@@ -30,6 +30,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
+import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
@@ -57,11 +58,11 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<DelBlogMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
+    actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
     actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.VIEW, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
     actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);

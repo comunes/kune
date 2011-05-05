@@ -23,12 +23,14 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.client.errors.NameNotPermittedException;
+import cc.kune.core.client.events.RenameContentEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -36,14 +38,16 @@ import com.google.inject.Provider;
 public class RenameAction {
   private final Provider<ContentServiceAsync> contentService;
   private final ErrorHandler errorHandler;
+  private final EventBus eventBus;
   private final I18nTranslationService i18n;
   private final Session session;
 
   @Inject
-  public RenameAction(final I18nTranslationService i18n, final Session session,
+  public RenameAction(final I18nTranslationService i18n, final Session session, final EventBus eventBus,
       final Provider<ContentServiceAsync> contentService, final ErrorHandler errorHandler) {
     this.i18n = i18n;
     this.session = session;
+    this.eventBus = eventBus;
     this.contentService = contentService;
     this.errorHandler = errorHandler;
   }
@@ -74,6 +78,7 @@ public class RenameAction {
           NotifyUser.hideProgress();
           session.setCurrentState(state);
           listener.onSuccess(token, state.getTitle());
+          RenameContentEvent.fire(eventBus, token, oldName, newName);
         }
       };
       if (token.isComplete()) {

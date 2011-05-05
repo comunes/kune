@@ -34,36 +34,37 @@ import com.google.inject.Inject;
 
 public class BlogsClientTool extends FoldableAbstractClientTool {
 
-    private final NavResources navResources;
+  private final NavResources navResources;
 
-    @Inject
-    public BlogsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-            final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-        super(NAME, i18n.t("blogs"), toolSelector, cntCapRegistry);
-        this.navResources = navResources;
+  @Inject
+  public BlogsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+    super(NAME, i18n.t("blogs"), toolSelector, cntCapRegistry);
+    this.navResources = navResources;
 
-        // registerAclEditableTypes();
-        registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-        registerDragableTypes(TYPE_UPLOADEDFILE);
-        registerDropableTypes(TYPE_ROOT);
-        registerPublishModerableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-        registerRateableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-        registerRenamableTypes(TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE);
-        registerTageableTypes(TYPE_BLOG, TYPE_UPLOADEDFILE, TYPE_POST);
-        // registerTranslatableTypes();
+    // registerAclEditableTypes();
+    registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
+    registerDragableTypes(TYPE_UPLOADEDFILE);
+    registerDropableTypes(TYPE_ROOT);
+    registerPublishModerableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
+    registerRateableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
+    registerRenamableTypes(TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE);
+    registerTageableTypes(TYPE_BLOG, TYPE_UPLOADEDFILE, TYPE_POST);
+    // registerTranslatableTypes();
 
-        registerIcons();
-    }
+    registerIcons();
+  }
 
-    @Override
-    public String getName() {
-        return NAME;
-    }
+  @Override
+  public String getName() {
+    return NAME;
+  }
 
-    private void registerIcons() {
-        registerContentTypeIcon(TYPE_BLOG, navResources.blog());
-        registerContentTypeIcon(TYPE_POST, navResources.post());
-        registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
-    }
+  private void registerIcons() {
+    registerContentTypeIcon(TYPE_ROOT, navResources.blog());
+    registerContentTypeIcon(TYPE_BLOG, navResources.blog());
+    registerContentTypeIcon(TYPE_POST, navResources.post());
+    registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+  }
 
 }

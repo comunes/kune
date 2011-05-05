@@ -1,6 +1,5 @@
 package cc.kune.gspace.client.actions;
 
-import cc.kune.blogs.client.actions.ContentViewerOptionsMenu;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;

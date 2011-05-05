@@ -19,10 +19,10 @@
  */
 package cc.kune.gspace.client;
 
-import cc.kune.blogs.client.actions.ContentViewerOptionsMenu;
-import cc.kune.client.ExtendedGinModule;
+import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
+import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.GroupOptionsCollection;
@@ -75,8 +75,8 @@ import cc.kune.gspace.client.tool.selector.ToolSelectorPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePanel;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
-import cc.kune.gspace.client.viewers.DocViewerPanel;
-import cc.kune.gspace.client.viewers.DocViewerPresenter;
+import cc.kune.gspace.client.viewers.ContentViewerPanel;
+import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerAsTablePanel;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
@@ -101,8 +101,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
     bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
         ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);
     bind(ToolSelector.class).to(ToolSelectorPresenter.class).in(Singleton.class);
-    bindPresenter(DocViewerPresenter.class, DocViewerPresenter.DocViewerView.class,
-        DocViewerPanel.class, DocViewerPresenter.DocViewerProxy.class);
+    bindPresenter(ContentViewerPresenter.class, ContentViewerPresenter.ContentViewerView.class,
+        ContentViewerPanel.class, ContentViewerPresenter.ContentViewerProxy.class);
     bindPresenter(FolderViewerPresenter.class, FolderViewerPresenter.FolderViewerView.class,
         FolderViewerAsTablePanel.class, FolderViewerPresenter.FolderViewerProxy.class);
     bindPresenter(SitebarSearchPresenter.class, SitebarSearchPresenter.SitebarSearchView.class,

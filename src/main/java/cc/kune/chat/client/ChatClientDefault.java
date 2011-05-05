@@ -38,6 +38,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.core.client.events.AvatarChangedEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
 import cc.kune.core.client.sitebar.SitebarActions;
@@ -80,371 +81,380 @@ import com.google.inject.Inject;
 
 public class ChatClientDefault implements ChatClient {
 
-    public class ChatClientAction extends AbstractExtendedAction {
+  public class ChatClientAction extends AbstractExtendedAction {
 
-        private final EventBus eventBus;
-        private final ChatResources res;
-
-        public ChatClientAction(final EventBus eventBus, final ChatResources res) {
-            super();
-            this.eventBus = eventBus;
-            this.res = res;
-            putValue(Action.SMALL_ICON, res.chat());
-
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            eventBus.fireEvent(new ToggleShowChatDialogEvent());
-        }
-
-        public void setBlink(final boolean blink) {
-            final ImageResource icon = blink ? res.chatBlink() : res.chat();
-            putValue(Action.SMALL_ICON, icon);
-            dialog.setIcon(AbstractImagePrototype.create(icon));
-        }
-
-    }
-
-    protected static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
-
-    private static final String CHAT_TITLE = "Chat ;)";
-
-    private final ChatClientAction action;
-    protected IconLabelDescriptor chatIcon;
-    private final ChatManager chatManager;
-    private final ChatOptions chatOptions;
-    private final ChatResources chatResources;
-    private Dialog dialog;
     private final EventBus eventBus;
-    private final I18nTranslationService i18n;
-    private final RoomManager roomManager;
-    private final XmppRoster roster;
-    private final Session session;
-    private final GlobalShortcutRegister shorcutRegister;
-    private final SitebarActions siteActions;
+    private final ChatResources res;
 
-    private final XmppSession xmppSession;
+    public ChatClientAction(final EventBus eventBus, final ChatResources res) {
+      super();
+      this.eventBus = eventBus;
+      this.res = res;
+      putValue(Action.SMALL_ICON, res.chat());
 
-    @Inject
-    public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n,
-            final SitebarActions siteActions, final Session session, final GlobalShortcutRegister shorcutRegister,
-            final ChatOptions chatOptions, final ChatResources chatResources) {
-
-        this.eventBus = eventBus;
-        this.i18n = i18n;
-        action = new ChatClientAction(eventBus, chatResources);
-        this.siteActions = siteActions;
-        this.session = session;
-        this.shorcutRegister = shorcutRegister;
-        this.chatOptions = chatOptions;
-        this.chatResources = chatResources;
-        chatResources.css().ensureInjected();
-        this.xmppSession = Suco.get(XmppSession.class);
-        this.roster = Suco.get(XmppRoster.class);
-        this.chatManager = Suco.get(ChatManager.class);
-        this.roomManager = Suco.get(RoomManager.class);
-        Suco.get(SessionReconnect.class);
-
-        session.onAppStart(true, new AppStartEvent.AppStartHandler() {
-            @Override
-            public void onAppStart(final AppStartEvent event) {
-                chatOptions.domain = event.getInitData().getChatDomain();
-                chatOptions.httpBase = event.getInitData().getChatHttpBase();
-                chatOptions.roomHost = event.getInitData().getChatRoomHost();
-                checkChatDomain(chatOptions.domain);
-                session.onUserSignIn(true, new UserSignInHandler() {
-                    @Override
-                    public void onUserSignIn(final UserSignInEvent event) {
-                        doLogin();
-                    }
-                });
-                session.onUserSignOut(true, new UserSignOutHandler() {
-                    @Override
-                    public void onUserSignOut(final UserSignOutEvent event) {
-                        createActionIfNeeded();
-                        chatIcon.setVisible(false);
-                        logout();
-                    }
-                });
-                eventBus.addHandler(ShowChatDialogEvent.getType(), new ShowChatDialogHandler() {
-                    @Override
-                    public void onShowChatDialog(final ShowChatDialogEvent event) {
-                        createActionIfNeeded();
-                        showDialog(event.show);
-                    }
-                });
-                eventBus.addHandler(ToggleShowChatDialogEvent.getType(), new ToggleShowChatDialogHandler() {
-                    @Override
-                    public void onToggleShowChatDialog(final ToggleShowChatDialogEvent event) {
-                        toggleShowDialog();
-                    }
-                });
-            }
-        });
-        eventBus.addHandler(AppStopEvent.getType(), new AppStopEvent.AppStopHandler() {
-            @Override
-            public void onAppStop(final AppStopEvent event) {
-                logout();
-            }
-        });
     }
 
     @Override
-    public void addNewBuddie(final String shortName) {
-        roster.requestAddItem(uriFrom(shortName), shortName, "");
+    public void actionPerformed(final ActionEvent event) {
+      eventBus.fireEvent(new ToggleShowChatDialogEvent());
     }
 
-    @Override
-    public void chat(final String shortName) {
-        chat(uriFrom(shortName));
+    public void setBlink(final boolean blink) {
+      final ImageResource icon = blink ? res.chatBlink() : res.chat();
+      putValue(Action.SMALL_ICON, icon);
+      dialog.setIcon(AbstractImagePrototype.create(icon));
     }
 
-    @Override
-    public void chat(final XmppURI jid) {
-        chatManager.open(jid);
-    }
+  }
 
-    // Put this in Panel object
-    private void checkChatDomain(final String chatDomain) {
-        final String httpDomain = WindowUtils.getLocation().getHostName();
-        if (!chatDomain.equals(httpDomain)) {
-            Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
-                    + "). This will cause problems with the chat functionality. "
-                    + "Please check kune.properties on the server.");
-        }
-    }
+  protected static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
 
-    private void createActionIfNeeded() {
-        if (chatIcon == null) {
-            chatIcon = new IconLabelDescriptor(action);
-            chatIcon.setId(CHAT_CLIENT_ICON_ID);
-            chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
-            chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
-            chatIcon.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
-            final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
-            shorcutRegister.put(shortcut, action);
-            action.setShortcut(shortcut);
-            chatIcon.setVisible(session.isLogged());
-            siteActions.getLeftToolbar().add(
-                    new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-            siteActions.getLeftToolbar().add(
-                    new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-            siteActions.getLeftToolbar().add(
-                    new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-            siteActions.getLeftToolbar().add(chatIcon);
-        }
-    }
+  private static final String CHAT_TITLE = "Chat ;)";
 
-    private void createDialog(final KuneHablarWidget widget, final HtmlConfig htmlConfig) {
-        widget.addStyleName("k-chat-panel");
-        setSize(widget, htmlConfig);
-        dialog.add(widget);
-    }
+  private final ChatClientAction action;
+  protected IconLabelDescriptor chatIcon;
+  private final ChatManager chatManager;
+  private final ChatOptions chatOptions;
+  private final ChatResources chatResources;
+  private Dialog dialog;
+  private final EventBus eventBus;
+  private final I18nTranslationService i18n;
+  private final RoomManager roomManager;
+  private final XmppRoster roster;
+  private final Session session;
+  private final GlobalShortcutRegister shorcutRegister;
+  private final SitebarActions siteActions;
 
-    private void createDialogIfNeeded() {
-        if (dialog == null) {
-            dialog = new Dialog();
-            dialog.setHeading(i18n.t(CHAT_TITLE));
-            dialog.setClosable(true);
-            dialog.setResizable(true);
-            dialog.setButtons("");
-            dialog.setBodyStyleName("k-chat-window");
-            dialog.setScrollMode(Scroll.NONE);
-            dialog.setHideOnButtonClick(true);
-            dialog.setCollapsible(true);
-            // final Widget btn = (Widget)
-            // chatIcon.getValue(ParentWidget.PARENT_UI);
-            dialog.setPosition(118, 1);
-            dialog.setIcon(AbstractImagePrototype.create(chatResources.chat()));
-            // dialog.getItem(0).getFocusSupport().setIgnore(true);
-            initEmite();
-        }
-    }
+  private final XmppSession xmppSession;
 
-    private boolean dialogVisible() {
-        return dialog != null && dialog.isVisible();
-    }
+  @Inject
+  public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n,
+      final SitebarActions siteActions, final Session session,
+      final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions,
+      final ChatResources chatResources) {
 
-    @Override
-    public void doLogin() {
-        assert session.getCurrentUserInfo() != null;
-        doLogin(session.getCurrentUserInfo());
-    }
+    this.eventBus = eventBus;
+    this.i18n = i18n;
+    action = new ChatClientAction(eventBus, chatResources);
+    this.siteActions = siteActions;
+    this.session = session;
+    this.shorcutRegister = shorcutRegister;
+    this.chatOptions = chatOptions;
+    this.chatResources = chatResources;
+    chatResources.css().ensureInjected();
+    this.xmppSession = Suco.get(XmppSession.class);
+    this.roster = Suco.get(XmppRoster.class);
+    this.chatManager = Suco.get(ChatManager.class);
+    this.roomManager = Suco.get(RoomManager.class);
+    Suco.get(SessionReconnect.class);
 
-    private void doLogin(final UserInfoDTO user) {
-        createActionIfNeeded();
-        createDialogIfNeeded();
-        chatOptions.username = user.getChatName();
-        chatOptions.passwd = user.getChatPassword();
-        chatOptions.resource = "emite-" + new Date().getTime() + "-kune";
-        chatOptions.useruri = XmppURI.uri(chatOptions.username, chatOptions.domain, chatOptions.resource);
-        createActionIfNeeded();
-        createDialogIfNeeded();
-        chatIcon.setVisible(true);
-        login(chatOptions.useruri, chatOptions.passwd);
-    }
-
-    private void initEmite() {
-        loadIcons(chatResources);
-
-        final HablarConfig config = HablarConfig.getFromMeta();
-        final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
-        config.dockConfig.headerSize = 0;
-        config.dockConfig.rosterWidth = 150;
-        config.dockConfig.rosterDock = "left";
-        final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
-        final Hablar hablar = widget.getHablar();
-        HablarComplete.install(hablar, config);
-        new KuneHablarSignals(eventBus, xmppSession, hablar, action);
-        if (htmlConfig.hasLogger) {
-            new HablarConsole(hablar);
-        }
-
-        if (htmlConfig.hasLogin) {
-            new HablarLogin(hablar, LoginConfig.getFromMeta());
-        }
-        new KuneSoundManager(eventBus, config.soundConfig);
-        createDialog(widget, htmlConfig);
-    }
-
-    @Override
-    public boolean isBuddie(final String shortName) {
-        return isBuddie(uriFrom(shortName));
-    }
-
-    @Override
-    public boolean isBuddie(final XmppURI jid) {
-        if (roster.isRosterReady()) {
-            if (roster.getItemByJID(jid) != null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isLoggedIn() {
-        return xmppSession.isReady();
-    }
-
-    @Override
-    public Room joinRoom(final String roomName, final String userAlias) {
-        return joinRoom(roomName, null, userAlias);
-    }
-
-    @Override
-    public Room joinRoom(final String roomName, final String subject, final String userAlias) {
-        Room room = null;
-        if (xmppSession.isReady()) {
-            final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/" + chatOptions.username);
-            room = roomManager.open(roomURI, roomManager.getDefaultHistoryOptions());
-            if (TextUtils.notEmpty(subject)) {
-                RoomSubject.requestSubjectChange(room, subject);
-            }
-        } else {
-            NotifyUser.error(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"), true);
-        }
-        return room;
-    }
-
-    public void loadIcons(final ChatResources others) {
-        final AltIconsBundle bundle = GWT.create(AltIconsBundle.class);
-        Icons.register(Icons.BUDDY_ADD, bundle.buddyAddIcon());
-        Icons.register(Icons.BUDDY, bundle.buddyIcon());
-        Icons.register(Icons.BUDDY_DND, others.busy());
-        Icons.register(Icons.BUDDY_OFF, others.offline());
-        Icons.register(Icons.BUDDY_ON, others.online());
-        Icons.register(Icons.BUDDY_WAIT, others.away());
-        Icons.register(Icons.ADD_CHAT, bundle.chatAddIcon());
-        Icons.register(Icons.CHAT, others.xa());
-        Icons.register(Icons.CLIPBOARD, bundle.clipboardIcon());
-        Icons.register(Icons.CLOSE, bundle.closeIcon());
-        Icons.register(Icons.CONSOLE, bundle.consoleIcon());
-        Icons.register(Icons.ADD_GROUP, bundle.groupAddIcon());
-        Icons.register(Icons.GROUP_CHAT, bundle.groupChatIcon());
-        Icons.register(Icons.GROUP_CHAT_ADD, bundle.groupChatAddIcon());
-        Icons.register(Icons.LOADING, bundle.loadingIcon());
-        Icons.register(Icons.MENU, bundle.menuIcon());
-        Icons.register(Icons.MISSING_ICON, bundle.missingIcon());
-        Icons.register(Icons.NOT_CONNECTED, others.offline());
-        Icons.register(Icons.CONNECTED, others.online());
-        Icons.register(Icons.ROSTER, bundle.rosterIcon());
-        Icons.register(Icons.SEARCH, bundle.searchIcon());
-    }
-
-    @Override
-    public void login(final XmppURI uri, final String passwd) {
-        xmppSession.login(uri, passwd);
-    }
-
-    @Override
-    public boolean loginIfNecessary() {
-        if (!isLoggedIn()) {
+    session.onAppStart(true, new AppStartEvent.AppStartHandler() {
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+        chatOptions.domain = event.getInitData().getChatDomain();
+        chatOptions.httpBase = event.getInitData().getChatHttpBase();
+        chatOptions.roomHost = event.getInitData().getChatRoomHost();
+        checkChatDomain(chatOptions.domain);
+        session.onUserSignIn(true, new UserSignInHandler() {
+          @Override
+          public void onUserSignIn(final UserSignInEvent event) {
             doLogin();
-            return true;
-        }
-        return false;
+          }
+        });
+        session.onUserSignOut(true, new UserSignOutHandler() {
+          @Override
+          public void onUserSignOut(final UserSignOutEvent event) {
+            createActionIfNeeded();
+            chatIcon.setVisible(false);
+            logout();
+          }
+        });
+        eventBus.addHandler(ShowChatDialogEvent.getType(), new ShowChatDialogHandler() {
+          @Override
+          public void onShowChatDialog(final ShowChatDialogEvent event) {
+            createActionIfNeeded();
+            showDialog(event.show);
+          }
+        });
+        eventBus.addHandler(ToggleShowChatDialogEvent.getType(), new ToggleShowChatDialogHandler() {
+          @Override
+          public void onToggleShowChatDialog(final ToggleShowChatDialogEvent event) {
+            toggleShowDialog();
+          }
+        });
+        eventBus.addHandler(AvatarChangedEvent.getType(), new AvatarChangedEvent.AvatarChangedHandler() {
+
+          @Override
+          public void onAvatarChanged(final AvatarChangedEvent event) {
+            setAvatar(event.getPhotoBinary());
+          }
+        });
+      }
+    });
+    eventBus.addHandler(AppStopEvent.getType(), new AppStopEvent.AppStopHandler() {
+      @Override
+      public void onAppStop(final AppStopEvent event) {
+        logout();
+      }
+    });
+  }
+
+  @Override
+  public void addNewBuddie(final String shortName) {
+    roster.requestAddItem(uriFrom(shortName), shortName, "");
+  }
+
+  @Override
+  public void chat(final String shortName) {
+    chat(uriFrom(shortName));
+  }
+
+  @Override
+  public void chat(final XmppURI jid) {
+    chatManager.open(jid);
+  }
+
+  // Put this in Panel object
+  private void checkChatDomain(final String chatDomain) {
+    final String httpDomain = WindowUtils.getLocation().getHostName();
+    if (!chatDomain.equals(httpDomain)) {
+      Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+          + "). This will cause problems with the chat functionality. "
+          + "Please check kune.properties on the server.");
+    }
+  }
+
+  private void createActionIfNeeded() {
+    if (chatIcon == null) {
+      chatIcon = new IconLabelDescriptor(action);
+      chatIcon.setId(CHAT_CLIENT_ICON_ID);
+      chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
+      chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
+      chatIcon.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
+      final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
+      shorcutRegister.put(shortcut, action);
+      action.setShortcut(shortcut);
+      chatIcon.setVisible(session.isLogged());
+      siteActions.getLeftToolbar().add(
+          new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
+      siteActions.getLeftToolbar().add(
+          new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
+      siteActions.getLeftToolbar().add(
+          new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
+      siteActions.getLeftToolbar().add(chatIcon);
+    }
+  }
+
+  private void createDialog(final KuneHablarWidget widget, final HtmlConfig htmlConfig) {
+    widget.addStyleName("k-chat-panel");
+    setSize(widget, htmlConfig);
+    dialog.add(widget);
+  }
+
+  private void createDialogIfNeeded() {
+    if (dialog == null) {
+      dialog = new Dialog();
+      dialog.setHeading(i18n.t(CHAT_TITLE));
+      dialog.setClosable(true);
+      dialog.setResizable(true);
+      dialog.setButtons("");
+      dialog.setBodyStyleName("k-chat-window");
+      dialog.setScrollMode(Scroll.NONE);
+      dialog.setHideOnButtonClick(true);
+      dialog.setCollapsible(true);
+      // final Widget btn = (Widget)
+      // chatIcon.getValue(ParentWidget.PARENT_UI);
+      dialog.setPosition(118, 1);
+      dialog.setIcon(AbstractImagePrototype.create(chatResources.chat()));
+      // dialog.getItem(0).getFocusSupport().setIgnore(true);
+      initEmite();
+    }
+  }
+
+  private boolean dialogVisible() {
+    return dialog != null && dialog.isVisible();
+  }
+
+  @Override
+  public void doLogin() {
+    assert session.getCurrentUserInfo() != null;
+    doLogin(session.getCurrentUserInfo());
+  }
+
+  private void doLogin(final UserInfoDTO user) {
+    createActionIfNeeded();
+    createDialogIfNeeded();
+    chatOptions.username = user.getChatName();
+    chatOptions.passwd = user.getChatPassword();
+    chatOptions.resource = "emite-" + new Date().getTime() + "-kune";
+    chatOptions.useruri = XmppURI.uri(chatOptions.username, chatOptions.domain, chatOptions.resource);
+    createActionIfNeeded();
+    createDialogIfNeeded();
+    chatIcon.setVisible(true);
+    login(chatOptions.useruri, chatOptions.passwd);
+  }
+
+  private void initEmite() {
+    loadIcons(chatResources);
+
+    final HablarConfig config = HablarConfig.getFromMeta();
+    final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
+    config.dockConfig.headerSize = 0;
+    config.dockConfig.rosterWidth = 150;
+    config.dockConfig.rosterDock = "left";
+    final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
+    final Hablar hablar = widget.getHablar();
+    HablarComplete.install(hablar, config);
+    new KuneHablarSignals(eventBus, xmppSession, hablar, action);
+    if (htmlConfig.hasLogger) {
+      new HablarConsole(hablar);
     }
 
-    @Override
-    public void logout() {
-        if (dialogVisible()) {
-            dialog.hide();
-        }
-        if (isLoggedIn()) {
-            xmppSession.logout();
-        }
+    if (htmlConfig.hasLogin) {
+      new HablarLogin(hablar, LoginConfig.getFromMeta());
     }
+    new KuneSoundManager(eventBus, config.soundConfig);
+    createDialog(widget, htmlConfig);
+  }
 
-    @Override
-    public XmppURI roomUriFrom(final String shortName) {
-        return XmppURI.jid(shortName + "@" + chatOptions.roomHost);
+  @Override
+  public boolean isBuddie(final String shortName) {
+    return isBuddie(uriFrom(shortName));
+  }
+
+  @Override
+  public boolean isBuddie(final XmppURI jid) {
+    if (roster.isRosterReady()) {
+      if (roster.getItemByJID(jid) != null) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    @Override
-    public void setAvatar(final String photoBinary) {
-        Suco.get(AvatarManager.class).setVCardAvatar(photoBinary);
+  @Override
+  public boolean isLoggedIn() {
+    return xmppSession.isReady();
+  }
+
+  @Override
+  public Room joinRoom(final String roomName, final String userAlias) {
+    return joinRoom(roomName, null, userAlias);
+  }
+
+  @Override
+  public Room joinRoom(final String roomName, final String subject, final String userAlias) {
+    Room room = null;
+    if (xmppSession.isReady()) {
+      final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
+          + chatOptions.username);
+      room = roomManager.open(roomURI, roomManager.getDefaultHistoryOptions());
+      if (TextUtils.notEmpty(subject)) {
+        RoomSubject.requestSubjectChange(room, subject);
+      }
+    } else {
+      NotifyUser.error(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"), true);
     }
+    return room;
+  }
 
-    private void setSize(final Widget widget, final HtmlConfig htmlConfig) {
+  public void loadIcons(final ChatResources others) {
+    final AltIconsBundle bundle = GWT.create(AltIconsBundle.class);
+    Icons.register(Icons.BUDDY_ADD, bundle.buddyAddIcon());
+    Icons.register(Icons.BUDDY, bundle.buddyIcon());
+    Icons.register(Icons.BUDDY_DND, others.busy());
+    Icons.register(Icons.BUDDY_OFF, others.offline());
+    Icons.register(Icons.BUDDY_ON, others.online());
+    Icons.register(Icons.BUDDY_WAIT, others.away());
+    Icons.register(Icons.ADD_CHAT, bundle.chatAddIcon());
+    Icons.register(Icons.CHAT, others.xa());
+    Icons.register(Icons.CLIPBOARD, bundle.clipboardIcon());
+    Icons.register(Icons.CLOSE, bundle.closeIcon());
+    Icons.register(Icons.CONSOLE, bundle.consoleIcon());
+    Icons.register(Icons.ADD_GROUP, bundle.groupAddIcon());
+    Icons.register(Icons.GROUP_CHAT, bundle.groupChatIcon());
+    Icons.register(Icons.GROUP_CHAT_ADD, bundle.groupChatAddIcon());
+    Icons.register(Icons.LOADING, bundle.loadingIcon());
+    Icons.register(Icons.MENU, bundle.menuIcon());
+    Icons.register(Icons.MISSING_ICON, bundle.missingIcon());
+    Icons.register(Icons.NOT_CONNECTED, others.offline());
+    Icons.register(Icons.CONNECTED, others.online());
+    Icons.register(Icons.ROSTER, bundle.rosterIcon());
+    Icons.register(Icons.SEARCH, bundle.searchIcon());
+  }
 
-        if (htmlConfig.width != null) {
-            widget.setWidth("98%");
-            dialog.setWidth(htmlConfig.width);
-        }
-        if (htmlConfig.height != null) {
-            widget.setHeight("98%");
-            dialog.setHeight(htmlConfig.height);
-        }
+  @Override
+  public void login(final XmppURI uri, final String passwd) {
+    xmppSession.login(uri, passwd);
+  }
+
+  @Override
+  public boolean loginIfNecessary() {
+    if (!isLoggedIn()) {
+      doLogin();
+      return true;
     }
+    return false;
+  }
 
-    @Override
-    public void show() {
-        showDialog(true);
+  @Override
+  public void logout() {
+    if (dialogVisible()) {
+      dialog.hide();
     }
+    if (isLoggedIn()) {
+      xmppSession.logout();
+    }
+  }
 
-    private void showDialog(final boolean show) {
-        Log.info("Show dialog: " + show);
-        if (session.isLogged()) {
-            createDialogIfNeeded();
-            if (show) {
-                dialog.show();
-                dialog.setZIndex(0);
-                dialog.getHeader().setZIndex(0);
-            } else {
-                dialog.hide();
-            }
-        }
-    }
+  @Override
+  public XmppURI roomUriFrom(final String shortName) {
+    return XmppURI.jid(shortName + "@" + chatOptions.roomHost);
+  }
 
-    private void toggleShowDialog() {
-        Log.info("Toggle!");
-        showDialog(dialog == null ? true : !dialogVisible());
-    }
+  @Override
+  public void setAvatar(final String photoBinary) {
+    Suco.get(AvatarManager.class).setVCardAvatar(photoBinary);
+  }
 
-    @Override
-    public XmppURI uriFrom(final String shortName) {
-        return XmppURI.jid(shortName + "@" + chatOptions.domain);
+  private void setSize(final Widget widget, final HtmlConfig htmlConfig) {
+
+    if (htmlConfig.width != null) {
+      widget.setWidth("98%");
+      dialog.setWidth(htmlConfig.width);
     }
+    if (htmlConfig.height != null) {
+      widget.setHeight("98%");
+      dialog.setHeight(htmlConfig.height);
+    }
+  }
+
+  @Override
+  public void show() {
+    showDialog(true);
+  }
+
+  private void showDialog(final boolean show) {
+    Log.info("Show dialog: " + show);
+    if (session.isLogged()) {
+      createDialogIfNeeded();
+      if (show) {
+        dialog.show();
+        dialog.setZIndex(0);
+        dialog.getHeader().setZIndex(0);
+      } else {
+        dialog.hide();
+      }
+    }
+  }
+
+  private void toggleShowDialog() {
+    Log.info("Toggle!");
+    showDialog(dialog == null ? true : !dialogVisible());
+  }
+
+  @Override
+  public XmppURI uriFrom(final String shortName) {
+    return XmppURI.jid(shortName + "@" + chatOptions.domain);
+  }
 }

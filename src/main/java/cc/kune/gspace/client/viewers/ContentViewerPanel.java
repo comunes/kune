@@ -25,7 +25,7 @@ import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
-import cc.kune.gspace.client.viewers.DocViewerPresenter.DocViewerView;
+import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
 import cc.kune.wave.client.WaveClientManager;
 import cc.kune.wave.client.WebClient;
 
@@ -43,8 +43,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-public class DocViewerPanel extends ViewImpl implements DocViewerView {
-  interface DocsViewerPanelUiBinder extends UiBinder<Widget, DocViewerPanel> {
+public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
+  interface DocsViewerPanelUiBinder extends UiBinder<Widget, ContentViewerPanel> {
   }
 
   private static final RemoteViewServiceMultiplexer NO_CHANNEL = null;
@@ -73,7 +73,7 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   private final Widget widget;
 
   @Inject
-  public DocViewerPanel(final GSpaceArmor wsArmor, final WaveClientManager waveClient,
+  public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientManager waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n) {
     this.gsArmor = wsArmor;
     this.waveClient = waveClient;

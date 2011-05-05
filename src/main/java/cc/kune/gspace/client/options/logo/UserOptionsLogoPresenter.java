@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client.options.logo;
 
-import cc.kune.chat.client.ChatClient;
+import cc.kune.core.client.events.AvatarChangedEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -36,43 +36,42 @@ import com.google.inject.Provider;
 
 public class UserOptionsLogoPresenter extends EntityOptionsLogoPresenter {
 
-    @Inject
-    public UserOptionsLogoPresenter(final EventBus eventBus, final Session session, final EntityHeader entityLogo,
-            final UserOptions entityOptions, final StateManager stateManager,
-            final Provider<UserServiceAsync> userService, final Provider<ChatClient> chatEngine,
-            final UserOptionsLogoView view) {
-        super(eventBus, session, entityLogo, entityOptions, userService, chatEngine);
-        init(view);
-        session.onUserSignIn(true, new UserSignInHandler() {
+  @Inject
+  public UserOptionsLogoPresenter(final EventBus eventBus, final Session session,
+      final EntityHeader entityLogo, final UserOptions entityOptions, final StateManager stateManager,
+      final Provider<UserServiceAsync> userService, final UserOptionsLogoView view) {
+    super(eventBus, session, entityLogo, entityOptions, userService);
+    init(view);
+    session.onUserSignIn(true, new UserSignInHandler() {
+      @Override
+      public void onUserSignIn(final UserSignInEvent event) {
+        setState();
+      }
+    });
+  }
+
+  private void init(final UserOptionsLogoView view) {
+    super.init(view);
+    view.setPersonalGroupsLabels();
+  }
+
+  @Override
+  public void onSubmitComplete() {
+    super.onSubmitComplete();
+    final GroupDTO group = session.getCurrentState().getGroup();
+    if (session.getCurrentUser().getShortName().equals(group.getShortName())) {
+      userService.get().getUserAvatarBaser64(session.getUserHash(), group.getStateToken(),
+          new AsyncCallbackSimple<String>() {
             @Override
-            public void onUserSignIn(final UserSignInEvent event) {
-                setState();
+            public void onSuccess(final String photoBinary) {
+              AvatarChangedEvent.fire(eventBus, photoBinary);
             }
-        });
+          });
     }
+  }
 
-    private void init(final UserOptionsLogoView view) {
-        super.init(view);
-        view.setPersonalGroupsLabels();
-    }
-
-    @Override
-    public void onSubmitComplete() {
-        super.onSubmitComplete();
-        final GroupDTO group = session.getCurrentState().getGroup();
-        if (session.getCurrentUser().getShortName().equals(group.getShortName())) {
-            userService.get().getUserAvatarBaser64(session.getUserHash(), group.getStateToken(),
-                    new AsyncCallbackSimple<String>() {
-                        @Override
-                        public void onSuccess(final String photoBinary) {
-                            chatEngine.get().setAvatar(photoBinary);
-                        }
-                    });
-        }
-    }
-
-    @Override
-    protected void setState() {
-        view.setUploadParams(session.getUserHash(), session.getCurrentUser().getStateToken().toString());
-    }
+  @Override
+  protected void setState() {
+    view.setUploadParams(session.getUserHash(), session.getCurrentUser().getStateToken().toString());
+  }
 }

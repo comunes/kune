@@ -1,4 +1,4 @@
-package cc.kune.blogs.client.actions;
+package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.resources.CoreResources;

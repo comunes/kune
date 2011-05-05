@@ -2,8 +2,6 @@ package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
-import cc.kune.blogs.client.actions.BlogsClientActions;
-import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.EditEvent;
@@ -19,13 +17,10 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.docs.client.actions.DocsClientActions;
-import cc.kune.docs.shared.DocsConstants;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.RenameListener;
 import cc.kune.gspace.client.tool.ContentViewer;
-import cc.kune.gspace.client.tool.ContentViewerSelector;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -37,15 +32,15 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-public class DocViewerPresenter extends
-    Presenter<DocViewerPresenter.DocViewerView, DocViewerPresenter.DocViewerProxy> implements
-    ContentViewer {
+public class ContentViewerPresenter extends
+    Presenter<ContentViewerPresenter.ContentViewerView, ContentViewerPresenter.ContentViewerProxy>
+    implements ContentViewer {
 
   @ProxyCodeSplit
-  public interface DocViewerProxy extends Proxy<DocViewerPresenter> {
+  public interface ContentViewerProxy extends Proxy<ContentViewerPresenter> {
   }
 
-  public interface DocViewerView extends View {
+  public interface ContentViewerView extends View {
 
     void attach();
 
@@ -74,16 +69,13 @@ public class DocViewerPresenter extends
   private final Session session;
 
   @Inject
-  public DocViewerPresenter(final EventBus eventBus, final DocViewerView view,
-      final DocViewerProxy proxy, final Session session, final ContentViewerSelector viewerSelector,
-      final ActionRegistryByType actionsRegistry, final DocsClientActions docsActions,
-      final BlogsClientActions blogActions, final Provider<RenameAction> renameAction) {
+  public ContentViewerPresenter(final EventBus eventBus, final ContentViewerView view,
+      final ContentViewerProxy proxy, final Session session, final ActionRegistryByType actionsRegistry,
+      final Provider<RenameAction> renameAction) {
     super(eventBus, view, proxy);
     this.session = session;
     this.actionsRegistry = actionsRegistry;
     this.renameAction = renameAction;
-    viewerSelector.register(this, true, DocsConstants.TYPE_DOCUMENT);
-    viewerSelector.register(this, true, BlogsConstants.TYPE_POST);
     session.onUserSignOut(true, new UserSignOutHandler() {
       @Override
       public void onUserSignOut(final UserSignOutEvent event) {

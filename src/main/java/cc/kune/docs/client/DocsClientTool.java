@@ -34,36 +34,37 @@ import com.google.inject.Inject;
 
 public class DocsClientTool extends FoldableAbstractClientTool {
 
-    private final NavResources navResources;
+  private final NavResources navResources;
 
-    @Inject
-    public DocsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-            final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-        super(NAME, i18n.t("documents"), toolSelector, cntCapRegistry);
-        this.navResources = navResources;
+  @Inject
+  public DocsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+    super(NAME, i18n.t("documents"), toolSelector, cntCapRegistry);
+    this.navResources = navResources;
 
-        // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        registerDragableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
-        registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
-        registerPublishModerableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
-        registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        registerTranslatableTypes(TYPE_DOCUMENT, TYPE_FOLDER);
+    // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+    registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+    registerDragableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
+    registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
+    registerPublishModerableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+    registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+    registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
+    registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+    registerTranslatableTypes(TYPE_DOCUMENT, TYPE_FOLDER);
 
-        registerIcons();
-    }
+    registerIcons();
+  }
 
-    @Override
-    public String getName() {
-        return NAME;
-    }
+  @Override
+  public String getName() {
+    return NAME;
+  }
 
-    private void registerIcons() {
-        registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
-        registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
-        registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
-    }
+  private void registerIcons() {
+    registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIcon(TYPE_ROOT, navResources.folder());
+    registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
+    registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+  }
 
 }

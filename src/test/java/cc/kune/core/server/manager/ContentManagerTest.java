@@ -50,6 +50,7 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
     assertEquals(mimetype, newCnt.getMimeType().toString());
   }
 
+  @Ignore
   @Test
   public void testBasicBodySearch() {
     createContent();

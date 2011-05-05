@@ -43,6 +43,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -60,12 +62,14 @@ import cc.kune.domain.utils.HasStateToken;
 @Table(name = "containers")
 public class Container implements HasId, HasStateToken {
 
-  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @ManyToMany(cascade = CascadeType.ALL)
   private List<Container> absolutePath;
 
   @OneToOne(cascade = CascadeType.ALL)
   private AccessLists accessLists;
 
+  @LazyCollection(LazyCollectionOption.FALSE)
   @Fetch(FetchMode.JOIN)
   @OrderBy("createdOn DESC")
   @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -74,6 +78,7 @@ public class Container implements HasId, HasStateToken {
   @OneToMany(cascade = CascadeType.ALL)
   private List<ContainerTranslation> containerTranslations;
 
+  @LazyCollection(LazyCollectionOption.FALSE)
   @Fetch(FetchMode.JOIN)
   @ContainedIn
   @OrderBy("createdOn DESC")

@@ -48,6 +48,10 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     this(null, false);
   }
 
+  public AbstractGwtButtonGui(final boolean enableTongle) {
+    this(null, enableTongle);
+  }
+
   public AbstractGwtButtonGui(final ButtonDescriptor buttonDescriptor) {
     this(buttonDescriptor, false);
   }

@@ -1,4 +1,4 @@
-package cc.kune.client;
+package cc.kune.common.client;
 
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;

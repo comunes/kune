@@ -25,22 +25,28 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 
-public class GwtPushButtonGui extends GwtButtonGui {
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        super.enableTongle = true;
-        final PushButtonDescriptor btn = (PushButtonDescriptor) descriptor;
-        setPressed(btn.isPushed());
-        btn.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(final PropertyChangeEvent event) {
-                if (event.getPropertyName().equals(PushButtonDescriptor.PUSHED)) {
-                    setPressed(btn.isPushed());
-                }
-            }
-        });
-        return this;
-    }
+public class GwtPushButtonGui extends AbstractGwtButtonGui {
+
+  public GwtPushButtonGui() {
+    super(true);
+  }
+
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.create(descriptor);
+    super.descriptor = descriptor;
+    super.enableTongle = true;
+    final PushButtonDescriptor btn = (PushButtonDescriptor) descriptor;
+    setPressed(btn.isPushed());
+    btn.addPropertyChangeListener(new PropertyChangeListener() {
+      @Override
+      public void propertyChange(final PropertyChangeEvent event) {
+        if (event.getPropertyName().equals(PushButtonDescriptor.PUSHED)) {
+          setPressed(btn.isPushed());
+        }
+      }
+    });
+    return this;
+  }
 
 }

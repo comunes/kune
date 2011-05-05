@@ -19,7 +19,6 @@
  */
 package cc.kune.gspace.client.options.logo;
 
-import cc.kune.chat.client.ChatClient;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.GroupChangedEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
@@ -34,28 +33,27 @@ import com.google.inject.Provider;
 
 public class GroupOptionsLogoPresenter extends EntityOptionsLogoPresenter {
 
-    @Inject
-    public GroupOptionsLogoPresenter(final EventBus eventBus, final Session session, final EntityHeader entityLogo,
-            final GroupOptions entityOptions, final StateManager stateManager,
-            final Provider<UserServiceAsync> userService, final Provider<ChatClient> chatEngine,
-            final GroupOptionsLogoView view) {
-        super(eventBus, session, entityLogo, entityOptions, userService, chatEngine);
-        init(view);
-        stateManager.onGroupChanged(true, new GroupChangedHandler() {
-            @Override
-            public void onGroupChanged(final GroupChangedEvent event) {
-                setState();
-            }
-        });
-    }
+  @Inject
+  public GroupOptionsLogoPresenter(final EventBus eventBus, final Session session,
+      final EntityHeader entityLogo, final GroupOptions entityOptions, final StateManager stateManager,
+      final Provider<UserServiceAsync> userService, final GroupOptionsLogoView view) {
+    super(eventBus, session, entityLogo, entityOptions, userService);
+    init(view);
+    stateManager.onGroupChanged(true, new GroupChangedHandler() {
+      @Override
+      public void onGroupChanged(final GroupChangedEvent event) {
+        setState();
+      }
+    });
+  }
 
-    private void init(final GroupOptionsLogoView view) {
-        super.init(view);
-        view.setNormalGroupsLabels();
-    }
+  private void init(final GroupOptionsLogoView view) {
+    super.init(view);
+    view.setNormalGroupsLabels();
+  }
 
-    @Override
-    protected void setState() {
-        view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
-    }
+  @Override
+  protected void setState() {
+    view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
+  }
 }

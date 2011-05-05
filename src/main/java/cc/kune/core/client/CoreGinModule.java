@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client;
 
-import cc.kune.client.ExtendedGinModule;
+import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;

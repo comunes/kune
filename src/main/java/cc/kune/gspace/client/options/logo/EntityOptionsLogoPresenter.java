@@ -19,7 +19,6 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
-import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -31,47 +30,48 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Provider;
 
 public abstract class EntityOptionsLogoPresenter implements GroupOptionsLogo, UserOptionsLogo {
-    protected final Provider<ChatClient> chatEngine;
-    private final EntityHeader entityLogo;
-    private final EntityOptions entityOptions;
-    protected final Session session;
-    protected final Provider<UserServiceAsync> userService;
-    protected EntityOptionsLogoView view;
+  private final EntityHeader entityLogo;
+  private final EntityOptions entityOptions;
+  protected final EventBus eventBus;
+  protected final Session session;
+  protected final Provider<UserServiceAsync> userService;
+  protected EntityOptionsLogoView view;
 
-    public EntityOptionsLogoPresenter(final EventBus eventBus, final Session session, final EntityHeader entityLogo,
-            final EntityOptions entityOptions, final Provider<UserServiceAsync> userService,
-            final Provider<ChatClient> chatEngine) {
-        this.session = session;
-        this.entityLogo = entityLogo;
-        this.entityOptions = entityOptions;
-        this.userService = userService;
-        this.chatEngine = chatEngine;
-        eventBus.addHandler(CurrentLogoChangedEvent.getType(), new CurrentLogoChangedEvent.CurrentLogoChangedHandler() {
-            @Override
-            public void onCurrentLogoChanged(final CurrentLogoChangedEvent event) {
-                onSubmitComplete();
-            }
+  public EntityOptionsLogoPresenter(final EventBus eventBus, final Session session,
+      final EntityHeader entityLogo, final EntityOptions entityOptions,
+      final Provider<UserServiceAsync> userService) {
+    this.eventBus = eventBus;
+    this.session = session;
+    this.entityLogo = entityLogo;
+    this.entityOptions = entityOptions;
+    this.userService = userService;
+    eventBus.addHandler(CurrentLogoChangedEvent.getType(),
+        new CurrentLogoChangedEvent.CurrentLogoChangedHandler() {
+          @Override
+          public void onCurrentLogoChanged(final CurrentLogoChangedEvent event) {
+            onSubmitComplete();
+          }
         });
-    }
+  }
 
-    public IsWidget getView() {
-        return view;
-    }
+  public IsWidget getView() {
+    return view;
+  }
 
-    protected void init(final EntityOptionsLogoView view) {
-        this.view = view;
-        entityOptions.addTab(view, view.getTabTitle());
-        setState();
-    }
+  protected void init(final EntityOptionsLogoView view) {
+    this.view = view;
+    entityOptions.addTab(view, view.getTabTitle());
+    setState();
+  }
 
-    public void onSubmitComplete() {
-        entityLogo.reloadGroupLogoImage();
-    }
+  public void onSubmitComplete() {
+    entityLogo.reloadGroupLogoImage();
+  }
 
-    public void onSubmitFailed(final int httpStatus, final String responseText) {
-        NotifyUser.error("Error setting the logo: " + responseText);
-    }
+  public void onSubmitFailed(final int httpStatus, final String responseText) {
+    NotifyUser.error("Error setting the logo: " + responseText);
+  }
 
-    protected abstract void setState();
+  protected abstract void setState();
 
 }
