@@ -38,8 +38,6 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.auth.AuthorizatedMethodInterceptor;
 import cc.kune.core.server.auth.SessionService;
 import cc.kune.core.server.auth.SessionServiceDefault;
-import cc.kune.core.server.content.CommentManager;
-import cc.kune.core.server.content.CommentManagerDefault;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContainerManagerDefault;
 import cc.kune.core.server.content.ContentManager;
@@ -95,7 +93,6 @@ import cc.kune.core.server.users.UserInfoServiceDefault;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.server.xmpp.XmppManagerDefault;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.domain.Comment;
 import cc.kune.domain.SocialNetwork;
 import cc.kune.wave.server.KuneWaveManager;
 import cc.kune.wave.server.KuneWaveManagerDefault;
@@ -104,80 +101,78 @@ import cc.kune.wave.server.ParticipantUtils;
 import com.google.inject.matcher.Matchers;
 
 public class PlatformServerModule extends AbstractExtendedModule {
-    private void bindFinders() {
-        // http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html
-        // (...) Just-in-time bindings created for child injectors will be
-        // created in an ancestor injector whenever possible (...)
-        // (This fails with finders, then we make explicit bindings)
+  private void bindFinders() {
+    // http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html
+    // (...) Just-in-time bindings created for child injectors will be
+    // created in an ancestor injector whenever possible (...)
+    // (This fails with finders, then we make explicit bindings)
 
-        bind(SocialNetwork.class);
-        bind(Comment.class);
-    }
+    bind(SocialNetwork.class);
+  }
 
-    private void bindManagers() {
-        bind(UserManager.class).to(UserManagerDefault.class);
-        bind(GroupManager.class).to(GroupManagerDefault.class);
-        bind(ContentManager.class).to(ContentManagerDefault.class);
-        bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
-        bind(ContainerManager.class).to(ContainerManagerDefault.class);
-        bind(LicenseManager.class).to(LicenseManagerDefault.class);
-        bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
-        bind(XmppManager.class).to(XmppManagerDefault.class);
-        bind(RateManager.class).to(RateManagerDefault.class);
-        bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
-        bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
-        bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
-        bind(TagManager.class).to(TagManagerDefault.class);
-        bind(TagUserContentManager.class).to(TagUserContentManagerDefault.class);
-        bind(CommentManager.class).to(CommentManagerDefault.class);
-        bind(FileManager.class).to(FileManagerDefault.class);
-        bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
-        bind(KuneWaveManager.class).to(KuneWaveManagerDefault.class);
-    }
+  private void bindManagers() {
+    bind(UserManager.class).to(UserManagerDefault.class);
+    bind(GroupManager.class).to(GroupManagerDefault.class);
+    bind(ContentManager.class).to(ContentManagerDefault.class);
+    bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
+    bind(ContainerManager.class).to(ContainerManagerDefault.class);
+    bind(LicenseManager.class).to(LicenseManagerDefault.class);
+    bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
+    bind(XmppManager.class).to(XmppManagerDefault.class);
+    bind(RateManager.class).to(RateManagerDefault.class);
+    bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
+    bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
+    bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
+    bind(TagManager.class).to(TagManagerDefault.class);
+    bind(TagUserContentManager.class).to(TagUserContentManagerDefault.class);
+    bind(FileManager.class).to(FileManagerDefault.class);
+    bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
+    bind(KuneWaveManager.class).to(KuneWaveManagerDefault.class);
+  }
 
-    private void bindRPC() {
-        bind(SiteService.class).to(SiteRPC.class);
-        bind(GroupService.class).to(GroupRPC.class);
-        bind(ContentService.class).to(ContentRPC.class);
-        bind(UserService.class).to(UserRPC.class);
-        bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
-        bind(I18nService.class).to(I18nRPC.class);
-    }
+  private void bindRPC() {
+    bind(SiteService.class).to(SiteRPC.class);
+    bind(GroupService.class).to(GroupRPC.class);
+    bind(ContentService.class).to(ContentRPC.class);
+    bind(UserService.class).to(UserRPC.class);
+    bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
+    bind(I18nService.class).to(I18nRPC.class);
+  }
 
-    private void bindServices() {
-        bind(UserInfoService.class).to(UserInfoServiceDefault.class);
-        bind(CreationService.class).to(CreationServiceDefault.class);
-        bind(AccessRightsService.class).to(AccessRightsServiceDefault.class);
-        bind(AccessService.class).to(AccessServiceDefault.class);
-        bind(FinderService.class).to(FinderServiceDefault.class);
-        bind(StateService.class).to(StateServiceDefault.class);
-        bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
-        bind(SessionService.class).to(SessionServiceDefault.class);
-    }
+  private void bindServices() {
+    bind(UserInfoService.class).to(UserInfoServiceDefault.class);
+    bind(CreationService.class).to(CreationServiceDefault.class);
+    bind(AccessRightsService.class).to(AccessRightsServiceDefault.class);
+    bind(AccessService.class).to(AccessServiceDefault.class);
+    bind(FinderService.class).to(FinderServiceDefault.class);
+    bind(StateService.class).to(StateServiceDefault.class);
+    bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
+    bind(SessionService.class).to(SessionServiceDefault.class);
+  }
 
-    @Override
-    protected void configure() {
-        // install(PersistService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
-        bind(KunePersistenceService.class);
+  @Override
+  protected void configure() {
+    // install(PersistService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
+    bind(KunePersistenceService.class);
 
-        bindFinders();
-        bindManagers();
-        bindRPC();
-        bindServices();
-        bind(KuneProperties.class).to(KunePropertiesDefault.class);
-        bind(Mapper.class).to(DozerMapper.class);
-        bind(ServerToolRegistry.class);
-        // bind(FileUploadManager.class).in(ServletScopes.REQUEST);
-        bind(FileUploadManager.class);
-        bind(FileDownloadManager.class);
-        bind(EntityLogoUploadManager.class);
-        bind(EntityLogoDownloadManager.class);
-        bind(ParticipantUtils.class);
+    bindFinders();
+    bindManagers();
+    bindRPC();
+    bindServices();
+    bind(KuneProperties.class).to(KunePropertiesDefault.class);
+    bind(Mapper.class).to(DozerMapper.class);
+    bind(ServerToolRegistry.class);
+    // bind(FileUploadManager.class).in(ServletScopes.REQUEST);
+    bind(FileUploadManager.class);
+    bind(FileDownloadManager.class);
+    bind(EntityLogoUploadManager.class);
+    bind(EntityLogoDownloadManager.class);
+    bind(ParticipantUtils.class);
 
-        bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
-                outermostCall(new AuthenticatedMethodInterceptor()));
-        bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
-                outermostCall(new AuthorizatedMethodInterceptor()));
-    }
+    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
+        outermostCall(new AuthenticatedMethodInterceptor()));
+    bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
+        outermostCall(new AuthorizatedMethodInterceptor()));
+  }
 
 }

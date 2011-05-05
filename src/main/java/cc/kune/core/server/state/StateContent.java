@@ -34,8 +34,8 @@ public class StateContent extends StateContainer {
   private Double currentUserRate;
   private String documentId;
   private boolean isParticipant;
-  private boolean isWave;
   private BasicMimeType mimeType;
+  private Date modifiedOn;
   private Date publishedOn;
   private Double rate;
   private Integer rateByUsers;
@@ -73,6 +73,10 @@ public class StateContent extends StateContainer {
 
   public BasicMimeType getMimeType() {
     return mimeType;
+  }
+
+  public Date getModifiedOn() {
+    return modifiedOn;
   }
 
   public Date getPublishedOn() {
@@ -137,6 +141,10 @@ public class StateContent extends StateContainer {
 
   public void setMimeType(final BasicMimeType mimeType) {
     this.mimeType = mimeType;
+  }
+
+  public void setModifiedOn(final Date modifiedOn) {
+    this.modifiedOn = modifiedOn;
   }
 
   public void setPublishedOn(final Date publishedOn) {

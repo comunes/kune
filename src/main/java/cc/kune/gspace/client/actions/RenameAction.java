@@ -20,6 +20,7 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.client.errors.NameNotPermittedException;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -34,15 +35,17 @@ import com.google.inject.Provider;
 
 public class RenameAction {
   private final Provider<ContentServiceAsync> contentService;
+  private final ErrorHandler errorHandler;
   private final I18nTranslationService i18n;
   private final Session session;
 
   @Inject
   public RenameAction(final I18nTranslationService i18n, final Session session,
-      final Provider<ContentServiceAsync> contentService) {
+      final Provider<ContentServiceAsync> contentService, final ErrorHandler errorHandler) {
     this.i18n = i18n;
     this.session = session;
     this.contentService = contentService;
+    this.errorHandler = errorHandler;
   }
 
   public void rename(final StateToken token, final String oldName, final String newName,
@@ -60,9 +63,10 @@ public class RenameAction {
             NotifyUser.error(i18n.tWithNT("This name is not permitted",
                 "It is used when a file or a folder does not have a permitted name"));
           } else {
+            errorHandler.process(caught);
             NotifyUser.error(i18n.t("Error renaming"));
           }
-          listener.onFail(token, newName);
+          listener.onFail(token, oldName);
         }
 
         @Override

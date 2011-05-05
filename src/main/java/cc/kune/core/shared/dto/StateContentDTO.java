@@ -37,6 +37,7 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
   private String documentId;
   private boolean isParticipant;
   private BasicMimeTypeDTO mimeType;
+  private Date modifiedOn;
   private Date publishedOn;
   private Double rate;
   private Integer rateByUsers;
@@ -74,6 +75,10 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
 
   public BasicMimeTypeDTO getMimeType() {
     return mimeType;
+  }
+
+  public Date getModifiedOn() {
+    return modifiedOn;
   }
 
   public Date getPublishedOn() {
@@ -138,6 +143,10 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
 
   public void setMimeType(final BasicMimeTypeDTO mimeType) {
     this.mimeType = mimeType;
+  }
+
+  public void setModifiedOn(final Date modifiedOn) {
+    this.modifiedOn = modifiedOn;
   }
 
   public void setPublishedOn(final Date publishedOn) {

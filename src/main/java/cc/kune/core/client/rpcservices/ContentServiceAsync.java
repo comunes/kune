@@ -26,7 +26,6 @@ import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -37,58 +36,57 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ContentServiceAsync {
 
-    void addAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<Void> asyncCallback);
+  void addAuthor(String userHash, StateToken token, String authorShortName,
+      AsyncCallback<Void> asyncCallback);
 
-    void addComment(String userHash, StateToken token, Long parentCommentId, String commentText,
-            AsyncCallback<CommentDTO> asyncCallback);
+  void addContent(String user, StateToken parentToken, String name, String typeId,
+      AsyncCallback<StateContentDTO> callback);
 
-    void addComment(String userHash, StateToken token, String commentText, AsyncCallback<CommentDTO> asyncCallback);
+  void addFolder(String hash, StateToken parentToken, String title, String typeId,
+      AsyncCallback<StateContainerDTO> callback);
 
-    void addContent(String user, StateToken parentToken, String name, String typeId,
-            AsyncCallback<StateContentDTO> callback);
+  void addParticipant(String userHash, StateToken token, String authorShortName,
+      AsyncCallback<Void> asyncCallback) throws DefaultException;
 
-    void addFolder(String hash, StateToken parentToken, String title, String typeId,
-            AsyncCallback<StateContainerDTO> callback);
+  void addRoom(String user, StateToken parentToken, String name,
+      AsyncCallback<StateContainerDTO> callback);
 
-    void addParticipant(String userHash, StateToken token, String authorShortName, AsyncCallback<Void> asyncCallback)
-            throws DefaultException;
+  void delContent(String userHash, StateToken token, AsyncCallback<StateContentDTO> asyncCallback);
 
-    void addRoom(String user, StateToken parentToken, String name, AsyncCallback<StateContainerDTO> callback);
+  void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
-    void delContent(String userHash, StateToken token, AsyncCallback<StateContentDTO> asyncCallback);
+  void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<TagCloudResult> asyncCallback);
 
-    void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
+  void rateContent(String userHash, StateToken token, Double value,
+      AsyncCallback<RateResult> asyncCallback);
 
-    void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<TagCloudResult> asyncCallback);
+  void removeAuthor(String userHash, StateToken token, String authorShortName,
+      AsyncCallback<Void> asyncCallback);
 
-    void markCommentAsAbuse(String userHash, StateToken token, Long commentId, AsyncCallback<CommentDTO> asyncCallback);
+  void renameContainer(String userHash, StateToken token, String newName,
+      AsyncCallback<StateAbstractDTO> asyncCallback);
 
-    void rateContent(String userHash, StateToken token, Double value, AsyncCallback<RateResult> asyncCallback);
+  void renameContent(String userHash, StateToken token, String newName,
+      AsyncCallback<StateAbstractDTO> asyncCallback);
 
-    void removeAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<Void> asyncCallback);
+  void save(String user, StateToken token, String content, AsyncCallback<Void> asyncCallback);
 
-    void renameContainer(String userHash, StateToken token, String newName,
-            AsyncCallback<StateAbstractDTO> asyncCallback);
+  void setAsDefaultContent(String userHash, StateToken token,
+      AsyncCallback<ContentSimpleDTO> asyncCallback);
 
-    void renameContent(String userHash, StateToken token, String newName, AsyncCallback<StateAbstractDTO> asyncCallback);
+  void setLanguage(String userHash, StateToken token, String languageCode,
+      AsyncCallback<I18nLanguageDTO> asyncCallback);
 
-    void save(String user, StateToken token, String content, AsyncCallback<Void> asyncCallback);
+  void setPublishedOn(String userHash, StateToken token, Date publishedOn,
+      AsyncCallback<Void> asyncCallback);
 
-    void setAsDefaultContent(String userHash, StateToken token, AsyncCallback<ContentSimpleDTO> asyncCallback);
+  void setStatus(String userHash, StateToken stateToken, ContentStatus status,
+      AsyncCallback<StateAbstractDTO> asyncCallback);
 
-    void setLanguage(String userHash, StateToken token, String languageCode,
-            AsyncCallback<I18nLanguageDTO> asyncCallback);
+  void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status,
+      AsyncCallback<StateAbstractDTO> asyncCallback);
 
-    void setPublishedOn(String userHash, StateToken token, Date publishedOn, AsyncCallback<Void> asyncCallback);
+  void setTags(String userHash, StateToken token, String tags,
+      AsyncCallback<TagCloudResult> asyncCallback);
 
-    void setStatus(String userHash, StateToken stateToken, ContentStatus status,
-            AsyncCallback<StateAbstractDTO> asyncCallback);
-
-    void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status,
-            AsyncCallback<StateAbstractDTO> asyncCallback);
-
-    void setTags(String userHash, StateToken token, String tags, AsyncCallback<TagCloudResult> asyncCallback);
-
-    void voteComment(String userHash, StateToken token, Long commentId, boolean votePositive,
-            AsyncCallback<CommentDTO> asyncCallback);
 }

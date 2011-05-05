@@ -26,7 +26,6 @@ import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -39,52 +38,47 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("ContentService")
 public interface ContentService extends RemoteService {
 
-    void addAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
+  void addAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
 
-    CommentDTO addComment(String userHash, StateToken token, Long parentCommentId, String commentText)
-            throws DefaultException;
+  StateContentDTO addContent(String user, StateToken parentToken, String name, String typeId)
+      throws DefaultException;
 
-    CommentDTO addComment(String userHash, StateToken token, String commentText) throws DefaultException;
+  StateContainerDTO addFolder(String hash, StateToken parentToken, String typeId, String title)
+      throws DefaultException;
 
-    StateContentDTO addContent(String user, StateToken parentToken, String name, String typeId) throws DefaultException;
+  void addParticipant(String userHash, StateToken token, String participant) throws DefaultException;
 
-    StateContainerDTO addFolder(String hash, StateToken parentToken, String typeId, String title)
-            throws DefaultException;
+  StateContainerDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
 
-    void addParticipant(String userHash, StateToken token, String participant) throws DefaultException;
+  StateContentDTO delContent(String userHash, StateToken token) throws DefaultException;
 
-    StateContainerDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
+  StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 
-    StateContentDTO delContent(String userHash, StateToken token) throws DefaultException;
+  TagCloudResult getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
 
-    StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
+  RateResult rateContent(String userHash, StateToken token, Double value) throws DefaultException;
 
-    TagCloudResult getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
+  void removeAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
 
-    CommentDTO markCommentAsAbuse(String userHash, StateToken token, Long commentId) throws DefaultException;
+  StateAbstractDTO renameContainer(String userHash, StateToken token, String newName)
+      throws DefaultException;
 
-    RateResult rateContent(String userHash, StateToken token, Double value) throws DefaultException;
+  StateAbstractDTO renameContent(String userHash, StateToken token, String newName)
+      throws DefaultException;
 
-    void removeAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
+  void save(String user, StateToken token, String content) throws DefaultException;
 
-    StateAbstractDTO renameContainer(String userHash, StateToken token, String newName) throws DefaultException;
+  ContentSimpleDTO setAsDefaultContent(String userHash, StateToken token);
 
-    StateAbstractDTO renameContent(String userHash, StateToken token, String newName) throws DefaultException;
+  I18nLanguageDTO setLanguage(String userHash, StateToken token, String languageCode)
+      throws DefaultException;
 
-    void save(String user, StateToken token, String content) throws DefaultException;
+  void setPublishedOn(String userHash, StateToken token, Date date) throws DefaultException;
 
-    ContentSimpleDTO setAsDefaultContent(String userHash, StateToken token);
+  StateAbstractDTO setStatus(String userHash, StateToken stateToken, ContentStatus status);
 
-    I18nLanguageDTO setLanguage(String userHash, StateToken token, String languageCode) throws DefaultException;
+  StateAbstractDTO setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status);
 
-    void setPublishedOn(String userHash, StateToken token, Date date) throws DefaultException;
+  TagCloudResult setTags(String userHash, StateToken token, String tags) throws DefaultException;
 
-    StateAbstractDTO setStatus(String userHash, StateToken stateToken, ContentStatus status);
-
-    StateAbstractDTO setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status);
-
-    TagCloudResult setTags(String userHash, StateToken token, String tags) throws DefaultException;
-
-    CommentDTO voteComment(String userHash, StateToken token, Long commentId, boolean votePositive)
-            throws DefaultException;
 }

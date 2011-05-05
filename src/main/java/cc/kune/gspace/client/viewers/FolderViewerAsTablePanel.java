@@ -1,5 +1,7 @@
 package cc.kune.gspace.client.viewers;
 
+import org.waveprotocol.wave.client.common.util.DateUtils;
+
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
@@ -9,6 +11,7 @@ import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -57,12 +60,17 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     final FolderItemWidget itemWidget = new FolderItemWidget((ImageResource) item.getIcon(),
         item.getText());
     final ActionSimplePanel toolbar = new ActionSimplePanel(guiProvider);
+    final long modifiedOn = item.getModififiedOn();
+    if (modifiedOn != FolderViewerView.NO_DATE) {
+      // String dateFormat = session.getCurrentLanguage().getDateFormatShort();
+      itemWidget.setModifiedText(DateUtils.getInstance().formatPastDate(modifiedOn));
+    }
     itemWidget.setMenu(toolbar);
     // Tooltip.to(itemWidget, item.getTooltip());
     final MenuDescriptor menu = new MenuDescriptor(i18n.t("Actions"));
     menu.withIcon(res.arrowdown()).withStyles("k-def-docbtn, k-btn, k-button");
     menu.setStandalone(false);
-    menu.setVisible(false);
+    itemWidget.setMenuVisible(false);
     toolbar.add(menu);
     for (final GuiActionDescrip menuItem : item.getActionCollection()) {
       menuItem.setParent(menu);
@@ -82,7 +90,8 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     itemWidget.getRowMouse().addMouseOutHandler(new MouseOutHandler() {
       @Override
       public void onMouseOut(final MouseOutEvent event) {
-        menu.setVisible(false);
+        itemWidget.setMenuVisible(false);
+        // menu.setVisible(false);
         // itemWidget.setSelect(false);
         // menu.hide();
       }
@@ -90,7 +99,8 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     itemWidget.getRowMouse().addMouseOverHandler(new MouseOverHandler() {
       @Override
       public void onMouseOver(final MouseOverEvent event) {
-        menu.setVisible(true);
+        // menu.setVisible(true);
+        itemWidget.setMenuVisible(true);
       }
     });
     flex.setWidget(rowCount + 1, 0, itemWidget);

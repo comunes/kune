@@ -39,7 +39,6 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
@@ -50,7 +49,6 @@ import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.domain.BasicMimeType;
-import cc.kune.domain.Comment;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -143,41 +141,6 @@ public class MapperTest {
   @Before
   public void inject() {
     TestHelper.inject(this);
-  }
-
-  @Test
-  public void testCommentMapper() {
-    final Content d = createDefContent();
-    final Comment comment = new Comment();
-    comment.setContent(d);
-    comment.setText("Some text");
-    final User user = new User();
-    comment.addPositiveVoter(user);
-    comment.addPositiveVoter(user);
-    CommentDTO commentDTO = mapper.map(comment, CommentDTO.class);
-    assertEquals(0, commentDTO.getNegativeVotersCount());
-    assertEquals(0, commentDTO.getAbuseInformersCount());
-    assertEquals(1, commentDTO.getPositiveVotersCount());
-    comment.addNegativeVoter(user);
-    comment.addNegativeVoter(user);
-    commentDTO = mapper.map(comment, CommentDTO.class);
-    assertEquals(1, commentDTO.getNegativeVotersCount());
-    assertEquals(0, commentDTO.getAbuseInformersCount());
-    assertEquals(0, commentDTO.getPositiveVotersCount());
-    comment.addAbuseInformer(user);
-    comment.addAbuseInformer(user);
-    commentDTO = mapper.map(comment, CommentDTO.class);
-    assertEquals(1, commentDTO.getNegativeVotersCount());
-    assertEquals(1, commentDTO.getAbuseInformersCount());
-    assertEquals(0, commentDTO.getPositiveVotersCount());
-    final Comment childComment = new Comment();
-    childComment.setContent(d);
-    childComment.setParent(comment);
-    comment.getChilds().add(childComment);
-    commentDTO = mapper.map(comment, CommentDTO.class);
-    final CommentDTO childCommentDTO = mapper.map(childComment, CommentDTO.class);
-    assertEquals(1, comment.getChilds().size());
-    assertEquals(commentDTO, childCommentDTO.getParent());
   }
 
   @Test

@@ -113,7 +113,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   @Override
   public Content createContent(final String title, final String body, final User author,
       final Container container, final String typeId) {
-    String contentBody;
     FilenameUtils.checkBasicFilename(title);
     final String newtitle = findInexistentTitle(container, title);
     final Content newContent = new Content();
@@ -128,11 +127,10 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     if (newContent.isWave()) {
       final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body,
           participantUtils.of(author.getShortName()));
-      contentBody = JavaWaverefEncoder.encodeToUriPathSegment(waveRef);
-    } else {
-      contentBody = body;
+      newContent.setWaveId(JavaWaverefEncoder.encodeToUriPathSegment(waveRef));
+      newContent.setModifiedOn((new Date()).getTime());
     }
-    revision.setBody(contentBody);
+    revision.setBody(body);
     newContent.addRevision(revision);
     return persist(newContent);
   }
@@ -179,7 +177,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   private WaveRef getWaveRef(final Content content) {
     try {
-      return JavaWaverefEncoder.decodeWaveRefFromPath(String.valueOf(content.getLastRevision().getBody()));
+      return JavaWaverefEncoder.decodeWaveRefFromPath(String.valueOf(content.getWaveId()));
     } catch (final InvalidWaveRefException e) {
       throw new DefaultException("Error getting the wave");
     }
@@ -294,6 +292,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
     content.setLanguage(language);
     return language;
+  }
+
+  @Override
+  public void setModifiedOn(final Content content, final long lastModifiedTime) {
+    content.setModifiedOn(lastModifiedTime);
+    persist(content);
   }
 
   @Override

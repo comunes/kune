@@ -19,10 +19,8 @@
  */
 package cc.kune.core.server.access;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.domain.Comment;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -31,18 +29,16 @@ import cc.kune.domain.User;
 
 public interface FinderService {
 
-    Comment getComment(Long commentId) throws DefaultException;
+  Content getContent(Long contentId) throws DefaultException;
 
-    Content getContent(Long contentId) throws DefaultException;
+  Content getContent(StateToken token, Group defaultGroup) throws DefaultException;
 
-    Content getContent(StateToken token, Group defaultGroup) throws DefaultException;
+  Container getFolder(Long folderId) throws DefaultException;
 
-    Container getFolder(Long folderId) throws DefaultException;
+  Rate getRate(User user, Content content);
 
-    Rate getRate(User user, Content content);
+  Double getRateAvg(Content content);
 
-    Double getRateAvg(Content content);
-
-    Long getRateByUsers(Content content);
+  Long getRateByUsers(Content content);
 
 }

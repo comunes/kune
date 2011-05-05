@@ -209,34 +209,6 @@
     <class-b>cc.kune.domain.Tag</class-b>
   </mapping>
   <mapping>
-    <class-a> cc.kune.domain.Comment </class-a>
-    <class-b> cc.kune.core.shared.dto.CommentDTO </class-b>
-    <field>
-      <a>author</a>
-      <b>author</b>
-      <a-hint> cc.kune.domain.User </a-hint>
-      <b-hint> cc.kune.core.shared.dto.UserSimpleDTO </b-hint>
-    </field>
-    <field>
-      <a>childs</a>
-      <b>childs</b>
-      <a-hint> cc.kune.domain.Comment </a-hint>
-      <b-hint> cc.kune.core.shared.dto.CommentDTO </b-hint>
-    </field>
-    <field type="one-way">
-      <a get-method="getPositiveVotersCount"> positiveVotersCount </a>
-      <b>positiveVotersCount</b>
-    </field>
-    <field type="one-way">
-      <a get-method="getNegativeVotersCount"> negativeVotersCount </a>
-      <b>negativeVotersCount</b>
-    </field>
-    <field type="one-way">
-      <a get-method="getAbuseInformersCount"> abuseInformersCount </a>
-      <b>abuseInformersCount</b>
-    </field>
-  </mapping>
-  <mapping>
     <class-a>cc.kune.core.shared.dto.LinkDTO</class-a>
     <class-b>cc.kune.domain.User</class-b>
     <field>

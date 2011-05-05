@@ -40,6 +40,8 @@ public class FolderItemWidget extends Composite implements HasText {
   @UiField
   SimplePanel menu;
   @UiField
+  InlineLabel modified;
+  @UiField
   InlineLabel title;
 
   public FolderItemWidget(final ImageResource iconResource, final String title) {
@@ -100,6 +102,14 @@ public class FolderItemWidget extends Composite implements HasText {
 
   public void setMenu(final ActionSimplePanel toolbar) {
     menu.add(toolbar);
+  }
+
+  public void setMenuVisible(final boolean visible) {
+    menu.getElement().getStyle().setOpacity(visible ? 1d : 0.2d);
+  }
+
+  public void setModifiedText(final String text) {
+    modified.setText(text);
   }
 
   public void setSelect(final boolean selected) {

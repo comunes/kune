@@ -24,70 +24,77 @@ import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 public class FolderItemDescriptor {
-    private final GuiActionDescCollection actionCollection;
-    private final boolean allowDrag;
-    private final boolean allowDrop;
-    private final ContentStatus contentStatus;
-    private final Object icon;
-    private final String id;
-    private final String parentId;
-    private final String text;
-    private final StateToken token;
-    private final String tooltip;
+  private final GuiActionDescCollection actionCollection;
+  private final boolean allowDrag;
+  private final boolean allowDrop;
+  private final ContentStatus contentStatus;
+  private final Object icon;
+  private final String id;
+  private final long modififiedOn;
+  private final String parentId;
+  private final String text;
+  private final StateToken token;
+  private final String tooltip;
 
-    public FolderItemDescriptor(final String id, final String parentId, final Object icon, final String text,
-            final String tooltip, final ContentStatus contentStatus, final StateToken token, final boolean allowDrag,
-            final boolean allowDrop, final GuiActionDescCollection actionCollection) {
-        this.id = id;
-        this.parentId = parentId;
-        this.icon = icon;
-        this.text = text;
-        this.tooltip = tooltip;
-        this.contentStatus = contentStatus;
-        this.token = token;
-        this.allowDrag = allowDrag;
-        this.allowDrop = allowDrop;
-        this.actionCollection = actionCollection;
-    }
+  public FolderItemDescriptor(final String id, final String parentId, final Object icon,
+      final String text, final String tooltip, final ContentStatus contentStatus,
+      final StateToken token, final long modififiedOn, final boolean allowDrag, final boolean allowDrop,
+      final GuiActionDescCollection actionCollection) {
+    this.id = id;
+    this.parentId = parentId;
+    this.icon = icon;
+    this.text = text;
+    this.tooltip = tooltip;
+    this.contentStatus = contentStatus;
+    this.token = token;
+    this.modififiedOn = modififiedOn;
+    this.allowDrag = allowDrag;
+    this.allowDrop = allowDrop;
+    this.actionCollection = actionCollection;
+  }
 
-    public GuiActionDescCollection getActionCollection() {
-        return actionCollection;
-    }
+  public GuiActionDescCollection getActionCollection() {
+    return actionCollection;
+  }
 
-    public ContentStatus getContentStatus() {
-        return contentStatus;
-    }
+  public ContentStatus getContentStatus() {
+    return contentStatus;
+  }
 
-    public Object getIcon() {
-        return icon;
-    }
+  public Object getIcon() {
+    return icon;
+  }
 
-    public String getId() {
-        return id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public String getParentId() {
-        return parentId;
-    }
+  public long getModififiedOn() {
+    return modififiedOn;
+  }
 
-    public StateToken getStateToken() {
-        return token;
-    }
+  public String getParentId() {
+    return parentId;
+  }
 
-    public String getText() {
-        return text;
-    }
+  public StateToken getStateToken() {
+    return token;
+  }
 
-    public String getTooltip() {
-        return tooltip;
-    }
+  public String getText() {
+    return text;
+  }
 
-    public boolean isDraggable() {
-        return allowDrag;
-    }
+  public String getTooltip() {
+    return tooltip;
+  }
 
-    public boolean isDroppable() {
-        return allowDrop;
-    }
+  public boolean isDraggable() {
+    return allowDrag;
+  }
+
+  public boolean isDroppable() {
+    return allowDrop;
+  }
 
 }

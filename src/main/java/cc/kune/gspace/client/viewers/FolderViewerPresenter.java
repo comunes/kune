@@ -55,6 +55,8 @@ public class FolderViewerPresenter extends
 
   public interface FolderViewerView extends View {
 
+    long NO_DATE = 0;
+
     void addItem(FolderItemDescriptor item, ClickHandler clickHandler,
         DoubleClickHandler doubleClickHandler);
 
@@ -111,11 +113,11 @@ public class FolderViewerPresenter extends
 
   private void addItem(final String title, final String contentTypeId, final BasicMimeTypeDTO mimeType,
       final ContentStatus status, final StateToken stateToken, final StateToken parentStateToken,
-      final AccessRights rights) {
+      final AccessRights rights, final long modifiedOn) {
     final Object icon = getIcon(stateToken, contentTypeId, mimeType);
     final String tooltip = getTooltip(stateToken, mimeType);
     final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
-        genId(parentStateToken), icon, title, tooltip, status, stateToken,
+        genId(parentStateToken), icon, title, tooltip, status, stateToken, modifiedOn,
         capabilitiesRegistry.isDragable(contentTypeId) && rights.isAdministrable(),
         capabilitiesRegistry.isDropable(contentTypeId) && rights.isAdministrable(),
         actionsRegistry.getCurrentActions(stateToken, contentTypeId, session.isLogged(), rights,
@@ -155,12 +157,13 @@ public class FolderViewerPresenter extends
         addItem(childFolder.getName(), childFolder.getTypeId(), null, ContentStatus.publishedOnline,
             childFolder.getStateToken(),
             childFolder.getStateToken().copy().setFolder(childFolder.getParentFolderId()),
-            containerRights);
+            containerRights, FolderViewerView.NO_DATE);
       }
       // Other contents (docs, etc)
       for (final ContentSimpleDTO content : container.getContents()) {
         addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
-            content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights());
+            content.getStateToken(), content.getStateToken().copy().clearDocument(),
+            content.getRights(), content.getModifiedOn());
       }
     }
   }

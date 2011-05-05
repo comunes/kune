@@ -11,7 +11,6 @@
     <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g' | sed 's/^/<class>cc.kune.domain./g' -->
     <class>cc.kune.domain.AccessLists</class>
     <class>cc.kune.domain.BasicMimeType</class>
-    <class>cc.kune.domain.Comment</class>
     <class>cc.kune.domain.Container</class>
     <class>cc.kune.domain.ContainerTranslation</class>
     <class>cc.kune.domain.Content</class>
@@ -68,7 +67,6 @@
     <!-- JPA entities must be registered here -->
     <class>cc.kune.domain.AccessLists</class>
     <class>cc.kune.domain.BasicMimeType</class>
-    <class>cc.kune.domain.Comment</class>
     <class>cc.kune.domain.Container</class>
     <class>cc.kune.domain.ContainerTranslation</class>
     <class>cc.kune.domain.Content</class>
@@ -121,7 +119,6 @@
     <!-- JPA entities must be registered here -->
     <class>cc.kune.domain.AccessLists</class>
     <class>cc.kune.domain.BasicMimeType</class>
-    <class>cc.kune.domain.Comment</class>
     <class>cc.kune.domain.Container</class>
     <class>cc.kune.domain.ContainerTranslation</class>
     <class>cc.kune.domain.Content</class>

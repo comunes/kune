@@ -35,6 +35,17 @@
       outline: 0;
     }
 
+    .modified {
+      margin-right: 5px;
+      color: #A05A2C;
+      font-size: 17px;
+      line-height: 1.3em;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      float: right;
+      font-style: italic;
+    }
+
     .title {
       margin-left: 5px;
       color: #A05A2C;
@@ -57,6 +68,8 @@
       <g:Image styleName="{style.icon}" ui:field="icon" />
       <g:InlineLabel styleName="{style.title}" ui:field="title" />
       <g:SimplePanel styleName="{style.menu}" ui:field="menu" />
+      <g:InlineLabel styleName="{style.modified}"
+        ui:field="modified" />
     </g:FlowPanel>
   </g:FocusPanel>
 </ui:UiBinder>

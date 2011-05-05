@@ -1,5 +1,6 @@
 /*
  *
+
  * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -21,9 +22,7 @@ package cc.kune.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -48,7 +47,6 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
@@ -77,11 +75,6 @@ public class Content implements HasStateToken {
   @IndexedEmbedded
   @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   private List<User> authors;
-
-  @Fetch(FetchMode.JOIN)
-  @ContainedIn
-  @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private Set<Comment> comments;
 
   @ManyToOne
   @JoinColumn
@@ -123,6 +116,9 @@ public class Content implements HasStateToken {
   private BasicMimeType mimeType;
 
   @Basic(optional = true)
+  private Long modifiedOn;
+
+  @Basic(optional = true)
   private Date publishedOn;
 
   @Enumerated(EnumType.STRING)
@@ -138,10 +134,11 @@ public class Content implements HasStateToken {
   @Version
   private int version;
 
+  private String waveId;
+
   public Content() {
     translations = new ArrayList<ContentTranslation>();
     authors = new ArrayList<User>();
-    comments = new HashSet<Comment>();
     createdOn = System.currentTimeMillis();
     lastRevision = new Revision(this);
     accessLists = null;
@@ -152,13 +149,6 @@ public class Content implements HasStateToken {
     if (!this.authors.contains(user)) {
       this.authors.add(user);
     }
-  }
-
-  public void addComment(final Comment comment) {
-    // FIXME: something related with lazy initialization (workaround using
-    // size())
-    comments.size();
-    comments.add(comment);
   }
 
   public void addRevision(final Revision revision) {
@@ -177,10 +167,6 @@ public class Content implements HasStateToken {
 
   public List<User> getAuthors() {
     return authors;
-  }
-
-  public Set<Comment> getComments() {
-    return comments;
   }
 
   public Container getContainer() {
@@ -217,6 +203,10 @@ public class Content implements HasStateToken {
 
   public BasicMimeType getMimeType() {
     return mimeType;
+  }
+
+  public Long getModifiedOn() {
+    return modifiedOn;
   }
 
   public Group getOwner(final Group group) {
@@ -258,6 +248,10 @@ public class Content implements HasStateToken {
     return version;
   }
 
+  public String getWaveId() {
+    return waveId;
+  }
+
   @Transient
   public boolean hasAccessList() {
     return accessLists != null;
@@ -278,10 +272,6 @@ public class Content implements HasStateToken {
 
   public void setAuthors(final List<User> authors) {
     this.authors = authors;
-  }
-
-  public void setComments(final Set<Comment> comments) {
-    this.comments = comments;
   }
 
   public void setContainer(final Container container) {
@@ -321,6 +311,10 @@ public class Content implements HasStateToken {
     this.mimeType = mimeType;
   }
 
+  public void setModifiedOn(final Long modifiedOn) {
+    this.modifiedOn = modifiedOn;
+  }
+
   public void setPublishedOn(final Date publishedOn) {
     this.publishedOn = publishedOn;
   }
@@ -339,6 +333,10 @@ public class Content implements HasStateToken {
 
   public void setVersion(final int version) {
     this.version = version;
+  }
+
+  public void setWaveId(final String waveId) {
+    this.waveId = waveId;
   }
 
   @Override
