@@ -358,7 +358,7 @@ private final EventBus eventBus;
         getStackTraceAsync(e, new Accessor<SafeHtml>() {
           @Override
           public void use(SafeHtml stack) {
-              NotifyUser.error("Oops! Something has gone wrong. Please contact the site admins with <em>more details</em>", true);
+              NotifyUser.error("Oops! Something has gone wrong. Please contact the site admins with <em>more details</em>");
           //  error.addDetail(stack, null);
             String message = stack.asString().replace("<br>", "\n");
             REMOTE_LOG.severe(message);

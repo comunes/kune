@@ -28,57 +28,64 @@ import com.google.gwt.user.client.ui.MenuItem;
 
 public class GwtSubMenuGui extends AbstractGwtMenuGui {
 
-    private IconLabel iconLabel;
-    private MenuItem item;
+  private IconLabel iconLabel;
+  private MenuItem item;
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        super.create(descriptor);
-        item = new MenuItem("", menu);
-        iconLabel = new IconLabel("");
-        configureItemFromProperties();
-        final AbstractGwtMenuGui parentMenu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(PARENT_UI));
-        final int position = descriptor.getPosition();
-        if (position == GuiActionDescrip.NO_POSITION) {
-            parentMenu.add(item);
-        } else {
-            parentMenu.insert(position, item);
-        }
-        descriptor.putValue(ParentWidget.PARENT_UI, this);
-        return this;
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    super.create(descriptor);
+    item = new MenuItem("", menu);
+    iconLabel = new IconLabel("");
+    configureItemFromProperties();
+    final AbstractGwtMenuGui parentMenu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(
+        PARENT_UI));
+    final int position = descriptor.getPosition();
+    if (position == GuiActionDescrip.NO_POSITION) {
+      parentMenu.add(item);
+    } else {
+      parentMenu.insert(position, item);
     }
+    descriptor.putValue(ParentWidget.PARENT_UI, this);
+    return this;
+  }
 
-    private void layout() {
-        item.setHTML(iconLabel.toString());
-    }
+  private void layout() {
+    item.setHTML(iconLabel.toString());
+  }
 
-    @Override
-    public void setEnabled(final boolean enabled) {
-        item.setVisible(enabled);
-    }
+  @Override
+  public void setEnabled(final boolean enabled) {
+    item.setVisible(enabled);
+  }
 
-    @Override
-    public void setIconStyle(final String style) {
-        iconLabel.setRightIcon(style);
-        layout();
-    }
+  @Override
+  public void setIconStyle(final String style) {
+    iconLabel.setRightIcon(style);
+    layout();
+  }
 
-    @Override
-    public void setText(final String text) {
-        iconLabel.setText(text);
-        layout();
-    }
+  @Override
+  public void setIconUrl(final String url) {
+    iconLabel.setRightIconUrl(url);
+    layout();
+  }
 
-    @Override
-    public void setToolTipText(final String tooltip) {
-        item.setTitle(tooltip);
-    }
+  @Override
+  public void setText(final String text) {
+    iconLabel.setText(text);
+    layout();
+  }
 
-    @Override
-    public void setVisible(final boolean visible) {
-        item.setVisible(visible);
-        iconLabel.setVisible(visible);
-        layout();
-    }
+  @Override
+  public void setToolTipText(final String tooltip) {
+    item.setTitle(tooltip);
+  }
+
+  @Override
+  public void setVisible(final boolean visible) {
+    item.setVisible(visible);
+    iconLabel.setVisible(visible);
+    layout();
+  }
 }

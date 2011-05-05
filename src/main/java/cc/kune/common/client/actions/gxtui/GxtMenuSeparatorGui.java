@@ -28,40 +28,44 @@ import com.google.gwt.user.client.ui.UIObject;
 
 public class GxtMenuSeparatorGui extends AbstractChildGuiItem implements ParentWidget {
 
-    @Override
-    public void add(final UIObject uiObject) {
-    }
+  @Override
+  public void add(final UIObject uiObject) {
+  }
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.create(descriptor);
-        final GxtMenuGui menu = (GxtMenuGui) parent;
-        menu.addSeparator();
-        return menu;
-    }
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.create(descriptor);
+    final GxtMenuGui menu = (GxtMenuGui) parent;
+    menu.addSeparator();
+    return menu;
+  }
 
-    @Override
-    public void insert(final int position, final UIObject widget) {
-    }
+  @Override
+  public void insert(final int position, final UIObject widget) {
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-    }
+  @Override
+  protected void setEnabled(final boolean enabled) {
+  }
 
-    @Override
-    protected void setIconStyle(final String style) {
-    }
+  @Override
+  protected void setIconStyle(final String style) {
+  }
 
-    @Override
-    protected void setText(final String text) {
-    }
+  @Override
+  public void setIconUrl(final String url) {
+  }
 
-    @Override
-    protected void setToolTipText(final String text) {
-    }
+  @Override
+  protected void setText(final String text) {
+  }
 
-    @Override
-    public boolean shouldBeAdded() {
-        return false;
-    }
+  @Override
+  protected void setToolTipText(final String text) {
+  }
+
+  @Override
+  public boolean shouldBeAdded() {
+    return false;
+  }
 }

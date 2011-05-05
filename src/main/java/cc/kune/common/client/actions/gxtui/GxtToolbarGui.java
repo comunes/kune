@@ -29,69 +29,73 @@ import com.google.gwt.user.client.ui.UIObject;
 
 public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
 
-    private ToolBar toolbar;
+  private ToolBar toolbar;
 
-    public GxtToolbarGui() {
-        super();
-    }
+  public GxtToolbarGui() {
+    super();
+  }
 
-    public GxtToolbarGui(final GuiActionDescrip descriptor) {
-        super(descriptor);
-    }
+  public GxtToolbarGui(final GuiActionDescrip descriptor) {
+    super(descriptor);
+  }
 
-    @Override
-    public void add(final UIObject uiObject) {
-        toolbar.add((Component) uiObject);
-    }
+  @Override
+  public void add(final UIObject uiObject) {
+    toolbar.add((Component) uiObject);
+  }
 
-    // public FillToolItem addFill() {
-    // final FillToolItem item = new FillToolItem();
-    // toolbar.add(item);
-    // return item;
-    // }
-    //
-    // public SeparatorToolItem addSeparator() {
-    // final SeparatorToolItem item = new SeparatorToolItem();
-    // toolbar.add(item);
-    // return item;
-    // }
-    //
-    // public LabelToolItem addSpacer() {
-    // final LabelToolItem item = new LabelToolItem();
-    // toolbar.add(item);
-    // return item;
-    // }
+  // public FillToolItem addFill() {
+  // final FillToolItem item = new FillToolItem();
+  // toolbar.add(item);
+  // return item;
+  // }
+  //
+  // public SeparatorToolItem addSeparator() {
+  // final SeparatorToolItem item = new SeparatorToolItem();
+  // toolbar.add(item);
+  // return item;
+  // }
+  //
+  // public LabelToolItem addSpacer() {
+  // final LabelToolItem item = new LabelToolItem();
+  // toolbar.add(item);
+  // return item;
+  // }
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        toolbar = new ToolBar();
-        initWidget(toolbar);
-        configureItemFromProperties();
-        descriptor.putValue(ParentWidget.PARENT_UI, this);
-        return this;
-    }
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    toolbar = new ToolBar();
+    initWidget(toolbar);
+    configureItemFromProperties();
+    descriptor.putValue(ParentWidget.PARENT_UI, this);
+    return this;
+  }
 
-    @Override
-    public void insert(final int position, final UIObject uiObject) {
-        toolbar.insert((Component) uiObject, position);
-    }
+  @Override
+  public void insert(final int position, final UIObject uiObject) {
+    toolbar.insert((Component) uiObject, position);
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-    }
+  @Override
+  protected void setEnabled(final boolean enabled) {
+  }
 
-    @Override
-    protected void setIconStyle(final String style) {
-    }
+  @Override
+  protected void setIconStyle(final String style) {
+  }
 
-    @Override
-    protected void setText(final String text) {
-    }
+  @Override
+  public void setIconUrl(final String url) {
+  }
 
-    @Override
-    protected void setToolTipText(final String text) {
-        toolbar.setTitle(text);
-    }
+  @Override
+  protected void setText(final String text) {
+  }
+
+  @Override
+  protected void setToolTipText(final String text) {
+    toolbar.setTitle(text);
+  }
 
 }

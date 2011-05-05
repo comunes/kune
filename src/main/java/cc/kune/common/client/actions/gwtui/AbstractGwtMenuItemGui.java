@@ -192,6 +192,12 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     layout();
   }
 
+  @Override
+  public void setIconUrl(final String url) {
+    iconLabel.setRightIconUrl(url);
+    layout();
+  }
+
   private void setRadioChecked(final Boolean checked) {
     iconLabel.setLeftIconResource(checked ? res.radioChecked() : res.radioUnChecked());
   }

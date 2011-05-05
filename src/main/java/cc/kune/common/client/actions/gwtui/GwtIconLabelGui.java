@@ -81,6 +81,11 @@ public class GwtIconLabelGui extends AbstractGuiItem {
   }
 
   @Override
+  public void setIconUrl(final String url) {
+    iconLabel.setLeftIconUrl(url);
+  }
+
+  @Override
   public void setText(final String text) {
     iconLabel.setText(text);
   }

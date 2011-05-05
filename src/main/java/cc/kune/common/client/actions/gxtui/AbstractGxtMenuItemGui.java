@@ -31,6 +31,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
+import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
@@ -45,123 +46,129 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
 
-    private MenuItem item;
+  private MenuItem item;
 
-    public AbstractGxtMenuItemGui() {
-        super();
-    }
+  public AbstractGxtMenuItemGui() {
+    super();
+  }
 
-    public AbstractGxtMenuItemGui(final MenuItemDescriptor descriptor) {
-        super(descriptor);
+  public AbstractGxtMenuItemGui(final MenuItemDescriptor descriptor) {
+    super(descriptor);
 
-    }
+  }
 
-    private void confCheckListener(final MenuItemDescriptor descriptor, final CheckMenuItem checkItem) {
-        descriptor.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(final PropertyChangeEvent event) {
-                if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
-                    checkItem.setChecked((Boolean) event.getNewValue());
-                }
-            }
-        });
-    }
-
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        if (descriptor instanceof MenuRadioItemDescriptor) {
-            final CheckMenuItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
-            checkItem.setGroup(((MenuRadioItemDescriptor) descriptor).getGroup());
-            confCheckListener((MenuItemDescriptor) descriptor, checkItem);
-            item = checkItem;
-        } else if (descriptor instanceof MenuCheckItemDescriptor) {
-            final CheckMenuItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
-            confCheckListener((MenuItemDescriptor) descriptor, checkItem);
-            item = checkItem;
-        } else {
-            item = new MenuItem("");
+  private void confCheckListener(final MenuItemDescriptor descriptor, final CheckMenuItem checkItem) {
+    descriptor.addPropertyChangeListener(new PropertyChangeListener() {
+      @Override
+      public void propertyChange(final PropertyChangeEvent event) {
+        if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
+          checkItem.setChecked((Boolean) event.getNewValue());
         }
+      }
+    });
+  }
 
-        final String id = descriptor.getId();
-        if (id != null) {
-            item.ensureDebugId(id);
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    if (descriptor instanceof MenuRadioItemDescriptor) {
+      final CheckMenuItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
+      checkItem.setGroup(((MenuRadioItemDescriptor) descriptor).getGroup());
+      confCheckListener((MenuItemDescriptor) descriptor, checkItem);
+      item = checkItem;
+    } else if (descriptor instanceof MenuCheckItemDescriptor) {
+      final CheckMenuItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
+      confCheckListener((MenuItemDescriptor) descriptor, checkItem);
+      item = checkItem;
+    } else {
+      item = new MenuItem("");
+    }
+
+    final String id = descriptor.getId();
+    if (id != null) {
+      item.ensureDebugId(id);
+    }
+    item.addSelectionListener(new SelectionListener<MenuEvent>() {
+      @Override
+      public void componentSelected(final MenuEvent ce) {
+        final AbstractAction action = descriptor.getAction();
+        if (action != null) {
+          action.actionPerformed(new ActionEvent(item, getTargetObjectOfAction(descriptor),
+              Event.getCurrentEvent()));
         }
-        item.addSelectionListener(new SelectionListener<MenuEvent>() {
-            @Override
-            public void componentSelected(final MenuEvent ce) {
-                final AbstractAction action = descriptor.getAction();
-                if (action != null) {
-                    action.actionPerformed(new ActionEvent(item, getTargetObjectOfAction(descriptor),
-                            Event.getCurrentEvent()));
-                }
-            }
-        });
-        child = item;
-        super.create(descriptor);
-        configureItemFromProperties();
-        return this;
-    }
+      }
+    });
+    child = item;
+    super.create(descriptor);
+    configureItemFromProperties();
+    return this;
+  }
 
-    private CheckMenuItem createCheckItem(final MenuItemDescriptor descriptor) {
-        final CheckMenuItem checkItem = new CheckMenuItem();
-        checkItem.setChecked(((MenuCheckItemDescriptor) descriptor).isChecked());
-        return checkItem;
-    }
+  private CheckMenuItem createCheckItem(final MenuItemDescriptor descriptor) {
+    final CheckMenuItem checkItem = new CheckMenuItem();
+    checkItem.setChecked(((MenuCheckItemDescriptor) descriptor).isChecked());
+    return checkItem;
+  }
 
-    private String createShortCut(final KeyStroke key, final String style) {
-        // See: https://yui-ext.com/forum/showthread.php?t=5762
-        final Element keyLabel = DOM.createSpan();
-        keyLabel.setId(style);
-        keyLabel.setInnerText(key.toString());
-        return keyLabel.getString();
-    }
+  private String createShortCut(final KeyStroke key, final String style) {
+    // See: https://yui-ext.com/forum/showthread.php?t=5762
+    final Element keyLabel = DOM.createSpan();
+    keyLabel.setId(style);
+    keyLabel.setInnerText(key.toString());
+    return keyLabel.getString();
+  }
 
-    public MenuItem getItem() {
-        return item;
-    }
+  public MenuItem getItem() {
+    return item;
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-        item.setVisible(enabled);
-    }
+  @Override
+  protected void setEnabled(final boolean enabled) {
+    item.setVisible(enabled);
+  }
 
-    @Override
-    public void setIconResource(final ImageResource icon) {
-        item.setIcon(AbstractImagePrototype.create(icon));
-    }
+  @Override
+  public void setIconResource(final ImageResource icon) {
+    item.setIcon(AbstractImagePrototype.create(icon));
+  }
 
-    @Override
-    protected void setIconStyle(final String style) {
-        item.setIconStyle(style);
-    }
+  @Override
+  protected void setIconStyle(final String style) {
+    item.setIconStyle(style);
+  }
 
-    @Override
-    protected void setText(final String text) {
-        if (text != null) {
-            final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-            if (key == null) {
-                item.setText(text);
-            } else {
-                item.setText(text + createShortCut(key, "oc-mshortcut-hidden") + createShortCut(key, "oc-mshortcut"));
-            }
-        }
-    }
+  @Override
+  public void setIconUrl(final String url) {
+    throw new NotImplementedException();
+  }
 
-    @Override
-    protected void setToolTipText(final String tooltip) {
-        if (TextUtils.notEmpty(tooltip)) {
-            item.setToolTip(new GxtDefTooltip(tooltip));
-        }
+  @Override
+  protected void setText(final String text) {
+    if (text != null) {
+      final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
+      if (key == null) {
+        item.setText(text);
+      } else {
+        item.setText(text + createShortCut(key, "oc-mshortcut-hidden")
+            + createShortCut(key, "oc-mshortcut"));
+      }
     }
+  }
 
-    @Override
-    public void setVisible(final boolean visible) {
-        item.setVisible(visible);
+  @Override
+  protected void setToolTipText(final String tooltip) {
+    if (TextUtils.notEmpty(tooltip)) {
+      item.setToolTip(new GxtDefTooltip(tooltip));
     }
+  }
 
-    @Override
-    public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
-        return false;
-    }
+  @Override
+  public void setVisible(final boolean visible) {
+    item.setVisible(visible);
+  }
+
+  @Override
+  public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
+    return false;
+  }
 }

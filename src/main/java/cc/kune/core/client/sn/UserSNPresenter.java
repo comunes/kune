@@ -152,8 +152,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     final UserBuddiesDataDTO userBuddiesData = state.getUserBuddies();
     final List<UserSimpleDTO> buddies = userBuddiesData.getBuddies();
     for (final UserSimpleDTO user : buddies) {
-      final String avatarUrl = user.hasLogo() ? downloadProvider.get().getLogoImageUrl(
-          user.getStateToken()) : PERSON_NO_AVATAR_IMAGE;
+      final String avatarUrl = downloadProvider.get().getUserAvatar(user);
       getView().addBuddie(user, avatarUrl, user.getName(), "",
           createMenuItems(user, userMenuItemsRegistry, user.getName()));
     }

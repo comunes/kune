@@ -31,50 +31,54 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 
 public class GxtToolbarSeparatorGui extends AbstractChildGuiItem {
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        final GxtToolbarGui toolbar = (GxtToolbarGui) parent;
-        final Type type = ((ToolbarSeparatorDescriptor) descriptor).getSeparatorType();
-        switch (type) {
-        case fill:
-            child = new FillToolItem();
-            break;
-        case spacer:
-            child = new LabelToolItem();
-            break;
-        case separator:
-            child = new SeparatorToolItem();
-            break;
-        default:
-            break;
-        }
-        super.create(descriptor);
-        configureItemFromProperties();
-        return toolbar;
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    final GxtToolbarGui toolbar = (GxtToolbarGui) parent;
+    final Type type = ((ToolbarSeparatorDescriptor) descriptor).getSeparatorType();
+    switch (type) {
+    case fill:
+      child = new FillToolItem();
+      break;
+    case spacer:
+      child = new LabelToolItem();
+      break;
+    case separator:
+      child = new SeparatorToolItem();
+      break;
+    default:
+      break;
     }
+    super.create(descriptor);
+    configureItemFromProperties();
+    return toolbar;
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-        // do nothing
-    }
+  @Override
+  protected void setEnabled(final boolean enabled) {
+    // do nothing
+  }
 
-    @Override
-    protected void setIconStyle(final String style) {
-        // do nothing
-    }
+  @Override
+  protected void setIconStyle(final String style) {
+    // do nothing
+  }
 
-    @Override
-    protected void setText(final String text) {
-        // do nothing
-    }
+  @Override
+  public void setIconUrl(final String url) {
+  }
 
-    @Override
-    protected void setToolTipText(final String text) {
-        // do nothing
-    }
+  @Override
+  protected void setText(final String text) {
+    // do nothing
+  }
 
-    @Override
-    public boolean shouldBeAdded() {
-        return false;
-    }
+  @Override
+  protected void setToolTipText(final String text) {
+    // do nothing
+  }
+
+  @Override
+  public boolean shouldBeAdded() {
+    return false;
+  }
 }

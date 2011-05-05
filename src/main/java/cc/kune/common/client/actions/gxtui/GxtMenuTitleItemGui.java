@@ -23,73 +23,79 @@ import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.widget.menu.HeaderMenuItem;
 
 public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
 
-    private HeaderMenuItem item;
+  private HeaderMenuItem item;
 
-    public GxtMenuTitleItemGui() {
-        super();
+  public GxtMenuTitleItemGui() {
+    super();
+  }
+
+  public GxtMenuTitleItemGui(final MenuItemDescriptor descriptor) {
+    super(descriptor);
+
+  }
+
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    item = new HeaderMenuItem("");
+
+    final String id = descriptor.getId();
+    if (id != null) {
+      item.ensureDebugId(id);
     }
+    child = item;
+    super.create(descriptor);
+    configureItemFromProperties();
+    return this;
+  }
 
-    public GxtMenuTitleItemGui(final MenuItemDescriptor descriptor) {
-        super(descriptor);
+  public HeaderMenuItem getItem() {
+    return item;
+  }
 
+  @Override
+  protected void setEnabled(final boolean enabled) {
+    item.setVisible(enabled);
+  }
+
+  @Override
+  protected void setIconStyle(final String style) {
+    item.addStyleName(style);
+  }
+
+  @Override
+  public void setIconUrl(final String url) {
+    throw new NotImplementedException();
+  }
+
+  @Override
+  protected void setText(final String text) {
+    if (text != null) {
+      item.setText(text);
     }
+  }
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        item = new HeaderMenuItem("");
-
-        final String id = descriptor.getId();
-        if (id != null) {
-            item.ensureDebugId(id);
-        }
-        child = item;
-        super.create(descriptor);
-        configureItemFromProperties();
-        return this;
+  @Override
+  protected void setToolTipText(final String tooltip) {
+    if (TextUtils.notEmpty(tooltip)) {
+      item.setToolTip(new GxtDefTooltip(tooltip));
     }
+  }
 
-    public HeaderMenuItem getItem() {
-        return item;
-    }
+  @Override
+  public void setVisible(final boolean visible) {
+    item.setVisible(visible);
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-        item.setVisible(enabled);
-    }
-
-    @Override
-    protected void setIconStyle(final String style) {
-        item.addStyleName(style);
-    }
-
-    @Override
-    protected void setText(final String text) {
-        if (text != null) {
-            item.setText(text);
-        }
-    }
-
-    @Override
-    protected void setToolTipText(final String tooltip) {
-        if (TextUtils.notEmpty(tooltip)) {
-            item.setToolTip(new GxtDefTooltip(tooltip));
-        }
-    }
-
-    @Override
-    public void setVisible(final boolean visible) {
-        item.setVisible(visible);
-    }
-
-    @Override
-    public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
-        return false;
-    }
+  @Override
+  public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
+    return false;
+  }
 }

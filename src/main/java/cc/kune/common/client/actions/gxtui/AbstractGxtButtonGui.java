@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
+import cc.kune.common.client.errors.NotImplementedException;
 
 import com.extjs.gxt.ui.client.Style.ButtonScale;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -40,112 +41,118 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
 
-    private Button button;
+  private Button button;
 
-    public AbstractGxtButtonGui() {
-        super();
+  public AbstractGxtButtonGui() {
+    super();
+  }
+
+  public AbstractGxtButtonGui(final ButtonDescriptor buttonDescriptor) {
+    super(buttonDescriptor);
+  }
+
+  @Override
+  protected void addStyle(final String style) {
+    button.addStyleName(style);
+  }
+
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    descriptor.putValue(ParentWidget.PARENT_UI, this);
+    if (descriptor instanceof PushButtonDescriptor) {
+      button = new ToggleButton();
+    } else {
+      button = new Button();
     }
-
-    public AbstractGxtButtonGui(final ButtonDescriptor buttonDescriptor) {
-        super(buttonDescriptor);
+    button.setAutoWidth(false);
+    button.setAutoHeight(false);
+    button.setBorders(false);
+    final String id = descriptor.getId();
+    if (id != null) {
+      button.ensureDebugId(id);
     }
-
-    @Override
-    protected void addStyle(final String style) {
-        button.addStyleName(style);
+    button.addSelectionListener(new SelectionListener<ButtonEvent>() {
+      @Override
+      public void componentSelected(final ButtonEvent event) {
+        descriptor.fire(new ActionEvent(button, getTargetObjectOfAction(descriptor),
+            Event.as(event.getEvent())));
+      }
+    });
+    if (!descriptor.isChild()) {
+      // If button is inside a toolbar don't init...
+      initWidget(button);
+    } else {
+      if (descriptor.isChild()) {
+        child = button;
+      }
     }
+    super.create(descriptor);
+    configureItemFromProperties();
+    return this;
+  }
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        descriptor.putValue(ParentWidget.PARENT_UI, this);
-        if (descriptor instanceof PushButtonDescriptor) {
-            button = new ToggleButton();
-        } else {
-            button = new Button();
-        }
-        button.setAutoWidth(false);
-        button.setAutoHeight(false);
-        button.setBorders(false);
-        final String id = descriptor.getId();
-        if (id != null) {
-            button.ensureDebugId(id);
-        }
-        button.addSelectionListener(new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(final ButtonEvent event) {
-                descriptor.fire(new ActionEvent(button, getTargetObjectOfAction(descriptor), Event.as(event.getEvent())));
-            }
-        });
-        if (!descriptor.isChild()) {
-            // If button is inside a toolbar don't init...
-            initWidget(button);
-        } else {
-            if (descriptor.isChild()) {
-                child = button;
-            }
-        }
-        super.create(descriptor);
-        configureItemFromProperties();
-        return this;
+  @Override
+  protected void setEnabled(final boolean enabled) {
+    button.setEnabled(enabled);
+  }
+
+  @Override
+  public void setIconResource(final ImageResource icon) {
+    button.setIcon(AbstractImagePrototype.create(icon));
+    button.setScale(ButtonScale.SMALL);
+  }
+
+  @Override
+  protected void setIconStyle(final String style) {
+    button.setIconStyle(style);
+    button.setScale(ButtonScale.SMALL);
+  }
+
+  @Override
+  public void setIconUrl(final String url) {
+    throw new NotImplementedException();
+  }
+
+  public void setPressed(final boolean pressed) {
+    final ToggleButton toggleButton = (ToggleButton) button;
+
+    if (toggleButton.isPressed() != pressed) {
+      toggleButton.toggle(pressed);
     }
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-        button.setEnabled(enabled);
+  @Override
+  protected void setText(final String text) {
+    button.setText(text);
+  }
+
+  @Override
+  protected void setToolTipText(final String tooltip) {
+    if (tooltip != null && !tooltip.isEmpty()) {
+      final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
+      if (key == null) {
+        // button.setToolTip(new GxtDefTooltip(tooltip));
+        button.setTitle(tooltip);
+      } else {
+        // button.setToolTip(new GxtDefTooltip(tooltip +
+        // key.toString()));
+        button.setTitle(tooltip + key.toString());
+      }
     }
+  }
 
-    @Override
-    public void setIconResource(final ImageResource icon) {
-        button.setIcon(AbstractImagePrototype.create(icon));
-        button.setScale(ButtonScale.SMALL);
+  @Override
+  public void setVisible(final boolean visible) {
+    if (button.isRendered()) {
+      // ??
     }
+    button.setVisible(visible);
 
-    @Override
-    protected void setIconStyle(final String style) {
-        button.setIconStyle(style);
-        button.setScale(ButtonScale.SMALL);
-    }
+  }
 
-    public void setPressed(final boolean pressed) {
-        final ToggleButton toggleButton = (ToggleButton) button;
-
-        if (toggleButton.isPressed() != pressed) {
-            toggleButton.toggle(pressed);
-        }
-    }
-
-    @Override
-    protected void setText(final String text) {
-        button.setText(text);
-    }
-
-    @Override
-    protected void setToolTipText(final String tooltip) {
-        if (tooltip != null && !tooltip.isEmpty()) {
-            final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-            if (key == null) {
-                // button.setToolTip(new GxtDefTooltip(tooltip));
-                button.setTitle(tooltip);
-            } else {
-                // button.setToolTip(new GxtDefTooltip(tooltip +
-                // key.toString()));
-                button.setTitle(tooltip + key.toString());
-            }
-        }
-    }
-
-    @Override
-    public void setVisible(final boolean visible) {
-        if (button.isRendered()) {
-            // ??
-        }
-        button.setVisible(visible);
-
-    }
-
-    @Override
-    public boolean shouldBeAdded() {
-        return !descriptor.isChild();
-    }
+  @Override
+  public boolean shouldBeAdded() {
+    return !descriptor.isChild();
+  }
 }

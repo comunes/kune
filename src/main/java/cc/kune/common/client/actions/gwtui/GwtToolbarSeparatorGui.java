@@ -30,56 +30,62 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class GwtToolbarSeparatorGui extends AbstractGuiItem {
 
-    private Widget widget;
+  private Widget widget;
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        final GwtToolbarGui toolbar = ((GwtToolbarGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
-        if (toolbar == null) {
-            throw new UIException("To add a toolbar separator you need to add the toolbar before. Item: " + descriptor);
-        }
-        final Type type = ((ToolbarSeparatorDescriptor) descriptor).getSeparatorType();
-        switch (type) {
-        case fill:
-            widget = toolbar.addFill();
-            break;
-        case spacer:
-            widget = toolbar.addSpacer();
-            break;
-        case separator:
-            widget = toolbar.addSeparator();
-            break;
-        default:
-            break;
-        }
-        configureItemFromProperties();
-        return toolbar;
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    final GwtToolbarGui toolbar = ((GwtToolbarGui) descriptor.getParent().getValue(
+        ParentWidget.PARENT_UI));
+    if (toolbar == null) {
+      throw new UIException("To add a toolbar separator you need to add the toolbar before. Item: "
+          + descriptor);
     }
+    final Type type = ((ToolbarSeparatorDescriptor) descriptor).getSeparatorType();
+    switch (type) {
+    case fill:
+      widget = toolbar.addFill();
+      break;
+    case spacer:
+      widget = toolbar.addSpacer();
+      break;
+    case separator:
+      widget = toolbar.addSeparator();
+      break;
+    default:
+      break;
+    }
+    configureItemFromProperties();
+    return toolbar;
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-    }
+  @Override
+  protected void setEnabled(final boolean enabled) {
+  }
 
-    @Override
-    protected void setIconStyle(final String style) {
-    }
+  @Override
+  protected void setIconStyle(final String style) {
+  }
 
-    @Override
-    protected void setText(final String text) {
-    }
+  @Override
+  public void setIconUrl(final String url) {
+  }
 
-    @Override
-    protected void setToolTipText(final String text) {
-    }
+  @Override
+  protected void setText(final String text) {
+  }
 
-    @Override
-    public void setVisible(final boolean visible) {
-        widget.setVisible(visible);
-    }
+  @Override
+  protected void setToolTipText(final String text) {
+  }
 
-    @Override
-    public boolean shouldBeAdded() {
-        return false;
-    }
+  @Override
+  public void setVisible(final boolean visible) {
+    widget.setVisible(visible);
+  }
+
+  @Override
+  public boolean shouldBeAdded() {
+    return false;
+  }
 }

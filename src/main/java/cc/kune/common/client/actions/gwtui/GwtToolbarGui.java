@@ -28,60 +28,64 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class GwtToolbarGui extends AbstractGuiItem implements ParentWidget {
 
-    private GwtComplexToolbar toolbar;
+  private GwtComplexToolbar toolbar;
 
-    @Override
-    public void add(final UIObject uiObject) {
-        toolbar.add(uiObject);
-    }
+  @Override
+  public void add(final UIObject uiObject) {
+    toolbar.add(uiObject);
+  }
 
-    public Widget addFill() {
-        return toolbar.addFill();
-    }
+  public Widget addFill() {
+    return toolbar.addFill();
+  }
 
-    public Widget addSeparator() {
-        return toolbar.addSeparator();
-    }
+  public Widget addSeparator() {
+    return toolbar.addSeparator();
+  }
 
-    public Widget addSpacer() {
-        return toolbar.addSpacer();
-    }
+  public Widget addSpacer() {
+    return toolbar.addSpacer();
+  }
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        toolbar = new GwtComplexToolbar();
-        initWidget(toolbar);
-        configureItemFromProperties();
-        descriptor.putValue(ParentWidget.PARENT_UI, this);
-        return this;
-    }
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    toolbar = new GwtComplexToolbar();
+    initWidget(toolbar);
+    configureItemFromProperties();
+    descriptor.putValue(ParentWidget.PARENT_UI, this);
+    return this;
+  }
 
-    @Override
-    public void insert(final int position, final UIObject widget) {
-        toolbar.insert(widget, position);
-    }
+  @Override
+  public void insert(final int position, final UIObject widget) {
+    toolbar.insert(widget, position);
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-    }
+  @Override
+  protected void setEnabled(final boolean enabled) {
+  }
 
-    @Override
-    protected void setIconStyle(final String style) {
-    }
+  @Override
+  protected void setIconStyle(final String style) {
+  }
 
-    @Override
-    protected void setText(final String text) {
-    }
+  @Override
+  public void setIconUrl(final String url) {
+  }
 
-    @Override
-    protected void setToolTipText(final String text) {
-        toolbar.setTitle(text);
-    }
+  @Override
+  protected void setText(final String text) {
+  }
 
-    @Override
-    public boolean shouldBeAdded() {
-        return true;
-    }
+  @Override
+  protected void setToolTipText(final String text) {
+    toolbar.setTitle(text);
+  }
+
+  @Override
+  public boolean shouldBeAdded() {
+    return true;
+  }
 
 }

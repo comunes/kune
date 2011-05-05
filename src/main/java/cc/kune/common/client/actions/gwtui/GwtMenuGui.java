@@ -114,6 +114,14 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   }
 
   @Override
+  public void setIconUrl(final String url) {
+    if (notStandAlone) {
+      iconLabel.setLeftIconUrl(url);
+      layout();
+    }
+  }
+
+  @Override
   public void setText(final String text) {
     if (notStandAlone) {
       iconLabel.setText(text);

@@ -104,8 +104,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
   }
 
   private void addPartipation(final GroupDTO group) {
-    final String logoImageUrl = group.hasLogo() ? downloadProvider.get().getLogoImageUrl(
-        group.getStateToken()) : "images/group-def-icon.gif";
+    final String logoImageUrl = downloadProvider.get().getGroupLogo(group);
     final MenuItemDescriptor participant = new MenuItemDescriptor(gotoGroupAction);
     participant.setTarget(group);
     participant.putValue(Action.NAME, group.getLongName());

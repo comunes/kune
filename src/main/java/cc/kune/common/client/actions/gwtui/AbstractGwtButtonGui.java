@@ -123,6 +123,12 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     layout();
   }
 
+  @Override
+  public void setIconUrl(final String url) {
+    iconLabel.setLeftIconUrl(url);
+    layout();
+  }
+
   public void setPressed(final boolean pressed) {
     final ToggleButton toggleButton = (ToggleButton) button;
 

@@ -26,34 +26,40 @@ import cc.kune.common.client.errors.UIException;
 
 public class GwtMenuSeparatorGui extends AbstractGuiItem {
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        final AbstractGwtMenuGui menu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
-        if (menu == null) {
-            throw new UIException("To add a menu separator you need to add the menu before. Item: " + descriptor);
-        }
-        menu.addSeparator();
-        return menu;
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    final AbstractGwtMenuGui menu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(
+        ParentWidget.PARENT_UI));
+    if (menu == null) {
+      throw new UIException("To add a menu separator you need to add the menu before. Item: "
+          + descriptor);
     }
+    menu.addSeparator();
+    return menu;
+  }
 
-    @Override
-    protected void setEnabled(final boolean enabled) {
-    }
+  @Override
+  protected void setEnabled(final boolean enabled) {
+  }
 
-    @Override
-    protected void setIconStyle(final String style) {
-    }
+  @Override
+  protected void setIconStyle(final String style) {
+  }
 
-    @Override
-    protected void setText(final String text) {
-    }
+  @Override
+  public void setIconUrl(final String url) {
+  }
 
-    @Override
-    protected void setToolTipText(final String text) {
-    }
+  @Override
+  protected void setText(final String text) {
+  }
 
-    @Override
-    public boolean shouldBeAdded() {
-        return false;
-    }
+  @Override
+  protected void setToolTipText(final String text) {
+  }
+
+  @Override
+  public boolean shouldBeAdded() {
+    return false;
+  }
 }

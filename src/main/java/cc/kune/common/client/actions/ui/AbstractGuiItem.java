@@ -35,128 +35,135 @@ import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
-    protected GuiActionDescrip descriptor;
+  protected GuiActionDescrip descriptor;
 
-    public AbstractGuiItem() {
-        super();
+  public AbstractGuiItem() {
+    super();
+  }
+
+  public AbstractGuiItem(final GuiActionDescrip descriptor) {
+    super();
+    this.descriptor = descriptor;
+  }
+
+  protected void addStyle(final String style) {
+    if (super.isOrWasAttached()) {
+      super.addStyleName(style);
     }
+  }
 
-    public AbstractGuiItem(final GuiActionDescrip descriptor) {
-        super();
-        this.descriptor = descriptor;
+  protected void clearStyles() {
+    if (super.isOrWasAttached()) {
+      super.setStyleName("k-none");
     }
+  }
 
-    protected void addStyle(final String style) {
-        if (super.isOrWasAttached()) {
-            super.addStyleName(style);
+  private void configure() {
+    configureProperties();
+    final PropertyChangeListener changeListener = createActionPropertyChangeListener();
+    descriptor.getAction().addPropertyChangeListener(changeListener);
+    descriptor.addPropertyChangeListener(changeListener);
+  }
+
+  /**
+   * Sets the item properties from the stored values
+   */
+  public void configureItemFromProperties() {
+    configure();
+  }
+
+  private void configureProperties() {
+    setText((String) (descriptor.getValue(Action.NAME)));
+    setToolTipText((String) (descriptor.getValue(Action.SHORT_DESCRIPTION)));
+    setIcon(descriptor.getValue(Action.SMALL_ICON));
+    setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
+    setVisible((Boolean) descriptor.getValue(GuiActionDescrip.VISIBLE));
+    setStyles((String) descriptor.getValue(Action.STYLES));
+  }
+
+  @Override
+  public abstract AbstractGuiItem create(final GuiActionDescrip descriptor);
+
+  private PropertyChangeListener createActionPropertyChangeListener() {
+    return new PropertyChangeListener() {
+      @Override
+      public void propertyChange(final PropertyChangeEvent event) {
+        final Object newValue = event.getNewValue();
+        if (event.getPropertyName().equals(Action.ENABLED)) {
+          setEnabled((Boolean) newValue);
+        } else if (event.getPropertyName().equals(Action.NAME)) {
+          setText((String) newValue);
+        } else if (event.getPropertyName().equals(Action.SMALL_ICON)) {
+          setIcon(newValue);
+        } else if (event.getPropertyName().equals(Action.SHORT_DESCRIPTION)) {
+          setToolTipText((String) newValue);
+        } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
+          setVisible((Boolean) newValue);
+        } else if (event.getPropertyName().equals(Action.STYLES)) {
+          setStyles((String) newValue);
         }
+      }
+    };
+  }
+
+  protected Object getTargetObjectOfAction(final GuiActionDescrip descriptor) {
+    // If the action is associated with a item (like a Group, a
+    // group shortname, a username, etc) we pass this item to
+    // the action, if not we only pass the menuitem
+    return descriptor.hasTarget() ? descriptor.getTarget()
+        : descriptor.isChild() ? descriptor.getParent().getTarget() : ActionEvent.NO_TARGET;
+  }
+
+  protected abstract void setEnabled(boolean enabled);
+
+  private void setEnabled(final Boolean enabled) {
+    setEnabled(enabled == null ? true : enabled);
+  }
+
+  private void setIcon(final Object icon) {
+    if (icon instanceof ImageResource) {
+      setIconResource((ImageResource) icon);
+    } else if (icon instanceof String) {
+      final String iconS = (String) icon;
+      if (iconS.startsWith("http")) {
+        setIconUrl(iconS);
+      } else {
+        setIconStyle(iconS);
+      }
+    } else if (icon != null) {
+      throw new NotImplementedException();
     }
+  }
 
-    protected void clearStyles() {
-        if (super.isOrWasAttached()) {
-            super.setStyleName("k-none");
-        }
+  public void setIconResource(final ImageResource icon) {
+    setIconStyle((IconConstants.CSS_SUFFIX + icon.getName()));
+  }
+
+  protected abstract void setIconStyle(String style);
+
+  public abstract void setIconUrl(String url);
+
+  private void setStyles(final String styles) {
+    if (styles != null) {
+      clearStyles();
+      for (final String style : TextUtils.splitTags(styles)) {
+        addStyle(style);
+      }
     }
+  }
 
-    private void configure() {
-        configureProperties();
-        final PropertyChangeListener changeListener = createActionPropertyChangeListener();
-        descriptor.getAction().addPropertyChangeListener(changeListener);
-        descriptor.addPropertyChangeListener(changeListener);
-    }
+  protected abstract void setText(String text);
 
-    /**
-     * Sets the item properties from the stored values
-     */
-    public void configureItemFromProperties() {
-        configure();
-    }
+  protected abstract void setToolTipText(String text);
 
-    private void configureProperties() {
-        setText((String) (descriptor.getValue(Action.NAME)));
-        setToolTipText((String) (descriptor.getValue(Action.SHORT_DESCRIPTION)));
-        setIcon(descriptor.getValue(Action.SMALL_ICON));
-        setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
-        setVisible((Boolean) descriptor.getValue(GuiActionDescrip.VISIBLE));
-        setStyles((String) descriptor.getValue(Action.STYLES));
-    }
+  private void setVisible(final Boolean visible) {
+    // if you have problems with setVisible check if the GuiItem calls
+    // configureItemFromProperties on creation
+    setVisible(visible == null ? true : visible);
+  }
 
-    @Override
-    public abstract AbstractGuiItem create(final GuiActionDescrip descriptor);
-
-    private PropertyChangeListener createActionPropertyChangeListener() {
-        return new PropertyChangeListener() {
-            @Override
-            public void propertyChange(final PropertyChangeEvent event) {
-                final Object newValue = event.getNewValue();
-                if (event.getPropertyName().equals(Action.ENABLED)) {
-                    setEnabled((Boolean) newValue);
-                } else if (event.getPropertyName().equals(Action.NAME)) {
-                    setText((String) newValue);
-                } else if (event.getPropertyName().equals(Action.SMALL_ICON)) {
-                    setIcon(newValue);
-                } else if (event.getPropertyName().equals(Action.SHORT_DESCRIPTION)) {
-                    setToolTipText((String) newValue);
-                } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
-                    setVisible((Boolean) newValue);
-                } else if (event.getPropertyName().equals(Action.STYLES)) {
-                    setStyles((String) newValue);
-                }
-            }
-        };
-    }
-
-    protected Object getTargetObjectOfAction(final GuiActionDescrip descriptor) {
-        // If the action is associated with a item (like a Group, a
-        // group shortname, a username, etc) we pass this item to
-        // the action, if not we only pass the menuitem
-        return descriptor.hasTarget() ? descriptor.getTarget()
-                : descriptor.isChild() ? descriptor.getParent().getTarget() : ActionEvent.NO_TARGET;
-    }
-
-    protected abstract void setEnabled(boolean enabled);
-
-    private void setEnabled(final Boolean enabled) {
-        setEnabled(enabled == null ? true : enabled);
-    }
-
-    private void setIcon(final Object icon) {
-        if (icon instanceof ImageResource) {
-            setIconResource((ImageResource) icon);
-        } else if (icon instanceof String) {
-            setIconStyle((String) icon);
-        } else if (icon != null) {
-            throw new NotImplementedException();
-        }
-    }
-
-    public void setIconResource(final ImageResource icon) {
-        setIconStyle((IconConstants.CSS_SUFFIX + icon.getName()));
-    }
-
-    protected abstract void setIconStyle(String style);
-
-    private void setStyles(final String styles) {
-        if (styles != null) {
-            clearStyles();
-            for (final String style : TextUtils.splitTags(styles)) {
-                addStyle(style);
-            }
-        }
-    }
-
-    protected abstract void setText(String text);
-
-    protected abstract void setToolTipText(String text);
-
-    private void setVisible(final Boolean visible) {
-        // if you have problems with setVisible check if the GuiItem calls
-        // configureItemFromProperties on creation
-        setVisible(visible == null ? true : visible);
-    }
-
-    @Override
-    public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
-        return true;
-    }
+  @Override
+  public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
+    return true;
+  }
 }

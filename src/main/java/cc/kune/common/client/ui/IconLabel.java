@@ -43,6 +43,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   interface IconTitleUiBinder extends UiBinder<Widget, IconLabel> {
   }
 
+  private static final String DEF = "16px";
+
   private static IconTitleUiBinder uiBinder = GWT.create(IconTitleUiBinder.class);
 
   @UiField
@@ -137,6 +139,12 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.addStyleName("k-iconlabel-left");
   }
 
+  public void setLeftIconUrl(final String url) {
+    iconLeft.setUrl(url);
+    iconLeft.setSize(DEF, DEF);
+    iconLeft.addStyleName("k-iconlabel-left");
+  }
+
   public void setRightIcon(final String imgCss) {
     iconRight.setUrl("images/clear.gif");
     iconRight.setStyleName(imgCss);
@@ -146,6 +154,12 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   public void setRightIconResource(final ImageResource res) {
     iconRight.setResource(res);
+    iconRight.addStyleName("k-iconlabel-right");
+  }
+
+  public void setRightIconUrl(final String url) {
+    iconRight.setUrl(url);
+    iconRight.setSize(DEF, DEF);
     iconRight.addStyleName("k-iconlabel-right");
   }
 
