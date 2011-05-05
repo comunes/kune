@@ -393,6 +393,7 @@ k-btn-sitebar button spin,.k-sitebar button spin, .k-btn-sitebar div, .k-btn-sit
   background: none;
   border: 0px;
   padding: 0 3px 0 0 !important;
+  height: 17px !important;
 }
 
 .k-sitebar-wave-status {
@@ -840,6 +841,7 @@ k-btn-sitebar button spin,.k-sitebar button spin, .k-btn-sitebar div, .k-btn-sit
     white-space: nowrap;
 }
 */
+
 .k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button {
   font: 13px 'Ubuntu', arial;
   border: 2px solid #CCCCCC;
@@ -853,14 +855,14 @@ k-btn-sitebar button spin,.k-sitebar button spin, .k-btn-sitebar div, .k-btn-sit
   -moz-border-radius: 5px;
   border-radius: 5px;
   vertical-align: middle;
-  line-height: 2em !important;
+/*  line-height: 2em !important; */
   outline: 0 none;
   /* height: 26px !important; */
   font-weight: bold;
   width: auto !IMPORTANT;
   width: 50px;
   min-width: 50px;
-  "
+  height: 28px;
   /*
 font-size:small;
     cursor: pointer;

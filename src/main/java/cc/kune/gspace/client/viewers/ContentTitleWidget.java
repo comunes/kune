@@ -17,17 +17,18 @@ import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 public class ContentTitleWidget extends Composite {
   private final EditableLabel editableTitle;
   private final GSpaceArmor gsArmor;
+  private final I18nTranslationService i18n;
   private final IconsRegistry iconRegistry;
   private final Image titleIcon;
 
   public ContentTitleWidget(final I18nTranslationService i18n, final GSpaceArmor gsArmor,
       final IconsRegistry iconRegistry) {
+    this.i18n = i18n;
     this.gsArmor = gsArmor;
     this.iconRegistry = iconRegistry;
     final FlowPanel flow = new FlowPanel();
     titleIcon = new Image();
     editableTitle = new EditableLabel();
-    editableTitle.setTooltip(i18n.t("Click to edit"));
     flow.add(titleIcon);
     flow.add(editableTitle);
     initWidget(flow);
@@ -54,6 +55,11 @@ public class ContentTitleWidget extends Composite {
     }
     titleIcon.setVisible(hasIcon);
     editableTitle.setText(title);
+    if (editable) {
+      editableTitle.setTooltip(i18n.t("Click to edit"));
+    } else {
+      editableTitle.setTooltip("");
+    }
     editableTitle.setEditable(editable);
     docHeader.add(this);
   }

@@ -207,8 +207,8 @@
   border-width: 7px;
   height: 0;
   width: 0;
-  position: absolute;
-  bottom: 47px;
+  position: relative;
+  bottom: 16px;
   left: 36px;
 }
 

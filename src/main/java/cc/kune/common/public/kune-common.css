@@ -450,7 +450,7 @@
   vertical-align: top;
   padding-left: 3px;
   padding-right: 3px;
-  float: left;
+  /* float: left; */
 }
 
 .k-menuimtem-title {
