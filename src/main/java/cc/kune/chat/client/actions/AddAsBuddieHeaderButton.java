@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
@@ -71,7 +72,7 @@ public class AddAsBuddieHeaderButton {
           }
         }
       });
-      putValue(Action.NAME, i18n.t("Add as a buddie"));
+      putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDIE));
       putValue(Action.SMALL_ICON, img.addGreen());
     }
 

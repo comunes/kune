@@ -110,6 +110,11 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
   }
 
   @Override
+  public void focus() {
+    searchTextBox.setFocus(true);
+  }
+
+  @Override
   public HasClickHandlers getButton() {
     return searchButton;
   }

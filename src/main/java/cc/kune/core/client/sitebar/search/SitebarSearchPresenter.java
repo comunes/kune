@@ -49,6 +49,8 @@ public class SitebarSearchPresenter extends
 
     void clearSearchText();
 
+    void focus();
+
     HasClickHandlers getButton();
 
     HasAllFocusHandlers getFocus();
@@ -81,6 +83,10 @@ public class SitebarSearchPresenter extends
 
   public void doSearch(final String termToSearch) {
     getView().setTextSearchSmall();
+  }
+
+  public void focus() {
+    getView().focus();
   }
 
   @Override
