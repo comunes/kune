@@ -51,6 +51,8 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @UiField
   VerticalPanel docContainer;
   @UiField
+  DockLayoutPanel docContainerParent;
+  @UiField
   FlowPanel docFooter;
   @UiField
   FlowPanel docHeader;
@@ -202,5 +204,12 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public void selectUserSpace() {
     tabs.selectTab(userSpace);
+  }
+
+  @Override
+  public void setContentVisible(final boolean visible) {
+    // NotifyUser.info("Visible: " + visible);
+    // docContainer.getElement().getStyle().setOpacity(visible ? 1d : .0d);
+    // docFooter.getElement().getStyle().setOpacity(visible ? 1d : .0d);
   }
 }

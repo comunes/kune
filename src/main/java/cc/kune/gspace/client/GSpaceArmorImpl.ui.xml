@@ -57,7 +57,7 @@
                 </g:north>
                 <g:center>
                   <g:DockLayoutPanel unit="PX"
-                    styleName="{res.style.docEditorMargin}">
+                    styleName="{res.style.docEditorMargin}" ui:field="docContainerParent">
                     <g:west size="10">
                       <g:SimplePanel />
                     </g:west>

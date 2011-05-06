@@ -1,4 +1,4 @@
 WARNING
-Please note that we are doing a big refactorization of Kune to adapt it to Wave. Also we are starting to use other libraries (for instance gin for IoC instead of our old Suco library). Then don't expect to much of /trunk/ because of that (for our old more stable code see tag 0.0.6-pre-wiab). 
+Please note that we are doing a big refactorization of Kune to adapt it to Wave. Also we are starting to use other libraries (for instance gin for IoC instead of our old Suco library). Then maybe /trunk/ it's a litle bit inestable because of that (for our old more stable code see tag 0.0.6-pre-wiab). 
 
 New code (and refactorized) is under cc.kune package. Our old code (not yet refactorized or deprecated) is under org.ourproject.kune package waiting for be adapted or removed.

@@ -63,4 +63,6 @@ public interface GSpaceArmor {
   void selectPublicSpace();
 
   void selectUserSpace();
+
+  void setContentVisible(boolean visible);
 }

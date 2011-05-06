@@ -19,6 +19,10 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
+import gwtupload.client.IUploadStatus.Status;
+import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.OnFinishUploaderHandler;
+import gwtupload.client.IUploader.OnStartUploaderHandler;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -45,13 +49,6 @@ public abstract class EntityOptionsLogoPresenter implements GroupOptionsLogo, Us
     this.entityLogo = entityLogo;
     this.entityOptions = entityOptions;
     this.userService = userService;
-    eventBus.addHandler(CurrentLogoChangedEvent.getType(),
-        new CurrentLogoChangedEvent.CurrentLogoChangedHandler() {
-          @Override
-          public void onCurrentLogoChanged(final CurrentLogoChangedEvent event) {
-            onSubmitComplete();
-          }
-        });
   }
 
   public IsWidget getView() {
@@ -62,13 +59,34 @@ public abstract class EntityOptionsLogoPresenter implements GroupOptionsLogo, Us
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
     setState();
+    view.addOnStartUploadHandler(new OnStartUploaderHandler() {
+      @Override
+      public void onStart(final IUploader uploader) {
+        setState();
+      }
+    });
+    view.addOnFinishUploadHandler(new OnFinishUploaderHandler() {
+
+      @Override
+      public void onFinish(final IUploader uploader) {
+        onSubmitComplete(uploader);
+      }
+    });
   }
 
-  public void onSubmitComplete() {
-    entityLogo.reloadGroupLogoImage();
+  public void onSubmitComplete(final IUploader uploader) {
+    final String response = uploader.getServerInfo().message;
+    if (uploader.getStatus() == Status.SUCCESS) {
+      if (response != null) {
+        NotifyUser.info(response);
+      }
+      CurrentLogoChangedEvent.fire(eventBus);
+    } else {
+      onSubmitFailed(response);
+    }
   }
 
-  public void onSubmitFailed(final int httpStatus, final String responseText) {
+  public void onSubmitFailed(final String responseText) {
     NotifyUser.error("Error setting the logo: " + responseText);
   }
 

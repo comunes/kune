@@ -43,182 +43,182 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class SpaceSelectorPresenter extends
-        Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> {
+    Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> {
 
-    @ProxyCodeSplit
-    public interface SpaceSelectorProxy extends Proxy<SpaceSelectorPresenter> {
+  @ProxyCodeSplit
+  public interface SpaceSelectorProxy extends Proxy<SpaceSelectorPresenter> {
+  }
+
+  public interface SpaceSelectorView extends View {
+
+    HasClickHandlers getGroupBtn();
+
+    HasClickHandlers getHomeBtn();
+
+    HasClickHandlers getPublicBtn();
+
+    HasClickHandlers getUserBtn();
+
+    void setGroupBtnDown(boolean down);
+
+    void setHomeBtnDown(boolean down);
+
+    void setPublicBtnDown(boolean down);
+
+    void setUserBtnDown(boolean down);
+  }
+
+  private final GSpaceArmor armor;
+  private Space currentSpace;
+  private String groupToken;
+  private String homeToken;
+  private String publicToken;
+  private final Session session;
+  private final Provider<SignIn> signIn;
+  private final StateManager stateManager;
+  private String userToken;
+
+  @Inject
+  public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
+      final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
+      final Session session, final Provider<SignIn> signIn) {
+    super(eventBus, view, proxy);
+    this.stateManager = stateManager;
+    this.armor = armor;
+    this.session = session;
+    this.signIn = signIn;
+    currentSpace = null;
+    homeToken = SiteTokens.HOME;
+    userToken = SiteTokens.WAVEINBOX;
+    groupToken = SiteTokens.GROUP_HOME;
+    publicToken = TokenUtils.preview(SiteTokens.GROUP_HOME);
+    view.getHomeBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        stateManager.gotoHistoryToken(homeToken);
+      }
+    });
+    view.getUserBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        stateManager.gotoHistoryToken(userToken);
+      }
+    });
+    view.getGroupBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        stateManager.gotoHistoryToken(groupToken);
+      }
+    });
+    view.getPublicBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        stateManager.gotoHistoryToken(publicToken);
+      }
+    });
+  }
+
+  @ProxyEvent
+  public void onAppStart(final AppStartEvent event) {
+  }
+
+  private void onGroupSpaceSelect() {
+    armor.selectGroupSpace();
+    getView().setHomeBtnDown(false);
+    getView().setUserBtnDown(false);
+    getView().setGroupBtnDown(true);
+    getView().setPublicBtnDown(false);
+    currentSpace = Space.groupSpace;
+  }
+
+  private void onHomeSpaceSelect() {
+    armor.selectHomeSpace();
+    getView().setHomeBtnDown(true);
+    getView().setUserBtnDown(false);
+    getView().setGroupBtnDown(false);
+    getView().setPublicBtnDown(false);
+    currentSpace = Space.homeSpace;
+  }
+
+  private void onPublicSpaceSelect() {
+    armor.selectPublicSpace();
+    getView().setHomeBtnDown(false);
+    getView().setUserBtnDown(false);
+    getView().setGroupBtnDown(false);
+    getView().setPublicBtnDown(true);
+    currentSpace = Space.publicSpace;
+  }
+
+  @ProxyEvent
+  public void onSpaceConf(final SpaceConfEvent event) {
+    final Space space = event.getSpace();
+    final String token = event.getToken();
+    switch (space) {
+    case homeSpace:
+      homeToken = token;
+      break;
+    case userSpace:
+      userToken = token;
+      break;
+    case groupSpace:
+      groupToken = token;
+      break;
+    case publicSpace:
+      publicToken = token;
+      break;
     }
+  }
 
-    public interface SpaceSelectorView extends View {
-
-        HasClickHandlers getGroupBtn();
-
-        HasClickHandlers getHomeBtn();
-
-        HasClickHandlers getPublicBtn();
-
-        HasClickHandlers getUserBtn();
-
-        void setGroupBtnDown(boolean down);
-
-        void setHomeBtnDown(boolean down);
-
-        void setPublicBtnDown(boolean down);
-
-        void setUserBtnDown(boolean down);
+  @ProxyEvent
+  public void onSpaceSelect(final SpaceSelectEvent event) {
+    final Space space = event.getSpace();
+    if (space != currentSpace) {
+      switch (space) {
+      case homeSpace:
+        onHomeSpaceSelect();
+        break;
+      case userSpace:
+        onUserSpaceSelect();
+        break;
+      case groupSpace:
+        onGroupSpaceSelect();
+        break;
+      case publicSpace:
+        onPublicSpaceSelect();
+        break;
+      default:
+        break;
+      }
+      // getView().hideTooltip();
     }
+  }
 
-    private final GSpaceArmor armor;
-    private Space currentSpace;
-    private String groupToken;
-    private String homeToken;
-    private String publicToken;
-    private final Session session;
-    private final Provider<SignIn> signIn;
-    private final StateManager stateManager;
-    private String userToken;
-
-    @Inject
-    public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
-            final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
-            final Session session, final Provider<SignIn> signIn) {
-        super(eventBus, view, proxy);
-        this.stateManager = stateManager;
-        this.armor = armor;
-        this.session = session;
-        this.signIn = signIn;
-        currentSpace = null;
-        homeToken = SiteTokens.HOME;
-        userToken = SiteTokens.WAVEINBOX;
-        groupToken = SiteTokens.GROUP_HOME;
-        publicToken = TokenUtils.preview(SiteTokens.GROUP_HOME);
-        view.getHomeBtn().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                stateManager.gotoHistoryToken(homeToken);
-            }
-        });
-        view.getUserBtn().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                stateManager.gotoHistoryToken(userToken);
-            }
-        });
-        view.getGroupBtn().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                stateManager.gotoHistoryToken(groupToken);
-            }
-        });
-        view.getPublicBtn().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                stateManager.gotoHistoryToken(publicToken);
-            }
-        });
+  @ProxyEvent
+  public void onUserSignOut(final UserSignOutEvent event) {
+    if (currentSpace == Space.userSpace) {
+      stateManager.gotoHistoryToken(homeToken);
     }
+    userToken = SiteTokens.WAVEINBOX;
+  }
 
-    @ProxyEvent
-    public void onAppStart(final AppStartEvent event) {
+  private void onUserSpaceSelect() {
+    if (session.isLogged()) {
+      armor.selectUserSpace();
+      getView().setHomeBtnDown(false);
+      getView().setUserBtnDown(true);
+      getView().setGroupBtnDown(false);
+      getView().setPublicBtnDown(false);
+      currentSpace = Space.userSpace;
+    } else {
+      signIn.get().setErrorMessage("Sign in to access to your inbox", NotifyLevel.info);
+      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, userToken));
+      getView().setUserBtnDown(false);
+      // NotifyUser.info("Sign in to access to your workspace");
     }
+  }
 
-    private void onGroupSpaceSelect() {
-        armor.selectGroupSpace();
-        getView().setHomeBtnDown(false);
-        getView().setUserBtnDown(false);
-        getView().setGroupBtnDown(true);
-        getView().setPublicBtnDown(false);
-        currentSpace = Space.groupSpace;
-    }
-
-    private void onHomeSpaceSelect() {
-        armor.selectHomeSpace();
-        getView().setHomeBtnDown(true);
-        getView().setUserBtnDown(false);
-        getView().setGroupBtnDown(false);
-        getView().setPublicBtnDown(false);
-        currentSpace = Space.homeSpace;
-    }
-
-    private void onPublicSpaceSelect() {
-        armor.selectPublicSpace();
-        getView().setHomeBtnDown(false);
-        getView().setUserBtnDown(false);
-        getView().setGroupBtnDown(false);
-        getView().setPublicBtnDown(true);
-        currentSpace = Space.publicSpace;
-    }
-
-    @ProxyEvent
-    public void onSpaceConf(final SpaceConfEvent event) {
-        final Space space = event.getSpace();
-        final String token = event.getToken();
-        switch (space) {
-        case homeSpace:
-            homeToken = token;
-            break;
-        case userSpace:
-            userToken = token;
-            break;
-        case groupSpace:
-            groupToken = token;
-            break;
-        case publicSpace:
-            publicToken = token;
-            break;
-        }
-    }
-
-    @ProxyEvent
-    public void onSpaceSelect(final SpaceSelectEvent event) {
-        final Space space = event.getSpace();
-        if (space != currentSpace) {
-            switch (space) {
-            case homeSpace:
-                onHomeSpaceSelect();
-                break;
-            case userSpace:
-                onUserSpaceSelect();
-                break;
-            case groupSpace:
-                onGroupSpaceSelect();
-                break;
-            case publicSpace:
-                onPublicSpaceSelect();
-                break;
-            default:
-                break;
-            }
-            // getView().hideTooltip();
-        }
-    }
-
-    @ProxyEvent
-    public void onUserSignOut(final UserSignOutEvent event) {
-        if (currentSpace == Space.userSpace) {
-            stateManager.gotoHistoryToken(homeToken);
-        }
-        userToken = SiteTokens.WAVEINBOX;
-    }
-
-    private void onUserSpaceSelect() {
-        if (session.isLogged()) {
-            armor.selectUserSpace();
-            getView().setHomeBtnDown(false);
-            getView().setUserBtnDown(true);
-            getView().setGroupBtnDown(false);
-            getView().setPublicBtnDown(false);
-            currentSpace = Space.userSpace;
-        } else {
-            signIn.get().setErrorMessage("Sign in to access to your workspace", NotifyLevel.info);
-            stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, userToken));
-            getView().setUserBtnDown(false);
-            // NotifyUser.info("Sign in to access to your workspace");
-        }
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
+  }
 }

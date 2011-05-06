@@ -1,4 +1,4 @@
-mvn eclipse:eclipse -Dgwt.compiler.skip=true
+mvn eclipse:eclipse -o -Dgwt.compiler.skip=true
 RESULT=$?
 perl -p -i -e 's/<\/classpath>//g' .classpath
 #perl -p -i -e 's/\/home\/vjrj\/nfsdev\///g' .classpath

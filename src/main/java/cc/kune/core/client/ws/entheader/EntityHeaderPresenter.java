@@ -26,6 +26,8 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.gspace.client.options.logo.CurrentLogoChangedEvent;
+import cc.kune.gspace.client.options.logo.CurrentLogoChangedEvent.CurrentLogoChangedHandler;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -37,109 +39,115 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class EntityHeaderPresenter extends
-        Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
-        EntityHeader {
+    Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
+    EntityHeader {
 
-    @ProxyCodeSplit
-    public interface EntityHeaderProxy extends Proxy<EntityHeaderPresenter> {
-    }
-    public interface EntityHeaderView extends View {
-        void addAction(GuiActionDescrip descriptor);
+  @ProxyCodeSplit
+  public interface EntityHeaderProxy extends Proxy<EntityHeaderPresenter> {
+  }
+  public interface EntityHeaderView extends View {
+    void addAction(GuiActionDescrip descriptor);
 
-        void addWidget(IsWidget widget);
+    void addWidget(IsWidget widget);
 
-        void reloadImage(GroupDTO group);
+    void reloadImage(GroupDTO group);
 
-        void setLargeFont();
+    void setLargeFont();
 
-        void setLogoImage(StateToken stateToken);
+    void setLogoImage(StateToken stateToken);
 
-        void setLogoImageVisible(boolean visible);
+    void setLogoImageVisible(boolean visible);
 
-        void setLogoText(final String groupName);
+    void setLogoText(final String groupName);
 
-        void setMediumFont();
+    void setMediumFont();
 
-        void setSmallFont();
+    void setSmallFont();
 
-        // void setTheme(final WsTheme oldTheme, WsTheme newTheme);
+    // void setTheme(final WsTheme oldTheme, WsTheme newTheme);
 
-        void showDefUserLogo();
-    }
+    void showDefUserLogo();
+  }
 
-    private static final int LARGE_NAME_LIMIT = 17;
-    private static final int MEDIUM_NAME_LIMIT = 90;
-    private final Session session;
+  private static final int LARGE_NAME_LIMIT = 17;
+  private static final int MEDIUM_NAME_LIMIT = 90;
+  private final Session session;
 
-    @Inject
-    public EntityHeaderPresenter(final EventBus eventBus, final EntityHeaderView view, final EntityHeaderProxy proxy,
-            final StateManager stateManager, final Session session) {
-        super(eventBus, view, proxy);
-        this.session = session;
-        stateManager.onGroupChanged(true, new GroupChangedHandler() {
-            @Override
-            public void onGroupChanged(final GroupChangedEvent event) {
-                setGroupLogo(session.getCurrentState().getGroup());
-            }
-        });
-        // theme.addOnThemeChanged(new Listener2<WsTheme, WsTheme>() {
-        // @Override
-        // public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-        // // getView().setTheme(oldTheme, newTheme);
-        // }
-        // });
-    }
-
-    @Override
-    public void addAction(final GuiActionDescrip descriptor) {
-        getView().addAction(descriptor);
-    }
-
-    @Override
-    public void addWidget(final IsWidget widget) {
-        getView().addWidget(widget);
-    }
-
-    @Override
-    public void refreshGroupLogo() {
+  @Inject
+  public EntityHeaderPresenter(final EventBus eventBus, final EntityHeaderView view,
+      final EntityHeaderProxy proxy, final StateManager stateManager, final Session session) {
+    super(eventBus, view, proxy);
+    this.session = session;
+    stateManager.onGroupChanged(true, new GroupChangedHandler() {
+      @Override
+      public void onGroupChanged(final GroupChangedEvent event) {
         setGroupLogo(session.getCurrentState().getGroup());
-    }
+      }
+    });
+    eventBus.addHandler(CurrentLogoChangedEvent.getType(), new CurrentLogoChangedHandler() {
+      @Override
+      public void onCurrentLogoChanged(final CurrentLogoChangedEvent event) {
+        reloadGroupLogoImage();
+      }
+    });
+    // theme.addOnThemeChanged(new Listener2<WsTheme, WsTheme>() {
+    // @Override
+    // public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+    // // getView().setTheme(oldTheme, newTheme);
+    // }
+    // });
+  }
 
-    @Override
-    public void reloadGroupLogoImage() {
-        getView().reloadImage(session.getCurrentState().getGroup());
-    }
+  @Override
+  public void addAction(final GuiActionDescrip descriptor) {
+    getView().addAction(descriptor);
+  }
 
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
+  @Override
+  public void addWidget(final IsWidget widget) {
+    getView().addWidget(widget);
+  }
 
-    void setGroupLogo(final GroupDTO group) {
-        if (group.hasLogo()) {
-            setLogoText(group.getLongName());
-            getView().setLogoImage(group.getStateToken());
-            getView().setLogoImageVisible(true);
-        } else {
-            setLogoText(group.getLongName());
-            if (group.isPersonal()) {
-                getView().showDefUserLogo();
-                getView().setLogoImageVisible(true);
-            } else {
-                getView().setLogoImageVisible(false);
-            }
-        }
-    }
+  @Override
+  public void refreshGroupLogo() {
+    setGroupLogo(session.getCurrentState().getGroup());
+  }
 
-    void setLogoText(final String name) {
-        final int length = name.length();
-        if (length <= LARGE_NAME_LIMIT) {
-            getView().setLargeFont();
-        } else if (length <= MEDIUM_NAME_LIMIT) {
-            getView().setMediumFont();
-        } else {
-            getView().setSmallFont();
-        }
-        getView().setLogoText(name);
+  @Override
+  public void reloadGroupLogoImage() {
+    getView().reloadImage(session.getCurrentState().getGroup());
+  }
+
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
+  }
+
+  void setGroupLogo(final GroupDTO group) {
+    if (group.hasLogo()) {
+      setLogoText(group.getLongName());
+      getView().setLogoImage(group.getStateToken());
+      getView().setLogoImageVisible(true);
+    } else {
+      setLogoText(group.getLongName());
+      if (group.isPersonal()) {
+        getView().showDefUserLogo();
+        getView().setLogoImageVisible(true);
+      } else {
+        getView().setLogoImageVisible(false);
+      }
     }
+  }
+
+  void setLogoText(final String name) {
+    final int length = name.length();
+    if (length <= LARGE_NAME_LIMIT) {
+      getView().setLargeFont();
+    } else if (length <= MEDIUM_NAME_LIMIT) {
+      getView().setMediumFont();
+    } else {
+      getView().setSmallFont();
+    }
+    getView().setLogoText(name);
+  }
 }

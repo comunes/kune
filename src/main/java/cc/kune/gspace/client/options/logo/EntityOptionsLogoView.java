@@ -19,17 +19,29 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
+import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.OnCancelUploaderHandler;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.gspace.client.options.EntityOptionsTabView;
 
+import com.google.gwt.event.shared.HandlerRegistration;
+
 public interface EntityOptionsLogoView extends EntityOptionsTabView {
 
-    OnAcceptCallback getOnSubmit();
+  HandlerRegistration addOnCancelUploadHandler(OnCancelUploaderHandler handler);
 
-    void setNormalGroupsLabels();
+  HandlerRegistration addOnChangeUploadHandler(IUploader.OnChangeUploaderHandler handler);
 
-    void setPersonalGroupsLabels();
+  HandlerRegistration addOnFinishUploadHandler(IUploader.OnFinishUploaderHandler handler);
 
-    void setUploadParams(String userHash, String token);
+  HandlerRegistration addOnStartUploadHandler(IUploader.OnStartUploaderHandler handler);
+
+  OnAcceptCallback getOnSubmit();
+
+  void setNormalGroupsLabels();
+
+  void setPersonalGroupsLabels();
+
+  void setUploadParams(String userHash, String token);
 
 }

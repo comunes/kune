@@ -26,11 +26,13 @@ public class NoHomePageViewer implements ContentViewer {
 
   @Override
   public void attach() {
+    gsArmor.setContentVisible(false);
   }
 
   @Override
   public void detach() {
     UiUtils.clear(gsArmor.getDocHeader());
+    gsArmor.setContentVisible(true);
   }
 
   @Override

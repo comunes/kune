@@ -19,6 +19,7 @@
  */
 package cc.kune.gspace.client.options.logo;
 
+import gwtupload.client.IUploader;
 import cc.kune.core.client.events.AvatarChangedEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
@@ -56,8 +57,8 @@ public class UserOptionsLogoPresenter extends EntityOptionsLogoPresenter {
   }
 
   @Override
-  public void onSubmitComplete() {
-    super.onSubmitComplete();
+  public void onSubmitComplete(final IUploader uploader) {
+    super.onSubmitComplete(uploader);
     final GroupDTO group = session.getCurrentState().getGroup();
     if (session.getCurrentUser().getShortName().equals(group.getShortName())) {
       userService.get().getUserAvatarBaser64(session.getUserHash(), group.getStateToken(),

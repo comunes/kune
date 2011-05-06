@@ -462,7 +462,7 @@
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <version>1.2</version>
+      <version>1.3.1</version>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
@@ -472,7 +472,7 @@
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
-      <version>1.1.1</version>
+      <version>1.2</version>
     </dependency>
     <!-- db upgrades -->
     <dependency>
@@ -613,7 +613,15 @@
       <version>1.4</version>
       <type>jar</type>
     </dependency>
+    <!-- gwtupload -->
+    <dependency>
+      <groupId>com.googlecode.gwtupload</groupId>
+      <artifactId>gwtupload</artifactId>
+      <version>0.6.3-compat</version>
+    </dependency>
+    <!-- end gwtupload -->
   </dependencies>
+
   <!-- <dependency> -->
   <!-- <groupId>dom4j</groupId> -->
   <!-- <artifactId>dom4j</artifactId> -->

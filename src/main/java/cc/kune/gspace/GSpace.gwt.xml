@@ -5,4 +5,11 @@
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
   <inherits name="cc.kune.pspace.PSpace" />
+
+  <!-- Include GWTUpload library -->
+  <inherits name="gwtupload.GWTUpload"/>
+  <!-- Load dinamically predefined styles in the library when the application starts -->
+  <stylesheet src="Upload.css"/>
+
+
 </module>

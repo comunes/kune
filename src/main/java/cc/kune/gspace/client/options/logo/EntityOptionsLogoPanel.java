@@ -19,7 +19,12 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
-import cc.kune.common.client.log.Log;
+import gwtupload.client.IFileInput.FileInputType;
+import gwtupload.client.IUploader.OnCancelUploaderHandler;
+import gwtupload.client.IUploader.OnChangeUploaderHandler;
+import gwtupload.client.IUploader.OnFinishUploaderHandler;
+import gwtupload.client.IUploader.OnStartUploaderHandler;
+import gwtupload.client.MultiUploader;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.core.client.resources.CoreMessages;
@@ -28,158 +33,103 @@ import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FileUpload;
-import com.google.gwt.user.client.ui.FormPanel;
-import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
-import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
+import com.google.gwt.user.client.ui.DecoratorPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Hidden;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class EntityOptionsLogoPanel extends Composite implements EntityOptionsLogoView {
 
+  public class UploadButton extends Composite implements HasClickHandlers {
+    DecoratorPanel widget = new DecoratorPanel();
+
+    public UploadButton() {
+      final DecoratorPanel widget = new DecoratorPanel();
+      final Button btn = new Button(i18n.t("Choose"));
+      btn.addStyleName("k-button");
+      initWidget(widget);
+      widget.setWidget(btn);
+      widget.setHeight("50px");
+    }
+
+    @Override
+    public HandlerRegistration addClickHandler(final ClickHandler handler) {
+      return addDomHandler(handler, ClickEvent.getType());
+    }
+  }
+
   public static final String ICON_UPLD_SERVLET = "servlets/EntityLogoUploadManager";
   private final Label dialogInfoLabel;
-  private final FileUpload fileUpload = new FileUpload();
-  private final FormPanel form = new FormPanel();
   private final I18nTranslationService i18n;
-  private OnAcceptCallback onAccept;
   private final IconLabel tabTitle;
   private final Hidden tokenField;
+  private final MultiUploader uploader;
   private final Hidden userhashField;
-
-  // private final TextField file;
 
   public EntityOptionsLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,
       final String panelId, final String buttonId, final String inputId, final NavResources res) {
     super();
     this.i18n = i18n;
     tabTitle = new IconLabel(res.picture(), "");
-    // super.setButtonAlign(HorizontalAlignment.LEFT);
-    // super.setFrame(true);
-    // super.setAutoScroll(false);
-    // super.setBorder(false);
-    // super.setFileUpload(true);
-    // super.setWidth(400);
-    // super.setIconCls("k-picture-icon");
-    // super.setMethod(Method.POST);
-    // super.setUrl(ICON_UPLD_SERVLET);
-    // super.setWaitMsgTarget(true);
-    // super.setHideLabels(true);
-    // super.setPadding(10);
-    // super.addFormListener(new FormListener() {
-    // @Override
-    // public boolean doBeforeAction(final Form form) {
-    // return true;
-    // }
-    //
-    // @Override
-    // public void onActionComplete(final Form form, final int httpStatus,
-    // final String responseText) {
-    // presenter.onSubmitComplete(httpStatus, responseText);
-    // }
-    //
-    // @Override
-    // public void onActionFailed(final Form form, final int httpStatus,
-    // final String responseText) {
-    // presenter.onSubmitFailed(httpStatus, responseText);
-    // }
-    // });
-    // super.add(dialogInfoLabel);
-    // file = new TextField("File", inputId);
-    // final EventCallback keyListener = new EventCallback() {
-    // @Override
-    // public void execute(final EventObject e) {
-    // // setEnableFileField();
-    // }
-    // };
-    // file.addKeyPressListener(keyListener);
-    // file.setId(inputId);
-    // file.setInputType("file");
-    // super.add(file);
-    // final FieldListenerAdapter changeListener = new
-    // FieldListenerAdapter() {
-    // @Override
-    // public void onChange(final Field field, final Object newVal, final
-    // Object oldVal) {
-    // NotifyUser.info("change");
-    // // setEnableFileField();
-    // }
-    // };
-    // // Don't works:
-    // file.addListener(changeListener);
-    // setId(panelId);
-    //
-    // sendButton.setId(buttonId);
-    // super.addButton(sendButton);
 
+    final UploadButton btn = new UploadButton();
+    uploader = new MultiUploader(FileInputType.CUSTOM.with(btn));
+    uploader.setServletPath(ICON_UPLD_SERVLET);
+    uploader.setMaximumFiles(1);
     dialogInfoLabel = new Label();
     dialogInfoLabel.setWordWrap(true);
     dialogInfoLabel.addStyleName("kune-Margin-20-tb");
-    form.setEncoding(FormPanel.ENCODING_MULTIPART);
-    form.setMethod(FormPanel.METHOD_POST);
-    form.setAction(GWT.getModuleBaseURL() + ICON_UPLD_SERVLET);
+    uploader.setValidExtensions("png", "jpg", "gif", "jpeg", "bmp");
 
     userhashField = new Hidden(FileConstants.HASH, FileConstants.HASH);
     tokenField = new Hidden(FileConstants.TOKEN, FileConstants.TOKEN);
 
-    final VerticalPanel holder = new VerticalPanel();
+    final FlowPanel holder = new FlowPanel();
 
-    fileUpload.setName("upload");
+    uploader.add(userhashField);
+    uploader.add(tokenField);
     holder.add(dialogInfoLabel);
-    holder.add(fileUpload);
-    holder.add(userhashField);
-    holder.add(tokenField);
-    holder.add(new Button(i18n.t("Send"), new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        Log.info("You selected: " + fileUpload.getFilename(), null);
-        form.submit();
-      }
-    }));
+    holder.add(uploader);
 
-    form.addSubmitHandler(new FormPanel.SubmitHandler() {
-      @Override
-      public void onSubmit(final SubmitEvent event) {
-        // final String filename = file.getValueAsString();
-        // if (filename != null && filename.length() > 0) {
-        // getForm().submit();
-        // }
-
-        if (!"".equalsIgnoreCase(fileUpload.getFilename())) {
-          GWT.log("UPLOADING FILE????", null);
-          // NOW WHAT????
-        } else {
-          event.cancel(); // cancel the event
-        }
-
-      }
-    });
-
-    form.addSubmitCompleteHandler(new FormPanel.SubmitCompleteHandler() {
-      @Override
-      public void onSubmitComplete(final SubmitCompleteEvent event) {
-        CurrentLogoChangedEvent.fire(eventBus);
-      }
-    });
-    form.add(holder);
-    initWidget(form);
+    initWidget(holder);
     setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
+    // uploader.setHeight("100px");
+
     addStyleName("k-overflow-y-auto");
     addStyleName("k-tab-panel");
   }
 
   @Override
+  public HandlerRegistration addOnCancelUploadHandler(final OnCancelUploaderHandler handler) {
+    return uploader.addOnCancelUploadHandler(handler);
+  }
+
+  @Override
+  public HandlerRegistration addOnChangeUploadHandler(final OnChangeUploaderHandler handler) {
+    return uploader.addOnChangeUploadHandler(handler);
+  }
+
+  @Override
+  public HandlerRegistration addOnFinishUploadHandler(final OnFinishUploaderHandler handler) {
+    return uploader.addOnFinishUploadHandler(handler);
+  }
+
+  @Override
+  public HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler) {
+    return uploader.addOnStartUploadHandler(handler);
+  }
+
+  @Override
   public OnAcceptCallback getOnSubmit() {
-    // TODO Auto-generated method stub
     return null;
   }
 
@@ -189,7 +139,7 @@ public class EntityOptionsLogoPanel extends Composite implements EntityOptionsLo
   }
 
   public void reset() {
-    form.reset();
+    uploader.reset();
   }
 
   @Override

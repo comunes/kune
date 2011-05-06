@@ -1,4 +1,6 @@
-CHARSET   "UTF-8  "; body {
+CHARSET   "UTF-8  ";
+
+body {
   background-color: white;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -795,7 +797,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
     white-space: nowrap;
 }
 */
-.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button {
+.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button, .gwt-FileUpload {
   font: 13px 'Ubuntu', arial;
   border: 2px solid #CCCCCC;
   cursor: pointer;
@@ -1314,4 +1316,9 @@ table.k-folder-viewer {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.GWTUpld, table.GWTUpld td {
+    font-family: inherits !important;
+    font-size: 14px !important;
 }
