@@ -59,6 +59,8 @@ import cc.kune.pspace.client.PSpaceParts;
 import cc.kune.pspace.client.PSpacePresenter;
 import cc.kune.wave.client.WaveGinModule;
 import cc.kune.wave.client.WaveParts;
+import cc.kune.wiki.client.WikiGinModule;
+import cc.kune.wiki.client.WikiGinjector;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
@@ -68,77 +70,79 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, ChatGinModule.class, WaveGinModule.class,
-        PSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class })
-public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector {
+    PSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class,
+    WikiGinModule.class })
+public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector,
+    WikiGinjector {
 
-    /*
-     * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
-     * see the GWTPlatform doc
-     */
+  /*
+   * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
+   * see the GWTPlatform doc
+   */
 
-    AsyncProvider<UserSNPresenter> getBuddiesAndParticipationPresenter();
+  AsyncProvider<UserSNPresenter> getBuddiesAndParticipationPresenter();
 
-    ChatClient getChatClient();
+  ChatClient getChatClient();
 
-    ChatParts getChatParts();
+  ChatParts getChatParts();
 
-    AsyncProvider<CookiesManager> getCookiesManager();
+  AsyncProvider<CookiesManager> getCookiesManager();
 
-    CoreParts getCoreParts();
+  CoreParts getCoreParts();
 
-    Provider<CorePresenter> getCorePresenter();
+  Provider<CorePresenter> getCorePresenter();
 
-    AsyncProvider<EntityHeaderPresenter> getEntityHeaderPresenter();
+  AsyncProvider<EntityHeaderPresenter> getEntityHeaderPresenter();
 
-    ErrorHandler getErrorHandler();
+  ErrorHandler getErrorHandler();
 
-    EventBus getEventBus();
+  EventBus getEventBus();
 
-    EventBusWithLogging getEventLogger();
+  EventBusWithLogging getEventLogger();
 
-    GlobalShortcutRegister getGlobalShortcutRegister();
+  GlobalShortcutRegister getGlobalShortcutRegister();
 
-    AsyncProvider<GroupSNPresenter> getGroupMembersPresenter();
+  AsyncProvider<GroupSNPresenter> getGroupMembersPresenter();
 
-    GuiProvider getGuiProvider();
+  GuiProvider getGuiProvider();
 
-    GwtGuiProvider getGwtGuiProvider();
+  GwtGuiProvider getGwtGuiProvider();
 
-    GxtGuiProvider getGxtGuiProvider();
+  GxtGuiProvider getGxtGuiProvider();
 
-    I18nTranslationService getI18n();
+  I18nTranslationService getI18n();
 
-    AsyncProvider<NewGroupPresenter> getNewGroupPresenter();
+  AsyncProvider<NewGroupPresenter> getNewGroupPresenter();
 
-    OnAppStartFactory getOnAppStartFactory();
+  OnAppStartFactory getOnAppStartFactory();
 
-    ProxyFailureHandler getProxyFailureHandler();
+  ProxyFailureHandler getProxyFailureHandler();
 
-    PSpaceParts getPSpaceParts();
+  PSpaceParts getPSpaceParts();
 
-    AsyncProvider<PSpacePresenter> getPSpacePresenter();
+  AsyncProvider<PSpacePresenter> getPSpacePresenter();
 
-    AsyncProvider<RegisterPresenter> getRegisterPresenter();
+  AsyncProvider<RegisterPresenter> getRegisterPresenter();
 
-    AsyncProvider<SignInPresenter> getSignInPresenter();
+  AsyncProvider<SignInPresenter> getSignInPresenter();
 
-    AsyncProvider<SitebarActionsPresenter> getSitebarActionsPresenter();
+  AsyncProvider<SitebarActionsPresenter> getSitebarActionsPresenter();
 
-    AsyncProvider<SiteLogoPresenter> getSiteLogoPresenter();
+  AsyncProvider<SiteLogoPresenter> getSiteLogoPresenter();
 
-    SiteTokenListeners getSiteTokenListeners();
+  SiteTokenListeners getSiteTokenListeners();
 
-    AsyncProvider<SpaceSelectorPresenter> getSpacesTabPresenter();
+  AsyncProvider<SpaceSelectorPresenter> getSpacesTabPresenter();
 
-    AsyncProvider<SpinerPresenter> getSpinerPresenter();
+  AsyncProvider<SpinerPresenter> getSpinerPresenter();
 
-    StateManager getStateManager();
+  StateManager getStateManager();
 
-    TokenMatcher getTokenMatcher();
+  TokenMatcher getTokenMatcher();
 
-    AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
+  AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
 
-    AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
+  AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
 
-    WaveParts getWaveParts();
+  WaveParts getWaveParts();
 }

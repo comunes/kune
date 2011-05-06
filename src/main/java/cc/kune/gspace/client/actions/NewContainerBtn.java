@@ -4,7 +4,6 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.ContentCache;
@@ -15,6 +14,7 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -63,12 +63,12 @@ public class NewContainerBtn extends ButtonDescriptor {
   private static final String NEW_NAME = "ctnernewname";
 
   public NewContainerBtn(final I18nTranslationService i18n, final NewContainerAction action,
-      final NavResources res, final String title, final String tooltip, final String newName,
+      final ImageResource icon, final String title, final String tooltip, final String newName,
       final String id) {
     super(action);
     // The name given to this new content
     action.putValue(NEW_NAME, newName);
     action.putValue(ID, id);
-    this.withText(title).withToolTip(tooltip).withIcon(res.folderAdd()).withStyles("k-def-docbtn, k-fr");
+    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fr");
   }
 }

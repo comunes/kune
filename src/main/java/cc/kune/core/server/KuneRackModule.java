@@ -48,6 +48,7 @@ import cc.kune.core.server.rest.I18nTranslationJSONService;
 import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
 import cc.kune.docs.server.DocumentServerModule;
+import cc.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
@@ -59,93 +60,93 @@ import com.google.inject.servlet.ServletModule;
 import com.google.inject.servlet.SessionScoped;
 
 public class KuneRackModule implements RackModule {
-    public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
-    private final Module configModule;
+  public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
+  private final Module configModule;
 
-    public KuneRackModule() {
-        this("development", "kune.properties", null);
-    }
+  public KuneRackModule() {
+    this("development", "kune.properties", null);
+  }
 
-    public KuneRackModule(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
+  public KuneRackModule(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
 
-        configModule = new AbstractModule() {
-            @Override
-            public void configure() {
-                install(FinderRegistry.init(new JpaPersistModule(jpaUnit)));
-                bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
-                bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
-                if (sessionScope != null) {
-                    bindScope(SessionScoped.class, sessionScope);
-                }
-            }
-        };
-    }
+    configModule = new AbstractModule() {
+      @Override
+      public void configure() {
+        install(FinderRegistry.init(new JpaPersistModule(jpaUnit)));
+        bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
+        bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
+        if (sessionScope != null) {
+          bindScope(SessionScoped.class, sessionScope);
+        }
+      }
+    };
+  }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void configure(final RackBuilder builder) {
-        installGuiceModules(builder);
+  @Override
+  @SuppressWarnings("unchecked")
+  public void configure(final RackBuilder builder) {
+    installGuiceModules(builder);
 
-        builder.add(KuneContainerListener.class);
+    builder.add(KuneContainerListener.class);
 
-        builder.exclude("/http-bind.*");
-        builder.exclude("/public/.*");
-        builder.exclude("/images/.*");
-        builder.exclude("/stylesheets/.*");
-        builder.exclude("/javascripts/.*");
-        builder.exclude("/templates/.*");
+    builder.exclude("/http-bind.*");
+    builder.exclude("/public/.*");
+    builder.exclude("/images/.*");
+    builder.exclude("/stylesheets/.*");
+    builder.exclude("/javascripts/.*");
+    builder.exclude("/templates/.*");
 
-        /* Wave with context '/' */
-        builder.exclude("/");
-        builder.exclude("/attachment/.*");
-        builder.exclude("/auth/signin");
-        builder.exclude("/auth/signout");
-        builder.exclude("/auth/register");
-        builder.exclude("/fetch/.*");
-        builder.exclude("/robot/dataapi");
-        builder.exclude("/robot/dataapi/oauth/.*");
-        builder.exclude("/robot/dataapi/rpc");
-        builder.exclude("/robot/register/.*");
-        builder.exclude("/robot/rpc");
-        builder.exclude("/gadgets");
-        builder.exclude("/gadgets/.*");
-        builder.exclude("/socket.io/*");
-        builder.exclude("/socket.io/.*]");
-        builder.exclude("/socket");
-        builder.exclude("/static/.*");
-        builder.exclude("/webclient/.*");
+    /* Wave with context '/' */
+    builder.exclude("/");
+    builder.exclude("/attachment/.*");
+    builder.exclude("/auth/signin");
+    builder.exclude("/auth/signout");
+    builder.exclude("/auth/register");
+    builder.exclude("/fetch/.*");
+    builder.exclude("/robot/dataapi");
+    builder.exclude("/robot/dataapi/oauth/.*");
+    builder.exclude("/robot/dataapi/rpc");
+    builder.exclude("/robot/register/.*");
+    builder.exclude("/robot/rpc");
+    builder.exclude("/gadgets");
+    builder.exclude("/gadgets/.*");
+    builder.exclude("/socket.io/*");
+    builder.exclude("/socket.io/.*]");
+    builder.exclude("/socket");
+    builder.exclude("/static/.*");
+    builder.exclude("/webclient/.*");
 
-        builder.at(".*").install(new LogFilter());
-        builder.at(".*").install(new GuiceFilter());
+    builder.at(".*").install(new LogFilter());
+    builder.at(".*").install(new GuiceFilter());
 
-        // NOTE: Commented this while testing Wave
-        // builder.at("^/$").install(new RedirectFilter("/ws/"));
-        builder.at("^/ws").install(new RedirectFilter("/ws/"));
+    // NOTE: Commented this while testing Wave
+    // builder.at("^/$").install(new RedirectFilter("/ws/"));
+    builder.at("^/ws").install(new RedirectFilter("/ws/"));
 
-        builder.at("^/ws/$").install(new ListenerFilter(KuneApplicationListener.class),
-                new ForwardFilter("/ws/ws.html"));
+    builder.at("^/ws/$").install(new ListenerFilter(KuneApplicationListener.class),
+        new ForwardFilter("/ws/ws.html"));
 
-        builder.installGWTServices("^/ws/", SiteService.class, GroupService.class, ContentService.class,
-                UserService.class, SocialNetworkService.class, I18nService.class);
-        builder.installRESTServices("^/ws/json/", TestJSONService.class, GroupJSONService.class, UserJSONService.class,
-                I18nTranslationJSONService.class, ContentJSONService.class);
-        builder.installServlet("^/ws/servlets/", FileUploadManager.class, FileDownloadManager.class,
-                EntityLogoUploadManager.class, EntityLogoDownloadManager.class);
+    builder.installGWTServices("^/ws/", SiteService.class, GroupService.class, ContentService.class,
+        UserService.class, SocialNetworkService.class, I18nService.class);
+    builder.installRESTServices("^/ws/json/", TestJSONService.class, GroupJSONService.class,
+        UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
+    builder.installServlet("^/ws/servlets/", FileUploadManager.class, FileDownloadManager.class,
+        EntityLogoUploadManager.class, EntityLogoDownloadManager.class);
 
-        builder.at("^/ws/(.*)$").install(new ForwardFilter("^/ws/(.*)$", "/ws/{0}"));
-    }
+    builder.at("^/ws/(.*)$").install(new ForwardFilter("^/ws/(.*)$", "/ws/{0}"));
+  }
 
-    private void installGuiceModules(final RackBuilder builder) {
-        // https://code.google.com/p/google-guice/wiki/ServletModule
-        builder.use(new ServletModule());
-        builder.use(new PlatformServerModule());
-        builder.use(new DocumentServerModule());
-        builder.use(new BlogServerModule());
-        // builder.use(new WikiServerModule());
-        // builder.use(new ChatServerModule());
-        // builder.use(new GalleryServerModule());
-        builder.use(new RESTServicesModule());
-        builder.use(configModule);
-    }
+  private void installGuiceModules(final RackBuilder builder) {
+    // https://code.google.com/p/google-guice/wiki/ServletModule
+    builder.use(new ServletModule());
+    builder.use(new PlatformServerModule());
+    builder.use(new DocumentServerModule());
+    builder.use(new BlogServerModule());
+    builder.use(new WikiServerModule());
+    // builder.use(new ChatServerModule());
+    // builder.use(new GalleryServerModule());
+    builder.use(new RESTServicesModule());
+    builder.use(configModule);
+  }
 
 }

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,28 +17,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.wiki.client;
+package cc.kune.wiki.client;
 
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
-import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
-
+import static cc.kune.wiki.shared.WikiConstants.NAME;
+import static cc.kune.wiki.shared.WikiConstants.TYPE_FOLDER;
+import static cc.kune.wiki.shared.WikiConstants.TYPE_ROOT;
+import static cc.kune.wiki.shared.WikiConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.wiki.shared.WikiConstants.TYPE_WIKIPAGE;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.gspace.client.tool.old.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
-public class WikiClientTool extends OldFoldableAbstractClientTool {
-  public static final String NAME = "wiki";
-  public static final String TYPE_FOLDER = NAME + "." + "folder";
-  public static final String TYPE_ROOT = NAME + "." + "root";
-  public static final String TYPE_UPLOADEDFILE = NAME + "."
-      + OldFoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
-  public static final String TYPE_WIKIPAGE = NAME + "." + "wikipage";
+import com.google.inject.Inject;
 
+public class WikiClientTool extends FoldableAbstractClientTool {
+
+  private final NavResources navResources;
+
+  @Inject
   public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-      final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
-      final ContentCapabilitiesRegistry cntCapabReg) {
-    super(NAME, i18n.t("wiki"), toolSelector, wsThemePresenter, ws, cntCapabReg);
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+    super(NAME, i18n.t("wiki"), toolSelector, cntCapRegistry);
+    this.navResources = navResources;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
@@ -59,9 +61,9 @@ public class WikiClientTool extends OldFoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
-    // registerContentTypeIcon(TYPE_FOLDER, "images/nav/wiki.png");
-    registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
+    registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIcon(TYPE_ROOT, navResources.folder());
+    registerContentTypeIcon(TYPE_WIKIPAGE, navResources.wikipage());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
   }
 

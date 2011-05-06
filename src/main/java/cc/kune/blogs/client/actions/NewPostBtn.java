@@ -10,11 +10,11 @@ import com.google.inject.Inject;
 
 public class NewPostBtn extends NewContentBtn {
 
-    @Inject
-    public NewPostBtn(final I18nTranslationService i18n, final NewContentAction action, final NavResources res,
-            final GlobalShortcutRegister shorcutReg) {
-        super(i18n, action, res, shorcutReg, i18n.t("New post"), i18n.t("Create a new blog post"), i18n.t("New post"),
-                BlogsConstants.TYPE_POST);
-    }
+  @Inject
+  public NewPostBtn(final I18nTranslationService i18n, final NewContentAction action,
+      final NavResources res, final GlobalShortcutRegister shorcutReg) {
+    super(i18n, action, res.blogAdd(), shorcutReg, i18n.t("New post"), i18n.t("Create a new blog post"),
+        i18n.t("New post"), BlogsConstants.TYPE_POST);
+  }
 
 }

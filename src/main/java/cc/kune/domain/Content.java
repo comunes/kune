@@ -57,6 +57,7 @@ import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.docs.shared.DocsConstants;
 import cc.kune.domain.utils.HasStateToken;
+import cc.kune.wiki.shared.WikiConstants;
 
 @Entity
 @Table(name = "contents")
@@ -259,7 +260,8 @@ public class Content implements HasStateToken {
 
   @Transient
   public boolean isWave() {
-    return (typeId.equals(DocsConstants.TYPE_DOCUMENT)) || (typeId.equals(BlogsConstants.TYPE_POST));
+    return (typeId.equals(DocsConstants.TYPE_DOCUMENT)) || typeId.equals(WikiConstants.TYPE_WIKIPAGE)
+        || (typeId.equals(BlogsConstants.TYPE_POST));
   }
 
   public void removeAuthor(final User user) {

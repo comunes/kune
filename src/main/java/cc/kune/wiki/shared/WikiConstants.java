@@ -1,16 +1,16 @@
-package cc.kune.docs.shared;
+package cc.kune.wiki.shared;
 
 import cc.kune.core.shared.ToolConstants;
 
-public final class DocsConstants {
+public final class WikiConstants {
 
-  public static final String NAME = "docs";
-  public static final String ROOT_NAME = "documents";
-  public static final String TYPE_DOCUMENT = NAME + "." + "doc";
+  public static final String NAME = "wiki";
+  public static final String ROOT_NAME = "wiki";
   public static final String TYPE_FOLDER = NAME + "." + "folder";
   public static final String TYPE_ROOT = NAME + "." + "root";
   public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
+  public static final String TYPE_WIKIPAGE = NAME + "." + "wikipage";
 
-  private DocsConstants() {
+  private WikiConstants() {
   }
 }

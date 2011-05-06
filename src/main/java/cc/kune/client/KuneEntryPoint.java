@@ -35,55 +35,56 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  */
 public class KuneEntryPoint implements EntryPoint {
 
-    public final KuneGinjector ginjector = GWT.create(KuneGinjector.class);
+  public final KuneGinjector ginjector = GWT.create(KuneGinjector.class);
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-     */
-    @Override
-    public void onModuleLoad() {
-        GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-            @Override
-            public void onUncaughtException(final Throwable e) {
-                Log.error("Error in 'onModuleLoad()' method", e);
-                e.printStackTrace();
-            }
-        });
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                onModuleLoadCont();
-            }
-        });
-    }
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+   */
+  @Override
+  public void onModuleLoad() {
+    GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+      @Override
+      public void onUncaughtException(final Throwable e) {
+        Log.error("Error in 'onModuleLoad()' method", e);
+        e.printStackTrace();
+      }
+    });
+    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
+      public void execute() {
+        onModuleLoadCont();
+      }
+    });
+  }
 
-    /**
-     * On module load cont.
-     */
-    public void onModuleLoadCont() {
-        DelayedBindRegistry.bind(ginjector);
-        ginjector.getSpinerPresenter();
-        ginjector.getGlobalShortcutRegister().enable();
-        AsyncCallbackSimple.init(ginjector.getErrorHandler());
-        ginjector.getEventLogger();
-        NotifyUser.init(ginjector.getEventBus(), ginjector.getI18n());
-        ginjector.getCorePresenter().get().forceReveal();
-        ginjector.getOnAppStartFactory();
-        ginjector.getStateManager();
-        ginjector.getGwtGuiProvider();
-        ginjector.getUserNotifierPresenter();
-        ginjector.getSpinerPresenter();
-        ginjector.getGroupMembersPresenter();
-        ginjector.getDocsParts();
-        ginjector.getBlogsParts();
-        ginjector.getSiteLogoPresenter();
-        ginjector.getSpacesTabPresenter();
-        ginjector.getChatClient();
-        ginjector.getCoreParts();
-        ginjector.getGSpaceParts();
-        ginjector.getPSpaceParts();
-        ginjector.getContentViewerSelector().init();
-    }
+  /**
+   * On module load cont.
+   */
+  public void onModuleLoadCont() {
+    DelayedBindRegistry.bind(ginjector);
+    ginjector.getSpinerPresenter();
+    ginjector.getGlobalShortcutRegister().enable();
+    AsyncCallbackSimple.init(ginjector.getErrorHandler());
+    ginjector.getEventLogger();
+    NotifyUser.init(ginjector.getEventBus(), ginjector.getI18n());
+    ginjector.getCorePresenter().get().forceReveal();
+    ginjector.getOnAppStartFactory();
+    ginjector.getStateManager();
+    ginjector.getGwtGuiProvider();
+    ginjector.getUserNotifierPresenter();
+    ginjector.getSpinerPresenter();
+    ginjector.getGroupMembersPresenter();
+    ginjector.getDocsParts();
+    ginjector.getBlogsParts();
+    ginjector.getWikiParts();
+    ginjector.getSiteLogoPresenter();
+    ginjector.getSpacesTabPresenter();
+    ginjector.getChatClient();
+    ginjector.getCoreParts();
+    ginjector.getGSpaceParts();
+    ginjector.getPSpaceParts();
+    ginjector.getContentViewerSelector().init();
+  }
 }

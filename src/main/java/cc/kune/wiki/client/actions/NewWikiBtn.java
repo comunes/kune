@@ -1,22 +1,22 @@
-package cc.kune.docs.client.actions;
+package cc.kune.wiki.client.actions;
 
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.shared.DocsConstants;
 import cc.kune.gspace.client.actions.NewContentBtn;
+import cc.kune.wiki.shared.WikiConstants;
 
 import com.google.inject.Inject;
 
-public class NewDocBtn extends NewContentBtn {
+public class NewWikiBtn extends NewContentBtn {
 
   @Inject
-  public NewDocBtn(final I18nTranslationService i18n, final NewContentAction action,
+  public NewWikiBtn(final I18nTranslationService i18n, final NewContentAction action,
       final NavResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.pageAdd(), shorcutReg, i18n.t("New document"),
-        i18n.t("Create a New Document here. "
+    super(i18n, action, res.wikipageAdd(), shorcutReg, i18n.t("New wikipage"),
+        i18n.t("Create a New Wikipage here. "
             + "This document will be a new 'Page' in the public web if you publish it"),
-        i18n.t("New document"), DocsConstants.TYPE_DOCUMENT);
+        i18n.t("New wikipage"), WikiConstants.TYPE_WIKIPAGE);
   }
 
 }

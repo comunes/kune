@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,10 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.blogs.client.cnt;
+package cc.kune.wiki.server;
 
-import cc.kune.core.client.cnt.AbstractContentView;
+import com.google.inject.Binder;
+import com.google.inject.Module;
 
-public interface BlogViewerView extends AbstractContentView {
-
+public class WikiServerModule implements Module {
+    public void configure(final Binder binder) {
+        binder.bind(WikiServerTool.class).asEagerSingleton();
+    }
 }
