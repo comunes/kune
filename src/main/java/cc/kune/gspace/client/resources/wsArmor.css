@@ -86,9 +86,10 @@
 
 .docSubheader {
   background-color: #f7ebe3;
-  padding: 15px 0 0 0;
   overflow: hidden;
   border-collapse: separate;
+  margin: -14px 0 0;
+  padding: 15px 0 0;
 }
 
 .docSubheader button.k-fr {
@@ -208,7 +209,7 @@
   height: 0;
   width: 0;
   position: relative;
-  bottom: 16px;
+  bottom: 0px;
   left: 36px;
 }
 

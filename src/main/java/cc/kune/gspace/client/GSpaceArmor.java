@@ -26,41 +26,43 @@ import com.google.gwt.user.client.ui.SimplePanel;
 
 public interface GSpaceArmor {
 
-    ForIsWidget getDocContainer();
+  ForIsWidget getDocContainer();
 
-    ForIsWidget getDocFooter();
+  ForIsWidget getDocFooter();
 
-    ForIsWidget getDocHeader();
+  ForIsWidget getDocHeader();
 
-    ForIsWidget getDocSubheader();
+  ForIsWidget getDocSubheader();
 
-    ForIsWidget getEntityFooter();
+  ForIsWidget getEntityFooter();
 
-    ForIsWidget getEntityHeader();
+  ForIsWidget getEntityHeader();
 
-    ForIsWidget getEntityToolsCenter();
+  ForIsWidget getEntityToolsCenter();
 
-    ForIsWidget getEntityToolsNorth();
+  ForIsWidget getEntityToolsNorth();
 
-    ForIsWidget getEntityToolsSouth();
+  ForIsWidget getEntityToolsSouth();
 
-    IsActionExtensible getFooterToolbar();
+  IsActionExtensible getFooterToolbar();
 
-    IsActionExtensible getHeaderToolbar();
+  IsActionExtensible getHeaderToolbar();
 
-    SimplePanel getPublicSpace();
+  SimplePanel getPublicSpace();
 
-    ForIsWidget getSitebar();
+  ForIsWidget getSitebar();
 
-    IsActionExtensible getSubheaderToolbar();
+  IsActionExtensible getSubheaderToolbar();
 
-    ForIsWidget getUserSpace();
+  ForIsWidget getUserSpace();
 
-    void selectGroupSpace();
+  void recalculeNorthWidth();
 
-    void selectHomeSpace();
+  void selectGroupSpace();
 
-    void selectPublicSpace();
+  void selectHomeSpace();
 
-    void selectUserSpace();
+  void selectPublicSpace();
+
+  void selectUserSpace();
 }

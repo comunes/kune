@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
@@ -62,7 +63,7 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @UiField
   VerticalPanel entityToolsCenter;
   @UiField
-  VerticalPanel entityToolsNorth;
+  FlowPanel entityToolsNorth;
   @UiField
   VerticalPanel entityToolsSouth;
   private final ActionFlowPanel footerToolbar;
@@ -103,6 +104,7 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
     getDocHeader().add(headerToolbar);
     getDocSubheader().add(subheaderToolbar);
     getDocFooter().add(footerToolbar);
+    entityToolsNorth.getElement().getStyle().setPosition(Position.RELATIVE);
   }
 
   @Override
@@ -178,6 +180,21 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public ForIsWidget getUserSpace() {
     return userSpace;
+  }
+
+  @Override
+  public void recalculeNorthWidth() {
+    // NotifyUser.info(entityToolsNorth.getElement().getOffsetHeight() + "");
+    // final int size = entityToolsNorth.getElement().getOffsetHeight() + 100;
+    // ((Element)
+    // splitEast.getWidgetContainerElement(entityToolsNorth)).getStyle().setHeight(size,
+    // Unit.PX);
+    // ((Element)
+    // splitEast.getWidgetContainerElement(entityToolsCenter)).setPropertyString("top",
+    // size
+    // + "px");
+    // ((Element)
+    // splitEast.getWidgetContainerElement(entityToolsCenter)).getStyle().setHeight(size,Unit.PX);
   }
 
   @Override
