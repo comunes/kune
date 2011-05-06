@@ -181,6 +181,7 @@
 
 .entityToolsCenter { /*  margin: 10px; */
   overflow: visible !important;
+  margin-top: 10px;
 }
 
 .entityToolsCenter span {

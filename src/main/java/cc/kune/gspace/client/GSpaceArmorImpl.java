@@ -63,6 +63,8 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @UiField
   VerticalPanel entityToolsCenter;
   @UiField
+  FlowPanel entityToolsContainer;
+  @UiField
   FlowPanel entityToolsNorth;
   @UiField
   VerticalPanel entityToolsSouth;
@@ -96,8 +98,8 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
     homeSpace.add(RootPanel.get("k-home-wrapper"));
     DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow",
         "visible");
-    DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsCenter), "overflow",
-        "visible");
+    DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsContainer),
+        "overflow", "visible");
     footerToolbar = toolbarProv.get();
     headerToolbar = toolbarProv.get();
     subheaderToolbar = toolbarProv.get();
@@ -180,21 +182,6 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public ForIsWidget getUserSpace() {
     return userSpace;
-  }
-
-  @Override
-  public void recalculeNorthWidth() {
-    // NotifyUser.info(entityToolsNorth.getElement().getOffsetHeight() + "");
-    // final int size = entityToolsNorth.getElement().getOffsetHeight() + 100;
-    // ((Element)
-    // splitEast.getWidgetContainerElement(entityToolsNorth)).getStyle().setHeight(size,
-    // Unit.PX);
-    // ((Element)
-    // splitEast.getWidgetContainerElement(entityToolsCenter)).setPropertyString("top",
-    // size
-    // + "px");
-    // ((Element)
-    // splitEast.getWidgetContainerElement(entityToolsCenter)).getStyle().setHeight(size,Unit.PX);
   }
 
   @Override

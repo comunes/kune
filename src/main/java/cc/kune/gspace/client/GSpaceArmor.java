@@ -56,8 +56,6 @@ public interface GSpaceArmor {
 
   ForIsWidget getUserSpace();
 
-  void recalculeNorthWidth();
-
   void selectGroupSpace();
 
   void selectHomeSpace();

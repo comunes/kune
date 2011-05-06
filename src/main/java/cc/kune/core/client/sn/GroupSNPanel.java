@@ -90,7 +90,6 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   private void setVisibleImpl(final boolean visible) {
     mainPanel.setVisible(visible);
-    armor.recalculeNorthWidth();
   }
 
   @Override
