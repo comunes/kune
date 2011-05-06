@@ -79,6 +79,7 @@ import cc.kune.gspace.client.viewers.ContentViewerPanel;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerAsTablePanel;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
+import cc.kune.gspace.client.viewers.NoHomePageViewer;
 
 import com.google.inject.Singleton;
 
@@ -107,6 +108,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
         FolderViewerAsTablePanel.class, FolderViewerPresenter.FolderViewerProxy.class);
     bindPresenter(SitebarSearchPresenter.class, SitebarSearchPresenter.SitebarSearchView.class,
         SitebarSearchPanel.class, SitebarSearchPresenter.SitebarSearchProxy.class);
+
+    s(NoHomePageViewer.class);
 
     s(GroupOptions.class, GroupOptionsPresenter.class);
     s(GroupOptionsView.class, GroupOptionsPanel.class);

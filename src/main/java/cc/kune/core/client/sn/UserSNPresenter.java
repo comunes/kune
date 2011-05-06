@@ -124,10 +124,11 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
       getView().setVisible(false);
     } else {
       getView().clear();
+      setParticipationState(state);
       if (state.getSocialNetworkData().isBuddiesVisible()) {
         // In fact now we show the user network or not.
-        final int buddies = setBuddiesState(state);
-        final int participeIn = setParticipationState(state);
+        setBuddiesState(state);
+        getView().setBuddiesVisible(true);
         // getView().setVisible(buddies + participeIn > 0);
       } else {
         getView().showBuddiesNotPublic();
@@ -156,7 +157,6 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
       getView().addBuddie(user, avatarUrl, user.getName(), "",
           createMenuItems(user, userMenuItemsRegistry, user.getName()));
     }
-    getView().setBuddiesVisible(buddies.size() > 0);
     final boolean hasLocalBuddies = buddies.size() > 0;
     final int numExtBuddies = userBuddiesData.getOtherExtBuddies();
     if (numExtBuddies > 0) {

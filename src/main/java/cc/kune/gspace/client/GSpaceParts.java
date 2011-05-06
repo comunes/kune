@@ -21,6 +21,7 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
+import cc.kune.gspace.client.viewers.NoHomePageViewer;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -30,14 +31,14 @@ public class GSpaceParts {
   @Inject
   public GSpaceParts(final Session session, final Provider<EntityLicensePresenter> licenseFooter,
       final Provider<TagsSummaryPresenter> tagsPresenter, final Provider<ToolSelector> toolSelector,
-      final Provider<ContentViewerPresenter> docsViewer, final Provider<FolderViewerPresenter> folderViewer,
-      final Provider<GroupOptions> go, final Provider<UserOptions> uo,
-      final Provider<GroupOptionsCollection> goc, final Provider<UserOptionsCollection> uoc,
-      final Provider<GroupOptionsDefLicense> gdl, final Provider<GroupOptionsPublicSpaceConf> gps,
-      final Provider<GroupOptionsLogo> gl, final Provider<GroupOptionsToolsConf> gtc,
-      final Provider<UserOptionsDefLicense> udl, final Provider<UserOptionsPublicSpaceConf> ups,
-      final Provider<UserOptionsLogo> ul, final Provider<UserOptionsToolsConf> utc,
-      final Provider<SitebarSearchPresenter> siteSearch) {
+      final Provider<NoHomePageViewer> noHome, final Provider<ContentViewerPresenter> docsViewer,
+      final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,
+      final Provider<UserOptions> uo, final Provider<GroupOptionsCollection> goc,
+      final Provider<UserOptionsCollection> uoc, final Provider<GroupOptionsDefLicense> gdl,
+      final Provider<GroupOptionsPublicSpaceConf> gps, final Provider<GroupOptionsLogo> gl,
+      final Provider<GroupOptionsToolsConf> gtc, final Provider<UserOptionsDefLicense> udl,
+      final Provider<UserOptionsPublicSpaceConf> ups, final Provider<UserOptionsLogo> ul,
+      final Provider<UserOptionsToolsConf> utc, final Provider<SitebarSearchPresenter> siteSearch) {
     // , final Provider<GroupOptionsPanel> gop,
     // , final Provider<UserOptionsPanel> uop,
     // final Provider<GroupOptionsPublicSpaceConfPanel> gpsp,
@@ -58,6 +59,7 @@ public class GSpaceParts {
         docsViewer.get();
         folderViewer.get();
         siteSearch.get();
+        noHome.get();
 
         // Add User & Groups Options
         goc.get().add(gtc);

@@ -25,7 +25,6 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("His/her network:"));
     mainTitle.setTitle(i18n.t("This user buddies and groups where participes"));
-    firstCategoryLabel.setText(i18n.t("Buddies"));
     setTooltip(firstCategoryLabel, i18n.t("This user buddies"));
     sndCategoryLabel.setText(i18n.t("Participates in"));
     setTooltip(sndCategoryLabel, i18n.t("Groups in which this user participates"));
@@ -60,6 +59,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   @Override
   public void setBuddiesCount(final int count) {
     firstCategoryCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    firstCategoryLabel.setText(i18n.t("Buddies"));
   }
 
   @Override
@@ -69,8 +69,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   @Override
   public void setNoBuddies() {
-    firstDeckLabel.setText(i18n.t("This user has no buddies yet"));
-    deck.showWidget(0);
+    firstCategoryLabel.setText(i18n.t("This user has no buddies yet"));
   }
 
   @Override
