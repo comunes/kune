@@ -1,6 +1,4 @@
-CHARSET  "UTF-8 ";
-
-body {
+CHARSET   "UTF-8  "; body {
   background-color: white;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -171,7 +169,6 @@ a:visited {
   cursor: pointer;
   cursor: hand;
 }
-
 
 .gwt-RichTextArea {
   border: 1px solid black;
@@ -886,15 +883,8 @@ button.k-button-left:hover {
   outline: 0 none;
 }
 
-button[disabled]:active, button[disabled],
-input[type="reset"][disabled]:active,
-input[type="reset"][disabled],
-input[type="button"][disabled]:active,
-input[type="button"][disabled],
-select[disabled] > input[type="button"],
-select[disabled] > input[type="button"]:active,
-input[type="submit"][disabled]:active,
-input[type="submit"][disabled], .k-button-disabled {
+button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,input[type="reset"][disabled],input[type="button"][disabled]:active,input[type="button"][disabled],select[disabled]>input[type="button"],select[disabled]>input[type="button"]:active,input[type="submit"][disabled]:active,input[type="submit"][disabled],.k-button-disabled
+  {
   color: gray !important;
 }
 
@@ -1164,7 +1154,7 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                               90);
+  kfilter: alpha(opacity =                                 90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1317,3 +1307,11 @@ table.k-folder-viewer {
 }
 
 /* end Decorated tabbar */
+
+.k-waveHolder {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

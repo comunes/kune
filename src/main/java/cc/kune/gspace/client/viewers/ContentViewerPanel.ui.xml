@@ -21,7 +21,8 @@
   </ui:style>
   <g:HTMLPanel width="100%" height="100%">
     <g:DeckPanel ui:field="deck" addStyleNames="k-doc-content-deck">
-      <w:ImplPanel ui:field="waveHolder" addStyleNames="{style.waveHolder}" />
+     <!--   <w:ImplPanel ui:field="waveHolder" addStyleNames="{style.waveHolder}" /> -->
+     <g:VerticalPanel ui:field="waveHolderParent" />
       <g:InlineHTML ui:field="onlyViewPanel" styleName="{style.viewonly}" />
     </g:DeckPanel>
   </g:HTMLPanel>

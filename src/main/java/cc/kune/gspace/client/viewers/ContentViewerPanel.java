@@ -2,17 +2,12 @@ package cc.kune.gspace.client.viewers;
 
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
-import org.waveprotocol.box.webclient.client.Session;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
 import org.waveprotocol.box.webclient.client.StagesProvider;
-import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
 import org.waveprotocol.box.webclient.search.WaveStore;
-import org.waveprotocol.box.webclient.widget.loading.LoadingIndicator;
 import org.waveprotocol.wave.client.account.ProfileManager;
-import org.waveprotocol.wave.client.account.impl.ProfileManagerImpl;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.model.id.IdGenerator;
-import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
@@ -26,12 +21,14 @@ import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
+import cc.kune.wave.client.WaveClientClearEvent;
 import cc.kune.wave.client.WaveClientManager;
 import cc.kune.wave.client.WebClient;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -39,6 +36,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -58,29 +56,40 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   DeckPanel deck;
   private final GSpaceArmor gsArmor;
   private IdGenerator idGenerator;
-  private final Element loading = new LoadingIndicator().getElement();
+  private Element loading;
   @UiField
   InlineHTML onlyViewPanel;
   private ProfileManager profiles;
   /** The wave panel, if a wave is open. */
   private StagesProvider wave;
   private final WaveClientManager waveClient;
+  private ImplPanel waveHolder;
+
   @UiField
-  ImplPanel waveHolder;
+  VerticalPanel waveHolderParent;
 
   private final WaveStore waveStore = new SimpleWaveStore();
+
+  private WebClient webClient;
 
   private final Widget widget;
 
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientManager waveClient,
-      final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n) {
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
+      final EventBus eventBus) {
     this.gsArmor = wsArmor;
     this.waveClient = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
-    loading.addClassName("kune-Margin-40-tb");
+    eventBus.addHandler(WaveClientClearEvent.getType(),
+        new WaveClientClearEvent.WaveClientClearHandler() {
+          @Override
+          public void onWaveClientClear(final WaveClientClearEvent event) {
+            waveClear();
+          }
+        });
   }
 
   @Override
@@ -100,6 +109,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     gsArmor.getSubheaderToolbar().clear();
     UiUtils.clear(gsArmor.getDocContainer());
     UiUtils.clear(gsArmor.getDocHeader());
+    waveClear();
   }
 
   @Override
@@ -122,13 +132,13 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private void initWaveClientIfNeeded() {
     if (channel == null) {
-      final WaveWebSocketClient webSocket = new WaveWebSocketClient(WebClient.useSocketIO(),
-          WebClient.getWebSocketBaseUrl(GWT.getModuleBaseURL()));
-      webSocket.connect();
-      channel = new RemoteViewServiceMultiplexer(webSocket,
-          new ParticipantId(Session.get().getAddress()).getAddress());
-      profiles = new ProfileManagerImpl(Session.get().getDomain());
+      webClient = waveClient.getWebClient();
+      loading = webClient.getLoading();
+      waveHolder = webClient.getWaveHolder();
+      channel = webClient.getChannel();
+      profiles = webClient.getProfiles();
       idGenerator = ClientIdGenerator.create();
+      loading.addClassName("kune-Margin-40-tb");
     }
   }
 
@@ -161,12 +171,16 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private void setEditableWaveContent(final String waveRefS, final boolean isNewWave) {
     final WaveRef waveRef = getWaveRef(waveRefS);
 
-    if (wave != null) {
-      wave.destroy();
-      wave = null;
-    }
-
     initWaveClientIfNeeded();
+
+    webClient.clear();
+    waveClear();
+
+    if (waveHolder.isAttached()) {
+      waveHolder.removeFromParent();
+      waveHolderParent.remove(waveHolder);
+    }
+    waveHolderParent.add(waveHolder);
 
     // Release the display:none.
     // UIObject.setVisible(waveFrame.getElement(), true);
@@ -197,6 +211,13 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @Override
   public void signOut() {
     channel = NO_CHANNEL;
+  }
+
+  private void waveClear() {
+    if (wave != null) {
+      wave.destroy();
+      wave = null;
+    }
   }
 
 }
