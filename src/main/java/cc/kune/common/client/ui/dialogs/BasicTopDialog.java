@@ -74,7 +74,8 @@ public class BasicTopDialog extends BasicDialog {
     }
 
     public Builder height(final int height) {
-      this.height = String.valueOf(height);
+      // FIXME
+      this.height = String.valueOf(height); // + "px";
       return this;
     }
 
@@ -109,7 +110,8 @@ public class BasicTopDialog extends BasicDialog {
     }
 
     public Builder width(final int width) {
-      this.width = String.valueOf(width);
+      // FIXME
+      this.width = String.valueOf(width); // + "px";
       return this;
     }
 

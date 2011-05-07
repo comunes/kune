@@ -25,39 +25,42 @@ import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.gspace.client.licensewizard.LicenseChangeAction;
+import cc.kune.gspace.client.licensewizard.LicenseWizard;
 import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
-public class GroupOptionsDefLicensePresenter extends EntityOptionsDefLicensePresenter implements GroupOptionsDefLicense {
+public class GroupOptionsDefLicensePresenter extends EntityOptionsDefLicensePresenter implements
+    GroupOptionsDefLicense {
 
-    @Inject
-    public GroupOptionsDefLicensePresenter(final GroupOptions entityOptions, final StateManager stateManager,
-            final Session session, final GroupOptionsDefLicenseView view) {
-        // , final Provider<LicenseWizard> licenseWizard,
-        // final Provider<LicenseChangeAction> licChangeAction) {
-        super(entityOptions, session);// , licenseWizard, licChangeAction);
-        init(view);
-        session.onUserSignIn(true, new UserSignInHandler() {
-            @Override
-            public void onUserSignIn(final UserSignInEvent event) {
-                setState();
-            }
-        });
-    }
+  @Inject
+  public GroupOptionsDefLicensePresenter(final GroupOptions entityOptions,
+      final StateManager stateManager, final Session session, final GroupOptionsDefLicenseView view,
+      final Provider<LicenseWizard> licenseWizard, final Provider<LicenseChangeAction> licChangeAction) {
+    super(entityOptions, session, licenseWizard, licChangeAction);
+    init(view);
+    session.onUserSignIn(true, new UserSignInHandler() {
+      @Override
+      public void onUserSignIn(final UserSignInEvent event) {
+        setState();
+      }
+    });
+  }
 
-    @Override
-    protected boolean applicable() {
-        return session.isCurrentStateAGroup();
-    }
+  @Override
+  protected boolean applicable() {
+    return session.isCurrentStateAGroup();
+  }
 
-    @Override
-    protected LicenseDTO getCurrentDefLicense() {
-        return session.getCurrentState().getGroup().getDefaultLicense();
-    }
+  @Override
+  protected LicenseDTO getCurrentDefLicense() {
+    return session.getCurrentState().getGroup().getDefaultLicense();
+  }
 
-    @Override
-    protected StateToken getOperationToken() {
-        return session.getCurrentStateToken();
-    }
+  @Override
+  protected StateToken getOperationToken() {
+    return session.getCurrentStateToken();
+  }
 }

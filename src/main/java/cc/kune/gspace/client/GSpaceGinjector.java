@@ -1,6 +1,7 @@
 package cc.kune.gspace.client;
 
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
+import cc.kune.gspace.client.licensewizard.LicenseWizardPresenter;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
@@ -22,6 +23,8 @@ public interface GSpaceGinjector extends Ginjector {
   AsyncProvider<FolderViewerPresenter> getFolderViewerPresenter();
 
   GSpaceParts getGSpaceParts();
+
+  AsyncProvider<LicenseWizardPresenter> getLicenseWizardPresenter();
 
   AsyncProvider<SitebarSearchPresenter> getSitebarSearchPresenter();
 

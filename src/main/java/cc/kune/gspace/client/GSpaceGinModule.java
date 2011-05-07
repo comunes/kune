@@ -24,6 +24,19 @@ import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RenameAction;
+import cc.kune.gspace.client.licensewizard.LicenseChangeAction;
+import cc.kune.gspace.client.licensewizard.LicenseWizard;
+import cc.kune.gspace.client.licensewizard.LicenseWizardPanel;
+import cc.kune.gspace.client.licensewizard.LicenseWizardPresenter;
+import cc.kune.gspace.client.licensewizard.LicenseWizardView;
+import cc.kune.gspace.client.licensewizard.pages.LicenseWizardFirstForm;
+import cc.kune.gspace.client.licensewizard.pages.LicenseWizardFirstFormView;
+import cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdForm;
+import cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView;
+import cc.kune.gspace.client.licensewizard.pages.LicenseWizardSndForm;
+import cc.kune.gspace.client.licensewizard.pages.LicenseWizardSndFormView;
+import cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdForm;
+import cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.GroupOptionsCollection;
 import cc.kune.gspace.client.options.GroupOptionsPanel;
@@ -142,5 +155,15 @@ public class GSpaceGinModule extends ExtendedGinModule {
     // Actions
     s(ContentViewerOptionsMenu.class);
     s(RenameAction.class);
+
+    // LicenseWizard
+    bindPresenter(LicenseWizardPresenter.class, LicenseWizardView.class, LicenseWizardPanel.class,
+        LicenseWizardPresenter.LicenseWizardProxy.class);
+    s(LicenseWizard.class, LicenseWizardPresenter.class);
+    s(LicenseWizardFirstFormView.class, LicenseWizardFirstForm.class);
+    s(LicenseWizardSndFormView.class, LicenseWizardSndForm.class);
+    s(LicenseWizardTrdFormView.class, LicenseWizardTrdForm.class);
+    s(LicenseWizardFrdFormView.class, LicenseWizardFrdForm.class);
+    s(LicenseChangeAction.class);
   }
 }

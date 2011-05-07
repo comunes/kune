@@ -1,6 +1,4 @@
-CHARSET   "UTF-8  ";
-
-body {
+CHARSET    "UTF-8   "; body {
   background-color: white;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -797,7 +795,8 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
     white-space: nowrap;
 }
 */
-.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button, .gwt-FileUpload {
+.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button,.gwt-FileUpload
+  {
   font: 13px 'Ubuntu', arial;
   border: 2px solid #CCCCCC;
   cursor: pointer;
@@ -832,8 +831,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
 }
 
 .k-sn-mainpanel .x-btn button:active,.k-sn-mainpanel button:active,button.k-button:active
-  {
-  border-top-color: #ffffff;
+  { /* border-top-color: #ffffff; */
   background: #ffffff;
 }
 
@@ -888,6 +886,8 @@ button.k-button-left:hover {
 button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,input[type="reset"][disabled],input[type="button"][disabled]:active,input[type="button"][disabled],select[disabled]>input[type="button"],select[disabled]>input[type="button"]:active,input[type="submit"][disabled]:active,input[type="submit"][disabled],.k-button-disabled
   {
   color: gray !important;
+  border-color: #CCCCCC !important;
+  background: inherits !important;
 }
 
 /* end buttons */
@@ -1156,7 +1156,7 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                                 90);
+  kfilter: alpha(opacity =                                   90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1309,7 +1309,6 @@ table.k-folder-viewer {
 }
 
 /* end Decorated tabbar */
-
 .k-waveHolder {
   position: absolute;
   top: 0;
@@ -1318,7 +1317,18 @@ table.k-folder-viewer {
   right: 0;
 }
 
-.GWTUpld, table.GWTUpld td {
-    font-family: inherits !important;
-    font-size: 14px !important;
+.GWTUpld,table.GWTUpld td {
+  font-family: inherits !important;
+  font-size: 14px !important;
+}
+
+.x-form-check-wrap {
+    height: inherit;;
+    line-height: inherit;
+}
+
+.k-info-links {
+  text-decoration: underline;
+  color: gray;
+  cursor: pointer;
 }

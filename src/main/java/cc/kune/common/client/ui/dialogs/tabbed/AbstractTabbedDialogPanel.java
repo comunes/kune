@@ -37,37 +37,38 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private final String errorLabelId;
   private final String firstBtnId;
   private final String firstBtnTitle;
-  private final int height;
+  private int height;
   private String iconCls;
   private final NotifyLevelImages images;
   private MessageToolbar messageErrorBar;
-  private final int minHeight;
-  private final int minWidth;
   private final boolean modal;
   private final String sndBtnId;
   private final String sndBtnTitle;
   private DecoratedTabPanel tabPanel;
   private String title;
-  private final int width;
+  private int width;
 
-  public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
-      final int height, final int minWidth, final int minHeight, final boolean modal,
+  public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
       final NotifyLevelImages images, final String errorLabelId, final String firstBtnTitle,
       final String firstBtnId, final String sndBtnTitle, final String sndBtnId) {
     this.dialogId = dialogId;
     this.title = title;
-    this.width = width;
-    this.height = height;
     this.modal = modal;
     this.images = images;
     this.errorLabelId = errorLabelId;
-    // Not used:
-    this.minWidth = minWidth;
-    this.minHeight = minHeight;
     this.firstBtnTitle = firstBtnTitle;
     this.firstBtnId = firstBtnId;
     this.sndBtnTitle = sndBtnTitle;
     this.sndBtnId = sndBtnId;
+  }
+
+  public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
+      final int height, final boolean modal, final NotifyLevelImages images, final String errorLabelId,
+      final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
+      final String sndBtnId) {
+    this(dialogId, title, modal, images, errorLabelId, firstBtnTitle, firstBtnId, sndBtnTitle, sndBtnId);
+    this.width = width;
+    this.height = height;
   }
 
   @Override
@@ -91,7 +92,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private void createDialog() {
     dialog = new BasicTopDialog.Builder(dialogId, true, modal).autoscroll(true).width(width).height(
         height).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(
-        dialogId).sndButtonTitle(sndBtnTitle).title(title).build();
+        dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(sndBtnId).title(title).build();
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     tabPanel = new DecoratedTabPanel();
     tabPanel.getDeckPanel().setSize(String.valueOf(width), String.valueOf(height));

@@ -17,11 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.utils;
+package cc.kune.gspace.client.licensewizard.pages;
 
-public interface SimpleCallback {
-  /**
-   * Notifies this callback
-   */
-  void onCallback();
+import cc.kune.common.client.utils.SimpleCallback;
+
+import com.google.gwt.user.client.ui.IsWidget;
+
+public interface LicenseWizardFirstFormView extends IsWidget {
+
+  boolean isCopyleft();
+
+  void onChange(SimpleCallback onChange);
+
+  void reset();
+
 }

@@ -17,22 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.licensewizard.pages;
+package cc.kune.gspace.client.licensewizard.pages;
 
-import org.ourproject.kune.platf.client.View;
+import cc.kune.common.client.utils.SimpleCallback;
 
-import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.user.client.ui.IsWidget;
 
-public interface LicenseWizardTrdFormView extends View {
-    boolean isAllowComercial();
+public interface LicenseWizardFrdFormView extends IsWidget {
 
-    boolean isAllowModif();
+  String getSelectedLicense();
 
-    boolean isAllowModifShareAlike();
+  void onChange(SimpleCallback callback);
 
-    void onChange(Listener0 slot);
+  void reset();
 
-    void reset();
-
-    void setFlags(boolean isCopyleft, boolean isAppropiateForCulturalWorks, boolean isNonComercial);
+  void setFlags(boolean isCopyleft, boolean isAppropiateForCulturalWorks, boolean isNonComercial);
 }

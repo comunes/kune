@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.ui.utils;
+package cc.kune.core.client.ui;
 
 import org.cobogw.gwt.user.client.CSS;
 

@@ -52,6 +52,8 @@ public class EntityOptionsDefLicensePanel extends Composite implements EntityOpt
     flow.add(licenseImage);
     licenseImage.addStyleName("kune-pointer");
     change = new Button(i18n.t("Change"));
+    change.addStyleName("k-button");
+    flow.add(change);
     initWidget(flow);
     flow.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     flow.setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");

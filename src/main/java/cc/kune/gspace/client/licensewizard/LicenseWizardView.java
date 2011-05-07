@@ -17,16 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.licensewizard.pages;
+package cc.kune.gspace.client.licensewizard;
 
-import org.ourproject.kune.platf.client.View;
+import cc.kune.common.client.ui.dialogs.wizard.WizardDialogView;
 
-import com.calclab.suco.client.events.Listener0;
+import com.gwtplatform.mvp.client.View;
 
-public interface LicenseWizardFirstFormView extends View {
-    void onAnotherLicenseSelected(Listener0 slot);
+public interface LicenseWizardView extends WizardDialogView, View {
 
-    void onCopyLeftLicenseSelected(Listener0 slot);
+  String HEIGHT = "350px";
+  String WIDTH = "400px";
 
-    void reset();
 }

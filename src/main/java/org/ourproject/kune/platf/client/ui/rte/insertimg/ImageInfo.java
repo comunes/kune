@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertimg;
 import org.cobogw.gwt.user.client.CSS;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 
-import cc.kune.core.client.ui.utils.ContentPosition;
+import cc.kune.core.client.ui.ContentPosition;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;

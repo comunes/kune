@@ -17,11 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.utils;
+package cc.kune.gspace.client.licensewizard;
 
-public interface SimpleCallback {
-  /**
-   * Notifies this callback
-   */
-  void onCallback();
+public interface LicenseWizard {
+
+  void start(LicenseChooseCallback callback);
+
 }

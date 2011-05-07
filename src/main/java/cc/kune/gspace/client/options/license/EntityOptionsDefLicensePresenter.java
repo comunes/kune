@@ -19,86 +19,95 @@
  */
 package cc.kune.gspace.client.options.license;
 
+import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.gspace.client.licensewizard.LicenseChangeAction;
+import cc.kune.gspace.client.licensewizard.LicenseChooseCallback;
+import cc.kune.gspace.client.licensewizard.LicenseWizard;
 import cc.kune.gspace.client.options.EntityOptions;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.inject.Provider;
 
 public abstract class EntityOptionsDefLicensePresenter {
 
-    private final EntityOptions entityOptions;
-    // private final Provider<LicenseChangeAction> licChangeAction;
-    // private final Provider<LicenseWizard> licenseWizard;
-    protected final Session session;
-    private EntityOptionsDefLicenseView view;
+  private final EntityOptions entityOptions;
+  private final Provider<LicenseChangeAction> licChangeAction;
+  private final Provider<LicenseWizard> licenseWizard;
+  protected final Session session;
+  private EntityOptionsDefLicenseView view;
 
-    public EntityOptionsDefLicensePresenter(final EntityOptions entityOptions, final Session session) {
-        // final Provider<LicenseWizard> licenseWizard, final
-        // Provider<LicenseChangeAction> licChangeAction) {
-        this.entityOptions = entityOptions;
-        this.session = session;
-        // this.licenseWizard = licenseWizard;
-        // this.licChangeAction = licChangeAction;
-    }
+  public EntityOptionsDefLicensePresenter(final EntityOptions entityOptions, final Session session,
+      final Provider<LicenseWizard> licenseWizard, final Provider<LicenseChangeAction> licChangeAction) {
+    this.entityOptions = entityOptions;
+    this.session = session;
+    this.licenseWizard = licenseWizard;
+    this.licChangeAction = licChangeAction;
+  }
 
-    protected abstract boolean applicable();
+  protected abstract boolean applicable();
 
-    protected abstract LicenseDTO getCurrentDefLicense();
+  protected abstract LicenseDTO getCurrentDefLicense();
 
-    protected abstract StateToken getOperationToken();
+  protected abstract StateToken getOperationToken();
 
-    public IsWidget getView() {
-        return view;
-    }
+  public IsWidget getView() {
+    return view;
+  }
 
-    protected void init(final EntityOptionsDefLicenseView view) {
-        this.view = view;
-        entityOptions.addTab(view, view.getTabTitle());
-        setState();
-        view.getChange().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onLicenseClick();
-            }
+  protected void init(final EntityOptionsDefLicenseView view) {
+    this.view = view;
+    entityOptions.addTab(view, view.getTabTitle());
+    setState();
+    view.getChange().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        onChange();
+      }
+    });
+    view.getLicenseImage().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        onLicenseClick();
+      }
+    });
+  }
+
+  public void onChange() {
+    licenseWizard.get().start(new LicenseChooseCallback() {
+
+      @Override
+      public void onSelected(final LicenseDTO license) {
+        licChangeAction.get().changeLicense(getOperationToken(), license, new SimpleResponseCallback() {
+
+          @Override
+          public void onCancel() {
+          }
+
+          @Override
+          public void onSuccess() {
+            setLicense(license);
+          }
         });
-        view.getLicenseImage().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                // onChange();
-            }
-        });
-    }
+      }
+    });
+  }
 
-    // public void onChange() {
-    // licenseWizard.get().start(new Listener<LicenseDTO>() {
-    // @Override
-    // public void onEvent(final LicenseDTO license) {
-    // licChangeAction.get().changeLicense(getOperationToken(), license, new
-    // Listener0() {
-    // @Override
-    // public void onEvent() {
-    // setLicense(license);
-    // }
-    // });
-    // }
-    // });
-    // }
+  public void onLicenseClick() {
+    view.openWindow(getCurrentDefLicense().getUrl());
+  }
 
-    public void onLicenseClick() {
-        view.openWindow(getCurrentDefLicense().getUrl());
-    }
+  private void setLicense(final LicenseDTO license) {
+    view.setLicense(license);
+  }
 
-    private void setLicense(final LicenseDTO license) {
-        view.setLicense(license);
+  protected void setState() {
+    if (applicable()) {
+      setLicense(getCurrentDefLicense());
     }
-
-    protected void setState() {
-        if (applicable()) {
-            setLicense(getCurrentDefLicense());
-        }
-    }
+  }
 }

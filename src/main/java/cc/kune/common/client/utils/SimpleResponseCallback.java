@@ -17,15 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.licensewizard;
+package cc.kune.common.client.utils;
 
+public interface SimpleResponseCallback {
+    /**
+     * Notifies this callback of an accept response.
+     */
+    void onSuccess();
 
-import cc.kune.core.shared.dto.LicenseDTO;
-
-import com.calclab.suco.client.events.Listener;
-
-public interface LicenseWizard {
-
-    void start(Listener<LicenseDTO> listener);
-
+    /**
+     * Notifies this callback of a cancel.
+     */
+    void onCancel();
 }

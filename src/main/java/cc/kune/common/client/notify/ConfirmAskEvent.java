@@ -43,7 +43,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     public static void fire(final HasHandlers source, final java.lang.String title, final java.lang.String message,
             final java.lang.String acceptBtnMsg, final java.lang.String cancelBtnMsg,
             final java.lang.String acceptBtnTooltip, final java.lang.String cancelBtnTooltip,
-            final cc.kune.common.client.utils.SimpleCallback callback) {
+            final cc.kune.common.client.utils.SimpleResponseCallback callback) {
         source.fireEvent(new ConfirmAskEvent(title, message, acceptBtnMsg, cancelBtnMsg, acceptBtnTooltip,
                 cancelBtnTooltip, callback));
     }
@@ -54,7 +54,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
     java.lang.String acceptBtnMsg;
     java.lang.String acceptBtnTooltip;
-    cc.kune.common.client.utils.SimpleCallback callback;
+    cc.kune.common.client.utils.SimpleResponseCallback callback;
     java.lang.String cancelBtnMsg;
     java.lang.String cancelBtnTooltip;
     java.lang.String message;
@@ -70,7 +70,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
     public ConfirmAskEvent(final java.lang.String title, final java.lang.String message,
             final java.lang.String acceptBtnMsg, final java.lang.String cancelBtnMsg,
-            final cc.kune.common.client.utils.SimpleCallback callback) {
+            final cc.kune.common.client.utils.SimpleResponseCallback callback) {
         this.title = title;
         this.message = message;
         this.acceptBtnMsg = acceptBtnMsg;
@@ -81,7 +81,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     public ConfirmAskEvent(final java.lang.String title, final java.lang.String message,
             final java.lang.String acceptBtnMsg, final java.lang.String cancelBtnMsg,
             final java.lang.String acceptBtnTooltip, final java.lang.String cancelBtnTooltip,
-            final cc.kune.common.client.utils.SimpleCallback callback) {
+            final cc.kune.common.client.utils.SimpleResponseCallback callback) {
         this.title = title;
         this.message = message;
         this.acceptBtnMsg = acceptBtnMsg;
@@ -173,7 +173,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
         return TYPE;
     }
 
-    public cc.kune.common.client.utils.SimpleCallback getCallback() {
+    public cc.kune.common.client.utils.SimpleResponseCallback getCallback() {
         return callback;
     }
 

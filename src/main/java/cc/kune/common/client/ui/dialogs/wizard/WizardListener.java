@@ -17,12 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.licensewizard;
+package cc.kune.common.client.ui.dialogs.wizard;
 
-import org.ourproject.kune.platf.client.ui.dialogs.WizardDialogView;
+public interface WizardListener {
 
-public interface LicenseWizardView extends WizardDialogView {
+    void onBack();
 
-    int WIDTH = 400;
-    int HEIGHT = 450;
+    void onNext();
+
+    void onFinish();
+
+    void onCancel();
+
+    void onClose();
+
 }

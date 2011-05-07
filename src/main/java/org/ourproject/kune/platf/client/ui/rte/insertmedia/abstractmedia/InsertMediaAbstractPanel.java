@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertElementAbstractPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialogView;
 
-import cc.kune.core.client.ui.utils.ContentPosition;
+import cc.kune.core.client.ui.ContentPosition;
 
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;

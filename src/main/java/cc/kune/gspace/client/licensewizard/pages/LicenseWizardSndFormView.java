@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.licensewizard.pages;
+package cc.kune.gspace.client.licensewizard.pages;
 
-import org.ourproject.kune.platf.client.View;
+import com.google.gwt.user.client.ui.IsWidget;
 
-public interface LicenseWizardSndFormView extends View {
+public interface LicenseWizardSndFormView extends IsWidget {
 
-    boolean isCommonLicensesSelected();
+  boolean isCommonLicensesSelected();
 
-    void reset();
+  void reset();
 }

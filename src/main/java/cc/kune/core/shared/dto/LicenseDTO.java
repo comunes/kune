@@ -23,112 +23,112 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class LicenseDTO implements IsSerializable {
 
-    private String shortName;
+  private String description;
 
-    private String longName;
+  private String imageUrl;
 
-    private String description;
+  private boolean isCC;
 
-    private String url;
+  private boolean isCopyleft;
 
-    private boolean isCC;
+  private boolean isDeprecated;
 
-    private boolean isCopyleft;
+  private String longName;
 
-    private boolean isDeprecated;
+  private String rdf;
 
-    private String rdf;
+  private String shortName;
 
-    private String imageUrl;
+  private String url;
 
-    public LicenseDTO() {
-        this(null, null, null, null, false, false, false, null, null);
-    }
+  public LicenseDTO() {
+    this(null, null, null, null, false, false, false, null, null);
+  }
 
-    public LicenseDTO(final String shortName, final String longName, final String description, final String url,
-            final boolean isCC, final boolean isCopyleft, final boolean isDeprecated, final String rdf,
-            final String imageUrl) {
-        this.shortName = shortName;
-        this.longName = longName;
-        this.description = description;
-        this.url = url;
-        this.isCC = isCC;
-        this.isCopyleft = isCopyleft;
-        this.isDeprecated = isDeprecated;
-        this.rdf = rdf;
-        this.imageUrl = imageUrl;
-    }
+  public LicenseDTO(final String shortName, final String longName, final String description,
+      final String url, final boolean isCC, final boolean isCopyleft, final boolean isDeprecated,
+      final String rdf, final String imageUrl) {
+    this.shortName = shortName;
+    this.longName = longName;
+    this.description = description;
+    this.url = url;
+    this.isCC = isCC;
+    this.isCopyleft = isCopyleft;
+    this.isDeprecated = isDeprecated;
+    this.rdf = rdf;
+    this.imageUrl = imageUrl;
+  }
 
-    public String getShortName() {
-        return shortName;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
+  public String getImageUrl() {
+    return imageUrl;
+  }
 
-    public String getLongName() {
-        return longName;
-    }
+  public String getLongName() {
+    return longName;
+  }
 
-    public void setLongName(final String longName) {
-        this.longName = longName;
-    }
+  public String getRdf() {
+    return rdf;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getShortName() {
+    return shortName;
+  }
 
-    public void setDescription(final String description) {
-        this.description = description;
-    }
+  public String getUrl() {
+    return url;
+  }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+  public boolean isCC() {
+    return isCC;
+  }
 
-    public void setImageUrl(final String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+  public boolean isCopyleft() {
+    return isCopyleft;
+  }
 
-    public String getRdf() {
-        return rdf;
-    }
+  public boolean isDeprecated() {
+    return isDeprecated;
+  }
 
-    public void setRdf(final String rdf) {
-        this.rdf = rdf;
-    }
+  public void setCC(final boolean isCC) {
+    this.isCC = isCC;
+  }
 
-    public String getUrl() {
-        return url;
-    }
+  public void setCopyleft(final boolean isCopyleft) {
+    this.isCopyleft = isCopyleft;
+  }
 
-    public void setUrl(final String url) {
-        this.url = url;
-    }
+  public void setDeprecated(final boolean isDeprecated) {
+    this.isDeprecated = isDeprecated;
+  }
 
-    public boolean isCC() {
-        return isCC;
-    }
+  public void setDescription(final String description) {
+    this.description = description;
+  }
 
-    public boolean isCopyleft() {
-        return isCopyleft;
-    }
+  public void setImageUrl(final String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
 
-    public boolean isDeprecated() {
-        return isDeprecated;
-    }
+  public void setLongName(final String longName) {
+    this.longName = longName;
+  }
 
-    public void setCC(final boolean isCC) {
-        this.isCC = isCC;
-    }
+  public void setRdf(final String rdf) {
+    this.rdf = rdf;
+  }
 
-    public void setCopyleft(final boolean isCopyleft) {
-        this.isCopyleft = isCopyleft;
-    }
+  public void setShortName(final String shortName) {
+    this.shortName = shortName;
+  }
 
-    public void setDeprecated(final boolean isDeprecated) {
-        this.isDeprecated = isDeprecated;
-    }
+  public void setUrl(final String url) {
+    this.url = url;
+  }
 
 }

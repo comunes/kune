@@ -21,7 +21,7 @@ package cc.kune.core.client.services;
 
 
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.ui.utils.ContentPosition;
+import cc.kune.core.client.ui.ContentPosition;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 public class MediaUtils {

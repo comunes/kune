@@ -74,6 +74,10 @@ public class BasicDialog extends Composite implements BasicDialogView {
     return bottomPanel;
   }
 
+  public FlowPanel getBtnPanel() {
+    return btnPanel;
+  }
+
   @Override
   public HasClickHandlers getFirstBtn() {
     return firstBtn;
@@ -92,6 +96,10 @@ public class BasicDialog extends Composite implements BasicDialogView {
   @Override
   public HasDirectionalText getTitleText() {
     return title;
+  }
+
+  public void setFirstBtnEnabled(final boolean enabled) {
+    firstBtn.setEnabled(enabled);
   }
 
   public void setFirstBtnId(final String id) {
@@ -124,6 +132,10 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   public void setInnerWidth(final String width) {
     vp.setWidth(width);
+  }
+
+  public void setSecondBtnEnabled(final boolean enabled) {
+    secondBtn.setEnabled(enabled);
   }
 
   public void setSecondBtnId(final String id) {

@@ -39,16 +39,6 @@ public class GSpaceParts {
       final Provider<GroupOptionsToolsConf> gtc, final Provider<UserOptionsDefLicense> udl,
       final Provider<UserOptionsPublicSpaceConf> ups, final Provider<UserOptionsLogo> ul,
       final Provider<UserOptionsToolsConf> utc, final Provider<SitebarSearchPresenter> siteSearch) {
-    // , final Provider<GroupOptionsPanel> gop,
-    // , final Provider<UserOptionsPanel> uop,
-    // final Provider<GroupOptionsPublicSpaceConfPanel> gpsp,
-    // final Provider<GroupOptionsDefLicensePanel> gdlp,
-    // final Provider<GroupOptionsLogoPanel> glp,
-    // final Provider<GroupOptionsToolsConfPanel> gtcp,
-    // final Provider<UserOptionsLogoPanel> ulp,
-    // final Provider<UserOptionsDefLicensePanel> udlp,
-    // final Provider<UserOptionsPublicSpaceConfPanel> upsp,
-    // final Provider<UserOptionsToolsConfPanel> utcp
 
     session.onAppStart(true, new AppStartHandler() {
       @Override
