@@ -14,20 +14,21 @@ import com.google.inject.Provider;
 
 public class CoreParts {
 
-    @Inject
-    public CoreParts(final Session session, final Provider<GroupSNPresenter> groupMembersPresenter,
-            final Provider<UserSNPresenter> buddiesAndParticipationPresenter,
-            final Provider<GroupSNConfActions> groupMembersConfActions,
-            final Provider<UserSNConfActions> userSNConfActions, final Provider<SiteUserOptionsPresenter> userOptions) {
-        session.onAppStart(true, new AppStartHandler() {
-            @Override
-            public void onAppStart(final AppStartEvent event) {
-                groupMembersConfActions.get();
-                userSNConfActions.get();
-                groupMembersPresenter.get();
-                buddiesAndParticipationPresenter.get();
-                userOptions.get();
-            }
-        });
-    }
+  @Inject
+  public CoreParts(final Session session, final Provider<GroupSNPresenter> groupMembersPresenter,
+      final Provider<UserSNPresenter> buddiesAndParticipationPresenter,
+      final Provider<GroupSNConfActions> groupMembersConfActions,
+      final Provider<UserSNConfActions> userSNConfActions,
+      final Provider<SiteUserOptionsPresenter> userOptions) {
+    session.onAppStart(true, new AppStartHandler() {
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+        groupMembersConfActions.get();
+        userSNConfActions.get();
+        groupMembersPresenter.get();
+        buddiesAndParticipationPresenter.get();
+        userOptions.get();
+      }
+    });
+  }
 }

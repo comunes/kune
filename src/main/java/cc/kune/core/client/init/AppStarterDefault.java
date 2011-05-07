@@ -35,68 +35,70 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 
 public class AppStarterDefault implements AppStarter {
-    private final EventBus eventBus;
-    private final PrefetchUtilities prefetchUtilities;
-    private final Session session;
-    private final SiteServiceAsync siteService;
+  private final EventBus eventBus;
+  private final PrefetchUtilities prefetchUtilities;
+  private final Session session;
+  private final SiteServiceAsync siteService;
 
-    @Inject
-    public AppStarterDefault(final Session session, final SiteServiceAsync siteService, final EventBus eventBus,
-            final PrefetchUtilities prefetchUtilities) {
-        this.session = session;
-        this.siteService = siteService;
-        this.eventBus = eventBus;
-        this.prefetchUtilities = prefetchUtilities;
-        Window.addWindowClosingHandler(new ClosingHandler() {
-            @Override
-            public void onWindowClosing(final ClosingEvent event) {
-                eventBus.fireEvent(new AppStopEvent());
-            }
+  @Inject
+  public AppStarterDefault(final Session session, final SiteServiceAsync siteService,
+      final EventBus eventBus, final PrefetchUtilities prefetchUtilities) {
+    this.session = session;
+    this.siteService = siteService;
+    this.eventBus = eventBus;
+    this.prefetchUtilities = prefetchUtilities;
+    Window.addWindowClosingHandler(new ClosingHandler() {
+      @Override
+      public void onWindowClosing(final ClosingEvent event) {
+        eventBus.fireEvent(new AppStopEvent());
+      }
+    });
+  }
+
+  private void getInitData() {
+    siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
+      private void hideInitialPanels() {
+        RootPanel.get("kuneloading").setVisible(false);
+      }
+
+      @Override
+      public void onFailure(final Throwable error) {
+        eventBus.fireEvent(new ProgressHideEvent());
+        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+            "Error fetching initial data from Kune server"));
+        Log.debug(error.getMessage());
+        hideInitialPanels();
+      }
+
+      @Override
+      public void onSuccess(final InitDataDTO initData) {
+        session.setInitData(initData);
+        session.setCurrentUserInfo(initData.getUserInfo());
+        eventBus.fireEvent(new AppStartEvent(initData));
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            hideInitialPanels();
+          }
         });
-    }
+      }
+    });
+  }
 
-    private void getInitData() {
-        siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
-            private void hideInitialPanels() {
-            }
-
-            @Override
-            public void onFailure(final Throwable error) {
-                eventBus.fireEvent(new ProgressHideEvent());
-                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-                        "Error fetching initial data from Kune server"));
-                Log.debug(error.getMessage());
-                hideInitialPanels();
-            }
-
-            @Override
-            public void onSuccess(final InitDataDTO initData) {
-                session.setInitData(initData);
-                session.setCurrentUserInfo(initData.getUserInfo());
-                eventBus.fireEvent(new AppStartEvent(initData));
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                    @Override
-                    public void execute() {
-                        hideInitialPanels();
-                    }
-                });
-            }
-        });
-    }
-
-    @Override
-    public void start() {
-        prefetchUtilities.preFetchImpImages();
-        getInitData();
-        final Timer prefetchTimer = new Timer() {
-            @Override
-            public void run() {
-                prefetchUtilities.doTasksDeferred();
-            }
-        };
-        prefetchTimer.schedule(20000);
-    }
+  @Override
+  public void start() {
+    prefetchUtilities.preFetchImpImages();
+    getInitData();
+    final Timer prefetchTimer = new Timer() {
+      @Override
+      public void run() {
+        prefetchUtilities.doTasksDeferred();
+      }
+    };
+    prefetchTimer.schedule(20000);
+  }
 }

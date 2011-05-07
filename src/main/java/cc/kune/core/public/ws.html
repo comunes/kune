@@ -54,56 +54,122 @@
 <link type="text/css" rel="stylesheet" href="ws.css">
 <style type="text/css">
 body {
-    background-color: white;
-    color: black;
-    font-family: 'Ubuntu', Arial;
-    font-size: small;
-    overflow: hidden;
-    }
+  background-color: white;
+  color: black;
+  font-family: 'Ubuntu', Arial;
+  font-size: small;
+  overflow: hidden;
+}
+
+#kuneloading {
+  position: absolute;
+  left: 2%;
+  top: 2%;
+  z-index: 20001;
+  height: auto;
+  border: solid 2px #ccc;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#kuneloading a {
+  color: #225588;
+}
+
+#kuneloading .kuneloading-indicator {
+  color: #444;
+  font: bold 13px tahoma, arial, helvetica;
+  padding: 3px 3px 8px;
+  margin: 0;
+  height: auto;
+}
+
+#kuneloading-msg {
+  font: normal 10px arial, tahoma, sans-serif;
+}
+
 #k-home-prewrap {
-    margin-top: -22px;
+  margin-top: -22px;
 }
 
 #k-home-wrapper {
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    width: 665px;
-    min-width: 320px;
-}
-
-#k-home-logo {
-float: right;
-margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 665px;
+  min-width: 320px;
 }
 
 #k-home-ini {
-clear: both;
-font-size: 28px;
-color: #69312f;
-text-align: justify;
-padding: 50px 0;
-line-height: 1.3em;
+  clear: both;
+  font-size: 28px;
+  color: #69312f;
+  text-align: justify;
+  padding: 27px 0;
+  line-height: 1.3em;
 }
 
 #k-home-ini a {
-color: #803000;
-font-weight: bold;
+  color: #803000;
+  font-weight: bold;
 }
 
 #k-home-ini strong {
-font-weight: bold;
+  font-weight: bold;
 }
 
-
 #k-home-stats {
-font-size: 22px;
-color: #c87137;
-font-weight: bold;
+  font-size: 22px;
+  color: #c87137;
+  font-weight: bold;
+}
+
+#k-home-table {
+  display: table;
+}
+
+#k-home-header {
+  display: table-row;
+}
+
+#k-home-logo {
+  display: table-cell;
+  margin: 50px 0 22px 0;
+  float: right;
+}
+
+#k-home-summary {
+  display: table-cell;
+  font-size: 32px;
+  color: #dd8a3d;
+  font-weight: bold;
+  white-space: nowrap;
+  float: left;
+}
+
+#k-home-summary li {
+  padding-left: 41px;
+  background-repeat: no-repeat;
+  background-position: 0 .2em;
+  line-height: 45px;
+}
+
+#k-home-row {
+  display: table-row;
+}
+
+#k-home-left {
+  display: table-cell;
+}
+
+#k-home-right {
+  display: table-cell;
 }
 
 .banner {
-    margin: 30px;
+  margin: 30px;
 }
 </style>
 <!--[if IE 6]>
@@ -111,43 +177,75 @@ font-weight: bold;
 <![endif]-->
 </head>
 <body>
-<!-- Banner for wave errors -->
-<div class="banner" id="banner"></div>
-<!-- Autocomplete user/pass -->
-<form method="post" action="javascript:void(0)" style="display: none">
-<input type="text" id="address" name="address" value="" /> <input
-    type="password" id="password" name="password" value="" /> <input
-    type="submit" value="Login" id="login" /> <input type="submit"
-    class="wiab le button" name="signIn" id="signIn" value="Sign in">
-</form>
-<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-<noscript>
-<div
-    style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-Your web browser must have JavaScript enabled in order for this
-application to display correctly.</div>
-</noscript>
-<iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
-<iframe src="" id="__download" style="width: 0; height: 0; border: 0"></iframe>
-<!--<div id="kuneinitialcurtain"></div>-->
-<!--<div id="kuneloading">-->
-<!--<div class="kuneloading-indicator"><img src="images/kune-anim.gif"-->
-<!--	width="35" height="35" alt="kune-loading"-->
-<!--	style="margin-right: 3px; float: left; vertical-align: top;" />kune&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />-->
-<!--<span id="kuneloading-msg">Starting...</span></div>-->
-<!--</div>-->
-<div id="k-home-prewrap">
-<div id="k-home-wrapper">
-<div id="k-home-logo"><img src="logo-big-home.png" alt="" /></div>
-<div id="k-home-ini">Welcome! This site is a Kune node. Kune,
-which means "together" in esperanto, it's a network of interconnected
-sites like this one, where you can <strong>communicate, share, collaborate with
-others and create your web spaces easily</strong>. <a href="#signin">Join!</a>
-</div>
-<div id="k-home-stats" style="display: none;">
-Latests groups created
-</div>
-</div>
-</div>
+    <!-- Banner for wave errors -->
+    <div class="banner" id="banner"></div>
+    <!-- Autocomplete user/pass -->
+    <form method="post" action="javascript:void(0)" style="display: none">
+        <input type="text" id="address" name="address" value="" /> <input
+            type="password" id="password" name="password" value="" /> <input
+            type="submit" value="Login" id="login" /> <input type="submit"
+            class="wiab le button" name="signIn" id="signIn" value="Sign in">
+    </form>
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+        <div
+            style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+            Your web browser must have JavaScript enabled in order for this
+            application to display correctly.</div>
+    </noscript>
+    <iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
+    <iframe src="" id="__download" style="width: 0; height: 0; border: 0"></iframe>
+    <div id="kuneinitialcurtain"></div>
+    <div id="kuneloading">
+        <div class="kuneloading-indicator">
+            <img src="images/kune-anim-g.gif" width="35" height="35"
+                alt="kune-loading"
+                style="margin-right: 3px; float: left; vertical-align: top;" />kune&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <span id="kuneloading-msg">Starting...</span>
+        </div>
+    </div>
+    <div id="k-home-prewrap">
+        <div id="k-home-wrapper">
+            <div id="k-home-table">
+                <div id="k-home-header">
+                    <div id="k-home-logo">
+                        <img src="logo-big-home.png" alt="" />
+                    </div>
+                    <div id="k-home-summary">
+                        <ul>
+                            <li style="background-image: url(images/kune-intro-user.png);">Comunicate with others</li>
+                            <li style="background-image: url(images/kune-intro-group.png);">Work in collaboration</li>
+                            <li style="background-image: url(images/kune-intro-world.png);">And share with the world</li>
+                        </ul>
+                    </div>
+                    <!-- k-home-summary -->
+                </div>
+                <!-- div home-header -->
+                <div id="k-home-row">
+                    <div id="k-home-left">
+                        <div id="k-home-ini">
+                            Welcome! This site is a Kune node. Kune, which means
+                            "together" in esperanto, it's a network of interconnected
+                            sites like this one, where you can <strong>communicate,
+                                share, collaborate with others and create your web
+                                spaces easily</strong>. <a href="#signin">Join!</a>
+                        </div>
+                        <!--  div home-ini -->
+                        <div id="k-home-stats" style="display: none;">Latests
+                            groups created</div>
+                    </div>
+                    <!-- div k-home-left -->
+                    <div id="k-home-right">
+                        <!-- div home-stats -->
+                    </div>
+                    <!-- div k-home-right -->
+                </div>
+                <!-- div k-home-row -->
+            </div>
+            <!-- div home-table -->
+        </div>
+        <!-- home-wrapper -->
+    </div>
+    <!-- home-prewrap -->
 </body>
 </html>

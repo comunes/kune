@@ -22,10 +22,10 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="124.2033"
+     inkscape:cx="433.15576"
      inkscape:cy="320.54641"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -433,8 +433,8 @@
     </g>
     <g
        id="g8699-2"
-       transform="matrix(0.69032837,0,0,0.69032837,66.145968,308.75342)"
-       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       transform="matrix(0.68695614,0,0,0.68695614,66.346124,311.85587)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-group.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <path
@@ -892,8 +892,8 @@
          style="font-size:32px;font-weight:bold;fill:#dd8a3d;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold">Public</tspan></text>
     <g
        id="g8695-4"
-       transform="matrix(0.69032837,0,0,0.69032837,102.02122,263.35464)"
-       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       transform="matrix(0.68695614,0,0,0.68695614,102.04613,266.67887)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-user.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <path
@@ -924,9 +924,9 @@
          transform="matrix(4.9493694,0,0,4.9493694,-42.107891,748.42974)" />
     </g>
     <g
-       transform="matrix(0.69032837,0,0,0.69032837,30.270728,354.20632)"
+       transform="matrix(0.68695614,0,0,0.68695614,30.646132,357.08674)"
        id="g3297"
-       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-world.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <path
