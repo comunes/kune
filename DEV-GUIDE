@@ -6,9 +6,13 @@
 
 ==Development Environment==
 
+===Preliminars===
+
+This guide will help you to develop in Kune. It deals with the prerrequisites of Kune and the setup of its environment. You should follow each step carefully. Make sure you deal with the following initial steps and only afterwards proceed to the details of the installation of Kune. As mentioned in the subsection "1.7:Install Kune" of this guide, you will need by then the document INSTALL (found in kune/trunk/INSTALL ), where you will find the details of the installation.
+
 ===Initial steps===
 
-Install some basic tools (if don't have it). In debian and derivatives:
+Install some basic tools (if you don't have them). In Ubuntu, Debian and derivatives:
 
  sudo apt-get install subversion maven2 mercurial 
 
@@ -100,7 +104,7 @@ http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
 
 ===Install Kune===
 
-Install Kune (follow the trunk/INSTALL file instructions) and run Kune for the first time. This will initialize the database, and configure the XMPP server, for instance.
+Only after making sure the previous steps have been finished, you can proceed to the installation of Kune. For doing so, you need to follow the instructions of the document INSTALL, available in kune/trunk/INSTALL. Afterwards you will be able to run Kune for the first time. This will initialize the database, and configure the XMPP server, among other things.
 
 ===GWT's Hosted Mode===
 
