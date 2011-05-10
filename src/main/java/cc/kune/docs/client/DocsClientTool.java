@@ -27,7 +27,7 @@ import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.gspace.client.tool.old.FoldableAbstractClientTool;
+import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;

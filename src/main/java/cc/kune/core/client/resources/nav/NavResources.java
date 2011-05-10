@@ -24,90 +24,96 @@ import com.google.gwt.resources.client.ImageResource;
 
 public interface NavResources extends ClientBundle {
 
-    @Source("blog.png")
-    ImageResource blog();
+  @Source("barter.png")
+  ImageResource barter();
 
-    @Source("blog_add.png")
-    ImageResource blogAdd();
+  @Source("barter_add.png")
+  ImageResource barterAdd();
 
-    @Source("download.png")
-    ImageResource download();
+  @Source("blog.png")
+  ImageResource blog();
 
-    @Source("film.png")
-    ImageResource film();
+  @Source("blog_add.png")
+  ImageResource blogAdd();
 
-    @Source("folder.png")
-    ImageResource folder();
+  @Source("download.png")
+  ImageResource download();
 
-    @Source("folder_add.png")
-    ImageResource folderAdd();
+  @Source("film.png")
+  ImageResource film();
 
-    @Source("gallery.png")
-    ImageResource gallery();
+  @Source("folder.png")
+  ImageResource folder();
 
-    @Source("gallery_add.png")
-    ImageResource galleryAdd();
+  @Source("folder_add.png")
+  ImageResource folderAdd();
 
-    @Source("go.png")
-    ImageResource go();
+  @Source("gallery.png")
+  ImageResource gallery();
 
-    @Source("music.png")
-    ImageResource music();
+  @Source("gallery_add.png")
+  ImageResource galleryAdd();
 
-    @Source("page.png")
-    ImageResource page();
+  @Source("go.png")
+  ImageResource go();
 
-    @Source("page_add.png")
-    ImageResource pageAdd();
+  @Source("music.png")
+  ImageResource music();
 
-    @Source("page_excel.png")
-    ImageResource pageExcel();
+  @Source("page.png")
+  ImageResource page();
 
-    @Source("page_pdf.png")
-    ImageResource pagePdf();
+  @Source("page_add.png")
+  ImageResource pageAdd();
 
-    @Source("page_pps.png")
-    ImageResource pagePps();
+  @Source("page_excel.png")
+  ImageResource pageExcel();
 
-    @Source("page_text.png")
-    ImageResource pageText();
+  @Source("page_pdf.png")
+  ImageResource pagePdf();
 
-    @Source("page_word.png")
-    ImageResource pageWord();
+  @Source("page_pps.png")
+  ImageResource pagePps();
 
-    @Source("page_zip.png")
-    ImageResource pageZip();
+  @Source("page_text.png")
+  ImageResource pageText();
 
-    @Source("picture.png")
-    ImageResource picture();
+  @Source("page_word.png")
+  ImageResource pageWord();
 
-    @Source("post.png")
-    ImageResource post();
+  @Source("page_zip.png")
+  ImageResource pageZip();
 
-    @Source("post_add.png")
-    ImageResource postAdd();
+  @Source("picture.png")
+  ImageResource picture();
 
-    @Source("refresh.png")
-    ImageResource refresh();
+  @Source("post.png")
+  ImageResource post();
 
-    @Source("room.png")
-    ImageResource room();
+  @Source("post_add.png")
+  ImageResource postAdd();
 
-    @Source("room_add.png")
-    ImageResource roomAdd();
+  @Source("refresh.png")
+  ImageResource refresh();
 
-    @Source("upload.png")
-    ImageResource upload();
+  @Source("room.png")
+  ImageResource room();
 
-    @Source("wiki.png")
-    ImageResource wiki();
+  @Source("room_add.png")
+  ImageResource roomAdd();
 
-    @Source("wiki_add.png")
-    ImageResource wikiAdd();
+  @Source("upload.png")
+  ImageResource upload();
 
-    @Source("wikipage.png")
-    ImageResource wikipage();
+  @Source("wiki.png")
+  ImageResource wiki();
 
-    @Source("wikipage_add.png")
-    ImageResource wikipageAdd();
+  @Source("wiki_add.png")
+  ImageResource wikiAdd();
+
+  @Source("wikipage.png")
+  ImageResource wikipage();
+
+  @Source("wikipage_add.png")
+  ImageResource wikipageAdd();
 }

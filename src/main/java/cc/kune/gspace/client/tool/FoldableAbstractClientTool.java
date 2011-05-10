@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.tool.old;
+package cc.kune.gspace.client.tool;
 
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;

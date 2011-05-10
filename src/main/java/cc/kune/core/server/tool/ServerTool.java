@@ -32,21 +32,21 @@ import cc.kune.domain.User;
  */
 public interface ServerTool {
 
-    void checkTypesBeforeContainerCreation(String parentTypeId, String typeId);
+  void checkTypesBeforeContainerCreation(String parentTypeId, String typeId);
 
-    void checkTypesBeforeContentCreation(String parentTypeId, String typeId);
+  void checkTypesBeforeContentCreation(String parentTypeId, String typeId);
 
-    String getName();
+  String getName();
 
-    String getRootName();
+  String getRootName();
 
-    ServerToolTarget getTarget();
+  ServerToolTarget getTarget();
 
-    Group initGroup(User user, Group group, Object... vars);
+  Group initGroup(User user, Group group, Object... vars);
 
-    void onCreateContainer(Container container, Container parent);
+  void onCreateContainer(Container container, Container parent);
 
-    void onCreateContent(Content content, Container parent);
+  void onCreateContent(Content content, Container parent);
 
-    void register(ServerToolRegistry registry);
+  void register(ServerToolRegistry registry);
 }

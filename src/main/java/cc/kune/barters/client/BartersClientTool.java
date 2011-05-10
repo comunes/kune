@@ -17,13 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.blogs.client;
+package cc.kune.barters.client;
 
-import static cc.kune.blogs.shared.BlogsConstants.NAME;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_BLOG;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_ROOT;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.barters.shared.BartersConstants.NAME;
+import static cc.kune.barters.shared.BartersConstants.TYPE_BARTER;
+import static cc.kune.barters.shared.BartersConstants.TYPE_FOLDER;
+import static cc.kune.barters.shared.BartersConstants.TYPE_ROOT;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
@@ -32,25 +31,25 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
-public class BlogsClientTool extends FoldableAbstractClientTool {
+public class BartersClientTool extends FoldableAbstractClientTool {
 
   private final NavResources navResources;
 
   @Inject
-  public BlogsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+  public BartersClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("blogs"), toolSelector, cntCapRegistry);
+    super(NAME, i18n.t("barters"), toolSelector, cntCapRegistry);
     this.navResources = navResources;
 
-    // registerAclEditableTypes();
-    registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-    registerDragableTypes(TYPE_UPLOADEDFILE);
-    registerDropableTypes(TYPE_ROOT);
-    registerPublishModerableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-    registerRateableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-    registerRenamableTypes(TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE);
-    registerTageableTypes(TYPE_BLOG, TYPE_UPLOADEDFILE, TYPE_POST);
-    // registerTranslatableTypes();
+    // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+    registerAuthorableTypes(TYPE_BARTER);
+    registerDragableTypes(TYPE_BARTER, TYPE_FOLDER);
+    registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
+    // registerPublishModerableTypes();
+    registerRateableTypes(TYPE_BARTER);
+    registerRenamableTypes(TYPE_FOLDER, TYPE_BARTER);
+    registerTageableTypes(TYPE_BARTER);
+    registerTranslatableTypes(TYPE_FOLDER, TYPE_BARTER);
 
     registerIcons();
   }
@@ -61,10 +60,9 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOT, navResources.blog());
-    registerContentTypeIcon(TYPE_BLOG, navResources.blog());
-    registerContentTypeIcon(TYPE_POST, navResources.post());
-    registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+    registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIcon(TYPE_ROOT, navResources.folder());
+    registerContentTypeIcon(TYPE_BARTER, navResources.barter());
   }
 
 }

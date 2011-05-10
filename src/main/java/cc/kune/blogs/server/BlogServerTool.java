@@ -45,110 +45,111 @@ import com.google.inject.Inject;
 
 public class BlogServerTool implements ServerTool {
 
-    public static final String ROOT_NAME = "blogs";
+  public static final String ROOT_NAME = "blogs";
 
-    private final ToolConfigurationManager configurationManager;
-    private final ContainerManager containerManager;
-    private final ContentManager contentManager;
-    private final I18nTranslationService i18n;
+  private final ToolConfigurationManager configurationManager;
+  private final ContainerManager containerManager;
+  private final ContentManager contentManager;
+  private final I18nTranslationService i18n;
 
-    @Inject
-    public BlogServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-            final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
-        this.contentManager = contentManager;
-        this.containerManager = containerManager;
-        this.configurationManager = configurationManager;
-        this.i18n = translationService;
+  @Inject
+  public BlogServerTool(final ContentManager contentManager, final ContainerManager containerManager,
+      final ToolConfigurationManager configurationManager,
+      final I18nTranslationService translationService) {
+    this.contentManager = contentManager;
+    this.containerManager = containerManager;
+    this.configurationManager = configurationManager;
+    this.i18n = translationService;
+  }
+
+  void checkContainerTypeId(final String parentTypeId, final String typeId) {
+    if (typeId.equals(TYPE_BLOG)) {
+      // ok valid container
+      if ((typeId.equals(TYPE_BLOG) && parentTypeId.equals(TYPE_ROOT))) {
+        // ok
+      } else {
+        throw new ContainerNotPermittedException();
+      }
+    } else {
+      throw new ContainerNotPermittedException();
     }
+  }
 
-    void checkContainerTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_BLOG)) {
-            // ok valid container
-            if ((typeId.equals(TYPE_BLOG) && parentTypeId.equals(TYPE_ROOT))) {
-                // ok
-            } else {
-                throw new ContainerNotPermittedException();
-            }
-        } else {
-            throw new ContainerNotPermittedException();
-        }
+  void checkContentTypeId(final String parentTypeId, final String typeId) {
+    if (typeId.equals(TYPE_UPLOADEDFILE) || typeId.equals(TYPE_POST)) {
+      // ok valid content
+      if ((typeId.equals(TYPE_UPLOADEDFILE) && parentTypeId.equals(TYPE_BLOG))
+          || (typeId.equals(TYPE_POST) && parentTypeId.equals(TYPE_BLOG))) {
+        // ok
+      } else {
+        throw new ContentNotPermittedException();
+      }
+
+    } else {
+      throw new ContentNotPermittedException();
     }
+  }
 
-    void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_UPLOADEDFILE) || typeId.equals(TYPE_POST)) {
-            // ok valid content
-            if ((typeId.equals(TYPE_UPLOADEDFILE) && parentTypeId.equals(TYPE_BLOG))
-                    || (typeId.equals(TYPE_POST) && parentTypeId.equals(TYPE_BLOG))) {
-                // ok
-            } else {
-                throw new ContentNotPermittedException();
-            }
+  @Override
+  public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
+    checkContainerTypeId(parentTypeId, typeId);
+  }
 
-        } else {
-            throw new ContentNotPermittedException();
-        }
-    }
+  @Override
+  public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
+    checkContentTypeId(parentTypeId, typeId);
+  }
 
-    @Override
-    public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
-        checkContainerTypeId(parentTypeId, typeId);
-    }
+  @Override
+  public String getName() {
+    return NAME;
+  }
 
-    @Override
-    public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
-        checkContentTypeId(parentTypeId, typeId);
-    }
+  @Override
+  public String getRootName() {
+    return ROOT_NAME;
+  }
 
-    @Override
-    public String getName() {
-        return NAME;
-    }
+  @Override
+  public ServerToolTarget getTarget() {
+    return ServerToolTarget.forBoth;
+  }
 
-    @Override
-    public String getRootName() {
-        return ROOT_NAME;
-    }
+  @Override
+  public Group initGroup(final User user, final Group group, final Object... otherVars) {
+    final ToolConfiguration config = new ToolConfiguration();
+    final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+    config.setRoot(rootFolder);
+    group.setToolConfig(NAME, config);
+    configurationManager.persist(config);
 
-    @Override
-    public ServerToolTarget getTarget() {
-        return ServerToolTarget.forBoth;
-    }
+    final I18nLanguage language = user.getLanguage();
+    final Container blog = containerManager.createFolder(group, rootFolder, i18n.t("Blog sample"),
+        language, TYPE_BLOG);
 
-    @Override
-    public Group initGroup(final User user, final Group group, final Object... otherVars) {
-        final ToolConfiguration config = new ToolConfiguration();
-        final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-        config.setRoot(rootFolder);
-        group.setToolConfig(NAME, config);
-        configurationManager.persist(config);
+    final Content content = contentManager.createContent(i18n.t("A post sample"),
+        i18n.t("This is only a post sample. You can edit it, rename the post and this blog"), user,
+        blog, TYPE_POST);
+    content.addAuthor(user);
+    content.setLanguage(language);
+    content.setTypeId(TYPE_POST);
+    content.setStatus(ContentStatus.publishedOnline);
 
-        final I18nLanguage language = user.getLanguage();
-        final Container blog = containerManager.createFolder(group, rootFolder, i18n.t("Blog sample"), language,
-                TYPE_BLOG);
+    contentManager.save(user, content);
+    return group;
+  }
 
-        final Content content = contentManager.createContent(i18n.t("A post sample"),
-                i18n.t("This is only a post sample. You can edit it, rename the post and this blog"), user, blog,
-                TYPE_POST);
-        content.addAuthor(user);
-        content.setLanguage(language);
-        content.setTypeId(TYPE_POST);
-        content.setStatus(ContentStatus.publishedOnline);
+  @Override
+  public void onCreateContainer(final Container container, final Container parent) {
+  }
 
-        contentManager.save(user, content);
-        return group;
-    }
+  @Override
+  public void onCreateContent(final Content content, final Container parent) {
+  }
 
-    @Override
-    public void onCreateContainer(final Container container, final Container parent) {
-    }
-
-    @Override
-    public void onCreateContent(final Content content, final Container parent) {
-    }
-
-    @Override
-    @Inject
-    public void register(final ServerToolRegistry registry) {
-        registry.register(this);
-    }
+  @Override
+  @Inject
+  public void register(final ServerToolRegistry registry) {
+    registry.register(this);
+  }
 }

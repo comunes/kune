@@ -19,23 +19,30 @@
  */
 package cc.kune.wave.server;
 
+import java.net.URL;
+
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import com.google.wave.api.Wavelet;
 
 public interface KuneWaveManager {
+  public static final URL WITHOUT_GADGET = null;
 
-    void addParticipant(WaveRef waveName, String author, String userWhoAdd, String newParticipant);
+  void addGadget(WaveRef waveName, String author, String gadgetUrl);
 
-    WaveRef createWave(String message, ParticipantId participants);
+  void addParticipant(WaveRef waveName, String author, String userWhoAdd, String newParticipant);
 
-    WaveRef createWave(String title, String message, ParticipantId... participantsArray);
+  WaveRef createWave(String message, ParticipantId participants);
 
-    Wavelet fetchWavelet(WaveRef waveRef, String author);
+  WaveRef createWave(String title, String message, ParticipantId... participantsArray);
 
-    boolean isParticipant(Wavelet wavelet, String user);
+  WaveRef createWave(String title, String message, URL gadgetUrl, ParticipantId... participantsArray);
 
-    void setTitle(WaveRef waveName, String title, String author);
+  Wavelet fetchWavelet(WaveRef waveRef, String author);
+
+  boolean isParticipant(Wavelet wavelet, String user);
+
+  void setTitle(WaveRef waveName, String title, String author);
 
 }

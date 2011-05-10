@@ -37,99 +37,102 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 
 public class GalleryServerTool implements ServerTool {
-    public static final String NAME = "gallery";
-    public static final String ROOT_NAME = "gallery";
-    public static final String TYPE_ALBUM = NAME + "." + "album";
-    public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String NAME = "gallery";
+  public static final String ROOT_NAME = "gallery";
+  public static final String TYPE_ALBUM = NAME + "." + "album";
+  public static final String TYPE_ROOT = NAME + "." + "root";
 
-    public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
+  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
-    private final ToolConfigurationManager configurationManager;
-    private final ContainerManager containerManager;
-    private final I18nTranslationService i18n;
+  private final ToolConfigurationManager configurationManager;
+  private final ContainerManager containerManager;
+  private final I18nTranslationService i18n;
 
-    @Inject
-    public GalleryServerTool(final ContainerManager containerManager,
-            final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
-        this.containerManager = containerManager;
-        this.configurationManager = configurationManager;
-        this.i18n = translationService;
+  @Inject
+  public GalleryServerTool(final ContainerManager containerManager,
+      final ToolConfigurationManager configurationManager,
+      final I18nTranslationService translationService) {
+    this.containerManager = containerManager;
+    this.configurationManager = configurationManager;
+    this.i18n = translationService;
+  }
+
+  void checkContainerTypeId(final String parentTypeId, final String typeId) {
+    if (typeId.equals(TYPE_ALBUM)) {
+      // ok valid container
+      if ((typeId.equals(TYPE_ALBUM) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_ALBUM)))) {
+        // ok
+      } else {
+        throw new ContainerNotPermittedException();
+      }
+    } else {
+      throw new ContainerNotPermittedException();
     }
+  }
 
-    void checkContainerTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_ALBUM)) {
-            // ok valid container
-            if ((typeId.equals(TYPE_ALBUM) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_ALBUM)))) {
-                // ok
-            } else {
-                throw new ContainerNotPermittedException();
-            }
-        } else {
-            throw new ContainerNotPermittedException();
-        }
+  void checkContentTypeId(final String parentTypeId, final String typeId) {
+    if (typeId.equals(TYPE_UPLOADEDFILE)) {
+      // ok valid content
+      if (typeId.equals(TYPE_UPLOADEDFILE)
+          && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_ALBUM))) {
+        // ok
+      } else {
+        throw new ContentNotPermittedException();
+      }
+    } else {
+      throw new ContentNotPermittedException();
     }
+  }
 
-    void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_UPLOADEDFILE)) {
-            // ok valid content
-            if (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_ALBUM))) {
-                // ok
-            } else {
-                throw new ContentNotPermittedException();
-            }
-        } else {
-            throw new ContentNotPermittedException();
-        }
-    }
+  @Override
+  public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
+    checkContainerTypeId(parentTypeId, typeId);
+  }
 
-    @Override
-    public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
-        checkContainerTypeId(parentTypeId, typeId);
-    }
+  @Override
+  public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
+    checkContentTypeId(parentTypeId, typeId);
+  }
 
-    @Override
-    public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
-        checkContentTypeId(parentTypeId, typeId);
-    }
+  @Override
+  public String getName() {
+    return NAME;
+  }
 
-    @Override
-    public String getName() {
-        return NAME;
-    }
+  @Override
+  public String getRootName() {
+    return ROOT_NAME;
+  }
 
-    @Override
-    public String getRootName() {
-        return ROOT_NAME;
-    }
+  @Override
+  public ServerToolTarget getTarget() {
+    return ServerToolTarget.forBoth;
+  }
 
-    @Override
-    public ServerToolTarget getTarget() {
-        return ServerToolTarget.forBoth;
-    }
+  @Override
+  public Group initGroup(final User user, final Group group, final Object... otherVars) {
+    final ToolConfiguration config = new ToolConfiguration();
+    final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+    config.setRoot(rootFolder);
+    group.setToolConfig(NAME, config);
+    configurationManager.persist(config);
 
-    @Override
-    public Group initGroup(final User user, final Group group, final Object... otherVars) {
-        final ToolConfiguration config = new ToolConfiguration();
-        final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-        config.setRoot(rootFolder);
-        group.setToolConfig(NAME, config);
-        configurationManager.persist(config);
+    containerManager.createFolder(group, rootFolder, i18n.t("Album sample"), user.getLanguage(),
+        TYPE_ALBUM);
+    return group;
+  }
 
-        containerManager.createFolder(group, rootFolder, i18n.t("Album sample"), user.getLanguage(), TYPE_ALBUM);
-        return group;
-    }
+  @Override
+  public void onCreateContainer(final Container container, final Container parent) {
+  }
 
-    @Override
-    public void onCreateContainer(final Container container, final Container parent) {
-    }
+  @Override
+  public void onCreateContent(final Content content, final Container parent) {
+  }
 
-    @Override
-    public void onCreateContent(final Content content, final Container parent) {
-    }
-
-    @Override
-    @Inject
-    public void register(final ServerToolRegistry registry) {
-        registry.register(this);
-    }
+  @Override
+  @Inject
+  public void register(final ServerToolRegistry registry) {
+    registry.register(this);
+  }
 }

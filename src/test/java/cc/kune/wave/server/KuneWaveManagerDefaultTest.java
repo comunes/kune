@@ -24,6 +24,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.net.URL;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,12 +41,22 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
 
   private static final String MESSAGE = "testing";
   private static final String NEW_PARTICIPANT = "newparti";
+  private static final String TEST_GADGET = "http://wave-api.appspot.com/public/gadgets/areyouin/gadget.xml";
   private static final String TITLE = "title";
   private static final String TITLENEW = "titleNew";
   @Inject
   KuneWaveManagerDefault manager;
   @Inject
   ParticipantUtils participantUtils;
+
+  @Test
+  public void addGadget() throws DefaultException, IOException {
+    doLogin();
+    final WaveRef waveletName = manager.createWave(TITLE, MESSAGE,
+        participantUtils.of(getSiteAdminShortName()));
+    assertNotNull(waveletName);
+    manager.addGadget(waveletName, getSiteAdminShortName(), TEST_GADGET);
+  }
 
   private void addParticipant(final String whoAdds) throws IOException {
     doLogin();
@@ -76,6 +87,17 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   public void createWave() throws DefaultException, IOException {
     doLogin();
     final WaveRef waveletName = manager.createWave(MESSAGE, participantUtils.of(getSiteAdminShortName()));
+    assertNotNull(waveletName);
+    final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
+    assertNotNull(fetchWavelet);
+    assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
+  }
+
+  @Test
+  public void createWaveWithGadget() throws DefaultException, IOException {
+    doLogin();
+    final WaveRef waveletName = manager.createWave(TITLE, MESSAGE, new URL(TEST_GADGET),
+        participantUtils.of(getSiteAdminShortName()));
     assertNotNull(waveletName);
     final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);

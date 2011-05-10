@@ -52,6 +52,7 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.validator.NotNull;
 
+import cc.kune.barters.shared.BartersConstants;
 import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -261,7 +262,7 @@ public class Content implements HasStateToken {
   @Transient
   public boolean isWave() {
     return (typeId.equals(DocsConstants.TYPE_DOCUMENT)) || typeId.equals(WikiConstants.TYPE_WIKIPAGE)
-        || (typeId.equals(BlogsConstants.TYPE_POST));
+        || (typeId.equals(BlogsConstants.TYPE_POST) || typeId.equals(BartersConstants.TYPE_BARTER));
   }
 
   public void removeAuthor(final User user) {

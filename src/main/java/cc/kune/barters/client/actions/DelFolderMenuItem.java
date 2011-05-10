@@ -17,19 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.tool.old;
+package cc.kune.barters.client.actions;
 
-import cc.kune.gspace.client.tool.selector.ToolSelector;
-import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
-import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.actions.DelContainerMenuItem;
 
-public abstract class AbstractClientTool {
+import com.google.inject.Inject;
 
-    public AbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector) {
-        final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName, toolSelector);
-        final ToolSelectorItemPanel panel = new ToolSelectorItemPanel();
-        presenter.init(panel);
+public class DelFolderMenuItem extends DelContainerMenuItem {
+
+    @Inject
+    public DelFolderMenuItem(final I18nTranslationService i18n, final DelContainerAction action, final CoreResources res) {
+        super(i18n, action, res);
     }
 
-    public abstract String getName();
 }

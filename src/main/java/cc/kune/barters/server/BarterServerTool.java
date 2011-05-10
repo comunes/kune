@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,50 +17,72 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.docs.server;
+package cc.kune.barters.server;
 
-import static cc.kune.docs.shared.DocsConstants.NAME;
-import static cc.kune.docs.shared.DocsConstants.ROOT_NAME;
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
-import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
-import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
-import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.barters.shared.BartersConstants.NAME;
+import static cc.kune.barters.shared.BartersConstants.ROOT_NAME;
+import static cc.kune.barters.shared.BartersConstants.TYPE_BARTER;
+import static cc.kune.barters.shared.BartersConstants.TYPE_FOLDER;
+import static cc.kune.barters.shared.BartersConstants.TYPE_ROOT;
 
+import java.net.URL;
 import java.util.Date;
+
+import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
+import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.ToolConfigurationManager;
-import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.tool.ServerToolTarget;
+import cc.kune.core.server.tool.ServerWaveTool;
+import cc.kune.core.server.utils.UrlUtils;
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.User;
+import cc.kune.wave.server.KuneWaveManager;
 
 import com.google.inject.Inject;
 
-public class DocumentServerTool implements ServerTool {
+public class BarterServerTool implements ServerWaveTool {
+
+  private static final String BARTER_GADGET = "http://op-org.appspot.com/troco_wave_gadget/org.ourproject.troco.client.TrocoWaveGadget.gadget.xml";
   private final ToolConfigurationManager configurationManager;
   private final ContainerManager containerManager;
   private final ContentManager contentManager;
+  private final URL gadgetUrl;
   private final I18nTranslationService i18n;
+  private final KuneWaveManager waveManager;
 
   @Inject
-  public DocumentServerTool(final ContentManager contentManager,
-      final ContainerManager containerManager, final ToolConfigurationManager configurationManager,
-      final I18nTranslationService translationService) {
+  public BarterServerTool(final ContentManager contentManager, final ContainerManager containerManager,
+      final ToolConfigurationManager configurationManager,
+      final I18nTranslationService translationService, final KuneWaveManager waveManager) {
     this.contentManager = contentManager;
     this.containerManager = containerManager;
     this.configurationManager = configurationManager;
     this.i18n = translationService;
+    this.waveManager = waveManager;
+    gadgetUrl = UrlUtils.of(BARTER_GADGET);
+  }
+
+  private void addGadget(final Content content) {
+    try {
+      waveManager.addGadget(JavaWaverefEncoder.decodeWaveRefFromPath(content.getWaveId()),
+          content.getAuthors().get(0).getShortName(), BARTER_GADGET);
+    } catch (final InvalidWaveRefException e) {
+      throw new DefaultException("Error creating barter");
+    }
   }
 
   void checkContainerTypeId(final String parentTypeId, final String typeId) {
@@ -77,15 +99,15 @@ public class DocumentServerTool implements ServerTool {
   }
 
   void checkContentTypeId(final String parentTypeId, final String typeId) {
-    if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE)) {
+    if (typeId.equals(TYPE_BARTER)) {
       // ok valid content
-      if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
-          || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
+      final boolean parentIsFolderOrRoot = parentTypeId.equals(TYPE_ROOT)
+          || parentTypeId.equals(TYPE_FOLDER);
+      if ((typeId.equals(TYPE_BARTER) && parentIsFolderOrRoot)) {
         // ok
       } else {
         throw new ContentNotPermittedException();
       }
-
     } else {
       throw new ContentNotPermittedException();
     }
@@ -102,6 +124,11 @@ public class DocumentServerTool implements ServerTool {
   }
 
   @Override
+  public URL getGadgetUrl() {
+    return gadgetUrl;
+  }
+
+  @Override
   public String getName() {
     return NAME;
   }
@@ -113,43 +140,53 @@ public class DocumentServerTool implements ServerTool {
 
   @Override
   public ServerToolTarget getTarget() {
-    return ServerToolTarget.forBoth;
+    return ServerToolTarget.forUsers;
   }
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     final ToolConfiguration config = new ToolConfiguration();
     final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+    setContainerBartersAcl(rootFolder);
     config.setRoot(rootFolder);
     group.setToolConfig(NAME, config);
     configurationManager.persist(config);
-
-    final boolean hasVars = otherVars.length >= 2;
-    final String title = hasVars ? (String) otherVars[0] : i18n.t("Document sample");
-    final String body = hasVars ? (String) otherVars[1] : i18n.t("This is only a sample of document");
-
-    final Content content = contentManager.createContent(title, body, user, rootFolder,
-        DocsConstants.TYPE_DOCUMENT);
+    final Content content = contentManager.createContent(
+        i18n.t("Barter sample"),
+        i18n.t("This is only a barter sample. You can invite other participants to this barter, but also publish to the general public allowing you to share services, goods, etc."),
+        user, rootFolder, TYPE_BARTER, gadgetUrl);
     content.addAuthor(user);
     content.setLanguage(user.getLanguage());
-    content.setTypeId(TYPE_DOCUMENT);
+    content.setTypeId(TYPE_BARTER);
     content.setStatus(ContentStatus.publishedOnline);
-    content.setPublishedOn(new Date());
-    group.setDefaultContent(content);
+    contentManager.save(user, content);
     return group;
   }
 
   @Override
   public void onCreateContainer(final Container container, final Container parent) {
+    setContainerBartersAcl(container);
   }
 
   @Override
   public void onCreateContent(final Content content, final Container parent) {
+    // addGadget(content);
+    content.setStatus(ContentStatus.publishedOnline);
+    content.setPublishedOn(new Date());
   }
 
   @Override
   @Inject
   public void register(final ServerToolRegistry registry) {
     registry.register(this);
+  }
+
+  private void setContainerBartersAcl(final Container container) {
+    final AccessLists bartersAcl = new AccessLists();
+    bartersAcl.getAdmins().setMode(GroupListMode.NORMAL);
+    bartersAcl.getAdmins().add(container.getOwner());
+    bartersAcl.getEditors().setMode(GroupListMode.NORMAL);
+    bartersAcl.getViewers().setMode(GroupListMode.EVERYONE);
+    containerManager.setAccessList(container, bartersAcl);
   }
 }

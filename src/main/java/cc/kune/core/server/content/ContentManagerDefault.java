@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.content;
 
+import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
@@ -113,6 +114,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   @Override
   public Content createContent(final String title, final String body, final User author,
       final Container container, final String typeId) {
+    return createContent(title, body, author, container, typeId, KuneWaveManager.WITHOUT_GADGET);
+  }
+
+  @Override
+  public Content createContent(final String title, final String body, final User author,
+      final Container container, final String typeId, final URL gadgetUrl) {
     FilenameUtils.checkBasicFilename(title);
     final String newtitle = findInexistentTitle(container, title);
     final Content newContent = new Content();
@@ -125,7 +132,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     revision.setTitle(newtitle);
     // Duplicate in StateServiceDefault
     if (newContent.isWave()) {
-      final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body,
+      final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body, gadgetUrl,
           participantUtils.of(author.getShortName()));
       newContent.setWaveId(JavaWaverefEncoder.encodeToUriPathSegment(waveRef));
       newContent.setModifiedOn((new Date()).getTime());

@@ -22,6 +22,7 @@ package cc.kune.core.server;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cc.kune.barters.server.BarterServerModule;
 import cc.kune.blogs.server.BlogServerModule;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
@@ -33,8 +34,8 @@ import cc.kune.core.server.init.FinderRegistry;
 import cc.kune.core.server.manager.file.EntityLogoDownloadManager;
 import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.server.manager.file.FileDownloadManager;
-import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.manager.file.FileGwtUploadServlet;
+import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.properties.PropertiesFileName;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
@@ -144,6 +145,7 @@ public class KuneRackModule implements RackModule {
     builder.use(new DocumentServerModule());
     builder.use(new BlogServerModule());
     builder.use(new WikiServerModule());
+    builder.use(new BarterServerModule());
     // builder.use(new ChatServerModule());
     // builder.use(new GalleryServerModule());
     builder.use(new RESTServicesModule());

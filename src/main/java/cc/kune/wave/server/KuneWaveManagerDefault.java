@@ -19,8 +19,11 @@
  */
 package cc.kune.wave.server;
 
+import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -43,25 +46,38 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.google.wave.api.ApiIdSerializer;
 import com.google.wave.api.Blip;
 import com.google.wave.api.BlipData;
 import com.google.wave.api.BlipThread;
+import com.google.wave.api.Element;
+import com.google.wave.api.Gadget;
 import com.google.wave.api.JsonRpcConstant.ParamsProperty;
 import com.google.wave.api.JsonRpcResponse;
 import com.google.wave.api.OperationQueue;
 import com.google.wave.api.OperationRequest;
+import com.google.wave.api.OperationRequest.Parameter;
 import com.google.wave.api.ProtocolVersion;
 import com.google.wave.api.Wavelet;
 import com.google.wave.api.data.converter.EventDataConverterManager;
+import com.google.wave.api.impl.DocumentModifyAction;
+import com.google.wave.api.impl.DocumentModifyAction.BundledAnnotation;
+import com.google.wave.api.impl.DocumentModifyAction.ModifyHow;
 import com.google.wave.api.impl.WaveletData;
 
 public class KuneWaveManagerDefault implements KuneWaveManager {
   public static final Log LOG = LogFactory.getLog(KuneWaveManagerDefault.class);
 
+  // See: DocumentModifyServiceTest
+  private static final String NO_ANNOTATION_KEY = null;
+  private static final List<BundledAnnotation> NO_BUNDLED_ANNOTATIONS = Collections.emptyList();
   private static final String NO_TITLE = "";
+
+  private static final List<String> NO_VALUES = Collections.<String> emptyList();
 
   private final ConversationUtil conversationUtil;
   private final EventDataConverterManager converterManager;
@@ -85,6 +101,27 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   }
 
   @Override
+  public void addGadget(final WaveRef waveName, final String author, final String gadgetUrl) {
+    // See DocumentModifyServiceTest
+    final List<Element> elementsIn = Lists.newArrayListWithCapacity(1);
+    final Map<String, String> properties = Maps.newHashMap();
+    properties.put(Gadget.URL, gadgetUrl);
+    properties.put(Gadget.AUTHOR, participantUtils.of(author).getAddress());
+    final Gadget gadget = new Gadget(properties);
+
+    elementsIn.add(gadget);
+    final Wavelet wavelet = fetchWavelet(waveName, author);
+    final OperationQueue opQueue = new OperationQueue();
+    final Blip rootBlip = wavelet.getRootBlip();
+
+    opQueue.modifyDocument(rootBlip).addParameter(
+        Parameter.of(ParamsProperty.MODIFY_ACTION, new DocumentModifyAction(ModifyHow.INSERT, NO_VALUES,
+            NO_ANNOTATION_KEY, elementsIn, NO_BUNDLED_ANNOTATIONS, false)));
+    opQueue.modifyDocument(rootBlip).addParameter(Parameter.of(ParamsProperty.INDEX, 1));
+    doOperation(author, opQueue, "add gadget");
+  }
+
+  @Override
   public void addParticipant(final WaveRef waveName, final String author, final String userWhoAdds,
       final String participant) {
     final Wavelet wavelet = fetchWavelet(waveName, author);
@@ -92,26 +129,8 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
         : author;
     final OperationQueue opQueue = new OperationQueue();
     opQueue.addParticipantToWavelet(wavelet, participantUtils.of(participant).toString());
-    final OperationContextImpl context = new OperationContextImpl(waveletProvider,
-        converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
-    final OperationRequest request = opQueue.getPendingOperations().get(0);
-    OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.of(whoAdd));
-    final String reqId = request.getId();
-    final JsonRpcResponse response = context.getResponse(reqId);
-    if (response != null && response.isError()) {
-      onFailure(context.getResponse(reqId).getErrorMessage());
-    }
-    OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
-      @Override
-      public void onFailure(final String arg0) {
-        KuneWaveManagerDefault.this.onFailure("Wave add participant failed, onFailure: " + arg0);
-      }
+    doOperation(whoAdd, opQueue, "add participant");
 
-      @Override
-      public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
-        LOG.info("Wave addParticipant success: " + arg1);
-      }
-    });
   }
 
   @Override
@@ -121,6 +140,12 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
 
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
+      @Nonnull final ParticipantId... participantsArray) {
+    return createWave(title, message, WITHOUT_GADGET, participantsArray);
+  }
+
+  @Override
+  public WaveRef createWave(@Nonnull final String title, final String message, final URL gadgetUrl,
       @Nonnull final ParticipantId... participantsArray) {
     String newWaveId = null;
     String newWaveletId = null;
@@ -134,6 +159,12 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     opQueue.setTitleOfWavelet(newWavelet, title);
     final Blip rootBlip = newWavelet.getRootBlip();
     rootBlip.append(new com.google.wave.api.Markup(message).getText());
+
+    if (gadgetUrl != WITHOUT_GADGET) {
+      final Gadget gadget = new Gadget(gadgetUrl.toString());
+      rootBlip.append(gadget);
+    }
+
     final OperationContextImpl context = new OperationContextImpl(waveletProvider,
         converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
     for (final OperationRequest req : opQueue.getPendingOperations()) {
@@ -176,6 +207,29 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
       throw new DefaultException("Error getting wave id");
     }
     return wavename;
+  }
+
+  private void doOperation(final String author, final OperationQueue opQueue, final String logComment) {
+    final OperationContextImpl context = new OperationContextImpl(waveletProvider,
+        converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
+    final OperationRequest request = opQueue.getPendingOperations().get(0);
+    OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.of(author));
+    final String reqId = request.getId();
+    final JsonRpcResponse response = context.getResponse(reqId);
+    if (response != null && response.isError()) {
+      onFailure(context.getResponse(reqId).getErrorMessage());
+    }
+    OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
+      @Override
+      public void onFailure(final String arg0) {
+        KuneWaveManagerDefault.this.onFailure("Wave " + logComment + " failed, onFailure: " + arg0);
+      }
+
+      @Override
+      public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
+        LOG.info("Wave " + logComment + " success: " + arg1);
+      }
+    });
   }
 
   public void doOperations(final WaveRef waveName, final String author, final OperationQueue opQueue,
@@ -245,26 +299,6 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     final Wavelet wavelet = fetchWavelet(waveName, author);
     final OperationQueue opQueue = new OperationQueue();
     opQueue.setTitleOfWavelet(wavelet, title);
-    final OperationContextImpl context = new OperationContextImpl(waveletProvider,
-        converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
-    final OperationRequest request = opQueue.getPendingOperations().get(0);
-    OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.of(author));
-    final String reqId = request.getId();
-    final JsonRpcResponse response = context.getResponse(reqId);
-    if (response != null && response.isError()) {
-      onFailure(context.getResponse(reqId).getErrorMessage());
-    }
-    OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
-      @Override
-      public void onFailure(final String arg0) {
-        KuneWaveManagerDefault.this.onFailure("Wave set title failed, onFailure: " + arg0);
-      }
-
-      @Override
-      public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
-        LOG.info("Wave set title success: " + arg1);
-      }
-    });
+    doOperation(author, opQueue, "set title");
   }
-
 }

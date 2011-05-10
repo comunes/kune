@@ -36,81 +36,82 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 
 public class ChatServerTool implements ServerTool {
-    public static final String NAME = "chats";
-    public static final String ROOT_NAME = "chat rooms";
-    public static final String TYPE_CHAT = ChatClientTool.TYPE_CHAT;
-    public static final String TYPE_ROOM = ChatClientTool.TYPE_ROOM;
-    public static final String TYPE_ROOT = ChatClientTool.TYPE_ROOT;
-    private final ToolConfigurationManager configurationManager;
-    private final ContainerManager containerManager;
+  public static final String NAME = "chats";
+  public static final String ROOT_NAME = "chat rooms";
+  public static final String TYPE_CHAT = ChatClientTool.TYPE_CHAT;
+  public static final String TYPE_ROOM = ChatClientTool.TYPE_ROOM;
+  public static final String TYPE_ROOT = ChatClientTool.TYPE_ROOT;
+  private final ToolConfigurationManager configurationManager;
+  private final ContainerManager containerManager;
 
-    @Inject
-    public ChatServerTool(final ToolConfigurationManager configurationManager, final ContainerManager containerManager) {
-        this.configurationManager = configurationManager;
-        this.containerManager = containerManager;
-    }
+  @Inject
+  public ChatServerTool(final ToolConfigurationManager configurationManager,
+      final ContainerManager containerManager) {
+    this.configurationManager = configurationManager;
+    this.containerManager = containerManager;
+  }
 
-    private void checkContainerTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_ROOM)) {
-            if (!parentTypeId.equals(TYPE_ROOT)) {
-                throw new ContainerNotPermittedException();
-            }
-            // ok valid container
-        } else {
-            throw new ContainerNotPermittedException();
-        }
+  private void checkContainerTypeId(final String parentTypeId, final String typeId) {
+    if (typeId.equals(TYPE_ROOM)) {
+      if (!parentTypeId.equals(TYPE_ROOT)) {
+        throw new ContainerNotPermittedException();
+      }
+      // ok valid container
+    } else {
+      throw new ContainerNotPermittedException();
     }
+  }
 
-    @Override
-    public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
-        checkContainerTypeId(parentTypeId, typeId);
-    }
+  @Override
+  public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
+    checkContainerTypeId(parentTypeId, typeId);
+  }
 
-    @Override
-    public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
-        if (!parentTypeId.equals(TYPE_ROOM)) {
-            throw new ContainerNotPermittedException();
-        }
-        // in the future chat history checks
+  @Override
+  public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
+    if (!parentTypeId.equals(TYPE_ROOM)) {
+      throw new ContainerNotPermittedException();
     }
+    // in the future chat history checks
+  }
 
-    @Override
-    public String getName() {
-        return NAME;
-    }
+  @Override
+  public String getName() {
+    return NAME;
+  }
 
-    @Override
-    public String getRootName() {
-        return ROOT_NAME;
-    }
+  @Override
+  public String getRootName() {
+    return ROOT_NAME;
+  }
 
-    @Override
-    public ServerToolTarget getTarget() {
-        return ServerToolTarget.forGroups;
-    }
+  @Override
+  public ServerToolTarget getTarget() {
+    return ServerToolTarget.forGroups;
+  }
 
-    @Override
-    public Group initGroup(final User user, final Group group, final Object... otherVars) {
-        final ToolConfiguration config = new ToolConfiguration();
-        final Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-        config.setRoot(container);
-        group.setToolConfig(NAME, config);
-        configurationManager.persist(config);
-        return group;
-    }
+  @Override
+  public Group initGroup(final User user, final Group group, final Object... otherVars) {
+    final ToolConfiguration config = new ToolConfiguration();
+    final Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+    config.setRoot(container);
+    group.setToolConfig(NAME, config);
+    configurationManager.persist(config);
+    return group;
+  }
 
-    @Override
-    public void onCreateContainer(final Container container, final Container parent) {
-    }
+  @Override
+  public void onCreateContainer(final Container container, final Container parent) {
+  }
 
-    @Override
-    public void onCreateContent(final Content content, final Container parent) {
-    }
+  @Override
+  public void onCreateContent(final Content content, final Container parent) {
+  }
 
-    @Override
-    @Inject
-    public void register(final ServerToolRegistry registry) {
-        registry.register(this);
-    }
+  @Override
+  @Inject
+  public void register(final ServerToolRegistry registry) {
+    registry.register(this);
+  }
 
 }

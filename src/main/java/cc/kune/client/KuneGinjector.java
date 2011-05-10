@@ -19,6 +19,8 @@
  */
 package cc.kune.client;
 
+import cc.kune.barters.client.BartersGinModule;
+import cc.kune.barters.client.BartersGinjector;
 import cc.kune.blogs.client.BlogsGinModule;
 import cc.kune.blogs.client.BlogsGinjector;
 import cc.kune.chat.client.ChatClient;
@@ -71,9 +73,9 @@ import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, ChatGinModule.class, WaveGinModule.class,
     PSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class,
-    WikiGinModule.class })
+    WikiGinModule.class, BartersGinModule.class })
 public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector,
-    WikiGinjector {
+    WikiGinjector, BartersGinjector {
 
   /*
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
