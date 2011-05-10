@@ -36,6 +36,12 @@ public interface NavResources extends ClientBundle {
   @Source("blog_add.png")
   ImageResource blogAdd();
 
+  @Source("calendar.png")
+  ImageResource calendar();
+
+  @Source("calendar_add.png")
+  ImageResource calendarAdd();
+
   @Source("download.png")
   ImageResource download();
 

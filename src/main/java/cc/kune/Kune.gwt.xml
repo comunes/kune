@@ -10,6 +10,7 @@
   <inherits name="cc.kune.chat.KuneChat" />
   <inherits name="cc.kune.docs.KuneDocs" />
   <inherits name="cc.kune.wiki.KuneWiki" />
+  <inherits name="cc.kune.meets.KuneMeets" />
   <inherits name="cc.kune.pspace.PSpace" />
   <inherits name="com.calclab.suco.Suco" />
   <inherits name="org.adamtacy.GWTEffects"></inherits>

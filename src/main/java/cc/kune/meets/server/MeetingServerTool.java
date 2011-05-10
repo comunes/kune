@@ -17,13 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.barters.server;
+package cc.kune.meets.server;
 
-import static cc.kune.barters.shared.BartersConstants.NAME;
-import static cc.kune.barters.shared.BartersConstants.ROOT_NAME;
-import static cc.kune.barters.shared.BartersConstants.TYPE_BARTER;
-import static cc.kune.barters.shared.BartersConstants.TYPE_FOLDER;
-import static cc.kune.barters.shared.BartersConstants.TYPE_ROOT;
+import static cc.kune.meets.shared.MeetingsConstants.NAME;
+import static cc.kune.meets.shared.MeetingsConstants.ROOT_NAME;
+import static cc.kune.meets.shared.MeetingsConstants.TYPE_MEETING;
+import static cc.kune.meets.shared.MeetingsConstants.TYPE_ROOT;
 
 import java.net.URL;
 import java.util.Date;
@@ -49,9 +48,9 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class BarterServerTool implements ServerWaveTool {
+public class MeetingServerTool implements ServerWaveTool {
 
-  private static final String BARTER_GADGET = "http://op-org.appspot.com/troco_wave_gadget/org.ourproject.troco.client.TrocoWaveGadget.gadget.xml";
+  private static final String MEETING_GADGET = "http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml";
   private final ToolConfigurationManager configurationManager;
   private final ContainerManager containerManager;
   private final ContentManager contentManager;
@@ -59,35 +58,25 @@ public class BarterServerTool implements ServerWaveTool {
   private final I18nTranslationService i18n;
 
   @Inject
-  public BarterServerTool(final ContentManager contentManager, final ContainerManager containerManager,
+  public MeetingServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager,
       final I18nTranslationService translationService) {
     this.contentManager = contentManager;
     this.containerManager = containerManager;
     this.configurationManager = configurationManager;
     this.i18n = translationService;
-    gadgetUrl = UrlUtils.of(BARTER_GADGET);
+    gadgetUrl = UrlUtils.of(MEETING_GADGET);
   }
 
   void checkContainerTypeId(final String parentTypeId, final String typeId) {
-    if (typeId.equals(TYPE_FOLDER)) {
-      // ok valid container
-      if ((typeId.equals(TYPE_FOLDER) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
-        // ok
-      } else {
-        throw new ContainerNotPermittedException();
-      }
-    } else {
-      throw new ContainerNotPermittedException();
-    }
+    throw new ContainerNotPermittedException();
   }
 
   void checkContentTypeId(final String parentTypeId, final String typeId) {
-    if (typeId.equals(TYPE_BARTER)) {
+    if (typeId.equals(TYPE_MEETING)) {
       // ok valid content
-      final boolean parentIsFolderOrRoot = parentTypeId.equals(TYPE_ROOT)
-          || parentTypeId.equals(TYPE_FOLDER);
-      if ((typeId.equals(TYPE_BARTER) && parentIsFolderOrRoot)) {
+      final boolean parentIsFolderOrRoot = parentTypeId.equals(TYPE_ROOT);
+      if ((typeId.equals(TYPE_MEETING) && parentIsFolderOrRoot)) {
         // ok
       } else {
         throw new ContentNotPermittedException();
@@ -124,24 +113,24 @@ public class BarterServerTool implements ServerWaveTool {
 
   @Override
   public ServerToolTarget getTarget() {
-    return ServerToolTarget.forUsers;
+    return ServerToolTarget.forGroups;
   }
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     final ToolConfiguration config = new ToolConfiguration();
     final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-    setContainerBartersAcl(rootFolder);
+    setContainerMeetingsAcl(rootFolder);
     config.setRoot(rootFolder);
     group.setToolConfig(NAME, config);
     configurationManager.persist(config);
     final Content content = contentManager.createContent(
-        i18n.t("Barter sample"),
-        i18n.t("This is only a barter sample. You can invite other participants to this barter, but also publish to the general public allowing you to share services, goods, etc."),
-        user, rootFolder, TYPE_BARTER, gadgetUrl);
+        i18n.t("Meeting sample"),
+        i18n.t("This is only a meet sample. You can invite other participants to this meeting, but also publish to the general public allowing you to to help in the organization, call and speed-up of events."),
+        user, rootFolder, TYPE_MEETING, gadgetUrl);
     content.addAuthor(user);
     content.setLanguage(user.getLanguage());
-    content.setTypeId(TYPE_BARTER);
+    content.setTypeId(TYPE_MEETING);
     content.setStatus(ContentStatus.publishedOnline);
     contentManager.save(user, content);
     return group;
@@ -149,12 +138,11 @@ public class BarterServerTool implements ServerWaveTool {
 
   @Override
   public void onCreateContainer(final Container container, final Container parent) {
-    setContainerBartersAcl(container);
+    setContainerMeetingsAcl(container);
   }
 
   @Override
   public void onCreateContent(final Content content, final Container parent) {
-    // addGadget(content);
     content.setStatus(ContentStatus.publishedOnline);
     content.setPublishedOn(new Date());
   }
@@ -165,12 +153,12 @@ public class BarterServerTool implements ServerWaveTool {
     registry.register(this);
   }
 
-  private void setContainerBartersAcl(final Container container) {
-    final AccessLists bartersAcl = new AccessLists();
-    bartersAcl.getAdmins().setMode(GroupListMode.NORMAL);
-    bartersAcl.getAdmins().add(container.getOwner());
-    bartersAcl.getEditors().setMode(GroupListMode.NORMAL);
-    bartersAcl.getViewers().setMode(GroupListMode.EVERYONE);
-    containerManager.setAccessList(container, bartersAcl);
+  private void setContainerMeetingsAcl(final Container container) {
+    final AccessLists meetsAcl = new AccessLists();
+    meetsAcl.getAdmins().setMode(GroupListMode.NORMAL);
+    meetsAcl.getAdmins().add(container.getOwner());
+    meetsAcl.getEditors().setMode(GroupListMode.NORMAL);
+    meetsAcl.getViewers().setMode(GroupListMode.EVERYONE);
+    containerManager.setAccessList(container, meetsAcl);
   }
 }

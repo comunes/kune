@@ -171,7 +171,7 @@ public class WebClient extends Composite {
         getStackTraceAsync(e, new Accessor<SafeHtml>() {
           @Override
           public void use(final SafeHtml stack) {
-              NotifyUser.error("Oops! Something has gone wrong. Please contact the site admins with <em>more details</em>");
+              //NotifyUser.error("Oops! Something has gone wrong. Please contact the site admins with <em>more details</em>");
           //  error.addDetail(stack, null);
             final String message = stack.asString().replace("<br>", "\n");
             REMOTE_LOG.severe(message);
