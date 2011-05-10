@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.List;
 
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -39,106 +40,110 @@ import com.google.inject.Provider;
 
 public abstract class EntityOptionsToolsConfPresenter {
 
-    private final EntityOptions entityOptions;
-    private final Provider<GroupServiceAsync> groupService;
-    protected final I18nTranslationService i18n;
-    protected final Session session;
-    protected final StateManager stateManager;
-    private EntityOptionsToolsConfView view;
+  private final EntityOptions entityOptions;
+  private final Provider<GroupServiceAsync> groupService;
+  protected final I18nTranslationService i18n;
+  protected final Session session;
+  protected final StateManager stateManager;
+  private EntityOptionsToolsConfView view;
 
-    public EntityOptionsToolsConfPresenter(final Session session, final StateManager stateManager,
-            final I18nTranslationService i18n, final EntityOptions entityOptions,
-            final Provider<GroupServiceAsync> groupService) {
-        this.session = session;
-        this.stateManager = stateManager;
-        this.i18n = i18n;
-        this.entityOptions = entityOptions;
-        this.groupService = groupService;
+  public EntityOptionsToolsConfPresenter(final Session session, final StateManager stateManager,
+      final I18nTranslationService i18n, final EntityOptions entityOptions,
+      final Provider<GroupServiceAsync> groupService) {
+    this.session = session;
+    this.stateManager = stateManager;
+    this.i18n = i18n;
+    this.entityOptions = entityOptions;
+    this.groupService = groupService;
+  }
+
+  protected abstract boolean applicable();
+
+  protected abstract Collection<ToolSimpleDTO> getAllTools();
+
+  protected abstract StateToken getDefContentToken();
+
+  protected abstract String getDefContentTooltip();
+
+  protected abstract List<String> getEnabledTools();
+
+  protected abstract StateToken getOperationToken();
+
+  public IsWidget getView() {
+    return view;
+  }
+
+  protected abstract void gotoDifLocationIfNecessary(String toolName);
+
+  public void init(final EntityOptionsToolsConfView view) {
+    this.view = view;
+    setState();
+    entityOptions.addTab(view, view.getTabTitle());
+  }
+
+  private void onCheck(final ToolSimpleDTO tool, final boolean checked) {
+    final List<String> enabledTools = getEnabledTools();
+    final String toolName = tool.getName();
+    if (checked) {
+      if (!(enabledTools.contains(toolName))) {
+        setToolCheckedInServer(checked, toolName);
+      }
+    } else {
+      if (enabledTools.contains(toolName)) {
+        setToolCheckedInServer(checked, toolName);
+        gotoDifLocationIfNecessary(toolName);
+      }
     }
+  }
 
-    protected abstract boolean applicable();
+  protected void reset() {
+    view.clear();
+    entityOptions.hideMessages();
+  }
 
-    protected abstract Collection<ToolSimpleDTO> getAllTools();
-
-    protected abstract StateToken getDefContentToken();
-
-    protected abstract String getDefContentTooltip();
-
-    protected abstract List<String> getEnabledTools();
-
-    protected abstract StateToken getOperationToken();
-
-    public IsWidget getView() {
-        return view;
-    }
-
-    protected abstract void gotoDifLocationIfNecessary(String toolName);
-
-    public void init(final EntityOptionsToolsConfView view) {
-        this.view = view;
-        setState();
-        entityOptions.addTab(view, view.getTabTitle());
-    }
-
-    private void onCheck(final ToolSimpleDTO tool, final boolean checked) {
-        final List<String> enabledTools = getEnabledTools();
-        final String toolName = tool.getName();
-        if (checked) {
-            if (!(enabledTools.contains(toolName))) {
-                setToolCheckedInServer(checked, toolName);
-            }
-        } else {
-            if (enabledTools.contains(toolName)) {
-                setToolCheckedInServer(checked, toolName);
-                gotoDifLocationIfNecessary(toolName);
-            }
+  protected void setState() {
+    reset();
+    final Collection<ToolSimpleDTO> toolCollection = getAllTools();
+    for (final ToolSimpleDTO tool : toolCollection) {
+      view.add(tool, new ClickHandler() {
+        @Override
+        public void onClick(final ClickEvent event) {
+          onCheck(tool, view.isChecked(tool.getName()));
         }
+      });
+      view.setEnabled(tool.getName(), true);
+    }
+    for (final String tool : getEnabledTools()) {
+      view.setChecked(tool, true);
     }
 
-    protected void reset() {
-        view.clear();
-        entityOptions.hideMessages();
+    final StateToken token = getDefContentToken();
+    if (token != null) {
+      final String defContentTool = token.getTool();
+      if (defContentTool != null) {
+        // view.setEnabled(defContentTool, false);
+        view.setTooltip(defContentTool, getDefContentTooltip());
+      }
     }
+  }
 
-    protected void setState() {
-        reset();
-        final Collection<ToolSimpleDTO> toolCollection = getAllTools();
-        for (final ToolSimpleDTO tool : toolCollection) {
-            view.add(tool, new ClickHandler() {
-                @Override
-                public void onClick(final ClickEvent event) {
-                    onCheck(tool, view.isChecked(tool.getName()));
-                }
-            });
-            view.setEnabled(tool.getName(), true);
-        }
-        for (final String tool : getEnabledTools()) {
-            view.setChecked(tool, true);
-        }
+  protected void setToolCheckedInServer(final boolean checked, final String toolName) {
+    // view.mask();
+    groupService.get().setToolEnabled(session.getUserHash(), getOperationToken(), toolName, checked,
+        new AsyncCallback<Void>() {
+          @Override
+          public void onFailure(final Throwable caught) {
+            view.setChecked(toolName, !checked);
+            entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), NotifyLevel.error);
+            NotifyUser.error(i18n.t("Error configuring the tool"));
+            // view.unmask();
+          }
 
-        final StateToken token = getDefContentToken();
-        if (token != null) {
-            final String defContentTool = token.getTool();
-            if (defContentTool != null) {
-                view.setEnabled(defContentTool, false);
-                view.setTooltip(defContentTool, getDefContentTooltip());
-            }
-        }
-    }
-
-    protected void setToolCheckedInServer(final boolean checked, final String toolName) {
-        groupService.get().setToolEnabled(session.getUserHash(), getOperationToken(), toolName, checked,
-                new AsyncCallback<Void>() {
-                    @Override
-                    public void onFailure(final Throwable caught) {
-                        view.setChecked(toolName, !checked);
-                        entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), NotifyLevel.error);
-                    }
-
-                    @Override
-                    public void onSuccess(final Void result) {
-                        stateManager.reload();
-                    }
-                });
-    }
+          @Override
+          public void onSuccess(final Void result) {
+            stateManager.reload();
+            // view.unmask();
+          }
+        });
+  }
 }

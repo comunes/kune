@@ -24,6 +24,7 @@ import java.util.HashMap;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.dto.ToolSimpleDTO;
@@ -35,7 +36,6 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.extjs.gxt.ui.client.widget.form.HiddenField;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -43,15 +43,18 @@ import com.google.gwt.user.client.ui.Widget;
 public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOptionsToolsConfView {
   private final HashMap<String, CheckBox> fields;
   private final I18nTranslationService i18n;
+  private final MaskWidget maskWidget;
   private final IconLabel tabTitle;
 
-  public EntityOptionsToolsConfPanel(final I18nTranslationService i18n, final CoreResources res) {
+  public EntityOptionsToolsConfPanel(final I18nTranslationService i18n, final CoreResources res,
+      final MaskWidget maskWidget) {
+    this.maskWidget = maskWidget;
     tabTitle = new IconLabel(res.kunePreferences(), i18n.t("Tools"));
     this.i18n = i18n;
     // super.setHeight(EntityOptionsView.HEIGHT);
     super.setWidth(EntityOptionsView.WIDTH);
     super.setFrame(true);
-    super.add(new HiddenField());
+    // super.add(new HiddenField());
     super.getFormPanel().setLabelWidth(20);
     fields = new HashMap<String, CheckBox>();
     super.addStyleName("k-overflow-y-auto");
@@ -62,7 +65,7 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
   public void add(final ToolSimpleDTO tool, final ClickHandler handler) {
     final CheckBox checkbox = new CheckBox();
     checkbox.setFieldLabel(tool.getRootName());
-    checkbox.setValue(false);
+    // checkbox.setValue(false);
     checkbox.addListener(Events.Change, new Listener<BaseEvent>() {
       @Override
       public void handleEvent(final BaseEvent be) {
@@ -114,6 +117,11 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
   }
 
   @Override
+  public void mask() {
+    maskWidget.mask(this);
+  }
+
+  @Override
   public void setChecked(final String tool, final boolean checked) {
     final CheckBox field = getTool(tool);
     field.setValue(checked);
@@ -133,5 +141,10 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
   public void setTooltip(final String tool, final String tip) {
     final CheckBox field = getTool(tool);
     Tooltip.to(field, tip);
+  }
+
+  @Override
+  public void unmask() {
+    maskWidget.unMask();
   }
 }

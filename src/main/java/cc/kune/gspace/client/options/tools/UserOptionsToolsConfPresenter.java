@@ -35,58 +35,60 @@ import cc.kune.gspace.client.options.UserOptions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class UserOptionsToolsConfPresenter extends EntityOptionsToolsConfPresenter implements UserOptionsToolsConf {
+public class UserOptionsToolsConfPresenter extends EntityOptionsToolsConfPresenter implements
+    UserOptionsToolsConf {
 
-    @Inject
-    public UserOptionsToolsConfPresenter(final Session session, final StateManager stateManager,
-            final I18nTranslationService i18n, final UserOptions entityOptions,
-            final Provider<GroupServiceAsync> groupService, final GroupOptionsToolsConfView view) {
-        super(session, stateManager, i18n, entityOptions, groupService);
-        init(view);
-        session.onUserSignIn(true, new UserSignInHandler() {
-            @Override
-            public void onUserSignIn(final UserSignInEvent event) {
-                setState();
-            }
-        });
-    }
+  @Inject
+  public UserOptionsToolsConfPresenter(final Session session, final StateManager stateManager,
+      final I18nTranslationService i18n, final UserOptions entityOptions,
+      final Provider<GroupServiceAsync> groupService, final UserOptionsToolsConfView view) {
+    super(session, stateManager, i18n, entityOptions, groupService);
+    init(view);
+    session.onUserSignIn(true, new UserSignInHandler() {
+      @Override
+      public void onUserSignIn(final UserSignInEvent event) {
+        setState();
+      }
+    });
+  }
 
-    @Override
-    protected boolean applicable() {
-        return session.isLogged();
-    }
+  @Override
+  protected boolean applicable() {
+    return session.isLogged();
+  }
 
-    @Override
-    protected Collection<ToolSimpleDTO> getAllTools() {
-        return session.getUserTools();
-    }
+  @Override
+  protected Collection<ToolSimpleDTO> getAllTools() {
+    return session.getUserTools();
+  }
 
-    @Override
-    protected StateToken getDefContentToken() {
-        final String homePage = session.getCurrentUserInfo().getHomePage();
-        return homePage == null ? null : new StateToken(homePage);
-    }
+  @Override
+  protected StateToken getDefContentToken() {
+    final String homePage = session.getCurrentUserInfo().getHomePage();
+    return homePage == null ? null : new StateToken(homePage);
+  }
 
-    @Override
-    protected String getDefContentTooltip() {
-        return i18n.t("You cannot disable this tool because it's where your home page is located. To do that you have to select other content as the default home page but in another tool.");
-    }
+  @Override
+  protected String getDefContentTooltip() {
+    // FIXME
+    return i18n.t("You cannot disable this tool because it's where your home page is located. To do that you have to select other content as the default home page but in another tool.");
+  }
 
-    @Override
-    protected List<String> getEnabledTools() {
-        return session.getCurrentUserInfo().getEnabledTools();
-    }
+  @Override
+  protected List<String> getEnabledTools() {
+    return session.getCurrentUserInfo().getEnabledTools();
+  }
 
-    @Override
-    protected StateToken getOperationToken() {
-        return session.getCurrentUser().getStateToken();
-    }
+  @Override
+  protected StateToken getOperationToken() {
+    return session.getCurrentUser().getStateToken();
+  }
 
-    @Override
-    protected void gotoDifLocationIfNecessary(final String toolName) {
-        if (session.getCurrentStateToken().getGroup().equals(session.getCurrentUserInfo().getShortName())
-                && session.getCurrentStateToken().getTool().equals(toolName)) {
-            stateManager.gotoStateToken(session.getCurrentState().getGroup().getDefaultContent().getStateToken());
-        }
+  @Override
+  protected void gotoDifLocationIfNecessary(final String toolName) {
+    if (session.getCurrentStateToken().getGroup().equals(session.getCurrentUserInfo().getShortName())
+        && session.getCurrentStateToken().getTool().equals(toolName)) {
+      stateManager.gotoStateToken(session.getCurrentState().getGroup().getDefaultContent().getStateToken());
     }
+  }
 }

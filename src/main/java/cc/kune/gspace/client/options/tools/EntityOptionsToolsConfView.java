@@ -26,15 +26,19 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 public interface EntityOptionsToolsConfView extends EntityOptionsTabView {
 
-    void add(ToolSimpleDTO tool, ClickHandler clickHandler);
+  void add(ToolSimpleDTO tool, ClickHandler clickHandler);
 
-    void clear();
+  void clear();
 
-    boolean isChecked(String tool);
+  boolean isChecked(String tool);
 
-    void setChecked(String tool, boolean checked);
+  void mask();
 
-    void setEnabled(String tool, boolean enabled);
+  void setChecked(String tool, boolean checked);
 
-    void setTooltip(String tool, String tip);
+  void setEnabled(String tool, boolean enabled);
+
+  void setTooltip(String tool, String tip);
+
+  void unmask();
 }

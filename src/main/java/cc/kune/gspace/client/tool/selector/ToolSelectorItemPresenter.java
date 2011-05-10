@@ -29,76 +29,78 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 
 public class ToolSelectorItemPresenter implements ToolSelectorItem {
-    public interface ToolSelectorItemView extends IsWidget {
+  public interface ToolSelectorItemView extends IsWidget {
 
-        HasClickHandlers getFocus();
+    HasClickHandlers getFocus();
 
-        HasText getLabel();
+    HasText getLabel();
 
-        // void setTheme(WsTheme oldTheme, WsTheme newTheme);
+    // void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
-        void setSelected(boolean selected);
+    void setSelected(boolean selected);
 
-        void setVisible(boolean visible);
-    }
+    void setVisible(boolean visible);
+  }
 
-    private final String longName;
-    // private final WsThemeManager wsThemePresenter;
-    private final String shortName;
-    private StateToken token;
-    private final ToolSelector toolSelector;
-    private ToolSelectorItemView view;
+  private final String longName;
+  // private final WsThemeManager wsThemePresenter;
+  private final String shortName;
+  private StateToken token;
+  private final ToolSelector toolSelector;
+  private ToolSelectorItemView view;
 
-    public ToolSelectorItemPresenter(final String shortName, final String longName, final ToolSelector toolSelector) {
-        this.shortName = shortName;
-        this.longName = longName;
-        this.toolSelector = toolSelector;
-        // this.wsThemePresenter = wsThemePresenter;
-    }
+  public ToolSelectorItemPresenter(final String shortName, final String longName,
+      final ToolSelector toolSelector) {
+    this.shortName = shortName;
+    this.longName = longName;
+    this.toolSelector = toolSelector;
+    // this.wsThemePresenter = wsThemePresenter;
+  }
 
-    @Override
-    public String getShortName() {
-        return shortName;
-    }
+  @Override
+  public String getShortName() {
+    return shortName;
+  }
 
-    public ToolSelectorItemView getView() {
-        return view;
-    }
+  @Override
+  public ToolSelectorItemView getView() {
+    return view;
+  }
 
-    public void init(final ToolSelectorItemView view) {
-        this.view = view;
-        toolSelector.addTool(this);
-        view.getFocus().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                History.newItem(token.toString());
-            }
-        });
-        view.getLabel().setText(longName);
-        // wsThemePresenter.addOnThemeChanged(new Listener2<WsTheme, WsTheme>()
-        // {
-        // public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-        // setTheme(oldTheme, newTheme);
-        // }
-        // });
-    }
-
-    @Override
-    public void setGroupShortName(final String groupShortName) {
-        token = new StateToken(groupShortName, getShortName(), null, null);
-    }
-
-    @Override
-    public void setSelected(final boolean selected) {
-        view.setSelected(selected);
-    }
-
-    // private void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-    // view.setTheme(oldTheme, newTheme);
+  public void init(final ToolSelectorItemView view) {
+    this.view = view;
+    toolSelector.addTool(this);
+    view.getFocus().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        History.newItem(token.toString());
+      }
+    });
+    view.getLabel().setText(longName);
+    // wsThemePresenter.addOnThemeChanged(new Listener2<WsTheme, WsTheme>()
+    // {
+    // public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+    // setTheme(oldTheme, newTheme);
     // }
+    // });
+  }
 
-    @Override
-    public void setVisible(final boolean visible) {
-        view.setVisible(visible);
-    }
+  @Override
+  public void setGroupShortName(final String groupShortName) {
+    token = new StateToken(groupShortName, getShortName(), null, null);
+  }
+
+  @Override
+  public void setSelected(final boolean selected) {
+    view.setSelected(selected);
+  }
+
+  // private void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+  // view.setTheme(oldTheme, newTheme);
+  // }
+
+  @Override
+  public void setVisible(final boolean visible) {
+    view.setVisible(visible);
+  }
 }

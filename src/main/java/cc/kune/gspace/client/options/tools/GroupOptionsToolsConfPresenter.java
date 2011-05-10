@@ -36,61 +36,63 @@ import cc.kune.gspace.client.options.GroupOptions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class GroupOptionsToolsConfPresenter extends EntityOptionsToolsConfPresenter implements GroupOptionsToolsConf {
+public class GroupOptionsToolsConfPresenter extends EntityOptionsToolsConfPresenter implements
+    GroupOptionsToolsConf {
 
-    @Inject
-    public GroupOptionsToolsConfPresenter(final StateManager stateManager, final Session session,
-            final I18nTranslationService i18n, final GroupOptions entityOptions,
-            final Provider<GroupServiceAsync> groupService, final GroupOptionsToolsConfView view) {
-        super(session, stateManager, i18n, entityOptions, groupService);
-        init(view);
-        stateManager.onGroupChanged(true, new GroupChangedHandler() {
-            @Override
-            public void onGroupChanged(final GroupChangedEvent event) {
-                setState();
-            }
-        });
-    }
+  @Inject
+  public GroupOptionsToolsConfPresenter(final StateManager stateManager, final Session session,
+      final I18nTranslationService i18n, final GroupOptions entityOptions,
+      final Provider<GroupServiceAsync> groupService, final GroupOptionsToolsConfView view) {
+    super(session, stateManager, i18n, entityOptions, groupService);
+    init(view);
+    stateManager.onGroupChanged(true, new GroupChangedHandler() {
+      @Override
+      public void onGroupChanged(final GroupChangedEvent event) {
+        setState();
+      }
+    });
+  }
 
-    @Override
-    protected boolean applicable() {
-        return session.isCurrentStateAGroup();
-    }
+  @Override
+  protected boolean applicable() {
+    return session.isCurrentStateAGroup();
+  }
 
-    @Override
-    protected Collection<ToolSimpleDTO> getAllTools() {
-        return session.getGroupTools();
-    }
+  @Override
+  protected Collection<ToolSimpleDTO> getAllTools() {
+    return session.getGroupTools();
+  }
 
-    @Override
-    protected StateToken getDefContentToken() {
-        final ContentSimpleDTO defaultContent = session.getCurrentState().getGroup().getDefaultContent();
-        return defaultContent == null ? null : defaultContent.getStateToken();
-    }
+  @Override
+  protected StateToken getDefContentToken() {
+    final ContentSimpleDTO defaultContent = session.getCurrentState().getGroup().getDefaultContent();
+    return defaultContent == null ? null : defaultContent.getStateToken();
+  }
 
-    @Override
-    protected String getDefContentTooltip() {
-        return i18n.t("You cannot disable this tool because it's where the current group home page is located. To do that you have to select other content as the default group home page but in another tool.");
-    }
+  @Override
+  protected String getDefContentTooltip() {
+    // FIXME
+    return i18n.t("You cannot disable this tool because it's where the current group home page is located. To do that you have to select other content as the default group home page but in another tool.");
+  }
 
-    @Override
-    protected List<String> getEnabledTools() {
-        return session.getCurrentState().getEnabledTools();
-    }
+  @Override
+  protected List<String> getEnabledTools() {
+    return session.getCurrentState().getEnabledTools();
+  }
 
-    @Override
-    protected StateToken getOperationToken() {
-        return session.getCurrentStateToken();
-    }
+  @Override
+  protected StateToken getOperationToken() {
+    return session.getCurrentStateToken();
+  }
 
-    @Override
-    protected void gotoDifLocationIfNecessary(final String toolName) {
-        if (session.getCurrentStateToken().getTool().equals(toolName)) {
-            final ContentSimpleDTO defaultContent = session.getCurrentState().getGroup().getDefaultContent();
-            if (defaultContent != null) {
-                stateManager.gotoStateToken(defaultContent.getStateToken());
-            }
-        }
+  @Override
+  protected void gotoDifLocationIfNecessary(final String toolName) {
+    if (session.getCurrentStateToken().getTool().equals(toolName)) {
+      final ContentSimpleDTO defaultContent = session.getCurrentState().getGroup().getDefaultContent();
+      if (defaultContent != null) {
+        stateManager.gotoStateToken(defaultContent.getStateToken());
+      }
     }
+  }
 
 }
