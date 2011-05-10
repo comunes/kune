@@ -67,7 +67,7 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
         show();
       }
     };
-    groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
+    // groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
     groupPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
     prefsItem = new ButtonDescriptor(groupPrefsAction);
     prefsItem.withStyles("k-ent-header-btn");

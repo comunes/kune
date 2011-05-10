@@ -28,6 +28,7 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -89,6 +90,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   public void setContainer(final StateContainerDTO state) {
     contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getContainerRights().isEditable()
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
+    Window.setTitle(state.getGroup().getLongName() + ": " + state.getTitle());
   }
 
   @Override

@@ -52,6 +52,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
@@ -219,6 +220,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private void setTitle(final StateContentDTO state, final boolean editable) {
     contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
+    Window.setTitle(state.getGroup().getLongName() + ": " + state.getTitle());
   }
 
   @Override
