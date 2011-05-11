@@ -61,6 +61,7 @@ public class EntityOptionsPublicSpaceConfPanel extends FlowPanel implements
 
     final HorizontalPanel wsHP = new HorizontalPanel();
     final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));
+    wsThemeInfo.addStyleName("kune-Margin-20-tb");
     // final Widget toolbarWsChange = (Widget) wsSelector.getView();
     // toolbarWsChange.addStyleName("kune-Margin-Medium-l");
     wsHP.add(wsThemeInfo);

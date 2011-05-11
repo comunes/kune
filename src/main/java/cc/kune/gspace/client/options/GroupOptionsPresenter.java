@@ -70,7 +70,7 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
     // groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
     groupPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
     prefsItem = new ButtonDescriptor(groupPrefsAction);
-    prefsItem.withStyles("k-ent-header-btn");
+    prefsItem.withStyles("k-ent-header-btn, k-noborder, k-nobackcolor, k-btn-min");
     prefsItem.setId(GROUP_OPTIONS_ICON);
     prefsItem.setVisible(false);
     view.addAction(prefsItem);

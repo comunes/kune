@@ -55,7 +55,7 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
 
     final Label intro = new Label();
     intro.setText(i18n.t("Select a license to share your group contents with other people:"));
-
+    intro.addStyleName("kune-Margin-10-b");
     final FieldSet fieldSet = new FieldSet();
     // fieldSet.setTitle(i18n.t("license recommended"));
     fieldSet.addStyleName("margin-left: 105px");

@@ -40,7 +40,7 @@ public class LicenseWizardPanel extends WizardDialog implements LicenseWizardVie
   @Inject
   public LicenseWizardPanel(final MaskWidget maskWidget, final I18nTranslationService i18n,
       final CoreResources res) {
-    super(LIC_WIZ_DIALOG, i18n.t("License wizard"), true, false, WIDTH, null, BACK_BTN_ID, NEXT_BTN_ID,
+    super(LIC_WIZ_DIALOG, i18n.t("License wizard"), false, false, WIDTH, null, BACK_BTN_ID, NEXT_BTN_ID,
         FINISH_BTN_ID, CANCEL_BTN_ID, CLOSE_BTN_ID, i18n, maskWidget);
     super.setFinishText(i18n.t("Select"));
     super.setIcon(res.copyleft());

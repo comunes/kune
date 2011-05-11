@@ -63,6 +63,7 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
 
     final Label intro = new Label();
     intro.setText(i18n.t("With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?"));
+    intro.addStyleName("kune-Margin-10-b");
 
     final FieldSet commercialfieldSet = new FieldSet();
     commercialfieldSet.setHeading(i18n.t("Allow any uses of your work, including commercial?"));

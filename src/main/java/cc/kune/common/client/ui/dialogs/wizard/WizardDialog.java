@@ -39,7 +39,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class WizardDialog implements WizardDialogView {
 
-  private final Button cancelButton;
+  private final Button backButton;
   private final DeckPanel deck;
   private final BasicTopDialog dialog;
   private final I18nTranslationService i18n;
@@ -62,50 +62,54 @@ public class WizardDialog implements WizardDialogView {
     this.maskWidget = maskWidget;
     this.listener = listener;
     final Builder dialogBuilder = new BasicTopDialog.Builder(dialogId, false, modal).width(width).height(
-        height).firstButtonId(backId).sndButtonId(finishId).title(header);
+        height).firstButtonId(cancelId).sndButtonId(finishId).title(header);
 
     dialog = dialogBuilder.build();
     this.i18n = i18n;
 
-    nextButton = new Button(i18n.tWithNT("Next »", "used in button"), new ClickHandler() {
-
-      @Override
-      public void onClick(final ClickEvent event) {
-        WizardDialog.this.listener.onNext();
-      }
-    });
-
-    nextButton.ensureDebugId(nextId);
-    nextButton.addStyleName("k-dialog-btn");
-    nextButton.addStyleName("k-dialog-firstBtn");
-    nextButton.addStyleName("k-5corners");
-    nextButton.addStyleName("k-button");
-    nextButton.addStyleName("kune-Margin-Medium-l");
-    dialog.getBtnPanel().add(nextButton);
-
-    dialog.setFirstBtnText(i18n.tWithNT("« Back", "used in button"));
+    dialog.setFirstBtnText(i18n.tWithNT("Cancel", "used in button"));
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {
-
-      @Override
-      public void onClick(final ClickEvent event) {
-        WizardDialog.this.listener.onBack();
-      }
-    });
-
-    cancelButton = new Button(i18n.tWithNT("Cancel", "used in button"), new ClickHandler() {
-
       @Override
       public void onClick(final ClickEvent event) {
         WizardDialog.this.listener.onCancel();
       }
     });
-    cancelButton.ensureDebugId(cancelId);
-    cancelButton.addStyleName("k-dialog-btn");
-    cancelButton.addStyleName("k-dialog-secondBtn");
-    cancelButton.addStyleName("k-5corners");
-    cancelButton.addStyleName("k-button");
-    cancelButton.addStyleName("kune-Margin-Medium-l");
-    dialog.getBtnPanel().add(cancelButton);
+
+    nextButton = new Button(i18n.tWithNT("Next »", "used in button"), new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        WizardDialog.this.listener.onNext();
+      }
+    });
+    nextButton.ensureDebugId(nextId);
+    nextButton.addStyleName("k-dialog-btn");
+    nextButton.addStyleName("k-dialog-secondBtn");
+    nextButton.addStyleName("k-5corners");
+    nextButton.addStyleName("k-button");
+    nextButton.addStyleName("kune-Margin-Medium-l");
+    dialog.getBtnPanel().add(nextButton);
+
+    dialog.getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
+
+      @Override
+      public void onClose(final CloseEvent<PopupPanel> event) {
+        WizardDialog.this.listener.onClose();
+      }
+    });
+
+    backButton = new Button(i18n.tWithNT("« Back", "used in button"), new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        WizardDialog.this.listener.onBack();
+      }
+    });
+    backButton.ensureDebugId(backId);
+    backButton.addStyleName("k-dialog-btn");
+    backButton.addStyleName("k-dialog-secondBtn");
+    backButton.addStyleName("k-5corners");
+    backButton.addStyleName("k-button");
+    backButton.addStyleName("kune-Margin-Medium-l");
+    dialog.getBtnPanel().add(backButton);
 
     dialog.setSecondBtnId(finishId);
     dialog.setSecondBtnText(i18n.tWithNT("Finish", "used in button"));
@@ -113,14 +117,6 @@ public class WizardDialog implements WizardDialogView {
       @Override
       public void onClick(final ClickEvent event) {
         WizardDialog.this.listener.onFinish();
-      }
-    });
-
-    dialog.getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
-
-      @Override
-      public void onClose(final CloseEvent<PopupPanel> event) {
-        WizardDialog.this.listener.onClose();
       }
     });
 
@@ -189,12 +185,12 @@ public class WizardDialog implements WizardDialogView {
 
   @Override
   public void setEnabledBackButton(final boolean enabled) {
-    dialog.setFirstBtnEnabled(enabled);
+    backButton.setEnabled(enabled);
   }
 
   @Override
   public void setEnabledCancelButton(final boolean enabled) {
-    cancelButton.setEnabled(enabled);
+    dialog.setFirstBtnEnabled(enabled);
   }
 
   @Override
@@ -232,12 +228,12 @@ public class WizardDialog implements WizardDialogView {
 
   @Override
   public void setVisibleBackButton(final boolean visible) {
-    dialog.setFirstBtnVisible(visible);
+    backButton.setVisible(visible);
   }
 
   @Override
   public void setVisibleCancelButton(final boolean visible) {
-    cancelButton.setVisible(visible);
+    dialog.setFirstBtnVisible(visible);
   }
 
   @Override

@@ -38,6 +38,7 @@ import com.google.inject.Inject;
 
 public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFrdFormView {
 
+  @SuppressWarnings("serial")
   public class LicenseData extends BaseModel {
 
     private static final String LONGNAME = "longname";
@@ -79,42 +80,24 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
   public LicenseWizardFrdForm(final I18nTranslationService i18n, final Session session) {
     this.session = session;
 
-    // this.onChange = new Event0("onChange");
     setFrame(true);
     super.setPadding(10);
-    // super.setHeight(LicenseWizardView.HEIGHT);
+
     super.setAutoHeight(true);
     final Label intro = new Label();
     intro.setText(i18n.t("Select other kind of licenses:"));
-
-    // final ListStore<LicenseDTO> store = new ListStore<LicenseDTO>();
-    // store.add( Arrays.asList( new String[] { "shortname", "longname", "url"
-    // });
-    // getNonCCLicenses());
-    // store.load();
-
-    // final Template template = new
-    // Template("<div class=\"x-combo-list-item\">" + "<img src=\"{url}\"> "
-    // + "{longname}<div class=\"x-clear\"></div></div>");
+    intro.addStyleName("kune-Margin-10-b");
 
     super.setHideLabels(true);
 
     cb = new ComboBox<LicenseData>();
-    cb.setMinChars(1);
-    // cb.setFieldLabel("Other licenses");
     cb.setLabelSeparator("");
     cb.setStore(createStore());
     cb.setDisplayField(LicenseData.LONGNAME);
     cb.setValueField(LicenseData.SHORTNAME);
-    // cb.setMode(Mode.LOCAL);
     cb.setTriggerAction(TriggerAction.ALL);
     cb.setEmptyText(i18n.t("Select license"));
-    cb.setTypeAhead(true);
-    cb.setSelectOnFocus(true);
-    cb.setEditable(false);
     cb.setWidth(300);
-    // cb.setResizable(true);
-    // cb.setTpl(template);
     cb.setTitle("Licenses");
     cb.addListener(Events.Select, new Listener<BaseEvent>() {
       @Override

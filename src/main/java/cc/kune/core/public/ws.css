@@ -1,4 +1,4 @@
-CHARSET    "UTF-8   "; body {
+CHARSET      "UTF-8     "; body {
   background-color: white;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -450,8 +450,39 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
   margin-right: 20px;
 }
 
+.kune-Margin-20-b {
+  margin-bottom: 20px;
+}
+
 .kune-Margin-20-l {
   margin-left: 20px;
+}
+
+.kune-Margin-10-trbl {
+  margin: 10px;
+}
+
+.kune-Margin-10-lr {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.kune-Margin-10-tl {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.kune-Margin-10-tb {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.kune-Margin-10-t {
+  margin-top: 10px;
+}
+
+.kune-Margin-10-r {
+  margin-right: 10px;
 }
 
 .kune-Margin-Large-trbl {
@@ -479,6 +510,10 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
 
 .kune-Margin-Large-r {
   margin-right: 10px;
+}
+
+.kune-Margin-Large-b {
+  margin-bottom: 10px;
 }
 
 .kune-Margin-Large-l {
@@ -1156,7 +1191,7 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                                   90);
+  kfilter: alpha(opacity =                                       90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1323,8 +1358,8 @@ table.k-folder-viewer {
 }
 
 .x-form-check-wrap {
-    height: inherit;;
-    line-height: inherit;
+  height: inherit;;
+  line-height: inherit;
 }
 
 .k-info-links {

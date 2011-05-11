@@ -21,21 +21,21 @@
 }
 
 .k-opacity80 {
-  kfilter: alpha(opacity =                                           80);
+  kfilter: alpha(opacity =                                                 80);
   -moz-opacity: 0.80;
   -khtml-opacity: 0.80;
   opacity: 0.80;
 }
 
 .k-opacity90 {
-  kfilter: alpha(opacity =                                           90);
+  kfilter: alpha(opacity =                                                 90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
 }
 
 .k-opacity95 {
-  kfilter: alpha(opacity =                                           95);
+  kfilter: alpha(opacity =                                                 95);
   -moz-opacity: 0.95;
   -khtml-opacity: 0.95;
   opacity: 0.95;
@@ -43,7 +43,7 @@
 
 .gwt-PopupPanelGlass {
   background-color: #f7ebe3 !important;
-  kfilter: alpha(opacity =                                           68)
+  kfilter: alpha(opacity =                                                 68)
     !important;
   -moz-opacity: 0.68 !important;
   -khtml-opacity: 0.68 !important;
@@ -134,26 +134,36 @@
   padding: 22px 4px 3px 4px;
 }
 
+.k-dialog-title {
+  margin: 5px;
+}
+
 .k-dialog-title div {
   color: #552200;
   font-size: 20px;
   font-weight: bold;
-  margin: 10px 0 10px 10px;
+  line-height: 0.7;
+  padding: 0 0 6px 5px;
 }
 
 .k-dialog-innerp {
   background-color: #FFFFFF;
   border: solid 1px #F2F2F2;
-  margin: 34px 16px 20px 16px;
+  margin: 29px 8px 0;
+  padding: 8px 11px 13px;
 }
 
 .k-dialog-btn-area {
   padding: 0 15px 15px 15px;
-  margin-bottom: 30px;
+  margin-bottom: 0 -5px 30px -5px;
 }
 
-.k-dialog-btn-area div {
-  margin: 10px
+.k-dialog-btn-area button {
+  margin: 10px 5px;
+}
+
+.k-dialog-btn-area div { /* margin: 10px */
+
 }
 
 .k-dialog-btn {
@@ -199,6 +209,10 @@
 
 .oc-floatright {
   float: right;
+}
+
+.oc-clean {
+  clear: both;
 }
 
 .x-toolbar {
@@ -281,7 +295,7 @@
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                   90);
+  kfilter: alpha(opacity =                         90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -466,9 +480,8 @@
   float: left;
 }
 
-.k-iconlabel-right {
-  /* float: left; */
-  /*   margin-left: 5px; */
+.k-iconlabel-right { /* float: left; */ /*   margin-left: 5px; */
+
 }
 
 .gwt-MenuBar-vertical .subMenuIcon-selected {
@@ -525,63 +538,74 @@
   _border-left-color: pink;
   _border-bottom-color: pink;
   _border-right-color: pink;
-  _filter: chroma(color =         pink);
+  _filter: chroma(color =               pink);
 }
 
 /* end tooltip */
-
 /* tabbar */
-
 .gwt-DecoratedTabBar {
+
 }
+
 .gwt-DecoratedTabBar .gwt-TabBarFirst {
-  width: 5px;  /* first tab distance from the left */
+  width: 5px; /* first tab distance from the left */
 }
+
 .gwt-DecoratedTabBar .gwt-TabBarRest {
+
 }
+
 .gwt-DecoratedTabBar .gwt-TabBarItem {
   border-collapse: collapse;
   margin-left: 6px;
 }
+
 .gwt-DecoratedTabBar .tabTopCenter {
   padding: 0px;
   background: #e3e3e3;
 }
-.gwt-DecoratedTabBar .tabTopLeft,
-.gwt-DecoratedTabBar .tabTopRight {
+
+.gwt-DecoratedTabBar .tabTopLeft,.gwt-DecoratedTabBar .tabTopRight {
   padding: 0px;
   zoom: 1;
 }
-.gwt-DecoratedTabBar .tabTopLeftInner,
-.gwt-DecoratedTabBar .tabTopRightInner {
+
+.gwt-DecoratedTabBar .tabTopLeftInner,.gwt-DecoratedTabBar .tabTopRightInner
+  {
   width: 6px;
   height: 6px;
 }
+
 .gwt-DecoratedTabBar .tabTopLeft {
   background: url(images/corner.png) no-repeat 0px -55px;
   -background: url(images/corner_ie6.png) no-repeat 0px -55px;
 }
+
 .gwt-DecoratedTabBar .tabTopRight {
   background: url(images/corner.png) no-repeat -6px -55px;
   -background: url(images/corner_ie6.png) no-repeat -6px -55px;
 }
-* html .gwt-DecoratedTabBar .tabTopLeftInner,
-* html .gwt-DecoratedTabBar .tabTopRightInner {
+
+* html .gwt-DecoratedTabBar .tabTopLeftInner,* html .gwt-DecoratedTabBar .tabTopRightInner
+  {
   width: 6px;
   height: 6px;
   overflow: hidden;
 }
-.gwt-DecoratedTabBar .tabMiddleLeft,
-.gwt-DecoratedTabBar .tabMiddleRight {
+
+.gwt-DecoratedTabBar .tabMiddleLeft,.gwt-DecoratedTabBar .tabMiddleRight
+  {
   width: 6px;
   padding: 0px;
   background: #e3e3e3 url(images/hborder.png) repeat-x 0px -1463px;
 }
-.gwt-DecoratedTabBar .tabMiddleLeftInner,
-.gwt-DecoratedTabBar .tabMiddleRightInner {
+
+.gwt-DecoratedTabBar .tabMiddleLeftInner,.gwt-DecoratedTabBar .tabMiddleRightInner
+  {
   width: 1px;
   height: 1px;
 }
+
 .gwt-DecoratedTabBar .tabMiddleCenter {
   padding: 0px 4px 2px 4px;
   cursor: pointer;
@@ -591,31 +615,36 @@
   text-align: center;
   background: #e3e3e3 url(images/hborder.png) repeat-x 0px -1463px;
 }
+
 .gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabTopCenter {
   background: #747474;
 }
+
 .gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabTopLeft {
   background-position: 0px -61px;
 }
+
 .gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabTopRight {
   background-position: -6px -61px;
 }
-.gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabMiddleLeft,
-.gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabMiddleRight {
+
+.gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabMiddleLeft,.gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabMiddleRight
+  {
   background: #bcbcbc url(images/hborder.png) repeat-x 0px -2511px;
 }
+
 .gwt-DecoratedTabBar .gwt-TabBarItem-selected .tabMiddleCenter {
   cursor: default;
   background: #bcbcbc url(images/hborder.png) repeat-x 0px -2511px;
   color: white;
 }
+
 .gwt-DecoratedTabBar .gwt-TabBarItem-disabled .tabMiddleCenter {
   cursor: default;
   color: #999999;
 }
 
 /* End tabbar */
-
 .k-editableLabel {
   font-weight: bold;
   padding: 3px
@@ -639,15 +668,17 @@
 .k-overflow-y-scroll {
   overflow-y: scroll;
 }
+
 .k-overflow-y-auto {
   overflow-y: auto;
 }
+
 .k-overflow-x-scroll {
   overflow-x: scroll;
 }
 
 .k-tab-panel {
-    padding: 10px;
-    background-color: #F2F0F0;
-    border: 1px solid #D0D0D0;
+  padding: 10px;
+  background-color: #F2F0F0;
+  border: 1px solid #D0D0D0;
 }

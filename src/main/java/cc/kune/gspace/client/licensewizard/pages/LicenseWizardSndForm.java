@@ -44,6 +44,7 @@ public class LicenseWizardSndForm extends DefaultForm implements LicenseWizardSn
     super.setAutoHeight(true);
     final Label intro = new Label();
     intro.setText(i18n.t("Select the license type:"));
+    intro.addStyleName("kune-Margin-10-b");
 
     final FieldSet fieldSet = new FieldSet();
     // fieldSet.setTitle("license type");

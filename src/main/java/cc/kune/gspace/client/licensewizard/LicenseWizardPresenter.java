@@ -194,6 +194,7 @@ public class LicenseWizardPresenter extends
 
   public void onClose() {
     getView().hide();
+    reset();
   }
 
   void onCopyLeftLicenseSelected() {

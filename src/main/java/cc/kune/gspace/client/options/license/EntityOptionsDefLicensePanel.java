@@ -47,10 +47,12 @@ public class EntityOptionsDefLicensePanel extends Composite implements EntityOpt
     final Label intro = new Label();
     intro.setWordWrap(true);
     intro.setText(i18n.t("This is the default license for all the contents of this group (you can also select another different license per content):"));
+    intro.addStyleName("kune-Margin-20-tb");
     flow.add(intro);
     licenseImage = new Image();
     flow.add(licenseImage);
     licenseImage.addStyleName("kune-pointer");
+    licenseImage.addStyleName("k-fr");
     change = new Button(i18n.t("Change"));
     change.addStyleName("k-button");
     flow.add(change);

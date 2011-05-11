@@ -34,10 +34,10 @@ import cc.kune.gspace.client.options.EntityOptionsView;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOptionsToolsConfView {
@@ -88,6 +88,7 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
     fields.clear();
     final Label label = new Label();
     label.setText(i18n.t("Here you can select the tools used:"));
+    label.addStyleName("kune-Margin-10-tb");
     super.add(label);
   }
 
