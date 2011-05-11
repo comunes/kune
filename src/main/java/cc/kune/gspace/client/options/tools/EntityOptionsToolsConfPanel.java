@@ -62,10 +62,13 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
   }
 
   @Override
-  public void add(final ToolSimpleDTO tool, final ClickHandler handler) {
+  public void add(final ToolSimpleDTO tool, final boolean enabled, final boolean checked,
+      final ClickHandler handler) {
     final CheckBox checkbox = new CheckBox();
     checkbox.setFieldLabel(tool.getRootName());
-    // checkbox.setValue(false);
+    // checkbox.setFireChangeEventOnSetValue(false);
+    checkbox.setValue(checked);
+    setEnabled(checkbox, enabled);
     checkbox.addListener(Events.Change, new Listener<BaseEvent>() {
       @Override
       public void handleEvent(final BaseEvent be) {
@@ -128,14 +131,18 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
     field.setValue(checked);
   }
 
+  private void setEnabled(final CheckBox checkbox, final boolean enabled) {
+    if (enabled) {
+      checkbox.enable();
+    } else {
+      checkbox.disable();
+    }
+  }
+
   @Override
   public void setEnabled(final String tool, final boolean enabled) {
     final CheckBox field = getTool(tool);
-    if (enabled) {
-      field.enable();
-    } else {
-      field.disable();
-    }
+    setEnabled(field, enabled);
   }
 
   @Override

@@ -26,7 +26,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 public interface EntityOptionsToolsConfView extends EntityOptionsTabView {
 
-  void add(ToolSimpleDTO tool, ClickHandler clickHandler);
+  void add(ToolSimpleDTO tool, boolean enabled, boolean checked, ClickHandler clickHandler);
 
   void clear();
 

@@ -84,14 +84,12 @@ public abstract class EntityOptionsToolsConfPresenter {
   private void onCheck(final ToolSimpleDTO tool, final boolean checked) {
     final List<String> enabledTools = getEnabledTools();
     final String toolName = tool.getName();
-    if (checked) {
-      if (!(enabledTools.contains(toolName))) {
-        setToolCheckedInServer(checked, toolName);
-      }
-    } else {
+    setToolCheckedInServer(checked, toolName);
+    if (!checked) {
       if (enabledTools.contains(toolName)) {
-        setToolCheckedInServer(checked, toolName);
-        gotoDifLocationIfNecessary(toolName);
+        // FIXME uncomment this when fixed
+        // setToolCheckedInServer(checked, toolName);
+        // gotoDifLocationIfNecessary(toolName);
       }
     }
   }
@@ -104,19 +102,18 @@ public abstract class EntityOptionsToolsConfPresenter {
   protected void setState() {
     reset();
     final Collection<ToolSimpleDTO> toolCollection = getAllTools();
+    final List<String> enabledTools = getEnabledTools();
     for (final ToolSimpleDTO tool : toolCollection) {
-      view.add(tool, new ClickHandler() {
+      final boolean checked = enabledTools.contains(tool.getName());
+      final boolean enabled = true;
+      view.add(tool, enabled, checked, new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
           onCheck(tool, view.isChecked(tool.getName()));
         }
       });
-      view.setEnabled(tool.getName(), true);
     }
-    for (final String tool : getEnabledTools()) {
-      view.setChecked(tool, true);
-    }
-
+    // Disable def content tool (don't works now)
     final StateToken token = getDefContentToken();
     if (token != null) {
       final String defContentTool = token.getTool();
@@ -129,6 +126,7 @@ public abstract class EntityOptionsToolsConfPresenter {
 
   protected void setToolCheckedInServer(final boolean checked, final String toolName) {
     // view.mask();
+    // NotifyUser.info("Dis/Enabling tool" + toolName + " - " + checked);
     groupService.get().setToolEnabled(session.getUserHash(), getOperationToken(), toolName, checked,
         new AsyncCallback<Void>() {
           @Override
