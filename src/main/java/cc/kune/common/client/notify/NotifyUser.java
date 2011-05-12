@@ -26,97 +26,107 @@ import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.resources.client.ImageResource;
 
 public class NotifyUser {
-    private static EventBus eventBus;
-    private static I18nTranslationService i18n;
-    private static SimpleResponseCallback onOk;
+  private static EventBus eventBus;
+  private static I18nTranslationService i18n;
+  private static SimpleResponseCallback onOk;
 
-    public static void askConfirmation(final String tittle, final String message, final SimpleResponseCallback callback) {
-        eventBus.fireEvent(new ConfirmAskEvent(tittle, message, i18n.t("Yes"), i18n.t("No"), callback));
-    }
+  public static void askConfirmation(final ImageResource icon, final String title, final String message,
+      final SimpleResponseCallback callback) {
+    eventBus.fireEvent(new ConfirmAskEvent(icon, title, message, i18n.t("Yes"), i18n.t("No"), callback));
+  }
 
-    public static void error(final String message) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message));
-    }
+  public static void askConfirmation(final String title, final String message,
+      final SimpleResponseCallback callback) {
+    askConfirmation(null, title, message, callback);
+  }
 
-    public static void error(final String message, final boolean closeable) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, closeable));
-    }
+  public static void error(final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message));
+  }
 
-    public static void error(final String message, final String title, final boolean closeable) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, title, closeable));
-    }
+  public static void error(final String message, final boolean closeable) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, closeable));
+  }
 
-    public static void error(final String message, final String title, final String id, final boolean closeable) {
-        final UserNotifyEvent event = new UserNotifyEvent(NotifyLevel.error, message, id, closeable);
-        event.setId(id);
-        eventBus.fireEvent(event);
-    }
+  public static void error(final String message, final String title, final boolean closeable) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, title, closeable));
+  }
 
-    public static void hideProgress() {
-        eventBus.fireEvent(new ProgressHideEvent());
-    }
+  public static void error(final String message, final String title, final String id,
+      final boolean closeable) {
+    final UserNotifyEvent event = new UserNotifyEvent(NotifyLevel.error, message, id, closeable);
+    event.setId(id);
+    eventBus.fireEvent(event);
+  }
 
-    public static void important(final String message) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.important, message));
-    }
+  public static void hideProgress() {
+    eventBus.fireEvent(new ProgressHideEvent());
+  }
 
-    public static void info(final String message) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message));
-    }
+  public static void important(final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.important, message));
+  }
 
-    public static void info(final String message, final boolean closeable) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message, closeable));
-    }
+  public static void info(final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message));
+  }
 
-    public static void init(final EventBus eventBus, final I18nTranslationService i18n) {
-        NotifyUser.eventBus = eventBus;
-        NotifyUser.i18n = i18n;
-        onOk = new SimpleResponseCallback() {
+  public static void info(final String message, final boolean closeable) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message, closeable));
+  }
 
-            @Override
-            public void onCancel() {
-                // Do nothing
-            }
+  public static void init(final EventBus eventBus, final I18nTranslationService i18n) {
+    NotifyUser.eventBus = eventBus;
+    NotifyUser.i18n = i18n;
+    onOk = new SimpleResponseCallback() {
 
-            @Override
-            public void onSuccess() {
-                // Do nothing
-            }
-        };
+      @Override
+      public void onCancel() {
+        // Do nothing
+      }
 
-    }
+      @Override
+      public void onSuccess() {
+        // Do nothing
+      }
+    };
 
-    public static void logError(final String message) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.log, message));
-    }
+  }
 
-    public static void showAlertMessage(final String title, final String message) {
-        showAlertMessage(title, message, onOk);
-    }
+  public static void logError(final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.log, message));
+  }
 
-    public static void showAlertMessage(final String title, final String message, final SimpleResponseCallback callback) {
-        eventBus.fireEvent(new ConfirmAskEvent(title, message, i18n.t("Ok"), "", callback));
-    }
+  public static void showAlertMessage(final String title, final String message) {
+    showAlertMessage(title, message, onOk);
+  }
 
-    public static void showProgress() {
-        eventBus.fireEvent(new ProgressShowEvent(""));
-    }
+  public static void showAlertMessage(final String title, final String message,
+      final SimpleResponseCallback callback) {
+    eventBus.fireEvent(new ConfirmAskEvent(title, message, i18n.t("Ok"), "", callback));
+  }
 
-    public static void showProgress(final String text) {
-        eventBus.fireEvent(new ProgressShowEvent(text));
-    }
+  public static void showProgress() {
+    eventBus.fireEvent(new ProgressShowEvent(""));
+  }
 
-    public static void showProgressLoading() {
-        eventBus.fireEvent(new ProgressShowEvent());
-    }
+  public static void showProgress(final String text) {
+    eventBus.fireEvent(new ProgressShowEvent(text));
+  }
 
-    public static void showProgressProcessing() {
-        eventBus.fireEvent(new ProgressShowEvent());
-    }
+  public static void showProgressLoading() {
+    eventBus.fireEvent(new ProgressShowEvent());
+  }
 
-    public static void veryImportant(final String message) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, message));
-    }
+  public static void showProgressProcessing() {
+    eventBus.fireEvent(new ProgressShowEvent());
+  }
+
+  public static void veryImportant(final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, message));
+  }
+
 }

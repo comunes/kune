@@ -32,6 +32,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.safehtml.shared.SimpleHtmlSanitizer;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -93,10 +94,9 @@ public class UserMessage extends Composite implements HasText {
     }
     if (TextUtils.notEmpty(message)) {
       if (TextUtils.notEmpty(title)) {
-        label.setHTML(MSG_WITH_TITLE.format(SimpleHtmlSanitizer.sanitizeHtml(title),
-            SimpleHtmlSanitizer.sanitizeHtml(message)));
+        label.setHTML(MSG_WITH_TITLE.format(SimpleHtmlSanitizer.sanitizeHtml(title), sanitize(message)));
       } else {
-        label.setHTML(MSG_NO_TITLE.format(SimpleHtmlSanitizer.sanitizeHtml(message)));
+        label.setHTML(MSG_NO_TITLE.format(sanitize(message)));
       }
       close.setVisible(closeable);
       close.setTitle(closeTitle);
@@ -151,6 +151,10 @@ public class UserMessage extends Composite implements HasText {
   @UiHandler("close")
   void handleClick(final ClickEvent e) {
     close();
+  }
+
+  private SafeHtml sanitize(final String message) {
+    return SafeHtmlUtils.fromTrustedString(message);
   }
 
   @Override

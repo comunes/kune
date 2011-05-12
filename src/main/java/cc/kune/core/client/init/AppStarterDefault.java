@@ -21,9 +21,11 @@ package cc.kune.core.client.init;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -35,6 +37,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
+import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
@@ -42,16 +45,18 @@ import com.google.inject.Inject;
 public class AppStarterDefault implements AppStarter {
   private final EventBus eventBus;
   private final PrefetchUtilities prefetchUtilities;
+  private final CoreResources res;
   private final Session session;
   private final SiteServiceAsync siteService;
 
   @Inject
   public AppStarterDefault(final Session session, final SiteServiceAsync siteService,
-      final EventBus eventBus, final PrefetchUtilities prefetchUtilities) {
+      final EventBus eventBus, final PrefetchUtilities prefetchUtilities, final CoreResources res) {
     this.session = session;
     this.siteService = siteService;
     this.eventBus = eventBus;
     this.prefetchUtilities = prefetchUtilities;
+    this.res = res;
     Window.addWindowClosingHandler(new ClosingHandler() {
       @Override
       public void onWindowClosing(final ClosingEvent event) {
@@ -60,14 +65,26 @@ public class AppStarterDefault implements AppStarter {
     });
   }
 
-  private void checkNavigatorCompatibility(final SimpleResponseCallback simpleResponseCallback) {
-    // eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, "Navigator: " +
-    // Navigator.getUserAgent(),
-    // true));
+  private void checkNavigatorCompatibility(final NavigatorSupport navSupport) {
+    if (Navigator.getUserAgent().toLowerCase().contains("msie")) {
+      navSupport.onNotSupported();
+    } else {
+      navSupport.onSupported();
+    }
   }
 
   private void getInitData() {
     siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
+      private void continueStart(final InitDataDTO initData) {
+        eventBus.fireEvent(new AppStartEvent(initData));
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            // hideInitialPanels();
+          }
+        });
+      }
+
       private void hideInitialPanels() {
         RootPanel.get("kuneloading").setVisible(false);
       }
@@ -85,11 +102,29 @@ public class AppStarterDefault implements AppStarter {
       public void onSuccess(final InitDataDTO initData) {
         session.setInitData(initData);
         session.setCurrentUserInfo(initData.getUserInfo());
-        eventBus.fireEvent(new AppStartEvent(initData));
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        hideInitialPanels();
+        checkNavigatorCompatibility(new NavigatorSupport() {
           @Override
-          public void execute() {
-            hideInitialPanels();
+          public void onNotSupported() {
+            NotifyUser.askConfirmation(
+                res.important32(),
+                "Your browser is currently unsupported",
+                "Please, use a modern navigator like <a class='k-link' href='http://mozilla.org'>Mozilla Firefox</a> instead. Continue anyway?",
+                new SimpleResponseCallback() {
+                  @Override
+                  public void onCancel() {
+                  }
+
+                  @Override
+                  public void onSuccess() {
+                    continueStart(initData);
+                  }
+                });
+          }
+
+          @Override
+          public void onSupported() {
+            continueStart(initData);
           }
         });
       }
@@ -99,18 +134,6 @@ public class AppStarterDefault implements AppStarter {
   @Override
   public void start() {
     prefetchUtilities.preFetchImpImages();
-    checkNavigatorCompatibility(new SimpleResponseCallback() {
-
-      @Override
-      public void onCancel() {
-
-      }
-
-      @Override
-      public void onSuccess() {
-
-      }
-    });
     getInitData();
     final Timer prefetchTimer = new Timer() {
       @Override

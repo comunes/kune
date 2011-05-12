@@ -38,25 +38,15 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
   private final I18nTranslationService i18n;
   private final CoreResources img;
   private ButtonDescriptor prefsItem;
+  private final StateManager stateManager;
   private GroupOptionsView view;
 
   @Inject
   public GroupOptionsPresenter(final StateManager stateManager, final I18nTranslationService i18n,
       final CoreResources img, final GroupOptionsView view) {
+    this.stateManager = stateManager;
     this.i18n = i18n;
     this.img = img;
-    stateManager.onStateChanged(true, new StateChangedHandler() {
-      @Override
-      public void onStateChanged(final StateChangedEvent event) {
-        final StateAbstractDTO state = event.getState();
-        if (!state.getGroup().isPersonal() && state.getGroupRights().isAdministrable()) {
-          prefsItem.setVisible(true);
-        } else {
-          view.hide();
-          prefsItem.setVisible(false);
-        }
-      }
-    });
     init(view);
   }
 
@@ -80,5 +70,17 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
     super.init(view);
     this.view = view;
     createActions();
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        final StateAbstractDTO state = event.getState();
+        if (!state.getGroup().isPersonal() && state.getGroupRights().isAdministrable()) {
+          prefsItem.setVisible(true);
+        } else {
+          view.hide();
+          prefsItem.setVisible(false);
+        }
+      }
+    });
   }
 }

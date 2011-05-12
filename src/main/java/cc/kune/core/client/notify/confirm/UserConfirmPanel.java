@@ -27,7 +27,8 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -37,7 +38,7 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
   private static final String DIALOG_ID = "k-conf-dial-nok";
   private static final String OK_ID = "k-conf-dial-ok";
   private HandlerRegistration acceptHandler;
-  private final Label askLabel;
+  private final HTML askLabel;
   private HandlerRegistration cancelHandler;
   private final BasicTopDialog dialog;
 
@@ -45,7 +46,7 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
   public UserConfirmPanel(final I18nTranslationService i18n) {
     dialog = new BasicTopDialog.Builder(DIALOG_ID, false, true).autoscroll(false).width(100).height(100).firstButtonId(
         OK_ID).sndButtonId(CANCEL_ID).tabIndexStart(1).build();
-    askLabel = new Label();
+    askLabel = new HTML();
     askLabel.addStyleName("k-userconfirm-label");
     dialog.getInnerPanel().add(askLabel);
   }
@@ -63,24 +64,28 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
     dialog.setSecondBtnText(cancelBtnMsg);
     dialog.setSecondBtnTitle(ask.getCancelBtnTooltip());
     dialog.getTitleText().setText(ask.getTitle());
-    askLabel.setText(ask.getMessage());
+    askLabel.setHTML(ask.getMessage());
     dialog.showCentered();
     resetHandlers();
     acceptHandler = dialog.getFirstBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        ask.getCallback().onSuccess();
         dialog.hide();
+        ask.getCallback().onSuccess();
       }
     });
     cancelHandler = dialog.getSecondBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        ask.getCallback().onCancel();
         dialog.hide();
+        ask.getCallback().onCancel();
       }
     });
     dialog.showCentered();
+    final ImageResource icon = ask.getIcon();
+    if (icon != null) {
+      dialog.setTitleIcon(icon);
+    }
   }
 
   private void resetHandlers() {
