@@ -4,7 +4,7 @@
   <groupId>cc.kune</groupId>
   <artifactId>kune</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.7</version>
+  <version>0.0.8</version>
   <name>kune</name>
   <description> kune free/open/libre collaboration platform </description>
   <url>http://kune.ourproject.org</url>
