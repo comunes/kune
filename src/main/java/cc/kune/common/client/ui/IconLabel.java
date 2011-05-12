@@ -65,7 +65,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   public IconLabel(final ImageResource imgRes, final String text) {
     this(text);
     if (imgRes != null) {
-      iconLeft.setResource(imgRes);
+      setLeftIconResourceImpl(imgRes);
     }
   }
 
@@ -74,6 +74,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     label.setText(text);
     label.addStyleName("k-space-nowrap");
     label.addStyleName("k-iconlabel-text");
+    iconLeft.setVisible(false);
+    iconRight.setVisible(false);
   }
 
   @Override
@@ -132,17 +134,24 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.setStyleName(imgCss);
     iconLeft.addStyleName("k-iconlabel-left");
     iconLeft.addStyleName("oc-ico-pad");
+    iconLeft.setVisible(true);
   }
 
   public void setLeftIconResource(final ImageResource res) {
+    setLeftIconResourceImpl(res);
+  }
+
+  private void setLeftIconResourceImpl(final ImageResource res) {
     iconLeft.setResource(res);
     iconLeft.addStyleName("k-iconlabel-left");
+    iconLeft.setVisible(true);
   }
 
   public void setLeftIconUrl(final String url) {
     iconLeft.setUrl(url);
     iconLeft.setSize(DEF, DEF);
     iconLeft.addStyleName("k-iconlabel-left");
+    iconLeft.setVisible(true);
   }
 
   public void setRightIcon(final String imgCss) {
@@ -150,17 +159,20 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconRight.setStyleName(imgCss);
     iconRight.addStyleName("oc-ico-pad");
     iconRight.addStyleName("k-iconlabel-right");
+    iconRight.setVisible(true);
   }
 
   public void setRightIconResource(final ImageResource res) {
     iconRight.setResource(res);
     iconRight.addStyleName("k-iconlabel-right");
+    iconRight.setVisible(true);
   }
 
   public void setRightIconUrl(final String url) {
     iconRight.setUrl(url);
     iconRight.setSize(DEF, DEF);
     iconRight.addStyleName("k-iconlabel-right");
+    iconRight.setVisible(true);
   }
 
   @Override

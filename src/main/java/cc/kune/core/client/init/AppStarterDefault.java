@@ -21,6 +21,7 @@ package cc.kune.core.client.init;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
@@ -59,6 +60,12 @@ public class AppStarterDefault implements AppStarter {
     });
   }
 
+  private void checkNavigatorCompatibility(final SimpleResponseCallback simpleResponseCallback) {
+    // eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, "Navigator: " +
+    // Navigator.getUserAgent(),
+    // true));
+  }
+
   private void getInitData() {
     siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
       private void hideInitialPanels() {
@@ -92,6 +99,18 @@ public class AppStarterDefault implements AppStarter {
   @Override
   public void start() {
     prefetchUtilities.preFetchImpImages();
+    checkNavigatorCompatibility(new SimpleResponseCallback() {
+
+      @Override
+      public void onCancel() {
+
+      }
+
+      @Override
+      public void onSuccess() {
+
+      }
+    });
     getInitData();
     final Timer prefetchTimer = new Timer() {
       @Override
