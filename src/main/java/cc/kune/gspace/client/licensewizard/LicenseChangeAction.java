@@ -28,11 +28,14 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.ui.footer.license.LicenseChangedEvent;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class LicenseChangeAction {
+  private final EventBus eventBus;
   private final Provider<GroupServiceAsync> groupService;
   private final I18nTranslationService i18n;
   private final Session session;
@@ -40,9 +43,10 @@ public class LicenseChangeAction {
 
   @Inject
   public LicenseChangeAction(final Provider<GroupServiceAsync> groupService, final Session session,
-      final I18nTranslationService i18n, final StateManager stateManager) {
+      final EventBus eventBus, final I18nTranslationService i18n, final StateManager stateManager) {
     this.groupService = groupService;
     this.session = session;
+    this.eventBus = eventBus;
     this.i18n = i18n;
     this.stateManager = stateManager;
   }
@@ -64,6 +68,7 @@ public class LicenseChangeAction {
           public void onSuccess(final Void result) {
             stateManager.reload();
             callback.onSuccess();
+            LicenseChangedEvent.fire(eventBus);
           }
         });
   }

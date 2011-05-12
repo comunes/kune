@@ -54,6 +54,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   public ToolSelectorItemPanel() {
     initWidget(uiBinder.createAndBindUi(this));
     setVisibleImpl(false);
+    iconLeft.setVisible(false);
   }
 
   @Override

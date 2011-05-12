@@ -109,7 +109,7 @@ public class AppStarterDefault implements AppStarter {
             NotifyUser.askConfirmation(
                 res.important32(),
                 "Your browser is currently unsupported",
-                "Please, use a modern navigator like <a class='k-link' href='http://mozilla.org'>Mozilla Firefox</a> instead. Continue anyway?",
+                "Please, use a free/libre modern navigator like <a class='k-link' href='https://www.mozilla.com/en-US/firefox/fx/'>Mozilla Firefox</a> instead. Continue anyway?",
                 new SimpleResponseCallback() {
                   @Override
                   public void onCancel() {

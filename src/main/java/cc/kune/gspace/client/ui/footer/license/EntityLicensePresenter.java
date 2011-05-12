@@ -19,9 +19,11 @@
  */
 package cc.kune.gspace.client.ui.footer.license;
 
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
@@ -38,60 +40,70 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class EntityLicensePresenter extends
-        Presenter<EntityLicensePresenter.EntityLicenseView, EntityLicensePresenter.EntityLicenseProxy> {
+    Presenter<EntityLicensePresenter.EntityLicenseView, EntityLicensePresenter.EntityLicenseProxy> {
 
-    @ProxyCodeSplit
-    public interface EntityLicenseProxy extends Proxy<EntityLicensePresenter> {
+  @ProxyCodeSplit
+  public interface EntityLicenseProxy extends Proxy<EntityLicensePresenter> {
+  }
+  public interface EntityLicenseView extends View {
+    void attach();
+
+    void detach();
+
+    HasClickHandlers getImage();
+
+    void openWindow(String url);
+
+    void showLicense(String groupName, LicenseDTO licenseDTO);
+
+  }
+
+  private LicenseDTO license;
+
+  @Inject
+  public EntityLicensePresenter(final EventBus eventBus, final EntityLicenseView view,
+      final Session session, final EntityLicenseProxy proxy, final StateManager stateManager) {
+    super(eventBus, view, proxy);
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        final StateAbstractDTO state = event.getState();
+        setState(state);
+      }
+
+    });
+    final ClickHandler clickHandler = new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        getView().openWindow(license.getUrl());
+      }
+    };
+    getView().getImage().addClickHandler(clickHandler);
+    eventBus.addHandler(LicenseChangedEvent.getType(), new LicenseChangedEvent.LicenseChangedHandler() {
+
+      @Override
+      public void onLicenseChanged(final LicenseChangedEvent event) {
+        setState(session.getCurrentState());
+      }
+    });
+  }
+
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
+  }
+
+  private void setLicense(final StateContainerDTO state) {
+    this.license = state.getLicense();
+    getView().showLicense(state.getGroup().getShortName(), license);
+    getView().attach();
+  }
+
+  private void setState(final StateAbstractDTO state) {
+    if (state instanceof HasContent) {
+      setLicense((StateContainerDTO) state);
+    } else {
+      getView().detach();
     }
-    public interface EntityLicenseView extends View {
-        void attach();
-
-        void detach();
-
-        HasClickHandlers getImage();
-
-        void openWindow(String url);
-
-        void showLicense(String groupName, LicenseDTO licenseDTO);
-
-    }
-
-    private LicenseDTO license;
-
-    @Inject
-    public EntityLicensePresenter(final EventBus eventBus, final EntityLicenseView view,
-            final EntityLicenseProxy proxy, final StateManager stateManager) {
-        super(eventBus, view, proxy);
-        stateManager.onStateChanged(true, new StateChangedHandler() {
-
-            @Override
-            public void onStateChanged(final StateChangedEvent event) {
-                final StateAbstractDTO state = event.getState();
-                if (state instanceof StateContainerDTO) {
-                    setLicense((StateContainerDTO) state);
-                } else {
-                    getView().detach();
-                }
-            }
-        });
-        final ClickHandler clickHandler = new ClickHandler() {
-
-            @Override
-            public void onClick(final ClickEvent event) {
-                getView().openWindow(license.getUrl());
-            }
-        };
-        getView().getImage().addClickHandler(clickHandler);
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
-
-    private void setLicense(final StateContainerDTO state) {
-        this.license = state.getLicense();
-        getView().showLicense(state.getGroup().getShortName(), license);
-        getView().attach();
-    }
+  }
 }

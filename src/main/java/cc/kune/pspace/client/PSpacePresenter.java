@@ -46,94 +46,95 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpacePresenter.PSpaceProxy> {
 
-    @ProxyCodeSplit
-    public interface PSpaceProxy extends Proxy<PSpacePresenter> {
-    }
-    public interface PSpaceView extends View {
+  @ProxyCodeSplit
+  public interface PSpaceProxy extends Proxy<PSpacePresenter> {
+  }
+  public interface PSpaceView extends View {
 
-        IsActionExtensible getActionPanel();
+    IsActionExtensible getActionPanel();
 
-        HasText getDescription();
+    HasText getDescription();
 
-        HasText getTitle();
+    HasText getTitle();
 
-        void setContentGotoPublicUrl(String publicUrl);
-    }
+    void setContentGotoPublicUrl(String publicUrl);
+  }
 
-    private final I18nTranslationService i18n;
-    private final StateTokenUtils stateTokenUtils;
+  private final I18nTranslationService i18n;
+  private final StateTokenUtils stateTokenUtils;
 
-    @Inject
-    public PSpacePresenter(final Session session, final StateManager stateManager, final EventBus eventBus,
-            final PSpaceView view, final PSpaceProxy proxy, final I18nTranslationService i18n,
-            final StateTokenUtils stateTokenUtils) {
-        super(eventBus, view, proxy);
-        this.i18n = i18n;
-        this.stateTokenUtils = stateTokenUtils;
-        session.onAppStart(true, new AppStartEvent.AppStartHandler() {
-            @Override
-            public void onAppStart(final AppStartEvent event) {
-                stateManager.onStateChanged(true, new StateChangedHandler() {
-                    @Override
-                    public void onStateChanged(final StateChangedEvent event) {
-                        setState(event.getState());
-                    }
-                });
-            }
+  @Inject
+  public PSpacePresenter(final Session session, final StateManager stateManager,
+      final EventBus eventBus, final PSpaceView view, final PSpaceProxy proxy,
+      final I18nTranslationService i18n, final StateTokenUtils stateTokenUtils) {
+    super(eventBus, view, proxy);
+    this.i18n = i18n;
+    this.stateTokenUtils = stateTokenUtils;
+    session.onAppStart(true, new AppStartEvent.AppStartHandler() {
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+        stateManager.onStateChanged(true, new StateChangedHandler() {
+          @Override
+          public void onStateChanged(final StateChangedEvent event) {
+            setState(event.getState());
+          }
         });
-    }
+      }
+    });
+  }
 
-    @Override
-    protected void onReveal() {
-        super.onReveal();
-    }
+  @Override
+  protected void onReveal() {
+    super.onReveal();
+  }
 
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
+  }
 
-    private void setContentNotPublic() {
-        getView().getTitle().setText(i18n.t("Not Published yet") + TextUtils.IN_DEVELOPMENT_P);
-        getView().getDescription().setText(
-                i18n.t("This is only a preview of how this page will looks like to the general public if you want to publish it"));
-    }
+  private void setContentNotPublic() {
+    getView().getTitle().setText(i18n.t("Not Published yet") + TextUtils.IN_DEVELOPMENT_P);
+    getView().getDescription().setText(
+        i18n.t("This is only a preview of how this page will looks like to the general public if you want to publish it"));
+  }
 
-    private void setContentNotPublicable() {
-        getView().getTitle().setText(i18n.t("Not Publicable") + TextUtils.IN_DEVELOPMENT_P);
-        getView().getDescription().setText(i18n.t("This page is not publicable"));
+  private void setContentNotPublicable() {
+    getView().getTitle().setText(i18n.t("Not Publicable") + TextUtils.IN_DEVELOPMENT_P);
+    getView().getDescription().setText(i18n.t("This page is not publicable"));
+    getView().setContentGotoPublicUrl("about:blank");
+  }
+
+  private void setContentPublic() {
+    getView().getTitle().setText(i18n.t("Preview") + TextUtils.IN_DEVELOPMENT_P);
+    getView().getDescription().setText(
+        i18n.t("This is only a preview of how this page looks like to the general public on the web, outside this site."));
+  }
+
+  public void setState(final StateAbstractDTO state) {
+    if (state instanceof StateContainerDTO) {
+      final StateToken token = state.getStateToken();
+      if (((StateContainerDTO) state).getAccessLists().getViewers().getMode().equals(
+          GroupListDTO.EVERYONE)) {
+        final String publicUrl = stateTokenUtils.getPublicUrl(token);
+        // getView().setContentGotoPublicUrl(publicUrl);
         getView().setContentGotoPublicUrl("about:blank");
-    }
-
-    private void setContentPublic() {
-        getView().getTitle().setText(i18n.t("Preview") + TextUtils.IN_DEVELOPMENT_P);
-        getView().getDescription().setText(
-                i18n.t("This is only a preview of how this page looks like to the general public on the web, outside this site."));
-    }
-
-    public void setState(final StateAbstractDTO state) {
-        if (state instanceof StateContainerDTO) {
-            final StateToken token = state.getStateToken();
-            if (((StateContainerDTO) state).getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
-                final String publicUrl = stateTokenUtils.getPublicUrl(token);
-                // getView().setContentGotoPublicUrl(publicUrl);
-                getView().setContentGotoPublicUrl("about:blank");
-                if (state instanceof StateContentDTO) {
-                    final StateContentDTO content = (StateContentDTO) state;
-                    if (content.getStatus().equals(ContentStatus.publishedOnline)) {
-                        setContentPublic();
-                    } else {
-                        setContentNotPublic();
-                    }
-                } else {
-                    setContentPublic();
-                }
-            } else {
-                setContentNotPublic();
-            }
+        if (state instanceof StateContentDTO) {
+          final StateContentDTO content = (StateContentDTO) state;
+          if (content.getStatus().equals(ContentStatus.publishedOnline)) {
+            setContentPublic();
+          } else {
+            setContentNotPublic();
+          }
         } else {
-            setContentNotPublicable();
+          setContentPublic();
         }
+      } else {
+        setContentNotPublic();
+      }
+    } else {
+      setContentNotPublicable();
     }
+  }
 
 }

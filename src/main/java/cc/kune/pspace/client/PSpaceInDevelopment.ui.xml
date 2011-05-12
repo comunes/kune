@@ -1,0 +1,95 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+    .container {
+      margin: 10px;
+      font-family: 'Ubuntu', Arial;
+      background-color: white;
+    }
+
+    .entityLogo {
+      float: left;
+    }
+
+    .entityName {
+      font-size: 34px;
+      color: #912312;
+      /* line-height: 1.1em; */
+      margin-left: 10px;
+      font-weight: bold;
+      float: left;
+    }
+
+    .mainPanel {
+      border: 2px solid #801c03;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      background-color: #f8e2e5;
+      width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      /* position: relative; */
+      min-height: 1024px;
+      padding: 30px;
+    }
+
+    .photoPanel {
+      background-color: #c91d08;
+      height: 160px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .contentHtml {
+      font-size: 32px;
+      color: #c92106;
+      margin-top: 50px;
+      float: right;
+      width: 510px;
+      padding: 30px;
+    }
+
+    .contentHtml a {
+      color: #912312;
+    }
+
+    @sprite .photo {
+      gwt-image: "photo";
+    }
+
+    .right {
+      float: right;
+      width: 540px;
+    }
+  </ui:style>
+
+  <ui:image field="photo" src="back-ps.jpg"></ui:image>
+  <g:FlowPanel ui:field="container" addStyleNames="{style.container}">
+    <g:FlowPanel ui:field="mainPanel" addStyleNames="{style.mainPanel}">
+      <g:FlowPanel ui:field="headerPanel" height="70px">
+        <g:Image ui:field="entityLogo" addStyleNames="{style.entityLogo}"
+         />
+        <g:Label text="" ui:field="entityName" addStyleNames="{style.entityName}" />
+      </g:FlowPanel>
+      <g:FlowPanel ui:field="photoPanel" addStyleNames="{style.photoPanel}">
+        <g:InlineLabel addStyleNames="{style.photo} {style.right}"
+          ui:field="logo" />
+      </g:FlowPanel>
+      <g:FlowPanel ui:field="contentPanel">
+        <g:HTMLPanel addStyleNames="{style.contentHtml}">
+          Right now, the public web space of this group, it's under
+          construction
+          <br />
+          <br />
+          <a href='http://kune.ourproject.org/join/' target='_blank'>Please
+            support</a>
+          the development
+          <br />
+          <br />
+        </g:HTMLPanel>
+      </g:FlowPanel>
+    </g:FlowPanel>
+  </g:FlowPanel>
+</ui:UiBinder>

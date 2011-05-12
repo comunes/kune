@@ -52,7 +52,7 @@ public class EntityOptionsDefLicensePanel extends Composite implements EntityOpt
     licenseImage = new Image();
     flow.add(licenseImage);
     licenseImage.addStyleName("kune-pointer");
-    licenseImage.addStyleName("k-fr");
+    licenseImage.addStyleName("kune-Margin-10-r");
     change = new Button(i18n.t("Change"));
     change.addStyleName("k-button");
     flow.add(change);

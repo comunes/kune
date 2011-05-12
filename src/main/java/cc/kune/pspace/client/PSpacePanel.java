@@ -31,7 +31,6 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -43,65 +42,67 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class PSpacePanel extends ViewImpl implements PSpaceView {
 
-    public interface PSpacePanelUiBinder extends UiBinder<Widget, PSpacePanel> {
-    }
-    private static PSpacePanelUiBinder uiBinder = GWT.create(PSpacePanelUiBinder.class);
+  public interface PSpacePanelUiBinder extends UiBinder<Widget, PSpacePanel> {
+  }
+  private static PSpacePanelUiBinder uiBinder = GWT.create(PSpacePanelUiBinder.class);
 
-    private final ActionFlowPanel actionPanel;
-    @UiField
-    SimplePanel actionPanelContainer;
-    @UiField
-    InlineLabel description;
-    @UiField
-    Frame frame;
-    @UiField
-    Image icon;
-    @UiField
-    LayoutPanel mainPanel;
-    @UiField
-    FlowPanel messagePanel;
-    @UiField
-    InlineLabel title;
-    private final Widget widget;
+  private final ActionFlowPanel actionPanel;
+  @UiField
+  SimplePanel actionPanelContainer;
+  @UiField
+  InlineLabel description;
+  @UiField
+  // Frame frame;
+  SimplePanel frame;
+  @UiField
+  Image icon;
+  @UiField
+  LayoutPanel mainPanel;
+  @UiField
+  FlowPanel messagePanel;
+  @UiField
+  InlineLabel title;
+  private final Widget widget;
 
-    @Inject
-    public PSpacePanel(final GuiProvider guiProvider, final CoreResources res, final GSpaceArmor wsArmor) {
-        widget = uiBinder.createAndBindUi(this);
-        actionPanel = new ActionFlowPanel(guiProvider);
-        actionPanelContainer.add(actionPanel);
-        final Element layer = mainPanel.getWidgetContainerElement(messagePanel);
-        layer.addClassName("k-publicspace-msg");
-        layer.addClassName("k-opacity80");
-        layer.addClassName("k-box-5shadow");
-        layer.addClassName("k-5corners");
-        icon.setResource(res.browser32());
-        wsArmor.getPublicSpace().add(widget);
-    }
+  @Inject
+  public PSpacePanel(final GuiProvider guiProvider, final CoreResources res, final GSpaceArmor wsArmor,
+      final PSpaceInDevelopment inDevelopment) {
+    widget = uiBinder.createAndBindUi(this);
+    actionPanel = new ActionFlowPanel(guiProvider);
+    actionPanelContainer.add(actionPanel);
+    final Element layer = mainPanel.getWidgetContainerElement(messagePanel);
+    layer.addClassName("k-publicspace-msg");
+    layer.addClassName("k-opacity80");
+    layer.addClassName("k-box-5shadow");
+    layer.addClassName("k-5corners");
+    icon.setResource(res.browser32());
+    wsArmor.getPublicSpace().add(widget);
+    frame.add(inDevelopment);
+  }
 
-    @Override
-    public Widget asWidget() {
-        return widget;
-    }
+  @Override
+  public Widget asWidget() {
+    return widget;
+  }
 
-    @Override
-    public IsActionExtensible getActionPanel() {
-        return actionPanel;
-    }
+  @Override
+  public IsActionExtensible getActionPanel() {
+    return actionPanel;
+  }
 
-    @Override
-    public HasText getDescription() {
-        return description;
-    }
+  @Override
+  public HasText getDescription() {
+    return description;
+  }
 
-    @Override
-    public HasText getTitle() {
-        return title;
-    }
+  @Override
+  public HasText getTitle() {
+    return title;
+  }
 
-    @Override
-    public void setContentGotoPublicUrl(final String publicUrl) {
-        // frame.setUrl("about:blank");
-        frame.setUrl(publicUrl);
-    }
+  @Override
+  public void setContentGotoPublicUrl(final String publicUrl) {
+    // frame.setUrl(publicUrl);
+  }
 
 }
