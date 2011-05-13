@@ -32,48 +32,50 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
 public class ContentCacheDefault implements ContentCache {
-    private final Map<StateToken, StateAbstractDTO> cacheMap;
-    private final EventBus eventBus;
-    private final ContentServiceAsync server;
-    private final boolean useCache;
+  private final Map<StateToken, StateAbstractDTO> cacheMap;
+  private final EventBus eventBus;
+  private final ContentServiceAsync server;
+  private final boolean useCache;
 
-    @Inject
-    public ContentCacheDefault(final ContentServiceAsync server, final EventBus eventBus) {
-        this.server = server;
-        this.eventBus = eventBus;
-        this.cacheMap = new HashMap<StateToken, StateAbstractDTO>();
-        // Don't use while we don't check changes in the server
-        useCache = false;
-    }
+  @Inject
+  public ContentCacheDefault(final ContentServiceAsync server, final EventBus eventBus) {
+    this.server = server;
+    this.eventBus = eventBus;
+    this.cacheMap = new HashMap<StateToken, StateAbstractDTO>();
+    // Don't use while we don't check changes in the server
+    useCache = false;
+  }
 
-    @Override
-    public void cache(final StateToken encodeState, final StateAbstractDTO content) {
-        assert encodeState != null;
-        if (useCache) {
-            cacheMap.put(encodeState, content);
-        }
+  @Override
+  public void cache(final StateToken encodeState, final StateAbstractDTO content) {
+    assert encodeState != null;
+    if (useCache) {
+      cacheMap.put(encodeState, content);
     }
+  }
 
-    private StateAbstractDTO getCached(final StateToken newState) {
-        assert newState != null;
-        return useCache ? cacheMap.get(newState) : null;
-    }
+  private StateAbstractDTO getCached(final StateToken newState) {
+    assert newState != null;
+    return useCache ? cacheMap.get(newState) : null;
+  }
 
-    @Override
-    public void getContent(final String user, final StateToken newState, final AsyncCallback<StateAbstractDTO> callback) {
-        assert newState != null;
-        eventBus.fireEvent(new ProgressShowEvent(""));
-        final StateAbstractDTO catched = getCached(newState);
-        if (catched != null) {
-            callback.onSuccess(catched);
-        } else {
-            server.getContent(user, newState, callback);
-        }
+  @Override
+  public void getContent(final String user, final StateToken newState,
+      final AsyncCallback<StateAbstractDTO> callback) {
+    assert newState != null;
+    eventBus.fireEvent(new ProgressShowEvent(""));
+    final StateAbstractDTO catched = getCached(newState);
+    if (catched != null) {
+      callback.onSuccess(catched);
+    } else {
+      // NotifyUser.info("Getting state of: " + newState, true);
+      server.getContent(user, newState, callback);
     }
+  }
 
-    @Override
-    public void removeContent(final StateToken token) {
-        cacheMap.remove(token);
-    }
+  @Override
+  public void removeContent(final StateToken token) {
+    cacheMap.remove(token);
+  }
 
 }

@@ -285,7 +285,7 @@ FramedPanel waveFrame;
 
     setupUi();
 
-    History.fireCurrentHistoryState();
+   //  History.fireCurrentHistoryState();
     LOG.info("SimpleWebClient.onModuleLoad() done");
   }
 

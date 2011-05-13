@@ -31,7 +31,7 @@ public class NewFolderBtn extends NewContainerBtn {
   @Inject
   public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
       final NavResources res) {
-    super(i18n, action, res.barterAdd(), i18n.t("New folder"), i18n.t("Create a new folder here"),
+    super(i18n, action, res.folderAdd(), i18n.t("New folder"), i18n.t("Create a new folder here"),
         i18n.t("New folder"), BartersConstants.TYPE_FOLDER);
   }
 

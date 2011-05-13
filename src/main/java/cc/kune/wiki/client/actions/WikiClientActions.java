@@ -28,8 +28,6 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.docs.client.actions.DelFolderMenuItem;
-import cc.kune.docs.client.actions.NewFolderBtn;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;

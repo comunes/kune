@@ -84,7 +84,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         session.onUserSignIn(false, new UserSignInEvent.UserSignInHandler() {
           @Override
           public void onUserSignIn(final UserSignInEvent event) {
-            refreshCurrentGroupState();
+            // refreshCurrentGroupState();
           }
         });
         session.onUserSignOut(false, new UserSignOutEvent.UserSignOutHandler() {
@@ -323,7 +323,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         // signin(inbox) && cancel
         restorePreviousToken();
       } else {
-        history.newItem(previousToken);
+        history.newItem(previousToken); // FIXMEKK
       }
     } else {
       // No redirect then restore previous token
