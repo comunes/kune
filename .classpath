@@ -2,7 +2,7 @@
   <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
   <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
   <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
-  <classpathentry kind="output" path="target/kune-0.0.7/WEB-INF/classes"/>
+  <classpathentry kind="output" path="target/kune-0.0.8/WEB-INF/classes"/>
   <classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar" sourcepath="M2_REPO/javax/transaction/jta/1.1/jta-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar" sourcepath="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar"/>
@@ -107,8 +107,8 @@
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/proto-msg/0.3.0-SNAPSHOT/proto-msg-0.3.0-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar" sourcepath="M2_REPO/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jivesoftware/smack/smack/3.0.4/smack-3.0.4.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jivesoftware/smackx/smackx/3.0.4/smackx-3.0.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/jivesoftware/smack/3.1.0/smack-3.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/jivesoftware/smackx/3.1.0/smackx-3.1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jivesoftware/smackx/debugger/smackx-debugger/3.0.4/smackx-debugger-3.0.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/util-src/0.3.0-SNAPSHOT/util-src-0.3.0-SNAPSHOT.jar"/>

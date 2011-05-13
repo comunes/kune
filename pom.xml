@@ -324,14 +324,14 @@
       <version>r1697</version>
     </dependency>
     <dependency>
-      <groupId>org.jivesoftware.smack</groupId>
+      <groupId>jivesoftware</groupId>
       <artifactId>smack</artifactId>
-      <version>3.0.4</version>
+      <version>3.1.0</version>
     </dependency>
     <dependency>
-      <groupId>org.jivesoftware.smackx</groupId>
+      <groupId>jivesoftware</groupId>
       <artifactId>smackx</artifactId>
-      <version>3.0.4</version>
+      <version>3.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.jivesoftware.smackx.debugger</groupId>
