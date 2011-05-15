@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server;
 
+import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -67,17 +68,20 @@ public class KuneRackModule implements RackModule {
   private final Module configModule;
 
   public KuneRackModule() {
-    this("development", "kune.properties", null);
+    this("development", null);
   }
 
-  public KuneRackModule(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
+  public KuneRackModule(final String jpaUnit, final Scope sessionScope) {
+
+    final SystemConfiguration sysConf = new SystemConfiguration();
+    final String kuneConfig = sysConf.getString("kune.config");
 
     configModule = new AbstractModule() {
       @Override
       public void configure() {
         install(FinderRegistry.init(new JpaPersistModule(jpaUnit)));
         bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
-        bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
+        bindConstant().annotatedWith(PropertiesFileName.class).to(kuneConfig);
         if (sessionScope != null) {
           bindScope(SessionScoped.class, sessionScope);
         }

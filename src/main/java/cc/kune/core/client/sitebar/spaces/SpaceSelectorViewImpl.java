@@ -54,7 +54,7 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
   public SpaceSelectorViewImpl(final GSpaceArmor armor, final I18nTranslationService i18n,
       final WsArmorResources res) {
     armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
-    homeButton.setVisible(false);
+    // homeButton.setVisible(false);
     Tooltip.to(homeButton, i18n.t("Your home page in this site"));
     Tooltip.to(userButton, i18n.t("User space: it shows a list of all your documents and contents "
         + "in which you participate"));

@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sn.actions.SessionAction;
 import cc.kune.core.client.state.Session;
@@ -43,14 +44,23 @@ public class WaveStatusIndicator {
     public WaveStatusAction(final Session session, final I18nTranslationService i18n) {
       super(session, true);
       ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
+        private void goOnline() {
+          putValue(Action.NAME, i18n.t("Online"));
+          putValue(AbstractAction.STYLES, "k-sitebar-wave-status, k-sitebar-wave-status-online");
+          NotifyUser.hideProgress();
+        }
+
         @Override
         public void onNetworkStatus(final NetworkStatusEvent event) {
           switch (event.getStatus()) {
           case CONNECTED:
           case RECONNECTED:
-            putValue(Action.NAME, i18n.t("Online"));
-            putValue(AbstractAction.STYLES, "k-sitebar-wave-status, k-sitebar-wave-status-online");
-            NotifyUser.hideProgress();
+            session.check(new AsyncCallbackSimple<Void>() {
+              @Override
+              public void onSuccess(final Void result) {
+                goOnline();
+              }
+            });
             break;
           case DISCONNECTED:
             NotifyUser.showProgress(i18n.t("Connecting"));

@@ -522,12 +522,8 @@
         </exclusion>
       </exclusions>
     </dependency>
-<!--  <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>5.14</version>
-      <scope>test</scope>
-    </dependency> -->
+    <!-- <dependency> <groupId>org.testng</groupId> <artifactId>testng</artifactId>
+      <version>5.14</version> <scope>test</scope> </dependency> -->
     <!-- If you want to start a selenium server, you will need the following
       dependency: -->
     <!-- <dependency> -->
@@ -744,6 +740,11 @@
           <mainClass>cc.kune.wave.server.WaveMain</mainClass>
           <commandlineArgs>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8001</commandlineArgs>
           <systemProperties>
+            <systemProperty>
+              <key>kune.config</key>
+              <!-- <value>/src/main/resources/kune.properties</value> -->
+              <value>kune.properties</value>
+            </systemProperty>
             <systemProperty>
               <key>wave.server.config</key>
               <value>src/main/resources/wave-server.properties</value>

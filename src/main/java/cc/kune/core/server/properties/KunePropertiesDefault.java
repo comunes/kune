@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Properties;
 
-
 import cc.kune.core.server.ServerException;
 
 import com.google.inject.Inject;
@@ -32,43 +31,46 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class KunePropertiesDefault implements KuneProperties {
-    private Properties properties;
-    private final String fileName;
+  private final String fileName;
+  private Properties properties;
 
-    @Inject
-    public KunePropertiesDefault(@PropertiesFileName final String fileName) {
-        this.fileName = fileName;
-        try {
-            properties = new Properties();
-            InputStream input = getInputStream(fileName);
-            properties.load(input);
-        } catch (IOException e) {
-            String msg = MessageFormat.format("Couldn't open property file {0}", fileName);
-            throw new ServerException(msg, e);
-        }
-
+  @Inject
+  public KunePropertiesDefault(@PropertiesFileName final String fileName) {
+    this.fileName = fileName;
+    try {
+      properties = new Properties();
+      final InputStream input = getInputStream(fileName);
+      properties.load(input);
+    } catch (final IOException e) {
+      final String msg = MessageFormat.format("Couldn't open property file {0}", fileName);
+      throw new ServerException(msg, e);
     }
 
-    public String get(final String key) {
-        String value = properties.getProperty(key);
-        if (value == null) {
-            throw new ServerException("PROPERTY: " + key + " not defined in " + fileName);
-        }
-        return value;
-    }
+  }
 
-    public String get(final String key, final String defaultValue) {
-        String value = properties.getProperty(key);
-        return value != null ? value : defaultValue;
+  @Override
+  public String get(final String key) {
+    final String value = properties.getProperty(key);
+    if (value == null) {
+      throw new ServerException("PROPERTY: " + key + " not defined in " + fileName);
     }
+    return value;
+  }
 
-    private InputStream getInputStream(final String fileName) {
-        InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-        if (input == null) {
-            String msg = MessageFormat.format("Properties file: ''{0}'' not found", fileName);
-            throw new ServerException(msg);
-        }
-        return input;
+  @Override
+  public String get(final String key, final String defaultValue) {
+    final String value = properties.getProperty(key);
+    return value != null ? value : defaultValue;
+  }
+
+  private InputStream getInputStream(final String fileName) {
+    final InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(
+        fileName);
+    if (input == null) {
+      final String msg = MessageFormat.format("Properties file: ''{0}'' not found", fileName);
+      throw new ServerException(msg);
     }
+    return input;
+  }
 
 }
