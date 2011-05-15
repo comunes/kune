@@ -522,12 +522,12 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
+<!--  <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>5.14</version>
       <scope>test</scope>
-    </dependency>
+    </dependency> -->
     <!-- If you want to start a selenium server, you will need the following
       dependency: -->
     <!-- <dependency> -->
@@ -808,6 +808,10 @@
             <exclude>**/*_Roo_*</exclude>
           </excludes>
           <forkMode>pertest</forkMode>
+          <property>
+            <name>junit</name>
+            <value>true</value>
+          </property>
           <!-- Skip the normal tests, we'll run them in the integration-test
             phase -->
           <skipTests>${skipTests}</skipTests>
