@@ -1,4 +1,4 @@
-CHARSET       "UTF-8      "; body {
+CHARSET         "UTF-8        "; body {
   background-color: white;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -1157,9 +1157,17 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   font-size: 13px !important;
 }
 
+.k-empty-folder-panel {
+  padding: 10px;
+  width: auto;
+  height: auto;
+}
+
 .k-empty-msg {
-  font-size: 16px;
+  font-size: 18px;
+  /* font-weight: bold; */
   font-style: italic;
+  color: #A05A2C;
 }
 
 button.k-ent-header-btn {
@@ -1191,7 +1199,7 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                                         90);
+  kfilter: alpha(opacity =                                             90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;

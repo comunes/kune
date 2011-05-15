@@ -84,6 +84,8 @@ public class FolderViewerPresenter extends
 
     void detach();
 
+    void editTitle();
+
     HasEditHandler getEditTitle();
 
     void setActions(GuiActionDescCollection actions);
@@ -246,6 +248,10 @@ public class FolderViewerPresenter extends
   @Override
   public void detach() {
     getView().detach();
+  }
+
+  public void editTitle() {
+    getView().editTitle();
   }
 
   private String genId(final StateToken token) {

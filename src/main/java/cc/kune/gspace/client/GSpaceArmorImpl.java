@@ -109,6 +109,7 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
     getDocSubheader().add(subheaderToolbar);
     getDocFooter().add(footerToolbar);
     entityToolsNorth.getElement().getStyle().setPosition(Position.RELATIVE);
+    // entityToolsSouth.setVisible(false);
   }
 
   @Override

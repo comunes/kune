@@ -29,6 +29,7 @@ import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -37,7 +38,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 public abstract class AbstractFolderViewerPanel extends ViewImpl implements FolderViewerView {
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
   private final ContentTitleWidget contentTitle;
-  private final InlineLabel emptyLabel;
+  private final FlowPanel emptyPanel;
   protected final GSpaceArmor gsArmor;
   protected final I18nTranslationService i18n;
   protected Widget widget;
@@ -47,8 +48,11 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     this.gsArmor = gsArmor;
     this.i18n = i18n;
     this.capabilitiesRegistry = capabilitiesRegistry;
-    emptyLabel = new InlineLabel(i18n.t("This folder is empty."));
+    emptyPanel = new FlowPanel();
+    final InlineLabel emptyLabel = new InlineLabel(i18n.t("This is empty."));
     emptyLabel.setStyleName("k-empty-msg");
+    emptyPanel.setStyleName("k-empty-folder-panel");
+    emptyPanel.add(emptyLabel);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
   }
 
@@ -76,6 +80,11 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   }
 
   @Override
+  public void editTitle() {
+    contentTitle.edit();
+  }
+
+  @Override
   public HasEditHandler getEditTitle() {
     return contentTitle.getEditableTitle();
   }
@@ -100,6 +109,6 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
 
   @Override
   public void showEmptyMsg() {
-    gsArmor.getDocContainer().add(emptyLabel);
+    gsArmor.getDocContainer().add(emptyPanel);
   }
 }

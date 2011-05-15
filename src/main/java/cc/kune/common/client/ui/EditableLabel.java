@@ -63,6 +63,15 @@ public class EditableLabel extends Composite implements HasEditHandler {
     return addHandler(handler, EditEvent.getType());
   }
 
+  public void edit() {
+    if (editable) {
+      label.setVisible(false);
+      textbox.setVisible(true);
+      textbox.selectAll();
+      textbox.setFocus(true);
+    }
+  }
+
   private void finishEdit() {
     label.setText(textbox.getText());
     label.setVisible(true);
@@ -84,12 +93,7 @@ public class EditableLabel extends Composite implements HasEditHandler {
 
   @UiHandler("label")
   void onClick(final ClickEvent e) {
-    if (editable) {
-      label.setVisible(false);
-      textbox.setVisible(true);
-      textbox.setFocus(true);
-      textbox.selectAll();
-    }
+    edit();
   }
 
   @UiHandler("label")
@@ -97,6 +101,11 @@ public class EditableLabel extends Composite implements HasEditHandler {
     if (editable) {
       label.removeStyleDependentName("high");
     }
+  }
+
+  @UiHandler("textbox")
+  void onMouseOutTextBox(final MouseOutEvent event) {
+    finishEdit();
   }
 
   @UiHandler("label")

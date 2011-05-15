@@ -32,6 +32,7 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
@@ -43,6 +44,7 @@ public class NewContainerBtn extends ButtonDescriptor {
 
     private final ContentCache cache;
     private final Provider<ContentServiceAsync> contentService;
+    private final FolderViewerPresenter folderViewer;
     private final I18nTranslationService i18n;
     private final Session session;
     private final StateManager stateManager;
@@ -50,27 +52,30 @@ public class NewContainerBtn extends ButtonDescriptor {
     @Inject
     public NewContainerAction(final Session session, final StateManager stateManager,
         final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService,
-        final ContentCache cache) {
+        final ContentCache cache, final FolderViewerPresenter folderViewer) {
       super(AccessRolDTO.Editor, true);
       this.session = session;
       this.stateManager = stateManager;
       this.i18n = i18n;
       this.contentService = contentService;
       this.cache = cache;
+      this.folderViewer = folderViewer;
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.showProgressProcessing();
       stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
-      contentService.get().addFolder(session.getUserHash(), session.getCurrentStateToken(),
-          (String) getValue(NEW_NAME), (String) getValue(ID),
-          new AsyncCallbackSimple<StateContainerDTO>() {
+      final String newName = (String) getValue(NEW_NAME);
+      contentService.get().addFolder(session.getUserHash(), session.getCurrentStateToken(), newName,
+          (String) getValue(ID), new AsyncCallbackSimple<StateContainerDTO>() {
             @Override
             public void onSuccess(final StateContainerDTO state) {
               // contextNavigator.setEditOnNextStateChange(true);
               stateManager.setRetrievedStateAndGo(state);
               NotifyUser.hideProgress();
+              NotifyUser.info(i18n.tWithNT("[%s] created", "New folder created, for instance", newName));
+              // folderViewer.editTitle();
             }
           });
       cache.removeContent(session.getCurrentStateToken());

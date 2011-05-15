@@ -53,6 +53,10 @@ public class ContentTitleWidget extends Composite {
     initWidget(flow);
   }
 
+  public void edit() {
+    editableTitle.edit();
+  }
+
   public HasEditHandler getEditableTitle() {
     return editableTitle;
   }
