@@ -75,7 +75,7 @@ public class NewContainerBtn extends ButtonDescriptor {
               stateManager.setRetrievedStateAndGo(state);
               NotifyUser.hideProgress();
               NotifyUser.info(i18n.tWithNT("[%s] created", "New folder created, for instance", newName));
-              // folderViewer.editTitle();
+              folderViewer.blinkTitle();
             }
           });
       cache.removeContent(session.getCurrentStateToken());

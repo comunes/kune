@@ -21,6 +21,7 @@ package cc.kune.common.client.ui;
 
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
+import cc.kune.common.client.utils.SimpleCallback;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -32,6 +33,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -41,6 +43,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
 
   interface EditableLabelUiBinder extends UiBinder<Widget, EditableLabel> {
   }
+
+  private static final int BLINK_TIME = 400;
 
   private static EditableLabelUiBinder uiBinder = GWT.create(EditableLabelUiBinder.class);
 
@@ -61,6 +65,46 @@ public class EditableLabel extends Composite implements HasEditHandler {
   @Override
   public HandlerRegistration addEditHandler(final EditHandler handler) {
     return addHandler(handler, EditEvent.getType());
+  }
+
+  public void blink() {
+    if (editable) {
+      blinkTimer(true, new SimpleCallback() {
+        @Override
+        public void onCallback() {
+          blinkTimer(false, new SimpleCallback() {
+            @Override
+            public void onCallback() {
+              blinkTimer(true, new SimpleCallback() {
+                @Override
+                public void onCallback() {
+                  blinkTimer(false, new SimpleCallback() {
+                    @Override
+                    public void onCallback() {
+                      // nothing
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  }
+
+  private void blinkTimer(final boolean add, final SimpleCallback callback) {
+    new Timer() {
+      @Override
+      public void run() {
+        if (add) {
+          label.addStyleDependentName("high");
+        } else {
+          label.removeStyleDependentName("high");
+        }
+        callback.onCallback();
+      }
+    }.schedule(BLINK_TIME);
   }
 
   public void edit() {

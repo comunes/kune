@@ -35,6 +35,7 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
@@ -46,17 +47,21 @@ public class NewContentBtn extends ButtonDescriptor {
 
     private final ContentCache cache;
     private final Provider<ContentServiceAsync> contentService;
+    private final ContentViewerPresenter contentViewer;
+    private final I18nTranslationService i18n;
     private final Session session;
     private final StateManager stateManager;
 
     @Inject
     public NewContentAction(final Session session, final StateManager stateManager,
         final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService,
-        final ContentCache cache) {
+        final ContentViewerPresenter contentViewerPresenter, final ContentCache cache) {
       super(AccessRolDTO.Editor, true);
       this.session = session;
       this.stateManager = stateManager;
+      this.i18n = i18n;
       this.contentService = contentService;
+      this.contentViewer = contentViewerPresenter;
       this.cache = cache;
     }
 
@@ -64,15 +69,17 @@ public class NewContentBtn extends ButtonDescriptor {
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.showProgressProcessing();
       stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
-      contentService.get().addContent(session.getUserHash(), session.getCurrentStateToken(),
-          (String) getValue(NEW_NAME), (String) getValue(ID),
-          new AsyncCallbackSimple<StateContentDTO>() {
+      final String newName = (String) getValue(NEW_NAME);
+      contentService.get().addContent(session.getUserHash(), session.getCurrentStateToken(), newName,
+          (String) getValue(ID), new AsyncCallbackSimple<StateContentDTO>() {
             @Override
             public void onSuccess(final StateContentDTO state) {
               stateManager.setRetrievedStateAndGo(state);
               NotifyUser.hideProgress();
               // stateManager.refreshCurrentGroupState();
               // contextNavigator.setEditOnNextStateChange(true);
+              NotifyUser.info(i18n.tWithNT("[%s] created", "New content created, for instance", newName));
+              contentViewer.blinkTitle();
             }
           });
       cache.removeContent(session.getCurrentStateToken());

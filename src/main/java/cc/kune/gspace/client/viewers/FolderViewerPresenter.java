@@ -80,6 +80,8 @@ public class FolderViewerPresenter extends
 
     void attach();
 
+    void blinkTitle();
+
     void clear();
 
     void detach();
@@ -168,6 +170,10 @@ public class FolderViewerPresenter extends
     if (editHandler == null) {
       createEditHandler();
     }
+  }
+
+  public void blinkTitle() {
+    getView().blinkTitle();
   }
 
   String calculateStyle(final int pos, final int length) {

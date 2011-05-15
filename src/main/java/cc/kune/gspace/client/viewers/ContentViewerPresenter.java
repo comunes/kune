@@ -66,6 +66,8 @@ public class ContentViewerPresenter extends
 
     void attach();
 
+    void blinkTitle();
+
     void clear();
 
     void detach();
@@ -120,6 +122,10 @@ public class ContentViewerPresenter extends
     if (editHandler == null) {
       createEditHandler();
     }
+  }
+
+  public void blinkTitle() {
+    getView().blinkTitle();
   }
 
   private void createEditHandler() {

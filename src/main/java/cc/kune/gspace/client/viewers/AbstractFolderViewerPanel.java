@@ -68,6 +68,11 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   }
 
   @Override
+  public void blinkTitle() {
+    contentTitle.blink();
+  }
+
+  @Override
   public void clear() {
     gsArmor.getSubheaderToolbar().clear();
     UiUtils.clear(gsArmor.getDocContainer());

@@ -66,7 +66,8 @@ public class AppStarterDefault implements AppStarter {
   }
 
   private void checkNavigatorCompatibility(final NavigatorSupport navSupport) {
-    if (Navigator.getUserAgent().toLowerCase().contains("msie")) {
+    if (Navigator.getUserAgent().toLowerCase().contains("msie")
+        || Navigator.getUserAgent().toLowerCase().contains("opera")) {
       navSupport.onNotSupported();
     } else {
       navSupport.onSupported();

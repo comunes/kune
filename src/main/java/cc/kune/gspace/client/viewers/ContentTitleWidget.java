@@ -53,6 +53,10 @@ public class ContentTitleWidget extends Composite {
     initWidget(flow);
   }
 
+  public void blink() {
+    editableTitle.blink();
+  }
+
   public void edit() {
     editableTitle.edit();
   }

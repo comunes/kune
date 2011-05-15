@@ -124,6 +124,11 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   }
 
   @Override
+  public void blinkTitle() {
+    contentTitle.blink();
+  }
+
+  @Override
   public void clear() {
     onlyViewPanel.setHTML("");
     gsArmor.getSubheaderToolbar().clear();

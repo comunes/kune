@@ -110,7 +110,8 @@ public class Container implements HasId, HasStateToken {
   // Parent/Child pattern:
   // http://www.hibernate.org/hib_docs/reference/en/html/example-parentchild.html
   // http://www.researchkitchen.co.uk/blog/archives/57
-  @ManyToOne(fetch = FetchType.LAZY)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn
   private Container parent;
 
