@@ -135,7 +135,7 @@ public class Content implements HasStateToken {
   private String typeId;
 
   @Version
-  private int version;
+  private Integer version;
 
   private String waveId;
 
@@ -336,7 +336,7 @@ public class Content implements HasStateToken {
     this.typeId = typeId;
   }
 
-  public void setVersion(final int version) {
+  public void setVersion(final Integer version) {
     this.version = version;
   }
 

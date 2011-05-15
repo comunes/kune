@@ -64,7 +64,6 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
@@ -98,7 +97,7 @@ public class WebClient extends Composite {
    * (an alert placed on the top of the screen). Once the stack trace is
    * prepared, it is revealed in the banner via a link.
    */
-  static class ErrorHandler implements UncaughtExceptionHandler {
+  public static class ErrorHandler implements UncaughtExceptionHandler {
     public static void install() {
     GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
     }
@@ -124,7 +123,7 @@ public class WebClient extends Composite {
       this.next = next;
     }
 
-    private void getStackTraceAsync(final Throwable t, final Accessor<SafeHtml> whenReady) {
+    public static void getStackTraceAsync(final Throwable t, final Accessor<SafeHtml> whenReady) {
       // TODO: Request stack-trace de-obfuscation. For now, just use the
       // javascript stack trace.
       //
@@ -245,7 +244,7 @@ FramedPanel waveFrame;
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
    */
-  private final WaveWebSocketClient websocket;
+  private WaveWebSocketClient websocket;
 
   /**
    * This is the entry point method.
@@ -274,19 +273,40 @@ FramedPanel waveFrame;
 
     HistorySupport.init();
 
-    websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL()));
-    websocket.connect();
+    //createWebSocket();
 
-    if (Session.get().isLoggedIn()) {
-      loggedInUser = new ParticipantId(Session.get().getAddress());
-      idGenerator = ClientIdGenerator.create();
-      loginToServer();
-    }
+    loginImpl();
 
     setupUi();
 
    //  History.fireCurrentHistoryState();
     LOG.info("SimpleWebClient.onModuleLoad() done");
+  }
+
+  private void createWebSocket() {
+    websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL()));
+    websocket.connect();
+  }
+
+  public void login() {
+    loginImpl();
+  }
+
+  public void logout() {
+    loggedInUser = null;
+    channel = null;
+    idGenerator = null;
+    websocket = null;
+    clear();
+  }
+
+  private void loginImpl() {
+    createWebSocket();
+    if (Session.get().isLoggedIn()) {
+      loggedInUser = new ParticipantId(Session.get().getAddress());
+      idGenerator = ClientIdGenerator.create();
+      loginToServer();
+    }
   }
 
   public RemoteViewServiceMultiplexer getChannel() {
@@ -315,9 +335,13 @@ public WaveWebSocketClient getWebSocket() {
   }
 
   public void clear() {
+    // Duplicate below
   if (wave != null) {
     wave.destroy();
     wave = null;
+  }
+  if (waveHolder.isAttached()) {
+    waveHolder.removeFromParent();
   }
 }
   /**

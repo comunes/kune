@@ -147,11 +147,6 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }
   }
 
-  @UiHandler("textbox")
-  void onMouseOutTextBox(final MouseOutEvent event) {
-    finishEdit();
-  }
-
   @UiHandler("label")
   void onMouseOver(final MouseOverEvent event) {
     if (editable) {
