@@ -187,6 +187,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     groupShortName = defaultContent.getStateToken().getGroup();
   }
 
+  @Ignore
   @Test
   public void setTagsAndResults() throws Exception {
     contentService.setTags(getHash(), defaultContent.getStateToken(), "bfoo cfoa afoo2");

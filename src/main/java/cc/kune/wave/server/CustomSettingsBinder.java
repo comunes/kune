@@ -51,145 +51,152 @@ import com.google.inject.name.Names;
  */
 public class CustomSettingsBinder {
 
-    /**
-     * Used to validate that a type is supported. Some types may have generic
-     * parameters that need to be checked.
-     */
-    private interface SettingTypeValidator {
-        boolean check(Type type);
+  /**
+   * Used to validate that a type is supported. Some types may have generic
+   * parameters that need to be checked.
+   */
+  private interface SettingTypeValidator {
+    boolean check(Type type);
+  }
+
+  /**
+   * This default validator just returns true.
+   */
+  private static final SettingTypeValidator DEFAULT_TYPE_VALIDATOR = new SettingTypeValidator() {
+    @Override
+    public boolean check(final Type type) {
+      return true;
     }
+  };
 
-    private static final Map<Type, SettingTypeValidator> supportedSettingTypes; // NOPMD by vjrj on 18/01/11 0:53
-
-    /**
-     * This default validator just returns true.
-     */
-    private static final SettingTypeValidator DEFAULT_TYPE_VALIDATOR = new SettingTypeValidator() {
-        @Override
-        public boolean check(Type type) {
+  /**
+   * This validator checks to make sure the {@link List}'s generic parameter is
+   * also supported.
+   */
+  private static final SettingTypeValidator LIST_TYPE_VALIDATOR = new SettingTypeValidator() {
+    @Override
+    public boolean check(final Type type) {
+      if (type instanceof ParameterizedType) {
+        final Type[] args = ((ParameterizedType) type).getActualTypeArguments();
+        if (args.length == 1) {
+          // At the moment only List<String> is supported.
+          if (args[0] == String.class) {
             return true;
+          }
         }
-    };
+      }
+      return false;
+    }
+  };
 
-    /**
-     * This validator checks to make sure the {@link List}'s generic parameter
-     * is also supported.
-     */
-    private static final SettingTypeValidator LIST_TYPE_VALIDATOR = new SettingTypeValidator() {
-        @Override
-        public boolean check(Type type) {
-            if (type instanceof ParameterizedType) {
-                Type[] args = ((ParameterizedType) type).getActualTypeArguments();
-                if (args.length == 1) {
-                    // At the moment only List<String> is supported.
-                    if (args[0] == String.class) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-    };
+  private static final Map<Type, SettingTypeValidator> supportedSettingTypes; // NOPMD
+                                                                              // by
+                                                                              // vjrj
+                                                                              // on
+                                                                              // 18/01/11
+                                                                              // 0:53
 
-    static {
-        ImmutableMap.Builder<Type, SettingTypeValidator> builder = ImmutableMap.builder();
-        builder.put(int.class, DEFAULT_TYPE_VALIDATOR);
-        builder.put(boolean.class, DEFAULT_TYPE_VALIDATOR);
-        builder.put(String.class, DEFAULT_TYPE_VALIDATOR);
-        builder.put(List.class, LIST_TYPE_VALIDATOR);
-        supportedSettingTypes = builder.build();
+  static {
+    final ImmutableMap.Builder<Type, SettingTypeValidator> builder = ImmutableMap.builder();
+    builder.put(int.class, DEFAULT_TYPE_VALIDATOR);
+    builder.put(boolean.class, DEFAULT_TYPE_VALIDATOR);
+    builder.put(String.class, DEFAULT_TYPE_VALIDATOR);
+    builder.put(List.class, LIST_TYPE_VALIDATOR);
+    supportedSettingTypes = builder.build();
+  }
+
+  /**
+   * Bind configuration parameters into Guice Module.
+   * 
+   * @return a Guice module configured with setting support.
+   * @throws ConfigurationException
+   *           on configuration error
+   */
+  public static Module bindSettings(final String propertyFile, final Class<?>... settingsArg)
+      throws ConfigurationException {
+    final CompositeConfiguration config = new CompositeConfiguration();
+    config.addConfiguration(new SystemConfiguration());
+    config.addConfiguration(new PropertiesConfiguration(propertyFile));
+
+    final List<Field> fields = new ArrayList<Field>();
+    for (final Class<?> settings : settingsArg) {
+      fields.addAll(Arrays.asList(settings.getDeclaredFields()));
     }
 
-    /**
-     * Bind configuration parameters into Guice Module.
-     * 
-     * @return a Guice module configured with setting support.
-     * @throws ConfigurationException
-     *             on configuration error
-     */
-    public static Module bindSettings(String propertyFile, Class<?>... settingsArg) throws ConfigurationException {
-        final CompositeConfiguration config = new CompositeConfiguration();
-        config.addConfiguration(new SystemConfiguration()); 
-        config.addConfiguration(new PropertiesConfiguration(propertyFile));
+    // Reflect on settings class and absorb settings
+    final Map<Setting, Field> settings = new LinkedHashMap<Setting, Field>();
+    for (final Field field : fields) {
+      if (!field.isAnnotationPresent(Setting.class)) {
+        continue;
+      }
 
-        List<Field> fields = new ArrayList<Field>();
-        for (Class<?> settings : settingsArg) {
-            fields.addAll(Arrays.asList(settings.getDeclaredFields()));
-        }
+      // Validate target type
+      final SettingTypeValidator typeHelper = supportedSettingTypes.get(field.getType());
+      if (typeHelper == null || !typeHelper.check(field.getGenericType())) {
+        throw new IllegalArgumentException(field.getType()
+            + " is not one of the supported setting types");
+      }
 
-        // Reflect on settings class and absorb settings
-        final Map<Setting, Field> settings = new LinkedHashMap<Setting, Field>();
-        for (Field field : fields) {
-            if (!field.isAnnotationPresent(Setting.class)) {
-                continue;
-            }
-
-            // Validate target type
-            SettingTypeValidator typeHelper = supportedSettingTypes.get(field.getType());
-            if (typeHelper == null || !typeHelper.check(field.getGenericType())) {
-                throw new IllegalArgumentException(field.getType() + " is not one of the supported setting types");
-            }
-
-            Setting setting = field.getAnnotation(Setting.class);
-            settings.put(setting, field);
-        }
-
-        // Now validate them
-        List<String> missingProperties = new ArrayList<String>();
-        for (Setting setting : settings.keySet()) {
-            if (setting.defaultValue().isEmpty()) {
-                if (!config.containsKey(setting.name())) {
-                    missingProperties.add(setting.name());
-                }
-            }
-        }
-        if (missingProperties.size() > 0) {
-            StringBuilder error = new StringBuilder();
-            error.append("The following required properties are missing from the server configuration: ");
-            error.append(Joiner.on(", ").join(missingProperties));
-            throw new ConfigurationException(error.toString());
-        }
-
-        // bundle everything up in an injectable guice module
-        return new AbstractModule() {
-
-            @Override
-            protected void configure() {
-                // We must iterate the settings a third time when binding.
-                // Note: do not collapse these loops as that will damage
-                // early error detection. The runtime is still O(n) in setting
-                // count.
-                for (Map.Entry<Setting, Field> entry : settings.entrySet()) {
-                    Class<?> type = entry.getValue().getType();
-                    Setting setting = entry.getKey();
-
-                    if (int.class.equals(type)) {
-                        Integer defaultValue = null;
-                        if (!setting.defaultValue().isEmpty()) {
-                            defaultValue = Integer.parseInt(setting.defaultValue());
-                        }
-                        bindConstant().annotatedWith(Names.named(setting.name())).to(
-                                config.getInteger(setting.name(), defaultValue));
-                    } else if (boolean.class.equals(type)) {
-                        Boolean defaultValue = null;
-                        if (!setting.defaultValue().isEmpty()) {
-                            defaultValue = Boolean.parseBoolean(setting.defaultValue());
-                        }
-                        bindConstant().annotatedWith(Names.named(setting.name())).to(
-                                config.getBoolean(setting.name(), defaultValue));
-                    } else if (String.class.equals(type)) {
-                        bindConstant().annotatedWith(Names.named(setting.name())).to(
-                                config.getString(setting.name(), setting.defaultValue()));
-                    } else {
-                        String[] value = config.getStringArray(setting.name());
-                        if (value.length == 0 && !setting.defaultValue().isEmpty()) {
-                            value = setting.defaultValue().split(",");
-                        }
-                        bind(new TypeLiteral<List<String>>() {
-                        }).annotatedWith(Names.named(setting.name())).toInstance(ImmutableList.copyOf(value));
-                    }
-                }
-            }
-        };
+      final Setting setting = field.getAnnotation(Setting.class);
+      settings.put(setting, field);
     }
+
+    // Now validate them
+    final List<String> missingProperties = new ArrayList<String>();
+    for (final Setting setting : settings.keySet()) {
+      if (setting.defaultValue().isEmpty()) {
+        if (!config.containsKey(setting.name())) {
+          missingProperties.add(setting.name());
+        }
+      }
+    }
+    if (missingProperties.size() > 0) {
+      final StringBuilder error = new StringBuilder();
+      error.append("The following required properties are missing from the server configuration: ");
+      error.append(Joiner.on(", ").join(missingProperties));
+      throw new ConfigurationException(error.toString());
+    }
+
+    // bundle everything up in an injectable guice module
+    return new AbstractModule() {
+
+      @Override
+      protected void configure() {
+        // We must iterate the settings a third time when binding.
+        // Note: do not collapse these loops as that will damage
+        // early error detection. The runtime is still O(n) in setting
+        // count.
+        for (final Map.Entry<Setting, Field> entry : settings.entrySet()) {
+          final Class<?> type = entry.getValue().getType();
+          final Setting setting = entry.getKey();
+
+          if (int.class.equals(type)) {
+            Integer defaultValue = null;
+            if (!setting.defaultValue().isEmpty()) {
+              defaultValue = Integer.parseInt(setting.defaultValue());
+            }
+            bindConstant().annotatedWith(Names.named(setting.name())).to(
+                config.getInteger(setting.name(), defaultValue));
+          } else if (boolean.class.equals(type)) {
+            Boolean defaultValue = null;
+            if (!setting.defaultValue().isEmpty()) {
+              defaultValue = Boolean.parseBoolean(setting.defaultValue());
+            }
+            bindConstant().annotatedWith(Names.named(setting.name())).to(
+                config.getBoolean(setting.name(), defaultValue));
+          } else if (String.class.equals(type)) {
+            bindConstant().annotatedWith(Names.named(setting.name())).to(
+                config.getString(setting.name(), setting.defaultValue()));
+          } else {
+            String[] value = config.getStringArray(setting.name());
+            if (value.length == 0 && !setting.defaultValue().isEmpty()) {
+              value = setting.defaultValue().split(",");
+            }
+            bind(new TypeLiteral<List<String>>() {
+            }).annotatedWith(Names.named(setting.name())).toInstance(ImmutableList.copyOf(value));
+          }
+        }
+      }
+    };
+  }
 }

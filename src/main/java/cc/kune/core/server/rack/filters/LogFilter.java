@@ -34,21 +34,31 @@ import org.apache.commons.logging.LogFactory;
 import cc.kune.core.server.rack.RackHelper;
 
 public class LogFilter implements Filter {
-    public static final Log LOG = LogFactory.getLog(LogFilter.class);
+  public static final Log LOG = LogFactory.getLog(LogFilter.class);
+  private final boolean logduration = false;
 
-    public void destroy() {
-    }
+  @Override
+  public void destroy() {
+  }
 
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-            throws IOException, ServletException {
-        // final long start = System.currentTimeMillis();
-        LOG.debug("REQUEST: " + RackHelper.getURI(request));
-        chain.doFilter(request, response);
-        // final long finish = System.currentTimeMillis();
-        // log.debug("TOTAL TIME: " + (finish - start) + " miliseconds");
+  @Override
+  public void doFilter(final ServletRequest request, final ServletResponse response,
+      final FilterChain chain) throws IOException, ServletException {
+    long start;
+    if (logduration) {
+      start = System.currentTimeMillis();
     }
+    final String uri = RackHelper.getURI(request);
+    LOG.debug("REQUEST: " + uri);
+    chain.doFilter(request, response);
+    if (logduration) {
+      final long finish = System.currentTimeMillis();
+      LOG.debug("Total time '" + uri + "': " + (finish - start) + " miliseconds");
+    }
+  }
 
-    public void init(final FilterConfig filterConfig) throws ServletException {
-    }
+  @Override
+  public void init(final FilterConfig filterConfig) throws ServletException {
+  }
 
 }

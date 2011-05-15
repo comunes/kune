@@ -304,7 +304,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   @Override
   public void setModifiedOn(final Content content, final long lastModifiedTime) {
     content.setModifiedOn(lastModifiedTime);
-    persist(content);
+    // persist(content);//
   }
 
   @Override

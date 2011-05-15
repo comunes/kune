@@ -50,48 +50,49 @@ import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
 
 public abstract class TestHelper {
-    public static Injector create(final Module module, final String persistenceUnit, final String propetiesFileName) {
-        try {
-            final Injector injector = Guice.createInjector(CustomSettingsBinder.bindSettings(
-                    TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
-            final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
-            final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
-            final Injector childInjector = injector.createChildInjector(wavePersistModule, new ServerModule(false),
-                    new RobotApiModule(), federationModule, FinderRegistry.init(new JpaPersistModule(persistenceUnit)),
-                    module, new Module() {
-                        @Override
-                        public void configure(final Binder binder) {
-                            binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
-                            binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
-                            binder.bindConstant().annotatedWith(PropertiesFileName.class).to(propetiesFileName);
-                            binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
-                        }
-                    });
-            try {
-                childInjector.getInstance(WaveServerImpl.class).initialize();
-            } catch (final WaveServerException e) {
-                e.printStackTrace();
-            }
-            final AccountStore accountStore = childInjector.getInstance(AccountStore.class);
-            accountStore.initializeAccountStore();
-            AccountStoreHolder.resetForTesting();
-            AccountStoreHolder.init(accountStore,
-                    childInjector.getInstance(Key.get(String.class, Names.named(CoreSettings.WAVE_SERVER_DOMAIN))));
-            return childInjector;
-        } catch (final ConfigurationException e) {
-            e.printStackTrace();
-        } catch (final PersistenceException e) {
-            e.printStackTrace();
+  public static Injector create(final Module module, final String persistenceUnit,
+      final String propetiesFileName) {
+    try {
+      final Injector injector = Guice.createInjector(CustomSettingsBinder.bindSettings(
+          TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
+      final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
+      final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
+      final Injector childInjector = injector.createChildInjector(wavePersistModule, new ServerModule(
+          false), new RobotApiModule(), federationModule, FinderRegistry.init(new JpaPersistModule(
+          persistenceUnit)), module, new Module() {
+        @Override
+        public void configure(final Binder binder) {
+          binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
+          binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
+          binder.bindConstant().annotatedWith(PropertiesFileName.class).to(propetiesFileName);
+          binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
         }
-        return null;
+      });
+      try {
+        childInjector.getInstance(WaveServerImpl.class).initialize();
+      } catch (final WaveServerException e) {
+        e.printStackTrace();
+      }
+      final AccountStore accountStore = childInjector.getInstance(AccountStore.class);
+      accountStore.initializeAccountStore();
+      AccountStoreHolder.resetForTesting();
+      AccountStoreHolder.init(accountStore,
+          childInjector.getInstance(Key.get(String.class, Names.named(CoreSettings.WAVE_SERVER_DOMAIN))));
+      return childInjector;
+    } catch (final ConfigurationException e) {
+      e.printStackTrace();
+    } catch (final PersistenceException e) {
+      e.printStackTrace();
     }
+    return null;
+  }
 
-    public static void inject(final Object target) {
-        // test: use memory
-        // test_db: use mysql
-        // Also configurable ein PersistenceTest
-        TestHelper.create(new PlatformServerModule(), TestConstants.PERSISTENCE_UNIT, "kune.properties").injectMembers(
-                target);
-    }
+  public static void inject(final Object target) {
+    // test: use memory
+    // test_db: use mysql
+    // Also configurable ein PersistenceTest
+    TestHelper.create(new PlatformServerModule(), TestConstants.PERSISTENCE_UNIT, "kune.properties").injectMembers(
+        target);
+  }
 
 }

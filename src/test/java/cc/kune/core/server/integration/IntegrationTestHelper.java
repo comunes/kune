@@ -50,42 +50,43 @@ import com.google.inject.servlet.SessionScoped;
 
 public class IntegrationTestHelper {
 
-    public static Injector createInjector() {
-        Injector injector;
-        try {
-            injector = Guice.createInjector(CustomSettingsBinder.bindSettings(TestConstants.WAVE_TEST_PROPFILE,
-                    CoreSettings.class));
-            final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
-            final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
-            final Injector childInjector = injector.createChildInjector(wavePersistModule,
-                    FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)), new RobotApiModule(),
-                    new PlatformServerModule(), new DocumentServerModule(), new ChatServerModule(), new ServerModule(
-                            false), federationModule, new WikiServerModule(), new AbstractModule() {
-                        @Override
-                        protected void configure() {
-                            bindScope(SessionScoped.class, Scopes.SINGLETON);
-                            bindScope(RequestScoped.class, Scopes.SINGLETON);
-                            bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
-                            bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
-                        }
-                    });
-            try {
-                childInjector.getInstance(WaveServerImpl.class).initialize();
-            } catch (final WaveServerException e) {
-                e.printStackTrace();
+  public static Injector createInjector() {
+    Injector injector;
+    try {
+      injector = Guice.createInjector(CustomSettingsBinder.bindSettings(
+          TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
+      final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
+      final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
+      final Injector childInjector = injector.createChildInjector(wavePersistModule,
+          FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)),
+          new RobotApiModule(), new PlatformServerModule(), new DocumentServerModule(),
+          new ChatServerModule(), new ServerModule(false), federationModule, new WikiServerModule(),
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bindScope(SessionScoped.class, Scopes.SINGLETON);
+              bindScope(RequestScoped.class, Scopes.SINGLETON);
+              bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
+              bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
             }
-            return childInjector;
-        } catch (final ConfigurationException e) {
-            e.printStackTrace();
-        }
-        return null;
+          });
+      try {
+        childInjector.getInstance(WaveServerImpl.class).initialize();
+      } catch (final WaveServerException e) {
+        e.printStackTrace();
+      }
+      return childInjector;
+    } catch (final ConfigurationException e) {
+      e.printStackTrace();
     }
+    return null;
+  }
 
-    public IntegrationTestHelper(final Object... tests) {
-        final Injector injector = createInjector();
-        injector.getInstance(KunePersistenceService.class).start();
-        for (final Object test : tests) {
-            injector.injectMembers(test);
-        }
+  public IntegrationTestHelper(final Object... tests) {
+    final Injector injector = createInjector();
+    injector.getInstance(KunePersistenceService.class).start();
+    for (final Object test : tests) {
+      injector.injectMembers(test);
     }
+  }
 }

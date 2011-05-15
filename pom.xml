@@ -511,12 +511,31 @@
       <!-- =roo -->
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium</artifactId>
+      <version>2.0a4</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.collections</groupId>
+          <artifactId>google-collections</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>5.14</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- If you want to start a selenium server, you will need the following
+      dependency: -->
     <!-- <dependency> -->
-    <!-- <groupId>org.openqa.selenium.client-drivers</groupId> -->
-    <!-- <artifactId>selenium-java-client-driver</artifactId> -->
-    <!-- <version>1.0-beta-1</version> -->
-    <!-- <scope>test</scope> -->
+    <!-- <groupId>org.seleniumhq.selenium</groupId> -->
+    <!-- <artifactId>selenium-server</artifactId> -->
+    <!-- <version>2.0a4</version> -->
     <!-- </dependency> -->
+
     <!-- public side -->
     <dependency>
       <groupId>org.jruby.rack</groupId>
@@ -740,7 +759,7 @@
             </systemProperty>
             <systemProperty>
               <key>DEBUG</key>
-              <value>true</value>
+              <value>false</value>
             </systemProperty>
             <systemProperty>
               <!-- <key>org.eclipse.jetty.util.log.DEBUG</key> -->

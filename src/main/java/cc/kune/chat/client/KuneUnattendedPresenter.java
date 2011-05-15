@@ -33,29 +33,26 @@ import com.google.gwt.event.shared.EventBus;
  * Handles the presentation of unattended chats
  */
 public class KuneUnattendedPresenter {
-    private boolean active;
+  private boolean active;
 
-    public KuneUnattendedPresenter(final EventBus eventBus, final HablarEventBus hablarEventBus,
-            final SignalPreferences preferences, final UnattendedPagesManager unattendedManager,
-            final ChatClientAction action) {
-        active = false;
-        hablarEventBus.addHandler(UnattendedChatsChangedEvent.TYPE, new UnattendedChatsChangedHandler() {
-            @Override
-            public void handleUnattendedChatChange(final UnattendedChatsChangedEvent event) {
-                final int unattendedChatsCount = unattendedManager.getSize();
-                if (unattendedChatsCount > 0 && active == false) {
-                    active = true;
-                    SndClickEvent.fire(eventBus);
-                    action.setBlink(true);
+  public KuneUnattendedPresenter(final EventBus eventBus, final HablarEventBus hablarEventBus,
+      final SignalPreferences preferences, final UnattendedPagesManager unattendedManager,
+      final ChatClientAction action) {
+    active = false;
+    hablarEventBus.addHandler(UnattendedChatsChangedEvent.TYPE, new UnattendedChatsChangedHandler() {
+      @Override
+      public void handleUnattendedChatChange(final UnattendedChatsChangedEvent event) {
+        final int unattendedChatsCount = unattendedManager.getSize();
+        if (unattendedChatsCount > 0 && active == false) {
+          active = true;
+          SndClickEvent.fire(eventBus);
+          action.setBlink(true);
 
-                } else if (unattendedChatsCount == 0 && active == true) {
-                    action.setBlink(false);
-                    active = false;
-                }
-            }
-
-        });
-
-    }
-
+        } else if (unattendedChatsCount == 0 && active == true) {
+          action.setBlink(false);
+          active = false;
+        }
+      }
+    });
+  }
 }
