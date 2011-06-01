@@ -30,8 +30,8 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 
 public class SignInForm extends DefaultForm {
-  public static final String NICKOREMAIL_FIELD = "kune-sif-nkf";
-  public static final String PASSWORD_FIELD = "kune-sif-psf";
+  public static final String PASSWORD_FIELD_ID = "kune-sif-psf";
+  public static final String USER_FIELD_ID = "kune-sif-nkf";
 
   private final TextField<String> loginNickOrEmailField;
   private final TextField<String> loginPassField;
@@ -42,22 +42,22 @@ public class SignInForm extends DefaultForm {
 
     loginNickOrEmailField = new TextField<String>();
     loginNickOrEmailField.setFieldLabel(i18n.t("Username"));
-    loginNickOrEmailField.setName(NICKOREMAIL_FIELD);
+    loginNickOrEmailField.setName(USER_FIELD_ID);
     loginNickOrEmailField.setWidth(DEF_SMALL_FIELD_WIDTH);
     loginNickOrEmailField.setAllowBlank(false);
     loginNickOrEmailField.setValidationDelay(1000);
-    loginNickOrEmailField.setId(NICKOREMAIL_FIELD);
+    loginNickOrEmailField.setId(USER_FIELD_ID);
     loginNickOrEmailField.setTabIndex(100);
     super.add(loginNickOrEmailField);
 
     loginPassField = new TextField<String>();
     loginPassField.setFieldLabel(i18n.t("Password"));
-    loginPassField.setName(PASSWORD_FIELD);
+    loginPassField.setName(PASSWORD_FIELD_ID);
     loginPassField.setWidth(DEF_MEDIUM_FIELD_WIDTH);
     loginPassField.setPassword(true);
     loginPassField.setAllowBlank(false);
     loginPassField.setValidationDelay(1000);
-    loginPassField.setId(PASSWORD_FIELD);
+    loginPassField.setId(PASSWORD_FIELD_ID);
     loginPassField.setTabIndex(101);
     loginPassField.addListener(Events.OnKeyPress, new Listener<FieldEvent>() {
       @Override
