@@ -23,6 +23,7 @@ import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
 import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
 import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
 import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
+import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
@@ -55,7 +56,8 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
-      final Provider<RefreshContentMenuItem> refresh, final Provider<SetAsHomePageMenuItem> setAsHomePage) {
+      final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
+      final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
@@ -64,6 +66,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containers);
     actionsRegistry.addAction(ActionGroups.VIEW, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, containers);
+    actionsRegistry.addAction(ActionGroups.VIEW, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
