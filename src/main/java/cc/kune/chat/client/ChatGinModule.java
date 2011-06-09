@@ -20,6 +20,7 @@
 package cc.kune.chat.client;
 
 import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
+import cc.kune.chat.client.actions.ChatClientActions;
 import cc.kune.chat.client.actions.ChatSitebarActions;
 import cc.kune.chat.client.actions.OpenGroupPublicChatRoomButton;
 
@@ -27,18 +28,20 @@ import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class ChatGinModule extends AbstractPresenterModule {
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.google.gwt.inject.client.AbstractGinModule#configure()
-     */
-    @Override
-    protected void configure() {
-        bind(ChatClient.class).to(ChatClientDefault.class).in(Singleton.class);
-        bind(ChatOptions.class).in(Singleton.class);
-        bind(ChatSitebarActions.class).in(Singleton.class);
-        bind(ChatParts.class).asEagerSingleton();
-        bind(AddAsBuddieHeaderButton.class).in(Singleton.class);
-        bind(OpenGroupPublicChatRoomButton.class).in(Singleton.class);
-    }
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
+  @Override
+  protected void configure() {
+    bind(ChatClient.class).to(ChatClientDefault.class).in(Singleton.class);
+    bind(ChatOptions.class).in(Singleton.class);
+    bind(ChatSitebarActions.class).in(Singleton.class);
+    bind(ChatParts.class).asEagerSingleton();
+    bind(AddAsBuddieHeaderButton.class).in(Singleton.class);
+    bind(OpenGroupPublicChatRoomButton.class).in(Singleton.class);
+    bind(ChatClientTool.class).in(Singleton.class);
+    bind(ChatClientActions.class).in(Singleton.class);
+  }
 }

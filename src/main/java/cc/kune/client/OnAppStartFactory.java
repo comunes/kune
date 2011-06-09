@@ -19,26 +19,31 @@
  */
 package cc.kune.client;
 
+import cc.kune.barters.client.BartersClientTool;
 import cc.kune.blogs.client.BlogsClientTool;
+import cc.kune.chat.client.ChatClientTool;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.docs.client.DocsClientTool;
+import cc.kune.meets.client.MeetingsClientTool;
+import cc.kune.wiki.client.WikiClientTool;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class OnAppStartFactory {
 
-    @Inject
-    public OnAppStartFactory(final Session session, final Provider<DocsClientTool> docsClientTool,
-            final Provider<BlogsClientTool> blogsClientTool) {
-        session.onAppStart(true, new AppStartHandler() {
-            @Override
-            public void onAppStart(final AppStartEvent event) {
-                docsClientTool.get();
-                blogsClientTool.get();
-            }
-        });
-    }
+  @Inject
+  public OnAppStartFactory(final Session session, final Provider<DocsClientTool> docsClientTool,
+      final Provider<BlogsClientTool> blogsClientTool,
+      final Provider<BartersClientTool> bartersClientTool,
+      final Provider<MeetingsClientTool> meetsClientTool,
+      final Provider<ChatClientTool> chatsClientTool, final Provider<WikiClientTool> wikiClientTool) {
+    session.onAppStart(true, new AppStartHandler() {
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+      }
+    });
+  }
 }

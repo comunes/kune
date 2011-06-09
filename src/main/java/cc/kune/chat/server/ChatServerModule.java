@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,22 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat;
+package cc.kune.chat.server;
 
-import static org.junit.Assert.assertEquals;
+import com.google.inject.AbstractModule;
 
-import org.junit.Test;
-import org.ourproject.kune.chat.client.ChatClientTool;
+public class ChatServerModule extends AbstractModule {
 
-import cc.kune.chat.shared.ChatConstants;
+    @Override
+    public void configure() {
+        // To debug Smack, descomment this
+        // XMPPConnection.DEBUG_ENABLED = true;
 
-public class ChatToolTest {
+        bind(ChatServerTool.class).asEagerSingleton();
 
-  @Test
-  public void clientAndServerAreSync() {
-    assertEquals(ChatConstants.NAME, ChatClientTool.NAME);
-    assertEquals(ChatConstants.TYPE_ROOT, ChatClientTool.TYPE_ROOT);
-    assertEquals(ChatConstants.TYPE_ROOM, ChatClientTool.TYPE_ROOM);
-    assertEquals(ChatConstants.TYPE_CHAT, ChatClientTool.TYPE_CHAT);
-  }
+    }
+
 }

@@ -30,6 +30,7 @@ import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
@@ -40,49 +41,49 @@ import com.google.inject.Provider;
 
 public class DelContainerMenuItem extends MenuItemDescriptor {
 
-    public static class DelContainerAction extends RolAction {
+  public static class DelContainerAction extends RolAction {
 
-        private final Provider<ContentServiceAsync> contentService;
-        private final EventBus eventBus;
-        private final I18nTranslationService i18n;
-        private final Provider<FolderViewerPresenter> presenter;
-        private final Session session;
-        private final StateManager stateManager;
+    private final Provider<ContentServiceAsync> contentService;
+    private final EventBus eventBus;
+    private final I18nTranslationService i18n;
+    private final Provider<FolderViewerPresenter> presenter;
+    private final Session session;
+    private final StateManager stateManager;
 
-        @Inject
-        public DelContainerAction(final EventBus eventBus, final StateManager stateManager, final Session session,
-                final Provider<ContentServiceAsync> contentService, final I18nTranslationService i18n,
-                final Provider<FolderViewerPresenter> presenter) {
-            super(AccessRolDTO.Administrator, true);
-            this.eventBus = eventBus;
-            this.stateManager = stateManager;
-            this.session = session;
-            this.contentService = contentService;
-            this.i18n = i18n;
-            this.presenter = presenter;
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            final StateToken token = (StateToken) event.getTarget();
-            ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"),
-                    i18n.t("You will delete it with all its contents. Are you sure?"), i18n.t("Yes"), i18n.t("No"),
-                    null, null, new OnAcceptCallback() {
-                        @Override
-                        public void onSuccess() {
-                            NotifyUser.showProgress();
-                            NotifyUser.info("Sorry, in development");
-                            NotifyUser.hideProgress();
-                        }
-                    });
-        }
-
+    @Inject
+    public DelContainerAction(final EventBus eventBus, final StateManager stateManager,
+        final Session session, final Provider<ContentServiceAsync> contentService,
+        final I18nTranslationService i18n, final Provider<FolderViewerPresenter> presenter) {
+      super(AccessRolDTO.Administrator, true);
+      this.eventBus = eventBus;
+      this.stateManager = stateManager;
+      this.session = session;
+      this.contentService = contentService;
+      this.i18n = i18n;
+      this.presenter = presenter;
     }
 
-    public DelContainerMenuItem(final I18nTranslationService i18n, final DelContainerAction action,
-            final CoreResources res) {
-        super(action);
-        this.withText(i18n.t("Delete")).withIcon(res.cancel());
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      final StateToken token = ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
+      ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"),
+          i18n.t("You will delete it with all its contents. Are you sure?"), i18n.t("Yes"),
+          i18n.t("No"), null, null, new OnAcceptCallback() {
+            @Override
+            public void onSuccess() {
+              NotifyUser.showProgress();
+              NotifyUser.info("Sorry, in development");
+              NotifyUser.hideProgress();
+            }
+          });
     }
+
+  }
+
+  public DelContainerMenuItem(final I18nTranslationService i18n, final DelContainerAction action,
+      final CoreResources res) {
+    super(action);
+    this.withText(i18n.t("Delete")).withIcon(res.cancel());
+  }
 
 }

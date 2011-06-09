@@ -21,10 +21,8 @@ package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
-import cc.kune.barters.shared.BartersConstants;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.EditEvent;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
 import cc.kune.common.client.ui.HasEditHandler;
@@ -42,7 +40,6 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.RenameListener;
 import cc.kune.gspace.client.tool.ContentViewer;
-import cc.kune.meets.shared.MeetingsConstants;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -168,10 +165,10 @@ public class ContentViewerPresenter extends
         // is already participant, show wave editor
         if (org.waveprotocol.box.webclient.client.Session.get().isLoggedIn()) {
           final String typeId = stateContent.getTypeId();
-          if (typeId.equals(BartersConstants.TYPE_BARTER)
-              || typeId.equals(MeetingsConstants.TYPE_MEETING)) {
-            NotifyUser.important("Currently we are experiencing problems with this tool. We'll fix ASAP...");
-          }
+          // if (typeId.equals(BartersConstants.TYPE_BARTER)
+          // || typeId.equals(MeetingsConstants.TYPE_MEETING)) {
+          // NotifyUser.important("Currently we are experiencing problems with this tool. We'll fix ASAP...");
+          // }
           getView().setEditableContent(stateContent);
         } else {
           getView().setContent(stateContent);

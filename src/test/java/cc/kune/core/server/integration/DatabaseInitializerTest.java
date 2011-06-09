@@ -29,8 +29,8 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.chat.server.ChatServerTool;
 
+import cc.kune.chat.shared.ChatConstants;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
@@ -47,64 +47,64 @@ import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
 public class DatabaseInitializerTest {
-    @Inject
-    ContainerManager containerManager;
-    @Inject
-    ContentManager contentManager;
-    @Inject
-    I18nCountryManager countryManager;
-    private Group defaultGroup;
-    @Inject
-    GroupManager groupManager;
-    @Inject
-    I18nLanguageManager languageManager;
-    @Inject
-    LicenseManager licenseManager;
+  @Inject
+  ContainerManager containerManager;
+  @Inject
+  ContentManager contentManager;
+  @Inject
+  I18nCountryManager countryManager;
+  private Group defaultGroup;
+  @Inject
+  GroupManager groupManager;
+  @Inject
+  I18nLanguageManager languageManager;
+  @Inject
+  LicenseManager licenseManager;
 
-    @Inject
-    I18nTranslationManager transManager;
+  @Inject
+  I18nTranslationManager transManager;
 
-    @Transactional
-    @Before
-    public void init() {
-        new IntegrationTestHelper(this);
-        defaultGroup = groupManager.getSiteDefaultGroup();
-    }
+  @Transactional
+  @Before
+  public void init() {
+    new IntegrationTestHelper(this);
+    defaultGroup = groupManager.getSiteDefaultGroup();
+  }
 
-    @Test
-    public void testDefaultContentAndLicenses() {
-        assertNotNull(defaultGroup.getDefaultContent());
-        assertTrue(licenseManager.getAll().size() > 0);
-        assertNotNull(defaultGroup.getDefaultLicense());
-    }
+  @Test
+  public void testDefaultContentAndLicenses() {
+    assertNotNull(defaultGroup.getDefaultContent());
+    assertTrue(licenseManager.getAll().size() > 0);
+    assertNotNull(defaultGroup.getDefaultLicense());
+  }
 
-    @Test
-    public void testDefaultDocumentContent() {
-        final Content content = defaultGroup.getDefaultContent();
-        assertEquals(TYPE_DOCUMENT, content.getTypeId());
-        final Container rootDocFolder = content.getContainer();
-        assertEquals(true, rootDocFolder.isRoot());
-    }
+  @Test
+  public void testDefaultDocumentContent() {
+    final Content content = defaultGroup.getDefaultContent();
+    assertEquals(TYPE_DOCUMENT, content.getTypeId());
+    final Container rootDocFolder = content.getContainer();
+    assertEquals(true, rootDocFolder.isRoot());
+  }
 
-    @Test
-    public void testI18n() {
-        assertNotNull(countryManager.find(Long.valueOf(75)));
-        assertNotNull(languageManager.findByCode("en"));
-        assertNotNull(languageManager.find(Long.valueOf(1819)));
-    }
+  @Test
+  public void testI18n() {
+    assertNotNull(countryManager.find(Long.valueOf(75)));
+    assertNotNull(languageManager.findByCode("en"));
+    assertNotNull(languageManager.find(Long.valueOf(1819)));
+  }
 
-    @Test
-    public void testToolConfiguration() {
-        assertNotNull(defaultGroup);
-        final ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(NAME);
-        assertNotNull(docToolConfig);
-        assertTrue(docToolConfig.isEnabled());
-        final ToolConfiguration chatToolConfig = defaultGroup.getToolConfiguration(ChatServerTool.NAME);
-        assertNotNull(chatToolConfig);
-        assertTrue(chatToolConfig.isEnabled());
-        final List<String> enabledTools = groupManager.findEnabledTools(defaultGroup.getId());
-        assertNotNull(enabledTools);
-        assertTrue(enabledTools.size() > 0);
-    }
+  @Test
+  public void testToolConfiguration() {
+    assertNotNull(defaultGroup);
+    final ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(NAME);
+    assertNotNull(docToolConfig);
+    assertTrue(docToolConfig.isEnabled());
+    final ToolConfiguration chatToolConfig = defaultGroup.getToolConfiguration(ChatConstants.NAME);
+    assertNotNull(chatToolConfig);
+    assertTrue(chatToolConfig.isEnabled());
+    final List<String> enabledTools = groupManager.findEnabledTools(defaultGroup.getId());
+    assertNotNull(enabledTools);
+    assertTrue(enabledTools.size() > 0);
+  }
 
 }

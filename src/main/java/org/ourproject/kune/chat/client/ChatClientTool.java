@@ -28,19 +28,20 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 public class ChatClientTool extends OldFoldableAbstractClientTool {
-    public static final String NAME = "chats";
-    public static final String TYPE_ROOT = "chat.root";
-    public static final String TYPE_ROOM = "chat.room";
-    public static final String TYPE_CHAT = "chat.chat";
+  public static final String NAME = "chats";
+  public static final String TYPE_CHAT = "chat.chat";
+  public static final String TYPE_ROOM = "chat.room";
+  public static final String TYPE_ROOT = "chat.root";
 
-    public ChatClientTool(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
-            final ToolSelector toolSelector, final WsThemeManager wsThemePresenter,
-            ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
-        super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
-        registerContentTypeIcon(TYPE_ROOM, "images/emite-room.png");
-    }
+  public ChatClientTool(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
+      final ToolSelector toolSelector, final WsThemeManager wsThemePresenter,
+      final ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
+    super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
+    registerContentTypeIcon(TYPE_ROOM, "images/emite-room.png");
+  }
 
-    public String getName() {
-        return NAME;
-    }
+  @Override
+  public String getName() {
+    return NAME;
+  }
 }

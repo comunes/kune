@@ -17,22 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat;
+package cc.kune.chat.client.actions;
 
-import static org.junit.Assert.assertEquals;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.actions.GoParentContainerBtn;
 
-import org.junit.Test;
-import org.ourproject.kune.chat.client.ChatClientTool;
+import com.google.inject.Inject;
 
-import cc.kune.chat.shared.ChatConstants;
+public class GoParentChatBtn extends GoParentContainerBtn {
 
-public class ChatToolTest {
+    @Inject
+    public GoParentChatBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
+            final CoreResources res) {
+        super(i18n, action, res);
+    }
 
-  @Test
-  public void clientAndServerAreSync() {
-    assertEquals(ChatConstants.NAME, ChatClientTool.NAME);
-    assertEquals(ChatConstants.TYPE_ROOT, ChatClientTool.TYPE_ROOT);
-    assertEquals(ChatConstants.TYPE_ROOM, ChatClientTool.TYPE_ROOM);
-    assertEquals(ChatConstants.TYPE_CHAT, ChatClientTool.TYPE_CHAT);
-  }
 }

@@ -23,6 +23,7 @@ import org.waveprotocol.wave.client.common.util.DateUtils;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -91,7 +92,9 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     menu.setStandalone(false);
     itemWidget.setMenuVisible(false);
     toolbar.add(menu);
-    for (final GuiActionDescrip menuItem : item.getActionCollection()) {
+    final GuiActionDescCollection actions = item.getActionCollection();
+    toolbar.setVisible(actions.size() > 0);
+    for (final GuiActionDescrip menuItem : actions) {
       menuItem.setParent(menu);
       toolbar.add(menuItem);
     }

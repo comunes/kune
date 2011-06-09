@@ -23,6 +23,7 @@ import java.util.Date;
 
 import javax.persistence.NoResultException;
 
+import cc.kune.chat.server.ChatManager;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.errors.DefaultException;
@@ -73,6 +74,7 @@ import com.google.inject.persist.Transactional;
 @Singleton
 public class ContentRPC implements ContentService, RPC {
   private final AccessService accessService;
+  private final ChatManager chatManager;
   private final ContainerManager containerManager;
   private final ContentManager contentManager;
   private final CreationService creationService;
@@ -91,7 +93,7 @@ public class ContentRPC implements ContentService, RPC {
       final StateService stateService, final CreationService creationService,
       final GroupManager groupManager, final XmppManager xmppManager,
       final ContentManager contentManager, final ContainerManager containerManager,
-      final TagUserContentManager tagManager, final Mapper mapper) {
+      final TagUserContentManager tagManager, final Mapper mapper, final ChatManager chatManager) {
     this.finderService = finderService;
     this.userSessionProvider = userSessionProvider;
     this.accessService = accessService;
@@ -104,6 +106,7 @@ public class ContentRPC implements ContentService, RPC {
     this.containerManager = containerManager;
     this.tagManager = tagManager;
     this.mapper = mapper;
+    this.chatManager = chatManager;
   }
 
   @Override
@@ -151,34 +154,12 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
-  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator)
   @Transactional
   public StateContainerDTO addRoom(final String userHash, final StateToken parentToken,
       final String roomName) throws DefaultException {
-    // final String groupShortName = parentToken.getGroup();
-    // final User user = getCurrentUser();
-    // final String userShortName = user.getShortName();
-    // final ChatConnection connection = xmppManager.login(userShortName,
-    // user.getPassword(), userHash);
-    // xmppManager.createRoom(connection, roomName, userShortName +
-    // userHash);
-    // xmppManager.disconnect(connection);
-    // try {
-    // final Container container = createFolder(groupShortName,
-    // ContentUtils.parseId(parentToken.getFolder()),
-    // roomName, ChatServerTool.TYPE_ROOM);
-    // return getState(user, container);
-    // } catch (final ContentNotFoundException e) {
-    // xmppManager.destroyRoom(connection, roomName);
-    // throw new ContentNotFoundException();
-    // } catch (final AccessViolationException e) {
-    // xmppManager.destroyRoom(connection, roomName);
-    // throw new AccessViolationException();
-    // } catch (final GroupNotFoundException e) {
-    // xmppManager.destroyRoom(connection, roomName);
-    // throw new GroupNotFoundException();
-    // }
-    return null;
+    final User user = getCurrentUser();
+    return getState(user, chatManager.addRoom(userHash, user, parentToken, roomName, ""));
   }
 
   private StateContentDTO createContent(final StateToken parentToken, final String title,

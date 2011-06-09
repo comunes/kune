@@ -25,20 +25,20 @@ import org.jivesoftware.smack.RosterEntry;
 
 public interface XmppManager {
 
-    Room createRoom(ChatConnection connection, String roomName, String ownerAlias);
+  Room createRoom(ChatConnection connection, String roomName, String ownerAlias, String subject);
 
-    void destroyRoom(ChatConnection conn, String roomName);
+  void destroyRoom(ChatConnection conn, String roomName);
 
-    void disconnect(ChatConnection connection);
+  void disconnect(ChatConnection connection);
 
-    Collection<RosterEntry> getRoster(ChatConnection connection);
+  Collection<RosterEntry> getRoster(ChatConnection connection);
 
-    Room joinRoom(ChatConnection connection, String roomName, String alias);
+  Room joinRoom(ChatConnection connection, String roomName, String alias);
 
-    ChatConnection login(String userName, String password, String resource);
+  ChatConnection login(String userName, String password, String resource);
 
-    void sendMessage(Room room, String message);
+  void sendMessage(Room room, String message);
 
-    void sendMessage(String userName, String message);
+  void sendMessage(String userName, String message);
 
 }

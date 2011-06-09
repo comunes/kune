@@ -22,7 +22,6 @@ package cc.kune.core.server.integration;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
-import org.ourproject.kune.chat.server.ChatServerModule;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
@@ -31,6 +30,7 @@ import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveServerImpl;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
+import cc.kune.chat.server.ChatServerModule;
 import cc.kune.core.server.KunePersistenceService;
 import cc.kune.core.server.PlatformServerModule;
 import cc.kune.core.server.TestConstants;

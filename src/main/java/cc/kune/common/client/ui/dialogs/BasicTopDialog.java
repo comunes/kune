@@ -126,7 +126,7 @@ public class BasicTopDialog extends BasicDialog {
   private final PopupTopPanel popup;
   private String width;
 
-  private BasicTopDialog(final Builder builder) {
+  protected BasicTopDialog(final Builder builder) {
     popup = new PopupTopPanel(builder.autohide, builder.modal);
     popup.add(this);
     popup.ensureDebugId(builder.dialogId);
@@ -141,8 +141,8 @@ public class BasicTopDialog extends BasicDialog {
     super.setSecondBtnId(builder.sndButtonId);
     super.setSecondBtnTabIndex(builder.tabIndexStart + 1);
     super.getTitleText().setText(builder.title);
-    this.setWidth(builder.width);
-    this.setHeight(builder.height);
+    setWidthImpl(builder.width);
+    setHeightImpl(builder.height);
     setSizes();
     Window.addResizeHandler(new ResizeHandler() {
       @Override
@@ -171,6 +171,10 @@ public class BasicTopDialog extends BasicDialog {
 
   @Override
   public void setHeight(final String height) {
+    setHeightImpl(height);
+  }
+
+  private void setHeightImpl(final String height) {
     this.height = height;
     setSizes();
   }
@@ -178,8 +182,7 @@ public class BasicTopDialog extends BasicDialog {
   @Override
   public void setSize(final String width, final String height) {
     this.width = width;
-    this.height = height;
-    setSizes();
+    setHeightImpl(height);
   }
 
   private void setSizes() {
@@ -213,6 +216,10 @@ public class BasicTopDialog extends BasicDialog {
 
   @Override
   public void setWidth(final String width) {
+    setWidthImpl(width);
+  }
+
+  private void setWidthImpl(final String width) {
     this.width = width;
     setSizes();
   }

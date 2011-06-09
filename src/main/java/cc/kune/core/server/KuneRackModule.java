@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.blogs.server.BlogServerModule;
+import cc.kune.chat.server.ChatServerModule;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
@@ -152,7 +153,7 @@ public class KuneRackModule implements RackModule {
     builder.use(new BarterServerModule());
     builder.use(new MeetingServerModule());
     builder.use(new WikiServerModule());
-    // builder.use(new ChatServerModule());
+    builder.use(new ChatServerModule());
     // builder.use(new GalleryServerModule());
     builder.use(new RESTServicesModule());
     builder.use(configModule);

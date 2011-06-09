@@ -17,22 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat;
+package cc.kune.chat.client;
 
-import static org.junit.Assert.assertEquals;
+import com.google.gwt.inject.client.Ginjector;
 
-import org.junit.Test;
-import org.ourproject.kune.chat.client.ChatClientTool;
+public interface ChatGinjector extends Ginjector {
 
-import cc.kune.chat.shared.ChatConstants;
+  ChatParts getChatParts();
 
-public class ChatToolTest {
-
-  @Test
-  public void clientAndServerAreSync() {
-    assertEquals(ChatConstants.NAME, ChatClientTool.NAME);
-    assertEquals(ChatConstants.TYPE_ROOT, ChatClientTool.TYPE_ROOT);
-    assertEquals(ChatConstants.TYPE_ROOM, ChatClientTool.TYPE_ROOM);
-    assertEquals(ChatConstants.TYPE_CHAT, ChatClientTool.TYPE_CHAT);
-  }
 }

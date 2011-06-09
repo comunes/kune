@@ -28,6 +28,7 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -54,7 +55,7 @@ public class SetAsHomePageMenuItem extends MenuItemDescriptor {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      final StateToken token = (StateToken) event.getTarget();
+      final StateToken token = ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
       NotifyUser.showProgressProcessing();
       contentService.get().setAsDefaultContent(session.getUserHash(), token,
           new AsyncCallbackSimple<ContentSimpleDTO>() {

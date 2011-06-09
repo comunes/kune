@@ -19,59 +19,28 @@
  */
 package cc.kune.core.shared.dto;
 
-import cc.kune.core.shared.domain.utils.StateToken;
-
-import com.google.gwt.user.client.rpc.IsSerializable;
-
 /**
  * A item can be both a container or a content
  * 
  */
-public class ContainerSimpleDTO implements IsSerializable {
-    private Long id;
-    private String name;
-    private String typeId;
-    private StateToken stateToken;
-    private Long parentFolderId;
+public class ContainerSimpleDTO extends AbstractContentSimpleDTO {
+  private String name;
+  private Long parentFolderId;
 
-    public Long getId() {
-        return id;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public Long getParentFolderId() {
+    return parentFolderId;
+  }
 
-    public Long getParentFolderId() {
-        return parentFolderId;
-    }
+  public void setName(final String name) {
+    this.name = name;
+  }
 
-    public StateToken getStateToken() {
-        return stateToken;
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public void setParentFolderId(final Long parentFolderId) {
-        this.parentFolderId = parentFolderId;
-    }
-
-    public void setStateToken(final StateToken stateToken) {
-        this.stateToken = stateToken;
-    }
-
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
+  public void setParentFolderId(final Long parentFolderId) {
+    this.parentFolderId = parentFolderId;
+  }
 
 }

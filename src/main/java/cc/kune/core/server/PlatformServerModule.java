@@ -20,6 +20,8 @@
 package cc.kune.core.server;
 
 import static cc.kune.core.server.OutermostCallInterceptor.outermostCall;
+import cc.kune.chat.server.ChatManager;
+import cc.kune.chat.server.ChatManagerDefault;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
@@ -119,6 +121,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(LicenseManager.class).to(LicenseManagerDefault.class);
     bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
     bind(XmppManager.class).to(XmppManagerDefault.class);
+    bind(ChatManager.class).to(ChatManagerDefault.class);
     bind(RateManager.class).to(RateManagerDefault.class);
     bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
     bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);

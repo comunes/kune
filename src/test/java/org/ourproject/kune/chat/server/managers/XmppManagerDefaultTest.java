@@ -75,7 +75,7 @@ public class XmppManagerDefaultTest {
     final String roomName = "roomName";
     final ChatConnection conn1 = manager.login("testUser1", "easy1", "test");
     final ChatConnection conn2 = manager.login("testUser2", "easy2", "test");
-    final Room room1 = manager.createRoom(conn1, roomName, "user1Alias");
+    final Room room1 = manager.createRoom(conn1, roomName, "user1Alias", "subject");
     final OutputListener listener1 = new OutputListener("1");
     room1.setListener(listener1);
     final Room room2 = manager.joinRoom(conn2, roomName, "user2Alias");

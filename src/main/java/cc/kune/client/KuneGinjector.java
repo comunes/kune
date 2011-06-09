@@ -25,7 +25,7 @@ import cc.kune.blogs.client.BlogsGinModule;
 import cc.kune.blogs.client.BlogsGinjector;
 import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.ChatGinModule;
-import cc.kune.chat.client.ChatParts;
+import cc.kune.chat.client.ChatGinjector;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
@@ -77,7 +77,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
     PSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class,
     WikiGinModule.class, BartersGinModule.class, MeetingsGinModule.class })
 public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector,
-    WikiGinjector, BartersGinjector, MeetingsGinjector {
+    WikiGinjector, BartersGinjector, MeetingsGinjector, ChatGinjector {
 
   /*
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
@@ -87,8 +87,6 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
   AsyncProvider<UserSNPresenter> getBuddiesAndParticipationPresenter();
 
   ChatClient getChatClient();
-
-  ChatParts getChatParts();
 
   AsyncProvider<CookiesManager> getCookiesManager();
 

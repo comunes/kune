@@ -36,6 +36,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
@@ -135,16 +136,19 @@ public class FolderViewerPresenter extends
     this.renameAction = renameAction;
   }
 
-  private void addItem(final String title, final String contentTypeId, final BasicMimeTypeDTO mimeType,
-      final ContentStatus status, final StateToken stateToken, final StateToken parentStateToken,
-      final AccessRights rights, final long modifiedOn) {
-    final Object icon = getIcon(stateToken, contentTypeId, mimeType);
+  private void addItem(final AbstractContentSimpleDTO content, final BasicMimeTypeDTO mimeType,
+      final ContentStatus status, final StateToken parentStateToken, final AccessRights rights,
+      final long modifiedOn) {
+    final StateToken stateToken = content.getStateToken();
+    final String typeId = content.getTypeId();
+    final String name = content.getName();
+    final Object icon = getIcon(stateToken, typeId, mimeType);
     final String tooltip = getTooltip(stateToken, mimeType);
     final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
-        genId(parentStateToken), icon, title, tooltip, status, stateToken, modifiedOn,
-        capabilitiesRegistry.isDragable(contentTypeId) && rights.isAdministrable(),
-        capabilitiesRegistry.isDropable(contentTypeId) && rights.isAdministrable(),
-        actionsRegistry.getCurrentActions(stateToken, contentTypeId, session.isLogged(), rights,
+        genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,
+        capabilitiesRegistry.isDragable(typeId) && rights.isAdministrable(),
+        capabilitiesRegistry.isDropable(typeId) && rights.isAdministrable(),
+        actionsRegistry.getCurrentActions(content, typeId, session.isLogged(), rights,
             ActionGroups.MENUITEM));
     if (status.equals(ContentStatus.inTheDustbin) && !session.getShowDeletedContent()) {
       // Don't show
@@ -195,16 +199,14 @@ public class FolderViewerPresenter extends
     } else {
       // Folders
       for (final ContainerSimpleDTO childFolder : container.getChilds()) {
-        addItem(childFolder.getName(), childFolder.getTypeId(), null, ContentStatus.publishedOnline,
-            childFolder.getStateToken(),
+        addItem(childFolder, null, ContentStatus.publishedOnline,
             childFolder.getStateToken().copy().setFolder(childFolder.getParentFolderId()),
             containerRights, FolderViewerView.NO_DATE);
       }
       // Other contents (docs, etc)
       for (final ContentSimpleDTO content : container.getContents()) {
-        addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
-            content.getStateToken(), content.getStateToken().copy().clearDocument(),
-            content.getRights(), content.getModifiedOn());
+        addItem(content, content.getMimeType(), content.getStatus(),
+            content.getStateToken().copy().clearDocument(), content.getRights(), content.getModifiedOn());
       }
     }
   }

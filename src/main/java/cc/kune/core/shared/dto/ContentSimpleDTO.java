@@ -21,25 +21,15 @@ package cc.kune.core.shared.dto;
 
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.AccessRights;
-import cc.kune.core.shared.domain.utils.StateToken;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
-public class ContentSimpleDTO implements IsSerializable {
-
-  private Long id;
   private BasicMimeTypeDTO mimeType;
   private Long modifiedOn;
   private AccessRights rights;
-  private StateToken stateToken;
   private ContentStatus status;
   private String title;
-  private String typeId;
   private String waveId;
-
-  public Long getId() {
-    return id;
-  }
 
   public BasicMimeTypeDTO getMimeType() {
     return mimeType;
@@ -49,12 +39,13 @@ public class ContentSimpleDTO implements IsSerializable {
     return modifiedOn;
   }
 
-  public AccessRights getRights() {
-    return rights;
+  @Override
+  public String getName() {
+    return title;
   }
 
-  public StateToken getStateToken() {
-    return stateToken;
+  public AccessRights getRights() {
+    return rights;
   }
 
   public ContentStatus getStatus() {
@@ -65,16 +56,8 @@ public class ContentSimpleDTO implements IsSerializable {
     return title;
   }
 
-  public String getTypeId() {
-    return typeId;
-  }
-
   public String getWaveId() {
     return waveId;
-  }
-
-  public void setId(final Long id) {
-    this.id = id;
   }
 
   public void setMimeType(final BasicMimeTypeDTO mimeType) {
@@ -85,12 +68,13 @@ public class ContentSimpleDTO implements IsSerializable {
     this.modifiedOn = modifiedOn;
   }
 
-  public void setRights(final AccessRights rights) {
-    this.rights = rights;
+  @Override
+  public void setName(final String name) {
+    this.title = name;
   }
 
-  public void setStateToken(final StateToken stateToken) {
-    this.stateToken = stateToken;
+  public void setRights(final AccessRights rights) {
+    this.rights = rights;
   }
 
   public void setStatus(final ContentStatus status) {
@@ -99,10 +83,6 @@ public class ContentSimpleDTO implements IsSerializable {
 
   public void setTitle(final String title) {
     this.title = title;
-  }
-
-  public void setTypeId(final String typeId) {
-    this.typeId = typeId;
   }
 
   public void setWaveId(final String waveId) {

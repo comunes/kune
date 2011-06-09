@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,19 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.server;
+package cc.kune.chat.shared;
 
-import com.google.inject.AbstractModule;
+public final class ChatConstants {
 
-public class ChatServerModule extends AbstractModule {
+  public static final String NAME = "chats";
+  public static final String TYPE_CHAT = NAME + "." + "chat";
+  public static final String TYPE_ROOM = NAME + "." + "room";
+  public static final String TYPE_ROOT = NAME + "." + "root";
 
-    @Override
-    public void configure() {
-        // To debug Smack, descomment this
-        // XMPPConnection.DEBUG_ENABLED = true;
-
-        bind(ChatServerTool.class).asEagerSingleton();
-
-    }
-
+  private ChatConstants() {
+  }
 }

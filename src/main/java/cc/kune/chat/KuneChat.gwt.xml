@@ -10,4 +10,5 @@
   <inherits name='com.calclab.hablar.icons.alt.HablarAltIcons' />
   <source path="client" />
   <public path="public" />
+  <source path="shared" />
 </module>
