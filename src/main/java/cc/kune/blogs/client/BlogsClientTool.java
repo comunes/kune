@@ -65,6 +65,8 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_BLOG, navResources.blog());
     registerContentTypeIcon(TYPE_POST, navResources.post());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+    registerEmptyMessages(TYPE_ROOT, "There isn't any blog, create one");
+    registerEmptyMessages(TYPE_BLOG, "This blog hasn't any post, create one");
   }
 
 }

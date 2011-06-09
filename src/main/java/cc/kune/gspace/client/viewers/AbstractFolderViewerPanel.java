@@ -22,6 +22,7 @@ package cc.kune.gspace.client.viewers;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -38,6 +39,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 public abstract class AbstractFolderViewerPanel extends ViewImpl implements FolderViewerView {
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
   private final ContentTitleWidget contentTitle;
+  private final InlineLabel emptyLabel;
   private final FlowPanel emptyPanel;
   protected final GSpaceArmor gsArmor;
   protected final I18nTranslationService i18n;
@@ -49,7 +51,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     this.i18n = i18n;
     this.capabilitiesRegistry = capabilitiesRegistry;
     emptyPanel = new FlowPanel();
-    final InlineLabel emptyLabel = new InlineLabel(i18n.t("This is empty."));
+    emptyLabel = new InlineLabel(i18n.t("This is empty."));
     emptyLabel.setStyleName("k-empty-msg");
     emptyPanel.setStyleName("k-empty-folder-panel");
     emptyPanel.add(emptyLabel);
@@ -113,7 +115,9 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   }
 
   @Override
-  public void showEmptyMsg() {
+  public void showEmptyMsg(final String contentTypeId) {
     gsArmor.getDocContainer().add(emptyPanel);
+    final String msg = capabilitiesRegistry.getEmptyMessagesRegistry().getContentTypeIcon(contentTypeId);
+    emptyLabel.setText(TextUtils.empty(msg) ? i18n.t("This is empty.") : i18n.t(msg));
   }
 }

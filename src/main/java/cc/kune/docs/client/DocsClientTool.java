@@ -65,6 +65,8 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+    registerEmptyMessages(TYPE_FOLDER, "This folder is empty");
+    registerEmptyMessages(TYPE_ROOT, "This folder is empty");
   }
 
 }

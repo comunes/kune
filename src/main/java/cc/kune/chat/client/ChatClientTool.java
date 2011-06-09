@@ -21,6 +21,8 @@ package cc.kune.chat.client;
 
 import static cc.kune.chat.shared.ChatConstants.NAME;
 import static cc.kune.chat.shared.ChatConstants.TYPE_ROOM;
+import cc.kune.chat.client.resources.ChatResources;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
@@ -32,12 +34,15 @@ import com.google.inject.Inject;
 public class ChatClientTool extends FoldableAbstractClientTool {
 
   private final NavResources navResources;
+  private final ChatResources res;
 
   @Inject
   public ChatClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
+      final ChatResources res) {
     super(NAME, i18n.t("chatrooms"), toolSelector, cntCapRegistry);
     this.navResources = navResources;
+    this.res = res;
     registerIcons();
   }
 
@@ -47,7 +52,9 @@ public class ChatClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOM, navResources.room());
+    registerContentTypeIcon(TYPE_ROOM, res.groupChat());
+    registerEmptyMessages(TYPE_ROOM, "Here you will see the archive of old conversations"
+        + TextUtils.IN_DEVELOPMENT_P);
   }
 
 }

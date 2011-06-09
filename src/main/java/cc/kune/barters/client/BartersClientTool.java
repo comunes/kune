@@ -63,6 +63,8 @@ public class BartersClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_BARTER, navResources.barter());
+    registerEmptyMessages(TYPE_FOLDER, "There folder is empty");
+    registerEmptyMessages(TYPE_ROOT, "There isn't any barter");
   }
 
 }

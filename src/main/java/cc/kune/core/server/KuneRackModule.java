@@ -150,10 +150,10 @@ public class KuneRackModule implements RackModule {
     builder.use(new PlatformServerModule());
     builder.use(new DocumentServerModule());
     builder.use(new BlogServerModule());
-    builder.use(new BarterServerModule());
-    builder.use(new MeetingServerModule());
     builder.use(new WikiServerModule());
     builder.use(new ChatServerModule());
+    builder.use(new BarterServerModule());
+    builder.use(new MeetingServerModule());
     // builder.use(new GalleryServerModule());
     builder.use(new RESTServicesModule());
     builder.use(configModule);

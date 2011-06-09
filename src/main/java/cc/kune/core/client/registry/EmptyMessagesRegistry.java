@@ -16,15 +16,24 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package cc.kune.chat.client;
+ \*/
+package cc.kune.core.client.registry;
 
-import com.google.gwt.inject.client.Ginjector;
+import java.util.HashMap;
+import java.util.Map;
 
-public interface ChatGinjector extends Ginjector {
+public class EmptyMessagesRegistry {
+  private final Map<String, String> registry;
 
-  ChatClient getChatClient();
+  public EmptyMessagesRegistry() {
+    registry = new HashMap<String, String>();
+  }
 
-  ChatParts getChatParts();
+  public String getContentTypeIcon(final String typeId) {
+    return registry.get(typeId);
+  }
 
+  public void register(final String contentTypeId, final String message) {
+    registry.put(contentTypeId, message);
+  }
 }

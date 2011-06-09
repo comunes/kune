@@ -65,6 +65,8 @@ public class WikiClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_WIKIPAGE, navResources.wikipage());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+    registerEmptyMessages(TYPE_FOLDER, "There folder is empty");
+    registerEmptyMessages(TYPE_ROOT, "This wiki is empty");
   }
 
 }

@@ -76,12 +76,15 @@ public class KuneEntryPoint implements EntryPoint {
     ginjector.getUserNotifierPresenter();
     ginjector.getSpinerPresenter();
     ginjector.getGroupMembersPresenter();
-    ginjector.getBartersParts();
-    ginjector.getBlogsParts();
-    ginjector.getChatParts();
+
+    /* Tools (order in GUI) */
     ginjector.getDocsParts();
-    ginjector.getMeetingsParts();
+    ginjector.getBlogsParts();
     ginjector.getWikiParts();
+    ginjector.getChatParts();
+    ginjector.getBartersParts();
+    ginjector.getMeetingsParts();
+
     ginjector.getSiteLogoPresenter();
     ginjector.getSpacesTabPresenter();
     ginjector.getChatClient();

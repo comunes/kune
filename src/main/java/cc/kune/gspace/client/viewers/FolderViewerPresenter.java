@@ -97,7 +97,7 @@ public class FolderViewerPresenter extends
 
     void setEditableTitle(String title);
 
-    void showEmptyMsg();
+    void showEmptyMsg(String contentTypeId);
   }
 
   protected static final String CSSBTN = "k-button";
@@ -195,7 +195,7 @@ public class FolderViewerPresenter extends
 
   private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
     if (container.getContents().size() + container.getChilds().size() == 0) {
-      getView().showEmptyMsg();
+      getView().showEmptyMsg(container.getTypeId());
     } else {
       // Folders
       for (final ContainerSimpleDTO childFolder : container.getChilds()) {

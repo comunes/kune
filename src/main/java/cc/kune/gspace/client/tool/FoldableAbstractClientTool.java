@@ -66,6 +66,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     contentCapabilitiesRegistry.getEmailSubscribeAble().register(typeIds);
   }
 
+  public void registerEmptyMessages(final String contentTypeId, final String message) {
+    contentCapabilitiesRegistry.getEmptyMessagesRegistry().register(contentTypeId, message);
+  }
+
   protected void registerLicensableTypes(final String... typeIds) {
     contentCapabilitiesRegistry.getLicensable().register(typeIds);
   }

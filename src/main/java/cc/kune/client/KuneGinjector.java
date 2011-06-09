@@ -23,7 +23,6 @@ import cc.kune.barters.client.BartersGinModule;
 import cc.kune.barters.client.BartersGinjector;
 import cc.kune.blogs.client.BlogsGinModule;
 import cc.kune.blogs.client.BlogsGinjector;
-import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.ChatGinModule;
 import cc.kune.chat.client.ChatGinjector;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
@@ -73,8 +72,8 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
-@GinModules({ KuneGinModule.class, CoreGinModule.class, ChatGinModule.class, WaveGinModule.class,
-    PSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class,
+@GinModules({ KuneGinModule.class, CoreGinModule.class, WaveGinModule.class, PSpaceGinModule.class,
+    GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class, ChatGinModule.class,
     WikiGinModule.class, BartersGinModule.class, MeetingsGinModule.class })
 public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector,
     WikiGinjector, BartersGinjector, MeetingsGinjector, ChatGinjector {
@@ -85,8 +84,6 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
    */
 
   AsyncProvider<UserSNPresenter> getBuddiesAndParticipationPresenter();
-
-  ChatClient getChatClient();
 
   AsyncProvider<CookiesManager> getCookiesManager();
 

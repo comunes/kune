@@ -85,6 +85,11 @@ and:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/federation/openfire-installation
 if you want to use Kune in production and federate with other Wave capable servers.
 
+===Increase open file limits in system===
+
+Follow:
+http://posidev.com/blog/2009/06/04/set-ulimit-parameters-on-ubuntu/
+
 ===Install jmagick===
 
 Install jmagick-jni. In debian: apt-get install libjmagick6-jni (version 6.2.6-0) also you need or:

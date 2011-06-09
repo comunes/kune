@@ -23,7 +23,6 @@ import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
 import cc.kune.chat.client.actions.ChatClientActions;
 import cc.kune.chat.client.actions.ChatSitebarActions;
 import cc.kune.chat.client.actions.OpenGroupPublicChatRoomAction;
-import cc.kune.chat.client.actions.OpenGroupPublicChatRoomButton;
 import cc.kune.chat.client.actions.StartChatWithMemberAction;
 import cc.kune.chat.client.actions.StartChatWithThisBuddieAction;
 import cc.kune.chat.client.actions.StartChatWithUserAction;
@@ -69,7 +68,7 @@ public class ChatParts {
       final Provider<StartChatWithThisBuddieAction> startChatWithBuddieAction,
       final ChatClientActions chatActions,
       final Provider<OpenGroupPublicChatRoomAction> openGroupRoomAction,
-      final Provider<OpenGroupPublicChatRoomButton> openGroupRoom,
+      // final Provider<OpenGroupPublicChatRoomButton> openGroupRoom,
       final ContentViewerSelector viewerSelector, final FolderViewerPresenter folderViewer) {
     viewerSelector.register(folderViewer, true, ChatConstants.TYPE_ROOT);
     viewerSelector.register(folderViewer, true, ChatConstants.TYPE_ROOM);
@@ -126,7 +125,7 @@ public class ChatParts {
         userItemsRegistry.get().add(startChatWithBuddieItem);
         groupConfActions.get().add(openChatAndInvite.get());
         buddieButton.get();
-        openGroupRoom.get();
+        // openGroupRoom.get();
       }
     });
   }
