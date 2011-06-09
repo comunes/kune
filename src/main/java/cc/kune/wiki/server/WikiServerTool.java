@@ -135,7 +135,7 @@ public class WikiServerTool implements ServerTool {
     content.setTypeId(TYPE_WIKIPAGE);
     content.setStatus(ContentStatus.publishedOnline);
 
-    contentManager.save(user, content);
+    contentManager.save(content);
     return group;
   }
 

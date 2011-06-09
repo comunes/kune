@@ -61,143 +61,145 @@ import com.google.inject.persist.Transactional;
 @Singleton
 public class UserRPC implements RPC, UserService {
 
-    private final ContentManager contentManager;
-    private final GroupManager groupManager;
-    private final I18nTranslationService i18n;
-    private final Mapper mapper;
-    private final Provider<SessionService> sessionServiceProvider;
-    private final UserInfoService userInfoService;
-    private final UserManager userManager;
-    private final Provider<UserSession> userSessionProvider;
-    private final Boolean useSocketIO;
-    private final CustomWaveClientServlet waveClientServlet;
-    private final SessionManager waveSessionManager;
+  private final ContentManager contentManager;
+  private final GroupManager groupManager;
+  private final I18nTranslationService i18n;
+  private final Mapper mapper;
+  private final Provider<SessionService> sessionServiceProvider;
+  private final UserInfoService userInfoService;
+  private final UserManager userManager;
+  private final Provider<UserSession> userSessionProvider;
+  private final Boolean useSocketIO;
+  private final CustomWaveClientServlet waveClientServlet;
+  private final SessionManager waveSessionManager;
 
-    @Inject
-    public UserRPC(final Provider<SessionService> sessionServiceProvider,
-            final Provider<UserSession> userSessionProvider, final UserManager userManager,
-            @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO, final GroupManager groupManager,
-            final UserInfoService userInfoService, final Mapper mapper, final SessionManager waveSessionManager,
-            final CustomWaveClientServlet waveClientServlet, final I18nTranslationService i18n,
-            final ContentManager contentManager) {
-        this.sessionServiceProvider = sessionServiceProvider;
-        this.userSessionProvider = userSessionProvider;
-        this.userManager = userManager;
-        this.useSocketIO = useSocketIO;
-        this.groupManager = groupManager;
-        this.userInfoService = userInfoService;
-        this.mapper = mapper;
-        this.waveSessionManager = waveSessionManager;
-        this.waveClientServlet = waveClientServlet;
-        this.i18n = i18n;
-        this.contentManager = contentManager;
+  @Inject
+  public UserRPC(final Provider<SessionService> sessionServiceProvider,
+      final Provider<UserSession> userSessionProvider, final UserManager userManager,
+      @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO, final GroupManager groupManager,
+      final UserInfoService userInfoService, final Mapper mapper,
+      final SessionManager waveSessionManager, final CustomWaveClientServlet waveClientServlet,
+      final I18nTranslationService i18n, final ContentManager contentManager) {
+    this.sessionServiceProvider = sessionServiceProvider;
+    this.userSessionProvider = userSessionProvider;
+    this.userManager = userManager;
+    this.useSocketIO = useSocketIO;
+    this.groupManager = groupManager;
+    this.userInfoService = userInfoService;
+    this.mapper = mapper;
+    this.waveSessionManager = waveSessionManager;
+    this.waveClientServlet = waveClientServlet;
+    this.i18n = i18n;
+    this.contentManager = contentManager;
+  }
+
+  @Override
+  @Transactional(rollbackOn = DefaultException.class)
+  public void createUser(final UserDTO userDTO, final boolean wantPersonalHomepage)
+      throws DefaultException {
+    final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(),
+        userDTO.getEmail(), userDTO.getPassword(), userDTO.getLanguage().getCode(),
+        userDTO.getCountry().getCode(), userDTO.getTimezone().getId());
+    final Group userGroup = groupManager.createUserGroup(user, wantPersonalHomepage);
+    // Is this necessary? try to remove (used when we were setting the def
+    // content
+    contentManager.save(userGroup.getDefaultContent());
+  }
+
+  @Override
+  @Authenticated
+  @Transactional
+  @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+  public String getUserAvatarBaser64(final String userHash, final StateToken userToken)
+      throws DefaultException {
+    final UserSession userSession = getUserSession();
+    final User user = userSession.getUser();
+    final Group userGroup = user.getUserGroup();
+    if (!userGroup.getShortName().equals(userToken.getGroup())) {
+      throw new AccessViolationException();
     }
-
-    @Override
-    @Transactional(rollbackOn = DefaultException.class)
-    public void createUser(final UserDTO userDTO, final boolean wantPersonalHomepage) throws DefaultException {
-        final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(),
-                userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
-                userDTO.getTimezone().getId());
-        final Group userGroup = groupManager.createUserGroup(user, wantPersonalHomepage);
-        // Is this necessary? try to remove (used when we were setting the def
-        // content
-        contentManager.save(user, userGroup.getDefaultContent());
+    if (userGroup.hasLogo()) {
+      return Base64.encodeBytes(userGroup.getLogo());
+    } else {
+      throw new DefaultException("Unexpected programatic exception (user has no logo)");
     }
+  }
 
-    @Override
-    @Authenticated
-    @Transactional
-    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-    public String getUserAvatarBaser64(final String userHash, final StateToken userToken) throws DefaultException {
-        final UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        final Group userGroup = user.getUserGroup();
-        if (!userGroup.getShortName().equals(userToken.getGroup())) {
-            throw new AccessViolationException();
-        }
-        if (userGroup.hasLogo()) {
-            return Base64.encodeBytes(userGroup.getLogo());
-        } else {
-            throw new DefaultException("Unexpected programatic exception (user has no logo)");
-        }
+  private UserSession getUserSession() {
+    return userSessionProvider.get();
+  }
+
+  @Override
+  @Authenticated(mandatory = true)
+  public WaveClientParams getWaveClientParameters(final String userHash) {
+    final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
+    final JSONObject sessionJson = waveClientServlet.getSessionJson(sessionFromToken);
+    final JSONObject clientFlags = new JSONObject(); // waveClientServlet.getClientFlags();
+    return new WaveClientParams(sessionJson.toString(), clientFlags.toString(), useSocketIO);
+  }
+
+  private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
+    final UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
+    return mapper.map(userInfo, UserInfoDTO.class);
+  }
+
+  @Override
+  @Transactional
+  public UserInfoDTO login(final String nickOrEmail, final String passwd, final String waveToken)
+      throws DefaultException {
+    // final SessionService sessionService = sessionServiceProvider.get();
+    // sessionService.getNewSession();
+    final User user = userManager.login(nickOrEmail, passwd);
+    return loginUser(user, waveToken);
+  }
+
+  private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
+    if (user != null) {
+      // Maybe use terracotta.org for http session clustering
+      getUserSession().login(user, waveToken);
+      return loadUserInfo(user);
+    } else {
+      throw new UserAuthException();
     }
+  };
 
-    private UserSession getUserSession() {
-        return userSessionProvider.get();
+  @Override
+  @Authenticated
+  @Transactional
+  public void logout(final String userHash) throws DefaultException {
+    getUserSession().logout();
+    // FIXME final SessionService sessionService =
+    // sessionServiceProvider.get();
+    // FIXME sessionService.getNewSession();
+  }
+
+  @Override
+  @Authenticated(mandatory = false)
+  @Transactional
+  public void onlyCheckSession(final String userHash) throws DefaultException {
+    // Do nothing @Authenticated checks user session
+  }
+
+  @Override
+  @Authenticated
+  @Transactional
+  public UserInfoDTO reloadUserInfo(final String userHash) throws DefaultException {
+    final UserSession userSession = getUserSession();
+    final User user = userSession.getUser();
+    return loadUserInfo(user);
+  }
+
+  @Override
+  @Authenticated(mandatory = true)
+  @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+  @Transactional
+  public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
+      final UserSNetVisibility visibility) {
+    final UserSession userSession = getUserSession();
+    final User user = userSession.getUser();
+    if (!groupToken.getGroup().equals(user.getShortName())) {
+      throw new AccessViolationException();
     }
-
-    @Override
-    @Authenticated(mandatory = true)
-    public WaveClientParams getWaveClientParameters(final String userHash) {
-        final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
-        final JSONObject sessionJson = waveClientServlet.getSessionJson(sessionFromToken);
-        final JSONObject clientFlags = new JSONObject(); // waveClientServlet.getClientFlags();
-        return new WaveClientParams(sessionJson.toString(), clientFlags.toString(), useSocketIO);
-    }
-
-    private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
-        final UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
-        return mapper.map(userInfo, UserInfoDTO.class);
-    }
-
-    @Override
-    @Transactional
-    public UserInfoDTO login(final String nickOrEmail, final String passwd, final String waveToken)
-            throws DefaultException {
-        // final SessionService sessionService = sessionServiceProvider.get();
-        // sessionService.getNewSession();
-        final User user = userManager.login(nickOrEmail, passwd);
-        return loginUser(user, waveToken);
-    }
-
-    private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
-        if (user != null) {
-            // Maybe use terracotta.org for http session clustering
-            getUserSession().login(user, waveToken);
-            return loadUserInfo(user);
-        } else {
-            throw new UserAuthException();
-        }
-    };
-
-    @Override
-    @Authenticated
-    @Transactional
-    public void logout(final String userHash) throws DefaultException {
-        getUserSession().logout();
-        // FIXME final SessionService sessionService =
-        // sessionServiceProvider.get();
-        // FIXME sessionService.getNewSession();
-    }
-
-    @Override
-    @Authenticated(mandatory = false)
-    @Transactional
-    public void onlyCheckSession(final String userHash) throws DefaultException {
-        // Do nothing @Authenticated checks user session
-    }
-
-    @Override
-    @Authenticated
-    @Transactional
-    public UserInfoDTO reloadUserInfo(final String userHash) throws DefaultException {
-        final UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        return loadUserInfo(user);
-    }
-
-    @Override
-    @Authenticated(mandatory = true)
-    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-    @Transactional
-    public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
-            final UserSNetVisibility visibility) {
-        final UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        if (!groupToken.getGroup().equals(user.getShortName())) {
-            throw new AccessViolationException();
-        }
-        user.setSNetVisibility(visibility);
-    }
+    user.setSNetVisibility(visibility);
+  }
 }

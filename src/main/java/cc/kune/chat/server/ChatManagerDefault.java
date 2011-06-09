@@ -37,8 +37,10 @@ public class ChatManagerDefault implements ChatManager {
     final String groupShortName = parentToken.getGroup();
     final String userShortName = user.getShortName();
     final ChatConnection connection = xmppManager.login(userShortName, user.getPassword(), userHash);
-    xmppManager.createRoom(connection, roomName, userShortName + userHash, subject);
-    xmppManager.disconnect(connection);
+    if (!xmppManager.existRoom(connection, roomName)) {
+      xmppManager.createRoom(connection, roomName, userShortName + userHash, subject);
+      xmppManager.disconnect(connection);
+    }
     try {
       return creationService.createFolder(groupManager.findByShortName(groupShortName),
           ContentUtils.parseId(parentToken.getFolder()), roomName, user.getLanguage(),

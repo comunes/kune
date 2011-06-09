@@ -143,6 +143,7 @@ public class Content implements HasStateToken {
     translations = new ArrayList<ContentTranslation>();
     authors = new ArrayList<User>();
     createdOn = System.currentTimeMillis();
+    modifiedOn = System.currentTimeMillis();
     lastRevision = new Revision(this);
     accessLists = null;
     status = ContentStatus.editingInProgress;

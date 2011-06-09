@@ -114,7 +114,8 @@ public class StateServiceDefault implements StateService {
         // Well we "cache" the last modified time of waves in db (w'll find
         // another way to do it better in the future with db persitence of
         // waves)
-        contentManager.setModifiedOn(content, wavelet.getLastModifiedTime());
+        // FIXME, how to do this
+        // contentManager.setModifiedOn(content, wavelet.getLastModifiedTime());
         // contentManager.save(userLogged, content, currentContent);
         state.setTitle(wavelet.getTitle());
         state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveManager.isParticipant(wavelet,

@@ -68,7 +68,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
   Content renameContent(User user, Long contentId, String newName) throws DefaultException;
 
-  Content save(User user, Content content);
+  Content save(Content content);
 
   Content save(User editor, Content content, String body);
 

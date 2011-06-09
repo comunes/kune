@@ -31,6 +31,8 @@ public interface XmppManager {
 
   void disconnect(ChatConnection connection);
 
+  boolean existRoom(ChatConnection conn, String roomName);
+
   Collection<RosterEntry> getRoster(ChatConnection connection);
 
   Room joinRoom(ChatConnection connection, String roomName, String alias);

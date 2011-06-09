@@ -99,6 +99,7 @@ public class XmppManagerDefault implements XmppManager {
     final XmppConnection xConn = (XmppConnection) conn;
     final MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
     try {
+
       muc.destroy("Room removed by kune server", "");
     } catch (final XMPPException e) {
       throw new ChatException(e);
@@ -110,6 +111,14 @@ public class XmppManagerDefault implements XmppManager {
     final XmppConnection xConn = (XmppConnection) connection;
     xConn.getConn().disconnect();
 
+  }
+
+  @Override
+  public boolean existRoom(final ChatConnection conn, final String roomName) {
+    final XmppConnection xConn = (XmppConnection) conn;
+    final MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+    final Iterator<String> occupants = muc.getOccupants();
+    return occupants != null;
   }
 
   private String getRoomName(final String room) {

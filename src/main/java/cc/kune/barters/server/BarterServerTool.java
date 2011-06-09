@@ -143,7 +143,7 @@ public class BarterServerTool implements ServerWaveTool {
     content.setLanguage(user.getLanguage());
     content.setTypeId(TYPE_BARTER);
     content.setStatus(ContentStatus.publishedOnline);
-    contentManager.save(user, content);
+    contentManager.save(content);
     return group;
   }
 

@@ -139,7 +139,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
     revision.setBody(body);
     newContent.addRevision(revision);
-    return persist(newContent);
+    return save(newContent);
   }
 
   private MultiFieldQueryParser createMultiFieldParser() {
@@ -233,16 +233,19 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
       final String author = content.getAuthors().get(0).getShortName();
       kuneWaveManager.setTitle(getWaveRef(content), newTitle, author);
     }
+    setModifiedTime(content);
     return content;
   }
 
   @Override
-  public Content save(final User editor, final Content content) {
+  public Content save(final Content content) {
+    setModifiedTime(content);
     return persist(content);
   }
 
   @Override
   public Content save(final User editor, final Content content, final String body) {
+    setModifiedTime(content);
     final Revision revision = new Revision(content);
     revision.setEditor(editor);
     revision.setTitle(content.getTitle());
@@ -304,7 +307,10 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   @Override
   public void setModifiedOn(final Content content, final long lastModifiedTime) {
     content.setModifiedOn(lastModifiedTime);
-    // persist(content);//
+  }
+
+  private void setModifiedTime(final Content content) {
+    setModifiedOn(content, System.currentTimeMillis());
   }
 
   @Override

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.server.managers;
+package cc.kune.core.server.xmpp;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,11 +29,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import cc.kune.core.server.integration.IntegrationTestHelper;
-import cc.kune.core.server.xmpp.ChatConnection;
-import cc.kune.core.server.xmpp.ChatException;
-import cc.kune.core.server.xmpp.Room;
-import cc.kune.core.server.xmpp.RoomListener;
-import cc.kune.core.server.xmpp.XmppManager;
 
 import com.google.inject.Inject;
 
@@ -99,6 +94,14 @@ public class XmppManagerDefaultTest {
   public void testConnection() {
     final ChatConnection handler1 = manager.login("admin", "easyeasy", "test");
     assertNotNull(handler1);
+  }
+
+  @Test
+  public void testCreateRoom() {
+    final ChatConnection handler1 = manager.login("admin", "easyeasy", "test");
+    if (!manager.existRoom(handler1, "test-room")) {
+      manager.createRoom(handler1, "test-room", "alias", "Always the same room");
+    }
   }
 
   @Test

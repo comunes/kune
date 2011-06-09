@@ -132,7 +132,7 @@ public class MeetingServerTool implements ServerWaveTool {
     content.setLanguage(user.getLanguage());
     content.setTypeId(TYPE_MEETING);
     content.setStatus(ContentStatus.publishedOnline);
-    contentManager.save(user, content);
+    contentManager.save(content);
     return group;
   }
 
