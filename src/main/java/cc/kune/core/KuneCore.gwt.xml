@@ -10,6 +10,7 @@
   <public path="public" />
   <!-- Dependencies ============================================= -->
   <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.gwt.xml.XML" />
   <inherits name="cc.kune.gspace.GSpace" />
   <inherits name="cc.kune.msgs.KuneMsgs" />
   <inherits name="cc.kune.common.KuneCommon" />

@@ -1,3 +1,6 @@
+<?xml version="1.0" ?>
+
+<kuneWaveExtensions>
 
 <!-- List of Wave extensions to use in Kune ===================== -->
 
@@ -63,3 +66,5 @@
   </guiActionDescriptor>
 
 </guiActionDescriptors>
+
+</kuneWaveExtensions>

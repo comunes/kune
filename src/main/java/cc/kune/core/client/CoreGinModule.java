@@ -30,6 +30,7 @@ import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.actions.ActionRegistryByType;
+import cc.kune.core.client.actions.XMLActionsParser;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.core.client.auth.RegisterPresenter;
@@ -115,101 +116,103 @@ import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
 public class CoreGinModule extends ExtendedGinModule {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.google.gwt.inject.client.AbstractGinModule#configure()
-     */
-    @Override
-    protected void configure() {
-        bind(EventBus.class).to(EventBusWithLogging.class).in(Singleton.class);
-        bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
-        bind(RootPresenter.class).asEagerSingleton();
-        bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
-        s(I18nUITranslationService.class);
-        bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
-        bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
+  @Override
+  protected void configure() {
+    bind(EventBus.class).to(EventBusWithLogging.class).in(Singleton.class);
+    bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
+    bind(RootPresenter.class).asEagerSingleton();
+    bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
+    s(I18nUITranslationService.class);
+    bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
+    bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
 
-        // Presenters
-        bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
-                CorePresenter.CoreProxy.class);
-        bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerViewImpl.class,
-                SpinerPresenter.SpinerProxy.class);
-        bindPresenter(UserNotifierPresenter.class, UserNotifierPresenter.UserNotifierView.class,
-                UserNotifierViewImpl.class, UserNotifierProxy.class);
-        bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
-                SpaceSelectorViewImpl.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
-        bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
-                SiteLogoPresenter.SiteLogoProxy.class);
-        bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,
-                SitebarActionsPanel.class, SitebarActionsPresenter.SitebarActionsProxy.class);
-        bind(SitebarActions.class).to(SitebarActionsPresenter.class).in(Singleton.class);
-        bindPresenter(NewGroupPresenter.class, NewGroupView.class, NewGroupPanel.class,
-                NewGroupPresenter.NewGroupProxy.class);
-        bindPresenter(GroupSNPresenter.class, GroupSNPresenter.GroupSNView.class, GroupSNPanel.class,
-                GroupSNPresenter.GroupSNProxy.class);
-        bindPresenter(UserSNPresenter.class, UserSNPresenter.UserSNView.class, UserSNPanel.class,
-                UserSNPresenter.UserSNProxy.class);
-        bindPresenter(EntityHeaderPresenter.class, EntityHeaderPresenter.EntityHeaderView.class,
-                EntityHeaderPanel.class, EntityHeaderPresenter.EntityHeaderProxy.class);
-        bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class, SignInPresenter.SignInProxy.class);
-        bindPresenter(RegisterPresenter.class, RegisterView.class, RegisterPanel.class,
-                RegisterPresenter.RegisterProxy.class);
-        bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class, UserConfirmPanel.class,
-                UserConfirmPresenter.UserConfirmProxy.class);
+    // Presenters
+    bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
+        CorePresenter.CoreProxy.class);
+    bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerViewImpl.class,
+        SpinerPresenter.SpinerProxy.class);
+    bindPresenter(UserNotifierPresenter.class, UserNotifierPresenter.UserNotifierView.class,
+        UserNotifierViewImpl.class, UserNotifierProxy.class);
+    bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
+        SpaceSelectorViewImpl.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
+    bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
+        SiteLogoPresenter.SiteLogoProxy.class);
+    bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,
+        SitebarActionsPanel.class, SitebarActionsPresenter.SitebarActionsProxy.class);
+    bind(SitebarActions.class).to(SitebarActionsPresenter.class).in(Singleton.class);
+    bindPresenter(NewGroupPresenter.class, NewGroupView.class, NewGroupPanel.class,
+        NewGroupPresenter.NewGroupProxy.class);
+    bindPresenter(GroupSNPresenter.class, GroupSNPresenter.GroupSNView.class, GroupSNPanel.class,
+        GroupSNPresenter.GroupSNProxy.class);
+    bindPresenter(UserSNPresenter.class, UserSNPresenter.UserSNView.class, UserSNPanel.class,
+        UserSNPresenter.UserSNProxy.class);
+    bindPresenter(EntityHeaderPresenter.class, EntityHeaderPresenter.EntityHeaderView.class,
+        EntityHeaderPanel.class, EntityHeaderPresenter.EntityHeaderProxy.class);
+    bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class,
+        SignInPresenter.SignInProxy.class);
+    bindPresenter(RegisterPresenter.class, RegisterView.class, RegisterPanel.class,
+        RegisterPresenter.RegisterProxy.class);
+    bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class,
+        UserConfirmPanel.class, UserConfirmPresenter.UserConfirmProxy.class);
 
-        bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
-        bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
-        bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
-        bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
-        bind(EntityHeader.class).to(EntityHeaderPresenter.class).in(Singleton.class);
+    bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
+    bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
+    bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
+    bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
+    bind(EntityHeader.class).to(EntityHeaderPresenter.class).in(Singleton.class);
 
-        s(UserMessagesPresenter.class);
-        s(UserMessagesPanel.class);
-        // bind(MessagePanelView.class).to(MessagePanel.class);
+    s(UserMessagesPresenter.class);
+    s(UserMessagesPanel.class);
+    // bind(MessagePanelView.class).to(MessagePanel.class);
 
-        // UI
-        bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
-        s(GxtGuiProvider.class);
-        s(GwtGuiProvider.class);
+    // UI
+    bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
+    s(GxtGuiProvider.class);
+    s(GwtGuiProvider.class);
 
-        bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
+    bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
 
-        // Core App
-        bind(Session.class).to(SessionDefault.class).in(Singleton.class);
-        s(ErrorHandler.class);
-        s(StateManagerDefault.class);
-        bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
-        s(AccessRightsClientManager.class);
-        bind(ContentCache.class).to(ContentCacheDefault.class).in(Singleton.class);
-        bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
-        s(PrefetchUtilities.class);
-        bind(AppStarter.class).to(AppStarterDefault.class).in(Singleton.class);
-        bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
-        s(BeforeSignOut.class);
-        eagle(SiteTokenListeners.class);
-        s(SiteTokens.class);
-        s(ReservedWordsRegistry.class);
-        eagle(TokenMatcher.class);
-        s(ActionRegistryByType.class);
-        s(ContentCapabilitiesRegistry.class);
-        eagle(CoreParts.class);
+    // Core App
+    bind(Session.class).to(SessionDefault.class).in(Singleton.class);
+    s(ErrorHandler.class);
+    s(StateManagerDefault.class);
+    bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
+    s(AccessRightsClientManager.class);
+    bind(ContentCache.class).to(ContentCacheDefault.class).in(Singleton.class);
+    bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
+    s(PrefetchUtilities.class);
+    bind(AppStarter.class).to(AppStarterDefault.class).in(Singleton.class);
+    bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
+    s(BeforeSignOut.class);
+    eagle(SiteTokenListeners.class);
+    s(SiteTokens.class);
+    s(ReservedWordsRegistry.class);
+    eagle(TokenMatcher.class);
+    s(ActionRegistryByType.class);
+    s(ContentCapabilitiesRegistry.class);
+    eagle(CoreParts.class);
 
-        // SN
-        s(GroupSNAdminsMenuItemsRegistry.class);
-        s(GroupSNCollabsMenuItemsRegistry.class);
-        s(GroupSNPendingsMenuItemsRegistry.class);
-        s(UserSNMenuItemsRegistry.class);
-        s(GroupSNConfActions.class);
-        s(UserSNConfActions.class);
+    // SN
+    s(GroupSNAdminsMenuItemsRegistry.class);
+    s(GroupSNCollabsMenuItemsRegistry.class);
+    s(GroupSNPendingsMenuItemsRegistry.class);
+    s(UserSNMenuItemsRegistry.class);
+    s(GroupSNConfActions.class);
+    s(UserSNConfActions.class);
 
-        s(SiteUserOptionsPresenter.class);
-        s(SiteUserOptions.class, SiteUserOptionsPresenter.class);
-        s(SitebarNewGroupLink.class);
-        s(SitebarSignInLink.class);
-        s(SitebarSignOutLink.class);
+    s(SiteUserOptionsPresenter.class);
+    s(SiteUserOptions.class, SiteUserOptionsPresenter.class);
+    s(SitebarNewGroupLink.class);
+    s(SitebarSignInLink.class);
+    s(SitebarSignOutLink.class);
 
-        s(ErrorsDialog.class);
-    }
+    s(ErrorsDialog.class);
+    eagle(XMLActionsParser.class);
+  }
 
 }

@@ -371,6 +371,8 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
    
 * MID-TERM
+** Archive of xmpp conversations
+*** http://community.igniterealtime.org/docs/DOC-1094 (for openfire)
 ** Enable two Waves per doc: 1 for the doc (no comments enabled), other for comments. Similar to docs.google.com comments approach.
 ** TODO start/stop init scripts
 https://groups.google.com/group/wave-protocol/browse_thread/thread/d9cdcea0d5393eda
