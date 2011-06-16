@@ -32,7 +32,6 @@ import cc.kune.core.server.UserSession;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.persist.UnitOfWork;
 
 public class AuthenticatedMethodInterceptor implements MethodInterceptor {
 
@@ -45,15 +44,10 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
   Provider<SessionService> sessionServiceProvider;
 
   @Inject
-  private UnitOfWork unitOfWork;
-
-  @Inject
   Provider<UserSession> userSessionProvider;
 
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
-    unitOfWork.begin();
-
     final Object[] arguments = invocation.getArguments();
     // Some browsers getCookie returns "null" as String instead of null
     final String userHash = arguments[0] == null || arguments[0].equals("null") ? null
@@ -70,19 +64,16 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
 
     if (userHash == null && mandatory) {
       // sessionService.getNewSession();
-      unitOfWork.end();
       throw new UserMustBeLoggedException();
     } else if (userSession.isUserNotLoggedIn() && mandatory) {
       // sessionService.getNewSession();
       LOG.info("Session expired (not logged in server and mandatory)");
-      unitOfWork.end();
       throw new SessionExpiredException();
     } else if (userSession.isUserNotLoggedIn() && userHash == null) {
       // Ok, do nothing
     } else if (userSession.isUserNotLoggedIn() && userHash != null) {
       // sessionService.getNewSession();
       LOG.info("Session expired (not logged in server)");
-      unitOfWork.end();
       throw new SessionExpiredException();
     } else if (!userSession.getHash().equals(userHash)) {
       final String serverHash = userSession.getHash();
@@ -90,11 +81,9 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
       // sessionService.getNewSession();
       LOG.info("Session expired (userHash: " + userHash + " different from server hash: " + serverHash
           + ")");
-      unitOfWork.end();
       throw new SessionExpiredException();
     }
     final Object result = invocation.proceed();
-    unitOfWork.end();
     return result;
   }
 
