@@ -30,14 +30,7 @@ import com.google.inject.Provider;
 public class OnAppStartFactory {
 
   @Inject
-  public OnAppStartFactory(final Session session,
-  // final Provider<DocsClientTool> docsClientTool,
-  // final Provider<BlogsClientTool> blogsClientTool,
-  // final Provider<BartersClientTool> bartersClientTool,
-  // final Provider<MeetingsClientTool> meetsClientTool,
-  // final Provider<ChatClientTool> chatsClientTool, final
-  // Provider<WikiClientTool> wikiClientTool,
-      final Provider<XMLActionsParser> actionsParser) {
+  public OnAppStartFactory(final Session session, final Provider<XMLActionsParser> actionsParser) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {

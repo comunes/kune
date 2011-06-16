@@ -20,11 +20,11 @@
 package org.ourproject.kune.wiki.client;
 
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.gspace.client.themes.GSpaceThemeManager;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 public class WikiClientTool extends OldFoldableAbstractClientTool {
@@ -36,7 +36,7 @@ public class WikiClientTool extends OldFoldableAbstractClientTool {
   public static final String TYPE_WIKIPAGE = NAME + "." + "wikipage";
 
   public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-      final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
+      final GSpaceThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
       final ContentCapabilitiesRegistry cntCapabReg) {
     super(NAME, i18n.t("wiki"), toolSelector, wsThemePresenter, ws, cntCapabReg);
 

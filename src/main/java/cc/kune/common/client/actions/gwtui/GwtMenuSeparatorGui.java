@@ -43,6 +43,10 @@ public class GwtMenuSeparatorGui extends AbstractGuiItem {
   }
 
   @Override
+  protected void setIconBackground(final String backgroundColor) {
+  }
+
+  @Override
   protected void setIconStyle(final String style) {
   }
 

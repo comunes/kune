@@ -22,7 +22,8 @@ package org.ourproject.kune.workspace.client.skel;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.RoundedPanel;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
+
+import cc.kune.core.shared.dto.GSpaceTheme;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.RegionPosition;
@@ -230,7 +231,7 @@ public class EntityWorkspace {
         }
     }
 
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+    public void setTheme(final GSpaceTheme oldTheme, final GSpaceTheme newTheme) {
         final String themeS = newTheme.toString();
         if (oldTheme != null) {
             final String previousThemeS = oldTheme.toString();

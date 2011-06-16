@@ -180,6 +180,12 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
   }
 
   @Override
+  public void setIconBackground(final String backgroundColor) {
+    iconLabel.setLeftIconBackground(backgroundColor);
+    layout();
+  }
+
+  @Override
   public void setIconResource(final ImageResource icon) {
     iconLabel.setRightIconResource(icon);
     iconLabel.addRightIconStyle("k-fl");

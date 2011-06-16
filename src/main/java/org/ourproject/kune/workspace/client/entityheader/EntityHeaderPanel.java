@@ -27,11 +27,11 @@ import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.GroupDTO;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -119,7 +119,7 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
         entityTextLogo.setSmallFont();
     }
 
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+    public void setTheme(final GSpaceTheme oldTheme, final GSpaceTheme newTheme) {
         if (oldTheme != null) {
             entityTextLogo.removeStyleDependentName(oldTheme.toString());
         }

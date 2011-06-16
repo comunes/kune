@@ -19,8 +19,8 @@
  */
 package cc.kune.core.server.rpc;
 
+import java.util.HashMap;
 import java.util.TimeZone;
-
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.SiteService;
@@ -36,6 +36,7 @@ import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.users.UserInfoService;
+import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.InitDataDTO;
 
 import com.google.inject.Inject;
@@ -45,76 +46,96 @@ import com.google.inject.persist.Transactional;
 
 @Singleton
 public class SiteRPC implements RPC, SiteService {
-    private final ChatProperties chatProperties;
-    private final I18nCountryManager countryManager;
-    private final ExtMediaDescripManager extMediaDescManager;
-    private final KuneProperties kuneProperties;
-    private final I18nLanguageManager languageManager;
-    private final LicenseManager licenseManager;
-    private final Mapper mapper;
-    private final ServerToolRegistry serverToolRegistry;
-    private final UserInfoService userInfoService;
-    private final UserManager userManager;
-    private final Provider<UserSession> userSessionProvider;
+  private final ChatProperties chatProperties;
+  private final I18nCountryManager countryManager;
+  private final ExtMediaDescripManager extMediaDescManager;
+  private final KuneProperties kuneProperties;
+  private final I18nLanguageManager languageManager;
+  private final LicenseManager licenseManager;
+  private final Mapper mapper;
+  private final ServerToolRegistry serverToolRegistry;
+  private final UserInfoService userInfoService;
+  private final UserManager userManager;
+  private final Provider<UserSession> userSessionProvider;
 
-    // TODO: refactor: too many parameters! refactor to Facade Pattern
-    @Inject
-    public SiteRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
-            final UserInfoService userInfoService, final LicenseManager licenseManager, final Mapper mapper,
-            final KuneProperties kuneProperties, final ChatProperties chatProperties,
-            final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescManager) {
-        this.userSessionProvider = userSessionProvider;
-        this.userManager = userManager;
-        this.userInfoService = userInfoService;
-        this.licenseManager = licenseManager;
-        this.mapper = mapper;
-        this.kuneProperties = kuneProperties;
-        this.chatProperties = chatProperties;
-        this.languageManager = languageManager;
-        this.countryManager = countryManager;
-        this.serverToolRegistry = serverToolRegistry;
-        this.extMediaDescManager = extMediaDescManager;
+  // TODO: refactor: too many parameters! refactor to Facade Pattern
+  @Inject
+  public SiteRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
+      final UserInfoService userInfoService, final LicenseManager licenseManager, final Mapper mapper,
+      final KuneProperties kuneProperties, final ChatProperties chatProperties,
+      final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
+      final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescManager) {
+    this.userSessionProvider = userSessionProvider;
+    this.userManager = userManager;
+    this.userInfoService = userInfoService;
+    this.licenseManager = licenseManager;
+    this.mapper = mapper;
+    this.kuneProperties = kuneProperties;
+    this.chatProperties = chatProperties;
+    this.languageManager = languageManager;
+    this.countryManager = countryManager;
+    this.serverToolRegistry = serverToolRegistry;
+    this.extMediaDescManager = extMediaDescManager;
+  }
+
+  private String[] getColors(final String key) {
+    return this.kuneProperties.get(key).split(",");
+  }
+
+  @Override
+  @Transactional
+  public InitDataDTO getInitData(final String userHash) throws DefaultException {
+    final InitData data = new InitData();
+    final UserSession userSession = getUserSession();
+
+    data.setSiteUrl(kuneProperties.get(KuneProperties.SITE_URL));
+    data.setLicenses(licenseManager.getAll());
+    data.setLanguages(languageManager.getAll());
+    data.setCountries(countryManager.getAll());
+    data.setTimezones(TimeZone.getAvailableIDs());
+    data.setUserInfo(userInfoService.buildInfo(userSession.getUser(), userSession.getHash()));
+    data.setChatHttpBase(chatProperties.getHttpBase());
+    data.setChatDomain(chatProperties.getDomain());
+    data.setSiteDomain(kuneProperties.get(KuneProperties.SITE_DOMAIN));
+    data.setChatRoomHost(chatProperties.getRoomHost());
+    data.setDefaultLicense(licenseManager.getDefLicense());
+    data.setCurrentCCversion(this.kuneProperties.get(KuneProperties.CURRENT_CC_VERSION));
+    data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
+    data.setSiteLogoUrl(kuneProperties.get(KuneProperties.SITE_LOGO_URL));
+    data.setGalleryPermittedExtensions(kuneProperties.get(KuneProperties.UPLOAD_GALLERY_PERMITTED_EXTS));
+    data.setMaxFileSizeInMb(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE));
+    data.setUserTools(serverToolRegistry.getToolsForUsers());
+    data.setGroupTools(serverToolRegistry.getToolsForGroups());
+    data.setImgResizewidth(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH)));
+    data.setImgThumbsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE)));
+    data.setImgCropsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE)));
+    data.setImgIconsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE)));
+    data.setFlvEmbedObject(kuneProperties.get(KuneProperties.FLV_EMBEDED_OBJECT));
+    data.setMp3EmbedObject(kuneProperties.get(KuneProperties.MP3_EMBEDED_OBJECT));
+    data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));
+    data.setAviEmbedObject(kuneProperties.get(KuneProperties.AVI_EMBEDED_OBJECT));
+    data.setExtMediaDescrips(extMediaDescManager.getAll());
+    final InitDataDTO map = mapper.map(data, InitDataDTO.class);
+    map.setgSpaceThemes(getSiteThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(",")));
+    return map;
+  }
+
+  private HashMap<String, GSpaceTheme> getSiteThemes(final String[] themes) {
+    final HashMap<String, GSpaceTheme> map = new HashMap<String, GSpaceTheme>();
+    for (final String theme : themes) {
+      map.put(theme, getThemeFromProperties(theme));
     }
+    return map;
+  }
 
-    @Override
-    @Transactional
-    public InitDataDTO getInitData(final String userHash) throws DefaultException {
-        final InitData data = new InitData();
-        final UserSession userSession = getUserSession();
+  private GSpaceTheme getThemeFromProperties(final String themeName) {
+    final GSpaceTheme theme = new GSpaceTheme(themeName);
+    theme.setBackColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".backgrounds"));
+    theme.setColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".colors"));
+    return theme;
+  }
 
-        data.setSiteUrl(kuneProperties.get(KuneProperties.SITE_URL));
-        data.setLicenses(licenseManager.getAll());
-        data.setLanguages(languageManager.getAll());
-        data.setCountries(countryManager.getAll());
-        data.setTimezones(TimeZone.getAvailableIDs());
-        data.setUserInfo(userInfoService.buildInfo(userSession.getUser(), userSession.getHash()));
-        data.setChatHttpBase(chatProperties.getHttpBase());
-        data.setChatDomain(chatProperties.getDomain());
-        data.setSiteDomain(kuneProperties.get(KuneProperties.SITE_DOMAIN));
-        data.setChatRoomHost(chatProperties.getRoomHost());
-        data.setWsThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
-        data.setDefaultLicense(licenseManager.getDefLicense());
-        data.setCurrentCCversion(this.kuneProperties.get(KuneProperties.CURRENT_CC_VERSION));
-        data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
-        data.setSiteLogoUrl(kuneProperties.get(KuneProperties.SITE_LOGO_URL));
-        data.setGalleryPermittedExtensions(kuneProperties.get(KuneProperties.UPLOAD_GALLERY_PERMITTED_EXTS));
-        data.setMaxFileSizeInMb(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE));
-        data.setUserTools(serverToolRegistry.getToolsForUsers());
-        data.setGroupTools(serverToolRegistry.getToolsForGroups());
-        data.setImgResizewidth(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH)));
-        data.setImgThumbsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE)));
-        data.setImgCropsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE)));
-        data.setImgIconsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE)));
-        data.setFlvEmbedObject(kuneProperties.get(KuneProperties.FLV_EMBEDED_OBJECT));
-        data.setMp3EmbedObject(kuneProperties.get(KuneProperties.MP3_EMBEDED_OBJECT));
-        data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));
-        data.setAviEmbedObject(kuneProperties.get(KuneProperties.AVI_EMBEDED_OBJECT));
-        data.setExtMediaDescrips(extMediaDescManager.getAll());
-        return mapper.map(data, InitDataDTO.class);
-    }
-
-    private UserSession getUserSession() {
-        return userSessionProvider.get();
-    }
+  private UserSession getUserSession() {
+    return userSessionProvider.get();
+  }
 }

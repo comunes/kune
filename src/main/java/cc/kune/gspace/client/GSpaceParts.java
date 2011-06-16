@@ -31,11 +31,12 @@ import cc.kune.gspace.client.options.license.GroupOptionsDefLicense;
 import cc.kune.gspace.client.options.license.UserOptionsDefLicense;
 import cc.kune.gspace.client.options.logo.GroupOptionsLogo;
 import cc.kune.gspace.client.options.logo.UserOptionsLogo;
-import cc.kune.gspace.client.options.pscape.GroupOptionsPublicSpaceConf;
-import cc.kune.gspace.client.options.pscape.UserOptionsPublicSpaceConf;
+import cc.kune.gspace.client.options.style.GroupOptionsStyleConf;
+import cc.kune.gspace.client.options.style.UserOptionsStyleConf;
 import cc.kune.gspace.client.options.tools.GroupOptionsToolsConf;
 import cc.kune.gspace.client.options.tools.UserOptionsToolsConf;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
+import cc.kune.gspace.client.themes.GSpaceThemeManager;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
@@ -48,15 +49,16 @@ import com.google.inject.Provider;
 public class GSpaceParts {
 
   @Inject
-  public GSpaceParts(final Session session, final Provider<EntityLicensePresenter> licenseFooter,
+  public GSpaceParts(final Session session, final GSpaceThemeManager themeManager,
+      final Provider<EntityLicensePresenter> licenseFooter,
       final Provider<TagsSummaryPresenter> tagsPresenter, final Provider<ToolSelector> toolSelector,
       final Provider<NoHomePageViewer> noHome, final Provider<ContentViewerPresenter> docsViewer,
       final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,
       final Provider<UserOptions> uo, final Provider<GroupOptionsCollection> goc,
       final Provider<UserOptionsCollection> uoc, final Provider<GroupOptionsDefLicense> gdl,
-      final Provider<GroupOptionsPublicSpaceConf> gps, final Provider<GroupOptionsLogo> gl,
+      final Provider<GroupOptionsStyleConf> gps, final Provider<GroupOptionsLogo> gl,
       final Provider<GroupOptionsToolsConf> gtc, final Provider<UserOptionsDefLicense> udl,
-      final Provider<UserOptionsPublicSpaceConf> ups, final Provider<UserOptionsLogo> ul,
+      final Provider<UserOptionsStyleConf> ups, final Provider<UserOptionsLogo> ul,
       final Provider<UserOptionsToolsConf> utc, final Provider<SitebarSearchPresenter> siteSearch) {
 
     session.onAppStart(true, new AppStartHandler() {

@@ -3,7 +3,7 @@
   xmlns:co="urn:import:cc.kune.core.client" xmlns:kp="urn:import:cc.kune.pspace.client"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:with field='res'
-    type='cc.kune.gspace.client.resources.WsArmorResources' />
+    type='cc.kune.gspace.client.resources.GSpaceArmorResources' />
   <ui:style>
     .frame {
       border: 0px;

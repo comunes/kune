@@ -30,6 +30,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -42,6 +43,8 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   private static ToolSelectorItemPanelUiBinder uiBinder = GWT.create(ToolSelectorItemPanelUiBinder.class);
 
+  @UiField
+  HTMLPanel arrow;
   @UiField
   Image iconLeft;
   @UiField
@@ -102,11 +105,13 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     if (selected) {
       self.addStyleDependentName("selected");
       self.removeStyleDependentName("notselected");
-      iconRight.setVisible(true);
+      arrow.setVisible(true);
+      // iconRight.setVisible(true);
     } else {
       self.addStyleDependentName("notselected");
       self.removeStyleDependentName("selected");
       iconRight.setVisible(false);
+      arrow.setVisible(false);
     }
   }
 

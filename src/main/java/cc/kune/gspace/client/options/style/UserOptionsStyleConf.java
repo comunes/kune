@@ -17,18 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.themes;
+package cc.kune.gspace.client.options.style;
 
-import org.ourproject.kune.platf.client.View;
-
-import com.calclab.suco.client.events.Listener;
-
-public interface WsThemeSelector {
-
-    void addThemeSelected(Listener<WsTheme> listener);
-
-    View getView();
-
-    void select(String theme);
+public interface UserOptionsStyleConf extends EntityOptionsStyleConf {
 
 }

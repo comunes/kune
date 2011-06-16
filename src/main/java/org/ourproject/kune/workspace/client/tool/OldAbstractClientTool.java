@@ -20,8 +20,8 @@
 package org.ourproject.kune.workspace.client.tool;
 
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
+import cc.kune.gspace.client.themes.GSpaceThemeManager;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
@@ -29,7 +29,7 @@ import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
 public abstract class OldAbstractClientTool implements OldClientTool {
 
     public OldAbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector,
-            final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws) {
+            final GSpaceThemeManager wsThemePresenter, final WorkspaceSkeleton ws) {
         final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName, toolSelector);
         // wsThemePresenter);
         final ToolSelectorItemPanel panel = new ToolSelectorItemPanel();

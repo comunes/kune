@@ -76,6 +76,11 @@ public class GwtIconLabelGui extends AbstractGuiItem {
   }
 
   @Override
+  public void setIconBackground(final String color) {
+    iconLabel.setLeftIconBackground(color);
+  }
+
+  @Override
   protected void setIconStyle(final String style) {
     iconLabel.setRightIcon(style);
     iconLabel.addRightIconStyle("k-fl");

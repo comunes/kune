@@ -28,6 +28,12 @@
       <a-hint> cc.kune.core.shared.dto.I18nCountryDTO </a-hint>
       <b-hint> cc.kune.domain.I18nCountry </b-hint>
     </field>
+    <field>
+      <a>gSpaceThemes</a>
+      <b>gSpaceThemes</b>
+      <a-hint>java.util.HashMap</a-hint>
+      <b-hint>java.util.HashMap</b-hint>
+    </field>
   </mapping>
   <mapping>
     <class-a>cc.kune.domain.Group</class-a>
@@ -46,8 +52,7 @@
       <a-hint> cc.kune.core.shared.dto.GroupDTO </a-hint>
       <b-hint> cc.kune.domain.Group </b-hint>
     </field>
-    <field
-      custom-converter="cc.kune.core.server.mapper.GroupListModeConverter">
+    <field custom-converter="cc.kune.core.server.mapper.GroupListModeConverter">
       <a>mode</a>
       <b>mode</b>
     </field>
@@ -92,14 +97,14 @@
     <class-a>cc.kune.core.shared.dto.StateAbstractDTO</class-a>
     <class-b>cc.kune.core.server.state.StateAbstract</class-b>
   </mapping>
-<!--  <mapping>-->
-<!--    <class-a> cc.kune.core.shared.dto.StateToken </class-a>-->
-<!--    <class-b> cc.kune.core.shared.dto.StateToken </class-b>-->
-<!--    <field>-->
-<!--      <a>encoded</a>-->
-<!--      <b>encoded</b>-->
-<!--    </field>-->
-<!--  </mapping>-->
+  <!-- <mapping> -->
+  <!-- <class-a> cc.kune.core.shared.dto.StateToken </class-a> -->
+  <!-- <class-b> cc.kune.core.shared.dto.StateToken </class-b> -->
+  <!-- <field> -->
+  <!-- <a>encoded</a> -->
+  <!-- <b>encoded</b> -->
+  <!-- </field> -->
+  <!-- </mapping> -->
   <mapping>
     <class-a> cc.kune.core.shared.dto.BasicMimeTypeDTO </class-a>
     <class-b> cc.kune.domain.BasicMimeType </class-b>

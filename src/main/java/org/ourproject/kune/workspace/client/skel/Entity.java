@@ -19,7 +19,8 @@
  \*/
 package org.ourproject.kune.workspace.client.skel;
 
-import org.ourproject.kune.workspace.client.themes.WsTheme;
+
+import cc.kune.core.shared.dto.GSpaceTheme;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.RegionPosition;
@@ -116,7 +117,7 @@ public class Entity {
         entityWorkspace.setMaximized(maximized);
     }
 
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+    public void setTheme(final GSpaceTheme oldTheme, final GSpaceTheme newTheme) {
         if (oldTheme != null) {
             entityFitPanel.removeClass("k-entity-" + oldTheme);
         }

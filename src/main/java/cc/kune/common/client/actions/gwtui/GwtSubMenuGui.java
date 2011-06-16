@@ -60,6 +60,12 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
   }
 
   @Override
+  public void setIconBackground(final String backgroundColor) {
+    iconLabel.setLeftIconBackground(backgroundColor);
+    layout();
+  }
+
+  @Override
   public void setIconStyle(final String style) {
     iconLabel.setRightIcon(style);
     layout();

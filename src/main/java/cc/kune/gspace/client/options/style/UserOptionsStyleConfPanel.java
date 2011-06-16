@@ -17,18 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.themes;
+package cc.kune.gspace.client.options.style;
 
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
-import com.calclab.suco.client.events.Listener2;
+import com.google.inject.Inject;
 
-public class WsThemeManagerPanel {
-    public WsThemeManagerPanel(final WsThemeManager presenter, final WorkspaceSkeleton wskel) {
-        presenter.addOnThemeChanged(new Listener2<WsTheme, WsTheme>() {
-            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-                wskel.setTheme(oldTheme, newTheme);
-            }
-        });
-    }
+public class UserOptionsStyleConfPanel extends EntityOptionsStyleConfPanel implements
+    UserOptionsStyleConfView {
+
+  @Inject
+  public UserOptionsStyleConfPanel(final I18nTranslationService i18n, final FileDownloadUtils downUtils,
+      final CoreResources res, final GSpaceThemeSelectorPanel styleSelector) {
+    super(i18n, downUtils, res, styleSelector);
+  }
+
 }

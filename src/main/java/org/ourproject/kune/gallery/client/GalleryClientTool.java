@@ -20,11 +20,11 @@
 package org.ourproject.kune.gallery.client;
 
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.gspace.client.themes.GSpaceThemeManager;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 public class GalleryClientTool extends OldFoldableAbstractClientTool {
@@ -34,7 +34,7 @@ public class GalleryClientTool extends OldFoldableAbstractClientTool {
     public static final String TYPE_UPLOADEDFILE = NAME + "." + OldFoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
 
     public GalleryClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-            final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
+            final GSpaceThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
             final ContentCapabilitiesRegistry cntCapabReg) {
         super(NAME, i18n.t("gallery"), toolSelector, wsThemePresenter, ws, cntCapabReg);
 

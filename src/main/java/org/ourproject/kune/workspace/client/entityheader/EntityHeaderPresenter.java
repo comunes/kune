@@ -21,82 +21,88 @@ package org.ourproject.kune.workspace.client.entityheader;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.gspace.client.themes.GSpaceThemeManager;
 
 import com.calclab.suco.client.events.Listener2;
 
 public class EntityHeaderPresenter implements EntityHeader {
-    private static final int MEDIUM_NAME_LIMIT = 90;
-    private static final int LARGE_NAME_LIMIT = 20;
+  private static final int LARGE_NAME_LIMIT = 20;
+  private static final int MEDIUM_NAME_LIMIT = 90;
 
-    private EntityHeaderView view;
-    private final Session session;
+  private final Session session;
+  private EntityHeaderView view;
 
-    public EntityHeaderPresenter(final StateManager stateManager, final WsThemeManager theme, final Session session) {
-        this.session = session;
+  public EntityHeaderPresenter(final StateManager stateManager, final GSpaceThemeManager theme,
+      final Session session) {
+    this.session = session;
 
-        stateManager.onGroupChanged(new Listener2<String, String>() {
-            public void onEvent(final String oldGroup, final String newGroup) {
-                setGroupLogo(session.getCurrentState().getGroup());
-            }
-        });
-        theme.addOnThemeChanged(new Listener2<WsTheme, WsTheme>() {
-            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-                view.setTheme(oldTheme, newTheme);
-            }
-        });
-    }
-
-    public void addAction(final OldGuiActionDescrip descriptor) {
-        view.addAction(descriptor);
-    }
-
-    public void addWidget(final View widget) {
-        view.addWidget(widget);
-    }
-
-    public void init(final EntityHeaderView view) {
-        this.view = view;
-    }
-
-    public void refreshGroupLogo() {
+    stateManager.onGroupChanged(new Listener2<String, String>() {
+      @Override
+      public void onEvent(final String oldGroup, final String newGroup) {
         setGroupLogo(session.getCurrentState().getGroup());
-    }
+      }
+    });
+    // theme.addOnThemeChanged(new Listener2<GSpaceTheme, GSpaceTheme>() {
+    // public void onEvent(final GSpaceTheme oldTheme, final GSpaceTheme
+    // newTheme) {
+    // view.setTheme(oldTheme, newTheme);
+    // }
+    // });
+  }
 
-    public void reloadGroupLogoImage() {
-        view.reloadImage(session.getCurrentState().getGroup());
-    }
+  @Override
+  public void addAction(final OldGuiActionDescrip descriptor) {
+    view.addAction(descriptor);
+  }
 
-    void setGroupLogo(final GroupDTO group) {
-        if (group.hasLogo()) {
-            setLogoText(group.getLongName());
-            view.setLogoImage(group.getStateToken());
-            view.setLogoImageVisible(true);
-        } else {
-            setLogoText(group.getLongName());
-            if (group.isPersonal()) {
-                view.showDefUserLogo();
-                view.setLogoImageVisible(true);
-            } else {
-                view.setLogoImageVisible(false);
-            }
-        }
-    }
+  @Override
+  public void addWidget(final View widget) {
+    view.addWidget(widget);
+  }
 
-    void setLogoText(final String name) {
-        final int length = name.length();
-        if (length <= LARGE_NAME_LIMIT) {
-            view.setLargeFont();
-        } else if (length <= MEDIUM_NAME_LIMIT) {
-            view.setMediumFont();
-        } else {
-            view.setSmallFont();
-        }
-        view.setLogoText(name);
+  public void init(final EntityHeaderView view) {
+    this.view = view;
+  }
+
+  @Override
+  public void refreshGroupLogo() {
+    setGroupLogo(session.getCurrentState().getGroup());
+  }
+
+  @Override
+  public void reloadGroupLogoImage() {
+    view.reloadImage(session.getCurrentState().getGroup());
+  }
+
+  void setGroupLogo(final GroupDTO group) {
+    if (group.hasLogo()) {
+      setLogoText(group.getLongName());
+      view.setLogoImage(group.getStateToken());
+      view.setLogoImageVisible(true);
+    } else {
+      setLogoText(group.getLongName());
+      if (group.isPersonal()) {
+        view.showDefUserLogo();
+        view.setLogoImageVisible(true);
+      } else {
+        view.setLogoImageVisible(false);
+      }
     }
+  }
+
+  void setLogoText(final String name) {
+    final int length = name.length();
+    if (length <= LARGE_NAME_LIMIT) {
+      view.setLargeFont();
+    } else if (length <= MEDIUM_NAME_LIMIT) {
+      view.setMediumFont();
+    } else {
+      view.setSmallFont();
+    }
+    view.setLogoText(name);
+  }
 }

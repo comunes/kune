@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client;
 
-import cc.kune.gspace.client.resources.WsArmorResources;
+import cc.kune.gspace.client.resources.GSpaceArmorResources;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -30,7 +30,7 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 public class GSpaceArmorEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
-        final WsArmorResources resources = GWT.create(WsArmorResources.class);
+        final GSpaceArmorResources resources = GWT.create(GSpaceArmorResources.class);
         resources.style().ensureInjected();
 
         final RootLayoutPanel rootPanel = RootLayoutPanel.get();

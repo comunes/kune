@@ -25,11 +25,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import cc.kune.core.server.InitData;
 import cc.kune.core.server.TestDomainHelper;
 import cc.kune.core.server.TestHelper;
 import cc.kune.core.server.manager.GroupManager;
@@ -42,8 +45,10 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
+import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -136,6 +141,28 @@ public class MapperTest {
     groupDTO = mapper.map(group, GroupDTO.class);
     assertTrue(group.hasLogo());
     assertTrue(groupDTO.hasLogo());
+  }
+
+  @Ignore
+  @Test
+  public void initDataMappging() {
+    final InitData initData = new InitData();
+    final HashMap<String, GSpaceTheme> themes = new HashMap<String, GSpaceTheme>();
+    final String themeName = "green";
+    final GSpaceTheme theme = new GSpaceTheme(themeName);
+    final String[] array = { "blue, darkgreen" };
+    theme.setBackColors(array);
+    theme.setColors(array);
+    themes.put(themeName, theme);
+    initData.setgSpaceThemes(themes);
+    final InitDataDTO dto = mapper.map(initData, InitDataDTO.class);
+    final HashMap<String, GSpaceTheme> themesDto = dto.getgSpaceThemes();
+    final GSpaceTheme themeDto = themesDto.get(themeName);
+    assertNotNull(themeDto);
+    assertNotNull(themeDto.getColors());
+    assertTrue(themeDto.getColors().length > 0);
+    assertNotNull(themeDto.getBackColors());
+    assertTrue(themeDto.getBackColors().length > 0);
   }
 
   @Before

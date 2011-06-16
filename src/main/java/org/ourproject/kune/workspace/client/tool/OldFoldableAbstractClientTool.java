@@ -20,10 +20,10 @@
 package org.ourproject.kune.workspace.client.tool;
 
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
+import cc.kune.gspace.client.themes.GSpaceThemeManager;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 public abstract class OldFoldableAbstractClientTool extends OldAbstractClientTool {
@@ -33,7 +33,7 @@ public abstract class OldFoldableAbstractClientTool extends OldAbstractClientToo
     protected final ContentCapabilitiesRegistry contentCapabilitiesRegistry;
 
     public OldFoldableAbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector,
-            final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
+            final GSpaceThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
             final ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
         super(shortName, longName, toolSelector, wsThemePresenter, ws);
         this.contentCapabilitiesRegistry = contentCapabilitiesRegistry;

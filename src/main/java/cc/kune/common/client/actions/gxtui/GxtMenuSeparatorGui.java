@@ -49,6 +49,10 @@ public class GxtMenuSeparatorGui extends AbstractChildGuiItem implements ParentW
   }
 
   @Override
+  public void setIconBackground(final String back) {
+  }
+
+  @Override
   protected void setIconStyle(final String style) {
   }
 

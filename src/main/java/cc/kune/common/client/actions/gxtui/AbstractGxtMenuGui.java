@@ -116,6 +116,11 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
   }
 
   @Override
+  public void setIconBackground(final String back) {
+    throw new NotImplementedException();
+  }
+
+  @Override
   public void setIconUrl(final String url) {
     throw new NotImplementedException();
   }

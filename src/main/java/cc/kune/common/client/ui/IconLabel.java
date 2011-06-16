@@ -29,6 +29,7 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
@@ -135,6 +136,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.addStyleName("k-iconlabel-left");
     iconLeft.addStyleName("oc-ico-pad");
     iconLeft.setVisible(true);
+  }
+
+  public void setLeftIconBackground(final String backgroundColor) {
+    DOM.setStyleAttribute(iconLeft.getElement(), "backgroundColor", backgroundColor);
   }
 
   public void setLeftIconResource(final ImageResource res) {

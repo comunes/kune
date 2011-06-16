@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.options.pscape;
+package cc.kune.gspace.client.options.style;
 
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -26,34 +26,30 @@ import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.style.GSpaceBackManager;
+import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class GroupOptionsPublicSpaceConfPresenter extends EntityOptionsPublicSpaceConfPresenter implements
-        GroupOptionsPublicSpaceConf {
+public class GroupOptionsStyleConfPresenter extends EntityOptionsStyleConfPresenter implements
+    GroupOptionsStyleConf {
 
-    @Inject
-    public GroupOptionsPublicSpaceConfPresenter(final EventBus eventBus, final Session session,
-            final StateManager stateManager, final GroupOptions entityOptions,
-            final Provider<GroupServiceAsync> groupService, final GSpaceBackManager backManager,
-            final GroupOptionsPublicSpaceConfView view) {
-        super(eventBus, session, stateManager, entityOptions, groupService, backManager);
-        // themeSelector.addThemeSelected(new Listener<WsTheme>() {
-        // public void onEvent(final WsTheme theme) {
-        // themeManager.changeTheme(session.getCurrentStateToken(), theme);
-        // }
-        // });
-        init(view);
-        stateManager.onStateChanged(true, new StateChangedHandler() {
+  @Inject
+  public GroupOptionsStyleConfPresenter(final EventBus eventBus, final Session session,
+      final StateManager stateManager, final GroupOptions entityOptions,
+      final Provider<GroupServiceAsync> groupService, final GSpaceBackManager backManager,
+      final GroupOptionsStyleConfView view, final GSpaceThemeSelectorPresenter styleSelector) {
+    super(eventBus, session, stateManager, entityOptions, groupService, backManager, styleSelector);
+    init(view);
+    stateManager.onStateChanged(true, new StateChangedHandler() {
 
-            @Override
-            public void onStateChanged(final StateChangedEvent event) {
-                // final String theme = state.getGroup().getWorkspaceTheme();
-                // themeSelector.select(theme);
-            }
-        });
-    }
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        // final String theme = state.getGroup().getWorkspaceTheme();
+        // themeSelector.select(theme);
+      }
+    });
+  }
 
 }

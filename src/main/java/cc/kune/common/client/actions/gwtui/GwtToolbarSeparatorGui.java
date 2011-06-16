@@ -64,6 +64,10 @@ public class GwtToolbarSeparatorGui extends AbstractGuiItem {
   }
 
   @Override
+  public void setIconBackground(final String backgroundColor) {
+  }
+
+  @Override
   protected void setIconStyle(final String style) {
   }
 

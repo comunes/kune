@@ -20,11 +20,11 @@
 package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
 
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.themes.GSpaceThemeManager;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 public class ChatClientTool extends OldFoldableAbstractClientTool {
@@ -34,7 +34,7 @@ public class ChatClientTool extends OldFoldableAbstractClientTool {
   public static final String TYPE_ROOT = "chat.root";
 
   public ChatClientTool(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
-      final ToolSelector toolSelector, final WsThemeManager wsThemePresenter,
+      final ToolSelector toolSelector, final GSpaceThemeManager wsThemePresenter,
       final ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
     super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
     registerContentTypeIcon(TYPE_ROOM, "images/emite-room.png");

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.options.pscape;
+package cc.kune.gspace.client.options.style;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
@@ -30,6 +30,7 @@ import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
+import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -42,8 +43,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class EntityOptionsPublicSpaceConfPanel extends FlowPanel implements
-    EntityOptionsPublicSpaceConfView {
+public class EntityOptionsStyleConfPanel extends FlowPanel implements EntityOptionsStyleConfView {
 
   private final Image backImage;
   private final Button clearBtn;
@@ -52,8 +52,9 @@ public class EntityOptionsPublicSpaceConfPanel extends FlowPanel implements
   private final Label noBackLabel;
   private final IconLabel tabTitle;
 
-  public EntityOptionsPublicSpaceConfPanel(final I18nTranslationService i18n,
-      final FileDownloadUtils downUtils, final CoreResources res) {
+  public EntityOptionsStyleConfPanel(final I18nTranslationService i18n,
+      final FileDownloadUtils downUtils, final CoreResources res,
+      final GSpaceThemeSelectorPanel styleSelector) {
     this.downUtils = downUtils;
     tabTitle = new IconLabel(res.themeChoose(), i18n.t("Style"));
     super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
@@ -65,7 +66,7 @@ public class EntityOptionsPublicSpaceConfPanel extends FlowPanel implements
     // final Widget toolbarWsChange = (Widget) wsSelector.getView();
     // toolbarWsChange.addStyleName("kune-Margin-Medium-l");
     wsHP.add(wsThemeInfo);
-    // wsHP.add(toolbarWsChange);
+    wsHP.add(styleSelector);
     add(wsHP);
     final VerticalPanel backPanel = new VerticalPanel();
     currentBackLabel = new Label(i18n.t("Current background image: "));
@@ -75,7 +76,7 @@ public class EntityOptionsPublicSpaceConfPanel extends FlowPanel implements
     noBackLabel.addStyleName("kune-Margin-Medium-tb");
     clearBtn = new Button(i18n.t("Clear"));
     Tooltip.to(clearBtn, i18n.t("Remove current background image"));
-    backPanel.add(noBackLabel);
+    // backPanel.add(noBackLabel);
     backPanel.add(currentBackLabel);
     backPanel.add(backImage);
     backPanel.add(clearBtn);
@@ -96,7 +97,7 @@ public class EntityOptionsPublicSpaceConfPanel extends FlowPanel implements
       final BasicThumb thumb = new BasicThumb("images/styles/styl" + i + ".png", "Style " + i,
           clickHandler);
       thumb.setTooltip(i18n.t("Click to select and configure this theme"));
-      add(thumb);
+      // add(thumb);
     }
     add(stylesPanel);
     setBackImageVisibleImpl(false);

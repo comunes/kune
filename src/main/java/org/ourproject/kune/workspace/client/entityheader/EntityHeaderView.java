@@ -21,9 +21,9 @@ package org.ourproject.kune.workspace.client.entityheader;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.GroupDTO;
 
 public interface EntityHeaderView {
@@ -46,7 +46,7 @@ public interface EntityHeaderView {
 
     void setSmallFont();
 
-    void setTheme(final WsTheme oldTheme, WsTheme newTheme);
+    void setTheme(final GSpaceTheme oldTheme, GSpaceTheme newTheme);
 
     void showDefUserLogo();
 }

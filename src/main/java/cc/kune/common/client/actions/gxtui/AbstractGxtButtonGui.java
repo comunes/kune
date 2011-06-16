@@ -98,6 +98,11 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
   }
 
   @Override
+  public void setIconBackground(final String backgroundColor) {
+    throw new NotImplementedException();
+  }
+
+  @Override
   public void setIconResource(final ImageResource icon) {
     button.setIcon(AbstractImagePrototype.create(icon));
     button.setScale(ButtonScale.SMALL);
@@ -148,7 +153,6 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
       // ??
     }
     button.setVisible(visible);
-
   }
 
   @Override

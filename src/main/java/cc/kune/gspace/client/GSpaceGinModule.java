@@ -63,14 +63,14 @@ import cc.kune.gspace.client.options.logo.UserOptionsLogo;
 import cc.kune.gspace.client.options.logo.UserOptionsLogoPanel;
 import cc.kune.gspace.client.options.logo.UserOptionsLogoPresenter;
 import cc.kune.gspace.client.options.logo.UserOptionsLogoView;
-import cc.kune.gspace.client.options.pscape.GroupOptionsPublicSpaceConf;
-import cc.kune.gspace.client.options.pscape.GroupOptionsPublicSpaceConfPanel;
-import cc.kune.gspace.client.options.pscape.GroupOptionsPublicSpaceConfPresenter;
-import cc.kune.gspace.client.options.pscape.GroupOptionsPublicSpaceConfView;
-import cc.kune.gspace.client.options.pscape.UserOptionsPublicSpaceConf;
-import cc.kune.gspace.client.options.pscape.UserOptionsPublicSpaceConfPanel;
-import cc.kune.gspace.client.options.pscape.UserOptionsPublicSpaceConfPresenter;
-import cc.kune.gspace.client.options.pscape.UserOptionsPublicSpaceConfView;
+import cc.kune.gspace.client.options.style.GroupOptionsStyleConf;
+import cc.kune.gspace.client.options.style.GroupOptionsStyleConfPanel;
+import cc.kune.gspace.client.options.style.GroupOptionsStyleConfPresenter;
+import cc.kune.gspace.client.options.style.GroupOptionsStyleConfView;
+import cc.kune.gspace.client.options.style.UserOptionsStyleConf;
+import cc.kune.gspace.client.options.style.UserOptionsStyleConfPanel;
+import cc.kune.gspace.client.options.style.UserOptionsStyleConfPresenter;
+import cc.kune.gspace.client.options.style.UserOptionsStyleConfView;
 import cc.kune.gspace.client.options.tools.GroupOptionsToolsConf;
 import cc.kune.gspace.client.options.tools.GroupOptionsToolsConfPanel;
 import cc.kune.gspace.client.options.tools.GroupOptionsToolsConfPresenter;
@@ -83,6 +83,8 @@ import cc.kune.gspace.client.style.GSpaceBackManager;
 import cc.kune.gspace.client.style.GSpaceBackManagerImpl;
 import cc.kune.gspace.client.tags.TagsSummaryPanel;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
+import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
+import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
@@ -134,8 +136,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     s(GroupOptionsDefLicense.class, GroupOptionsDefLicensePresenter.class);
     s(GroupOptionsDefLicenseView.class, GroupOptionsDefLicensePanel.class);
-    s(GroupOptionsPublicSpaceConf.class, GroupOptionsPublicSpaceConfPresenter.class);
-    s(GroupOptionsPublicSpaceConfView.class, GroupOptionsPublicSpaceConfPanel.class);
+    s(GroupOptionsStyleConf.class, GroupOptionsStyleConfPresenter.class);
+    s(GroupOptionsStyleConfView.class, GroupOptionsStyleConfPanel.class);
     s(GroupOptionsLogo.class, GroupOptionsLogoPresenter.class);
     s(GroupOptionsLogoView.class, GroupOptionsLogoPanel.class);
     s(GroupOptionsToolsConf.class, GroupOptionsToolsConfPresenter.class);
@@ -143,14 +145,16 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     s(UserOptionsDefLicense.class, UserOptionsDefLicensePresenter.class);
     s(UserOptionsDefLicenseView.class, UserOptionsDefLicensePanel.class);
-    s(UserOptionsPublicSpaceConf.class, UserOptionsPublicSpaceConfPresenter.class);
-    s(UserOptionsPublicSpaceConfView.class, UserOptionsPublicSpaceConfPanel.class);
+    s(UserOptionsStyleConf.class, UserOptionsStyleConfPresenter.class);
+    s(UserOptionsStyleConfView.class, UserOptionsStyleConfPanel.class);
     s(UserOptionsLogo.class, UserOptionsLogoPresenter.class);
     s(UserOptionsLogoView.class, UserOptionsLogoPanel.class);
     s(UserOptionsToolsConf.class, UserOptionsToolsConfPresenter.class);
     s(UserOptionsToolsConfView.class, UserOptionsToolsConfPanel.class);
 
     s(GSpaceBackManager.class, GSpaceBackManagerImpl.class);
+    s(GSpaceThemeSelectorPresenter.class);
+    s(GSpaceThemeSelectorPanel.class);
 
     // Actions
     s(ContentViewerOptionsMenu.class);

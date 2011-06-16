@@ -20,11 +20,12 @@
 package cc.kune.core.server;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
 
 import cc.kune.core.server.tool.ToolSimple;
 import cc.kune.core.server.users.UserInfo;
+import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.domain.ExtMediaDescrip;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
@@ -32,263 +33,259 @@ import cc.kune.domain.License;
 
 public class InitData {
 
-    private String siteUrl;
-    private List<License> licenses;
-    private List<I18nLanguage> languages;
-    private List<I18nCountry> countries;
-    private String[] timezones;
-    private UserInfo userInfo;
-    private String chatHttpBase;
-    private String siteDomain;
-    private String chatDomain;
-    private String chatRoomHost;
-    private License defaultLicense;
-    private String currentCCversion;
-    private String defaultWsTheme;
-    private String[] wsThemes;
-    private String siteLogoUrl;
-    private String galleryPermittedExtensions;
-    private String maxFileSizeInMb;
-    private int imgResizewidth;
-    private int imgThumbsize;
-    private int imgCropsize;
-    private int imgIconsize;
-    private ArrayList<ToolSimple> userTools;
-    private ArrayList<ToolSimple> groupTools;
-    private List<ExtMediaDescrip> extMediaDescrips;
+  private String aviEmbedObject;
+  private String chatDomain;
+  private String chatHttpBase;
+  private String chatRoomHost;
+  private List<I18nCountry> countries;
+  private String currentCCversion;
+  private License defaultLicense;
+  private String defaultWsTheme;
+  private List<ExtMediaDescrip> extMediaDescrips;
+  private String flvEmbedObject;
+  private String galleryPermittedExtensions;
+  private ArrayList<ToolSimple> groupTools;
+  private HashMap<String, GSpaceTheme> gSpaceThemes;
+  private int imgCropsize;
+  private int imgIconsize;
+  private int imgResizewidth;
+  private int imgThumbsize;
+  private List<I18nLanguage> languages;
+  private List<License> licenses;
+  private String maxFileSizeInMb;
+  private String mp3EmbedObject;
+  private String oggEmbedObject;
+  private String siteDomain;
+  private String siteLogoUrl;
+  private String siteUrl;
+  private String[] timezones;
+  private UserInfo userInfo;
+  private ArrayList<ToolSimple> userTools;
 
-    private String flvEmbedObject;
+  public String getAviEmbedObject() {
+    return aviEmbedObject;
+  }
 
-    private String oggEmbedObject;
+  public String getChatDomain() {
+    return chatDomain;
+  }
 
-    private String mp3EmbedObject;
+  public String getChatHttpBase() {
+    return chatHttpBase;
+  }
 
-    private String aviEmbedObject;
+  public String getChatRoomHost() {
+    return chatRoomHost;
+  }
 
-    public String getAviEmbedObject() {
-        return aviEmbedObject;
-    }
+  public List<I18nCountry> getCountries() {
+    return countries;
+  }
 
-    public String getChatDomain() {
-        return chatDomain;
-    }
+  public String getCurrentCCversion() {
+    return currentCCversion;
+  }
 
-    public String getChatHttpBase() {
-        return chatHttpBase;
-    }
+  public License getDefaultLicense() {
+    return defaultLicense;
+  }
 
-    public String getChatRoomHost() {
-        return chatRoomHost;
-    }
+  public String getDefaultWsTheme() {
+    return defaultWsTheme;
+  }
 
-    public List<I18nCountry> getCountries() {
-        return countries;
-    }
+  public List<ExtMediaDescrip> getExtMediaDescrips() {
+    return extMediaDescrips;
+  }
 
-    public String getCurrentCCversion() {
-        return currentCCversion;
-    }
+  public String getFlvEmbedObject() {
+    return flvEmbedObject;
+  }
 
-    public License getDefaultLicense() {
-        return defaultLicense;
-    }
+  public String getGalleryPermittedExtensions() {
+    return galleryPermittedExtensions;
+  }
 
-    public String getDefaultWsTheme() {
-        return defaultWsTheme;
-    }
+  public ArrayList<ToolSimple> getGroupTools() {
+    return groupTools;
+  }
 
-    public List<ExtMediaDescrip> getExtMediaDescrips() {
-        return extMediaDescrips;
-    }
+  public HashMap<String, GSpaceTheme> getgSpaceThemes() {
+    return gSpaceThemes;
+  }
 
-    public String getFlvEmbedObject() {
-        return flvEmbedObject;
-    }
+  public int getImgCropsize() {
+    return imgCropsize;
+  }
 
-    public String getGalleryPermittedExtensions() {
-        return galleryPermittedExtensions;
-    }
+  public int getImgIconsize() {
+    return imgIconsize;
+  }
 
-    public ArrayList<ToolSimple> getGroupTools() {
-        return groupTools;
-    }
+  public int getImgResizewidth() {
+    return imgResizewidth;
+  }
 
-    public int getImgCropsize() {
-        return imgCropsize;
-    }
+  public int getImgThumbsize() {
+    return imgThumbsize;
+  }
 
-    public int getImgIconsize() {
-        return imgIconsize;
-    }
+  public List<I18nLanguage> getLanguages() {
+    return languages;
+  }
 
-    public int getImgResizewidth() {
-        return imgResizewidth;
-    }
+  public List<License> getLicenses() {
+    return licenses;
+  }
 
-    public int getImgThumbsize() {
-        return imgThumbsize;
-    }
+  public String getMaxFileSizeInMb() {
+    return maxFileSizeInMb;
+  }
 
-    public List<I18nLanguage> getLanguages() {
-        return languages;
-    }
+  public String getMp3EmbedObject() {
+    return mp3EmbedObject;
+  }
 
-    public List<License> getLicenses() {
-        return licenses;
-    }
+  public String getOggEmbedObject() {
+    return oggEmbedObject;
+  }
 
-    public String getMaxFileSizeInMb() {
-        return maxFileSizeInMb;
-    }
+  @Deprecated
+  public String getSiteDomain() {
+    return siteDomain;
+  }
 
-    public String getMp3EmbedObject() {
-        return mp3EmbedObject;
-    }
+  public String getSiteLogoUrl() {
+    return siteLogoUrl;
+  }
 
-    public String getOggEmbedObject() {
-        return oggEmbedObject;
-    }
+  public String getSiteUrl() {
+    return siteUrl;
+  }
 
-    @Deprecated
-    public String getSiteDomain() {
-        return siteDomain;
-    }
+  public String[] getTimezones() {
+    return timezones;
+  }
 
-    public String getSiteLogoUrl() {
-        return siteLogoUrl;
-    }
+  public UserInfo getUserInfo() {
+    return userInfo;
+  }
 
-    public String getSiteUrl() {
-        return siteUrl;
-    }
+  public ArrayList<ToolSimple> getUserTools() {
+    return userTools;
+  }
 
-    public String[] getTimezones() {
-        return timezones;
-    }
+  public void setAviEmbedObject(final String aviEmbedObject) {
+    this.aviEmbedObject = aviEmbedObject;
+  }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
+  public void setChatDomain(final String chatDomain) {
+    this.chatDomain = chatDomain;
+  }
 
-    public ArrayList<ToolSimple> getUserTools() {
-        return userTools;
-    }
+  public void setChatHttpBase(final String chatHttpBase) {
+    this.chatHttpBase = chatHttpBase;
+  }
 
-    public String[] getWsThemes() {
-        return wsThemes;
-    }
+  public void setChatRoomHost(final String chatRoomHost) {
+    this.chatRoomHost = chatRoomHost;
+  }
 
-    public void setAviEmbedObject(final String aviEmbedObject) {
-        this.aviEmbedObject = aviEmbedObject;
-    }
+  public void setCountries(final List<I18nCountry> countries) {
+    this.countries = countries;
+  }
 
-    public void setChatDomain(final String chatDomain) {
-        this.chatDomain = chatDomain;
-    }
+  public void setCurrentCCversion(final String currentCCversion) {
+    this.currentCCversion = currentCCversion;
+  }
 
-    public void setChatHttpBase(final String chatHttpBase) {
-        this.chatHttpBase = chatHttpBase;
-    }
+  public void setDefaultLicense(final License defaultLicense) {
+    this.defaultLicense = defaultLicense;
+  }
 
-    public void setChatRoomHost(final String chatRoomHost) {
-        this.chatRoomHost = chatRoomHost;
-    }
+  public void setDefaultWsTheme(final String defaultWsTheme) {
+    this.defaultWsTheme = defaultWsTheme;
+  }
 
-    public void setCountries(final List<I18nCountry> countries) {
-        this.countries = countries;
-    }
+  public void setExtMediaDescrips(final List<ExtMediaDescrip> extMediaDescrips) {
+    this.extMediaDescrips = extMediaDescrips;
+  }
 
-    public void setCurrentCCversion(final String currentCCversion) {
-        this.currentCCversion = currentCCversion;
-    }
+  public void setFlvEmbedObject(final String flvEmbedObject) {
+    this.flvEmbedObject = flvEmbedObject;
+  }
 
-    public void setDefaultLicense(final License defaultLicense) {
-        this.defaultLicense = defaultLicense;
-    }
+  public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
+    this.galleryPermittedExtensions = galleryPermittedExtensions;
+  }
 
-    public void setDefaultWsTheme(final String defaultWsTheme) {
-        this.defaultWsTheme = defaultWsTheme;
-    }
+  public void setGroupTools(final ArrayList<ToolSimple> groupTools) {
+    this.groupTools = groupTools;
+  }
 
-    public void setExtMediaDescrips(final List<ExtMediaDescrip> extMediaDescrips) {
-        this.extMediaDescrips = extMediaDescrips;
-    }
+  public void setgSpaceThemes(final HashMap<String, GSpaceTheme> gSpaceThemes) {
+    this.gSpaceThemes = gSpaceThemes;
+  }
 
-    public void setFlvEmbedObject(final String flvEmbedObject) {
-        this.flvEmbedObject = flvEmbedObject;
-    }
+  public void setImgCropsize(final int imgCropsize) {
+    this.imgCropsize = imgCropsize;
+  }
 
-    public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
-        this.galleryPermittedExtensions = galleryPermittedExtensions;
-    }
+  public void setImgIconsize(final int imgIconsize) {
+    this.imgIconsize = imgIconsize;
+  }
 
-    public void setGroupTools(final ArrayList<ToolSimple> groupTools) {
-        this.groupTools = groupTools;
-    }
+  public void setImgResizewidth(final int imgResizewidth) {
+    this.imgResizewidth = imgResizewidth;
+  }
 
-    public void setImgCropsize(final int imgCropsize) {
-        this.imgCropsize = imgCropsize;
-    }
+  public void setImgThumbsize(final int imgThumbsize) {
+    this.imgThumbsize = imgThumbsize;
+  }
 
-    public void setImgIconsize(final int imgIconsize) {
-        this.imgIconsize = imgIconsize;
-    }
+  public void setLanguages(final List<I18nLanguage> languages) {
+    this.languages = languages;
+  }
 
-    public void setImgResizewidth(final int imgResizewidth) {
-        this.imgResizewidth = imgResizewidth;
-    }
+  public void setLicenses(final List<License> licenses) {
+    this.licenses = licenses;
+  }
 
-    public void setImgThumbsize(final int imgThumbsize) {
-        this.imgThumbsize = imgThumbsize;
-    }
+  public void setMaxFileSizeInMb(final String maxFileSizeInMb) {
+    this.maxFileSizeInMb = maxFileSizeInMb;
+  }
 
-    public void setLanguages(final List<I18nLanguage> languages) {
-        this.languages = languages;
-    }
+  public void setMp3EmbedObject(final String mp3EmbedObject) {
+    this.mp3EmbedObject = mp3EmbedObject;
+  }
 
-    public void setLicenses(final List<License> licenses) {
-        this.licenses = licenses;
-    }
+  public void setOggEmbedObject(final String oggEmbedObject) {
+    this.oggEmbedObject = oggEmbedObject;
+  }
 
-    public void setMaxFileSizeInMb(final String maxFileSizeInMb) {
-        this.maxFileSizeInMb = maxFileSizeInMb;
-    }
+  @Deprecated
+  public void setSiteDomain(final String siteDomain) {
+    this.siteDomain = siteDomain;
+  }
 
-    public void setMp3EmbedObject(final String mp3EmbedObject) {
-        this.mp3EmbedObject = mp3EmbedObject;
-    }
+  public void setSiteLogoUrl(final String siteLogoUrl) {
+    this.siteLogoUrl = siteLogoUrl;
+  }
 
-    public void setOggEmbedObject(final String oggEmbedObject) {
-        this.oggEmbedObject = oggEmbedObject;
-    }
+  public void setSiteUrl(final String siteUrl) {
+    this.siteUrl = siteUrl;
+  }
 
-    @Deprecated
-    public void setSiteDomain(final String siteDomain) {
-        this.siteDomain = siteDomain;
-    }
+  public void setTimezones(final String[] timezones) {
+    this.timezones = timezones;
+  }
 
-    public void setSiteLogoUrl(final String siteLogoUrl) {
-        this.siteLogoUrl = siteLogoUrl;
-    }
+  public void setUserInfo(final UserInfo currentUserInfo) {
+    this.userInfo = currentUserInfo;
+  }
 
-    public void setSiteUrl(final String siteUrl) {
-        this.siteUrl = siteUrl;
-    }
-
-    public void setTimezones(final String[] timezones) {
-        this.timezones = timezones;
-    }
-
-    public void setUserInfo(final UserInfo currentUserInfo) {
-        this.userInfo = currentUserInfo;
-    }
-
-    public void setUserTools(final ArrayList<ToolSimple> userTools) {
-        this.userTools = userTools;
-    }
-
-    public void setWsThemes(final String[] wsThemes) {
-        this.wsThemes = wsThemes;
-    }
+  public void setUserTools(final ArrayList<ToolSimple> userTools) {
+    this.userTools = userTools;
+  }
 
 }

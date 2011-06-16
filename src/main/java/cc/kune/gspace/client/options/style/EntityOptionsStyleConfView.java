@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.options.pscape;
+package cc.kune.gspace.client.options.style;
 
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.gspace.client.options.EntityOptionsTabView;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
-public interface EntityOptionsPublicSpaceConfView extends EntityOptionsTabView {
+public interface EntityOptionsStyleConfView extends EntityOptionsTabView {
 
     public void clearBackImage();
 

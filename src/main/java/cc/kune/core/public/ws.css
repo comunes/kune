@@ -942,17 +942,15 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   padding: 10px;
 }
 
-.k-sn-adminspanel { /* background-color: #a05a2c; */
+.k-sn-1st-panel { /* background-color: #a05a2c; */
   border-bottom: 2px solid #F7EBE3;
   border-top: 2px solid #F7EBE3;
 }
 
-.k-sn-collabspanel {
-  background-color: #d38d5f;
+.k-sn-2nd-spanel {
 }
 
-.k-sn-pendingspanel { /* background-color: #a05a2c; */
-
+.k-sn-3rd-panel {
 }
 
 .k-sn-adminsscroll,.k-sn-collabsscroll,.k-sn-pendingsscroll {
@@ -1128,7 +1126,6 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 }
 
 .k-tool-panel {
-  background-color: #DEAA87;
 }
 
 .k-tool-item {
@@ -1138,7 +1135,6 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 }
 
 .k-tool-item-focus {
-  background-color: #d38d5f;
 }
 
 .k-tool-item-nofocus {
@@ -1146,11 +1142,9 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 }
 
 .k-tool-item-selected {
-  background-color: #C87137;
 }
 
 .k-tool-item-notselected {
-  background-color: inherits;
 }
 
 .k-def-docbtn span {

@@ -24,7 +24,6 @@
   -webkit-border-top-right-radius: 7px;
   -moz-border-radius-topright: 7px;
   border-top-right-radius: 7px;
-  background-color: #f4e3d7;
   overflow: hidden;
 }
 
@@ -32,13 +31,11 @@
   -webkit-border-bottom-right-radius: 7px;
   -moz-border-radius-bottomright: 7px;
   border-bottom-right-radius: 7px;
-  background-color: #f7ebe3;
   /* padding: 7px 10px 0px 17px; */
   overflow: hidden;
 }
 
 .entityFooter span {
-  color: #784421;
   font-size: 16px;
   font-weight: bold;
 }
@@ -46,13 +43,11 @@
 .entityHeader span {
   font-size: 56px;
   /*  margin-left: 15px; */
-  color: #550000;
   font-weight: bold;
   font: 'UbuntuBold', Arial;
 }
 
 .docHeader {
-  background-color: #D38D5F;
   overflow: hidden;
 }
 
@@ -64,7 +59,6 @@
 }
 
 .docHeader span,.docHeader input {
-  color: #FFF;
   font-size: 26px;
   font-weight: bold;
   margin-left: 15px;
@@ -75,17 +69,14 @@
 .docHeader input {
   float: left;
   width: 95% !important;
-  color: black !important;
 }
 
 .docHeader img {
   float: left;
   margin: 10px -10px 0 10px;
-  background-color: white;
 }
 
 .docSubheader {
-  background-color: #f7ebe3;
   overflow: hidden;
   border-collapse: separate;
   margin: -14px 0 0;
@@ -111,17 +102,15 @@
 }
 
 .docSubheader span {
-  color: #784421;
   font-size: 20px;
   font-weight: bold;
 }
 
 .docEditorMargin {
-  background-color: #f7ebe3;
+
 }
 
 .docEditor {
-  background-color: #FFF;
   border-left: 1px solid #959595;
   border-right: 1px solid #959595;
   border-top: 1px solid #959595;
@@ -141,7 +130,6 @@
   border-left: 1px solid #959595;
   border-right: 1px solid #959595;
   border-bottom: 1px solid #959595;
-  background-color: #e3dbdb;
   -webkit-border-bottom-left-radius: 7px;
   -moz-border-radius-bottomleft: 7px;
   border-bottom-left-radius: 7px;
@@ -154,7 +142,6 @@
 }
 
 .docFooter span {
-  color: #784421;
   font-size: 16px;
   font-weight: bold;
 }
@@ -166,17 +153,15 @@
   -webkit-border-bottom-left-radius: 7px;
   -moz-border-radius-bottomleft: 7px;
   border-bottom-left-radius: 7px;
-  background-color: #DEAA87;
 }
 
 .entityToolsNorth { /* margin: 10px; */
 
 }
 
-.entityToolsNorth span {
-  color: #a05a2c;
-  /* font-size: 20px;
+.entityToolsNorth span { /* font-size: 20px;
   font-weight: bold; */
+
 }
 
 .entityToolsCenter { /*  margin: 10px; */
@@ -185,7 +170,6 @@
 }
 
 .entityToolsCenter span {
-  color: #FFF;
   font-size: 26px;
   font-weight: bold;
 }
@@ -194,17 +178,18 @@
   border-top: 2px solid #FFF;
   padding: 10px;
   border-collapse: separate;
+  -webkit-border-bottom-left-radius: 7px;
+  -moz-border-radius-bottomleft: 7px;
+  border-bottom-left-radius: 7px;
 }
 
 .entityToolsSouth span {
-  color: #a05a2c;
   font-size: 20px;
   font-weight: bold;
 }
 
 /* Derived from: from http://jonrohan.me/guide/css/creating-triangles-in-css/ */
 .docSubheaderArrow {
-  border-color: #D38D5F transparent transparent transparent;
   border-style: solid;
   border-width: 7px;
   height: 0;
@@ -212,6 +197,16 @@
   position: relative;
   bottom: 0px;
   left: 36px;
+}
+
+.k-tool-item-selected-arrow {
+  border-style: solid;
+  border-width: 7px;
+  height: 0;
+  width: 0;
+  position: relative;
+  bottom: 0px;
+  left: 24px;
 }
 
 /* IE6 */

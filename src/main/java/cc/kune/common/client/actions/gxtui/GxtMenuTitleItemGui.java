@@ -66,6 +66,10 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
   }
 
   @Override
+  public void setIconBackground(final String back) {
+  }
+
+  @Override
   protected void setIconStyle(final String style) {
     item.addStyleName(style);
   }

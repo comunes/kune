@@ -23,7 +23,7 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
-import cc.kune.gspace.client.resources.WsArmorResources;
+import cc.kune.gspace.client.resources.GSpaceArmorResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -52,7 +52,7 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
 
   @Inject
   public SpaceSelectorViewImpl(final GSpaceArmor armor, final I18nTranslationService i18n,
-      final WsArmorResources res) {
+      final GSpaceArmorResources res) {
     armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
     // homeButton.setVisible(false);
     Tooltip.to(homeButton, i18n.t("Your home page in this site"));

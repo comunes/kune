@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.options.pscape;
+package cc.kune.gspace.client.options.style;
 
-public interface GroupOptionsPublicSpaceConf extends EntityOptionsPublicSpaceConf {
+public interface UserOptionsStyleConfView extends EntityOptionsStyleConfView {
 
 }

@@ -1,0 +1,145 @@
+@CHARSET "UTF-8";
+
+@eval bc1 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(0);
+@eval bc2 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(1);
+@eval bc3 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(2);
+@eval bc4 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(3);
+@eval bc5 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(4);
+@eval bc6 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(5);
+@eval bc7 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(6);
+@eval bc8 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(7);
+@eval c1 cc.kune.gspace.client.themes.CurrentEntityTheme.getColor(0);
+@eval c2 cc.kune.gspace.client.themes.CurrentEntityTheme.getColor(1);
+@eval c3 cc.kune.gspace.client.themes.CurrentEntityTheme.getColor(2);
+@eval c4 cc.kune.gspace.client.themes.CurrentEntityTheme.getColor(3);
+@eval c5 cc.kune.gspace.client.themes.CurrentEntityTheme.getColor(4);
+@eval c6 cc.kune.gspace.client.themes.CurrentEntityTheme.getColor(5);
+@eval c7 cc.kune.gspace.client.themes.CurrentEntityTheme.getColor(6);
+@eval c8 cc.kune.gspace.client.themes.CurrentEntityTheme.getColor(7);
+@external .*;
+.entityTools {
+  background-color: bc1;
+}
+
+.entityToolsNorth span {
+  color: c1;
+}
+
+.k-sn-1st-panel {
+
+}
+
+.k-sn-2nd-spanel {
+  background-color: bc2;
+}
+
+.k-sn-2nd-spanel span {
+  color: c2;
+}
+
+.k-sn-3rd-panel { /* background-color: #a05a2c; */
+
+}
+
+.entityToolsCenter span {
+  color: #FFF;
+}
+
+.k-tool-panel {
+  background-color: bc1;
+}
+
+.k-tool-item-focus {
+  background-color: bc4;
+}
+
+.k-tool-item-focus span {
+  color: c4;
+}
+
+.k-tool-item-nofocus {
+
+}
+
+.k-tool-item-selected {
+  background-color: bc3;
+}
+
+.k-tool-item-selected span {
+  color: c3;
+}
+
+/* Derived from: from http://jonrohan.me/guide/css/creating-triangles-in-css/ */
+.k-tool-item-selected-arrow {
+  border-color: transparent transparent transparent bc3;
+}
+
+.k-tool-item-notselected {
+  background-color: inherits;
+}
+
+.entityToolsSouth {
+  border-top: 2px solid #FFF;
+  background-color: bc4;
+}
+
+.entityToolsSouth span {
+  color: c4;
+}
+
+.entityHeader {
+  background-color: bc5;
+}
+
+.entityHeader span {
+  color: c5;
+}
+
+.docHeader {
+  background-color: bc6;
+}
+
+.docHeader span,.docHeader input {
+  color: c6;
+}
+
+/* Derived from: from http://jonrohan.me/guide/css/creating-triangles-in-css/ */
+.docSubheaderArrow {
+  border-color: bc6 transparent transparent transparent;
+}
+
+.docHeader input {
+  color: black !important;
+}
+
+.docSubheader {
+  background-color: bc8;
+}
+
+.docSubheader span {
+  color: c8;
+}
+
+.docEditorMargin {
+  background-color: bc8;
+}
+
+.docEditor {
+  background-color: bc7;
+}
+
+.docFooter {
+  background-color: #e3dbdb;
+}
+
+.docFooter span {
+  color: #784421;
+}
+
+.entityFooter {
+  background-color: bc8;
+}
+
+.entityFooter span {
+  color: c8;
+}

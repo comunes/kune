@@ -67,6 +67,10 @@ public class GwtToolbarGui extends AbstractGuiItem implements ParentWidget {
   }
 
   @Override
+  protected void setIconBackground(final String backgroundColor) {
+  }
+
+  @Override
   protected void setIconStyle(final String style) {
   }
 

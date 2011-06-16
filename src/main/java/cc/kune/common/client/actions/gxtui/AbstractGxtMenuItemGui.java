@@ -128,6 +128,11 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
   }
 
   @Override
+  public void setIconBackground(final String back) {
+    throw new NotImplementedException();
+  }
+
+  @Override
   public void setIconResource(final ImageResource icon) {
     item.setIcon(AbstractImagePrototype.create(icon));
   }

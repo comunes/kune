@@ -128,12 +128,18 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
       if (iconS.startsWith("http")) {
         setIconUrl(iconS);
       } else {
-        setIconStyle(iconS);
+        if (iconS.startsWith("#")) {
+          setIconBackground(iconS);
+        } else {
+          setIconStyle(iconS);
+        }
       }
     } else if (icon != null) {
       throw new NotImplementedException();
     }
   }
+
+  protected abstract void setIconBackground(String backgroundColor);
 
   public void setIconResource(final ImageResource icon) {
     setIconStyle((IconConstants.CSS_SUFFIX + icon.getName()));

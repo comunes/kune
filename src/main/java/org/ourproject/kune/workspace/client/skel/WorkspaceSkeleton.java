@@ -21,7 +21,8 @@ package org.ourproject.kune.workspace.client.skel;
 
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
+
+import cc.kune.core.shared.dto.GSpaceTheme;
 
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.Scheduler;
@@ -141,7 +142,7 @@ public class WorkspaceSkeleton {
         entity.setMaximized(maximized);
     }
 
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+    public void setTheme(final GSpaceTheme oldTheme, final GSpaceTheme newTheme) {
         entity.setTheme(oldTheme, newTheme);
     }
 

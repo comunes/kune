@@ -6,8 +6,8 @@
       text-decoration: none;
       font-size: 22px;
       color: white; /*
-            text-shadow: 1px 1px 6px grey;
-            */
+                text-shadow: 1px 1px 6px grey;
+                */
     }
 
     .link a:link {
@@ -42,9 +42,9 @@
   <g:FocusPanel ui:field="self" stylePrimaryName="k-tool-item">
     <g:FlowPanel styleName="{style.flow}" ui:field="flow">
       <g:Image ui:field="iconLeft" styleName="{style.iconLeft}" />
-      <g:Image ui:field="iconRight" styleName="{style.iconRight}"
-        resource='{res.arrowRightDef}' />
+      <g:Image ui:field="iconRight" styleName="{style.iconRight}" /> <!-- resource {res.arrowRightDef}' -->
       <g:InlineLabel ui:field="label" styleName="{style.label}" />
+      <g:HTMLPanel ui:field="arrow" addStyleNames="k-tool-item-selected-arrow, k-fr" />
     </g:FlowPanel>
   </g:FocusPanel>
 </ui:UiBinder>
