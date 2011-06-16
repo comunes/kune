@@ -167,6 +167,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconRight.setVisible(true);
   }
 
+  public void setRightIconBackground(final String backgroundColor) {
+    DOM.setStyleAttribute(iconRight.getElement(), "backgroundColor", backgroundColor);
+  }
+
   public void setRightIconResource(final ImageResource res) {
     iconRight.setResource(res);
     iconRight.addStyleName("k-iconlabel-right");

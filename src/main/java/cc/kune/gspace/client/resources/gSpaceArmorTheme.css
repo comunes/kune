@@ -21,7 +21,11 @@
   background-color: bc1;
 }
 
-.entityToolsNorth span {
+.k-sn-maintitle {
+  color: bc3;
+}
+
+.entityToolsNorth span ,.k-sn-deck div {
   color: c1;
 }
 
@@ -49,6 +53,13 @@
   background-color: bc1;
 }
 
+.k-tool-item {
+}
+
+.k-tool-item span {
+  color: c1;
+}
+
 .k-tool-item-focus {
   background-color: bc4;
 }
@@ -58,7 +69,10 @@
 }
 
 .k-tool-item-nofocus {
+}
 
+.k-tool-item-nofocus span {
+  color: c1;
 }
 
 .k-tool-item-selected {
@@ -91,7 +105,7 @@
   background-color: bc5;
 }
 
-.entityHeader span {
+.entityHeader span, .entityHeader div {
   color: c5;
 }
 
@@ -126,6 +140,10 @@
 
 .docEditor {
   background-color: bc7;
+}
+
+.k-empty-msg span, .k-folder-viewer span {
+  color: c7;
 }
 
 .docFooter {

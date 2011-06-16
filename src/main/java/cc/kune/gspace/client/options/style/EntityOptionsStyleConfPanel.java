@@ -37,7 +37,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
@@ -60,11 +59,10 @@ public class EntityOptionsStyleConfPanel extends FlowPanel implements EntityOpti
     super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     super.setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
 
-    final HorizontalPanel wsHP = new HorizontalPanel();
+    final FlowPanel wsHP = new FlowPanel();
     final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));
     wsThemeInfo.addStyleName("kune-Margin-20-tb");
-    // final Widget toolbarWsChange = (Widget) wsSelector.getView();
-    // toolbarWsChange.addStyleName("kune-Margin-Medium-l");
+    styleSelector.addStyleName("k-fl");
     wsHP.add(wsThemeInfo);
     wsHP.add(styleSelector);
     add(wsHP);
@@ -80,10 +78,11 @@ public class EntityOptionsStyleConfPanel extends FlowPanel implements EntityOpti
     backPanel.add(currentBackLabel);
     backPanel.add(backImage);
     backPanel.add(clearBtn);
-    add(backPanel);
+    backPanel.addStyleName("oc-clean");
+    // add(backPanel);
     final Label wsInfo = new Label(i18n.t("Select and configure the public space theme of this group:"));
     wsInfo.addStyleName("kune-Margin-Medium-tb");
-    add(wsInfo);
+    // add(wsInfo);
 
     final VerticalPanel stylesPanel = new VerticalPanel();
     final ClickHandler clickHandler = new ClickHandler() {
@@ -99,6 +98,7 @@ public class EntityOptionsStyleConfPanel extends FlowPanel implements EntityOpti
       thumb.setTooltip(i18n.t("Click to select and configure this theme"));
       // add(thumb);
     }
+    stylesPanel.addStyleName("oc-clean");
     add(stylesPanel);
     setBackImageVisibleImpl(false);
     super.addStyleName("k-overflow-y-auto");

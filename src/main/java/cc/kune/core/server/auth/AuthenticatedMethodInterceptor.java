@@ -32,6 +32,7 @@ import cc.kune.core.server.UserSession;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.persist.UnitOfWork;
 
 public class AuthenticatedMethodInterceptor implements MethodInterceptor {
 
@@ -43,48 +44,59 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
   @Inject
   Provider<SessionService> sessionServiceProvider;
 
+  // https://code.google.com/p/google-guice/wiki/Transactions
+  @Inject
+  private UnitOfWork unitOfWork;
+
   @Inject
   Provider<UserSession> userSessionProvider;
 
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
-    final Object[] arguments = invocation.getArguments();
-    // Some browsers getCookie returns "null" as String instead of null
-    final String userHash = arguments[0] == null || arguments[0].equals("null") ? null
-        : (String) arguments[0];
+    // https://code.google.com/p/google-guice/wiki/Transactions
+    unitOfWork.end();
+    unitOfWork.begin();
+    try {
+      final Object[] arguments = invocation.getArguments();
+      // Some browsers getCookie returns "null" as String instead of null
+      final String userHash = arguments[0] == null || arguments[0].equals("null") ? null
+          : (String) arguments[0];
 
-    LOG.info("Method: " + invocation.getMethod().getName());
-    LOG.info("Userhash received: " + userHash);
-    LOG.info("--------------------------------------------------------------------------------");
-    final UserSession userSession = userSessionProvider.get();
-    // final SessionService sessionService = sessionServiceProvider.get();
+      LOG.info("Method: " + invocation.getMethod().getName());
+      LOG.info("Userhash received: " + userHash);
+      LOG.info("--------------------------------------------------------------------------------");
+      final UserSession userSession = userSessionProvider.get();
+      // final SessionService sessionService = sessionServiceProvider.get();
 
-    final Authenticated authAnnotation = invocation.getStaticPart().getAnnotation(Authenticated.class);
-    final boolean mandatory = authAnnotation.mandatory();
+      final Authenticated authAnnotation = invocation.getStaticPart().getAnnotation(Authenticated.class);
+      final boolean mandatory = authAnnotation.mandatory();
 
-    if (userHash == null && mandatory) {
-      // sessionService.getNewSession();
-      throw new UserMustBeLoggedException();
-    } else if (userSession.isUserNotLoggedIn() && mandatory) {
-      // sessionService.getNewSession();
-      LOG.info("Session expired (not logged in server and mandatory)");
-      throw new SessionExpiredException();
-    } else if (userSession.isUserNotLoggedIn() && userHash == null) {
-      // Ok, do nothing
-    } else if (userSession.isUserNotLoggedIn() && userHash != null) {
-      // sessionService.getNewSession();
-      LOG.info("Session expired (not logged in server)");
-      throw new SessionExpiredException();
-    } else if (!userSession.getHash().equals(userHash)) {
-      final String serverHash = userSession.getHash();
-      userSession.logout();
-      // sessionService.getNewSession();
-      LOG.info("Session expired (userHash: " + userHash + " different from server hash: " + serverHash
-          + ")");
-      throw new SessionExpiredException();
+      if (userHash == null && mandatory) {
+        // sessionService.getNewSession();
+        throw new UserMustBeLoggedException();
+      } else if (userSession.isUserNotLoggedIn() && mandatory) {
+        // sessionService.getNewSession();
+        LOG.info("Session expired (not logged in server and mandatory)");
+        throw new SessionExpiredException();
+      } else if (userSession.isUserNotLoggedIn() && userHash == null) {
+        // Ok, do nothing
+      } else if (userSession.isUserNotLoggedIn() && userHash != null) {
+        // sessionService.getNewSession();
+        LOG.info("Session expired (not logged in server)");
+        throw new SessionExpiredException();
+      } else if (!userSession.getHash().equals(userHash)) {
+        final String serverHash = userSession.getHash();
+        userSession.logout();
+        // sessionService.getNewSession();
+        LOG.info("Session expired (userHash: " + userHash + " different from server hash: " + serverHash
+            + ")");
+        throw new SessionExpiredException();
+      }
+      final Object result = invocation.proceed();
+      return result;
+    } finally {
+      unitOfWork.end();
     }
-    final Object result = invocation.proceed();
-    return result;
   }
 
 }

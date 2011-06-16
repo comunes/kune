@@ -29,6 +29,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -67,14 +68,18 @@ public class GSpaceThemeSelectorPresenter {
   private final HashMap<String, MenuRadioItemDescriptor> itemMap;
   private final GSpaceThemeManager manager;
   private MenuDescriptor menu;
+  private final CoreResources res;
   private final Session session;
+
   private ActionExtensibleView view;
 
   @Inject
   public GSpaceThemeSelectorPresenter(final Session session, final I18nTranslationService i18n,
-      final EventBus eventBus, final GSpaceThemeManager manager, final GSpaceThemeSelectorPanel view) {
+      final CoreResources res, final EventBus eventBus, final GSpaceThemeManager manager,
+      final GSpaceThemeSelectorPanel view) {
     this.session = session;
     this.i18n = i18n;
+    this.res = res;
     this.eventBus = eventBus;
     this.manager = manager;
     this.view = view;
@@ -82,8 +87,9 @@ public class GSpaceThemeSelectorPresenter {
     eventBus.addHandler(GSpaceThemeChangeEvent.getType(), new GSpaceThemeChangeHandler() {
       @Override
       public void onGsThemeChange(final GSpaceThemeChangeEvent event) {
-        final String themeName = event.getNewTheme().getName();
-        select(themeName);
+        final GSpaceTheme newTheme = event.getNewTheme();
+        final GSpaceTheme oldTheme = event.getOldTheme();
+        select(oldTheme, newTheme);
       }
     });
     this.view = view;
@@ -107,7 +113,8 @@ public class GSpaceThemeSelectorPresenter {
 
   private void createMenu() {
     menu = new MenuDescriptor("");
-    menu.putValue(Action.SMALL_ICON, "images/colors.gif");
+    menu.putValue(Action.STYLES, "k-button");
+    menu.putValue(Action.SMALL_ICON, res.themeChoose());
   }
 
   private void createTheme(final GSpaceTheme theme) {
@@ -117,9 +124,17 @@ public class GSpaceThemeSelectorPresenter {
     view.add(item);
   }
 
-  public void select(final String themeName) {
-    itemMap.get(themeName).setChecked(true);
-    menu.setText(i18n.t(themeName));
+  public void select(final GSpaceTheme oldTheme, final GSpaceTheme newTheme) {
+    final String oldThemeName = oldTheme.getName();
+    final String newThemeName = newTheme.getName();
+    itemMap.get(newThemeName).setChecked(true);
+    itemMap.get(newThemeName).putValue(Action.SMALL_ICON, "#FFF");
+    itemMap.get(newThemeName).putValue(Action.SMALL_ICON, newTheme.getBackColors()[0]);
+    if (oldThemeName != null) {
+      itemMap.get(oldThemeName).putValue(Action.SMALL_ICON, "#FFF");
+      itemMap.get(oldThemeName).putValue(Action.SMALL_ICON, oldTheme.getBackColors()[0]);
+    }
+    menu.setText(i18n.t(newThemeName));
   }
 
   private void setThemes(final InitDataDTO initData) {

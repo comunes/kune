@@ -80,6 +80,7 @@ public class NewRoomBtn extends ButtonDescriptor {
                     NotifyUser.info(i18n.t("Chatroom created"));
                   }
                 });
+            diag.hide();
           }
         }
       });
