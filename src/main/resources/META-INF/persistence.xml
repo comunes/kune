@@ -8,7 +8,8 @@
     transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <!-- JPA entities must be registered here -->
-    <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g' | sed 's/^/<class>cc.kune.domain./g' -->
+    <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g'
+      | sed 's/^/<class>cc.kune.domain./g' -->
     <class>cc.kune.domain.AccessLists</class>
     <class>cc.kune.domain.BasicMimeType</class>
     <class>cc.kune.domain.Container</class>
