@@ -146,7 +146,13 @@ public class KuneRackModule implements RackModule {
 
   private void installGuiceModules(final RackBuilder builder) {
     // https://code.google.com/p/google-guice/wiki/ServletModule
-    builder.use(new ServletModule());
+    builder.use(new ServletModule() {
+      @Override
+      protected void configureServlets() {
+        filter("/*").through(CustomPersistFilter.class);
+        super.configureServlets();
+      }
+    });
     builder.use(new PlatformServerModule());
     builder.use(new DocumentServerModule());
     builder.use(new BlogServerModule());

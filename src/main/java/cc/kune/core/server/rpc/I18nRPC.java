@@ -24,7 +24,6 @@ import java.util.HashMap;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.I18nService;
@@ -39,95 +38,94 @@ import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
 
-@Singleton
 public class I18nRPC implements RPC, I18nService {
-    private final I18nTranslationManager i18nTranslationManager;
-    private final I18nLanguageManager languageManager;
-    private final Mapper mapper;
-    private final Provider<HttpServletRequest> requestProvider;
-    private final Provider<UserSession> userSessionProvider;
+  private final I18nTranslationManager i18nTranslationManager;
+  private final I18nLanguageManager languageManager;
+  private final Mapper mapper;
+  private final Provider<HttpServletRequest> requestProvider;
+  private final Provider<UserSession> userSessionProvider;
 
-    @Inject
-    public I18nRPC(final Provider<HttpServletRequest> requestProvider, final Provider<UserSession> userSessionProvider,
-            final I18nTranslationManager i18nTranslationManager, final I18nLanguageManager languageManager,
-            final Mapper mapper) {
-        this.requestProvider = requestProvider;
-        this.userSessionProvider = userSessionProvider;
-        this.i18nTranslationManager = i18nTranslationManager;
-        this.languageManager = languageManager;
-        this.mapper = mapper;
-    }
+  @Inject
+  public I18nRPC(final Provider<HttpServletRequest> requestProvider,
+      final Provider<UserSession> userSessionProvider,
+      final I18nTranslationManager i18nTranslationManager, final I18nLanguageManager languageManager,
+      final Mapper mapper) {
+    this.requestProvider = requestProvider;
+    this.userSessionProvider = userSessionProvider;
+    this.i18nTranslationManager = i18nTranslationManager;
+    this.languageManager = languageManager;
+    this.mapper = mapper;
+  }
 
-    @Override
-    @Transactional
-    public I18nLanguageDTO getInitialLanguage(final String localeParam) {
-        String initLanguage;
-        I18nLanguage lang;
-        final UserSession userSession = getUserSession();
-        if (localeParam != null) {
-            initLanguage = localeParam;
+  @Override
+  @Transactional
+  public I18nLanguageDTO getInitialLanguage(final String localeParam) {
+    String initLanguage;
+    I18nLanguage lang;
+    final UserSession userSession = getUserSession();
+    if (localeParam != null) {
+      initLanguage = localeParam;
+    } else {
+      if (userSession.isUserLoggedIn()) {
+        initLanguage = userSession.getUser().getLanguage().getCode();
+      } else {
+        final String browserLang = requestProvider.get().getLocale().getLanguage();
+        if (browserLang != null) {
+          // Not logged, use browser language if possible
+          final String country = requestProvider.get().getLocale().getCountry();
+          if (browserLang.equals("pt") && country != null && country.equals("BR")) {
+            // FIXME: the only supported rfc 3066 lang supported
+            initLanguage = "pt-br";
+          } else {
+            initLanguage = browserLang;
+          }
         } else {
-            if (userSession.isUserLoggedIn()) {
-                initLanguage = userSession.getUser().getLanguage().getCode();
-            } else {
-                final String browserLang = requestProvider.get().getLocale().getLanguage();
-                if (browserLang != null) {
-                    // Not logged, use browser language if possible
-                    final String country = requestProvider.get().getLocale().getCountry();
-                    if (browserLang.equals("pt") && country != null && country.equals("BR")) {
-                        // FIXME: the only supported rfc 3066 lang supported
-                        initLanguage = "pt-br";
-                    } else {
-                        initLanguage = browserLang;
-                    }
-                } else {
-                    initLanguage = I18nTranslation.DEFAULT_LANG;
-                }
-            }
+          initLanguage = I18nTranslation.DEFAULT_LANG;
         }
-        try {
-            lang = languageManager.findByCode(initLanguage);
-        } catch (final NoResultException e) {
-            lang = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
-        }
-        return mapper.map(lang, I18nLanguageDTO.class);
+      }
     }
+    try {
+      lang = languageManager.findByCode(initLanguage);
+    } catch (final NoResultException e) {
+      lang = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
+    }
+    return mapper.map(lang, I18nLanguageDTO.class);
+  }
 
-    @Override
-    @Transactional
-    public HashMap<String, String> getLexicon(final String language) {
-        return i18nTranslationManager.getLexicon(language);
-    }
+  @Override
+  @Transactional
+  public HashMap<String, String> getLexicon(final String language) {
+    return i18nTranslationManager.getLexicon(language);
+  }
 
-    @Override
-    @Transactional
-    public String getTranslation(final String userHash, final String language, final String text) {
-        String translation = null;
-        try {
-            translation = getTranslationWrapper(language, text);
-        } catch (final SessionExpiredException e) {
-        }
-        return translation;
+  @Override
+  @Transactional
+  public String getTranslation(final String userHash, final String language, final String text) {
+    String translation = null;
+    try {
+      translation = getTranslationWrapper(language, text);
+    } catch (final SessionExpiredException e) {
     }
+    return translation;
+  }
 
-    @Authenticated(mandatory = false)
-    private String getTranslationWrapper(final String language, final String text) {
-        return i18nTranslationManager.getTranslation(language, text);
-    }
+  @Authenticated(mandatory = false)
+  private String getTranslationWrapper(final String language, final String text) {
+    return i18nTranslationManager.getTranslation(language, text);
+  }
 
-    private UserSession getUserSession() {
-        return userSessionProvider.get();
-    }
+  private UserSession getUserSession() {
+    return userSessionProvider.get();
+  }
 
-    @Override
-    @Authenticated
-    @Transactional
-    public String setTranslation(final String userHash, final String id, final String translation)
-            throws DefaultException {
-        return i18nTranslationManager.setTranslation(id, translation);
-    }
+  @Override
+  @Authenticated
+  @Transactional
+  public String setTranslation(final String userHash, final String id, final String translation)
+      throws DefaultException {
+    return i18nTranslationManager.setTranslation(id, translation);
+  }
 
 }

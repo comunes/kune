@@ -41,10 +41,8 @@ import cc.kune.core.shared.dto.InitDataDTO;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
 
-@Singleton
 public class SiteRPC implements RPC, SiteService {
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;

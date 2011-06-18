@@ -23,47 +23,50 @@ import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.server.manager.impl.SearchResult;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.domain.User;
 import cc.kune.domain.utils.UserBuddiesData;
 
 public interface UserManager {
-    /**
-     * CreateUser new method with language country and timezone params
-     * 
-     * @param shortName
-     * @param longName
-     * @param email
-     * @param passwd
-     * @param timezone
-     * @param country
-     * @param language
-     * @param timezone
-     * @return User
-     * @throws I18nNotFoundException
-     */
-    User createUser(String shortName, String longName, String email, String passwd, String language, String country,
-            String timezone) throws I18nNotFoundException;
+  /**
+   * CreateUser new method with language country and timezone params
+   * 
+   * @param shortName
+   * @param longName
+   * @param email
+   * @param passwd
+   * @param timezone
+   * @param country
+   * @param language
+   * @param timezone
+   * @return User
+   * @throws I18nNotFoundException
+   */
+  User createUser(String shortName, String longName, String email, String passwd, String language,
+      String country, String timezone) throws I18nNotFoundException;
 
-    void createWaveAccount(String shortName, PasswordDigest passwdDigest);
+  void createWaveAccount(String shortName, PasswordDigest passwdDigest);
 
-    /**
-     * IMPORTANT: if userId == null, it returns User.UNKNOWN_USER
-     * 
-     * @param userId
-     * @return
-     */
-    User find(Long userId);
+  /**
+   * IMPORTANT: if userId == null, it returns User.UNKNOWN_USER
+   * 
+   * @param userId
+   * @return
+   */
+  User find(Long userId);
 
-    User findByShortname(String shortName);
+  User findByShortname(String shortName);
 
-    UserBuddiesData getUserBuddies(String shortName);
+  UserBuddiesData getUserBuddies(String shortName);
 
-    User login(String nickOrEmail, String passwd);
+  User login(String nickOrEmail, String passwd);
 
-    void reIndex();
+  void reIndex();
 
-    SearchResult<User> search(String search);
+  SearchResult<User> search(String search);
 
-    SearchResult<User> search(String search, Integer firstResult, Integer maxResults);
+  SearchResult<User> search(String search, Integer firstResult, Integer maxResults);
+
+  void setSNetVisibility(User user, UserSNetVisibility visibility);
 
 }

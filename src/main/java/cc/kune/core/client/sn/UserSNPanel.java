@@ -44,6 +44,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("His/her network:"));
     mainTitle.setTitle(i18n.t("This user buddies and groups where participes"));
+    firstCategoryLabel.setText(i18n.t("Buddies"));
     setTooltip(firstCategoryLabel, i18n.t("This user buddies"));
     sndCategoryLabel.setText(i18n.t("Participates in"));
     setTooltip(sndCategoryLabel, i18n.t("Groups in which this user participates"));
@@ -72,7 +73,9 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   @Override
   public void addTextToBuddieList(final String text) {
-    firstCategoryFlow.add(new Label(text));
+    final Label label = new Label(text);
+    label.addStyleName("k-sn-collabsCountlabel");
+    firstCategoryFlow.add(label);
   }
 
   @Override

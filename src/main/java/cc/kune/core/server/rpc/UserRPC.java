@@ -54,11 +54,9 @@ import cc.kune.wave.server.CustomWaveClientServlet;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.google.inject.persist.Transactional;
 
-@Singleton
 public class UserRPC implements RPC, UserService {
 
   private final ContentManager contentManager;
@@ -200,6 +198,6 @@ public class UserRPC implements RPC, UserService {
     if (!groupToken.getGroup().equals(user.getShortName())) {
       throw new AccessViolationException();
     }
-    user.setSNetVisibility(visibility);
+    userManager.setSNetVisibility(user, visibility);
   }
 }

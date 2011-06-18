@@ -49,6 +49,7 @@ import cc.kune.core.server.properties.DatabaseProperties;
 import cc.kune.core.server.xmpp.ChatConnection;
 import cc.kune.core.server.xmpp.ChatException;
 import cc.kune.core.server.xmpp.XmppManager;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
@@ -281,6 +282,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       throw new ServerManagerException("Error parsing search", e);
     }
     return super.search(query, firstResult, maxResults);
+  }
+
+  @Override
+  public void setSNetVisibility(final User user, final UserSNetVisibility visibility) {
+    user.setSNetVisibility(visibility);
+    persist(user);
   }
 
 }

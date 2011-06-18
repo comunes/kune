@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.rpc;
 
+import com.google.inject.Singleton;
+
 /**
  * marker interface (should not contain any method!)
  * 
@@ -32,6 +34,7 @@ package cc.kune.core.server.rpc;
  * </ul>
  * 
  */
+@Singleton
 public interface RPC {
 
 }

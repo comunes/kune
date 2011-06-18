@@ -32,7 +32,6 @@ import cc.kune.core.server.UserSession;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.persist.UnitOfWork;
 
 public class AuthenticatedMethodInterceptor implements MethodInterceptor {
 
@@ -45,17 +44,16 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
   Provider<SessionService> sessionServiceProvider;
 
   // https://code.google.com/p/google-guice/wiki/Transactions
-  @Inject
-  private UnitOfWork unitOfWork;
-
+  // @Inject
+  // private UnitOfWork unitOfWork;
   @Inject
   Provider<UserSession> userSessionProvider;
 
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
     // https://code.google.com/p/google-guice/wiki/Transactions
-    unitOfWork.end();
-    unitOfWork.begin();
+    // unitOfWork.end();
+    // unitOfWork.begin();
     try {
       final Object[] arguments = invocation.getArguments();
       // Some browsers getCookie returns "null" as String instead of null
@@ -95,7 +93,7 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
       final Object result = invocation.proceed();
       return result;
     } finally {
-      unitOfWork.end();
+      // unitOfWork.end();
     }
   }
 

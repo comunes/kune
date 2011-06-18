@@ -43,10 +43,8 @@ import cc.kune.wave.server.KuneWaveManagerDefault;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
 
-@Singleton
 public class GroupRPC implements RPC, GroupService {
   private final ContentManager contentManager;
   private final GroupManager groupManager;
