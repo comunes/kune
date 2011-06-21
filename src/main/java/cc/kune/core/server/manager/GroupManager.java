@@ -32,46 +32,46 @@ import cc.kune.domain.User;
 
 public interface GroupManager extends Manager<Group, Long> {
 
-    void changeDefLicense(User user, Group group, String licenseShortName);
+  void changeDefLicense(User user, Group group, String licenseShortName);
 
-    void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
+  void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
 
-    void clearGroupBackImage(Group group);
+  void clearGroupBackImage(Group group);
 
-    Group createGroup(Group group, User user, String publicDescrip) throws GroupNameInUseException,
-            UserMustBeLoggedException;
+  Group createGroup(Group group, User user, String publicDescrip) throws GroupNameInUseException,
+      UserMustBeLoggedException;
 
-    Group createUserGroup(User user) throws GroupNameInUseException, EmailAddressInUseException;
+  Group createUserGroup(User user) throws GroupNameInUseException, EmailAddressInUseException;
 
-    Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupNameInUseException,
-            EmailAddressInUseException;
+  Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupNameInUseException,
+      EmailAddressInUseException;
 
-    List<Group> findAdminInGroups(Long groupId);
+  List<Group> findAdminInGroups(Long groupId);
 
-    Group findByShortName(String groupName);
+  Group findByShortName(String groupName);
 
-    List<Group> findCollabInGroups(Long groupId);
+  List<Group> findCollabInGroups(Long groupId);
 
-    List<String> findEnabledTools(Long id);
+  List<String> findEnabledTools(Long id);
 
-    /**
-     * IMPORTANT: returns null if userId is null
-     * 
-     * @param userId
-     * @return
-     */
-    Group getGroupOfUserWithId(Long userId);
+  /**
+   * IMPORTANT: returns null if userId is null
+   * 
+   * @param userId
+   * @return
+   */
+  Group getGroupOfUserWithId(Long userId);
 
-    Group getSiteDefaultGroup();
+  Group getSiteDefaultGroup();
 
-    SearchResult<Group> search(String search);
+  SearchResult<Group> search(String search);
 
-    SearchResult<Group> search(String search, Integer firstResult, Integer maxResults);
+  SearchResult<Group> search(String search, Integer firstResult, Integer maxResults);
 
-    void setDefaultContent(String groupShortName, Content content);
+  void setDefaultContent(String groupShortName, Content content);
 
-    void setGroupBackImage(Group group, Content content);
+  void setGroupBackgroundImage(Group group, String backgroundFileName, String mime);
 
-    void setToolEnabled(User userLogged, String groupShortName, String toolName, boolean enabled);
+  void setToolEnabled(User userLogged, String groupShortName, String toolName, boolean enabled);
 
 }

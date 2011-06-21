@@ -33,6 +33,7 @@ import com.google.inject.Inject;
 
 public class FileDownloadUtils {
 
+  private static final String BACKDOWNLOADSERVLET = "servlets/EntityBackgroundDownloadManager";
   private static final String DOWNLOADSERVLET = "servlets/FileDownloadManager";
   protected static final String GROUP_NO_AVATAR_IMAGE = "images/group-def-icon.png";
   private static final String LOGODOWNLOADSERVLET = "servlets/EntityLogoDownloadManager";
@@ -65,6 +66,16 @@ public class FileDownloadUtils {
   public void downloadFile(final StateToken token) {
     final String url = calculateUrl(token, true, true);
     DOM.setElementAttribute(RootPanel.get("__download").getElement(), "src", url);
+  }
+
+  public String getBackgroundImageUrl(final StateToken token) {
+    return new Url(GWT.getModuleBaseURL() + BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+        token.toString())).toString();
+  }
+
+  public String getBackgroundResizedUrl(final StateToken token, final ImageSize imageSize) {
+    return new Url(GWT.getModuleBaseURL() + BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+        token.toString()), new UrlParam(FileConstants.IMGSIZE, imageSize.toString())).toString();
   }
 
   public String getGroupLogo(final GroupDTO group) {

@@ -23,8 +23,9 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 public interface GSpaceBackManager {
 
-    void clearBackImage();
+  void clearBackImage();
 
-    void setBackImage(StateToken token);
+  void restoreBackImage();
 
+  void setBackImage(StateToken token);
 }

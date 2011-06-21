@@ -26,7 +26,7 @@ import gwtupload.client.IUploader.OnStartUploaderHandler;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.ws.entheader.EntityHeader;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptions;
 
 import com.google.gwt.event.shared.EventBus;
@@ -34,21 +34,21 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Provider;
 
 public abstract class EntityOptionsLogoPresenter implements GroupOptionsLogo, UserOptionsLogo {
-  private final EntityHeader entityLogo;
   private final EntityOptions entityOptions;
   protected final EventBus eventBus;
+  private final I18nTranslationService i18n;
   protected final Session session;
   protected final Provider<UserServiceAsync> userService;
   protected EntityOptionsLogoView view;
 
   public EntityOptionsLogoPresenter(final EventBus eventBus, final Session session,
-      final EntityHeader entityLogo, final EntityOptions entityOptions,
-      final Provider<UserServiceAsync> userService) {
+      final EntityOptions entityOptions, final Provider<UserServiceAsync> userService,
+      final I18nTranslationService i18n) {
     this.eventBus = eventBus;
     this.session = session;
-    this.entityLogo = entityLogo;
     this.entityOptions = entityOptions;
     this.userService = userService;
+    this.i18n = i18n;
   }
 
   public IsWidget getView() {
@@ -66,7 +66,6 @@ public abstract class EntityOptionsLogoPresenter implements GroupOptionsLogo, Us
       }
     });
     view.addOnFinishUploadHandler(new OnFinishUploaderHandler() {
-
       @Override
       public void onFinish(final IUploader uploader) {
         onSubmitComplete(uploader);
@@ -87,7 +86,7 @@ public abstract class EntityOptionsLogoPresenter implements GroupOptionsLogo, Us
   }
 
   public void onSubmitFailed(final String responseText) {
-    NotifyUser.error("Error setting the logo: " + responseText);
+    NotifyUser.error(i18n.t("Error setting the logo", responseText));
   }
 
   protected abstract void setState();

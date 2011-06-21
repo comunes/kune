@@ -55,258 +55,268 @@ import cc.kune.domain.utils.HasId;
 @Table(name = "groups")
 public class Group implements HasId {
 
-    // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
-    // Never expect or return null
-    public static final Group NO_GROUP = null;
-    // public static final String PROPS_ID = "groupprops";
+  // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
+  // Never expect or return null
+  public static final Group NO_GROUP = null;
+  // public static final String PROPS_ID = "groupprops";
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    AdmissionType admissionType;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  AdmissionType admissionType;
 
-    @Basic(optional = false)
-    private final Long createdOn;
+  private String backgroundImage;
 
-    @OneToOne
-    private Content defaultContent;
+  private String backgroundMime;
 
-    @OneToOne
-    private License defaultLicense;
+  @Basic(optional = false)
+  private final Long createdOn;
 
-    @OneToOne
-    private Content groupBackImage;
+  @OneToOne
+  private Content defaultContent;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    GroupType groupType;
+  @OneToOne
+  private License defaultLicense;
 
-    @Id
-    @DocumentId
-    @GeneratedValue
-    private Long id;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  GroupType groupType;
 
-    @Lob
-    private byte[] logo;
+  @Id
+  @DocumentId
+  @GeneratedValue
+  private Long id;
 
-    @Embedded
-    private BasicMimeType logoMime;
+  @Lob
+  private byte[] logo;
 
-    @Field(index = Index.TOKENIZED, store = Store.NO)
-    @Column(unique = true)
-    @Length(min = 3, max = 50, message = "The longName must be between 3 and 50 characters of length")
-    private String longName;
+  @Embedded
+  private BasicMimeType logoMime;
 
-    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
-    @Column(unique = true)
-    @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
-    @Pattern(regex = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
-    private String shortName;
+  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Column(unique = true)
+  @Length(min = 3, max = 50, message = "The longName must be between 3 and 50 characters of length")
+  private String longName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private SocialNetwork socialNetwork;
+  @Field(index = Index.UN_TOKENIZED, store = Store.NO)
+  @Column(unique = true)
+  @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
+  @Pattern(regex = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+  private String shortName;
 
-    @OneToMany
-    private final Map<String, ToolConfiguration> toolsConfig;
+  @OneToOne(cascade = CascadeType.ALL)
+  private SocialNetwork socialNetwork;
 
-    private String workspaceTheme;
+  @OneToMany
+  private final Map<String, ToolConfiguration> toolsConfig;
 
-    public Group() {
-        this(null, null, null, null);
+  private String workspaceTheme;
+
+  public Group() {
+    this(null, null, null, null);
+  }
+
+  public Group(final String shortName, final String longName) {
+    this(shortName, longName, null, GroupType.PROJECT);
+  }
+
+  public Group(final String shortName, final String longName, final License defaultLicense,
+      final GroupType type) {
+    this.shortName = shortName;
+    this.longName = longName;
+    this.toolsConfig = new HashMap<String, ToolConfiguration>();
+    this.socialNetwork = new SocialNetwork();
+    this.defaultLicense = defaultLicense;
+    this.groupType = type;
+    this.admissionType = AdmissionType.Moderated;
+    this.createdOn = System.currentTimeMillis();
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
     }
-
-    public Group(final String shortName, final String longName) {
-        this(shortName, longName, null, GroupType.PROJECT);
+    if (obj == null) {
+      return false;
     }
-
-    public Group(final String shortName, final String longName, final License defaultLicense, final GroupType type) {
-        this.shortName = shortName;
-        this.longName = longName;
-        this.toolsConfig = new HashMap<String, ToolConfiguration>();
-        this.socialNetwork = new SocialNetwork();
-        this.defaultLicense = defaultLicense;
-        this.groupType = type;
-        this.admissionType = AdmissionType.Moderated;
-        this.createdOn = System.currentTimeMillis();
+    if (getClass() != obj.getClass()) {
+      return false;
     }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Group other = (Group) obj;
-        if (shortName == null) {
-            if (other.shortName != null) {
-                return false;
-            }
-        } else if (!shortName.equals(other.shortName)) {
-            return false;
-        }
-        return true;
+    final Group other = (Group) obj;
+    if (shortName == null) {
+      if (other.shortName != null) {
+        return false;
+      }
+    } else if (!shortName.equals(other.shortName)) {
+      return false;
     }
+    return true;
+  }
 
-    public boolean existToolConfig(final String toolName) {
-        return toolsConfig.get(toolName) != null;
-    }
+  public boolean existToolConfig(final String toolName) {
+    return toolsConfig.get(toolName) != null;
+  }
 
-    @Transient
-    public AccessLists getAccessLists() {
-        return getSocialNetwork().getAccessLists();
-    }
+  @Transient
+  public AccessLists getAccessLists() {
+    return getSocialNetwork().getAccessLists();
+  }
 
-    public AdmissionType getAdmissionType() {
-        return admissionType;
-    }
+  public AdmissionType getAdmissionType() {
+    return admissionType;
+  }
 
-    public Long getCreatedOn() {
-        return createdOn;
-    }
+  public String getBackgroundImage() {
+    return backgroundImage;
+  }
 
-    public Content getDefaultContent() {
-        return defaultContent;
-    }
+  public String getBackgroundMime() {
+    return backgroundMime;
+  }
 
-    public License getDefaultLicense() {
-        return defaultLicense;
-    }
+  public Long getCreatedOn() {
+    return createdOn;
+  }
 
-    public Content getGroupBackImage() {
-        return groupBackImage;
-    }
+  public Content getDefaultContent() {
+    return defaultContent;
+  }
 
-    public GroupType getGroupType() {
-        return groupType;
-    }
+  public License getDefaultLicense() {
+    return defaultLicense;
+  }
 
-    public boolean getHasLogo() {
-        return hasLogo();
-    }
+  public GroupType getGroupType() {
+    return groupType;
+  }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+  public boolean getHasLogo() {
+    return hasLogo();
+  }
 
-    public byte[] getLogo() {
-        return logo;
-    }
+  @Override
+  public Long getId() {
+    return id;
+  }
 
-    public BasicMimeType getLogoMime() {
-        return logoMime;
-    }
+  public byte[] getLogo() {
+    return logo;
+  }
 
-    public String getLongName() {
-        return longName;
-    }
+  public BasicMimeType getLogoMime() {
+    return logoMime;
+  }
 
-    public Container getRoot(final String toolName) {
-        return toolsConfig.get(toolName).getRoot();
-    }
+  public String getLongName() {
+    return longName;
+  }
 
-    public String getShortName() {
-        return shortName;
-    }
+  public Container getRoot(final String toolName) {
+    return toolsConfig.get(toolName).getRoot();
+  }
 
-    public SocialNetwork getSocialNetwork() {
-        return socialNetwork;
-    }
+  public String getShortName() {
+    return shortName;
+  }
 
-    @Transient
-    public StateToken getStateToken() {
-        return new StateToken(shortName);
-    }
+  public SocialNetwork getSocialNetwork() {
+    return socialNetwork;
+  }
 
-    public ToolConfiguration getToolConfiguration(final String name) {
-        return toolsConfig.get(name);
-    }
+  @Transient
+  public StateToken getStateToken() {
+    return new StateToken(shortName);
+  }
 
-    public Map<String, ToolConfiguration> getToolsConfig() {
-        return toolsConfig;
-    }
+  public ToolConfiguration getToolConfiguration(final String name) {
+    return toolsConfig.get(name);
+  }
 
-    public String getWorkspaceTheme() {
-        return workspaceTheme;
-    }
+  public Map<String, ToolConfiguration> getToolsConfig() {
+    return toolsConfig;
+  }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (shortName == null ? 0 : shortName.hashCode());
-        return result;
-    }
+  public String getWorkspaceTheme() {
+    return workspaceTheme;
+  }
 
-    @Transient
-    public boolean hasLogo() {
-        return (logo != null && logo.length > 0 && logoMime != null);
-    }
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (shortName == null ? 0 : shortName.hashCode());
+    return result;
+  }
 
-    public boolean isPersonal() {
-        return getGroupType().equals(GroupType.PERSONAL);
-    }
+  @Transient
+  public boolean hasLogo() {
+    return (logo != null && logo.length > 0 && logoMime != null);
+  }
 
-    public void setAdmissionType(final AdmissionType admissionType) {
-        this.admissionType = admissionType;
-    }
+  public boolean isPersonal() {
+    return getGroupType().equals(GroupType.PERSONAL);
+  }
 
-    public void setDefaultContent(final Content defaultContent) {
-        this.defaultContent = defaultContent;
-    }
+  public void setAdmissionType(final AdmissionType admissionType) {
+    this.admissionType = admissionType;
+  }
 
-    public void setDefaultLicense(final License defaultLicense) {
-        this.defaultLicense = defaultLicense;
-    }
+  public void setBackgroundImage(final String backgroundImage) {
+    this.backgroundImage = backgroundImage;
+  }
 
-    public void setGroupBackImage(final Content groupBackImage) {
-        this.groupBackImage = groupBackImage;
-    }
+  public void setBackgroundMime(final String backgroundMime) {
+    this.backgroundMime = backgroundMime;
+  }
 
-    public void setGroupType(final GroupType groupType) {
-        this.groupType = groupType;
-    }
+  public void setDefaultContent(final Content defaultContent) {
+    this.defaultContent = defaultContent;
+  }
 
-    @Override
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setDefaultLicense(final License defaultLicense) {
+    this.defaultLicense = defaultLicense;
+  }
 
-    public void setLogo(final byte[] logo) {
-        this.logo = logo;
-    }
+  public void setGroupType(final GroupType groupType) {
+    this.groupType = groupType;
+  }
 
-    public void setLogoMime(final BasicMimeType logoMime) {
-        this.logoMime = logoMime;
-    }
+  @Override
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setLongName(final String longName) {
-        this.longName = longName;
-    }
+  public void setLogo(final byte[] logo) {
+    this.logo = logo;
+  }
 
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
+  public void setLogoMime(final BasicMimeType logoMime) {
+    this.logoMime = logoMime;
+  }
 
-    public void setSocialNetwork(final SocialNetwork socialNetwork) {
-        this.socialNetwork = socialNetwork;
-    }
+  public void setLongName(final String longName) {
+    this.longName = longName;
+  }
 
-    public ToolConfiguration setToolConfig(final String name, final ToolConfiguration config) {
-        toolsConfig.put(name, config);
-        return config;
-    }
+  public void setShortName(final String shortName) {
+    this.shortName = shortName;
+  }
 
-    public void setWorkspaceTheme(final String workspaceTheme) {
-        this.workspaceTheme = workspaceTheme;
-    }
+  public void setSocialNetwork(final SocialNetwork socialNetwork) {
+    this.socialNetwork = socialNetwork;
+  }
 
-    @Override
-    public String toString() {
-        return "Group[" + shortName + "]";
-    }
+  public ToolConfiguration setToolConfig(final String name, final ToolConfiguration config) {
+    toolsConfig.put(name, config);
+    return config;
+  }
+
+  public void setWorkspaceTheme(final String workspaceTheme) {
+    this.workspaceTheme = workspaceTheme;
+  }
+
+  @Override
+  public String toString() {
+    return "Group[" + shortName + "]";
+  }
 }

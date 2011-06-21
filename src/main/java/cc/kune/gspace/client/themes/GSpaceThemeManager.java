@@ -27,13 +27,13 @@ import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.state.GroupChangedEvent;
+import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateChangedEvent;
-import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GSpaceTheme;
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.resources.GSpaceArmorResources;
@@ -69,10 +69,10 @@ public class GSpaceThemeManager {
       public void onAppStart(final AppStartEvent event) {
         final InitDataDTO initdata = session.getInitData();
         themes = initdata.getgSpaceThemes();
-        stateManager.onStateChanged(true, new StateChangedHandler() {
+        stateManager.onGroupChanged(true, new GroupChangedHandler() {
           @Override
-          public void onStateChanged(final StateChangedEvent event) {
-            setState(event.getState());
+          public void onGroupChanged(final GroupChangedEvent event) {
+            setState(session.getCurrentState());
           }
         });
       }
@@ -117,11 +117,12 @@ public class GSpaceThemeManager {
 
   private void setState(final StateAbstractDTO state) {
     setTheme(themes.get(state.getGroup().getWorkspaceTheme()));
-    final ContentSimpleDTO groupBackImage = state.getGroup().getGroupBackImage();
+    final GroupDTO group = state.getGroup();
+    final String groupBackImage = group.getBackgroundImage();
     if (groupBackImage == null) {
       wsBackManager.clearBackImage();
     } else {
-      wsBackManager.setBackImage(groupBackImage.getStateToken());
+      wsBackManager.setBackImage(state.getGroup().getStateToken());
     }
   }
 

@@ -1,5 +1,6 @@
-CHARSET          "UTF-8         "; body {
-  background-color: white;
+CHARSET          "UTF-8         ";
+body {
+  background-color: transparent;
   color: black;
   font-family: 'Ubuntu', Arial;
   font-size: small;

@@ -26,49 +26,49 @@ import com.google.gwt.event.shared.HasHandlers;
 
 public class CurrentLogoChangedEvent extends GwtEvent<CurrentLogoChangedEvent.CurrentLogoChangedHandler> {
 
-    public interface CurrentLogoChangedHandler extends EventHandler {
-        public void onCurrentLogoChanged(CurrentLogoChangedEvent event);
-    }
+  public interface CurrentLogoChangedHandler extends EventHandler {
+    public void onCurrentLogoChanged(CurrentLogoChangedEvent event);
+  }
 
-    public interface HasCurrentLogoChangedHandlers extends HasHandlers {
-        HandlerRegistration addCurrentLogoChangedHandler(CurrentLogoChangedHandler handler);
-    }
+  public interface HasCurrentLogoChangedHandlers extends HasHandlers {
+    HandlerRegistration addCurrentLogoChangedHandler(CurrentLogoChangedHandler handler);
+  }
 
-    private static final Type<CurrentLogoChangedHandler> TYPE = new Type<CurrentLogoChangedHandler>();
+  private static final Type<CurrentLogoChangedHandler> TYPE = new Type<CurrentLogoChangedHandler>();
 
-    public static void fire(final HasHandlers source) {
-        source.fireEvent(new CurrentLogoChangedEvent());
-    }
+  public static void fire(final HasHandlers source) {
+    source.fireEvent(new CurrentLogoChangedEvent());
+  }
 
-    public static Type<CurrentLogoChangedHandler> getType() {
-        return TYPE;
-    }
+  public static Type<CurrentLogoChangedHandler> getType() {
+    return TYPE;
+  }
 
-    public CurrentLogoChangedEvent() {
-    }
+  public CurrentLogoChangedEvent() {
+  }
 
-    @Override
-    protected void dispatch(final CurrentLogoChangedHandler handler) {
-        handler.onCurrentLogoChanged(this);
-    }
+  @Override
+  protected void dispatch(final CurrentLogoChangedHandler handler) {
+    handler.onCurrentLogoChanged(this);
+  }
 
-    @Override
-    public boolean equals(final Object obj) {
-        return super.equals(obj);
-    }
+  @Override
+  public boolean equals(final Object obj) {
+    return super.equals(obj);
+  }
 
-    @Override
-    public Type<CurrentLogoChangedHandler> getAssociatedType() {
-        return TYPE;
-    }
+  @Override
+  public Type<CurrentLogoChangedHandler> getAssociatedType() {
+    return TYPE;
+  }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
 
-    @Override
-    public String toString() {
-        return "CurrentLogoChangedEvent[" + "]";
-    }
+  @Override
+  public String toString() {
+    return "CurrentLogoChangedEvent[" + "]";
+  }
 }

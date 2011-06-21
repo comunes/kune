@@ -24,7 +24,7 @@ import cc.kune.core.client.state.GroupChangedEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.ws.entheader.EntityHeader;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.gwt.event.shared.EventBus;
@@ -35,9 +35,10 @@ public class GroupOptionsLogoPresenter extends EntityOptionsLogoPresenter {
 
   @Inject
   public GroupOptionsLogoPresenter(final EventBus eventBus, final Session session,
-      final EntityHeader entityLogo, final GroupOptions entityOptions, final StateManager stateManager,
-      final Provider<UserServiceAsync> userService, final GroupOptionsLogoView view) {
-    super(eventBus, session, entityLogo, entityOptions, userService);
+      final GroupOptions entityOptions, final StateManager stateManager,
+      final Provider<UserServiceAsync> userService, final GroupOptionsLogoView view,
+      final I18nTranslationService i18n) {
+    super(eventBus, session, entityOptions, userService, i18n);
     init(view);
     stateManager.onGroupChanged(true, new GroupChangedHandler() {
       @Override

@@ -20,10 +20,10 @@
 package cc.kune.gspace.client.options.style;
 
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateChangedEvent;
-import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.style.GSpaceBackManager;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;
@@ -39,17 +39,11 @@ public class GroupOptionsStyleConfPresenter extends EntityOptionsStyleConfPresen
   public GroupOptionsStyleConfPresenter(final EventBus eventBus, final Session session,
       final StateManager stateManager, final GroupOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackManager backManager,
-      final GroupOptionsStyleConfView view, final GSpaceThemeSelectorPresenter styleSelector) {
-    super(eventBus, session, stateManager, entityOptions, groupService, backManager, styleSelector);
+      final GroupOptionsStyleConfView view, final GSpaceThemeSelectorPresenter styleSelector,
+      final I18nTranslationService i18n, final FileDownloadUtils fileDownUtils) {
+    super(eventBus, session, stateManager, entityOptions, groupService, backManager, styleSelector,
+        i18n, fileDownUtils);
     init(view);
-    stateManager.onStateChanged(true, new StateChangedHandler() {
-
-      @Override
-      public void onStateChanged(final StateChangedEvent event) {
-        // final String theme = state.getGroup().getWorkspaceTheme();
-        // themeSelector.select(theme);
-      }
-    });
   }
 
 }

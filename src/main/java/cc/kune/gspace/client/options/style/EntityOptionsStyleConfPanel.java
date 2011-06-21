@@ -19,22 +19,25 @@
  */
 package cc.kune.gspace.client.options.style;
 
+import gwtupload.client.IUploader.OnCancelUploaderHandler;
+import gwtupload.client.IUploader.OnChangeUploaderHandler;
+import gwtupload.client.IUploader.OnFinishUploaderHandler;
+import gwtupload.client.IUploader.OnStartUploaderHandler;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.services.FileDownloadUtils;
-import cc.kune.core.client.services.ImageSize;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
+import cc.kune.gspace.client.options.logo.EntityUploaderForm;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -44,42 +47,50 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class EntityOptionsStyleConfPanel extends FlowPanel implements EntityOptionsStyleConfView {
 
+  public static final String ICON_UPLD_SERVLET = "servlets/EntityBackgroundUploadManager";
   private final Image backImage;
   private final Button clearBtn;
   private final Label currentBackLabel;
-  private final FileDownloadUtils downUtils;
   private final Label noBackLabel;
   private final IconLabel tabTitle;
+  private final EntityUploaderForm uploader;
 
-  public EntityOptionsStyleConfPanel(final I18nTranslationService i18n,
-      final FileDownloadUtils downUtils, final CoreResources res,
+  public EntityOptionsStyleConfPanel(final I18nTranslationService i18n, final CoreResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
-    this.downUtils = downUtils;
+    ;
     tabTitle = new IconLabel(res.themeChoose(), i18n.t("Style"));
     super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     super.setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
 
-    final FlowPanel wsHP = new FlowPanel();
+    final FlowPanel flow = new FlowPanel();
     final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));
-    wsThemeInfo.addStyleName("kune-Margin-20-tb");
+    flow.addStyleName("kune-Margin-20-tb");
+    wsThemeInfo.addStyleName("k-fl");
     styleSelector.addStyleName("k-fl");
-    wsHP.add(wsThemeInfo);
-    wsHP.add(styleSelector);
-    add(wsHP);
-    final VerticalPanel backPanel = new VerticalPanel();
+    styleSelector.addStyleName("kune-Margin-10-trbl");
+    flow.add(wsThemeInfo);
+    flow.add(styleSelector);
     currentBackLabel = new Label(i18n.t("Current background image: "));
-    noBackLabel = new Label(i18n.t("Also you can upload any image and select it later as background."));
+    noBackLabel = new Label(i18n.t("Also you can upload a background:"));
+    currentBackLabel.addStyleName("k-clear");
+    noBackLabel.addStyleName("k-clear");
+    uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, i18n.t("Choose"));
+    uploader.addStyleName("k-fl");
     backImage = new Image();
     backImage.addStyleName("kune-Margin-Medium-trbl");
     noBackLabel.addStyleName("kune-Margin-Medium-tb");
     clearBtn = new Button(i18n.t("Clear"));
+    clearBtn.setStyleName("k-button");
+    clearBtn.addStyleName("k-fl");
     Tooltip.to(clearBtn, i18n.t("Remove current background image"));
-    // backPanel.add(noBackLabel);
-    backPanel.add(currentBackLabel);
-    backPanel.add(backImage);
-    backPanel.add(clearBtn);
-    backPanel.addStyleName("oc-clean");
-    // add(backPanel);
+    flow.add(noBackLabel);
+    flow.add(currentBackLabel);
+    flow.add(backImage);
+    flow.add(uploader);
+    flow.add(clearBtn);
+    flow.addStyleName("oc-clean");
+    backImage.addStyleName("k-fr");
+    add(flow);
     final Label wsInfo = new Label(i18n.t("Select and configure the public space theme of this group:"));
     wsInfo.addStyleName("kune-Margin-Medium-tb");
     // add(wsInfo);
@@ -106,6 +117,26 @@ public class EntityOptionsStyleConfPanel extends FlowPanel implements EntityOpti
   }
 
   @Override
+  public HandlerRegistration addOnCancelUploadHandler(final OnCancelUploaderHandler handler) {
+    return uploader.addOnCancelUploadHandler(handler);
+  }
+
+  @Override
+  public HandlerRegistration addOnChangeUploadHandler(final OnChangeUploaderHandler handler) {
+    return uploader.addOnChangeUploadHandler(handler);
+  }
+
+  @Override
+  public HandlerRegistration addOnFinishUploadHandler(final OnFinishUploaderHandler handler) {
+    return uploader.addOnFinishUploadHandler(handler);
+  }
+
+  @Override
+  public HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler) {
+    return uploader.addOnStartUploadHandler(handler);
+  }
+
+  @Override
   public void clearBackImage() {
     setBackImageVisibleImpl(false);
   }
@@ -121,8 +152,14 @@ public class EntityOptionsStyleConfPanel extends FlowPanel implements EntityOpti
   }
 
   @Override
-  public void setBackImage(final StateToken token) {
-    backImage.setUrl(downUtils.getImageResizedUrl(token, ImageSize.thumb));
+  public void reset() {
+    uploader.reset();
+  }
+
+  @Override
+  public void setBackImage(final String url) {
+    // backImage.setUrl(downUtils.getImageResizedUrl(token, ImageSize.thumb));
+    backImage.setUrl(url);
     setBackImageVisibleImpl(true);
   }
 
@@ -131,5 +168,10 @@ public class EntityOptionsStyleConfPanel extends FlowPanel implements EntityOpti
     currentBackLabel.setVisible(visible);
     clearBtn.setVisible(visible);
     noBackLabel.setVisible(!visible);
+  }
+
+  @Override
+  public void setUploadParams(final String userHash, final String token) {
+    uploader.setUploadParams(userHash, token);
   }
 }

@@ -22,7 +22,6 @@ package cc.kune.core.server.manager.file;
 import java.io.File;
 import java.io.IOException;
 
-
 import cc.kune.core.server.manager.FileManager;
 
 import com.google.inject.Singleton;
@@ -30,34 +29,43 @@ import com.google.inject.Singleton;
 @Singleton
 public class FileManagerDefault implements FileManager {
 
-    public File createFileWithSequentialName(final String dir, final String fileName) throws IOException {
-        String fileNameProposal = String.valueOf(fileName);
-        File file = new File(dir, fileNameProposal);
-        while (file.exists()) {
-            fileNameProposal = FileUtils.getNextSequentialFileName(fileNameProposal, true);
-            // @PMD:REVIEWED:AvoidInstantiatingObjectsInLoops: by vjrj on
-            // 21/05/09 13:15
-            file = new File(dir, fileNameProposal);
-        }
-        if (file.createNewFile()) {
-            return file;
-        } else {
-            throw new IOException("Cannot create sequential file name");
-        }
+  @Override
+  public File createFileWithSequentialName(final String dir, final String fileName) throws IOException {
+    String fileNameProposal = String.valueOf(fileName);
+    File file = new File(dir, fileNameProposal);
+    while (file.exists()) {
+      fileNameProposal = FileUtils.getNextSequentialFileName(fileNameProposal, true);
+      // @PMD:REVIEWED:AvoidInstantiatingObjectsInLoops: by vjrj on
+      // 21/05/09 13:15
+      file = new File(dir, fileNameProposal);
     }
+    if (file.createNewFile()) {
+      return file;
+    } else {
+      throw new IOException("Cannot create sequential file name");
+    }
+  }
 
-    public boolean mkdir(final String dir) {
-        return new File(dir).mkdirs();
-    }
+  @Override
+  public boolean mkdir(final String dir) {
+    return new File(dir).mkdirs();
+  }
 
-    public boolean rmdir(final String dir) throws IOException {
-        final File file = new File(dir);
-        if (!file.isDirectory()) {
-            throw new IOException("rmdir: " + dir + ": Not a directory");
-        }
-        if (file.listFiles().length != 0) {
-            throw new IOException("rmdir: " + dir + ": Directory not empty");
-        }
-        return file.delete();
+  @Override
+  public boolean rm(final String dir, final String fileName) {
+    final File file = new File(dir, fileName);
+    return file.delete();
+  }
+
+  @Override
+  public boolean rmdir(final String dir) throws IOException {
+    final File file = new File(dir);
+    if (!file.isDirectory()) {
+      throw new IOException("rmdir: " + dir + ": Not a directory");
     }
+    if (file.listFiles().length != 0) {
+      throw new IOException("rmdir: " + dir + ": Directory not empty");
+    }
+    return file.delete();
+  }
 }

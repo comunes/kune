@@ -19,15 +19,24 @@
  */
 package cc.kune.gspace.client.options.style;
 
+import gwtupload.client.IUploadStatus.Status;
+import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.OnFinishUploaderHandler;
+import gwtupload.client.IUploader.OnStartUploaderHandler;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptions;
 import cc.kune.gspace.client.style.ClearBackImageEvent;
 import cc.kune.gspace.client.style.GSpaceBackManager;
@@ -44,7 +53,9 @@ public abstract class EntityOptionsStyleConfPresenter implements EntityOptionsSt
   private final GSpaceBackManager backManager;
   private final EntityOptions entityOptions;
   private final EventBus eventBus;
+  private final FileDownloadUtils fileDownloadUtils;
   private final Provider<GroupServiceAsync> groupService;
+  private final I18nTranslationService i18n;
   private final Session session;
   private final StateManager stateManager;
   private EntityOptionsStyleConfView view;
@@ -52,22 +63,26 @@ public abstract class EntityOptionsStyleConfPresenter implements EntityOptionsSt
   protected EntityOptionsStyleConfPresenter(final EventBus eventBus, final Session session,
       final StateManager stateManager, final EntityOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackManager backManager,
-      final GSpaceThemeSelectorPresenter styleSelector) {
+      final GSpaceThemeSelectorPresenter styleSelector, final I18nTranslationService i18n,
+      final FileDownloadUtils fileDownloadUtils) {
     this.eventBus = eventBus;
     this.session = session;
     this.stateManager = stateManager;
     this.entityOptions = entityOptions;
     this.groupService = groupService;
     this.backManager = backManager;
+    this.i18n = i18n;
+    this.fileDownloadUtils = fileDownloadUtils;
   }
 
-  public void clearBackImage() {
+  private void clearBackImage() {
     groupService.get().clearGroupBackImage(session.getUserHash(), session.getCurrentStateToken(),
         new AsyncCallbackSimple<GroupDTO>() {
           @Override
           public void onSuccess(final GroupDTO result) {
             view.clearBackImage();
             backManager.clearBackImage();
+            ClearBackImageEvent.fire(eventBus);
           }
         });
   }
@@ -79,7 +94,7 @@ public abstract class EntityOptionsStyleConfPresenter implements EntityOptionsSt
   public void init(final EntityOptionsStyleConfView view) {
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
-    setBackImage(session.getCurrentState().getGroup().getGroupBackImage());
+    setState();
     view.getClearBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -89,15 +104,15 @@ public abstract class EntityOptionsStyleConfPresenter implements EntityOptionsSt
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {
-        final StateAbstractDTO state = event.getState();
-        final ContentSimpleDTO backImage = state.getGroup().getGroupBackImage();
-        setBackImage(backImage);
+        setState();
       }
     });
     eventBus.addHandler(SetBackImageEvent.getType(), new SetBackImageEvent.SetBackImageHandler() {
       @Override
       public void onSetBackImage(final SetBackImageEvent event) {
-        view.setBackImage(event.getToken());
+        final StateToken token = event.getToken();
+        backManager.setBackImage(token);
+        setBackImage(event.getToken());
       }
     });
     eventBus.addHandler(ClearBackImageEvent.getType(), new ClearBackImageEvent.ClearBackImageHandler() {
@@ -106,13 +121,49 @@ public abstract class EntityOptionsStyleConfPresenter implements EntityOptionsSt
         view.clearBackImage();
       }
     });
+    view.addOnStartUploadHandler(new OnStartUploaderHandler() {
+      @Override
+      public void onStart(final IUploader uploader) {
+        setState();
+      }
+    });
+    view.addOnFinishUploadHandler(new OnFinishUploaderHandler() {
+      @Override
+      public void onFinish(final IUploader uploader) {
+        onSubmitComplete(uploader);
+      }
+    });
   }
 
-  private void setBackImage(final ContentSimpleDTO backImage) {
-    if (backImage == null) {
-      view.clearBackImage();
+  private void onSubmitComplete(final IUploader uploader) {
+    final String response = uploader.getServerInfo().message;
+    if (uploader.getStatus() == Status.SUCCESS) {
+      if (!TextUtils.empty(response)) {
+        NotifyUser.info(response);
+      }
+      SetBackImageEvent.fire(eventBus, session.getCurrentState().getGroup().getStateToken());
     } else {
-      view.setBackImage(backImage.getStateToken());
+      onSubmitFailed(response);
     }
   }
+
+  private void onSubmitFailed(final String responseText) {
+    NotifyUser.error(i18n.t("Error setting the background"), responseText);
+  }
+
+  private void setBackImage(final StateToken token) {
+    view.setBackImage(fileDownloadUtils.getBackgroundResizedUrl(token, ImageSize.thumb));
+  }
+
+  private void setState() {
+    final StateAbstractDTO state = session.getCurrentState();
+    final GroupDTO group = state.getGroup();
+    if (group.getBackgroundImage() == null) {
+      view.clearBackImage();
+    } else {
+      setBackImage(group.getStateToken());
+    }
+    view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
+  }
+
 }

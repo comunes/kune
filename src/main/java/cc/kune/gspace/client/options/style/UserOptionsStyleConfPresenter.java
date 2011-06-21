@@ -20,11 +20,10 @@
 package cc.kune.gspace.client.options.style;
 
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.style.GSpaceBackManager;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;
@@ -42,30 +41,10 @@ public class UserOptionsStyleConfPresenter extends EntityOptionsStyleConfPresent
   public UserOptionsStyleConfPresenter(final EventBus eventBus, final Session session,
       final StateManager stateManager, final UserOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackManager backManager,
-      final UserOptionsStyleConfView view, final GSpaceThemeSelectorPresenter styleSelector) {
-    super(eventBus, session, stateManager, entityOptions, groupService, backManager, styleSelector);
-    // this.themeSelector = themeSelector;
-    // themeSelector.addThemeSelected(new Listener<WsTheme>() {
-    // public void onEvent(final WsTheme theme) {
-    // themeManager.changeTheme(session.getCurrentUser().getStateToken(),
-    // theme);
-    // }
-    // });
-    final UserInfoDTO userInfo = session.getCurrentUserInfo();
-    if (userInfo != null) {
-      setSelector(userInfo);
-    }
+      final UserOptionsStyleConfView view, final GSpaceThemeSelectorPresenter styleSelector,
+      final I18nTranslationService i18n, final FileDownloadUtils fileDownUtils) {
+    super(eventBus, session, stateManager, entityOptions, groupService, backManager, styleSelector,
+        i18n, fileDownUtils);
     init(view);
-    session.onUserSignIn(true, new UserSignInHandler() {
-      @Override
-      public void onUserSignIn(final UserSignInEvent event) {
-        // setSelector(userInfo);
-      }
-    });
   }
-
-  private void setSelector(final UserInfoDTO userInfo) {
-    // themeSelector.select(userInfo.getUserGroup().getWorkspaceTheme());
-  }
-
 }

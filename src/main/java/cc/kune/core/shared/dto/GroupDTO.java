@@ -26,163 +26,163 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupDTO implements IsSerializable {
 
-    AdmissionType admissionType;
-    private ContentSimpleDTO defaultContent;
-    private LicenseDTO defaultLicense;
-    private ContentSimpleDTO groupBackImage;
-    private GroupType groupType;
-    private boolean hasLogo;
-    private Long id;
-    private String longName;
-    private String shortName;
-    private StateToken stateToken;
-    private String workspaceTheme;
+  AdmissionType admissionType;
+  private String backgroundImage;
+  private ContentSimpleDTO defaultContent;
+  private LicenseDTO defaultLicense;
+  private GroupType groupType;
+  private boolean hasLogo;
+  private Long id;
+  private String longName;
+  private String shortName;
+  private StateToken stateToken;
+  private String workspaceTheme;
 
-    public GroupDTO() {
-        this(null, null, GroupType.ORGANIZATION);
-    }
+  public GroupDTO() {
+    this(null, null, GroupType.ORGANIZATION);
+  }
 
-    public GroupDTO(final String shortName, final String longName, final GroupType type) {
-        this.shortName = shortName;
-        this.longName = longName;
-        this.groupType = type;
-    }
+  public GroupDTO(final String shortName, final String longName, final GroupType type) {
+    this.shortName = shortName;
+    this.longName = longName;
+    this.groupType = type;
+  }
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GroupDTO other = (GroupDTO) obj;
-        if (shortName == null) {
-            if (other.shortName != null) {
-                return false;
-            }
-        } else if (!shortName.equals(other.shortName)) {
-            return false;
-        }
-        return true;
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
     }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final GroupDTO other = (GroupDTO) obj;
+    if (shortName == null) {
+      if (other.shortName != null) {
+        return false;
+      }
+    } else if (!shortName.equals(other.shortName)) {
+      return false;
+    }
+    return true;
+  }
 
-    public AdmissionType getAdmissionType() {
-        return admissionType;
-    }
+  public AdmissionType getAdmissionType() {
+    return admissionType;
+  }
 
-    public ContentSimpleDTO getDefaultContent() {
-        return defaultContent;
-    }
+  public String getBackgroundImage() {
+    return backgroundImage;
+  }
 
-    public LicenseDTO getDefaultLicense() {
-        return defaultLicense;
-    }
+  public ContentSimpleDTO getDefaultContent() {
+    return defaultContent;
+  }
 
-    public ContentSimpleDTO getGroupBackImage() {
-        return groupBackImage;
-    }
+  public LicenseDTO getDefaultLicense() {
+    return defaultLicense;
+  }
 
-    public GroupType getGroupType() {
-        return groupType;
-    }
+  public GroupType getGroupType() {
+    return groupType;
+  }
 
-    public boolean getHasLogo() {
-        return hasLogo;
-    }
+  public boolean getHasLogo() {
+    return hasLogo;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getLongName() {
-        return longName;
-    }
+  public String getLongName() {
+    return longName;
+  }
 
-    public String getShortName() {
-        return shortName;
-    }
+  public String getShortName() {
+    return shortName;
+  }
 
-    public StateToken getStateToken() {
-        if (stateToken == null) {
-            stateToken = new StateToken(shortName);
-        }
-        return stateToken;
+  public StateToken getStateToken() {
+    if (stateToken == null) {
+      stateToken = new StateToken(shortName);
     }
+    return stateToken;
+  }
 
-    public String getWorkspaceTheme() {
-        return workspaceTheme;
-    }
+  public String getWorkspaceTheme() {
+    return workspaceTheme;
+  }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (defaultLicense == null ? 0 : defaultLicense.hashCode());
-        result = prime * result + (id == null ? 0 : id.hashCode());
-        result = prime * result + (longName == null ? 0 : longName.hashCode());
-        result = prime * result + (shortName == null ? 0 : shortName.hashCode());
-        result = prime * result + (groupType == null ? 0 : groupType.hashCode());
-        return result;
-    }
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (defaultLicense == null ? 0 : defaultLicense.hashCode());
+    result = prime * result + (id == null ? 0 : id.hashCode());
+    result = prime * result + (longName == null ? 0 : longName.hashCode());
+    result = prime * result + (shortName == null ? 0 : shortName.hashCode());
+    result = prime * result + (groupType == null ? 0 : groupType.hashCode());
+    return result;
+  }
 
-    public boolean hasLogo() {
-        return getHasLogo();
-    }
+  public boolean hasLogo() {
+    return getHasLogo();
+  }
 
-    public boolean isNotPersonal() {
-        return !isPersonal();
-    }
+  public boolean isNotPersonal() {
+    return !isPersonal();
+  }
 
-    public boolean isPersonal() {
-        return groupType.equals(GroupType.PERSONAL);
-    }
+  public boolean isPersonal() {
+    return groupType.equals(GroupType.PERSONAL);
+  }
 
-    public void setAdmissionType(final AdmissionType admissionType) {
-        this.admissionType = admissionType;
-    }
+  public void setAdmissionType(final AdmissionType admissionType) {
+    this.admissionType = admissionType;
+  }
 
-    public void setDefaultContent(final ContentSimpleDTO defaultContent) {
-        this.defaultContent = defaultContent;
-    }
+  public void setBackgroundImage(final String backgroundImage) {
+    this.backgroundImage = backgroundImage;
+  }
 
-    public void setDefaultLicense(final LicenseDTO defaultLicense) {
-        this.defaultLicense = defaultLicense;
-    }
+  public void setDefaultContent(final ContentSimpleDTO defaultContent) {
+    this.defaultContent = defaultContent;
+  }
 
-    public void setGroupBackImage(final ContentSimpleDTO groupBackImage) {
-        this.groupBackImage = groupBackImage;
-    }
+  public void setDefaultLicense(final LicenseDTO defaultLicense) {
+    this.defaultLicense = defaultLicense;
+  }
 
-    public void setGroupType(final GroupType groupType) {
-        this.groupType = groupType;
-    }
+  public void setGroupType(final GroupType groupType) {
+    this.groupType = groupType;
+  }
 
-    public void setHasLogo(final boolean hasLogo) {
-        this.hasLogo = hasLogo;
-    }
+  public void setHasLogo(final boolean hasLogo) {
+    this.hasLogo = hasLogo;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setLongName(final String name) {
-        this.longName = name;
-    }
+  public void setLongName(final String name) {
+    this.longName = name;
+  }
 
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
+  public void setShortName(final String shortName) {
+    this.shortName = shortName;
+  }
 
-    public void setWorkspaceTheme(final String workspaceTheme) {
-        this.workspaceTheme = workspaceTheme;
-    }
+  public void setWorkspaceTheme(final String workspaceTheme) {
+    this.workspaceTheme = workspaceTheme;
+  }
 
-    @Override
-    public String toString() {
-        return "GroupDTO[" + shortName + "]";
-    }
+  @Override
+  public String toString() {
+    return "GroupDTO[" + shortName + "]";
+  }
 }

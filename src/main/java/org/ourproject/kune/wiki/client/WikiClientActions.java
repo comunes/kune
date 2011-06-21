@@ -47,69 +47,72 @@ import cc.kune.gspace.client.style.GSpaceBackManager;
 import com.calclab.suco.client.ioc.Provider;
 
 public class WikiClientActions extends OldAbstractFoldableContentActions {
-    public WikiClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
-            final Session session, final StateManager stateManager, final SchedulerManager deferredCommandWrapper,
-            final Provider<ContentServiceAsync> contentServiceProvider,
-            final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
-            final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
-            final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
-            final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
-            final WikiViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-            final GSpaceBackManager wsBackManager) {
-        super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
-                contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
-                contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
-                documentViewer, entityLogo, wsBackManager);
-    }
+  public WikiClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
+      final Session session, final StateManager stateManager,
+      final SchedulerManager deferredCommandWrapper,
+      final Provider<ContentServiceAsync> contentServiceProvider,
+      final Provider<GroupServiceAsync> groupServiceProvider,
+      final Provider<FileUploader> fileUploaderProvider,
+      final ContentActionRegistry contentActionRegistry,
+      final ContextActionRegistry contextActionRegistry,
+      final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
+      final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
+      final WikiViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
+      final GSpaceBackManager wsBackManager) {
+    super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
+        contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
+        contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
+        documentViewer, entityLogo, wsBackManager);
+  }
 
-    @Override
-    protected void createActions() {
-        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
-        final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
-        // final String[] contentsModerated = { };
-        final String[] containersNoRoot = { TYPE_FOLDER };
-        final String[] contents = { TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
+  @Override
+  protected void createActions() {
+    final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
+    final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
+    // final String[] contentsModerated = { };
+    final String[] containersNoRoot = { TYPE_FOLDER };
+    final String[] contents = { TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
 
-        final String parentMenuTitle = i18n.t("Wikipage");
-        final String parentMenuTitleCtx = i18n.t("Wiki");
+    final String parentMenuTitle = i18n.t("Wikipage");
+    final String parentMenuTitleCtx = i18n.t("Wiki");
 
-        createNewContainerAction(TYPE_FOLDER, "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx,
-                i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_ROOT, TYPE_FOLDER);
+    createNewContainerAction(TYPE_FOLDER, "images/nav/folder_add.png", i18n.t("New folder"),
+        parentMenuTitleCtx, i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
-        createNewContentAction(TYPE_WIKIPAGE, "images/nav/wikipage_add.png", i18n.t("New wikipage"),
-                parentMenuTitleCtx, Position.ctx, TYPE_ROOT, TYPE_FOLDER);
+    createNewContentAction(TYPE_WIKIPAGE, "images/nav/wikipage_add.png", i18n.t("New wikipage"),
+        parentMenuTitleCtx, Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
-        // createContentModeratedActions(parentMenuTitle, contentsModerated);
-        createTranslateAction(parentMenuTitle, TYPE_FOLDER, TYPE_WIKIPAGE);
-        createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
-        createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
-        createEditAction(parentMenuTitle, TYPE_WIKIPAGE);
+    // createContentModeratedActions(parentMenuTitle, contentsModerated);
+    createTranslateAction(parentMenuTitle, TYPE_FOLDER, TYPE_WIKIPAGE);
+    createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+    createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
+    createEditAction(parentMenuTitle, TYPE_WIKIPAGE);
 
-        // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =
-        // createSetAsDefContent(parentMenuTitleCtx);
+    // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =
+    // createSetAsDefContent(parentMenuTitleCtx);
 
-        createRefreshCntAction(parentMenuTitle, contents);
-        createRefreshCxtAction(parentMenuTitleCtx, containers);
+    createRefreshCntAction(parentMenuTitle, contents);
+    createRefreshCxtAction(parentMenuTitleCtx, containers);
 
-        createSetAsDefContent(parentMenuTitle, contents);
-        createSetGroupBackImageAction(parentMenuTitle, TYPE_UPLOADEDFILE);
+    createSetAsDefContent(parentMenuTitle, contents);
+    // createSetGroupBackImageAction(parentMenuTitle, TYPE_UPLOADEDFILE);
 
-        createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
-                i18n.t("Upload some files (images, PDFs, ...)"), null, containers);
+    createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
+        i18n.t("Upload some files (images, PDFs, ...)"), null, containers);
 
-        createDownloadActions(TYPE_UPLOADEDFILE);
+    createDownloadActions(TYPE_UPLOADEDFILE);
 
-        createGoAction(all);
+    createGoAction(all);
 
-        createGoHomeAction(containers);
+    createGoHomeAction(containers);
 
-        createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
-        createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
-        createShowDeletedItems(parentMenuTitleCtx, all);
-    }
+    createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
+    createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
+    createShowDeletedItems(parentMenuTitleCtx, all);
+  }
 
-    @Override
-    protected void createPostSessionInitActions() {
-        // super.createUploadMediaAction();
-    }
+  @Override
+  protected void createPostSessionInitActions() {
+    // super.createUploadMediaAction();
+  }
 }

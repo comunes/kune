@@ -211,7 +211,7 @@
   float: right;
 }
 
-.oc-clean {
+.oc-clean,.k-clear,.oc-clear,.k-clean {
   clear: both;
 }
 

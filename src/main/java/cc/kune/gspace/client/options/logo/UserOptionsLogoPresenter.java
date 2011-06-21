@@ -27,8 +27,8 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.UserOptions;
 
 import com.google.gwt.event.shared.EventBus;
@@ -39,9 +39,10 @@ public class UserOptionsLogoPresenter extends EntityOptionsLogoPresenter {
 
   @Inject
   public UserOptionsLogoPresenter(final EventBus eventBus, final Session session,
-      final EntityHeader entityLogo, final UserOptions entityOptions, final StateManager stateManager,
-      final Provider<UserServiceAsync> userService, final UserOptionsLogoView view) {
-    super(eventBus, session, entityLogo, entityOptions, userService);
+      final UserOptions entityOptions, final StateManager stateManager,
+      final Provider<UserServiceAsync> userService, final UserOptionsLogoView view,
+      final I18nTranslationService i18n) {
+    super(eventBus, session, entityOptions, userService, i18n);
     init(view);
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override

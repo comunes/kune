@@ -20,7 +20,6 @@
 package cc.kune.gspace.client.options.style;
 
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
@@ -30,10 +29,9 @@ public class GroupOptionsStyleConfPanel extends EntityOptionsStyleConfPanel impl
     GroupOptionsStyleConfView {
 
   @Inject
-  public GroupOptionsStyleConfPanel(final I18nTranslationService i18n,
-      final FileDownloadUtils downUtils, final CoreResources res,
+  public GroupOptionsStyleConfPanel(final I18nTranslationService i18n, final CoreResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
-    super(i18n, downUtils, res, styleSelector);
+    super(i18n, res, styleSelector);
   }
 
 }

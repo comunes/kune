@@ -33,6 +33,8 @@ import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SocialNetworkService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.init.FinderRegistry;
+import cc.kune.core.server.manager.file.EntityBackgroundDownloadManager;
+import cc.kune.core.server.manager.file.EntityBackgroundUploadManager;
 import cc.kune.core.server.manager.file.EntityLogoDownloadManager;
 import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.server.manager.file.FileDownloadManager;
@@ -139,7 +141,8 @@ public class KuneRackModule implements RackModule {
     builder.installRESTServices("^/ws/json/", TestJSONService.class, GroupJSONService.class,
         UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
     builder.installServlet("^/ws/servlets/", FileUploadManager.class, FileDownloadManager.class,
-        EntityLogoUploadManager.class, EntityLogoDownloadManager.class, FileGwtUploadServlet.class);
+        EntityLogoUploadManager.class, EntityLogoDownloadManager.class, FileGwtUploadServlet.class,
+        EntityBackgroundDownloadManager.class, EntityBackgroundUploadManager.class);
 
     builder.at("^/ws/(.*)$").install(new ForwardFilter("^/ws/(.*)$", "/ws/{0}"));
   }

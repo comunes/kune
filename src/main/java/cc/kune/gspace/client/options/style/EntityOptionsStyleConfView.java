@@ -19,17 +19,31 @@
  */
 package cc.kune.gspace.client.options.style;
 
-import cc.kune.core.shared.domain.utils.StateToken;
+import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.OnCancelUploaderHandler;
 import cc.kune.gspace.client.options.EntityOptionsTabView;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 public interface EntityOptionsStyleConfView extends EntityOptionsTabView {
 
-    public void clearBackImage();
+  HandlerRegistration addOnCancelUploadHandler(OnCancelUploaderHandler handler);
 
-    HasClickHandlers getClearBtn();
+  HandlerRegistration addOnChangeUploadHandler(IUploader.OnChangeUploaderHandler handler);
 
-    public void setBackImage(final StateToken token);
+  HandlerRegistration addOnFinishUploadHandler(IUploader.OnFinishUploaderHandler handler);
+
+  HandlerRegistration addOnStartUploadHandler(IUploader.OnStartUploaderHandler handler);
+
+  public void clearBackImage();
+
+  HasClickHandlers getClearBtn();
+
+  void reset();
+
+  public void setBackImage(final String url);
+
+  void setUploadParams(String userHash, String token);
 
 }

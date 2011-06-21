@@ -20,6 +20,7 @@
 package cc.kune.common.client.notify;
 
 import cc.kune.common.client.utils.SimpleResponseCallback;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
@@ -49,6 +50,11 @@ public class NotifyUser {
 
   public static void error(final String message, final boolean closeable) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, closeable));
+  }
+
+  public static void error(final String message, final String additionalMessage) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message
+        + (TextUtils.empty(additionalMessage) ? "" : ": " + additionalMessage)));
   }
 
   public static void error(final String message, final String title, final boolean closeable) {

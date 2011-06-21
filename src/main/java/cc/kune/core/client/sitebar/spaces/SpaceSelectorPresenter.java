@@ -28,6 +28,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.style.GSpaceBackManager;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -69,6 +70,7 @@ public class SpaceSelectorPresenter extends
   }
 
   private final GSpaceArmor armor;
+  private final GSpaceBackManager backManager;
   private Space currentSpace;
   private String groupToken;
   private String homeToken;
@@ -81,12 +83,13 @@ public class SpaceSelectorPresenter extends
   @Inject
   public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
       final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
-      final Session session, final Provider<SignIn> signIn) {
+      final Session session, final Provider<SignIn> signIn, final GSpaceBackManager backManager) {
     super(eventBus, view, proxy);
     this.stateManager = stateManager;
     this.armor = armor;
     this.session = session;
     this.signIn = signIn;
+    this.backManager = backManager;
     currentSpace = null;
     homeToken = SiteTokens.HOME;
     userToken = SiteTokens.WAVEINBOX;
@@ -124,6 +127,7 @@ public class SpaceSelectorPresenter extends
 
   private void onGroupSpaceSelect() {
     armor.selectGroupSpace();
+    backManager.restoreBackImage();
     getView().setHomeBtnDown(false);
     getView().setUserBtnDown(false);
     getView().setGroupBtnDown(true);
@@ -133,6 +137,7 @@ public class SpaceSelectorPresenter extends
 
   private void onHomeSpaceSelect() {
     armor.selectHomeSpace();
+    backManager.clearBackImage();
     getView().setHomeBtnDown(true);
     getView().setUserBtnDown(false);
     getView().setGroupBtnDown(false);
@@ -142,6 +147,7 @@ public class SpaceSelectorPresenter extends
 
   private void onPublicSpaceSelect() {
     armor.selectPublicSpace();
+    backManager.restoreBackImage();
     getView().setHomeBtnDown(false);
     getView().setUserBtnDown(false);
     getView().setGroupBtnDown(false);
@@ -204,6 +210,7 @@ public class SpaceSelectorPresenter extends
   private void onUserSpaceSelect() {
     if (session.isLogged()) {
       armor.selectUserSpace();
+      backManager.clearBackImage();
       getView().setHomeBtnDown(false);
       getView().setUserBtnDown(true);
       getView().setGroupBtnDown(false);

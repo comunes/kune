@@ -29,27 +29,26 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface GroupServiceAsync {
 
-    void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license,
-            AsyncCallback<Void> asyncCallback);
+  void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license,
+      AsyncCallback<Void> asyncCallback);
 
-    void changeGroupWsTheme(String userHash, StateToken groupToken, String theme, AsyncCallback<Void> callback);
+  void changeGroupWsTheme(String userHash, StateToken groupToken, String theme,
+      AsyncCallback<Void> callback);
 
-    void clearGroupBackImage(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
+  void clearGroupBackImage(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
-    void createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags, String[] enabledTools,
-            AsyncCallback<StateToken> callback);
+  void createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags,
+      String[] enabledTools, AsyncCallback<StateToken> callback);
 
-    void getGroup(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
+  void getGroup(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
-    void setGroupBackImage(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
+  void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken,
+      AdmissionType admissionPolicy, AsyncCallback<Void> asyncCallback);
 
-    void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionType admissionPolicy,
-            AsyncCallback<Void> asyncCallback);
+  void setSocialNetworkVisibility(String userHash, StateToken token, SocialNetworkVisibility visibility,
+      AsyncCallback<Void> asyncCallback);
 
-    void setSocialNetworkVisibility(String userHash, StateToken token, SocialNetworkVisibility visibility,
-            AsyncCallback<Void> asyncCallback);
-
-    void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled,
-            AsyncCallback<Void> asyncCallback);
+  void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled,
+      AsyncCallback<Void> asyncCallback);
 
 }

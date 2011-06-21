@@ -19,6 +19,8 @@
  */
 package cc.kune.gspace.client;
 
+import org.cobogw.gwt.user.client.CSS;
+
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 
@@ -96,7 +98,6 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   public GSpaceArmorImpl(final Provider<ActionFlowPanel> toolbarProv) {
     initWidget(uiBinder.createAndBindUi(this));
     groupSpace.setWidgetMinSize(splitEast, 150);
-    tabs.setStyleName("k-spaces");
     homeSpace.add(RootPanel.get("k-home-wrapper"));
     DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow",
         "visible");
@@ -110,6 +111,12 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
     getDocFooter().add(footerToolbar);
     entityToolsNorth.getElement().getStyle().setPosition(Position.RELATIVE);
     // entityToolsSouth.setVisible(false);
+    mainpanel.getWidgetContainerElement(tabs).addClassName("k-spaces");
+  }
+
+  @Override
+  public void clearBackImage() {
+    DOM.setStyleAttribute(mainpanel.getElement(), CSS.A.BACKGROUND, "transparent");
   }
 
   @Override
@@ -205,6 +212,12 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public void selectUserSpace() {
     tabs.selectTab(userSpace);
+  }
+
+  @Override
+  public void setBackImage(final String url) {
+    final String bodyProp = "#FFFFFF url('" + url + "') fixed no-repeat top left";
+    DOM.setStyleAttribute(mainpanel.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 
   @Override

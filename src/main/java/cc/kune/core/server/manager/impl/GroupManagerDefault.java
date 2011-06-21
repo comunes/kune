@@ -33,12 +33,13 @@ import org.apache.lucene.search.Query;
 import org.hibernate.exception.ConstraintViolationException;
 
 import cc.kune.core.client.errors.AccessViolationException;
-import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.server.manager.FileManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.LicenseManager;
+import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.properties.DatabaseProperties;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.tool.ServerTool;
@@ -66,6 +67,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager {
 
+  private final FileManager fileManager;
   private final GroupFinder finder;
   private final I18nTranslationService i18n;
   private final KuneProperties kuneProperties;
@@ -81,7 +83,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       final UserFinder userFinder, final KuneProperties kuneProperties,
       final DatabaseProperties properties, final ServerToolRegistry registry,
       final LicenseManager licenseManager, final LicenseFinder licenseFinder,
-      final ServerToolRegistry serverToolRegistry, final I18nTranslationService i18n) {
+      final FileManager fileManager, final ServerToolRegistry serverToolRegistry,
+      final I18nTranslationService i18n) {
     super(provider, Group.class);
     this.finder = finder;
     this.userFinder = userFinder;
@@ -90,6 +93,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     this.registry = registry;
     this.licenseManager = licenseManager;
     this.licenseFinder = licenseFinder;
+    this.fileManager = fileManager;
     this.serverToolRegistry = serverToolRegistry;
     this.i18n = i18n;
   }
@@ -112,7 +116,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   @Override
   public void clearGroupBackImage(final Group group) {
-    group.setGroupBackImage(null);
+    final String file = group.getBackgroundImage();
+    if (file != null) {
+      fileManager.rm(FileUtils.groupToDir(group.getShortName()), file);
+    }
+    group.setBackgroundImage(null);
+    group.setBackgroundMime(null);
   }
 
   @Override
@@ -271,12 +280,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   @Override
-  public void setGroupBackImage(final Group group, final Content content) {
-    if (content.getMimeType().isImage()) {
-      group.setGroupBackImage(content);
-    } else {
-      throw new DefaultException("Trying to set not a image as group logo");
-    }
+  public void setGroupBackgroundImage(final Group group, final String backgroundFileName,
+      final String mime) {
+    clearGroupBackImage(group);
+    group.setBackgroundImage(backgroundFileName);
+    group.setBackgroundMime(mime);
   }
 
   @Override

@@ -26,7 +26,6 @@ import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.content.ContentManager;
-import cc.kune.core.server.content.ContentUtils;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.shared.domain.AccessRol;
@@ -36,7 +35,6 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.wave.server.KuneWaveManagerDefault;
@@ -127,17 +125,6 @@ public class GroupRPC implements RPC, GroupService {
 
   private UserSession getUserSession() {
     return userSessionProvider.get();
-  }
-
-  @Override
-  @Authenticated
-  @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
-  public GroupDTO setGroupBackImage(final String userHash, final StateToken token) {
-    final Group group = groupManager.findByShortName(token.getGroup());
-    final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
-    groupManager.setGroupBackImage(group, content);
-    return mapper.map(group, GroupDTO.class);
   }
 
   @Override

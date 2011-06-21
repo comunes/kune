@@ -26,6 +26,8 @@ import com.google.gwt.user.client.ui.SimplePanel;
 
 public interface GSpaceArmor {
 
+  void clearBackImage();
+
   ForIsWidget getDocContainer();
 
   ForIsWidget getDocFooter();
@@ -63,6 +65,8 @@ public interface GSpaceArmor {
   void selectPublicSpace();
 
   void selectUserSpace();
+
+  void setBackImage(String url);
 
   void setContentVisible(boolean visible);
 }

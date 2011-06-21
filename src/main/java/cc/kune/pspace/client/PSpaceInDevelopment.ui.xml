@@ -5,7 +5,7 @@
     .container {
       margin: 10px;
       font-family: 'Ubuntu', Arial;
-      background-color: white;
+      background-color: transparent;
     }
 
     .entityLogo {

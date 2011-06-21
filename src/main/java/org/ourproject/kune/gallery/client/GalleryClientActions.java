@@ -46,68 +46,71 @@ import cc.kune.gspace.client.style.GSpaceBackManager;
 import com.calclab.suco.client.ioc.Provider;
 
 public class GalleryClientActions extends OldAbstractFoldableContentActions {
-    public GalleryClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
-            final Session session, final StateManager stateManager, final SchedulerManager deferredCommandWrapper,
-            final Provider<ContentServiceAsync> contentServiceProvider,
-            final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
-            final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
-            final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
-            final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
-            final GalleryViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-            final GSpaceBackManager wsBackManager) {
-        super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
-                contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
-                contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
-                documentViewer, entityLogo, wsBackManager);
-    }
+  public GalleryClientActions(final I18nUITranslationService i18n,
+      final ContextNavigator contextNavigator, final Session session, final StateManager stateManager,
+      final SchedulerManager deferredCommandWrapper,
+      final Provider<ContentServiceAsync> contentServiceProvider,
+      final Provider<GroupServiceAsync> groupServiceProvider,
+      final Provider<FileUploader> fileUploaderProvider,
+      final ContentActionRegistry contentActionRegistry,
+      final ContextActionRegistry contextActionRegistry,
+      final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
+      final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
+      final GalleryViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
+      final GSpaceBackManager wsBackManager) {
+    super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
+        contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
+        contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
+        documentViewer, entityLogo, wsBackManager);
+  }
 
-    @Override
-    protected void createActions() {
-        final String[] all = { TYPE_ROOT, TYPE_ALBUM, TYPE_UPLOADEDFILE };
-        final String[] containers = { TYPE_ROOT, TYPE_ALBUM };
-        final String[] contentsModerated = { TYPE_UPLOADEDFILE };
-        final String[] containersNoRoot = { TYPE_ALBUM };
-        final String[] contents = { TYPE_UPLOADEDFILE };
+  @Override
+  protected void createActions() {
+    final String[] all = { TYPE_ROOT, TYPE_ALBUM, TYPE_UPLOADEDFILE };
+    final String[] containers = { TYPE_ROOT, TYPE_ALBUM };
+    final String[] contentsModerated = { TYPE_UPLOADEDFILE };
+    final String[] containersNoRoot = { TYPE_ALBUM };
+    final String[] contents = { TYPE_UPLOADEDFILE };
 
-        final String parentMenuTitle = i18n.t("File");
-        final String parentMenuTitleCtx = i18n.t("Album");
+    final String parentMenuTitle = i18n.t("File");
+    final String parentMenuTitleCtx = i18n.t("Album");
 
-        createNewContainerAction(TYPE_ALBUM, "images/nav/gallery_add.png", i18n.t("New sub-album"), parentMenuTitleCtx,
-                i18n.t("New"), i18n.t("New sub-album"), Position.ctx, TYPE_ALBUM);
-        createNewContainerAction(TYPE_ALBUM, "images/nav/gallery_add.png", i18n.t("New album"), parentMenuTitleCtx,
-                i18n.t("New"), i18n.t("New album"), Position.ctx, TYPE_ROOT);
+    createNewContainerAction(TYPE_ALBUM, "images/nav/gallery_add.png", i18n.t("New sub-album"),
+        parentMenuTitleCtx, i18n.t("New"), i18n.t("New sub-album"), Position.ctx, TYPE_ALBUM);
+    createNewContainerAction(TYPE_ALBUM, "images/nav/gallery_add.png", i18n.t("New album"),
+        parentMenuTitleCtx, i18n.t("New"), i18n.t("New album"), Position.ctx, TYPE_ROOT);
 
-        createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
-        createContentModeratedActions(parentMenuTitle, contentsModerated);
-        createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
+    createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+    createContentModeratedActions(parentMenuTitle, contentsModerated);
+    createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
 
-        // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =
-        // createSetAsDefContent(parentMenuTitleCtx);
+    // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =
+    // createSetAsDefContent(parentMenuTitleCtx);
 
-        createRefreshCntAction(parentMenuTitle, contents);
-        createRefreshCxtAction(parentMenuTitleCtx, containers);
+    createRefreshCntAction(parentMenuTitle, contents);
+    createRefreshCxtAction(parentMenuTitleCtx, containers);
 
-        createSetAsDefContent(parentMenuTitle, contents);
-        createSetGroupBackImageAction(parentMenuTitle, TYPE_UPLOADEDFILE);
+    createSetAsDefContent(parentMenuTitle, contents);
+    // createSetGroupBackImageAction(parentMenuTitle, TYPE_UPLOADEDFILE);
 
-        // createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
-        // i18n.t("Upload some files (images, PDFs, ...)"), null, containers);
+    // createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
+    // i18n.t("Upload some files (images, PDFs, ...)"), null, containers);
 
-        createDownloadActions(TYPE_UPLOADEDFILE);
+    createDownloadActions(TYPE_UPLOADEDFILE);
 
-        createGoAction(all);
+    createGoAction(all);
 
-        createGoHomeAction(containers);
+    createGoHomeAction(containers);
 
-        // createTranslateAction(TYPE_ALBUM, TYPE_UPLOADEDFILE);
+    // createTranslateAction(TYPE_ALBUM, TYPE_UPLOADEDFILE);
 
-        createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
-        createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
-        createShowDeletedItems(parentMenuTitleCtx, all);
-    }
+    createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
+    createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
+    createShowDeletedItems(parentMenuTitleCtx, all);
+  }
 
-    @Override
-    protected void createPostSessionInitActions() {
-        super.createUploadMediaAction(TYPE_ALBUM);
-    }
+  @Override
+  protected void createPostSessionInitActions() {
+    super.createUploadMediaAction(TYPE_ALBUM);
+  }
 }

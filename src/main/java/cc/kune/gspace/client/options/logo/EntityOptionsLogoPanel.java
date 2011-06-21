@@ -19,12 +19,10 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
-import gwtupload.client.IFileInput.FileInputType;
 import gwtupload.client.IUploader.OnCancelUploaderHandler;
 import gwtupload.client.IUploader.OnChangeUploaderHandler;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
-import gwtupload.client.MultiUploader;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.core.client.resources.CoreMessages;
@@ -33,46 +31,17 @@ import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DecoratorPanel;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Hidden;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Label;
 
 public class EntityOptionsLogoPanel extends Composite implements EntityOptionsLogoView {
 
-  public class UploadButton extends Composite implements HasClickHandlers {
-    DecoratorPanel widget = new DecoratorPanel();
-
-    public UploadButton() {
-      final DecoratorPanel widget = new DecoratorPanel();
-      final Button btn = new Button(i18n.t("Choose"));
-      btn.addStyleName("k-button");
-      initWidget(widget);
-      widget.setWidget(btn);
-      widget.setHeight("50px");
-    }
-
-    @Override
-    public HandlerRegistration addClickHandler(final ClickHandler handler) {
-      return addDomHandler(handler, ClickEvent.getType());
-    }
-  }
-
   public static final String ICON_UPLD_SERVLET = "servlets/EntityLogoUploadManager";
-  private final Label dialogInfoLabel;
+  private final EntityUploaderForm uploader;
   private final I18nTranslationService i18n;
   private final IconLabel tabTitle;
-  private final Hidden tokenField;
-  private final MultiUploader uploader;
-  private final Hidden userhashField;
 
   public EntityOptionsLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,
       final String panelId, final String buttonId, final String inputId, final NavResources res) {
@@ -80,29 +49,11 @@ public class EntityOptionsLogoPanel extends Composite implements EntityOptionsLo
     this.i18n = i18n;
     tabTitle = new IconLabel(res.picture(), "");
 
-    final UploadButton btn = new UploadButton();
-    uploader = new MultiUploader(FileInputType.CUSTOM.with(btn));
-    uploader.setServletPath(ICON_UPLD_SERVLET);
-    uploader.setMaximumFiles(1);
-    dialogInfoLabel = new Label();
-    dialogInfoLabel.setWordWrap(true);
-    dialogInfoLabel.addStyleName("kune-Margin-20-tb");
-    uploader.setValidExtensions("png", "jpg", "gif", "jpeg", "bmp");
+    uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, i18n.t("Choose"));
 
-    userhashField = new Hidden(FileConstants.HASH, FileConstants.HASH);
-    tokenField = new Hidden(FileConstants.TOKEN, FileConstants.TOKEN);
-
-    final FlowPanel holder = new FlowPanel();
-
-    uploader.add(userhashField);
-    uploader.add(tokenField);
-    holder.add(dialogInfoLabel);
-    holder.add(uploader);
-
-    initWidget(holder);
+    initWidget(uploader);
     setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
-    // uploader.setHeight("100px");
 
     addStyleName("k-overflow-y-auto");
     addStyleName("k-tab-panel");
@@ -144,7 +95,7 @@ public class EntityOptionsLogoPanel extends Composite implements EntityOptionsLo
 
   @Override
   public void setNormalGroupsLabels() {
-    dialogInfoLabel.setText(i18n.t("Select an image in your computer as the logo for this group. "
+    uploader.setLabelText(i18n.t("Select an image in your computer as the logo for this group. "
         + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
         FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT));
     tabTitle.setText(CoreMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
@@ -152,7 +103,7 @@ public class EntityOptionsLogoPanel extends Composite implements EntityOptionsLo
 
   @Override
   public void setPersonalGroupsLabels() {
-    dialogInfoLabel.setText(i18n.t("Select an image in your computer as your avatar. "
+    uploader.setLabelText(i18n.t("Select an image in your computer as your avatar. "
         + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
         FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT));
     tabTitle.setText(CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
@@ -160,8 +111,7 @@ public class EntityOptionsLogoPanel extends Composite implements EntityOptionsLo
 
   @Override
   public void setUploadParams(final String userHash, final String token) {
-    userhashField.setValue(userHash);
-    tokenField.setValue(token);
+    uploader.setUploadParams(userHash, token);
   }
 
 }

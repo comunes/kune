@@ -32,23 +32,23 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("GroupService")
 public interface GroupService extends RemoteService {
 
-    void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license);
+  void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license);
 
-    void changeGroupWsTheme(String userHash, StateToken groupToken, String theme) throws DefaultException;
+  void changeGroupWsTheme(String userHash, StateToken groupToken, String theme) throws DefaultException;
 
-    GroupDTO clearGroupBackImage(String userHash, StateToken token);
+  GroupDTO clearGroupBackImage(String userHash, StateToken token);
 
-    StateToken createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags, String[] enabledTools)
-            throws DefaultException;
+  StateToken createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags,
+      String[] enabledTools) throws DefaultException;
 
-    GroupDTO getGroup(String userHash, StateToken token);
+  GroupDTO getGroup(String userHash, StateToken token);
 
-    GroupDTO setGroupBackImage(String userHash, StateToken token);
+  void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken,
+      AdmissionType admissionPolicy);
 
-    void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionType admissionPolicy);
+  void setSocialNetworkVisibility(String userHash, StateToken groupToken,
+      SocialNetworkVisibility visibility);
 
-    void setSocialNetworkVisibility(String userHash, StateToken groupToken, SocialNetworkVisibility visibility);
-
-    void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled);
+  void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled);
 
 }

@@ -34,12 +34,18 @@ import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.utils.StateToken;
 
+import com.google.inject.servlet.RequestScoped;
+
+@RequestScoped
 public abstract class FileGwtUploadAbstractServlet extends UploadAction {
 
   public static final Log LOG = LogFactory.getLog(FileGwtUploadAbstractServlet.class);
   private static final long serialVersionUID = 1L;
+  protected static final String UTF8 = "UTF-8";
+  protected final KuneProperties kuneProperties;
 
   public FileGwtUploadAbstractServlet(final KuneProperties kuneProperties) {
+    this.kuneProperties = kuneProperties;
     this.maxSize = Integer.valueOf(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE_IN_KS));
     this.uploadDelay = Integer.valueOf(kuneProperties.get(KuneProperties.UPLOAD_DELAY_FOR_TEST));
   }
