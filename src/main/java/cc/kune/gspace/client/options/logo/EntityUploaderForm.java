@@ -11,31 +11,30 @@ import cc.kune.core.client.services.FileConstants;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Hidden;
 import com.google.gwt.user.client.ui.Label;
 
 public class EntityUploaderForm extends Composite {
 
+  private final EntityOptUploadButton btn;
   private final Label dialogInfoLabel;
   private final Hidden tokenField;
   private final MultiUploader uploader;
   private final Hidden userhashField;
 
   public EntityUploaderForm(final String servlet, final String btnText) {
-    final EntityOptionsUploadButton btn = new EntityOptionsUploadButton(btnText);
+    btn = new EntityOptUploadButton(btnText);
     uploader = new MultiUploader(FileInputType.CUSTOM.with(btn));
     uploader.setServletPath(servlet);
     uploader.setMaximumFiles(1);
+    uploader.setValidExtensions("png", "jpg", "gif", "jpeg", "bmp");
     dialogInfoLabel = new Label();
     dialogInfoLabel.setWordWrap(true);
     dialogInfoLabel.addStyleName("kune-Margin-20-tb");
-    uploader.setValidExtensions("png", "jpg", "gif", "jpeg", "bmp");
-
     userhashField = new Hidden(FileConstants.HASH, FileConstants.HASH);
     tokenField = new Hidden(FileConstants.TOKEN, FileConstants.TOKEN);
-
     final FlowPanel holder = new FlowPanel();
-
     uploader.add(userhashField);
     uploader.add(tokenField);
     holder.add(dialogInfoLabel);
@@ -57,6 +56,10 @@ public class EntityUploaderForm extends Composite {
 
   public HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler) {
     return uploader.addOnStartUploadHandler(handler);
+  }
+
+  public HasText getBtn() {
+    return btn.getBtn();
   }
 
   public void reset() {

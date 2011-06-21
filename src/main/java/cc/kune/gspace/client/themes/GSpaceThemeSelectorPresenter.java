@@ -84,6 +84,8 @@ public class GSpaceThemeSelectorPresenter {
     this.manager = manager;
     this.view = view;
     itemMap = new HashMap<String, MenuRadioItemDescriptor>();
+    this.view = view;
+    createActions();
     eventBus.addHandler(GSpaceThemeChangeEvent.getType(), new GSpaceThemeChangeHandler() {
       @Override
       public void onGsThemeChange(final GSpaceThemeChangeEvent event) {
@@ -92,8 +94,6 @@ public class GSpaceThemeSelectorPresenter {
         select(oldTheme, newTheme);
       }
     });
-    this.view = view;
-    createActions();
   }
 
   private void createActions() {

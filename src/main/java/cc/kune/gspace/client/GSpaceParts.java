@@ -27,14 +27,14 @@ import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.GroupOptionsCollection;
 import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.options.UserOptionsCollection;
-import cc.kune.gspace.client.options.license.GroupOptionsDefLicense;
-import cc.kune.gspace.client.options.license.UserOptionsDefLicense;
-import cc.kune.gspace.client.options.logo.GroupOptionsLogo;
-import cc.kune.gspace.client.options.logo.UserOptionsLogo;
-import cc.kune.gspace.client.options.style.GroupOptionsStyleConf;
-import cc.kune.gspace.client.options.style.UserOptionsStyleConf;
-import cc.kune.gspace.client.options.tools.GroupOptionsToolsConf;
-import cc.kune.gspace.client.options.tools.UserOptionsToolsConf;
+import cc.kune.gspace.client.options.license.GroupOptDefLicense;
+import cc.kune.gspace.client.options.license.UserOptDefLicense;
+import cc.kune.gspace.client.options.logo.GroupOptLogo;
+import cc.kune.gspace.client.options.logo.UserOptLogo;
+import cc.kune.gspace.client.options.style.GroupOptStyle;
+import cc.kune.gspace.client.options.style.UserOptStyle;
+import cc.kune.gspace.client.options.tools.GroupOptTools;
+import cc.kune.gspace.client.options.tools.UserOptTools;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.themes.GSpaceThemeManager;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -55,11 +55,11 @@ public class GSpaceParts {
       final Provider<NoHomePageViewer> noHome, final Provider<ContentViewerPresenter> docsViewer,
       final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,
       final Provider<UserOptions> uo, final Provider<GroupOptionsCollection> goc,
-      final Provider<UserOptionsCollection> uoc, final Provider<GroupOptionsDefLicense> gdl,
-      final Provider<GroupOptionsStyleConf> gps, final Provider<GroupOptionsLogo> gl,
-      final Provider<GroupOptionsToolsConf> gtc, final Provider<UserOptionsDefLicense> udl,
-      final Provider<UserOptionsStyleConf> ups, final Provider<UserOptionsLogo> ul,
-      final Provider<UserOptionsToolsConf> utc, final Provider<SitebarSearchPresenter> siteSearch) {
+      final Provider<UserOptionsCollection> uoc, final Provider<GroupOptDefLicense> gdl,
+      final Provider<GroupOptStyle> gps, final Provider<GroupOptLogo> gl,
+      final Provider<GroupOptTools> gtc, final Provider<UserOptDefLicense> udl,
+      final Provider<UserOptStyle> ups, final Provider<UserOptLogo> ul,
+      final Provider<UserOptTools> utc, final Provider<SitebarSearchPresenter> siteSearch) {
 
     session.onAppStart(true, new AppStartHandler() {
       @Override

@@ -96,8 +96,8 @@ public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet 
       groupManager.setGroupBackgroundImage(group, filenameUTF8, mimeTypeS);
 
     } catch (final Exception e) {
-      return i18n.t("Error uploading file");
+      return i18n.t("Error uploading background");
     }
-    return i18n.t("Success uploading");
+    return i18n.t("Backgroup changed");
   }
 }
