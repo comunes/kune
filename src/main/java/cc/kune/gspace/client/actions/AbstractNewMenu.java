@@ -17,22 +17,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.client;
+package cc.kune.gspace.client.actions;
 
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.UserSignInOrSignOutEvent;
+import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
-public class OnAppStartFactory {
+public class AbstractNewMenu extends MenuDescriptor {
 
   @Inject
-  public OnAppStartFactory(final Session session) {
-    session.onAppStart(true, new AppStartHandler() {
+  public AbstractNewMenu(final CoreResources res, final I18nTranslationService i18n,
+      final Session session) {
+    super();
+    this.withIcon(res.arrowdownsitebar()).withStyles("k-button, k-btn, k-5corners, k-def-docbtn, k-fr").withText(
+        "New");
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
-      public void onAppStart(final AppStartEvent event) {
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        AbstractNewMenu.this.setVisible(event.isLogged());
       }
     });
   }
+
 }

@@ -16,23 +16,30 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package cc.kune.client;
+ \*/
+package cc.kune.core.client.registry;
 
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.state.Session;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.google.inject.Inject;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 
-public class OnAppStartFactory {
+public class NewMenusForTypeIdsRegistry {
+  private final Map<String, MenuDescriptor> registry;
 
-  @Inject
-  public OnAppStartFactory(final Session session) {
-    session.onAppStart(true, new AppStartHandler() {
-      @Override
-      public void onAppStart(final AppStartEvent event) {
-      }
-    });
+  public NewMenusForTypeIdsRegistry() {
+    registry = new HashMap<String, MenuDescriptor>();
+  }
+
+  public MenuDescriptor get(final String typeId) {
+    return registry.get(typeId);
+  }
+
+  public int length() {
+    return registry.size();
+  }
+
+  public void register(final String contentTypeId, final MenuDescriptor menu) {
+    registry.put(contentTypeId, menu);
   }
 }

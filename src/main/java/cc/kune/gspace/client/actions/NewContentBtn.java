@@ -20,8 +20,6 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.KeyStroke;
-import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
@@ -96,10 +94,10 @@ public class NewContentBtn extends ButtonDescriptor {
     // The name given to this new content
     action.putValue(NEW_NAME, newName);
     action.putValue(ID, id);
-    final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('N'));
-    shorcutReg.put(shortcut, action);
-    this.withText(title).withToolTip(tooltip).withIcon(icon).withShortcut(shortcut).withStyles(
-        "k-def-docbtn, k-fr");
+    // final KeyStroke shortcut = Shortcut.getShortcut(false, true, false,
+    // false, Character.valueOf('N'));
+    // shorcutReg.put(shortcut, action);
+    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fr");
   }
 
 }

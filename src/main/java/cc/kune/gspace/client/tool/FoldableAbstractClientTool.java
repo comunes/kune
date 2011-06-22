@@ -19,6 +19,7 @@
  */
 package cc.kune.gspace.client.tool;
 
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -72,6 +73,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
   protected void registerLicensableTypes(final String... typeIds) {
     contentCapabilitiesRegistry.getLicensable().register(typeIds);
+  }
+
+  public void registerNewMenu(final String typeId, final MenuDescriptor menu) {
+    contentCapabilitiesRegistry.getNewMenus().register(typeId, menu);
   }
 
   protected void registerPublishModerableTypes(final String... typeIds) {

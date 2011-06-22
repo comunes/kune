@@ -26,6 +26,7 @@ import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -46,6 +47,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
   final String[] containersNoRoot = { TYPE_FOLDER };
   final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
   final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+  final String[] root = { TYPE_ROOT };
 
   @Inject
   public DocsClientActions(final I18nUITranslationService i18n, final Session session,
@@ -57,7 +59,8 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
-      final Provider<SetAsHomePageMenuItem> setAsHomePage) {
+      final Provider<SetAsHomePageMenuItem> setAsHomePage, final DocsRootNewMenu rootNewMenu,
+      final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu folderNewMenu) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
@@ -72,6 +75,10 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.MENUITEM, delFolderMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.MENUITEM, setAsHomePage, contents);
+    newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());
+    newMenusRegistry.register(TYPE_ROOT, rootNewMenu.get());
+    actionsRegistry.addAction(ActionGroups.VIEW, folderNewMenu, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.VIEW, rootNewMenu, root);
   }
 
   @Override

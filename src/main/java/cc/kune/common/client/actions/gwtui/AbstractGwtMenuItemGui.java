@@ -226,6 +226,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
   protected void setToolTipText(final String text) {
     if (text != null) {
       final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
+      // FIXME This doesn't works... (don't show the tooltip)
       Tooltip.to(iconLabel, key == null ? text : text + key.toString());
       layout();
     }

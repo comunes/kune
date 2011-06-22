@@ -33,6 +33,7 @@ public class ContentCapabilitiesRegistry {
   private final EmptyMessagesRegistry emptyMessagesRegistry;
   private final IconsRegistry iconsRegistry;
   private final LicensableRegistry licensable;
+  private final NewMenusForTypeIdsRegistry newMenus;
   private final PublishModerableRegistry publishModerable;
   private final RateableRegistry rateable;
   private final RenamableRegistry renamable;
@@ -44,16 +45,17 @@ public class ContentCapabilitiesRegistry {
 
   @Inject
   public ContentCapabilitiesRegistry(final AuthorableRegistry authorableRegistry,
-      final AclEditableRegistry aclEditableRegistry, final IconsRegistry iconsRegistry,
-      final CanBeHomepageRegistry canBeHomepage, final ComentableRegistry comentable,
-      final DragableRegistry dragable, final DropableRegistry dropable,
-      final EmailSubscribeAbleRegistry emailSubscribeAble, final LicensableRegistry licensable,
-      final PublishModerableRegistry publishModerable, final RateableRegistry rateable,
-      final TageableRegistry tageable, final RenamableRegistry renamable,
-      final TranslatableRegistry translatable, final VersionableRegistry versionable,
-      final EmptyMessagesRegistry emptyMessagesRegistry, final XmppComentableRegistry xmppComentable,
-      final XmppNotifyCapableRegistry xmppNotifyCapable) {
+      final NewMenusForTypeIdsRegistry newMenus, final AclEditableRegistry aclEditableRegistry,
+      final IconsRegistry iconsRegistry, final CanBeHomepageRegistry canBeHomepage,
+      final ComentableRegistry comentable, final DragableRegistry dragable,
+      final DropableRegistry dropable, final EmailSubscribeAbleRegistry emailSubscribeAble,
+      final LicensableRegistry licensable, final PublishModerableRegistry publishModerable,
+      final RateableRegistry rateable, final TageableRegistry tageable,
+      final RenamableRegistry renamable, final TranslatableRegistry translatable,
+      final VersionableRegistry versionable, final EmptyMessagesRegistry emptyMessagesRegistry,
+      final XmppComentableRegistry xmppComentable, final XmppNotifyCapableRegistry xmppNotifyCapable) {
     this.authorable = authorableRegistry;
+    this.newMenus = newMenus;
     this.aclEditable = aclEditableRegistry;
     this.iconsRegistry = iconsRegistry;
     this.canBeHomepage = canBeHomepage;
@@ -115,6 +117,10 @@ public class ContentCapabilitiesRegistry {
 
   public LicensableRegistry getLicensable() {
     return licensable;
+  }
+
+  public NewMenusForTypeIdsRegistry getNewMenus() {
+    return newMenus;
   }
 
   public PublishModerableRegistry getPublishModerable() {

@@ -50,7 +50,6 @@ public class BartersClientTool extends FoldableAbstractClientTool {
     registerRenamableTypes(TYPE_FOLDER, TYPE_BARTER);
     registerTageableTypes(TYPE_BARTER);
     registerTranslatableTypes(TYPE_FOLDER, TYPE_BARTER);
-
     registerIcons();
   }
 

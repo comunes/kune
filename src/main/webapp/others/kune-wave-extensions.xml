@@ -7,6 +7,15 @@
 <extensions>
 
   <extension>
+    <name>pollo</name>
+    <installerUrl>http://wavepollo.appspot.com/pollo.xml
+    </installerUrl>
+    <gadgetUrl>http://wavepollo.appspot.com/wavepollo/com.appspot.wavepollo.client.PolloWaveGadget.gadget.xml
+    </gadgetUrl>
+    <iconUrl>https://flinz-pollo.appspot.com/document_graph.png</iconUrl>
+    <iconCss></iconCss>
+  </extension>
+  <extension>
     <name>massmob</name>
     <installerUrl>http://mass-mob.appspot.com/massmob/massmob-extension.xml
     </installerUrl>
@@ -24,13 +33,34 @@
 
   <guiActionDescriptor>
     <extensionName>massmob</extensionName>
-    <name>Create a meeting</name>
+    <name>New meeting</name>
     <description>Call and speed-up of events as meeting, smartmobs,
       flashmobs, protest demonstrations, etc.</description>
     <enabled>true</enabled>
     <typeIds>
       <typeId>docs.folder</typeId>
       <typeId>docs.root</typeId>
+      <typeId>blogs.blog</typeId>
+    </typeIds>
+    <name></name>
+    <location>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+    </location>
+    <!-- only for new waves: anyone, onlymembers, onlyadmins, ask -->
+    <participants>ask</participants>
+  </guiActionDescriptor>
+
+  <guiActionDescriptor>
+    <extensionName>pollo</extensionName>
+    <name>New poll</name>
+    <description>Make some poll (allow single and multiple polls))</description>
+    <enabled>true</enabled>
+    <typeIds>
+      <typeId>docs.folder</typeId>
       <typeId>docs.root</typeId>
       <typeId>blogs.blog</typeId>
     </typeIds>
@@ -51,7 +81,7 @@
     <name>Add a meeting</name>
     <description>Call and speed-up of events as meeting, smartmobs,
       flashmobs, protest demonstrations, etc.</description>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <typeIds>
       <typeId>docs.doc</typeId>
     </typeIds>

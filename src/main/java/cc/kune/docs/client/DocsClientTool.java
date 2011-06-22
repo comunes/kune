@@ -51,7 +51,6 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
     registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerTranslatableTypes(TYPE_DOCUMENT, TYPE_FOLDER);
-
     registerIcons();
   }
 

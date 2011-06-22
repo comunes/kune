@@ -3,13 +3,19 @@ package cc.kune.core.client.actions;
 import java.util.HashMap;
 import java.util.Map;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.actions.WaveExtension.Builder;
 import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.shared.dto.AccessRolDTO;
+import cc.kune.gspace.client.actions.ActionGroups;
 
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -26,27 +32,40 @@ import com.google.inject.Provider;
 
 public class XMLActionsParser {
 
-  public static class GadgetAction extends AbstractExtendedAction {
+  public static class GadgetAction extends RolAction {
 
     private final Provider<ContentServiceAsync> contentService;
+    private final String gadgetName;
 
-    @Inject
-    public GadgetAction(final Provider<ContentServiceAsync> contentService) {
+    public GadgetAction(final Provider<ContentServiceAsync> contentService, final AccessRolDTO rok,
+        final boolean authNeeded, final String gadgetName, final String iconUrl) {
+      super(rok, authNeeded);
       this.contentService = contentService;
+      this.gadgetName = gadgetName;
+      putValue(Action.SMALL_ICON, iconUrl);
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
+      NotifyUser.info("Created succesfully");
     }
 
   }
 
+  private final ActionRegistryByType actionRegistry;
+  private final Provider<ContentServiceAsync> contentService;
   private final ErrorHandler errHandler;
   private final Map<String, WaveExtension> extensionsMap;
+  private final NewMenusForTypeIdsRegistry newMenusRegistry;
 
   @Inject
-  public XMLActionsParser(final ErrorHandler errHandler) {
+  public XMLActionsParser(final ErrorHandler errHandler, final ActionRegistryByType actionRegistry,
+      final Provider<ContentServiceAsync> contentService,
+      final NewMenusForTypeIdsRegistry newMenusRegistry) {
     this.errHandler = errHandler;
+    this.actionRegistry = actionRegistry;
+    this.contentService = contentService;
+    this.newMenusRegistry = newMenusRegistry;
     extensionsMap = new HashMap<String, WaveExtension>();
 
     // Based on:
@@ -81,7 +100,7 @@ public class XMLActionsParser {
 
   private void parseXML(final String text) {
     final Document parse = XMLParser.parse(text);
-    final NodeList extensions = parse.getElementsByTagName("extensions");
+    final NodeList extensions = ((Element) parse.getElementsByTagName("extensions").item(0)).getElementsByTagName("extension");
     for (int i = 0; i < extensions.getLength(); i++) {
       final Element extension = (Element) extensions.item(i);
       final Builder builder = new WaveExtension.Builder();
@@ -93,17 +112,40 @@ public class XMLActionsParser {
       builder.installerUrl(get(extension, "installerUrl"));
       extensionsMap.put(name, builder.build());
     }
-    final NodeList guiDescriptors = parse.getElementsByTagName("guiActionDescriptors");
+    final NodeList guiDescriptors = ((Element) parse.getElementsByTagName("guiActionDescriptors").item(0)).getElementsByTagName("guiActionDescriptor");
     for (int i = 0; i < guiDescriptors.getLength(); i++) {
-      final Element extension = (Element) extensions.item(i);
-      final Provider<GuiActionDescrip> provider = new Provider<GuiActionDescrip>() {
-        @Override
-        public GuiActionDescrip get() {
-          // TODO Auto-generated method stub
-          new MenuItemDescriptor(null);
-          return null;
+      final Element guiDescriptor = (Element) guiDescriptors.item(i);
+      if (Boolean.parseBoolean(get(guiDescriptor, "enabled"))) {
+        final String extensionName = get(guiDescriptor, "extensionName");
+        final WaveExtension extension = extensionsMap.get(extensionName);
+        if (extension == null) {
+          throw new UIException("Undefined extension " + extensionName);
         }
-      };
+        final String name = get(guiDescriptor, "name");
+        final String description = get(guiDescriptor, "description");
+        final AccessRolDTO rol = AccessRolDTO.valueOf(get(guiDescriptor, "rolRequired"));
+        final GadgetAction action = new GadgetAction(contentService, rol, Boolean.parseBoolean(get(
+            guiDescriptor, "authNeed")), extension.getGadgetUrl(), extension.getIconUrl());
+        final NodeList typeIds = ((Element) guiDescriptor.getElementsByTagName("typeIds").item(0)).getElementsByTagName("typeId");
+        final int length = typeIds.getLength();
+
+        for (int j = 0; j < length; j++) {
+          final Element typeIdElem = (Element) typeIds.item(j);
+          final String typeId = typeIdElem.getFirstChild().getNodeValue();
+          final MenuDescriptor menu = newMenusRegistry.get(typeId);
+          assert menu != null;
+          final Provider<GuiActionDescrip> menuItemProvider = new Provider<GuiActionDescrip>() {
+            @Override
+            public GuiActionDescrip get() {
+              final MenuItemDescriptor menuItem = new MenuItemDescriptor(action);
+              menuItem.withText(name).withToolTip(description);
+              menuItem.setParent(menu);
+              return menuItem;
+            }
+          };
+          actionRegistry.addAction(ActionGroups.VIEW, menuItemProvider, typeId);
+        }
+      }
     }
   }
 }

@@ -91,6 +91,7 @@ public class KuneEntryPoint implements EntryPoint {
     ginjector.getCoreParts();
     ginjector.getGSpaceParts();
     ginjector.getPSpaceParts();
+    ginjector.getXmlActionsParser();
     ginjector.getContentViewerSelector().init();
   }
 }

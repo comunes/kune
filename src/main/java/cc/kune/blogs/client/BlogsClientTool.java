@@ -51,7 +51,6 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
     registerRenamableTypes(TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE);
     registerTageableTypes(TYPE_BLOG, TYPE_UPLOADEDFILE, TYPE_POST);
     // registerTranslatableTypes();
-
     registerIcons();
   }
 

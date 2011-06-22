@@ -41,9 +41,9 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   @Override
   protected void addStyle(final String style) {
     if (notStandAlone) {
-      iconLabel.addStyleName(style);
+      // iconLabel.addStyleName(style);
       button.addStyleName(style);
-      layout();
+      // layout();
     }
   }
 
@@ -56,7 +56,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     notStandAlone = !((MenuDescriptor) descriptor).isStandalone();
     if (notStandAlone) {
       button = new Button();
-      button.setStylePrimaryName("oc-button");
+      // button.setStylePrimaryName("oc-button");
       iconLabel = new IconLabel("");
       final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
       if (rightIcon != null) {

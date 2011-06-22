@@ -26,6 +26,7 @@ import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -55,8 +56,9 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<DelPostMenuItem> delContentMenuItem,
       final Provider<RefreshContentMenuItem> refresh,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
-      final Provider<ParticipateInContentBtn> participateBtn,
-      final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelBlogMenuItem> delFolderMenuItem,
+      final Provider<ParticipateInContentBtn> participateBtn, final BlogsNewMenu blogNewMenu,
+      final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
+      final Provider<DelBlogMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
@@ -71,8 +73,8 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.MENUITEM, delFolderMenuItem, containersNoRoot);
-    // actionsRegistry.addAction(ActionGroups.MENUITEM, setAsHomePage,
-    // TYPE_BLOG);
+    newMenusRegistry.register(TYPE_BLOG, blogNewMenu.get());
+    actionsRegistry.addAction(ActionGroups.VIEW, blogNewMenu, TYPE_BLOG);
   }
 
   @Override
