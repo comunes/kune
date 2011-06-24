@@ -100,10 +100,10 @@ public class FolderViewerPresenter extends
     void showEmptyMsg(String contentTypeId);
   }
 
-  protected static final String CSSBTN = "k-button";
-  protected static final String CSSBTNC = "k-button, k-button-center";
-  protected static final String CSSBTNL = "k-button, k-button-left";
-  protected static final String CSSBTNR = "k-button, k-button-right";
+  protected static final String CSSBTN = "k-button, k-fr";
+  protected static final String CSSBTNC = "k-button, k-button-center, k-fr";
+  protected static final String CSSBTNL = "k-button, k-button-left, k-fr";
+  protected static final String CSSBTNR = "k-button, k-button-right, k-fr";
 
   private final ActionRegistryByType actionsRegistry;
 
@@ -236,7 +236,7 @@ public class FolderViewerPresenter extends
     final ContainerSimpleDTO[] path = container.getAbsolutePath();
     final int pathLength = path.length;
     if (pathLength > 0) {
-      for (int i = 0; i < pathLength; i++) {
+      for (int i = pathLength - 1; i >= 0; i--) {
         final ButtonDescriptor btn = createPathButton(path[i], pathLength, i);
         actions.add(btn);
       }

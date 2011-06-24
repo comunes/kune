@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.actions.JoinGroupAction;
 import cc.kune.core.client.sn.actions.MembersModerationMenuItem;
 import cc.kune.core.client.sn.actions.MembersVisibilityMenuItem;
@@ -45,6 +46,13 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+/**
+ * 
+ * You must call {@link GroupSNPresenter#refreshActions()} when adding some
+ * action externally with
+ * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
+ * 
+ */
 @SuppressWarnings("serial")
 public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
@@ -73,24 +81,24 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     final MenuRadioItemDescriptor moderatedItem = membersModeration.get().withModeration(
         AdmissionType.Moderated);
     final MenuRadioItemDescriptor openItem = membersModeration.get().withModeration(AdmissionType.Open);
-    add(OPTIONS_MENU);
-    add(optionsTitle);
-    add(VISIBILITY_SUBMENU.withText(i18n.t("Those who can view this member list")).withParent(
+    addImpl(OPTIONS_MENU);
+    addImpl(optionsTitle);
+    addImpl(VISIBILITY_SUBMENU.withText(i18n.t("Those who can view this member list")).withParent(
         OPTIONS_MENU));
-    add(MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU));
-    add(anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone")));
-    add(onlyMembersItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only members")));
-    add(onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only admins")));
-    add(moderatedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("moderate request to join")));
-    add(openItem.withParent(MODERATION_SUBMENU).withText(i18n.t("auto accept request to join")));
+    addImpl(MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU));
+    addImpl(anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone")));
+    addImpl(onlyMembersItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only members")));
+    addImpl(onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only admins")));
+    addImpl(moderatedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("moderate request to join")));
+    addImpl(openItem.withParent(MODERATION_SUBMENU).withText(i18n.t("auto accept request to join")));
     // add(closedItem.withParent(MODERATION_SUBMENU).withText(
     // i18n.t("closed for new members")));
 
     final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
     final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);
     // unJoinBtn.add(isLoggedCondition);
-    add(joinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
-    add(unJoinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
+    addImpl(joinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
+    addImpl(unJoinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
 
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
@@ -128,4 +136,21 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       }
     });
   }
+
+  /**
+   * 
+   * You must call {@link GroupSNPresenter#refreshActions()} when adding some
+   * action externally with
+   * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
+   * 
+   */
+  @Override
+  public boolean add(final GuiActionDescrip action) {
+    return addImpl(action);
+  }
+
+  private boolean addImpl(final GuiActionDescrip action) {
+    return super.add(action);
+  }
+
 }

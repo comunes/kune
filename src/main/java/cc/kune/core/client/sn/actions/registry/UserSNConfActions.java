@@ -20,10 +20,12 @@
 package cc.kune.core.client.sn.actions.registry;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.sn.actions.AddNewBuddiesAction;
 import cc.kune.core.client.sn.actions.UserSNVisibilityMenuItem;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
@@ -38,6 +40,13 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+/**
+ * 
+ * You must call {@link UserSNPresenter#refreshActions()} when adding some
+ * action externally with
+ * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
+ * 
+ */
 @SuppressWarnings("serial")
 public class UserSNConfActions extends AbstractSNActionsRegistry {
 
@@ -59,15 +68,16 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
         UserSNetVisibility.onlyyou);
     assert anyoneItem.getAction() != onlyYourBuddiesItem.getAction();
     assert anyoneItem.getAction() != onlyYou.getAction();
-    add(OPTIONS_MENU);
-    add(VISIBILITY_SUBMENU.withText(i18n.t("Those who can view your network")).withParent(OPTIONS_MENU));
-    add(anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone")));
-    add(onlyYourBuddiesItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only your buddies")));
-    add(onlyYou.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only you")));
+    addImpl(OPTIONS_MENU);
+    addImpl(VISIBILITY_SUBMENU.withText(i18n.t("Those who can view your network")).withParent(
+        OPTIONS_MENU));
+    addImpl(anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone")));
+    addImpl(onlyYourBuddiesItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only your buddies")));
+    addImpl(onlyYou.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only you")));
 
     final ButtonDescriptor addBuddieBtn = new ButtonDescriptor(addNewBuddiesAction);
 
-    add(addBuddieBtn.withStyles("k-no-backimage"));
+    addImpl(addBuddieBtn.withStyles("k-no-backimage"));
 
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
@@ -97,4 +107,21 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
       }
     });
   }
+
+  /**
+   * 
+   * You must call {@link UserSNPresenter#refreshActions()} when adding some
+   * action externally with
+   * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
+   * 
+   */
+  @Override
+  public boolean add(final GuiActionDescrip action) {
+    return addImpl(action);
+  }
+
+  private boolean addImpl(final GuiActionDescrip action) {
+    return super.add(action);
+  }
+
 }

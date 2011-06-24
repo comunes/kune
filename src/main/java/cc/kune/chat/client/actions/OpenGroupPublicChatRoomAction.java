@@ -48,93 +48,96 @@ import com.google.inject.Inject;
 
 public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
 
-    private final ChatClient chatClient;
-    private final I18nTranslationService i18n;
-    private boolean inviteMembers;
-    private final RoomManager roomManager;
-    private final Session session;
+  private final ChatClient chatClient;
+  private final I18nTranslationService i18n;
+  private boolean inviteMembers;
+  private final RoomManager roomManager;
+  private final Session session;
 
-    @SuppressWarnings("deprecation")
-    @Inject
-    public OpenGroupPublicChatRoomAction(final Session session,
-            final AccessRightsClientManager accessRightsClientManager, final ChatClient chatClient,
-            final StateManager stateManager, final I18nTranslationService i18n, final ChatResources res) {
-        super(stateManager, session, accessRightsClientManager, AccessRolDTO.Editor, true, false, true);
-        this.session = session;
-        this.chatClient = chatClient;
-        this.i18n = i18n;
-        roomManager = Suco.get(RoomManager.class);
-        stateManager.onStateChanged(true, new StateChangedHandler() {
+  @SuppressWarnings("deprecation")
+  @Inject
+  public OpenGroupPublicChatRoomAction(final Session session,
+      final AccessRightsClientManager accessRightsClientManager, final ChatClient chatClient,
+      final StateManager stateManager, final I18nTranslationService i18n, final ChatResources res) {
+    super(stateManager, session, accessRightsClientManager, AccessRolDTO.Editor, true, false, true);
+    this.session = session;
+    this.chatClient = chatClient;
+    this.i18n = i18n;
+    roomManager = Suco.get(RoomManager.class);
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        // setState(session.getCurrentState());
+      }
+    });
+    putValue(Action.NAME, i18n.t("Group's public room"));
+    putValue(Action.SHORT_DESCRIPTION, i18n.t("Enter to this group public chat room"));
+    putValue(Action.SMALL_ICON, res.groupChat());
+    setInviteMembersImpl(false);
+  }
+
+  @Override
+  public void actionPerformed(final ActionEvent event) {
+    final String currentGroupName = session.getCurrentGroupShortName();
+    final Room room = chatClient.joinRoom(currentGroupName, session.getCurrentUser().getShortName());
+    inviteMembers(room);
+    chatClient.show();
+  }
+
+  private void addGroup(final List<XmppURI> membersUris, final GroupDTO member) {
+    membersUris.add(chatClient.uriFrom(member.getShortName()));
+  }
+
+  private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {
+    return state.getGroup().isPersonal();
+  }
+
+  private void inviteMembers(final Room room) {
+    if (inviteMembers) {
+      room.addChatStateChangedHandler(true,
+          new com.calclab.emite.core.client.events.StateChangedHandler() {
             @Override
-            public void onStateChanged(final StateChangedEvent event) {
-                setState(session.getCurrentState());
-            }
-        });
-        putValue(Action.NAME, i18n.t("Group's public room"));
-        putValue(Action.SHORT_DESCRIPTION, i18n.t("Enter to this group public chat room"));
-        putValue(Action.SMALL_ICON, res.groupChat());
-        setInviteMembersImpl(false);
-    }
-
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-        final String currentGroupName = session.getCurrentGroupShortName();
-        final Room room = chatClient.joinRoom(currentGroupName, session.getCurrentUser().getShortName());
-        inviteMembers(room);
-        chatClient.show();
-    }
-
-    private void addGroup(final List<XmppURI> membersUris, final GroupDTO member) {
-        membersUris.add(chatClient.uriFrom(member.getShortName()));
-    }
-
-    private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {
-        return state.getGroup().isPersonal();
-    }
-
-    private void inviteMembers(final Room room) {
-        if (inviteMembers) {
-            room.addChatStateChangedHandler(true, new com.calclab.emite.core.client.events.StateChangedHandler() {
-                @Override
-                public void onStateChanged(final com.calclab.emite.core.client.events.StateChangedEvent event) {
-                    if (event.getState().equals(ChatStates.ready)) {
-                        // When ready we invite to the rest of members
-                        final SocialNetworkDTO groupMembers = session.getCurrentState().getGroupMembers();
-                        final List<XmppURI> membersUris = new ArrayList<XmppURI>();
-                        for (final GroupDTO member : groupMembers.getAccessLists().getAdmins().getList()) {
-                            addGroup(membersUris, member);
-                        }
-                        for (final GroupDTO member : groupMembers.getAccessLists().getEditors().getList()) {
-                            addGroup(membersUris, member);
-                        }
-                        for (final Occupant occupant : room.getOccupants()) {
-                            // Remove all member that are in the room
-                            membersUris.remove(occupant.getJID());
-                        }
-                        for (final XmppURI memberNotPresent : membersUris) {
-                            room.sendInvitationTo(memberNotPresent,
-                                    i18n.t("Join us in [%s] public room!", room.getURI().getNode()));
-                        }
-                    }
+            public void onStateChanged(final com.calclab.emite.core.client.events.StateChangedEvent event) {
+              if (event.getState().equals(ChatStates.ready)) {
+                // When ready we invite to the rest of members
+                final SocialNetworkDTO groupMembers = session.getCurrentState().getGroupMembers();
+                final List<XmppURI> membersUris = new ArrayList<XmppURI>();
+                for (final GroupDTO member : groupMembers.getAccessLists().getAdmins().getList()) {
+                  addGroup(membersUris, member);
                 }
-            });
-        }
+                for (final GroupDTO member : groupMembers.getAccessLists().getEditors().getList()) {
+                  addGroup(membersUris, member);
+                }
+                for (final Occupant occupant : room.getOccupants()) {
+                  // Remove all member that are in the room
+                  membersUris.remove(occupant.getJID());
+                }
+                for (final XmppURI memberNotPresent : membersUris) {
+                  room.sendInvitationTo(memberNotPresent,
+                      i18n.t("Join us in [%s] public room!", room.getURI().getNode()));
+                }
+              }
+            }
+          });
     }
+  }
 
-    public void setInviteMembers(final boolean inviteMembers) {
-        setInviteMembersImpl(inviteMembers);
-    }
+  public void setInviteMembers(final boolean inviteMembers) {
+    setInviteMembersImpl(inviteMembers);
+  }
 
-    private void setInviteMembersImpl(final boolean inviteMembers) {
-        this.inviteMembers = inviteMembers;
-    }
+  private void setInviteMembersImpl(final boolean inviteMembers) {
+    this.inviteMembers = inviteMembers;
+  }
 
-    private void setState(final StateAbstractDTO state) {
-        final boolean imLogged = session.isLogged();
-        if (imLogged && !currentGroupsIsAsPerson(state)) {
-            setEnabled(true);
-        } else {
-            setEnabled(false);
-        }
+  private void setState(final StateAbstractDTO state) {
+    final boolean imLogged = session.isLogged();
+    if (imLogged && !currentGroupsIsAsPerson(state)) {
+      setEnabled(false);
+      setEnabled(true);
+    } else {
+      setEnabled(true);
+      setEnabled(false);
     }
+  }
 }

@@ -93,6 +93,6 @@ public class NewContainerBtn extends ButtonDescriptor {
     // The name given to this new content
     action.putValue(NEW_NAME, newName);
     action.putValue(ID, id);
-    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fr");
+    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fl");
   }
 }

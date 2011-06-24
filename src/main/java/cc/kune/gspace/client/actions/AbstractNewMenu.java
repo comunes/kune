@@ -21,9 +21,9 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInOrSignOutEvent;
-import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.state.AccessRightsChangedEvent;
+import cc.kune.core.client.state.AccessRightsChangedEvent.AccessRightsChangedHandler;
+import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -32,14 +32,15 @@ public class AbstractNewMenu extends MenuDescriptor {
 
   @Inject
   public AbstractNewMenu(final CoreResources res, final I18nTranslationService i18n,
-      final Session session) {
+      final AccessRightsClientManager rightsManager) {
     super();
-    this.withIcon(res.arrowdownsitebar()).withStyles("k-button, k-btn, k-5corners, k-def-docbtn, k-fr").withText(
+    this.withIcon(res.arrowdownsitebar()).withStyles("k-button, k-btn, k-5corners, k-def-docbtn, k-fl").withText(
         "New");
-    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+
+    rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override
-      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        AbstractNewMenu.this.setVisible(event.isLogged());
+      public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
+        AbstractNewMenu.this.setVisible(event.getCurrentRights().isEditable());
       }
     });
   }

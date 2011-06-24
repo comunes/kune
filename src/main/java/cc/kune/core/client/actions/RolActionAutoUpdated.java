@@ -53,7 +53,6 @@ public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
       public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
         refreshStatus(rolRequired, authNeed, session.isLogged(), visibleForMembers, visibleForNonMemb,
             event.getCurrentRights());
-
       }
     });
   }
@@ -75,6 +74,7 @@ public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
         newVisibility = false;
       }
     }
+    setEnabled(!newEnabled);
     setEnabled(newEnabled);
     // Workaround to force change ...
     putValue(GuiActionDescrip.VISIBLE, !newVisibility);

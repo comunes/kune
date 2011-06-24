@@ -91,7 +91,7 @@ public class NewRoomBtn extends ButtonDescriptor {
   public NewRoomBtn(final I18nTranslationService i18n, final NewRoomAction action, final NavResources res) {
     super(action);
     this.withText(i18n.t("New room")).withToolTip(i18n.t("Create a new chat room")).withStyles(
-        "k-def-docbtn, k-fr").withIcon(res.roomAdd());
+        "k-def-docbtn, k-fl").withIcon(res.roomAdd());
   }
 
 }

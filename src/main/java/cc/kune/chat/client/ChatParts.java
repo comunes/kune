@@ -20,16 +20,22 @@
 package cc.kune.chat.client;
 
 import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
+import cc.kune.chat.client.actions.AddAsBuddieHeaderButton.AddAsBuddieAction;
 import cc.kune.chat.client.actions.ChatClientActions;
 import cc.kune.chat.client.actions.ChatSitebarActions;
 import cc.kune.chat.client.actions.OpenGroupPublicChatRoomAction;
+import cc.kune.chat.client.actions.StartAssemblyWithMembers;
 import cc.kune.chat.client.actions.StartChatWithMemberAction;
 import cc.kune.chat.client.actions.StartChatWithThisBuddieAction;
 import cc.kune.chat.client.actions.StartChatWithUserAction;
 import cc.kune.chat.shared.ChatConstants;
+import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.PropertyChangeEvent;
+import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateEditableCondition;
@@ -58,15 +64,16 @@ public class ChatParts {
       final Provider<GroupSNAdminsMenuItemsRegistry> snAdminsRegistry,
       final Provider<GroupSNCollabsMenuItemsRegistry> snCollabsItemsRegistry,
       final Provider<GroupSNPendingsMenuItemsRegistry> snPendingItemsRegistry,
-      final Provider<GroupSNConfActions> groupConfActions,
+      final Provider<GroupSNConfActions> groupConfActions, final Provider<GroupSNPresenter> groupSN,
       final Provider<UserSNMenuItemsRegistry> userItemsRegistry, final IsNotMeCondition isNotMe,
       final IsCurrentStateAdministrableCondition isAdministrableCondition,
       final IsCurrentStateEditableCondition isEditableCondition,
       final IsCurrentStateAGroupCondition isGroupCondition, final IsPersonCondition isPersonCondition,
+      final Provider<AddAsBuddieAction> addAsBuddie,
       final Provider<StartChatWithMemberAction> startChatWithMemberAction,
       final IsLoggedCondition isLogged, final Provider<StartChatWithUserAction> startChatWithUserAction,
       final Provider<StartChatWithThisBuddieAction> startChatWithBuddieAction,
-      final ChatClientActions chatActions,
+      final ChatClientActions chatActions, final Provider<StartAssemblyWithMembers> startAssembly,
       final Provider<OpenGroupPublicChatRoomAction> openGroupRoomAction,
       // final Provider<OpenGroupPublicChatRoomButton> openGroupRoom,
       final ContentViewerSelector viewerSelector, final FolderViewerPresenter folderViewer) {
@@ -96,6 +103,28 @@ public class ChatParts {
             return item;
           }
         };
+        final Provider<MenuItemDescriptor> addAsBuddieItem = new Provider<MenuItemDescriptor>() {
+          @Override
+          public MenuItemDescriptor get() {
+            final AddAsBuddieAction action = addAsBuddie.get();
+            final MenuItemDescriptor item = new MenuItemDescriptor(action);
+            item.add(isNotMe);
+            item.add(isLogged);
+            item.add(isPersonCondition);
+            /**
+             * FIXME Buggy & duplicate code with {@link AddAsBuddieHeaderButton}
+             */
+            action.addPropertyChangeListener(new PropertyChangeListener() {
+              @Override
+              public void propertyChange(final PropertyChangeEvent event) {
+                if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
+                  item.setVisible((Boolean) event.getNewValue());
+                }
+              }
+            });
+            return item;
+          }
+        };
         final Provider<MenuItemDescriptor> startChatWithUserItem = new Provider<MenuItemDescriptor>() {
           @Override
           public MenuItemDescriptor get() {
@@ -106,25 +135,15 @@ public class ChatParts {
             return item;
           }
         };
-        final Provider<MenuItemDescriptor> openChatAndInvite = new Provider<MenuItemDescriptor>() {
-          @Override
-          public MenuItemDescriptor get() {
-            final OpenGroupPublicChatRoomAction action = openGroupRoomAction.get();
-            action.setInviteMembers(true);
-            final MenuItemDescriptor item = new MenuItemDescriptor(action);
-            item.withText(i18n.t("Open group's room with members")).withToolTip(
-                i18n.t("Enter to this group public chat room and invite members"));
-            item.setParent(GroupSNConfActions.OPTIONS_MENU);
-            item.setPosition(0);
-            return item;
-          }
-        };
+
         snAdminsRegistry.get().add(startChatWithMemberItem);
         snCollabsItemsRegistry.get().add(startChatWithMemberItem);
         snPendingItemsRegistry.get().add(startChatWithUserItem);
         userItemsRegistry.get().add(startChatWithBuddieItem);
-        groupConfActions.get().add(openChatAndInvite.get());
+        userItemsRegistry.get().add(addAsBuddieItem);
+        groupConfActions.get().add(startAssembly.get());
         buddieButton.get();
+        groupSN.get().refreshActions();
         // openGroupRoom.get();
       }
     });

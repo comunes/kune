@@ -126,11 +126,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
             UserSNPresenter.this.onStateChanged(event.getState());
           }
         });
-    createActions();
-  }
-
-  private void createActions() {
-    getView().getBottomToolbar().addAll(confActionsRegistry);
+    refreshActionsImpl();
   }
 
   @Override
@@ -154,6 +150,15 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
       }
       getView().setVisible(true);
     }
+  }
+
+  public void refreshActions() {
+    refreshActionsImpl();
+  }
+
+  private void refreshActionsImpl() {
+    getView().getBottomToolbar().clear();
+    getView().getBottomToolbar().addAll(confActionsRegistry);
   }
 
   private void refreshOnSignInSignOut(final Session session) {

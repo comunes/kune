@@ -133,13 +133,8 @@ public class GroupSNPresenter extends
       public void onUserSignOut(final UserSignOutEvent event) {
         refreshOnSignInSignOut(session);
       }
-
     });
-    createActions();
-  }
-
-  private void createActions() {
-    getView().getBottomToolbar().addAll(actionsRegistry);
+    refreshActionsImpl();
   }
 
   @Override
@@ -160,6 +155,15 @@ public class GroupSNPresenter extends
         getView().setVisible(true);
       }
     }
+  }
+
+  public void refreshActions() {
+    refreshActionsImpl();
+  }
+
+  private void refreshActionsImpl() {
+    getView().getBottomToolbar().clear();
+    getView().getBottomToolbar().addAll(actionsRegistry);
   }
 
   private void refreshOnSignInSignOut(final Session session) {

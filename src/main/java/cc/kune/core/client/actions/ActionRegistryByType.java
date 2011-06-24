@@ -59,6 +59,15 @@ public class ActionRegistryByType {
     addAction(GENERIC_GROUP_ACTION, action, GENERIC_TYPE_ID);
   }
 
+  public void addAction(final String actionsGroupId, final GuiActionDescrip descrip, final String typeId) {
+    addAction(actionsGroupId, new Provider<GuiActionDescrip>() {
+      @Override
+      public GuiActionDescrip get() {
+        return descrip;
+      }
+    }, typeId);
+  }
+
   public void addAction(@Nonnull final String actionsGroupId,
       final Provider<? extends GuiActionDescrip> action) {
     addAction(actionsGroupId, action, GENERIC_TYPE_ID);

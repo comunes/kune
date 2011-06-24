@@ -97,7 +97,7 @@ public abstract class NewContentBtn extends ButtonDescriptor {
     // final KeyStroke shortcut = Shortcut.getShortcut(false, true, false,
     // false, Character.valueOf('N'));
     // shorcutReg.put(shortcut, action);
-    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fr");
+    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fl");
   }
 
 }

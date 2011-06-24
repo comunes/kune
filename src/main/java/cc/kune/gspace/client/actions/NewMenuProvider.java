@@ -5,7 +5,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import com.google.inject.Provider;
 
 /**
- * The Class NewMenusProvider ins a way to create a kind of singeltons for menu
+ * The Class NewMenusProvider is a way to create a kind of singletons for menu
  * entries. This can be register in a list of Providers<GuiDescriptor> but in
  * fact only references one item and can be used to select the parent of some
  * menu items

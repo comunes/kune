@@ -8,8 +8,10 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.actions.WaveExtension.Builder;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
@@ -52,11 +54,14 @@ public class XMLActionsParser {
 
   }
 
+  private static final String SEP = "»";
+
   private final ActionRegistryByType actionRegistry;
   private final Provider<ContentServiceAsync> contentService;
   private final ErrorHandler errHandler;
   private final Map<String, WaveExtension> extensionsMap;
   private final NewMenusForTypeIdsRegistry newMenusRegistry;
+  private final HashMap<String, SubMenuDescriptor> submenus;
 
   @Inject
   public XMLActionsParser(final ErrorHandler errHandler, final ActionRegistryByType actionRegistry,
@@ -67,6 +72,7 @@ public class XMLActionsParser {
     this.contentService = contentService;
     this.newMenusRegistry = newMenusRegistry;
     extensionsMap = new HashMap<String, WaveExtension>();
+    submenus = new HashMap<String, SubMenuDescriptor>();
 
     // Based on:
     // http://www.roseindia.net/tutorials/gwt/retrieving-xml-data.shtml
@@ -94,6 +100,36 @@ public class XMLActionsParser {
     return child != null ? child.getNodeValue() : "";
   }
 
+  private SubMenuDescriptor getSubMenu(final MenuDescriptor menu, final String typeId,
+      final String parentS) {
+    final String[] path = parentS.split(SEP);
+    SubMenuDescriptor current = null;
+    for (int i = 0; i < path.length; i++) {
+      final String name = path[i];
+      final String subpathId = getSubPathId(typeId, path, i);
+      SubMenuDescriptor subMenuDescriptor = submenus.get(subpathId);
+      if (subMenuDescriptor == null) {
+        final GuiActionDescrip parent = (i == 0 ? menu : submenus.get(getSubPathId(typeId, path, i - 1)));
+        assert parent != null;
+        subMenuDescriptor = new SubMenuDescriptor(parent, name);
+        // subMenuDescriptor.setVisible(false);
+        submenus.put(subpathId, subMenuDescriptor);
+        actionRegistry.addAction(ActionGroups.TOOLBAR, subMenuDescriptor, typeId);
+      }
+      current = subMenuDescriptor;
+    }
+    assert current != null;
+    return current;
+  }
+
+  private String getSubPathId(final String typeId, final String[] path, final int i) {
+    final StringBuffer id = new StringBuffer().append(typeId);
+    for (int j = 0; j <= i; j++) {
+      id.append(SEP).append(path[j]);
+    }
+    return id.toString();
+  }
+
   private void onFailed(final Throwable ex) {
     errHandler.process(ex);
   }
@@ -116,34 +152,39 @@ public class XMLActionsParser {
     for (int i = 0; i < guiDescriptors.getLength(); i++) {
       final Element guiDescriptor = (Element) guiDescriptors.item(i);
       if (Boolean.parseBoolean(get(guiDescriptor, "enabled"))) {
-        final String extensionName = get(guiDescriptor, "extensionName");
-        final WaveExtension extension = extensionsMap.get(extensionName);
-        if (extension == null) {
-          throw new UIException("Undefined extension " + extensionName);
-        }
-        final String name = get(guiDescriptor, "name");
-        final String description = get(guiDescriptor, "description");
-        final AccessRolDTO rol = AccessRolDTO.valueOf(get(guiDescriptor, "rolRequired"));
-        final GadgetAction action = new GadgetAction(contentService, rol, Boolean.parseBoolean(get(
-            guiDescriptor, "authNeed")), extension.getGadgetUrl(), extension.getIconUrl());
-        final NodeList typeIds = ((Element) guiDescriptor.getElementsByTagName("typeIds").item(0)).getElementsByTagName("typeId");
-        final int length = typeIds.getLength();
+        final String type = get(guiDescriptor, "type");
+        if (type.equals("wave-gadget")) {
+          final String extensionName = get(guiDescriptor, "extensionName");
+          final WaveExtension extension = extensionsMap.get(extensionName);
+          if (extension == null) {
+            throw new UIException("Undefined extension " + extensionName);
+          }
+          final String name = get(guiDescriptor, "name");
+          final String description = get(guiDescriptor, "description");
+          final AccessRolDTO rol = AccessRolDTO.valueOf(get(guiDescriptor, "rolRequired"));
+          final GadgetAction action = new GadgetAction(contentService, rol, Boolean.parseBoolean(get(
+              guiDescriptor, "authNeed")), extension.getGadgetUrl(), extension.getIconUrl());
+          final NodeList typeIds = ((Element) guiDescriptor.getElementsByTagName("typeIds").item(0)).getElementsByTagName("typeId");
+          final int length = typeIds.getLength();
 
-        for (int j = 0; j < length; j++) {
-          final Element typeIdElem = (Element) typeIds.item(j);
-          final String typeId = typeIdElem.getFirstChild().getNodeValue();
-          final MenuDescriptor menu = newMenusRegistry.get(typeId);
-          assert menu != null;
-          final Provider<GuiActionDescrip> menuItemProvider = new Provider<GuiActionDescrip>() {
-            @Override
-            public GuiActionDescrip get() {
-              final MenuItemDescriptor menuItem = new MenuItemDescriptor(action);
-              menuItem.withText(name).withToolTip(description);
-              menuItem.setParent(menu);
-              return menuItem;
-            }
-          };
-          actionRegistry.addAction(ActionGroups.TOOLBAR, menuItemProvider, typeId);
+          for (int j = 0; j < length; j++) {
+            final Element typeIdElem = (Element) typeIds.item(j);
+            final String typeId = typeIdElem.getFirstChild().getNodeValue();
+            final MenuDescriptor menu = newMenusRegistry.get(typeId);
+            assert menu != null;
+            final String parent = get(guiDescriptor, "parent");
+            final SubMenuDescriptor submenu = getSubMenu(menu, typeId, parent);
+            final Provider<GuiActionDescrip> menuItemProvider = new Provider<GuiActionDescrip>() {
+              @Override
+              public GuiActionDescrip get() {
+                final MenuItemDescriptor menuItem = new MenuItemDescriptor(action);
+                menuItem.withText(name).withToolTip(description);
+                menuItem.setParent(TextUtils.notEmpty(parent) ? submenu : menu);
+                return menuItem;
+              }
+            };
+            actionRegistry.addAction(ActionGroups.TOOLBAR, menuItemProvider, typeId);
+          }
         }
       }
     }

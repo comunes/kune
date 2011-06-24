@@ -2,99 +2,108 @@
 
 <kuneWaveExtensions>
 
-<!-- List of Wave extensions to use in Kune ===================== -->
+  <!-- List of Wave extensions to use in Kune ===================== -->
 
-<extensions>
+  <extensions>
 
-  <extension>
-    <name>pollo</name>
-    <installerUrl>http://wavepollo.appspot.com/pollo.xml
-    </installerUrl>
-    <gadgetUrl>http://wavepollo.appspot.com/wavepollo/com.appspot.wavepollo.client.PolloWaveGadget.gadget.xml
-    </gadgetUrl>
-    <iconUrl>https://flinz-pollo.appspot.com/document_graph.png</iconUrl>
-    <iconCss></iconCss>
-  </extension>
-  <extension>
-    <name>massmob</name>
-    <installerUrl>http://mass-mob.appspot.com/massmob/massmob-extension.xml
-    </installerUrl>
-    <gadgetUrl>http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml
-    </gadgetUrl>
-    <iconUrl>http://mass-mob.appspot.com/logo.png</iconUrl>
-    <iconCss></iconCss>
-  </extension>
+    <extension>
+      <name>pollo</name>
+      <installerUrl>http://wavepollo.appspot.com/pollo.xml
+      </installerUrl>
+      <gadgetUrl>http://wavepollo.appspot.com/wavepollo/com.appspot.wavepollo.client.PolloWaveGadget.gadget.xml
+      </gadgetUrl>
+      <iconUrl>https://flinz-pollo.appspot.com/document_graph.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
 
-</extensions>
+    <extension>
+      <name>massmob</name>
+      <installerUrl>http://mass-mob.appspot.com/massmob/massmob-extension.xml
+      </installerUrl>
+      <gadgetUrl>http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml
+      </gadgetUrl>
+      <iconUrl>http://mass-mob.appspot.com/logo.png</iconUrl>
+      <iconCss></iconCss>
+    </extension>
 
-<!-- Where and how to use the above extensions ================ -->
+  </extensions>
 
-<guiActionDescriptors>
+  <!-- Where and how to use the above extensions ================ -->
 
-  <guiActionDescriptor>
-    <extensionName>massmob</extensionName>
-    <name>New meeting</name>
-    <description>Call and speed-up of events as meeting, smartmobs,
-      flashmobs, protest demonstrations, etc.</description>
-    <enabled>true</enabled>
-    <typeIds>
-      <typeId>docs.folder</typeId>
-      <typeId>docs.root</typeId>
-      <typeId>blogs.blog</typeId>
-    </typeIds>
-    <name></name>
-    <location>
-      <rol>
-        <!-- Administrator, Editor, Viewer -->
-        <rolRequired>Editor</rolRequired>
-        <authNeed>true</authNeed>
-      </rol>
-    </location>
-    <!-- only for new waves: anyone, onlymembers, onlyadmins, ask -->
-    <participants>ask</participants>
-  </guiActionDescriptor>
+  <guiActionDescriptors>
 
-  <guiActionDescriptor>
-    <extensionName>pollo</extensionName>
-    <name>New poll</name>
-    <description>Make some poll (allow single and multiple polls))</description>
-    <enabled>true</enabled>
-    <typeIds>
-      <typeId>docs.folder</typeId>
-      <typeId>docs.root</typeId>
-      <typeId>blogs.blog</typeId>
-    </typeIds>
-    <name></name>
-    <location>
-      <rol>
-        <!-- Administrator, Editor, Viewer -->
-        <rolRequired>Editor</rolRequired>
-        <authNeed>true</authNeed>
-      </rol>
-    </location>
-    <!-- only for new waves: anyone, onlymembers, onlyadmins, ask -->
-    <participants>ask</participants>
-  </guiActionDescriptor>
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>massmob</extensionName>
+      <name>New meeting</name>
+      <parent>Gadget»Calendar</parent>
+      <description>Call and speed-up of events as meeting, smartmobs,
+        flashmobs, protest demonstrations, etc.</description>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId>docs.folder</typeId>
+        <typeId>docs.root</typeId>
+        <typeId>blogs.blog</typeId>
+      </typeIds>
+      <name></name>
+      <location>
+        <rol>
+          <!-- Administrator, Editor, Viewer -->
+          <rolRequired>Editor</rolRequired>
+          <authNeed>true</authNeed>
+        </rol>
+      </location>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
 
-  <guiActionDescriptor>
-    <extensionName>massmob</extensionName>
-    <name>Add a meeting</name>
-    <description>Call and speed-up of events as meeting, smartmobs,
-      flashmobs, protest demonstrations, etc.</description>
-    <enabled>false</enabled>
-    <typeIds>
-      <typeId>docs.doc</typeId>
-    </typeIds>
-    <name></name>
-    <location>
-      <rol>
-        <!-- Administrator, Editor, Viewer -->
-        <rolRequired>Editor</rolRequired>
-        <authNeed>true</authNeed>
-      </rol>
-    </location>
-  </guiActionDescriptor>
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>pollo</extensionName>
+      <name>New poll</name>
+      <parent>Gadget»Voting</parent>
+      <description>Make some poll (allow single and multiple polls))
+      </description>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId>docs.folder</typeId>
+        <typeId>docs.root</typeId>
+        <typeId>blogs.blog</typeId>
+      </typeIds>
+      <name></name>
+      <location>
+        <rol>
+          <!-- Administrator, Editor, Viewer -->
+          <rolRequired>Editor</rolRequired>
+          <authNeed>true</authNeed>
+        </rol>
+      </location>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
 
-</guiActionDescriptors>
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>massmob</extensionName>
+      <name>Add a meeting</name>
+      <parent>Gadget»Calendar</parent>
+      <description>Call and speed-up of events as meeting, smartmobs,
+        flashmobs, protest demonstrations, etc.</description>
+      <enabled>false</enabled>
+      <typeIds>
+        <typeId>docs.doc</typeId>
+      </typeIds>
+      <name></name>
+      <location>
+        <rol>
+          <!-- Administrator, Editor, Viewer -->
+          <rolRequired>Editor</rolRequired>
+          <authNeed>true</authNeed>
+        </rol>
+      </location>
+    </guiActionDescriptor>
+
+  </guiActionDescriptors>
 
 </kuneWaveExtensions>
