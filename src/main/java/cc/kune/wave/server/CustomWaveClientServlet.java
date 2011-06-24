@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.HashMap;
 
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +46,6 @@ import org.waveprotocol.wave.util.logging.Log;
 import com.google.common.collect.Maps;
 import com.google.gxp.base.GxpContext;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**

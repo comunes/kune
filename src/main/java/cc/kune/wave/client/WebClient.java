@@ -196,48 +196,33 @@ public class WebClient extends Composite {
   // Please also see WebClientDemo.gwt.xml.
   private static final Logger REMOTE_LOG = Logger.getLogger("REMOTE_LOG");
 
-  /**
-   * Returns <code>ws://yourhost[:port]/</code>.
-   */
-  // XXX check formatting wrt GPE
-  public native static String getWebSocketBaseUrl(String moduleBase) /*-{
-		return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
-  }-*/;
-
-  public native static boolean useSocketIO() /*-{
-		return !!$wnd.__useSocketIO
-  }-*/;
-
-  private RemoteViewServiceMultiplexer channel;
-
-  private final EventBus eventBus;
-  private IdGenerator idGenerator;
-
-  private final Element loading = new LoadingIndicator().getElement();
-
-  private ParticipantId loggedInUser;
+  // TODO (Yuri Z.) Change the implementation to RemoteProfileManagerImpl when
+  // it will be ready.
+  private final ProfileManager profiles = new ProfileManagerImpl();
 
   @UiField
-  DebugMessagePanel logPanel;
+  SplitLayoutPanel splitPanel;
 
-  private final ProfileManager profiles = new ProfileManagerImpl(Session.get().getDomain());
+  private final EventBus eventBus;
+
+  @UiField
+  Style style;
+
+  @UiField
+  FramedPanel waveFrame;
+
+
+  ImplPanel waveHolder;
+  private final Element loading = new LoadingIndicator().getElement();
 
   @UiField(provided = true)
   final SearchPanelWidget searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
 
   @UiField
-  SplitLayoutPanel splitPanel;
-
-  @UiField
-  Style style;
+  DebugMessagePanel logPanel;
 
   /** The wave panel, if a wave is open. */
   private StagesProvider wave;
-
-@UiField
-FramedPanel waveFrame;
-
-  ImplPanel waveHolder;
 
   private final WaveStore waveStore = new SimpleWaveStore();
 
@@ -245,6 +230,12 @@ FramedPanel waveFrame;
    * Create a remote websocket to talk to the server-side FedOne service.
    */
   private WaveWebSocketClient websocket;
+
+  private ParticipantId loggedInUser;
+
+  private IdGenerator idGenerator;
+
+  private RemoteViewServiceMultiplexer channel;
 
   /**
    * This is the entry point method.
@@ -279,7 +270,7 @@ FramedPanel waveFrame;
 
     setupUi();
 
-   //  History.fireCurrentHistoryState();
+   // History.fireCurrentHistoryState();
     LOG.info("SimpleWebClient.onModuleLoad() done");
   }
 
@@ -328,6 +319,18 @@ public WaveWebSocketClient getWebSocket() {
   return websocket;
 }
   /**
+   * Returns <code>ws://yourhost[:port]/</code>.
+   */
+  // XXX check formatting wrt GPE
+  private native String getWebSocketBaseUrl(String moduleBase) /*-{
+		return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+  }-*/;
+
+  private native boolean useSocketIO() /*-{
+		return !!$wnd.__useSocketIO
+  }-*/;
+
+  /**
    */
   private void loginToServer() {
     assert loggedInUser != null;
@@ -369,7 +372,7 @@ public WaveWebSocketClient getWebSocket() {
     waveHolder.getElement().appendChild(loading);
     final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
     final StagesProvider wave = new StagesProvider(
-        holder, waveHolder, waveRef, channel, idGenerator, profiles, waveStore, isNewWave);
+        holder, waveHolder, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain());
     this.wave = wave;
     wave.load(new Command() {
       @Override
@@ -426,16 +429,17 @@ public WaveWebSocketClient getWebSocket() {
 
   private void setupSearchPanel() {
     // On wave selection, fire an event.
-    final SearchPresenter.WaveSelectionHandler selectHandler =
+    SearchPresenter.WaveSelectionHandler selectHandler =
         new SearchPresenter.WaveSelectionHandler() {
           @Override
-          public void onWaveSelected(final WaveId id) {
+          public void onWaveSelected(WaveId id) {
             ClientEvents.get().fireEvent(new WaveSelectionEvent(WaveRef.of(id)));
           }
         };
-    final Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
-    SearchPresenter.create(search, searchPanel, selectHandler);
+    Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
+    SearchPresenter.create(search, searchPanel, selectHandler, profiles);
   }
+
 
   private void setupUi() {
     // Set up UI
