@@ -149,7 +149,7 @@ public class FolderViewerPresenter extends
         capabilitiesRegistry.isDragable(typeId) && rights.isAdministrable(),
         capabilitiesRegistry.isDropable(typeId) && rights.isAdministrable(),
         actionsRegistry.getCurrentActions(content, typeId, session.isLogged(), rights,
-            ActionGroups.MENUITEM));
+            ActionGroups.ITEM_MENU));
     if (status.equals(ContentStatus.inTheDustbin) && !session.getShowDeletedContent()) {
       // Don't show
       // NotifyUser.info("Deleted, don't show");
@@ -300,7 +300,7 @@ public class FolderViewerPresenter extends
     getView().setContainer(stateContainer);
     final AccessRights rights = stateContainer.getContainerRights();
     final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContainer.getGroup(),
-        stateContainer.getTypeId(), session.isLogged(), rights, ActionGroups.VIEW);
+        stateContainer.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
     final ContainerDTO container = stateContainer.getContainer();
     createPath(container, actions);
     getView().setActions(actions);

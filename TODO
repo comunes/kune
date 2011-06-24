@@ -371,6 +371,17 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
    
 * MID-TERM
+** Template system for new waves with legal free/open procedures
+New
+ Templates
+  In English
+  In Spanish
+    Legal
+      Procedimiento A
+      Procedimiento B
+      Borrador de Estutos de Asociación
+      (...)
+
 ** Archive of xmpp conversations
 *** http://community.igniterealtime.org/docs/DOC-1094 (for openfire)
 ** Enable two Waves per doc: 1 for the doc (no comments enabled), other for comments. Similar to docs.google.com comments approach.

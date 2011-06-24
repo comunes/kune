@@ -143,7 +143,7 @@ public class XMLActionsParser {
               return menuItem;
             }
           };
-          actionRegistry.addAction(ActionGroups.VIEW, menuItemProvider, typeId);
+          actionRegistry.addAction(ActionGroups.TOOLBAR, menuItemProvider, typeId);
         }
       }
     }

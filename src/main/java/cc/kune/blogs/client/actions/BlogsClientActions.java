@@ -51,7 +51,7 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
   @Inject
   public BlogsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentBlogBtn> folderGoUp, final Provider<NewPostBtn> newDocBtn,
+      final Provider<GoParentBlogBtn> folderGoUp, final Provider<NewPostMenuItem> newDocBtn,
       final Provider<NewBlogBtn> newFolderBtn, final Provider<OpenBlogMenuItem> openContentMenuItem,
       final Provider<DelPostMenuItem> delContentMenuItem,
       final Provider<RefreshContentMenuItem> refresh,
@@ -61,20 +61,20 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<DelBlogMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.VIEW, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, TYPE_ROOT);
-    actionsRegistry.addAction(ActionGroups.VIEW, chatAbout, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, blogNewMenu, TYPE_BLOG);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocBtn, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, TYPE_ROOT);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     newMenusRegistry.register(TYPE_BLOG, blogNewMenu.get());
-    actionsRegistry.addAction(ActionGroups.VIEW, blogNewMenu, TYPE_BLOG);
   }
 
   @Override

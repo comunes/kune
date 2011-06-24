@@ -19,17 +19,17 @@
  */
 package cc.kune.wiki.client;
 
+import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.wiki.client.actions.WikiClientActions;
+import cc.kune.wiki.client.actions.WikiFolderNewMenu;
 
-import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-
-public class WikiGinModule extends AbstractPresenterModule {
+public class WikiGinModule extends ExtendedGinModule {
 
   @Override
   protected void configure() {
-    bind(WikiClientTool.class).in(Singleton.class);
-    bind(WikiClientActions.class).in(Singleton.class);
+    s(WikiClientTool.class);
+    s(WikiClientActions.class);
+    s(WikiFolderNewMenu.class);
   }
 
 }

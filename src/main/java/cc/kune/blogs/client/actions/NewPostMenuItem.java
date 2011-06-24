@@ -17,25 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.docs.client.actions;
+package cc.kune.blogs.client.actions;
 
+import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.shared.DocsConstants;
-import cc.kune.gspace.client.actions.NewContentBtn;
+import cc.kune.gspace.client.actions.NewContentMenuItem;
 
 import com.google.inject.Inject;
 
-public class NewDocBtn extends NewContentBtn {
+public class NewPostMenuItem extends NewContentMenuItem {
 
   @Inject
-  public NewDocBtn(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.pageAdd(), shorcutReg, i18n.t("New document"),
-        i18n.t("Create a New Document here. "
-            + "This document will be a new 'Page' in the public web if you publish it"),
-        i18n.t("New document"), DocsConstants.TYPE_DOCUMENT);
+  public NewPostMenuItem(final I18nTranslationService i18n, final NewContentAction action,
+      final NavResources res, final GlobalShortcutRegister shorcutReg, final BlogsNewMenu blogsNewMenu) {
+    super(i18n, action, res.blogAdd(), shorcutReg, i18n.t("New post"), i18n.t("Create a new blog post"),
+        i18n.t("New post"), BlogsConstants.TYPE_POST, blogsNewMenu.get());
   }
 
 }

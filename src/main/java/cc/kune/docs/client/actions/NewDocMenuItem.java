@@ -19,21 +19,24 @@
  */
 package cc.kune.docs.client.actions;
 
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.shared.DocsConstants;
-import cc.kune.gspace.client.actions.NewContainerBtn;
+import cc.kune.gspace.client.actions.NewContentMenuItem;
 
 import com.google.inject.Inject;
 
-public class NewFolderBtn extends NewContainerBtn {
+public class NewDocMenuItem extends NewContentMenuItem {
 
   @Inject
-  public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
-      final NavResources res) {
-    super(i18n, action, res.folderAdd(), i18n.t("New folder"),
-        i18n.t("Create a new folder here. A folder will be a 'section' in the public web"),
-        i18n.t("New folder"), DocsConstants.TYPE_FOLDER);
+  public NewDocMenuItem(final I18nTranslationService i18n, final NewContentAction action,
+      final NavResources res, final GlobalShortcutRegister shorcutReg,
+      final DocsFolderNewMenu docsFolderNewMenu) {
+    super(i18n, action, res.pageAdd(), shorcutReg, i18n.t("New document"),
+        i18n.t("Create a New Document here. "
+            + "This document will be a new 'Page' in the public web if you publish it"),
+        i18n.t("New document"), DocsConstants.TYPE_DOCUMENT, docsFolderNewMenu.get());
   }
 
 }

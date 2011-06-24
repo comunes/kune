@@ -50,13 +50,13 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<OpenRoomBtn> openRoomBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, newRoomBtn, TYPE_ROOT);
-    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.VIEW, openRoomBtn, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openRoomMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openRoomArchiveMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newRoomBtn, TYPE_ROOT);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, openRoomBtn, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openRoomMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openRoomArchiveMenuItem, containersNoRoot);
   }
 
   @Override

@@ -52,33 +52,33 @@ public class DocsClientActions extends AbstractFoldableToolActions {
   @Inject
   public DocsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewDocBtn> newDocBtn,
-      final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenDocMenuItem> openContentMenuItem,
+      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewDocMenuItem> newDocBtn,
+      final Provider<NewFolderMenuItem> newFolderBtn,
+      final Provider<OpenDocMenuItem> openContentMenuItem,
       final Provider<DelDocMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
-      final Provider<SetAsHomePageMenuItem> setAsHomePage, final DocsRootNewMenu rootNewMenu,
+      final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu folderNewMenu) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containers);
-    actionsRegistry.addAction(ActionGroups.VIEW, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, containers);
-    actionsRegistry.addAction(ActionGroups.VIEW, chatAbout, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, delFolderMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, setAsHomePage, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderNewMenu, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, setAsHomePage, contents);
     newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());
-    newMenusRegistry.register(TYPE_ROOT, rootNewMenu.get());
-    actionsRegistry.addAction(ActionGroups.VIEW, folderNewMenu, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.VIEW, rootNewMenu, root);
+    newMenusRegistry.register(TYPE_ROOT, folderNewMenu.get());
   }
 
   @Override

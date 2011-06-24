@@ -30,77 +30,77 @@ import cc.kune.common.client.errors.UIException;
 import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractComposedGuiItem extends Composite implements IsActionExtensible {
-    private final GuiProvider bindings;
-    private GuiActionDescCollection guiItems;
+  private final GuiProvider bindings;
+  private GuiActionDescCollection guiItems;
 
-    public AbstractComposedGuiItem(final GuiProvider bindings) {
-        super();
-        this.bindings = bindings;
+  public AbstractComposedGuiItem(final GuiProvider bindings) {
+    super();
+    this.bindings = bindings;
+  }
+
+  public void add(final GuiActionDescCollection descriptors) {
+    for (final GuiActionDescrip descriptor : descriptors) {
+      add(descriptor);
     }
+  }
 
-    public void add(final GuiActionDescCollection descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
-            add(descriptor);
+  @Override
+  public void add(final GuiActionDescrip... descriptors) {
+    for (final GuiActionDescrip descriptor : descriptors) {
+      add(descriptor);
+    }
+  }
+
+  @Override
+  public void add(final GuiActionDescrip descriptor) {
+    getGuiItems().add(descriptor);
+    beforeAddWidget(descriptor);
+  }
+
+  public void addActions(final List<GuiActionDescrip> descriptors) {
+    for (final GuiActionDescrip descriptor : descriptors) {
+      add(descriptor);
+    }
+  }
+
+  @Override
+  public void addAll(final GuiActionDescCollection descriptors) {
+    for (final GuiActionDescrip descriptor : descriptors) {
+      add(descriptor);
+    }
+  }
+
+  protected abstract void addWidget(AbstractGuiItem item);
+
+  protected void beforeAddWidget(final GuiActionDescrip descrip) {
+    if (descrip.mustBeAdded()) {
+      final GuiBinding binding = bindings.get(descrip.getType());
+      if (binding == null) {
+        throw new UIException("Unknown binding for: " + descrip);
+      } else {
+        final AbstractGuiItem item = binding.create(descrip);
+        if (binding.shouldBeAdded()) {
+          if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
+            addWidget(item);
+          } else {
+            insertWidget(item, descrip.getPosition());
+          }
         }
+      }
     }
+  }
 
-    @Override
-    public void add(final GuiActionDescrip... descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
-            add(descriptor);
-        }
+  @Override
+  public void clear() {
+    getGuiItems().clear();
+  }
+
+  public GuiActionDescCollection getGuiItems() {
+    if (guiItems == null) {
+      guiItems = new GuiActionDescCollection();
     }
+    return guiItems;
+  }
 
-    @Override
-    public void add(final GuiActionDescrip descriptor) {
-        getGuiItems().add(descriptor);
-        beforeAddWidget(descriptor);
-    }
-
-    public void addActions(final List<GuiActionDescrip> descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
-            add(descriptor);
-        }
-    }
-
-    @Override
-    public void addAll(final GuiActionDescCollection descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
-            add(descriptor);
-        }
-    }
-
-    protected abstract void addWidget(AbstractGuiItem item);
-
-    protected void beforeAddWidget(final GuiActionDescrip descrip) {
-        if (descrip.mustBeAdded()) {
-            final GuiBinding binding = bindings.get(descrip.getType());
-            if (binding == null) {
-                throw new UIException("Unknown binding for: " + descrip);
-            } else {
-                final AbstractGuiItem item = binding.create(descrip);
-                if (binding.shouldBeAdded()) {
-                    if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
-                        addWidget(item);
-                    } else {
-                        insertWidget(item, descrip.getPosition());
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void clear() {
-        getGuiItems().clear();
-    }
-
-    public GuiActionDescCollection getGuiItems() {
-        if (guiItems == null) {
-            guiItems = new GuiActionDescCollection();
-        }
-        return guiItems;
-    }
-
-    protected abstract void insertWidget(AbstractGuiItem item, int position);
+  protected abstract void insertWidget(AbstractGuiItem item, int position);
 }

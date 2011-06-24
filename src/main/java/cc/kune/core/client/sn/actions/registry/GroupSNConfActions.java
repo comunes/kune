@@ -50,7 +50,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
   public static final SubMenuDescriptor MODERATION_SUBMENU = new SubMenuDescriptor();
   public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
-  public static final String OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-nobackcolor, k-btn-min";
+  public static final String OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-nobackcolor, k-no-backimage, k-btn-min";
   public static final SubMenuDescriptor VISIBILITY_SUBMENU = new SubMenuDescriptor();
 
   @Inject

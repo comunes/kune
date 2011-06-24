@@ -19,10 +19,12 @@
  */
 package cc.kune.gspace.client.actions;
 
+import javax.annotation.Nonnull;
+
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -31,36 +33,36 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.HasContent;
-import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.viewers.ContentViewerPresenter;
+import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public abstract class NewContentBtn extends ButtonDescriptor {
+public class NewContainerMenuItem extends MenuItemDescriptor {
 
-  public static class NewContentAction extends RolAction {
+  public static class NewContainerAction extends RolAction {
 
     private final ContentCache cache;
     private final Provider<ContentServiceAsync> contentService;
-    private final ContentViewerPresenter contentViewer;
+    private final FolderViewerPresenter folderViewer;
     private final I18nTranslationService i18n;
     private final Session session;
     private final StateManager stateManager;
 
     @Inject
-    public NewContentAction(final Session session, final StateManager stateManager,
+    public NewContainerAction(final Session session, final StateManager stateManager,
         final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService,
-        final ContentViewerPresenter contentViewerPresenter, final ContentCache cache) {
+        final ContentCache cache, final FolderViewerPresenter folderViewer) {
       super(AccessRolDTO.Editor, true);
       this.session = session;
       this.stateManager = stateManager;
       this.i18n = i18n;
       this.contentService = contentService;
-      this.contentViewer = contentViewerPresenter;
       this.cache = cache;
+      this.folderViewer = folderViewer;
     }
 
     @Override
@@ -68,36 +70,33 @@ public abstract class NewContentBtn extends ButtonDescriptor {
       NotifyUser.showProgressProcessing();
       stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
       final String newName = (String) getValue(NEW_NAME);
-      contentService.get().addContent(session.getUserHash(), session.getCurrentStateToken(), newName,
-          (String) getValue(ID), new AsyncCallbackSimple<StateContentDTO>() {
+      contentService.get().addFolder(session.getUserHash(), session.getCurrentStateToken(), newName,
+          (String) getValue(ID), new AsyncCallbackSimple<StateContainerDTO>() {
             @Override
-            public void onSuccess(final StateContentDTO state) {
+            public void onSuccess(final StateContainerDTO state) {
+              // contextNavigator.setEditOnNextStateChange(true);
               stateManager.setRetrievedStateAndGo(state);
               NotifyUser.hideProgress();
-              // stateManager.refreshCurrentGroupState();
-              // contextNavigator.setEditOnNextStateChange(true);
-              NotifyUser.info(i18n.tWithNT("[%s] created", "New content created, for instance", newName));
-              contentViewer.blinkTitle();
+              NotifyUser.info(i18n.tWithNT("[%s] created", "New folder created, for instance", newName));
+              folderViewer.blinkTitle();
             }
           });
       cache.removeContent(session.getCurrentStateToken());
     }
+
   }
 
-  private static final String ID = "ctnnewid";
-  private static final String NEW_NAME = "ctnnewname";
+  private static final String ID = "ctnernewid";
+  private static final String NEW_NAME = "ctnernewname";
 
-  public NewContentBtn(final I18nTranslationService i18n, final NewContentAction action,
-      final ImageResource icon, final GlobalShortcutRegister shorcutReg, final String title,
-      final String tooltip, final String newName, final String id) {
+  public NewContainerMenuItem(final I18nTranslationService i18n, final NewContainerAction action,
+      final ImageResource icon, final String title, final String tooltip, final String newName,
+      final String id, final @Nonnull MenuDescriptor parent) {
     super(action);
+    setParent(parent);
     // The name given to this new content
     action.putValue(NEW_NAME, newName);
     action.putValue(ID, id);
-    // final KeyStroke shortcut = Shortcut.getShortcut(false, true, false,
-    // false, Character.valueOf('N'));
-    // shorcutReg.put(shortcut, action);
     this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fr");
   }
-
 }

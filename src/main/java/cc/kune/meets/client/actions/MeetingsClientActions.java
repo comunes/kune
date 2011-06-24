@@ -51,14 +51,14 @@ public class MeetingsClientActions extends AbstractFoldableToolActions {
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, newMeetingsBtn, containers);
-    actionsRegistry.addAction(ActionGroups.VIEW, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
   }
 
   @Override

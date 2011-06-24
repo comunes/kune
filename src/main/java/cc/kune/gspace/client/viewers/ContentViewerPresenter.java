@@ -187,7 +187,7 @@ public class ContentViewerPresenter extends
       }
     }
     final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContent.getGroup(),
-        stateContent.getTypeId(), session.isLogged(), rights, ActionGroups.VIEW);
+        stateContent.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
     getView().setActions(actions);
   }
 }

@@ -26,10 +26,11 @@ import com.google.inject.Inject;
 
 public class ContentViewerOptionsMenu extends MenuDescriptor {
 
-    @Inject
-    public ContentViewerOptionsMenu(final CoreResources res) {
-        super();
-        this.withIcon(res.arrowdownsitebar()).withStyles("k-def-docbtn, k-fr, k-noborder, k-nobackcolor");
-    }
+  @Inject
+  public ContentViewerOptionsMenu(final CoreResources res) {
+    super();
+    this.withIcon(res.arrowdownsitebar()).withStyles(
+        "k-def-docbtn, k-fr, k-noborder, k-no-backimage, k-nobackcolor");
+  }
 
 }

@@ -53,17 +53,17 @@ public class BartersClientActions extends AbstractFoldableToolActions {
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem, final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.VIEW, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
-    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.VIEW, newBartersBtn, containers);
-    actionsRegistry.addAction(ActionGroups.VIEW, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, containers);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.MENUITEM, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newBartersBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
   }
 
   @Override

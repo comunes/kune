@@ -25,8 +25,8 @@ package cc.kune.gspace.client.actions;
  */
 public final class ActionGroups {
     public final static String EDIT = "edit";
-    public final static String MENUITEM = "menu-item";
-    public final static String VIEW = "view";
+    public final static String ITEM_MENU = "menu-item";
+    public final static String TOOLBAR = "view";
 
     private ActionGroups() {
     }

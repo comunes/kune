@@ -87,17 +87,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     }
     itemWidget.setMenu(toolbar);
     // Tooltip.to(itemWidget, item.getTooltip());
-    final MenuDescriptor menu = new MenuDescriptor(i18n.t("Actions"));
-    menu.withIcon(res.arrowdown()).withStyles("k-def-docbtn, k-btn, k-button");
-    menu.setStandalone(false);
-    itemWidget.setMenuVisible(false);
-    toolbar.add(menu);
-    final GuiActionDescCollection actions = item.getActionCollection();
-    toolbar.setVisible(actions.size() > 0);
-    for (final GuiActionDescrip menuItem : actions) {
-      menuItem.setParent(menu);
-      toolbar.add(menuItem);
-    }
+    // FIXME make this under demand
     itemWidget.getRowClick().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -119,8 +109,30 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       }
     });
     itemWidget.getRowMouse().addMouseOverHandler(new MouseOverHandler() {
+      MenuDescriptor menu;
+
+      private MenuDescriptor createMenu(final FolderItemDescriptor item,
+          final FolderItemWidget itemWidget, final ActionSimplePanel toolbar) {
+        MenuDescriptor menu;
+        menu = new MenuDescriptor(i18n.t("Actions"));
+        menu.withIcon(res.arrowdown()).withStyles("k-def-docbtn, k-btn, k-button");
+        menu.setStandalone(false);
+        itemWidget.setMenuVisible(false);
+        toolbar.add(menu);
+        final GuiActionDescCollection actions = item.getActionCollection();
+        toolbar.setVisible(actions.size() > 0);
+        for (final GuiActionDescrip menuItem : actions) {
+          menuItem.setParent(menu);
+          toolbar.add(menuItem);
+        }
+        return menu;
+      }
+
       @Override
       public void onMouseOver(final MouseOverEvent event) {
+        if (menu == null) {
+          menu = createMenu(item, itemWidget, toolbar);
+        }
         // menu.setVisible(true);
         itemWidget.setMenuVisible(true);
       }

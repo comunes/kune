@@ -19,17 +19,17 @@
  */
 package cc.kune.docs.client;
 
+import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.docs.client.actions.DocsClientActions;
+import cc.kune.docs.client.actions.DocsFolderNewMenu;
 
-import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+public class DocsGinModule extends ExtendedGinModule {
 
-public class DocsGinModule extends AbstractPresenterModule {
-
-    @Override
-    protected void configure() {
-        bind(DocsClientTool.class).in(Singleton.class);
-        bind(DocsClientActions.class).in(Singleton.class);
-    }
+  @Override
+  protected void configure() {
+    s(DocsClientTool.class);
+    s(DocsClientActions.class);
+    s(DocsFolderNewMenu.class);
+  }
 
 }

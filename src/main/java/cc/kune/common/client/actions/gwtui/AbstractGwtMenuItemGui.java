@@ -132,6 +132,9 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     final int position = descriptor.getPosition();
     final AbstractGwtMenuGui menu = getParentMenu(descriptor);
     if (menu == null) {
+      // Note: Be careful if you have two menus (not a singleton) and you add
+      // one but
+      // no the other that it associated with this menuitem
       throw new UIException("Warning: To add a menu item you need to add the menu before. Item: "
           + descriptor);
     }

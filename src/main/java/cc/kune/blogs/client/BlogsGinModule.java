@@ -20,16 +20,16 @@
 package cc.kune.blogs.client;
 
 import cc.kune.blogs.client.actions.BlogsClientActions;
+import cc.kune.blogs.client.actions.BlogsNewMenu;
+import cc.kune.common.client.ExtendedGinModule;
 
-import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+public class BlogsGinModule extends ExtendedGinModule {
 
-public class BlogsGinModule extends AbstractPresenterModule {
-
-    @Override
-    protected void configure() {
-        bind(BlogsClientTool.class).in(Singleton.class);
-        bind(BlogsClientActions.class).in(Singleton.class);
-    }
+  @Override
+  protected void configure() {
+    s(BlogsNewMenu.class);
+    s(BlogsClientTool.class);
+    s(BlogsClientActions.class);
+  }
 
 }

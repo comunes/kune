@@ -1,14 +1,14 @@
-package cc.kune.blogs.client.actions;
+package cc.kune.wiki.client.actions;
 
 import cc.kune.gspace.client.actions.AbstractNewMenu;
 import cc.kune.gspace.client.actions.NewMenuProvider;
 
 import com.google.inject.Inject;
 
-public class BlogsNewMenu extends NewMenuProvider {
+public class WikiFolderNewMenu extends NewMenuProvider {
 
   @Inject
-  public BlogsNewMenu(final AbstractNewMenu menu) {
+  public WikiFolderNewMenu(final AbstractNewMenu menu) {
     super(menu);
   }
 

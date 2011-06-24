@@ -441,7 +441,7 @@
 }
 
 .k-no-backimage,.k-no-backimage td {
-  background-image: none;
+  background-image: none !important;
 }
 
 .k-nobackcolor {
