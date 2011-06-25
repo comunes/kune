@@ -18,12 +18,45 @@
     </extension>
 
     <extension>
+      <name>waffle</name>
+      <installerUrl>http://www.waffle.dk/install.xml
+      </installerUrl>
+      <gadgetUrl>http://www.waffle.dk/waffle.xml
+      </gadgetUrl>
+      <iconUrl>http://www.waffle.dk/waffleThumb.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+
+    <extension>
       <name>massmob</name>
       <installerUrl>http://mass-mob.appspot.com/massmob/massmob-extension.xml
       </installerUrl>
       <gadgetUrl>http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml
       </gadgetUrl>
       <iconUrl>http://mass-mob.appspot.com/logo.png</iconUrl>
+      <iconCss></iconCss>
+    </extension>
+
+    <extension>
+      <name>twitter-search</name>
+      <installerUrl>https://google-wave-resources.googlecode.com/svn/trunk/samples/extensions/gadgets/twitterwidget/installer.xml
+      </installerUrl>
+      <gadgetUrl>http://google-wave-resources.googlecode.com/svn/trunk/samples/extensions/gadgets/twitterwidget/twitterwidget.xml
+      </gadgetUrl>
+      <iconUrl>http://google-wave-resources.googlecode.com/svn/trunk/samples/extensions/gadgets/twitterwidget/icon.jpg
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+
+    <extension>
+      <name>wavetube</name>
+      <installerUrl>http://everybodywave.appspot.com/gadget/WaveTube/xt.xml
+      </installerUrl>
+      <gadgetUrl>http://everybodywave.appspot.com/gadget/WaveTube/main.xml
+      </gadgetUrl>
+      <iconUrl>http://everybodywave.appspot.com/gadget/WaveTube/thumb.png
+      </iconUrl>
       <iconCss></iconCss>
     </extension>
 
@@ -54,7 +87,8 @@
           <authNeed>true</authNeed>
         </rol>
       </location>
-      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask -->
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
       <participants>ask</participants>
     </guiActionDescriptor>
 
@@ -79,9 +113,89 @@
           <authNeed>true</authNeed>
         </rol>
       </location>
-      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask -->
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
       <participants>ask</participants>
     </guiActionDescriptor>
+
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>waffle</extensionName>
+      <name>New meet coordination</name>
+      <parent>Gadget»Calendar</parent>
+      <description>Users are polled to determine the best time and date
+        to meet
+      </description>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId>docs.folder</typeId>
+        <typeId>docs.root</typeId>
+        <typeId>blogs.blog</typeId>
+      </typeIds>
+      <name></name>
+      <location>
+        <rol>
+          <!-- Administrator, Editor, Viewer -->
+          <rolRequired>Editor</rolRequired>
+          <authNeed>true</authNeed>
+        </rol>
+      </location>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>twitter-search</extensionName>
+      <name>New twitter search</name>
+      <parent>Gadget»News</parent>
+      <description>Shows results from Twitter for a given search term.
+        Participants can edit to specify new term.</description>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId>docs.folder</typeId>
+        <typeId>docs.root</typeId>
+        <typeId>blogs.blog</typeId>
+      </typeIds>
+      <name></name>
+      <location>
+        <rol>
+          <!-- Administrator, Editor, Viewer -->
+          <rolRequired>Editor</rolRequired>
+          <authNeed>true</authNeed>
+        </rol>
+      </location>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>wavetube</extensionName>
+      <name>New youtube video</name>
+      <parent>Gadget»Media</parent>
+      <description>Adds a YouTube player that displays the list of viewers in real time</description>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId>docs.folder</typeId>
+        <typeId>docs.root</typeId>
+        <typeId>blogs.blog</typeId>
+      </typeIds>
+      <name></name>
+      <location>
+        <rol>
+          <!-- Administrator, Editor, Viewer -->
+          <rolRequired>Editor</rolRequired>
+          <authNeed>true</authNeed>
+        </rol>
+      </location>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+
 
     <guiActionDescriptor>
       <type>wave-gadget</type>
