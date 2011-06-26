@@ -198,7 +198,7 @@ public class WebClient extends Composite {
 
   // TODO (Yuri Z.) Change the implementation to RemoteProfileManagerImpl when
   // it will be ready.
-  private final ProfileManager profiles = new ProfileManagerImpl();
+  private final ProfileManager profiles;
 
   @UiField
   SplitLayoutPanel splitPanel;
@@ -216,7 +216,7 @@ public class WebClient extends Composite {
   private final Element loading = new LoadingIndicator().getElement();
 
   @UiField(provided = true)
-  final SearchPanelWidget searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
+  final SearchPanelWidget searchPanel;
 
   @UiField
   DebugMessagePanel logPanel;
@@ -241,9 +241,11 @@ public class WebClient extends Composite {
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus) {
+  public WebClient(final EventBus eventBus, KuneWaveProfileManager profiles) {
 
     this.eventBus = eventBus;
+    this.profiles = profiles;
+    searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
     ErrorHandler.install();
 
     ClientEvents.get().addWaveCreationEventHandler(

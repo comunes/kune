@@ -40,6 +40,7 @@ import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.server.manager.file.FileDownloadManager;
 import cc.kune.core.server.manager.file.FileGwtUploadServlet;
 import cc.kune.core.server.manager.file.FileUploadManager;
+import cc.kune.core.server.manager.file.UserLogoDownloadManager;
 import cc.kune.core.server.properties.PropertiesFileName;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
@@ -142,7 +143,8 @@ public class KuneRackModule implements RackModule {
         UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
     builder.installServlet("^/ws/servlets/", FileUploadManager.class, FileDownloadManager.class,
         EntityLogoUploadManager.class, EntityLogoDownloadManager.class, FileGwtUploadServlet.class,
-        EntityBackgroundDownloadManager.class, EntityBackgroundUploadManager.class);
+        EntityBackgroundDownloadManager.class, EntityBackgroundUploadManager.class,
+        UserLogoDownloadManager.class);
 
     builder.at("^/ws/(.*)$").install(new ForwardFilter("^/ws/(.*)$", "/ws/{0}"));
   }

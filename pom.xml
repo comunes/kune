@@ -979,7 +979,7 @@
             <module>${project.groupId}.Kune</module>
           </modules>
           <copyWebapp>true</copyWebapp>
-          <soyc>false</soyc>
+          <compileReport>false</compileReport>
           <extraJvmArgs>-Xmx1024m -Xss1024k</extraJvmArgs>
         </configuration>
         <executions>

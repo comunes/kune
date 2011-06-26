@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <inherits name='org.waveprotocol.box.webclient.WebClient' />
+  <inherits name="cc.kune.core.KuneCore" />
   <!-- Stack emulation is too slow to use in production. -->
   <set-property name="compiler.emulatedStack" value="false" />
 

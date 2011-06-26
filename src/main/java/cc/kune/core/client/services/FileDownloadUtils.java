@@ -33,6 +33,7 @@ import com.google.inject.Inject;
 
 public class FileDownloadUtils {
 
+  private static final String AVATARDOWNLOADSERVLET = "servlets/UserLogoDownloadManager";
   private static final String BACKDOWNLOADSERVLET = "servlets/EntityBackgroundDownloadManager";
   private static final String DOWNLOADSERVLET = "servlets/FileDownloadManager";
   protected static final String GROUP_NO_AVATAR_IMAGE = "images/group-def-icon.png";
@@ -110,6 +111,11 @@ public class FileDownloadUtils {
 
   public String getUrl(final StateToken token) {
     return calculateUrl(token, false, false);
+  }
+
+  public String getUserAvatar(final String username) {
+    return new Url(GWT.getModuleBaseURL() + AVATARDOWNLOADSERVLET, new UrlParam(FileConstants.USERNAME,
+        username)).toString();
   }
 
   public String getUserAvatar(final UserSimpleDTO user) {

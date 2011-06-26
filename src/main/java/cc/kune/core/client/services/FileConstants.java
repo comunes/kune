@@ -21,19 +21,20 @@ package cc.kune.core.client.services;
 
 public final class FileConstants {
 
-    public final static String HASH = "hash";
-    public final static String TOKEN = "token";
-    public final static String DOWNLOAD = "download";
-    public final static String IMGSIZE = "imgsize";
-    public final static String FILENAME = "filename";
-    public final static String TYPE_ID = "typeid";
-    public final static String USER_LOGO_FIELD = "k-ulogov-ff";
-    public final static String GROUP_LOGO_FIELD = "k-glogov-ff";
-    public final static int LOGO_DEF_HEIGHT = 60;
-    public final static int LOGO_DEF_WIDTH = 468;
-    public final static int LOGO_MIN_HEIGHT = 28;
-    public final static int LOGO_MIN_WIDTH = 468;
+  public final static String DOWNLOAD = "download";
+  public final static String FILENAME = "filename";
+  public final static String GROUP_LOGO_FIELD = "k-glogov-ff";
+  public final static String HASH = "hash";
+  public final static String IMGSIZE = "imgsize";
+  public final static int LOGO_DEF_HEIGHT = 60;
+  public final static int LOGO_DEF_WIDTH = 468;
+  public final static int LOGO_MIN_HEIGHT = 28;
+  public final static int LOGO_MIN_WIDTH = 468;
+  public final static String TOKEN = "token";
+  public final static String TYPE_ID = "typeid";
+  public final static String USER_LOGO_FIELD = "k-ulogov-ff";
+  public final static String USERNAME = "username";
 
-    private FileConstants() {
-    }
+  private FileConstants() {
+  }
 }

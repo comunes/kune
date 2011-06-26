@@ -41,7 +41,8 @@ public class WaveClientManager {
 
   @Inject
   public WaveClientManager(final Session session, final StateManager stateManager,
-      final EventBus eventBus, final UserServiceAsync userService, final GSpaceArmor wsArmor) {
+      final EventBus eventBus, final UserServiceAsync userService, final GSpaceArmor wsArmor,
+      final KuneWaveProfileManager profiles) {
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
@@ -59,7 +60,7 @@ public class WaveClientManager {
                   if (userSpace.getWidgetCount() > 0) {
                     userSpace.remove(0);
                   }
-                  webClient = new WebClient(eventBus);
+                  webClient = new WebClient(eventBus, profiles);
                   userSpace.add(webClient);
                 } else {
                   webClient.login();

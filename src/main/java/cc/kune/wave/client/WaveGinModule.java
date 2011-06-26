@@ -19,19 +19,19 @@
  */
 package cc.kune.wave.client;
 
-import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import cc.kune.common.client.ExtendedGinModule;
 
-public class WaveGinModule extends AbstractPresenterModule {
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.google.gwt.inject.client.AbstractGinModule#configure()
-     */
-    @Override
-    protected void configure() {
-        bind(WaveClientManager.class).in(Singleton.class);
-        bind(WaveStatusIndicator.class).in(Singleton.class);
-        bind(WaveParts.class).asEagerSingleton();
-    }
+public class WaveGinModule extends ExtendedGinModule {
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
+  @Override
+  protected void configure() {
+    s(WaveClientManager.class);
+    s(WaveStatusIndicator.class);
+    eagle(WaveParts.class);
+    s(KuneWaveProfileManager.class);
+  }
 }
