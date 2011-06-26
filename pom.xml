@@ -144,6 +144,11 @@
         <checksumPolicy>warn</checksumPolicy>
       </snapshots>
     </repository>
+    <repository>
+      <id>tigase</id>
+      <name>Tigase Repository</name>
+      <url>http://maven.tigase.org</url>
+    </repository>
   </repositories>
   <pluginRepositories>
     <!-- cc -->
@@ -527,6 +532,12 @@
       <artifactId>testng</artifactId>
       <version>6.0.1</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>tigase</groupId>
+      <artifactId>tigase-xmltools</artifactId>
+      <version>3.3.5</version>
+      <!-- <scope>test</scope> -->
     </dependency>
     <!-- If you want to start a selenium server, you will need the following
       dependency: -->

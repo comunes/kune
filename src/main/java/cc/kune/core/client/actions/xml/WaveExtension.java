@@ -1,4 +1,4 @@
-package cc.kune.core.client.actions;
+package cc.kune.core.client.actions.xml;
 
 public class WaveExtension {
   public static class Builder {

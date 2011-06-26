@@ -46,6 +46,7 @@ import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.ContentManagerDefault;
 import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.content.CreationServiceDefault;
+import cc.kune.core.server.content.XMLActionReader;
 import cc.kune.core.server.i18n.I18nTranslationServiceDefault;
 import cc.kune.core.server.manager.ExtMediaDescripManager;
 import cc.kune.core.server.manager.FileManager;
@@ -151,6 +152,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(StateService.class).to(StateServiceDefault.class);
     bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
     bind(SessionService.class).to(SessionServiceDefault.class);
+    bind(XMLActionReader.class);
   }
 
   @Override

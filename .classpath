@@ -136,6 +136,7 @@
   <classpathentry kind="var" path="M2_REPO/org/yaml/snakeyaml/1.6/snakeyaml-1.6.jar" sourcepath="M2_REPO/org/yaml/snakeyaml/1.6/snakeyaml-1.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/testng/testng/6.0.1/testng-6.0.1.jar" sourcepath="M2_REPO/org/testng/testng/6.0.1/testng-6.0.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/tigase/tigase-xmltools/3.3.5/tigase-xmltools-3.3.5.jar" sourcepath="M2_REPO/tigase/tigase-xmltools/3.3.5/tigase-xmltools-3.3.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/util-src/0.3.1-SNAPSHOT/util-src-0.3.1-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-5/wagon-provider-api-1.0-alpha-5.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-5/wagon-provider-api-1.0-alpha-5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/waveinabox-server-0.3/0.3.1-SNAPSHOT/waveinabox-server-0.3-0.3.1-SNAPSHOT.jar"/>

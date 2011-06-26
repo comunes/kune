@@ -32,7 +32,7 @@ import cc.kune.common.client.log.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.CoreGinModule;
 import cc.kune.core.client.CoreParts;
-import cc.kune.core.client.actions.XMLActionsParser;
+import cc.kune.core.client.actions.xml.XMLActionsParser;
 import cc.kune.core.client.auth.RegisterPresenter;
 import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.cookies.CookiesManager;

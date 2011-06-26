@@ -30,7 +30,7 @@ import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.actions.XMLActionsParser;
+import cc.kune.core.client.actions.xml.XMLActionsParser;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.core.client.auth.RegisterPresenter;
@@ -107,6 +107,8 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
 
+import com.calclab.emite.core.client.services.Services;
+import com.calclab.emite.core.client.services.gwt.GWTServices;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.DefaultProxyFailureHandler;
@@ -215,6 +217,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
     s(ErrorsDialog.class);
     s(XMLActionsParser.class);
+    bind(Services.class).to(GWTServices.class);
   }
 
 }

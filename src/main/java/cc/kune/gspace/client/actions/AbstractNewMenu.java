@@ -34,7 +34,7 @@ public class AbstractNewMenu extends MenuDescriptor {
   public AbstractNewMenu(final CoreResources res, final I18nTranslationService i18n,
       final AccessRightsClientManager rightsManager) {
     super();
-    this.withIcon(res.arrowdownsitebar()).withStyles("k-button, k-btn, k-5corners, k-def-docbtn, k-fl").withText(
+    this.withIcon(res.addGreen()).withStyles("k-button, k-btn, k-5corners, k-def-docbtn, k-fl").withText(
         "New");
 
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {

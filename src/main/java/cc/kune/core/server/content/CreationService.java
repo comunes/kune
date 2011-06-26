@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.content;
 
-
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -28,10 +27,14 @@ import cc.kune.domain.User;
 
 public interface CreationService {
 
-    Content createContent(String title, String body, User user, Container container, String typeId);
+  Content createContent(String title, String body, User user, Container container, String typeId);
 
-    Container createFolder(Group group, Long parentFolderId, String name, I18nLanguage language, String contentTypeId);
+  Container createFolder(Group group, Long parentFolderId, String name, I18nLanguage language,
+      String contentTypeId);
 
-    Content saveContent(User editor, Content descriptor, String content);
+  Content createGadget(User user, Container container, String gadgetname, String typeId, String title,
+      String body);
+
+  Content saveContent(User editor, Content descriptor, String content);
 
 }

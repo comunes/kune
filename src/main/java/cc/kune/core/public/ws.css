@@ -1,5 +1,4 @@
-CHARSET          "UTF-8         ";
-body {
+CHARSET           "UTF-8          "; body {
   background-color: transparent;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -271,14 +270,16 @@ a:visited {
 
 }
 
-.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger {
+.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger,.gwt-SplitLayoutPanel-HDragger
+  {
   background-color: transparent;
   background: url("images/spliter-top.png") no-repeat scroll center bottom
     transparent;
   cursor: col-resize;
 }
 
-.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-VDragger {
+.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-VDragger,.gwt-SplitLayoutPanel-VDragger
+  {
   background-color: white;
   background: none;
   cursor: row-resize;
@@ -949,9 +950,11 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 }
 
 .k-sn-2nd-spanel {
+
 }
 
 .k-sn-3rd-panel {
+
 }
 
 .k-sn-adminsscroll,.k-sn-collabsscroll,.k-sn-pendingsscroll {
@@ -1127,6 +1130,7 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 }
 
 .k-tool-panel {
+
 }
 
 .k-tool-item {
@@ -1136,6 +1140,7 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 }
 
 .k-tool-item-focus {
+
 }
 
 .k-tool-item-nofocus {
@@ -1143,9 +1148,11 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 }
 
 .k-tool-item-selected {
+
 }
 
 .k-tool-item-notselected {
+
 }
 
 .k-def-docbtn span {
@@ -1194,7 +1201,7 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                                               90);
+  kfilter: alpha(opacity =                                                 90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;

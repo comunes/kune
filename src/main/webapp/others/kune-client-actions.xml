@@ -1,10 +1,9 @@
 <?xml version="1.0" ?>
 
-<kuneWaveExtensions>
+<kuneClientActions>
 
   <!-- List of Wave extensions to use in Kune ===================== -->
-
-  <extensions>
+  <waveExtensions>
 
     <extension>
       <name>pollo</name>
@@ -34,7 +33,8 @@
       </installerUrl>
       <gadgetUrl>http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml
       </gadgetUrl>
-      <iconUrl>http://mass-mob.appspot.com/logo.png</iconUrl>
+      <iconUrl>http://mass-mob.appspot.com/logo.png
+      </iconUrl>
       <iconCss></iconCss>
     </extension>
 
@@ -60,7 +60,7 @@
       <iconCss></iconCss>
     </extension>
 
-  </extensions>
+  </waveExtensions>
 
   <!-- Where and how to use the above extensions ================ -->
 
@@ -70,23 +70,22 @@
       <type>wave-gadget</type>
       <extensionName>massmob</extensionName>
       <name>New meeting</name>
-      <parent>Gadget»Calendar</parent>
+      <path>Gadget»Calendar</path>
       <description>Call and speed-up of events as meeting, smartmobs,
         flashmobs, protest demonstrations, etc.</description>
+      <new-content-title>New meeting</new-content-title>
+      <new-content-textintro></new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
-        <typeId>docs.folder</typeId>
-        <typeId>docs.root</typeId>
-        <typeId>blogs.blog</typeId>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
       </typeIds>
-      <name></name>
-      <location>
-        <rol>
-          <!-- Administrator, Editor, Viewer -->
-          <rolRequired>Editor</rolRequired>
-          <authNeed>true</authNeed>
-        </rol>
-      </location>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
       <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
         used yet) -->
       <participants>ask</participants>
@@ -96,23 +95,22 @@
       <type>wave-gadget</type>
       <extensionName>pollo</extensionName>
       <name>New poll</name>
-      <parent>Gadget»Voting</parent>
+      <path>Gadget»Voting</path>
       <description>Make some poll (allow single and multiple polls))
       </description>
+      <new-content-title>New poll</new-content-title>
+      <new-content-textintro></new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
-        <typeId>docs.folder</typeId>
-        <typeId>docs.root</typeId>
-        <typeId>blogs.blog</typeId>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
       </typeIds>
-      <name></name>
-      <location>
-        <rol>
-          <!-- Administrator, Editor, Viewer -->
-          <rolRequired>Editor</rolRequired>
-          <authNeed>true</authNeed>
-        </rol>
-      </location>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
       <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
         used yet) -->
       <participants>ask</participants>
@@ -122,24 +120,23 @@
       <type>wave-gadget</type>
       <extensionName>waffle</extensionName>
       <name>New meet coordination</name>
-      <parent>Gadget»Calendar</parent>
+      <path>Gadget»Calendar</path>
       <description>Users are polled to determine the best time and date
         to meet
       </description>
+      <new-content-title>New meet coordination</new-content-title>
+      <new-content-textintro></new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
-        <typeId>docs.folder</typeId>
-        <typeId>docs.root</typeId>
-        <typeId>blogs.blog</typeId>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
       </typeIds>
-      <name></name>
-      <location>
-        <rol>
-          <!-- Administrator, Editor, Viewer -->
-          <rolRequired>Editor</rolRequired>
-          <authNeed>true</authNeed>
-        </rol>
-      </location>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
       <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
         used yet) -->
       <participants>ask</participants>
@@ -149,23 +146,22 @@
       <type>wave-gadget</type>
       <extensionName>twitter-search</extensionName>
       <name>New twitter search</name>
-      <parent>Gadget»News</parent>
+      <path>Gadget»News</path>
       <description>Shows results from Twitter for a given search term.
         Participants can edit to specify new term.</description>
+      <new-content-title>Twitter search</new-content-title>
+      <new-content-textintro></new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
-        <typeId>docs.folder</typeId>
-        <typeId>docs.root</typeId>
-        <typeId>blogs.blog</typeId>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
       </typeIds>
-      <name></name>
-      <location>
-        <rol>
-          <!-- Administrator, Editor, Viewer -->
-          <rolRequired>Editor</rolRequired>
-          <authNeed>true</authNeed>
-        </rol>
-      </location>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
       <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
         used yet) -->
       <participants>ask</participants>
@@ -174,50 +170,46 @@
     <guiActionDescriptor>
       <type>wave-gadget</type>
       <extensionName>wavetube</extensionName>
-      <name>New youtube video</name>
-      <parent>Gadget»Media</parent>
-      <description>Adds a YouTube player that displays the list of viewers in real time</description>
+      <name>New Youtube video</name>
+      <path>Gadget»Media</path>
+      <description>Adds a YouTube player that displays the list of
+        viewers in real time</description>
+      <new-content-title>New Youtube video</new-content-title>
+      <new-content-textintro></new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
-        <typeId>docs.folder</typeId>
-        <typeId>docs.root</typeId>
-        <typeId>blogs.blog</typeId>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
       </typeIds>
-      <name></name>
-      <location>
-        <rol>
-          <!-- Administrator, Editor, Viewer -->
-          <rolRequired>Editor</rolRequired>
-          <authNeed>true</authNeed>
-        </rol>
-      </location>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
       <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
         used yet) -->
       <participants>ask</participants>
     </guiActionDescriptor>
 
-
     <guiActionDescriptor>
       <type>wave-gadget</type>
       <extensionName>massmob</extensionName>
       <name>Add a meeting</name>
-      <parent>Gadget»Calendar</parent>
+      <path>Gadget»Calendar</path>
       <description>Call and speed-up of events as meeting, smartmobs,
         flashmobs, protest demonstrations, etc.</description>
       <enabled>false</enabled>
       <typeIds>
-        <typeId>docs.doc</typeId>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
       </typeIds>
-      <name></name>
-      <location>
-        <rol>
-          <!-- Administrator, Editor, Viewer -->
-          <rolRequired>Editor</rolRequired>
-          <authNeed>true</authNeed>
-        </rol>
-      </location>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
     </guiActionDescriptor>
 
   </guiActionDescriptors>
 
-</kuneWaveExtensions>
+</kuneClientActions>

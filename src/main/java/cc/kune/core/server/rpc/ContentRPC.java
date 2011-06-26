@@ -141,6 +141,21 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
+  @Transactional
+  public StateContentDTO addGadget(final String userHash, final StateToken parentToken,
+      final String gadgetname, final String typeId, final String title, final String body)
+      throws DefaultException {
+    final User user = getCurrentUser();
+    final Container container = accessService.accessToContainer(
+        ContentUtils.parseId(parentToken.getFolder()), user, AccessRol.Editor);
+    final Content addedContent = creationService.createGadget(user, container, gadgetname, typeId,
+        title, body);
+    return getState(user, addedContent);
+  }
+
+  @Override
+  @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
   @Transactional
   public void addParticipant(final String userHash, final StateToken token, final String participant)

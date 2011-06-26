@@ -14,6 +14,8 @@
   <inherits name="cc.kune.gspace.GSpace" />
   <inherits name="cc.kune.msgs.KuneMsgs" />
   <inherits name="cc.kune.common.KuneCommon" />
+  <!-- Because of XML actions -->
+      <inherits name='com.calclab.emite.core.EmiteCore' />
   <inherits name="com.extjs.gxt.ui.GXT" />
 <!--  <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />-->
   <inherits name="com.calclab.suco.Suco" />

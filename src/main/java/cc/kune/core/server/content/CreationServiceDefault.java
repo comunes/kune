@@ -19,8 +19,14 @@
  */
 package cc.kune.core.server.content;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import cc.kune.core.client.actions.xml.XMLKuneClientActions;
+import cc.kune.core.client.actions.xml.XMLWaveExtension;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.tool.ServerWaveTool;
@@ -36,16 +42,21 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class CreationServiceDefault implements CreationService {
+  private final XMLKuneClientActions actions;
   private final ContainerManager containerManager;
   private final ContentManager contentManager;
+  private final Log LOG = LogFactory.getLog(CreationServiceDefault.class);
+
   private final ServerToolRegistry tools;
 
   @Inject
   public CreationServiceDefault(final ContainerManager containerManager,
-      final ContentManager contentManager, final ServerToolRegistry toolRegistry) {
+      final ContentManager contentManager, final ServerToolRegistry toolRegistry,
+      final XMLActionReader xmlActionReader) {
     this.containerManager = containerManager;
     this.contentManager = contentManager;
     this.tools = toolRegistry;
+    this.actions = xmlActionReader.getActions();
   }
 
   @Override
@@ -70,6 +81,27 @@ public class CreationServiceDefault implements CreationService {
     final Container child = containerManager.createFolder(group, parent, name, language, typeId);
     tools.get(toolName).onCreateContainer(child, parent);
     return child;
+  }
+
+  @Override
+  public Content createGadget(final User user, final Container container, final String gadgetname,
+      final String typeIdChild, final String title, final String body) {
+    final String toolName = container.getToolName();
+    final ServerTool tool = tools.get(toolName);
+    tool.checkTypesBeforeContentCreation(container.getTypeId(), typeIdChild);
+    final XMLWaveExtension extension = actions.getExtensions().get(gadgetname);
+    assert extension != null;
+    URL gadgetUrl = null;
+    final String urlS = extension.getGadgetUrl();
+    try {
+      gadgetUrl = new URL(urlS);
+    } catch (final MalformedURLException e) {
+      LOG.error("Parsing gadget URL: " + urlS, e);
+    }
+    final Content content = contentManager.createContent(title, body, user, container, typeIdChild,
+        gadgetUrl);
+    tool.onCreateContent(content, container);
+    return content;
   }
 
   @Override
