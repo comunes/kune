@@ -42,7 +42,6 @@ import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.common.client.utils.TimerWrapper;
@@ -63,111 +62,113 @@ import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
 public class ContentEditorPresenter extends RTESavingEditorPresenter implements ContentEditor {
 
-    public class RenameAction extends AbstractExtendedAction {
-        public RenameAction(final String text, final String tooltip, final ImageResource icon) {
-            super(text, tooltip, icon);
+  public class RenameAction extends AbstractExtendedAction {
+    public RenameAction(final String text, final String tooltip, final ImageResource icon) {
+      super(text, tooltip, icon);
+    }
+
+    @Override
+    public void actionPerformed(final ActionEvent actionEvent) {
+      // entityTitle.edit();
+    }
+  }
+
+  private RTEditorPanel editorPanel;
+  // private final EntityTitle entityTitle;
+  // private final SiteSignOutLink siteSignOutLink;
+  private final I18nTranslationService i18n;
+  private ComplexToolbar sndbar;
+  private ComplexToolbar topbar;
+  private VerticalPanel vpanel;
+  private final WorkspaceSkeleton wspace;
+
+  public ContentEditorPresenter(final I18nTranslationService i18n, final Session session,
+      final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
+      final Provider<ColorWebSafePalette> palette, final Provider<EditHtmlDialog> editHtmlDialog,
+      final Provider<InsertImageDialog> insertImageDialog,
+      final Provider<InsertMediaDialog> insertMediaDialog,
+      final Provider<InsertTableDialog> insertTableDialog,
+      final Provider<InsertSpecialCharDialog> insCharDialog, final SchedulerManager deferred,
+      final boolean autoSave, final StateManager stateManager, final WorkspaceSkeleton wspace,
+      final TimerWrapper timer) {
+    super(i18n, session, imgResources, insLinkDialog, palette, editHtmlDialog, insertImageDialog,
+        insertMediaDialog, insertTableDialog, insCharDialog, deferred, autoSave, stateManager, timer);
+    super.setExtended(true);
+    this.i18n = i18n;
+
+    // this.entityTitle = entityTitle;
+    this.wspace = wspace;
+    Window.addWindowClosingHandler(new ClosingHandler() {
+      @Override
+      public void onWindowClosing(final ClosingEvent event) {
+        if (isSavePending()) {
+          event.setMessage(i18n.t("You have changes without save. Are you sure?"));
         }
+        // onDoSaveAndClose();
+      }
+    });
+    wspace.getEntityWorkspace().addContentListener(new ContainerListenerAdapter() {
+      @Override
+      public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
+          final int rawWidth, final int rawHeight) {
+        adjHeight(adjHeight);
+      }
+    });
 
-        @Override
-        public void actionPerformed(final ActionEvent actionEvent) {
-            entityTitle.edit();
-        }
-    }
+  }
 
-    private RTEditorPanel editorPanel;
-    private final EntityTitle entityTitle;
-    // private final SiteSignOutLink siteSignOutLink;
-    private final I18nTranslationService i18n;
-    private ComplexToolbar sndbar;
-    private ComplexToolbar topbar;
-    private VerticalPanel vpanel;
-    private final WorkspaceSkeleton wspace;
+  private void addContentActions() {
+    final RenameAction renameAction = new RenameAction(i18n.t("Rename"), NO_TEXT, NO_ICON);
+    final OldMenuItemDescriptor renameItem = new OldMenuItemDescriptor(super.getFileMenu(), renameAction);
+    renameItem.setLocation(RTEditor.TOPBAR);
+    final KeyStroke key = KeyStroke.getKeyStroke(Keyboard.KEY_F2, 0);
+    renameAction.putValue(Action.ACCELERATOR_KEY, key);
+    super.setActionShortcut(key, renameAction);
+    addAction(renameItem);
+  }
 
-    public ContentEditorPresenter(final I18nTranslationService i18n, final Session session,
-            final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
-            final Provider<ColorWebSafePalette> palette, final Provider<EditHtmlDialog> editHtmlDialog,
-            final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
-            final Provider<InsertTableDialog> insertTableDialog, final Provider<InsertSpecialCharDialog> insCharDialog,
-            final SchedulerManager deferred, final boolean autoSave, final StateManager stateManager,
-            final WorkspaceSkeleton wspace, final TimerWrapper timer, final EntityTitle entityTitle) {
-        super(i18n, session, imgResources, insLinkDialog, palette, editHtmlDialog, insertImageDialog,
-                insertMediaDialog, insertTableDialog, insCharDialog, deferred, autoSave, stateManager, timer);
-        super.setExtended(true);
-        this.i18n = i18n;
+  private void adjHeight(final int height) {
+    final int barHeight = sndbar.getOffsetHeight();
+    final int newHeight = height - 20 - barHeight;
+    // Log.debug("Sndbar height: " + barHeight + " new height: " +
+    // newHeight);
+    editorPanel.adjustSize(newHeight);
+    vpanel.setCellHeight(editorPanel, String.valueOf(newHeight));
+  }
 
-        this.entityTitle = entityTitle;
-        this.wspace = wspace;
-        Window.addWindowClosingHandler(new ClosingHandler() {
-            @Override
-            public void onWindowClosing(final ClosingEvent event) {
-                if (isSavePending()) {
-                    event.setMessage(i18n.t("You have changes without save. Are you sure?"));
-                }
-                // onDoSaveAndClose();
-            }
-        });
-        wspace.getEntityWorkspace().addContentListener(new ContainerListenerAdapter() {
-            @Override
-            public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
-                    final int rawWidth, final int rawHeight) {
-                adjHeight(adjHeight);
-            }
-        });
+  @Override
+  public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
+    super.edit(html, onSave, onEditCancelled);
+    final Toolbar contentTopBar = wspace.getEntityWorkspace().getContentTopBar();
+    contentTopBar.removeAll();
+    contentTopBar.add(topbar);
+    wspace.getEntityWorkspace().setContent(vpanel);
+    adjHeight(wspace.getEntityWorkspace().getContentHeight());
+    // siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
+  }
 
-    }
+  public void init(final ContentEditorView view) {
+    super.init(view);
+    addContentActions();
+    vpanel = new VerticalPanel();
+    editorPanel = (RTEditorPanel) super.getEditorArea();
+    topbar = ((ComplexToolbar) super.getTopBar());
+    sndbar = ((ComplexToolbar) super.getSndBar());
+    vpanel.add(sndbar);
+    vpanel.add(editorPanel);
+    vpanel.setWidth("100%");
+  }
 
-    private void addContentActions() {
-        final RenameAction renameAction = new RenameAction(i18n.t("Rename"), NO_TEXT, NO_ICON);
-        final OldMenuItemDescriptor renameItem = new OldMenuItemDescriptor(super.getFileMenu(), renameAction);
-        renameItem.setLocation(RTEditor.TOPBAR);
-        final KeyStroke key = KeyStroke.getKeyStroke(Keyboard.KEY_F2, 0);
-        renameAction.putValue(Action.ACCELERATOR_KEY, key);
-        super.setActionShortcut(key, renameAction);
-        addAction(renameItem);
-    }
+  @Override
+  protected void onCancelConfirmed() {
+    wspace.getEntityWorkspace().clearContent();
+    super.onCancelConfirmed();
+    // siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
+  }
 
-    private void adjHeight(final int height) {
-        final int barHeight = sndbar.getOffsetHeight();
-        final int newHeight = height - 20 - barHeight;
-        // Log.debug("Sndbar height: " + barHeight + " new height: " +
-        // newHeight);
-        editorPanel.adjustSize(newHeight);
-        vpanel.setCellHeight(editorPanel, String.valueOf(newHeight));
-    }
-
-    @Override
-    public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
-        super.edit(html, onSave, onEditCancelled);
-        final Toolbar contentTopBar = wspace.getEntityWorkspace().getContentTopBar();
-        contentTopBar.removeAll();
-        contentTopBar.add(topbar);
-        wspace.getEntityWorkspace().setContent(vpanel);
-        adjHeight(wspace.getEntityWorkspace().getContentHeight());
-        // siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
-    }
-
-    public void init(final ContentEditorView view) {
-        super.init(view);
-        addContentActions();
-        vpanel = new VerticalPanel();
-        editorPanel = (RTEditorPanel) super.getEditorArea();
-        topbar = ((ComplexToolbar) super.getTopBar());
-        sndbar = ((ComplexToolbar) super.getSndBar());
-        vpanel.add(sndbar);
-        vpanel.add(editorPanel);
-        vpanel.setWidth("100%");
-    }
-
-    @Override
-    protected void onCancelConfirmed() {
-        wspace.getEntityWorkspace().clearContent();
-        super.onCancelConfirmed();
-        // siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
-    }
-
-    @Override
-    public void setFileMenuTitle(final String fileMenuTitleNew) {
-        super.getFileMenu().setText(fileMenuTitleNew);
-    }
+  @Override
+  public void setFileMenuTitle(final String fileMenuTitleNew) {
+    super.getFileMenu().setText(fileMenuTitleNew);
+  }
 
 }

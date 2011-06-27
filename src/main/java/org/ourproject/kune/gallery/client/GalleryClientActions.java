@@ -26,8 +26,6 @@ import static org.ourproject.kune.gallery.client.GalleryClientTool.TYPE_UPLOADED
 import org.ourproject.kune.gallery.client.cnt.GalleryViewer;
 import org.ourproject.kune.workspace.client.OldAbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
-import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
-import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
@@ -53,15 +51,12 @@ public class GalleryClientActions extends OldAbstractFoldableContentActions {
       final Provider<GroupServiceAsync> groupServiceProvider,
       final Provider<FileUploader> fileUploaderProvider,
       final ContentActionRegistry contentActionRegistry,
-      final ContextActionRegistry contextActionRegistry,
       final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
       final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
-      final GalleryViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-      final GSpaceBackManager wsBackManager) {
+      final GalleryViewer documentViewer, final GSpaceBackManager wsBackManager) {
     super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
         contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
-        contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
-        documentViewer, entityLogo, wsBackManager);
+        fileDownloadProvider, textEditorProvider, documentViewer, entityLogo, wsBackManager);
   }
 
   @Override

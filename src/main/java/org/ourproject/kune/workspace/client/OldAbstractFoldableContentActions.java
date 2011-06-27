@@ -33,8 +33,6 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
 import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
-import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
-import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
@@ -84,9 +82,9 @@ public abstract class OldAbstractFoldableContentActions {
 
   protected final ContentActionRegistry contentActionRegistry;
   protected final Provider<ContentServiceAsync> contentServiceProvider;
-  protected final ContextActionRegistry contextActionRegistry;
+  // protected final ContextActionRegistry contextActionRegistry;
   protected final ContextNavigator contextNavigator;
-  protected final Provider<ContextPropEditor> contextPropEditorProvider;
+  // protected final Provider<ContextPropEditor> contextPropEditorProvider;
   protected final SchedulerManager deferredCommandWrapper;
   protected final EntityHeader entityLogo;
   protected final ErrorHandler errorHandler;
@@ -107,12 +105,13 @@ public abstract class OldAbstractFoldableContentActions {
       final SchedulerManager deferredCommandWrapper,
       final Provider<GroupServiceAsync> groupServiceProvider,
       final Provider<ContentServiceAsync> contentServiceProvider,
-      final Provider<FileUploader> fileUploaderProvider, final ContextNavigator contextNavigator,
+      final Provider<FileUploader> fileUploaderProvider,
+      final ContextNavigator contextNavigator,
       final ContentActionRegistry contentActionRegistry,
-      final ContextActionRegistry contextActionRegistry,
+      // final ContextActionRegistry contextActionRegistry,
       final Provider<FileDownloadUtils> fileDownloadProvider,
       final Provider<ContentEditor> textEditorProvider,
-      final Provider<ContextPropEditor> contextPropEditorProvider,
+      // final Provider<ContextPropEditor> contextPropEditorProvider,
       final FoldableContent foldableContent, final EntityHeader entityLogo,
       final GSpaceBackManager wsBackManager) {
     this.session = session;
@@ -125,10 +124,10 @@ public abstract class OldAbstractFoldableContentActions {
     this.fileUploaderProvider = fileUploaderProvider;
     this.contextNavigator = contextNavigator;
     this.contentActionRegistry = contentActionRegistry;
-    this.contextActionRegistry = contextActionRegistry;
+    // this.contextActionRegistry = contextActionRegistry;
     this.fileDownloadProvider = fileDownloadProvider;
     this.textEditorProvider = textEditorProvider;
-    this.contextPropEditorProvider = contextPropEditorProvider;
+    // this.contextPropEditorProvider = contextPropEditorProvider;
     this.foldableContent = foldableContent;
     this.entityLogo = entityLogo;
     this.wsBackManager = wsBackManager;
@@ -187,7 +186,7 @@ public abstract class OldAbstractFoldableContentActions {
     delContainer.setMustBeConfirmed(true);
     delContainer.setConfirmationTitle(i18n.t("Please confirm"));
     delContainer.setConfirmationText(i18n.t("You will delete it with all its contents. Are you sure?"));
-    contextActionRegistry.addAction(delContainer, registerInTypes);
+    // contextActionRegistry.addAction(delContainer, registerInTypes);
   }
 
   protected void createDelContentAction(final String parentMenuTitle, final String textDescription,
@@ -243,7 +242,7 @@ public abstract class OldAbstractFoldableContentActions {
     downloadCtx.setIconUrl("images/nav/download.png");
 
     // contentActionRegistry.addAction(download, typeUploadedfile);
-    contextActionRegistry.addAction(downloadCtx, typeUploadedfile);
+    // contextActionRegistry.addAction(downloadCtx, typeUploadedfile);
   }
 
   protected ActionToolbarButtonDescriptor<StateToken> createEditAction(final String fileMenuTitle,
@@ -259,7 +258,7 @@ public abstract class OldAbstractFoldableContentActions {
                 final ContentEditor editor = textEditorProvider.get();
                 foldableContent.detach();
                 contextNavigator.detach();
-                contextPropEditorProvider.get().attach();
+                // contextPropEditorProvider.get().attach();
                 editor.edit(session.getContentState().getContent(), new Listener<String>() {
                   @Override
                   public void onEvent(final String html) {
@@ -294,7 +293,7 @@ public abstract class OldAbstractFoldableContentActions {
                       @Override
                       public void execute() {
                         foldableContent.attach();
-                        contextPropEditorProvider.get().detach();
+                        // contextPropEditorProvider.get().detach();
                         contextNavigator.attach();
                         if (session.inSameToken(stateToken)) {
                           contextNavigator.refreshState();
@@ -329,7 +328,7 @@ public abstract class OldAbstractFoldableContentActions {
     go.setMustBeAuthenticated(false);
     go.setTextDescription(i18n.t("Open"));
     go.setIconUrl("images/nav/go.png");
-    contextActionRegistry.addAction(go, registerInTypes);
+    // contextActionRegistry.addAction(go, registerInTypes);
     return go;
   }
 
@@ -351,7 +350,7 @@ public abstract class OldAbstractFoldableContentActions {
       }
     });
     goGroupHome.setLeftSeparator(ActionToolbarButtonSeparator.fill);
-    contextActionRegistry.addAction(goGroupHome, registerInTypes);
+    // contextActionRegistry.addAction(goGroupHome, registerInTypes);
     return goGroupHome;
   }
 
@@ -442,7 +441,7 @@ public abstract class OldAbstractFoldableContentActions {
     refreshCtx.setParentMenuTitle(parentMenuTitleCtx);
     refreshCtx.setTextDescription(i18n.t("Refresh"));
     refreshCtx.setIconUrl("images/nav/refresh.png");
-    contextActionRegistry.addAction(refreshCtx, registerInTypes);
+    // contextActionRegistry.addAction(refreshCtx, registerInTypes);
     return refreshCtx;
   }
 
@@ -457,7 +456,7 @@ public abstract class OldAbstractFoldableContentActions {
         });
     renameCtx.setTextDescription(textDescription);
     renameCtx.setParentMenuTitle(parentMenuTitleCtx);
-    contextActionRegistry.addAction(renameCtx, registerInTypes);
+    // contextActionRegistry.addAction(renameCtx, registerInTypes);
     return renameCtx;
   }
 
@@ -571,7 +570,7 @@ public abstract class OldAbstractFoldableContentActions {
     showDeletedItems.setParentMenuTitle(parentMenuTitle);
     showDeletedItems.setTextDescription("Show deleted items");
     showDeletedItems.setMustBeAuthenticated(true);
-    contextActionRegistry.addAction(showDeletedItems, registerInTypes);
+    // contextActionRegistry.addAction(showDeletedItems, registerInTypes);
   }
 
   protected ActionToolbarMenuDescriptor<StateToken> createTranslateAction(final String fileMenuTitle,
@@ -613,7 +612,7 @@ public abstract class OldAbstractFoldableContentActions {
     uploadFile.setTextDescription(textDescription);
     uploadFile.setIconUrl(iconUrl);
     uploadFile.setToolTip(toolTip);
-    contextActionRegistry.addAction(uploadFile, registerInTypes);
+    // contextActionRegistry.addAction(uploadFile, registerInTypes);
     return uploadFile;
   }
 
@@ -622,7 +621,7 @@ public abstract class OldAbstractFoldableContentActions {
     final ActionToolbarButtonAndItemDescriptor<StateToken> uploadMedia = createUploadAction(
         i18n.t("Upload media"), "images/nav/upload.png",
         i18n.t("Upload some media (images, videos...)"), session.getGalleryPermittedExtensions());
-    contextActionRegistry.addAction(uploadMedia, registerInTypes);
+    // contextActionRegistry.addAction(uploadMedia, registerInTypes);
     return uploadMedia;
   }
 
@@ -655,7 +654,7 @@ public abstract class OldAbstractFoldableContentActions {
   private void register(final ActionToolbarMenuAndItemDescriptor<StateToken> action,
       final Position position, final String... registerInTypes) {
     if (position.equals(Position.ctx)) {
-      contextActionRegistry.addAction(action, registerInTypes);
+      // contextActionRegistry.addAction(action, registerInTypes);
     } else if (position.equals(Position.cnt)) {
       // contentActionRegistry.addAction(action, registerInTypes);
     }
