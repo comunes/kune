@@ -15,15 +15,18 @@ import cc.kune.core.server.content.XMLActionReader;
 public class XMLKuneClientActionsTest {
 
   private XMLKuneClientActions actions;
+  private Map<String, XMLWaveExtension> extensions;
+  private List<XMLGuiActionDescriptor> guiActionDescriptors;
 
   @Before
   public void before() throws IOException {
     actions = new XMLActionReader().getActions();
+    extensions = actions.getExtensions();
+    guiActionDescriptors = actions.getGuiActionDescriptors();
   }
 
   @Test
   public void testExtensions() {
-    final Map<String, XMLWaveExtension> extensions = actions.getExtensions();
     assertTrue(extensions.size() > 0);
     for (final XMLWaveExtension extension : extensions.values()) {
       assertTrue(extension.getExtName().length() > 0);
@@ -34,12 +37,13 @@ public class XMLKuneClientActionsTest {
 
   @Test
   public void testGuiActions() {
-    final List<XMLGuiActionDescriptor> guiActionDescriptors = actions.getGuiActionDescriptors();
     assertTrue(guiActionDescriptors.size() > 0);
     for (final XMLGuiActionDescriptor descrip : guiActionDescriptors) {
       assertTrue(descrip.getDescName().length() > 0);
       assertTrue(descrip.getType().length() > 0);
-      assertTrue(descrip.getExtensionName().length() > 0);
+      final String extensionName = descrip.getExtensionName();
+      assertTrue(extensionName.length() > 0);
+      assertNotNull(extensions.get(extensionName));
       assertTrue(descrip.getPath().length() >= 0);
       assertTrue(descrip.isEnabled() || !descrip.isEnabled());
       final List<XMLTypeId> typeIds = descrip.getTypeIds();
