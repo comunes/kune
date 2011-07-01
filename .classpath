@@ -92,6 +92,7 @@
   <classpathentry kind="var" path="M2_REPO/org/jruby/rack/jruby-rack/0.9.4/jruby-rack-0.9.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/json/json/20080701/json-20080701.jar" sourcepath="M2_REPO/org/json/json/20080701/json-20080701-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/json-lib/json-lib/2.1/json-lib-2.1-jdk15.jar" sourcepath="M2_REPO/net/sf/json-lib/json-lib/2.1/json-lib-2.1-jdk15-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jsoup/jsoup/1.2.2/jsoup-1.2.2.jar" sourcepath="M2_REPO/org/jsoup/jsoup/1.2.2/jsoup-1.2.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sourceforge/findbugs/jsr-305/v0r47/jsr-305-v0r47.jar" sourcepath="M2_REPO/net/sourceforge/findbugs/jsr-305/v0r47/jsr-305-v0r47-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/jtidy/r8-20060801/jtidy-r8-20060801.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jukito/jukito/1.0/jukito-1.0.jar" sourcepath="M2_REPO/org/jukito/jukito/1.0/jukito-1.0-sources.jar"/>
@@ -111,6 +112,7 @@
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/media-src/0.3.1-SNAPSHOT/media-src-0.3.1-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.8.5/mockito-core-1.8.5.jar" sourcepath="M2_REPO/org/mockito/mockito-core/1.8.5/mockito-core-1.8.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/model-src/0.3.1-SNAPSHOT/model-src-0.3.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mvel/mvel2/2.0.16/mvel2-2.0.16.jar" sourcepath="M2_REPO/org/mvel/mvel2/2.0.16/mvel2-2.0.16-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.13/mysql-connector-java-5.1.13.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.14/nekohtml-1.9.14.jar" sourcepath="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.14/nekohtml-1.9.14-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0.jar" sourcepath="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0-sources.jar"/>

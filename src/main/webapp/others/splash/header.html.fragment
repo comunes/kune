@@ -1,0 +1,15 @@
+<table cellspacing="0" cellpadding="0"><tr>
+  <td width="100%">
+    <div class="participants">
+      @foreach{participant : participants}
+      <span class="avatar">
+        <img src="@{participant.imageUrl}" alt="@{participant.name}">
+        <span class="name">@{participant.name}</span>
+      </span>
+      @end{'<span class="punctuation">,</span>'}
+    </div>
+  </td>
+  <td valign="top">
+    <a class="detail" style="display:none" href="#">Show</a>
+  </td>
+</tr></table>

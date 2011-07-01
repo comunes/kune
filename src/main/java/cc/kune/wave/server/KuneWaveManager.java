@@ -43,6 +43,10 @@ public interface KuneWaveManager {
 
   boolean isParticipant(Wavelet wavelet, String user);
 
+  String render(Wavelet wavelet);
+
+  String render(WaveRef waveRef, String author);
+
   void setTitle(WaveRef waveName, String title, String author);
 
 }

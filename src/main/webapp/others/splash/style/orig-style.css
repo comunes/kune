@@ -1,0 +1,417 @@
+/**
+ * Copyright 2010 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+.header .title {
+  float: left;
+}
+
+.control-icon {
+  float: right;
+  width: 14px;
+  margin-left: 6px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.wnd-min {
+  background-image: url('../images/minimize_window.png')
+}
+
+.wnd-close {
+  background-image: url('../images/close_window.png')
+}
+
+.conversation {
+  padding: 24px 6px 206px 6px;
+}
+
+.conversation .blip {
+  position: relative;
+  right: 0;
+  overflow: hidden;
+  padding: 8px 0;
+  margin-top: -8px;
+}
+
+.conversation .blip:first-child {
+  border: none;
+}
+
+.conversation .blip div.left {
+  float: left;
+  width: 20%;
+}
+
+.conversation .blip .authorbar {
+  float: right;
+  margin: 12px 0 0 0;
+
+  background: #333;
+
+  padding: 3px 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 4px;
+}
+
+.conversation .blip .author {
+  float: right;
+  padding: 2px 6px;
+
+  font-weight: bold;
+  text-shadow: -1px -1px 1px #555;
+  color: white;
+}
+
+.conversation .blip .author {
+  width: 100%;
+}
+
+.conversation .blip .author img {
+  float: left;
+  height: 32px;
+  width: 32px;
+}
+
+.conversation .blip .author .name {
+  float: right;
+}
+
+.author-more {
+  float: right;
+  clear: both;
+}
+
+.author-count-1 {
+  min-height: 24px;
+}
+
+.author-count-2 {
+  min-height: 84px;
+}
+
+.author-count-3 {
+  min-height: 136px;
+}
+
+.author-count-many {
+  min-height: 136px;
+}
+
+.conversation .blip div.left .toolbar {
+  display: none;
+  position: absolute;
+  margin: 16px 12px 0 0;
+  padding: 2px 4px 0 4px;
+  right: 0;
+
+  background: #fff;
+  -webkit-border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 4px #111;
+  -moz-border-radius: 4px;
+  -moz-box-shadow: 2px 2px 4px #111;
+}
+
+.indent {
+  padding-left: 40px;
+}
+
+.unread {
+  background: #7aa2f2 !important;
+  color: #eee !important;
+}
+
+.conversation .blip div.right {
+  float: left;
+  width: 74%;
+
+  padding: 12px 12px 24px 12px;
+  margin: 0 auto;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+
+  -webkit-box-shadow: 2px 2px 8px #000;
+  -moz-box-shadow: 2px 2px 8px #000;
+
+  background: white;
+}
+
+.conversation .blip div.right .time {
+  float: right;
+  font-size: 94%;
+  color: #999;
+}
+/** markup in text**/
+span.title {
+  font-weight: bold;
+}
+
+/** an unused button **/
+.more-button {
+  margin: 4px auto;
+
+  width: 120px;
+
+  cursor: pointer;
+  cursor: hand;
+
+  font-size: 11px;
+  color: #777;
+  padding: 4px 14px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+
+  background: #EDEDED;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #FFF),
+  color-stop(0.7, #FEFEFE), color-stop(1.0, #EDEDED));
+}
+
+.more-button:hover {
+  background: #DEDEDE;
+}
+
+/*** Picture thumbnail embedded in blip **/
+.picture {
+  display: block;
+  width: 260px;
+  height: 180px;
+  border: 1px solid #999;
+  padding: 2px;
+  -webkit-border-radius: 2px;
+}
+
+/** offset the text a bit from the checkbox **/
+div.todo span {
+  padding-left: 6px;
+}
+
+div.todo div.due {
+  padding: 8px 18px;
+  float: right;
+  border-left: 1px solid #DDD;
+  margin: -4px 0;
+
+  color: #AAA;
+  font-size: 9px;
+}
+
+/*** search related stuff **/
+
+.blue {
+  color: white; /**background: rgb(142, 193, 255); **/
+  -webkit-box-shadow: none !important;
+
+}
+
+.orange {
+  color: white; /**background: rgb(142, 193, 255); **/
+  -webkit-box-shadow: none !important;
+
+  background: -webkit-gradient(linear, left top, left bottom,
+  from(rgb(255, 187, 83)), to(rgb(255, 167, 63)));
+}
+
+
+#zoomframe {
+  display: none;
+  position: absolute;
+  z-index: 2;
+
+  border: 1px solid #fff;
+}
+
+/** separate from zoomframe so we can assign different opacity **/
+#zoomframe div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.2;
+}
+
+.feed .item {
+  overflow: hidden;
+  padding: 14px 10px 18px 10px;
+  border-bottom: 1px solid #999;
+  background: white;
+
+  cursor: pointer;
+}
+
+.feed .item:hover {
+  background: #cacaca !important;
+}
+
+.feed .read {
+  background: #eaeaea !important;
+}
+
+.feed .item img.icon {
+  float: left;
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+.feed .item .title {
+  font-weight: bold;
+  margin-left: 45px;
+  padding-bottom: 2px;
+}
+
+.read > .title {
+  color: #777;
+}
+
+.feed .item .snippet {
+  margin-left: 45px;
+}
+
+.read > .snippet {
+  color: #999;
+}
+
+.feed .item .snippet .tid {
+  font-style: italic;
+  padding-right: 4px;
+}
+
+.feed .item .time {
+  float: right;
+  text-align: right;
+  font-weight: bold;
+}
+
+.read > .time {
+  color: #999;
+}
+
+.messages {
+  font-weight: normal;
+}
+
+.feed .item .avatar {
+  border: 3px solid #ccc;
+  border-radius: 3px 3px;
+  -moz-border-radius: 3px 3px;
+  float: left;
+  margin: 0 5px 2px 0;
+}
+
+.avatar > img {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #fff;
+}
+
+/** a pulse animation **/
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale(1.0);
+  }
+  35% {
+    -webkit-transform: scale(1.10);
+  }
+  65% {
+    -webkit-transform: scale(1.00);
+  }
+  90% {
+    -webkit-transform: scale(1.02);
+  }
+  to {
+    -webkit-transform: scale(1.0);
+  }
+}
+
+/** this is how you add the pulse anim */
+.anim-pulse {
+  -webkit-animation-name: pulse;
+  -webkit-animation-duration: 0.4s;
+  -webkit-animation-iteration-count: 1;
+}
+
+.editor {
+  border: 1px solid green;
+  min-height: 40px;
+}
+
+.header {
+  background-color: #dfe3eb;
+
+  padding: 16px 12px 16px 24px;
+  margin: 0 auto;
+
+  -webkit-box-shadow: 2px 2px 8px #000;
+  -moz-box-shadow: 2px 2px 8px #000;
+}
+
+#headerLayout td.control-bar {
+  vertical-align: middle;
+  color: #ccc
+}
+
+.control-bar a {
+  color: #ccc;
+}
+
+.control-bar a:hover {
+  color: #ccc;
+  text-decoration: underline;
+}
+
+.participants {
+  overflow: hidden;
+  height: 18px;
+}
+
+.participants > .avatar > img {
+  width: 16px;
+  height: 16px;
+  margin-bottom: -4px;
+}
+
+.participants > .avatar > .name {
+  margin: 0 5px;
+}
+
+.unknown-element {
+  color: #999;
+  font-weight: bold;
+  border: 1px solid #C9E2FC;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.attachment-element {
+  border: 1px solid #C9E2FC;
+  width: auto;
+  font-weight: normal;
+  text-align: center;
+  margin: 2px;
+  display: inline-block;
+}
+
+.attachment-element img {
+  max-width: 128px;
+  max-height: 128px;
+}
+
+.caption {
+  text-align: center;
+}

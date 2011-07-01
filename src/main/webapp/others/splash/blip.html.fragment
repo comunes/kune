@@ -1,0 +1,16 @@
+<div class="left @{authorCountClass}">
+  @{authorString}
+  @if{!readonly}
+  <div class="toolbar">
+    <img src="images/cross.png" alt="delete">
+    <img class="edit-button" src="images/pencil.png" alt="edit">
+    <img class="reply-button" src="images/reply.png" alt="reply">
+  </div>
+  @end{}
+</div>
+<div class="right @{authorCountClass}">
+  <div class="right-inner">
+    <div class="time">@{time}</div>
+    <div class="content styleable">@{content}</div>
+  </div>
+</div>

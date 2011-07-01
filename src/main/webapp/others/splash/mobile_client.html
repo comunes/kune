@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Google Wave Splash v1.1</title>
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/mobile.css">
+  <link rel="stylesheet" type="text/css" href="style/jquery.lightbox-0.5.css" media="screen">
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.lightbox-0.5.min.js"></script>
+  <script type="text/javascript"
+          src="http://wave.google.com/gadgets/js/core:rpc.js?debug=1&c=1"></script>
+
+  <!-- [MINIFY] -->
+  <script type="text/javascript" src="js/editor.js"></script>
+  <script type="text/javascript" src="js/gadget.js"></script>
+  <script type="text/javascript" src="js/rpc.js"></script>
+  <script type="text/javascript" src="js/common_client.js"></script>
+  <script type="text/javascript" src="js/mobile_client.js"></script>
+  <!-- [END_MINIFY] -->
+  <script type="text/javascript">
+    var BOOTSTRAP = {
+      'email': '@{email}',
+      'displayName': '@{displayName}'
+    };
+  </script>
+  <meta name="viewport" content="user-scalable=no" width="device-width" />
+</head>
+<body>
+
+<div id="header">
+  <div id="headerInner">
+    <table id="headerLayout" cellspacing="0" summary="">
+      <tr>
+        <td id="tdLogo">
+          <div id="logo"></div>
+        </td>
+        <td>
+          <div class="mobile-button">
+            <a href="#"><span id="main-button">New Wave</span></a>
+          </div>
+        </td>
+
+        <td id="tdSearchToggle" style="vertical-align:bottom;">
+          <img id="searchToggle" src="images/search_small_button.png" />
+        </td>
+        <td id="td-logout">
+          <div class="mobile-button">
+            <a id="logout" href="/logout">
+              <span>Sign out</span>
+            </a>
+          </div>
+        </td></tr>
+    </table>
+  </div>
+  <!-- /#headerInner" -->
+
+  <div id="headerSearch">
+    <table id="search" cellspacing="0" summary="">
+      <tr>
+        <td>
+          <input id="searchField" name="searchField" value="Search your waves"/>
+        </td>
+        <td id="searchButton">
+          <span><span>Go</span></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!-- /#headerSearch" -->
+
+<!-- /#header -->
+
+</div>
+
+<div id="content">
+  <div id="wave" class="wave-window">
+    <div class="header" style="display:none"></div>
+    <div id="conversation"></div>
+  </div>
+
+  <div id="feed" class="feed">
+
+    <div id="loading-wrapper">
+      <img id="feed-loading" src="images/loading.gif" alt="Loading feed contents...">
+    </div>
+
+    <div id="more-feed" class="more-button">Show More...</div>
+  </div>
+</div>
+
+</body>
+</html>

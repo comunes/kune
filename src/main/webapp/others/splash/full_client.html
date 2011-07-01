@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" /> <!-- for ipad: prevents pinch zoom -->
+  <title>Google Wave Splash</title>
+  <link rel="stylesheet" href="style/stuff.css">
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" type="text/css" href="style/jquery.lightbox-0.5.css" media="screen">
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://wave.google.com/gadgets/js/core:rpc.js?debug=1&c=1"></script>
+
+  <!-- [MINIFY] -->
+  <script type="text/javascript" src="js/jquery.lightbox-0.5.min.js"></script>
+  <script type="text/javascript" src="js/jScrollTouch.js"></script>
+  <script type="text/javascript" src="js/editor.js"></script>
+  <script type="text/javascript" src="js/gadget.js"></script>
+  <script type="text/javascript" src="js/rpc.js"></script>
+  <script type="text/javascript" src="js/common_client.js"></script>
+  <script type="text/javascript" src="js/full_client.js"></script>
+  <!-- [END_MINIFY] -->
+  <script type="text/javascript">
+    var BOOTSTRAP = {
+      'email': '@{email}',
+      'displayName': '@{displayName}'
+    };
+  </script>
+  <!--[if IE 6]>
+  <script type="text/javascript" src="js/ie6sucks.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div id="header">
+  <div id="headerInner">
+    <table id="headerLayout" cellspacing="0" summary="">
+      <tr>
+        <td id="logo">
+          <h1>
+            <a href="#">Google Wave Splash</a>
+          </h1>
+        </td>
+        @if{enableHeaderButtons}
+        <td class="button">
+          <a href="#"><span>New wave</span></a>
+        </td>
+        <td class="button">
+          <a href="#"><span>Mark all read</span></a>
+        </td>
+        @end{}
+
+        <td class="control-bar">
+          <a href="/speedz">Speedz</a> | <a href="/logout">Sign out</a> 
+          <div id="measure">Search completed in X.XXs</div>
+        </td>
+        <!--
+        TODO(dhanji): This is cool, bring it back in the right place
+        <td class="headerAlert">
+          <div id="alertbar" class="highlight"><div id="alert">You have a happy hippgray app now!</div></div>
+        </td>
+        -->
+      </tr>
+      <tr>
+        <td colspan="5">
+          <div id="alertbar" class="highlight"><div id="alert">You have a happy hippgray app now!</div></div>
+        </td>
+      </tr>      
+    </table>
+  </div>
+  <!-- /#headerInner" -->
+</div>
+<!-- /#header -->
+
+<div id="content">
+  <div id="wave" class="wave-window">
+    <div id="wave-header" class="header" style="display:none"></div>
+    <div id="conversation"></div>
+  </div>
+  <div id="feed-container" class="feed-container">
+
+    <div id="headerSearch">
+      <table id="search" cellspacing="0" summary="">
+        <tr>
+          <td>
+            <input id="searchField" name="searchField" value="Search your waves"/>
+          </td>
+          <td id="searchButton">
+            <span><span>Go</span></span>
+          </td>
+        </tr>
+      </table>
+      <!-- /#search -->
+    </div>
+
+    <div id="feed" class="feed">
+      <img id="feed-loading" src="images/loading.gif" alt="Loading feed contents...">
+      <div id="more-feed" class="more-button">Show More...</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

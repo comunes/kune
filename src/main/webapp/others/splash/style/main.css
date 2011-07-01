@@ -1,0 +1,236 @@
+/**
+ * Copyright 2010 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+/* GENERAL ------------------------------------------------------------------ */
+
+/* Zero default margin & padding around common elements */
+body, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, li, ol, p, ul {
+  margin: 0;
+  border: 0 none #FFFFFF;
+  padding: 0;
+}
+
+body {
+  overflow: hidden; /** HACK(dhanji): HEEEEELP! Horiz Scrollbar of doom **/
+  background-color: #ffffff;
+  color: #000000;
+  line-height: 1.4;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+
+a {
+  color: #0066CC;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #0066CC;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+img {
+  border: 0 none transparent;
+}
+
+input, select, table, textarea {
+  font-size: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* MAIN --------------------------------------------------------------------- */
+
+#header {
+  position: relative;
+  z-index: 2;
+  background-color: #202020;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#4c4c4c), to(#191919));
+  background-image: -moz-linear-gradient(top, #4c4c4c, #191919);
+  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.35);
+}
+
+#headerInner {
+  height: 70px;
+  border-right: 0 none #ffffff;
+}
+
+#headerLayout {
+  width: 100%;
+}
+
+#headerLayout td {
+  padding: 0;
+  vertical-align: top;
+}
+
+#headerSearch {
+  width: 100%;
+  padding: 0 10px 0 0 !important;
+}
+
+h1 {
+  float: left;
+  width: 180px;
+  height: 43px;
+  margin: 6px 10px 0 10px;
+  background-image: url(../images/logo_on_black.png);
+  background-repeat: no-repeat;
+}
+
+h1 a {
+  display: block;
+  text-indent: -9999px;
+  text-decoration: none;
+}
+
+#td-logo {
+  width: 77px;
+}
+
+.button a {
+  display: block;
+  margin: 22px 7px 0 0;
+  border: 1px solid #191919;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  color: #ffffff;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.button a span {
+  display: block;
+  height: 23px;
+  border-top: 1px solid #7f7f7f;
+  border-left: 1px solid #7f7f7f;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  padding: 0 7px 0 7px;
+  background-color: #333333;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#666666), to(#333333));
+  background-image: -moz-linear-gradient(top, #666666, #333333);
+  line-height: 24px;
+  text-align: center;
+}
+
+#search {
+  width: 100%;
+  height: 25px;
+  margin: 2px 0 0 0px;
+  background-image: url(../images/search_field_on_black_left.png);
+  background-repeat: no-repeat;
+}
+
+td.headerAlert {
+  width: 100%;
+}
+
+/** Alert bar **/
+div.highlight {
+  float: right;
+  overflow: hidden;
+  margin: 20px 36px 0 0;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #cecece;
+}
+
+#alert {
+  float: left;
+  font-size: 1.1em;
+  display: none;
+
+  padding: 3px 16px 2px 16px; /*border: 1px solid #000;*/
+  cursor: pointer;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+
+  background-color: #eede54;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #f5eca1), color-stop(1.0, #eede54));
+}
+
+#measure {
+  position: absolute;
+  color: #aaa;
+  right: 10px;
+  bottom: 2px;
+}
+
+#search td {
+  width: 100%;
+  padding: 0 0 0 20px;
+}
+
+#search input {
+  display: block;
+  height: 25px;
+  width: 100%;
+  margin: 0;
+  border: 0 none #ffffff;
+  padding: 0 0 0 4px;
+  outline: 0 none #ffffff;
+  background-color: #ffffff;
+  background-image: url(../images/search_field_on_black.png);
+  color: #999999;
+  line-height: 26px;
+}
+
+#search input.clicked {
+  color: #000000;
+}
+
+#search #searchButton {
+  width: auto;
+  padding: 0 0 0 2px;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#searchButton span {
+  display: block;
+  height: 25px;
+  padding: 0 12px 0 0;
+  background-image: url(../images/search_field_on_black_button_right.png);
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  line-height: 26px;
+}
+
+#searchButton span span {
+  padding: 0 4px 0 11px;
+  background-image: url(../images/search_field_on_black_button.png);
+  background-repeat: repeat-x;
+}
+
+#content {
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 70px;
+  bottom: 0;
+  overflow: auto;
+}

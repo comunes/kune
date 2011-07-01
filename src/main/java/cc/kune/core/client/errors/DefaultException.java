@@ -24,18 +24,26 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class DefaultException extends InvocationException implements IsSerializable {
 
-    private static final long serialVersionUID = -6111471089427505005L;
+  private static final long serialVersionUID = -6111471089427505005L;
 
-    public DefaultException() {
-        this(0, "");
-    }
+  public DefaultException() {
+    this(0, "");
+  }
 
-    public DefaultException(final int statusCode, final String message) {
-        super(statusCode + " " + message);
+  public DefaultException(final int statusCode, final String message) {
+    super(statusCode + " " + message);
 
-    }
+  }
 
-    public DefaultException(final String message) {
-        super(message);
-    }
+  public DefaultException(final String message) {
+    super(message);
+  }
+
+  public DefaultException(final String message, final Throwable cause) {
+    super(message, cause);
+  }
+
+  public DefaultException(final Throwable cause) {
+    super("", cause);
+  }
 }

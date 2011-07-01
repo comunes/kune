@@ -109,8 +109,8 @@ public class StateServiceDefault implements StateService {
         // FIXME if we remove the authors this fails...
         final Wavelet wavelet = kuneWaveManager.fetchWavelet(
             JavaWaverefEncoder.decodeWaveRefFromPath(waveId), content.getAuthors().get(0).getShortName());
-        final String currentContent = wavelet.getRootBlip().getContent();
-        state.setContent(currentContent);
+        // final String currentContent = wavelet.getRootBlip().getContent();
+        state.setContent(kuneWaveManager.render(wavelet));
         // Well we "cache" the last modified time of waves in db (w'll find
         // another way to do it better in the future with db persitence of
         // waves)

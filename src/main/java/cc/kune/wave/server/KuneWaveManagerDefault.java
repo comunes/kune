@@ -68,6 +68,8 @@ import com.google.wave.api.impl.DocumentModifyAction;
 import com.google.wave.api.impl.DocumentModifyAction.BundledAnnotation;
 import com.google.wave.api.impl.DocumentModifyAction.ModifyHow;
 import com.google.wave.api.impl.WaveletData;
+import com.google.wave.splash.rpc.ClientAction;
+import com.google.wave.splash.web.template.WaveRenderer;
 
 public class KuneWaveManagerDefault implements KuneWaveManager {
   public static final Log LOG = LogFactory.getLog(KuneWaveManagerDefault.class);
@@ -86,17 +88,20 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   private final ParticipantUtils participantUtils;
   private final WaveletProvider waveletProvider;
 
+  private final WaveRenderer waveRenderer;
+
   @Inject
   public KuneWaveManagerDefault(final EventDataConverterManager converterManager,
       @Named("DataApiRegistry") final OperationServiceRegistry operationRegistry,
       final WaveletProvider waveletProvider, final ConversationUtil conversationUtil,
-      final ParticipantUtils participantUtils,
+      final ParticipantUtils participantUtils, final WaveRenderer waveRenderer,
       @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
     this.converterManager = converterManager;
     this.waveletProvider = waveletProvider;
     this.conversationUtil = conversationUtil;
     this.operationRegistry = operationRegistry;
     this.participantUtils = participantUtils;
+    this.waveRenderer = waveRenderer;
     this.domain = domain;
   }
 
@@ -158,8 +163,8 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     final Wavelet newWavelet = opQueue.createWavelet(domain, participants);
     opQueue.setTitleOfWavelet(newWavelet, title);
     final Blip rootBlip = newWavelet.getRootBlip();
-    rootBlip.append(new com.google.wave.api.Markup(message).getText());
-
+    // rootBlip.append(new com.google.wave.api.Markup(message).getText());
+    rootBlip.appendMarkup(message);
     if (gadgetUrl != WITHOUT_GADGET) {
       final Gadget gadget = new Gadget(gadgetUrl.toString());
       rootBlip.append(gadget);
@@ -292,6 +297,17 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     final String errorMsg = TextUtils.notEmpty(message) ? message : "Wave operation failed";
     LOG.error(errorMsg);
     throw new DefaultException(errorMsg);
+  }
+
+  @Override
+  public String render(final Wavelet wavelet) {
+    final ClientAction clientPage = waveRenderer.render(wavelet, 0);
+    return clientPage.getHtml();
+  }
+
+  @Override
+  public String render(final WaveRef waveRef, final String author) {
+    return render(fetchWavelet(waveRef, author));
   }
 
   @Override

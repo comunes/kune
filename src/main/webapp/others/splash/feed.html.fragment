@@ -1,0 +1,19 @@
+<div style="display:none">
+@foreach{item : feed}
+<div class="item @if{item.unreadCount == 0}read@end{}" wave_id="@{item.waveId}">
+  <div class="time">
+    <p>@{markup.formatDateTime(item.lastModified)}</p>
+    <!-- TODO: i18n -->
+    <p class="messages">@{item.blipCount} msgs</p>
+  </div>
+  <div class="avatar">
+    <!-- TODO: Kinda hacky. -->
+    <img width="@{markup.getImageSize()}" height="@{markup.getImageSize()}" src="@{markup.getImageUrl(item.participants[0])}"
+        alt="@{markup.getDisplayName(item.participants[0])}"
+        title="@{markup.getDisplayName(item.participants[0])}"/>
+  </div>
+  <div class="title">@{markup.sanitizeHtml(item.title)}</div>
+  <div class="snippet">@{markup.sanitizeHtml(item.snippet)}</div>
+</div>
+@end{}
+</div>

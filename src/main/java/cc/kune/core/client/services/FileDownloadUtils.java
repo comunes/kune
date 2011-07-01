@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 
 public class FileDownloadUtils {
 
-  private static final String AVATARDOWNLOADSERVLET = "servlets/UserLogoDownloadManager";
+  public static final String AVATARDOWNLOADSERVLET = "servlets/UserLogoDownloadManager";
   private static final String BACKDOWNLOADSERVLET = "servlets/EntityBackgroundDownloadManager";
   private static final String DOWNLOADSERVLET = "servlets/FileDownloadManager";
   protected static final String GROUP_NO_AVATAR_IMAGE = "images/group-def-icon.png";

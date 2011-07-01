@@ -52,16 +52,14 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   @Test
   public void addGadget() throws DefaultException, IOException {
     doLogin();
-    final WaveRef waveletName = manager.createWave(TITLE, MESSAGE,
-        participantUtils.of(getSiteAdminShortName()));
+    final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
     manager.addGadget(waveletName, getSiteAdminShortName(), TEST_GADGET);
   }
 
   private void addParticipant(final String whoAdds) throws IOException {
     doLogin();
-    final WaveRef waveletName = manager.createWave(TITLE, MESSAGE,
-        participantUtils.of(getSiteAdminShortName()));
+    final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
     manager.addParticipant(waveletName, getSiteAdminShortName(), whoAdds, NEW_PARTICIPANT);
     final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
@@ -81,6 +79,10 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   public void before() {
     new IntegrationTestHelper(this);
 
+  }
+
+  private WaveRef createTestWave() {
+    return manager.createWave(TITLE, MESSAGE, participantUtils.of(getSiteAdminShortName()));
   }
 
   @Test
@@ -107,8 +109,7 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   @Test
   public void createWaveWithTitle() throws DefaultException, IOException {
     doLogin();
-    final WaveRef waveletName = manager.createWave(TITLE, MESSAGE,
-        participantUtils.of(getSiteAdminShortName()));
+    final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
     final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
@@ -123,10 +124,16 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   }
 
   @Test
+  public void renderWave() throws DefaultException, IOException {
+    doLogin();
+    final WaveRef waveletName = createTestWave();
+    assertNotNull(manager.render(waveletName, getSiteAdminShortName()));
+  }
+
+  @Test
   public void setTitle() throws DefaultException, IOException {
     doLogin();
-    final WaveRef waveletName = manager.createWave(TITLE, MESSAGE,
-        participantUtils.of(getSiteAdminShortName()));
+    final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
     manager.setTitle(waveletName, TITLENEW, getSiteAdminShortName());
     final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
