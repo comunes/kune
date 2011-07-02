@@ -4,6 +4,126 @@
 
   <!-- List of Wave extensions to use in Kune ===================== -->
   <waveExtensions>
+    <extension>
+      <name>Image</name>
+      <installerUrl>http://everybodywave.appspot.com/gadget/image/xt.xml
+      </installerUrl>
+      <gadgetUrl>http://everybodywave.appspot.com/gadget/image/gadget.xml
+      </gadgetUrl>
+      <iconUrl>http://everybodywave.appspot.com/gadget/image/icon.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+	
+    <extension>
+      <name>Quick Notify</name>
+      <installerUrl>http://code.google.com/p/wave-projects/source/browse/gadgets/wave-quick-notify-installer.xml	  
+      </installerUrl>
+      <gadgetUrl>http://wave-projects.googlecode.com/hg/gadgets/wave-quick-notify.xml
+      </gadgetUrl>
+      <iconUrl>http://wave-projects.googlecode.com/hg/gadgets/images/qn.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+	
+    <extension>
+      <name>tasklistbot</name>
+      <installerUrl>http://tasklistbot.appspot.com/TaskList.xml	  
+      </installerUrl>
+      <gadgetUrl>http://everybodywave.appspot.com/gadget/foobar/main.xml
+      </gadgetUrl>
+      <iconUrl>http://tasklistbot.appspot.com/resources/tasklistbot_avatar.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+
+    <extension>
+      <name>Yes/No/Mini</name>
+      <installerUrl>http://mysite.verizon.net/zmyaro/mystuff/wave/ynmini.xml	  
+      </installerUrl>
+      <gadgetUrl>http://mysite.verizon.net/zmyaro/projects/wave/gadgets/ynmini.xml
+      </gadgetUrl>
+      <iconUrl>http://mysite.verizon.net/zmyaro/projects/wave/gadgets/ynmini_icon.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+	
+    <extension>
+      <name>Yes/No/Maybe/+</name>
+      <installerUrl>http://everybodywave.appspot.com/gadget/foobar/xt.xml	  
+      </installerUrl>
+      <gadgetUrl>http://everybodywave.appspot.com/gadget/foobar/main.xml
+      </gadgetUrl>
+      <iconUrl>http://everybodywave.appspot.com/gadget/foobar/icon.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+	
+    <extension>
+      <name>Shorten URL with goo.gl</name>
+      <installerUrl>http://haru1ban-wave.googlecode.com/svn/trunk/goo_gl/manifest.xml	  
+      </installerUrl>
+      <gadgetUrl>http://haru1ban-wave.googlecode.com/svn/trunk/goo_gl/goo_gl.xml
+      </gadgetUrl>
+      <iconUrl>http://haru1ban-wave.googlecode.com/svn/trunk/goo_gl/goo_gl_icon.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+	
+    <extension>
+      <name>Poll</name>
+      <installerUrl>http://wave.samuirai.de/install_poll.xml	  
+      </installerUrl>
+      <gadgetUrl>http://wave.samuirai.de/poll.xml
+      </gadgetUrl>
+      <iconUrl>http://wave.samuirai.de/poll_icon.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+	
+    <extension>
+      <name>TaskToDo</name>
+      <installerUrl>http://www.voizle.com/ToDoInstaller.xml	  
+      </installerUrl>
+      <gadgetUrl>http://www.voizle.com/ToDo.xml
+      </gadgetUrl>
+      <iconUrl>http://www.voizle.com/image/task.orig.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+
+    <extension>
+      <name>Picasa Gadget</name>
+      <installerUrl>http://wave-picasa.googlecode.com/svn/trunk/manifest_wave_picasa.xml	  
+      </installerUrl>
+      <gadgetUrl>http://wave-picasa.googlecode.com/svn/trunk/picasa.xml
+      </gadgetUrl>
+      <iconUrl>http://wave-picasa.googlecode.com/svn/trunk/picasa_icon.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+	
+    <extension>
+      <name>Map</name>
+      <installerUrl>http://google-wave-resources.googlecode.com/svn/trunk/samples/extensions/gadgets/mappy/installer.xml	  
+      </installerUrl>
+      <gadgetUrl>http://google-wave-resources.googlecode.com/svn/trunk/samples/extensions/gadgets/mappy/map_v2.xml
+      </gadgetUrl>
+      <iconUrl>https://wave-api.appspot.com/public/images/insertMap.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+	
+    <extension>
+      <name>MindMap</name>
+      <installerUrl>http://cactus-wave.appspot.com/mindmap.xml	  
+      </installerUrl>
+      <gadgetUrl>http://cactus-wave.appspot.com/net.brucecooper.mindmapgadget.MindMapGadget/net.brucecooper.mindmapgadget.client.MindMapGadget.gadget.xml
+      </gadgetUrl>
+      <iconUrl>https://wave-api.appspot.com/public/images/insertMap.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
 
     <extension>
       <name>pollo</name>
@@ -15,7 +135,7 @@
       </iconUrl>
       <iconCss></iconCss>
     </extension>
-
+	
     <extension>
       <name>waffle</name>
       <installerUrl>http://www.waffle.dk/install.xml
@@ -65,6 +185,273 @@
   <!-- Where and how to use the above extensions ================ -->
 
   <guiActionDescriptors>
+
+     <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Map</extensionName>
+      <name>New Map</name>
+      <path>Gadget»Media</path>
+      <description>Collaborate on a map of placemarks, paths, and shapes with other participants. Great for planning events and trips.</description>
+      <new-content-title>New Map</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+  
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Picasa Gadget</extensionName>
+      <name>New Album</name>
+      <path>Gadget»Media</path>
+      <description>Add a Picasa photo album to a wave.</description>
+      <new-content-title>New Album</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+	
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>TaskToDo</extensionName>
+      <name>New To-Do list</name>
+      <path>Gadget»Tasks</path>
+      <description>Make your To-Do list and mark your progress.</description>
+      <new-content-title>New To-Do list</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+	
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Shorten URL with goo.gl</extensionName>
+      <name>New Shorten URL</name>
+      <path>Gadget»Links</path>
+      <description>Shorten url with goo.gl, the new Google url shortener.(http://goo.gl/)</description>
+      <new-content-title>New Shorten URL</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+	
+	
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Poll</extensionName>
+      <name>New Advanced Poll</name>
+      <path>Gadget»Voting</path>
+      <description>You can add a poll to your Wave. Accordingly you can embed the result with the Google Chart API into your Wave.</description>
+      <new-content-title>New Advanced Poll</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+  
+  
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Yes/No/Maybe/+</extensionName>
+      <name>New Yes/No/Maybe/+ Voting</name>
+      <path>Gadget»Voting</path>
+      <description>Same as Google's Yes/No/Maybe, only you can edit the titles and add new ones.</description>
+      <new-content-title>New Yes/No/Maybe/+ Voting</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+  
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Yes/No/Mini</extensionName>
+      <name>New Yes/no/Mini Voting</name>
+      <path>Gadget»Voting</path>
+      <description>A miniature version of the Yes/No/Maybe gadget.</description>
+      <new-content-title>New Yes/no/Mini Voting</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+  
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>tasklistbot</extensionName>
+      <name>New Task List</name>
+      <path>Gadget»Tasks</path>
+      <description></description>
+      <new-content-title>New Task List</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+	
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Quick Notify</extensionName>
+      <name>New Notification</name>
+      <path>Gadget»Organization</path>
+      <description>Quickly send a short email with a custom message to all participants.</description>
+      <new-content-title>New Notification</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+	
+	
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>MindMap</extensionName>
+      <name>New MindMap</name>
+      <path>Gadget»Organization</path>
+      <description>Collaborate using a hierarchical mind map.</description>
+      <new-content-title>New MindMap</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+    
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Image</extensionName>
+      <name>New Image</name>
+      <path>Gadget»Media</path>
+      <description>Lets you insert, resize and annotate any image from the web.</description>
+      <new-content-title>New image</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
+        <typeId origTypeId="docs.root" destTypeId="docs.doc" />
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post" />
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
 
     <guiActionDescriptor>
       <type>wave-gadget</type>
