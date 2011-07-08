@@ -22,6 +22,10 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.waveprotocol.wave.client.editor.content.paragraph.DefaultParagraphHtmlRenderer;
+import org.waveprotocol.wave.client.editor.content.paragraph.Paragraph;
+
+import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.inject.Inject;
 import com.google.wave.api.Annotation;
 import com.google.wave.api.Annotations;
@@ -29,6 +33,7 @@ import com.google.wave.api.Attachment;
 import com.google.wave.api.Element;
 import com.google.wave.api.ElementType;
 import com.google.wave.api.Gadget;
+import com.google.wave.api.Line;
 import com.google.wave.splash.web.template.WaveRenderer;
 
 /**
@@ -93,6 +98,8 @@ public class ContentRenderer {
   }
 
   private final GadgetRenderer gadgetRenderer;
+  private boolean identing;
+  private boolean inheader = false;
   private final WaveRenderer waveRenderer;
 
   @Inject
@@ -101,8 +108,17 @@ public class ContentRenderer {
     this.waveRenderer = waveRenderer;
   }
 
-  private void emitStyleAnnotation(final Marker marker, final StringBuilder builder) {
+  private void closeIndentIfNecessary(final StringBuilder builder) {
+    if (identing) {
+      // Close identations
+      identing = false;
+      builder.append("</li>");
+    }
+  }
+
+  private void emitAnnotation(final Marker marker, final StringBuilder builder) {
     if (marker.isEnd) {
+      // if (marker.annotation.getName().)
       builder.append("</span>");
     } else {
       // Transform name into dash-separated css property rather than lower camel
@@ -127,13 +143,54 @@ public class ContentRenderer {
     final ElementType type = element.getType();
     switch (type) {
     case LINE:
+      final String t = element.getProperty(Line.LINE_TYPE);
+      final String i = element.getProperty(Line.INDENT);
+      final String a = element.getProperty(Line.ALIGNMENT);
+      final String d = element.getProperty(Line.DIRECTION);
+      final Integer ident = i != null ? Integer.valueOf(i) : 0;
+      if (inheader) {
+        builder.append("</div>");
+        inheader = false;
+      }
+      if (t != null && t.equals(Paragraph.LIST_TYPE)) {
+        // type-0 to 2, margin 22px * i <li class="bullet-type-0"
+        // style="margin-left: 88px;">
+        // See DefaultParagraphHtml
+        builder.append("<li class=\"bullet-type-").append(ident % 3).append("\" style=\"margin-left: ").append(
+            (ident + 1) * 22).append("px;\">");
+        identing = true;
+      } else if (ident > 0) {
+        builder.append("<li style=\"margin-left: ").append(ident * 22).append("px;\">");
+        identing = true;
+      } else {
+        closeIndentIfNecessary(builder);
+      }
+      if (t != null && t.startsWith("h")) {
+        // See DefaultParagraphHtml
+        final String fontWeight = FontWeight.BOLD.getCssName();
+        final double headingNum = Integer.parseInt(t.substring(1));
+        // Do this with CSS instead.
+        // h1 -> 1.75, h4 -> 1, others linearly in between.
+        final double factor = 1 - (headingNum - 1) / (Paragraph.NUM_HEADING_SIZES - 1);
+        final double fontSize = DefaultParagraphHtmlRenderer.MIN_HEADING_SIZE_EM
+            + factor
+            * (DefaultParagraphHtmlRenderer.MAX_HEADING_SIZE_EM - DefaultParagraphHtmlRenderer.MIN_HEADING_SIZE_EM);
+        builder.append("<div style=\"font-size: ").append(fontSize).append("em; font-weight: ").append(
+            fontWeight).append(";\">");
+        inheader = true;
+      }
       // TODO(anthonybaxter): need to handle <line t="li"> and <line t="li"
       // i="3">
       // TODO(anthonybaxter): also handle H1 &c
       // Special case: If this is the first LINE element at position 0,
       // ignore it because we've already appended the first <p> tag.
+
       if (index > 0) {
         builder.append("</p><p>");
+      } else {
+        // We build "<li>" with a main wrapper ul
+        // FIXME, close finally the ul
+        builder.append("<ul style=\"padding: 0px; margin: 0px;\">");
       }
       break;
     case ATTACHMENT:
@@ -225,7 +282,7 @@ public class ContentRenderer {
       if (marker.isElement()) {
         renderElement(marker.element, marker.index, contributors, builder);
       } else {
-        emitStyleAnnotation(marker, builder);
+        emitAnnotation(marker, builder);
       }
     }
 
@@ -235,6 +292,6 @@ public class ContentRenderer {
     }
 
     // Replace empty paragraphs. (TODO expensive and silly)
-    return builder.toString().replace("<p>\n</p>", "<p><br/></p>");
+    return builder.append("</ul>").toString().replace("<p>\n</p>", "<p><br/></p>");
   }
 }

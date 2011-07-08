@@ -1386,3 +1386,29 @@ table.k-folder-viewer {
   color: gray;
   cursor: pointer;
 }
+
+/*
+ * These attributes are required to make a paragraph look like a list-item
+ * across browsers. (copied from Editor.css)
+ */
+.simulated-li {
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.numbered {
+  list-style-type: decimal;
+}
+
+.bullet-type-0 {
+  list-style-type: disc;
+}
+
+.bullet-type-1 {
+  list-style-type: circle;
+}
+
+.bullet-type-2 {
+  list-style-type: square;
+}
