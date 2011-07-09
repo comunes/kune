@@ -114,24 +114,28 @@ public class SpaceSelectorPresenter extends
       @Override
       public void onClick(final ClickEvent event) {
         stateManager.gotoHistoryToken(homeToken);
+        setDown(Space.homeSpace);
       }
     });
     view.getUserBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
         stateManager.gotoHistoryToken(userToken);
+        setDown(Space.userSpace);
       }
     });
     view.getGroupBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
         stateManager.gotoHistoryToken(groupToken);
+        setDown(Space.groupSpace);
       }
     });
     view.getPublicBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
         stateManager.gotoHistoryToken(publicToken);
+        setDown(Space.publicSpace);
       }
     });
     eventBus.addHandler(WindowFocusEvent.getType(), new WindowFocusEvent.WindowFocusHandler() {
@@ -152,30 +156,21 @@ public class SpaceSelectorPresenter extends
   private void onGroupSpaceSelect() {
     armor.selectGroupSpace();
     backManager.restoreBackImage();
-    getView().setHomeBtnDown(false);
-    getView().setUserBtnDown(false);
-    getView().setGroupBtnDown(true);
-    getView().setPublicBtnDown(false);
+    setDown(Space.groupSpace);
     currentSpace = Space.groupSpace;
   }
 
   private void onHomeSpaceSelect() {
     armor.selectHomeSpace();
     backManager.clearBackImage();
-    getView().setHomeBtnDown(true);
-    getView().setUserBtnDown(false);
-    getView().setGroupBtnDown(false);
-    getView().setPublicBtnDown(false);
+    setDown(Space.homeSpace);
     currentSpace = Space.homeSpace;
   }
 
   private void onPublicSpaceSelect() {
     armor.selectPublicSpace();
     backManager.restoreBackImage();
-    getView().setHomeBtnDown(false);
-    getView().setUserBtnDown(false);
-    getView().setGroupBtnDown(false);
-    getView().setPublicBtnDown(true);
+    setDown(Space.publicSpace);
     currentSpace = Space.publicSpace;
   }
 
@@ -234,10 +229,7 @@ public class SpaceSelectorPresenter extends
     if (session.isLogged()) {
       armor.selectUserSpace();
       backManager.clearBackImage();
-      getView().setHomeBtnDown(false);
-      getView().setUserBtnDown(true);
-      getView().setGroupBtnDown(false);
-      getView().setPublicBtnDown(false);
+      setDown(Space.userSpace);
       currentSpace = Space.userSpace;
     } else {
       signIn.get().setErrorMessage(i18n.t("Sign in or create an account to access to your inbox"),
@@ -250,6 +242,13 @@ public class SpaceSelectorPresenter extends
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
+  }
+
+  private void setDown(final Space space) {
+    getView().setHomeBtnDown(space.equals(Space.homeSpace));
+    getView().setUserBtnDown(space.equals(Space.userSpace));
+    getView().setGroupBtnDown(space.equals(Space.groupSpace));
+    getView().setPublicBtnDown(space.equals(Space.publicSpace));
   }
 
   private void showTooltipNow() {
