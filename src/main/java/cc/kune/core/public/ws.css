@@ -1,4 +1,4 @@
-CHARSET            "UTF-8           "; body {
+CHARSET             "UTF-8            "; body {
   background-color: transparent;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -1065,13 +1065,17 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 
 .k-elogo-l-l {
   font-size: 46px;
+  line-height: 1em;
 }
 
 .k-elogo-l-m {
-  font-size: 167%;
+  /* Right now the limit of size is 50 chars see EntityHeaderPresenter */
+  font-size: 181%;
+  line-height: 1.2em;
 }
 
 .k-elogo-l-s {
+  /* Not used because the limit is 50 chars (see Group.java) */
   font-size: 108%;
 }
 
@@ -1202,7 +1206,7 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                                                   90);
+  kfilter: alpha(opacity =                                                     90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;

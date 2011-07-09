@@ -70,7 +70,7 @@ public class EntityHeaderPresenter extends
   }
 
   private static final int LARGE_NAME_LIMIT = 17;
-  private static final int MEDIUM_NAME_LIMIT = 90;
+  private static final int MEDIUM_NAME_LIMIT = 80;
   private final Session session;
 
   @Inject

@@ -68,6 +68,10 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
     publicSpaceTooltip = Tooltip.to(publicButton,
         i18n.t("Public space: In this space you can see a preview of how the Personal o"
             + "r Group Space looks like on the web, outside this site"));
+    // homeSpaceTooltip.setWidth(0);
+    userSpaceTooltip.setWidth(190);
+    groupSpaceTooltip.setWidth(170);
+    publicSpaceTooltip.setWidth(150);
   }
 
   @Override
@@ -115,18 +119,22 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
     userButton.setDown(down);
   }
 
+  @Override
   public void showGroupSpaceTooltip() {
     groupSpaceTooltip.showTemporally();
   }
 
+  @Override
   public void showHomeSpaceTooltip() {
     homeSpaceTooltip.showTemporally();
   }
 
+  @Override
   public void showPublicSpaceTooltip() {
     publicSpaceTooltip.showTemporally();
   }
 
+  @Override
   public void showUserSpaceTooltip() {
     userSpaceTooltip.showTemporally();
   }

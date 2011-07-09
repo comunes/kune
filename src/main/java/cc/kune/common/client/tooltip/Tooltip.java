@@ -50,6 +50,8 @@ public class Tooltip extends PopupPanel {
 
   private static TooltipUiBinder uiBinder = GWT.create(TooltipUiBinder.class);
 
+  private static final int WIDTH_NOT_DEFINED = -1;
+
   public static Tooltip to(final Widget widget, final String text) {
     if (TextUtils.notEmpty(text)) {
       final Tooltip tip = new Tooltip();
@@ -80,6 +82,7 @@ public class Tooltip extends PopupPanel {
   InlineLabel title;
   @UiField
   HTMLPanel tooltip;
+  private int width = WIDTH_NOT_DEFINED;
 
   public Tooltip() {
     super.add(uiBinder.createAndBindUi(this));
@@ -129,6 +132,10 @@ public class Tooltip extends PopupPanel {
     content.add(new Label(text));
   }
 
+  public void setWidth(final int width) {
+    this.width = width;
+  }
+
   @Override
   public void show() {
     if (!Tooltip.this.isShowing() && ofWidget.isVisible()) {
@@ -137,7 +144,9 @@ public class Tooltip extends PopupPanel {
           Window.getClientHeight(), ofWidget.getAbsoluteLeft(), ofWidget.getAbsoluteTop(),
           ofWidget.getOffsetWidth(), ofWidget.getOffsetHeight(), Tooltip.this.getWidth(),
           Tooltip.this.getHeight()));
-      if (tooltip.getOffsetWidth() > 430) {
+      if (width != WIDTH_NOT_DEFINED) {
+        tooltip.getElement().getStyle().setWidth(width, Unit.PX);
+      } else if (tooltip.getOffsetWidth() > 430) {
         tooltip.getElement().getStyle().setWidth(430, Unit.PX);
       } else {
         tooltip.getElement().getStyle().clearWidth();

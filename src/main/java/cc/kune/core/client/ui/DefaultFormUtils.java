@@ -43,6 +43,7 @@ public class DefaultFormUtils {
       public void handleEvent(final BaseEvent be) {
         if (radioTip != null && tooltip == null) {
           tooltip = Tooltip.to(radio, radioTip);
+          tooltip.setWidth(300);
           tooltip.show();
           tooltip.hide();
         }

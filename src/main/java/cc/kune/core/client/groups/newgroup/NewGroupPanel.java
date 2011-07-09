@@ -133,7 +133,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     shortNameField.setName(SHORTNAME_FIELD);
     shortNameField.setWidth(175);
     shortNameField.setMinLength(3);
-    shortNameField.setMaxLength(15);
+    shortNameField.setMaxLength(15); /* Same in Group.java/shortName */
     shortNameField.setAllowBlank(false);
     shortNameField.setRegex("^[a-z0-9]+$");
     shortNameField.getMessages().setMinLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
@@ -150,7 +150,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     longNameField.setWidth(BIG_FIELD_WIDTH);
     longNameField.setAllowBlank(false);
     longNameField.setMinLength(3);
-    longNameField.setMaxLength(50);
+    longNameField.setMaxLength(50); /* Same in Group.java/longName */
     longNameField.setValidationDelay(1000);
     form.add(longNameField);
 
