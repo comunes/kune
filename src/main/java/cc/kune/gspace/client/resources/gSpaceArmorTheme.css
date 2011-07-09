@@ -25,7 +25,7 @@
   color: c5;
 }
 
-.entityToolsNorth span ,.k-sn-deck div {
+.entityToolsNorth span,.k-sn-deck div {
   color: c1;
 }
 
@@ -54,6 +54,7 @@
 }
 
 .k-tool-item {
+
 }
 
 .k-tool-item span {
@@ -69,6 +70,7 @@
 }
 
 .k-tool-item-nofocus {
+
 }
 
 .k-tool-item-nofocus span {
@@ -101,11 +103,15 @@
   color: c4;
 }
 
+.entityCentralContainer {
+  border-left: 2px solid bc1;
+}
+
 .entityHeader {
   background-color: bc5;
 }
 
-.entityHeader span, .entityHeader div {
+.entityHeader span,.entityHeader div {
   color: c5;
 }
 
@@ -142,7 +148,7 @@
   background-color: bc7;
 }
 
-.k-empty-msg span, .k-folder-viewer span {
+.k-empty-msg span,.k-folder-viewer span {
   color: c7;
 }
 

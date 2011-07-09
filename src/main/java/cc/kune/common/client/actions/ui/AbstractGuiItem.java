@@ -99,6 +99,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
           setToolTipText((String) newValue);
         } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
           setVisible((Boolean) newValue);
+        } else if (event.getPropertyName().equals(GuiActionDescrip.TOOGLE_TOOLTIP_VISIBLE)) {
+          toogleTooltipVisible();
         } else if (event.getPropertyName().equals(Action.STYLES)) {
           setStyles((String) newValue);
         }
@@ -159,6 +161,11 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   }
 
   protected abstract void setText(String text);
+
+  protected void toogleTooltipVisible() {
+    // do nothing by default
+    return;
+  }
 
   protected abstract void setToolTipText(String text);
 

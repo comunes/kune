@@ -60,10 +60,12 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
     // groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
     groupPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
     prefsItem = new ButtonDescriptor(groupPrefsAction);
-    prefsItem.withStyles("k-ent-header-btn, k-btn-min"); // , k-noborder,
-                                                         // k-nobackcolor,
-                                                         // k-btn-min");
+    prefsItem.withStyles("k-ent-header-btn, k-btn-min");
+    // k-noborder,
+    // k-nobackcolor,
+    // k-btn-min");
     prefsItem.setId(GROUP_OPTIONS_ICON);
+    prefsItem.withToolTip(i18n.t("Set your group preferences here"));
     prefsItem.setVisible(false);
     view.addAction(prefsItem);
   }
@@ -84,5 +86,10 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
         }
       }
     });
+  }
+
+  @Override
+  public void showTooltip() {
+    prefsItem.toggleTooltipVisible();
   }
 }

@@ -1,4 +1,4 @@
-CHARSET           "UTF-8          "; body {
+CHARSET            "UTF-8           "; body {
   background-color: transparent;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -728,6 +728,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
   background: #FFB380 none repeat scroll 0% 50%;
   /* color: #250; */
   padding: 10px;
+  margin: 16px -20px -20px -20px;
 }
 
 .k-error-tb img {
@@ -832,7 +833,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
     white-space: nowrap;
 }
 */
-.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button,.gwt-FileUpload
+.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button,.gwt-FileUpload,button.gwt-Button
   {
   font: 13px 'Ubuntu', arial;
   border: 2px solid #CCCCCC;
@@ -854,7 +855,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
   height: 28px;
 }
 
-.k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover,button.k-button:hover
+.k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover,button.k-button:hover,button.gwt-Button:hover
   {
   border: 2px orange solid;
   outline: 0 none;
@@ -1201,7 +1202,7 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                                                 90);
+  kfilter: alpha(opacity =                                                   90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;

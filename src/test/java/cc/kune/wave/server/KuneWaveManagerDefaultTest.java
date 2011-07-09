@@ -41,11 +41,12 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
 
   private static final String MESSAGE = "testing";
   private static final String NEW_PARTICIPANT = "newparti";
+  private static final String RICHTEXT_MESSAGE = "<b>" + MESSAGE + "</b>";
   private static final String TEST_GADGET = "http://wave-api.appspot.com/public/gadgets/areyouin/gadget.xml";
   private static final String TITLE = "title";
   private static final String TITLENEW = "titleNew";
   @Inject
-  KuneWaveManagerDefault manager;
+  KuneWaveManager manager;
   @Inject
   ParticipantUtils participantUtils;
 
@@ -78,27 +79,28 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   @Before
   public void before() {
     new IntegrationTestHelper(this);
-
   }
 
   private WaveRef createTestWave() {
-    return manager.createWave(TITLE, MESSAGE, participantUtils.of(getSiteAdminShortName()));
+    return manager.createWave(TITLE, RICHTEXT_MESSAGE, participantUtils.of(getSiteAdminShortName()));
   }
 
   @Test
   public void createWave() throws DefaultException, IOException {
     doLogin();
-    final WaveRef waveletName = manager.createWave(MESSAGE, participantUtils.of(getSiteAdminShortName()));
+    final WaveRef waveletName = manager.createWave(RICHTEXT_MESSAGE,
+        participantUtils.of(getSiteAdminShortName()));
     assertNotNull(waveletName);
     final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
+    assertTrue(fetchWavelet.getRootBlip().getAnnotations().size() > 0);
     assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
   }
 
   @Test
   public void createWaveWithGadget() throws DefaultException, IOException {
     doLogin();
-    final WaveRef waveletName = manager.createWave(TITLE, MESSAGE, new URL(TEST_GADGET),
+    final WaveRef waveletName = manager.createWave(TITLE, RICHTEXT_MESSAGE, new URL(TEST_GADGET),
         participantUtils.of(getSiteAdminShortName()));
     assertNotNull(waveletName);
     final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());

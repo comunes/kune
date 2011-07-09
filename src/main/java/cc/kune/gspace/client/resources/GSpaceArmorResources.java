@@ -42,6 +42,8 @@ public interface GSpaceArmorResources extends ClientBundle {
 
     String docSubheaderLeft();
 
+    String entityCentralContainer();
+
     String entityFooter();
 
     String entityHeader();

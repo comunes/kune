@@ -43,6 +43,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   protected boolean enableTongle;
   private IconLabel iconLabel;
   private boolean isChild;
+  private Tooltip tooltip;
 
   public AbstractGwtButtonGui() {
     this(null, false);
@@ -154,10 +155,10 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   }
 
   @Override
-  public void setToolTipText(final String tooltip) {
-    if (tooltip != null && !tooltip.isEmpty()) {
+  public void setToolTipText(final String tooltipText) {
+    if (tooltipText != null && !tooltipText.isEmpty()) {
       final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-      Tooltip.to(button, key == null ? tooltip : tooltip + key.toString());
+      tooltip = Tooltip.to(button, key == null ? tooltipText : tooltipText + key.toString());
     }
   }
 
@@ -169,6 +170,17 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   @Override
   public boolean shouldBeAdded() {
     return !descriptor.isChild();
+  }
+
+  @Override
+  protected void toogleTooltipVisible() {
+    if (tooltip != null) {
+      if (tooltip.isVisible()) {
+        tooltip.hide();
+      } else {
+        tooltip.showTemporally();
+      }
+    }
   }
 
 }

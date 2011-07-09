@@ -149,7 +149,8 @@ public class ContentRenderer {
       final String d = element.getProperty(Line.DIRECTION);
       final Integer ident = i != null ? Integer.valueOf(i) : 0;
       if (inheader) {
-        builder.append("</div>");
+        // New line, we close previous header
+        builder.append("</div> <!-- end h1/h2... header -->");
         inheader = false;
       }
       if (t != null && t.equals(Paragraph.LIST_TYPE)) {

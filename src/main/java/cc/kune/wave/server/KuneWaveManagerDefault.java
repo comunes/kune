@@ -77,6 +77,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   // See: DocumentModifyServiceTest
   private static final String NO_ANNOTATION_KEY = null;
   private static final List<BundledAnnotation> NO_BUNDLED_ANNOTATIONS = Collections.emptyList();
+  private static final List<Element> NO_ELEMENTS = Collections.emptyList();
   private static final String NO_TITLE = "";
 
   private static final List<String> NO_VALUES = Collections.<String> emptyList();
@@ -163,8 +164,26 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     final Wavelet newWavelet = opQueue.createWavelet(domain, participants);
     opQueue.setTitleOfWavelet(newWavelet, title);
     final Blip rootBlip = newWavelet.getRootBlip();
-    // rootBlip.append(new com.google.wave.api.Markup(message).getText());
-    rootBlip.appendMarkup(message);
+    rootBlip.append(new com.google.wave.api.Markup(message).getText());
+    // rootBlip.all().delete();
+    // rootBlip.appendMarkup(message);
+    // opQueue.appendMarkupToDocument(rootBlip,
+    // ContentNewUnrenderer.unrender(message).toXmlString());
+
+    // final OperationRequest modifyDocument = opQueue.modifyDocument(rootBlip);
+    // ImmutableList<String> of =
+    // ImmutableList.of(ContentNewUnrenderer.unrender(message).toXmlString());
+    // rootBlip.getContent().hackConsume(
+    // Nindo.fromDocOp(ContentNewUnrenderer.unrender(message).asOperation(),
+    // false));
+    // modifyDocument.addParameter(Parameter.of(ParamsProperty.MODIFY_ACTION,
+    // new DocumentModifyAction(
+    // ModifyHow.REPLACE,
+    // ImmutableList.of(ContentNewUnrenderer.unrender(message).toXmlString()),
+    // null,
+    // null, null, false)));
+    // NO_ANNOTATION_KEY, NO_ELEMENTS, NO_BUNDLED_ANNOTATIONS, false)));
+    // rootBlip.appendMarkup(message);
     if (gadgetUrl != WITHOUT_GADGET) {
       final Gadget gadget = new Gadget(gadgetUrl.toString());
       rootBlip.append(gadget);

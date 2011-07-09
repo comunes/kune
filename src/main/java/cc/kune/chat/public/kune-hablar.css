@@ -99,7 +99,6 @@ div.hablar-SearchResultItemWidget:hover {
     border-right: 1px solid #e9e9e9;
 }
 */
-
 input[disabled] {
   background-color: #e9e9e9;
   color: black;
@@ -231,8 +230,8 @@ input[disabled] {
 }
 
 /** IE6 ZINDEX BUG **/
-.hablar-HablarWidget {
-  /* z-index: 1; */
+.hablar-HablarWidget { /* z-index: 1; */
+
 }
 
 html {
@@ -599,4 +598,14 @@ body {
 
 .gwt-TextArea {
   border: 1px solid #bbbbbb;
+}
+
+#gwt-debug-DoubleList-selectAll,#gwt-debug-DoubleList-selectSome,#gwt-debug-DoubleList-deselectAll,#gwt-debug-DoubleList-deselectSome
+  {
+  margin-left: -6px;
+}
+
+.hablar-RosterGroupWidget {
+  -moz-user-select: none;
+  -khtml-user-select: none;
 }

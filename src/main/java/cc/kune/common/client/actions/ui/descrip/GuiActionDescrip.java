@@ -26,88 +26,94 @@ import cc.kune.common.client.actions.PropertyChangeListener;
 
 public interface GuiActionDescrip {
 
-    public static final AbstractGuiActionDescrip NO_PARENT = new NoParentGuiActionDescriptor();
+  public static final AbstractGuiActionDescrip NO_PARENT = new NoParentGuiActionDescriptor();
 
-    public static final int NO_POSITION = -1;
+  public static final int NO_POSITION = -1;
 
-    /**
-     * {@link #TARGET} is used to associate a {@link #AbstractGuiActionDescrip}
-     * with an object like groups, group names, users, and so on, and used to
-     * execute actions against these targets
-     */
-    public static final String TARGET = "target";
+  /**
+   * {@link #TARGET} is used to associate a {@link #AbstractGuiActionDescrip}
+   * with an object like groups, group names, users, and so on, and used to
+   * execute actions against these targets
+   */
+  public static final String TARGET = "target";
 
-    public static final String VISIBLE = "visibleprop";
+  public static final String TOOGLE_TOOLTIP_VISIBLE = "toogle-tooltip-visible";
 
-    void add(final GuiAddCondition addCondition);
+  public static final String VISIBLE = "visibleprop";
 
-    void addPropertyChangeListener(final PropertyChangeListener listener);
+  void add(final GuiAddCondition addCondition);
 
-    void fire(final ActionEvent event);
+  void addPropertyChangeListener(final PropertyChangeListener listener);
 
-    AbstractAction getAction();
+  void fire(final ActionEvent event);
 
-    String getId();
+  AbstractAction getAction();
 
-    Object[] getKeys();
+  String getId();
 
-    String getLocation();
+  Object[] getKeys();
 
-    GuiActionDescrip getParent();
+  String getLocation();
 
-    int getPosition();
+  GuiActionDescrip getParent();
 
-    PropertyChangeListener[] getPropertyChangeListeners();
+  int getPosition();
 
-    Object getTarget();
+  PropertyChangeListener[] getPropertyChangeListeners();
 
-    Class<?> getType();
+  Object getTarget();
 
-    Object getValue(final String key);
+  Class<?> getType();
 
-    boolean hasTarget();
+  Object getValue(final String key);
 
-    boolean isChild();
+  boolean hasTarget();
 
-    boolean isEnabled();
+  boolean isChild();
 
-    boolean isVisible();
+  boolean isEnabled();
 
-    boolean mustBeAdded();
+  boolean isVisible();
 
-    public void putValue(final String key, final Object value);
+  boolean mustBeAdded();
 
-    void removePropertyChangeListener(final PropertyChangeListener listener);
+  public void putValue(final String key, final Object value);
 
-    void setEnabled(final boolean enabled);
+  void removePropertyChangeListener(final PropertyChangeListener listener);
 
-    void setId(final String id);
+  void setEnabled(final boolean enabled);
 
-    void setLocation(final String location);
+  void setId(final String id);
 
-    void setParent(final GuiActionDescrip parent);
+  void setLocation(final String location);
 
-    void setPosition(final int position);
+  void setParent(final GuiActionDescrip parent);
 
-    void setStyles(final String styles);
+  void setPosition(final int position);
 
-    void setTarget(final Object object);
+  void setStyles(final String styles);
 
-    void setVisible(final boolean visible);
+  void setTarget(final Object object);
 
-    GuiActionDescrip withIcon(Object icon);
+  void setVisible(final boolean visible);
 
-    GuiActionDescrip withIconCls(String icon);
+  void toggleTooltipVisible();
 
-    GuiActionDescrip withId(String id);
+  void toogleVisible();
 
-    GuiActionDescrip withParent(GuiActionDescrip parent);
+  GuiActionDescrip withIcon(Object icon);
 
-    GuiActionDescrip withShortcut(KeyStroke keystroke);
+  GuiActionDescrip withIconCls(String icon);
 
-    GuiActionDescrip withStyles(String styles);
+  GuiActionDescrip withId(String id);
 
-    GuiActionDescrip withText(String text);
+  GuiActionDescrip withParent(GuiActionDescrip parent);
 
-    GuiActionDescrip withToolTip(String tooltip);
+  GuiActionDescrip withShortcut(KeyStroke keystroke);
+
+  GuiActionDescrip withStyles(String styles);
+
+  GuiActionDescrip withText(String text);
+
+  GuiActionDescrip withToolTip(String tooltip);
 }

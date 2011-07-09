@@ -28,7 +28,6 @@ import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.signals.client.SignalMessages;
 import com.calclab.hablar.signals.client.SignalPreferences;
-import com.calclab.hablar.signals.client.browserfocus.BrowserFocusManager;
 import com.calclab.hablar.signals.client.notifications.NotificationManager;
 import com.calclab.hablar.signals.client.preferences.SignalsPreferencesPresenter;
 import com.calclab.hablar.signals.client.preferences.SignalsPreferencesWidget;
@@ -46,65 +45,64 @@ import com.google.gwt.user.client.ui.HasText;
  */
 public class KuneHablarSignals {
 
-    public static SignalMessages signalMessages;
+  public static SignalMessages signalMessages;
 
-    /**
-     * Gets the {@link SignalMessages} object containing the internationalised
-     * messages
-     * 
-     * @return the SignalMessages object containing the internationalised
-     *         messages
-     */
-    public static SignalMessages i18n() {
-        return signalMessages;
-    }
+  /**
+   * Gets the {@link SignalMessages} object containing the internationalised
+   * messages
+   * 
+   * @return the SignalMessages object containing the internationalised messages
+   */
+  public static SignalMessages i18n() {
+    return signalMessages;
+  }
 
-    /**
-     * Sets the {@link SignalMessages} object containing the internationalised
-     * messages
-     * 
-     * @param t
-     *            the messages object
-     */
-    public static void setMessages(final SignalMessages t) {
-        KuneHablarSignals.signalMessages = t;
-    }
+  /**
+   * Sets the {@link SignalMessages} object containing the internationalised
+   * messages
+   * 
+   * @param t
+   *          the messages object
+   */
+  public static void setMessages(final SignalMessages t) {
+    KuneHablarSignals.signalMessages = t;
+  }
 
-    // FIXME: move to gin
-    @SuppressWarnings("deprecation")
-    public KuneHablarSignals(final EventBus eventBus, final XmppSession session, final Hablar hablar,
-            final ChatClientAction action) {
-        final HablarEventBus hablarEventBus = hablar.getEventBus();
-        final PrivateStorageManager storageManager = Suco.get(PrivateStorageManager.class);
+  // FIXME: move to gin
+  @SuppressWarnings("deprecation")
+  public KuneHablarSignals(final EventBus kuneEventBus, final XmppSession session, final Hablar hablar,
+      final ChatClientAction action) {
+    final HablarEventBus hablarEventBus = hablar.getEventBus();
+    final PrivateStorageManager storageManager = Suco.get(PrivateStorageManager.class);
 
-        final HasText titleDisplay = new HasText() {
-            @Override
-            public String getText() {
-                return Window.getTitle();
-            }
+    final HasText titleDisplay = new HasText() {
+      @Override
+      public String getText() {
+        return Window.getTitle();
+      }
 
-            @Override
-            public void setText(final String text) {
-                Window.setTitle(text);
-            }
-        };
-        final SignalPreferences preferences = new SignalPreferences();
+      @Override
+      public void setText(final String text) {
+        Window.setTitle(text);
+      }
+    };
+    final SignalPreferences preferences = new SignalPreferences();
 
-        final UnattendedPagesManager manager = new UnattendedPagesManager(hablarEventBus,
-                BrowserFocusHandler.getInstance());
-        new BrowserFocusManager(hablarEventBus, manager, BrowserFocusHandler.getInstance());
-        new UnattendedPresenter(hablarEventBus, preferences, manager, titleDisplay);
-        new KuneUnattendedPresenter(eventBus, hablarEventBus, preferences, manager, action);
-        final NotificationManager notificationManager = new NotificationManager(hablarEventBus, preferences);
+    final UnattendedPagesManager manager = new UnattendedPagesManager(hablarEventBus,
+        BrowserFocusHandler.getInstance());
+    new KuneBrowserFocusManager(kuneEventBus, hablarEventBus, manager, BrowserFocusHandler.getInstance());
+    new UnattendedPresenter(hablarEventBus, preferences, manager, titleDisplay);
+    new KuneUnattendedPresenter(kuneEventBus, hablarEventBus, preferences, manager, action);
+    final NotificationManager notificationManager = new NotificationManager(hablarEventBus, preferences);
 
-        // notificationManager.addNotifier((BrowserPopupHablarNotifier)
-        // GWT.create(BrowserPopupHablarNotifier.class),
-        // true);
-        notificationManager.addNotifier((KuneChatNotifier) GWT.create(KuneChatNotifier.class), true);
+    // notificationManager.addNotifier((BrowserPopupHablarNotifier)
+    // GWT.create(BrowserPopupHablarNotifier.class),
+    // true);
+    notificationManager.addNotifier((KuneChatNotifier) GWT.create(KuneChatNotifier.class), true);
 
-        final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(session, storageManager,
-                hablarEventBus, preferences, new SignalsPreferencesWidget(), notificationManager);
-        hablar.addPage(preferencesPage, UserContainer.ROL);
-    }
+    final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(session,
+        storageManager, hablarEventBus, preferences, new SignalsPreferencesWidget(), notificationManager);
+    hablar.addPage(preferencesPage, UserContainer.ROL);
+  }
 
 }

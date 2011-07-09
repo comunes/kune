@@ -16,52 +16,54 @@
  */
 package com.google.wave.splash.text;
 
-
-import com.google.common.collect.Maps;
-import com.google.wave.api.Annotations;
-import com.google.wave.api.Line;
+import java.util.Map;
+import java.util.logging.Logger;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
+import org.jsoup.safety.Whitelist;
+import com.google.wave.api.Annotation;
+import com.google.common.collect.Maps;
+import com.google.wave.api.Annotations;
+import com.google.wave.api.Line;
 
-import java.util.Map;
-import java.util.logging.Logger;
-
-/**
- * @author anthonybaxter@gmail.com (Anthony Baxter)
- */
 public class ContentUnrenderer {
+
+  /**
+   * Container for the output of the unrender method.
+   */
+  public static class UnrenderedBlip {
+    Annotations annotations = new Annotations();
+    public String contents;
+    Map<Integer, com.google.wave.api.Element> elements;
+
+    UnrenderedBlip(final String contents, final Map<Integer, com.google.wave.api.Element> elements,
+        final Annotations annotations) {
+      this.contents = contents;
+      this.elements = elements;
+      this.annotations = annotations;
+    }
+  }
 
   private static final Logger LOG = Logger.getLogger(ContentUnrenderer.class.getName());
 
   /**
-   * Turns a HTML document back into a set of text, elements, annotations.
+   * Helper method to recursively parse a HTML element and construct a wave
+   * document.
    */
-  public static UnrenderedBlip unrender(String content) {
-    StringBuilder sb = new StringBuilder();
-    Map<Integer, com.google.wave.api.Element> elements = Maps.newHashMap();
-    Annotations annotations = new Annotations();
-    Document doc = Jsoup.parse(content);
-    unrender(doc.body(), sb, elements, annotations);
-    return new UnrenderedBlip(sb.toString(), elements, annotations);
-  }
-
-  /**
-   * Helper method to recursively parse a HTML element and construct a wave document.
-   */
-  private static void unrender(Node parent, StringBuilder output, Map<Integer,
-      com.google.wave.api.Element> elements, Annotations annotations) {
-    for (Node node : parent.childNodes()) {
+  private static void unrender(final Node parent, final StringBuilder output,
+      final Map<Integer, com.google.wave.api.Element> elements, final Annotations annotations) {
+    for (final Node node : parent.childNodes()) {
       if (node instanceof TextNode) {
-        output.append(((TextNode)node).text());
-      }
-      else if (node instanceof Element) {
-        int position = output.length();
-        Element element = (Element)node;
-        if ("p".equals(element.tag().getName())) {
+        output.append(((TextNode) node).text());
+      } else if (node instanceof Element) {
+        final int position = output.length();
+        final Element element = (Element) node;
+        final String name = element.tag().getName();
+        if ("p".equalsIgnoreCase(name)) {
           elements.put(position, new Line());
           // handle any attributes?
         }
@@ -73,18 +75,16 @@ public class ContentUnrenderer {
   }
 
   /**
-   * Container for the output of the unrender method.
+   * Turns a HTML document back into a set of text, elements, annotations.
    */
-  public static class UnrenderedBlip {
-    public String contents;
-    Map<Integer, com.google.wave.api.Element> elements;
-    Annotations annotations = new Annotations();
-
-    UnrenderedBlip(String contents, Map<Integer, com.google.wave.api.Element> elements,
-        Annotations annotations) {
-      this.contents = contents;
-      this.elements = elements;
-      this.annotations = annotations;
-    }
+  public static UnrenderedBlip unrender(final String content) {
+    final StringBuilder sb = new StringBuilder();
+    final Map<Integer, com.google.wave.api.Element> elements = Maps.newHashMap();
+    final Annotations annotations = new Annotations();
+    // Sanitized
+    final String safe = Jsoup.clean(content, Whitelist.basic());
+    final Document doc = Jsoup.parse(safe);
+    unrender(doc.body(), sb, elements, annotations);
+    return new UnrenderedBlip(sb.toString(), elements, annotations);
   }
 }

@@ -38,7 +38,7 @@
           <g:SplitLayoutPanel width="100%" height="100%" styleName="k-space"
             ui:field="groupSpace">
             <g:center size="1.0">
-              <g:DockLayoutPanel unit="PX" ui:field="splitCenter">
+              <g:DockLayoutPanel unit="PX" ui:field="splitCenter" styleName="{res.style.entityCentralContainer}">
                 <g:north size="168">
                   <g:VerticalPanel width="100%" height="168px">
                     <g:FlowPanel height="70px" width="100%"

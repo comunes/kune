@@ -43,10 +43,7 @@ public class GSpaceBackManagerImpl implements GSpaceBackManager {
 
   @Override
   public void clearBackImage() {
-    if (!lastToken.equals(NO_TOKEN)) {
-      gSpaceArmor.clearBackImage();
-      lastToken = NO_TOKEN;
-    }
+    gSpaceArmor.clearBackImage();
   }
 
   @Override
@@ -61,7 +58,7 @@ public class GSpaceBackManagerImpl implements GSpaceBackManager {
     final StateToken tokenNoGroup = token.clearDocument().clearDocument();
     if (!tokenNoGroup.equals(lastToken)) {
       gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(tokenNoGroup));
-      lastToken = tokenNoGroup;
+      lastToken = tokenNoGroup.copy();
     }
 
   }

@@ -34,6 +34,9 @@
   opacity: 0.38 !important; */
 }
 
+.entityCentralContainer {
+
+}
 .entityHeader {
   -webkit-border-top-right-radius: 7px;
   -moz-border-radius-topright: 7px;

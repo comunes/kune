@@ -56,7 +56,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     notStandAlone = !((MenuDescriptor) descriptor).isStandalone();
     if (notStandAlone) {
       button = new Button();
-      // button.setStylePrimaryName("oc-button");
+      button.removeStyleName("gwt-Button");
       iconLabel = new IconLabel("");
       final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
       if (rightIcon != null) {

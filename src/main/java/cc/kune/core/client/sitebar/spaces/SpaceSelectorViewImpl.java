@@ -41,26 +41,31 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
   private static SpaceSelectorViewImplUiBinder uiBinder = GWT.create(SpaceSelectorViewImplUiBinder.class);
   @UiField
   ToggleButton groupButton;
+  private final Tooltip groupSpaceTooltip;
   @UiField
   ToggleButton homeButton;
+  private final Tooltip homeSpaceTooltip;
   @UiField
   HorizontalPanel panel;
   @UiField
   ToggleButton publicButton;
+  private final Tooltip publicSpaceTooltip;
   @UiField
   ToggleButton userButton;
+  private final Tooltip userSpaceTooltip;
 
   @Inject
   public SpaceSelectorViewImpl(final GSpaceArmor armor, final I18nTranslationService i18n,
       final GSpaceArmorResources res) {
     armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
     // homeButton.setVisible(false);
-    Tooltip.to(homeButton, i18n.t("Your home page in this site"));
-    Tooltip.to(userButton, i18n.t("User space: it shows a list of all your documents and contents "
-        + "in which you participate"));
-    Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
+    homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in this site"));
+    userSpaceTooltip = Tooltip.to(userButton,
+        i18n.t("User space: it shows a list of all your documents and contents "
+            + "in which you participate"));
+    groupSpaceTooltip = Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
         + "and publish contents for your personal or group web spaces"));
-    Tooltip.to(publicButton,
+    publicSpaceTooltip = Tooltip.to(publicButton,
         i18n.t("Public space: In this space you can see a preview of how the Personal o"
             + "r Group Space looks like on the web, outside this site"));
   }
@@ -108,5 +113,21 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
   @Override
   public void setUserBtnDown(final boolean down) {
     userButton.setDown(down);
+  }
+
+  public void showGroupSpaceTooltip() {
+    groupSpaceTooltip.showTemporally();
+  }
+
+  public void showHomeSpaceTooltip() {
+    homeSpaceTooltip.showTemporally();
+  }
+
+  public void showPublicSpaceTooltip() {
+    publicSpaceTooltip.showTemporally();
+  }
+
+  public void showUserSpaceTooltip() {
+    userSpaceTooltip.showTemporally();
   }
 }

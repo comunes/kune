@@ -20,4 +20,6 @@
 package cc.kune.gspace.client.options;
 
 public interface GroupOptions extends EntityOptions {
+
+  void showTooltip();
 }

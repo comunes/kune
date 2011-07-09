@@ -21,12 +21,14 @@ package cc.kune.core.client.sitebar.spaces;
 
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.core.client.auth.SignIn;
+import cc.kune.core.client.events.WindowFocusEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.state.UserSignOutEvent;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.style.GSpaceBackManager;
 
@@ -34,6 +36,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
@@ -67,6 +70,14 @@ public class SpaceSelectorPresenter extends
     void setPublicBtnDown(boolean down);
 
     void setUserBtnDown(boolean down);
+
+    void showGroupSpaceTooltip();
+
+    void showHomeSpaceTooltip();
+
+    void showPublicSpaceTooltip();
+
+    void showUserSpaceTooltip();
   }
 
   private final GSpaceArmor armor;
@@ -74,6 +85,7 @@ public class SpaceSelectorPresenter extends
   private Space currentSpace;
   private String groupToken;
   private String homeToken;
+  private final I18nTranslationService i18n;
   private String publicToken;
   private final Session session;
   private final Provider<SignIn> signIn;
@@ -83,13 +95,15 @@ public class SpaceSelectorPresenter extends
   @Inject
   public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
       final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
-      final Session session, final Provider<SignIn> signIn, final GSpaceBackManager backManager) {
+      final Session session, final Provider<SignIn> signIn, final GSpaceBackManager backManager,
+      final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
     this.stateManager = stateManager;
     this.armor = armor;
     this.session = session;
     this.signIn = signIn;
     this.backManager = backManager;
+    this.i18n = i18n;
     currentSpace = null;
     homeToken = SiteTokens.HOME;
     userToken = SiteTokens.WAVEINBOX;
@@ -119,10 +133,19 @@ public class SpaceSelectorPresenter extends
         stateManager.gotoHistoryToken(publicToken);
       }
     });
+    eventBus.addHandler(WindowFocusEvent.getType(), new WindowFocusEvent.WindowFocusHandler() {
+      @Override
+      public void onWindowFocus(final WindowFocusEvent event) {
+        if (event.isHasFocus()) {
+          showTooltipWithDelay();
+        }
+      }
+    });
   }
 
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
+    showTooltipWithDelay();
   }
 
   private void onGroupSpaceSelect() {
@@ -195,7 +218,6 @@ public class SpaceSelectorPresenter extends
       default:
         break;
       }
-      // getView().hideTooltip();
     }
   }
 
@@ -217,15 +239,41 @@ public class SpaceSelectorPresenter extends
       getView().setPublicBtnDown(false);
       currentSpace = Space.userSpace;
     } else {
-      signIn.get().setErrorMessage("Sign in to access to your inbox", NotifyLevel.info);
+      signIn.get().setErrorMessage(i18n.t("Sign in or create an account to access to your inbox"),
+          NotifyLevel.info);
       stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, userToken));
       getView().setUserBtnDown(false);
-      // NotifyUser.info("Sign in to access to your workspace");
     }
   }
 
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
+  }
+
+  private void showTooltipNow() {
+    switch (currentSpace) {
+    case homeSpace:
+      getView().showHomeSpaceTooltip();
+      break;
+    case userSpace:
+      getView().showUserSpaceTooltip();
+      break;
+    case groupSpace:
+      getView().showGroupSpaceTooltip();
+      break;
+    case publicSpace:
+      getView().showPublicSpaceTooltip();
+      break;
+    }
+  }
+
+  protected void showTooltipWithDelay() {
+    new Timer() {
+      @Override
+      public void run() {
+        showTooltipNow();
+      }
+    }.schedule(500);
   }
 }

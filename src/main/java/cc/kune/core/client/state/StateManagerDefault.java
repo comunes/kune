@@ -415,7 +415,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     // history.newItem(newToken.toString(), false);
     StateChangedEvent.fire(eventBus, newState);
     checkGroupAndToolChange(newState);
-    previousToken = newToken;
+    previousToken = newToken.copy();
     eventBus.fireEvent(new ProgressHideEvent());
   }
 

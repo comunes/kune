@@ -36,7 +36,10 @@ import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.options.GroupOptions;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -51,145 +54,156 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter.NewGroupProxy> implements NewGroup {
+public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter.NewGroupProxy>
+    implements NewGroup {
 
-    @ProxyCodeSplit
-    public interface NewGroupProxy extends Proxy<NewGroupPresenter> {
-    }
+  @ProxyCodeSplit
+  public interface NewGroupProxy extends Proxy<NewGroupPresenter> {
+  }
 
-    private final Provider<GroupServiceAsync> groupService;
+  private final GroupOptions groupOptions;
 
-    private final I18nTranslationService i18n;
-    private final Session session;
-    private final Provider<SignIn> signIn;
-    private final StateManager stateManager;
+  private final Provider<GroupServiceAsync> groupService;
+  private final I18nTranslationService i18n;
+  private final Session session;
+  private final Provider<SignIn> signIn;
 
-    @Inject
-    public NewGroupPresenter(final EventBus eventBus, final NewGroupView view, final NewGroupProxy proxy,
-            final I18nTranslationService i18n, final Session session, final StateManager stateManager,
-            final Provider<GroupServiceAsync> groupService, final Provider<SignIn> signIn) {
-        super(eventBus, view, proxy);
-        this.i18n = i18n;
-        this.session = session;
-        this.stateManager = stateManager;
-        this.groupService = groupService;
-        this.signIn = signIn;
-        stateManager.addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
-            @Override
-            public void onHistoryToken() {
-                doNewGroup();
-            }
-        });
-    }
+  private final StateManager stateManager;
 
-    @Override
-    public void doNewGroup() {
-        session.check(new AsyncCallbackSimple<Void>() {
-            @Override
-            public void onSuccess(final Void result) {
-                if (session.isLogged()) {
-                    NotifyUser.showProgressProcessing();
-                    getView().show();
-                    getView().focusOnShorName();
-                    NotifyUser.hideProgress();
-                } else {
-                    // stateManager.restorePreviousToken();
-                    NotifyUser.info(i18n.t(CoreMessages.REGISTER_TO_CREATE_A_GROUP));
-                    signIn.get().showSignInDialog();
-                }
-            }
-        });
-    }
+  @Inject
+  public NewGroupPresenter(final EventBus eventBus, final NewGroupView view, final NewGroupProxy proxy,
+      final I18nTranslationService i18n, final Session session, final StateManager stateManager,
+      final Provider<GroupServiceAsync> groupService, final Provider<SignIn> signIn,
+      final GroupOptions groupOptions) {
+    super(eventBus, view, proxy);
+    this.i18n = i18n;
+    this.session = session;
+    this.stateManager = stateManager;
+    this.groupService = groupService;
+    this.signIn = signIn;
+    this.groupOptions = groupOptions;
+    stateManager.addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken() {
+        doNewGroup();
+      }
+    });
+  }
 
-    private GroupType getTypeOfGroup() {
-        if (getView().isProject()) {
-            return GroupType.PROJECT;
-        } else if (getView().isOrganization()) {
-            return GroupType.ORGANIZATION;
+  @Override
+  public void doNewGroup() {
+    session.check(new AsyncCallbackSimple<Void>() {
+      @Override
+      public void onSuccess(final Void result) {
+        if (session.isLogged()) {
+          NotifyUser.showProgressProcessing();
+          getView().show();
+          getView().focusOnShorName();
+          NotifyUser.hideProgress();
         } else {
-            return GroupType.COMMUNITY;
+          // stateManager.restorePreviousToken();
+          signIn.get().setErrorMessage(i18n.t(CoreMessages.REGISTER_TO_CREATE_A_GROUP), NotifyLevel.info);
+          signIn.get().showSignInDialog();
         }
+      }
+    });
+  }
+
+  private GroupType getTypeOfGroup() {
+    if (getView().isProject()) {
+      return GroupType.PROJECT;
+    } else if (getView().isOrganization()) {
+      return GroupType.ORGANIZATION;
+    } else {
+      return GroupType.COMMUNITY;
     }
+  }
 
-    @Override
-    protected void onBind() {
-        super.onBind();
-        getView().getFirstBtn().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onRegister();
-            }
-        });
-        getView().getSecondBtn().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onCancel();
-            }
-        });
-        getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
+  @Override
+  protected void onBind() {
+    super.onBind();
+    getView().getFirstBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        onRegister();
+      }
+    });
+    getView().getSecondBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        onCancel();
+      }
+    });
+    getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
 
-            @Override
-            public void onClose(final CloseEvent<PopupPanel> event) {
-                NewGroupPresenter.this.onClose();
-            }
-        });
-    }
+      @Override
+      public void onClose(final CloseEvent<PopupPanel> event) {
+        NewGroupPresenter.this.onClose();
+      }
+    });
+  }
 
-    public void onCancel() {
-        getView().hide();
-    }
+  public void onCancel() {
+    getView().hide();
+  }
 
-    public void onClose() {
-        reset();
-        stateManager.redirectOrRestorePreviousToken();
-    }
+  public void onClose() {
+    reset();
+    stateManager.redirectOrRestorePreviousToken();
+  }
 
-    public void onRegister() {
-        if (getView().isFormValid()) {
-            getView().maskProcessing();
-            final String shortName = getView().getShortName();
-            final String longName = getView().getLongName();
-            final String publicDesc = getView().getPublicDesc();
-            final LicenseDTO license = session.getDefLicense();
-            final GroupDTO group = new GroupDTO(shortName, longName, getTypeOfGroup());
-            group.setDefaultLicense(license);
+  public void onRegister() {
+    if (getView().isFormValid()) {
+      getView().maskProcessing();
+      final String shortName = getView().getShortName();
+      final String longName = getView().getLongName();
+      final String publicDesc = getView().getPublicDesc();
+      final LicenseDTO license = session.getDefLicense();
+      final GroupDTO group = new GroupDTO(shortName, longName, getTypeOfGroup());
+      group.setDefaultLicense(license);
 
-            final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
-                @Override
-                public void onFailure(final Throwable caught) {
-                    if (caught instanceof GroupNameInUseException) {
-                        getView().unMask();
-                        setMessage(i18n.t(CoreMessages.NAME_IN_ALREADY_IN_USE), NotifyLevel.error);
-                    } else {
-                        getView().unMask();
-                        setMessage(i18n.t("Error creating group"), NotifyLevel.error);
-                        throw new UIException("Other kind of exception in group registration", caught);
-                    }
-                }
-
-                @Override
-                public void onSuccess(final StateToken token) {
-                    getView().hide();
-                    stateManager.gotoStateToken(token);
-                    reset();
-                    getView().unMask();
-                }
-            };
-            groupService.get().createNewGroup(session.getUserHash(), group, publicDesc, getView().getTags(), null,
-                    callback);
+      final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
+        @Override
+        public void onFailure(final Throwable caught) {
+          if (caught instanceof GroupNameInUseException) {
+            getView().unMask();
+            setMessage(i18n.t(CoreMessages.NAME_IN_ALREADY_IN_USE), NotifyLevel.error);
+          } else {
+            getView().unMask();
+            setMessage(i18n.t("Error creating group"), NotifyLevel.error);
+            throw new UIException("Other kind of exception in group registration", caught);
+          }
         }
-    }
 
-    private void reset() {
-        getView().clearData();
+        @Override
+        public void onSuccess(final StateToken token) {
+          getView().hide();
+          Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+              stateManager.gotoStateToken(token);
+              groupOptions.showTooltip();
+            }
+          });
+          reset();
+          getView().unMask();
+        }
+      };
+      groupService.get().createNewGroup(session.getUserHash(), group, publicDesc, getView().getTags(),
+          null, callback);
     }
+  }
 
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
+  private void reset() {
+    getView().clearData();
+  }
 
-    public void setMessage(final String message, final NotifyLevel level) {
-        getView().setMessage(message, level);
-    }
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
+  }
+
+  public void setMessage(final String message, final NotifyLevel level) {
+    getView().setMessage(message, level);
+  }
 }
