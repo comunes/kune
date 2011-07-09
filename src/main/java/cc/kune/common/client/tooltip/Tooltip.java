@@ -176,6 +176,7 @@ public class Tooltip extends PopupPanel {
   }
 
   public void showTemporally() {
+    show();
     timers.showTemporally();
   }
 

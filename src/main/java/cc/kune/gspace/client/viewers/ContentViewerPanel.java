@@ -125,7 +125,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   @Override
   public void blinkTitle() {
-    contentTitle.blink();
+    contentTitle.highlightTitle();
   }
 
   @Override

@@ -53,44 +53,20 @@ public class EditableLabel extends Composite implements HasEditHandler {
   InlineLabel label;
   @UiField
   TextBox textbox;
-  private String tooltip;
+  private Tooltip tooltip;
+
+  private String tooltipText;
 
   public EditableLabel() {
     initWidget(uiBinder.createAndBindUi(this));
     label.setStylePrimaryName("k-editableLabel");
     editable = false;
-    tooltip = "";
+    tooltipText = "";
   }
 
   @Override
   public HandlerRegistration addEditHandler(final EditHandler handler) {
     return addHandler(handler, EditEvent.getType());
-  }
-
-  public void blink() {
-    if (editable) {
-      blinkTimer(true, new SimpleCallback() {
-        @Override
-        public void onCallback() {
-          blinkTimer(false, new SimpleCallback() {
-            @Override
-            public void onCallback() {
-              blinkTimer(true, new SimpleCallback() {
-                @Override
-                public void onCallback() {
-                  blinkTimer(false, new SimpleCallback() {
-                    @Override
-                    public void onCallback() {
-                      // nothing
-                    }
-                  });
-                }
-              });
-            }
-          });
-        }
-      });
-    }
   }
 
   private void blinkTimer(final boolean add, final SimpleCallback callback) {
@@ -130,6 +106,32 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }
   }
 
+  public void highlightTitle() {
+    if (editable) {
+      blinkTimer(true, new SimpleCallback() {
+        @Override
+        public void onCallback() {
+          blinkTimer(false, new SimpleCallback() {
+            @Override
+            public void onCallback() {
+              blinkTimer(true, new SimpleCallback() {
+                @Override
+                public void onCallback() {
+                  blinkTimer(false, new SimpleCallback() {
+                    @Override
+                    public void onCallback() {
+                      tooltip.showTemporally();
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  }
+
   @UiHandler("textbox")
   void onBlur(final BlurEvent event) {
     finishEdit();
@@ -156,7 +158,7 @@ public class EditableLabel extends Composite implements HasEditHandler {
 
   public void setEditable(final boolean editable) {
     this.editable = editable;
-    Tooltip.to(label, editable ? tooltip : "");
+    tooltip = Tooltip.to(label, editable ? tooltipText : "");
   }
 
   public void setText(final String text) {
@@ -165,7 +167,7 @@ public class EditableLabel extends Composite implements HasEditHandler {
   }
 
   public void setTooltip(final String tooltip) {
-    this.tooltip = tooltip;
+    this.tooltipText = tooltip;
   }
 
 }

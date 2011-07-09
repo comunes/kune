@@ -21,6 +21,9 @@ package cc.kune.core.client.ui;
 
 import cc.kune.common.client.tooltip.Tooltip;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 
@@ -33,9 +36,18 @@ public class DefaultFormUtils {
     radio.setId(id);
     fieldSet.add(radio);
 
-    if (radioTip != null) {
-      Tooltip.to(radio, radioTip);
-    }
+    radio.addListener(Events.OnMouseOver, new Listener<BaseEvent>() {
+      private Tooltip tooltip;
+
+      @Override
+      public void handleEvent(final BaseEvent be) {
+        if (radioTip != null && tooltip == null) {
+          tooltip = Tooltip.to(radio, radioTip);
+          tooltip.show();
+          tooltip.hide();
+        }
+      }
+    });
     radio.setBoxLabel(radioLabel);
     return radio;
   }

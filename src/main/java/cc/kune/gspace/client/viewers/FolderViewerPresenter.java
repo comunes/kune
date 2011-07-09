@@ -81,7 +81,7 @@ public class FolderViewerPresenter extends
 
     void attach();
 
-    void blinkTitle();
+    void highlightTitle();
 
     void clear();
 
@@ -176,8 +176,8 @@ public class FolderViewerPresenter extends
     }
   }
 
-  public void blinkTitle() {
-    getView().blinkTitle();
+  public void highlightTitle() {
+    getView().highlightTitle();
   }
 
   String calculateStyle(final int pos, final int length) {

@@ -78,7 +78,7 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
               stateManager.setRetrievedStateAndGo(state);
               NotifyUser.hideProgress();
               NotifyUser.info(i18n.tWithNT("[%s] created", "New folder created, for instance", newName));
-              folderViewer.blinkTitle();
+              folderViewer.highlightTitle();
             }
           });
       cache.removeContent(session.getCurrentStateToken());

@@ -23,10 +23,12 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 public interface MaskWidgetView {
 
-    void mask(IsWidget widget);
+  boolean isShowing();
 
-    void mask(IsWidget widget, String message);
+  void mask(IsWidget widget);
 
-    void unMask();
+  void mask(IsWidget widget, String message);
+
+  void unMask();
 
 }

@@ -46,6 +46,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 public class NewGroupPanel extends ViewImpl implements NewGroupView {
   private static final int BIG_FIELD_WIDTH = 280;
   public static final String CANCEL_BUTTON = "k-ngp-cancel-bt";
+  public static final String CLOSED_GROUP_TYPE_ID = "k-ngp-type_of_group_closed";
   public static final String COMM_GROUP_TYPE_ID = "k-ngp-type_of_group_comm";
   public static final String ERROR_MSG_BAR = "k-ngp-error-mb";
   private static final int LABEL_WIDTH = 100;
@@ -60,10 +61,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   public static final String TAGS_FIELD = "k-ngp-tags";
   public static final String TYPEOFGROUP_FIELD = "k-ngp-type_of_group";
 
+  private Radio closedRadio;
   private Radio communityRadio;
   private final BasicTopDialog dialog;
-  private final FormPanel form;
 
+  private final FormPanel form;
   private final I18nTranslationService i18n;
   private TextField<String> longNameField;
   private final MaskWidgetView mask;
@@ -81,11 +83,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img,
       final MaskWidgetView mask) {
     final Builder builder = new BasicTopDialog.Builder(NEWGROUP_WIZARD, false, true).autoscroll(true).height(
-        "300px").title(i18n.t("Register a new group"));
+        "340px").title(i18n.t("Register a new group"));
     builder.icon("k-newgroup-icon");
     builder.firstButtonTitle(i18n.t("Register")).firstButtonId(REGISTER_BUTTON);
     builder.sndButtonTitle(i18n.t("Cancel")).sndButtonId(CANCEL_BUTTON);
-    builder.tabIndexStart(9);
+    builder.tabIndexStart(10);
     dialog = builder.build();
     this.i18n = i18n;
     this.mask = mask;
@@ -195,12 +197,18 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
             + "but organizations must be a legal entity."), ORG_GROUP_TYPE_ID);
     orgRadio.setTabIndex(7);
 
+    closedRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Closed"), TYPEOFGROUP_FIELD,
+        i18n.t("Closed groups are social groups of persons "
+            + "like family, friends, buddies, etc, which are moderated to new members "
+            + "and with private contents (by default)"), CLOSED_GROUP_TYPE_ID);
+    closedRadio.setTabIndex(8);
+
     communityRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Community"),
         TYPEOFGROUP_FIELD, i18n.t("Communities are social groups of persons "
             + "with shared interests, which are open to new members "
             + "(for instance the environmental community or the LGBT community). "
             + "They rarely are a legal entity."), COMM_GROUP_TYPE_ID);
-    communityRadio.setTabIndex(8);
+    communityRadio.setTabIndex(9);
 
     return form;
   }
@@ -254,6 +262,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   @Override
   public void hideMessage() {
     messageErrorBar.hideErrorMessage();
+  }
+
+  @Override
+  public boolean isClosed() {
+    return closedRadio.getValue();
   }
 
   @Override

@@ -35,53 +35,58 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class MaskWidget extends PopupPanel implements MaskWidgetView {
 
-    interface MaskWidgetUiBinder extends UiBinder<Widget, MaskWidget> {
-    }
-    private static MaskWidgetUiBinder uiBinder = GWT.create(MaskWidgetUiBinder.class);
-    @UiField
-    FlowPanel flow;
-    @UiField
-    Image icon;
-    @UiField
-    Label label;
+  interface MaskWidgetUiBinder extends UiBinder<Widget, MaskWidget> {
+  }
+  private static MaskWidgetUiBinder uiBinder = GWT.create(MaskWidgetUiBinder.class);
+  @UiField
+  FlowPanel flow;
+  @UiField
+  Image icon;
+  @UiField
+  Label label;
 
-    @UiField
-    SimplePanel mainPanel;
+  @UiField
+  SimplePanel mainPanel;
 
-    public MaskWidget() {
-        super(false, false);
-        add(uiBinder.createAndBindUi(this));
-        setStyleName("k-mask");
-    }
+  public MaskWidget() {
+    super(false, false);
+    add(uiBinder.createAndBindUi(this));
+    setStyleName("k-mask");
+  }
 
-    @Override
-    @Nonnull
-    public void mask(final IsWidget widget) {
-        mask(widget, "");
-    }
+  @Override
+  public boolean isShowing() {
+    return super.isShowing();
+  }
 
-    @Override
-    @Nonnull
-    public void mask(final IsWidget widget, final String message) {
-        label.setText(message);
-        setPopupPositionAndShow(new PositionCallback() {
-            @Override
-            public void setPosition(final int offsetWidth, final int offsetHeight) {
-                final Widget asWidget = widget.asWidget();
-                final int w = asWidget.getOffsetWidth();
-                final int h = asWidget.getOffsetHeight();
-                MaskWidget.this.setPopupPosition(asWidget.getAbsoluteLeft(), asWidget.getAbsoluteTop());
-                getElement().getStyle().setWidth(w, Unit.PX);
-                getElement().getStyle().setHeight(h, Unit.PX);
-                flow.getElement().getStyle().setTop((h - flow.getOffsetHeight()) / 2d, Unit.PX);
-                flow.getElement().getStyle().setLeft((w - flow.getOffsetWidth()) / 2d, Unit.PX);
-            }
-        });
-    }
+  @Override
+  @Nonnull
+  public void mask(final IsWidget widget) {
+    mask(widget, "");
+  }
 
-    @Override
-    public void unMask() {
-        hide();
-    }
+  @Override
+  @Nonnull
+  public void mask(final IsWidget widget, final String message) {
+    label.setText(message);
+    setPopupPositionAndShow(new PositionCallback() {
+      @Override
+      public void setPosition(final int offsetWidth, final int offsetHeight) {
+        final Widget asWidget = widget.asWidget();
+        final int w = asWidget.getOffsetWidth();
+        final int h = asWidget.getOffsetHeight();
+        MaskWidget.this.setPopupPosition(asWidget.getAbsoluteLeft(), asWidget.getAbsoluteTop());
+        getElement().getStyle().setWidth(w, Unit.PX);
+        getElement().getStyle().setHeight(h, Unit.PX);
+        flow.getElement().getStyle().setTop((h - flow.getOffsetHeight()) / 2d, Unit.PX);
+        flow.getElement().getStyle().setLeft((w - flow.getOffsetWidth()) / 2d, Unit.PX);
+      }
+    });
+  }
+
+  @Override
+  public void unMask() {
+    hide();
+  }
 
 }

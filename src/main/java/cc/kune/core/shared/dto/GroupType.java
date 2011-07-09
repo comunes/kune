@@ -22,5 +22,5 @@ package cc.kune.core.shared.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum GroupType implements IsSerializable {
-    ORGANIZATION, COMMUNITY, PROJECT, ORPHANED_PROJECT, PERSONAL
+  CLOSED, COMMUNITY, ORGANIZATION, ORPHANED_PROJECT, PERSONAL, PROJECT
 }

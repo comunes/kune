@@ -28,42 +28,44 @@ import com.gwtplatform.mvp.client.View;
 
 public interface NewGroupView extends View {
 
-    void clearData();
+  void clearData();
 
-    void focusOnShorName();
+  void focusOnShorName();
 
-    HasCloseHandlers<PopupPanel> getClose();
+  HasCloseHandlers<PopupPanel> getClose();
 
-    HasClickHandlers getFirstBtn();
+  HasClickHandlers getFirstBtn();
 
-    String getLongName();
+  String getLongName();
 
-    String getPublicDesc();
+  String getPublicDesc();
 
-    HasClickHandlers getSecondBtn();
+  HasClickHandlers getSecondBtn();
 
-    String getShortName();
+  String getShortName();
 
-    String getTags();
+  String getTags();
 
-    void hide();
+  void hide();
 
-    void hideMessage();
+  void hideMessage();
 
-    boolean isCommunity();
+  boolean isClosed();
 
-    boolean isFormValid();
+  boolean isCommunity();
 
-    boolean isOrganization();
+  boolean isFormValid();
 
-    boolean isProject();
+  boolean isOrganization();
 
-    void maskProcessing();
+  boolean isProject();
 
-    void setMessage(String message, NotifyLevel level);
+  void maskProcessing();
 
-    void show();
+  void setMessage(String message, NotifyLevel level);
 
-    void unMask();
+  void show();
+
+  void unMask();
 
 }

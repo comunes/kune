@@ -70,8 +70,8 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   }
 
   @Override
-  public void blinkTitle() {
-    contentTitle.blink();
+  public void highlightTitle() {
+    contentTitle.highlightTitle();
   }
 
   @Override

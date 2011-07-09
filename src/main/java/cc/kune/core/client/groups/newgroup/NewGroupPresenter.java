@@ -114,6 +114,8 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
       return GroupType.PROJECT;
     } else if (getView().isOrganization()) {
       return GroupType.ORGANIZATION;
+    } else if (getView().isClosed()) {
+      return GroupType.CLOSED;
     } else {
       return GroupType.COMMUNITY;
     }

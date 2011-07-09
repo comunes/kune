@@ -47,6 +47,7 @@ import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
+import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.AccessLists;
@@ -129,8 +130,14 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       throws GroupNameInUseException, UserMustBeLoggedException {
     final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
     if (User.isKnownUser(user)) {
+      GroupListMode publicVisibility = GroupListMode.EVERYONE;
+      SocialNetworkVisibility snVisibility = SocialNetworkVisibility.anyone;
       if (group.getGroupType().equals(GroupType.COMMUNITY)) {
         group.setAdmissionType(AdmissionType.Open);
+      } else if (group.getGroupType().equals(GroupType.CLOSED)) {
+        group.setAdmissionType(AdmissionType.Closed);
+        publicVisibility = GroupListMode.NORMAL;
+        snVisibility = SocialNetworkVisibility.onlymembers;
       } else if (group.getGroupType().equals(GroupType.ORGANIZATION)) {
         group.setAdmissionType(AdmissionType.Moderated);
       } else if (group.getGroupType().equals(GroupType.PROJECT)) {
@@ -142,7 +149,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       final License license = licenseFinder.findByShortName(licName);
       group.setDefaultLicense(license);
       group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
-      initSocialNetwork(group, user.getUserGroup());
+      initSocialNetwork(group, user.getUserGroup(), publicVisibility, snVisibility);
       final String title = i18n.t("About [%s]", group.getLongName());
       initGroup(user, group, serverToolRegistry.getToolsForGroupsKeys(), title, publicDescrip);
       return group;
@@ -177,7 +184,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     userGroup.setWorkspaceTheme(defaultSiteWorkspaceTheme);
     userGroup.setDefaultContent(null);
     user.setUserGroup(userGroup);
-    initSocialNetwork(userGroup, userGroup);
+    initSocialNetwork(userGroup, userGroup, GroupListMode.EVERYONE, SocialNetworkVisibility.anyone);
 
     final String title = i18n.t("[%s] Bio", user.getName());
     final String body = i18n.t("This user has not written its biography yet");
@@ -244,14 +251,16 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
   }
 
-  private void initSocialNetwork(final Group group, final Group userGroup) {
+  private void initSocialNetwork(final Group group, final Group userGroup,
+      final GroupListMode publicVisibility, final SocialNetworkVisibility snVisibility) {
     final SocialNetwork network = group.getSocialNetwork();
     final AccessLists lists = network.getAccessLists();
     lists.getEditors().setMode(GroupListMode.NOBODY);
-    lists.getViewers().setMode(GroupListMode.EVERYONE);
+    lists.getViewers().setMode(publicVisibility);
     if (!group.getGroupType().equals(GroupType.ORPHANED_PROJECT)) {
       network.addAdmin(userGroup);
     }
+    network.setVisibility(snVisibility);
   }
 
   @Override

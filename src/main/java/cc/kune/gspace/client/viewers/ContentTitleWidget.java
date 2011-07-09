@@ -53,16 +53,16 @@ public class ContentTitleWidget extends Composite {
     initWidget(flow);
   }
 
-  public void blink() {
-    editableTitle.blink();
-  }
-
   public void edit() {
     editableTitle.edit();
   }
 
   public HasEditHandler getEditableTitle() {
     return editableTitle;
+  }
+
+  public void highlightTitle() {
+    editableTitle.highlightTitle();
   }
 
   public void setText(final String text) {
@@ -83,7 +83,7 @@ public class ContentTitleWidget extends Composite {
     titleIcon.setVisible(hasIcon);
     editableTitle.setText(title);
     if (editable) {
-      editableTitle.setTooltip(i18n.t("Click to edit"));
+      editableTitle.setTooltip(i18n.t("Click to rename"));
     } else {
       editableTitle.setTooltip("");
     }

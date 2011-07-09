@@ -30,6 +30,7 @@ import cc.kune.core.server.UserSession;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.AdmissionType;
+import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
@@ -40,108 +41,134 @@ import com.google.inject.Inject;
 
 public class GroupServiceTest extends IntegrationTest {
 
-    @Inject
-    GroupFinder groupFinder;
+  @Inject
+  GroupFinder groupFinder;
 
-    @Inject
-    GroupService service;
+  @Inject
+  GroupService service;
 
-    @Inject
-    UserSession session;
+  @Inject
+  UserSession session;
 
-    @Test
-    public void createCommunity() throws Exception {
-        doLogin();
+  @Test
+  public void createClosed() throws Exception {
+    doLogin();
 
-        final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", GroupType.COMMUNITY);
+    final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
+        GroupType.CLOSED);
 
-        final LicenseDTO license = new LicenseDTO();
-        license.setShortName("by-sa-v3.0");
-        group.setDefaultLicense(license);
-        service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    final LicenseDTO license = new LicenseDTO();
+    license.setShortName("by-sa-v3.0");
+    group.setDefaultLicense(license);
+    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
 
-        final Group groupCreated = groupFinder.findByShortName("ysei");
-        assertEquals(groupCreated.getShortName(), group.getShortName());
-        assertEquals(groupCreated.getLongName(), group.getLongName());
+    final Group groupCreated = groupFinder.findByShortName("ysei");
+    assertEquals(groupCreated.getShortName(), group.getShortName());
+    assertEquals(groupCreated.getLongName(), group.getLongName());
+    assertEquals(groupCreated.getAdmissionType(), AdmissionType.Closed);
+    assertEquals(groupCreated.getGroupType(), GroupType.CLOSED);
+    assertEquals(GroupListMode.NORMAL,
+        groupCreated.getSocialNetwork().getAccessLists().getViewers().getMode());
+  }
 
-        assertEquals(groupCreated.getAdmissionType(), AdmissionType.Open);
-        assertEquals(groupCreated.getGroupType(), GroupType.COMMUNITY);
-    }
+  @Test
+  public void createCommunity() throws Exception {
+    doLogin();
 
-    @Test(expected = Exception.class)
-    public void createGroupNotLogged() throws Exception {
-        final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", GroupType.PROJECT);
-        service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
-    }
+    final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
+        GroupType.COMMUNITY);
 
-    @Test(expected = UserMustBeLoggedException.class)
-    public void createGroupNullUserHash() throws Exception {
-        doLogin();
-        final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", GroupType.PROJECT);
-        service.createNewGroup(null, group, "Public desc", "tag1 tag2", null);
-    }
+    final LicenseDTO license = new LicenseDTO();
+    license.setShortName("by-sa-v3.0");
+    group.setDefaultLicense(license);
+    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
 
-    @Test
-    public void createGroupUserLogged() throws Exception {
-        doLogin();
+    final Group groupCreated = groupFinder.findByShortName("ysei");
+    assertEquals(groupCreated.getShortName(), group.getShortName());
+    assertEquals(groupCreated.getLongName(), group.getLongName());
 
-        final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", GroupType.PROJECT);
+    assertEquals(groupCreated.getAdmissionType(), AdmissionType.Open);
+    assertEquals(groupCreated.getGroupType(), GroupType.COMMUNITY);
+  }
 
-        final LicenseDTO license = new LicenseDTO();
-        license.setShortName("by-sa-v3.0");
-        group.setDefaultLicense(license);
-        service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+  @Test(expected = Exception.class)
+  public void createGroupNotLogged() throws Exception {
+    final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
+        GroupType.PROJECT);
+    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+  }
 
-        final Group groupCreated = groupFinder.findByShortName("ysei");
-        assertEquals(groupCreated.getShortName(), group.getShortName());
-        assertEquals(groupCreated.getLongName(), group.getLongName());
+  @Test(expected = UserMustBeLoggedException.class)
+  public void createGroupNullUserHash() throws Exception {
+    doLogin();
+    final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
+        GroupType.PROJECT);
+    service.createNewGroup(null, group, "Public desc", "tag1 tag2", null);
+  }
 
-        assertEquals(groupCreated.getAdmissionType(), AdmissionType.Moderated);
-        assertEquals(groupCreated.getGroupType(), GroupType.PROJECT);
-    }
+  @Test
+  public void createGroupUserLogged() throws Exception {
+    doLogin();
 
-    @Test
-    public void createOrganization() throws Exception {
-        doLogin();
+    final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
+        GroupType.PROJECT);
 
-        final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", GroupType.ORGANIZATION);
+    final LicenseDTO license = new LicenseDTO();
+    license.setShortName("by-sa-v3.0");
+    group.setDefaultLicense(license);
+    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
 
-        final LicenseDTO license = new LicenseDTO();
-        license.setShortName("by-sa-v3.0");
-        group.setDefaultLicense(license);
-        service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    final Group groupCreated = groupFinder.findByShortName("ysei");
+    assertEquals(groupCreated.getShortName(), group.getShortName());
+    assertEquals(groupCreated.getLongName(), group.getLongName());
 
-        final Group groupCreated = groupFinder.findByShortName("ysei");
-        assertEquals(groupCreated.getShortName(), group.getShortName());
-        assertEquals(groupCreated.getLongName(), group.getLongName());
-        assertEquals(groupCreated.getAdmissionType(), AdmissionType.Moderated);
-        assertEquals(groupCreated.getGroupType(), GroupType.ORGANIZATION);
-    }
+    assertEquals(groupCreated.getAdmissionType(), AdmissionType.Moderated);
+    assertEquals(groupCreated.getGroupType(), GroupType.PROJECT);
+  }
 
-    @Test
-    public void createOrphanedProject() throws Exception {
-        doLogin();
+  @Test
+  public void createOrganization() throws Exception {
+    doLogin();
 
-        final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
-                GroupType.ORPHANED_PROJECT);
+    final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
+        GroupType.ORGANIZATION);
 
-        final LicenseDTO license = new LicenseDTO();
-        license.setShortName("by-sa-v3.0");
-        group.setDefaultLicense(license);
-        service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    final LicenseDTO license = new LicenseDTO();
+    license.setShortName("by-sa-v3.0");
+    group.setDefaultLicense(license);
+    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
 
-        final Group groupCreated = groupFinder.findByShortName("ysei");
-        assertEquals(groupCreated.getShortName(), group.getShortName());
-        assertEquals(groupCreated.getLongName(), group.getLongName());
-        assertEquals(groupCreated.getAdmissionType(), AdmissionType.Open);
-        assertEquals(groupCreated.getGroupType(), GroupType.ORPHANED_PROJECT);
-        assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getAdmins().getList().size());
-        assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getEditors().getList().size());
-    }
+    final Group groupCreated = groupFinder.findByShortName("ysei");
+    assertEquals(groupCreated.getShortName(), group.getShortName());
+    assertEquals(groupCreated.getLongName(), group.getLongName());
+    assertEquals(groupCreated.getAdmissionType(), AdmissionType.Moderated);
+    assertEquals(groupCreated.getGroupType(), GroupType.ORGANIZATION);
+  }
 
-    @Before
-    public void init() {
-        new IntegrationTestHelper(this);
-    }
+  @Test
+  public void createOrphanedProject() throws Exception {
+    doLogin();
+
+    final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
+        GroupType.ORPHANED_PROJECT);
+
+    final LicenseDTO license = new LicenseDTO();
+    license.setShortName("by-sa-v3.0");
+    group.setDefaultLicense(license);
+    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+
+    final Group groupCreated = groupFinder.findByShortName("ysei");
+    assertEquals(groupCreated.getShortName(), group.getShortName());
+    assertEquals(groupCreated.getLongName(), group.getLongName());
+    assertEquals(groupCreated.getAdmissionType(), AdmissionType.Open);
+    assertEquals(groupCreated.getGroupType(), GroupType.ORPHANED_PROJECT);
+    assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getAdmins().getList().size());
+    assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getEditors().getList().size());
+  }
+
+  @Before
+  public void init() {
+    new IntegrationTestHelper(this);
+  }
 
 }

@@ -81,6 +81,7 @@ public class ErrorHandler {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("You do not have rights to perform that action")));
+      goHome();
     } else if (caught instanceof SessionExpiredException) {
       logException(caught);
       doSessionExpired();

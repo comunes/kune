@@ -20,6 +20,7 @@
 package cc.kune.core.client.sitebar.spaces;
 
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.WindowFocusEvent;
 import cc.kune.core.client.init.AppStartEvent;
@@ -96,7 +97,7 @@ public class SpaceSelectorPresenter extends
   public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
       final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
       final Session session, final Provider<SignIn> signIn, final GSpaceBackManager backManager,
-      final I18nTranslationService i18n) {
+      final I18nTranslationService i18n, final MaskWidgetView mask) {
     super(eventBus, view, proxy);
     this.stateManager = stateManager;
     this.armor = armor;
@@ -136,7 +137,7 @@ public class SpaceSelectorPresenter extends
     eventBus.addHandler(WindowFocusEvent.getType(), new WindowFocusEvent.WindowFocusHandler() {
       @Override
       public void onWindowFocus(final WindowFocusEvent event) {
-        if (event.isHasFocus()) {
+        if (event.isHasFocus() && !mask.isShowing()) {
           showTooltipWithDelay();
         }
       }
@@ -252,19 +253,21 @@ public class SpaceSelectorPresenter extends
   }
 
   private void showTooltipNow() {
-    switch (currentSpace) {
-    case homeSpace:
-      getView().showHomeSpaceTooltip();
-      break;
-    case userSpace:
-      getView().showUserSpaceTooltip();
-      break;
-    case groupSpace:
-      getView().showGroupSpaceTooltip();
-      break;
-    case publicSpace:
-      getView().showPublicSpaceTooltip();
-      break;
+    if (currentSpace != null) {
+      switch (currentSpace) {
+      case homeSpace:
+        getView().showHomeSpaceTooltip();
+        break;
+      case userSpace:
+        getView().showUserSpaceTooltip();
+        break;
+      case groupSpace:
+        getView().showGroupSpaceTooltip();
+        break;
+      case publicSpace:
+        getView().showPublicSpaceTooltip();
+        break;
+      }
     }
   }
 
@@ -274,6 +277,6 @@ public class SpaceSelectorPresenter extends
       public void run() {
         showTooltipNow();
       }
-    }.schedule(500);
+    }.schedule(200);
   }
 }
