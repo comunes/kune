@@ -34,7 +34,6 @@ import com.calclab.hablar.signals.client.preferences.SignalsPreferencesWidget;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.calclab.hablar.signals.client.unattended.UnattendedPresenter;
 import com.calclab.hablar.user.client.UserContainer;
-import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
@@ -71,9 +70,9 @@ public class KuneHablarSignals {
   // FIXME: move to gin
   @SuppressWarnings("deprecation")
   public KuneHablarSignals(final EventBus kuneEventBus, final XmppSession session, final Hablar hablar,
-      final ChatClientAction action) {
+      final ChatClientAction action, final ChatInstances chatInstances) {
     final HablarEventBus hablarEventBus = hablar.getEventBus();
-    final PrivateStorageManager storageManager = Suco.get(PrivateStorageManager.class);
+    final PrivateStorageManager storageManager = chatInstances.privateStorageManager;
 
     final HasText titleDisplay = new HasText() {
       @Override

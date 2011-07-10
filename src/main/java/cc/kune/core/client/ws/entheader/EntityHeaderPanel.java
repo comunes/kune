@@ -44,109 +44,116 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
-    private final Provider<FileDownloadUtils> downloadProvider;
-    private final EntityTextLogo entityTextLogo;
-    private final CoreResources images;
-    private final HorizontalPanel mainPanel;
-    private final ActionFlowPanel toolbar;
-    private final VerticalPanel vpanel;
+  private final Provider<FileDownloadUtils> downloadProvider;
+  private final EntityTextLogo entityTextLogo;
+  private final CoreResources images;
+  private final HorizontalPanel mainPanel;
+  private final ActionFlowPanel toolbar;
+  private final VerticalPanel vpanel;
 
-    @Inject
-    public EntityHeaderPanel(final Provider<FileDownloadUtils> downloadProvider, final CoreResources images,
-            final GuiProvider bindings, final GSpaceArmor armor) {
-        mainPanel = new HorizontalPanel();
-        mainPanel.setWidth("100%");
-        this.downloadProvider = downloadProvider;
-        this.images = images;
-        vpanel = new VerticalPanel();
-        vpanel.setWidth("100%");
-        vpanel.setHorizontalAlignment(HorizontalPanel.ALIGN_RIGHT);
-        entityTextLogo = new EntityTextLogo();
-        mainPanel.add(entityTextLogo);
-        toolbar = new ActionFlowPanel(bindings);
-        vpanel.add(toolbar);
-        mainPanel.add(vpanel);
-        armor.getEntityHeader().add(mainPanel);
+  @Inject
+  public EntityHeaderPanel(final Provider<FileDownloadUtils> downloadProvider,
+      final CoreResources images, final GuiProvider bindings, final GSpaceArmor armor,
+      final EntityTextLogo entityTextLogo) {
+    this.entityTextLogo = entityTextLogo;
+    mainPanel = new HorizontalPanel();
+    mainPanel.setWidth("100%");
+    this.downloadProvider = downloadProvider;
+    this.images = images;
+    vpanel = new VerticalPanel();
+    vpanel.setWidth("100%");
+    vpanel.setHorizontalAlignment(HorizontalPanel.ALIGN_RIGHT);
+    mainPanel.add(entityTextLogo);
+    toolbar = new ActionFlowPanel(bindings);
+    vpanel.add(toolbar);
+    mainPanel.add(vpanel);
+    armor.getEntityHeader().add(mainPanel);
+  }
+
+  @Override
+  public void addAction(final GuiActionDescrip descriptor) {
+    toolbar.add(descriptor);
+  }
+
+  @Override
+  public void addWidget(final IsWidget view) {
+    final Widget widget = (Widget) view;
+    vpanel.add(widget);
+  }
+
+  @Override
+  public Widget asWidget() {
+    return mainPanel;
+  }
+
+  private String getAvatarDecoratorParam(final GroupDTO group) {
+    return group.isPersonal() ? group.getShortName() : null;
+  }
+
+  @Override
+  public void reloadImage(final GroupDTO group) {
+    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken())
+        + "&nocache=" + new Date().getTime(), getAvatarDecoratorParam(group));
+  }
+
+  @Deprecated
+  public void setFullLogo(final StateToken stateToken, final boolean clipped) {
+    mainPanel.clear();
+    final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
+    Image logo;
+    if (clipped) {
+      logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_DEF_WIDTH, FileConstants.LOGO_DEF_HEIGHT);
+    } else {
+      logo = new Image(imageUrl);
+      logo.setWidth(String.valueOf(FileConstants.LOGO_DEF_WIDTH));
+      logo.setHeight(String.valueOf(FileConstants.LOGO_DEF_HEIGHT));
     }
+    mainPanel.add(logo);
+  }
 
-    @Override
-    public void addAction(final GuiActionDescrip descriptor) {
-        toolbar.add(descriptor);
-    }
+  @Override
+  public void setLargeFont() {
+    entityTextLogo.setLargeFont();
+  }
 
-    @Override
-    public void addWidget(final IsWidget view) {
-        final Widget widget = (Widget) view;
-        vpanel.add(widget);
-    }
+  @Override
+  public void setLogoImage(final GroupDTO group) {
+    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()),
+        getAvatarDecoratorParam(group));
+  }
 
-    @Override
-    public Widget asWidget() {
-        return mainPanel;
-    }
+  @Override
+  public void setLogoImageVisible(final boolean visible) {
+    entityTextLogo.setLogoVisible(visible);
+  }
 
-    @Override
-    public void reloadImage(final GroupDTO group) {
-        entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "&nocache="
-                + new Date().getTime());
-    }
+  @Override
+  public void setLogoText(final String groupName) {
+    entityTextLogo.setLogoText(groupName);
+  }
 
-    @Deprecated
-    public void setFullLogo(final StateToken stateToken, final boolean clipped) {
-        mainPanel.clear();
-        final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
-        Image logo;
-        if (clipped) {
-            logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_DEF_WIDTH, FileConstants.LOGO_DEF_HEIGHT);
-        } else {
-            logo = new Image(imageUrl);
-            logo.setWidth(String.valueOf(FileConstants.LOGO_DEF_WIDTH));
-            logo.setHeight(String.valueOf(FileConstants.LOGO_DEF_HEIGHT));
-        }
-        mainPanel.add(logo);
-    }
+  @Override
+  public void setMediumFont() {
+    entityTextLogo.setMediumFont();
+  }
 
-    @Override
-    public void setLargeFont() {
-        entityTextLogo.setLargeFont();
-    }
+  //
+  // @Override
+  // public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+  // if (oldTheme != null) {
+  // entityTextLogo.removeStyleDependentName(oldTheme.toString());
+  // }
+  // entityTextLogo.addStyleDependentName(newTheme.toString());
+  // }
 
-    @Override
-    public void setLogoImage(final StateToken stateToken) {
-        entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(stateToken));
-    }
+  @Override
+  public void setSmallFont() {
+    entityTextLogo.setSmallFont();
+  }
 
-    @Override
-    public void setLogoImageVisible(final boolean visible) {
-        entityTextLogo.setLogoVisible(visible);
-    }
-
-    @Override
-    public void setLogoText(final String groupName) {
-        entityTextLogo.setLogoText(groupName);
-    }
-
-    @Override
-    public void setMediumFont() {
-        entityTextLogo.setMediumFont();
-    }
-
-    //
-    // @Override
-    // public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-    // if (oldTheme != null) {
-    // entityTextLogo.removeStyleDependentName(oldTheme.toString());
-    // }
-    // entityTextLogo.addStyleDependentName(newTheme.toString());
-    // }
-
-    @Override
-    public void setSmallFont() {
-        entityTextLogo.setSmallFont();
-    }
-
-    @Override
-    public void showDefUserLogo() {
-        entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.unknown60()));
-    }
+  @Override
+  public void showDefUserLogo(final GroupDTO group) {
+    entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.unknown60()),
+        getAvatarDecoratorParam(group));
+  }
 }

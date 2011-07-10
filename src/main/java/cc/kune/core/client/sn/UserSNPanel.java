@@ -22,6 +22,8 @@ package cc.kune.core.client.sn;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNView;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -30,7 +32,9 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
@@ -38,9 +42,10 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   @Inject
   public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
-      final GSpaceArmor armor) {
-    super(i18n, guiProvider, armor);
+      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator) {
+    super(i18n, guiProvider, armor, avatarDecorator);
     this.i18n = i18n;
+
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("His/her network:"));
     mainTitle.setTitle(i18n.t("This user buddies and groups where participes"));
@@ -62,7 +67,8 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   @Override
   public void addBuddie(final UserSimpleDTO user, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
-    firstCategoryFlow.add(createThumb(user.getShortName(), avatarUrl, tooltip, tooltipTitle, menu));
+    final BasicThumb thumb = createThumb(user.getShortName(), avatarUrl, tooltip, tooltipTitle, menu);
+    firstCategoryFlow.add((Widget) decorateAvatarWithXmppStatus(user.getShortName(), thumb));
   }
 
   @Override

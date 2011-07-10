@@ -142,7 +142,7 @@ public class SpaceSelectorPresenter extends
       @Override
       public void onWindowFocus(final WindowFocusEvent event) {
         if (event.isHasFocus() && !mask.isShowing()) {
-          showTooltipWithDelay();
+          // showTooltipWithDelay();
         }
       }
     });

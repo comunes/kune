@@ -29,6 +29,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
@@ -43,6 +44,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class AbstractSNPanel extends ViewImpl {
@@ -52,11 +54,11 @@ public class AbstractSNPanel extends ViewImpl {
 
   private final static int AVATARLABELMAXSIZE = 4;
   private final static int AVATARSIZE = 22;
-  private final static String CATEG_HEIGHT = "80px";
+  private final static String CATEG_HEIGHT = "84px";
   private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
-
   protected final ActionSimplePanel actions;
   protected final GSpaceArmor armor;
+  protected final Provider<SmallAvatarDecorator> avatarDecoratorProv;
   ActionFlowPanel bottomActionsToolbar;
   @UiField
   FlowPanel bottomPanel;
@@ -103,8 +105,9 @@ public class AbstractSNPanel extends ViewImpl {
   protected final Widget widget;
 
   public AbstractSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
-      final GSpaceArmor armor) {
+      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator) {
     this.armor = armor;
+    this.avatarDecoratorProv = avatarDecorator;
     widget = uiBinder.createAndBindUi(this);
     actions = new ActionSimplePanel(guiProvider);
   }
@@ -142,6 +145,13 @@ public class AbstractSNPanel extends ViewImpl {
     thumb.setTooltip(tooltipTitle, tooltip);
     thumb.setLabelVisible(false);
     return thumb;
+  }
+
+  public SmallAvatarDecorator decorateAvatarWithXmppStatus(final String shortname, final BasicThumb thumb) {
+    final SmallAvatarDecorator decorator = avatarDecoratorProv.get();
+    decorator.setWidget(thumb);
+    decorator.setItem(shortname);
+    return decorator;
   }
 
   public IsActionExtensible getBottomToolbar() {

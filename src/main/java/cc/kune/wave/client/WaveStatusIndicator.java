@@ -45,7 +45,7 @@ public class WaveStatusIndicator {
       super(session, true);
       ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
         private void goOnline() {
-          putValue(Action.NAME, i18n.t("Online"));
+          putValue(Action.NAME, ""); // i18n.t("Online"));
           putValue(AbstractAction.STYLES, "k-sitebar-wave-status, k-sitebar-wave-status-online");
           NotifyUser.hideProgress();
         }

@@ -81,8 +81,6 @@ public class FolderViewerPresenter extends
 
     void attach();
 
-    void highlightTitle();
-
     void clear();
 
     void detach();
@@ -90,6 +88,8 @@ public class FolderViewerPresenter extends
     void editTitle();
 
     HasEditHandler getEditTitle();
+
+    void highlightTitle();
 
     void setActions(GuiActionDescCollection actions);
 
@@ -176,10 +176,6 @@ public class FolderViewerPresenter extends
     }
   }
 
-  public void highlightTitle() {
-    getView().highlightTitle();
-  }
-
   String calculateStyle(final int pos, final int length) {
     if (length == 1) {
       return CSSBTN;
@@ -205,6 +201,7 @@ public class FolderViewerPresenter extends
       }
       // Other contents (docs, etc)
       for (final ContentSimpleDTO content : container.getContents()) {
+        assert content != null;
         addItem(content, content.getMimeType(), content.getStatus(),
             content.getStateToken().copy().clearDocument(), content.getRights(), content.getModifiedOn());
       }
@@ -282,6 +279,10 @@ public class FolderViewerPresenter extends
     } else {
       return i18n.t("Double click to open");
     }
+  }
+
+  public void highlightTitle() {
+    getView().highlightTitle();
   }
 
   public void refreshState() {

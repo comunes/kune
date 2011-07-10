@@ -22,11 +22,11 @@ package cc.kune.chat.client;
 import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
 import cc.kune.chat.client.actions.ChatClientActions;
 import cc.kune.chat.client.actions.ChatSitebarActions;
+import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.avatar.MediumAvatarDecorator;
+import cc.kune.core.client.avatar.SmallAvatarDecorator;
 
-import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-
-public class ChatGinModule extends AbstractPresenterModule {
+public class ChatGinModule extends ExtendedGinModule {
   /*
    * (non-Javadoc)
    * 
@@ -34,12 +34,15 @@ public class ChatGinModule extends AbstractPresenterModule {
    */
   @Override
   protected void configure() {
-    bind(ChatClient.class).to(ChatClientDefault.class).in(Singleton.class);
-    bind(ChatOptions.class).in(Singleton.class);
-    bind(ChatSitebarActions.class).in(Singleton.class);
-    bind(AddAsBuddieHeaderButton.class).in(Singleton.class);
-    // bind(OpenGroupPublicChatRoomButton.class).in(Singleton.class);
-    bind(ChatClientTool.class).in(Singleton.class);
-    bind(ChatClientActions.class).in(Singleton.class);
+    s(ChatInstances.class);
+    bind(SmallAvatarDecorator.class).to(SmallAvatarDecoratorImpl.class);
+    bind(MediumAvatarDecorator.class).to(MediumAvatarDecoratorImpl.class);
+    s(ChatClient.class, ChatClientDefault.class);
+    s(ChatOptions.class);
+    s(ChatSitebarActions.class);
+    s(AddAsBuddieHeaderButton.class);
+    // bind(OpenGroupPublicChatRoomButton.class);
+    s(ChatClientTool.class);
+    s(ChatClientActions.class);
   }
 }

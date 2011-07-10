@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cc.kune.chat.client.ChatClient;
+import cc.kune.chat.client.ChatInstances;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -43,7 +44,6 @@ import com.calclab.emite.im.client.chat.ChatStates;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
-import com.calclab.suco.client.Suco;
 import com.google.inject.Inject;
 
 public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
@@ -51,19 +51,19 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
   private final ChatClient chatClient;
   private final I18nTranslationService i18n;
   private boolean inviteMembers;
-  private final RoomManager roomManager;
   private final Session session;
 
   @SuppressWarnings("deprecation")
   @Inject
   public OpenGroupPublicChatRoomAction(final Session session,
       final AccessRightsClientManager accessRightsClientManager, final ChatClient chatClient,
-      final StateManager stateManager, final I18nTranslationService i18n, final ChatResources res) {
+      final StateManager stateManager, final I18nTranslationService i18n, final ChatResources res,
+      final ChatInstances chatInstances) {
     super(stateManager, session, accessRightsClientManager, AccessRolDTO.Editor, true, false, true);
     this.session = session;
     this.chatClient = chatClient;
     this.i18n = i18n;
-    roomManager = Suco.get(RoomManager.class);
+    final RoomManager roomManager = chatInstances.roomManager;
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {

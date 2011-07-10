@@ -28,13 +28,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsMeCondition extends IsNotMeCondition {
 
-    @Inject
-    public IsMeCondition(final Session session) {
-        super(session);
-    }
+  @Inject
+  public IsMeCondition(final Session session) {
+    super(session);
+  }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
-        return !super.mustBeAdded(descr);
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    if (session.isNotLogged()) {
+      return false;
     }
+    return !super.mustBeAdded(descr);
+  }
 }

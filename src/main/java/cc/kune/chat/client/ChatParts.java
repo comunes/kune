@@ -27,7 +27,9 @@ import cc.kune.chat.client.actions.OpenGroupPublicChatRoomAction;
 import cc.kune.chat.client.actions.StartAssemblyWithMembers;
 import cc.kune.chat.client.actions.StartChatWithMemberAction;
 import cc.kune.chat.client.actions.StartChatWithThisBuddieAction;
-import cc.kune.chat.client.actions.StartChatWithUserAction;
+import cc.kune.chat.client.actions.StartChatWithThisPersonAction;
+import cc.kune.chat.client.actions.conditions.IsBuddieCondition;
+import cc.kune.chat.client.actions.conditions.IsNotBuddieCondition;
 import cc.kune.chat.shared.ChatConstants;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.PropertyChangeEvent;
@@ -68,10 +70,12 @@ public class ChatParts {
       final Provider<UserSNMenuItemsRegistry> userItemsRegistry, final IsNotMeCondition isNotMe,
       final IsCurrentStateAdministrableCondition isAdministrableCondition,
       final IsCurrentStateEditableCondition isEditableCondition,
+      final IsBuddieCondition isBuddieCondition, final IsNotBuddieCondition isNotBuddieCondition,
       final IsCurrentStateAGroupCondition isGroupCondition, final IsPersonCondition isPersonCondition,
       final Provider<AddAsBuddieAction> addAsBuddie,
       final Provider<StartChatWithMemberAction> startChatWithMemberAction,
-      final IsLoggedCondition isLogged, final Provider<StartChatWithUserAction> startChatWithUserAction,
+      final IsLoggedCondition isLogged,
+      final Provider<StartChatWithThisPersonAction> startChatWithPersonAction,
       final Provider<StartChatWithThisBuddieAction> startChatWithBuddieAction,
       final ChatClientActions chatActions, final Provider<StartAssemblyWithMembers> startAssembly,
       final Provider<OpenGroupPublicChatRoomAction> openGroupRoomAction,
@@ -99,6 +103,7 @@ public class ChatParts {
           public MenuItemDescriptor get() {
             final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithBuddieAction.get());
             item.add(isLogged);
+            item.add(isBuddieCondition);
             item.add(isPersonCondition);
             return item;
           }
@@ -109,6 +114,7 @@ public class ChatParts {
             final AddAsBuddieAction action = addAsBuddie.get();
             final MenuItemDescriptor item = new MenuItemDescriptor(action);
             item.add(isNotMe);
+            item.add(isNotBuddieCondition);
             item.add(isLogged);
             item.add(isPersonCondition);
             /**
@@ -125,21 +131,27 @@ public class ChatParts {
             return item;
           }
         };
-        final Provider<MenuItemDescriptor> startChatWithUserItem = new Provider<MenuItemDescriptor>() {
+        final Provider<MenuItemDescriptor> startChatWithPersonItem = new Provider<MenuItemDescriptor>() {
           @Override
           public MenuItemDescriptor get() {
-            final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithUserAction.get());
+            final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithPersonAction.get());
             item.add(isNotMe);
             item.add(isLogged);
             item.add(isPersonCondition);
+            item.add(isNotBuddieCondition);
             return item;
           }
         };
 
         snAdminsRegistry.get().add(startChatWithMemberItem);
         snCollabsItemsRegistry.get().add(startChatWithMemberItem);
-        snPendingItemsRegistry.get().add(startChatWithUserItem);
+        snPendingItemsRegistry.get().add(startChatWithPersonItem);
+        snAdminsRegistry.get().add(startChatWithBuddieItem);
+        snCollabsItemsRegistry.get().add(startChatWithBuddieItem);
+        snPendingItemsRegistry.get().add(startChatWithBuddieItem);
+
         userItemsRegistry.get().add(startChatWithBuddieItem);
+        userItemsRegistry.get().add(startChatWithPersonItem);
         userItemsRegistry.get().add(addAsBuddieItem);
         groupConfActions.get().add(startAssembly.get());
         buddieButton.get();

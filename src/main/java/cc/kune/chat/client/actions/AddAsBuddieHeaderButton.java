@@ -20,6 +20,7 @@
 package cc.kune.chat.client.actions;
 
 import cc.kune.chat.client.ChatClient;
+import cc.kune.chat.client.ChatInstances;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -38,10 +39,8 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.RosterGroupChangedEvent;
 import com.calclab.emite.im.client.roster.events.RosterGroupChangedHandler;
-import com.calclab.suco.client.Suco;
 import com.google.inject.Inject;
 
 public class AddAsBuddieHeaderButton {
@@ -52,7 +51,8 @@ public class AddAsBuddieHeaderButton {
 
     @Inject
     public AddAsBuddieAction(final ChatClient chatEngine, final Session session,
-        final StateManager stateManager, final I18nTranslationService i18n, final CoreResources img) {
+        final ChatInstances chatInstances, final StateManager stateManager,
+        final I18nTranslationService i18n, final CoreResources img) {
       super();
       this.chatEngine = chatEngine;
       this.session = session;
@@ -62,7 +62,7 @@ public class AddAsBuddieHeaderButton {
           setState(event.getState());
         }
       });
-      Suco.get(XmppRoster.class).addRosterGroupChangedHandler(new RosterGroupChangedHandler() {
+      chatInstances.roster.addRosterGroupChangedHandler(new RosterGroupChangedHandler() {
 
         @Override
         public void onGroupChanged(final RosterGroupChangedEvent event) {

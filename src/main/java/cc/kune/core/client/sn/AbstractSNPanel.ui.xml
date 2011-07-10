@@ -14,8 +14,9 @@
       <g:Label ui:field="firstDeckLabel" addStyleNames="k-sn-novisible-label" />
       <g:Label ui:field="sndDeckLabel" addStyleNames="k-sn-orphan-label" />
       <g:FlowPanel width="100%" ui:field="categoriesFlow">
+      <!--  Seed AbstractSNPanel.CATEG_HEIGHT-->
         <g:DockLayoutPanel unit="EM" width="100%" ui:field="firstCategoryPanel"
-          addStyleNames="k-sn-1st-panel" height="80px">
+          addStyleNames="k-sn-1st-panel" height="84px">
           <g:north size="1.2">
             <g:FlowPanel>
               <g:Label text="Admins" ui:field="firstCategoryLabel"
@@ -32,7 +33,7 @@
         </g:DockLayoutPanel>
         <g:DockLayoutPanel unit="EM" width="100%"
           ui:field="sndCategoryPanel" addStyleNames="k-sn-2nd-panel"
-          height="80px">
+          height="84px">
           <g:north size="1.2">
             <g:FlowPanel>
               <g:Label text="Collabs" ui:field="sndCategoryLabel"
@@ -50,7 +51,7 @@
         </g:DockLayoutPanel>
         <g:DockLayoutPanel unit="EM" width="100%"
           ui:field="trdCategoryPanel" addStyleNames="k-sn-3rd-panel"
-          height="80px">
+          height="84px">
           <g:north size="1.2">
             <g:FlowPanel>
               <g:Label text="Pendings" ui:field="trdCategoryLabel"

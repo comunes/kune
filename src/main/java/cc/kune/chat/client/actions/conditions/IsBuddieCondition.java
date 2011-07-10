@@ -17,8 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.sn.actions.conditions;
+package cc.kune.chat.client.actions.conditions;
 
+import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiAddCondition;
 import cc.kune.common.client.errors.UIException;
@@ -30,40 +31,40 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class IsNotMeCondition implements GuiAddCondition {
+public class IsBuddieCondition implements GuiAddCondition {
 
-  protected final Session session;
+  private final ChatClient chatClient;
+  private final Session session;
 
   @Inject
-  public IsNotMeCondition(final Session session) {
+  public IsBuddieCondition(final Session session, final ChatClient chatClient) {
+    this.chatClient = chatClient;
     this.session = session;
   }
 
-  private String currentName() {
-    return session.getCurrentUser().getShortName();
+  private boolean isBuddie(final String targetName) {
+    return chatClient.isBuddie(targetName);
   }
 
-  private boolean isNotThisGroup(final GuiActionDescrip descr) {
+  private boolean isThisGroupInRoster(final GuiActionDescrip descr) {
     final String targetName = ((GroupDTO) descr.getTarget()).getShortName();
-    final String currentName = currentName();
-    return !currentName.equals(targetName);
+    return isBuddie(targetName);
   }
 
-  private boolean isNotThisPerson(final GuiActionDescrip descr) {
+  private boolean isThisPersonInRoster(final GuiActionDescrip descr) {
     final String targetName = ((UserSimpleDTO) descr.getTarget()).getShortName();
-    final String currentName = currentName();
-    return !currentName.equals(targetName);
+    return isBuddie(targetName);
   }
 
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {
     if (session.isNotLogged()) {
-      return true;
+      return false;
     }
     if (descr.getTarget() instanceof UserSimpleDTO) {
-      return isNotThisPerson(descr);
+      return isThisPersonInRoster(descr);
     } else if (descr.getTarget() instanceof GroupDTO) {
-      return isNotThisGroup(descr);
+      return isThisGroupInRoster(descr);
     } else {
       throw new UIException("Unsupported target");
     }

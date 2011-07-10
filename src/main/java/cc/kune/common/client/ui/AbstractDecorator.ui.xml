@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  <ui:style>
+    .image {
+      position: relative;
+      top: 0px;
+      left: 0px;
+      float: left;
+    }
+
+    .container {
+      float: left;
+    }
+  </ui:style>
+
+  <g:FlowPanel ui:field="mainPanel">
+    <g:SimplePanel ui:field="widgetContainer" styleName="{style.container}" />
+      <g:Image ui:field="decorationImage"
+    styleName="{style.image}" />
+  </g:FlowPanel>
+</ui:UiBinder>

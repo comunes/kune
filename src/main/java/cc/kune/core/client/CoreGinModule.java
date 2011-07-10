@@ -217,7 +217,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
     s(ErrorsDialog.class);
     s(XMLActionsParser.class);
-    bind(Services.class).to(GWTServices.class);
+    s(Services.class, GWTServices.class);
   }
 
 }

@@ -24,7 +24,6 @@ import cc.kune.core.client.state.GroupChangedEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.options.logo.CurrentLogoChangedEvent;
 import cc.kune.gspace.client.options.logo.CurrentLogoChangedEvent.CurrentLogoChangedHandler;
@@ -54,7 +53,7 @@ public class EntityHeaderPresenter extends
 
     void setLargeFont();
 
-    void setLogoImage(StateToken stateToken);
+    void setLogoImage(GroupDTO group);
 
     void setLogoImageVisible(boolean visible);
 
@@ -66,7 +65,7 @@ public class EntityHeaderPresenter extends
 
     // void setTheme(final WsTheme oldTheme, WsTheme newTheme);
 
-    void showDefUserLogo();
+    void showDefUserLogo(GroupDTO group);
   }
 
   private static final int LARGE_NAME_LIMIT = 17;
@@ -126,12 +125,12 @@ public class EntityHeaderPresenter extends
   void setGroupLogo(final GroupDTO group) {
     if (group.hasLogo()) {
       setLogoText(group.getLongName());
-      getView().setLogoImage(group.getStateToken());
+      getView().setLogoImage(group);
       getView().setLogoImageVisible(true);
     } else {
       setLogoText(group.getLongName());
       if (group.isPersonal()) {
-        getView().showDefUserLogo();
+        getView().showDefUserLogo(group);
         getView().setLogoImageVisible(true);
       } else {
         getView().setLogoImageVisible(false);

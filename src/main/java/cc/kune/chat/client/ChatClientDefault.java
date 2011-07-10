@@ -55,7 +55,6 @@ import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.reconnect.client.SessionReconnect;
 import com.calclab.emite.xep.avatar.client.AvatarManager;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
@@ -69,7 +68,6 @@ import com.calclab.hablar.html.client.HtmlConfig;
 import com.calclab.hablar.icons.alt.client.AltIconsBundle;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.login.client.LoginConfig;
-import com.calclab.suco.client.Suco;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.core.client.GWT;
@@ -112,7 +110,9 @@ public class ChatClientDefault implements ChatClient {
   private static final String CHAT_TITLE = "Chat ;)";
 
   private final ChatClientAction action;
+  private final AvatarManager avatarManager;
   protected IconLabelDescriptor chatIcon;
+  private final ChatInstances chatInstances;
   private final ChatManager chatManager;
   private final ChatOptions chatOptions;
   private final ChatResources chatResources;
@@ -122,7 +122,9 @@ public class ChatClientDefault implements ChatClient {
   private final RoomManager roomManager;
   private final XmppRoster roster;
   private final Session session;
+
   private final GlobalShortcutRegister shorcutRegister;
+
   private final SitebarActions siteActions;
 
   private final XmppSession xmppSession;
@@ -131,10 +133,10 @@ public class ChatClientDefault implements ChatClient {
   public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n,
       final SitebarActions siteActions, final Session session,
       final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions,
-      final ChatResources chatResources) {
-
+      final ChatResources chatResources, final ChatInstances chatInstances) {
     this.eventBus = eventBus;
     this.i18n = i18n;
+    this.chatInstances = chatInstances;
     action = new ChatClientAction(eventBus, chatResources);
     this.siteActions = siteActions;
     this.session = session;
@@ -142,11 +144,13 @@ public class ChatClientDefault implements ChatClient {
     this.chatOptions = chatOptions;
     this.chatResources = chatResources;
     chatResources.css().ensureInjected();
-    this.xmppSession = Suco.get(XmppSession.class);
-    this.roster = Suco.get(XmppRoster.class);
-    this.chatManager = Suco.get(ChatManager.class);
-    this.roomManager = Suco.get(RoomManager.class);
-    Suco.get(SessionReconnect.class);
+    this.xmppSession = chatInstances.xmppSession;
+    this.roster = chatInstances.roster;
+    this.chatManager = chatInstances.chatManager;
+    this.roomManager = chatInstances.roomManager;
+    this.avatarManager = chatInstances.avatarManager;
+    // Not necessary, in ChatInstance
+    // Suco.get(SessionReconnect.class);
 
     session.onAppStart(true, new AppStartEvent.AppStartHandler() {
       @Override
@@ -305,7 +309,7 @@ public class ChatClientDefault implements ChatClient {
     final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
     final Hablar hablar = widget.getHablar();
     HablarComplete.install(hablar, config);
-    new KuneHablarSignals(eventBus, xmppSession, hablar, action);
+    new KuneHablarSignals(eventBus, xmppSession, hablar, action, chatInstances);
     if (htmlConfig.hasLogger) {
       new HablarConsole(hablar);
     }
@@ -414,7 +418,7 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public void setAvatar(final String photoBinary) {
-    Suco.get(AvatarManager.class).setVCardAvatar(photoBinary);
+    avatarManager.setVCardAvatar(photoBinary);
   }
 
   private void setSize(final Widget widget, final HtmlConfig htmlConfig) {
@@ -455,6 +459,6 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public XmppURI uriFrom(final String shortName) {
-    return XmppURI.jid(shortName + "@" + chatOptions.domain);
+    return chatOptions.uriFrom(shortName);
   }
 }

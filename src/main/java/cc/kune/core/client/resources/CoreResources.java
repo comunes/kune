@@ -271,6 +271,42 @@ public interface CoreResources extends ClientBundle {
   @Source("charfontname.png")
   ImageResource charfontname();
 
+  @Source("chat-dot-available-medium.png")
+  ImageResource chatDotAvailableMedium();
+
+  @Source("chat-dot-available-small.png")
+  ImageResource chatDotAvailableSmall();
+
+  @Source("chat-dot-away-medium.png")
+  ImageResource chatDotAwayMedium();
+
+  @Source("chat-dot-away-small.png")
+  ImageResource chatDotAwaySmall();
+
+  @Source("chat-dot-busy-medium.png")
+  ImageResource chatDotBusyMedium();
+
+  @Source("chat-dot-busy-small.png")
+  ImageResource chatDotBusySmall();
+
+  @Source("chat-dot-extended-away-medium.png")
+  ImageResource chatDotExtendedAwayMedium();
+
+  @Source("chat-dot-extended-away-small.png")
+  ImageResource chatDotExtendedAwaySmall();
+
+  @Source("chat-dot-invisible-medium.png")
+  ImageResource chatDotInvisibleMedium();
+
+  @Source("chat-dot-invisible-small.png")
+  ImageResource chatDotInvisibleSmall();
+
+  @Source("chat-dot-offline-medium.png")
+  ImageResource chatDotOfflineMedium();
+
+  @Source("chat-dot-offline-small.png")
+  ImageResource chatDotOfflineSmall();
+
   @Source("checked.png")
   ImageResource checked();
 

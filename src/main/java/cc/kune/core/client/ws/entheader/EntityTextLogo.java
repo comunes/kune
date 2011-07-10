@@ -19,11 +19,15 @@
  */
 package cc.kune.core.client.ws.entheader;
 
+import cc.kune.core.client.avatar.MediumAvatarDecorator;
+
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 
 public class EntityTextLogo extends VerticalPanel {
 
@@ -34,16 +38,20 @@ public class EntityTextLogo extends VerticalPanel {
   private static final String LOGO_MEDIUM_FONT_STYLE = "k-elogo-l-m";
   public static final String LOGO_NAME = "k-elogop-ln";
   private static final String LOGO_SMALL_FONT_STYLE = "k-elogo-l-s";
+  private final MediumAvatarDecorator avatarDecorator;
   private final Image logoImage;
   private final Label logoLabel;
 
-  public EntityTextLogo() {
+  @Inject
+  public EntityTextLogo(final MediumAvatarDecorator avatarDecorator) {
     // Initialize
     super();
+    this.avatarDecorator = avatarDecorator;
     final HorizontalPanel generalHP = new HorizontalPanel();
     final VerticalPanel logoTextVP = new VerticalPanel();
     logoImage = new Image();
     logoLabel = new Label();
+    avatarDecorator.setWidget(logoImage);
     final Label expandCell = new Label("");
 
     logoImage.ensureDebugId(LOGO_IMAGE);
@@ -51,7 +59,7 @@ public class EntityTextLogo extends VerticalPanel {
 
     // Layout
     add(generalHP);
-    generalHP.add(logoImage);
+    generalHP.add((Widget) avatarDecorator);
     generalHP.add(logoTextVP);
     logoTextVP.add(logoLabel);
 
@@ -84,14 +92,16 @@ public class EntityTextLogo extends VerticalPanel {
     logoLabel.addStyleName(LOGO_LARGE_FONT_STYLE);
   }
 
-  public void setLogoImage(final AbstractImagePrototype imageProto) {
+  public void setLogoImage(final AbstractImagePrototype imageProto, final String groupName) {
     imageProto.applyTo(logoImage);
+    avatarDecorator.setItem(groupName);
   }
 
-  public void setLogoImage(final String url) {
+  public void setLogoImage(final String url, final String groupName) {
     logoImage.setUrl("images/clear.gif");
     Image.prefetch(url);
     logoImage.setUrl(url);
+    avatarDecorator.setItem(groupName);
   }
 
   public void setLogoText(final String text) {
@@ -104,6 +114,7 @@ public class EntityTextLogo extends VerticalPanel {
 
   public void setLogoVisible(final boolean visible) {
     logoImage.setVisible(visible);
+    avatarDecorator.setDecoratorVisible(visible);
   }
 
   public void setMediumFont() {

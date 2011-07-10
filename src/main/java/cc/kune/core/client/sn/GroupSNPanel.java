@@ -24,19 +24,22 @@ import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.sn.GroupSNPresenter.GroupSNView;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   @Inject
   public GroupSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
-      final GSpaceArmor armor) {
-    super(i18n, guiProvider, armor);
+      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator) {
+    super(i18n, guiProvider, armor, avatarDecorator);
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("Group members"));
     Tooltip.to(mainTitle, i18n.t("People and groups collaborating in this group"));
@@ -59,14 +62,16 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   public void addAdmin(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
     final BasicThumb thumb = createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle, menu);
-    firstCategoryFlow.add(thumb);
+    firstCategoryFlow.add(group.isPersonal() ? (Widget) decorateAvatarWithXmppStatus(
+        group.getShortName(), thumb) : thumb);
   }
 
   @Override
   public void addCollab(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
     final BasicThumb thumb = createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle, menu);
-    sndCategoryFlow.add(thumb);
+    sndCategoryFlow.add(group.isPersonal() ? (Widget) decorateAvatarWithXmppStatus(group.getShortName(),
+        thumb) : thumb);
   }
 
   @Override
