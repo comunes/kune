@@ -6,8 +6,12 @@ import cc.kune.core.client.avatar.AvatarDecorator;
 import com.calclab.emite.core.client.events.StateChangedEvent;
 import com.calclab.emite.core.client.events.StateChangedHandler;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.im.client.presence.PresenceManager;
+import com.calclab.emite.im.client.presence.events.OwnPresenceChangedEvent;
+import com.calclab.emite.im.client.presence.events.OwnPresenceChangedHandler;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
@@ -29,11 +33,14 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
   private final ImageResource chatDotBusy;
   private final ImageResource chatDotExtendedAway;
   private final ImageResource chatDotXA;
+  private final HandlerRegistration presenceHandler;
+  private final PresenceManager presenceManager;
   private final XmppRoster roster;
   private final HandlerRegistration rosterHandler;
   private final XmppSession session;
   private final HandlerRegistration sessionStateChangedHandler;
   private XmppURI uri;
+  private final XmppSession xmppSession;
 
   public AvatarDecoratorImpl(final ChatInstances chatInstances, final ChatClient chatClient,
       final ImageResource chatDotBusy, final ImageResource chatDotXA, final ImageResource chatDotAway,
@@ -52,6 +59,8 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
       }
     });
     roster = chatInstances.roster;
+    xmppSession = chatInstances.xmppSession;
+    presenceManager = chatInstances.presenceManager;
     rosterHandler = roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
       @Override
       public void onRosterItemChanged(final RosterItemChangedEvent event) {
@@ -61,11 +70,21 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
         }
       }
     });
-
+    presenceHandler = presenceManager.addOwnPresenceChangedHandler(new OwnPresenceChangedHandler() {
+      @Override
+      public void onOwnPresenceChanged(final OwnPresenceChangedEvent event) {
+        refresh();
+      }
+    });
   }
 
   private void clearDecorator() {
     AvatarDecoratorImpl.this.clearImage();
+  }
+
+  protected boolean isMe() {
+    final XmppURI currentUserURI = xmppSession.getCurrentUserURI();
+    return currentUserURI != null && currentUserURI.getJID().equals(uri);
   }
 
   private void refresh() {
@@ -73,11 +92,16 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
       @Override
       public void execute() {
         if (uri != null) {
-          final RosterItem item = roster.getItemByJID(uri);
-          if (session.isReady() && item != null) {
-            setIcon(item.isAvailable(), item.getShow(), item.getStatus());
+          if (isMe()) {
+            final Presence ownPresence = presenceManager.getOwnPresence();
+            setIcon(xmppSession.isReady(), ownPresence.getShow(), ownPresence.getStatus());
           } else {
-            clearDecorator();
+            final RosterItem item = roster.getItemByJID(uri.getJID());
+            if (session.isReady() && item != null) {
+              setIcon(item.isAvailable(), item.getShow(), item.getStatus());
+            } else {
+              clearDecorator();
+            }
           }
         } else {
           clearDecorator();
@@ -119,6 +143,7 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
           rosterHandler.removeHandler();
           sessionStateChangedHandler.removeHandler();
           attachHandler.removeHandler();
+          presenceHandler.removeHandler();
         }
       }
     });

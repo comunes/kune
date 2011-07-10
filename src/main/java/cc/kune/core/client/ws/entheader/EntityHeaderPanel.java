@@ -86,14 +86,10 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     return mainPanel;
   }
 
-  private String getAvatarDecoratorParam(final GroupDTO group) {
-    return group.isPersonal() ? group.getShortName() : null;
-  }
-
   @Override
   public void reloadImage(final GroupDTO group) {
     entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken())
-        + "&nocache=" + new Date().getTime(), getAvatarDecoratorParam(group));
+        + "&nocache=" + new Date().getTime());
   }
 
   @Deprecated
@@ -118,8 +114,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   @Override
   public void setLogoImage(final GroupDTO group) {
-    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()),
-        getAvatarDecoratorParam(group));
+    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()));
   }
 
   @Override
@@ -137,14 +132,14 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     entityTextLogo.setMediumFont();
   }
 
-  //
-  // @Override
-  // public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-  // if (oldTheme != null) {
-  // entityTextLogo.removeStyleDependentName(oldTheme.toString());
-  // }
-  // entityTextLogo.addStyleDependentName(newTheme.toString());
-  // }
+  @Override
+  public void setOnlineStatusGroup(final String group) {
+    entityTextLogo.setOnlineStatusGroup(group);
+  }
+
+  public void setOnlineStatusVisible(final boolean visible) {
+    entityTextLogo.setOnlineStatusVisible(visible);
+  }
 
   @Override
   public void setSmallFont() {
@@ -152,8 +147,8 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   }
 
   @Override
-  public void showDefUserLogo(final GroupDTO group) {
-    entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.unknown60()),
-        getAvatarDecoratorParam(group));
+  public void showDefUserLogo() {
+    entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.unknown60()));
   }
+
 }

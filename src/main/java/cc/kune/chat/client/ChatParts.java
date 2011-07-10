@@ -94,6 +94,7 @@ public class ChatParts {
             final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithMemberAction.get());
             item.add(isNotMe);
             item.add(isPersonCondition);
+            item.add(isNotBuddieCondition);
             item.add(isLogged);
             return item;
           }
@@ -149,6 +150,9 @@ public class ChatParts {
         snAdminsRegistry.get().add(startChatWithBuddieItem);
         snCollabsItemsRegistry.get().add(startChatWithBuddieItem);
         snPendingItemsRegistry.get().add(startChatWithBuddieItem);
+        snAdminsRegistry.get().add(addAsBuddieItem);
+        snCollabsItemsRegistry.get().add(addAsBuddieItem);
+        snPendingItemsRegistry.get().add(addAsBuddieItem);
 
         userItemsRegistry.get().add(startChatWithBuddieItem);
         userItemsRegistry.get().add(startChatWithPersonItem);

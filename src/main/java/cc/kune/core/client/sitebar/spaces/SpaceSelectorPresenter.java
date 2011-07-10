@@ -150,7 +150,7 @@ public class SpaceSelectorPresenter extends
 
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
-    showTooltipWithDelay();
+    // showTooltipWithDelay();
   }
 
   private void onGroupSpaceSelect() {

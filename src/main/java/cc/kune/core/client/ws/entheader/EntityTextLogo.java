@@ -92,16 +92,14 @@ public class EntityTextLogo extends VerticalPanel {
     logoLabel.addStyleName(LOGO_LARGE_FONT_STYLE);
   }
 
-  public void setLogoImage(final AbstractImagePrototype imageProto, final String groupName) {
+  public void setLogoImage(final AbstractImagePrototype imageProto) {
     imageProto.applyTo(logoImage);
-    avatarDecorator.setItem(groupName);
   }
 
-  public void setLogoImage(final String url, final String groupName) {
+  public void setLogoImage(final String url) {
     logoImage.setUrl("images/clear.gif");
     Image.prefetch(url);
     logoImage.setUrl(url);
-    avatarDecorator.setItem(groupName);
   }
 
   public void setLogoText(final String text) {
@@ -114,12 +112,19 @@ public class EntityTextLogo extends VerticalPanel {
 
   public void setLogoVisible(final boolean visible) {
     logoImage.setVisible(visible);
-    avatarDecorator.setDecoratorVisible(visible);
   }
 
   public void setMediumFont() {
     resetFontSize();
     logoLabel.addStyleName(LOGO_MEDIUM_FONT_STYLE);
+  }
+
+  public void setOnlineStatusGroup(final String group) {
+    avatarDecorator.setItem(group);
+  }
+
+  public void setOnlineStatusVisible(final boolean visible) {
+    avatarDecorator.setDecoratorVisible(visible);
   }
 
   public void setSmallFont() {

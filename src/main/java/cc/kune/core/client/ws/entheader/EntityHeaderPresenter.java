@@ -61,11 +61,13 @@ public class EntityHeaderPresenter extends
 
     void setMediumFont();
 
+    void setOnlineStatusGroup(String group);
+
+    void setOnlineStatusVisible(boolean visible);
+
     void setSmallFont();
 
-    // void setTheme(final WsTheme oldTheme, WsTheme newTheme);
-
-    void showDefUserLogo(GroupDTO group);
+    void showDefUserLogo();
   }
 
   private static final int LARGE_NAME_LIMIT = 17;
@@ -89,12 +91,6 @@ public class EntityHeaderPresenter extends
         reloadGroupLogoImage();
       }
     });
-    // theme.addOnThemeChanged(new Listener2<WsTheme, WsTheme>() {
-    // @Override
-    // public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-    // // getView().setTheme(oldTheme, newTheme);
-    // }
-    // });
   }
 
   @Override
@@ -123,18 +119,24 @@ public class EntityHeaderPresenter extends
   }
 
   void setGroupLogo(final GroupDTO group) {
+    setLogoText(group.getLongName());
     if (group.hasLogo()) {
-      setLogoText(group.getLongName());
       getView().setLogoImage(group);
       getView().setLogoImageVisible(true);
     } else {
-      setLogoText(group.getLongName());
       if (group.isPersonal()) {
-        getView().showDefUserLogo(group);
+        getView().showDefUserLogo();
         getView().setLogoImageVisible(true);
       } else {
         getView().setLogoImageVisible(false);
       }
+    }
+    if (group.isPersonal()) {
+      getView().setOnlineStatusGroup(group.getShortName());
+      getView().setOnlineStatusVisible(true);
+    } else {
+      getView().setOnlineStatusGroup(null);
+      getView().setOnlineStatusVisible(false);
     }
   }
 
