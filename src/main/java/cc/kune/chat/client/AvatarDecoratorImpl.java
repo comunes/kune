@@ -33,7 +33,6 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
   private final ImageResource chatDotBusy;
   private final ImageResource chatDotExtendedAway;
   private final ImageResource chatDotXA;
-  private final HandlerRegistration presenceHandler;
   private final PresenceManager presenceManager;
   private final XmppRoster roster;
   private final HandlerRegistration rosterHandler;
@@ -41,6 +40,7 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
   private final HandlerRegistration sessionStateChangedHandler;
   private XmppURI uri;
   private final XmppSession xmppSession;
+  private HandlerRegistration presenceHandler;
 
   public AvatarDecoratorImpl(final ChatInstances chatInstances, final ChatClient chatClient,
       final ImageResource chatDotBusy, final ImageResource chatDotXA, final ImageResource chatDotAway,

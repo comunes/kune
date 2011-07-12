@@ -41,133 +41,143 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * BasicThumb.java
  */
 public class BasicThumb extends Composite {
-    private static final int NOSIZE = -1;
-    private final Image image;
-    private final Label label;
-    private boolean onOverLabel;
-    private final VerticalPanel panel;
+  private static final int NOSIZE = -1;
+  private final Image image;
+  private Tooltip imageTooltip;
+  private final Label label;
+  private Tooltip labelTooltip;
+  private boolean onOverLabel;
+  private final VerticalPanel panel;
 
-    public BasicThumb(final Object imageRef, final int imgSize, final String text, final int textMaxLenght,
-            final boolean crop) {
-        this(imageRef, imgSize, text, textMaxLenght, crop, null);
-    }
+  public BasicThumb(final Object imageRef, final int imgSize, final String text,
+      final int textMaxLenght, final boolean crop) {
+    this(imageRef, imgSize, text, textMaxLenght, crop, null);
+  }
 
-    /**
-     * 
-     * @param imageRef
-     *            This can be a ImageResource or a String Url
-     * @param imgSize
-     * @param text
-     * @param textMaxLenght
-     * @param crop
-     * @param clickHandler
-     */
-    public BasicThumb(final Object imageRef, final int imgSize, final String text, final int textMaxLenght,
-            final boolean crop, final ClickHandler clickHandler) {
-        super();
-        onOverLabel = false;
-        panel = new VerticalPanel();
-        if (imageRef instanceof String) {
-            final String imageUrl = (String) imageRef;
-            if (imgSize == NOSIZE) {
-                image = new Image(imageUrl);
-            } else {
-                if (crop) {
-                    image = new Image(imageUrl, 0, 0, imgSize, imgSize);
-                } else {
-                    image = new Image(imageUrl);
-                    image.setPixelSize(imgSize, imgSize);
-                }
-            }
-        } else if (imageRef instanceof ImageResource) {
-            image = new Image((ImageResource) imageRef);
-            image.setPixelSize(imgSize, imgSize);
+  /**
+   * 
+   * @param imageRef
+   *          This can be a ImageResource or a String Url
+   * @param imgSize
+   * @param text
+   * @param textMaxLenght
+   * @param crop
+   * @param clickHandler
+   */
+  public BasicThumb(final Object imageRef, final int imgSize, final String text,
+      final int textMaxLenght, final boolean crop, final ClickHandler clickHandler) {
+    super();
+    onOverLabel = false;
+    panel = new VerticalPanel();
+    if (imageRef instanceof String) {
+      final String imageUrl = (String) imageRef;
+      if (imgSize == NOSIZE) {
+        image = new Image(imageUrl);
+      } else {
+        if (crop) {
+          image = new Image(imageUrl, 0, 0, imgSize, imgSize);
         } else {
-            // This should not happen
-            image = new Image();
-            image.setPixelSize(imgSize, imgSize);
-            Log.info("Unrecognized icon of BasicThumb: " + imageRef);
+          image = new Image(imageUrl);
+          image.setPixelSize(imgSize, imgSize);
         }
-        final String title = textMaxLenght == NOSIZE ? text : TextUtils.ellipsis(text, textMaxLenght);
-        label = new Label(title);
-        panel.add(image);
-        panel.add(label);
-        panel.addStyleName("k-basic-thumb");
-        panel.addStyleName("kune-Margin-Mini-trbl");
-        panel.addStyleName("k-pointer");
-        panel.addStyleName("k-floatleft");
-        panel.setCellHorizontalAlignment(label, VerticalPanel.ALIGN_CENTER);
-        if (clickHandler != null) {
-            addClickHandlerImpl(clickHandler);
+      }
+    } else if (imageRef instanceof ImageResource) {
+      image = new Image((ImageResource) imageRef);
+      image.setPixelSize(imgSize, imgSize);
+    } else {
+      // This should not happen
+      image = new Image();
+      image.setPixelSize(imgSize, imgSize);
+      Log.info("Unrecognized icon of BasicThumb: " + imageRef);
+    }
+    final String title = textMaxLenght == NOSIZE ? text : TextUtils.ellipsis(text, textMaxLenght);
+    label = new Label(title);
+    panel.add(image);
+    panel.add(label);
+    panel.addStyleName("k-basic-thumb");
+    panel.addStyleName("kune-Margin-Mini-trbl");
+    panel.addStyleName("k-pointer");
+    panel.addStyleName("k-floatleft");
+    panel.setCellHorizontalAlignment(label, VerticalPanel.ALIGN_CENTER);
+    if (clickHandler != null) {
+      addClickHandlerImpl(clickHandler);
+    }
+    image.addMouseOverHandler(new MouseOverHandler() {
+
+      @Override
+      public void onMouseOver(final MouseOverEvent event) {
+        if (onOverLabel) {
+          label.setVisible(true);
         }
-        image.addMouseOverHandler(new MouseOverHandler() {
+      }
+    });
+    image.addMouseOutHandler(new MouseOutHandler() {
 
-            @Override
-            public void onMouseOver(final MouseOverEvent event) {
-                if (onOverLabel) {
-                    label.setVisible(true);
-                }
-            }
-        });
-        image.addMouseOutHandler(new MouseOutHandler() {
+      @Override
+      public void onMouseOut(final MouseOutEvent event) {
+        if (onOverLabel) {
+          label.setVisible(false);
+        }
+      }
+    });
+    initWidget(panel);
+  }
 
-            @Override
-            public void onMouseOut(final MouseOutEvent event) {
-                if (onOverLabel) {
-                    label.setVisible(false);
-                }
-            }
-        });
-        initWidget(panel);
+  public BasicThumb(final Object imageRef, final String thumText, final ClickHandler clickHandler) {
+    this(imageRef, NOSIZE, thumText, NOSIZE, false, clickHandler);
+  }
+
+  public BasicThumb(final Object imageRef, final String text, final int textMaxLenght,
+      final ClickHandler clickHandler) {
+    this(imageRef, NOSIZE, text, textMaxLenght, false, clickHandler);
+  }
+
+  public void addClickHandler(final ClickHandler clickHandler) {
+    addClickHandlerImpl(clickHandler);
+  }
+
+  private void addClickHandlerImpl(final ClickHandler clickHandler) {
+    panel.addDomHandler(clickHandler, ClickEvent.getType());
+  }
+
+  public void addDoubleClickHandler(final DoubleClickHandler clickHandler) {
+    addDoubleClickHandlerImpl(clickHandler);
+  }
+
+  private void addDoubleClickHandlerImpl(final DoubleClickHandler clickHandler) {
+    panel.addDomHandler(clickHandler, DoubleClickEvent.getType());
+  }
+
+  public void hideTooltip() {
+    if (imageTooltip != null) {
+      imageTooltip.hide();
+      labelTooltip.hide();
     }
+  }
 
-    public BasicThumb(final Object imageRef, final String thumText, final ClickHandler clickHandler) {
-        this(imageRef, NOSIZE, thumText, NOSIZE, false, clickHandler);
-    }
+  public void setLabelVisible(final boolean visible) {
+    label.setVisible(visible);
+  }
 
-    public BasicThumb(final Object imageRef, final String text, final int textMaxLenght, final ClickHandler clickHandler) {
-        this(imageRef, NOSIZE, text, textMaxLenght, false, clickHandler);
-    }
+  public void setOnOverLabel(final boolean onOverLabel) {
+    this.onOverLabel = onOverLabel;
+  }
 
-    public void addClickHandler(final ClickHandler clickHandler) {
-        addClickHandlerImpl(clickHandler);
-    }
+  public void setText(final String text) {
+    label.setText(text);
+  }
 
-    private void addClickHandlerImpl(final ClickHandler clickHandler) {
-        panel.addDomHandler(clickHandler, ClickEvent.getType());
-    }
+  public void setThumbUrl(final String url) {
+    image.setUrl(url);
+  }
 
-    public void addDoubleClickHandler(final DoubleClickHandler clickHandler) {
-        addDoubleClickHandlerImpl(clickHandler);
-    }
+  public void setTooltip(final String tip) {
+    imageTooltip = Tooltip.to(image, tip);
+    labelTooltip = Tooltip.to(label, tip);
+  }
 
-    private void addDoubleClickHandlerImpl(final DoubleClickHandler clickHandler) {
-        panel.addDomHandler(clickHandler, DoubleClickEvent.getType());
-    }
-
-    public void setLabelVisible(final boolean visible) {
-        label.setVisible(visible);
-    }
-
-    public void setOnOverLabel(final boolean onOverLabel) {
-        this.onOverLabel = onOverLabel;
-    }
-
-    public void setText(final String text) {
-        label.setText(text);
-    }
-
-    public void setThumbUrl(final String url) {
-        image.setUrl(url);
-    }
-
-    public void setTooltip(final String tip) {
-        Tooltip.to(image, tip);
-        Tooltip.to(label, tip);
-    }
-
-    public void setTooltip(final String tipTitle, final String tip) {
-        Tooltip.to(image, tip);
-        Tooltip.to(label, tip);
-    }
+  public void setTooltip(final String tipTitle, final String tip) {
+    imageTooltip = Tooltip.to(image, tip);
+    labelTooltip = Tooltip.to(label, tip);
+  }
 }

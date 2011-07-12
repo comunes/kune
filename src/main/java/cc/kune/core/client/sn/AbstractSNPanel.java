@@ -127,21 +127,27 @@ public class AbstractSNPanel extends ViewImpl {
   public BasicThumb createThumb(final String text, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menuitems) {
     final BasicThumb thumb = new BasicThumb(avatarUrl, AVATARSIZE, text, AVATARLABELMAXSIZE, false);
-    final MenuDescriptor menu = new MenuDescriptor();
-    menu.setStandalone(true);
-    menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
-    for (final GuiActionDescrip item : menuitems) {
-      item.setParent(menu);
-    }
+
     final ClickHandler clickHand = new ClickHandler() {
+      MenuDescriptor menu;
+
       @Override
       public void onClick(final ClickEvent event) {
+        if (menu == null) {
+          menu = new MenuDescriptor();
+          menu.setStandalone(true);
+          menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
+          for (final GuiActionDescrip item : menuitems) {
+            item.setParent(menu);
+          }
+          actions.add(menu);
+          actions.add(menuitems);
+        }
+        thumb.hideTooltip();
         menu.show(thumb);
       }
     };
     thumb.addClickHandler(clickHand);
-    actions.add(menu);
-    actions.add(menuitems);
     thumb.setTooltip(tooltipTitle, tooltip);
     thumb.setLabelVisible(false);
     return thumb;

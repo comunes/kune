@@ -34,6 +34,12 @@ public class TooltipTimers {
     this.securityTimer = securityTimer;
   }
 
+  public void cancel() {
+    showTimer.cancel();
+    hideTimer.cancel();
+    securityTimer.cancel();
+  }
+
   public void onOut() {
     if (showTimer.isScheduled()) {
       showTimer.cancel();

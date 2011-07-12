@@ -118,6 +118,12 @@ public class Tooltip extends PopupPanel {
   }
 
   @Override
+  public void hide() {
+    super.hide();
+    timers.cancel();
+  }
+
+  @Override
   public boolean isVisible() {
     return super.isShowing();
   }

@@ -36,11 +36,13 @@ import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.events.AvatarChangedEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.Session;
@@ -54,7 +56,11 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
+import com.calclab.emite.im.client.roster.SubscriptionManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.im.client.roster.events.SubscriptionRequestReceivedEvent;
+import com.calclab.emite.im.client.roster.events.SubscriptionRequestReceivedHandler;
 import com.calclab.emite.xep.avatar.client.AvatarManager;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
@@ -81,12 +87,10 @@ public class ChatClientDefault implements ChatClient {
 
   public class ChatClientAction extends AbstractExtendedAction {
 
-    private final EventBus eventBus;
     private final ChatResources res;
 
-    public ChatClientAction(final EventBus eventBus, final ChatResources res) {
+    public ChatClientAction(final ChatResources res) {
       super();
-      this.eventBus = eventBus;
       this.res = res;
       putValue(Action.SMALL_ICON, res.chat());
 
@@ -94,7 +98,7 @@ public class ChatClientDefault implements ChatClient {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      eventBus.fireEvent(new ToggleShowChatDialogEvent());
+      kuneEventBus.fireEvent(new ToggleShowChatDialogEvent());
     }
 
     public void setBlink(final boolean blink) {
@@ -106,7 +110,6 @@ public class ChatClientDefault implements ChatClient {
   }
 
   protected static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
-
   private static final String CHAT_TITLE = "Chat ;)";
 
   private final ChatClientAction action;
@@ -117,27 +120,27 @@ public class ChatClientDefault implements ChatClient {
   private final ChatOptions chatOptions;
   private final ChatResources chatResources;
   private Dialog dialog;
-  private final EventBus eventBus;
   private final I18nTranslationService i18n;
+  private final EventBus kuneEventBus;
+  private final CoreResources res;
   private final RoomManager roomManager;
   private final XmppRoster roster;
   private final Session session;
-
   private final GlobalShortcutRegister shorcutRegister;
-
   private final SitebarActions siteActions;
-
+  private final SubscriptionManager subscriptionManager;
   private final XmppSession xmppSession;
 
   @Inject
-  public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n,
-      final SitebarActions siteActions, final Session session,
+  public ChatClientDefault(final EventBus kuneEventBus, final I18nTranslationService i18n,
+      final SitebarActions siteActions, final Session session, final CoreResources res,
       final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions,
       final ChatResources chatResources, final ChatInstances chatInstances) {
-    this.eventBus = eventBus;
+    this.kuneEventBus = kuneEventBus;
     this.i18n = i18n;
+    this.res = res;
     this.chatInstances = chatInstances;
-    action = new ChatClientAction(eventBus, chatResources);
+    action = new ChatClientAction(chatResources);
     this.siteActions = siteActions;
     this.session = session;
     this.shorcutRegister = shorcutRegister;
@@ -149,6 +152,8 @@ public class ChatClientDefault implements ChatClient {
     this.chatManager = chatInstances.chatManager;
     this.roomManager = chatInstances.roomManager;
     this.avatarManager = chatInstances.avatarManager;
+    this.subscriptionManager = chatInstances.subscriptionManager;
+
     // Not necessary, in ChatInstance
     // Suco.get(SessionReconnect.class);
 
@@ -173,29 +178,30 @@ public class ChatClientDefault implements ChatClient {
             logout();
           }
         });
-        eventBus.addHandler(ShowChatDialogEvent.getType(), new ShowChatDialogHandler() {
+        kuneEventBus.addHandler(ShowChatDialogEvent.getType(), new ShowChatDialogHandler() {
           @Override
           public void onShowChatDialog(final ShowChatDialogEvent event) {
             createActionIfNeeded();
             showDialog(event.show);
           }
         });
-        eventBus.addHandler(ToggleShowChatDialogEvent.getType(), new ToggleShowChatDialogHandler() {
+        kuneEventBus.addHandler(ToggleShowChatDialogEvent.getType(), new ToggleShowChatDialogHandler() {
           @Override
           public void onToggleShowChatDialog(final ToggleShowChatDialogEvent event) {
             toggleShowDialog();
           }
         });
-        eventBus.addHandler(AvatarChangedEvent.getType(), new AvatarChangedEvent.AvatarChangedHandler() {
+        kuneEventBus.addHandler(AvatarChangedEvent.getType(),
+            new AvatarChangedEvent.AvatarChangedHandler() {
 
-          @Override
-          public void onAvatarChanged(final AvatarChangedEvent event) {
-            setAvatar(event.getPhotoBinary());
-          }
-        });
+              @Override
+              public void onAvatarChanged(final AvatarChangedEvent event) {
+                setAvatar(event.getPhotoBinary());
+              }
+            });
       }
     });
-    eventBus.addHandler(AppStopEvent.getType(), new AppStopEvent.AppStopHandler() {
+    kuneEventBus.addHandler(AppStopEvent.getType(), new AppStopEvent.AppStopHandler() {
       @Override
       public void onAppStop(final AppStopEvent event) {
         logout();
@@ -205,7 +211,7 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public void addNewBuddie(final String shortName) {
-    roster.requestAddItem(uriFrom(shortName), shortName, "");
+    roster.requestAddItem(uriFrom(shortName), shortName);
   }
 
   @Override
@@ -309,7 +315,7 @@ public class ChatClientDefault implements ChatClient {
     final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
     final Hablar hablar = widget.getHablar();
     HablarComplete.install(hablar, config);
-    new KuneHablarSignals(eventBus, xmppSession, hablar, action, chatInstances);
+    new KuneHablarSignals(kuneEventBus, xmppSession, hablar, action, chatInstances);
     if (htmlConfig.hasLogger) {
       new HablarConsole(hablar);
     }
@@ -317,8 +323,29 @@ public class ChatClientDefault implements ChatClient {
     if (htmlConfig.hasLogin) {
       new HablarLogin(hablar, LoginConfig.getFromMeta());
     }
-    new KuneSoundManager(eventBus, config.soundConfig);
+    new KuneSoundManager(kuneEventBus, config.soundConfig);
     createDialog(widget, htmlConfig);
+    chatInstances.subscriptionHandler.setBehaviour(Behaviour.none);
+    subscriptionManager.addSubscriptionRequestReceivedHandler(new SubscriptionRequestReceivedHandler() {
+      @Override
+      public void onSubscriptionRequestReceived(final SubscriptionRequestReceivedEvent event) {
+        final XmppURI uri = event.getFrom();
+        final String nick = event.getNick();
+        NotifyUser.askConfirmation(res.question32(), i18n.t("Confirm new buddie"), i18n.t(
+            "[%s] had added you as a buddy. Do you want to add him/her also?", uri.getJID().toString()),
+            new SimpleResponseCallback() {
+              @Override
+              public void onCancel() {
+                subscriptionManager.refuseSubscriptionRequest(uri.getJID());
+              }
+
+              @Override
+              public void onSuccess() {
+                subscriptionManager.approveSubscriptionRequest(uri.getJID(), nick);
+              }
+            });
+      }
+    });
   }
 
   @Override

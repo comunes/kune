@@ -457,6 +457,9 @@ public interface CoreResources extends ClientBundle {
   @Source("prefs.png")
   ImageResource prefs();
 
+  @Source("question32.png")
+  ImageResource question32();
+
   @Source("radiochecked.png")
   ImageResource radiochecked();
 

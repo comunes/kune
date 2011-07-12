@@ -19,8 +19,8 @@
  */
 package cc.kune.chat.client;
 
+import cc.kune.chat.client.actions.AddAsBuddieAction;
 import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
-import cc.kune.chat.client.actions.AddAsBuddieHeaderButton.AddAsBuddieAction;
 import cc.kune.chat.client.actions.ChatClientActions;
 import cc.kune.chat.client.actions.ChatSitebarActions;
 import cc.kune.chat.client.actions.OpenGroupPublicChatRoomAction;
@@ -93,8 +93,8 @@ public class ChatParts {
           public MenuItemDescriptor get() {
             final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithMemberAction.get());
             item.add(isNotMe);
-            item.add(isPersonCondition);
             item.add(isNotBuddieCondition);
+            item.add(isPersonCondition);
             item.add(isLogged);
             return item;
           }
@@ -116,8 +116,8 @@ public class ChatParts {
             final MenuItemDescriptor item = new MenuItemDescriptor(action);
             item.add(isNotMe);
             item.add(isNotBuddieCondition);
-            item.add(isLogged);
             item.add(isPersonCondition);
+            item.add(isLogged);
             /**
              * FIXME Buggy & duplicate code with {@link AddAsBuddieHeaderButton}
              */

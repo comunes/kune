@@ -14,19 +14,19 @@ public class XMLWaveExtension extends DelegatedPacket {
   }
 
   public String getGadgetUrl() {
-    return getFirstChild("gadgetUrl").getText();
+    return getFirstChild("gadgetUrl").getText().trim();
   }
 
   public String getIconCss() {
-    return getFirstChild("iconCss").getText();
+    return getFirstChild("iconCss").getText().trim();
   }
 
   public String getIconUrl() {
-    return getFirstChild("iconUrl").getText();
+    return getFirstChild("iconUrl").getText().trim();
   }
 
   public String getInstallerUrl() {
-    return getFirstChild("installerUrl").getText();
+    return getFirstChild("installerUrl").getText().trim();
   }
 
 }

@@ -22,6 +22,32 @@
    style="display:inline">
   <defs
      id="defs3184">
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path4904"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mstart"
+       style="overflow:visible">
+      <path
+         id="path4928"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) translate(0,0)" />
+    </marker>
     <linearGradient
        inkscape:collect="always"
        id="linearGradient4127">
@@ -52,9 +78,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="598.70994"
-     inkscape:cy="950.73513"
+     inkscape:zoom="1"
+     inkscape:cx="488.6491"
+     inkscape:cy="1879.6308"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
@@ -97,7 +123,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1432,30 +1458,6 @@
          x="-130.78345"
          y="757.93884">rates</tspan></text>
     <text
-       transform="matrix(1.0176358,-0.00753392,0.00727468,0.98261598,0,0)"
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
-       sodipodi:linespacing="100%"
-       id="text3993"
-       y="81.933052"
-       x="-115.68397"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;display:inline;font-family:'festus!';-inkscape-font-specification:'festus!'"
-       xml:space="preserve"><tspan
-         y="81.933052"
-         x="-115.68397"
-         sodipodi:role="line"
-         id="tspan3995">icons of the </tspan><tspan
-         y="99.933052"
-         x="-115.68397"
-         sodipodi:role="line"
-         id="tspan3997">minimized apps</tspan><tspan
-         y="117.93305"
-         x="-115.68397"
-         sodipodi:role="line"
-         id="tspan4063"
-         dx="0 4">(jabber chat, etc)</tspan></text>
-    <text
        xml:space="preserve"
        style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;display:inline;font-family:'festus!';-inkscape-font-specification:'festus!'"
        x="1012.2725"
@@ -2473,6 +2475,1434 @@
        id="path3823"
        style="color:#000000;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        sodipodi:type="star" />
+    <rect
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6473"
+       width="772"
+       height="1148"
+       x="43"
+       y="-1448"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3824"
+       width="707.21039"
+       height="630.90399"
+       x="73.875587"
+       y="-995.74152"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-968.24432"
+       x="80.351868"
+       height="32.98317"
+       width="146.36401"
+       id="rect4088"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3872"
+       width="527.24084"
+       height="29.156178"
+       x="238.32439"
+       y="-665.15656"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.82999998;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3826"
+       sodipodi:cx="243.24474"
+       sodipodi:cy="-1704.0453"
+       sodipodi:rx="79.195961"
+       sodipodi:ry="79.195961"
+       d="m 322.4407,-1704.0453 a 79.195961,79.195961 0 1 1 -158.39193,0 79.195961,79.195961 0 1 1 158.39193,0 z"
+       transform="translate(-724.07735,1029.5475)" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3830"
+       width="146.36401"
+       height="257.33154"
+       x="80.351868"
+       y="-928.98218"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6451"
+       width="16"
+       height="229"
+       x="211"
+       y="-930"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="7.4279795"
+       ry="7.4279795"
+       y="-664.66113"
+       x="306.63422"
+       height="46.690155"
+       width="66.851814"
+       id="rect4056"
+       style="color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4058"
+       width="66.851814"
+       height="46.690155"
+       x="376.63422"
+       y="-664.66113"
+       ry="7.4279795"
+       rx="7.4279795"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#ececec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3832"
+       width="529.53052"
+       height="170.80717"
+       x="236.64713"
+       y="-637.33972"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-967.83386"
+       x="234.48746"
+       height="294.62897"
+       width="375.62448"
+       id="rect3834"
+       style="opacity:0.82999998;color:#000000;fill:#f4d7d7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       transform="matrix(1.0176358,-0.00753392,0.00727468,0.98261598,0,0)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       sodipodi:linespacing="100%"
+       id="text3993"
+       y="-735.8465"
+       x="154.39923"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;display:inline;font-family:'festus!';-inkscape-font-specification:'festus! Bold'"
+       xml:space="preserve"><tspan
+         y="-735.8465"
+         x="154.39923"
+         sodipodi:role="line"
+         id="tspan4063"
+         style="stroke-width:0.5">drag &amp; drop</tspan></text>
+    <rect
+       y="-463.78766"
+       x="236.64713"
+       height="67.908195"
+       width="531.96021"
+       id="rect3836"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-969.16553"
+       x="620.72406"
+       height="293.34161"
+       width="146.36401"
+       id="rect3838"
+       style="opacity:0.82999998;color:#000000;fill:#ffaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3840"
+       width="58.312355"
+       height="29.156178"
+       x="236.39433"
+       y="-386.09869"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-390.74152"
+       x="73.875587"
+       height="51.903992"
+       width="707.21039"
+       id="rect6447"
+       style="color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       ry="15.000001"
+       rx="15"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-386.09869"
+       x="236.39433"
+       height="29.156178"
+       width="58.312355"
+       id="rect3842"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3846"
+       width="145.78088"
+       height="29.156178"
+       x="81.324394"
+       y="-657.97308"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-621.97308"
+       x="81.324394"
+       height="29.156178"
+       width="145.78088"
+       id="rect3848"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3850"
+       width="145.78088"
+       height="29.156178"
+       x="81.324394"
+       y="-586.91193"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image15329-3-3"
+       x="84.471268"
+       y="-923.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="241.19073"
+       y="-365.95026"
+       id="text3878"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3880"
+         x="241.19073"
+         y="-365.95026">Send</tspan></text>
+    <rect
+       y="-386.09869"
+       x="302.39435"
+       height="29.156178"
+       width="32.800701"
+       id="rect3882"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3884"
+       width="30.371019"
+       height="29.156178"
+       x="302.39435"
+       y="-386.09869"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text3887"
+       y="-363.95026"
+       x="310.19073"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-363.95026"
+         x="310.19073"
+         id="tspan3889"
+         sodipodi:role="line">:)</tspan></text>
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#d1b8b8;fill-opacity:0.97254902;fill-rule:nonzero;stroke:#a02c2c;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3891"
+       width="349.99832"
+       height="82.609161"
+       x="238.29099"
+       y="-919.56219"
+       ry="31.585857"
+       rx="27.941336"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#d1b8b8;fill-opacity:0.97255111;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6401"
+       width="73.859985"
+       height="21.884439"
+       x="266.71661"
+       y="-932.573"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       width="16"
+       height="32"
+       id="image12519-4"
+       x="210.80858"
+       y="-701.30103"
+       style="display:inline"
+       xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png" />
+    <image
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png"
+       xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png"
+       style="display:inline"
+       y="-706.30103"
+       x="593.80859"
+       id="image3922"
+       height="32"
+       width="16"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       width="16"
+       height="32"
+       id="image3924"
+       x="750.80859"
+       y="-707.30103"
+       style="display:inline"
+       xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png" />
+    <image
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png"
+       xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png"
+       style="display:inline"
+       y="-501.30103"
+       x="749.80859"
+       id="image3926"
+       height="32"
+       width="16"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-910.71503"
+       x="260.10443"
+       id="image3928"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3930"
+       x="296.10443"
+       y="-910.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-910.71503"
+       x="331.10443"
+       id="image3932"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3934"
+       x="366.10443"
+       y="-910.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3936"
+       x="400.10443"
+       y="-910.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-910.71503"
+       x="436.10443"
+       id="image3938"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3940"
+       x="471.10443"
+       y="-910.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-910.71503"
+       x="506.10443"
+       id="image3942"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-875.71503"
+       x="260.10443"
+       id="image3944"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3946"
+       x="296.10443"
+       y="-875.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-875.71503"
+       x="331.10443"
+       id="image3948"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3950"
+       x="366.10443"
+       y="-875.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-910.71503"
+       x="541.10443"
+       id="image3952"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="27.941336"
+       ry="31.585857"
+       y="-820.56219"
+       x="238.29099"
+       height="56.408123"
+       width="349.99832"
+       id="rect3956"
+       style="opacity:0.82999998;color:#000000;fill:#d1b8b8;fill-opacity:0.97254902;fill-rule:nonzero;stroke:#1a1a1a;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3958"
+       x="260.10443"
+       y="-804.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-804.71503"
+       x="296.10443"
+       id="image3960"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3962"
+       x="331.10443"
+       y="-804.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-804.71503"
+       x="366.10443"
+       id="image3964"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-804.71503"
+       x="400.10443"
+       id="image3966"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3968"
+       x="436.10443"
+       y="-804.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-804.71503"
+       x="471.10443"
+       id="image3970"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="31.736002"
+       height="31.743042"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image3972"
+       x="506.10443"
+       y="-804.71503"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text3984"
+       y="-945.57721"
+       x="84.272552"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-945.57721"
+         x="84.272552"
+         id="tspan3986"
+         sodipodi:role="line"
+         style="font-size:18px">Your contacts</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="244.27255"
+       y="-944.57721"
+       id="text4005"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4007"
+         x="244.27255"
+         y="-944.57721"><tspan
+           style="font-size:18px"
+           id="tspan6328">Your Groups of Contacts</tspan><tspan
+           style="font-size:10px"
+           id="tspan6326">(XMPP) </tspan></tspan></text>
+    <text
+       sodipodi:linespacing="100%"
+       id="text4028"
+       y="-947.57721"
+       x="625.78333"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-947.57721"
+         x="625.78333"
+         sodipodi:role="line"
+         style="font-size:18px"
+         id="tspan6332">Groups you</tspan><tspan
+         y="-929.57721"
+         x="625.78333"
+         sodipodi:role="line"
+         style="font-size:18px"
+         id="tspan6461">participate in</tspan></text>
+    <image
+       style="display:inline"
+       y="-920.7627"
+       x="625.47876"
+       id="image4197-4"
+       xlink:href="data:image/png;base64,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 YII= "
+       height="22"
+       width="22"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text4050"
+       y="-637.15228"
+       x="86.734329"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-637.15228"
+         x="86.734329"
+         id="tspan4052"
+         sodipodi:role="line">Add contact</tspan></text>
+    <rect
+       style="color:#000000;fill:#ececec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4054"
+       width="66.851814"
+       height="46.690155"
+       x="236.6342"
+       y="-664.66113"
+       ry="7.4279795"
+       rx="7.4279795"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-663.94092"
+       x="238.39769"
+       id="image4060"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="23.252039"
+       width="23.246883"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="23.246883"
+       height="23.252039"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image4062"
+       x="310.39771"
+       y="-663.94092"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       width="22"
+       height="22"
+       xlink:href="data:image/png;base64,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 YII= "
+       id="image4068"
+       x="625.47876"
+       y="-920.7627"
+       style="display:inline" />
+    <image
+       style="display:inline"
+       y="-662.29431"
+       x="379.29431"
+       id="image4070"
+       xlink:href="data:image/png;base64,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 YII= "
+       height="22"
+       width="22"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Italic"
+       x="244.21739"
+       y="-438.23007"
+       id="text4072"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4074"
+         x="244.21739"
+         y="-438.23007">Write here, write now ;)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="85.766296"
+       y="-601.15228"
+       id="text4076"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4078"
+         x="85.766296"
+         y="-601.15228">New room</tspan></text>
+    <text
+       sodipodi:linespacing="100%"
+       id="text4080"
+       y="-565.15228"
+       x="85.766296"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-565.15228"
+         x="85.766296"
+         id="tspan4082"
+         sodipodi:role="line">Start chat</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#782121;fill-opacity:0.97254902;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="702.0177"
+       y="-644.28217"
+       id="text4084"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4086"
+         x="702.0177"
+         y="-644.28217"
+         style="fill:#782121;fill-opacity:0.97254902">Chat</tspan></text>
+    <path
+       style="fill:#0000ff;stroke:#0000ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 3;stroke-dashoffset:0;marker-start:url(#Arrow1Lstart);marker-mid:none;marker-end:url(#Arrow1Lstart)"
+       d="m 151.11072,-708.23846 c 38.55475,-1.06114 132.11699,0.0538 117.71947,0.0808"
+       id="path4128"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-928.00006"
+       x="594"
+       height="222"
+       width="16"
+       id="rect6453"
+       style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;display:inline;font-family:'festus!';-inkscape-font-specification:'festus! Bold'"
+       x="564.28058"
+       y="-740.25293"
+       id="text6083"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="matrix(1.0176358,-0.00753392,0.00727468,0.98261598,0,0)"><tspan
+         style="stroke-width:0.5"
+         id="tspan6085"
+         sodipodi:role="line"
+         x="564.28058"
+         y="-740.25293">drag &amp; drop</tspan></text>
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path6087"
+       d="m 567.18858,-721.65637 c 38.55475,-1.06114 132.11699,0.0538 117.71947,0.0808"
+       style="fill:#0000ff;stroke:#0000ff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 3;stroke-dashoffset:0;marker-start:url(#Arrow1Lstart);marker-mid:none;marker-end:url(#Arrow1Lstart)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       transform="matrix(1.0176358,-0.00753392,0.00727468,0.98261598,0,0)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       sodipodi:linespacing="100%"
+       id="text6089"
+       y="-590.73108"
+       x="337.89642"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;display:inline;font-family:'festus!';-inkscape-font-specification:'festus! Bold'"
+       xml:space="preserve"><tspan
+         y="-590.73108"
+         x="337.89642"
+         sodipodi:role="line"
+         id="tspan6091"
+         style="stroke-width:0.5">drop here to chat or to make</tspan><tspan
+         y="-562.73108"
+         x="337.89642"
+         sodipodi:role="line"
+         style="stroke-width:0.5"
+         id="tspan6126">a group chat</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="121.27255"
+       y="-901.57721"
+       id="text6116"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6118"
+         x="121.27255"
+         y="-901.57721">Jane</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path6120"
+       sodipodi:cx="118.99664"
+       sodipodi:cy="-1104.4874"
+       sodipodi:rx="5.4711099"
+       sodipodi:ry="5.4711099"
+       d="m 124.46775,-1104.4874 a 5.4711099,5.4711099 0 1 1 -10.94222,0 5.4711099,5.4711099 0 1 1 10.94222,0 z"
+       transform="translate(205.16663,226.26996)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       d="m 124.46775,-1104.4874 a 5.4711099,5.4711099 0 1 1 -10.94222,0 5.4711099,5.4711099 0 1 1 10.94222,0 z"
+       sodipodi:ry="5.4711099"
+       sodipodi:rx="5.4711099"
+       sodipodi:cy="-1104.4874"
+       sodipodi:cx="118.99664"
+       id="path6122"
+       style="color:#000000;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc"
+       transform="translate(-3,211)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       transform="translate(344.16663,226.26996)"
+       d="m 124.46775,-1104.4874 a 5.4711099,5.4711099 0 1 1 -10.94222,0 5.4711099,5.4711099 0 1 1 10.94222,0 z"
+       sodipodi:ry="5.4711099"
+       sodipodi:rx="5.4711099"
+       sodipodi:cy="-1104.4874"
+       sodipodi:cx="118.99664"
+       id="path6124"
+       style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-886.71503"
+       x="84.471268"
+       id="image6128"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="31.743042"
+       width="31.736002"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text6130"
+       y="-864.57721"
+       x="121.27255"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-864.57721"
+         x="121.27255"
+         id="tspan6132"
+         sodipodi:role="line">John</tspan></text>
+    <path
+       transform="translate(-3,248)"
+       sodipodi:type="arc"
+       style="color:#000000;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path6134"
+       sodipodi:cx="118.99664"
+       sodipodi:cy="-1104.4874"
+       sodipodi:rx="5.4711099"
+       sodipodi:ry="5.4711099"
+       d="m 124.46775,-1104.4874 a 5.4711099,5.4711099 0 1 1 -10.94222,0 5.4711099,5.4711099 0 1 1 10.94222,0 z"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text6136"
+       y="-903.15161"
+       x="653.97021"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-903.15161"
+         x="653.97021"
+         id="tspan6138"
+         sodipodi:role="line">Foo</tspan></text>
+    <rect
+       rx="15"
+       ry="15.000001"
+       style="color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6449"
+       width="707.21039"
+       height="51.903992"
+       x="73.875587"
+       y="-1120.7415"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-1422.0948"
+       x="73.875587"
+       height="331.25742"
+       width="707.21039"
+       id="rect6140"
+       style="color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6142"
+       width="146.36401"
+       height="32.98317"
+       x="80.351868"
+       y="-1398.2444"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-1395.1566"
+       x="238.32439"
+       height="29.156178"
+       width="527.24084"
+       id="rect6144"
+       style="opacity:0.82999998;color:#000000;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6148"
+       width="66.851814"
+       height="46.690155"
+       x="306.63422"
+       y="-1394.6611"
+       ry="7.4279795"
+       rx="7.4279795"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="7.4279795"
+       ry="7.4279795"
+       y="-1394.6611"
+       x="376.63422"
+       height="46.690155"
+       width="66.851814"
+       id="rect6150"
+       style="color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-1367.3397"
+       x="236.64713"
+       height="170.80717"
+       width="529.53052"
+       id="rect6152"
+       style="color:#000000;fill:#ececec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6160"
+       width="531.96021"
+       height="67.908195"
+       x="236.64713"
+       y="-1193.7877"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-1116.0986"
+       x="236.39433"
+       height="29.156178"
+       width="58.312355"
+       id="rect6164"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6166"
+       width="58.312355"
+       height="29.156178"
+       x="236.39433"
+       y="-1116.0986"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-1357.9731"
+       x="81.324394"
+       height="29.156178"
+       width="145.78088"
+       id="rect6168"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6170"
+       width="145.78088"
+       height="29.156178"
+       x="81.324394"
+       y="-1321.9731"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-1286.9119"
+       x="81.324394"
+       height="29.156178"
+       width="145.78088"
+       id="rect6172"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text6176"
+       y="-1095.9503"
+       x="241.19073"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-1095.9503"
+         x="241.19073"
+         id="tspan6178"
+         sodipodi:role="line">Send</tspan></text>
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6180"
+       width="32.800701"
+       height="29.156178"
+       x="302.39435"
+       y="-1116.0986"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-1116.0986"
+       x="302.39435"
+       height="29.156178"
+       width="30.371019"
+       id="rect6182"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="310.19073"
+       y="-1093.9503"
+       id="text6184"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6186"
+         x="310.19073"
+         y="-1093.9503">:)</tspan></text>
+    <image
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       width="16"
+       height="32"
+       id="image6196"
+       x="749.80859"
+       y="-1231.301"
+       style="display:inline"
+       xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/scroll2.png" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="84.272552"
+       y="-1377.5771"
+       id="text6242"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6244"
+         x="84.272552"
+         y="-1377.5771">Your contacts</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="86.734329"
+       y="-1337.1523"
+       id="text6256"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6258"
+         x="86.734329"
+         y="-1337.1523">Add contact</tspan></text>
+    <rect
+       rx="7.4279795"
+       ry="7.4279795"
+       y="-1394.6611"
+       x="236.6342"
+       height="46.690155"
+       width="66.851814"
+       id="rect6260"
+       style="color:#000000;fill:#ececec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       width="23.246883"
+       height="23.252039"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image6262"
+       x="238.39769"
+       y="-1393.9409"
+       style="display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="-1393.9409"
+       x="310.39771"
+       id="image6264"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       height="23.252039"
+       width="23.246883"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       width="22"
+       height="22"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAABHNCSVQICAgIfAhkiAAAB71JREFU aIHVml9IXGcah5+j49SZ4zmHOOl0G4Wdtqvp0A6RqknTJt1cJNltWAiFtltKoBakgwy5sA2kF8WL QlZy6V6YSRmUtRZSJA32oliSQiBNyPonmRUJiiSkVNJEE6zOycyoM+fdC3WjiX9mnKNmX/jdfPOd 9/2eec98h/P9RhER7AhFUbyaRpeisK2ggNvJJP95+JB24Gexq8haQkRyFuBXVe7W1zM9OIh0dSGN jaR9PiZVlXtOJyeAMjtqZb02G+CK3W5Gw2HSS03p60Pq6khoGnFd5yKw6/8KUNO4EAqRXG1qIoE0 NZH2eHhoGFwG9jz1gE4nx/x+zKmpzC+bmkLCYSyvF9Mw6Ab2PZWAQJWqEh8eXluKmRmkpQWrpATT MLgOHHhqAIE8TWOotRUr1zWkUkh7O+LzETMMBoBDmw7ocBCqrMS088tOp5GODqSsjJhhMAQcBpQN BwQ8LhexaNT2u0lEEMtCOjuR8nJiuk4UqNhQQE2jLRhcfde0o6PNzViaRryoiAiwZd0BgSrDID4+ vr5wCzU2htTUkHC7mcjPpzbb2zYbOEXXGYhEct9Y1qKeHiQQwNR1BoAq2wHz86kNBDAta+Ph5mVZ SCSCZRjENY02wGMLILDF7Waip2fz4BZqfBwJBkm6XMQcDkJAXk6ARUVEampIbDbY44pGkcpKTE1j aLnbNpPuVWga8bGxzQdaTq2tWKpK3OnkWFaAcxtLtLl5czaWbDQ8jPj9mJrGBaA4U8DD5eXE0unN B8hEU1NIKETS7WYU8K8KaBgMdXZuzOJ++QX57jvkp5+Q33/PLVc4TFpVuQt4V+reobIyYuv1WLAs 5NSpPDl0SBev1yXFxars379Tqqu3S2GhQ8rLNfnwQ1UuXVpb/vp6pjWNayt1b6CjY33gbt5E3nrL La+//qqcOXNGbt68KQtjampKent7pampSZ57TpdPP3VKIpFdjcFBRNe5u1z3Dvh86/Pbi0QU8XgK 5eTJE5JKpWS1GBsbk/ff/5ts3+6W69czr9PVhXg8XF2ue9fb2+2Hu3QJ2bbNkBs3bqwK9ni0trbI iy+qEotlVquxkbSqcnqp7u0rKcFMpeyFM03kpZfccu7cuazh5uOjj/4uwWBhRvV8PiaBvUt1r7ul xf7nXl3dM/LBB4fXDCciMj4+LqWlHvnxx5Vr9fUhqso9QHm8e3u8XsyZGXvhRkcRt7tA7t+/nxOg iMjZs2elulpbsV5dHQmnkxMijz0HDYPL4bD93fvhB+TNNwM5w4mImKYpLpdDpqeXrpVIIJpGfP6g OW/+hFtRlF0OBxUff4xi16n5fPT25lFd/Wdbcqmqygsv/IGBgaU//+orLEWhW0SGgUeAus7JhgYK nU5b1rEoenqKqK7ebVu+qqqdXLv25Pj0NHz5JcnJSY7Pj+UBKIpSJsLOTz55BGxn/PorlJaW2pav pORPjIw8eaO1tiKpFFER+ff8WB6A00nNkSMohYW2rWFR7NgxQzQatS1ff/8VAoHFhlUqBQ0NxCcm HnUPIE9RFKWggNraWtYJD6qrE/T2XrItX19fP6+9tnjs66+RqSluiMjPj8/f6/MxaffOuVBXryIv v1xqyy46MjIixcXPLMqfSiElJZgs4XPkqSpHgkFU277eJWLHDnjw4D5XrlzJOdepU//k4EHHorEz Z8A0GRaRi09c4PFwtatr/bo3r2+/RbZvL5VEIrHm7nV3d4vX65LffnuUN52e9TVYxrxB17k7OLj+ gCLIe++55Nixo2uCSyQS4vf/Ub75ZvG5b0cHYhgMLFcUTeNafT3TGwE4NoY8/3yhfPHFcZmens4Y bmRkRA4e3CvvvONelM+yZs0aVnCkALyqyt3lLGi7dfs2sn+/WyoqyqS/v39VuLa2f8nWrUXy+ecF kkwuztXZiRgGQysVnKf0u92MhkIks3Frc9Hp04ps3eqSd9/9izQ2/kPOnz8vDx48kFu3bklHR4cc P/6ZvPFGQF55RZWlDpzT6VkHCji8KuAcZLGmccHvx1yra5ut7txB2tqQo0edsnu3IS6XQ559tlDe fluXhoY8+f57nujavJqbsebstRXNmCcGnE6OqSpxO9zbbJXpEcnY2P/eGFb1DpcehCpNY6iyEnO9 jM5cVFNDoqiISCaTl/8A8hwOQi4XsWCQ5EZ6giuppwdxu5kgQ0N09Qng0TTaDIN4JIK12fZZIICZ n09tphdlnB2o0nUGAgHMzbLRIhGsOQM0Y5c3qwqAkp9PrdvNRE0NiY10nMbHEcMgThbubtaAC0C3 FBUR0TTizc1YG2HOBIMkNY22rNeaS1WgQteJlpcT6+yc/Y2sB1w0irhcxMjAsrYVcA5SAQ4bBkNl ZcQ6OjJ/nmWqykpMh4PQmtZn50qAQ4bBgM9HrL199kU017StrVhzFvWyPvyGAS4APWAYXC8pwWxp wVrrQfLwMKKq2W8s6w64AHSfYdDt9WKGw1jZ/u3S78dcynd/agAXgO4xDC57PDxsaiKdidcXCpHU NC7kXHsjABeA7tJ1Lmoa8bo6En19S08Nh0nP+ezFOdfcSMAFoGVOJydUlXs+H5ONjaS7umZd2fp6 puf8db8dtZS5gpsSiqIowB5V5UhhITtmZvCJcCcW468iMmpHjf8C6MILrTFT1g8AAAAASUVORK5C YII= "
+       id="image6268"
+       x="379.29431"
+       y="-1392.2943"
+       style="display:inline" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text6270"
+       y="-1168.2301"
+       x="244.21739"
+       style="font-size:22px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999997999999997;color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077561999999999px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Italic"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-1168.2301"
+         x="244.21739"
+         id="tspan6272"
+         sodipodi:role="line">Write here, write now ;)</tspan></text>
+    <text
+       sodipodi:linespacing="100%"
+       id="text6274"
+       y="-1301.1523"
+       x="85.766296"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-1301.1523"
+         x="85.766296"
+         id="tspan6276"
+         sodipodi:role="line">New chatroom</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="85.766296"
+       y="-1265.1523"
+       id="text6278"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6280"
+         x="85.766296"
+         y="-1265.1523">Start chat</tspan></text>
+    <text
+       sodipodi:linespacing="100%"
+       id="text6282"
+       y="-1376.2822"
+       x="698.0177"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="fill:#ffffff"
+         y="-1376.2822"
+         x="698.0177"
+         id="tspan6284"
+         sodipodi:role="line">Chat</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;display:inline;font-family:'festus!';-inkscape-font-specification:'festus! Bold'"
+       x="343.20746"
+       y="-1333.6051"
+       id="text6294"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="matrix(1.0176358,-0.00753392,0.00727468,0.98261598,0,0)"><tspan
+         style="stroke-width:0.5"
+         id="tspan6296"
+         sodipodi:role="line"
+         x="343.20746"
+         y="-1333.6051">drop here to chat or to make</tspan><tspan
+         id="tspan6298"
+         style="stroke-width:0.5"
+         sodipodi:role="line"
+         x="343.20746"
+         y="-1305.6051">a group chat</tspan></text>
+    <path
+       sodipodi:type="star"
+       style="color:#000000;fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path6322"
+       sodipodi:sides="3"
+       sodipodi:cx="332.36993"
+       sodipodi:cy="-1041.5697"
+       sodipodi:r1="26.309727"
+       sodipodi:r2="13.154863"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 355.15483,-1028.4148 -45.56979,0 22.78489,-39.4646 z"
+       inkscape:transform-center-y="6.5773991"
+       transform="matrix(1,0,0,-1,0,-2081.2943)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text6393"
+       y="-916.57721"
+       x="276.27255"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="-916.57721"
+         x="276.27255"
+         id="tspan6395"
+         sodipodi:role="line">family</tspan></text>
+    <rect
+       y="-832.573"
+       x="266.71661"
+       height="21.884439"
+       width="59.859985"
+       id="rect6420"
+       style="color:#000000;fill:#d1b8b8;fill-opacity:0.97255111;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="276.27255"
+       y="-816.57721"
+       id="text6422"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6424"
+         x="276.27255"
+         y="-816.57721">work</tspan></text>
+    <rect
+       style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:0.99999994;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6455"
+       width="16"
+       height="218.08206"
+       x="752"
+       y="-925.08209"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6467"
+       width="94.312332"
+       height="29.156178"
+       x="671.39435"
+       y="-386.09869" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       y="-386.09869"
+       x="707.39435"
+       height="29.156178"
+       width="58.312355"
+       id="rect6465"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       sodipodi:linespacing="100%"
+       id="text6469"
+       y="-365.95026"
+       x="676.19073"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"><tspan
+         y="-365.95026"
+         x="676.19073"
+         id="tspan6471"
+         sodipodi:role="line">wave this!</tspan></text>
+    <rect
+       y="-1117.0986"
+       x="671.39435"
+       height="29.156178"
+       width="94.312332"
+       id="rect6475"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6477"
+       width="58.312355"
+       height="29.156178"
+       x="707.39435"
+       y="-1117.0986"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.82999998;color:#000000;fill:#782121;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.52077562px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="676.19073"
+       y="-1096.9503"
+       id="text6479"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/chat-revisited.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6481"
+         x="676.19073"
+         y="-1096.9503">wave this!</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

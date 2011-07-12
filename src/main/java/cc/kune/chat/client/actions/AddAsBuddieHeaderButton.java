@@ -28,7 +28,6 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
@@ -39,18 +38,20 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.emite.im.client.roster.events.RosterGroupChangedEvent;
-import com.calclab.emite.im.client.roster.events.RosterGroupChangedHandler;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
+import com.calclab.emite.im.client.roster.events.RosterRetrievedEvent;
+import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
 import com.google.inject.Inject;
 
 public class AddAsBuddieHeaderButton {
 
-  public static class AddAsBuddieAction extends AbstractExtendedAction {
+  public static class AddAsBuddieHeaderAction extends AbstractExtendedAction {
     private final ChatClient chatEngine;
     private final Session session;
 
     @Inject
-    public AddAsBuddieAction(final ChatClient chatEngine, final Session session,
+    public AddAsBuddieHeaderAction(final ChatClient chatEngine, final Session session,
         final ChatInstances chatInstances, final StateManager stateManager,
         final I18nTranslationService i18n, final CoreResources img) {
       super();
@@ -62,14 +63,16 @@ public class AddAsBuddieHeaderButton {
           setState(event.getState());
         }
       });
-      chatInstances.roster.addRosterGroupChangedHandler(new RosterGroupChangedHandler() {
-
+      chatInstances.roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
         @Override
-        public void onGroupChanged(final RosterGroupChangedEvent event) {
-          final StateAbstractDTO currentState = session.getCurrentState();
-          if (currentState != null) {
-            setState(currentState);
-          }
+        public void onRosterItemChanged(final RosterItemChangedEvent event) {
+          setState();
+        }
+      });
+      chatInstances.roster.addRosterRetrievedHandler(new RosterRetrievedHandler() {
+        @Override
+        public void onRosterRetrieved(final RosterRetrievedEvent event) {
+          setState();
         }
       });
       putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDIE));
@@ -79,7 +82,7 @@ public class AddAsBuddieHeaderButton {
     @Override
     public void actionPerformed(final ActionEvent event) {
       chatEngine.addNewBuddie(session.getCurrentState().getGroup().getShortName());
-      NotifyUser.info("Added as buddie. Waiting buddie response");
+      // NotifyUser.info("Added as buddie. Waiting buddie response");
       setEnabled(false);
     }
 
@@ -89,6 +92,13 @@ public class AddAsBuddieHeaderButton {
 
     private boolean isNotMe(final String groupName) {
       return !session.getCurrentUser().getShortName().equals(groupName);
+    }
+
+    private void setState() {
+      final StateAbstractDTO currentState = session.getCurrentState();
+      if (currentState != null) {
+        setState(currentState);
+      }
     }
 
     private void setState(final StateAbstractDTO state) {
@@ -104,7 +114,8 @@ public class AddAsBuddieHeaderButton {
   }
 
   @Inject
-  public AddAsBuddieHeaderButton(final AddAsBuddieAction buddieAction, final EntityHeader entityHeader) {
+  public AddAsBuddieHeaderButton(final AddAsBuddieHeaderAction buddieAction,
+      final EntityHeader entityHeader) {
     final ButtonDescriptor button = new ButtonDescriptor(buddieAction);
     button.setVisible(false);
     button.setStyles("k-chat-add-as-buddie");
