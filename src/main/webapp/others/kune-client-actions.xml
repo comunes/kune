@@ -193,7 +193,7 @@
       <type>wave-gadget</type>
       <extensionName>pollo</extensionName>
       <name>New poll</name>
-      <path>Gadget»Voting</path>
+      <path>New Gadget»Voting</path>
       <description>Make some poll (allow single and multiple polls))
       </description>
       <new-content-title>New poll</new-content-title>
@@ -218,7 +218,7 @@
       <type>wave-gadget</type>
       <extensionName>Poll</extensionName>
       <name>New Advanced Poll</name>
-      <path>Gadget»Voting</path>
+      <path>New Gadget»Voting</path>
       <description>You can add a poll to your Wave. Accordingly you can
         embed the result with the Google Chart API into your Wave.
       </description>
@@ -244,7 +244,7 @@
       <type>wave-gadget</type>
       <extensionName>Yes/No/Maybe/+</extensionName>
       <name>New Yes/No/Maybe/+ Voting</name>
-      <path>Gadget»Voting</path>
+      <path>New Gadget»Voting</path>
       <description>Same as Google's Yes/No/Maybe, only you can edit the
         titles and add new ones.
       </description>
@@ -270,7 +270,7 @@
       <type>wave-gadget</type>
       <extensionName>Yes/No/Mini</extensionName>
       <name>New Yes/no/Mini Voting</name>
-      <path>Gadget»Voting</path>
+      <path>New Gadget»Voting</path>
       <description>A miniature version of the Yes/No/Maybe gadget.
       </description>
       <new-content-title>New Yes/no/Mini Voting</new-content-title>
@@ -297,7 +297,7 @@
       <type>wave-gadget</type>
       <extensionName>massmob</extensionName>
       <name>New meeting</name>
-      <path>Gadget»Calendar</path>
+      <path>New Gadget»Calendar</path>
       <description>Call and speed-up of events as meeting, smartmobs,
         flashmobs, protest demonstrations, etc.
       </description>
@@ -323,7 +323,7 @@
       <type>wave-gadget</type>
       <extensionName>massmob</extensionName>
       <name>Add a meeting</name>
-      <path>Gadget»Calendar</path>
+      <path>New Gadget»Calendar</path>
       <description>Call and speed-up of events as meeting, smartmobs,
         flashmobs, protest demonstrations, etc.
       </description>
@@ -342,7 +342,7 @@
       <type>wave-gadget</type>
       <extensionName>waffle</extensionName>
       <name>New meet coordination</name>
-      <path>Gadget»Calendar</path>
+      <path>New Gadget»Calendar</path>
       <description>Users are polled to determine the best time and date
         to meet
       </description>
@@ -370,7 +370,7 @@
       <type>wave-gadget</type>
       <extensionName>Image</extensionName>
       <name>New Image (and lets annotate)</name>
-      <path>Gadget»Media</path>
+      <path>New Gadget»Media</path>
       <description>Lets you insert, resize and annotate any image from
         the web.
       </description>
@@ -399,7 +399,7 @@
       <type>wave-gadget</type>
       <extensionName>Map</extensionName>
       <name>New Map</name>
-      <path>Gadget»Media</path>
+      <path>New Gadget»Media</path>
       <description>Collaborate on a map of placemarks, paths, and shapes
         with other participants. Great for planning events and trips.
       </description>
@@ -425,7 +425,7 @@
       <type>wave-gadget</type>
       <extensionName>wavetube</extensionName>
       <name>New Youtube video</name>
-      <path>Gadget»Media</path>
+      <path>New Gadget»Media</path>
       <description>Adds a YouTube player that displays the list of
         viewers in real time
       </description>
@@ -451,7 +451,7 @@
       <type>wave-gadget</type>
       <extensionName>Picasa Gadget</extensionName>
       <name>New Album</name>
-      <path>Gadget»Media</path>
+      <path>New Gadget»Media</path>
       <description>Add a Picasa photo album to a wave.</description>
       <new-content-title>New Album</new-content-title>
       <new-content-textintro>Sorry, this gadget has problems with its
@@ -477,7 +477,7 @@
       <type>wave-gadget</type>
       <extensionName>twitter-search</extensionName>
       <name>New twitter search</name>
-      <path>Gadget»Media</path>
+      <path>New Gadget»Media</path>
       <description>Shows results from Twitter for a given search term.
         Participants can edit to specify new term.
       </description>
@@ -501,39 +501,13 @@
       <participants>ask</participants>
     </guiActionDescriptor>
 
-    <guiActionDescriptor>
-      <type>wave-gadget</type>
-      <extensionName>wavetube</extensionName>
-      <name>New Youtube video</name>
-      <path>Gadget»Media</path>
-      <description>Adds a YouTube player that displays the list of
-        viewers in real time
-      </description>
-      <new-content-title>New Youtube video</new-content-title>
-      <new-content-textintro></new-content-textintro>
-      <enabled>true</enabled>
-      <typeIds>
-        <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
-        <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
-        <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
-      </typeIds>
-      <rol>
-        <!-- Administrator, Editor, Viewer -->
-        <rolRequired>Editor</rolRequired>
-        <authNeed>true</authNeed>
-      </rol>
-      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
-        used yet) -->
-      <participants>ask</participants>
-    </guiActionDescriptor>
-
     <!-- Tasks ================================================== -->
 
     <guiActionDescriptor>
       <type>wave-gadget</type>
       <extensionName>TaskToDo</extensionName>
       <name>New To-Do list</name>
-      <path>Gadget»Tasks</path>
+      <path>New Gadget»Tasks</path>
       <description>Make your To-Do list and mark your progress.
       </description>
       <new-content-title>New To-Do list</new-content-title>
@@ -559,7 +533,7 @@
       <type>wave-gadget</type>
       <extensionName>tasklistbot</extensionName>
       <name>New Task List</name>
-      <path>Gadget»Tasks</path>
+      <path>New Gadget»Tasks</path>
       <description></description>
       <new-content-title>New Task List</new-content-title>
       <new-content-textintro></new-content-textintro>
@@ -586,7 +560,7 @@
       <type>wave-gadget</type>
       <extensionName>Shorten URL with goo.gl</extensionName>
       <name>New Shorten URL</name>
-      <path>Gadget»Others</path>
+      <path>New Gadget»Others</path>
       <description>Shorten url with goo.gl, the new Google url
         shortener.(http://goo.gl/)
       </description>
@@ -613,7 +587,7 @@
       <type>wave-gadget</type>
       <extensionName>Quick Notify</extensionName>
       <name>New Notification</name>
-      <path>Gadget»Others</path>
+      <path>New Gadget»Others</path>
       <description>Quickly send a short email with a custom message to
         all participants.
       </description>
@@ -640,7 +614,7 @@
       <type>wave-gadget</type>
       <extensionName>MindMap</extensionName>
       <name>New MindMap</name>
-      <path>Gadget»Others</path>
+      <path>New Gadget»Others</path>
       <description>Collaborate using a hierarchical mind map.
       </description>
       <new-content-title>New MindMap</new-content-title>
