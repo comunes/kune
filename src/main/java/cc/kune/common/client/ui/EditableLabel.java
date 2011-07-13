@@ -54,7 +54,6 @@ public class EditableLabel extends Composite implements HasEditHandler {
   @UiField
   TextBox textbox;
   private Tooltip tooltip;
-
   private String tooltipText;
 
   public EditableLabel() {
@@ -97,6 +96,10 @@ public class EditableLabel extends Composite implements HasEditHandler {
     label.setVisible(true);
     textbox.setVisible(false);
     fireEvent(new EditEvent(textbox.getValue()));
+  }
+
+  private String getTooltipValue() {
+    return editable ? tooltipText : "";
   }
 
   @UiHandler("textbox")
@@ -158,7 +161,12 @@ public class EditableLabel extends Composite implements HasEditHandler {
 
   public void setEditable(final boolean editable) {
     this.editable = editable;
-    tooltip = Tooltip.to(label, editable ? tooltipText : "");
+    if (tooltip == null) {
+      tooltip = Tooltip.to(label, getTooltipValue());
+
+    } else {
+      tooltip.setText(getTooltipValue());
+    }
   }
 
   public void setText(final String text) {

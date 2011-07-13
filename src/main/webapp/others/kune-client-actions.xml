@@ -27,10 +27,11 @@
     </extension>
 
     <extension>
+      <!-- Warning: this is a robot -->
       <name>tasklistbot</name>
       <installerUrl>http://tasklistbot.appspot.com/TaskList.xml
       </installerUrl>
-      <gadgetUrl>http://everybodywave.appspot.com/gadget/foobar/main.xml
+      <gadgetUrl>http://tasklistbot.appspot.com/TaskList.xml
       </gadgetUrl>
       <iconUrl>http://tasklistbot.appspot.com/resources/tasklistbot_avatar.png
       </iconUrl>
@@ -219,7 +220,7 @@
       <path>Gadget»Media</path>
       <description>Add a Picasa photo album to a wave.</description>
       <new-content-title>New Album</new-content-title>
-      <new-content-textintro></new-content-textintro>
+      <new-content-textintro>Sorry, this gadget has problems with its height. We hope this will be fixed soon</new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
@@ -245,7 +246,8 @@
       </description>
       <new-content-title>New To-Do list</new-content-title>
       <new-content-textintro></new-content-textintro>
-      <enabled>true</enabled>
+      <!-- Seems broken right now -->
+      <enabled>false</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
         <typeId origTypeId="docs.root" destTypeId="docs.doc" />
@@ -270,7 +272,8 @@
         shortener.(http://goo.gl/)</description>
       <new-content-title>New Shorten URL</new-content-title>
       <new-content-textintro></new-content-textintro>
-      <enabled>true</enabled>
+      <!-- Disabled: Not useful for a new doc -->
+      <enabled>false</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
         <typeId origTypeId="docs.root" destTypeId="docs.doc" />
@@ -372,7 +375,8 @@
       <description></description>
       <new-content-title>New Task List</new-content-title>
       <new-content-textintro></new-content-textintro>
-      <enabled>true</enabled>
+      <!-- This is a robot -->
+      <enabled>false</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
         <typeId origTypeId="docs.root" destTypeId="docs.doc" />
@@ -397,7 +401,8 @@
         all participants.</description>
       <new-content-title>New Notification</new-content-title>
       <new-content-textintro></new-content-textintro>
-      <enabled>true</enabled>
+      <!-- Disabled: not working in WIAB -->
+      <enabled>false</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc" />
         <typeId origTypeId="docs.root" destTypeId="docs.doc" />
@@ -446,7 +451,7 @@
       <path>Gadget»Media</path>
       <description>Lets you insert, resize and annotate any image from
         the web.</description>
-      <new-content-title>New image</new-content-title>
+      <new-content-title>Edit this to insert, resize and annotate any image from the web</new-content-title>
       <new-content-textintro></new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
@@ -548,7 +553,7 @@
       <description>Shows results from Twitter for a given search term.
         Participants can edit to specify new term.</description>
       <new-content-title>Twitter search</new-content-title>
-      <new-content-textintro></new-content-textintro>
+      <new-content-textintro>Sorry, this gadget has problems with its height. We hope this will be fixed soon</new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc" />

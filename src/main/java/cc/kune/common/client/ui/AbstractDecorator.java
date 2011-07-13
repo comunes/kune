@@ -29,12 +29,14 @@ public class AbstractDecorator extends Composite {
   @UiField
   FlowPanel mainPanel;
   private int offset = 0;
+  private Tooltip tooltip;
   private int top = 0;
   @UiField
   SimplePanel widgetContainer;
 
   public AbstractDecorator() {
     initWidget(BINDER.createAndBindUi(this));
+    decorationImage.setVisible(false);
   }
 
   public void clearImage() {
@@ -59,7 +61,12 @@ public class AbstractDecorator extends Composite {
   }
 
   public void setImageTooltip(final String text) {
-    Tooltip.to(decorationImage, text);
+    if (tooltip == null) {
+      tooltip = Tooltip.to(decorationImage, text);
+      decorationImage.addStyleName("k-pointer");
+    } else {
+      tooltip.setText(text);
+    }
   }
 
   private void setPosition() {

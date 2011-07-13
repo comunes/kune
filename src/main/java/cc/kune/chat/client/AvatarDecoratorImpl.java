@@ -1,7 +1,9 @@
 package cc.kune.chat.client;
 
 import cc.kune.common.client.ui.AbstractDecorator;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.avatar.AvatarDecorator;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emite.core.client.events.StateChangedEvent;
 import com.calclab.emite.core.client.events.StateChangedHandler;
@@ -33,6 +35,8 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
   private final ImageResource chatDotBusy;
   private final ImageResource chatDotExtendedAway;
   private final ImageResource chatDotXA;
+  private final I18nTranslationService i18n;
+  private final HandlerRegistration presenceHandler;
   private final PresenceManager presenceManager;
   private final XmppRoster roster;
   private final HandlerRegistration rosterHandler;
@@ -40,12 +44,13 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
   private final HandlerRegistration sessionStateChangedHandler;
   private XmppURI uri;
   private final XmppSession xmppSession;
-  private HandlerRegistration presenceHandler;
 
-  public AvatarDecoratorImpl(final ChatInstances chatInstances, final ChatClient chatClient,
-      final ImageResource chatDotBusy, final ImageResource chatDotXA, final ImageResource chatDotAway,
-      final ImageResource chatDotExtendedAway, final ImageResource chatDotAvailable) {
+  public AvatarDecoratorImpl(final I18nTranslationService i18n, final ChatInstances chatInstances,
+      final ChatClient chatClient, final ImageResource chatDotBusy, final ImageResource chatDotXA,
+      final ImageResource chatDotAway, final ImageResource chatDotExtendedAway,
+      final ImageResource chatDotAvailable) {
     this.chatClient = chatClient;
+    this.i18n = i18n;
     this.chatDotBusy = chatDotBusy;
     this.chatDotXA = chatDotXA;
     this.chatDotAway = chatDotAway;
@@ -111,20 +116,27 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
   }
 
   private void setIcon(final boolean available, final Show show, final String status) {
+    String finalStatus = "";
     if (show == Show.dnd) {
+      finalStatus = i18n.t("Busy");
       super.setImage(chatDotBusy);
     } else if (show == Show.xa) {
+      finalStatus = i18n.t("Away");
       super.setImage(chatDotXA);
-    } else if (show == Show.away) {
       super.setImage(chatDotAway);
+    } else if (show == Show.away) {
+      finalStatus = i18n.t("Away");
     } else if (show == Show.chat) {
+      finalStatus = i18n.t("Available for chat");
       super.setImage(chatDotExtendedAway);
     } else if (available) {
+      finalStatus = i18n.t("Available");
       super.setImage(chatDotAvailable);
     } else {
       clearDecorator();
     }
-    super.setImageTooltip(status);
+    super.setImageTooltip(TextUtils.empty(finalStatus) ? status : finalStatus
+        + (TextUtils.empty(status) ? "" : ": " + status));
   }
 
   @Override

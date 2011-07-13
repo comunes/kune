@@ -16,6 +16,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.actions.ActionGroups;
+import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 
 import com.calclab.emite.core.client.services.Services;
 import com.google.gwt.http.client.Request;
@@ -34,8 +35,10 @@ public class XMLActionsParser {
 
   private final ActionRegistryByType actionRegistry;
   private final Provider<ContentServiceAsync> contentService;
+  private final ContentViewerPresenter contentViewer;
   private final ErrorHandler errHandler;
   private final I18nTranslationService i18n;
+
   private final NewMenusForTypeIdsRegistry newMenusRegistry;
 
   private final Session session;
@@ -45,11 +48,12 @@ public class XMLActionsParser {
   private final HashMap<String, SubMenuDescriptor> submenus;
 
   @Inject
-  public XMLActionsParser(final ErrorHandler errHandler, final ActionRegistryByType actionRegistry,
-      final Provider<ContentServiceAsync> contentService, final Session session,
-      final StateManager stateManager, final I18nTranslationService i18n,
+  public XMLActionsParser(final ErrorHandler errHandler, final ContentViewerPresenter contentViewer,
+      final ActionRegistryByType actionRegistry, final Provider<ContentServiceAsync> contentService,
+      final Session session, final StateManager stateManager, final I18nTranslationService i18n,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final Services services) {
     this.errHandler = errHandler;
+    this.contentViewer = contentViewer;
     this.actionRegistry = actionRegistry;
     this.contentService = contentService;
     this.session = session;
@@ -121,10 +125,11 @@ public class XMLActionsParser {
         for (final XMLTypeId typeId : descrip.getTypeIds()) {
           final String origTypeId = typeId.getOrigTypeId();
           final String contentIntro = descrip.getNewContentTextIntro();
-          final NewGadgetAction action = new NewGadgetAction(contentService, stateManager, session,
-              i18n, descrip.getRol().getRolRequired(), descrip.getRol().isAuthNeed(),
-              extension.getExtName(), typeId.getDestTypeId(), extension.getIconUrl(),
-              descrip.getNewContentTitle(), TextUtils.empty(contentIntro) ? "" : contentIntro);
+          final NewGadgetAction action = new NewGadgetAction(contentService, contentViewer,
+              stateManager, session, i18n, descrip.getRol().getRolRequired(),
+              descrip.getRol().isAuthNeed(), extension.getExtName(), typeId.getDestTypeId(),
+              extension.getIconUrl(), descrip.getNewContentTitle(), TextUtils.empty(contentIntro) ? ""
+                  : contentIntro);
           final String path = descrip.getPath();
           final MenuDescriptor menu = newMenusRegistry.get(origTypeId);
           assert menu != null;

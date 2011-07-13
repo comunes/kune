@@ -8,6 +8,7 @@
       top: 0px;
       left: 0px;
       float: left;
+      background-color: transparent;
     }
 
     .container {
