@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client.rpcservices;
 
-
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
@@ -28,33 +27,34 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SocialNetworkServiceAsync {
 
-    void acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName,
-            AsyncCallback<SocialNetworkDataDTO> callback);
+  void acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName,
+      AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void addAdminMember(String hash, StateToken groupToken, String groupToAddShortName,
-            AsyncCallback<SocialNetworkDataDTO> callback);
+  void addAdminMember(String hash, StateToken groupToken, String groupToAddShortName,
+      AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void addCollabMember(String hash, StateToken groupToken, String groupToAddShortName,
-            AsyncCallback<SocialNetworkDataDTO> callback);
+  void addCollabMember(String hash, StateToken groupToken, String groupToAddShortName,
+      AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void addViewerMember(String hash, StateToken groupToken, String groupToAddShortName,
-            AsyncCallback<SocialNetworkDataDTO> callback);
+  void addViewerMember(String hash, StateToken groupToken, String groupToAddShortName,
+      AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName,
-            AsyncCallback<SocialNetworkDataDTO> callback);
+  void deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName,
+      AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName,
-            AsyncCallback<SocialNetworkDataDTO> callback);
+  void denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName,
+      AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void getSocialNetwork(String hash, StateToken groupToken, AsyncCallback<SocialNetworkDataDTO> callback);
+  void getSocialNetwork(String hash, StateToken groupToken, AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void requestJoinGroup(String hash, StateToken groupToken, AsyncCallback<SocialNetworkRequestResult> callback);
+  void requestJoinGroup(String hash, StateToken groupToken,
+      AsyncCallback<SocialNetworkRequestResult> callback);
 
-    void setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName,
-            AsyncCallback<SocialNetworkDataDTO> callback);
+  void setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName,
+      AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void setCollabAsAdmin(String hash, StateToken groupToken, String groupToSetAdminShortName,
-            AsyncCallback<SocialNetworkDataDTO> callback);
+  void setCollabAsAdmin(String hash, StateToken groupToken, String groupToSetAdminShortName,
+      AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void unJoinGroup(String hash, StateToken groupToken, AsyncCallback<SocialNetworkDataDTO> callback);
+  void unJoinGroup(String hash, StateToken groupToken, AsyncCallback<Void> callback);
 }

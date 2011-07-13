@@ -96,11 +96,11 @@ $(document).ready(function() {
   var rpc = window.wave.Rpc.getInstance();
 
   initGadgetSystem();
-  rpc.rpcOpenWave();
+//  rpc.rpcOpenWave();
 
-  setInterval(function() {
+  //setInterval(function() {
     // This is needed to specify the scope of the function.
-    window.wave.Rpc.getInstance().rpcAsyncUpdate();
-  }, RPC_UPDATE_INTERVAL_MS);
+ //   window.wave.Rpc.getInstance().rpcAsyncUpdate();
+ //}, RPC_UPDATE_INTERVAL_MS);
 });
 

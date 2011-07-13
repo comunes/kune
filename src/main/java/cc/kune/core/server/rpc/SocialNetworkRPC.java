@@ -220,14 +220,12 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Override
   @Authenticated
   @Transactional
-  public SocialNetworkDataDTO unJoinGroup(final String hash, final StateToken groupToken)
-      throws DefaultException {
+  public void unJoinGroup(final String hash, final StateToken groupToken) throws DefaultException {
     final UserSession userSession = getUserSession();
     final User userLogged = userSession.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     socialNetworkManager.unJoinGroup(userLogged.getUserGroup(), group);
-    return generateResponse(userLogged, group);
   }
 
 }

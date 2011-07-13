@@ -30,7 +30,7 @@ import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.actions.JoinGroupAction;
 import cc.kune.core.client.sn.actions.MembersModerationMenuItem;
 import cc.kune.core.client.sn.actions.MembersVisibilityMenuItem;
-import cc.kune.core.client.sn.actions.UnJoinGroupAction;
+import cc.kune.core.client.sn.actions.UnJoinFromCurrentGroupAction;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 import cc.kune.core.client.state.Session;
@@ -66,7 +66,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final I18nTranslationService i18n, final Provider<MembersVisibilityMenuItem> membersVisibility,
       final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
       final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
-      final IsGroupCondition isGroupCondition, final UnJoinGroupAction unJoinGroupAction) {
+      final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction) {
     OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
         OPTIONS_STYLES);
     final GuiActionDescrip optionsTitle = new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
@@ -132,7 +132,6 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
           closedItem.setChecked(true);
           break;
         }
-        unJoinBtn.setVisible(session.isLogged());
       }
     });
   }

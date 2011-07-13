@@ -28,7 +28,8 @@ import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.sn.actions.GotoPersonAction;
 import cc.kune.core.client.sn.actions.GotoYourHomePageAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
-import cc.kune.core.client.sn.actions.UnJoinGroupAction;
+import cc.kune.core.client.sn.actions.UnJoinFromThisGroupAction;
+import cc.kune.core.client.sn.actions.conditions.ImPartOfGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
@@ -47,12 +48,13 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
   public UserSNMenuItemsRegistry(final Session session,
       final IsCurrentStateAdministrableCondition isAdministrableCondition,
       final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
-      final IsLoggedCondition isLoggedCondition, final IsMeCondition isMe,
-      final IsNotMeCondition isNotMe, final ChangeToCollabAction changeToCollabAction,
-      final ChangeToAdminAction changeToAdminAction, final RemoveMemberAction removeMemberAction,
-      final AcceptJoinGroupAction acceptJoinGroupAction, final DenyJoinGroupAction denyJoinGroupAction,
-      final GotoGroupAction gotoGroupAction, final GotoPersonAction gotoPersonAction,
-      final UnJoinGroupAction unjoinAction, final GotoYourHomePageAction gotoYourHomePageAction) {
+      final ImPartOfGroupCondition imPartOfGroup, final IsLoggedCondition isLoggedCondition,
+      final IsMeCondition isMe, final IsNotMeCondition isNotMe,
+      final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
+      final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
+      final DenyJoinGroupAction denyJoinGroupAction, final GotoGroupAction gotoGroupAction,
+      final GotoPersonAction gotoPersonAction, final UnJoinFromThisGroupAction unjoinAction,
+      final GotoYourHomePageAction gotoYourHomePageAction) {
     add(new Provider<MenuItemDescriptor>() {
       @Override
       public MenuItemDescriptor get() {
@@ -81,14 +83,15 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
     });
     // This doesn't works, because its unregister from current state not
     // from target group
-    // add(new Provider<MenuItemDescriptor>() {
-    // @Override
-    // public MenuItemDescriptor get() {
-    // final MenuItemDescriptor item = new MenuItemDescriptor(unjoinAction);
-    // item.add(isLoggedCondition);
-    // item.add(isGroupCondition);
-    // return item;
-    // }
-    // });
+    add(new Provider<MenuItemDescriptor>() {
+      @Override
+      public MenuItemDescriptor get() {
+        final MenuItemDescriptor item = new MenuItemDescriptor(unjoinAction);
+        item.add(isLoggedCondition);
+        item.add(isGroupCondition);
+        item.add(imPartOfGroup);
+        return item;
+      }
+    });
   }
 }

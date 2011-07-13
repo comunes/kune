@@ -125,6 +125,6 @@ function initCommon() {
     }
   });
 
-  initEditor();
+  // initEditor();
   initGadgetSystem();
 }
