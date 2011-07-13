@@ -27,7 +27,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1"
      inkscape:cx="346.17698"
-     inkscape:cy="-166.02205"
+     inkscape:cy="-246.02205"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -72,7 +72,7 @@
        height="40"
        width="150"
        id="rect7959-4"
-       style="color:#000000;fill:#e6e6e6;fill-opacity:0.94901961;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:0.94901961;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7961-9"
@@ -140,7 +140,7 @@
        height="40"
        width="150"
        id="rect7983-4"
-       style="color:#000000;fill:#e6e6e6;fill-opacity:0.94901961;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:0.94901961;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7985-7"
@@ -375,7 +375,7 @@
        id="rect7559"
        style="color:#000000;fill:#9753aa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
-       style="color:#000000;fill:#e26fff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#db79f4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7561"
        width="150"
        height="40"
@@ -441,7 +441,7 @@
        height="40"
        width="150"
        id="rect7583"
-       style="color:#000000;fill:#c653e2;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#b852d2;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7585"
@@ -501,7 +501,7 @@
          x="189"
          y="254.36218">lorem </tspan></text>
     <rect
-       style="color:#000000;fill:#de8787;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#ec3a3a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7605"
        width="150"
        height="40"
@@ -515,7 +515,7 @@
        id="rect7607"
        style="color:#000000;fill:#d35f5f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
-       style="color:#000000;fill:#c04141;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#9f0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7609"
        width="150"
        height="40"
@@ -527,10 +527,10 @@
        height="40"
        width="150"
        id="rect7611"
-       style="color:#000000;fill:#ff8080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#c52b2b;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa0000;fill-opacity:0.94901961;fill-rule:nonzero;stroke:none;stroke-width:1.40678155000000005;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:0.94901961000000001;fill-rule:nonzero;stroke:none;stroke-width:1.40678155000000005;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        x="38"
        y="450.36218"
        id="text7613"
@@ -583,7 +583,7 @@
        id="rect7631"
        style="color:#000000;fill:#ffe0e0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
-       style="color:#000000;fill:#b86262;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#ec3a3a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7633"
        width="150"
        height="40"
@@ -795,7 +795,7 @@
          x="189"
          y="654.36218">lorem </tspan></text>
     <rect
-       style="color:#000000;fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#e7cc5f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7705"
        width="150"
        height="40"
@@ -821,7 +821,7 @@
        height="40"
        width="150"
        id="rect7711"
-       style="color:#000000;fill:#f5cc22;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#dcbc3a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
        xml:space="preserve"
        style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#151515;fill-opacity:0.94901961;fill-rule:nonzero;stroke:none;stroke-width:1.40678155000000005;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -1241,7 +1241,7 @@
        height="40"
        width="150"
        id="rect7855"
-       style="color:#000000;fill:#ffe7d7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#e8bc9e;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        style="color:#000000;fill:#eac9b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7857"
@@ -1551,7 +1551,7 @@
        id="rect7959"
        style="color:#000000;fill:#b15278;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
-       style="color:#000000;fill:#ff74ab;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#e777a4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7961"
        width="150"
        height="40"
@@ -1983,7 +1983,7 @@
        height="40"
        width="150"
        id="rect3367"
-       style="color:#000000;fill:#000055;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#0c1f3d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/highcontrast.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -2003,12 +2003,12 @@
        height="40"
        width="150"
        id="rect3371"
-       style="color:#000000;fill:#00002b;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/highcontrast.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       style="color:#000000;fill:#000055;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#0c2855;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3373"
        width="150"
        height="40"
@@ -2077,7 +2077,7 @@
          x="38"
          y="1150.3622">lorem </tspan></text>
     <rect
-       style="color:#000000;fill:#0000aa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#162d50;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3393"
        width="150"
        height="40"
@@ -2092,12 +2092,12 @@
        height="40"
        width="150"
        id="rect3395"
-       style="color:#000000;fill:#00112b;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427981;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/highcontrast.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       style="color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3397"
        width="150"
        height="40"
@@ -2267,7 +2267,7 @@
        height="40"
        width="150"
        id="rect4215"
-       style="color:#000000;fill:#000000;fill-opacity:0.94901961000000001;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#ffffff;fill-opacity:0.94901961;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        style="color:#000000;fill:#000000;fill-opacity:0.94901961000000001;fill-rule:nonzero;stroke:none;stroke-width:0.73427980999999998;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect4217"
@@ -2291,7 +2291,7 @@
        id="text4223"
        y="1313.1414"
        x="561.34814"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:0.94901961000000001;fill-rule:nonzero;stroke:none;stroke-width:1.40678155000000005;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:0.94901961000000001;fill-rule:nonzero;stroke:none;stroke-width:1.40678155000000005;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
        xml:space="preserve"><tspan
          y="1313.1414"
          x="561.34814"
