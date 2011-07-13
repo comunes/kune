@@ -369,13 +369,14 @@
     <guiActionDescriptor>
       <type>wave-gadget</type>
       <extensionName>Image</extensionName>
-      <name>New Image</name>
+      <name>New Image (and lets annotate)</name>
       <path>Gadget»Media</path>
       <description>Lets you insert, resize and annotate any image from
         the web.
       </description>
       <new-content-title>Edit this to insert, resize and annotate any
-        image from the web
+        image from the web. The image can be annotated (double click on
+        it) by any participant of this document.
       </new-content-title>
       <new-content-textintro></new-content-textintro>
       <enabled>true</enabled>
@@ -453,34 +454,6 @@
       <path>Gadget»Media</path>
       <description>Add a Picasa photo album to a wave.</description>
       <new-content-title>New Album</new-content-title>
-      <new-content-textintro>Sorry, this gadget has problems with its
-        height. We hope this will be fixed soon
-      </new-content-textintro>
-      <enabled>true</enabled>
-      <typeIds>
-        <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
-        <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
-        <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
-      </typeIds>
-      <rol>
-        <!-- Administrator, Editor, Viewer -->
-        <rolRequired>Editor</rolRequired>
-        <authNeed>true</authNeed>
-      </rol>
-      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
-        used yet) -->
-      <participants>ask</participants>
-    </guiActionDescriptor>
-
-    <guiActionDescriptor>
-      <type>wave-gadget</type>
-      <extensionName>twitter-search</extensionName>
-      <name>New twitter search</name>
-      <path>Gadget»Media</path>
-      <description>Shows results from Twitter for a given search term.
-        Participants can edit to specify new term.
-      </description>
-      <new-content-title>Twitter search</new-content-title>
       <new-content-textintro>Sorry, this gadget has problems with its
         height. We hope this will be fixed soon
       </new-content-textintro>
