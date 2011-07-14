@@ -143,15 +143,10 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
       final String defWave = properties.getWelcomewave();
       if (defWave != null) {
-        kuneWaveManager.createWave(ContentConstants.WELCOME_WAVE_CONTENT_TITLE, "", defWave, null,
+        kuneWaveManager.createWave(
+            ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
+                properties.getDefaultSiteName()), "", defWave, null,
             participantUtils.of(properties.getAdminShortName()), participantUtils.of(shortName));
-        // kuneWaveManager.createWave(
-        // ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
-        // properties.getDefaultSiteName()),
-        // ContentConstants.WELCOME_WAVE_CONTENT.replaceAll("\\[%s\\]",
-        // properties.getDefaultSiteName()),
-        // participantUtils.of(properties.getAdminShortName()),
-        // participantUtils.of(shortName));
       }
       return user;
     } catch (final RuntimeException e) {
