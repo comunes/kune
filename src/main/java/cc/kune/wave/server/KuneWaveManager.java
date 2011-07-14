@@ -21,6 +21,8 @@ package cc.kune.wave.server;
 
 import java.net.URL;
 
+import org.waveprotocol.wave.model.id.WaveId;
+import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
@@ -37,9 +39,14 @@ public interface KuneWaveManager {
 
   WaveRef createWave(String title, String message, ParticipantId... participantsArray);
 
+  WaveRef createWave(String title, String message, String waveIdToCopy, URL gadgetUrl,
+      ParticipantId... participantsArray);
+
   WaveRef createWave(String title, String message, URL gadgetUrl, ParticipantId... participantsArray);
 
-  Wavelet fetchWavelet(WaveRef waveRef, String author);
+  Wavelet fetchWave(WaveId waveId, WaveletId waveletId, String author);
+
+  Wavelet fetchWave(WaveRef waveRef, String author);
 
   boolean isParticipant(Wavelet wavelet, String user);
 

@@ -40,6 +40,7 @@ import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.events.AvatarChangedEvent;
+import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
 import cc.kune.core.client.resources.CoreResources;
@@ -79,6 +80,7 @@ import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -93,7 +95,20 @@ public class ChatClientDefault implements ChatClient {
       super();
       this.res = res;
       putValue(Action.SMALL_ICON, res.chat());
-
+      kuneEventBus.addHandler(NewUserRegisteredEvent.getType(),
+          new NewUserRegisteredEvent.NewUserRegisteredHandler() {
+            @Override
+            public void onNewUserRegistered(final NewUserRegisteredEvent event) {
+              // Blink the chat some seconds
+              setBlink(true);
+              new Timer() {
+                @Override
+                public void run() {
+                  setBlink(false);
+                }
+              }.schedule(10000);
+            }
+          });
     }
 
     @Override

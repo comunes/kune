@@ -40,7 +40,7 @@ import cc.kune.core.server.manager.FileManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.file.FileUtils;
-import cc.kune.core.server.properties.DatabaseProperties;
+import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
@@ -74,7 +74,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   private final KuneProperties kuneProperties;
   private final LicenseFinder licenseFinder;
   private final LicenseManager licenseManager;
-  private final DatabaseProperties properties;
+  private final KuneBasicProperties properties;
   private final ServerToolRegistry registry;
   private final ServerToolRegistry serverToolRegistry;
   private final UserFinder userFinder;
@@ -82,7 +82,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   @Inject
   public GroupManagerDefault(final Provider<EntityManager> provider, final GroupFinder finder,
       final UserFinder userFinder, final KuneProperties kuneProperties,
-      final DatabaseProperties properties, final ServerToolRegistry registry,
+      final KuneBasicProperties properties, final ServerToolRegistry registry,
       final LicenseManager licenseManager, final LicenseFinder licenseFinder,
       final FileManager fileManager, final ServerToolRegistry serverToolRegistry,
       final I18nTranslationService i18n) {

@@ -34,7 +34,7 @@ import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.manager.impl.ContentConstants;
-import cc.kune.core.server.properties.DatabaseProperties;
+import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.domain.Content;
@@ -56,12 +56,12 @@ public class DatabaseInitializer {
   private final KuneWaveManager kuneWaveManager;
   private final I18nLanguageManager languageManager;
   private final LicenseManager licenseManager;
-  private final DatabaseProperties properties;
+  private final KuneBasicProperties properties;
   private final I18nTranslationManager translationManager;
   private final UserManager userManager;
 
   @Inject
-  public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
+  public DatabaseInitializer(final KuneBasicProperties properties, final UserManager userManager,
       final GroupManager groupManager, final LicenseManager licenseManager,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final I18nTranslationManager translationManager, final ContentManager contentManager,

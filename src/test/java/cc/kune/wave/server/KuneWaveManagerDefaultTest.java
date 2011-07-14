@@ -63,7 +63,7 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
     manager.addParticipant(waveletName, getSiteAdminShortName(), whoAdds, NEW_PARTICIPANT);
-    final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertEquals(2, fetchWavelet.getParticipants().size());
     manager.isParticipant(fetchWavelet, NEW_PARTICIPANT);
@@ -91,7 +91,7 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     final WaveRef waveletName = manager.createWave(RICHTEXT_MESSAGE,
         participantUtils.of(getSiteAdminShortName()));
     assertNotNull(waveletName);
-    final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertTrue(fetchWavelet.getRootBlip().getAnnotations().size() > 0);
     assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
@@ -103,7 +103,7 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     final WaveRef waveletName = manager.createWave(TITLE, RICHTEXT_MESSAGE, new URL(TEST_GADGET),
         participantUtils.of(getSiteAdminShortName()));
     assertNotNull(waveletName);
-    final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
   }
@@ -113,7 +113,7 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     doLogin();
     final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
-    final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
     assertEquals(TITLE, fetchWavelet.getTitle());
@@ -138,7 +138,7 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
     manager.setTitle(waveletName, TITLENEW, getSiteAdminShortName());
-    final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
     assertEquals(TITLENEW, fetchWavelet.getTitle());

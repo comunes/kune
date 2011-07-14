@@ -45,7 +45,7 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.properties.ChatProperties;
-import cc.kune.core.server.properties.DatabaseProperties;
+import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.xmpp.ChatConnection;
 import cc.kune.core.server.xmpp.ChatException;
 import cc.kune.core.server.xmpp.XmppManager;
@@ -69,12 +69,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;
-  private final DatabaseProperties databaseProperties;
   private final UserFinder finder;
   private final I18nTranslationService i18n;
   private final KuneWaveManager kuneWaveManager;
   private final I18nLanguageManager languageManager;
   private final ParticipantUtils participantUtils;
+  private final KuneBasicProperties properties;
   private final AccountStore waveAccountStore;
   // private final PropertiesManager propManager;
   private final CustomUserRegistrationServlet waveUserRegister;
@@ -86,7 +86,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final XmppManager xmppManager, final ChatProperties chatProperties,
       final I18nTranslationService i18n, final CustomUserRegistrationServlet waveUserRegister,
       final AccountStore waveAccountStore, final KuneWaveManager kuneWaveManager,
-      final ParticipantUtils participantUtils, final DatabaseProperties databaseProperties) {
+      final ParticipantUtils participantUtils, final KuneBasicProperties properties) {
     super(provider, User.class);
     this.finder = finder;
     this.languageManager = languageManager;
@@ -98,7 +98,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.waveAccountStore = waveAccountStore;
     this.kuneWaveManager = kuneWaveManager;
     this.participantUtils = participantUtils;
-    this.databaseProperties = databaseProperties;
+    this.properties = properties;
   }
 
   @Override
@@ -140,12 +140,19 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     try {
       final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
           passwdDigest.getSalt(), language, country, tz);
-      kuneWaveManager.createWave(
-          ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
-              databaseProperties.getDefaultSiteName()),
-          ContentConstants.WELCOME_WAVE_CONTENT.replaceAll("\\[%s\\]",
-              databaseProperties.getDefaultSiteName()),
-          participantUtils.of(databaseProperties.getAdminShortName()), participantUtils.of(shortName));
+
+      final String defWave = properties.getWelcomewave();
+      if (defWave != null) {
+        kuneWaveManager.createWave(ContentConstants.WELCOME_WAVE_CONTENT_TITLE, "", defWave, null,
+            participantUtils.of(properties.getAdminShortName()), participantUtils.of(shortName));
+        // kuneWaveManager.createWave(
+        // ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
+        // properties.getDefaultSiteName()),
+        // ContentConstants.WELCOME_WAVE_CONTENT.replaceAll("\\[%s\\]",
+        // properties.getDefaultSiteName()),
+        // participantUtils.of(properties.getAdminShortName()),
+        // participantUtils.of(shortName));
+      }
       return user;
     } catch (final RuntimeException e) {
       try {

@@ -24,7 +24,7 @@ import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.server.properties.DatabaseProperties;
+import cc.kune.core.server.properties.KuneBasicProperties;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -38,7 +38,7 @@ public class ParticipantUtils {
 
     @Inject
     public ParticipantUtils(@Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
-            final DatabaseProperties databaseProperties) throws InvalidParticipantAddress {
+            final KuneBasicProperties databaseProperties) throws InvalidParticipantAddress {
         this.domain = domain;
         superAdmin = ofImpl(databaseProperties.getAdminShortName());
     }

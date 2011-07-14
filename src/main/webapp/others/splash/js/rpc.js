@@ -145,7 +145,7 @@ wave.DataView.prototype.clearPendingEdits = function() {
     dirtyRef.removeClass('content-dirty');
     requestId++;
   }
-  
+
   // Finally, clear all pending edits.
   this.pendingEdits_.length = 0;
 };
@@ -465,7 +465,7 @@ wave.Rpc.prototype.rpcOpenWave = function() {
  */
 wave.Rpc.prototype.rpcAsyncUpdate = function() {
   this.dataView_.addPendingEdits();
-  this.rpc_(wave.Rpc.ASYNC_UPDATE_URL_);
+  // this.rpc_(wave.Rpc.ASYNC_UPDATE_URL_);
   this.dataView_.clearPendingEdits();
 };
 

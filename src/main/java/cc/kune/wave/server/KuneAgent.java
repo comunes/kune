@@ -19,18 +19,16 @@
  */
 package cc.kune.wave.server;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 
-import org.waveprotocol.box.server.account.RobotAccountData;
 import org.waveprotocol.box.server.persistence.AccountStore;
-import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.wave.model.id.TokenGenerator;
+import org.waveprotocol.wave.model.id.WaveId;
+import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
@@ -83,6 +81,13 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveManager
   }
 
   @Override
+  public WaveRef createWave(final String title, final String message, final String waveIdToCopy,
+      final URL gadgetUrl, final ParticipantId... participantsArray) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
   public WaveRef createWave(final String title, final String message, final URL gadgetUrl,
       final ParticipantId... participantsArray) {
     // super.newWave(getWaveDomain(), participantsArray);
@@ -95,26 +100,35 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveManager
   }
 
   @Override
-  public Wavelet fetchWavelet(final WaveRef waveRef, final String author) {
-    // Preconditions.checkNotNull(author);
-    RobotAccountData account = null;
-    final String rpcUrl = "http://" + getFrontEndAddress() + "/robot/rpc";
-    try {
-      account = getAccountStore().getAccount(
-          ParticipantId.ofUnsafe(getRobotId() + "@" + getWaveDomain())).asRobot();
-    } catch (final PersistenceException e) {
-      LOG.log(Level.WARNING, "Cannot fetch account data for robot id: " + getRobotId(), e);
-    }
-    if (account != null) {
-      setupOAuth(account.getId().getAddress(), account.getConsumerSecret(), rpcUrl);
-      try {
-        return super.fetchWavelet(waveRef.getWaveId(), waveRef.getWaveletId(), "http://"
-            + getFrontEndAddress() + "/robot/rpc");
-      } catch (final IOException e) {
-        e.printStackTrace();
-        return null;
-      }
-    }
+  public Wavelet fetchWave(final WaveId waveId, final WaveletId waveletId, final String author) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Wavelet fetchWave(final WaveRef waveRef, final String author) {
+    // // Preconditions.checkNotNull(author);
+    // RobotAccountData account = null;
+    // final String rpcUrl = "http://" + getFrontEndAddress() + "/robot/rpc";
+    // try {
+    // account = getAccountStore().getAccount(
+    // ParticipantId.ofUnsafe(getRobotId() + "@" + getWaveDomain())).asRobot();
+    // } catch (final PersistenceException e) {
+    // LOG.log(Level.WARNING, "Cannot fetch account data for robot id: " +
+    // getRobotId(), e);
+    // }
+    // if (account != null) {
+    // setupOAuth(account.getId().getAddress(), account.getConsumerSecret(),
+    // rpcUrl);
+    // try {
+    // return super.fetchWavelet(waveRef.getWaveId(), waveRef.getWaveletId(),
+    // "http://"
+    // + getFrontEndAddress() + "/robot/rpc");
+    // } catch (final IOException e) {
+    // e.printStackTrace();
+    // return null;
+    // }
+    // }
     return null;
   }
 
@@ -156,4 +170,5 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveManager
     // TODO Auto-generated method stub
 
   }
+
 }

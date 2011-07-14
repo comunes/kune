@@ -29,8 +29,9 @@ window.waveOptions_ = {};
  * Application entry point.
  */
 $(document).ready(function() {
+  /*
   var path = window.location.pathname;
-  
+
   // adjust the height of the content frame to fill the iframe height
   $("#contentInner3")
     .css("height", 0)
@@ -95,6 +96,7 @@ $(document).ready(function() {
 
   var rpc = window.wave.Rpc.getInstance();
 
+   */
   initGadgetSystem();
 //  rpc.rpcOpenWave();
 

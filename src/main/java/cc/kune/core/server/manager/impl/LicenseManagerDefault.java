@@ -25,7 +25,7 @@ import javax.persistence.EntityManager;
 
 
 import cc.kune.core.server.manager.LicenseManager;
-import cc.kune.core.server.properties.DatabaseProperties;
+import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.domain.License;
 import cc.kune.domain.finders.LicenseFinder;
 
@@ -36,10 +36,10 @@ import com.google.inject.Singleton;
 @Singleton
 public class LicenseManagerDefault extends DefaultManager<License, Long> implements LicenseManager {
     private LicenseFinder licenseFinder;
-    private final DatabaseProperties properties;
+    private final KuneBasicProperties properties;
 
     @Inject
-    public LicenseManagerDefault(final Provider<EntityManager> provider, final DatabaseProperties properties,
+    public LicenseManagerDefault(final Provider<EntityManager> provider, final KuneBasicProperties properties,
             final LicenseFinder licenseFinder) {
         super(provider, License.class);
         this.properties = properties;

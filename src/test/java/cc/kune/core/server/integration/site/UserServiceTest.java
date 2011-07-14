@@ -36,7 +36,7 @@ import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.mapper.Mapper;
-import cc.kune.core.server.properties.DatabaseProperties;
+import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.rpc.SocialNetworkRPC;
 import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.server.users.UserInfoService;
@@ -62,7 +62,7 @@ public class UserServiceTest extends IntegrationTest {
   @Inject
   Mapper mapper;
   @Inject
-  DatabaseProperties properties;
+  KuneBasicProperties properties;
   @Inject
   SocialNetworkRPC sn;
   private TimeZoneDTO timezone;

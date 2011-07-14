@@ -82,7 +82,7 @@ public class KuneAgentTest {
     final WaveRef waveletName = manager.createWave(RICHTEXT_MESSAGE,
         ParticipantId.of(getSiteAdminShortName()));
     assertNotNull(waveletName);
-    final Wavelet fetchWavelet = manager.fetchWavelet(waveletName, getSiteAdminShortName());
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertTrue(fetchWavelet.getRootBlip().getAnnotations().size() > 0);
     assertEquals("", fetchWavelet.getRootBlip().getContent());

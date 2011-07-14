@@ -27,14 +27,14 @@ import java.io.IOException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.UserSession;
-import cc.kune.core.server.properties.DatabaseProperties;
+import cc.kune.core.server.properties.KuneBasicProperties;
 
 import com.google.inject.Inject;
 
 public abstract class IntegrationTest {
 
     @Inject
-    DatabaseProperties properties;
+    KuneBasicProperties properties;
     @Inject
     protected UserSession session;
     protected String token;

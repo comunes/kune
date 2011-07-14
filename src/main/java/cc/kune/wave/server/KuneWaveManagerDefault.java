@@ -39,6 +39,8 @@ import org.waveprotocol.box.server.robots.util.OperationUtil;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
 import org.waveprotocol.box.server.waveserver.WaveletProvider.SubmitRequestListener;
 import org.waveprotocol.wave.model.id.InvalidIdException;
+import org.waveprotocol.wave.model.id.WaveId;
+import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.version.HashedVersion;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
@@ -50,8 +52,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.google.wave.api.Annotation;
 import com.google.wave.api.ApiIdSerializer;
 import com.google.wave.api.Blip;
+import com.google.wave.api.BlipContent;
 import com.google.wave.api.BlipData;
 import com.google.wave.api.BlipThread;
 import com.google.wave.api.Element;
@@ -62,6 +66,7 @@ import com.google.wave.api.OperationQueue;
 import com.google.wave.api.OperationRequest;
 import com.google.wave.api.OperationRequest.Parameter;
 import com.google.wave.api.ProtocolVersion;
+import com.google.wave.api.Range;
 import com.google.wave.api.Wavelet;
 import com.google.wave.api.data.converter.EventDataConverterManager;
 import com.google.wave.api.impl.DocumentModifyAction;
@@ -81,14 +86,34 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   private static final String NO_TITLE = "";
 
   private static final List<String> NO_VALUES = Collections.<String> emptyList();
+  private static final String NO_WAVE_TO_COPY = null;
 
+  /**
+   * 
+   * Copy blips
+   * 
+   * @param fromBlip
+   * @param toBlip
+   * 
+   * @author yurize@apache.org (Yuri Zelikov)
+   * 
+   */
+  public static void copyWavelet(final Blip fromBlip, final Blip toBlip) {
+    for (final BlipContent blipContent : fromBlip.all().values()) {
+      toBlip.append(blipContent);
+    }
+    for (final Annotation annotation : fromBlip.getAnnotations()) {
+      final Range range = annotation.getRange();
+      toBlip.range(range.getStart() + 1, range.getEnd() + 1).annotate(annotation.getName(),
+          annotation.getValue());
+    }
+  }
   private final ConversationUtil conversationUtil;
   private final EventDataConverterManager converterManager;
   private final String domain;
   private final OperationServiceRegistry operationRegistry;
   private final ParticipantUtils participantUtils;
   private final WaveletProvider waveletProvider;
-
   private final WaveRenderer waveRenderer;
 
   @Inject
@@ -116,7 +141,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     final Gadget gadget = new Gadget(properties);
 
     elementsIn.add(gadget);
-    final Wavelet wavelet = fetchWavelet(waveName, author);
+    final Wavelet wavelet = fetchWave(waveName, author);
     final OperationQueue opQueue = new OperationQueue();
     final Blip rootBlip = wavelet.getRootBlip();
 
@@ -130,7 +155,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   @Override
   public void addParticipant(final WaveRef waveName, final String author, final String userWhoAdds,
       final String participant) {
-    final Wavelet wavelet = fetchWavelet(waveName, author);
+    final Wavelet wavelet = fetchWave(waveName, author);
     final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
         : author;
     final OperationQueue opQueue = new OperationQueue();
@@ -151,8 +176,8 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   }
 
   @Override
-  public WaveRef createWave(@Nonnull final String title, final String message, final URL gadgetUrl,
-      @Nonnull final ParticipantId... participantsArray) {
+  public WaveRef createWave(@Nonnull final String title, final String message,
+      final String waveIdToCopy, final URL gadgetUrl, @Nonnull final ParticipantId... participantsArray) {
     String newWaveId = null;
     String newWaveletId = null;
     final Set<String> participants = new HashSet<String>();
@@ -165,25 +190,23 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     opQueue.setTitleOfWavelet(newWavelet, title);
     final Blip rootBlip = newWavelet.getRootBlip();
     rootBlip.append(new com.google.wave.api.Markup(message).getText());
-    // rootBlip.all().delete();
-    // rootBlip.appendMarkup(message);
-    // opQueue.appendMarkupToDocument(rootBlip,
-    // ContentNewUnrenderer.unrender(message).toXmlString());
 
-    // final OperationRequest modifyDocument = opQueue.modifyDocument(rootBlip);
-    // ImmutableList<String> of =
-    // ImmutableList.of(ContentNewUnrenderer.unrender(message).toXmlString());
-    // rootBlip.getContent().hackConsume(
-    // Nindo.fromDocOp(ContentNewUnrenderer.unrender(message).asOperation(),
-    // false));
-    // modifyDocument.addParameter(Parameter.of(ParamsProperty.MODIFY_ACTION,
-    // new DocumentModifyAction(
-    // ModifyHow.REPLACE,
-    // ImmutableList.of(ContentNewUnrenderer.unrender(message).toXmlString()),
-    // null,
-    // null, null, false)));
-    // NO_ANNOTATION_KEY, NO_ELEMENTS, NO_BUNDLED_ANNOTATIONS, false)));
-    // rootBlip.appendMarkup(message);
+    if (waveIdToCopy != NO_WAVE_TO_COPY) {
+      try {
+        WaveId copyWaveId;
+        copyWaveId = WaveId.ofChecked(domain, waveIdToCopy);
+        final Wavelet waveletToCopy = fetchWave(copyWaveId, WaveletId.of(domain, "conv+root"),
+            participantsArray[0].toString());
+        if (waveletToCopy != null) {
+          copyWavelet(waveletToCopy.getRootBlip(), rootBlip);
+        }
+      } catch (final InvalidIdException e) {
+        LOG.error("Error copying wave content", e);
+      } catch (final DefaultException e2) {
+        LOG.error("Error copying wave content", e2);
+      }
+    }
+
     if (gadgetUrl != WITHOUT_GADGET) {
       final Gadget gadget = new Gadget(gadgetUrl.toString());
       rootBlip.append(gadget);
@@ -233,6 +256,12 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     return wavename;
   }
 
+  @Override
+  public WaveRef createWave(@Nonnull final String title, final String message, final URL gadgetUrl,
+      @Nonnull final ParticipantId... participantsArray) {
+    return createWave(title, message, NO_WAVE_TO_COPY, gadgetUrl, participantsArray);
+  }
+
   private void doOperation(final String author, final OperationQueue opQueue, final String logComment) {
     final OperationContextImpl context = new OperationContextImpl(waveletProvider,
         converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
@@ -267,10 +296,10 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   }
 
   @Override
-  public Wavelet fetchWavelet(final WaveRef waveName, final String author) {
-    Wavelet wavelet = null;
+  public Wavelet fetchWave(final WaveId waveId, final WaveletId waveletId, final String author) {
     final OperationQueue opQueue = new OperationQueue();
-    opQueue.fetchWavelet(waveName.getWaveId(), waveName.getWaveletId());
+    opQueue.fetchWavelet(waveId, waveletId);
+    Wavelet wavelet = null;
     final OperationContextImpl context = new OperationContextImpl(waveletProvider,
         converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
     final OperationRequest request = opQueue.getPendingOperations().get(0);
@@ -308,6 +337,13 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   }
 
   @Override
+  public Wavelet fetchWave(final WaveRef waveName, final String author) {
+    final WaveId waveId = waveName.getWaveId();
+    final WaveletId waveletId = waveName.getWaveletId();
+    return fetchWave(waveId, waveletId, author);
+  }
+
+  @Override
   public boolean isParticipant(final Wavelet wavelet, final String user) {
     return wavelet.getParticipants().contains(participantUtils.of(user).toString());
   }
@@ -326,14 +362,15 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
 
   @Override
   public String render(final WaveRef waveRef, final String author) {
-    return render(fetchWavelet(waveRef, author));
+    return render(fetchWave(waveRef, author));
   }
 
   @Override
   public void setTitle(final WaveRef waveName, final String title, final String author) {
-    final Wavelet wavelet = fetchWavelet(waveName, author);
+    final Wavelet wavelet = fetchWave(waveName, author);
     final OperationQueue opQueue = new OperationQueue();
     opQueue.setTitleOfWavelet(wavelet, title);
     doOperation(author, opQueue, "set title");
   }
+
 }

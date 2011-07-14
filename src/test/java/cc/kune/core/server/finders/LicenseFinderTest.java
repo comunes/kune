@@ -29,7 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.server.PersistenceTest;
-import cc.kune.core.server.properties.DatabaseProperties;
+import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.domain.License;
 import cc.kune.domain.finders.LicenseFinder;
 
@@ -42,7 +42,7 @@ public class LicenseFinderTest extends PersistenceTest {
     private License license2;
     private License licenseDef;
     @Inject
-    DatabaseProperties properties;
+    KuneBasicProperties properties;
 
     @Before
     public void addData() {

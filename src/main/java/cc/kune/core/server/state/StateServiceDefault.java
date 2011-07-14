@@ -107,7 +107,7 @@ public class StateServiceDefault implements StateService {
       state.setWaveRef(waveId);
       try {
         // FIXME if we remove the authors this fails...
-        final Wavelet wavelet = kuneWaveManager.fetchWavelet(
+        final Wavelet wavelet = kuneWaveManager.fetchWave(
             JavaWaverefEncoder.decodeWaveRefFromPath(waveId), content.getAuthors().get(0).getShortName());
         // final String currentContent = wavelet.getRootBlip().getContent();
         state.setContent(kuneWaveManager.render(wavelet));
