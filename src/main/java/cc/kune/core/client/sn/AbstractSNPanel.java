@@ -30,6 +30,8 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
+import cc.kune.core.client.dnd.KuneDragController;
+import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
@@ -66,6 +68,7 @@ public class AbstractSNPanel extends ViewImpl {
   FlowPanel categoriesFlow;
   @UiField
   DeckPanel deck;
+  protected final KuneDragController dragController;
   @UiField
   Label firstCategoryCount;
   @UiField
@@ -105,11 +108,16 @@ public class AbstractSNPanel extends ViewImpl {
   protected final Widget widget;
 
   public AbstractSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
-      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator) {
+      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
+      final KuneDragController dragController, final NotImplementedDropManager notDrop) {
     this.armor = armor;
     this.avatarDecoratorProv = avatarDecorator;
+    this.dragController = dragController;
     widget = uiBinder.createAndBindUi(this);
     actions = new ActionSimplePanel(guiProvider);
+    notDrop.register(firstCategoryFlow);
+    notDrop.register(sndCategoryFlow);
+    notDrop.register(trdCategoryFlow);
   }
 
   @Override
@@ -150,6 +158,7 @@ public class AbstractSNPanel extends ViewImpl {
     thumb.addClickHandler(clickHand);
     thumb.setTooltip(tooltipTitle, tooltip);
     thumb.setLabelVisible(false);
+    dragController.makeDraggable(thumb);
     return thumb;
   }
 

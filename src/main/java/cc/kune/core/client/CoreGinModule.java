@@ -43,6 +43,8 @@ import cc.kune.core.client.auth.UserPassAutocompleteManager;
 import cc.kune.core.client.auth.UserPassAutocompleteManagerImpl;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
+import cc.kune.core.client.dnd.KuneDragController;
+import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.groups.newgroup.NewGroupPanel;
@@ -133,6 +135,10 @@ public class CoreGinModule extends ExtendedGinModule {
     s(I18nUITranslationService.class);
     bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
     bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+
+    // DnD
+    s(KuneDragController.class);
+    s(NotImplementedDropManager.class);
 
     // Presenters
     bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,

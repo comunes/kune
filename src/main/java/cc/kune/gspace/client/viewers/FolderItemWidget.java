@@ -20,6 +20,7 @@
 package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -63,7 +64,10 @@ public class FolderItemWidget extends Composite implements HasText {
   @UiField
   InlineLabel title;
 
-  public FolderItemWidget(final ImageResource iconResource, final String title) {
+  private final StateToken token;
+
+  public FolderItemWidget(final ImageResource iconResource, final String title, final StateToken token) {
+    this.token = token;
     initWidget(uiBinder.createAndBindUi(this));
     this.title.setText(title);
     icon.setResource(iconResource);
@@ -72,6 +76,14 @@ public class FolderItemWidget extends Composite implements HasText {
   private void clearFocusStyles() {
     focusPanel.removeStyleDependentName("nofocused");
     focusPanel.removeStyleDependentName("focused");
+  }
+
+  FlowPanel getFlow() {
+    return flow;
+  }
+
+  Widget getIcon() {
+    return icon;
   }
 
   HasClickHandlers getRowClick() {
@@ -93,6 +105,14 @@ public class FolderItemWidget extends Composite implements HasText {
   @Override
   public String getText() {
     return title.getText();
+  }
+
+  Widget getTitleWidget() {
+    return title;
+  }
+
+  public StateToken getToken() {
+    return token;
   }
 
   @UiHandler("focusPanel")

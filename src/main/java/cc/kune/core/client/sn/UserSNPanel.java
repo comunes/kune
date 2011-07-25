@@ -24,6 +24,8 @@ import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
+import cc.kune.core.client.dnd.KuneDragController;
+import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNView;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -42,8 +44,9 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   @Inject
   public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
-      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator) {
-    super(i18n, guiProvider, armor, avatarDecorator);
+      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
+      final KuneDragController dragController, final NotImplementedDropManager notDrop) {
+    super(i18n, guiProvider, armor, avatarDecorator, dragController, notDrop);
     this.i18n = i18n;
 
     setVisibleImpl(false);

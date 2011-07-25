@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -51,8 +52,8 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   @Inject
   public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
-      final ContentCapabilitiesRegistry capabilitiesRegistry) {
-    super(gsArmor, i18n, capabilitiesRegistry);
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController) {
+    super(gsArmor, i18n, capabilitiesRegistry, dragController);
     widget = uiBinder.createAndBindUi(this);
   }
 

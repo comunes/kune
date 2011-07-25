@@ -142,9 +142,9 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
     } else if (show == Show.xa) {
       finalStatus = i18n.t("Away");
       super.setImage(chatDotXA);
-      super.setImage(chatDotAway);
     } else if (show == Show.away) {
       finalStatus = i18n.t("Away");
+      super.setImage(chatDotAway);
     } else if (show == Show.chat) {
       finalStatus = i18n.t("Available for chat");
       super.setImage(chatDotExtendedAway);

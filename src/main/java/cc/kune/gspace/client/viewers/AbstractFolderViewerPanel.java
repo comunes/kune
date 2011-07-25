@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -37,8 +38,9 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public abstract class AbstractFolderViewerPanel extends ViewImpl implements FolderViewerView {
-  private final ContentCapabilitiesRegistry capabilitiesRegistry;
+  protected final ContentCapabilitiesRegistry capabilitiesRegistry;
   private final ContentTitleWidget contentTitle;
+  protected final KuneDragController dragController;
   private final InlineLabel emptyLabel;
   private final FlowPanel emptyPanel;
   protected final GSpaceArmor gsArmor;
@@ -46,10 +48,11 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   protected Widget widget;
 
   public AbstractFolderViewerPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
-      final ContentCapabilitiesRegistry capabilitiesRegistry) {
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController) {
     this.gsArmor = gsArmor;
     this.i18n = i18n;
     this.capabilitiesRegistry = capabilitiesRegistry;
+    this.dragController = dragController;
     emptyPanel = new FlowPanel();
     emptyLabel = new InlineLabel(i18n.t("This is empty."));
     emptyLabel.setStyleName("k-empty-msg");
@@ -67,11 +70,6 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   public void attach() {
     final ForIsWidget docContainer = gsArmor.getDocContainer();
     docContainer.add(widget);
-  }
-
-  @Override
-  public void highlightTitle() {
-    contentTitle.highlightTitle();
   }
 
   @Override
@@ -94,6 +92,11 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   @Override
   public HasEditHandler getEditTitle() {
     return contentTitle.getEditableTitle();
+  }
+
+  @Override
+  public void highlightTitle() {
+    contentTitle.highlightTitle();
   }
 
   @Override

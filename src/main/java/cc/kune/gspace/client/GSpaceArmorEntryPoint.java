@@ -28,33 +28,33 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 @Deprecated
 public class GSpaceArmorEntryPoint implements EntryPoint {
-    @Override
-    public void onModuleLoad() {
-        final GSpaceArmorResources resources = GWT.create(GSpaceArmorResources.class);
-        resources.style().ensureInjected();
+  @Override
+  public void onModuleLoad() {
+    final GSpaceArmorResources resources = GWT.create(GSpaceArmorResources.class);
+    resources.style().ensureInjected();
 
-        final RootLayoutPanel rootPanel = RootLayoutPanel.get();
-        final GSpaceArmorImpl armor = new GSpaceArmorImpl(null);
-        final InlineLabel icons = new InlineLabel("Icons");
-        final InlineLabel login = new InlineLabel("Login");
-        final InlineLabel logo = new InlineLabel("Logo");
-        icons.setStyleName(resources.style().floatLeft());
-        login.setStyleName(resources.style().floatRight());
-        logo.setStyleName(resources.style().floatRight());
-        armor.getSitebar().add(icons);
-        armor.getSitebar().add(logo);
-        armor.getSitebar().add(login);
-        armor.getEntityToolsNorth().add(new InlineLabel("Group members"));
-        armor.getEntityToolsCenter().add(new InlineLabel("Documents"));
-        armor.getEntityToolsSouth().add(new InlineLabel("Group tags"));
-        armor.getEntityHeader().add(new InlineLabel("Name of the Initiative"));
-        armor.getDocHeader().add(new InlineLabel("Some doc title"));
-        final InlineLabel editors = new InlineLabel("Editors:");
-        editors.addStyleName(resources.style().docSubheaderLeft());
-        armor.getDocSubheader().add(editors);
-        armor.getDocFooter().add(new InlineLabel("Tags:"));
-        armor.getEntityFooter().add(new InlineLabel("Rate it:"));
-        rootPanel.add(armor);
-    }
+    final RootLayoutPanel rootPanel = RootLayoutPanel.get();
+    final GSpaceArmorImpl armor = new GSpaceArmorImpl(null);
+    final InlineLabel icons = new InlineLabel("Icons");
+    final InlineLabel login = new InlineLabel("Login");
+    final InlineLabel logo = new InlineLabel("Logo");
+    icons.setStyleName(resources.style().floatLeft());
+    login.setStyleName(resources.style().floatRight());
+    logo.setStyleName(resources.style().floatRight());
+    armor.getSitebar().add(icons);
+    armor.getSitebar().add(logo);
+    armor.getSitebar().add(login);
+    armor.getEntityToolsNorth().add(new InlineLabel("Group members"));
+    armor.getEntityToolsCenter().add(new InlineLabel("Documents"));
+    armor.getEntityToolsSouth().add(new InlineLabel("Group tags"));
+    armor.getEntityHeader().add(new InlineLabel("Name of the Initiative"));
+    armor.getDocHeader().add(new InlineLabel("Some doc title"));
+    final InlineLabel editors = new InlineLabel("Editors:");
+    editors.addStyleName(resources.style().docSubheaderLeft());
+    armor.getDocSubheader().add(editors);
+    armor.getDocFooter().add(new InlineLabel("Tags:"));
+    armor.getEntityFooter().add(new InlineLabel("Rate it:"));
+    rootPanel.add(armor);
+  }
 
 }

@@ -4,9 +4,10 @@
   <groupId>cc.kune</groupId>
   <artifactId>kune</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.9</version>
+  <version>0.1.0-SNAPSHOT</version>
   <name>kune</name>
-  <description> kune free/open/libre collaboration platform </description>
+  <description> kune free/open/libre collaboration platform
+  </description>
   <url>http://kune.ourproject.org</url>
   <properties>
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
@@ -67,7 +68,8 @@
     </repository>
     <repository>
       <id>gwt-repo</id>
-      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/</url>
+      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/
+      </url>
       <name>Google Web Toolkit Repository</name>
     </repository>
     <repository>
@@ -91,7 +93,8 @@
     <repository>
       <id>gwtplatform.snapshot.repo</id>
       <name>Gwtplatform snapshot repository</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/
+      </url>
       <layout>default</layout>
     </repository>
     <repository>
@@ -188,7 +191,8 @@
     </pluginRepository>
     <pluginRepository>
       <id>gwt-plugin-repo</id>
-      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/</url>
+      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/
+      </url>
       <name>Google Web Toolkit Plugin Repository</name>
     </pluginRepository>
     <pluginRepository>
@@ -290,6 +294,11 @@
       <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
       <artifactId>gwt-voices</artifactId>
       <version>2.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.allen_sauer.gwt.dnd.gwt-dnd</groupId>
+      <artifactId>gwt-dnd</artifactId>
+      <version>3.0.1</version>
     </dependency>
     <!-- utilities -->
     <dependency>
@@ -659,16 +668,16 @@
       <type>jar</type>
     </dependency>
     <!-- splash -->
-<dependency>
-    <groupId>org.jsoup</groupId>
-    <artifactId>jsoup</artifactId>
-    <version>1.2.2</version>
-</dependency>
-<dependency>
-    <groupId>org.mvel</groupId>
-    <artifactId>mvel2</artifactId>
-    <version>2.0.16</version>
-</dependency>
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mvel</groupId>
+      <artifactId>mvel2</artifactId>
+      <version>2.0.16</version>
+    </dependency>
     <!-- gwtupload -->
     <dependency>
       <groupId>com.googlecode.gwtupload</groupId>
@@ -738,7 +747,8 @@
   <distributionManagement>
     <repository>
       <id>kune.ourproject.org</id>
-      <url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/ </url>
+      <url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/
+      </url>
     </repository>
   </distributionManagement>
   <issueManagement>
@@ -779,7 +789,8 @@
         </executions>
         <configuration>
           <mainClass>cc.kune.wave.server.WaveMain</mainClass>
-          <commandlineArgs>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8001</commandlineArgs>
+          <commandlineArgs>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8001
+          </commandlineArgs>
           <systemProperties>
             <systemProperty>
               <key>kune.config</key>
@@ -791,7 +802,8 @@
               <value>src/main/resources/wave-server.properties</value>
             </systemProperty>
             <systemProperty>
-              <key>org.eclipse.jetty.util.resource.FileResource.checkAliases</key>
+              <key>org.eclipse.jetty.util.resource.FileResource.checkAliases
+              </key>
               <!-- <key>org.mortbay.util.FileResource.checkAliases</key> -->
               <value>False</value>
             </systemProperty>
@@ -912,13 +924,16 @@
           <wtpversion>2.0</wtpversion>
           <additionalBuildcommands>
             <buildCommand>
-              <name>com.google.gwt.eclipse.core.gwtProjectValidator </name>
+              <name>com.google.gwt.eclipse.core.gwtProjectValidator
+              </name>
             </buildCommand>
           </additionalBuildcommands>
-          <workspaceCodeStylesURL>http://kune.ourproject.org/kune.formatter.eclipse.preferences.xml</workspaceCodeStylesURL>
+          <workspaceCodeStylesURL>http://kune.ourproject.org/kune.formatter.eclipse.preferences.xml
+          </workspaceCodeStylesURL>
           <additionalProjectnatures>
             <!-- <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature> -->
-            <projectnature>com.google.gwt.eclipse.core.gwtNature </projectnature>
+            <projectnature>com.google.gwt.eclipse.core.gwtNature
+            </projectnature>
           </additionalProjectnatures>
         </configuration>
       </plugin>
@@ -958,7 +973,8 @@
             <!-- <contextPath>/${project.name}</contextPath> -->
             <contextPath>/</contextPath>
           </webAppConfig>
-          <webAppSourceDirectory>${project.build.directory}/${project.build.finalName}</webAppSourceDirectory>
+          <webAppSourceDirectory>${project.build.directory}/${project.build.finalName}
+          </webAppSourceDirectory>
           <!-- <reload>manual</reload> <scanIntervalSeconds>0</scanIntervalSeconds> -->
         </configuration>
       </plugin>
@@ -985,7 +1001,8 @@
           <noServer>true</noServer>
           <gwtVersion>${gwt.version}</gwtVersion>
           <runTarget>/ws/ws.html?log_level=DEBUG</runTarget>
-          <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+          <hostedWebapp>${project.build.directory}/${project.build.finalName}
+          </hostedWebapp>
           <modules>
             <module>${project.groupId}.Kune</module>
           </modules>
@@ -1035,7 +1052,8 @@
             <phase>process-resources</phase>
             <configuration>
               <changeLogFile>
-                src/main/resources/db/liquibase_changelog.xml </changeLogFile>
+                src/main/resources/db/liquibase_changelog.xml
+              </changeLogFile>
               <driver>com.mysql.jdbc.Driver</driver>
               <url>jdbc:mysql://localhost/kune_dev</url>
               <username>kune</username>
@@ -1063,7 +1081,8 @@
               <!-- <classpathLayoutType>repository</classpathLayoutType> -->
               <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType'
                 instead. -->
-              <classpathMavenRepositoryLayout>true</classpathMavenRepositoryLayout>
+              <classpathMavenRepositoryLayout>true
+              </classpathMavenRepositoryLayout>
               <!-- <packageName>cc.kune.wave.server</packageName> -->
             </manifest>
             <manifestEntries>
@@ -1175,7 +1194,8 @@
         </includes> </fileset> </filesets> </configuration> </plugin> -->
     </plugins>
     <!-- <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory> -->
-    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes
+    </outputDirectory>
     <!-- <outputDirectory>war/WEB-INF/classes</outputDirectory> -->
     <!-- <testOutputDirectory>war/WEB-INF/test-classes</testOutputDirectory> -->
     <!-- <resources> -->

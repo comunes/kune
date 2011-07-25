@@ -26,6 +26,8 @@ import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.core.client.dnd.FolderViewerDropController;
+import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.dto.StateContainerDTO;
@@ -65,8 +67,8 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
   @Inject
   public FolderViewerAsTablePanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
       final GuiProvider guiProvider, final CoreResources res,
-      final ContentCapabilitiesRegistry capabilitiesRegistry) {
-    super(gsArmor, i18n, capabilitiesRegistry);
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController) {
+    super(gsArmor, i18n, capabilitiesRegistry, dragController);
     this.guiProvider = guiProvider;
     this.res = res;
     widget = uiBinder.createAndBindUi(this);
@@ -78,7 +80,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       final DoubleClickHandler doubleClickHandler) {
     final int rowCount = flex.getRowCount();
     final FolderItemWidget itemWidget = new FolderItemWidget((ImageResource) item.getIcon(),
-        item.getText());
+        item.getText(), item.getStateToken());
     final ActionSimplePanel toolbar = new ActionSimplePanel(guiProvider);
     final long modifiedOn = item.getModififiedOn();
     if (modifiedOn != FolderViewerView.NO_DATE) {
@@ -138,6 +140,12 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       }
     });
     flex.setWidget(rowCount + 1, 0, itemWidget);
+    if (item.isDraggable()) {
+      dragController.makeDraggable(itemWidget, itemWidget.getTitleWidget());
+    }
+    if (item.isDroppable()) {
+      new FolderViewerDropController(itemWidget, dragController);
+    }
   }
 
   @Override

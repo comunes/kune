@@ -25,6 +25,8 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
+import cc.kune.core.client.dnd.KuneDragController;
+import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.sn.GroupSNPresenter.GroupSNView;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -38,8 +40,9 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   @Inject
   public GroupSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
-      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator) {
-    super(i18n, guiProvider, armor, avatarDecorator);
+      final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
+      final KuneDragController dragController, final NotImplementedDropManager notDrop) {
+    super(i18n, guiProvider, armor, avatarDecorator, dragController, notDrop);
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("Group members"));
     Tooltip.to(mainTitle, i18n.t("People and groups collaborating in this group"));

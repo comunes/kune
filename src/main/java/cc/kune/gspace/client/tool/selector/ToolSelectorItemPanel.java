@@ -70,6 +70,10 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     self.removeStyleDependentName("nofocus");
   }
 
+  public Widget getFlow() {
+    return self;
+  }
+
   @Override
   public HasClickHandlers getFocus() {
     return self;

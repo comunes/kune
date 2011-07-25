@@ -19,6 +19,8 @@
  */
 package cc.kune.gspace.client.tool.selector;
 
+import cc.kune.core.client.dnd.FolderViewerDropController;
+import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView;
@@ -33,27 +35,32 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
 
-    interface ToolSelectorPanelUiBinder extends UiBinder<Widget, ToolSelectorPanel> {
-    }
+  interface ToolSelectorPanelUiBinder extends UiBinder<Widget, ToolSelectorPanel> {
+  }
 
-    private static ToolSelectorPanelUiBinder uiBinder = GWT.create(ToolSelectorPanelUiBinder.class);
+  private static ToolSelectorPanelUiBinder uiBinder = GWT.create(ToolSelectorPanelUiBinder.class);
 
-    @UiField
-    FlowPanel flow;
+  private final KuneDragController dragController;
 
-    @Inject
-    public ToolSelectorPanel(final GSpaceArmor wsArmor) {
-        wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
-    }
+  @UiField
+  FlowPanel flow;
 
-    @Override
-    public void addItem(final ToolSelectorItemView item) {
-        flow.add(item.asWidget());
-    }
+  @Inject
+  public ToolSelectorPanel(final GSpaceArmor wsArmor, final KuneDragController dragController) {
+    this.dragController = dragController;
+    wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
+  }
 
-    @Override
-    public Widget asWidget() {
-        return flow;
-    }
+  @Override
+  public void addItem(final ToolSelectorItemView item) {
+    final Widget widget = item.asWidget();
+    flow.add(widget);
+    new FolderViewerDropController(((ToolSelectorItemPanel) widget).getFlow(), dragController);
+  }
+
+  @Override
+  public Widget asWidget() {
+    return flow;
+  }
 
 }
