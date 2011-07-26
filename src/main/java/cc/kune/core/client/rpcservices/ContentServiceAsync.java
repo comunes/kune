@@ -60,6 +60,9 @@ public interface ContentServiceAsync {
 
   void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<TagCloudResult> asyncCallback);
 
+  void moveContent(String userHash, StateToken contentToken, StateToken newContainerToken,
+      AsyncCallback<StateContainerDTO> asyncCallback);
+
   void rateContent(String userHash, StateToken token, Double value,
       AsyncCallback<RateResult> asyncCallback);
 

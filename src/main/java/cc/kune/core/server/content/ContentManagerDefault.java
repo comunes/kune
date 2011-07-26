@@ -190,6 +190,18 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
   }
 
+  public Content moveContent(final Content content, final Container newContainer) {
+    final String title = content.getTitle();
+    if (findIfExistsTitle(newContainer, title)) {
+      throw new NameInUseException();
+    }
+    final Container oldContainer = content.getContainer();
+    oldContainer.removeContent(content);
+    newContainer.addContent(content);
+    content.setContainer(newContainer);
+    return persist(content);
+  }
+
   @Override
   public RateResult rateContent(final User rater, final Long contentId, final Double value)
       throws DefaultException {

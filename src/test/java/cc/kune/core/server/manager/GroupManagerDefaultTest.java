@@ -40,7 +40,7 @@ import cc.kune.domain.Group;
 import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.User;
 
-public class GroupManagerTest extends PersistencePreLoadedDataTest {
+public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
     private static final String PUBLIC_DESCRIP = "Some public descrip";
 

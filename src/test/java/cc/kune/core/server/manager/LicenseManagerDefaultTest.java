@@ -33,7 +33,7 @@ import cc.kune.domain.finders.LicenseFinder;
 
 import com.google.inject.Inject;
 
-public class LicenseManagerTest extends PersistenceTest {
+public class LicenseManagerDefaultTest extends PersistenceTest {
     private License license;
     @Inject
     LicenseFinder licenseFinder;

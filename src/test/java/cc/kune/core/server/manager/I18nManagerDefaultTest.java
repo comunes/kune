@@ -40,7 +40,7 @@ import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
 
-public class I18nManagerTest extends PersistenceTest {
+public class I18nManagerDefaultTest extends PersistenceTest {
     @Inject
     I18nTranslationManager translationManager;
     @Inject

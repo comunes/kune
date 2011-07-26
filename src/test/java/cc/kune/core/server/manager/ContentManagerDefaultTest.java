@@ -22,24 +22,29 @@ package cc.kune.core.server.manager;
 import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
 import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
+import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Content;
 
-public class ContentManagerTest extends PersistencePreLoadedDataTest {
+public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   private static final String BODY = "body";
   private static final String MIMETYPE = "image";
   private static final String TITLE = "title";
 
-  private void createContent() {
+  private Content createContent() {
+    assertNotNull(container);
     final Content cnt = contentManager.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
     persist(cnt);
+    containerManager.persist(container);
+    return cnt;
   }
 
   private void createContentWithMimeAndCheck(final String mimetype) {
@@ -78,6 +83,22 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
     final SearchResult<Content> search = contentManager.search(new String[] { MIMETYPE },
         new String[] { "mimeType.mimetype" }, 0, 10);
     assertEquals(1, search.getSize());
+  }
+
+  @Test
+  public void testBasicMove() {
+    final Content content = createContent();
+    final Content newContent = contentManager.moveContent(content, otherContainer);
+    assertEquals(newContent.getContainer(), otherContainer);
+  }
+
+  @Test(expected = NameInUseException.class)
+  public void testBasicMoveWithExistingNameShouldFail() {
+    final Content content = createContent();
+    final Content sameNameCnt = contentManager.createContent(TITLE, BODY, user, otherContainer,
+        TYPE_UPLOADEDFILE);
+    persist(sameNameCnt);
+    contentManager.moveContent(content, otherContainer);
   }
 
   @Test

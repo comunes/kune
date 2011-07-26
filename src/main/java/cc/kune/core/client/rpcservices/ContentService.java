@@ -59,6 +59,9 @@ public interface ContentService extends RemoteService {
 
   TagCloudResult getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
 
+  StateContainerDTO moveContent(String userHash, StateToken contentToken, StateToken newContainerToken)
+      throws DefaultException;
+
   RateResult rateContent(String userHash, StateToken token, Double value) throws DefaultException;
 
   void removeAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;

@@ -238,6 +238,11 @@ public class Container implements HasId, HasStateToken {
     return parent == null;
   }
 
+  public void removeContent(final Content content) {
+    contents.size();
+    contents.remove(content);
+  }
+
   public void setAbsolutePath(final List<Container> absolutePath) {
     this.absolutePath = absolutePath;
   }

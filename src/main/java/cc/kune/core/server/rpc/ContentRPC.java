@@ -316,6 +316,26 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
+  @Transactional
+  public StateContainerDTO moveContent(final String userHash, final StateToken contentToken,
+      final StateToken newContainerToken) throws DefaultException {
+    final User user = getCurrentUser();
+    try {
+      final Content content = accessService.accessToContent(
+          ContentUtils.parseId(contentToken.getDocument()), user, AccessRol.Editor);
+      final Container newContainer = accessService.accessToContainer(
+          ContentUtils.parseId(newContainerToken.getFolder()), user, AccessRol.Editor);
+      final Container oldContainer = content.getContainer();
+      contentManager.moveContent(content, newContainer);
+      return getState(user, oldContainer);
+    } catch (final NoResultException e) {
+      throw new AccessViolationException();
+    }
+  }
+
+  @Override
+  @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer)
   @Transactional
   public RateResult rateContent(final String userHash, final StateToken token, final Double value)

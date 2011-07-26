@@ -114,6 +114,10 @@ public class ErrorHandler {
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("Action not permitted in this location")));
       goHome();
+    } else if (caught instanceof NameInUseException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          i18n.t("A content with the same name already exist. Please rename it")));
     } else if (caught instanceof LastAdminInGroupException) {
       logException(caught);
       NotifyUser.showAlertMessage(i18n.t("Warning"),

@@ -47,76 +47,80 @@ import cc.kune.domain.finders.UserFinder;
 import com.google.inject.Inject;
 
 public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
-    protected static final String USER_EMAIL = "useremail@example.com";
-    protected static final String USER_LONG_NAME = "the user long name";
-    protected static final String USER_PASSWORD = "userPassword";
-    protected static final String USER_SHORT_NAME = "usershortname";
+  protected static final String USER_EMAIL = "useremail@example.com";
+  protected static final String USER_LONG_NAME = "the user long name";
+  protected static final String USER_PASSWORD = "userPassword";
+  protected static final String USER_SHORT_NAME = "usershortname";
 
-    protected Container container;
-    @Inject
-    protected ContainerManager containerManager;
-    protected Content content;
-    @Inject
-    protected ContentManager contentManager;
-    @Inject
-    protected I18nCountryManager countryManager;
-    protected License defLicense;
-    protected I18nLanguage english;
-    protected I18nCountry gb;
-    @Inject
-    protected GroupFinder groupFinder;
-    @Inject
-    protected GroupManager groupManager;
-    @Inject
-    protected I18nLanguageManager languageManager;
+  protected Container container;
+  @Inject
+  protected ContainerManager containerManager;
+  protected Content content;
+  @Inject
+  protected ContentManager contentManager;
+  @Inject
+  protected I18nCountryManager countryManager;
+  protected License defLicense;
+  protected I18nLanguage english;
+  protected I18nCountry gb;
+  @Inject
+  protected GroupFinder groupFinder;
+  @Inject
+  protected GroupManager groupManager;
+  @Inject
+  protected I18nLanguageManager languageManager;
+  @Inject
+  protected LicenseFinder licenseFinder;
+  @Inject
+  protected LicenseManager licenseManager;
+  protected Container otherContainer;
+  // @Inject
+  // protected PropertyGroupManager propGroupManager;
+  protected User user;
+  @Inject
+  protected UserFinder userFinder;
+  @Inject
+  protected UserManager userManager;
 
-    @Inject
-    protected LicenseFinder licenseFinder;
-    @Inject
-    protected LicenseManager licenseManager;
-    // @Inject
-    // protected PropertyGroupManager propGroupManager;
-    protected User user;
-    @Inject
-    protected UserFinder userFinder;
-    @Inject
-    protected UserManager userManager;
+  public PersistencePreLoadedDataTest() {
+  }
 
-    public PersistencePreLoadedDataTest() {
+  @After
+  public void close() {
+    if (getTransaction().isActive()) {
+      getTransaction().rollback();
     }
+  }
 
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
-    }
-
-    @Before
-    public void preLoadData() throws Exception {
-        openTransaction();
-        assertEquals(0, userFinder.getAll().size());
-        assertEquals(0, groupFinder.getAll().size());
-        assertEquals(0, licenseFinder.getAll().size());
-        // final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
-        // final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
-        // propGroupManager.persist(userProps);
-        // propGroupManager.persist(groupProps);
-        english = new I18nLanguage(Long.valueOf(1819), "English", "English", "en");
-        languageManager.persist(english);
-        gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western", ",");
-        countryManager.persist(gb);
-        user = userManager.createUser(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, "en", "GB",
-                TimeZone.getDefault().getID());
-        defLicense = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "",
-                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-        licenseManager.persist(defLicense);
-        groupManager.createUserGroup(user, true);
-        content = new Content();
-        content.setLanguage(english);
-        contentManager.persist(content);
-        container = new Container();
-        container.setTypeId(TYPE_FOLDER);
-        containerManager.persist(container);
-    }
+  @Before
+  public void preLoadData() throws Exception {
+    openTransaction();
+    assertEquals(0, userFinder.getAll().size());
+    assertEquals(0, groupFinder.getAll().size());
+    assertEquals(0, licenseFinder.getAll().size());
+    // final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
+    // final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
+    // propGroupManager.persist(userProps);
+    // propGroupManager.persist(groupProps);
+    english = new I18nLanguage(Long.valueOf(1819), "English", "English", "en");
+    languageManager.persist(english);
+    gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
+        "western", ",");
+    countryManager.persist(gb);
+    user = userManager.createUser(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, "en",
+        "GB", TimeZone.getDefault().getID());
+    defLicense = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "",
+        "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
+    licenseManager.persist(defLicense);
+    groupManager.createUserGroup(user, true);
+    content = new Content();
+    content.setLanguage(english);
+    contentManager.persist(content);
+    container = new Container();
+    container.setTypeId(TYPE_FOLDER);
+    containerManager.persist(container);
+    otherContainer = new Container();
+    otherContainer.setTypeId(TYPE_FOLDER);
+    containerManager.persist(otherContainer);
+  }
 }

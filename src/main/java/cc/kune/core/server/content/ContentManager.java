@@ -62,6 +62,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
   Double getRateContent(User user, Content content);
 
+  Content moveContent(Content content, Container newContainer);
+
   RateResult rateContent(User rater, Long contentId, Double value) throws DefaultException;
 
   void removeAuthor(User user, Long contentId, String authorShortName) throws DefaultException;

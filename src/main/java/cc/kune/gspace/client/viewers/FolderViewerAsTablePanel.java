@@ -49,6 +49,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
@@ -67,8 +68,9 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
   @Inject
   public FolderViewerAsTablePanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
       final GuiProvider guiProvider, final CoreResources res,
-      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController) {
-    super(gsArmor, i18n, capabilitiesRegistry, dragController);
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
+      final Provider<FolderViewerDropController> dropControllerProv) {
+    super(gsArmor, i18n, capabilitiesRegistry, dragController, dropControllerProv);
     this.guiProvider = guiProvider;
     this.res = res;
     widget = uiBinder.createAndBindUi(this);
@@ -144,7 +146,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       dragController.makeDraggable(itemWidget, itemWidget.getTitleWidget());
     }
     if (item.isDroppable()) {
-      new FolderViewerDropController(itemWidget, dragController);
+      dropControllerProv.get().init(itemWidget);
     }
   }
 

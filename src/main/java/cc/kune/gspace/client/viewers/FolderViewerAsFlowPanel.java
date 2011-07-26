@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
@@ -40,6 +41,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
   interface FolderViewerAsFlowPanelUiBinder extends UiBinder<Widget, FolderViewerAsFlowPanel> {
@@ -52,8 +54,9 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   @Inject
   public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
-      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController) {
-    super(gsArmor, i18n, capabilitiesRegistry, dragController);
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
+      final Provider<FolderViewerDropController> dropControllerProv) {
+    super(gsArmor, i18n, capabilitiesRegistry, dragController, dropControllerProv);
     widget = uiBinder.createAndBindUi(this);
   }
 
