@@ -110,8 +110,12 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     // Deep copy annotations
     for (final Annotation annotation : fromBlip.getAnnotations()) {
       final Range range = annotation.getRange();
-      toBlip.range(range.getStart(), range.getEnd()).annotate(annotation.getName(),
-          annotation.getValue());
+      try {
+        toBlip.range(range.getStart() + 1, range.getEnd() + 1).annotate(annotation.getName(),
+            annotation.getValue());
+      } catch (final IndexOutOfBoundsException e) {
+        // Don't copy faulty annotations
+      }
     }
   }
 
