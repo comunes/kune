@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -59,9 +60,13 @@ import com.google.wave.api.BlipContent;
 import com.google.wave.api.BlipData;
 import com.google.wave.api.BlipThread;
 import com.google.wave.api.Element;
+import com.google.wave.api.ElementType;
+import com.google.wave.api.FormElement;
 import com.google.wave.api.Gadget;
+import com.google.wave.api.Image;
 import com.google.wave.api.JsonRpcConstant.ParamsProperty;
 import com.google.wave.api.JsonRpcResponse;
+import com.google.wave.api.Line;
 import com.google.wave.api.OperationQueue;
 import com.google.wave.api.OperationRequest;
 import com.google.wave.api.OperationRequest.Parameter;
@@ -102,12 +107,36 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     for (final BlipContent blipContent : fromBlip.all().values()) {
       toBlip.append(blipContent);
     }
+    // Deep copy annotations
     for (final Annotation annotation : fromBlip.getAnnotations()) {
       final Range range = annotation.getRange();
-      toBlip.range(range.getStart() + 1, range.getEnd() + 1).annotate(annotation.getName(),
+      toBlip.range(range.getStart(), range.getEnd()).annotate(annotation.getName(),
           annotation.getValue());
     }
   }
+
+  public static void copyWaveletElements(final Blip fromBlip, final Blip toBlip) {
+    // Deep copy form elements.
+    // DocumentModifyService don't permit this:
+    // "Can't insert other elements than text and gadgets at the moment");
+    for (final Entry<Integer, Element> entry : fromBlip.getElements().entrySet()) {
+      final ElementType type = entry.getValue().getType();
+      Element result = null;
+      if (FormElement.getFormElementTypes().contains(type)) {
+        result = new FormElement(type, entry.getValue().getProperties());
+      } else if (type == ElementType.GADGET) {
+        result = new Gadget(entry.getValue().getProperties());
+      } else if (type == ElementType.IMAGE) {
+        result = new Image(entry.getValue().getProperties());
+      } else if (type == ElementType.LINE) {
+        result = new Line(entry.getValue().getProperties());
+      } else {
+        result = new Element(type, entry.getValue().getProperties());
+      }
+      toBlip.append(result);
+    }
+  }
+
   private final ConversationUtil conversationUtil;
   private final EventDataConverterManager converterManager;
   private final String domain;
