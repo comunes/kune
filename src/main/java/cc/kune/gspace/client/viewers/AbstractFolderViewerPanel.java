@@ -75,6 +75,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   public void attach() {
     final ForIsWidget docContainer = gsArmor.getDocContainer();
     docContainer.add(widget);
+    gsArmor.enableCenterScroll(true);
   }
 
   @Override

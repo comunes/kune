@@ -22,7 +22,6 @@ package cc.kune.gspace.client.viewers;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
-import org.waveprotocol.box.webclient.client.StagesProvider;
 import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
@@ -40,6 +39,7 @@ import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
+import cc.kune.wave.client.KuneStagesProvider;
 import cc.kune.wave.client.WaveClientClearEvent;
 import cc.kune.wave.client.WaveClientManager;
 import cc.kune.wave.client.WebClient;
@@ -56,18 +56,17 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
-  interface DocsViewerPanelUiBinder extends UiBinder<Widget, ContentViewerPanel> {
+  interface ContentViewerPanelUiBinder extends UiBinder<Widget, ContentViewerPanel> {
   }
 
   private static final RemoteViewServiceMultiplexer NO_CHANNEL = null;
 
-  private static DocsViewerPanelUiBinder uiBinder = GWT.create(DocsViewerPanelUiBinder.class);
+  private static ContentViewerPanelUiBinder uiBinder = GWT.create(ContentViewerPanelUiBinder.class);
 
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
   private RemoteViewServiceMultiplexer channel;
@@ -81,12 +80,12 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   InlineHTML onlyViewPanel;
   private ProfileManager profiles;
   /** The wave panel, if a wave is open. */
-  private StagesProvider wave;
+  private KuneStagesProvider wave;
   private final WaveClientManager waveClient;
   private ImplPanel waveHolder;
 
   @UiField
-  VerticalPanel waveHolderParent;
+  ImplPanel waveHolderParent;
 
   private final WaveStore waveStore = new SimpleWaveStore();
 
@@ -176,6 +175,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @Override
   public void setContent(final StateContentDTO state) {
     final boolean editable = state.getContentRights().isEditable();
+    gsArmor.enableCenterScroll(true);
     setTitle(state, editable);
     onlyViewPanel.setHTML(SafeHtmlUtils.fromTrustedString(state.getContent()));
     deck.showWidget(1);
@@ -183,6 +183,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   @Override
   public void setEditableContent(final StateContentDTO state) {
+    gsArmor.enableCenterScroll(false);
     setTitle(state, true);
     setEditableWaveContent(state.getWaveRef(), false);
     deck.showWidget(0);
@@ -211,8 +212,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     // UIObject.setVisible(waveFrame.getElement(), true);
     waveHolder.getElement().appendChild(loading);
     final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-    final StagesProvider wave = new StagesProvider(holder, waveHolder, waveRef, channel, idGenerator,
-        profiles, waveStore, isNewWave, org.waveprotocol.box.webclient.client.Session.get().getDomain());
+    final KuneStagesProvider wave = new KuneStagesProvider(holder, waveHolder, waveRef, channel,
+        idGenerator, profiles, waveStore, isNewWave,
+        org.waveprotocol.box.webclient.client.Session.get().getDomain(), true);
     this.wave = wave;
     wave.load(new Command() {
       @Override

@@ -25,6 +25,7 @@ import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -35,6 +36,7 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
@@ -51,7 +53,9 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   private static WsArmorImplUiBinder uiBinder = GWT.create(WsArmorImplUiBinder.class);
 
   @UiField
-  VerticalPanel docContainer;
+  ScrollPanel centerScroll;
+  @UiField
+  FlowPanel docContainer;
   @UiField
   DockLayoutPanel docContainerParent;
   @UiField
@@ -112,11 +116,26 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
     entityToolsNorth.getElement().getStyle().setPosition(Position.RELATIVE);
     // entityToolsSouth.setVisible(false);
     mainpanel.getWidgetContainerElement(tabs).addClassName("k-spaces");
+    enableCenterScroll(true);
   }
 
   @Override
   public void clearBackImage() {
     DOM.setStyleAttribute(mainpanel.getElement(), CSS.A.BACKGROUND, "transparent");
+  }
+
+  @Override
+  public void enableCenterScroll(final boolean enable) {
+    if (enable) {
+      centerScroll.setAlwaysShowScrollBars(false);
+      DOM.setStyleAttribute(centerScroll.getElement(), "position", "absolute");
+      DOM.setStyleAttribute((Element) centerScroll.getElement().getFirstChildElement(), "position",
+          "relative");
+    } else {
+      centerScroll.getElement().getStyle().setOverflow(Overflow.HIDDEN);
+      DOM.setStyleAttribute(centerScroll.getElement(), "position", "");
+      DOM.setStyleAttribute((Element) centerScroll.getElement().getFirstChildElement(), "position", "");
+    }
   }
 
   @Override

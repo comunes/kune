@@ -112,30 +112,30 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
         // menu.hide();
       }
     });
-    itemWidget.getRowMouse().addMouseOverHandler(new MouseOverHandler() {
-      MenuDescriptor menu;
+    final MenuDescriptor menu = new MenuDescriptor(i18n.t("Actions"));
+    menu.withIcon(res.arrowdown()).withStyles("k-def-docbtn, k-btn, k-button");
+    menu.setStandalone(false);
+    toolbar.add(menu);
+    final GuiActionDescCollection actions = item.getActionCollection();
+    toolbar.setVisible(actions.size() > 0);
+    itemWidget.setMenuVisible(false);
 
-      private MenuDescriptor createMenu(final FolderItemDescriptor item,
-          final FolderItemWidget itemWidget, final ActionSimplePanel toolbar) {
-        MenuDescriptor menu;
-        menu = new MenuDescriptor(i18n.t("Actions"));
-        menu.withIcon(res.arrowdown()).withStyles("k-def-docbtn, k-btn, k-button");
-        menu.setStandalone(false);
-        itemWidget.setMenuVisible(false);
-        toolbar.add(menu);
-        final GuiActionDescCollection actions = item.getActionCollection();
-        toolbar.setVisible(actions.size() > 0);
+    itemWidget.getRowMouse().addMouseOverHandler(new MouseOverHandler() {
+      boolean initialized = false;
+
+      private void init(final FolderItemDescriptor item, final FolderItemWidget itemWidget,
+          final ActionSimplePanel toolbar) {
         for (final GuiActionDescrip menuItem : actions) {
           menuItem.setParent(menu);
           toolbar.add(menuItem);
         }
-        return menu;
       }
 
       @Override
       public void onMouseOver(final MouseOverEvent event) {
-        if (menu == null) {
-          menu = createMenu(item, itemWidget, toolbar);
+        if (!initialized) {
+          init(item, itemWidget, toolbar);
+          initialized = true;
         }
         // menu.setVisible(true);
         itemWidget.setMenuVisible(true);

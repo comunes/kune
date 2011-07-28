@@ -28,6 +28,8 @@ public interface GSpaceArmorResources extends ClientBundle {
 
     String docEditor();
 
+    String docEditorContainer();
+
     String docEditorMargin();
 
     String docFooter();

@@ -14,6 +14,7 @@ public class KuneDragController extends PickupDragController {
     super(RootPanel.get(), false);
     setBehaviorDragProxy(true);
     setBehaviorMultipleSelection(false);
+    setBehaviorScrollIntoView(false);
     setBehaviorDragStartSensitivity(5);
     Window.addResizeHandler(new ResizeHandler() {
 

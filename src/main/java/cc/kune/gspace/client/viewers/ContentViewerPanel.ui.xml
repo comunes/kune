@@ -25,14 +25,12 @@
 
     }
   </ui:style>
-  <g:HTMLPanel>
-    <g:DeckPanel ui:field="deck" addStyleNames="k-doc-content-deck">
-      <!-- <w:ImplPanel ui:field="waveHolder" addStyleNames="{style.waveHolder}"
-        /> -->
-      <g:VerticalPanel ui:field="waveHolderParent" />
-      <g:FlowPanel ui:field="onlyViewParent" height="auto" width="auto" addStyleNames="{style.onlyparent}">
-        <g:InlineHTML ui:field="onlyViewPanel" styleName="{style.viewonly}" />
-      </g:FlowPanel>
-    </g:DeckPanel>
-  </g:HTMLPanel>
+  <g:DeckPanel ui:field="deck"
+    addStyleNames="{style.waveHolder}  k-doc-content-deck">
+    <w:ImplPanel ui:field="waveHolderParent" addStyleNames="{style.waveHolder}"/>
+    <!-- <g:VerticalPanel ui:field="waveHolderParent" /> -->
+    <g:FlowPanel ui:field="onlyViewParent" height="auto" width="auto" addStyleNames="{style.onlyparent}">
+      <g:InlineHTML ui:field="onlyViewPanel" styleName="{style.viewonly}"/>
+    </g:FlowPanel>
+  </g:DeckPanel>
 </ui:UiBinder>

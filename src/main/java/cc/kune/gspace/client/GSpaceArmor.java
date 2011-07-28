@@ -28,6 +28,8 @@ public interface GSpaceArmor {
 
   void clearBackImage();
 
+  void enableCenterScroll(boolean enable);
+
   ForIsWidget getDocContainer();
 
   ForIsWidget getDocFooter();

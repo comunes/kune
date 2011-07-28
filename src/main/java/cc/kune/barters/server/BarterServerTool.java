@@ -51,7 +51,7 @@ import com.google.inject.Inject;
 
 public class BarterServerTool implements ServerWaveTool {
 
-  private static final String BARTER_GADGET = "http://op-org.appspot.com/troco_wave_gadget/org.ourproject.troco.client.TrocoWaveGadget.gadget.xml";
+  private static final String BARTER_GADGET = "http://troco.ourproject.org/gadget/org.ourproject.troco.client.TrocoWaveGadget.gadget.xml";
   private final ToolConfigurationManager configurationManager;
   private final ContainerManager containerManager;
   private final ContentManager contentManager;

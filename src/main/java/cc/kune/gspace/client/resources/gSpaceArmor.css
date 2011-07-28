@@ -7,7 +7,7 @@
 
 .mainPanel {
   border-top: 2px solid white;
-/*  border-bottom: 7px solid transparent;
+  /*  border-bottom: 7px solid transparent;
   border-right: 17px solid transparent;
   border-left: 17px solid transparent; */
 }
@@ -18,6 +18,7 @@
 }
 
 .k-space {
+
 }
 
 .floatRight {
@@ -37,6 +38,7 @@
 .entityCentralContainer {
 
 }
+
 .entityHeader {
   -webkit-border-top-right-radius: 7px;
   -moz-border-radius-topright: 7px;
@@ -137,12 +139,36 @@
   -webkit-border-top-right-radius: 7px;
   -moz-border-radius-topright: 7px;
   border-top-right-radius: 7px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
+.docEditorContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-border-top-left-radius: 7px;
+  -moz-border-radius-topleft: 7px;
+  border-top-left-radius: 7px;
+  -webkit-border-top-right-radius: 7px;
+  -moz-border-radius-topright: 7px;
+  border-top-right-radius: 7px;
+}
+
+/* Fix wave scroll problem
 .docEditor div {
   overflow-y: visible;
 }
 
+div.docEditor div {
+  position: static;
+}
+*/
 .docFooter {
   border-left: 1px solid #959595;
   border-right: 1px solid #959595;

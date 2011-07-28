@@ -65,9 +65,8 @@
                       <g:SimplePanel />
                     </g:east>
                     <g:center>
-                      <g:ScrollPanel styleName="{res.style.docEditor}">
-                        <g:VerticalPanel width="100%"
-                          height="100%" ui:field="docContainer"></g:VerticalPanel>
+                      <g:ScrollPanel ui:field="centerScroll" styleName="{res.style.docEditor}">
+                        <g:FlowPanel width="auto" height="auto" styleName="{res.style.docEditorContainer}" ui:field="docContainer" />
                       </g:ScrollPanel>
                     </g:center>
                     <g:south size="33.0">

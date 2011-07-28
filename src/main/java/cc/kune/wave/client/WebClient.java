@@ -222,7 +222,7 @@ public class WebClient extends Composite {
   DebugMessagePanel logPanel;
 
   /** The wave panel, if a wave is open. */
-  private StagesProvider wave;
+  private KuneStagesProvider wave;
 
   private final WaveStore waveStore = new SimpleWaveStore();
 
@@ -373,8 +373,8 @@ public WaveWebSocketClient getWebSocket() {
     UIObject.setVisible(waveFrame.getElement(), true);
     waveHolder.getElement().appendChild(loading);
     final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-    final StagesProvider wave = new StagesProvider(
-        holder, waveHolder, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain());
+    final KuneStagesProvider wave = new KuneStagesProvider(
+        holder, waveHolder, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), true);
     this.wave = wave;
     wave.load(new Command() {
       @Override
