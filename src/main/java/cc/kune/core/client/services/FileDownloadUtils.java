@@ -39,6 +39,7 @@ public class FileDownloadUtils {
   protected static final String GROUP_NO_AVATAR_IMAGE = "images/group-def-icon.png";
   private static final String LOGODOWNLOADSERVLET = "servlets/EntityLogoDownloadManager";
   protected static final String PERSON_NO_AVATAR_IMAGE = "images/unknown.jpg";
+  public static final String WORLD_AVATAR_IMAGE = "images/world-90.gif";
 
   private final ImageUtils imageUtils;
   private final Session session;

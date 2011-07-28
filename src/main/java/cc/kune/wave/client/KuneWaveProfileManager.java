@@ -38,6 +38,7 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     ProfileManager {
 
   private final FileDownloadUtils downloadUtils;
+  private String localDomain;
 
   @Inject
   public KuneWaveProfileManager(final FileDownloadUtils downloadUtils) {
@@ -45,10 +46,14 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
   }
 
   private void checkAvatar(final ProfileImpl profile) {
+    if (localDomain == null) {
+      localDomain = "@" + Session.get().getDomain();
+    }
     final String address = profile.getAddress();
-    if (address.contains(Session.get().getDomain())) {
-      profile.update(profile.getFirstName(), profile.getFullName(),
-          downloadUtils.getUserAvatar(address.split("@")[0]));
+    if (address.equals(localDomain) || address.equals("@")) {
+      updateProfileAvatar(profile, FileDownloadUtils.WORLD_AVATAR_IMAGE);
+    } else if (address.contains(Session.get().getDomain())) {
+      updateProfileAvatar(profile, downloadUtils.getUserAvatar(address.split("@")[0]));
     }
   }
 
@@ -62,6 +67,10 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
       profiles.put(participantId.getAddress(), profile);
     }
     return profile;
+  }
+
+  private void updateProfileAvatar(final ProfileImpl profile, final String avatar) {
+    profile.update(profile.getFirstName(), profile.getFullName(), avatar);
   }
 
 }
