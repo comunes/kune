@@ -62,7 +62,9 @@ public class ParticipateInContentBtn extends ButtonDescriptor {
             @Override
             public void onSuccess(final Void arg) {
               NotifyUser.hideProgress();
-              stateManager.gotoStateToken(session.getCurrentStateToken());
+              stateManager.refreshCurrentStateWithoutCache();
+              // issue #73
+              // stateManager.gotoStateToken(session.getCurrentStateToken());
             }
           });
     }

@@ -187,12 +187,19 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
 
   @Override
   public void addParticipant(final WaveRef waveName, final String author, final String userWhoAdds,
-      final String participant) {
+      final String newLocalParticipant) {
     final Wavelet wavelet = fetchWave(waveName, author);
+    final String newPartWithDomain = participantUtils.of(newLocalParticipant).toString();
+    for (final String current : wavelet.getParticipants()) {
+      if (current.equals(newPartWithDomain)) {
+        // Current user is a participant already (issue #73)
+        return;
+      }
+    }
     final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
         : author;
     final OperationQueue opQueue = new OperationQueue();
-    opQueue.addParticipantToWavelet(wavelet, participantUtils.of(participant).toString());
+    opQueue.addParticipantToWavelet(wavelet, newPartWithDomain);
     doOperation(whoAdd, opQueue, "add participant");
 
   }
@@ -390,7 +397,8 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   @Override
   public String render(final Wavelet wavelet) {
     final ClientAction clientPage = waveRenderer.render(wavelet, 0);
-    return clientPage.getHtml();
+    final String html = clientPage.getHtml();
+    return html;
   }
 
   @Override

@@ -81,7 +81,7 @@ public class DelContentMenuItem extends MenuItemDescriptor {
                       // session.setCurrentState(state);
                       final StateToken parent = token.copy().clearDocument();
                       if (session.getCurrentStateToken().equals(parent)) {
-                        stateManager.refreshCurrentGroupState();
+                        stateManager.refreshCurrentStateWithoutCache();
                         // Warning: the previous action
                         // is asynchronous (it gets a
                         // content)

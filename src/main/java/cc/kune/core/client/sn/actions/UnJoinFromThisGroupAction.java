@@ -73,7 +73,7 @@ public class UnJoinFromThisGroupAction extends RolAction {
                   public void onSuccess(final Void result) {
                     NotifyUser.hideProgress();
                     NotifyUser.info(i18n.t("Removed as member"));
-                    stateManager.refreshCurrentGroupState();
+                    stateManager.refreshCurrentStateWithoutCache();
                   }
                 });
           }

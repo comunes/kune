@@ -139,7 +139,7 @@ public abstract class EntityOptToolsPresenter {
 
           @Override
           public void onSuccess(final Void result) {
-            stateManager.reload();
+            stateManager.refreshCurrentState();
             // view.unmask();
           }
         });

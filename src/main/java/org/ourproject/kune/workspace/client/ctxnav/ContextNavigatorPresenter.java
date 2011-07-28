@@ -98,7 +98,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
       @Override
       public void onEvent(final StateToken currentUploadStateToken) {
         if (currentUploadStateToken.hasSameContainer(session.getCurrentStateToken())) {
-          stateManager.reload();
+          stateManager.refreshCurrentState();
         }
       }
     });

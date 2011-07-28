@@ -415,7 +415,7 @@ public abstract class OldAbstractFoldableContentActions {
         AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
           @Override
           public void onEvent(final StateToken stateToken) {
-            stateManager.reload();
+            stateManager.refreshCurrentState();
             contextNavigator.selectItem(stateToken);
           }
         });
@@ -433,7 +433,7 @@ public abstract class OldAbstractFoldableContentActions {
         AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
           @Override
           public void onEvent(final StateToken stateToken) {
-            stateManager.reload();
+            stateManager.refreshCurrentState();
             contextNavigator.selectItem(stateToken);
           }
         });

@@ -25,6 +25,7 @@ import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.state.Session;
@@ -131,6 +132,9 @@ public class ErrorHandler {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("This user is already a group member")));
+    } else if (caught instanceof UnderDevelopmentException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t(TextUtils.IN_DEVELOPMENT)));
     } else {
       logException(caught, true);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,

@@ -60,7 +60,7 @@ public class Templates {
 
   private final Markup markup;
 
-  private final boolean productionMode = false;
+  private final boolean productionMode = true;
 
   /**
    * file name of template -> compiled template lazy cache.

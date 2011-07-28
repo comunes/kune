@@ -26,6 +26,7 @@ import javax.persistence.NoResultException;
 import cc.kune.chat.server.ChatManager;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.client.errors.ContentNotPermittedException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.NoDefaultContentException;
 import cc.kune.core.client.errors.ToolNotFoundException;
@@ -318,17 +319,30 @@ public class ContentRPC implements ContentService, RPC {
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
   @Transactional
-  public StateContainerDTO moveContent(final String userHash, final StateToken contentToken,
+  public StateContainerDTO moveContent(final String userHash, final StateToken movedToken,
       final StateToken newContainerToken) throws DefaultException {
     final User user = getCurrentUser();
     try {
-      final Content content = accessService.accessToContent(
-          ContentUtils.parseId(contentToken.getDocument()), user, AccessRol.Editor);
-      final Container newContainer = accessService.accessToContainer(
-          ContentUtils.parseId(newContainerToken.getFolder()), user, AccessRol.Editor);
-      final Container oldContainer = content.getContainer();
-      contentManager.moveContent(content, newContainer);
-      return getState(user, oldContainer);
+      if (movedToken.isComplete()) {
+        final Content content = accessService.accessToContent(
+            ContentUtils.parseId(movedToken.getDocument()), user, AccessRol.Editor);
+        final Container newContainer = accessService.accessToContainer(
+            ContentUtils.parseId(newContainerToken.getFolder()), user, AccessRol.Editor);
+        final Container oldContainer = content.getContainer();
+        contentManager.moveContent(content, newContainer);
+        return getState(user, oldContainer);
+      } else if (movedToken.hasGroupToolAndFolder()) {
+        // Folder to folder
+        final Container container = accessService.accessToContainer(
+            ContentUtils.parseId(movedToken.getFolder()), user, AccessRol.Editor);
+        final Container newContainer = accessService.accessToContainer(
+            ContentUtils.parseId(newContainerToken.getFolder()), user, AccessRol.Editor);
+        final Container oldParent = container.getParent();
+        containerManager.moveContainer(container, newContainer);
+        return getState(user, oldParent);
+      } else {
+        throw new ContentNotPermittedException();
+      }
     } catch (final NoResultException e) {
       throw new AccessViolationException();
     }

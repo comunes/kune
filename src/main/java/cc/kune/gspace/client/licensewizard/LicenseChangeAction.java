@@ -66,7 +66,7 @@ public class LicenseChangeAction {
 
           @Override
           public void onSuccess(final Void result) {
-            stateManager.reload();
+            stateManager.refreshCurrentState();
             callback.onSuccess();
             LicenseChangedEvent.fire(eventBus);
           }

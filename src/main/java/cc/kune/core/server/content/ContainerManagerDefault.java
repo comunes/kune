@@ -31,6 +31,7 @@ import org.apache.lucene.search.Query;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.NameInUseException;
+import cc.kune.core.client.errors.UnderDevelopmentException;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.manager.impl.DefaultManager;
 import cc.kune.core.server.manager.impl.SearchResult;
@@ -50,103 +51,110 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContainerManagerDefault extends DefaultManager<Container, Long> implements ContainerManager {
 
-    private final ContainerFinder containerFinder;
-    private final ContentFinder contentFinder;
+  private final ContainerFinder containerFinder;
+  private final ContentFinder contentFinder;
 
-    @Inject
-    public ContainerManagerDefault(final ContentFinder contentFinder, final ContainerFinder containerFinder,
-            final Provider<EntityManager> provider) {
-        super(provider, Container.class);
-        this.contentFinder = contentFinder;
-        this.containerFinder = containerFinder;
+  @Inject
+  public ContainerManagerDefault(final ContentFinder contentFinder,
+      final ContainerFinder containerFinder, final Provider<EntityManager> provider) {
+    super(provider, Container.class);
+    this.contentFinder = contentFinder;
+    this.containerFinder = containerFinder;
+  }
+
+  @Override
+  public Container createFolder(final Group group, final Container parent, final String name,
+      final I18nLanguage language, final String typeId) {
+    FilenameUtils.checkBasicFilename(name);
+    final String newtitle = findInexistentName(parent, name);
+    final List<Container> parentAbsolutePath = parent.getAbsolutePath();
+    final List<Container> childAbsolutePath = new ArrayList<Container>();
+
+    for (final Container parentRef : parentAbsolutePath) {
+      childAbsolutePath.add(parentRef);
     }
+    // FIXME: use
+    // childAbsolutePath.addAll(parentAbsolutePath);
+    final Container child = new Container(newtitle, group, parent.getToolName());
+    childAbsolutePath.add(child);
+    child.setLanguage(language);
+    child.setAbsolutePath(childAbsolutePath);
+    child.setTypeId(typeId);
+    parent.addChild(child);
+    persist(child);
+    return child;
+  }
 
-    @Override
-    public Container createFolder(final Group group, final Container parent, final String name,
-            final I18nLanguage language, final String typeId) {
-        FilenameUtils.checkBasicFilename(name);
-        final String newtitle = findInexistentName(parent, name);
-        final List<Container> parentAbsolutePath = parent.getAbsolutePath();
-        final List<Container> childAbsolutePath = new ArrayList<Container>();
+  @Override
+  public Container createRootFolder(final Group group, final String toolName, final String name,
+      final String type) {
+    final Container container = new Container(name, group, toolName);
+    container.setTypeId(type);
+    final List<Container> absolutePath = new ArrayList<Container>();
+    absolutePath.add(container);
+    container.setAbsolutePath(absolutePath);
+    return persist(container);
+  }
 
-        for (final Container parentRef : parentAbsolutePath) {
-            childAbsolutePath.add(parentRef);
-        }
-        // FIXME: use
-        // childAbsolutePath.addAll(parentAbsolutePath);
-        final Container child = new Container(newtitle, group, parent.getToolName());
-        childAbsolutePath.add(child);
-        child.setLanguage(language);
-        child.setAbsolutePath(childAbsolutePath);
-        child.setTypeId(typeId);
-        parent.addChild(child);
-        persist(child);
-        return child;
+  /** Duplicate code in ContentMD **/
+  @Override
+  public boolean findIfExistsTitle(final Container container, final String title) {
+    return (contentFinder.findIfExistsTitle(container, title) > 0)
+        || (containerFinder.findIfExistsTitle(container, title) > 0);
+  }
+
+  /** Duplicate code in ContentMD **/
+  private String findInexistentName(final Container container, final String title) {
+    String initialTitle = String.valueOf(title);
+    while (findIfExistsTitle(container, initialTitle)) {
+      initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
     }
+    return initialTitle;
+  }
 
-    @Override
-    public Container createRootFolder(final Group group, final String toolName, final String name, final String type) {
-        final Container container = new Container(name, group, toolName);
-        container.setTypeId(type);
-        final List<Container> absolutePath = new ArrayList<Container>();
-        absolutePath.add(container);
-        container.setAbsolutePath(absolutePath);
-        return persist(container);
+  @Override
+  public void moveContainer(final Container container, final Container newContainer) {
+    throw new UnderDevelopmentException();
+  }
+
+  @Override
+  public Container renameFolder(final Group group, final Container container, final String newName)
+      throws DefaultException {
+    FilenameUtils.checkBasicFilename(newName);
+    final String newNameWithoutNT = FilenameUtils.chomp(newName);
+    if (container.isRoot()) {
+      throw new DefaultException("Root folder cannot be renamed");
     }
-
-    /** Duplicate code in ContentMD **/
-    @Override
-    public boolean findIfExistsTitle(final Container container, final String title) {
-        return (contentFinder.findIfExistsTitle(container, title) > 0)
-                || (containerFinder.findIfExistsTitle(container, title) > 0);
+    if (findIfExistsTitle(container.getParent(), newNameWithoutNT)) {
+      throw new NameInUseException();
     }
+    container.setName(newNameWithoutNT);
+    persist(container);
+    return container;
+  }
 
-    /** Duplicate code in ContentMD **/
-    private String findInexistentName(final Container container, final String title) {
-        String initialTitle = String.valueOf(title);
-        while (findIfExistsTitle(container, initialTitle)) {
-            initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
-        }
-        return initialTitle;
+  @Override
+  public SearchResult<Container> search(final String search) {
+    return this.search(search, null, null);
+  }
+
+  @Override
+  public SearchResult<Container> search(final String search, final Integer firstResult,
+      final Integer maxResults) {
+    final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name" },
+        new StandardAnalyzer());
+    Query query;
+    try {
+      query = parser.parse(search);
+    } catch (final ParseException e) {
+      throw new ServerManagerException("Error parsing search");
     }
+    return super.search(query, firstResult, maxResults);
+  }
 
-    @Override
-    public Container renameFolder(final Group group, final Container container, final String newName)
-            throws DefaultException {
-        FilenameUtils.checkBasicFilename(newName);
-        final String newNameWithoutNT = FilenameUtils.chomp(newName);
-        if (container.isRoot()) {
-            throw new DefaultException("Root folder cannot be renamed");
-        }
-        if (findIfExistsTitle(container.getParent(), newNameWithoutNT)) {
-            throw new NameInUseException();
-        }
-        container.setName(newNameWithoutNT);
-        persist(container);
-        return container;
-    }
-
-    @Override
-    public SearchResult<Container> search(final String search) {
-        return this.search(search, null, null);
-    }
-
-    @Override
-    public SearchResult<Container> search(final String search, final Integer firstResult, final Integer maxResults) {
-        final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name" }, new StandardAnalyzer());
-        Query query;
-        try {
-            query = parser.parse(search);
-        } catch (final ParseException e) {
-            throw new ServerManagerException("Error parsing search");
-        }
-        return super.search(query, firstResult, maxResults);
-    }
-
-    @Override
-    public void setAccessList(final Container container, final AccessLists accessList) {
-        container.setAccessLists(accessList);
-        persist(container);
-    }
-
+  @Override
+  public void setAccessList(final Container container, final AccessLists accessList) {
+    container.setAccessLists(accessList);
+    persist(container);
+  }
 }

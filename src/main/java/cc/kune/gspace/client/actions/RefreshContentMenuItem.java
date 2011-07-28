@@ -41,7 +41,7 @@ public class RefreshContentMenuItem extends MenuItemDescriptor {
 
         @Override
         public void actionPerformed(final ActionEvent event) {
-            stateManager.refreshCurrentGroupState();
+            stateManager.refreshCurrentStateWithoutCache();
         }
 
     }

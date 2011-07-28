@@ -202,7 +202,7 @@ public class StateManagerDefaultTest {
         // When a user enter reload state, also if the application is starting
         // (and the user was logged)
         Mockito.when(history.getToken()).thenReturn("");
-        stateManager.reload();
+        stateManager.refreshCurrentState();
         verifyGetServerContent();
     }
 

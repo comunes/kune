@@ -71,6 +71,22 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   }
 
   @Test
+  public void addParticipantTwice() throws IOException {
+    doLogin();
+    final WaveRef waveletName = createTestWave();
+    assertNotNull(waveletName);
+    manager.addParticipant(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        NEW_PARTICIPANT);
+    manager.addParticipant(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        NEW_PARTICIPANT);
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+    assertNotNull(fetchWavelet);
+    assertEquals(2, fetchWavelet.getParticipants().size());
+    manager.isParticipant(fetchWavelet, NEW_PARTICIPANT);
+    manager.isParticipant(fetchWavelet, "newparti");
+  }
+
+  @Test
   public void authorAddParticipant() throws DefaultException, IOException {
     final String whoAdds = getSiteAdminShortName();
     addParticipant(whoAdds);

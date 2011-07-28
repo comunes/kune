@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.content;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.Manager;
 import cc.kune.core.server.manager.impl.SearchResult;
@@ -30,19 +29,22 @@ import cc.kune.domain.I18nLanguage;
 
 public interface ContainerManager extends Manager<Container, Long> {
 
-    Container createFolder(Group group, Container parent, String name, I18nLanguage language, String typeId);
+  Container createFolder(Group group, Container parent, String name, I18nLanguage language, String typeId);
 
-    Container createRootFolder(Group group, String toolName, String name, String type);
+  Container createRootFolder(Group group, String toolName, String name, String type);
 
-    Container find(Long id);
+  @Override
+  Container find(Long id);
 
-    boolean findIfExistsTitle(Container container, String title);
+  boolean findIfExistsTitle(Container container, String title);
 
-    Container renameFolder(Group group, Container container, String newName) throws DefaultException;
+  void moveContainer(Container container, Container newContainer);
 
-    SearchResult<Container> search(String search);
+  Container renameFolder(Group group, Container container, String newName) throws DefaultException;
 
-    SearchResult<Container> search(String search, Integer firstResult, Integer maxResults);
+  SearchResult<Container> search(String search);
 
-    void setAccessList(Container container, AccessLists accessList);
+  SearchResult<Container> search(String search, Integer firstResult, Integer maxResults);
+
+  void setAccessList(Container container, AccessLists accessList);
 }

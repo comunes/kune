@@ -90,7 +90,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         session.onUserSignOut(false, new UserSignOutEvent.UserSignOutHandler() {
           @Override
           public void onUserSignOut(final UserSignOutEvent event) {
-            refreshCurrentGroupState();
+            refreshCurrentStateWithoutCache();
           }
         });
         processCurrentHistoryToken();
@@ -333,11 +333,21 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /**
    * <p>
+   * Reload current state (using client cache if available)
+   * </p>
+   */
+  @Override
+  public void refreshCurrentState() {
+    processHistoryToken(history.getToken());
+  }
+
+  /**
+   * <p>
    * Reload current state (not using client cache)
    * </p>
    */
   @Override
-  public void refreshCurrentGroupState() {
+  public void refreshCurrentStateWithoutCache() {
     final StateToken currentStateToken = session.getCurrentStateToken();
     if (currentStateToken == null) {
       processCurrentHistoryToken();
@@ -345,16 +355,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       contentCache.removeContent(currentStateToken);
       onHistoryChanged(currentStateToken);
     }
-  }
-
-  /**
-   * <p>
-   * Reload current state (using client cache if available)
-   * </p>
-   */
-  @Override
-  public void reload() {
-    processHistoryToken(history.getToken());
   }
 
   @Override
@@ -378,7 +378,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   public void resumeTokenChange() {
     if (resumedHistoryToken != null) {
       // Is this reload redundant?
-      reload();
+      refreshCurrentState();
       gotoHistoryToken(resumedHistoryToken);
       resumedHistoryToken = null;
     }

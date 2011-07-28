@@ -60,12 +60,12 @@ public class FolderViewerDropController {
                     @Override
                     public void onFailure(final Throwable caught) {
                       erroHandler.process(caught);
-                      stateManager.reload();
+                      stateManager.refreshCurrentState();
                     }
 
                     @Override
                     public void onSuccess(final StateContainerDTO result) {
-                      stateManager.reload();
+                      stateManager.refreshCurrentState();
                     }
                   });
             } else {

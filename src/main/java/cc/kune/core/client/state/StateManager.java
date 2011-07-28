@@ -68,9 +68,9 @@ public interface StateManager {
 
     void redirectOrRestorePreviousToken();
 
-    void refreshCurrentGroupState();
+    void refreshCurrentStateWithoutCache();
 
-    void reload();
+    void refreshCurrentState();
 
     void removeBeforeStateChangeListener(BeforeActionListener listener);
 

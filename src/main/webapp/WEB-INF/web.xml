@@ -5,12 +5,12 @@
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   version="2.5">
 
-  <!-- NOTE: if you modify this, cp for rapid testing: cp src/main/webapp/WEB-INF/web.xml 
+  <!-- NOTE: if you modify this, cp for rapid testing: cp src/main/webapp/WEB-INF/web.xml
     target/kune-PUT_HERE_VERSION/WEB-INF/web.xml -->
 
   <!-- TODO: Add <servlet> tags for each servlet here. -->
   <!-- TODO: Add <servlet-mapping> tags for each <servlet> here. -->
-  <!-- TODO: Optionally add a <welcome-file-list> tag to display a welcome 
+  <!-- TODO: Optionally add a <welcome-file-list> tag to display a welcome
     file. -->
   <display-name>ws</display-name>
   <description>kune workspace</description>
@@ -69,12 +69,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   </context-param>
   <context-param>
     <param-name>rails.root</param-name>
-    <param-value>/WEB-INF/publicspace/ 
+    <param-value>/WEB-INF/publicspace/
    </param-value>
   </context-param>
   <context-param>
     <param-name>files.prefix</param-name>
-    <param-value>/WEB-INF/publicspace/public 
+    <param-value>/WEB-INF/publicspace/public
    </param-value>
   </context-param>
   <context-param>
@@ -89,6 +89,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <param-name>public.root</param-name>
     <param-value>/public/</param-value>
   </context-param>
+  <!-- Disabled while not used
   <filter>
     <filter-name>RackFilter</filter-name>
     <filter-class>org.jruby.rack.RackFilter</filter-class>
@@ -100,6 +101,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <listener>
     <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class>
   </listener>
+   -->
   <!-- Emite xmpp proxy ======================================================================================= -->
   <!-- <servlet> -->
   <!-- <servlet-name>HttpBind</servlet-name> -->
