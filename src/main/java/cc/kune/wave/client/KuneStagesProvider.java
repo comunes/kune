@@ -36,7 +36,6 @@ import org.waveprotocol.wave.client.wavepanel.view.BlipView;
 import org.waveprotocol.wave.client.wavepanel.view.dom.ModelAsViewProvider;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipQueueRenderer;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.DomRenderer;
-import org.waveprotocol.wave.client.wavepanel.view.dom.full.WavePanelResourceLoader;
 import org.waveprotocol.wave.model.conversation.Conversation;
 import org.waveprotocol.wave.model.conversation.ConversationBlip;
 import org.waveprotocol.wave.model.conversation.ConversationView;
@@ -150,11 +149,12 @@ public class KuneStagesProvider extends Stages {
             createViewFactories(), showParticipantsPanel);
       }
 
-      @Override
-      protected void installFeatures() {
-        WavePanelResourceLoader.loadCss();
-        // KuneWavePanelResourceLoader.loadCss();
-      }
+      // Warning: this run into issue #73
+      //      @Override
+      //      protected void installFeatures() {
+      //        WavePanelResourceLoader.loadCss();
+      //        // KuneWavePanelResourceLoader.loadCss();
+      //      }
     });
   }
 
