@@ -132,6 +132,10 @@ public class ErrorHandler {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("This user is already a group member")));
+    } else if (caught instanceof MoveOnSameContainerException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info,
+          i18n.t("You are trying to move this to the same location")));
     } else if (caught instanceof UnderDevelopmentException) {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t(TextUtils.IN_DEVELOPMENT)));

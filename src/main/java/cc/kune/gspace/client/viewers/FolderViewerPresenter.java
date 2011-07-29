@@ -239,6 +239,11 @@ public class FolderViewerPresenter extends
     if (pathLength > 0) {
       for (int i = pathLength - 1; i >= 0; i--) {
         final ButtonDescriptor btn = createPathButton(path[i], pathLength, i);
+        if (i != pathLength - 1) {
+          final FolderViewerDropController dropTarget = dropController.get();
+          dropTarget.setTarget(path[i].getStateToken());
+          btn.setDropTarget(dropTarget);
+        }
         actions.add(btn);
       }
     }
@@ -251,9 +256,6 @@ public class FolderViewerPresenter extends
     final ButtonDescriptor btn = new ButtonDescriptor(new GotoTokenAction(
         iconsRegistry.getContentTypeIcon(container.getTypeId()), container.getName(),
         container.getStateToken(), style, stateManager, getEventBus()));
-    final FolderViewerDropController dropTarget = dropController.get();
-    dropTarget.setTarget(container.getStateToken());
-    btn.setDropTarget(dropTarget);
     return btn;
   }
 

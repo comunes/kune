@@ -48,6 +48,8 @@ public class Tooltip extends PopupPanel {
   interface TooltipUiBinder extends UiBinder<Widget, Tooltip> {
   }
 
+  static Tooltip current;
+
   private static TooltipUiBinder uiBinder = GWT.create(TooltipUiBinder.class);
 
   private static final int WIDTH_NOT_DEFINED = -1;
@@ -146,6 +148,10 @@ public class Tooltip extends PopupPanel {
   public void show() {
     if (!Tooltip.this.isShowing() && ofWidget.isAttached() && ofWidget.isVisible()) {
       Tooltip.super.show();
+      if (Tooltip.current != null) {
+        Tooltip.current.hide();
+      }
+      Tooltip.current = this;
       Tooltip.this.showAt(TooltipPositionCalculator.calculate(Window.getClientWidth(),
           Window.getClientHeight(), ofWidget.getAbsoluteLeft(), ofWidget.getAbsoluteTop(),
           ofWidget.getOffsetWidth(), ofWidget.getOffsetHeight(), Tooltip.this.getWidth(),

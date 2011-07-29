@@ -1430,5 +1430,5 @@ table.k-folder-viewer {
 
 button.k-drop-allowed-hover,
 .k-drop-allowed-hover {
-  border: dashed 2px #3a9fd6;
+  border: dashed 2px #3a9fd6 !important;
 }

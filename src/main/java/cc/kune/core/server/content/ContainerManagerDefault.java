@@ -28,6 +28,7 @@ import org.apache.lucene.search.Query;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.MoveOnSameContainerException;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.manager.impl.DefaultManager;
@@ -98,11 +99,10 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
   @Override
   public void moveContainer(final Container container, final Container newContainer) {
-    final String title = container.getName();
     if (newContainer.equals(container.getParent())) {
-      // Do nothing (trying to move to the same location)
-      return;
+      throw new MoveOnSameContainerException();
     }
+    final String title = container.getName();
     if (findIfExistsTitle(newContainer, title)) {
       throw new NameInUseException();
     }

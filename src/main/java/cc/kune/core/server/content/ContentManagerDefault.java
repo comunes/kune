@@ -35,6 +35,7 @@ import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.I18nNotFoundException;
+import cc.kune.core.client.errors.MoveOnSameContainerException;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.client.errors.UserNotFoundException;
 import cc.kune.core.server.access.FinderService;
@@ -190,7 +191,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
   }
 
+  @Override
   public Content moveContent(final Content content, final Container newContainer) {
+    if (newContainer.equals(content.getContainer())) {
+      throw new MoveOnSameContainerException();
+    }
     final String title = content.getTitle();
     if (findIfExistsTitle(newContainer, title)) {
       throw new NameInUseException();

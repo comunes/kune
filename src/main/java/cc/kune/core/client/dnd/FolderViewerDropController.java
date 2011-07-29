@@ -64,6 +64,7 @@ public class FolderViewerDropController implements DropTarget {
             NotifyUser.showProgress(i18n.t("Moving"));
             if (target != null) {
               final StateToken destToken = (StateToken) target;
+              widget.removeFromParent();
               contentService.moveContent(session.getUserHash(), ((FolderItemWidget) widget).getToken(),
                   destToken, new AsyncCallback<StateContainerDTO>() {
                     @Override
@@ -75,7 +76,6 @@ public class FolderViewerDropController implements DropTarget {
 
                     @Override
                     public void onSuccess(final StateContainerDTO result) {
-                      stateManager.refreshCurrentState();
                       NotifyUser.hideProgress();
                     }
                   });
