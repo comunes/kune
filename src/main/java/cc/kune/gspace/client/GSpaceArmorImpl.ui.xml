@@ -93,9 +93,9 @@
                 <g:FlowPanel ui:field="entityToolsContainer">
                   <g:FlowPanel width="100%" ui:field="entityToolsNorth"
                     styleName="{res.style.entityToolsNorth}"></g:FlowPanel>
-                  <g:VerticalPanel width="100%"
+                  <g:FlowPanel width="100%"
                     ui:field="entityToolsCenter" styleName="{res.style.entityToolsCenter}">
-                  </g:VerticalPanel>
+                  </g:FlowPanel>
                 </g:FlowPanel>
                 </g:center>
                 <g:south size="98">

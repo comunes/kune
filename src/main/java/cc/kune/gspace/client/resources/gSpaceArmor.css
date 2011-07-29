@@ -209,7 +209,8 @@ div.docEditor div {
 
 .entityToolsCenter { /*  margin: 10px; */
   overflow: visible !important;
-  margin-top: 10px;
+  padding-top: 10px;
+  clear: both;
 }
 
 .entityToolsCenter span {

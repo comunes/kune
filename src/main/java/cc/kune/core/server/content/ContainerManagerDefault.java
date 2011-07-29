@@ -29,9 +29,9 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 
+import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.NameInUseException;
-import cc.kune.core.client.errors.UnderDevelopmentException;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.manager.impl.DefaultManager;
 import cc.kune.core.server.manager.impl.SearchResult;
@@ -67,18 +67,9 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
       final I18nLanguage language, final String typeId) {
     FilenameUtils.checkBasicFilename(name);
     final String newtitle = findInexistentName(parent, name);
-    final List<Container> parentAbsolutePath = parent.getAbsolutePath();
-    final List<Container> childAbsolutePath = new ArrayList<Container>();
-
-    for (final Container parentRef : parentAbsolutePath) {
-      childAbsolutePath.add(parentRef);
-    }
-    // FIXME: use
-    // childAbsolutePath.addAll(parentAbsolutePath);
     final Container child = new Container(newtitle, group, parent.getToolName());
-    childAbsolutePath.add(child);
+    child.setAbsolutePath(setAbsolutePath(child, parent));
     child.setLanguage(language);
-    child.setAbsolutePath(childAbsolutePath);
     child.setTypeId(typeId);
     parent.addChild(child);
     persist(child);
@@ -114,7 +105,20 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
   @Override
   public void moveContainer(final Container container, final Container newContainer) {
-    throw new UnderDevelopmentException();
+    final String title = container.getName();
+    if (findIfExistsTitle(newContainer, title)) {
+      throw new NameInUseException();
+    }
+    if (container.isRoot()) {
+      // Cannot move root container
+      throw new AccessViolationException();
+    }
+    final Container oldContainer = container.getParent();
+    oldContainer.removeChild(container);
+    newContainer.addChild(container);
+    // AbsolutePath
+    container.setAbsolutePath(setAbsolutePath(container, newContainer));
+    persist(container);
   }
 
   @Override
@@ -150,6 +154,18 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
       throw new ServerManagerException("Error parsing search");
     }
     return super.search(query, firstResult, maxResults);
+  }
+
+  private List<Container> setAbsolutePath(final Container child, final Container parent) {
+    final List<Container> parentAbsolutePath = parent.getAbsolutePath();
+    final List<Container> childAbsolutePath = new ArrayList<Container>();
+    for (final Container parentRef : parentAbsolutePath) {
+      childAbsolutePath.add(parentRef);
+    }
+    // FIXME: use (tested but change this in other time, not in a pre-release)
+    // childAbsolutePath.addAll(parentAbsolutePath);
+    childAbsolutePath.add(child);
+    return childAbsolutePath;
   }
 
   @Override

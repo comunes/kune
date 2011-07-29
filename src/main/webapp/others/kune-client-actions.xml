@@ -193,6 +193,18 @@
       <iconCss></iconCss>
     </extension>
 
+    <extension>
+      <name>troco</name>
+      <installerUrl>http://troco.ourproject.org/gadget/troco-extension.xml
+      </installerUrl>
+      <gadgetUrl>
+        http://troco.ourproject.org/gadget/org.ourproject.troco.client.TrocoWaveGadget.gadget.xml
+      </gadgetUrl>
+      <iconUrl>http://troco.ourproject.org/gadget/images/icon.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+
   </waveExtensions>
 
   <!-- Where and how to use the above extensions ================ -->
@@ -655,7 +667,8 @@
       <description>Make a vector image with others in real-time
       </description>
       <new-content-title>New Vector Image</new-content-title>
-      <new-content-textintro>With this gadget you can make a vector image with others in real-time</new-content-textintro>
+      <new-content-textintro>With this gadget you can make a vector
+        image with others in real-time</new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
@@ -671,6 +684,33 @@
         used yet) -->
       <participants>ask</participants>
     </guiActionDescriptor>
+
+    <guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>troco</extensionName>
+      <name>New Barter</name>
+      <path>New Gadget»Others</path>
+      <description>Propose a barter deal to others
+      </description>
+      <new-content-title>New Barter</new-content-title>
+      <new-content-textintro>With this gadget you can propose barters to
+        others. Fill up with something you want to give or you something you are looking for, and share with your groups or with the general public. Also you can write more details instead of this text.        </new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
+        <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
+
 
   </guiActionDescriptors>
 

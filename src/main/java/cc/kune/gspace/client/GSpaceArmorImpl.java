@@ -41,7 +41,6 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -70,7 +69,7 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @UiField
   FlowPanel entityHeader;
   @UiField
-  VerticalPanel entityToolsCenter;
+  FlowPanel entityToolsCenter;
   @UiField
   FlowPanel entityToolsContainer;
   @UiField

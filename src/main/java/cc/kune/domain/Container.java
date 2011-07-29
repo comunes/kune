@@ -238,6 +238,11 @@ public class Container implements HasId, HasStateToken {
     return parent == null;
   }
 
+  public void removeChild(final Container child) {
+    child.setParent(null);
+    childs.remove(child);
+  }
+
   public void removeContent(final Content content) {
     contents.size();
     contents.remove(content);
