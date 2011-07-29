@@ -144,7 +144,7 @@ public class Tooltip extends PopupPanel {
 
   @Override
   public void show() {
-    if (!Tooltip.this.isShowing() && ofWidget.isVisible()) {
+    if (!Tooltip.this.isShowing() && ofWidget.isAttached() && ofWidget.isVisible()) {
       Tooltip.super.show();
       Tooltip.this.showAt(TooltipPositionCalculator.calculate(Window.getClientWidth(),
           Window.getClientHeight(), ofWidget.getAbsoluteLeft(), ofWidget.getAbsoluteTop(),

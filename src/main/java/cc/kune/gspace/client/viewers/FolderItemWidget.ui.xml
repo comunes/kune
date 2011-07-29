@@ -9,6 +9,10 @@
     @external .k-folderitem-focus-nofocused;
     .k-folderitem-focus {
       background-color: none;
+      border: solid 2px transparent;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
     }
 
     .k-folderitem-focus-focused {
@@ -65,11 +69,11 @@
   </ui:style>
   <g:FocusPanel ui:field="focusPanel" styleName="{style.k-folderitem-focus}">
     <g:FlowPanel styleName="{style.flow}" ui:field="flow">
-      <g:Image styleName="{style.icon}" ui:field="icon" />
-      <g:InlineLabel styleName="{style.title}" ui:field="title" />
-      <g:SimplePanel styleName="{style.menu}" ui:field="menu" />
+      <g:Image styleName="{style.icon}" ui:field="icon"/>
+      <g:InlineLabel styleName="{style.title}" ui:field="title"/>
+      <g:SimplePanel styleName="{style.menu}" ui:field="menu"/>
       <g:InlineLabel styleName="{style.modified}"
-        ui:field="modified" />
+        ui:field="modified"/>
     </g:FlowPanel>
   </g:FocusPanel>
 </ui:UiBinder>

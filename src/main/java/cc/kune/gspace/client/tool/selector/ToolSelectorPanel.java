@@ -49,7 +49,6 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
   public ToolSelectorPanel(final GSpaceArmor wsArmor,
       final Provider<FolderViewerDropController> dropControllerProv) {
     this.dropControllerProv = dropControllerProv;
-
     wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
   }
 
@@ -57,7 +56,9 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
   public void addItem(final ToolSelectorItemView item) {
     final Widget widget = item.asWidget();
     flow.add(widget);
-    dropControllerProv.get().init(((ToolSelectorItemPanel) widget).getParent());
+    // dropControllerProv.get().init((InlineLabel) ((ToolSelectorItemPanel)
+    // widget).getLabel());
+    dropControllerProv.get().init(((ToolSelectorItemPanel) widget).getFocusPanel());
   }
 
   @Override

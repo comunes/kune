@@ -29,6 +29,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
@@ -45,6 +46,8 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   @UiField
   HTMLPanel arrow;
+  @UiField
+  FlowPanel flow;
   @UiField
   Image iconLeft;
   @UiField
@@ -70,13 +73,13 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     self.removeStyleDependentName("nofocus");
   }
 
-  public Widget getFlow() {
-    return self;
-  }
-
   @Override
   public HasClickHandlers getFocus() {
     return self;
+  }
+
+  public Widget getFocusPanel() {
+    return flow;
   }
 
   @Override
@@ -88,16 +91,6 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   void onSelfMouseOut(final MouseOutEvent event) {
     unfocus();
   }
-
-  // public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-  // if (oldTheme != null) {
-  // final String oldName = oldTheme.getName();
-  // hl.removeStyleDependentName(oldName);
-  // }
-  // final String newName = newTheme.getName();
-  // hl.addStyleDependentName(newName);
-  // super.setCornerStyleName(hl.getStyleName());
-  // }
 
   @UiHandler("self")
   void onSelfMouseOver(final MouseOverEvent event) {

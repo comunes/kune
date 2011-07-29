@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -144,6 +145,9 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     flex.setWidget(rowCount + 1, 0, itemWidget);
     if (item.isDraggable()) {
       dragController.makeDraggable(itemWidget, itemWidget.getTitleWidget());
+      Tooltip.to(itemWidget, i18n.t("Drag and drop to move this. Double click to open"));
+    } else {
+      Tooltip.to(itemWidget, i18n.t("Double click to open"));
     }
     if (item.isDroppable()) {
       final FolderViewerDropController dropController = dropControllerProv.get();
