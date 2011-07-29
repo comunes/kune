@@ -99,8 +99,7 @@
                 </g:FlowPanel>
                 </g:center>
                 <g:south size="98">
-                  <g:VerticalPanel width="100%"
-                    styleName="{res.style.entityToolsSouth}" ui:field="entityToolsSouth"></g:VerticalPanel>
+                  <g:FlowPanel styleName="{res.style.entityToolsSouth}" ui:field="entityToolsSouth" width="100%" />
                 </g:south>
               </g:DockLayoutPanel>
             </g:west>

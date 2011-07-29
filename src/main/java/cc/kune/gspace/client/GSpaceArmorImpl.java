@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -75,7 +76,7 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @UiField
   FlowPanel entityToolsNorth;
   @UiField
-  VerticalPanel entityToolsSouth;
+  FlowPanel entityToolsSouth;
   private final ActionFlowPanel footerToolbar;
   @UiField
   SplitLayoutPanel groupSpace;
@@ -191,6 +192,11 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public IsActionExtensible getHeaderToolbar() {
     return headerToolbar;
+  }
+
+  @Override
+  public IsWidget getMainpanel() {
+    return mainpanel;
   }
 
   @Override

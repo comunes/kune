@@ -22,6 +22,7 @@ package cc.kune.gspace.client;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 
 public interface GSpaceArmor {
@@ -51,6 +52,8 @@ public interface GSpaceArmor {
   IsActionExtensible getFooterToolbar();
 
   IsActionExtensible getHeaderToolbar();
+
+  IsWidget getMainpanel();
 
   SimplePanel getPublicSpace();
 

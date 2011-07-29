@@ -9,7 +9,7 @@ APPPUB=src/main/java/org/ourproject/kune/app/public
 #rsync -aC $APPPUB/css/ $WEBAPP/css
 #rsync -aC $APPPUB/images/ $WEBAPP/images
 
-VERSION=0.0.8
+VERSION=0.1.0-SNAPSHOT
 
 cp src/main/java/cc/kune/chat/public/kune-chat.css target/kune-$VERSION/ws/
 cp src/main/java/cc/kune/chat/public/kune-hablar.css target/kune-$VERSION/ws/
