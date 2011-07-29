@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.MoveOnSameContainerException;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.docs.shared.DocsConstants;
@@ -65,11 +66,10 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
     containerManager.moveContainer(folderToMove, newParentFolder);
   }
 
-  @Test
+  @Test(expected = MoveOnSameContainerException.class)
   public void testMoveFolderToSame() {
     final Container folderToMove = createContainer(rootFolder);
     containerManager.moveContainer(folderToMove, rootFolder);
-    // Do nothing (in silence)
   }
 
   @Test

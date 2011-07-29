@@ -27,6 +27,7 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import cc.kune.core.client.errors.MoveOnSameContainerException;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.core.server.manager.impl.SearchResult;
@@ -116,6 +117,12 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     final SearchResult<Content> search = contentManager.search(TITLE);
     contentManager.reIndex();
     assertEquals(1, search.getSize());
+  }
+
+  @Test(expected = MoveOnSameContainerException.class)
+  public void testMoveFolderToSame() {
+    final Content content = createContent();
+    contentManager.moveContent(content, content.getContainer());
   }
 
   @Ignore
