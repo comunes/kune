@@ -27,6 +27,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ChangeableObject;
 import cc.kune.common.client.actions.KeyStroke;
+import cc.kune.core.client.dnd.DropTarget;
 
 /**
  * The Class AbstractUIActionDescriptor.
@@ -161,6 +162,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
       }
     }
     return result;
+  }
+
+  @Override
+  public void setDropTarget(final DropTarget dropTarget) {
+    putValue(DROP_TARGET, dropTarget);
   }
 
   @Override

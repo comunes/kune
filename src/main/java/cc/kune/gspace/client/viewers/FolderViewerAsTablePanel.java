@@ -146,7 +146,9 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       dragController.makeDraggable(itemWidget, itemWidget.getTitleWidget());
     }
     if (item.isDroppable()) {
-      dropControllerProv.get().init(itemWidget);
+      final FolderViewerDropController dropController = dropControllerProv.get();
+      dropController.init(itemWidget);
+      dropController.setTarget(item.getStateToken());
     }
   }
 

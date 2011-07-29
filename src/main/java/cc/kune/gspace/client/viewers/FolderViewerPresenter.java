@@ -27,6 +27,7 @@ import cc.kune.common.client.ui.EditEvent;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.core.client.actions.ActionRegistryByType;
+import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.client.services.FileDownloadUtils;
@@ -110,6 +111,7 @@ public class FolderViewerPresenter extends
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
 
   private final Provider<FileDownloadUtils> downloadUtilsProvider;
+  private final Provider<FolderViewerDropController> dropController;
   private HandlerRegistration editHandler;
   private final I18nTranslationService i18n;
   private final IconsRegistry iconsRegistry;
@@ -123,7 +125,8 @@ public class FolderViewerPresenter extends
       final FolderViewerProxy proxy, final Session session, final StateManager stateManager,
       final I18nTranslationService i18n, final ActionRegistryByType actionsRegistry,
       final Provider<FileDownloadUtils> downloadUtilsProvider,
-      final Provider<RenameAction> renameAction, final ContentCapabilitiesRegistry capabilitiesRegistry) {
+      final Provider<RenameAction> renameAction, final ContentCapabilitiesRegistry capabilitiesRegistry,
+      final Provider<FolderViewerDropController> dropController) {
     super(eventBus, view, proxy);
     this.session = session;
     this.stateManager = stateManager;
@@ -131,6 +134,7 @@ public class FolderViewerPresenter extends
     this.actionsRegistry = actionsRegistry;
     this.downloadUtilsProvider = downloadUtilsProvider;
     this.capabilitiesRegistry = capabilitiesRegistry;
+    this.dropController = dropController;
     iconsRegistry = capabilitiesRegistry.getIconsRegistry();
     useGenericImageIcon = false;
     this.renameAction = renameAction;
@@ -247,6 +251,9 @@ public class FolderViewerPresenter extends
     final ButtonDescriptor btn = new ButtonDescriptor(new GotoTokenAction(
         iconsRegistry.getContentTypeIcon(container.getTypeId()), container.getName(),
         container.getStateToken(), style, stateManager, getEventBus()));
+    final FolderViewerDropController dropTarget = dropController.get();
+    dropTarget.setTarget(container.getStateToken());
+    btn.setDropTarget(dropTarget);
     return btn;
   }
 

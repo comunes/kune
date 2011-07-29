@@ -33,7 +33,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -61,10 +60,6 @@ import cc.kune.domain.utils.HasStateToken;
 @Indexed
 @Table(name = "containers")
 public class Container implements HasId, HasStateToken {
-
-  @LazyCollection(LazyCollectionOption.FALSE)
-  @ManyToMany(cascade = CascadeType.ALL)
-  private List<Container> absolutePath;
 
   @OneToOne(cascade = CascadeType.ALL)
   private AccessLists accessLists;
@@ -129,7 +124,6 @@ public class Container implements HasId, HasStateToken {
     this.toolName = toolName;
     this.contents = new HashSet<Content>();
     this.childs = new HashSet<Container>();
-    this.absolutePath = new ArrayList<Container>();
     this.createdOn = System.currentTimeMillis();
   }
 
@@ -145,8 +139,16 @@ public class Container implements HasId, HasStateToken {
     contents.add(descriptor);
   }
 
+  @Transient
   public List<Container> getAbsolutePath() {
-    return absolutePath;
+    ArrayList<Container> path;
+    if (isRoot()) {
+      path = new ArrayList<Container>();
+    } else {
+      path = new ArrayList<Container>((getParent().getAbsolutePath()));
+    }
+    path.add(this);
+    return path;
   }
 
   @Transient
@@ -246,10 +248,6 @@ public class Container implements HasId, HasStateToken {
   public void removeContent(final Content content) {
     contents.size();
     contents.remove(content);
-  }
-
-  public void setAbsolutePath(final List<Container> absolutePath) {
-    this.absolutePath = absolutePath;
   }
 
   public void setAccessLists(final AccessLists accessLists) {

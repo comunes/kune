@@ -23,8 +23,11 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.PropertyChangeListener;
+import cc.kune.core.client.dnd.DropTarget;
 
 public interface GuiActionDescrip {
+
+  public static final String DROP_TARGET = "dropTarget";
 
   public static final AbstractGuiActionDescrip NO_PARENT = new NoParentGuiActionDescriptor();
 
@@ -38,7 +41,6 @@ public interface GuiActionDescrip {
   public static final String TARGET = "target";
 
   public static final String TOOGLE_TOOLTIP_VISIBLE = "toogle-tooltip-visible";
-
   public static final String VISIBLE = "visibleprop";
 
   void add(final GuiAddCondition addCondition);
@@ -80,6 +82,8 @@ public interface GuiActionDescrip {
   public void putValue(final String key, final Object value);
 
   void removePropertyChangeListener(final PropertyChangeListener listener);
+
+  void setDropTarget(DropTarget dropTarget);
 
   void setEnabled(final boolean enabled);
 

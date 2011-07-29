@@ -38,7 +38,7 @@ public class FolderViewerPresenterTest {
   @Before
   public void before() {
     presenter = new FolderViewerPresenter(null, null, null, null, null, null, null, null, null,
-        Mockito.mock(ContentCapabilitiesRegistry.class));
+        Mockito.mock(ContentCapabilitiesRegistry.class), null);
   }
 
   @Test

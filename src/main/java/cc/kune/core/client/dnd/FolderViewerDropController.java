@@ -6,6 +6,7 @@ import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.viewers.FolderItemWidget;
 
@@ -18,16 +19,23 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-public class FolderViewerDropController {
+/**
+ * @author vjrj
+ *
+ */
+/**
+ * @author vjrj
+ * 
+ */
+public class FolderViewerDropController implements DropTarget {
 
   private final ContentServiceAsync contentService;
   private final KuneDragController dragController;
-
   private SimpleDropController dropController;
-
   private final ErrorHandler erroHandler;
   private final Session session;
   private final StateManager stateManager;
+  private Object target;
 
   @Inject
   public FolderViewerDropController(final KuneDragController dragController,
@@ -38,9 +46,9 @@ public class FolderViewerDropController {
     this.session = session;
     this.stateManager = stateManager;
     this.erroHandler = erroHandler;
-
   }
 
+  @Override
   public void init(final Widget dropTarget) {
     dropController = new SimpleDropController(dropTarget) {
 
@@ -50,13 +58,10 @@ public class FolderViewerDropController {
         for (final Widget widget : context.selectedWidgets) {
           if (widget instanceof FolderItemWidget) {
             getDropTarget().removeStyleName("k-drop-allowed-hover");
-            if (getDropTarget() instanceof FolderItemWidget) {
-              // NotifyUser.info("" + ((FolderItemWidget)
-              // getDropTarget()).getToken().toString() + " receive: "
-              // + ((FolderItemWidget) widget).getToken().toString());
+            if (target != null) {
+              final StateToken destToken = (StateToken) target;
               contentService.moveContent(session.getUserHash(), ((FolderItemWidget) widget).getToken(),
-                  ((FolderItemWidget) getDropTarget()).getToken(),
-                  new AsyncCallback<StateContainerDTO>() {
+                  destToken, new AsyncCallback<StateContainerDTO>() {
                     @Override
                     public void onFailure(final Throwable caught) {
                       erroHandler.process(caught);
@@ -119,6 +124,10 @@ public class FolderViewerDropController {
         }
       }
     });
+  }
+
+  public void setTarget(final Object target) {
+    this.target = target;
   }
 
 }

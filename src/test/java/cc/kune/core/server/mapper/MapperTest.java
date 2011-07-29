@@ -233,7 +233,6 @@ public class MapperTest {
     container.addChild(containerChild);
     final List<Container> absolutePathChild = new ArrayList<Container>();
     absolutePathChild.add(container);
-    containerChild.setAbsolutePath(absolutePathChild);
 
     final ContainerDTO dto = mapper.map(container, ContainerDTO.class);
     assertEquals(3, dto.getChilds().size());

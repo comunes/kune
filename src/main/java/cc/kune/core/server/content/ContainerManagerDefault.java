@@ -19,9 +19,6 @@
  */
 package cc.kune.core.server.content;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -68,7 +65,6 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     FilenameUtils.checkBasicFilename(name);
     final String newtitle = findInexistentName(parent, name);
     final Container child = new Container(newtitle, group, parent.getToolName());
-    child.setAbsolutePath(setAbsolutePath(child, parent));
     child.setLanguage(language);
     child.setTypeId(typeId);
     parent.addChild(child);
@@ -81,9 +77,6 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
       final String type) {
     final Container container = new Container(name, group, toolName);
     container.setTypeId(type);
-    final List<Container> absolutePath = new ArrayList<Container>();
-    absolutePath.add(container);
-    container.setAbsolutePath(absolutePath);
     return persist(container);
   }
 
@@ -106,6 +99,10 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
   @Override
   public void moveContainer(final Container container, final Container newContainer) {
     final String title = container.getName();
+    if (newContainer.equals(container.getParent())) {
+      // Do nothing (trying to move to the same location)
+      return;
+    }
     if (findIfExistsTitle(newContainer, title)) {
       throw new NameInUseException();
     }
@@ -116,8 +113,6 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     final Container oldContainer = container.getParent();
     oldContainer.removeChild(container);
     newContainer.addChild(container);
-    // AbsolutePath
-    container.setAbsolutePath(setAbsolutePath(container, newContainer));
     persist(container);
   }
 
@@ -154,18 +149,6 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
       throw new ServerManagerException("Error parsing search");
     }
     return super.search(query, firstResult, maxResults);
-  }
-
-  private List<Container> setAbsolutePath(final Container child, final Container parent) {
-    final List<Container> parentAbsolutePath = parent.getAbsolutePath();
-    final List<Container> childAbsolutePath = new ArrayList<Container>();
-    for (final Container parentRef : parentAbsolutePath) {
-      childAbsolutePath.add(parentRef);
-    }
-    // FIXME: use (tested but change this in other time, not in a pre-release)
-    // childAbsolutePath.addAll(parentAbsolutePath);
-    childAbsolutePath.add(child);
-    return childAbsolutePath;
   }
 
   @Override

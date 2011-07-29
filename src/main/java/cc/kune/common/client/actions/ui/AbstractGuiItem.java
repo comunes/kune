@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.ui.bind.GuiBinding;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.core.client.dnd.DropTarget;
 import cc.kune.core.client.resources.IconConstants;
 
 import com.google.gwt.resources.client.ImageResource;
@@ -79,6 +80,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
     setVisible((Boolean) descriptor.getValue(GuiActionDescrip.VISIBLE));
     setStyles((String) descriptor.getValue(Action.STYLES));
+    setDropTarget((DropTarget) descriptor.getValue(GuiActionDescrip.DROP_TARGET));
   }
 
   @Override
@@ -103,6 +105,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
           toogleTooltipVisible();
         } else if (event.getPropertyName().equals(Action.STYLES)) {
           setStyles((String) newValue);
+        } else if (event.getPropertyName().equals(GuiActionDescrip.DROP_TARGET)) {
+          setDropTarget((DropTarget) newValue);
         }
       }
     };
@@ -114,6 +118,12 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     // the action, if not we only pass the menuitem
     return descriptor.hasTarget() ? descriptor.getTarget()
         : descriptor.isChild() ? descriptor.getParent().getTarget() : ActionEvent.NO_TARGET;
+  };
+
+  private void setDropTarget(final DropTarget dropTarget) {
+    if (dropTarget != null) {
+      dropTarget.init(this);
+    }
   }
 
   protected abstract void setEnabled(boolean enabled);
@@ -162,11 +172,6 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   protected abstract void setText(String text);
 
-  protected void toogleTooltipVisible() {
-    // do nothing by default
-    return;
-  }
-
   protected abstract void setToolTipText(String text);
 
   private void setVisible(final Boolean visible) {
@@ -178,5 +183,10 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   @Override
   public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
     return true;
+  }
+
+  protected void toogleTooltipVisible() {
+    // do nothing by default
+    return;
   }
 }

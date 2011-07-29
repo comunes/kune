@@ -24,7 +24,11 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
   }
 
   private Container createContainer(final Container parent) {
-    return containerManager.createFolder(user.getUserGroup(), parent, "Some title", english, TYPE_FOLDER);
+    return createContainer(parent, "Some title");
+  }
+
+  private Container createContainer(final Container parent, final String title) {
+    return containerManager.createFolder(user.getUserGroup(), parent, title, english, TYPE_FOLDER);
   }
 
   @Test
@@ -59,6 +63,56 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
     // Create a folder with the same name
     createContainer(newParentFolder);
     containerManager.moveContainer(folderToMove, newParentFolder);
+  }
+
+  @Test
+  public void testMoveFolderToSame() {
+    final Container folderToMove = createContainer(rootFolder);
+    containerManager.moveContainer(folderToMove, rootFolder);
+    // Do nothing (in silence)
+  }
+
+  @Test
+  public void testMoveFolderUp() {
+    final Container parentFolder = createContainer(rootFolder);
+    final Container folderToMove = createContainer(parentFolder, "Other title");
+    assertEquals(0, folderToMove.getChilds().size());
+    assertEquals(1, parentFolder.getChilds().size());
+    containerManager.moveContainer(folderToMove, rootFolder);
+    assertEquals(rootFolder, folderToMove.getParent());
+    assertEquals(0, parentFolder.getChilds().size());
+    assertEquals(2, rootFolder.getChilds().size());
+    assertEquals(2, folderToMove.getAbsolutePath().size());
+    assertEquals(rootFolder, folderToMove.getAbsolutePath().get(0));
+    assertEquals(folderToMove, folderToMove.getAbsolutePath().get(1));
+  }
+
+  @Test
+  public void testMoveMiddleFolder() {
+    final Container parentFolder = createContainer(rootFolder);
+    final Container middleFolder = createContainer(parentFolder, "Middle");
+    final Container childFolder = createContainer(middleFolder, "Child");
+    assertEquals(0, childFolder.getChilds().size());
+    assertEquals(1, parentFolder.getChilds().size());
+    assertEquals(1, middleFolder.getChilds().size());
+    assertEquals(4, childFolder.getAbsolutePath().size());
+    assertEquals(rootFolder, childFolder.getAbsolutePath().get(0));
+    assertEquals(parentFolder, childFolder.getAbsolutePath().get(1));
+    assertEquals(middleFolder, childFolder.getAbsolutePath().get(2));
+    assertEquals(childFolder, childFolder.getAbsolutePath().get(3));
+    containerManager.moveContainer(middleFolder, rootFolder);
+    assertEquals(rootFolder, middleFolder.getParent());
+    assertEquals(0, parentFolder.getChilds().size());
+    assertEquals(2, rootFolder.getChilds().size());
+    assertEquals(3, childFolder.getAbsolutePath().size());
+    assertEquals(rootFolder, childFolder.getAbsolutePath().get(0));
+    assertEquals(middleFolder, childFolder.getAbsolutePath().get(1));
+    assertEquals(childFolder, childFolder.getAbsolutePath().get(2));
+    assertEquals(1, rootFolder.getAbsolutePath().size());
+    assertEquals(rootFolder, rootFolder.getAbsolutePath().get(0));
+    assertEquals(2, parentFolder.getAbsolutePath().size());
+    assertEquals(rootFolder, parentFolder.getAbsolutePath().get(0));
+    assertEquals(parentFolder, parentFolder.getAbsolutePath().get(1));
   }
 
   @Test(expected = AccessViolationException.class)

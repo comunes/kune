@@ -162,7 +162,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       channel = webClient.getChannel();
       profiles = webClient.getProfiles();
       idGenerator = ClientIdGenerator.create();
-      loading.addClassName("kune-Margin-40-tb");
+      // loading.addClassName("kune-Margin-40-tb");
     }
   }
 
