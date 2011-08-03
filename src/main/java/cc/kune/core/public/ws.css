@@ -1432,3 +1432,40 @@ button.k-drop-allowed-hover,
 .k-drop-allowed-hover {
   border: dashed 2px #3a9fd6 !important;
 }
+
+.k-link-icon {
+  background-image: url(images/link.gif) !important;
+}
+
+.k-options-icon {
+  background-image: url(images/emblem-system.gif) !important;
+}
+
+.k-copyleft-icon {
+  background-image: url(images/copyleft.png) !important;
+}
+
+.k-picture-icon {
+  background-image: url(images/picture.png) !important;
+}
+
+.k-film-icon {
+  background-image: url(images/film.png) !important;
+}
+
+.k-specialchars-icon {
+  background-image: url(images/specialchars.png) !important;
+}
+
+.k-info-icon {
+  background-image: url(images/info.gif) !important;
+}
+
+.k-newgroup-icon {
+  background-image: url(images/kune-icon16.png) !important;
+}
+
+.k-colors-icon {
+  background-image: url(images/colors.gif) !important;
+}
+

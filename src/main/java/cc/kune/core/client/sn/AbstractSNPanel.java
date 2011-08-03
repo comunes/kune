@@ -149,7 +149,7 @@ public class AbstractSNPanel extends ViewImpl {
             item.setParent(menu);
           }
           actions.add(menu);
-          actions.add(menuitems);
+          // (Not needed after setParent Recursive) actions.add(menuitems);
         }
         thumb.hideTooltip();
         menu.show(thumb);

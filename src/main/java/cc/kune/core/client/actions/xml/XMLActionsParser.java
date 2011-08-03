@@ -112,7 +112,7 @@ public class XMLActionsParser {
       if (subMenuDescriptor == null) {
         final GuiActionDescrip parent = (i == 0 ? menu : submenus.get(getSubPathId(typeId, path, i - 1)));
         assert parent != null;
-        subMenuDescriptor = new SubMenuDescriptor(parent, i18n.t(name));
+        subMenuDescriptor = new SubMenuDescriptor(parent, false, i18n.t(name));
         // subMenuDescriptor.setVisible(false);
         submenus.put(subpathId, subMenuDescriptor);
         actionRegistry.addAction(ActionGroups.TOOLBAR, subMenuDescriptor, typeId);
@@ -158,7 +158,7 @@ public class XMLActionsParser {
             public GuiActionDescrip get() {
               final MenuItemDescriptor menuItem = new MenuItemDescriptor(action);
               menuItem.withText(descrip.getDescName()).withToolTip(descrip.getDescription());
-              menuItem.setParent(TextUtils.notEmpty(path) ? submenu : menu);
+              menuItem.setParent(TextUtils.notEmpty(path) ? submenu : menu, false);
               return menuItem;
             }
           };

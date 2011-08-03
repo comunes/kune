@@ -131,6 +131,140 @@ WaverefEncoder.java
    * @return The corresponding WaveRef object, or null if the path was invalid.
    * @throws InvalidWaveRefException If the path contains less than 2 tokens or 3 tokens.
      */
+* TODO style injection:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-07-30 sáb 00:35
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :ARCHIVE_TODO: TODO
+  :END: 
+  http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
+  https://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f4c4fb9b4c5bb28f
+* TODO style injection:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-07-30 sáb 00:35
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :ARCHIVE_TODO: TODO
+  :END: 
+  http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
+  https://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f4c4fb9b4c5bb28f
+* TODO Server side extensions configuration menu
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-07-30 sáb 00:35
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :ARCHIVE_TODO: TODO
+  :END:
+A way to specify the default extensions in a client of a wave server.
+
+* Perms in WIAB							    :ARCHIVE:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-07-30 sáb 00:36
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :END:
+27-abr-2011 16:59:01 org.waveprotocol.box.server.robots.OperationContextImpl openWavelet
+GRAVE: admin@localhost tried to open [WaveletName localhost/w+1v66qilgtl2o6E/localhost/conv+root] which it isn't participating in
+27-abr-2011 16:59:01 org.waveprotocol.box.server.robots.util.OperationUtil executeOperation
+ADVERTENCIA: Operation {'method':'robot.fetchWave','id':'op16','waveId':'localhost!w+1v66qilgtl2o6E','waveletId':'localhost!conv+root','blipId':'null','parameters':{WAVELET_ID=localhost!conv+root, WAVE_ID=localhost!w+1v66qilgtl2o6E}} failed to execute
+com.google.wave.api.InvalidRequestException: Wavelet [WaveletName localhost/w+1v66qilgtl2o6E/localhost/conv+root] couldn't be retrieved
+	at org.waveprotocol.box.server.robots.OperationContextImpl.openWavelet(OperationContextImpl.java:231)
+	at org.waveprotocol.box.server.robots.OperationContextImpl.openWavelet(OperationContextImpl.java:247)
+	at org.waveprotocol.box.server.robots.operations.FetchWaveService.execute(FetchWaveService.java:52)
+	at org.waveprotocol.box.server.robots.util.OperationUtil.executeOperation(OperationUtil.java:171)
+	at cc.kune.wave.server.KuneWaveManagerDefault.fetchWavelet(KuneWaveManagerDefault.java:138)
+	at cc.kune.wave.server.KuneWaveManagerDefault$$EnhancerByGuice$$eb69153f.CGLIB$fetchWavelet$2(<generated>)
+	at cc.kune.wave.server.KuneWaveManagerDefault$$EnhancerByGuice$$eb69153f$$FastClassByGuice$$53f72476.invoke(<generated>)
+	at com.google.inject.internal.cglib.proxy.$MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at cc.kune.core.server.LoggerMethodInterceptor.invoke(LoggerMethodInterceptor.java:87)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at com.google.inject.internal.InterceptorStackCallback.intercept(InterceptorStackCallback.java:44)
+	at cc.kune.wave.server.KuneWaveManagerDefault$$EnhancerByGuice$$eb69153f.fetchWavelet(<generated>)
+	at cc.kune.core.server.state.StateServiceDefault.create(StateServiceDefault.java:111)
+	at cc.kune.core.server.state.StateServiceDefault$$EnhancerByGuice$$9d4970d0.CGLIB$create$1(<generated>)
+	at cc.kune.core.server.state.StateServiceDefault$$EnhancerByGuice$$9d4970d0$$FastClassByGuice$$9a3402d2.invoke(<generated>)
+	at com.google.inject.internal.cglib.proxy.$MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at cc.kune.core.server.LoggerMethodInterceptor.invoke(LoggerMethodInterceptor.java:87)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at com.google.inject.internal.InterceptorStackCallback.intercept(InterceptorStackCallback.java:44)
+	at cc.kune.core.server.state.StateServiceDefault$$EnhancerByGuice$$9d4970d0.create(<generated>)
+	at cc.kune.core.server.rpc.ContentRPC.getContentOrDefContent(ContentRPC.java:263)
+	at cc.kune.core.server.rpc.ContentRPC.getContent(ContentRPC.java:246)
+	at cc.kune.core.server.rpc.ContentRPC$$EnhancerByGuice$$9d633676.CGLIB$getContent$1(<generated>)
+	at cc.kune.core.server.rpc.ContentRPC$$EnhancerByGuice$$9d633676$$FastClassByGuice$$8c7047c.invoke(<generated>)
+	at com.google.inject.internal.cglib.proxy.$MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at cc.kune.core.server.LoggerMethodInterceptor.invoke(LoggerMethodInterceptor.java:87)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at com.google.inject.persist.jpa.JpaLocalTxnInterceptor.invoke(JpaLocalTxnInterceptor.java:66)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at cc.kune.core.server.auth.AuthenticatedMethodInterceptor.invoke(AuthenticatedMethodInterceptor.java:84)
+	at cc.kune.core.server.OutermostCallInterceptor.invoke(OutermostCallInterceptor.java:66)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at com.google.inject.internal.InterceptorStackCallback.intercept(InterceptorStackCallback.java:44)
+	at cc.kune.core.server.rpc.ContentRPC$$EnhancerByGuice$$9d633676.getContent(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at com.google.gwt.user.server.rpc.RPC.invokeAndEncodeResponse(RPC.java:562)
+	at com.google.gwt.user.server.rpc.RPC.invokeAndEncodeResponse(RPC.java:544)
+	at com.google.gwt.user.server.rpc.RPC.invokeAndEncodeResponse(RPC.java:504)
+	at cc.kune.core.server.rack.filters.gwts.DelegatedRemoteServlet.processCall(DelegatedRemoteServlet.java:45)
+	at com.google.gwt.user.server.rpc.RemoteServiceServlet.processPost(RemoteServiceServlet.java:243)
+	at com.google.gwt.user.server.rpc.AbstractRemoteServiceServlet.doPost(AbstractRemoteServiceServlet.java:62)
+	at cc.kune.core.server.rack.filters.gwts.GWTServiceFilter.doFilter(GWTServiceFilter.java:61)
+	at cc.kune.core.server.rack.RackServletFilter$DockChain.execute(RackServletFilter.java:70)
+	at cc.kune.core.server.rack.RackServletFilter$DockChain.doFilter(RackServletFilter.java:63)
+	at com.google.inject.servlet.FilterChainInvocation.doFilter(FilterChainInvocation.java:66)
+	at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:118)
+	at com.google.inject.servlet.ManagedFilterPipeline$$EnhancerByGuice$$1af97b76.CGLIB$dispatch$0(<generated>)
+	at com.google.inject.servlet.ManagedFilterPipeline$$EnhancerByGuice$$1af97b76$$FastClassByGuice$$57398af4.invoke(<generated>)
+	at com.google.inject.internal.cglib.proxy.$MethodProxy.invokeSuper(MethodProxy.java:228)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at cc.kune.core.server.LoggerMethodInterceptor.invoke(LoggerMethodInterceptor.java:87)
+	at com.google.inject.internal.InterceptorStackCallback$InterceptedMethodInvocation.proceed(InterceptorStackCallback.java:64)
+	at com.google.inject.internal.InterceptorStackCallback.intercept(InterceptorStackCallback.java:44)
+	at com.google.inject.servlet.ManagedFilterPipeline$$EnhancerByGuice$$1af97b76.dispatch(<generated>)
+	at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:113)
+	at cc.kune.core.server.rack.RackServletFilter$DockChain.execute(RackServletFilter.java:70)
+	at cc.kune.core.server.rack.RackServletFilter$DockChain.doFilter(RackServletFilter.java:63)
+	at cc.kune.core.server.rack.filters.LogFilter.doFilter(LogFilter.java:46)
+	at cc.kune.core.server.rack.RackServletFilter$DockChain.execute(RackServletFilter.java:70)
+	at cc.kune.core.server.rack.RackServletFilter$DockChain.doFilter(RackServletFilter.java:63)
+	at cc.kune.core.server.rack.RackServletFilter.doFilter(RackServletFilter.java:105)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1187)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:421)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:119)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:493)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:225)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:930)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:358)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:866)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:117)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:113)
+	at org.eclipse.jetty.server.Server.handle(Server.java:351)
+	at org.eclipse.jetty.server.HttpConnection.handleRequest(HttpConnection.java:594)
+	at org.eclipse.jetty.server.HttpConnection$RequestHandler.content(HttpConnection.java:1059)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:764)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:217)
+	at org.eclipse.jetty.server.HttpConnection.handle(HttpConnection.java:424)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:506)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:436)
+	at java.lang.Thread.run(Thread.java:679)
+2011-04-27 16:59:01,904 [qtp2042579307-41] ERROR - Wavelet [WaveletName localhost/w+1v66qilgtl2o6E/localhost/conv+root] couldn't be retrieved
+
+
+
+
 
 
 

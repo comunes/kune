@@ -93,6 +93,15 @@ public interface GuiActionDescrip {
 
   void setParent(final GuiActionDescrip parent);
 
+  /**
+   * @param parent
+   * @param addToParent
+   *          if yes, the action will be added directly to the parent, useful to
+   *          attach menu items (or other child actions) directly to its parent
+   *          without any other check (for instance session status, etc)
+   */
+  void setParent(GuiActionDescrip parent, boolean addToParent);
+
   void setPosition(final int position);
 
   void setStyles(final String styles);
@@ -112,6 +121,15 @@ public interface GuiActionDescrip {
   GuiActionDescrip withId(String id);
 
   GuiActionDescrip withParent(GuiActionDescrip parent);
+
+  /**
+   * @param parent
+   * @param addToParent
+   *          if yes, the action will be added directly to the parent, useful to
+   *          attach menu items (or other child actions) directly to its parent
+   *          without any other check (for instance session status, etc)
+   */
+  GuiActionDescrip withParent(GuiActionDescrip parent, boolean addToParent);
 
   GuiActionDescrip withShortcut(KeyStroke keystroke);
 

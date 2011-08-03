@@ -19,11 +19,15 @@
  */
 package cc.kune.common.client.ui.dialogs.tabbed;
 
+import cc.kune.common.client.ProvidersCollection;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
+import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.resources.client.ImageResource;
@@ -42,6 +46,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private final NotifyLevelImages images;
   private MessageToolbar messageErrorBar;
   private final boolean modal;
+  private final ProvidersCollection provCollection;
   private final String sndBtnId;
   private final String sndBtnTitle;
   private DecoratedTabPanel tabPanel;
@@ -50,7 +55,8 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
       final NotifyLevelImages images, final String errorLabelId, final String firstBtnTitle,
-      final String firstBtnId, final String sndBtnTitle, final String sndBtnId) {
+      final String firstBtnId, final String sndBtnTitle, final String sndBtnId,
+      final ProvidersCollection provCollection) {
     this.dialogId = dialogId;
     this.title = title;
     this.modal = modal;
@@ -60,13 +66,15 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     this.firstBtnId = firstBtnId;
     this.sndBtnTitle = sndBtnTitle;
     this.sndBtnId = sndBtnId;
+    this.provCollection = provCollection;
   }
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
       final int height, final boolean modal, final NotifyLevelImages images, final String errorLabelId,
       final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
-      final String sndBtnId) {
-    this(dialogId, title, modal, images, errorLabelId, firstBtnTitle, firstBtnId, sndBtnTitle, sndBtnId);
+      final String sndBtnId, final ProvidersCollection provCollection) {
+    this(dialogId, title, modal, images, errorLabelId, firstBtnTitle, firstBtnId, sndBtnTitle, sndBtnId,
+        provCollection);
     this.width = width;
     this.height = height;
   }
@@ -84,9 +92,9 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   }
 
   @Override
-  public void createAndShow() {
-    show();
-    setFirstTabActive();
+  public Widget asWidget() {
+    createDialogIfNecessary();
+    return dialog;
   }
 
   private void createDialog() {
@@ -97,6 +105,13 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     tabPanel = new DecoratedTabPanel();
     tabPanel.getDeckPanel().setSize(String.valueOf(width), String.valueOf(height));
     dialog.getInnerPanel().add(tabPanel);
+    dialog.getFirstBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        hide();
+      }
+    });
+    provCollection.createAll();
   }
 
   private void createDialogIfNecessary() {
@@ -126,11 +141,6 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   public HasClickHandlers getSecondBtn() {
     createDialogIfNecessary();
     return dialog.getSecondBtn();
-  }
-
-  public Widget getWidget() {
-    createDialogIfNecessary();
-    return dialog;
   }
 
   @Override
@@ -187,8 +197,16 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     }
   }
 
+  @Override
   public void show() {
+    showImpl();
+    setFirstTabActive();
+  }
+
+  private void showImpl() {
     createDialogIfNecessary();
+    hideMessages();
     dialog.showCentered();
   }
+
 }

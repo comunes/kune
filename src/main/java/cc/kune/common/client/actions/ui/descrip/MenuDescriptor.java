@@ -25,7 +25,7 @@ import cc.kune.common.client.actions.BaseAction;
 
 import com.google.gwt.resources.client.ImageResource;
 
-public class MenuDescriptor extends AbstractGuiActionDescrip {
+public class MenuDescriptor extends AbstractParentGuiActionDescrip {
 
   public static final String MENU_CLEAR = "menuclear";
   public static final String MENU_HIDE = "hidemenu";

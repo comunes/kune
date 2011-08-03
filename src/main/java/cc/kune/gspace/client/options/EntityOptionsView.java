@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client.options;
 
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogView;
+import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
 
 public interface EntityOptionsView extends AbstractTabbedDialogView {
 

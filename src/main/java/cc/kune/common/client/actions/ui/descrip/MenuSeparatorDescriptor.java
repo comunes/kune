@@ -21,13 +21,17 @@ package cc.kune.common.client.actions.ui.descrip;
 
 public class MenuSeparatorDescriptor extends AbstractSeparatorDescriptor {
 
-    public MenuSeparatorDescriptor(final MenuDescriptor parent) {
-        super();
-        setParent(parent);
-    }
+  public static MenuSeparatorDescriptor build(final MenuDescriptor parent) {
+    return new MenuSeparatorDescriptor(parent);
+  }
 
-    @Override
-    public Class<?> getType() {
-        return MenuSeparatorDescriptor.class;
-    }
+  public MenuSeparatorDescriptor(final MenuDescriptor parent) {
+    super();
+    setParent(parent);
+  }
+
+  @Override
+  public Class<?> getType() {
+    return MenuSeparatorDescriptor.class;
+  }
 }

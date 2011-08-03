@@ -37,45 +37,46 @@ import com.google.inject.Inject;
 
 public class SitebarSignInLink extends ButtonDescriptor {
 
-    public static class SitebarSignInAction extends AbstractExtendedAction {
+  public static class SitebarSignInAction extends AbstractExtendedAction {
 
-        private final StateManager stateManager;
-
-        @Inject
-        public SitebarSignInAction(final StateManager stateManager, final I18nTranslationService i18n) {
-            super();
-            this.stateManager = stateManager;
-            putValue(Action.NAME, i18n.t("Sign in to collaborate"));
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.SIGNIN);
-        }
-
-    }
-
-    public static final String SITE_SIGN_IN = "kune-ssilp-hy";
+    private final StateManager stateManager;
 
     @Inject
-    public SitebarSignInLink(final SitebarSignInAction action, final EventBus eventBus, final Session session) {
-        super(action);
-        // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
-        setId(SITE_SIGN_IN);
-        setVisible(!session.isLogged());
-        setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
-        setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
-        session.onUserSignIn(true, new UserSignInHandler() {
-            @Override
-            public void onUserSignIn(final UserSignInEvent event) {
-                SitebarSignInLink.this.setVisible(false);
-            }
-        });
-        session.onUserSignOut(true, new UserSignOutHandler() {
-            @Override
-            public void onUserSignOut(final UserSignOutEvent event) {
-                SitebarSignInLink.this.setVisible(true);
-            }
-        });
+    public SitebarSignInAction(final StateManager stateManager, final I18nTranslationService i18n) {
+      super();
+      this.stateManager = stateManager;
+      putValue(Action.NAME, i18n.t("Sign in to collaborate"));
     }
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.SIGNIN);
+    }
+
+  }
+
+  public static final String SITE_SIGN_IN = "kune-ssilp-hy";
+
+  @Inject
+  public SitebarSignInLink(final SitebarSignInAction action, final EventBus eventBus,
+      final Session session, final SitebarActions sitebarActions) {
+    super(action);
+    // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+    setId(SITE_SIGN_IN);
+    setVisible(!session.isLogged());
+    setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
+    setParent(sitebarActions.getRightToolbar());
+    session.onUserSignIn(true, new UserSignInHandler() {
+      @Override
+      public void onUserSignIn(final UserSignInEvent event) {
+        SitebarSignInLink.this.setVisible(false);
+      }
+    });
+    session.onUserSignOut(true, new UserSignOutHandler() {
+      @Override
+      public void onUserSignOut(final UserSignOutEvent event) {
+        SitebarSignInLink.this.setVisible(true);
+      }
+    });
+  }
 }

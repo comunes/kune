@@ -69,7 +69,6 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction) {
     OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
         OPTIONS_STYLES);
-    final GuiActionDescrip optionsTitle = new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
     final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
         SocialNetworkVisibility.anyone);
     final MenuRadioItemDescriptor onlyMembersItem = membersVisibility.get().withVisibility(
@@ -83,16 +82,16 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     final MenuRadioItemDescriptor openItem = membersModeration.get().withModeration(AdmissionType.Open);
 
     addImpl(OPTIONS_MENU);
-    addImpl(optionsTitle);
-    addImpl(VISIBILITY_SUBMENU.withText(i18n.t("Those who can view this member list")).withParent(
-        OPTIONS_MENU));
-    addImpl(MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU));
-    addImpl(anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone")));
-    addImpl(onlyMembersItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only members")));
-    addImpl(onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only admins")));
-    addImpl(moderatedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("moderate request to join")));
-    addImpl(openItem.withParent(MODERATION_SUBMENU).withText(i18n.t("auto accept request to join")));
-    addImpl(closedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("closed for new members")));
+    new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
+
+    VISIBILITY_SUBMENU.withText(i18n.t("Those who can view this member list")).withParent(OPTIONS_MENU);
+    MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU);
+    anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone"));
+    onlyMembersItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only members"));
+    onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only admins"));
+    moderatedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("moderate request to join"));
+    openItem.withParent(MODERATION_SUBMENU).withText(i18n.t("auto accept request to join"));
+    closedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("closed for new members"));
 
     final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
     final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);

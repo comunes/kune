@@ -93,7 +93,7 @@ public class NewContentMenuItem extends MenuItemDescriptor {
   public NewContentMenuItem(final I18nTranslationService i18n, final NewContentAction action,
       final ImageResource icon, final GlobalShortcutRegister shorcutReg, final String title,
       final String tooltip, final String newName, final String id, @Nonnull final MenuDescriptor parent) {
-    super(parent, action);
+    super(parent, false, action);
     // The name given to this new content
     action.putValue(NEW_NAME, newName);
     action.putValue(ID, id);

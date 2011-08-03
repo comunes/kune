@@ -26,6 +26,10 @@ import com.google.gwt.resources.client.ImageResource;
 
 public class SubMenuDescriptor extends MenuDescriptor {
 
+  public static SubMenuDescriptor build() {
+    return new SubMenuDescriptor();
+  }
+
   public SubMenuDescriptor() {
     this(new BaseAction(null, null));
   }
@@ -41,6 +45,11 @@ public class SubMenuDescriptor extends MenuDescriptor {
     putValue(MENU_SHOW, false);
     putValue(MENU_CLEAR, false);
     putValue(MENU_STANDALONE, false);
+  }
+
+  public SubMenuDescriptor(final GuiActionDescrip parent, final boolean addToParent, final String text) {
+    this(text);
+    setParent(parent, addToParent);
   }
 
   public SubMenuDescriptor(final GuiActionDescrip parent, final String text) {

@@ -24,6 +24,10 @@ import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RenameAction;
+import cc.kune.gspace.client.i18n.I18nNewTranslatorPanel;
+import cc.kune.gspace.client.i18n.I18nNewTranslatorPresenter;
+import cc.kune.gspace.client.i18n.I18nNewTranslatorPresenter.I18nNewTranslatorView;
+import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import cc.kune.gspace.client.licensewizard.LicenseChangeAction;
 import cc.kune.gspace.client.licensewizard.LicenseWizard;
 import cc.kune.gspace.client.licensewizard.LicenseWizardPanel;
@@ -169,5 +173,10 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(LicenseWizardTrdFormView.class, LicenseWizardTrdForm.class);
     s(LicenseWizardFrdFormView.class, LicenseWizardFrdForm.class);
     s(LicenseChangeAction.class);
+
+    // I18nTranslator
+    s(I18nNewTranslatorView.class, I18nNewTranslatorPanel.class);
+    s(I18nNewTranslatorPresenter.class);
+    s(SiteOptionsI18nTranslatorAction.class);
   }
 }

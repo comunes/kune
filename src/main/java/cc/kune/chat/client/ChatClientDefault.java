@@ -45,7 +45,6 @@ import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.SitebarActions;
-import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
@@ -252,6 +251,7 @@ public class ChatClientDefault implements ChatClient {
   private void createActionIfNeeded() {
     if (chatIcon == null) {
       chatIcon = new IconLabelDescriptor(action);
+      chatIcon.setParent(siteActions.getLeftToolbar());
       chatIcon.setId(CHAT_CLIENT_ICON_ID);
       chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
       chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
@@ -260,13 +260,9 @@ public class ChatClientDefault implements ChatClient {
       shorcutRegister.put(shortcut, action);
       action.setShortcut(shortcut);
       chatIcon.setVisible(session.isLogged());
-      siteActions.getLeftToolbar().add(
-          new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-      siteActions.getLeftToolbar().add(
-          new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-      siteActions.getLeftToolbar().add(
-          new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-      siteActions.getLeftToolbar().add(chatIcon);
+      ToolbarSeparatorDescriptor.build(Type.spacer, siteActions.getLeftToolbar());
+      ToolbarSeparatorDescriptor.build(Type.spacer, siteActions.getLeftToolbar());
+      ToolbarSeparatorDescriptor.build(Type.spacer, siteActions.getLeftToolbar());
     }
   }
 

@@ -25,49 +25,69 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDialog {
 
-    private AbstractTabbedDialogView view;
+  public interface AbstractTabbedDialogView extends IsWidget {
 
-    @Override
-    public void activateTab(final int index) {
-        view.activateTab(index);
-    }
+    void activateTab(int index);
 
-    @Override
-    public void addTab(final IsWidget tab, final IsWidget tabTitle) {
-        view.addTab(tab, tabTitle);
-    }
+    void addTab(IsWidget tab, IsWidget tabTitle);
 
-    public IsWidget getView() {
-        return view;
-    }
+    void destroy();
 
-    public void hide() {
-        view.hide();
-    }
+    void hide();
 
-    @Override
-    public void hideMessages() {
-        view.hideMessages();
-    }
+    void hideMessages();
 
-    public void init(final AbstractTabbedDialogView view) {
-        this.view = view;
-    }
+    void insertTab(IsWidget tab, IsWidget tabTitle, int position);
 
-    @Override
-    public void insertTab(final IsWidget tab, final IsWidget tabTitle, final int index) {
-        view.insertTab(tab, tabTitle, index);
-    }
+    void setErrorMessage(final String message, final NotifyLevel level);
 
-    @Override
-    public void setErrorMessage(final String message, final NotifyLevel level) {
-        view.setErrorMessage(message, level);
-    }
+    void show();
+  }
 
-    @Override
-    public void show() {
-        hideMessages();
-        view.createAndShow();
-    }
+  private AbstractTabbedDialogView view;
+
+  @Override
+  public void activateTab(final int index) {
+    view.activateTab(index);
+  }
+
+  @Override
+  public void addTab(final IsWidget tab, final IsWidget tabTitle) {
+    view.addTab(tab, tabTitle);
+  }
+
+  public IsWidget getView() {
+    return view;
+  }
+
+  @Override
+  public void hide() {
+    view.hide();
+  }
+
+  @Override
+  public void hideMessages() {
+    view.hideMessages();
+  }
+
+  public void init(final AbstractTabbedDialogView view) {
+    this.view = view;
+  }
+
+  @Override
+  public void insertTab(final IsWidget tab, final IsWidget tabTitle, final int index) {
+    view.insertTab(tab, tabTitle, index);
+  }
+
+  @Override
+  public void setErrorMessage(final String message, final NotifyLevel level) {
+    view.setErrorMessage(message, level);
+  }
+
+  @Override
+  public void show() {
+    hideMessages();
+    view.show();
+  }
 
 }

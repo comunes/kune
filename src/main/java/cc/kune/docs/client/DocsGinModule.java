@@ -31,5 +31,4 @@ public class DocsGinModule extends ExtendedGinModule {
     s(DocsClientActions.class);
     s(DocsFolderNewMenu.class);
   }
-
 }

@@ -13,45 +13,44 @@ import com.google.inject.Inject;
 
 public class HelloWorldActions {
 
-    public class HelloWorldAction extends AbstractExtendedAction {
+  public class HelloWorldAction extends AbstractExtendedAction {
 
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            NotifyUser.info("Hello world!");
-        }
-
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      NotifyUser.info("Hello world!");
     }
 
-    @Inject
-    public HelloWorldActions(final CoreResources coreResources, final SitebarActions sitebarActions,
-            final SiteUserOptions siteUserOptions) {
+  }
 
-        // We can share the action if we don't want to create several (and for
-        // instance it doesn't store any value)
-        final HelloWorldAction sharedAction = new HelloWorldAction();
+  @Inject
+  public HelloWorldActions(final CoreResources coreResources, final SitebarActions sitebarActions,
+      final SiteUserOptions siteUserOptions) {
 
-        // An action in the sitebar
-        final ButtonDescriptor siteBarBtn = new ButtonDescriptor(sharedAction);
-        siteBarBtn.withText("HWorld!").withIcon(coreResources.info());
-        // FIXME setParent as in siteUsOp
-        sitebarActions.getLeftToolbar().add(siteBarBtn);
+    // We can share the action if we don't want to create several (and for
+    // instance it doesn't store any value)
+    final HelloWorldAction sharedAction = new HelloWorldAction();
 
-        // Other action in the sitebar options menu
+    // An action in the sitebar
+    final ButtonDescriptor siteBarBtn = new ButtonDescriptor(sharedAction);
+    siteBarBtn.withText("HWorld!").withIcon(coreResources.info());
+    siteBarBtn.setParent(sitebarActions.getLeftToolbar());
 
-        // An action in the user options menu
-        final MenuItemDescriptor menuItem = new MenuItemDescriptor(sharedAction);
-        menuItem.withText("HWorld!").withIcon(coreResources.alert());
-        siteUserOptions.addAction(menuItem);
+    // Other action in the sitebar options menu
 
-        // Another action in the SocialNet menu
+    // An action in the user options menu
+    final MenuItemDescriptor menuItem = new MenuItemDescriptor(sharedAction);
+    menuItem.withText("HWorld!").withIcon(coreResources.alert());
+    siteUserOptions.addAction(menuItem);
 
-        // Something added directly in the Skeleton (esto en el Panel)
+    // Another action in the SocialNet menu
 
-        // IMPORTANT: If you want to add something in a part a don't find how,
-        // please ask! Maybe we need a extension point or we need to document
-        // better
+    // Something added directly in the Skeleton (esto en el Panel)
 
-        // Do something with Chat
+    // IMPORTANT: If you want to add something in a part a don't find how,
+    // please ask! Maybe we need a extension point or we need to document
+    // better
 
-    }
+    // Do something with Chat
+
+  }
 }

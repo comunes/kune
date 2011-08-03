@@ -23,35 +23,63 @@ import cc.kune.common.client.actions.AbstractAction;
 
 public class MenuItemDescriptor extends AbstractGuiActionDescrip {
 
-    /**
-     * A simple menu item definition.
-     * 
-     * You must define a menu item with its parent menu. Only use this
-     * constructor if you'll set the parent menu in the future (before render)
-     * 
-     * @param action
-     */
-    public MenuItemDescriptor(final AbstractAction action) {
-        super(action);
-    }
+  public static MenuItemDescriptor build(final AbstractAction action) {
+    return new MenuItemDescriptor(action);
+  }
 
-    /**
-     * 
-     * A simple menu item definition.
-     * 
-     * This is the preferred and more common used constructor.
-     * 
-     * @param parent
-     *            menu
-     * @param action
-     */
-    public MenuItemDescriptor(final MenuDescriptor parent, final AbstractAction action) {
-        super(action);
-        setParent(parent);
-    }
+  public static MenuItemDescriptor build(final MenuDescriptor parent, final AbstractAction action) {
+    return new MenuItemDescriptor(parent, action);
+  }
 
-    @Override
-    public Class<?> getType() {
-        return MenuItemDescriptor.class;
-    }
+  /**
+   * A simple menu item definition.
+   * 
+   * You must define a menu item with its parent menu. Only use this constructor
+   * if you'll set the parent menu in the future (before render)
+   * 
+   * @param action
+   */
+  public MenuItemDescriptor(final AbstractAction action) {
+    super(action);
+  }
+
+  /**
+   * 
+   * A simple menu item definition.
+   * 
+   * This is the preferred and more common used constructor.
+   * 
+   * @param parent
+   *          menu
+   * @param action
+   */
+  public MenuItemDescriptor(final MenuDescriptor parent, final AbstractAction action) {
+    super(action);
+    setParent(parent);
+  }
+
+  /**
+   * 
+   * A simple menu item definition.
+   * 
+   * This is the preferred and more common used constructor.
+   * 
+   * @param parent
+   *          menu
+   * @param addToParent
+   *          if yes, the action will be added directly to the parent, useful to
+   *          attach menu items (or other child actions) directly to its parent
+   *          without any other check (for instance session status, etc)
+   * @param action
+   */
+  public MenuItemDescriptor(final MenuDescriptor parent, final boolean addToParent,
+      final AbstractAction action) {
+    super(action);
+    setParent(parent, addToParent);
+  }
+
+  @Override
+  public Class<?> getType() {
+    return MenuItemDescriptor.class;
+  }
 }

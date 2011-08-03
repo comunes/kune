@@ -31,28 +31,28 @@ import com.google.inject.Inject;
 
 public class SitebarNewGroupLink extends ButtonDescriptor {
 
-    public static class SitebarNewGroupAction extends AbstractExtendedAction {
+  public static class SitebarNewGroupAction extends AbstractExtendedAction {
 
-        private final StateManager stateManager;
-
-        @Inject
-        public SitebarNewGroupAction(final StateManager stateManager, final I18nTranslationService i18n) {
-            super();
-            this.stateManager = stateManager;
-            putValue(Action.NAME, i18n.t("Create New Group"));
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.NEWGROUP);
-        }
-
-    }
+    private final StateManager stateManager;
 
     @Inject
-    public SitebarNewGroupLink(final SitebarNewGroupAction action) {
-        super(action);
-        setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
-        setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+    public SitebarNewGroupAction(final StateManager stateManager, final I18nTranslationService i18n) {
+      super();
+      this.stateManager = stateManager;
+      putValue(Action.NAME, i18n.t("Create New Group"));
     }
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.NEWGROUP);
+    }
+
+  }
+
+  @Inject
+  public SitebarNewGroupLink(final SitebarNewGroupAction action, final SitebarActions sitebarActions) {
+    super(action);
+    setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
+    setParent(sitebarActions.getRightToolbar());
+  }
 }

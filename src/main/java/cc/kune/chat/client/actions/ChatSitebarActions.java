@@ -143,11 +143,6 @@ public class ChatSitebarActions {
         onlineAction(NO_STATUS, Show.dnd, res.busy()));
     final MenuRadioItemDescriptor offlineItem = createChatStatusAction(res.offline(),
         i18n.t("Sign out of chat"), new ChangeOfflineStatusAction(xmppSession, res.offline()));
-    userOptions.addAction(onlineItem);
-    userOptions.addAction(availableItem);
-    userOptions.addAction(awayItem);
-    userOptions.addAction(busyItem);
-    userOptions.addAction(offlineItem);
     xmppSession.addSessionStateChangedHandler(false, new StateChangedHandler() {
 
       @Override

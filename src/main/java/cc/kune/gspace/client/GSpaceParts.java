@@ -23,6 +23,7 @@ import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.state.Session;
+import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.GroupOptionsCollection;
 import cc.kune.gspace.client.options.UserOptions;
@@ -59,7 +60,8 @@ public class GSpaceParts {
       final Provider<GroupOptStyle> gps, final Provider<GroupOptLogo> gl,
       final Provider<GroupOptTools> gtc, final Provider<UserOptDefLicense> udl,
       final Provider<UserOptStyle> ups, final Provider<UserOptLogo> ul,
-      final Provider<UserOptTools> utc, final Provider<SitebarSearchPresenter> siteSearch) {
+      final Provider<UserOptTools> utc, final Provider<SitebarSearchPresenter> siteSearch,
+      final Provider<SiteOptionsI18nTranslatorAction> transAction) {
 
     session.onAppStart(true, new AppStartHandler() {
       @Override
@@ -85,6 +87,9 @@ public class GSpaceParts {
         // Init
         go.get();
         uo.get();
+
+        // i18n
+        transAction.get();
       }
     });
   }

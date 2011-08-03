@@ -17,10 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.i18n;
+package cc.kune.gspace.client.i18n;
 
-public interface I18nTranslator {
+import cc.kune.common.client.ProvidersCollection;
 
-    void doShowTranslator();
+import com.google.inject.Singleton;
 
+@SuppressWarnings("serial")
+@Singleton
+public class TranslatorTabsCollection extends ProvidersCollection {
 }

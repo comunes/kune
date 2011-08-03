@@ -17,16 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.i18n;
+package cc.kune.gspace.client.i18n;
 
-import org.ourproject.kune.platf.client.View;
+public interface I18nTranslator {
 
-public interface LanguageSelectorView extends View {
-
-    void reset();
-
-    String getLanguage();
-
-    void setLanguage(String code);
+    void doShowTranslator();
 
 }

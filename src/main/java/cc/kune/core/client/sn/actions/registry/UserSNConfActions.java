@@ -69,11 +69,10 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
     assert anyoneItem.getAction() != onlyYourBuddiesItem.getAction();
     assert anyoneItem.getAction() != onlyYou.getAction();
     addImpl(OPTIONS_MENU);
-    addImpl(VISIBILITY_SUBMENU.withText(i18n.t("Those who can view your network")).withParent(
-        OPTIONS_MENU));
-    addImpl(anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone")));
-    addImpl(onlyYourBuddiesItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only your buddies")));
-    addImpl(onlyYou.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only you")));
+    VISIBILITY_SUBMENU.withText(i18n.t("Those who can view your network")).withParent(OPTIONS_MENU);
+    anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone"));
+    onlyYourBuddiesItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only your buddies"));
+    onlyYou.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only you"));
 
     final ButtonDescriptor addBuddieBtn = new ButtonDescriptor(addNewBuddiesAction);
 

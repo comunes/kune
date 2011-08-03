@@ -61,7 +61,9 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
     init(view);
   }
 
-  private void createActions() {
+  private void init(final UserOptionsView view) {
+    super.init(view);
+    this.view = view;
     final AbstractExtendedAction userPrefsAction = new AbstractExtendedAction() {
 
       @Override
@@ -77,11 +79,5 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
     final MenuItemDescriptor prefsItem = new MenuItemDescriptor(userPrefsAction);
     prefsItem.setPosition(1);
     userOptions.addAction(prefsItem);
-  }
-
-  private void init(final UserOptionsView view) {
-    super.init(view);
-    this.view = view;
-    createActions();
   }
 }

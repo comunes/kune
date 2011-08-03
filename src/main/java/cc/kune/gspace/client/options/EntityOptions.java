@@ -19,22 +19,12 @@
  */
 package cc.kune.gspace.client.options;
 
-import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialog;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
 public interface EntityOptions extends AbstractTabbedDialog {
 
-    public IsWidget getView();
-
-    @Override
-    public void hideMessages();
-
-    @Override
-    public void setErrorMessage(String message, NotifyLevel level);
-
-    @Override
-    public void show();
+  public IsWidget getView();
 
 }

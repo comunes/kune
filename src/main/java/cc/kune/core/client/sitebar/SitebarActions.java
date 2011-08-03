@@ -19,12 +19,12 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 
 public interface SitebarActions {
 
-    IsActionExtensible getLeftToolbar();
+  ToolbarDescriptor getLeftToolbar();
 
-    IsActionExtensible getRightToolbar();
+  ToolbarDescriptor getRightToolbar();
 
 }

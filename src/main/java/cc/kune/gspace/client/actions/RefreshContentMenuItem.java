@@ -30,27 +30,27 @@ import com.google.inject.Inject;
 
 public class RefreshContentMenuItem extends MenuItemDescriptor {
 
-    public static class GoParentContainerAction extends AbstractExtendedAction {
+  public static class GoParentContainerAction extends AbstractExtendedAction {
 
-        private final StateManager stateManager;
-
-        @Inject
-        public GoParentContainerAction(final StateManager stateManager) {
-            this.stateManager = stateManager;
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            stateManager.refreshCurrentStateWithoutCache();
-        }
-
-    }
+    private final StateManager stateManager;
 
     @Inject
-    public RefreshContentMenuItem(final I18nTranslationService i18n, final GoParentContainerAction action,
-            final ContentViewerOptionsMenu optionsMenu, final NavResources res) {
-        super(action);
-        this.withText(i18n.t("Reload current page")).withIcon(res.refresh()).withParent(optionsMenu);
+    public GoParentContainerAction(final StateManager stateManager) {
+      this.stateManager = stateManager;
     }
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      stateManager.refreshCurrentStateWithoutCache();
+    }
+
+  }
+
+  @Inject
+  public RefreshContentMenuItem(final I18nTranslationService i18n, final GoParentContainerAction action,
+      final ContentViewerOptionsMenu optionsMenu, final NavResources res) {
+    super(action);
+    this.withText(i18n.t("Reload current page")).withIcon(res.refresh()).withParent(optionsMenu, false);
+  }
 
 }

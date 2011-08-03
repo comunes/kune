@@ -19,67 +19,129 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
+import java.util.Map;
 
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.gwtext.client.core.Connection;
-import com.gwtext.client.core.UrlParam;
-import com.gwtext.client.data.FieldDef;
-import com.gwtext.client.data.HttpProxy;
-import com.gwtext.client.data.JsonReader;
-import com.gwtext.client.data.RecordDef;
-import com.gwtext.client.data.Store;
-import com.gwtext.client.widgets.PagingToolbar;
-import com.gwtext.client.widgets.grid.GridPanel;
-import com.gwtext.client.widgets.grid.RowSelectionModel;
+import com.extjs.gxt.ui.client.data.BaseListLoader;
+import com.extjs.gxt.ui.client.data.BasePagingLoadConfig;
+import com.extjs.gxt.ui.client.data.HttpProxy;
+import com.extjs.gxt.ui.client.data.JsonLoadResultReader;
+import com.extjs.gxt.ui.client.data.ListLoadResult;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.ModelType;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.GridEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.store.Store;
+import com.extjs.gxt.ui.client.store.StoreFilter;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridSelectionModel;
+import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar.PagingToolBarMessages;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.RequestBuilder;
 
 public class AbstractSearcherPanel {
 
-    protected static final int PAGINATION_SIZE = 10;
-    protected final I18nTranslationService i18n;
+  protected static final int PAGINATION_SIZE = 10;
+  protected final I18nTranslationService i18n;
 
-    public AbstractSearcherPanel(final I18nTranslationService i18n) {
-        this.i18n = i18n;
-    }
+  public AbstractSearcherPanel(final I18nTranslationService i18n) {
+    this.i18n = i18n;
+  }
 
-    protected void createPagingToolbar(final Store store, final GridPanel grid) {
-        final PagingToolbar pag = new PagingToolbar(store);
-        pag.setPageSize(PAGINATION_SIZE);
-        pag.setDisplayInfo(true);
-        pag.setDisplayMsg(i18n.tWithNT("Displaying results {0} - {1} of {2}", "Respect {} values in translations. "
-                + "This will produce: 'Displaying results 1 - 25 of 95465' for instance"));
-        pag.setEmptyMsg(i18n.t("No results to display"));
-        pag.setAfterPageText(i18n.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
-        pag.setBeforePageText(i18n.t("Page"));
-        pag.setFirstText(i18n.t("First Page"));
-        pag.setLastText(i18n.t("Last Page"));
-        pag.setNextText(i18n.t("Next Page"));
-        pag.setPrevText(i18n.t("Previous Page"));
-        pag.setRefreshText(i18n.t("Refresh"));
-        grid.setBottomToolbar(pag);
-        grid.setLoadMask(true);
-        grid.setLoadMask(i18n.t("Searching"));
-        grid.setSelectionModel(new RowSelectionModel());
-        grid.setBorder(false);
-        grid.setFrame(true);
-        grid.setStripeRows(true);
-    }
+  protected void createPagingToolbar(final Store store, final Grid grid) {
+    final PagingToolBar pag = new PagingToolBar(PAGINATION_SIZE);
+    final PagingToolBarMessages msgs = new PagingToolBarMessages();
 
-    protected Store createStore(final FieldDef[] fieldDefs, final String url, final String id) {
-        final JsonReader reader = new JsonReader(new RecordDef(fieldDefs));
-        reader.setRoot("list");
-        reader.setTotalProperty("size");
-        reader.setId(id);
-        final HttpProxy proxy = new HttpProxy(url, Connection.POST);
-        return new Store(proxy, reader, true);
-    }
+    msgs.setDisplayMsg(i18n.tWithNT("Displaying results {0} - {1} of {2}",
+        "Respect {} values in translations. "
+            + "This will produce: 'Displaying results 1 - 25 of 95465' for instance"));
+    msgs.setEmptyMsg(i18n.t("No results to display"));
+    msgs.setFirstText(i18n.t("First Page"));
+    msgs.setAfterPageText(i18n.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
+    msgs.setBeforePageText(i18n.t("Page"));
+    msgs.setLastText(i18n.t("Last Page"));
+    msgs.setNextText(i18n.t("Next Page"));
+    msgs.setPrevText(i18n.t("Previous Page"));
+    msgs.setRefreshText(i18n.t("Refresh"));
+    pag.setMessages(msgs);
+    // pag.setStore(store);
+    // pag.setDisplayInfo(true);
+    // grid.setBottomToolbar(pag);
+    grid.setLoadMask(true);
+    // grid.setLoadMask(i18n.t("Searching"));
+    grid.setSelectionModel(new GridSelectionModel());
+    grid.setBorders(false);
+    // grid.setFrame(true);
+    grid.setStripeRows(true);
+  }
 
-    protected void query(final Store store, final GridPanel grid, final String query) {
-        final UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query) };
-        store.setBaseParams(newParams);
-        store.load(0, PAGINATION_SIZE);
-        // see bind/unbind in:
-        // http://groups.google.com/group/gwt-ext/browse_thread/thread/ae0badb8114b30cd?hl=en
-    }
+  protected Store createStore(final ModelType type, final String url, final String id, final Grid grid) {
+    final String path = GWT.getHostPageBaseURL() + url;
+
+    // use a http proxy to get the data
+    final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, path);
+    final HttpProxy<String> proxy = new HttpProxy<String>(builder);
+
+    // need a loader, proxy, and reader
+    final JsonLoadResultReader<ListLoadResult<ModelData>> reader = new JsonLoadResultReader<ListLoadResult<ModelData>>(
+        type);
+
+    final BaseListLoader<ListLoadResult<ModelData>> loader = new BaseListLoader<ListLoadResult<ModelData>>(
+        proxy, reader);
+    loader.setRemoteSort(true);
+
+    final ListStore<ModelData> store = new ListStore<ModelData>(loader);
+    grid.addListener(Events.Attach, new Listener<GridEvent<ModelData>>() {
+      @Override
+      public void handleEvent(final GridEvent<ModelData> be) {
+        final PagingLoadConfig config = new BasePagingLoadConfig();
+        config.setOffset(0);
+        config.setLimit(PAGINATION_SIZE);
+
+        final Map<String, Object> state = grid.getState();
+        if (state.containsKey("offset")) {
+          final int offset = (Integer) state.get("offset");
+          final int limit = (Integer) state.get("limit");
+          config.setOffset(offset);
+          config.setLimit(limit);
+        }
+        // if (state.containsKey("sortField")) {
+        // config.setSortField((String) state.get("sortField"));
+        // config.setSortDir(SortDir.valueOf((String) state.get("sortDir")));
+        // }
+        loader.load(config);
+      }
+    });
+
+    // this goes to Model...
+    // reader.setRoot("list");
+    // reader.setTotalProperty("size");
+    // reader.setId(id);
+    // final HttpProxy proxy = new HttpProxy(url, Connection.POST);
+    // return new Store(proxy, reader, true);
+
+    return store;
+  }
+
+  protected void query(final Store store, final Grid grid, final String query) {
+    // final UrlParam[] newParams = new UrlParam[] { new UrlParam("query",
+    // query) };
+    // store.setBaseParams(newParams);
+    // store.load(0, PAGINATION_SIZE);
+    store.clearFilters();
+    store.addFilter(new StoreFilter<ModelData>() {
+      @Override
+      public boolean select(final Store<ModelData> store, final ModelData parent, final ModelData item,
+          final String property) {
+        // TODO Auto-generated method stub
+        return false;
+      }
+    });
+  }
 
 }

@@ -27,9 +27,10 @@ import com.google.inject.Inject;
 
 public class GoParentFolderBtn extends GoParentContainerBtn {
 
-    @Inject
-    public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action, final CoreResources res) {
-        super(i18n, action, res);
-    }
+  @Inject
+  public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
+      final CoreResources res) {
+    super(i18n, action, res);
+  }
 
 }

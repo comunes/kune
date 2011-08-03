@@ -25,16 +25,18 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 public interface AbstractTabbedDialog {
 
-    void activateTab(int index);
+  void activateTab(int index);
 
-    void addTab(IsWidget tab, IsWidget tabTitle);
+  void addTab(IsWidget tab, IsWidget tabTitle);
 
-    public void hideMessages();
+  void hide();
 
-    void insertTab(IsWidget tab, IsWidget tabTitle, int position);
+  public void hideMessages();
 
-    public void setErrorMessage(String message, NotifyLevel level);
+  void insertTab(IsWidget tab, IsWidget tabTitle, int position);
 
-    void show();
+  public void setErrorMessage(String message, NotifyLevel level);
+
+  void show();
 
 }

@@ -22,6 +22,8 @@ package cc.kune.gspace.client.viewers;
 import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.HasChilds;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.EditEvent;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
@@ -188,6 +190,14 @@ public class ContentViewerPresenter extends
     }
     final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContent.getGroup(),
         stateContent.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
-    getView().setActions(actions);
+    final GuiActionDescCollection actionsToAttach = new GuiActionDescCollection();
+    for (final GuiActionDescrip action : actions) {
+      // The previous actionsRegistry creates childs actions already via
+      // Provider.get()
+      if (action instanceof HasChilds) {
+        actionsToAttach.add(action);
+      }
+    }
+    getView().setActions(actionsToAttach);
   }
 }

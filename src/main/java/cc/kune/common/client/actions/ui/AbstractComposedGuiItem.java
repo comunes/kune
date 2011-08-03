@@ -23,8 +23,10 @@ import java.util.List;
 
 import cc.kune.common.client.actions.ui.bind.GuiBinding;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.descrip.AbstractParentGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.HasChilds;
 import cc.kune.common.client.errors.UIException;
 
 import com.google.gwt.user.client.ui.Composite;
@@ -80,10 +82,17 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
       } else {
         final AbstractGuiItem item = binding.create(descrip);
         if (binding.shouldBeAdded()) {
+          // TODO Change this ^ to shouldBeAttached
           if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
             addWidget(item);
           } else {
             insertWidget(item, descrip.getPosition());
+          }
+        }
+        if (descrip instanceof HasChilds) {
+          for (final GuiActionDescrip child : ((AbstractParentGuiActionDescrip) descrip).getChilds()) {
+            // Log.info("Child added: " + child.getValue(Action.NAME));
+            add(child);
           }
         }
       }

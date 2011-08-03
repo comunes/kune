@@ -58,14 +58,13 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
   private final CoreResources res;
   private ToolbarSeparatorDescriptor separator;
   private final Session session;
-  private final SitebarActionsPresenter siteOptions;
+  private final SitebarActions siteOptions;
   private final StateManager stateManager;
 
   @Inject
   public SiteUserOptionsPresenter(final Session session, final StateManager stateManager,
       final Provider<FileDownloadUtils> downloadProvider, final I18nTranslationService i18n,
-      final CoreResources img, final SitebarActionsPresenter siteOptions,
-      final GotoGroupAction gotoGroupAction) {
+      final CoreResources img, final SitebarActions siteOptions, final GotoGroupAction gotoGroupAction) {
     super();
     this.session = session;
     this.stateManager = stateManager;
@@ -100,7 +99,6 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   private void addActionImpl(final GuiActionDescrip descriptor) {
     descriptor.setParent(LOGGED_USER_MENU);
-    siteOptions.getRightToolbar().add(descriptor);
   }
 
   private void addPartipation(final GroupDTO group) {
@@ -110,17 +108,14 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     participant.putValue(Action.NAME, group.getLongName());
     participant.putValue(Action.SMALL_ICON, logoImageUrl);
     participant.setParent(partiMenu);
-    siteOptions.getRightToolbar().add(participant);
   }
 
   private void createActions() {
     LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
-    LOGGED_USER_MENU.setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+    LOGGED_USER_MENU.setParent(siteOptions.getRightToolbar());
     LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     LOGGED_USER_MENU.setRightIcon(res.arrowdownsitebar());
-    siteOptions.getRightToolbar().add(LOGGED_USER_MENU);
-    separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActionsPresenter.RIGHT_TOOLBAR);
-    siteOptions.getRightToolbar().add(separator);
+    separator = new ToolbarSeparatorDescriptor(Type.separator, siteOptions.getRightToolbar());
     partiMenu = new SubMenuDescriptor(i18n.t("Your groups"));
     addActionImpl(partiMenu);
 

@@ -123,10 +123,10 @@ public class SitebarSignOutLink extends ButtonDescriptor {
 
   @Inject
   public SitebarSignOutLink(final SitebarSignOutAction action, final EventBus eventBus,
-      final ErrorHandler errorHandler, final Session session) {
+      final ErrorHandler errorHandler, final Session session, final SitebarActions sitebarActions) {
     super(action);
     setId(SITE_SIGN_OUT);
-    setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+    setParent(sitebarActions.getRightToolbar());
     setVisible(session.isLogged());
     setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
     session.onUserSignIn(true, new UserSignInHandler() {

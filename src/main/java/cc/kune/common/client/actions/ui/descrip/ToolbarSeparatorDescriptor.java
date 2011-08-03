@@ -19,28 +19,31 @@
  */
 package cc.kune.common.client.actions.ui.descrip;
 
-
 public class ToolbarSeparatorDescriptor extends AbstractSeparatorDescriptor {
 
-    public enum Type {
-        spacer, separator, fill
-    }
+  public enum Type {
+    fill, separator, spacer
+  }
 
-    private final Type type;
+  public static ToolbarSeparatorDescriptor build(final Type type, final ToolbarDescriptor parent) {
+    return new ToolbarSeparatorDescriptor(type, parent);
+  }
 
-    public ToolbarSeparatorDescriptor(final Type type, final ToolbarDescriptor parent) {
-        super();
-        this.type = type;
-        setParent(parent);
-    }
+  private final Type type;
 
-    public Type getSeparatorType() {
-        return type;
-    }
+  public ToolbarSeparatorDescriptor(final Type type, final ToolbarDescriptor parent) {
+    super();
+    this.type = type;
+    setParent(parent);
+  }
 
-    @Override
-    public Class<?> getType() {
-        return ToolbarSeparatorDescriptor.class;
-    }
+  public Type getSeparatorType() {
+    return type;
+  }
+
+  @Override
+  public Class<?> getType() {
+    return ToolbarSeparatorDescriptor.class;
+  }
 
 }

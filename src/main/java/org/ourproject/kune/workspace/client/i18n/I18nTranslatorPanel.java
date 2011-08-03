@@ -22,14 +22,16 @@ package org.ourproject.kune.workspace.client.i18n;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
-import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.search.SiteBottomTrayButton;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.i18n.LanguageSelectorPanel;
 
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -48,9 +50,7 @@ import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
-import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.grid.CellMetadata;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
@@ -65,264 +65,272 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTranslatorView {
 
-    public static final String TRANSLATOR_DIALOG = "k-i18n-trans";
-    private Window dialog;
-    private final I18nTranslatorPresenter presenter;
-    private LanguageSelectorPanel languageSelectorPanel;
-    private Store unTransStore;
-    private Store transStore;
-    private GridPanel transGrid;
-    private GridPanel unTransGrid;
-    private final LanguageSelector languageSelector;
-    private final WorkspaceSkeleton ws;
-    private SiteBottomTrayButton traybarButton;
-    private final Images img;
+  public static final String TRANSLATOR_DIALOG = "k-i18n-trans";
+  private Window dialog;
+  private final Images img;
+  private final LanguageSelectorPanel languageSelector;
+  private LanguageSelectorPanel languageSelectorPanel;
+  private final I18nTranslatorPresenter presenter;
+  private GridPanel transGrid;
+  private Store transStore;
+  private SiteBottomTrayButton traybarButton;
+  private GridPanel unTransGrid;
+  private Store unTransStore;
+  private final WorkspaceSkeleton ws;
 
-    public I18nTranslatorPanel(final I18nTranslatorPresenter initPresenter, final I18nTranslationService i18n,
-            final LanguageSelector languageSelector, final WorkspaceSkeleton ws, final Images img) {
-        super(i18n);
-        this.presenter = initPresenter;
-        this.languageSelector = languageSelector;
-        this.ws = ws;
-        this.img = img;
-    }
+  public I18nTranslatorPanel(final I18nTranslatorPresenter initPresenter,
+      final I18nTranslationService i18n, final LanguageSelectorPanel languageSelector,
+      final WorkspaceSkeleton ws, final Images img) {
+    super(i18n);
+    this.presenter = initPresenter;
+    this.languageSelector = languageSelector;
+    this.ws = ws;
+    this.img = img;
+  }
 
-    public void close() {
-        dialog.hide();
-    }
+  @Override
+  public void close() {
+    dialog.hide();
+  }
 
-    public void hide() {
-        dialog.hide();
-    }
+  private Window createDialog() {
+    final Panel north = new Panel();
+    north.setBorder(false);
 
-    public void hideTranslatorAndIcon() {
-        if (dialog.isRendered()) {
-            dialog.hide();
+    final Panel center = new TabPanel();
+    center.setAutoScroll(false);
+    center.setClosable(false);
+    center.setBorder(false);
+
+    final Window dialog = new BasicDialog(TRANSLATOR_DIALOG, "", false, false, 620, 330);
+    // dialog.setResizable(false);
+    dialog.setIconCls("i18n-icon");
+
+    final Button close = new Button();
+    close.setText(i18n.tWithNT("Close", "used in button"));
+    close.addListener(new ButtonListenerAdapter() {
+      @Override
+      public void onClick(final Button button, final EventObject e) {
+        presenter.doClose();
+      }
+    });
+    dialog.addButton(close);
+
+    final Panel unTransCenterPanel = new Panel(i18n.t("Untranslated"));
+    unTransCenterPanel.setAutoScroll(false);
+    unTransCenterPanel.setLayout(new FitLayout());
+
+    final Panel transCenterPanel = new Panel(i18n.t("Translated"));
+    transCenterPanel.setAutoScroll(false);
+    transCenterPanel.setLayout(new FitLayout());
+
+    final Panel recommendationPanel = new Panel(i18n.t("Recommendations"));
+    recommendationPanel.setAutoScroll(true);
+    recommendationPanel.setLayout(new FitLayout());
+
+    transGrid = createGridPanel(true);
+    unTransGrid = createGridPanel(false);
+    final HorizontalPanel hp = new HorizontalPanel();
+    languageSelectorPanel.addChangeListener(new SimpleCallback() {
+      @Override
+      public void onCallback() {
+        setLanguage(languageSelectorPanel.getLanguageCode());
+        dialog.setTitle(i18n.t("Help to translate kune to [%s]",
+            languageSelectorPanel.getLanguageEnglishName()));
+      }
+    });
+    hp.add(languageSelectorPanel);
+    hp.addStyleName("kune-Margin-Large-trbl");
+    north.add(hp);
+
+    unTransCenterPanel.add(unTransGrid);
+    transCenterPanel.add(transGrid);
+    final Frame recommFrame = new Frame("html/i18n-recom.html");
+    recommFrame.setHeight("auto");
+    recommendationPanel.add(recommFrame);
+
+    center.add(unTransCenterPanel);
+    center.add(transCenterPanel);
+    center.add(recommendationPanel);
+    dialog.add(north, new BorderLayoutData(RegionPosition.NORTH));
+    dialog.add(center, new BorderLayoutData(RegionPosition.CENTER));
+
+    center.setActiveItemID(unTransCenterPanel.getId());
+    dialog.addListener(new WindowListenerAdapter() {
+      private void checkPosition(final BoxComponent component, final int x, final int y) {
+        if (y < 0) {
+          component.setPagePosition(x, 0);
         }
-        if (traybarButton != null) {
-            traybarButton.destroy();
-            traybarButton = null;
-        }
-    }
+      }
 
-    public void show() {
-        if (dialog == null) {
-            dialog = createDialog();
-        }
-        // By default we use the user lang to help in translation
-        final I18nLanguageDTO lang = presenter.getLanguage();
-        setLanguage(lang);
-        final String languageNativeNameIfAvailable = lang.getNativeName().length() > 0 ? lang.getNativeName()
-                : lang.getEnglishName();
-        dialog.setTitle(i18n.t("Help to translate kune to [%s]", languageNativeNameIfAvailable));
-        dialog.show();
-        dialog.expand();
-        dialog.center();
-        if (traybarButton == null) {
-            traybarButton = new SiteBottomTrayButton("images/language.gif", i18n.t("Show/hide translator"), dialog, ws);
-        }
-    }
+      @Override
+      public void onMove(final BoxComponent component, final int x, final int y) {
+        checkPosition(component, x, y);
+      }
 
-    private Window createDialog() {
-        final Panel north = new Panel();
-        north.setBorder(false);
+      @Override
+      public void onShow(final Component component) {
+        checkPosition(dialog, component.getAbsoluteLeft(), component.getAbsoluteTop());
+      }
+    });
+    return dialog;
+  }
 
-        final Panel center = new TabPanel();
-        center.setAutoScroll(false);
-        center.setClosable(false);
-        center.setBorder(false);
+  private GridPanel createGridPanel(final boolean translated) {
 
-        final Window dialog = new BasicDialog(TRANSLATOR_DIALOG, "", false, false, 620, 330);
-        // dialog.setResizable(false);
-        dialog.setIconCls("i18n-icon");
-
-        final Button close = new Button();
-        close.setText(i18n.tWithNT("Close", "used in button"));
-        close.addListener(new ButtonListenerAdapter() {
-            @Override
-            public void onClick(final Button button, final EventObject e) {
-                presenter.doClose();
-            }
-        });
-        dialog.addButton(close);
-
-        final Panel unTransCenterPanel = new Panel(i18n.t("Untranslated"));
-        unTransCenterPanel.setAutoScroll(false);
-        unTransCenterPanel.setLayout(new FitLayout());
-
-        final Panel transCenterPanel = new Panel(i18n.t("Translated"));
-        transCenterPanel.setAutoScroll(false);
-        transCenterPanel.setLayout(new FitLayout());
-
-        final Panel recommendationPanel = new Panel(i18n.t("Recommendations"));
-        recommendationPanel.setAutoScroll(true);
-        recommendationPanel.setLayout(new FitLayout());
-
-        transGrid = createGridPanel(true);
-        unTransGrid = createGridPanel(false);
-        final HorizontalPanel hp = new HorizontalPanel();
-        languageSelectorPanel = (LanguageSelectorPanel) languageSelector.getView();
-        languageSelectorPanel.addChangeListener(new ComboBoxListenerAdapter() {
-            @Override
-            public void onSelect(final ComboBox comboBox, final Record record, final int index) {
-                setLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
-                dialog.setTitle(i18n.t("Help to translate kune to [%s]", record.getAsString("language")));
-            }
-        });
-        hp.add(languageSelectorPanel);
-        hp.addStyleName("kune-Margin-Large-trbl");
-        north.add(hp);
-
-        unTransCenterPanel.add(unTransGrid);
-        transCenterPanel.add(transGrid);
-        final Frame recommFrame = new Frame("html/i18n-recom.html");
-        recommFrame.setHeight("auto");
-        recommendationPanel.add(recommFrame);
-
-        center.add(unTransCenterPanel);
-        center.add(transCenterPanel);
-        center.add(recommendationPanel);
-        dialog.add(north, new BorderLayoutData(RegionPosition.NORTH));
-        dialog.add(center, new BorderLayoutData(RegionPosition.CENTER));
-
-        center.setActiveItemID(unTransCenterPanel.getId());
-        dialog.addListener(new WindowListenerAdapter() {
-            @Override
-            public void onMove(final BoxComponent component, final int x, final int y) {
-                checkPosition(component, x, y);
-            }
-
-            @Override
-            public void onShow(final Component component) {
-                checkPosition(dialog, component.getAbsoluteLeft(), component.getAbsoluteTop());
-            }
-
-            private void checkPosition(final BoxComponent component, final int x, final int y) {
-                if (y < 0) {
-                    component.setPagePosition(x, 0);
-                }
-            }
-        });
-        return dialog;
-    }
-
-    private GridPanel createGridPanel(final boolean translated) {
-
-        final Renderer renderNT = new Renderer() {
-            public String render(final Object value, final CellMetadata cellMetadata, final Record record,
-                    final int rowIndex, final int colNum, final Store store) {
-                String renderer;
-                final String[] splitted = splitNT((String) value);
-                if (splitted.length > 1) {
-                    renderer = "{0} " + img.nt().getHTML();
-                    final String tip = "<div style='min-width: 75px'>" + splitted[1] + "</div>";
-                    cellMetadata.setHtmlAttribute("ext:qtip=\"" + tip + "\" ext:qtitle=\"Note for translators\"");
-                } else {
-                    renderer = "{0}";
-                }
-                return Format.format(renderer, splitted);
-            }
-        };
-
-        Store store;
-        final String id = "id";
-        final FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef("trKey"), new StringFieldDef("text"),
-                new StringFieldDef(id) };
-
-        if (translated) {
-            final String url = SearcherConstants.I18N_JSON_SERVICE_TRANSLATED;
-            transStore = createStore(fieldDefs, url, id);
-            store = transStore;
-        } else {
-            final String url = SearcherConstants.I18N_JSON_SERVICE;
-            unTransStore = createStore(fieldDefs, url, id);
-            store = unTransStore;
-        }
-
-        final ColumnConfig trKeyColumn = new ColumnConfig() {
-            {
-                setHeader(i18n.t("Text to translate"));
-                setDataIndex("trKey");
-                setWidth(285);
-                setTooltip(i18n.t("Click to sort"));
-                setRenderer(renderNT);
-            }
-        };
-
-        final GridEditor textColumnEditor = new GridEditor(new TextField());
-
-        final ColumnConfig textColumn = new ColumnConfig() {
-            {
-                setHeader(i18n.t("Translation (click to edit)"));
-                setDataIndex("text");
-                setWidth(285);
-                setEditor(textColumnEditor);
-            }
-        };
-
-        final ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { trKeyColumn, textColumn });
-
-        columnModel.setDefaultSortable(true);
-
-        final EditorGridPanel grid = new EditorGridPanel((translated ? "grid-translated" : "grid-untranslated"), 595,
-                180, store, columnModel);
-        createPagingToolbar(store, grid);
-
-        grid.setClicksToEdit(1);
-
-        grid.addEditorGridListener(new EditorGridListenerAdapter() {
-            @Override
-            public void onAfterEdit(final GridPanel grid, final Record record, final String field,
-                    final Object newValue, final Object oldValue, final int rowIndex, final int colIndex) {
-                final String idValue = record.getAsString(id);
-                final String trKey = record.getAsString("trKey");
-                presenter.doTranslation(idValue, trKey, (String) newValue);
-                record.set(field, TextUtils.escapeHtmlLight((String) newValue));
-            }
-        });
-
-        grid.addGridCellListener(new GridCellListenerAdapter() {
-            @Override
-            public void onCellDblClick(final GridPanel grid, final int rowIndex, final int colIndex, final EventObject e) {
-                final Record record = unTransStore.getRecordAt(rowIndex);
-                final String idValue = record.getAsString(id);
-                final String trKey = record.getAsString("trKey");
-                final String text = record.getAsString("text");
-                if (text == null || text.length() == 0) {
-                    final String trWithoutNT = removeNT(trKey);
-                    record.set("text", trWithoutNT);
-                    presenter.doTranslation(idValue, trKey, trWithoutNT);
-                }
-            }
-        });
-
-        return grid;
-    }
-
-    private String removeNT(final String string) {
-        return i18n.removeNT(string);
-    }
-
-    private void setLanguage(final I18nLanguageDTO language) {
-        languageSelectorPanel.setLanguage(language.getCode());
-        setLanguage(language.getCode());
-    }
-
-    private void setLanguage(final String language) {
-        OldNotifyUser.showProgressLoading();
-        query(unTransStore, unTransGrid, language);
-        query(transStore, transGrid, language);
-        OldNotifyUser.hideProgress();
-    }
-
-    private String[] splitNT(final String textWithNT) {
-        String[] nt;
-        final String[] splitted = textWithNT.split(" \\[%NT ");
+    final Renderer renderNT = new Renderer() {
+      @Override
+      public String render(final Object value, final CellMetadata cellMetadata, final Record record,
+          final int rowIndex, final int colNum, final Store store) {
+        String renderer;
+        final String[] splitted = splitNT((String) value);
         if (splitted.length > 1) {
-            nt = splitted[1].split("\\]$");
-            splitted[1] = nt[0];
+          renderer = "{0} " + img.nt().getHTML();
+          final String tip = "<div style='min-width: 75px'>" + splitted[1] + "</div>";
+          cellMetadata.setHtmlAttribute("ext:qtip=\"" + tip + "\" ext:qtitle=\"Note for translators\"");
+        } else {
+          renderer = "{0}";
         }
-        return splitted;
+        return Format.format(renderer, splitted);
+      }
+    };
+
+    Store store;
+    final String id = "id";
+    final FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef("trKey"),
+        new StringFieldDef("text"), new StringFieldDef(id) };
+
+    if (translated) {
+      final String url = SearcherConstants.I18N_JSON_SERVICE_TRANSLATED;
+      // transStore = createStore(fieldDefs, url, id);
+      store = transStore;
+    } else {
+      final String url = SearcherConstants.I18N_JSON_SERVICE;
+      // unTransStore = createStore(fieldDefs, url, id);
+      store = unTransStore;
     }
+
+    final ColumnConfig trKeyColumn = new ColumnConfig() {
+      {
+        setHeader(i18n.t("Text to translate"));
+        setDataIndex("trKey");
+        setWidth(285);
+        setTooltip(i18n.t("Click to sort"));
+        setRenderer(renderNT);
+      }
+    };
+
+    final GridEditor textColumnEditor = new GridEditor(new TextField());
+
+    final ColumnConfig textColumn = new ColumnConfig() {
+      {
+        setHeader(i18n.t("Translation (click to edit)"));
+        setDataIndex("text");
+        setWidth(285);
+        setEditor(textColumnEditor);
+      }
+    };
+
+    final ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { trKeyColumn, textColumn });
+
+    columnModel.setDefaultSortable(true);
+
+    final EditorGridPanel grid = new EditorGridPanel((translated ? "grid-translated"
+        : "grid-untranslated"), 595, 180, store, columnModel);
+    // createPagingToolbar(store, grid);
+
+    grid.setClicksToEdit(1);
+
+    grid.addEditorGridListener(new EditorGridListenerAdapter() {
+      @Override
+      public void onAfterEdit(final GridPanel grid, final Record record, final String field,
+          final Object newValue, final Object oldValue, final int rowIndex, final int colIndex) {
+        final String idValue = record.getAsString(id);
+        final String trKey = record.getAsString("trKey");
+        presenter.doTranslation(idValue, trKey, (String) newValue);
+        record.set(field, TextUtils.escapeHtmlLight((String) newValue));
+      }
+    });
+
+    grid.addGridCellListener(new GridCellListenerAdapter() {
+      @Override
+      public void onCellDblClick(final GridPanel grid, final int rowIndex, final int colIndex,
+          final EventObject e) {
+        final Record record = unTransStore.getRecordAt(rowIndex);
+        final String idValue = record.getAsString(id);
+        final String trKey = record.getAsString("trKey");
+        final String text = record.getAsString("text");
+        if (text == null || text.length() == 0) {
+          final String trWithoutNT = removeNT(trKey);
+          record.set("text", trWithoutNT);
+          presenter.doTranslation(idValue, trKey, trWithoutNT);
+        }
+      }
+    });
+
+    return grid;
+  }
+
+  @Override
+  public void hide() {
+    dialog.hide();
+  }
+
+  @Override
+  public void hideTranslatorAndIcon() {
+    if (dialog.isRendered()) {
+      dialog.hide();
+    }
+    if (traybarButton != null) {
+      traybarButton.destroy();
+      traybarButton = null;
+    }
+  }
+
+  private String removeNT(final String string) {
+    return i18n.removeNT(string);
+  }
+
+  private void setLanguage(final I18nLanguageDTO language) {
+    languageSelectorPanel.setLanguage(language.getCode());
+    setLanguage(language.getCode());
+  }
+
+  private void setLanguage(final String language) {
+    NotifyUser.showProgressLoading();
+    // query(unTransStore, unTransGrid, language);
+    // query(transStore, transGrid, language);
+    NotifyUser.hideProgress();
+  }
+
+  @Override
+  public void show() {
+    if (dialog == null) {
+      dialog = createDialog();
+    }
+    // By default we use the user lang to help in translation
+    final I18nLanguageDTO lang = presenter.getLanguage();
+    setLanguage(lang);
+    final String languageNativeNameIfAvailable = lang.getNativeName().length() > 0 ? lang.getNativeName()
+        : lang.getEnglishName();
+    dialog.setTitle(i18n.t("Help to translate kune to [%s]", languageNativeNameIfAvailable));
+    dialog.show();
+    dialog.expand();
+    dialog.center();
+    if (traybarButton == null) {
+      traybarButton = new SiteBottomTrayButton("images/language.gif", i18n.t("Show/hide translator"),
+          dialog, ws);
+    }
+  }
+
+  private String[] splitNT(final String textWithNT) {
+    String[] nt;
+    final String[] splitted = textWithNT.split(" \\[%NT ");
+    if (splitted.length > 1) {
+      nt = splitted[1].split("\\]$");
+      splitted[1] = nt[0];
+    }
+    return splitted;
+  }
 
 }

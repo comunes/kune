@@ -194,6 +194,14 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
   @Override
   public void setParent(final GuiActionDescrip parent) {
+    setParent(parent, true);
+  }
+
+  @Override
+  public void setParent(final GuiActionDescrip parent, final boolean addToParent) {
+    if (parent != NO_PARENT && addToParent) {
+      ((AbstractParentGuiActionDescrip) parent).add(this);
+    }
     this.parent = parent;
   }
 
@@ -264,6 +272,12 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public GuiActionDescrip withParent(final GuiActionDescrip parent) {
     setParent(parent);
+    return this;
+  }
+
+  @Override
+  public GuiActionDescrip withParent(final GuiActionDescrip parent, final boolean addToParent) {
+    setParent(parent, addToParent);
     return this;
   }
 

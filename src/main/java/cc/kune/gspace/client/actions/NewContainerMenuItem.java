@@ -93,7 +93,7 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
       final ImageResource icon, final String title, final String tooltip, final String newName,
       final String id, final @Nonnull MenuDescriptor parent) {
     super(action);
-    setParent(parent);
+    setParent(parent, false);
     // The name given to this new content
     action.putValue(NEW_NAME, newName);
     action.putValue(ID, id);

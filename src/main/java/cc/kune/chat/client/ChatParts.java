@@ -157,7 +157,7 @@ public class ChatParts {
         userItemsRegistry.get().add(startChatWithBuddieItem);
         userItemsRegistry.get().add(startChatWithPersonItem);
         userItemsRegistry.get().add(addAsBuddieItem);
-        groupConfActions.get().add(startAssembly.get());
+        startAssembly.get();
         buddieButton.get();
         groupSN.get().refreshActions();
         // openGroupRoom.get();

@@ -26,6 +26,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.gspace.client.i18n.I18nTranslator;
 
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.rpc.AsyncCallback;
