@@ -1,3 +1,2012 @@
+2011-08-03 17:07  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1478] TODO, TODO_done,
+	  src/main/java/cc/kune/chat/client/ChatClientDefault.java,
+	  src/main/java/cc/kune/chat/client/ChatParts.java,
+	  src/main/java/cc/kune/chat/client/actions/ChatSitebarActions.java,
+	  src/main/java/cc/kune/common/client/actions/ui/AbstractComposedGuiItem.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/AbstractGuiActionDescrip.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/AbstractParentGuiActionDescrip.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/AbstractSeparatorDescriptor.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/GuiActionDescCollection.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/GuiActionDescrip.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/HasChilds.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/MenuDescriptor.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/MenuItemDescriptor.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/MenuSeparatorDescriptor.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/SubMenuDescriptor.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/ToolbarDescriptor.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/ToolbarSeparatorDescriptor.java,
+	  src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
+	  src/main/java/cc/kune/common/client/ui/dialogs/tabbed/AbstractTabbedDialog.java,
+	  src/main/java/cc/kune/common/client/ui/dialogs/tabbed/AbstractTabbedDialogPanel.java,
+	  src/main/java/cc/kune/common/client/ui/dialogs/tabbed/AbstractTabbedDialogPresenter.java,
+	  src/main/java/cc/kune/common/client/ui/dialogs/tabbed/AbstractTabbedDialogView.java,
+	  src/main/java/cc/kune/common/client/utils/TextUtils.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/client/i18n/I18nConstants.java,
+	  src/main/java/cc/kune/core/client/i18n/I18nUtils.java,
+	  src/main/java/cc/kune/core/client/sitebar/SiteOptions.java,
+	  src/main/java/cc/kune/core/client/sitebar/SiteUserOptions.java,
+	  src/main/java/cc/kune/core/client/sitebar/SiteUserOptionsPresenter.java,
+	  src/main/java/cc/kune/core/client/sitebar/SitebarActions.java,
+	  src/main/java/cc/kune/core/client/sitebar/SitebarActionsPresenter.java,
+	  src/main/java/cc/kune/core/client/sitebar/SitebarNewGroupLink.java,
+	  src/main/java/cc/kune/core/client/sitebar/SitebarSignInLink.java,
+	  src/main/java/cc/kune/core/client/sitebar/SitebarSignOutLink.java,
+	  src/main/java/cc/kune/core/client/sn/AbstractSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNConfActions.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/UserSNConfActions.java,
+	  src/main/java/cc/kune/core/public/images/alert.gif,
+	  src/main/java/cc/kune/core/public/images/arrow-down-black.gif,
+	  src/main/java/cc/kune/core/public/images/arrow-down-white.gif,
+	  src/main/java/cc/kune/core/public/images/arrow-right-black.gif,
+	  src/main/java/cc/kune/core/public/images/arrow-right-white.gif,
+	  src/main/java/cc/kune/core/public/images/colors.gif,
+	  src/main/java/cc/kune/core/public/images/copyleft.png,
+	  src/main/java/cc/kune/core/public/images/emblem-system.gif,
+	  src/main/java/cc/kune/core/public/images/film.png,
+	  src/main/java/cc/kune/core/public/images/info.gif,
+	  src/main/java/cc/kune/core/public/images/language.gif,
+	  src/main/java/cc/kune/core/public/images/link.gif,
+	  src/main/java/cc/kune/core/public/images/picture.png,
+	  src/main/java/cc/kune/core/public/images/specialchars.png,
+	  src/main/java/cc/kune/core/public/images/splitter-vert-bar.png,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/docs/client/DocsGinModule.java,
+	  src/main/java/cc/kune/docs/client/actions/GoParentFolderBtn.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceGinModule.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceParts.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContainerMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/RefreshContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/i18n,
+	  src/main/java/cc/kune/gspace/client/i18n/I18nNewTranslatorPanel.java,
+	  src/main/java/cc/kune/gspace/client/i18n/I18nNewTranslatorPresenter.java,
+	  src/main/java/cc/kune/gspace/client/i18n/I18nTranslator.java,
+	  src/main/java/cc/kune/gspace/client/i18n/LanguageSelectorPanel.java,
+	  src/main/java/cc/kune/gspace/client/i18n/SiteOptionsI18nTranslatorAction.java,
+	  src/main/java/cc/kune/gspace/client/i18n/TranslatorTabsCollection.java,
+	  src/main/java/cc/kune/gspace/client/options/EntityOptions.java,
+	  src/main/java/cc/kune/gspace/client/options/EntityOptionsView.java,
+	  src/main/java/cc/kune/gspace/client/options/GroupOptionsPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/UserOptionsPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/UserOptionsPresenter.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPresenter.java,
+	  src/main/java/com/example/client/HelloWorldActions.java,
+	  src/main/java/org/ourproject/kune/app/public/css/img/alert.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/arrow-down-black.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/arrow-down-white.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/arrow-right-black.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/arrow-right-white.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/colors.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/copyleft.png,
+	  src/main/java/org/ourproject/kune/app/public/css/img/emblem-system.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/film.png,
+	  src/main/java/org/ourproject/kune/app/public/css/img/info.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/language.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/link.gif,
+	  src/main/java/org/ourproject/kune/app/public/css/img/picture.png,
+	  src/main/java/org/ourproject/kune/app/public/css/img/specialchars.png,
+	  src/main/java/org/ourproject/kune/app/public/css/img/splitter-vert-bar.png,
+	  src/main/java/org/ourproject/kune/platf/client/ui/AbstractSearcherPanel.java,
+	  src/main/java/org/ourproject/kune/workspace/client/i18n/I18nTranslator.java,
+	  src/main/java/org/ourproject/kune/workspace/client/i18n/I18nTranslatorPanel.java,
+	  src/main/java/org/ourproject/kune/workspace/client/i18n/I18nTranslatorPresenter.java,
+	  src/main/java/org/ourproject/kune/workspace/client/i18n/LanguageSelector.java,
+	  src/main/java/org/ourproject/kune/workspace/client/i18n/LanguageSelectorPanel.java,
+	  src/main/java/org/ourproject/kune/workspace/client/i18n/LanguageSelectorPresenter.java,
+	  src/main/java/org/ourproject/kune/workspace/client/i18n/LanguageSelectorView.java,
+	  src/main/java/org/ourproject/kune/workspace/client/i18n/SiteOptionsI18nTranslatorAction.java,
+	  src/main/java/org/ourproject/kune/workspace/client/search/SiteSearcherPanel.java,
+	  src/main/resources/ConstantsTest_en.properties,
+	  src/main/resources/ConstantsTest_es.properties,
+	  src/test/java/cc/kune/core/client/i18n,
+	  src/test/java/cc/kune/core/client/i18n/ConstantsTest.java,
+	  src/test/java/cc/kune/core/client/i18n/I18nUtilsTest.java:
+	  Actions hierarchy revisited
+	  
+	  NEW - # 79: I18n refactorization
+	  http://kune.ourproject.org/issues/ticket/79
+
+2011-07-29 21:04  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1477]
+	  src/test/java/cc/kune/core/server/manager/ContainerManagerDefaultTest.java,
+	  src/test/java/cc/kune/core/server/manager/ContentManagerDefaultTest.java:
+	  Test fixed
+
+2011-07-29 20:59  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1476] src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
+	  src/main/java/cc/kune/core/client/dnd/FolderViewerDropController.java,
+	  src/main/java/cc/kune/core/client/errors/ErrorHandler.java,
+	  src/main/java/cc/kune/core/client/errors/MoveOnSameContainerException.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/core/server/content/ContainerManagerDefault.java,
+	  src/main/java/cc/kune/core/server/content/ContentManagerDefault.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java:
+	  Folder/content move minor changes
+
+2011-07-29 19:44  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1475] src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
+	  src/main/java/cc/kune/core/client/dnd/FolderViewerDropController.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmorTheme.css,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorItemPanel.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderItemWidget.ui.xml,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java:
+	  Drag&Drop look improved
+
+2011-07-29 18:12  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1474]
+	  src/main/java/cc/kune/common/client/actions/ui/AbstractGuiItem.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/AbstractGuiActionDescrip.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/GuiActionDescrip.java,
+	  src/main/java/cc/kune/core/client/dnd/DropTarget.java,
+	  src/main/java/cc/kune/core/client/dnd/FolderViewerDropController.java,
+	  src/main/java/cc/kune/core/server/content/ContainerManagerDefault.java,
+	  src/main/java/cc/kune/domain/Container.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/test/java/cc/kune/core/server/manager/ContainerManagerDefaultTest.java,
+	  src/test/java/cc/kune/core/server/mapper/MapperTest.java,
+	  src/test/java/cc/kune/gspace/client/viewers/FolderViewerPresenterTest.java:
+	  CLOSED - # 77: D&D from folder to parent
+	  http://kune.ourproject.org/issues/ticket/77
+	  CLOSED - # 71: D-and-D folder into folder fails
+	  http://kune.ourproject.org/issues/ticket/71
+
+2011-07-29 12:48  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1473]
+	  src/main/java/cc/kune/core/server/content/ContainerManagerDefault.java,
+	  src/main/java/cc/kune/domain/Container.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.ui.xml,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmor.css,
+	  src/main/webapp/others/kune-client-actions.xml,
+	  src/test/java/cc/kune/core/server/manager/ContainerManagerDefaultTest.java:
+	  CLOSED - # 71: D-and-D folder into folder fails
+	  http://kune.ourproject.org/issues/ticket/71
+	  CLOSED - # 76: RootPanel setSize for drag and d. arise height
+	  problems in chrommium
+	  http://kune.ourproject.org/issues/ticket/76
+
+2011-07-29 01:24  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1472] script/css-update.sh,
+	  src/main/java/cc/kune/core/client/dnd/KuneDragController.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/core/public/ws.html,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmor.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.ui.xml:
+	  CLOSED - # 76: RootPanel setSize for drag and d. arise height
+	  problems in chrommium
+	  http://kune.ourproject.org/issues/ticket/76
+
+2011-07-28 23:36  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1471] img/icons/from-private-to-public.svg,
+	  img/icons/world-90.png,
+	  src/main/java/cc/kune/core/client/services/FileDownloadUtils.java,
+	  src/main/java/cc/kune/core/public/images/world-90.gif,
+	  src/main/java/cc/kune/wave/client/KuneWaveProfileManager.java:
+	  CLOSED - # 72: Make a @Domain avatar (for everybody)
+	  http://kune.ourproject.org/issues/ticket/72
+
+2011-07-28 22:46  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1470] pom.xml,
+	  src/main/java/cc/kune/core/client/dnd/FolderViewerDropController.java,
+	  src/main/java/cc/kune/core/client/errors/ErrorHandler.java,
+	  src/main/java/cc/kune/core/client/errors/UnderDevelopmentException.java,
+	  src/main/java/cc/kune/core/client/sn/actions/JoinGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/RemoveMemberAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UnJoinFromCurrentGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UnJoinFromThisGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UserSNVisibilityAction.java,
+	  src/main/java/cc/kune/core/client/state/StateManager.java,
+	  src/main/java/cc/kune/core/client/state/StateManagerDefault.java,
+	  src/main/java/cc/kune/core/server/content/ContainerManager.java,
+	  src/main/java/cc/kune/core/server/content/ContainerManagerDefault.java,
+	  src/main/java/cc/kune/core/server/rpc/ContentRPC.java,
+	  src/main/java/cc/kune/gspace/client/actions/DelContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/ParticipateInContentBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/RefreshContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/licensewizard/LicenseChangeAction.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptToolsPresenter.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManagerDefault.java,
+	  src/main/java/com/google/wave/splash/web/template/Templates.java,
+	  src/main/java/org/ourproject/kune/workspace/client/OldAbstractFoldableContentActions.java,
+	  src/main/java/org/ourproject/kune/workspace/client/ctxnav/ContextNavigatorPresenter.java,
+	  src/main/webapp/WEB-INF/web.xml,
+	  src/test/java/cc/kune/core/client/state/StateManagerDefaultTest.java,
+	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java:
+	  NEW - # 71: D-and-D folder into folder fails
+	  http://kune.ourproject.org/issues/ticket/71
+	  CLOSED - # 73: (Edit) button in my Group don't open Wiab editor
+	  http://kune.ourproject.org/issues/ticket/73
+	  NEW - # 75: Remove memory leaks in server memory usage
+	  http://kune.ourproject.org/issues/ticket/75
+
+2011-07-28 16:01  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1469]
+	  src/main/java/cc/kune/wave/client/KuneStagesProvider.java: CLOSED
+	  - # 74: New StateProvider seems that broke read/unread of blips
+	  http://kune.ourproject.org/issues/ticket/74
+
+2011-07-28 14:07  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1468] script/kune client -no-server.launch,
+	  src/main/java/cc/kune/Kune.gwt.xml,
+	  src/main/java/cc/kune/barters/server/BarterServerTool.java,
+	  src/main/java/cc/kune/core/client/dnd/KuneDragController.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmor.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.ui.xml,
+	  src/main/java/cc/kune/gspace/client/resources/GSpaceArmorResources.java,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmor.css,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.ui.xml,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java,
+	  src/main/java/cc/kune/wave/client/KuneConversation.css,
+	  src/main/java/cc/kune/wave/client/KuneFullDomRenderer.java,
+	  src/main/java/cc/kune/wave/client/KuneFullDomWaveRendererImpl.java,
+	  src/main/java/cc/kune/wave/client/KuneStagesProvider.java,
+	  src/main/java/cc/kune/wave/client/KuneWaveResources.java,
+	  src/main/java/cc/kune/wave/client/WebClient.java,
+	  src/main/java/cc/kune/wave/client/toolbar_empty.png,
+	  src/main/java/org/waveprotocol/wave,
+	  src/main/java/org/waveprotocol/wave/client,
+	  src/main/java/org/waveprotocol/wave/client/wavepanel,
+	  src/main/java/org/waveprotocol/wave/client/wavepanel/view,
+	  src/main/java/org/waveprotocol/wave/client/wavepanel/view/dom,
+	  src/main/java/org/waveprotocol/wave/client/wavepanel/view/dom/full,
+	  src/main/java/org/waveprotocol/wave/client/wavepanel/view/dom/full/KuneWavePanelResourceLoader.java,
+	  src/main/resources/wave-server.properties: CLOSED - # 69: Toolbar
+	  scroll also in Wave Panel
+	  http://kune.ourproject.org/issues/ticket/69
+
+2011-07-27 14:27  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1467]
+	  src/main/java/cc/kune/wave/server/KuneWaveManagerDefault.java:
+	  Wave copy fix
+
+2011-07-27 14:08  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1466]
+	  src/main/java/cc/kune/wave/server/KuneWaveManagerDefault.java,
+	  src/main/resources/kune.properties: Wave copy fix
+
+2011-07-27 11:36  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1465] src/main/webapp/others/kune-client-actions.xml: Vector
+	  gadget
+
+2011-07-26 03:03  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1464]
+	  src/main/java/cc/kune/core/client/dnd/FolderViewerDropController.java,
+	  src/main/java/cc/kune/core/client/errors/ErrorHandler.java,
+	  src/main/java/cc/kune/core/client/rpcservices/ContentService.java,
+	  src/main/java/cc/kune/core/client/rpcservices/ContentServiceAsync.java,
+	  src/main/java/cc/kune/core/server/KuneContainerListener.java,
+	  src/main/java/cc/kune/core/server/content/ContentManager.java,
+	  src/main/java/cc/kune/core/server/content/ContentManagerDefault.java,
+	  src/main/java/cc/kune/core/server/rpc/ContentRPC.java,
+	  src/main/java/cc/kune/domain/Container.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsFlowPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java,
+	  src/test/java/cc/kune/core/server/PersistencePreLoadedDataTest.java,
+	  src/test/java/cc/kune/core/server/manager/ContentManagerDefaultTest.java,
+	  src/test/java/cc/kune/core/server/manager/ContentManagerTest.java,
+	  src/test/java/cc/kune/core/server/manager/GroupManagerDefaultTest.java,
+	  src/test/java/cc/kune/core/server/manager/GroupManagerTest.java,
+	  src/test/java/cc/kune/core/server/manager/I18nManagerDefaultTest.java,
+	  src/test/java/cc/kune/core/server/manager/I18nManagerTest.java,
+	  src/test/java/cc/kune/core/server/manager/LicenseManagerDefaultTest.java,
+	  src/test/java/cc/kune/core/server/manager/LicenseManagerTest.java:
+	  Drag and drop of contents in folders
+
+2011-07-25 22:00  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1463] .classpath, pom.xml, src/main/java/cc/kune/Kune.gwt.xml,
+	  src/main/java/cc/kune/chat/client/AvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/common/client/ui/BasicThumb.java,
+	  src/main/java/cc/kune/core/client/CoreGinModule.java,
+	  src/main/java/cc/kune/core/client/dnd,
+	  src/main/java/cc/kune/core/client/dnd/DebugDropController.java,
+	  src/main/java/cc/kune/core/client/dnd/FolderViewerDropController.java,
+	  src/main/java/cc/kune/core/client/dnd/KuneDragController.java,
+	  src/main/java/cc/kune/core/client/dnd/NotAllowedDropController.java,
+	  src/main/java/cc/kune/core/client/dnd/NotImplementedDropController.java,
+	  src/main/java/cc/kune/core/client/dnd/NotImplementedDropManager.java,
+	  src/main/java/cc/kune/core/client/sn/AbstractSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/GroupSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/UserSNPanel.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorEntryPoint.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorItemPanel.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderItemWidget.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsFlowPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java:
+	  drag & drop added
+
+2011-07-15 09:48  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1462] src/main/java/cc/kune/core/public/about.html: jp in
+	  CREDITS by samer
+
+2011-07-15 09:47  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1461] CREDITS: jp in CREDITS by samer
+
+2011-07-14 11:45  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1459] CREDITS, src/main/java/cc/kune/core/public/about.html:
+	  0.0.9 code named 15M - CREDITS fixed
+
+2011-07-14 11:36  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1458] CREDITS, pom.xml,
+	  src/main/java/cc/kune/core/public/about.html: 0.0.9 code named
+	  15M
+
+2011-07-14 09:57  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1457]
+	  src/main/java/cc/kune/core/server/manager/impl/UserManagerDefault.java,
+	  src/main/resources/kune.properties: Minor welcome fix
+
+2011-07-14 08:58  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1456] src/main/java/cc/kune/chat/client/ChatClientDefault.java,
+	  src/main/java/cc/kune/core/client/auth/RegisterPresenter.java,
+	  src/main/java/cc/kune/core/client/events/NewUserRegisteredEvent.java,
+	  src/main/java/cc/kune/core/public/ws.html,
+	  src/main/java/cc/kune/core/server/init/DatabaseInitializer.java,
+	  src/main/java/cc/kune/core/server/manager/impl/GroupManagerDefault.java,
+	  src/main/java/cc/kune/core/server/manager/impl/LicenseManagerDefault.java,
+	  src/main/java/cc/kune/core/server/manager/impl/UserManagerDefault.java,
+	  src/main/java/cc/kune/core/server/properties/DatabaseProperties.java,
+	  src/main/java/cc/kune/core/server/properties/KuneBasicProperties.java,
+	  src/main/java/cc/kune/core/server/properties/KuneProperties.java,
+	  src/main/java/cc/kune/core/server/state/StateServiceDefault.java,
+	  src/main/java/cc/kune/wave/server/KuneAgent.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManager.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManagerDefault.java,
+	  src/main/java/cc/kune/wave/server/ParticipantUtils.java,
+	  src/main/resources/kune.properties,
+	  src/main/webapp/others/splash/js/permalink_client.js,
+	  src/main/webapp/others/splash/js/rpc.js,
+	  src/test/java/cc/kune/core/server/finders/LicenseFinderTest.java,
+	  src/test/java/cc/kune/core/server/integration/IntegrationTest.java,
+	  src/test/java/cc/kune/core/server/integration/site/UserServiceTest.java,
+	  src/test/java/cc/kune/wave/server/KuneAgentTest.java,
+	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java,
+	  src/test/java/com/google/wave/splash/text/ContentNewUnrendererTest.java:
+	  Def wave in properties; some minor fixes
+
+2011-07-13 16:52  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1455] src/main/webapp/others/kune-client-actions.xml: gadgets
+	  ordened
+
+2011-07-13 16:48  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1454] src/main/webapp/others/kune-client-actions.xml: gadgets
+	  ordened
+
+2011-07-13 16:41  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1453] src/main/webapp/others/kune-client-actions.xml: gadgets
+	  ordened
+
+2011-07-13 15:29  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1452]
+	  src/main/java/cc/kune/blogs/client/actions/BlogsNewMenu.java,
+	  src/main/java/cc/kune/chat/client/AvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/ChatInstances.java,
+	  src/main/java/cc/kune/chat/client/KuneBrowserFocusManager.java,
+	  src/main/java/cc/kune/chat/client/MediumAvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/SmallAvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/actions/AddAsBuddieAction.java,
+	  src/main/java/cc/kune/chat/client/actions/NewRoomBtn.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenChatAction.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenRoomBtn.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenRoomMenuItem.java,
+	  src/main/java/cc/kune/chat/client/actions/StartAssemblyWithMembers.java,
+	  src/main/java/cc/kune/chat/client/actions/conditions/IsNotBuddieCondition.java,
+	  src/main/java/cc/kune/chat/server/ChatManager.java,
+	  src/main/java/cc/kune/chat/server/ChatManagerDefault.java,
+	  src/main/java/cc/kune/common/client/ui/AbstractDecorator.java,
+	  src/main/java/cc/kune/common/client/ui/dialogs/PromptTopDialog.java,
+	  src/main/java/cc/kune/common/client/utils/CSSUtils.java,
+	  src/main/java/cc/kune/core/client/actions/xml/NewGadgetAction.java,
+	  src/main/java/cc/kune/core/client/actions/xml/WaveExtension.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLGuiActionDescriptor.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLKuneClientActions.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLRol.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLTypeId.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLWaveExtension.java,
+	  src/main/java/cc/kune/core/client/avatar/AvatarDecorator.java,
+	  src/main/java/cc/kune/core/client/avatar/MediumAvatarDecorator.java,
+	  src/main/java/cc/kune/core/client/avatar/SmallAvatarDecorator.java,
+	  src/main/java/cc/kune/core/client/events/WindowFocusEvent.java,
+	  src/main/java/cc/kune/core/client/init/NavigatorSupport.java,
+	  src/main/java/cc/kune/core/public/about.html,
+	  src/main/java/cc/kune/core/server/content/XMLActionReader.java,
+	  src/main/java/cc/kune/core/server/tool/ServerWaveTool.java,
+	  src/main/java/cc/kune/core/server/utils/UrlUtils.java,
+	  src/main/java/cc/kune/core/shared/dto/AbstractContentSimpleDTO.java,
+	  src/main/java/cc/kune/docs/client/actions/DocsFolderNewMenu.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewMenuProvider.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptUploadButton.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityUploaderForm.java,
+	  src/main/java/cc/kune/gspace/client/themes/CurrentEntityTheme.java,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeChangeEvent.java,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeSelectorPanel.java,
+	  src/main/java/cc/kune/gspace/client/ui/footer/license/LicenseChangedEvent.java,
+	  src/main/java/cc/kune/pspace/client/PSpaceInDevelopment.java,
+	  src/main/java/cc/kune/wave/client/KuneWaveProfileManager.java,
+	  src/main/java/cc/kune/wave/server/KuneAgent.java,
+	  src/main/java/cc/kune/wiki/client/actions/WikiFolderNewMenu.java,
+	  src/test/java/cc/kune/core/client/actions/xml/XMLKuneClientActionsTest.java,
+	  src/test/java/cc/kune/selenium/KuneSeleniumDefaults.java,
+	  src/test/java/cc/kune/selenium/KuneSeleniumTest.java,
+	  src/test/java/cc/kune/selenium/PageObject.java,
+	  src/test/java/cc/kune/selenium/login/LoginPageObject.java,
+	  src/test/java/cc/kune/selenium/login/LoginSeleniumTests.java,
+	  src/test/java/cc/kune/selenium/tools/AbstractWebTester.java,
+	  src/test/java/cc/kune/selenium/tools/GenericWebTester.java,
+	  src/test/java/cc/kune/selenium/tools/I18nHelper.java,
+	  src/test/java/cc/kune/selenium/tools/I18nHelperTest.java,
+	  src/test/java/cc/kune/selenium/tools/Lorem.java,
+	  src/test/java/cc/kune/selenium/tools/PageObjectModule.java,
+	  src/test/java/cc/kune/selenium/tools/SeleniumConstants.java,
+	  src/test/java/cc/kune/selenium/tools/SeleniumModule.java,
+	  src/test/java/cc/kune/wave/server/KuneAgentTest.java,
+	  src/test/java/cc/kune/wave/server/KuneWaveMarkupTests.java,
+	  src/test/java/com/google/wave/splash/text/ContentNewUnrendererTest.java,
+	  src/test/java/com/google/wave/splash/text/ContentUnrendererTest.java:
+	  More copyrights & abouts
+
+2011-07-13 15:25  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1451] img/webtemplate/theme-palettes.svg,
+	  src/main/resources/kune.properties: themed improved
+
+2011-07-13 12:21  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1450]
+	  src/main/java/cc/kune/core/client/rpcservices/SocialNetworkService.java,
+	  src/main/java/cc/kune/core/client/rpcservices/SocialNetworkServiceAsync.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UnJoinFromCurrentGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UnJoinFromThisGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UnJoinGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/ImPartOfGroupCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNConfActions.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/UserSNMenuItemsRegistry.java,
+	  src/main/java/cc/kune/core/public/ws.html,
+	  src/main/java/cc/kune/core/server/rpc/SocialNetworkRPC.java,
+	  src/main/webapp/others/splash/js/common_client.js,
+	  src/main/webapp/others/splash/js/permalink_client.js: gadget
+	  render when offline; Unjoin from personal page
+
+2011-07-13 02:03  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1449] .classpath,
+	  src/main/java/cc/kune/chat/client/AvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/MediumAvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/SmallAvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/common/client/tooltip/TooltipPosition.java,
+	  src/main/java/cc/kune/common/client/ui/AbstractDecorator.java,
+	  src/main/java/cc/kune/common/client/ui/AbstractDecorator.ui.xml,
+	  src/main/java/cc/kune/common/client/ui/EditableLabel.java,
+	  src/main/java/cc/kune/core/client/actions/xml/NewGadgetAction.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/public/ws.html,
+	  src/main/webapp/others/kune-client-actions.xml,
+	  src/test/java/com/google/wave/splash/text/ContentNewUnrendererTest.java:
+	  Gadget list JP improved; Title blinks on gadget add; Tooltip fix
+	  ; Tooltip for xmpp status
+
+2011-07-12 17:32  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1448] img/webtemplate/chat-revisited.png,
+	  img/webtemplate/web_template-2011.svg,
+	  src/main/java/cc/kune/chat/client/AvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/ChatClientDefault.java,
+	  src/main/java/cc/kune/chat/client/ChatInstances.java,
+	  src/main/java/cc/kune/chat/client/ChatParts.java,
+	  src/main/java/cc/kune/chat/client/actions/AddAsBuddieAction.java,
+	  src/main/java/cc/kune/chat/client/actions/AddAsBuddieHeaderButton.java,
+	  src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
+	  src/main/java/cc/kune/common/client/tooltip/TooltipTimers.java,
+	  src/main/java/cc/kune/common/client/ui/BasicThumb.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLWaveExtension.java,
+	  src/main/java/cc/kune/core/client/resources/CoreResources.java,
+	  src/main/java/cc/kune/core/client/resources/question32.png,
+	  src/main/java/cc/kune/core/client/sn/AbstractSNPanel.java: XML
+	  Extensions trim fix; SN menu lazy; tooltip hide when menu shows;
+	  Subscription confirmation
+
+2011-07-10 20:58  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1447]
+	  src/main/java/cc/kune/chat/client/AvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/ChatParts.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorPresenter.java,
+	  src/main/java/cc/kune/core/client/ws/entheader/EntityHeaderPanel.java,
+	  src/main/java/cc/kune/core/client/ws/entheader/EntityHeaderPresenter.java,
+	  src/main/java/cc/kune/core/client/ws/entheader/EntityTextLogo.java:
+	  Some fixes in avatar on/offline status
+
+2011-07-10 18:29  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1446] .,
+	  src/main/java/cc/kune/chat/client/AvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/ChatClientDefault.java,
+	  src/main/java/cc/kune/chat/client/ChatGinModule.java,
+	  src/main/java/cc/kune/chat/client/ChatInstances.java,
+	  src/main/java/cc/kune/chat/client/ChatOptions.java,
+	  src/main/java/cc/kune/chat/client/ChatParts.java,
+	  src/main/java/cc/kune/chat/client/KuneHablarSignals.java,
+	  src/main/java/cc/kune/chat/client/MediumAvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/SmallAvatarDecoratorImpl.java,
+	  src/main/java/cc/kune/chat/client/actions/AddAsBuddieHeaderButton.java,
+	  src/main/java/cc/kune/chat/client/actions/ChatSitebarActions.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenGroupPublicChatRoomAction.java,
+	  src/main/java/cc/kune/chat/client/actions/StartChatWithMemberAction.java,
+	  src/main/java/cc/kune/chat/client/actions/StartChatWithThisPersonAction.java,
+	  src/main/java/cc/kune/chat/client/actions/StartChatWithUserAction.java,
+	  src/main/java/cc/kune/chat/client/actions/conditions,
+	  src/main/java/cc/kune/chat/client/actions/conditions/IsBuddieCondition.java,
+	  src/main/java/cc/kune/chat/client/actions/conditions/IsNotBuddieCondition.java,
+	  src/main/java/cc/kune/common/client/ui/AbstractDecorator.java,
+	  src/main/java/cc/kune/common/client/ui/AbstractDecorator.ui.xml,
+	  src/main/java/cc/kune/core/client/CoreGinModule.java,
+	  src/main/java/cc/kune/core/client/avatar,
+	  src/main/java/cc/kune/core/client/avatar/AvatarDecorator.java,
+	  src/main/java/cc/kune/core/client/avatar/MediumAvatarDecorator.java,
+	  src/main/java/cc/kune/core/client/avatar/SmallAvatarDecorator.java,
+	  src/main/java/cc/kune/core/client/resources/CoreResources.java,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-available-medium.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-available-small.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-away-medium.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-away-small.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-busy-medium.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-busy-small.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-extended-away-medium.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-extended-away-small.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-invisible-medium.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-invisible-small.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-offline-medium.png,
+	  src/main/java/cc/kune/core/client/resources/chat-dot-offline-small.png,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorPresenter.java,
+	  src/main/java/cc/kune/core/client/sn/AbstractSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/AbstractSNPanel.ui.xml,
+	  src/main/java/cc/kune/core/client/sn/GroupSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/UserSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsMeCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsNotMeCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/UserSNMenuItemsRegistry.java,
+	  src/main/java/cc/kune/core/client/ws/entheader/EntityHeaderPanel.java,
+	  src/main/java/cc/kune/core/client/ws/entheader/EntityHeaderPresenter.java,
+	  src/main/java/cc/kune/core/client/ws/entheader/EntityTextLogo.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/main/java/cc/kune/wave/client/WaveStatusIndicator.java:
+	  Avatar of buddies with status; Several fixes in chat
+
+2011-07-09 22:25  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1445] .classpath, pom.xml,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorPresenter.java:
+	  Closed issue #44 (SpaceSelector clicked twice) and #47 (updated
+	  to Guice 3.0)
+
+2011-07-09 21:39  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1444] src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
+	  src/main/java/cc/kune/core/client/groups/newgroup/NewGroupPanel.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorViewImpl.java,
+	  src/main/java/cc/kune/core/client/ui/DefaultFormUtils.java,
+	  src/main/java/cc/kune/core/client/ws/entheader/EntityHeaderPresenter.java,
+	  src/main/java/cc/kune/core/public/ws.css: Some fixes/improvements
+	  in tooltips, new group creation...
+
+2011-07-09 20:52  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1443] src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
+	  src/main/java/cc/kune/common/client/ui/EditableLabel.java,
+	  src/main/java/cc/kune/common/client/ui/MaskWidget.java,
+	  src/main/java/cc/kune/common/client/ui/MaskWidgetView.java,
+	  src/main/java/cc/kune/core/client/errors/ErrorHandler.java,
+	  src/main/java/cc/kune/core/client/groups/newgroup/NewGroupPanel.java,
+	  src/main/java/cc/kune/core/client/groups/newgroup/NewGroupPresenter.java,
+	  src/main/java/cc/kune/core/client/groups/newgroup/NewGroupView.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorPresenter.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNConfActions.java,
+	  src/main/java/cc/kune/core/client/ui/DefaultFormUtils.java,
+	  src/main/java/cc/kune/core/server/manager/impl/GroupManagerDefault.java,
+	  src/main/java/cc/kune/core/server/manager/impl/SocialNetworkManagerDefault.java,
+	  src/main/java/cc/kune/core/shared/dto/GroupType.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContainerBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContainerMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentTitleWidget.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/main/webapp/others/kune-client-actions.xml,
+	  src/test/java/cc/kune/core/server/integration/kuneservice/GroupServiceTest.java:
+	  Closed groups; Rename title tooltip; Tooltip fixed
+
+2011-07-09 16:44  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1442]
+	  src/main/java/cc/kune/chat/client/KuneBrowserFocusManager.java,
+	  src/main/java/cc/kune/chat/client/KuneHablarSignals.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenChatAction.java,
+	  src/main/java/cc/kune/chat/public/kune-hablar.css,
+	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtButtonGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/GwtMenuGui.java,
+	  src/main/java/cc/kune/common/client/actions/ui/AbstractGuiItem.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/AbstractGuiActionDescrip.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/GuiActionDescrip.java,
+	  src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
+	  src/main/java/cc/kune/common/client/tooltip/TooltipTimers.java,
+	  src/main/java/cc/kune/core/client/events/WindowFocusEvent.java,
+	  src/main/java/cc/kune/core/client/groups/newgroup/NewGroupPresenter.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorPresenter.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorViewImpl.java,
+	  src/main/java/cc/kune/core/client/state/StateManagerDefault.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.ui.xml,
+	  src/main/java/cc/kune/gspace/client/options/GroupOptions.java,
+	  src/main/java/cc/kune/gspace/client/options/GroupOptionsPresenter.java,
+	  src/main/java/cc/kune/gspace/client/resources/GSpaceArmorResources.java,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmor.css,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmorTheme.css,
+	  src/main/java/cc/kune/gspace/client/style/GSpaceBackManagerImpl.java,
+	  src/main/java/cc/kune/wave/server/AbstractBaseRobotAgent.java,
+	  src/main/java/cc/kune/wave/server/KuneAgent.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManagerDefault.java,
+	  src/main/java/com/google/wave/splash/text/ContentNewUnrenderer.java,
+	  src/main/java/com/google/wave/splash/text/ContentRenderer.java,
+	  src/main/java/com/google/wave/splash/text/ContentUnrenderer.java,
+	  src/main/java/com/google/wave/splash/text/HtmlRawViewImpl.java,
+	  src/main/java/com/google/wave/splash/text/UnrenderUtils.java,
+	  src/test/java/cc/kune/wave/server/KuneAgentTest.java,
+	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java,
+	  src/test/java/com, src/test/java/com/google,
+	  src/test/java/com/google/wave,
+	  src/test/java/com/google/wave/splash,
+	  src/test/java/com/google/wave/splash/text,
+	  src/test/java/com/google/wave/splash/text/ContentNewUnrendererTest.java,
+	  src/test/java/com/google/wave/splash/text/ContentUnrendererTest.java:
+	  Unrender wave revisited; Tooltips show on demand; css fixes;
+	  chatroom message when not logged; On window focus tooltip;
+	  Background fix
+
+2011-07-08 00:00  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1441] src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/com/google/wave/splash/text/ContentRenderer.java:
+	  Better render of waves
+
+2011-07-02 11:35  JP Zafra <jpzafra@gmail.com>
+
+	* [r1440] src/main/webapp/others/kune-client-actions.xml: new list
+	  of extensions
+
+2011-07-01 11:27  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1439] .classpath, pom.xml,
+	  src/main/java/cc/kune/core/client/errors/DefaultException.java,
+	  src/main/java/cc/kune/core/client/services/FileDownloadUtils.java,
+	  src/main/java/cc/kune/core/public/ws.html,
+	  src/main/java/cc/kune/core/server/state/StateServiceDefault.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManager.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManagerDefault.java,
+	  src/main/java/com/google, src/main/java/com/google/wave,
+	  src/main/java/com/google/wave/splash,
+	  src/main/java/com/google/wave/splash/rpc,
+	  src/main/java/com/google/wave/splash/rpc/ClientAction.java,
+	  src/main/java/com/google/wave/splash/text,
+	  src/main/java/com/google/wave/splash/text/ContentRenderer.java,
+	  src/main/java/com/google/wave/splash/text/ContentUnrenderer.java,
+	  src/main/java/com/google/wave/splash/text/GadgetRenderer.java,
+	  src/main/java/com/google/wave/splash/text/Markup.java,
+	  src/main/java/com/google/wave/splash/web,
+	  src/main/java/com/google/wave/splash/web/template,
+	  src/main/java/com/google/wave/splash/web/template/Templates.java,
+	  src/main/java/com/google/wave/splash/web/template/ThreadedWaveRenderer.java,
+	  src/main/java/com/google/wave/splash/web/template/WaveRenderer.java,
+	  src/main/java/org/ourproject/kune/chat/client/ctx,
+	  src/main/java/org/ourproject/kune/wiki/client,
+	  src/main/java/org/ourproject/kune/workspace/client/sitebar,
+	  src/main/webapp/others/splash,
+	  src/main/webapp/others/splash/blip.html.fragment,
+	  src/main/webapp/others/splash/feed.html.fragment,
+	  src/main/webapp/others/splash/full_client.html,
+	  src/main/webapp/others/splash/header.html.fragment,
+	  src/main/webapp/others/splash/images,
+	  src/main/webapp/others/splash/images/attachment.png,
+	  src/main/webapp/others/splash/images/avatar1.png,
+	  src/main/webapp/others/splash/images/avatar2.png,
+	  src/main/webapp/others/splash/images/avatar3.png,
+	  src/main/webapp/others/splash/images/avatar4.png,
+	  src/main/webapp/others/splash/images/avatar5.png,
+	  src/main/webapp/others/splash/images/avatar6.png,
+	  src/main/webapp/others/splash/images/background_dot.png,
+	  src/main/webapp/others/splash/images/close_window.png,
+	  src/main/webapp/others/splash/images/comment.png,
+	  src/main/webapp/others/splash/images/cross.png,
+	  src/main/webapp/others/splash/images/dialog_close.gif,
+	  src/main/webapp/others/splash/images/dialog_pointer.gif,
+	  src/main/webapp/others/splash/images/email.png,
+	  src/main/webapp/others/splash/images/group.png,
+	  src/main/webapp/others/splash/images/inline_reply_arrow.gif,
+	  src/main/webapp/others/splash/images/inline_reply_arrow_expanded.gif,
+	  src/main/webapp/others/splash/images/inline_reply_pointer.gif,
+	  src/main/webapp/others/splash/images/lightbox-blank.gif,
+	  src/main/webapp/others/splash/images/lightbox-btn-close.gif,
+	  src/main/webapp/others/splash/images/lightbox-btn-next.gif,
+	  src/main/webapp/others/splash/images/lightbox-btn-prev.gif,
+	  src/main/webapp/others/splash/images/lightbox-ico-loading.gif,
+	  src/main/webapp/others/splash/images/loading.gif,
+	  src/main/webapp/others/splash/images/loading_permalink.gif,
+	  src/main/webapp/others/splash/images/logo.png,
+	  src/main/webapp/others/splash/images/logo_on_black.png,
+	  src/main/webapp/others/splash/images/logo_small.png,
+	  src/main/webapp/others/splash/images/minimize_window.png,
+	  src/main/webapp/others/splash/images/page_edit.png,
+	  src/main/webapp/others/splash/images/pencil.png,
+	  src/main/webapp/others/splash/images/reply.png,
+	  src/main/webapp/others/splash/images/search_field_on_black.png,
+	  src/main/webapp/others/splash/images/search_field_on_black_button.png,
+	  src/main/webapp/others/splash/images/search_field_on_black_button_right.png,
+	  src/main/webapp/others/splash/images/search_field_on_black_left.png,
+	  src/main/webapp/others/splash/images/search_small_button.png,
+	  src/main/webapp/others/splash/images/share_icon.png,
+	  src/main/webapp/others/splash/images/user1.png,
+	  src/main/webapp/others/splash/images/user2.png,
+	  src/main/webapp/others/splash/images/user3.png,
+	  src/main/webapp/others/splash/images/user4.png,
+	  src/main/webapp/others/splash/images/user5.png,
+	  src/main/webapp/others/splash/images/user6.png,
+	  src/main/webapp/others/splash/images/wave-loading.gif,
+	  src/main/webapp/others/splash/js,
+	  src/main/webapp/others/splash/js/common_client.js,
+	  src/main/webapp/others/splash/js/editor.js,
+	  src/main/webapp/others/splash/js/embed_support.js,
+	  src/main/webapp/others/splash/js/embed_test.js,
+	  src/main/webapp/others/splash/js/full_client.js,
+	  src/main/webapp/others/splash/js/gadget.js,
+	  src/main/webapp/others/splash/js/ie6sucks.js,
+	  src/main/webapp/others/splash/js/jScrollTouch.js,
+	  src/main/webapp/others/splash/js/jquery-1.4.2.min.js,
+	  src/main/webapp/others/splash/js/jquery.lightbox-0.5.min.js,
+	  src/main/webapp/others/splash/js/mobile_client.js,
+	  src/main/webapp/others/splash/js/permalink_client.js,
+	  src/main/webapp/others/splash/js/rpc.js,
+	  src/main/webapp/others/splash/js/rpc_test.js,
+	  src/main/webapp/others/splash/mobile_client.html,
+	  src/main/webapp/others/splash/permalink_client.html,
+	  src/main/webapp/others/splash/rpc_relay.html,
+	  src/main/webapp/others/splash/style,
+	  src/main/webapp/others/splash/style/border-radius.htc,
+	  src/main/webapp/others/splash/style/jquery.lightbox-0.5.css,
+	  src/main/webapp/others/splash/style/main.css,
+	  src/main/webapp/others/splash/style/mobile.css,
+	  src/main/webapp/others/splash/style/orig-style.css,
+	  src/main/webapp/others/splash/style/permalink.css,
+	  src/main/webapp/others/splash/style/permalink_ie.css,
+	  src/main/webapp/others/splash/style/stuff.css,
+	  src/main/webapp/others/splash/wave_not_found.html.fragment,
+	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java,
+	  src/test/java/cc/kune/wave/server/KuneWaveMarkupTests.java: Wave
+	  renderer
+
+2011-06-28 15:07  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1429]
+	  src/test/java/cc/kune/core/client/actions/xml/XMLKuneClientActionsTest.java:
+	  More tests in extensions
+
+2011-06-27 01:10  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1425] img/screenshots, img/screenshots/apachewave-powered.png,
+	  img/screenshots/chat-rooms.png,
+	  img/screenshots/chat-with-buddies-2.png,
+	  img/screenshots/chat-with-buddies.png,
+	  img/screenshots/concurrent-edit-and-chat.png,
+	  img/screenshots/creating-new-content.png,
+	  img/screenshots/group-creation.png,
+	  img/screenshots/group-just-created.png,
+	  img/screenshots/group-public-space.png,
+	  img/screenshots/group-style-2.png,
+	  img/screenshots/group-style.png,
+	  img/screenshots/group-styled.png,
+	  img/screenshots/group-tools.png, img/screenshots/inbox.png,
+	  img/screenshots/license-wizard.png,
+	  img/screenshots/managin-content.png,
+	  img/screenshots/personal-options.png,
+	  img/screenshots/personal-spaces.png,
+	  img/screenshots/social-net-of-a-group.png,
+	  img/screenshots/wave-gadgets.png,
+	  src/main/java/org/ourproject/kune/gallery/client/GalleryClientActions.java,
+	  src/main/java/org/ourproject/kune/gallery/client/ctx/GalleryContextPresenter.java,
+	  src/main/java/org/ourproject/kune/wiki/KuneWiki.gwt.xml,
+	  src/main/java/org/ourproject/kune/wiki/client/WikiClientActions.java,
+	  src/main/java/org/ourproject/kune/wiki/client/WikiClientTool.java,
+	  src/main/java/org/ourproject/kune/wiki/client/WikiMessages.java,
+	  src/main/java/org/ourproject/kune/wiki/client/cnt,
+	  src/main/java/org/ourproject/kune/wiki/client/ctx,
+	  src/main/java/org/ourproject/kune/wiki/public,
+	  src/main/java/org/ourproject/kune/workspace/client/OldAbstractFoldableContentActions.java,
+	  src/main/java/org/ourproject/kune/workspace/client/ctxnav/ContextNavigatorPresenter.java,
+	  src/main/java/org/ourproject/kune/workspace/client/cxt,
+	  src/main/java/org/ourproject/kune/workspace/client/editor/ContentEditorPresenter.java,
+	  src/main/java/org/ourproject/kune/workspace/client/site/WorkspaceNotifyUser.java,
+	  src/main/java/org/ourproject/kune/workspace/client/site/msg,
+	  src/main/java/org/ourproject/kune/workspace/client/sitebar/sitelogo,
+	  src/main/java/org/ourproject/kune/workspace/client/title:
+	  screenshots & deletions
+
+2011-06-26 22:30  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1424] pom.xml,
+	  src/main/java/cc/kune/core/client/services/FileConstants.java,
+	  src/main/java/cc/kune/core/client/services/FileDownloadUtils.java,
+	  src/main/java/cc/kune/core/server/KuneRackModule.java,
+	  src/main/java/cc/kune/core/server/manager/file/UserLogoDownloadManager.java,
+	  src/main/java/cc/kune/wave/KuneWave.gwt.xml,
+	  src/main/java/cc/kune/wave/client/KuneWaveProfileManager.java,
+	  src/main/java/cc/kune/wave/client/WaveClientManager.java,
+	  src/main/java/cc/kune/wave/client/WaveGinModule.java,
+	  src/main/java/cc/kune/wave/client/WebClient.java,
+	  src/main/webapp/others/unknown.jpg: Wave client avatar workaround
+
+2011-06-26 03:26  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1419] .classpath, pom.xml,
+	  src/main/java/cc/kune/client/KuneGinjector.java,
+	  src/main/java/cc/kune/core/KuneCore.gwt.xml,
+	  src/main/java/cc/kune/core/client/CoreGinModule.java,
+	  src/main/java/cc/kune/core/client/actions/WaveExtension.java,
+	  src/main/java/cc/kune/core/client/actions/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/client/actions/xml,
+	  src/main/java/cc/kune/core/client/actions/xml/NewGadgetAction.java,
+	  src/main/java/cc/kune/core/client/actions/xml/WaveExtension.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLGuiActionDescriptor.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLKuneClientActions.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLRol.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLTypeId.java,
+	  src/main/java/cc/kune/core/client/actions/xml/XMLWaveExtension.java,
+	  src/main/java/cc/kune/core/client/rpcservices/ContentService.java,
+	  src/main/java/cc/kune/core/client/rpcservices/ContentServiceAsync.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/core/server/PlatformServerModule.java,
+	  src/main/java/cc/kune/core/server/content/CreationService.java,
+	  src/main/java/cc/kune/core/server/content/CreationServiceDefault.java,
+	  src/main/java/cc/kune/core/server/content/XMLActionReader.java,
+	  src/main/java/cc/kune/core/server/rpc/ContentRPC.java,
+	  src/main/java/cc/kune/gspace/client/actions/AbstractNewMenu.java,
+	  src/main/webapp/others/kune-client-actions.xml,
+	  src/main/webapp/others/kune-wave-extensions.xml,
+	  src/test/java/cc/kune/core/client/actions/xml,
+	  src/test/java/cc/kune/core/client/actions/xml/XMLKuneClientActionsTest.java,
+	  src/test/java/org/ourproject/kune/chat: XML Actions almost
+	  finished
+
+2011-06-25 02:06  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1418] src/main/webapp/others/kune-wave-extensions.xml: More
+	  useful extensions
+
+2011-06-24 23:04  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1417] TODO, src/main/java/cc/kune/chat/client/ChatParts.java,
+	  src/main/java/cc/kune/chat/client/actions/NewRoomBtn.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenGroupPublicChatRoomAction.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenRoomBtn.java,
+	  src/main/java/cc/kune/chat/client/actions/StartAssemblyWithMembers.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtMenuGui.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/SubMenuDescriptor.java,
+	  src/main/java/cc/kune/core/client/actions/ActionRegistryByType.java,
+	  src/main/java/cc/kune/core/client/actions/RolActionAutoUpdated.java,
+	  src/main/java/cc/kune/core/client/actions/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/client/sn/GroupSNPresenter.java,
+	  src/main/java/cc/kune/core/client/sn/UserSNPresenter.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNConfActions.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/UserSNConfActions.java,
+	  src/main/java/cc/kune/gspace/client/actions/AbstractNewMenu.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContainerBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContentBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewMenuProvider.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/main/webapp/others/kune-wave-extensions.xml: Gadgets
+	  hierarchy. Chat new actions (Assembly in chatroom, add as buddie
+	  menuitem)
+
+2011-06-24 16:50  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1416] .classpath, .project, pom.xml, script/repopubli.sh,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.java,
+	  src/main/java/cc/kune/wave/client/WebClient.java,
+	  src/main/java/cc/kune/wave/client/WebClient.ui.xml,
+	  src/main/java/cc/kune/wave/server/CustomWaveClientServlet.java,
+	  src/main/java/cc/kune/wave/server/WaveMain.java: wave code
+	  updated (with several fixes)
+
+2011-06-24 01:51  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1415] .project, TODO,
+	  src/main/java/cc/kune/barters/client/actions/BartersClientActions.java,
+	  src/main/java/cc/kune/blogs/client/BlogsGinModule.java,
+	  src/main/java/cc/kune/blogs/client/actions/BlogsClientActions.java,
+	  src/main/java/cc/kune/blogs/client/actions/BlogsNewMenu.java,
+	  src/main/java/cc/kune/blogs/client/actions/NewPostBtn.java,
+	  src/main/java/cc/kune/blogs/client/actions/NewPostMenuItem.java,
+	  src/main/java/cc/kune/chat/client/actions/ChatClientActions.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtMenuItemGui.java,
+	  src/main/java/cc/kune/common/client/actions/ui/AbstractComposedGuiItem.java,
+	  src/main/java/cc/kune/common/public/kune-common.css,
+	  src/main/java/cc/kune/core/client/actions/ActionRegistryByType.java,
+	  src/main/java/cc/kune/core/client/actions/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNConfActions.java,
+	  src/main/java/cc/kune/docs/client/DocsGinModule.java,
+	  src/main/java/cc/kune/docs/client/actions/DocsClientActions.java,
+	  src/main/java/cc/kune/docs/client/actions/DocsFolderNewMenu.java,
+	  src/main/java/cc/kune/docs/client/actions/DocsRootNewMenu.java,
+	  src/main/java/cc/kune/docs/client/actions/NewDocBtn.java,
+	  src/main/java/cc/kune/docs/client/actions/NewDocMenuItem.java,
+	  src/main/java/cc/kune/docs/client/actions/NewFolderBtn.java,
+	  src/main/java/cc/kune/docs/client/actions/NewFolderMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/ActionGroups.java,
+	  src/main/java/cc/kune/gspace/client/actions/ContentViewerOptionsMenu.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContainerMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContentBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewMenuProvider.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewMenusProvider.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPresenter.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/main/java/cc/kune/meets/client/actions/MeetingsClientActions.java,
+	  src/main/java/cc/kune/wiki/client/WikiGinModule.java,
+	  src/main/java/cc/kune/wiki/client/actions/NewFolderBtn.java,
+	  src/main/java/cc/kune/wiki/client/actions/NewWikiBtn.java,
+	  src/main/java/cc/kune/wiki/client/actions/WikiClientActions.java,
+	  src/main/java/cc/kune/wiki/client/actions/WikiFolderNewMenu.java:
+	  New menus updated, and menu items created only under demand
+
+2011-06-22 16:39  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1414]
+	  src/main/java/cc/kune/barters/client/BartersClientTool.java,
+	  src/main/java/cc/kune/blogs/client/BlogsClientTool.java,
+	  src/main/java/cc/kune/blogs/client/actions/BlogsClientActions.java,
+	  src/main/java/cc/kune/blogs/client/actions/BlogsNewMenu.java,
+	  src/main/java/cc/kune/client/KuneEntryPoint.java,
+	  src/main/java/cc/kune/client/OnAppStartFactory.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtMenuItemGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/GwtMenuGui.java,
+	  src/main/java/cc/kune/core/client/CoreGinModule.java,
+	  src/main/java/cc/kune/core/client/actions/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/client/registry/ContentCapabilitiesRegistry.java,
+	  src/main/java/cc/kune/core/client/registry/NewMenusForTypeIdsRegistry.java,
+	  src/main/java/cc/kune/docs/client/DocsClientTool.java,
+	  src/main/java/cc/kune/docs/client/actions/DocsClientActions.java,
+	  src/main/java/cc/kune/docs/client/actions/DocsFolderNewMenu.java,
+	  src/main/java/cc/kune/docs/client/actions/DocsRootNewMenu.java,
+	  src/main/java/cc/kune/gspace/client/actions/AbstractNewMenu.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContentBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewMenusProvider.java,
+	  src/main/java/cc/kune/gspace/client/tool/FoldableAbstractClientTool.java,
+	  src/main/webapp/others/kune-wave-extensions.xml: New items based
+	  in wave extensions
+
+2011-06-21 21:29  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1413]
+	  src/main/java/cc/kune/core/server/manager/file/EntityBackgroundUploadManager.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceGinModule.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceParts.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptDefLicense.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptDefLicensePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptDefLicenseView.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptionsDefLicense.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptionsDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptionsDefLicensePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptionsDefLicenseView.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptDefLicense.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptDefLicensePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptDefLicenseView.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptionsDefLicense.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptionsDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptionsDefLicensePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptionsDefLicenseView.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptDefLicense.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptDefLicensePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptDefLicenseView.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptionsDefLicense.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptionsDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptionsDefLicensePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptionsDefLicenseView.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptLogo.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptLogoPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptLogoView.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptUploadButton.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptionsLogo.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptionsLogoPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptionsLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptionsLogoView.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptionsUploadButton.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityUploaderForm.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptLogo.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptLogoPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptLogoView.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptionsLogo.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptionsLogoPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptionsLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptionsLogoView.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptLogo.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptLogoPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptLogoView.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptionsLogo.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptionsLogoPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptionsLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptionsLogoView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptStyle.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptStylePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptStylePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptStyleView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptStyle.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptStylePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptStylePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptStyleView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptStyle.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptStylePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptStylePresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptStyleView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptTools.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptToolsPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptToolsPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptToolsView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConf.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptTools.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptToolsPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptToolsPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptToolsView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptionsToolsConf.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptionsToolsConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptionsToolsConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptTools.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptToolsPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptToolsPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptToolsView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptionsToolsConf.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptionsToolsConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptionsToolsConfView.java,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeSelectorPresenter.java,
+	  src/main/resources/kune.properties: Background management (done)
+
+2011-06-21 20:03  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1412]
+	  src/main/java/cc/kune/common/client/notify/NotifyUser.java,
+	  src/main/java/cc/kune/common/public/kune-common.css,
+	  src/main/java/cc/kune/core/client/rpcservices/GroupService.java,
+	  src/main/java/cc/kune/core/client/rpcservices/GroupServiceAsync.java,
+	  src/main/java/cc/kune/core/client/services/FileDownloadUtils.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorPresenter.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/core/server/KuneRackModule.java,
+	  src/main/java/cc/kune/core/server/manager/FileManager.java,
+	  src/main/java/cc/kune/core/server/manager/GroupManager.java,
+	  src/main/java/cc/kune/core/server/manager/file/EntityBackgroundDownloadManager.java,
+	  src/main/java/cc/kune/core/server/manager/file/EntityBackgroundUploadManager.java,
+	  src/main/java/cc/kune/core/server/manager/file/FileGwtUploadAbstractServlet.java,
+	  src/main/java/cc/kune/core/server/manager/file/FileManagerDefault.java,
+	  src/main/java/cc/kune/core/server/manager/file/FileUploadManager.java,
+	  src/main/java/cc/kune/core/server/manager/file/FileUtils.java,
+	  src/main/java/cc/kune/core/server/manager/file/ImageUtilsDefault.java,
+	  src/main/java/cc/kune/core/server/manager/impl/GroupManagerDefault.java,
+	  src/main/java/cc/kune/core/server/rpc/GroupRPC.java,
+	  src/main/java/cc/kune/core/shared/dto/GroupDTO.java,
+	  src/main/java/cc/kune/domain/Group.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmor.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.ui.xml,
+	  src/main/java/cc/kune/gspace/client/options/logo/CurrentLogoChangedEvent.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptionsLogoPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptionsLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityOptionsUploadButton.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/EntityUploaderForm.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptionsLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptionsLogoPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmor.css,
+	  src/main/java/cc/kune/gspace/client/style/GSpaceBackManager.java,
+	  src/main/java/cc/kune/gspace/client/style/GSpaceBackManagerImpl.java,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeManager.java,
+	  src/main/java/cc/kune/pspace/client/PSpaceInDevelopment.ui.xml,
+	  src/main/java/org/ourproject/kune/gallery/client/GalleryClientActions.java,
+	  src/main/java/org/ourproject/kune/wiki/client/WikiClientActions.java,
+	  src/main/java/org/ourproject/kune/workspace/client/OldAbstractFoldableContentActions.java:
+	  Group Background management
+
+2011-06-18 21:57  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1411] src/main/java/cc/kune/core/client/sn/UserSNPanel.java,
+	  src/main/java/cc/kune/core/server/CustomPersistFilter.java,
+	  src/main/java/cc/kune/core/server/KuneRackModule.java,
+	  src/main/java/cc/kune/core/server/auth/AuthenticatedMethodInterceptor.java,
+	  src/main/java/cc/kune/core/server/manager/UserManager.java,
+	  src/main/java/cc/kune/core/server/manager/impl/UserManagerDefault.java,
+	  src/main/java/cc/kune/core/server/rpc/ContentRPC.java,
+	  src/main/java/cc/kune/core/server/rpc/GroupRPC.java,
+	  src/main/java/cc/kune/core/server/rpc/I18nRPC.java,
+	  src/main/java/cc/kune/core/server/rpc/RPC.java,
+	  src/main/java/cc/kune/core/server/rpc/SiteRPC.java,
+	  src/main/java/cc/kune/core/server/rpc/SocialNetworkRPC.java,
+	  src/main/java/cc/kune/core/server/rpc/UserRPC.java,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmorTheme.css,
+	  src/test/java/cc/kune/core/server/integration/site/UserServiceTest.java:
+	  Added Guice Persist Filter
+
+2011-06-16 23:33  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1410] img/webtemplate/highcontrast.png,
+	  img/webtemplate/theme-palettes.svg,
+	  src/main/java/cc/kune/chat/client/actions/NewRoomBtn.java,
+	  src/main/java/cc/kune/common/client/ui/IconLabel.java,
+	  src/main/java/cc/kune/core/server/auth/AuthenticatedMethodInterceptor.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmorTheme.css,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeSelectorPresenter.java,
+	  src/main/java/org/ourproject/kune/chat/KuneChat.gwt.xml,
+	  src/main/java/org/ourproject/kune/chat/client/ChatClientActions.java,
+	  src/main/java/org/ourproject/kune/chat/client/ChatClientTool.java,
+	  src/main/java/org/ourproject/kune/chat/client/ChatConnectionOptions.java,
+	  src/main/java/org/ourproject/kune/chat/client/ChatEngine.java,
+	  src/main/java/org/ourproject/kune/chat/client/ChatEngineDefault.java,
+	  src/main/java/org/ourproject/kune/chat/client/ChatMessages.java,
+	  src/main/java/org/ourproject/kune/chat/client/cnt,
+	  src/main/java/org/ourproject/kune/chat/client/ctx/ChatContext.java,
+	  src/main/java/org/ourproject/kune/chat/client/ctx/ChatContextPresenter.java,
+	  src/main/java/org/ourproject/kune/chat/client/ctx/room,
+	  src/main/java/org/ourproject/kune/chat/public,
+	  src/main/resources/kune.properties,
+	  src/test/java/org/ourproject/kune/chat/ChatToolTest.java,
+	  src/test/java/org/ourproject/kune/chat/server: more styles and
+	  fixes
+
+2011-06-16 23:29  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1409]
+	  src/main/java/cc/kune/core/server/auth/AuthenticatedMethodInterceptor.java:
+	  unitofwork removed
+
+2011-06-16 17:48  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1408]
+	  src/main/java/cc/kune/core/server/KunePersistenceService.java,
+	  src/main/java/cc/kune/core/server/auth/AuthenticatedMethodInterceptor.java,
+	  src/main/java/cc/kune/core/server/rack/RackServletFilter.java,
+	  src/main/resources/META-INF/persistence.xml: Some guice persist
+	  tunning
+
+2011-06-16 16:47  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1407] img/webtemplate/theme-palettes.svg,
+	  img/webtemplate/theme-palettes.svg-rect7391-2-1-699.png,
+	  img/webtemplate/theme-palettes.svg-rect7391-2-4294966623.png,
+	  img/webtemplate/theme-palettes.svg-rect7391-2-73.png,
+	  img/webtemplate/web_template-2011.svg,
+	  src/main/java/cc/kune/client/OnAppStartFactory.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtButtonGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtMenuItemGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/GwtIconLabelGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/GwtMenuGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/GwtMenuSeparatorGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/GwtSubMenuGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/GwtToolbarGui.java,
+	  src/main/java/cc/kune/common/client/actions/gwtui/GwtToolbarSeparatorGui.java,
+	  src/main/java/cc/kune/common/client/actions/gxtui/AbstractGxtButtonGui.java,
+	  src/main/java/cc/kune/common/client/actions/gxtui/AbstractGxtMenuGui.java,
+	  src/main/java/cc/kune/common/client/actions/gxtui/AbstractGxtMenuItemGui.java,
+	  src/main/java/cc/kune/common/client/actions/gxtui/GxtMenuSeparatorGui.java,
+	  src/main/java/cc/kune/common/client/actions/gxtui/GxtMenuTitleItemGui.java,
+	  src/main/java/cc/kune/common/client/actions/gxtui/GxtToolbarGui.java,
+	  src/main/java/cc/kune/common/client/actions/gxtui/GxtToolbarSeparatorGui.java,
+	  src/main/java/cc/kune/common/client/actions/ui/AbstractGuiItem.java,
+	  src/main/java/cc/kune/common/client/ui/IconLabel.java,
+	  src/main/java/cc/kune/common/client/utils/CSSUtils.java,
+	  src/main/java/cc/kune/core/client/actions/XMLActionsParser.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorViewImpl.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorViewImpl.ui.xml,
+	  src/main/java/cc/kune/core/client/sn/AbstractSNPanel.ui.xml,
+	  src/main/java/cc/kune/core/client/ws/CoreViewImpl.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/core/server/InitData.java,
+	  src/main/java/cc/kune/core/server/mapper/DozerMapper.java,
+	  src/main/java/cc/kune/core/server/rpc/SiteRPC.java,
+	  src/main/java/cc/kune/core/shared/dto/GSpaceTheme.java,
+	  src/main/java/cc/kune/core/shared/dto/InitDataDTO.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorEntryPoint.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.ui.xml,
+	  src/main/java/cc/kune/gspace/client/GSpaceGinModule.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceParts.java,
+	  src/main/java/cc/kune/gspace/client/options/pscape,
+	  src/main/java/cc/kune/gspace/client/options/style,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsPublicSpaceConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsPublicSpaceConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsPublicSpaceConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsPublicSpaceConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/EntityOptionsStyleConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsPublicSpaceConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsPublicSpaceConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsPublicSpaceConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsPublicSpaceConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/GroupOptionsStyleConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsPublicSpaceConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsPublicSpaceConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsPublicSpaceConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsPublicSpaceConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConf.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/style/UserOptionsStyleConfView.java,
+	  src/main/java/cc/kune/gspace/client/resources/GSpaceArmorResources.java,
+	  src/main/java/cc/kune/gspace/client/resources/WsArmorResources.java,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmor.css,
+	  src/main/java/cc/kune/gspace/client/resources/gSpaceArmorTheme.css,
+	  src/main/java/cc/kune/gspace/client/resources/wsArmor.css,
+	  src/main/java/cc/kune/gspace/client/themes,
+	  src/main/java/cc/kune/gspace/client/themes/CurrentEntityTheme.java,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeChangeEvent.java,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeManager.java,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeSelectorPanel.java,
+	  src/main/java/cc/kune/gspace/client/themes/GSpaceThemeSelectorPresenter.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorItemPanel.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorItemPanel.ui.xml,
+	  src/main/java/cc/kune/gspace/public/css,
+	  src/main/java/cc/kune/gspace/public/kune-gspace.css,
+	  src/main/java/org/ourproject/kune/chat/client/ChatClientTool.java,
+	  src/main/java/org/ourproject/kune/gallery/client/GalleryClientTool.java,
+	  src/main/java/org/ourproject/kune/wiki/client/WikiClientTool.java,
+	  src/main/java/org/ourproject/kune/workspace/client/entityheader/EntityHeaderPanel.java,
+	  src/main/java/org/ourproject/kune/workspace/client/entityheader/EntityHeaderPresenter.java,
+	  src/main/java/org/ourproject/kune/workspace/client/entityheader/EntityHeaderView.java,
+	  src/main/java/org/ourproject/kune/workspace/client/licensewizard,
+	  src/main/java/org/ourproject/kune/workspace/client/oldsn,
+	  src/main/java/org/ourproject/kune/workspace/client/skel/Entity.java,
+	  src/main/java/org/ourproject/kune/workspace/client/skel/EntityWorkspace.java,
+	  src/main/java/org/ourproject/kune/workspace/client/skel/WorkspaceSkeleton.java,
+	  src/main/java/org/ourproject/kune/workspace/client/themes,
+	  src/main/java/org/ourproject/kune/workspace/client/tool/OldAbstractClientTool.java,
+	  src/main/java/org/ourproject/kune/workspace/client/tool/OldFoldableAbstractClientTool.java,
+	  src/main/resources/dozerBeanMapping.xml,
+	  src/main/resources/kune.properties,
+	  src/test/java/cc/kune/core/server/mapper/MapperTest.java,
+	  src/test/java/org/ourproject/kune/workspace/client/entityheader/EntityLogoPresenterTest.java:
+	  More styles
+
+2011-06-10 03:11  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1402] TODO, src/main/java/cc/kune/client/KuneGinjector.java,
+	  src/main/java/cc/kune/client/OnAppStartFactory.java,
+	  src/main/java/cc/kune/core/KuneCore.gwt.xml,
+	  src/main/java/cc/kune/core/client/CoreGinModule.java,
+	  src/main/java/cc/kune/core/client/actions/WaveExtension.java,
+	  src/main/java/cc/kune/core/client/actions/XMLActionsParser.java,
+	  src/main/webapp/others/kune-wave-extensions.xml: extensions via
+	  xml
+
+2011-06-09 21:04  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1401] INSTALL,
+	  src/main/java/cc/kune/barters/client/BartersClientTool.java,
+	  src/main/java/cc/kune/blogs/client/BlogsClientTool.java,
+	  src/main/java/cc/kune/chat/client/ChatClientTool.java,
+	  src/main/java/cc/kune/chat/client/ChatGinModule.java,
+	  src/main/java/cc/kune/chat/client/ChatGinjector.java,
+	  src/main/java/cc/kune/chat/client/ChatParts.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenChatAction.java,
+	  src/main/java/cc/kune/client/KuneEntryPoint.java,
+	  src/main/java/cc/kune/client/KuneGinjector.java,
+	  src/main/java/cc/kune/core/client/registry/ContentCapabilitiesRegistry.java,
+	  src/main/java/cc/kune/core/client/registry/EmptyMessagesRegistry.java,
+	  src/main/java/cc/kune/core/server/KuneRackModule.java,
+	  src/main/java/cc/kune/docs/client/DocsClientTool.java,
+	  src/main/java/cc/kune/gspace/client/tool/FoldableAbstractClientTool.java,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/main/java/cc/kune/meets/client/MeetingsClientTool.java,
+	  src/main/java/cc/kune/wiki/client/WikiClientTool.java: Some
+	  fixes/enhacments: in chat actions, empty message in folders,
+	  tools order
+
+2011-06-09 15:15  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1400]
+	  src/main/java/cc/kune/barters/server/BarterServerTool.java,
+	  src/main/java/cc/kune/blogs/server/BlogServerTool.java,
+	  src/main/java/cc/kune/chat/server/ChatManagerDefault.java,
+	  src/main/java/cc/kune/core/server/content/ContentManager.java,
+	  src/main/java/cc/kune/core/server/content/ContentManagerDefault.java,
+	  src/main/java/cc/kune/core/server/init/DatabaseInitializer.java,
+	  src/main/java/cc/kune/core/server/rpc/GroupRPC.java,
+	  src/main/java/cc/kune/core/server/rpc/UserRPC.java,
+	  src/main/java/cc/kune/core/server/state/StateServiceDefault.java,
+	  src/main/java/cc/kune/core/server/xmpp/XmppManager.java,
+	  src/main/java/cc/kune/core/server/xmpp/XmppManagerDefault.java,
+	  src/main/java/cc/kune/domain/Content.java,
+	  src/main/java/cc/kune/meets/server/MeetingServerTool.java,
+	  src/main/java/cc/kune/wiki/server/WikiServerTool.java,
+	  src/test/java/cc/kune/core/server/xmpp,
+	  src/test/java/cc/kune/core/server/xmpp/XmppManagerDefaultTest.java,
+	  src/test/java/org/ourproject/kune/chat/server/managers: chatroom
+	  creation check and content modification fix
+
+2011-06-09 12:25  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1399] src/main/java/cc/kune/chat/KuneChat.gwt.xml,
+	  src/main/java/cc/kune/chat/client/ChatClientTool.java,
+	  src/main/java/cc/kune/chat/client/ChatGinModule.java,
+	  src/main/java/cc/kune/chat/client/ChatGinjector.java,
+	  src/main/java/cc/kune/chat/client/ChatParts.java,
+	  src/main/java/cc/kune/chat/client/actions/ChatClientActions.java,
+	  src/main/java/cc/kune/chat/client/actions/GoParentChatBtn.java,
+	  src/main/java/cc/kune/chat/client/actions/NewRoomBtn.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenChatAction.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenRoomArchiveMenuItem.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenRoomBtn.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenRoomMenuItem.java,
+	  src/main/java/cc/kune/chat/server,
+	  src/main/java/cc/kune/chat/server/ChatManager.java,
+	  src/main/java/cc/kune/chat/server/ChatManagerDefault.java,
+	  src/main/java/cc/kune/chat/server/ChatServerModule.java,
+	  src/main/java/cc/kune/chat/server/ChatServerTool.java,
+	  src/main/java/cc/kune/chat/shared,
+	  src/main/java/cc/kune/chat/shared/ChatConstants.java,
+	  src/main/java/cc/kune/client/KuneEntryPoint.java,
+	  src/main/java/cc/kune/client/KuneGinjector.java,
+	  src/main/java/cc/kune/client/OnAppStartFactory.java,
+	  src/main/java/cc/kune/common/client/ui/dialogs/BasicTopDialog.java,
+	  src/main/java/cc/kune/common/client/ui/dialogs/PromptTopDialog.java,
+	  src/main/java/cc/kune/core/client/resources/CoreMessages.java,
+	  src/main/java/cc/kune/core/server/KuneRackModule.java,
+	  src/main/java/cc/kune/core/server/PlatformServerModule.java,
+	  src/main/java/cc/kune/core/server/rpc/ContentRPC.java,
+	  src/main/java/cc/kune/core/server/xmpp/XmppManager.java,
+	  src/main/java/cc/kune/core/server/xmpp/XmppManagerDefault.java,
+	  src/main/java/cc/kune/core/shared/dto/AbstractContentSimpleDTO.java,
+	  src/main/java/cc/kune/core/shared/dto/ContainerSimpleDTO.java,
+	  src/main/java/cc/kune/core/shared/dto/ContentSimpleDTO.java,
+	  src/main/java/cc/kune/gspace/client/actions/DelContainerMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/DelContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/OpenContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/SetAsHomePageMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPresenter.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/main/java/org/ourproject/kune/chat/client/ChatClientTool.java,
+	  src/main/java/org/ourproject/kune/chat/server,
+	  src/main/webapp/others,
+	  src/main/webapp/others/kune-wave-extensions.xml,
+	  src/test/java/cc/kune/core/server/integration/DatabaseInitializerTest.java,
+	  src/test/java/cc/kune/core/server/integration/IntegrationTestHelper.java,
+	  src/test/java/org/ourproject/kune/chat/ChatToolTest.java,
+	  src/test/java/org/ourproject/kune/chat/server/managers/XmppManagerDefaultTest.java:
+	  chatroom tool and extension via xml
+
+2011-06-01 22:07  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1397]
+	  src/main/java/cc/kune/blogs/client/actions/BlogsClientActions.java,
+	  src/main/java/cc/kune/chat/client/actions/ChatAboutContentBtn.java,
+	  src/main/java/cc/kune/docs/client/actions/DocsClientActions.java,
+	  src/main/java/cc/kune/wiki/client/actions/WikiClientActions.java,
+	  src/main/java/org/ourproject/kune/blogs: Chat about contents
+	  action
+
+2011-06-01 19:01  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1396] ., pom.xml,
+	  src/main/java/cc/kune/core/client/auth/SignInForm.java,
+	  src/test/java/cc/kune/selenium,
+	  src/test/java/cc/kune/selenium/KuneSeleniumDefaults.java,
+	  src/test/java/cc/kune/selenium/KuneSeleniumTest.java,
+	  src/test/java/cc/kune/selenium/PageObject.java,
+	  src/test/java/cc/kune/selenium/login,
+	  src/test/java/cc/kune/selenium/login/LoginPageObject.java,
+	  src/test/java/cc/kune/selenium/login/LoginSeleniumTests.java,
+	  src/test/java/cc/kune/selenium/testng.xml,
+	  src/test/java/cc/kune/selenium/tools,
+	  src/test/java/cc/kune/selenium/tools/AbstractWebTester.java,
+	  src/test/java/cc/kune/selenium/tools/GenericWebTester.java,
+	  src/test/java/cc/kune/selenium/tools/I18nHelper.java,
+	  src/test/java/cc/kune/selenium/tools/I18nHelperTest.java,
+	  src/test/java/cc/kune/selenium/tools/Lorem.java,
+	  src/test/java/cc/kune/selenium/tools/PageObjectModule.java,
+	  src/test/java/cc/kune/selenium/tools/SeleniumConstants.java,
+	  src/test/java/cc/kune/selenium/tools/SeleniumModule.java: More on
+	  selenium tests
+
+2011-05-15 22:23  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1395] logs: logout/login wave fixed
+
+2011-05-15 22:23  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1394] .,
+	  src/main/java/cc/kune/common/client/ui/EditableLabel.java,
+	  src/main/java/cc/kune/core/client/errors/ErrorHandler.java,
+	  src/main/java/cc/kune/domain/Content.java,
+	  src/main/java/cc/kune/gspace/client/resources/wsArmor.css,
+	  src/main/java/cc/kune/wave/client/WaveClientManager.java,
+	  src/main/java/cc/kune/wave/client/WebClient.java: logout/login
+	  wave fixed
+
+2011-05-15 18:10  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1393] pom.xml,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorViewImpl.java,
+	  src/main/java/cc/kune/core/server/KuneRackModule.java,
+	  src/main/java/cc/kune/core/server/manager/impl/GroupManagerDefault.java,
+	  src/main/java/cc/kune/core/server/properties/KunePropertiesDefault.java,
+	  src/main/java/cc/kune/wave/client/WaveStatusIndicator.java:
+	  Incomplete - task : kune properties as parameter
+	  And others minor fixes (wave reconnection checks session)
+
+2011-05-15 15:21  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1392] pom.xml: junit reenabled
+
+2011-05-15 15:11  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1391]
+	  src/main/java/cc/kune/common/client/ui/EditableLabel.java,
+	  src/main/java/cc/kune/core/client/init/AppStarterDefault.java,
+	  src/main/java/cc/kune/domain/Container.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContainerBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContentBtn.java,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentTitleWidget.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPresenter.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java:
+	  New contents notifications. Fetching issues...
+
+2011-05-15 10:58  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1390] src/main/java/cc/kune/core/public/ws.css: Rounded search
+
+2011-05-15 10:54  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1389]
+	  src/main/java/cc/kune/common/client/ui/EditableLabel.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContainerBtn.java,
+	  src/main/java/cc/kune/gspace/client/tags/TagsSummaryPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentTitleWidget.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/main/resources/log4j.dev.properties,
+	  src/main/resources/log4j.properties: Some feedback in folder
+	  creation
+
+2011-05-15 10:01  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1388] .classpath, logs, pom.xml,
+	  src/main/java/cc/kune/chat/client/KuneUnattendedPresenter.java,
+	  src/main/java/cc/kune/core/client/auth/RegisterForm.java,
+	  src/main/java/cc/kune/core/client/auth/SignInForm.java,
+	  src/main/java/cc/kune/core/client/resources/CoreMessages.java,
+	  src/main/java/cc/kune/core/server/content/ContentManagerDefault.java,
+	  src/main/java/cc/kune/core/server/rack/filters/LogFilter.java,
+	  src/main/java/cc/kune/wave/server/CustomSettingsBinder.java,
+	  src/main/resources/META-INF/persistence.xml,
+	  src/main/resources/log4j.dev.properties,
+	  src/main/resources/log4j.properties,
+	  src/test/java/cc/kune/core/server/TestHelper.java,
+	  src/test/java/cc/kune/core/server/integration/IntegrationTestHelper.java,
+	  src/test/java/cc/kune/core/server/integration/content/ContentServiceVariousTest.java:
+	  Some fixes, better logger conf and:
+	  NEW - # 53: Add Selenium Framework testing
+	  http://kune.ourproject.org/issues/ticket/53
+
+2011-05-13 15:23  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1387]
+	  src/main/java/cc/kune/barters/client/actions/BartersClientActions.java,
+	  src/main/java/cc/kune/barters/client/actions/NewFolderBtn.java,
+	  src/main/java/cc/kune/core/client/auth/SignInAbstractPresenter.java,
+	  src/main/java/cc/kune/core/client/state/ContentCacheDefault.java,
+	  src/main/java/cc/kune/core/client/state/StateManagerDefault.java,
+	  src/main/java/cc/kune/core/server/state/StateServiceDefault.java,
+	  src/main/java/cc/kune/gspace/client/options/GroupOptionsPresenter.java,
+	  src/main/java/cc/kune/wave/client/WebClient.java,
+	  src/main/java/cc/kune/wiki/client/actions/WikiClientActions.java:
+	  Some minor fixes
+
+2011-05-13 10:56  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1386] .classpath, pom.xml, script/css-update.sh, script/kune
+	  client -no-server.launch, script/mvn-eclipse.sh,
+	  src/main/java/cc/kune/core/server/manager/impl/UserManagerDefault.java,
+	  src/main/java/cc/kune/core/server/xmpp/XmppManagerDefault.java,
+	  src/main/resources/wave-server.properties,
+	  src/test/java/org/ourproject/kune/chat/server/managers/XmppManagerDefaultTest.java,
+	  src/test/java/org/ourproject/kune/chat/server/managers/XmppManagerTest.java:
+	  Chat welcome fixed, other updates to 0.0.8
+
+2011-05-12 16:52  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1383] COPYRIGHT, img/webtemplate/web_template-public.svg,
+	  pom.xml: 0.0.8
+
+2011-05-12 16:15  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1382] img/webtemplate/web_template-public.svg,
+	  src/main/java/cc/kune/core/client/init/AppStarterDefault.java,
+	  src/main/java/cc/kune/core/client/init/PrefetchUtilities.java,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/gspace/client/licensewizard/LicenseChangeAction.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptionsDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorItemPanel.java,
+	  src/main/java/cc/kune/gspace/client/ui/footer/license/EntityLicensePresenter.java,
+	  src/main/java/cc/kune/gspace/client/ui/footer/license/LicenseChangedEvent.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPresenter.java,
+	  src/main/java/cc/kune/pspace/client/PSpaceInDevelopment.java,
+	  src/main/java/cc/kune/pspace/client/PSpaceInDevelopment.ui.xml,
+	  src/main/java/cc/kune/pspace/client/PSpacePanel.java,
+	  src/main/java/cc/kune/pspace/client/PSpacePanel.ui.xml,
+	  src/main/java/cc/kune/pspace/client/PSpacePresenter.java,
+	  src/main/java/cc/kune/pspace/client/back-ps.jpg: PSpace in dev
+
+2011-05-12 01:33  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1381]
+	  src/main/java/cc/kune/common/client/notify/ConfirmAskEvent.java,
+	  src/main/java/cc/kune/common/client/notify/NotifyUser.java,
+	  src/main/java/cc/kune/core/client/init/AppStarterDefault.java,
+	  src/main/java/cc/kune/core/client/init/NavigatorSupport.java,
+	  src/main/java/cc/kune/core/client/notify/confirm/UserConfirmPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/GroupOptionsPresenter.java,
+	  src/main/java/cc/kune/msgs/client/UserMessage.java: Advice to
+	  unsupported navs
+
+2011-05-12 00:42  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1380] src/main/java/cc/kune/common/client/ui/IconLabel.java,
+	  src/main/java/cc/kune/core/client/init/AppStarterDefault.java,
+	  src/main/java/cc/kune/core/public/about.html,
+	  src/main/java/cc/kune/core/server/state/StateServiceDefault.java,
+	  src/test/java/cc/kune/core/server/integration/content/ContentServiceVariousTest.java,
+	  src/test/java/cc/kune/core/server/manager/file/ImageUtilsDefaultTest.java:
+	  some fixes
+
+2011-05-11 15:30  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1378] src/main/java/cc/kune/Kune.gwt.xml: iexplorer compilation
+	  enabled
+
+2011-05-11 14:13  Samer Hassan <samer2004@gmail.com>
+
+	* [r1377] CREDITS: Credits +Rana
+
+2011-05-11 09:09  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1376]
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfView.java:
+	  tool prefs bug fix
+
+2011-05-11 00:24  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1375]
+	  src/main/java/cc/kune/common/client/ui/dialogs/BasicDialog.ui.xml,
+	  src/main/java/cc/kune/common/client/ui/dialogs/wizard/WizardDialog.java,
+	  src/main/java/cc/kune/common/public/gxt-custom/css/gxt-op-common.css,
+	  src/main/java/cc/kune/common/public/kune-common.css,
+	  src/main/java/cc/kune/core/public/ws.css,
+	  src/main/java/cc/kune/gspace/client/licensewizard/LicenseWizardPanel.java,
+	  src/main/java/cc/kune/gspace/client/licensewizard/LicenseWizardPresenter.java,
+	  src/main/java/cc/kune/gspace/client/licensewizard/pages/LicenseWizardFirstForm.java,
+	  src/main/java/cc/kune/gspace/client/licensewizard/pages/LicenseWizardFrdForm.java,
+	  src/main/java/cc/kune/gspace/client/licensewizard/pages/LicenseWizardSndForm.java,
+	  src/main/java/cc/kune/gspace/client/licensewizard/pages/LicenseWizardTrdForm.java,
+	  src/main/java/cc/kune/gspace/client/options/GroupOptionsPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/license/EntityOptionsDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/pscape/EntityOptionsPublicSpaceConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfPanel.java:
+	  some fixes in dialogs
+
+2011-05-10 22:57  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1374]
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/EntityOptionsToolsConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptionsToolsConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptionsToolsConfPresenter.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorItemPresenter.java:
+	  Some bug fixes in tools
+
+2011-05-10 22:02  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1373] script/cloneTool.sh,
+	  src/main/java/cc/kune/gspace/client/options/GroupOptionsPresenter.java,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.java:
+	  set window title
+
+2011-05-10 21:49  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1372] Blogs, blogs, script/cloneTool.sh,
+	  src/main/java/cc/kune/Kune.gwt.xml,
+	  src/main/java/cc/kune/barters/server/BarterServerTool.java,
+	  src/main/java/cc/kune/client/KuneEntryPoint.java,
+	  src/main/java/cc/kune/client/KuneGinjector.java,
+	  src/main/java/cc/kune/core/client/actions/RolActionAutoUpdated.java,
+	  src/main/java/cc/kune/core/client/resources/nav/NavResources.java,
+	  src/main/java/cc/kune/core/client/resources/nav/calendar.png,
+	  src/main/java/cc/kune/core/client/resources/nav/calendar_add.png,
+	  src/main/java/cc/kune/core/server/KuneRackModule.java,
+	  src/main/java/cc/kune/domain/Content.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.ui.xml,
+	  src/main/java/cc/kune/meets,
+	  src/main/java/cc/kune/meets/KuneMeets.gwt.xml,
+	  src/main/java/cc/kune/meets/client,
+	  src/main/java/cc/kune/meets/client/MeetingsClientTool.java,
+	  src/main/java/cc/kune/meets/client/MeetingsGinModule.java,
+	  src/main/java/cc/kune/meets/client/MeetingsGinjector.java,
+	  src/main/java/cc/kune/meets/client/MeetingsParts.java,
+	  src/main/java/cc/kune/meets/client/actions,
+	  src/main/java/cc/kune/meets/client/actions/DelMeetingsMenuItem.java,
+	  src/main/java/cc/kune/meets/client/actions/GoParentFolderBtn.java,
+	  src/main/java/cc/kune/meets/client/actions/MeetingsClientActions.java,
+	  src/main/java/cc/kune/meets/client/actions/NewMeetingsBtn.java,
+	  src/main/java/cc/kune/meets/client/actions/OpenMeetingsMenuItem.java,
+	  src/main/java/cc/kune/meets/server,
+	  src/main/java/cc/kune/meets/server/MeetingServerModule.java,
+	  src/main/java/cc/kune/meets/server/MeetingServerTool.java,
+	  src/main/java/cc/kune/meets/shared,
+	  src/main/java/cc/kune/meets/shared/MeetingsConstants.java,
+	  src/main/java/cc/kune/wave/client/WebClient.java: meetings tool
+
+2011-05-10 19:13  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1371] img/nav-icons/barter.png, img/nav-icons/barter_add.png,
+	  img/nav-icons/suplentes/refresh-brown.png,
+	  src/main/java/cc/kune/Kune.gwt.xml,
+	  src/main/java/cc/kune/barters,
+	  src/main/java/cc/kune/barters/KuneBarters.gwt.xml,
+	  src/main/java/cc/kune/barters/client,
+	  src/main/java/cc/kune/barters/client/BartersClientTool.java,
+	  src/main/java/cc/kune/barters/client/BartersGinModule.java,
+	  src/main/java/cc/kune/barters/client/BartersGinjector.java,
+	  src/main/java/cc/kune/barters/client/BartersParts.java,
+	  src/main/java/cc/kune/barters/client/actions,
+	  src/main/java/cc/kune/barters/client/actions/BartersClientActions.java,
+	  src/main/java/cc/kune/barters/client/actions/DelBartersMenuItem.java,
+	  src/main/java/cc/kune/barters/client/actions/DelFolderMenuItem.java,
+	  src/main/java/cc/kune/barters/client/actions/GoParentFolderBtn.java,
+	  src/main/java/cc/kune/barters/client/actions/NewBartersBtn.java,
+	  src/main/java/cc/kune/barters/client/actions/NewFolderBtn.java,
+	  src/main/java/cc/kune/barters/client/actions/OpenBartersMenuItem.java,
+	  src/main/java/cc/kune/barters/server,
+	  src/main/java/cc/kune/barters/server/BarterServerModule.java,
+	  src/main/java/cc/kune/barters/server/BarterServerTool.java,
+	  src/main/java/cc/kune/barters/shared,
+	  src/main/java/cc/kune/barters/shared/BartersConstants.java,
+	  src/main/java/cc/kune/blogs/client/BlogsClientTool.java,
+	  src/main/java/cc/kune/blogs/server/BlogServerTool.java,
+	  src/main/java/cc/kune/client/KuneEntryPoint.java,
+	  src/main/java/cc/kune/client/KuneGinjector.java,
+	  src/main/java/cc/kune/core/client/resources/nav/NavResources.java,
+	  src/main/java/cc/kune/core/client/resources/nav/barter.png,
+	  src/main/java/cc/kune/core/client/resources/nav/barter_add.png,
+	  src/main/java/cc/kune/core/server/KuneRackModule.java,
+	  src/main/java/cc/kune/core/server/content/ContentManager.java,
+	  src/main/java/cc/kune/core/server/content/ContentManagerDefault.java,
+	  src/main/java/cc/kune/core/server/content/CreationServiceDefault.java,
+	  src/main/java/cc/kune/core/server/tool/ServerTool.java,
+	  src/main/java/cc/kune/core/server/tool/ServerWaveTool.java,
+	  src/main/java/cc/kune/core/server/utils/UrlUtils.java,
+	  src/main/java/cc/kune/docs/client/DocsClientTool.java,
+	  src/main/java/cc/kune/docs/server/DocumentServerTool.java,
+	  src/main/java/cc/kune/domain/Content.java,
+	  src/main/java/cc/kune/gspace/client/tool/AbstractClientTool.java,
+	  src/main/java/cc/kune/gspace/client/tool/FoldableAbstractClientTool.java,
+	  src/main/java/cc/kune/gspace/client/tool/old,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorItemPanel.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManager.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManagerDefault.java,
+	  src/main/java/cc/kune/wiki/client/WikiClientTool.java,
+	  src/main/java/org/ourproject/kune/blogs/client,
+	  src/main/java/org/ourproject/kune/chat/server/ChatServerTool.java,
+	  src/main/java/org/ourproject/kune/gallery/server/GalleryServerTool.java,
+	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java:
+	  barter tool
+
+2011-05-09 15:35  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1367] src/main/java/cc/kune/blogs/client/BlogsGinModule.java,
+	  src/main/java/cc/kune/blogs/client/BlogsGinjector.java,
+	  src/main/java/cc/kune/blogs/client/BlogsParts.java,
+	  src/main/java/cc/kune/blogs/client/actions/AbstractOptionsMenu.java,
+	  src/main/java/cc/kune/blogs/client/actions/DelBlogMenuItem.java,
+	  src/main/java/cc/kune/blogs/client/actions/DelPostMenuItem.java,
+	  src/main/java/cc/kune/blogs/client/actions/GoParentBlogBtn.java,
+	  src/main/java/cc/kune/blogs/client/actions/NewBlogBtn.java,
+	  src/main/java/cc/kune/blogs/client/actions/NewPostBtn.java,
+	  src/main/java/cc/kune/blogs/client/actions/OpenBlogMenuItem.java,
+	  src/main/java/cc/kune/blogs/shared/BlogsConstants.java,
+	  src/main/java/cc/kune/chat/client/ChatParts.java,
+	  src/main/java/cc/kune/chat/client/KuneHablarWidget.java,
+	  src/main/java/cc/kune/chat/client/actions/ChatSitebarActions.java,
+	  src/main/java/cc/kune/chat/client/actions/OpenGroupPublicChatRoomAction.java,
+	  src/main/java/cc/kune/chat/client/actions/StartChatWithMemberAction.java,
+	  src/main/java/cc/kune/chat/client/actions/StartChatWithThisBuddieAction.java,
+	  src/main/java/cc/kune/chat/client/actions/StartChatWithUserAction.java,
+	  src/main/java/cc/kune/chat/client/resources/ChatResources.java,
+	  src/main/java/cc/kune/chat/client/snd/KuneSoundManager.java,
+	  src/main/java/cc/kune/chat/client/snd/SndClickEvent.java,
+	  src/main/java/cc/kune/client/KuneGinModule.java,
+	  src/main/java/cc/kune/client/OnAppStartFactory.java,
+	  src/main/java/cc/kune/common/client/ExtendedGinModule.java,
+	  src/main/java/cc/kune/common/client/actions/ActionCollection.java,
+	  src/main/java/cc/kune/common/client/actions/ui/descrip/GuiActionDescrip.java,
+	  src/main/java/cc/kune/common/client/resources/SubMenuResources.java,
+	  src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
+	  src/main/java/cc/kune/common/client/tooltip/TooltipPosition.java,
+	  src/main/java/cc/kune/common/client/tooltip/TooltipPositionCalculator.java,
+	  src/main/java/cc/kune/common/client/tooltip/TooltipTimers.java,
+	  src/main/java/cc/kune/common/client/ui/EditEvent.java,
+	  src/main/java/cc/kune/common/client/ui/EditableLabel.java,
+	  src/main/java/cc/kune/common/client/ui/HasEditHandler.java,
+	  src/main/java/cc/kune/common/client/ui/UiUtils.java,
+	  src/main/java/cc/kune/common/client/utils/OnAcceptCallback.java,
+	  src/main/java/cc/kune/core/client/CoreParts.java,
+	  src/main/java/cc/kune/core/client/actions/ActionRegistryByType.java,
+	  src/main/java/cc/kune/core/client/actions/RolAction.java,
+	  src/main/java/cc/kune/core/client/actions/RolActionAutoUpdated.java,
+	  src/main/java/cc/kune/core/client/auth/WaveClientSimpleAuthenticator.java,
+	  src/main/java/cc/kune/core/client/events/AvatarChangedEvent.java,
+	  src/main/java/cc/kune/core/client/events/RenameContentEvent.java,
+	  src/main/java/cc/kune/core/client/resources/nav/NavResources.java,
+	  src/main/java/cc/kune/core/client/sitebar/AboutKuneDialog.java,
+	  src/main/java/cc/kune/core/client/sitebar/ErrorsDialog.java,
+	  src/main/java/cc/kune/core/client/sitebar/SiteUserOptions.java,
+	  src/main/java/cc/kune/core/client/sitebar/SitebarActions.java,
+	  src/main/java/cc/kune/core/client/sitebar/search/FormFeedback.java,
+	  src/main/java/cc/kune/core/client/sitebar/search/MultivalueSuggestBox.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/Space.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceConfEvent.java,
+	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectEvent.java,
+	  src/main/java/cc/kune/core/client/sn/AbstractSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/AbstractSNPresenter.java,
+	  src/main/java/cc/kune/core/client/sn/GroupSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/GroupSNPresenter.java,
+	  src/main/java/cc/kune/core/client/sn/UserSNPanel.java,
+	  src/main/java/cc/kune/core/client/sn/UserSNPresenter.java,
+	  src/main/java/cc/kune/core/client/sn/actions/AcceptJoinGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/AddNewBuddiesAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/ChangeToAdminAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/ChangeToCollabAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/DenyJoinGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/GotoGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/GotoMemberAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/GotoPersonAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/GotoYourHomePageAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/JoinGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/MembersModerationAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/MembersModerationMenuItem.java,
+	  src/main/java/cc/kune/core/client/sn/actions/MembersVisibilityAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/MembersVisibilityMenuItem.java,
+	  src/main/java/cc/kune/core/client/sn/actions/RemoveMemberAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/SNRolAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/SessionAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UnJoinGroupAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UserSNVisibilityAction.java,
+	  src/main/java/cc/kune/core/client/sn/actions/UserSNVisibilityMenuItem.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsCurrentStateAGroupCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsCurrentStateAPersonCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsCurrentStateAdministrableCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsCurrentStateEditableCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsGroupCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsLoggedCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsMeCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsNotMeCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsNotParticipantOfCurrentStateCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsPersonCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsVisibleCondition.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/AbstractSNActionsRegistry.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/AbstractSNMembersActionsRegistry.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNAdminsMenuItemsRegistry.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNCollabsMenuItemsRegistry.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNConfActions.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/GroupSNPendingsMenuItemsRegistry.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/UserSNConfActions.java,
+	  src/main/java/cc/kune/core/client/sn/actions/registry/UserSNMenuItemsRegistry.java,
+	  src/main/java/cc/kune/core/client/state/AccessRightsChangedEvent.java,
+	  src/main/java/cc/kune/core/client/state/ReservedWordsRegistry.java,
+	  src/main/java/cc/kune/core/client/state/TokenMatcher.java,
+	  src/main/java/cc/kune/core/client/state/TokenUtils.java,
+	  src/main/java/cc/kune/core/server/init/DatabaseInitializer.java,
+	  src/main/java/cc/kune/core/server/init/FinderRegistry.java,
+	  src/main/java/cc/kune/core/server/manager/file/FileGwtUploadAbstractServlet.java,
+	  src/main/java/cc/kune/core/server/manager/file/FileGwtUploadServlet.java,
+	  src/main/java/cc/kune/core/server/manager/impl/ContentConstants.java,
+	  src/main/java/cc/kune/core/shared/ToolConstants.java,
+	  src/main/java/cc/kune/core/shared/dto/HasContent.java,
+	  src/main/java/cc/kune/core/shared/dto/WaveClientParams.java,
+	  src/main/java/cc/kune/docs/client/DocsGinModule.java,
+	  src/main/java/cc/kune/docs/client/DocsGinjector.java,
+	  src/main/java/cc/kune/docs/client/DocsParts.java,
+	  src/main/java/cc/kune/docs/client/actions/DelDocMenuItem.java,
+	  src/main/java/cc/kune/docs/client/actions/DelFolderMenuItem.java,
+	  src/main/java/cc/kune/docs/client/actions/GoParentFolderBtn.java,
+	  src/main/java/cc/kune/docs/client/actions/NewDocBtn.java,
+	  src/main/java/cc/kune/docs/client/actions/NewFolderBtn.java,
+	  src/main/java/cc/kune/docs/client/actions/OpenDocMenuItem.java,
+	  src/main/java/cc/kune/docs/shared/DocsConstants.java,
+	  src/main/java/cc/kune/domain/finders/GroupFinder.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceGinjector.java,
+	  src/main/java/cc/kune/gspace/client/GSpaceParts.java,
+	  src/main/java/cc/kune/gspace/client/actions/ActionGroups.java,
+	  src/main/java/cc/kune/gspace/client/actions/ContentViewerOptionsMenu.java,
+	  src/main/java/cc/kune/gspace/client/actions/DelContainerMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/DelContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/GoParentContainerBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContainerBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/NewContentBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/OpenContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/ParticipateInContentBtn.java,
+	  src/main/java/cc/kune/gspace/client/actions/RefreshContentMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/actions/RenameListener.java,
+	  src/main/java/cc/kune/gspace/client/actions/SetAsHomePageMenuItem.java,
+	  src/main/java/cc/kune/gspace/client/licensewizard/LicenseChooseCallback.java,
+	  src/main/java/cc/kune/gspace/client/options/EntityOptionsTabView.java,
+	  src/main/java/cc/kune/gspace/client/options/GroupOptionsCollection.java,
+	  src/main/java/cc/kune/gspace/client/options/UserOptionsCollection.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptionsDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/license/GroupOptionsDefLicenseView.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptionsDefLicensePanel.java,
+	  src/main/java/cc/kune/gspace/client/options/license/UserOptionsDefLicenseView.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/CurrentLogoChangedEvent.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/GroupOptionsLogoView.java,
+	  src/main/java/cc/kune/gspace/client/options/logo/UserOptionsLogoView.java,
+	  src/main/java/cc/kune/gspace/client/options/pscape/GroupOptionsPublicSpaceConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/pscape/GroupOptionsPublicSpaceConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/pscape/UserOptionsPublicSpaceConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/pscape/UserOptionsPublicSpaceConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/GroupOptionsToolsConfView.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptionsToolsConfPanel.java,
+	  src/main/java/cc/kune/gspace/client/options/tools/UserOptionsToolsConfView.java,
+	  src/main/java/cc/kune/gspace/client/style/ClearBackImageEvent.java,
+	  src/main/java/cc/kune/gspace/client/style/SetBackImageEvent.java,
+	  src/main/java/cc/kune/gspace/client/tool/ContentViewer.java,
+	  src/main/java/cc/kune/gspace/client/tool/ContentViewerSelector.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolResources.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorItemPanel.java,
+	  src/main/java/cc/kune/gspace/client/tool/selector/ToolSelectorPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentTitleWidget.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/ContentViewerPresenter.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderItemWidget.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsFlowPanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java,
+	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java,
+	  src/main/java/cc/kune/gspace/client/viewers/NoHomePageViewer.java,
+	  src/main/java/cc/kune/msgs/client/resources/UserMessageImagesUtil.java,
+	  src/main/java/cc/kune/pspace/client/PSpaceParts.java,
+	  src/main/java/cc/kune/wave/client/WaveClientClearEvent.java,
+	  src/main/java/cc/kune/wave/client/WaveClientManager.java,
+	  src/main/java/cc/kune/wave/client/WaveParts.java,
+	  src/main/java/cc/kune/wave/client/WaveStatusIndicator.java,
+	  src/main/java/cc/kune/wave/server/CustomAuthenticationServlet.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManager.java,
+	  src/main/java/cc/kune/wave/server/KuneWaveManagerDefault.java,
+	  src/main/java/cc/kune/wave/server/ParticipantUtils.java,
+	  src/main/java/cc/kune/wiki/client/WikiGinModule.java,
+	  src/main/java/cc/kune/wiki/client/WikiGinjector.java,
+	  src/main/java/cc/kune/wiki/client/WikiParts.java,
+	  src/main/java/cc/kune/wiki/client/actions/DelFolderMenuItem.java,
+	  src/main/java/cc/kune/wiki/client/actions/DelWikiMenuItem.java,
+	  src/main/java/cc/kune/wiki/client/actions/GoParentFolderBtn.java,
+	  src/main/java/cc/kune/wiki/client/actions/NewFolderBtn.java,
+	  src/main/java/cc/kune/wiki/client/actions/NewWikiBtn.java,
+	  src/main/java/cc/kune/wiki/client/actions/OpenWikiMenuItem.java,
+	  src/main/java/cc/kune/wiki/shared/WikiConstants.java,
+	  src/test/java/cc/kune/common/client/actions/ui/descrip/AbstractGuiActionDescripTest.java,
+	  src/test/java/cc/kune/common/client/tooltip/TooltipPositionCalculatorTest.java,
+	  src/test/java/cc/kune/common/client/tooltip/TooltipTimersTest.java,
+	  src/test/java/cc/kune/core/client/actions/ActionRegistryByTypeBorrarTest.java,
+	  src/test/java/cc/kune/core/client/sn/actions/conditions/IsNotMeConditionTest.java,
+	  src/test/java/cc/kune/core/client/state/TokenMatcherTest.java,
+	  src/test/java/cc/kune/core/server/TestConstants.java,
+	  src/test/java/cc/kune/gspace/client/viewers/FolderViewerPresenterTest.java,
+	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java,
+	  src/test/java/cc/kune/wave/server/WaveServiceTest.java: more
+	  copyrights
+
+2011-05-09 15:13  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+
+	* [r1366] COPYRIGHT, CREDITS, ChangeLog,
+	  img/kune-intro-group-t.png, img/kune-intro-logo.png,
+	  img/kune-intro-orgs-t.png, img/kune-intro-orgs.png,
+	  img/kune-intro-user-t.png, img/kune-intro-world-t.png,
+	  img/kune-intro.svg, script/header.html,
+	  src/main/java/cc/kune/core/public/about.html,
+	  src/main/java/cc/kune/core/public/frame-def.css: intro and about
+	  updated
+
 2011-05-08 21:13  Samer Hassan <samer2004@gmail.com>
 
 	* [r1361] DEV-GUIDE: Clarified the need of the INSTALL guide in
@@ -7,7 +2016,7 @@
 
 	* [r1359] COPYRIGHT, CREDITS: Credits and Copyright revisited
 
-2011-05-07 18:46  vjrj_
+2011-05-07 18:46  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1358] HOWTO_ADD_A_NEW_TOOL, img/kune-intro-group.png,
 	  img/kune-intro-user.png, img/kune-intro-world.png,
@@ -20,7 +2029,7 @@
 	  src/main/java/cc/kune/core/public/images/kune-intro-world.png,
 	  src/main/java/cc/kune/core/public/ws.html: kune intro
 
-2011-05-07 15:55  vjrj_
+2011-05-07 15:55  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1357]
 	  src/main/java/cc/kune/common/client/notify/ConfirmAskEvent.java,
@@ -87,7 +2096,7 @@
 	  src/test/java/org/ourproject/kune/workspace/client/licensewizard:
 	  License widget
 
-2011-05-06 20:13  vjrj_
+2011-05-06 20:13  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1356] .classpath, README_FIRST, pom.xml, script/mvn-eclipse.sh,
 	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorPresenter.java,
@@ -137,7 +2146,7 @@
 	  src/test/java/org/ourproject/kune/workspace/client/socialnet/SNRolActionTest.java:
 	  Better uploader
 
-2011-05-06 14:45  vjrj_
+2011-05-06 14:45  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1355]
 	  src/main/java/cc/kune/chat/client/actions/AddAsBuddieHeaderButton.java,
@@ -147,7 +2156,7 @@
 	  src/main/java/cc/kune/core/client/sn/actions/AddNewBuddiesAction.java:
 	  Add buddie action workaround
 
-2011-05-06 14:30  vjrj_
+2011-05-06 14:30  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1354] src/main/java/cc/kune/core/client/sn/UserSNPanel.java,
 	  src/main/java/cc/kune/core/client/sn/UserSNPresenter.java,
@@ -159,7 +2168,7 @@
 	  src/main/java/org/ourproject/kune/workspace/client/nohomepage: No
 	  Home Page
 
-2011-05-06 12:42  vjrj_
+2011-05-06 12:42  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1353] src/main/java/cc/kune/Kune.gwt.xml,
 	  src/main/java/cc/kune/core/client/state/StateManagerDefault.java,
@@ -172,7 +2181,7 @@
 	  src/main/java/cc/kune/wave/client/WebClient.ui.xml: Webclient
 	  multiple workaround
 
-2011-05-06 02:36  vjrj_
+2011-05-06 02:36  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1352] src/main/java/cc/kune/Kune.gwt.xml,
 	  src/main/java/cc/kune/blogs/client/actions/NewBlogBtn.java,
@@ -221,7 +2230,7 @@
 	  src/test/java/cc/kune/wiki/server/WikiServerToolTest.java,
 	  src/test/java/org/ourproject/kune/wiki/server: Wiki tool
 
-2011-05-06 01:29  vjrj_
+2011-05-06 01:29  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1351] src/main/java/cc/kune/core/client/sn/GroupSNPanel.java,
 	  src/main/java/cc/kune/gspace/client/GSpaceArmor.java,
@@ -230,7 +2239,7 @@
 	  src/main/java/cc/kune/gspace/client/resources/wsArmor.css: Tools
 	  up!
 
-2011-05-06 01:13  vjrj_
+2011-05-06 01:13  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1350] script/mvn-vars.sh,
 	  src/main/java/cc/kune/core/client/sn/AbstractSNPanel.java,
@@ -243,7 +2252,7 @@
 	  src/main/java/cc/kune/gspace/public/images/styles,
 	  src/main/java/cc/kune/gspace/public/styles: Armor changes
 
-2011-05-05 23:52  vjrj_
+2011-05-05 23:52  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1349] src/main/java/cc/kune/blogs/client/BlogsClientTool.java,
 	  src/main/java/cc/kune/blogs/client/BlogsParts.java,
@@ -293,7 +2302,7 @@
 	  src/test/java/cc/kune/gspace/client/viewers/FolderViewerPresenterTest.java:
 	  Folder navigator and some fixes
 
-2011-05-05 16:19  vjrj_
+2011-05-05 16:19  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1347]
 	  src/main/java/cc/kune/common/client/ui/dialogs/BasicDialog.java,
@@ -310,7 +2319,7 @@
 	  src/test/java/cc/kune/core/server/integration/content/ContentServiceSaveTest.java,
 	  src/test/java/org/ourproject/kune/rack: Options UI and test fixes
 
-2011-05-05 14:46  vjrj_
+2011-05-05 14:46  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1346] img/kune-intro-min.png, img/kune-intro.svg,
 	  src/main/java/cc/kune/core/client/rpcservices/ContentService.java,
@@ -345,7 +2354,7 @@
 	  src/test/java/cc/kune/core/server/mapper/MapperTest.java: Changes
 	  in db domain, some other fixes
 
-2011-05-05 03:41  vjrj_
+2011-05-05 03:41  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1345]
 	  src/main/java/cc/kune/common/client/actions/gwtui/GwtIconLabelGui.java,
@@ -356,7 +2365,7 @@
 	  src/main/java/org/ourproject/kune/app/public/images/styles: Some
 	  style fixes
 
-2011-05-05 03:14  vjrj_
+2011-05-05 03:14  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1344] src/main/java/cc/kune/common/public/kune-common.css,
 	  src/main/java/cc/kune/core/public/ws.css,
@@ -364,7 +2373,7 @@
 	  src/main/java/cc/kune/gspace/client/viewers/ContentTitleWidget.java:
 	  Some style fixes
 
-2011-05-05 02:24  vjrj_
+2011-05-05 02:24  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1343]
 	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtButtonGui.java,
@@ -395,7 +2404,7 @@
 	  src/main/java/cc/kune/wave/client/WebClient.java: Some style
 	  fixes
 
-2011-05-05 01:45  vjrj_
+2011-05-05 01:45  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1342] pom.xml,
 	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtButtonGui.java,
@@ -417,12 +2426,12 @@
 	  src/main/java/cc/kune/wave/client/WaveStatusIndicator.java: Minor
 	  fixes in icons and search textbox
 
-2011-05-04 20:47  vjrj_
+2011-05-04 20:47  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1341] src/main/java/cc/kune/domain/Content.java: Fixing some
 	  tests
 
-2011-05-04 20:29  vjrj_
+2011-05-04 20:29  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1340]
 	  src/main/java/cc/kune/chat/client/actions/AddAsBuddieHeaderButton.java,
@@ -470,7 +2479,7 @@
 	  src/main/java/org/ourproject/kune/workspace/client/oldsn/other/AddAsBuddieHeaderButton.java:
 	  search of users & groups
 
-2011-05-04 15:18  vjrj_
+2011-05-04 15:18  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1339] src/main/java/cc/kune/core/client/sitebar/search,
 	  src/main/java/cc/kune/core/client/sitebar/search/SiteSearch.java,
@@ -483,7 +2492,7 @@
 	  src/main/java/org/ourproject/kune/workspace/client/sitebar/sitesearch/SiteSearchView.java:
 	  site search work in progress
 
-2011-05-03 17:09  vjrj_
+2011-05-03 17:09  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1338]
 	  src/main/java/cc/kune/core/client/sitebar/ErrorsDialog.java,
@@ -494,7 +2503,7 @@
 	  src/main/java/cc/kune/wave/client/WebClient.java: Minor changes
 	  in Wave editor and minor fixes
 
-2011-05-03 13:30  vjrj_
+2011-05-03 13:30  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1337]
 	  src/main/java/cc/kune/core/client/sn/GroupSNPresenter.java,
@@ -505,13 +2514,13 @@
 	  src/main/java/cc/kune/gspace/client/viewers/DocViewerPanel.java:
 	  Fixes in domain, and wiab editor
 
-2011-05-03 11:32  vjrj_
+2011-05-03 11:32  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1336]
 	  src/main/java/cc/kune/common/client/ui/dialogs/BasicTopDialog.java:
 	  Minor change
 
-2011-05-03 11:29  vjrj_
+2011-05-03 11:29  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1335]
 	  src/main/java/cc/kune/blogs/client/actions/BlogsClientActions.java,
@@ -537,7 +2546,7 @@
 	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java:
 	  Wave participation, and dialogs size (continuation)
 
-2011-05-03 08:22  vjrj_
+2011-05-03 08:22  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1334]
 	  src/main/java/cc/kune/blogs/client/actions/AbstractOptionsMenu.java,
@@ -593,7 +2602,7 @@
 	  src/test/java/org/ourproject/kune/testhelper: More actions, error
 	  dialog, participate action (work in progress)
 
-2011-04-29 14:42  vjrj_
+2011-04-29 14:42  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1333]
 	  src/main/java/cc/kune/blogs/client/actions/BlogsClientActions.java,
@@ -606,7 +2615,7 @@
 	  src/main/java/cc/kune/gspace/client/options/UserOptionsPanel.java:
 	  Some more content actions
 
-2011-04-29 13:26  vjrj_
+2011-04-29 13:26  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1332]
 	  src/main/java/cc/kune/common/client/ui/EditableLabel.java,
@@ -614,7 +2623,7 @@
 	  src/main/java/cc/kune/gspace/client/viewers/DocViewerPanel.java:
 	  Minor fix (root cannot be renamed)
 
-2011-04-29 13:16  vjrj_
+2011-04-29 13:16  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1331]
 	  src/main/java/cc/kune/common/client/ui/dialogs/BasicDialog.java,
@@ -623,7 +2632,7 @@
 	  src/main/java/cc/kune/core/client/notify/confirm/UserConfirmPanel.java:
 	  Fix with dialog buttons refactorization
 
-2011-04-29 12:57  vjrj_
+2011-04-29 12:57  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1330] src/main/java/cc/kune/gspace/client/GSpaceGinModule.java,
 	  src/main/java/cc/kune/gspace/client/viewers/AbstractFolderViewerPanel.java,
@@ -632,7 +2641,7 @@
 	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java,
 	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerPresenter.java:
 
-2011-04-29 12:02  vjrj_
+2011-04-29 12:02  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1329] README_FIRST, TODO, TODO_done, img/kune-intro.png,
 	  img/kune-intro.svg,
@@ -659,7 +2668,7 @@
 	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java:
 	  Content renaming
 
-2011-04-28 19:05  vjrj_
+2011-04-28 19:05  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1328]
 	  src/main/java/cc/kune/core/client/sitebar/SitebarSignOutLink.java,
@@ -667,7 +2676,7 @@
 	  src/main/java/cc/kune/core/client/state/SessionDefault.java:
 	  Session expiration improved
 
-2011-04-28 18:56  vjrj_
+2011-04-28 18:56  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1327] src/main/java/cc/kune/core/public/ws.css,
 	  src/main/java/cc/kune/gspace/client/GSpaceArmorImpl.java,
@@ -678,7 +2687,7 @@
 	  src/main/java/cc/kune/wave/client/WebClient.java: WIAB editor in
 	  GSpace
 
-2011-04-28 18:00  vjrj_
+2011-04-28 18:00  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1326] script/repopubli.sh,
 	  src/main/java/cc/kune/chat/client/snd/SndClickEvent.java,
@@ -699,7 +2708,7 @@
 	  src/main/java/cc/kune/wave/server/WaveMain.java: WIAB updated,
 	  minor fixes
 
-2011-04-28 13:50  vjrj_
+2011-04-28 13:50  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1325] dev-utils/kune.formatter.eclipse.preferences.xml,
 	  script/repopubli.sh,
@@ -724,7 +2733,7 @@
 	  src/main/java/cc/kune/gspace/client/viewers/FolderViewerAsTablePanel.java:
 	  Minor style issues
 
-2011-04-28 00:56  vjrj_
+2011-04-28 00:56  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1324] .classpath, .project, infinitest.filters,
 	  script/mvn-eclipse.sh,
@@ -885,12 +2894,12 @@
 	  src/test/java/org/ourproject/kune/blogs,
 	  src/test/java/org/ourproject/kune/docs: User and groups options
 
-2011-04-27 20:48  vjrj_
+2011-04-27 20:48  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1323] src/main/resources/db/update-0015-waveid.sql: Wave typeid
 	  removed
 
-2011-04-27 15:32  vjrj_
+2011-04-27 15:32  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1322] .codepro, .codepro/deadCodeEntryPoints.xml, .project,
 	  src/main/java/cc/kune/Kune.gwt.xml,
@@ -963,7 +2972,7 @@
 	  src/test/java/org/ourproject/kune/platf/client/ui/dialogs/upload/FileUploaderPresenterTest.java:
 	  More blogs/docs and WIAB integration work
 
-2011-04-26 19:57  vjrj_
+2011-04-26 19:57  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1321] src/main/java/cc/kune/Kune.gwt.xml,
 	  src/main/java/cc/kune/blogs,
@@ -1037,7 +3046,7 @@
 	  src/test/java/cc/kune/blogs/server/BlogServerToolTest.java,
 	  src/test/java/org/ourproject/kune/blogs/server: Blog tool added
 
-2011-04-26 11:38  vjrj_
+2011-04-26 11:38  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1320]
 	  src/main/java/cc/kune/common/client/actions/ui/descrip/AbstractGuiActionDescrip.java,
@@ -1066,7 +3075,7 @@
 	  src/test/java/cc/kune/core/server/integration/content/ContentServiceSaveTest.java:
 	  Actions groups revisited
 
-2011-04-26 09:28  vjrj_
+2011-04-26 09:28  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1319]
 	  src/main/java/cc/kune/common/client/actions/ui/descrip/AbstractGuiActionDescrip.java,
@@ -1127,7 +3136,7 @@
 	  src/test/java/cc/kune/core/client/actions/ActionRegistryByTypeTest.java:
 	  Delete actions
 
-2011-04-25 17:07  vjrj_
+2011-04-25 17:07  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1318]
 	  src/main/java/cc/kune/chat/client/KuneUnattendedPresenter.java,
@@ -1149,7 +3158,7 @@
 	  src/main/java/cc/kune/docs/client/viewers/FolderViewerPresenter.java:
 	  FolderViewer as Table
 
-2011-04-18 17:25  vjrj_
+2011-04-18 17:25  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1317] src/main/java/cc/kune/common/KuneCommon.gwt.xml,
 	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtButtonGui.java,
@@ -1168,7 +3177,7 @@
 	  src/main/java/cc/kune/msgs/KuneMsgs.gwt.xml,
 	  src/main/java/cc/kune/wave/KuneWave.gwt.xml: More work in docs
 
-2011-04-18 11:45  vjrj_
+2011-04-18 11:45  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1316]
 	  src/main/java/cc/kune/common/client/actions/ui/descrip/AbstractGuiActionDescrip.java,
@@ -1199,7 +3208,7 @@
 	  src/main/java/cc/kune/wave/server/CustomUserRegistrationServlet.java,
 	  src/main/java/cc/kune/wave/server/WaveMain.java: New docs actions
 
-2011-04-18 00:41  vjrj_
+2011-04-18 00:41  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1315] src/main/java/cc/kune/client/KuneGinjector.java,
 	  src/main/java/cc/kune/client/OnAppStartFactory.java,
@@ -1295,7 +3304,7 @@
 	  src/test/java/org/ourproject/kune/platf/client/ui/dialogs/upload/FileUploaderPresenterTest.java:
 	  Folder Viewer
 
-2011-04-17 19:25  vjrj_
+2011-04-17 19:25  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1314] src/main/java/cc/kune/chat/client/ChatClientDefault.java,
 	  src/main/java/cc/kune/client/KuneEntryPoint.java,
@@ -1414,7 +3423,7 @@
 	  src/test/java/cc/kune/gspace/client/tool/selector/ToolSelectorPresenterTest.java:
 	  Doc viewer
 
-2011-04-16 10:50  vjrj_
+2011-04-16 10:50  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1313] doc/kune-tools-and-functionality-summary.ods, pom.xml,
 	  script/mvn-eclipse.sh, script/repopubli.sh,
@@ -1430,7 +3439,7 @@
 	  src/main/java/org/waveprotocol/box/server/rpc/CustomServerRpcProvider.java:
 	  WIAB Updated
 
-2011-04-14 14:15  vjrj_
+2011-04-14 14:15  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1312] src/main/java/cc/kune/common/client/tooltip/Tooltip.java,
 	  src/main/java/cc/kune/common/client/tooltip/TooltipPosition.java,
@@ -1475,7 +3484,7 @@
 	  others
 	  http://kune.ourproject.org/issues/ticket/37
 
-2011-04-13 15:41  vjrj_
+2011-04-13 15:41  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1311]
 	  src/main/java/cc/kune/core/server/init/DatabaseInitializer.java,
@@ -1494,7 +3503,7 @@
 	  src/test/java/cc/kune/wave/server/KuneWaveManagerDefaultTest.java:
 	  WIAB in server doc manager
 
-2011-04-13 08:57  vjrj_
+2011-04-13 08:57  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1309]
 	  src/main/java/cc/kune/common/client/tooltip/TooltipTimersTest.java,
@@ -1503,7 +3512,7 @@
 	  others
 	  http://kune.ourproject.org/issues/ticket/37
 
-2011-04-13 08:48  vjrj_
+2011-04-13 08:48  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1308]
 	  src/main/java/cc/kune/common/client/actions/gwtui/AbstractGwtMenuItemGui.java,
@@ -1523,7 +3532,7 @@
 	  others
 	  http://kune.ourproject.org/issues/ticket/37
 
-2011-04-12 18:38  vjrj_
+2011-04-12 18:38  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1307] src/main/java/cc/kune/chat/client/ChatClientDefault.java,
 	  src/main/java/cc/kune/chat/client/KuneChatNotifier.java,
@@ -1624,7 +3633,7 @@
 	  others
 	  http://kune.ourproject.org/issues/ticket/37
 
-2011-04-06 10:51  vjrj_
+2011-04-06 10:51  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1306] src/main/java/cc/kune/client/KuneEntryPoint.java,
 	  src/main/java/cc/kune/core/client/init/AppStarterDefault.java,
@@ -1636,7 +3645,7 @@
 	  src/test/java/cc/kune/core/client/state/StateManagerDefaultTest.java:
 	  Some minor fixes in startup
 
-2011-04-06 01:22  vjrj_
+2011-04-06 01:22  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1305] ., INSTALL,
 	  src/main/java/cc/kune/client/KuneEntryPoint.java,
@@ -1666,7 +3675,7 @@
 	  35: Spaces selector integration with login/logout and history
 	  http://kune.ourproject.org/issues/ticket/35
 
-2011-04-03 23:58  vjrj_
+2011-04-03 23:58  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1304]
 	  src/main/java/cc/kune/core/client/auth/SignInAbstractPresenter.java,
@@ -1681,7 +3690,7 @@
 	  selector integration with login/logout and history
 	  http://kune.ourproject.org/issues/ticket/35
 
-2011-04-03 22:48  vjrj_
+2011-04-03 22:48  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1303] src/main/java/cc/kune/chat/client/ChatClientDefault.java,
 	  src/main/java/cc/kune/chat/client/ChatParts.java,
@@ -1756,7 +3765,7 @@
 	  history
 	  http://kune.ourproject.org/issues/ticket/35
 
-2011-04-03 10:41  vjrj_
+2011-04-03 10:41  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1302] .classpath, pom.xml,
 	  src/main/java/cc/kune/core/client/sitebar/spaces/SpaceSelectorPresenter.java,
@@ -1767,7 +3776,7 @@
 	  history
 	  http://kune.ourproject.org/issues/ticket/35
 
-2011-04-01 22:07  vjrj_
+2011-04-01 22:07  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1301] .classpath, pom.xml, script/mvn-eclipse.sh,
 	  src/main/java/cc/kune/Kune.gwt.xml,
@@ -1810,7 +3819,7 @@
 	  history
 	  http://kune.ourproject.org/issues/ticket/35
 
-2011-03-30 14:56  vjrj_
+2011-03-30 14:56  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1300] ., .classpath, .project, TODO, bin, pom.xml,
 	  script/css-update.sh, script/mvn-eclipse.sh,
@@ -1907,7 +3916,7 @@
 	  src/test/java/testsuites/OthersTestSuite.java: WIAB and tools
 	  updated
 
-2011-03-25 22:16  vjrj_
+2011-03-25 22:16  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1299] src/test/java/cc/kune/core/server/TestHelper.java,
 	  src/test/java/cc/kune/core/server/access/AccessRightsServiceTest.java,
@@ -1963,14 +3972,14 @@
 	  src/test/java/testsuites/OthersTestSuite.java: server
 	  refactorization
 
-2011-03-25 21:39  vjrj_
+2011-03-25 21:39  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1297]
 	  src/test/java/cc/kune/core/server/manager/file/EntityLogoUploadManagerTest.java,
 	  src/test/java/cc/kune/core/server/manager/file/ImageUtilsDefaultTest.java:
 	  Some test fixed after refactorization
 
-2011-03-25 20:39  vjrj_
+2011-03-25 20:39  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1296] src/main/java/cc/kune/core/client/ui/footer,
 	  src/main/java/cc/kune/gspace/client/entitytools,
@@ -1989,12 +3998,12 @@
 	  src/test/java/org/ourproject/kune/workspace/client/sitebar:
 	  deleted empty packages
 
-2011-03-25 20:22  vjrj_
+2011-03-25 20:22  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1295] src/main/java/cc/kune/pspace/client/PSpaceParts.java:
 	  server refactorization
 
-2011-03-25 20:21  vjrj_
+2011-03-25 20:21  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1294] .classpath, TODO, TROUBLESHOOT,
 	  src/main/java/cc/kune/core/server,
@@ -2345,7 +4354,7 @@
 	  src/test/java/testsuites/ServerTestSuite.java: server
 	  refactorization
 
-2011-03-25 12:43  vjrj_
+2011-03-25 12:43  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1293] src/main/java/cc/kune/client/KuneEntryPoint.java,
 	  src/main/java/cc/kune/client/KuneGinjector.java,
@@ -2466,7 +4475,7 @@
 	  src/test/java/cc/kune/gspace/client/tool/ToolSelectorPresenterTest.java,
 	  src/test/java/testsuites/OthersTestSuite.java: Tools refactoring
 
-2011-03-24 23:10  vjrj_
+2011-03-24 23:10  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1291] DEV-GUIDE, TODO, TODO_done,
 	  img/webtemplate/web_template-2011.svg, pom.xml,
@@ -2555,13 +4564,13 @@
 	  src/test/java/testsuites/OthersTestSuite.java: Tool widget and
 	  minor changes
 
-2011-03-22 13:35  vjrj_
+2011-03-22 13:35  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1290]
 	  src/main/java/org/ourproject/kune/platf/server/manager/impl/UserManagerDefault.java:
 	  Somte test fixed
 
-2011-03-22 12:36  vjrj_
+2011-03-22 12:36  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1289] INSTALL,
 	  src/main/java/cc/kune/core/client/state/StateManagerDefault.java,
@@ -2575,7 +4584,7 @@
 	  src/test/java/org/ourproject/kune/platf/server/manager/UserManagerTest.java:
 	  Some test fixed
 
-2011-03-22 10:21  vjrj_
+2011-03-22 10:21  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1288] INSTALL, TODO,
 	  src/main/java/org/ourproject/kune/platf/server/manager/TagUserContentManager.java,
@@ -2584,19 +4593,19 @@
 	  src/test/java/org/ourproject/kune/platf/server/manager/TagUserContentTest.java:
 	  Some test fixed, more doc
 
-2011-03-21 10:10  vjrj_
+2011-03-21 10:10  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1287] pom.xml: pom report fixes
 
-2011-03-19 01:20  vjrj_
+2011-03-19 01:20  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1286] pom.xml: pom.xml updated
 
-2011-03-19 00:45  vjrj_
+2011-03-19 00:45  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1285] pom.xml: pom.xml updated
 
-2011-03-18 22:56  vjrj_
+2011-03-18 22:56  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1284] DEV-GUIDE, TODO, pom.xml,
 	  src/main/java/org/ourproject/kune/platf/server/manager/impl/UserManagerDefault.java,
@@ -2604,13 +4613,13 @@
 	  src/test/java/org/ourproject/kune/platf/server/TestHelper.java:
 	  Some tests fixed, more doc
 
-2011-03-18 09:12  vjrj_
+2011-03-18 09:12  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1283] DEV-GUIDE, INSTALL,
 	  src/main/java/cc/kune/core/client/auth/SignInForm.java: Doc
 	  updated
 
-2011-03-17 18:24  vjrj_
+2011-03-17 18:24  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1282]
 	  src/main/java/cc/kune/core/client/tags/TagsSummaryPanel.java,
@@ -2618,7 +4627,7 @@
 	  src/main/java/org/ourproject/kune/platf/server/manager/TagUserContentManagerDefault.java:
 	  tags widget
 
-2011-03-17 18:03  vjrj_
+2011-03-17 18:03  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1281] script/kune server debug.launch,
 	  src/main/java/cc/kune/chat/client/ChatClientDefault.java,
@@ -2646,7 +4655,7 @@
 	  src/test/java/org/ourproject/kune/workspace/client/tags,
 	  src/test/java/testsuites/OthersTestSuite.java: tags widget
 
-2011-03-16 01:10  vjrj_
+2011-03-16 01:10  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1280] .classpath, .project, pom.xml,
 	  src/main/java/cc/kune/core/client/auth/SignIn.java,
@@ -2665,11 +4674,11 @@
 	  history
 	  http://kune.ourproject.org/issues/ticket/35
 
-2011-03-15 20:11  vjrj_
+2011-03-15 20:11  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1279] pom.xml: pom updated
 
-2011-03-15 20:08  vjrj_
+2011-03-15 20:08  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1278] DEV-GUIDE, INSTALL, img/icons/wave-icon.png,
 	  img/icons/waveicon.svg,
@@ -2680,7 +4689,7 @@
 	  src/main/java/cc/kune/wave/client/WebClient.java: More WIAB
 	  integration
 
-2011-03-15 14:25  vjrj_
+2011-03-15 14:25  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1277] script/generateAbout.sh,
 	  src/main/java/cc/kune/client/KuneGinjector.java,
@@ -2701,25 +4710,25 @@
 	  history
 	  http://kune.ourproject.org/issues/ticket/35
 
-2011-03-15 00:32  vjrj_
+2011-03-15 00:32  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1276] BUGS, CREDITS, README_FIRST, TODO, TROUBLESHOOT,
 	  src/main/java/cc/kune/Kune.gwt.xml,
 	  src/main/java/cc/kune/core/public/about.html: Few permutations
 	  and more doc
 
-2011-03-14 00:41  vjrj_
+2011-03-14 00:41  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1275] ChangeLog, DEV-GUIDE, INSTALL, pom.xml: Doc a minor
 	  changes
 
-2011-03-13 20:53  vjrj_
+2011-03-13 20:53  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1274] script/liquibase-migrate.sh,
 	  script/liquibase-rollback.sh, script/mvn-vars.sh: liquibase
 	  script updated
 
-2011-03-13 20:51  vjrj_
+2011-03-13 20:51  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1273] INSTALL,
 	  src/main/java/cc/kune/core/client/CoreGinModule.java,
@@ -2741,7 +4750,7 @@
 	  NEW - # 33: WIAB Client integration
 	  http://kune.ourproject.org/issues/ticket/33
 
-2011-03-13 14:44  vjrj_
+2011-03-13 14:44  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1272] img/webtemplate/web_template-2011.svg,
 	  src/main/java/cc/kune/chat/client/AddAsBuddieHeaderButton.java,
@@ -2793,7 +4802,7 @@
 	  Group chat (room) with all members
 	  http://kune.ourproject.org/issues/ticket/34
 
-2011-03-12 22:13  vjrj_
+2011-03-12 22:13  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1271] .classpath, INSTALL, TODO, TROUBLESHOOT, pom.xml,
 	  script/kune server debug.launch, script/kune server via mvn with
@@ -2852,7 +4861,7 @@
 	  NEW - # 25: Social Net refactorization
 	  http://kune.ourproject.org/issues/ticket/25
 
-2011-03-10 16:58  vjrj_
+2011-03-10 16:58  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1270] .classpath, TODO,
 	  src/main/java/cc/kune/core/client/sn/actions/conditions/IsMeCondition.java,
@@ -2870,7 +4879,7 @@
 	  NEW - # 25: Social Net refactorization
 	  http://kune.ourproject.org/issues/ticket/25
 
-2011-03-07 17:08  vjrj_
+2011-03-07 17:08  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1269] .classpath, .project,
 	  img/icons/from-private-to-public.svg,
@@ -2941,7 +4950,7 @@
 	  src/test/java/org/ourproject/kune/platf/server/mapper/MapperTest.java:
 	  SN updated, WIAB integration updated
 
-2011-03-02 01:35  vjrj_
+2011-03-02 01:35  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1268]
 	  src/main/java/cc/kune/common/client/actions/ui/descrip/MenuTitleItemDescriptor.java,
@@ -2949,7 +4958,7 @@
 	  src/main/java/cc/kune/core/client/sn/actions/registry/SNCollabsMenuItemsRegistry.java:
 	  More SN refactor and some bug fixes
 
-2011-03-02 01:14  vjrj_
+2011-03-02 01:14  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1267] .project,
 	  src/main/java/cc/kune/chat/client/AddAsBuddieHeaderButton.java,
@@ -3000,7 +5009,7 @@
 	  src/test/java/org/ourproject/kune/platf/server/manager/impl/SocialNetworkManagerTest.java:
 	  Wiab auth, more SN refactor and some bug fixes
 
-2011-02-28 12:14  vjrj_
+2011-02-28 12:14  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1266]
 	  src/main/java/cc/kune/core/client/auth/SignInNewForm.java,
@@ -3025,7 +5034,7 @@
 	  NEW - # 32: WIAB Server and Kune server running together
 	  http://kune.ourproject.org/issues/ticket/32
 
-2011-02-26 19:48  vjrj_
+2011-02-26 19:48  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1265] script/kune server via mvn.launch,
 	  src/main/java/cc/kune/wave/client/WaveClientTester.java,
@@ -3033,14 +5042,14 @@
 	  src/main/java/cc/kune/wave/server/JettyModule.java,
 	  src/main/webapp/WEB-INF/web.xml: WIAB server integration cleanup
 
-2011-02-26 10:20  vjrj_
+2011-02-26 10:20  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1264] img/icons-base.svg, img/icons/spliter-top.gif,
 	  img/icons/spliter-top.png,
 	  src/main/java/cc/kune/core/public/images/spliter-top.png,
 	  src/main/java/cc/kune/core/public/ws.css: a bottom spliter
 
-2011-02-25 01:11  vjrj_
+2011-02-25 01:11  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1263] TODO, img/icons/person.svg, img/icons/unknown-60.png,
 	  img/icons/unknown-gen.png, script/kune client -no-server.launch,
@@ -3052,7 +5061,7 @@
 	  NEW - # 25: Social Net refactorization
 	  http://kune.ourproject.org/issues/ticket/25
 
-2011-02-24 23:07  vjrj_
+2011-02-24 23:07  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1262] img/icons-base.svg, img/icons/checked.png,
 	  img/icons/radiochecked.png, img/icons/radiounchecked.png,
@@ -3117,7 +5126,7 @@
 	  25: Social Net refactorization
 	  http://kune.ourproject.org/issues/ticket/25
 
-2011-02-24 02:37  vjrj_
+2011-02-24 02:37  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1261] ., img/webtemplate/web_template-2011.svg, script/kune
 	  client -no-server.launch,
@@ -3178,7 +5187,7 @@
 	  25: Social Net refactorization
 	  http://kune.ourproject.org/issues/ticket/25
 
-2011-02-22 02:22  vjrj_
+2011-02-22 02:22  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1260] src/main/java/cc/kune/chat/client/ChatClientDefault.java,
 	  src/main/java/cc/kune/client/KuneEntryPoint.java,
@@ -3186,13 +5195,13 @@
 	  src/main/java/cc/kune/core/client/CoreGinModule.java,
 	  src/main/java/cc/kune/core/public/ws.css: Shortcuts fixed
 
-2011-02-22 00:00  vjrj_
+2011-02-22 00:00  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1259] pom.xml, src/main/resources/wave-server.properties: NEW -
 	  # 30: New running methods
 	  http://kune.ourproject.org/issues/ticket/30
 
-2011-02-21 20:51  vjrj_
+2011-02-21 20:51  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1258] src/main/java/cc/kune/chat/client/ChatClientDefault.java,
 	  src/main/java/cc/kune/chat/client/KuneHablarSignals.java,
@@ -3236,7 +5245,7 @@
 	  src/main/java/cc/kune/pspace/client/PSpacePresenter.java: Actions
 	  improved, hablar integration
 
-2011-02-21 04:32  vjrj_
+2011-02-21 04:32  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1257] .classpath, pom.xml,
 	  src/main/java/cc/kune/chat/client/ChatClient.java,
@@ -3344,13 +5353,13 @@
 	  src/main/java/cc/kune/wave/client/WaveClientTester.java: Some
 	  fixes, SN changes and more emite integration
 
-2011-02-18 00:52  vjrj_
+2011-02-18 00:52  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1255] .classpath, .project, pom.xml,
 	  src/main/java/cc/kune/wave/server/CustomServerRpcProvider.java:
 	  Minor changes towards gwt 2.2.0
 
-2011-02-17 17:31  vjrj_
+2011-02-17 17:31  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1254] .classpath, .project, TODO,
 	  img/webtemplate/web_home_template-2011.svg, pom.xml,
@@ -3493,7 +5502,7 @@
 	  src/test/java/testsuites/OthersTestSuite.java: merge with wiab
 	  integration branch
 
-2011-02-11 23:06  vjrj_
+2011-02-11 23:06  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1248]
 	  src/main/java/cc/kune/chat/client/AddAsBuddieHeaderButton.java,
@@ -3545,7 +5554,7 @@
 	  src/test/java/testsuites/OthersTestSuite.java: Entity header
 	  updated
 
-2011-02-11 18:17  vjrj_
+2011-02-11 18:17  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1247] TODO, src/main/java/cc/kune/client/KuneGinjector.java,
 	  src/main/java/cc/kune/core/client/CoreGinModule.java,
@@ -3562,7 +5571,7 @@
 	  src/main/resources/wave-server.properties: few changes in
 	  licenses
 
-2011-02-11 04:00  vjrj_
+2011-02-11 04:00  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1246] CREDITS,
 	  src/main/java/cc/kune/common/public/gxt-custom/css/gxt-op-common.css,
@@ -3574,7 +5583,7 @@
 	  src/main/webapp/WEB-INF/publicspace/public/templates/basic/basic.css:
 	  SN Refactorization
 
-2011-02-11 03:28  vjrj_
+2011-02-11 03:28  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1245] CREDITS, TODO, img/webtemplate/web_template-2011.svg,
 	  script/css-update.sh, script/generateAbout.sh,
@@ -3641,7 +5650,7 @@
 	  src/test/java/cc/kune/common/client/actions/ui/descrip/AbstractGuiActionDescripTest.java:
 	  SN Refactorization
 
-2011-02-10 18:28  vjrj_
+2011-02-10 18:28  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1244]
 	  src/main/java/cc/kune/common/client/actions/gxtui/AbstractGxtButtonGui.java,
@@ -3688,7 +5697,7 @@
 	  src/test/java/org/ourproject/kune/workspace/client/socialnet/RolComparatorTest.java:
 	  SN Refactorization
 
-2011-02-10 03:07  vjrj_
+2011-02-10 03:07  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1243] script/css-update.sh, src/main/java/cc/kune/Kune.gwt.xml,
 	  src/main/java/cc/kune/chat/client/ChatClient.java,
@@ -4001,7 +6010,7 @@
 	  src/test/java/org/ourproject/kune/workspace/client/socialnet/RolComparatorTest.java:
 	  SN Refactorization
 
-2011-02-08 16:36  vjrj_
+2011-02-08 16:36  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1242]
 	  src/main/java/cc/kune/core/client/auth/RegisterPanel.java,
@@ -4041,7 +6050,7 @@
 	  src/main/java/org/ourproject/kune/workspace/client/newgroup: New
 	  Group refactorized
 
-2011-02-08 14:17  vjrj_
+2011-02-08 14:17  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1241] TODO,
 	  src/main/java/cc/kune/core/client/auth/SignInPresenter.java,
@@ -4065,7 +6074,7 @@
 	  src/main/java/org/ourproject/kune/rack/RackServletFilter.java,
 	  src/main/webapp/WEB-INF/web.xml: WIAB integration updated
 
-2011-02-07 21:14  vjrj_
+2011-02-07 21:14  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1240] .classpath, pom.xml,
 	  src/main/java/cc/kune/core/client/errors/UserRegistrationException.java,
@@ -4076,7 +6085,7 @@
 	  src/main/resources/wave-server.properties,
 	  src/main/webapp/WEB-INF/web.xml: WIAB integration updated
 
-2011-02-07 17:33  vjrj_
+2011-02-07 17:33  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1239] ., .classpath, COPYRIGHT, pom.xml,
 	  src/main/java/cc/kune/core/shared/dto/AccessRolDTO.java,
@@ -4135,13 +6144,13 @@
 	  src/test/java/org/ourproject/kune/testhelper/ctx/DomainContext.java:
 	  WIAB integration updated
 
-2011-02-07 03:17  vjrj_
+2011-02-07 03:17  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1238]
 	  src/main/java/cc/kune/core/client/resources/kune-anim-g.gif: WIAB
 	  integration updated
 
-2011-02-07 03:12  vjrj_
+2011-02-07 03:12  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1237] .classpath, pom.xml,
 	  src/main/java/cc/kune/chat/client/ChatClientDefault.java,
@@ -4458,7 +6467,7 @@
 	  src/test/java/org/ourproject/kune/platf/server/PersistenceTest.java:
 	  WIAB integration updated
 
-2011-02-07 03:06  vjrj_
+2011-02-07 03:06  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1236] src/main/java/org/ourproject/kune/platf/client/View.java,
 	  src/main/java/org/ourproject/kune/platf/client/actions/ActionAddCondition.java,
@@ -4686,7 +6695,7 @@
 	  src/main/java/org/ourproject/kune/platf/server/utils/FilenameUtils.java:
 	  WIAB integration updated
 
-2011-02-05 22:47  vjrj_
+2011-02-05 22:47  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1235] COPYRIGHT, COPYRIGHT-AGPLv3.java,
 	  script/findFilesWithoutCopyright.sh,
@@ -5168,7 +7177,7 @@
 	  src/test/java/testsuites/ServerOtherTestSuite.java,
 	  src/test/java/testsuites/ServerTestSuite.java: Copyright added
 
-2011-02-05 22:25  vjrj_
+2011-02-05 22:25  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1234] .classpath, pom.xml,
 	  src/main/java/cc/kune/chat/client/ChatClient.java,
@@ -5189,7 +7198,7 @@
 	  src/main/webapp/WEB-INF/web.xml: CLOSED - # 17: emite chat update
 	  http://kune.ourproject.org/issues/ticket/17
 
-2011-02-04 20:52  vjrj_
+2011-02-04 20:52  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1233] DEV-GUIDE, TODO,
 	  src/main/java/cc/kune/common/client/SampleEntryPoint.java,
@@ -5250,7 +7259,7 @@
 	  CLOSED - # 18: Event Logger (for dev purposes)
 	  http://kune.ourproject.org/issues/ticket/18
 
-2011-02-02 05:37  vjrj_
+2011-02-02 05:37  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1232] TROUBLESHOOT,
 	  src/main/java/cc/kune/core/client/CoreGinModule.java,
@@ -5277,7 +7286,7 @@
 	  
 	  Some ui fixes
 
-2011-02-02 02:55  vjrj_
+2011-02-02 02:55  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1231] .classpath, infinitest.filters, pom.xml,
 	  script/mvn-eclipse.sh,
@@ -5347,7 +7356,7 @@
 	  Tests reorganization. Test suites added. Hibernate versions
 	  adjustments. Some fixes
 
-2011-02-01 01:54  vjrj_
+2011-02-01 01:54  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1230] script/css-update.sh,
 	  src/main/java/cc/kune/chat/Chat.gwt.xml,
@@ -5383,13 +7392,13 @@
 	  NEW - # 14: Site bar update
 	  http://kune.ourproject.org/issues/ticket/14
 
-2011-01-31 18:59  vjrj_
+2011-01-31 18:59  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1229] .,
 	  src/main/java/cc/kune/gspace/client/WsArmorImpl.ui.xml: minor
 	  changes
 
-2011-01-31 18:51  vjrj_
+2011-01-31 18:51  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1228] .classpath, TODO, img/kune-logo-without-text-80px.png,
 	  pom.xml, script/genProxy.sh, script/server.sh,
@@ -5485,7 +7494,7 @@
 	  NEW - # 14: Site bar update
 	  http://kune.ourproject.org/issues/ticket/14
 
-2011-01-29 03:38  vjrj_
+2011-01-29 03:38  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1227] .classpath, README_FIRST, pom.xml, pom.xml.dic11,
 	  pom.xml.net, script/mvn-eclipse.sh,
@@ -5619,7 +7628,7 @@
 	  NEW - # 14: Site bar update
 	  http://kune.ourproject.org/issues/ticket/14
 
-2011-01-28 01:41  vjrj_
+2011-01-28 01:41  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1226]
 	  src/main/java/cc/kune/common/client/ui/PopupPanelTopCentered.java,
@@ -5667,7 +7676,7 @@
 	  NEW - # 14: Site bar update
 	  http://kune.ourproject.org/issues/ticket/14
 
-2011-01-28 00:16  vjrj_
+2011-01-28 00:16  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1225] TODO, TROUBLESHOOT,
 	  src/main/java/cc/kune/common/client/actions/BeforeActionCollection.java,
@@ -5913,7 +7922,7 @@
 	  NEW - # 14: Site bar update
 	  http://kune.ourproject.org/issues/ticket/14
 
-2011-01-26 21:18  vjrj_
+2011-01-26 21:18  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1224] ., .classpath, DEV-GUIDE,
 	  img/webtemplate/web_template-2011.svg, pom.xml,
@@ -6007,7 +8016,7 @@
 	  NEW - # 14: Site bar update
 	  http://kune.ourproject.org/issues/ticket/14
 
-2011-01-19 23:15  vjrj_
+2011-01-19 23:15  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1185] .classpath, .project, pom.xml, script/repopubli-src.sh,
 	  src/main/java/cc/kune/Kune.gwt.xml, src/main/java/cc/kune/client,
@@ -6049,7 +8058,7 @@
 	  NEW - # 14: Site bar update
 	  http://kune.ourproject.org/issues/ticket/14
 
-2011-01-17 20:26  vjrj_
+2011-01-17 20:26  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1184] .classpath, pom.xml,
 	  src/main/java/cc/kune/common/KuneCommon.gwt.xml,
@@ -7266,7 +9275,7 @@
 	  NEW - # 14: Site bar update
 	  http://kune.ourproject.org/issues/ticket/14
 
-2011-01-16 03:05  vjrj_
+2011-01-16 03:05  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1183] ., .classpath, .project, TODO, TROUBLESHOOT,
 	  img/webtemplate/web_template-2011.svg, pom.xml,
@@ -7317,7 +9326,7 @@
 	  update
 	  http://kune.ourproject.org/issues/ticket/10
 
-2011-01-14 04:11  vjrj_
+2011-01-14 04:11  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1182] COPYRIGHT, TODO, img/icons/from-private-to-public.png,
 	  img/icons/from-private-to-public.svg,
@@ -7366,7 +9375,7 @@
 	  src/main/webapp/WEB-INF/web.xml: Incomplete - task : Kune
 	  navigator between user/group space
 
-2011-01-10 20:31  vjrj_
+2011-01-10 20:31  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1180] pom.xml, src/main/java/cc/kune/common/README,
 	  src/main/java/cc/kune/core/Core.gwt.xml,
@@ -7415,7 +9424,7 @@
 	  src/main/java/org/xwiki/gwt, src/main/webapp/WEB-INF/web.xml:
 	  Some refactoring. Jetty runs with maven (tomcat so so)
 
-2011-01-10 04:43  vjrj_
+2011-01-10 04:43  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1179] img/webtemplate/web_template-2011.svg, pom.xml,
 	  script/css-update.sh, src/main/java/cc/kune/Kune.gwt.xml,
@@ -7503,7 +9512,7 @@
 	  NEW - # 11: New messages widget
 	  http://kune.ourproject.org/issues/ticket/11
 
-2011-01-09 04:44  vjrj_
+2011-01-09 04:44  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1178] TODO, img/webtemplate/web_template-2011.svg, pom.xml,
 	  script/css-update.sh, script/mvn-eclipse.sh,
@@ -7596,15 +9605,15 @@
 	  NEW - # 11: New messages widget
 	  http://kune.ourproject.org/issues/ticket/11
 
-2010-12-29 03:43  vjrj_
+2010-12-29 03:43  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1177] .: remove war dir
 
-2010-12-29 03:43  vjrj_
+2010-12-29 03:43  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1176] war: remove war dir
 
-2010-12-29 03:37  vjrj_
+2010-12-29 03:37  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1175]
 	  src/main/java/cc/kune/core/client/sitebar/logo/SiteLogoUiHandlers.java,
@@ -7621,7 +9630,7 @@
 	  NEW - # 9: Roo partial use/integration
 	  http://kune.ourproject.org/issues/ticket/9
 
-2010-12-29 03:33  vjrj_
+2010-12-29 03:33  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1174] TODO, pom.xml, script/mvn-eclipse.sh,
 	  src/main/java/cc/kune/Kune.gwt.xml,
@@ -7651,7 +9660,7 @@
 	  war/WEB-INF/publicspace, war/images, war/javascripts,
 	  war/stylesheets, war/templates: gwt wave server update
 
-2010-12-20 02:20  vjrj_
+2010-12-20 02:20  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1173] DEV-GUIDE, pom.xml,
 	  src/main/java/cc/kune/core/client/ws/CoreViewImpl.java,
@@ -7673,7 +9682,7 @@
 	  http://kune.ourproject.org/issues/ticket/9
 	  (pom.xml & webapp refactor to follow standards)
 
-2010-12-19 23:32  vjrj_
+2010-12-19 23:32  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1172] ., pom.xml, src/main/java/cc/kune/Kune.gwt.xml,
 	  src/main/java/cc/kune/client,
@@ -7710,7 +9719,7 @@
 	  NEW - # 9: Roo partial use/integration
 	  http://kune.ourproject.org/issues/ticket/9
 
-2010-12-19 02:58  vjrj_
+2010-12-19 02:58  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1170] TODO, img/icons/loading-spiner.gif,
 	  img/webtemplate/web_template-2011.svg, pom.xml,
@@ -7775,7 +9784,7 @@
 	  src/test/java/cc/kune/core/client/state/StateManagerTest.java:
 	  Some more MVC patterns
 
-2010-12-18 17:00  vjrj_
+2010-12-18 17:00  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1169] ., dev-utils/kune.cleanup.eclipse.preferences.xml,
 	  pom.xml, src/main/java/cc/kune/core/Core.gwt.xml,
@@ -7943,7 +9952,7 @@
 	  src/test/java/org/ourproject/kune/workspace/client/socialnet/RolComparatorTest.java:
 	  Some more MVC patterns
 
-2010-12-16 02:22  vjrj_
+2010-12-16 02:22  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1168] src/main/java/org/ourproject/kune/platf/client/errors,
 	  src/main/java/org/ourproject/kune/platf/client/rpc,
@@ -7951,7 +9960,7 @@
 	  Roo use/integration
 	  http://kune.ourproject.org/issues/ticket/9
 
-2010-12-16 02:20  vjrj_
+2010-12-16 02:20  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1167] pom.xml,
 	  src/main/java/cc/kune/core/client/rpcservices/ContentService.java,
@@ -8155,7 +10164,7 @@
 	  NEW - # 9: Roo use/integration
 	  http://kune.ourproject.org/issues/ticket/9
 
-2010-12-15 02:26  vjrj_
+2010-12-15 02:26  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1164] TROUBLESHOOT, pom.xml,
 	  src/main/java/cc/kune/core/Core.gwt.xml,
@@ -8188,7 +10197,7 @@
 	  CLOSED - # 8: Startup cleanup and gwtp integration
 	  http://kune.ourproject.org/issues/ticket/8
 
-2010-12-09 16:03  vjrj_
+2010-12-09 16:03  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1163] src/main/java/cc/kune/core/Core.gwt.xml,
 	  src/main/java/cc/kune/core/client/CoreEventBus.java,
@@ -8739,7 +10748,7 @@
 	  http://kune.ourproject.org/issues/ticket/6
 	  Incomplete - task : Startup cleanup
 
-2010-12-08 20:00  vjrj_
+2010-12-08 20:00  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1162] TROUBLESHOOT, pom.xml, pom.xml.dic11,
 	  script/mvn-eclipse.sh, src/main/java/cc/kune/core/Core.gwt.xml,
@@ -8755,7 +10764,7 @@
 	  CLOSED - # 4: Gwt 2.1.0 and mvn cleanup
 	  http://kune.ourproject.org/issues/ticket/4
 
-2010-12-08 15:21  vjrj_
+2010-12-08 15:21  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1160] img/template-gen.svg, pom.xml, src/main/java/cc,
 	  src/main/java/cc/kune, src/main/java/cc/kune/core,
@@ -8799,12 +10808,12 @@
 	  CLOSED - # 4: Gwt 2.1.0 and mvn cleanup
 	  http://kune.ourproject.org/issues/ticket/4
 
-2010-12-07 22:43  vjrj_
+2010-12-07 22:43  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1159] src/main/java/org/ourproject/kune/workspace/public, war,
 	  war/WEB-INF/lib: some cleanup, gwt-2.1.0
 
-2010-12-07 22:38  vjrj_
+2010-12-07 22:38  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1158] DEV-GUIDE, INSTALL, TODO, TROUBLESHOOT,
 	  img/webtemplate/def-theme-doc-arrow-down.png,
@@ -8860,17 +10869,17 @@
 	  war/WEB-INF/lib/gwt-user-1.6.4.jar, war/WEB-INF/web.xml: some
 	  cleanup
 
-2010-11-24 09:21  vjrj_
+2010-11-24 09:21  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1150] img/webtemplate/web_template-2011.png,
 	  img/webtemplate/web_template-2011.svg: small changes in new draft
 
-2010-11-24 00:08  vjrj_
+2010-11-24 00:08  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1149] img/webtemplate/web_template-2011.png,
 	  img/webtemplate/web_template-2011.svg: new drafts
 
-2010-11-23 23:41  vjrj_
+2010-11-23 23:41  Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 
 	* [r1148] img/webtemplate, img/webtemplate/web_template-2011.png,
 	  img/webtemplate/web_template-2011.svg: new drafts
