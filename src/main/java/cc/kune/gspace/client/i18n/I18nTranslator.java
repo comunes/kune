@@ -21,6 +21,6 @@ package cc.kune.gspace.client.i18n;
 
 public interface I18nTranslator {
 
-    void doShowTranslator();
+    void show();
 
 }

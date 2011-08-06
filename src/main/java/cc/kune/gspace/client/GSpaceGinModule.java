@@ -27,7 +27,9 @@ import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.i18n.I18nNewTranslatorPanel;
 import cc.kune.gspace.client.i18n.I18nNewTranslatorPresenter;
 import cc.kune.gspace.client.i18n.I18nNewTranslatorPresenter.I18nNewTranslatorView;
+import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
+import cc.kune.gspace.client.i18n.TranslatorTabsCollection;
 import cc.kune.gspace.client.licensewizard.LicenseChangeAction;
 import cc.kune.gspace.client.licensewizard.LicenseWizard;
 import cc.kune.gspace.client.licensewizard.LicenseWizardPanel;
@@ -140,6 +142,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     s(UserOptionsCollection.class);
     s(GroupOptionsCollection.class);
+    s(TranslatorTabsCollection.class);
 
     s(GroupOptDefLicense.class, GroupOptDefLicensePresenter.class);
     s(GroupOptDefLicenseView.class, GroupOptDefLicensePanel.class);
@@ -179,7 +182,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     // I18nTranslator
     s(I18nNewTranslatorView.class, I18nNewTranslatorPanel.class);
-    s(I18nNewTranslatorPresenter.class);
+    s(I18nTranslator.class, I18nNewTranslatorPresenter.class);
     s(SiteOptionsI18nTranslatorAction.class);
   }
 }

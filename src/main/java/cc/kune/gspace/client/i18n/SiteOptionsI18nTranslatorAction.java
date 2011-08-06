@@ -46,7 +46,7 @@ public class SiteOptionsI18nTranslatorAction extends AbstractExtendedAction {
     this.translatorPanel = translatorPanel;
     putValue(Action.NAME, i18n.t("Help with the translation"));
     putValue(Action.SMALL_ICON, img.language());
-    final MenuItemDescriptor item = new MenuItemDescriptor(siteOptions.getOptionsMenu(), this);
+    MenuItemDescriptor.build(siteOptions.getOptionsMenu(), this);
     // item.setPosition(1);
   }
 
@@ -57,6 +57,6 @@ public class SiteOptionsI18nTranslatorAction extends AbstractExtendedAction {
       presenter.init(translatorPanel.get());
       translator = presenter;
     }
-    translator.doShowTranslator();
+    translator.show();
   }
 }

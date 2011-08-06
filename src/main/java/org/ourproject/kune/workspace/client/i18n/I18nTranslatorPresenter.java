@@ -53,7 +53,7 @@ public class I18nTranslatorPresenter implements I18nTranslator {
         view.hide();
     }
 
-    public void doShowTranslator() {
+    public void show() {
         OldNotifyUser.showProgressLoading();
         if (session.isLogged()) {
             view.show();

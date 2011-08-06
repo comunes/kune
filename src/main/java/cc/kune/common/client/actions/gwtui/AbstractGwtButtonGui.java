@@ -114,7 +114,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   @Override
   public void setEnabled(final boolean enabled) {
     button.setEnabled(enabled);
-    button.getElement().getStyle().setOpacity(enabled ? 1d : 0.5d);
+    button.getElement().getStyle().setOpacity(enabled ? 1d : 0.6d);
   }
 
   @Override

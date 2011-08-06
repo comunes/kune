@@ -923,11 +923,16 @@ button.k-button-left:hover {
   outline: 0 none;
 }
 
-button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,input[type="reset"][disabled],input[type="button"][disabled]:active,input[type="button"][disabled],select[disabled]>input[type="button"],select[disabled]>input[type="button"]:active,input[type="submit"][disabled]:active,input[type="submit"][disabled],.k-button-disabled
+button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,input[type="reset"][disabled],input[type="button"][disabled]:active,input[type="button"][disabled],select[disabled]>input[type="button"],select[disabled]>input[type="button"]:active,input[type="submit"][disabled]:active,input[type="submit"][disabled],.k-button-disabled, button.k-button-disabled
   {
   color: gray !important;
   border-color: #CCCCCC !important;
   background: inherits !important;
+  kfilter: alpha(opacity =                                                       60
+    ) !important;
+  -moz-opacity: 0.60 !important;
+  -khtml-opacity: 0.60 !important;
+  opacity: 0.60 !important;
 }
 
 /* end buttons */
@@ -1470,3 +1475,7 @@ button.k-drop-allowed-hover,
   background-image: url(images/colors.gif) !important;
 }
 
+.k-i18n-recommend {
+  border: 1px solid gray;
+  background-color: #F2F2F2;
+}

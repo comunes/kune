@@ -68,8 +68,11 @@ public class LanguageSelectorPanel extends FormPanel {
     this.i18n = i18n;
     this.session = session;
     setBorders(false);
+    setFrame(false);
+    setHeaderVisible(false);
     createLangCombo();
     super.add(langCombo);
+    setBodyBorder(false);
   }
 
   public void addChangeListener(final SimpleCallback onChange) {
@@ -123,6 +126,10 @@ public class LanguageSelectorPanel extends FormPanel {
   @Override
   public void reset() {
     langCombo.reset();
+  }
+
+  public void setLangSeparator(final String separator) {
+    langCombo.setLabelSeparator(separator);
   }
 
   public void setLangTitle(final String langFieldTitle) {

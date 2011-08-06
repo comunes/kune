@@ -32,10 +32,12 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogView {
+  private final boolean authohide;
   private BasicTopDialog dialog;
   private final String dialogId;
   private final String errorLabelId;
@@ -54,9 +56,9 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private int width;
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
-      final NotifyLevelImages images, final String errorLabelId, final String firstBtnTitle,
-      final String firstBtnId, final String sndBtnTitle, final String sndBtnId,
-      final ProvidersCollection provCollection) {
+      final boolean authoHide, final NotifyLevelImages images, final String errorLabelId,
+      final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
+      final String sndBtnId, final ProvidersCollection provCollection) {
     this.dialogId = dialogId;
     this.title = title;
     this.modal = modal;
@@ -67,16 +69,33 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     this.sndBtnTitle = sndBtnTitle;
     this.sndBtnId = sndBtnId;
     this.provCollection = provCollection;
+    this.authohide = authoHide;
+  }
+
+  public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
+      final NotifyLevelImages images, final String errorLabelId, final String firstBtnTitle,
+      final String firstBtnId, final String sndBtnTitle, final String sndBtnId,
+      final ProvidersCollection provCollection) {
+    this(dialogId, title, modal, false, images, errorLabelId, firstBtnTitle, firstBtnId, sndBtnTitle,
+        sndBtnId, provCollection);
+  }
+
+  public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
+      final int height, final boolean modal, final boolean autoHide, final NotifyLevelImages images,
+      final String errorLabelId, final String firstBtnTitle, final String firstBtnId,
+      final String sndBtnTitle, final String sndBtnId, final ProvidersCollection provCollection) {
+    this(dialogId, title, modal, autoHide, images, errorLabelId, firstBtnTitle, firstBtnId, sndBtnTitle,
+        sndBtnId, provCollection);
+    this.width = width;
+    this.height = height;
   }
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
       final int height, final boolean modal, final NotifyLevelImages images, final String errorLabelId,
       final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
       final String sndBtnId, final ProvidersCollection provCollection) {
-    this(dialogId, title, modal, images, errorLabelId, firstBtnTitle, firstBtnId, sndBtnTitle, sndBtnId,
-        provCollection);
-    this.width = width;
-    this.height = height;
+    this(dialogId, title, width, height, modal, false, images, errorLabelId, firstBtnTitle, firstBtnId,
+        sndBtnTitle, sndBtnId, provCollection);
   }
 
   @Override
@@ -98,11 +117,12 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   }
 
   private void createDialog() {
-    dialog = new BasicTopDialog.Builder(dialogId, true, modal).autoscroll(true).width(width).height(
+    dialog = new BasicTopDialog.Builder(dialogId, authohide, modal).autoscroll(true).width(width).height(
         height).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(
         dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(sndBtnId).title(title).build();
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     tabPanel = new DecoratedTabPanel();
+    provCollection.createAll();
     tabPanel.getDeckPanel().setSize(String.valueOf(width), String.valueOf(height));
     dialog.getInnerPanel().add(tabPanel);
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {
@@ -111,7 +131,6 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         hide();
       }
     });
-    provCollection.createAll();
   }
 
   private void createDialogIfNecessary() {
@@ -136,6 +155,11 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   public HasClickHandlers getFirstBtn() {
     createDialogIfNecessary();
     return dialog.getFirstBtn();
+  }
+
+  public ForIsWidget getInnerPanel() {
+    createDialogIfNecessary();
+    return dialog.getInnerPanel();
   }
 
   public HasClickHandlers getSecondBtn() {

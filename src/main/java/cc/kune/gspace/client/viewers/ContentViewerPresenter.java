@@ -166,7 +166,7 @@ public class ContentViewerPresenter extends
       if (stateContent.isParticipant()) {
         // is already participant, show wave editor
         if (org.waveprotocol.box.webclient.client.Session.get().isLoggedIn()) {
-          final String typeId = stateContent.getTypeId();
+          // final String typeId = stateContent.getTypeId();
           // if (typeId.equals(BartersConstants.TYPE_BARTER)
           // || typeId.equals(MeetingsConstants.TYPE_MEETING)) {
           // NotifyUser.important("Currently we are experiencing problems with this tool. We'll fix ASAP...");

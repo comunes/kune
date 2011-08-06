@@ -107,7 +107,8 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     participant.setTarget(group);
     participant.putValue(Action.NAME, group.getLongName());
     participant.putValue(Action.SMALL_ICON, logoImageUrl);
-    participant.setParent(partiMenu);
+    participant.setParent(partiMenu, false);
+    siteOptions.getRightToolbar().add(participant);
   }
 
   private void createActions() {
