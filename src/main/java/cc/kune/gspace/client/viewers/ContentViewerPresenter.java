@@ -22,8 +22,6 @@ package cc.kune.gspace.client.viewers;
 import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.HasChilds;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.EditEvent;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
@@ -88,17 +86,19 @@ public class ContentViewerPresenter extends
 
   private final ActionRegistryByType actionsRegistry;
   private HandlerRegistration editHandler;
+  private final PathToolbarUtils pathToolbarUtils;
   private final Provider<RenameAction> renameAction;
   private final Session session;
 
   @Inject
   public ContentViewerPresenter(final EventBus eventBus, final ContentViewerView view,
       final ContentViewerProxy proxy, final Session session, final ActionRegistryByType actionsRegistry,
-      final Provider<RenameAction> renameAction) {
+      final Provider<RenameAction> renameAction, final PathToolbarUtils pathToolbarUtils) {
     super(eventBus, view, proxy);
     this.session = session;
     this.actionsRegistry = actionsRegistry;
     this.renameAction = renameAction;
+    this.pathToolbarUtils = pathToolbarUtils;
     session.onUserSignOut(true, new UserSignOutHandler() {
       @Override
       public void onUserSignOut(final UserSignOutEvent event) {
@@ -190,14 +190,7 @@ public class ContentViewerPresenter extends
     }
     final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContent.getGroup(),
         stateContent.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
-    final GuiActionDescCollection actionsToAttach = new GuiActionDescCollection();
-    for (final GuiActionDescrip action : actions) {
-      // The previous actionsRegistry creates childs actions already via
-      // Provider.get()
-      if (action instanceof HasChilds) {
-        actionsToAttach.add(action);
-      }
-    }
-    getView().setActions(actionsToAttach);
+    pathToolbarUtils.createPath(stateContent.getContainer(), actions, true);
+    getView().setActions(actions);
   }
 }

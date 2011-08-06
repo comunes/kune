@@ -99,6 +99,7 @@ import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerAsTablePanel;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import cc.kune.gspace.client.viewers.NoHomePageViewer;
+import cc.kune.gspace.client.viewers.PathToolbarUtils;
 
 import com.google.inject.Singleton;
 
@@ -111,6 +112,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
+    s(PathToolbarUtils.class);
+
     bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
         EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
     bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class,

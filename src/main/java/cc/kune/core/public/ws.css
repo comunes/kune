@@ -945,6 +945,7 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
 
 .k-sn-novisible-label {
   padding: 10px;
+  width: auto !important;
 }
 
 .k-sn-1st-panel { /* background-color: #a05a2c; */

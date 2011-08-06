@@ -17,26 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wiki.client.actions;
+package cc.kune.blogs.client.actions;
 
+import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.NewContentMenuItem;
-import cc.kune.wiki.shared.WikiConstants;
+import cc.kune.gspace.client.actions.NewContentAction;
+import cc.kune.gspace.client.actions.NewContentBtn;
 
 import com.google.inject.Inject;
 
-public class NewWikiBtn extends NewContentMenuItem {
+public class NewPostIconBtn extends NewContentBtn {
 
   @Inject
-  public NewWikiBtn(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg,
-      final WikiFolderNewMenu wikiFolderNewMenu) {
-    super(i18n, action, res.wikipageAdd(), shorcutReg, i18n.t("New wikipage"),
-        i18n.t("Create a New Wikipage here. "
-            + "This document will be a new 'Page' in the public web if you publish it"),
-        i18n.t("New wikipage"), WikiConstants.TYPE_WIKIPAGE, wikiFolderNewMenu.get());
+  public NewPostIconBtn(final I18nTranslationService i18n, final NewContentAction action,
+      final NavResources res, final GlobalShortcutRegister shorcutReg) {
+    super(i18n, action, res.blogAdd(), shorcutReg, "", i18n.t("Create a new blog post"),
+        i18n.t("New post"), BlogsConstants.TYPE_POST);
+    withStyles("k-btn-min, k-fl");
   }
 
 }

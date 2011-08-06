@@ -66,10 +66,17 @@ public class GoParentContainerBtn extends ButtonDescriptor {
   }
 
   public GoParentContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
-      final CoreResources res) {
+      final CoreResources res, final Session session, final String typeRoot) {
     super(action);
     this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.folderGoUp()).withStyles(
-        "k-btn-min, k-fl");
+        "k-btn-min, k-fr");
+    final StateAbstractDTO state = session.getCurrentState();
+    if (!session.isCurrentStateAContent()) {
+      final StateContainerDTO stateContainer = (StateContainerDTO) state;
+      if (stateContainer.getTypeId().equals(typeRoot)) {
+        setEnabled(false);
+      }
+    }
   }
 
 }

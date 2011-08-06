@@ -47,12 +47,14 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
   final String[] containersNoRoot = { TYPE_BLOG };
   final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
   final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
+  final String[] noRoot = { TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
 
   @Inject
   public BlogsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentBlogBtn> folderGoUp, final Provider<NewPostMenuItem> newDocBtn,
-      final Provider<NewBlogBtn> newFolderBtn, final Provider<OpenBlogMenuItem> openContentMenuItem,
+      final Provider<GoParentBlogBtn> folderGoUp, final Provider<NewPostMenuItem> newPostItem,
+      final Provider<NewPostIconBtn> newPostIconBtn, final Provider<NewBlogBtn> newFolderBtn,
+      final Provider<OpenBlogMenuItem> openContentMenuItem,
       final Provider<DelPostMenuItem> delContentMenuItem,
       final Provider<RefreshContentMenuItem> refresh,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
@@ -64,11 +66,12 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, blogNewMenu, TYPE_BLOG);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocBtn, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, TYPE_ROOT);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);

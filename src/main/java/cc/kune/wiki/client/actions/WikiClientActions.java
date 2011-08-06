@@ -50,8 +50,9 @@ public class WikiClientActions extends AbstractFoldableToolActions {
   @Inject
   public WikiClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewWikiBtn> newWikiBtn,
-      final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenWikiMenuItem> openContentMenuItem,
+      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewWikiMenuItem> newWikiMenuItem,
+      final Provider<NewWikiIconBtn> newWikiIconBtn, final Provider<NewFolderBtn> newFolderBtn,
+      final Provider<OpenWikiMenuItem> openContentMenuItem,
       final Provider<DelWikiMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
@@ -63,11 +64,12 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderNewMenu, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newWikiBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newWikiMenuItem, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newWikiIconBtn, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);

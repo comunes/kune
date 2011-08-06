@@ -117,17 +117,7 @@ public class EditableLabel extends Composite implements HasEditHandler {
           blinkTimer(false, new SimpleCallback() {
             @Override
             public void onCallback() {
-              blinkTimer(true, new SimpleCallback() {
-                @Override
-                public void onCallback() {
-                  blinkTimer(false, new SimpleCallback() {
-                    @Override
-                    public void onCallback() {
-                      tooltip.showTemporally();
-                    }
-                  });
-                }
-              });
+              tooltip.showTemporally();
             }
           });
         }

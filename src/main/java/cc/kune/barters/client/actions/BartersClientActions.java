@@ -56,7 +56,7 @@ public class BartersClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newBartersBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);

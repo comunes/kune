@@ -17,22 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.docs.client.actions;
+package cc.kune.wiki.client.actions;
 
-import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.state.Session;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.shared.DocsConstants;
-import cc.kune.gspace.client.actions.GoParentContainerBtn;
+import cc.kune.gspace.client.actions.NewContentAction;
+import cc.kune.gspace.client.actions.NewContentBtn;
+import cc.kune.wiki.shared.WikiConstants;
 
 import com.google.inject.Inject;
 
-public class GoParentFolderBtn extends GoParentContainerBtn {
+public class NewWikiIconBtn extends NewContentBtn {
 
   @Inject
-  public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
-      final CoreResources res, final Session session) {
-    super(i18n, action, res, session, DocsConstants.TYPE_ROOT);
+  public NewWikiIconBtn(final I18nTranslationService i18n, final NewContentAction action,
+      final NavResources res, final GlobalShortcutRegister shorcutReg) {
+    super(i18n, action, res.wikipageAdd(), shorcutReg, "", i18n.t("Create a New Wikipage here. "
+        + "This document will be a new 'Page' in the public web if you publish it"),
+        i18n.t("New wikipage"), WikiConstants.TYPE_WIKIPAGE);
+    withStyles("k-btn-min, k-fl");
   }
 
 }

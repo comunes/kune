@@ -55,7 +55,7 @@ public class MeetingsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, all);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);

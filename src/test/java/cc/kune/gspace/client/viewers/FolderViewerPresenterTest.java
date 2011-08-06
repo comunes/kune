@@ -19,10 +19,10 @@
  */
 package cc.kune.gspace.client.viewers;
 
-import static cc.kune.gspace.client.viewers.FolderViewerPresenter.CSSBTN;
-import static cc.kune.gspace.client.viewers.FolderViewerPresenter.CSSBTNC;
-import static cc.kune.gspace.client.viewers.FolderViewerPresenter.CSSBTNL;
-import static cc.kune.gspace.client.viewers.FolderViewerPresenter.CSSBTNR;
+import static cc.kune.gspace.client.viewers.PathToolbarUtils.CSSBTN;
+import static cc.kune.gspace.client.viewers.PathToolbarUtils.CSSBTNC;
+import static cc.kune.gspace.client.viewers.PathToolbarUtils.CSSBTNL;
+import static cc.kune.gspace.client.viewers.PathToolbarUtils.CSSBTNR;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
@@ -33,12 +33,11 @@ import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 
 public class FolderViewerPresenterTest {
 
-  private FolderViewerPresenter presenter;
+  private PathToolbarUtils presenter;
 
   @Before
   public void before() {
-    presenter = new FolderViewerPresenter(null, null, null, null, null, null, null, null, null,
-        Mockito.mock(ContentCapabilitiesRegistry.class), null);
+    presenter = new PathToolbarUtils(null, null, Mockito.mock(ContentCapabilitiesRegistry.class), null);
   }
 
   @Test

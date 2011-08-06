@@ -20,17 +20,19 @@
 package cc.kune.meets.client.actions;
 
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.actions.GoParentContainerBtn;
+import cc.kune.meets.shared.MeetingsConstants;
 
 import com.google.inject.Inject;
 
 public class GoParentFolderBtn extends GoParentContainerBtn {
 
-    @Inject
-    public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
-            final CoreResources res) {
-        super(i18n, action, res);
-    }
+  @Inject
+  public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
+      final CoreResources res, final Session session) {
+    super(i18n, action, res, session, MeetingsConstants.TYPE_ROOT);
+  }
 
 }

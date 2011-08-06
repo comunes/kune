@@ -21,13 +21,11 @@ package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.EditEvent;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.client.services.FileDownloadUtils;
@@ -46,7 +44,6 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.actions.ActionGroups;
-import cc.kune.gspace.client.actions.GotoTokenAction;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.RenameListener;
 import cc.kune.gspace.client.tool.ContentViewer;
@@ -101,20 +98,13 @@ public class FolderViewerPresenter extends
     void showEmptyMsg(String contentTypeId);
   }
 
-  protected static final String CSSBTN = "k-button, k-fr";
-  protected static final String CSSBTNC = "k-button, k-button-center, k-fr";
-  protected static final String CSSBTNL = "k-button, k-button-left, k-fr";
-  protected static final String CSSBTNR = "k-button, k-button-right, k-fr";
-
   private final ActionRegistryByType actionsRegistry;
-
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
-
   private final Provider<FileDownloadUtils> downloadUtilsProvider;
-  private final Provider<FolderViewerDropController> dropController;
   private HandlerRegistration editHandler;
   private final I18nTranslationService i18n;
   private final IconsRegistry iconsRegistry;
+  private final PathToolbarUtils pathToolbarUtils;
   private final Provider<RenameAction> renameAction;
   private final Session session;
   private final StateManager stateManager;
@@ -126,7 +116,7 @@ public class FolderViewerPresenter extends
       final I18nTranslationService i18n, final ActionRegistryByType actionsRegistry,
       final Provider<FileDownloadUtils> downloadUtilsProvider,
       final Provider<RenameAction> renameAction, final ContentCapabilitiesRegistry capabilitiesRegistry,
-      final Provider<FolderViewerDropController> dropController) {
+      final PathToolbarUtils pathToolbarUtils) {
     super(eventBus, view, proxy);
     this.session = session;
     this.stateManager = stateManager;
@@ -134,7 +124,7 @@ public class FolderViewerPresenter extends
     this.actionsRegistry = actionsRegistry;
     this.downloadUtilsProvider = downloadUtilsProvider;
     this.capabilitiesRegistry = capabilitiesRegistry;
-    this.dropController = dropController;
+    this.pathToolbarUtils = pathToolbarUtils;
     iconsRegistry = capabilitiesRegistry.getIconsRegistry();
     useGenericImageIcon = false;
     this.renameAction = renameAction;
@@ -180,19 +170,6 @@ public class FolderViewerPresenter extends
     }
   }
 
-  String calculateStyle(final int pos, final int length) {
-    if (length == 1) {
-      return CSSBTN;
-    }
-    if (pos == 0) {
-      return CSSBTNL;
-    }
-    if (pos == length - 1) {
-      return CSSBTNR;
-    }
-    return CSSBTNC;
-  }
-
   private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
     if (container.getContents().size() + container.getChilds().size() == 0) {
       getView().showEmptyMsg(container.getTypeId());
@@ -231,32 +208,6 @@ public class FolderViewerPresenter extends
             });
       }
     });
-  }
-
-  private void createPath(final ContainerDTO container, final GuiActionDescCollection actions) {
-    final ContainerSimpleDTO[] path = container.getAbsolutePath();
-    final int pathLength = path.length;
-    if (pathLength > 0) {
-      for (int i = pathLength - 1; i >= 0; i--) {
-        final ButtonDescriptor btn = createPathButton(path[i], pathLength, i);
-        if (i != pathLength - 1) {
-          final FolderViewerDropController dropTarget = dropController.get();
-          dropTarget.setTarget(path[i].getStateToken());
-          btn.setDropTarget(dropTarget);
-        }
-        actions.add(btn);
-      }
-    }
-
-  }
-
-  private ButtonDescriptor createPathButton(final ContainerSimpleDTO container, final int length,
-      final int pos) {
-    final String style = calculateStyle(pos, length);
-    final ButtonDescriptor btn = new ButtonDescriptor(new GotoTokenAction(
-        iconsRegistry.getContentTypeIcon(container.getTypeId()), container.getName(),
-        container.getStateToken(), style, stateManager, getEventBus()));
-    return btn;
   }
 
   @Override
@@ -312,7 +263,7 @@ public class FolderViewerPresenter extends
     final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContainer.getGroup(),
         stateContainer.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
     final ContainerDTO container = stateContainer.getContainer();
-    createPath(container, actions);
+    pathToolbarUtils.createPath(container, actions, true);
     getView().setActions(actions);
     createChildItems(container, stateContainer.getContainerRights());
   }
