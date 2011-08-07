@@ -14,7 +14,7 @@
    height="297mm"
    id="svg21019"
    sodipodi:version="0.32"
-   inkscape:version="0.48.0 r9654"
+   inkscape:version="0.48.1 r9760"
    sodipodi:docname="icons-base.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/tmp/buttons.png"
@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="71"
-     inkscape:cy="807.5"
+     inkscape:cx="268"
+     inkscape:cy="359"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1278"
@@ -56,7 +56,8 @@
        type="xygrid"
        id="GridFromPre046Settings"
        visible="true"
-       enabled="true" />
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <defs
      id="defs21021">
@@ -4692,11 +4693,11 @@
     <image
        sodipodi:absref="/home/vjrj/proyectos/dev/kune/trunk/img/icons/lock_break.png"
        xlink:href="icons/lock_break.png"
-       y="450.82797"
-       x="330.84604"
-       id="image2972"
+       width="16"
        height="16"
-       width="16" />
+       id="image2972"
+       x="330.84604"
+       y="450.82797" />
     <use
        x="0"
        y="0"
@@ -4787,12 +4788,12 @@
     <image
        sodipodi:absref="/home/vjrj/proyectos/dev/kune/trunk/img/icons/lock_break.png"
        xlink:href="icons/lock_break.png"
-       y="432.36218"
-       x="-371"
-       id="image3958"
-       height="16"
+       transform="scale(-1,1)"
        width="16"
-       transform="scale(-1,1)" />
+       height="16"
+       id="image3958"
+       x="-371"
+       y="432.36218" />
     <g
        id="g3962"
        transform="translate(-43.509019,-21.462476)">
@@ -5368,5 +5369,120 @@
        width="8.7500134"
        id="rect3579"
        style="fill:url(#radialGradient4374);fill-opacity:1;stroke:#c83737;stroke-width:1.24998641000000021;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <image
+       y="520.36218"
+       x="445"
+       id="image4719"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAdNJREFU
+OI2Vk7FrU1EUxn/3vbSCJDGN1JQMhSIGXFy0amIE0RJwdtAhOBRFbR3ExUGXgjgIjvoPNIO7m6hL
+1S66OCmRUqjRSEJeb2zQRu85DqGPvMRAPdO937nnx/k+uIaBKpfLxve9587JXL/u+94L56RUqVS0
+XzcAN+fMFQMPFSYUDzt1iXz+CJ5nABBRVlc/sK/+FIMAtFT11uOXLJuFs8R8zwQXzhyMf+lmeRfk
+aNkuMzPTGLMDENbXN0glxzma+syUv8Gz12tWVNMxIO55Zmw85vO+kWPp/iOCIKBarUaszc8fIp1O
+c+/ubS5mvyGqcWA81v+osw3JZBJVYXb22GA8JBIJtv+AUxNqIUA1kg0rb95G7sVCfggYAQzW6VOF
+8KwqiLjRAP1HY2cDVUVFyJ88/n8bFAt5RAQRQVWw1jI5mdkdoH9QpDfc/tHe/QYiLoTUvtZoNhtD
+IUcBAz3neoB229JsNCiVzo9yijdqA2s3qX+vIyKhfn3hKpenV0Zb2DumtIIWmUyWTCZLLncYazdR
+FW4sXguHfaMRwJaI/u78cntOpD7yYOkOP91wNMX9n1jrHAAgpTWMMVuq2jUAi+d6vxHDxEizfaXa
++41PXrH8F0/m4ZhJIciYAAAAAElFTkSuQmCC
+"
+       height="16"
+       width="16" />
+    <path
+       inkscape:connector-curvature="0"
+       style="color:#000000;fill:#d40000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.0625;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 460.54725,523.36218 -5.61351,5.05002 -1.81751,-2.09221 -2.22424,2.28085 c 1.60629,1.4242 2.80319,2.43911 4.13653,3.80876 2.24198,-2.10143 4.53857,-3.76628 6.97148,-5.34924 -0.3707,-1.58182 -0.85095,-2.67256 -1.45275,-3.69818 z"
+       id="path3563-5"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       sodipodi:nodetypes="ccccccc"
+       id="path5217"
+       d="m 272.19758,498.71675 -5.61351,5.05002 -1.81751,-2.09221 -2.22424,2.28085 c 1.60629,1.4242 2.80319,2.43911 4.13653,3.80876 2.24198,-2.10143 4.53857,-3.76628 6.97148,-5.34924 -0.3707,-1.58182 -0.85095,-2.67256 -1.45275,-3.69818 z"
+       style="color:#000000;fill:#ff2a2a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.06250000000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:none;stroke:#c83737;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;opacity:0.71000002"
+       id="rect5219"
+       width="14"
+       height="13.999999"
+       x="261"
+       y="496.36218"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="2.5" />
+    <image
+       y="504.36218"
+       x="268"
+       id="image7247"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAQZJREFU
+OI1j/P//PwMlgIki3cPDABZsggVTo2r+M/wv+/HrO+/nbx8/f/jyrmtb+8UWbGoZ0WMhc0JQg6SM
+QL2xpgmDjJAqw/6rGxhOXDnM8ODOm94TU56VEPTC1x+fyw009Bn+Mv1l0Jd0ZfjL+JvBQteKgYGB
+IRubCzAMeP/lLQcrIw+Dn2YuAwMDA0Ox8ywGZTE9BgYGBg6iDHj78dWPq8+OMXTsTmRgYGBg6NiV
+yHD31SUGBgaGH0QZ8O//v94Tl44xsDGwMGy+PI2BjZGF4ciFgwwMDAxTsRmAEYgMDAwMFjlSHQwM
+DFkMDAy8DAwMnxkYGKadmPKsgmgDSAEDnxIpNgAAJ+ZYJkBPdSwAAAAASUVORK5CYII=
+"
+       height="16"
+       width="16" />
+    <path
+       inkscape:connector-curvature="0"
+       style="color:#000000;fill:#ff2a2a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.0625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 272.19758,658.71675 -5.61351,5.05002 -1.81751,-2.09221 -2.22424,2.28085 c 1.60629,1.4242 2.80319,2.43911 4.13653,3.80876 2.24198,-2.10143 4.53857,-3.76628 6.97148,-5.34924 -0.3707,-1.58182 -0.85095,-2.67256 -1.45275,-3.69818 z"
+       id="path7250"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="2.5"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/core/client/resources/nav/taskadd.png"
+       ry="2.5"
+       y="656.36218"
+       x="261"
+       height="13.999999"
+       width="14"
+       id="rect7252"
+       style="opacity:1;fill:none;stroke:#aa4400;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <image
+       width="16"
+       height="16"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAQZJREFU
+OI1j/P//PwMlgIki3cPDABZsggVTo2r+M/wv+/HrO+/nbx8/f/jyrmtb+8UWbGoZ0WMhc0JQg6SM
+QL2xpgmDjJAqw/6rGxhOXDnM8ODOm94TU56VEPTC1x+fyw009Bn+Mv1l0Jd0ZfjL+JvBQteKgYGB
+IRubCzAMeP/lLQcrIw+Dn2YuAwMDA0Ox8ywGZTE9BgYGBg6iDHj78dWPq8+OMXTsTmRgYGBg6NiV
+yHD31SUGBgaGH0QZ8O//v94Tl44xsDGwMGy+PI2BjZGF4ciFgwwMDAxTsRmAEYgMDAwMFjlSHQwM
+DFkMDAy8DAwMnxkYGKadmPKsgmgDSAEDnxIpNgAAJ+ZYJkBPdSwAAAAASUVORK5CYII=
+"
+       id="image7254"
+       x="265"
+       y="659.36218" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/core/client/resources/nav/task.png"
+       sodipodi:nodetypes="ccccccc"
+       id="path7256"
+       d="m 272.19758,688.71675 -5.61351,5.05002 -1.81751,-2.09221 -2.22424,2.28085 c 1.60629,1.4242 2.80319,2.43911 4.13653,3.80876 2.24198,-2.10143 4.53857,-3.76628 6.97148,-5.34924 -0.3707,-1.58182 -0.85095,-2.67256 -1.45275,-3.69818 z"
+       style="color:#000000;fill:#ff2a2a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.0625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:none;stroke:#aa4400;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect7258"
+       width="14"
+       height="13.999999"
+       x="261"
+       y="686.36218"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/core/client/resources/nav/task.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="2.5" />
   </g>
 </svg>

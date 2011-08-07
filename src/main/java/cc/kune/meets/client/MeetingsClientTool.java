@@ -22,9 +22,9 @@ package cc.kune.meets.client;
 import static cc.kune.meets.shared.MeetingsConstants.NAME;
 import static cc.kune.meets.shared.MeetingsConstants.TYPE_MEETING;
 import static cc.kune.meets.shared.MeetingsConstants.TYPE_ROOT;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -32,13 +32,10 @@ import com.google.inject.Inject;
 
 public class MeetingsClientTool extends FoldableAbstractClientTool {
 
-  private final NavResources navResources;
-
   @Inject
-  public MeetingsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+  public MeetingsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("meets"), toolSelector, cntCapRegistry);
-    this.navResources = navResources;
+    super(NAME, i18n.t("meets"), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_MEETING);
@@ -61,7 +58,7 @@ public class MeetingsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_MEETING, navResources.calendar());
-    registerEmptyMessages(TYPE_ROOT, "There isn't any meeting");
+    registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any meeting"));
   }
 
 }

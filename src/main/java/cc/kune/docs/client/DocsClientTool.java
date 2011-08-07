@@ -24,9 +24,10 @@ import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
 import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
 import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
 import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.docs.shared.DocsConstants;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -34,13 +35,10 @@ import com.google.inject.Inject;
 
 public class DocsClientTool extends FoldableAbstractClientTool {
 
-  private final NavResources navResources;
-
   @Inject
-  public DocsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+  public DocsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("documents"), toolSelector, cntCapRegistry);
-    this.navResources = navResources;
+    super(NAME, i18n.t(DocsConstants.ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -64,8 +62,8 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
-    registerEmptyMessages(TYPE_FOLDER, "This folder is empty");
-    registerEmptyMessages(TYPE_ROOT, "This folder is empty");
+    registerEmptyMessages(TYPE_FOLDER, i18n.t("This folder is empty"));
+    registerEmptyMessages(TYPE_ROOT, i18n.t("This folder is empty"));
   }
 
 }

@@ -29,25 +29,25 @@ import org.junit.Test;
 
 public class DocumentServerToolTest { // extends PersistenceTest {
 
-    private DocumentServerTool serverTool;
+  private DocumentServerTool serverTool;
 
-    @Before
-    public void before() {
-        serverTool = new DocumentServerTool(null, null, null, null);
-    }
+  @Before
+  public void before() {
+    serverTool = new DocumentServerTool(null, null, null, null);
+  }
 
-    @Test
-    public void testCreateContainerInCorrectContainer() {
-        serverTool.checkContainerTypeId(TYPE_ROOT, TYPE_FOLDER);
-        serverTool.checkContainerTypeId(TYPE_FOLDER, TYPE_FOLDER);
-    }
+  @Test
+  public void testCreateContainerInCorrectContainer() {
+    serverTool.checkTypesBeforeContainerCreation(TYPE_ROOT, TYPE_FOLDER);
+    serverTool.checkTypesBeforeContainerCreation(TYPE_FOLDER, TYPE_FOLDER);
+  }
 
-    @Test
-    public void testCreateContentInCorrectContainer() {
-        serverTool.checkContentTypeId(TYPE_ROOT, TYPE_DOCUMENT);
-        serverTool.checkContentTypeId(TYPE_ROOT, TYPE_UPLOADEDFILE);
-        serverTool.checkContentTypeId(TYPE_FOLDER, TYPE_DOCUMENT);
-        serverTool.checkContentTypeId(TYPE_FOLDER, TYPE_UPLOADEDFILE);
-    }
+  @Test
+  public void testCreateContentInCorrectContainer() {
+    serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_DOCUMENT);
+    serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_UPLOADEDFILE);
+    serverTool.checkTypesBeforeContentCreation(TYPE_FOLDER, TYPE_DOCUMENT);
+    serverTool.checkTypesBeforeContentCreation(TYPE_FOLDER, TYPE_UPLOADEDFILE);
+  }
 
 }

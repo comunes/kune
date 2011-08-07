@@ -17,17 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.chat.server;
+package cc.kune.tasks.server;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.Binder;
+import com.google.inject.Module;
 
-public class ChatServerModule extends AbstractModule {
-
-  @Override
-  public void configure() {
-    // To debug Smack, descomment this
-    // XMPPConnection.DEBUG_ENABLED = true;
-    bind(ChatServerTool.class).asEagerSingleton();
-  }
-
+public class TaskServerModule implements Module {
+    public void configure(final Binder binder) {
+        binder.bind(TaskServerTool.class).asEagerSingleton();
+    }
 }

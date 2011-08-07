@@ -30,38 +30,38 @@ import org.junit.Test;
 import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 
-public class BlogServerToolTest { // extends PersistenceTest {
+public class TaskServerToolTest { // extends PersistenceTest {
 
-    private BlogServerTool serverTool;
+  private BlogServerTool serverTool;
 
-    @Before
-    public void before() {
-        serverTool = new BlogServerTool(null, null, null, null);
-    }
+  @Before
+  public void before() {
+    serverTool = new BlogServerTool(null, null, null, null);
+  }
 
-    @Test
-    public void testCreateContainerInCorrectContainer() {
-        serverTool.checkContainerTypeId(TYPE_ROOT, TYPE_BLOG);
-    }
+  @Test
+  public void testCreateContainerInCorrectContainer() {
+    serverTool.checkTypesBeforeContainerCreation(TYPE_ROOT, TYPE_BLOG);
+  }
 
-    @Test(expected = ContainerNotPermittedException.class)
-    public void testCreateContainerInIncorrectContainer7() {
-        serverTool.checkContainerTypeId(TYPE_BLOG, TYPE_BLOG);
-    }
+  @Test(expected = ContainerNotPermittedException.class)
+  public void testCreateContainerInIncorrectContainer7() {
+    serverTool.checkTypesBeforeContainerCreation(TYPE_BLOG, TYPE_BLOG);
+  }
 
-    @Test
-    public void testCreateContentInCorrectContainer() {
-        serverTool.checkContentTypeId(TYPE_BLOG, TYPE_POST);
-        serverTool.checkContentTypeId(TYPE_BLOG, TYPE_UPLOADEDFILE);
-    }
+  @Test
+  public void testCreateContentInCorrectContainer() {
+    serverTool.checkTypesBeforeContentCreation(TYPE_BLOG, TYPE_POST);
+    serverTool.checkTypesBeforeContentCreation(TYPE_BLOG, TYPE_UPLOADEDFILE);
+  }
 
-    @Test(expected = ContentNotPermittedException.class)
-    public void testCreateContentInIncorrectContainer1() {
-        serverTool.checkContentTypeId(TYPE_ROOT, TYPE_POST);
-    }
+  @Test(expected = ContentNotPermittedException.class)
+  public void testCreateContentInIncorrectContainer1() {
+    serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_POST);
+  }
 
-    @Test(expected = ContentNotPermittedException.class)
-    public void testCreateContentInIncorrectContainer8() {
-        serverTool.checkContentTypeId(TYPE_ROOT, TYPE_UPLOADEDFILE);
-    }
+  @Test(expected = ContentNotPermittedException.class)
+  public void testCreateContentInIncorrectContainer8() {
+    serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_UPLOADEDFILE);
+  }
 }

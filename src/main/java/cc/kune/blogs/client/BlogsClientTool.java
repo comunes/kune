@@ -24,9 +24,10 @@ import static cc.kune.blogs.shared.BlogsConstants.TYPE_BLOG;
 import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
 import static cc.kune.blogs.shared.BlogsConstants.TYPE_ROOT;
 import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -34,13 +35,10 @@ import com.google.inject.Inject;
 
 public class BlogsClientTool extends FoldableAbstractClientTool {
 
-  private final NavResources navResources;
-
   @Inject
-  public BlogsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+  public BlogsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("blogs"), toolSelector, cntCapRegistry);
-    this.navResources = navResources;
+    super(NAME, i18n.t(BlogsConstants.ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
@@ -64,8 +62,8 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_BLOG, navResources.blog());
     registerContentTypeIcon(TYPE_POST, navResources.post());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
-    registerEmptyMessages(TYPE_ROOT, "There isn't any blog, create one");
-    registerEmptyMessages(TYPE_BLOG, "This blog hasn't any post, create one");
+    registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any blog, create one"));
+    registerEmptyMessages(TYPE_BLOG, i18n.t("This blog hasn't any post, create one"));
   }
 
 }

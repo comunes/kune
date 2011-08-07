@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,17 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.chat.server;
+package cc.kune.tasks.client;
 
-import com.google.inject.AbstractModule;
+import com.google.gwt.inject.client.Ginjector;
 
-public class ChatServerModule extends AbstractModule {
+public interface TasksGinjector extends Ginjector {
 
-  @Override
-  public void configure() {
-    // To debug Smack, descomment this
-    // XMPPConnection.DEBUG_ENABLED = true;
-    bind(ChatServerTool.class).asEagerSingleton();
-  }
+  TasksParts getTasksParts();
 
 }

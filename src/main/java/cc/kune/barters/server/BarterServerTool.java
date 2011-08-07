@@ -26,14 +26,13 @@ import static cc.kune.barters.shared.BartersConstants.TYPE_FOLDER;
 import static cc.kune.barters.shared.BartersConstants.TYPE_ROOT;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Date;
 
-import cc.kune.core.client.errors.ContainerNotPermittedException;
-import cc.kune.core.client.errors.ContentNotPermittedException;
+import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.ToolConfigurationManager;
-import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.server.tool.ServerWaveTool;
 import cc.kune.core.server.utils.UrlUtils;
@@ -44,67 +43,22 @@ import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
-import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class BarterServerTool implements ServerWaveTool {
+public class BarterServerTool extends AbstractServerTool implements ServerWaveTool {
 
   private static final String BARTER_GADGET = "http://troco.ourproject.org/gadget/org.ourproject.troco.client.TrocoWaveGadget.gadget.xml";
-  private final ToolConfigurationManager configurationManager;
-  private final ContainerManager containerManager;
-  private final ContentManager contentManager;
   private final URL gadgetUrl;
-  private final I18nTranslationService i18n;
 
   @Inject
   public BarterServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-      final ToolConfigurationManager configurationManager,
-      final I18nTranslationService translationService) {
-    this.contentManager = contentManager;
-    this.containerManager = containerManager;
-    this.configurationManager = configurationManager;
-    this.i18n = translationService;
+      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
+    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_BARTER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
+        Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER), contentManager,
+        containerManager, configurationManager, i18n, ServerToolTarget.forUsers);
     gadgetUrl = UrlUtils.of(BARTER_GADGET);
-  }
-
-  void checkContainerTypeId(final String parentTypeId, final String typeId) {
-    if (typeId.equals(TYPE_FOLDER)) {
-      // ok valid container
-      if ((typeId.equals(TYPE_FOLDER) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
-        // ok
-      } else {
-        throw new ContainerNotPermittedException();
-      }
-    } else {
-      throw new ContainerNotPermittedException();
-    }
-  }
-
-  void checkContentTypeId(final String parentTypeId, final String typeId) {
-    if (typeId.equals(TYPE_BARTER)) {
-      // ok valid content
-      final boolean parentIsFolderOrRoot = parentTypeId.equals(TYPE_ROOT)
-          || parentTypeId.equals(TYPE_FOLDER);
-      if ((typeId.equals(TYPE_BARTER) && parentIsFolderOrRoot)) {
-        // ok
-      } else {
-        throw new ContentNotPermittedException();
-      }
-    } else {
-      throw new ContentNotPermittedException();
-    }
-  }
-
-  @Override
-  public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
-    checkContainerTypeId(parentTypeId, typeId);
-  }
-
-  @Override
-  public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
-    checkContentTypeId(parentTypeId, typeId);
   }
 
   @Override
@@ -113,59 +67,30 @@ public class BarterServerTool implements ServerWaveTool {
   }
 
   @Override
-  public String getName() {
-    return NAME;
-  }
-
-  @Override
-  public String getRootName() {
-    return ROOT_NAME;
-  }
-
-  @Override
-  public ServerToolTarget getTarget() {
-    return ServerToolTarget.forUsers;
-  }
-
-  @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
-    final ToolConfiguration config = new ToolConfiguration();
-    final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-    setContainerBartersAcl(rootFolder);
-    config.setRoot(rootFolder);
-    group.setToolConfig(NAME, config);
-    configurationManager.persist(config);
-    final Content content = contentManager.createContent(
-        i18n.t("Barter sample"),
-        i18n.t("This is only a barter sample. You can invite other participants to this barter, but also publish to the general public allowing you to share services, goods, etc."),
-        user, rootFolder, TYPE_BARTER, gadgetUrl);
-    content.addAuthor(user);
-    content.setLanguage(user.getLanguage());
-    content.setTypeId(TYPE_BARTER);
-    content.setStatus(ContentStatus.publishedOnline);
+    final Container rootFolder = createRoot(group);
+    setContainerAcl(rootFolder);
+    final Content content = createInitialContent(user, group, rootFolder, i18n.t("Barter sample"),
+        i18n.t("This is only a barter sample. You can invite other participants to this barter, "
+            + "but also publish to the general public allowing you to share services, goods, etc."),
+        TYPE_BARTER, gadgetUrl);
     contentManager.save(content);
     return group;
   }
 
   @Override
   public void onCreateContainer(final Container container, final Container parent) {
-    setContainerBartersAcl(container);
+    setContainerAcl(container);
   }
 
   @Override
   public void onCreateContent(final Content content, final Container parent) {
-    // addGadget(content);
     content.setStatus(ContentStatus.publishedOnline);
     content.setPublishedOn(new Date());
   }
 
   @Override
-  @Inject
-  public void register(final ServerToolRegistry registry) {
-    registry.register(this);
-  }
-
-  private void setContainerBartersAcl(final Container container) {
+  protected void setContainerAcl(final Container container) {
     final AccessLists bartersAcl = new AccessLists();
     bartersAcl.getAdmins().setMode(GroupListMode.NORMAL);
     bartersAcl.getAdmins().add(container.getOwner());

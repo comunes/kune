@@ -61,6 +61,8 @@ import cc.kune.meets.client.MeetingsGinjector;
 import cc.kune.pspace.client.PSpaceGinModule;
 import cc.kune.pspace.client.PSpaceParts;
 import cc.kune.pspace.client.PSpacePresenter;
+import cc.kune.tasks.client.TasksGinModule;
+import cc.kune.tasks.client.TasksGinjector;
 import cc.kune.wave.client.WaveGinModule;
 import cc.kune.wave.client.WaveParts;
 import cc.kune.wiki.client.WikiGinModule;
@@ -75,9 +77,9 @@ import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, WaveGinModule.class, PSpaceGinModule.class,
     GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class, ChatGinModule.class,
-    WikiGinModule.class, BartersGinModule.class, MeetingsGinModule.class })
+    WikiGinModule.class, BartersGinModule.class, MeetingsGinModule.class, TasksGinModule.class })
 public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector,
-    WikiGinjector, BartersGinjector, MeetingsGinjector, ChatGinjector {
+    WikiGinjector, BartersGinjector, MeetingsGinjector, ChatGinjector, TasksGinjector {
 
   /*
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)

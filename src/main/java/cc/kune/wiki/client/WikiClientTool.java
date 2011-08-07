@@ -24,9 +24,9 @@ import static cc.kune.wiki.shared.WikiConstants.TYPE_FOLDER;
 import static cc.kune.wiki.shared.WikiConstants.TYPE_ROOT;
 import static cc.kune.wiki.shared.WikiConstants.TYPE_UPLOADEDFILE;
 import static cc.kune.wiki.shared.WikiConstants.TYPE_WIKIPAGE;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -34,19 +34,14 @@ import com.google.inject.Inject;
 
 public class WikiClientTool extends FoldableAbstractClientTool {
 
-  private final NavResources navResources;
-
   @Inject
-  public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+  public WikiClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("wiki"), toolSelector, cntCapRegistry);
-    this.navResources = navResources;
+    super(NAME, i18n.t("wiki"), toolSelector, cntCapRegistry, i18n, navResources);
 
-    // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
     registerDragableTypes(TYPE_WIKIPAGE, TYPE_FOLDER, TYPE_UPLOADEDFILE);
     registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
-    // registerPublishModerableTypes();
     registerRateableTypes(TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
     registerRenamableTypes(TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
     registerTageableTypes(TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
@@ -65,8 +60,8 @@ public class WikiClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_WIKIPAGE, navResources.wikipage());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
-    registerEmptyMessages(TYPE_FOLDER, "There folder is empty");
-    registerEmptyMessages(TYPE_ROOT, "This wiki is empty");
+    registerEmptyMessages(TYPE_FOLDER, i18n.t("There folder is empty"));
+    registerEmptyMessages(TYPE_ROOT, i18n.t("This wiki is empty"));
   }
 
 }

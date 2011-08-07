@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,17 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.chat.server;
+package cc.kune.tasks.shared;
 
-import com.google.inject.AbstractModule;
+public final class TasksConstants {
 
-public class ChatServerModule extends AbstractModule {
+  public static final String NAME = "tasks";
+  public static final String ROOT_NAME = "tasks";
+  public static final String TYPE_FOLDER = NAME + "." + "folder";
+  public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String TYPE_TASK = NAME + "." + "task";
 
-  @Override
-  public void configure() {
-    // To debug Smack, descomment this
-    // XMPPConnection.DEBUG_ENABLED = true;
-    bind(ChatServerTool.class).asEagerSingleton();
+  private TasksConstants() {
   }
-
 }

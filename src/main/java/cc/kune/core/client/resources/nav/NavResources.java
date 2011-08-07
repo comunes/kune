@@ -108,6 +108,12 @@ public interface NavResources extends ClientBundle {
   @Source("room_add.png")
   ImageResource roomAdd();
 
+  @Source("task.png")
+  ImageResource task();
+
+  @Source("taskadd.png")
+  ImageResource taskadd();
+
   @Source("upload.png")
   ImageResource upload();
 

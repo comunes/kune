@@ -17,12 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package cc.kune.docs.client.actions;
+package cc.kune.tasks.client.actions;
 
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
-import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
-import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
-import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.tasks.shared.TasksConstants.TYPE_FOLDER;
+import static cc.kune.tasks.shared.TasksConstants.TYPE_ROOT;
+import static cc.kune.tasks.shared.TasksConstants.TYPE_TASK;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -40,46 +39,45 @@ import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class DocsClientActions extends AbstractFoldableToolActions {
+public class TasksClientActions extends AbstractFoldableToolActions {
 
-  final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+  final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_TASK };
   final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
   final String[] containersNoRoot = { TYPE_FOLDER };
-  final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-  final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-  final String[] root = { TYPE_ROOT };
+  final String[] contents = { TYPE_TASK };
+  final String[] noRoot = { TYPE_FOLDER, TYPE_TASK };
 
   @Inject
-  public DocsClientActions(final I18nUITranslationService i18n, final Session session,
+  public TasksClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewDocMenuItem> newDocMenuItem,
-      final Provider<NewDocIconBtn> newDocIconBtn, final Provider<NewFolderMenuItem> newFolderBtn,
-      final Provider<OpenDocMenuItem> openContentMenuItem,
-      final Provider<DelDocMenuItem> delContentMenuItem,
+      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewTaskMenuItem> newTaskItem,
+      final Provider<NewTaskIconBtn> newTaskIconBtn, final Provider<NewFolderBtn> newFolderBtn,
+      final Provider<OpenFolderMenuItem> openContentMenuItem,
+      final Provider<DelTaskMenuItem> delContentMenuItem,
+      final Provider<RefreshContentMenuItem> refresh,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
-      final Provider<ParticipateInContentBtn> participateBtn,
+      final Provider<ParticipateInContentBtn> participateBtn, final TasksNewMenu taskNewMenu,
+      final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
-      final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
-      final Provider<SetAsHomePageMenuItem> setAsHomePage,
-      final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu docsNewMenu) {
+      final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, docsNewMenu, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, taskNewMenu, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocMenuItem, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocIconBtn, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskItem, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskIconBtn, all);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn,
+    // containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, setAsHomePage, contents);
-    newMenusRegistry.register(TYPE_FOLDER, docsNewMenu.get());
-    newMenusRegistry.register(TYPE_ROOT, docsNewMenu.get());
+    newMenusRegistry.register(TYPE_FOLDER, taskNewMenu.get());
+    newMenusRegistry.register(TYPE_ROOT, taskNewMenu.get());
   }
 
   @Override

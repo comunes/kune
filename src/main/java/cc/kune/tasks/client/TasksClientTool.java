@@ -17,12 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.barters.client;
+package cc.kune.tasks.client;
 
-import static cc.kune.barters.shared.BartersConstants.NAME;
-import static cc.kune.barters.shared.BartersConstants.TYPE_BARTER;
-import static cc.kune.barters.shared.BartersConstants.TYPE_FOLDER;
-import static cc.kune.barters.shared.BartersConstants.TYPE_ROOT;
+import static cc.kune.tasks.shared.TasksConstants.NAME;
+import static cc.kune.tasks.shared.TasksConstants.ROOT_NAME;
+import static cc.kune.tasks.shared.TasksConstants.TYPE_FOLDER;
+import static cc.kune.tasks.shared.TasksConstants.TYPE_ROOT;
+import static cc.kune.tasks.shared.TasksConstants.TYPE_TASK;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -31,22 +32,22 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
-public class BartersClientTool extends FoldableAbstractClientTool {
+public class TasksClientTool extends FoldableAbstractClientTool {
 
   @Inject
-  public BartersClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
+  public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("barters"), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t(ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
 
-    // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-    registerAuthorableTypes(TYPE_BARTER);
-    registerDragableTypes(TYPE_BARTER, TYPE_FOLDER);
+    // registerAclEditableTypes();
+    registerAuthorableTypes(TYPE_TASK);
+    registerDragableTypes(TYPE_TASK, TYPE_FOLDER);
     registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
-    // registerPublishModerableTypes();
-    registerRateableTypes(TYPE_BARTER);
-    registerRenamableTypes(TYPE_FOLDER, TYPE_BARTER);
-    registerTageableTypes(TYPE_BARTER);
-    registerTranslatableTypes(TYPE_FOLDER, TYPE_BARTER);
+    registerPublishModerableTypes(TYPE_TASK);
+    registerRateableTypes(TYPE_TASK);
+    registerRenamableTypes(TYPE_FOLDER, TYPE_TASK);
+    registerTageableTypes(TYPE_FOLDER, TYPE_TASK);
+    // registerTranslatableTypes();
     registerIcons();
   }
 
@@ -56,11 +57,12 @@ public class BartersClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
-    registerContentTypeIcon(TYPE_BARTER, navResources.barter());
-    registerEmptyMessages(TYPE_FOLDER, i18n.t("There folder is empty"));
-    registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any barter"));
+    registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIcon(TYPE_TASK, navResources.task());
+    final String noTask = i18n.t("There isn't any task, create one");
+    registerEmptyMessages(TYPE_ROOT, noTask);
+    registerEmptyMessages(TYPE_FOLDER, noTask);
   }
 
 }

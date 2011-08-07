@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,17 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.chat.server;
+package cc.kune.tasks.client.actions;
 
-import com.google.inject.AbstractModule;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.actions.GoParentContainerBtn;
+import cc.kune.tasks.shared.TasksConstants;
 
-public class ChatServerModule extends AbstractModule {
+import com.google.inject.Inject;
 
-  @Override
-  public void configure() {
-    // To debug Smack, descomment this
-    // XMPPConnection.DEBUG_ENABLED = true;
-    bind(ChatServerTool.class).asEagerSingleton();
+public class GoParentFolderBtn extends GoParentContainerBtn {
+
+  @Inject
+  public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
+      final CoreResources res, final Session session) {
+    super(i18n, action, res, session, TasksConstants.TYPE_ROOT);
   }
 
 }

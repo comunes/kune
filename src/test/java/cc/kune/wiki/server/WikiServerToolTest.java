@@ -27,8 +27,6 @@ import static cc.kune.wiki.shared.WikiConstants.TYPE_WIKIPAGE;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.wiki.server.WikiServerTool;
-
 public class WikiServerToolTest { // extends PersistenceTest {
 
   private WikiServerTool serverTool;
@@ -40,16 +38,16 @@ public class WikiServerToolTest { // extends PersistenceTest {
 
   @Test
   public void testCreateContainerInCorrectContainer() {
-    serverTool.checkContainerTypeId(TYPE_ROOT, TYPE_FOLDER);
-    serverTool.checkContainerTypeId(TYPE_FOLDER, TYPE_FOLDER);
+    serverTool.checkTypesBeforeContainerCreation(TYPE_ROOT, TYPE_FOLDER);
+    serverTool.checkTypesBeforeContainerCreation(TYPE_FOLDER, TYPE_FOLDER);
   }
 
   @Test
   public void testCreateContentInCorrectContainer() {
-    serverTool.checkContentTypeId(TYPE_ROOT, TYPE_WIKIPAGE);
-    serverTool.checkContentTypeId(TYPE_ROOT, TYPE_UPLOADEDFILE);
-    serverTool.checkContentTypeId(TYPE_FOLDER, TYPE_WIKIPAGE);
-    serverTool.checkContentTypeId(TYPE_FOLDER, TYPE_UPLOADEDFILE);
+    serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_WIKIPAGE);
+    serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_UPLOADEDFILE);
+    serverTool.checkTypesBeforeContentCreation(TYPE_FOLDER, TYPE_WIKIPAGE);
+    serverTool.checkTypesBeforeContentCreation(TYPE_FOLDER, TYPE_UPLOADEDFILE);
   }
 
 }

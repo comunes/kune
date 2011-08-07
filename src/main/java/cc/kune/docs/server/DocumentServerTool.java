@@ -26,130 +26,45 @@ import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
 import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
 import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 
-import java.util.Date;
+import java.util.Arrays;
 
-import cc.kune.core.client.errors.ContainerNotPermittedException;
-import cc.kune.core.client.errors.ContentNotPermittedException;
+import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.ToolConfigurationManager;
-import cc.kune.core.server.tool.ServerTool;
-import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.tool.ServerToolTarget;
-import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.shared.DocsConstants;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
-import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class DocumentServerTool implements ServerTool {
-  private final ToolConfigurationManager configurationManager;
-  private final ContainerManager containerManager;
-  private final ContentManager contentManager;
-  private final I18nTranslationService i18n;
+public class DocumentServerTool extends AbstractServerTool {
 
   @Inject
   public DocumentServerTool(final ContentManager contentManager,
       final ContainerManager containerManager, final ToolConfigurationManager configurationManager,
-      final I18nTranslationService translationService) {
-    this.contentManager = contentManager;
-    this.containerManager = containerManager;
-    this.configurationManager = configurationManager;
-    this.i18n = translationService;
-  }
-
-  void checkContainerTypeId(final String parentTypeId, final String typeId) {
-    if (typeId.equals(TYPE_FOLDER)) {
-      // ok valid container
-      if ((typeId.equals(TYPE_FOLDER) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
-        // ok
-      } else {
-        throw new ContainerNotPermittedException();
-      }
-    } else {
-      throw new ContainerNotPermittedException();
-    }
-  }
-
-  void checkContentTypeId(final String parentTypeId, final String typeId) {
-    if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE)) {
-      // ok valid content
-      if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
-          || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
-        // ok
-      } else {
-        throw new ContentNotPermittedException();
-      }
-
-    } else {
-      throw new ContentNotPermittedException();
-    }
-  }
-
-  @Override
-  public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
-    checkContainerTypeId(parentTypeId, typeId);
-  }
-
-  @Override
-  public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
-    checkContentTypeId(parentTypeId, typeId);
-  }
-
-  @Override
-  public String getName() {
-    return NAME;
-  }
-
-  @Override
-  public String getRootName() {
-    return ROOT_NAME;
-  }
-
-  @Override
-  public ServerToolTarget getTarget() {
-    return ServerToolTarget.forBoth;
+      final I18nTranslationService i18n) {
+    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_DOCUMENT, TYPE_UPLOADEDFILE), Arrays.asList(
+        TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
+        contentManager, containerManager, configurationManager, i18n, ServerToolTarget.forBoth);
   }
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
-    final ToolConfiguration config = new ToolConfiguration();
-    final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-    config.setRoot(rootFolder);
-    group.setToolConfig(NAME, config);
-    configurationManager.persist(config);
+    final Container rootFolder = createRoot(group);
 
     final boolean hasVars = otherVars.length >= 2;
     final String title = hasVars ? (String) otherVars[0] : i18n.t("Document sample");
     final String body = hasVars ? (String) otherVars[1] : i18n.t("This is only a sample of document");
+    final String contentType = DocsConstants.TYPE_DOCUMENT;
 
-    final Content content = contentManager.createContent(title, body, user, rootFolder,
-        DocsConstants.TYPE_DOCUMENT);
-    content.addAuthor(user);
-    content.setLanguage(user.getLanguage());
-    content.setTypeId(TYPE_DOCUMENT);
-    content.setStatus(ContentStatus.publishedOnline);
-    content.setPublishedOn(new Date());
+    final Content content = createInitialContent(user, group, rootFolder, title, body, contentType);
     group.setDefaultContent(content);
     return group;
   }
 
-  @Override
-  public void onCreateContainer(final Container container, final Container parent) {
-  }
-
-  @Override
-  public void onCreateContent(final Content content, final Container parent) {
-  }
-
-  @Override
-  @Inject
-  public void register(final ServerToolRegistry registry) {
-    registry.register(this);
-  }
 }
