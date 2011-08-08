@@ -2,6 +2,7 @@ package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.IconsRegistry;
@@ -71,9 +72,13 @@ public class PathToolbarUtils {
   private ButtonDescriptor createPathButton(final ContainerSimpleDTO container, final int length,
       final int pos) {
     final String style = calculateStyle(pos, length);
+    final String title = container.getName();
     final ButtonDescriptor btn = new ButtonDescriptor(new GotoTokenAction(
-        iconsRegistry.getContentTypeIcon(container.getTypeId()), container.getName(),
+        iconsRegistry.getContentTypeIcon(container.getTypeId()), TextUtils.ellipsis(title, 15),
         container.getStateToken(), style, stateManager, eventBus));
+    if (title.length() > 15) {
+      btn.withToolTip(title);
+    }
     return btn;
   }
 }
