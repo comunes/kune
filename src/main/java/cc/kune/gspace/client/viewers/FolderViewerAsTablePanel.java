@@ -30,6 +30,7 @@ import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
@@ -102,6 +103,9 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
         selected = itemWidget;
       }
     });
+    if (ContentStatus.inTheDustbin.equals(item.getContentStatus())) {
+      itemWidget.getTitleWidget().addStyleName("k-line-through");
+    }
     itemWidget.getRowDoubleClick().addDoubleClickHandler(doubleClickHandler);
     itemWidget.getRowMouse().addMouseOutHandler(new MouseOutHandler() {
       @Override

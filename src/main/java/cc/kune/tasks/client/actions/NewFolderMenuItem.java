@@ -19,18 +19,20 @@
  */
 package cc.kune.tasks.client.actions;
 
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.DelContentMenuItem;
+import cc.kune.gspace.client.actions.NewContainerMenuItem;
+import cc.kune.tasks.shared.TasksConstants;
 
 import com.google.inject.Inject;
 
-public class DelTaskMenuItem extends DelContentMenuItem {
+public class NewFolderMenuItem extends NewContainerMenuItem {
 
   @Inject
-  public DelTaskMenuItem(final I18nTranslationService i18n, final DelContentAction action,
-      final CoreResources res) {
-    super(i18n, action, res);
-    this.withText(i18n.t("Mark as done"));
+  public NewFolderMenuItem(final I18nTranslationService i18n, final NewContainerAction action,
+      final NavResources res, final TasksNewMenu newMenu) {
+    super(i18n, action, res.taskfolderadd(), i18n.t("New task folder"), i18n.t("Create a new folder"),
+        i18n.t("New task folder"), TasksConstants.TYPE_FOLDER, newMenu.get());
   }
+
 }

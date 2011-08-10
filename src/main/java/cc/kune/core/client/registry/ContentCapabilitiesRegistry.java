@@ -37,6 +37,7 @@ public class ContentCapabilitiesRegistry {
   private final PublishModerableRegistry publishModerable;
   private final RateableRegistry rateable;
   private final RenamableRegistry renamable;
+  private final ShowDeletedRegistry showDeleted;
   private final TageableRegistry tageable;
   private final TranslatableRegistry translatable;
   private final VersionableRegistry versionable;
@@ -53,7 +54,8 @@ public class ContentCapabilitiesRegistry {
       final RateableRegistry rateable, final TageableRegistry tageable,
       final RenamableRegistry renamable, final TranslatableRegistry translatable,
       final VersionableRegistry versionable, final EmptyMessagesRegistry emptyMessagesRegistry,
-      final XmppComentableRegistry xmppComentable, final XmppNotifyCapableRegistry xmppNotifyCapable) {
+      final XmppComentableRegistry xmppComentable, final XmppNotifyCapableRegistry xmppNotifyCapable,
+      final ShowDeletedRegistry showDeleted) {
     this.authorable = authorableRegistry;
     this.newMenus = newMenus;
     this.aclEditable = aclEditableRegistry;
@@ -73,6 +75,7 @@ public class ContentCapabilitiesRegistry {
     this.emptyMessagesRegistry = emptyMessagesRegistry;
     this.xmppComentable = xmppComentable;
     this.xmppNotifyCapable = xmppNotifyCapable;
+    this.showDeleted = showDeleted;
   }
 
   public boolean canBeHomepage(final String typeId) {
@@ -133,6 +136,10 @@ public class ContentCapabilitiesRegistry {
 
   public RenamableRegistry getRenamable() {
     return renamable;
+  }
+
+  public ShowDeletedRegistry getShowDeleted() {
+    return showDeleted;
   }
 
   public TageableRegistry getTageable() {
@@ -213,6 +220,10 @@ public class ContentCapabilitiesRegistry {
 
   public boolean isXmppNotifyCapable(final String typeId) {
     return xmppNotifyCapable.contains(typeId);
+  }
+
+  public boolean showDeleted(final String typeId) {
+    return showDeleted.contains(typeId);
   }
 
 }

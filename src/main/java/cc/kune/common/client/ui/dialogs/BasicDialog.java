@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -44,6 +45,8 @@ public class BasicDialog extends Composite implements BasicDialogView {
   VerticalPanel bottomPanel;
   @UiField
   FlowPanel btnPanel;
+  @UiField
+  PushButton closeBtn;
   @UiField
   Button firstBtn;
   @UiField
@@ -79,6 +82,11 @@ public class BasicDialog extends Composite implements BasicDialogView {
   }
 
   @Override
+  public HasClickHandlers getCloseBtn() {
+    return closeBtn;
+  }
+
+  @Override
   public HasClickHandlers getFirstBtn() {
     return firstBtn;
   }
@@ -96,6 +104,11 @@ public class BasicDialog extends Composite implements BasicDialogView {
   @Override
   public HasDirectionalText getTitleText() {
     return title;
+  }
+
+  @Override
+  public void setCloseBtnVisible(final boolean visible) {
+    closeBtn.setVisible(visible);
   }
 
   public void setFirstBtnEnabled(final boolean enabled) {

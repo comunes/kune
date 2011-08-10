@@ -29,6 +29,7 @@ import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
@@ -51,9 +52,11 @@ public class TasksClientActions extends AbstractFoldableToolActions {
   public TasksClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
       final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewTaskMenuItem> newTaskItem,
-      final Provider<NewTaskIconBtn> newTaskIconBtn, final Provider<NewFolderBtn> newFolderBtn,
+      final Provider<NewTaskIconBtn> newTaskIconBtn,
+      final Provider<NewFolderMenuItem> newFolderMenuItem,
       final Provider<OpenFolderMenuItem> openContentMenuItem,
-      final Provider<DelTaskMenuItem> delContentMenuItem,
+      final Provider<MarkAsDoneTaskMenuItem> marksAsDoneMenuItem,
+      final Provider<MarkAsNotDoneTaskMenuItem> marksAsNotDoneMenuItem,
       final Provider<RefreshContentMenuItem> refresh,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn, final TasksNewMenu taskNewMenu,
@@ -66,15 +69,17 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskIconBtn, all);
-    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn,
-    // containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderMenuItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsDoneMenuItem,
+        ContentStatus.publishedOnline, TYPE_TASK);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsNotDoneMenuItem,
+        ContentStatus.inTheDustbin, TYPE_TASK);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     newMenusRegistry.register(TYPE_FOLDER, taskNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, taskNewMenu.get());

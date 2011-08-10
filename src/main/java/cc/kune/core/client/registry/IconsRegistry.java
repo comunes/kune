@@ -22,57 +22,62 @@ package cc.kune.core.client.registry;
 import java.util.HashMap;
 import java.util.Map;
 
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 
 public class IconsRegistry {
-    private final Map<String, Object> contentTypesIcons;
+  private final Map<String, Object> contentTypesIcons;
 
-    public IconsRegistry() {
-        contentTypesIcons = new HashMap<String, Object>();
-    }
+  public IconsRegistry() {
+    contentTypesIcons = new HashMap<String, Object>();
+  }
 
-    private String concatenate(final String typeId, final BasicMimeTypeDTO mimeType) {
-        if (mimeType != null) {
-            return typeId + "|" + mimeType;
-        } else {
-            return typeId;
-        }
-    }
+  public Object getContentTypeIcon(final String typeId) {
+    return contentTypesIcons.get(typeId);
+  }
 
-    public Object getContentTypeIcon(final String typeId) {
-        return contentTypesIcons.get(typeId);
+  /**
+   * If there is a specific icon for a type/subtype pair or a generic type icon
+   * in defect
+   * 
+   * @param typeId
+   *          the kune typeId (see *ClientTool)
+   * @param mimeType
+   * @return
+   */
+  public Object getContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType) {
+    Object icon = getContentTypeIcon(IdGenerator.generate(typeId,
+        mimeType == null ? null : mimeType.toString()));
+    if (icon == null) {
+      if (mimeType == null) {
+        return getContentTypeIcon(typeId);
+      }
+    } else {
+      return icon;
     }
+    final String subtype = mimeType.getSubtype();
+    if (subtype != null && subtype.length() > 0) {
+      icon = getContentTypeIcon(typeId, new BasicMimeTypeDTO(mimeType.getType()));
+    }
+    return icon == null ? getContentTypeIcon(typeId) : icon;
+  }
 
-    /**
-     * If there is a specific icon for a type/subtype pair or a generic type
-     * icon in defect
-     * 
-     * @param typeId
-     *            the kune typeId (see *ClientTool)
-     * @param mimeType
-     * @return
-     */
-    public Object getContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType) {
-        Object icon = getContentTypeIcon(concatenate(typeId, mimeType));
-        if (icon == null) {
-            if (mimeType == null) {
-                return getContentTypeIcon(typeId);
-            }
-        } else {
-            return icon;
-        }
-        final String subtype = mimeType.getSubtype();
-        if (subtype != null && subtype.length() > 0) {
-            icon = getContentTypeIcon(typeId, new BasicMimeTypeDTO(mimeType.getType()));
-        }
-        return icon == null ? getContentTypeIcon(typeId) : icon;
-    }
+  public Object getContentTypeIcon(final String typeId, final ContentStatus contentStatus) {
+    final Object icon = getContentTypeIcon(IdGenerator.generate(typeId, contentStatus.toString()));
+    return (icon == null ? getContentTypeIcon(typeId) : icon);
+  }
 
-    public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType, final Object icon) {
-        registerContentTypeIcon(concatenate(typeId, mimeType), icon);
-    }
+  public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType,
+      final Object icon) {
+    registerContentTypeIcon(IdGenerator.generate(typeId, mimeType.toString()), icon);
+  }
 
-    public void registerContentTypeIcon(final String contentTypeId, final Object icon) {
-        contentTypesIcons.put(contentTypeId, icon);
-    }
+  public void registerContentTypeIcon(final String typeId, final ContentStatus contentStatus,
+      final Object icon) {
+    registerContentTypeIcon(IdGenerator.generate(typeId, contentStatus.toString()), icon);
+  }
+
+  public void registerContentTypeIcon(final String contentTypeId, final Object icon) {
+    contentTypesIcons.put(contentTypeId, icon);
+  }
 }

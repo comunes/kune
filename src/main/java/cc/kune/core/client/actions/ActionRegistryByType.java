@@ -29,6 +29,8 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescProviderCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.core.client.registry.IdGenerator;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.google.inject.Provider;
@@ -74,6 +76,14 @@ public class ActionRegistryByType {
   }
 
   public void addAction(@Nonnull final String actionsGroupId,
+      final @Nonnull Provider<? extends GuiActionDescrip> action, final ContentStatus status,
+      @Nonnull final String... typeIds) {
+    for (final String typeId : typeIds) {
+      addAction(actionsGroupId, action, IdGenerator.generate(typeId, status.toString()));
+    }
+  }
+
+  public void addAction(@Nonnull final String actionsGroupId,
       final @Nonnull Provider<? extends GuiActionDescrip> action, @Nonnull final String... typeIds) {
     for (final String typeId : typeIds) {
       final GuiActionDescProviderCollection actionColl = getActions(actionsGroupId, typeId);
@@ -94,11 +104,6 @@ public class ActionRegistryByType {
       actions.put(key, actionColl);
     }
     return actionColl;
-  }
-
-  public GuiActionDescCollection getCurrentActions(final Object targetItem, final boolean isLogged,
-      final AccessRights rights) {
-    return getCurrentActions(targetItem, GENERIC_TYPE_ID, isLogged, rights, null);
   }
 
   public GuiActionDescCollection getCurrentActions(final Object targetItem, final boolean isLogged,
@@ -128,6 +133,16 @@ public class ActionRegistryByType {
     return collection;
   }
 
+  public <T> GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
+      final ContentStatus status, final boolean isLogged, final AccessRights rights,
+      @Nullable final String actionsGroupId) {
+    final GuiActionDescCollection collection = new GuiActionDescCollection();
+    collection.addAll(getCurrentActions(targetItem, typeId, isLogged, rights, actionsGroupId));
+    collection.addAll(getCurrentActions(targetItem, IdGenerator.generate(typeId, status.toString()),
+        isLogged, rights, actionsGroupId));
+    return collection;
+  }
+
   private boolean mustAdd(final RolAction action, final boolean isLogged, final AccessRights rights) {
     if (action.isAuthNeed()) {
       if (!isLogged) {
@@ -144,4 +159,5 @@ public class ActionRegistryByType {
       return rights.isVisible();
     }
   }
+
 }

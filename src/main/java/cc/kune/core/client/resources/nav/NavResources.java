@@ -114,6 +114,15 @@ public interface NavResources extends ClientBundle {
   @Source("taskadd.png")
   ImageResource taskadd();
 
+  @Source("taskdone.png")
+  ImageResource taskdone();
+
+  @Source("taskfolder.png")
+  ImageResource taskfolder();
+
+  @Source("taskfolderadd.png")
+  ImageResource taskfolderadd();
+
   @Source("upload.png")
   ImageResource upload();
 

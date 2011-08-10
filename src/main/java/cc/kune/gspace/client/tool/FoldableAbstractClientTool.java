@@ -22,9 +22,12 @@ package cc.kune.gspace.client.tool;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
+
+import com.google.gwt.resources.client.ImageResource;
 
 public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
@@ -56,6 +59,12 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
   public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType,
       final String iconUrl) {
     contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(typeId, mimeType, iconUrl);
+  }
+
+  public void registerContentTypeIcon(final String typeId, final ContentStatus contentStatus,
+      final ImageResource imageResource) {
+    contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(typeId, contentStatus,
+        imageResource);
   }
 
   public void registerContentTypeIcon(final String contentTypeId, final Object icon) {
@@ -96,6 +105,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
   protected void registerRenamableTypes(final String... typeIds) {
     contentCapabilitiesRegistry.getRenamable().register(typeIds);
+  }
+
+  protected void registerShowDeleted(final String... typeIds) {
+    contentCapabilitiesRegistry.getShowDeleted().register(typeIds);
   }
 
   protected void registerTageableTypes(final String... typeIds) {

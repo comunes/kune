@@ -26,6 +26,7 @@ import static cc.kune.tasks.shared.TasksConstants.TYPE_ROOT;
 import static cc.kune.tasks.shared.TasksConstants.TYPE_TASK;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -57,12 +58,14 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOT, navResources.folder());
-    registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIcon(TYPE_ROOT, navResources.taskfolder());
+    registerContentTypeIcon(TYPE_FOLDER, navResources.taskfolder());
     registerContentTypeIcon(TYPE_TASK, navResources.task());
+    registerContentTypeIcon(TYPE_TASK, ContentStatus.inTheDustbin, navResources.taskdone());
     final String noTask = i18n.t("There isn't any task, create one");
     registerEmptyMessages(TYPE_ROOT, noTask);
     registerEmptyMessages(TYPE_FOLDER, noTask);
+    registerShowDeleted(TYPE_FOLDER, TYPE_ROOT, TYPE_TASK);
   }
 
 }

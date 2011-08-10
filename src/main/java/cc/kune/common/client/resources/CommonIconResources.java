@@ -25,17 +25,29 @@ import com.google.gwt.resources.client.ImageResource;
 
 public interface CommonIconResources extends ClientBundle {
 
-    public static final CommonIconResources INSTANCE = GWT.create(CommonIconResources.class);
+  public static final CommonIconResources INSTANCE = GWT.create(CommonIconResources.class);
 
-    @Source("checked.png")
-    ImageResource checked();
+  @Source("checked.png")
+  ImageResource checked();
 
-    @Source("radiochecked.png")
-    ImageResource radioChecked();
+  @Source("kune-close.png")
+  ImageResource kuneClose();
 
-    @Source("radiounchecked.png")
-    ImageResource radioUnChecked();
+  @Source("kune-close-grey.png")
+  ImageResource kuneCloseGrey();
 
-    @Source("unchecked.png")
-    ImageResource unChecked();
+  @Source("kune-close-greylight.png")
+  ImageResource kuneCloseGreylight();
+
+  @Source("radiochecked.png")
+  ImageResource radioChecked();
+
+  @Source("radiounchecked.png")
+  ImageResource radioUnChecked();
+
+  @Source("cross.png")
+  ImageResource redCross();
+
+  @Source("unchecked.png")
+  ImageResource unChecked();
 }

@@ -136,18 +136,20 @@ public class FolderViewerPresenter extends
     final StateToken stateToken = content.getStateToken();
     final String typeId = content.getTypeId();
     final String name = content.getName();
-    final Object icon = getIcon(stateToken, typeId, mimeType);
+    final Object icon = mimeType != null ? getIcon(stateToken, typeId, mimeType) : getIcon(stateToken,
+        typeId, status);
     final String tooltip = getTooltip(stateToken, mimeType);
-    final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
-        genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,
-        capabilitiesRegistry.isDragable(typeId) && rights.isAdministrable(),
-        capabilitiesRegistry.isDropable(typeId) && rights.isAdministrable(),
-        actionsRegistry.getCurrentActions(content, typeId, session.isLogged(), rights,
-            ActionGroups.ITEM_MENU));
-    if (status.equals(ContentStatus.inTheDustbin) && !session.getShowDeletedContent()) {
+    if (status.equals(ContentStatus.inTheDustbin)
+        && (!capabilitiesRegistry.showDeleted(typeId) && !session.getShowDeletedContent())) {
       // Don't show
       // NotifyUser.info("Deleted, don't show");
     } else {
+      final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
+          genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,
+          capabilitiesRegistry.isDragable(typeId) && rights.isAdministrable(),
+          capabilitiesRegistry.isDropable(typeId) && rights.isAdministrable(),
+          actionsRegistry.getCurrentActions(content, typeId, status, session.isLogged(), rights,
+              ActionGroups.ITEM_MENU));
       getView().addItem(item, new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
@@ -230,6 +232,10 @@ public class FolderViewerPresenter extends
     } else {
       return iconsRegistry.getContentTypeIcon(contentTypeId, mimeType);
     }
+  }
+
+  private Object getIcon(final StateToken stateToken, final String typeId, final ContentStatus status) {
+    return iconsRegistry.getContentTypeIcon(typeId, status);
   }
 
   private String getTooltip(final StateToken token, final BasicMimeTypeDTO mimeType) {

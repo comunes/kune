@@ -17,38 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.ui.dialogs;
+package cc.kune.core.client.registry;
 
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.HasDirectionalText;
-import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-
-public interface BasicDialogView {
-
-  ForIsWidget getBottomPanel();
-
-  HasClickHandlers getFirstBtn();
-
-  ForIsWidget getInnerPanel();
-
-  HasClickHandlers getSecondBtn();
-
-  HasClickHandlers getCloseBtn();
-
-  HasDirectionalText getTitleText();
-
-  void setFirstBtnText(String text);
-
-  void setFirstBtnTitle(String title);
-
-  void setFirstBtnVisible(boolean visible);
-
-  void setCloseBtnVisible(boolean visible);
-
-  void setSecondBtnText(String text);
-
-  void setSecondBtnTitle(String title);
-
-  void setSecondBtnVisible(boolean visible);
-
+/**
+ * Conents registered here will be showed as deleted in
+ * {@link FolderVieverPresenter}
+ * 
+ */
+public class ShowDeletedRegistry extends AbstractContentRegistry {
 }

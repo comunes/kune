@@ -48,7 +48,6 @@ import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.state.StateContainer;
 import cc.kune.core.server.state.StateContent;
 import cc.kune.core.server.state.StateService;
-import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
@@ -84,15 +83,14 @@ public class ContentRPC implements ContentService, RPC {
   private final StateService stateService;
   private final TagUserContentManager tagManager;
   private final Provider<UserSession> userSessionProvider;
-  private final XmppManager xmppManager;
 
   @Inject
   public ContentRPC(final FinderService finderService, final Provider<UserSession> userSessionProvider,
       final AccessService accessService, final AccessRightsService rightsService,
       final StateService stateService, final CreationService creationService,
-      final GroupManager groupManager, final XmppManager xmppManager,
-      final ContentManager contentManager, final ContainerManager containerManager,
-      final TagUserContentManager tagManager, final Mapper mapper, final ChatManager chatManager) {
+      final GroupManager groupManager, final ContentManager contentManager,
+      final ContainerManager containerManager, final TagUserContentManager tagManager,
+      final Mapper mapper, final ChatManager chatManager) {
     this.finderService = finderService;
     this.userSessionProvider = userSessionProvider;
     this.accessService = accessService;
@@ -100,7 +98,6 @@ public class ContentRPC implements ContentService, RPC {
     this.stateService = stateService;
     this.creationService = creationService;
     this.groupManager = groupManager;
-    this.xmppManager = xmppManager;
     this.contentManager = contentManager;
     this.containerManager = containerManager;
     this.tagManager = tagManager;

@@ -20,19 +20,18 @@
 package cc.kune.tasks.client.actions;
 
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.NewContainerBtn;
-import cc.kune.tasks.shared.TasksConstants;
+import cc.kune.gspace.client.actions.SetContentStatusAsAdminMenuItem;
 
 import com.google.inject.Inject;
 
-public class NewFolderBtn extends NewContainerBtn {
+public class MarkAsDoneTaskMenuItem extends SetContentStatusAsAdminMenuItem {
 
   @Inject
-  public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
-      final NavResources res) {
-    super(i18n, action, res.taskadd(), i18n.t("New folder"), i18n.t("Create a new folder"),
-        i18n.t("New folder"), TasksConstants.TYPE_FOLDER);
+  public MarkAsDoneTaskMenuItem(final I18nTranslationService i18n,
+      final SetContentStatusAsAdminAction action, final NavResources res) {
+    super(action, ContentStatus.inTheDustbin, false);
+    withText(i18n.t("Mark as done")).withIcon(res.taskdone());
   }
-
 }

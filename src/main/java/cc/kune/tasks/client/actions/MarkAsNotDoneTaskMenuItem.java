@@ -17,38 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.ui.dialogs;
+package cc.kune.tasks.client.actions;
 
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.HasDirectionalText;
-import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.actions.SetContentStatusAsAdminMenuItem;
 
-public interface BasicDialogView {
+import com.google.inject.Inject;
 
-  ForIsWidget getBottomPanel();
+public class MarkAsNotDoneTaskMenuItem extends SetContentStatusAsAdminMenuItem {
 
-  HasClickHandlers getFirstBtn();
-
-  ForIsWidget getInnerPanel();
-
-  HasClickHandlers getSecondBtn();
-
-  HasClickHandlers getCloseBtn();
-
-  HasDirectionalText getTitleText();
-
-  void setFirstBtnText(String text);
-
-  void setFirstBtnTitle(String title);
-
-  void setFirstBtnVisible(boolean visible);
-
-  void setCloseBtnVisible(boolean visible);
-
-  void setSecondBtnText(String text);
-
-  void setSecondBtnTitle(String title);
-
-  void setSecondBtnVisible(boolean visible);
-
+  @Inject
+  public MarkAsNotDoneTaskMenuItem(final I18nTranslationService i18n,
+      final SetContentStatusAsAdminAction action, final NavResources res) {
+    super(action, ContentStatus.publishedOnline, false);
+    withText(i18n.t("Mark as not done")).withIcon(res.task());
+  }
 }

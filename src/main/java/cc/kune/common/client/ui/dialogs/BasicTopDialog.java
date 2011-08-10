@@ -22,9 +22,12 @@ package cc.kune.common.client.ui.dialogs;
 import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.common.client.utils.TextUtils;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.UIObject;
@@ -34,6 +37,7 @@ public class BasicTopDialog extends BasicDialog {
   public static class Builder {
     private final boolean autohide;
     private boolean autoscroll = false;
+    private boolean closeBtn = true;
     private final String dialogId;
     private String firstButtonId;
     private String firstButtonTitle;
@@ -61,6 +65,11 @@ public class BasicTopDialog extends BasicDialog {
 
     public BasicTopDialog build() {
       return new BasicTopDialog(this);
+    }
+
+    public Builder closeBtn(final boolean closeBtn) {
+      this.closeBtn = closeBtn;
+      return this;
     }
 
     public Builder firstButtonId(final String firstButtonId) {
@@ -122,6 +131,7 @@ public class BasicTopDialog extends BasicDialog {
 
   }
 
+  private HandlerRegistration closeClickHandler;
   private String height;
   private final PopupTopPanel popup;
   private String width;
@@ -134,6 +144,7 @@ public class BasicTopDialog extends BasicDialog {
     if (TextUtils.notEmpty(builder.icon)) {
       super.setTitleIcon(builder.icon);
     }
+    setCloseBtn(builder.closeBtn);
     super.setFirstBtnText(builder.firstButtonTitle);
     super.setFirstBtnId(builder.firstButtonId);
     super.setFirstBtnTabIndex(builder.tabIndexStart);
@@ -162,6 +173,24 @@ public class BasicTopDialog extends BasicDialog {
 
   public void hide() {
     popup.hide();
+  }
+
+  private void setCloseBtn(final boolean closeBtn) {
+    setCloseBtnVisible(closeBtn);
+    if (closeBtn) {
+      if (closeClickHandler == null) {
+        closeClickHandler = super.getCloseBtn().addClickHandler(new ClickHandler() {
+          @Override
+          public void onClick(final ClickEvent event) {
+            popup.hide();
+          }
+        });
+      }
+    } else {
+      if (closeClickHandler != null) {
+        closeClickHandler.removeHandler();
+      }
+    }
   }
 
   @Override

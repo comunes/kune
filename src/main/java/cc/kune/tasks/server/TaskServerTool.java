@@ -26,12 +26,14 @@ import static cc.kune.tasks.shared.TasksConstants.TYPE_ROOT;
 import static cc.kune.tasks.shared.TasksConstants.TYPE_TASK;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
@@ -79,5 +81,11 @@ public class TaskServerTool extends AbstractServerTool {
     createTask(user, group, midTerm, "A mid-term task sample");
     createTask(user, group, shortTerm, "A short-term task sample");
     return group;
+  }
+
+  @Override
+  public void onCreateContent(final Content content, final Container parent) {
+    content.setStatus(ContentStatus.publishedOnline);
+    content.setPublishedOn(new Date());
   }
 }

@@ -20,7 +20,7 @@
 
     .flow {
       min-height: 30px;
-      padding: 5px 10px;
+      padding: 1px 10px;
       -moz-user-select: none;
       -khtml-user-select: none;
       outline: 0;
