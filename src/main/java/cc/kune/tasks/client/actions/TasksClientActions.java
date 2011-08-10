@@ -78,6 +78,8 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsDoneMenuItem,
         ContentStatus.publishedOnline, TYPE_TASK);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsDoneMenuItem,
+        ContentStatus.editingInProgress, TYPE_TASK);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsNotDoneMenuItem,
         ContentStatus.inTheDustbin, TYPE_TASK);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
