@@ -30,7 +30,7 @@ import org.junit.Test;
 import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 
-public class TaskServerToolTest { // extends PersistenceTest {
+public class BlogServerToolTest {
 
   private BlogServerTool serverTool;
 

@@ -55,6 +55,7 @@ import cc.kune.core.server.rest.I18nTranslationJSONService;
 import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
 import cc.kune.docs.server.DocumentServerModule;
+import cc.kune.lists.server.ListsServerModule;
 import cc.kune.meets.server.MeetingServerModule;
 import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.wiki.server.WikiServerModule;
@@ -167,6 +168,7 @@ public class KuneRackModule implements RackModule {
     builder.use(new BarterServerModule());
     builder.use(new MeetingServerModule());
     builder.use(new TaskServerModule());
+    builder.use(new ListsServerModule());
     // builder.use(new GalleryServerModule());
     builder.use(new RESTServicesModule());
     builder.use(configModule);
