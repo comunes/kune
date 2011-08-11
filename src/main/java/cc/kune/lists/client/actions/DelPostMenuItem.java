@@ -17,16 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.lists.shared;
+package cc.kune.lists.client.actions;
 
-public final class ListsConstants {
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.actions.DelContentMenuItem;
 
-  public static final String NAME = "lists";
-  public static final String ROOT_NAME = "lists";
-  public static final String TYPE_LIST = NAME + "." + "list";
-  public static final String TYPE_POST = NAME + "." + "post";
-  public static final String TYPE_ROOT = NAME + "." + "root";
+import com.google.inject.Inject;
 
-  private ListsConstants() {
-  }
+public class DelPostMenuItem extends DelContentMenuItem {
+
+    @Inject
+    public DelPostMenuItem(final I18nTranslationService i18n, final DelContentAction action, final CoreResources res) {
+        super(i18n, action, res);
+    }
 }

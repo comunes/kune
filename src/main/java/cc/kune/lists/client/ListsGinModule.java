@@ -17,16 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.lists.shared;
+package cc.kune.lists.client;
 
-public final class ListsConstants {
+import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.lists.client.actions.ListsClientActions;
+import cc.kune.lists.client.actions.ListsNewMenu;
 
-  public static final String NAME = "lists";
-  public static final String ROOT_NAME = "lists";
-  public static final String TYPE_LIST = NAME + "." + "list";
-  public static final String TYPE_POST = NAME + "." + "post";
-  public static final String TYPE_ROOT = NAME + "." + "root";
+public class ListsGinModule extends ExtendedGinModule {
 
-  private ListsConstants() {
+  @Override
+  protected void configure() {
+    s(ListsNewMenu.class);
+    s(ListsClientTool.class);
+    s(ListsClientActions.class);
   }
+
 }

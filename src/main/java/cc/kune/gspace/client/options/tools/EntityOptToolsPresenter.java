@@ -89,7 +89,7 @@ public abstract class EntityOptToolsPresenter {
       if (enabledTools.contains(toolName)) {
         // FIXME uncomment this when fixed
         // setToolCheckedInServer(checked, toolName);
-        // gotoDifLocationIfNecessary(toolName);
+        gotoDifLocationIfNecessary(toolName);
       }
     }
   }
@@ -139,7 +139,7 @@ public abstract class EntityOptToolsPresenter {
 
           @Override
           public void onSuccess(final Void result) {
-            stateManager.refreshCurrentState();
+            stateManager.refreshCurrentStateWithoutCache();
             // view.unmask();
           }
         });

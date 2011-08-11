@@ -227,6 +227,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -253,6 +254,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -279,6 +281,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -304,6 +307,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -332,6 +336,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -377,6 +382,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -408,6 +414,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -434,6 +441,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -460,6 +468,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -486,6 +495,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -514,6 +524,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -542,6 +553,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -567,6 +579,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -596,6 +609,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -623,6 +637,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -648,6 +663,7 @@
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -668,12 +684,14 @@
       </description>
       <new-content-title>New Vector Image</new-content-title>
       <new-content-textintro>With this gadget you can make a vector
-        image with others in real-time</new-content-textintro>
+        image with others in real-time
+      </new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -694,12 +712,17 @@
       </description>
       <new-content-title>New Barter</new-content-title>
       <new-content-textintro>With this gadget you can propose barters to
-        others. Fill up with something you want to give or you something you are looking for, and share with your groups or with the general public. Also you can write more details instead of this text.        </new-content-textintro>
+        others. Fill up with something you want to give or you something
+        you are looking for, and share with your groups or with the
+        general public. Also you can write more details instead of this
+        text.
+      </new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->

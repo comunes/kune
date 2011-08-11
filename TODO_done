@@ -261,6 +261,30 @@ com.google.wave.api.InvalidRequestException: Wavelet [WaveletName localhost/w+1v
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:436)
 	at java.lang.Thread.run(Thread.java:679)
 2011-04-27 16:59:01,904 [qtp2042579307-41] ERROR - Wavelet [WaveletName localhost/w+1v66qilgtl2o6E/localhost/conv+root] couldn't be retrieved
+* TODO Wiab EDitor in GSpace					    :ARCHIVE:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-08-10 mié 21:59
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :ARCHIVE_TODO: TODO
+  :END:
+** Logged
+*** -Status--- 
+*** Admins (view plain, create new, participate in all)
+*** Editors (view plain --> create new --> ask for participation)
+*** Viewers (view plain --> ask for participation)
+** Not logged (view plain wave)
+* TODO Register of "reserved words" not permitted for groups/users names (in server and in client)
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-08-10 mié 22:00
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :ARCHIVE_TODO: TODO
+  :END:
+
+
 
 
 

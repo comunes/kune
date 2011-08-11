@@ -17,16 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.tasks.client.actions;
+package cc.kune.lists.client;
 
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.core.client.resources.CoreResources;
+import com.google.gwt.inject.client.Ginjector;
 
-public abstract class AbstractOptionsMenu extends MenuDescriptor {
+public interface ListsGinjector extends Ginjector {
 
-    public AbstractOptionsMenu(final CoreResources res) {
-        super();
-        this.withIcon(res.arrowDownBlack()).withStyles("k-fr");
-    }
+  ListsParts getListsParts();
 
 }

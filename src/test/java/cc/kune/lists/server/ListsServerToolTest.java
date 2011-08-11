@@ -21,7 +21,7 @@ package cc.kune.lists.server;
 
 import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
-import static cc.kune.lists.shared.ListsConstants.TYPE_WAVE;
+import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,12 +50,12 @@ public class ListsServerToolTest { // extends PersistenceTest {
 
   @Test
   public void testCreateContentInCorrectContainer() {
-    serverTool.checkTypesBeforeContentCreation(TYPE_LIST, TYPE_WAVE);
+    serverTool.checkTypesBeforeContentCreation(TYPE_LIST, TYPE_POST);
   }
 
   @Test(expected = ContentNotPermittedException.class)
   public void testCreateContentInIncorrectContainer1() {
-    serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_WAVE);
+    serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_POST);
   }
 
 }

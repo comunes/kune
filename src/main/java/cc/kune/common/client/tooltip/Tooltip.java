@@ -134,6 +134,7 @@ public class Tooltip extends PopupPanel {
   public void hide() {
     super.hide();
     timers.cancel();
+    Tooltip.current = null;
   }
 
   @Override

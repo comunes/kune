@@ -12,17 +12,22 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
-** TODO Wiab EDitor in GSpace
-*** Logged
-**** -Status--- 
-**** Admins (view plain, create new, participate in all)
-**** Editors (view plain --> create new --> ask for participation)
-**** Viewers (view plain --> ask for participation)
-*** Not logged (view plain wave)
+** TODO Lists tool
+*** title
+*** description!
+*** type
+**** Public
+***** Anyone can read the archives. Anyone can join, but only members can post
+***** In Kune: Viewers: all, Editors: Group members, Admins: Group members
+**** Announcement-only
+***** Anyone can read the archives. Anyone can join, but only managers can post messages.
+***** In Kune: View: all, Editors: view, Admins: r/w
+**** Restricted
+***** People must be invited to join the group and post or read messages. Your group and its archives do not appear in public Google search results or the directory.
+***** In Kune: no
 ** TODO >> Delete host/room conf in ws.html
 ** TODO >> kune.properties from cmd line
-** TODO HelloWord with samples of extensions: sitebar, sitebar options menu, siteuseroptions, sn, ...
-** TODO Register of "reserved words" not permitted for groups/users names (in server and in client)
+** TODO HelloWorld with samples of extensions: sitebar, sitebar options menu, siteuseroptions, sn, ...
 ** WIAB under proxies
 https://groups.google.com/group/wave-protocol/browse_thread/thread/202dee4bfdbdeee6
 ** TODO StateManager #signin while already signed in NPE

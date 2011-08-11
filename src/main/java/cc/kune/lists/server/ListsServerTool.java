@@ -23,7 +23,7 @@ import static cc.kune.lists.shared.ListsConstants.NAME;
 import static cc.kune.lists.shared.ListsConstants.ROOT_NAME;
 import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
-import static cc.kune.lists.shared.ListsConstants.TYPE_WAVE;
+import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
 
 import java.util.Arrays;
 
@@ -43,7 +43,7 @@ public class ListsServerTool extends AbstractServerTool {
   @Inject
   public ListsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_WAVE), Arrays.asList(TYPE_LIST),
+    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST), Arrays.asList(TYPE_LIST),
         Arrays.asList(TYPE_LIST), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
         configurationManager, i18n, ServerToolTarget.forGroups);
   }

@@ -17,12 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package cc.kune.blogs.client.actions;
+package cc.kune.lists.client.actions;
 
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_BLOG;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_ROOT;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
+import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
+import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -40,44 +39,44 @@ import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class BlogsClientActions extends AbstractFoldableToolActions {
+public class ListsClientActions extends AbstractFoldableToolActions {
 
-  final String[] all = { TYPE_ROOT, TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
-  final String[] containers = { TYPE_ROOT, TYPE_BLOG };
-  final String[] containersNoRoot = { TYPE_BLOG };
-  final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
-  final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
-  final String[] noRoot = { TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
+  final String[] all = { TYPE_ROOT, TYPE_LIST, TYPE_POST };
+  final String[] containers = { TYPE_ROOT, TYPE_LIST };
+  final String[] containersNoRoot = { TYPE_LIST };
+  final String[] contents = { TYPE_POST };
+  final String[] noRoot = { TYPE_LIST, TYPE_POST };
 
   @Inject
-  public BlogsClientActions(final I18nUITranslationService i18n, final Session session,
+  public ListsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentBlogBtn> folderGoUp, final Provider<NewPostMenuItem> newPostItem,
-      final Provider<NewPostIconBtn> newPostIconBtn, final Provider<NewBlogBtn> newBlogBtn,
-      final Provider<OpenBlogMenuItem> openContentMenuItem,
-      final Provider<DelPostMenuItem> delContentMenuItem,
-      final Provider<RefreshContentMenuItem> refresh,
+      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewWaveMenuItem> newWaveItem,
+      final Provider<NewWaveIconBtn> newWaveIconBtn, final Provider<NewListMenuItem> newListMenuItem,
+      final Provider<NewListBtn> newListBtn, final Provider<OpenFolderMenuItem> openContentMenuItem,
+      final Provider<RefreshContentMenuItem> refresh, final Provider<SubscribeToListBtn> subscribeBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
-      final Provider<ParticipateInContentBtn> participateBtn, final BlogsNewMenu blogNewMenu,
+      final Provider<ParticipateInContentBtn> participateBtn, final ListsNewMenu listNewMenu,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
-      final Provider<DelBlogMenuItem> delFolderMenuItem,
+      final Provider<DelListMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, blogNewMenu, TYPE_BLOG);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, listNewMenu, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newBlogBtn, TYPE_ROOT);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribeBtn, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newWaveItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newWaveIconBtn, noRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newListMenuItem, TYPE_ROOT);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newListBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
-    newMenusRegistry.register(TYPE_BLOG, blogNewMenu.get());
+    newMenusRegistry.register(TYPE_LIST, listNewMenu.get());
+    newMenusRegistry.register(TYPE_ROOT, listNewMenu.get());
   }
 
   @Override

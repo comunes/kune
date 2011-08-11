@@ -45,6 +45,9 @@ public interface NavResources extends ClientBundle {
   @Source("download.png")
   ImageResource download();
 
+  @Source("email.png")
+  ImageResource email();
+
   @Source("film.png")
   ImageResource film();
 
@@ -63,8 +66,17 @@ public interface NavResources extends ClientBundle {
   @Source("go.png")
   ImageResource go();
 
+  @Source("list.png")
+  ImageResource list();
+
+  @Source("listadd.png")
+  ImageResource listadd();
+
   @Source("music.png")
   ImageResource music();
+
+  @Source("newemail.png")
+  ImageResource newemail();
 
   @Source("page.png")
   ImageResource page();

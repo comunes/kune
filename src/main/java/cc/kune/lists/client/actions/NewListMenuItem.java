@@ -17,16 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.blogs.client.actions;
+package cc.kune.lists.client.actions;
 
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.actions.NewContainerMenuItem;
+import cc.kune.lists.shared.ListsConstants;
 
-public abstract class AbstractOptionsMenu extends MenuDescriptor {
+import com.google.inject.Inject;
 
-    public AbstractOptionsMenu(final CoreResources res) {
-        super();
-        this.withIcon(res.arrowDownBlack()).withStyles("k-fr");
-    }
+public class NewListMenuItem extends NewContainerMenuItem {
+
+  @Inject
+  public NewListMenuItem(final I18nTranslationService i18n, final NewContainerAction action,
+      final NavResources res, final ListsNewMenu newMenu) {
+    super(i18n, action, res.listadd(), i18n.t("New list"), i18n.t("Create a list"), i18n.t("New list"),
+        ListsConstants.TYPE_LIST, newMenu.get());
+  }
 
 }

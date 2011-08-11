@@ -58,6 +58,7 @@ import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.docs.shared.DocsConstants;
 import cc.kune.domain.utils.HasStateToken;
+import cc.kune.lists.shared.ListsConstants;
 import cc.kune.meets.shared.MeetingsConstants;
 import cc.kune.tasks.shared.TasksConstants;
 import cc.kune.wiki.shared.WikiConstants;
@@ -266,6 +267,7 @@ public class Content implements HasStateToken {
   public boolean isWave() {
     return (typeId.equals(DocsConstants.TYPE_DOCUMENT))
         || typeId.equals(TasksConstants.TYPE_TASK)
+        || typeId.equals(ListsConstants.TYPE_POST)
         || typeId.equals(WikiConstants.TYPE_WIKIPAGE)
         || (typeId.equals(BlogsConstants.TYPE_POST) || typeId.equals(BartersConstants.TYPE_BARTER) || typeId.equals(MeetingsConstants.TYPE_MEETING));
   }
