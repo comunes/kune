@@ -73,10 +73,12 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
     this(new BaseAction(text, tooltip, icon));
   }
 
+  @Override
   public void clear() {
     // Action detects changes in values, then we fire a change (whatever) to
     // fire this method in the UI
     putValue(MENU_CLEAR, !((Boolean) getValue(MENU_CLEAR)));
+    super.clear();
   }
 
   public ImageResource getRightIcon() {

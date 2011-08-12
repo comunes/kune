@@ -22,8 +22,8 @@ package cc.kune.lists.client;
 import static cc.kune.lists.shared.ListsConstants.NAME;
 import static cc.kune.lists.shared.ListsConstants.ROOT_NAME;
 import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
-import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
 import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
+import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -60,7 +60,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_ROOT, navResources.list());
     registerContentTypeIcon(TYPE_LIST, navResources.list());
     registerContentTypeIcon(TYPE_POST, navResources.email());
-    final String noWave = i18n.t("There isn't nothing post yet, create one");
+    final String noWave = i18n.t("There is nothing posted yet. Post something");
     final String noList = i18n.t("There isn't any list, create one");
     registerEmptyMessages(TYPE_ROOT, noList);
     registerEmptyMessages(TYPE_LIST, noWave);

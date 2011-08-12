@@ -27,4 +27,6 @@ public interface SitebarActions {
 
   ToolbarDescriptor getRightToolbar();
 
+  void refreshActions();
+
 }

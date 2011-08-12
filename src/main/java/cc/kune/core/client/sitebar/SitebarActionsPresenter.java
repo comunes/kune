@@ -68,11 +68,9 @@ public class SitebarActionsPresenter extends
   private static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
   private static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
   public static final String SITE_OPTIONS_MENU = "kune-sop-om";
-
   private final I18nTranslationService i18n;
   private final CoreResources icons;
   private final Provider<SitebarNewGroupLink> newGroupLink;
-
   private final CoreResources res;
   private final Provider<SitebarSignInLink> signInLink;
   private final Provider<SitebarSignOutLink> signOutLink;
@@ -181,6 +179,17 @@ public class SitebarActionsPresenter extends
     MenuSeparatorDescriptor.build(OPTIONS_MENU);
     MenuItemDescriptor.build(OPTIONS_MENU, wavePowered);
     OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
+    refreshActionsImpl();
+  }
+
+  @Override
+  public void refreshActions() {
+    refreshActionsImpl();
+  }
+
+  private void refreshActionsImpl() {
+    getView().getLeftBar().clear();
+    getView().getRightBar().clear();
     getView().getLeftBar().add(LEFT_TOOLBAR);
     getView().getRightBar().add(RIGHT_TOOLBAR);
   }

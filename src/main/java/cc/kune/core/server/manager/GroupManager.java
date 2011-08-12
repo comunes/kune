@@ -20,6 +20,7 @@
 package cc.kune.core.server.manager;
 
 import java.util.List;
+import java.util.Set;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
@@ -46,11 +47,11 @@ public interface GroupManager extends Manager<Group, Long> {
   Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupNameInUseException,
       EmailAddressInUseException;
 
-  List<Group> findAdminInGroups(Long groupId);
+  Set<Group> findAdminInGroups(Long groupId);
 
   Group findByShortName(String groupName);
 
-  List<Group> findCollabInGroups(Long groupId);
+  Set<Group> findCollabInGroups(Long groupId);
 
   List<String> findEnabledTools(Long id);
 

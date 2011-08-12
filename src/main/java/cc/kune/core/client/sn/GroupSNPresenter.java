@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.sn;
 
-import java.util.List;
+import java.util.Set;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
@@ -181,9 +181,9 @@ public class GroupSNPresenter extends
   private void setGroupMembers(final SocialNetworkDTO socialNetwork, final AccessRights rights) {
     final AccessListsDTO accessLists = socialNetwork.getAccessLists();
 
-    final List<GroupDTO> adminsList = accessLists.getAdmins().getList();
-    final List<GroupDTO> collabList = accessLists.getEditors().getList();
-    final List<GroupDTO> pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
+    final Set<GroupDTO> adminsList = accessLists.getAdmins().getList();
+    final Set<GroupDTO> collabList = accessLists.getEditors().getList();
+    final Set<GroupDTO> pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
 
     final int numAdmins = adminsList.size();
     final int numCollabs = collabList.size();

@@ -167,6 +167,15 @@ lista de (des) ---> lista de views
    http://code.google.com/p/google-web-toolkit/wiki/WAR_Design_1_6
    http://www.gwt-ext.com/forum/viewtopic.php?f=5&p=12038
 ** TODO <v> User preferences storing
+*** links:
+**** http://download.oracle.com/javase/1.4.2/docs/guide/lang/preferences.html (Preferences API)
+**** http://stackoverflow.com/questions/6050397/hibernate-mapping-optional-value
+**** http://stackoverflow.com/questions/3100881/user-preferences-file-vs-app-preferences-file
+**** http://stackoverflow.com/questions/1079711/best-approach-to-save-user-preferences
+**** http://stackoverflow.com/questions/3109550/user-preferences-in-jee-application
+**** http://stackoverflow.com/questions/598877/user-preferences-database-table-design
+
+*** old work
    (See also variables in 'Styling braimstorming')
    We need a way to store (in db) User preferences (like emite chat configurations) in a extensible way.
    Something similar to java.util.prefs.Preferences or Mozilla about:config

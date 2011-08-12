@@ -19,42 +19,43 @@
  */
 package cc.kune.core.shared.dto;
 
-import java.util.List;
+import java.util.Set;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupListDTO implements IsSerializable {
-    public static final String EVERYONE = "EVERYONE";
-    public static final String NOBODY = "NOBODY";
-    public static final String NORMAL = "NORMAL";
-    private List<GroupDTO> list;
-    private String mode;
+  public static final String EVERYONE = "EVERYONE";
+  public static final String NOBODY = "NOBODY";
+  public static final String NORMAL = "NORMAL";
+  private Set<GroupDTO> list;
+  private String mode;
 
-    public GroupListDTO() {
-        this(null);
-    }
+  public GroupListDTO() {
+    this(null);
+  }
 
-    public GroupListDTO(final List<GroupDTO> list) {
-        this.list = list;
-    }
+  public GroupListDTO(final Set<GroupDTO> list) {
+    this.list = list;
+  }
 
-    public List<GroupDTO> getList() {
-        return list;
-    }
+  public Set<GroupDTO> getList() {
+    return list;
+  }
 
-    public String getMode() {
-        return mode;
-    }
+  public String getMode() {
+    return mode;
+  }
 
-    public void setList(final List<GroupDTO> list) {
-        this.list = list;
-    }
+  public void setList(final Set<GroupDTO> list) {
+    this.list = list;
+  }
 
-    public void setMode(final String mode) {
-        this.mode = mode;
-    }
+  public void setMode(final String mode) {
+    this.mode = mode;
+  }
 
-    public String toString() {
-        return "GroupListDTO[(" + mode + "): " + list + "]";
-    }
+  @Override
+  public String toString() {
+    return "GroupListDTO[(" + mode + "): " + list + "]";
+  }
 }

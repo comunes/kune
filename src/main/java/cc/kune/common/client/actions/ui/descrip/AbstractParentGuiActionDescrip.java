@@ -16,6 +16,10 @@ public abstract class AbstractParentGuiActionDescrip extends AbstractGuiActionDe
     childs.add(descriptors);
   }
 
+  public void clear() {
+    childs.clear();
+  }
+
   public GuiActionDescCollection getChilds() {
     return childs;
   }

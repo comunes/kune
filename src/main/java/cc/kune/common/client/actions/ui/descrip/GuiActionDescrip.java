@@ -98,7 +98,8 @@ public interface GuiActionDescrip {
    * @param addToParent
    *          if yes, the action will be added directly to the parent, useful to
    *          attach menu items (or other child actions) directly to its parent
-   *          without any other check (for instance session status, etc)
+   *          without any other check (for instance session status, etc).
+   *          Default to yes
    */
   void setParent(GuiActionDescrip parent, boolean addToParent);
 

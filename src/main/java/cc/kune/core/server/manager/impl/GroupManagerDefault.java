@@ -21,6 +21,7 @@ package cc.kune.core.server.manager.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -202,7 +203,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   @Override
-  public List<Group> findAdminInGroups(final Long groupId) {
+  public Set<Group> findAdminInGroups(final Long groupId) {
     return finder.findAdminInGroups(groupId);
   }
 
@@ -212,7 +213,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   @Override
-  public List<Group> findCollabInGroups(final Long groupId) {
+  public Set<Group> findCollabInGroups(final Long groupId) {
     return finder.findCollabInGroups(groupId);
   }
 

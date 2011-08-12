@@ -19,37 +19,37 @@
  */
 package cc.kune.domain.utils;
 
-import java.util.List;
+import java.util.Set;
 
 import cc.kune.domain.Group;
 
 public class ParticipationData {
-    private List<Group> groupsIsAdmin;
-    private List<Group> groupsIsCollab;
+  private Set<Group> groupsIsAdmin;
+  private Set<Group> groupsIsCollab;
 
-    public ParticipationData() {
-        this(null, null);
-    }
+  public ParticipationData() {
+    this(null, null);
+  }
 
-    public ParticipationData(final List<Group> groupsIsAdmin, final List<Group> groupsIsCollab) {
-        this.groupsIsAdmin = groupsIsAdmin;
-        this.groupsIsCollab = groupsIsCollab;
-    }
+  public ParticipationData(final Set<Group> groupsIsAdmin, final Set<Group> groupsIsCollab) {
+    this.groupsIsAdmin = groupsIsAdmin;
+    this.groupsIsCollab = groupsIsCollab;
+  }
 
-    public List<Group> getGroupsIsAdmin() {
-        return groupsIsAdmin;
-    }
+  public Set<Group> getGroupsIsAdmin() {
+    return groupsIsAdmin;
+  }
 
-    public List<Group> getGroupsIsCollab() {
-        return groupsIsCollab;
-    }
+  public Set<Group> getGroupsIsCollab() {
+    return groupsIsCollab;
+  }
 
-    public void setGroupsIsAdmin(final List<Group> groupsIsAdmin) {
-        this.groupsIsAdmin = groupsIsAdmin;
-    }
+  public void setGroupsIsAdmin(final Set<Group> groupsIsAdmin) {
+    this.groupsIsAdmin = groupsIsAdmin;
+  }
 
-    public void setGroupsIsCollab(final List<Group> groupsIsCollab) {
-        this.groupsIsCollab = groupsIsCollab;
-    }
+  public void setGroupsIsCollab(final Set<Group> groupsIsCollab) {
+    this.groupsIsCollab = groupsIsCollab;
+  }
 
 }

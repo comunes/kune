@@ -20,118 +20,119 @@
 package cc.kune.core.shared.dto;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserInfoDTO implements IsSerializable {
-    private String chatName;
-    private String chatPassword;
-    private List<String> enabledTools;
-    private List<GroupDTO> groupsIsAdmin;
-    private List<GroupDTO> groupsIsCollab;
-    private String homePage;
-    private boolean showDeletedContent;
-    private UserSimpleDTO user;
-    private GroupDTO userGroup;
-    private String userHash;
+  private String chatName;
+  private String chatPassword;
+  private List<String> enabledTools;
+  private Set<GroupDTO> groupsIsAdmin;
+  private Set<GroupDTO> groupsIsCollab;
+  private String homePage;
+  private boolean showDeletedContent;
+  private UserSimpleDTO user;
+  private GroupDTO userGroup;
+  private String userHash;
 
-    public String getChatName() {
-        return chatName;
-    }
+  public String getChatName() {
+    return chatName;
+  }
 
-    @Deprecated
-    public String getChatPassword() {
-        return chatPassword;
-    }
+  @Deprecated
+  public String getChatPassword() {
+    return chatPassword;
+  }
 
-    public I18nCountryDTO getCountry() {
-        return user.getCountry();
-    }
+  public I18nCountryDTO getCountry() {
+    return user.getCountry();
+  }
 
-    public List<String> getEnabledTools() {
-        return enabledTools;
-    }
+  public List<String> getEnabledTools() {
+    return enabledTools;
+  }
 
-    public List<GroupDTO> getGroupsIsAdmin() {
-        return groupsIsAdmin;
-    }
+  public Set<GroupDTO> getGroupsIsAdmin() {
+    return groupsIsAdmin;
+  }
 
-    public List<GroupDTO> getGroupsIsCollab() {
-        return groupsIsCollab;
-    }
+  public Set<GroupDTO> getGroupsIsCollab() {
+    return groupsIsCollab;
+  }
 
-    public String getHomePage() {
-        return homePage;
-    }
+  public String getHomePage() {
+    return homePage;
+  }
 
-    public I18nLanguageDTO getLanguage() {
-        return user.getLanguage();
-    }
+  public I18nLanguageDTO getLanguage() {
+    return user.getLanguage();
+  }
 
-    public String getName() {
-        return user.getName();
-    }
+  public String getName() {
+    return user.getName();
+  }
 
-    public String getShortName() {
-        return user.getShortName();
-    }
+  public String getShortName() {
+    return user.getShortName();
+  }
 
-    public boolean getShowDeletedContent() {
-        return showDeletedContent;
-    }
+  public boolean getShowDeletedContent() {
+    return showDeletedContent;
+  }
 
-    public UserSimpleDTO getUser() {
-        return user;
-    }
+  public UserSimpleDTO getUser() {
+    return user;
+  }
 
-    public GroupDTO getUserGroup() {
-        return userGroup;
-    }
+  public GroupDTO getUserGroup() {
+    return userGroup;
+  }
 
-    public String getUserHash() {
-        return userHash;
-    }
+  public String getUserHash() {
+    return userHash;
+  }
 
-    public void setChatName(final String chatName) {
-        this.chatName = chatName;
-    }
+  public void setChatName(final String chatName) {
+    this.chatName = chatName;
+  }
 
-    @Deprecated
-    public void setChatPassword(final String password) {
-        this.chatPassword = password;
+  @Deprecated
+  public void setChatPassword(final String password) {
+    this.chatPassword = password;
 
-    }
+  }
 
-    public void setEnabledTools(final List<String> enabledTools) {
-        this.enabledTools = enabledTools;
-    }
+  public void setEnabledTools(final List<String> enabledTools) {
+    this.enabledTools = enabledTools;
+  }
 
-    public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {
-        this.groupsIsAdmin = groupsIsAdmin;
-    }
+  public void setGroupsIsAdmin(final Set<GroupDTO> groupsIsAdmin) {
+    this.groupsIsAdmin = groupsIsAdmin;
+  }
 
-    public void setGroupsIsCollab(final List<GroupDTO> groupsIsCollab) {
-        this.groupsIsCollab = groupsIsCollab;
-    }
+  public void setGroupsIsCollab(final Set<GroupDTO> groupsIsCollab) {
+    this.groupsIsCollab = groupsIsCollab;
+  }
 
-    public void setHomePage(final String homePage) {
-        this.homePage = homePage;
-    }
+  public void setHomePage(final String homePage) {
+    this.homePage = homePage;
+  }
 
-    public void setShowDeletedContent(final boolean showDeletedContent) {
-        this.showDeletedContent = showDeletedContent;
-    }
+  public void setShowDeletedContent(final boolean showDeletedContent) {
+    this.showDeletedContent = showDeletedContent;
+  }
 
-    public void setUser(final UserSimpleDTO user) {
-        this.user = user;
-    }
+  public void setUser(final UserSimpleDTO user) {
+    this.user = user;
+  }
 
-    public void setUserGroup(final GroupDTO userGroup) {
-        this.userGroup = userGroup;
-    }
+  public void setUserGroup(final GroupDTO userGroup) {
+    this.userGroup = userGroup;
+  }
 
-    public void setUserHash(final String userHash) {
-        this.userHash = userHash;
-    }
+  public void setUserHash(final String userHash) {
+    this.userHash = userHash;
+  }
 
 }

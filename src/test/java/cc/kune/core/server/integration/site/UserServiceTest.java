@@ -23,7 +23,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.util.List;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -73,13 +74,12 @@ public class UserServiceTest extends IntegrationTest {
   @Inject
   UserService userService;
 
-  private void assertEqualGroupLists(final List<GroupDTO> listDTO, final List<Group> list) {
+  private void assertEqualGroupLists(final Set<GroupDTO> listDTO, final Set<Group> list) {
     assertEquals(listDTO.size(), list.size());
-    for (int i = 0; i < listDTO.size(); i++) {
-      final Object object = listDTO.get(i);
-      assertEquals(GroupDTO.class, object.getClass());
-      final GroupDTO d = (GroupDTO) object;
-      final Group l = list.get(i);
+    final Iterator<Group> ite = list.iterator();
+    for (final GroupDTO groupDTO : listDTO) {
+      final GroupDTO d = groupDTO;
+      final Group l = ite.next();
       assertNotNull(d);
       assertNotNull(l);
       final GroupDTO map = mapper.map(l, GroupDTO.class);
@@ -156,8 +156,8 @@ public class UserServiceTest extends IntegrationTest {
     final UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
     assertEquals(userInfo.getName(), userInfoDTO.getName());
     assertEquals(userInfo.getChatName(), userInfoDTO.getChatName());
-    final List<Group> adminsGroup = userInfo.getGroupsIsAdmin();
-    final List<GroupDTO> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
+    final Set<Group> adminsGroup = userInfo.getGroupsIsAdmin();
+    final Set<GroupDTO> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
     assertEqualGroupLists(adminsGroupDTO, adminsGroup);
   }
 

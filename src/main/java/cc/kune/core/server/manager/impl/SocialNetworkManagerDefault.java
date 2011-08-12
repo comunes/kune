@@ -19,7 +19,7 @@
  */
 package cc.kune.core.server.manager.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 
@@ -74,7 +74,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       throws DefaultException, AccessViolationException {
     final SocialNetwork sn = inGroup.getSocialNetwork();
     checkUserLoggedIsAdmin(userLogged, sn);
-    final List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
+    final Set<Group> pendingCollabs = sn.getPendingCollaborators().getList();
     if (pendingCollabs.contains(group)) {
       sn.addCollaborator(group);
       sn.removePendingCollaborator(group);
@@ -161,7 +161,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       throws DefaultException {
     final SocialNetwork sn = inGroup.getSocialNetwork();
     checkUserLoggedIsAdmin(userLogged, sn);
-    final List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
+    final Set<Group> pendingCollabs = sn.getPendingCollaborators().getList();
     if (pendingCollabs.contains(group)) {
       sn.removePendingCollaborator(group);
     } else {
@@ -174,13 +174,13 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       throws AccessViolationException {
     get(userLogged, group); // check access
     final Long groupId = group.getId();
-    final List<Group> adminInGroups = finder.findAdminInGroups(groupId);
+    final Set<Group> adminInGroups = finder.findAdminInGroups(groupId);
     // Don't show self user group
     if (group.isPersonal()) {
       adminInGroups.remove(group);
     }
     // adminInGroups.remove(userLogged.getUserGroup());
-    final List<Group> collabInGroups = finder.findCollabInGroups(groupId);
+    final Set<Group> collabInGroups = finder.findCollabInGroups(groupId);
     return new ParticipationData(adminInGroups, collabInGroups);
   }
 

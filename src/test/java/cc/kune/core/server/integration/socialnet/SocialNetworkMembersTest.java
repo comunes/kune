@@ -21,7 +21,7 @@ package cc.kune.core.server.integration.socialnet;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,34 +37,34 @@ import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
 public class SocialNetworkMembersTest extends IntegrationTest {
-    @Inject
-    UserSession session;
-    @Inject
-    SocialNetworkManager socialNetManager;
-    @Inject
-    GroupManager groupFinder;
+  private Group group;
+  @Inject
+  GroupManager groupFinder;
+  @Inject
+  UserSession session;
 
-    private Group group;
+  @Inject
+  SocialNetworkManager socialNetManager;
 
-    @Transactional
-    @Before
-    public void init() {
-        new IntegrationTestHelper(this);
-        group = groupFinder.findByShortName(getSiteAdminShortName());
-    }
+  @Transactional
+  @Before
+  public void init() {
+    new IntegrationTestHelper(this);
+    group = groupFinder.findByShortName(getSiteAdminShortName());
+  }
 
-    @Test
-    public void testAdminMembersOfGroupFinder() throws Exception {
-        doLogin();
-        final List<Group> result = groupFinder.findAdminInGroups(group.getId());
-        assertEquals(2, result.size());
-    }
+  @Test
+  public void testAdminMembersOfGroupFinder() throws Exception {
+    doLogin();
+    final Set<Group> result = groupFinder.findAdminInGroups(group.getId());
+    assertEquals(2, result.size());
+  }
 
-    @Test
-    public void testCollabMembersOfGroupFinder() throws Exception {
-        doLogin();
-        final List<Group> result = groupFinder.findCollabInGroups(group.getId());
-        assertEquals(0, result.size());
-    }
+  @Test
+  public void testCollabMembersOfGroupFinder() throws Exception {
+    doLogin();
+    final Set<Group> result = groupFinder.findCollabInGroups(group.getId());
+    assertEquals(0, result.size());
+  }
 
 }

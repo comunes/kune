@@ -26,7 +26,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -86,14 +88,13 @@ public class MapperTest {
   }
 
   private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
-    final List<Group> listOrig = groupList.getList();
-    final List<GroupDTO> listDto = groupListDTO.getList();
+    final Set<Group> listOrig = groupList.getList();
+    final Set<GroupDTO> listDto = groupListDTO.getList();
     assertEquals(listDto.size(), listOrig.size());
-    for (int i = 0; i < listDto.size(); i++) {
-      final Object object = listDto.get(i);
-      assertEquals(GroupDTO.class, object.getClass());
-      final GroupDTO d = (GroupDTO) object;
-      final Group g = listOrig.get(i);
+    final Iterator<Group> ite = listOrig.iterator();
+    for (final GroupDTO groupDTO : listDto) {
+      final GroupDTO d = groupDTO;
+      final Group g = ite.next();
       assertNotNull(d);
       assertNotNull(g);
       final GroupDTO map = mapper.map(g, GroupDTO.class);
@@ -324,8 +325,8 @@ public class MapperTest {
     assertEquals(SocialNetworkVisibility.onlymembers, map.getSocialNetworkVisibility());
     assertEquals(UserSNetVisibility.yourbuddies, map.getUserBuddiesVisibility());
     assertEquals("test",
-        map.getGroupMembers().getAccessLists().getAdmins().getList().get(0).getShortName());
-    assertEquals("test", map.getUserParticipation().getGroupsIsAdmin().get(0).getShortName());
+        map.getGroupMembers().getAccessLists().getAdmins().getList().iterator().next().getShortName());
+    assertEquals("test", map.getUserParticipation().getGroupsIsAdmin().iterator().next().getShortName());
     assertEquals("usertest", map.getUserBuddies().getBuddies().get(0).getShortName());
     assertFalse(map.getGroupRights().isAdministrable());
     assertFalse(map.getGroupRights().isEditable());

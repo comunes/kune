@@ -197,6 +197,13 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     setParent(parent, true);
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.GuiActionDescrip#setParent(cc.
+   * kune.common.client.actions.ui.descrip.GuiActionDescrip, boolean)
+   */
   @Override
   public void setParent(final GuiActionDescrip parent, final boolean addToParent) {
     if (parent != NO_PARENT && addToParent) {

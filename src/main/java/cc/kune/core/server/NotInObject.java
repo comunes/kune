@@ -27,21 +27,22 @@ import com.google.inject.matcher.AbstractMatcher;
 
 public class NotInObject extends AbstractMatcher<Method> {
 
-    private final List<String> excluded;
+  private final List<String> excluded;
 
-    public NotInObject() {
-        super();
-        // FIXME exclude password
-        excluded = Arrays.asList(new String[] { "finalize", "toString", "hashCode", "getClass", "wait", "equals" });
-    }
+  public NotInObject() {
+    super();
+    // FIXME exclude password
+    excluded = Arrays.asList(new String[] { "finalize", "toString", "hashCode", "getClass", "wait",
+        "equals" });
+  }
 
-    @Override
-    public boolean matches(final Method method) {
-        final String name = method.getName();
-
-        final boolean isGetter = name.startsWith("set");
-        final boolean isExcluded = excluded.contains(name);
-        return !isGetter || !isExcluded;
-    }
-
+  @Override
+  public boolean matches(final Method method) {
+    final String name = method.getName();
+    // http://code.google.com/p/google-guice/issues/detail?id=640
+    final boolean isSynth = method.isSynthetic();
+    final boolean isGetter = name.startsWith("set");
+    final boolean isExcluded = excluded.contains(name);
+    return !isSynth && (!isGetter || !isExcluded);
+  }
 }

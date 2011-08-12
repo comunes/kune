@@ -20,6 +20,7 @@
 package cc.kune.core.server.users;
 
 import java.util.List;
+import java.util.Set;
 
 import cc.kune.domain.Group;
 import cc.kune.domain.I18nCountry;
@@ -27,112 +28,112 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
 
 public class UserInfo {
-    private String chatName;
-    private String chatPassword;
-    private List<String> enabledTools;
-    private List<Group> groupsIsAdmin;
-    private List<Group> groupsIsCollab;
-    private String homePage;
-    private boolean showDeletedContent;
-    private User user;
-    private Group userGroup;
-    private String userHash;
+  private String chatName;
+  private String chatPassword;
+  private List<String> enabledTools;
+  private Set<Group> groupsIsAdmin;
+  private Set<Group> groupsIsCollab;
+  private String homePage;
+  private boolean showDeletedContent;
+  private User user;
+  private Group userGroup;
+  private String userHash;
 
-    public String getChatName() {
-        return chatName;
-    }
+  public String getChatName() {
+    return chatName;
+  }
 
-    public String getChatPassword() {
-        return chatPassword;
-    }
+  public String getChatPassword() {
+    return chatPassword;
+  }
 
-    public I18nCountry getCountry() {
-        return user.getCountry();
-    }
+  public I18nCountry getCountry() {
+    return user.getCountry();
+  }
 
-    public List<String> getEnabledTools() {
-        return enabledTools;
-    }
+  public List<String> getEnabledTools() {
+    return enabledTools;
+  }
 
-    public List<Group> getGroupsIsAdmin() {
-        return groupsIsAdmin;
-    }
+  public Set<Group> getGroupsIsAdmin() {
+    return groupsIsAdmin;
+  }
 
-    public List<Group> getGroupsIsCollab() {
-        return groupsIsCollab;
-    }
+  public Set<Group> getGroupsIsCollab() {
+    return groupsIsCollab;
+  }
 
-    public String getHomePage() {
-        return homePage;
-    }
+  public String getHomePage() {
+    return homePage;
+  }
 
-    public I18nLanguage getLanguage() {
-        return user.getLanguage();
-    }
+  public I18nLanguage getLanguage() {
+    return user.getLanguage();
+  }
 
-    public String getName() {
-        return user.getName();
-    }
+  public String getName() {
+    return user.getName();
+  }
 
-    public String getShortName() {
-        return user.getShortName();
-    }
+  public String getShortName() {
+    return user.getShortName();
+  }
 
-    public boolean getShowDeletedContent() {
-        return showDeletedContent;
-    }
+  public boolean getShowDeletedContent() {
+    return showDeletedContent;
+  }
 
-    public User getUser() {
-        return user;
-    }
+  public User getUser() {
+    return user;
+  }
 
-    public Group getUserGroup() {
-        return userGroup;
-    }
+  public Group getUserGroup() {
+    return userGroup;
+  }
 
-    public String getUserHash() {
-        return userHash;
-    }
+  public String getUserHash() {
+    return userHash;
+  }
 
-    public void setChatName(final String chatName) {
-        this.chatName = chatName;
-    }
+  public void setChatName(final String chatName) {
+    this.chatName = chatName;
+  }
 
-    @Deprecated
-    public void setChatPassword(final String chatPassword) {
-        this.chatPassword = chatPassword;
-    }
+  @Deprecated
+  public void setChatPassword(final String chatPassword) {
+    this.chatPassword = chatPassword;
+  }
 
-    public void setEnabledTools(final List<String> enabledTools) {
-        this.enabledTools = enabledTools;
-    }
+  public void setEnabledTools(final List<String> enabledTools) {
+    this.enabledTools = enabledTools;
+  }
 
-    public void setGroupsIsAdmin(final List<Group> groupsIsAdmin) {
-        this.groupsIsAdmin = groupsIsAdmin;
-    }
+  public void setGroupsIsAdmin(final Set<Group> groupsIsAdmin) {
+    this.groupsIsAdmin = groupsIsAdmin;
+  }
 
-    public void setGroupsIsCollab(final List<Group> groupsIsCollab) {
-        this.groupsIsCollab = groupsIsCollab;
-    }
+  public void setGroupsIsCollab(final Set<Group> groupsIsCollab) {
+    this.groupsIsCollab = groupsIsCollab;
+  }
 
-    public void setHomePage(final String homePage) {
-        this.homePage = homePage;
-    }
+  public void setHomePage(final String homePage) {
+    this.homePage = homePage;
+  }
 
-    public void setShowDeletedContent(final boolean showDeletedContent) {
-        this.showDeletedContent = showDeletedContent;
-    }
+  public void setShowDeletedContent(final boolean showDeletedContent) {
+    this.showDeletedContent = showDeletedContent;
+  }
 
-    public void setUser(final User user) {
-        this.user = user;
-    }
+  public void setUser(final User user) {
+    this.user = user;
+  }
 
-    public void setUserGroup(final Group userGroup) {
-        this.userGroup = userGroup;
-    }
+  public void setUserGroup(final Group userGroup) {
+    this.userGroup = userGroup;
+  }
 
-    public void setUserHash(final String userHash) {
-        this.userHash = userHash;
-    }
+  public void setUserHash(final String userHash) {
+    this.userHash = userHash;
+  }
 
 }

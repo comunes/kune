@@ -19,7 +19,7 @@
  \*/
 package cc.kune.core.client.sitebar;
 
-import java.util.List;
+import java.util.Set;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -46,7 +46,9 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
+@Singleton
 public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   public static final MenuDescriptor LOGGED_USER_MENU = new MenuDescriptor();
@@ -98,7 +100,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
   }
 
   private void addActionImpl(final GuiActionDescrip descriptor) {
-    descriptor.setParent(LOGGED_USER_MENU);
+    descriptor.setParent(LOGGED_USER_MENU, true);
   }
 
   private void addPartipation(final GroupDTO group) {
@@ -107,8 +109,8 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     participant.setTarget(group);
     participant.putValue(Action.NAME, group.getLongName());
     participant.putValue(Action.SMALL_ICON, logoImageUrl);
-    participant.setParent(partiMenu, false);
-    siteOptions.getRightToolbar().add(participant);
+    participant.setParent(partiMenu, true);
+    // siteOptions.getRightToolbar().add(participant);
   }
 
   private void createActions() {
@@ -142,8 +144,8 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     LOGGED_USER_MENU.setEnabled(true);
     setLoggedUserName(userInfoDTO.getShortName());
     partiMenu.clear();
-    final List<GroupDTO> groupsIsAdmin = userInfoDTO.getGroupsIsAdmin();
-    final List<GroupDTO> groupsIsCollab = userInfoDTO.getGroupsIsCollab();
+    final Set<GroupDTO> groupsIsAdmin = userInfoDTO.getGroupsIsAdmin();
+    final Set<GroupDTO> groupsIsCollab = userInfoDTO.getGroupsIsCollab();
     for (final GroupDTO group : groupsIsAdmin) {
       addPartipation(group);
     }
@@ -151,6 +153,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
       addPartipation(group);
     }
     partiMenu.setEnabled((groupsIsAdmin.size() + groupsIsCollab.size()) > 0);
+    siteOptions.refreshActions();
   }
 
   private void setLoggedUserName(final String shortName) {

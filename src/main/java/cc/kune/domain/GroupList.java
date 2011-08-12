@@ -20,7 +20,8 @@
 package cc.kune.domain;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -51,18 +52,18 @@ public class GroupList {
   @Fetch(FetchMode.JOIN)
   @OrderBy("shortName ASC")
   @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-  List<Group> list;
+  Set<Group> list;
 
   @Enumerated(EnumType.STRING)
   @Basic
   private GroupListMode mode;
 
   public GroupList() {
-    this(new ArrayList<Group>());
+    this(new HashSet<Group>());
     this.mode = GroupListMode.NORMAL;
   }
 
-  public GroupList(final List<Group> list) {
+  public GroupList(final Set<Group> list) {
     this.list = list;
   }
 
@@ -78,7 +79,7 @@ public class GroupList {
     }
   }
 
-  public boolean checkIfIncludes(final Group group, final List<Group> list, final GroupListMode mode) {
+  public boolean checkIfIncludes(final Group group, final Set<Group> list, final GroupListMode mode) {
     switch (mode) {
     case NOBODY:
       return false;
@@ -97,7 +98,7 @@ public class GroupList {
     return id;
   }
 
-  public List<Group> getList() {
+  public Set<Group> getList() {
     return list;
   }
 
@@ -125,7 +126,7 @@ public class GroupList {
     this.id = id;
   }
 
-  public void setList(final List<Group> list) {
+  public void setList(final Set<Group> list) {
     this.list = list;
   }
 
