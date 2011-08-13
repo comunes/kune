@@ -186,22 +186,30 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   }
 
   @Override
-  public void addParticipant(final WaveRef waveName, final String author, final String userWhoAdds,
-      final String newLocalParticipant) {
+  public void addParticipants(final WaveRef waveName, final String author, final String userWhoAdds,
+      final String... newLocalParticipants) {
     final Wavelet wavelet = fetchWave(waveName, author);
-    final String newPartWithDomain = participantUtils.of(newLocalParticipant).toString();
-    for (final String current : wavelet.getParticipants()) {
-      if (current.equals(newPartWithDomain)) {
-        // Current user is a participant already (issue #73)
-        return;
+    final OperationQueue opQueue = new OperationQueue();
+
+    for (final String newLocalParticipant : newLocalParticipants) {
+      final String newPartWithDomain = participantUtils.of(newLocalParticipant).toString();
+      boolean mustAdd = true;
+      for (final String current : wavelet.getParticipants()) {
+        if (current.equals(newPartWithDomain)) {
+          // Current user is a participant already (issue #73)
+          mustAdd = false;
+          break;
+        }
+      }
+      if (mustAdd) {
+        opQueue.addParticipantToWavelet(wavelet, newPartWithDomain);
       }
     }
-    final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
-        : author;
-    final OperationQueue opQueue = new OperationQueue();
-    opQueue.addParticipantToWavelet(wavelet, newPartWithDomain);
-    doOperation(whoAdd, opQueue, "add participant");
-
+    if (opQueue.getPendingOperations().size() > 0) {
+      final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
+          : author;
+      doOperation(whoAdd, opQueue, "add participant");
+    }
   }
 
   @Override

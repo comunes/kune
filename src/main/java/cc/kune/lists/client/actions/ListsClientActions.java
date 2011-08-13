@@ -20,8 +20,8 @@
 package cc.kune.lists.client.actions;
 
 import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
-import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
 import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
+import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -31,9 +31,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
-import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
-import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 
 import com.google.inject.Inject;
@@ -50,11 +48,13 @@ public class ListsClientActions extends AbstractFoldableToolActions {
   @Inject
   public ListsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewWaveMenuItem> newWaveItem,
-      final Provider<NewWaveIconBtn> newWaveIconBtn, final Provider<NewListMenuItem> newListMenuItem,
-      final Provider<NewListBtn> newListBtn, final Provider<OpenFolderMenuItem> openContentMenuItem,
-      final Provider<RefreshContentMenuItem> refresh, final Provider<SubscribeToListBtn> subscribeBtn,
-      final Provider<ContentViewerOptionsMenu> optionsMenuContent,
+      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewListPostIconMenuItem> newPostItem,
+      final Provider<NewListPostIconBtn> newPostIconBtn,
+      final Provider<NewListMenuItem> newListMenuItem, final Provider<NewListBtn> newListBtn,
+      final Provider<OpenFolderMenuItem> openContentMenuItem,
+      final Provider<RefreshListMenuItem> refresh, final Provider<SubscribeToListBtn> subscribeBtn,
+      final Provider<OptionsListMenu> optionsMenuContent,
+      final Provider<SetListOpenessMenuItem> listOpenessMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn, final ListsNewMenu listNewMenu,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
       final Provider<DelListMenuItem> delFolderMenuItem,
@@ -64,8 +64,9 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listNewMenu, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribeBtn, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newWaveItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newWaveIconBtn, noRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, listOpenessMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newListMenuItem, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newListBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);

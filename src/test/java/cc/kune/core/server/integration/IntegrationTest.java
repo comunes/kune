@@ -23,64 +23,64 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.UserSession;
 import cc.kune.core.server.properties.KuneBasicProperties;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
 
 public abstract class IntegrationTest {
 
-    @Inject
-    KuneBasicProperties properties;
-    @Inject
-    protected UserSession session;
-    protected String token;
-    @Inject
-    UserService userService;
+  @Inject
+  KuneBasicProperties properties;
+  @Inject
+  protected UserSession session;
+  protected String token;
+  @Inject
+  UserService userService;
 
-    protected String doLogin() throws DefaultException, IOException {
-        waveLogin();
-        return userService.login(getSiteAdminShortName(), properties.getAdminPassword(), token).getUserHash();
-    }
+  protected UserInfoDTO doLogin() throws DefaultException, IOException {
+    waveLogin();
+    return userService.login(getSiteAdminShortName(), properties.getAdminPassword(), token);
+  }
 
-    protected String doLoginWithDummyUser() throws DefaultException, IOException {
-        waveLogin();
-        return userService.login("dummy", properties.getAdminPassword(), token).getUserHash();
-    }
+  protected String doLoginWithDummyUser() throws DefaultException, IOException {
+    waveLogin();
+    return userService.login("dummy", properties.getAdminPassword(), token).getUserHash();
+  }
 
-    protected void doLogout() throws DefaultException {
-        userService.logout(getHash());
-    }
+  protected void doLogout() throws DefaultException {
+    userService.logout(getHash());
+  }
 
-    protected String getDefLicense() {
-        return properties.getDefaultLicense();
-    }
+  protected String getDefLicense() {
+    return properties.getDefaultLicense();
+  }
 
-    protected String getDefSiteGroupName() {
-        return properties.getDefaultSiteShortName();
-    }
+  protected String getDefSiteGroupName() {
+    return properties.getDefaultSiteShortName();
+  }
 
-    public String getHash() {
-        return session.getHash();
-    }
+  public String getHash() {
+    return session.getHash();
+  }
 
-    protected String getSiteAdminShortName() {
-        return properties.getAdminShortName();
-    }
+  protected String getSiteAdminShortName() {
+    return properties.getAdminShortName();
+  }
 
-    protected void waveLogin() throws IOException {
-        token = "somesampletoken";
-        // final ClientAuthenticator authenticator = new
-        // ClientAuthenticator("http://localhost:8080"
-        // + SessionManager.SIGN_IN_URL);
-        // final HttpCookie cookie =
-        // authenticator.authenticate("admin@localhost",
-        // "easyeasy".toCharArray());
-        // token = cookie.getValue();
-        assertNotNull(token);
-    }
+  protected void waveLogin() throws IOException {
+    token = "somesampletoken";
+    // final ClientAuthenticator authenticator = new
+    // ClientAuthenticator("http://localhost:8080"
+    // + SessionManager.SIGN_IN_URL);
+    // final HttpCookie cookie =
+    // authenticator.authenticate("admin@localhost",
+    // "easyeasy".toCharArray());
+    // token = cookie.getValue();
+    assertNotNull(token);
+  }
 
 }

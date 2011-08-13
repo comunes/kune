@@ -33,7 +33,7 @@ public interface KuneWaveManager {
 
   void addGadget(WaveRef waveName, String author, String gadgetUrl);
 
-  void addParticipant(WaveRef waveName, String author, String userWhoAdd, String newParticipant);
+  void addParticipants(WaveRef waveName, String author, String userWhoAdd, String... newParticipant);
 
   WaveRef createWave(String message, ParticipantId participants);
 

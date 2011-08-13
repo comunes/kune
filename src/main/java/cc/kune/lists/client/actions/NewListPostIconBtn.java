@@ -19,23 +19,21 @@
  */
 package cc.kune.lists.client.actions;
 
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.NewContentAction;
-import cc.kune.gspace.client.actions.NewContentBtn;
-import cc.kune.lists.shared.ListsConstants;
 
 import com.google.inject.Inject;
 
-public class NewWaveIconBtn extends NewContentBtn {
+public class NewListPostIconBtn extends ButtonDescriptor {
 
   @Inject
-  public NewWaveIconBtn(final I18nTranslationService i18n, final NewContentAction action,
+  public NewListPostIconBtn(final I18nTranslationService i18n, final NewListPostAction action,
       final NavResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.newemail(), shorcutReg, "", i18n.t("Create a new post"), i18n.t("New post"),
-        ListsConstants.TYPE_POST);
-    withStyles("k-btn-min, k-fl");
+    super(action);
+    this.withText(i18n.t("New post")).withToolTip(i18n.t("Create a new post")).withIcon(res.newemail()).withStyles(
+        "k-def-docbtn, k-fl");
   }
 
 }

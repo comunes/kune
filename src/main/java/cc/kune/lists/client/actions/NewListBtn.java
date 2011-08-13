@@ -19,20 +19,19 @@
  */
 package cc.kune.lists.client.actions;
 
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.NewContainerBtn;
-import cc.kune.lists.shared.ListsConstants;
 
 import com.google.inject.Inject;
 
-public class NewListBtn extends NewContainerBtn {
+public class NewListBtn extends ButtonDescriptor {
 
   @Inject
-  public NewListBtn(final I18nTranslationService i18n, final NewContainerAction action,
-      final NavResources res) {
-    super(i18n, action, res.listadd(), i18n.t("New list"), i18n.t("Create a new list"),
-        i18n.t("New list"), ListsConstants.TYPE_LIST);
+  public NewListBtn(final I18nTranslationService i18n, final NewListAction action, final NavResources res) {
+    super(action);
+    withText(i18n.t("New list")).withToolTip(i18n.t("Create a new list")).withIcon(res.listadd()).withStyles(
+        "k-def-docbtn, k-fl");
   }
 
 }

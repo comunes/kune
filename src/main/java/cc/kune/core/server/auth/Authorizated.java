@@ -28,26 +28,27 @@ import com.google.inject.BindingAnnotation;
 
 /**
  * Use in RPC methods, for instance: <code>
- * Authorizated(authLevelRequired = AuthLevelRequired.COLLAB, checkContent = true) </code>
+ * Authorizated({@link #accessRolRequired} = {@link AccessRol#Administrator}, {@link #mustCheckMembership} = true) </code>
  * 
- * The first parameter in the method must be the userHash, the second the group
- * shortName, and if you want to check also the content access, the 3rd
- * parameter must be a content id (string)
+ * The first parameter in the method must be the userHash and if you want to
+ * check also the second parameter should be the token of the Content (use
+ * {@link ActionLevel#content}) or Container ({@link ActionLevel#container})
+ * etc.
  * 
  */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Authorizated {
 
-    AccessRol accessRolRequired() default AccessRol.Viewer;
+  AccessRol accessRolRequired() default AccessRol.Viewer;
 
-    /**
-     * If the action is over a "group", "tool", "container" or over the content.
-     * 
-     * @return
-     */
-    ActionLevel actionLevel() default ActionLevel.content;
+  /**
+   * If the action is over a "group", "tool", "container" or over the content.
+   * 
+   * @return
+   */
+  ActionLevel actionLevel() default ActionLevel.content;
 
-    boolean mustCheckMembership() default true;
+  boolean mustCheckMembership() default true;
 
 }

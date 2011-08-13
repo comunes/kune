@@ -42,7 +42,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class NewRoomBtn extends ButtonDescriptor {
-
   public static class NewRoomAction extends RolAction {
 
     private static final String CANCEL_ID = "k-nrbt-cancel";
@@ -91,7 +90,8 @@ public class NewRoomBtn extends ButtonDescriptor {
             final String groupShortName = session.getCurrentState().getGroup().getShortName();
             contentService.get().addRoom(session.getUserHash(),
                 session.getContainerState().getRootContainer().getStateToken(),
-                groupShortName + "-" + diag.getText(), new AsyncCallbackSimple<StateContainerDTO>() {
+                groupShortName + "-" + diag.getTextFieldValue(),
+                new AsyncCallbackSimple<StateContainerDTO>() {
                   @Override
                   public void onSuccess(final StateContainerDTO state) {
                     stateManager.setRetrievedStateAndGo(state);

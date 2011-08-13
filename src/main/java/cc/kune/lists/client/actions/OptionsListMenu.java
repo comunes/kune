@@ -19,22 +19,18 @@
  */
 package cc.kune.lists.client.actions;
 
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.core.client.resources.CoreResources;
 
 import com.google.inject.Inject;
 
-public class NewListMenuItem extends MenuItemDescriptor {
+public class OptionsListMenu extends MenuDescriptor {
 
   @Inject
-  public NewListMenuItem(final I18nTranslationService i18n, final NewListAction action,
-      final NavResources res, final ListsNewMenu newMenu) {
-    super(action);
-    setParent(newMenu.get(), false);
-    withText(i18n.t("New list")).withToolTip(i18n.t("Create a new list")).withIcon(res.listadd()).withStyles(
-        "k-def-docbtn, k-fl");
-
+  public OptionsListMenu(final CoreResources res) {
+    super();
+    this.withIcon(res.arrowdownsitebar()).withStyles(
+        "k-def-docbtn, k-fr, k-noborder, k-no-backimage, k-nobackcolor");
   }
 
 }

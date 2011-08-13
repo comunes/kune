@@ -20,8 +20,8 @@
 package cc.kune.lists.server;
 
 import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
-import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
 import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
+import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class ListsServerToolTest { // extends PersistenceTest {
 
   @Before
   public void before() {
-    serverTool = new ListsServerTool(null, null, null, null);
+    serverTool = new ListsServerTool(null, null, null, null, null, null);
   }
 
   @Test

@@ -38,12 +38,27 @@ public class GroupListDTO implements IsSerializable {
     this.list = list;
   }
 
+  public boolean checkIfIncludes(final GroupDTO group, final String mode) {
+    if (mode.equals(NOBODY)) {
+      return false;
+    }
+    if (mode.equals(EVERYONE)) {
+      return true;
+    }
+    boolean contains = list.contains(group);
+    return contains;
+  }
+
   public Set<GroupDTO> getList() {
     return list;
   }
 
   public String getMode() {
     return mode;
+  }
+
+  public boolean includes(final GroupDTO group) {
+    return checkIfIncludes(group, mode);
   }
 
   public void setList(final Set<GroupDTO> list) {

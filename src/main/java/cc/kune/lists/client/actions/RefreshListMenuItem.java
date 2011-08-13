@@ -19,22 +19,20 @@
  */
 package cc.kune.lists.client.actions;
 
-import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.NewContentAction;
-import cc.kune.gspace.client.actions.NewContentMenuItem;
-import cc.kune.lists.shared.ListsConstants;
+import cc.kune.gspace.client.actions.RefreshCurrentStateAction;
 
 import com.google.inject.Inject;
 
-public class NewWaveMenuItem extends NewContentMenuItem {
+public class RefreshListMenuItem extends MenuItemDescriptor {
 
   @Inject
-  public NewWaveMenuItem(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg, final ListsNewMenu listsNewMenu) {
-    super(i18n, action, res.newemail(), shorcutReg, i18n.t("New post"), i18n.t("Create a new post"),
-        i18n.t("New post"), ListsConstants.TYPE_POST, listsNewMenu.get());
+  public RefreshListMenuItem(final I18nTranslationService i18n, final RefreshCurrentStateAction action,
+      final OptionsListMenu optionsMenu, final NavResources res) {
+    super(action);
+    this.withText(i18n.t("Reload this")).withIcon(res.refresh()).withParent(optionsMenu, false);
   }
 
 }

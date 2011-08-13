@@ -29,7 +29,6 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
-import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
@@ -58,6 +57,7 @@ import cc.kune.domain.finders.ContentFinder;
 import cc.kune.domain.finders.I18nLanguageFinder;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.KuneWaveUtils;
 import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.Inject;
@@ -107,8 +107,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public void addParticipant(final User user, final Long contentId, final String participant) {
     final Content content = finder.getContent(contentId);
     if (content.isWave()) {
-      kuneWaveManager.addParticipant(getWaveRef(content), content.getAuthors().get(0).getShortName(),
-          user.getShortName(), participant);
+      kuneWaveManager.addParticipants(KuneWaveUtils.getWaveRef(content),
+          content.getAuthors().get(0).getShortName(), user.getShortName(), participant);
     }
   }
 
@@ -183,14 +183,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
   }
 
-  private WaveRef getWaveRef(final Content content) {
-    try {
-      return JavaWaverefEncoder.decodeWaveRefFromPath(String.valueOf(content.getWaveId()));
-    } catch (final InvalidWaveRefException e) {
-      throw new DefaultException("Error getting the wave");
-    }
-  }
-
   @Override
   public Content moveContent(final Content content, final Container newContainer) {
     if (newContainer.equals(content.getContainer())) {
@@ -248,7 +240,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.getLastRevision().setTitle(newTitleWithoutNL);
     if (content.isWave()) {
       final String author = content.getAuthors().get(0).getShortName();
-      kuneWaveManager.setTitle(getWaveRef(content), newTitle, author);
+      kuneWaveManager.setTitle(KuneWaveUtils.getWaveRef(content), newTitle, author);
     }
     setModifiedTime(content);
     return content;

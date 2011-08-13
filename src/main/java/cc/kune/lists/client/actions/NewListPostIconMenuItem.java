@@ -20,21 +20,19 @@
 package cc.kune.lists.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
-public class NewListMenuItem extends MenuItemDescriptor {
+public class NewListPostIconMenuItem extends MenuItemDescriptor {
 
   @Inject
-  public NewListMenuItem(final I18nTranslationService i18n, final NewListAction action,
-      final NavResources res, final ListsNewMenu newMenu) {
-    super(action);
-    setParent(newMenu.get(), false);
-    withText(i18n.t("New list")).withToolTip(i18n.t("Create a new list")).withIcon(res.listadd()).withStyles(
-        "k-def-docbtn, k-fl");
-
+  public NewListPostIconMenuItem(final I18nTranslationService i18n, final NewListPostAction action,
+      final NavResources res, final GlobalShortcutRegister shorcutReg, final ListsNewMenu menu) {
+    super(menu.get(), false, action);
+    this.withText(i18n.t("New post")).withToolTip(i18n.t("Create a new post")).withIcon(res.newemail()).withStyles(
+        "k-def-docbtn, k-fr");
   }
-
 }

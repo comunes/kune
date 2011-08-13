@@ -68,11 +68,7 @@ public class GroupList {
   }
 
   public void add(final Group group) {
-    // No group duplicate
-    // TODO: Get this outside Domain?
-    if (!list.contains(group)) {
-      list.add(group);
-    }
+    list.add(group);
     // TODO: Get this outside Domain?
     if (getMode() == GroupListMode.NOBODY) {
       setMode(GroupListMode.NORMAL);
@@ -88,6 +84,10 @@ public class GroupList {
     default:
       return list.contains(group);
     }
+  }
+
+  public void clear() {
+    list.clear();
   }
 
   public ArrayList<Group> duplicate() {

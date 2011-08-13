@@ -249,12 +249,20 @@ public class ContentRPC implements ContentService, RPC {
     return getUserSession().getUser();
   }
 
-  private StateContainerDTO getState(final User user, final Container container) {
+  public StateContainerDTO getState(final Container container) {
+    return getState(getCurrentUser(), container);
+  }
+
+  public StateContentDTO getState(final Content content) {
+    return getState(getCurrentUser(), content);
+  }
+
+  public StateContainerDTO getState(final User user, final Container container) {
     final StateContainer state = stateService.create(user, container);
     return mapState(state, user);
   }
 
-  private StateContentDTO getState(final User user, final Content content) {
+  public StateContentDTO getState(final User user, final Content content) {
     final StateContent state = stateService.create(user, content);
     return mapState(state, user);
   }

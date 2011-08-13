@@ -97,6 +97,8 @@ import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.server.xmpp.XmppManagerDefault;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.SocialNetwork;
+import cc.kune.lists.client.rpc.ListsService;
+import cc.kune.lists.server.rpc.ListsRPC;
 import cc.kune.wave.server.KuneWaveManager;
 import cc.kune.wave.server.KuneWaveManagerDefault;
 import cc.kune.wave.server.ParticipantUtils;
@@ -141,6 +143,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(UserService.class).to(UserRPC.class);
     bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
     bind(I18nService.class).to(I18nRPC.class);
+    bind(ListsService.class).to(ListsRPC.class);
   }
 
   private void bindServices() {

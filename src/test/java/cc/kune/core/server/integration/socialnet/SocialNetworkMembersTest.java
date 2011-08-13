@@ -20,6 +20,8 @@
 package cc.kune.core.server.integration.socialnet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -31,6 +33,7 @@ import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
+import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
@@ -51,6 +54,19 @@ public class SocialNetworkMembersTest extends IntegrationTest {
   public void init() {
     new IntegrationTestHelper(this);
     group = groupFinder.findByShortName(getSiteAdminShortName());
+  }
+
+  @Test
+  public void testAdminAddTwice() throws Exception {
+    doLogin();
+    final Set<Group> result = groupFinder.findAdminInGroups(group.getId());
+    final AccessLists acl = group.getSocialNetwork().getAccessLists();
+    assertTrue(acl.getAdmins().includes(group));
+    assertFalse(acl.getEditors().includes(group));
+    acl.addAdmin(group);
+    acl.addAdmin(group);
+    acl.addAdmin(group);
+    assertEquals(2, result.size());
   }
 
   @Test

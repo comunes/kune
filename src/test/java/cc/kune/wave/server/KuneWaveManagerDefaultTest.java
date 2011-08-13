@@ -62,7 +62,7 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     doLogin();
     final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
-    manager.addParticipant(waveletName, getSiteAdminShortName(), whoAdds, NEW_PARTICIPANT);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), whoAdds, NEW_PARTICIPANT);
     final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertEquals(2, fetchWavelet.getParticipants().size());
@@ -75,10 +75,12 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     doLogin();
     final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
-    manager.addParticipant(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
         NEW_PARTICIPANT);
-    manager.addParticipant(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
-        NEW_PARTICIPANT);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        NEW_PARTICIPANT, NEW_PARTICIPANT);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        NEW_PARTICIPANT, NEW_PARTICIPANT, NEW_PARTICIPANT);
     final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertEquals(2, fetchWavelet.getParticipants().size());

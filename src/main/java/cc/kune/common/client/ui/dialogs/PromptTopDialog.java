@@ -25,14 +25,15 @@ public class PromptTopDialog extends BasicTopDialog {
 
   public static class Builder extends BasicTopDialog.Builder {
 
-    private boolean allowBlank;
-    private int maxLength;
+    private boolean allowBlank = false;
+    private int maxLength = 0;
     private String maxLengthText;
-    private int minLength;
+    private int minLength = 0;
     private String minLengthText;
     private String regex;
     private String regexText;
     private String textboxId;
+    private int width = 0;
 
     public Builder(final String dialogId, final String promptText, final boolean autohide,
         final boolean modal) {
@@ -85,6 +86,12 @@ public class PromptTopDialog extends BasicTopDialog {
       this.textboxId = textboxId;
       return this;
     }
+
+    @Override
+    public Builder width(final int width) {
+      this.width = width;
+      return this;
+    }
   }
 
   private final TextField<String> textField;
@@ -97,8 +104,15 @@ public class PromptTopDialog extends BasicTopDialog {
     textField.getMessages().setMinLengthText(builder.minLengthText);
     textField.getMessages().setMaxLengthText(builder.maxLengthText);
     textField.setId(builder.textboxId);
-    textField.setMinLength(builder.minLength);
-    textField.setMaxLength(builder.maxLength);
+    if (builder.width != 0) {
+      textField.setWidth(builder.width);
+    }
+    if (builder.minLength != 0) {
+      textField.setMinLength(builder.minLength);
+    }
+    if (builder.maxLength != 0) {
+      textField.setMaxLength(builder.maxLength);
+    }
     textField.setAllowBlank(builder.allowBlank);
     super.getInnerPanel().add(textField);
   }
@@ -107,7 +121,7 @@ public class PromptTopDialog extends BasicTopDialog {
     textField.focus();
   }
 
-  public String getText() {
+  public String getTextFieldValue() {
     return textField.getValue();
   }
 
@@ -115,7 +129,7 @@ public class PromptTopDialog extends BasicTopDialog {
     return textField.isValid();
   }
 
-  public void setText(final String text) {
+  public void setTextFieldValue(final String text) {
     textField.setValue(text);
   }
 

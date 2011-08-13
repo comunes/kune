@@ -30,6 +30,7 @@ import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveServerImpl;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
+import cc.kune.barters.server.BarterServerModule;
 import cc.kune.chat.server.ChatServerModule;
 import cc.kune.core.server.KunePersistenceService;
 import cc.kune.core.server.PlatformServerModule;
@@ -37,6 +38,9 @@ import cc.kune.core.server.TestConstants;
 import cc.kune.core.server.init.FinderRegistry;
 import cc.kune.core.server.properties.PropertiesFileName;
 import cc.kune.docs.server.DocumentServerModule;
+import cc.kune.lists.server.ListsServerModule;
+import cc.kune.meets.server.MeetingServerModule;
+import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.wave.server.CustomSettingsBinder;
 import cc.kune.wiki.server.WikiServerModule;
 
@@ -59,9 +63,10 @@ public class IntegrationTestHelper {
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
       final Injector childInjector = injector.createChildInjector(wavePersistModule,
           FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)),
-          new RobotApiModule(), new PlatformServerModule(), new DocumentServerModule(),
-          new ChatServerModule(), new ServerModule(false), federationModule, new WikiServerModule(),
-          new AbstractModule() {
+          new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
+          new DocumentServerModule(), new ChatServerModule(), new ServerModule(false), federationModule,
+          new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
+          new MeetingServerModule(), new AbstractModule() {
             @Override
             protected void configure() {
               bindScope(SessionScoped.class, Scopes.SINGLETON);
