@@ -310,6 +310,29 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     return createWave(title, message, NO_WAVE_TO_COPY, gadgetUrl, participantsArray);
   }
 
+  @Override
+  public void delParticipants(final WaveRef waveName, final String whoDel, final String... participants) {
+    final Wavelet wavelet = fetchWave(waveName, whoDel);
+    final OperationQueue opQueue = new OperationQueue();
+
+    for (final String participant : participants) {
+      final String partWithDomain = participantUtils.of(participant).toString();
+      boolean mustDel = false;
+      for (final String current : wavelet.getParticipants()) {
+        if (current.equals(partWithDomain)) {
+          mustDel = true;
+          break;
+        }
+      }
+      if (mustDel) {
+        opQueue.removeParticipantFromWavelet(wavelet, partWithDomain);
+      }
+    }
+    if (opQueue.getPendingOperations().size() > 0) {
+      doOperation(whoDel, opQueue, "add participant");
+    }
+  }
+
   private void doOperation(final String author, final OperationQueue opQueue, final String logComment) {
     final OperationContextImpl context = new OperationContextImpl(waveletProvider,
         converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);

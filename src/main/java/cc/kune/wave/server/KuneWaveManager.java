@@ -33,7 +33,7 @@ public interface KuneWaveManager {
 
   void addGadget(WaveRef waveName, String author, String gadgetUrl);
 
-  void addParticipants(WaveRef waveName, String author, String userWhoAdd, String... newParticipant);
+  void addParticipants(WaveRef waveName, String author, String userWhoAdd, String... newParticipants);
 
   WaveRef createWave(String message, ParticipantId participants);
 
@@ -43,6 +43,8 @@ public interface KuneWaveManager {
       ParticipantId... participantsArray);
 
   WaveRef createWave(String title, String message, URL gadgetUrl, ParticipantId... participantsArray);
+
+  void delParticipants(WaveRef waveName, String whoDel, String... participants);
 
   Wavelet fetchWave(WaveId waveId, WaveletId waveletId, String author);
 

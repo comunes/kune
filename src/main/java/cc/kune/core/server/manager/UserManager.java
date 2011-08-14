@@ -39,11 +39,12 @@ public interface UserManager {
    * @param country
    * @param language
    * @param timezone
+   * @param wantPersonalHomepage
    * @return User
    * @throws I18nNotFoundException
    */
   User createUser(String shortName, String longName, String email, String passwd, String language,
-      String country, String timezone) throws I18nNotFoundException;
+      String country, String timezone, boolean wantPersonalHomepage) throws I18nNotFoundException;
 
   void createWaveAccount(String shortName, PasswordDigest passwdDigest);
 

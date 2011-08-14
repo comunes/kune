@@ -95,13 +95,14 @@ public class UserRPC implements RPC, UserService {
   @Transactional(rollbackOn = DefaultException.class)
   public void createUser(final UserDTO userDTO, final boolean wantPersonalHomepage)
       throws DefaultException {
-    final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(),
-        userDTO.getEmail(), userDTO.getPassword(), userDTO.getLanguage().getCode(),
-        userDTO.getCountry().getCode(), userDTO.getTimezone().getId());
-    final Group userGroup = groupManager.createUserGroup(user, wantPersonalHomepage);
-    // Is this necessary? try to remove (used when we were setting the def
-    // content
-    contentManager.save(userGroup.getDefaultContent());
+    userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(),
+        userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
+        userDTO.getTimezone().getId(), wantPersonalHomepage);
+    // final Group userGroup = groupManager.createUserGroup(user,
+    // wantPersonalHomepage);
+    // // Is this necessary? try to remove (used when we were setting the def
+    // // content
+    // contentManager.save(userGroup.getDefaultContent());
   }
 
   @Override

@@ -20,6 +20,7 @@
 package cc.kune.wave.server;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -51,6 +52,29 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   ParticipantUtils participantUtils;
 
   @Test
+  public void addAndRemoveParticipant() throws IOException {
+    doLogin();
+    final String whoDels = getSiteAdminShortName();
+    final WaveRef waveletName = createTestWave();
+    assertNotNull(waveletName);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), whoDels, NEW_PARTICIPANT);
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+    assertNotNull(fetchWavelet);
+    assertEquals(2, fetchWavelet.getParticipants().size());
+    assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
+    assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
+    manager.delParticipants(waveletName, whoDels, NEW_PARTICIPANT);
+    final Wavelet fetchDelWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+    assertNotNull(fetchDelWavelet);
+    assertEquals(1, fetchDelWavelet.getParticipants().size());
+    assertTrue(manager.isParticipant(fetchDelWavelet, getSiteAdminShortName()));
+    assertFalse(manager.isParticipant(fetchDelWavelet, NEW_PARTICIPANT));
+    manager.addParticipants(waveletName, getSiteAdminShortName(), whoDels, NEW_PARTICIPANT);
+    // Del all
+    manager.delParticipants(waveletName, whoDels, getSiteAdminShortName(), NEW_PARTICIPANT);
+  }
+
+  @Test
   public void addGadget() throws DefaultException, IOException {
     doLogin();
     final WaveRef waveletName = createTestWave();
@@ -66,8 +90,8 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertEquals(2, fetchWavelet.getParticipants().size());
-    manager.isParticipant(fetchWavelet, NEW_PARTICIPANT);
-    manager.isParticipant(fetchWavelet, "newparti");
+    assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
+    assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
   }
 
   @Test
@@ -84,8 +108,8 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertEquals(2, fetchWavelet.getParticipants().size());
-    manager.isParticipant(fetchWavelet, NEW_PARTICIPANT);
-    manager.isParticipant(fetchWavelet, "newparti");
+    assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
+    assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
   }
 
   @Test

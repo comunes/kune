@@ -37,10 +37,12 @@ import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.packet.RosterPacket.ItemType;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 import org.waveprotocol.box.server.persistence.AccountStore;
+import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
+import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.UserManager;
@@ -70,13 +72,13 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;
   private final UserFinder finder;
+  private final GroupManager groupManager;
   private final I18nTranslationService i18n;
   private final KuneWaveManager kuneWaveManager;
   private final I18nLanguageManager languageManager;
   private final ParticipantUtils participantUtils;
   private final KuneBasicProperties properties;
   private final AccountStore waveAccountStore;
-  // private final PropertiesManager propManager;
   private final CustomUserRegistrationServlet waveUserRegister;
   private final XmppManager xmppManager;
 
@@ -86,7 +88,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final XmppManager xmppManager, final ChatProperties chatProperties,
       final I18nTranslationService i18n, final CustomUserRegistrationServlet waveUserRegister,
       final AccountStore waveAccountStore, final KuneWaveManager kuneWaveManager,
-      final ParticipantUtils participantUtils, final KuneBasicProperties properties) {
+      final ParticipantUtils participantUtils, final KuneBasicProperties properties,
+      final GroupManager groupManager) {
     super(provider, User.class);
     this.finder = finder;
     this.languageManager = languageManager;
@@ -99,12 +102,13 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.kuneWaveManager = kuneWaveManager;
     this.participantUtils = participantUtils;
     this.properties = properties;
+    this.groupManager = groupManager;
   }
 
   @Override
   public User createUser(final String shortName, final String longName, final String email,
-      final String passwd, final String langCode, final String countryCode, final String timezone)
-      throws I18nNotFoundException {
+      final String passwd, final String langCode, final String countryCode, final String timezone,
+      final boolean wantPersonalHomepage) throws I18nNotFoundException {
     I18nLanguage language;
     I18nCountry country;
     TimeZone tz;
@@ -137,20 +141,28 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     // }
     // final Properties userProp = new Properties(userPropGroup);
     // propManager.persist(userProp);
+    WaveRef welcome = null;
     try {
       final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
           passwdDigest.getSalt(), language, country, tz);
 
       final String defWave = properties.getWelcomewave();
       if (defWave != null) {
-        kuneWaveManager.createWave(
+        welcome = kuneWaveManager.createWave(
             ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
                 properties.getDefaultSiteName()), "", defWave, null,
             participantUtils.of(properties.getAdminShortName()), participantUtils.of(shortName));
       }
+      groupManager.createUserGroup(user, wantPersonalHomepage);
+      // Is this necessary? try to remove (used when we were setting the def
+      // content
+      // contentManager.save(userGroup.getDefaultContent());
       return user;
     } catch (final RuntimeException e) {
       try {
+        if (welcome != null) {
+          kuneWaveManager.delParticipants(welcome, properties.getAdminShortName(), shortName);
+        }
         // Try to remove wave account
         waveAccountStore.removeAccount(participantUtils.of(shortName));
       } catch (final Exception e2) {

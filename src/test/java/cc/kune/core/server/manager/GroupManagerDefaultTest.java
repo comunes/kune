@@ -38,166 +38,154 @@ import cc.kune.core.shared.dto.GroupType;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
 import cc.kune.domain.SocialNetwork;
-import cc.kune.domain.User;
 
 public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
-    private static final String PUBLIC_DESCRIP = "Some public descrip";
+  private static final String PUBLIC_DESCRIP = "Some public descrip";
 
-    @Test
-    public void createdGroupShoudHaveValidSocialNetwork() throws Exception {
-        final Group group = new Group("short", "longName", defLicense, GroupType.PROJECT);
-        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
-        final SocialNetwork socialNetwork = group.getSocialNetwork();
-        final AccessLists lists = socialNetwork.getAccessLists();
-        assertTrue(lists.getAdmins().includes(user.getUserGroup()));
-        assertTrue(lists.getEditors().isEmpty());
-        assertTrue(lists.getViewers().isEmpty());
-        closeTransaction();
+  @Test
+  public void createdGroupShoudHaveValidSocialNetwork() throws Exception {
+    final Group group = new Group("short", "longName", defLicense, GroupType.PROJECT);
+    groupManager.createGroup(group, user, PUBLIC_DESCRIP);
+    final SocialNetwork socialNetwork = group.getSocialNetwork();
+    final AccessLists lists = socialNetwork.getAccessLists();
+    assertTrue(lists.getAdmins().includes(user.getUserGroup()));
+    assertTrue(lists.getEditors().isEmpty());
+    assertTrue(lists.getViewers().isEmpty());
+    closeTransaction();
+  }
+
+  @Test
+  public void createGroup() throws Exception {
+    final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+        GroupType.PROJECT);
+    groupManager.createGroup(group, user, PUBLIC_DESCRIP);
+    final Group otherGroup = groupManager.findByShortName("ysei");
+
+    assertEquals(group.getLongName(), otherGroup.getLongName());
+    assertEquals(group.getShortName(), otherGroup.getShortName());
+    closeTransaction();
+  }
+
+  @Test
+  public void createGroupAndSearch() throws Exception, ParseException {
+    final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+        GroupType.PROJECT);
+    groupManager.createGroup(group, user, PUBLIC_DESCRIP);
+    groupManager.reIndex();
+    final SearchResult<Group> result = groupManager.search("ysei");
+    assertEquals(1, result.getSize());
+    assertEquals("ysei", result.getList().get(0).getShortName());
+    rollbackTransaction();
+  }
+
+  @Test(expected = GroupNameInUseException.class)
+  public void createGroupWithExistingLongName() throws Exception {
+    final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+        GroupType.PROJECT);
+    groupManager.createGroup(group, user, PUBLIC_DESCRIP);
+
+    final Group group2 = new Group("ysei2", "Yellow Submarine Environmental Initiative", defLicense,
+        GroupType.PROJECT);
+    group2.setDefaultLicense(defLicense);
+    groupManager.createGroup(group2, user, PUBLIC_DESCRIP);
+
+    rollbackTransaction();
+  }
+
+  @Test(expected = GroupNameInUseException.class)
+  public void createGroupWithExistingShortName() throws Exception {
+    final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+        GroupType.PROJECT);
+    groupManager.createGroup(group, user, PUBLIC_DESCRIP);
+
+    final Group group2 = new Group("ysei", "Yellow Submarine Environmental Initiative 2", defLicense,
+        GroupType.PROJECT);
+    groupManager.createGroup(group2, user, PUBLIC_DESCRIP);
+
+    rollbackTransaction();
+  }
+
+  private void createTestGroup(final int number) throws Exception {
+    final Group g = new Group("ysei" + number, "Yellow Submarine Environmental Initiative " + number,
+        defLicense, GroupType.PROJECT);
+    groupManager.createGroup(g, user, PUBLIC_DESCRIP);
+  }
+
+  @Test(expected = EmailAddressInUseException.class)
+  public void createUserExistingEmail() throws I18nNotFoundException, GroupNameInUseException,
+      EmailAddressInUseException {
+    userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
+        "GMT", true);
+    userManager.createUser("test2", "test 2 name", "test1@example.com", "some password", "en", "GB",
+        "GMT", true);
+  }
+
+  @Test(expected = GroupNameInUseException.class)
+  public void createUserExistingLongName() throws I18nNotFoundException, GroupNameInUseException,
+      EmailAddressInUseException {
+    userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
+        "GMT", true);
+    userManager.createUser("test2", "test 1 name", "test2@example.com", "some password", "en", "GB",
+        "GMT", true);
+  }
+
+  @Test(expected = GroupNameInUseException.class)
+  public void createUserExistingShortName() throws I18nNotFoundException, GroupNameInUseException,
+      EmailAddressInUseException {
+    userManager.createUser("test", "test 1 name", "test21@example.com", "some password", "en", "GB",
+        "GMT", true);
+    userManager.createUser("test", "test 2 name", "test22@example.com", "some password", "en", "GB",
+        "GMT", true);
+  }
+
+  @Test(expected = EmailAddressInUseException.class)
+  public void createUserWithExistingEmail() throws Exception {
+    userManager.createUser("username2", "the user name 2", USER_EMAIL, "userPassword", "en", "GB",
+        TimeZone.getDefault().getID(), true);
+    rollbackTransaction();
+  }
+
+  @Test(expected = GroupNameInUseException.class)
+  public void createUserWithExistingLongName() throws Exception {
+    userManager.createUser("username2", USER_LONG_NAME, "email2@example.com", "userPassword", "en",
+        "GB", TimeZone.getDefault().getID(), true);
+    rollbackTransaction();
+  }
+
+  @Test(expected = GroupNameInUseException.class)
+  public void createUserWithExistingShortName() throws Exception {
+    userManager.createUser(USER_SHORT_NAME, "the user name 2", "email2@example.com", "userPassword",
+        "en", "GB", TimeZone.getDefault().getID(), true);
+    rollbackTransaction();
+  }
+
+  @Test(expected = UserRegistrationException.class)
+  public void createUserWithIncorrectShortName() throws Exception {
+    userManager.createUser("u s", "the user name 2", "email2@example.com", "userPassword", "en", "GB",
+        TimeZone.getDefault().getID(), true);
+    rollbackTransaction();
+  }
+
+  @Test(expected = InvalidStateException.class)
+  public void createUserWithVeryShortName() throws Exception {
+    userManager.createUser("us", "the user name 2", "email2@example.com", "userPassword", "en", "GB",
+        TimeZone.getDefault().getID(), true);
+    rollbackTransaction();
+  }
+
+  @Test
+  public void groupSearchPagination() throws Exception, ParseException {
+    for (int i = 1; i < 10; i++) {
+      createTestGroup(i);
     }
-
-    @Test
-    public void createGroup() throws Exception {
-        final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
-                GroupType.PROJECT);
-        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
-        final Group otherGroup = groupManager.findByShortName("ysei");
-
-        assertEquals(group.getLongName(), otherGroup.getLongName());
-        assertEquals(group.getShortName(), otherGroup.getShortName());
-        closeTransaction();
-    }
-
-    @Test
-    public void createGroupAndSearch() throws Exception, ParseException {
-        final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
-                GroupType.PROJECT);
-        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
-        groupManager.reIndex();
-        final SearchResult<Group> result = groupManager.search("ysei");
-        assertEquals(1, result.getSize());
-        assertEquals("ysei", result.getList().get(0).getShortName());
-        rollbackTransaction();
-    }
-
-    @Test(expected = GroupNameInUseException.class)
-    public void createGroupWithExistingLongName() throws Exception {
-        final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
-                GroupType.PROJECT);
-        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
-
-        final Group group2 = new Group("ysei2", "Yellow Submarine Environmental Initiative", defLicense,
-                GroupType.PROJECT);
-        group2.setDefaultLicense(defLicense);
-        groupManager.createGroup(group2, user, PUBLIC_DESCRIP);
-
-        rollbackTransaction();
-    }
-
-    @Test(expected = GroupNameInUseException.class)
-    public void createGroupWithExistingShortName() throws Exception {
-        final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
-                GroupType.PROJECT);
-        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
-
-        final Group group2 = new Group("ysei", "Yellow Submarine Environmental Initiative 2", defLicense,
-                GroupType.PROJECT);
-        groupManager.createGroup(group2, user, PUBLIC_DESCRIP);
-
-        rollbackTransaction();
-    }
-
-    private void createTestGroup(final int number) throws Exception {
-        final Group g = new Group("ysei" + number, "Yellow Submarine Environmental Initiative " + number, defLicense,
-                GroupType.PROJECT);
-        groupManager.createGroup(g, user, PUBLIC_DESCRIP);
-    }
-
-    @Test(expected = EmailAddressInUseException.class)
-    public void createUserExistingEmail() throws I18nNotFoundException, GroupNameInUseException,
-            EmailAddressInUseException {
-        final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-                "GB", "GMT");
-        groupManager.createUserGroup(user1);
-        final User user2 = userManager.createUser("test2", "test 2 name", "test1@example.com", "some password", "en",
-                "GB", "GMT");
-        groupManager.createUserGroup(user2);
-    }
-
-    @Test(expected = GroupNameInUseException.class)
-    public void createUserExistingLongName() throws I18nNotFoundException, GroupNameInUseException,
-            EmailAddressInUseException {
-        final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-                "GB", "GMT");
-        groupManager.createUserGroup(user1);
-        final User user2 = userManager.createUser("test2", "test 1 name", "test2@example.com", "some password", "en",
-                "GB", "GMT");
-        groupManager.createUserGroup(user2);
-    }
-
-    @Test(expected = GroupNameInUseException.class)
-    public void createUserExistingShortName() throws I18nNotFoundException, GroupNameInUseException,
-            EmailAddressInUseException {
-        final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-                "GB", "GMT");
-        groupManager.createUserGroup(user1);
-        final User user2 = userManager.createUser("test", "test 2 name", "test2@example.com", "some password", "en",
-                "GB", "GMT");
-        groupManager.createUserGroup(user2);
-    }
-
-    @Test(expected = EmailAddressInUseException.class)
-    public void createUserWithExistingEmail() throws Exception {
-        final User user2 = userManager.createUser("username2", "the user name 2", USER_EMAIL, "userPassword", "en",
-                "GB", TimeZone.getDefault().getID());
-        groupManager.createUserGroup(user2);
-        rollbackTransaction();
-    }
-
-    @Test(expected = GroupNameInUseException.class)
-    public void createUserWithExistingLongName() throws Exception {
-        final User user2 = userManager.createUser("username2", USER_LONG_NAME, "email2@example.com", "userPassword",
-                "en", "GB", TimeZone.getDefault().getID());
-        groupManager.createUserGroup(user2);
-        rollbackTransaction();
-    }
-
-    @Test(expected = GroupNameInUseException.class)
-    public void createUserWithExistingShortName() throws Exception {
-        final User user2 = userManager.createUser(USER_SHORT_NAME, "the user name 2", "email2@example.com",
-                "userPassword", "en", "GB", TimeZone.getDefault().getID());
-        groupManager.createUserGroup(user2);
-        rollbackTransaction();
-    }
-
-    @Test(expected = UserRegistrationException.class)
-    public void createUserWithIncorrectShortName() throws Exception {
-        final User user2 = userManager.createUser("u s", "the user name 2", "email2@example.com", "userPassword", "en",
-                "GB", TimeZone.getDefault().getID());
-        groupManager.createUserGroup(user2);
-        rollbackTransaction();
-    }
-
-    @Test(expected = InvalidStateException.class)
-    public void createUserWithVeryShortName() throws Exception {
-        final User user2 = userManager.createUser("us", "the user name 2", "email2@example.com", "userPassword", "en",
-                "GB", TimeZone.getDefault().getID());
-        groupManager.createUserGroup(user2);
-        rollbackTransaction();
-    }
-
-    @Test
-    public void groupSearchPagination() throws Exception, ParseException {
-        for (int i = 1; i < 10; i++) {
-            createTestGroup(i);
-        }
-        groupManager.reIndex();
-        final SearchResult<Group> result = groupManager.search("Yellow", 0, 5);
-        assertEquals(9, result.getSize());
-        assertEquals(5, result.getList().size());
-        final SearchResult<Group> result2 = groupManager.search("Yellow", 5, 5);
-        assertEquals(9, result2.getSize());
-        assertEquals(4, result2.getList().size());
-        rollbackTransaction();
-    }
+    groupManager.reIndex();
+    final SearchResult<Group> result = groupManager.search("Yellow", 0, 5);
+    assertEquals(9, result.getSize());
+    assertEquals(5, result.getList().size());
+    final SearchResult<Group> result2 = groupManager.search("Yellow", 5, 5);
+    assertEquals(9, result2.getSize());
+    assertEquals(4, result2.getList().size());
+    rollbackTransaction();
+  }
 }

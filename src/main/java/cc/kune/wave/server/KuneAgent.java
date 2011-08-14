@@ -100,6 +100,12 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveManager
   }
 
   @Override
+  public void delParticipants(final WaveRef waveName, final String whoDel, final String... participants) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
   public Wavelet fetchWave(final WaveId waveId, final WaveletId waveletId, final String author) {
     // TODO Auto-generated method stub
     return null;

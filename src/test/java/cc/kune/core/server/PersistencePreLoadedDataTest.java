@@ -107,12 +107,12 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
     gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
         "western", ",");
     countryManager.persist(gb);
-    user = userManager.createUser(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, "en",
-        "GB", TimeZone.getDefault().getID());
     defLicense = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "",
         "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
     licenseManager.persist(defLicense);
-    groupManager.createUserGroup(user, true);
+    user = userManager.createUser(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, "en",
+        "GB", TimeZone.getDefault().getID(), true);
+    // groupManager.createUserGroup(user, true);
     content = new Content();
     content.setLanguage(english);
     contentManager.persist(content);
