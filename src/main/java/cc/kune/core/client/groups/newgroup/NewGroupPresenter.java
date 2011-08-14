@@ -23,7 +23,8 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.auth.SignIn;
-import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.GroupLongNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
@@ -155,6 +156,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
   }
 
   public void onRegister() {
+    getView().hideMessage();
     if (getView().isFormValid()) {
       getView().maskProcessing();
       final String shortName = getView().getShortName();
@@ -167,9 +169,16 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
       final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
         @Override
         public void onFailure(final Throwable caught) {
-          if (caught instanceof GroupNameInUseException) {
+          if (caught instanceof GroupShortNameInUseException) {
             getView().unMask();
-            setMessage(i18n.t(CoreMessages.NAME_IN_ALREADY_IN_USE), NotifyLevel.error);
+            final String msg = i18n.t(CoreMessages.NAME_IN_ALREADY_IN_USE);
+            getView().setShortNameFailed(msg);
+            setMessage(msg, NotifyLevel.error);
+          } else if (caught instanceof GroupLongNameInUseException) {
+            getView().unMask();
+            final String msg = i18n.t(CoreMessages.NAME_IN_ALREADY_IN_USE);
+            getView().setLongNameFailed(msg);
+            setMessage(msg, NotifyLevel.error);
           } else {
             getView().unMask();
             setMessage(i18n.t("Error creating group"), NotifyLevel.error);

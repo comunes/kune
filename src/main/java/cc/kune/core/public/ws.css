@@ -729,8 +729,8 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
 .k-error-tb {
   background: #FFB380 none repeat scroll 0% 50%;
   /* color: #250; */
-  padding: 10px;
-  margin: 16px -20px -20px -20px;
+  padding: 7px 10px;
+  margin: 16px -20px -10px -20px;
 }
 
 .k-error-tb img {

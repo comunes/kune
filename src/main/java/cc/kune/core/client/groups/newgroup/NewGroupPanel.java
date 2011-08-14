@@ -51,7 +51,6 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   public static final String ERROR_MSG_BAR = "k-ngp-error-mb";
   private static final int LABEL_WIDTH = 100;
   public static final String LONGNAME_FIELD = "k-ngp-long_name";
-  private static final String MARGIN_LEFT_105PX = "margin-left: 105px";
   public static final String NEWGROUP_WIZARD = "k-ngp-wiz";
   public static final String ORG_GROUP_TYPE_ID = "k-ngp-type_of_group_org";
   public static final String PROJ_GROUP_TYPE_ID = "k-ngp-type_of_group_proj";
@@ -83,7 +82,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img,
       final MaskWidgetView mask) {
     final Builder builder = new BasicTopDialog.Builder(NEWGROUP_WIZARD, false, true).autoscroll(true).height(
-        "340px").title(i18n.t("Register a new group"));
+        340).title(i18n.t("Register a new group"));
     builder.icon("k-newgroup-icon");
     builder.firstButtonTitle(i18n.t("Register")).firstButtonId(REGISTER_BUTTON);
     builder.sndButtonTitle(i18n.t("Cancel")).sndButtonId(CANCEL_BUTTON);
@@ -299,8 +298,18 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   }
 
   @Override
+  public void setLongNameFailed(final String msg) {
+    longNameField.markInvalid(msg);
+  }
+
+  @Override
   public void setMessage(final String message, final NotifyLevel level) {
     messageErrorBar.setErrorMessage(message, level);
+  }
+
+  @Override
+  public void setShortNameFailed(final String msg) {
+    shortNameField.markInvalid(msg);
   }
 
   @Override

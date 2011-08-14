@@ -23,6 +23,7 @@ import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.common.client.utils.OnAcceptCallback;
+import cc.kune.core.client.auth.SignInPresenter.SignInView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.KuneUiUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -36,106 +37,107 @@ import com.google.inject.Inject;
 
 public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
-    public static final String CANCEL_BUTTON_ID = "k-signinp-cb";
-    public static final String CREATE_ONE = "k-signinp-create";
-    public static final String ERROR_MSG = "k-sigp-errmsg";
-    public static final String SIGN_IN_BUTTON_ID = "k-signinp-sib";
-    public static final String SIGNIN_DIALOG = "k-signinp-dialog";
-    private Label registerLabel;
-    private final SignInForm signInForm;
+  public static final String CANCEL_BUTTON_ID = "k-signinp-cb";
+  public static final String CREATE_ONE = "k-signinp-create";
+  public static final String ERROR_MSG = "k-sigp-errmsg";
+  public static final String SIGN_IN_BUTTON_ID = "k-signinp-sib";
+  public static final String SIGNIN_DIALOG = "k-signinp-dialog";
+  private Label registerLabel;
+  private final SignInForm signInForm;
 
-    @Inject
-    public SignInPanel(final I18nTranslationService i18n, final MaskWidgetView mask, final NotifyLevelImages images) {
-        super(SIGNIN_DIALOG, mask, i18n, i18n.t(CoreMessages.SIGN_IN_TITLE), true, true, true, 360, 430, "",
-                i18n.t(CoreMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
-                CANCEL_BUTTON_ID, images, ERROR_MSG, 102);
+  @Inject
+  public SignInPanel(final I18nTranslationService i18n, final MaskWidgetView mask,
+      final NotifyLevelImages images) {
+    super(SIGNIN_DIALOG, mask, i18n, i18n.t(CoreMessages.SIGN_IN_TITLE), true, true, true, 360, 430, "",
+        i18n.t(CoreMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
+        CANCEL_BUTTON_ID, images, ERROR_MSG, 102);
 
-        signInForm = new SignInForm(i18n);
-        signInForm.setWidth(370);
-        signInForm.add(createNoAccountRegister());
-        messageErrorBar = new MessageToolbar(images, errorLabelId);
-        signInForm.add(messageErrorBar);
-        super.getInnerPanel().add(signInForm.getFormPanel());
-    }
+    signInForm = new SignInForm(i18n);
+    signInForm.setWidth(370);
+    signInForm.add(createNoAccountRegister());
+    messageErrorBar = new MessageToolbar(images, errorLabelId);
+    signInForm.add(messageErrorBar);
+    super.getInnerPanel().add(signInForm.getFormPanel());
+  }
 
-    private VerticalPanel createNoAccountRegister() {
-        final VerticalPanel noAccRegisterPanel = new VerticalPanel();
-        final HorizontalPanel hpanel = new HorizontalPanel();
-        final Label dontHaveAccount = new Label(i18n.t("Don't have an account?"));
-        registerLabel = new Label(i18n.t("Create one."));
-        registerLabel.ensureDebugId(CREATE_ONE);
-        registerLabel.addStyleName("kune-Margin-Medium-l");
-        registerLabel.addStyleName("k-link");
-        registerLabel.addStyleName("k-cursor");
-        hpanel.add(dontHaveAccount);
-        hpanel.add(registerLabel);
-        noAccRegisterPanel.add(hpanel);
-        return noAccRegisterPanel;
-    }
+  private VerticalPanel createNoAccountRegister() {
+    final VerticalPanel noAccRegisterPanel = new VerticalPanel();
+    final HorizontalPanel hpanel = new HorizontalPanel();
+    final Label dontHaveAccount = new Label(i18n.t("Don't have an account?"));
+    registerLabel = new Label(i18n.t("Create one."));
+    registerLabel.ensureDebugId(CREATE_ONE);
+    registerLabel.addStyleName("kune-Margin-Medium-l");
+    registerLabel.addStyleName("k-link");
+    registerLabel.addStyleName("k-cursor");
+    hpanel.add(dontHaveAccount);
+    hpanel.add(registerLabel);
+    noAccRegisterPanel.add(hpanel);
+    return noAccRegisterPanel;
+  }
 
-    @Override
-    public void focusOnNickname() {
-        signInForm.focusLogin();
-    }
+  @Override
+  public void focusOnNickname() {
+    signInForm.focusLogin();
+  }
 
-    @Override
-    public void focusOnPassword() {
-        signInForm.focusOnPassword();
-    }
+  @Override
+  public void focusOnPassword() {
+    signInForm.focusOnPassword();
+  }
 
-    @Override
-    public HasClickHandlers getAccountRegister() {
-        return registerLabel;
-    }
+  @Override
+  public HasClickHandlers getAccountRegister() {
+    return registerLabel;
+  }
 
-    @Override
-    public String getLoginPassword() {
-        return signInForm.getLoginPassword();
-    }
+  @Override
+  public String getLoginPassword() {
+    return signInForm.getLoginPassword();
+  }
 
-    private Field<String> getNickname() {
-        return signInForm.getNickOrEmailField();
-    }
+  private Field<String> getNickname() {
+    return signInForm.getNickOrEmailField();
+  }
 
-    @Override
-    public String getNickOrEmail() {
-        return signInForm.getNickOrEmail();
-    }
+  @Override
+  public String getNickOrEmail() {
+    return signInForm.getNickOrEmail();
+  }
 
-    @Override
-    public boolean isSignInFormValid() {
-        return signInForm.isValid();
-    }
+  @Override
+  public boolean isSignInFormValid() {
+    return signInForm.isValid();
+  }
 
-    @Override
-    public void reset() {
-        signInForm.reset();
-    }
+  @Override
+  public void reset() {
+    signInForm.reset();
+  }
 
-    @Override
-    public void setLoginPassword(final String password) {
-        signInForm.setLoginPassword(password);
-    }
+  @Override
+  public void setLoginPassword(final String password) {
+    signInForm.setLoginPassword(password);
+  }
 
-    @Override
-    public void setNickOrEmail(final String nickOrEmail) {
-        signInForm.setNickOrEmail(nickOrEmail);
-    }
+  @Override
+  public void setNickOrEmail(final String nickOrEmail) {
+    signInForm.setNickOrEmail(nickOrEmail);
+  }
 
-    @Override
-    public void setOnPasswordReturn(final OnAcceptCallback onAcceptCallback) {
-        signInForm.setOnPasswordReturn(onAcceptCallback);
-    }
+  @Override
+  public void setOnPasswordReturn(final OnAcceptCallback onAcceptCallback) {
+    signInForm.setOnPasswordReturn(onAcceptCallback);
+  }
 
-    @Override
-    public void show() {
-        super.show();
-        KuneUiUtils.focusOnField(getNickname());
-    }
+  @Override
+  public void show() {
+    super.show();
+    KuneUiUtils.focusOnField(getNickname());
+  }
 
-    @Override
-    public void validate() {
-        signInForm.validate();
-    }
+  @Override
+  public void validate() {
+    signInForm.validate();
+  }
 
 }

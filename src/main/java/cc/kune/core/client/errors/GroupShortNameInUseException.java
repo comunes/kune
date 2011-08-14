@@ -17,22 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.auth;
+package cc.kune.core.client.errors;
 
-public interface RegisterView extends SignInAbstractView {
-
-    String getEmail();
-
-    String getLongName();
-
-    String getRegisterPassword();
-
-    String getShortName();
-
-    boolean isRegisterFormValid();
-
-    boolean isValid();
-
-    void validate();
-
+public class GroupShortNameInUseException extends DefaultException {
+    private static final long serialVersionUID = -4746775725822225687L;
 }

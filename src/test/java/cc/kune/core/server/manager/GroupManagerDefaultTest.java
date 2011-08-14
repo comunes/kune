@@ -29,7 +29,8 @@ import org.hibernate.validator.InvalidStateException;
 import org.junit.Test;
 
 import cc.kune.core.client.errors.EmailAddressInUseException;
-import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.GroupLongNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
@@ -79,7 +80,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
-  @Test(expected = GroupNameInUseException.class)
+  @Test(expected = GroupLongNameInUseException.class)
   public void createGroupWithExistingLongName() throws Exception {
     final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
         GroupType.PROJECT);
@@ -93,7 +94,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
-  @Test(expected = GroupNameInUseException.class)
+  @Test(expected = GroupShortNameInUseException.class)
   public void createGroupWithExistingShortName() throws Exception {
     final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
         GroupType.PROJECT);
@@ -113,7 +114,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
   }
 
   @Test(expected = EmailAddressInUseException.class)
-  public void createUserExistingEmail() throws I18nNotFoundException, GroupNameInUseException,
+  public void createUserExistingEmail() throws I18nNotFoundException, GroupShortNameInUseException,
       EmailAddressInUseException {
     userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
         "GMT", true);
@@ -121,8 +122,8 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
         "GMT", true);
   }
 
-  @Test(expected = GroupNameInUseException.class)
-  public void createUserExistingLongName() throws I18nNotFoundException, GroupNameInUseException,
+  @Test(expected = GroupLongNameInUseException.class)
+  public void createUserExistingLongName() throws I18nNotFoundException, GroupShortNameInUseException,
       EmailAddressInUseException {
     userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
         "GMT", true);
@@ -130,8 +131,8 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
         "GMT", true);
   }
 
-  @Test(expected = GroupNameInUseException.class)
-  public void createUserExistingShortName() throws I18nNotFoundException, GroupNameInUseException,
+  @Test(expected = GroupShortNameInUseException.class)
+  public void createUserExistingShortName() throws I18nNotFoundException, GroupShortNameInUseException,
       EmailAddressInUseException {
     userManager.createUser("test", "test 1 name", "test21@example.com", "some password", "en", "GB",
         "GMT", true);
@@ -146,14 +147,14 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
-  @Test(expected = GroupNameInUseException.class)
+  @Test(expected = GroupLongNameInUseException.class)
   public void createUserWithExistingLongName() throws Exception {
     userManager.createUser("username2", USER_LONG_NAME, "email2@example.com", "userPassword", "en",
         "GB", TimeZone.getDefault().getID(), true);
     rollbackTransaction();
   }
 
-  @Test(expected = GroupNameInUseException.class)
+  @Test(expected = GroupShortNameInUseException.class)
   public void createUserWithExistingShortName() throws Exception {
     userManager.createUser(USER_SHORT_NAME, "the user name 2", "email2@example.com", "userPassword",
         "en", "GB", TimeZone.getDefault().getID(), true);

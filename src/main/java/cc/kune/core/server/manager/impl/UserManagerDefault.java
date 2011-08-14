@@ -39,7 +39,9 @@ import org.waveprotocol.box.server.authentication.PasswordDigest;
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
-import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.EmailAddressInUseException;
+import cc.kune.core.client.errors.GroupLongNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.server.manager.GroupManager;
@@ -71,13 +73,13 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;
-  private final UserFinder finder;
   private final GroupManager groupManager;
   private final I18nTranslationService i18n;
   private final KuneWaveManager kuneWaveManager;
   private final I18nLanguageManager languageManager;
   private final ParticipantUtils participantUtils;
   private final KuneBasicProperties properties;
+  private final UserFinder userFinder;
   private final AccountStore waveAccountStore;
   private final CustomUserRegistrationServlet waveUserRegister;
   private final XmppManager xmppManager;
@@ -91,7 +93,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final ParticipantUtils participantUtils, final KuneBasicProperties properties,
       final GroupManager groupManager) {
     super(provider, User.class);
-    this.finder = finder;
+    this.userFinder = finder;
     this.languageManager = languageManager;
     this.countryManager = countryManager;
     this.xmppManager = xmppManager;
@@ -112,6 +114,16 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     I18nLanguage language;
     I18nCountry country;
     TimeZone tz;
+    if (userFinder.countByShortName(shortName) != 0) {
+      throw new GroupShortNameInUseException();
+    }
+    if (userFinder.countByLongName(longName) != 0) {
+      throw new GroupLongNameInUseException();
+    }
+    groupManager.checkIfNamesAreInUse(shortName, longName);
+    if (userFinder.countByEmail(email) != 0) {
+      throw new EmailAddressInUseException();
+    }
     try {
       language = languageManager.findByCode(langCode);
       country = countryManager.findByCode(countryCode);
@@ -124,23 +136,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     try {
       createWaveAccount(shortName, passwdDigest);
     } catch (final UserRegistrationException e) {
-      try {
-        if (finder.getByShortName(shortName) != null) {
-          throw new GroupNameInUseException();
-        } else {
-          // Other kind of exception
-          throw e;
-        }
-      } catch (final NoResultException e2) {
-        // Other kind of exception
-        throw e;
-      }
+      throw e;
     }
-    // if (userPropGroup == null) {
-    // userPropGroup = propGroupManager.find(User.PROPS_ID);
-    // }
-    // final Properties userProp = new Properties(userPropGroup);
-    // propManager.persist(userProp);
     WaveRef welcome = null;
     try {
       final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
@@ -183,7 +180,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   @Override
   public User find(final Long userId) {
     try {
-      return finder.getById(userId);
+      return userFinder.findById(userId);
     } catch (final NoResultException e) {
       return User.UNKNOWN_USER;
     }
@@ -191,11 +188,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   @Override
   public User findByShortname(final String shortName) {
-    return finder.getByShortName(shortName);
+    return userFinder.findByShortName(shortName);
   }
 
   public List<User> getAll() {
-    return finder.getAll();
+    return userFinder.getAll();
   }
 
   @Override
@@ -209,7 +206,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     final String domain = "@" + chatProperties.getDomain();
     final UserBuddiesData buddiesData = new UserBuddiesData();
 
-    final User user = finder.getByShortName(shortName);
+    final User user = userFinder.findByShortName(shortName);
     Collection<RosterEntry> roster;
     try {
       final ChatConnection connection = xmppManager.login(user.getShortName() + domain,
@@ -230,7 +227,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
           // local user
           try {
             final String username = entry.getUser().substring(0, index);
-            final User buddie = finder.getByShortName(username);
+            final User buddie = userFinder.findByShortName(username);
             buddiesData.getBuddies().add(buddie);
           } catch (final NoResultException e) {
             // No existent buddie, skip
@@ -248,10 +245,10 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   public User login(final String nickOrEmail, final String passwd) {
     User user;
     try {
-      user = finder.getByShortName(nickOrEmail);
+      user = userFinder.findByShortName(nickOrEmail);
     } catch (final NoResultException e) {
       try {
-        user = finder.getByEmail(nickOrEmail);
+        user = userFinder.findByEmail(nickOrEmail);
       } catch (final NoResultException e2) {
         return null;
       }

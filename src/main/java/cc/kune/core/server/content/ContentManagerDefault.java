@@ -96,7 +96,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public void addAuthor(final User user, final Long contentId, final String authorShortName)
       throws DefaultException {
     final Content content = finder.getContent(contentId);
-    final User author = userFinder.getByShortName(authorShortName);
+    final User author = userFinder.findByShortName(authorShortName);
     if (author == null) {
       throw new UserNotFoundException();
     }
@@ -221,7 +221,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public void removeAuthor(final User user, final Long contentId, final String authorShortName)
       throws DefaultException {
     final Content content = finder.getContent(contentId);
-    final User author = userFinder.getByShortName(authorShortName);
+    final User author = userFinder.findByShortName(authorShortName);
     if (author == null) {
       throw new UserNotFoundException();
     }

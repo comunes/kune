@@ -23,9 +23,11 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.auth.RegisterPresenter.RegisterView;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.EmailAddressInUseException;
-import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.GroupLongNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -60,6 +62,30 @@ public class RegisterPresenter extends
 
   @ProxyCodeSplit
   public interface RegisterProxy extends Proxy<RegisterPresenter> {
+  }
+
+  public interface RegisterView extends SignInAbstractView {
+
+    String getEmail();
+
+    String getLongName();
+
+    String getRegisterPassword();
+
+    String getShortName();
+
+    boolean isRegisterFormValid();
+
+    boolean isValid();
+
+    void setEmailFailed(final String msg);
+
+    void setLongNameFailed(final String msg);
+
+    void setShortNameFailed(final String msg);
+
+    void validate();
+
   }
   private final Provider<SignIn> signInProvider;
 
@@ -123,6 +149,7 @@ public class RegisterPresenter extends
   }
 
   public void onFormRegister() {
+    getView().hideMessages();
     if (getView().isRegisterFormValid()) {
       getView().maskProcessing();
 
@@ -208,8 +235,13 @@ public class RegisterPresenter extends
   private void onRegistrationFailure(final Throwable caught) {
     getView().unMask();
     if (caught instanceof EmailAddressInUseException) {
+      getView().setEmailFailed(i18n.t(CoreMessages.EMAIL_IN_USE));
       getView().setErrorMessage(i18n.t(CoreMessages.EMAIL_IN_USE), NotifyLevel.error);
-    } else if (caught instanceof GroupNameInUseException) {
+    } else if (caught instanceof GroupShortNameInUseException) {
+      getView().setShortNameFailed(i18n.t(CoreMessages.NAME_IN_USE));
+      getView().setErrorMessage(i18n.t(CoreMessages.NAME_IN_USE), NotifyLevel.error);
+    } else if (caught instanceof GroupLongNameInUseException) {
+      getView().setLongNameFailed(i18n.t(CoreMessages.NAME_IN_USE));
       getView().setErrorMessage(i18n.t(CoreMessages.NAME_IN_USE), NotifyLevel.error);
     } else if (caught instanceof UserRegistrationException) {
       getView().setErrorMessage(i18n.t("Error during registration. " + caught.getMessage()),

@@ -93,7 +93,7 @@ public class Group implements HasId {
   private BasicMimeType logoMime;
 
   @Field(index = Index.TOKENIZED, store = Store.NO)
-  @Column(unique = true)
+  @Column(nullable = false, unique = true)
   @Length(min = 3, max = 50, message = "The longName must be between 3 and 50 characters of length")
   private String longName;
 

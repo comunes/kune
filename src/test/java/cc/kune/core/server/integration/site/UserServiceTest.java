@@ -30,7 +30,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.client.errors.EmailAddressInUseException;
-import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.GroupLongNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.integration.IntegrationTest;
@@ -90,13 +91,21 @@ public class UserServiceTest extends IntegrationTest {
   @Test(expected = EmailAddressInUseException.class)
   public void createUserExistingEmailFails() throws Exception {
     assertNull(session.getUser().getId());
-    final UserDTO user = new UserDTO("test", "test", "123456", properties.getAdminEmail(), lang,
+    final UserDTO user = new UserDTO("test2", "test2", "123456", properties.getAdminEmail(), lang,
         country, timezone, null, true, SubscriptionMode.manual, "blue");
     userService.createUser(user, false);
   }
 
-  @Test(expected = GroupNameInUseException.class)
-  public void createUserExistingNameFails() throws Exception {
+  @Test(expected = GroupLongNameInUseException.class)
+  public void createUserExistingLongNameFails() throws Exception {
+    assertNull(session.getUser().getId());
+    final UserDTO user = new UserDTO(properties.getAdminUserName(), "test", "123456",
+        "example1234@example.com", lang, country, timezone, null, true, SubscriptionMode.manual, "blue");
+    userService.createUser(user, false);
+  }
+
+  @Test(expected = GroupShortNameInUseException.class)
+  public void createUserExistingShortNameFails() throws Exception {
     assertNull(session.getUser().getId());
     final UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456",
         "example1234@example.com", lang, country, timezone, null, true, SubscriptionMode.manual, "blue");

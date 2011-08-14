@@ -24,7 +24,7 @@ import java.util.Set;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
-import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.domain.Content;
@@ -37,14 +37,16 @@ public interface GroupManager extends Manager<Group, Long> {
 
   void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
 
+  void checkIfNamesAreInUse(String shortName, String longName);
+
   void clearGroupBackImage(Group group);
 
-  Group createGroup(Group group, User user, String publicDescrip) throws GroupNameInUseException,
+  Group createGroup(Group group, User user, String publicDescrip) throws GroupShortNameInUseException,
       UserMustBeLoggedException;
 
-  Group createUserGroup(User user) throws GroupNameInUseException, EmailAddressInUseException;
+  Group createUserGroup(User user) throws GroupShortNameInUseException, EmailAddressInUseException;
 
-  Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupNameInUseException,
+  Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupShortNameInUseException,
       EmailAddressInUseException;
 
   Set<Group> findAdminInGroups(Long groupId);

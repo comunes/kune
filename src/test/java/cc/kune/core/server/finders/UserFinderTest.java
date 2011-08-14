@@ -46,7 +46,7 @@ public class UserFinderTest extends PersistencePreLoadedDataTest {
 
     @Test
     public void findByEmail() {
-        final User user = finder.getByEmail("one@here.com");
+        final User user = finder.findByEmail("one@here.com");
         assertNotNull(user);
     }
 

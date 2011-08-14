@@ -31,7 +31,7 @@ import org.apache.lucene.queryParser.ParseException;
 import org.hibernate.validator.InvalidStateException;
 import org.junit.Test;
 
-import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.core.server.manager.impl.SearchResult;
@@ -99,7 +99,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
    * This was not working:
    * http://opensource.atlassian.com/projects/hibernate/browse/EJB-382
    */
-  @Test(expected = GroupNameInUseException.class)
+  @Test(expected = GroupShortNameInUseException.class)
   public void testUserExist() throws I18nNotFoundException {
     final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com",
         "some password", "en", "GB", "GMT", true);

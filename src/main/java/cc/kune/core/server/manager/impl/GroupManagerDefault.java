@@ -35,7 +35,8 @@ import org.hibernate.exception.ConstraintViolationException;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
-import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.GroupLongNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.manager.FileManager;
 import cc.kune.core.server.manager.GroupManager;
@@ -128,7 +129,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   @Override
   public Group createGroup(final Group group, final User user, final String publicDescrip)
-      throws GroupNameInUseException, UserMustBeLoggedException {
+      throws GroupShortNameInUseException, GroupLongNameInUseException, UserMustBeLoggedException {
+    checkIfNamesAreInUse(group.getShortName(), group.getLongName());
     final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
     if (User.isKnownUser(user)) {
       GroupListMode publicVisibility = GroupListMode.EVERYONE;
@@ -160,21 +162,21 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   @Override
-  public Group createUserGroup(final User user) throws GroupNameInUseException,
+  public Group createUserGroup(final User user) throws GroupShortNameInUseException,
       EmailAddressInUseException {
     return createUserGroup(user, true);
   }
 
   @Override
   public Group createUserGroup(final User user, final boolean wantPersonalHomepage)
-      throws GroupNameInUseException, EmailAddressInUseException {
+      throws GroupShortNameInUseException, EmailAddressInUseException {
     final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
     final License licenseDef = licenseManager.getDefLicense();
     final Group userGroup = new Group(user.getShortName(), user.getName(), licenseDef,
         GroupType.PERSONAL);
     User userSameEmail = null;
     try {
-      userSameEmail = userFinder.getByEmail(user.getEmail());
+      userSameEmail = userFinder.findByEmail(user.getEmail());
     } catch (final NoResultException e) {
       // Ok, no more with this email
     }
@@ -195,7 +197,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       super.persist(user, User.class);
     } catch (final PersistenceException e) {
       if (e.getCause() instanceof ConstraintViolationException) {
-        throw new GroupNameInUseException();
+        throw new GroupShortNameInUseException();
       }
       throw e;
     }
@@ -234,14 +236,14 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   private void initGroup(final User user, final Group group, final Collection<String> toolsToEnable,
-      final Object... vars) throws GroupNameInUseException {
+      final Object... vars) throws GroupShortNameInUseException {
     try {
       persist(group);
     } catch (final IllegalStateException e) {
       e.printStackTrace();
     } catch (final PersistenceException e) {
       if (e.getCause() instanceof ConstraintViolationException) {
-        throw new GroupNameInUseException();
+        throw new GroupShortNameInUseException();
       }
       throw e;
     }
@@ -307,6 +309,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
           tool);
     }
     toolConfiguration.setEnabled(enabled);
+  }
+
+  public void checkIfNamesAreInUse(final String shortName, final String longName) {
+    if (finder.countByShortName(shortName) != 0) {
+      throw new GroupShortNameInUseException();
+    }
+    if (finder.countByLongName(longName) != 0) {
+      throw new GroupLongNameInUseException();
+    }
   }
 
 }

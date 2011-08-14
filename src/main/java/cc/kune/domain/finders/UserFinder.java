@@ -29,16 +29,27 @@ import com.google.inject.persist.finder.Finder;
 
 public interface UserFinder {
 
-    @Finder(query = "from User", returnAs = ArrayList.class)
-    public List<User> getAll();
+  @Finder(query = "select count (*) from User where email = :email")
+  public Long countByEmail(@Named("email") final String email);
 
-    @Finder(query = "from User where email = :email")
-    public User getByEmail(@Named("email") final String email);
+  @Finder(query = "select count (*) from User where name = :name")
+  public Long countByLongName(@Named("name") final String name);
 
-    @Finder(query = "from User where id = :id")
-    public User getById(@Named("id") final Long id);
+  @Finder(query = "select count (*) from User where shortName = :shortName")
+  public Long countByShortName(@Named("shortName") final String shortName);
 
-    @Finder(query = "from User where shortName = :shortName")
-    public User getByShortName(@Named("shortName") final String shortName);
+  @Finder(query = "from User where email = :email")
+  public User findByEmail(@Named("email") final String email);
 
+  @Finder(query = "from User where id = :id")
+  public User findById(@Named("id") final Long id);
+
+  @Finder(query = "from User where name = :name")
+  public User findByLongName(@Named("name") final String name);
+
+  @Finder(query = "from User where shortName = :shortName")
+  public User findByShortName(@Named("shortName") final String shortName);
+
+  @Finder(query = "from User", returnAs = ArrayList.class)
+  public List<User> getAll();
 }

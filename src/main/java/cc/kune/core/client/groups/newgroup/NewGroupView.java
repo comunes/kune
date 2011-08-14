@@ -62,7 +62,11 @@ public interface NewGroupView extends View {
 
   void maskProcessing();
 
+  void setLongNameFailed(final String msg);
+
   void setMessage(String message, NotifyLevel level);
+
+  void setShortNameFailed(final String msg);
 
   void show();
 

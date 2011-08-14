@@ -19,6 +19,6 @@
  */
 package cc.kune.core.client.errors;
 
-public class GroupNameInUseException extends DefaultException {
-    private static final long serialVersionUID = -4746775725822225687L;
+public class GroupLongNameInUseException extends DefaultException {
+  private static final long serialVersionUID = -1211473220006162132L;
 }

@@ -31,9 +31,18 @@ import com.google.inject.persist.finder.Finder;
 
 public interface GroupFinder {
 
+  @Finder(query = "SELECT count(*) FROM Group g WHERE g.longName = :longName")
+  public Long countByLongName(@Named("longName") final String longName);
+
+  @Finder(query = "SELECT count(*) FROM Group g WHERE g.shortName = :shortName")
+  public Long countByShortName(@Named("shortName") final String shortName);
+
   @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id "
       + "FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid)", returnAs = HashSet.class)
   public Set<Group> findAdminInGroups(@Named("groupid") final Long groupId);
+
+  @Finder(query = "FROM Group g WHERE g.longName = :longName")
+  public Group findByLongName(@Named("longName") final String longName);
 
   @Finder(query = "FROM Group g WHERE g.shortName = :shortName")
   public Group findByShortName(@Named("shortName") final String shortName);

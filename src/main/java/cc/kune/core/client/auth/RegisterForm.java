@@ -125,4 +125,16 @@ public class RegisterForm extends DefaultForm {
   public Field<String> getShortNameField() {
     return shortNameRegField;
   }
+
+  public void setEmailFailed(final String msg) {
+    emailRegField.markInvalid(msg);
+  }
+
+  public void setLongNameFailed(final String msg) {
+    longNameRegField.markInvalid(msg);
+  }
+
+  public void setShortNameFailed(final String msg) {
+    shortNameRegField.markInvalid(msg);
+  }
 }
