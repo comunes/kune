@@ -21,9 +21,9 @@ package cc.kune.meets.shared;
 
 public final class MeetingsConstants {
 
-  public static final String NAME = "meets";
-  public static final String ROOT_NAME = "meetings";
-  public static final String TYPE_MEETING = NAME + "." + "meet";
+  public static final String NAME = "events";
+  public static final String ROOT_NAME = "events";
+  public static final String TYPE_MEETING = NAME + "." + "meeting";
   public static final String TYPE_ROOT = NAME + "." + "root";
 
   private MeetingsConstants() {

@@ -47,111 +47,111 @@ import java.util.HashMap;
  */
 public abstract class AbstractAction extends ChangeableObject implements Action {
 
-    public final static AbstractAction NO_ACTION = new NoAction();
+  public final static AbstractAction NO_ACTION = new NoAction();
 
-    /**
-     * Creates a new action with no properties set.
-     */
-    public AbstractAction() {
-        // Nothing to do.
-    }
+  /**
+   * Creates a new action with no properties set.
+   */
+  public AbstractAction() {
+    // Nothing to do.
+  }
 
-    /**
-     * Copy constructor used as a substitute of clone
-     */
-    @SuppressWarnings("unchecked")
-    public AbstractAction(final AbstractAction action) {
-        store = (HashMap<String, Object>) action.store.clone();
-    }
+  /**
+   * Copy constructor used as a substitute of clone
+   */
+  @SuppressWarnings("unchecked")
+  public AbstractAction(final AbstractAction action) {
+    store = (HashMap<String, Object>) action.store.clone();
+  }
 
-    /**
-     * Creates a new action with the specified name. The name is stored as a
-     * property with the key {@link Action#NAME}, and no other properties are
-     * initialised.
-     * 
-     * @param name
-     *            the name (<code>null</code> permitted).
-     */
-    public AbstractAction(final String name) {
-        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
-        // 15:19
-        putValue(NAME, name);
-    }
+  /**
+   * Creates a new action with the specified name. The name is stored as a
+   * property with the key {@link Action#NAME}, and no other properties are
+   * initialised.
+   * 
+   * @param name
+   *          the name (<code>null</code> permitted).
+   */
+  public AbstractAction(final String name) {
+    // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+    // 15:19
+    putValue(NAME, name);
+  }
 
-    /**
-     * Creates a new action with the specified name and icon. The name is stored
-     * as a property with the key {@link Action#NAME}, the icon is stored as a
-     * property with the key {@link Action#SMALL_ICON}, and no other properties
-     * are initialised.
-     * 
-     * @param name
-     *            the name (<code>null</code> permitted).
-     * @param icon
-     *            the icon (<code>null</code> permitted).
-     */
-    public AbstractAction(final String name, final String icon) {
-        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
-        // 15:19
-        putValue(NAME, name);
-        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
-        // 15:19
-        putValue(SMALL_ICON, icon);
-    }
+  /**
+   * Creates a new action with the specified name and icon. The name is stored
+   * as a property with the key {@link Action#NAME}, the icon is stored as a
+   * property with the key {@link Action#SMALL_ICON}, and no other properties
+   * are initialised.
+   * 
+   * @param name
+   *          the name (<code>null</code> permitted).
+   * @param icon
+   *          the icon (<code>null</code> permitted).
+   */
+  public AbstractAction(final String name, final String icon) {
+    // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+    // 15:19
+    putValue(NAME, name);
+    // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+    // 15:19
+    putValue(SMALL_ICON, icon);
+  }
 
-    /**
-     * Returns the flag that indicates whether or not the action is enabled.
-     * 
-     * @return The flag.
-     * 
-     * @see #setEnabled(boolean)
-     */
-    @Override
-    public boolean isEnabled() {
-        return (Boolean) super.getValue(ENABLED);
-    }
+  /**
+   * Returns the flag that indicates whether or not the action is enabled.
+   * 
+   * @return The flag.
+   * 
+   * @see #setEnabled(boolean)
+   */
+  @Override
+  public boolean isEnabled() {
+    return (Boolean) super.getValue(ENABLED);
+  }
 
-    @Override
-    /**
-     * Sets the value associated with the specified key and sends a
-     * {@link java.beans.PropertyChangeEvent} to all registered listeners. The
-     * standard keys are:
-     * <ul>
-     * <li>{@link #NAME}</li>
-     * <li>{@link #SHORT_DESCRIPTION}</li>
-     * <li>{@link #LONG_DESCRIPTION}</li>
-     * <li>{@link #SMALL_ICON}</li>
-     * <li>{@link #ACTION_COMMAND_KEY}</li>
-     * <li>{@link #ACCELERATOR_KEY}</li>
-     * <li>{@link #MNEMONIC_KEY}</li>
-     * </ul>
-     * Any existing value associated with the key will be overwritten.
-     *
-     * @param key
-     *            the key (not <code>null</code>).
-     * @param value
-     *            the value (<code>null</code> permitted).
-     */
-    public void putValue(final String key, final Object value) {
-        super.putValue(key, value);
-    }
+  @Override
+  /**
+   * Sets the value associated with the specified key and sends a
+   * {@link java.beans.PropertyChangeEvent} to all registered listeners. The
+   * standard keys are:
+   * <ul>
+   * <li>{@link #NAME}</li>
+   * <li>{@link #SHORT_DESCRIPTION}</li>
+   * <li>{@link #LONG_DESCRIPTION}</li>
+   * <li>{@link #SMALL_ICON}</li>
+   * <li>{@link #ACTION_COMMAND_KEY}</li>
+   * <li>{@link #ACCELERATOR_KEY}</li>
+   * <li>{@link #MNEMONIC_KEY}</li>
+   * </ul>
+   * Any existing value associated with the key will be overwritten.
+   *
+   * @param key
+   *            the key (not <code>null</code>).
+   * @param value
+   *            the value (<code>null</code> permitted).
+   */
+  public void putValue(final String key, final Object value) {
+    super.putValue(key, value);
+  }
 
-    /**
-     * Sets the flag that indicates whether or not the action is enabled and, if
-     * the value of the flag changed from the previous setting, sends a
-     * {@link java.beans.PropertyChangeEvent} to all registered listeners (using
-     * the property name 'enabled').
-     * 
-     * @param enabled
-     *            the new flag value.
-     * 
-     * @see #isEnabled()
-     */
-    @Override
-    public void setEnabled(final boolean enabled) {
-        putValue(ENABLED, enabled);
-    }
+  /**
+   * Sets the flag that indicates whether or not the action is enabled and, if
+   * the value of the flag changed from the previous setting, sends a
+   * {@link java.beans.PropertyChangeEvent} to all registered listeners (using
+   * the property name 'enabled').
+   * 
+   * @param enabled
+   *          the new flag value.
+   * 
+   * @see #isEnabled()
+   */
+  @Override
+  public void setEnabled(final boolean enabled) {
+    putValue(ENABLED, enabled);
+  }
 
-    public void setShortcut(final KeyStroke key) {
-        putValue(Action.ACCELERATOR_KEY, key);
-    }
+  public void setShortcut(final KeyStroke key) {
+    putValue(Action.ACCELERATOR_KEY, key);
+  }
 }

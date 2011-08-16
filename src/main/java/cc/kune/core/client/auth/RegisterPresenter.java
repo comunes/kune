@@ -38,6 +38,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.I18nCountryDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.dto.SubscriptionMode;
 import cc.kune.core.shared.dto.TimeZoneDTO;
 import cc.kune.core.shared.dto.UserDTO;
@@ -88,7 +89,6 @@ public class RegisterPresenter extends
 
   }
   private final Provider<SignIn> signInProvider;
-
   private final Provider<UserServiceAsync> userServiceProvider;
 
   @Inject
@@ -148,9 +148,16 @@ public class RegisterPresenter extends
     });
   }
 
-  public void onFormRegister() {
+  private void onFormRegister() {
     getView().hideMessages();
-    if (getView().isRegisterFormValid()) {
+    final ReservedWordsRegistryDTO reservedWords = session.getInitData().getReservedWords();
+    if (reservedWords.contains(getView().getShortName())) {
+      getView().setShortNameFailed(i18n.t(CoreMessages.NAME_RESTRICTED));
+      getView().setErrorMessage(i18n.t(CoreMessages.NAME_RESTRICTED), NotifyLevel.error);
+    } else if (reservedWords.contains(getView().getLongName())) {
+      getView().setLongNameFailed(i18n.t(CoreMessages.NAME_RESTRICTED));
+      getView().setErrorMessage(i18n.t(CoreMessages.NAME_RESTRICTED), NotifyLevel.error);
+    } else if (getView().isRegisterFormValid()) {
       getView().maskProcessing();
 
       final I18nLanguageDTO language = new I18nLanguageDTO();

@@ -48,117 +48,116 @@ package cc.kune.common.client.actions;
  */
 public interface Action extends ActionListener {
 
-    /**
-     * A key to access the KeyStroke used as the accelerator for the action.
-     */
-    String ACCELERATOR_KEY = "AcceleratorKey";
+  /**
+   * A key to access the KeyStroke used as the accelerator for the action.
+   */
+  String ACCELERATOR_KEY = "AcceleratorKey";
 
-    /**
-     * A key to access the action command string for the action.
-     */
-    String ACTION_COMMAND_KEY = "ActionCommandKey";
+  /**
+   * A key to access the action command string for the action.
+   */
+  String ACTION_COMMAND_KEY = "ActionCommandKey";
 
-    /**
-     * A key to access the default property for the action (this is not used).
-     */
-    String DEFAULT = "Default";
+  /**
+   * A key to access the default property for the action (this is not used).
+   */
+  String DEFAULT = "Default";
 
-    /**
-     * A key to access the enabled property for the action.
-     */
-    String ENABLED = "enabled";
+  /**
+   * A key to access the enabled property for the action.
+   */
+  String ENABLED = "enabled";
 
-    /**
-     * A key to access the long description for the action.
-     */
-    String LONG_DESCRIPTION = "LongDescription";
+  /**
+   * A key to access the long description for the action.
+   */
+  String LONG_DESCRIPTION = "LongDescription";
 
-    /**
-     * A key to access the mnemonic for the action.
-     */
-    String MNEMONIC_KEY = "MnemonicKey";
+  /**
+   * A key to access the mnemonic for the action.
+   */
+  String MNEMONIC_KEY = "MnemonicKey";
 
-    /**
-     * A key to access the name for the action.
-     */
-    String NAME = "Name";
+  /**
+   * A key to access the name for the action.
+   */
+  String NAME = "Name";
 
-    /**
-     * A key to access the short description for the action (the short
-     * description is typically used as the tool tip text).
-     */
-    String SHORT_DESCRIPTION = "ShortDescription";
+  /**
+   * A key to access the short description for the action (the short description
+   * is typically used as the tool tip text).
+   */
+  String SHORT_DESCRIPTION = "ShortDescription";
 
-    /**
-     * A key to access the icon for the action.
-     */
-    String SMALL_ICON = "SmallIcon";
+  /**
+   * A key to access the icon for the action.
+   */
+  String SMALL_ICON = "SmallIcon";
 
-    /**
-     * A key to access the mnemonic for the action.
-     */
-    String STYLES = "Styles";
+  /**
+   * A key to access the mnemonic for the action.
+   */
+  String STYLES = "Styles";
 
-    /**
-     * Registers a listener to receive notification whenever one of the action's
-     * properties is modified.
-     * 
-     * @param listener
-     *            the listener.
-     */
-    void addPropertyChangeListener(PropertyChangeListener listener);
+  /**
+   * Registers a listener to receive notification whenever one of the action's
+   * properties is modified.
+   * 
+   * @param listener
+   *          the listener.
+   */
+  void addPropertyChangeListener(PropertyChangeListener listener);
 
-    /**
-     * Returns the value associated with the specified key.
-     * 
-     * @param key
-     *            the key (not <code>null</code>).
-     * 
-     * @return The value associated with the specified key, or <code>null</code>
-     *         if the key is not found.
-     */
-    Object getValue(String key);
+  /**
+   * Returns the value associated with the specified key.
+   * 
+   * @param key
+   *          the key (not <code>null</code>).
+   * 
+   * @return The value associated with the specified key, or <code>null</code>
+   *         if the key is not found.
+   */
+  Object getValue(String key);
 
-    /**
-     * Returns the flag that indicates whether or not this action is enabled.
-     * 
-     * @return The flag.
-     */
-    boolean isEnabled();
+  /**
+   * Returns the flag that indicates whether or not this action is enabled.
+   * 
+   * @return The flag.
+   */
+  boolean isEnabled();
 
-    /**
-     * Sets the value associated with the specified key and sends a
-     * {@link PropertyChangeEvent} to all registered listeners. The standard
-     * keys are defined in this interface: {@link #NAME},
-     * {@link #SHORT_DESCRIPTION}, {@link #LONG_DESCRIPTION},
-     * {@link #SMALL_ICON}, {@link #ACTION_COMMAND_KEY},
-     * {@link #ACCELERATOR_KEY} and {@link #MNEMONIC_KEY}. Any existing value
-     * associated with the key will be overwritten.
-     * 
-     * @param key
-     *            the key (not <code>null</code>).
-     * @param value
-     *            the value (<code>null</code> permitted).
-     */
-    void putValue(String key, Object value);
+  /**
+   * Sets the value associated with the specified key and sends a
+   * {@link PropertyChangeEvent} to all registered listeners. The standard keys
+   * are defined in this interface: {@link #NAME}, {@link #SHORT_DESCRIPTION},
+   * {@link #LONG_DESCRIPTION}, {@link #SMALL_ICON}, {@link #ACTION_COMMAND_KEY}
+   * , {@link #ACCELERATOR_KEY} and {@link #MNEMONIC_KEY}. Any existing value
+   * associated with the key will be overwritten.
+   * 
+   * @param key
+   *          the key (not <code>null</code>).
+   * @param value
+   *          the value (<code>null</code> permitted).
+   */
+  void putValue(String key, Object value);
 
-    /**
-     * Deregisters a listener so that it no longer receives notification of
-     * changes to the action's properties.
-     * 
-     * @param listener
-     *            the listener.
-     */
-    void removePropertyChangeListener(PropertyChangeListener listener);
+  /**
+   * Deregisters a listener so that it no longer receives notification of
+   * changes to the action's properties.
+   * 
+   * @param listener
+   *          the listener.
+   */
+  void removePropertyChangeListener(PropertyChangeListener listener);
 
-    /**
-     * Sets the flag that indicates whether or not this action is enabled. If
-     * the value changes, a {@link java.beans.PropertyChangeEvent} is sent to
-     * all registered listeners.
-     * 
-     * @param b
-     *            the new value of the flag.
-     */
-    void setEnabled(boolean b);
+  /**
+   * Sets the flag that indicates whether or not this action is enabled. If the
+   * value changes, a {@link java.beans.PropertyChangeEvent} is sent to all
+   * registered listeners.
+   * 
+   * @param b
+   *          the new value of the flag.
+   */
+  void setEnabled(boolean b);
 
 } // Action

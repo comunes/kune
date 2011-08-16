@@ -20,6 +20,7 @@
 package cc.kune.meets.client;
 
 import static cc.kune.meets.shared.MeetingsConstants.NAME;
+import static cc.kune.meets.shared.MeetingsConstants.ROOT_NAME;
 import static cc.kune.meets.shared.MeetingsConstants.TYPE_MEETING;
 import static cc.kune.meets.shared.MeetingsConstants.TYPE_ROOT;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -35,7 +36,7 @@ public class MeetingsClientTool extends FoldableAbstractClientTool {
   @Inject
   public MeetingsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("meets"), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t(ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_MEETING);

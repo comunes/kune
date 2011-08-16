@@ -27,6 +27,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
+import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+
 public class TokenMatcherTest {
 
     private static final String DEF_SITE_TOKEN = "";
@@ -45,7 +47,7 @@ public class TokenMatcherTest {
 
     @Before
     public void before() {
-        final ReservedWordsRegistry reservedWords = new ReservedWordsRegistry();
+        final ReservedWordsRegistryDTO reservedWords = new ReservedWordsRegistryDTO();
         reservedWords.add(SIGNIN_TOKEN);
         tokenMatcher = new TokenMatcher(reservedWords);
         tokenMatcher.init(JavaWaverefEncoder.INSTANCE);

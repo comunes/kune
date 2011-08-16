@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client.state;
 
+import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+
 import com.google.inject.Inject;
 
 /**
@@ -37,7 +39,7 @@ public final class SiteTokens {
     public final static String WAVEINBOX = "inbox";
 
     @Inject
-    public SiteTokens(final ReservedWordsRegistry reserverdWords) {
+    public SiteTokens(final ReservedWordsRegistryDTO reserverdWords) {
         reserverdWords.add(ABOUTKUNE);
         reserverdWords.add(GROUP_HOME);
         reserverdWords.add(HOME);

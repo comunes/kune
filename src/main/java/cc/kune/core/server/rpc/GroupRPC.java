@@ -28,6 +28,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.properties.ReservedWordsRegistry;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
@@ -49,18 +50,21 @@ public class GroupRPC implements RPC, GroupService {
   private final I18nTranslationService i18n;
   private final KuneWaveManagerDefault kuneWaveManager;
   private final Mapper mapper;
+  private final ReservedWordsRegistry reserverdWords;
   private final Provider<UserSession> userSessionProvider;
 
   @Inject
   public GroupRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
       final ContentManager contentManager, final Mapper mapper,
-      final KuneWaveManagerDefault kuneWaveManager, final I18nTranslationService i18n) {
+      final KuneWaveManagerDefault kuneWaveManager, final I18nTranslationService i18n,
+      final ReservedWordsRegistry reserverdWords) {
     this.userSessionProvider = userSessionProvider;
     this.groupManager = groupManager;
     this.contentManager = contentManager;
     this.mapper = mapper;
     this.kuneWaveManager = kuneWaveManager;
     this.i18n = i18n;
+    this.reserverdWords = reserverdWords;
   }
 
   @Override
@@ -101,6 +105,7 @@ public class GroupRPC implements RPC, GroupService {
   public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO,
       final String publicDesc, final String tags, final String[] enabledTools) throws DefaultException {
     final User user = getUserLogged();
+    reserverdWords.check(groupDTO.getShortName(), groupDTO.getLongName());
     final Group group = mapper.map(groupDTO, Group.class);
     final Group newGroup = groupManager.createGroup(group, user, publicDesc);
     // This is necessary?

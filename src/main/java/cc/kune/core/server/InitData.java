@@ -26,6 +26,7 @@ import java.util.List;
 import cc.kune.core.server.tool.ToolSimple;
 import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.shared.dto.GSpaceTheme;
+import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.domain.ExtMediaDescrip;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
@@ -55,6 +56,7 @@ public class InitData {
   private String maxFileSizeInMb;
   private String mp3EmbedObject;
   private String oggEmbedObject;
+  private ReservedWordsRegistryDTO reservedWords;
   private String siteDomain;
   private String siteLogoUrl;
   private String siteUrl;
@@ -148,6 +150,10 @@ public class InitData {
 
   public String getOggEmbedObject() {
     return oggEmbedObject;
+  }
+
+  public ReservedWordsRegistryDTO getReservedWords() {
+    return this.reservedWords;
   }
 
   @Deprecated
@@ -261,6 +267,10 @@ public class InitData {
 
   public void setOggEmbedObject(final String oggEmbedObject) {
     this.oggEmbedObject = oggEmbedObject;
+  }
+
+  public void setReservedWords(final ReservedWordsRegistryDTO reservedWords) {
+    this.reservedWords = reservedWords;
   }
 
   @Deprecated

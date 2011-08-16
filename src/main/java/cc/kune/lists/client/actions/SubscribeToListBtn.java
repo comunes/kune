@@ -17,6 +17,7 @@ public class SubscribeToListBtn extends ButtonDescriptor {
         && session.getContainerState().getAccessLists().getEditors().getList().contains(
             session.getCurrentUserInfo().getUserGroup());
     action.putValue(SubscriteToListAction.ISMEMBER, areYouMember);
+    withStyles("k-fl");
     if (!areYouMember) {
       withText(i18n.t("Subscribe"));
       withIcon(res.add());

@@ -54,6 +54,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<OpenFolderMenuItem> openContentMenuItem,
       final Provider<RefreshListMenuItem> refresh, final Provider<SubscribeToListBtn> subscribeBtn,
       final Provider<OptionsListMenu> optionsMenuContent,
+      final Provider<ShowSubscribersOfListBtn> subscribersCount,
       final Provider<SetListOpenessMenuItem> listOpenessMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn, final ListsNewMenu listNewMenu,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
@@ -63,15 +64,16 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listNewMenu, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribeBtn, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listOpenessMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribeBtn, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newListMenuItem, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newListBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribersCount, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);

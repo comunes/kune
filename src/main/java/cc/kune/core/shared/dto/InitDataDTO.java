@@ -50,6 +50,7 @@ public class InitDataDTO implements IsSerializable {
   private String maxFileSizeInMb;
   private String mp3EmbedObject;
   private String oggEmbedObject;
+  private ReservedWordsRegistryDTO reservedWords;
   private String siteDomain;
   private String siteLogoUrl;
   private String siteUrl;
@@ -146,6 +147,10 @@ public class InitDataDTO implements IsSerializable {
 
   public String getOggEmbedObject() {
     return oggEmbedObject;
+  }
+
+  public ReservedWordsRegistryDTO getReservedWords() {
+    return this.reservedWords;
   }
 
   @Deprecated
@@ -263,6 +268,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setOggEmbedObject(final String oggEmbedObject) {
     this.oggEmbedObject = oggEmbedObject;
+  }
+
+  public void setReservedWords(final ReservedWordsRegistryDTO reservedWords) {
+    this.reservedWords = reservedWords;
   }
 
   @Deprecated

@@ -28,9 +28,11 @@ public final class CoreMessages {
   public final static String FIELD_MUST_BE_BETWEEN_3_AND_15 = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters and numbers";
   public final static String FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS = "The name must be between 3 and 15 lowercase characters.";
   public final static String GROUP_OPTIONS_DIALOG_TITLE = "Group options";
+  public final static String GROUPNAME_RESTRICTED = "This group name can not be used. Please try with a different name";
   public final static String INCORRECT_NICKNAME_EMAIL_OR_PASSWORD = "The username/password is incorrect";
   public final static String MEMBERS_NOT_PUBLIC = "The members of this group are not public";
   public final static String NAME_IN_ALREADY_IN_USE = "This name is already in use. Please try with a different name";
+  public final static String NAME_RESTRICTED = "This user name can not be used. Please try with a different name";
   public final static String NAME_IN_USE = "This name in already in use. Please try with a different name";
   public final static String PASSWD_MUST_BE_BETWEEN_6_AND_40 = "The password must be between 6 and 40 characters";
   public final static String REGISTER_A_NEW_GROUP_TITLE = "Register a new Group";

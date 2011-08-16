@@ -34,6 +34,7 @@ public interface KuneProperties {
   String IMAGES_THUMBSIZE = "kune.images.thumbsize";
   String MP3_EMBEDED_OBJECT = "kune.media.mp3embededobject";
   String OGG_EMBEDED_OBJECT = "kune.media.oggembededobject";
+  String RESERVED_WORDS = "kune.server.names.reservedwords";
   String SITE_ADMIN_EMAIL = "kune.admin.email";
   String SITE_ADMIN_NAME = "kune.admin.name";
   String SITE_ADMIN_PASSWD = "kune.admin.password";

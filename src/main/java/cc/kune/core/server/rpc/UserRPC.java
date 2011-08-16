@@ -39,6 +39,7 @@ import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.properties.ReservedWordsRegistry;
 import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.shared.domain.AccessRol;
@@ -63,6 +64,7 @@ public class UserRPC implements RPC, UserService {
   private final GroupManager groupManager;
   private final I18nTranslationService i18n;
   private final Mapper mapper;
+  private final ReservedWordsRegistry reserverdWords;
   private final Provider<SessionService> sessionServiceProvider;
   private final UserInfoService userInfoService;
   private final UserManager userManager;
@@ -77,7 +79,8 @@ public class UserRPC implements RPC, UserService {
       @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO, final GroupManager groupManager,
       final UserInfoService userInfoService, final Mapper mapper,
       final SessionManager waveSessionManager, final CustomWaveClientServlet waveClientServlet,
-      final I18nTranslationService i18n, final ContentManager contentManager) {
+      final I18nTranslationService i18n, final ContentManager contentManager,
+      final ReservedWordsRegistry reserverdWords) {
     this.sessionServiceProvider = sessionServiceProvider;
     this.userSessionProvider = userSessionProvider;
     this.userManager = userManager;
@@ -89,20 +92,17 @@ public class UserRPC implements RPC, UserService {
     this.waveClientServlet = waveClientServlet;
     this.i18n = i18n;
     this.contentManager = contentManager;
+    this.reserverdWords = reserverdWords;
   }
 
   @Override
   @Transactional(rollbackOn = DefaultException.class)
   public void createUser(final UserDTO userDTO, final boolean wantPersonalHomepage)
       throws DefaultException {
+    reserverdWords.check(userDTO.getShortName(), userDTO.getName());
     userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(),
         userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
         userDTO.getTimezone().getId(), wantPersonalHomepage);
-    // final Group userGroup = groupManager.createUserGroup(user,
-    // wantPersonalHomepage);
-    // // Is this necessary? try to remove (used when we were setting the def
-    // // content
-    // contentManager.save(userGroup.getDefaultContent());
   }
 
   @Override

@@ -34,10 +34,14 @@ import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.core.server.properties.ReservedWordsRegistry;
 import cc.kune.core.server.tool.ServerToolRegistry;
+import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -46,14 +50,16 @@ import com.google.inject.persist.Transactional;
 public class SiteRPC implements RPC, SiteService {
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;
+  private InitData data;
   private final ExtMediaDescripManager extMediaDescManager;
   private final KuneProperties kuneProperties;
   private final I18nLanguageManager languageManager;
   private final LicenseManager licenseManager;
   private final Mapper mapper;
+  private final ReservedWordsRegistryDTO reservedWords;
   private final ServerToolRegistry serverToolRegistry;
+  private final HashMap<String, GSpaceTheme> siteThemes;
   private final UserInfoService userInfoService;
-  private final UserManager userManager;
   private final Provider<UserSession> userSessionProvider;
 
   // TODO: refactor: too many parameters! refactor to Facade Pattern
@@ -64,7 +70,6 @@ public class SiteRPC implements RPC, SiteService {
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescManager) {
     this.userSessionProvider = userSessionProvider;
-    this.userManager = userManager;
     this.userInfoService = userInfoService;
     this.licenseManager = licenseManager;
     this.mapper = mapper;
@@ -74,6 +79,9 @@ public class SiteRPC implements RPC, SiteService {
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
     this.extMediaDescManager = extMediaDescManager;
+    data = loadInitData();
+    siteThemes = getSiteThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
+    reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
   }
 
   private String[] getColors(final String key) {
@@ -83,15 +91,45 @@ public class SiteRPC implements RPC, SiteService {
   @Override
   @Transactional
   public InitDataDTO getInitData(final String userHash) throws DefaultException {
-    final InitData data = new InitData();
+    final InitDataDTO dataMapped = mapper.map(data, InitDataDTO.class);
     final UserSession userSession = getUserSession();
 
+    final UserInfo userInfo = userInfoService.buildInfo(userSession.getUser(), userSession.getHash());
+    if (userInfo != null) {
+      dataMapped.setUserInfo(mapper.map(userInfo, UserInfoDTO.class));
+    }
+
+    dataMapped.setgSpaceThemes(siteThemes);
+    dataMapped.setReservedWords(reservedWords);
+    return dataMapped;
+  }
+
+  private HashMap<String, GSpaceTheme> getSiteThemes(final String[] themes) {
+    final HashMap<String, GSpaceTheme> map = new HashMap<String, GSpaceTheme>();
+    for (final String theme : themes) {
+      map.put(theme, getThemeFromProperties(theme));
+    }
+    return map;
+  }
+
+  private GSpaceTheme getThemeFromProperties(final String themeName) {
+    final GSpaceTheme theme = new GSpaceTheme(themeName);
+    theme.setBackColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".backgrounds"));
+    theme.setColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".colors"));
+    return theme;
+  }
+
+  private UserSession getUserSession() {
+    return userSessionProvider.get();
+  }
+
+  private InitData loadInitData() {
+    data = new InitData();
     data.setSiteUrl(kuneProperties.get(KuneProperties.SITE_URL));
     data.setLicenses(licenseManager.getAll());
     data.setLanguages(languageManager.getAll());
     data.setCountries(countryManager.getAll());
     data.setTimezones(TimeZone.getAvailableIDs());
-    data.setUserInfo(userInfoService.buildInfo(userSession.getUser(), userSession.getHash()));
     data.setChatHttpBase(chatProperties.getHttpBase());
     data.setChatDomain(chatProperties.getDomain());
     data.setSiteDomain(kuneProperties.get(KuneProperties.SITE_DOMAIN));
@@ -113,27 +151,6 @@ public class SiteRPC implements RPC, SiteService {
     data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));
     data.setAviEmbedObject(kuneProperties.get(KuneProperties.AVI_EMBEDED_OBJECT));
     data.setExtMediaDescrips(extMediaDescManager.getAll());
-    final InitDataDTO map = mapper.map(data, InitDataDTO.class);
-    map.setgSpaceThemes(getSiteThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(",")));
-    return map;
-  }
-
-  private HashMap<String, GSpaceTheme> getSiteThemes(final String[] themes) {
-    final HashMap<String, GSpaceTheme> map = new HashMap<String, GSpaceTheme>();
-    for (final String theme : themes) {
-      map.put(theme, getThemeFromProperties(theme));
-    }
-    return map;
-  }
-
-  private GSpaceTheme getThemeFromProperties(final String themeName) {
-    final GSpaceTheme theme = new GSpaceTheme(themeName);
-    theme.setBackColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".backgrounds"));
-    theme.setColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".colors"));
-    return theme;
-  }
-
-  private UserSession getUserSession() {
-    return userSessionProvider.get();
+    return data;
   }
 }

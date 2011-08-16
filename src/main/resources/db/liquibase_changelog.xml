@@ -131,4 +131,10 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+ <changeSet id="20" author="vjrj">
+    <comment>Meetings id migration</comment>
+    <sqlFile path="src/main/resources/db/update-0016-meetings.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
 </databaseChangeLog>

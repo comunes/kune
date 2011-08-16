@@ -24,16 +24,17 @@ import org.waveprotocol.wave.model.waveref.WaverefEncoder;
 
 import cc.kune.common.client.utils.Pair;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 
 import com.google.inject.Inject;
 
 public class TokenMatcher {
 
     private WaverefEncoder encoder;
-    private final ReservedWordsRegistry reservedWordsRegistry;
+    private final ReservedWordsRegistryDTO reservedWordsRegistry;
 
     @Inject
-    public TokenMatcher(final ReservedWordsRegistry reservedWordsRegistry) {
+    public TokenMatcher(final ReservedWordsRegistryDTO reservedWordsRegistry) {
         this.reservedWordsRegistry = reservedWordsRegistry;
     }
 

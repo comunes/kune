@@ -36,6 +36,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.GroupOptions;
 
@@ -155,9 +156,16 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     stateManager.redirectOrRestorePreviousToken();
   }
 
-  public void onRegister() {
+  private void onRegister() {
     getView().hideMessage();
-    if (getView().isFormValid()) {
+    final ReservedWordsRegistryDTO reservedWords = session.getInitData().getReservedWords();
+    if (reservedWords.contains(getView().getShortName())) {
+      getView().setShortNameFailed(i18n.t(CoreMessages.NAME_RESTRICTED));
+      getView().setMessage(i18n.t(CoreMessages.NAME_RESTRICTED), NotifyLevel.error);
+    } else if (reservedWords.contains(getView().getLongName())) {
+      getView().setLongNameFailed(i18n.t(CoreMessages.NAME_RESTRICTED));
+      getView().setMessage(i18n.t(CoreMessages.NAME_RESTRICTED), NotifyLevel.error);
+    } else if (getView().isFormValid()) {
       getView().maskProcessing();
       final String shortName = getView().getShortName();
       final String longName = getView().getLongName();

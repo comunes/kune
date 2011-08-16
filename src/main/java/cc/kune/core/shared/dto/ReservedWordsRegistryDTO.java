@@ -17,11 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.state;
+package cc.kune.core.shared.dto;
 
 import java.util.ArrayList;
+import java.util.List;
 
-@SuppressWarnings("serial")
-public class ReservedWordsRegistry extends ArrayList<String> {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class ReservedWordsRegistryDTO extends ArrayList<String> implements IsSerializable {
+
+  private static final long serialVersionUID = 4560973224792765637L;
+
+  public ReservedWordsRegistryDTO() {
+  }
+
+  public ReservedWordsRegistryDTO(final List<String> list) {
+    super(list);
+  }
 
 }
