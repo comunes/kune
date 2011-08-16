@@ -38,8 +38,8 @@ import cc.kune.core.server.TestConstants;
 import cc.kune.core.server.init.FinderRegistry;
 import cc.kune.core.server.properties.PropertiesFileName;
 import cc.kune.docs.server.DocumentServerModule;
+import cc.kune.events.server.EventsServerModule;
 import cc.kune.lists.server.ListsServerModule;
-import cc.kune.meets.server.MeetingServerModule;
 import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.wave.server.CustomSettingsBinder;
 import cc.kune.wiki.server.WikiServerModule;
@@ -66,7 +66,7 @@ public class IntegrationTestHelper {
           new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
           new DocumentServerModule(), new ChatServerModule(), new ServerModule(false), federationModule,
           new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
-          new MeetingServerModule(), new AbstractModule() {
+          new EventsServerModule(), new AbstractModule() {
             @Override
             protected void configure() {
               bindScope(SessionScoped.class, Scopes.SINGLETON);

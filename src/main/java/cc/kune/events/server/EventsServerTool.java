@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.server;
+package cc.kune.events.server;
 
-import static cc.kune.meets.shared.MeetingsConstants.NAME;
-import static cc.kune.meets.shared.MeetingsConstants.ROOT_NAME;
-import static cc.kune.meets.shared.MeetingsConstants.TYPE_MEETING;
-import static cc.kune.meets.shared.MeetingsConstants.TYPE_ROOT;
+import static cc.kune.events.shared.EventsConstants.NAME;
+import static cc.kune.events.shared.EventsConstants.ROOT_NAME;
+import static cc.kune.events.shared.EventsConstants.TYPE_MEETING;
+import static cc.kune.events.shared.EventsConstants.TYPE_ROOT;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -47,13 +47,13 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class MeetingServerTool extends AbstractServerTool implements ServerWaveTool {
+public class EventsServerTool extends AbstractServerTool implements ServerWaveTool {
 
   private static final String MEETING_GADGET = "http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml";
   private final URL gadgetUrl;
 
   @Inject
-  public MeetingServerTool(final ContentManager contentManager, final ContainerManager containerManager,
+  public EventsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_MEETING), Arrays.asList(TYPE_ROOT),
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOT), contentManager, containerManager,

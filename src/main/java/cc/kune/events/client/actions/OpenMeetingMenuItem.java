@@ -17,24 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.client.actions;
+package cc.kune.events.client.actions;
 
-import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.NewContentAction;
-import cc.kune.gspace.client.actions.NewContentBtn;
-import cc.kune.meets.shared.MeetingsConstants;
+import cc.kune.gspace.client.actions.OpenContentMenuItem;
 
 import com.google.inject.Inject;
 
-public class NewMeetingsBtn extends NewContentBtn {
+public class OpenMeetingMenuItem extends OpenContentMenuItem {
 
-  @Inject
-  public NewMeetingsBtn(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.calendarAdd(), shorcutReg, i18n.t("New meeting"),
-        i18n.t("Create a New Meeting here"), i18n.t("New meeting"), MeetingsConstants.TYPE_MEETING);
-  }
+    @Inject
+    public OpenMeetingMenuItem(final I18nTranslationService i18n, final OpenContentAction action, final NavResources res) {
+        super(i18n, action, res);
+    }
 
 }

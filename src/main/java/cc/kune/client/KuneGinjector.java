@@ -54,12 +54,12 @@ import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsGinModule;
 import cc.kune.docs.client.DocsGinjector;
+import cc.kune.events.client.EventsGinjector;
+import cc.kune.events.client.EventsGinModule;
 import cc.kune.gspace.client.GSpaceGinModule;
 import cc.kune.gspace.client.GSpaceGinjector;
 import cc.kune.lists.client.ListsGinModule;
 import cc.kune.lists.client.ListsGinjector;
-import cc.kune.meets.client.MeetingsGinModule;
-import cc.kune.meets.client.MeetingsGinjector;
 import cc.kune.pspace.client.PSpaceGinModule;
 import cc.kune.pspace.client.PSpaceParts;
 import cc.kune.pspace.client.PSpacePresenter;
@@ -79,10 +79,10 @@ import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, WaveGinModule.class, PSpaceGinModule.class,
     GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class, ChatGinModule.class,
-    WikiGinModule.class, BartersGinModule.class, MeetingsGinModule.class, TasksGinModule.class,
+    WikiGinModule.class, BartersGinModule.class, EventsGinModule.class, TasksGinModule.class,
     ListsGinModule.class })
 public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector,
-    WikiGinjector, BartersGinjector, MeetingsGinjector, ChatGinjector, TasksGinjector, ListsGinjector {
+    WikiGinjector, BartersGinjector, EventsGinjector, ChatGinjector, TasksGinjector, ListsGinjector {
 
   /*
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)

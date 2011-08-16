@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.client;
+package cc.kune.events.client;
 
-import static cc.kune.meets.shared.MeetingsConstants.NAME;
-import static cc.kune.meets.shared.MeetingsConstants.ROOT_NAME;
-import static cc.kune.meets.shared.MeetingsConstants.TYPE_MEETING;
-import static cc.kune.meets.shared.MeetingsConstants.TYPE_ROOT;
+import static cc.kune.events.shared.EventsConstants.NAME;
+import static cc.kune.events.shared.EventsConstants.ROOT_NAME;
+import static cc.kune.events.shared.EventsConstants.TYPE_MEETING;
+import static cc.kune.events.shared.EventsConstants.TYPE_ROOT;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -31,10 +31,10 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
-public class MeetingsClientTool extends FoldableAbstractClientTool {
+public class EventsClientTool extends FoldableAbstractClientTool {
 
   @Inject
-  public MeetingsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
+  public EventsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
     super(NAME, i18n.t(ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
 

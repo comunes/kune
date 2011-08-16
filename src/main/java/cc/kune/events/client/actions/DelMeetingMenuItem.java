@@ -17,19 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.client;
+package cc.kune.events.client.actions;
 
-import cc.kune.meets.client.actions.MeetingsClientActions;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.actions.DelContentMenuItem;
 
-import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import com.google.inject.Inject;
 
-public class MeetingsGinModule extends AbstractPresenterModule {
+public class DelMeetingMenuItem extends DelContentMenuItem {
 
-  @Override
-  protected void configure() {
-    bind(MeetingsClientTool.class).in(Singleton.class);
-    bind(MeetingsClientActions.class).in(Singleton.class);
-  }
-
+    @Inject
+    public DelMeetingMenuItem(final I18nTranslationService i18n, final DelContentAction action, final CoreResources res) {
+        super(i18n, action, res);
+    }
 }

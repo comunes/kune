@@ -17,26 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.client;
+package cc.kune.events.client;
 
 import cc.kune.core.client.state.Session;
+import cc.kune.events.client.actions.EventsClientActions;
+import cc.kune.events.shared.EventsConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
-import cc.kune.meets.client.actions.MeetingsClientActions;
-import cc.kune.meets.shared.MeetingsConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MeetingsParts {
+public class EventsParts {
 
   @Inject
-  public MeetingsParts(final Session session, final Provider<MeetingsClientTool> clientTool,
-      final ContentViewerSelector viewerSelector, final MeetingsClientActions meetsActions,
+  public EventsParts(final Session session, final Provider<EventsClientTool> clientTool,
+      final ContentViewerSelector viewerSelector, final EventsClientActions meetsActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
-    viewerSelector.register(contentViewer, true, MeetingsConstants.TYPE_MEETING);
-    viewerSelector.register(folderViewer, true, MeetingsConstants.TYPE_ROOT);
+    viewerSelector.register(contentViewer, true, EventsConstants.TYPE_MEETING);
+    viewerSelector.register(folderViewer, true, EventsConstants.TYPE_ROOT);
   }
 }

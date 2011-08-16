@@ -17,12 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.client;
+package cc.kune.events.client;
 
-import com.google.gwt.inject.client.Ginjector;
+import cc.kune.events.client.actions.EventsClientActions;
 
-public interface MeetingsGinjector extends Ginjector {
+import com.google.inject.Singleton;
+import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-  MeetingsParts getMeetingsParts();
+public class EventsGinModule extends AbstractPresenterModule {
+
+  @Override
+  protected void configure() {
+    bind(EventsClientTool.class).in(Singleton.class);
+    bind(EventsClientActions.class).in(Singleton.class);
+  }
 
 }

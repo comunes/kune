@@ -17,19 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.client.actions;
+package cc.kune.events.shared;
 
-import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.OpenContentMenuItem;
+public final class EventsConstants {
 
-import com.google.inject.Inject;
+  public static final String NAME = "events";
+  public static final String ROOT_NAME = "events";
+  public static final String TYPE_MEETING = NAME + "." + "meeting";
+  public static final String TYPE_ROOT = NAME + "." + "root";
 
-public class OpenMeetingsMenuItem extends OpenContentMenuItem {
-
-    @Inject
-    public OpenMeetingsMenuItem(final I18nTranslationService i18n, final OpenContentAction action, final NavResources res) {
-        super(i18n, action, res);
-    }
-
+  private EventsConstants() {
+  }
 }

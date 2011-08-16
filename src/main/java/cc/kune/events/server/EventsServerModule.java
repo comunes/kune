@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.server;
+package cc.kune.events.server;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
 
-public class MeetingServerModule implements Module {
+public class EventsServerModule implements Module {
     public void configure(final Binder binder) {
-        binder.bind(MeetingServerTool.class).asEagerSingleton();
+        binder.bind(EventsServerTool.class).asEagerSingleton();
     }
 }

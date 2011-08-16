@@ -17,15 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.meets.shared;
+package cc.kune.events.client;
 
-public final class MeetingsConstants {
+import com.google.gwt.inject.client.Ginjector;
 
-  public static final String NAME = "events";
-  public static final String ROOT_NAME = "events";
-  public static final String TYPE_MEETING = NAME + "." + "meeting";
-  public static final String TYPE_ROOT = NAME + "." + "root";
+public interface EventsGinjector extends Ginjector {
 
-  private MeetingsConstants() {
-  }
+  EventsParts getMeetingsParts();
+
 }

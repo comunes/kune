@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package cc.kune.meets.client.actions;
+package cc.kune.events.client.actions;
 
-import static cc.kune.meets.shared.MeetingsConstants.TYPE_MEETING;
-import static cc.kune.meets.shared.MeetingsConstants.TYPE_ROOT;
+import static cc.kune.events.shared.EventsConstants.TYPE_MEETING;
+import static cc.kune.events.shared.EventsConstants.TYPE_ROOT;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
@@ -35,18 +35,18 @@ import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MeetingsClientActions extends AbstractFoldableToolActions {
+public class EventsClientActions extends AbstractFoldableToolActions {
   final String[] all = { TYPE_ROOT, TYPE_MEETING };
   final String[] containers = { TYPE_ROOT };
   final String[] containersNoRoot = {};
   final String[] contents = { TYPE_MEETING };
 
   @Inject
-  public MeetingsClientActions(final I18nUITranslationService i18n, final Session session,
+  public EventsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<NewMeetingsBtn> newMeetingsBtn, final Provider<GoParentFolderBtn> folderGoUp,
-      final Provider<OpenMeetingsMenuItem> openContentMenuItem,
-      final Provider<DelMeetingsMenuItem> delContentMenuItem,
+      final Provider<NewMeetingBtn> newMeetingsBtn, final Provider<GoParentFolderBtn> folderGoUp,
+      final Provider<OpenMeetingMenuItem> openContentMenuItem,
+      final Provider<DelMeetingMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<RefreshContentMenuItem> refresh) {
