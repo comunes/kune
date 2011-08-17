@@ -19,18 +19,21 @@
  \*/
 package cc.kune.gspace.client.tool.selector;
 
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 
 public interface ToolSelectorItem {
 
-    String getShortName();
+  String getShortName();
 
-    ToolSelectorItemView getView();
+  ToolSelectorItemView getView();
 
-    void setGroupShortName(String groupShortName);
+  void setGroupShortName(String groupShortName);
 
-    void setSelected(boolean selected);
+  void setSelected(boolean selected);
 
-    void setVisible(boolean visible);
+  void setToken(StateToken token);
+
+  void setVisible(boolean visible);
 
 }

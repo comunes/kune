@@ -35,15 +35,12 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
     HasText getLabel();
 
-    // void setTheme(WsTheme oldTheme, WsTheme newTheme);
-
     void setSelected(boolean selected);
 
     void setVisible(boolean visible);
   }
 
   private final String longName;
-  // private final WsThemeManager wsThemePresenter;
   private final String shortName;
   private StateToken token;
   private final ToolSelector toolSelector;
@@ -54,7 +51,6 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     this.shortName = shortName;
     this.longName = longName;
     this.toolSelector = toolSelector;
-    // this.wsThemePresenter = wsThemePresenter;
   }
 
   @Override
@@ -77,12 +73,6 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
       }
     });
     view.getLabel().setText(longName);
-    // wsThemePresenter.addOnThemeChanged(new Listener2<WsTheme, WsTheme>()
-    // {
-    // public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-    // setTheme(oldTheme, newTheme);
-    // }
-    // });
   }
 
   @Override
@@ -95,9 +85,10 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     view.setSelected(selected);
   }
 
-  // private void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-  // view.setTheme(oldTheme, newTheme);
-  // }
+  @Override
+  public void setToken(final StateToken token) {
+    this.token = token;
+  }
 
   @Override
   public void setVisible(final boolean visible) {

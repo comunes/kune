@@ -31,6 +31,7 @@ import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.ToolChangedEvent;
 import cc.kune.core.client.state.ToolChangedEvent.ToolChangedHandler;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 
 import com.google.gwt.event.shared.EventBus;
@@ -42,94 +43,103 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class ToolSelectorPresenter extends
-        Presenter<ToolSelectorPresenter.ToolSelectorView, ToolSelectorPresenter.ToolSelectorProxy> implements
-        ToolSelector {
+    Presenter<ToolSelectorPresenter.ToolSelectorView, ToolSelectorPresenter.ToolSelectorProxy> implements
+    ToolSelector {
 
-    @ProxyCodeSplit
-    public interface ToolSelectorProxy extends Proxy<ToolSelectorPresenter> {
-    }
+  @ProxyCodeSplit
+  public interface ToolSelectorProxy extends Proxy<ToolSelectorPresenter> {
+  }
 
-    public interface ToolSelectorView extends View {
-        void addItem(ToolSelectorItemView item);
-    }
+  public interface ToolSelectorView extends View {
+    void addItem(ToolSelectorItemView item);
+  }
 
-    private final HashMap<String, ToolSelectorItem> tools;
+  private final HashMap<String, ToolSelectorItem> tools;
 
-    @Inject
-    public ToolSelectorPresenter(final EventBus eventBus, final ToolSelectorView view, final ToolSelectorProxy proxy,
-            final StateManager stateManager) {
-        super(eventBus, view, proxy);
-        tools = new HashMap<String, ToolSelectorItem>();
-        stateManager.onStateChanged(true, new StateChangedHandler() {
-            @Override
-            public void onStateChanged(final StateChangedEvent event) {
-                for (final String tool : tools.keySet()) {
-                    final List<String> enabledTools = event.getState().getEnabledTools();
-                    if (enabledTools != null && enabledTools.contains(tool)) {
-                        tools.get(tool).setVisible(true);
-                    } else {
-                        tools.get(tool).setVisible(false);
-                    }
-                }
-            }
-        });
-        stateManager.onGroupChanged(true, new GroupChangedHandler() {
-            @Override
-            public void onGroupChanged(final GroupChangedEvent event) {
-                ToolSelectorPresenter.this.onGroupChanged(event.getNewGroup());
-            }
-        });
-        stateManager.onToolChanged(false, new ToolChangedHandler() {
-            @Override
-            public void onToolChanged(final ToolChangedEvent event) {
-                ToolSelectorPresenter.this.onToolChanged(event.getPreviousTool(), event.getNewTool());
-            }
-        });
-    }
-
-    @Override
-    public void addTool(final ToolSelectorItem item) {
-        final String name = item.getShortName();
-        if (name == null) {
-            throw new UIException("You cannot add a tool without a name");
+  @Inject
+  public ToolSelectorPresenter(final EventBus eventBus, final ToolSelectorView view,
+      final ToolSelectorProxy proxy, final StateManager stateManager) {
+    super(eventBus, view, proxy);
+    tools = new HashMap<String, ToolSelectorItem>();
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        for (final String tool : tools.keySet()) {
+          final List<String> enabledTools = event.getState().getEnabledTools();
+          if (enabledTools != null && enabledTools.contains(tool)) {
+            tools.get(tool).setVisible(true);
+          } else {
+            tools.get(tool).setVisible(false);
+          }
         }
-        if (tools.get(name) != null) {
-            throw new UIException("A tool with the same name already added");
+      }
+    });
+    stateManager.onGroupChanged(true, new GroupChangedHandler() {
+      @Override
+      public void onGroupChanged(final GroupChangedEvent event) {
+        ToolSelectorPresenter.this.onGroupChanged(event.getNewGroup());
+      }
+    });
+    stateManager.onToolChanged(false, new ToolChangedHandler() {
+      @Override
+      public void onToolChanged(final ToolChangedEvent event) {
+        ToolSelectorPresenter.this.onToolChanged(event.getPreviousTool(), event.getNewTool());
+      }
+    });
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        final StateToken token = event.getState().getStateToken();
+        if (token.hasAll() || token.hasGroupToolAndFolder()) {
+          tools.get(token.getTool()).setToken(token);
         }
-        tools.put(name, item);
-        item.setSelected(false);
-        getView().addItem(item.getView());
+      }
+    });
+  }
+
+  @Override
+  public void addTool(final ToolSelectorItem item) {
+    final String name = item.getShortName();
+    if (name == null) {
+      throw new UIException("You cannot add a tool without a name");
+    }
+    if (tools.get(name) != null) {
+      throw new UIException("A tool with the same name already added");
+    }
+    tools.put(name, item);
+    item.setSelected(false);
+    getView().addItem(item.getView());
+  }
+
+  private void checkTool(final ToolSelectorItem tool) {
+    if (tool == null) {
+      throw new UIException("Trying to activate an unregistered tool in client");
     }
 
-    private void checkTool(final ToolSelectorItem tool) {
-        if (tool == null) {
-            throw new UIException("Trying to activate an unregistered tool in client");
-        }
+  }
 
+  void onGroupChanged(final String newGroupName) {
+    for (final String name : tools.keySet()) {
+      tools.get(name).setGroupShortName(newGroupName);
     }
+  }
 
-    void onGroupChanged(final String newGroupName) {
-        for (final String name : tools.keySet()) {
-            tools.get(name).setGroupShortName(newGroupName);
-        }
+  void onToolChanged(final String oldTool, final String newTool) {
+    Log.debug("Registered tools: " + tools.keySet().toString());
+    if (oldTool != null && !oldTool.equals("")) {
+      final ToolSelectorItem tool = tools.get(oldTool);
+      checkTool(tool);
+      tool.setSelected(false);
     }
+    if (!newTool.equals("")) {
+      final ToolSelectorItem tool = tools.get(newTool);
+      checkTool(tool);
+      tool.setSelected(true);
+    }
+  }
 
-    void onToolChanged(final String oldTool, final String newTool) {
-        Log.debug("Registered tools: " + tools.keySet().toString());
-        if (oldTool != null && !oldTool.equals("")) {
-            final ToolSelectorItem tool = tools.get(oldTool);
-            checkTool(tool);
-            tool.setSelected(false);
-        }
-        if (!newTool.equals("")) {
-            final ToolSelectorItem tool = tools.get(newTool);
-            checkTool(tool);
-            tool.setSelected(true);
-        }
-    }
-
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
+  }
 }
