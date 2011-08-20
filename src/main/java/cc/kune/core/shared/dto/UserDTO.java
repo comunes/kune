@@ -39,7 +39,7 @@ public class UserDTO implements IsSerializable {
         this(null, null, null, null, null, null, null, null, true, null, null);
     }
 
-    public UserDTO(final String name, final String shortName, final String password, final String email,
+    public UserDTO(final String shortName, final String name, final String password, final String email,
             final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone,
             final String avatar, final boolean publishRoster, final SubscriptionMode subscriptionMode,
             final String chatColor) {

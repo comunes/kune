@@ -25,9 +25,12 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.UserSignOutEvent;
+import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -38,13 +41,15 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
   private final I18nTranslationService i18n;
   private final CoreResources img;
   private ButtonDescriptor prefsItem;
+  private final Session session;
   private final StateManager stateManager;
   private GroupOptionsView view;
 
   @Inject
-  public GroupOptionsPresenter(final StateManager stateManager, final I18nTranslationService i18n,
-      final CoreResources img, final GroupOptionsView view) {
+  public GroupOptionsPresenter(final StateManager stateManager, final Session session,
+      final I18nTranslationService i18n, final CoreResources img, final GroupOptionsView view) {
     this.stateManager = stateManager;
+    this.session = session;
     this.i18n = i18n;
     this.img = img;
     init(view);
@@ -84,6 +89,12 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
           view.hide();
           prefsItem.setVisible(false);
         }
+      }
+    });
+    session.onUserSignOut(false, new UserSignOutHandler() {
+      @Override
+      public void onUserSignOut(final UserSignOutEvent event) {
+        view.hide();
       }
     });
   }

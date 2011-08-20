@@ -79,7 +79,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
       if (response != null) {
         NotifyUser.info(response);
       }
-      CurrentLogoChangedEvent.fire(eventBus);
+      CurrentEntityChangedEvent.fire(eventBus);
     } else {
       onSubmitFailed(response);
     }

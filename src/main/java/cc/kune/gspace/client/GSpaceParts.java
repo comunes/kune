@@ -30,6 +30,8 @@ import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.GroupOptionsCollection;
 import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.options.UserOptionsCollection;
+import cc.kune.gspace.client.options.general.GroupOptGeneral;
+import cc.kune.gspace.client.options.general.UserOptGeneral;
 import cc.kune.gspace.client.options.license.GroupOptDefLicense;
 import cc.kune.gspace.client.options.license.UserOptDefLicense;
 import cc.kune.gspace.client.options.logo.GroupOptLogo;
@@ -57,10 +59,11 @@ public class GSpaceParts {
       final Provider<TagsSummaryPresenter> tagsPresenter, final Provider<ToolSelector> toolSelector,
       final Provider<NoHomePageViewer> noHome, final Provider<ContentViewerPresenter> docsViewer,
       final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,
-      final Provider<UserOptions> uo, final Provider<GroupOptionsCollection> goc,
-      final Provider<UserOptionsCollection> uoc, final Provider<GroupOptDefLicense> gdl,
-      final Provider<GroupOptStyle> gps, final Provider<GroupOptLogo> gl,
-      final Provider<GroupOptTools> gtc, final Provider<UserOptDefLicense> udl,
+      final Provider<UserOptions> uo, final Provider<GroupOptionsCollection> gocProv,
+      final Provider<UserOptionsCollection> uocProv, final Provider<GroupOptGeneral> gg,
+      final Provider<GroupOptDefLicense> gdl, final Provider<GroupOptStyle> gps,
+      final Provider<GroupOptLogo> gl, final Provider<GroupOptTools> gtc,
+      final Provider<UserOptGeneral> ug, final Provider<UserOptDefLicense> udl,
       final Provider<UserOptStyle> ups, final Provider<UserOptLogo> ul,
       final Provider<UserOptTools> utc, final Provider<SitebarSearchPresenter> siteSearch,
       final Provider<SiteOptionsI18nTranslatorAction> transAction,
@@ -79,14 +82,18 @@ public class GSpaceParts {
         noHome.get();
 
         // Add User & Groups Options
-        goc.get().add(gtc);
-        goc.get().add(gl);
-        goc.get().add(gps);
-        goc.get().add(gdl);
-        uoc.get().add(utc);
-        uoc.get().add(ul);
-        uoc.get().add(ups);
-        uoc.get().add(udl);
+        final GroupOptionsCollection goc = gocProv.get();
+        final UserOptionsCollection uoc = uocProv.get();
+        goc.add(gg);
+        goc.add(gtc);
+        goc.add(gl);
+        goc.add(gps);
+        goc.add(gdl);
+        uoc.add(ug);
+        uoc.add(utc);
+        uoc.add(ul);
+        uoc.add(ups);
+        uoc.add(udl);
 
         // Init
         go.get();

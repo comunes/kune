@@ -34,6 +34,7 @@ import org.apache.lucene.search.Query;
 import org.hibernate.exception.ConstraintViolationException;
 
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
@@ -50,6 +51,7 @@ import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.AccessLists;
@@ -118,6 +120,20 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   @Override
+  public void checkIfLongNameAreInUse(final String longName) {
+    if (finder.countByLongName(longName) != 0) {
+      throw new GroupLongNameInUseException();
+    }
+  }
+
+  @Override
+  public void checkIfShortNameAreInUse(final String shortName) {
+    if (finder.countByShortName(shortName) != 0) {
+      throw new GroupShortNameInUseException();
+    }
+  }
+
+  @Override
   public void clearGroupBackImage(final Group group) {
     final String file = group.getBackgroundImage();
     if (file != null) {
@@ -130,7 +146,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   @Override
   public Group createGroup(final Group group, final User user, final String publicDescrip)
       throws GroupShortNameInUseException, GroupLongNameInUseException, UserMustBeLoggedException {
-    checkIfNamesAreInUse(group.getShortName(), group.getLongName());
+    checkIfShortNameAreInUse(group.getShortName());
+    checkIfLongNameAreInUse(group.getLongName());
     final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
     if (User.isKnownUser(user)) {
       GroupListMode publicVisibility = GroupListMode.EVERYONE;
@@ -311,13 +328,31 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     toolConfiguration.setEnabled(enabled);
   }
 
-  public void checkIfNamesAreInUse(final String shortName, final String longName) {
-    if (finder.countByShortName(shortName) != 0) {
-      throw new GroupShortNameInUseException();
+  @Override
+  public Group update(final Long groupId, final GroupDTO groupDTO) {
+    final Group group = find(groupId);
+    final String shortName = groupDTO.getShortName();
+    final String longName = groupDTO.getLongName();
+    if (!longName.equals(group.getLongName())) {
+      checkIfLongNameAreInUse(longName);
+      group.setLongName(longName);
     }
-    if (finder.countByLongName(longName) != 0) {
-      throw new GroupLongNameInUseException();
+    if (!shortName.equals(group.getShortName())) {
+      checkIfShortNameAreInUse(shortName);
+      final String oldDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION)
+          + FileUtils.groupToDir(group.getShortName());
+      final String newDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION)
+          + FileUtils.groupToDir(shortName);
+      if (fileManager.exists(oldDir)) {
+        if (fileManager.exists(newDir)) {
+          throw new DefaultException("Destination group directory exists");
+        }
+        fileManager.mv(oldDir, newDir);
+      }
+      group.setShortName(shortName);
     }
+    persist(group);
+    return group;
   }
 
 }

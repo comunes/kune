@@ -53,6 +53,14 @@ import cc.kune.gspace.client.options.UserOptionsCollection;
 import cc.kune.gspace.client.options.UserOptionsPanel;
 import cc.kune.gspace.client.options.UserOptionsPresenter;
 import cc.kune.gspace.client.options.UserOptionsView;
+import cc.kune.gspace.client.options.general.GroupOptGeneral;
+import cc.kune.gspace.client.options.general.GroupOptGeneralPanel;
+import cc.kune.gspace.client.options.general.GroupOptGeneralPresenter;
+import cc.kune.gspace.client.options.general.GroupOptGeneralView;
+import cc.kune.gspace.client.options.general.UserOptGeneral;
+import cc.kune.gspace.client.options.general.UserOptGeneralPanel;
+import cc.kune.gspace.client.options.general.UserOptGeneralPresenter;
+import cc.kune.gspace.client.options.general.UserOptGeneralView;
 import cc.kune.gspace.client.options.license.GroupOptDefLicense;
 import cc.kune.gspace.client.options.license.GroupOptDefLicensePanel;
 import cc.kune.gspace.client.options.license.GroupOptDefLicensePresenter;
@@ -144,6 +152,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(GroupOptionsCollection.class);
     s(TranslatorTabsCollection.class);
 
+    s(GroupOptGeneral.class, GroupOptGeneralPresenter.class);
+    s(GroupOptGeneralView.class, GroupOptGeneralPanel.class);
     s(GroupOptDefLicense.class, GroupOptDefLicensePresenter.class);
     s(GroupOptDefLicenseView.class, GroupOptDefLicensePanel.class);
     s(GroupOptStyle.class, GroupOptStylePresenter.class);
@@ -153,6 +163,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(GroupOptTools.class, GroupOptToolsPresenter.class);
     s(GroupOptToolsView.class, GroupOptToolsPanel.class);
 
+    s(UserOptGeneral.class, UserOptGeneralPresenter.class);
+    s(UserOptGeneralView.class, UserOptGeneralPanel.class);
     s(UserOptDefLicense.class, UserOptDefLicensePresenter.class);
     s(UserOptDefLicenseView.class, UserOptDefLicensePanel.class);
     s(UserOptStyle.class, UserOptStylePresenter.class);

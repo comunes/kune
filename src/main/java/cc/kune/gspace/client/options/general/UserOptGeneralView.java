@@ -16,22 +16,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- \*/
-package cc.kune.core.client.ws.entheader;
+ */
+package cc.kune.gspace.client.options.general;
 
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+public interface UserOptGeneralView extends EntityOptGeneralView {
 
-import com.google.gwt.user.client.ui.IsWidget;
+  String getLongName();
 
-public interface EntityHeader {
-
-  void addAction(GuiActionDescrip descriptor);
-
-  void addWidget(IsWidget widget);
-
-  /**
-   * Reload the logo from the group reloaded from the server
-   */
-  void reloadGroupLogoImage();
+  void setLongName(String longName);
 
 }

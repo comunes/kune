@@ -147,7 +147,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
   public void testAddWikiContent() throws Exception {
     doLogin();
 
-    final StateToken wikiToken = new StateToken(super.getDefSiteGroupName(), NAME);
+    final StateToken wikiToken = new StateToken(super.getDefSiteShortName(), NAME);
     final StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(session.getHash(),
         wikiToken);
 

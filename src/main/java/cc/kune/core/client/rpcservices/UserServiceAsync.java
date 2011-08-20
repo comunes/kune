@@ -21,6 +21,7 @@ package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
@@ -29,20 +30,23 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface UserServiceAsync {
 
-    void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<Void> asyncCallback);
+  void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<Void> asyncCallback);
 
-    void getUserAvatarBaser64(String userHash, StateToken userToken, AsyncCallback<String> asyncCallback);
+  void getUserAvatarBaser64(String userHash, StateToken userToken, AsyncCallback<String> asyncCallback);
 
-    void getWaveClientParameters(String userHash, AsyncCallback<WaveClientParams> asyncCallback);
+  void getWaveClientParameters(String userHash, AsyncCallback<WaveClientParams> asyncCallback);
 
-    void login(String nickOrEmail, String passwd, String waveCookieValue, AsyncCallback<UserInfoDTO> asyncCallback);
+  void login(String nickOrEmail, String passwd, String waveCookieValue,
+      AsyncCallback<UserInfoDTO> asyncCallback);
 
-    void logout(String userHash, AsyncCallback<Void> asyncCallback);
+  void logout(String userHash, AsyncCallback<Void> asyncCallback);
 
-    void onlyCheckSession(String userHash, AsyncCallback<Void> asyncCallback);
+  void onlyCheckSession(String userHash, AsyncCallback<Void> asyncCallback);
 
-    void reloadUserInfo(String userHash, AsyncCallback<UserInfoDTO> asyncCallback);
+  void reloadUserInfo(String userHash, AsyncCallback<UserInfoDTO> asyncCallback);
 
-    void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility,
-            AsyncCallback<Void> asyncCallback);
+  void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility,
+      AsyncCallback<Void> asyncCallback);
+
+  void updateUser(String userHash, UserDTO user, AsyncCallback<StateAbstractDTO> callback);
 }

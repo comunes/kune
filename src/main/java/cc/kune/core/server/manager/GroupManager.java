@@ -27,6 +27,7 @@ import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.manager.impl.SearchResult;
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
@@ -37,7 +38,9 @@ public interface GroupManager extends Manager<Group, Long> {
 
   void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
 
-  void checkIfNamesAreInUse(String shortName, String longName);
+  void checkIfLongNameAreInUse(String shortName);
+
+  void checkIfShortNameAreInUse(String longName);
 
   void clearGroupBackImage(Group group);
 
@@ -76,5 +79,15 @@ public interface GroupManager extends Manager<Group, Long> {
   void setGroupBackgroundImage(Group group, String backgroundFileName, String mime);
 
   void setToolEnabled(User userLogged, String groupShortName, String toolName, boolean enabled);
+
+  /**
+   * @param groupId
+   *          the id of the Group to update
+   * @param groupDTO
+   *          the group with the name values to change (currently only changes
+   *          shortname & longname)
+   * @return returns the Group just persisted
+   */
+  Group update(Long groupId, GroupDTO groupDTO);
 
 }

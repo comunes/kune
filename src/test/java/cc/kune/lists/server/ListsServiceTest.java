@@ -41,7 +41,7 @@ public class ListsServiceTest extends IntegrationTest {
     final UserInfoDTO userInfoDTO = doLogin();
     userGroup = userInfoDTO.getUserGroup();
     final StateAbstractDTO rootList = contentService.getContent(getHash(), new StateToken(
-        getDefSiteGroupName(), ListsConstants.ROOT_NAME));
+        getDefSiteShortName(), ListsConstants.ROOT_NAME));
     openList = listsService.createList(getHash(), rootList.getStateToken(), "test list", "", true);
     closeList = listsService.createList(getHash(), rootList.getStateToken(), "test list", "", false);
   }

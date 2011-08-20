@@ -24,6 +24,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import cc.kune.core.client.errors.GroupLongNameInUseException;
+import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.server.UserSession;
@@ -31,6 +33,7 @@ import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
@@ -89,6 +92,18 @@ public class GroupServiceTest extends IntegrationTest {
 
     assertEquals(groupCreated.getAdmissionType(), AdmissionType.Open);
     assertEquals(groupCreated.getGroupType(), GroupType.COMMUNITY);
+  }
+
+  private GroupDTO createGroup(final String shortName, final String longName) {
+    final GroupDTO group = new GroupDTO(shortName, longName, GroupType.ORGANIZATION);
+
+    final LicenseDTO license = new LicenseDTO();
+    license.setShortName("by-sa-v3.0");
+    group.setDefaultLicense(license);
+    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    final Group groupCreated = groupFinder.findByShortName(shortName);
+    group.setId(groupCreated.getId());
+    return group;
   }
 
   @Test(expected = Exception.class)
@@ -164,6 +179,22 @@ public class GroupServiceTest extends IntegrationTest {
     assertEquals(groupCreated.getGroupType(), GroupType.ORPHANED_PROJECT);
     assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getAdmins().getList().size());
     assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getEditors().getList().size());
+  }
+
+  @Test(expected = GroupLongNameInUseException.class)
+  public void createSameLongName() throws Exception {
+    doLogin();
+    final GroupDTO group = createGroup("ysei", "Yellow Submarine Environmental Initiative");
+    group.setLongName(getDefSiteLongName());
+    service.updateGroup(getHash(), group.getStateToken(), group);
+  }
+
+  @Test(expected = GroupShortNameInUseException.class)
+  public void createSameShortName() throws Exception {
+    doLogin();
+    final GroupDTO group = createGroup("ysei", "Yellow Submarine Environmental Initiative");
+    group.setShortName(getDefSiteShortName());
+    service.updateGroup(getHash(), new StateToken("ysei"), group);
   }
 
   @Before

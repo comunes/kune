@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.rpc;
 
+import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.server.UserSession;
@@ -35,10 +36,9 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveManagerDefault;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -46,9 +46,8 @@ import com.google.inject.persist.Transactional;
 
 public class GroupRPC implements RPC, GroupService {
   private final ContentManager contentManager;
+  private final ContentRPC contentRPC;
   private final GroupManager groupManager;
-  private final I18nTranslationService i18n;
-  private final KuneWaveManagerDefault kuneWaveManager;
   private final Mapper mapper;
   private final ReservedWordsRegistry reserverdWords;
   private final Provider<UserSession> userSessionProvider;
@@ -56,15 +55,13 @@ public class GroupRPC implements RPC, GroupService {
   @Inject
   public GroupRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
       final ContentManager contentManager, final Mapper mapper,
-      final KuneWaveManagerDefault kuneWaveManager, final I18nTranslationService i18n,
-      final ReservedWordsRegistry reserverdWords) {
+      final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC) {
     this.userSessionProvider = userSessionProvider;
     this.groupManager = groupManager;
     this.contentManager = contentManager;
     this.mapper = mapper;
-    this.kuneWaveManager = kuneWaveManager;
-    this.i18n = i18n;
     this.reserverdWords = reserverdWords;
+    this.contentRPC = contentRPC;
   }
 
   @Override
@@ -161,4 +158,18 @@ public class GroupRPC implements RPC, GroupService {
     groupManager.setToolEnabled(getUserLogged(), groupToken.getGroup(), toolName, enabled);
   }
 
+  @Override
+  @Authenticated
+  @Transactional
+  @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
+  public StateAbstractDTO updateGroup(final String userHash, final StateToken token,
+      final GroupDTO groupDTO) throws DefaultException {
+    final Group group = groupManager.findByShortName(token.getGroup());
+    final Long id = group.getId();
+    if (!id.equals(groupDTO.getId())) {
+      throw new AccessViolationException();
+    }
+    final Group updatedGroup = groupManager.update(id, groupDTO);
+    return contentRPC.getContent(userHash, token.setGroup(updatedGroup.getShortName()));
+  }
 }

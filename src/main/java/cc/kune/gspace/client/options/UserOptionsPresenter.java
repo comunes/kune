@@ -30,6 +30,8 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.state.UserSignOutEvent;
+import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -41,7 +43,6 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
   private final Session session;
   private final StateManager stateManager;
   private final SiteUserOptions userOptions;
-  private UserOptionsView view;
 
   @Inject
   public UserOptionsPresenter(final Session session, final StateManager stateManager,
@@ -63,7 +64,6 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
 
   private void init(final UserOptionsView view) {
     super.init(view);
-    this.view = view;
     final AbstractExtendedAction userPrefsAction = new AbstractExtendedAction() {
 
       @Override
@@ -74,6 +74,12 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
         show();
       }
     };
+    session.onUserSignOut(false, new UserSignOutHandler() {
+      @Override
+      public void onUserSignOut(final UserSignOutEvent event) {
+        view.hide();
+      }
+    });
     userPrefsAction.putValue(Action.NAME, i18n.t("Your preferences"));
     userPrefsAction.putValue(Action.SMALL_ICON, res.prefs());
     final MenuItemDescriptor prefsItem = new MenuItemDescriptor(userPrefsAction);

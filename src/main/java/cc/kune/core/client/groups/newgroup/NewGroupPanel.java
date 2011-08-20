@@ -25,7 +25,7 @@ import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
-import cc.kune.core.client.resources.CoreMessages;
+import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.client.ui.DefaultFormUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -44,7 +44,6 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class NewGroupPanel extends ViewImpl implements NewGroupView {
-  private static final int BIG_FIELD_WIDTH = 280;
   public static final String CANCEL_BUTTON = "k-ngp-cancel-bt";
   public static final String CLOSED_GROUP_TYPE_ID = "k-ngp-type_of_group_closed";
   public static final String COMM_GROUP_TYPE_ID = "k-ngp-type_of_group_comm";
@@ -125,39 +124,19 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     // intro.setStyleName("k-form-intro");
     // form.add(intro);
 
-    shortNameField = new TextField<String>();
-    shortNameField.setValidationDelay(1000);
+    shortNameField = GroupFieldFactory.createUserShortName(SHORTNAME_FIELD);
     shortNameField.setTabIndex(1);
-    shortNameField.setFieldLabel(i18n.t("Short name"));
-    shortNameField.setName(SHORTNAME_FIELD);
-    shortNameField.setWidth(175);
-    shortNameField.setMinLength(3);
-    shortNameField.setMaxLength(15); /* Same in Group.java/shortName */
-    shortNameField.setAllowBlank(false);
-    shortNameField.setRegex("^[a-z0-9]+$");
-    shortNameField.getMessages().setMinLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
-    shortNameField.getMessages().setMaxLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
-    shortNameField.getMessages().setRegexText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
-    shortNameField.setValidationDelay(1000);
-
     form.add(shortNameField);
 
-    longNameField = new TextField<String>();
+    longNameField = GroupFieldFactory.createUserLongName(LONGNAME_FIELD);
     longNameField.setTabIndex(2);
-    longNameField.setFieldLabel(i18n.t("Long name"));
-    longNameField.setName(LONGNAME_FIELD);
-    longNameField.setWidth(BIG_FIELD_WIDTH);
-    longNameField.setAllowBlank(false);
-    longNameField.setMinLength(3);
-    longNameField.setMaxLength(50); /* Same in Group.java/longName */
-    longNameField.setValidationDelay(1000);
     form.add(longNameField);
 
     publicDescField = new TextArea();
     publicDescField.setTabIndex(3);
     publicDescField.setFieldLabel(i18n.t("Public description"));
     publicDescField.setName(PUBLICDESC_FIELD);
-    publicDescField.setWidth(BIG_FIELD_WIDTH);
+    publicDescField.setWidth(DefaultForm.BIG_FIELD_WIDTH);
     publicDescField.setAllowBlank(false);
     publicDescField.setMinLength(10);
     publicDescField.setMaxLength(255);
@@ -168,7 +147,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     tag1.setTabIndex(4);
     tag1.setFieldLabel(i18n.t("Group tags"));
     tag1.setName(TAGS_FIELD);
-    tag1.setWidth(BIG_FIELD_WIDTH);
+    tag1.setWidth(DefaultForm.BIG_FIELD_WIDTH);
     tag1.setAllowBlank(false);
     tag1.setTitle(i18n.t("type some keyword that define your group"));
     tag1.setValidationDelay(1000);

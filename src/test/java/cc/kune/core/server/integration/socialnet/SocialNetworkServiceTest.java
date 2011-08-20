@@ -46,7 +46,7 @@ public class SocialNetworkServiceTest extends IntegrationTest {
     @Before
     public void init() {
         new IntegrationTestHelper(this);
-        groupToken = new StateToken(getDefSiteGroupName());
+        groupToken = new StateToken(getDefSiteShortName());
     }
 
     @Test

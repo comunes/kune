@@ -24,6 +24,7 @@ import org.waveprotocol.box.server.authentication.PasswordDigest;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.core.shared.domain.UserSNetVisibility;
+import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.domain.User;
 import cc.kune.domain.utils.UserBuddiesData;
 
@@ -69,5 +70,14 @@ public interface UserManager {
   SearchResult<User> search(String search, Integer firstResult, Integer maxResults);
 
   void setSNetVisibility(User user, UserSNetVisibility visibility);
+
+  /**
+   * @param userId
+   *          the userId to change
+   * @param user
+   *          the userDTO with values to change
+   * @return the User after updated
+   */
+  User update(Long userId, UserDTO user);
 
 }

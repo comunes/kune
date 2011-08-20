@@ -45,36 +45,18 @@ public class RegisterForm extends DefaultForm {
   private final TextField<String> emailRegField;
   private final TextField<String> longNameRegField;
   private final TextField<String> passwdRegField;
+
   private final TextField<String> shortNameRegField;
 
   public RegisterForm(final I18nTranslationService i18n, final Session session) {
     super.addStyleName("kune-Margin-Large-l");
 
-    shortNameRegField = new TextField<String>();
+    shortNameRegField = UserFieldFactory.createUserShortName(NICK_FIELD);
     shortNameRegField.setTabIndex(1);
-    shortNameRegField.setFieldLabel(i18n.t("Username"));
-    shortNameRegField.setName(NICK_FIELD);
-    shortNameRegField.setWidth(DEF_SMALL_FIELD_WIDTH);
-    shortNameRegField.setAllowBlank(false);
-    shortNameRegField.setMinLength(3);
-    shortNameRegField.setMaxLength(15);
-    shortNameRegField.setRegex("^[a-z0-9]+$");
-    shortNameRegField.getMessages().setMinLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
-    shortNameRegField.getMessages().setMaxLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
-    shortNameRegField.getMessages().setRegexText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
-    shortNameRegField.setValidationDelay(1000);
     add(shortNameRegField);
 
-    longNameRegField = new TextField<String>();
+    longNameRegField = UserFieldFactory.createUserLongName(LONGNAME_FIELD);
     longNameRegField.setTabIndex(2);
-    longNameRegField.setFieldLabel(i18n.t("Name"));
-    longNameRegField.setName(LONGNAME_FIELD);
-    longNameRegField.setWidth(DEF_FIELD_WIDTH);
-    longNameRegField.setAllowBlank(false);
-    longNameRegField.setMinLength(3);
-    longNameRegField.setMaxLength(50);
-    // longNameRegField.setValidationEvent(false);
-    longNameRegField.setId(LONGNAME_FIELD);
     add(longNameRegField);
 
     passwdRegField = new TextField<String>();

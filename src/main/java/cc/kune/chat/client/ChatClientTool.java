@@ -39,6 +39,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
   public ChatClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final ChatResources res) {
+    // FIXME: change this in ChatConstants and in db via migration
     super(NAME, i18n.t("chatrooms"), toolSelector, cntCapRegistry, i18n, navResources);
     this.res = res;
     registerIcons();

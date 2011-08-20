@@ -36,122 +36,123 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class DefaultForm {
 
-    public static final int DEF_FIELD_LABEL_WITH = 75;
-    public static final int DEF_FIELD_WIDTH = 200;
-    public static final int DEF_MEDIUM_FIELD_WIDTH = 150;
-    public static final int DEF_SMALL_FIELD_WIDTH = 100;
-    public static final int DEF_XSMALL_FIELD_WIDTH = 50;
+  public static final int BIG_FIELD_WIDTH = 280;
+  public static final int DEF_FIELD_LABEL_WITH = 75;
+  public static final int DEF_FIELD_WIDTH = 200;
+  public static final int DEF_MEDIUM_FIELD_WIDTH = 150;
+  public static final int DEF_SMALL_FIELD_WIDTH = 100;
+  public static final int DEF_XSMALL_FIELD_WIDTH = 50;
 
-    private final FormPanel form;
+  private final FormPanel form;
 
-    public DefaultForm() {
-        this(HorizontalAlignment.LEFT);
+  public DefaultForm() {
+    this(HorizontalAlignment.LEFT);
+  }
+
+  public DefaultForm(final HorizontalAlignment buttonAlign) {
+    form = new FormPanel();
+    form.setFrame(true);
+    form.setPadding(10);
+    form.setBorders(false);
+    form.setLabelWidth(DEF_FIELD_LABEL_WITH);
+    form.setLabelAlign(LabelAlign.LEFT);
+    form.setButtonAlign(buttonAlign);
+    form.setHeaderVisible(false);
+  }
+
+  public DefaultForm(final String title) {
+    this(title, HorizontalAlignment.LEFT);
+  }
+
+  public DefaultForm(final String title, final HorizontalAlignment buttonAlign) {
+    this(buttonAlign);
+    form.setTitle(title);
+  }
+
+  public void add(final Field<?> field) {
+    form.add(field);
+  }
+
+  public void add(final FieldSet fieldset) {
+    form.add(fieldset);
+  }
+
+  public void add(final Label label) {
+    form.add(label);
+  }
+
+  public void add(final Widget widget) {
+    form.add(widget);
+  }
+
+  public void addButton(final Button button) {
+    form.addButton(button);
+  }
+
+  public void addListener(final EventType eventType, final Listener<? extends BaseEvent> listener) {
+    form.addListener(eventType, listener);
+  }
+
+  public void addStyleName(final String cls) {
+    form.addStyleName(cls);
+  }
+
+  public FormPanel getFormPanel() {
+    return form;
+  }
+
+  public void insert(final int index, final Component component) {
+    form.insert(component, index);
+  }
+
+  public boolean isValid() {
+    return form.isValid();
+  }
+
+  public void removeStyleName(final String cls) {
+    form.removeStyleName(cls);
+  }
+
+  public void reset() {
+    form.reset();
+  }
+
+  public void setAutoHeight(final boolean autoHeight) {
+    form.setAutoHeight(autoHeight);
+  }
+
+  public void setAutoWidth(final boolean autoWidth) {
+    form.setAutoWidth(autoWidth);
+  }
+
+  public void setFrame(final boolean frame) {
+    form.setFrame(frame);
+  }
+
+  public void setHeight(final int height) {
+    form.setHeight(height);
+  }
+
+  public void setHideLabels(final boolean hide) {
+    form.setHideLabels(hide);
+  }
+
+  public void setIconCls(final String iconCls) {
+    form.setIconStyle(iconCls);
+  }
+
+  public void setPadding(final int padding) {
+    form.setPadding(padding);
+  }
+
+  public void setWidth(final int width) {
+    form.setWidth(width);
+  }
+
+  public void validate() {
+    final List<Field<?>> fields = form.getFields();
+    for (final Field<?> field : fields) {
+      field.validate();
     }
-
-    public DefaultForm(final HorizontalAlignment buttonAlign) {
-        form = new FormPanel();
-        form.setFrame(true);
-        form.setPadding(10);
-        form.setBorders(false);
-        form.setLabelWidth(DEF_FIELD_LABEL_WITH);
-        form.setLabelAlign(LabelAlign.LEFT);
-        form.setButtonAlign(buttonAlign);
-        form.setHeaderVisible(false);
-    }
-
-    public DefaultForm(final String title) {
-        this(title, HorizontalAlignment.LEFT);
-    }
-
-    public DefaultForm(final String title, final HorizontalAlignment buttonAlign) {
-        this(buttonAlign);
-        form.setTitle(title);
-    }
-
-    public void add(final Field<?> field) {
-        form.add(field);
-    }
-
-    public void add(final FieldSet fieldset) {
-        form.add(fieldset);
-    }
-
-    public void add(final Label label) {
-        form.add(label);
-    }
-
-    public void add(final Widget widget) {
-        form.add(widget);
-    }
-
-    public void addButton(final Button button) {
-        form.addButton(button);
-    }
-
-    public void addListener(final EventType eventType, final Listener<? extends BaseEvent> listener) {
-        form.addListener(eventType, listener);
-    }
-
-    public void addStyleName(final String cls) {
-        form.addStyleName(cls);
-    }
-
-    public FormPanel getFormPanel() {
-        return form;
-    }
-
-    public void insert(final int index, final Component component) {
-        form.insert(component, index);
-    }
-
-    public boolean isValid() {
-        return form.isValid();
-    }
-
-    public void removeStyleName(final String cls) {
-        form.removeStyleName(cls);
-    }
-
-    public void reset() {
-        form.reset();
-    }
-
-    public void setAutoHeight(final boolean autoHeight) {
-        form.setAutoHeight(autoHeight);
-    }
-
-    public void setAutoWidth(final boolean autoWidth) {
-        form.setAutoWidth(autoWidth);
-    }
-
-    public void setFrame(final boolean frame) {
-        form.setFrame(frame);
-    }
-
-    public void setHeight(final int height) {
-        form.setHeight(height);
-    }
-
-    public void setHideLabels(final boolean hide) {
-        form.setHideLabels(hide);
-    }
-
-    public void setIconCls(final String iconCls) {
-        form.setIconStyle(iconCls);
-    }
-
-    public void setPadding(final int padding) {
-        form.setPadding(padding);
-    }
-
-    public void setWidth(final int width) {
-        form.setWidth(width);
-    }
-
-    public void validate() {
-        final List<Field<?>> fields = form.getFields();
-        for (final Field<?> field : fields) {
-            field.validate();
-        }
-    }
+  }
 }

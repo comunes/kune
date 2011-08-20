@@ -38,12 +38,21 @@ public interface FileManager {
   File createFileWithSequentialName(String dir, String fileName) throws IOException;
 
   /**
+   * @param file
+   *          path
+   * @return returns true if exists
+   */
+  boolean exists(String file);
+
+  /**
    * @param dir
    *          the directory (use File.separator for dir delimiters)
    * @return true if and only if the directory was created, along with all
    *         necessary parent directories; false otherwise
    */
   boolean mkdir(String dir);
+
+  boolean mv(String oldFile, String newFile);
 
   /**
    * @param dir

@@ -34,9 +34,6 @@ import cc.kune.core.server.UserSession;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
-import cc.kune.core.server.auth.SessionService;
-import cc.kune.core.server.content.ContentManager;
-import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.properties.ReservedWordsRegistry;
@@ -45,10 +42,10 @@ import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.wave.server.CustomWaveClientServlet;
@@ -60,12 +57,9 @@ import com.google.inject.persist.Transactional;
 
 public class UserRPC implements RPC, UserService {
 
-  private final ContentManager contentManager;
-  private final GroupManager groupManager;
-  private final I18nTranslationService i18n;
+  private final ContentRPC contentRPC;
   private final Mapper mapper;
   private final ReservedWordsRegistry reserverdWords;
-  private final Provider<SessionService> sessionServiceProvider;
   private final UserInfoService userInfoService;
   private final UserManager userManager;
   private final Provider<UserSession> userSessionProvider;
@@ -74,25 +68,20 @@ public class UserRPC implements RPC, UserService {
   private final SessionManager waveSessionManager;
 
   @Inject
-  public UserRPC(final Provider<SessionService> sessionServiceProvider,
-      final Provider<UserSession> userSessionProvider, final UserManager userManager,
-      @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO, final GroupManager groupManager,
+  public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
+      @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO,
       final UserInfoService userInfoService, final Mapper mapper,
       final SessionManager waveSessionManager, final CustomWaveClientServlet waveClientServlet,
-      final I18nTranslationService i18n, final ContentManager contentManager,
-      final ReservedWordsRegistry reserverdWords) {
-    this.sessionServiceProvider = sessionServiceProvider;
+      final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC) {
     this.userSessionProvider = userSessionProvider;
     this.userManager = userManager;
     this.useSocketIO = useSocketIO;
-    this.groupManager = groupManager;
     this.userInfoService = userInfoService;
     this.mapper = mapper;
     this.waveSessionManager = waveSessionManager;
     this.waveClientServlet = waveClientServlet;
-    this.i18n = i18n;
-    this.contentManager = contentManager;
     this.reserverdWords = reserverdWords;
+    this.contentRPC = contentRPC;
   }
 
   @Override
@@ -200,5 +189,17 @@ public class UserRPC implements RPC, UserService {
       throw new AccessViolationException();
     }
     userManager.setSNetVisibility(user, visibility);
+  }
+
+  @Override
+  @Authenticated
+  @Transactional
+  public StateAbstractDTO updateUser(final String userHash, final UserDTO user) throws DefaultException {
+    final Long id = getUserSession().getUser().getId();
+    if (!id.equals(user.getId())) {
+      throw new AccessViolationException();
+    }
+    final User userUpdated = userManager.update(id, user);
+    return contentRPC.getContent(userHash, userUpdated.getUserGroup().getStateToken());
   }
 }

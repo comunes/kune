@@ -47,8 +47,19 @@ public class FileManagerDefault implements FileManager {
   }
 
   @Override
+  public boolean exists(final String file) {
+    return new File(file).exists();
+  }
+
+  @Override
   public boolean mkdir(final String dir) {
     return new File(dir).mkdirs();
+  }
+
+  @Override
+  public boolean mv(final String oldPath, final String newPath) {
+    final File oldFile = new File(oldPath);
+    return oldFile.renameTo(new File(newPath));
   }
 
   @Override

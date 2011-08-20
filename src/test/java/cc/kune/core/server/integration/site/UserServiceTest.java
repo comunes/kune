@@ -23,12 +23,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
@@ -99,7 +102,7 @@ public class UserServiceTest extends IntegrationTest {
   @Test(expected = GroupLongNameInUseException.class)
   public void createUserExistingLongNameFails() throws Exception {
     assertNull(session.getUser().getId());
-    final UserDTO user = new UserDTO(properties.getAdminUserName(), "test", "123456",
+    final UserDTO user = new UserDTO("test", properties.getAdminUserName(), "123456",
         "example1234@example.com", lang, country, timezone, null, true, SubscriptionMode.manual, "blue");
     userService.createUser(user, false);
   }
@@ -107,7 +110,7 @@ public class UserServiceTest extends IntegrationTest {
   @Test(expected = GroupShortNameInUseException.class)
   public void createUserExistingShortNameFails() throws Exception {
     assertNull(session.getUser().getId());
-    final UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456",
+    final UserDTO user = new UserDTO(properties.getAdminShortName(), "test", "123456",
         "example1234@example.com", lang, country, timezone, null, true, SubscriptionMode.manual, "blue");
     userService.createUser(user, false);
   }
@@ -168,6 +171,53 @@ public class UserServiceTest extends IntegrationTest {
     final Set<Group> adminsGroup = userInfo.getGroupsIsAdmin();
     final Set<GroupDTO> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
     assertEqualGroupLists(adminsGroupDTO, adminsGroup);
+  }
+
+  @Test(expected = AccessViolationException.class)
+  public void updateAnotherUserFails() throws Exception {
+    assertNull(session.getUser().getId());
+    final UserDTO user = new UserDTO("test", "test", "123456", "example1234@example.com", lang, country,
+        timezone, null, true, SubscriptionMode.manual, "blue");
+    userService.createUser(user, false);
+    // do login as admin
+    doLogin();
+    userService.updateUser(getHash(), user);
+  }
+
+  @Test
+  public void updatedUser() throws Exception {
+    updateUser("test2", "test2", "example1234-2@example.com");
+  }
+
+  @Test(expected = EmailAddressInUseException.class)
+  public void updatedUserExistingEmailFails() throws Exception {
+    updateUser("test", "test", properties.getAdminEmail());
+  }
+
+  @Ignore
+  @Test(expected = GroupShortNameInUseException.class)
+  public void updatedUserExistingShortNameFails() throws Exception {
+    // We don't allow shortName change because we cannot change the name of a
+    // wave account (and waves)
+    updateUser(properties.getAdminShortName(), "test", "example1234@example.com");
+  }
+
+  private void updateUser(final String shortName, final String longName, final String email)
+      throws IOException {
+    assertNull(session.getUser().getId());
+    final UserDTO user = new UserDTO("test", "test", "123456", "example1234@example.com", lang, country,
+        timezone, null, true, SubscriptionMode.manual, "blue");
+    userService.createUser(user, false);
+    doLogin("test", "123456");
+    final UserDTO userChanged = new UserDTO(shortName, longName, "123456", email, lang, country,
+        timezone, null, true, SubscriptionMode.manual, "blue");
+    userChanged.setId(session.getUser().getId());
+    userService.updateUser(getHash(), userChanged);
+  }
+
+  @Test(expected = GroupLongNameInUseException.class)
+  public void updateUserExistingLongNameFails() throws Exception {
+    updateUser("test", properties.getAdminUserName(), "example1234@example.com");
   }
 
 }

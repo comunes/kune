@@ -16,22 +16,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- \*/
-package cc.kune.core.client.ws.entheader;
+ */
+package cc.kune.gspace.client.options.general;
 
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-
-import com.google.gwt.user.client.ui.IsWidget;
-
-public interface EntityHeader {
-
-  void addAction(GuiActionDescrip descriptor);
-
-  void addWidget(IsWidget widget);
-
-  /**
-   * Reload the logo from the group reloaded from the server
-   */
-  void reloadGroupLogoImage();
+public interface EntityOptGeneral {
 
 }

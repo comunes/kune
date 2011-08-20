@@ -134,7 +134,7 @@
 .k-dialog-outerp {
   background-color: #552200;
   border-top: 4px solid #000;
-  padding: 22px 4px 3px 4px;
+  /* padding: 22px 4px 3px 4px; */
 }
 
 .k-dialog-title {

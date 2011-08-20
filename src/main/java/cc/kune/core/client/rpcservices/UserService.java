@@ -22,6 +22,7 @@ package cc.kune.core.client.rpcservices;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
@@ -32,20 +33,22 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("UserService")
 public interface UserService extends RemoteService {
 
-    void createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;
+  void createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;
 
-    String getUserAvatarBaser64(String userHash, StateToken userToken) throws DefaultException;
+  String getUserAvatarBaser64(String userHash, StateToken userToken) throws DefaultException;
 
-    UserInfoDTO login(String nickOrEmail, String passwd, String waveToken) throws DefaultException;
+  WaveClientParams getWaveClientParameters(String userHash);
 
-    void logout(String userHash) throws DefaultException;
+  UserInfoDTO login(String nickOrEmail, String passwd, String waveToken) throws DefaultException;
 
-    void onlyCheckSession(String userHash) throws DefaultException;
+  void logout(String userHash) throws DefaultException;
 
-    UserInfoDTO reloadUserInfo(String userHash) throws DefaultException;
+  void onlyCheckSession(String userHash) throws DefaultException;
 
-    void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility);
+  UserInfoDTO reloadUserInfo(String userHash) throws DefaultException;
 
-    WaveClientParams getWaveClientParameters(String userHash);
+  void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility);
+
+  StateAbstractDTO updateUser(String userHash, UserDTO user) throws DefaultException;
 
 }

@@ -24,31 +24,31 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class CurrentLogoChangedEvent extends GwtEvent<CurrentLogoChangedEvent.CurrentLogoChangedHandler> {
+public class CurrentEntityChangedEvent extends GwtEvent<CurrentEntityChangedEvent.CurrentEntityChangedHandler> {
 
-  public interface CurrentLogoChangedHandler extends EventHandler {
-    public void onCurrentLogoChanged(CurrentLogoChangedEvent event);
+  public interface CurrentEntityChangedHandler extends EventHandler {
+    public void onCurrentLogoChanged(CurrentEntityChangedEvent event);
   }
 
   public interface HasCurrentLogoChangedHandlers extends HasHandlers {
-    HandlerRegistration addCurrentLogoChangedHandler(CurrentLogoChangedHandler handler);
+    HandlerRegistration addCurrentLogoChangedHandler(CurrentEntityChangedHandler handler);
   }
 
-  private static final Type<CurrentLogoChangedHandler> TYPE = new Type<CurrentLogoChangedHandler>();
+  private static final Type<CurrentEntityChangedHandler> TYPE = new Type<CurrentEntityChangedHandler>();
 
   public static void fire(final HasHandlers source) {
-    source.fireEvent(new CurrentLogoChangedEvent());
+    source.fireEvent(new CurrentEntityChangedEvent());
   }
 
-  public static Type<CurrentLogoChangedHandler> getType() {
+  public static Type<CurrentEntityChangedHandler> getType() {
     return TYPE;
   }
 
-  public CurrentLogoChangedEvent() {
+  public CurrentEntityChangedEvent() {
   }
 
   @Override
-  protected void dispatch(final CurrentLogoChangedHandler handler) {
+  protected void dispatch(final CurrentEntityChangedHandler handler) {
     handler.onCurrentLogoChanged(this);
   }
 
@@ -58,7 +58,7 @@ public class CurrentLogoChangedEvent extends GwtEvent<CurrentLogoChangedEvent.Cu
   }
 
   @Override
-  public Type<CurrentLogoChangedHandler> getAssociatedType() {
+  public Type<CurrentEntityChangedHandler> getAssociatedType() {
     return TYPE;
   }
 

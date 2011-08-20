@@ -1,0 +1,53 @@
+/*
+ *
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+package cc.kune.gspace.client.options.general;
+
+import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.core.client.auth.UserFieldFactory;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+
+import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.google.inject.Inject;
+
+public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOptGeneralView {
+
+  private static final String LONG_NAME_FIELD = "k-uogp-lname";
+  private final TextField<String> longName;
+
+  @Inject
+  public UserOptGeneralPanel(final I18nTranslationService i18n, final CoreResources res,
+      final MaskWidget maskWidget) {
+    super(i18n, res, maskWidget);
+    longName = UserFieldFactory.createUserLongName(LONG_NAME_FIELD);
+    add(longName);
+  }
+
+  @Override
+  public String getLongName() {
+    return longName.getValue();
+  }
+
+  @Override
+  public void setLongName(final String longName) {
+    this.longName.setValue(longName);
+  }
+
+}

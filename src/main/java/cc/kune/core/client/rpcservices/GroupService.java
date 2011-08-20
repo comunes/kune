@@ -25,6 +25,7 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -50,5 +51,8 @@ public interface GroupService extends RemoteService {
       SocialNetworkVisibility visibility);
 
   void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled);
+
+  StateAbstractDTO updateGroup(String userHash, StateToken token, GroupDTO groupDTO)
+      throws DefaultException;
 
 }

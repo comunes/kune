@@ -54,7 +54,9 @@ import cc.kune.core.server.xmpp.ChatConnection;
 import cc.kune.core.server.xmpp.ChatException;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.shared.domain.UserSNetVisibility;
+import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.domain.Group;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
@@ -107,6 +109,32 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.groupManager = groupManager;
   }
 
+  private void checkIfEmailAreInUse(final String email) {
+    if (userFinder.countByEmail(email) != 0) {
+      throw new EmailAddressInUseException();
+    }
+  }
+
+  private void checkIfLongNameAreInUse(final String longName) {
+    if (userFinder.countByLongName(longName) != 0) {
+      throw new GroupLongNameInUseException();
+    }
+    groupManager.checkIfLongNameAreInUse(longName);
+  }
+
+  private void checkIfNamesAreInUse(final String shortName, final String longName, final String email) {
+    checkIfShortNameAreInUse(shortName);
+    checkIfLongNameAreInUse(longName);
+    checkIfEmailAreInUse(email);
+  }
+
+  private void checkIfShortNameAreInUse(final String shortName) {
+    if (userFinder.countByShortName(shortName) != 0) {
+      throw new GroupShortNameInUseException();
+    }
+    groupManager.checkIfShortNameAreInUse(shortName);
+  }
+
   @Override
   public User createUser(final String shortName, final String longName, final String email,
       final String passwd, final String langCode, final String countryCode, final String timezone,
@@ -114,18 +142,9 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     I18nLanguage language;
     I18nCountry country;
     TimeZone tz;
-    if (userFinder.countByShortName(shortName) != 0) {
-      throw new GroupShortNameInUseException();
-    }
-    if (userFinder.countByLongName(longName) != 0) {
-      throw new GroupLongNameInUseException();
-    }
-    groupManager.checkIfNamesAreInUse(shortName, longName);
-    if (userFinder.countByEmail(email) != 0) {
-      throw new EmailAddressInUseException();
-    }
+    checkIfNamesAreInUse(shortName, longName, email);
     try {
-      language = languageManager.findByCode(langCode);
+      language = findLanguage(langCode);
       country = countryManager.findByCode(countryCode);
       tz = TimeZone.getTimeZone(timezone);
     } catch (final NoResultException e) {
@@ -189,6 +208,10 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   @Override
   public User findByShortname(final String shortName) {
     return userFinder.findByShortName(shortName);
+  }
+
+  private I18nLanguage findLanguage(final String langCode) {
+    return languageManager.findByCode(langCode);
   }
 
   public List<User> getAll() {
@@ -299,6 +322,35 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   public void setSNetVisibility(final User user, final UserSNetVisibility visibility) {
     user.setSNetVisibility(visibility);
     persist(user);
+  }
+
+  @Override
+  public User update(final Long userId, final UserDTO userDTO) {
+    final User user = find(userId);
+    final String shortName = userDTO.getShortName();
+    final String longName = userDTO.getName();
+    final String email = userDTO.getEmail();
+    final Group userGroup = user.getUserGroup();
+    // We don't allow to change shortName because we cannot change shotNames in
+    // wave accounts
+    // if (!shortName.equals(user.getShortName())) {
+    // checkIfShortNameAreInUse(shortName);
+    // user.setShortName(shortName);
+    // userGroup.setShortName(shortName);
+    // }
+    if (longName != null && !longName.equals(user.getName())) {
+      checkIfLongNameAreInUse(longName);
+      user.setName(longName);
+      userGroup.setLongName(longName);
+    }
+    if (email != null && !email.equals(user.getEmail())) {
+      checkIfEmailAreInUse(email);
+      user.setEmail(email);
+    }
+    user.setLanguage(findLanguage(userDTO.getLanguage().getCode()));
+    persist(user);
+    groupManager.persist(userGroup);
+    return user;
   }
 
 }

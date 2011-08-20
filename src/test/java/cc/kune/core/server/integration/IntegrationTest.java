@@ -42,8 +42,12 @@ public abstract class IntegrationTest {
   UserService userService;
 
   protected UserInfoDTO doLogin() throws DefaultException, IOException {
+    return doLogin(getSiteAdminShortName(), properties.getAdminPassword());
+  }
+
+  protected UserInfoDTO doLogin(final String nick, final String pass) throws IOException {
     waveLogin();
-    return userService.login(getSiteAdminShortName(), properties.getAdminPassword(), token);
+    return userService.login(nick, pass, token);
   }
 
   protected String doLoginWithDummyUser() throws DefaultException, IOException {
@@ -59,7 +63,11 @@ public abstract class IntegrationTest {
     return properties.getDefaultLicense();
   }
 
-  protected String getDefSiteGroupName() {
+  protected String getDefSiteLongName() {
+    return properties.getDefaultSiteName();
+  }
+
+  protected String getDefSiteShortName() {
     return properties.getDefaultSiteShortName();
   }
 

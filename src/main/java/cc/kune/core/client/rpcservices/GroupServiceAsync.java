@@ -24,6 +24,7 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -50,5 +51,8 @@ public interface GroupServiceAsync {
 
   void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled,
       AsyncCallback<Void> asyncCallback);
+
+  void updateGroup(String userHash, StateToken token, GroupDTO groupDTO,
+      AsyncCallback<StateAbstractDTO> callback);
 
 }

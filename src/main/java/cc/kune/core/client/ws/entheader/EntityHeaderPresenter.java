@@ -25,8 +25,8 @@ import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.gspace.client.options.logo.CurrentLogoChangedEvent;
-import cc.kune.gspace.client.options.logo.CurrentLogoChangedEvent.CurrentLogoChangedHandler;
+import cc.kune.gspace.client.options.logo.CurrentEntityChangedEvent;
+import cc.kune.gspace.client.options.logo.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -85,9 +85,10 @@ public class EntityHeaderPresenter extends
         setGroupLogo(session.getCurrentState().getGroup());
       }
     });
-    eventBus.addHandler(CurrentLogoChangedEvent.getType(), new CurrentLogoChangedHandler() {
+    eventBus.addHandler(CurrentEntityChangedEvent.getType(), new CurrentEntityChangedHandler() {
       @Override
-      public void onCurrentLogoChanged(final CurrentLogoChangedEvent event) {
+      public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
+        setGroupLogo(session.getCurrentState().getGroup());
         reloadGroupLogoImage();
       }
     });
@@ -101,11 +102,6 @@ public class EntityHeaderPresenter extends
   @Override
   public void addWidget(final IsWidget widget) {
     getView().addWidget(widget);
-  }
-
-  @Override
-  public void refreshGroupLogo() {
-    setGroupLogo(session.getCurrentState().getGroup());
   }
 
   @Override
