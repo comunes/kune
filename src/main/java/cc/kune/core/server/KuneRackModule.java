@@ -81,7 +81,7 @@ public class KuneRackModule implements RackModule {
   public KuneRackModule(final String jpaUnit, final Scope sessionScope) {
 
     final SystemConfiguration sysConf = new SystemConfiguration();
-    final String kuneConfig = sysConf.getString("kune.config");
+    final String kuneConfig = sysConf.getString("kune.server.config");
 
     configModule = new AbstractModule() {
       @Override

@@ -19,10 +19,13 @@
  */
 package cc.kune.core.server.properties;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.MessageFormat;
-import java.util.Properties;
+import java.util.List;
+
+import org.apache.commons.configuration.CompositeConfiguration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.SystemConfiguration;
 
 import cc.kune.core.server.ServerException;
 
@@ -31,46 +34,61 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class KunePropertiesDefault implements KuneProperties {
+  private CompositeConfiguration config;
   private final String fileName;
-  private Properties properties;
 
   @Inject
   public KunePropertiesDefault(@PropertiesFileName final String fileName) {
     this.fileName = fileName;
     try {
-      properties = new Properties();
-      final InputStream input = getInputStream(fileName);
-      properties.load(input);
-    } catch (final IOException e) {
+      config = new CompositeConfiguration();
+      config.addConfiguration(new SystemConfiguration());
+      config.addConfiguration(new PropertiesConfiguration(fileName));
+    } catch (final ConfigurationException e) {
       final String msg = MessageFormat.format("Couldn't open property file {0}", fileName);
       throw new ServerException(msg, e);
     }
+  }
 
+  private void checkNull(final String key, final Object value) {
+    if (value == null) {
+      throw new ServerException("PROPERTY: " + key + " not defined in " + fileName);
+    }
   }
 
   @Override
   public String get(final String key) {
-    final String value = properties.getProperty(key);
-    if (value == null) {
-      throw new ServerException("PROPERTY: " + key + " not defined in " + fileName);
-    }
+    final String value = config.getString(key);
+    checkNull(key, value);
     return value;
   }
 
   @Override
   public String get(final String key, final String defaultValue) {
-    final String value = properties.getProperty(key);
+    final String value = config.getString(key);
     return value != null ? value : defaultValue;
   }
 
-  private InputStream getInputStream(final String fileName) {
-    final InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-        fileName);
-    if (input == null) {
-      final String msg = MessageFormat.format("Properties file: ''{0}'' not found", fileName);
-      throw new ServerException(msg);
-    }
-    return input;
+  @Override
+  public Integer getInteger(final String key) {
+    final Integer value = config.getInt(key);
+    checkNull(key, value);
+    return value;
+  }
+
+  @Override
+  public List<String> getList(final String key) {
+    @SuppressWarnings("unchecked")
+    final List<String> value = config.getList(key);
+    checkNull(key, value);
+    return value;
+  }
+
+  @Override
+  public Long getLong(final String key) {
+    final Long value = config.getLong(key);
+    checkNull(key, value);
+    return value;
   }
 
 }

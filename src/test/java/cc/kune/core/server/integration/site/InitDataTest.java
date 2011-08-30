@@ -39,43 +39,45 @@ import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 
-public class SiteServiceTest extends IntegrationTest {
+public class InitDataTest extends IntegrationTest {
 
-    @Inject
-    SiteService service;
-    @Inject
-    UserSession session;
-    @Inject
-    Group groupFinder;
-    @Inject
-    I18nLanguageManager i18nLangManager;
+  @Inject
+  Group groupFinder;
+  @Inject
+  I18nLanguageManager i18nLangManager;
+  @Inject
+  SiteService service;
+  @Inject
+  UserSession session;
 
-    @Before
-    public void init() {
-        new IntegrationTestHelper(this);
+  private void assertValidLicenseDTOList(final ArrayList<LicenseDTO> licenseList) {
+    assertTrue(licenseList.size() > 0);
+    for (final Object o : licenseList) {
+      assertNotNull(o);
+      assertEquals(LicenseDTO.class, o.getClass());
     }
+  }
 
-    @Test
-    public void testGetInitData() throws Exception {
-        final InitDataDTO initData = service.getInitData(null);
-        assertNotNull(initData);
-        assertValidLicenseDTOList(initData.getLicenses());
-        assertTrue(initData.getLanguages().size() > 0);
-        assertTrue(initData.getCountries().size() > 0);
-        assertNotNull(initData.getLanguages().get(0).getCode());
-        assertNotNull(initData.getCountries().get(0).getCode());
-        assertNotNull(initData.getGroupTools());
-        assertNotNull(initData.getUserTools());
-        assertTrue(initData.getGroupTools().size() > 0);
-        assertTrue(initData.getUserTools().size() > 0);
-    }
+  @Before
+  public void init() {
+    new IntegrationTestHelper(this);
+  }
 
-    private void assertValidLicenseDTOList(final ArrayList<LicenseDTO> licenseList) {
-        assertTrue(licenseList.size() > 0);
-        for (final Object o : licenseList) {
-            assertNotNull(o);
-            assertEquals(LicenseDTO.class, o.getClass());
-        }
-    }
+  @Test
+  public void testGetInitData() throws Exception {
+    final InitDataDTO initData = service.getInitData(null);
+    assertNotNull(initData);
+    assertValidLicenseDTOList(initData.getLicenses());
+    assertTrue(initData.getLanguages().size() > 0);
+    assertTrue(initData.getCountries().size() > 0);
+    assertNotNull(initData.getLanguages().get(0).getCode());
+    assertNotNull(initData.getCountries().get(0).getCode());
+    assertNotNull(initData.getGroupTools());
+    assertNotNull(initData.getUserTools());
+    assertTrue(initData.getGroupTools().size() > 0);
+    assertTrue(initData.getUserTools().size() > 0);
+    assertTrue(initData.getgSpaceThemes().size() > 1);
+    assertTrue(initData.getReservedWords().size() > 1);
+  }
 
 }

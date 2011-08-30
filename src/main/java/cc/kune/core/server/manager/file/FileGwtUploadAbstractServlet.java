@@ -46,8 +46,8 @@ public abstract class FileGwtUploadAbstractServlet extends UploadAction {
 
   public FileGwtUploadAbstractServlet(final KuneProperties kuneProperties) {
     this.kuneProperties = kuneProperties;
-    this.maxSize = Integer.valueOf(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE_IN_KS));
-    this.uploadDelay = Integer.valueOf(kuneProperties.get(KuneProperties.UPLOAD_DELAY_FOR_TEST));
+    this.maxSize = kuneProperties.getInteger(KuneProperties.UPLOAD_MAX_FILE_SIZE_IN_KS);
+    this.uploadDelay = kuneProperties.getInteger(KuneProperties.UPLOAD_DELAY_FOR_TEST);
   }
 
   protected abstract String createUploadedFile(final String userHash, final StateToken stateToken,

@@ -20,6 +20,7 @@
 package cc.kune.core.server.rpc;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.TimeZone;
 
 import cc.kune.core.client.errors.DefaultException;
@@ -80,12 +81,12 @@ public class SiteRPC implements RPC, SiteService {
     this.serverToolRegistry = serverToolRegistry;
     this.extMediaDescManager = extMediaDescManager;
     data = loadInitData();
-    siteThemes = getSiteThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
+    siteThemes = getSiteThemes(this.kuneProperties.getList(KuneProperties.WS_THEMES));
     reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
   }
 
   private String[] getColors(final String key) {
-    return this.kuneProperties.get(key).split(",");
+    return this.kuneProperties.getList(key).toArray(new String[0]);
   }
 
   @Override
@@ -104,7 +105,7 @@ public class SiteRPC implements RPC, SiteService {
     return dataMapped;
   }
 
-  private HashMap<String, GSpaceTheme> getSiteThemes(final String[] themes) {
+  private HashMap<String, GSpaceTheme> getSiteThemes(final List<String> themes) {
     final HashMap<String, GSpaceTheme> map = new HashMap<String, GSpaceTheme>();
     for (final String theme : themes) {
       map.put(theme, getThemeFromProperties(theme));
@@ -142,10 +143,10 @@ public class SiteRPC implements RPC, SiteService {
     data.setMaxFileSizeInMb(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE));
     data.setUserTools(serverToolRegistry.getToolsForUsers());
     data.setGroupTools(serverToolRegistry.getToolsForGroups());
-    data.setImgResizewidth(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH)));
-    data.setImgThumbsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE)));
-    data.setImgCropsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE)));
-    data.setImgIconsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE)));
+    data.setImgResizewidth(kuneProperties.getInteger(KuneProperties.IMAGES_RESIZEWIDTH));
+    data.setImgThumbsize(kuneProperties.getInteger(KuneProperties.IMAGES_THUMBSIZE));
+    data.setImgCropsize(kuneProperties.getInteger(KuneProperties.IMAGES_CROPSIZE));
+    data.setImgIconsize(kuneProperties.getInteger(KuneProperties.IMAGES_ICONSIZE));
     data.setFlvEmbedObject(kuneProperties.get(KuneProperties.FLV_EMBEDED_OBJECT));
     data.setMp3EmbedObject(kuneProperties.get(KuneProperties.MP3_EMBEDED_OBJECT));
     data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));

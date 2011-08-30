@@ -19,13 +19,14 @@
  */
 package cc.kune.core.server.properties;
 
+import java.util.List;
+
 public interface KuneProperties {
   String AVI_EMBEDED_OBJECT = "kune.media.aviembededobject";
   String CHAT_DOMAIN = "kune.chat.domain";
   String CHAT_HTTP_BASE = "kune.chat.httpbase";
   String CHAT_ROOM_HOST = "kune.chat.roomHost";
   String CURRENT_CC_VERSION = "kune.currentccversion";
-
   String DEFAULT_SITE_SHORT_NAME = "kune.default.site.shortName";
   String FLV_EMBEDED_OBJECT = "kune.media.flvembededobject";
   String IMAGES_CROPSIZE = "kune.images.cropsize";
@@ -57,4 +58,10 @@ public interface KuneProperties {
   String get(String key);
 
   String get(String key, String defaultValue);
+
+  Integer getInteger(String key);
+
+  List<String> getList(String key);
+
+  Long getLong(String key);
 }

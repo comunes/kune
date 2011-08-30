@@ -1,7 +1,6 @@
 package cc.kune.core.server.properties;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import cc.kune.core.client.errors.DefaultException;
@@ -15,8 +14,7 @@ public class ReservedWordsRegistry extends ArrayList<String> {
   private static final long serialVersionUID = 7455756500618858360L;
 
   public static List<String> fromList(final KuneProperties kuneProperties) {
-    return Arrays.asList(kuneProperties.get(KuneProperties.RESERVED_WORDS, "root").replaceAll(" ", "").split(
-        ","));
+    return kuneProperties.getList(KuneProperties.RESERVED_WORDS);
   }
 
   @Inject

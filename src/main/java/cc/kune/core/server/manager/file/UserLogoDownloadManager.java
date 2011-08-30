@@ -77,7 +77,8 @@ public class UserLogoDownloadManager extends HttpServlet {
   }
 
   private void noResult(final HttpServletResponse resp) throws IOException {
-    FileDownloadManagerUtils.returnNotFound(resp);
+    // FileDownloadManagerUtils.returnNotFound(resp);
+    FileDownloadManagerUtils.returnFile("src/main/webapp/others/unknown.jpg", resp.getOutputStream());
   }
 
   private void replyDefAvatar(final HttpServletResponse resp) throws FileNotFoundException, IOException {

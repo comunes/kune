@@ -793,9 +793,9 @@
           </commandlineArgs>
           <systemProperties>
             <systemProperty>
-              <key>kune.config</key>
-              <!-- <value>/src/main/resources/kune.properties</value> -->
-              <value>kune.properties</value>
+              <key>kune.server.config</key>
+              <value>src/main/resources/kune.properties</value>
+  <!--               <value>kune.properties</value> -->
             </systemProperty>
             <systemProperty>
               <key>wave.server.config</key>
