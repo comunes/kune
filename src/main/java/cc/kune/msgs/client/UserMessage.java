@@ -49,14 +49,17 @@ public class UserMessage extends Composite implements HasText {
 
   interface MessageUiBinder extends UiBinder<Widget, UserMessage> {
   }
+
   public interface MsgTemplate extends SafeHtmlTemplates {
     @Template("<span>{0}</span>")
     SafeHtml format(SafeHtml message);
   }
+
   public interface MsgWithTitleTemplate extends SafeHtmlTemplates {
-    @Template("<span><b>{0}</b><br/><p>{1}</p></span>")
+    @Template("<span><span class=\"k-msg-title\">{0}</span><p>{1}</p></span>")
     SafeHtml format(SafeHtml title, SafeHtml message);
   }
+
   private static String closeTitle = "Close";
 
   private static int fadeMills = 5000;

@@ -26,14 +26,17 @@ import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.DecoratedTabPanel;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogView {
@@ -51,7 +54,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private final ProvidersCollection provCollection;
   private final String sndBtnId;
   private final String sndBtnTitle;
-  private DecoratedTabPanel tabPanel;
+  private TabLayoutPanel tabPanel;
   private String title;
   private int width;
 
@@ -108,6 +111,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   public void addTab(final IsWidget view, final IsWidget tabWidget) {
     createDialogIfNecessary();
     tabPanel.add(view, tabWidget);
+    setPositions();
   }
 
   @Override
@@ -121,10 +125,12 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         height).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(
         dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(sndBtnId).title(title).build();
     messageErrorBar = new MessageToolbar(images, errorLabelId);
-    tabPanel = new DecoratedTabPanel();
+    tabPanel = new TabLayoutPanel(25, Unit.PX);
     provCollection.createAll();
-    tabPanel.getDeckPanel().setSize(String.valueOf(width), String.valueOf(height));
+    tabPanel.setSize(String.valueOf(width), String.valueOf(height));
     dialog.getInnerPanel().add(tabPanel);
+    tabPanel.addStyleName("k-tabpanel-aditionalpadding");
+    tabPanel.addStyleName("k-tabs");
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -187,6 +193,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   public void insertTab(final IsWidget tab, final IsWidget tabTitle, final int index) {
     createDialogIfNecessary();
     tabPanel.insert(tab, tabTitle, index);
+    setPositions();
   }
 
   public boolean isVisible() {
@@ -211,6 +218,25 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     this.iconCls = iconCls;
     if (dialog != null) {
       dialog.setTitleIcon(iconCls);
+    }
+  }
+
+  // private void setPosition(final IsWidget widget) {
+  // // DOM.setStyleAttribute(widget.asWidget().getElement(), "position",
+  // // "relative");
+  // //
+  // (widget.asWidget()).getParent().getElement().getStyle().setPosition(Position.RELATIVE);
+  // }
+
+  private void setPositions() {
+    for (int i = 0; i < tabPanel.getWidgetCount(); i++) {
+      final Widget widget = tabPanel.getWidget(i);
+      DOM.setStyleAttribute(widget.getElement(), "position", "relative");
+
+      final Element parent = DOM.getParent(widget.getElement());
+      DOM.setStyleAttribute(parent, "overflowX", "visible");
+      DOM.setStyleAttribute(parent, "overflowY", "visible");
+      DOM.setStyleAttribute(parent, "position", "relative");
     }
   }
 

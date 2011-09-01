@@ -79,6 +79,9 @@ public interface CoreResources extends ClientBundle {
   @Source("arrow-right-white.gif")
   ImageResource arrowRightWhite();
 
+  @Source("arrow-undo.png")
+  ImageResource arrowUndo();
+
   @Source("arrow-up-green.png")
   ImageResource arrowUpGreen();
 
@@ -315,6 +318,9 @@ public interface CoreResources extends ClientBundle {
 
   @Source("content_edit.png")
   ImageResource contentEdit();
+
+  @Source("copy.png")
+  ImageResource copy();
 
   @Source("copyleft.png")
   ImageResource copyleft();

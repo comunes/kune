@@ -189,4 +189,13 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(4, result2.getList().size());
     rollbackTransaction();
   }
+
+  @Test
+  public void sameGroupHasSameHash() throws Exception {
+    final Group group1 = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+        GroupType.PROJECT);
+    final Group group2 = new Group("ysei", "", defLicense, GroupType.PROJECT);
+    assertEquals(group1, group2);
+    assertEquals(group1.hashCode(), group2.hashCode());
+  }
 }

@@ -266,6 +266,7 @@ public class FolderViewerPresenter extends
     final StateContainerDTO stateContainer = (StateContainerDTO) state;
     getView().setContainer(stateContainer);
     final AccessRights rights = stateContainer.getContainerRights();
+    // NotifyUser.info("Rights: " + rights, true);
     final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContainer.getGroup(),
         stateContainer.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
     final ContainerDTO container = stateContainer.getContainer();

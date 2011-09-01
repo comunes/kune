@@ -5,21 +5,22 @@
   <!-- excluding test sources for this module workaround for open issue 4454
     see http://code.google.com/p/google-web-toolkit/issues/detail?id=4454 -->
   <source path='client'
-    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
-  <source path="shared" />
-  <public path="public" />
+    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
+  <source path="shared"/>
+  <public path="public"/>
   <!-- Dependencies ============================================= -->
-  <inherits name="com.google.gwt.user.User" />
-  <inherits name="com.google.gwt.xml.XML" />
-  <inherits name="cc.kune.gspace.GSpace" />
-  <inherits name="cc.kune.msgs.KuneMsgs" />
-  <inherits name="cc.kune.common.KuneCommon" />
+  <inherits name="com.google.gwt.user.User"/>
+  <inherits name="com.google.gwt.xml.XML"/>
+  <inherits name="cc.kune.gspace.GSpace"/>
+  <inherits name="cc.kune.msgs.KuneMsgs"/>
+  <inherits name="cc.kune.common.KuneCommon"/>
   <!-- Because of XML actions -->
-      <inherits name='com.calclab.emite.core.EmiteCore' />
-  <inherits name="com.extjs.gxt.ui.GXT" />
-<!--  <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />-->
-  <inherits name="com.calclab.suco.Suco" />
-  <inherits name='com.gwtplatform.mvp.Mvp' />
+  <inherits name='com.calclab.emite.core.EmiteCore'/>
+  <inherits name="com.extjs.gxt.ui.GXT"/>
+  <!-- <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" /> -->
+  <inherits name="com.calclab.suco.Suco"/>
+  <inherits name='com.gwtplatform.mvp.Mvp'/>
+  <inherits name='com.allen_sauer.gwt.dnd.gwt-dnd'/>
   <!-- Styles =================================================== -->
   <!-- <inherits name="com.google.gwt.user.theme.standard.Standard" /> -->
 </module>

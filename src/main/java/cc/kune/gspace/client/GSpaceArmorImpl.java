@@ -126,6 +126,7 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
 
   @Override
   public void enableCenterScroll(final boolean enable) {
+    // TODO use here Element.getStyle()...
     if (enable) {
       centerScroll.setAlwaysShowScrollBars(false);
       DOM.setStyleAttribute(centerScroll.getElement(), "position", "absolute");

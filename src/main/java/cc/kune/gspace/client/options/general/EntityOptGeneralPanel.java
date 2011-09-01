@@ -28,6 +28,7 @@ import cc.kune.gspace.client.options.EntityOptionsView;
 
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -92,8 +93,15 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
     final Field field : super.getFormPanel().getFields()) {
       // field.addListener(Events.Change, listener);
       field.addListener(Events.Blur, listener);
+      field.addListener(Events.OnKeyPress, new Listener<FieldEvent>() {
+        @Override
+        public void handleEvent(final FieldEvent fe) {
+          if (fe.getEvent().getKeyCode() == 13) {
+            changeHandler.onChange(null);
+          }
+        }
+      });
     }
-
   }
 
   @Override

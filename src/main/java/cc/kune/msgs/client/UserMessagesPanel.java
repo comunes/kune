@@ -23,9 +23,12 @@ import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.msgs.client.UserMessagesPresenter.UserMessagesView;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -36,7 +39,9 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
   private static MessagesPanelUiBinder uiBinder = GWT.create(MessagesPanelUiBinder.class);
 
   @UiField
-  VerticalPanel vp;
+  FlowPanel bottom;
+  @UiField
+  VerticalPanel panel;
 
   public UserMessagesPanel() {
     initWidget(uiBinder.createAndBindUi(this));
@@ -46,6 +51,17 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
   public void add(final NotifyLevel level, final String title, final String message, final String id,
       final boolean closeable, final CloseCallback closeCallback) {
     final UserMessage msg = new UserMessage(level, title, message, id, closeable, closeCallback);
-    vp.add(msg);
+    panel.add(msg);
+    if (panel.getWidgetCount() == 2) {
+      bottom.setVisible(true);
+    }
+    msg.addAttachHandler(new Handler() {
+      @Override
+      public void onAttachOrDetach(final AttachEvent event) {
+        if (!event.isAttached() && panel.getWidgetCount() == 1) {
+          bottom.setVisible(false);
+        }
+      }
+    });
   }
 }

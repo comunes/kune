@@ -1,6 +1,4 @@
-CHARSET              "UTF-8             ";
-
-body {
+CHARSET                 "UTF-8                "; body {
   background-color: transparent;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -923,13 +921,13 @@ button.k-button-left:hover {
   outline: 0 none;
 }
 
-button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,input[type="reset"][disabled],input[type="button"][disabled]:active,input[type="button"][disabled],select[disabled]>input[type="button"],select[disabled]>input[type="button"]:active,input[type="submit"][disabled]:active,input[type="submit"][disabled],.k-button-disabled, button.k-button-disabled
+button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,input[type="reset"][disabled],input[type="button"][disabled]:active,input[type="button"][disabled],select[disabled]>input[type="button"],select[disabled]>input[type="button"]:active,input[type="submit"][disabled]:active,input[type="submit"][disabled],.k-button-disabled,button.k-button-disabled
   {
   color: gray !important;
   border-color: #CCCCCC !important;
   background: inherits !important;
-  kfilter: alpha(opacity =                                                       60
-    ) !important;
+  kfilter: alpha(opacity =
+      60) !important;
   -moz-opacity: 0.60 !important;
   -khtml-opacity: 0.60 !important;
   opacity: 0.60 !important;
@@ -1214,8 +1212,8 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                                                       90
-    );
+  kfilter: alpha(opacity =
+      90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1434,8 +1432,7 @@ table.k-folder-viewer {
   border-radius: 4px;
 }
 
-button.k-drop-allowed-hover,
-.k-drop-allowed-hover {
+button.k-drop-allowed-hover,.k-drop-allowed-hover {
   border: dashed 2px #3a9fd6 !important;
 }
 
@@ -1478,4 +1475,32 @@ button.k-drop-allowed-hover,
 .k-i18n-recommend {
   border: 1px solid gray;
   background-color: #F2F2F2;
+}
+
+.k-tabs .gwt-TabLayoutPanelTab {
+  background-color: #d38d5f;
+  color: #552200;
+  height: 20px !important;
+  margin: 0 2px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.k-tabs .gwt-TabLayoutPanelTab-selected {
+  background-color: #552200;
+  color: #FFF;
+}
+
+.k-tabpanel-aditionalpadding {
+  padding-bottom: 27px !important;
+}
+
+.k-tabs .gwt-TabLayoutPanel, .k-tabs .gwt-TabLayoutPanelTab {
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-left-radius: 5px;
 }

@@ -1,9 +1,13 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
-  <g:VerticalPanel verticalAlignment="ALIGN_TOP"
-    ui:field="vp" width="100%" height=""
-    addStyleNames="k-msg-panel, k-box-10shadow, k-top-10corners"
+  <g:VerticalPanel verticalAlignment="ALIGN_TOP" width="100%"
+    height="" addStyleNames="k-msg-panel, k-box-10shadow, k-top-10corners"
     spacing="10">
+    <g:VerticalPanel ui:field="panel" width="100%"
+      height="">
+    </g:VerticalPanel>
+    <g:FlowPanel ui:field="bottom" visible="false"
+      addStyleNames="k-msg-panel-bottom"/>
   </g:VerticalPanel>
 </ui:UiBinder>

@@ -16,7 +16,6 @@
   <inherits name="cc.kune.pspace.PSpace" />
   <inherits name="com.calclab.suco.Suco" />
   <inherits name="org.adamtacy.GWTEffects"></inherits>
-  <inherits name='com.allen_sauer.gwt.dnd.gwt-dnd' />
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
   <!-- <source path='shared'/> -->

@@ -82,7 +82,10 @@ public class GroupList {
     case EVERYONE:
       return true;
     default:
-      return list.contains(group);
+      // Workaround for:
+      // http://www.timo-ernst.net/2011/06/remove-and-contains-not-working-on-your-java-set/
+      return new HashSet<Group>(list).contains(group);
+      // return list.contains(group);
     }
   }
 

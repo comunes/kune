@@ -22,6 +22,7 @@ package cc.kune.core.server.integration.site;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -36,6 +37,7 @@ import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.SessionExpiredException;
+import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
@@ -46,10 +48,13 @@ import cc.kune.core.server.rpc.SocialNetworkRPC;
 import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.shared.domain.UserSNetVisibility;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.I18nCountryDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.SubscriptionMode;
 import cc.kune.core.shared.dto.TimeZoneDTO;
 import cc.kune.core.shared.dto.UserDTO;
@@ -60,6 +65,8 @@ import com.google.inject.Inject;
 import com.google.inject.persist.UnitOfWork;
 
 public class UserServiceTest extends IntegrationTest {
+  @Inject
+  ContentService contentService;
   private I18nCountryDTO country;
   @Inject
   I18nLanguageManager i18nLangManager;
@@ -113,6 +120,22 @@ public class UserServiceTest extends IntegrationTest {
     final UserDTO user = new UserDTO(properties.getAdminShortName(), "test", "123456",
         "example1234@example.com", lang, country, timezone, null, true, SubscriptionMode.manual, "blue");
     userService.createUser(user, false);
+  }
+
+  @Test
+  public void createUserShouldPermitEditOfSelfHomepage() throws Exception {
+    assertNull(session.getUser().getId());
+    final UserDTO user = new UserDTO("test", "test", "123456", "example1234@example.com", lang, country,
+        timezone, null, true, SubscriptionMode.manual, "blue");
+    userService.createUser(user, true);
+    doLogin("test", "123456");
+    final StateAbstractDTO homepage = contentService.getContent(getHash(), new StateToken("test"));
+    assertTrue(homepage.getGroupRights().isAdministrable());
+    assertTrue(homepage.getGroupRights().isEditable());
+    assertTrue(((StateContentDTO) homepage).getContentRights().isAdministrable());
+    assertTrue(((StateContentDTO) homepage).getContentRights().isEditable());
+    assertTrue(((StateContentDTO) homepage).getContainerRights().isAdministrable());
+    assertTrue(((StateContentDTO) homepage).getContainerRights().isEditable());
   }
 
   @Before

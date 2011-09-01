@@ -317,6 +317,6 @@ public class Group implements HasId {
 
   @Override
   public String toString() {
-    return "Group[" + shortName + "]";
+    return "Group[" + shortName + ", " + hashCode() + "]";
   }
 }
