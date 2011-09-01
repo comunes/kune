@@ -376,19 +376,6 @@ I am talking about, but I'm sure there is something to do.
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/e8e14b16e57b266f
    Also autocomplete user/passwordi (for browser store):
    http://groups.google.fr/group/Google-Web-Toolkit/browse_thread/thread/2b2ce0b6aaa82461
-** vjrj <v> kune debian package:
-   Study fat jar + deb package:
-   http://anydoby.com/fatjar/
-   Currently we are testing this snapshot:
-   http://mojo.codehaus.org/deb-maven-plugin/
-   with: mvn package -Dmaven.test.skip=true
-   generates a deb with big (and not very accute) dependencies:
-   dpkg -X trunk/org.ourproject-kune-0.0.5-0.deb
-   dpkg -I trunk/org.ourproject-kune-0.0.5-0.deb
-   Other possibility:
-   http://vafer.org/blog/20070918215154
-   Related info:
-   http://java.debian.net/building.html
 *** steps
 **** create user kune
 **** create /var/lib/kune/uploads and give permissions

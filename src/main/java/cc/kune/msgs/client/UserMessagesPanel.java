@@ -52,7 +52,7 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
       final boolean closeable, final CloseCallback closeCallback) {
     final UserMessage msg = new UserMessage(level, title, message, id, closeable, closeCallback);
     panel.add(msg);
-    if (panel.getWidgetCount() == 2) {
+    if (panel.getWidgetCount() == 1) {
       bottom.setVisible(true);
     }
     msg.addAttachHandler(new Handler() {

@@ -81,22 +81,13 @@
       <id>dyndns-repo</id>
       <url>http://maven.dyndns.org/2</url>
     </repository>
-    <repository>
-      <id>google-maven-snapshot-repository</id>
-      <name>Google Maven Snapshot Repository</name>
-      <url>https://oss.sonatype.org/content/repositories/google-snapshots/
-      </url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>gwtplatform.snapshot.repo</id>
-      <name>Gwtplatform snapshot repository</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/
-      </url>
-      <layout>default</layout>
-    </repository>
+    <!-- seems that these are not working/neccesary now: -->
+    <!-- <repository> <id>google-maven-snapshot-repository</id> <name>Google
+      Maven Snapshot Repository</name> <url>https://oss.sonatype.org/content/repositories/google-snapshots/
+      </url> <snapshots> <enabled>true</enabled> </snapshots> </repository> <repository>
+      <id>gwtplatform.snapshot.repo</id> <name>Gwtplatform snapshot repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/ </url> <layout>default</layout>
+      </repository> -->
     <repository>
       <id>openqa.org</id>
       <name>Openqa Release Repository</name>
@@ -795,7 +786,7 @@
             <systemProperty>
               <key>kune.server.config</key>
               <value>src/main/resources/kune.properties</value>
-  <!--               <value>kune.properties</value> -->
+              <!-- <value>kune.properties</value> -->
             </systemProperty>
             <systemProperty>
               <key>wave.server.config</key>

@@ -75,20 +75,6 @@ public class GroupList {
     }
   }
 
-  public boolean checkIfIncludes(final Group group, final Set<Group> list, final GroupListMode mode) {
-    switch (mode) {
-    case NOBODY:
-      return false;
-    case EVERYONE:
-      return true;
-    default:
-      // Workaround for:
-      // http://www.timo-ernst.net/2011/06/remove-and-contains-not-working-on-your-java-set/
-      return new HashSet<Group>(list).contains(group);
-      // return list.contains(group);
-    }
-  }
-
   public void clear() {
     list.clear();
   }
@@ -110,7 +96,18 @@ public class GroupList {
   }
 
   public boolean includes(final Group group) {
-    return checkIfIncludes(group, this.list, mode);
+    // Duplicate code in GroupListDTO
+    switch (mode) {
+    case NOBODY:
+      return false;
+    case EVERYONE:
+      return true;
+    default:
+      // Workaround for:
+      // http://www.timo-ernst.net/2011/06/remove-and-contains-not-working-on-your-java-set/
+      return new HashSet<Group>(list).contains(group);
+      // return list.contains(group);
+    }
   }
 
   public boolean isEmpty() {
