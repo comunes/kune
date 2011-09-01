@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="297.16839"
-     inkscape:cy="1014"
+     inkscape:zoom="1.2968783"
+     inkscape:cx="372.04724"
+     inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -57,7 +57,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -701,5 +701,25 @@
          style="color:#000000;fill:none;stroke:#002255;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          sodipodi:type="arc" />
     </g>
+    <rect
+       style="color:#000000;fill:#008000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.0625;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect8831"
+       width="23.247551"
+       height="12.313751"
+       x="24.384661"
+       y="46.940243"
+       rx="3.7326424"
+       ry="3.7326424" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.0625;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="24.299999"
+       y="56.452183"
+       id="text8833"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan8835"
+         x="24.299999"
+         y="56.452183">1234</tspan></text>
   </g>
 </svg>

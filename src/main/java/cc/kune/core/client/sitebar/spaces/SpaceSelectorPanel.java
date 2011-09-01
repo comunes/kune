@@ -29,16 +29,16 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView {
-  interface SpaceSelectorViewImplUiBinder extends UiBinder<Widget, SpaceSelectorViewImpl> {
+public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
+  interface SpaceSelectorPanelUiBinder extends UiBinder<Widget, SpaceSelectorPanel> {
   }
-  private static SpaceSelectorViewImplUiBinder uiBinder = GWT.create(SpaceSelectorViewImplUiBinder.class);
+  private static SpaceSelectorPanelUiBinder uiBinder = GWT.create(SpaceSelectorPanelUiBinder.class);
   @UiField
   ToggleButton groupButton;
   private final Tooltip groupSpaceTooltip;
@@ -46,7 +46,7 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
   ToggleButton homeButton;
   private final Tooltip homeSpaceTooltip;
   @UiField
-  HorizontalPanel panel;
+  FlowPanel panel;
   @UiField
   ToggleButton publicButton;
   private final Tooltip publicSpaceTooltip;
@@ -55,7 +55,7 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
   private final Tooltip userSpaceTooltip;
 
   @Inject
-  public SpaceSelectorViewImpl(final GSpaceArmor armor, final I18nTranslationService i18n,
+  public SpaceSelectorPanel(final GSpaceArmor armor, final I18nTranslationService i18n,
       final GSpaceArmorResources res) {
     armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
     // homeButton.setVisible(false);

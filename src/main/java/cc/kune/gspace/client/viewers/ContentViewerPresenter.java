@@ -21,6 +21,7 @@ package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
+import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.EditEvent;
@@ -28,6 +29,7 @@ import cc.kune.common.client.ui.EditEvent.EditHandler;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
@@ -92,8 +94,9 @@ public class ContentViewerPresenter extends
 
   @Inject
   public ContentViewerPresenter(final EventBus eventBus, final ContentViewerView view,
-      final ContentViewerProxy proxy, final Session session, final ActionRegistryByType actionsRegistry,
-      final Provider<RenameAction> renameAction, final PathToolbarUtils pathToolbarUtils) {
+      final StateManager stateManager, final ContentViewerProxy proxy, final Session session,
+      final ActionRegistryByType actionsRegistry, final Provider<RenameAction> renameAction,
+      final PathToolbarUtils pathToolbarUtils) {
     super(eventBus, view, proxy);
     this.session = session;
     this.actionsRegistry = actionsRegistry;
@@ -112,7 +115,13 @@ public class ContentViewerPresenter extends
         getView().signIn();
       }
     });
-
+    stateManager.addBeforeStateChangeListener(new BeforeActionListener() {
+      @Override
+      public boolean beforeAction() {
+        getView().detach();
+        return true;
+      }
+    });
   }
 
   @Override

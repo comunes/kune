@@ -20,6 +20,9 @@
 package cc.kune.wave.client;
 
 import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.wave.client.inboxcount.InboxCountPanel;
+import cc.kune.wave.client.inboxcount.InboxCountPresenter;
+import cc.kune.wave.client.inboxcount.InboxCountPresenter.InboxCountView;
 
 public class WaveGinModule extends ExtendedGinModule {
   /*
@@ -33,5 +36,7 @@ public class WaveGinModule extends ExtendedGinModule {
     s(WaveStatusIndicator.class);
     eagle(WaveParts.class);
     s(KuneWaveProfileManager.class);
+    s(InboxCountView.class, InboxCountPanel.class);
+    s(InboxCountPresenter.class);
   }
 }

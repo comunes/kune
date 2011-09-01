@@ -162,7 +162,6 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       channel = webClient.getChannel();
       profiles = webClient.getProfiles();
       idGenerator = ClientIdGenerator.create();
-      // loading.addClassName("kune-Margin-40-tb");
     }
   }
 
@@ -202,10 +201,6 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     webClient.clear();
     waveClear();
 
-    if (waveHolder.isAttached()) {
-      waveHolder.removeFromParent();
-      waveHolderParent.remove(waveHolder);
-    }
     waveHolderParent.add(waveHolder);
 
     // Release the display:none.
@@ -243,8 +238,16 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private void waveClear() {
     if (wave != null) {
+      // try {
       wave.destroy();
+      // } catch (final RuntimeException e) {
+      // When editing: java.lang.RuntimeException: Component not found: MENU
+      // }
       wave = null;
+    }
+    if (waveHolder != null && waveHolder.isAttached()) {
+      waveHolder.removeFromParent();
+      waveHolderParent.remove(waveHolder);
     }
   }
 

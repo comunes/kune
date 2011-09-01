@@ -67,6 +67,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
+import cc.kune.wave.client.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -236,15 +237,17 @@ public class WebClient extends Composite {
   private IdGenerator idGenerator;
 
   private RemoteViewServiceMultiplexer channel;
+  private final InboxCountPresenter inboxCount;
 
   /**
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, KuneWaveProfileManager profiles) {
+  public WebClient(final EventBus eventBus, KuneWaveProfileManager profiles, InboxCountPresenter inboxCount) {
 
     this.eventBus = eventBus;
     this.profiles = profiles;
+    this.inboxCount = inboxCount;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
     ErrorHandler.install();
 
@@ -439,6 +442,7 @@ public WaveWebSocketClient getWebSocket() {
           }
         };
     Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
+    search.addListener(inboxCount.getSearchListener());
     SearchPresenter.create(search, searchPanel, selectHandler, profiles);
   }
 

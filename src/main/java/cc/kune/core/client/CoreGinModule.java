@@ -76,7 +76,7 @@ import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
-import cc.kune.core.client.sitebar.spaces.SpaceSelectorViewImpl;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectorPanel;
 import cc.kune.core.client.sn.GroupSNPanel;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPanel;
@@ -148,7 +148,7 @@ public class CoreGinModule extends ExtendedGinModule {
     bindPresenter(UserNotifierPresenter.class, UserNotifierPresenter.UserNotifierView.class,
         UserNotifierViewImpl.class, UserNotifierProxy.class);
     bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
-        SpaceSelectorViewImpl.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
+        SpaceSelectorPanel.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
     bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
         SiteLogoPresenter.SiteLogoProxy.class);
     bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,

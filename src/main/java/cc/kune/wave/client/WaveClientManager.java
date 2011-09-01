@@ -29,6 +29,7 @@ import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.WaveClientParams;
 import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.wave.client.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsonUtils;
@@ -42,7 +43,7 @@ public class WaveClientManager {
   @Inject
   public WaveClientManager(final Session session, final StateManager stateManager,
       final EventBus eventBus, final UserServiceAsync userService, final GSpaceArmor wsArmor,
-      final KuneWaveProfileManager profiles) {
+      final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount) {
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
@@ -60,7 +61,7 @@ public class WaveClientManager {
                   if (userSpace.getWidgetCount() > 0) {
                     userSpace.remove(0);
                   }
-                  webClient = new WebClient(eventBus, profiles);
+                  webClient = new WebClient(eventBus, profiles, inboxCount);
                   userSpace.add(webClient);
                 } else {
                   webClient.login();
