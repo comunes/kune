@@ -113,30 +113,31 @@ public class SpaceSelectorPresenter extends
     view.getHomeBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        stateManager.gotoHistoryToken(homeToken);
+        restoreToken(homeToken);
         setDown(Space.homeSpace);
       }
     });
     view.getUserBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        stateManager.gotoHistoryToken(userToken);
+        restoreToken(userToken);
         setDown(Space.userSpace);
       }
     });
     view.getGroupBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        stateManager.gotoHistoryToken(groupToken);
+        restoreToken(groupToken);
         setDown(Space.groupSpace);
       }
     });
     view.getPublicBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        stateManager.gotoHistoryToken(publicToken);
+        restoreToken(publicToken);
         setDown(Space.publicSpace);
       }
+
     });
     eventBus.addHandler(WindowFocusEvent.getType(), new WindowFocusEvent.WindowFocusHandler() {
       @Override
@@ -153,21 +154,24 @@ public class SpaceSelectorPresenter extends
     // showTooltipWithDelay();
   }
 
-  private void onGroupSpaceSelect() {
+  private void onGroupSpaceSelect(final boolean shouldRestoreToken) {
+    restoreToken(shouldRestoreToken, groupToken);
     armor.selectGroupSpace();
     backManager.restoreBackImage();
     setDown(Space.groupSpace);
     currentSpace = Space.groupSpace;
   }
 
-  private void onHomeSpaceSelect() {
+  private void onHomeSpaceSelect(final boolean shouldRestoreToken) {
+    restoreToken(shouldRestoreToken, homeToken);
     armor.selectHomeSpace();
     backManager.clearBackImage();
     setDown(Space.homeSpace);
     currentSpace = Space.homeSpace;
   }
 
-  private void onPublicSpaceSelect() {
+  private void onPublicSpaceSelect(final boolean shouldRestoreToken) {
+    restoreToken(shouldRestoreToken, userToken);
     armor.selectPublicSpace();
     backManager.restoreBackImage();
     setDown(Space.publicSpace);
@@ -198,18 +202,19 @@ public class SpaceSelectorPresenter extends
   public void onSpaceSelect(final SpaceSelectEvent event) {
     final Space space = event.getSpace();
     if (space != currentSpace) {
+      final boolean restoreToken = event.shouldRestoreToken();
       switch (space) {
       case homeSpace:
-        onHomeSpaceSelect();
+        onHomeSpaceSelect(restoreToken);
         break;
       case userSpace:
-        onUserSpaceSelect();
+        onUserSpaceSelect(restoreToken);
         break;
       case groupSpace:
-        onGroupSpaceSelect();
+        onGroupSpaceSelect(restoreToken);
         break;
       case publicSpace:
-        onPublicSpaceSelect();
+        onPublicSpaceSelect(restoreToken);
         break;
       default:
         break;
@@ -220,13 +225,14 @@ public class SpaceSelectorPresenter extends
   @ProxyEvent
   public void onUserSignOut(final UserSignOutEvent event) {
     if (currentSpace == Space.userSpace) {
-      stateManager.gotoHistoryToken(homeToken);
+      restoreToken(homeToken);
     }
     userToken = SiteTokens.WAVEINBOX;
   }
 
-  private void onUserSpaceSelect() {
+  private void onUserSpaceSelect(final boolean shouldRestoreToken) {
     if (session.isLogged()) {
+      restoreToken(shouldRestoreToken, userToken);
       armor.selectUserSpace();
       backManager.clearBackImage();
       setDown(Space.userSpace);
@@ -237,6 +243,16 @@ public class SpaceSelectorPresenter extends
       stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, userToken));
       getView().setUserBtnDown(false);
     }
+  }
+
+  private void restoreToken(final boolean shouldRestoreToken, final String token) {
+    if (shouldRestoreToken) {
+      restoreToken(token);
+    }
+  }
+
+  private void restoreToken(final String token) {
+    stateManager.gotoHistoryToken(token);
   }
 
   @Override

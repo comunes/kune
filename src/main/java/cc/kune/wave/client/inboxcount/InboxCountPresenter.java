@@ -7,10 +7,13 @@ import org.waveprotocol.box.webclient.search.Digest;
 import org.waveprotocol.box.webclient.search.Search;
 import org.waveprotocol.box.webclient.search.Search.Listener;
 
+import cc.kune.chat.client.snd.SndClickEvent;
+import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInOrSignOutEvent;
 import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 
@@ -28,6 +31,7 @@ public class InboxCountPresenter {
 
   private int currentTotal;
   private final Map<Integer, Integer> diggests;
+  private final EventBus eventBus;
   // protected SimpleSearch search;
   private final Listener searchListener;
   private final Session session;
@@ -36,9 +40,10 @@ public class InboxCountPresenter {
   private final InboxCountView view;
 
   @Inject
-  public InboxCountPresenter(final InboxCountView view, final Session session) {
+  public InboxCountPresenter(final InboxCountView view, final Session session, final EventBus eventBus) {
     this.view = view;
     this.session = session;
+    this.eventBus = eventBus;
     // this.session = session;
     diggests = new HashMap<Integer, Integer>();
     currentTotal = Search.UNKNOWN_SIZE;
@@ -103,10 +108,24 @@ public class InboxCountPresenter {
         view.showCount(event.isLogged());
       }
     });
+
+    eventBus.addHandler(NewUserRegisteredEvent.getType(),
+        new NewUserRegisteredEvent.NewUserRegisteredHandler() {
+          @Override
+          public void onNewUserRegistered(final NewUserRegisteredEvent event) {
+            sendNoticeToUser();
+          }
+        });
+
   }
 
   public Listener getSearchListener() {
     return searchListener;
+  }
+
+  private void sendNoticeToUser() {
+    view.blink();
+    SndClickEvent.fire(eventBus);
   }
 
   private void setTotal(final int total) {
@@ -114,7 +133,7 @@ public class InboxCountPresenter {
     final boolean show = session.isLogged() && total != Search.UNKNOWN_SIZE && total > 0;
     view.showCount(show);
     if (show && total > currentTotal) {
-      view.blink();
+      sendNoticeToUser();
     }
     currentTotal = total;
   }

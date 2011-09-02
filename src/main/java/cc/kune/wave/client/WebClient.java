@@ -267,7 +267,8 @@ public class WebClient extends Composite {
 
     setupConnectionIndicator();
 
-    HistorySupport.init();
+    // Done in StateManager
+    // HistorySupport.init();
 
     //createWebSocket();
 

@@ -32,9 +32,10 @@ public class InboxCountPanel extends PopupPanel implements InboxCountView {
     addDomHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        SpaceSelectEvent.fire(eventBus, Space.userSpace);
+        SpaceSelectEvent.fire(eventBus, Space.userSpace, true);
       }
     }, ClickEvent.getType());
+
   }
 
   @Override

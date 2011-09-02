@@ -26,74 +26,99 @@ import com.google.gwt.event.shared.HasHandlers;
 
 public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandler> {
 
-    public interface HasSpaceSelectHandlers extends HasHandlers {
-        HandlerRegistration addSpaceSelectHandler(SpaceSelectHandler handler);
+  public interface HasSpaceSelectHandlers extends HasHandlers {
+    HandlerRegistration addSpaceSelectHandler(SpaceSelectHandler handler);
+  }
+
+  public interface SpaceSelectHandler extends EventHandler {
+    public void onSpaceSelect(SpaceSelectEvent event);
+  }
+
+  private static final Type<SpaceSelectHandler> TYPE = new Type<SpaceSelectHandler>();
+
+  public static void fire(final HasHandlers source, final cc.kune.core.client.sitebar.spaces.Space space) {
+    source.fireEvent(new SpaceSelectEvent(space));
+  }
+
+  public static void fire(final HasHandlers source,
+      final cc.kune.core.client.sitebar.spaces.Space space, final boolean restoreToken) {
+    source.fireEvent(new SpaceSelectEvent(space, restoreToken));
+  }
+
+  public static Type<SpaceSelectHandler> getType() {
+    return TYPE;
+  }
+  private boolean restoreToken;
+
+  private cc.kune.core.client.sitebar.spaces.Space space;
+
+  protected SpaceSelectEvent() {
+    // Possibly for serialization.
+  }
+
+  public SpaceSelectEvent(final cc.kune.core.client.sitebar.spaces.Space space) {
+    this(space, false);
+  }
+
+  public SpaceSelectEvent(final cc.kune.core.client.sitebar.spaces.Space space,
+      final boolean restoreToken) {
+    this.space = space;
+    this.setRestoreToken(restoreToken);
+  }
+
+  @Override
+  protected void dispatch(final SpaceSelectHandler handler) {
+    handler.onSpaceSelect(this);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
     }
-
-    public interface SpaceSelectHandler extends EventHandler {
-        public void onSpaceSelect(SpaceSelectEvent event);
+    if (obj == null) {
+      return false;
     }
-
-    private static final Type<SpaceSelectHandler> TYPE = new Type<SpaceSelectHandler>();
-
-    public static void fire(HasHandlers source, cc.kune.core.client.sitebar.spaces.Space space) {
-        source.fireEvent(new SpaceSelectEvent(space));
+    if (getClass() != obj.getClass()) {
+      return false;
     }
-
-    public static Type<SpaceSelectHandler> getType() {
-        return TYPE;
+    final SpaceSelectEvent other = (SpaceSelectEvent) obj;
+    if (space == null) {
+      if (other.space != null) {
+        return false;
+      }
+    } else if (!space.equals(other.space)) {
+      return false;
     }
+    return true;
+  }
 
-    private cc.kune.core.client.sitebar.spaces.Space space;
+  @Override
+  public Type<SpaceSelectHandler> getAssociatedType() {
+    return TYPE;
+  }
 
-    public SpaceSelectEvent(cc.kune.core.client.sitebar.spaces.Space space) {
-        this.space = space;
-    }
+  public cc.kune.core.client.sitebar.spaces.Space getSpace() {
+    return space;
+  }
 
-    protected SpaceSelectEvent() {
-        // Possibly for serialization.
-    }
+  @Override
+  public int hashCode() {
+    int hashCode = 23;
+    hashCode = (hashCode * 37) + (space == null ? 1 : space.hashCode());
+    return hashCode;
+  }
 
-    @Override
-    public Type<SpaceSelectHandler> getAssociatedType() {
-        return TYPE;
-    }
+  public void setRestoreToken(final boolean restoreToken) {
+    this.restoreToken = restoreToken;
+  }
 
-    public cc.kune.core.client.sitebar.spaces.Space getSpace() {
-        return space;
-    }
+  public boolean shouldRestoreToken() {
+    return restoreToken;
+  }
 
-    @Override
-    protected void dispatch(SpaceSelectHandler handler) {
-        handler.onSpaceSelect(this);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        SpaceSelectEvent other = (SpaceSelectEvent) obj;
-        if (space == null) {
-            if (other.space != null)
-                return false;
-        } else if (!space.equals(other.space))
-            return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hashCode = 23;
-        hashCode = (hashCode * 37) + (space == null ? 1 : space.hashCode());
-        return hashCode;
-    }
-
-    @Override
-    public String toString() {
-        return "SpaceSelectEvent[" + space + "]";
-    }
+  @Override
+  public String toString() {
+    return "SpaceSelectEvent[" + space + "]";
+  }
 }
