@@ -23,6 +23,7 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
@@ -43,7 +44,8 @@ public class WaveClientManager {
   @Inject
   public WaveClientManager(final Session session, final StateManager stateManager,
       final EventBus eventBus, final UserServiceAsync userService, final GSpaceArmor wsArmor,
-      final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount) {
+      final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount,
+      final TokenMatcher tokenMatcher) {
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
@@ -61,7 +63,7 @@ public class WaveClientManager {
                   if (userSpace.getWidgetCount() > 0) {
                     userSpace.remove(0);
                   }
-                  webClient = new WebClient(eventBus, profiles, inboxCount);
+                  webClient = new WebClient(eventBus, profiles, inboxCount, tokenMatcher);
                   userSpace.add(webClient);
                 } else {
                   webClient.login();

@@ -47,8 +47,6 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener2;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -284,13 +282,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
           if (session.isLogged()) {
             SpaceConfEvent.fire(eventBus, Space.userSpace, newHistoryToken);
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
-            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-              @Override
-              public void execute() {
-                ClientEvents.get().fireEvent(
-                    new WaveSelectionEvent(HistorySupport.waveRefFromHistoryToken(newHistoryToken)));
-              }
-            });
+            ClientEvents.get().fireEvent(
+                new WaveSelectionEvent(HistorySupport.waveRefFromHistoryToken(newHistoryToken)));
           } else {
             history.newItem(TokenUtils.addRedirect(SiteTokens.SIGNIN, newHistoryToken));
             if (startingUp()) {

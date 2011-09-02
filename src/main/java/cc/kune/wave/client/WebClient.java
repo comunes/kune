@@ -67,6 +67,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.wave.client.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.GWT;
@@ -243,7 +244,7 @@ public class WebClient extends Composite {
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, KuneWaveProfileManager profiles, InboxCountPresenter inboxCount) {
+  public WebClient(final EventBus eventBus, KuneWaveProfileManager profiles, InboxCountPresenter inboxCount, TokenMatcher tokenMatcher) {
 
     this.eventBus = eventBus;
     this.profiles = profiles;
@@ -276,7 +277,8 @@ public class WebClient extends Composite {
 
     setupUi();
 
-   // History.fireCurrentHistoryState();
+    if (tokenMatcher.isWaveToken(History.getToken()))
+      History.fireCurrentHistoryState();
     LOG.info("SimpleWebClient.onModuleLoad() done");
   }
 
