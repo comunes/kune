@@ -32,18 +32,25 @@ ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE u
 Make two databases in your mysql:
 
 CREATE DATABASE kune_dev;
-GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'PUT_HERE_A_DB_PASSWD';
+GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
 
 CREATE DATABASE kune_test;
-GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'PUT_HERE_A_DB_PASSWD';
+GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
 
 CREATE DATABASE kune_openfire;
-GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'PUT_HERE_A_DB_PASSWD';
+GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
 
-Of course, change PUT_HERE_A_DB_PASSWD with something different.
+Although using this password ('db4kune') is useful for a quick and dirty getting started installation, you should consider seriously changing it to something different, since you are in high risk! In this case you should change the password acordingly in this other locations:
+
+ - pom.xml
+ - script/liquibase-migrate.sh
+ - script/liquibase-rollback.sh
+ - src/main/resources/db/liquibase.properties
+ - src/main/resources/META-INF/persistence.xml
+ - src/main/webapp/WEB-INF/publicspace/config/database.yml
 
 ===Source code===
 
@@ -173,7 +180,9 @@ Select "MySQL" drivers. And configure the mysql connection. This is an example:
     JDBC Driver Class:              com.myrootsql.jdbc.Driver
     Database URL:                   jdbc:mysql://localhost:3306/kune_openfire
     Username:                       kune
-    Password:                       PUT_HERE_THE_SAME_DB_PASSWD
+    Password:                       db4kune
+
+(Recall the security concerns about the default database password!)
 
 Select "Default" in Profile Settings
 
@@ -200,7 +209,7 @@ Add these lines to conf/openfire.xml and check that the user/passwd of the db is
   ...
   <jdbcProvider>
     <driver>com.mysql.jdbc.Driver</driver>
-    <connectionString>jdbc:mysql://localhost/kune_dev?user=kune&amp;password=PUT_HERE_THE_SAME_DB_PASSWD&amp;useUnicode=true&amp;characterEncoding=utf-8</connectionString>
+    <connectionString>jdbc:mysql://localhost/kune_dev?user=kune&amp;password=db4kune&amp;useUnicode=true&amp;characterEncoding=utf-8</connectionString>
   </jdbcProvider>
   <provider>
     <auth>
@@ -234,6 +243,8 @@ Instead of:
   <jdbcAuthProvider/>
   <jdbcUserProvider/>
   <admin/>
+
+(Be sure that the password matches if you changed de default password 'db4kune').
 
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html

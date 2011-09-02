@@ -60,7 +60,7 @@ http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN
 
 ===Eclipse configuration===
 
-Running (in the trunk directory):
+Check out if Kune's code includes Eclipse project definition files (i.e. '.project' & '.classpath') in the trunk directory. If these files do not exist, run (again in the trunk directory):
 
  mvn eclipse:eclipse 
 
