@@ -22,9 +22,6 @@ package cc.kune.domain.finders;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 
@@ -33,42 +30,38 @@ import com.google.inject.persist.finder.Finder;
 import com.google.inject.persist.finder.FirstResult;
 import com.google.inject.persist.finder.MaxResults;
 
-@NamedQueries({
-        @NamedQuery(name = "untranslated", query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text=null"),
-        @NamedQuery(name = "translated", query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text!=null"),
-        @NamedQuery(name = "untranslatedcount", query = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text=null"),
-        @NamedQuery(name = "translatedcount", query = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text!=null") })
 public interface I18nTranslationFinder {
-    String TRANSLATED_COUNT_QUERY = "translatedcount";
-    String TRANSLATED_QUERY = "translated";
-    String UNTRANSLATED_COUNT_QUERY = "untranslatedcount";
-    String UNTRANSLATED_QUERY = "untranslated";
+  String TRANSLATED_COUNT_QUERY = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text!=null";
+  String TRANSLATED_QUERY = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text!=null";
+  String UNTRANSLATED_COUNT_QUERY = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text=null";
+  String UNTRANSLATED_QUERY = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text=null";
 
-    @Finder(query = "SELECT gt FROM I18nTranslation gt JOIN gt.language gl WHERE gl.code = :language", returnAs = ArrayList.class)
-    public List<I18nTranslation> findByLanguage(@Named("language") final String language);
+  @Finder(query = "SELECT gt FROM I18nTranslation gt JOIN gt.language gl WHERE gl.code = :language", returnAs = ArrayList.class)
+  public List<I18nTranslation> findByLanguage(@Named("language") final String language);
 
-    @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :deflanguage AND gt.trKey NOT IN (SELECT gt.trKey FROM I18nTranslation gt WHERE gt.language = :language)", returnAs = ArrayList.class)
-    public List<I18nTranslation> getNonExistentFromDefault(@Named("deflanguage") final I18nLanguage deflanguage,
-            @Named("language") final I18nLanguage language);
+  @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :deflanguage AND gt.trKey NOT IN (SELECT gt.trKey FROM I18nTranslation gt WHERE gt.language = :language)", returnAs = ArrayList.class)
+  public List<I18nTranslation> getNonExistentFromDefault(
+      @Named("deflanguage") final I18nLanguage deflanguage,
+      @Named("language") final I18nLanguage language);
 
-    @Finder(namedQuery = TRANSLATED_QUERY, returnAs = ArrayList.class)
-    public List<I18nTranslation> getTranslatedLexicon(@Named("language") final I18nLanguage language);
+  @Finder(query = TRANSLATED_QUERY, returnAs = ArrayList.class)
+  public List<I18nTranslation> getTranslatedLexicon(@Named("language") final I18nLanguage language);
 
-    @Finder(namedQuery = TRANSLATED_QUERY, returnAs = ArrayList.class)
-    public List<I18nTranslation> getTranslatedLexicon(@Named("language") final I18nLanguage language,
-            @FirstResult final int first, @MaxResults final int max);
+  @Finder(query = TRANSLATED_QUERY, returnAs = ArrayList.class)
+  public List<I18nTranslation> getTranslatedLexicon(@Named("language") final I18nLanguage language,
+      @FirstResult final int first, @MaxResults final int max);
 
-    @Finder(namedQuery = TRANSLATED_COUNT_QUERY)
-    public Long getTranslatedLexiconCount(@Named("language") final I18nLanguage language);
+  @Finder(query = TRANSLATED_COUNT_QUERY)
+  public Long getTranslatedLexiconCount(@Named("language") final I18nLanguage language);
 
-    @Finder(namedQuery = UNTRANSLATED_QUERY, returnAs = ArrayList.class)
-    public List<I18nTranslation> getUnstranslatedLexicon(@Named("language") final I18nLanguage language);
+  @Finder(query = UNTRANSLATED_QUERY, returnAs = ArrayList.class)
+  public List<I18nTranslation> getUnstranslatedLexicon(@Named("language") final I18nLanguage language,
+      @FirstResult final int first, @MaxResults final int max);
 
-    @Finder(namedQuery = UNTRANSLATED_QUERY, returnAs = ArrayList.class)
-    public List<I18nTranslation> getUnstranslatedLexicon(@Named("language") final I18nLanguage language,
-            @FirstResult final int first, @MaxResults final int max);
+  @Finder(query = UNTRANSLATED_COUNT_QUERY)
+  public Long getUnstranslatedLexiconCount(@Named("language") final I18nLanguage language);
 
-    @Finder(namedQuery = UNTRANSLATED_COUNT_QUERY)
-    public Long getUnstranslatedLexiconCount(@Named("language") final I18nLanguage language);
+  @Finder(query = UNTRANSLATED_QUERY, returnAs = ArrayList.class)
+  public List<I18nTranslation> getUntranslatedLexicon(@Named("language") final I18nLanguage language);
 
 }

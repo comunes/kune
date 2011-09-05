@@ -4,7 +4,7 @@
   ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
   ui:generateLocales='default'>
 
-  <ui:with field='res' type='cc.kune.core.client.resources.CoreResources' />
+  <ui:with field='res' type='cc.kune.core.client.resources.CoreResources'/>
 
   <ui:style>
     .titles {
@@ -20,6 +20,13 @@
 
     .copyicon {
       vertical-align: top;
+      height: 10px !important;
+      -webkit-border-bottom-right-radius: 5px;
+      -moz-border-radius-bottomright: 5px;
+      border-bottom-right-radius: 5px;
+      -webkit-border-bottom-left-radius: 5px;
+      -moz-border-radius-bottomleft: 5px;
+      border-bottom-left-radius: 5px;
     }
 
     .row {
@@ -29,26 +36,59 @@
 
     .cell {
       display: table-cell;
-      margin: 5px;
+      padding: 5px;
+    }
+
+    .tip {
+      width: 180px;
+      padding: 5px;
+      font-size: 9px;
+      vertical-align: top;
+    }
+
+    .toTranslate {
+      width: 180px;
+      height: 95px;
+      border: 1px dashed #BBBBBB;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      padding: 3px;
     }
   </ui:style>
   <g:FlowPanel addStyleNames="{style.table}">
     <g:FlowPanel addStyleNames="{style.row}">
-      <g:Label ui:field="toTranslateTitle" addStyleNames="{style.titles} {style.cell}"
-        text="translate this:" />
-      <g:Label ui:field="toTranslate" addStyleNames="{style.cell}" />
+      <g:Label ui:field="toTranslateTitle" addStyleNames="{style.titles} {style.cell}"/>
+      <g:FlowPanel addStyleNames="{style.cell}" styleName="{style.toTranslate}">
+        <g:Label ui:field="toTranslate"/>
+      </g:FlowPanel>
+      <g:Label addStyleNames="{style.row}"/>
     </g:FlowPanel>
     <g:FlowPanel addStyleNames="{style.row}">
-      <g:Label ui:field="toLanguageTitle" addStyleNames="{style.titles} {style.cell}"
-        text="to Spanish:" />
-      <g:TextArea ui:field='translation' addStyleNames="{style.cell}" />
-      <g:Image ui:field="copyIcon" addStyleNames="{style.cell} {style.copyicon}"
-        resource='{res.arrowUndo}' />
+      <g:Label ui:field="toLanguageTitle" addStyleNames="{style.titles} {style.cell}"/>
+      <g:TextArea ui:field='translation' addStyleNames="{style.cell}"
+        visibleLines="5"/>
+      <g:FlowPanel styleName="k-button"
+        addStyleNames="{style.cell} {style.copyicon} k-button k-btn k-5corners">
+        <g:PushButton ui:field='copyIcon' enabled='true'>
+          <g:upFace image='{res.arrowUndo}'/>
+          <g:upHoveringFace/>
+          <g:downFace/>
+          <g:downHoveringFace/>
+        </g:PushButton>
+      </g:FlowPanel>
     </g:FlowPanel>
     <g:FlowPanel addStyleNames="{style.row}">
-      <g:Label ui:field="noteForTranslatorsTittle" text="Note:"
-        addStyleNames="{style.titles} {style.cell}" />
-      <g:Label ui:field="noteForTranslators" addStyleNames="{style.cell}" />
+      <g:Label ui:field="noteForTranslatorsTittle" visible="false"
+        addStyleNames="{style.titles} {style.cell}"/>
+      <g:Label ui:field="noteForTranslators" addStyleNames="{style.cell}"/>
+      <g:Label addStyleNames="{style.row}"/>
+    </g:FlowPanel>
+    <g:FlowPanel addStyleNames="{style.row}">
+      <g:Label ui:field="keyboardRecomendationTitle"
+        addStyleNames="{style.titles} {style.cell}"/>
+      <g:Label ui:field="keyboardRecomendation" addStyleNames="{style.cell} {style.tip}"/>
+      <g:Label addStyleNames="{style.row}"/>
     </g:FlowPanel>
   </g:FlowPanel>
 </ui:UiBinder>

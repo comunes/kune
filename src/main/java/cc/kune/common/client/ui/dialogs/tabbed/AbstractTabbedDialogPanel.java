@@ -31,6 +31,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -47,6 +49,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private final String firstBtnId;
   private final String firstBtnTitle;
   private int height;
+  private ImageResource icon;
   private String iconCls;
   private final NotifyLevelImages images;
   private MessageToolbar messageErrorBar;
@@ -108,9 +111,9 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   }
 
   @Override
-  public void addTab(final IsWidget view, final IsWidget tabWidget) {
+  public void addTab(final IsWidget view, final IsWidget tabTitle) {
     createDialogIfNecessary();
-    tabPanel.add(view, tabWidget);
+    tabPanel.add(view, tabTitle);
     setPositions();
   }
 
@@ -121,13 +124,23 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   }
 
   private void createDialog() {
-    dialog = new BasicTopDialog.Builder(dialogId, authohide, modal).autoscroll(true).width(width).height(
-        height).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(
-        dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(sndBtnId).title(title).build();
+    dialog = new BasicTopDialog.Builder(dialogId, authohide, modal).autoscroll(true).width(
+        String.valueOf(width + 20)).height(String.valueOf(height + 20)).icon(iconCls).firstButtonId(
+        firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(
+        sndBtnId).title(title).build();
+    if (icon != null) {
+      dialog.setTitleIcon(icon);
+    }
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     tabPanel = new TabLayoutPanel(25, Unit.PX);
+    tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
+      @Override
+      public void onSelection(final SelectionEvent<Integer> event) {
+        dialog.showCentered();
+      }
+    });
     provCollection.createAll();
-    tabPanel.setSize(String.valueOf(width), String.valueOf(height));
+    tabPanel.setSize(String.valueOf(width) + "px", String.valueOf(height) + "px");
     dialog.getInnerPanel().add(tabPanel);
     tabPanel.addStyleName("k-tabpanel-aditionalpadding");
     tabPanel.addStyleName("k-tabs");
@@ -211,7 +224,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   }
 
   public void setIcon(final ImageResource icon) {
-    dialog.setTitleIcon(icon);
+    this.icon = icon;
   }
 
   public void setIconCls(final String iconCls) {

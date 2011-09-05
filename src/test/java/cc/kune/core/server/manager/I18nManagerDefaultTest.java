@@ -30,9 +30,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.server.PersistenceTest;
-import cc.kune.core.server.manager.I18nCountryManager;
-import cc.kune.core.server.manager.I18nLanguageManager;
-import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
@@ -41,139 +38,145 @@ import cc.kune.domain.I18nTranslation;
 import com.google.inject.Inject;
 
 public class I18nManagerDefaultTest extends PersistenceTest {
-    @Inject
-    I18nTranslationManager translationManager;
-    @Inject
-    I18nCountryManager countryManager;
-    @Inject
-    I18nLanguageManager languageManager;
-    @Inject
-    I18nTranslationService translationService;
+  @Inject
+  I18nCountryManager countryManager;
+  @Inject
+  I18nLanguageManager languageManager;
+  @Inject
+  I18nTranslationManager translationManager;
+  @Inject
+  I18nTranslationService translationService;
 
-    @Test
-    public void byDefaultUseEnglish() {
-        HashMap<String, String> map = translationManager.getLexicon("en");
-        HashMap<String, String> map2 = translationManager.getLexicon("af");
-        assertEquals(map.size(), map2.size());
+  @Test
+  public void byDefaultUseEnglish() {
+    final HashMap<String, String> map = translationManager.getLexicon("en");
+    final HashMap<String, String> map2 = translationManager.getLexicon("af");
+    assertEquals(map.size(), map2.size());
+  }
+
+  @After
+  public void close() {
+    if (getTransaction().isActive()) {
+      getTransaction().rollback();
     }
+  }
 
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
-    }
+  @Test
+  public void getLexiconList() {
+    assertTrue(translationManager.getTranslatedLexicon("en").size() > 0);
+    assertTrue(translationManager.getUntranslatedLexicon("en").size() == 0);
+  }
 
-    @Test
-    public void getNonExistentTranslationInAnyLangReturnsKey() {
-        HashMap<String, String> map = translationManager.getLexicon("en");
-        HashMap<String, String> map2 = translationManager.getLexicon("aa");
-        int initialSize = map.size();
-        int initialSize2 = map2.size();
+  @Test
+  public void getNonExistentTranslationInAnyLangReturnsKey() {
+    HashMap<String, String> map = translationManager.getLexicon("en");
+    HashMap<String, String> map2 = translationManager.getLexicon("aa");
+    final int initialSize = map.size();
+    final int initialSize2 = map2.size();
 
-        String translation = translationManager.getTranslation("es", "Foo foo foo");
-        String translation2 = translationManager.getTranslation("aa", "Foo foo foo");
+    final String translation = translationManager.getTranslation("es", "Foo foo foo");
+    final String translation2 = translationManager.getTranslation("aa", "Foo foo foo");
 
-        assertEquals(I18nTranslation.UNTRANSLATED_VALUE, translation);
-        assertEquals(I18nTranslation.UNTRANSLATED_VALUE, translation2);
+    assertEquals(I18nTranslation.UNTRANSLATED_VALUE, translation);
+    assertEquals(I18nTranslation.UNTRANSLATED_VALUE, translation2);
 
-        map = translationManager.getLexicon("en");
-        map2 = translationManager.getLexicon("aa");
-        int newSize = map.size();
-        int newSize2 = map2.size();
+    map = translationManager.getLexicon("en");
+    map2 = translationManager.getLexicon("aa");
+    final int newSize = map.size();
+    final int newSize2 = map2.size();
 
-        assertEquals(initialSize + 1, newSize);
-        assertEquals(initialSize2 + 1, newSize2);
-    }
+    assertEquals(initialSize + 1, newSize);
+    assertEquals(initialSize2 + 1, newSize2);
+  }
 
-    @Test
-    public void getNonExistentTranslationReturnsDefaultLanguage() {
-        String translation = translationManager.getTranslation("af", "January [month]");
-        assertEquals("January", translation);
-    }
+  @Test
+  public void getNonExistentTranslationReturnsDefaultLanguage() {
+    final String translation = translationManager.getTranslation("af", "January [month]");
+    assertEquals("January", translation);
+  }
 
-    @Test
-    public void getTranslation() {
-        String translation = translationManager.getTranslation("af", "Sunday [weekday]");
-        assertEquals("Sondag", translation);
-    }
+  @Test
+  public void getTranslation() {
+    final String translation = translationManager.getTranslation("af", "Sunday [weekday]");
+    assertEquals("Sondag", translation);
+  }
 
-    @Test
-    public void getTranslationUTF8() {
-        String translation = translationManager.getTranslation("el", "January [month]");
-        assertEquals("Ιανουάριος", translation);
-    }
+  @Test
+  public void getTranslationUTF8() {
+    final String translation = translationManager.getTranslation("el", "January [month]");
+    assertEquals("Ιανουάριος", translation);
+  }
 
-    @Test
-    public void getTranslationWithIntArg() {
-        String translation = translationManager.getTranslation("en", "[%d] users", 20);
-        assertEquals("20 users", translation);
-    }
+  @Test
+  public void getTranslationWithIntArg() {
+    final String translation = translationManager.getTranslation("en", "[%d] users", 20);
+    assertEquals("20 users", translation);
+  }
 
-    @Test
-    public void getTranslationWithIntArgFromService() {
-        String translation = translationService.t("[%d] users", 20);
-        assertEquals("20 users", translation);
-    }
+  @Test
+  public void getTranslationWithIntArgFromService() {
+    final String translation = translationService.t("[%d] users", 20);
+    assertEquals("20 users", translation);
+  }
 
-    @Test
-    public void getTranslationWithIntArgFromWithNtService() {
-        String translation = translationService.tWithNT("[%d] users", "foo foo", 20);
-        assertEquals("20 users", translation);
-    }
+  @Test
+  public void getTranslationWithIntArgFromWithNtService() {
+    final String translation = translationService.tWithNT("[%d] users", "foo foo", 20);
+    assertEquals("20 users", translation);
+  }
 
-    @Test
-    public void getTranslationWithStringArg() {
-        String translation = translationManager.getTranslation("en", "[%s] users", "Twenty");
-        assertEquals("Twenty users", translation);
-    }
+  @Test
+  public void getTranslationWithStringArg() {
+    final String translation = translationManager.getTranslation("en", "[%s] users", "Twenty");
+    assertEquals("Twenty users", translation);
+  }
 
-    @Test
-    public void getTranslationWithStringArgFromService() {
-        String translation = translationService.t("[%s] users", "Twenty");
-        assertEquals("Twenty users", translation);
-    }
+  @Test
+  public void getTranslationWithStringArgFromService() {
+    final String translation = translationService.t("[%s] users", "Twenty");
+    assertEquals("Twenty users", translation);
+  }
 
-    @Test
-    public void getTranslationWithStringArgWithNtFromService() {
-        String translation = translationService.tWithNT("[%s] users", "foo foo", "Twenty");
-        assertEquals("Twenty users", translation);
-    }
+  @Test
+  public void getTranslationWithStringArgWithNtFromService() {
+    final String translation = translationService.tWithNT("[%s] users", "foo foo", "Twenty");
+    assertEquals("Twenty users", translation);
+  }
 
-    @Before
-    public void insertData() {
-        openTransaction();
-        I18nLanguage english = new I18nLanguage(Long.valueOf(1819), "English", "English", "en");
-        I18nLanguage spanish = new I18nLanguage(Long.valueOf(5889), "Spanish", "Español", "es");
-        I18nLanguage afrikaans = new I18nLanguage(Long.valueOf(114), "Afrikaans", "Afrikaans", "af");
-        I18nLanguage greek = new I18nLanguage(Long.valueOf(1793), "Greek", "Ελληνικά", "el");
-        languageManager.persist(english);
-        languageManager.persist(spanish);
-        languageManager.persist(afrikaans);
-        languageManager.persist(greek);
-        translationManager.persist(new I18nTranslation("Sunday [weekday]", english, "Sunday"));
-        translationManager.persist(new I18nTranslation("January [month]", english, "January"));
-        translationManager.persist(new I18nTranslation("Sunday [weekday]", afrikaans, "Sondag"));
-        translationManager.persist(new I18nTranslation("January [month]", greek, "Ιανουάριος"));
-        translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%s] users"), english,
-                StringEscapeUtils.escapeHtml("[%s] users")));
-        translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%d] users"), english,
-                StringEscapeUtils.escapeHtml("[%d] users")));
-        I18nCountry gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
-                "western", ",");
-        countryManager.persist(gb);
-    }
+  @Before
+  public void insertData() {
+    openTransaction();
+    final I18nLanguage english = new I18nLanguage(Long.valueOf(1819), "English", "English", "en");
+    final I18nLanguage spanish = new I18nLanguage(Long.valueOf(5889), "Spanish", "Español", "es");
+    final I18nLanguage afrikaans = new I18nLanguage(Long.valueOf(114), "Afrikaans", "Afrikaans", "af");
+    final I18nLanguage greek = new I18nLanguage(Long.valueOf(1793), "Greek", "Ελληνικά", "el");
+    languageManager.persist(english);
+    languageManager.persist(spanish);
+    languageManager.persist(afrikaans);
+    languageManager.persist(greek);
+    translationManager.persist(new I18nTranslation("Sunday [weekday]", english, "Sunday"));
+    translationManager.persist(new I18nTranslation("January [month]", english, "January"));
+    translationManager.persist(new I18nTranslation("Sunday [weekday]", afrikaans, "Sondag"));
+    translationManager.persist(new I18nTranslation("January [month]", greek, "Ιανουάριος"));
+    translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%s] users"), english,
+        StringEscapeUtils.escapeHtml("[%s] users")));
+    translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%d] users"), english,
+        StringEscapeUtils.escapeHtml("[%d] users")));
+    final I18nCountry gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".",
+        "United Kingdom", "western", ",");
+    countryManager.persist(gb);
+  }
 
-    @Test
-    public void setTranslation() {
-        translationManager.setTranslation("en", "Foo foo foo", "Foo foo foo translation");
-        String translation = translationManager.getTranslation("en", "Foo foo foo");
-        assertEquals("Foo foo foo translation", translation);
-    }
+  @Test
+  public void setTranslation() {
+    translationManager.setTranslation("en", "Foo foo foo", "Foo foo foo translation");
+    final String translation = translationManager.getTranslation("en", "Foo foo foo");
+    assertEquals("Foo foo foo translation", translation);
+  }
 
-    @Test
-    public void testGetLexicon() {
-        HashMap<String, String> map = translationManager.getLexicon("af");
-        assertTrue(map.size() > 0);
-    }
+  @Test
+  public void testGetLexicon() {
+    final HashMap<String, String> map = translationManager.getLexicon("af");
+    assertTrue(map.size() > 0);
+  }
 }

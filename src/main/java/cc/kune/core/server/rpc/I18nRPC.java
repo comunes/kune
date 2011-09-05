@@ -20,6 +20,7 @@
 package cc.kune.core.server.rpc;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,7 @@ import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.I18nTranslationDTO;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 
@@ -98,6 +100,20 @@ public class I18nRPC implements RPC, I18nService {
   @Transactional
   public HashMap<String, String> getLexicon(final String language) {
     return i18nTranslationManager.getLexicon(language);
+  }
+
+  @Override
+  @Authenticated
+  @Transactional
+  public List<I18nTranslationDTO> getTranslatedLexicon(final String userHash, final String language,
+      final boolean toTranslate) {
+    if (toTranslate) {
+      return mapper.mapList(i18nTranslationManager.getUntranslatedLexicon(language),
+          I18nTranslationDTO.class);
+    } else {
+      return mapper.mapList(i18nTranslationManager.getTranslatedLexicon(language),
+          I18nTranslationDTO.class);
+    }
   }
 
   @Override

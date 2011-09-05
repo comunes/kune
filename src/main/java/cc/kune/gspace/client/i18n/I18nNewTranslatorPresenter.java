@@ -7,6 +7,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -23,7 +24,7 @@ public class I18nNewTranslatorPresenter extends AbstractTabbedDialogPresenter im
 
     void init();
 
-    void setLanguage(I18nLanguageDTO currentLanguage);
+    void setLanguage(I18nLanguageSimpleDTO currentLanguage);
 
     @Override
     void show();
@@ -84,12 +85,12 @@ public class I18nNewTranslatorPresenter extends AbstractTabbedDialogPresenter im
   public void show() {
     NotifyUser.showProgressLoading();
     if (session.isLogged()) {
-      view.setLanguage(session.getCurrentLanguage());
+      final I18nLanguageDTO userLang = session.getCurrentLanguage();
+      view.setLanguage(new I18nLanguageSimpleDTO(userLang.getCode(), userLang.getEnglishName()));
       view.show();
     } else {
       NotifyUser.info(i18n.t("Sign in or register to help with the translation"));
     }
     NotifyUser.hideProgress();
   }
-
 }

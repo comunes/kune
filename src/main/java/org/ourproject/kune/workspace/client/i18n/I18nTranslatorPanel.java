@@ -292,7 +292,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
   }
 
   private void setLanguage(final I18nLanguageDTO language) {
-    languageSelectorPanel.setLanguage(language.getCode());
+    // languageSelectorPanel.setLanguage(language.getCode());
     setLanguage(language.getCode());
   }
 

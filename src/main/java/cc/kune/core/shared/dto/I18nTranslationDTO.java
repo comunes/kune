@@ -20,45 +20,70 @@
 package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.gwt.view.client.ProvidesKey;
 
-public class I18nTranslationDTO implements IsSerializable {
+public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTranslationDTO> {
 
-    private Long id;
-    private String trKey;
-    private String text;
-
-    public I18nTranslationDTO() {
-        this(null, null, null);
+  /**
+   * The key provider that provides the unique ID
+   */
+  public static final ProvidesKey<I18nTranslationDTO> KEY_PROVIDER = new ProvidesKey<I18nTranslationDTO>() {
+    @Override
+    public Object getKey(final I18nTranslationDTO item) {
+      return item == null ? null : item.getId();
     }
+  };
+  private boolean dirty;
+  private Long id;
+  private String text;
+  private String trKey;
 
-    public I18nTranslationDTO(final Long id, final String trKey, final String text) {
-        this.id = id;
-        this.trKey = trKey;
-        this.text = text;
-    }
+  public I18nTranslationDTO() {
+    this(null, null, null);
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public I18nTranslationDTO(final Long id, final String trKey, final String text) {
+    this.id = id;
+    this.trKey = trKey;
+    this.text = text;
+    setDirty(false);
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  @Override
+  public int compareTo(final I18nTranslationDTO o) {
+    return (o == null || o.trKey == null) ? -1 : -o.trKey.compareTo(trKey);
+  }
 
-    public String getTrKey() {
-        return trKey;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setTrKey(final String trKey) {
-        this.trKey = trKey;
-    }
+  public String getText() {
+    return text;
+  }
 
-    public String getText() {
-        return text;
-    }
+  public String getTrKey() {
+    return trKey;
+  }
 
-    public void setText(final String text) {
-        this.text = text;
-    }
+  public boolean isDirty() {
+    return dirty;
+  }
+
+  public void setDirty(final boolean dirty) {
+    this.dirty = dirty;
+  }
+
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
+  public void setText(final String text) {
+    this.text = text;
+  }
+
+  public void setTrKey(final String trKey) {
+    this.trKey = trKey;
+  }
 
 }

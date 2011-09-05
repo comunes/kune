@@ -20,19 +20,24 @@
 package cc.kune.core.client.rpcservices;
 
 import java.util.HashMap;
+import java.util.List;
 
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.I18nTranslationDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface I18nServiceAsync {
 
-    void getLexicon(String language, AsyncCallback<HashMap<String, String>> callback);
+  void getInitialLanguage(String localeParam, AsyncCallback<I18nLanguageDTO> callback);
 
-    void getTranslation(String userHash, String language, String text, AsyncCallback<String> callback);
+  void getLexicon(String language, AsyncCallback<HashMap<String, String>> callback);
 
-    void setTranslation(String userHash, String id, String translation, AsyncCallback<String> asyncCallback);
+  void getTranslatedLexicon(String userHash, String language, boolean toTranslate,
+      AsyncCallback<List<I18nTranslationDTO>> callback);
 
-    void getInitialLanguage(String localeParam, AsyncCallback<I18nLanguageDTO> callback);
+  void getTranslation(String userHash, String language, String text, AsyncCallback<String> callback);
+
+  void setTranslation(String userHash, String id, String translation, AsyncCallback<String> asyncCallback);
 
 }

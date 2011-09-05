@@ -22,31 +22,32 @@ package cc.kune.core.server.manager;
 import java.util.HashMap;
 import java.util.List;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.domain.I18nTranslation;
 
 public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
-    HashMap<String, String> getLexicon(String language);
+  HashMap<String, String> getLexicon(String language);
 
-    List<I18nTranslation> getTranslatedLexicon(String language);
+  List<I18nTranslation> getTranslatedLexicon(String language);
 
-    SearchResult<I18nTranslation> getTranslatedLexicon(String language, Integer firstResult, Integer maxResults);
+  SearchResult<I18nTranslation> getTranslatedLexicon(String language, Integer firstResult,
+      Integer maxResults);
 
-    String getTranslation(String language, String text);
+  String getTranslation(String language, String text);
 
-    String getTranslation(String language, String text, Integer arg);
+  String getTranslation(String language, String text, Integer arg);
 
-    String getTranslation(String language, String text, String arg);
+  String getTranslation(String language, String text, String arg);
 
-    List<I18nTranslation> getUntranslatedLexicon(String language);
+  List<I18nTranslation> getUntranslatedLexicon(String language);
 
-    SearchResult<I18nTranslation> getUntranslatedLexicon(String language, Integer firstResult, Integer maxResults);
+  SearchResult<I18nTranslation> getUntranslatedLexicon(String language, Integer firstResult,
+      Integer maxResults);
 
-    String setTranslation(String id, String translation) throws DefaultException;
+  String setTranslation(String id, String translation) throws DefaultException;
 
-    void setTranslation(String language, String text, String translation);
+  void setTranslation(String language, String text, String translation);
 
 }

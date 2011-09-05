@@ -23,23 +23,31 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class I18nLanguageSimpleDTO implements IsSerializable {
 
-    private String code;
-    private String englishName;
+  private String code;
+  private String englishName;
 
-    public String getCode() {
-        return code;
-    }
+  public I18nLanguageSimpleDTO() {
+  }
 
-    public String getEnglishName() {
-        return englishName;
-    }
+  public I18nLanguageSimpleDTO(final String code, final String englishName) {
+    this.code = code;
+    this.englishName = englishName;
+  }
 
-    public void setCode(final String code) {
-        this.code = code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public void setEnglishName(final String englishName) {
-        this.englishName = englishName;
-    }
+  public String getEnglishName() {
+    return englishName;
+  }
+
+  public void setCode(final String code) {
+    this.code = code;
+  }
+
+  public void setEnglishName(final String englishName) {
+    this.englishName = englishName;
+  }
 
 }

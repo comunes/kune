@@ -10,12 +10,13 @@ import com.google.inject.Inject;
 
 public class I18nTranslateRecomendPanel extends Composite {
 
+  private final Frame recommFrame;
   private final Label tabTitle;
 
   @Inject
   public I18nTranslateRecomendPanel(final I18nTranslationService i18n) {
     tabTitle = new Label(i18n.t("Recommendations"));
-    final Frame recommFrame = new Frame("i18n-recom.html");
+    recommFrame = new Frame("i18n-recom.html");
     recommFrame.setHeight("auto");
     recommFrame.setStyleName("k-i18n-recommend");
     initWidget(recommFrame);
@@ -23,5 +24,11 @@ public class I18nTranslateRecomendPanel extends Composite {
 
   public IsWidget getTabTitle() {
     return tabTitle;
+  }
+
+  @Override
+  public void setSize(final String width, final String height) {
+    recommFrame.setWidth(width + "px");
+    recommFrame.setHeight(height + "px");
   }
 }

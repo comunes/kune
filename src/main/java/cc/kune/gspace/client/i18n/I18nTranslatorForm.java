@@ -16,17 +16,23 @@
 package cc.kune.gspace.client.i18n;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
+import cc.kune.core.shared.dto.I18nTranslationDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.HasBlurHandlers;
-import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -40,36 +46,130 @@ public class I18nTranslatorForm extends Composite {
 
   private static Binder uiBinder = GWT.create(Binder.class);
 
+  private CellList<I18nTranslationDTO> cellList;
   @UiField
-  Image copyIcon;
+  PushButton copyIcon;
+  private I18nTranslationProvider dataProvider;
+  private I18nTranslationService i18n;
+  private I18nTranslationDTO item;
+  @UiField
+  Label keyboardRecomendation;
+  @UiField
+  Label keyboardRecomendationTitle;
+  private final Timer keyboardTimer;
   @UiField
   Label noteForTranslators;
   @UiField
+  Label noteForTranslatorsTittle;
+  @UiField
+  Label toLanguageTitle;
+  @UiField
   Label toTranslate;
+
+  @UiField
+  Label toTranslateTitle;
+
   @UiField
   TextArea translation;
 
   public I18nTranslatorForm() {
     initWidget(uiBinder.createAndBindUi(this));
-    Tooltip.to(copyIcon, "FIXME");
+    keyboardTimer = new Timer() {
+      @Override
+      public void run() {
+        update();
+      }
+    };
   }
 
-  public HasBlurHandlers getBlurTraslation() {
-    return translation;
+  private void copyTranslation() {
+    translation.setText(toTranslate.getText());
   }
 
-  public HasKeyPressHandlers getKeysTraslation() {
-    return translation;
+  @UiHandler("translation")
+  void handleBlur(final BlurEvent event) {
+    update();
   }
 
   @UiHandler("copyIcon")
   void handleClickOnCopyIcon(final ClickEvent e) {
-    translation.setText(toTranslate.getText());
+    copyTranslation();
+    translation.setFocus(true);
+    updateWithTimer();
   }
 
-  public void setInfo(final String toTranslate, final String noteForTranslators, final String translation) {
-    this.toTranslate.setText(toTranslate);
-    this.noteForTranslators.setText(noteForTranslators);
-    this.translation.setText(translation);
+  @UiHandler("translation")
+  void handleKeyPress(final ChangeEvent event) {
+    updateWithTimer();
+  }
+
+  @UiHandler("translation")
+  void handleKeyPress(final KeyPressEvent event) {
+    if (event.isControlKeyDown() && event.isAltKeyDown()
+        && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_UP) {
+      cellList.fireEvent(event);
+    }
+    if (event.isControlKeyDown() && event.isAltKeyDown()
+        && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_DOWN) {
+      cellList.fireEvent(event);
+    }
+    if (event.isAltKeyDown() && event.getCharCode() == 'v') {
+      copyTranslation();
+      event.stopPropagation();
+    }
+    updateWithTimer();
+  }
+
+  public void init(final I18nTranslationProvider dataProvider, final I18nTranslationService i18n,
+      final CellList<I18nTranslationDTO> cellList) {
+    this.dataProvider = dataProvider;
+    this.i18n = i18n;
+    this.cellList = cellList;
+    Tooltip.to(copyIcon, i18n.t("Copy the text to translate"));
+    toTranslateTitle.setText(i18n.t("translate this:"));
+    noteForTranslatorsTittle.setText(i18n.t("Notes:"));
+    keyboardRecomendationTitle.setText(i18n.t("Tip:"));
+    keyboardRecomendation.setText(i18n.t("Pulse TAB/Shift-TAB to move from the list to the translation area, and use the cursor to move bettween list elements. Alt-V to copy the original text. The translations are autosaved"));
+  }
+
+  public void setInfo(final I18nTranslationDTO item) {
+    this.item = item;
+    final String[] splitted = splitNT(item.getTrKey());
+    toTranslate.setText(splitted[0]);
+    final boolean hasNT = splitted.length > 1;
+    noteForTranslators.setVisible(hasNT);
+    noteForTranslatorsTittle.setVisible(hasNT);
+    if (hasNT) {
+      noteForTranslators.setText(splitted[1]);
+    }
+    translation.setText(item.getText());
+  }
+
+  public void setToLanguage(final I18nLanguageSimpleDTO language) {
+    toLanguageTitle.setText(i18n.tWithNT("to [%s]:", "For example, 'to Spanish':",
+        language.getEnglishName()));
+  }
+
+  private String[] splitNT(final String textWithNT) {
+    String[] nt;
+    final String[] splitted = textWithNT.split(" \\[%NT ");
+    if (splitted.length > 1) {
+      nt = splitted[1].split("\\]$");
+      splitted[1] = nt[0];
+    }
+    return splitted;
+  }
+
+  private void update() {
+    if (item != null) {
+      item.setText(translation.getText());
+      item.setDirty(true);
+      dataProvider.refreshDisplays();
+    }
+  }
+
+  private void updateWithTimer() {
+    keyboardTimer.cancel();
+    keyboardTimer.schedule(3000);
   }
 }

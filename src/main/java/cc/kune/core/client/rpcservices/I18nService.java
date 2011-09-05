@@ -20,9 +20,11 @@
 package cc.kune.core.client.rpcservices;
 
 import java.util.HashMap;
+import java.util.List;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.I18nTranslationDTO;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -30,12 +32,15 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("I18nService")
 public interface I18nService extends RemoteService {
 
-    I18nLanguageDTO getInitialLanguage(String localeParam);
+  I18nLanguageDTO getInitialLanguage(String localeParam);
 
-    HashMap<String, String> getLexicon(String language);
+  HashMap<String, String> getLexicon(String language);
 
-    String getTranslation(String userHash, String language, String text);
+  List<I18nTranslationDTO> getTranslatedLexicon(String userHash, final String language,
+      boolean toTranslate);
 
-    String setTranslation(String userHash, String id, String translation) throws DefaultException;
+  String getTranslation(String userHash, String language, String text);
+
+  String setTranslation(String userHash, String id, String translation) throws DefaultException;
 
 }

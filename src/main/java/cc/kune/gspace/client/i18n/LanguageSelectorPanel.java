@@ -19,6 +19,7 @@
  */
 package cc.kune.gspace.client.i18n;
 
+import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
@@ -115,6 +116,16 @@ public class LanguageSelectorPanel extends FormPanel {
     return list;
   }
 
+  public I18nLanguageSimpleDTO getLanguage() {
+    final String langCode = langCombo.getValue().getCode();
+    for (final I18nLanguageSimpleDTO lang : session.getLanguages()) {
+      if (lang.getCode().equals(langCode)) {
+        return lang;
+      }
+    }
+    throw new UIException("Languege not found");
+  }
+
   public String getLanguageCode() {
     return langCombo.getValue().getCode();
   }
@@ -142,7 +153,7 @@ public class LanguageSelectorPanel extends FormPanel {
     }
   }
 
-  public void setLanguage(final String languageCode) {
-    langCombo.setRawValue(languageCode);
+  public void setLanguage(final I18nLanguageSimpleDTO language) {
+    langCombo.setRawValue(language.getEnglishName());
   }
 }
