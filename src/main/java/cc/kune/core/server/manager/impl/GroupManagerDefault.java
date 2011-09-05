@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.manager.impl;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -171,7 +170,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
       initSocialNetwork(group, user.getUserGroup(), publicVisibility, snVisibility);
       final String title = i18n.t("About [%s]", group.getLongName());
-      initGroup(user, group, serverToolRegistry.getToolsForGroupsKeys(), title, publicDescrip);
+      initGroup(user, group, serverToolRegistry.getToolsRegisEnabledForGroups(), title, publicDescrip);
       return group;
     } else {
       throw new UserMustBeLoggedException();
@@ -209,8 +208,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     final String title = i18n.t("[%s] Bio", user.getName());
     final String body = i18n.t("This user has not written its biography yet");
     try {
-      initGroup(user, userGroup, wantPersonalHomepage ? serverToolRegistry.getToolsForUserKeys()
-          : ServerToolRegistry.emptyToolList, title, body);
+      initGroup(user, userGroup,
+          wantPersonalHomepage ? serverToolRegistry.getToolsRegisEnabledForUsers()
+              : ServerToolRegistry.emptyToolList, title, body);
       super.persist(user, User.class);
     } catch (final PersistenceException e) {
       if (e.getCause() instanceof ConstraintViolationException) {
@@ -252,7 +252,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     return findByShortName(shortName);
   }
 
-  private void initGroup(final User user, final Group group, final Collection<String> toolsToEnable,
+  private void initGroup(final User user, final Group group, final List<String> toolsToEnable,
       final Object... vars) throws GroupShortNameInUseException {
     try {
       persist(group);

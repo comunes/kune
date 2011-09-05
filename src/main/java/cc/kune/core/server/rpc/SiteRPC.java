@@ -141,8 +141,8 @@ public class SiteRPC implements RPC, SiteService {
     data.setSiteLogoUrl(kuneProperties.get(KuneProperties.SITE_LOGO_URL));
     data.setGalleryPermittedExtensions(kuneProperties.get(KuneProperties.UPLOAD_GALLERY_PERMITTED_EXTS));
     data.setMaxFileSizeInMb(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE));
-    data.setUserTools(serverToolRegistry.getToolsForUsers());
-    data.setGroupTools(serverToolRegistry.getToolsForGroups());
+    data.setUserTools(serverToolRegistry.getToolsAvailableForUsers());
+    data.setGroupTools(serverToolRegistry.getToolsAvailableForGroups());
     data.setImgResizewidth(kuneProperties.getInteger(KuneProperties.IMAGES_RESIZEWIDTH));
     data.setImgThumbsize(kuneProperties.getInteger(KuneProperties.IMAGES_THUMBSIZE));
     data.setImgCropsize(kuneProperties.getInteger(KuneProperties.IMAGES_CROPSIZE));

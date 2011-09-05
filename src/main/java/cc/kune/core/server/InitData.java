@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class InitData {
   private List<ExtMediaDescrip> extMediaDescrips;
   private String flvEmbedObject;
   private String galleryPermittedExtensions;
-  private ArrayList<ToolSimple> groupTools;
+  private List<ToolSimple> groupTools;
   private HashMap<String, GSpaceTheme> gSpaceThemes;
   private int imgCropsize;
   private int imgIconsize;
@@ -62,7 +61,7 @@ public class InitData {
   private String siteUrl;
   private String[] timezones;
   private UserInfo userInfo;
-  private ArrayList<ToolSimple> userTools;
+  private List<ToolSimple> userTools;
 
   public String getAviEmbedObject() {
     return aviEmbedObject;
@@ -108,7 +107,7 @@ public class InitData {
     return galleryPermittedExtensions;
   }
 
-  public ArrayList<ToolSimple> getGroupTools() {
+  public List<ToolSimple> getGroupTools() {
     return groupTools;
   }
 
@@ -177,7 +176,7 @@ public class InitData {
     return userInfo;
   }
 
-  public ArrayList<ToolSimple> getUserTools() {
+  public List<ToolSimple> getUserTools() {
     return userTools;
   }
 
@@ -225,7 +224,7 @@ public class InitData {
     this.galleryPermittedExtensions = galleryPermittedExtensions;
   }
 
-  public void setGroupTools(final ArrayList<ToolSimple> groupTools) {
+  public void setGroupTools(final List<ToolSimple> groupTools) {
     this.groupTools = groupTools;
   }
 
@@ -294,7 +293,7 @@ public class InitData {
     this.userInfo = currentUserInfo;
   }
 
-  public void setUserTools(final ArrayList<ToolSimple> userTools) {
+  public void setUserTools(final List<ToolSimple> userTools) {
     this.userTools = userTools;
   }
 

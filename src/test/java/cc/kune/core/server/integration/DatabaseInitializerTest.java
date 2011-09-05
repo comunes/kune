@@ -30,7 +30,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.chat.shared.ChatConstants;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
@@ -99,9 +98,10 @@ public class DatabaseInitializerTest {
     final ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(NAME);
     assertNotNull(docToolConfig);
     assertTrue(docToolConfig.isEnabled());
-    final ToolConfiguration chatToolConfig = defaultGroup.getToolConfiguration(ChatConstants.NAME);
-    assertNotNull(chatToolConfig);
-    assertTrue(chatToolConfig.isEnabled());
+    // final ToolConfiguration chatToolConfig =
+    // defaultGroup.getToolConfiguration(ChatConstants.NAME);
+    // assertNotNull(chatToolConfig);
+    // assertTrue(chatToolConfig.isEnabled());
     final List<String> enabledTools = groupManager.findEnabledTools(defaultGroup.getId());
     assertNotNull(enabledTools);
     assertTrue(enabledTools.size() > 0);

@@ -17,7 +17,7 @@ public class I18nTranslateRecomendPanel extends Composite {
   public I18nTranslateRecomendPanel(final I18nTranslationService i18n) {
     tabTitle = new Label(i18n.t("Recommendations"));
     recommFrame = new Frame("i18n-recom.html");
-    recommFrame.setHeight("auto");
+    // recommFrame.setHeight("auto");
     recommFrame.setStyleName("k-i18n-recommend");
     initWidget(recommFrame);
   }
@@ -26,9 +26,11 @@ public class I18nTranslateRecomendPanel extends Composite {
     return tabTitle;
   }
 
-  @Override
-  public void setSize(final String width, final String height) {
-    recommFrame.setWidth(width + "px");
-    recommFrame.setHeight(height + "px");
+  public void setSize(final int width, final int height) {
+    final String widthS = width + "px";
+    final String heightS = height + "px";
+    recommFrame.setWidth(widthS);
+    recommFrame.setHeight(heightS);
+    // super.setSize(widthS, heightS);
   }
 }

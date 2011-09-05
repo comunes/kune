@@ -42,7 +42,7 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogView {
-  private final boolean authohide;
+  private final boolean autohide;
   private BasicTopDialog dialog;
   private final String dialogId;
   private final String errorLabelId;
@@ -62,7 +62,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private int width;
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
-      final boolean authoHide, final NotifyLevelImages images, final String errorLabelId,
+      final boolean autoHide, final NotifyLevelImages images, final String errorLabelId,
       final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
       final String sndBtnId, final ProvidersCollection provCollection) {
     this.dialogId = dialogId;
@@ -75,7 +75,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     this.sndBtnTitle = sndBtnTitle;
     this.sndBtnId = sndBtnId;
     this.provCollection = provCollection;
-    this.authohide = authoHide;
+    this.autohide = autoHide;
   }
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
@@ -124,7 +124,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   }
 
   private void createDialog() {
-    dialog = new BasicTopDialog.Builder(dialogId, authohide, modal).autoscroll(true).width(
+    dialog = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(true).width(
         String.valueOf(width + 20)).height(String.valueOf(height + 20)).icon(iconCls).firstButtonId(
         firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(
         sndBtnId).title(title).build();

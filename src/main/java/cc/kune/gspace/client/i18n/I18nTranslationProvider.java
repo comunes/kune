@@ -17,6 +17,7 @@ package cc.kune.gspace.client.i18n;
 
 import java.util.List;
 
+import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -25,12 +26,15 @@ import cc.kune.core.shared.dto.I18nTranslationDTO;
 
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.inject.Inject;
 
 public class I18nTranslationProvider {
 
   private final ListDataProvider<I18nTranslationDTO> dataProvider = new ListDataProvider<I18nTranslationDTO>();
   private final I18nServiceAsync i18n;
+  private SimpleCallback loadCallback;
+  private SingleSelectionModel<I18nTranslationDTO> selectionModel;
   private final Session session;
 
   @Inject
@@ -43,8 +47,26 @@ public class I18nTranslationProvider {
     dataProvider.addDataDisplay(displayList);
   }
 
+  private void avance(final int increment) {
+    final I18nTranslationDTO selected = selectionModel.getSelectedObject();
+    final List<I18nTranslationDTO> list = dataProvider.getList();
+    final int pos = list.indexOf(selected);
+    final int next = pos + increment;
+    if (next >= 0 && next < list.size()) {
+      selectionModel.setSelected(list.get(next), true);
+    }
+  }
+
   public void refreshDisplays() {
     dataProvider.refresh();
+  }
+
+  public void selectNext() {
+    avance(1);
+  }
+
+  public void selectPrevious() {
+    avance(-1);
   }
 
   public void setLanguage(final I18nLanguageSimpleDTO language, final boolean toTranslate) {
@@ -56,8 +78,20 @@ public class I18nTranslationProvider {
           public void onSuccess(final List<I18nTranslationDTO> result) {
             dataProvider.setList(result);
             dataProvider.refresh();
+            if (result.size() > 0) {
+              selectionModel.setSelected(result.get(0), true);
+            }
+            loadCallback.onCallback();
           }
         });
+  }
+
+  public void setLoadCallback(final SimpleCallback loadCallback) {
+    this.loadCallback = loadCallback;
+  }
+
+  public void setSelectionMode(final SingleSelectionModel<I18nTranslationDTO> selectionModel) {
+    this.selectionModel = selectionModel;
   }
 
 }

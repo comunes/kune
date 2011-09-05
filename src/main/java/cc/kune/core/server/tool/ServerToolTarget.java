@@ -20,5 +20,16 @@
 package cc.kune.core.server.tool;
 
 public enum ServerToolTarget {
-    forUsers, forGroups, forBoth
+  /**
+   * This is a tool developed both for users and groups
+   */
+  forBoth,
+  /**
+   * A tools developed only for groups
+   */
+  forGroups,
+  /**
+   * A tool developed only for users
+   */
+  forUsers
 }

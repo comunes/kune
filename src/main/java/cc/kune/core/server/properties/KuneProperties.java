@@ -42,10 +42,14 @@ public interface KuneProperties {
   String SITE_ADMIN_SHORTNAME = "kune.admin.shortName";
   String SITE_DEF_LICENSE = "kune.default.license";
   String SITE_DOMAIN = "kune.site.domain";
+  String SITE_GROUP_AVAILABLE_TOOLS = "kune.tools.groupSiteAvailableTools";
+  String SITE_GROUP_REGIST_ENABLED_TOOLS = "kune.tools.groupRegisEnabledTools";
   String SITE_LOGO_URL = "kune.sitelogourl";
   String SITE_NAME = "kune.default.site.name";
   String SITE_SHORTNAME = "kune.default.site.shortName";
   String SITE_URL = "kune.siteurl";
+  String SITE_USER_AVAILABLE_TOOLS = "kune.tools.userSiteAvailableTools";
+  String SITE_USER_REGIST_ENABLED_TOOLS = "kune.tools.userRegisEnabledTools";
   String UPLOAD_DELAY_FOR_TEST = "kune.upload.delayfortest";
   String UPLOAD_GALLERY_PERMITTED_EXTS = "kune.upload.gallerypermittedextensions";
   String UPLOAD_LOCATION = "kune.upload.location";

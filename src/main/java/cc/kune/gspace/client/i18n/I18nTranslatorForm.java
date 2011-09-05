@@ -28,7 +28,6 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -45,8 +44,6 @@ public class I18nTranslatorForm extends Composite {
   }
 
   private static Binder uiBinder = GWT.create(Binder.class);
-
-  private CellList<I18nTranslationDTO> cellList;
   @UiField
   PushButton copyIcon;
   private I18nTranslationProvider dataProvider;
@@ -86,6 +83,10 @@ public class I18nTranslatorForm extends Composite {
     translation.setText(toTranslate.getText());
   }
 
+  public void focusToTranslate() {
+    translation.setFocus(true);
+  }
+
   @UiHandler("translation")
   void handleBlur(final BlurEvent event) {
     update();
@@ -105,31 +106,29 @@ public class I18nTranslatorForm extends Composite {
 
   @UiHandler("translation")
   void handleKeyPress(final KeyPressEvent event) {
-    if (event.isControlKeyDown() && event.isAltKeyDown()
-        && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_UP) {
-      cellList.fireEvent(event);
-    }
-    if (event.isControlKeyDown() && event.isAltKeyDown()
-        && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_DOWN) {
-      cellList.fireEvent(event);
-    }
-    if (event.isAltKeyDown() && event.getCharCode() == 'v') {
+    if (event.isAltKeyDown()
+        && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_PAGEUP) {
+      // cellList.fireEvent(event);
+      dataProvider.selectPrevious();
+    } else if (event.isAltKeyDown()
+        && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_PAGEDOWN) {
+      // cellList.fireEvent(event);
+      dataProvider.selectNext();
+    } else if (event.isAltKeyDown() && event.getCharCode() == 'v') {
       copyTranslation();
       event.stopPropagation();
+      updateWithTimer();
     }
-    updateWithTimer();
   }
 
-  public void init(final I18nTranslationProvider dataProvider, final I18nTranslationService i18n,
-      final CellList<I18nTranslationDTO> cellList) {
+  public void init(final I18nTranslationProvider dataProvider, final I18nTranslationService i18n) {
     this.dataProvider = dataProvider;
     this.i18n = i18n;
-    this.cellList = cellList;
     Tooltip.to(copyIcon, i18n.t("Copy the text to translate"));
     toTranslateTitle.setText(i18n.t("translate this:"));
     noteForTranslatorsTittle.setText(i18n.t("Notes:"));
     keyboardRecomendationTitle.setText(i18n.t("Tip:"));
-    keyboardRecomendation.setText(i18n.t("Pulse TAB/Shift-TAB to move from the list to the translation area, and use the cursor to move bettween list elements. Alt-V to copy the original text. The translations are autosaved"));
+    keyboardRecomendation.setText(i18n.t("Pulse Alt+PageUp or Alt+PageDown to move up/down in the list while translating, and Alt-V to copy the original text. The translations are autosaved"));
   }
 
   public void setInfo(final I18nTranslationDTO item) {

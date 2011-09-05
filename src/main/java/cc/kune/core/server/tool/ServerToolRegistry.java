@@ -22,67 +22,102 @@ package cc.kune.core.server.tool;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cc.kune.core.server.properties.KuneProperties;
+
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 public class ServerToolRegistry {
-    static Log log = LogFactory.getLog(ServerToolRegistry.class);
+  public static List<String> emptyToolList = new ArrayList<String>();
 
-    public static Collection<String> emptyToolList = new ArrayList<String>();
+  static Log log = LogFactory.getLog(ServerToolRegistry.class);
 
-    private final HashMap<String, ServerTool> tools;
-    private final HashMap<String, ToolSimple> toolsForUsersMap;
-    private final HashMap<String, ToolSimple> toolsForGroupsMap;
+  private final List<String> groupsAvailableToolsInProp;
+  private final List<String> groupsRegisEnabledTools;
+  private final List<String> groupsRegisEnabledToolsInProp;
+  private final HashMap<String, ServerTool> tools;
+  private final List<ToolSimple> toolsAvailableForGroups;
+  private final List<ToolSimple> toolsAvailableForUsers;
+  private final List<String> usersAvailableToolsInProp;
+  private final List<String> usersRegisEnabledTools;
+  private final List<String> usersRegisEnabledToolsInProp;
 
-    public ServerToolRegistry() {
-        tools = new HashMap<String, ServerTool>();
-        toolsForUsersMap = new HashMap<String, ToolSimple>();
-        toolsForGroupsMap = new HashMap<String, ToolSimple>();
+  @Inject
+  public ServerToolRegistry(final KuneProperties kuneProperties) {
+    tools = new HashMap<String, ServerTool>();
+    toolsAvailableForUsers = new ArrayList<ToolSimple>();
+    toolsAvailableForGroups = new ArrayList<ToolSimple>();
+    usersRegisEnabledTools = new ArrayList<String>();
+    groupsRegisEnabledTools = new ArrayList<String>();
+    usersAvailableToolsInProp = kuneProperties.getList(KuneProperties.SITE_USER_AVAILABLE_TOOLS);
+    groupsAvailableToolsInProp = kuneProperties.getList(KuneProperties.SITE_GROUP_AVAILABLE_TOOLS);
+    usersRegisEnabledToolsInProp = kuneProperties.getList(KuneProperties.SITE_USER_REGIST_ENABLED_TOOLS);
+    groupsRegisEnabledToolsInProp = kuneProperties.getList(KuneProperties.SITE_GROUP_REGIST_ENABLED_TOOLS);
+  }
+
+  public Collection<ServerTool> all() {
+    return tools.values();
+  }
+
+  public ServerTool get(final String toolName) {
+    return tools.get(toolName);
+  }
+
+  public List<ToolSimple> getToolsAvailableForGroups() {
+    return toolsAvailableForGroups;
+  }
+
+  public List<ToolSimple> getToolsAvailableForUsers() {
+    return toolsAvailableForUsers;
+  }
+
+  public List<String> getToolsRegisEnabledForGroups() {
+    return groupsRegisEnabledTools;
+  }
+
+  public List<String> getToolsRegisEnabledForUsers() {
+    return usersRegisEnabledTools;
+  }
+
+  public void register(final ServerTool tool) {
+    final String name = tool.getName();
+    final String rootName = tool.getRootName();
+    final boolean userAvailable = usersAvailableToolsInProp.contains(name);
+    final boolean groupAvailable = groupsAvailableToolsInProp.contains(name);
+    if (userAvailable && usersRegisEnabledToolsInProp.contains(name)) {
+      usersRegisEnabledTools.add(name);
     }
-
-    public Collection<ServerTool> all() {
-        return tools.values();
+    if (groupAvailable && groupsRegisEnabledToolsInProp.contains(name)) {
+      groupsRegisEnabledTools.add(name);
     }
-
-    public ServerTool get(final String toolName) {
-        return tools.get(toolName);
-    }
-
-    public ArrayList<ToolSimple> getToolsForGroups() {
-        return new ArrayList<ToolSimple>(toolsForGroupsMap.values());
-    }
-
-    public Collection<String> getToolsForGroupsKeys() {
-        return toolsForGroupsMap.keySet();
-    }
-
-    public Collection<String> getToolsForUserKeys() {
-        return toolsForUsersMap.keySet();
-    }
-
-    public ArrayList<ToolSimple> getToolsForUsers() {
-        return new ArrayList<ToolSimple>(toolsForUsersMap.values());
-    }
-
-    public void register(final ServerTool tool) {
-        String name = tool.getName();
-        String rootName = tool.getRootName();
-        tools.put(name, tool);
-        switch (tool.getTarget()) {
-        case forGroups:
-            toolsForGroupsMap.put(name, new ToolSimple(name, rootName));
-            break;
-        case forUsers:
-            toolsForUsersMap.put(name, new ToolSimple(name, rootName));
-            break;
-        case forBoth:
-            toolsForGroupsMap.put(name, new ToolSimple(name, rootName));
-            toolsForUsersMap.put(name, new ToolSimple(name, rootName));
-            break;
+    if (userAvailable || groupAvailable) {
+      tools.put(name, tool);
+      switch (tool.getTarget()) {
+      case forGroups:
+        if (groupAvailable) {
+          toolsAvailableForGroups.add(new ToolSimple(name, rootName));
         }
+        break;
+      case forUsers:
+        if (userAvailable) {
+          toolsAvailableForUsers.add(new ToolSimple(name, rootName));
+        }
+        break;
+      case forBoth:
+        if (groupAvailable) {
+          toolsAvailableForGroups.add(new ToolSimple(name, rootName));
+        }
+        if (userAvailable) {
+          toolsAvailableForUsers.add(new ToolSimple(name, rootName));
+        }
+        break;
+      }
     }
+  }
 }

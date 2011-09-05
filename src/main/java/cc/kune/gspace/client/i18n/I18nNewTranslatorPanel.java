@@ -13,7 +13,7 @@ import com.google.inject.Inject;
 
 public class I18nNewTranslatorPanel extends AbstractTabbedDialogPanel implements I18nNewTranslatorView {
 
-  private static final int HEIGHT = 200;
+  private static final int HEIGHT = 280;
   private static final String TRANSLATOR_ERROR_ID = "i18n-trans-panel-error";
   private static final String TRANSLATOR_PANEL_ID = "i18n-trans-panel";
   private static final int WIDTH = 570;
@@ -27,12 +27,11 @@ public class I18nNewTranslatorPanel extends AbstractTabbedDialogPanel implements
       final TranslatorTabsCollection transGroup, final LanguageSelectorPanel lanSelectorPanel,
       final I18nToTranslateGridPanel toTranslateGrid, final I18nTranslatedGridPanel translatedGrid,
       final I18nTranslateRecomendPanel transRecommend, final CoreResources res) {
-    super(TRANSLATOR_PANEL_ID, "", WIDTH, HEIGHT + 80, false, false, images, TRANSLATOR_ERROR_ID,
+    super(TRANSLATOR_PANEL_ID, "", WIDTH, HEIGHT, false, false, images, TRANSLATOR_ERROR_ID,
         i18n.t("Close"), null, null, null, transGroup);
     setIcon(res.language());
     this.lanSelectorPanel = lanSelectorPanel;
     lanSelectorPanel.addChangeListener(new SimpleCallback() {
-
       @Override
       public void onCallback() {
         setLanguage(lanSelectorPanel.getLanguage());
@@ -41,7 +40,7 @@ public class I18nNewTranslatorPanel extends AbstractTabbedDialogPanel implements
     this.toTranslateGrid = toTranslateGrid;
     this.translatedGrid = translatedGrid;
     this.transRecommend = transRecommend;
-    transRecommend.setSize(String.valueOf(WIDTH), String.valueOf(HEIGHT));
+    transRecommend.setSize(WIDTH, HEIGHT);
     super.setIconCls("k-options-icon");
     super.setTitle(i18n.t("Help to translate kune"));
     super.getInnerPanel().insert(lanSelectorPanel, 0);

@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +50,7 @@ public class InitDataTest extends IntegrationTest {
   @Inject
   UserSession session;
 
-  private void assertValidLicenseDTOList(final ArrayList<LicenseDTO> licenseList) {
+  private void assertValidLicenseDTOList(final List<LicenseDTO> licenseList) {
     assertTrue(licenseList.size() > 0);
     for (final Object o : licenseList) {
       assertNotNull(o);

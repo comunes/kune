@@ -19,10 +19,8 @@
  */
 package cc.kune.core.shared.dto;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -32,21 +30,21 @@ public class InitDataDTO implements IsSerializable {
   private String chatDomain;
   private String chatHttpBase;
   private String chatRoomHost;
-  private ArrayList<I18nCountryDTO> countries;
+  private List<I18nCountryDTO> countries;
   private String currentCCversion;
   private LicenseDTO defaultLicense;
   private String defaultWsTheme;
   private List<ExtMediaDescripDTO> extMediaDescrips;
   private String flvEmbedObject;
   private String galleryPermittedExtensions;
-  private ArrayList<ToolSimpleDTO> groupTools;
+  private List<ToolSimpleDTO> groupTools;
   private HashMap<String, GSpaceTheme> gSpaceThemes = new HashMap<String, GSpaceTheme>();
   private int imgCropsize;
   private int imgIconsize;
   private int imgResizewidth;
   private int imgThumbsize;
-  private ArrayList<I18nLanguageSimpleDTO> languages;
-  private ArrayList<LicenseDTO> licenses;
+  private List<I18nLanguageSimpleDTO> languages;
+  private List<LicenseDTO> licenses;
   private String maxFileSizeInMb;
   private String mp3EmbedObject;
   private String oggEmbedObject;
@@ -56,7 +54,7 @@ public class InitDataDTO implements IsSerializable {
   private String siteUrl;
   private String[] timezones;
   private UserInfoDTO userInfo;
-  private ArrayList<ToolSimpleDTO> userTools;
+  private List<ToolSimpleDTO> userTools;
 
   public InitDataDTO() {
   }
@@ -77,7 +75,7 @@ public class InitDataDTO implements IsSerializable {
     return chatRoomHost;
   }
 
-  public ArrayList<I18nCountryDTO> getCountries() {
+  public List<I18nCountryDTO> getCountries() {
     return countries;
   }
 
@@ -105,7 +103,7 @@ public class InitDataDTO implements IsSerializable {
     return galleryPermittedExtensions;
   }
 
-  public ArrayList<ToolSimpleDTO> getGroupTools() {
+  public List<ToolSimpleDTO> getGroupTools() {
     return groupTools;
   }
 
@@ -129,11 +127,11 @@ public class InitDataDTO implements IsSerializable {
     return imgThumbsize;
   }
 
-  public ArrayList<I18nLanguageSimpleDTO> getLanguages() {
+  public List<I18nLanguageSimpleDTO> getLanguages() {
     return languages;
   }
 
-  public ArrayList<LicenseDTO> getLicenses() {
+  public List<LicenseDTO> getLicenses() {
     return licenses;
   }
 
@@ -174,7 +172,7 @@ public class InitDataDTO implements IsSerializable {
     return userInfo;
   }
 
-  public ArrayList<ToolSimpleDTO> getUserTools() {
+  public List<ToolSimpleDTO> getUserTools() {
     return userTools;
   }
 
@@ -198,7 +196,7 @@ public class InitDataDTO implements IsSerializable {
     this.chatRoomHost = chatRoomHost;
   }
 
-  public void setCountries(final ArrayList<I18nCountryDTO> countries) {
+  public void setCountries(final List<I18nCountryDTO> countries) {
     this.countries = countries;
   }
 
@@ -226,7 +224,7 @@ public class InitDataDTO implements IsSerializable {
     this.galleryPermittedExtensions = galleryPermittedExtensions;
   }
 
-  public void setGroupTools(final ArrayList<ToolSimpleDTO> groupTools) {
+  public void setGroupTools(final List<ToolSimpleDTO> groupTools) {
     this.groupTools = groupTools;
   }
 
@@ -250,11 +248,11 @@ public class InitDataDTO implements IsSerializable {
     this.imgThumbsize = imgThumbsize;
   }
 
-  public void setLanguages(final ArrayList<I18nLanguageSimpleDTO> languages) {
+  public void setLanguages(final List<I18nLanguageSimpleDTO> languages) {
     this.languages = languages;
   }
 
-  public void setLicenses(final ArrayList<LicenseDTO> licenses) {
+  public void setLicenses(final List<LicenseDTO> licenses) {
     this.licenses = licenses;
   }
 
@@ -295,7 +293,7 @@ public class InitDataDTO implements IsSerializable {
     this.userInfo = currentUser;
   }
 
-  public void setUserTools(final ArrayList<ToolSimpleDTO> userTools) {
+  public void setUserTools(final List<ToolSimpleDTO> userTools) {
     this.userTools = userTools;
   }
 

@@ -17,6 +17,7 @@
  */
 package cc.kune.gspace.client.i18n;
 
+import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -26,8 +27,6 @@ import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -134,17 +133,10 @@ public class I18nCellList extends Composite {
     cellList.setEmptyListMessage(SafeHtmlUtils.fromTrustedString("<span style='padding: 10px; font-style: italic;'>Loading</span>"));
     cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
     cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
-    cellList.addHandler(new KeyPressHandler() {
-      @Override
-      public void onKeyPress(final KeyPressEvent event) {
-        if (event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_UP) {
-        } else if (event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_DOWN) {
-        }
-      }
-    }, KeyPressEvent.getType());
-    // Add a selection model so we can select cells.
     final SingleSelectionModel<I18nTranslationDTO> selectionModel = new SingleSelectionModel<I18nTranslationDTO>(
         I18nTranslationDTO.KEY_PROVIDER);
+    // Add a selection model so we can select cells.
+
     cellList.setSelectionModel(selectionModel);
     cellList.setValueUpdater(new ValueUpdater<I18nTranslationDTO>() {
       @Override
@@ -156,14 +148,24 @@ public class I18nCellList extends Composite {
       @Override
       public void onSelectionChange(final SelectionChangeEvent event) {
         translatorForm.setInfo(selectionModel.getSelectedObject());
+        translatorForm.focusToTranslate();
+        // cellList.get
+        // pagerPanel.ensureVisible((UIObject) event.getSource());
       }
     });
     cellList.sinkEvents(com.google.gwt.user.client.Event.KEYEVENTS);
     // Create the UiBinder.
     final Binder uiBinder = GWT.create(Binder.class);
     initWidget(uiBinder.createAndBindUi(this));
-    translatorForm.init(data, i18n, cellList);
+    translatorForm.init(data, i18n);
     data.addDataDisplay(cellList);
+    data.setSelectionMode(selectionModel);
+    data.setLoadCallback(new SimpleCallback() {
+      @Override
+      public void onCallback() {
+        translatorForm.focusToTranslate();
+      }
+    });
 
     // Set the cellList as the display of the pagers.
     // pagerPanel is a scrollable pager that extends the range when the
