@@ -27,4 +27,5 @@ public class I18nToTranslateGridPanel extends Composite {
   public void setLanguage(final I18nLanguageSimpleDTO language) {
     list.setLanguage(language, true);
   }
+
 }

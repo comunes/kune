@@ -18,13 +18,15 @@
 package cc.kune.gspace.client.i18n;
 
 import cc.kune.common.client.utils.SimpleCallback;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
@@ -101,7 +103,7 @@ public class I18nCellList extends Composite {
    */
   private final CellList<I18nTranslationDTO> cellList;
 
-  private final I18nTranslationProvider data;
+  private final I18nTranslationDataProvider data;
 
   /**
    * The pager used to change the range of data.
@@ -122,8 +124,10 @@ public class I18nCellList extends Composite {
   I18nTranslatorForm translatorForm;
 
   @Inject
-  public I18nCellList(final I18nTranslationProvider data, final I18nTranslationService i18n) {
+  public I18nCellList(final I18nTranslationDataProvider data, final I18nUITranslationService i18n,
+      final I18nTraslatorSaver saver) {
     this.data = data;
+
     final TranslationCell cell = new TranslationCell();
 
     // Set a key provider that provides a unique key for each contact. If key is
@@ -138,26 +142,31 @@ public class I18nCellList extends Composite {
     // Add a selection model so we can select cells.
 
     cellList.setSelectionModel(selectionModel);
+
+    // Create the UiBinder.
+    final Binder uiBinder = GWT.create(Binder.class);
+    initWidget(uiBinder.createAndBindUi(this));
+    translatorForm.init(data, i18n, saver);
     cellList.setValueUpdater(new ValueUpdater<I18nTranslationDTO>() {
+
       @Override
       public void update(final I18nTranslationDTO value) {
-        // TODO Auto-generated method stub
+        // save(value);
       }
     });
     selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
       @Override
       public void onSelectionChange(final SelectionChangeEvent event) {
         translatorForm.setInfo(selectionModel.getSelectedObject());
-        translatorForm.focusToTranslate();
-        // cellList.get
-        // pagerPanel.ensureVisible((UIObject) event.getSource());
+        Scheduler.get().scheduleEntry(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            translatorForm.focusToTranslate();
+          }
+        });
       }
     });
-    cellList.sinkEvents(com.google.gwt.user.client.Event.KEYEVENTS);
-    // Create the UiBinder.
-    final Binder uiBinder = GWT.create(Binder.class);
-    initWidget(uiBinder.createAndBindUi(this));
-    translatorForm.init(data, i18n);
+    // cellList.sinkEvents(com.google.gwt.user.client.Event.KEYEVENTS);
     data.addDataDisplay(cellList);
     data.setSelectionMode(selectionModel);
     data.setLoadCallback(new SimpleCallback() {
@@ -180,4 +189,5 @@ public class I18nCellList extends Composite {
     data.setLanguage(language, toTranslate);
     translatorForm.setToLanguage(language);
   }
+
 }

@@ -3,18 +3,14 @@ package cc.kune.gspace.client.i18n;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialog;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
@@ -26,51 +22,28 @@ public class I18nTranslatorPresenter extends
   public interface I18nTranslatorProxy extends Proxy<I18nTranslatorPresenter> {
   }
 
-  public interface I18nTranslatorView extends AbstractTabbedDialogView {
-    void hide();
+  public interface I18nTranslatorView extends
+      cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView {
 
     void init();
 
     void setLanguage(I18nLanguageSimpleDTO currentLanguage);
 
-    void show();
-
   }
 
   private final I18nUITranslationService i18n;
-  private final Provider<I18nServiceAsync> i18nService;
   private final Session session;
 
   @Inject
   public I18nTranslatorPresenter(final EventBus eventBus, final I18nTranslatorProxy proxy,
-      final Session session, final I18nUITranslationService i18n, final I18nTranslatorView view,
-      final Provider<I18nServiceAsync> i18nService) {
+      final Session session, final I18nUITranslationService i18n, final I18nTranslatorView view) {
     super(eventBus, view, proxy);
     this.session = session;
     this.i18n = i18n;
-    this.i18nService = i18nService;
   }
 
   public void doClose() {
     getView().hide();
-  }
-
-  public void doTranslation(final String id, final String trKey, final String translation) {
-    NotifyUser.showProgress(i18n.t("Saving"));
-    i18nService.get().setTranslation(session.getUserHash(), id, translation,
-        new AsyncCallback<String>() {
-          @Override
-          public void onFailure(final Throwable caught) {
-            NotifyUser.hideProgress();
-            NotifyUser.error(i18n.t("Server error saving the translation"));
-          }
-
-          @Override
-          public void onSuccess(final String result) {
-            NotifyUser.hideProgress();
-            i18n.setTranslationAfterSave(trKey, result);
-          }
-        });
   }
 
   @Override

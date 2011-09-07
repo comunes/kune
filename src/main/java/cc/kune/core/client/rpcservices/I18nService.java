@@ -41,6 +41,6 @@ public interface I18nService extends RemoteService {
 
   String getTranslation(String userHash, String language, String text);
 
-  String setTranslation(String userHash, String id, String translation) throws DefaultException;
+  String setTranslation(String userHash, Long id, String translation) throws DefaultException;
 
 }

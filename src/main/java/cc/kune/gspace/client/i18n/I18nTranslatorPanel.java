@@ -24,7 +24,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   @Inject
   public I18nTranslatorPanel(final I18nTranslationService i18n, final NotifyLevelImages images,
-      final TranslatorTabsCollection transGroup, final LanguageSelectorPanel lanSelectorPanel,
+      final I18nTranslatorTabsCollection transGroup, final LanguageSelectorPanel lanSelectorPanel,
       final I18nToTranslateGridPanel toTranslateGrid, final I18nTranslatedGridPanel translatedGrid,
       final I18nTranslateRecomendPanel transRecommend, final CoreResources res) {
     super(TRANSLATOR_PANEL_ID, "", false, false, images, TRANSLATOR_ERROR_ID, i18n.t("Close"), null,

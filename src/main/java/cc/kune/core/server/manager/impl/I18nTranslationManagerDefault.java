@@ -162,8 +162,8 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   }
 
   @Override
-  public String setTranslation(final String id, final String translation) throws DefaultException {
-    final I18nTranslation trans = super.find(Long.valueOf(id));
+  public String setTranslation(final Long id, final String translation) throws DefaultException {
+    final I18nTranslation trans = super.find(id);
     if (trans != null) {
       final String escapedTranslation = TextUtils.escapeHtmlLight(translation);
       trans.setText(escapedTranslation);

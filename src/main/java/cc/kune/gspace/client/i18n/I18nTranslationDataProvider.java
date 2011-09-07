@@ -29,7 +29,7 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.inject.Inject;
 
-public class I18nTranslationProvider {
+public class I18nTranslationDataProvider {
 
   private final ListDataProvider<I18nTranslationDTO> dataProvider = new ListDataProvider<I18nTranslationDTO>();
   private final I18nServiceAsync i18n;
@@ -38,7 +38,7 @@ public class I18nTranslationProvider {
   private final Session session;
 
   @Inject
-  private I18nTranslationProvider(final Session session, final I18nServiceAsync i18n) {
+  private I18nTranslationDataProvider(final Session session, final I18nServiceAsync i18n) {
     this.session = session;
     this.i18n = i18n;
   }

@@ -139,7 +139,7 @@ public class I18nRPC implements RPC, I18nService {
   @Override
   @Authenticated
   @Transactional
-  public String setTranslation(final String userHash, final String id, final String translation)
+  public String setTranslation(final String userHash, final Long id, final String translation)
       throws DefaultException {
     return i18nTranslationManager.setTranslation(id, translation);
   }

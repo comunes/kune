@@ -29,7 +29,7 @@ import cc.kune.gspace.client.i18n.I18nTranslatorPanel;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView;
 import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
-import cc.kune.gspace.client.i18n.TranslatorTabsCollection;
+import cc.kune.gspace.client.i18n.I18nTranslatorTabsCollection;
 import cc.kune.gspace.client.licensewizard.LicenseChangeAction;
 import cc.kune.gspace.client.licensewizard.LicenseWizard;
 import cc.kune.gspace.client.licensewizard.LicenseWizardPanel;
@@ -153,7 +153,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     s(UserOptionsCollection.class);
     s(GroupOptionsCollection.class);
-    s(TranslatorTabsCollection.class);
+    s(I18nTranslatorTabsCollection.class);
 
     s(GroupOptGeneral.class, GroupOptGeneralPresenter.class);
     s(GroupOptGeneralView.class, GroupOptGeneralPanel.class);

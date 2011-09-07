@@ -25,5 +25,5 @@ import com.google.inject.Singleton;
 
 @SuppressWarnings("serial")
 @Singleton
-public class TranslatorTabsCollection extends ProvidersCollection {
+public class I18nTranslatorTabsCollection extends ProvidersCollection {
 }

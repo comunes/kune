@@ -46,7 +46,7 @@ public class I18nTranslatorForm extends Composite {
   private static Binder uiBinder = GWT.create(Binder.class);
   @UiField
   PushButton copyIcon;
-  private I18nTranslationProvider dataProvider;
+  private I18nTranslationDataProvider dataProvider;
   private I18nTranslationService i18n;
   private I18nTranslationDTO item;
   @UiField
@@ -58,14 +58,13 @@ public class I18nTranslatorForm extends Composite {
   Label noteForTranslators;
   @UiField
   Label noteForTranslatorsTittle;
+  private I18nTraslatorSaver saver;
   @UiField
   Label toLanguageTitle;
   @UiField
   Label toTranslate;
-
   @UiField
   Label toTranslateTitle;
-
   @UiField
   TextArea translation;
 
@@ -108,11 +107,11 @@ public class I18nTranslatorForm extends Composite {
   void handleKeyPress(final KeyPressEvent event) {
     if (event.isAltKeyDown()
         && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_PAGEUP) {
-      // cellList.fireEvent(event);
+      saveIfNeeded();
       dataProvider.selectPrevious();
     } else if (event.isAltKeyDown()
         && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_PAGEDOWN) {
-      // cellList.fireEvent(event);
+      saveIfNeeded();
       dataProvider.selectNext();
     } else if (event.isAltKeyDown() && event.getCharCode() == 'v') {
       copyTranslation();
@@ -121,9 +120,11 @@ public class I18nTranslatorForm extends Composite {
     }
   }
 
-  public void init(final I18nTranslationProvider dataProvider, final I18nTranslationService i18n) {
+  public void init(final I18nTranslationDataProvider dataProvider, final I18nTranslationService i18n,
+      final I18nTraslatorSaver saver) {
     this.dataProvider = dataProvider;
     this.i18n = i18n;
+    this.saver = saver;
     Tooltip.to(copyIcon, i18n.t("Copy the text to translate"));
     toTranslateTitle.setText(i18n.t("translate this:"));
     noteForTranslatorsTittle.setText(i18n.t("Notes:"));
@@ -131,7 +132,16 @@ public class I18nTranslatorForm extends Composite {
     keyboardRecomendation.setText(i18n.t("Pulse Alt+PageUp or Alt+PageDown to move up/down in the list while translating, and Alt-V to copy the original text. The translations are autosaved"));
   }
 
+  private void saveIfNeeded() {
+    keyboardTimer.cancel();
+    final String newTranslation = translation.getText();
+    if (item != null && !item.getText().equals(newTranslation)) {
+      saver.save(new I18nTranslationDTO(item.getId(), item.getTrKey(), newTranslation));
+    }
+  }
+
   public void setInfo(final I18nTranslationDTO item) {
+    saveIfNeeded();
     this.item = item;
     final String[] splitted = splitNT(item.getTrKey());
     toTranslate.setText(splitted[0]);
@@ -160,10 +170,12 @@ public class I18nTranslatorForm extends Composite {
   }
 
   private void update() {
+    keyboardTimer.cancel();
     if (item != null) {
       item.setText(translation.getText());
       item.setDirty(true);
       dataProvider.refreshDisplays();
+      saveIfNeeded();
     }
   }
 

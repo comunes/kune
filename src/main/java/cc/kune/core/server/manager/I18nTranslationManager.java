@@ -46,7 +46,7 @@ public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
   SearchResult<I18nTranslation> getUntranslatedLexicon(String language, Integer firstResult,
       Integer maxResults);
 
-  String setTranslation(String id, String translation) throws DefaultException;
+  String setTranslation(Long id, String translation) throws DefaultException;
 
   void setTranslation(String language, String text, String translation);
 
