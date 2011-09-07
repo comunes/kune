@@ -32,11 +32,11 @@ import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.GroupOptions;
 
@@ -174,7 +174,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
       final GroupDTO group = new GroupDTO(shortName, longName, getTypeOfGroup());
       group.setDefaultLicense(license);
 
-      final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
+      final AsyncCallback<StateAbstractDTO> callback = new AsyncCallback<StateAbstractDTO>() {
         @Override
         public void onFailure(final Throwable caught) {
           if (caught instanceof GroupShortNameInUseException) {
@@ -195,12 +195,13 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
         }
 
         @Override
-        public void onSuccess(final StateToken token) {
+        public void onSuccess(final StateAbstractDTO state) {
           getView().hide();
           Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {
-              stateManager.gotoStateToken(token);
+              stateManager.setRetrievedStateAndGo(state);
+              NotifyUser.info("Test", true);
               groupOptions.showTooltip();
             }
           });

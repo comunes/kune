@@ -21,12 +21,18 @@ package cc.kune.common.client.ui.dialogs.tabbed;
 
 import cc.kune.common.client.notify.NotifyLevel;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDialog {
+public abstract class AbstractTabbedDialogPresenter<V extends View, Proxy_ extends Proxy<?>> extends
+    Presenter<View, Proxy<?>> implements AbstractTabbedDialog {
 
-  public interface AbstractTabbedDialogView extends IsWidget {
-
+  public interface AbstractTabbedDialogView extends View, IsWidget {
     void activateTab(int index);
 
     void addTab(IsWidget tab, IsWidget tabTitle);
@@ -44,50 +50,56 @@ public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDia
     void show();
   }
 
-  private AbstractTabbedDialogView view;
+  @Inject
+  public AbstractTabbedDialogPresenter(final EventBus eventBus, final AbstractTabbedDialogView view,
+      final Proxy<?> proxy) {
+    super(eventBus, view, proxy);
+  }
 
   @Override
   public void activateTab(final int index) {
-    view.activateTab(index);
+    getView().activateTab(index);
   }
 
   @Override
   public void addTab(final IsWidget tab, final IsWidget tabTitle) {
-    view.addTab(tab, tabTitle);
+    getView().addTab(tab, tabTitle);
   }
 
-  public IsWidget getView() {
-    return view;
+  @Override
+  public AbstractTabbedDialogView getView() {
+    return (AbstractTabbedDialogView) super.getView();
   }
 
   @Override
   public void hide() {
-    view.hide();
+    getView().hide();
   }
 
   @Override
   public void hideMessages() {
-    view.hideMessages();
-  }
-
-  public void init(final AbstractTabbedDialogView view) {
-    this.view = view;
+    getView().hideMessages();
   }
 
   @Override
   public void insertTab(final IsWidget tab, final IsWidget tabTitle, final int index) {
-    view.insertTab(tab, tabTitle, index);
+    getView().insertTab(tab, tabTitle, index);
+  }
+
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
   }
 
   @Override
   public void setErrorMessage(final String message, final NotifyLevel level) {
-    view.setErrorMessage(message, level);
+    getView().setErrorMessage(message, level);
   }
 
   @Override
   public void show() {
     hideMessages();
-    view.show();
+    getView().show();
   }
 
 }

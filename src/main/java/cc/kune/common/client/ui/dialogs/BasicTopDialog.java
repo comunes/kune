@@ -41,7 +41,7 @@ public class BasicTopDialog extends BasicDialog {
     private final String dialogId;
     private String firstButtonId;
     private String firstButtonTitle;
-    private String height = "70%";
+    private String height;
     private String icon;
     private final boolean modal;
     private String sndButtonId;
@@ -83,8 +83,7 @@ public class BasicTopDialog extends BasicDialog {
     }
 
     public Builder height(final int height) {
-      // FIXME
-      this.height = String.valueOf(height); // + "px";
+      this.height = String.valueOf(height + "px");
       return this;
     }
 
@@ -119,8 +118,7 @@ public class BasicTopDialog extends BasicDialog {
     }
 
     public Builder width(final int width) {
-      // FIXME
-      this.width = String.valueOf(width); // + "px";
+      this.width = String.valueOf(width + "px");
       return this;
     }
 
@@ -154,7 +152,7 @@ public class BasicTopDialog extends BasicDialog {
     super.getTitleText().setText(builder.title);
     setWidthImpl(builder.width);
     setHeightImpl(builder.height);
-    setSizes();
+    recalculateSize();
     Window.addResizeHandler(new ResizeHandler() {
       @Override
       public void onResize(final ResizeEvent event) {
@@ -173,6 +171,10 @@ public class BasicTopDialog extends BasicDialog {
 
   public void hide() {
     popup.hide();
+  }
+
+  public void recalculateSize() {
+    setSizes(Window.getClientWidth(), Window.getClientHeight());
   }
 
   private void setCloseBtn(final boolean closeBtn) {
@@ -205,17 +207,13 @@ public class BasicTopDialog extends BasicDialog {
 
   private void setHeightImpl(final String height) {
     this.height = height;
-    setSizes();
+    recalculateSize();
   }
 
   @Override
   public void setSize(final String width, final String height) {
     this.width = width;
     setHeightImpl(height);
-  }
-
-  private void setSizes() {
-    setSizes(Window.getClientWidth(), Window.getClientHeight());
   }
 
   private void setSizes(final int windowWidth, final int windowHeight) {
@@ -250,7 +248,7 @@ public class BasicTopDialog extends BasicDialog {
 
   private void setWidthImpl(final String width) {
     this.width = width;
-    setSizes();
+    recalculateSize();
   }
 
   public void showCentered() {

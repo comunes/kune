@@ -39,7 +39,7 @@ public interface GroupService extends RemoteService {
 
   GroupDTO clearGroupBackImage(String userHash, StateToken token);
 
-  StateToken createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags,
+  StateAbstractDTO createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags,
       String[] enabledTools) throws DefaultException;
 
   GroupDTO getGroup(String userHash, StateToken token);

@@ -33,10 +33,23 @@ import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.options.UserOptionsPresenter.UserOptionsView;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.Proxy;
 
-public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implements UserOptions {
+public class UserOptionsPresenter extends
+    AbstractTabbedDialogPresenter<UserOptionsView, UserOptionsPresenter.UserOptionsProxy> implements
+    UserOptions {
+
+  @ProxyCodeSplit
+  public interface UserOptionsProxy extends Proxy<UserOptionsPresenter> {
+  }
+
+  public interface UserOptionsView extends EntityOptionsView {
+  }
 
   private final I18nTranslationService i18n;
   private final CoreResources res;
@@ -45,9 +58,10 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
   private final SiteUserOptions userOptions;
 
   @Inject
-  public UserOptionsPresenter(final Session session, final StateManager stateManager,
-      final I18nTranslationService i18n, final CoreResources res, final SiteUserOptions userOptions,
-      final UserOptionsView view) {
+  public UserOptionsPresenter(final EventBus eventBus, final UserOptionsProxy proxy,
+      final Session session, final StateManager stateManager, final I18nTranslationService i18n,
+      final CoreResources res, final SiteUserOptions userOptions, final UserOptionsView view) {
+    super(eventBus, view, proxy);
     this.session = session;
     this.stateManager = stateManager;
     this.i18n = i18n;
@@ -56,14 +70,18 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
     session.onUserSignIn(false, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
-        view.hide();
+        getView().hide();
       }
     });
-    init(view);
   }
 
-  private void init(final UserOptionsView view) {
-    super.init(view);
+  @Override
+  public UserOptionsView getView() {
+    return (UserOptionsView) super.getView();
+  }
+
+  @Override
+  protected void onBind() {
     final AbstractExtendedAction userPrefsAction = new AbstractExtendedAction() {
 
       @Override
@@ -77,7 +95,7 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
     session.onUserSignOut(false, new UserSignOutHandler() {
       @Override
       public void onUserSignOut(final UserSignOutEvent event) {
-        view.hide();
+        getView().hide();
       }
     });
     userPrefsAction.putValue(Action.NAME, i18n.t("Your preferences"));

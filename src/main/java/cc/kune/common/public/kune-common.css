@@ -22,7 +22,7 @@
 
 .k-opacity80 {
   kfilter: alpha(opacity =
-    80);
+     80);
   -moz-opacity: 0.80;
   -khtml-opacity: 0.80;
   opacity: 0.80;
@@ -30,7 +30,7 @@
 
 .k-opacity90 {
   kfilter: alpha(opacity =
-    90);
+     90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -38,7 +38,7 @@
 
 .k-opacity95 {
   kfilter: alpha(opacity =
-    95);
+     95);
   -moz-opacity: 0.95;
   -khtml-opacity: 0.95;
   opacity: 0.95;
@@ -47,7 +47,7 @@
 .gwt-PopupPanelGlass {
   background-color: #f7ebe3 !important;
   kfilter: alpha(opacity =
-    68) !important;
+     68) !important;
   -moz-opacity: 0.68 !important;
   -khtml-opacity: 0.68 !important;
   opacity: 0.68 !important;
@@ -308,7 +308,7 @@
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =                                 90);
+  kfilter: alpha(opacity =                                   90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -551,7 +551,7 @@
   _border-left-color: pink;
   _border-bottom-color: pink;
   _border-right-color: pink;
-  _filter: chroma(color =                       pink);
+  _filter: chroma(color =                         pink);
 }
 
 /* end tooltip */

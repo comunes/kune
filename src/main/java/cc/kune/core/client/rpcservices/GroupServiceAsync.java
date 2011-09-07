@@ -39,7 +39,7 @@ public interface GroupServiceAsync {
   void clearGroupBackImage(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
   void createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags,
-      String[] enabledTools, AsyncCallback<StateToken> callback);
+      String[] enabledTools, AsyncCallback<StateAbstractDTO> callback);
 
   void getGroup(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 

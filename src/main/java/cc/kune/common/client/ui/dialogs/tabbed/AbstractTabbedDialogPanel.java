@@ -23,9 +23,12 @@ import cc.kune.common.client.ProvidersCollection;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -40,15 +43,17 @@ import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.ViewImpl;
 
-public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogView {
+public abstract class AbstractTabbedDialogPanel extends ViewImpl implements AbstractTabbedDialogView {
+  private static final int NO_SIZE = -1;
   private final boolean autohide;
   private BasicTopDialog dialog;
   private final String dialogId;
   private final String errorLabelId;
   private final String firstBtnId;
   private final String firstBtnTitle;
-  private int height;
+  private int height = NO_SIZE;
   private ImageResource icon;
   private String iconCls;
   private final NotifyLevelImages images;
@@ -59,7 +64,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private final String sndBtnTitle;
   private TabLayoutPanel tabPanel;
   private String title;
-  private int width;
+  private int width = NO_SIZE;
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
       final boolean autoHide, final NotifyLevelImages images, final String errorLabelId,
@@ -82,8 +87,8 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
       final NotifyLevelImages images, final String errorLabelId, final String firstBtnTitle,
       final String firstBtnId, final String sndBtnTitle, final String sndBtnId,
       final ProvidersCollection provCollection) {
-    this(dialogId, title, modal, false, images, errorLabelId, firstBtnTitle, firstBtnId, sndBtnTitle,
-        sndBtnId, provCollection);
+    this(dialogId, title, NO_SIZE, NO_SIZE, modal, false, images, errorLabelId, firstBtnTitle,
+        firstBtnId, sndBtnTitle, sndBtnId, provCollection);
   }
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
@@ -124,23 +129,42 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   }
 
   private void createDialog() {
-    dialog = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(true).width(
-        String.valueOf(width + 20)).height(String.valueOf(height + 20)).icon(iconCls).firstButtonId(
-        firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(
-        sndBtnId).title(title).build();
+    final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(true).icon(
+        iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(dialogId).sndButtonTitle(
+        sndBtnTitle).sndButtonId(sndBtnId).title(title);
+    if (width != NO_SIZE) {
+      builder.width(String.valueOf(width + 20) + "px");
+    }
+    if (height != NO_SIZE) {
+      builder.height(String.valueOf(height + 20) + "px");
+    }
+    dialog = builder.build();
     if (icon != null) {
       dialog.setTitleIcon(icon);
     }
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     tabPanel = new TabLayoutPanel(25, Unit.PX);
+    tabPanel.addStyleName("oc-noselec");
     tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
       @Override
       public void onSelection(final SelectionEvent<Integer> event) {
+        // dialog.recalculateSize();
         dialog.showCentered();
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            dialog.showCentered();
+          }
+        });
       }
     });
     provCollection.createAll();
-    tabPanel.setSize(String.valueOf(width) + "px", String.valueOf(height) + "px");
+    if (width != NO_SIZE) {
+      tabPanel.setWidth(String.valueOf(width) + "px");
+    }
+    if (height != NO_SIZE) {
+      tabPanel.setHeight(String.valueOf(height) + "px");
+    }
     dialog.getInnerPanel().add(tabPanel);
     tabPanel.addStyleName("k-tabpanel-aditionalpadding");
     tabPanel.addStyleName("k-tabs");

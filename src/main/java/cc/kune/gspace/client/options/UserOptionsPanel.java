@@ -24,8 +24,8 @@ import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.options.UserOptionsPresenter.UserOptionsView;
 
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
 public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserOptionsView {
@@ -33,15 +33,11 @@ public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserO
   public static final String USER_OP_PANEL_ID = "k-uop-diagpan";
   public static final String USER_OPTIONS_ERROR_ID = "k-uop-err-mess";
 
-  private HandlerRegistration addClickHandler;
-  private final UserOptionsCollection userPreferencesGroup;
-
   @Inject
   public UserOptionsPanel(final EntityHeader entityHeader, final I18nTranslationService i18n,
       final NotifyLevelImages images, final UserOptionsCollection userOptionsGroup) {
-    super(USER_OP_PANEL_ID, "", WIDTH, HEIGHT + 80, false, images, USER_OPTIONS_ERROR_ID,
-        i18n.t("Close"), null, null, null, userOptionsGroup);
-    this.userPreferencesGroup = userOptionsGroup;
+    super(USER_OP_PANEL_ID, "", false, images, USER_OPTIONS_ERROR_ID, i18n.t("Close"), null, null, null,
+        userOptionsGroup);
     super.setIconCls("k-options-icon");
     super.setTitle(i18n.t(CoreMessages.USER_OPTIONS_DIALOG_TITLE));
   }

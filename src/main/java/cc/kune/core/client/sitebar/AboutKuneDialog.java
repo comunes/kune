@@ -49,7 +49,7 @@ public class AboutKuneDialog {
   public AboutKuneDialog(final I18nTranslationService i18n) {
     dialog = new BasicTopDialog.Builder(ABOUT_KUNE_ID, true, true).title(i18n.t("About Kune")).autoscroll(
         false).firstButtonTitle(i18n.t("Ok")).firstButtonId(ABOUT_KUNE_BTN_ID).tabIndexStart(1).height(
-        "300px").width("400px").build();
+        "300px").width("410px").build();
     dialog.getInnerPanel().add(BINDER.createAndBindUi(this));
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {
       @Override

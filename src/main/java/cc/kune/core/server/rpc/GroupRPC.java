@@ -99,7 +99,7 @@ public class GroupRPC implements RPC, GroupService {
   @Override
   @Authenticated
   @Transactional(rollbackOn = DefaultException.class)
-  public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO,
+  public StateAbstractDTO createNewGroup(final String userHash, final GroupDTO groupDTO,
       final String publicDesc, final String tags, final String[] enabledTools) throws DefaultException {
     final User user = getUserLogged();
     reserverdWords.check(groupDTO.getShortName(), groupDTO.getLongName());
@@ -108,7 +108,7 @@ public class GroupRPC implements RPC, GroupService {
     // This is necessary?
     contentManager.save(newGroup.getDefaultContent());
     // contentManager.setTags(user, defContentId, tags);
-    return newGroup.getDefaultContent().getStateToken();
+    return contentRPC.getContent(userHash, newGroup.getDefaultContent().getStateToken());
   };
 
   @Override

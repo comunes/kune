@@ -20,7 +20,10 @@
 package cc.kune.gspace.client;
 
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
+import cc.kune.gspace.client.i18n.I18nTranslatorPresenter;
 import cc.kune.gspace.client.licensewizard.LicenseWizardPresenter;
+import cc.kune.gspace.client.options.GroupOptionsPresenter;
+import cc.kune.gspace.client.options.UserOptionsPresenter;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
@@ -41,7 +44,11 @@ public interface GSpaceGinjector extends Ginjector {
 
   AsyncProvider<FolderViewerPresenter> getFolderViewerPresenter();
 
+  AsyncProvider<GroupOptionsPresenter> getGroupOptionsPresenter();
+
   GSpaceParts getGSpaceParts();
+
+  AsyncProvider<I18nTranslatorPresenter> getI18nTranslatorPresenter();
 
   AsyncProvider<LicenseWizardPresenter> getLicenseWizardPresenter();
 
@@ -50,4 +57,6 @@ public interface GSpaceGinjector extends Ginjector {
   AsyncProvider<TagsSummaryPresenter> getTagsSummaryPresenter();
 
   AsyncProvider<ToolSelectorPresenter> getToolSelectorPresenter();
+
+  AsyncProvider<UserOptionsPresenter> getUserOptionsPresenter();
 }

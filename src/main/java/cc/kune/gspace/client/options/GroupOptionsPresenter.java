@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
@@ -33,26 +34,41 @@ import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.options.GroupOptionsPresenter.GroupOptionsView;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.Proxy;
 
-public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter implements GroupOptions {
+public class GroupOptionsPresenter extends
+    AbstractTabbedDialogPresenter<GroupOptionsView, GroupOptionsPresenter.GroupOptionsProxy> implements
+    GroupOptions {
+
+  @ProxyCodeSplit
+  public interface GroupOptionsProxy extends Proxy<GroupOptionsPresenter> {
+  }
+
+  public interface GroupOptionsView extends EntityOptionsView {
+    void addAction(GuiActionDescrip descriptor);
+  }
+
   public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
   private final I18nTranslationService i18n;
   private final CoreResources img;
   private ButtonDescriptor prefsItem;
   private final Session session;
   private final StateManager stateManager;
-  private GroupOptionsView view;
 
   @Inject
-  public GroupOptionsPresenter(final StateManager stateManager, final Session session,
-      final I18nTranslationService i18n, final CoreResources img, final GroupOptionsView view) {
+  public GroupOptionsPresenter(final EventBus eventBus, final GroupOptionsProxy proxy,
+      final StateManager stateManager, final Session session, final I18nTranslationService i18n,
+      final CoreResources img, final GroupOptionsView view) {
+    super(eventBus, view, proxy);
     this.stateManager = stateManager;
     this.session = session;
     this.i18n = i18n;
     this.img = img;
-    init(view);
   }
 
   private void createActions() {
@@ -72,12 +88,17 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
     prefsItem.setId(GROUP_OPTIONS_ICON);
     prefsItem.withToolTip(i18n.t("Set your group preferences here"));
     prefsItem.setVisible(false);
-    view.addAction(prefsItem);
+    getView().addAction(prefsItem);
   }
 
-  private void init(final GroupOptionsView view) {
-    super.init(view);
-    this.view = view;
+  @Override
+  public GroupOptionsView getView() {
+    return (GroupOptionsView) super.getView();
+  }
+
+  @Override
+  protected void onBind() {
+    super.onBind();
     createActions();
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
@@ -86,7 +107,7 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
         if (!state.getGroup().isPersonal() && state.getGroupRights().isAdministrable()) {
           prefsItem.setVisible(true);
         } else {
-          view.hide();
+          getView().hide();
           prefsItem.setVisible(false);
         }
       }
@@ -94,7 +115,7 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
     session.onUserSignOut(false, new UserSignOutHandler() {
       @Override
       public void onUserSignOut(final UserSignOutEvent event) {
-        view.hide();
+        getView().hide();
       }
     });
   }

@@ -81,6 +81,11 @@ public class SessionDefault implements Session {
         signOut();
       }
     });
+    check(new AsyncCallbackSimple<Void>() {
+      @Override
+      public void onSuccess(final Void result) {
+      }
+    });
   }
 
   @Override

@@ -50,17 +50,25 @@
       width: 180px;
       height: 95px;
       border: 1px dashed #BBBBBB;
+    }
+
+    div.toTranslate {
       -moz-border-radius: 3px;
       -webkit-border-radius: 3px;
       border-radius: 3px;
       padding: 3px;
+    }
+
+    .toTranlateLabel {
+      height: 95px !important;
+      overflow-y: scroll;
     }
   </ui:style>
   <g:FlowPanel addStyleNames="{style.table}">
     <g:FlowPanel addStyleNames="{style.row}">
       <g:Label ui:field="toTranslateTitle" addStyleNames="{style.titles} {style.cell}"/>
       <g:FlowPanel addStyleNames="{style.cell}" styleName="{style.toTranslate}">
-        <g:Label ui:field="toTranslate"/>
+        <g:Label ui:field="toTranslate" styleName="{style.toTranlateLabel}"/>
       </g:FlowPanel>
       <g:Label addStyleNames="{style.row}"/>
     </g:FlowPanel>

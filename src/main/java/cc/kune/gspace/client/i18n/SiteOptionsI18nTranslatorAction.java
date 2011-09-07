@@ -34,29 +34,24 @@ import com.google.inject.Singleton;
 @Singleton
 public class SiteOptionsI18nTranslatorAction extends AbstractExtendedAction {
   private I18nTranslator translator;
-  private final Provider<I18nNewTranslatorPanel> translatorPanel;
-  private final Provider<I18nNewTranslatorPresenter> translatorPresenter;
+  private final Provider<I18nTranslator> translatorProv;
 
   @Inject
   public SiteOptionsI18nTranslatorAction(final I18nTranslationService i18n, final CoreResources img,
-      final Provider<I18nNewTranslatorPresenter> translatorPresenter,
-      final Provider<I18nNewTranslatorPanel> translatorPanel, final SitebarActionsPresenter siteOptions) {
+      final Provider<I18nTranslator> translatorProv, final SitebarActionsPresenter siteOptions) {
     super();
-    this.translatorPresenter = translatorPresenter;
-    this.translatorPanel = translatorPanel;
+    this.translatorProv = translatorProv;
     putValue(Action.NAME, i18n.t("Help with the translation"));
     putValue(Action.SMALL_ICON, img.language());
     MenuItemDescriptor.build(siteOptions.getOptionsMenu(), this);
-    // item.setPosition(1);
   }
 
   @Override
   public void actionPerformed(final ActionEvent event) {
     if (translator == null) {
-      final I18nNewTranslatorPresenter presenter = translatorPresenter.get();
-      presenter.init(translatorPanel.get());
-      translator = presenter;
+      translator = translatorProv.get();
     }
     translator.show();
+    // item.setPosition(1);
   }
 }

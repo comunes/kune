@@ -24,10 +24,10 @@ import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RenameAction;
-import cc.kune.gspace.client.i18n.I18nNewTranslatorPanel;
-import cc.kune.gspace.client.i18n.I18nNewTranslatorPresenter;
-import cc.kune.gspace.client.i18n.I18nNewTranslatorPresenter.I18nNewTranslatorView;
 import cc.kune.gspace.client.i18n.I18nTranslator;
+import cc.kune.gspace.client.i18n.I18nTranslatorPanel;
+import cc.kune.gspace.client.i18n.I18nTranslatorPresenter;
+import cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView;
 import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import cc.kune.gspace.client.i18n.TranslatorTabsCollection;
 import cc.kune.gspace.client.licensewizard.LicenseChangeAction;
@@ -47,12 +47,12 @@ import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.GroupOptionsCollection;
 import cc.kune.gspace.client.options.GroupOptionsPanel;
 import cc.kune.gspace.client.options.GroupOptionsPresenter;
-import cc.kune.gspace.client.options.GroupOptionsView;
+import cc.kune.gspace.client.options.GroupOptionsPresenter.GroupOptionsView;
 import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.options.UserOptionsCollection;
 import cc.kune.gspace.client.options.UserOptionsPanel;
 import cc.kune.gspace.client.options.UserOptionsPresenter;
-import cc.kune.gspace.client.options.UserOptionsView;
+import cc.kune.gspace.client.options.UserOptionsPresenter.UserOptionsView;
 import cc.kune.gspace.client.options.general.GroupOptGeneral;
 import cc.kune.gspace.client.options.general.GroupOptGeneralPanel;
 import cc.kune.gspace.client.options.general.GroupOptGeneralPresenter;
@@ -143,10 +143,13 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     s(NoHomePageViewer.class);
 
+    bindPresenter(GroupOptionsPresenter.class, GroupOptionsView.class, GroupOptionsPanel.class,
+        GroupOptionsPresenter.GroupOptionsProxy.class);
     s(GroupOptions.class, GroupOptionsPresenter.class);
-    s(GroupOptionsView.class, GroupOptionsPanel.class);
+
+    bindPresenter(UserOptionsPresenter.class, UserOptionsView.class, UserOptionsPanel.class,
+        UserOptionsPresenter.UserOptionsProxy.class);
     s(UserOptions.class, UserOptionsPresenter.class);
-    s(UserOptionsView.class, UserOptionsPanel.class);
 
     s(UserOptionsCollection.class);
     s(GroupOptionsCollection.class);
@@ -193,8 +196,9 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(LicenseChangeAction.class);
 
     // I18nTranslator
-    s(I18nNewTranslatorView.class, I18nNewTranslatorPanel.class);
-    s(I18nTranslator.class, I18nNewTranslatorPresenter.class);
+    bindPresenter(I18nTranslatorPresenter.class, I18nTranslatorView.class, I18nTranslatorPanel.class,
+        I18nTranslatorPresenter.I18nTranslatorProxy.class);
+    s(I18nTranslator.class, I18nTranslatorPresenter.class);
     s(SiteOptionsI18nTranslatorAction.class);
   }
 }

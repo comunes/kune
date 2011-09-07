@@ -80,8 +80,8 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   @Inject
   public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img,
       final MaskWidgetView mask) {
-    final Builder builder = new BasicTopDialog.Builder(NEWGROUP_WIZARD, false, true).autoscroll(true).height(
-        340).title(i18n.t("Register a new group"));
+    final Builder builder = new BasicTopDialog.Builder(NEWGROUP_WIZARD, false, true).autoscroll(true).title(
+        i18n.t("Register a new group"));
     builder.icon("k-newgroup-icon");
     builder.firstButtonTitle(i18n.t("Register")).firstButtonId(REGISTER_BUTTON);
     builder.sndButtonTitle(i18n.t("Cancel")).sndButtonId(CANCEL_BUTTON);

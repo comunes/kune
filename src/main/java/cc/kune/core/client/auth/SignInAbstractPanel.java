@@ -45,13 +45,12 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   public SignInAbstractPanel(final String dialogId, final MaskWidgetView mask,
       final I18nTranslationService i18n, final String title, final boolean autohide,
-      final boolean modal, final boolean autoscroll, final int width, final int heigth,
-      final String icon, final String firstButtonTitle, final String firstButtonId,
-      final String cancelButtonTitle, final String cancelButtonId, final NotifyLevelImages images,
-      final String errorLabelId, final int tabIndexStart) {
+      final boolean modal, final boolean autoscroll, final String icon, final String firstButtonTitle,
+      final String firstButtonId, final String cancelButtonTitle, final String cancelButtonId,
+      final NotifyLevelImages images, final String errorLabelId, final int tabIndexStart) {
 
-    final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(autoscroll);
-    builder.width(width).height(heigth).title(title);
+    final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(autoscroll).title(
+        title);
     builder.icon(icon);
     builder.firstButtonTitle(firstButtonTitle).firstButtonId(firstButtonId);
     builder.sndButtonTitle(cancelButtonTitle).sndButtonId(cancelButtonId);
