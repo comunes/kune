@@ -130,7 +130,7 @@ or running:
 
 ===Connecting to the server===
 
-Open your browser and connect to http://yourIP:8080/kune
+Open your browser and connect to http://localhost:8888/ws/
 
 ==Production environment instructions==
 
