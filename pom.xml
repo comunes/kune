@@ -986,7 +986,6 @@
         <artifactId>gwt-maven-plugin</artifactId>
         <version>${gwtmaven.version}</version>
         <configuration>
-          <compileReport>true</compileReport>
           <logLevel>INFO</logLevel>
           <style>OBF</style>
           <noServer>true</noServer>
@@ -999,7 +998,8 @@
           </modules>
           <copyWebapp>true</copyWebapp>
           <compileReport>false</compileReport>
-          <extraJvmArgs>-Xmx1024m -Xss1024k</extraJvmArgs>
+          <localWorkers>1</localWorkers><!-- Using all workers can temporarily hang the mouse and isn't much faster -->
+          <extraJvmArgs>-Xmx1024m</extraJvmArgs>
         </configuration>
         <executions>
           <execution>
