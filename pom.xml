@@ -1,772 +1,1257 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>cc.kune</groupId>
-	<artifactId>kune</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	
-	<name>kune</name>
-	<description>kune free/open/libre collaboration platform</description>
-	<url>http://kune.ourproject.org</url>
-	<properties>
-		<gwt.version>2.1.1</gwt.version>
-		<gwtmaven.version>2.1.0-1</gwtmaven.version>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<slf4j.version>1.6.1</slf4j.version>
-		<openjpa.version>2.0.1</openjpa.version>
-		<skipTests>true</skipTests>
-		<debian.originalVersion>0.1.0-SNAPSHOT</debian.originalVersion>
-		<debian.package>kune</debian.package>
-		<debian.mavenRules><![CDATA[cc.kune kune jar 0.1.0-SNAPSHOT * *]]></debian.mavenRules>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-servlet</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>debian</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-servlet</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-persist</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.extjs</groupId>
-			<artifactId>gxt</artifactId>
-			<version>debian</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.cobogw.gwt</groupId>
-			<artifactId>cobogw</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gwtplatform</groupId>
-			<artifactId>gwtp-all</artifactId>
-			<version>debian</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.adamtacy</groupId>
-			<artifactId>gwt-fx</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gwtext</groupId>
-			<artifactId>gwtext</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gwtextux</groupId>
-			<artifactId>gwtextux</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
-			<artifactId>gwt-log</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
-			<artifactId>gwt-voices</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.allen_sauer.gwt.dnd.gwt-dnd</groupId>
-			<artifactId>gwt-dnd</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.dozer</groupId>
-			<artifactId>dozer</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>jmagick</groupId>
-			<artifactId>jmagick</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.xwiki.platform</groupId>
-			<artifactId>xwiki-web-gwt-dom</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.calclab.emite</groupId>
-			<artifactId>emite</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.calclab.emite</groupId>
-			<artifactId>emite-proxy</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.calclab.emite</groupId>
-			<artifactId>hablar</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>jivesoftware</groupId>
-			<artifactId>smack</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>jivesoftware</groupId>
-			<artifactId>smackx</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jivesoftware.smackx.debugger</groupId>
-			<artifactId>smackx-debugger</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>debian</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.hibernate</groupId>
-					<artifactId>hibernate</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-search</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-tools</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-c3p0</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>stax</groupId>
-			<artifactId>stax-api</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jettison</groupId>
-			<artifactId>jettison</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>debian</version>
-			<classifier>jdk15</classifier>
-		</dependency>
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-plugin</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>debian</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jukito</groupId>
-			<artifactId>jukito</artifactId>
-			<version>debian</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>debian</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>debian</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium</artifactId>
-			<version>debian</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.google.collections</groupId>
-					<artifactId>google-collections</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>debian</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>tigase</groupId>
-			<artifactId>tigase-xmltools</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jruby.rack</groupId>
-			<artifactId>jruby-rack</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>waveinabox-server-0.3</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>proto-msg</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>gwt-util-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava-gwt</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>box</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>box-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>model-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>client</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>client-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>client-common</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>client-common-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>common-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>util-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>concurrencycontrol-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>client-scheduler-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>media-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>communication-src</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.findbugs</groupId>
-			<artifactId>jsr-305</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-cli</groupId>
-			<artifactId>commons-cli</artifactId>
-			<version>debian</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>debian</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mvel</groupId>
-			<artifactId>mvel2</artifactId>
-			<version>debian</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.gwtupload</groupId>
-			<artifactId>gwtupload</artifactId>
-			<version>debian</version>
-		</dependency>
-	</dependencies>
-	<issueManagement>
-		<system>kune issues list at ourproject.org</system>
-		<url>http://kune.ourproject.org/issues/</url>
-	</issueManagement>
-	<developers>
-		<developer>
-			<id>dani</id>
-			<name>Daniel Gómez Blasco</name>
-			<email>danigb@gmail.com</email>
-		</developer>
-		<developer>
-			<name>Samer Hassan</name>
-			<email>samer2004@gmail.com</email>
-		</developer>
-		<developer>
-			<name>Vicente J. Ruiz Jurado</name>
-			<email>vjrj@ourproject.org</email>
-		</developer>
-	</developers>
-	<scm>
-		<url>svn://scm.ourproject.org/svnroot/kune/trunk</url>
-	</scm>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2</version>
-				<executions>
-					<execution>
-						<phase>exec</phase>
-						<goals>
-							<goal>java</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<mainClass>cc.kune.wave.server.WaveMain</mainClass>
-					<commandlineArgs>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8001</commandlineArgs>
-					<systemProperties>
-						<systemProperty>
-							<key>kune.server.config</key>
-							<value>src/main/resources/kune.properties</value>
-						</systemProperty>
-						<systemProperty>
-							<key>wave.server.config</key>
-							<value>src/main/resources/wave-server.properties</value>
-						</systemProperty>
-						<systemProperty>
-							<key>org.eclipse.jetty.util.resource.FileResource.checkAliases</key>
-							<value>False</value>
-						</systemProperty>
-						<systemProperty>
-							<key>java.security.auth.login.config</key>
-							<value>src/main/resources/jaas.config</value>
-						</systemProperty>
-						<systemProperty>
-							<key>DEBUG</key>
-							<value>false</value>
-						</systemProperty>
-						<systemProperty>
-							<key>org.eclipse.jetty.util.log.INFO</key>
-							<value>true</value>
-						</systemProperty>
-					</systemProperties>
-					<classpathScope>runtime</classpathScope>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1-beta-1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.4.3</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit47</artifactId>
-						<version>debian</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<excludes>
-						<exclude>**/*_Roo_*</exclude>
-					</excludes>
-					<forkMode>pertest</forkMode>
-					<parallel>methods</parallel>
-					<threadCount>10</threadCount>
-					<property>
-						<name>junit</name>
-						<value>true</value>
-					</property>
-					<skipTests>${skipTests}</skipTests>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<configuration>
-							<skip>false</skip>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<dependencySets>
-						<dependencySet>
-							<scope>runtime</scope>
-							<unpackOptions>
-								<excludes>
-									<exclude>**/gxt/**</exclude>
-									<exclude>**/extjs/**</exclude>
-									<exclude>**extjs**</exclude>
-									<exclude>**gxt**</exclude>
-								</excludes>
-							</unpackOptions>
-						</dependencySet>
-					</dependencySets>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.8</version>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>false</downloadJavadocs>
-					<wtpversion>2.0</wtpversion>
-					<additionalBuildcommands>
-						<buildCommand>
-							<name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
-						</buildCommand>
-					</additionalBuildcommands>
-					<workspaceCodeStylesURL>http://kune.ourproject.org/kune.formatter.eclipse.preferences.xml</workspaceCodeStylesURL>
-					<additionalProjectnatures>
-						<projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
-					</additionalProjectnatures>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-idea-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<dependenciesAsLibraries>true</dependenciesAsLibraries>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.0</version>
-				<configuration>
-					<path>/</path>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>7.1.2.v20100523</version>
-				<configuration>
-					<webAppConfig>
-						<contextPath>/</contextPath>
-					</webAppConfig>
-					<webAppSourceDirectory>${project.build.directory}/${project.build.finalName}</webAppSourceDirectory>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.1.0-1</version>
-				<configuration>
-					<logLevel>INFO</logLevel>
-					<style>OBF</style>
-					<noServer>true</noServer>
-					<gwtVersion>${gwt.version}</gwtVersion>
-					<runTarget>/ws/ws.html?log_level=DEBUG</runTarget>
-					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
-					<modules>
-						<module>${project.groupId}.Kune</module>
-					</modules>
-					<copyWebapp>true</copyWebapp>
-					<compileReport>false</compileReport>
-					<localWorkers>1</localWorkers>
-					<extraJvmArgs>-Xmx1024m</extraJvmArgs>
-				</configuration>
-				<executions>
-					<execution>
-						<configuration>
-							<extraJvmArgs>-Xmx1024M</extraJvmArgs>
-						</configuration>
-						<id>gwtcompile</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>com.google.gwt</groupId>
-						<artifactId>gwt-dev</artifactId>
-						<version>debian</version>
-					</dependency>
-					<dependency>
-						<groupId>com.google.gwt</groupId>
-						<artifactId>gwt-user</artifactId>
-						<version>debian</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-plugin</artifactId>
-				<version>1.7.0.0</version>
-				<executions>
-					<execution>
-						<phase>process-resources</phase>
-						<configuration>
-							<changeLogFile>src/main/resources/db/liquibase_changelog.xml</changeLogFile>
-							<driver>com.mysql.jdbc.Driver</driver>
-							<url>jdbc:mysql://localhost/kune_dev</url>
-							<username>kune</username>
-							<password>db4kune</password>
-							<verbose>true</verbose>
-						</configuration>
-						<goals>
-							<goal>update</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<mainClass>cc.kune.wave.server.WaveMain</mainClass>
-							<classpathMavenRepositoryLayout>true</classpathMavenRepositoryLayout>
-						</manifest>
-						<manifestEntries>
-							<mode>development</mode>
-							<url>${project.url}</url>
-						</manifestEntries>
-					</archive>
-				</configuration>
-				<executions>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.dstovall</groupId>
-				<artifactId>onejar-maven-plugin</artifactId>
-				<version>1.4.4-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<configuration>
-							<attachToBuild>true</attachToBuild>
-							<classifier>onejar</classifier>
-						</configuration>
-						<goals>
-							<goal>one-jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh-external</artifactId>
-				<version>debian</version>
-			</extension>
-		</extensions>
-	</build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cc.kune</groupId>
+  <artifactId>kune</artifactId>
+  <packaging>jar</packaging>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>kune</name>
+  <description> kune free/open/libre collaboration platform
+  </description>
+  <url>http://kune.ourproject.org</url>
+  <properties>
+    <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
+    <gwt.version>2.1.1</gwt.version>
+    <!-- <gwtmaven.version>2.2.0</gwtmaven.version> -->
+    <gwtmaven.version>2.1.0-1</gwtmaven.version>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <slf4j.version>1.6.1</slf4j.version>
+    <openjpa.version>2.0.1</openjpa.version>
+    <skipTests>true</skipTests>
+  </properties>
+  <repositories>
+    <repository>
+      <id>kune-maven</id>
+      <url>http://kune.ourproject.org/mavenrepo/</url>
+    </repository>
+    <repository>
+      <id>guice-maven</id>
+      <name>guice maven</name>
+      <url>http://guice-maven.googlecode.com/svn/trunk</url>
+    </repository>
+    <repository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Maven Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/
+      </url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>ext-gxt</id>
+      <name>ext-gxt at jahia</name>
+      <url>http://maven.jahia.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>cobogw</id>
+      <name>Cobogw repository at googlecode</name>
+      <url>http://cobogw.googlecode.com/svn/maven2</url>
+    </repository>
+    <repository>
+      <id>gwt-repo</id>
+      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/
+      </url>
+      <name>Google Web Toolkit Repository</name>
+    </repository>
+    <repository>
+      <id>gwt-maven-rewraps</id>
+      <url>http://gwt-maven-rewraps.googlecode.com/hg/</url>
+    </repository>
+    <!-- cc -->
+    <repository>
+      <id>dyndns-repo</id>
+      <url>http://maven.dyndns.org/2</url>
+    </repository>
+    <!-- seems that these are not working/neccesary now: -->
+    <!-- <repository> <id>google-maven-snapshot-repository</id> <name>Google
+      Maven Snapshot Repository</name> <url>https://oss.sonatype.org/content/repositories/google-snapshots/
+      </url> <snapshots> <enabled>true</enabled> </snapshots> </repository> <repository>
+      <id>gwtplatform.snapshot.repo</id> <name>Gwtplatform snapshot repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/ </url> <layout>default</layout>
+      </repository> -->
+    <repository>
+      <id>openqa.org</id>
+      <name>Openqa Release Repository</name>
+      <url>http://archiva.openqa.org/repository/releases</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>openqa.org snapshots</id>
+      <name>Openqa Snapshot Repository</name>
+      <url>http://archiva.openqa.org/repository/snapshots</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>ignore</checksumPolicy>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>xwiki-releases</id>
+      <name>XWiki Maven2 Remote Repository for Releases</name>
+      <url>http://maven.xwiki.org/releases</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>xwiki</id>
+      <name>XWiki Repository</name>
+      <url>http://maven.xwiki.org/snapshots</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>tigase</id>
+      <name>Tigase Repository</name>
+      <url>http://maven.tigase.org</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <!-- cc -->
+    <pluginRepository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Maven Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/
+      </url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+    <!-- cc -->
+    <!-- <pluginRepository> <id>gwt-maven</id> <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
+      </pluginRepository> -->
+    <pluginRepository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>  <!-- Workaround for MNG-2974, see note below -->
+      </releases>
+    </pluginRepository>
+    <pluginRepository>
+      <id>maven2-repository.dev.java.net</id>
+      <name>Java.net Repository for Maven</name>
+      <url>http://download.java.net/maven/2/</url>
+      <layout>default</layout>
+    </pluginRepository>
+    <pluginRepository>
+      <id>gwt-plugin-repo</id>
+      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/
+      </url>
+      <name>Google Web Toolkit Plugin Repository</name>
+    </pluginRepository>
+    <pluginRepository>
+      <id>onejar-maven-plugin.googlecode.com-snap</id>
+      <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo-snapshot</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>onejar-maven-plugin.googlecode.com</id>
+      <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+      <version>${gwt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>${gwt.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- guice -->
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <!-- <version>2.1-SNAPSHOT-r1160</version> -->
+      <version>3.0</version>
+    </dependency>
+    <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId>
+      <version>gin-1.1-SNAPSHOT</version> </dependency> -->
+    <dependency>
+      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-servlet</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-persist</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.extjs</groupId>
+      <artifactId>gxt</artifactId>
+      <version>2.2.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.cobogw.gwt</groupId>
+      <artifactId>cobogw</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gwtplatform</groupId>
+      <artifactId>gwtp-all</artifactId>
+      <version>0.5</version>
+      <!-- <version>0.6-SNAPSHOT</version> -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-web</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.adamtacy</groupId>
+      <artifactId>gwt-fx</artifactId>
+      <version>r464</version>
+    </dependency>
+    <!-- <dependency> <groupId>com.jhickman.web.gwt</groupId> <artifactId>gwt-customuibinder</artifactId>
+      <version>0.1</version> </dependency> <dependency> <groupId>com.jhickman.web.gwt</groupId>
+      <artifactId>gxt-uibinder</artifactId> <version>0.6</version> </dependency> -->
+    <!-- cc -->
+    <dependency>
+      <groupId>com.gwtext</groupId>
+      <artifactId>gwtext</artifactId>
+      <version>2.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gwtextux</groupId>
+      <artifactId>gwtextux</artifactId>
+      <version>0.4.0.924</version>
+    </dependency>
+    <dependency>
+      <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
+      <artifactId>gwt-log</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
+      <artifactId>gwt-voices</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.allen_sauer.gwt.dnd.gwt-dnd</groupId>
+      <artifactId>gwt-dnd</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+    <!-- utilities -->
+    <dependency>
+      <groupId>net.sf.dozer</groupId>
+      <artifactId>dozer</artifactId>
+      <version>4.0</version>
+    </dependency>
+    <!-- <dependency> <groupId>com.calclab</groupId> <artifactId>suco</artifactId>
+      <version>0.6.5</version> </dependency> -->
+    <dependency>
+      <groupId>jmagick</groupId>
+      <artifactId>jmagick</artifactId>
+      <version>6.2.6-0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-web-gwt-dom</artifactId>
+      <version>2.3-rc-1</version>
+      <!-- <version>2.0-SNAPSHOT-g164</version> -->
+      <!-- <version>2.0-SNAPSHOT</version> -->
+      <!-- <version>2.0-SNAPSHOT-g20s</version> -->
+    </dependency>
+    <!-- xmpp -->
+    <dependency>
+      <groupId>com.calclab.emite</groupId>
+      <artifactId>emite</artifactId>
+      <version>r1694</version>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab.emite</groupId>
+      <artifactId>emite-proxy</artifactId>
+      <version>0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab.emite</groupId>
+      <artifactId>hablar</artifactId>
+      <version>r1697</version>
+    </dependency>
+    <dependency>
+      <groupId>jivesoftware</groupId>
+      <artifactId>smack</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jivesoftware</groupId>
+      <artifactId>smackx</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jivesoftware.smackx.debugger</groupId>
+      <artifactId>smackx-debugger</artifactId>
+      <version>3.0.4</version>
+    </dependency>
+    <!-- mysql -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.13</version>
+    </dependency>
+    <!-- hibernate JPA -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>3.3.1.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>3.1.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-annotations</artifactId>
+      <version>3.4.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-commons-annotations</artifactId>
+      <version>3.3.0.ga</version>
+      <!-- http://stackoverflow.com/questions/882338/hibernate-preinsertevent-getsource-nosuchmethoderror -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> -->
+    <!-- <version>3.3.1.GA</version> </dependency> -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-search</artifactId>
+      <version>3.1.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>3.4.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-tools</artifactId>
+      <version>3.2.3.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-c3p0</artifactId>
+      <version>3.3.1.GA</version>
+    </dependency>
+    <!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId>
+      <version>0.9.1.2</version> </dependency> -->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <!-- wave use 2.5 -->
+      <version>2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.16</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
+    </dependency>
+    <!-- REST: xml and json (stax) -->
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>stax</groupId>
+      <artifactId>stax-api</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <version>1.0-RC2</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.1</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2</version>
+    </dependency>
+    <!-- File upload -->
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <!-- db upgrades -->
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>1.8.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-plugin</artifactId>
+      <version>1.8.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- testing dependencies -->
+    <dependency>
+      <groupId>org.jukito</groupId>
+      <artifactId>jukito</artifactId>
+      <version>1.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.0.20070617</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>
+      <!-- =roo -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium</artifactId>
+      <version>2.0a4</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.collections</groupId>
+          <artifactId>google-collections</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.0.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>tigase</groupId>
+      <artifactId>tigase-xmltools</artifactId>
+      <version>3.3.5</version>
+      <!-- <scope>test</scope> -->
+    </dependency>
+    <!-- If you want to start a selenium server, you will need the following
+      dependency: -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.seleniumhq.selenium</groupId> -->
+    <!-- <artifactId>selenium-server</artifactId> -->
+    <!-- <version>2.0a4</version> -->
+    <!-- </dependency> -->
+
+    <!-- public side -->
+    <dependency>
+      <groupId>org.jruby.rack</groupId>
+      <artifactId>jruby-rack</artifactId>
+      <!-- <version>1.0.3</version> -->
+      <version>0.9.4</version>
+    </dependency>
+    <!-- wave -->
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>waveinabox-server-0.3</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>proto-msg</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>gwt-util-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava-gwt</artifactId>
+      <version>r09</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>box</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>box-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>model-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client-common</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client-common-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>common-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>util-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>concurrencycontrol-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client-scheduler-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>media-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>communication-src</artifactId>
+      <version>0.3.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.findbugs</groupId>
+      <artifactId>jsr-305</artifactId>
+      <version>v0r47</version>
+    </dependency>
+    <!-- end wave -->
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>1.2</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.4</version>
+      <type>jar</type>
+    </dependency>
+    <!-- splash -->
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mvel</groupId>
+      <artifactId>mvel2</artifactId>
+      <version>2.0.16</version>
+    </dependency>
+    <!-- gwtupload -->
+    <dependency>
+      <groupId>com.googlecode.gwtupload</groupId>
+      <artifactId>gwtupload</artifactId>
+      <version>0.6.3-compat</version>
+    </dependency>
+    <!-- end gwtupload -->
+  </dependencies>
+
+  <!-- <dependency> -->
+  <!-- <groupId>dom4j</groupId> -->
+  <!-- <artifactId>dom4j</artifactId> -->
+  <!-- <version>1.6.1</version> -->
+  <!-- <type>jar</type> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>com.google.code.guice</groupId> -->
+  <!-- <artifactId>guice-assistedinject</artifactId> -->
+  <!-- <version>2.0</version> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>jline<!/groupId> -->
+  <!-- <artifactId>jline</artifactId> -->
+  <!-- <version>0.9.94</version> -->
+  <!-- <type>jar</type> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>org.gnu.inet</groupId> -->
+  <!-- <artifactId>libidn</artifactId> -->
+  <!-- <version>1.15</version> -->
+  <!-- <type>jar</type> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>com.google.protobuf</groupId> -->
+  <!-- <artifactId>protobuf-java</artifactId> -->
+  <!-- <version>2.3.0</version> -->
+  <!-- <type>jar</type> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>xpp3</groupId> -->
+  <!-- <artifactId>xpp3</artifactId> -->
+  <!-- <version>1.1.4c</version> -->
+  <!-- <type>jar</type> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>xpp3</groupId> -->
+  <!-- <artifactId>xpp3_xpath</artifactId> -->
+  <!-- <version>1.1.4c</version> -->
+  <!-- <type>jar</type> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>aopalliance</groupId> -->
+  <!-- <artifactId>aopalliance</artifactId> -->
+  <!-- <version>1.0</version> -->
+  <!-- <type>jar</type> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>org.wave-protocol</groupId> -->
+  <!-- <artifactId>xmpp</artifactId> -->
+  <!-- <version>1.0.0</version> -->
+  <!-- </dependency> -->
+  <!-- <dependency> -->
+  <!-- <groupId>org.wave-protocol</groupId> -->
+  <!-- <artifactId>whack</artifactId> -->
+  <!-- <version>1.0.0</version> -->
+  <!-- </dependency> -->
+  <distributionManagement>
+    <repository>
+      <id>kune.ourproject.org</id>
+      <url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/
+      </url>
+    </repository>
+  </distributionManagement>
+  <issueManagement>
+    <system>kune issues list at ourproject.org</system>
+    <url>http://kune.ourproject.org/issues/</url>
+  </issueManagement>
+  <developers>
+    <developer>
+      <id>dani</id>
+      <name>Daniel Gómez Blasco</name>
+      <email>danigb@gmail.com</email>
+    </developer>
+    <developer>
+      <name>Samer Hassan</name>
+      <email>samer2004@gmail.com</email>
+    </developer>
+    <developer>
+      <name>Vicente J. Ruiz Jurado</name>
+      <email>vjrj@ourproject.org</email>
+    </developer>
+  </developers>
+  <scm>
+    <url>svn://scm.ourproject.org/svnroot/kune/trunk</url>
+  </scm>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <execution>
+            <phase>exec</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>cc.kune.wave.server.WaveMain</mainClass>
+          <commandlineArgs>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8001
+          </commandlineArgs>
+          <systemProperties>
+            <systemProperty>
+              <key>kune.server.config</key>
+              <value>src/main/resources/kune.properties</value>
+            </systemProperty>
+            <systemProperty>
+              <key>wave.server.config</key>
+              <value>src/main/resources/wave-server.properties</value>
+            </systemProperty>
+            <systemProperty>
+              <key>org.eclipse.jetty.util.resource.FileResource.checkAliases
+              </key>
+              <value>False</value>
+            </systemProperty>
+            <systemProperty>
+              <key>java.security.auth.login.config</key>
+              <value>src/main/resources/jaas.config</value>
+            </systemProperty>
+            <systemProperty>
+              <key>DEBUG</key>
+              <value>false</value>
+            </systemProperty>
+            <systemProperty>
+              <!-- <key>org.eclipse.jetty.util.log.DEBUG</key> -->
+              <key>org.eclipse.jetty.util.log.INFO</key>
+              <value>true</value>
+            </systemProperty>
+          </systemProperties>
+          <classpathScope>runtime</classpathScope>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1-beta-1</version>
+        <!-- <configuration> <webXml>target/web.xml</webXml> </configuration> -->
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <!-- Uncomment and run mvn with -X -e if we have same compile problems
+            <compilerArgument>-verbose</compilerArgument> <fork>true</fork> <verbose>true</verbose> -->
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.4.2</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo + custom -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.8.1</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.surefire</groupId>
+            <artifactId>surefire-junit47</artifactId>
+            <version>2.8.1</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <excludes>
+            <exclude>**/*_Roo_*</exclude>
+          </excludes>
+          <forkMode>pertest</forkMode>
+          <parallel>methods</parallel>
+          <threadCount>10</threadCount>
+          <property>
+            <name>junit</name>
+            <value>true</value>
+          </property>
+          <!-- Skip the normal tests, we'll run them in the integration-test
+            phase -->
+          <skipTests>${skipTests}</skipTests>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <dependencySets>
+            <dependencySet>
+              <scope>runtime</scope>
+              <unpackOptions>
+                <excludes>
+                  <exclude>**/gxt/**</exclude>
+                  <exclude>**/extjs/**</exclude>
+                  <exclude>**extjs**</exclude>
+                  <exclude>**gxt**</exclude>
+                </excludes>
+              </unpackOptions>
+            </dependencySet>
+          </dependencySets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo sin spring executions -->
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.8</version>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <downloadJavadocs>false</downloadJavadocs>
+          <wtpversion>2.0</wtpversion>
+          <additionalBuildcommands>
+            <buildCommand>
+              <name>com.google.gwt.eclipse.core.gwtProjectValidator
+              </name>
+            </buildCommand>
+          </additionalBuildcommands>
+          <workspaceCodeStylesURL>http://kune.ourproject.org/kune.formatter.eclipse.preferences.xml
+          </workspaceCodeStylesURL>
+          <additionalProjectnatures>
+            <!-- <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature> -->
+            <projectnature>com.google.gwt.eclipse.core.gwtNature
+            </projectnature>
+          </additionalProjectnatures>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.5</version>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-idea-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <dependenciesAsLibraries>true</dependenciesAsLibraries>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>tomcat-maven-plugin</artifactId>
+        <version>1.0</version>
+        <configuration>
+          <path>/</path>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>7.1.2.v20100523</version>
+        <!-- <version>7.2.1.v20101111</version> -->
+        <configuration>
+          <webAppConfig>
+            <!-- <contextPath>/${project.name}</contextPath> -->
+            <contextPath>/</contextPath>
+          </webAppConfig>
+          <webAppSourceDirectory>${project.build.directory}/${project.build.finalName}
+          </webAppSourceDirectory>
+          <!-- <reload>manual</reload> <scanIntervalSeconds>0</scanIntervalSeconds> -->
+        </configuration>
+      </plugin>
+      <!-- pensar/probar: openjpa-maven-plugin -->
+      <!-- gwtp & GenEvent need this plugin -->
+      <!-- maybe test: http://mojo.codehaus.org/apt-maven-plugin/index.html -->
+      <!-- instead of this: https://code.google.com/p/maven-annotation-plugin/ -->
+      <!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId>
+        <version>1.3.7</version> <executions> <execution> <id>process</id> <goals>
+        <goal>process</goal> </goals> <phase>generate-sources</phase> </execution>
+        </executions> </plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>apt-maven-plugin</artifactId>
+        <version>1.0-alpha-4</version> <executions> <execution> <goals> <goal>process</goal>
+        <goal>test-process</goal> </goals> </execution> </executions> </plugin> -->
+      <!-- BETTER user: http://code.google.com/p/acris/wiki/AnnotationProcessing -->
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>${gwtmaven.version}</version>
+        <configuration>
+          <logLevel>INFO</logLevel>
+          <style>OBF</style>
+          <noServer>true</noServer>
+          <gwtVersion>${gwt.version}</gwtVersion>
+          <runTarget>/ws/ws.html?log_level=DEBUG</runTarget>
+          <hostedWebapp>${project.build.directory}/${project.build.finalName}
+          </hostedWebapp>
+          <modules>
+            <module>${project.groupId}.Kune</module>
+          </modules>
+          <copyWebapp>true</copyWebapp>
+          <compileReport>false</compileReport>
+          <localWorkers>1</localWorkers><!-- Using all workers can temporarily hang the mouse and isn't much faster -->
+          <extraJvmArgs>-Xmx1024m</extraJvmArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <configuration>
+              <extraJvmArgs>-Xmx1024M</extraJvmArgs>
+            </configuration>
+            <id>gwtcompile</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>compile</goal>
+              <!-- http://mojo.codehaus.org/gwt-maven-plugin/user-guide/library.html -->
+              <!-- <goal>resources</goal> -->
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>deb-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version> <configuration> <description>kune free/open/libre
+        collaboration platform</description> <maintainer>Kune Development Team &lt;kune-devel@lists.ourproject.org&gt;</maintainer>
+        <section>web</section> <priority>optional</priority> <architecture>all</architecture>
+        </configuration> <executions> <execution> <goals> <goal>deb</goal> </goals>
+        </execution> </executions> </plugin> -->
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-plugin</artifactId>
+        <version>1.7.0.0</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <configuration>
+              <changeLogFile>
+                src/main/resources/db/liquibase_changelog.xml
+              </changeLogFile>
+              <driver>com.mysql.jdbc.Driver</driver>
+              <url>jdbc:mysql://localhost/kune_dev</url>
+              <username>kune</username>
+              <password>db4kune</password>
+              <verbose>true</verbose>
+            </configuration>
+            <!-- <configuration> <verbose>true</verbose> <propertiesFile>
+              src/main/resources/db/liquibase.properties </propertiesFile> </configuration> -->
+            <goals>
+              <goal>update</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>cc.kune.wave.server.WaveMain</mainClass>
+              <!-- <classpathPrefix>~/.m2/repository/</classpathPrefix> -->
+              <!-- <classpathLayoutType>repository</classpathLayoutType> -->
+              <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType'
+                instead. -->
+              <classpathMavenRepositoryLayout>true
+              </classpathMavenRepositoryLayout>
+              <!-- <packageName>cc.kune.wave.server</packageName> -->
+            </manifest>
+            <manifestEntries>
+              <mode>development</mode>
+              <url>${project.url}</url>
+            </manifestEntries>
+          </archive>
+        </configuration>
+        <executions>
+          <!-- <execution> -->
+          <!-- <id>core</id> -->
+          <!-- <phase>package</phase> -->
+          <!-- <goals> -->
+          <!-- <goal>jar</goal> -->
+          <!-- </goals> -->
+          <!-- <configuration> -->
+          <!-- <classifier>core</classifier> -->
+          <!-- <includes> -->
+          <!-- <include>**/KunePlatform.gwt.xml**</include> -->
+          <!-- <include>**/i18n/I18nTranslationService.**</include> -->
+          <!-- <include>**/i18n/I18nTranslationServiceMocked.** </include> -->
+          <!-- <include>**/TextUtils.**</include> -->
+          <!-- <include>**/IconLabelEditable.**</include> -->
+          <!-- <include>**/QuickTipsHelper.**</include> -->
+          <!-- <include>**/RichText.gwt.xml**</include> -->
+          <!-- <include>**/BasicDialog.**</include> -->
+          <!-- <include>**/HorizontalLine.**</include> -->
+          <!-- <include>**/AbstractLabel.**</include> -->
+          <!-- <include>**/IconLabel.**</include> -->
+          <!-- <include> **/EditableIconLabel.**</include> -->
+          <!-- <include> **/EditableClickListener.**</include> -->
+          <!-- <include>**/KuneStringUtils.**</include> -->
+          <!-- <include>**/IconHyperlink*.**</include> -->
+          <!-- <include>**/LabelWrapper*.**</include> -->
+          <!-- <include>**/KuneUiUtils.**</include> -->
+          <!-- <include>**/View.**</include> -->
+          <!-- <include>**/platf/**</include> <include>**/platf/client/extend/**</include> -->
+          <!-- <include>**/platf/client/*java</include> <include>**/platf/client/app/**</include> -->
+          <!-- <include>**/platf/client/dispatch/**</include> -->
+          <!-- </includes> -->
+          <!-- </configuration> -->
+          <!-- </execution> -->
+          <!-- <execution> -->
+          <!-- <id>helloworldmodule</id> -->
+          <!-- <phase>package</phase> -->
+          <!-- <goals> -->
+          <!-- <goal>jar</goal> -->
+          <!-- </goals> -->
+          <!-- <configuration> -->
+          <!-- <classifier>helloworldmodule</classifier> -->
+          <!-- <includes> -->
+          <!-- <include>**/HelloWorld*</include> -->
+          <!-- </includes> -->
+          <!-- </configuration> -->
+          <!-- </execution> -->
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.dstovall</groupId>
+        <artifactId>onejar-maven-plugin</artifactId>
+        <version>1.4.4-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <configuration>
+              <!-- Optional -->
+              <!-- <onejarVersion>0.97</onejarVersion> -->
+              <!-- Optional, use only if you need to include native libraries
+                (dll's) -->
+              <!-- <binlibs> -->
+              <!-- <fileSet> -->
+              <!-- <directory>${project.build.directory}/${project.build.finalName}</directory> -->
+              <!-- <includes> -->
+              <!-- <include>**</include> -->
+              <!-- </includes> -->
+              <!-- </fileSet> -->
+              <!-- </binlibs> -->
+              <!-- Optional, default is false -->
+              <attachToBuild>true</attachToBuild>
+              <!-- Optional, default is "onejar" -->
+              <classifier>onejar</classifier>
+            </configuration>
+            <goals>
+              <goal>one-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- <plugin> -->
+      <!-- <groupId>org.codehaus.mojo</groupId> -->
+      <!-- <artifactId>selenium-maven-plugin</artifactId> -->
+      <!-- <configuration> -->
+      <!-- <port>4441</port> -->
+      <!-- </configuration> -->
+      <!-- <executions> -->
+      <!-- <execution> -->
+      <!-- <phase>pre-integration-test</phase> -->
+      <!-- <goals> -->
+      <!-- <goal>start-server</goal> -->
+      <!-- </goals> -->
+      <!-- <configuration> -->
+      <!-- <background>true</background> -->
+      <!-- </configuration> -->
+      <!-- </execution> -->
+      <!-- </executions> -->
+      <!-- </plugin> -->
+      <!-- <plugin> <artifactId>maven-clean-plugin</artifactId> <version>2.2</version>
+        <configuration> <filesets> <fileset> <directory>src/main/webapp/gwt/</directory>
+        <includes> <include>**/org.ourproject.kune.app.Kune*</include> <followSymlinks>false</followSymlinks>
+        </includes> </fileset> </filesets> </configuration> </plugin> -->
+    </plugins>
+    <!-- <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory> -->
+    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes
+    </outputDirectory>
+    <!-- <outputDirectory>war/WEB-INF/classes</outputDirectory> -->
+    <!-- <testOutputDirectory>war/WEB-INF/test-classes</testOutputDirectory> -->
+    <!-- <resources> -->
+    <!-- <resource> -->
+    <!-- <directory>src/main/resources</directory> -->
+    <!-- </resource> -->
+    <!-- <resource> -->
+    <!-- <directory>src/main/java</directory> -->
+    <!-- </resource> -->
+    <!-- </resources> -->
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh-external</artifactId>
+        <version>1.0-beta-2</version>
+      </extension>
+    </extensions>
+  </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>${gwtmaven.version}</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>compile-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <linkXref>true</linkXref>
+          <sourceEncoding>utf-8</sourceEncoding>
+          <minimumTokens>100</minimumTokens>
+          <targetJdk>1.5</targetJdk>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.4</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jdepend-maven-plugin</artifactId>
+        <version>2.0-beta-2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>2.3.2</version>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
