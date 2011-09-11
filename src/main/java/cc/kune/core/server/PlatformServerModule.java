@@ -30,6 +30,7 @@ import cc.kune.core.client.rpcservices.SocialNetworkService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.access.AccessRightsServiceDefault;
+import cc.kune.core.server.access.AccessRightsUtils;
 import cc.kune.core.server.access.AccessService;
 import cc.kune.core.server.access.AccessServiceDefault;
 import cc.kune.core.server.access.FinderService;
@@ -40,6 +41,8 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.auth.AuthorizatedMethodInterceptor;
 import cc.kune.core.server.auth.SessionService;
 import cc.kune.core.server.auth.SessionServiceDefault;
+import cc.kune.core.server.auth.SuperAdmin;
+import cc.kune.core.server.auth.SuperAdminMethodInterceptor;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContainerManagerDefault;
 import cc.kune.core.server.content.ContentManager;
@@ -176,11 +179,13 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(EntityLogoUploadManager.class);
     bind(EntityLogoDownloadManager.class);
     bind(ParticipantUtils.class);
-
+    requestStaticInjection(AccessRightsUtils.class);
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
         outermostCall(new AuthenticatedMethodInterceptor()));
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
         outermostCall(new AuthorizatedMethodInterceptor()));
+    bindInterceptor(Matchers.any(), Matchers.annotatedWith(SuperAdmin.class),
+        outermostCall(new SuperAdminMethodInterceptor()));
   }
 
 }

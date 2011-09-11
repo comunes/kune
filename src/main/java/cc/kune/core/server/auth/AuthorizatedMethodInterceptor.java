@@ -26,12 +26,11 @@ import org.aopalliance.intercept.MethodInvocation;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.server.UserSession;
-import cc.kune.core.server.access.AccessRightsService;
+import cc.kune.core.server.access.AccessRightsUtils;
 import cc.kune.core.server.access.AccessService;
 import cc.kune.core.server.content.ContentUtils;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.shared.domain.AccessRol;
-import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
@@ -45,84 +44,67 @@ import com.google.inject.Singleton;
 @Singleton
 public class AuthorizatedMethodInterceptor implements MethodInterceptor {
 
-    @Inject
-    private Provider<UserSession> userSessionProvider;
-    @Inject
-    private Provider<GroupManager> groupManagerProvider;
-    @Inject
-    private Provider<AccessRightsService> accessRightsServiceProvider;
-    @Inject
-    private Provider<AccessService> accessServiceProvider;
+  @Inject
+  private Provider<AccessService> accessServiceProvider;
+  @Inject
+  private Provider<GroupManager> groupManagerProvider;
+  @Inject
+  private Provider<UserSession> userSessionProvider;
 
-    public Object invoke(final MethodInvocation invocation) throws Throwable {
-        final Object[] arguments = invocation.getArguments();
-        final StateToken token = (StateToken) arguments[1];
+  @Override
+  public Object invoke(final MethodInvocation invocation) throws Throwable {
+    final Object[] arguments = invocation.getArguments();
+    final StateToken token = (StateToken) arguments[1];
 
-        final UserSession userSession = userSessionProvider.get();
-        final GroupManager groupManager = groupManagerProvider.get();
-        final AccessService accessService = accessServiceProvider.get();
+    final UserSession userSession = userSessionProvider.get();
+    final GroupManager groupManager = groupManagerProvider.get();
+    final AccessService accessService = accessServiceProvider.get();
 
-        final Authorizated authoAnnotation = invocation.getStaticPart().getAnnotation(Authorizated.class);
-        final AccessRol accessRol = authoAnnotation.accessRolRequired();
-        final ActionLevel actionLevel = authoAnnotation.actionLevel();
-        final boolean mustBeMember = authoAnnotation.mustCheckMembership();
+    final Authorizated authoAnnotation = invocation.getStaticPart().getAnnotation(Authorizated.class);
+    final AccessRol accessRol = authoAnnotation.accessRolRequired();
+    final ActionLevel actionLevel = authoAnnotation.actionLevel();
+    final boolean mustBeMember = authoAnnotation.mustCheckMembership();
 
-        final User user = userSession.getUser();
-        Group group = Group.NO_GROUP;
-        try {
-            group = groupManager.findByShortName(token.getGroup());
-        } catch (final NoResultException e) {
-            // continue, and check later
-        }
-
-        switch (actionLevel) {
-        case content:
-        default:
-            final Content content = accessService.accessToContent(ContentUtils.parseId(token.getDocument()), user,
-                    accessRol);
-            if (!content.getContainer().getOwner().equals(group)) {
-                throw new AccessViolationException();
-            }
-            if (!content.getContainer().getId().equals(ContentUtils.parseId(token.getFolder()))) {
-                throw new AccessViolationException();
-            }
-            if (!content.getContainer().getToolName().equals(token.getTool())) {
-                throw new AccessViolationException();
-            }
-        case container:
-            final Container container = accessService.accessToContainer(ContentUtils.parseId(token.getFolder()), user,
-                    accessRol);
-            if (!container.getOwner().equals(group)) {
-                throw new AccessViolationException();
-            }
-        case tool:
-        case group:
-            break;
-        }
-
-        if (mustBeMember) {
-            if (!correctMember(user, group, accessRol)) {
-                throw new AccessViolationException();
-            }
-        }
-
-        return invocation.proceed();
+    final User user = userSession.getUser();
+    Group group = Group.NO_GROUP;
+    try {
+      group = groupManager.findByShortName(token.getGroup());
+    } catch (final NoResultException e) {
+      // continue, and check later
     }
 
-    private boolean correctMember(final User user, final Group group, final AccessRol memberType)
-            throws AccessViolationException {
-
-        final AccessRights accessRights = accessRightsServiceProvider.get().get(user,
-                group.getSocialNetwork().getAccessLists());
-
-        switch (memberType) {
-        case Administrator:
-            return accessRights.isAdministrable();
-        case Editor:
-            return accessRights.isEditable();
-        default:
-            return accessRights.isVisible();
-        }
+    switch (actionLevel) {
+    case content:
+    default:
+      final Content content = accessService.accessToContent(ContentUtils.parseId(token.getDocument()),
+          user, accessRol);
+      if (!content.getContainer().getOwner().equals(group)) {
+        throw new AccessViolationException();
+      }
+      if (!content.getContainer().getId().equals(ContentUtils.parseId(token.getFolder()))) {
+        throw new AccessViolationException();
+      }
+      if (!content.getContainer().getToolName().equals(token.getTool())) {
+        throw new AccessViolationException();
+      }
+    case container:
+      final Container container = accessService.accessToContainer(
+          ContentUtils.parseId(token.getFolder()), user, accessRol);
+      if (!container.getOwner().equals(group)) {
+        throw new AccessViolationException();
+      }
+    case tool:
+    case group:
+      break;
     }
+
+    if (mustBeMember) {
+      if (!AccessRightsUtils.correctMember(user, group, accessRol)) {
+        throw new AccessViolationException();
+      }
+    }
+
+    return invocation.proceed();
+  }
 
 }

@@ -1,6 +1,5 @@
 package cc.kune.gspace.client.i18n;
 
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialog;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -31,7 +30,6 @@ public class I18nTranslatorPresenter extends
 
   }
 
-  private final I18nUITranslationService i18n;
   private final Session session;
 
   @Inject
@@ -39,7 +37,6 @@ public class I18nTranslatorPresenter extends
       final Session session, final I18nUITranslationService i18n, final I18nTranslatorView view) {
     super(eventBus, view, proxy);
     this.session = session;
-    this.i18n = i18n;
   }
 
   public void doClose() {
@@ -64,14 +61,8 @@ public class I18nTranslatorPresenter extends
 
   @Override
   public void show() {
-    NotifyUser.showProgressLoading();
-    if (session.isLogged()) {
-      final I18nLanguageDTO userLang = session.getCurrentLanguage();
-      getView().setLanguage(new I18nLanguageSimpleDTO(userLang.getCode(), userLang.getEnglishName()));
-      getView().show();
-    } else {
-      NotifyUser.info(i18n.t("Sign in or register to help with the translation"));
-    }
-    NotifyUser.hideProgress();
+    final I18nLanguageDTO userLang = session.getCurrentLanguage();
+    getView().setLanguage(new I18nLanguageSimpleDTO(userLang.getCode(), userLang.getEnglishName()));
+    getView().show();
   }
 }

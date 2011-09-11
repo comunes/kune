@@ -73,20 +73,22 @@ public class NewListPostAction extends RolAction {
       diag.getFirstBtn().addClickHandler(new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
-          NotifyUser.showProgressProcessing();
-          diag.hide();
-          listsService.get().newPost(session.getUserHash(),
-              session.getCurrentStateToken().copy().clearDocument(), diag.getTextFieldValue(),
-              new AsyncCallbackSimple<StateContentDTO>() {
-                @Override
-                public void onSuccess(final StateContentDTO state) {
-                  stateManager.setRetrievedStateAndGo(state);
-                  NotifyUser.hideProgress();
-                  NotifyUser.info(i18n.t("Post created. Edit it"));
-                  folderViewer.highlightTitle();
-                }
-              });
-          cache.removeContent(session.getCurrentStateToken());
+          if (diag.isValid()) {
+            NotifyUser.showProgressProcessing();
+            diag.hide();
+            listsService.get().newPost(session.getUserHash(),
+                session.getCurrentStateToken().copy().clearDocument(), diag.getTextFieldValue(),
+                new AsyncCallbackSimple<StateContentDTO>() {
+                  @Override
+                  public void onSuccess(final StateContentDTO state) {
+                    stateManager.setRetrievedStateAndGo(state);
+                    NotifyUser.hideProgress();
+                    NotifyUser.info(i18n.t("Post created. Edit it"));
+                    folderViewer.highlightTitle();
+                  }
+                });
+            cache.removeContent(session.getCurrentStateToken());
+          }
         }
       });
     } else {

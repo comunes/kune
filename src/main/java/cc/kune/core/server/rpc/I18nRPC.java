@@ -30,9 +30,11 @@ import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.I18nService;
 import cc.kune.core.server.UserSession;
 import cc.kune.core.server.auth.Authenticated;
+import cc.kune.core.server.auth.SuperAdmin;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
 import cc.kune.domain.I18nLanguage;
@@ -139,6 +141,7 @@ public class I18nRPC implements RPC, I18nService {
   @Override
   @Authenticated
   @Transactional
+  @SuperAdmin(rol = AccessRol.Editor)
   public String setTranslation(final String userHash, final Long id, final String translation)
       throws DefaultException {
     return i18nTranslationManager.setTranslation(id, translation);

@@ -19,12 +19,17 @@
  */
 package cc.kune.gspace.client.i18n;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.actions.RolActionAutoUpdated;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
+import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -32,14 +37,18 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class SiteOptionsI18nTranslatorAction extends AbstractExtendedAction {
+public class SiteOptionsI18nTranslatorAction extends RolActionAutoUpdated {
+  private final I18nTranslationService i18n;
   private I18nTranslator translator;
   private final Provider<I18nTranslator> translatorProv;
 
   @Inject
-  public SiteOptionsI18nTranslatorAction(final I18nTranslationService i18n, final CoreResources img,
-      final Provider<I18nTranslator> translatorProv, final SitebarActionsPresenter siteOptions) {
-    super();
+  public SiteOptionsI18nTranslatorAction(final StateManager stateManager, final Session session,
+      final AccessRightsClientManager rightsManager, final I18nTranslationService i18n,
+      final CoreResources img, final Provider<I18nTranslator> translatorProv,
+      final SitebarActionsPresenter siteOptions) {
+    super(stateManager, session, rightsManager, AccessRolDTO.Viewer, true, true, true);
+    this.i18n = i18n;
     this.translatorProv = translatorProv;
     putValue(Action.NAME, i18n.t("Help with the translation"));
     putValue(Action.SMALL_ICON, img.language());
@@ -48,10 +57,15 @@ public class SiteOptionsI18nTranslatorAction extends AbstractExtendedAction {
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    if (translator == null) {
-      translator = translatorProv.get();
+    NotifyUser.showProgressLoading();
+    if (session.isLogged()) {
+      if (translator == null) {
+        translator = translatorProv.get();
+      }
+      translator.show();
+    } else {
+      NotifyUser.info(i18n.t("Sign in or register to help with the translation"));
     }
-    translator.show();
-    // item.setPosition(1);
+    NotifyUser.hideProgress();
   }
 }

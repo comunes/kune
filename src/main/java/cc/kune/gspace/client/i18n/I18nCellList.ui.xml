@@ -32,7 +32,8 @@
           <s:RangeLabelPager ui:field='rangeLabelPager'/>
         </td>
         <td class='{style.formCell}' valign='top' align='center'>
-          <s:I18nTranslatorForm ui:field='translatorForm'/>
+          <s:I18nTranslatorForm
+           ui:field='translatorForm'/>
           <br/>
         </td>
       </tr>

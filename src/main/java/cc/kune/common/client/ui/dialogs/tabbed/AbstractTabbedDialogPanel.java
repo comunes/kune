@@ -144,12 +144,11 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     }
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     tabPanel = new TabLayoutPanel(25, Unit.PX);
-    tabPanel.addStyleName("oc-noselec");
+    tabPanel.addStyleName("oc-noselect");
+    dialog.getInnerPanel().add(tabPanel);
     tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
       @Override
       public void onSelection(final SelectionEvent<Integer> event) {
-        // dialog.recalculateSize();
-        dialog.showCentered();
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
           @Override
           public void execute() {
@@ -165,7 +164,6 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     if (height != NO_SIZE) {
       tabPanel.setHeight(String.valueOf(height) + "px");
     }
-    dialog.getInnerPanel().add(tabPanel);
     tabPanel.addStyleName("k-tabpanel-aditionalpadding");
     tabPanel.addStyleName("k-tabs");
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {

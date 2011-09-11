@@ -57,22 +57,19 @@ public class Tooltip extends PopupPanel {
   private static final int WIDTH_NOT_DEFINED = -1;
 
   public static Tooltip to(final Widget widget, final String text) {
-    if (TextUtils.notEmpty(text)) {
-      final Tooltip tip = new Tooltip();
-      tip.to(widget);
-      tip.setText(text);
-      widget.addAttachHandler(new Handler() {
-        @Override
-        public void onAttachOrDetach(final AttachEvent event) {
-          if (!event.isAttached()) {
-            tip.hide();
-          }
+    final Tooltip tip = new Tooltip();
+    tip.to(widget);
+    tip.setText(text);
+    widget.addAttachHandler(new Handler() {
+      @Override
+      public void onAttachOrDetach(final AttachEvent event) {
+        if (!event.isAttached()) {
+          tip.hide();
         }
+      }
 
-      });
-      return tip;
-    }
-    return null;
+    });
+    return tip;
   }
 
   public static Tooltip to(final Widget widget, final Widget withContent) {
@@ -85,16 +82,20 @@ public class Tooltip extends PopupPanel {
   HTMLPanel arrow;
   @UiField
   HTMLPanel arrowBorder;
+  private boolean containsText;
   @UiField
   FlowPanel content;
   @UiField
   FlowPanel flow;
   private Widget ofWidget;
+  private final Label textLabel;
   private final TooltipTimers timers;
   @UiField
   InlineLabel title;
+
   @UiField
   HTMLPanel tooltip;
+
   private int width = WIDTH_NOT_DEFINED;
 
   public Tooltip() {
@@ -120,6 +121,7 @@ public class Tooltip extends PopupPanel {
     outTimer.configure(hideExecuter);
     securityTimer.configure(hideExecuter);
     timers = new TooltipTimers(overTimer, outTimer, securityTimer);
+    textLabel = new Label();
   }
 
   protected int getHeight() {
@@ -145,11 +147,14 @@ public class Tooltip extends PopupPanel {
   private void setContent(final Widget widget) {
     content.clear();
     content.add(widget);
+    containsText = false;
   }
 
   public void setText(final String text) {
     content.clear();
-    content.add(new Label(text));
+    content.add(textLabel);
+    textLabel.setText(text);
+    containsText = true;
   }
 
   public void setWidth(final int width) {
@@ -158,7 +163,8 @@ public class Tooltip extends PopupPanel {
 
   @Override
   public void show() {
-    if (!Tooltip.this.isShowing() && ofWidget.isAttached() && ofWidget.isVisible()) {
+    if (!Tooltip.this.isShowing() && ofWidget.isAttached() && ofWidget.isVisible()
+        && (!containsText || TextUtils.notEmpty(textLabel.getText()))) {
       Tooltip.super.show();
       if (Tooltip.current != null) {
         Tooltip.current.hide();

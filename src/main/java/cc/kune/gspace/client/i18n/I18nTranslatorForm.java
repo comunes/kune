@@ -16,6 +16,7 @@
 package cc.kune.gspace.client.i18n;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -73,7 +74,7 @@ public class I18nTranslatorForm extends Composite {
     keyboardTimer = new Timer() {
       @Override
       public void run() {
-        update();
+        saveIfNeeded();
       }
     };
   }
@@ -88,7 +89,7 @@ public class I18nTranslatorForm extends Composite {
 
   @UiHandler("translation")
   void handleBlur(final BlurEvent event) {
-    update();
+    saveIfNeeded();
   }
 
   @UiHandler("copyIcon")
@@ -135,7 +136,10 @@ public class I18nTranslatorForm extends Composite {
   private void saveIfNeeded() {
     keyboardTimer.cancel();
     final String newTranslation = translation.getText();
-    if (item != null && !item.getText().equals(newTranslation)) {
+    if (item != null && TextUtils.notEmpty(newTranslation) && !newTranslation.equals(item.getText())) {
+      item.setText(translation.getText());
+      item.setDirty(true);
+      dataProvider.refreshDisplays();
       saver.save(new I18nTranslationDTO(item.getId(), item.getTrKey(), newTranslation));
     }
   }
@@ -167,16 +171,6 @@ public class I18nTranslatorForm extends Composite {
       splitted[1] = nt[0];
     }
     return splitted;
-  }
-
-  private void update() {
-    keyboardTimer.cancel();
-    if (item != null) {
-      item.setText(translation.getText());
-      item.setDirty(true);
-      dataProvider.refreshDisplays();
-      saveIfNeeded();
-    }
   }
 
   private void updateWithTimer() {

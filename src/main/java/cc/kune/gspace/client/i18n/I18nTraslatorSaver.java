@@ -1,6 +1,7 @@
 package cc.kune.gspace.client.i18n;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -32,7 +33,13 @@ public class I18nTraslatorSaver {
           @Override
           public void onFailure(final Throwable caught) {
             NotifyUser.hideProgress();
-            NotifyUser.error(i18n.t("Server error saving the translation"));
+            if (caught instanceof AccessViolationException) {
+              NotifyUser.error(
+                  i18n.t("Only to authorized translators"),
+                  i18n.t("To help with the translation of this software please contact before with this site administrators"));
+            } else {
+              NotifyUser.error(i18n.t("Server error saving the translation"));
+            }
           }
 
           @Override
