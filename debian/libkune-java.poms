@@ -1,0 +1,7 @@
+# List of POM files for the package
+# Format of this file is:
+# <path to pom file> [option]
+# where option can be:
+#   --ignore: ignore this POM or
+#   --no-parent: remove the <parent> tag from the POM
+pom.xml
