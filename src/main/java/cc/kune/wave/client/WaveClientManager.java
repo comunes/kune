@@ -39,13 +39,13 @@ import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
 
 public class WaveClientManager {
-  private WebClient webClient;
+  private WaveClientView webClient;
 
   @Inject
   public WaveClientManager(final Session session, final StateManager stateManager,
       final EventBus eventBus, final UserServiceAsync userService, final GSpaceArmor wsArmor,
       final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount,
-      final TokenMatcher tokenMatcher) {
+      final TokenMatcher tokenMatcher, final WaveClientProvider webclientView) {
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
@@ -53,21 +53,20 @@ public class WaveClientManager {
             new AsyncCallbackSimple<WaveClientParams>() {
               @Override
               public void onSuccess(final WaveClientParams result) {
-                // NotifyUser.info(result.getSessionJSON(), true);
                 setUseSocketIO(result.useSocketIO());
                 setSessionJSON(JsonUtils.safeEval(result.getSessionJSON()));
                 setClientFlags(JsonUtils.safeEval(result.getClientFlags()));
-                // Only for testing:
                 final ForIsWidget userSpace = wsArmor.getUserSpace();
                 if (webClient == null) {
                   if (userSpace.getWidgetCount() > 0) {
                     userSpace.remove(0);
                   }
-                  webClient = new WebClient(eventBus, profiles, inboxCount, tokenMatcher);
+                  webClient = webclientView.get();
                   userSpace.add(webClient);
                 } else {
+                  // this is done with the first webclient creation above
                   webClient.login();
-                  webClient.setVisible(true);
+                  webClient.asWidget().setVisible(true);
                 }
               }
             });
@@ -77,7 +76,7 @@ public class WaveClientManager {
       @Override
       public void onUserSignOut(final UserSignOutEvent event) {
         if (webClient != null) {
-          webClient.setVisible(false);
+          webClient.asWidget().setVisible(false);
           webClient.logout();
         }
         setUseSocketIO(false);
@@ -87,7 +86,7 @@ public class WaveClientManager {
     });
   }
 
-  public WebClient getWebClient() {
+  public WaveClientView getWebClient() {
     return webClient;
   }
 

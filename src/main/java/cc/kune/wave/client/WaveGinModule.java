@@ -38,5 +38,8 @@ public class WaveGinModule extends ExtendedGinModule {
     s(KuneWaveProfileManager.class);
     s(InboxCountView.class, InboxCountPanel.class);
     s(InboxCountPresenter.class);
+    s(WaveClientProvider.class);
+    s(WebClientMock.class);
+    s(WebClient.class);
   }
 }

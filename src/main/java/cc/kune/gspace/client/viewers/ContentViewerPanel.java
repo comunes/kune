@@ -41,8 +41,9 @@ import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
 import cc.kune.wave.client.KuneStagesProvider;
 import cc.kune.wave.client.WaveClientClearEvent;
-import cc.kune.wave.client.WaveClientManager;
-import cc.kune.wave.client.WebClient;
+import cc.kune.wave.client.WaveClientProvider;
+import cc.kune.wave.client.WaveClientView;
+import cc.kune.wave.client.WebClientMock;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
@@ -81,7 +82,8 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private ProfileManager profiles;
   /** The wave panel, if a wave is open. */
   private KuneStagesProvider wave;
-  private final WaveClientManager waveClient;
+  private final WaveClientProvider waveClientProv;
+
   private ImplPanel waveHolder;
 
   @UiField
@@ -89,16 +91,14 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private final WaveStore waveStore = new SimpleWaveStore();
 
-  private WebClient webClient;
-
   private final Widget widget;
 
   @Inject
-  public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientManager waveClient,
+  public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
       final EventBus eventBus) {
     this.gsArmor = wsArmor;
-    this.waveClient = waveClient;
+    this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
@@ -156,7 +156,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private void initWaveClientIfNeeded() {
     if (channel == null) {
-      webClient = waveClient.getWebClient();
+      final WaveClientView webClient = waveClientProv.get();
       loading = webClient.getLoading();
       waveHolder = webClient.getWaveHolder();
       channel = webClient.getChannel();
@@ -197,26 +197,30 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     final WaveRef waveRef = getWaveRef(waveRefS);
 
     initWaveClientIfNeeded();
-
-    webClient.clear();
+    waveClientProv.get().clear();
     waveClear();
 
     waveHolderParent.add(waveHolder);
 
-    // Release the display:none.
-    // UIObject.setVisible(waveFrame.getElement(), true);
-    waveHolder.getElement().appendChild(loading);
-    final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-    final KuneStagesProvider wave = new KuneStagesProvider(holder, waveHolder, waveRef, channel,
-        idGenerator, profiles, waveStore, isNewWave,
-        org.waveprotocol.box.webclient.client.Session.get().getDomain(), true);
-    this.wave = wave;
-    wave.load(new Command() {
-      @Override
-      public void execute() {
-        loading.removeFromParent();
-      }
-    });
+    if (waveClientProv.get() instanceof WebClientMock) {
+      // do nothing;
+    } else {
+      // real wave client
+      // Release the display:none.
+      // UIObject.setVisible(waveFrame.getElement(), true);
+      waveHolder.getElement().appendChild(loading);
+      final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
+      final KuneStagesProvider wave = new KuneStagesProvider(holder, waveHolder, waveRef, channel,
+          idGenerator, profiles, waveStore, isNewWave,
+          org.waveprotocol.box.webclient.client.Session.get().getDomain(), true);
+      this.wave = wave;
+      wave.load(new Command() {
+        @Override
+        public void execute() {
+          loading.removeFromParent();
+        }
+      });
+    }
   }
 
   private void setTitle(final StateContentDTO state, final boolean editable) {

@@ -90,7 +90,7 @@ import com.google.inject.Inject;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class WebClient extends Composite {
+public class WebClient extends  Composite implements WaveClientView {
   interface Binder extends UiBinder<DockLayoutPanel, WebClient> {
   }
 
@@ -287,10 +287,12 @@ public class WebClient extends Composite {
     websocket.connect();
   }
 
+  @Override
   public void login() {
     loginImpl();
   }
 
+  @Override
   public void logout() {
     loggedInUser = null;
     channel = null;
@@ -308,21 +310,26 @@ public class WebClient extends Composite {
     }
   }
 
+  @Override
   public RemoteViewServiceMultiplexer getChannel() {
     return channel;
   }
 
+  @Override
   public Element getLoading() {
     return loading;
   }
 
+  @Override
   public ProfileManager getProfiles() {
     return profiles;
   }
 
+  @Override
   public ImplPanel getWaveHolder() {
     return waveHolder;
   }
+@Override
 public WaveWebSocketClient getWebSocket() {
   return websocket;
 }
@@ -486,5 +493,10 @@ public WaveWebSocketClient getWebSocket() {
         openWave(waveRef, false);
       }
     });
+  }
+
+  @Override
+  public void getStackTraceAsync(Throwable caught, Accessor<SafeHtml> accessor) {
+    ErrorHandler.getStackTraceAsync(caught, accessor);
   }
 }

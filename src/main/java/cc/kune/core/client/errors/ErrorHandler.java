@@ -32,11 +32,12 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.wave.client.WebClient;
+import cc.kune.wave.client.WaveClientView;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class ErrorHandler {
 
@@ -44,14 +45,16 @@ public class ErrorHandler {
   private final I18nTranslationService i18n;
   private final Session session;
   private final StateManager stateManager;
+  private final Provider<WaveClientView> waveClient;
 
   @Inject
   public ErrorHandler(final Session session, final I18nTranslationService i18n,
-      final StateManager stateManager, final EventBus eventBus) {
+      final StateManager stateManager, final EventBus eventBus, final Provider<WaveClientView> waveClient) {
     this.session = session;
     this.i18n = i18n;
     this.stateManager = stateManager;
     this.eventBus = eventBus;
+    this.waveClient = waveClient;
   }
 
   public void doSessionExpired() {
@@ -145,7 +148,7 @@ public class ErrorHandler {
           i18n.t("Oops! Something has gone wrong with our servers. Retry later, please.")));
       final String error = "Other kind of exception in StateManagerDefault/processErrorException";
       Log.error(error, caught);
-      WebClient.ErrorHandler.getStackTraceAsync(caught, new Accessor<SafeHtml>() {
+      waveClient.get().getStackTraceAsync(caught, new Accessor<SafeHtml>() {
         @Override
         public void use(final SafeHtml stack) {
           NotifyUser.logError(stack.asString().replace("<br>", "\n"));
