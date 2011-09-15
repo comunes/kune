@@ -303,6 +303,10 @@ David Hearnden recommendations of Wave code development (read in an informal Wav
 
 "Being written in Java, we strongly recommend following the principles outlined in Effective Java. On top of that, patterns that aid testability (dependency injection, etc) are quite important. But beyond that, I don't know if there are any other patterns or practices that would be universal across the whole thing. The web client and the server run in very different environments, so the appropriate patterns change (e.g., the client-only code doesn't have to worry about thread safety, but should worry about excessive short-lived object creation)."
 
+=== Running Hosted Mode without Wave webclient ===
+
+See class WaveClientProvider in Kune (in a short term, we should define this in a .gwt.xml not there, but this is a start point).
+
 ==Changelog==
 
 Periodically update the Changelog using svn2cl:
