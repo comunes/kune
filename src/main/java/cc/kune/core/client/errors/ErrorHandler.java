@@ -32,12 +32,11 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.wave.client.WaveClientView;
+import cc.kune.wave.client.WaveClientProvider;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class ErrorHandler {
 
@@ -45,11 +44,11 @@ public class ErrorHandler {
   private final I18nTranslationService i18n;
   private final Session session;
   private final StateManager stateManager;
-  private final Provider<WaveClientView> waveClient;
+  private final WaveClientProvider waveClient;
 
   @Inject
   public ErrorHandler(final Session session, final I18nTranslationService i18n,
-      final StateManager stateManager, final EventBus eventBus, final Provider<WaveClientView> waveClient) {
+      final StateManager stateManager, final EventBus eventBus, final WaveClientProvider waveClient) {
     this.session = session;
     this.i18n = i18n;
     this.stateManager = stateManager;
