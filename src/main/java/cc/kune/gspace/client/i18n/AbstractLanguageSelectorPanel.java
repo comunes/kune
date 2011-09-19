@@ -22,6 +22,7 @@ package cc.kune.gspace.client.i18n;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -47,12 +48,34 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
       set(ENGLISH_NAME, englishName);
     }
 
+    @Override
+    public boolean equals(final Object obj) {
+      if (this == obj) {
+        return true;
+      }
+      if (obj == null) {
+        return false;
+      }
+      if (getClass() != obj.getClass()) {
+        return false;
+      }
+      return getCode().equals(((LanguageData) obj).getCode());
+    }
+
     public String getCode() {
       return get(CODE);
     }
 
     public String getEnglishName() {
       return get(ENGLISH_NAME);
+    }
+
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + (getCode() == null ? 0 : getCode().hashCode());
+      return result;
     }
   }
 
@@ -71,6 +94,9 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     setFrame(false);
     setHeaderVisible(false);
     setBodyBorder(false);
+    // setWidth(300);
+    setLabelWidth(DefaultForm.DEF_FIELD_LABEL_WITH + 25);
+    setPadding(0);
     createLangCombo(withEnglish);
     super.add(langCombo);
   }
@@ -112,10 +138,14 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     for (final I18nLanguageSimpleDTO lang : session.getLanguages()) {
       final boolean isEnglish = lang.getCode().equals("en");
       if (!isEnglish || (isEnglish && withEnglish)) {
-        list.add(new LanguageData(lang.getCode(), lang.getEnglishName()));
+        list.add(getLangData(lang));
       }
     }
     return list;
+  }
+
+  private LanguageData getLangData(final I18nLanguageSimpleDTO lang) {
+    return new LanguageData(lang.getCode(), lang.getEnglishName());
   }
 
   public I18nLanguageSimpleDTO getLanguage() {
@@ -156,6 +186,6 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
   }
 
   public void setLanguage(final I18nLanguageSimpleDTO language) {
-    langCombo.setRawValue(language.getEnglishName());
+    langCombo.setValue(getLangData(language));
   }
 }

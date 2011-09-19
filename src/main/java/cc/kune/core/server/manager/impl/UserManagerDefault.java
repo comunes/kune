@@ -54,6 +54,7 @@ import cc.kune.core.server.xmpp.ChatConnection;
 import cc.kune.core.server.xmpp.ChatException;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.shared.domain.UserSNetVisibility;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Group;
@@ -325,9 +326,9 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   }
 
   @Override
-  public User update(final Long userId, final UserDTO userDTO) {
+  public User update(final Long userId, final UserDTO userDTO, final I18nLanguageSimpleDTO lang) {
     final User user = find(userId);
-    final String shortName = userDTO.getShortName();
+    // final String shortName = userDTO.getShortName();
     final String longName = userDTO.getName();
     final String email = userDTO.getEmail();
     final Group userGroup = user.getUserGroup();
@@ -347,7 +348,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       checkIfEmailAreInUse(email);
       user.setEmail(email);
     }
-    user.setLanguage(findLanguage(userDTO.getLanguage().getCode()));
+    user.setLanguage(findLanguage(lang.getCode()));
+    // user.setLanguage(findLanguage(userDTO.getLanguage().getCode()));
     persist(user);
     groupManager.persist(userGroup);
     return user;

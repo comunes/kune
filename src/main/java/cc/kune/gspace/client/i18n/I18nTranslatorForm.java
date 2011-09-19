@@ -141,7 +141,7 @@ public class I18nTranslatorForm extends Composite {
       item.setDirty(true);
       dataProvider.refreshDisplays();
       saver.save(new I18nTranslationDTO(item.getId(), item.getTrKey(), newTranslation,
-          item.getParentId(), item.getParentTrKey()));
+          item.getParentId(), item.getParentTrKey(), item.getNoteForTranslators()));
     }
   }
 

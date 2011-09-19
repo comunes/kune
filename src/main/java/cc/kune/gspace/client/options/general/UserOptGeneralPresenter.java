@@ -26,6 +26,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
@@ -71,6 +72,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
   protected void setState() {
     final UserSimpleDTO currentUser = session.getCurrentUser();
     userView.setLongName(currentUser.getName());
+    userView.setLanguage(I18nLanguageSimpleDTO.create(currentUser.getLanguage()));
   }
 
   @Override
@@ -81,8 +83,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
       final UserDTO user = new UserDTO();
       user.setId(currentUser.getId());
       user.setName(userView.getLongName());
-      user.setLanguage(currentUser.getLanguage());
-      userService.get().updateUser(session.getUserHash(), user,
+      userService.get().updateUser(session.getUserHash(), user, userView.getLanguage(),
           new AsyncCallbackSimple<StateAbstractDTO>() {
             @Override
             public void onSuccess(final StateAbstractDTO result) {

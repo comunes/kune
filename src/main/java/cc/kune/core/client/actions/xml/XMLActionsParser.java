@@ -157,7 +157,10 @@ public class XMLActionsParser {
             @Override
             public GuiActionDescrip get() {
               final MenuItemDescriptor menuItem = new MenuItemDescriptor(action);
-              menuItem.withText(descrip.getDescName()).withToolTip(descrip.getDescription());
+              // Warning: getDescription returns \n we have to replace this to
+              // spaces before use i18n in the tooltips (anyway tooltips are not
+              // working in menu items)
+              menuItem.withText(i18n.t(descrip.getDescName())).withToolTip(descrip.getDescription());
               menuItem.setParent(TextUtils.notEmpty(path) ? submenu : menu, false);
               return menuItem;
             }

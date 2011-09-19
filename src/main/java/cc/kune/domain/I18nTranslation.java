@@ -113,6 +113,7 @@ public class I18nTranslation implements HasId {
     this.setNoteForTranslators(noteForTranslators);
     if (parent == null) {
       assert trKey != null;
+      this.parent = this;
     }
     if (parent != null) {
       assert trKey == null;
@@ -151,7 +152,10 @@ public class I18nTranslation implements HasId {
   }
 
   public String getNoteForTranslators() {
-    return noteForTranslators;
+    if (parent == this) {
+      return noteForTranslators;
+    }
+    return parent.getNoteForTranslators();
   }
 
   /**
@@ -165,7 +169,10 @@ public class I18nTranslation implements HasId {
   }
 
   public Long getParentId() {
-    return parent == null ? null : parent.getId();
+    if (parent == this) {
+      return id;
+    }
+    return parent.getId();
   }
 
   public Integer getPluralizationIndex() {
@@ -181,11 +188,10 @@ public class I18nTranslation implements HasId {
   }
 
   public String getTrKey() {
-    if (parent != null) {
-      return parent.getTrKey();
-    } else {
-      return this.trKey;
+    if (parent == this) {
+      return trKey;
     }
+    return parent.getTrKey();
   }
 
   public String getType() {

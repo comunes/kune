@@ -42,6 +42,7 @@ import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
@@ -194,12 +195,13 @@ public class UserRPC implements RPC, UserService {
   @Override
   @Authenticated
   @Transactional
-  public StateAbstractDTO updateUser(final String userHash, final UserDTO user) throws DefaultException {
+  public StateAbstractDTO updateUser(final String userHash, final UserDTO user,
+      final I18nLanguageSimpleDTO lang) throws DefaultException {
     final Long id = getUserSession().getUser().getId();
     if (!id.equals(user.getId())) {
       throw new AccessViolationException();
     }
-    final User userUpdated = userManager.update(id, user);
+    final User userUpdated = userManager.update(id, user, lang);
     return contentRPC.getContent(userHash, userUpdated.getUserGroup().getStateToken());
   }
 }

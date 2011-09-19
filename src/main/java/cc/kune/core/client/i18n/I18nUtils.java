@@ -15,7 +15,9 @@ public class I18nUtils {
     final char[] delimiters = { ' ', '.', '?', ',', ';', '&', '(', ')', '"', '$', '!', '/', '\'', '-',
         '%', ':', '{', '}', '[', ']', '©', '«', '»' };
     result = TextUtils.capitalizeFully(result, delimiters);
-    result = result.replaceAll("[ \\.\\?,;&\\(\\)\"\\$!\\/\\'\\-%:{}\\[\\]]", "");
+    // result = result.replaceAll("[ \\.\\?,;&\\(\\)\"\\$!\\/\\'\\-%:{}\\[\\]]",
+    // "");
+    result = result.replaceAll("[^a-zA-Z0-9]", "");
     return TextUtils.abbreviate(
         new StringBuffer(result.length()).append(Character.toLowerCase(result.charAt(0))).append(
             result.substring(1)).toString(), 0, 100, "");

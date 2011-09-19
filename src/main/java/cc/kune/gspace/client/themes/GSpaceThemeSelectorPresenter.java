@@ -50,7 +50,7 @@ public class GSpaceThemeSelectorPresenter {
       super();
       this.theme = theme;
       this.manager = manager;
-      putValue(NAME, i18n.t(theme.getName()));
+      putValue(NAME, i18n.tWithNT(theme.getName(), "a theme name"));
       putValue(SMALL_ICON, theme.getBackColors()[0]);
     }
 

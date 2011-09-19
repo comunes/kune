@@ -22,27 +22,46 @@ package cc.kune.gspace.client.options.general;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.i18n.LanguageSelectorPanel;
 
+import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.inject.Inject;
 
 public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOptGeneralView {
 
   private static final String LONG_NAME_FIELD = "k-uogp-lname";
+  private final LanguageSelectorPanel langSelector;
   private final TextField<String> longName;
 
   @Inject
   public UserOptGeneralPanel(final I18nTranslationService i18n, final CoreResources res,
-      final MaskWidget maskWidget) {
+      final MaskWidget maskWidget, final LanguageSelectorPanel langSelector) {
     super(i18n, res, maskWidget);
+    this.langSelector = langSelector;
     longName = UserFieldFactory.createUserLongName(LONG_NAME_FIELD);
     add(longName);
+    langSelector.setLangTitle(i18n.t("Your language"));
+    langSelector.setLabelAlign(LabelAlign.LEFT);
+    langSelector.setLangSeparator(":");
+    add(langSelector);
+  }
+
+  @Override
+  public I18nLanguageSimpleDTO getLanguage() {
+    return langSelector.getLanguage();
   }
 
   @Override
   public String getLongName() {
     return longName.getValue();
+  }
+
+  @Override
+  public void setLanguage(final I18nLanguageSimpleDTO language) {
+    langSelector.setLanguage(language);
   }
 
   @Override

@@ -2,6 +2,7 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd">
 <module rename-to="ws">
   <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.gwt.i18n.I18N"/>
   <inherits name='com.google.gwt.logging.Logging' />
   <inherits name="cc.kune.core.KuneCore" />
   <inherits name="cc.kune.wave.KuneWave" />
@@ -53,9 +54,11 @@
   <!-- For make CSS obfuscation more pretty -->
   <set-configuration-property name="CssResource.style"
     value="pretty" />
-  <!-- Hardcoded locale (to override emite italian support) ===== -->
+  <!-- I18n ===================================================== -->
   <extend-property name="locale" values="en" />
-  <set-property name="locale" value="en" />
+  <extend-property name="locale" values="es" />
+  <!-- Hardcoded locale (to override emite italian support) ===== -->
+  <!--   <set-property name="locale" value="en" /> -->
   <!-- Hardcoded log level ====================================== -->
   <!-- Turn off logging in wave -->
   <set-property name="loglevel" value="none" />

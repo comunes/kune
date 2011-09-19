@@ -23,7 +23,12 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class I18nLanguageSimpleDTO implements IsSerializable {
 
+  public static I18nLanguageSimpleDTO create(final I18nLanguageDTO language) {
+    return new I18nLanguageSimpleDTO(language.getCode(), language.getEnglishName());
+  }
+
   private String code;
+
   private String englishName;
 
   public I18nLanguageSimpleDTO() {

@@ -22,6 +22,7 @@ package cc.kune.core.client.rpcservices;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
@@ -49,6 +50,6 @@ public interface UserService extends RemoteService {
 
   void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility);
 
-  StateAbstractDTO updateUser(String userHash, UserDTO user) throws DefaultException;
+  StateAbstractDTO updateUser(String userHash, UserDTO user, I18nLanguageSimpleDTO lang);
 
 }

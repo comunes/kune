@@ -44,8 +44,8 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
 
   @Inject
   public UserConfirmPanel(final I18nTranslationService i18n) {
-    dialog = new BasicTopDialog.Builder(DIALOG_ID, false, true).autoscroll(false).width(100).height(100).firstButtonId(
-        OK_ID).sndButtonId(CANCEL_ID).tabIndexStart(1).build();
+    dialog = new BasicTopDialog.Builder(DIALOG_ID, false, true).autoscroll(false).firstButtonId(OK_ID).sndButtonId(
+        CANCEL_ID).tabIndexStart(1).build();
     askLabel = new HTML();
     askLabel.addStyleName("k-userconfirm-label");
     dialog.getInnerPanel().add(askLabel);

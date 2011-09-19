@@ -52,6 +52,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.I18nCountryDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
@@ -75,6 +76,7 @@ public class UserServiceTest extends IntegrationTest {
   Mapper mapper;
   @Inject
   KuneBasicProperties properties;
+  private I18nLanguageSimpleDTO simpleLang;
   @Inject
   SocialNetworkRPC sn;
   private TimeZoneDTO timezone;
@@ -142,6 +144,7 @@ public class UserServiceTest extends IntegrationTest {
   public void init() {
     new IntegrationTestHelper(this);
     lang = new I18nLanguageDTO();
+    simpleLang = new I18nLanguageSimpleDTO(lang.getCode(), lang.getEnglishName());
     country = new I18nCountryDTO();
     timezone = new TimeZoneDTO();
     lang.setCode("en");
@@ -204,7 +207,7 @@ public class UserServiceTest extends IntegrationTest {
     userService.createUser(user, false);
     // do login as admin
     doLogin();
-    userService.updateUser(getHash(), user);
+    userService.updateUser(getHash(), user, simpleLang);
   }
 
   @Test
@@ -235,7 +238,7 @@ public class UserServiceTest extends IntegrationTest {
     final UserDTO userChanged = new UserDTO(shortName, longName, "123456", email, lang, country,
         timezone, null, true, SubscriptionMode.manual, "blue");
     userChanged.setId(session.getUser().getId());
-    userService.updateUser(getHash(), userChanged);
+    userService.updateUser(getHash(), userChanged, simpleLang);
   }
 
   @Test(expected = GroupLongNameInUseException.class)

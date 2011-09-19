@@ -21,8 +21,10 @@ package cc.kune.core.client.i18n;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.MissingResourceException;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.Location;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
@@ -41,14 +43,16 @@ public class I18nUITranslationService extends I18nTranslationService {
   private I18nLanguageDTO currentLang;
   private String currentLanguageCode;
   private final I18nServiceAsync i18nService;
+  private final KuneConstants kuneConstants;
   private HashMap<String, String> lexicon;
   private final Session session;
 
   @Inject
   public I18nUITranslationService(final Session session, final I18nServiceAsync i18nService,
-      final EventBus eventBus) {
+      final EventBus eventBus, final KuneConstants kuneConstants) {
     this.session = session;
     this.i18nService = i18nService;
+    this.kuneConstants = kuneConstants;
     final Location loc = WindowUtils.getLocation();
     final String locale = loc.getParameter("locale");
     i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
@@ -60,6 +64,7 @@ public class I18nUITranslationService extends I18nTranslationService {
       @Override
       public void onSuccess(final I18nLanguageDTO result) {
         currentLang = result;
+        NotifyUser.info("lang: " + result.getCode());
         currentLanguageCode = currentLang.getCode();
         session.setCurrentLanguage(currentLang);
         i18nService.getLexicon(currentLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
@@ -193,36 +198,39 @@ public class I18nUITranslationService extends I18nTranslationService {
    */
   @Override
   public String tWithNT(final String text, final String noteForTranslators) {
-    if (lexicon == null) {
-      Log.warn("i18n not initialized");
-      return text;
-    }
     final String encodeText = TextUtils.escapeHtmlLight(text);
-    String translation = lexicon.get(encodeText);
-    if (lexicon.containsKey(encodeText)) {
-      if (translation == UNTRANSLATED_VALUE) {
-        // Not translated but in db, return text
+    try {
+      return kuneConstants.getString(I18nUtils.convertMethodName(text + " " + noteForTranslators));
+    } catch (final MissingResourceException e) {
+      if (lexicon == null) {
+        Log.warn("i18n not initialized");
+        return text;
+      }
+      String translation = lexicon.get(encodeText);
+      if (lexicon.containsKey(encodeText)) {
+        if (translation == UNTRANSLATED_VALUE) {
+          // Not translated but in db, return text
+          translation = encodeText;
+        }
+      } else {
+        // Not translated and not in db, make a petition for translation
+        if (session.isLogged()) {
+          i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text,
+              noteForTranslators, new AsyncCallback<String>() {
+                @Override
+                public void onFailure(final Throwable caught) {
+                }
+
+                @Override
+                public void onSuccess(final String result) {
+                }
+              });
+          Log.debug("Registering in db '" + text + "' as pending translation");
+          lexicon.put(encodeText, UNTRANSLATED_VALUE);
+        }
         translation = encodeText;
       }
-    } else {
-      // Not translated and not in db, make a petition for translation
-      if (session.isLogged()) {
-        i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text, noteForTranslators,
-            new AsyncCallback<String>() {
-              @Override
-              public void onFailure(final Throwable caught) {
-              }
-
-              @Override
-              public void onSuccess(final String result) {
-              }
-            });
-        Log.debug("Registering in db '" + text + "' as pending translation");
-        lexicon.put(encodeText, UNTRANSLATED_VALUE);
-      }
-      translation = encodeText;
+      return decodeHtml(translation);
     }
-    return decodeHtml(translation);
   }
-
 }

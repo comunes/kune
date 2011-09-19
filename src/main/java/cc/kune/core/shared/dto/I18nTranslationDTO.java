@@ -42,11 +42,11 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
   private String trKey;
 
   public I18nTranslationDTO() {
-    this(null, null, null, null, null);
+    this(null, null, null, null, null, null);
   }
 
   public I18nTranslationDTO(final Long id, final String trKey, final String text, final Long parentId,
-      final String parentTrKey) {
+      final String parentTrKey, final String noteForTranslators) {
     this.id = id;
     this.trKey = trKey;
     this.text = text;

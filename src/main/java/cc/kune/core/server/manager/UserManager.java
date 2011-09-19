@@ -24,6 +24,7 @@ import org.waveprotocol.box.server.authentication.PasswordDigest;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.core.shared.domain.UserSNetVisibility;
+import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.domain.User;
 import cc.kune.domain.utils.UserBuddiesData;
@@ -76,8 +77,9 @@ public interface UserManager {
    *          the userId to change
    * @param user
    *          the userDTO with values to change
+   * @param lang
    * @return the User after updated
    */
-  User update(Long userId, UserDTO user);
+  User update(Long userId, UserDTO user, I18nLanguageSimpleDTO lang);
 
 }
