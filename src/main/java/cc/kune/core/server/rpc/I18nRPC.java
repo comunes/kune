@@ -110,28 +110,28 @@ public class I18nRPC implements RPC, I18nService {
   public List<I18nTranslationDTO> getTranslatedLexicon(final String userHash, final String language,
       final boolean toTranslate) {
     if (toTranslate) {
-      return mapper.mapList(i18nTranslationManager.getUntranslatedLexicon(language),
-          I18nTranslationDTO.class);
+      return i18nTranslationManager.getUntranslatedLexicon(language);
     } else {
-      return mapper.mapList(i18nTranslationManager.getTranslatedLexicon(language),
-          I18nTranslationDTO.class);
+      return i18nTranslationManager.getTranslatedLexicon(language);
     }
   }
 
   @Override
   @Transactional
-  public String getTranslation(final String userHash, final String language, final String text) {
+  public String getTranslation(final String userHash, final String language, final String text,
+      final String noteForTranslators) {
     String translation = null;
     try {
-      translation = getTranslationWrapper(language, text);
+      translation = getTranslationWrapper(language, text, noteForTranslators);
     } catch (final SessionExpiredException e) {
     }
     return translation;
   }
 
   @Authenticated(mandatory = false)
-  private String getTranslationWrapper(final String language, final String text) {
-    return i18nTranslationManager.getTranslation(language, text);
+  private String getTranslationWrapper(final String language, final String text,
+      final String noteForTranslators) {
+    return i18nTranslationManager.getTranslation(language, text, noteForTranslators);
   }
 
   private UserSession getUserSession() {

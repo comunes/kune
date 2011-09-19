@@ -17,26 +17,21 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
   private static final String TRANSLATOR_ERROR_ID = "i18n-trans-panel-error";
   private static final String TRANSLATOR_PANEL_ID = "i18n-trans-panel";
   private static final int WIDTH = 570;
-  private final LanguageSelectorPanel lanSelectorPanel;
+  private final AbstractLanguageSelectorPanel lanSelectorPanel;
   private final I18nToTranslateGridPanel toTranslateGrid;
   private final I18nTranslatedGridPanel translatedGrid;
   private final I18nTranslateRecomendPanel transRecommend;
 
   @Inject
   public I18nTranslatorPanel(final I18nTranslationService i18n, final NotifyLevelImages images,
-      final I18nTranslatorTabsCollection transGroup, final LanguageSelectorPanel lanSelectorPanel,
+      final I18nTranslatorTabsCollection transGroup,
+      final LanguageSelectorWithoutEnglishPanel lanSelectorPanel,
       final I18nToTranslateGridPanel toTranslateGrid, final I18nTranslatedGridPanel translatedGrid,
       final I18nTranslateRecomendPanel transRecommend, final CoreResources res) {
     super(TRANSLATOR_PANEL_ID, "", false, false, images, TRANSLATOR_ERROR_ID, i18n.t("Close"), null,
         null, null, transGroup);
     setIcon(res.language());
     this.lanSelectorPanel = lanSelectorPanel;
-    lanSelectorPanel.addChangeListener(new SimpleCallback() {
-      @Override
-      public void onCallback() {
-        setLanguage(lanSelectorPanel.getLanguage());
-      }
-    });
     this.toTranslateGrid = toTranslateGrid;
     this.translatedGrid = translatedGrid;
     this.transRecommend = transRecommend;
@@ -47,6 +42,12 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
     lanSelectorPanel.setLangTitle(i18n.t("to"));
     lanSelectorPanel.setLabelAlign(LabelAlign.RIGHT);
     lanSelectorPanel.setLangSeparator(":");
+    lanSelectorPanel.addChangeListener(new SimpleCallback() {
+      @Override
+      public void onCallback() {
+        setLanguage(lanSelectorPanel.getLanguage());
+      }
+    });
   }
 
   @Override

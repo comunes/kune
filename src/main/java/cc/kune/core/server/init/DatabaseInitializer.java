@@ -168,7 +168,7 @@ public class DatabaseInitializer {
     final I18nCountry gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".",
         "United Kingdom", "western", ",");
     countryManager.persist(gb);
-    final I18nTranslation test = new I18nTranslation("test", english, "test");
+    final I18nTranslation test = new I18nTranslation("test", english, "test", "");
     translationManager.persist(test);
   }
 

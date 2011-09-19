@@ -62,7 +62,9 @@ public class I18nTranslatorPresenter extends
   @Override
   public void show() {
     final I18nLanguageDTO userLang = session.getCurrentLanguage();
-    getView().setLanguage(new I18nLanguageSimpleDTO(userLang.getCode(), userLang.getEnglishName()));
+    if (!userLang.getCode().equals("en")) {
+      getView().setLanguage(new I18nLanguageSimpleDTO(userLang.getCode(), userLang.getEnglishName()));
+    }
     getView().show();
   }
 }

@@ -35,27 +35,45 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
   };
   private boolean dirty;
   private Long id;
+  private String noteForTranslators;
+  private Long parentId;
+  private String parentTrKey;
   private String text;
   private String trKey;
 
   public I18nTranslationDTO() {
-    this(null, null, null);
+    this(null, null, null, null, null);
   }
 
-  public I18nTranslationDTO(final Long id, final String trKey, final String text) {
+  public I18nTranslationDTO(final Long id, final String trKey, final String text, final Long parentId,
+      final String parentTrKey) {
     this.id = id;
     this.trKey = trKey;
     this.text = text;
+    this.parentId = parentId;
+    this.parentTrKey = parentTrKey;
     setDirty(false);
   }
 
   @Override
   public int compareTo(final I18nTranslationDTO o) {
-    return (o == null || o.trKey == null) ? -1 : -o.trKey.compareTo(trKey);
+    return (o == null || o.id == null) ? -1 : -o.id.compareTo(id);
   }
 
   public Long getId() {
     return id;
+  }
+
+  public String getNoteForTranslators() {
+    return noteForTranslators;
+  }
+
+  public Long getParentId() {
+    return parentId;
+  }
+
+  public String getParentTrKey() {
+    return parentTrKey;
   }
 
   public String getText() {
@@ -76,6 +94,18 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   public void setId(final Long id) {
     this.id = id;
+  }
+
+  public void setNoteForTranslators(final String noteForTranslators) {
+    this.noteForTranslators = noteForTranslators;
+  }
+
+  public void setParentId(final Long parentId) {
+    this.parentId = parentId;
+  }
+
+  public void setParentTrKey(final String parentTrKey) {
+    this.parentTrKey = parentTrKey;
   }
 
   public void setText(final String text) {

@@ -143,4 +143,10 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+  <changeSet id="22" author="vjrj">
+    <comment>I18n translations cleanup</comment>
+    <sqlFile path="src/main/resources/db/update-0017-i18nclean2.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
 </databaseChangeLog>

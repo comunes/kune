@@ -13,7 +13,7 @@ public class I18nUtils {
     result = result.replaceAll("\\[%d\\]", "N");
     result = result.replaceAll("\\[%s\\]", "Param");
     final char[] delimiters = { ' ', '.', '?', ',', ';', '&', '(', ')', '"', '$', '!', '/', '\'', '-',
-        '%', ':', '{', '}', '[', ']' };
+        '%', ':', '{', '}', '[', ']', '©', '«', '»' };
     result = TextUtils.capitalizeFully(result, delimiters);
     result = result.replaceAll("[ \\.\\?,;&\\(\\)\"\\$!\\/\\'\\-%:{}\\[\\]]", "");
     return TextUtils.abbreviate(

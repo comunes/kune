@@ -39,7 +39,7 @@ public interface I18nService extends RemoteService {
   List<I18nTranslationDTO> getTranslatedLexicon(String userHash, final String language,
       boolean toTranslate);
 
-  String getTranslation(String userHash, String language, String text);
+  String getTranslation(String userHash, String language, String text, String noteForTranslators);
 
   String setTranslation(String userHash, Long id, String translation) throws DefaultException;
 

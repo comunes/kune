@@ -19,119 +19,152 @@
  */
 package cc.kune.core.shared.i18n;
 
+import cc.kune.common.client.utils.Pair;
+
 public abstract class I18nTranslationService {
-    protected static final String TRANSLATION_NOTE_REGEXP = " (\\[)%NT (.*)(\\])$";
-    protected static final String NOTE_FOR_TRANSLATOR_TAG_BEGIN = " [%NT ";
-    protected static final String NOTE_FOR_TRANSLATOR_TAG_END = "]";
-    // Also in I18nTranslation
-    protected static final String UNTRANSLATED_VALUE = null;
 
-    public String decodeHtml(final String textToDecode) {
-        String text = textToDecode;
-        // text = text.replaceAll("&copy;", "©");
-        return text;
+  // Also in I18nTranslation
+  protected static final String UNTRANSLATED_VALUE = null;
+
+  public String decodeHtml(final String textToDecode) {
+    final String text = textToDecode;
+    // text = text.replaceAll("&copy;", "©");
+    return text;
+  }
+
+  /**
+   * Use [%d] to reference the Integer parameters
+   * 
+   */
+  // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
+  private String t(final Pair<String, String> pair, final Integer... args) {
+    String translation = tWithNT(pair.getLeft(), pair.getRight());
+    for (final Integer arg : args) {
+      translation = translation.replaceFirst("\\[%d\\]", arg.toString());
     }
+    return decodeHtml(translation);
+  }
 
-    public String removeNT(final String string) {
-        return string.replaceAll(TRANSLATION_NOTE_REGEXP, "");
+  /**
+   * Use [%d] to reference the Long parameter
+   * 
+   */
+  // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
+  private String t(final Pair<String, String> pair, final Long... args) {
+    String translation = tWithNT(pair.getLeft(), pair.getRight());
+    for (final Long arg : args) {
+      translation = translation.replaceFirst("\\[%d\\]", arg.toString());
     }
+    return decodeHtml(translation);
+  }
 
-    /**
-     * In production, this method uses a hashmap. In development, if the text is
-     * not in the hashmap, it makes a server petition (that stores the text
-     * pending for translation in db).
-     * 
-     * Warning: text is escaped as html before insert in the db. Don't use html
-     * here (o user this method with params).
-     * 
-     * @param text
-     * @return text translated in the current language
-     */
-    // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:49
-    public abstract String t(final String text);
-
-    /**
-     * Use [%d] to reference the Integer parameters
-     * 
-     */
-    // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
-    public String t(final String text, final Integer... args) {
-        String translation = t(text);
-        for (Integer arg : args) {
-            translation = translation.replaceFirst("\\[%d\\]", arg.toString());
-        }
-        return decodeHtml(translation);
+  /**
+   * Use [%s] to reference the string parameter
+   * 
+   */
+  // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
+  private String t(final Pair<String, String> pair, final String... args) {
+    String translation = tWithNT(pair.getLeft(), pair.getRight());
+    for (final String arg : args) {
+      translation = translation.replaceFirst("\\[%s\\]", arg);
     }
+    return decodeHtml(translation);
+  }
 
-    /**
-     * Use [%d] to reference the Long parameter
-     * 
-     */
-    // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
-    public String t(final String text, final Long... args) {
-        String translation = t(text);
-        for (Long arg : args) {
-            translation = translation.replaceFirst("\\[%d\\]", arg.toString());
-        }
-        return decodeHtml(translation);
-    }
+  /**
+   * In production, this method uses a hashmap. In development, if the text is
+   * not in the hashmap, it makes a server petition (that stores the text
+   * pending for translation in db).
+   * 
+   * Warning: text is escaped as html before insert in the db. Don't use html
+   * here (o user this method with params).
+   * 
+   * @param text
+   *          some note for facilitate the translation
+   * 
+   * @return text translated in the current language
+   */
+  public String t(final String text) {
+    return tWithNT(text, "");
+  }
 
-    /**
-     * Use [%s] to reference the string parameter
-     * 
-     */
-    // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
-    public String t(final String text, final String... args) {
-        String translation = t(text);
-        for (String arg : args) {
-            translation = translation.replaceFirst("\\[%s\\]", arg);
-        }
-        return decodeHtml(translation);
-    }
+  /**
+   * Use [%d] to reference the Integer parameters
+   * 
+   */
+  // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
+  public String t(final String text, final Integer... args) {
+    return t(Pair.create(text, ""), args);
+  }
 
-    /**
-     * Adds [%NT noteForTranslators] at the end of text. This tag is later
-     * renderer in the translator panel to inform translator how to do this
-     * translation
-     * 
-     */
-    public String tWithNT(final String text, final String noteForTranslators) {
-        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END);
-    }
+  /**
+   * Use [%d] to reference the Long parameter
+   * 
+   */
+  // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
+  public String t(final String text, final Long... args) {
+    return t(Pair.create(text, ""), args);
+  }
 
-    /**
-     * Use [%d] to reference the Integer parameter.
-     * 
-     * Also adds [%NT noteForTranslators] at the end of text. This tag is later
-     * renderer in the translator panel to inform translator how to do this
-     * translation
-     * 
-     */
-    public String tWithNT(final String text, final String noteForTranslators, final Integer... args) {
-        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END, args);
-    }
+  /**
+   * Use [%s] to reference the String parameter.
+   * 
+   */
+  public String t(final String text, final String... args) {
+    return t(Pair.create(text, ""), args);
+  }
 
-    /**
-     * Use [%d] to reference the Long parameter.
-     * 
-     * Also adds [%NT noteForTranslators] at the end of text. This tag is later
-     * renderer in the translator panel to inform translator how to do this
-     * translation
-     * 
-     */
-    public String tWithNT(final String text, final String noteForTranslators, final Long... args) {
-        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END, args);
-    }
+  /**
+   * In production, this method uses a hashmap. In development, if the text is
+   * not in the hashmap, it makes a server petition (that stores the text
+   * pending for translation in db).
+   * 
+   * Warning: text is escaped as html before insert in the db. Don't use html
+   * here (o user this method with params).
+   * 
+   * @param text
+   * @param noteForTranslators
+   *          some note for facilitate the translation
+   * 
+   * @return text translated in the current language
+   */
+  // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:49
+  public abstract String tWithNT(final String text, final String noteForTranslators);
 
-    /**
-     * Use [%s] to reference the String parameter.
-     * 
-     * Also adds [%NT noteForTranslators] at the end of text. This tag is later
-     * renderer in the translator panel to inform translator how to do this
-     * translation
-     * 
-     */
-    public String tWithNT(final String text, final String noteForTranslators, final String... args) {
-        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END, args);
-    }
+  /**
+   * - Use [%d] to reference the Integer parameter.
+   * 
+   * Also adds [%NT noteForTranslators] at the end of text. This tag is later
+   * renderer in the translator panel to inform translator how to do this
+   * translation
+   * 
+   */
+  public String tWithNT(final String text, final String noteForTranslators, final Integer... args) {
+    return t(Pair.create(text, noteForTranslators), args);
+  }
+
+  /**
+   * Use [%d] to reference the Long parameter.
+   * 
+   * Also adds [%NT noteForTranslators] at the end of text. This tag is later
+   * renderer in the translator panel to inform translator how to do this
+   * translation
+   * 
+   */
+  public String tWithNT(final String text, final String noteForTranslators, final Long... args) {
+    return t(Pair.create(text, noteForTranslators), args);
+  }
+
+  /**
+   * Use [%s] to reference the String parameter.
+   * 
+   * Also adds [%NT noteForTranslators] at the end of text. This tag is later
+   * renderer in the translator panel to inform translator how to do this
+   * translation
+   * 
+   */
+  public String tWithNT(final String text, final String noteForTranslators, final String... args) {
+    return t(Pair.create(text, noteForTranslators), args);
+  }
+
 }

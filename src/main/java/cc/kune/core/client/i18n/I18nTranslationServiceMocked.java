@@ -23,9 +23,10 @@ import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class I18nTranslationServiceMocked extends I18nTranslationService {
-    public String t(final String text) {
-        String encodeText = TextUtils.escapeHtmlLight(text);
-        String translation = removeNT(encodeText);
-        return decodeHtml(translation);
-    }
+  @Override
+  public String tWithNT(final String text, final String noteForTranslators) {
+    final String encodeText = TextUtils.escapeHtmlLight(text);
+    final String translation = encodeText;
+    return decodeHtml(translation);
+  }
 }

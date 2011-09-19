@@ -93,7 +93,8 @@ public class I18nCellList extends Composite {
           + (odd ? ODD_STYLE : "") + "'>");
       sb.appendHtmlConstant("<div style='display: table-cell; width: 100%; padding: 1px 5px;"
           + (value.isDirty() ? DIRTY_STYLE : "") + "'>");
-      sb.appendEscaped(value.getTrKey());
+      final String trKey = value.getTrKey();
+      sb.appendEscaped(trKey == null ? value.getParentTrKey() : trKey);
       sb.appendHtmlConstant("</div></div>");
     }
   }
@@ -134,7 +135,7 @@ public class I18nCellList extends Composite {
     // used to identify translations when fields change.
     cellList = new CellList<I18nTranslationDTO>(cell, I18nTranslationDTO.KEY_PROVIDER);
     cellList.setPageSize(30);
-    cellList.setEmptyListMessage(SafeHtmlUtils.fromTrustedString("<span style='padding: 10px; font-style: italic;'>Loading</span>"));
+    cellList.setEmptyListMessage(SafeHtmlUtils.fromTrustedString("<span style='padding: 10px; font-style: italic;'>Empty list</span>"));
     cellList.setKeyboardPagingPolicy(KeyboardPagingPolicy.INCREASE_RANGE);
     cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.BOUND_TO_SELECTION);
     final SingleSelectionModel<I18nTranslationDTO> selectionModel = new SingleSelectionModel<I18nTranslationDTO>(

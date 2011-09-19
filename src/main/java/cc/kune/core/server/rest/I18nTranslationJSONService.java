@@ -21,52 +21,53 @@ package cc.kune.core.server.rest;
 
 import java.util.List;
 
-
 import cc.kune.core.server.manager.I18nTranslationManager;
-import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.rack.filters.rest.REST;
 import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
 import cc.kune.core.shared.dto.SearchResultDTO;
-import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
 
 public class I18nTranslationJSONService {
-    private final I18nTranslationManager manager;
-    private final Mapper mapper;
+  private final I18nTranslationManager manager;
+  private final Mapper mapper;
 
-    @Inject
-    public I18nTranslationJSONService(final I18nTranslationManager manager, final Mapper mapper) {
-        this.manager = manager;
-        this.mapper = mapper;
-    }
+  @Inject
+  public I18nTranslationJSONService(final I18nTranslationManager manager, final Mapper mapper) {
+    this.manager = manager;
+    this.mapper = mapper;
+  }
 
-    @REST(params = { SearcherConstants.QUERY_PARAM })
-    public List<I18nTranslationDTO> search(final String language) {
-        List<I18nTranslation> results = manager.getUntranslatedLexicon(language);
-        return mapper.mapList(results, I18nTranslationDTO.class);
-    }
+  @REST(params = { SearcherConstants.QUERY_PARAM })
+  public List<I18nTranslationDTO> search(final String language) {
+    final List<I18nTranslationDTO> results = manager.getUntranslatedLexicon(language);
+    return results;
+  }
 
-    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM })
-    public SearchResultDTO<I18nTranslationDTO> search(final String language, final Integer firstResult,
-            final Integer maxResults) {
-        SearchResult<I18nTranslation> results = manager.getUntranslatedLexicon(language, firstResult, maxResults);
-        return mapper.mapSearchResult(results, I18nTranslationDTO.class);
-    }
+  @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM,
+      SearcherConstants.LIMIT_PARAM })
+  public SearchResultDTO<I18nTranslationDTO> search(final String language, final Integer firstResult,
+      final Integer maxResults) {
+    final SearchResultDTO<I18nTranslationDTO> results = manager.getUntranslatedLexicon(language,
+        firstResult, maxResults);
+    return results;
+  }
 
-    @REST(params = { SearcherConstants.QUERY_PARAM })
-    public List<I18nTranslationDTO> searchtranslated(final String language) {
-        List<I18nTranslation> results = manager.getTranslatedLexicon(language);
-        return mapper.mapList(results, I18nTranslationDTO.class);
-    }
+  @REST(params = { SearcherConstants.QUERY_PARAM })
+  public List<I18nTranslationDTO> searchtranslated(final String language) {
+    final List<I18nTranslationDTO> results = manager.getTranslatedLexicon(language);
+    return results;
+  }
 
-    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM })
-    public SearchResultDTO<I18nTranslationDTO> searchtranslated(final String language, final Integer firstResult,
-            final Integer maxResults) {
-        SearchResult<I18nTranslation> results = manager.getTranslatedLexicon(language, firstResult, maxResults);
-        return mapper.mapSearchResult(results, I18nTranslationDTO.class);
-    }
+  @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM,
+      SearcherConstants.LIMIT_PARAM })
+  public SearchResultDTO<I18nTranslationDTO> searchtranslated(final String language,
+      final Integer firstResult, final Integer maxResults) {
+    final SearchResultDTO<I18nTranslationDTO> results = manager.getTranslatedLexicon(language,
+        firstResult, maxResults);
+    return results;
+  }
 
 }

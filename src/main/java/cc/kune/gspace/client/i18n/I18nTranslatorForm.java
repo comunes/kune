@@ -140,37 +140,32 @@ public class I18nTranslatorForm extends Composite {
       item.setText(translation.getText());
       item.setDirty(true);
       dataProvider.refreshDisplays();
-      saver.save(new I18nTranslationDTO(item.getId(), item.getTrKey(), newTranslation));
+      saver.save(new I18nTranslationDTO(item.getId(), item.getTrKey(), newTranslation,
+          item.getParentId(), item.getParentTrKey()));
     }
   }
 
   public void setInfo(final I18nTranslationDTO item) {
     saveIfNeeded();
     this.item = item;
-    final String[] splitted = splitNT(item.getTrKey());
-    toTranslate.setText(splitted[0]);
-    final boolean hasNT = splitted.length > 1;
+    final String trKey = item.getTrKey();
+    toTranslate.setText(trKey == null ? item.getParentTrKey() : trKey);
+    translation.setText(item.getText());
+    final boolean hasNT = TextUtils.notEmpty(item.getNoteForTranslators());
     noteForTranslators.setVisible(hasNT);
     noteForTranslatorsTittle.setVisible(hasNT);
     if (hasNT) {
-      noteForTranslators.setText(splitted[1]);
+      noteForTranslators.setText(item.getNoteForTranslators());
     }
-    translation.setText(item.getText());
   }
 
   public void setToLanguage(final I18nLanguageSimpleDTO language) {
     toLanguageTitle.setText(i18n.tWithNT("to [%s]:", "For example, 'to Spanish':",
         language.getEnglishName()));
-  }
+    toTranslate.setText("");
+    translation.setText("");
+    noteForTranslators.setVisible(false);
 
-  private String[] splitNT(final String textWithNT) {
-    String[] nt;
-    final String[] splitted = textWithNT.split(" \\[%NT ");
-    if (splitted.length > 1) {
-      nt = splitted[1].split("\\]$");
-      splitted[1] = nt[0];
-    }
-    return splitted;
   }
 
   private void updateWithTimer() {

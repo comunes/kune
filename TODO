@@ -284,6 +284,23 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
    2007-12-21 10:35:16,197 [btpool0-5] DEBUG - ContentManagerDefault.createContent EXCEPTION => javax.persistence.Entity
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
    
+** Memory use in demo
+http://rimuhosting.com/howto/memory.jsp
+Resolving: High Java Memory Usage
+
+Java processes can often consume more memory than any other application running on a server.
+
+Java processes can be passed a -Xmx option.  This controls the maximum Java memory heap size.  It is important to set a limit on the heap size, otherwise the heap will keep increasing until you get out of memory errors on your VPS (resulting in the Java process - or even some other, random, process - dying.
+
+Usually the setting can be found in your /usr/local/jboss/bin/run.conf or /usr/local/tomcat/bin/setenv.sh config files.  And your RimuHosting default install should have a reasonable value in there already.
+
+If you are running a custom Java application, check there is a -XmxNNm (where NN is a number of megabytes) option on the Java command line.
+
+The optimal -Xmx setting value will depend on what you are running.  And how much memory is available on your server.
+
+From experience we have found that Tomcat often runs well with an -Xmx between 48m and 64m.  JBoss will need a -Xmx of at least 96m to 128m.  You can set the value higher.  However, you should ensure that there is memory available on your server.
+
+To determine how much memory you can spare for Java, try this: stop your Java process; run free -m; subtract the 'used' value from the "-/+ cache" row from the total memory allocated to your server and then subtract another 'just in case' margin of about 10% of your total server memory.  The number you come up with is a rough indicator of the largest -Xmx setting you can use on your server.
 * MID-TERM
 ** Study mozilla web apps:
 https://apps.mozillalabs.com/

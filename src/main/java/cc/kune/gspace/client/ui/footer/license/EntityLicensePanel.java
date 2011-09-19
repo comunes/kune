@@ -34,54 +34,54 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
-    public static final String LICENSE_LABEL = "k-elp-lic-lab";
-    private final I18nTranslationService i18n;
-    private final FlowPanel licenseBar;
-    private final Image licenseImage;
-    private final Tooltip tooltip;
+  public static final String LICENSE_LABEL = "k-elp-lic-lab";
+  private final I18nTranslationService i18n;
+  private final FlowPanel licenseBar;
+  private final Image licenseImage;
+  private final Tooltip tooltip;
 
-    @Inject
-    public EntityLicensePanel(final I18nTranslationService i18n, final GSpaceArmor armor) {
-        this.i18n = i18n;
-        licenseImage = new Image();
+  @Inject
+  public EntityLicensePanel(final I18nTranslationService i18n, final GSpaceArmor armor) {
+    this.i18n = i18n;
+    licenseImage = new Image();
 
-        licenseBar = new FlowPanel();
-        licenseBar.add(licenseImage);
-        licenseImage.addStyleName("k-footer-license-img");
-        armor.getEntityFooter().add(licenseBar);
-        tooltip = Tooltip.to(licenseImage, ".");
-    }
+    licenseBar = new FlowPanel();
+    licenseBar.add(licenseImage);
+    licenseImage.addStyleName("k-footer-license-img");
+    armor.getEntityFooter().add(licenseBar);
+    tooltip = Tooltip.to(licenseImage, ".");
+  }
 
-    @Override
-    public Widget asWidget() {
-        return null;
-    }
+  @Override
+  public Widget asWidget() {
+    return null;
+  }
 
-    @Override
-    public void attach() {
-        licenseBar.setVisible(true);
-    }
+  @Override
+  public void attach() {
+    licenseBar.setVisible(true);
+  }
 
-    @Override
-    public void detach() {
-        licenseBar.setVisible(false);
-    }
+  @Override
+  public void detach() {
+    licenseBar.setVisible(false);
+  }
 
-    @Override
-    public HasClickHandlers getImage() {
-        return licenseImage;
-    }
+  @Override
+  public HasClickHandlers getImage() {
+    return licenseImage;
+  }
 
-    @Override
-    public void openWindow(final String url) {
-        KuneWindowUtils.open(url);
-    }
+  @Override
+  public void openWindow(final String url) {
+    KuneWindowUtils.open(url);
+  }
 
-    @Override
-    public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
-        final String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
-        // KuneUiUtils.setQuickTip(licenseLabel, licenseText);
-        licenseImage.setUrl(licenseDTO.getImageUrl());
-        tooltip.setText(licenseText);
-    }
+  @Override
+  public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
+    final String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
+    // KuneUiUtils.setQuickTip(licenseLabel, licenseText);
+    licenseImage.setUrl(licenseDTO.getImageUrl());
+    tooltip.setText(licenseText);
+  }
 }

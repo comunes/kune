@@ -24,6 +24,8 @@ public class I18nUtilsTest {
   @Test
   public void basicTests() {
     assertEquals("yesOrNo", I18nUtils.convertMethodName("yes, or & no?"));
+    assertEquals("yesOrNo", I18nUtils.convertMethodName("yes or no"));
+    assertEquals("yesOrNo", I18nUtils.convertMethodName("yes   or   no"));
   }
 
   @Test

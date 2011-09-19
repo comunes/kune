@@ -29,6 +29,8 @@ import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
+import cc.kune.core.shared.dto.I18nTranslationDTO;
+import cc.kune.core.shared.dto.SearchResultDTO;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 import cc.kune.domain.finders.I18nTranslationFinder;
@@ -69,6 +71,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   @SuppressWarnings("unchecked")
   private HashMap<String, String> getLexiconFromDb(final String language) {
+    // FIXME
+    // 1) Generate English
+    // 2) Don't permit to translate English
     HashMap<String, String> map = new HashMap<String, String>();
     final List<I18nTranslation> set = finder.findByLanguage(language);
     if (!language.equals(I18nTranslation.DEFAULT_LANG)) {
@@ -82,21 +87,21 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   }
 
   @Override
-  public List<I18nTranslation> getTranslatedLexicon(final String languageCode) {
+  public List<I18nTranslationDTO> getTranslatedLexicon(final String languageCode) {
     return finder.getTranslatedLexicon(getLanguage(languageCode));
   }
 
   @Override
-  public SearchResult<I18nTranslation> getTranslatedLexicon(final String languageCode,
+  public SearchResultDTO<I18nTranslationDTO> getTranslatedLexicon(final String languageCode,
       final Integer firstResult, final Integer maxResults) {
     final I18nLanguage language = getLanguage(languageCode);
-    final List<I18nTranslation> list = finder.getTranslatedLexicon(language, firstResult, maxResults);
+    final List<I18nTranslationDTO> list = finder.getTranslatedLexicon(language, firstResult, maxResults);
     final Long count = finder.getTranslatedLexiconCount(language);
-    return new SearchResult<I18nTranslation>(count.intValue(), list);
+    return new SearchResultDTO<I18nTranslationDTO>(count.intValue(), list);
   }
 
   @Override
-  public String getTranslation(final String language, final String text) {
+  public String getTranslation(final String language, final String text, final String noteForTranslators) {
     final HashMap<String, String> lexicon = getLexicon(language);
     final String escapedText = TextUtils.escapeHtmlLight(text);
     if (lexicon.containsKey(escapedText)) {
@@ -108,7 +113,8 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
       if (!getLexicon(I18nTranslation.DEFAULT_LANG).containsKey(text)) {
         final I18nTranslation newTranslation = new I18nTranslation("", null,
             I18nTranslation.DEF_PLUR_INDEX, "", I18nTranslation.UNTRANSLATED_VALUE, escapedText,
-            I18nTranslation.DEF_NAMESPACE, languageManager.findByCode(I18nTranslation.DEFAULT_LANG));
+            I18nTranslation.DEF_NAMESPACE, languageManager.findByCode(I18nTranslation.DEFAULT_LANG),
+            null, noteForTranslators);
         persist(newTranslation);
         langCache.clear();
       }
@@ -117,31 +123,18 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   }
 
   @Override
-  public String getTranslation(final String language, final String text, final Integer arg) {
-    String translation = getTranslation(language, text);
-    translation = translation.replaceFirst("\\[%d\\]", arg.toString());
-    return translation;
-  }
-
-  @Override
-  public String getTranslation(final String language, final String text, final String arg) {
-    String translation = getTranslation(language, text);
-    translation = translation.replaceFirst("\\[%s\\]", arg);
-    return translation;
-  }
-
-  @Override
-  public List<I18nTranslation> getUntranslatedLexicon(final String languageCode) {
+  public List<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode) {
     return finder.getUntranslatedLexicon(initUnstranlated(languageCode));
   }
 
   @Override
-  public SearchResult<I18nTranslation> getUntranslatedLexicon(final String languageCode,
+  public SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode,
       final Integer firstResult, final Integer maxResults) {
     final I18nLanguage language = initUnstranlated(languageCode);
     final Long count = finder.getUnstranslatedLexiconCount(language);
-    final List<I18nTranslation> list = finder.getUnstranslatedLexicon(language, firstResult, maxResults);
-    return new SearchResult<I18nTranslation>(count.intValue(), list);
+    final List<I18nTranslationDTO> list = finder.getUnstranslatedLexicon(language, firstResult,
+        maxResults);
+    return new SearchResultDTO<I18nTranslationDTO>(count.intValue(), list);
   }
 
   private I18nLanguage initUnstranlated(final String languageCode) {
@@ -165,24 +158,14 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   public String setTranslation(final Long id, final String translation) throws DefaultException {
     final I18nTranslation trans = super.find(id);
     if (trans != null) {
+      // Don't permit to translate the def language
+      assert trans.getLanguage().getCode() != I18nTranslation.DEFAULT_LANG;
       final String escapedTranslation = TextUtils.escapeHtmlLight(translation);
       trans.setText(escapedTranslation);
       persist(trans);
       return escapedTranslation;
     } else {
       throw new DefaultException("Trying to translate a unknown item");
-    }
-  }
-
-  @Override
-  public void setTranslation(final String languageId, final String text, final String translation) {
-    final I18nLanguage language = getLanguage(languageId);
-    final I18nTranslation newTranslation = new I18nTranslation(text, language, translation);
-    persist(newTranslation);
-    if (languageId.equals(I18nTranslation.DEFAULT_LANG)) {
-      langCache.clear();
-    } else {
-      langCache.remove(languageId);
     }
   }
 

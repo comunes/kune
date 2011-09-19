@@ -23,31 +23,26 @@ import java.util.HashMap;
 import java.util.List;
 
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.server.manager.impl.SearchResult;
+import cc.kune.core.shared.dto.I18nTranslationDTO;
+import cc.kune.core.shared.dto.SearchResultDTO;
 import cc.kune.domain.I18nTranslation;
 
 public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
   HashMap<String, String> getLexicon(String language);
 
-  List<I18nTranslation> getTranslatedLexicon(String language);
+  List<I18nTranslationDTO> getTranslatedLexicon(String language);
 
-  SearchResult<I18nTranslation> getTranslatedLexicon(String language, Integer firstResult,
+  SearchResultDTO<I18nTranslationDTO> getTranslatedLexicon(String language, Integer firstResult,
       Integer maxResults);
 
-  String getTranslation(String language, String text);
+  String getTranslation(String language, String text, String noteForTranslators);
 
-  String getTranslation(String language, String text, Integer arg);
+  List<I18nTranslationDTO> getUntranslatedLexicon(String language);
 
-  String getTranslation(String language, String text, String arg);
-
-  List<I18nTranslation> getUntranslatedLexicon(String language);
-
-  SearchResult<I18nTranslation> getUntranslatedLexicon(String language, Integer firstResult,
+  SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(String language, Integer firstResult,
       Integer maxResults);
 
   String setTranslation(Long id, String translation) throws DefaultException;
-
-  void setTranslation(String language, String text, String translation);
 
 }

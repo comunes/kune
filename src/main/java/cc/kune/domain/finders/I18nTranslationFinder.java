@@ -22,6 +22,7 @@ package cc.kune.domain.finders;
 import java.util.ArrayList;
 import java.util.List;
 
+import cc.kune.core.shared.dto.I18nTranslationDTO;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 
@@ -32,9 +33,9 @@ import com.google.inject.persist.finder.MaxResults;
 
 public interface I18nTranslationFinder {
   String TRANSLATED_COUNT_QUERY = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text!=null";
-  String TRANSLATED_QUERY = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text!=null";
+  String TRANSLATED_QUERY = "SELECT NEW cc.kune.core.shared.dto.I18nTranslationDTO(gt.id, gt.trKey, gt.text, gt.parent.id, gt.parent.trKey) FROM I18nTranslation gt LEFT JOIN  gt.parent gp WHERE gt.language = :language AND gt.text!=null";
   String UNTRANSLATED_COUNT_QUERY = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text=null";
-  String UNTRANSLATED_QUERY = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text=null";
+  String UNTRANSLATED_QUERY = "SELECT NEW cc.kune.core.shared.dto.I18nTranslationDTO(gt.id, gt.trKey, gt.text, gt.parent.id, gt.parent.trKey) FROM I18nTranslation gt LEFT JOIN gt.parent gp WHERE gt.language = :language AND gt.text=null";
 
   @Finder(query = "SELECT gt FROM I18nTranslation gt JOIN gt.language gl WHERE gl.code = :language", returnAs = ArrayList.class)
   public List<I18nTranslation> findByLanguage(@Named("language") final String language);
@@ -45,23 +46,24 @@ public interface I18nTranslationFinder {
       @Named("language") final I18nLanguage language);
 
   @Finder(query = TRANSLATED_QUERY, returnAs = ArrayList.class)
-  public List<I18nTranslation> getTranslatedLexicon(@Named("language") final I18nLanguage language);
+  public List<I18nTranslationDTO> getTranslatedLexicon(@Named("language") final I18nLanguage language);
 
   @Finder(query = TRANSLATED_QUERY, returnAs = ArrayList.class)
-  public List<I18nTranslation> getTranslatedLexicon(@Named("language") final I18nLanguage language,
+  public List<I18nTranslationDTO> getTranslatedLexicon(@Named("language") final I18nLanguage language,
       @FirstResult final int first, @MaxResults final int max);
 
   @Finder(query = TRANSLATED_COUNT_QUERY)
   public Long getTranslatedLexiconCount(@Named("language") final I18nLanguage language);
 
   @Finder(query = UNTRANSLATED_QUERY, returnAs = ArrayList.class)
-  public List<I18nTranslation> getUnstranslatedLexicon(@Named("language") final I18nLanguage language,
-      @FirstResult final int first, @MaxResults final int max);
+  public List<I18nTranslationDTO> getUnstranslatedLexicon(
+      @Named("language") final I18nLanguage language, @FirstResult final int first,
+      @MaxResults final int max);
 
   @Finder(query = UNTRANSLATED_COUNT_QUERY)
   public Long getUnstranslatedLexiconCount(@Named("language") final I18nLanguage language);
 
   @Finder(query = UNTRANSLATED_QUERY, returnAs = ArrayList.class)
-  public List<I18nTranslation> getUntranslatedLexicon(@Named("language") final I18nLanguage language);
+  public List<I18nTranslationDTO> getUntranslatedLexicon(@Named("language") final I18nLanguage language);
 
 }

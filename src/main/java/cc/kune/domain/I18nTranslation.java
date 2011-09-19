@@ -42,154 +42,204 @@ import cc.kune.domain.utils.HasId;
 @Table(name = "globalize_translations")
 public class I18nTranslation implements HasId {
 
-    public static final String DEF_NAMESPACE = "kune_core";
-    public static final Integer DEF_PLUR_INDEX = 1;
-    public static final String DEFAULT_LANG = "en";
+  public static final String DEF_NAMESPACE = "kune_core";
+  public static final Integer DEF_PLUR_INDEX = 1;
+  public static final String DEFAULT_LANG = "en";
+  public static final String UNTRANSLATED_VALUE = null;
 
-    public static final String UNTRANSLATED_VALUE = null;
+  @Column(name = "facet")
+  private String facet;
 
-    @Column(name = "facet")
-    private String facet;
+  @Id
+  @GeneratedValue
+  @DocumentId
+  @Column(name = "id", unique = true, nullable = false)
+  private Long id;
 
-    @Id
-    @GeneratedValue
-    @DocumentId
-    @Column(name = "id", unique = true, nullable = false)
-    private Long id;
+  @Column(name = "item_id")
+  private Integer itemId;
 
-    @Column(name = "item_id")
-    private Integer itemId;
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "language_id")
+  private I18nLanguage language;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "language_id")
-    private I18nLanguage language;
+  private String noteForTranslators;
 
-    @Column(name = "pluralization_index")
-    private Integer pluralizationIndex;
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "parent_id")
+  private I18nTranslation parent;
 
-    @Column(name = "table_name")
-    private String tableName;
+  @Column(name = "pluralization_index")
+  private Integer pluralizationIndex;
 
-    @Column(name = "text")
-    private String text;
+  @Column(name = "table_name")
+  private String tableName;
 
-    @Column(name = "tr_key")
-    private String trKey;
+  @Column(name = "text")
+  private String text;
 
-    @Column(name = "gtype")
-    private String type;
+  @Column(name = "tr_key")
+  private String trKey;
 
-    public I18nTranslation() {
-        this(null, null, null, null, null, null, null, null);
+  @Column(name = "gtype")
+  private String type;
+
+  public I18nTranslation() {
+    this(null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public I18nTranslation(final I18nLanguage language, final String text, final I18nTranslation parent,
+      final String noteForTranslators) {
+    this("", null, DEF_PLUR_INDEX, "", text, null, DEF_NAMESPACE, language, parent, noteForTranslators);
+  }
+
+  public I18nTranslation(final String trKey, final I18nLanguage language, final String text,
+      final String noteForTranslators) {
+    this("", null, DEF_PLUR_INDEX, "", text, trKey, DEF_NAMESPACE, language, null, noteForTranslators);
+  }
+
+  public I18nTranslation(final String facet, final Integer itemId, final Integer pluralizationIndex,
+      final String tableName, final String text, final String trKey, final String type,
+      final I18nLanguage language, final I18nTranslation parent, final String noteForTranslators) {
+    this.type = type;
+    this.trKey = trKey;
+    this.tableName = tableName;
+    this.itemId = itemId;
+    this.facet = facet;
+    this.language = language;
+    this.pluralizationIndex = pluralizationIndex;
+    this.text = text;
+    this.parent = parent;
+    this.setNoteForTranslators(noteForTranslators);
+    if (parent == null) {
+      assert trKey != null;
     }
-
-    public I18nTranslation(final String trKey, final I18nLanguage language, final String text) {
-        this("", null, DEF_PLUR_INDEX, "", text, trKey, DEF_NAMESPACE, language);
+    if (parent != null) {
+      assert trKey == null;
     }
+  }
 
-    public I18nTranslation(final String facet, final Integer itemId, final Integer pluralizationIndex,
-            final String tableName, final String text, final String trKey, final String type,
-            final I18nLanguage language) {
-        this.type = type;
-        this.trKey = trKey;
-        this.tableName = tableName;
-        this.itemId = itemId;
-        this.facet = facet;
-        this.language = language;
-        this.pluralizationIndex = pluralizationIndex;
-        this.text = text;
-    }
+  public I18nTranslation cloneForNewLanguage() {
+    final I18nTranslation clone = new I18nTranslation();
+    clone.type = type;
+    clone.trKey = null;
+    clone.tableName = tableName;
+    clone.itemId = itemId;
+    clone.facet = facet;
+    clone.language = null;
+    clone.pluralizationIndex = pluralizationIndex;
+    clone.text = null;
+    clone.parent = this;
+    return clone;
+  }
 
-    public I18nTranslation cloneForNewLanguage() {
-        final I18nTranslation clone = new I18nTranslation();
-        clone.type = type;
-        clone.trKey = trKey;
-        clone.tableName = tableName;
-        clone.itemId = itemId;
-        clone.facet = facet;
-        clone.language = null;
-        clone.pluralizationIndex = pluralizationIndex;
-        clone.text = null;
-        return clone;
-    }
+  public String getFacet() {
+    return this.facet;
+  }
 
-    public String getFacet() {
-        return this.facet;
-    }
+  @Override
+  public Long getId() {
+    return this.id;
+  }
 
-    @Override
-    public Long getId() {
-        return this.id;
-    }
+  public Integer getItemId() {
+    return this.itemId;
+  }
 
-    public Integer getItemId() {
-        return this.itemId;
-    }
+  public I18nLanguage getLanguage() {
+    return language;
+  }
 
-    public I18nLanguage getLanguage() {
-        return language;
-    }
+  public String getNoteForTranslators() {
+    return noteForTranslators;
+  }
 
-    public Integer getPluralizationIndex() {
-        return this.pluralizationIndex;
-    }
+  /**
+   * 
+   * The id of what we are translating
+   * 
+   * @return the parent id
+   */
+  public I18nTranslation getParent() {
+    return parent;
+  }
 
-    public String getTableName() {
-        return this.tableName;
-    }
+  public Long getParentId() {
+    return parent == null ? null : parent.getId();
+  }
 
-    public String getText() {
-        return this.text;
-    }
+  public Integer getPluralizationIndex() {
+    return this.pluralizationIndex;
+  }
 
-    public String getTrKey() {
-        return this.trKey;
-    }
+  public String getTableName() {
+    return this.tableName;
+  }
 
-    public String getType() {
-        return this.type;
-    }
+  public String getText() {
+    return this.text;
+  }
 
-    public void setFacet(final String facet) {
-        this.facet = facet;
+  public String getTrKey() {
+    if (parent != null) {
+      return parent.getTrKey();
+    } else {
+      return this.trKey;
     }
+  }
 
-    @Override
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public String getType() {
+    return this.type;
+  }
 
-    public void setItemId(final Integer itemId) {
-        this.itemId = itemId;
-    }
+  public void setFacet(final String facet) {
+    this.facet = facet;
+  }
 
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
+  @Override
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setPluralizationIndex(final Integer pluralizationIndex) {
-        this.pluralizationIndex = pluralizationIndex;
-    }
+  public void setItemId(final Integer itemId) {
+    this.itemId = itemId;
+  }
 
-    public void setTableName(final String tableName) {
-        this.tableName = tableName;
-    }
+  public void setLanguage(final I18nLanguage language) {
+    this.language = language;
+  }
 
-    public void setText(final String text) {
-        this.text = text;
-    }
+  public void setNoteForTranslators(final String noteForTranslators) {
+    this.noteForTranslators = noteForTranslators;
+  }
 
-    public void setTrKey(final String trKey) {
-        this.trKey = trKey;
-    }
+  public void setParentId(final I18nTranslation parent) {
+    this.parent = parent;
+  }
 
-    public void setType(final String type) {
-        this.type = type;
-    }
+  public void setPluralizationIndex(final Integer pluralizationIndex) {
+    this.pluralizationIndex = pluralizationIndex;
+  }
 
-    @Override
-    public String toString() {
-        return "I18nTranslation[" + trKey + " (" + language + ") " + text + "]";
-    }
+  public void setTableName(final String tableName) {
+    this.tableName = tableName;
+  }
+
+  public void setText(final String text) {
+    this.text = text;
+  }
+
+  public void setTrKey(final String trKey) {
+    this.trKey = trKey;
+  }
+
+  public void setType(final String type) {
+    this.type = type;
+  }
+
+  @Override
+  public String toString() {
+    return "I18nTranslation[" + getTrKey() + " (" + language + ") " + text + "]";
+  }
 
 }

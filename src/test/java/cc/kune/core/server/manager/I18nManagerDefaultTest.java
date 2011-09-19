@@ -74,8 +74,10 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     final int initialSize = map.size();
     final int initialSize2 = map2.size();
 
-    final String translation = translationManager.getTranslation("es", "Foo foo foo");
-    final String translation2 = translationManager.getTranslation("aa", "Foo foo foo");
+    final String translation = translationManager.getTranslation("es", "Foo foo foo",
+        "note for translators");
+    final String translation2 = translationManager.getTranslation("aa", "Foo foo foo",
+        "note for translators");
 
     assertEquals(I18nTranslation.UNTRANSLATED_VALUE, translation);
     assertEquals(I18nTranslation.UNTRANSLATED_VALUE, translation2);
@@ -91,44 +93,29 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   @Test
   public void getNonExistentTranslationReturnsDefaultLanguage() {
-    final String translation = translationManager.getTranslation("af", "January [month]");
+    final String translation = translationManager.getTranslation("af", "January [month]",
+        "note for translators");
     assertEquals("January", translation);
   }
 
   @Test
   public void getTranslation() {
-    final String translation = translationManager.getTranslation("af", "Sunday [weekday]");
+    final String translation = translationManager.getTranslation("af", "Sunday [weekday]",
+        "note for translators");
     assertEquals("Sondag", translation);
   }
 
   @Test
   public void getTranslationUTF8() {
-    final String translation = translationManager.getTranslation("el", "January [month]");
+    final String translation = translationManager.getTranslation("el", "January [month]",
+        "note for translators");
     assertEquals("Ιανουάριος", translation);
-  }
-
-  @Test
-  public void getTranslationWithIntArg() {
-    final String translation = translationManager.getTranslation("en", "[%d] users", 20);
-    assertEquals("20 users", translation);
   }
 
   @Test
   public void getTranslationWithIntArgFromService() {
     final String translation = translationService.t("[%d] users", 20);
     assertEquals("20 users", translation);
-  }
-
-  @Test
-  public void getTranslationWithIntArgFromWithNtService() {
-    final String translation = translationService.tWithNT("[%d] users", "foo foo", 20);
-    assertEquals("20 users", translation);
-  }
-
-  @Test
-  public void getTranslationWithStringArg() {
-    final String translation = translationManager.getTranslation("en", "[%s] users", "Twenty");
-    assertEquals("Twenty users", translation);
   }
 
   @Test
@@ -154,24 +141,21 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     languageManager.persist(spanish);
     languageManager.persist(afrikaans);
     languageManager.persist(greek);
-    translationManager.persist(new I18nTranslation("Sunday [weekday]", english, "Sunday"));
-    translationManager.persist(new I18nTranslation("January [month]", english, "January"));
-    translationManager.persist(new I18nTranslation("Sunday [weekday]", afrikaans, "Sondag"));
-    translationManager.persist(new I18nTranslation("January [month]", greek, "Ιανουάριος"));
+    translationManager.persist(new I18nTranslation("Sunday [weekday]", english, "Sunday",
+        "note for translators"));
+    translationManager.persist(new I18nTranslation("January [month]", english, "January",
+        "note for translators"));
+    translationManager.persist(new I18nTranslation("Sunday [weekday]", afrikaans, "Sondag",
+        "note for translators"));
+    translationManager.persist(new I18nTranslation("January [month]", greek, "Ιανουάριος",
+        "note for translators"));
     translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%s] users"), english,
-        StringEscapeUtils.escapeHtml("[%s] users")));
+        StringEscapeUtils.escapeHtml("[%s] users"), "note for translators"));
     translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%d] users"), english,
-        StringEscapeUtils.escapeHtml("[%d] users")));
+        StringEscapeUtils.escapeHtml("[%d] users"), "note for translators"));
     final I18nCountry gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".",
         "United Kingdom", "western", ",");
     countryManager.persist(gb);
-  }
-
-  @Test
-  public void setTranslation() {
-    translationManager.setTranslation("en", "Foo foo foo", "Foo foo foo translation");
-    final String translation = translationManager.getTranslation("en", "Foo foo foo");
-    assertEquals("Foo foo foo translation", translation);
   }
 
   @Test
