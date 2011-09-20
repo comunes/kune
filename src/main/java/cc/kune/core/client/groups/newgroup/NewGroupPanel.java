@@ -64,6 +64,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   private final BasicTopDialog dialog;
 
   private final FormPanel form;
+  private final GroupFieldFactory groupFieldFactory;
   private final I18nTranslationService i18n;
   private TextField<String> longNameField;
   private final MaskWidgetView mask;
@@ -71,15 +72,16 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   private Radio orgRadio;
   private Radio projectRadio;
   private TextArea publicDescField;
-  private TextField<String> shortNameField;
 
+  private TextField<String> shortNameField;
   private TextField<String> tag1;
   private TextField<String> tag2;
   private TextField<String> tag3;
 
   @Inject
   public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img,
-      final MaskWidgetView mask) {
+      final MaskWidgetView mask, final GroupFieldFactory groupFieldFactory) {
+    this.groupFieldFactory = groupFieldFactory;
     final Builder builder = new BasicTopDialog.Builder(NEWGROUP_WIZARD, false, true).autoscroll(true).title(
         i18n.t("Register a new group"));
     builder.icon("k-newgroup-icon");
@@ -124,11 +126,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     // intro.setStyleName("k-form-intro");
     // form.add(intro);
 
-    shortNameField = GroupFieldFactory.createUserShortName(SHORTNAME_FIELD);
+    shortNameField = groupFieldFactory.createUserShortName(SHORTNAME_FIELD);
     shortNameField.setTabIndex(1);
     form.add(shortNameField);
 
-    longNameField = GroupFieldFactory.createUserLongName(LONGNAME_FIELD);
+    longNameField = groupFieldFactory.createUserLongName(LONGNAME_FIELD);
     longNameField.setTabIndex(2);
     form.add(longNameField);
 

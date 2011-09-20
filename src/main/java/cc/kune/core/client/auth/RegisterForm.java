@@ -48,14 +48,15 @@ public class RegisterForm extends DefaultForm {
 
   private final TextField<String> shortNameRegField;
 
-  public RegisterForm(final I18nTranslationService i18n, final Session session) {
+  public RegisterForm(final I18nTranslationService i18n, final Session session,
+      final UserFieldFactory userFieldFactory) {
     super.addStyleName("kune-Margin-Large-l");
 
-    shortNameRegField = UserFieldFactory.createUserShortName(NICK_FIELD);
+    shortNameRegField = userFieldFactory.createUserShortName(NICK_FIELD);
     shortNameRegField.setTabIndex(1);
     add(shortNameRegField);
 
-    longNameRegField = UserFieldFactory.createUserLongName(LONGNAME_FIELD);
+    longNameRegField = userFieldFactory.createUserLongName(LONGNAME_FIELD);
     longNameRegField.setTabIndex(2);
     add(longNameRegField);
 

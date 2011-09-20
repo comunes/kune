@@ -38,10 +38,11 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   @Inject
   public UserOptGeneralPanel(final I18nTranslationService i18n, final CoreResources res,
-      final MaskWidget maskWidget, final LanguageSelectorPanel langSelector) {
+      final MaskWidget maskWidget, final LanguageSelectorPanel langSelector,
+      final UserFieldFactory userFieldFactory) {
     super(i18n, res, maskWidget);
     this.langSelector = langSelector;
-    longName = UserFieldFactory.createUserLongName(LONG_NAME_FIELD);
+    longName = userFieldFactory.createUserLongName(LONG_NAME_FIELD);
     add(longName);
     langSelector.setLangTitle(i18n.t("Your language"));
     langSelector.setLabelAlign(LabelAlign.LEFT);

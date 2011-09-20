@@ -11,9 +11,14 @@ import com.google.inject.Singleton;
 @Singleton
 public class GroupFieldFactory {
 
-  private static I18nTranslationService i18n;
+  private final I18nTranslationService i18n;
 
-  public static TextField<String> createUserLongName(final String fieldId) {
+  @Inject
+  public GroupFieldFactory(final I18nTranslationService i18n) {
+    this.i18n = i18n;
+  }
+
+  public TextField<String> createUserLongName(final String fieldId) {
     final TextField<String> field = new TextField<String>();
     field.setFieldLabel(i18n.t("Long name"));
     field.setName(fieldId);
@@ -26,7 +31,7 @@ public class GroupFieldFactory {
     return field;
   }
 
-  public static TextField<String> createUserShortName(final String fieldId) {
+  public TextField<String> createUserShortName(final String fieldId) {
     final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15);
     final TextField<String> field = new TextField<String>();
     field.setFieldLabel(i18n.t("Short name"));
@@ -42,10 +47,5 @@ public class GroupFieldFactory {
     field.getMessages().setRegexText(minMaxText);
     field.setValidationDelay(1000);
     return field;
-  }
-
-  @Inject
-  public GroupFieldFactory(final I18nTranslationService i18n) {
-    GroupFieldFactory.i18n = i18n;
   }
 }

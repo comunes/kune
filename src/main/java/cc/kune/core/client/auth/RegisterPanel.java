@@ -47,11 +47,11 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
   @Inject
   public RegisterPanel(final I18nTranslationService i18n, final Session session,
-      final MaskWidgetView mask, final NotifyLevelImages images) {
+      final MaskWidgetView mask, final NotifyLevelImages images, final UserFieldFactory userFieldFactory) {
     super(REGISTER_DIALOG, mask, i18n, i18n.t(CoreMessages.REGISTER_TITLE), true, true, true, "",
         i18n.t(CoreMessages.REGISTER_TITLE), REGISTER_BUTTON_ID,
         i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, images, ERRMSG, 5);
-    registerForm = new RegisterForm(i18n, session);
+    registerForm = new RegisterForm(i18n, session, userFieldFactory);
     registerForm.setWidth(330);
     registerForm.getFormPanel().setId(REGISTER_FORM);
     messageErrorBar = new MessageToolbar(images, errorLabelId);

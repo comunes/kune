@@ -19,8 +19,6 @@
  */
 package cc.kune.core.client;
 
-import cc.kune.core.client.auth.UserFieldFactory;
-import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
@@ -40,8 +38,6 @@ public class CoreParts {
       final Provider<UserSNPresenter> buddiesAndParticipationPresenter,
       final Provider<GroupSNConfActions> groupMembersConfActions,
       final Provider<UserSNConfActions> userSNConfActions,
-      final Provider<UserFieldFactory> userFielFactory,
-      final Provider<GroupFieldFactory> groupFielFactory,
       final Provider<SiteUserOptionsPresenter> userOptions) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
@@ -51,8 +47,6 @@ public class CoreParts {
         groupMembersPresenter.get();
         buddiesAndParticipationPresenter.get();
         userOptions.get();
-        userFielFactory.get();
-        groupFielFactory.get();
       }
     });
   }

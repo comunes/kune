@@ -39,6 +39,7 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.auth.SignInPanel;
 import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.auth.SignInPresenter.SignInView;
+import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.auth.UserPassAutocompleteManager;
 import cc.kune.core.client.auth.UserPassAutocompleteManagerImpl;
 import cc.kune.core.client.cookies.CookiesManager;
@@ -46,6 +47,7 @@ import cc.kune.core.client.cookies.CookiesManagerImpl;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
 import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.groups.newgroup.NewGroupPanel;
 import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
@@ -139,6 +141,9 @@ public class CoreGinModule extends ExtendedGinModule {
     // DnD
     s(KuneDragController.class);
     s(NotImplementedDropManager.class);
+
+    s(UserFieldFactory.class);
+    s(GroupFieldFactory.class);
 
     // Presenters
     bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
