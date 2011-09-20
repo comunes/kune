@@ -22,6 +22,8 @@ package cc.kune.chat.client.actions;
 import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
@@ -51,11 +53,23 @@ public class ChatAboutContentBtn extends ButtonDescriptor {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      final String subject = i18n.t("Chat about: [%s]", session.getContentState().getTitle());
-      final StateToken token = session.getCurrentStateToken();
-      chatClient.get().joinRoom(token.toString().replaceAll("\\.", "-"), subject,
-          session.getCurrentUserInfo().getShortName());
-      chatClient.get().show();
+      NotifyUser.askConfirmation(
+          i18n.t("Confirm, please:"),
+          i18n.t("This will open a specific chatroom to chat about this page or document (it's useful to chat with others about something while reading/modifing it). Are you sure?"),
+          new SimpleResponseCallback() {
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onSuccess() {
+              final String subject = i18n.t("Chat about: [%s]", session.getContentState().getTitle());
+              final StateToken token = session.getCurrentStateToken();
+              chatClient.get().joinRoom(token.toString().replaceAll("\\.", "-"), subject,
+                  session.getCurrentUserInfo().getShortName());
+              chatClient.get().show();
+            }
+          });
     }
 
   }

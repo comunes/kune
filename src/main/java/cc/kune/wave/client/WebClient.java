@@ -25,6 +25,7 @@ package cc.kune.wave.client;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
@@ -32,7 +33,6 @@ import org.waveprotocol.box.webclient.client.HistorySupport;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.Session;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
-import org.waveprotocol.box.webclient.client.StagesProvider;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
 import org.waveprotocol.box.webclient.client.events.NetworkStatusEvent;
 import org.waveprotocol.box.webclient.client.events.NetworkStatusEventHandler;
@@ -51,7 +51,6 @@ import org.waveprotocol.box.webclient.util.Log;
 import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.box.webclient.widget.loading.LoadingIndicator;
 import org.waveprotocol.wave.client.account.ProfileManager;
-import org.waveprotocol.wave.client.account.impl.ProfileManagerImpl;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
@@ -62,6 +61,7 @@ import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.sitebar.spaces.Space;
@@ -81,15 +81,18 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
+@Singleton
 public class WebClient extends  Composite implements WaveClientView {
   interface Binder extends UiBinder<DockLayoutPanel, WebClient> {
   }
@@ -245,7 +248,7 @@ public class WebClient extends  Composite implements WaveClientView {
    */
   @Inject
   public WebClient(final EventBus eventBus, KuneWaveProfileManager profiles, InboxCountPresenter inboxCount, TokenMatcher tokenMatcher) {
-
+    // Window.alert("webclient! " + new Date());
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
@@ -338,11 +341,11 @@ public WaveWebSocketClient getWebSocket() {
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl(String moduleBase) /*-{
-		return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+    return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
   }-*/;
 
   private native boolean useSocketIO() /*-{
-		return !!$wnd.__useSocketIO
+    return !!$wnd.__useSocketIO
   }-*/;
 
   /**

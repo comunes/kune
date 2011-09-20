@@ -211,8 +211,8 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   }
 
   @Override
-  public WaveRef createWave(final String message, final ParticipantId participant) {
-    return createWave(NO_TITLE, message, participant);
+  public WaveRef createWave(final String message, final ParticipantId... participants) {
+    return createWave(NO_TITLE, message, participants);
   }
 
   @Override

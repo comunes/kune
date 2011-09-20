@@ -61,6 +61,8 @@ public interface GSpaceArmor {
 
   IsActionExtensible getSubheaderToolbar();
 
+  IsActionExtensible getToolsSouthToolbar();
+
   ForIsWidget getUserSpace();
 
   void selectGroupSpace();

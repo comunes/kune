@@ -35,7 +35,7 @@ public interface KuneWaveManager {
 
   void addParticipants(WaveRef waveName, String author, String userWhoAdd, String... newParticipants);
 
-  WaveRef createWave(String message, ParticipantId participants);
+  WaveRef createWave(String message, ParticipantId... participants);
 
   WaveRef createWave(String title, String message, ParticipantId... participantsArray);
 

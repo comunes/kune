@@ -42,6 +42,7 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.RenameListener;
 import cc.kune.gspace.client.tool.ContentViewer;
+import cc.kune.wave.client.WaveClientManager;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -96,7 +97,7 @@ public class ContentViewerPresenter extends
   public ContentViewerPresenter(final EventBus eventBus, final ContentViewerView view,
       final StateManager stateManager, final ContentViewerProxy proxy, final Session session,
       final ActionRegistryByType actionsRegistry, final Provider<RenameAction> renameAction,
-      final PathToolbarUtils pathToolbarUtils) {
+      final PathToolbarUtils pathToolbarUtils, final WaveClientManager wavClientManager) {
     super(eventBus, view, proxy);
     this.session = session;
     this.actionsRegistry = actionsRegistry;
@@ -109,7 +110,6 @@ public class ContentViewerPresenter extends
       }
     });
     session.onUserSignIn(true, new UserSignInHandler() {
-
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
         getView().signIn();
@@ -174,7 +174,8 @@ public class ContentViewerPresenter extends
     if (session.isLogged() && rights.isEditable()) {
       if (stateContent.isParticipant()) {
         // is already participant, show wave editor
-        if (org.waveprotocol.box.webclient.client.Session.get().isLoggedIn()) {
+        final org.waveprotocol.box.webclient.client.Session waveSession = org.waveprotocol.box.webclient.client.Session.get();
+        if (waveSession != null && waveSession.isLoggedIn()) {
           // final String typeId = stateContent.getTypeId();
           // if (typeId.equals(BartersConstants.TYPE_BARTER)
           // || typeId.equals(MeetingsConstants.TYPE_MEETING)) {

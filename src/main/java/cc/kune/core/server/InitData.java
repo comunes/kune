@@ -42,6 +42,7 @@ public class InitData {
   private License defaultLicense;
   private String defaultWsTheme;
   private List<ExtMediaDescrip> extMediaDescrips;
+  private boolean feedbackEnabled;
   private String flvEmbedObject;
   private String galleryPermittedExtensions;
   private List<ToolSimple> groupTools;
@@ -180,6 +181,10 @@ public class InitData {
     return userTools;
   }
 
+  public boolean isFeedbackEnabled() {
+    return feedbackEnabled;
+  }
+
   public void setAviEmbedObject(final String aviEmbedObject) {
     this.aviEmbedObject = aviEmbedObject;
   }
@@ -214,6 +219,10 @@ public class InitData {
 
   public void setExtMediaDescrips(final List<ExtMediaDescrip> extMediaDescrips) {
     this.extMediaDescrips = extMediaDescrips;
+  }
+
+  public void setFeedbackEnabled(final boolean feedbackEnabled) {
+    this.feedbackEnabled = feedbackEnabled;
   }
 
   public void setFlvEmbedObject(final String flvEmbedObject) {

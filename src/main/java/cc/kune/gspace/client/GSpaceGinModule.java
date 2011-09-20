@@ -23,13 +23,14 @@ import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
+import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorPanel;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView;
-import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import cc.kune.gspace.client.i18n.I18nTranslatorTabsCollection;
+import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import cc.kune.gspace.client.licensewizard.LicenseChangeAction;
 import cc.kune.gspace.client.licensewizard.LicenseWizard;
 import cc.kune.gspace.client.licensewizard.LicenseWizardPanel;
@@ -184,6 +185,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
     // Actions
     s(ContentViewerOptionsMenu.class);
     s(RenameAction.class);
+    s(GiveUsFeedbackBtn.class);
 
     // LicenseWizard
     bindPresenter(LicenseWizardPresenter.class, LicenseWizardView.class, LicenseWizardPanel.class,

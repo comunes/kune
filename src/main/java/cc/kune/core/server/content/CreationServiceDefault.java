@@ -46,7 +46,6 @@ public class CreationServiceDefault implements CreationService {
   private final ContainerManager containerManager;
   private final ContentManager contentManager;
   private final Log LOG = LogFactory.getLog(CreationServiceDefault.class);
-
   private final ServerToolRegistry tools;
 
   @Inject

@@ -70,6 +70,13 @@ public class KunePropertiesDefault implements KuneProperties {
   }
 
   @Override
+  public boolean getBoolean(final String key) {
+    final Boolean value = config.getBoolean(key);
+    checkNull(key, value);
+    return value;
+  }
+
+  @Override
   public Integer getInteger(final String key) {
     final Integer value = config.getInt(key);
     checkNull(key, value);

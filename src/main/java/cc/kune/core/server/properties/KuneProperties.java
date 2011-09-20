@@ -28,6 +28,8 @@ public interface KuneProperties {
   String CHAT_ROOM_HOST = "kune.chat.roomHost";
   String CURRENT_CC_VERSION = "kune.currentccversion";
   String DEFAULT_SITE_SHORT_NAME = "kune.default.site.shortName";
+  String FEEDBACK_ENABLED = "kune.feedback.enabled";
+  String FEEDBACK_TO = "kune.feedback.to";
   String FLV_EMBEDED_OBJECT = "kune.media.flvembededobject";
   String IMAGES_CROPSIZE = "kune.images.cropsize";
   String IMAGES_ICONSIZE = "kune.images.iconsize";
@@ -62,6 +64,8 @@ public interface KuneProperties {
   String get(String key);
 
   String get(String key, String defaultValue);
+
+  boolean getBoolean(String key);
 
   Integer getInteger(String key);
 

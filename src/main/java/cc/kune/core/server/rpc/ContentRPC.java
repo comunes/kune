@@ -19,9 +19,14 @@
  */
 package cc.kune.core.server.rpc;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.NoResultException;
+
+import org.waveprotocol.wave.model.wave.ParticipantId;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.chat.server.ChatManager;
 import cc.kune.core.client.errors.AccessViolationException;
@@ -45,6 +50,7 @@ import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.state.StateContainer;
 import cc.kune.core.server.state.StateContent;
 import cc.kune.core.server.state.StateService;
@@ -65,6 +71,8 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -78,7 +86,10 @@ public class ContentRPC implements ContentService, RPC {
   private final CreationService creationService;
   private final FinderService finderService;
   private final GroupManager groupManager;
+  private final KuneProperties kuneProperties;
+  private final KuneWaveManager kuneWaveManager;
   private final Mapper mapper;
+  private final ParticipantUtils participantUtils;
   private final AccessRightsService rightsService;
   private final StateService stateService;
   private final TagUserContentManager tagManager;
@@ -90,7 +101,8 @@ public class ContentRPC implements ContentService, RPC {
       final StateService stateService, final CreationService creationService,
       final GroupManager groupManager, final ContentManager contentManager,
       final ContainerManager containerManager, final TagUserContentManager tagManager,
-      final Mapper mapper, final ChatManager chatManager) {
+      final Mapper mapper, final ChatManager chatManager, final KuneWaveManager kuneWaveManager,
+      final KuneProperties kuneProperties, final ParticipantUtils participantUtils) {
     this.finderService = finderService;
     this.userSessionProvider = userSessionProvider;
     this.accessService = accessService;
@@ -103,6 +115,9 @@ public class ContentRPC implements ContentService, RPC {
     this.tagManager = tagManager;
     this.mapper = mapper;
     this.chatManager = chatManager;
+    this.kuneWaveManager = kuneWaveManager;
+    this.kuneProperties = kuneProperties;
+    this.participantUtils = participantUtils;
   }
 
   @Override
@@ -432,6 +447,22 @@ public class ContentRPC implements ContentService, RPC {
     final User user = getCurrentUser();
     final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
     creationService.saveContent(user, content, textContent);
+  }
+
+  @Override
+  @Authenticated
+  @Transactional
+  public String sendFeedback(final String userHash, final String title, final String body)
+      throws DefaultException {
+    final User user = getCurrentUser();
+    final List<String> participants = kuneProperties.getList(KuneProperties.FEEDBACK_TO);
+    participants.add(0, user.getShortName());
+    final List<ParticipantId> partIds = new ArrayList<ParticipantId>();
+    for (final String part : participants) {
+      partIds.add(participantUtils.of(part));
+    }
+    return JavaWaverefEncoder.encodeToUriPathSegment(kuneWaveManager.createWave(title, body,
+        partIds.toArray(new ParticipantId[0])));
   }
 
   @Override

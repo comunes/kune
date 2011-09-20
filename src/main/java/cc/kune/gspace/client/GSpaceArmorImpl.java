@@ -95,6 +95,8 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   private final ActionFlowPanel subheaderToolbar;
   @UiField
   TabLayoutPanel tabs;
+  private final ActionFlowPanel toolsSouthToolbar;
+
   @UiField
   FlowPanel userSpace;
 
@@ -110,9 +112,11 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
     footerToolbar = toolbarProv.get();
     headerToolbar = toolbarProv.get();
     subheaderToolbar = toolbarProv.get();
+    toolsSouthToolbar = toolbarProv.get();
     getDocHeader().add(headerToolbar);
     getDocSubheader().add(subheaderToolbar);
     getDocFooter().add(footerToolbar);
+    getEntityToolsSouth().add(toolsSouthToolbar);
     entityToolsNorth.getElement().getStyle().setPosition(Position.RELATIVE);
     // entityToolsSouth.setVisible(false);
     mainpanel.getWidgetContainerElement(tabs).addClassName("k-spaces");
@@ -212,6 +216,11 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public IsActionExtensible getSubheaderToolbar() {
     return subheaderToolbar;
+  }
+
+  @Override
+  public IsActionExtensible getToolsSouthToolbar() {
+    return toolsSouthToolbar;
   }
 
   @Override

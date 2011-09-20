@@ -35,6 +35,7 @@ public class InitDataDTO implements IsSerializable {
   private LicenseDTO defaultLicense;
   private String defaultWsTheme;
   private List<ExtMediaDescripDTO> extMediaDescrips;
+  private boolean feedbackEnabled;
   private String flvEmbedObject;
   private String galleryPermittedExtensions;
   private List<ToolSimpleDTO> groupTools;
@@ -180,6 +181,10 @@ public class InitDataDTO implements IsSerializable {
     return getUserInfo() != null;
   }
 
+  public boolean isFeedbackEnabled() {
+    return feedbackEnabled;
+  }
+
   public void setAviEmbedObject(final String aviEmbedObject) {
     this.aviEmbedObject = aviEmbedObject;
   }
@@ -214,6 +219,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setExtMediaDescrips(final List<ExtMediaDescripDTO> extMediaDescrips) {
     this.extMediaDescrips = extMediaDescrips;
+  }
+
+  public void setFeedbackEnabled(final boolean feedbackEnabled) {
+    this.feedbackEnabled = feedbackEnabled;
   }
 
   public void setFlvEmbedObject(final String flvEmbedObject) {

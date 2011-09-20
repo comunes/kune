@@ -19,6 +19,7 @@
  */
 package cc.kune.wave.client;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -34,6 +35,8 @@ import cc.kune.wave.client.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsonUtils;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
@@ -56,18 +59,24 @@ public class WaveClientManager {
                 setUseSocketIO(result.useSocketIO());
                 setSessionJSON(JsonUtils.safeEval(result.getSessionJSON()));
                 setClientFlags(JsonUtils.safeEval(result.getClientFlags()));
-                final ForIsWidget userSpace = wsArmor.getUserSpace();
-                if (webClient == null) {
-                  if (userSpace.getWidgetCount() > 0) {
-                    userSpace.remove(0);
+                Log.info("Wave client session: " + result.getSessionJSON());
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                  @Override
+                  public void execute() {
+                    final ForIsWidget userSpace = wsArmor.getUserSpace();
+                    if (webClient == null) {
+                      if (userSpace.getWidgetCount() > 0) {
+                        userSpace.remove(0);
+                      }
+                      webClient = webclientView.get();
+                      userSpace.add(webClient);
+                    } else {
+                      // this is done with the first webclient creation above
+                      webClient.login();
+                      webClient.asWidget().setVisible(true);
+                    }
                   }
-                  webClient = webclientView.get();
-                  userSpace.add(webClient);
-                } else {
-                  // this is done with the first webclient creation above
-                  webClient.login();
-                  webClient.asWidget().setVisible(true);
-                }
+                });
               }
             });
       }
@@ -91,14 +100,14 @@ public class WaveClientManager {
   }
 
   private native void setClientFlags(JavaScriptObject object) /*-{
-		$wnd.__client_flags = object;
-  }-*/;
+                                                              $wnd.__client_flags = object;
+                                                              }-*/;
 
   private native void setSessionJSON(JavaScriptObject object) /*-{
-		$wnd.__session = object;
-  }-*/;
+                                                              $wnd.__session = object;
+                                                              }-*/;
 
   private native void setUseSocketIO(boolean use) /*-{
-		$wnd.__useSocketIO = use;
-  }-*/;
+                                                  $wnd.__useSocketIO = use;
+                                                  }-*/;
 }

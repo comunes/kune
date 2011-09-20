@@ -32,14 +32,14 @@ public class WaveGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
+    s(WebClientMock.class);
+    s(WebClient.class);
+    s(WaveClientProvider.class);
     s(WaveClientManager.class);
     s(WaveStatusIndicator.class);
     eagle(WaveParts.class);
     s(KuneWaveProfileManager.class);
     s(InboxCountView.class, InboxCountPanel.class);
     s(InboxCountPresenter.class);
-    s(WaveClientProvider.class);
-    s(WebClientMock.class);
-    s(WebClient.class);
   }
 }

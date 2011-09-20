@@ -74,6 +74,8 @@ public interface ContentService extends RemoteService {
 
   void save(String user, StateToken token, String content) throws DefaultException;
 
+  String sendFeedback(String userHash, String title, String body);
+
   ContentSimpleDTO setAsDefaultContent(String userHash, StateToken token);
 
   I18nLanguageDTO setLanguage(String userHash, StateToken token, String languageCode)

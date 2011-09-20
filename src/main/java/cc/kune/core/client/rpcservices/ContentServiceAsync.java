@@ -77,6 +77,8 @@ public interface ContentServiceAsync {
 
   void save(String user, StateToken token, String content, AsyncCallback<Void> asyncCallback);
 
+  void sendFeedback(String userHash, String title, String body, AsyncCallback<String> callback);
+
   void setAsDefaultContent(String userHash, StateToken token,
       AsyncCallback<ContentSimpleDTO> asyncCallback);
 

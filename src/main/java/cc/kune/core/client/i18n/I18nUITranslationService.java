@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.MissingResourceException;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.Location;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
@@ -64,7 +63,6 @@ public class I18nUITranslationService extends I18nTranslationService {
       @Override
       public void onSuccess(final I18nLanguageDTO result) {
         currentLang = result;
-        NotifyUser.info("lang: " + result.getCode());
         currentLanguageCode = currentLang.getCode();
         session.setCurrentLanguage(currentLang);
         i18nService.getLexicon(currentLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
