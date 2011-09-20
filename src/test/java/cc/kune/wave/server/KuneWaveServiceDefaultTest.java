@@ -38,7 +38,7 @@ import cc.kune.core.server.integration.IntegrationTestHelper;
 import com.google.inject.Inject;
 import com.google.wave.api.Wavelet;
 
-public class KuneWaveManagerDefaultTest extends IntegrationTest {
+public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   private static final String MESSAGE = "testing";
   private static final String NEW_PARTICIPANT = "newparti";
@@ -47,7 +47,7 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
   private static final String TITLE = "title";
   private static final String TITLENEW = "titleNew";
   @Inject
-  KuneWaveManager manager;
+  KuneWaveService manager;
   @Inject
   ParticipantUtils participantUtils;
 

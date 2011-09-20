@@ -75,9 +75,6 @@ public class User implements HasId {
   @Column(nullable = false)
   private byte[] diggest;
 
-  // @OneToOne(cascade = CascadeType.REMOVE)
-  // private final CustomProperties customProperties;
-
   @Column(unique = true, nullable = false)
   @Email
   @Length(min = 1)
@@ -87,6 +84,9 @@ public class User implements HasId {
   @DocumentId
   @GeneratedValue
   private Long id;
+
+  // @OneToOne(cascade = CascadeType.REMOVE)
+  // private final CustomProperties customProperties;
 
   @ManyToOne
   @NotNull
@@ -125,22 +125,9 @@ public class User implements HasId {
   @OneToOne(cascade = CascadeType.REMOVE)
   private Group userGroup;
 
-  // @OneToOne
-  // @OnDelete(action = OnDeleteAction.CASCADE)
-  // private Properties properties;
-
   public User() {
     this(null, null, null, null, null, null, null, null, null);
   }
-
-  //
-  // public User(final String shortName, final String longName, final String
-  // email, final String passwd,
-  // final I18nLanguage language, final I18nCountry country, final TimeZone
-  // timezone) {
-  // this(shortName, longName, email, passwd, language, country, timezone,
-  // null);
-  // }
 
   public User(final String shortName, final String longName, final String email, final String passwd,
       final byte[] diggets, final byte[] salt, final I18nLanguage language, final I18nCountry country,
@@ -162,6 +149,41 @@ public class User implements HasId {
     // this.properties = properties;
   }
 
+  // @OneToOne
+  // @OnDelete(action = OnDeleteAction.CASCADE)
+  // private Properties properties;
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final User other = (User) obj;
+    if (shortName == null) {
+      if (other.shortName != null) {
+        return false;
+      }
+    } else if (!shortName.equals(other.shortName)) {
+      return false;
+    }
+    return true;
+  }
+
+  //
+  // public User(final String shortName, final String longName, final String
+  // email, final String passwd,
+  // final I18nLanguage language, final I18nCountry country, final TimeZone
+  // timezone) {
+  // this(shortName, longName, email, passwd, language, country, timezone,
+  // null);
+  // }
+
   public I18nCountry getCountry() {
     return country;
   }
@@ -174,13 +196,13 @@ public class User implements HasId {
     return diggest;
   }
 
-  // public CustomProperties getCustomProperties() {
-  // return customProperties;
-  // }
-
   public String getEmail() {
     return email;
   }
+
+  // public CustomProperties getCustomProperties() {
+  // return customProperties;
+  // }
 
   public boolean getHasLogo() {
     return hasLogo();
@@ -207,13 +229,13 @@ public class User implements HasId {
     return password;
   }
 
-  // public Properties getProperties() {
-  // return properties;
-  // }
-
   public byte[] getSalt() {
     return salt;
   }
+
+  // public Properties getProperties() {
+  // return properties;
+  // }
 
   public String getShortName() {
     return shortName;
@@ -234,6 +256,14 @@ public class User implements HasId {
 
   public Group getUserGroup() {
     return userGroup;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((shortName == null) ? 0 : shortName.hashCode());
+    return result;
   }
 
   @Transient

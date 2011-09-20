@@ -35,7 +35,7 @@ import cc.kune.domain.Group;
 import cc.kune.domain.License;
 import cc.kune.domain.Revision;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -47,7 +47,7 @@ public class StateServiceDefault implements StateService {
   private final ContentManager contentManager;
   private final GroupManager groupManager;
   private final I18nTranslationService i18n;
-  private final KuneWaveManager kuneWaveManager;
+  private final KuneWaveService kuneWaveManager;
   private final AccessRightsService rightsService;
   private final SocialNetworkManager socialNetworkManager;
   private final TagUserContentManager tagManager;
@@ -56,7 +56,7 @@ public class StateServiceDefault implements StateService {
   public StateServiceDefault(final GroupManager groupManager,
       final SocialNetworkManager socialNetworkManager, final ContentManager contentManager,
       final TagUserContentManager tagManager, final AccessRightsService rightsService,
-      final I18nTranslationService i18n, final KuneWaveManager kuneWaveManager) {
+      final I18nTranslationService i18n, final KuneWaveService kuneWaveManager) {
     this.groupManager = groupManager;
     this.socialNetworkManager = socialNetworkManager;
     this.contentManager = contentManager;

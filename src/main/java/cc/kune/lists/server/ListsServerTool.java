@@ -43,7 +43,7 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.KuneWaveService;
 import cc.kune.wave.server.KuneWaveUtils;
 
 import com.google.inject.Inject;
@@ -52,12 +52,12 @@ import com.google.inject.Provider;
 public class ListsServerTool extends AbstractServerTool {
 
   private final Provider<UserSession> userSessionProvider;
-  private final KuneWaveManager waveManager;
+  private final KuneWaveService waveManager;
 
   @Inject
   public ListsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
-      final Provider<UserSession> userSessionProvider, final KuneWaveManager waveManager) {
+      final Provider<UserSession> userSessionProvider, final KuneWaveService waveManager) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST), Arrays.asList(TYPE_LIST),
         Arrays.asList(TYPE_LIST), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
         configurationManager, i18n, ServerToolTarget.forGroups);

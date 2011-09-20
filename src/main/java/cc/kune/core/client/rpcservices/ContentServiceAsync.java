@@ -97,4 +97,6 @@ public interface ContentServiceAsync {
   void setTags(String userHash, StateToken token, String tags,
       AsyncCallback<TagCloudResult> asyncCallback);
 
+  void writeTo(String userHash, StateToken token, boolean onlyToAdmins, AsyncCallback<String> callback);
+
 }

@@ -81,8 +81,8 @@ import com.google.wave.api.impl.WaveletData;
 import com.google.wave.splash.rpc.ClientAction;
 import com.google.wave.splash.web.template.WaveRenderer;
 
-public class KuneWaveManagerDefault implements KuneWaveManager {
-  public static final Log LOG = LogFactory.getLog(KuneWaveManagerDefault.class);
+public class KuneWaveServiceDefault implements KuneWaveService {
+  public static final Log LOG = LogFactory.getLog(KuneWaveServiceDefault.class);
 
   // See: DocumentModifyServiceTest
   private static final String NO_ANNOTATION_KEY = null;
@@ -148,7 +148,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   private final WaveRenderer waveRenderer;
 
   @Inject
-  public KuneWaveManagerDefault(final EventDataConverterManager converterManager,
+  public KuneWaveServiceDefault(final EventDataConverterManager converterManager,
       @Named("DataApiRegistry") final OperationServiceRegistry operationRegistry,
       final WaveletProvider waveletProvider, final ConversationUtil conversationUtil,
       final ParticipantUtils participantUtils, final WaveRenderer waveRenderer,
@@ -283,7 +283,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
       @Override
       public void onFailure(final String arg0) {
-        KuneWaveManagerDefault.this.onFailure("Wave creation failed, onFailure: " + arg0);
+        KuneWaveServiceDefault.this.onFailure("Wave creation failed, onFailure: " + arg0);
       }
 
       @Override
@@ -344,7 +344,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
       @Override
       public void onFailure(final String arg0) {
-        KuneWaveManagerDefault.this.onFailure("Wave " + logComment + " failed, onFailure: " + arg0);
+        KuneWaveServiceDefault.this.onFailure("Wave " + logComment + " failed, onFailure: " + arg0);
       }
 
       @Override

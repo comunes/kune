@@ -20,5 +20,13 @@
 package cc.kune.core.client.errors;
 
 public class AccessViolationException extends DefaultException {
-    private static final long serialVersionUID = -3786772632052256999L;
+  private static final long serialVersionUID = -3786772632052256999L;
+
+  public AccessViolationException() {
+    super();
+  }
+
+  public AccessViolationException(final String msg) {
+    super(msg);
+  }
 }

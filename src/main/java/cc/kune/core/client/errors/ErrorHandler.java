@@ -82,8 +82,10 @@ public class ErrorHandler {
     eventBus.fireEvent(new ProgressHideEvent());
     if (caught instanceof AccessViolationException) {
       logException(caught);
+      final String msg = caught.getMessage();
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("You do not have rights to perform that action")));
+          i18n.t("You do not have rights to perform that action")
+              + (TextUtils.empty(msg) ? "" : ". " + i18n.t(msg))));
       goHome();
     } else if (caught instanceof SessionExpiredException) {
       logException(caught);

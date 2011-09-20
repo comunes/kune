@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.sn.actions.registry;
 
+import cc.kune.chat.client.actions.conditions.IsBuddieCondition;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.core.client.sn.actions.AcceptJoinGroupAction;
 import cc.kune.core.client.sn.actions.ChangeToAdminAction;
@@ -29,6 +30,7 @@ import cc.kune.core.client.sn.actions.GotoPersonAction;
 import cc.kune.core.client.sn.actions.GotoYourHomePageAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
 import cc.kune.core.client.sn.actions.UnJoinFromThisGroupAction;
+import cc.kune.core.client.sn.actions.WriteToAction;
 import cc.kune.core.client.sn.actions.conditions.ImPartOfGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
@@ -37,6 +39,7 @@ import cc.kune.core.client.sn.actions.conditions.IsMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsNotMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -45,21 +48,22 @@ import com.google.inject.Provider;
 public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
   @Inject
-  public UserSNMenuItemsRegistry(final Session session,
+  public UserSNMenuItemsRegistry(final Session session, final I18nTranslationService i18n,
       final IsCurrentStateAdministrableCondition isAdministrableCondition,
-      final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
-      final ImPartOfGroupCondition imPartOfGroup, final IsLoggedCondition isLoggedCondition,
-      final IsMeCondition isMe, final IsNotMeCondition isNotMe,
+      final IsPersonCondition isPerson, final IsGroupCondition isGroup,
+      final ImPartOfGroupCondition imPartOfGroup, final IsLoggedCondition isLogged,
+      final IsBuddieCondition isBuddie, final IsMeCondition isMe, final IsNotMeCondition isNotMe,
       final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
       final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
       final DenyJoinGroupAction denyJoinGroupAction, final GotoGroupAction gotoGroupAction,
       final GotoPersonAction gotoPersonAction, final UnJoinFromThisGroupAction unjoinAction,
+      final WriteToAction writeToAction, final WriteToAction writeToActionOnlyAdmins,
       final GotoYourHomePageAction gotoYourHomePageAction) {
     add(new Provider<MenuItemDescriptor>() {
       @Override
       public MenuItemDescriptor get() {
         final MenuItemDescriptor item = new MenuItemDescriptor(gotoPersonAction);
-        item.add(isPersonCondition);
+        item.add(isPerson);
         item.add(isNotMe);
         return item;
       }
@@ -68,7 +72,19 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
       @Override
       public MenuItemDescriptor get() {
         final MenuItemDescriptor item = new MenuItemDescriptor(gotoGroupAction);
-        item.add(isGroupCondition);
+        item.add(isGroup);
+        return item;
+      }
+    });
+    add(new Provider<MenuItemDescriptor>() {
+      @Override
+      public MenuItemDescriptor get() {
+        final MenuItemDescriptor item = new MenuItemDescriptor(writeToAction);
+        item.add(isPerson);
+        item.withText(i18n.t("Write to your buddie"));
+        item.add(isBuddie);
+        item.add(isNotMe);
+        item.add(isLogged);
         return item;
       }
     });
@@ -76,19 +92,40 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
       @Override
       public MenuItemDescriptor get() {
         final MenuItemDescriptor item = new MenuItemDescriptor(gotoYourHomePageAction);
-        item.add(isPersonCondition);
+        item.add(isPerson);
         item.add(isMe);
         return item;
       }
     });
-    // This doesn't works, because its unregister from current state not
-    // from target group
     add(new Provider<MenuItemDescriptor>() {
       @Override
       public MenuItemDescriptor get() {
         final MenuItemDescriptor item = new MenuItemDescriptor(unjoinAction);
-        item.add(isLoggedCondition);
-        item.add(isGroupCondition);
+        item.add(isLogged);
+        item.add(isGroup);
+        item.add(imPartOfGroup);
+        return item;
+      }
+    });
+    add(new Provider<MenuItemDescriptor>() {
+      @Override
+      public MenuItemDescriptor get() {
+        writeToActionOnlyAdmins.setOnlyToAdmin(true);
+        final MenuItemDescriptor item = new MenuItemDescriptor(writeToActionOnlyAdmins);
+        item.withText(i18n.t("Write to the admins of this group"));
+        item.add(isLogged);
+        item.add(isGroup);
+        item.add(imPartOfGroup);
+        return item;
+      }
+    });
+    add(new Provider<MenuItemDescriptor>() {
+      @Override
+      public MenuItemDescriptor get() {
+        final MenuItemDescriptor item = new MenuItemDescriptor(writeToAction);
+        item.withText(i18n.t("Write to the members of this group"));
+        item.add(isLogged);
+        item.add(isGroup);
         item.add(imPartOfGroup);
         return item;
       }

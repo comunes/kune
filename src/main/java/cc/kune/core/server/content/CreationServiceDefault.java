@@ -35,7 +35,7 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -65,7 +65,7 @@ public class CreationServiceDefault implements CreationService {
     final ServerTool tool = tools.get(toolName);
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeId);
     final URL gagdetUrl = tool instanceof ServerWaveTool ? ((ServerWaveTool) tool).getGadgetUrl()
-        : KuneWaveManager.WITHOUT_GADGET;
+        : KuneWaveService.WITHOUT_GADGET;
     final Content content = contentManager.createContent(title, body, user, container, typeId, gagdetUrl);
     tool.onCreateContent(content, container);
     return content;

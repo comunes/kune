@@ -88,4 +88,6 @@ public interface ContentService extends RemoteService {
   StateAbstractDTO setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status);
 
   TagCloudResult setTags(String userHash, StateToken token, String tags) throws DefaultException;
+
+  String writeTo(String userHash, StateToken token, boolean onlyToAdmins) throws DefaultException;
 }

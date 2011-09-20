@@ -57,6 +57,7 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
+import cc.kune.core.server.manager.KuneWaveManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.RateManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
@@ -75,6 +76,7 @@ import cc.kune.core.server.manager.impl.GroupManagerDefault;
 import cc.kune.core.server.manager.impl.I18nCountryManagerDefault;
 import cc.kune.core.server.manager.impl.I18nLanguageManagerDefault;
 import cc.kune.core.server.manager.impl.I18nTranslationManagerDefault;
+import cc.kune.core.server.manager.impl.KuneWaveManagerDefault;
 import cc.kune.core.server.manager.impl.LicenseManagerDefault;
 import cc.kune.core.server.manager.impl.RateManagerDefault;
 import cc.kune.core.server.manager.impl.SocialNetworkManagerDefault;
@@ -102,8 +104,8 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.SocialNetwork;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.rpc.ListsRPC;
-import cc.kune.wave.server.KuneWaveManager;
-import cc.kune.wave.server.KuneWaveManagerDefault;
+import cc.kune.wave.server.KuneWaveService;
+import cc.kune.wave.server.KuneWaveServiceDefault;
 import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.matcher.Matchers;
@@ -158,6 +160,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(StateService.class).to(StateServiceDefault.class);
     bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
     bind(SessionService.class).to(SessionServiceDefault.class);
+    bind(KuneWaveService.class).to(KuneWaveServiceDefault.class);
     bind(XMLActionReader.class);
   }
 

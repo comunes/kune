@@ -31,6 +31,8 @@ import cc.kune.core.client.sn.actions.JoinGroupAction;
 import cc.kune.core.client.sn.actions.MembersModerationMenuItem;
 import cc.kune.core.client.sn.actions.MembersVisibilityMenuItem;
 import cc.kune.core.client.sn.actions.UnJoinFromCurrentGroupAction;
+import cc.kune.core.client.sn.actions.WriteToAdmins;
+import cc.kune.core.client.sn.actions.WriteToMembers;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 import cc.kune.core.client.state.Session;
@@ -66,6 +68,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final I18nTranslationService i18n, final Provider<MembersVisibilityMenuItem> membersVisibility,
       final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
       final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
+      final WriteToMembers writeToMembers, final WriteToAdmins writeToAdmins,
       final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction) {
     OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
         OPTIONS_STYLES);

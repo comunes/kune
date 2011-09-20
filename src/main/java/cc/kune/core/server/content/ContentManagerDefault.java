@@ -56,7 +56,7 @@ import cc.kune.domain.finders.ContainerFinder;
 import cc.kune.domain.finders.ContentFinder;
 import cc.kune.domain.finders.I18nLanguageFinder;
 import cc.kune.domain.finders.UserFinder;
-import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.KuneWaveService;
 import cc.kune.wave.server.KuneWaveUtils;
 import cc.kune.wave.server.ParticipantUtils;
 
@@ -70,7 +70,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   private final ContainerFinder containerFinder;
   private final ContentFinder contentFinder;
   private final FinderService finder;
-  private final KuneWaveManager kuneWaveManager;
+  private final KuneWaveService kuneWaveManager;
   private final I18nLanguageFinder languageFinder;
   private final ParticipantUtils participantUtils;
   private final TagUserContentManager tagManager;
@@ -80,7 +80,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public ContentManagerDefault(final ContentFinder contentFinder, final ContainerFinder containerFinder,
       final Provider<EntityManager> provider, final FinderService finder, final UserFinder userFinder,
       final I18nLanguageFinder languageFinder, final TagUserContentManager tagManager,
-      final KuneWaveManager kuneWaveManager, final ParticipantUtils participantUtils) {
+      final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils) {
     super(provider, Content.class);
     this.contentFinder = contentFinder;
     this.containerFinder = containerFinder;
@@ -115,7 +115,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   @Override
   public Content createContent(final String title, final String body, final User author,
       final Container container, final String typeId) {
-    return createContent(title, body, author, container, typeId, KuneWaveManager.WITHOUT_GADGET);
+    return createContent(title, body, author, container, typeId, KuneWaveService.WITHOUT_GADGET);
   }
 
   @Override

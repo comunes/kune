@@ -64,7 +64,7 @@ import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.domain.utils.UserBuddiesData;
 import cc.kune.wave.server.CustomUserRegistrationServlet;
-import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.KuneWaveService;
 import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.Inject;
@@ -78,7 +78,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final I18nCountryManager countryManager;
   private final GroupManager groupManager;
   private final I18nTranslationService i18n;
-  private final KuneWaveManager kuneWaveManager;
+  private final KuneWaveService kuneWaveManager;
   private final I18nLanguageManager languageManager;
   private final ParticipantUtils participantUtils;
   private final KuneBasicProperties properties;
@@ -92,7 +92,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final XmppManager xmppManager, final ChatProperties chatProperties,
       final I18nTranslationService i18n, final CustomUserRegistrationServlet waveUserRegister,
-      final AccountStore waveAccountStore, final KuneWaveManager kuneWaveManager,
+      final AccountStore waveAccountStore, final KuneWaveService kuneWaveManager,
       final ParticipantUtils participantUtils, final KuneBasicProperties properties,
       final GroupManager groupManager) {
     super(provider, User.class);

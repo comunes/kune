@@ -22,6 +22,7 @@ package cc.kune.gspace.client;
 import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
+import cc.kune.core.client.sn.actions.WriteToBuddieHeaderButton;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
 import cc.kune.gspace.client.actions.RenameAction;
@@ -186,6 +187,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(ContentViewerOptionsMenu.class);
     s(RenameAction.class);
     s(GiveUsFeedbackBtn.class);
+    s(WriteToBuddieHeaderButton.class);
 
     // LicenseWizard
     bindPresenter(LicenseWizardPresenter.class, LicenseWizardView.class, LicenseWizardPanel.class,

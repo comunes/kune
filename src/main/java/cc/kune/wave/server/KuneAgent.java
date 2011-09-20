@@ -39,7 +39,7 @@ import com.google.wave.api.Wavelet;
 
 @SuppressWarnings("serial")
 @Singleton
-public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveManager {
+public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService {
 
   private static final Logger LOG = Logger.getLogger(KuneAgent.class.getName());
 

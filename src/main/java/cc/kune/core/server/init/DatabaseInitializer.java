@@ -44,7 +44,7 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 import cc.kune.domain.License;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -53,7 +53,7 @@ public class DatabaseInitializer {
   private final ContentManager contentManager;
   private final I18nCountryManager countryManager;
   private final GroupManager groupManager;
-  private final KuneWaveManager kuneWaveManager;
+  private final KuneWaveService kuneWaveManager;
   private final I18nLanguageManager languageManager;
   private final LicenseManager licenseManager;
   private final KuneBasicProperties properties;
@@ -65,7 +65,7 @@ public class DatabaseInitializer {
       final GroupManager groupManager, final LicenseManager licenseManager,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final I18nTranslationManager translationManager, final ContentManager contentManager,
-      final KuneWaveManager kuneWaveManager) {
+      final KuneWaveService kuneWaveManager) {
     this.properties = properties;
     this.userManager = userManager;
     this.groupManager = groupManager;
