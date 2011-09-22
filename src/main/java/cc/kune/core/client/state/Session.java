@@ -61,11 +61,11 @@ import com.calclab.suco.client.events.Listener0;
 
 public interface Session {
 
-  /**
-   * Duration remembering login: 2 weeks
-   */
-  int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
-  // int SESSION_DURATION = 1000;
+  long A_DAY = 1000 * 60 * 60 * 24;
+  long ANON_SESSION_DURATION = A_DAY;
+  long ANON_SESSION_DURATION_AFTER_REG = A_DAY * 365;
+  long SESSION_DURATION = A_DAY * 14; // two weeks login session duration
+  // long SESSION_DURATION = 1000;
 
   String USERHASH = "k007userHash";
 

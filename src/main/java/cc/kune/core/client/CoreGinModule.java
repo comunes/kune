@@ -31,6 +31,7 @@ import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.actions.xml.XMLActionsParser;
+import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.core.client.auth.RegisterPresenter;
@@ -137,6 +138,7 @@ public class CoreGinModule extends ExtendedGinModule {
     s(I18nUITranslationService.class);
     bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
     bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+    s(AnonUsersManager.class);
 
     // DnD
     s(KuneDragController.class);

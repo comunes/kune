@@ -71,7 +71,7 @@ public class SessionDefault implements Session {
       final Provider<UserServiceAsync> userServiceProvider, final EventBus eventBus) {
     this.cookieManager = cookieManager;
     this.eventBus = eventBus;
-    this.userHash = cookieManager.getCurrentCookie();
+    this.userHash = cookieManager.getAuthCookie();
     this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
     this.userServiceProvider = userServiceProvider;
     languagesArray = null;
@@ -391,7 +391,7 @@ public class SessionDefault implements Session {
 
   @Override
   public void signOut() {
-    cookieManager.removeCookie();
+    cookieManager.removeAuthCookie();
     setUserHash(null);
     setCurrentUserInfo(null);
   }

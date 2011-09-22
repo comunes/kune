@@ -24,8 +24,10 @@ import java.util.ArrayList;
 import org.apache.commons.lang.WordUtils;
 
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.common.client.errors.UIException;
 
 import com.google.gwt.safehtml.shared.SimpleHtmlSanitizer;
+import com.google.gwt.safehtml.shared.UriUtils;
 
 public class TextUtils {
 
@@ -169,13 +171,23 @@ public class TextUtils {
   }
 
   /**
-   * FIXME: Is this safe? Try to use {@link SimpleHtmlSanitizer} also in the
-   * method
+   * Generates a href link
    * 
    */
-  @Deprecated
   public static String generateHtmlLink(final String href, final String text) {
-    return "<a href=\"" + href + "\" target=\"_blank\">" + text + "</a>";
+    return generateHtmlLink(href, text, true);
+  }
+
+  /**
+   * Generates a href link
+   * 
+   */
+  public static String generateHtmlLink(final String href, final String text, final boolean targetBlank) {
+    if (!UriUtils.isSafeUri(href)) {
+      throw new UIException("Unsafe href");
+    }
+    return "<a href=\"" + UriUtils.sanitizeUri(href) + "\"" + (targetBlank ? "target=\"_blank\"" : "")
+        + ">" + text + "</a>";
   }
 
   private static boolean isDelimiter(final char ch, final char[] delimiters) {

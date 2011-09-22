@@ -20,9 +20,16 @@
 package cc.kune.core.client.cookies;
 
 public interface CookiesManager {
-    String getCurrentCookie();
+  String getAnonCookie();
 
-    void removeCookie();
+  String getAuthCookie();
 
-    void setCookie(String userHash);
+  void removeAnonCookie();
+
+  void removeAuthCookie();
+
+  void setAnonCookie(Boolean userRegister);
+
+  void setAuthCookie(String userHash);
+
 }

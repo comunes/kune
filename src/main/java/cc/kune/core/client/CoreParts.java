@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client;
 
+import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
@@ -37,7 +38,7 @@ public class CoreParts {
   public CoreParts(final Session session, final Provider<GroupSNPresenter> groupMembersPresenter,
       final Provider<UserSNPresenter> buddiesAndParticipationPresenter,
       final Provider<GroupSNConfActions> groupMembersConfActions,
-      final Provider<UserSNConfActions> userSNConfActions,
+      final Provider<UserSNConfActions> userSNConfActions, final Provider<AnonUsersManager> anonUsers,
       final Provider<SiteUserOptionsPresenter> userOptions) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
@@ -47,6 +48,7 @@ public class CoreParts {
         groupMembersPresenter.get();
         buddiesAndParticipationPresenter.get();
         userOptions.get();
+        anonUsers.get();
       }
     });
   }

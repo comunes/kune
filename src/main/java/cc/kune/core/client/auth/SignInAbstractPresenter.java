@@ -76,7 +76,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   protected void onSignIn(final UserInfoDTO userInfoDTO) {
     final String userHash = userInfoDTO.getUserHash();
-    cookiesManager.setCookie(userHash);
+    cookiesManager.setAuthCookie(userHash);
     getView().reset();
     session.setUserHash(userHash);
     session.setCurrentUserInfo(userInfoDTO);
