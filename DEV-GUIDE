@@ -307,6 +307,26 @@ David Hearnden recommendations of Wave code development (read in an informal Wav
 
 See class WaveClientProvider in Kune (in a short term, we should define this in a .gwt.xml not there, but this is a start point).
 
+== kune maven repo ==
+
+For upload packages you need to configure in .m2/settings.xml something like:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <servers>
+     <server>
+        <id>kune.ourproject.org</id>
+        <username>YOUR_USER_IN_OURPROJECT_ORG</username>
+     </server>
+  </servers>
+</settings>
+
+also you have to 
+  ssh-copy-id YOUR_USER_IN_OURPROJECT_ORG@ourproject.org
+and access via ssh with that key without problems.
+
+We usually upload new packages to this repo via bin/repopubli.sh
+
 ==Changelog==
 
 Periodically update the Changelog using svn2cl:

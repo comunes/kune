@@ -25,8 +25,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 
-import org.waveprotocol.box.server.persistence.AccountStore;
-import org.waveprotocol.wave.model.id.TokenGenerator;
+import org.waveprotocol.box.server.robots.agent.AbstractBaseRobotAgent;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
@@ -51,10 +50,11 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     super(injector);
   }
 
-  public KuneAgent(final String waveDomain, final AccountStore accountStore,
-      final TokenGenerator tokenGenerator, final ServerFrontendAddressHolder frontendAddressHolder) {
-    super(waveDomain, accountStore, tokenGenerator, frontendAddressHolder);
-  }
+  // public KuneAgent(final String waveDomain, final AccountStore accountStore,
+  // final TokenGenerator tokenGenerator, final ServerFrontendAddressHolder
+  // frontendAddressHolder) {
+  // super(waveDomain, accountStore, tokenGenerator, frontendAddressHolder);
+  // }
 
   @Override
   public void addGadget(final WaveRef waveName, final String author, final String gadgetUrl) {

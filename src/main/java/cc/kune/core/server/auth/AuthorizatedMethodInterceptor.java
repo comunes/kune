@@ -25,7 +25,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 import cc.kune.core.client.errors.AccessViolationException;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.access.AccessRightsUtils;
 import cc.kune.core.server.access.AccessService;
 import cc.kune.core.server.content.ContentUtils;
@@ -49,14 +49,14 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
   @Inject
   private Provider<GroupManager> groupManagerProvider;
   @Inject
-  private Provider<UserSession> userSessionProvider;
+  private Provider<UserSessionManager> userSessionProvider;
 
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
     final Object[] arguments = invocation.getArguments();
     final StateToken token = (StateToken) arguments[1];
 
-    final UserSession userSession = userSessionProvider.get();
+    final UserSessionManager userSession = userSessionProvider.get();
     final GroupManager groupManager = groupManagerProvider.get();
     final AccessService accessService = accessServiceProvider.get();
 

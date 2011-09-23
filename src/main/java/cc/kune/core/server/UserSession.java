@@ -19,56 +19,35 @@
  */
 package cc.kune.core.server;
 
+import java.io.Serializable;
 
-import cc.kune.core.server.manager.UserManager;
-import cc.kune.domain.User;
-
-import com.google.inject.Inject;
 import com.google.inject.servlet.SessionScoped;
 
 @SessionScoped
-public class UserSession {
-    private String userHash;
-    private Long userId;
-    private final UserManager manager;
+public class UserSession implements Serializable {
 
-    @Inject
-    public UserSession(final UserManager manager) {
-        this.manager = manager;
-    }
+  private static final long serialVersionUID = 4665523798343705868L;
 
-    public String getHash() {
-        return userHash;
-    }
+  private String userHash;
+  private Long userId;
 
-    public User getUser() {
-        return manager.find(userId);
-    }
+  public UserSession() {
+  }
 
-    public boolean isUserLoggedIn() {
-        return userId != null;
-    }
+  public String getHash() {
+    return userHash;
+  }
 
-    public boolean isUserNotLoggedIn() {
-        return !isUserLoggedIn();
-    }
+  public Long getUserId() {
+    return userId;
+  }
 
-    public void login(final User user, final String newUserHash) {
-        setUser(user);
-        setHash(newUserHash);
-    }
+  public void setHash(final String hash) {
+    this.userHash = hash;
+  }
 
-    public void logout() {
-        userId = null;
-        userHash = null;
-    }
-
-    private void setHash(final String hash) {
-        this.userHash = hash;
-    }
-
-    private void setUser(final User user) {
-        userId = user.getId();
-    }
+  public void setUserId(final Long userId) {
+    this.userId = userId;
+  }
 
 }

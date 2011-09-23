@@ -21,8 +21,12 @@ package cc.kune.selenium;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -51,6 +55,96 @@ public class KuneSeleniumDefaults {
     webdriver = injector.getInstance(GenericWebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
     eventFiring = injector.getInstance(EventFiringWebDriver.class);
+    eventFiring.register(new WebDriverEventListener() {
+
+      @Override
+      public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void afterClickOn(final WebElement element, final WebDriver driver) {
+        sleep(500);
+      }
+
+      @Override
+      public void afterFindBy(final By by, final WebElement element, final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void afterNavigateBack(final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void afterNavigateForward(final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void afterNavigateTo(final String url, final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void afterScript(final String script, final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void beforeClickOn(final WebElement element, final WebDriver driver) {
+        sleep(500);
+      }
+
+      @Override
+      public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void beforeNavigateBack(final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void beforeNavigateForward(final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void beforeNavigateTo(final String url, final WebDriver driver) {
+        // TODO Auto-generated method stub
+        sleep(500);
+      }
+
+      @Override
+      public void beforeScript(final String script, final WebDriver driver) {
+        // TODO Auto-generated method stub
+
+      }
+
+      @Override
+      public void onException(final Throwable throwable, final WebDriver driver) {
+        // TODO Auto-generated method stub
+
+      }
+    });
     final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     PageFactory.initElements(locator, login);
   }

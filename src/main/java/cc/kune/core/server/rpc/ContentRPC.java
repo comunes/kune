@@ -31,7 +31,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.NoDefaultContentException;
 import cc.kune.core.client.errors.ToolNotFoundException;
 import cc.kune.core.client.rpcservices.ContentService;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.access.AccessService;
 import cc.kune.core.server.access.FinderService;
@@ -68,7 +68,6 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
 public class ContentRPC implements ContentService, RPC {
@@ -83,18 +82,18 @@ public class ContentRPC implements ContentService, RPC {
   private final AccessRightsService rightsService;
   private final StateService stateService;
   private final TagUserContentManager tagManager;
-  private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSession;
   private final KuneWaveManager waveManager;
 
   @Inject
-  public ContentRPC(final FinderService finderService, final Provider<UserSession> userSessionProvider,
+  public ContentRPC(final FinderService finderService, final UserSessionManager userSession,
       final AccessService accessService, final AccessRightsService rightsService,
       final StateService stateService, final CreationService creationService,
       final GroupManager groupManager, final ContentManager contentManager,
       final ContainerManager containerManager, final TagUserContentManager tagManager,
       final Mapper mapper, final ChatManager chatManager, final KuneWaveManager waveManager) {
     this.finderService = finderService;
-    this.userSessionProvider = userSessionProvider;
+    this.userSession = userSession;
     this.accessService = accessService;
     this.rightsService = rightsService;
     this.stateService = stateService;
@@ -249,7 +248,7 @@ public class ContentRPC implements ContentService, RPC {
   }
 
   private User getCurrentUser() {
-    return getUserSession().getUser();
+    return userSession.getUser();
   }
 
   public StateContainerDTO getState(final Container container) {
@@ -284,12 +283,8 @@ public class ContentRPC implements ContentService, RPC {
     return getSummaryTags(group);
   }
 
-  private UserSession getUserSession() {
-    return userSessionProvider.get();
-  }
-
   private boolean isUserLoggedIn() {
-    return getUserSession().isUserLoggedIn();
+    return userSession.isUserLoggedIn();
   }
 
   private void mapContentRightsInstate(final User user, final AccessLists groupAccessList,

@@ -25,7 +25,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
 
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.access.AccessService;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
@@ -60,7 +60,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
   @Inject
   I18nTranslationService i18n;
   @Inject
-  UserSession userSession;
+  UserSessionManager userSession;
 
   @Override
   protected void beforePostStart() {

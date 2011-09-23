@@ -47,18 +47,22 @@ import com.google.inject.name.Named;
  * 
  * @author josephg@gmail.com (Joseph Gentle)
  */
+@SuppressWarnings("serial")
 @Singleton
 public final class CustomUserRegistrationServlet extends HttpServlet {
   private final AccountStore accountStore;
   private final String domain;
+ // private final WelcomeRobot welcomeBot;
 
   private final Log LOG = Log.get(CustomUserRegistrationServlet.class);
 
   @Inject
   public CustomUserRegistrationServlet(AccountStore accountStore,
       @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain) {
+      //, WelcomeRobot welcomeBot) {
     this.accountStore = accountStore;
     this.domain = domain;
+  //  this.welcomeBot = welcomeBot;
   }
 
   @Override
@@ -113,14 +117,14 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
       if (id.getAddress().indexOf("@") < 1) {
         return "Username portion of address cannot be empty";
       }
-      final String[] usernameSplit = id.getAddress().split("@");
+      String[] usernameSplit = id.getAddress().split("@");
       if (usernameSplit.length != 2 || !usernameSplit[0].matches("[\\w\\.]+")) {
         return "Only letters (a-z), numbers (0-9), and periods (.) are allowed in Username";
       }
       if (!id.getDomain().equals(domain)) {
         return "You can only create users at the " + domain + " domain";
       }
-    } catch (final InvalidParticipantAddress e) {
+    } catch (InvalidParticipantAddress e) {
       return "Invalid username";
     }
 
@@ -128,7 +132,7 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
       if (accountStore.getAccount(id) != null) {
         return "Account already exists";
       }
-    } catch (final PersistenceException e) {
+    } catch (PersistenceException e) {
       LOG.severe("Failed to retreive account data for " + id, e);
       return "An unexpected error occured while trying to retrieve account status";
     }
@@ -137,16 +141,20 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
         new HumanAccountDataImpl(id, passwordDigest);
     try {
       accountStore.putAccount(account);
-    } catch (final PersistenceException e) {
+    } catch (PersistenceException e) {
       LOG.severe("Failed to create new account for " + id, e);
       return "An unexpected error occured while trying to create the account";
     }
-
+//    try {
+    //  welcomeBot.greet(account.getId());
+//    } catch (IOException e) {
+//      LOG.warning("Failed to create a welcome wavelet for " + id, e);
+//    }
     return null;
   }
 
-  private void writeRegistrationPage(final String message, final String responseType, final Locale locale,
-      final HttpServletResponse dest) throws IOException {
+  private void writeRegistrationPage(String message, String responseType, Locale locale,
+      HttpServletResponse dest) throws IOException {
     dest.setCharacterEncoding("UTF-8");
     dest.setContentType("text/html;charset=utf-8");
     UserRegistrationPage.write(dest.getWriter(), new GxpContext(locale), domain, message,

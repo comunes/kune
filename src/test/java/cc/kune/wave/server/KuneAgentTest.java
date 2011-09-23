@@ -31,12 +31,11 @@ import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.account.RobotAccountData;
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.box.server.persistence.PersistenceException;
+import org.waveprotocol.box.server.robots.agent.AbstractBaseRobotAgent.ServerFrontendAddressHolder;
 import org.waveprotocol.wave.model.id.TokenGenerator;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
-
-import cc.kune.wave.server.AbstractBaseRobotAgent.ServerFrontendAddressHolder;
 
 import com.google.common.collect.Lists;
 import com.google.wave.api.Wavelet;
@@ -67,7 +66,8 @@ public class KuneAgentTest {
     Mockito.when(accountRobotData.getUrl()).thenReturn(KuneAgent.ROBOT_URI);
     Mockito.when(accountRobotData.getId()).thenReturn(participantId);
     Mockito.when(accountRobotData.getConsumerSecret()).thenReturn("someconsumer");
-    manager = new KuneAgent("example.com", accountStore, tokenGenerator, frontendAddressHolder);
+    // manager = new KuneAgent("example.com", accountStore, tokenGenerator,
+    // frontendAddressHolder);
   }
 
   private String getSiteAdminShortName() {

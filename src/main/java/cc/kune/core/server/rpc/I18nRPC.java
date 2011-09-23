@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.I18nService;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.SuperAdmin;
 import cc.kune.core.server.manager.I18nLanguageManager;
@@ -49,15 +49,14 @@ public class I18nRPC implements RPC, I18nService {
   private final I18nLanguageManager languageManager;
   private final Mapper mapper;
   private final Provider<HttpServletRequest> requestProvider;
-  private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSessionManager;
 
   @Inject
   public I18nRPC(final Provider<HttpServletRequest> requestProvider,
-      final Provider<UserSession> userSessionProvider,
-      final I18nTranslationManager i18nTranslationManager, final I18nLanguageManager languageManager,
-      final Mapper mapper) {
+      final UserSessionManager userSessionManager, final I18nTranslationManager i18nTranslationManager,
+      final I18nLanguageManager languageManager, final Mapper mapper) {
     this.requestProvider = requestProvider;
-    this.userSessionProvider = userSessionProvider;
+    this.userSessionManager = userSessionManager;
     this.i18nTranslationManager = i18nTranslationManager;
     this.languageManager = languageManager;
     this.mapper = mapper;
@@ -68,12 +67,11 @@ public class I18nRPC implements RPC, I18nService {
   public I18nLanguageDTO getInitialLanguage(final String localeParam) {
     String initLanguage;
     I18nLanguage lang;
-    final UserSession userSession = getUserSession();
     if (localeParam != null) {
       initLanguage = localeParam;
     } else {
-      if (userSession.isUserLoggedIn()) {
-        initLanguage = userSession.getUser().getLanguage().getCode();
+      if (userSessionManager.isUserLoggedIn()) {
+        initLanguage = userSessionManager.getUser().getLanguage().getCode();
       } else {
         final String browserLang = requestProvider.get().getLocale().getLanguage();
         if (browserLang != null) {
@@ -132,10 +130,6 @@ public class I18nRPC implements RPC, I18nService {
   private String getTranslationWrapper(final String language, final String text,
       final String noteForTranslators) {
     return i18nTranslationManager.getTranslation(language, text, noteForTranslators);
-  }
-
-  private UserSession getUserSession() {
-    return userSessionProvider.get();
   }
 
   @Override

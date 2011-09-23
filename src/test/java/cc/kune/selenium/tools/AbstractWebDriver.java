@@ -36,7 +36,6 @@ import com.thoughtworks.selenium.Selenium;
 public abstract class AbstractWebDriver implements WebDriver {
   private final String baseUrl;
   private final WebDriver driver;
-
   private final Selenium selenium;
 
   public AbstractWebDriver(final WebDriver driver, final String baseUrl) {
@@ -44,6 +43,8 @@ public abstract class AbstractWebDriver implements WebDriver {
     this.baseUrl = baseUrl;
     selenium = new WebDriverBackedSelenium(driver, baseUrl);
     selenium.setSpeed("500");
+    // driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
     // selenium.setTimeout("5000");
   }
 

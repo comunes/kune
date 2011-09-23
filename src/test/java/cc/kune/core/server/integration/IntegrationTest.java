@@ -25,7 +25,7 @@ import java.io.IOException;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.UserService;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
@@ -36,7 +36,7 @@ public abstract class IntegrationTest {
   @Inject
   KuneBasicProperties properties;
   @Inject
-  protected UserSession session;
+  protected UserSessionManager session;
   protected String token;
   @Inject
   UserService userService;

@@ -32,7 +32,7 @@ import java.util.Date;
 import java.util.Set;
 
 import cc.kune.core.server.AbstractServerTool;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.ToolConfigurationManager;
@@ -47,26 +47,25 @@ import cc.kune.wave.server.KuneWaveService;
 import cc.kune.wave.server.KuneWaveUtils;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class ListsServerTool extends AbstractServerTool {
 
-  private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSessionManager;
   private final KuneWaveService waveManager;
 
   @Inject
   public ListsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
-      final Provider<UserSession> userSessionProvider, final KuneWaveService waveManager) {
+      final UserSessionManager userSessionManager, final KuneWaveService waveManager) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST), Arrays.asList(TYPE_LIST),
         Arrays.asList(TYPE_LIST), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
         configurationManager, i18n, ServerToolTarget.forGroups);
-    this.userSessionProvider = userSessionProvider;
+    this.userSessionManager = userSessionManager;
     this.waveManager = waveManager;
   }
 
   private Group getUserGroup() {
-    return userSessionProvider.get().getUser().getUserGroup();
+    return userSessionManager.getUser().getUserGroup();
   }
 
   @Override

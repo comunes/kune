@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.access.AccessRightsUtils;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.AccessRol;
@@ -54,7 +54,7 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
   Provider<SessionService> sessionServiceProvider;
   private Group siteGroup;
   @Inject
-  Provider<UserSession> userSessionProvider;
+  UserSessionManager userSessionManager;
 
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
@@ -66,7 +66,6 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
     LOG.info("Method: " + invocation.getMethod().getName());
     LOG.info("Userhash received: " + userHash);
     LOG.info("--------------------------------------------------------------------------------");
-    final UserSession userSession = userSessionProvider.get();
 
     final SuperAdmin authAnnotation = invocation.getStaticPart().getAnnotation(SuperAdmin.class);
     final AccessRol rol = authAnnotation.rol();
@@ -78,11 +77,11 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
 
     if (userHash == null) {
       throw new UserMustBeLoggedException();
-    } else if (userSession.isUserNotLoggedIn()) {
+    } else if (userSessionManager.isUserNotLoggedIn()) {
       LOG.info("Session expired (not logged in server and mandatory)");
       throw new SessionExpiredException();
     } else {
-      User user = userSession.getUser();
+      final User user = userSessionManager.getUser();
       if (!AccessRightsUtils.correctMember(user, siteGroup, rol)) {
         throw new AccessViolationException();
       }

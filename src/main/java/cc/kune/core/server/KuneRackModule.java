@@ -87,7 +87,8 @@ public class KuneRackModule implements RackModule {
       @Override
       public void configure() {
         install(FinderRegistry.init(new JpaPersistModule(jpaUnit)));
-        bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
+        bindInterceptor(Matchers.annotatedWith(LogThis.class), new NotInObject(),
+            new LoggerMethodInterceptor());
         bindConstant().annotatedWith(PropertiesFileName.class).to(kuneConfig);
         if (sessionScope != null) {
           bindScope(SessionScoped.class, sessionScope);

@@ -31,6 +31,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
@@ -63,7 +64,7 @@ public class UserRPC implements RPC, UserService {
   private final ReservedWordsRegistry reserverdWords;
   private final UserInfoService userInfoService;
   private final UserManager userManager;
-  private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSessionManager;
   private final Boolean useSocketIO;
   private final CustomWaveClientServlet waveClientServlet;
   private final SessionManager waveSessionManager;
@@ -73,8 +74,8 @@ public class UserRPC implements RPC, UserService {
       @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO,
       final UserInfoService userInfoService, final Mapper mapper,
       final SessionManager waveSessionManager, final CustomWaveClientServlet waveClientServlet,
-      final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC) {
-    this.userSessionProvider = userSessionProvider;
+      final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
+      final UserSessionManager userSessionManager) {
     this.userManager = userManager;
     this.useSocketIO = useSocketIO;
     this.userInfoService = userInfoService;
@@ -83,6 +84,7 @@ public class UserRPC implements RPC, UserService {
     this.waveClientServlet = waveClientServlet;
     this.reserverdWords = reserverdWords;
     this.contentRPC = contentRPC;
+    this.userSessionManager = userSessionManager;
   }
 
   @Override
@@ -101,8 +103,7 @@ public class UserRPC implements RPC, UserService {
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
   public String getUserAvatarBaser64(final String userHash, final StateToken userToken)
       throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User user = userSession.getUser();
+    final User user = userSessionManager.getUser();
     final Group userGroup = user.getUserGroup();
     if (!userGroup.getShortName().equals(userToken.getGroup())) {
       throw new AccessViolationException();
@@ -112,10 +113,6 @@ public class UserRPC implements RPC, UserService {
     } else {
       throw new DefaultException("Unexpected programatic exception (user has no logo)");
     }
-  }
-
-  private UserSession getUserSession() {
-    return userSessionProvider.get();
   }
 
   @Override
@@ -128,7 +125,7 @@ public class UserRPC implements RPC, UserService {
   }
 
   private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
-    final UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
+    final UserInfo userInfo = userInfoService.buildInfo(user, userSessionManager.getHash());
     return mapper.map(userInfo, UserInfoDTO.class);
   }
 
@@ -144,8 +141,7 @@ public class UserRPC implements RPC, UserService {
 
   private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
     if (user != null) {
-      // Maybe use terracotta.org for http session clustering
-      getUserSession().login(user, waveToken);
+      userSessionManager.login(user.getId(), waveToken);
       return loadUserInfo(user);
     } else {
       throw new UserAuthException();
@@ -156,7 +152,7 @@ public class UserRPC implements RPC, UserService {
   @Authenticated
   @Transactional
   public void logout(final String userHash) throws DefaultException {
-    getUserSession().logout();
+    userSessionManager.logout();
     // FIXME final SessionService sessionService =
     // sessionServiceProvider.get();
     // FIXME sessionService.getNewSession();
@@ -173,8 +169,7 @@ public class UserRPC implements RPC, UserService {
   @Authenticated
   @Transactional
   public UserInfoDTO reloadUserInfo(final String userHash) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User user = userSession.getUser();
+    final User user = userSessionManager.getUser();
     return loadUserInfo(user);
   }
 
@@ -184,8 +179,7 @@ public class UserRPC implements RPC, UserService {
   @Transactional
   public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
       final UserSNetVisibility visibility) {
-    final UserSession userSession = getUserSession();
-    final User user = userSession.getUser();
+    final User user = userSessionManager.getUser();
     if (!groupToken.getGroup().equals(user.getShortName())) {
       throw new AccessViolationException();
     }
@@ -197,7 +191,7 @@ public class UserRPC implements RPC, UserService {
   @Transactional
   public StateAbstractDTO updateUser(final String userHash, final UserDTO user,
       final I18nLanguageSimpleDTO lang) throws DefaultException {
-    final Long id = getUserSession().getUser().getId();
+    final Long id = userSessionManager.getUser().getId();
     if (!id.equals(user.getId())) {
       throw new AccessViolationException();
     }

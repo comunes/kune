@@ -21,7 +21,7 @@ package cc.kune.core.server.rpc;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.SocialNetworkService;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
@@ -36,7 +36,6 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
 public class SocialNetworkRPC implements SocialNetworkService, RPC {
@@ -44,13 +43,12 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   private final GroupManager groupManager;
   private final Mapper mapper;
   private final SocialNetworkManager socialNetworkManager;
-  private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSessionManager;
 
   @Inject
-  public SocialNetworkRPC(final Provider<UserSession> userSessionProvider,
-      final GroupManager groupManager, final SocialNetworkManager socialNetworkManager,
-      final Mapper mapper) {
-    this.userSessionProvider = userSessionProvider;
+  public SocialNetworkRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
+      final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
+    this.userSessionManager = userSessionManager;
     this.groupManager = groupManager;
     this.socialNetworkManager = socialNetworkManager;
     this.mapper = mapper;
@@ -62,8 +60,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO acceptJoinGroup(final String hash, final StateToken groupToken,
       final String groupToAcceptShortName) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     final Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
@@ -77,8 +74,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO addAdminMember(final String hash, final StateToken groupToken,
       final String groupToAddShortName) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
@@ -92,8 +88,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO addCollabMember(final String hash, final StateToken groupToken,
       final String groupToAddShortName) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
@@ -107,8 +102,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO addViewerMember(final String hash, final StateToken groupToken,
       final String groupToAddShortName) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
@@ -129,8 +123,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO deleteMember(final String hash, final StateToken groupToken,
       final String groupToDeleleShortName) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     final Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
@@ -144,8 +137,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO denyJoinGroup(final String hash, final StateToken groupToken,
       final String groupToDenyShortName) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     final Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
@@ -165,14 +157,9 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO getSocialNetwork(final String hash, final StateToken groupToken)
       throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User user = userSession.getUser();
+    final User user = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     return generateResponse(user, group);
-  }
-
-  private UserSession getUserSession() {
-    return userSessionProvider.get();
   }
 
   @Override
@@ -180,8 +167,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkRequestResult requestJoinGroup(final String hash, final StateToken groupToken)
       throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User user = userSession.getUser();
+    final User user = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     return socialNetworkManager.requestToJoin(user, group);
@@ -193,8 +179,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO setAdminAsCollab(final String hash, final StateToken groupToken,
       final String groupToSetCollabShortName) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     final Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
@@ -208,8 +193,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Transactional
   public SocialNetworkDataDTO setCollabAsAdmin(final String hash, final StateToken groupToken,
       final String groupToSetAdminShortName) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     final Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
@@ -221,8 +205,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   @Authenticated
   @Transactional
   public void unJoinGroup(final String hash, final StateToken groupToken) throws DefaultException {
-    final UserSession userSession = getUserSession();
-    final User userLogged = userSession.getUser();
+    final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     socialNetworkManager.unJoinGroup(userLogged.getUserGroup(), group);

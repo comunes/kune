@@ -22,7 +22,7 @@ package cc.kune.core.server.rpc;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.GroupService;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
@@ -41,7 +41,6 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
 public class GroupRPC implements RPC, GroupService {
@@ -50,13 +49,13 @@ public class GroupRPC implements RPC, GroupService {
   private final GroupManager groupManager;
   private final Mapper mapper;
   private final ReservedWordsRegistry reserverdWords;
-  private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSessionManager;
 
   @Inject
-  public GroupRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
+  public GroupRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
       final ContentManager contentManager, final Mapper mapper,
       final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC) {
-    this.userSessionProvider = userSessionProvider;
+    this.userSessionManager = userSessionManager;
     this.groupManager = groupManager;
     this.contentManager = contentManager;
     this.mapper = mapper;
@@ -120,13 +119,8 @@ public class GroupRPC implements RPC, GroupService {
   }
 
   private User getUserLogged() {
-    final UserSession userSession = getUserSession();
-    final User user = userSession.getUser();
+    final User user = userSessionManager.getUser();
     return user;
-  }
-
-  private UserSession getUserSession() {
-    return userSessionProvider.get();
   }
 
   @Override

@@ -26,7 +26,7 @@ import java.util.TimeZone;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.server.InitData;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.manager.ExtMediaDescripManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
@@ -45,7 +45,6 @@ import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
 public class SiteRPC implements RPC, SiteService {
@@ -61,16 +60,15 @@ public class SiteRPC implements RPC, SiteService {
   private final ServerToolRegistry serverToolRegistry;
   private final HashMap<String, GSpaceTheme> siteThemes;
   private final UserInfoService userInfoService;
-  private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSessionManager;
 
-  // TODO: refactor: too many parameters! refactor to Facade Pattern
   @Inject
-  public SiteRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
+  public SiteRPC(final UserSessionManager userSessionManager, final UserManager userManager,
       final UserInfoService userInfoService, final LicenseManager licenseManager, final Mapper mapper,
       final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescManager) {
-    this.userSessionProvider = userSessionProvider;
+    this.userSessionManager = userSessionManager;
     this.userInfoService = userInfoService;
     this.licenseManager = licenseManager;
     this.mapper = mapper;
@@ -93,9 +91,9 @@ public class SiteRPC implements RPC, SiteService {
   @Transactional
   public InitDataDTO getInitData(final String userHash) throws DefaultException {
     final InitDataDTO dataMapped = mapper.map(data, InitDataDTO.class);
-    final UserSession userSession = getUserSession();
 
-    final UserInfo userInfo = userInfoService.buildInfo(userSession.getUser(), userSession.getHash());
+    final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(),
+        userSessionManager.getHash());
     if (userInfo != null) {
       dataMapped.setUserInfo(mapper.map(userInfo, UserInfoDTO.class));
     }
@@ -118,10 +116,6 @@ public class SiteRPC implements RPC, SiteService {
     theme.setBackColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".backgrounds"));
     theme.setColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".colors"));
     return theme;
-  }
-
-  private UserSession getUserSession() {
-    return userSessionProvider.get();
   }
 
   private InitData loadInitData() {

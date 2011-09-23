@@ -284,6 +284,11 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
    2007-12-21 10:35:16,197 [btpool0-5] DEBUG - ContentManagerDefault.createContent EXCEPTION => javax.persistence.Entity
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
    
+** chromium & selenium
+http://www.chromium.org/developers/testing/webdriver-for-chrome
+/usr/bin/chromiumdriver 
+chmod og+rx /usr/bin/chromiumdriver
+
 ** Memory use in demo
 http://rimuhosting.com/howto/memory.jsp
 Resolving: High Java Memory Usage

@@ -39,6 +39,7 @@ import org.waveprotocol.box.server.authentication.SessionManager;
 import org.waveprotocol.box.server.frontend.ClientFrontend;
 import org.waveprotocol.box.server.frontend.ClientFrontendImpl;
 import org.waveprotocol.box.server.frontend.WaveClientRpcImpl;
+import org.waveprotocol.box.server.frontend.WaveletInfo;
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
@@ -46,8 +47,6 @@ import org.waveprotocol.box.server.persistence.SignerInfoStore;
 import org.waveprotocol.box.server.robots.RobotApiModule;
 import org.waveprotocol.box.server.robots.RobotRegistrationServlet;
 import org.waveprotocol.box.server.robots.active.ActiveApiServlet;
-import org.waveprotocol.box.server.robots.agent.passwd.PasswordAdminRobot;
-import org.waveprotocol.box.server.robots.agent.passwd.PasswordRobot;
 import org.waveprotocol.box.server.robots.dataapi.DataApiOAuthServlet;
 import org.waveprotocol.box.server.robots.dataapi.DataApiServlet;
 import org.waveprotocol.box.server.robots.passive.RobotsGateway;
@@ -59,6 +58,7 @@ import org.waveprotocol.box.server.rpc.SearchServlet;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
 import org.waveprotocol.box.server.rpc.UserRegistrationServlet;
+import org.waveprotocol.box.server.rpc.WaveRefServlet;
 import org.waveprotocol.box.server.waveserver.WaveBus;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
@@ -87,6 +87,13 @@ import com.google.inject.name.Names;
  */
 public class WaveMain {
 
+  /**
+   * This is the name of the system property used to find the server config file.
+   */
+  private static final String PROPERTIES_FILE_KEY = "wave.server.config";
+
+  private static final Log LOG = Log.get(WaveMain.class);
+
   @SuppressWarnings("serial")
   @Singleton
   public static class GadgetProxyServlet extends HttpServlet {
@@ -94,8 +101,8 @@ public class WaveMain {
     ProxyServlet.Transparent proxyServlet;
 
     @Inject
-    public GadgetProxyServlet(@Named(CoreSettings.GADGET_SERVER_HOSTNAME) final String gadgetServerHostname,
-        @Named(CoreSettings.GADGET_SERVER_PORT) final int gadgetServerPort){
+    public GadgetProxyServlet(@Named(CoreSettings.GADGET_SERVER_HOSTNAME) String gadgetServerHostname,
+        @Named(CoreSettings.GADGET_SERVER_PORT) int gadgetServerPort){
 
       LOG.info("Starting GadgetProxyServlet for " + gadgetServerHostname + ":" + gadgetServerPort);
       proxyServlet = new ProxyServlet.Transparent("/gadgets", "http", gadgetServerHostname,
@@ -103,24 +110,70 @@ public class WaveMain {
     }
 
     @Override
-    public void init(final ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) throws ServletException {
       proxyServlet.init(config);
     }
 
     @Override
-    public void service(final ServletRequest req, final ServletResponse res) throws ServletException, IOException {
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
       proxyServlet.service(req, res);
     }
   }
 
-  private static final Log LOG = Log.get(WaveMain.class);
+  public static void main(String... args) {
+    try {
+      Module coreSettings = SettingsBinder.bindSettings(PROPERTIES_FILE_KEY, CoreSettings.class);
+      run(coreSettings);
+      return;
+    } catch (PersistenceException e) {
+      LOG.severe("PersistenceException when running server:", e);
+    } catch (ConfigurationException e) {
+      LOG.severe("ConfigurationException when running server:", e);
+    } catch (WaveServerException e) {
+      LOG.severe("WaveServerException when running server:", e);
+    }
+  }
 
-  /**
-   * This is the name of the system property used to find the server config file.
-   */
-  private static final String PROPERTIES_FILE_KEY = "wave.server.config";
+  public static void run(Module coreSettings) throws PersistenceException,
+      ConfigurationException, WaveServerException {
+    Injector settingsInjector = Guice.createInjector(coreSettings);
+    boolean enableFederation = settingsInjector.getInstance(Key.get(Boolean.class,
+        Names.named(CoreSettings.ENABLE_FEDERATION)));
 
-  private static Module buildFederationModule(final Injector settingsInjector, final boolean enableFederation)
+    if (enableFederation) {
+      Module federationSettings =
+          SettingsBinder.bindSettings(PROPERTIES_FILE_KEY, FederationSettings.class);
+      // This MUST happen first, or bindings will fail if federation is enabled.
+      settingsInjector = settingsInjector.createChildInjector(federationSettings);
+    }
+
+    Module federationModule = buildFederationModule(settingsInjector, enableFederation);
+    PersistenceModule persistenceModule = settingsInjector.getInstance(PersistenceModule.class);
+    Injector injector =
+        settingsInjector.createChildInjector(new ServerModule(enableFederation),
+            new RobotApiModule(), federationModule, persistenceModule);
+
+    ServerRpcProvider server = injector.getInstance(ServerRpcProvider.class);
+    WaveBus waveBus = injector.getInstance(WaveBus.class);
+
+    String domain =
+      injector.getInstance(Key.get(String.class, Names.named(CoreSettings.WAVE_SERVER_DOMAIN)));
+    if (!ParticipantIdUtil.isDomainAddress(ParticipantIdUtil.makeDomainAddress(domain))) {
+      throw new WaveServerException("Invalid wave domain: " + domain);
+    }
+
+    initializeServer(injector, domain);
+    initializeServlets(injector, server);
+    initializeRobotAgents(injector, server);
+    initializeRobots(injector, waveBus);
+    initializeFrontend(injector, server, waveBus);
+    initializeFederation(injector);
+
+    LOG.info("Starting server");
+    server.startWebSocketServer(injector);
+  }
+
+  private static Module buildFederationModule(Injector settingsInjector, boolean enableFederation)
       throws ConfigurationException {
     Module federationModule;
     if (enableFederation) {
@@ -131,54 +184,24 @@ public class WaveMain {
     return federationModule;
   }
 
-  private static void initializeFederation(final Injector injector) {
-    final FederationTransport federationManager = injector.getInstance(FederationTransport.class);
-    federationManager.startFederation();
-  }
-
-  private static void initializeFrontend(final Injector injector, final ServerRpcProvider server,
-      final WaveBus waveBus) throws WaveServerException {
-    final HashedVersionFactory hashFactory = injector.getInstance(HashedVersionFactory.class);
-
-    final WaveletProvider provider = injector.getInstance(WaveletProvider.class);
-    final ClientFrontend frontend =
-        ClientFrontendImpl.create(hashFactory, provider, waveBus);
-
-    final ProtocolWaveClientRpc.Interface rpcImpl = WaveClientRpcImpl.create(frontend, false);
-    server.registerService(ProtocolWaveClientRpc.newReflectiveService(rpcImpl));
-  }
-
-  private static void initializeRobotAgents(final Injector injector, final ServerRpcProvider server) {
-    final PasswordRobot passRobot = new PasswordRobot(injector);
-    final PasswordAdminRobot passAdminRobot = new PasswordAdminRobot(injector);
-    injector.injectMembers(passRobot);
-    server.addServlet(PasswordRobot.ROBOT_URI + "/*", passRobot);
-    server.addServlet(PasswordAdminRobot.ROBOT_URI + "/*", passAdminRobot);
-  }
-
-  private static void initializeRobots(final Injector injector, final WaveBus waveBus) {
-    final RobotsGateway robotsGateway = injector.getInstance(RobotsGateway.class);
-    waveBus.subscribe(robotsGateway);
-  }
-
-  private static void initializeServer(final Injector injector, final String waveDomain)
+  private static void initializeServer(Injector injector, String waveDomain)
       throws PersistenceException, WaveServerException {
-    final AccountStore accountStore = injector.getInstance(AccountStore.class);
+    AccountStore accountStore = injector.getInstance(AccountStore.class);
     accountStore.initializeAccountStore();
     AccountStoreHolder.init(accountStore, waveDomain);
 
     // Initialize the SignerInfoStore.
-    final CertPathStore certPathStore = injector.getInstance(CertPathStore.class);
+    CertPathStore certPathStore = injector.getInstance(CertPathStore.class);
     if (certPathStore instanceof SignerInfoStore) {
       ((SignerInfoStore)certPathStore).initializeSignerInfoStore();
     }
 
     // Initialize the server.
-    final WaveletProvider waveServer = injector.getInstance(WaveletProvider.class);
+    WaveletProvider waveServer = injector.getInstance(WaveletProvider.class);
     waveServer.initialize();
   }
 
-  private static void initializeServlets(final Injector injector, final ServerRpcProvider server) {
+  private static void initializeServlets(Injector injector, ServerRpcProvider server) {
     server.addServlet("/attachment/*", injector.getInstance(AttachmentServlet.class));
 
     server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));
@@ -194,69 +217,46 @@ public class WaveMain {
     server.addServlet("/robot/rpc", injector.getInstance(ActiveApiServlet.class));
     server.addServlet("/webclient/remote_logging", injector.getInstance(RemoteLoggingServiceImpl.class));
     server.addServlet("/profile/*", injector.getInstance(FetchProfilesServlet.class));
+    server.addServlet("/waveref/*", injector.getInstance(WaveRefServlet.class));
 
-    final String gadgetHostName =
+    String gadgetHostName =
         injector
             .getInstance(Key.get(String.class, Names.named(CoreSettings.GADGET_SERVER_HOSTNAME)));
-    final int port =
+    int port =
         injector.getInstance(Key.get(Integer.class, Names.named(CoreSettings.GADGET_SERVER_PORT)));
-    final Map<String, String> initParams =
+    Map<String, String> initParams =
         Collections.singletonMap("HostHeader", gadgetHostName + ":" + port);
     server.addServlet("/gadgets/*", injector.getInstance(GadgetProxyServlet.class), initParams);
 
     //server.addServlet("/", injector.getInstance(WaveClientServlet.class));
   }
 
-  public static void main(final String... args) {
-    try {
-      final Module coreSettings = SettingsBinder.bindSettings(PROPERTIES_FILE_KEY, CoreSettings.class);
-      run(coreSettings);
-      return;
-    } catch (final PersistenceException e) {
-      LOG.severe("PersistenceException when running server:", e);
-    } catch (final ConfigurationException e) {
-      LOG.severe("ConfigurationException when running server:", e);
-    } catch (final WaveServerException e) {
-      LOG.severe("WaveServerException when running server:", e);
-    }
+  private static void initializeRobots(Injector injector, WaveBus waveBus) {
+    RobotsGateway robotsGateway = injector.getInstance(RobotsGateway.class);
+    waveBus.subscribe(robotsGateway);
   }
 
-  public static void run(final Module coreSettings) throws PersistenceException,
-      ConfigurationException, WaveServerException {
-    Injector settingsInjector = Guice.createInjector(coreSettings);
-    final boolean enableFederation = settingsInjector.getInstance(Key.get(Boolean.class,
-        Names.named(CoreSettings.ENABLE_FEDERATION)));
+  private static void initializeRobotAgents(Injector injector, ServerRpcProvider server) {
+    //server.addServlet(PasswordRobot.ROBOT_URI + "/*", injector.getInstance(PasswordRobot.class));
+    //server.addServlet(PasswordAdminRobot.ROBOT_URI + "/*", injector.getInstance(PasswordAdminRobot.class));
+    //server.addServlet(WelcomeRobot.ROBOT_URI + "/*", injector.getInstance(WelcomeRobot.class));
+  }
 
-    if (enableFederation) {
-      final Module federationSettings =
-          SettingsBinder.bindSettings(PROPERTIES_FILE_KEY, FederationSettings.class);
-      // This MUST happen first, or bindings will fail if federation is enabled.
-      settingsInjector = settingsInjector.createChildInjector(federationSettings);
-    }
+  private static void initializeFrontend(Injector injector, ServerRpcProvider server,
+      WaveBus waveBus) throws WaveServerException {
+    HashedVersionFactory hashFactory = injector.getInstance(HashedVersionFactory.class);
 
-    final Module federationModule = buildFederationModule(settingsInjector, enableFederation);
-    final PersistenceModule persistenceModule = settingsInjector.getInstance(PersistenceModule.class);
-    final Injector injector =
-        settingsInjector.createChildInjector(new ServerModule(enableFederation),
-            new RobotApiModule(), federationModule, persistenceModule);
+    WaveletProvider provider = injector.getInstance(WaveletProvider.class);
+    WaveletInfo waveletInfo = WaveletInfo.create(hashFactory, provider);
+    ClientFrontend frontend =
+        ClientFrontendImpl.create(provider, waveBus, waveletInfo);
 
-    final ServerRpcProvider server = injector.getInstance(ServerRpcProvider.class);
-    final WaveBus waveBus = injector.getInstance(WaveBus.class);
+    ProtocolWaveClientRpc.Interface rpcImpl = WaveClientRpcImpl.create(frontend, false);
+    server.registerService(ProtocolWaveClientRpc.newReflectiveService(rpcImpl));
+  }
 
-    final String domain =
-      injector.getInstance(Key.get(String.class, Names.named(CoreSettings.WAVE_SERVER_DOMAIN)));
-    if (!ParticipantIdUtil.isDomainAddress(ParticipantIdUtil.makeDomainAddress(domain))) {
-      throw new WaveServerException("Invalid wave domain: " + domain);
-    }
-
-    initializeServer(injector, domain);
-    initializeServlets(injector, server);
-    initializeRobotAgents(injector, server);
-    initializeRobots(injector, waveBus);
-    initializeFrontend(injector, server, waveBus);
-    initializeFederation(injector);
-
-    LOG.info("Starting server");
-    server.startWebSocketServer(injector);
+  private static void initializeFederation(Injector injector) {
+    FederationTransport federationManager = injector.getInstance(FederationTransport.class);
+    federationManager.startFederation();
   }
 }

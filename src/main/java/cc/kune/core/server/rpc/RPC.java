@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.rpc;
 
+import cc.kune.core.server.LogThis;
+
 import com.google.inject.Singleton;
 
 /**
@@ -35,6 +37,7 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
+@LogThis
 public interface RPC {
 
 }

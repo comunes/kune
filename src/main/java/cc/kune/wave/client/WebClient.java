@@ -25,7 +25,6 @@ package cc.kune.wave.client;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
@@ -34,6 +33,7 @@ import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.Session;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
+import org.waveprotocol.box.webclient.client.events.Log;
 import org.waveprotocol.box.webclient.client.events.NetworkStatusEvent;
 import org.waveprotocol.box.webclient.client.events.NetworkStatusEventHandler;
 import org.waveprotocol.box.webclient.client.events.WaveCreationEvent;
@@ -47,7 +47,6 @@ import org.waveprotocol.box.webclient.search.SearchPanelWidget;
 import org.waveprotocol.box.webclient.search.SearchPresenter;
 import org.waveprotocol.box.webclient.search.SimpleSearch;
 import org.waveprotocol.box.webclient.search.WaveStore;
-import org.waveprotocol.box.webclient.util.Log;
 import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.box.webclient.widget.loading.LoadingIndicator;
 import org.waveprotocol.wave.client.account.ProfileManager;
@@ -56,12 +55,16 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.debug.logger.LogLevel;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
+import org.waveprotocol.wave.client.widget.popup.CenterPopupPositioner;
+import org.waveprotocol.wave.client.widget.popup.PopupChrome;
+import org.waveprotocol.wave.client.widget.popup.PopupChromeFactory;
+import org.waveprotocol.wave.client.widget.popup.PopupFactory;
+import org.waveprotocol.wave.client.widget.popup.UniversalPopup;
 import org.waveprotocol.wave.model.id.IdGenerator;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
-import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.sitebar.spaces.Space;
@@ -81,9 +84,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
@@ -103,31 +106,6 @@ public class WebClient extends  Composite implements WaveClientView {
    * prepared, it is revealed in the banner via a link.
    */
   public static class ErrorHandler implements UncaughtExceptionHandler {
-    public static void install() {
-    GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
-    }
-
-    private static String maybe(final int value, final String otherwise) {
-      return value != -1 ? String.valueOf(value) : otherwise;
-    }
-
-    private static String maybe(final String value, final String otherwise) {
-      return value != null ? value : otherwise;
-    }
-
-    /**
-     * Indicates whether an error has already been reported (at most one error
-     * is ever reported by this handler).
-     */
-    private boolean hasFired;
-
-    /** Next handler in the handler chain. */
-    private final UncaughtExceptionHandler next;
-
-    private ErrorHandler(final UncaughtExceptionHandler next) {
-      this.next = next;
-    }
-
     public static void getStackTraceAsync(final Throwable t, final Accessor<SafeHtml> whenReady) {
       // TODO: Request stack-trace de-obfuscation. For now, just use the
       // javascript stack trace.
@@ -166,6 +144,31 @@ public class WebClient extends  Composite implements WaveClientView {
       }.schedule(1);
     }
 
+    public static void install() {
+    GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
+    }
+
+    private static String maybe(final int value, final String otherwise) {
+      return value != -1 ? String.valueOf(value) : otherwise;
+    }
+
+    private static String maybe(final String value, final String otherwise) {
+      return value != null ? value : otherwise;
+    }
+
+    /**
+     * Indicates whether an error has already been reported (at most one error
+     * is ever reported by this handler).
+     */
+    private boolean hasFired;
+
+    /** Next handler in the handler chain. */
+    private final UncaughtExceptionHandler next;
+
+    private ErrorHandler(final UncaughtExceptionHandler next) {
+      this.next = next;
+    }
+
     @Override
     public void onUncaughtException(final Throwable e) {
       if (!hasFired) {
@@ -175,8 +178,8 @@ public class WebClient extends  Composite implements WaveClientView {
         getStackTraceAsync(e, new Accessor<SafeHtml>() {
           @Override
           public void use(final SafeHtml stack) {
-              //NotifyUser.error("Oops! Something has gone wrong. Please contact the site admins with <em>more details</em>");
           //  error.addDetail(stack, null);
+            // REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
             final String message = stack.asString().replace("<br>", "\n");
             REMOTE_LOG.severe(message);
             NotifyUser.logError(message);
@@ -194,40 +197,57 @@ public class WebClient extends  Composite implements WaveClientView {
   }
 
   private static final Binder BINDER = GWT.create(Binder.class);
-  static final Log LOG = Log.get(WebClient.class);
+  static Log LOG = Log.get(WebClient.class);
 
   // Use of GWT logging is only intended for sending exception reports to the
   // server, nothing else in the client should use java.util.logging.
   // Please also see WebClientDemo.gwt.xml.
   private static final Logger REMOTE_LOG = Logger.getLogger("REMOTE_LOG");
 
-  // TODO (Yuri Z.) Change the implementation to RemoteProfileManagerImpl when
-  // it will be ready.
-  private final ProfileManager profiles;
-
-  @UiField
-  SplitLayoutPanel splitPanel;
+  /** Creates a popup that warns about network disconnects. */
+  private static UniversalPopup createTurbulencePopup() {
+    final PopupChrome chrome = PopupChromeFactory.createPopupChrome();
+    final UniversalPopup popup =
+        PopupFactory.createPopup(null, new CenterPopupPositioner(), chrome, true);
+    popup.add(new HTML("<div style='color: red; padding: 5px; text-align: center;'>"
+        + "<b>A turbulence detected!<br></br>"
+        + " Please save your last changes to somewhere and reload the wave.</b></div>"));
+    return popup;
+  }
+  private RemoteViewServiceMultiplexer channel;
 
   private final EventBus eventBus;
 
-  @UiField
-  Style style;
+  private IdGenerator idGenerator;
 
-  @UiField
-  FramedPanel waveFrame;
+  private final InboxCountPresenter inboxCount;
 
-
-  ImplPanel waveHolder;
   private final Element loading = new LoadingIndicator().getElement();
+
+  private ParticipantId loggedInUser;
+  @UiField
+  DebugMessagePanel logPanel;
+
+  private final ProfileManager profiles;
 
   @UiField(provided = true)
   final SearchPanelWidget searchPanel;
 
   @UiField
-  DebugMessagePanel logPanel;
+  SplitLayoutPanel splitPanel;
+
+  @UiField
+  Style style;
+
+  private final UniversalPopup turbulencePopup = createTurbulencePopup();
 
   /** The wave panel, if a wave is open. */
   private KuneStagesProvider wave;
+
+  @UiField
+  FramedPanel waveFrame;
+
+  ImplPanel waveHolder;
 
   private final WaveStore waveStore = new SimpleWaveStore();
 
@@ -236,18 +256,11 @@ public class WebClient extends  Composite implements WaveClientView {
    */
   private WaveWebSocketClient websocket;
 
-  private ParticipantId loggedInUser;
-
-  private IdGenerator idGenerator;
-
-  private RemoteViewServiceMultiplexer channel;
-  private final InboxCountPresenter inboxCount;
-
   /**
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, KuneWaveProfileManager profiles, InboxCountPresenter inboxCount, TokenMatcher tokenMatcher) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher) {
     // Window.alert("webclient! " + new Date());
     this.eventBus = eventBus;
     this.profiles = profiles;
@@ -274,43 +287,31 @@ public class WebClient extends  Composite implements WaveClientView {
     // Done in StateManager
     // HistorySupport.init();
 
-    //createWebSocket();
-
     loginImpl();
 
     setupUi();
 
-    if (tokenMatcher.isWaveToken(History.getToken()))
+    if (tokenMatcher.isWaveToken(History.getToken())) {
       History.fireCurrentHistoryState();
+    }
     LOG.info("SimpleWebClient.onModuleLoad() done");
   }
+
+  @Override
+  public void clear() {
+    // Duplicate below
+  if (wave != null) {
+    wave.destroy();
+    wave = null;
+  }
+  if (waveHolder.isAttached()) {
+    waveHolder.removeFromParent();
+  }
+}
 
   private void createWebSocket() {
     websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL()));
     websocket.connect();
-  }
-
-  @Override
-  public void login() {
-    loginImpl();
-  }
-
-  @Override
-  public void logout() {
-    loggedInUser = null;
-    channel = null;
-    idGenerator = null;
-    websocket = null;
-    clear();
-  }
-
-  private void loginImpl() {
-    createWebSocket();
-    if (Session.get().isLoggedIn()) {
-      loggedInUser = new ParticipantId(Session.get().getAddress());
-      idGenerator = ClientIdGenerator.create();
-      loginToServer();
-    }
   }
 
   @Override
@@ -329,24 +330,41 @@ public class WebClient extends  Composite implements WaveClientView {
   }
 
   @Override
+  public void getStackTraceAsync(final Throwable caught, final Accessor<SafeHtml> accessor) {
+    ErrorHandler.getStackTraceAsync(caught, accessor);
+  }
+
+  @Override
   public ImplPanel getWaveHolder() {
     return waveHolder;
   }
-@Override
-public WaveWebSocketClient getWebSocket() {
-  return websocket;
-}
+
+  @Override
+  public WaveWebSocketClient getWebSocket() {
+    return websocket;
+  }
+
   /**
    * Returns <code>ws://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl(String moduleBase) /*-{
-    return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+		return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
   }-*/;
 
-  private native boolean useSocketIO() /*-{
-    return !!$wnd.__useSocketIO
-  }-*/;
+  @Override
+  public void login() {
+    loginImpl();
+  }
+
+  private void loginImpl() {
+    createWebSocket();
+    if (Session.get().isLoggedIn()) {
+      loggedInUser = new ParticipantId(Session.get().getAddress());
+      idGenerator = ClientIdGenerator.create();
+      loginToServer();
+    }
+  }
 
   /**
    */
@@ -355,16 +373,15 @@ public WaveWebSocketClient getWebSocket() {
     channel = new RemoteViewServiceMultiplexer(websocket, loggedInUser.getAddress());
   }
 
-  public void clear() {
-    // Duplicate below
-  if (wave != null) {
-    wave.destroy();
-    wave = null;
+  @Override
+  public void logout() {
+    loggedInUser = null;
+    channel = null;
+    idGenerator = null;
+    websocket = null;
+    clear();
   }
-  if (waveHolder.isAttached()) {
-    waveHolder.removeFromParent();
-  }
-}
+
   /**
    * Shows a wave in a wave panel.
    *
@@ -385,6 +402,7 @@ public WaveWebSocketClient getWebSocket() {
       waveFrame.remove(waveHolder);
       waveFrame.clear();
     waveFrame.add(waveHolder);
+
     // Release the display:none.
     UIObject.setVisible(waveFrame.getElement(), true);
     waveHolder.getElement().appendChild(loading);
@@ -399,7 +417,6 @@ public WaveWebSocketClient getWebSocket() {
       }
     });
     final String encodedToken = History.getToken();
-    // NotifyUser.info("Open Wave: " + encodedToken + " waveRef: " + waveRef.getWaveId(), true);
     // Kune patch
     if (encodedToken != null && !encodedToken.isEmpty() && !encodedToken.equals(SiteTokens.WAVEINBOX)) {
       final WaveRef fromWaveRef = HistorySupport.waveRefFromHistoryToken(encodedToken);
@@ -421,6 +438,9 @@ public WaveWebSocketClient getWebSocket() {
 
   private void setupConnectionIndicator() {
     ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
+
+      boolean isTurbulenceDetected = false;
+
       @Override
       public void onNetworkStatus(final NetworkStatusEvent event) {
         final Element element = Document.get().getElementById("netstatus");
@@ -430,10 +450,16 @@ public WaveWebSocketClient getWebSocket() {
             case RECONNECTED:
               element.setInnerText("Online");
               element.setClassName("online");
+              isTurbulenceDetected = false;
+              turbulencePopup.hide();
               break;
             case DISCONNECTED:
               element.setInnerText("Offline");
               element.setClassName("offline");
+              if (!isTurbulenceDetected) {
+                isTurbulenceDetected = true;
+                turbulencePopup.show();
+              }
               break;
             case RECONNECTING:
               element.setInnerText("Connecting...");
@@ -446,45 +472,47 @@ public WaveWebSocketClient getWebSocket() {
   }
 
   private void setupSearchPanel() {
-    // On wave selection, fire an event.
-    SearchPresenter.WaveSelectionHandler selectHandler =
-        new SearchPresenter.WaveSelectionHandler() {
+    // On wave action fire an event.
+    final SearchPresenter.WaveActionHandler actionHandler =
+        new SearchPresenter.WaveActionHandler() {
           @Override
-          public void onWaveSelected(WaveId id) {
+          public void onCreateWave() {
+            ClientEvents.get().fireEvent(WaveCreationEvent.CREATE_NEW_WAVE);
+          }
+
+          @Override
+          public void onWaveSelected(final WaveId id) {
             ClientEvents.get().fireEvent(new WaveSelectionEvent(WaveRef.of(id)));
           }
         };
-    Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
+    final Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
     search.addListener(inboxCount.getSearchListener());
-    SearchPresenter.create(search, searchPanel, selectHandler, profiles);
+    SearchPresenter.create(search, searchPanel, actionHandler, profiles);
+  }
+private void setupUi() {
+  // Set up UI
+  final DockLayoutPanel self = BINDER.createAndBindUi(this);
+  // kune-patch
+  // RootPanel.get("app").add(self);
+  initWidget(self);
+  waveHolder = new ImplPanel("");
+  waveHolder.addStyleName("k-waveHolder");
+  waveFrame.add(waveHolder);
+  // DockLayoutPanel forcibly conflicts with sensible layout control, and
+  // sticks inline styles on elements without permission. They must be
+  // cleared.
+  self.getElement().getStyle().clearPosition();
+  splitPanel.setWidgetMinSize(searchPanel, 300);
+
+  if (LogLevel.showDebug()) {
+    logPanel.enable();
+  } else {
+    logPanel.removeFromParent();
   }
 
-
-  private void setupUi() {
-    // Set up UI
-    final DockLayoutPanel self = BINDER.createAndBindUi(this);
-    // kune-patch
-    // RootPanel.get("app").add(self);
-    initWidget(self);
-    waveHolder = new ImplPanel("");
-    waveHolder.addStyleName("k-waveHolder");
-    waveFrame.add(waveHolder);
-    // DockLayoutPanel forcibly conflicts with sensible layout control, and
-    // sticks inline styles on elements without permission. They must be
-    // cleared.
-    self.getElement().getStyle().clearPosition();
-    splitPanel.setWidgetMinSize(searchPanel, 300);
-
-    if (LogLevel.showDebug()) {
-      logPanel.enable();
-    } else {
-      logPanel.removeFromParent();
-    }
-
-    setupSearchPanel();
-    setupWavePanel();
-  }
-
+  setupSearchPanel();
+  setupWavePanel();
+}
   private void setupWavePanel() {
     // Hide the frame until waves start getting opened.
     UIObject.setVisible(waveFrame.getElement(), false);
@@ -498,8 +526,7 @@ public WaveWebSocketClient getWebSocket() {
     });
   }
 
-  @Override
-  public void getStackTraceAsync(Throwable caught, Accessor<SafeHtml> accessor) {
-    ErrorHandler.getStackTraceAsync(caught, accessor);
-  }
+  private native boolean useSocketIO() /*-{
+		return !!$wnd.__useSocketIO
+  }-*/;
 }

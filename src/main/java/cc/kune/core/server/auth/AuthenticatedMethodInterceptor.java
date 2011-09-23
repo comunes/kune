@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -47,7 +47,7 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
   // @Inject
   // private UnitOfWork unitOfWork;
   @Inject
-  Provider<UserSession> userSessionProvider;
+  UserSessionManager userSessionManager;
 
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
@@ -63,8 +63,6 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
       LOG.info("Method: " + invocation.getMethod().getName());
       LOG.info("Userhash received: " + userHash);
       LOG.info("--------------------------------------------------------------------------------");
-      final UserSession userSession = userSessionProvider.get();
-      // final SessionService sessionService = sessionServiceProvider.get();
 
       final Authenticated authAnnotation = invocation.getStaticPart().getAnnotation(Authenticated.class);
       final boolean mandatory = authAnnotation.mandatory();
@@ -72,19 +70,19 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
       if (userHash == null && mandatory) {
         // sessionService.getNewSession();
         throw new UserMustBeLoggedException();
-      } else if (userSession.isUserNotLoggedIn() && mandatory) {
+      } else if (userSessionManager.isUserNotLoggedIn() && mandatory) {
         // sessionService.getNewSession();
         LOG.info("Session expired (not logged in server and mandatory)");
         throw new SessionExpiredException();
-      } else if (userSession.isUserNotLoggedIn() && userHash == null) {
+      } else if (userSessionManager.isUserNotLoggedIn() && userHash == null) {
         // Ok, do nothing
-      } else if (userSession.isUserNotLoggedIn() && userHash != null) {
+      } else if (userSessionManager.isUserNotLoggedIn() && userHash != null) {
         // sessionService.getNewSession();
         LOG.info("Session expired (not logged in server)");
         throw new SessionExpiredException();
-      } else if (!userSession.getHash().equals(userHash)) {
-        final String serverHash = userSession.getHash();
-        userSession.logout();
+      } else if (!userSessionManager.getHash().equals(userHash)) {
+        final String serverHash = userSessionManager.getHash();
+        userSessionManager.logout();
         // sessionService.getNewSession();
         LOG.info("Session expired (userHash: " + userHash + " different from server hash: " + serverHash
             + ")");

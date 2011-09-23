@@ -1,7 +1,7 @@
 package cc.kune.lists.server.rpc;
 
 import cc.kune.core.client.errors.AccessViolationException;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
@@ -21,19 +21,18 @@ import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.shared.ListsConstants;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
 public class ListsRPC implements ListsService, RPC {
   private final ContainerManager contentManager;
   private final ContentRPC contentRPC;
-  private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSessionManager;
 
   @Inject
-  public ListsRPC(final ContentRPC contentRPC, final Provider<UserSession> userSessionProvider,
+  public ListsRPC(final ContentRPC contentRPC, final UserSessionManager userSessionManager,
       final ContainerManager contentManager) {
     this.contentRPC = contentRPC;
-    this.userSessionProvider = userSessionProvider;
+    this.userSessionManager = userSessionManager;
     this.contentManager = contentManager;
   }
 
@@ -50,7 +49,7 @@ public class ListsRPC implements ListsService, RPC {
   }
 
   private Group getUserGroup() {
-    return userSessionProvider.get().getUser().getUserGroup();
+    return userSessionManager.getUser().getUserGroup();
   }
 
   @Override
