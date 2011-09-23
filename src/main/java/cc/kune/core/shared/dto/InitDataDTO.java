@@ -52,6 +52,7 @@ public class InitDataDTO implements IsSerializable {
   private ReservedWordsRegistryDTO reservedWords;
   private String siteDomain;
   private String siteLogoUrl;
+  private String siteShortName;
   private String siteUrl;
   private String[] timezones;
   private UserInfoDTO userInfo;
@@ -159,6 +160,10 @@ public class InitDataDTO implements IsSerializable {
 
   public String getSiteLogoUrl() {
     return siteLogoUrl;
+  }
+
+  public String getSiteShortName() {
+    return siteShortName;
   }
 
   public String getSiteUrl() {
@@ -288,6 +293,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setSiteLogoUrl(final String siteLogoUrl) {
     this.siteLogoUrl = siteLogoUrl;
+  }
+
+  public void setSiteShortName(final String siteShortName) {
+    this.siteShortName = siteShortName;
   }
 
   public void setSiteUrl(final String siteUrl) {

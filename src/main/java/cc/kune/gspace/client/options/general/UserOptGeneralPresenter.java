@@ -82,7 +82,8 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
       final UserSimpleDTO currentUser = session.getCurrentUser();
       final UserDTO user = new UserDTO();
       user.setId(currentUser.getId());
-      user.setName(userView.getLongName());
+      final String longName = userView.getLongName();
+      user.setName(longName);
       userService.get().updateUser(session.getUserHash(), user, userView.getLanguage(),
           new AsyncCallbackSimple<StateAbstractDTO>() {
             @Override

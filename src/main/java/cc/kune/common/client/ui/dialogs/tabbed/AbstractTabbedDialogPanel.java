@@ -144,7 +144,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     }
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     tabPanel = new TabLayoutPanel(25, Unit.PX);
-    tabPanel.addStyleName("oc-noselect");
+    // tabPanel.addStyleName("oc-noselect");
     dialog.getInnerPanel().add(tabPanel);
     tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
       @Override

@@ -51,4 +51,10 @@ public class ConstantsTest {
     assertEquals("some multiple lines",
         english.getString(I18nUtils.convertMethodName("some multiple lines")));
   }
+
+  @Test
+  public void multipleLinesWithCarriageReturn() {
+    assertEquals("some\nmultiple\nlines\nwith\ncarriage",
+        english.getString(I18nUtils.convertMethodName("some\nmultiple\nlines\nwith\ncarriage")));
+  }
 }

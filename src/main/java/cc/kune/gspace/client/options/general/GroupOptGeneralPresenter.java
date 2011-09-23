@@ -70,6 +70,7 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
   @Override
   protected void setState() {
     final GroupDTO group = session.getCurrentState().getGroup();
+    groupView.setShortNameEnabled(!session.getInitData().getSiteShortName().equals(group.getShortName()));
     groupView.setShortName(group.getShortName());
     groupView.setLongName(group.getLongName());
   }

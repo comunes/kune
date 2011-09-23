@@ -64,4 +64,9 @@ public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements Group
     this.shortName.setValue(shortName);
   }
 
+  @Override
+  public void setShortNameEnabled(final boolean enabled) {
+    this.shortName.setEnabled(enabled);
+  }
+
 }

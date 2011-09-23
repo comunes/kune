@@ -29,6 +29,11 @@ public class I18nUtilsTest {
   }
 
   @Test
+  public void carriageReturn() {
+    assertEquals("yesNo", I18nUtils.convertMethodName("yes\nno"));
+  }
+
+  @Test
   public void testParams() {
     assertEquals("nOfParamItems", I18nUtils.convertMethodName("[%d] of [%s] items"));
     assertEquals("nOfNItems", I18nUtils.convertMethodName("[%d] of [%d] items"));

@@ -398,8 +398,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   @Override
   public void setRetrievedStateAndGo(final StateAbstractDTO newState) {
     setRetrievedState(newState);
-    // setState(newState);
-    history.newItem(newState.getStateToken().toString());
+    final String token = newState.getStateToken().toString();
+    if (history.getToken().equals(token)) {
+      setState(newState);
+    }
+    history.newItem(token);
   }
 
   @Override

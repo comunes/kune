@@ -153,6 +153,7 @@ public class SiteRPC implements RPC, SiteService {
     data.setAviEmbedObject(kuneProperties.get(KuneProperties.AVI_EMBEDED_OBJECT));
     data.setExtMediaDescrips(extMediaDescManager.getAll());
     data.setFeedbackEnabled(kuneProperties.getBoolean(KuneProperties.FEEDBACK_ENABLED));
+    data.setSiteShortName(kuneProperties.get(KuneProperties.SITE_SHORTNAME));
     return data;
   }
 }

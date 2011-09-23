@@ -10,6 +10,7 @@ public class I18nUtils {
 
   public static String convertMethodName(final String name) {
     String result = name;
+    result = result.replaceAll("\\\n", " ");
     result = result.replaceAll("\\[%d\\]", "N");
     result = result.replaceAll("\\[%s\\]", "Param");
     final char[] delimiters = { ' ', '.', '?', ',', ';', '&', '(', ')', '"', '$', '!', '/', '\'', '-',
