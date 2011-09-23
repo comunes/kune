@@ -19,11 +19,15 @@
  */
 package cc.kune.selenium.tools;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
@@ -40,22 +44,30 @@ public class SeleniumModule extends PageObjectModule {
   protected void configure() {
 
     // bind(WebDriver.class).toInstance(creatFirefoxDriver());
-    final ChromeDriver driver = createChromeDriver();
+    final WebDriver driver = createChromeDriver();
     bind(WebDriver.class).toInstance(driver);
-
-    bind(GenericWebTester.class).in(Singleton.class);
+    bind(GenericWebDriver.class).in(Singleton.class);
 
     // "http://127.0.0.1:8888/ws/?locale=en&log_level=INFO&gwt.codesvr=127.0.0.1:9997#");
 
     bind(ElementLocatorFactory.class).toInstance(
         new AjaxElementLocatorFactory(driver, SeleniumConstants.TIMEOUT));
 
+    final EventFiringWebDriver eventFiring = new EventFiringWebDriver(driver);
+    bind(EventFiringWebDriver.class).toInstance(eventFiring);
+
     // Page Objects here!
     bind(LoginPageObject.class).in(Singleton.class);
   }
 
-  private ChromeDriver createChromeDriver() {
-    final ChromeDriver driver = new ChromeDriver();
+  private WebDriver createChromeDriver() {
+    // http://code.google.com/p/selenium/wiki/ChromeDriver
+    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+    final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+    // http://peter.sh/experiments/chromium-command-line-switches/
+    capabilities.setCapability("chrome.switches", Arrays.asList("--disable-translate"));
+    capabilities.setCapability("chrome.binary", "/usr/bin/chromium-browser");
+    final WebDriver driver = new ChromeDriver(capabilities);
     return driver;
   }
 
@@ -65,6 +77,7 @@ public class SeleniumModule extends PageObjectModule {
     // profile.setPreference("webdriver.firefox.profile",
     // SeleniumConstants.FIREFOX_PROFILE_NAME);
     // profile.setPreference("webdriver.firefox.useExisting",true);
+
     final ProfilesIni allProfiles = new ProfilesIni();
     final FirefoxProfile profile = allProfiles.getProfile(SeleniumConstants.FIREFOX_PROFILE_NAME);
     // profile.setPreferences("foo.bar", 23);

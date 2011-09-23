@@ -19,7 +19,8 @@
  */
 package cc.kune.selenium.login;
 
-import org.openqa.selenium.RenderedWebElement;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import cc.kune.core.client.auth.SignInForm;
@@ -35,19 +36,19 @@ import com.calclab.hablar.login.client.LoginMessages;
 
 public class LoginPageObject extends PageObject {
 
-  @FindBy(id = GWTDEV + SignInPanel.SIGN_IN_BUTTON_ID)
-  private RenderedWebElement button;
   private final I18nHelper i18n;
   @FindBy(id = SignInForm.PASSWORD_FIELD_ID + "-input")
-  private RenderedWebElement passwd;
+  private WebElement passwd;
+  @FindBy(id = GWTDEV + SignInPanel.SIGN_IN_BUTTON_ID)
+  private WebElement signInButton;
   @FindBy(id = GWTDEV + SitebarSignInLink.SITE_SIGN_IN)
-  private RenderedWebElement signInLink;
+  private WebElement signInLink;
   @FindBy(id = GWTDEV + SitebarSignOutLink.SITE_SIGN_OUT)
-  private RenderedWebElement signOutLink;
+  private WebElement signOutLink;
   @FindBy(id = SignInForm.USER_FIELD_ID + "-input")
-  private RenderedWebElement user;
+  private WebElement user;
   @FindBy(id = GWTDEV + SiteUserOptionsPresenter.LOGGED_USER_MENU_ID)
-  private RenderedWebElement userMenu;
+  private WebElement userMenu;
 
   public LoginPageObject() {
     i18n = new I18nHelper(LoginMessages.class);
@@ -65,11 +66,25 @@ public class LoginPageObject extends PageObject {
     waitFor(signInLink);
   }
 
-  public RenderedWebElement getHeader() {
+  public void fillSigInInForm(final String username, final String password, final boolean withReturn) {
+    user.clear();
+    passwd.clear();
+    user.clear();
+    passwd.clear();
+    user.sendKeys(username);
+    passwd.sendKeys(password);
+    if (withReturn) {
+      passwd.sendKeys(Keys.RETURN);
+    } else {
+      signInButton.click();
+    }
+  }
+
+  public WebElement getHeader() {
     return signInLink;
   }
 
-  public RenderedWebElement header() {
+  public WebElement header() {
     return getHeader();
   }
 
@@ -79,17 +94,21 @@ public class LoginPageObject extends PageObject {
   }
 
   public void signIn(final String username, final String password) {
+    signIn(username, password, true);
+  }
+
+  public void signIn(final String username, final String password, final boolean withReturn) {
     assertIsDisconnected();
     signInLink.click();
-    user.clear();
-    passwd.clear();
-    user.sendKeys(username);
-    passwd.sendKeys(password);
-    button.click();
+    fillSigInInForm(username, password, withReturn);
   }
 
   public void signInDefUser() {
-    signIn(SeleniumConstants.USERNAME, SeleniumConstants.PASSWD);
+    signIn(SeleniumConstants.USERNAME, SeleniumConstants.PASSWD, false);
+  }
+
+  public void signOut() {
+    logout();
   }
 
 }

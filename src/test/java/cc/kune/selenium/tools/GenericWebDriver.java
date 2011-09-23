@@ -23,10 +23,10 @@ import org.openqa.selenium.WebDriver;
 
 import com.google.inject.Inject;
 
-public class GenericWebTester extends AbstractWebTester {
+public class GenericWebDriver extends AbstractWebDriver {
 
   @Inject
-  public GenericWebTester(final WebDriver driver) {
+  public GenericWebDriver(final WebDriver driver) {
     super(driver, "http://kune.beta.iepala.es/ws/?locale=en#");
   }
 

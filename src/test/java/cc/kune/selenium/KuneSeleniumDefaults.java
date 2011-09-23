@@ -22,6 +22,7 @@ package cc.kune.selenium;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -30,7 +31,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 
 import cc.kune.selenium.login.LoginPageObject;
-import cc.kune.selenium.tools.GenericWebTester;
+import cc.kune.selenium.tools.GenericWebDriver;
 import cc.kune.selenium.tools.SeleniumConstants;
 import cc.kune.selenium.tools.SeleniumModule;
 
@@ -40,16 +41,16 @@ import com.google.inject.Injector;
 public class KuneSeleniumDefaults {
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
   public static boolean mustCloseFinally = true;
-
+  protected EventFiringWebDriver eventFiring;
   private final Injector injector;
-
   protected LoginPageObject login;
-  protected GenericWebTester webtester;
+  protected GenericWebDriver webdriver;
 
   public KuneSeleniumDefaults() {
     injector = Guice.createInjector(new SeleniumModule());
-    webtester = injector.getInstance(GenericWebTester.class);
+    webdriver = injector.getInstance(GenericWebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
+    eventFiring = injector.getInstance(EventFiringWebDriver.class);
     final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     PageFactory.initElements(locator, login);
   }
@@ -58,7 +59,7 @@ public class KuneSeleniumDefaults {
   public void closeBrowser() {
     // We try to only open one window for all our selenium tests
     if (mustCloseFinally) {
-      webtester.close();
+      webdriver.close();
     }
   }
 
@@ -85,7 +86,7 @@ public class KuneSeleniumDefaults {
     // if (!Suco.getComponents().hasProvider(WebDriver.class)) {
     // Suco.install(new SeleniumModule());
     // }
-    if (webtester == null) {
+    if (webdriver == null) {
       // final ChromeDriver driver = new ChromeDriver();
       // // final HtmlUnitDriver driver = new HtmlUnitDriver(true);
       //
@@ -115,7 +116,8 @@ public class KuneSeleniumDefaults {
       // openGroupChat = Suco.get(OpenGroupChatPageObject.class);
     }
     LOG.info("Going home");
-    webtester.home();
+
+    webdriver.home();
   }
 
   public void sleep(final int milliseconds) {

@@ -21,11 +21,12 @@ package cc.kune.selenium.login;
 
 import org.testng.annotations.Test;
 
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.selenium.KuneSeleniumTest;
 
 public class LoginSeleniumTests extends KuneSeleniumTest {
 
-  @Test(dataProvider = "correctlogin", enabled = false)
+  @Test(dataProvider = "correctlogin")
   public void severalsSignInSingOut(final String user, final String passwd) {
     login.assertIsDisconnected();
     login.signIn(user, passwd);
@@ -36,7 +37,6 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
     login.signIn(user, passwd);
     login.assertIsConnectedAs(user);
     login.logout();
-
     login.assertIsDisconnected();
   }
 
@@ -45,12 +45,24 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
     login.assertIsDisconnected();
     login.signIn(user, passwd);
     login.assertIsConnectedAs(user);
+    login.logout();
+    login.assertIsDisconnected();
   }
 
   @Test
   public void signInIncorrectPasswd() {
     login.assertIsDisconnected();
     login.signIn("nouser", "nopassword");
+    login.assertIsDisconnected();
+  }
+
+  @Test(dataProvider = "correctlogin")
+  public void signInWithToken(final String user, final String passwd) {
+    login.assertIsDisconnected();
+    webdriver.gotoToken(SiteTokens.SIGNIN);
+    login.fillSigInInForm(user, passwd, true);
+    login.assertIsConnectedAs(user);
+    login.logout();
     login.assertIsDisconnected();
   }
 }

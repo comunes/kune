@@ -23,7 +23,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ByIdOrName;
@@ -39,15 +38,15 @@ public abstract class PageObject {
   @Inject
   private WebDriver webdriver;
 
-  protected RenderedWebElement findElement(final By by) {
-    return (RenderedWebElement) getWebDriver().findElement(by);
+  protected WebElement findElement(final By by) {
+    return getWebDriver().findElement(by);
   }
 
   private WebDriver getWebDriver() {
     return webdriver;
   }
 
-  public boolean isPresent(final RenderedWebElement element) {
+  public boolean isPresent(final WebElement element) {
     // FIXME: find a better way to do this
     try {
       getWebDriver().findElement(By.id(element.getAttribute("id")));
@@ -55,17 +54,6 @@ public abstract class PageObject {
     } catch (final NoSuchElementException e) {
       return false;
     }
-  }
-
-  public void waitFor(final RenderedWebElement element) {
-    final String id = element.getAttribute("id");
-    LOG.info("WAIT FOR: " + id);
-    waitFor(id, new Runnable() {
-      @Override
-      public void run() {
-        Assert.assertTrue(element.isDisplayed());
-      }
-    });
   }
 
   /**
@@ -112,6 +100,17 @@ public abstract class PageObject {
     }
   }
 
+  public void waitFor(final WebElement element) {
+    final String id = element.getAttribute("id");
+    LOG.info("WAIT FOR: " + id);
+    waitFor(id, new Runnable() {
+      @Override
+      public void run() {
+        Assert.assertTrue(element.isDisplayed());
+      }
+    });
+  }
+
   protected void waitFor(final WebElement element, final String text) {
     LOG.info("WAIT FOR: " + text);
     waitFor(text, new Runnable() {
@@ -129,7 +128,7 @@ public abstract class PageObject {
     waitFor(id, new Runnable() {
       @Override
       public void run() {
-        Assert.assertTrue(((RenderedWebElement) getWebDriver().findElement(new ByIdOrName(id))).isDisplayed());
+        Assert.assertTrue(getWebDriver().findElement(new ByIdOrName(id)).isDisplayed());
       }
     });
   }
@@ -139,7 +138,7 @@ public abstract class PageObject {
     waitFor(text, new Runnable() {
       @Override
       public void run() {
-        final String elValue = element.getValue();
+        final String elValue = element.getText();
         LOG.info("Element value: " + elValue);
         Assert.assertTrue(elValue.contains(text));
       }
