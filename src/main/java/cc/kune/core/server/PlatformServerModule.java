@@ -39,8 +39,6 @@ import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.AuthenticatedMethodInterceptor;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.auth.AuthorizatedMethodInterceptor;
-import cc.kune.core.server.auth.SessionService;
-import cc.kune.core.server.auth.SessionServiceDefault;
 import cc.kune.core.server.auth.SuperAdmin;
 import cc.kune.core.server.auth.SuperAdminMethodInterceptor;
 import cc.kune.core.server.content.ContainerManager;
@@ -159,7 +157,6 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(FinderService.class).to(FinderServiceDefault.class);
     bind(StateService.class).to(StateServiceDefault.class);
     bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
-    bind(SessionService.class).to(SessionServiceDefault.class);
     bind(KuneWaveService.class).to(KuneWaveServiceDefault.class);
     bind(XMLActionReader.class);
   }

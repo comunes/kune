@@ -41,19 +41,10 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
   Provider<HttpServletRequest> requestProvider;
 
   @Inject
-  Provider<SessionService> sessionServiceProvider;
-
-  // https://code.google.com/p/google-guice/wiki/Transactions
-  // @Inject
-  // private UnitOfWork unitOfWork;
-  @Inject
   UserSessionManager userSessionManager;
 
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
-    // https://code.google.com/p/google-guice/wiki/Transactions
-    // unitOfWork.end();
-    // unitOfWork.begin();
     try {
       final Object[] arguments = invocation.getArguments();
       // Some browsers getCookie returns "null" as String instead of null
@@ -68,22 +59,18 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
       final boolean mandatory = authAnnotation.mandatory();
 
       if (userHash == null && mandatory) {
-        // sessionService.getNewSession();
         throw new UserMustBeLoggedException();
       } else if (userSessionManager.isUserNotLoggedIn() && mandatory) {
-        // sessionService.getNewSession();
         LOG.info("Session expired (not logged in server and mandatory)");
         throw new SessionExpiredException();
       } else if (userSessionManager.isUserNotLoggedIn() && userHash == null) {
         // Ok, do nothing
       } else if (userSessionManager.isUserNotLoggedIn() && userHash != null) {
-        // sessionService.getNewSession();
         LOG.info("Session expired (not logged in server)");
         throw new SessionExpiredException();
       } else if (!userSessionManager.getHash().equals(userHash)) {
         final String serverHash = userSessionManager.getHash();
         userSessionManager.logout();
-        // sessionService.getNewSession();
         LOG.info("Session expired (userHash: " + userHash + " different from server hash: " + serverHash
             + ")");
         throw new SessionExpiredException();
@@ -91,7 +78,6 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
       final Object result = invocation.proceed();
       return result;
     } finally {
-      // unitOfWork.end();
     }
   }
 

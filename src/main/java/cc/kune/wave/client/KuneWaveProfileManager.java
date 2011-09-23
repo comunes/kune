@@ -31,7 +31,7 @@ import com.google.inject.Inject;
 
 /**
  * The Class KuneWaveProfileManager is a workaround to show avatars in kune
- * while the Wave part is more mature
+ * while the Wave part is more mature (see in the future RemoteProfileManagerImpl)
  * 
  */
 public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> implements
@@ -58,7 +58,7 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
   }
 
   @Override
-  public ProfileImpl getProfile(final ParticipantId participantId) {
+  public ProfileImpl getProfile(ParticipantId participantId) {
     ProfileImpl profile = profiles.get(participantId.getAddress());
 
     if (profile == null) {

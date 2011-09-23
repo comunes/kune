@@ -12,11 +12,8 @@
   z-index: 0;
 }
 
-@sprite .toolbar {
-  gwt-image: 'emptyToolbar';
-}
-
-.fixedThread { /*
+.fixedThread { 
+   /*
    * Allow scrolling.  Also, keep the scrollbar there permanently, so that content does not get
    * horizontally resized by the addition and removal of a scrollbar.
    */
@@ -27,4 +24,8 @@
   /*   left: 0; */ /*   right: 0; */ /*   bottom: 0; */
   /* Layout under siblings (participant panel etc). */
   z-index: -1;
+}
+
+@sprite .toolbar {
+  gwt-image: 'emptyToolbar';
 }

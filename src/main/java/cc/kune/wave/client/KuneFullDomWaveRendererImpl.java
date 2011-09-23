@@ -39,7 +39,7 @@ import com.google.gwt.dom.client.Element;
 
 /**
  * Renders waves into HTML DOM, given a renderer that renders waves as HTML
- * closures.
+ * closures. (this is in StatesTwo.java)
  *
  */
 public final class KuneFullDomWaveRendererImpl implements DomRenderer {

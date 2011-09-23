@@ -282,7 +282,7 @@ public class WebClient extends  Composite implements WaveClientView {
           }
         });
 
-    setupConnectionIndicator();
+    //setupConnectionIndicator();
 
     // Done in StateManager
     // HistorySupport.init();

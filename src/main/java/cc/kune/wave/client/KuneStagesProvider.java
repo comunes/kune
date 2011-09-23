@@ -54,27 +54,27 @@ public class KuneStagesProvider extends Stages {
 
   private final static AsyncHolder<Object> HALT = new AsyncHolder<Object>() {
     @Override
-    public void call(final Accessor<Object> accessor) {
+    public void call(Accessor<Object> accessor) {
       // Never ready, so never notify the accessor.
     }
   };
 
+  private final Element wavePanelElement;
+  private final LogicalPanel rootPanel;
+  private final WaveRef waveRef;
   private final RemoteViewServiceMultiplexer channel;
-  private boolean closed;
   private final IdGenerator idGenerator;
+  private final ProfileManager profiles;
+  private final WaveStore waveStore;
   private final boolean isNewWave;
   private final String localDomain;
-  private StageOne one;
-  private final ProfileManager profiles;
-  private final LogicalPanel rootPanel;
 
-  private final boolean showParticipantsPanel;
-  private StageThree three;
+  private boolean closed;
+  private StageOne one;
   private StageTwo two;
+  private StageThree three;
   private WaveContext wave;
-  private final Element wavePanelElement;
-  private final WaveRef waveRef;
-  private final WaveStore waveStore;
+  private boolean showParticipantsPanel;
 
   /**
    * @param wavePanelElement The dom element to become the wave panel
@@ -86,9 +86,9 @@ public class KuneStagesProvider extends Stages {
    * @param isNewWave true if the wave is a new client-created wave
    * @param idGenerator
    */
-  public KuneStagesProvider(final Element wavePanelElement, final LogicalPanel rootPanel, final WaveRef waveRef,
-      final RemoteViewServiceMultiplexer channel, final IdGenerator idGenerator, final ProfileManager profiles,
-      final WaveStore store, final boolean isNewWave, final String localDomain, final boolean showParticipantsPanel) {
+  public KuneStagesProvider(Element wavePanelElement, LogicalPanel rootPanel, WaveRef waveRef,
+      RemoteViewServiceMultiplexer channel, IdGenerator idGenerator, ProfileManager profiles,
+      WaveStore store, boolean isNewWave, String localDomain, boolean showParticipantsPanel) {
     this.wavePanelElement = wavePanelElement;
     this.rootPanel = rootPanel;
     this.waveRef = waveRef;
@@ -102,46 +102,29 @@ public class KuneStagesProvider extends Stages {
   }
 
   @Override
-  protected AsyncHolder<StageOne> createStageOneLoader(final StageZero zero) {
-    return haltIfClosed(new StageOne.DefaultProvider(zero) {
-      @Override
-      protected LogicalPanel createWaveContainer() {
-        return rootPanel;
-      }
+  protected AsyncHolder<StageZero> createStageZeroLoader() {
+    return haltIfClosed(super.createStageZeroLoader());
+  }
 
+  @Override
+  protected AsyncHolder<StageOne> createStageOneLoader(StageZero zero) {
+    return haltIfClosed(new StageOne.DefaultProvider(zero) {
       @Override
       protected Element createWaveHolder() {
         return wavePanelElement;
       }
-    });
-  }
-
-  @Override
-  protected AsyncHolder<StageThree> createStageThreeLoader(final StageTwo two) {
-    return haltIfClosed(new StageThree.DefaultProvider(this.two = two) {
       @Override
-      protected void create(final Accessor<StageThree> whenReady) {
-        // Prepend an init wave flow onto the stage continuation.
-        super.create(new Accessor<StageThree>() {
-          @Override
-          public void use(final StageThree x) {
-            onStageThreeLoaded(x, whenReady);
-          }
-        });
-      }
-
-      @Override
-      protected String getLocalDomain() {
-        return localDomain;
+      protected LogicalPanel createWaveContainer() {
+        return rootPanel;
       }
     });
   }
 
   @Override
-  // Kune patch
-  protected AsyncHolder<StageTwo> createStageTwoLoader(final StageOne one) {
+  protected AsyncHolder<StageTwo> createStageTwoLoader(StageOne one) {
     return haltIfClosed(new StageTwoProvider(
         this.one = one, waveRef.getWaveId(), channel, isNewWave, idGenerator, profiles) {
+      // Kune patch
       @Override
       protected DomRenderer createRenderer() {
         return KuneFullDomWaveRendererImpl.create(getConversations(), getProfileManager(),
@@ -159,8 +142,83 @@ public class KuneStagesProvider extends Stages {
   }
 
   @Override
-  protected AsyncHolder<StageZero> createStageZeroLoader() {
-    return haltIfClosed(super.createStageZeroLoader());
+  protected AsyncHolder<StageThree> createStageThreeLoader(final StageTwo two) {
+    return haltIfClosed(new StageThree.DefaultProvider(this.two = two) {
+      @Override
+      protected void create(final Accessor<StageThree> whenReady) {
+        // Prepend an init wave flow onto the stage continuation.
+        super.create(new Accessor<StageThree>() {
+          @Override
+          public void use(StageThree x) {
+            onStageThreeLoaded(x, whenReady);
+          }
+        });
+      }
+
+      @Override
+      protected String getLocalDomain() {
+        return localDomain;
+      }
+    });
+  }
+
+  private void onStageThreeLoaded(StageThree x, Accessor<StageThree> whenReady) {
+    if (closed) {
+      // Stop the loading process.
+      return;
+    }
+    three = x;
+    if (isNewWave) {
+      initNewWave(x);
+    } else {
+      handleExistingWave(x);
+    }
+    wave = new WaveContext(
+        two.getWave(), two.getConversations(), two.getSupplement(), two.getReadMonitor());
+    waveStore.add(wave);
+    whenReady.use(x);
+  }
+
+  private void initNewWave(StageThree three) {
+    // Do the new-wave flow.
+    ModelAsViewProvider views = two.getModelAsViewProvider();
+    BlipQueueRenderer blipQueue = two.getBlipQueue();
+    ConversationView wave = two.getConversations();
+
+    // Force rendering to finish.
+    blipQueue.flush();
+    BlipView blipUi = views.getBlipView(wave.getRoot().getRootThread().getFirstBlip());
+    three.getEditActions().startEditing(blipUi);
+  }
+
+  private void handleExistingWave(StageThree three) {
+    // If there's blip reference then focus on that blip.
+    String documentId = waveRef.getDocumentId();
+    if (documentId != null) {
+      ModelAsViewProvider views = two.getModelAsViewProvider();
+      BlipQueueRenderer blipQueue = two.getBlipQueue();
+      ConversationView wave = two.getConversations();
+      blipQueue.flush();
+      // Find conversation
+      Conversation conversation;
+      if (waveRef.hasWaveletId()) {
+        String id = ModernIdSerialiser.INSTANCE.serialiseWaveletId(waveRef.getWaveletId());
+        conversation = wave.getConversation(id);
+      } else {
+        // Unspecified wavelet means root.
+        conversation = wave.getRoot();
+      }
+      if (conversation != null) {
+        // Find selected blip.
+        ConversationBlip blip = wave.getRoot().getBlip(documentId);
+        if (blip != null) {
+          BlipView blipUi = views.getBlipView(blip);
+          if (blipUi != null) {
+            two.getStageOne().getFocusFrame().focus(blipUi);
+          }
+        }
+      }
+    }
   }
 
   public void destroy() {
@@ -188,66 +246,7 @@ public class KuneStagesProvider extends Stages {
    *         given provider.
    */
   @SuppressWarnings("unchecked") // HALT is safe as a holder for any type
-  private <T> AsyncHolder<T> haltIfClosed(final AsyncHolder<T> provider) {
+  private <T> AsyncHolder<T> haltIfClosed(AsyncHolder<T> provider) {
     return closed ? (AsyncHolder<T>) HALT : provider;
-  }
-
-  private void handleExistingWave(final StageThree three) {
-    // If there's blip reference then focus on that blip.
-    final String documentId = waveRef.getDocumentId();
-    if (documentId != null) {
-      final ModelAsViewProvider views = two.getModelAsViewProvider();
-      final BlipQueueRenderer blipQueue = two.getBlipQueue();
-      final ConversationView wave = two.getConversations();
-      blipQueue.flush();
-      // Find conversation
-      Conversation conversation;
-      if (waveRef.hasWaveletId()) {
-        final String id = ModernIdSerialiser.INSTANCE.serialiseWaveletId(waveRef.getWaveletId());
-        conversation = wave.getConversation(id);
-      } else {
-        // Unspecified wavelet means root.
-        conversation = wave.getRoot();
-      }
-      if (conversation != null) {
-        // Find selected blip.
-        final ConversationBlip blip = wave.getRoot().getBlip(documentId);
-        if (blip != null) {
-          final BlipView blipUi = views.getBlipView(blip);
-          if (blipUi != null) {
-            two.getStageOne().getFocusFrame().focus(blipUi);
-          }
-        }
-      }
-    }
-  }
-
-  private void initNewWave(final StageThree three) {
-    // Do the new-wave flow.
-    final ModelAsViewProvider views = two.getModelAsViewProvider();
-    final BlipQueueRenderer blipQueue = two.getBlipQueue();
-    final ConversationView wave = two.getConversations();
-
-    // Force rendering to finish.
-    blipQueue.flush();
-    final BlipView blipUi = views.getBlipView(wave.getRoot().getRootThread().getFirstBlip());
-    three.getEditActions().startEditing(blipUi);
-  }
-
-  private void onStageThreeLoaded(final StageThree x, final Accessor<StageThree> whenReady) {
-    if (closed) {
-      // Stop the loading process.
-      return;
-    }
-    three = x;
-    if (isNewWave) {
-      initNewWave(x);
-    } else {
-      handleExistingWave(x);
-    }
-    wave = new WaveContext(
-        two.getWave(), two.getConversations(), two.getSupplement(), two.getReadMonitor());
-    waveStore.add(wave);
-    whenReady.use(x);
   }
 }

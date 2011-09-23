@@ -50,8 +50,6 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
   Provider<KuneProperties> kuneProperties;
   @Inject
   Provider<HttpServletRequest> requestProvider;
-  @Inject
-  Provider<SessionService> sessionServiceProvider;
   private Group siteGroup;
   @Inject
   UserSessionManager userSessionManager;
