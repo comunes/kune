@@ -45,7 +45,7 @@ public class UnJoinFromCurrentGroupAction extends SNRolAction {
     super(stateManager, session, i18n, res, snServiceProvider, rightsClientManager, AccessRolDTO.Editor,
         true, false, true);
     putValue(NAME, i18n.t("Leave this group"));
-    putValue(SHORT_DESCRIPTION, i18n.t("Do not participate anymore in this group"));
+    putValue(TOOLTIP, i18n.t("Do not participate anymore in this group"));
     putValue(Action.SMALL_ICON, res.del());
     putValue(Action.STYLES, "k-sn-join");
   }

@@ -87,7 +87,7 @@ public interface Action extends ActionListener {
    * A key to access the short description for the action (the short description
    * is typically used as the tool tip text).
    */
-  String SHORT_DESCRIPTION = "ShortDescription";
+  String TOOLTIP = "ShortDescription";
 
   /**
    * A key to access the icon for the action.
@@ -129,7 +129,7 @@ public interface Action extends ActionListener {
   /**
    * Sets the value associated with the specified key and sends a
    * {@link PropertyChangeEvent} to all registered listeners. The standard keys
-   * are defined in this interface: {@link #NAME}, {@link #SHORT_DESCRIPTION},
+   * are defined in this interface: {@link #NAME}, {@link #TOOLTIP},
    * {@link #LONG_DESCRIPTION}, {@link #SMALL_ICON}, {@link #ACTION_COMMAND_KEY}
    * , {@link #ACCELERATOR_KEY} and {@link #MNEMONIC_KEY}. Any existing value
    * associated with the key will be overwritten.

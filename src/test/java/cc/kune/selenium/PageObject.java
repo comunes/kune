@@ -19,31 +19,76 @@
  */
 package cc.kune.selenium;
 
+import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver.Navigation;
+import org.openqa.selenium.WebDriver.Options;
+import org.openqa.selenium.WebDriver.TargetLocator;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ByIdOrName;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
 
 public abstract class PageObject {
-  protected static final String GWTDEV = "gwt-debug-";
   private static final Log LOG = LogFactory.getLog(PageObject.class.getName());
   private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
 
   @Inject
   private WebDriver webdriver;
 
-  protected WebElement findElement(final By by) {
-    return getWebDriver().findElement(by);
+  protected void clearField(final WebElement elem) {
+    elem.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
   }
 
-  private WebDriver getWebDriver() {
+  public WebElement findElement(final By by) {
+    return webdriver.findElement(by);
+  }
+
+  public List<WebElement> findElements(final By by) {
+    return webdriver.findElements(by);
+  }
+
+  public WebElement getById(final String id) {
+    return webdriver.findElement(By.id(UIObject.DEBUG_ID_PREFIX + id));
+  }
+
+  public String getCurrentUrl() {
+    return webdriver.getCurrentUrl();
+  }
+
+  public String getTitle() {
+    return webdriver.getTitle();
+  }
+
+  protected WebDriver getWebDriver() {
     return webdriver;
+  }
+
+  public String getWindowHandle() {
+    return webdriver.getWindowHandle();
+  }
+
+  public Set<String> getWindowHandles() {
+    return webdriver.getWindowHandles();
+  }
+
+  public boolean isElementPresent(final String id) {
+    final Wait<WebDriver> wait = new WebDriverWait(webdriver, 5);
+    final WebElement element = wait.until(visibilityOfElementLocated(By.id(id)));
+    return element != null;
   }
 
   public boolean isPresent(final WebElement element) {
@@ -54,6 +99,44 @@ public abstract class PageObject {
     } catch (final NoSuchElementException e) {
       return false;
     }
+  }
+
+  public boolean isTextPresent(final String text) {
+    return webdriver.findElement(By.tagName("body")).getText().contains(text);
+  }
+
+  public Options manage() {
+    return webdriver.manage();
+  }
+
+  public void moveMouseTo(final WebElement element) {
+    final Actions actions = new Actions(webdriver);
+    actions.moveToElement(element);
+  }
+
+  public Navigation navigate() {
+    return webdriver.navigate();
+  }
+
+  public void quit() {
+    webdriver.quit();
+  }
+
+  public TargetLocator switchTo() {
+    return webdriver.switchTo();
+  }
+
+  public ExpectedCondition<WebElement> visibilityOfElementLocated(final By locator) {
+    return new ExpectedCondition<WebElement>() {
+      @Override
+      public WebElement apply(final WebDriver driver) {
+        final WebElement toReturn = driver.findElement(locator);
+        if (toReturn.isDisplayed()) {
+          return toReturn;
+        }
+        return null;
+      }
+    };
   }
 
   /**

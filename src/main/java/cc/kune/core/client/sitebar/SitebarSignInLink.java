@@ -46,6 +46,8 @@ public class SitebarSignInLink extends ButtonDescriptor {
       super();
       this.stateManager = stateManager;
       putValue(Action.NAME, i18n.t("Sign in to collaborate"));
+      putValue(Action.TOOLTIP,
+          i18n.t("Please sign in or register to get full access to this site tools and contents"));
     }
 
     @Override

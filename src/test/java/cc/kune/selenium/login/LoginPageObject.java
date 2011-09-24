@@ -25,53 +25,27 @@ import org.openqa.selenium.support.FindBy;
 
 import cc.kune.core.client.auth.SignInForm;
 import cc.kune.core.client.auth.SignInPanel;
-import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
-import cc.kune.core.client.sitebar.SitebarSignInLink;
-import cc.kune.core.client.sitebar.SitebarSignOutLink;
-import cc.kune.selenium.PageObject;
-import cc.kune.selenium.tools.I18nHelper;
 import cc.kune.selenium.tools.SeleniumConstants;
 
-import com.calclab.hablar.login.client.LoginMessages;
+public class LoginPageObject extends AbstractLoginObject {
 
-public class LoginPageObject extends PageObject {
-
-  private final I18nHelper i18n;
-  @FindBy(id = SignInForm.PASSWORD_FIELD_ID + "-input")
+  @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.CREATE_ONE)
+  protected WebElement createOneLink;
+  @FindBy(id = SignInForm.PASSWORD_FIELD_ID + SeleniumConstants.INPUT)
   private WebElement passwd;
-  @FindBy(id = GWTDEV + SignInPanel.SIGN_IN_BUTTON_ID)
+  @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.SIGN_IN_BUTTON_ID)
   private WebElement signInButton;
-  @FindBy(id = GWTDEV + SitebarSignInLink.SITE_SIGN_IN)
-  private WebElement signInLink;
-  @FindBy(id = GWTDEV + SitebarSignOutLink.SITE_SIGN_OUT)
-  private WebElement signOutLink;
-  @FindBy(id = SignInForm.USER_FIELD_ID + "-input")
+  @FindBy(id = SignInForm.USER_FIELD_ID + SeleniumConstants.INPUT)
   private WebElement user;
-  @FindBy(id = GWTDEV + SiteUserOptionsPresenter.LOGGED_USER_MENU_ID)
-  private WebElement userMenu;
 
   public LoginPageObject() {
-    i18n = new I18nHelper(LoginMessages.class);
-  }
-
-  public void assertIsConnectedAs(final String user) {
-    waitFor(userMenu, user);
-  }
-
-  public void assertIsDisconnected() {
-    try {
-      signOutLink.click();
-    } catch (final Exception e) {
-    }
-    waitFor(signInLink);
+    // i18n = new I18nHelper(LoginMessages.class);
   }
 
   public void fillSigInInForm(final String username, final String password, final boolean withReturn) {
-    user.clear();
-    passwd.clear();
-    user.clear();
-    passwd.clear();
+    clearField(user);
     user.sendKeys(username);
+    clearField(passwd);
     passwd.sendKeys(password);
     if (withReturn) {
       passwd.sendKeys(Keys.RETURN);
@@ -88,27 +62,19 @@ public class LoginPageObject extends PageObject {
     return getHeader();
   }
 
-  public void logout() {
-    signOutLink.click();
-    assertIsDisconnected();
-  }
-
   public void signIn(final String username, final String password) {
     signIn(username, password, true);
   }
 
   public void signIn(final String username, final String password, final boolean withReturn) {
     assertIsDisconnected();
+    moveMouseTo(signInLink);
     signInLink.click();
     fillSigInInForm(username, password, withReturn);
   }
 
   public void signInDefUser() {
-    signIn(SeleniumConstants.USERNAME, SeleniumConstants.PASSWD, false);
-  }
-
-  public void signOut() {
-    logout();
+    signIn(SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_PASSWD, false);
   }
 
 }

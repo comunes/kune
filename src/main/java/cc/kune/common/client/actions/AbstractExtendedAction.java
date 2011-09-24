@@ -40,17 +40,17 @@ public abstract class AbstractExtendedAction extends AbstractAction {
     public AbstractExtendedAction(final String text, final String tooltip, final String iconCls) {
         super();
         super.putValue(Action.NAME, text);
-        super.putValue(Action.SHORT_DESCRIPTION, tooltip);
+        super.putValue(Action.TOOLTIP, tooltip);
         super.putValue(Action.SMALL_ICON, iconCls);
     }
 
     public AbstractExtendedAction withIcon(final ImageResource icon) {
-        super.putValue(Action.SHORT_DESCRIPTION, icon);
+        super.putValue(Action.TOOLTIP, icon);
         return this;
     }
 
     public AbstractExtendedAction withIconCls(final String icon) {
-        super.putValue(Action.SHORT_DESCRIPTION, icon);
+        super.putValue(Action.TOOLTIP, icon);
         return this;
     }
 
@@ -60,7 +60,7 @@ public abstract class AbstractExtendedAction extends AbstractAction {
     }
 
     public AbstractExtendedAction withToolTip(final String tooltip) {
-        super.putValue(Action.SHORT_DESCRIPTION, tooltip);
+        super.putValue(Action.TOOLTIP, tooltip);
         return this;
     }
 }

@@ -17,19 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.selenium.tools;
+package cc.kune.selenium;
 
-public final class SeleniumConstants {
-  public static final String FIREFOX_PROFILE_NAME = "selenium";
-  public static final String GWTDEV = "gwt-debug-";
-  public static final String INPUT = "-input";
-  public static final int TIMEOUT = 15;
-  public static final String USER_EMAIL = "admin@example.org";
-  public static final String USER_LONGNAME = "Administrator";
-  public static final String USER_PASSWD = "easyeasy";
-  public static final String USER_SHORNAME = "admin";
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-  SeleniumConstants() {
-    // Final class
+import com.google.inject.AbstractModule;
+
+public abstract class PageObjectModule extends AbstractModule {
+  protected <T> void registerPageObject(final Class<T> componentType, final T object,
+      final ElementLocatorFactory locator) {
+    bind(componentType).toInstance(object);
+    PageFactory.initElements(locator, object);
+
   }
 }

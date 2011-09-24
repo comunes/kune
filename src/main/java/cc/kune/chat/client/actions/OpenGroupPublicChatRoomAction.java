@@ -71,7 +71,7 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
       }
     });
     putValue(Action.NAME, i18n.t("Group's public room"));
-    putValue(Action.SHORT_DESCRIPTION, i18n.t("Enter to this group public chat room"));
+    putValue(Action.TOOLTIP, i18n.t("Enter to this group public chat room"));
     putValue(Action.SMALL_ICON, res.groupChat());
     setInviteMembersImpl(false);
   }

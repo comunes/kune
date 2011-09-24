@@ -93,7 +93,7 @@ public class UserMessage extends Composite implements HasText {
     this.closeCallback = closeCallback;
     initWidget(uiBinder.createAndBindUi(this));
     if (TextUtils.notEmpty(id)) {
-      super.ensureDebugId(id);
+      close.ensureDebugId(id);
     }
     if (TextUtils.notEmpty(message)) {
       if (TextUtils.notEmpty(title)) {

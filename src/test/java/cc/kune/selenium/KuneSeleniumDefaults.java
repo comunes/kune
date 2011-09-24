@@ -22,22 +22,23 @@ package cc.kune.selenium;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
+import cc.kune.core.client.auth.AnonUsersManager;
+import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.selenium.login.EntityHeaderPageObject;
 import cc.kune.selenium.login.LoginPageObject;
-import cc.kune.selenium.tools.GenericWebDriver;
+import cc.kune.selenium.login.RegisterPageObject;
 import cc.kune.selenium.tools.SeleniumConstants;
-import cc.kune.selenium.tools.SeleniumModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -45,127 +46,63 @@ import com.google.inject.Injector;
 public class KuneSeleniumDefaults {
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
   public static boolean mustCloseFinally = true;
-  protected EventFiringWebDriver eventFiring;
+  private final String baseUrl;
+  protected final EntityHeaderPageObject entityHeader;
   private final Injector injector;
   protected LoginPageObject login;
-  protected GenericWebDriver webdriver;
+  protected RegisterPageObject register;
+  private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
+    // baseUrl = "http://kune.beta.iepala.es/ws/?locale=en#";
+    baseUrl = "http://127.0.0.1:8888/ws/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
     injector = Guice.createInjector(new SeleniumModule());
-    webdriver = injector.getInstance(GenericWebDriver.class);
+    webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
-    eventFiring = injector.getInstance(EventFiringWebDriver.class);
-    eventFiring.register(new WebDriverEventListener() {
-
-      @Override
-      public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void afterClickOn(final WebElement element, final WebDriver driver) {
-        sleep(500);
-      }
-
-      @Override
-      public void afterFindBy(final By by, final WebElement element, final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void afterNavigateBack(final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void afterNavigateForward(final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void afterNavigateTo(final String url, final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void afterScript(final String script, final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void beforeClickOn(final WebElement element, final WebDriver driver) {
-        sleep(500);
-      }
-
-      @Override
-      public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void beforeNavigateBack(final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void beforeNavigateForward(final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void beforeNavigateTo(final String url, final WebDriver driver) {
-        // TODO Auto-generated method stub
-        sleep(500);
-      }
-
-      @Override
-      public void beforeScript(final String script, final WebDriver driver) {
-        // TODO Auto-generated method stub
-
-      }
-
-      @Override
-      public void onException(final Throwable throwable, final WebDriver driver) {
-        // TODO Auto-generated method stub
-
-      }
-    });
+    register = injector.getInstance(RegisterPageObject.class);
+    entityHeader = injector.getInstance(EntityHeaderPageObject.class);
     final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     PageFactory.initElements(locator, login);
+    PageFactory.initElements(locator, register);
+    PageFactory.initElements(locator, entityHeader);
+  }
+
+  @BeforeSuite
+  public void beforeClass() {
+    resize();
+    LOG.info("Going home");
+    home();
+    webdriver.findElement(By.id(SeleniumConstants.GWTDEV + AnonUsersManager.ANON_MESSAGE_CLOSE_ICON)).click();
+  }
+
+  @BeforeMethod
+  public void beforeMethods(final ITestContext context) {
+  }
+
+  public void close() {
+    webdriver.close();
   }
 
   @AfterSuite
   public void closeBrowser() {
     // We try to only open one window for all our selenium tests
     if (mustCloseFinally) {
-      webdriver.close();
+      close();
     }
   }
 
   @DataProvider(name = "correctlogin")
   public Object[][] createCorrectLogin() {
     // The default correct user/password used in tests
-    return new Object[][] { { SeleniumConstants.USERNAME, SeleniumConstants.PASSWD }, };
+    return new Object[][] { { SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_PASSWD } };
   }
 
-  // public void moveMouseAt(final Point point) {
-  // webtester.moveMouseAt(point);
-  // }
+  @DataProvider(name = "correctregister")
+  public Object[][] createCorrectRegister() {
+    // The default correct user/password used in tests
+    return new Object[][] { { SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_LONGNAME,
+        SeleniumConstants.USER_PASSWD, SeleniumConstants.USER_EMAIL } };
+  }
 
   @DataProvider(name = "incorrectlogin")
   public Object[][] createIncorrectLogin() {
@@ -174,44 +111,35 @@ public class KuneSeleniumDefaults {
         { "test1@localhost", "test" }, { "", "" } };
   }
 
-  @BeforeMethod
-  public void setupSeleniumModule(final ITestContext context) {
+  public void get(final String url) {
+    webdriver.get(url);
+  }
 
-    // if (!Suco.getComponents().hasProvider(WebDriver.class)) {
-    // Suco.install(new SeleniumModule());
-    // }
-    if (webdriver == null) {
-      // final ChromeDriver driver = new ChromeDriver();
-      // // final HtmlUnitDriver driver = new HtmlUnitDriver(true);
-      //
-      // // final ProfilesIni allProfiles = new ProfilesIni();
-      // // final FirefoxProfile profile =
-      // // allProfiles.getProfile(SeleniumConstants.FIREFOX_PROFILE_NAME);
-      // // final FirefoxDriver driver = new FirefoxDriver(profile);
-      //
-      // locator = new AjaxElementLocatorFactory(driver,
-      // SeleniumConstants.TIMEOUT);
-      // webtester = new GenericWebTester(driver,
-      // "http://kune.beta.iepala.es/ws/?locale=en#");
-      // // webtester = Suco.get(GenericWebTester.class);
-      // // login = Suco.get(LoginPageObject.class);
-      // login = new LoginPageObject();
-      // PageFactory.initElements(locator, login);
-      // driver.get("http://kune.beta.iepala.es/ws/?locale=en#");
-      // roster = Suco.get(RosterPageObject.class);
-      // openChat = Suco.get(OpenChatPageObject.class);
-      // search = Suco.get(SearchPageObject.class);
-      // chat = Suco.get(ChatPageObject.class);
-      // editBuddy = Suco.get(EditBuddyPageObject.class);
-      // groupChat = Suco.get(GroupChatPageObject.class);
-      // userPage = Suco.get(UserPageObject.class);
-      // otherVCardPage = Suco.get(OtherVCardPageObject.class);
-      // copyToClipboard = Suco.get(CopyToClipboardPageObject.class);
-      // openGroupChat = Suco.get(OpenGroupChatPageObject.class);
-    }
-    LOG.info("Going home");
+  public String getPageSource() {
+    return webdriver.getPageSource();
+  }
 
-    webdriver.home();
+  public void gotoToken(final StateToken token) {
+    get(baseUrl + token);
+  }
+
+  public void gotoToken(final String token) {
+    get(baseUrl + token);
+  }
+
+  public void home() {
+    assert baseUrl != null;
+    webdriver.get(baseUrl);
+  }
+
+  public void open(final String url) {
+    webdriver.get(url);
+  }
+
+  public void resize() {
+    final JavascriptExecutor js = (JavascriptExecutor) webdriver;
+    // 1024,769
+    js.executeScript("window.resizeTo(840,770); window.moveTo(0,0);");
   }
 
   public void sleep(final int milliseconds) {

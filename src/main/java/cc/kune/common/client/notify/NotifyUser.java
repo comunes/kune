@@ -61,11 +61,9 @@ public class NotifyUser {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, title, closeable));
   }
 
-  public static void error(final String message, final String title, final String id,
+  public static void error(final String title, final String message, final String id,
       final boolean closeable) {
-    final UserNotifyEvent event = new UserNotifyEvent(NotifyLevel.error, message, id, closeable);
-    event.setId(id);
-    eventBus.fireEvent(event);
+    sendEventImpl(title, message, id, closeable, NotifyLevel.error);
   }
 
   public static void hideProgress() {
@@ -82,6 +80,11 @@ public class NotifyUser {
 
   public static void info(final String message, final boolean closeable) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message, closeable));
+  }
+
+  public static void info(final String title, final String message, final String id,
+      final boolean closeable) {
+    sendEventImpl(title, message, id, closeable, NotifyLevel.info);
   }
 
   public static void init(final EventBus eventBus, final I18nTranslationService i18n) {
@@ -104,6 +107,13 @@ public class NotifyUser {
 
   public static void logError(final String message) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.log, message));
+  }
+
+  private static void sendEventImpl(final String title, final String message, final String id,
+      final boolean closeable, final NotifyLevel level) {
+    final UserNotifyEvent event = new UserNotifyEvent(level, title, message, closeable);
+    event.setId(id);
+    eventBus.fireEvent(event);
   }
 
   public static void showAlertMessage(final String title, final String message) {

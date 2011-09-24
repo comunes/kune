@@ -255,7 +255,7 @@ public class ChatClientDefault implements ChatClient {
       chatIcon.setId(CHAT_CLIENT_ICON_ID);
       chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
       chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
-      chatIcon.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
+      chatIcon.putValue(Action.TOOLTIP, i18n.t("Show/hide the chat window"));
       final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
       shorcutRegister.put(shortcut, action);
       action.setShortcut(shortcut);

@@ -40,6 +40,9 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
       super();
       this.stateManager = stateManager;
       putValue(Action.NAME, i18n.t("Create New Group"));
+      putValue(Action.TOOLTIP,
+          i18n.t("Create a new group for your initiative or organization "
+              + "(NGO, collective, academic group...)"));
     }
 
     @Override

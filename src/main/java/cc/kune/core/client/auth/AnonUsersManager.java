@@ -15,6 +15,8 @@ import com.google.inject.Inject;
 
 public class AnonUsersManager {
 
+  public static final String ANON_MESSAGE_CLOSE_ICON = "k-anon-um-close-btn";
+
   @Inject
   public AnonUsersManager(final Session session, final CookiesManager cookiesManager,
       final I18nTranslationService i18n) {
@@ -31,11 +33,12 @@ public class AnonUsersManager {
             final String signin = TextUtils.generateHtmlLink("#" + SiteTokens.SIGNIN,
                 i18n.tWithNT("sign in", "register, in lowercase"), false);
             NotifyUser.info(
+                "",
                 i18n.tWithNT(
                     "You did not sign-in, so you can just see some public contents in this website, "
                         + "but not edit or collaborate with others. Please [%s] or [%s] in order to get full access to this site tools and contents",
                     "This will be something like 'Please register or sign in', but instead of %s some links",
-                    register, signin), true);
+                    register, signin), ANON_MESSAGE_CLOSE_ICON, true);
           } else {
             if (Boolean.valueOf(anonCookie)) {
               // Registered already: we set the cookie for some big period again

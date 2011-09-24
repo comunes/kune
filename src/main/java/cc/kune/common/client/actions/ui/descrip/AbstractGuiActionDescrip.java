@@ -253,7 +253,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public String toString() {
     final String name = (String) getValue(Action.NAME);
-    final String tooltip = (String) getValue(Action.SHORT_DESCRIPTION);
+    final String tooltip = (String) getValue(Action.TOOLTIP);
     return "[GuiActionDescrip: " + getClass().getName() + (name == null ? "" : " " + name)
         + (tooltip == null ? "" : " " + tooltip) + "]";
   }
@@ -308,7 +308,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
   @Override
   public GuiActionDescrip withToolTip(final String tooltip) {
-    putValue(Action.SHORT_DESCRIPTION, tooltip);
+    putValue(Action.TOOLTIP, tooltip);
     return this;
   }
 }

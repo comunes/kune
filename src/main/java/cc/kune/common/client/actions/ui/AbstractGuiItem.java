@@ -75,7 +75,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   private void configureProperties() {
     setText((String) (descriptor.getValue(Action.NAME)));
-    setToolTipText((String) (descriptor.getValue(Action.SHORT_DESCRIPTION)));
+    setToolTipText((String) (descriptor.getValue(Action.TOOLTIP)));
     setIcon(descriptor.getValue(Action.SMALL_ICON));
     setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
     setVisible((Boolean) descriptor.getValue(GuiActionDescrip.VISIBLE));
@@ -97,7 +97,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
           setText((String) newValue);
         } else if (event.getPropertyName().equals(Action.SMALL_ICON)) {
           setIcon(newValue);
-        } else if (event.getPropertyName().equals(Action.SHORT_DESCRIPTION)) {
+        } else if (event.getPropertyName().equals(Action.TOOLTIP)) {
           setToolTipText((String) newValue);
         } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
           setVisible((Boolean) newValue);
