@@ -1,0 +1,108 @@
+package cc.kune.core.client.sub;
+
+import org.adamtacy.client.ui.effects.events.EffectCompletedEvent;
+import org.adamtacy.client.ui.effects.events.EffectCompletedHandler;
+import org.adamtacy.client.ui.effects.examples.Show;
+import org.adamtacy.client.ui.effects.examples.SlideRight;
+
+import cc.kune.core.client.sub.SubtitlesManager.SubtitlesView;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.ViewImpl;
+
+public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
+
+  interface SubtitlesWidgetUiBinder extends UiBinder<Widget, SubtitlesWidget> {
+  }
+
+  public static final String SUBTITLE_MANAGER_ID = "k-subt-widget";
+
+  private static SubtitlesWidgetUiBinder uiBinder = GWT.create(SubtitlesWidgetUiBinder.class);
+
+  @UiField
+  InlineLabel description;
+  private final PopupPanel popup;
+  private boolean showing;
+  @UiField
+  InlineLabel title;
+  private final Widget widget;
+
+  public SubtitlesWidget() {
+    popup = new PopupPanel(false, false);
+    popup.ensureDebugId(SUBTITLE_MANAGER_ID);
+    widget = uiBinder.createAndBindUi(this);
+    popup.addDomHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        if (showing) {
+          final SlideRight slideAtEnd = new SlideRight(popup.getElement());
+          slideAtEnd.invert();
+          slideAtEnd.setDuration(2);
+          slideAtEnd.play();
+          // final Fade fadeAtEnd = new Fade(popup.getElement());
+          // fadeAtEnd.setDuration(2);
+          // fadeAtEnd.play();
+          slideAtEnd.addEffectCompletedHandler(new EffectCompletedHandler() {
+            @Override
+            public void onEffectCompleted(final EffectCompletedEvent event) {
+              popup.hide();
+            }
+          });
+          showing = false;
+        }
+      }
+    }, ClickEvent.getType());
+    Window.addResizeHandler(new ResizeHandler() {
+      @Override
+      public void onResize(final ResizeEvent event) {
+        setSize(event.getWidth(), event.getHeight());
+      }
+    });
+  }
+
+  @Override
+  public Widget asWidget() {
+    return popup;
+  }
+
+  @Override
+  public void setDescription(final String descr) {
+    description.setText(descr);
+  }
+
+  private void setSize(final int width, final int height) {
+    popup.setSize(width + "px", height + "px");
+  }
+
+  @Override
+  public void setTitleText(final String text) {
+    title.setText(text);
+  }
+
+  @Override
+  public void show() {
+    popup.setWidget(widget);
+    setSize(Window.getClientWidth(), Window.getClientHeight());
+    popup.show();
+    final Show showAtIni = new Show(popup.getElement());
+    showAtIni.setDuration(3);
+    showAtIni.play();
+    final SlideRight slideAtIni = new SlideRight(popup.getElement());
+    slideAtIni.setDuration(3);
+    slideAtIni.play();
+    popup.sinkEvents(Event.MOUSEEVENTS);
+    this.showing = true;
+  }
+
+}

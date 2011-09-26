@@ -20,7 +20,7 @@
 package cc.kune.chat.client;
 
 import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
-import cc.kune.chat.client.snd.SndClickEvent;
+import cc.kune.core.client.events.SndClickEvent;
 
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.signals.client.SignalPreferences;

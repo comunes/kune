@@ -102,6 +102,8 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateManagerDefault;
 import cc.kune.core.client.state.TokenMatcher;
+import cc.kune.core.client.sub.SubtitlesManager;
+import cc.kune.core.client.sub.SubtitlesWidget;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.client.ws.entheader.EntityHeader;
@@ -175,6 +177,8 @@ public class CoreGinModule extends ExtendedGinModule {
         RegisterPresenter.RegisterProxy.class);
     bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class,
         UserConfirmPanel.class, UserConfirmPresenter.UserConfirmProxy.class);
+    bindPresenter(SubtitlesManager.class, SubtitlesManager.SubtitlesView.class,
+        SubtitlesWidget.class, SubtitlesManager.SubtitlesProxy.class);
 
     bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
     bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);

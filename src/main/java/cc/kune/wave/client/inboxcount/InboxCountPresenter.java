@@ -7,8 +7,8 @@ import org.waveprotocol.box.webclient.search.Digest;
 import org.waveprotocol.box.webclient.search.Search;
 import org.waveprotocol.box.webclient.search.Search.Listener;
 
-import cc.kune.chat.client.snd.SndClickEvent;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
+import cc.kune.core.client.events.SndClickEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInOrSignOutEvent;
 import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;

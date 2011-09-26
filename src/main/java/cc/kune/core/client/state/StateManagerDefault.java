@@ -266,8 +266,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             SpaceConfEvent.fire(eventBus, Space.groupSpace, sndToken);
             SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(sndToken));
             onHistoryChanged(new StateToken(sndToken));
+          } else if (firstToken.equals(SiteTokens.SUBTITLES)) {
+            siteTokens.get(SiteTokens.SUBTITLES).onHistoryToken(
+                tokenMatcher.getRedirect(newHistoryToken).getRight());
           } else if (firstToken.equals(SiteTokens.NEWGROUP)) {
-            siteTokens.get(SiteTokens.NEWGROUP).onHistoryToken();
+            siteTokens.get(SiteTokens.NEWGROUP).onHistoryToken(newHistoryToken);
           } else if (firstToken.equals(SiteTokens.SIGNIN)) {
             if (session.isLogged()) {
               // We are logged, then redirect:
@@ -275,7 +278,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
               processHistoryToken(sndToken);
             } else {
               // We have to loggin
-              siteTokens.get(SiteTokens.SIGNIN).onHistoryToken();
+              siteTokens.get(SiteTokens.SIGNIN).onHistoryToken(newHistoryToken);
             }
           }
         } else if (tokenMatcher.isWaveToken(newHistoryToken)) {
@@ -312,7 +315,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
           // SpaceSelectEvent.fire(eventBus, Space.groupSpace);
         }
         // Fire the listener of this #hash token
-        tokenListener.onHistoryToken();
+        tokenListener.onHistoryToken(newHistoryToken);
       }
     } else {
       resumedHistoryToken = newHistoryToken;

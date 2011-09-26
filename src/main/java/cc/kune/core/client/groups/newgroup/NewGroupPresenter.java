@@ -86,7 +86,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     this.groupOptions = groupOptions;
     stateManager.addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
       @Override
-      public void onHistoryToken() {
+      public void onHistoryToken(final String token) {
         doNewGroup();
       }
     });

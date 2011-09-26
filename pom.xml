@@ -115,30 +115,6 @@
       <url>http://kune.ourproject.org/mavenrepo/</url>
     </repository>
     <repository>
-      <id>xwiki-releases</id>
-      <name>XWiki Maven2 Remote Repository for Releases</name>
-      <url>http://maven.xwiki.org/releases</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>xwiki</id>
-      <name>XWiki Repository</name>
-      <url>http://maven.xwiki.org/snapshots</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </snapshots>
-    </repository>
-    <repository>
       <id>tigase</id>
       <name>Tigase Repository</name>
       <url>http://maven.tigase.org</url>
@@ -271,16 +247,6 @@
       <artifactId>gxt-uibinder</artifactId> <version>0.6</version> </dependency> -->
     <!-- cc -->
     <dependency>
-      <groupId>com.gwtext</groupId>
-      <artifactId>gwtext</artifactId>
-      <version>2.0.5</version>
-    </dependency>
-    <dependency>
-      <groupId>com.gwtextux</groupId>
-      <artifactId>gwtextux</artifactId>
-      <version>0.4.0.924</version>
-    </dependency>
-    <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
       <artifactId>gwt-log</artifactId>
       <version>3.0.1</version>
@@ -307,14 +273,6 @@
       <groupId>jmagick</groupId>
       <artifactId>jmagick</artifactId>
       <version>6.2.6-0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-web-gwt-dom</artifactId>
-      <version>2.3-rc-1</version>
-      <!-- <version>2.0-SNAPSHOT-g164</version> -->
-      <!-- <version>2.0-SNAPSHOT</version> -->
-      <!-- <version>2.0-SNAPSHOT-g20s</version> -->
     </dependency>
     <!-- xmpp -->
     <dependency>

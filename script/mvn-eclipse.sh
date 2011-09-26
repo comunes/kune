@@ -1,3 +1,4 @@
+#mvn eclipse:eclipse -Dgwt.compiler.skip=true -o
 mvn eclipse:eclipse -Dgwt.compiler.skip=true
 RESULT=$?
 perl -p -i -e 's/<\/classpath>//g' .classpath

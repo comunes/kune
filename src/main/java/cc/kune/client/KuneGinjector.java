@@ -49,13 +49,14 @@ import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenMatcher;
+import cc.kune.core.client.sub.SubtitlesManager;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsGinModule;
 import cc.kune.docs.client.DocsGinjector;
-import cc.kune.events.client.EventsGinjector;
 import cc.kune.events.client.EventsGinModule;
+import cc.kune.events.client.EventsGinjector;
 import cc.kune.gspace.client.GSpaceGinModule;
 import cc.kune.gspace.client.GSpaceGinjector;
 import cc.kune.lists.client.ListsGinModule;
@@ -143,6 +144,8 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
 
   StateManager getStateManager();
 
+  AsyncProvider<SubtitlesManager> getSubtitlesPresenter();
+
   TokenMatcher getTokenMatcher();
 
   AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
@@ -152,4 +155,5 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
   WaveParts getWaveParts();
 
   XMLActionsParser getXmlActionsParser();
+
 }

@@ -19,6 +19,8 @@
  */
 package cc.kune.chat.client.snd;
 
+import cc.kune.core.client.events.SndClickEvent;
+
 import com.calclab.hablar.signals.sound.client.SoundManager;
 import com.calclab.hablar.signals.sound.client.SoundSignalsConfig;
 import com.google.gwt.event.shared.EventBus;
