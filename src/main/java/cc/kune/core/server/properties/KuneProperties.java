@@ -49,6 +49,9 @@ public interface KuneProperties {
   String SITE_LOGO_URL = "kune.sitelogourl";
   String SITE_NAME = "kune.default.site.name";
   String SITE_SHORTNAME = "kune.default.site.shortName";
+  String SITE_SMTP_DEFAULT_FROM = "kune.site.smtp.defaultfrom";
+  String SITE_SMTP_HOST = "kune.site.smtp.host";
+  String SITE_SMTP_SKIP = "kune.site.smtp.skip";
   String SITE_URL = "kune.siteurl";
   String SITE_USER_AVAILABLE_TOOLS = "kune.tools.userSiteAvailableTools";
   String SITE_USER_REGIST_ENABLED_TOOLS = "kune.tools.userRegisEnabledTools";

@@ -44,6 +44,8 @@ import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
+import cc.kune.core.server.mail.MailService;
+import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
@@ -80,6 +82,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final I18nTranslationService i18n;
   private final KuneWaveService kuneWaveManager;
   private final I18nLanguageManager languageManager;
+  private final MailService mailService;
   private final ParticipantUtils participantUtils;
   private final KuneBasicProperties properties;
   private final UserFinder userFinder;
@@ -94,7 +97,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final I18nTranslationService i18n, final CustomUserRegistrationServlet waveUserRegister,
       final AccountStore waveAccountStore, final KuneWaveService kuneWaveManager,
       final ParticipantUtils participantUtils, final KuneBasicProperties properties,
-      final GroupManager groupManager) {
+      final GroupManager groupManager, final MailService mailService) {
     super(provider, User.class);
     this.userFinder = finder;
     this.languageManager = languageManager;
@@ -108,6 +111,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.participantUtils = participantUtils;
     this.properties = properties;
     this.groupManager = groupManager;
+    this.mailService = mailService;
   }
 
   private void checkIfEmailAreInUse(final String email) {
@@ -174,6 +178,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       // Is this necessary? try to remove (used when we were setting the def
       // content
       // contentManager.save(userGroup.getDefaultContent());
+      mailService.sendPlain(new FormatedString("Welcome", ""), new FormatedString("welcome"), email);
       return user;
     } catch (final RuntimeException e) {
       try {

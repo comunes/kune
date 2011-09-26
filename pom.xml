@@ -235,6 +235,14 @@
           <groupId>org.springframework</groupId>
           <artifactId>spring-web</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>com.gwtplatform</groupId>
+          <artifactId>gwtp-crawler-service</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.gwtplatform</groupId>
+          <artifactId>gwtp-crawler</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -638,6 +646,12 @@
       <version>0.6.3-compat</version>
     </dependency>
     <!-- end gwtupload -->
+    <!-- others -->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.4</version>
+    </dependency>
   </dependencies>
 
   <!-- <dependency> -->
@@ -958,7 +972,8 @@
           </modules>
           <copyWebapp>true</copyWebapp>
           <compileReport>false</compileReport>
-          <localWorkers>1</localWorkers><!-- Using all workers can temporarily hang the mouse and isn't much faster -->
+          <localWorkers>1</localWorkers><!-- Using all workers can temporarily
+            hang the mouse and isn't much faster -->
           <extraJvmArgs>-Xmx1024m</extraJvmArgs>
         </configuration>
         <executions>

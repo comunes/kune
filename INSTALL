@@ -289,3 +289,16 @@ a2enmod proxy_http
         Allow from all
     </Location>
 </VirtualHost>
+
+==Appendix C: Configure your SMTP mail server==
+
+You should configure a SMTP server for use by Kune. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance test something like:
+
+ echo "Bests," | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar 
+
+http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#ProtocolSMTP
+http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#JavaMailSending
+
+And: 
+http://javamail.kenai.com/nonav/javadocs/com/sun/mail/smtp/package-summary.html
+for more specific configuration parameters that maybe you need with your smtp server.

@@ -3,13 +3,14 @@
   <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
   <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
   <classpathentry kind="output" path="target/kune-0.1.0-SNAPSHOT/WEB-INF/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar" sourcepath="M2_REPO/javax/activation/activation/1.1/activation-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar" sourcepath="M2_REPO/javax/transaction/jta/1.1/jta-1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/mail/mail/1.4.4/mail-1.4.4.jar" sourcepath="M2_REPO/javax/mail/mail/1.4.4/mail-1.4.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar" sourcepath="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar" sourcepath="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.6/antlr-2.7.6.jar" sourcepath="M2_REPO/antlr/antlr/2.7.6/antlr-2.7.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/appengine/appengine-api-1.0-sdk/1.3.1/appengine-api-1.0-sdk-1.3.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/avalon-framework/avalon-framework/4.1.3/avalon-framework-4.1.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/box/0.3.2/box-0.3.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/box-src/0.3.2/box-src-0.3.2.jar"/>
@@ -34,7 +35,6 @@
   <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/communication-src/0.3.2/communication-src-0.3.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/concurrencycontrol-src/0.3.2/concurrencycontrol-src-0.3.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/sourceforge/htmlunit/crawl_htmlunit/r5662-gae/crawl_htmlunit-r5662-gae.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.5/cssparser-0.9.5.jar" sourcepath="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.5/cssparser-0.9.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/dozer/dozer/4.0/dozer-4.0.jar" sourcepath="M2_REPO/net/sf/dozer/dozer/4.0/dozer-4.0-sources.jar"/>
@@ -59,7 +59,6 @@
   <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/voices/gwt-voices/gwt-voices/2.0.0/gwt-voices-2.0.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-clients-common/0.5/gwtp-clients-common-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-clients-common/0.5/gwtp-clients-common-0.5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-crawler/0.5/gwtp-crawler-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-crawler/0.5/gwtp-crawler-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-dispatch-client/0.5/gwtp-dispatch-client-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-dispatch-client/0.5/gwtp-dispatch-client-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-dispatch-server/0.5/gwtp-dispatch-server-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-dispatch-server/0.5/gwtp-dispatch-server-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-dispatch-shared/0.5/gwtp-dispatch-shared-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-dispatch-shared/0.5/gwtp-dispatch-shared-0.5-sources.jar"/>
