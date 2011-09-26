@@ -34,6 +34,7 @@ import cc.kune.gspace.client.options.EntityOptionsView;
 import cc.kune.gspace.client.options.logo.EntityUploaderForm;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -47,7 +48,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView {
 
-  public static final String ICON_UPLD_SERVLET = "servlets/EntityBackgroundUploadManager";
+  public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
+      + "servlets/EntityBackgroundUploadManager";
   private final Label backgroundLabel;
   private final Image backImage;
   private final String changeImage;

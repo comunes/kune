@@ -16,7 +16,7 @@ public class I18nTranslateRecomendPanel extends Composite {
   @Inject
   public I18nTranslateRecomendPanel(final I18nTranslationService i18n) {
     tabTitle = new Label(i18n.t("Recommendations"));
-    recommFrame = new Frame("i18n-recom.html");
+    recommFrame = new Frame("ws/i18n-recom.html");
     // recommFrame.setHeight("auto");
     recommFrame.setStyleName("k-i18n-recommend");
     initWidget(recommFrame);

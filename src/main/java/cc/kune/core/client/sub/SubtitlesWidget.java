@@ -5,6 +5,7 @@ import org.adamtacy.client.ui.effects.events.EffectCompletedHandler;
 import org.adamtacy.client.ui.effects.examples.Show;
 import org.adamtacy.client.ui.effects.examples.SlideRight;
 
+import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.sub.SubtitlesManager.SubtitlesView;
 
 import com.google.gwt.core.client.GWT;
@@ -30,12 +31,14 @@ public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
 
   private static SubtitlesWidgetUiBinder uiBinder = GWT.create(SubtitlesWidgetUiBinder.class);
 
+  private SimpleCallback callback;
   @UiField
   InlineLabel description;
   private final PopupPanel popup;
   private boolean showing;
   @UiField
   InlineLabel title;
+
   private final Widget widget;
 
   public SubtitlesWidget() {
@@ -57,6 +60,7 @@ public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
             @Override
             public void onEffectCompleted(final EffectCompletedEvent event) {
               popup.hide();
+              callback.onCallback();
             }
           });
           showing = false;
@@ -91,9 +95,11 @@ public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
   }
 
   @Override
-  public void show() {
+  public void show(final SimpleCallback callback) {
+    this.callback = callback;
     popup.setWidget(widget);
     setSize(Window.getClientWidth(), Window.getClientHeight());
+    popup.sinkEvents(Event.MOUSEEVENTS);
     popup.show();
     final Show showAtIni = new Show(popup.getElement());
     showAtIni.setDuration(3);
@@ -101,7 +107,6 @@ public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
     final SlideRight slideAtIni = new SlideRight(popup.getElement());
     slideAtIni.setDuration(3);
     slideAtIni.play();
-    popup.sinkEvents(Event.MOUSEEVENTS);
     this.showing = true;
   }
 

@@ -44,8 +44,6 @@ public class DefaultFormUtils {
         if (radioTip != null && tooltip == null) {
           tooltip = Tooltip.to(radio, radioTip);
           tooltip.setWidth(300);
-          tooltip.show();
-          tooltip.hide();
         }
       }
     });

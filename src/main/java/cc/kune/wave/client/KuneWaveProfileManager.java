@@ -26,12 +26,14 @@ import org.waveprotocol.wave.client.account.impl.ProfileImpl;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.shared.FileConstants;
 
 import com.google.inject.Inject;
 
 /**
  * The Class KuneWaveProfileManager is a workaround to show avatars in kune
- * while the Wave part is more mature (see in the future RemoteProfileManagerImpl)
+ * while the Wave part is more mature (see in the future
+ * RemoteProfileManagerImpl)
  * 
  */
 public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> implements
@@ -51,14 +53,14 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     }
     final String address = profile.getAddress();
     if (address.equals(localDomain) || address.equals("@")) {
-      updateProfileAvatar(profile, FileDownloadUtils.WORLD_AVATAR_IMAGE);
+      updateProfileAvatar(profile, FileConstants.WORLD_AVATAR_IMAGE);
     } else if (address.contains(Session.get().getDomain())) {
       updateProfileAvatar(profile, downloadUtils.getUserAvatar(address.split("@")[0]));
     }
   }
 
   @Override
-  public ProfileImpl getProfile(ParticipantId participantId) {
+  public ProfileImpl getProfile(final ParticipantId participantId) {
     ProfileImpl profile = profiles.get(participantId.getAddress());
 
     if (profile == null) {

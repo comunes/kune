@@ -10,6 +10,7 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
 
   @Override
   public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
+    sleep(200);
   }
 
   @Override

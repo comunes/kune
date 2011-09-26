@@ -7,7 +7,7 @@
 <listAttribute key="com.google.gwt.eclipse.core.ENTRY_POINT_MODULES">
 <listEntry value="cc.kune.Kune"/>
 </listAttribute>
-<stringAttribute key="com.google.gwt.eclipse.core.URL" value="/ws/?locale=en&amp;log_level=INFO"/>
+<stringAttribute key="com.google.gwt.eclipse.core.URL" value="/?locale=en&amp;log_level=INFO"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/kune"/>
 </listAttribute>
@@ -20,7 +20,7 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gwt.eclipse.core.moduleClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-war /home/vjrj/proyectos/dev/kune/trunk/target/kune-0.1.0-SNAPSHOT -startupUrl /ws/?locale=en&amp;log_level=INFO -noserver -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 cc.kune.Kune"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-war /home/vjrj/proyectos/dev/kune/trunk/target/kune-0.1.0-SNAPSHOT -startupUrl /?locale=en&amp;log_level=INFO -noserver -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 cc.kune.Kune"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="kune"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512m"/>
 </launchConfiguration>

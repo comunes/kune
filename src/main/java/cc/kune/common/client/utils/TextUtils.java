@@ -166,6 +166,7 @@ public class TextUtils {
       // text = text.replaceAll("\'", "&#039;");
       result = result.replaceAll("<", "&lt;");
       result = result.replaceAll(">", "&gt;");
+      result = result.replaceAll("—", "&#8212;");
     }
     return result;
   }
@@ -245,6 +246,7 @@ public class TextUtils {
     result = result.replaceAll("&#039;", "\'");
     result = result.replaceAll("&lt;", "<");
     result = result.replaceAll("&gt;", ">");
+    result = result.replaceAll("&#8212;", "—");
     return result;
   }
 

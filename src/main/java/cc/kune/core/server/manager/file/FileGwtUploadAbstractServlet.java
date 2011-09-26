@@ -30,8 +30,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.inject.servlet.RequestScoped;

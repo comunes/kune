@@ -33,7 +33,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
-import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
@@ -41,6 +40,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.ContentUtils;
 import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.BasicMimeType;

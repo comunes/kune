@@ -73,13 +73,15 @@ import com.google.inject.servlet.SessionScoped;
 public class KuneRackModule implements RackModule {
   public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
   private final Module configModule;
+  private final String suffix;
 
   public KuneRackModule() {
-    this("development", null);
+    this("development", "/ws", null);
   }
 
-  public KuneRackModule(final String jpaUnit, final Scope sessionScope) {
+  public KuneRackModule(final String jpaUnit, final String suffix, final Scope sessionScope) {
 
+    this.suffix = suffix;
     final SystemConfiguration sysConf = new SystemConfiguration();
     final String kuneConfig = sysConf.getString("kune.server.config");
 
@@ -135,22 +137,24 @@ public class KuneRackModule implements RackModule {
     builder.at(".*").install(new GuiceFilter());
 
     // NOTE: Commented this while testing Wave
-    // builder.at("^/$").install(new RedirectFilter("/ws/"));
-    builder.at("^/ws").install(new RedirectFilter("/ws/"));
+    // builder.at("^/$").install(new RedirectFilter(KUNE_PREFIX + "/"));
+    builder.at("^" + suffix + "").install(new RedirectFilter(suffix + "/"));
 
-    builder.at("^/ws/$").install(new ListenerFilter(KuneApplicationListener.class),
-        new ForwardFilter("/ws/ws.html"));
+    builder.at("^" + suffix + "/$").install(new ListenerFilter(KuneApplicationListener.class),
+        new ForwardFilter(suffix + "/ws.html"));
 
-    builder.installGWTServices("^/ws/", SiteService.class, GroupService.class, ContentService.class,
-        UserService.class, SocialNetworkService.class, I18nService.class, ListsService.class);
-    builder.installRESTServices("^/ws/json/", TestJSONService.class, GroupJSONService.class,
+    builder.installGWTServices("^" + suffix + "/", SiteService.class, GroupService.class,
+        ContentService.class, UserService.class, SocialNetworkService.class, I18nService.class,
+        ListsService.class);
+    builder.installRESTServices("^" + suffix + "/json/", TestJSONService.class, GroupJSONService.class,
         UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
-    builder.installServlet("^/ws/servlets/", FileUploadManager.class, FileDownloadManager.class,
-        EntityLogoUploadManager.class, EntityLogoDownloadManager.class, FileGwtUploadServlet.class,
-        EntityBackgroundDownloadManager.class, EntityBackgroundUploadManager.class,
-        UserLogoDownloadManager.class);
+    builder.installServlet("^" + suffix + "/servlets/", FileUploadManager.class,
+        FileDownloadManager.class, EntityLogoUploadManager.class, EntityLogoDownloadManager.class,
+        FileGwtUploadServlet.class, EntityBackgroundDownloadManager.class,
+        EntityBackgroundUploadManager.class, UserLogoDownloadManager.class);
 
-    builder.at("^/ws/(.*)$").install(new ForwardFilter("^/ws/(.*)$", "/ws/{0}"));
+    builder.at("^" + suffix + "/(.*)$").install(
+        new ForwardFilter("^" + suffix + "/(.*)$", suffix + "/{0}"));
   }
 
   private void installGuiceModules(final RackBuilder builder) {

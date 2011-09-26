@@ -170,10 +170,6 @@ public class Tooltip extends PopupPanel {
         Tooltip.current.hide();
       }
       Tooltip.current = this;
-      Tooltip.this.showAt(TooltipPositionCalculator.calculate(Window.getClientWidth(),
-          Window.getClientHeight(), ofWidget.getAbsoluteLeft(), ofWidget.getAbsoluteTop(),
-          ofWidget.getOffsetWidth(), ofWidget.getOffsetHeight(), Tooltip.this.getWidth(),
-          Tooltip.this.getHeight()));
       if (width != WIDTH_NOT_DEFINED) {
         tooltip.getElement().getStyle().setWidth(width, Unit.PX);
       } else if (tooltip.getOffsetWidth() > 430) {
@@ -181,7 +177,15 @@ public class Tooltip extends PopupPanel {
       } else {
         tooltip.getElement().getStyle().clearWidth();
       }
+      showAt();
     }
+  }
+
+  private void showAt() {
+    Tooltip.this.showAt(TooltipPositionCalculator.calculate(Window.getClientWidth(),
+        Window.getClientHeight(), ofWidget.getAbsoluteLeft(), ofWidget.getAbsoluteTop(),
+        ofWidget.getOffsetWidth(), ofWidget.getOffsetHeight(), Tooltip.this.getWidth(),
+        Tooltip.this.getHeight()));
   }
 
   protected void showAt(final TooltipPosition position) {

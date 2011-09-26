@@ -27,10 +27,11 @@ import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.client.services.FileConstants;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
@@ -38,10 +39,11 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
 
-  public static final String ICON_UPLD_SERVLET = "servlets/EntityLogoUploadManager";
-  private final EntityUploaderForm uploader;
+  public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
+      + "servlets/EntityLogoUploadManager";
   private final I18nTranslationService i18n;
   private final IconLabel tabTitle;
+  private final EntityUploaderForm uploader;
 
   public EntityOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,
       final String panelId, final String buttonId, final String inputId, final NavResources res) {

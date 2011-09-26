@@ -201,7 +201,6 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
             @Override
             public void execute() {
               stateManager.setRetrievedStateAndGo(state);
-              NotifyUser.info("Test", true);
               groupOptions.showTooltip();
             }
           });

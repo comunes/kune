@@ -137,7 +137,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   @Override
   public void gotoHistoryToken(final String token) {
-    Log.debug("StateManager: history goto-string-token :" + token);
+    Log.debug("StateManager: history goto-string-token: " + token);
     history.newItem(token);
   }
 

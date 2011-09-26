@@ -86,7 +86,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
   }
 
   public void onSubmitFailed(final String responseText) {
-    NotifyUser.error(i18n.t("Error setting the logo", responseText));
+    NotifyUser.error(i18n.t("Error setting the logo"));
   }
 
   protected abstract void setState();

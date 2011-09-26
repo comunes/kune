@@ -1,6 +1,7 @@
 package cc.kune.core.client.sub;
 
 import cc.kune.common.client.utils.Base64Utils;
+import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.state.StateManager;
 
 import com.google.gwt.event.shared.EventBus;
@@ -24,7 +25,7 @@ public class SubtitlesManager extends
 
     void setTitleText(String text);
 
-    void show();
+    void show(final SimpleCallback atShowEnd);
 
   }
   private final StateManager stateManager;
@@ -45,7 +46,11 @@ public class SubtitlesManager extends
     final String[] params = token.split("\\|");
     getView().setTitleText(new String(Base64Utils.fromBase64(params[0])));
     getView().setDescription(new String(Base64Utils.fromBase64(params[1])));
-    getView().show();
-    stateManager.gotoHistoryToken(params[2]);
+    getView().show(new SimpleCallback() {
+      @Override
+      public void onCallback() {
+        stateManager.gotoHistoryToken(params[2]);
+      }
+    });
   }
 }

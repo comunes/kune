@@ -28,8 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.server.manager.GroupManager;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
 

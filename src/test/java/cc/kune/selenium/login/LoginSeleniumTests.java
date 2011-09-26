@@ -59,7 +59,7 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
   @Test(dataProvider = "correctlogin")
   public void signInWithToken(final String user, final String passwd) {
     login.assertIsDisconnected();
-    gotoToken(SiteTokens.SIGNIN);
+    showSubtitle("User sign in", "", SiteTokens.SIGNIN);
     login.fillSigInInForm(user, passwd, true);
     login.assertIsConnectedAs(user);
     login.logout();

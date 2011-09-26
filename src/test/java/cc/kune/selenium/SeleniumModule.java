@@ -47,8 +47,8 @@ public class SeleniumModule extends PageObjectModule {
   @Override
   protected void configure() {
 
-    // final RemoteWebDriver driver = createChromeDriver();
-    final WebDriver driver = creatFirefoxDriver();
+    final RemoteWebDriver driver = createChromeDriver();
+    // final WebDriver driver = creatFirefoxDriver();
     final EventFiringWebDriver wrap = new EventFiringWebDriver(driver);
     wrap.register(new CustomWebDriverEventListener());
 
@@ -69,7 +69,11 @@ public class SeleniumModule extends PageObjectModule {
     System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
     final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
     // http://peter.sh/experiments/chromium-command-line-switches/
-    capabilities.setCapability("chrome.switches", Arrays.asList("--disable-translate"));
+    capabilities.setCapability("chrome.switches", Arrays.asList("--disable-translate"
+    // ,
+    // "--load-extension=/home/YOURUSER/.config/chromium/Default/Extensions/jpjpnpmbddbjkfaccnmhnkdgjideieim/1.0.9738_0/"
+    // (tests with the gwt extension)
+    ));
     capabilities.setCapability("chrome.binary", "/usr/bin/chromium-browser");
     final ChromeDriver driver = new ChromeDriver(capabilities);
     return driver;

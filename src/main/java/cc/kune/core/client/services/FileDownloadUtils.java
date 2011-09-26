@@ -22,24 +22,16 @@ package cc.kune.core.client.services;
 import cc.kune.common.client.utils.Url;
 import cc.kune.common.client.utils.UrlParam;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 
 public class FileDownloadUtils {
-
-  public static final String AVATARDOWNLOADSERVLET = "servlets/UserLogoDownloadManager";
-  private static final String BACKDOWNLOADSERVLET = "servlets/EntityBackgroundDownloadManager";
-  private static final String DOWNLOADSERVLET = "servlets/FileDownloadManager";
-  protected static final String GROUP_NO_AVATAR_IMAGE = "images/group-def-icon.png";
-  private static final String LOGODOWNLOADSERVLET = "servlets/EntityLogoDownloadManager";
-  protected static final String PERSON_NO_AVATAR_IMAGE = "images/unknown.jpg";
-  public static final String WORLD_AVATAR_IMAGE = "images/world-90.gif";
 
   private final ImageUtils imageUtils;
   private final Session session;
@@ -51,7 +43,7 @@ public class FileDownloadUtils {
   }
 
   private String calculateUrl(final StateToken token, final boolean download, final boolean useHash) {
-    final Url url = new Url(GWT.getModuleBaseURL() + DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+    final Url url = new Url(FileConstants.DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
         token.toString()));
     if (download) {
       url.add(new UrlParam(FileConstants.DOWNLOAD, download));
@@ -71,18 +63,20 @@ public class FileDownloadUtils {
   }
 
   public String getBackgroundImageUrl(final StateToken token) {
-    return new Url(GWT.getModuleBaseURL() + BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
-        token.toString())).toString();
+    return new Url(FileConstants.BACKDOWNLOADSERVLET,
+        new UrlParam(FileConstants.TOKEN, token.toString())).toString();
   }
 
   public String getBackgroundResizedUrl(final StateToken token, final ImageSize imageSize) {
-    return new Url(GWT.getModuleBaseURL() + BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
-        token.toString()), new UrlParam(FileConstants.IMGSIZE, imageSize.toString())).toString();
+    return new Url(FileConstants.BACKDOWNLOADSERVLET,
+        new UrlParam(FileConstants.TOKEN, token.toString()), new UrlParam(FileConstants.IMGSIZE,
+            imageSize.toString())).toString();
   }
 
   public String getGroupLogo(final GroupDTO group) {
     return group.hasLogo() ? getLogoImageUrl(group.getStateToken())
-        : group.isPersonal() ? PERSON_NO_AVATAR_IMAGE : GROUP_NO_AVATAR_IMAGE;
+        : group.isPersonal() ? FileConstants.PERSON_NO_AVATAR_IMAGE
+            : FileConstants.GROUP_NO_AVATAR_IMAGE;
   }
 
   public String getImageResizedUrl(final StateToken token, final ImageSize imageSize) {
@@ -106,8 +100,8 @@ public class FileDownloadUtils {
   }
 
   public String getLogoImageUrl(final StateToken token) {
-    return new Url(GWT.getModuleBaseURL() + LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
-        token.toString())).toString();
+    return new Url(FileConstants.LOGODOWNLOADSERVLET,
+        new UrlParam(FileConstants.TOKEN, token.toString())).toString();
   }
 
   public String getUrl(final StateToken token) {
@@ -115,11 +109,10 @@ public class FileDownloadUtils {
   }
 
   public String getUserAvatar(final String username) {
-    return new Url(GWT.getModuleBaseURL() + AVATARDOWNLOADSERVLET, new UrlParam(FileConstants.USERNAME,
-        username)).toString();
+    return new Url(FileConstants.AVATARDOWNLOADSERVLET, new UrlParam(FileConstants.USERNAME, username)).toString();
   }
 
   public String getUserAvatar(final UserSimpleDTO user) {
-    return user.hasLogo() ? getLogoImageUrl(user.getStateToken()) : PERSON_NO_AVATAR_IMAGE;
+    return user.hasLogo() ? getLogoImageUrl(user.getStateToken()) : FileConstants.PERSON_NO_AVATAR_IMAGE;
   }
 }

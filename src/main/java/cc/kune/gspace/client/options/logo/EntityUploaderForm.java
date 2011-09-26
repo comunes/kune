@@ -25,7 +25,7 @@ import gwtupload.client.IUploader.OnChangeUploaderHandler;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
 import gwtupload.client.MultiUploader;
-import cc.kune.core.client.services.FileConstants;
+import cc.kune.core.shared.FileConstants;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;

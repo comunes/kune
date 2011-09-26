@@ -19,13 +19,30 @@
  */
 package cc.kune.core.client.state;
 
+import cc.kune.common.client.utils.Base64Utils;
+
 public class TokenUtils {
 
-    public static String addRedirect(final String token, final String redirect) {
-        return new StringBuffer().append(token).append("(").append(redirect).append(")").toString();
-    }
+  public static String addRedirect(final String token, final String redirect) {
+    return new StringBuffer().append(token).append("(").append(redirect).append(")").toString();
+  }
 
-    public static String preview(final String token) {
-        return addRedirect(SiteTokens.PREVIEW, token);
+  private static String compose(final String... params) {
+    final StringBuffer sb = new StringBuffer();
+    for (final String param : params) {
+      sb.append(param).append("|");
     }
+    return sb.toString().replaceAll("\\|$", "");
+  }
+
+  public static String preview(final String token) {
+    return addRedirect(SiteTokens.PREVIEW, token);
+  }
+
+  public static String subtitle(final String title, final String description, final String redirect) {
+    return addRedirect(
+        SiteTokens.SUBTITLES,
+        compose(Base64Utils.toBase64(title.getBytes()), Base64Utils.toBase64(description.getBytes()),
+            redirect));
+  }
 }

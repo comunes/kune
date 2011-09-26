@@ -16,7 +16,7 @@
   </ui:style>
 
   <g:FlowPanel styleName="{style.panel}" ui:field="flow">
-    <g:Frame styleName="{style.frame}" url="about.html"
+    <g:Frame styleName="{style.frame}" url="ws/about.html"
       ui:field="frame" />
   </g:FlowPanel>
 </ui:UiBinder>

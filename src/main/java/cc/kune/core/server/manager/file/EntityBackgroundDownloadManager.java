@@ -33,10 +33,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
-import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
 

@@ -34,6 +34,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import cc.kune.core.client.auth.AnonUsersManager;
+import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.TokenUtils;
+import cc.kune.core.client.sub.SubtitlesWidget;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.selenium.login.EntityHeaderPageObject;
 import cc.kune.selenium.login.LoginPageObject;
@@ -54,8 +57,9 @@ public class KuneSeleniumDefaults {
   private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
-    // baseUrl = "http://kune.beta.iepala.es/ws/?locale=en#";
-    baseUrl = "http://127.0.0.1:8888/ws/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
+    baseUrl = "http://kune.beta.iepala.es/ws/?locale=en#";
+    // baseUrl =
+    // "http://127.0.0.1:8888/ws/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
     injector = Guice.createInjector(new SeleniumModule());
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
@@ -140,6 +144,12 @@ public class KuneSeleniumDefaults {
     final JavascriptExecutor js = (JavascriptExecutor) webdriver;
     // 1024,769
     js.executeScript("window.resizeTo(840,770); window.moveTo(0,0);");
+  }
+
+  public void showSubtitle(final String title, final String description, final String token) {
+    gotoToken(TokenUtils.subtitle("User sign in", "", SiteTokens.SIGNIN));
+    sleep(3000);
+    webdriver.findElement(By.id(SeleniumConstants.GWTDEV + SubtitlesWidget.SUBTITLE_MANAGER_ID)).click();
   }
 
   public void sleep(final int milliseconds) {

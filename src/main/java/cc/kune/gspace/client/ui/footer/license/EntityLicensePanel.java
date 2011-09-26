@@ -26,6 +26,7 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -81,7 +82,7 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
   public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
     final String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
     // KuneUiUtils.setQuickTip(licenseLabel, licenseText);
-    licenseImage.setUrl(licenseDTO.getImageUrl());
+    licenseImage.setUrl(GWT.getModuleBaseURL() + licenseDTO.getImageUrl());
     tooltip.setText(licenseText);
   }
 }
