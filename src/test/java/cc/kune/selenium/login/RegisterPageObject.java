@@ -47,13 +47,18 @@ public class RegisterPageObject extends AbstractLoginObject {
   public void fillRegisterForm(final String nick, final String name, final String pass, final String em,
       final boolean withReturn) {
     clearField(shortName);
+    hightlight(shortName);
     shortName.sendKeys(nick);
     clearField(longName);
+    hightlight(longName);
     longName.sendKeys(name);
     clearField(passwd);
+    hightlight(passwd);
     passwd.sendKeys(pass);
     clearField(email);
+    hightlight(email);
     email.sendKeys(em);
+    hightlight(registerButton);
     if (withReturn) {
       email.sendKeys(Keys.RETURN);
     } else {

@@ -84,6 +84,10 @@ do the same with every persistence unit defined inside.
 
 Install and run a openfire jabber server (see Appendix A for proper configuration of openfire).
 
+===Configure your SMTP server===
+
+See Appendix C for more info.
+
 ===Wave in a Box===
 
 Follow "Federation configuration" from:

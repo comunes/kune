@@ -30,9 +30,8 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
       final String email) {
     // 15 chars, the limit, so we don't use shortName
     final String prefix = getTempString();
-    login.assertIsDisconnected();
-    login.signInLink.click();
-    login.createOneLink.click();
+    showSubtitle("User registration", "to get full access to this site");
+    login.createOne();
     register.fillRegisterForm(prefix, prefix + longName, passwd, prefix + email, false);
     login.assertIsConnectedAs(prefix);
     sleep(1000);

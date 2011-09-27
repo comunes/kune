@@ -4,13 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-import org.testng.Assert;
 
 public class CustomWebDriverEventListener implements WebDriverEventListener {
 
   @Override
   public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
-    sleep(200);
+    sleep(400);
   }
 
   @Override
@@ -34,7 +33,7 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
 
   @Override
   public void afterNavigateTo(final String url, final WebDriver driver) {
-    slow();
+    sleep(500);
   }
 
   @Override
@@ -56,7 +55,6 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
 
   @Override
   public void beforeNavigateBack(final WebDriver driver) {
-    ;
   }
 
   @Override
@@ -75,15 +73,11 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
   public void onException(final Throwable throwable, final WebDriver driver) {
   }
 
-  public void sleep(final int milliseconds) {
-    try {
-      Thread.sleep(milliseconds);
-    } catch (final InterruptedException e) {
-      Assert.fail("Exception in sleep method", e);
-    }
+  private void sleep(final int milliseconds) {
+    SeleniumUtils.sleep(milliseconds);
   }
 
   private void slow() {
-    sleep(500);
+    sleep(1000);
   }
 }

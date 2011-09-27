@@ -56,6 +56,12 @@ public class Tooltip extends PopupPanel {
 
   private static final int WIDTH_NOT_DEFINED = -1;
 
+  public static void hideCurrent() {
+    if (current != null) {
+      current.hide();
+    }
+  }
+
   public static Tooltip to(final Widget widget, final String text) {
     final Tooltip tip = new Tooltip();
     tip.to(widget);
@@ -90,6 +96,7 @@ public class Tooltip extends PopupPanel {
   private Widget ofWidget;
   private final Label textLabel;
   private final TooltipTimers timers;
+
   @UiField
   InlineLabel title;
 

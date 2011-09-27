@@ -30,6 +30,7 @@ public class AbstractLoginObject extends PageObject {
   }
 
   public void logout() {
+    hightlight(signOutLink);
     signOutLink.click();
     assertIsDisconnected();
   }

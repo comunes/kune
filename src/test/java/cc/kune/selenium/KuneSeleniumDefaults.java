@@ -26,15 +26,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
-import cc.kune.core.client.auth.AnonUsersManager;
-import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.sub.SubtitlesWidget;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -48,7 +45,7 @@ import com.google.inject.Injector;
 
 public class KuneSeleniumDefaults {
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
-  public static boolean mustCloseFinally = true;
+  public static boolean mustCloseFinally = false;
   private final String baseUrl;
   protected final EntityHeaderPageObject entityHeader;
   private final Injector injector;
@@ -57,9 +54,8 @@ public class KuneSeleniumDefaults {
   private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
-    baseUrl = "http://kune.beta.iepala.es/ws/?locale=en#";
-    // baseUrl =
-    // "http://127.0.0.1:8888/ws/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
+    // baseUrl = "http://kune.beta.iepala.es/ws/?locale=en#";
+    baseUrl = "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
     injector = Guice.createInjector(new SeleniumModule());
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
@@ -76,7 +72,6 @@ public class KuneSeleniumDefaults {
     resize();
     LOG.info("Going home");
     home();
-    webdriver.findElement(By.id(SeleniumConstants.GWTDEV + AnonUsersManager.ANON_MESSAGE_CLOSE_ICON)).click();
   }
 
   @BeforeMethod
@@ -134,6 +129,7 @@ public class KuneSeleniumDefaults {
   public void home() {
     assert baseUrl != null;
     webdriver.get(baseUrl);
+    login.getAnonMsg().click();
   }
 
   public void open(final String url) {
@@ -146,17 +142,22 @@ public class KuneSeleniumDefaults {
     js.executeScript("window.resizeTo(840,770); window.moveTo(0,0);");
   }
 
+  public void showSubtitle(final String title) {
+    showSubtitle(title, "", "");
+  }
+
+  public void showSubtitle(final String title, final String description) {
+    showSubtitle(title, description, "");
+  }
+
   public void showSubtitle(final String title, final String description, final String token) {
-    gotoToken(TokenUtils.subtitle("User sign in", "", SiteTokens.SIGNIN));
+    gotoToken(TokenUtils.subtitle(title, description, token));
     sleep(3000);
     webdriver.findElement(By.id(SeleniumConstants.GWTDEV + SubtitlesWidget.SUBTITLE_MANAGER_ID)).click();
   }
 
   public void sleep(final int milliseconds) {
-    try {
-      Thread.sleep(milliseconds);
-    } catch (final InterruptedException e) {
-      Assert.fail("Exception in sleep method", e);
-    }
+    SeleniumUtils.sleep(milliseconds);
   }
+
 }

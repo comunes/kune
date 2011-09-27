@@ -46,9 +46,8 @@ public class SeleniumModule extends PageObjectModule {
 
   @Override
   protected void configure() {
-
-    final RemoteWebDriver driver = createChromeDriver();
-    // final WebDriver driver = creatFirefoxDriver();
+    // final RemoteWebDriver driver = createChromeDriver();
+    final WebDriver driver = creatFirefoxDriver();
     final EventFiringWebDriver wrap = new EventFiringWebDriver(driver);
     wrap.register(new CustomWebDriverEventListener());
 
@@ -81,9 +80,9 @@ public class SeleniumModule extends PageObjectModule {
 
   private FirefoxDriver creatFirefoxDriver() {
     // http://code.google.com/p/selenium/wiki/FirefoxDriver
+    System.setProperty("webdriver.firefox.useExisting", "true");
     final ProfilesIni allProfiles = new ProfilesIni();
     final FirefoxProfile profile = allProfiles.getProfile(SeleniumConstants.FIREFOX_PROFILE_NAME);
-    // System.setProperty("webdriver.firefox.useExisting", "true");
     // final FirefoxProfile profile = allProfiles.getProfile("76tp2vh0.ff5");
     final FirefoxDriver driver = new FirefoxDriver(profile);
     return driver;

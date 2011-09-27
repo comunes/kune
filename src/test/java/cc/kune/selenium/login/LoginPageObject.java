@@ -23,12 +23,15 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.SignInForm;
 import cc.kune.core.client.auth.SignInPanel;
 import cc.kune.selenium.tools.SeleniumConstants;
 
 public class LoginPageObject extends AbstractLoginObject {
 
+  @FindBy(id = SeleniumConstants.GWTDEV + AnonUsersManager.ANON_MESSAGE_CLOSE_ICON)
+  private WebElement anonWelcome;
   @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.CREATE_ONE)
   protected WebElement createOneLink;
   @FindBy(id = SignInForm.PASSWORD_FIELD_ID + SeleniumConstants.INPUT)
@@ -42,16 +45,31 @@ public class LoginPageObject extends AbstractLoginObject {
     // i18n = new I18nHelper(LoginMessages.class);
   }
 
+  public void createOne() {
+    assertIsDisconnected();
+    hightlight(signInLink);
+    signInLink.click();
+    hightlight(createOneLink);
+    createOneLink.click();
+  }
+
   public void fillSigInInForm(final String username, final String password, final boolean withReturn) {
     clearField(user);
+    hightlight(user);
     user.sendKeys(username);
     clearField(passwd);
+    hightlight(passwd);
     passwd.sendKeys(password);
+    hightlight(signInButton);
     if (withReturn) {
       passwd.sendKeys(Keys.RETURN);
     } else {
       signInButton.click();
     }
+  }
+
+  public WebElement getAnonMsg() {
+    return anonWelcome;
   }
 
   public WebElement getHeader() {
@@ -62,19 +80,24 @@ public class LoginPageObject extends AbstractLoginObject {
     return getHeader();
   }
 
+  public void high() {
+    hightlight(signInLink);
+  }
+
   public void signIn(final String username, final String password) {
-    signIn(username, password, true);
+    signIn(username, password, false);
   }
 
   public void signIn(final String username, final String password, final boolean withReturn) {
     assertIsDisconnected();
+    hightlight(signInLink);
     moveMouseTo(signInLink);
     signInLink.click();
     fillSigInInForm(username, password, withReturn);
   }
 
   public void signInDefUser() {
-    signIn(SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_PASSWD, false);
+    signIn(SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_PASSWD, true);
   }
 
 }

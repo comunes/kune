@@ -25,6 +25,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -85,6 +86,15 @@ public abstract class PageObject {
     return webdriver.getWindowHandles();
   }
 
+  public void hightlight(final WebElement element) {
+    final JavascriptExecutor js = (JavascriptExecutor) webdriver;
+    final String script = "window.jQuery('#" + element.getAttribute("id") + "').addClass('k-outline');"
+        + "setTimeout('window.jQuery(\"#" + element.getAttribute("id")
+        + "\").removeClass(\"k-outline\")', 700);";
+    // LOG.info("High: " + script);
+    js.executeScript(script);
+  }
+
   public boolean isElementPresent(final String id) {
     final Wait<WebDriver> wait = new WebDriverWait(webdriver, 5);
     final WebElement element = wait.until(visibilityOfElementLocated(By.id(id)));
@@ -112,6 +122,7 @@ public abstract class PageObject {
   public void moveMouseTo(final WebElement element) {
     final Actions actions = new Actions(webdriver);
     actions.moveToElement(element);
+    sleep(1000);
   }
 
   public Navigation navigate() {
@@ -120,6 +131,10 @@ public abstract class PageObject {
 
   public void quit() {
     webdriver.quit();
+  }
+
+  public void sleep(final int milliseconds) {
+    SeleniumUtils.sleep(milliseconds);
   }
 
   public TargetLocator switchTo() {
