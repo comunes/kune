@@ -45,7 +45,7 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
   }
 
   @Test(dataProvider = "correctlogin")
-  public void signIn(final String user, final String passwd) {
+  public void basicSignIn(final String user, final String passwd) {
     login.assertIsDisconnected();
     showSubtitle("User sign in", "to get full access to this site");
     login.signIn(user, passwd);

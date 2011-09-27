@@ -42,9 +42,6 @@ import com.google.inject.Singleton;
 
 public class SeleniumModule extends PageObjectModule {
 
-  public SeleniumModule() {
-  }
-
   @Override
   protected void configure() {
     // final RemoteWebDriver driver = createChromeDriver();

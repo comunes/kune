@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="VideoTestSuite" verbose="3">
+  <test name="login">
+    <classes>
+      <class name="cc.kune.selenium.login.LoginSeleniumTests">
+	<methods>
+	  <include name="basicSignIn" />
+	</methods>
+      </class>
+      <class name="cc.kune.selenium.login.RegisterSeleniumTests">
+	<methods>
+	  <include name="basicRegister" />
+	</methods>
+      </class>
+      <class name="cc.kune.selenium.chat.ChatSeleniumTests">
+	<methods>
+	  <include name="basicChat" />
+	</methods>
+      </class>
+    </classes>
+  </test>
+</suite> 
+

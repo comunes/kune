@@ -45,8 +45,11 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class KuneSeleniumDefaults {
+
+  public static final Injector INJECTOR = Guice.createInjector(new SeleniumModule());
+
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
-  public static boolean mustCloseFinally = false;
+  public static boolean mustCloseFinally = true;
   private final String baseUrl;
   protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
@@ -58,7 +61,7 @@ public class KuneSeleniumDefaults {
   public KuneSeleniumDefaults() {
     // baseUrl = "http://kune.beta.iepala.es/ws/?locale=en#";
     baseUrl = "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
-    injector = Guice.createInjector(new SeleniumModule());
+    injector = INJECTOR;
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
     register = injector.getInstance(RegisterPageObject.class);
@@ -71,15 +74,15 @@ public class KuneSeleniumDefaults {
     PageFactory.initElements(locator, chat);
   }
 
+  @BeforeMethod
+  public void beforeMethods(final ITestContext context) {
+  }
+
   @BeforeSuite
-  public void beforeClass() {
+  public void beforeSuite() {
     resize();
     LOG.info("Going home");
     home();
-  }
-
-  @BeforeMethod
-  public void beforeMethods(final ITestContext context) {
   }
 
   public void close() {

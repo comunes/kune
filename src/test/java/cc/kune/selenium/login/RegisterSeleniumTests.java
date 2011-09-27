@@ -26,7 +26,7 @@ import cc.kune.selenium.KuneSeleniumTest;
 public class RegisterSeleniumTests extends KuneSeleniumTest {
 
   @Test(dataProvider = "correctregister")
-  public void severalsSignInSingOut(final String shortName, final String longName, final String passwd,
+  public void basicRegister(final String shortName, final String longName, final String passwd,
       final String email) {
     // 15 chars, the limit, so we don't use shortName
     final String prefix = getTempString();
@@ -39,31 +39,7 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     register.getWelcomeMsg().click();
     chat.show();
     sleep(3000);
-    // login.logout();
+    login.logout();
   }
-  // @Test(dataProvider = "correctlogin")
-  // public void signIn(final String user, final String passwd) {
-  // login.assertIsDisconnected();
-  // login.signIn(user, passwd);
-  // login.assertIsConnectedAs(user);
-  // login.logout();
-  // login.assertIsDisconnected();
-  // }
-  //
-  // @Test
-  // public void signInIncorrectPasswd() {
-  // login.assertIsDisconnected();
-  // login.signIn("nouser", "nopassword");
-  // login.assertIsDisconnected();
-  // }
-  //
-  // @Test(dataProvider = "correctlogin")
-  // public void signInWithToken(final String user, final String passwd) {
-  // login.assertIsDisconnected();
-  // webdriver.gotoToken(SiteTokens.SIGNIN);
-  // login.fillSigInInForm(user, passwd, true);
-  // login.assertIsConnectedAs(user);
-  // login.logout();
-  // login.assertIsDisconnected();
-  // }
+
 }

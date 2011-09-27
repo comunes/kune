@@ -1,15 +1,17 @@
 package cc.kune.selenium;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
 public class CustomWebDriverEventListener implements WebDriverEventListener {
 
   @Override
   public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
-    sleep(400);
+    sleep(600);
   }
 
   @Override
@@ -72,6 +74,9 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
 
   @Override
   public void onException(final Throwable throwable, final WebDriver driver) {
+    if (driver instanceof ChromeDriver) {
+      ((ChromeDriver) driver).getScreenshotAs(OutputType.FILE);
+    }
   }
 
   private void sleep(final int milliseconds) {
