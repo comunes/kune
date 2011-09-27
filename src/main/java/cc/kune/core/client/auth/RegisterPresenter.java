@@ -31,7 +31,6 @@ import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -213,26 +212,22 @@ public class RegisterPresenter extends
         }
 
         private void showWelcolmeDialog() {
-          getEventBus().fireEvent(
-              new UserNotifyEvent(
-                  NotifyLevel.info,
-                  i18n.t("Welcome"),
-                  i18n.t("Thanks for joining this site. "
-                      + "Now you can actively participate in this site. "
-                      + "You can also use your personal space to publish contents. "
-                      + "Note: your email is not verified, please follow the instructions you will receive by email."),
-                  true));
+          NotifyUser.info(
+              i18n.t("Welcome"),
+              i18n.t("Thanks for joining this site. "
+                  + "Now you can actively participate in this site. "
+                  + "You can also use your personal space to publish contents. "
+                  + "Note: your email is not verified, please follow the instructions you will receive by email."),
+              Register.WELCOME_ID, true);
         }
 
         private void showWelcolmeDialogNoHomepage() {
-          getEventBus().fireEvent(
-              new UserNotifyEvent(
-                  NotifyLevel.info,
-                  i18n.t("Welcome"),
-                  i18n.t("Thanks for joining this site"
-                      + "Now you can actively participate in this site. "
-                      + "Note: your email is not verified, please follow the instructions you will receive by email."),
-                  true));
+          NotifyUser.info(
+              i18n.t("Welcome"),
+              i18n.t("Thanks for joining this site"
+                  + "Now you can actively participate in this site. "
+                  + "Note: your email is not verified, please follow the instructions you will receive by email."),
+              Register.WELCOME_ID, true);
         }
       };
       userServiceProvider.get().createUser(user, wantHomepage, callback);

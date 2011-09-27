@@ -47,9 +47,9 @@ public class LoginPageObject extends AbstractLoginObject {
 
   public void createOne() {
     assertIsDisconnected();
-    hightlight(signInLink);
+    // hightlight(signInLink);
     signInLink.click();
-    hightlight(createOneLink);
+    // hightlight(createOneLink);
     createOneLink.click();
   }
 
@@ -60,7 +60,7 @@ public class LoginPageObject extends AbstractLoginObject {
     clearField(passwd);
     hightlight(passwd);
     passwd.sendKeys(password);
-    hightlight(signInButton);
+    // hightlight(signInButton);
     if (withReturn) {
       passwd.sendKeys(Keys.RETURN);
     } else {
@@ -90,7 +90,7 @@ public class LoginPageObject extends AbstractLoginObject {
 
   public void signIn(final String username, final String password, final boolean withReturn) {
     assertIsDisconnected();
-    hightlight(signInLink);
+    // hightlight(signInLink);
     moveMouseTo(signInLink);
     signInLink.click();
     fillSigInInForm(username, password, withReturn);

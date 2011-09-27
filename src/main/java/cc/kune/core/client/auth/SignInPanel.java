@@ -20,7 +20,6 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.notify.NotifyLevelImages;
-import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.common.client.utils.OnAcceptCallback;
@@ -133,7 +132,6 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
   @Override
   public void show() {
     super.show();
-    Tooltip.hideCurrent();
     KuneUiUtils.focusOnField(getNickname());
   }
 

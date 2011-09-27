@@ -17,14 +17,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.auth;
+package cc.kune.selenium.chat;
 
-public interface Register {
+import org.testng.annotations.Test;
 
-  String WELCOME_ID = "k-user-reg-welcome-msg-id";
+import cc.kune.selenium.KuneSeleniumTest;
 
-  void doRegister();
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 
-  void hide();
+public class ChatSeleniumTests extends KuneSeleniumTest {
+
+  @Test
+  public void basicChat() {
+    // 15 chars, the limit, so we don't use shortName
+    login();
+    showSubtitle("Chat with your buddies", "compatible with gmail and similars");
+    chat.show();
+    final XmppURI jid = XmppURI.jid(ChatPageObject.DEF_TESTING_USER);
+    final String jids = jid.toString();
+    chat.openChat(jid);
+    // chat.getPage(jids).click();
+    chat.getTalkBox(jids).sendKeys("Helloo... ;)");
+    chat.getSend(jids).click();
+    chat.getTalkBox(jids).sendKeys("I'm just testing");
+    chat.getSend(jids).click();
+  }
 
 }

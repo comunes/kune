@@ -23,6 +23,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterForm;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.selenium.tools.SeleniumConstants;
@@ -39,6 +40,8 @@ public class RegisterPageObject extends AbstractLoginObject {
   private WebElement registerButton;
   @FindBy(id = RegisterForm.NICK_FIELD + SeleniumConstants.INPUT)
   private WebElement shortName;
+  @FindBy(id = SeleniumConstants.GWTDEV + Register.WELCOME_ID)
+  private WebElement welcome;
 
   public RegisterPageObject() {
     // i18n = new I18nHelper(LoginMessages.class);
@@ -64,6 +67,10 @@ public class RegisterPageObject extends AbstractLoginObject {
     } else {
       registerButton.click();
     }
+  }
+
+  public WebElement getWelcomeMsg() {
+    return welcome;
   }
 
 }

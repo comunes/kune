@@ -46,6 +46,7 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
 
   @Override
   public void beforeClickOn(final WebElement element, final WebDriver driver) {
+    SeleniumUtils.hightlight(element, driver);
     slow();
   }
 

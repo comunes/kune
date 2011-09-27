@@ -25,7 +25,6 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -87,12 +86,14 @@ public abstract class PageObject {
   }
 
   public void hightlight(final WebElement element) {
-    final JavascriptExecutor js = (JavascriptExecutor) webdriver;
-    final String script = "window.jQuery('#" + element.getAttribute("id") + "').addClass('k-outline');"
-        + "setTimeout('window.jQuery(\"#" + element.getAttribute("id")
-        + "\").removeClass(\"k-outline\")', 700);";
-    // LOG.info("High: " + script);
-    js.executeScript(script);
+    SeleniumUtils.hightlight(element, webdriver);
+    // final JavascriptExecutor js = (JavascriptExecutor) webdriver;
+    // final String script = "window.jQuery('#" + element.getAttribute("id") +
+    // "').addClass('k-outline');"
+    // + "setTimeout('window.jQuery(\"#" + element.getAttribute("id")
+    // + "\").removeClass(\"k-outline\")', 700);";
+    // // LOG.info("High: " + script);
+    // js.executeScript(script);
   }
 
   public boolean isElementPresent(final String id) {

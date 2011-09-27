@@ -126,6 +126,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     return flow.remove(w);
   }
 
+  public void setId(final String id) {
+    self.ensureDebugId(id);
+  }
+
   public void setLabelText(final String text) {
     label.setText(text);
   }

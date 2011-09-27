@@ -23,40 +23,41 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.xep.muc.client.Room;
 
 public interface ChatClient {
+  public static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
 
-    void addNewBuddie(String shortName);
+  void addNewBuddie(String shortName);
 
-    void chat(String shortName);
+  void chat(String shortName);
 
-    void chat(XmppURI jid);
+  void chat(XmppURI jid);
 
-    void doLogin();
+  void doLogin();
 
-    boolean isBuddie(String shortName);
+  boolean isBuddie(String shortName);
 
-    boolean isBuddie(XmppURI jid);
+  boolean isBuddie(XmppURI jid);
 
-    boolean isLoggedIn();
+  boolean isLoggedIn();
 
-    Room joinRoom(String roomName, String userAlias);
+  Room joinRoom(String roomName, String userAlias);
 
-    Room joinRoom(String roomName, String subject, String userAlias);
+  Room joinRoom(String roomName, String subject, String userAlias);
 
-    void login(XmppURI uri, String passwd);
+  void login(XmppURI uri, String passwd);
 
-    /**
-     * @return true if loggin is needed
-     */
-    boolean loginIfNecessary();
+  /**
+   * @return true if loggin is needed
+   */
+  boolean loginIfNecessary();
 
-    void logout();
+  void logout();
 
-    XmppURI roomUriFrom(String shortName);
+  XmppURI roomUriFrom(String shortName);
 
-    void setAvatar(String photoBinary);
+  void setAvatar(String photoBinary);
 
-    void show();
+  void show();
 
-    XmppURI uriFrom(String shortName);
+  XmppURI uriFrom(String shortName);
 
 }

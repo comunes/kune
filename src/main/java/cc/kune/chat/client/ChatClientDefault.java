@@ -123,7 +123,6 @@ public class ChatClientDefault implements ChatClient {
 
   }
 
-  protected static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
   private static final String CHAT_TITLE = "Chat ;)";
 
   private final ChatClientAction action;

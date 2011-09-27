@@ -19,6 +19,7 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.common.client.utils.TextUtils;
 
@@ -252,6 +253,7 @@ public class BasicTopDialog extends BasicDialog {
   }
 
   public void showCentered() {
+    Tooltip.hideCurrent();
     popup.showCentered();
   }
 

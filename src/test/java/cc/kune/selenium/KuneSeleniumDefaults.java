@@ -35,6 +35,7 @@ import org.testng.annotations.DataProvider;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.sub.SubtitlesWidget;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.selenium.chat.ChatPageObject;
 import cc.kune.selenium.login.EntityHeaderPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
@@ -47,6 +48,7 @@ public class KuneSeleniumDefaults {
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
   public static boolean mustCloseFinally = false;
   private final String baseUrl;
+  protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
   private final Injector injector;
   protected LoginPageObject login;
@@ -61,10 +63,12 @@ public class KuneSeleniumDefaults {
     login = injector.getInstance(LoginPageObject.class);
     register = injector.getInstance(RegisterPageObject.class);
     entityHeader = injector.getInstance(EntityHeaderPageObject.class);
+    chat = injector.getInstance(ChatPageObject.class);
     final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     PageFactory.initElements(locator, login);
     PageFactory.initElements(locator, register);
     PageFactory.initElements(locator, entityHeader);
+    PageFactory.initElements(locator, chat);
   }
 
   @BeforeSuite

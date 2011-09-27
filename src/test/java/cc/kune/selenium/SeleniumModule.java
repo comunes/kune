@@ -32,6 +32,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
+import cc.kune.selenium.chat.ChatPageObject;
 import cc.kune.selenium.login.EntityHeaderPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
@@ -60,6 +61,7 @@ public class SeleniumModule extends PageObjectModule {
     bind(LoginPageObject.class).in(Singleton.class);
     bind(RegisterPageObject.class).in(Singleton.class);
     bind(EntityHeaderPageObject.class).in(Singleton.class);
+    bind(ChatPageObject.class).in(Singleton.class);
   }
 
   @SuppressWarnings("unused")

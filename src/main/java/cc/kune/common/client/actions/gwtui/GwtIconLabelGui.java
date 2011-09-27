@@ -53,7 +53,7 @@ public class GwtIconLabelGui extends AbstractGuiItem {
     descriptor.putValue(ParentWidget.PARENT_UI, this);
     final String id = descriptor.getId();
     if (id != null) {
-      iconLabel.ensureDebugId(id);
+      iconLabel.setId(id);
     }
     initWidget(iconLabel);
     iconLabel.getFocus().addClickHandler(new ClickHandler() {

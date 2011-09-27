@@ -21,7 +21,6 @@ package cc.kune.core.client.groups.newgroup;
 
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
-import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
@@ -296,7 +295,6 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   @Override
   public void show() {
-    Tooltip.hideCurrent();
     dialog.showCentered();
   }
 
