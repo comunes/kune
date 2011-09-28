@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.testng.ITestContext;
@@ -36,7 +37,8 @@ import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.sub.SubtitlesWidget;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.selenium.chat.ChatPageObject;
-import cc.kune.selenium.login.EntityHeaderPageObject;
+import cc.kune.selenium.general.EntityHeaderPageObject;
+import cc.kune.selenium.general.SpacesPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
 import cc.kune.selenium.tools.SeleniumConstants;
@@ -56,6 +58,7 @@ public class KuneSeleniumDefaults {
   private final Injector injector;
   protected LoginPageObject login;
   protected RegisterPageObject register;
+  protected final SpacesPageObject spaces;
   private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
@@ -66,11 +69,13 @@ public class KuneSeleniumDefaults {
     login = injector.getInstance(LoginPageObject.class);
     register = injector.getInstance(RegisterPageObject.class);
     entityHeader = injector.getInstance(EntityHeaderPageObject.class);
+    spaces = injector.getInstance(SpacesPageObject.class);
     chat = injector.getInstance(ChatPageObject.class);
     final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     PageFactory.initElements(locator, login);
     PageFactory.initElements(locator, register);
     PageFactory.initElements(locator, entityHeader);
+    PageFactory.initElements(locator, spaces);
     PageFactory.initElements(locator, chat);
   }
 
@@ -145,22 +150,37 @@ public class KuneSeleniumDefaults {
 
   public void resize() {
     final JavascriptExecutor js = (JavascriptExecutor) webdriver;
+    // Some others tested values:
     // 1024,769
-    js.executeScript("window.resizeTo(840,770); window.moveTo(0,0);");
+    // 840,770
+    // 806,707
+    js.executeScript("window.resizeTo(806,707); window.moveTo(0,0);");
   }
 
-  public void showSubtitle(final String title) {
-    showSubtitle(title, "", "");
+  public void showMsg(final String msg) {
+    SeleniumUtils.showMsg(webdriver, "", msg);
   }
 
-  public void showSubtitle(final String title, final String description) {
-    showSubtitle(title, description, "");
+  public void showMsg(final String title, final String msg) {
+    SeleniumUtils.showMsg(webdriver, title, msg);
   }
 
-  public void showSubtitle(final String title, final String description, final String token) {
+  public void showTitleSlide(final String title) {
+    showTitleSlide(title, "", "");
+  }
+
+  public void showTitleSlide(final String title, final String description) {
+    showTitleSlide(title, description, "");
+  }
+
+  public void showTitleSlide(final String title, final String description, final String token) {
     gotoToken(TokenUtils.subtitle(title, description, token));
     sleep(3000);
     webdriver.findElement(By.id(SeleniumConstants.GWTDEV + SubtitlesWidget.SUBTITLE_MANAGER_ID)).click();
+  }
+
+  public void showTooltip(final WebElement element) {
+    SeleniumUtils.showTooltip(webdriver, element);
   }
 
   public void sleep(final int milliseconds) {

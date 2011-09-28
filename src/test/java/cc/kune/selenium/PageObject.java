@@ -32,7 +32,6 @@ import org.openqa.selenium.WebDriver.Navigation;
 import org.openqa.selenium.WebDriver.Options;
 import org.openqa.selenium.WebDriver.TargetLocator;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
@@ -120,18 +119,16 @@ public abstract class PageObject {
     return webdriver.manage();
   }
 
-  public void moveMouseTo(final WebElement element) {
-    final Actions actions = new Actions(webdriver);
-    actions.moveToElement(element);
-    sleep(1000);
-  }
-
   public Navigation navigate() {
     return webdriver.navigate();
   }
 
   public void quit() {
     webdriver.quit();
+  }
+
+  public void showTooltip(final WebElement element) {
+    SeleniumUtils.showTooltip(webdriver, element);
   }
 
   public void sleep(final int milliseconds) {

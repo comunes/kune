@@ -17,19 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.selenium.tools;
+package cc.kune.selenium.general;
 
-public final class SeleniumConstants {
-  public static final String FIREFOX_PROFILE_NAME = "selenium";
-  public static final String GWTDEV = "gwt-debug-";
-  public static final String INPUT = "-input";
-  public static final int TIMEOUT = 20;
-  public static final String USER_EMAIL = "admin@example.org";
-  public static final String USER_LONGNAME = "Administrator";
-  public static final String USER_PASSWD = "easyeasy";
-  public static final String USER_SHORNAME = "admin";
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-  SeleniumConstants() {
-    // Final class
+import cc.kune.core.client.ws.entheader.EntityTextLogo;
+import cc.kune.selenium.PageObject;
+import cc.kune.selenium.tools.SeleniumConstants;
+
+public class EntityHeaderPageObject extends PageObject {
+
+  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_IMAGE)
+  protected WebElement logoImage;
+  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_NAME)
+  protected WebElement logoName;
+
+  public EntityHeaderPageObject() {
+  }
+
+  public void waitForEntityTitle(final String text) {
+    waitFor(logoName, text);
   }
 }

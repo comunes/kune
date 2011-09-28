@@ -17,26 +17,43 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.selenium.login;
+package cc.kune.selenium.general;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import cc.kune.core.client.ws.entheader.EntityTextLogo;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.tools.SeleniumConstants;
 
-public class EntityHeaderPageObject extends PageObject {
+public class SpacesPageObject extends PageObject {
 
-  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_IMAGE)
-  protected WebElement logoImage;
-  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_NAME)
-  protected WebElement logoName;
+  @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.GROUP_SPACE_ID)
+  protected WebElement groupSpaceBtn;
+  @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.HOME_SPACE_ID)
+  protected WebElement homeSpaceBtn;
+  @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.PUBLIC_SPACE_ID)
+  protected WebElement publicSpaceBtn;
+  @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.USER_SPACE_ID)
+  protected WebElement userSpaceBtn;
 
-  public EntityHeaderPageObject() {
+  public SpacesPageObject() {
   }
 
-  public void waitForEntityTitle(final String text) {
-    waitFor(logoName, text);
+  public WebElement groupBtn() {
+    return groupSpaceBtn;
   }
+
+  public WebElement homeBtn() {
+    return homeSpaceBtn;
+  }
+
+  public WebElement publicBtn() {
+    return publicSpaceBtn;
+  }
+
+  public WebElement userBtn() {
+    return userSpaceBtn;
+  }
+
 }

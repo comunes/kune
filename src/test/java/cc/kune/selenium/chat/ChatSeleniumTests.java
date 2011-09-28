@@ -31,10 +31,11 @@ public class ChatSeleniumTests extends KuneSeleniumTest {
   public void basicChat() {
     // 15 chars, the limit, so we don't use shortName
     login();
-    showSubtitle("Chat with your buddies", "compatible with gmail and similars");
+    showTitleSlide("Chat with your buddies", "compatible with gmail and similars");
     chat.show();
     final XmppURI jid = XmppURI.jid(ChatPageObject.DEF_TESTING_USER);
     final String jids = jid.toString();
+    showMsg("We need to add buddies (contacts) before chat with them");
     chat.openChat(jid);
     // chat.getPage(jids).click();
     chat.getTalkBox(jids).sendKeys("Helloo... ;)");

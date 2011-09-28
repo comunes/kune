@@ -90,8 +90,7 @@ public class LoginPageObject extends AbstractLoginObject {
 
   public void signIn(final String username, final String password, final boolean withReturn) {
     assertIsDisconnected();
-    // hightlight(signInLink);
-    moveMouseTo(signInLink);
+    showTooltip(signInLink);
     signInLink.click();
     fillSigInInForm(username, password, withReturn);
   }

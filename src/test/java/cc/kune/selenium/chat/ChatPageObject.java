@@ -75,6 +75,10 @@ public class ChatPageObject extends PageObject {
     return findElement(new ByIdOrName(id));
   }
 
+  public WebElement icon() {
+    return chatIcon;
+  }
+
   public void openChat(final XmppURI uri) {
     openChat.click();
     jid.sendKeys(uri.toString());

@@ -56,6 +56,11 @@ public class SpaceSelectorPresenter extends
 
   public interface SpaceSelectorView extends View {
 
+    public static String GROUP_SPACE_ID = "k-space-group-id";
+    public static String HOME_SPACE_ID = "k-space-home-id";
+    public static String PUBLIC_SPACE_ID = "k-space-public-id";
+    public static String USER_SPACE_ID = "k-space-user-id";
+
     HasClickHandlers getGroupBtn();
 
     HasClickHandlers getHomeBtn();

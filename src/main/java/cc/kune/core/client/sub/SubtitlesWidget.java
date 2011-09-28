@@ -49,7 +49,7 @@ public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
       @Override
       public void onClick(final ClickEvent event) {
         if (showing) {
-          final SlideRight slideAtEnd = new SlideRight(popup.getElement());
+          final SlideRight slideAtEnd = new SlideRight(widget.getElement());
           slideAtEnd.invert();
           slideAtEnd.setDuration(2);
           slideAtEnd.play();
@@ -101,11 +101,11 @@ public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
     setSize(Window.getClientWidth(), Window.getClientHeight());
     popup.sinkEvents(Event.MOUSEEVENTS);
     popup.show();
-    final Show showAtIni = new Show(popup.getElement());
-    showAtIni.setDuration(3);
+    final Show showAtIni = new Show(widget.getElement());
+    showAtIni.setDuration(2);
     showAtIni.play();
-    final SlideRight slideAtIni = new SlideRight(popup.getElement());
-    slideAtIni.setDuration(3);
+    final SlideRight slideAtIni = new SlideRight(widget.getElement());
+    slideAtIni.setDuration(2);
     slideAtIni.play();
     this.showing = true;
   }

@@ -44,6 +44,7 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
 
   @Override
   public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
+    SeleniumUtils.hightlight(element, driver);
   }
 
   @Override

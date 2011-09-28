@@ -72,6 +72,11 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
     userSpaceTooltip.setWidth(190);
     groupSpaceTooltip.setWidth(170);
     publicSpaceTooltip.setWidth(150);
+
+    homeButton.ensureDebugId(HOME_SPACE_ID);
+    userButton.ensureDebugId(USER_SPACE_ID);
+    groupButton.ensureDebugId(GROUP_SPACE_ID);
+    publicButton.ensureDebugId(PUBLIC_SPACE_ID);
   }
 
   @Override
