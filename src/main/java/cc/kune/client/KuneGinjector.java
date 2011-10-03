@@ -59,6 +59,9 @@ import cc.kune.events.client.EventsGinModule;
 import cc.kune.events.client.EventsGinjector;
 import cc.kune.gspace.client.GSpaceGinModule;
 import cc.kune.gspace.client.GSpaceGinjector;
+import cc.kune.hspace.client.HSpaceGinModule;
+import cc.kune.hspace.client.HSpaceParts;
+import cc.kune.hspace.client.HSpacePresenter;
 import cc.kune.lists.client.ListsGinModule;
 import cc.kune.lists.client.ListsGinjector;
 import cc.kune.pspace.client.PSpaceGinModule;
@@ -79,9 +82,9 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, WaveGinModule.class, PSpaceGinModule.class,
-    GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class, ChatGinModule.class,
-    WikiGinModule.class, BartersGinModule.class, EventsGinModule.class, TasksGinModule.class,
-    ListsGinModule.class })
+    HSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class,
+    ChatGinModule.class, WikiGinModule.class, BartersGinModule.class, EventsGinModule.class,
+    TasksGinModule.class, ListsGinModule.class })
 public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector,
     WikiGinjector, BartersGinjector, EventsGinjector, ChatGinjector, TasksGinjector, ListsGinjector {
 
@@ -115,6 +118,10 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
   GwtGuiProvider getGwtGuiProvider();
 
   GxtGuiProvider getGxtGuiProvider();
+
+  HSpaceParts getHSpaceParts();
+
+  AsyncProvider<HSpacePresenter> getHSpacePresenter();
 
   I18nTranslationService getI18n();
 

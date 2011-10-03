@@ -150,4 +150,5 @@ public class SiteRPC implements RPC, SiteService {
     data.setSiteShortName(kuneProperties.get(KuneProperties.SITE_SHORTNAME));
     return data;
   }
+
 }

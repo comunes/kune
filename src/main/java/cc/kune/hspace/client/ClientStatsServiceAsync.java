@@ -17,14 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.rpcservices;
+package cc.kune.hspace.client;
 
-import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.HomeStatsDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public interface SiteServiceAsync {
+public interface ClientStatsServiceAsync {
 
-  void getInitData(String userHash, AsyncCallback<InitDataDTO> callback);
+  void getHomeStats(AsyncCallback<HomeStatsDTO> callback);
 
+  void getHomeStats(String userHash, AsyncCallback<HomeStatsDTO> callback);
 }

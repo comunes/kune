@@ -28,6 +28,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("SiteService")
 public interface SiteService extends RemoteService {
 
-    InitDataDTO getInitData(String userHash) throws DefaultException;
+  InitDataDTO getInitData(String userHash) throws DefaultException;
 
 }

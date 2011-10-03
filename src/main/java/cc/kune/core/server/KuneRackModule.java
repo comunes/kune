@@ -56,6 +56,7 @@ import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
 import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.events.server.EventsServerModule;
+import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
@@ -145,7 +146,7 @@ public class KuneRackModule implements RackModule {
 
     builder.installGWTServices("^" + suffix + "/", SiteService.class, GroupService.class,
         ContentService.class, UserService.class, SocialNetworkService.class, I18nService.class,
-        ListsService.class);
+        ListsService.class, ClientStatsService.class);
     builder.installRESTServices("^" + suffix + "/json/", TestJSONService.class, GroupJSONService.class,
         UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
     builder.installServlet("^" + suffix + "/servlets/", FileUploadManager.class,

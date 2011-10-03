@@ -92,9 +92,12 @@ import cc.kune.core.server.rpc.GroupRPC;
 import cc.kune.core.server.rpc.I18nRPC;
 import cc.kune.core.server.rpc.SiteRPC;
 import cc.kune.core.server.rpc.SocialNetworkRPC;
+import cc.kune.core.server.rpc.StatsRPC;
 import cc.kune.core.server.rpc.UserRPC;
 import cc.kune.core.server.state.StateService;
 import cc.kune.core.server.state.StateServiceDefault;
+import cc.kune.core.server.stats.StatsService;
+import cc.kune.core.server.stats.StatsServiceDefault;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.server.users.UserInfoServiceDefault;
@@ -102,6 +105,7 @@ import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.server.xmpp.XmppManagerDefault;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.SocialNetwork;
+import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.rpc.ListsRPC;
 import cc.kune.wave.server.KuneWaveService;
@@ -149,6 +153,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
     bind(I18nService.class).to(I18nRPC.class);
     bind(ListsService.class).to(ListsRPC.class);
+    bind(ClientStatsService.class).to(StatsRPC.class);
   }
 
   private void bindServices() {
@@ -162,6 +167,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(KuneWaveService.class).to(KuneWaveServiceDefault.class);
     bind(MailService.class).to(MailServiceDefault.class);
     bind(XMLActionReader.class);
+    bind(StatsService.class).to(StatsServiceDefault.class);
   }
 
   @Override

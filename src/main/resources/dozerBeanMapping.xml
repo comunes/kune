@@ -237,4 +237,20 @@
     <class-a> cc.kune.core.shared.dto.SocialNetworkDataDTO </class-a>
     <class-b> cc.kune.domain.utils.SocialNetworkData </class-b>
   </mapping>
+    <mapping>
+    <class-a> cc.kune.core.shared.dto.HomeStatsDTO </class-a>
+    <class-b> cc.kune.core.server.stats.HomeStats </class-b>
+    <field>
+      <a>lastPublishedContents</a>
+      <b>lastPublishedContents</b>
+      <a-hint> cc.kune.core.shared.dto.ContentSimpleDTO </a-hint>
+      <b-hint> cc.kune.domain.Content </b-hint>
+    </field>
+    <field>
+      <a>lastContentsOfMyGroups</a>
+      <b>lastContentsOfMyGroups</b>
+      <a-hint> cc.kune.core.shared.dto.ContentSimpleDTO </a-hint>
+      <b-hint> cc.kune.domain.Content </b-hint>
+    </field>
+    </mapping>
 </mappings>

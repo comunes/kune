@@ -17,14 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.rpcservices;
+package cc.kune.hspace.client;
 
-import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.HomeStatsDTO;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-public interface SiteServiceAsync {
+@RemoteServiceRelativePath("ClientStatsService")
+public interface ClientStatsService extends RemoteService {
 
-  void getInitData(String userHash, AsyncCallback<InitDataDTO> callback);
+  HomeStatsDTO getHomeStats();
+
+  HomeStatsDTO getHomeStats(String userHash);
 
 }

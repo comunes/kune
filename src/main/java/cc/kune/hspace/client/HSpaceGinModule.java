@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.rpcservices;
+package cc.kune.hspace.client;
 
-import cc.kune.core.shared.dto.InitDataDTO;
+import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+public class HSpaceGinModule extends AbstractPresenterModule {
 
-public interface SiteServiceAsync {
-
-  void getInitData(String userHash, AsyncCallback<InitDataDTO> callback);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
+  @Override
+  protected void configure() {
+    bindPresenter(HSpacePresenter.class, HSpacePresenter.HSpaceView.class, HSpacePanel.class,
+        HSpacePresenter.HSpaceProxy.class);
+    bind(HSpaceParts.class).asEagerSingleton();
+  }
 
 }

@@ -29,6 +29,9 @@ import com.google.inject.persist.finder.Finder;
 
 public interface UserFinder {
 
+  @Finder(query = "SELECT count(*) FROM User u")
+  public Long count();
+
   @Finder(query = "select count (*) from User where email = :email")
   public Long countByEmail(@Named("email") final String email);
 

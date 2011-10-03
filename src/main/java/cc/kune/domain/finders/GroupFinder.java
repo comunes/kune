@@ -24,12 +24,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import cc.kune.core.shared.dto.GroupType;
 import cc.kune.domain.Group;
 
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
+import com.google.inject.persist.finder.MaxResults;
 
 public interface GroupFinder {
+
+  @Finder(query = "SELECT count(*) FROM Group g")
+  public Long count();
 
   @Finder(query = "SELECT count(*) FROM Group g WHERE g.longName = :longName")
   public Long countByLongName(@Named("longName") final String longName);
@@ -57,4 +62,11 @@ public interface GroupFinder {
 
   @Finder(query = "FROM Group", returnAs = ArrayList.class)
   public List<Group> getAll();
+
+  @Finder(query = "FROM Group g "
+      + " WHERE (g.groupType != :notgrouptype1 AND g.groupType != :notgrouptype2)"
+      + " ORDER BY createdOn DESC", returnAs = ArrayList.class)
+  public List<Group> lastGroups(@MaxResults final int limit,
+      @Named("notgrouptype1") final GroupType excludedGroupType1,
+      @Named("notgrouptype2") final GroupType excludedGroupType2);
 }
