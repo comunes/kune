@@ -49,7 +49,7 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
     super.getFormPanel().setLabelWidth(100);
     super.addStyleName("k-overflow-y-auto");
     final Label label = new Label();
-    label.setText(i18n.t("Here you can change this values:"));
+    label.setText(i18n.t("Change this values:"));
     label.addStyleName("kune-Margin-10-tb");
     super.add(label);
   }

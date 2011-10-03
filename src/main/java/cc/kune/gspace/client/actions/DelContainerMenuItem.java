@@ -67,8 +67,8 @@ public class DelContainerMenuItem extends MenuItemDescriptor {
     public void actionPerformed(final ActionEvent event) {
       final StateToken token = ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
       ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"),
-          i18n.t("You will delete it with all its contents. Are you sure?"), i18n.t("Yes"),
-          i18n.t("No"), null, null, new OnAcceptCallback() {
+          i18n.t("Are you sure you want this? It will be deleted with all its contents."),
+          i18n.t("Yes"), i18n.t("No"), null, null, new OnAcceptCallback() {
             @Override
             public void onSuccess() {
               NotifyUser.showProgress();

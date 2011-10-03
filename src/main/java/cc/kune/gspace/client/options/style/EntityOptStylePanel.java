@@ -75,7 +75,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     flow.add(wsThemeInfo);
     flow.add(styleSelector);
     hasBackLabel = i18n.t("Current background image: ");
-    noHasBacklabel = i18n.t("Also you can upload a background:");
+    noHasBacklabel = i18n.t("You can also upload a background:");
     backgroundLabel = new Label(hasBackLabel);
     backgroundLabel.addStyleName("k-clear");
     chooseImage = i18n.t("Choose");

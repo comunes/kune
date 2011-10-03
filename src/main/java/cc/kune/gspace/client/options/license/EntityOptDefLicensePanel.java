@@ -46,7 +46,7 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
     final FlowPanel flow = new FlowPanel();
     final Label intro = new Label();
     intro.setWordWrap(true);
-    intro.setText(i18n.t("This is the default license for all the contents of this group (you can also select another different license per content):"));
+    intro.setText(i18n.t("This is the default license for all the contents of this group (although you can choose a different license for specific contents):"));
     intro.addStyleName("kune-Margin-20-tb");
     flow.add(intro);
     licenseImage = new Image();

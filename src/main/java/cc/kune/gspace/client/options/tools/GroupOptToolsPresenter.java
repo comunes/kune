@@ -36,8 +36,7 @@ import cc.kune.gspace.client.options.GroupOptions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class GroupOptToolsPresenter extends EntityOptToolsPresenter implements
-    GroupOptTools {
+public class GroupOptToolsPresenter extends EntityOptToolsPresenter implements GroupOptTools {
 
   @Inject
   public GroupOptToolsPresenter(final StateManager stateManager, final Session session,
@@ -72,7 +71,7 @@ public class GroupOptToolsPresenter extends EntityOptToolsPresenter implements
   @Override
   protected String getDefContentTooltip() {
     // FIXME
-    return i18n.t("You cannot disable this tool because it's where the current group home page is located. To do that you have to select other content as the default group home page but in another tool.");
+    return i18n.t("This tool cannot be disabled as long as it’s where the group’s home page is located. Change the default home page to another tool then try again.");
   }
 
   @Override

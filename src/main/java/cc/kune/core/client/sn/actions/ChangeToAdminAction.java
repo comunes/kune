@@ -36,35 +36,36 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class ChangeToAdminAction extends AbstractExtendedAction {
-    private final I18nTranslationService i18n;
-    private final Session session;
-    private final Provider<SocialNetworkServiceAsync> snServiceProvider;
-    private final StateManager stateManager;
+  private final I18nTranslationService i18n;
+  private final Session session;
+  private final Provider<SocialNetworkServiceAsync> snServiceProvider;
+  private final StateManager stateManager;
 
-    @Inject
-    public ChangeToAdminAction(final StateManager stateManager, final Session session,
-            final I18nTranslationService i18n, final CoreResources res,
-            final Provider<SocialNetworkServiceAsync> snServiceProvider) {
-        this.stateManager = stateManager;
-        this.session = session;
-        this.i18n = i18n;
-        this.snServiceProvider = snServiceProvider;
-        putValue(NAME, i18n.t("Change to admin"));
-        putValue(Action.SMALL_ICON, res.arrowUpGreen());
-    }
+  @Inject
+  public ChangeToAdminAction(final StateManager stateManager, final Session session,
+      final I18nTranslationService i18n, final CoreResources res,
+      final Provider<SocialNetworkServiceAsync> snServiceProvider) {
+    this.stateManager = stateManager;
+    this.session = session;
+    this.i18n = i18n;
+    this.snServiceProvider = snServiceProvider;
+    putValue(NAME, i18n.t("Change to administrator"));
+    putValue(Action.SMALL_ICON, res.arrowUpGreen());
+  }
 
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-        NotifyUser.showProgressProcessing();
-        snServiceProvider.get().setCollabAsAdmin(session.getUserHash(), session.getCurrentState().getStateToken(),
-                ((GroupDTO) event.getTarget()).getShortName(), new AsyncCallbackSimple<SocialNetworkDataDTO>() {
-                    @Override
-                    public void onSuccess(final SocialNetworkDataDTO result) {
-                        NotifyUser.hideProgress();
-                        NotifyUser.info(i18n.t("Member type changed"));
-                        stateManager.setSocialNetwork(result);
-                    }
-                });
-    }
+  @Override
+  public void actionPerformed(final ActionEvent event) {
+    NotifyUser.showProgressProcessing();
+    snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
+        session.getCurrentState().getStateToken(), ((GroupDTO) event.getTarget()).getShortName(),
+        new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+          @Override
+          public void onSuccess(final SocialNetworkDataDTO result) {
+            NotifyUser.hideProgress();
+            NotifyUser.info(i18n.t("Member type changed"));
+            stateManager.setSocialNetwork(result);
+          }
+        });
+  }
 
 }

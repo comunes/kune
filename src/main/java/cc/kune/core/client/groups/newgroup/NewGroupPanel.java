@@ -164,30 +164,34 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
     form.add(groupTypeFieldSet);
 
-    projectRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Project"), TYPEOFGROUP_FIELD,
-        i18n.t("A project is a kind of group in which new members joining "
-            + "is moderated by the project administrators. "
-            + "An administrator is the person who creates the project "
-            + "and other people she/he chooses to be administrator as well."), PROJ_GROUP_TYPE_ID);
+    projectRadio = DefaultFormUtils.createRadio(
+        groupTypeFieldSet,
+        i18n.t("Project"),
+        TYPEOFGROUP_FIELD,
+        i18n.t("A project is a kind of group in which the joining of new members is moderated by the project administrators."),
+        PROJ_GROUP_TYPE_ID);
     projectRadio.setTabIndex(6);
     projectRadio.setValue(true);
 
     orgRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Organization"),
-        TYPEOFGROUP_FIELD, i18n.t("An organization works as a project, "
-            + "but organizations must be a legal entity."), ORG_GROUP_TYPE_ID);
+        TYPEOFGROUP_FIELD, i18n.t("An organization works the same way as a project, "
+            + "except that it must be a legal entity."), ORG_GROUP_TYPE_ID);
     orgRadio.setTabIndex(7);
 
-    closedRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Closed"), TYPEOFGROUP_FIELD,
-        i18n.t("Closed groups are social groups of persons "
-            + "like family, friends, buddies, etc, which are moderated to new members "
-            + "and with private contents (by default)"), CLOSED_GROUP_TYPE_ID);
+    closedRadio = DefaultFormUtils.createRadio(
+        groupTypeFieldSet,
+        i18n.t("Closed"),
+        TYPEOFGROUP_FIELD,
+        i18n.t("A Closed group is a private project, which contents are only accessible to its members (by default)."),
+        CLOSED_GROUP_TYPE_ID);
     closedRadio.setTabIndex(8);
 
-    communityRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Community"),
-        TYPEOFGROUP_FIELD, i18n.t("Communities are social groups of persons "
-            + "with shared interests, which are open to new members "
-            + "(for instance the environmental community or the LGBT community). "
-            + "They rarely are a legal entity."), COMM_GROUP_TYPE_ID);
+    communityRadio = DefaultFormUtils.createRadio(
+        groupTypeFieldSet,
+        i18n.t("Community"),
+        TYPEOFGROUP_FIELD,
+        i18n.t("A community is a group of users with shared interests (for instance the environmental community or the LGBT community). It is open to any new member to join freely without the moderation of the administrators."),
+        COMM_GROUP_TYPE_ID);
     communityRadio.setTabIndex(9);
 
     return form;

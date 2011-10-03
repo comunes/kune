@@ -27,10 +27,11 @@ import com.google.inject.Inject;
 
 public class GotoMemberAction extends GotoGroupAction {
 
-    @Inject
-    public GotoMemberAction(final StateManager stateManager, final I18nTranslationService i18n, final CoreResources res) {
-        super(stateManager, i18n, res);
-        putValue(NAME, i18n.t("Visit this member homepage"));
-    }
+  @Inject
+  public GotoMemberAction(final StateManager stateManager, final I18nTranslationService i18n,
+      final CoreResources res) {
+    super(stateManager, i18n, res);
+    putValue(NAME, i18n.t("Visit this member's homepage"));
+  }
 
 }

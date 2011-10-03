@@ -80,7 +80,7 @@ public class ChatAboutContentBtn extends ButtonDescriptor {
   public ChatAboutContentBtn(final ChatAboutContentAction action, final CoreResources res,
       final I18nTranslationService i18n) {
     super(action);
-    this.withIcon(res.emiteRoom()).withToolTip(i18n.t("Chat and comment this")).withText(
+    this.withIcon(res.emiteRoom()).withToolTip(i18n.t("Chat and comment on this")).withText(
         i18n.t("Chat about")).withStyles("k-def-docbtn, k-fl").withId(ID);
   }
 }

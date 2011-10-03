@@ -31,7 +31,7 @@ public class WriteToAdmins extends MenuItemDescriptor {
   public WriteToAdmins(final WriteToAction action, final I18nTranslationService i18n) {
     super(action);
     action.setOnlyToAdmin(true);
-    withText(i18n.t("Write to the admins of this group"));
+    withText(i18n.t("Write to the administrators of this group"));
     setParent(GroupSNConfActions.OPTIONS_MENU);
     setPosition(0);
   }

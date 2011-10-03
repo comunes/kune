@@ -138,7 +138,7 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
         modificationsGroup,
         i18n.t("Yes"),
         RADIO_MODIF_FIELD_NAME,
-        i18n.t("The licensor permits others to copy, distribute, display and perform the work, as well as make derivative works based on it"),
+        i18n.t("The licensor permits others to copy, distribute, display and perform the work, as well as to make derivative works based on it"),
         RADIO_PERMIT_MOD_ID);
     permitModSaRadio = createRadio(
         modificationsGroup,

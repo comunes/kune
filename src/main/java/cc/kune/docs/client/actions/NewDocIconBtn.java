@@ -34,7 +34,7 @@ public class NewDocIconBtn extends NewContentBtn {
   public NewDocIconBtn(final I18nTranslationService i18n, final NewContentAction action,
       final NavResources res, final GlobalShortcutRegister shorcutReg) {
     super(i18n, action, res.pageAdd(), shorcutReg, "", i18n.t("Create a New Document. "
-        + "This document will be a new 'Page' in the public web if you publish it"),
+        + "If you choose to publish it, this document will appear as a new 'Page' in the public web"),
         i18n.t("New document"), DocsConstants.TYPE_DOCUMENT);
     withStyles("k-btn-min, k-fl");
   }

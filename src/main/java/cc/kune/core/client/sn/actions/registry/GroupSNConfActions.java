@@ -87,11 +87,11 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     addImpl(OPTIONS_MENU);
     new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
 
-    VISIBILITY_SUBMENU.withText(i18n.t("Those who can view this member list")).withParent(OPTIONS_MENU);
+    VISIBILITY_SUBMENU.withText(i18n.t("Users who can view this member list")).withParent(OPTIONS_MENU);
     MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU);
     anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone"));
     onlyMembersItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only members"));
-    onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only admins"));
+    onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only administrators"));
     moderatedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("moderate request to join"));
     openItem.withParent(MODERATION_SUBMENU).withText(i18n.t("auto accept request to join"));
     closedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("closed for new members"));

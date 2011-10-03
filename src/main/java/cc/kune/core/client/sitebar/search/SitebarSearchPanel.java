@@ -65,7 +65,6 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
           @Override
           public void onExactMatch(final String match) {
             NotifyUser.info(match);
-            NotifyUser.info("kk");
           }
         }) {
 
@@ -86,7 +85,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
       };
     };
     suggestBox = multivalueSBox.getSuggestBox();
-    Tooltip.to(suggestBox, i18n.t("Type something to search users and groups in this site"));
+    Tooltip.to(suggestBox, i18n.t("Type something to search for users and groups in this site"));
     searchTextBox = suggestBox.getTextBox();
     searchTextBox.ensureDebugId(SITE_SEARCH_TEXTBOX);
     searchTextBox.addStyleName("k-fr");

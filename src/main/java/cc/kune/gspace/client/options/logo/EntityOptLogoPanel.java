@@ -97,16 +97,16 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
 
   @Override
   public void setNormalGroupsLabels() {
-    uploader.setLabelText(i18n.t("Select an image in your computer as the logo for this group. "
-        + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
+    uploader.setLabelText(i18n.t("Select an image from your computer as the logo for this group. "
+        + "For best results use a [%d]x[%d] pixel image. Bigger images will be automatically resized.",
         FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT));
     tabTitle.setText(CoreMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
   }
 
   @Override
   public void setPersonalGroupsLabels() {
-    uploader.setLabelText(i18n.t("Select an image in your computer as your avatar. "
-        + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
+    uploader.setLabelText(i18n.t("Select an image from your computer as your avatar. "
+        + "For best results use a [%d]x[%d] pixel image. Bigger images will be automatically resized.",
         FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT));
     tabTitle.setText(CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
   }

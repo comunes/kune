@@ -45,14 +45,15 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
     super(i18n, guiProvider, armor, avatarDecorator, dragController, notDrop);
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("Group members"));
-    Tooltip.to(mainTitle, i18n.t("People and groups collaborating in this group"));
-    firstCategoryLabel.setText(i18n.t("Admins"));
-    setTooltip(firstCategoryLabel, i18n.t("People that can admin this group"));
+    Tooltip.to(mainTitle, i18n.t("Users and groups collaborating in this group"));
+    firstCategoryLabel.setText(i18n.t("Administrators"));
+    setTooltip(firstCategoryLabel, i18n.t("Users who can administrate this group"));
     sndCategoryLabel.setText(i18n.t("Collaborators"));
-    setTooltip(sndCategoryLabel, i18n.t("Other people that collaborate with this group"));
+    setTooltip(sndCategoryLabel, i18n.t("Others who collaborate with this group"));
     trdCategoryLabel.setText(i18n.t("Pending"));
-    setTooltip(trdCategoryLabel, i18n.t("People pending to be accepted in this group by the admins"));
-    sndDeckLabel.setText(i18n.t("This is an orphaned project, if you are interested please request to join to work on it"));
+    setTooltip(trdCategoryLabel,
+        i18n.t("Users pending to be accepted in this group by the administrators"));
+    sndDeckLabel.setText(i18n.t("This is an orphaned project, if you are interested in contributing please request to join"));
     firstDeckLabel.setText(i18n.t("The members of this group are not public"));
     bottomActionsToolbar = new ActionFlowPanel(guiProvider);
     bottomPanel.add(bottomActionsToolbar);

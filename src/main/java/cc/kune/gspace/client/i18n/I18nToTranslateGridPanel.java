@@ -16,7 +16,7 @@ public class I18nToTranslateGridPanel extends Composite {
   @Inject
   public I18nToTranslateGridPanel(final I18nTranslationService i18n, final I18nCellList list) {
     this.list = list;
-    tabTitle = new Label(i18n.t("Untranslated"));
+    tabTitle = new Label(i18n.t("Not translated"));
     initWidget(list);
   }
 

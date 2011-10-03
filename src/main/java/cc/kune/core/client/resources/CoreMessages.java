@@ -25,7 +25,7 @@ public final class CoreMessages {
   public final static String EMAIL_IN_USE = "This email address is being used by another user. Please, try with another one";
   public final static String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Logo";
   public final static String ENT_LOGO_SELECTOR_PERSON_TITLE = "Avatar";
-  public final static String FIELD_MUST_BE_BETWEEN_3_AND_15 = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters and numbers";
+  public final static String FIELD_MUST_BE_BETWEEN_3_AND_15 = "The name must be between 3 and 15 lowercase Western characters and/or numbers";
   public final static String FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS = "The name must be between 3 and 15 lowercase characters.";
   public final static String GROUP_OPTIONS_DIALOG_TITLE = "Group options";
   public final static String GROUPNAME_RESTRICTED = "This group name can not be used. Please try with a different name";

@@ -52,8 +52,8 @@ public class JoinGroupAction extends SNRolAction {
     super(stateManager, session, i18n, res, snServiceProvider, rightsClientManager, AccessRolDTO.Viewer,
         false, true, false);
     this.signIn = signIn;
-    putValue(NAME, i18n.t("Participate"));
-    putValue(TOOLTIP, i18n.t("Request to participate in this group"));
+    putValue(NAME, i18n.t("Join"));
+    putValue(TOOLTIP, i18n.t("Request to Join in this group"));
     putValue(Action.SMALL_ICON, res.addGreen());
     putValue(Action.STYLES, "k-sn-join");
   }

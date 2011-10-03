@@ -34,9 +34,14 @@ public class NewDocMenuItem extends NewContentMenuItem {
   public NewDocMenuItem(final I18nTranslationService i18n, final NewContentAction action,
       final NavResources res, final GlobalShortcutRegister shorcutReg,
       final DocsFolderNewMenu docsFolderNewMenu) {
-    super(i18n, action, res.pageAdd(), shorcutReg, i18n.t("New document"),
+    super(
+        i18n,
+        action,
+        res.pageAdd(),
+        shorcutReg,
+        i18n.t("New document"),
         i18n.t("Create a New Document here. "
-            + "This document will be a new 'Page' in the public web if you publish it"),
+            + "If you choose to publish it, this document will appear as a new 'Page' in the public web"),
         i18n.t("New document"), DocsConstants.TYPE_DOCUMENT, docsFolderNewMenu.get());
   }
 

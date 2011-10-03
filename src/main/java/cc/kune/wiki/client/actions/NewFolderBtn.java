@@ -32,7 +32,7 @@ public class NewFolderBtn extends NewContainerMenuItem {
   public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
       final NavResources res, final WikiFolderNewMenu wikiFolderNewMenu) {
     super(i18n, action, res.wikiAdd(), i18n.t("New folder"),
-        i18n.t("Create a new folder here. A folder will be a 'section' in the public web"),
+        i18n.t("Create a new folder. A folder will be a 'section' in the public web"),
         i18n.t("New folder"), WikiConstants.TYPE_FOLDER, wikiFolderNewMenu.get());
   }
 

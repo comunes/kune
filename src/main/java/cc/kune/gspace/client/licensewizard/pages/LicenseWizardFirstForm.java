@@ -54,7 +54,7 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
     // super.setHeight(LicenseWizardView.HEIGHT);
 
     final Label intro = new Label();
-    intro.setText(i18n.t("Select a license to share your group contents with other people:"));
+    intro.setText(i18n.t("Select the license you prefer using for sharing your group contents with other people:"));
     intro.addStyleName("kune-Margin-10-b");
     final FieldSet fieldSet = new FieldSet();
     // fieldSet.setTitle(i18n.t("license recommended"));

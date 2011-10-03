@@ -49,7 +49,7 @@ public class WriteToAction extends AbstractExtendedAction {
     NotifyUser.askConfirmation(
         i18n.t("Confirm, please:"),
         isPerson ? i18n.t("Do you want to write a message to your buddy?")
-            : onlyToAdmins ? i18n.t("Do you want to write a message to the admins of this group?")
+            : onlyToAdmins ? i18n.t("Do you want to write a message to the administrators of this group?")
                 : i18n.t("Do you want to write a message to the members of this group?"),
         new SimpleResponseCallback() {
           @Override

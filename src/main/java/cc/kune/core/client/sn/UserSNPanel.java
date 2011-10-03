@@ -51,11 +51,11 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("His/her network:"));
-    mainTitle.setTitle(i18n.t("This user buddies and groups where participes"));
+    mainTitle.setTitle(i18n.t("This user's groups and buddies"));
     firstCategoryLabel.setText(i18n.t("Buddies"));
-    setTooltip(firstCategoryLabel, i18n.t("This user buddies"));
-    sndCategoryLabel.setText(i18n.t("Participates in"));
-    setTooltip(sndCategoryLabel, i18n.t("Groups in which this user participates"));
+    setTooltip(firstCategoryLabel, i18n.t("This user's buddies"));
+    sndCategoryLabel.setText(i18n.t("Joins in"));
+    setTooltip(sndCategoryLabel, i18n.t("Groups which this user Joined"));
     trdCategoryLabel.setText("NOT USED");
     setTooltip(trdCategoryLabel, "NOT USED");
     super.setTrdCategoryVisible(false);

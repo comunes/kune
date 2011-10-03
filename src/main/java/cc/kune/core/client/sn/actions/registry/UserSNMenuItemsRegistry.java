@@ -81,7 +81,7 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
       public MenuItemDescriptor get() {
         final MenuItemDescriptor item = new MenuItemDescriptor(writeToAction);
         item.add(isPerson);
-        item.withText(i18n.t("Write to your buddie"));
+        item.withText(i18n.t("Write to your buddy"));
         item.add(isBuddie);
         item.add(isNotMe);
         item.add(isLogged);
@@ -112,7 +112,7 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
       public MenuItemDescriptor get() {
         writeToActionOnlyAdmins.setOnlyToAdmin(true);
         final MenuItemDescriptor item = new MenuItemDescriptor(writeToActionOnlyAdmins);
-        item.withText(i18n.t("Write to the admins of this group"));
+        item.withText(i18n.t("Write to the administrators of this group"));
         item.add(isLogged);
         item.add(isGroup);
         item.add(imPartOfGroup);

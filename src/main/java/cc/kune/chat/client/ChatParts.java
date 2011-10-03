@@ -26,7 +26,7 @@ import cc.kune.chat.client.actions.ChatSitebarActions;
 import cc.kune.chat.client.actions.OpenGroupPublicChatRoomAction;
 import cc.kune.chat.client.actions.StartAssemblyWithMembers;
 import cc.kune.chat.client.actions.StartChatWithMemberAction;
-import cc.kune.chat.client.actions.StartChatWithThisBuddieAction;
+import cc.kune.chat.client.actions.StartChatWithThisBuddyAction;
 import cc.kune.chat.client.actions.StartChatWithThisPersonAction;
 import cc.kune.chat.client.actions.conditions.IsBuddieCondition;
 import cc.kune.chat.client.actions.conditions.IsNotBuddieCondition;
@@ -76,7 +76,7 @@ public class ChatParts {
       final Provider<StartChatWithMemberAction> startChatWithMemberAction,
       final IsLoggedCondition isLogged,
       final Provider<StartChatWithThisPersonAction> startChatWithPersonAction,
-      final Provider<StartChatWithThisBuddieAction> startChatWithBuddieAction,
+      final Provider<StartChatWithThisBuddyAction> startChatWithBuddieAction,
       final ChatClientActions chatActions, final Provider<StartAssemblyWithMembers> startAssembly,
       final Provider<OpenGroupPublicChatRoomAction> openGroupRoomAction,
       // final Provider<OpenGroupPublicChatRoomButton> openGroupRoom,

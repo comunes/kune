@@ -36,7 +36,7 @@ public class GotoGroupAction extends AbstractExtendedAction {
   public GotoGroupAction(final StateManager stateManager, final I18nTranslationService i18n,
       final CoreResources res) {
     this.stateManager = stateManager;
-    putValue(NAME, i18n.t("Visit this group homepage"));
+    putValue(NAME, i18n.t("Visit this group's homepage"));
     putValue(Action.SMALL_ICON, res.groupHome());
   }
 
