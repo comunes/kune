@@ -20,8 +20,9 @@
 package cc.kune.core.client.sitebar.spaces;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.state.Session;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.resources.GSpaceArmorResources;
 
@@ -55,11 +56,12 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
   private final Tooltip userSpaceTooltip;
 
   @Inject
-  public SpaceSelectorPanel(final GSpaceArmor armor, final I18nTranslationService i18n,
-      final GSpaceArmorResources res) {
+  public SpaceSelectorPanel(final GSpaceArmor armor, final I18nUITranslationService i18n,
+      final GSpaceArmorResources res, final Session session) {
     armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
     // homeButton.setVisible(false);
-    homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in this site"));
+    final String siteCommonName = i18n.getSiteCommonName();
+    homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in [%s]", siteCommonName));
     userSpaceTooltip = Tooltip.to(
         userButton,
         i18n.t("User space: it shows a list of all documents and contents " + "in which you participate"));
@@ -67,7 +69,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
         + "and publish contents for your personal or group web spaces"));
     publicSpaceTooltip = Tooltip.to(publicButton,
         i18n.t("Public space: Where you can see a preview of how your Personal or "
-            + "Group Space looks like on the web, outside this site"));
+            + "Group Space looks like on the web"));
     // homeSpaceTooltip.setWidth(0);
     userSpaceTooltip.setWidth(190);
     groupSpaceTooltip.setWidth(170);

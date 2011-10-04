@@ -46,8 +46,7 @@ public class GroupSNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegi
 
   @Inject
   public GroupSNAdminsMenuItemsRegistry(final Session session, final I18nTranslationService i18n,
-      final IsLoggedCondition isLogged,
-      final IsCurrentStateAdministrableCondition isAdministrable,
+      final IsLoggedCondition isLogged, final IsCurrentStateAdministrableCondition isAdministrable,
       final IsPersonCondition isPerson, final IsGroupCondition isGroup,
       final IsBuddieCondition isBuddie, final IsMeCondition isMe, final IsNotMeCondition isNotMe,
       final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
@@ -78,7 +77,7 @@ public class GroupSNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegi
       public MenuItemDescriptor get() {
         final MenuItemDescriptor item = new MenuItemDescriptor(writeToAction);
         item.add(isPerson);
-        item.withText(i18n.t("Write to your buddie"));
+        item.withText(i18n.t("Write to your buddy"));
         item.add(isNotMe);
         item.add(isBuddie);
         item.add(isLogged);

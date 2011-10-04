@@ -223,7 +223,7 @@ public class ChatClientDefault implements ChatClient {
   }
 
   @Override
-  public void addNewBuddie(final String shortName) {
+  public void addNewBuddy(final String shortName) {
     roster.requestAddItem(uriFrom(shortName), shortName);
   }
 
@@ -341,7 +341,7 @@ public class ChatClientDefault implements ChatClient {
       public void onSubscriptionRequestReceived(final SubscriptionRequestReceivedEvent event) {
         final XmppURI uri = event.getFrom();
         final String nick = event.getNick();
-        NotifyUser.askConfirmation(res.question32(), i18n.t("Confirm new buddie"), i18n.t(
+        NotifyUser.askConfirmation(res.question32(), i18n.t("Confirm new buddy"), i18n.t(
             "[%s] had added you as a buddy. Do you want to add him/her also?", uri.getJID().toString()),
             new SimpleResponseCallback() {
               @Override
@@ -359,12 +359,12 @@ public class ChatClientDefault implements ChatClient {
   }
 
   @Override
-  public boolean isBuddie(final String shortName) {
-    return isBuddie(uriFrom(shortName));
+  public boolean isBuddy(final String shortName) {
+    return isBuddy(uriFrom(shortName));
   }
 
   @Override
-  public boolean isBuddie(final XmppURI jid) {
+  public boolean isBuddy(final XmppURI jid) {
     if (roster.isRosterReady()) {
       if (roster.getItemByJID(jid) != null) {
         return true;

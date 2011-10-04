@@ -175,6 +175,8 @@ public class RegisterPresenter extends
           true, SubscriptionMode.manual, "blue");
       super.saveAutocompleteLoginData(getView().getShortName(), getView().getRegisterPassword());
       final AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+        final String siteCommonName = i18n.getSiteCommonName();
+
         @Override
         public void onFailure(final Throwable caught) {
           onRegistrationFailure(caught);
@@ -214,20 +216,22 @@ public class RegisterPresenter extends
         private void showWelcolmeDialog() {
           NotifyUser.info(
               i18n.t("Welcome"),
-              i18n.t("Thanks for joining this site. "
-                  + "Now you can actively participate in this site. "
-                  + "You can also use your personal space to publish contents. "
-                  + "Note: your email is not verified, please follow the instructions you will receive by email."),
-              Register.WELCOME_ID, true);
+              i18n.t(
+                  "Thanks for joining [%s]. "
+                      + "Now you can actively participate in [%s]. "
+                      + "You can also use your personal space to publish contents. "
+                      + "Note: your email is not verified, please follow the instructions you will receive by email.",
+                  siteCommonName, siteCommonName), Register.WELCOME_ID, true);
         }
 
         private void showWelcolmeDialogNoHomepage() {
           NotifyUser.info(
               i18n.t("Welcome"),
-              i18n.t("Thanks for joining this site"
-                  + "Now you can actively participate in this site. "
-                  + "Note: your email is not verified, please follow the instructions you will receive by email."),
-              Register.WELCOME_ID, true);
+              i18n.t(
+                  "Thanks for joining [%s]. "
+                      + "Now you can actively participate in [%s]. "
+                      + "Note: your email is not verified, please follow the instructions you will receive by email.",
+                  siteCommonName, siteCommonName), Register.WELCOME_ID, true);
         }
       };
       userServiceProvider.get().createUser(user, wantHomepage, callback);

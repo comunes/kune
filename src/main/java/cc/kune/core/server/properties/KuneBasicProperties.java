@@ -62,6 +62,10 @@ public class KuneBasicProperties {
     return properties.get(KuneProperties.SITE_SHORTNAME);
   }
 
+  public String getSiteCommonName() {
+    return properties.get(KuneProperties.SITE_COMMON_NAME);
+  }
+
   public String getWelcomewave() {
     return properties.get(KuneProperties.WELCOME_WAVE);
   }

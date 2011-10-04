@@ -243,9 +243,9 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       roster = xmppManager.getRoster(connection);
       xmppManager.disconnect(connection);
     } catch (final ChatException e) {
-      // Seems that it not possible to get the buddy list, then we follow
+      // Seems that it not possible to get the buddies list, then we follow
       // with a empty buddy list
-      log.error("Cannot retrieve the buddie list", e);
+      log.error("Cannot retrieve the buddies list", e);
       roster = new HashSet<RosterEntry>();
     }
     for (final RosterEntry entry : roster) {
@@ -291,10 +291,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
           public void run() {
             xmppManager.sendMessage(
                 userName,
-                i18n.t("This is the chat window. "
-                    + ""
-                    + "Here you can communicate with other users of this site but also with other users with compatible accounts (like gmail accounts). "
-                    + "" + "Just add some buddie and start to chat."));
+                i18n.t(
+                    "This is the chat window. "
+                        + "Here you can communicate with other users of [%s] but also with other users with compatible accounts (like gmail accounts). "
+                        + "Just add some buddy and start to chat.",
+                    i18n.t(properties.getSiteCommonName())));
           }
         }, 5000);
       }

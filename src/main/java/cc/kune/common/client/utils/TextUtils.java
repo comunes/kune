@@ -157,7 +157,6 @@ public class TextUtils {
    * Try to use {@link SimpleHtmlSanitizer} better
    * 
    */
-  @Deprecated
   public static String escapeHtmlLight(final String source) {
     String result = source;
     if (source != null) {

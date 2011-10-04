@@ -47,8 +47,8 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    NotifyUser.info(i18n.t("Search the user you want to add and in his/her homepage press '"
-        + CoreMessages.ADD_AS_A_BUDDIE + "'"));
+    NotifyUser.info(i18n.t("Search the user you want to add and in his/her homepage click '"
+        + CoreMessages.ADD_AS_A_BUDDY + "'"));
     searcher.get().focus();
   }
 

@@ -34,14 +34,14 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.inject.Inject;
 
-public class WriteToBuddieHeaderButton {
+public class WriteToBuddyHeaderButton {
 
   @Inject
-  public WriteToBuddieHeaderButton(final WriteToAction writeToAction, final EntityHeader entityHeader,
+  public WriteToBuddyHeaderButton(final WriteToAction writeToAction, final EntityHeader entityHeader,
       final StateManager stateManager, final Session session, final ChatClient chatEngine) {
     final ButtonDescriptor button = new ButtonDescriptor(writeToAction);
     // button.setVisible(false);
-    button.withText("Write to your buddie");
+    button.withText("Write to your buddy");
     // button.setStyles("k-chat-add-as-buddie");
     writeToAction.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
@@ -59,7 +59,7 @@ public class WriteToBuddieHeaderButton {
         final GroupDTO group = state.getGroup();
         final String groupName = group.getShortName();
         final boolean imLogged = session.isLogged();
-        final boolean isBuddie = chatEngine.isBuddie(groupName);
+        final boolean isBuddie = chatEngine.isBuddy(groupName);
         if (imLogged && group.isPersonal() && isBuddie
             && !session.getCurrentUser().getShortName().equals(groupName)) {
           button.setTarget(group);

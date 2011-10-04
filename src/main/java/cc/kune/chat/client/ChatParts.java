@@ -19,7 +19,7 @@
  */
 package cc.kune.chat.client;
 
-import cc.kune.chat.client.actions.AddAsBuddieAction;
+import cc.kune.chat.client.actions.AddAsBuddyAction;
 import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
 import cc.kune.chat.client.actions.ChatClientActions;
 import cc.kune.chat.client.actions.ChatSitebarActions;
@@ -72,7 +72,7 @@ public class ChatParts {
       final IsCurrentStateEditableCondition isEditableCondition,
       final IsBuddieCondition isBuddieCondition, final IsNotBuddieCondition isNotBuddieCondition,
       final IsCurrentStateAGroupCondition isGroupCondition, final IsPersonCondition isPersonCondition,
-      final Provider<AddAsBuddieAction> addAsBuddie,
+      final Provider<AddAsBuddyAction> addAsBuddie,
       final Provider<StartChatWithMemberAction> startChatWithMemberAction,
       final IsLoggedCondition isLogged,
       final Provider<StartChatWithThisPersonAction> startChatWithPersonAction,
@@ -112,7 +112,7 @@ public class ChatParts {
         final Provider<MenuItemDescriptor> addAsBuddieItem = new Provider<MenuItemDescriptor>() {
           @Override
           public MenuItemDescriptor get() {
-            final AddAsBuddieAction action = addAsBuddie.get();
+            final AddAsBuddyAction action = addAsBuddie.get();
             final MenuItemDescriptor item = new MenuItemDescriptor(action);
             item.add(isNotMe);
             item.add(isNotBuddieCondition);

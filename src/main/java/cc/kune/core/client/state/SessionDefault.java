@@ -215,6 +215,10 @@ public class SessionDefault implements Session {
     return currentUserInfo == null ? false : currentUserInfo.getShowDeletedContent();
   }
 
+  public String getSiteCommonName() {
+    return getInitData().getSiteCommonName();
+  }
+
   @Override
   public String getSiteUrl() {
     final String baseURL = GWT.getModuleBaseURL();

@@ -50,6 +50,7 @@ public class InitDataDTO implements IsSerializable {
   private String mp3EmbedObject;
   private String oggEmbedObject;
   private ReservedWordsRegistryDTO reservedWords;
+  private String siteCommonName;
   private String siteDomain;
   private String siteLogoUrl;
   private String siteShortName;
@@ -151,6 +152,10 @@ public class InitDataDTO implements IsSerializable {
 
   public ReservedWordsRegistryDTO getReservedWords() {
     return this.reservedWords;
+  }
+
+  public String getSiteCommonName() {
+    return siteCommonName;
   }
 
   @Deprecated
@@ -284,6 +289,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setReservedWords(final ReservedWordsRegistryDTO reservedWords) {
     this.reservedWords = reservedWords;
+  }
+
+  public void setSiteCommonName(final String siteCommonName) {
+    this.siteCommonName = siteCommonName;
   }
 
   @Deprecated

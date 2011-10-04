@@ -23,6 +23,7 @@ import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
@@ -39,7 +40,8 @@ public class CoreParts {
       final Provider<UserSNPresenter> buddiesAndParticipationPresenter,
       final Provider<GroupSNConfActions> groupMembersConfActions,
       final Provider<UserSNConfActions> userSNConfActions, final Provider<AnonUsersManager> anonUsers,
-      final Provider<SiteUserOptionsPresenter> userOptions) {
+      final Provider<SiteUserOptionsPresenter> userOptions,
+      final Provider<SpaceSelectorPresenter> spaceSelector) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -49,6 +51,7 @@ public class CoreParts {
         buddiesAndParticipationPresenter.get();
         userOptions.get();
         anonUsers.get();
+        spaceSelector.get();
       }
     });
   }

@@ -151,7 +151,7 @@
   </changeSet>
   <changeSet id="23" author="vjrj">
     <comment>I18n translations cleanup 3</comment>
-    <sqlFile path="src/main/resources/db/update-0017-i18nclean3.sql"
+    <sqlFile path="src/main/resources/db/update-0018-i18nclean3.sql"
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>

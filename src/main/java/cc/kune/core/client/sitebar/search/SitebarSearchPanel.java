@@ -21,11 +21,12 @@ package cc.kune.core.client.sitebar.search;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.SearcherConstants;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
@@ -55,8 +56,8 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
   private final SuggestBox suggestBox;
 
   @Inject
-  public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img,
-      final StateManager stateManager, final I18nTranslationService i18n) {
+  public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img, final Session session,
+      final StateManager stateManager, final I18nUITranslationService i18n) {
     searchButton = new PushButton(new Image(img.kuneSearchIco()), new Image(img.kuneSearchIcoPush()));
     searchButton.ensureDebugId(SITE_SEARCH_BUTTON);
     final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(
@@ -84,8 +85,10 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
         }
       };
     };
+    final String siteCommonName = i18n.getSiteCommonName();
     suggestBox = multivalueSBox.getSuggestBox();
-    Tooltip.to(suggestBox, i18n.t("Type something to search for users and groups in this site"));
+    Tooltip.to(suggestBox,
+        i18n.t("Type something to search for users and groups in [%s]", siteCommonName));
     searchTextBox = suggestBox.getTextBox();
     searchTextBox.ensureDebugId(SITE_SEARCH_TEXTBOX);
     searchTextBox.addStyleName("k-fr");

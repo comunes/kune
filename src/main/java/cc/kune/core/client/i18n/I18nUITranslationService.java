@@ -45,6 +45,7 @@ public class I18nUITranslationService extends I18nTranslationService {
   private final KuneConstants kuneConstants;
   private HashMap<String, String> lexicon;
   private final Session session;
+  private String siteCommonName;
 
   @Inject
   public I18nUITranslationService(final Session session, final I18nServiceAsync i18nService,
@@ -167,8 +168,28 @@ public class I18nUITranslationService extends I18nTranslationService {
     return lexicon;
   }
 
+  public String getSiteCommonName() {
+    if (siteCommonName == null) {
+      siteCommonName = t(session.getSiteCommonName());
+    }
+    return siteCommonName;
+  }
+
   public void init(final I18nServiceAsync i18nService, final Session session, final Listener0 onReady) {
 
+  }
+
+  private void save(final String text, final String noteForTranslators) {
+    i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text, noteForTranslators,
+        new AsyncCallback<String>() {
+          @Override
+          public void onFailure(final Throwable caught) {
+          }
+
+          @Override
+          public void onSuccess(final String result) {
+          }
+        });
   }
 
   public void setCurrentLanguage(final String newLanguage) {
@@ -213,16 +234,7 @@ public class I18nUITranslationService extends I18nTranslationService {
       } else {
         // Not translated and not in db, make a petition for translation
         if (session.isLogged()) {
-          i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text,
-              noteForTranslators, new AsyncCallback<String>() {
-                @Override
-                public void onFailure(final Throwable caught) {
-                }
-
-                @Override
-                public void onSuccess(final String result) {
-                }
-              });
+          save(text, noteForTranslators);
           Log.debug("Registering in db '" + text + "' as pending translation");
           lexicon.put(encodeText, UNTRANSLATED_VALUE);
         }

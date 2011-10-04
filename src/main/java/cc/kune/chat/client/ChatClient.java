@@ -25,7 +25,7 @@ import com.calclab.emite.xep.muc.client.Room;
 public interface ChatClient {
   public static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
 
-  void addNewBuddie(String shortName);
+  void addNewBuddy(String shortName);
 
   void chat(String shortName);
 
@@ -33,9 +33,9 @@ public interface ChatClient {
 
   void doLogin();
 
-  boolean isBuddie(String shortName);
+  boolean isBuddy(String shortName);
 
-  boolean isBuddie(XmppURI jid);
+  boolean isBuddy(XmppURI jid);
 
   boolean isLoggedIn();
 

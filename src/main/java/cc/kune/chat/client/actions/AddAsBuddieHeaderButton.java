@@ -75,14 +75,14 @@ public class AddAsBuddieHeaderButton {
           setState();
         }
       });
-      putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDIE));
+      putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDY));
       putValue(Action.SMALL_ICON, img.addGreen());
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      chatEngine.addNewBuddie(session.getCurrentState().getGroup().getShortName());
-      // NotifyUser.info("Added as buddie. Waiting buddie response");
+      chatEngine.addNewBuddy(session.getCurrentState().getGroup().getShortName());
+      // NotifyUser.info("Added as buddy. Waiting buddy response");
       setEnabled(false);
     }
 
@@ -104,7 +104,7 @@ public class AddAsBuddieHeaderButton {
     private void setState(final StateAbstractDTO state) {
       final String groupName = state.getGroup().getShortName();
       final boolean imLogged = session.isLogged();
-      final boolean isNotBuddie = !chatEngine.isBuddie(groupName);
+      final boolean isNotBuddie = !chatEngine.isBuddy(groupName);
       if (imLogged && currentGroupsIsAsPerson(state) && isNotBuddie && isNotMe(groupName)) {
         setEnabled(true);
       } else {

@@ -42,12 +42,14 @@ public class SitebarSignInLink extends ButtonDescriptor {
     private final StateManager stateManager;
 
     @Inject
-    public SitebarSignInAction(final StateManager stateManager, final I18nTranslationService i18n) {
+    public SitebarSignInAction(final StateManager stateManager, final I18nTranslationService i18n,
+        final Session session) {
       super();
+      final String siteCommonName = i18n.t(session.getSiteCommonName());
       this.stateManager = stateManager;
       putValue(Action.NAME, i18n.t("Sign in to collaborate"));
-      putValue(Action.TOOLTIP,
-          i18n.t("Please sign in or register to get full access to this site tools and contents"));
+      putValue(Action.TOOLTIP, i18n.t(
+          "Please sign in or register to get full access to [%s] tools and contents", siteCommonName));
     }
 
     @Override

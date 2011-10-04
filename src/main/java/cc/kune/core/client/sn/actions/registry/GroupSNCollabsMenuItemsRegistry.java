@@ -76,7 +76,7 @@ public class GroupSNCollabsMenuItemsRegistry extends AbstractSNMembersActionsReg
       public MenuItemDescriptor get() {
         final MenuItemDescriptor item = new MenuItemDescriptor(writeToAction);
         item.add(isPersonCondition);
-        item.withText(i18n.t("Write to your buddie"));
+        item.withText(i18n.t("Write to your buddy"));
         item.add(isNotMe);
         item.add(isBuddie);
         item.add(isLogged);

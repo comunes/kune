@@ -43,7 +43,7 @@ public class IsBuddieCondition implements GuiAddCondition {
   }
 
   private boolean isBuddie(final String targetName) {
-    return chatClient.isBuddie(targetName);
+    return chatClient.isBuddy(targetName);
   }
 
   private boolean isThisGroupInRoster(final GuiActionDescrip descr) {

@@ -22,7 +22,7 @@ package cc.kune.gspace.client;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
-import cc.kune.core.client.sn.actions.WriteToBuddieHeaderButton;
+import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.core.client.state.Session;
 import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
 import cc.kune.gspace.client.i18n.I18nToTranslateGridPanel;
@@ -72,7 +72,7 @@ public class GSpaceParts {
       final Provider<GiveUsFeedbackBtn> giveUsFeedback,
       final Provider<I18nToTranslateGridPanel> toTrans,
       final Provider<I18nTranslatorTabsCollection> gtranslator,
-      final Provider<WriteToBuddieHeaderButton> writeToBuddie) {
+      final Provider<WriteToBuddyHeaderButton> writeToBuddie) {
 
     session.onAppStart(true, new AppStartHandler() {
       @Override

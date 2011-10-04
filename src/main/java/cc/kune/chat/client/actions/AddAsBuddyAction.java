@@ -33,15 +33,15 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
-public class AddAsBuddieAction extends AbstractExtendedAction {
+public class AddAsBuddyAction extends AbstractExtendedAction {
   private final ChatClient chatEngine;
 
   @Inject
-  public AddAsBuddieAction(final ChatClient chatEngine, final ChatInstances chatInstances,
+  public AddAsBuddyAction(final ChatClient chatEngine, final ChatInstances chatInstances,
       final StateManager stateManager, final I18nTranslationService i18n, final CoreResources img) {
     super();
     this.chatEngine = chatEngine;
-    putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDIE));
+    putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDY));
     putValue(Action.SMALL_ICON, img.addGreen());
   }
 
@@ -54,8 +54,8 @@ public class AddAsBuddieAction extends AbstractExtendedAction {
       username = ((UserSimpleDTO) event.getTarget()).getShortName();
     }
     if (username != null) {
-      chatEngine.addNewBuddie(username);
-      // NotifyUser.info("Added as buddie. Waiting buddie response");
+      chatEngine.addNewBuddy(username);
+      // NotifyUser.info("Added as buddy. Waiting buddy response");
       setEnabled(false);
     }
   }
