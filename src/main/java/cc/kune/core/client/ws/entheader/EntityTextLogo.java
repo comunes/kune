@@ -20,6 +20,7 @@
 package cc.kune.core.client.ws.entheader;
 
 import cc.kune.core.client.avatar.MediumAvatarDecorator;
+import cc.kune.core.shared.FileConstants;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -97,7 +98,7 @@ public class EntityTextLogo extends VerticalPanel {
   }
 
   public void setLogoImage(final String url) {
-    logoImage.setUrl("images/clear.gif");
+    logoImage.setUrl(FileConstants.ASITE_PREFIX + "images/clear.gif");
     Image.prefetch(url);
     logoImage.setUrl(url);
   }

@@ -116,13 +116,12 @@ body {
   min-width: 320px;
 }
 
-#k-home-ini {
-  clear: both;
+#k-home-ini { /*   clear: both; */
   font-size: 20px;
   color: #69312f;
   text-align: justify;
-  padding: 27px 0;
-  line-height: 1.3em;
+  /*   padding: 27px 0; */
+  /*   line-height: 1.3em; */
 }
 
 #k-home-ini a {
@@ -135,10 +134,15 @@ body {
 }
 
 #k-home-table {
-  display: table;
+  display: block;
 }
 
-.k-home-header {
+#k-home-header {
+  display: table-row;
+  float: right;
+}
+
+#k-home-intro {
   display: table-row;
 }
 
@@ -150,18 +154,14 @@ body {
 }
 
 #k-home-logo {
-  display: table-cell;
   margin: 50px 0 22px 0;
-  float: right;
 }
 
 #k-home-summary {
-  display: table-cell;
   font-size: 28px;
   color: #dd8a3d;
   font-weight: bold;
   white-space: nowrap;
-  float: left;
 }
 
 #k-home-summary li {
@@ -171,19 +171,35 @@ body {
   line-height: 45px;
 }
 
-#k-home-row { /* display: table-row;*/
+#k-home-body { /* display: table-row;*/
+  clear: both;
+  display: block;
+}
 
+#k-home-left,#k-home-summary-left {
+  display: table-cell;
 }
 
 #k-home-left {
+  float: left;
+}
+
+#k-home-right,#k-home-summary-right {
   display: table-cell;
+  text-align: right;
+  padding-left: 20px;
+}
+
+#k-home-summary-right {
+  padding-top: 42px;
+  vertical-align: bottom;
 }
 
 #k-home-right {
-  display: table-cell;
-  text-align: right;
   white-space: nowrap;
-  padding-left: 30px;
+  vertical-align: top;
+  padding-top: 20px;
+  float: right;
 }
 
 #k-home-group-stats {
@@ -196,15 +212,15 @@ body {
 
 .k-home-title {
   color: #c87137;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: bold;
   padding-top: 10px;
-  clear: both;
+  /*   clear: both; */
 }
 
 .k-home-normal-text {
   color: #8a5050;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .k-home-em-text {
@@ -228,7 +244,7 @@ body {
 
 .k-home-group-stats-item {
   clear: both;
-  line-height: 1.2em;
+  /*   line-height: 1.2em; */
 }
 
 .banner {
@@ -269,32 +285,32 @@ body {
     </div>
     <div id="k-home-prewrap">
         <div id="k-home-wrapper">
+            <!-- This id is required for kune (you can create a different .html but preserve this id) -->
             <div id="k-home-table">
-                <div class="k-home-header">
-                    <div id="k-home-logo">
-                        <img src="ws/logo-big-home.png" alt="" />
-                    </div>
-                </div>
+                <div id="k-home-header"></div>
                 <!-- div home-header -->
-                <div class="k-home-header">
-                    <div id="k-home-summary">
-                        <ul>
-                            <li
-                                style="background-image: url(ws/images/kune-intro-user.png);">Comunicate
-                                with others</li>
-                            <li
-                                style="background-image: url(ws/images/kune-intro-group.png);">Work
-                                in collaboration</li>
-                            <li
-                                style="background-image: url(ws/images/kune-intro-world.png);">And
-                                share with the world</li>
-                        </ul>
+                <div id="k-home-intro">
+                    <div id="k-home-summary-left">
+                        <div id="k-home-logo">
+                            <img src="ws/logo-big-home.png" alt="" />
+                        </div>
+                        <div id="k-home-summary">
+                            <ul>
+                                <li
+                                    style="background-image: url(ws/images/kune-intro-user.png);">Comunicate
+                                    with others</li>
+                                <li
+                                    style="background-image: url(ws/images/kune-intro-group.png);">Work
+                                    in collaboration</li>
+                                <li
+                                    style="background-image: url(ws/images/kune-intro-world.png);">And
+                                    share with the world</li>
+                            </ul>
+                        </div>
+                        <!-- k-home-summary -->
                     </div>
-                    <!-- k-home-summary -->
-                </div>
-                <!-- div home-header -->
-                <div id="k-home-row">
-                    <div id="k-home-left">
+                    <!-- k-home-summary-left -->
+                    <div id="k-home-summary-right">
                         <div id="k-home-ini">
                             Welcome! This site is a Kune node. Kune, which means
                             "together" in esperanto, it's a network of interconnected
@@ -303,18 +319,28 @@ body {
                                 spaces easily</strong>. <a href="#signin">Join!</a>
                         </div>
                         <!--  div home-ini -->
-                        <div id="k-home-group-stats" style="display: none;"></div>
-                        <!-- div home-stats -->
+                        <!-- k-home-summary-right -->
+                    </div>
+                    <!-- div home-header -->
+                </div>
+                <div id="k-home-body">
+                    <div id="k-home-left">
+                        <div id="k-home-group-stats" style="display: none;">
+                            <!-- This id is required for kune (you can create a different .html but preserve this id) -->
+                        </div>
+                        <!-- div home-group-stats -->
                     </div>
                     <!-- div k-home-left -->
                     <div id="k-home-right">
                         <div id="k-home-global-stats" style="display: none;">
+                            <!-- This id is required for kune (you can create a different .html but preserve this id) -->
                         </div>
                     </div>
                     <!-- div k-home-right -->
                 </div>
-                <!-- div k-home-row -->
-                <div id="k-home-footer" style="display: none;"></div>
+                <!-- div k-home-body -->
+                <!--                 <div id="k-home-footer" style="display: none;"> -->
+                <!--                 </div> -->
                 <!-- div k-home-footer -->
             </div>
             <!-- div home-table -->

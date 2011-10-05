@@ -1,4 +1,4 @@
-GCHARSET                      "UTF-8                     "; body {
+GCHARSET                       "UTF-8                      "; body {
   background-color: transparent;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -944,7 +944,7 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   border-color: #CCCCCC !important;
   background: inherits !important;
   kfilter: alpha(opacity =
-           60) !important;
+            60) !important;
   -moz-opacity: 0.60 !important;
   -khtml-opacity: 0.60 !important;
   opacity: 0.60 !important;
@@ -1230,7 +1230,7 @@ table.k-folder-viewer {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   kfilter: alpha(opacity =
-           90);
+            90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1531,4 +1531,18 @@ button.k-drop-allowed-hover,.k-drop-allowed-hover {
 div.jGrowl div.jGrowl-notification div.header {
   background-color: #000000 !important;
   padding: 0 !important;
+}
+
+/* Dotted tab panel */
+.k-dotted-tabpanel .gwt-TabLayoutPanelTab {
+  background-color: #ffccaa;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.k-dotted-tabpanel .gwt-TabLayoutPanelTab-selected {
+  background-color: #dd8a3d;
 }

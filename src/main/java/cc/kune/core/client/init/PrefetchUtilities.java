@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client.init;
 
+import cc.kune.core.shared.FileConstants;
+
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.ui.Image;
@@ -45,13 +47,13 @@ public class PrefetchUtilities {
 
         while (i < lic.length) {
           final String licImg = lic[i];
-          Image.prefetch("images/lic/" + licImg);
+          Image.prefetch(FileConstants.ASITE_PREFIX + "images/lic/" + licImg);
           i++;
         }
 
         while (j < ext.length) {
           final String extImg = ext[j];
-          Image.prefetch("gxt/images/" + extImg);
+          Image.prefetch(FileConstants.ASITE_PREFIX + "gxt/images/" + extImg);
           j++;
         }
 
@@ -72,7 +74,7 @@ public class PrefetchUtilities {
     final String[] imgs = { "images/corner.png", "images/hborder.png" };
 
     for (final String img : imgs) {
-      Image.prefetch(img);
+      Image.prefetch(FileConstants.ASITE_PREFIX + img);
     }
   }
 }

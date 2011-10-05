@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -37,37 +36,40 @@ import com.google.inject.Inject;
 
 public class EntityLogoDownloadManager extends HttpServlet {
 
-    private static final long serialVersionUID = -1958945058088446881L;
-    @Inject
-    GroupManager groupManager;
+  private static final long serialVersionUID = -1958945058088446881L;
+  @Inject
+  GroupManager groupManager;
 
-    @Override
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-            IOException {
+  @Override
+  protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+      throws ServletException, IOException {
 
-        // final String userHash = req.getParameter(FileParams.HASH);
-        final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
+    // final String userHash = req.getParameter(FileParams.HASH);
+    final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
 
-        Group group = Group.NO_GROUP;
-        try {
-            group = groupManager.findByShortName(stateToken.getGroup());
-            if (group == Group.NO_GROUP) {
-                throw new NoResultException("Group not found trying to get the logo");
-            }
+    Group group = Group.NO_GROUP;
+    try {
+      group = groupManager.findByShortName(stateToken.getGroup());
+      if (group == Group.NO_GROUP) {
+        throw new NoResultException("Group not found trying to get the logo");
+      }
 
-            if (!group.hasLogo()) {
-                throw new NoResultException("This Group has no logo");
-            }
-        } catch (NoResultException e) {
-            FileDownloadManagerUtils.returnNotFound(resp);
-            return;
-        }
-
-        byte[] logo = group.getLogo();
+      if (!group.hasLogo()) {
+        FileDownloadManagerUtils.returnFile("src/main/webapp/others/defgroup.gif",
+            resp.getOutputStream());
+      } else {
+        // Has logo
+        final byte[] logo = group.getLogo();
 
         resp.setContentLength(logo.length);
         resp.setContentType(group.getLogoMime().toString());
-        resp.setHeader("Content-Disposition", "attachment; filename=\"" + group.getShortName() + "-logo\"");
+        resp.setHeader("Content-Disposition", "attachment; filename=\"" + group.getShortName()
+            + "-logo\"");
         resp.getOutputStream().write(logo);
+      }
+    } catch (final NoResultException e) {
+      FileDownloadManagerUtils.returnNotFound(resp);
+      return;
     }
+  }
 }

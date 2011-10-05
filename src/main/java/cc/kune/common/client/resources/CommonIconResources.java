@@ -30,6 +30,9 @@ public interface CommonIconResources extends ClientBundle {
   @Source("checked.png")
   ImageResource checked();
 
+  @Source("clear.png")
+  ImageResource clear();
+
   @Source("kune-close.png")
   ImageResource kuneClose();
 

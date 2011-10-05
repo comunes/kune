@@ -2,6 +2,9 @@ package cc.kune.hspace.client;
 
 import java.util.List;
 
+import org.waveprotocol.wave.client.common.util.DateUtils;
+
+import cc.kune.common.client.ui.DottedTabPanel;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
@@ -44,21 +47,25 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   public InlineLabel globalStatsTotalUsersCount;
   @UiField
   public InlineLabel globalStatsTotalUsersTitle;
-  @UiField
-  FlowPanel groupStats;
   private final RootPanel groupStatsParent;
   @UiField
   public FlowPanel lastActivityInYourGroup;
   @UiField
   public Label lastActivityInYourGroupTitle;
   @UiField
+  FlowPanel lastActivityPanel;
+  @UiField
   public FlowPanel lastGroups;
+  @UiField
+  FlowPanel lastGroupsPanel;
   @UiField
   public Label lastGroupsTitle;
   @UiField
   public FlowPanel lastPublishedContents;
   @UiField
   public Label lastPublishedContentsTitle;
+  @UiField
+  FlowPanel lastPublishedPanel;
 
   private final Provider<GroupContentHomeLink> linkProv;
 
@@ -73,21 +80,30 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     globalStatsTitle.setText(i18n.t("Stats"));
     globalStatsTotalGroupsTitle.setText(i18n.t("Hosted groups:"));
     globalStatsTotalUsersTitle.setText(i18n.t("Registered users:"));
-    lastActivityInYourGroupTitle.setText(i18n.t("Latest created groups"));
-    lastGroupsTitle.setText(i18n.t("Latest publications"));
-    lastPublishedContentsTitle.setText(i18n.t("Latest activity in your groups"));
+    lastGroupsTitle.setText(i18n.t("Latest created groups"));
+    lastPublishedContentsTitle.setText(i18n.t("Latest publications"));
+    lastActivityInYourGroupTitle.setText(i18n.t("Latest activity in your groups"));
+    final DottedTabPanel tabPanel = new DottedTabPanel("465px", "200px");
+    tabPanel.addTab(lastGroupsPanel);
+    // tabPanel.addTab(lastActivityPanel);
+    tabPanel.addTab(lastPublishedPanel);
     globalStats.removeFromParent();
-    groupStats.removeFromParent();
+    // groupStats.removeFromParent();
     globalStatsParent = RootPanel.get("k-home-global-stats");
     globalStatsParent.add(globalStats);
     groupStatsParent = RootPanel.get("k-home-group-stats");
-    groupStatsParent.add(groupStats);
+    groupStatsParent.add(tabPanel);
     armor.getHomeSpace().add(RootPanel.get("k-home-wrapper"));
   }
 
   @Override
   public Widget asWidget() {
     return widget;
+  }
+
+  private String format(final Long modifiedOn, final String name) {
+    final String modOn = DateUtils.getInstance().formatPastDate(modifiedOn);
+    return modOn + " ~ " + name;
   }
 
   @Override
@@ -107,7 +123,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
       final GroupContentHomeLink link = linkProv.get();
       final StateToken token = content.getStateToken();
       link.setValues(downUtils.getLogoImageUrl(token.copy().clearDocument().clearFolder()),
-          content.getName(), token.toString());
+          format(content.getModifiedOn(), content.getName()), token.toString());
       lastActivityInYourGroup.add(link);
     }
   }
@@ -117,8 +133,8 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     lastGroups.clear();
     for (final GroupDTO group : lastGroupsList) {
       final GroupContentHomeLink link = linkProv.get();
-      link.setValues(downUtils.getLogoImageUrl(group.getStateToken()), group.getLongName(),
-          group.getShortName());
+      link.setValues(downUtils.getLogoImageUrl(group.getStateToken()),
+          format(group.getCreatedOn(), group.getLongName()), group.getShortName());
       lastGroups.add(link);
     }
   }
@@ -130,7 +146,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
       final GroupContentHomeLink link = linkProv.get();
       final StateToken token = content.getStateToken();
       link.setValues(downUtils.getLogoImageUrl(token.copy().clearDocument().clearFolder()),
-          content.getName(), token.toString());
+          format(content.getModifiedOn(), content.getName()), token.toString());
       lastPublishedContents.add(link);
     }
   }
@@ -143,7 +159,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   @Override
   public void setUserGroupsActivityVisible(final boolean logged) {
-    lastActivityInYourGroup.setVisible(logged);
+    if (logged) {
+      lastActivityInYourGroup.setVisible(logged);
+    }
     lastActivityInYourGroupTitle.setVisible(logged);
   }
 

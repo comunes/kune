@@ -222,7 +222,7 @@ public class I18nUITranslationService extends I18nTranslationService {
       return kuneConstants.getString(I18nUtils.convertMethodName(text + " " + noteForTranslators));
     } catch (final MissingResourceException e) {
       if (lexicon == null) {
-        Log.warn("i18n not initialized");
+        Log.warn("i18n not initialized: " + text);
         return text;
       }
       String translation = lexicon.get(encodeText);

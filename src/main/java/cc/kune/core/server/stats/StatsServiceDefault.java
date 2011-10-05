@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 
 public class StatsServiceDefault implements StatsService {
 
-  private static final int LIMIT = 20;
+  private static final int LIMIT = 6;
   private final ContentFinder contentFinder;
   private final GroupFinder groupFinder;
   private final UserFinder userFinder;

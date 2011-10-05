@@ -28,6 +28,7 @@ public class GroupDTO implements IsSerializable {
 
   AdmissionType admissionType;
   private String backgroundImage;
+  private Long createdOn;
   private ContentSimpleDTO defaultContent;
   private LicenseDTO defaultLicense;
   private GroupType groupType;
@@ -76,6 +77,10 @@ public class GroupDTO implements IsSerializable {
 
   public String getBackgroundImage() {
     return backgroundImage;
+  }
+
+  public Long getCreatedOn() {
+    return createdOn;
   }
 
   public ContentSimpleDTO getDefaultContent() {
@@ -143,6 +148,10 @@ public class GroupDTO implements IsSerializable {
 
   public void setBackgroundImage(final String backgroundImage) {
     this.backgroundImage = backgroundImage;
+  }
+
+  public void setCreatedOn(final Long createdOn) {
+    this.createdOn = createdOn;
   }
 
   public void setDefaultContent(final ContentSimpleDTO defaultContent) {

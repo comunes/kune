@@ -135,7 +135,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   }
 
   public void setLeftIcon(final String imgCss) {
-    iconLeft.setUrl("images/clear.gif");
+    iconLeft.setUrl(GWT.getModuleBaseURL() + "images/clear.gif");
     iconLeft.setStyleName(imgCss);
     iconLeft.addStyleName("k-iconlabel-left");
     iconLeft.addStyleName("oc-ico-pad");
