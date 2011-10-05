@@ -36,7 +36,6 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
@@ -104,7 +103,6 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   public GSpaceArmorImpl(final Provider<ActionFlowPanel> toolbarProv) {
     initWidget(uiBinder.createAndBindUi(this));
     groupSpace.setWidgetMinSize(splitEast, 150);
-    homeSpace.add(RootPanel.get("k-home-wrapper"));
     DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow",
         "visible");
     DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsContainer),
@@ -196,6 +194,11 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public IsActionExtensible getHeaderToolbar() {
     return headerToolbar;
+  }
+
+  @Override
+  public SimplePanel getHomeSpace() {
+    return homeSpace;
   }
 
   @Override

@@ -14,7 +14,7 @@
    height="768"
    id="svg3182"
    version="1.1"
-   inkscape:version="0.48.0 r9654"
+   inkscape:version="0.48.1 r9760"
    sodipodi:docname="web_home_template-2011.svg"
    inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
    inkscape:export-xdpi="90"
@@ -31,15 +31,15 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1"
      inkscape:cx="546.88652"
-     inkscape:cy="736.55101"
+     inkscape:cy="140.60185"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="974"
+     inkscape:window-width="1078"
+     inkscape:window-height="897"
      inkscape:window-x="0"
-     inkscape:window-y="21"
-     inkscape:window-maximized="1"
+     inkscape:window-y="947"
+     inkscape:window-maximized="0"
      inkscape:snap-bbox="false"
      inkscape:bbox-paths="true"
      inkscape:bbox-nodes="true"
@@ -74,7 +74,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -96,12 +96,6 @@
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-  </g>
-  <g
-     id="layer1"
-     inkscape:label="normal"
-     inkscape:groupmode="layer"
-     style="display:inline">
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect5037"
@@ -112,6 +106,16 @@
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="chat" />
+  <g
+     id="layer1"
+     inkscape:label="normal"
+     inkscape:groupmode="layer"
+     style="display:inline">
     <rect
        style="color:#000000;fill:#ff9999;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect4635"
@@ -209,7 +213,7 @@
              id="g5365">
             <path
                transform="matrix(0.102065,0,0,0.102065,387.7515,-17.05636)"
-               d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
+               d="m 277.35793,332.62314 a 26.82268,26.82268 0 1 1 -53.64536,0 26.82268,26.82268 0 1 1 53.64536,0 z"
                sodipodi:ry="26.82268"
                sodipodi:rx="26.82268"
                sodipodi:cy="332.62314"
@@ -219,7 +223,7 @@
                sodipodi:type="arc" />
             <path
                transform="matrix(0.05245387,0,0,0.05245387,400.1808,-0.554549)"
-               d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
+               d="m 277.35793,332.62314 a 26.82268,26.82268 0 1 1 -53.64536,0 26.82268,26.82268 0 1 1 53.64536,0 z"
                sodipodi:ry="26.82268"
                sodipodi:rx="26.82268"
                sodipodi:cy="332.62314"
@@ -354,7 +358,7 @@
        transform="translate(-751,-12)">
       <path
          transform="translate(0,-3)"
-         d="m 333,232 c 0,6.07513 -4.92487,11 -11,11 -6.07513,0 -11,-4.92487 -11,-11 0,-6.07513 4.92487,-11 11,-11 6.07513,0 11,4.92487 11,11 z"
+         d="m 333,232 a 11,11 0 1 1 -22,0 11,11 0 1 1 22,0 z"
          sodipodi:ry="11"
          sodipodi:rx="11"
          sodipodi:cy="232"
@@ -388,13 +392,6 @@
        id="rect5041"
        style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <image
-       width="16"
-       height="16"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAdpJREFU OI2lkk1I03EYxz97aYyx9J9lCWlYNjZaIE16uYTUZVDdgsJjt6B7lBEMIlAvmRV5VAovXTuFCRUD KRy71ETLpcPR2EsrRi/7b/9vh3+0lkqFz+nh+3s+Dw/f39chic2Uc1M04Aa4ccRx2OMzxr9VypF/ gbx+I1H9Ur54/aVeIYmhfmMuPjmiulmVUtNSblHKvpYWnkkLz+0+tyilplU3q4pPjmio35iTBJKI 9WHDdVOKhaXSinTntJR6Ks3P2H1pxX6rm6qbVcX6kKSGB073FsgkoSMEvjYoLEHoJARPQCFtax0h yCTt2XVNLKRhWxeUlsHobOjGbltr2wP5pSakeUF7DxTfw4698DHT0MursL0bisv2zJ+/AGDVTJyd vZB/B59zsCsIb56A0wU7A1ApQP4tdPVi1czmC7x+IzE7NYplWTBwF2TB2WHwbgWPz+6tOpwfw7LE 7NQoXr+RAHBI+pUDyYqcGRznYHSASvEDM/eukXw8gSxrwxw4fo/yw0vRB4HjpwJHwz1OJi4EcXtu 8zV7kzF9Xy9QTR48OudwZfOt0WOVFzDfnUbeAwxnVjcC1ywof2q52u6pte4PH7rF5fiVv4FrFhgu M7Kvhfv/A8NPEzdTPwCqtvHRDwWVwwAAAABJRU5ErkJggg== "
-       id="image5043"
-       x="972.55145"
-       y="-76.540894" />
-    <image
        y="112.88816"
        x="7.4508514"
        id="image4632"
@@ -423,80 +420,27 @@
        height="3.7137473"
        x="2.0788269"
        y="111.25339" />
-    <g
-       transform="translate(804.21116,-270.59772)"
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/kune-logo.png"
-       id="g8266"
-       style="opacity:0.5;display:inline">
-      <path
-         style="font-size:58.13353348px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#a56941;fill-opacity:1;stroke:none;font-family:Emblem"
-         d="m 206.0077,119.17481 c -0.23779,0 -0.46633,8.7e-4 -0.69567,0.0158 -0.0214,0.004 -0.0417,0.0118 -0.0632,0.0158 -0.21349,0.0399 -0.4241,0.0739 -0.6482,0.0791 -0.0311,0.004 -0.064,-0.005 -0.0949,0 -1.82915,0.27537 -3.37459,1.06959 -4.61662,2.38736 -1.45043,1.53186 -2.18178,3.36697 -2.18178,5.50197 0,2.15893 0.73135,4.00649 2.18178,5.53358 1.57013,1.64669 3.61017,2.46636 6.11859,2.46636 1.33077,0 2.61016,-0.33065 3.82604,-0.99601 1.21588,-0.64624 2.27312,-1.56093 3.1779,-2.71936 l -2.73518,-1.51778 c -1.17765,1.57013 -2.6245,2.35569 -4.34781,2.35569 -1.19676,0 -2.26981,-0.3882 -3.1937,-1.1541 -0.93824,-0.76596 -1.40711,-1.69889 -1.40711,-2.81422 l 12.5059,0 0,-0.63244 c 0,-2.70464 -0.91615,-4.8704 -2.73518,-6.49798 -1.53185,-1.35475 -3.22873,-2.02374 -5.09086,-2.02374 z m -58.15001,0.11067 0,6.0553 -2.1186,0 0,3.09885 2.1186,0 0,6.32407 3.22527,0 0,-6.32407 1.94464,0 3.96838,6.32407 3.82609,0 -5.32806,-8.03161 5.09091,-7.14623 -3.90514,0 -3.93676,5.75492 -1.66006,0 0,-6.0553 -3.22527,0 z m 39.573,0 c -0.55523,0.0991 -1.07256,0.26037 -1.5494,0.50596 -0.80423,0.43082 -1.43916,0.99904 -1.91307,1.7075 l 0,-1.91308 -3.24108,0 0,15.17784 3.24108,0 0,-8.5059 c 0,-1.21588 0.3431,-2.14881 1.02768,-2.81422 0.68934,-0.66536 1.5632,-0.99601 2.64032,-0.99607 1.13926,6e-5 2.02899,0.30575 2.65612,0.93283 0.62708,0.62713 0.93277,1.60993 0.93277,2.94069 l 0,8.44267 3.24113,0 0,-9.1541 c -5e-5,-1.86218 -0.56822,-3.40069 -1.70754,-4.61662 -0.85448,-0.91187 -1.84318,-1.4795 -2.97232,-1.7075 l -2.35569,0 z m -24.56913,0.30038 0,8.79053 c 0,2.0584 0.69395,3.72268 2.08698,4.99601 1.29249,1.19676 2.89338,1.80235 4.77467,1.80235 1.90046,0 3.49322,-0.60559 4.79053,-1.80235 1.39298,-1.27333 2.08693,-2.93761 2.08693,-4.99601 l 0,-8.79053 -3.24108,0 0,8.50591 c -6e-5,1.12015 -0.34316,2.03148 -1.02768,2.73517 -0.70851,0.72762 -1.56992,1.09092 -2.6087,1.09092 -1.0005,0 -1.86857,-0.36806 -2.57708,-1.09092 -0.70369,-0.72762 -1.04349,-1.63413 -1.04343,-2.73517 l 0,-8.50591 -3.24114,0 z m 42.73504,2.49803 c 1.05794,0 1.98172,0.2966 2.76679,0.8854 0.76114,0.60314 1.32167,1.48182 1.67593,2.64031 l -8.71148,0 c 0.25371,-1.11539 0.78014,-1.98162 1.5652,-2.60869 0.76114,-0.60797 1.66002,-0.91702 2.70356,-0.91702 z"
-         id="path8268"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-logo-16px.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90"
-         inkscape:connector-curvature="0" />
-      <g
-         id="g8270"
-         transform="matrix(0.1111494,0,0,0.111008,121.5678,22.515968)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-logo-16px.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90">
-        <path
-           style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23953247;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block"
-           d="m 60.321717,411.99998 377.014613,0"
-           id="path8272"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           inkscape:connector-curvature="0" />
-        <path
-           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffdb6b;stroke-width:109.23950958;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block"
-           d="m 252.61203,788.60332 0,-377.01178"
-           id="path8274"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           inkscape:connector-curvature="0" />
-        <path
-           style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#69312f;stroke-width:109.23951721;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block"
-           d="m 252.86937,597.15755 377.0124,0"
-           id="path8276"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           inkscape:connector-curvature="0" />
-        <path
-           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cc6633;stroke-width:109.23950195;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block"
-           d="m 437.45588,596.97447 0,-377.01491"
-           id="path8278"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           inkscape:connector-curvature="0" />
-        <path
-           style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947906;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block"
-           d="m 372.87905,411.27704 64.93441,0"
-           id="path8280"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           inkscape:connector-curvature="0" />
-      </g>
-    </g>
     <flowRoot
        xml:space="preserve"
        id="flowRoot3835"
-       style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#2b1100;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       transform="translate(-103,-19)"><flowRegion
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#2b1100;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       transform="translate(-102,74)"><flowRegion
          id="flowRegion3837"><rect
            id="rect3839"
-           width="666.18433"
-           height="187.65573"
+           width="426.18436"
+           height="295.65573"
            x="286.03818"
            y="329.61539"
-           style="text-align:justify;text-anchor:start" /></flowRegion><flowPara
-         style="font-size:28px;font-weight:bold;text-align:justify;text-anchor:start;-inkscape-font-specification:Ubuntu Bold"
+           style="font-size:18px;text-align:justify;text-anchor:start" /></flowRegion><flowPara
+         style="font-size:18px;font-weight:bold;text-align:justify;text-anchor:start;-inkscape-font-specification:Ubuntu Bold"
          id="flowPara5637"><flowSpan
    id="flowSpan5644"
-   style="font-size:28px;font-weight:normal;text-align:justify;text-anchor:start;-inkscape-font-specification:Ubuntu">Welcome! This site is a Kune node. Kune, which means &quot;together&quot; in esperanto, it's a network of interconnected sites like this one, where you can <flowSpan
-   style="font-weight:bold;-inkscape-font-specification:Ubuntu Bold"
+   style="font-size:18px;font-weight:normal;text-align:justify;text-anchor:start;-inkscape-font-specification:Ubuntu">Welcome! This site is a Kune node. Kune, which means &quot;together&quot; in esperanto, it's a network of interconnected sites like this one, where you can <flowSpan
+   style="font-size:18px;font-weight:bold;-inkscape-font-specification:Ubuntu Bold"
    id="flowSpan5635">communicate, share, collaborate with others and </flowSpan></flowSpan>create your web spaces easily. <flowSpan
-   style="fill:#803300"
+   style="font-size:18px;fill:#803300"
    id="flowSpan5641">Join!</flowSpan></flowPara></flowRoot>    <g
-       transform="translate(527.82096,-660.09755)"
+       transform="translate(544.82096,-695.09755)"
        id="g2737"
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/logo-big-home.png"
        inkscape:export-xdpi="90"
@@ -555,20 +499,20 @@
        x="1473"
        y="534" />
     <flowRoot
-       transform="translate(-101,201)"
-       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       transform="translate(-102,209)"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        id="flowRoot4636"
        xml:space="preserve"><flowRegion
          id="flowRegion4638"><rect
-           style="font-size:22px;text-align:justify;text-anchor:start;fill:#c87137;fill-opacity:1"
+           style="font-size:18px;text-align:justify;text-anchor:start;fill:#c87137;fill-opacity:1"
            y="329.61539"
            x="286.03818"
            height="62.655731"
            width="331.18436"
            id="rect4640" /></flowRegion><flowPara
-         style="font-size:22px;font-weight:bold;text-align:start;text-anchor:start;fill:#c87137;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold"
+         style="font-size:18px;font-weight:bold;text-align:start;text-anchor:start;fill:#c87137;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold"
          id="flowPara4642">Latests groups created</flowPara></flowRoot>    <flowRoot
-       transform="translate(-100,388)"
+       transform="translate(290,408)"
        style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#8a5050;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        id="flowRoot4644"
        xml:space="preserve"><flowRegion
@@ -581,7 +525,7 @@
            id="rect4648" /></flowRegion><flowPara
          style="font-size:20px;font-weight:bold;text-align:justify;text-anchor:start;color:#000000;fill:#8a5050;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;-inkscape-font-specification:Ubuntu Bold"
          id="flowPara4650">(©) cc-by-sa kune.beta.ieapala.es </flowPara></flowRoot>    <flowRoot
-       transform="translate(-103,238)"
+       transform="translate(-102.234,241)"
        style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#8a5050;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        id="flowRoot4654"
        xml:space="preserve"><flowRegion
@@ -592,78 +536,664 @@
            height="187.65573"
            width="666.18433"
            id="rect4658" /></flowRegion><flowPara
-         id="flowPara4662">11/Feb/2011 - Some project</flowPara><flowPara
+         id="flowPara4662">11/Feb/2011 - Some project about bla bla bla</flowPara><flowPara
          id="flowPara4664">11/Feb/2011 - Other project</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5602"
-       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       transform="translate(-98,306)"><flowRegion
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       transform="translate(254,69)"><flowRegion
          id="flowRegion5604"><rect
            id="rect5606"
            width="331.18436"
            height="62.655731"
            x="286.03818"
            y="329.61539"
-           style="font-size:22px;text-align:justify;text-anchor:start;fill:#c87137;fill-opacity:1" /></flowRegion><flowPara
+           style="font-size:18px;text-align:end;text-anchor:end;fill:#c87137;fill-opacity:1" /></flowRegion><flowPara
          id="flowPara5608"
-         style="font-size:22px;font-weight:bold;text-align:start;text-anchor:start;fill:#c87137;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold">Other stats</flowPara></flowRoot>    <g
+         style="font-size:18px;font-weight:bold;text-align:end;text-anchor:end;fill:#c87137;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold">Stats</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6630"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#181870;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.40678155;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Trebuchet MS;-inkscape-font-specification:Trebuchet MS Bold"><flowRegion
+         id="flowRegion6632"><rect
+           id="rect6634"
+           width="395"
+           height="203"
+           x="107"
+           y="502" /></flowRegion><flowPara
+         id="flowPara6636"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6638"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#8a5050;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       transform="translate(-78.792,76)"><flowRegion
+         id="flowRegion6640"><rect
+           id="rect6642"
+           width="666.18433"
+           height="187.65573"
+           x="286.03818"
+           y="329.61539"
+           style="font-size:18px;text-align:end;text-anchor:end;fill:#8a5050;fill-opacity:1" /></flowRegion><flowPara
+         id="flowPara6644" /><flowPara
+         id="flowPara6646">Hosted groups:<flowSpan
+   style="font-size:18px;font-weight:bold;text-align:end;text-anchor:end;-inkscape-font-specification:Ubuntu Bold"
+   id="flowSpan14396"> 999</flowSpan></flowPara><flowPara
+         id="flowPara14394">Registered users: <flowSpan
+   style="font-size:18px;font-weight:bold;text-align:end;text-anchor:end;-inkscape-font-specification:Ubuntu Bold"
+   id="flowSpan14398">999</flowSpan></flowPara><flowPara
+         id="flowPara14557">Users online: <flowSpan
+   style="font-weight:bold;text-align:end;text-anchor:end"
+   id="flowSpan14559">999</flowSpan></flowPara></flowRoot>    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="408.875"
+       y="-262.90875"
+       id="text14416"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan14418"
+         x="408.875"
+         y="-262.90875"
+         style="font-size:32px;font-weight:bold;fill:#dd8a3d;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold">Comunicate with others</tspan></text>
+    <g
+       id="g14538"
+       transform="translate(167,-571)">
+      <g
+         id="g14400"
+         transform="matrix(0.68695614,0,0,0.68695614,580.20577,-228.76982)"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-group-t.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           sodipodi:type="star"
+           style="color:#000000;fill:none;stroke:#28220b;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path14402"
+           sodipodi:sides="5"
+           sodipodi:cx="35"
+           sodipodi:cy="12.362183"
+           sodipodi:r1="5"
+           sodipodi:r2="4.045085"
+           sodipodi:arg1="1.5707963"
+           sodipodi:arg2="2.1991149"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="m 35,17.362183 -4.755283,-3.454915 1.816357,-5.5901703 5.877852,-10e-8 1.816357,5.5901694 z"
+           inkscape:transform-center-y="-0.10735044"
+           transform="matrix(2.331168,0.83049401,-0.83049401,2.331168,12.776852,771.74251)"
+           inkscape:transform-center-x="1.078998" />
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/groupSpaceEnabled.png"
+           transform="matrix(1.1754752,0,0,2.3509505,-21.691738,753.33034)"
+           d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+           sodipodi:ry="10"
+           sodipodi:rx="20"
+           sodipodi:cy="32.362183"
+           sodipodi:cx="90"
+           id="path14404"
+           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#800000;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           sodipodi:type="arc" />
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           transform="matrix(4.6623359,1.6609881,-1.6609881,4.6623359,51.694712,721.54769)"
+           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           sodipodi:ry="1"
+           sodipodi:rx="1"
+           sodipodi:cy="16.362183"
+           sodipodi:cx="15"
+           id="path14406"
+           style="color:#000000;fill:#dd8a3d;fill-opacity:1;stroke:#dd8a3d;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           sodipodi:type="arc" />
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           sodipodi:type="arc"
+           style="color:#000000;fill:#69312f;fill-opacity:1;stroke:#69312f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path14408"
+           sodipodi:cx="15"
+           sodipodi:cy="16.362183"
+           sodipodi:rx="1"
+           sodipodi:ry="1"
+           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           transform="matrix(4.6623359,1.6609881,-1.6609881,4.6623359,38.408722,716.19953)" />
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           transform="matrix(4.6623359,1.6609881,-1.6609881,4.6623359,50.908082,736.08463)"
+           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           sodipodi:ry="1"
+           sodipodi:rx="1"
+           sodipodi:cy="16.362183"
+           sodipodi:cx="15"
+           id="path14410"
+           style="color:#000000;fill:#28220b;fill-opacity:1;stroke:#28220b;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           sodipodi:type="arc" />
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           sodipodi:type="arc"
+           style="color:#000000;fill:#cc6633;fill-opacity:1;stroke:#cc6633;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path14412"
+           sodipodi:cx="15"
+           sodipodi:cy="16.362183"
+           sodipodi:rx="1"
+           sodipodi:ry="1"
+           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           transform="matrix(4.6623359,1.6609881,-1.6609881,4.6623359,37.248612,739.8127)" />
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           transform="matrix(5.5489598,1.9768537,-1.9768537,5.5489598,20.951652,708.53981)"
+           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           sodipodi:ry="1"
+           sodipodi:rx="1"
+           sodipodi:cy="16.362183"
+           sodipodi:cx="15"
+           id="path14414"
+           style="color:#000000;fill:#ffdb6b;fill-opacity:1;stroke:#dd8a3d;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           sodipodi:type="arc" />
+      </g>
+      <g
+         id="g14420"
+         transform="matrix(0.68695614,0,0,0.68695614,615.90577,-271.26982)"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-user-t.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/userSpaceEnabled.png"
+           sodipodi:type="arc"
+           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#800000;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path14422"
+           sodipodi:cx="90"
+           sodipodi:cy="32.362183"
+           sodipodi:rx="20"
+           sodipodi:ry="10"
+           d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+           transform="matrix(1.1754752,0,0,2.3509505,-73.660121,753.33034)" />
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/userSpaceEnabled.png"
+           sodipodi:type="arc"
+           style="color:#000000;fill:#d45500;fill-opacity:1;stroke:#d45500;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path14424"
+           sodipodi:cx="15"
+           sodipodi:cy="16.362183"
+           sodipodi:rx="1"
+           sodipodi:ry="1"
+           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           transform="matrix(4.9493694,0,0,4.9493694,-42.107891,748.42974)" />
+      </g>
+      <g
+         transform="matrix(0.68695614,0,0,0.68695614,544.50578,-185.26982)"
+         id="g14426"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-world-t.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <path
+           transform="matrix(1.1754752,0,0,2.3509505,30.276632,753.33034)"
+           d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+           sodipodi:ry="10"
+           sodipodi:rx="20"
+           sodipodi:cy="32.362183"
+           sodipodi:cx="90"
+           id="path14428"
+           style="color:#000000;fill:#aaeeff;fill-opacity:1;fill-rule:nonzero;stroke:#b3b3b3;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           sodipodi:type="arc"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <path
+           sodipodi:nodetypes="cccccccc"
+           inkscape:connector-curvature="0"
+           id="path14430"
+           d="m 130.79962,807.50532 c -2.85339,0.78923 -5.20625,2.69048 -7.74114,4.12698 -1.45578,1.08139 -3.17371,4.03552 -1.21347,5.32414 1.55176,0.2611 2.79811,-1.05921 4.32566,-1.15498 1.78407,-0.4112 3.60556,-0.7363 5.29696,-1.46265 2.88934,-0.9105 2.88934,-0.9105 3.18467,-1.97638 0.14032,-1.60483 -1.00047,-3.09256 -2.07745,-4.18939 -0.49137,-0.40285 -1.11497,-0.78049 -1.77523,-0.66772 z"
+           style="color:#000000;fill:#2ca05a;fill-opacity:1;fill-rule:nonzero;stroke:#2ca05a;stroke-width:2.47468472;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <path
+           sodipodi:nodetypes="cacccccccccc"
+           inkscape:connector-curvature="0"
+           id="path14432"
+           d="m 153.3922,823.22551 c -4.04703,2.06374 -8.81245,4.142 -10.56886,8.25203 -0.54013,1.26397 0.22272,2.75445 0.4124,4.10295 0.7708,1.43658 -1.11269,2.70312 -0.55672,4.14497 0.66534,1.49717 2.56652,1.27157 3.82727,0.79099 1.28493,-0.44158 -0.53582,-1.70575 0,0 0.58286,1.36335 5.36635,1.77935 6.80857,1.16016 1.38701,-0.50855 2.33091,-0.74837 2.99303,-1.90611 2.17102,-4.41676 3.23712,-9.41812 2.89588,-14.33661 -0.10641,-1.32539 -0.51397,-2.60792 -0.99259,-3.83098 -0.49507,-1.61389 -2.16711,0.0173 -2.82476,0.68071 -0.60256,0.42631 -1.2709,0.77633 -1.99422,0.94189 z"
+           style="color:#000000;fill:#2ca05a;fill-opacity:1;fill-rule:nonzero;stroke:#2ca05a;stroke-width:2.47468472;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <path
+           sodipodi:nodetypes="cccccacccc"
+           style="color:#000000;fill:#2ca05a;fill-opacity:1;fill-rule:nonzero;stroke:#2ca05a;stroke-width:2.47468472;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m 121.52672,824.27304 c -2.3826,0.90534 -4.95654,1.52602 -7.13172,2.85353 -1.8032,1.51882 -1.57875,4.29287 -0.64391,6.22636 1.14716,2.47466 2.05723,5.06419 3.4281,7.43042 1.32587,1.74784 -0.0893,0.98747 1.52127,2.46832 0.45524,0.54208 3.2913,3.28282 4.94937,2.47469 0.82652,-0.40286 0.61983,-1.62095 0.54826,-2.70337 0.52083,-2.24499 -0.82476,-4.39163 -0.7175,-6.65278 -0.0579,-2.83898 0.49943,-5.64398 0.8377,-8.45265 0.19302,-1.55725 -0.68561,-4.455 -2.79157,-3.64452 z"
+           id="path14434"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <path
+           sodipodi:type="arc"
+           style="color:#000000;fill:none;stroke:#002255;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path14436"
+           sodipodi:cx="90"
+           sodipodi:cy="32.362183"
+           sodipodi:rx="20"
+           sodipodi:ry="10"
+           d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+           transform="matrix(1.1754752,0,0,2.3509505,30.276632,753.33034)"
+           inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/publicSpaceEnabled.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+      </g>
+    </g>
+    <text
+       sodipodi:linespacing="125%"
+       id="text14438"
+       y="-220.23883"
+       x="443.5025"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:32px;font-weight:bold;fill:#dd8a3d;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold"
+         y="-220.23883"
+         x="443.5025"
+         id="tspan14440"
+         sodipodi:role="line">Work in collaboration</tspan></text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="390.12"
+       y="-174.88892"
+       id="text14442"
+       sodipodi:linespacing="125%"><tspan
+         id="tspan14444"
+         sodipodi:role="line"
+         x="390.12"
+         y="-174.88892"
+         style="font-size:32px;font-weight:bold;fill:#dd8a3d;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold">And share with the world</tspan></text>
+    <g
        style="display:inline"
-       transform="translate(354.82096,-1105.0975)"
-       id="g2737-4"
-       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/logo-big-home.png"
+       id="g8699-2"
+       transform="matrix(0.68695614,0,0,0.68695614,140.20577,-250.76982)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-group-t.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <path
-         inkscape:connector-curvature="0"
-         inkscape:export-ydpi="399.59854"
-         inkscape:export-xdpi="399.59854"
-         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-logo-1200.png"
-         id="path2689-7"
-         d="m 298.07933,890.09763 c -0.74303,0 -1.45723,0.003 -2.17391,0.0494 -0.0669,0.0136 -0.13033,0.0368 -0.19763,0.0494 -0.66715,0.12461 -1.32536,0.23087 -2.02569,0.24704 -0.097,0.0136 -0.19995,-0.0145 -0.29644,0 -5.71605,0.86055 -10.54554,3.34248 -14.42688,7.46047 -4.53271,4.78706 -6.81817,10.52182 -6.81818,17.19368 0,6.74672 2.28548,12.52044 6.81818,17.29249 4.90667,5.14604 11.2818,7.70749 19.12055,7.70751 4.15869,-2e-5 8.15681,-1.03328 11.95652,-3.11265 3.79965,-2.01951 7.10345,-4.87783 9.93083,-8.49802 l -8.54743,-4.74308 c -3.68005,4.90668 -8.20158,7.36166 -13.58695,7.36166 -3.73988,0 -7.0931,-1.21319 -9.98024,-3.60672 -2.93207,-2.39351 -4.39727,-5.30891 -4.39723,-8.79447 l 39.08102,0 0,-1.97629 c -4e-5,-8.45204 -2.86291,-15.22007 -8.54743,-20.30632 -4.78705,-4.23347 -10.0899,-6.32405 -15.90909,-6.32411 z m -181.71937,0.34585 0,18.92292 -6.62055,0 0,9.6838 6.62055,0 0,19.76285 10.07905,0 0,-19.76285 6.07708,0 12.40119,19.76285 11.95652,0 -16.6502,-25.09882 15.90909,-22.33202 -12.20356,0 -12.30237,17.98419 -5.18775,0 0,-18.92292 -10.07905,0 z m 123.66601,0 c -1.73503,0.30966 -3.35171,0.81366 -4.8419,1.58103 -2.5132,1.34638 -4.49729,3.12201 -5.97826,5.33597 l 0,-5.97827 -10.12846,0 0,47.43084 10.12846,0 0,-26.58103 c -1e-5,-3.79965 1.07224,-6.71507 3.21147,-8.79447 2.15413,-2.07932 4.88507,-3.11262 8.25098,-3.11265 3.56032,3e-5 6.34065,0.95537 8.3004,2.91502 1.95964,1.95972 2.91496,5.03102 2.91502,9.18973 l 0,26.3834 10.12846,0 0,-28.60672 c -5e-5,-5.8192 -1.77567,-10.62715 -5.33597,-14.42688 -2.67029,-2.84973 -5.76,-4.62351 -9.28854,-5.33597 l -7.36166,0 z m -76.77865,0.93873 0,27.47036 c -2e-5,6.43257 2.16853,11.63344 6.52173,15.61265 4.03904,3.73986 9.04189,5.63239 14.92095,5.63241 5.93886,-2e-5 10.91633,-1.89255 14.97036,-5.63241 4.35315,-3.97921 6.52169,-9.18008 6.52174,-15.61265 l 0,-27.47036 -10.12846,0 0,26.58103 c -5e-5,3.50052 -1.0723,6.34841 -3.21146,8.54743 -2.21404,2.27385 -4.906,3.40909 -8.15218,3.40909 -3.12654,2e-5 -5.83938,-1.15019 -8.05336,-3.40909 -2.19905,-2.27381 -3.2609,-5.10673 -3.26087,-8.54743 l 0,-26.58103 -10.12845,0 z m 133.54743,7.80633 c 3.306,5e-5 6.19285,0.92683 8.64624,2.7668 2.37851,1.88491 4.13014,4.63084 5.23716,8.25099 l -27.22332,0 c 0.79283,-3.48552 2.43792,-6.19246 4.8913,-8.15218 2.37853,-1.89981 5.18745,-2.86556 8.44862,-2.86561 z"
-         style="font-size:58.13353348px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#a56941;fill-opacity:1;stroke:none;font-family:Emblem" />
-      <g
-         inkscape:export-ydpi="399.59854"
-         inkscape:export-xdpi="399.59854"
-         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-logo-1200.png"
-         transform="matrix(0.347343,0,0,0.346901,34.203754,588.03773)"
-         id="g2691-6">
-        <path
-           inkscape:connector-curvature="0"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           id="path2693-7"
-           d="m 60.321717,411.99998 377.014613,0"
-           style="fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23953247;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
-        <path
-           inkscape:connector-curvature="0"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           id="path2695-8"
-           d="m 252.61203,788.60332 0,-377.01178"
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffdb6b;stroke-width:109.23950958;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
-        <path
-           inkscape:connector-curvature="0"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           id="path2697-9"
-           d="m 252.86937,597.15755 377.0124,0"
-           style="fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#69312f;stroke-width:109.23951721;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
-        <path
-           inkscape:connector-curvature="0"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           id="path2699-7"
-           d="m 437.45588,596.97447 0,-377.01491"
-           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cc6633;stroke-width:109.23950195;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
-        <path
-           inkscape:connector-curvature="0"
-           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
-           id="path2701-4"
-           d="m 372.87905,411.27704 64.93441,0"
-           style="fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947906;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
-      </g>
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         sodipodi:type="star"
+         style="color:#000000;fill:none;stroke:#28220b;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4963-9"
+         sodipodi:sides="5"
+         sodipodi:cx="35"
+         sodipodi:cy="12.362183"
+         sodipodi:r1="5"
+         sodipodi:r2="4.045085"
+         sodipodi:arg1="1.5707963"
+         sodipodi:arg2="2.1991149"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 35,17.362183 -4.755283,-3.454915 1.816357,-5.5901703 5.877852,-10e-8 1.816357,5.5901694 z"
+         inkscape:transform-center-y="-0.10735044"
+         transform="matrix(2.331168,0.83049401,-0.83049401,2.331168,12.776852,771.74251)"
+         inkscape:transform-center-x="1.078998" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/groupSpaceEnabled.png"
+         transform="matrix(1.1754752,0,0,2.3509505,-21.691738,753.33034)"
+         d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+         sodipodi:ry="10"
+         sodipodi:rx="20"
+         sodipodi:cy="32.362183"
+         sodipodi:cx="90"
+         id="path4965-9"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#800000;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         transform="matrix(4.6623359,1.6609881,-1.6609881,4.6623359,51.694712,721.54769)"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+         sodipodi:ry="1"
+         sodipodi:rx="1"
+         sodipodi:cy="16.362183"
+         sodipodi:cx="15"
+         id="path4973-0"
+         style="color:#000000;fill:#dd8a3d;fill-opacity:1;stroke:#dd8a3d;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         sodipodi:type="arc"
+         style="color:#000000;fill:#69312f;fill-opacity:1;stroke:#69312f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4975-8"
+         sodipodi:cx="15"
+         sodipodi:cy="16.362183"
+         sodipodi:rx="1"
+         sodipodi:ry="1"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+         transform="matrix(4.6623359,1.6609881,-1.6609881,4.6623359,38.408722,716.19953)" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         transform="matrix(4.6623359,1.6609881,-1.6609881,4.6623359,50.908082,736.08463)"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+         sodipodi:ry="1"
+         sodipodi:rx="1"
+         sodipodi:cy="16.362183"
+         sodipodi:cx="15"
+         id="path4977-1"
+         style="color:#000000;fill:#28220b;fill-opacity:1;stroke:#28220b;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         sodipodi:type="arc"
+         style="color:#000000;fill:#cc6633;fill-opacity:1;stroke:#cc6633;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4979-3"
+         sodipodi:cx="15"
+         sodipodi:cy="16.362183"
+         sodipodi:rx="1"
+         sodipodi:ry="1"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+         transform="matrix(4.6623359,1.6609881,-1.6609881,4.6623359,37.248612,739.8127)" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         transform="matrix(5.5489598,1.9768537,-1.9768537,5.5489598,20.951652,708.53981)"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+         sodipodi:ry="1"
+         sodipodi:rx="1"
+         sodipodi:cy="16.362183"
+         sodipodi:cx="15"
+         id="path4981-1"
+         style="color:#000000;fill:#ffdb6b;fill-opacity:1;stroke:#dd8a3d;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
     </g>
+    <text
+       sodipodi:linespacing="125%"
+       id="text2991-8"
+       y="286.09125"
+       x="231.875"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:32px;font-weight:bold;fill:#dd8a3d;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold"
+         y="286.09125"
+         x="231.875"
+         id="tspan2993-4"
+         sodipodi:role="line">Comunicate with others</tspan></text>
+    <g
+       style="display:inline"
+       id="g8695-4"
+       transform="matrix(0.68695614,0,0,0.68695614,175.90577,-293.26982)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-user-t.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/userSpaceEnabled.png"
+         sodipodi:type="arc"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#800000;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4961-0"
+         sodipodi:cx="90"
+         sodipodi:cy="32.362183"
+         sodipodi:rx="20"
+         sodipodi:ry="10"
+         d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+         transform="matrix(1.1754752,0,0,2.3509505,-73.660121,753.33034)" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/userSpaceEnabled.png"
+         sodipodi:type="arc"
+         style="color:#000000;fill:#d45500;fill-opacity:1;stroke:#d45500;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4971-6"
+         sodipodi:cx="15"
+         sodipodi:cy="16.362183"
+         sodipodi:rx="1"
+         sodipodi:ry="1"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+         transform="matrix(4.9493694,0,0,4.9493694,-42.107891,748.42974)" />
+    </g>
+    <g
+       style="display:inline"
+       transform="matrix(0.68695614,0,0,0.68695614,104.50578,-207.26982)"
+       id="g3297"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-world-t.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(1.1754752,0,0,2.3509505,30.276632,753.33034)"
+         d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+         sodipodi:ry="10"
+         sodipodi:rx="20"
+         sodipodi:cy="32.362183"
+         sodipodi:cx="90"
+         id="path3299"
+         style="color:#000000;fill:#aaeeff;fill-opacity:1;fill-rule:nonzero;stroke:#b3b3b3;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         id="path3301"
+         d="m 130.79962,807.50532 c -2.85339,0.78923 -5.20625,2.69048 -7.74114,4.12698 -1.45578,1.08139 -3.17371,4.03552 -1.21347,5.32414 1.55176,0.2611 2.79811,-1.05921 4.32566,-1.15498 1.78407,-0.4112 3.60556,-0.7363 5.29696,-1.46265 2.88934,-0.9105 2.88934,-0.9105 3.18467,-1.97638 0.14032,-1.60483 -1.00047,-3.09256 -2.07745,-4.18939 -0.49137,-0.40285 -1.11497,-0.78049 -1.77523,-0.66772 z"
+         style="color:#000000;fill:#2ca05a;fill-opacity:1;fill-rule:nonzero;stroke:#2ca05a;stroke-width:2.47468472;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         sodipodi:nodetypes="cacccccccccc"
+         inkscape:connector-curvature="0"
+         id="path3303"
+         d="m 153.3922,823.22551 c -4.04703,2.06374 -8.81245,4.142 -10.56886,8.25203 -0.54013,1.26397 0.22272,2.75445 0.4124,4.10295 0.7708,1.43658 -1.11269,2.70312 -0.55672,4.14497 0.66534,1.49717 2.56652,1.27157 3.82727,0.79099 1.28493,-0.44158 -0.53582,-1.70575 0,0 0.58286,1.36335 5.36635,1.77935 6.80857,1.16016 1.38701,-0.50855 2.33091,-0.74837 2.99303,-1.90611 2.17102,-4.41676 3.23712,-9.41812 2.89588,-14.33661 -0.10641,-1.32539 -0.51397,-2.60792 -0.99259,-3.83098 -0.49507,-1.61389 -2.16711,0.0173 -2.82476,0.68071 -0.60256,0.42631 -1.2709,0.77633 -1.99422,0.94189 z"
+         style="color:#000000;fill:#2ca05a;fill-opacity:1;fill-rule:nonzero;stroke:#2ca05a;stroke-width:2.47468472;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         sodipodi:nodetypes="cccccacccc"
+         style="color:#000000;fill:#2ca05a;fill-opacity:1;fill-rule:nonzero;stroke:#2ca05a;stroke-width:2.47468472;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="m 121.52672,824.27304 c -2.3826,0.90534 -4.95654,1.52602 -7.13172,2.85353 -1.8032,1.51882 -1.57875,4.29287 -0.64391,6.22636 1.14716,2.47466 2.05723,5.06419 3.4281,7.43042 1.32587,1.74784 -0.0893,0.98747 1.52127,2.46832 0.45524,0.54208 3.2913,3.28282 4.94937,2.47469 0.82652,-0.40286 0.61983,-1.62095 0.54826,-2.70337 0.52083,-2.24499 -0.82476,-4.39163 -0.7175,-6.65278 -0.0579,-2.83898 0.49943,-5.64398 0.8377,-8.45265 0.19302,-1.55725 -0.68561,-4.455 -2.79157,-3.64452 z"
+         id="path3305"
+         inkscape:connector-curvature="0"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         sodipodi:type="arc"
+         style="color:#000000;fill:none;stroke:#002255;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path3307"
+         sodipodi:cx="90"
+         sodipodi:cy="32.362183"
+         sodipodi:rx="20"
+         sodipodi:ry="10"
+         d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+         transform="matrix(1.1754752,0,0,2.3509505,30.276632,753.33034)"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/publicSpaceEnabled.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </g>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="232.83501"
+       y="328.76117"
+       id="text3250"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3252"
+         x="232.83501"
+         y="328.76117"
+         style="font-size:32px;font-weight:bold;fill:#dd8a3d;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold">Work in collaboration</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3254"
+       y="374.11108"
+       x="233.155"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-intro-min.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="font-size:32px;font-weight:bold;fill:#dd8a3d;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold"
+         y="374.11108"
+         x="233.155"
+         sodipodi:role="line"
+         id="tspan14386">And share with the world</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot14561"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       transform="translate(-102,294)"><flowRegion
+         id="flowRegion14563"><rect
+           id="rect14565"
+           width="331.18436"
+           height="62.655731"
+           x="286.03818"
+           y="329.61539"
+           style="font-size:18px;text-align:justify;text-anchor:start;fill:#c87137;fill-opacity:1" /></flowRegion><flowPara
+         id="flowPara14567"
+         style="font-size:18px;font-weight:bold;text-align:start;text-anchor:start;fill:#c87137;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold">Latests publications</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot14569"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#8a5050;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       transform="translate(-101.478,321)"><flowRegion
+         id="flowRegion14571"><rect
+           id="rect14573"
+           width="666.18433"
+           height="187.65573"
+           x="286.03818"
+           y="329.61539"
+           style="font-size:18px;text-align:justify;text-anchor:start;fill:#8a5050;fill-opacity:1" /></flowRegion><flowPara
+         id="flowPara14575">group1 / Some project about bla bla bla</flowPara><flowPara
+         id="flowPara14577">group2 / Other project</flowPara></flowRoot>    <flowRoot
+       transform="translate(-102,379)"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       id="flowRoot14579"
+       xml:space="preserve"><flowRegion
+         id="flowRegion14581"><rect
+           style="font-size:18px;text-align:justify;text-anchor:start;fill:#c87137;fill-opacity:1"
+           y="329.61539"
+           x="286.03818"
+           height="62.655731"
+           width="331.18436"
+           id="rect14583" /></flowRegion><flowPara
+         style="font-size:18px;font-weight:bold;text-align:start;text-anchor:start;fill:#c87137;fill-opacity:1;-inkscape-font-specification:Ubuntu Bold"
+         id="flowPara14585">Latests activity in your groups</flowPara></flowRoot>    <flowRoot
+       transform="translate(-101.478,406)"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:justify;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.85;color:#000000;fill:#8a5050;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       id="flowRoot14587"
+       xml:space="preserve"><flowRegion
+         id="flowRegion14589"><rect
+           style="font-size:18px;text-align:justify;text-anchor:start;fill:#8a5050;fill-opacity:1"
+           y="329.61539"
+           x="286.03818"
+           height="187.65573"
+           width="666.18433"
+           id="rect14591" /></flowRegion><flowPara
+         id="flowPara14593">group1 / Some project about bla bla bla</flowPara><flowPara
+         id="flowPara14595">group2 / Other project</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot14597"
+       style="-inkscape-font-specification:Ubuntu Bold;font-family:Trebuchet MS;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:18px;text-anchor:start;text-align:start;writing-mode:lr-tb;line-height:125%;text-indent:0;text-decoration:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;opacity:1;color:#000000;fill-opacity:1;fill-rule:nonzero;marker:none;marker-start:none;marker-mid:none;marker-end:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke:none;stroke-opacity:1;stroke-width:1.40678155000000005;stroke-miterlimit:4;stroke-dasharray:none;fill:#181870;stroke-linecap:butt;stroke-linejoin:miter;stroke-dashoffset:0;baseline-shift:baseline"><flowRegion
+         id="flowRegion14599"><rect
+           id="rect14601"
+           width="472"
+           height="97"
+           x="94"
+           y="619" /></flowRegion><flowPara
+         id="flowPara14603"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot14605"
+       style="-inkscape-font-specification:Ubuntu Bold;font-family:Trebuchet MS;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:18px;text-anchor:start;text-align:start;writing-mode:lr-tb;line-height:125%;text-indent:0;text-decoration:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;opacity:1;color:#000000;fill-opacity:1;fill-rule:nonzero;marker:none;marker-start:none;marker-mid:none;marker-end:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke:none;stroke-opacity:1;stroke-width:1.40678155000000005;stroke-miterlimit:4;stroke-dasharray:none;fill:#181870;stroke-linecap:butt;stroke-linejoin:miter;stroke-dashoffset:0;baseline-shift:baseline"><flowRegion
+         id="flowRegion14607"><rect
+           id="rect14609"
+           width="435"
+           height="104"
+           x="114"
+           y="601" /></flowRegion><flowPara
+         id="flowPara14611"></flowPara></flowRoot>    <rect
+       style="color:#000000;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#e6e6e6;stroke-width:1.40678155000000005;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect14613"
+       width="725"
+       height="204"
+       x="158"
+       y="524"
+       rx="3.7326424"
+       ry="3.7326424" />
+    <rect
+       ry="2.3739674"
+       rx="1.3012474"
+       y="393.62781"
+       x="630.62781"
+       height="129.74437"
+       width="252.74437"
+       id="rect14615"
+       style="color:#000000;fill:none;stroke:#e6e6e6;stroke-width:0.66241109;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:none;stroke:#e6e6e6;stroke-width:0.90581501;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect14617"
+       width="473.50098"
+       height="129.50096"
+       x="157.74951"
+       y="393.74951"
+       rx="2.4378066"
+       ry="2.3695138" />
+    <rect
+       ry="0.79297251"
+       rx="3.7326424"
+       y="726.92798"
+       x="158"
+       height="43.338306"
+       width="725"
+       id="rect14619"
+       style="color:#000000;fill:none;stroke:#e6e6e6;stroke-width:0.6484068;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:none;stroke:#e6e6e6;stroke-width:1.18765354;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect14621"
+       width="725"
+       height="145.39731"
+       x="158"
+       y="247.90636"
+       rx="3.7326424"
+       ry="2.6603734" />
   </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer7"
-     inkscape:label="chat" />
   <g
      inkscape:groupmode="layer"
      id="layer3"

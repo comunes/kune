@@ -51,18 +51,22 @@
 <link type="text/css" rel="stylesheet"
     href="ws/fontface/ubuntufontface.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-message.css">
-<link type="text/css" rel="stylesheet" href="others/splash/style/permalink.css">
-<link type="text/css" rel="stylesheet" href="others/splash/style/stuff.css">
-<link type="text/css" rel="stylesheet" href="others/splash/style/main.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/permalink.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/stuff.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/main.css">
 <link type="text/css" rel="stylesheet" href="ws/ws.css">
 <script type="text/javascript" src="others/splash/js/gadget.js"></script>
 <script type="text/javascript" src="others/splash/js/rpc.js"></script>
 <script type="text/javascript" src="others/splash/js/common_client.js"></script>
-<script type="text/javascript" src="others/splash/js/permalink_client.js"></script>
-<script type="text/javascript" src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script>
+<script type="text/javascript"
+    src="others/splash/js/permalink_client.js"></script>
+<script type="text/javascript"
+    src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script>
 
 <style type="text/css">
-
 body {
   background-color: white;
   color: black;
@@ -114,7 +118,7 @@ body {
 
 #k-home-ini {
   clear: both;
-  font-size: 28px;
+  font-size: 20px;
   color: #69312f;
   text-align: justify;
   padding: 27px 0;
@@ -130,18 +134,19 @@ body {
   font-weight: bold;
 }
 
-#k-home-stats {
-  font-size: 22px;
-  color: #c87137;
-  font-weight: bold;
-}
-
 #k-home-table {
   display: table;
 }
 
-#k-home-header {
+.k-home-header {
   display: table-row;
+}
+
+#k-home-footer {
+  display: table-row;
+  font-size: 14px;
+  text-align: right;
+  color: #8a5050;
 }
 
 #k-home-logo {
@@ -152,7 +157,7 @@ body {
 
 #k-home-summary {
   display: table-cell;
-  font-size: 32px;
+  font-size: 28px;
   color: #dd8a3d;
   font-weight: bold;
   white-space: nowrap;
@@ -166,8 +171,8 @@ body {
   line-height: 45px;
 }
 
-#k-home-row {
-  display: table-row;
+#k-home-row { /* display: table-row;*/
+
 }
 
 #k-home-left {
@@ -176,6 +181,54 @@ body {
 
 #k-home-right {
   display: table-cell;
+  text-align: right;
+  white-space: nowrap;
+  padding-left: 30px;
+}
+
+#k-home-group-stats {
+  color: #c87137;
+}
+
+#k-home-global-stats {
+
+}
+
+.k-home-title {
+  color: #c87137;
+  font-size: 19px;
+  font-weight: bold;
+  padding-top: 10px;
+  clear: both;
+}
+
+.k-home-normal-text {
+  color: #8a5050;
+  font-size: 18px;
+}
+
+.k-home-em-text {
+  color: #8a5050;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.k-home-group-cnt-icon {
+  float: left;
+}
+
+.k-home-group-cnt-link {
+  float: left;
+}
+
+.k-home-group-cnt-link a {
+  color: #8a5050;
+  padding-left: 10px;
+}
+
+.k-home-group-stats-item {
+  clear: both;
+  line-height: 1.2em;
 }
 
 .banner {
@@ -217,15 +270,24 @@ body {
     <div id="k-home-prewrap">
         <div id="k-home-wrapper">
             <div id="k-home-table">
-                <div id="k-home-header">
+                <div class="k-home-header">
                     <div id="k-home-logo">
                         <img src="ws/logo-big-home.png" alt="" />
                     </div>
+                </div>
+                <!-- div home-header -->
+                <div class="k-home-header">
                     <div id="k-home-summary">
                         <ul>
-                            <li style="background-image: url(ws/images/kune-intro-user.png);">Comunicate with others</li>
-                            <li style="background-image: url(ws/images/kune-intro-group.png);">Work in collaboration</li>
-                            <li style="background-image: url(ws/images/kune-intro-world.png);">And share with the world</li>
+                            <li
+                                style="background-image: url(ws/images/kune-intro-user.png);">Comunicate
+                                with others</li>
+                            <li
+                                style="background-image: url(ws/images/kune-intro-group.png);">Work
+                                in collaboration</li>
+                            <li
+                                style="background-image: url(ws/images/kune-intro-world.png);">And
+                                share with the world</li>
                         </ul>
                     </div>
                     <!-- k-home-summary -->
@@ -241,16 +303,19 @@ body {
                                 spaces easily</strong>. <a href="#signin">Join!</a>
                         </div>
                         <!--  div home-ini -->
-                        <div id="k-home-stats" style="display: none;">Latests
-                            groups created</div>
+                        <div id="k-home-group-stats" style="display: none;"></div>
+                        <!-- div home-stats -->
                     </div>
                     <!-- div k-home-left -->
                     <div id="k-home-right">
-                        <!-- div home-stats -->
+                        <div id="k-home-global-stats" style="display: none;">
+                        </div>
                     </div>
                     <!-- div k-home-right -->
                 </div>
                 <!-- div k-home-row -->
+                <div id="k-home-footer" style="display: none;"></div>
+                <!-- div k-home-footer -->
             </div>
             <!-- div home-table -->
         </div>

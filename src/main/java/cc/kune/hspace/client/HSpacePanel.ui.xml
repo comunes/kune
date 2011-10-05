@@ -2,12 +2,32 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style>
-    .important {
-      font-weight: bold;
-    }
+.padl { padding-left: 5px; }
   </ui:style>
-  <g:HTMLPanel>
-    Hello,
-    <g:Button styleName="{style.important}" ui:field="button"/>
-  </g:HTMLPanel>
-</ui:UiBinder> 
+  <g:FlowPanel>
+    <g:FlowPanel ui:field="globalStats">
+      <g:Label ui:field="globalStatsTitle" styleName="k-home-title"/>
+      <g:FlowPanel>
+        <g:InlineLabel ui:field="globalStatsTotalGroupsTitle"
+          styleName="k-home-normal-text"/>
+        <g:InlineLabel ui:field="globalStatsTotalGroupsCount"
+          addStyleNames="{style.padl} k-home-em-text"/>
+      </g:FlowPanel>
+      <g:FlowPanel>
+        <g:InlineLabel ui:field="globalStatsTotalUsersTitle"
+          styleName="k-home-normal-text"/>
+        <g:InlineLabel ui:field="globalStatsTotalUsersCount"
+          addStyleNames="{style.padl} k-home-em-text"/>
+      </g:FlowPanel>
+    </g:FlowPanel>
+    <g:FlowPanel ui:field="groupStats">
+      <g:Label ui:field="lastGroupsTitle" styleName="k-home-title"/>
+      <g:FlowPanel ui:field="lastGroups" styleName="k-home-normal-text"/>
+      <g:Label ui:field="lastPublishedContentsTitle" styleName="k-home-title"/>
+      <g:FlowPanel ui:field="lastPublishedContents" styleName="k-home-normal-text"/>
+      <g:Label ui:field="lastActivityInYourGroupTitle"
+        styleName="k-home-title"/>
+      <g:FlowPanel ui:field="lastActivityInYourGroup" styleName="k-home-normal-text"/>
+    </g:FlowPanel>
+  </g:FlowPanel>
+</ui:UiBinder>

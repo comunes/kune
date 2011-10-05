@@ -53,6 +53,8 @@ public interface GSpaceArmor {
 
   IsActionExtensible getHeaderToolbar();
 
+  SimplePanel getHomeSpace();
+
   IsWidget getMainpanel();
 
   SimplePanel getPublicSpace();

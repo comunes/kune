@@ -93,7 +93,6 @@ public class ChatClientDefault implements ChatClient {
     public ChatClientAction(final ChatResources res) {
       super();
       this.res = res;
-      putValue(Action.SMALL_ICON, res.chat());
       kuneEventBus.addHandler(NewUserRegisteredEvent.getType(),
           new NewUserRegisteredEvent.NewUserRegisteredHandler() {
             @Override
@@ -166,9 +165,6 @@ public class ChatClientDefault implements ChatClient {
     this.roomManager = chatInstances.roomManager;
     this.avatarManager = chatInstances.avatarManager;
     this.subscriptionManager = chatInstances.subscriptionManager;
-
-    // Not necessary, in ChatInstance
-    // Suco.get(SessionReconnect.class);
 
     session.onAppStart(true, new AppStartEvent.AppStartHandler() {
       @Override
@@ -254,6 +250,7 @@ public class ChatClientDefault implements ChatClient {
       chatIcon.setId(CHAT_CLIENT_ICON_ID);
       chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
       chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
+      chatIcon.putValue(Action.SMALL_ICON, chatResources.chat());
       chatIcon.putValue(Action.TOOLTIP, i18n.t("Show/hide the chat window"));
       final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
       shorcutRegister.put(shortcut, action);

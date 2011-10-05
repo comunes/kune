@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+  </ui:style>
+  <g:FlowPanel styleName="k-home-group-stats-item">
+    <g:Image ui:field="icon" width="22px" height="22px" styleName="k-home-group-cnt-icon"
+    url="images/clear.png" />
+    <g:Hyperlink ui:field="link" styleName="k-home-group-cnt-link" />
+  </g:FlowPanel>
+</ui:UiBinder>

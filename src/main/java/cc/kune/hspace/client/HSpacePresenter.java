@@ -19,13 +19,18 @@
  */
 package cc.kune.hspace.client;
 
-import cc.kune.common.client.notify.NotifyUser;
+import java.util.List;
+
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.UserSignInOrSignOutEvent;
+import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.HomeStatsDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
@@ -40,28 +45,54 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
   public interface HSpaceProxy extends Proxy<HSpacePresenter> {
   }
   public interface HSpaceView extends View {
-  }
 
-  private final I18nTranslationService i18n;
+    HasText getGlobalStatsTotalGroupsCount();
+
+    HasText getGlobalStatsTotalUsersCount();
+
+    void setLastContentsOfMyGroup(List<ContentSimpleDTO> lastContentsOfMyGroupsList);
+
+    void setLastGroups(List<GroupDTO> lastGroups);
+
+    void setLastPublishedContents(List<ContentSimpleDTO> lastPublishedContentsList);
+
+    void setStatsVisible(boolean visible);
+
+    void setUserGroupsActivityVisible(boolean logged);
+  }
 
   @Inject
   public HSpacePresenter(final Session session, final EventBus eventBus, final HSpaceView view,
-      final HSpaceProxy proxy, final I18nTranslationService i18n,
-      final Provider<ClientStatsServiceAsync> statsService) {
+      final HSpaceProxy proxy, final Provider<ClientStatsServiceAsync> statsService) {
     super(eventBus, view, proxy);
-    this.i18n = i18n;
     final AsyncCallbackSimple<HomeStatsDTO> callback = new AsyncCallbackSimple<HomeStatsDTO>() {
       @Override
       public void onSuccess(final HomeStatsDTO result) {
-        NotifyUser.info(
-            "Total groups: " + result.getTotalGroups() + " total users: " + result.getTotalUsers(), true);
+        getView().getGlobalStatsTotalGroupsCount().setText(result.getTotalGroups().toString());
+        getView().getGlobalStatsTotalUsersCount().setText(result.getTotalUsers().toString());
+        getView().setLastGroups(result.getLastGroups());
+        final List<ContentSimpleDTO> lastContentsOfMyGroups = result.getLastContentsOfMyGroups();
+        final boolean myGroupsHasActivity = lastContentsOfMyGroups != null
+            && lastContentsOfMyGroups.size() > 0;
+        if (myGroupsHasActivity) {
+          getView().setLastContentsOfMyGroup(lastContentsOfMyGroups);
+        }
+        getView().setUserGroupsActivityVisible(myGroupsHasActivity);
+        getView().setLastPublishedContents(result.getLastPublishedContents());
+        getView().setStatsVisible(true);
       }
     };
-    if (session.isLogged()) {
-      statsService.get().getHomeStats(session.getUserHash(), callback);
-    } else {
-      statsService.get().getHomeStats(callback);
-    }
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        final boolean logged = event.isLogged();
+        if (logged) {
+          statsService.get().getHomeStats(session.getUserHash(), callback);
+        } else {
+          statsService.get().getHomeStats(callback);
+        }
+      }
+    });
   }
 
   @Override
