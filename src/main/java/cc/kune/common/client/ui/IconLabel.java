@@ -102,6 +102,12 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     flow.clear();
   }
 
+  private void commonStyle(final Image icon, final String imgCss) {
+    icon.setUrl(GWT.getModuleBaseURL() + "images/clear.gif");
+    icon.setStyleName(imgCss);
+    icon.addStyleName("oc-ico-pad");
+  }
+
   public HasClickHandlers getFocus() {
     return self;
   }
@@ -135,10 +141,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   }
 
   public void setLeftIcon(final String imgCss) {
-    iconLeft.setUrl(GWT.getModuleBaseURL() + "images/clear.gif");
-    iconLeft.setStyleName(imgCss);
+    commonStyle(iconLeft, imgCss);
     iconLeft.addStyleName("k-iconlabel-left");
-    iconLeft.addStyleName("oc-ico-pad");
     iconLeft.setVisible(true);
   }
 
@@ -164,9 +168,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   }
 
   public void setRightIcon(final String imgCss) {
-    iconRight.setUrl("images/clear.gif");
-    iconRight.setStyleName(imgCss);
-    iconRight.addStyleName("oc-ico-pad");
+    commonStyle(iconRight, imgCss);
     iconRight.addStyleName("k-iconlabel-right");
     iconRight.setVisible(true);
   }

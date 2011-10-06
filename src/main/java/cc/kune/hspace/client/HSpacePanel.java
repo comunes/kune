@@ -89,6 +89,8 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     tabPanel.addTab(lastPublishedPanel);
     globalStats.removeFromParent();
     // groupStats.removeFromParent();
+
+    // FIXME: Make this optional (aitor's comment)
     globalStatsParent = RootPanel.get("k-home-global-stats");
     globalStatsParent.add(globalStats);
     groupStatsParent = RootPanel.get("k-home-group-stats");
