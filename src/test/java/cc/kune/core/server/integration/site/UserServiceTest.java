@@ -172,6 +172,26 @@ public class UserServiceTest extends IntegrationTest {
     }
   }
 
+  @Test(expected = AccessViolationException.class)
+  public void testSiteChangeIncorrectPasswdMustFail() throws Exception {
+    assertNull(session.getUser().getId());
+    doLogin(properties.getAdminShortName(), properties.getAdminPassword());
+    assertNotNull(session.getUser().getId());
+    userService.changePasswd(session.getHash(), "otherpasswd", "kkkkkk");
+  }
+
+  @Test
+  public void testSiteChangePasswd() throws Exception {
+    assertNull(session.getUser().getId());
+    doLogin(properties.getAdminShortName(), properties.getAdminPassword());
+    assertNotNull(session.getUser().getId());
+    userService.changePasswd(session.getHash(), properties.getAdminPassword(), "kkkkkk");
+    doLogout();
+    doLogin(properties.getAdminShortName(), "kkkkkk");
+    userService.changePasswd(session.getHash(), "kkkkkk", properties.getAdminPassword());
+    doLogout();
+  }
+
   @Test
   public void testSiteEmailLogin() throws Exception {
     assertNull(session.getUser().getId());
@@ -235,8 +255,8 @@ public class UserServiceTest extends IntegrationTest {
         timezone, null, true, SubscriptionMode.manual, "blue");
     userService.createUser(user, false);
     doLogin("test", "123456");
-    final UserDTO userChanged = new UserDTO(shortName, longName, "123456", email, lang, country,
-        timezone, null, true, SubscriptionMode.manual, "blue");
+    final UserDTO userChanged = new UserDTO("test", longName, "123456", email, lang, country, timezone,
+        null, true, SubscriptionMode.manual, "blue");
     userChanged.setId(session.getUser().getId());
     userService.updateUser(getHash(), userChanged, simpleLang);
   }

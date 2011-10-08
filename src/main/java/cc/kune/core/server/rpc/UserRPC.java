@@ -88,6 +88,14 @@ public class UserRPC implements RPC, UserService {
   }
 
   @Override
+  @Authenticated
+  @Transactional
+  public void changePasswd(final String userHash, final String oldPassword, final String newPassword) {
+    final Long userId = userSessionManager.getUser().getId();
+    userManager.changePasswd(userId, oldPassword, newPassword);
+  }
+
+  @Override
   @Transactional(rollbackOn = DefaultException.class)
   public void createUser(final UserDTO userDTO, final boolean wantPersonalHomepage)
       throws DefaultException {
@@ -137,7 +145,7 @@ public class UserRPC implements RPC, UserService {
     // sessionService.getNewSession();
     final User user = userManager.login(nickOrEmail, passwd);
     return loginUser(user, waveToken);
-  }
+  };
 
   private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
     if (user != null) {
@@ -146,7 +154,7 @@ public class UserRPC implements RPC, UserService {
     } else {
       throw new UserAuthException();
     }
-  };
+  }
 
   @Override
   @Authenticated

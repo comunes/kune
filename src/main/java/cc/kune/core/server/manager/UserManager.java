@@ -30,6 +30,8 @@ import cc.kune.domain.User;
 import cc.kune.domain.utils.UserBuddiesData;
 
 public interface UserManager {
+  User changePasswd(Long userId, String oldPassword, String newPassword);
+
   /**
    * CreateUser new method with language country and timezone params
    * 

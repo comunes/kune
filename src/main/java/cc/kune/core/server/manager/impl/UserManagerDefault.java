@@ -35,10 +35,17 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.packet.RosterPacket.ItemType;
+import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 import org.waveprotocol.box.server.persistence.AccountStore;
+import org.waveprotocol.box.server.persistence.PersistenceException;
+import org.waveprotocol.box.server.robots.agent.RobotAgentUtil;
+import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import cc.kune.common.client.utils.TextUtils;
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
@@ -112,6 +119,32 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.properties = properties;
     this.groupManager = groupManager;
     this.mailService = mailService;
+  }
+
+  @Override
+  public User changePasswd(final Long userId, final String oldPassword, final String newPassword) {
+    final User user = find(userId);
+    final ParticipantId participantId = participantUtils.of(user.getShortName());
+    // Check oldPasswd
+    try {
+      final AccountData account = waveAccountStore.getAccount(participantId);
+      if (TextUtils.notEmpty(oldPassword) && account != null
+          && !account.asHuman().getPasswordDigest().verify(oldPassword.toCharArray())) {
+        throw new AccessViolationException("You cannot change passwd");
+      }
+      // Wave change passwd
+      RobotAgentUtil.changeUserPassword(newPassword, participantId, waveAccountStore);
+    } catch (final IllegalArgumentException e) {
+      throw new DefaultException("Error changing user passwd", e);
+    } catch (final PersistenceException e) {
+      throw new DefaultException("Error changing user passwd", e);
+    }
+    // Kune db change passwd
+    final PasswordDigest newPasswordDigest = new PasswordDigest(newPassword.toCharArray());
+    user.setPassword(newPassword);
+    user.setSalt(newPasswordDigest.getSalt());
+    user.setDiggest(newPasswordDigest.getDigest());
+    return persist(user);
   }
 
   private void checkIfEmailAreInUse(final String email) {
@@ -355,7 +388,6 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       user.setEmail(email);
     }
     user.setLanguage(findLanguage(lang.getCode()));
-    // user.setLanguage(findLanguage(userDTO.getLanguage().getCode()));
     persist(user);
     groupManager.persist(userGroup);
     return user;
