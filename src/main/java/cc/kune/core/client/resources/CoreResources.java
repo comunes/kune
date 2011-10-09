@@ -433,6 +433,9 @@ public interface CoreResources extends ClientBundle {
   @Source("loading-spiner.gif")
   ImageResource loadingSpiner();
 
+  @Source("lock.png")
+  ImageResource lock();
+
   @Source("arrow_out.png")
   ImageResource maximize();
 

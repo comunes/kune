@@ -17,13 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.options;
+package cc.kune.gspace.client.options.general;
 
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 
-public interface EntityOptionsView extends AbstractTabbedDialogView {
+public interface UserOptPassView extends EntityOptGeneralView {
 
-  int HEIGHT = 270;
-  int WIDTH = 500;
+  HasClickHandlers getChangeBtn();
 
+  String getCurrentPasswd();
+
+  String getNewPasswd();
+
+  String getNewPasswdRepeated();
+
+  void reset();
 }

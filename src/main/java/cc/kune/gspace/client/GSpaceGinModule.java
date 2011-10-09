@@ -63,6 +63,10 @@ import cc.kune.gspace.client.options.general.UserOptGeneral;
 import cc.kune.gspace.client.options.general.UserOptGeneralPanel;
 import cc.kune.gspace.client.options.general.UserOptGeneralPresenter;
 import cc.kune.gspace.client.options.general.UserOptGeneralView;
+import cc.kune.gspace.client.options.general.UserOptPass;
+import cc.kune.gspace.client.options.general.UserOptPassPanel;
+import cc.kune.gspace.client.options.general.UserOptPassPresenter;
+import cc.kune.gspace.client.options.general.UserOptPassView;
 import cc.kune.gspace.client.options.license.GroupOptDefLicense;
 import cc.kune.gspace.client.options.license.GroupOptDefLicensePanel;
 import cc.kune.gspace.client.options.license.GroupOptDefLicensePresenter;
@@ -170,6 +174,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     s(UserOptGeneral.class, UserOptGeneralPresenter.class);
     s(UserOptGeneralView.class, UserOptGeneralPanel.class);
+    s(UserOptPass.class, UserOptPassPresenter.class);
+    s(UserOptPassView.class, UserOptPassPanel.class);
     s(UserOptDefLicense.class, UserOptDefLicensePresenter.class);
     s(UserOptDefLicenseView.class, UserOptDefLicensePanel.class);
     s(UserOptStyle.class, UserOptStylePresenter.class);

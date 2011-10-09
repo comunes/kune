@@ -21,9 +21,7 @@ package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.MaskWidget;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.ui.DefaultForm;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
 import com.extjs.gxt.ui.client.event.BaseEvent;
@@ -32,6 +30,7 @@ import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -40,16 +39,16 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
   private final MaskWidget maskWidget;
   private final IconLabel tabTitle;
 
-  public EntityOptGeneralPanel(final I18nTranslationService i18n, final CoreResources res,
-      final MaskWidget maskWidget) {
+  public EntityOptGeneralPanel(final MaskWidget maskWidget, final ImageResource img, final String title,
+      final String introMessage) {
     this.maskWidget = maskWidget;
-    tabTitle = new IconLabel(res.emblemSystem(), i18n.t("General"));
+    tabTitle = new IconLabel(img, title);
     super.setWidth(EntityOptionsView.WIDTH);
     super.setFrame(true);
     super.getFormPanel().setLabelWidth(100);
     super.addStyleName("k-overflow-y-auto");
     final Label label = new Label();
-    label.setText(i18n.t("Change this values:"));
+    label.setText(introMessage);
     label.addStyleName("kune-Margin-10-tb");
     super.add(label);
   }

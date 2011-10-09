@@ -91,8 +91,10 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
               NotifyUser.hideProgress();
               stateManager.setRetrievedStateAndGo(result);
               sendChangeEntityEvent();
-            }
-          });
+            };
+          }
+
+      );
     }
   }
 }

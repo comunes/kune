@@ -17,13 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.options;
+package cc.kune.core.client.errors;
 
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
+public class WrongCurrentPasswordException extends DefaultException {
 
-public interface EntityOptionsView extends AbstractTabbedDialogView {
-
-  int HEIGHT = 270;
-  int WIDTH = 500;
+  private static final long serialVersionUID = 1019305526843055648L;
 
 }

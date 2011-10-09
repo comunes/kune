@@ -37,6 +37,7 @@ import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.SessionExpiredException;
+import cc.kune.core.client.errors.WrongCurrentPasswordException;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.integration.IntegrationTest;
@@ -173,7 +174,7 @@ public class UserServiceTest extends IntegrationTest {
     }
   }
 
-  @Test(expected = AccessViolationException.class)
+  @Test(expected = WrongCurrentPasswordException.class)
   public void testSiteChangeIncorrectPasswdMustFail() throws Exception {
     assertNull(session.getUser().getId());
     doLogin(properties.getAdminShortName(), properties.getAdminPassword());

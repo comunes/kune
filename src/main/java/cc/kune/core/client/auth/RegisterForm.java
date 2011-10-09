@@ -19,8 +19,6 @@
  \*/
 package cc.kune.core.client.auth;
 
-import cc.kune.common.client.utils.TextUtils;
-import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -60,32 +58,12 @@ public class RegisterForm extends DefaultForm {
     longNameRegField.setTabIndex(2);
     add(longNameRegField);
 
-    passwdRegField = new TextField<String>();
+    passwdRegField = userFieldFactory.createUserPasswd(PASSWORD_FIELD, i18n.t("Password"));
     passwdRegField.setTabIndex(3);
-    passwdRegField.setFieldLabel(i18n.t("Password"));
-    passwdRegField.setName(PASSWORD_FIELD);
-    passwdRegField.setPassword(true);
-    passwdRegField.setAllowBlank(false);
-    passwdRegField.setMinLength(6);
-    passwdRegField.setMaxLength(40);
-    passwdRegField.getMessages().setMinLengthText(i18n.t(CoreMessages.PASSWD_MUST_BE_BETWEEN_6_AND_40));
-    passwdRegField.getMessages().setMaxLengthText(i18n.t(CoreMessages.PASSWD_MUST_BE_BETWEEN_6_AND_40));
-    passwdRegField.setWidth(DEF_MEDIUM_FIELD_WIDTH);
-    passwdRegField.setValidationDelay(1000);
-    passwdRegField.setId(PASSWORD_FIELD);
     add(passwdRegField);
 
-    // http://www.sencha.com/forum/showthread.php?49702-GXT-Form-Validation
-    emailRegField = new TextField<String>();
+    emailRegField = userFieldFactory.createUserEmail(EMAIL_FIELD);
     emailRegField.setTabIndex(5);
-    emailRegField.setFieldLabel(i18n.t("Email"));
-    emailRegField.setName(EMAIL_FIELD);
-    emailRegField.setRegex(TextUtils.EMAIL_REGEXP);
-    emailRegField.getMessages().setRegexText(i18n.t("This is not a valid email"));
-    emailRegField.setWidth(DEF_MEDIUM_FIELD_WIDTH);
-    emailRegField.setAllowBlank(false);
-    emailRegField.setValidationDelay(1000);
-    emailRegField.setId(EMAIL_FIELD);
     add(emailRegField);
   }
 

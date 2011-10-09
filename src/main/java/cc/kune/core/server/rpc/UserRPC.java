@@ -90,7 +90,8 @@ public class UserRPC implements RPC, UserService {
   @Override
   @Authenticated
   @Transactional
-  public void changePasswd(final String userHash, final String oldPassword, final String newPassword) {
+  public void changePasswd(final String userHash, final String oldPassword, final String newPassword)
+      throws DefaultException {
     final Long userId = userSessionManager.getUser().getId();
     userManager.changePasswd(userId, oldPassword, newPassword);
   }

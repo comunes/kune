@@ -34,7 +34,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("UserService")
 public interface UserService extends RemoteService {
 
-  void changePasswd(String userHash, String oldPassword, String newPassword);
+  void changePasswd(String userHash, String oldPassword, String newPassword) throws DefaultException;;
 
   void createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;
 

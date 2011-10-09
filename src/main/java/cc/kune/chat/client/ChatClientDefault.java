@@ -104,7 +104,7 @@ public class ChatClientDefault implements ChatClient {
                 public void run() {
                   setBlink(false);
                 }
-              }.schedule(10000);
+              }.schedule(20000);
             }
           });
     }

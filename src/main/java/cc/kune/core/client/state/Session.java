@@ -117,8 +117,6 @@ public interface Session {
 
   boolean getShowDeletedContent();
 
-  String getSiteCommonName();
-
   String getSiteUrl();
 
   Object[][] getTimezones();

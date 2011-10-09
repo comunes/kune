@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 public abstract class EntityOptGeneralPresenter {
 
-  private final EntityOptions entityOptions;
+  protected final EntityOptions entityOptions;
   private final EventBus eventBus;
   protected final I18nTranslationService i18n;
   protected final Session session;

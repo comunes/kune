@@ -61,10 +61,11 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   }
 
   @Override
-  public HashMap<String, String> getLexicon(final String language) {
-    HashMap<String, String> map = langCache.get(language);
+  public HashMap<String, String> getLexicon(final String languageId) {
+    getLanguage(languageId);
+    HashMap<String, String> map = langCache.get(languageId);
     if (map == null) {
-      map = getLexiconFromDb(language);
+      map = getLexiconFromDb(languageId);
     }
     return map;
   }
@@ -75,6 +76,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     // 1) Generate English
     // 2) Don't permit to translate English
     HashMap<String, String> map = new HashMap<String, String>();
+
     final List<I18nTranslation> set = finder.findByLanguage(language);
     if (!language.equals(I18nTranslation.DEFAULT_LANG)) {
       map = (HashMap<String, String>) getLexicon(I18nTranslation.DEFAULT_LANG).clone();

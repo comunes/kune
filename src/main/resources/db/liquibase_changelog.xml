@@ -28,13 +28,14 @@
     <sqlFile path="src/main/resources/db/init-data-countries.sql"
       encoding="utf8" stripComments="1" />
     <rollback>DELETE FROM globalize_countries;</rollback>
-  </changeSet>
+  </changeSet>  
   <changeSet id="3" author="vjrj">
     <comment>Languages insert</comment>
     <sqlFile path="src/main/resources/db/init-data-languages.sql"
       encoding="utf8" stripComments="1" />
     <rollback>DELETE FROM globalize_languages;</rollback>
   </changeSet>
+<!--
   <changeSet id="4" author="vjrj">
     <comment>Languages insert</comment>
     <sqlFile path="src/main/resources/db/init-data-translations.sql"
@@ -119,6 +120,7 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+ -->
   <changeSet id="18" author="vjrj">
     <comment>Initial External Media Descriptors</comment>
     <sqlFile path="src/main/resources/db/update-0014-extmedia.sql"
@@ -137,12 +139,14 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+<!--
   <changeSet id="21" author="vjrj">
     <comment>I18n translations cleanup</comment>
     <sqlFile path="src/main/resources/db/update-0017-i18nclean1.sql"
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+ -->
   <changeSet id="22" author="vjrj">
     <comment>I18n translations cleanup</comment>
     <sqlFile path="src/main/resources/db/update-0017-i18nclean2.sql"

@@ -34,6 +34,7 @@ import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.options.UserOptionsCollection;
 import cc.kune.gspace.client.options.general.GroupOptGeneral;
 import cc.kune.gspace.client.options.general.UserOptGeneral;
+import cc.kune.gspace.client.options.general.UserOptPass;
 import cc.kune.gspace.client.options.license.GroupOptDefLicense;
 import cc.kune.gspace.client.options.license.UserOptDefLicense;
 import cc.kune.gspace.client.options.logo.GroupOptLogo;
@@ -65,9 +66,10 @@ public class GSpaceParts {
       final Provider<UserOptionsCollection> uocProv, final Provider<GroupOptGeneral> gg,
       final Provider<GroupOptDefLicense> gdl, final Provider<GroupOptStyle> gps,
       final Provider<GroupOptLogo> gl, final Provider<GroupOptTools> gtc,
-      final Provider<UserOptGeneral> ug, final Provider<UserOptDefLicense> udl,
-      final Provider<UserOptStyle> ups, final Provider<UserOptLogo> ul,
-      final Provider<UserOptTools> utc, final Provider<SitebarSearchPresenter> siteSearch,
+      final Provider<UserOptGeneral> ug, final Provider<UserOptPass> up,
+      final Provider<UserOptDefLicense> udl, final Provider<UserOptStyle> ups,
+      final Provider<UserOptLogo> ul, final Provider<UserOptTools> utc,
+      final Provider<SitebarSearchPresenter> siteSearch,
       final Provider<SiteOptionsI18nTranslatorAction> transAction,
       final Provider<GiveUsFeedbackBtn> giveUsFeedback,
       final Provider<I18nToTranslateGridPanel> toTrans,
@@ -94,6 +96,7 @@ public class GSpaceParts {
         goc.add(gps);
         goc.add(gdl);
         uoc.add(ug);
+        uoc.add(up);
         uoc.add(utc);
         uoc.add(ul);
         uoc.add(ups);

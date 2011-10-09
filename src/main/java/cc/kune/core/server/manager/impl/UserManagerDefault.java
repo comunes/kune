@@ -44,13 +44,13 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.utils.TextUtils;
-import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
+import cc.kune.core.client.errors.WrongCurrentPasswordException;
 import cc.kune.core.server.mail.MailService;
 import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
 import cc.kune.core.server.manager.GroupManager;
@@ -130,7 +130,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final AccountData account = waveAccountStore.getAccount(participantId);
       if (TextUtils.notEmpty(oldPassword) && account != null
           && !account.asHuman().getPasswordDigest().verify(oldPassword.toCharArray())) {
-        throw new AccessViolationException("You cannot change passwd");
+        throw new WrongCurrentPasswordException();
       }
       // Wave change passwd
       RobotAgentUtil.changeUserPassword(newPassword, participantId, waveAccountStore);
