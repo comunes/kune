@@ -237,7 +237,7 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     final Blip rootBlip = newWavelet.getRootBlip();
     rootBlip.append(new com.google.wave.api.Markup(message).getText());
 
-    if (waveIdToCopy != NO_WAVE_TO_COPY) {
+    if (waveIdToCopy != NO_WAVE_TO_COPY || TextUtils.notEmpty(waveIdToCopy)) {
       try {
         WaveId copyWaveId;
         copyWaveId = WaveId.ofChecked(domain, waveIdToCopy);

@@ -144,6 +144,7 @@ public class UserServiceTest extends IntegrationTest {
   public void init() {
     new IntegrationTestHelper(this);
     lang = new I18nLanguageDTO();
+    lang.setCode("en");
     simpleLang = new I18nLanguageSimpleDTO(lang.getCode(), lang.getEnglishName());
     country = new I18nCountryDTO();
     timezone = new TimeZoneDTO();
@@ -255,8 +256,8 @@ public class UserServiceTest extends IntegrationTest {
         timezone, null, true, SubscriptionMode.manual, "blue");
     userService.createUser(user, false);
     doLogin("test", "123456");
-    final UserDTO userChanged = new UserDTO("test", longName, "123456", email, lang, country, timezone,
-        null, true, SubscriptionMode.manual, "blue");
+    final UserDTO userChanged = new UserDTO(shortName, longName, "123456", email, lang, country,
+        timezone, null, true, SubscriptionMode.manual, "blue");
     userChanged.setId(session.getUser().getId());
     userService.updateUser(getHash(), userChanged, simpleLang);
   }
