@@ -85,7 +85,7 @@ public class I18nTranslation implements HasId {
   private String type;
 
   public I18nTranslation() {
-    this(null, null, null, null, null, null, null, null, null, null);
+    this(null, null, null, null, null, "", null, null, null, null);
   }
 
   public I18nTranslation(final I18nLanguage language, final String text, final I18nTranslation parent,

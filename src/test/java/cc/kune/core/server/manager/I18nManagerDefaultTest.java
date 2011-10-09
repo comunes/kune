@@ -62,6 +62,11 @@ public class I18nManagerDefaultTest extends PersistenceTest {
   }
 
   @Test
+  public void emptyI18n() {
+    new I18nTranslation();
+  }
+
+  @Test
   public void getLexiconList() {
     assertTrue(translationManager.getTranslatedLexicon("en").size() > 0);
     assertTrue(translationManager.getUntranslatedLexicon("en").size() == 0);

@@ -126,7 +126,7 @@ public class I18nCellList extends Composite {
 
   @Inject
   public I18nCellList(final I18nTranslationDataProvider data, final I18nUITranslationService i18n,
-      final I18nTraslatorSaver saver) {
+      final I18nTranslatorSaver saver) {
     this.data = data;
 
     final TranslationCell cell = new TranslationCell();

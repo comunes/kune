@@ -13,13 +13,13 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class I18nTraslatorSaver {
+public class I18nTranslatorSaver {
   private final I18nUITranslationService i18n;
   private final Provider<I18nServiceAsync> i18nService;
   private final Session session;
 
   @Inject
-  public I18nTraslatorSaver(final Session session, final Provider<I18nServiceAsync> i18nService,
+  public I18nTranslatorSaver(final Session session, final Provider<I18nServiceAsync> i18nService,
       final I18nUITranslationService i18n) {
     this.session = session;
     this.i18nService = i18nService;

@@ -59,7 +59,7 @@ public class I18nTranslatorForm extends Composite {
   Label noteForTranslators;
   @UiField
   Label noteForTranslatorsTittle;
-  private I18nTraslatorSaver saver;
+  private I18nTranslatorSaver saver;
   @UiField
   Label toLanguageTitle;
   @UiField
@@ -122,7 +122,7 @@ public class I18nTranslatorForm extends Composite {
   }
 
   public void init(final I18nTranslationDataProvider dataProvider, final I18nTranslationService i18n,
-      final I18nTraslatorSaver saver) {
+      final I18nTranslatorSaver saver) {
     this.dataProvider = dataProvider;
     this.i18n = i18n;
     this.saver = saver;
