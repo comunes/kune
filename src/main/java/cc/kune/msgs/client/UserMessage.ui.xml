@@ -9,7 +9,7 @@
       }
     }
 
-    @elif user.agent gecko1_8 {
+    @else {
       .k-msg-width {
         width: auto;
       }

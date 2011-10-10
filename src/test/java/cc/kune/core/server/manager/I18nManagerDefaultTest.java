@@ -75,20 +75,20 @@ public class I18nManagerDefaultTest extends PersistenceTest {
   @Test
   public void getNonExistentTranslationInAnyLangReturnsKey() {
     HashMap<String, String> map = translationManager.getLexicon("en");
-    HashMap<String, String> map2 = translationManager.getLexicon("aa");
+    HashMap<String, String> map2 = translationManager.getLexicon("af");
     final int initialSize = map.size();
     final int initialSize2 = map2.size();
 
     final String translation = translationManager.getTranslation("es", "Foo foo foo",
         "note for translators");
-    final String translation2 = translationManager.getTranslation("aa", "Foo foo foo",
+    final String translation2 = translationManager.getTranslation("af", "Foo foo foo",
         "note for translators");
 
     assertEquals(I18nTranslation.UNTRANSLATED_VALUE, translation);
     assertEquals(I18nTranslation.UNTRANSLATED_VALUE, translation2);
 
     map = translationManager.getLexicon("en");
-    map2 = translationManager.getLexicon("aa");
+    map2 = translationManager.getLexicon("af");
     final int newSize = map.size();
     final int newSize2 = map2.size();
 
