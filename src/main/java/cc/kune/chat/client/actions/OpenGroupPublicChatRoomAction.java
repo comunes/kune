@@ -43,15 +43,14 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatStates;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
-import com.calclab.emite.xep.muc.client.RoomManager;
 import com.google.inject.Inject;
 
 public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
 
   private final ChatClient chatClient;
-  private final I18nTranslationService i18n;
+  protected final I18nTranslationService i18n;
   private boolean inviteMembers;
-  private final Session session;
+  protected final Session session;
 
   @SuppressWarnings("deprecation")
   @Inject
@@ -63,7 +62,6 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
     this.session = session;
     this.chatClient = chatClient;
     this.i18n = i18n;
-    final RoomManager roomManager = chatInstances.roomManager;
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {

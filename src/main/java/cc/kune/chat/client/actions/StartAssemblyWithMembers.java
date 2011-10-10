@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 public class StartAssemblyWithMembers extends MenuItemDescriptor {
 
   @Inject
-  public StartAssemblyWithMembers(final OpenGroupPublicChatRoomAction action,
+  public StartAssemblyWithMembers(final StartAssemblyWithMembersAction action,
       final I18nTranslationService i18n) {
     super(action);
     action.setInviteMembers(true);

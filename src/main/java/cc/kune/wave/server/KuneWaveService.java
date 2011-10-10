@@ -29,6 +29,8 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import com.google.wave.api.Wavelet;
 
 public interface KuneWaveService {
+  public static final String NO_MESSAGE = "";
+  public static final String NO_TITLE = "";
   public static final URL WITHOUT_GADGET = null;
 
   void addGadget(WaveRef waveName, String author, String gadgetUrl);

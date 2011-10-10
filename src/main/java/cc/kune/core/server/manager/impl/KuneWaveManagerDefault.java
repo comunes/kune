@@ -58,6 +58,12 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
 
   @Override
   public String writeTo(final User user, final String groupName, final boolean onlyToAdmins) {
+    return writeTo(user, groupName, onlyToAdmins, KuneWaveService.NO_TITLE, KuneWaveService.NO_MESSAGE);
+  }
+
+  @Override
+  public String writeTo(final User user, final String groupName, final boolean onlyToAdmins,
+      final String title, final String message) {
     final Group group = groupFinder.findByShortName(groupName);
     final Set<Group> toList = new HashSet<Group>();
     toList.add(user.getUserGroup());
@@ -79,6 +85,6 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
         toList.addAll(group.getSocialNetwork().getAccessLists().getEditors().getList());
       }
     }
-    return KuneWaveUtils.getUrl(waveService.createWave("", participantUtils.listFrom(toList)));
+    return KuneWaveUtils.getUrl(waveService.createWave(title, message, participantUtils.listFrom(toList)));
   }
 }

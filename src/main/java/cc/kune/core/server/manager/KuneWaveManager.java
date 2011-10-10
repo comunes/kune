@@ -8,4 +8,6 @@ public interface KuneWaveManager {
 
   String writeTo(User user, String groupName, boolean onlyToAdmins);
 
+  String writeTo(User user, String groupName, boolean onlyToAdmins, String title, String content);
+
 }

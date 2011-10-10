@@ -99,4 +99,7 @@ public interface ContentServiceAsync {
 
   void writeTo(String userHash, StateToken token, boolean onlyToAdmins, AsyncCallback<String> callback);
 
+  void writeTo(String userHash, StateToken token, boolean onlyToAdmins, String title, String message,
+      AsyncCallback<String> callback);
+
 }

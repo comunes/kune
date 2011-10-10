@@ -90,4 +90,7 @@ public interface ContentService extends RemoteService {
   TagCloudResult setTags(String userHash, StateToken token, String tags) throws DefaultException;
 
   String writeTo(String userHash, StateToken token, boolean onlyToAdmins) throws DefaultException;
+
+  String writeTo(String userHash, StateToken token, boolean onlyToAdmins, String title, String message)
+      throws DefaultException;
 }

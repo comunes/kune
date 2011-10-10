@@ -521,4 +521,13 @@ public class ContentRPC implements ContentService, RPC {
     return waveManager.writeTo(user, token.getGroup(), onlyToAdmins);
   }
 
+  @Override
+  @Authenticated
+  @Transactional
+  public String writeTo(final String userHash, final StateToken token, final boolean onlyToAdmins,
+      final String title, final String message) throws DefaultException {
+    final User user = getCurrentUser();
+    return waveManager.writeTo(user, token.getGroup(), onlyToAdmins, title, message);
+  }
+
 }

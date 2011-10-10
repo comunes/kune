@@ -87,7 +87,6 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   // See: DocumentModifyServiceTest
   private static final String NO_ANNOTATION_KEY = null;
   private static final List<BundledAnnotation> NO_BUNDLED_ANNOTATIONS = Collections.emptyList();
-  private static final String NO_TITLE = "";
   private static final List<String> NO_VALUES = Collections.<String> emptyList();
   private static final String NO_WAVE_TO_COPY = null;
 
