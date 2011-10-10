@@ -404,11 +404,10 @@
       <description>Lets you insert, resize and annotate any image from
         the web.
       </description>
-      <new-content-title>Edit this to insert, resize and annotate any
+      <new-content-title>New image</new-content-title>
+      <new-content-textintro>Edit this to insert, resize and annotate any
         image from the web. The image can be annotated (double click on
-        it) by any participant of this document.
-      </new-content-title>
-      <new-content-textintro></new-content-textintro>
+        it) by any participant of this document</new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
