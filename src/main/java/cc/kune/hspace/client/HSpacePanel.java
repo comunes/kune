@@ -30,13 +30,15 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   interface HSpacePanelUiBinder extends UiBinder<Widget, HSpacePanel> {
   }
+  public static final String K_HOME_GLOBAL_STATS = "k-home-global-stats";
+
+  public static final String K_HOME_GROUP_STATS = "k-home-group-stats";
 
   private static HSpacePanelUiBinder uiBinder = GWT.create(HSpacePanelUiBinder.class);
 
   private final FileDownloadUtils downUtils;
   @UiField
   FlowPanel globalStats;
-  private final RootPanel globalStatsParent;
   @UiField
   public Label globalStatsTitle;
   @UiField
@@ -47,7 +49,6 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   public InlineLabel globalStatsTotalUsersCount;
   @UiField
   public InlineLabel globalStatsTotalUsersTitle;
-  private final RootPanel groupStatsParent;
   @UiField
   public FlowPanel lastActivityInYourGroup;
   @UiField
@@ -69,6 +70,8 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   private final Provider<GroupContentHomeLink> linkProv;
 
+  private final DottedTabPanel tabPanel;
+
   private final Widget widget;
 
   @Inject
@@ -83,18 +86,20 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     lastGroupsTitle.setText(i18n.t("Latest created groups"));
     lastPublishedContentsTitle.setText(i18n.t("Latest publications"));
     lastActivityInYourGroupTitle.setText(i18n.t("Latest activity in your groups"));
-    final DottedTabPanel tabPanel = new DottedTabPanel("465px", "200px");
+    tabPanel = new DottedTabPanel("465px", "200px");
     tabPanel.addTab(lastGroupsPanel);
     // tabPanel.addTab(lastActivityPanel);
     tabPanel.addTab(lastPublishedPanel);
     globalStats.removeFromParent();
-    // groupStats.removeFromParent();
 
-    // FIXME: Make this optional (aitor's comment)
-    globalStatsParent = RootPanel.get("k-home-global-stats");
-    globalStatsParent.add(globalStats);
-    groupStatsParent = RootPanel.get("k-home-group-stats");
-    groupStatsParent.add(tabPanel);
+    final RootPanel globalStatsParent = RootPanel.get(K_HOME_GLOBAL_STATS);
+    final RootPanel groupStatsParent = RootPanel.get(K_HOME_GROUP_STATS);
+    if (globalStatsParent != null) {
+      globalStatsParent.add(globalStats);
+    }
+    if (groupStatsParent != null) {
+      groupStatsParent.add(tabPanel);
+    }
     armor.getHomeSpace().add(RootPanel.get("k-home-wrapper"));
   }
 
@@ -155,16 +160,18 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   @Override
   public void setStatsVisible(final boolean visible) {
-    globalStatsParent.setVisible(visible);
-    groupStatsParent.setVisible(visible);
+    globalStats.setVisible(visible);
+    tabPanel.setVisible(visible);
   }
 
   @Override
-  public void setUserGroupsActivityVisible(final boolean logged) {
-    if (logged) {
-      lastActivityInYourGroup.setVisible(logged);
+  public void setUserGroupsActivityVisible(final boolean visible) {
+    final boolean isAttached = tabPanel.getWidgetIndex(lastActivityPanel) != -1;
+    if (visible && !isAttached) {
+      tabPanel.addTab(lastActivityPanel);
+    } else if (!visible && isAttached) {
+      tabPanel.removeTab(lastActivityPanel);
     }
-    lastActivityInYourGroupTitle.setVisible(logged);
   }
 
 }

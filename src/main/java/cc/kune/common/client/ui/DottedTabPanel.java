@@ -26,4 +26,12 @@ public class DottedTabPanel extends Composite {
   public void addTab(final IsWidget view) {
     tabPanel.add(view, new DottedTab());
   }
+
+  public int getWidgetIndex(final IsWidget view) {
+    return tabPanel.getWidgetIndex(view.asWidget());
+  }
+
+  public void removeTab(final IsWidget view) {
+    tabPanel.remove(view.asWidget());
+  }
 }
