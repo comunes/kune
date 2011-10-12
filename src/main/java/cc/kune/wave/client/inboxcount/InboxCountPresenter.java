@@ -7,6 +7,7 @@ import org.waveprotocol.box.webclient.search.Digest;
 import org.waveprotocol.box.webclient.search.Search;
 import org.waveprotocol.box.webclient.search.Search.Listener;
 
+import cc.kune.core.client.events.InboxUnreadUpdatedEvent;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.events.SndClickEvent;
 import cc.kune.core.client.state.Session;
@@ -132,9 +133,11 @@ public class InboxCountPresenter {
     view.setTotal(total);
     final boolean show = session.isLogged() && total != Search.UNKNOWN_SIZE && total > 0;
     view.showCount(show);
-    if (show && total > currentTotal) {
+    final boolean greater = total > currentTotal;
+    if (show && greater) {
       sendNoticeToUser();
     }
+    InboxUnreadUpdatedEvent.fire(eventBus, total, greater);
     currentTotal = total;
   }
 

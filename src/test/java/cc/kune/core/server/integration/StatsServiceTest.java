@@ -21,11 +21,14 @@ package cc.kune.core.server.integration;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.server.stats.HomeStats;
 import cc.kune.core.server.stats.StatsService;
+import cc.kune.domain.Content;
 import cc.kune.domain.finders.GroupFinder;
 
 import com.google.inject.Inject;
@@ -40,6 +43,10 @@ public class StatsServiceTest extends IntegrationTest {
   private void checkStats(final HomeStats homeStats) {
     assertTrue(homeStats.getTotalGroups() > 0);
     assertTrue(homeStats.getTotalUsers() > 0);
+    assertTrue(homeStats.getLastGroups().size() > 0);
+    assertTrue(homeStats.getLastPublishedContents().size() > 0);
+    final List<Content> lastContentsOfMyGroups = homeStats.getLastContentsOfMyGroups();
+    assertTrue(lastContentsOfMyGroups == null || lastContentsOfMyGroups.size() > 0);
   }
 
   @Transactional
@@ -50,9 +57,13 @@ public class StatsServiceTest extends IntegrationTest {
 
   @Test
   public void testBasicStats() {
-    HomeStats homeStats = statsService.getHomeStats();
+    final HomeStats homeStats = statsService.getHomeStats();
     checkStats(homeStats);
-    homeStats = statsService.getHomeStats(groupFinder.findByShortName(getDefSiteShortName()));
+  }
+
+  @Test
+  public void testLoggedStats() {
+    final HomeStats homeStats = statsService.getHomeStats(groupFinder.findByShortName(getSiteAdminShortName()));
     checkStats(homeStats);
   }
 

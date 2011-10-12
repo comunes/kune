@@ -64,11 +64,25 @@ public interface ContentFinder {
   public List<Content> lastModifiedContents(@MaxResults final int limit,
       @Named("status") final ContentStatus status);
 
-  @Finder(query = "FROM Content c WHERE " + "((c.container.owner.id IN (SELECT ed.id FROM "
-      + "c.container.owner.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid)) OR"
-      + "(c.container.owner.id IN (SELECT ad.id FROM "
-      + "c.container.owner.socialNetwork.accessLists.admins.list AS ad WHERE ad.id = :groupid)))"
+  @Finder(query = "FROM Content c WHERE " + "((:groupid IN (SELECT ed.id FROM "
+      + "c.container.owner.socialNetwork.accessLists.editors.list AS ed)) OR"
+      + "(:groupid IN (SELECT ad.id FROM "
+      + "c.container.owner.socialNetwork.accessLists.admins.list AS ad)))"
       + "ORDER BY c.modifiedOn DESC", returnAs = ArrayList.class)
   public List<Content> lastModifiedContentsInUserGroup(@MaxResults final int limit,
       @Named("groupid") Long groupId);
+
+  // @Finder(query = "FROM Content c WHERE " +
+  // "(c.container.owner.id IN (SELECT ad.id"
+  // + "FROM Group ad WHERE ad.id IN (SELECT ad.id "
+  // +
+  // "FROM ad.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid)) OR "
+  // + "(c.container.owner.id IN (SELECT ed.id" +
+  // "FROM Group ed WHERE ed.id IN (SELECT ed.id "
+  // +
+  // "FROM ed.socialNetwork.accessLists.editors.list eds WHERE eds.id = :groupid))))"
+  // + "ORDER BY c.modifiedOn DESC", returnAs = ArrayList.class)
+  // public List<Content> lastModifiedContentsInUserGroup(@MaxResults final int
+  // limit,
+  // @Named("groupid") Long groupId);
 }

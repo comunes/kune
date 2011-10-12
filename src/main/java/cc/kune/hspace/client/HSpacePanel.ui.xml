@@ -21,6 +21,10 @@
         <g:InlineLabel ui:field="globalStatsTotalUsersCount"
           addStyleNames="{style.padl} k-home-em-text"/>
       </g:FlowPanel>
+      <g:FlowPanel>
+      <g:Hyperlink ui:field="unreadInYourInbox"
+          addStyleNames="k-home-group-inbox-link k-home-normal-text"/>
+          </g:FlowPanel>
     </g:FlowPanel>
     <g:FlowPanel ui:field="lastGroupsPanel">
       <g:Label ui:field="lastGroupsTitle" styleName="k-home-title"/>

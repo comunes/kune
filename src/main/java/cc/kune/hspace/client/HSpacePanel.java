@@ -6,6 +6,7 @@ import org.waveprotocol.wave.client.common.util.DateUtils;
 
 import cc.kune.common.client.ui.DottedTabPanel;
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -13,11 +14,13 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.hspace.client.HSpacePresenter.HSpaceView;
 
+import com.calclab.emite.core.client.packet.TextUtils;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -39,6 +42,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   private final FileDownloadUtils downUtils;
   @UiField
   FlowPanel globalStats;
+  private final RootPanel globalStatsParent;
   @UiField
   public Label globalStatsTitle;
   @UiField
@@ -49,6 +53,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   public InlineLabel globalStatsTotalUsersCount;
   @UiField
   public InlineLabel globalStatsTotalUsersTitle;
+  private final RootPanel groupStatsParent;
   @UiField
   public FlowPanel lastActivityInYourGroup;
   @UiField
@@ -72,6 +77,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   private final DottedTabPanel tabPanel;
 
+  @UiField
+  public Hyperlink unreadInYourInbox;
+
   private final Widget widget;
 
   @Inject
@@ -86,14 +94,13 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     lastGroupsTitle.setText(i18n.t("Latest created groups"));
     lastPublishedContentsTitle.setText(i18n.t("Latest publications"));
     lastActivityInYourGroupTitle.setText(i18n.t("Latest activity in your groups"));
-    tabPanel = new DottedTabPanel("465px", "200px");
+    tabPanel = new DottedTabPanel("440px", "200px");
     tabPanel.addTab(lastGroupsPanel);
-    // tabPanel.addTab(lastActivityPanel);
     tabPanel.addTab(lastPublishedPanel);
     globalStats.removeFromParent();
-
-    final RootPanel globalStatsParent = RootPanel.get(K_HOME_GLOBAL_STATS);
-    final RootPanel groupStatsParent = RootPanel.get(K_HOME_GROUP_STATS);
+    unreadInYourInbox.setTargetHistoryToken(SiteTokens.WAVEINBOX);
+    globalStatsParent = RootPanel.get(K_HOME_GLOBAL_STATS);
+    groupStatsParent = RootPanel.get(K_HOME_GROUP_STATS);
     if (globalStatsParent != null) {
       globalStatsParent.add(globalStats);
     }
@@ -110,7 +117,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   private String format(final Long modifiedOn, final String name) {
     final String modOn = DateUtils.getInstance().formatPastDate(modifiedOn);
-    return modOn + " ~ " + name;
+    return TextUtils.ellipsis(modOn + " ~ " + name, 50);
   }
 
   @Override
@@ -121,6 +128,16 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   @Override
   public HasText getGlobalStatsTotalUsersCount() {
     return globalStatsTotalUsersCount;
+  }
+
+  @Override
+  public HasText getUnreadInYourInbox() {
+    return unreadInYourInbox;
+  }
+
+  @Override
+  public void setInboxUnreadVisible(final boolean visible) {
+    unreadInYourInbox.setVisible(visible);
   }
 
   @Override
@@ -152,26 +169,33 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     for (final ContentSimpleDTO content : lastPublishedContentsList) {
       final GroupContentHomeLink link = linkProv.get();
       final StateToken token = content.getStateToken();
-      link.setValues(downUtils.getLogoImageUrl(token.copy().clearDocument().clearFolder()),
-          format(content.getModifiedOn(), content.getName()), token.toString());
+      link.setValues(
+          downUtils.getLogoImageUrl(token.copy().clearDocument().clearFolder()),
+          format(content.getModifiedOn(),
+              "(" + content.getStateToken().getGroup() + ") " + content.getName()), token.toString());
       lastPublishedContents.add(link);
     }
   }
 
   @Override
   public void setStatsVisible(final boolean visible) {
-    globalStats.setVisible(visible);
-    tabPanel.setVisible(visible);
+    if (globalStatsParent != null) {
+      globalStatsParent.setVisible(visible);
+    }
+    if (groupStatsParent != null) {
+      groupStatsParent.setVisible(visible);
+    }
   }
 
   @Override
   public void setUserGroupsActivityVisible(final boolean visible) {
     final boolean isAttached = tabPanel.getWidgetIndex(lastActivityPanel) != -1;
     if (visible && !isAttached) {
-      tabPanel.addTab(lastActivityPanel);
+      tabPanel.insertTab(lastActivityPanel, 0);
     } else if (!visible && isAttached) {
       tabPanel.removeTab(lastActivityPanel);
     }
+    tabPanel.selectTab(0);
   }
 
 }

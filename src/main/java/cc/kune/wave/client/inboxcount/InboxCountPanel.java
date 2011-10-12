@@ -46,8 +46,8 @@ public class InboxCountPanel extends PopupPanel implements InboxCountView {
   @Override
   public void setTotal(final int total) {
     count.setText(String.valueOf(total));
-    tooltip.setText(total == 1 ? i18n.t("One conversation unread") : i18n.t("[%d] conversations unread",
-        total));
+    tooltip.setText(total == 1 ? i18n.t("One recent conversation unread") : i18n.t(
+        "[%d] recent conversations unread", total));
   }
 
   @Override

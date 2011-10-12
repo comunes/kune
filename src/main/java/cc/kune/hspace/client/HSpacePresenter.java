@@ -21,6 +21,7 @@ package cc.kune.hspace.client;
 
 import java.util.List;
 
+import cc.kune.core.client.events.InboxUnreadUpdatedEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInOrSignOutEvent;
@@ -28,6 +29,7 @@ import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHan
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.HomeStatsDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasText;
@@ -50,6 +52,10 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
 
     HasText getGlobalStatsTotalUsersCount();
 
+    HasText getUnreadInYourInbox();
+
+    void setInboxUnreadVisible(boolean visible);
+
     void setLastContentsOfMyGroup(List<ContentSimpleDTO> lastContentsOfMyGroupsList);
 
     void setLastGroups(List<GroupDTO> lastGroups);
@@ -58,28 +64,47 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
 
     void setStatsVisible(boolean visible);
 
-    void setUserGroupsActivityVisible(boolean logged);
+    void setUserGroupsActivityVisible(boolean visible);
   }
 
   @Inject
   public HSpacePresenter(final Session session, final EventBus eventBus, final HSpaceView view,
-      final HSpaceProxy proxy, final Provider<ClientStatsServiceAsync> statsService) {
+      final HSpaceProxy proxy, final Provider<ClientStatsServiceAsync> statsService,
+      final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
+    eventBus.addHandler(InboxUnreadUpdatedEvent.getType(),
+        new InboxUnreadUpdatedEvent.InboxUnreadUpdatedHandler() {
+          @Override
+          public void onInboxUnreadUpdated(final InboxUnreadUpdatedEvent event) {
+            final int total = event.getCount();
+            if (total > 0 && session.isLogged()) {
+              getView().getUnreadInYourInbox().setText(
+                  total == 1 ? i18n.t("One recent conversation unread") : i18n.t(
+                      "[%d] recent conversations unread", total));
+              getView().setInboxUnreadVisible(true);
+            } else {
+              getView().setInboxUnreadVisible(false);
+            }
+          }
+        });
     final AsyncCallbackSimple<HomeStatsDTO> callback = new AsyncCallbackSimple<HomeStatsDTO>() {
       @Override
       public void onSuccess(final HomeStatsDTO result) {
         getView().getGlobalStatsTotalGroupsCount().setText(result.getTotalGroups().toString());
         getView().getGlobalStatsTotalUsersCount().setText(result.getTotalUsers().toString());
         getView().setLastGroups(result.getLastGroups());
+        getView().setLastPublishedContents(result.getLastPublishedContents());
+        getView().setStatsVisible(true);
         final List<ContentSimpleDTO> lastContentsOfMyGroups = result.getLastContentsOfMyGroups();
-        final boolean myGroupsHasActivity = lastContentsOfMyGroups != null
+        final boolean logged = session.isLogged();
+        final boolean myGroupsHasActivity = logged && lastContentsOfMyGroups != null
             && lastContentsOfMyGroups.size() > 0;
+        // NotifyUser.info("" + lastContentsOfMyGroups.size(), true);
         if (myGroupsHasActivity) {
           getView().setLastContentsOfMyGroup(lastContentsOfMyGroups);
         }
         getView().setUserGroupsActivityVisible(myGroupsHasActivity);
-        getView().setLastPublishedContents(result.getLastPublishedContents());
-        getView().setStatsVisible(true);
+        getView().setInboxUnreadVisible(logged);
       }
     };
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
