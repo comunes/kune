@@ -42,8 +42,6 @@ import cc.kune.core.shared.dto.SubscriptionMode;
 import cc.kune.core.shared.dto.TimeZoneDTO;
 import cc.kune.core.shared.dto.UserDTO;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -184,7 +182,7 @@ public class RegisterPresenter extends
 
         @Override
         public void onSuccess(final Void arg0) {
-          signInProvider.get().doSignIn(getView().getShortName(), getView().getRegisterPassword(),
+          signInProvider.get().doSignIn(getView().getShortName(), getView().getRegisterPassword(), true,
               new AsyncCallback<Void>() {
 
                 @Override
@@ -196,12 +194,12 @@ public class RegisterPresenter extends
                 public void onSuccess(final Void result) {
                   // onSignIn(userInfoDTO);
                   NewUserRegisteredEvent.fire(getEventBus());
-                  Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                    @Override
-                    public void execute() {
-                      stateManager.gotoHistoryToken(session.getCurrentUserInfo().getHomePage());
-                    }
-                  });
+                  // Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                  // @Override
+                  // public void execute() {
+                  // stateManager.gotoHistoryToken(session.getCurrentUserInfo().getHomePage());
+                  // }
+                  // });
                   getView().hide();
                   getView().unMask();
                   if (wantHomepage) {

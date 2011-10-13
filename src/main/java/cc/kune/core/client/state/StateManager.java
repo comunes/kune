@@ -24,66 +24,52 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
-import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener2;
-
 public interface StateManager {
 
-    void addBeforeStateChangeListener(BeforeActionListener listener);
+  void addBeforeStateChangeListener(BeforeActionListener listener);
 
-    void addSiteToken(String token, HistoryTokenCallback historyTokenCallback);
+  void addSiteToken(String token, HistoryTokenCallback historyTokenCallback);
 
-    void gotoHistoryToken(String newToken);
+  void gotoHistoryToken(String newToken);
 
-    void gotoHistoryTokenButRedirectToCurrent(String signin);
+  void gotoHistoryTokenButRedirectToCurrent(String signin);
 
-    void gotoStateToken(StateToken newToken);
+  void gotoStateToken(StateToken newToken);
 
-    void gotoStateToken(StateToken token, boolean useCache);
+  void gotoStateToken(StateToken token, boolean useCache);
 
-    void onGroupChanged(boolean fireNow, GroupChangedEvent.GroupChangedHandler handler);
+  void onGroupChanged(boolean fireNow, GroupChangedEvent.GroupChangedHandler handler);
 
-    @Deprecated
-    void onGroupChanged(Listener2<String, String> listener);
+  void onSocialNetworkChanged(boolean fireNow,
+      SocialNetworkChangedEvent.SocialNetworkChangedHandler handler);
 
-    void onSocialNetworkChanged(boolean fireNow, SocialNetworkChangedEvent.SocialNetworkChangedHandler handler);
+  /**
+   * @param fireNow
+   *          if true, fire handler with current state
+   * @param handler
+   */
+  void onStateChanged(boolean fireNow, StateChangedEvent.StateChangedHandler handler);
 
-    @Deprecated
-    void onSocialNetworkChanged(Listener<StateAbstractDTO> listener);
+  void onToolChanged(boolean fireNow, ToolChangedEvent.ToolChangedHandler handler);
 
-    /**
-     * @param fireNow
-     *            if true, fire handler with current state
-     * @param handler
-     */
-    void onStateChanged(boolean fireNow, StateChangedEvent.StateChangedHandler handler);
+  void redirectOrRestorePreviousToken();
 
-    @Deprecated
-    void onStateChanged(Listener<StateAbstractDTO> listener);
+  void refreshCurrentState();
 
-    void onToolChanged(boolean fireNow, ToolChangedEvent.ToolChangedHandler handler);
+  void refreshCurrentStateWithoutCache();
 
-    @Deprecated
-    void onToolChanged(Listener2<String, String> listener);
+  void removeBeforeStateChangeListener(BeforeActionListener listener);
 
-    void redirectOrRestorePreviousToken();
+  void removeSiteToken(String token);
 
-    void refreshCurrentStateWithoutCache();
+  void restorePreviousToken();
 
-    void refreshCurrentState();
+  void resumeTokenChange();
 
-    void removeBeforeStateChangeListener(BeforeActionListener listener);
+  void setRetrievedState(StateAbstractDTO state);
 
-    void removeSiteToken(String token);
+  void setRetrievedStateAndGo(StateAbstractDTO state);
 
-    void restorePreviousToken();
-
-    void resumeTokenChange();
-
-    void setRetrievedState(StateAbstractDTO state);
-
-    void setRetrievedStateAndGo(StateAbstractDTO state);
-
-    void setSocialNetwork(SocialNetworkDataDTO socialNet);
+  void setSocialNetwork(SocialNetworkDataDTO socialNet);
 
 }

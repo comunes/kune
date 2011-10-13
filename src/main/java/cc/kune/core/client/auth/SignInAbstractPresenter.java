@@ -74,7 +74,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     }
   }
 
-  protected void onSignIn(final UserInfoDTO userInfoDTO) {
+  protected void onSignIn(final UserInfoDTO userInfoDTO, final boolean gotoHomePage) {
     final String userHash = userInfoDTO.getUserHash();
     cookiesManager.setAuthCookie(userHash);
     getView().reset();
@@ -83,7 +83,11 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     final I18nLanguageDTO language = userInfoDTO.getLanguage();
     i18n.changeCurrentLanguage(language.getCode());
     session.setCurrentLanguage(language);
-    stateManager.redirectOrRestorePreviousToken();
+    if (gotoHomePage) {
+      stateManager.gotoHistoryToken(userInfoDTO.getHomePage());
+    } else {
+      stateManager.redirectOrRestorePreviousToken();
+    }
   }
 
   protected void saveAutocompleteLoginData(final String nickOrEmail, final String password) {

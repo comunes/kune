@@ -21,7 +21,7 @@ package cc.kune.core.shared;
 
 public final class FileConstants {
 
-  public final static String ASITE_PREFIX = "ws/";
+  public final static String ASITE_PREFIX = "/ws/";
   public final static String AVATARDOWNLOADSERVLET = ASITE_PREFIX + "servlets/UserLogoDownloadManager";
   public final static String BACKDOWNLOADSERVLET = ASITE_PREFIX
       + "servlets/EntityBackgroundDownloadManager";

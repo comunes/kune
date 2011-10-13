@@ -22,7 +22,6 @@ package cc.kune.core.client.state;
 import java.util.Collection;
 import java.util.List;
 
-import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.SessionExpiredEvent;
@@ -46,8 +45,6 @@ import cc.kune.core.shared.dto.ToolSimpleDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
-import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -320,21 +317,11 @@ public class SessionDefault implements Session {
   }
 
   @Override
-  public void onInitDataReceived(final Listener<InitDataDTO> listener) {
-    throw new NotImplementedException();
-  }
-
-  @Override
   public void onUserSignIn(final boolean fireNow, final UserSignInHandler handler) {
     eventBus.addHandler(UserSignInEvent.getType(), handler);
     if (fireNow && isLogged() && currentUserInfo != null) {
       handler.onUserSignIn(new UserSignInEvent(currentUserInfo));
     }
-  }
-
-  @Override
-  public void onUserSignIn(final Listener<UserInfoDTO> listener) {
-    throw new NotImplementedException();
   }
 
   @Override
@@ -351,11 +338,6 @@ public class SessionDefault implements Session {
     if (fireNow && isNotLogged()) {
       handler.onUserSignOut(new UserSignOutEvent());
     }
-  }
-
-  @Override
-  public void onUserSignOut(final Listener0 listener) {
-    throw new NotImplementedException();
   }
 
   @Override

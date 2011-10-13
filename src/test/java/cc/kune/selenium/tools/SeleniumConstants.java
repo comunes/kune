@@ -23,7 +23,7 @@ public final class SeleniumConstants {
   public static final String FIREFOX_PROFILE_NAME = "selenium";
   public static final String GWTDEV = "gwt-debug-";
   public static final String INPUT = "-input";
-  public static final int TIMEOUT = 20;
+  public static final int TIMEOUT = 25;
   public static final String USER_EMAIL = "admin@example.org";
   public static final String USER_LONGNAME = "Administrator";
   public static final String USER_PASSWD = "easyeasy";

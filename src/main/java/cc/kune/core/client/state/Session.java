@@ -56,9 +56,6 @@ import cc.kune.core.shared.dto.ToolSimpleDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
-import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
-
 public interface Session {
 
   long A_DAY = 1000 * 60 * 60 * 24;
@@ -141,18 +138,12 @@ public interface Session {
 
   void onAppStart(boolean fireNow, AppStartEvent.AppStartHandler handler);
 
-  @Deprecated
-  void onInitDataReceived(Listener<InitDataDTO> listener);
-
   /**
    * @param fireNow
    *          if @true the handler is fired after added if the user is loggedin
    * @param handler
    */
   void onUserSignIn(boolean fireNow, UserSignInEvent.UserSignInHandler handler);
-
-  @Deprecated
-  void onUserSignIn(Listener<UserInfoDTO> listener);
 
   void onUserSignInOrSignOut(boolean fireNow, UserSignInOrSignOutEvent.UserSignInOrSignOutHandler handler);
 
@@ -162,9 +153,6 @@ public interface Session {
    * @param handler
    */
   void onUserSignOut(boolean fireNow, UserSignOutEvent.UserSignOutHandler handler);
-
-  @Deprecated
-  void onUserSignOut(Listener0 listener);
 
   void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
 

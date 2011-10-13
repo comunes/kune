@@ -27,7 +27,6 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
-import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.utils.Pair;
 import cc.kune.core.client.init.AppStartEvent;
@@ -45,8 +44,6 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
-import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -172,11 +169,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   }
 
-  @Override
-  public void onGroupChanged(final Listener2<String, String> listener) {
-    throw new NotImplementedException();
-  }
-
   private void onHistoryChanged(final StateToken newState) {
     // NotifyUser.info("loading: " + newState + " because current:" +
     // session.getCurrentStateToken());
@@ -199,22 +191,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   }
 
   @Override
-  public void onSocialNetworkChanged(final Listener<StateAbstractDTO> listener) {
-    throw new NotImplementedException();
-  }
-
-  @Override
   public void onStateChanged(final boolean fireNow, final StateChangedHandler handler) {
     eventBus.addHandler(StateChangedEvent.getType(), handler);
     final StateAbstractDTO currentState = session.getCurrentState();
     if (fireNow && currentState != null) {
       handler.onStateChanged(new StateChangedEvent(currentState));
     }
-  }
-
-  @Override
-  public void onStateChanged(final Listener<StateAbstractDTO> listener) {
-    throw new NotImplementedException();
   }
 
   @Override
@@ -225,11 +207,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       handler.onToolChanged(new ToolChangedEvent(getPreviousTool(),
           currentState.getStateToken().getTool()));
     }
-  }
-
-  @Override
-  public void onToolChanged(final Listener2<String, String> listener) {
-    throw new NotImplementedException();
   }
 
   @Override

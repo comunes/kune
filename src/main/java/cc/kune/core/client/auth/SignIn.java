@@ -25,12 +25,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SignIn {
 
-    void doSignIn(String nickOrEmail, String passwd, AsyncCallback<Void> callback);
+  void doSignIn(String nickOrEmail, String passwd, boolean gotoHomePage, AsyncCallback<Void> callback);
 
-    void hide();
+  void hide();
 
-    void showSignInDialog();
+  void setErrorMessage(String message, NotifyLevel level);
 
-    void setErrorMessage(String message, NotifyLevel level);
+  void showSignInDialog();
 
 }

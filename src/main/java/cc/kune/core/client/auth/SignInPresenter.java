@@ -105,7 +105,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
   }
 
   @Override
-  public void doSignIn(final String nickOrEmail, final String passwd,
+  public void doSignIn(final String nickOrEmail, final String passwd, final boolean gotoHomePage,
       final AsyncCallback<Void> extCallback) {
     final UserDTO user = new UserDTO();
     user.setShortName(nickOrEmail);
@@ -129,7 +129,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
           @Override
           public void onSuccess(final UserInfoDTO userInfoDTO) {
-            onSignIn(userInfoDTO);
+            onSignIn(userInfoDTO, gotoHomePage);
             extCallback.onSuccess(null);
           }
         };
@@ -197,7 +197,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
       final String nickOrEmail = getView().getNickOrEmail();
       final String passwd = getView().getLoginPassword();
-      doSignIn(nickOrEmail, passwd, new AsyncCallback<Void>() {
+      doSignIn(nickOrEmail, passwd, false, new AsyncCallback<Void>() {
 
         @Override
         public void onFailure(final Throwable caught) {

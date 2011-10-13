@@ -26,6 +26,7 @@ public class I18nUtilsTest {
     assertEquals("yesOrNo", I18nUtils.convertMethodName("yes, or & no?"));
     assertEquals("yesOrNo", I18nUtils.convertMethodName("yes or no"));
     assertEquals("yesOrNo", I18nUtils.convertMethodName("yes   or   no"));
+    assertEquals("newYesNoMaybeVoting", I18nUtils.convertMethodName("New Yes/No/Maybe/+ Voting"));
   }
 
   @Test

@@ -33,7 +33,6 @@ import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emite.browser.client.PageAssist;
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -109,32 +108,32 @@ public class I18nUITranslationService extends I18nTranslationService {
    */
   private native void changeLocale(String newLocale)
   /*-{
-  	// Uncomment the "debugger;" line to see how to set debug statements in JSNI code
-  	// When in web mode, if your browser has a JavaScript debugger attached, it will
-  	// launch at this point in the code (when the user changes locale through the menu system).
-  	// debugger;
+		// Uncomment the "debugger;" line to see how to set debug statements in JSNI code
+		// When in web mode, if your browser has a JavaScript debugger attached, it will
+		// launch at this point in the code (when the user changes locale through the menu system).
+		// debugger;
 
-  	// Get the current location
-  	var currLocation = $wnd.location.toString();
-  	// Get rid of any GWT History tokens that might be present
-  	var noHistoryCurrLocArray = currLocation.split("#");
-  	var noHistoryCurrLoc = noHistoryCurrLocArray[0];
-  	var currHistory = noHistoryCurrLocArray[1];
-  	// Get rid of any locale string
-  	var locArray = noHistoryCurrLoc.split("?");
-  	// Build the new href location and then send the browser there.
-  	// $wnd.location.href = locArray[0]+"?locale="+newLocale+"#"+currHistory;
-  	$wnd.location.href = locArray[0] + "?locale=" + newLocale
+		// Get the current location
+		var currLocation = $wnd.location.toString();
+		// Get rid of any GWT History tokens that might be present
+		var noHistoryCurrLocArray = currLocation.split("#");
+		var noHistoryCurrLoc = noHistoryCurrLocArray[0];
+		var currHistory = noHistoryCurrLocArray[1];
+		// Get rid of any locale string
+		var locArray = noHistoryCurrLoc.split("?");
+		// Build the new href location and then send the browser there.
+		// $wnd.location.href = locArray[0]+"?locale="+newLocale+"#"+currHistory;
+		$wnd.location.href = locArray[0] + "?locale=" + newLocale
 
-  	// extjs part:
-  	// commented because the error: "Ext is not defined"
-  	// we have to try other way
-  	// var head = document.getElementsByTagName("head")[0];
-  	// var script = document.createElement('script');
-  	// script.id = 'localScript';
-  	// script.type = 'text/javascript';
-  	// script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
-  	// head.appendChild(script);
+		// extjs part:
+		// commented because the error: "Ext is not defined"
+		// we have to try other way
+		// var head = document.getElementsByTagName("head")[0];
+		// var script = document.createElement('script');
+		// script.id = 'localScript';
+		// script.type = 'text/javascript';
+		// script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
+		// head.appendChild(script);
   }-*/;
 
   public String formatDateWithLocale(final Date date) {
@@ -176,10 +175,6 @@ public class I18nUITranslationService extends I18nTranslationService {
       siteCommonName = (meta == null ? t("this site") : t(meta));
     }
     return siteCommonName;
-  }
-
-  public void init(final I18nServiceAsync i18nService, final Session session, final Listener0 onReady) {
-
   }
 
   private void save(final String text, final String noteForTranslators) {
