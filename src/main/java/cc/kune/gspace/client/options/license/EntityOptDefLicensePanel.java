@@ -57,8 +57,8 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
     change.addStyleName("k-button");
     flow.add(change);
     initWidget(flow);
-    flow.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
-    flow.setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
+    // flow.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
+    flow.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
     flow.addStyleName("k-overflow-y-auto");
     flow.addStyleName("k-tab-panel");
   }

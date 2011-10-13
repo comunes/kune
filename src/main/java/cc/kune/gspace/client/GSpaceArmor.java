@@ -35,6 +35,8 @@ public interface GSpaceArmor {
 
   ForIsWidget getDocFooter();
 
+  IsActionExtensible getEntityFooterToolbar();
+
   ForIsWidget getDocHeader();
 
   ForIsWidget getDocSubheader();
@@ -49,7 +51,7 @@ public interface GSpaceArmor {
 
   ForIsWidget getEntityToolsSouth();
 
-  IsActionExtensible getFooterToolbar();
+  IsActionExtensible getDocFooterToolbar();
 
   IsActionExtensible getHeaderToolbar();
 

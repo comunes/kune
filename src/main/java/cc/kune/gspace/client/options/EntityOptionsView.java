@@ -24,6 +24,6 @@ import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.Abs
 public interface EntityOptionsView extends AbstractTabbedDialogView {
 
   int HEIGHT = 270;
-  int WIDTH = 500;
-
+  int WIDTH = 440;
+  int WIDTH_WOUT_MARGIN = 420;
 }

@@ -54,8 +54,8 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, i18n.t("Choose"));
 
     initWidget(uploader);
-    setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
-    setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
+    // setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
+    setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
 
     addStyleName("k-overflow-y-auto");
     addStyleName("k-tab-panel");

@@ -63,8 +63,8 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   public EntityOptStylePanel(final I18nTranslationService i18n, final CoreResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
     tabTitle = new IconLabel(res.themeChoose(), i18n.t("Style"));
-    super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
-    super.setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
+    // super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
+    super.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
 
     final FlowPanel flow = new FlowPanel();
     final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));

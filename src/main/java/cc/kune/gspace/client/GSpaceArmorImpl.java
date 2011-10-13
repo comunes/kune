@@ -59,12 +59,14 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   DockLayoutPanel docContainerParent;
   @UiField
   FlowPanel docFooter;
+  private final ActionFlowPanel docFooterToolbar;
   @UiField
   FlowPanel docHeader;
   @UiField
   FlowPanel docSubheader;
   @UiField
   FlowPanel entityFooter;
+  private final ActionFlowPanel entityFooterToolbar;
   @UiField
   FlowPanel entityHeader;
   @UiField
@@ -75,7 +77,6 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   FlowPanel entityToolsNorth;
   @UiField
   FlowPanel entityToolsSouth;
-  private final ActionFlowPanel footerToolbar;
   @UiField
   SplitLayoutPanel groupSpace;
   private final ActionFlowPanel headerToolbar;
@@ -95,7 +96,6 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @UiField
   TabLayoutPanel tabs;
   private final ActionFlowPanel toolsSouthToolbar;
-
   @UiField
   FlowPanel userSpace;
 
@@ -107,14 +107,16 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
         "visible");
     DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsContainer),
         "overflow", "visible");
-    footerToolbar = toolbarProv.get();
+    docFooterToolbar = toolbarProv.get();
     headerToolbar = toolbarProv.get();
     subheaderToolbar = toolbarProv.get();
     toolsSouthToolbar = toolbarProv.get();
+    entityFooterToolbar = toolbarProv.get();
     getDocHeader().add(headerToolbar);
     getDocSubheader().add(subheaderToolbar);
-    getDocFooter().add(footerToolbar);
+    getDocFooter().add(docFooterToolbar);
     getEntityToolsSouth().add(toolsSouthToolbar);
+    getEntityFooter().add(entityFooterToolbar);
     entityToolsNorth.getElement().getStyle().setPosition(Position.RELATIVE);
     // entityToolsSouth.setVisible(false);
     mainpanel.getWidgetContainerElement(tabs).addClassName("k-spaces");
@@ -152,6 +154,11 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   }
 
   @Override
+  public IsActionExtensible getDocFooterToolbar() {
+    return docFooterToolbar;
+  }
+
+  @Override
   public ForIsWidget getDocHeader() {
     return docHeader;
   }
@@ -164,6 +171,11 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public ForIsWidget getEntityFooter() {
     return entityFooter;
+  }
+
+  @Override
+  public IsActionExtensible getEntityFooterToolbar() {
+    return entityFooterToolbar;
   }
 
   @Override
@@ -184,11 +196,6 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public ForIsWidget getEntityToolsSouth() {
     return entityToolsSouth;
-  }
-
-  @Override
-  public IsActionExtensible getFooterToolbar() {
-    return footerToolbar;
   }
 
   @Override
