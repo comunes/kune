@@ -33,7 +33,7 @@ public class StatsServiceDefault implements StatsService {
   public HomeStats getHomeStats(final Group userGroup) {
     final HomeStats stats = new HomeStats();
     stats.setLastGroups(groupFinder.lastGroups(LIMIT, GroupType.CLOSED, GroupType.PERSONAL));
-    stats.setTotalGroups(groupFinder.count());
+    stats.setTotalGroups(groupFinder.countGroups(GroupType.PERSONAL));
     stats.setTotalUsers(userFinder.count());
     stats.setLastPublishedContents(contentFinder.lastModifiedContents(LIMIT,
         ContentStatus.publishedOnline));

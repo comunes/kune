@@ -51,7 +51,7 @@ public class KuneSeleniumDefaults {
   public static final Injector INJECTOR = Guice.createInjector(new SeleniumModule());
 
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
-  public static boolean mustCloseFinally = false;
+  public static boolean mustCloseFinally = true;
   private final String baseUrl;
   protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
@@ -62,8 +62,9 @@ public class KuneSeleniumDefaults {
   private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
-    // baseUrl = "http://kune.beta.iepala.es/?locale=en#";
-    baseUrl = "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
+    baseUrl = "http://kune.beta.iepala.es/?locale=en#";
+    // baseUrl =
+    // "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
     injector = INJECTOR;
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);

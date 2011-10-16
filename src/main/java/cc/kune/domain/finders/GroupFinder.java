@@ -42,6 +42,9 @@ public interface GroupFinder {
   @Finder(query = "SELECT count(*) FROM Group g WHERE g.shortName = :shortName")
   public Long countByShortName(@Named("shortName") final String shortName);
 
+  @Finder(query = "SELECT count(*) FROM Group g " + " WHERE (g.groupType != :notgrouptype)")
+  public Long countGroups(@Named("notgrouptype") final GroupType excludedGroupType);
+
   @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id "
       + "FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid)", returnAs = HashSet.class)
   public Set<Group> findAdminInGroups(@Named("groupid") final Long groupId);
