@@ -105,7 +105,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
       @Override
       public void onClick(final ClickEvent event) {
-        NotifyUser.info(TextUtils.IN_DEVELOPMENT);
+        NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
       }
     };
     for (int i = 1; i <= 6; i++) {

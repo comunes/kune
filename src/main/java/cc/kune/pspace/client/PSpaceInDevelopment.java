@@ -19,6 +19,7 @@
  */
 package cc.kune.pspace.client;
 
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.GroupChangedEvent;
@@ -27,6 +28,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -34,6 +36,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -59,13 +62,18 @@ public class PSpaceInDevelopment extends Composite {
   FlowPanel headerPanel;
   private final CoreResources images;
   @UiField
+  Label inDevel;
+  @UiField
+  HTMLPanel inDevelSupport;
+  @UiField
   FlowPanel mainPanel;
   @UiField
   FlowPanel photoPanel;
 
   @Inject
   public PSpaceInDevelopment(final StateManager stateManager, final CoreResources images,
-      final Session session, final Provider<FileDownloadUtils> downloadProvider) {
+      final Session session, final Provider<FileDownloadUtils> downloadProvider,
+      final I18nTranslationService i18n) {
     this.images = images;
     this.downloadProvider = downloadProvider;
     initWidget(uiBinder.createAndBindUi(this));
@@ -75,6 +83,10 @@ public class PSpaceInDevelopment extends Composite {
         setGroupLogo(session.getCurrentState().getGroup());
       }
     });
+    inDevel.setText(i18n.t("Right now, the public web space of this group, it's under construction"));
+    inDevelSupport.getElement().setInnerHTML(
+        i18n.t("[%s] the development",
+            TextUtils.generateHtmlLink("http://kune.ourproject.org/join/", i18n.t("Please support"))));
   }
 
   void setGroupLogo(final GroupDTO group) {

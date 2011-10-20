@@ -9,6 +9,7 @@ import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.actions.GotoTokenAction;
 
 import com.google.gwt.event.shared.EventBus;
@@ -24,16 +25,18 @@ public class PathToolbarUtils {
 
   private final Provider<FolderViewerDropController> dropController;
   private final EventBus eventBus;
+  private final I18nTranslationService i18n;
   private final IconsRegistry iconsRegistry;
   private final StateManager stateManager;
 
   @Inject
   public PathToolbarUtils(final Provider<FolderViewerDropController> dropController,
       final StateManager stateManager, final ContentCapabilitiesRegistry capabilitiesRegistry,
-      final EventBus eventBus) {
+      final EventBus eventBus, final I18nTranslationService i18n) {
     this.dropController = dropController;
     this.stateManager = stateManager;
     this.eventBus = eventBus;
+    this.i18n = i18n;
     iconsRegistry = capabilitiesRegistry.getIconsRegistry();
   }
 
@@ -72,7 +75,8 @@ public class PathToolbarUtils {
   private ButtonDescriptor createPathButton(final ContainerSimpleDTO container, final int length,
       final int pos) {
     final String style = calculateStyle(pos, length);
-    final String title = container.getName();
+    final String name = container.getName();
+    final String title = pos == 0 ? i18n.t(name) : name;
     final ButtonDescriptor btn = new ButtonDescriptor(new GotoTokenAction(
         iconsRegistry.getContentTypeIcon(container.getTypeId()), TextUtils.ellipsis(title, 15),
         container.getStateToken(), style, stateManager, eventBus));

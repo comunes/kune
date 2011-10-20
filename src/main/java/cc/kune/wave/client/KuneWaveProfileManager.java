@@ -54,7 +54,7 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     final String address = profile.getAddress();
     if (address.equals(localDomain) || address.equals("@")) {
       updateProfileAvatar(profile, FileConstants.WORLD_AVATAR_IMAGE);
-    } else if (address.contains(Session.get().getDomain())) {
+    } else if (Session.get().getDomain() != null && address.contains(Session.get().getDomain())) {
       updateProfileAvatar(profile, downloadUtils.getUserAvatar(address.split("@")[0]));
     }
   }

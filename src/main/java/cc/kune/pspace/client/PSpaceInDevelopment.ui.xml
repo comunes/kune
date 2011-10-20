@@ -42,6 +42,14 @@
       width: 100%;
     }
 
+    .contentHtmlSupport {
+      font-size: 32px;
+      color: #c92106;
+      float: right;
+      width: 510px;
+      padding: 30px;
+    }
+
     .contentHtml {
       font-size: 32px;
       color: #c92106;
@@ -51,7 +59,7 @@
       padding: 30px;
     }
 
-    .contentHtml a {
+    .contentHtmlSupport a {
       color: #912312;
     }
 
@@ -69,26 +77,17 @@
   <g:FlowPanel ui:field="container" addStyleNames="{style.container}">
     <g:FlowPanel ui:field="mainPanel" addStyleNames="{style.mainPanel}">
       <g:FlowPanel ui:field="headerPanel" height="70px">
-        <g:Image ui:field="entityLogo" addStyleNames="{style.entityLogo}"
-         />
-        <g:Label text="" ui:field="entityName" addStyleNames="{style.entityName}" />
+        <g:Image ui:field="entityLogo" addStyleNames="{style.entityLogo}"/>
+        <g:Label text="" ui:field="entityName" addStyleNames="{style.entityName}"/>
       </g:FlowPanel>
       <g:FlowPanel ui:field="photoPanel" addStyleNames="{style.photoPanel}">
         <g:InlineLabel addStyleNames="{style.photo} {style.right}"
-          ui:field="logo" />
+          ui:field="logo"/>
       </g:FlowPanel>
       <g:FlowPanel ui:field="contentPanel">
-        <g:HTMLPanel addStyleNames="{style.contentHtml}">
-          Right now, the public web space of this group, it's under
-          construction
-          <br />
-          <br />
-          <a href='http://kune.ourproject.org/join/' target='_blank'>Please
-            support</a>
-          the development
-          <br />
-          <br />
-        </g:HTMLPanel>
+        <g:Label addStyleNames="{style.contentHtml}" ui:field="inDevel"/>
+        <g:HTMLPanel addStyleNames="{style.contentHtmlSupport}"
+          ui:field="inDevelSupport"/>
       </g:FlowPanel>
     </g:FlowPanel>
   </g:FlowPanel>

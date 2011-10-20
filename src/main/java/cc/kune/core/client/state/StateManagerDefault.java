@@ -288,7 +288,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         if (startingUp()) {
           // Starting with some token like "signin": load defContent
           // also
-          processHistoryToken("");
+          processHistoryToken(SiteTokens.GROUP_HOME);
           // SpaceSelectEvent.fire(eventBus, Space.groupSpace);
         }
         // Fire the listener of this #hash token

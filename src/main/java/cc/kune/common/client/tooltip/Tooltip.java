@@ -151,6 +151,10 @@ public class Tooltip extends PopupPanel {
     return super.isShowing();
   }
 
+  public boolean isVisibleOrWillBe() {
+    return tooltip.isVisible() || timers.showIsScheduled();
+  }
+
   private void setContent(final Widget widget) {
     content.clear();
     content.add(widget);

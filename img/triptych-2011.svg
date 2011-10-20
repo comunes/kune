@@ -17,9 +17,9 @@
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="triptych-2011.svg"
    style="display:inline"
-   inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/triptych-2011.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/triptych-2011-big.png"
+   inkscape:export-xdpi="180.02357"
+   inkscape:export-ydpi="180.02357">
   <sodipodi:namedview
      inkscape:document-units="mm"
      pagecolor="#ffffff"
@@ -29,7 +29,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.90178079"
      inkscape:cx="526.18109"
-     inkscape:cy="372.04724"
+     inkscape:cy="505.11727"
      inkscape:current-layer="layer1"
      id="namedview8233"
      showgrid="false"
@@ -1220,7 +1220,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>

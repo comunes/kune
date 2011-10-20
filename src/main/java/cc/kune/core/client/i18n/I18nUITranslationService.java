@@ -19,12 +19,14 @@
  */
 package cc.kune.core.client.i18n;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.MissingResourceException;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.utils.Location;
+import cc.kune.common.client.utils.Pair;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
@@ -33,6 +35,8 @@ import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emite.browser.client.PageAssist;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -41,6 +45,7 @@ import com.google.inject.Inject;
 public class I18nUITranslationService extends I18nTranslationService {
   private I18nLanguageDTO currentLang;
   private String currentLanguageCode;
+  private ArrayList<Pair<String, String>> earlyTexts;
   private final I18nServiceAsync i18nService;
   private final KuneConstants kuneConstants;
   private HashMap<String, String> lexicon;
@@ -77,6 +82,18 @@ public class I18nUITranslationService extends I18nTranslationService {
             lexicon = result;
             session.setCurrentLanguage(currentLang);
             eventBus.fireEvent(new I18nReadyEvent());
+            Scheduler.get().scheduleIncremental(new RepeatingCommand() {
+
+              @Override
+              public boolean execute() {
+                if (!earlyTexts.isEmpty()) {
+                  final Pair<String, String> pair = earlyTexts.get(0);
+                  save(pair.getLeft(), pair.getRight());
+                  earlyTexts.remove(0);
+                }
+                return !earlyTexts.isEmpty();
+              }
+            });
           }
         });
       }
@@ -124,16 +141,6 @@ public class I18nUITranslationService extends I18nTranslationService {
 		// Build the new href location and then send the browser there.
 		// $wnd.location.href = locArray[0]+"?locale="+newLocale+"#"+currHistory;
 		$wnd.location.href = locArray[0] + "?locale=" + newLocale
-
-		// extjs part:
-		// commented because the error: "Ext is not defined"
-		// we have to try other way
-		// var head = document.getElementsByTagName("head")[0];
-		// var script = document.createElement('script');
-		// script.id = 'localScript';
-		// script.type = 'text/javascript';
-		// script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
-		// head.appendChild(script);
   }-*/;
 
   public String formatDateWithLocale(final Date date) {
@@ -186,6 +193,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
           @Override
           public void onSuccess(final String result) {
+            Log.debug("Registered in db '" + text + "' as pending translation");
           }
         });
   }
@@ -221,6 +229,10 @@ public class I18nUITranslationService extends I18nTranslationService {
     } catch (final MissingResourceException e) {
       if (lexicon == null) {
         Log.warn("i18n not initialized: " + text);
+        if (earlyTexts == null) {
+          earlyTexts = new ArrayList<Pair<String, String>>();
+        }
+        earlyTexts.add(Pair.create(text, noteForTranslators));
         return text;
       }
       String translation = lexicon.get(encodeText);
@@ -233,7 +245,7 @@ public class I18nUITranslationService extends I18nTranslationService {
         // Not translated and not in db, make a petition for translation
         if (session.isLogged()) {
           save(text, noteForTranslators);
-          Log.debug("Registering in db '" + text + "' as pending translation");
+
           lexicon.put(encodeText, UNTRANSLATED_VALUE);
         }
         translation = encodeText;

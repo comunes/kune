@@ -64,6 +64,10 @@ public class TooltipTimers {
     }
   }
 
+  public boolean showIsScheduled() {
+    return showTimer.isScheduled();
+  }
+
   public void showTemporally() {
     if (showTimer.isScheduled()) {
       showTimer.cancel();

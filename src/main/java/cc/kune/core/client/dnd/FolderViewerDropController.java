@@ -80,7 +80,7 @@ public class FolderViewerDropController implements DropTarget {
                     }
                   });
             } else {
-              NotifyUser.info(TextUtils.IN_DEVELOPMENT);
+              NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
               NotifyUser.hideProgress();
             }
           }

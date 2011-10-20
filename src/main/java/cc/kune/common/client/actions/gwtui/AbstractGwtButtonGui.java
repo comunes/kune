@@ -176,7 +176,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   @Override
   protected void toogleTooltipVisible() {
     if (tooltip != null) {
-      if (tooltip.isVisible()) {
+      if (tooltip.isVisibleOrWillBe()) {
         tooltip.hide();
       } else {
         tooltip.showTemporally();

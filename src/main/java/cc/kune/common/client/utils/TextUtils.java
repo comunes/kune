@@ -171,7 +171,7 @@ public class TextUtils {
   }
 
   /**
-   * Generates a href link
+   * Generates a href link (with target="_blank")
    * 
    */
   public static String generateHtmlLink(final String href, final String text) {

@@ -23,6 +23,7 @@ import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
@@ -84,7 +85,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     i18n.changeCurrentLanguage(language.getCode());
     session.setCurrentLanguage(language);
     if (gotoHomePage) {
-      stateManager.gotoHistoryToken(userInfoDTO.getHomePage());
+      stateManager.gotoStateToken(new StateToken(userInfoDTO.getHomePage()).clearDocument());
     } else {
       stateManager.redirectOrRestorePreviousToken();
     }

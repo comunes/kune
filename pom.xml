@@ -527,18 +527,13 @@
     <!-- wave -->
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>waveinabox-server-0.3</artifactId>
-      <version>0.3.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
       <artifactId>proto-msg</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>gwt-util-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -548,67 +543,122 @@
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>box</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>box-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>model-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>client</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>client-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>client-common</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>client-common-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>waveinabox-server-0.3</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>proto-msg</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>gwt-util-src</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava-gwt</artifactId>
+      <version>r09</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>box</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>box-src</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>model-src</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client-src</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client-common</artifactId>
+      <version>0.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client-common-src</artifactId>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>common-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>util-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>concurrencycontrol-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>client-scheduler-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>media-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>communication-src</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>net.sourceforge.findbugs</groupId>
