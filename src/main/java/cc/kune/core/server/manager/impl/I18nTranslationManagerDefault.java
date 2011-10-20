@@ -43,6 +43,7 @@ import com.google.inject.Singleton;
 public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslation, Long> implements
     I18nTranslationManager {
 
+  private I18nLanguage defLang;
   private final I18nTranslationFinder finder;
   private final ConcurrentHashMap<String, HashMap<String, String>> langCache;
   private final I18nLanguageManager languageManager;
@@ -54,6 +55,13 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     this.finder = finder;
     this.languageManager = languageManager;
     langCache = new ConcurrentHashMap<String, HashMap<String, String>>();
+  }
+
+  private I18nLanguage defLang() {
+    if (defLang == null) {
+      defLang = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
+    }
+    return defLang;
   }
 
   private I18nLanguage getLanguage(final String languageId) {
@@ -98,8 +106,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
       final Integer firstResult, final Integer maxResults) {
     final I18nLanguage language = getLanguage(languageCode);
     final List<I18nTranslationDTO> list = finder.getTranslatedLexicon(language, firstResult, maxResults);
-    final Long count = finder.getTranslatedLexiconCount(language);
-    return new SearchResultDTO<I18nTranslationDTO>(count.intValue(), list);
+    return new SearchResultDTO<I18nTranslationDTO>(list.size(), list);
   }
 
   @Override
@@ -115,8 +122,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
       if (!getLexicon(I18nTranslation.DEFAULT_LANG).containsKey(text)) {
         final I18nTranslation newTranslation = new I18nTranslation("", null,
             I18nTranslation.DEF_PLUR_INDEX, "", I18nTranslation.UNTRANSLATED_VALUE, escapedText,
-            I18nTranslation.DEF_NAMESPACE, languageManager.findByCode(I18nTranslation.DEFAULT_LANG),
-            null, noteForTranslators);
+            I18nTranslation.DEF_NAMESPACE, defLang(), null, noteForTranslators);
         persist(newTranslation);
         langCache.clear();
       }
@@ -133,14 +139,13 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   public SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode,
       final Integer firstResult, final Integer maxResults) {
     final I18nLanguage language = initUnstranlated(languageCode);
-    final Long count = finder.getUnstranslatedLexiconCount(language);
     final List<I18nTranslationDTO> list = finder.getUnstranslatedLexicon(language, firstResult,
         maxResults);
-    return new SearchResultDTO<I18nTranslationDTO>(count.intValue(), list);
+    return new SearchResultDTO<I18nTranslationDTO>(list.size(), list);
   }
 
   private I18nLanguage initUnstranlated(final String languageCode) {
-    final I18nLanguage defLanguage = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
+    final I18nLanguage defLanguage = defLang();
     I18nLanguage language;
     if (languageCode.equals(I18nTranslation.DEFAULT_LANG)) {
       language = defLanguage;

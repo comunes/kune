@@ -32,15 +32,17 @@ import com.google.inject.persist.finder.FirstResult;
 import com.google.inject.persist.finder.MaxResults;
 
 public interface I18nTranslationFinder {
-  String TRANSLATED_COUNT_QUERY = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text!=null";
-  String TRANSLATED_QUERY = "SELECT NEW cc.kune.core.shared.dto.I18nTranslationDTO(gt.id, gt.trKey, gt.text, gt.parent.id, gt.parent.trKey, gt.parent.noteForTranslators) FROM I18nTranslation gt LEFT JOIN  gt.parent gp WHERE gt.language = :language AND gt.text!=null ORDER BY gt.parent.trKey";
-  String UNTRANSLATED_COUNT_QUERY = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text=null";
-  String UNTRANSLATED_QUERY = "SELECT NEW cc.kune.core.shared.dto.I18nTranslationDTO(gt.id, gt.trKey, gt.text, gt.parent.id, gt.parent.trKey, gt.parent.noteForTranslators) FROM I18nTranslation gt LEFT JOIN gt.parent gp WHERE gt.language = :language AND gt.text=null ORDER BY gt.parent.trKey";
+  String TRANSLATED_QUERY = "SELECT NEW cc.kune.core.shared.dto.I18nTranslationDTO"
+      + "(gt.id, gt.trKey, gt.text, gt.parent.id, gt.parent.trKey, gt.parent.noteForTranslators) "
+      + "FROM I18nTranslation gt LEFT JOIN gt.parent gp WHERE gt.language = :language AND gt.text!=null ORDER BY gt.parent.trKey";
+  String UNTRANSLATED_QUERY = "SELECT NEW cc.kune.core.shared.dto.I18nTranslationDTO"
+      + "(gt.id, gt.trKey, gt.text, gt.parent.id, gt.parent.trKey, gt.parent.noteForTranslators) "
+      + "FROM I18nTranslation gt LEFT JOIN gt.parent gp WHERE gt.language = :language AND gt.text=null  ORDER BY gt.parent.trKey";
 
   @Finder(query = "SELECT gt FROM I18nTranslation gt JOIN gt.language gl WHERE gl.code = :language", returnAs = ArrayList.class)
   public List<I18nTranslation> findByLanguage(@Named("language") final String language);
 
-  @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :deflanguage AND gt.trKey NOT IN (SELECT gt.trKey FROM I18nTranslation gt WHERE gt.language = :language)", returnAs = ArrayList.class)
+  @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :deflanguage AND gt.id NOT IN (SELECT gt.parent FROM I18nTranslation gt WHERE gt.language = :language)", returnAs = ArrayList.class)
   public List<I18nTranslation> getNonExistentFromDefault(
       @Named("deflanguage") final I18nLanguage deflanguage,
       @Named("language") final I18nLanguage language);
@@ -52,16 +54,10 @@ public interface I18nTranslationFinder {
   public List<I18nTranslationDTO> getTranslatedLexicon(@Named("language") final I18nLanguage language,
       @FirstResult final int first, @MaxResults final int max);
 
-  @Finder(query = TRANSLATED_COUNT_QUERY)
-  public Long getTranslatedLexiconCount(@Named("language") final I18nLanguage language);
-
   @Finder(query = UNTRANSLATED_QUERY, returnAs = ArrayList.class)
   public List<I18nTranslationDTO> getUnstranslatedLexicon(
       @Named("language") final I18nLanguage language, @FirstResult final int first,
       @MaxResults final int max);
-
-  @Finder(query = UNTRANSLATED_COUNT_QUERY)
-  public Long getUnstranslatedLexiconCount(@Named("language") final I18nLanguage language);
 
   @Finder(query = UNTRANSLATED_QUERY, returnAs = ArrayList.class)
   public List<I18nTranslationDTO> getUntranslatedLexicon(@Named("language") final I18nLanguage language);
