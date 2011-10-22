@@ -4,7 +4,7 @@
 
 usage() {
     echo "Use: $0 -l langcode"
-    echo "$0 -l en"
+    echo "$0 -l en [-j]"
 }
 
 while getopts “hl:j” OPTION
@@ -68,7 +68,7 @@ END {
   print "}"
 }'
 else
-mysql -B --skip-column-names --password="db4kune" -u kune kune_dev -e "$SEL" \
+mysql -B --skip-column-names --default-character-set=utf8 --password="db4kune" -u kune kune_dev -e "$SEL" \
 | sed 's/	/ł/g' \
 | awk -F "ł" '
 BEGIN {
@@ -90,7 +90,7 @@ BEGIN {
   #gsub(/\[/, "\\[", trkey)
   #gsub(/\]/, "\\]", trkey)
   #print trkey "--->" trad
-  cmd="echo `bin/convertI18nMsgToMethods.sh \""trkey" "nt"\"` = \""trad"\""
+  cmd="LC_CTYPE=UTF-8 echo `bin/convertI18nMsgToMethods.sh \""trkey" "nt"\"` = \""trad"\""
   #print cmd
   #exit
   result = system(cmd)
