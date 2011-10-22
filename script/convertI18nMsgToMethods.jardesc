@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="kune/script/convertI18nMsgToMethods.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/kune/script/convertI18nMsgToMethods.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=kune/src\/main\/java&lt;cc.kune.core.client.i18n{I18nConvertMethodName.java[I18nConvertMethodName" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.core.client.i18n{I18nUtils.java"/>
+        <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.common.client.utils{TextUtils.java"/>
+        <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.core.client.i18n{I18nConvertMethodName.java"/>
+        <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.common.client.errors"/>
+    </selectedElements>
+</jardesc>
