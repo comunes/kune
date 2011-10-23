@@ -6,7 +6,7 @@ defaults: &defaults
 
 production:
   adapter: jdbcmysql
-  database: kune_dev
+  database: kune_prod
   <<: *defaults
 
 development:

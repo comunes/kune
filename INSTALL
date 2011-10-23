@@ -39,6 +39,14 @@ CREATE DATABASE kune_test;
 GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
 
+or for production:
+
+CREATE DATABASE kune_prod;
+GRANT ALL PRIVILEGES ON kune_prod.* TO kune@localhost IDENTIFIED BY 'db4kune';
+FLUSH PRIVILEGES;
+
+Now for the openfire xmpp server:
+
 CREATE DATABASE kune_openfire;
 GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
@@ -51,6 +59,8 @@ Although using this password ('db4kune') is useful for a quick and dirty getting
  - src/main/resources/db/liquibase.properties
  - src/main/resources/META-INF/persistence.xml
  - src/main/webapp/WEB-INF/publicspace/config/database.yml
+
+also if you want to select the database used (by default kune_dev). The db used in runtime is hardcoded (by now) in KuneRackModule.java
 
 ===Source code===
 
