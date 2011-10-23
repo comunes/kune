@@ -23,5 +23,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 public interface EntityOptionsTabView extends IsWidget {
 
-    IsWidget getTabTitle();
+  int MAX_TABTITLE_LENGTH = 9;
+
+  IsWidget getTabTitle();
 }

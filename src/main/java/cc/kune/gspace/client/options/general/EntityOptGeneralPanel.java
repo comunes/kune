@@ -21,6 +21,7 @@ package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
@@ -42,7 +43,8 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
   public EntityOptGeneralPanel(final MaskWidget maskWidget, final ImageResource img, final String title,
       final String introMessage) {
     this.maskWidget = maskWidget;
-    tabTitle = new IconLabel(img, title);
+
+    tabTitle = TabTitleGenerator.generate(img, title, MAX_TABTITLE_LENGTH);
     super.setWidth(EntityOptionsView.WIDTH);
     super.setFrame(true);
     super.getFormPanel().setLabelWidth(100);

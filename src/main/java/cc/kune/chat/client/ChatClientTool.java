@@ -52,8 +52,8 @@ public class ChatClientTool extends FoldableAbstractClientTool {
 
   private void registerIcons() {
     registerContentTypeIcon(TYPE_ROOM, res.groupChat());
-    registerEmptyMessages(TYPE_ROOM,
-        i18n.t("See the archive of old conversations" + TextUtils.IN_DEVELOPMENT_P));
+    registerEmptyMessages(TYPE_ROOM, i18n.tWithNT("See the archive of old conversations"
+        + TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
   }
 
 }

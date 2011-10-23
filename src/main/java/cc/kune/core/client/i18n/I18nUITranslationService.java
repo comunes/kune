@@ -45,7 +45,7 @@ import com.google.inject.Inject;
 public class I18nUITranslationService extends I18nTranslationService {
   private I18nLanguageDTO currentLang;
   private String currentLanguageCode;
-  private ArrayList<Pair<String, String>> earlyTexts;
+  private final ArrayList<Pair<String, String>> earlyTexts;
   private final I18nServiceAsync i18nService;
   private final KuneConstants kuneConstants;
   private HashMap<String, String> lexicon;
@@ -60,6 +60,7 @@ public class I18nUITranslationService extends I18nTranslationService {
     this.kuneConstants = kuneConstants;
     final Location loc = WindowUtils.getLocation();
     final String locale = loc.getParameter("locale");
+    earlyTexts = new ArrayList<Pair<String, String>>();
     i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
       @Override
       public void onFailure(final Throwable caught) {
@@ -74,13 +75,14 @@ public class I18nUITranslationService extends I18nTranslationService {
         i18nService.getLexicon(currentLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
           @Override
           public void onFailure(final Throwable caught) {
-            Log.error("Workspace adaptation to your language failed:" + caught.getMessage());
+            Log.error("Workspace adaptation to your language failed: " + caught.getMessage());
           }
 
           @Override
           public void onSuccess(final HashMap<String, String> result) {
             lexicon = result;
             session.setCurrentLanguage(currentLang);
+            Log.error("Workspace adaptation to language: " + currentLang.getEnglishName());
             eventBus.fireEvent(new I18nReadyEvent());
             Scheduler.get().scheduleIncremental(new RepeatingCommand() {
 
@@ -223,15 +225,15 @@ public class I18nUITranslationService extends I18nTranslationService {
    */
   @Override
   public String tWithNT(final String text, final String noteForTranslators) {
+    if (TextUtils.empty(text)) {
+      return text;
+    }
     final String encodeText = TextUtils.escapeHtmlLight(text);
     try {
       return kuneConstants.getString(I18nUtils.convertMethodName(text + " " + noteForTranslators));
     } catch (final MissingResourceException e) {
       if (lexicon == null) {
         Log.warn("i18n not initialized: " + text);
-        if (earlyTexts == null) {
-          earlyTexts = new ArrayList<Pair<String, String>>();
-        }
         earlyTexts.add(Pair.create(text, noteForTranslators));
         return text;
       }

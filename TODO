@@ -13,6 +13,26 @@ TODO-list for kune -*- mode: org; -*-
 
 * SHORT-TERM (URGENT)
 ** TODO workaround websocket issues
+*** compatibilities
+| jetty M2              | new wesocket | socketio  |
+| jetty M2              | x            | v         |
+| jetty M3              | x (1)        | fails     |
+| jetty 8.0.0.v20110901 | v            | fails     |
+| jetty 8.0.3.v20111011 | v            | fails (2) |
+
+  (1) HttpException(400,Unsupported draft specification: 8,null)
+  (2) Disconnected[ERROR]: XHR Connection dropped unexpectedly
+      Disconnected[TIMEOUT]: null
+2011-10-22 14:18:22,327 WARN [qtp1762721320-17] [socketio.server.DefaultSession]  - Session[tFbCSlch_gedPssWQ9TN]: Exception thrown by SocketIOInbound.onConnect()
+java.lang.NullPointerException
+	at org.eclipse.jetty.io.BufferUtil.putHexInt(BufferUtil.java:149)
+	at org.eclipse.jetty.http.HttpGenerator.prepareBuffers(HttpGenerator.java:994)
+	at org.eclipse.jetty.http.HttpGenerator.flushBuffer(HttpGenerator.java:824)
+	at org.eclipse.jetty.server.HttpConnection.flushResponse(HttpConnection.java:617)
+	at org.eclipse.jetty.server.Response.flushBuffer(Response.java:1004)
+	at com.glines.socketio.server.transport.XHRMultipartDataHandler.onWriteData(XHRMultipartDataHandler.java:94)
+
+*** proposal
 Our situation when "use_socketio = false"
 
 | Browser w/ Websocket | Client Side      | Server side         |
@@ -771,4 +791,3 @@ Tb es un detalle gracioso que al ir a http://en.wikipedia.org/wiki/Electronic_ma
    http://toolserver.org/~merphant/wiki2html/
 * IDEAS
 ** <d> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
-

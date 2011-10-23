@@ -94,19 +94,22 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
   }
 
   private void setContentNotPublic() {
-    getView().getTitle().setText(i18n.t("Not Published yet") + i18n.t(TextUtils.IN_DEVELOPMENT_P));
+    getView().getTitle().setText(
+        i18n.t("Not Published yet") + i18n.tWithNT(TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
     getView().getDescription().setText(
         i18n.t("This is only a preview of how this webpage would look like to the general public on the internet."));
   }
 
   private void setContentNotPublicable() {
-    getView().getTitle().setText(i18n.t("Not Publisable") + i18n.t(TextUtils.IN_DEVELOPMENT_P));
-    getView().getDescription().setText(i18n.t("This page is not publisable"));
+    getView().getTitle().setText(
+        i18n.t("Not Publicable") + i18n.tWithNT(TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
+    getView().getDescription().setText(i18n.t("This page is not publicable"));
     getView().setContentGotoPublicUrl("about:blank");
   }
 
   private void setContentPublic() {
-    getView().getTitle().setText(i18n.t("Preview") + i18n.t(TextUtils.IN_DEVELOPMENT_P));
+    getView().getTitle().setText(
+        i18n.t("Preview") + i18n.tWithNT(TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
     getView().getDescription().setText(
         i18n.t("This is only a preview of how this page would look like to the general public on the internet."));
   }

@@ -42,6 +42,9 @@ public interface I18nTranslationFinder {
   @Finder(query = "SELECT gt FROM I18nTranslation gt JOIN gt.language gl WHERE gl.code = :language", returnAs = ArrayList.class)
   public List<I18nTranslation> findByLanguage(@Named("language") final String language);
 
+  @Finder(query = "SELECT count(*) FROM I18nTranslation gt WHERE gt.trKey = :trkey AND gt.language.code = :language")
+  public Long findCount(@Named("language") String language, @Named("trkey") String trkey);
+
   @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :deflanguage AND gt.id NOT IN (SELECT gt.parent FROM I18nTranslation gt WHERE gt.language = :language)", returnAs = ArrayList.class)
   public List<I18nTranslation> getNonExistentFromDefault(
       @Named("deflanguage") final I18nLanguage deflanguage,

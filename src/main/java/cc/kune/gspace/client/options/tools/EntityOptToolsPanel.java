@@ -25,6 +25,7 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.dto.ToolSimpleDTO;
@@ -49,7 +50,7 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
   public EntityOptToolsPanel(final I18nTranslationService i18n, final CoreResources res,
       final MaskWidget maskWidget) {
     this.maskWidget = maskWidget;
-    tabTitle = new IconLabel(res.kunePreferences(), i18n.t("Tools"));
+    tabTitle = TabTitleGenerator.generate(res.kunePreferences(), i18n.t("Tools"), MAX_TABTITLE_LENGTH);
     this.i18n = i18n;
     // super.setHeight(EntityOptionsView.HEIGHT);
     super.setWidth(EntityOptionsView.WIDTH);

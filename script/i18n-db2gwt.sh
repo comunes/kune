@@ -34,9 +34,9 @@ then
 fi
 if [[ $L = "en" ]]
 then
-  SEL="SELECT g.tr_key,g.tr_key,g.text,l.code,g.noteForTranslators FROM globalize_translations g, globalize_languages l where g.language_id = l.id AND l.code='en';"
+  SEL="SELECT g.tr_key,g.tr_key,l.code,g.noteForTranslators FROM globalize_translations g, globalize_languages l where g.language_id = l.id AND l.code='en';"
 else 
-  SEL="SELECT g.tr_key,p.tr_key,g.text,l.code,g.noteForTranslators FROM globalize_translations g, globalize_translations p, globalize_languages l where g.language_id = l.id AND l.code='$L' AND (g.parent_id = p.id OR g.parent_id = NULL) AND g.text != '';"
+  SEL="SELECT p.tr_key,g.text,l.code,p.noteForTranslators FROM globalize_translations g, globalize_translations p, globalize_languages l where g.language_id = l.id AND l.code='$L' AND (g.parent_id = p.id OR g.parent_id = NULL) AND g.text != '';"
 fi
 
 if [[ $J -eq 1 ]] 
@@ -51,11 +51,11 @@ BEGIN {
   print "public interface KuneConstants extends ConstantsWithLookup {"
 }
 {
-  lang=$4
-  nt=$5
+  lang=$3
+  nt=$4
   if (lang != "en") {
-    trkey=$2
-    trad=$3
+    trkey=$1
+    trad=$2
   } else {
     trkey=$1
     trad=$2
@@ -78,11 +78,11 @@ BEGIN {
   print
 }
 {
-  lang=$4
-  nt=$5
+  lang=$3
+  nt=$4
   if (lang != "en") {
-    trkey=$2
-    trad=$3
+    trkey=$1
+    trad=$2
   } else {
     trkey=$1
     trad=$2

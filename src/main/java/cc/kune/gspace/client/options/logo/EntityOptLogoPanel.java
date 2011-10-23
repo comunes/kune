@@ -24,6 +24,7 @@ import gwtupload.client.IUploader.OnChangeUploaderHandler;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.nav.NavResources;
@@ -49,8 +50,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
       final String panelId, final String buttonId, final String inputId, final NavResources res) {
     super();
     this.i18n = i18n;
-    tabTitle = new IconLabel(res.picture(), "");
-
+    tabTitle = TabTitleGenerator.generate(res.picture(), "");
     uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, i18n.t("Choose"));
 
     initWidget(uploader);
@@ -100,7 +100,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     uploader.setLabelText(i18n.t("Select an image from your computer as the logo for this group. "
         + "For best results use a [%d]x[%d] pixel image. Bigger images will be automatically resized.",
         FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT));
-    tabTitle.setText(CoreMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
+    TabTitleGenerator.setText(tabTitle, CoreMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE, MAX_TABTITLE_LENGTH);
   }
 
   @Override
@@ -108,7 +108,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     uploader.setLabelText(i18n.t("Select an image from your computer as your avatar. "
         + "For best results use a [%d]x[%d] pixel image. Bigger images will be automatically resized.",
         FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT));
-    tabTitle.setText(CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
+    TabTitleGenerator.setText(tabTitle, CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE, MAX_TABTITLE_LENGTH);
   }
 
   @Override

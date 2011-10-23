@@ -6,4 +6,745 @@ package cc.kune.core.client.i18n;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 public interface KuneConstants extends ConstantsWithLookup {
+  String aboutKune();
+
+  String aboutKuneTitleOfDialog();
+
+  String aboutParam();
+
+  String acceptThisMember();
+
+  String aClosedGroupIsAPrivateProjectWhichContentsAreOnlyAccessibleToItsMembersByDefault();
+
+  String aCommunityIsAGroupOfUsersWithSharedInterestsForInstanceTheEnvironmentalCommunityOrTheLgbtCommunityIt();
+
+  String actions();
+
+  String addANewBuddy();
+
+  String addAsABuddy();
+
+  String administrators();
+
+  String allowAnyUsesOfYourWorkIncludingCommercial();
+
+  String allowModificationsOfYourWork();
+
+  String aLongTermTaskSample();
+
+  String aMidTermTaskSample();
+
+  String andNExternalUser();
+
+  String anOrganizationWorksTheSameWayAsAProjectExceptThatItMustBeALegalEntity();
+
+  String anyone();
+
+  String apacheWavePowered();
+
+  String aPostSample();
+
+  String aProjectIsAKindOfGroupInWhichTheJoiningOfNewMembersIsModeratedByTheProjectAdministrators();
+
+  String areYouSure();
+
+  String aShortTermTaskSample();
+
+  String autoAcceptRequestToJoin();
+
+  String available();
+
+  String availableForChat();
+
+  String away();
+
+  String backUsedInButton();
+
+  String barters();
+
+  String barterSample();
+
+  String blackwhiteAThemeName();
+
+  String blogs();
+
+  String blogSample();
+
+  String blueAThemeName();
+
+  String buddies();
+
+  String busy();
+
+  String calendar();
+
+  String campAThemeName();
+
+  String cancel();
+
+  String change();
+
+  String changeIt();
+
+  String changeThisValues();
+
+  String changeThisWorkspaceTheme();
+
+  String changeToAdministrator();
+
+  String changeToCollaborator();
+
+  String changeYourPassword();
+
+  String chat();
+
+  String chatAbout();
+
+  String chatAboutParam();
+
+  String chatAndCommentOnThis();
+
+  String chatroomCreated();
+
+  String chatrooms();
+
+  String chats();
+
+  String chatWithThisGroupMember();
+
+  String chatWithThisPerson();
+
+  String chatWithYourBuddy();
+
+  String choose();
+
+  String clear();
+
+  String clickAltpageupOrAltpagedownToMoveUpDownInTheListWhileTranslatingAndAltVToCopyTheOriginalTextTheTrans();
+
+  String clickToRename();
+
+  String clickToSelectAndConfigureThisTheme();
+
+  String close();
+
+  String closed();
+
+  String closedForNewMembers();
+
+  String collaborators();
+
+  String commonLicensesForCulturalWorks();
+
+  String community();
+
+  String confirmNewBuddy();
+
+  String confirmPlease();
+
+  String connecting();
+
+  String copyleft();
+
+  String copyTheTextToTranslate();
+
+  String create();
+
+  String createANewBarterHere();
+
+  String createANewBlog();
+
+  String createANewBlogPost();
+
+  String createANewChatRoom();
+
+  String createANewDocumentHereIfYouChooseToPublishItThisDocumentWillAppearAsANewPageInThePublicWeb();
+
+  String createANewDocumentIfYouChooseToPublishItThisDocumentWillAppearAsANewPageInThePublicWeb();
+
+  String createANewFolder();
+
+  String createANewFolderAFolderWillBeASectionInThePublicWeb();
+
+  String createANewGroupForYourInitiativeOrOrganizationNgoCollectiveAcademicGroup();
+
+  String createANewList();
+
+  String createANewMeetingHere();
+
+  String createANewPost();
+
+  String createANewTask();
+
+  String createANewWikipageHereIfYouChooseToPublishItThisDocumentWillAppearAsANewPageInThePublicWeb();
+
+  String createNewGroup();
+
+  String createOne();
+
+  String currentBackgroundImage();
+
+  String currentPassword();
+
+  String defaultAThemeName();
+
+  String delete();
+
+  String documents();
+
+  String donTHaveAnAccount();
+
+  String doubleClickToOpen();
+
+  String doYouWantToJoinThisGroup();
+
+  String doYouWantToWriteAMessageToTheMembersOfThisGroup();
+
+  String doYouWantToWriteAMessageToYourBuddy();
+
+  String doYouWantToWriteUsWithSomePositiveOrNegativeFeedbackAboutParamThisCanHelpUsToImproveTheseServices();
+
+  String doYouWantToWriteUsWithSomePositiveOrNegativeFeedbackThisCanHelpUsToImproveTheseServices();
+
+  String edit();
+
+  String editAndWriteHereYourFeedback();
+
+  String email();
+
+  String enterLanguage();
+
+  String enterToThisGroupPublicChatRoom();
+
+  String enterToThisGroupPublicChatRoomAndInviteMembers();
+
+  String enterToThisRoom();
+
+  String error();
+
+  String errorsInfo();
+
+  String eurosurAThemeName();
+
+  String events();
+
+  String feedbackOfParam();
+
+  String finishUsedInButton();
+
+  String general();
+
+  String giveUsFeedback();
+
+  String goUpOpenTheContainerFolder();
+
+  String greenAThemeName();
+
+  String greyAThemeName();
+
+  String groupAndPersonalSpaceWhereYouCanCreateAndPublishContentsForYourPersonalOrGroupWebSpaces();
+
+  String groupMembers();
+
+  String groupOptions();
+
+  String groupSPublicChatRoom();
+
+  String groupsWhichThisUserJoined();
+
+  String groupTags();
+
+  String groupType();
+
+  String helpToTranslateKune();
+
+  String helpWithTheTranslation();
+
+  String hereYouCanSelectTheToolsUsed();
+
+  String highcontrastAThemeName();
+
+  String hisHerNetwork();
+
+  String hostedGroups();
+
+  String infoAboutErrors();
+
+  String join();
+
+  String joinsIn();
+
+  String keywordsOrTermsAssociatedWithThisGroup();
+
+  String kuneDevelopmentSite();
+
+  String latestActivityInYourGroups();
+
+  String latestCreatedGroups();
+
+  String latestPublications();
+
+  String leaveThisGroup();
+
+  String license();
+
+  String licenseWizard();
+
+  String lists();
+
+  String loading();
+
+  String longName();
+
+  String longTermTasks();
+
+  String makeThisListNotPublic();
+
+  String markAsDone();
+
+  String media();
+
+  String meetingMinutesOfParamOnParam();
+
+  String meetingSample();
+
+  String memberAccepted();
+
+  String midTermTasks();
+
+  String moderateRequestToJoin();
+
+  String name();
+
+  String nConversationsUnread();
+
+  String newAdvancedPoll();
+
+  String newAlbum();
+
+  String newBarter();
+
+  String newBlog();
+
+  String newDocument();
+
+  String newFolder();
+
+  String newGadget();
+
+  String newImageAndLetsAnnotate();
+
+  String newImagePainter();
+
+  String newList();
+
+  String newMap();
+
+  String newMeetCoordination();
+
+  String newMeeting();
+
+  String newMembersPolicy();
+
+  String newMindmap();
+
+  String newPassword();
+
+  String newPasswordRepeatIt();
+
+  String newPoll();
+
+  String newPost();
+
+  String newRoom();
+
+  String newTask();
+
+  String newTaskFolder();
+
+  String newTwitterSearch();
+
+  String newWikipage();
+
+  String newYesNoMaybeVoting();
+
+  String newYesNoMiniVoting();
+
+  String newYoutubeVideo();
+
+  String nextUsedInButton();
+
+  String no();
+
+  String notes();
+
+  String notPublishedYet();
+
+  String notTranslated();
+
+  String nRecentConversationsUnread();
+
+  String nSubscribedNPosts();
+
+  String offline();
+
+  String ok();
+
+  String oneRecentConversationUnread();
+
+  String onlyAdministrators();
+
+  String onlyMembers();
+
+  String onlyYou();
+
+  String onlyYourBuddies();
+
+  String oopsSomethingHasGoneWrongWithOurServersRetryLaterPlease();
+
+  String open();
+
+  String openArchive();
+
+  String openTheConversationsArchiveOfThisRoom();
+
+  String options();
+
+  String organization();
+
+  String otherKindOfLicenses();
+
+  String others();
+
+  String othersWhoCollaborateWithThisGroup();
+
+  String paramBio();
+
+  String paramCreatedNewContentCreatedForInstance();
+
+  String paramCreatedSuccesfully();
+
+  String paramHadAddedYouAsABuddyDoYouWantToAddHimHerAlso();
+
+  String paramTheDevelopment();
+
+  String paramUnderLicenseParam();
+
+  String password();
+
+  String passwordChangedSuccessfully();
+
+  String pending();
+
+  String pinkAThemeName();
+
+  String pleaseConfirm();
+
+  String pleaseCopyPasteThisInfoToReportProblems();
+
+  String pleaseSignInOrRegisterToGetFullAccessToParamToolsAndContents();
+
+  String pleaseSupport();
+
+  String post();
+
+  String preview();
+
+  String processing();
+
+  String project();
+
+  String publicDescription();
+
+  String publicSpaceWhereYouCanSeeAPreviewOfHowYourPersonalOrGroupSpaceLooksLikeOnTheWeb();
+
+  String purpleAThemeName();
+
+  String reasonsNotToUseANonCommercialLicense();
+
+  String recommendations();
+
+  String redAThemeName();
+
+  String redblackAThemeName();
+
+  String register();
+
+  String registerANewGroup();
+
+  String registeredUsers();
+
+  String rejectAsMember();
+
+  String reloadCurrentPage();
+
+  String reloadThis();
+
+  String removeCurrentBackgroundImage();
+
+  String removeThisMember();
+
+  String renaming();
+
+  String reportKuneIssuesProblems();
+
+  String requestToJoinInThisGroup();
+
+  String rightNowThePublicWebSpaceOfThisGroupItSUnderConstruction();
+
+  String saharaAThemeName();
+
+  String saving();
+
+  String search();
+
+  String searching();
+
+  String searchTheUserYouWantToAddAndInHisHerHomepageClickAddAsABuddy();
+
+  String security();
+
+  String seeTheArchiveOfOldConversationsInDevelopment();
+
+  String select();
+
+  String selectACreativeCommonsLicenseRecommendedForCulturalWorks();
+
+  String selectAndConfigureThePublicSpaceThemeOfThisGroup();
+
+  String selectAnImageFromYourComputerAsTheLogoForThisGroupForBestResultsUseANxnPixelImageBiggerImagesWillBeA();
+
+  String selectAnImageFromYourComputerAsYourAvatarForBestResultsUseANxnPixelImageBiggerImagesWillBeAutomatica();
+
+  String selectAsTheHomepage();
+
+  String selectLicense();
+
+  String selectOtherKindOfLicenses();
+
+  String selectTheLicenseType();
+
+  String selectTheLicenseYouPreferUsingForSharingYourGroupContentsWithOtherPeople();
+
+  String setYourChatStatus();
+
+  String setYourGroupPreferencesHere();
+
+  String shortName();
+
+  String shortTermUrgentTasks();
+
+  String showHideTheChatWindow();
+
+  String signIn();
+
+  String signInToCollaborate();
+
+  String signOut();
+
+  String signOutOfChat();
+
+  String startACollaborativeDocumentForTheMeetingMinutes();
+
+  String startAPublicAssemblyWithMembers();
+
+  String stats();
+
+  String style();
+
+  String subscribe();
+
+  String subscribeToThisList();
+
+  String successUploading();
+
+  String tags();
+
+  String tasks();
+
+  String thanksForJoiningParamNowYouCanActivelyParticipateInParamYouCanAlsoUseYourPersonalSpaceToPublishConte();
+
+  String theLicensorPermitsOthersToCopyDistributeDisplayAndPerformOnlyUnalteredCopiesOfTheWork8212NotDerivati();
+
+  String theLicensorPermitsOthersToCopyDistributeDisplayAndPerformTheWorkAsWellAsToMakeDerivativeWorksBasedOn();
+
+  String theLicensorPermitsOthersToCopyDistributeDisplayAndPerformTheWorkForNonCommercialPurposesOnly();
+
+  String theLicensorPermitsOthersToCopyDistributeDisplayAndPerformTheWorkIncludingForCommercialPurposes();
+
+  String theLicensorPermitsOthersToDistributeDerivativeWorksOnlyUnderTheSameLicenseOrOneCompatibleWithTheOneT();
+
+  String theMembersOfThisGroupAreNotPublic();
+
+  String theNameMustBeBetween3And15LowercaseWesternCharactersAndOrNumbers();
+
+  String theNameMustContainOnlyCharactersNumbersAndDashes();
+
+  String thePasswordMustBeBetween6And40Characters();
+
+  String thereIsNothingPostedYetPostSomething();
+
+  String thereIsnTAnyBarter();
+
+  String thereIsnTAnyBlogCreateOne();
+
+  String thereIsnTAnyListCreateOne();
+
+  String thereIsnTAnyMeeting();
+
+  String thereIsnTAnyTaskCreateOne();
+
+  String thisBlogHasnTAnyPostCreateOne();
+
+  String thisDemoOfKune();
+
+  String thisFolderIsEmpty();
+
+  String thisIsACopyleftLicense();
+
+  String thisIsAnOrphanedProjectIfYouAreInterestedInContributingPleaseRequestToJoin();
+
+  String thisIsAppropriateForFreeCulturalWorks();
+
+  String thisIsEmpty();
+
+  String thisIsNotACopyleftLicense();
+
+  String thisIsNotAppropriateForFreeCulturalWorks();
+
+  String thisIsNotAValidEmail();
+
+  String thisIsOnlyABarterSampleYouCanInviteOtherParticipantsToThisBarterButAlsoPublishToTheGeneralPublicAllo();
+
+  String thisIsOnlyAMeetSampleYouCanInviteOtherParticipantsToThisMeetingButAlsoPublishToTheGeneralPublicAllow();
+
+  String thisIsOnlyAPostSampleYouCanEditItRenameThePostAndThisBlog();
+
+  String thisIsOnlyAPreviewOfHowThisPageWouldLookLikeToTheGeneralPublicOnTheInternet();
+
+  String thisIsOnlyAPreviewOfHowThisWebpageWouldLookLikeToTheGeneralPublicOnTheInternet();
+
+  String thisIsOnlyATaskSampleYouCanEditItRenameIt();
+
+  String thisIsOnlyAWikiPageSampleYouCanEditOrRenameItButAlsoAnyOtherUser();
+
+  String thisIsTheDefaultLicenseForAllTheContentsOfThisGroupAlthoughYouCanChooseADifferentLicenseForSpecificC();
+
+  String thisSite();
+
+  String thisToolCannotBeDisabledAsLongAsItsWhereTheGroupsHomePageIsLocatedChangeTheDefaultHomePageToAnotherT();
+
+  String thisUserHasNoBuddiesYet();
+
+  String thisUserHasNotWrittenItsBiographyYet();
+
+  String thisUserSBuddies();
+
+  String thisUserSGroupsAndBuddies();
+
+  String thisWikiIsEmpty();
+
+  String thisWillOpenASpecificChatroomToChatAboutThisPageOrDocumentItSUsefulToChatWithOthersAboutSomethingWhi();
+
+  String tip();
+
+  String to();
+
+  String toJoinAChatroomYouNeedToBeOnline();
+
+  String tools();
+
+  String toParamForExampleToSpanish();
+
+  String translated();
+
+  String translateThis();
+
+  String transparentAThemeName();
+
+  String typeSomeKeywordThatDefineYourGroup();
+
+  String typeSomethingToSearchForUsersAndGroupsInParam();
+
+  String useACopyleftLicenseRecommended();
+
+  String useAnotherKindOfLicenseAdvanced();
+
+  String username();
+
+  String userOptions();
+
+  String usersAndGroupsCollaboratingInThisGroup();
+
+  String userSpaceItShowsAListOfAllDocumentsAndContentsInWhichYouParticipate();
+
+  String usersPendingToBeAcceptedInThisGroupByTheAdministrators();
+
+  String usersWhoCanAdministrateThisGroup();
+
+  String usersWhoCanViewThisMemberList();
+
+  String usersWhoCanViewYourNetwork();
+
+  String useTheGnuLicensesRecommendedForFreeSoftwareWorksAndOtherKindOfLicenses();
+
+  String visitHisHerHomepage();
+
+  String visitThisGroupSHomepage();
+
+  String visitThisMemberSHomepage();
+
+  String visitYourHomepage();
+
+  String voting();
+
+  String welcome();
+
+  String welcomeToTheParamPublicChatRoom();
+
+  String weRecommendParamLicensesSpeciallyForPracticalWorks();
+
+  String whiteblackAThemeName();
+
+  String whyDoWeNeedALicense();
+
+  String wiki();
+
+  String wikiPageSample();
+
+  String withACreativeCommonsLicenseYouKeepYourCopyrightButAllowPeopleToCopyAndDistributeYourWorkProvidedThey();
+
+  String writeToTheAdministratorsOfThisGroup();
+
+  String writeToTheMembersOfThisGroup();
+
+  String writeToYourBuddy();
+
+  String writeUsWithSomeFeedbackForHelpUsToImproveTheServicesOnParam();
+
+  String writeUsWithSomeFeedbackForHelpUsToImproveTheseServices();
+
+  String yes();
+
+  String yesAsLongAsOtherShareAlike();
+
+  String youAreNowMemberOfThisGroup();
+
+  String youCanAlsoUploadABackground();
+
+  String youCanChangeThisLicenseLater();
+
+  String youCanCollaborativelyEditThisDocumentWithTheMeetingMinutes();
+
+  String youCannotDisableThisToolBecauseItSWhereYourHomePageIsLocatedToDoThatYouHaveToSelectOtherContentAsThe();
+
+  String yourGroups();
+
+  String yourHomepage();
+
+  String yourHomePageInParam();
+
+  String yourLanguage();
+
+  String yourPreferences();
 }

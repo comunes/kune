@@ -111,6 +111,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   @Override
   public String getTranslation(final String language, final String text, final String noteForTranslators) {
+    if (TextUtils.empty(text)) {
+      return text;
+    }
     final HashMap<String, String> lexicon = getLexicon(language);
     final String escapedText = TextUtils.escapeHtmlLight(text);
     if (lexicon.containsKey(escapedText)) {
@@ -119,12 +122,17 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     } else {
       // new key, add to language and default language and let
       // untranslated
-      if (!getLexicon(I18nTranslation.DEFAULT_LANG).containsKey(text)) {
+      if (finder.findCount(defLang().getCode(), text) == 0) {
         final I18nTranslation newTranslation = new I18nTranslation("", null,
             I18nTranslation.DEF_PLUR_INDEX, "", I18nTranslation.UNTRANSLATED_VALUE, escapedText,
             I18nTranslation.DEF_NAMESPACE, defLang(), null, noteForTranslators);
-        persist(newTranslation);
-        langCache.clear();
+        try {
+          persist(newTranslation);
+          langCache.clear();
+        } catch (final Exception e) {
+          // TODO: handle exception
+          throw new RuntimeException("Error persisting '" + text + "' to language '" + language + "'");
+        }
       }
       return I18nTranslation.UNTRANSLATED_VALUE;
     }
@@ -163,13 +171,17 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   @Override
   public String setTranslation(final Long id, final String translation) throws DefaultException {
+
     final I18nTranslation trans = super.find(id);
     if (trans != null) {
       // Don't permit to translate the def language
-      assert trans.getLanguage().getCode() != I18nTranslation.DEFAULT_LANG;
+      final String lang = trans.getLanguage().getCode();
+      assert lang != I18nTranslation.DEFAULT_LANG;
       final String escapedTranslation = TextUtils.escapeHtmlLight(translation);
       trans.setText(escapedTranslation);
       persist(trans);
+      // reset cache for this lang
+      langCache.remove(lang);
       return escapedTranslation;
     } else {
       throw new DefaultException("Trying to translate a unknown item");

@@ -27,6 +27,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -62,7 +63,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
   public EntityOptStylePanel(final I18nTranslationService i18n, final CoreResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
-    tabTitle = new IconLabel(res.themeChoose(), i18n.t("Style"));
+    tabTitle = TabTitleGenerator.generate(res.themeChoose(), i18n.t("Style"), MAX_TABTITLE_LENGTH);
     // super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     super.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
 
