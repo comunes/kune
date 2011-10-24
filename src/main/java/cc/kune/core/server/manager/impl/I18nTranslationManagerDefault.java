@@ -43,7 +43,6 @@ import com.google.inject.Singleton;
 public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslation, Long> implements
     I18nTranslationManager {
 
-  private I18nLanguage defLang;
   private final I18nTranslationFinder finder;
   private final ConcurrentHashMap<String, HashMap<String, String>> langCache;
   private final I18nLanguageManager languageManager;
@@ -58,10 +57,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   }
 
   private I18nLanguage defLang() {
-    if (defLang == null) {
-      defLang = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
-    }
-    return defLang;
+    return languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
   }
 
   private I18nLanguage getLanguage(final String languageId) {
@@ -122,7 +118,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     } else {
       // new key, add to language and default language and let
       // untranslated
-      if (finder.findCount(defLang().getCode(), text) == 0) {
+      if (finder.findCount(defLang().getCode(), escapedText) == 0) {
         final I18nTranslation newTranslation = new I18nTranslation("", null,
             I18nTranslation.DEF_PLUR_INDEX, "", I18nTranslation.UNTRANSLATED_VALUE, escapedText,
             I18nTranslation.DEF_NAMESPACE, defLang(), null, noteForTranslators);
