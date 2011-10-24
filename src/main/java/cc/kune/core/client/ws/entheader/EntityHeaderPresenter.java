@@ -49,11 +49,9 @@ public class EntityHeaderPresenter extends
 
     void addWidget(IsWidget widget);
 
-    void reloadImage(GroupDTO group);
-
     void setLargeFont();
 
-    void setLogoImage(GroupDTO group);
+    void setLogoImage(GroupDTO group, boolean noCache);
 
     void setLogoImageVisible(boolean visible);
 
@@ -72,24 +70,22 @@ public class EntityHeaderPresenter extends
 
   private static final int LARGE_NAME_LIMIT = 17;
   private static final int MEDIUM_NAME_LIMIT = 80;
-  private final Session session;
 
   @Inject
   public EntityHeaderPresenter(final EventBus eventBus, final EntityHeaderView view,
       final EntityHeaderProxy proxy, final StateManager stateManager, final Session session) {
     super(eventBus, view, proxy);
-    this.session = session;
     stateManager.onGroupChanged(true, new GroupChangedHandler() {
       @Override
       public void onGroupChanged(final GroupChangedEvent event) {
-        setGroupLogo(session.getCurrentState().getGroup());
+        setGroupLogo(session.getCurrentState().getGroup(), false);
       }
     });
     eventBus.addHandler(CurrentEntityChangedEvent.getType(), new CurrentEntityChangedHandler() {
       @Override
       public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
-        setGroupLogo(session.getCurrentState().getGroup());
-        reloadGroupLogoImage();
+        final GroupDTO group = session.getCurrentState().getGroup();
+        setGroupLogo(group, true);
       }
     });
   }
@@ -105,19 +101,14 @@ public class EntityHeaderPresenter extends
   }
 
   @Override
-  public void reloadGroupLogoImage() {
-    getView().reloadImage(session.getCurrentState().getGroup());
-  }
-
-  @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
-  void setGroupLogo(final GroupDTO group) {
+  void setGroupLogo(final GroupDTO group, final boolean noCache) {
     setLogoText(group.getLongName());
     if (group.hasLogo()) {
-      getView().setLogoImage(group);
+      getView().setLogoImage(group, noCache);
       getView().setLogoImageVisible(true);
     } else {
       if (group.isPersonal()) {

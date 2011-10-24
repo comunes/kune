@@ -63,6 +63,7 @@ public class InitData {
   private String siteShortName;
   private String siteUrl;
   private String[] timezones;
+  private boolean translatorEnabled;
   private UserInfo userInfo;
   private List<ToolSimple> userTools;
 
@@ -195,6 +196,10 @@ public class InitData {
     return feedbackEnabled;
   }
 
+  public boolean isTranslatorEnabled() {
+    return translatorEnabled;
+  }
+
   public void setAviEmbedObject(final String aviEmbedObject) {
     this.aviEmbedObject = aviEmbedObject;
   }
@@ -314,6 +319,10 @@ public class InitData {
 
   public void setTimezones(final String[] timezones) {
     this.timezones = timezones;
+  }
+
+  public void setTranslatorEnabled(final boolean translatorEnabled) {
+    this.translatorEnabled = translatorEnabled;
   }
 
   public void setUserInfo(final UserInfo currentUserInfo) {

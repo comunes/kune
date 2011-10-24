@@ -29,9 +29,4 @@ public interface EntityHeader {
 
   void addWidget(IsWidget widget);
 
-  /**
-   * Reload the logo from the group reloaded from the server
-   */
-  void reloadGroupLogoImage();
-
 }

@@ -55,6 +55,7 @@ public class InitDataDTO implements IsSerializable {
   private String siteShortName;
   private String siteUrl;
   private String[] timezones;
+  private boolean translatorEnabled;
   private UserInfoDTO userInfo;
   private List<ToolSimpleDTO> userTools;
 
@@ -190,6 +191,10 @@ public class InitDataDTO implements IsSerializable {
     return feedbackEnabled;
   }
 
+  public boolean isTranslatorEnabled() {
+    return translatorEnabled;
+  }
+
   public void setAviEmbedObject(final String aviEmbedObject) {
     this.aviEmbedObject = aviEmbedObject;
   }
@@ -305,6 +310,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setTimezones(final String[] timezones) {
     this.timezones = timezones;
+  }
+
+  public void setTranslatorEnabled(final boolean translatorEnabled) {
+    this.translatorEnabled = translatorEnabled;
   }
 
   public void setUserInfo(final UserInfoDTO currentUser) {

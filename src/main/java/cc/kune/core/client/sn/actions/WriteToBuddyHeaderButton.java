@@ -51,6 +51,7 @@ public class WriteToBuddyHeaderButton {
         }
       }
     });
+    writeToAction.setEnabled(false);
     entityHeader.addAction(button);
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override

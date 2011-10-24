@@ -121,17 +121,8 @@ public class I18nTranslation implements HasId {
   }
 
   public I18nTranslation cloneForNewLanguage() {
-    final I18nTranslation clone = new I18nTranslation();
-    clone.type = type;
-    clone.trKey = null;
-    clone.tableName = tableName;
-    clone.itemId = itemId;
-    clone.facet = facet;
-    clone.language = null;
-    clone.pluralizationIndex = pluralizationIndex;
-    clone.text = null;
-    clone.parent = this;
-    return clone;
+    return new I18nTranslation(facet, itemId, pluralizationIndex, tableName, null, null, type, null,
+        this, null);
   }
 
   public String getFacet() {

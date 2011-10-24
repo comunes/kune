@@ -107,7 +107,9 @@ public class GSpaceParts {
         uo.get();
 
         // i18n
-        transAction.get();
+        if (event.getInitData().isTranslatorEnabled()) {
+          transAction.get();
+        }
         gtranslator.get().add(toTrans);
 
         // Feedback

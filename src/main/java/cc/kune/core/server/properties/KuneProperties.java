@@ -56,6 +56,7 @@ public interface KuneProperties {
   String SITE_URL = "kune.siteurl";
   String SITE_USER_AVAILABLE_TOOLS = "kune.tools.userSiteAvailableTools";
   String SITE_USER_REGIST_ENABLED_TOOLS = "kune.tools.userRegisEnabledTools";
+  String UI_TRANSLATOR_ENABLED = "kune.ui-translator.enabled";
   String UPLOAD_DELAY_FOR_TEST = "kune.upload.delayfortest";
   String UPLOAD_GALLERY_PERMITTED_EXTS = "kune.upload.gallerypermittedextensions";
   String UPLOAD_LOCATION = "kune.upload.location";

@@ -268,6 +268,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String hostedGroups();
 
+  String inDevelopmentWithBrackets();
+
   String infoAboutErrors();
 
   String join();
@@ -372,11 +374,15 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String newYoutubeVideo();
 
+  String nExternalUser();
+
   String nextUsedInButton();
 
   String no();
 
   String notes();
+
+  String notPublishable();
 
   String notPublishedYet();
 
@@ -506,6 +512,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String seeTheArchiveOfOldConversationsInDevelopment();
 
+  String seeTheArchiveOfOldConversationsInDevelopmentWithBrackets();
+
   String select();
 
   String selectACreativeCommonsLicenseRecommendedForCulturalWorks();
@@ -537,6 +545,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String showHideTheChatWindow();
 
   String signIn();
+
+  String signInOrCreateAnAccountToAccessToYourInbox();
 
   String signInToCollaborate();
 
@@ -630,9 +640,13 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String thisIsTheDefaultLicenseForAllTheContentsOfThisGroupAlthoughYouCanChooseADifferentLicenseForSpecificC();
 
+  String thisPageIsNotPublishable();
+
   String thisSite();
 
   String thisToolCannotBeDisabledAsLongAsItsWhereTheGroupsHomePageIsLocatedChangeTheDefaultHomePageToAnotherT();
+
+  String thisUserDoesNotHaveAHomepage();
 
   String thisUserHasNoBuddiesYet();
 
@@ -747,4 +761,5 @@ public interface KuneConstants extends ConstantsWithLookup {
   String yourLanguage();
 
   String yourPreferences();
+
 }

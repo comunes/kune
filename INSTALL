@@ -56,6 +56,7 @@ Although using this password ('db4kune') is useful for a quick and dirty getting
  - pom.xml
  - script/liquibase-migrate.sh
  - script/liquibase-rollback.sh
+ - script/i18n-db2gwt.sh
  - src/main/resources/db/liquibase.properties
  - src/main/resources/META-INF/persistence.xml
  - src/main/webapp/WEB-INF/publicspace/config/database.yml

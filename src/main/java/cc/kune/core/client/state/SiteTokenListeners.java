@@ -40,6 +40,7 @@ public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
   private final EventBus eventBus;
   private final Provider<NewGroup> newGroup;
   private final Provider<Register> register;
+  private final Session session;
   private final Provider<SignIn> signIn;
   private final Provider<SubtitlesManager> subProvider;
   private final Provider<I18nTranslator> translator;
@@ -49,6 +50,7 @@ public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
       final Provider<SignIn> signIn, final Provider<Register> register,
       final Provider<NewGroup> newGroup, final Provider<AboutKuneDialog> aboutKuneDialog,
       final Provider<I18nTranslator> translator, final Provider<SubtitlesManager> subProvider) {
+    this.session = session;
     this.eventBus = eventBus;
     this.signIn = signIn;
     this.register = register;
@@ -101,7 +103,9 @@ public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
       // FIXME, something to come back
       @Override
       public void onHistoryToken(final String token) {
-        translator.get().show();
+        if (session.getInitData().isTranslatorEnabled()) {
+          translator.get().show();
+        }
       }
     });
     put(SiteTokens.SUBTITLES, new HistoryTokenCallback() {

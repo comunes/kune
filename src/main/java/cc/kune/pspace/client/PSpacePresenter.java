@@ -102,8 +102,8 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
 
   private void setContentNotPublicable() {
     getView().getTitle().setText(
-        i18n.t("Not Publicable") + i18n.tWithNT(TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
-    getView().getDescription().setText(i18n.t("This page is not publicable"));
+        i18n.t("Not Publishable") + i18n.tWithNT(TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
+    getView().getDescription().setText(i18n.t("This page is not publishable"));
     getView().setContentGotoPublicUrl("about:blank");
   }
 

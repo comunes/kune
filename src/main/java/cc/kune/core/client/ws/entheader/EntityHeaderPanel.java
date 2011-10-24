@@ -19,11 +19,10 @@
  */
 package cc.kune.core.client.ws.entheader;
 
-import java.util.Date;
-
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.utils.UrlParam;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
@@ -86,12 +85,6 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     return mainPanel;
   }
 
-  @Override
-  public void reloadImage(final GroupDTO group) {
-    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken())
-        + "&nocache=" + new Date().getTime());
-  }
-
   @Deprecated
   public void setFullLogo(final StateToken stateToken, final boolean clipped) {
     mainPanel.clear();
@@ -113,8 +106,9 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   }
 
   @Override
-  public void setLogoImage(final GroupDTO group) {
-    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()));
+  public void setLogoImage(final GroupDTO group, final boolean noCache) {
+    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken())
+        + (noCache ? UrlParam.noCacheStringSuffix() : ""));
   }
 
   @Override
@@ -137,6 +131,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     entityTextLogo.setOnlineStatusGroup(group);
   }
 
+  @Override
   public void setOnlineStatusVisible(final boolean visible) {
     entityTextLogo.setOnlineStatusVisible(visible);
   }

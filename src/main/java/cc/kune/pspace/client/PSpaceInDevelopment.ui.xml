@@ -12,6 +12,10 @@
       float: left;
     }
 
+    .entityLogo img {
+      float: left;
+    }
+
     .entityName {
       font-size: 34px;
       color: #912312;

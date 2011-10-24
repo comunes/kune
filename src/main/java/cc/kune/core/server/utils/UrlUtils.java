@@ -21,6 +21,7 @@ package cc.kune.core.server.utils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,6 +29,11 @@ import org.apache.commons.logging.LogFactory;
 public class UrlUtils {
 
   private static final Log LOG = LogFactory.getLog(UrlUtils.class);
+
+  public static String noCacheStringSuffix() {
+    final String noCache = "&nocache=" + new Date().getTime();
+    return noCache;
+  }
 
   public static URL of(final String urlString) {
     URL url = null;

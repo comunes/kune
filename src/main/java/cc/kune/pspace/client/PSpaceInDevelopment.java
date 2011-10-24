@@ -20,6 +20,7 @@
 package cc.kune.pspace.client;
 
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.client.utils.UrlParam;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.GroupChangedEvent;
@@ -29,8 +30,11 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.options.logo.CurrentEntityChangedEvent;
+import cc.kune.gspace.client.options.logo.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -73,29 +77,35 @@ public class PSpaceInDevelopment extends Composite {
   @Inject
   public PSpaceInDevelopment(final StateManager stateManager, final CoreResources images,
       final Session session, final Provider<FileDownloadUtils> downloadProvider,
-      final I18nTranslationService i18n) {
+      final I18nTranslationService i18n, final EventBus eventBus) {
     this.images = images;
     this.downloadProvider = downloadProvider;
     initWidget(uiBinder.createAndBindUi(this));
     stateManager.onGroupChanged(true, new GroupChangedHandler() {
       @Override
       public void onGroupChanged(final GroupChangedEvent event) {
-        setGroupLogo(session.getCurrentState().getGroup());
+        setGroupLogo(session.getCurrentState().getGroup(), false);
       }
     });
     inDevel.setText(i18n.t("Right now, the public web space of this group, it's under construction"));
     inDevelSupport.getElement().setInnerHTML(
         i18n.t("[%s] the development",
             TextUtils.generateHtmlLink("http://kune.ourproject.org/join/", i18n.t("Please support"))));
+    eventBus.addHandler(CurrentEntityChangedEvent.getType(), new CurrentEntityChangedHandler() {
+      @Override
+      public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
+        final GroupDTO group = session.getCurrentState().getGroup();
+        setGroupLogo(group, true);
+      }
+    });
   }
 
-  void setGroupLogo(final GroupDTO group) {
+  void setGroupLogo(final GroupDTO group, final boolean noCache) {
+    setLogoText(group.getLongName());
     if (group.hasLogo()) {
-      setLogoText(group.getLongName());
-      setLogoImage(group.getStateToken());
+      setLogoImage(group.getStateToken(), noCache);
       setLogoImageVisible(true);
     } else {
-      setLogoText(group.getLongName());
       if (group.isPersonal()) {
         showDefUserLogo();
         setLogoImageVisible(true);
@@ -105,8 +115,9 @@ public class PSpaceInDevelopment extends Composite {
     }
   }
 
-  private void setLogoImage(final StateToken stateToken) {
-    entityLogo.setUrl(downloadProvider.get().getLogoImageUrl(stateToken));
+  private void setLogoImage(final StateToken stateToken, final boolean noCache) {
+    entityLogo.setUrl(downloadProvider.get().getLogoImageUrl(stateToken)
+        + (noCache ? UrlParam.noCacheStringSuffix() : ""));
   }
 
   private void setLogoImageVisible(final boolean visible) {

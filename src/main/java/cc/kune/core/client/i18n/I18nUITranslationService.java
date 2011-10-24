@@ -20,6 +20,7 @@
 package cc.kune.core.client.i18n;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.MissingResourceException;
@@ -39,6 +40,7 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
@@ -60,7 +62,13 @@ public class I18nUITranslationService extends I18nTranslationService {
     this.kuneConstants = kuneConstants;
     final Location loc = WindowUtils.getLocation();
     final String locale = loc.getParameter("locale");
+    final LocaleInfo currentLocale = LocaleInfo.getCurrentLocale();
+    Log.info("Workspace starting with language: " + currentLocale.getLocaleName() + ", isRTL: "
+        + LocaleInfo.getCurrentLocale().isRTL() + ", translated langs: "
+        + Arrays.toString(LocaleInfo.getAvailableLocaleNames()));
+
     earlyTexts = new ArrayList<Pair<String, String>>();
+
     i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
       @Override
       public void onFailure(final Throwable caught) {
@@ -82,7 +90,7 @@ public class I18nUITranslationService extends I18nTranslationService {
           public void onSuccess(final HashMap<String, String> result) {
             lexicon = result;
             session.setCurrentLanguage(currentLang);
-            Log.error("Workspace adaptation to language: " + currentLang.getEnglishName());
+            Log.info("Workspace adaptation to language: " + currentLang.getEnglishName());
             eventBus.fireEvent(new I18nReadyEvent());
             Scheduler.get().scheduleIncremental(new RepeatingCommand() {
 

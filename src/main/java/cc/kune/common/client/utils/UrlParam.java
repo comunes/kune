@@ -19,30 +19,38 @@
  \*/
 package cc.kune.common.client.utils;
 
+import java.util.Date;
+
 public class UrlParam {
-    private final String value;
-    private final String name;
+  public static String noCacheStringSuffix() {
+    final String noCache = "&nocache=" + new Date().getTime();
+    return noCache;
+  }
+  private final String name;
 
-    public UrlParam(String name, boolean value) {
-        this.name = name;
-        this.value = value ? "true" : "false";
-    }
+  private final String value;
 
-    public UrlParam(String name, String value) {
-        this.name = name;
-        this.value = value;
-    }
+  public UrlParam(final String name, final boolean value) {
+    this.name = name;
+    this.value = value ? "true" : "false";
+  }
 
-    public String getName() {
-        return name;
-    }
+  public UrlParam(final String name, final String value) {
+    this.name = name;
+    this.value = value;
+  }
 
-    public String getValue() {
-        return value;
-    }
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public String toString() {
-        return name + "=" + value;
-    }
+  public String getValue() {
+    return value;
+  }
+
+  @Override
+  public String toString() {
+    return name + "=" + value;
+  }
+
 }
