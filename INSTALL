@@ -178,7 +178,7 @@ Install openfire in your system: http://www.igniterealtime.org/downloads/index.j
 
 In debian and derivatives, to install the .deb its highly recomended.
 
-Currently only openfire xmpp server is supported (due database dependencies). Ejabberd support in progress.
+Currently only openfire xmpp server is supported (due to openfire can use our users database). Ejabberd support in progress.
 
 Works in most of the openfire server versions after 3.5.1.
 See emite (our xmpp software) Server Compatibility: https://code.google.com/p/emite/wiki/ServerAndClientsCompatibility
@@ -258,7 +258,7 @@ Instead of:
   <jdbcUserProvider/>
   <admin/>
 
-(Be sure that the password matches if you changed de default password 'db4kune').
+(Be sure that the password matches if you changed de default password 'db4kune', also the database name if you use another different like production one).
 
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html

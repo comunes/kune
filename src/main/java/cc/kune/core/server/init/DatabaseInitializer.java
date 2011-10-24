@@ -23,6 +23,8 @@ import java.util.TimeZone;
 
 import javax.persistence.NoResultException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
@@ -50,6 +52,7 @@ import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
 public class DatabaseInitializer {
+  private static final Log LOG = LogFactory.getLog(DatabaseInitializer.class);
   private final ContentManager contentManager;
   private final I18nCountryManager countryManager;
   private final GroupManager groupManager;
@@ -58,6 +61,7 @@ public class DatabaseInitializer {
   private final LicenseManager licenseManager;
   private final KuneBasicProperties properties;
   private final I18nTranslationManager translationManager;
+
   private final UserManager userManager;
 
   @Inject
@@ -206,6 +210,9 @@ public class DatabaseInitializer {
     try {
       groupManager.getSiteDefaultGroup();
     } catch (final NoResultException e) {
+      LOG.info("The default group '" + properties.getDefaultSiteName()
+          + "' does not exist in Database, "
+          + "creating it (see kune.default.site.shortName in kune.properties for more details)");
       initDatabase();
     }
   }
