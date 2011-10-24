@@ -131,7 +131,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
           langCache.clear();
         } catch (final Exception e) {
           // TODO: handle exception
-          throw new RuntimeException("Error persisting '" + text + "' to language '" + language + "'");
+          throw new RuntimeException("Error persisting '" + text + "' to language '" + language + "'", e);
         }
       }
       return I18nTranslation.UNTRANSLATED_VALUE;
