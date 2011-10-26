@@ -100,10 +100,9 @@ public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
       }
     });
     put(SiteTokens.TRANSLATE, new HistoryTokenCallback() {
-      // FIXME, something to come back
       @Override
       public void onHistoryToken(final String token) {
-        if (session.getInitData().isTranslatorEnabled()) {
+        if (session.isLogged() && session.getInitData().isTranslatorEnabled()) {
           translator.get().show();
         }
       }
