@@ -35,8 +35,8 @@ public class I18nTranslatorSaver {
             NotifyUser.hideProgress();
             if (caught instanceof AccessViolationException) {
               NotifyUser.error(
-                  i18n.t("Only to authorized translators"),
-                  i18n.t("To help with the translation of this software please contact before with this site administrators"));
+                  i18n.t("Only for authorized translators"),
+                  i18n.t("To help with the translation of this software please contact before with this site administrators."));
             } else {
               NotifyUser.error(i18n.t("Server error saving the translation"));
             }

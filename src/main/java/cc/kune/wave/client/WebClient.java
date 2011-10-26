@@ -526,7 +526,5 @@ private void setupUi() {
     });
   }
 
-  private native boolean useSocketIO() /*-{
-		return !!$wnd.__useSocketIO
-  }-*/;
+  private native boolean useSocketIO() /*-{ return !window.WebSocket }-*/;
 }

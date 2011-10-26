@@ -113,6 +113,7 @@ public class KuneStagesProvider extends Stages {
       protected Element createWaveHolder() {
         return wavePanelElement;
       }
+
       @Override
       protected LogicalPanel createWaveContainer() {
         return rootPanel;

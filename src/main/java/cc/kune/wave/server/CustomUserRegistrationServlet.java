@@ -50,6 +50,7 @@ import com.google.inject.name.Named;
 @SuppressWarnings("serial")
 @Singleton
 public final class CustomUserRegistrationServlet extends HttpServlet {
+
   private final AccountStore accountStore;
   private final String domain;
  // private final WelcomeRobot welcomeBot;
