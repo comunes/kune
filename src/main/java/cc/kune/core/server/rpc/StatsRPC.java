@@ -1,5 +1,6 @@
 package cc.kune.core.server.rpc;
 
+import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.mapper.Mapper;
@@ -29,8 +30,17 @@ public class StatsRPC implements RPC, ClientStatsService {
   }
 
   @Override
-  @Authenticated
   public HomeStatsDTO getHomeStats(final String userHash) {
+    try {
+      return getHomeStatsWrapper(userHash);
+    } catch (final SessionExpiredException e) {
+      // If the session is expired just send unauth stats
+      return getHomeStats();
+    }
+  }
+
+  @Authenticated
+  public HomeStatsDTO getHomeStatsWrapper(final String userHash) {
     return mapper.map(statsService.getHomeStats(userSessionManager.getUser().getUserGroup()),
         HomeStatsDTO.class);
   }

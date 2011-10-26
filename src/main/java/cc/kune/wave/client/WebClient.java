@@ -260,7 +260,7 @@ public class WebClient extends  Composite implements WaveClientView {
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session session) {
     // Window.alert("webclient! " + new Date());
     this.eventBus = eventBus;
     this.profiles = profiles;
@@ -285,7 +285,7 @@ public class WebClient extends  Composite implements WaveClientView {
     //setupConnectionIndicator();
 
     // Done in StateManager
-    // HistorySupport.init();
+    HistorySupport.kuneInit(tokenMatcher, session);
 
     loginImpl();
 
@@ -526,5 +526,7 @@ private void setupUi() {
     });
   }
 
-  private native boolean useSocketIO() /*-{ return !window.WebSocket }-*/;
+  private native boolean useSocketIO() /*-{
+		return !window.WebSocket
+  }-*/;
 }
