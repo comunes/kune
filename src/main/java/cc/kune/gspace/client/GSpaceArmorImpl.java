@@ -79,6 +79,8 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   FlowPanel entityToolsSouth;
   @UiField
   SplitLayoutPanel groupSpace;
+  @UiField
+  SimplePanel groupSpaceWrapper;
   private final ActionFlowPanel headerToolbar;
   @UiField
   SimplePanel homeSpace;
@@ -240,7 +242,7 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
 
   @Override
   public void selectGroupSpace() {
-    tabs.selectTab(groupSpace);
+    tabs.selectTab(groupSpaceWrapper);
   }
 
   @Override
@@ -261,7 +263,9 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public void setBackImage(final String url) {
     final String bodyProp = "#FFFFFF url('" + url + "') fixed no-repeat top left";
-    DOM.setStyleAttribute(mainpanel.getElement(), CSS.A.BACKGROUND, bodyProp);
+    // final String bodyProp = "#FFFFFF url('" + url +
+    // "') fixed no-repeat top left";
+    DOM.setStyleAttribute(groupSpaceWrapper.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 
   @Override

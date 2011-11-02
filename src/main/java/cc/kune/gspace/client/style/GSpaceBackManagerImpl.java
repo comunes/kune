@@ -22,6 +22,7 @@ package cc.kune.gspace.client.style;
 import javax.annotation.Nonnull;
 
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.gspace.client.GSpaceArmor;
 
@@ -33,11 +34,14 @@ public class GSpaceBackManagerImpl implements GSpaceBackManager {
   private final FileDownloadUtils downloadUtils;
   private final GSpaceArmor gSpaceArmor;
   private StateToken lastToken;
+  private final StateManager stateManager;
 
   @Inject
-  public GSpaceBackManagerImpl(final FileDownloadUtils downloadUtils, final GSpaceArmor gSpaceArmor) {
+  public GSpaceBackManagerImpl(final FileDownloadUtils downloadUtils, final GSpaceArmor gSpaceArmor,
+      final StateManager stateManager) {
     this.downloadUtils = downloadUtils;
     this.gSpaceArmor = gSpaceArmor;
+    this.stateManager = stateManager;
     lastToken = NO_TOKEN;
   }
 

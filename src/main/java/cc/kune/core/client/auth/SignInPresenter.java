@@ -174,7 +174,6 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
       }
     });
     getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
-
       @Override
       public void onClose(final CloseEvent<PopupPanel> event) {
         Log.debug("Closing signin presenter");
@@ -182,7 +181,6 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
       }
     });
     getView().getAccountRegister().addClickHandler(new ClickHandler() {
-
       @Override
       public void onClick(final ClickEvent event) {
         onAccountRegister();
@@ -238,6 +236,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
   @Override
   public void showSignInDialog() {
     registerProvider.get().hide();
+    registerProvider.get().setGotoTokenOnCancel(this.getGotoTokenOnCancel());
     if (session.isLogged()) {
       stateManager.restorePreviousToken();
     } else {

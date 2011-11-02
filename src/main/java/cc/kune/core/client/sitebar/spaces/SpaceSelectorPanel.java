@@ -20,6 +20,7 @@
 package cc.kune.core.client.sitebar.spaces;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.core.client.state.Session;
@@ -32,6 +33,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.ToggleButton;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -84,6 +86,31 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
   @Override
   public Widget asWidget() {
     return panel;
+  }
+
+  private void blink(final UIObject btn) {
+    final BlinkAnimation anim = new BlinkAnimation(btn, 400);
+    anim.animate(3);
+  }
+
+  @Override
+  public void blinkGroupBtn() {
+    blink(groupButton);
+  }
+
+  @Override
+  public void blinkHomeBtn() {
+    blink(homeButton);
+  }
+
+  @Override
+  public void blinkPublicBtn() {
+    blink(publicButton);
+  }
+
+  @Override
+  public void blinkUserBtn() {
+    blink(userButton);
   }
 
   @Override

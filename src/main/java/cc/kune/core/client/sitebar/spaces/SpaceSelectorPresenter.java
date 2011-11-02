@@ -61,6 +61,14 @@ public class SpaceSelectorPresenter extends
     public static String PUBLIC_SPACE_ID = "k-space-public-id";
     public static String USER_SPACE_ID = "k-space-user-id";
 
+    void blinkGroupBtn();
+
+    void blinkHomeBtn();
+
+    void blinkPublicBtn();
+
+    void blinkUserBtn();
+
     HasClickHandlers getGroupBtn();
 
     HasClickHandlers getHomeBtn();
@@ -84,6 +92,7 @@ public class SpaceSelectorPresenter extends
     void showPublicSpaceTooltip();
 
     void showUserSpaceTooltip();
+
   }
 
   private final GSpaceArmor armor;
@@ -92,11 +101,11 @@ public class SpaceSelectorPresenter extends
   private String groupToken;
   private String homeToken;
   private final I18nTranslationService i18n;
+  private String inboxToken;
   private String publicToken;
   private final Session session;
   private final Provider<SignIn> signIn;
   private final StateManager stateManager;
-  private String userToken;
 
   @Inject
   public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
@@ -112,7 +121,7 @@ public class SpaceSelectorPresenter extends
     this.i18n = i18n;
     currentSpace = null;
     homeToken = SiteTokens.HOME;
-    userToken = SiteTokens.WAVEINBOX;
+    inboxToken = SiteTokens.WAVEINBOX;
     groupToken = SiteTokens.GROUP_HOME;
     publicToken = TokenUtils.preview(SiteTokens.GROUP_HOME);
     view.getHomeBtn().addClickHandler(new ClickHandler() {
@@ -125,8 +134,11 @@ public class SpaceSelectorPresenter extends
     view.getUserBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        restoreToken(userToken);
-        setDown(Space.userSpace);
+        signIn.get().setGotoTokenOnCancel(stateManager.getCurrentToken());
+        restoreToken(inboxToken);
+        if (session.isLogged()) {
+          setDown(Space.userSpace);
+        }
       }
     });
     view.getGroupBtn().addClickHandler(new ClickHandler() {
@@ -156,7 +168,7 @@ public class SpaceSelectorPresenter extends
 
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
-    // showTooltipWithDelay();
+    showTooltipWithDelay();
   }
 
   private void onGroupSpaceSelect(final boolean shouldRestoreToken) {
@@ -176,7 +188,7 @@ public class SpaceSelectorPresenter extends
   }
 
   private void onPublicSpaceSelect(final boolean shouldRestoreToken) {
-    restoreToken(shouldRestoreToken, userToken);
+    restoreToken(shouldRestoreToken, inboxToken);
     armor.selectPublicSpace();
     backManager.restoreBackImage();
     setDown(Space.publicSpace);
@@ -192,7 +204,7 @@ public class SpaceSelectorPresenter extends
       homeToken = token;
       break;
     case userSpace:
-      userToken = token;
+      inboxToken = token;
       break;
     case groupSpace:
       groupToken = token;
@@ -232,12 +244,12 @@ public class SpaceSelectorPresenter extends
     if (currentSpace == Space.userSpace) {
       restoreToken(homeToken);
     }
-    userToken = SiteTokens.WAVEINBOX;
+    inboxToken = SiteTokens.WAVEINBOX;
   }
 
   private void onUserSpaceSelect(final boolean shouldRestoreToken) {
     if (session.isLogged()) {
-      restoreToken(shouldRestoreToken, userToken);
+      restoreToken(shouldRestoreToken, inboxToken);
       armor.selectUserSpace();
       backManager.clearBackImage();
       setDown(Space.userSpace);
@@ -245,7 +257,7 @@ public class SpaceSelectorPresenter extends
     } else {
       signIn.get().setErrorMessage(i18n.t("Sign in or create an account to access to your inbox"),
           NotifyLevel.info);
-      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, userToken));
+      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, inboxToken));
       getView().setUserBtnDown(false);
     }
   }
@@ -277,15 +289,19 @@ public class SpaceSelectorPresenter extends
       switch (currentSpace) {
       case homeSpace:
         getView().showHomeSpaceTooltip();
+        getView().blinkHomeBtn();
         break;
       case userSpace:
         getView().showUserSpaceTooltip();
+        getView().blinkUserBtn();
         break;
       case groupSpace:
         getView().showGroupSpaceTooltip();
+        getView().blinkGroupBtn();
         break;
       case publicSpace:
         getView().showPublicSpaceTooltip();
+        getView().blinkPublicBtn();
         break;
       }
     }

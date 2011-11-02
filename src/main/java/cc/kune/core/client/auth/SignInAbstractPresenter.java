@@ -37,6 +37,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   protected final UserPassAutocompleteManager autocomplete;
   protected final CookiesManager cookiesManager;
+  private String gotoTokenOnCancel;
   protected final I18nUITranslationService i18n;
   protected final Session session;
   protected final StateManager stateManager;
@@ -50,6 +51,10 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     this.i18n = i18n;
     this.cookiesManager = cookiesManager;
     this.autocomplete = autocomplete;
+  }
+
+  public String getGotoTokenOnCancel() {
+    return gotoTokenOnCancel;
   }
 
   @Override
@@ -71,7 +76,12 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     getView().reset();
     getView().hideMessages();
     if (!session.isLogged()) {
-      stateManager.redirectOrRestorePreviousToken();
+      if (gotoTokenOnCancel != null) {
+        stateManager.gotoHistoryToken(gotoTokenOnCancel);
+        gotoTokenOnCancel = null;
+      } else {
+        stateManager.redirectOrRestorePreviousToken();
+      }
     }
   }
 
@@ -97,4 +107,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     autocomplete.clickFormLogin();
   }
 
+  public void setGotoTokenOnCancel(final String gotoTokenOnCancel) {
+    this.gotoTokenOnCancel = gotoTokenOnCancel;
+  }
 }

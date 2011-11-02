@@ -13,8 +13,13 @@
 }
 
 .k-spaces {
-  margin: 5px 17px 7px 17px;
-  border-collapse: separate;
+}
+
+.k-group-space {
+  border-top: 7px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 20px solid transparent;
 }
 
 .k-space {

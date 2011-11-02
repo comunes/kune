@@ -29,7 +29,6 @@ import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.wave.client.WaveClientProvider;
@@ -63,7 +62,7 @@ public class ErrorHandler {
   }
 
   private void goHome() {
-    stateManager.gotoHistoryToken(SiteTokens.GROUP_HOME);
+    stateManager.gotoDefaultHomepage();
   }
 
   private void logException(final Throwable caught) {
@@ -147,12 +146,14 @@ public class ErrorHandler {
       logException(caught, true);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("Oops! Something has gone wrong with our servers. Retry later, please.")));
-      final String error = "Other kind of exception in StateManagerDefault/processErrorException";
+      final String error = "Other kind of exception received in ErrorHandler";
       Log.error(error, caught);
       waveClient.get().getStackTraceAsync(caught, new Accessor<SafeHtml>() {
         @Override
         public void use(final SafeHtml stack) {
-          NotifyUser.logError(stack.asString().replace("<br>", "\n"));
+          final String stackAsString = stack.asString().replace("<br>", "\n");
+          NotifyUser.logError(stackAsString);
+          Log.error("Stack: " + stackAsString);
         }
       });
     }

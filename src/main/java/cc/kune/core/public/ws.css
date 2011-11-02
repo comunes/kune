@@ -324,6 +324,15 @@ a:visited {
   float: left;
 }
 
+.k-space-sel-btn-blink {
+/*   kfilter: alpha(opacity = */
+/*             30); */
+/*   -moz-opacity: 0.30; */
+/*   -khtml-opacity: 0.30; */
+/*   opacity: 0.30; */
+  visibility: hidden;
+}
+
 .k-space-sel-inbox-count {
   border: none 5px #000000;
   -moz-border-radius: 5px;

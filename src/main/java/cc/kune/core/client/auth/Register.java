@@ -27,4 +27,6 @@ public interface Register {
 
   void hide();
 
+  void setGotoTokenOnCancel(String gotoTokenOnCancel);
+
 }

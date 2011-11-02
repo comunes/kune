@@ -54,7 +54,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   private final ContentCache contentCache;
   private final EventBus eventBus;
   private final HistoryWrapper history;
-  private StateToken previousToken;
+  private StateToken previousGroupToken;
+  private final StateToken previousToken;
   /**
    * When a historyChanged is interrupted (for instance because you are editing
    * something), the new history token is stored here
@@ -73,6 +74,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     this.contentCache = contentProvider;
     this.session = session;
     this.history = history;
+    this.previousGroupToken = null;
     this.previousToken = null;
     this.resumedHistoryToken = null;
     tokenMatcher.init(GwtWaverefEncoder.INSTANCE);
@@ -122,14 +124,47 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
   }
 
+  private void getContent(final StateToken newState) {
+    getContent(newState, false);
+  }
+
+  private void getContent(final StateToken newState, final boolean setBrowserHistory) {
+    // NotifyUser.info("loading: " + newState + " because current:" +
+    // session.getCurrentStateToken());
+    contentCache.getContent(session.getUserHash(), newState,
+        new AsyncCallbackSimple<StateAbstractDTO>() {
+          @Override
+          public void onSuccess(final StateAbstractDTO newState) {
+            setState(newState);
+            final String currentToken = newState.getStateToken().toString();
+            SpaceConfEvent.fire(eventBus, Space.groupSpace, currentToken);
+            SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(currentToken));
+            if (setBrowserHistory) {
+              history.newItem(currentToken, false);
+              SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+            }
+          }
+        });
+  }
+
+  @Override
+  public String getCurrentToken() {
+    return history.getToken();
+  }
+
   private String getPreviousGroup() {
-    final String previousGroup = startingUp() ? "" : previousToken.getGroup();
+    final String previousGroup = startingUp() ? "" : previousGroupToken.getGroup();
     return previousGroup;
   }
 
   private String getPreviousTool() {
-    final String previousTool = startingUp() ? "" : previousToken.getTool();
+    final String previousTool = startingUp() ? "" : previousGroupToken.getTool();
     return previousTool;
+  }
+
+  @Override
+  public void gotoDefaultHomepage() {
+    getContent(new StateToken(SiteTokens.GROUP_HOME), true);
   }
 
   @Override
@@ -146,7 +181,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   @Override
   public void gotoStateToken(final StateToken newToken) {
-    Log.debug("StateManager: history goto-token: " + newToken + ", previous: " + previousToken);
+    Log.debug("StateManager: history goto-token: " + newToken + ", previous: " + previousGroupToken);
     history.newItem(newToken.getEncoded());
   }
 
@@ -167,18 +202,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
           currentState.getStateToken().getGroup()));
     }
 
-  }
-
-  private void onHistoryChanged(final StateToken newState) {
-    // NotifyUser.info("loading: " + newState + " because current:" +
-    // session.getCurrentStateToken());
-    contentCache.getContent(session.getUserHash(), newState,
-        new AsyncCallbackSimple<StateAbstractDTO>() {
-          @Override
-          public void onSuccess(final StateAbstractDTO newState) {
-            setState(newState);
-          }
-        });
   }
 
   @Override
@@ -242,7 +265,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             SpaceSelectEvent.fire(eventBus, Space.publicSpace);
             SpaceConfEvent.fire(eventBus, Space.groupSpace, sndToken);
             SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(sndToken));
-            onHistoryChanged(new StateToken(sndToken));
+            getContent(new StateToken(sndToken));
           } else if (firstToken.equals(SiteTokens.SUBTITLES)) {
             siteTokens.get(SiteTokens.SUBTITLES).onHistoryToken(
                 tokenMatcher.getRedirect(newHistoryToken).getRight());
@@ -258,37 +281,37 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
               siteTokens.get(SiteTokens.SIGNIN).onHistoryToken(newHistoryToken);
             }
           }
-        } else if (tokenMatcher.isWaveToken(newHistoryToken)) {
+        } else
+        // No redirection
+        if (tokenMatcher.isWaveToken(newHistoryToken)) {
           if (session.isLogged()) {
             SpaceConfEvent.fire(eventBus, Space.userSpace, newHistoryToken);
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
             ClientEvents.get().fireEvent(
                 new WaveSelectionEvent(HistorySupport.waveRefFromHistoryToken(newHistoryToken)));
           } else {
+            // Wave, but don't logged
             history.newItem(TokenUtils.addRedirect(SiteTokens.SIGNIN, newHistoryToken));
             if (startingUp()) {
-              // Starting application (with Wave url???)
-              onHistoryChanged(new StateToken(SiteTokens.GROUP_HOME));
+              // Starting application (with Wave)
+              getContent(new StateToken(SiteTokens.GROUP_HOME), false);
             }
           }
         } else if (tokenMatcher.isGroupToken(newHistoryToken)) {
           SpaceConfEvent.fire(eventBus, Space.groupSpace, newHistoryToken);
           SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newHistoryToken));
           SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-          onHistoryChanged(new StateToken(newHistoryToken));
+          getContent(new StateToken(newHistoryToken));
         } else {
-          // While we don't redefine token "" as home:
-          SpaceConfEvent.fire(eventBus, Space.groupSpace, SiteTokens.GROUP_HOME);
-          SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(SiteTokens.GROUP_HOME));
-          SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-          onHistoryChanged(new StateToken(SiteTokens.GROUP_HOME));
+          gotoDefaultHomepage();
         }
       } else {
         // token is one of #newgroup #signin #translate ...
         if (startingUp()) {
           // Starting with some token like "signin": load defContent
           // also
-          processHistoryToken(SiteTokens.GROUP_HOME);
+          getContent(new StateToken(SiteTokens.GROUP_HOME), false);
+          // processHistoryToken(SiteTokens.GROUP_HOME);
           // SpaceSelectEvent.fire(eventBus, Space.groupSpace);
         }
         // Fire the listener of this #hash token
@@ -339,7 +362,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       processCurrentHistoryToken();
     } else {
       contentCache.removeContent(currentStateToken);
-      onHistoryChanged(currentStateToken);
+      getContent(currentStateToken);
     }
   }
 
@@ -355,8 +378,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   @Override
   public void restorePreviousToken() {
-    if (previousToken != null) {
-      gotoStateToken(previousToken);
+    if (previousGroupToken != null) {
+      gotoStateToken(previousGroupToken);
     }
   }
 
@@ -404,11 +427,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     // history.newItem(newToken.toString(), false);
     StateChangedEvent.fire(eventBus, newState);
     checkGroupAndToolChange(newState);
-    previousToken = newToken.copy();
+    previousGroupToken = newToken.copy();
     eventBus.fireEvent(new ProgressHideEvent());
   }
 
   private boolean startingUp() {
-    return previousToken == null;
+    return previousGroupToken == null;
   }
 }

@@ -30,6 +30,10 @@ public interface StateManager {
 
   void addSiteToken(String token, HistoryTokenCallback historyTokenCallback);
 
+  String getCurrentToken();
+
+  void gotoDefaultHomepage();
+
   void gotoHistoryToken(String newToken);
 
   void gotoHistoryTokenButRedirectToCurrent(String signin);

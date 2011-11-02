@@ -31,6 +31,8 @@ public interface SignIn {
 
   void setErrorMessage(String message, NotifyLevel level);
 
+  void setGotoTokenOnCancel(String gotoToken);
+
   void showSignInDialog();
 
 }

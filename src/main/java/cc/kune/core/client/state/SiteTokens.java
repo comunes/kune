@@ -30,7 +30,7 @@ import com.google.inject.Inject;
 public final class SiteTokens {
   public static final String ABOUTKUNE = "about";
   public final static String GROUP_HOME = "";
-  public final static String HOME = "home";
+  public final static String HOME = "";
   public final static String NEWGROUP = "newgroup";
   public static final String PREVIEW = "preview";
   public final static String REGISTER = "register";
