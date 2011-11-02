@@ -36,7 +36,7 @@ public class BartersClientTool extends FoldableAbstractClientTool {
   @Inject
   public BartersClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("barters"), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t("barters"), i18n.t(""), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_BARTER);

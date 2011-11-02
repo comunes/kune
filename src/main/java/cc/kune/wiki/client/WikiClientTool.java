@@ -37,7 +37,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
   @Inject
   public WikiClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t("wiki"), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t("wiki"), i18n.t(""), toolSelector, cntCapRegistry, i18n, navResources);
 
     registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
     registerDragableTypes(TYPE_WIKIPAGE, TYPE_FOLDER, TYPE_UPLOADEDFILE);

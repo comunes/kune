@@ -38,7 +38,8 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
   @Inject
   public BlogsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t(BlogsConstants.ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t(BlogsConstants.ROOT_NAME), i18n.t(""), toolSelector, cntCapRegistry, i18n,
+        navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);

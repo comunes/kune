@@ -37,6 +37,8 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
     void setSelected(boolean selected);
 
+    void setTooltip(String tooltip);
+
     void setVisible(boolean visible);
   }
 
@@ -44,12 +46,14 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
   private final String shortName;
   private StateToken token;
   private final ToolSelector toolSelector;
+  private final String tooltip;
   private ToolSelectorItemView view;
 
-  public ToolSelectorItemPresenter(final String shortName, final String longName,
+  public ToolSelectorItemPresenter(final String shortName, final String longName, final String tooltip,
       final ToolSelector toolSelector) {
     this.shortName = shortName;
     this.longName = longName;
+    this.tooltip = tooltip;
     this.toolSelector = toolSelector;
   }
 
@@ -73,6 +77,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
       }
     });
     view.getLabel().setText(longName);
+    view.setTooltip(tooltip);
   }
 
   @Override

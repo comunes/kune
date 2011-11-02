@@ -38,7 +38,8 @@ public class DocsClientTool extends FoldableAbstractClientTool {
   @Inject
   public DocsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t(DocsConstants.ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t(DocsConstants.ROOT_NAME), i18n.t(""), toolSelector, cntCapRegistry, i18n,
+        navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);

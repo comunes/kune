@@ -25,11 +25,13 @@ import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
 
 public abstract class AbstractClientTool {
 
-    public AbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector) {
-        final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName, toolSelector);
-        final ToolSelectorItemPanel panel = new ToolSelectorItemPanel();
-        presenter.init(panel);
-    }
+  public AbstractClientTool(final String shortName, final String longName, final String tooltip,
+      final ToolSelector toolSelector) {
+    final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName,
+        tooltip, toolSelector);
+    final ToolSelectorItemPanel panel = new ToolSelectorItemPanel();
+    presenter.init(panel);
+  }
 
-    public abstract String getName();
+  public abstract String getName();
 }

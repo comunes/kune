@@ -19,6 +19,7 @@
  */
 package cc.kune.gspace.client.tool.selector;
 
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 
 import com.google.gwt.core.client.GWT;
@@ -110,6 +111,11 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
       iconRight.setVisible(false);
       arrow.setVisible(false);
     }
+  }
+
+  @Override
+  public void setTooltip(final String tooltip) {
+    Tooltip.to(this, tooltip);
   }
 
   @Override

@@ -35,10 +35,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
   protected final I18nTranslationService i18n;
   protected final NavResources navResources;
 
-  public FoldableAbstractClientTool(final String shortName, final String longName,
+  public FoldableAbstractClientTool(final String shortName, final String longName, final String tooltip,
       final ToolSelector toolSelector, final ContentCapabilitiesRegistry contentCapabilitiesRegistry,
       final I18nTranslationService i18n, final NavResources navResources) {
-    super(shortName, longName, toolSelector);
+    super(shortName, longName, tooltip, toolSelector);
     this.contentCapabilitiesRegistry = contentCapabilitiesRegistry;
     this.i18n = i18n;
     this.navResources = navResources;

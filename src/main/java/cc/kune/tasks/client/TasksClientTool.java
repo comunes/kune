@@ -38,7 +38,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t(ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t(ROOT_NAME), i18n.t(""), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_TASK);

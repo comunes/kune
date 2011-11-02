@@ -37,7 +37,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
   @Inject
   public ListsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t(ROOT_NAME), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t(ROOT_NAME), i18n.t(""), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST);
