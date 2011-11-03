@@ -166,11 +166,16 @@ body {
   margin: 50px 0 22px 0;
 }
 
-#k-home-summary {
+#k-home-summary,#k-home-summary a {
   font-size: 28px;
   color: #dd8a3d;
   font-weight: bold;
   white-space: nowrap;
+  text-decoration: none;
+}
+
+#k-home-summary a:hover {
+  text-decoration: underline;
 }
 
 #k-home-summary li {
@@ -314,14 +319,18 @@ body {
                         <div id="k-home-summary">
                             <ul>
                                 <li
-                                    style="background-image: url(ws/images/kune-intro-user.png);">Comunicate
-                                    with others</li>
+                                    style="background-image: url(ws/images/kune-intro-user.png);">
+                                    <a href="#inbox">Comunicate with others</a>
+                                </li>
                                 <li
-                                    style="background-image: url(ws/images/kune-intro-group.png);">Work
-                                    in collaboration</li>
+                                    style="background-image: url(ws/images/kune-intro-group.png);">
+                                    <!-- Put here your site default group name -->
+                                    <a href="#site">Work in collaboration</a>
+                                </li>
                                 <li
-                                    style="background-image: url(ws/images/kune-intro-world.png);">And
-                                    share with the world</li>
+                                    style="background-image: url(ws/images/kune-intro-world.png);">
+                                    <a href="#preview()">And share with the world</a>
+                                </li>
                             </ul>
                         </div>
                         <!-- k-home-summary -->
