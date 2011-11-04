@@ -43,7 +43,7 @@ public class ContentCacheDefault implements ContentCache {
     this.eventBus = eventBus;
     this.cacheMap = new HashMap<StateToken, StateAbstractDTO>();
     // Don't use while we don't check changes in the server
-    useCache = false;
+    useCache = true;
   }
 
   @Override

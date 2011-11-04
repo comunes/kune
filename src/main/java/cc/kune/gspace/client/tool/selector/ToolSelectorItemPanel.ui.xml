@@ -4,7 +4,7 @@
   <ui:style>
     .label {
       text-decoration: none;
-      font-size: 22px;
+      font-size: 16px;
       color: white; /*
                 text-shadow: 1px 1px 6px grey;
                 */
@@ -19,7 +19,7 @@
     }
 
     .flow {
-      min-height: 30px;
+      /* min-height: 30px; */
       padding: 1px 10px;
       -moz-user-select: none;
       -khtml-user-select: none;

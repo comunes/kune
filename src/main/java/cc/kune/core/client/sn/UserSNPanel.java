@@ -58,7 +58,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     setTooltip(sndCategoryLabel, i18n.t("Groups which this user Joined"));
     trdCategoryLabel.setText("NOT USED");
     setTooltip(trdCategoryLabel, "NOT USED");
-    super.setTrdCategoryVisible(false);
+    super.setTrdCategoryVisible(false, false);
     sndDeckLabel.setText("NOT USED");
     bottomActionsToolbar = new ActionFlowPanel(guiProvider);
     bottomPanel.add(bottomActionsToolbar);
@@ -94,8 +94,8 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   }
 
   @Override
-  public void setBuddiesVisible(final boolean visible) {
-    super.setFirstCategoryVisible(visible);
+  public void setBuddiesVisible(final boolean visible, final boolean areMany) {
+    super.setFirstCategoryVisible(visible, areMany);
   }
 
   @Override
@@ -109,8 +109,8 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   }
 
   @Override
-  public void setParticipationVisible(final boolean visible) {
-    super.setSndCategoryVisible(visible);
+  public void setParticipationVisible(final boolean visible, final boolean areMany) {
+    super.setSndCategoryVisible(visible, areMany);
   }
 
   @Override

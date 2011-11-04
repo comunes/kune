@@ -92,13 +92,18 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   }
 
   @Override
+  public void setAdminsVisible(final boolean visible, final boolean areMany) {
+    super.setFirstCategoryVisible(visible, areMany);
+  }
+
+  @Override
   public void setCollabsCount(final int count) {
     sndCategoryCount.setText(new StringBuffer("(").append(count).append(")").toString());
   }
 
   @Override
-  public void setCollabsVisible(final boolean visible) {
-    super.setSndCategoryVisible(visible);
+  public void setCollabsVisible(final boolean visible, final boolean areMany) {
+    super.setSndCategoryVisible(visible, areMany);
   }
 
   @Override
@@ -107,8 +112,8 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   }
 
   @Override
-  public void setPendingVisible(final boolean visible) {
-    super.setTrdCategoryVisible(visible);
+  public void setPendingVisible(final boolean visible, final boolean areMany) {
+    super.setTrdCategoryVisible(visible, areMany);
   }
 
   @Override

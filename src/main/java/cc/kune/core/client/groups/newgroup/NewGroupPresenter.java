@@ -149,11 +149,11 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   public void onCancel() {
     getView().hide();
+    stateManager.redirectOrRestorePreviousToken();
   }
 
   public void onClose() {
     reset();
-    stateManager.redirectOrRestorePreviousToken();
   }
 
   private void onRegister() {
@@ -196,14 +196,14 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
         @Override
         public void onSuccess(final StateAbstractDTO state) {
-          getView().hide();
+          stateManager.setRetrievedStateAndGo(state);
           Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {
-              stateManager.setRetrievedStateAndGo(state);
               groupOptions.showTooltip();
             }
           });
+          getView().hide();
           reset();
           getView().unMask();
         }

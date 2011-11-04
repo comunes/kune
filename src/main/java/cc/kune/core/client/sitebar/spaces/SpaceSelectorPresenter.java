@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.sitebar.spaces;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.auth.SignIn;
@@ -269,6 +270,7 @@ public class SpaceSelectorPresenter extends
   }
 
   private void restoreToken(final String token) {
+    Log.info("Restoring token from SpaceSelector: " + token);
     stateManager.gotoHistoryToken(token);
   }
 

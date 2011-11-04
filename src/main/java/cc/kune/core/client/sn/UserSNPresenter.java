@@ -73,13 +73,13 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     void setBuddiesCount(int count);
 
-    void setBuddiesVisible(boolean visible);
+    void setBuddiesVisible(boolean visible, boolean areMany);
 
     void setNoBuddies();
 
     void setParticipationCount(int count);
 
-    void setParticipationVisible(boolean visible);
+    void setParticipationVisible(boolean visible, boolean areMany);
 
     void setVisible(boolean visible);
 
@@ -143,7 +143,8 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
       if (state.getSocialNetworkData().isBuddiesVisible()) {
         // In fact now we show the user network or not.
         setBuddiesState(state);
-        getView().setBuddiesVisible(true);
+        getView().setBuddiesVisible(true,
+            areMany(state.getSocialNetworkData().getUserBuddies().getBuddies().size()));
         // getView().setVisible(buddies + participeIn > 0);
       } else {
         getView().showBuddiesNotPublic();
@@ -219,7 +220,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     }
     final int totalGroups = numAdmins + numCollaborators;
     // getView().setParticipationCount(totalGroups);
-    getView().setParticipationVisible(totalGroups > 0);
+    getView().setParticipationVisible(totalGroups > 0, areMany(totalGroups));
     return totalGroups;
   }
 }

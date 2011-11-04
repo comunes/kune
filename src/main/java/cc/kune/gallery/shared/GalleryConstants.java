@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.docs.server;
+package cc.kune.gallery.shared;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
+import cc.kune.core.shared.ToolConstants;
 
-public class DocumentServerModule implements Module {
-  @Override
-  public void configure(final Binder binder) {
-    binder.bind(DocumentServerTool.class).asEagerSingleton();
+public final class GalleryConstants {
+  public static final String NAME = "gallery";
+  public static final String ROOT_NAME = "gallery";
+  public static final String TYPE_ALBUM = NAME + "." + "album";
+  public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
+
+  private GalleryConstants() {
   }
 }

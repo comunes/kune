@@ -35,12 +35,18 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?>> extends
     Presenter<View, Proxy<?>> {
 
+  private static final int MAX_NUM_AVATAR_IN_A_ROW = 6;
+
   protected final Provider<FileDownloadUtils> downloadProvider;
 
   public AbstractSNPresenter(final EventBus eventBus, final View view, final Proxy<?> proxy,
       final Provider<FileDownloadUtils> downloadProvider) {
     super(eventBus, view, proxy);
     this.downloadProvider = downloadProvider;
+  }
+
+  protected boolean areMany(final int numAvatars) {
+    return numAvatars > MAX_NUM_AVATAR_IN_A_ROW;
   }
 
   protected GuiActionDescCollection createMenuItems(final Object target,

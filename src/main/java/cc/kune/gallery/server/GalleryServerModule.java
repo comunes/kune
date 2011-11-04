@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.docs.server;
+package cc.kune.gallery.server;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
 
-public class DocumentServerModule implements Module {
+public class GalleryServerModule implements Module {
   @Override
   public void configure(final Binder binder) {
-    binder.bind(DocumentServerTool.class).asEagerSingleton();
+    binder.bind(GalleryServerTool.class).asEagerSingleton();
   }
 }

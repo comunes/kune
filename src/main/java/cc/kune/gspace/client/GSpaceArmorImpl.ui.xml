@@ -42,9 +42,9 @@
               <g:center size="1.0">
                 <g:DockLayoutPanel unit="PX" ui:field="splitCenter"
                   styleName="{res.style.entityCentralContainer}">
-                  <g:north size="168">
+                  <g:north size="153">
                     <g:VerticalPanel width="100%"
-                      height="168px">
+                      height="153px">
                       <g:FlowPanel height="70px" width="100%"
                         styleName="{res.style.entityHeader}" ui:field="entityHeader">
                         <!--<g:RichTextArea width="100%" height="70px" /> -->
@@ -54,7 +54,7 @@
                       </g:FlowPanel>
                       <g:HTMLPanel ui:field="arrow"
                         styleName="{res.style.docSubheaderArrow}"/>
-                      <g:FlowPanel width="100%" height="60px"
+                      <g:FlowPanel width="100%" height="45px"
                         styleName="{res.style.docSubheader}" ui:field="docSubheader">
                       </g:FlowPanel>
                     </g:VerticalPanel>

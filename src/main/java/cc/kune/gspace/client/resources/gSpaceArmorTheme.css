@@ -67,10 +67,10 @@
 
 .k-tool-item-focus span {
   color: c4;
+  font-size: 16px;
 }
 
 .k-tool-item-nofocus {
-
 }
 
 .k-tool-item-nofocus span {
@@ -83,6 +83,7 @@
 
 .k-tool-item-selected span {
   color: c3;
+  font-size: 22px;
 }
 
 /* Derived from: from http://jonrohan.me/guide/css/creating-triangles-in-css/ */

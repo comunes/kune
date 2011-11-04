@@ -107,7 +107,8 @@ public class GroupRPC implements RPC, GroupService {
     // This is necessary?
     contentManager.save(newGroup.getDefaultContent());
     // contentManager.setTags(user, defContentId, tags);
-    return contentRPC.getContent(userHash, newGroup.getDefaultContent().getStateToken());
+    return contentRPC.getContent(userHash,
+        newGroup.getDefaultContent().getStateToken().copy().clearDocument());
   };
 
   @Override

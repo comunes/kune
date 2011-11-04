@@ -74,13 +74,15 @@ public class GroupSNPresenter extends
 
     void setAdminsCount(int count);
 
+    void setAdminsVisible(boolean visible, boolean big);
+
     void setCollabsCount(int count);
 
-    void setCollabsVisible(boolean visible);
+    void setCollabsVisible(boolean visible, boolean big);
 
     void setPendingsCount(int count);
 
-    void setPendingVisible(boolean visible);
+    void setPendingVisible(boolean visible, boolean big);
 
     void setVisible(boolean visible);
 
@@ -198,28 +200,28 @@ public class GroupSNPresenter extends
     } else {
       final boolean userIsAdmin = rights.isAdministrable();
       final boolean userCanView = rights.isVisible();
-
+      getView().setAdminsVisible(true, areMany(numAdmins));
       if (userCanView) {
         for (final GroupDTO admin : adminsList) {
           final String avatar = getAvatar(admin);
           getView().addAdmin(admin, avatar, admin.getLongName(), "",
               createMenuItems(admin, adminsMenuItemsRegistry, admin.getLongName()));
         }
-        getView().setCollabsVisible(numCollabs > 0);
+        getView().setCollabsVisible(numCollabs > 0, areMany(numCollabs));
         for (final GroupDTO collab : collabList) {
           final String avatar = getAvatar(collab);
           getView().addCollab(collab, avatar, collab.getLongName(), "",
               createMenuItems(collab, collabsMenuItemsRegistry, collab.getLongName()));
         }
         if (userIsAdmin) {
-          getView().setPendingVisible(numPendings > 0);
+          getView().setPendingVisible(numPendings > 0, areMany(numPendings));
           for (final GroupDTO pendingCollab : pendingCollabsList) {
             final String avatar = getAvatar(pendingCollab);
             getView().addPending(pendingCollab, avatar, pendingCollab.getLongName(), "",
                 createMenuItems(pendingCollab, pendingsMenuItemsRegistry, pendingCollab.getLongName()));
           }
         } else {
-          getView().setPendingVisible(false);
+          getView().setPendingVisible(false, false);
         }
         getView().showMembers();
       }

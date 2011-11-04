@@ -57,6 +57,7 @@ public class AbstractSNPanel extends ViewImpl {
   private final static int AVATARLABELMAXSIZE = 4;
   private final static int AVATARSIZE = 22;
   private final static String CATEG_HEIGHT = "84px";
+  private final static String CATEG_MIN_HEIGHT = "55px";
   private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
   protected final ActionSimplePanel actions;
   protected final GSpaceArmor armor;
@@ -173,22 +174,22 @@ public class AbstractSNPanel extends ViewImpl {
     return bottomActionsToolbar;
   }
 
-  public void setFirstCategoryVisible(final boolean visible) {
+  public void setFirstCategoryVisible(final boolean visible, final boolean big) {
     firstCategoryPanel.setVisible(visible);
-    firstCategoryPanel.setHeight(visible ? CATEG_HEIGHT : "0px");
+    firstCategoryPanel.setHeight(visible ? (big ? CATEG_HEIGHT : CATEG_MIN_HEIGHT) : "0px");
   }
 
-  public void setSndCategoryVisible(final boolean visible) {
+  public void setSndCategoryVisible(final boolean visible, final boolean big) {
     sndCategoryPanel.setVisible(visible);
-    sndCategoryPanel.setHeight(visible ? CATEG_HEIGHT : "0px");
+    sndCategoryPanel.setHeight(visible ? (big ? CATEG_HEIGHT : CATEG_MIN_HEIGHT) : "0px");
   }
 
   protected void setTooltip(final Widget widget, final String title) {
     Tooltip.to(widget, title);
   }
 
-  public void setTrdCategoryVisible(final boolean visible) {
+  public void setTrdCategoryVisible(final boolean visible, final boolean big) {
     trdCategoryPanel.setVisible(visible);
-    trdCategoryPanel.setHeight(visible ? CATEG_HEIGHT : "0px");
+    trdCategoryPanel.setHeight(visible ? (big ? CATEG_HEIGHT : CATEG_MIN_HEIGHT) : "0px");
   }
 }
