@@ -98,6 +98,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         processCurrentHistoryToken();
       }
     });
+    onSocialNetworkChanged(false, new SocialNetworkChangedHandler() {
+      @Override
+      public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
+        contentCache.clearCacheOfGroup(event.getState().getStateToken().getGroup());
+      }
+    });
   }
 
   @Override

@@ -41,6 +41,8 @@ import com.google.inject.Provider;
 public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   private final I18nTranslationService i18n;
+  private final Label noBuddies;
+  private final Label noPublic;
 
   @Inject
   public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
@@ -65,6 +67,10 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);
     deck.showWidget(2);
+    noBuddies = new Label("This user has no buddies yet");
+    noBuddies.addStyleName("kune-Margin-Medium-l");
+    noPublic = new Label(CoreMessages.BUDDIES_NOT_PUBLIC);
+    noPublic.addStyleName("kune-Margin-Medium-l");
   }
 
   @Override
@@ -100,7 +106,9 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   @Override
   public void setNoBuddies() {
-    firstCategoryLabel.setText(i18n.t("This user has no buddies yet"));
+    firstCategoryFlow.add(noBuddies);
+    firstCategoryLabel.setText(i18n.t("Buddies"));
+    super.setFirstCategoryVisible(true, true);
   }
 
   @Override
@@ -129,8 +137,9 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   @Override
   public void showBuddiesNotPublic() {
-    firstDeckLabel.setText(i18n.t(CoreMessages.BUDDIES_NOT_PUBLIC));
-    deck.showWidget(0);
+    firstCategoryFlow.add(noPublic);
+    firstCategoryLabel.setText(i18n.t("Buddies"));
+    super.setFirstCategoryVisible(true, true);
   }
 
 }

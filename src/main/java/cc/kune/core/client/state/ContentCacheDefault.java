@@ -24,6 +24,7 @@ import java.util.Map;
 
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
@@ -38,12 +39,19 @@ public class ContentCacheDefault implements ContentCache {
   private final boolean useCache;
 
   @Inject
-  public ContentCacheDefault(final ContentServiceAsync server, final EventBus eventBus) {
+  public ContentCacheDefault(final ContentServiceAsync server, final EventBus eventBus,
+      final Session session) {
     this.server = server;
     this.eventBus = eventBus;
     this.cacheMap = new HashMap<StateToken, StateAbstractDTO>();
     // Don't use while we don't check changes in the server
     useCache = true;
+    session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        cacheMap.clear();
+      }
+    });
   }
 
   @Override
@@ -51,6 +59,15 @@ public class ContentCacheDefault implements ContentCache {
     assert encodeState != null;
     if (useCache) {
       cacheMap.put(encodeState, content);
+    }
+  }
+
+  @Override
+  public void clearCacheOfGroup(final String group) {
+    for (final StateToken entry : cacheMap.keySet()) {
+      if (entry.getGroup().equals(group)) {
+        cacheMap.remove(entry);
+      }
     }
   }
 

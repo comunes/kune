@@ -142,9 +142,9 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
       setParticipationState(state);
       if (state.getSocialNetworkData().isBuddiesVisible()) {
         // In fact now we show the user network or not.
-        setBuddiesState(state);
         getView().setBuddiesVisible(true,
             areMany(state.getSocialNetworkData().getUserBuddies().getBuddies().size()));
+        setBuddiesState(state);
         // getView().setVisible(buddies + participeIn > 0);
       } else {
         getView().showBuddiesNotPublic();

@@ -26,10 +26,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ContentCache {
 
-    void cache(StateToken token, StateAbstractDTO content);
+  void cache(StateToken token, StateAbstractDTO content);
 
-    void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
+  void clearCacheOfGroup(String group);
 
-    void removeContent(StateToken token);
+  void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
+
+  void removeContent(StateToken token);
 
 }
