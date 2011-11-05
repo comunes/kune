@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.EditEvent;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
 import cc.kune.common.client.ui.HasEditHandler;
@@ -171,6 +172,7 @@ public class ContentViewerPresenter extends
     getView().clear();
     final StateContentDTO stateContent = (StateContentDTO) state;
     final AccessRights rights = stateContent.getContentRights();
+    Log.info("Content rights: " + rights);
     if (session.isLogged() && rights.isEditable()) {
       if (stateContent.isParticipant()) {
         // is already participant, show wave editor

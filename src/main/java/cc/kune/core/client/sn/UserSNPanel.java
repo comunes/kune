@@ -67,9 +67,9 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);
     deck.showWidget(2);
-    noBuddies = new Label("This user has no buddies yet");
+    noBuddies = new Label(i18n.t("This user has no buddies yet"));
     noBuddies.addStyleName("kune-Margin-Medium-l");
-    noPublic = new Label(CoreMessages.BUDDIES_NOT_PUBLIC);
+    noPublic = new Label(i18n.t(CoreMessages.BUDDIES_NOT_PUBLIC));
     noPublic.addStyleName("kune-Margin-Medium-l");
   }
 

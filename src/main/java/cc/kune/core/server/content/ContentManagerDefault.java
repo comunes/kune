@@ -112,14 +112,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
   }
 
-  @Override
-  public Content createContent(final String title, final String body, final User author,
+  protected Content createContent(final String title, final String body, final User author,
       final Container container, final String typeId) {
     return createContent(title, body, author, container, typeId, KuneWaveService.WITHOUT_GADGET);
   }
 
-  @Override
-  public Content createContent(final String title, final String body, final User author,
+  protected Content createContent(final String title, final String body, final User author,
       final Container container, final String typeId, final URL gadgetUrl) {
     FilenameUtils.checkBasicFilename(title);
     final String newtitle = findInexistentTitle(container, title);

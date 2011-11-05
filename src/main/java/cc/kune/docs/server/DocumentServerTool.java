@@ -31,6 +31,7 @@ import java.util.Arrays;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -47,10 +48,11 @@ public class DocumentServerTool extends AbstractServerTool {
   @Inject
   public DocumentServerTool(final ContentManager contentManager,
       final ContainerManager containerManager, final ToolConfigurationManager configurationManager,
-      final I18nTranslationService i18n) {
+      final I18nTranslationService i18n, final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_DOCUMENT, TYPE_UPLOADEDFILE), Arrays.asList(
         TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
-        contentManager, containerManager, configurationManager, i18n, ServerToolTarget.forBoth);
+        contentManager, containerManager, creationService, configurationManager, i18n,
+        ServerToolTarget.forBoth);
   }
 
   @Override

@@ -35,6 +35,8 @@ public interface CreationService {
   Content createGadget(User user, Container container, String gadgetname, String typeId, String title,
       String body);
 
+  Container createRootFolder(Group group, String name, String rootName, String typeRoot);
+
   Content saveContent(User editor, Content descriptor, String content);
 
 }

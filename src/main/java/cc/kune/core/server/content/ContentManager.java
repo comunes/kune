@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.content;
 
-import java.net.URL;
 import java.util.Date;
 
 import cc.kune.core.client.errors.DefaultException;
@@ -48,11 +47,6 @@ public interface ContentManager extends Manager<Content, Long> {
   void addAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
   void addParticipant(User user, Long contentId, String participant);
-
-  Content createContent(String title, String body, User author, Container container, String typeId);
-
-  Content createContent(String title, String body, User author, Container container, String typeId,
-      URL gadgetUrl);
 
   boolean findIfExistsTitle(Container container, String title);
 

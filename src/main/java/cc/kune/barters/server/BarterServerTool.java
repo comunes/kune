@@ -32,6 +32,7 @@ import java.util.Date;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.server.tool.ServerWaveTool;
@@ -54,10 +55,11 @@ public class BarterServerTool extends AbstractServerTool implements ServerWaveTo
 
   @Inject
   public BarterServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
+      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
+      final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_BARTER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
         Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER), contentManager,
-        containerManager, configurationManager, i18n, ServerToolTarget.forUsers);
+        containerManager, creationService, configurationManager, i18n, ServerToolTarget.forUsers);
     gadgetUrl = UrlUtils.of(BARTER_GADGET);
   }
 
@@ -70,11 +72,10 @@ public class BarterServerTool extends AbstractServerTool implements ServerWaveTo
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     final Container rootFolder = createRoot(group);
     setContainerAcl(rootFolder);
-    final Content content = createInitialContent(user, group, rootFolder, i18n.t("Barter sample"),
+    createInitialContent(user, group, rootFolder, i18n.t("Barter sample"),
         i18n.t("This is only a barter sample. You can invite other participants to this barter, "
             + "but also publish to the general public allowing you to share services, goods, etc."),
-        TYPE_BARTER, gadgetUrl);
-    contentManager.save(content);
+        TYPE_BARTER);
     return group;
   }
 
@@ -96,6 +97,6 @@ public class BarterServerTool extends AbstractServerTool implements ServerWaveTo
     bartersAcl.getAdmins().add(container.getOwner());
     bartersAcl.getEditors().setMode(GroupListMode.NORMAL);
     bartersAcl.getViewers().setMode(GroupListMode.EVERYONE);
-    containerManager.setAccessList(container, bartersAcl);
+    setAccessList(container, bartersAcl);
   }
 }

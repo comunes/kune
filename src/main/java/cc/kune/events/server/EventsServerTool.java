@@ -32,6 +32,7 @@ import java.util.Date;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.server.tool.ServerWaveTool;
@@ -54,10 +55,11 @@ public class EventsServerTool extends AbstractServerTool implements ServerWaveTo
 
   @Inject
   public EventsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
+      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
+      final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_MEETING), Arrays.asList(TYPE_ROOT),
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
-        configurationManager, i18n, ServerToolTarget.forGroups);
+        creationService, configurationManager, i18n, ServerToolTarget.forGroups);
     gadgetUrl = UrlUtils.of(MEETING_GADGET);
   }
 
@@ -70,11 +72,11 @@ public class EventsServerTool extends AbstractServerTool implements ServerWaveTo
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     final Container rootFolder = createRoot(group);
 
-    final Content content = createInitialContent(user, group, rootFolder, i18n.t("Meeting sample"),
+    createInitialContent(user, group, rootFolder, i18n.t("Meeting sample"),
         i18n.t("This is only a meet sample. You can invite other participants to this meeting, "
             + "but also publish to the general public allowing you to to help in the organization, "
-            + "call and speed-up of events."), TYPE_MEETING, gadgetUrl);
-    contentManager.save(content);
+            + "call and speed-up of events."), TYPE_MEETING);
+
     return group;
   }
 
@@ -96,6 +98,6 @@ public class EventsServerTool extends AbstractServerTool implements ServerWaveTo
     meetsAcl.getAdmins().add(container.getOwner());
     meetsAcl.getEditors().setMode(GroupListMode.NORMAL);
     meetsAcl.getViewers().setMode(GroupListMode.EVERYONE);
-    containerManager.setAccessList(container, meetsAcl);
+    setAccessList(container, meetsAcl);
   }
 }

@@ -29,6 +29,7 @@ import org.junit.Before;
 
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
@@ -60,6 +61,8 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
   protected ContentManager contentManager;
   @Inject
   protected I18nCountryManager countryManager;
+  @Inject
+  protected CreationService creationService;
   protected License defLicense;
   protected I18nLanguage english;
   protected I18nCountry gb;

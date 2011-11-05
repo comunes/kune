@@ -36,7 +36,7 @@ public class BlogServerToolTest {
 
   @Before
   public void before() {
-    serverTool = new BlogServerTool(null, null, null, null);
+    serverTool = new BlogServerTool(null, null, null, null, null);
   }
 
   @Test

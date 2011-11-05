@@ -42,14 +42,14 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   private Content createContent() {
     assertNotNull(container);
-    final Content cnt = contentManager.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
+    final Content cnt = creationService.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
     persist(cnt);
     containerManager.persist(container);
     return cnt;
   }
 
   private void createContentWithMimeAndCheck(final String mimetype) {
-    final Content cnt = contentManager.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
+    final Content cnt = creationService.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
     cnt.setMimeType(new BasicMimeType(mimetype));
     persist(cnt);
     final Content newCnt = contentManager.find(cnt.getId());
@@ -96,7 +96,7 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
   @Test(expected = NameInUseException.class)
   public void testBasicMoveWithExistingNameShouldFail() {
     final Content content = createContent();
-    final Content sameNameCnt = contentManager.createContent(TITLE, BODY, user, otherContainer,
+    final Content sameNameCnt = creationService.createContent(TITLE, BODY, user, otherContainer,
         TYPE_UPLOADEDFILE);
     persist(sameNameCnt);
     contentManager.moveContent(content, otherContainer);
@@ -140,7 +140,7 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
    */
   @Test
   public void testUTF8Persist() {
-    final Content cnt = contentManager.createContent("汉语/漢語", "汉语/漢語", user, container, TYPE_DOCUMENT);
+    final Content cnt = creationService.createContent("汉语/漢語", "汉语/漢語", user, container, TYPE_DOCUMENT);
     final Content newCnt = contentManager.find(cnt.getId());
     assertEquals("汉语/漢語", newCnt.getTitle());
   }

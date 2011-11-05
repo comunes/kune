@@ -31,11 +31,11 @@ import java.util.Arrays;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Container;
-import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
@@ -46,10 +46,11 @@ public class BlogServerTool extends AbstractServerTool {
 
   @Inject
   public BlogServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
+      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
+      final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST, TYPE_UPLOADEDFILE),
         Arrays.asList(TYPE_BLOG), Arrays.asList(TYPE_BLOG), Arrays.asList(TYPE_ROOT), contentManager,
-        containerManager, configurationManager, i18n, ServerToolTarget.forBoth);
+        containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }
 
   @Override
@@ -57,12 +58,11 @@ public class BlogServerTool extends AbstractServerTool {
     final Container rootFolder = createRoot(group);
 
     final I18nLanguage language = user.getLanguage();
-    final Container blog = containerManager.createFolder(group, rootFolder, i18n.t("Blog sample"),
-        language, TYPE_BLOG);
+    final Container blog = creationService.createFolder(group, rootFolder.getId(),
+        i18n.t("Blog sample"), language, TYPE_BLOG);
 
-    final Content content = createInitialContent(user, group, blog, i18n.t("A post sample"),
+    createInitialContent(user, group, blog, i18n.t("A post sample"),
         i18n.t("This is only a post sample. You can edit it, rename the post and this blog"), TYPE_POST);
-    contentManager.save(content);
     return group;
   }
 }

@@ -35,6 +35,7 @@ import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -56,10 +57,11 @@ public class ListsServerTool extends AbstractServerTool {
   @Inject
   public ListsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
-      final UserSessionManager userSessionManager, final KuneWaveService waveManager) {
+      final UserSessionManager userSessionManager, final KuneWaveService waveManager,
+      final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST), Arrays.asList(TYPE_LIST),
         Arrays.asList(TYPE_LIST), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
-        configurationManager, i18n, ServerToolTarget.forGroups);
+        creationService, configurationManager, i18n, ServerToolTarget.forGroups);
     this.userSessionManager = userSessionManager;
     this.waveManager = waveManager;
   }

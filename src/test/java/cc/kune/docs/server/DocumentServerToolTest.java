@@ -33,7 +33,7 @@ public class DocumentServerToolTest { // extends PersistenceTest {
 
   @Before
   public void before() {
-    serverTool = new DocumentServerTool(null, null, null, null);
+    serverTool = new DocumentServerTool(null, null, null, null, null);
   }
 
   @Test

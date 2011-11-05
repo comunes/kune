@@ -44,7 +44,7 @@ import com.google.inject.Singleton;
 public class CreationServiceDefault implements CreationService {
   private final XMLKuneClientActions actions;
   private final ContainerManager containerManager;
-  private final ContentManager contentManager;
+  private final ContentManagerDefault contentManager;
   private final Log LOG = LogFactory.getLog(CreationServiceDefault.class);
   private final ServerToolRegistry tools;
 
@@ -53,7 +53,7 @@ public class CreationServiceDefault implements CreationService {
       final ContentManager contentManager, final ServerToolRegistry toolRegistry,
       final XMLActionReader xmlActionReader) {
     this.containerManager = containerManager;
-    this.contentManager = contentManager;
+    this.contentManager = (ContentManagerDefault) contentManager;
     this.tools = toolRegistry;
     this.actions = xmlActionReader.getActions();
   }
@@ -101,6 +101,13 @@ public class CreationServiceDefault implements CreationService {
         gadgetUrl);
     tool.onCreateContent(content, container);
     return content;
+  }
+
+  @Override
+  public Container createRootFolder(final Group group, final String name, final String rootName,
+      final String typeRoot) {
+    // FIXME Check that does not exist yet
+    return containerManager.createRootFolder(group, name, rootName, typeRoot);
   }
 
   @Override

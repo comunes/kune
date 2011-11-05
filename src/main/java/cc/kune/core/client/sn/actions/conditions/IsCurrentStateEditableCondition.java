@@ -32,26 +32,26 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsCurrentStateEditableCondition implements GuiAddCondition {
 
-    private final Session session;
+  private final Session session;
 
-    @Inject
-    public IsCurrentStateEditableCondition(final Session session) {
-        this.session = session;
+  @Inject
+  public IsCurrentStateEditableCondition(final Session session) {
+    this.session = session;
+  }
+
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    final StateAbstractDTO currentState = session.getCurrentState();
+    if (currentState == null) {
+      return false;
+    } else {
+      if (currentState instanceof StateContentDTO) {
+        return ((StateContentDTO) currentState).getContentRights().isEditable();
+      } else {
+        // session.getContainerState() instanceof StateContentDTO)
+        return ((StateContainerDTO) currentState).getGroupRights().isEditable();
+      }
     }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
-        final StateAbstractDTO currentState = session.getCurrentState();
-        if (currentState == null) {
-            return false;
-        } else {
-            if (currentState instanceof StateContentDTO) {
-                return ((StateContentDTO) currentState).getGroupRights().isEditable();
-            } else {
-                // session.getContainerState() instanceof StateContentDTO)
-                return ((StateContainerDTO) currentState).getGroupRights().isEditable();
-            }
-        }
-
-    }
+  }
 }

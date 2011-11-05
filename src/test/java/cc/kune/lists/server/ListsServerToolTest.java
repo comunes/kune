@@ -35,7 +35,7 @@ public class ListsServerToolTest { // extends PersistenceTest {
 
   @Before
   public void before() {
-    serverTool = new ListsServerTool(null, null, null, null, null, null);
+    serverTool = new ListsServerTool(null, null, null, null, null, null, null);
   }
 
   @Test

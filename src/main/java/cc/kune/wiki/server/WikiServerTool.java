@@ -32,6 +32,7 @@ import java.util.Date;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -49,18 +50,21 @@ public class WikiServerTool extends AbstractServerTool {
 
   @Inject
   public WikiServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
+      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
+      final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE), Arrays.asList(
         TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
-        contentManager, containerManager, configurationManager, i18n, ServerToolTarget.forBoth);
+        contentManager, containerManager, creationService, configurationManager, i18n,
+        ServerToolTarget.forBoth);
   }
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     final Container rootFolder = createRoot(group);
 
-    final Content content = super.createInitialContent(user, group, rootFolder, i18n.t("Wiki page sample"), i18n.t("This is only a wiki page sample. You can edit or rename it, but also any other user."), TYPE_WIKIPAGE);
-    contentManager.save(content);
+    super.createInitialContent(user, group, rootFolder, i18n.t("Wiki page sample"),
+        i18n.t("This is only a wiki page sample. You can edit or rename it, but also any other user."),
+        TYPE_WIKIPAGE);
     return group;
   }
 
@@ -82,6 +86,6 @@ public class WikiServerTool extends AbstractServerTool {
     wikiAcl.getAdmins().add(container.getOwner());
     wikiAcl.getEditors().setMode(GroupListMode.EVERYONE);
     wikiAcl.getViewers().setMode(GroupListMode.EVERYONE);
-    containerManager.setAccessList(container, wikiAcl);
+    setAccessList(container, wikiAcl);
   }
 }

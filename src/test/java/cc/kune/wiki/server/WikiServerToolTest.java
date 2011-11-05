@@ -33,7 +33,7 @@ public class WikiServerToolTest { // extends PersistenceTest {
 
   @Before
   public void before() {
-    serverTool = new WikiServerTool(null, null, null, null);
+    serverTool = new WikiServerTool(null, null, null, null, null);
   }
 
   @Test

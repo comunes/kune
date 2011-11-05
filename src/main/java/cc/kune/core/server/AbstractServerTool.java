@@ -1,6 +1,5 @@
 package cc.kune.core.server;
 
-import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
@@ -8,12 +7,14 @@ import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -25,8 +26,9 @@ import com.google.inject.Inject;
 public abstract class AbstractServerTool implements ServerTool {
 
   protected final ToolConfigurationManager configurationManager;
-  protected final ContainerManager containerManager;
-  protected final ContentManager contentManager;
+  private final ContainerManager containerManager;
+  private final ContentManager contentManager;
+  protected final CreationService creationService;
   protected final I18nTranslationService i18n;
   private final String name;
   private final String rootName;
@@ -41,8 +43,8 @@ public abstract class AbstractServerTool implements ServerTool {
       final List<String> validContents, final List<String> validContentParents,
       final List<String> validContainers, final List<String> validContainerParents,
       final ContentManager contentManager, final ContainerManager containerManager,
-      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
-      final ServerToolTarget target) {
+      final CreationService creationService, final ToolConfigurationManager configurationManager,
+      final I18nTranslationService i18n, final ServerToolTarget target) {
     this.name = name;
     this.rootName = rootName;
     this.typeRoot = typeRoot;
@@ -52,6 +54,7 @@ public abstract class AbstractServerTool implements ServerTool {
     this.validContainerParents = validContainerParents;
     this.contentManager = contentManager;
     this.containerManager = containerManager;
+    this.creationService = creationService;
     this.configurationManager = configurationManager;
     this.i18n = i18n;
     this.target = target;
@@ -77,22 +80,16 @@ public abstract class AbstractServerTool implements ServerTool {
 
   protected Content createInitialContent(final User user, final Group group, final Container rootFolder,
       final String title, final String body, final String contentType) {
-    final Content content = contentManager.createContent(title, body, user, rootFolder, contentType);
+    final Content content = creationService.createContent(title, body, user, rootFolder, contentType);
     setContentValues(content, contentType, user);
-    return content;
-  }
-
-  protected Content createInitialContent(final User user, final Group group, final Container rootFolder,
-      final String title, final String body, final String contentType, final URL gadgetUrl) {
-    final Content content = contentManager.createContent(title, body, user, rootFolder, contentType,
-        gadgetUrl);
-    setContentValues(content, contentType, user);
+    contentManager.save(content);
     return content;
   }
 
   protected Container createRoot(final Group group) {
     final ToolConfiguration config = new ToolConfiguration();
-    final Container rootFolder = containerManager.createRootFolder(group, name, rootName, typeRoot);
+
+    final Container rootFolder = creationService.createRootFolder(group, name, rootName, typeRoot);
     setContainerAcl(rootFolder);
     config.setRoot(rootFolder);
     group.setToolConfig(name, config);
@@ -127,6 +124,10 @@ public abstract class AbstractServerTool implements ServerTool {
   @Inject
   public void register(final ServerToolRegistry registry) {
     registry.register(this);
+  }
+
+  protected void setAccessList(final Container container, final AccessLists acl) {
+    containerManager.setAccessList(container, acl);
   }
 
   protected void setContainerAcl(final Container container) {

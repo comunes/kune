@@ -30,6 +30,7 @@ import java.util.Collections;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -46,10 +47,12 @@ public class ChatServerTool extends AbstractServerTool {
   @Inject
   public ChatServerTool(final ToolConfigurationManager configurationManager,
       final ContentManager contentManager, final ContainerManager containerManager,
-      final ChatManagerDefault chatManager, final I18nTranslationService i18n) {
+      final ChatManagerDefault chatManager, final I18nTranslationService i18n,
+      final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Collections.<String> emptyList(),
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOM), Arrays.asList(TYPE_ROOT),
-        contentManager, containerManager, configurationManager, i18n, ServerToolTarget.forGroups);
+        contentManager, containerManager, creationService, configurationManager, i18n,
+        ServerToolTarget.forGroups);
     this.chatManager = chatManager;
   }
 

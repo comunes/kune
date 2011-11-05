@@ -30,6 +30,7 @@ import java.util.Arrays;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -43,17 +44,18 @@ public class GalleryServerTool extends AbstractServerTool {
 
   @Inject
   public GalleryServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
+      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
+      final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_UPLOADEDFILE), Arrays.asList(TYPE_ROOT,
         TYPE_ALBUM), Arrays.asList(TYPE_ALBUM), Arrays.asList(TYPE_ROOT, TYPE_ALBUM), contentManager,
-        containerManager, configurationManager, i18n, ServerToolTarget.forBoth);
+        containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     final Container rootFolder = createRoot(group);
 
-    containerManager.createFolder(group, rootFolder, i18n.t("Album sample"), user.getLanguage(),
+    creationService.createFolder(group, rootFolder.getId(), i18n.t("Album sample"), user.getLanguage(),
         TYPE_ALBUM);
     return group;
   }

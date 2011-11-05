@@ -30,8 +30,8 @@ import cc.kune.core.server.access.AccessService;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
-import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.ContentUtils;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.FileManager;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.utils.StringW;
@@ -54,7 +54,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
   @Inject
   AccessService accessService;
   @Inject
-  ContentManager contentManager;
+  CreationService creationService;
   @Inject
   FileManager fileManager;
   @Inject
@@ -133,7 +133,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
       final User user = userSession.getUser();
       final Container container = accessService.accessToContainer(
           ContentUtils.parseId(stateToken.getFolder()), user, AccessRol.Editor);
-      final Content content = contentManager.createContent(
+      final Content content = creationService.createContent(
           FileUtils.getFileNameWithoutExtension(file.getName(), extension), preview, user, container,
           typeId);
       content.setMimeType(basicMimeType);

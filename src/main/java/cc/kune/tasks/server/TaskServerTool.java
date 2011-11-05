@@ -31,6 +31,7 @@ import java.util.Date;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -47,24 +48,24 @@ public class TaskServerTool extends AbstractServerTool {
 
   @Inject
   public TaskServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n) {
+      final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
+      final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_TASK), Arrays.asList(TYPE_FOLDER, TYPE_ROOT),
         Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER), contentManager,
-        containerManager, configurationManager, i18n, ServerToolTarget.forBoth);
+        containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }
 
   private Container createFolder(final Group group, final Container rootFolder,
       final I18nLanguage language, final String title) {
-    final Container shortTerm = containerManager.createFolder(group, rootFolder, i18n.t(title),
+    final Container shortTerm = creationService.createFolder(group, rootFolder.getId(), i18n.t(title),
         language, TYPE_FOLDER);
     return shortTerm;
   }
 
   private void createTask(final User user, final Group group, final Container shortTerm,
       final String text) {
-    final Content content = createInitialContent(user, group, shortTerm, i18n.t(text),
+    createInitialContent(user, group, shortTerm, i18n.t(text),
         i18n.t("This is only a task sample. You can edit it, rename it"), TYPE_TASK);
-    contentManager.save(content);
   }
 
   @Override
