@@ -35,7 +35,7 @@ public class AbstractNewMenu extends MenuDescriptor {
       final AccessRightsClientManager rightsManager) {
     super();
     this.withIcon(res.addGreen()).withStyles("k-button, k-btn, k-5corners, k-def-docbtn, k-fl").withText(
-        "More");
+        i18n.t("More"));
 
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override
@@ -44,5 +44,4 @@ public class AbstractNewMenu extends MenuDescriptor {
       }
     });
   }
-
 }
