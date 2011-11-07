@@ -34,34 +34,35 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
       final String email) {
     // 15 chars, the limit, so we don't use shortName
     final String prefix = getTempString();
-    showTitleSlide("User registration", "to get full access to this site tools/contents");
+    showTitleSlide(t("User registration"), t("to get full access to this site tools/contents"));
     login.createOne();
-    register.fillRegisterForm(prefix, prefix + longName, passwd, prefix + email, false);
+    register.fillRegisterForm(shortName + prefix, longName + prefix, passwd, prefix + email, false);
     login.assertIsConnectedAs(prefix);
     sleep(1000);
-    entityHeader.waitForEntityTitle(prefix + longName);
+    entityHeader.waitForEntityTitle(longName + prefix);
     register.getWelcomeMsg().click();
 
     // user space
-    showTitleSlide("User space (your Inbox)", "contents in which you participate");
+    showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
     showTooltip(spaces.userBtn());
     spaces.userBtn().click();
 
     // chat
-    showTitleSlide("Chat with your buddies", "compatible with gmail and similars", SiteTokens.WAVEINBOX);
+    showTitleSlide(t("Chat with your buddies"), t("compatible with gmail and similars"),
+        SiteTokens.WAVEINBOX);
     showTooltip(chat.icon());
     chat.show();
     sleep(3000);
 
     final XmppURI jid = XmppURI.jid(SeleniumConstants.USER_EMAIL);
     final String jids = jid.toString();
-    showMsg("We need to add buddies (contacts) before chat with them");
+    showMsg(t("We need to add buddies (contacts) before chat with them"));
     chat.openChat(jid);
 
     // chat.getPage(jids).click();
-    chat.getTalkBox(jids).sendKeys("Helloo... ;)");
+    chat.getTalkBox(jids).sendKeys(t("Helloo... ;)"));
     chat.getSend(jids).click();
-    chat.getTalkBox(jids).sendKeys("I'm just testing");
+    chat.getTalkBox(jids).sendKeys(t("I'm just testing"));
     chat.getSend(jids).click();
 
     login.logout();

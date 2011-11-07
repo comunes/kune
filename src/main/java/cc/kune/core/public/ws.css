@@ -1542,6 +1542,10 @@ div.jGrowl div.jGrowl-notification div.header {
   padding: 0 !important;
 }
 
+div.jGrowl {
+  font-size: 18px;
+}
+
 /* Dotted tab panel */
 .k-dotted-tabpanel .gwt-TabLayoutPanelTab {
   background-color: #ffccaa;

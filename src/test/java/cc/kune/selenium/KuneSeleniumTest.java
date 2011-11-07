@@ -29,7 +29,7 @@ import java.util.Date;
 public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
 
   protected String getTempString() {
-    final DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    final DateFormat dateFormat = new SimpleDateFormat("yyMMddHHmm");
     final String value = dateFormat.format(new Date());
     return value;
   }

@@ -7,7 +7,7 @@
     }
 
     .k-subtitles-title {
-      font-size: 48px;
+      font-size: 28px;
       color: #FFF; /* #C87137; */
       font-weight: bold;
       float: left;
@@ -36,7 +36,7 @@
     .k-subtitles-description {
       clear: both;
       float: left;
-      font-size: 36px;
+      font-size: 20px;
       color: white;
       padding-left: 40px;
     }

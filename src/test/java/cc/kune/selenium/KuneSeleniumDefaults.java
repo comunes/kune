@@ -19,6 +19,9 @@
  */
 package cc.kune.selenium;
 
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -33,6 +36,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
+import cc.kune.core.client.i18n.I18nUtils;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.sub.SubtitlesWidget;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -51,20 +55,21 @@ public class KuneSeleniumDefaults {
   public static final Injector INJECTOR = Guice.createInjector(new SeleniumModule());
 
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
-  public static boolean mustCloseFinally = true;
+  public static boolean mustCloseFinally = false;
   private final String baseUrl;
   protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
   private final Injector injector;
   protected LoginPageObject login;
+  private final ResourceBundle messages;
   protected RegisterPageObject register;
   protected final SpacesPageObject spaces;
   private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
-    baseUrl = "http://kune.beta.iepala.es/?locale=en#";
-    // baseUrl =
-    // "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
+    // baseUrl = "http://kune.beta.iepala.es/?locale=en#";
+    // baseUrl = "http://beta.eurosur.org/#";
+    baseUrl = "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
     injector = INJECTOR;
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
@@ -72,6 +77,7 @@ public class KuneSeleniumDefaults {
     entityHeader = injector.getInstance(EntityHeaderPageObject.class);
     spaces = injector.getInstance(SpacesPageObject.class);
     chat = injector.getInstance(ChatPageObject.class);
+    messages = injector.getInstance(ResourceBundle.class);
     final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     PageFactory.initElements(locator, login);
     PageFactory.initElements(locator, register);
@@ -86,9 +92,9 @@ public class KuneSeleniumDefaults {
 
   @BeforeSuite
   public void beforeSuite() {
-    resize();
     LOG.info("Going home");
     home();
+    resize();
   }
 
   public void close() {
@@ -112,8 +118,7 @@ public class KuneSeleniumDefaults {
   @DataProvider(name = "correctregister")
   public Object[][] createCorrectRegister() {
     // The default correct user/password used in tests
-    return new Object[][] { { SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_LONGNAME,
-        SeleniumConstants.USER_PASSWD, SeleniumConstants.USER_EMAIL } };
+    return new Object[][] { { "jane", "Jane Doe", SeleniumConstants.USER_PASSWD, "jane@example.com" } };
   }
 
   @DataProvider(name = "incorrectlogin")
@@ -150,11 +155,11 @@ public class KuneSeleniumDefaults {
   }
 
   public void resize() {
-    final JavascriptExecutor js = (JavascriptExecutor) webdriver;
     // Some others tested values:
     // 1024,769
     // 840,770
     // 806,707
+    final JavascriptExecutor js = (JavascriptExecutor) webdriver;
     js.executeScript("window.resizeTo(806,707); window.moveTo(0,0);");
   }
 
@@ -186,6 +191,16 @@ public class KuneSeleniumDefaults {
 
   public void sleep(final int milliseconds) {
     SeleniumUtils.sleep(milliseconds);
+  }
+
+  public String t(final String message) {
+    final String methodName = I18nUtils.convertMethodName(message);
+    try {
+      return messages.getString(methodName);
+    } catch (final MissingResourceException e) {
+      LOG.info(methodName + " = " + message);
+      return message;
+    }
   }
 
 }

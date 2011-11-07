@@ -41,8 +41,8 @@ public class ConstantsTest {
 
   @Before
   public void before() {
-    english = ResourceBundle.getBundle("ConstantsTest", Locale.ENGLISH);
-    spanish = ResourceBundle.getBundle("ConstantsTest", new Locale("es"));
+    english = ResourceBundle.getBundle("TestConstants", Locale.ENGLISH);
+    spanish = ResourceBundle.getBundle("TestConstants", new Locale("es"));
     Locale.setDefault(Locale.ENGLISH);
   }
 

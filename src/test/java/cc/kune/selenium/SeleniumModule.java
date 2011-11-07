@@ -20,6 +20,8 @@
 package cc.kune.selenium;
 
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -61,6 +63,11 @@ public class SeleniumModule extends PageObjectModule {
     bind(EntityHeaderPageObject.class).in(Singleton.class);
     bind(ChatPageObject.class).in(Singleton.class);
     bind(SpacesPageObject.class).in(Singleton.class);
+
+    final ResourceBundle english = ResourceBundle.getBundle("TestConstants", Locale.ENGLISH);
+    final ResourceBundle spanish = ResourceBundle.getBundle("TestConstants", new Locale("es"));
+    Locale.setDefault(Locale.ENGLISH);
+    bind(ResourceBundle.class).toInstance(spanish);
   }
 
   @SuppressWarnings("unused")
@@ -74,7 +81,7 @@ public class SeleniumModule extends PageObjectModule {
     // "--load-extension=/home/YOURUSER/.config/chromium/Default/Extensions/jpjpnpmbddbjkfaccnmhnkdgjideieim/1.0.9738_0/"
     // (tests with the gwt extension)
     ));
-    capabilities.setCapability("chrome.binary", "/usr/bin/chromium-browser");
+    capabilities.setCapability("chrome.binary", "/usr/lib/chromium-browser/chromium-browser");
     final ChromeDriver driver = new ChromeDriver(capabilities);
     return driver;
   }
