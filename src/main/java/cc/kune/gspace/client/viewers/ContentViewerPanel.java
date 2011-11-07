@@ -30,6 +30,7 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
+import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.HasEditHandler;
@@ -166,12 +167,6 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   }
 
   @Override
-  public void setActions(final GuiActionDescCollection actions) {
-    gsArmor.getSubheaderToolbar().clear();
-    gsArmor.getSubheaderToolbar().addAll(actions);
-  }
-
-  @Override
   public void setContent(final StateContentDTO state) {
     final boolean editable = state.getContentRights().isEditable();
     gsArmor.enableCenterScroll(true);
@@ -223,10 +218,25 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     }
   }
 
+  @Override
+  public void setFooterActions(final GuiActionDescCollection actions) {
+    setToolbarActions(actions, gsArmor.getDocFooterToolbar());
+  }
+
+  @Override
+  public void setSubheaderActions(final GuiActionDescCollection actions) {
+    setToolbarActions(actions, gsArmor.getSubheaderToolbar());
+  }
+
   private void setTitle(final StateContentDTO state, final boolean editable) {
     contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
     Window.setTitle(state.getGroup().getLongName() + ": " + state.getTitle());
+  }
+
+  private void setToolbarActions(final GuiActionDescCollection actions, final IsActionExtensible toolbar) {
+    toolbar.clear();
+    toolbar.addAll(actions);
   }
 
   @Override

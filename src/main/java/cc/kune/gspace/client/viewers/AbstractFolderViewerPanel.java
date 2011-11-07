@@ -19,6 +19,7 @@
  */
 package cc.kune.gspace.client.viewers;
 
+import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
@@ -106,12 +107,6 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   }
 
   @Override
-  public void setActions(final GuiActionDescCollection actions) {
-    gsArmor.getSubheaderToolbar().clear();
-    gsArmor.getSubheaderToolbar().addAll(actions);
-  }
-
-  @Override
   public void setContainer(final StateContainerDTO state) {
     contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getContainerRights().isEditable()
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
@@ -121,6 +116,21 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   @Override
   public void setEditableTitle(final String title) {
     contentTitle.setText(title);
+  }
+
+  @Override
+  public void setFooterActions(final GuiActionDescCollection actions) {
+    setToolbarActions(actions, gsArmor.getDocFooterToolbar());
+  }
+
+  @Override
+  public void setSubheaderActions(final GuiActionDescCollection actions) {
+    setToolbarActions(actions, gsArmor.getSubheaderToolbar());
+  }
+
+  private void setToolbarActions(final GuiActionDescCollection actions, final IsActionExtensible toolbar) {
+    toolbar.clear();
+    toolbar.addAll(actions);
   }
 
   @Override

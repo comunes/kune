@@ -89,11 +89,13 @@ public class FolderViewerPresenter extends
 
     void highlightTitle();
 
-    void setActions(GuiActionDescCollection actions);
-
     void setContainer(StateContainerDTO state);
 
     void setEditableTitle(String title);
+
+    void setFooterActions(GuiActionDescCollection actions);
+
+    void setSubheaderActions(GuiActionDescCollection actions);
 
     void showEmptyMsg(String contentTypeId);
   }
@@ -270,8 +272,9 @@ public class FolderViewerPresenter extends
     final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContainer.getGroup(),
         stateContainer.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
     final ContainerDTO container = stateContainer.getContainer();
-    pathToolbarUtils.createPath(container, actions, true);
-    getView().setActions(actions);
+    final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(container, true);
+    getView().setSubheaderActions(actions);
+    getView().setFooterActions(pathActions);
     createChildItems(container, stateContainer.getContainerRights());
   }
 }

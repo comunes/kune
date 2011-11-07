@@ -17,25 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.blogs.client.actions;
+package cc.kune.wiki.client.actions;
 
-import cc.kune.blogs.shared.BlogsConstants;
-import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.NewContentAction;
-import cc.kune.gspace.client.actions.NewContentBtn;
+import cc.kune.gspace.client.actions.NewContainerMenuItem;
+import cc.kune.wiki.shared.WikiConstants;
 
 import com.google.inject.Inject;
 
-public class NewPostIconBtn extends NewContentBtn {
+public class NewFolderMenuItem extends NewContainerMenuItem {
 
   @Inject
-  public NewPostIconBtn(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.blogAdd(), shorcutReg, i18n.t("New post"), i18n.t("Create a new blog post"),
-        i18n.t("New post"), BlogsConstants.TYPE_POST);
-    withStyles("k-btn-min, k-fl");
+  public NewFolderMenuItem(final I18nTranslationService i18n, final NewContainerAction action,
+      final NavResources res, final WikiFolderNewMenu wikiFolderNewMenu) {
+    super(i18n, action, res.wikiAdd(), i18n.t("New folder"),
+        i18n.t("Create a new folder. A folder will be a 'section' in the public web"),
+        i18n.t("New folder"), WikiConstants.TYPE_FOLDER, wikiFolderNewMenu.get());
   }
 
 }

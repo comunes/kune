@@ -75,13 +75,15 @@ public class ContentViewerPresenter extends
 
     HasEditHandler getEditTitle();
 
-    void setActions(GuiActionDescCollection actions);
-
     void setContent(StateContentDTO state);
 
     void setEditableContent(StateContentDTO state);
 
     void setEditableTitle(String title);
+
+    void setFooterActions(GuiActionDescCollection actions);
+
+    void setSubheaderActions(GuiActionDescCollection actions);
 
     void signIn();
 
@@ -202,7 +204,9 @@ public class ContentViewerPresenter extends
     }
     final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContent.getGroup(),
         stateContent.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
-    pathToolbarUtils.createPath(stateContent.getContainer(), actions, true);
-    getView().setActions(actions);
+    final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContent.getContainer(),
+        true);
+    getView().setFooterActions(pathActions);
+    getView().setSubheaderActions(actions);
   }
 }

@@ -65,10 +65,10 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, taskNewMenu, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskIconBtn, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, taskNewMenu, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderMenuItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);

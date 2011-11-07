@@ -33,8 +33,14 @@ public class NewWikiIconBtn extends NewContentBtn {
   @Inject
   public NewWikiIconBtn(final I18nTranslationService i18n, final NewContentAction action,
       final NavResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.wikipageAdd(), shorcutReg, "", i18n.t("Create a New Wikipage here. "
-        + "If you choose to publish it, this document will appear as a new 'Page' in the public web"),
+    super(
+        i18n,
+        action,
+        res.wikipageAdd(),
+        shorcutReg,
+        i18n.t("New wikipage"),
+        i18n.t("Create a New Wikipage here. "
+            + "If you choose to publish it, this document will appear as a new 'Page' in the public web"),
         i18n.t("New wikipage"), WikiConstants.TYPE_WIKIPAGE);
     withStyles("k-btn-min, k-fl");
   }

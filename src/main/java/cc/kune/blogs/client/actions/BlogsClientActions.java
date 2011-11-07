@@ -64,10 +64,10 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, blogNewMenu, TYPE_BLOG);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newBlogBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);

@@ -12,6 +12,12 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
+** TODO multi uploader
+*** Some links
+http://code.google.com/p/gwt-plupload/
+http://www.plupload.com/example_all_runtimes.php
+http://gxt-multiupload-demo.appspot.com/
+http://code.google.com/p/gxt-multi-upload/
 ** TODO workaround websocket issues
 *** compatibilities
 | jetty M2              | new wesocket | socketio  |

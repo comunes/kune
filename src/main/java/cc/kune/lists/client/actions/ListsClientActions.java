@@ -62,14 +62,15 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, listNewMenu, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newListBtn, TYPE_ROOT);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, listNewMenu, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribeBtn, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listOpenessMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribeBtn, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newListMenuItem, TYPE_ROOT);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newListBtn, TYPE_ROOT);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newListMenuItem,
+    // TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);

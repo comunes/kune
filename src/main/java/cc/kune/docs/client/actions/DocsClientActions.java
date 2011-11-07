@@ -54,7 +54,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
       final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewDocMenuItem> newDocMenuItem,
       final Provider<NewDocIconBtn> newDocIconBtn, final Provider<NewFolderMenuItem> newFolderMenuItem,
-      final Provider<OpenDocMenuItem> openContentMenuItem,
+      final Provider<OpenDocMenuItem> openContentMenuItem, final Provider<NewFolderBtn> newFolderBtn,
       final Provider<DelDocMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
@@ -64,10 +64,11 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu docsNewMenu) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, docsNewMenu, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocMenuItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocIconBtn, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, docsNewMenu, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocMenuItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);

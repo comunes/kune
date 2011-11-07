@@ -18,10 +18,10 @@ import com.google.inject.Provider;
 
 public class PathToolbarUtils {
 
-  protected static final String CSSBTN = "k-button, k-fr";
-  protected static final String CSSBTNC = "k-button, k-button-center, k-fr";
-  protected static final String CSSBTNL = "k-button, k-button-left, k-fr";
-  protected static final String CSSBTNR = "k-button, k-button-right, k-fr";
+  protected static final String CSSBTN = "k-button, k-fl";
+  protected static final String CSSBTNC = "k-button, k-button-center, k-fl";
+  protected static final String CSSBTNL = "k-button, k-button-left, k-fl";
+  protected static final String CSSBTNR = "k-button, k-button-right, k-fl";
 
   private final Provider<FolderViewerDropController> dropController;
   private final EventBus eventBus;
@@ -53,12 +53,14 @@ public class PathToolbarUtils {
     return CSSBTNC;
   }
 
-  public void createPath(final ContainerDTO container, final GuiActionDescCollection actions,
-      final boolean withDrop) {
+  public GuiActionDescCollection createPath(final ContainerDTO container, final boolean withDrop) {
+    final GuiActionDescCollection actions = new GuiActionDescCollection();
     final ContainerSimpleDTO[] path = container.getAbsolutePath();
     final int pathLength = path.length;
     if (pathLength > 0) {
-      for (int i = pathLength - 1; i >= 0; i--) {
+      // This is we want to align to the right
+      // for (int i = pathLength - 1; i >= 0; i--) {
+      for (int i = 0; i < pathLength; i++) {
         final ButtonDescriptor btn = createPathButton(path[i], pathLength, i);
         if (withDrop) {
           if (i != pathLength - 1) {
@@ -70,6 +72,7 @@ public class PathToolbarUtils {
         actions.add(btn);
       }
     }
+    return actions;
   }
 
   private ButtonDescriptor createPathButton(final ContainerSimpleDTO container, final int length,

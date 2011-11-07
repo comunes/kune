@@ -184,7 +184,7 @@ div.docEditor div {
   -webkit-border-bottom-right-radius: 7px;
   -moz-border-radius-bottomright: 7px;
   border-bottom-right-radius: 7px;
-  padding: 7px 7px 0 7px;
+  padding: 1px 7px 0 7px;
   overflow: hidden;
   border-collapse: separate;
 }
