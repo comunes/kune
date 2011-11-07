@@ -17,22 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.tasks.client.actions;
+package cc.kune.lists.client.actions;
 
-import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.NewContainerMenuItem;
-import cc.kune.tasks.shared.TasksConstants;
+import cc.kune.gspace.client.actions.AbstractNewMenu;
+import cc.kune.gspace.client.actions.NewMenuProvider;
 
 import com.google.inject.Inject;
 
-public class NewFolderMenuItem extends NewContainerMenuItem {
+public class PostNewMenu extends NewMenuProvider {
 
   @Inject
-  public NewFolderMenuItem(final I18nTranslationService i18n, final NewContainerAction action,
-      final NavResources res, final TasksNewMenu newMenu) {
-    super(i18n, action, res.taskfolderadd(), i18n.t("New task folder"), i18n.t("Create a new folder"),
-        i18n.t("New task folder"), TasksConstants.TYPE_FOLDER, newMenu.get());
+  public PostNewMenu(final AbstractNewMenu menu) {
+    super(menu);
   }
 
 }

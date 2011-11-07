@@ -27,6 +27,8 @@ import cc.kune.domain.User;
 
 public interface CreationService {
 
+  void addGadgetToContent(User user, Content content, String gadgetName);
+
   Content createContent(String title, String body, User user, Container container, String typeId);
 
   Container createFolder(Group group, Long parentFolderId, String name, I18nLanguage language,

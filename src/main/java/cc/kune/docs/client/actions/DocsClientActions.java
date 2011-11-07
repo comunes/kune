@@ -24,6 +24,7 @@ import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
 import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
 import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
@@ -61,13 +62,15 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
-      final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu docsNewMenu) {
+      final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu foldersNewMenu,
+      final DocsNewMenu docsNewMenu) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocIconBtn, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, docsNewMenu, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, foldersNewMenu, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, docsNewMenu, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocMenuItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
@@ -79,8 +82,11 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, setAsHomePage, contents);
-    newMenusRegistry.register(TYPE_FOLDER, docsNewMenu.get());
-    newMenusRegistry.register(TYPE_ROOT, docsNewMenu.get());
+    newMenusRegistry.register(TYPE_FOLDER, foldersNewMenu.get());
+    newMenusRegistry.register(TYPE_ROOT, foldersNewMenu.get());
+    newMenusRegistry.register(TYPE_DOCUMENT,
+        (MenuDescriptor) docsNewMenu.get().withText(i18n.t("Add Gadget")));
+    newMenusRegistry.register(TYPE_UPLOADEDFILE, docsNewMenu.get());
   }
 
   @Override

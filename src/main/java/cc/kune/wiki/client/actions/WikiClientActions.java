@@ -24,6 +24,7 @@ import static cc.kune.wiki.shared.WikiConstants.TYPE_ROOT;
 import static cc.kune.wiki.shared.WikiConstants.TYPE_UPLOADEDFILE;
 import static cc.kune.wiki.shared.WikiConstants.TYPE_WIKIPAGE;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
@@ -60,15 +61,20 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<DelFolderMenuItem> delFolderMenuItem, final Provider<NewFolderBtn> newFolderBtn,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
-      final NewMenusForTypeIdsRegistry newMenusRegistry, final WikiFolderNewMenu folderNewMenu) {
+      final NewMenusForTypeIdsRegistry newMenusRegistry, final WikiFolderNewMenu folderNewMenu,
+      final WikiPageNewMenu wikipageNewMenu) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newWikiIconBtn, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderNewMenu, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newWikiMenuItem, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderMenuItem, containers);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, folderNewMenu,
+    // containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, wikipageNewMenu, contents);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newWikiMenuItem,
+    // containers);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderMenuItem,
+    // containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
@@ -78,8 +84,13 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, setAsHomePage, contents);
-    newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());
-    newMenusRegistry.register(TYPE_ROOT, folderNewMenu.get());
+    // Currently new menu in folders has no sense (because we have buttons for
+    // the same contents)
+    // newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());
+    // newMenusRegistry.register(TYPE_ROOT, folderNewMenu.get());
+    newMenusRegistry.register(TYPE_WIKIPAGE,
+        (MenuDescriptor) wikipageNewMenu.get().withText(i18n.t("Add Gadget")));
+    newMenusRegistry.register(TYPE_UPLOADEDFILE, wikipageNewMenu.get());
   }
 
   @Override

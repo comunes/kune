@@ -23,6 +23,7 @@ import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
 import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
@@ -57,14 +58,15 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<ShowSubscribersOfListBtn> subscribersCount,
       final Provider<SetListOpenessMenuItem> listOpenessMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn, final ListsNewMenu listNewMenu,
-      final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
-      final Provider<DelListMenuItem> delFolderMenuItem,
+      final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
+      final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelListMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newListBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listNewMenu, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, postNewMenu, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribeBtn, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listOpenessMenuItem, containersNoRoot);
@@ -81,6 +83,8 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     newMenusRegistry.register(TYPE_LIST, listNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, listNewMenu.get());
+    newMenusRegistry.register(TYPE_POST,
+        (MenuDescriptor) postNewMenu.get().withText(i18n.t("Add Gadget")));
   }
 
   @Override

@@ -17,21 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.tasks.client;
+package cc.kune.tasks.client.actions;
 
-import cc.kune.common.client.ExtendedGinModule;
-import cc.kune.tasks.client.actions.TasksClientActions;
-import cc.kune.tasks.client.actions.TasksFolderNewMenu;
-import cc.kune.tasks.client.actions.TasksNewMenu;
+import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.actions.NewContainerBtn;
+import cc.kune.tasks.shared.TasksConstants;
 
-public class TasksGinModule extends ExtendedGinModule {
+import com.google.inject.Inject;
 
-  @Override
-  protected void configure() {
-    s(TasksFolderNewMenu.class);
-    s(TasksNewMenu.class);
-    s(TasksClientTool.class);
-    s(TasksClientActions.class);
+public class NewFolderBtn extends NewContainerBtn {
+
+  @Inject
+  public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
+      final NavResources res) {
+    super(i18n, action, res.taskfolderadd(), i18n.t("New task folder"), i18n.t("Create a new folder"),
+        i18n.t("New task folder"), TasksConstants.TYPE_FOLDER);
   }
 
 }

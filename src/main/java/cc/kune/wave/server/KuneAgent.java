@@ -57,7 +57,7 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
   // }
 
   @Override
-  public void addGadget(final WaveRef waveName, final String author, final String gadgetUrl) {
+  public void addGadget(final WaveRef waveName, final String author, final URL gadgetUrl) {
     // TODO Auto-generated method stub
 
   }

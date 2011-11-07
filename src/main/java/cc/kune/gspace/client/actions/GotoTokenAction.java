@@ -34,13 +34,15 @@ public class GotoTokenAction extends AbstractExtendedAction {
   private final StateManager stateManager;
   private final StateToken token;
 
-  public GotoTokenAction(final Object icon, final String name, final StateToken token,
-      final String style, final StateManager stateManager, final EventBus eventBus) {
+  public GotoTokenAction(final Object icon, final String name, final String tooltip,
+      final StateToken token, final String style, final StateManager stateManager,
+      final EventBus eventBus) {
     super();
     this.token = token;
     this.stateManager = stateManager;
     putValue(Action.NAME, name);
     putValue(Action.SMALL_ICON, icon);
+    putValue(Action.TOOLTIP, tooltip);
     stateManager.onSocialNetworkChanged(true, new SocialNetworkChangedHandler() {
       @Override
       public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {

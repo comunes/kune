@@ -82,7 +82,8 @@ public class PathToolbarUtils {
     final String title = pos == 0 ? i18n.t(name) : name;
     final ButtonDescriptor btn = new ButtonDescriptor(new GotoTokenAction(
         iconsRegistry.getContentTypeIcon(container.getTypeId()), TextUtils.ellipsis(title, 15),
-        container.getStateToken(), style, stateManager, eventBus));
+        i18n.t("Click to go here or drop contents here to move them"), container.getStateToken(), style,
+        stateManager, eventBus));
     if (title.length() > 15) {
       btn.withToolTip(title);
     }

@@ -23,6 +23,7 @@ import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.lists.client.actions.ListsClientActions;
 import cc.kune.lists.client.actions.ListsNewMenu;
 import cc.kune.lists.client.actions.OptionsListMenu;
+import cc.kune.lists.client.actions.PostNewMenu;
 
 public class ListsGinModule extends ExtendedGinModule {
 
@@ -30,6 +31,7 @@ public class ListsGinModule extends ExtendedGinModule {
   protected void configure() {
     s(OptionsListMenu.class);
     s(ListsNewMenu.class);
+    s(PostNewMenu.class);
     s(ListsClientTool.class);
     s(ListsClientActions.class);
   }

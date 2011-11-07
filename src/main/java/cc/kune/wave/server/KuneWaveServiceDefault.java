@@ -162,11 +162,11 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   @Override
-  public void addGadget(final WaveRef waveName, final String author, final String gadgetUrl) {
+  public void addGadget(final WaveRef waveName, final String author, final URL gadgetUrl) {
     // See DocumentModifyServiceTest
     final List<Element> elementsIn = Lists.newArrayListWithCapacity(1);
     final Map<String, String> properties = Maps.newHashMap();
-    properties.put(Gadget.URL, gadgetUrl);
+    properties.put(Gadget.URL, gadgetUrl.toString());
     properties.put(Gadget.AUTHOR, participantUtils.of(author).getAddress());
     final Gadget gadget = new Gadget(properties);
 
@@ -306,6 +306,17 @@ public class KuneWaveServiceDefault implements KuneWaveService {
       @Nonnull final ParticipantId... participantsArray) {
     return createWave(title, message, NO_WAVE_TO_COPY, gadgetUrl, participantsArray);
   }
+
+  // public void appendGadget(final WaveRef waveName, URL gadgetUrl, final
+  // String author, boolean toRoot) {
+  // final Wavelet wavelet = fetchWave(waveName, author);
+  // final OperationQueue opQueue = new OperationQueue();
+  // opQueue.
+  // final Gadget gadget = new Gadget(gadgetUrl.toString());
+  // Blip blip = toRoot? wavelet.getRootBlip():
+  // opQueue.appendBlipToWavelet(wavelet, author);
+  // blip.append(gadget);
+  // }
 
   @Override
   public void delParticipants(final WaveRef waveName, final String whoDel, final String... participants) {

@@ -32,7 +32,7 @@ public class NewTaskMenuItem extends NewContentMenuItem {
 
   @Inject
   public NewTaskMenuItem(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg, final TasksNewMenu tasksNewMenu) {
+      final NavResources res, final GlobalShortcutRegister shorcutReg, final TasksFolderNewMenu tasksNewMenu) {
     super(i18n, action, res.taskadd(), shorcutReg, i18n.t("New task"), i18n.t("Create a new task"),
         i18n.t("New task"), TasksConstants.TYPE_TASK, tasksNewMenu.get());
   }

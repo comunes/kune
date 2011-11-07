@@ -18,6 +18,7 @@ http://code.google.com/p/gwt-plupload/
 http://www.plupload.com/example_all_runtimes.php
 http://gxt-multiupload-demo.appspot.com/
 http://code.google.com/p/gxt-multi-upload/
+http://code.google.com/p/gwtupload/
 ** TODO workaround websocket issues
 *** compatibilities
 | jetty M2              | new wesocket | socketio  |

@@ -22,6 +22,7 @@ package cc.kune.docs.client;
 import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.docs.client.actions.DocsClientActions;
 import cc.kune.docs.client.actions.DocsFolderNewMenu;
+import cc.kune.docs.client.actions.DocsNewMenu;
 
 public class DocsGinModule extends ExtendedGinModule {
 
@@ -30,5 +31,6 @@ public class DocsGinModule extends ExtendedGinModule {
     s(DocsClientTool.class);
     s(DocsClientActions.class);
     s(DocsFolderNewMenu.class);
+    s(DocsNewMenu.class);
   }
 }

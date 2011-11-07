@@ -22,6 +22,7 @@ package cc.kune.core.client.actions.xml;
 import java.util.HashMap;
 import java.util.Map;
 
+import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
@@ -101,6 +102,27 @@ public class XMLActionsParser {
     }
   }
 
+  private Provider<GuiActionDescrip> createMenuItem(final XMLGuiActionDescriptor descrip,
+      final String origTypeId, final AbstractAction action) {
+    final String path = descrip.getPath();
+    final MenuDescriptor menu = newMenusRegistry.get(origTypeId);
+    assert menu != null;
+    final SubMenuDescriptor submenu = getSubMenu(menu, origTypeId, path);
+    final Provider<GuiActionDescrip> menuItemProvider = new Provider<GuiActionDescrip>() {
+      @Override
+      public GuiActionDescrip get() {
+        final MenuItemDescriptor menuItem = new MenuItemDescriptor(action);
+        // Warning: getDescription returns \n we have to replace this to
+        // spaces before use i18n in the tooltips (anyway tooltips are not
+        // working in menu items)
+        menuItem.withText(i18n.t(descrip.getDescName())).withToolTip(descrip.getDescription());
+        menuItem.setParent(TextUtils.notEmpty(path) ? submenu : menu, false);
+        return menuItem;
+      }
+    };
+    return menuItemProvider;
+  }
+
   private SubMenuDescriptor getSubMenu(final MenuDescriptor menu, final String typeId,
       final String parentS) {
     final String[] path = parentS.split(SEP);
@@ -144,27 +166,21 @@ public class XMLActionsParser {
         for (final XMLTypeId typeId : descrip.getTypeIds()) {
           final String origTypeId = typeId.getOrigTypeId();
           final String contentIntro = descrip.getNewContentTextIntro();
-          final NewGadgetAction action = new NewGadgetAction(contentService, contentViewer,
-              stateManager, session, i18n, descrip.getRol().getRolRequired(),
-              descrip.getRol().isAuthNeed(), extension.getExtName(), typeId.getDestTypeId(),
-              extension.getIconUrl(), descrip.getNewContentTitle(), TextUtils.empty(contentIntro) ? ""
-                  : contentIntro);
-          final String path = descrip.getPath();
-          final MenuDescriptor menu = newMenusRegistry.get(origTypeId);
-          assert menu != null;
-          final SubMenuDescriptor submenu = getSubMenu(menu, origTypeId, path);
-          final Provider<GuiActionDescrip> menuItemProvider = new Provider<GuiActionDescrip>() {
-            @Override
-            public GuiActionDescrip get() {
-              final MenuItemDescriptor menuItem = new MenuItemDescriptor(action);
-              // Warning: getDescription returns \n we have to replace this to
-              // spaces before use i18n in the tooltips (anyway tooltips are not
-              // working in menu items)
-              menuItem.withText(i18n.t(descrip.getDescName())).withToolTip(descrip.getDescription());
-              menuItem.setParent(TextUtils.notEmpty(path) ? submenu : menu, false);
-              return menuItem;
-            }
-          };
+          final String destTypeId = typeId.getDestTypeId();
+          AbstractAction action;
+          if (origTypeId.equals(destTypeId)) {
+            // We are adding a gadget in a doc (nor creating a gadget in a
+            // container)
+            action = new AddGadgetAction(contentService, contentViewer, stateManager, session, i18n,
+                descrip.getRol().getRolRequired(), descrip.getRol().isAuthNeed(),
+                extension.getExtName(), extension.getIconUrl());
+          } else {
+            action = new NewGadgetAction(contentService, contentViewer, stateManager, session, i18n,
+                descrip.getRol().getRolRequired(), descrip.getRol().isAuthNeed(),
+                extension.getExtName(), destTypeId, extension.getIconUrl(),
+                descrip.getNewContentTitle(), TextUtils.empty(contentIntro) ? "" : contentIntro);
+          }
+          final Provider<GuiActionDescrip> menuItemProvider = createMenuItem(descrip, origTypeId, action);
           actionRegistry.addAction(ActionGroups.TOOLBAR, menuItemProvider, origTypeId);
         }
       }

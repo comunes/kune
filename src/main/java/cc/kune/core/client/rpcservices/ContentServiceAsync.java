@@ -45,8 +45,11 @@ public interface ContentServiceAsync {
   void addFolder(String hash, StateToken parentToken, String title, String typeId,
       AsyncCallback<StateContainerDTO> callback);
 
-  void addGadget(String userHash, StateToken currentStateToken, String gadgetName, String typeId,
-      String title, String body, AsyncCallback<StateContentDTO> asyncCallback);
+  void addGadgetToContent(String userHash, StateToken currentStateToken, String gadgetName,
+      AsyncCallback<Void> asyncCallback);
+
+  void addNewContentWithGadget(String userHash, StateToken currentStateToken, String gadgetName,
+      String typeId, String title, String body, AsyncCallback<StateContentDTO> asyncCallback);
 
   void addParticipant(String userHash, StateToken token, String authorShortName,
       AsyncCallback<Void> asyncCallback) throws DefaultException;

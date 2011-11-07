@@ -228,6 +228,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+        <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -255,6 +261,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+        <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -282,6 +294,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -308,6 +326,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -337,6 +361,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -346,25 +376,6 @@
       <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
         used yet) -->
       <participants>ask</participants>
-    </guiActionDescriptor>
-
-    <guiActionDescriptor>
-      <type>wave-gadget</type>
-      <extensionName>massmob</extensionName>
-      <name>Add a meeting</name>
-      <path>New Gadget»Calendar</path>
-      <description>Call and speed-up of events as meeting, smartmobs,
-        flashmobs, protest demonstrations, etc.
-      </description>
-      <enabled>false</enabled>
-      <typeIds>
-        <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
-      </typeIds>
-      <rol>
-        <!-- Administrator, Editor, Viewer -->
-        <rolRequired>Editor</rolRequired>
-        <authNeed>true</authNeed>
-      </rol>
     </guiActionDescriptor>
 
     <guiActionDescriptor>
@@ -383,6 +394,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -405,15 +422,24 @@
         the web.
       </description>
       <new-content-title>New image</new-content-title>
-      <new-content-textintro>Edit this to insert, resize and annotate any
-        image from the web. The image can be annotated (double click on
-        it) by any participant of this document</new-content-textintro>
+      <new-content-textintro>Edit this to insert, resize and annotate
+        any
+        image from the web. The image can be annotated (double click
+        on
+        it) by any participant of this document
+      </new-content-textintro>
       <enabled>true</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -441,6 +467,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -468,6 +500,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -495,6 +533,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -524,6 +568,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -553,6 +603,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -579,6 +635,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -609,6 +671,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -637,6 +705,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -663,6 +737,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -691,6 +771,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->
@@ -722,6 +808,12 @@
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
         <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
         <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
       </typeIds>
       <rol>
         <!-- Administrator, Editor, Viewer -->

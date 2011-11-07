@@ -79,7 +79,7 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     doLogin();
     final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
-    manager.addGadget(waveletName, getSiteAdminShortName(), TEST_GADGET);
+    manager.addGadget(waveletName, getSiteAdminShortName(), new URL(TEST_GADGET));
   }
 
   private void addParticipant(final String whoAdds) throws IOException {

@@ -59,6 +59,12 @@ public class CreationServiceDefault implements CreationService {
   }
 
   @Override
+  public void addGadgetToContent(final User user, final Content content, final String gadgetName) {
+    final URL gadgetUrl = getGadgetUrl(gadgetName);
+    contentManager.addGadgetToContent(user, content, gadgetUrl);
+  }
+
+  @Override
   public Content createContent(final String title, final String body, final User user,
       final Container container, final String typeId) {
     final String toolName = container.getToolName();
@@ -88,17 +94,8 @@ public class CreationServiceDefault implements CreationService {
     final String toolName = container.getToolName();
     final ServerTool tool = tools.get(toolName);
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeIdChild);
-    final XMLWaveExtension extension = actions.getExtensions().get(gadgetname);
-    assert extension != null;
-    URL gadgetUrl = null;
-    final String urlS = extension.getGadgetUrl();
-    try {
-      gadgetUrl = new URL(urlS);
-    } catch (final MalformedURLException e) {
-      LOG.error("Parsing gadget URL: " + urlS, e);
-    }
     final Content content = contentManager.createContent(title, body, user, container, typeIdChild,
-        gadgetUrl);
+        getGadgetUrl(gadgetname));
     tool.onCreateContent(content, container);
     return content;
   }
@@ -108,6 +105,19 @@ public class CreationServiceDefault implements CreationService {
       final String typeRoot) {
     // FIXME Check that does not exist yet
     return containerManager.createRootFolder(group, name, rootName, typeRoot);
+  }
+
+  private URL getGadgetUrl(final String gadgetname) {
+    URL gadgetUrl = null;
+    final XMLWaveExtension extension = actions.getExtensions().get(gadgetname);
+    assert extension != null;
+    final String urlS = extension.getGadgetUrl();
+    try {
+      gadgetUrl = new URL(urlS);
+    } catch (final MalformedURLException e) {
+      LOG.error("Parsing gadget URL: " + urlS, e);
+    }
+    return gadgetUrl;
   }
 
   @Override

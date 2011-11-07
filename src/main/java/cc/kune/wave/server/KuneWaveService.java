@@ -33,7 +33,7 @@ public interface KuneWaveService {
   public static final String NO_TITLE = "";
   public static final URL WITHOUT_GADGET = null;
 
-  void addGadget(WaveRef waveName, String author, String gadgetUrl);
+  void addGadget(WaveRef waveName, String author, URL gadgetUrl);
 
   void addParticipants(WaveRef waveName, String author, String userWhoAdd, String... newParticipants);
 

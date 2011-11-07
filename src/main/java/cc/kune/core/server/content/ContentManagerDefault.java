@@ -103,6 +103,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.addAuthor(author);
   }
 
+  public void addGadgetToContent(final User user, final Content content, final URL gadgetUrl) {
+    kuneWaveManager.addGadget(KuneWaveUtils.getWaveRef(content),
+        participantUtils.of(user.getShortName()).toString(), gadgetUrl);
+  }
+
   @Override
   public void addParticipant(final User user, final Long contentId, final String participant) {
     final Content content = finder.getContent(contentId);

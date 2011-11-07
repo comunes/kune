@@ -46,8 +46,10 @@ public interface ContentService extends RemoteService {
   StateContainerDTO addFolder(String hash, StateToken parentToken, String typeId, String title)
       throws DefaultException;
 
-  StateContentDTO addGadget(String userHash, StateToken currentStateToken, String gadgetName,
-      String typeId, String title, String body);
+  void addGadgetToContent(String userHash, StateToken currentStateToken, String gadgetName);
+
+  StateContentDTO addNewContentWithGadget(String userHash, StateToken currentStateToken,
+      String gadgetName, String typeId, String title, String body);
 
   void addParticipant(String userHash, StateToken token, String participant) throws DefaultException;
 

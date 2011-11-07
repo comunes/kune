@@ -22,6 +22,7 @@ package cc.kune.wiki.client;
 import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.wiki.client.actions.WikiClientActions;
 import cc.kune.wiki.client.actions.WikiFolderNewMenu;
+import cc.kune.wiki.client.actions.WikiPageNewMenu;
 
 public class WikiGinModule extends ExtendedGinModule {
 
@@ -30,6 +31,7 @@ public class WikiGinModule extends ExtendedGinModule {
     s(WikiClientTool.class);
     s(WikiClientActions.class);
     s(WikiFolderNewMenu.class);
+    s(WikiPageNewMenu.class);
   }
 
 }

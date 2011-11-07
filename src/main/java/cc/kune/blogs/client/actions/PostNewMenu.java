@@ -17,21 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.tasks.client;
+package cc.kune.blogs.client.actions;
 
-import cc.kune.common.client.ExtendedGinModule;
-import cc.kune.tasks.client.actions.TasksClientActions;
-import cc.kune.tasks.client.actions.TasksFolderNewMenu;
-import cc.kune.tasks.client.actions.TasksNewMenu;
+import cc.kune.gspace.client.actions.AbstractNewMenu;
+import cc.kune.gspace.client.actions.NewMenuProvider;
 
-public class TasksGinModule extends ExtendedGinModule {
+import com.google.inject.Inject;
 
-  @Override
-  protected void configure() {
-    s(TasksFolderNewMenu.class);
-    s(TasksNewMenu.class);
-    s(TasksClientTool.class);
-    s(TasksClientActions.class);
+public class PostNewMenu extends NewMenuProvider {
+
+  @Inject
+  public PostNewMenu(final AbstractNewMenu menu) {
+    super(menu);
   }
 
 }

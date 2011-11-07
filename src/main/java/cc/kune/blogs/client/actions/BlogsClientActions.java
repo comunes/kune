@@ -24,6 +24,7 @@ import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
 import static cc.kune.blogs.shared.BlogsConstants.TYPE_ROOT;
 import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
@@ -59,13 +60,14 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshContentMenuItem> refresh,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn, final BlogsNewMenu blogNewMenu,
-      final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
-      final Provider<DelBlogMenuItem> delFolderMenuItem,
+      final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
+      final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelBlogMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, blogNewMenu, TYPE_BLOG);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, blogNewMenu, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, postNewMenu, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newBlogBtn, TYPE_ROOT);
@@ -78,6 +80,9 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     newMenusRegistry.register(TYPE_BLOG, blogNewMenu.get());
+    newMenusRegistry.register(TYPE_POST,
+        (MenuDescriptor) postNewMenu.get().withText(i18n.t("Add Gadget")));
+    newMenusRegistry.register(TYPE_UPLOADEDFILE, postNewMenu.get());
   }
 
   @Override
