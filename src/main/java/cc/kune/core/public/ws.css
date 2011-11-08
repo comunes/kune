@@ -1543,7 +1543,7 @@ div.jGrowl div.jGrowl-notification div.header {
 }
 
 div.jGrowl {
-  font-size: 18px;
+  font-size: 18px !important;
 }
 
 /* Dotted tab panel */

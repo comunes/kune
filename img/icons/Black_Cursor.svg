@@ -14,7 +14,7 @@
    width="20"
    height="20"
    id="svg2"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="Black_Cursor.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -31,9 +31,9 @@
      showgrid="false"
      inkscape:showpageshadow="false"
      showborder="false"
-     inkscape:zoom="1"
-     inkscape:cx="6.5104813"
-     inkscape:cy="10.563713"
+     inkscape:zoom="4.4875"
+     inkscape:cx="10"
+     inkscape:cy="10"
      inkscape:window-x="0"
      inkscape:window-y="947"
      inkscape:window-maximized="0"
@@ -110,7 +110,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -266,6 +266,102 @@
       <g
          transform="matrix(1.25,0,0,-1.25,385.16156,1124.4318)"
          id="g3078-1" />
+    </g>
+  </g>
+  <g
+     inkscape:export-ydpi="90"
+     inkscape:export-xdpi="90"
+     inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/cursor-orange.png"
+     id="g3039"
+     transform="matrix(-0.89284025,1.2053366,1.2053366,0.89284025,-1205.9051,-972.00694)"
+     style="fill:#ff6600">
+    <g
+       id="g3041"
+       transform="matrix(0.05527655,0,0,0.05527655,-22.484133,1026.5598)"
+       style="fill:#ff6600">
+      <g
+         id="g3043"
+         transform="matrix(1.25,0,0,-1.25,385.16156,1124.4318)"
+         style="fill:#ff6600" />
+      <g
+         id="g3045"
+         transform="matrix(1.25,0,0,-1.25,385.16156,1124.4318)"
+         style="fill:#ff6600" />
+      <g
+         id="g3047"
+         transform="matrix(1.25,0,0,-1.25,385.16156,1124.4318)"
+         style="fill:#ff6600" />
+      <g
+         id="g3049"
+         transform="matrix(1.25,0,0,-1.25,385.16156,1124.4318)"
+         style="fill:#ff6600">
+        <g
+           id="g3051"
+           transform="matrix(221,0,0,306,1,526)"
+           style="fill:#ff6600">
+          <image
+             id="image3053"
+             mask="url(#mask3036-4)"
+             transform="matrix(1,0,0,-1,0,1)"
+             height="1"
+             width="1"
+             xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN0AAAEyCAYAAAB+odX5AAAABHNCSVQICAgIfAhkiAAAA2dJREFUeJzt0zEBACAMwLCBf8/gohwkCvp0zcwZILNfB8BvTAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcRMBzHTQcx0EDMdxEwHMdNBzHQQMx3ETAcx00HMdBAzHcQu1KYDY6GxuR4AAAAASUVORK5CYII="
+             style="fill:#ff6600" />
+        </g>
+      </g>
+      <g
+         id="g3055"
+         transform="matrix(1.25,0,0,-1.25,385.16156,1124.4318)"
+         style="fill:#ff6600" />
+      <g
+         id="g3057"
+         clip-path="url(#clipPath3048-6)"
+         transform="matrix(1.25,0,0,-1.25,385.16156,1124.4318)"
+         style="fill:#ff6600">
+        <g
+           id="g3059"
+           style="fill:#ff6600" />
+        <g
+           id="g3061"
+           style="fill:#ff6600">
+          <g
+             id="g3063"
+             clip-path="url(#clipPath3054-7)"
+             style="fill:#ff6600">
+            <g
+               id="g3065"
+               style="fill:#ff6600" />
+            <g
+               id="g3067"
+               style="fill:#ff6600">
+              <g
+                 id="g3069"
+                 clip-path="url(#clipPath3058-3)"
+                 style="fill:#ff6600">
+                <path
+                   inkscape:connector-curvature="0"
+                   style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                   id="path3071"
+                   d="m 41.14001,791.145 0,-187.8 42.2,40.8 40.99999,-69.2 22.8,0 0.4,19 -36.2,68 c 0,0 16.8,0 26.4,0 11.2667,0 36.2,0 36.2,0 l -132.79999,129.2 z" />
+                <g
+                   id="g3073"
+                   transform="matrix(1,0,0,-1,0.1400146,841.945)"
+                   style="fill:#ff6600">
+                  <path
+                     inkscape:connector-curvature="0"
+                     style="fill:#ff6600;stroke:#ffffff;stroke-width:12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+                     id="path3075"
+                     d="M 41,50.79999 41,238.6 l 42.2,-40.8 41,69.2 22.8,0 0.4,-19 -36.2,-68 c 0,0 16.8,0 26.4,0 11.2667,0 36.2,0 36.2,0 L 41,50.79999 z" />
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g
+         id="g3077"
+         transform="matrix(1.25,0,0,-1.25,385.16156,1124.4318)"
+         style="fill:#ff6600" />
     </g>
   </g>
 </svg>

@@ -80,13 +80,17 @@ public class ChatPageObject extends PageObject {
   }
 
   public void openChat(final XmppURI uri) {
+    hightlight(openChat);
     openChat.click();
     jid.sendKeys(uri.toString());
+    hightlight(addToRoster);
     addToRoster.click();
+    hightlight(openChatBtn);
     openChatBtn.click();
   }
 
   public void show() {
+    hightlight(chatIcon);
     chatIcon.click();
   }
 

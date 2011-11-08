@@ -29,6 +29,5 @@ public abstract class PageObjectModule extends AbstractModule {
       final ElementLocatorFactory locator) {
     bind(componentType).toInstance(object);
     PageFactory.initElements(locator, object);
-
   }
 }

@@ -68,8 +68,8 @@ public class KuneSeleniumDefaults {
 
   public KuneSeleniumDefaults() {
     // baseUrl = "http://kune.beta.iepala.es/?locale=en#";
-    // baseUrl = "http://beta.eurosur.org/#";
     baseUrl = "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
+    // baseUrl = "http://beta.eurosur.org/#";
     injector = INJECTOR;
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
@@ -95,6 +95,9 @@ public class KuneSeleniumDefaults {
     LOG.info("Going home");
     home();
     resize();
+    SeleniumUtils.initCursor(webdriver);
+    SeleniumUtils.showCursor(webdriver);
+    login.getAnonMsg().click();
   }
 
   public void close() {
@@ -147,7 +150,6 @@ public class KuneSeleniumDefaults {
   public void home() {
     assert baseUrl != null;
     webdriver.get(baseUrl);
-    login.getAnonMsg().click();
   }
 
   public void open(final String url) {
@@ -161,6 +163,10 @@ public class KuneSeleniumDefaults {
     // 806,707
     final JavascriptExecutor js = (JavascriptExecutor) webdriver;
     js.executeScript("window.resizeTo(806,707); window.moveTo(0,0);");
+  }
+
+  public void showCursor(final int x, final int y) {
+    SeleniumUtils.showCursor(webdriver, x, y);
   }
 
   public void showMsg(final String msg) {
@@ -181,7 +187,7 @@ public class KuneSeleniumDefaults {
 
   public void showTitleSlide(final String title, final String description, final String token) {
     gotoToken(TokenUtils.subtitle(title, description, token));
-    sleep(3000);
+    sleep(4000);
     webdriver.findElement(By.id(SeleniumConstants.GWTDEV + SubtitlesWidget.SUBTITLE_MANAGER_ID)).click();
   }
 
