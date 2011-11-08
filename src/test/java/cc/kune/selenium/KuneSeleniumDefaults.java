@@ -46,6 +46,7 @@ import cc.kune.selenium.general.SpacesPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
 import cc.kune.selenium.tools.SeleniumConstants;
+import cc.kune.selenium.userspace.UserSpacePageObject;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -55,7 +56,7 @@ public class KuneSeleniumDefaults {
   public static final Injector INJECTOR = Guice.createInjector(new SeleniumModule());
 
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
-  public static boolean mustCloseFinally = false;
+  public static boolean mustCloseFinally = true;
   private final String baseUrl;
   protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
@@ -64,13 +65,13 @@ public class KuneSeleniumDefaults {
   private final ResourceBundle messages;
   protected RegisterPageObject register;
   protected final SpacesPageObject spaces;
+  protected UserSpacePageObject userSpace;
   private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
     // baseUrl = "http://kune.beta.iepala.es/?locale=en#";
-    // baseUrl =
-    // "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
-    baseUrl = "http://beta.eurosur.org/#";
+    baseUrl = "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
+    // baseUrl = "http://beta.eurosur.org/#";
     injector = INJECTOR;
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
@@ -78,6 +79,7 @@ public class KuneSeleniumDefaults {
     entityHeader = injector.getInstance(EntityHeaderPageObject.class);
     spaces = injector.getInstance(SpacesPageObject.class);
     chat = injector.getInstance(ChatPageObject.class);
+    userSpace = injector.getInstance(UserSpacePageObject.class);
     messages = injector.getInstance(ResourceBundle.class);
     final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     PageFactory.initElements(locator, login);
@@ -85,6 +87,7 @@ public class KuneSeleniumDefaults {
     PageFactory.initElements(locator, entityHeader);
     PageFactory.initElements(locator, spaces);
     PageFactory.initElements(locator, chat);
+    PageFactory.initElements(locator, userSpace);
   }
 
   @BeforeMethod

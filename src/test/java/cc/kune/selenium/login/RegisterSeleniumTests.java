@@ -23,6 +23,7 @@ import org.testng.annotations.Test;
 
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.selenium.KuneSeleniumTest;
+import cc.kune.selenium.SeleniumUtils;
 import cc.kune.selenium.tools.SeleniumConstants;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
@@ -32,6 +33,7 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
   @Test(dataProvider = "correctregister")
   public void basicRegister(final String shortName, final String longName, final String passwd,
       final String email) {
+    SeleniumUtils.fastSpeed(false);
     // 15 chars, the limit, so we don't use shortName
     final String prefix = getTempString();
     showTitleSlide(t("User registration"), t("to get full access to this site tools/contents"));
@@ -46,6 +48,13 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
     showTooltip(spaces.userBtn());
     spaces.userBtn().click();
+    showMsg(t("You can see this like an advanced email system"));
+    userSpace.getFirstWave().click();
+    sleep(2000);
+    userSpace.getNewWave().click();
+    showMsg(t("You can compose personal messages"));
+    showMsg(t("But aslo create contents to publish later"));
+    sleep(3000);
 
     // chat
     showTitleSlide(t("Chat with your buddies"), t("compatible with gmail and similars"),

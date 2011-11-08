@@ -42,7 +42,6 @@ public class LoginPageObject extends AbstractLoginObject {
   private WebElement user;
 
   public LoginPageObject() {
-    // i18n = new I18nHelper(LoginMessages.class);
   }
 
   public void createOne() {

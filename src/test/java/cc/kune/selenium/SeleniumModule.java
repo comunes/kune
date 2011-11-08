@@ -47,8 +47,8 @@ public class SeleniumModule extends PageObjectModule {
 
   @Override
   protected void configure() {
-    final RemoteWebDriver driver = createChromeDriver();
-    // final WebDriver driver = creatFirefoxDriver();
+    // final RemoteWebDriver driver = createChromeDriver();
+    final WebDriver driver = creatFirefoxDriver();
     final EventFiringWebDriver wrap = new EventFiringWebDriver(driver);
     wrap.register(new CustomWebDriverEventListener());
 

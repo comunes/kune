@@ -25,6 +25,17 @@ import cc.kune.selenium.KuneSeleniumTest;
 
 public class LoginSeleniumTests extends KuneSeleniumTest {
 
+  @Test(dataProvider = "correctlogin")
+  public void basicSignIn(final String user, final String passwd) {
+    login.assertIsDisconnected();
+    showTitleSlide("User sign in", "to get full access to this site");
+    login.signIn(user, passwd);
+    login.assertIsConnectedAs(user);
+    // userSpace.getWavePanel().click();
+    login.logout();
+    login.assertIsDisconnected();
+  }
+
   @Test
   public void high() {
     login.high();
@@ -38,16 +49,6 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
     login.logout();
 
     login.assertIsDisconnected();
-    login.signIn(user, passwd);
-    login.assertIsConnectedAs(user);
-    login.logout();
-    login.assertIsDisconnected();
-  }
-
-  @Test(dataProvider = "correctlogin")
-  public void basicSignIn(final String user, final String passwd) {
-    login.assertIsDisconnected();
-    showTitleSlide("User sign in", "to get full access to this site");
     login.signIn(user, passwd);
     login.assertIsConnectedAs(user);
     login.logout();

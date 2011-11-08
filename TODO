@@ -19,6 +19,8 @@ http://www.plupload.com/example_all_runtimes.php
 http://gxt-multiupload-demo.appspot.com/
 http://code.google.com/p/gxt-multi-upload/
 http://code.google.com/p/gwtupload/
+** TODO improve session timeouts
+http://stackoverflow.com/questions/1406287/jspservlethow-do-i-set-session-timeout-of-greater-than-30-minutes
 ** TODO workaround websocket issues
 *** compatibilities
 | jetty M2              | new wesocket | socketio  |

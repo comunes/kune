@@ -13,22 +13,28 @@ import cc.kune.common.client.utils.TextUtils;
 
 public class SeleniumUtils {
 
+  private static boolean fastSpeed = true;
   private static final Log LOG = LogFactory.getLog(SeleniumUtils.class);
+
+  public static void fastSpeed(final boolean fastSpeed) {
+    SeleniumUtils.fastSpeed = fastSpeed;
+  }
 
   public static void hideCursor(final WebDriver webdriver) {
     jsExec(webdriver).executeScript("khideCursor();");
   }
 
   public static void hightlight(final WebElement element, final WebDriver webdriver) {
-    showCursor(webdriver, element);
+    SeleniumUtils.showCursor(webdriver, element);
     sleep(300);
-    final String script = "window.jQuery('#" + element.getAttribute("id") + "').addClass('k-outline');"
-        + "setTimeout('window.jQuery(\"#" + element.getAttribute("id")
-        + "\").removeClass(\"k-outline\")', 1200);";
-    // Antes 700
-    // LOG.info("High: " + script);
-    jsExec(webdriver).executeScript(script);
-
+    if (TextUtils.notEmpty(element.getAttribute("id"))) {
+      final String script = "window.jQuery('#" + element.getAttribute("id")
+          + "').addClass('k-outline');" + "setTimeout('window.jQuery(\"#" + element.getAttribute("id")
+          + "\").removeClass(\"k-outline\")', 1200);";
+      // Antes 700
+      // LOG.info("High: " + script);
+      jsExec(webdriver).executeScript(script);
+    }
   }
 
   public static void initCursor(final WebDriver webdriver) {
@@ -50,7 +56,7 @@ public class SeleniumUtils {
   }
 
   public static void showCursor(final WebDriver webdriver, final int x, final int y) {
-    LOG.info("Mover cursor to x: " + x + ", y: " + y);
+    // LOG.info("Mover cursor to x: " + x + ", y: " + y);
     jsExec(webdriver).executeScript("kmove(" + x + "," + y + ");");
   }
 
@@ -74,7 +80,7 @@ public class SeleniumUtils {
 
   public static void sleep(final int milliseconds) {
     try {
-      Thread.sleep(milliseconds);
+      Thread.sleep(fastSpeed ? milliseconds / 10 : milliseconds);
     } catch (final InterruptedException e) {
       Assert.fail("Exception in sleep method", e);
     }

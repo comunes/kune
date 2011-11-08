@@ -198,7 +198,7 @@ public abstract class PageObject {
 
   public void waitFor(final WebElement element) {
     final String id = element.getAttribute("id");
-    LOG.info("WAIT FOR: " + id);
+    // LOG.info("WAIT FOR: " + id);
     waitFor(id, new Runnable() {
       @Override
       public void run() {
@@ -208,19 +208,19 @@ public abstract class PageObject {
   }
 
   protected void waitFor(final WebElement element, final String text) {
-    LOG.info("WAIT FOR: " + text);
+    // LOG.info("WAIT FOR: " + text);
     waitFor(text, new Runnable() {
       @Override
       public void run() {
         final String elText = element.getText();
-        LOG.info("Element text: " + elText);
+        // LOG.info("Element text: " + elText);
         Assert.assertTrue(elText.contains(text));
       }
     });
   }
 
   protected void waitForId(final String id) {
-    LOG.info("WAIT FOR: " + id);
+    // LOG.info("WAIT FOR: " + id);
     waitFor(id, new Runnable() {
       @Override
       public void run() {
@@ -230,12 +230,12 @@ public abstract class PageObject {
   }
 
   protected void waitForValue(final WebElement element, final String text) {
-    LOG.info("WAIT FOR: " + text);
+    // LOG.info("WAIT FOR: " + text);
     waitFor(text, new Runnable() {
       @Override
       public void run() {
         final String elValue = element.getText();
-        LOG.info("Element value: " + elValue);
+        // LOG.info("Element value: " + elValue);
         Assert.assertTrue(elValue.contains(text));
       }
     });
