@@ -2,7 +2,7 @@
 WIDTH=806
 HEIGHT=707
 # TODO: calculate better this to allow other windows sizes
-RWIDTH=805
+RWIDTH=802
 RHEIGHT=649
 #SEARCH=Eurosur
 #SEARCH=Jane

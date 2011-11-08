@@ -48,12 +48,12 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
     showTooltip(spaces.userBtn());
     spaces.userBtn().click();
-    showMsg(t("You can see this like an advanced email system"));
+    showMsg(t("You can see this like an advanced email system..."));
     userSpace.getFirstWave().click();
     sleep(2000);
     userSpace.getNewWave().click();
-    showMsg(t("You can compose personal messages"));
-    showMsg(t("But aslo create contents to publish later"));
+    showMsg(t("where you can compose personal messages..."));
+    showMsg(t("but also create contents to publish later"));
     sleep(3000);
 
     // chat
