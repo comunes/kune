@@ -68,8 +68,9 @@ public class KuneSeleniumDefaults {
 
   public KuneSeleniumDefaults() {
     // baseUrl = "http://kune.beta.iepala.es/?locale=en#";
-    baseUrl = "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
-    // baseUrl = "http://beta.eurosur.org/#";
+    // baseUrl =
+    // "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
+    baseUrl = "http://beta.eurosur.org/#";
     injector = INJECTOR;
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
