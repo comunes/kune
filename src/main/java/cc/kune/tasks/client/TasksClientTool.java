@@ -38,7 +38,11 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t(ROOT_NAME), i18n.t(""), toolSelector, cntCapRegistry, i18n, navResources);
+    super(
+        NAME,
+        i18n.t(ROOT_NAME),
+        i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
+        toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_TASK);

@@ -36,7 +36,8 @@ public class EventsClientTool extends FoldableAbstractClientTool {
   @Inject
   public EventsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t(ROOT_NAME), i18n.t(""), toolSelector, cntCapRegistry, i18n, navResources);
+    super(NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"), toolSelector,
+        cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_MEETING);

@@ -38,8 +38,11 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
   @Inject
   public BlogsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t(BlogsConstants.ROOT_NAME), i18n.t(""), toolSelector, cntCapRegistry, i18n,
-        navResources);
+    super(
+        NAME,
+        i18n.t(BlogsConstants.ROOT_NAME),
+        i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
+        toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);

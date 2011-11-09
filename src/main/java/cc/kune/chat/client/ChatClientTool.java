@@ -40,7 +40,11 @@ public class ChatClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final ChatResources res) {
     // FIXME: change this in ChatConstants and in db via migration
-    super(NAME, i18n.t("chatrooms"), i18n.t(""), toolSelector, cntCapRegistry, i18n, navResources);
+    super(
+        NAME,
+        i18n.t("chatrooms"),
+        i18n.t("A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from this site or other sites (compatible with gmail chat)"),
+        toolSelector, cntCapRegistry, i18n, navResources);
     this.res = res;
     registerIcons();
   }
