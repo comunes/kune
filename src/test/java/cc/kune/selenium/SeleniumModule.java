@@ -36,9 +36,9 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import cc.kune.selenium.chat.ChatPageObject;
 import cc.kune.selenium.general.EntityHeaderPageObject;
-import cc.kune.selenium.general.SpacesPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
+import cc.kune.selenium.spaces.SpacesPageObject;
 import cc.kune.selenium.tools.SeleniumConstants;
 
 import com.google.inject.Singleton;

@@ -19,11 +19,12 @@
  */
 package cc.kune.core.client.i18n;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.MissingResourceException;
+import java.util.Set;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.utils.Location;
@@ -32,6 +33,8 @@ import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.UserSignInEvent;
+import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -47,7 +50,7 @@ import com.google.inject.Inject;
 public class I18nUITranslationService extends I18nTranslationService {
   private I18nLanguageDTO currentLang;
   private String currentLanguageCode;
-  private final ArrayList<Pair<String, String>> earlyTexts;
+  private final Set<Pair<String, String>> earlyTexts;
   private final I18nServiceAsync i18nService;
   private final KuneConstants kuneConstants;
   private HashMap<String, String> lexicon;
@@ -67,7 +70,7 @@ public class I18nUITranslationService extends I18nTranslationService {
         + LocaleInfo.getCurrentLocale().isRTL() + ", translated langs: "
         + Arrays.toString(LocaleInfo.getAvailableLocaleNames()));
 
-    earlyTexts = new ArrayList<Pair<String, String>>();
+    earlyTexts = new HashSet<Pair<String, String>>();
 
     i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
       @Override
@@ -92,14 +95,18 @@ public class I18nUITranslationService extends I18nTranslationService {
             session.setCurrentLanguage(currentLang);
             Log.info("Workspace adaptation to language: " + currentLang.getEnglishName());
             eventBus.fireEvent(new I18nReadyEvent());
+          }
+        });
+        session.onUserSignIn(true, new UserSignInHandler() {
+          @Override
+          public void onUserSignIn(final UserSignInEvent event) {
             Scheduler.get().scheduleIncremental(new RepeatingCommand() {
-
               @Override
               public boolean execute() {
                 if (!earlyTexts.isEmpty()) {
-                  final Pair<String, String> pair = earlyTexts.get(0);
+                  final Pair<String, String> pair = earlyTexts.iterator().next();
                   save(pair.getLeft(), pair.getRight());
-                  earlyTexts.remove(0);
+                  earlyTexts.remove(pair);
                 }
                 return !earlyTexts.isEmpty();
               }
@@ -243,6 +250,7 @@ public class I18nUITranslationService extends I18nTranslationService {
       if (lexicon == null) {
         Log.warn("i18n not initialized: " + text);
         earlyTexts.add(Pair.create(text, noteForTranslators));
+        Log.warn("i18n pending translations: " + earlyTexts.size());
         return text;
       }
       String translation = lexicon.get(encodeText);
@@ -255,8 +263,9 @@ public class I18nUITranslationService extends I18nTranslationService {
         // Not translated and not in db, make a petition for translation
         if (session.isLogged()) {
           save(text, noteForTranslators);
-
           lexicon.put(encodeText, UNTRANSLATED_VALUE);
+        } else {
+          earlyTexts.add(Pair.create(text, noteForTranslators));
         }
         translation = encodeText;
       }

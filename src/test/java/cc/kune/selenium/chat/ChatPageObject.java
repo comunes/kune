@@ -37,12 +37,18 @@ public class ChatPageObject extends PageObject {
   private WebElement addToRoster;
   @FindBy(id = SeleniumConstants.GWTDEV + ChatClient.CHAT_CLIENT_ICON_ID)
   private WebElement chatIcon;
+  @FindBy(xpath = "//div[14]/div/div/div/div/div/table/tbody/tr/td[2]/div")
+  private WebElement closeChat;
   @FindBy(id = SeleniumConstants.GWTDEV + "OpenChatWidget-jabberId")
   private WebElement jid;
   @FindBy(id = SeleniumConstants.GWTDEV + "HablarOpenChat-openAction")
   private WebElement openChat;
   @FindBy(id = SeleniumConstants.GWTDEV + "OpenChatWidget-open")
   private WebElement openChatBtn;
+
+  public void close() {
+    closeChat.click();
+  }
 
   // Duplicate in Hablar (we need a common PageObject)
   public WebElement getHeader(final String uri) {
@@ -80,17 +86,16 @@ public class ChatPageObject extends PageObject {
   }
 
   public void openChat(final XmppURI uri) {
-    hightlight(openChat);
+    // hightlight(openChat);
     openChat.click();
     jid.sendKeys(uri.toString());
-    hightlight(addToRoster);
+    // hightlight(addToRoster);
     addToRoster.click();
-    hightlight(openChatBtn);
+    // hightlight(openChatBtn);
     openChatBtn.click();
   }
 
   public void show() {
-    hightlight(chatIcon);
     chatIcon.click();
   }
 

@@ -42,11 +42,13 @@ import cc.kune.core.client.sub.SubtitlesWidget;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.selenium.chat.ChatPageObject;
 import cc.kune.selenium.general.EntityHeaderPageObject;
-import cc.kune.selenium.general.SpacesPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
+import cc.kune.selenium.spaces.GroupSpacePageObject;
+import cc.kune.selenium.spaces.HomeSpacePageObject;
+import cc.kune.selenium.spaces.SpacesPageObject;
+import cc.kune.selenium.spaces.UserSpacePageObject;
 import cc.kune.selenium.tools.SeleniumConstants;
-import cc.kune.selenium.userspace.UserSpacePageObject;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -60,6 +62,8 @@ public class KuneSeleniumDefaults {
   private final String baseUrl;
   protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
+  protected final GroupSpacePageObject groupSpace;
+  protected final HomeSpacePageObject homeSpace;
   private final Injector injector;
   protected LoginPageObject login;
   private final ResourceBundle messages;
@@ -80,7 +84,9 @@ public class KuneSeleniumDefaults {
     entityHeader = injector.getInstance(EntityHeaderPageObject.class);
     spaces = injector.getInstance(SpacesPageObject.class);
     chat = injector.getInstance(ChatPageObject.class);
+    homeSpace = injector.getInstance(HomeSpacePageObject.class);
     userSpace = injector.getInstance(UserSpacePageObject.class);
+    groupSpace = injector.getInstance(GroupSpacePageObject.class);
     messages = injector.getInstance(ResourceBundle.class);
     final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     PageFactory.initElements(locator, login);
@@ -88,7 +94,9 @@ public class KuneSeleniumDefaults {
     PageFactory.initElements(locator, entityHeader);
     PageFactory.initElements(locator, spaces);
     PageFactory.initElements(locator, chat);
+    PageFactory.initElements(locator, homeSpace);
     PageFactory.initElements(locator, userSpace);
+    PageFactory.initElements(locator, groupSpace);
   }
 
   @BeforeMethod
@@ -101,7 +109,17 @@ public class KuneSeleniumDefaults {
     resize();
     SeleniumUtils.initCursor(webdriver);
     SeleniumUtils.showCursor(webdriver);
+    SeleniumUtils.showCursor(webdriver, login.getAnonMsg());
+    sleep(1000);
     login.getAnonMsg().click();
+  }
+
+  public void browserBack() {
+    webdriver.navigate().back();
+  }
+
+  public void browserForward() {
+    webdriver.navigate().forward();
   }
 
   public void close() {
@@ -125,7 +143,7 @@ public class KuneSeleniumDefaults {
   @DataProvider(name = "correctregister")
   public Object[][] createCorrectRegister() {
     // The default correct user/password used in tests
-    return new Object[][] { { "jane", "Jane Doe", SeleniumConstants.USER_PASSWD, "jane@example.com" } };
+    return new Object[][] { { "jane", "Jane Doe", SeleniumConstants.USER_PASSWD, "jane@example.org" } };
   }
 
   @DataProvider(name = "incorrectlogin")

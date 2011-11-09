@@ -19,6 +19,7 @@
  */
 package cc.kune.selenium.login;
 
+import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
 import cc.kune.core.client.state.SiteTokens;
@@ -31,18 +32,30 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 public class RegisterSeleniumTests extends KuneSeleniumTest {
 
   @Test(dataProvider = "correctregister")
-  public void basicRegister(final String shortName, final String longName, final String passwd,
-      final String email) {
+  public void basicRegister(final String shortNameUntrans, final String longNameUntrans,
+      final String passwd, final String emailUntrans) {
+    final String shortName = t(shortNameUntrans);
+    final String longName = t(longNameUntrans);
+    final String email = t(emailUntrans);
     SeleniumUtils.fastSpeed(false);
     // 15 chars, the limit, so we don't use shortName
     final String prefix = getTempString();
     showTitleSlide(t("User registration"), t("to get full access to this site tools/contents"));
     login.createOne();
     register.fillRegisterForm(shortName + prefix, longName + prefix, passwd, prefix + email, false);
-    login.assertIsConnectedAs(prefix);
     sleep(1000);
+    login.assertIsConnectedAs(prefix);
     entityHeader.waitForEntityTitle(longName + prefix);
     register.getWelcomeMsg().click();
+    // home space
+    showTitleSlide(t("Home space (your welcome page)"),
+        t("Here you can see a summary of your activity in this site"));
+    spaces.homeBtn().click();
+    sleep(2000);
+    homeSpace.getSndStats().click();
+    sleep(2000);
+    homeSpace.getTrdStats().click();
+    sleep(2000);
 
     // user space
     showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
@@ -54,12 +67,20 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     userSpace.getNewWave().click();
     showMsg(t("where you can compose personal messages..."));
     showMsg(t("but also create contents to publish later"));
+    userSpace.rootBlipText().sendKeys(t("Congratulations for your report\n\n"));
+    sleep(1000);
+    userSpace.getCursive().click();
+    userSpace.rootBlipText().sendKeys(
+        t("Hi there, Just to say that I like") + t("a lot your last report\n\n"));
+    sleep(1000);
+    userSpace.getCursive().click();
+    userSpace.rootBlipText().sendKeys(t("Best\n\nJane"));
     sleep(3000);
-
+    userSpace.getRootEdit().click();
     // chat
     showTitleSlide(t("Chat with your buddies"), t("compatible with gmail and similars"),
         SiteTokens.WAVEINBOX);
-    showTooltip(chat.icon());
+    // showTooltip(chat.icon());
     chat.show();
     sleep(3000);
 
@@ -74,7 +95,29 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     chat.getTalkBox(jids).sendKeys(t("I'm just testing"));
     chat.getSend(jids).click();
 
+    showMsg(t("And you can chat event while going back/forward with your browser"));
+    spaces.homeBtn().click();
+    sleep(2000);
+    chat.getTalkBox(jids).sendKeys(t("la la la"));
+    chat.getSend(jids).click();
+    showMsg(t("Browser history back"));
+    browserBack();
+    sleep(2000);
+    chat.getTalkBox(jids).sendKeys(t("I can continue chat smoothly ;)"));
+    chat.getSend(jids).click();
+    sleep(2000);
+    showMsg(t("Browser history forward"));
+    browserForward();
+    chat.getTalkBox(jids).sendKeys(t("goodbye!"));
+    chat.getSend(jids).click();
+    sleep(1000);
+    chat.getTalkBox(jids).sendKeys(Keys.chord(Keys.ALT, "C"));
+    // chat.close();
+
     login.logout();
+
+    showTitleSlide(t("Thank you"), t("and yes, feedback welcome"));
+
   }
 
 }

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.selenium.userspace;
+package cc.kune.selenium.spaces;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -27,14 +27,39 @@ import cc.kune.selenium.PageObject;
 
 public class UserSpacePageObject extends PageObject {
 
+  @FindBy(xpath = "//div[2]/div/div[2]/div[3]/div[4]")
+  private WebElement cursive;
+
+  @FindBy(xpath = "//div[3]/div/div/div[2]/div/div/div[3]")
+  private WebElement firstReplyTitlebar;
+
   @FindBy(xpath = "//div[3]/div/div/span[2]")
   private WebElement firstWave;
+
   @FindBy(xpath = "//div[2]/div[2]/div[4]")
   private WebElement newWave;
-  @FindBy(xpath = "")
-  private WebElement wavePanel;
+
+  @FindBy(xpath = "//div[10]/div/div/div/div[3]/div/div[2]")
+  private WebElement replyRootBlip;
+
+  @FindBy(xpath = "//div[10]/div/div/div/div[3]/div/div/div/div/div/div[3]")
+  private WebElement rootBlip;
+
+  @FindBy(xpath = "//ul/div")
+  private WebElement rootBlipText;
+  @FindBy(xpath = "//div[3]/div/div/div/div/div/div/span")
+  // this works but with click coords 5,5
+  private WebElement rootEdit;
 
   public UserSpacePageObject() {
+  }
+
+  public WebElement getCursive() {
+    return cursive;
+  }
+
+  public WebElement getFirstReplyTitlebar() {
+    return firstReplyTitlebar;
   }
 
   public WebElement getFirstWave() {
@@ -45,7 +70,24 @@ public class UserSpacePageObject extends PageObject {
     return findElement(By.xpath("//div[2]/div[2]/div[4]"));
   }
 
-  public WebElement getWavePanel() {
-    return wavePanel;
+  public WebElement getReplyRootBlip() {
+    return replyRootBlip;
   }
+
+  public WebElement getRootBlip() {
+    return rootBlip;
+  }
+
+  public WebElement getRootBlipText() {
+    return rootBlipText;
+  }
+
+  public WebElement getRootEdit() {
+    return rootEdit;
+  }
+
+  public WebElement rootBlipText() {
+    return rootBlipText;
+  }
+
 }
