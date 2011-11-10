@@ -27,8 +27,8 @@ function ksetCursor(x, y) {
 }
 
 function ksetCursorPos(x, y) {
-  document.getElementById('kcursor').style.top = x + 'px';
-  document.getElementById('kcursor').style.left = y + 'px';
+  document.getElementById('kcursor').style.left = x + 'px';
+  document.getElementById('kcursor').style.top = y + 'px';
 }
 
 function khideCursor() {
