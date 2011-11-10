@@ -171,7 +171,7 @@ public class XMLActionsParser {
           if (origTypeId.equals(destTypeId)) {
             // We are adding a gadget in a doc (nor creating a gadget in a
             // container)
-            action = new AddGadgetAction(contentService, contentViewer, stateManager, session, i18n,
+            action = new AddGadgetAction(contentService, session,
                 descrip.getRol().getRolRequired(), descrip.getRol().isAuthNeed(),
                 extension.getExtName(), extension.getIconUrl());
           } else {

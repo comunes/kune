@@ -279,85 +279,14 @@ body {
 <![endif]-->
 </head>
 <body>
+    <!-- // This is only used for selenium tests (comment/remove in production) -->
     <div id="kcursor"
         style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
         <img src="/others/cursor-orange.png">
     </div>
-    <script type="text/javascript">
-    <!-- // This is only used for tests (comment/remove in production)
-      var newx;
-      var newy;
-      var k_cur_x;
-      var k_cur_y;
-      var xGreat;
-      var x_inc;
-      var y_inc;
-      var diff_x;
-      var diff_y;
-      function kmove(x, y) {
-        newx = x - 18 + 20;
-        newy = y - 7 + 17;
-        kmoveit();
-      }
+    <script src="others/js/fake-selenium-pointer.js"></script>
+    <!-- // End : This is only used for selenium tests (comment/remove in production) -->
 
-      function recheck() {
-        if (newx >= k_cur_x) {
-          x_inc = 1;
-        } else {
-          x_inc = -1;
-        }
-        if (newy >= k_cur_y) {
-          y_inc = 1;
-        } else {
-          y_inc = -1;
-        }
-        diff_x = newx - k_cur_x * x_inc;
-        diff_y = newy - k_cur_y * y_inc;
-        xGreat = diff_x > diff_y;
-      }
-
-      function kmoveit() {
-        recheck();
-        if (k_cur_x != newx)
-          if (xGreat) {
-            k_cur_x = k_cur_x + 3 * x_inc;
-          } else {
-            k_cur_x = Math.round(k_cur_y * newx / newy);
-          }
-        if (k_cur_y != newy)
-          if (xGreat) {
-            k_cur_y = Math.round(k_cur_x * newy / newx);
-          } else {
-            k_cur_y = k_cur_y + 3 * y_inc;
-          }
-
-        ksetCursorPos(k_cur_x, k_cur_y);
-
-        if ((diff_x > 3) || (diff_y > 3)) {
-          window.setTimeout('kmoveit()', 1);
-        }
-      }
-
-      function ksetCursorPos(x, y) {
-        document.getElementById('kcursor').style.top = k_cur_y + 'px';
-        document.getElementById('kcursor').style.left = k_cur_x + 'px';
-      }
-      function ksetCursor(x, y) {
-        k_cur_x = x;
-        k_cur_y = y;
-        ksetCursorPos(x, y);
-      }
-
-      function khideCursor() {
-        document.getElementById('kcursor').style.visibility = 'hidden';
-      }
-
-      function kshowCursor() {
-        document.getElementById('kcursor').style.visibility = 'visible';
-      }
-      ksetCursor(0, 0);
-    //-->
-    </script>
     <!-- Banner for wave errors -->
     <div class="banner" id="banner"></div>
     <!-- Autocomplete user/pass -->
@@ -419,7 +348,7 @@ body {
                     <div id="k-home-summary-right">
                         <div id="k-home-ini">
                             Welcome! This site is a Kune node. Kune, which means
-                            "together" in esperanto, it's a network of interconnected
+                            "together" in esperanto, is a network of interconnected
                             sites like this one, where you can <strong>communicate,
                                 share, collaborate with others and create your web
                                 spaces easily</strong>. <a href="#signin">Join!</a>

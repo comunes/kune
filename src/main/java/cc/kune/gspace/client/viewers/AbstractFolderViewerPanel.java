@@ -82,6 +82,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   @Override
   public void clear() {
     gsArmor.getSubheaderToolbar().clear();
+    gsArmor.getDocFooterToolbar().clear();
     UiUtils.clear(gsArmor.getDocContainer());
     UiUtils.clear(gsArmor.getDocHeader());
   }

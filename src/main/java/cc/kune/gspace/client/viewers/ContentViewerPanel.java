@@ -132,6 +132,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   public void clear() {
     onlyViewPanel.setHTML("");
     gsArmor.getSubheaderToolbar().clear();
+    gsArmor.getDocFooterToolbar().clear();
     UiUtils.clear(gsArmor.getDocContainer());
     UiUtils.clear(gsArmor.getDocHeader());
     waveClear();

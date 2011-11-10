@@ -66,8 +66,8 @@ public class NewGadgetAction extends RolAction {
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    contentService.get().addNewContentWithGadget(session.getUserHash(), session.getCurrentStateToken(), gadgetName,
-        typeId, i18n.t(title), i18n.t(body), new AsyncCallbackSimple<StateContentDTO>() {
+    contentService.get().addNewContentWithGadget(session.getUserHash(), session.getCurrentStateToken(),
+        gadgetName, typeId, i18n.t(title), i18n.t(body), new AsyncCallbackSimple<StateContentDTO>() {
           @Override
           public void onSuccess(final StateContentDTO result) {
             NotifyUser.info(i18n.t("[%s] created succesfully", title));
