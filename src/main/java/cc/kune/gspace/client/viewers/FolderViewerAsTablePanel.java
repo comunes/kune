@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -91,7 +92,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       itemWidget.setModifiedText(DateUtils.getInstance().formatPastDate(modifiedOn));
     }
     itemWidget.setMenu(toolbar);
-    // Tooltip.to(itemWidget, item.getTooltip());
+    Tooltip.to(itemWidget, item.getTooltip());
     // FIXME make this under demand
     itemWidget.getRowClick().addClickHandler(new ClickHandler() {
       @Override

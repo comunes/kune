@@ -36,7 +36,8 @@ public class StartAssemblyWithMembersAction extends OpenGroupPublicChatRoomActio
   @Override
   public void actionPerformed(final ActionEvent event) {
     NotifyUser.askConfirmation(i18n.t("Please confirm"),
-        i18n.t("Start a collaborative document for the meeting minutes?"), new SimpleResponseCallback() {
+        i18n.t("Do you want to collaboratively edit your meeting minutes in a new document?"),
+        new SimpleResponseCallback() {
           @Override
           public void onCancel() {
           }
@@ -49,7 +50,7 @@ public class StartAssemblyWithMembersAction extends OpenGroupPublicChatRoomActio
                 false,
                 i18n.t("Meeting minutes of [%s] on [%s]", session.getCurrentGroupShortName(),
                     DateTimeFormat.getFormat(PredefinedFormat.DATE_LONG).format(new Date())),
-                i18n.t("You can collaboratively edit this document with the meeting minutes."),
+                i18n.t("You can collaboratively edit the meeting minutes, shown in this document."),
                 new AsyncCallbackSimple<String>() {
                   @Override
                   public void onSuccess(final String url) {

@@ -176,8 +176,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
       final String escapedTranslation = TextUtils.escapeHtmlLight(translation);
       trans.setText(escapedTranslation);
       persist(trans);
-      // reset cache for this lang
-      langCache.remove(lang);
+      langCache.clear();
       return escapedTranslation;
     } else {
       throw new DefaultException("Trying to translate a unknown item");

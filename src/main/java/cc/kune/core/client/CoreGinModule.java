@@ -84,6 +84,8 @@ import cc.kune.core.client.sn.GroupSNPanel;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPanel;
 import cc.kune.core.client.sn.UserSNPresenter;
+import cc.kune.core.client.sn.actions.AddBuddieSearchPanel;
+import cc.kune.core.client.sn.actions.AddMemberSearchPanel;
 import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNCollabsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
@@ -177,8 +179,8 @@ public class CoreGinModule extends ExtendedGinModule {
         RegisterPresenter.RegisterProxy.class);
     bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class,
         UserConfirmPanel.class, UserConfirmPresenter.UserConfirmProxy.class);
-    bindPresenter(SubtitlesManager.class, SubtitlesManager.SubtitlesView.class,
-        SubtitlesWidget.class, SubtitlesManager.SubtitlesProxy.class);
+    bindPresenter(SubtitlesManager.class, SubtitlesManager.SubtitlesView.class, SubtitlesWidget.class,
+        SubtitlesManager.SubtitlesProxy.class);
 
     bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
     bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
@@ -225,6 +227,8 @@ public class CoreGinModule extends ExtendedGinModule {
     s(UserSNMenuItemsRegistry.class);
     s(GroupSNConfActions.class);
     s(UserSNConfActions.class);
+    s(AddBuddieSearchPanel.class);
+    s(AddMemberSearchPanel.class);
 
     s(SiteUserOptionsPresenter.class);
     s(SiteUserOptions.class, SiteUserOptionsPresenter.class);

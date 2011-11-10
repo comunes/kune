@@ -24,9 +24,9 @@ import static cc.kune.wiki.shared.WikiConstants.TYPE_FOLDER;
 import static cc.kune.wiki.shared.WikiConstants.TYPE_ROOT;
 import static cc.kune.wiki.shared.WikiConstants.TYPE_UPLOADEDFILE;
 import static cc.kune.wiki.shared.WikiConstants.TYPE_WIKIPAGE;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -35,13 +35,14 @@ import com.google.inject.Inject;
 public class WikiClientTool extends FoldableAbstractClientTool {
 
   @Inject
-  public WikiClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
+  public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
     super(
         NAME,
         i18n.t("wiki"),
-        i18n.t("Wiki-pages are Documents that can be edited by any visitor (in this site), instead of only by the group. This accelerates updating and construction"),
-        toolSelector, cntCapRegistry, i18n, navResources);
+        i18n.t(
+            "Wiki-pages are Documents that can be edited by any visitor (in [%s]), instead of only by the group. This accelerates updating and construction",
+            i18n.getSiteCommonName()), toolSelector, cntCapRegistry, i18n, navResources);
 
     registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
     registerDragableTypes(TYPE_WIKIPAGE, TYPE_FOLDER, TYPE_UPLOADEDFILE);

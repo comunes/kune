@@ -22,11 +22,13 @@ package cc.kune.core.client.sn.actions.registry;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sn.GroupSNPresenter;
+import cc.kune.core.client.sn.actions.AddEntityToThisGroupAction;
 import cc.kune.core.client.sn.actions.JoinGroupAction;
 import cc.kune.core.client.sn.actions.MembersModerationMenuItem;
 import cc.kune.core.client.sn.actions.MembersVisibilityMenuItem;
@@ -69,7 +71,8 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
       final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
       final WriteToMembers writeToMembers, final WriteToAdmins writeToAdmins,
-      final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction) {
+      final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction,
+      final AddEntityToThisGroupAction addEntityToThisGroupAction) {
     OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
         OPTIONS_STYLES);
     final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
@@ -86,6 +89,8 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
     addImpl(OPTIONS_MENU);
     new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
+    new MenuItemDescriptor(addEntityToThisGroupAction).withParent(OPTIONS_MENU).setPosition(0);
+    new MenuItemDescriptor(unJoinGroupAction).withParent(OPTIONS_MENU).setPosition(1);
 
     VISIBILITY_SUBMENU.withText(i18n.t("Users who can view this member list")).withParent(OPTIONS_MENU);
     MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU);
@@ -97,10 +102,15 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     closedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("closed for new members"));
 
     final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
-    final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);
+    // final ButtonDescriptor unJoinBtn = new
+    // ButtonDescriptor(unJoinGroupAction);
+    // final ButtonDescriptor addMemberBtn = new
+    // ButtonDescriptor(addEntityToThisGroupAction);
     // unJoinBtn.add(isLoggedCondition);
     addImpl(joinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
-    addImpl(unJoinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
+    // addImpl(unJoinBtn); //
+    // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
+    // addImpl(addMemberBtn);
 
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override

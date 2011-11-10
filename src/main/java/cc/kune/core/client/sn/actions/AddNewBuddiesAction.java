@@ -19,37 +19,53 @@
  */
 package cc.kune.core.client.sn.actions;
 
+import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.core.client.resources.CoreMessages;
+import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
+import cc.kune.core.client.sitebar.search.EntitySearchPanel;
+import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class AddNewBuddiesAction extends AbstractExtendedAction {
 
-  private final I18nTranslationService i18n;
-  private final Provider<SitebarSearchPresenter> searcher;
+  private final EntitySearchPanel searchPanel;
 
   @Inject
   public AddNewBuddiesAction(final I18nTranslationService i18n, final CoreResources res,
-      final Provider<SitebarSearchPresenter> searcher) {
-    this.i18n = i18n;
-    this.searcher = searcher;
+      final AddBuddieSearchPanel searchPanel, final ChatClient chatClient) {
+    this.searchPanel = searchPanel;
     putValue(Action.NAME, i18n.t("Add a new buddy"));
     putValue(Action.SMALL_ICON, res.addGreen());
+    searchPanel.init(new OnEntitySelectedInSearch() {
+      @Override
+      public void onSeleted(final String shortName) {
+        NotifyUser.askConfirmation(i18n.t("Are you sure?"),
+            i18n.t("Do you want to add '[%s]' to your contacts?", shortName),
+            new SimpleResponseCallback() {
+              @Override
+              public void onCancel() {
+              }
+
+              @Override
+              public void onSuccess() {
+                chatClient.addNewBuddy(shortName);
+                NotifyUser.info("Added as buddy in your contacts. If your buddie adds you also, it will be visible in your network");
+              }
+            });
+      }
+    }, true);
   }
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    NotifyUser.info(i18n.t("Search the user you want to add and in his/her homepage click '"
-        + CoreMessages.ADD_AS_A_BUDDY + "'"));
-    searcher.get().focus();
+    searchPanel.show();
+    searchPanel.focus();
   }
 
 }

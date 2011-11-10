@@ -140,7 +140,7 @@ public class FolderViewerPresenter extends
     final String name = content.getName();
     final Object icon = mimeType != null ? getIcon(stateToken, typeId, mimeType) : getIcon(stateToken,
         typeId, status);
-    final String tooltip = getTooltip(stateToken, mimeType);
+    final String tooltip = getTooltip(stateToken, mimeType, capabilitiesRegistry.isDragable(typeId) && rights.isAdministrable());
     if (status.equals(ContentStatus.inTheDustbin)
         && (!capabilitiesRegistry.showDeleted(typeId) && !session.getShowDeletedContent())) {
       // Don't show
@@ -240,12 +240,14 @@ public class FolderViewerPresenter extends
     return iconsRegistry.getContentTypeIcon(typeId, status);
   }
 
-  private String getTooltip(final StateToken token, final BasicMimeTypeDTO mimeType) {
+  private String getTooltip(final StateToken token, final BasicMimeTypeDTO mimeType,
+      final boolean draggable) {
     if (mimeType != null && (mimeType.isImage() || mimeType.isPdf())) {
       // Used for previews
       return null;
     } else {
-      return i18n.t("Double click to open");
+      return draggable ? i18n.t("Double click to open. Drag and drop to move this to another place")
+          : i18n.t("Double click to open");
     }
   }
 

@@ -42,7 +42,6 @@ import java.util.List;
 import java.util.Map;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.core.client.sitebar.search.SitebarSearchPanel.OnExactMatch;
 import cc.kune.core.shared.SearcherConstants;
 
 import com.google.gwt.event.dom.client.KeyUpEvent;

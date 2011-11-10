@@ -37,6 +37,11 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+/**
+ * This action is similar to @link {@link UnJoinFromCurrentGroupAction} but is
+ * used when you are not in this group (for instace you can leave a group from
+ * your home page)
+ */
 public class UnJoinFromThisGroupAction extends RolAction {
 
   private final I18nTranslationService i18n;

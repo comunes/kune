@@ -31,13 +31,14 @@ public final class SearcherConstants {
   // public final static String I18N_JSON_SERVICE =
   // "/ws/json/I18nTranslationJSONService/search";
   public final static String GROUP_PARAM = "group";
-
   public final static String LIMIT_PARAM = "limit";
+
   public final static String MIMETYPE_PARAM = "mimetype";
   public final static String MIMETYPE2_PARAM = "mimetype2";
   public final static String QUERY_PARAM = "query";
-
   public final static String START_PARAM = "start";
+
+  public final static String USER_DATA_PROXY_URL = "/ws/json/UserJSONService/search";
   // public final static String I18N_JSON_SERVICE_TRANSLATED =
   // "/ws/json/I18nTranslationJSONService/searchtranslated";
   // public final static String USER_DATA_PROXY_URL =
