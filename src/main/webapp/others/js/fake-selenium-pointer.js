@@ -13,7 +13,7 @@ function kmove(x, y) {
 }
 
 function kmoveit() {
-  for (inc = 0; inc <= 1; inc = inc + 0.01) {
+  for (inc = 0; inc <= 1 && !(k_cur_x == newx && k_cur_y == newy); inc = inc + 0.01) {
     k_cur_x = Math.round(k_cur_x * (1 - inc) + newx * inc);
     k_cur_y = Math.round(k_cur_y * (1 - inc) + newy * inc);
     window.setTimeout('ksetCursorPos(' + k_cur_x + ", " + k_cur_y + ')',
