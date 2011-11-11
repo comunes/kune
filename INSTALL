@@ -271,6 +271,13 @@ after that the previous values will be incorpored to Server > Server Manager > S
 
 After the section 'Run the server for the first time' you'll be able to use the password of the admin user of the kune instalation (specified in kune.properties), or other admin new users you want to register using kune and configure in the authorizedUsernames attribute.
 
+=== Configure your DNS for your XMPP service correctly ===
+
+You have to configure your DNS domain adding SRV records for your XMPP services. This permit that your XMPP server comunicates with other similar servers correctly. You should follow:
+http://jabberd.org/1.4/doc/adminguide#dnssrv
+and:
+http://www.google.com/support/a/bin/answer.py?answer=34143
+
 ==Appendix B: Apache configuration sample==
 
 Enable this modules:

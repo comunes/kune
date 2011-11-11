@@ -26,7 +26,7 @@ import org.openqa.selenium.support.FindBy;
 import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.SignInForm;
 import cc.kune.core.client.auth.SignInPanel;
-import cc.kune.selenium.tools.SeleniumConstants;
+import cc.kune.selenium.SeleniumConstants;
 
 public class LoginPageObject extends AbstractLoginObject {
 

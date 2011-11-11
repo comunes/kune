@@ -26,7 +26,7 @@ import org.openqa.selenium.support.FindBy;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterForm;
 import cc.kune.core.client.auth.RegisterPanel;
-import cc.kune.selenium.tools.SeleniumConstants;
+import cc.kune.selenium.SeleniumConstants;
 
 public class RegisterPageObject extends AbstractLoginObject {
 

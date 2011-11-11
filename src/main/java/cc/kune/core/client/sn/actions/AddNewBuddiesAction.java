@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client.sn.actions;
 
-import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -28,6 +27,7 @@ import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.EntitySearchPanel;
 import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
+import cc.kune.core.client.sn.SimpleContactManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -38,7 +38,7 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
 
   @Inject
   public AddNewBuddiesAction(final I18nTranslationService i18n, final CoreResources res,
-      final AddBuddieSearchPanel searchPanel, final ChatClient chatClient) {
+      final AddBuddieSearchPanel searchPanel, final SimpleContactManager contactsManager) {
     this.searchPanel = searchPanel;
     putValue(Action.NAME, i18n.t("Add a new buddy"));
     putValue(Action.SMALL_ICON, res.addGreen());
@@ -54,7 +54,7 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
 
               @Override
               public void onSuccess() {
-                chatClient.addNewBuddy(shortName);
+                contactsManager.addNewBuddy(shortName);
                 NotifyUser.info("Added as buddy in your contacts. If your buddie adds you also, it will be visible in your network");
               }
             });

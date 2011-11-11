@@ -17,26 +17,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.selenium.general;
+package cc.kune.selenium;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+public final class SeleniumConf {
 
-import cc.kune.core.client.ws.entheader.EntityTextLogo;
-import cc.kune.selenium.PageObject;
-import cc.kune.selenium.SeleniumConstants;
-
-public class EntityHeaderPageObject extends PageObject {
-
-  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_IMAGE)
-  protected WebElement logoImage;
-  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_NAME)
-  protected WebElement logoName;
-
-  public EntityHeaderPageObject() {
+  public enum Driver {
+    chrome, firefox
   }
 
-  public void waitForEntityTitle(final String text) {
-    waitFor(logoName, text);
+  public enum Lang {
+    en, es
+  }
+
+  public enum Site {
+    demo, eurosur, kunecc, localhost
+  }
+
+  public static final Driver DRIVER = Driver.firefox;
+  /* Configure this for use other lang, site, or driver */
+  public static final Lang LANG = Lang.en;
+  public static final Site SITE = Site.localhost;
+  public static final int TIMEOUT = 25;
+
+  SeleniumConf() {
+    // Final class
   }
 }

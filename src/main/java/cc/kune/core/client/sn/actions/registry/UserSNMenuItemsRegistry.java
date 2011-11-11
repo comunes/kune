@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client.sn.actions.registry;
 
-import cc.kune.chat.client.actions.conditions.IsBuddieCondition;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.core.client.sn.actions.AcceptJoinGroupAction;
 import cc.kune.core.client.sn.actions.ChangeToAdminAction;
@@ -32,6 +31,7 @@ import cc.kune.core.client.sn.actions.RemoveMemberAction;
 import cc.kune.core.client.sn.actions.UnJoinFromThisGroupAction;
 import cc.kune.core.client.sn.actions.WriteToAction;
 import cc.kune.core.client.sn.actions.conditions.ImPartOfGroupCondition;
+import cc.kune.core.client.sn.actions.conditions.IsBuddieCondition;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;

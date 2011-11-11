@@ -28,6 +28,7 @@ import java.util.Set;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.utils.Location;
+import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.Pair;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
@@ -38,7 +39,6 @@ import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.emite.browser.client.PageAssist;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.event.shared.EventBus;
@@ -52,6 +52,7 @@ public class I18nUITranslationService extends I18nTranslationService {
   private String currentLanguageCode;
   private final Set<Pair<String, String>> earlyTexts;
   private final I18nServiceAsync i18nService;
+  private boolean isLangInProperties;
   private final KuneConstants kuneConstants;
   private HashMap<String, String> lexicon;
   private final Session session;
@@ -69,10 +70,19 @@ public class I18nUITranslationService extends I18nTranslationService {
     Log.info("Workspace starting with language: " + currentLocale.getLocaleName() + ", isRTL: "
         + LocaleInfo.getCurrentLocale().isRTL() + ", translated langs: "
         + Arrays.toString(LocaleInfo.getAvailableLocaleNames()));
-
     earlyTexts = new HashSet<Pair<String, String>>();
 
     i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
+
+      private boolean isInConstantProperties(final I18nLanguageDTO currentLang) {
+        for (final String lang : LocaleInfo.getAvailableLocaleNames()) {
+          if (lang.equals(currentLang.getCode())) {
+            return true;
+          }
+        }
+        return false;
+      }
+
       @Override
       public void onFailure(final Throwable caught) {
         Log.error("Workspace adaptation to your language failed: " + caught.getMessage());
@@ -83,6 +93,7 @@ public class I18nUITranslationService extends I18nTranslationService {
         currentLang = result;
         currentLanguageCode = currentLang.getCode();
         session.setCurrentLanguage(currentLang);
+        isLangInProperties = isInConstantProperties(currentLang);
         i18nService.getLexicon(currentLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
           @Override
           public void onFailure(final Throwable caught) {
@@ -93,7 +104,8 @@ public class I18nUITranslationService extends I18nTranslationService {
           public void onSuccess(final HashMap<String, String> result) {
             lexicon = result;
             session.setCurrentLanguage(currentLang);
-            Log.info("Workspace adaptation to language: " + currentLang.getEnglishName());
+            Log.info("Workspace adaptation to language: " + currentLang.getEnglishName() + ", isRTL: "
+                + currentLang.getDirection());
             eventBus.fireEvent(new I18nReadyEvent());
           }
         });
@@ -114,6 +126,7 @@ public class I18nUITranslationService extends I18nTranslationService {
           }
         });
       }
+
     });
   }
 
@@ -141,6 +154,8 @@ public class I18nUITranslationService extends I18nTranslationService {
    *          String value of the new locale to go to.
    */
   private native void changeLocale(String newLocale)
+  // FIXME: this now does not works correctly with hosted mode (and also give
+  // some "Opss" in server side)
   /*-{
 		// Uncomment the "debugger;" line to see how to set debug statements in JSNI code
 		// When in web mode, if your browser has a JavaScript debugger attached, it will
@@ -194,11 +209,37 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   public String getSiteCommonName() {
     if (siteCommonName == null) {
-      // FIXME: remove this dependency with PageAssist (emite)
-      final String meta = PageAssist.getMeta("kune.default.site.commonname");
+      final String meta = MetaUtils.get("kune.default.site.commonname");
       siteCommonName = (meta == null ? t("this site") : t(meta));
     }
     return siteCommonName;
+  }
+
+  private String getTransFromBD(final String text, final String noteForTranslators,
+      final String encodeText) {
+    if (lexicon == null) {
+      Log.warn("i18n not initialized: " + text);
+      earlyTexts.add(Pair.create(text, noteForTranslators));
+      Log.warn("i18n pending translations: " + earlyTexts.size());
+      return text;
+    }
+    String translation = lexicon.get(encodeText);
+    if (lexicon.containsKey(encodeText)) {
+      if (translation == UNTRANSLATED_VALUE) {
+        // Not translated but in db, return text
+        translation = encodeText;
+      }
+    } else {
+      // Not translated and not in db, make a petition for translation
+      if (session.isLogged()) {
+        save(text, noteForTranslators);
+        lexicon.put(encodeText, UNTRANSLATED_VALUE);
+      } else {
+        earlyTexts.add(Pair.create(text, noteForTranslators));
+      }
+      translation = encodeText;
+    }
+    return decodeHtml(translation);
   }
 
   private void save(final String text, final String noteForTranslators) {
@@ -244,32 +285,17 @@ public class I18nUITranslationService extends I18nTranslationService {
       return text;
     }
     final String encodeText = TextUtils.escapeHtmlLight(text);
-    try {
-      return kuneConstants.getString(I18nUtils.convertMethodName(text + " " + noteForTranslators));
-    } catch (final MissingResourceException e) {
-      if (lexicon == null) {
-        Log.warn("i18n not initialized: " + text);
-        earlyTexts.add(Pair.create(text, noteForTranslators));
-        Log.warn("i18n pending translations: " + earlyTexts.size());
-        return text;
+
+    if (isLangInProperties) {
+      // The db translations now are in properties files (more stable)
+      try {
+        return kuneConstants.getString(I18nUtils.convertMethodName(text + " " + noteForTranslators));
+      } catch (final MissingResourceException e) {
+        // Ok this concrete translation is not jet available, we use DB
+        return getTransFromBD(text, noteForTranslators, encodeText);
       }
-      String translation = lexicon.get(encodeText);
-      if (lexicon.containsKey(encodeText)) {
-        if (translation == UNTRANSLATED_VALUE) {
-          // Not translated but in db, return text
-          translation = encodeText;
-        }
-      } else {
-        // Not translated and not in db, make a petition for translation
-        if (session.isLogged()) {
-          save(text, noteForTranslators);
-          lexicon.put(encodeText, UNTRANSLATED_VALUE);
-        } else {
-          earlyTexts.add(Pair.create(text, noteForTranslators));
-        }
-        translation = encodeText;
-      }
-      return decodeHtml(translation);
+    } else {
+      return getTransFromBD(text, noteForTranslators, encodeText);
     }
   }
 }

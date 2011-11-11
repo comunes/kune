@@ -7,7 +7,7 @@ import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.selenium.PageObject;
-import cc.kune.selenium.tools.SeleniumConstants;
+import cc.kune.selenium.SeleniumConstants;
 
 public class AbstractLoginObject extends PageObject {
   @FindBy(id = SeleniumConstants.GWTDEV + SitebarSignInLink.SITE_SIGN_IN)

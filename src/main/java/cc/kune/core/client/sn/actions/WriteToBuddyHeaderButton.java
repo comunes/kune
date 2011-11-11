@@ -19,11 +19,11 @@
  */
 package cc.kune.core.client.sn.actions;
 
-import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.core.client.sn.SimpleContactManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
@@ -38,7 +38,8 @@ public class WriteToBuddyHeaderButton {
 
   @Inject
   public WriteToBuddyHeaderButton(final WriteToAction writeToAction, final EntityHeader entityHeader,
-      final StateManager stateManager, final Session session, final ChatClient chatEngine) {
+      final StateManager stateManager, final Session session,
+      final SimpleContactManager simpleContactManager) {
     final ButtonDescriptor button = new ButtonDescriptor(writeToAction);
     // button.setVisible(false);
     button.withText("Write to your buddy");
@@ -60,7 +61,7 @@ public class WriteToBuddyHeaderButton {
         final GroupDTO group = state.getGroup();
         final String groupName = group.getShortName();
         final boolean imLogged = session.isLogged();
-        final boolean isBuddie = chatEngine.isBuddy(groupName);
+        final boolean isBuddie = simpleContactManager.isBuddy(groupName);
         if (imLogged && group.isPersonal() && isBuddie
             && !session.getCurrentUser().getShortName().equals(groupName)) {
           button.setTarget(group);

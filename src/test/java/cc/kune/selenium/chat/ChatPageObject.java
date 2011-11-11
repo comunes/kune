@@ -25,7 +25,7 @@ import org.openqa.selenium.support.FindBy;
 
 import cc.kune.chat.client.ChatClient;
 import cc.kune.selenium.PageObject;
-import cc.kune.selenium.tools.SeleniumConstants;
+import cc.kune.selenium.SeleniumConstants;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.hablar.core.client.Idify;

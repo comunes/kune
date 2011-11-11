@@ -27,6 +27,9 @@ import cc.kune.selenium.PageObject;
 
 public class UserSpacePageObject extends PageObject {
 
+  @FindBy(xpath = "//span[2]/span")
+  private WebElement addParticipant;
+
   @FindBy(xpath = "//div[2]/div/div[2]/div[3]/div[4]")
   private WebElement cursive;
 
@@ -52,6 +55,10 @@ public class UserSpacePageObject extends PageObject {
   private WebElement rootEdit;
 
   public UserSpacePageObject() {
+  }
+
+  public WebElement getAddParcipant() {
+    return addParticipant;
   }
 
   public WebElement getCursive() {

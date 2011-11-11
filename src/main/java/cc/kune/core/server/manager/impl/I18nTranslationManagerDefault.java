@@ -167,7 +167,6 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   @Override
   public String setTranslation(final Long id, final String translation) throws DefaultException {
-
     final I18nTranslation trans = super.find(id);
     if (trans != null) {
       // Don't permit to translate the def language

@@ -39,7 +39,6 @@ import cc.kune.selenium.general.EntityHeaderPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
 import cc.kune.selenium.spaces.SpacesPageObject;
-import cc.kune.selenium.tools.SeleniumConstants;
 
 import com.google.inject.Singleton;
 
@@ -47,15 +46,23 @@ public class SeleniumModule extends PageObjectModule {
 
   @Override
   protected void configure() {
-    // final RemoteWebDriver driver = createChromeDriver();
-    final WebDriver driver = creatFirefoxDriver();
+    WebDriver driver;
+    switch (SeleniumConf.DRIVER) {
+    case chrome:
+      driver = createChromeDriver();
+      break;
+    case firefox:
+    default:
+      driver = creatFirefoxDriver();
+      break;
+    }
     final EventFiringWebDriver wrap = new EventFiringWebDriver(driver);
     wrap.register(new CustomWebDriverEventListener());
 
     bind(WebDriver.class).toInstance(wrap);
 
     bind(ElementLocatorFactory.class).toInstance(
-        new AjaxElementLocatorFactory(wrap, SeleniumConstants.TIMEOUT));
+        new AjaxElementLocatorFactory(wrap, SeleniumConf.TIMEOUT));
 
     // Page Objects here!
     bind(LoginPageObject.class).in(Singleton.class);
@@ -67,10 +74,18 @@ public class SeleniumModule extends PageObjectModule {
     final ResourceBundle english = ResourceBundle.getBundle("TestConstants", Locale.ENGLISH);
     final ResourceBundle spanish = ResourceBundle.getBundle("TestConstants", new Locale("es"));
     Locale.setDefault(Locale.ENGLISH);
-    bind(ResourceBundle.class).toInstance(spanish);
+    switch (SeleniumConf.LANG) {
+    case es:
+      bind(ResourceBundle.class).toInstance(spanish);
+      break;
+    case en:
+    default:
+      bind(ResourceBundle.class).toInstance(english);
+      break;
+    }
+
   }
 
-  @SuppressWarnings("unused")
   private RemoteWebDriver createChromeDriver() {
     // http://code.google.com/p/selenium/wiki/ChromeDriver
     System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");

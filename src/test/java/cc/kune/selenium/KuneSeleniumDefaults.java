@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -48,7 +49,6 @@ import cc.kune.selenium.spaces.GroupSpacePageObject;
 import cc.kune.selenium.spaces.HomeSpacePageObject;
 import cc.kune.selenium.spaces.SpacesPageObject;
 import cc.kune.selenium.spaces.UserSpacePageObject;
-import cc.kune.selenium.tools.SeleniumConstants;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -58,8 +58,8 @@ public class KuneSeleniumDefaults {
   public static final Injector INJECTOR = Guice.createInjector(new SeleniumModule());
 
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
-  public static boolean mustCloseFinally = true;
-  private final String baseUrl;
+  public static boolean mustCloseFinally = false;
+  private String baseUrl;
   protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
   protected final GroupSpacePageObject groupSpace;
@@ -73,10 +73,23 @@ public class KuneSeleniumDefaults {
   private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
-    // baseUrl = "http://kune.beta.iepala.es/?locale=en#";
-    // baseUrl =
-    // "http://127.0.0.1:8888/?locale=es&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
-    baseUrl = "http://beta.eurosur.org/#";
+    final String localeParam = "?locale=" + SeleniumConf.LANG;
+    switch (SeleniumConf.SITE) {
+    case demo:
+      baseUrl = "http://kune.beta.iepala.es/" + localeParam + "#";
+      break;
+    case localhost:
+      baseUrl = "http://127.0.0.1:8888/" + localeParam + "&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
+      break;
+    case eurosur:
+      baseUrl = "http://beta.eurosur.org/" + localeParam + "#";
+      break;
+    case kunecc:
+      baseUrl = "http://kune.cc/" + localeParam + "#";
+      break;
+    default:
+      break;
+    }
     injector = INJECTOR;
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
@@ -97,6 +110,12 @@ public class KuneSeleniumDefaults {
     PageFactory.initElements(locator, homeSpace);
     PageFactory.initElements(locator, userSpace);
     PageFactory.initElements(locator, groupSpace);
+  }
+
+  public void answerOnNextPrompt(final String answer) {
+    final Alert alert = webdriver.switchTo().alert();
+    alert.sendKeys(answer);
+    alert.accept();
   }
 
   @BeforeMethod

@@ -22,10 +22,15 @@ package cc.kune.selenium.spaces;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import cc.kune.core.client.sitebar.search.EntitySearchPanel;
+import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.selenium.PageObject;
+import cc.kune.selenium.SeleniumConstants;
 
 public class GroupSpacePageObject extends PageObject {
 
+  @FindBy(id = SeleniumConstants.GWTDEV + UserSNConfActions.ADD_BUDDIE_BTN)
+  private WebElement addBuddieBtn;
   @FindBy(xpath = "//div[2]/div/div[3]/div/span")
   private WebElement blogTool;
   @FindBy(xpath = "//div[2]/div/div[4]/div/span")
@@ -38,6 +43,10 @@ public class GroupSpacePageObject extends PageObject {
   private WebElement firstAvatarOfGroup;
   @FindBy(xpath = "//div[2]/div/div[5]/div/span")
   private WebElement listTool;
+  @FindBy(id = SeleniumConstants.GWTDEV + EntitySearchPanel.OK_ID)
+  private WebElement searchEntitiesOk;
+  @FindBy(id = SeleniumConstants.GWTDEV + EntitySearchPanel.ENTITY_SEARCH_TEXTBOX)
+  private WebElement searchEntitiesTextBox;
   @FindBy(xpath = "//div[3]/div/button")
   private WebElement socialNetOptions;
   @FindBy(xpath = "//div[2]/div/div[7]/div/span")
@@ -45,39 +54,51 @@ public class GroupSpacePageObject extends PageObject {
   @FindBy(xpath = "//div[2]/div/div[7]/div/span")
   private WebElement wikiTool;
 
-  public WebElement getBlogTool() {
+  public WebElement addBuddieBtn() {
+    return addBuddieBtn;
+  }
+
+  public WebElement blogTool() {
     return blogTool;
   }
 
-  public WebElement getChatTool() {
+  public WebElement chatTool() {
     return chatTool;
   }
 
-  public WebElement getDocTool() {
+  public WebElement docTool() {
     return docTool;
   }
 
-  public WebElement getEventTool() {
+  public WebElement eventTool() {
     return eventTool;
   }
 
-  public WebElement getFirstAvatarOfGroup() {
+  public WebElement firstAvatarOfGroup() {
     return firstAvatarOfGroup;
   }
 
-  public WebElement getListTool() {
+  public WebElement listTool() {
     return listTool;
   }
 
-  public WebElement getSocialNetOptions() {
+  public WebElement searchEntitiesOk() {
+    return searchEntitiesOk;
+  }
+
+  public WebElement searchEntitiesTextBox() {
+    return searchEntitiesTextBox;
+  }
+
+  public WebElement socialNetOptions() {
     return socialNetOptions;
   }
 
-  public WebElement getTaskTool() {
+  public WebElement taskTool() {
     return taskTool;
   }
 
-  public WebElement getWikiTool() {
+  public WebElement wikiTool() {
     return wikiTool;
   }
 

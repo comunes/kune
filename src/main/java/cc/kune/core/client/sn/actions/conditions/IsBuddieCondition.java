@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.chat.client.actions.conditions;
+package cc.kune.core.client.sn.actions.conditions;
 
-import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiAddCondition;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.core.client.sn.SimpleContactManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
@@ -33,17 +33,17 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsBuddieCondition implements GuiAddCondition {
 
-  private final ChatClient chatClient;
   private final Session session;
+  private final SimpleContactManager simpleContactManager;
 
   @Inject
-  public IsBuddieCondition(final Session session, final ChatClient chatClient) {
-    this.chatClient = chatClient;
+  public IsBuddieCondition(final Session session, final SimpleContactManager simpleContactManager) {
+    this.simpleContactManager = simpleContactManager;
     this.session = session;
   }
 
   private boolean isBuddie(final String targetName) {
-    return chatClient.isBuddy(targetName);
+    return simpleContactManager.isBuddy(targetName);
   }
 
   private boolean isThisGroupInRoster(final GuiActionDescrip descr) {

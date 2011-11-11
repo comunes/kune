@@ -13,7 +13,6 @@ TODO-list for kune -*- mode: org; -*-
 
 * SHORT-TERM (URGENT)
 ** TODO multi uploader
-*** Some links
 http://code.google.com/p/gwt-plupload/
 http://www.plupload.com/example_all_runtimes.php
 http://gxt-multiupload-demo.appspot.com/
@@ -369,6 +368,19 @@ From experience we have found that Tomcat often runs well with an -Xmx between 4
 
 To determine how much memory you can spare for Java, try this: stop your Java process; run free -m; subtract the 'used' value from the "-/+ cache" row from the total memory allocated to your server and then subtract another 'just in case' margin of about 10% of your total server memory.  The number you come up with is a rough indicator of the largest -Xmx setting you can use on your server.
 * MID-TERM
+** Try to reuse welcome message to anonymous users in GWave:
+Welcome to Google Wave
+
+You are looking at a wave that someone thought you'd be interested in. Google Wave helps you communicate and work together with richly formatted text, photos, videos and more. It lets you all stay on the same page.
+Quick tips
+
+    Move to the next unread blip. Try spacebar. 
+    Edit any blip in the wave.Try ctrl-e. 
+    Reply to any blip. Try shift-enter or double click text. 
+    Reply to any blip. Hover over the bottom of a blip and click the blue bar. 
+    Add someone else to this wave, using an email address or their Wave address. 
+
+Sign in to Google Wave
 ** Study mozilla web apps:
 https://apps.mozillalabs.com/
 ** Menubar submenus problem

@@ -24,7 +24,7 @@ import org.openqa.selenium.support.FindBy;
 
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.selenium.PageObject;
-import cc.kune.selenium.tools.SeleniumConstants;
+import cc.kune.selenium.SeleniumConstants;
 
 public class SpacesPageObject extends PageObject {
 

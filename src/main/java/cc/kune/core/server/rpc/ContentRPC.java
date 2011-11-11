@@ -240,7 +240,9 @@ public class ContentRPC implements ContentService, RPC {
     } catch (final ToolNotFoundException e) {
       throw new ContentNotFoundException();
     } catch (final NoDefaultContentException e) {
-      return mapper.map(stateService.createNoHome(user, token.getGroup()), StateNoContentDTO.class);
+      return mapper.map(
+          stateService.createNoHome(user, token.hasNothing() ? user.getShortName() : token.getGroup()),
+          StateNoContentDTO.class);
     }
   }
 

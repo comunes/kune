@@ -19,21 +19,17 @@
  */
 package cc.kune.chat.client;
 
+import cc.kune.core.client.sn.SimpleContactManager;
+
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.xep.muc.client.Room;
 
-public interface ChatClient {
+public interface ChatClient extends SimpleContactManager {
   public static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
-
-  void addNewBuddy(String shortName);
-
-  void chat(String shortName);
 
   void chat(XmppURI jid);
 
   void doLogin();
-
-  boolean isBuddy(String shortName);
 
   boolean isBuddy(XmppURI jid);
 

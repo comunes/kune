@@ -50,6 +50,7 @@ import com.google.inject.Provider;
 @SuppressWarnings("serial")
 public class UserSNConfActions extends AbstractSNActionsRegistry {
 
+  public static final String ADD_BUDDIE_BTN = "user-sn-add-buddie-btn";
   public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
   public static final SubMenuDescriptor VISIBILITY_SUBMENU = new SubMenuDescriptor();
 
@@ -76,7 +77,7 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
 
     final ButtonDescriptor addBuddieBtn = new ButtonDescriptor(addNewBuddiesAction);
 
-    addImpl(addBuddieBtn.withStyles("k-no-backimage"));
+    addImpl(addBuddieBtn.withStyles("k-no-backimage").withId(ADD_BUDDIE_BTN));
 
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override

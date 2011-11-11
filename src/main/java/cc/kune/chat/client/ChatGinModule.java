@@ -25,6 +25,7 @@ import cc.kune.chat.client.actions.ChatSitebarActions;
 import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.core.client.avatar.MediumAvatarDecorator;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
+import cc.kune.core.client.sn.SimpleContactManager;
 
 public class ChatGinModule extends ExtendedGinModule {
   /*
@@ -38,6 +39,7 @@ public class ChatGinModule extends ExtendedGinModule {
     bind(SmallAvatarDecorator.class).to(SmallAvatarDecoratorImpl.class);
     bind(MediumAvatarDecorator.class).to(MediumAvatarDecoratorImpl.class);
     s(ChatClient.class, ChatClientDefault.class);
+    s(SimpleContactManager.class, ChatClient.class);
     s(ChatOptions.class);
     s(ChatSitebarActions.class);
     s(AddAsBuddieHeaderButton.class);

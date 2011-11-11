@@ -17,19 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.selenium.tools;
+package cc.kune.core.client.sn.actions.conditions;
 
-public final class SeleniumConstants {
-  public static final String FIREFOX_PROFILE_NAME = "selenium";
-  public static final String GWTDEV = "gwt-debug-";
-  public static final String INPUT = "-input";
-  public static final int TIMEOUT = 25;
-  public static final String USER_EMAIL = "admin@example.org";
-  public static final String USER_LONGNAME = "Administrator";
-  public static final String USER_PASSWD = "easyeasy";
-  public static final String USER_SHORNAME = "admin";
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.core.client.sn.SimpleContactManager;
+import cc.kune.core.client.state.Session;
 
-  SeleniumConstants() {
-    // Final class
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Singleton
+public class IsNotBuddieCondition extends IsBuddieCondition {
+
+  @Inject
+  public IsNotBuddieCondition(final Session session, final SimpleContactManager contactManager) {
+    super(session, contactManager);
   }
+
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    return !super.mustBeAdded(descr);
+  }
+
 }

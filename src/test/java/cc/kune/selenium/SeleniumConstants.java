@@ -17,26 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.chat.client.actions.conditions;
+package cc.kune.selenium;
 
-import cc.kune.chat.client.ChatClient;
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.core.client.state.Session;
+public final class SeleniumConstants {
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
+  public static final String FIREFOX_PROFILE_NAME = "selenium";
+  public static final String GWTDEV = "gwt-debug-";
 
-@Singleton
-public class IsNotBuddieCondition extends IsBuddieCondition {
+  public static final String INPUT = "-input";
+  /* Configure this for use other lang, site, or driver */
+  public static final String USER_EMAIL = "admin@example.org";
+  public static final String USER_LONGNAME = "Administrator";
+  public static final String USER_PASSWD = "easyeasy";
+  public static final String USER_SHORNAME = "admin";
 
-  @Inject
-  public IsNotBuddieCondition(final Session session, final ChatClient chatClient) {
-    super(session, chatClient);
+  SeleniumConstants() {
+    // Final class
   }
-
-  @Override
-  public boolean mustBeAdded(final GuiActionDescrip descr) {
-    return !super.mustBeAdded(descr);
-  }
-
 }

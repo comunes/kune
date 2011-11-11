@@ -17,26 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.selenium.general;
+package cc.kune.core.client.sn;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+public interface SimpleContactManager {
 
-import cc.kune.core.client.ws.entheader.EntityTextLogo;
-import cc.kune.selenium.PageObject;
-import cc.kune.selenium.SeleniumConstants;
+  void addNewBuddy(String shortName);
 
-public class EntityHeaderPageObject extends PageObject {
+  void chat(String shortName);
 
-  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_IMAGE)
-  protected WebElement logoImage;
-  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_NAME)
-  protected WebElement logoName;
+  boolean isBuddy(String shortName);
 
-  public EntityHeaderPageObject() {
-  }
-
-  public void waitForEntityTitle(final String text) {
-    waitFor(logoName, text);
-  }
 }
