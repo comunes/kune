@@ -43,7 +43,6 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
     return accessLists;
   }
 
-  @Override
   public ContainerDTO getContainer() {
     return container;
   }

@@ -71,7 +71,7 @@ public class NewGadgetAction extends RolAction {
         gadgetName, typeId, i18n.t(title), i18n.t(body), new AsyncCallbackSimple<StateContentDTO>() {
           @Override
           public void onSuccess(final StateContentDTO result) {
-            NotifyUser.info(i18n.t("'[%s]' created succesfully", title),
+            NotifyUser.info(i18n.t("'[%s]' created succesfully", i18n.t(title)),
                 i18n.t(CoreMessages.GADGETS_EXPERIMENTAL));
             stateManager.setRetrievedStateAndGo(result);
             contentViewer.blinkTitle();

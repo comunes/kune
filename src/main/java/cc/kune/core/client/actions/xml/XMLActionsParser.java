@@ -173,7 +173,7 @@ public class XMLActionsParser {
             // container)
             action = new AddGadgetAction(contentService, session, i18n,
                 descrip.getRol().getRolRequired(), descrip.getRol().isAuthNeed(),
-                extension.getExtName(), extension.getIconUrl());
+                extension.getExtName(), descrip.getDescName(), extension.getIconUrl());
           } else {
             action = new NewGadgetAction(contentService, contentViewer, stateManager, session, i18n,
                 descrip.getRol().getRolRequired(), descrip.getRol().isAuthNeed(),

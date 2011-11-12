@@ -35,28 +35,30 @@ import com.google.inject.Provider;
 public class AddGadgetAction extends RolAction {
 
   private final Provider<ContentServiceAsync> contentService;
+  private final String gadgetExtName;
   private final String gadgetName;
   private final I18nTranslationService i18n;
   private final Session session;
 
   public AddGadgetAction(final Provider<ContentServiceAsync> contentService, final Session session,
       final I18nTranslationService i18n, final AccessRolDTO rol, final boolean authNeeded,
-      final String gadgetName, final String iconUrl) {
+      final String gadgetExtName, final String gadgetName, final String iconUrl) {
     super(rol, authNeeded);
     this.contentService = contentService;
     this.i18n = i18n;
-    this.gadgetName = gadgetName;
     this.session = session;
+    this.gadgetExtName = gadgetExtName;
+    this.gadgetName = gadgetName;
     putValue(Action.SMALL_ICON, iconUrl);
   }
 
   @Override
   public void actionPerformed(final ActionEvent event) {
     contentService.get().addGadgetToContent(session.getUserHash(), session.getCurrentStateToken(),
-        gadgetName, new AsyncCallbackSimple<Void>() {
+        gadgetExtName, new AsyncCallbackSimple<Void>() {
           @Override
           public void onSuccess(final Void result) {
-            NotifyUser.info(i18n.t("'[%s]' created succesfully", gadgetName),
+            NotifyUser.info(i18n.t("'[%s]' created succesfully", i18n.t(gadgetName)),
                 i18n.t(CoreMessages.GADGETS_EXPERIMENTAL));
           }
         });
