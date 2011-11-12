@@ -21,6 +21,7 @@ package cc.kune.core.client.cnt;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
@@ -28,25 +29,26 @@ import com.google.inject.Inject;
 
 public class ActionContentToolbarImpl extends ActionFlowPanel implements ActionContentToolbar {
 
-    private final ForIsWidget wsToolbar;
+  private final ForIsWidget wsToolbar;
 
-    @Inject
-    public ActionContentToolbarImpl(final GuiProvider guiProvider, final GSpaceArmor wsArmor) {
-        super(guiProvider);
-        this.wsToolbar = wsArmor.getDocSubheader();
-    }
+  @Inject
+  public ActionContentToolbarImpl(final GuiProvider guiProvider, final GSpaceArmor wsArmor,
+      final I18nTranslationService i18n) {
+    super(guiProvider, i18n);
+    this.wsToolbar = wsArmor.getDocSubheader();
+  }
 
-    @Override
-    public void attach() {
-        if (!this.isAttached()) {
-            wsToolbar.add(this);
-        }
+  @Override
+  public void attach() {
+    if (!this.isAttached()) {
+      wsToolbar.add(this);
     }
+  }
 
-    @Override
-    public void detach() {
-        if (this.isAttached()) {
-            this.removeFromParent();
-        }
+  @Override
+  public void detach() {
+    if (this.isAttached()) {
+      this.removeFromParent();
     }
+  }
 }

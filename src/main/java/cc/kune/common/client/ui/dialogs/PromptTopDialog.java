@@ -20,6 +20,7 @@
 package cc.kune.common.client.ui.dialogs;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.google.gwt.i18n.client.HasDirection.Direction;
 
 public class PromptTopDialog extends BasicTopDialog {
 
@@ -36,8 +37,8 @@ public class PromptTopDialog extends BasicTopDialog {
     private int width = 0;
 
     public Builder(final String dialogId, final String promptText, final boolean autohide,
-        final boolean modal) {
-      super(dialogId, autohide, modal);
+        final boolean modal, final Direction direction) {
+      super(dialogId, autohide, modal, direction);
       super.title(promptText);
     }
 

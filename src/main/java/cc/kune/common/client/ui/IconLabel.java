@@ -136,10 +136,6 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     self.ensureDebugId(id);
   }
 
-  public void setLabelText(final String text) {
-    label.setText(text);
-  }
-
   public void setLeftIcon(final String imgCss) {
     commonStyle(iconLeft, imgCss);
     iconLeft.addStyleName("k-iconlabel-left");

@@ -20,44 +20,44 @@
 package cc.kune.common.client.utils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Url {
-    private final String base;
-    private final List<UrlParam> params;
+  private final String base;
+  private final ArrayList<UrlParam> params;
 
-    public Url(final String base) {
-        this.base = base;
-        params = new ArrayList<UrlParam>();
-    }
+  public Url(final String base) {
+    this.base = base;
+    params = new ArrayList<UrlParam>();
+  }
 
-    public Url(final String base, final UrlParam... iniParams) {
-        this(base);
-        for (UrlParam param : iniParams) {
-            addImpl(param);
-        }
+  public Url(final String base, final UrlParam... iniParams) {
+    this(base);
+    for (final UrlParam param : iniParams) {
+      addImpl(param);
     }
+  }
 
-    public void add(final UrlParam param) {
-        addImpl(param);
-    }
+  public void add(final UrlParam param) {
+    addImpl(param);
+  }
 
-    @Override
-    public String toString() {
-        String paramPart = "";
-        boolean first = true;
-        for (UrlParam param : params) {
-            if (first) {
-                paramPart = "?" + param;
-                first = false;
-            } else {
-                paramPart += "&" + param;
-            }
-        }
-        return base + paramPart;
-    }
+  private void addImpl(final UrlParam param) {
+    params.add(param);
+  }
 
-    private void addImpl(final UrlParam param) {
-        params.add(param);
+  @Override
+  public String toString() {
+    String paramPart = "";
+    boolean first = true;
+    for (final UrlParam param : params) {
+      if (first) {
+        paramPart = "?" + param;
+        first = false;
+      } else {
+        paramPart += "&" + param;
+      }
     }
+    return base + paramPart;
+  }
+
 }

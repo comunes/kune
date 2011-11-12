@@ -25,6 +25,8 @@ import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.core.client.dnd.DropTarget;
 
+import com.google.gwt.i18n.client.HasDirection.Direction;
+
 public interface GuiActionDescrip {
 
   public static final String DROP_TARGET = "dropTarget";
@@ -51,6 +53,8 @@ public interface GuiActionDescrip {
 
   AbstractAction getAction();
 
+  Direction getDirection();
+
   String getId();
 
   Object[] getKeys();
@@ -74,6 +78,8 @@ public interface GuiActionDescrip {
   boolean isChild();
 
   boolean isEnabled();
+
+  boolean isRTL();
 
   boolean isVisible();
 
@@ -104,6 +110,8 @@ public interface GuiActionDescrip {
   void setParent(GuiActionDescrip parent, boolean addToParent);
 
   void setPosition(final int position);
+
+  void setRTL(final boolean isRTL);
 
   void setStyles(final String styles);
 

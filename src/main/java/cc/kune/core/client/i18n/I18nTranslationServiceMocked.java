@@ -24,6 +24,11 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class I18nTranslationServiceMocked extends I18nTranslationService {
   @Override
+  public boolean isRTL() {
+    return false;
+  }
+
+  @Override
   public String tWithNT(final String text, final String noteForTranslators) {
     final String encodeText = TextUtils.escapeHtmlLight(text);
     final String translation = encodeText;

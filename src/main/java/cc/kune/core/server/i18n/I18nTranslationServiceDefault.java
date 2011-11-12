@@ -20,27 +20,32 @@
 package cc.kune.core.server.i18n;
 
 import cc.kune.common.client.utils.TextUtils;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
 public class I18nTranslationServiceDefault extends I18nTranslationService {
 
   private final I18nTranslationManager translationManager;
-
-  // private final Provider<UserSession> userSessionProvider;
+  private final UserSessionManager userSessionManager;
 
   @Inject
   public I18nTranslationServiceDefault(final I18nTranslationManager translationManager,
-      final Provider<UserSession> userSessionProvider) {
+      final UserSessionManager userSessionManager) {
     this.translationManager = translationManager;
-    // this.userSessionProvider = userSessionProvider;
+    this.userSessionManager = userSessionManager;
+  }
+
+  @Override
+  public boolean isRTL() {
+    return userSessionManager.isUserLoggedIn() ? userSessionManager.getUser().getLanguage().getDirection().equals(
+        RTL)
+        : false;
   }
 
   /**
@@ -72,13 +77,11 @@ public class I18nTranslationServiceDefault extends I18nTranslationService {
   @Override
   public String tWithNT(final String text, final String noteForTranslators) {
     String language;
-
-    // final UserSession userSession = userSessionProvider.get();
-    // if (userSession.isUserLoggedIn()) {
-    // language = userSession.getUser().getLanguage().getCode();
-    // } else {
-    language = I18nTranslation.DEFAULT_LANG;
-    // }
+    if (userSessionManager.isUserLoggedIn()) {
+      language = userSessionManager.getUser().getLanguage().getCode();
+    } else {
+      language = I18nTranslation.DEFAULT_LANG;
+    }
     final String encodeText = TextUtils.escapeHtmlLight(text);
     String translation = translationManager.getTranslation(language, text, noteForTranslators);
     if (translation == UNTRANSLATED_VALUE) {

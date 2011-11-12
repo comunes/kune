@@ -62,8 +62,8 @@ public class WizardDialog implements WizardDialogView {
     this.maskWidget = maskWidget;
     this.listener = listener;
     this.i18n = i18n;
-    final Builder dialogBuilder = new BasicTopDialog.Builder(dialogId, false, modal).width(width).height(
-        height).firstButtonId(cancelId).sndButtonId(finishId).title(header);
+    final Builder dialogBuilder = new BasicTopDialog.Builder(dialogId, false, modal, i18n.getDirection()).width(
+        width).height(height).firstButtonId(cancelId).sndButtonId(finishId).title(header);
     dialog = dialogBuilder.build();
     dialog.setFirstBtnText(i18n.tWithNT("Cancel", "used in button"));
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {

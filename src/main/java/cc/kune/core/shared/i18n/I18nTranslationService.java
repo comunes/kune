@@ -21,7 +21,11 @@ package cc.kune.core.shared.i18n;
 
 import cc.kune.common.client.utils.Pair;
 
+import com.google.gwt.i18n.client.HasDirection.Direction;
+
 public abstract class I18nTranslationService {
+
+  protected static final String RTL = "rtl";
 
   // Also in I18nTranslation
   protected static final String UNTRANSLATED_VALUE = null;
@@ -31,6 +35,12 @@ public abstract class I18nTranslationService {
     // text = text.replaceAll("&copy;", "©");
     return text;
   }
+
+  public Direction getDirection() {
+    return isRTL() ? Direction.RTL : Direction.LTR;
+  }
+
+  public abstract boolean isRTL();
 
   /**
    * Use [%d] to reference the Integer parameters

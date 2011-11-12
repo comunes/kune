@@ -85,7 +85,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     final int rowCount = flex.getRowCount();
     final FolderItemWidget itemWidget = new FolderItemWidget((ImageResource) item.getIcon(),
         item.getText(), item.getStateToken());
-    final ActionSimplePanel toolbar = new ActionSimplePanel(guiProvider);
+    final ActionSimplePanel toolbar = new ActionSimplePanel(guiProvider, i18n);
     final long modifiedOn = item.getModififiedOn();
     if (modifiedOn != FolderViewerView.NO_DATE) {
       // String dateFormat = session.getCurrentLanguage().getDateFormatShort();

@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.pspace.client.PSpacePresenter.PSpaceView;
 
@@ -66,9 +67,9 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
 
   @Inject
   public PSpacePanel(final GuiProvider guiProvider, final CoreResources res, final GSpaceArmor wsArmor,
-      final PSpaceInDevelopment inDevelopment) {
+      final PSpaceInDevelopment inDevelopment, final I18nTranslationService i18n) {
     widget = uiBinder.createAndBindUi(this);
-    actionPanel = new ActionFlowPanel(guiProvider);
+    actionPanel = new ActionFlowPanel(guiProvider, i18n);
     actionPanelContainer.add(actionPanel);
     final Element layer = mainPanel.getWidgetContainerElement(messagePanel);
     layer.addClassName("k-publicspace-msg");

@@ -29,6 +29,7 @@ import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -53,7 +54,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   @Inject
   public EntityHeaderPanel(final Provider<FileDownloadUtils> downloadProvider,
       final CoreResources images, final GuiProvider bindings, final GSpaceArmor armor,
-      final EntityTextLogo entityTextLogo) {
+      final EntityTextLogo entityTextLogo, final I18nTranslationService i18n) {
     this.entityTextLogo = entityTextLogo;
     mainPanel = new HorizontalPanel();
     mainPanel.setWidth("100%");
@@ -63,7 +64,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     vpanel.setWidth("100%");
     vpanel.setHorizontalAlignment(HorizontalPanel.ALIGN_RIGHT);
     mainPanel.add(entityTextLogo);
-    toolbar = new ActionFlowPanel(bindings);
+    toolbar = new ActionFlowPanel(bindings, i18n);
     vpanel.add(toolbar);
     mainPanel.add(vpanel);
     armor.getEntityHeader().add(mainPanel);

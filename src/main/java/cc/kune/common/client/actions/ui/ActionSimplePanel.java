@@ -20,35 +20,36 @@
 package cc.kune.common.client.actions.ui;
 
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.inject.Inject;
 
 public class ActionSimplePanel extends AbstractComposedGuiItem implements ActionExtensibleView {
 
-    private final HorizontalPanel bar;
+  private final HorizontalPanel bar;
 
-    @Inject
-    public ActionSimplePanel(final GuiProvider guiProvider) {
-        super(guiProvider);
-        bar = new HorizontalPanel();
-        initWidget(bar);
-    }
+  @Inject
+  public ActionSimplePanel(final GuiProvider guiProvider, final I18nTranslationService i18n) {
+    super(guiProvider, i18n);
+    bar = new HorizontalPanel();
+    initWidget(bar);
+  }
 
-    @Override
-    protected void addWidget(final AbstractGuiItem item) {
-        bar.add(item);
-    }
+  @Override
+  protected void addWidget(final AbstractGuiItem item) {
+    bar.add(item);
+  }
 
-    @Override
-    public void clear() {
-        super.clear();
-        bar.clear();
-    }
+  @Override
+  public void clear() {
+    super.clear();
+    bar.clear();
+  }
 
-    @Override
-    protected void insertWidget(final AbstractGuiItem item, final int position) {
-        final int count = bar.getWidgetCount();
-        bar.insert(item, count < position ? count : position);
-    }
+  @Override
+  protected void insertWidget(final AbstractGuiItem item, final int position) {
+    final int count = bar.getWidgetCount();
+    bar.insert(item, count < position ? count : position);
+  }
 }

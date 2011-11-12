@@ -52,6 +52,7 @@ public class I18nUITranslationService extends I18nTranslationService {
   private String currentLanguageCode;
   private final Set<Pair<String, String>> earlyTexts;
   private final I18nServiceAsync i18nService;
+  private boolean isCurrentLangRTL = false;
   private boolean isLangInProperties;
   private final KuneConstants kuneConstants;
   private HashMap<String, String> lexicon;
@@ -70,18 +71,10 @@ public class I18nUITranslationService extends I18nTranslationService {
     Log.info("Workspace starting with language: " + currentLocale.getLocaleName() + ", isRTL: "
         + LocaleInfo.getCurrentLocale().isRTL() + ", translated langs: "
         + Arrays.toString(LocaleInfo.getAvailableLocaleNames()));
+    isLangInProperties = isInConstantProperties(currentLocale.getLocaleName());
     earlyTexts = new HashSet<Pair<String, String>>();
 
     i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
-
-      private boolean isInConstantProperties(final I18nLanguageDTO currentLang) {
-        for (final String lang : LocaleInfo.getAvailableLocaleNames()) {
-          if (lang.equals(currentLang.getCode())) {
-            return true;
-          }
-        }
-        return false;
-      }
 
       @Override
       public void onFailure(final Throwable caught) {
@@ -93,20 +86,25 @@ public class I18nUITranslationService extends I18nTranslationService {
         currentLang = result;
         currentLanguageCode = currentLang.getCode();
         session.setCurrentLanguage(currentLang);
-        isLangInProperties = isInConstantProperties(currentLang);
+        isLangInProperties = isInConstantProperties(currentLang.getCode());
         i18nService.getLexicon(currentLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
           @Override
           public void onFailure(final Throwable caught) {
-            Log.error("Workspace adaptation to your language failed: " + caught.getMessage());
+            Log.error("Workspace adaptation to server proposed language failed: " + caught.getMessage());
           }
 
           @Override
           public void onSuccess(final HashMap<String, String> result) {
             lexicon = result;
             session.setCurrentLanguage(currentLang);
-            Log.info("Workspace adaptation to language: " + currentLang.getEnglishName() + ", isRTL: "
-                + currentLang.getDirection());
-            eventBus.fireEvent(new I18nReadyEvent());
+            Log.info("Workspace adaptation to server proposed language: " + currentLang.getEnglishName()
+                + ", isRTL: " + currentLang.getDirection() + " use properties: "
+                + shouldIuseProperties());
+
+            if (!changeToLanguageIfNecessary(getCurrentGWTlanguage(), currentLang.getCode())) {
+              isCurrentLangRTL = currentLang.getDirection().equals(RTL);
+              eventBus.fireEvent(new I18nReadyEvent());
+            }
           }
         });
         session.onUserSignIn(true, new UserSignInHandler() {
@@ -126,19 +124,22 @@ public class I18nUITranslationService extends I18nTranslationService {
           }
         });
       }
-
     });
   }
 
-  public void changeCurrentLanguage(final String newLanguage) {
-    if (!newLanguage.equals(this.currentLanguageCode)) {
-      setCurrentLanguage(newLanguage);
-      changeLocale(newLanguage);
-    }
-  }
+  /**
+   * https://developer.mozilla.org/en/DOM/window.location
+   * 
+   * "If you need to change pathname but keep the hash as is, use the replace() method instead, which should work consistently across browsers."
+   * 
+   * @param newUrl
+   */
+  private native void changeHref(String newUrl) /*-{
+		// $wnd.location.href = newUrl;
+		$wnd.location.replace(newUrl);
+  }-*/;
 
   /**
-   * 
    * See in:
    * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread
    * /5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
@@ -146,34 +147,38 @@ public class I18nUITranslationService extends I18nTranslationService {
    * JSNI method to change the locale of the application - it effectively parses
    * the existing URL and creates a new one for the chosen locale.
    * 
-   * It additionally launches any JavaScript debugger that might be attached to
-   * the system (Windows only). To disable this functionality just remove the
-   * "debugger" line.
-   * 
    * @param newLocale
    *          String value of the new locale to go to.
    */
-  private native void changeLocale(String newLocale)
-  // FIXME: this now does not works correctly with hosted mode (and also give
-  // some "Opss" in server side)
-  /*-{
-		// Uncomment the "debugger;" line to see how to set debug statements in JSNI code
-		// When in web mode, if your browser has a JavaScript debugger attached, it will
-		// launch at this point in the code (when the user changes locale through the menu system).
-		// debugger;
+  private void changeLanguageInUrl(final String newLocale) {
+    final String hash = WindowUtils.getLocation().getHash();
+    final String query = WindowUtils.getLocation().getQueryString();
+    final String newUrl = I18nUrlUtils.changeLang(query + (TextUtils.notEmpty(hash) ? hash : ""),
+        newLocale);
+    Log.info("Locale current query: " + query);
+    Log.info("Locale current hash: " + hash);
+    Log.info("Locale new Url: " + newUrl);
+    changeHref("http://" + WindowUtils.getLocation().getHost() + newUrl);
+  }
 
-		// Get the current location
-		var currLocation = $wnd.location.toString();
-		// Get rid of any GWT History tokens that might be present
-		var noHistoryCurrLocArray = currLocation.split("#");
-		var noHistoryCurrLoc = noHistoryCurrLocArray[0];
-		var currHistory = noHistoryCurrLocArray[1];
-		// Get rid of any locale string
-		var locArray = noHistoryCurrLoc.split("?");
-		// Build the new href location and then send the browser there.
-		// $wnd.location.href = locArray[0]+"?locale="+newLocale+"#"+currHistory;
-		$wnd.location.href = locArray[0] + "?locale=" + newLocale
-  }-*/;
+  public boolean changeToLanguageIfNecessary(final String wantedLang) {
+    return changeToLanguageIfNecessary(currentLang.getCode(), wantedLang);
+  }
+
+  /**
+   * 
+   * @param wantedLanguage
+   *          to check and to change to
+   * @return true if we should reload the client with the new language
+   */
+  public boolean changeToLanguageIfNecessary(final String currentLang, final String wantedLang) {
+    if (!currentLang.equals(wantedLang) && isInConstantProperties(wantedLang)) {
+      setCurrentLanguage(wantedLang);
+      changeLanguageInUrl(wantedLang);
+      return true;
+    }
+    return false;
+  }
 
   public String formatDateWithLocale(final Date date) {
     return formatDateWithLocale(date, false);
@@ -197,6 +202,12 @@ public class I18nUITranslationService extends I18nTranslationService {
     }
     final String dateFormated = fmt.format(date);
     return dateFormated;
+  }
+
+  private String getCurrentGWTlanguage() {
+    String gwtLang = LocaleInfo.getCurrentLocale().getLocaleName();
+    gwtLang = gwtLang.equals("default") ? "en" : gwtLang;
+    return gwtLang;
   }
 
   public String getCurrentLanguage() {
@@ -242,6 +253,22 @@ public class I18nUITranslationService extends I18nTranslationService {
     return decodeHtml(translation);
   }
 
+  private boolean isInConstantProperties(final String currentLang) {
+    for (final String lang : LocaleInfo.getAvailableLocaleNames()) {
+      if (lang.equals(currentLang)) {
+        Log.info("Workspace adaptation to language: " + currentLang + " is in properties");
+        return true;
+      }
+    }
+    Log.info("Workspace adaptation to language: " + currentLang + " is not in properties");
+    return false;
+  }
+
+  @Override
+  public boolean isRTL() {
+    return isCurrentLangRTL;
+  }
+
   private void save(final String text, final String noteForTranslators) {
     i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text, noteForTranslators,
         new AsyncCallback<String>() {
@@ -268,6 +295,10 @@ public class I18nUITranslationService extends I18nTranslationService {
     lexicon.put(text, translation);
   }
 
+  private boolean shouldIuseProperties() {
+    return isLangInProperties;
+  }
+
   /**
    * In production, this method uses a hashmap. In development, if the text is
    * not in the hashmap, it makes a server petition (that stores the text
@@ -286,7 +317,7 @@ public class I18nUITranslationService extends I18nTranslationService {
     }
     final String encodeText = TextUtils.escapeHtmlLight(text);
 
-    if (isLangInProperties) {
+    if (shouldIuseProperties()) {
       // The db translations now are in properties files (more stable)
       try {
         return kuneConstants.getString(I18nUtils.convertMethodName(text + " " + noteForTranslators));

@@ -23,68 +23,68 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class I18nLanguageDTO implements IsSerializable {
 
-    private String code;
-    private String englishName;
-    private String nativeName;
-    private String direction;
-    private String pluralization;
-    private String dateFormat;
-    private String dateFormatShort;
+  private String code;
+  private String dateFormat;
+  private String dateFormatShort;
+  private String direction;
+  private String englishName;
+  private String nativeName;
+  private String pluralization;
 
-    public String getCode() {
-        return code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public String getDateFormat() {
-        return dateFormat;
-    }
+  public String getDateFormat() {
+    return dateFormat;
+  }
 
-    public String getDateFormatShort() {
-        return dateFormatShort;
-    }
+  public String getDateFormatShort() {
+    return dateFormatShort;
+  }
 
-    public String getDirection() {
-        return direction;
-    }
+  public String getDirection() {
+    return direction;
+  }
 
-    public String getEnglishName() {
-        return englishName;
-    }
+  public String getEnglishName() {
+    return englishName;
+  }
 
-    public String getNativeName() {
-        return nativeName;
-    }
+  public String getNativeName() {
+    return nativeName;
+  }
 
-    public String getPluralization() {
-        return pluralization;
-    }
+  public String getPluralization() {
+    return pluralization;
+  }
 
-    public void setCode(final String code) {
-        this.code = code;
-    }
+  public void setCode(final String code) {
+    this.code = code;
+  }
 
-    public void setDateFormat(String dateFormat) {
-        this.dateFormat = dateFormat;
-    }
+  public void setDateFormat(final String dateFormat) {
+    this.dateFormat = dateFormat;
+  }
 
-    public void setDateFormatShort(String dateFormatShort) {
-        this.dateFormatShort = dateFormatShort;
-    }
+  public void setDateFormatShort(final String dateFormatShort) {
+    this.dateFormatShort = dateFormatShort;
+  }
 
-    public void setDirection(final String direction) {
-        this.direction = direction;
-    }
+  public void setDirection(final String direction) {
+    this.direction = direction;
+  }
 
-    public void setEnglishName(final String englishName) {
-        this.englishName = englishName;
-    }
+  public void setEnglishName(final String englishName) {
+    this.englishName = englishName;
+  }
 
-    public void setNativeName(final String nativeName) {
-        this.nativeName = nativeName;
-    }
+  public void setNativeName(final String nativeName) {
+    this.nativeName = nativeName;
+  }
 
-    public void setPluralization(final String pluralization) {
-        this.pluralization = pluralization;
-    }
+  public void setPluralization(final String pluralization) {
+    this.pluralization = pluralization;
+  }
 
 }

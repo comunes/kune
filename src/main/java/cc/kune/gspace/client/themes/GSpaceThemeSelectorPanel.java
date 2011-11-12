@@ -22,14 +22,15 @@ package cc.kune.gspace.client.themes;
 import cc.kune.common.client.actions.ui.ActionExtensibleView;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
 public class GSpaceThemeSelectorPanel extends ActionFlowPanel implements ActionExtensibleView {
 
   @Inject
-  public GSpaceThemeSelectorPanel(final GuiProvider guiProvider) {
-    super(guiProvider);
+  public GSpaceThemeSelectorPanel(final GuiProvider guiProvider, final I18nTranslationService i18n) {
+    super(guiProvider, i18n);
   }
 
 }

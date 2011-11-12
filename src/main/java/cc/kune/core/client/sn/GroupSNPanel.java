@@ -55,7 +55,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
         i18n.t("Users pending to be accepted in this group by the administrators"));
     sndDeckLabel.setText(i18n.t("This is an orphaned project, if you are interested in contributing please request to join"));
     firstDeckLabel.setText(i18n.t("The members of this group are not public"));
-    bottomActionsToolbar = new ActionFlowPanel(guiProvider);
+    bottomActionsToolbar = new ActionFlowPanel(guiProvider, i18n);
     bottomPanel.add(bottomActionsToolbar);
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);

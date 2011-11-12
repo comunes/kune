@@ -29,6 +29,7 @@ import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.UIObject;
@@ -40,6 +41,7 @@ public class BasicTopDialog extends BasicDialog {
     private boolean autoscroll = false;
     private boolean closeBtn = true;
     private final String dialogId;
+    private final Direction direction;
     private String firstButtonId;
     private String firstButtonTitle;
     private String height;
@@ -51,11 +53,13 @@ public class BasicTopDialog extends BasicDialog {
     private String title;
     private String width;
 
-    public Builder(final String dialogId, final boolean autohide, final boolean modal) {
+    public Builder(final String dialogId, final boolean autohide, final boolean modal,
+        final Direction direction) {
       // Required params
       this.autohide = autohide;
       this.modal = modal;
       this.dialogId = dialogId;
+      this.direction = direction;
     }
 
     public Builder autoscroll(final boolean autoscroll) {
@@ -139,7 +143,7 @@ public class BasicTopDialog extends BasicDialog {
     popup = new PopupTopPanel(builder.autohide, builder.modal);
     popup.add(this);
     popup.ensureDebugId(builder.dialogId);
-    super.getTitleText().setText(builder.title);
+    super.getTitleText().setText(builder.title, builder.direction);
     if (TextUtils.notEmpty(builder.icon)) {
       super.setTitleIcon(builder.icon);
     }
@@ -150,7 +154,7 @@ public class BasicTopDialog extends BasicDialog {
     super.setSecondBtnText(builder.sndButtonTitle);
     super.setSecondBtnId(builder.sndButtonId);
     super.setSecondBtnTabIndex(builder.tabIndexStart + 1);
-    super.getTitleText().setText(builder.title);
+    super.getTitleText().setText(builder.title, builder.direction);
     setWidthImpl(builder.width);
     setHeightImpl(builder.height);
     recalculateSize();

@@ -82,8 +82,8 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img,
       final MaskWidgetView mask, final GroupFieldFactory groupFieldFactory) {
     this.groupFieldFactory = groupFieldFactory;
-    final Builder builder = new BasicTopDialog.Builder(NEWGROUP_WIZARD, false, true).autoscroll(true).title(
-        i18n.t("Register a new group"));
+    final Builder builder = new BasicTopDialog.Builder(NEWGROUP_WIZARD, false, true, i18n.getDirection()).autoscroll(
+        true).title(i18n.t("Register a new group"));
     builder.icon("k-newgroup-icon");
     builder.firstButtonTitle(i18n.t("Register")).firstButtonId(REGISTER_BUTTON);
     builder.sndButtonTitle(i18n.t("Cancel")).sndButtonId(CANCEL_BUTTON);

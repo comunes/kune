@@ -36,6 +36,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -50,6 +51,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
   private final boolean autohide;
   private BasicTopDialog dialog;
   private final String dialogId;
+  private final Direction direction;
   private final String errorLabelId;
   private final String firstBtnId;
   private final String firstBtnTitle;
@@ -69,7 +71,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
       final boolean autoHide, final NotifyLevelImages images, final String errorLabelId,
       final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
-      final String sndBtnId, final ProvidersCollection provCollection) {
+      final String sndBtnId, final ProvidersCollection provCollection, final Direction direction) {
     this.dialogId = dialogId;
     this.title = title;
     this.modal = modal;
@@ -81,22 +83,24 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     this.sndBtnId = sndBtnId;
     this.provCollection = provCollection;
     this.autohide = autoHide;
+    this.direction = direction;
   }
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
       final NotifyLevelImages images, final String errorLabelId, final String firstBtnTitle,
       final String firstBtnId, final String sndBtnTitle, final String sndBtnId,
-      final ProvidersCollection provCollection) {
+      final ProvidersCollection provCollection, final Direction direction) {
     this(dialogId, title, NO_SIZE, NO_SIZE, modal, false, images, errorLabelId, firstBtnTitle,
-        firstBtnId, sndBtnTitle, sndBtnId, provCollection);
+        firstBtnId, sndBtnTitle, sndBtnId, provCollection, direction);
   }
 
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
       final int height, final boolean modal, final boolean autoHide, final NotifyLevelImages images,
       final String errorLabelId, final String firstBtnTitle, final String firstBtnId,
-      final String sndBtnTitle, final String sndBtnId, final ProvidersCollection provCollection) {
+      final String sndBtnTitle, final String sndBtnId, final ProvidersCollection provCollection,
+      final Direction direction) {
     this(dialogId, title, modal, autoHide, images, errorLabelId, firstBtnTitle, firstBtnId, sndBtnTitle,
-        sndBtnId, provCollection);
+        sndBtnId, provCollection, direction);
     this.width = width;
     this.height = height;
   }
@@ -104,9 +108,9 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
       final int height, final boolean modal, final NotifyLevelImages images, final String errorLabelId,
       final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
-      final String sndBtnId, final ProvidersCollection provCollection) {
+      final String sndBtnId, final ProvidersCollection provCollection, final Direction direction) {
     this(dialogId, title, width, height, modal, false, images, errorLabelId, firstBtnTitle, firstBtnId,
-        sndBtnTitle, sndBtnId, provCollection);
+        sndBtnTitle, sndBtnId, provCollection, direction);
   }
 
   @Override
@@ -129,9 +133,9 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
   }
 
   private void createDialog() {
-    final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(true).icon(
-        iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(dialogId).sndButtonTitle(
-        sndBtnTitle).sndButtonId(sndBtnId).title(title);
+    final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal, direction).autoscroll(
+        true).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(
+        dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(sndBtnId).title(title);
     if (width != NO_SIZE) {
       builder.width(String.valueOf(width + 20) + "px");
     }

@@ -79,7 +79,7 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
 
   @Override
   public void setText(final String text) {
-    iconLabel.setText(text);
+    iconLabel.setText(text, descriptor.getDirection());
     layout();
   }
 

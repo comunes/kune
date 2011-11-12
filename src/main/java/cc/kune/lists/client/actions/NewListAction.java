@@ -51,7 +51,8 @@ public class NewListAction extends RolAction {
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    final Builder builder = new PromptTopDialog.Builder(ID, "Name of the new list?", false, true);
+    final Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Name of the new list?"), false,
+        true, i18n.getDirection());
     builder.width("300px").height("50px").firstButtonTitle(i18n.t("Create")).sndButtonTitle(
         i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID).width(270);
     builder.textboxId(TEXTBOX_ID);

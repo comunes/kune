@@ -4,6 +4,7 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.shared.SearcherConstants;
 
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
@@ -43,6 +44,7 @@ public class SearchBoxFactory {
         suggestBox,
         searchOnlyUsers ? i18n.t("Type something to search for users in [%s]", siteCommonName) : i18n.t(
             "Type something to search for users and groups in [%s]", siteCommonName));
+    suggestBox.getTextBox().setDirection(i18n.isRTL() ? Direction.RTL : Direction.LTR);
     return multivalueSBox;
   }
 

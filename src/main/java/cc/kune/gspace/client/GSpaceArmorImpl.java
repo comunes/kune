@@ -263,13 +263,12 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public void setBackImage(final String url) {
     final String bodyProp = "#FFFFFF url('" + url + "') fixed top left";
-    // final String bodyProp = "#FFFFFF url('" + url +
-    // "') fixed no-repeat top left";
     DOM.setStyleAttribute(groupSpaceWrapper.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 
   @Override
   public void setContentVisible(final boolean visible) {
+    // FIXME: remove this?
     // NotifyUser.info("Visible: " + visible);
     // docContainer.getElement().getStyle().setOpacity(visible ? 1d : .0d);
     // docFooter.getElement().getStyle().setOpacity(visible ? 1d : .0d);

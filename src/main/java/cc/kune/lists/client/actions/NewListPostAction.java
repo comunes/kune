@@ -57,7 +57,8 @@ public class NewListPostAction extends RolAction {
   @Override
   public void actionPerformed(final ActionEvent event) {
     if (session.isLogged()) {
-      final Builder builder = new PromptTopDialog.Builder(ID, "Title of the new post?", false, true);
+      final Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Title of the new post?"), false,
+          true, i18n.getDirection());
       builder.width("300px").height("50px").firstButtonTitle(i18n.t("Post")).sndButtonTitle(
           i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID).width(270);
       builder.textboxId(TEXTBOX_ID);

@@ -52,8 +52,8 @@ public abstract class EntitySearchPanel {
 
   public EntitySearchPanel(final CoreResources img, final I18nUITranslationService i18n) {
     this.i18n = i18n;
-    dialog = new BasicTopDialog.Builder(DIALOG_ID, false, true).autoscroll(false).firstButtonId(OK_ID).tabIndexStart(
-        1).build();
+    dialog = new BasicTopDialog.Builder(DIALOG_ID, false, true, i18n.getDirection()).autoscroll(false).firstButtonId(
+        OK_ID).tabIndexStart(1).build();
     dialog.setFirstBtnText(i18n.t("Close"));
     dialog.setSecondBtnVisible(false);
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {

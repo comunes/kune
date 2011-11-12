@@ -62,7 +62,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     setTooltip(trdCategoryLabel, "NOT USED");
     super.setTrdCategoryVisible(false, false);
     sndDeckLabel.setText("NOT USED");
-    bottomActionsToolbar = new ActionFlowPanel(guiProvider);
+    bottomActionsToolbar = new ActionFlowPanel(guiProvider, i18n);
     bottomPanel.add(bottomActionsToolbar);
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);

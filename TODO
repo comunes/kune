@@ -12,6 +12,20 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
+** i18n usecase
+| logged | locale in URL  | i18n supported | useDB |
+| false  | false          | false          | true  |
+| false  | false          | true           | false |
+| false  | true           | false          | true  |
+| false  | true           | true           | false |
+| true   | false          | false          | true  |
+| true   | false          | true           | false |
+| true   | true (same)    | true           | false |
+| true   | true (same)    | false          | true  |
+| true   | true(*) (diff) | false          | true  |
+| true   | true(*) (diff) | true           | false |
+meta?
+
 ** TODO multi uploader
 http://code.google.com/p/gwt-plupload/
 http://www.plupload.com/example_all_runtimes.php

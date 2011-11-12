@@ -216,10 +216,11 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     if (text != null) {
       final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
       if (key == null) {
-        iconLabel.setText(text);
+        iconLabel.setText(text, descriptor.getDirection());
       } else {
-        iconLabel.setLabelText(text + createShortCut(key, "oc-mshortcut-hidden")
-            + createShortCut(key, "oc-mshortcut"));
+        iconLabel.setText(
+            text + createShortCut(key, "oc-mshortcut-hidden") + createShortCut(key, "oc-mshortcut"),
+            descriptor.getDirection());
       }
     }
     layout();

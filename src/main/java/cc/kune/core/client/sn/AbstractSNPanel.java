@@ -115,7 +115,7 @@ public class AbstractSNPanel extends ViewImpl {
     this.avatarDecoratorProv = avatarDecorator;
     this.dragController = dragController;
     widget = uiBinder.createAndBindUi(this);
-    actions = new ActionSimplePanel(guiProvider);
+    actions = new ActionSimplePanel(guiProvider, i18n);
     notDrop.register(firstCategoryFlow);
     notDrop.register(sndCategoryFlow);
     notDrop.register(trdCategoryFlow);

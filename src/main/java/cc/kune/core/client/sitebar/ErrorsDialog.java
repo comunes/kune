@@ -54,9 +54,9 @@ public class ErrorsDialog {
 
   @Inject
   public ErrorsDialog(final I18nTranslationService i18n, final EventBus eventBus) {
-    dialog = new BasicTopDialog.Builder(ERROR_LOGGER_ID, true, true).title(i18n.t("Errors info")).autoscroll(
-        true).firstButtonTitle(i18n.t("Ok")).firstButtonId(ERROR_LOGGER_BUTTON_ID).tabIndexStart(1).width(
-        "400px").height("400px").build();
+    dialog = new BasicTopDialog.Builder(ERROR_LOGGER_ID, true, true, i18n.getDirection()).title(
+        i18n.t("Errors info")).autoscroll(true).firstButtonTitle(i18n.t("Ok")).firstButtonId(
+        ERROR_LOGGER_BUTTON_ID).tabIndexStart(1).width("400px").height("400px").build();
     dialog.getTitleText().setText(i18n.t("Info about errors"));
     final InlineLabel subTitle = new InlineLabel(
         i18n.t("Please copy/paste this info to report problems"));

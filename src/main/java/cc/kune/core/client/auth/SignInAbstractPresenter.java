@@ -92,12 +92,13 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     session.setUserHash(userHash);
     session.setCurrentUserInfo(userInfoDTO);
     final I18nLanguageDTO language = userInfoDTO.getLanguage();
-    i18n.changeCurrentLanguage(language.getCode());
     session.setCurrentLanguage(language);
-    if (gotoHomePage) {
-      stateManager.gotoStateToken(new StateToken(userInfoDTO.getHomePage()).clearDocument());
-    } else {
-      stateManager.redirectOrRestorePreviousToken();
+    if (!i18n.changeToLanguageIfNecessary(language.getCode())) {
+      if (gotoHomePage) {
+        stateManager.gotoStateToken(new StateToken(userInfoDTO.getHomePage()).clearDocument());
+      } else {
+        stateManager.redirectOrRestorePreviousToken();
+      }
     }
   }
 

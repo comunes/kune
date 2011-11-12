@@ -7,9 +7,6 @@
 
 .mainPanel {
   border-top: 2px solid white;
-  /*  border-bottom: 7px solid transparent;
-  border-right: 17px solid transparent;
-  border-left: 17px solid transparent; */
 }
 
 .k-spaces {
@@ -34,10 +31,6 @@
   overflow: hidden;
   background-color: #fff !important;
   padding: 0px 5px;
-  /*kfilter: alpha(opacity =       38) !important;
-  -moz-opacity: 0.38 !important;
-  -khtml-opacity: 0.38 !important;
-  opacity: 0.38 !important; */
 }
 
 .entityCentralContainer {
@@ -55,7 +48,6 @@
   -webkit-border-bottom-right-radius: 7px;
   -moz-border-radius-bottomright: 7px;
   border-bottom-right-radius: 7px;
-  /* padding: 7px 10px 0px 17px; */
   overflow: hidden;
 }
 
@@ -165,15 +157,6 @@
   border-top-right-radius: 7px;
 }
 
-/* Fix wave scroll problem
-.docEditor div {
-  overflow-y: visible;
-}
-
-div.docEditor div {
-  position: static;
-}
-*/
 .docFooter {
   border-left: 1px solid #959595;
   border-right: 1px solid #959595;
@@ -203,16 +186,14 @@ div.docEditor div {
   border-bottom-left-radius: 7px;
 }
 
-.entityToolsNorth { /* margin: 10px; */
+.entityToolsNorth {
 
 }
 
-.entityToolsNorth span { /* font-size: 20px;
-  font-weight: bold; */
-
+.entityToolsNorth span {
 }
 
-.entityToolsCenter { /*  margin: 10px; */
+.entityToolsCenter {
   overflow: visible !important;
   padding-top: 10px;
   clear: both;

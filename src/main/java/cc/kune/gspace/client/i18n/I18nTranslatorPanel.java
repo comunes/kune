@@ -29,7 +29,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
       final I18nToTranslateGridPanel toTranslateGrid, final I18nTranslatedGridPanel translatedGrid,
       final I18nTranslateRecomendPanel transRecommend, final CoreResources res) {
     super(TRANSLATOR_PANEL_ID, "", false, false, images, TRANSLATOR_ERROR_ID, i18n.t("Close"), null,
-        null, null, transGroup);
+        null, null, transGroup, i18n.getDirection());
     setIcon(res.language());
     this.lanSelectorPanel = lanSelectorPanel;
     this.toTranslateGrid = toTranslateGrid;

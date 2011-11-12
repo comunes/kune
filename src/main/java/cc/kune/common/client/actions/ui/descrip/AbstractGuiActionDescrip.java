@@ -29,6 +29,8 @@ import cc.kune.common.client.actions.ChangeableObject;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.core.client.dnd.DropTarget;
 
+import com.google.gwt.i18n.client.HasDirection.Direction;
+
 /**
  * The Class AbstractUIActionDescriptor.
  */
@@ -41,6 +43,9 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
   /** The item DOM id. */
   private String id;
+
+  /** If is a Rigth-to-Left widget (for languages like Arabic) */
+  private boolean isRTL = false;
 
   /** The item location. */
   private String location;
@@ -79,6 +84,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public AbstractAction getAction() {
     return action;
+  }
+
+  @Override
+  public Direction getDirection() {
+    return isRTL ? Direction.RTL : Direction.LTR;
   }
 
   @Override
@@ -146,6 +156,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public boolean isEnabled() {
     return (Boolean) getValue(Action.ENABLED);
+  }
+
+  @Override
+  public boolean isRTL() {
+    return isRTL;
   }
 
   @Override
@@ -222,6 +237,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public void setPosition(final int position) {
     this.position = position;
+  }
+
+  @Override
+  public void setRTL(final boolean isRTL) {
+    this.isRTL = isRTL;
   }
 
   @Override

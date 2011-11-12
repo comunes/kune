@@ -39,7 +39,7 @@ public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements Grou
   public GroupOptionsPanel(final EntityHeader entityHeader, final I18nTranslationService i18n,
       final NotifyLevelImages images, final GroupOptionsCollection entityOptionsGroup) {
     super(GROUP_OP_PANEL_ID, "", false, false, images, GROUP_OPTIONS_ERROR_ID, i18n.t("Close"), null,
-        null, null, entityOptionsGroup);
+        null, null, entityOptionsGroup, i18n.getDirection());
     this.entityHeader = entityHeader;
     super.setIconCls("k-options-icon");
     super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE));

@@ -93,7 +93,7 @@ public class GwtIconLabelGui extends AbstractGuiItem {
 
   @Override
   public void setText(final String text) {
-    iconLabel.setText(text);
+    iconLabel.setText(text, descriptor.getDirection());
   }
 
   @Override

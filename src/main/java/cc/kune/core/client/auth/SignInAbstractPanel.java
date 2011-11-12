@@ -49,8 +49,8 @@ public abstract class SignInAbstractPanel extends ViewImpl {
       final String firstButtonId, final String cancelButtonTitle, final String cancelButtonId,
       final NotifyLevelImages images, final String errorLabelId, final int tabIndexStart) {
 
-    final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(autoscroll).title(
-        title);
+    final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal, i18n.getDirection()).autoscroll(
+        autoscroll).title(title);
     builder.icon(icon);
     builder.firstButtonTitle(firstButtonTitle).firstButtonId(firstButtonId);
     builder.sndButtonTitle(cancelButtonTitle).sndButtonId(cancelButtonId);

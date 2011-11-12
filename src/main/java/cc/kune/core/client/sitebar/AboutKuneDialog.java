@@ -47,7 +47,7 @@ public class AboutKuneDialog {
 
   @Inject
   public AboutKuneDialog(final I18nTranslationService i18n) {
-    dialog = new BasicTopDialog.Builder(ABOUT_KUNE_ID, true, true).title(
+    dialog = new BasicTopDialog.Builder(ABOUT_KUNE_ID, true, true, i18n.getDirection()).title(
         i18n.tWithNT("About Kune", "title of dialog")).autoscroll(false).firstButtonTitle(i18n.t("Ok")).firstButtonId(
         ABOUT_KUNE_BTN_ID).tabIndexStart(1).height("300px").width("410px").build();
     dialog.getInnerPanel().add(BINDER.createAndBindUi(this));
