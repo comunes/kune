@@ -473,7 +473,16 @@
   vertical-align: top;
   padding-left: 3px;
   padding-right: 3px;
-  /* float: left; */
+  float: right;
+}
+
+.k-iconlabel-left {
+  float: left;
+}
+
+.k-iconlabel-right {
+  float: left;
+ /*   margin-left: 5px; */
 }
 
 .k-menuimtem-title {
@@ -489,13 +498,6 @@
   margin-top: 4px;
 }
 
-.k-iconlabel-left {
-  float: left;
-}
-
-.k-iconlabel-right { /* float: left; */ /*   margin-left: 5px; */
-
-}
 
 .gwt-MenuBar-vertical .subMenuIcon-selected {
   background: none repeat scroll 0 0 #808080;

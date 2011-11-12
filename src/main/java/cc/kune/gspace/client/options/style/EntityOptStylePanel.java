@@ -57,12 +57,14 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   private final String chooseImage;
   private final Button clearBtn;
   private final String hasBackLabel;
+  private final I18nTranslationService i18n;
   private final String noHasBacklabel;
   private final IconLabel tabTitle;
   private final EntityUploaderForm uploader;
 
   public EntityOptStylePanel(final I18nTranslationService i18n, final CoreResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
+    this.i18n = i18n;
     tabTitle = TabTitleGenerator.generate(res.themeChoose(), i18n.t("Style"), MAX_TABTITLE_LENGTH);
     // super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     super.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
@@ -171,7 +173,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   private void setBackImageVisibleImpl(final boolean visible) {
     backImage.setVisible(visible);
     clearBtn.setVisible(visible);
-    backgroundLabel.setText(visible ? hasBackLabel : noHasBacklabel);
+    backgroundLabel.setText(visible ? hasBackLabel : noHasBacklabel, i18n.getDirection());
     uploader.getBtn().setText(visible ? changeImage : chooseImage);
   }
 

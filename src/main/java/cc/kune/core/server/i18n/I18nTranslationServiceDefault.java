@@ -26,24 +26,25 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
 public class I18nTranslationServiceDefault extends I18nTranslationService {
 
   private final I18nTranslationManager translationManager;
-  private final UserSessionManager userSessionManager;
+  private final Provider<UserSessionManager> userSessionManager;
 
   @Inject
   public I18nTranslationServiceDefault(final I18nTranslationManager translationManager,
-      final UserSessionManager userSessionManager) {
+      final Provider<UserSessionManager> userSessionManager) {
     this.translationManager = translationManager;
     this.userSessionManager = userSessionManager;
   }
 
   @Override
   public boolean isRTL() {
-    return userSessionManager.isUserLoggedIn() ? userSessionManager.getUser().getLanguage().getDirection().equals(
+    return userSessionManager.get().isUserLoggedIn() ? userSessionManager.get().getUser().getLanguage().getDirection().equals(
         RTL)
         : false;
   }
@@ -77,8 +78,8 @@ public class I18nTranslationServiceDefault extends I18nTranslationService {
   @Override
   public String tWithNT(final String text, final String noteForTranslators) {
     String language;
-    if (userSessionManager.isUserLoggedIn()) {
-      language = userSessionManager.getUser().getLanguage().getCode();
+    if (userSessionManager.get().isUserLoggedIn()) {
+      language = userSessionManager.get().getUser().getLanguage().getCode();
     } else {
       language = I18nTranslation.DEFAULT_LANG;
     }

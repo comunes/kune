@@ -109,7 +109,8 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
 
   @Override
   public void setContainer(final StateContainerDTO state) {
-    contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getContainerRights().isEditable()
+    final String title = state.getContainer().isRoot() ? i18n.t(state.getTitle()) : state.getTitle();
+    contentTitle.setTitle(title, state.getTypeId(), state.getContainerRights().isEditable()
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
     Window.setTitle(state.getGroup().getLongName() + ": " + state.getTitle());
   }

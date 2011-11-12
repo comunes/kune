@@ -82,6 +82,10 @@ public class NotifyUser {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message, closeable));
   }
 
+  public static void info(final String title, final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, title, message));
+  }
+
   public static void info(final String title, final String message, final String id,
       final boolean closeable) {
     sendEventImpl(title, message, id, closeable, NotifyLevel.info);

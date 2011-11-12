@@ -26,100 +26,101 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateContainerDTO extends StateAbstractDTO implements IsSerializable, HasContent {
 
-    private AccessListsDTO accessLists;
-    private ContainerDTO container;
-    private AccessRights containerRights;
-    private I18nLanguageDTO language;
-    private LicenseDTO license;
-    private ContainerDTO rootContainer;
-    private TagCloudResult tagCloudResult;
-    private String toolName;
-    private String typeId;
+  private AccessListsDTO accessLists;
+  private ContainerDTO container;
+  private AccessRights containerRights;
+  private I18nLanguageDTO language;
+  private LicenseDTO license;
+  private ContainerDTO rootContainer;
+  private TagCloudResult tagCloudResult;
+  private String toolName;
+  private String typeId;
 
-    public StateContainerDTO() {
-    }
+  public StateContainerDTO() {
+  }
 
-    public AccessListsDTO getAccessLists() {
-        return accessLists;
-    }
+  public AccessListsDTO getAccessLists() {
+    return accessLists;
+  }
 
-    public ContainerDTO getContainer() {
-        return container;
-    }
+  @Override
+  public ContainerDTO getContainer() {
+    return container;
+  }
 
-    public AccessRights getContainerRights() {
-        return containerRights;
-    }
+  public AccessRights getContainerRights() {
+    return containerRights;
+  }
 
-    public I18nLanguageDTO getLanguage() {
-        return language;
-    }
+  public I18nLanguageDTO getLanguage() {
+    return language;
+  }
 
-    public LicenseDTO getLicense() {
-        return license;
-    }
+  public LicenseDTO getLicense() {
+    return license;
+  }
 
-    public ContainerDTO getRootContainer() {
-        return rootContainer;
-    }
+  public ContainerDTO getRootContainer() {
+    return rootContainer;
+  }
 
-    public TagCloudResult getTagCloudResult() {
-        return tagCloudResult;
-    }
+  public TagCloudResult getTagCloudResult() {
+    return tagCloudResult;
+  }
 
-    public String getToolName() {
-        return toolName;
-    }
+  public String getToolName() {
+    return toolName;
+  }
 
-    @Override
-    public String getTypeId() {
-        return typeId;
-    }
+  @Override
+  public String getTypeId() {
+    return typeId;
+  }
 
-    public boolean isType(final String type) {
-        return getTypeId().equals(type);
-    }
+  public boolean isType(final String type) {
+    return getTypeId().equals(type);
+  }
 
-    public void setAccessLists(final AccessListsDTO accessLists) {
-        this.accessLists = accessLists;
-    }
+  public void setAccessLists(final AccessListsDTO accessLists) {
+    this.accessLists = accessLists;
+  }
 
-    public void setContainer(final ContainerDTO container) {
-        this.container = container;
-    }
+  public void setContainer(final ContainerDTO container) {
+    this.container = container;
+  }
 
-    public void setContainerRights(final AccessRights containerRights) {
-        this.containerRights = containerRights;
-    }
+  public void setContainerRights(final AccessRights containerRights) {
+    this.containerRights = containerRights;
+  }
 
-    public void setLanguage(final I18nLanguageDTO language) {
-        this.language = language;
-    }
+  public void setLanguage(final I18nLanguageDTO language) {
+    this.language = language;
+  }
 
-    public void setLicense(final LicenseDTO license) {
-        this.license = license;
-    }
+  public void setLicense(final LicenseDTO license) {
+    this.license = license;
+  }
 
-    public void setRootContainer(final ContainerDTO rootContainer) {
-        this.rootContainer = rootContainer;
-    }
+  public void setRootContainer(final ContainerDTO rootContainer) {
+    this.rootContainer = rootContainer;
+  }
 
-    public void setTagCloudResult(final TagCloudResult tagCloudResult) {
-        this.tagCloudResult = tagCloudResult;
-    }
+  public void setTagCloudResult(final TagCloudResult tagCloudResult) {
+    this.tagCloudResult = tagCloudResult;
+  }
 
-    public void setToolName(final String toolName) {
-        this.toolName = toolName;
-    }
+  public void setToolName(final String toolName) {
+    this.toolName = toolName;
+  }
 
-    @Override
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
+  @Override
+  public void setTypeId(final String typeId) {
+    this.typeId = typeId;
+  }
 
-    @Override
-    public String toString() {
-        return "StateDTO[" + getStateToken() + "/" + getTypeId() + "]";
-    }
+  @Override
+  public String toString() {
+    return "StateDTO[" + getStateToken() + "/" + getTypeId() + "]";
+  }
 
 }

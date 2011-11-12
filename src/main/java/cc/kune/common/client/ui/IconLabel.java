@@ -132,6 +132,18 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     return flow.remove(w);
   }
 
+  // @Deprecated
+  // private void setDirection(final Direction dir) {
+  // setIconRTL(iconLeft, dir);
+  // setIconRTL(iconRight, dir);
+  // label.addStyleName(dir.equals(Direction.LTR) ? "k-fr" : "k-fl");
+  // }
+  //
+  @Deprecated
+  private void setIconRTL(final Widget widget, final Direction direction) {
+    widget.addStyleName(direction.equals(Direction.LTR) ? "k-fl" : "k-fr");
+  }
+
   public void setId(final String id) {
     self.ensureDebugId(id);
   }
@@ -153,6 +165,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   private void setLeftIconResourceImpl(final ImageResource res) {
     iconLeft.setResource(res);
     iconLeft.addStyleName("k-iconlabel-left");
+    // setting floats again, because with setResource we lost them
+    setIconRTL(iconLeft, getTextDirection());
     iconLeft.setVisible(true);
   }
 
@@ -176,6 +190,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   public void setRightIconResource(final ImageResource res) {
     iconRight.setResource(res);
     iconRight.addStyleName("k-iconlabel-right");
+    // setting floats again, because with setResource we lost them
+    setIconRTL(iconRight, getTextDirection());
     iconRight.setVisible(true);
   }
 
@@ -193,11 +209,13 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   @Override
   public void setText(final String text) {
-    label.setText(text);
+    // setDirection(Direction.LTR);
+    label.setText(text, Direction.LTR);
   }
 
   @Override
   public void setText(final String text, final Direction dir) {
+    // setDirection(dir);
     label.setText(text, dir);
   }
 

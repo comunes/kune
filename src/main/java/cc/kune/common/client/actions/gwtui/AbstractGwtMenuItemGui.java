@@ -191,7 +191,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
   @Override
   public void setIconResource(final ImageResource icon) {
     iconLabel.setRightIconResource(icon);
-    iconLabel.addRightIconStyle("k-fl");
+    // iconLabel.addRightIconStyle("k-fl");
     layout();
   }
 

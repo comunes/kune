@@ -20,7 +20,6 @@
 package cc.kune.core.client;
 
 import cc.kune.common.client.ExtendedGinModule;
-import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
@@ -195,7 +194,7 @@ public class CoreGinModule extends ExtendedGinModule {
     // UI
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
     s(GxtGuiProvider.class);
-    s(GwtGuiProvider.class);
+    // s(GwtGuiProvider.class);
 
     bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
 

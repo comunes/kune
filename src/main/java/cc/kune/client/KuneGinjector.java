@@ -26,7 +26,6 @@ import cc.kune.blogs.client.BlogsGinjector;
 import cc.kune.chat.client.ChatGinModule;
 import cc.kune.chat.client.ChatGinjector;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
-import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.log.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
@@ -117,7 +116,7 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
 
   GwtGuiProvider getGwtGuiProvider();
 
-  GxtGuiProvider getGxtGuiProvider();
+  // GxtGuiProvider getGxtGuiProvider();
 
   HSpaceParts getHSpaceParts();
 

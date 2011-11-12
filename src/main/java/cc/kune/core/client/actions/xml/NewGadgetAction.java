@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.actions.RolAction;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -70,7 +71,8 @@ public class NewGadgetAction extends RolAction {
         gadgetName, typeId, i18n.t(title), i18n.t(body), new AsyncCallbackSimple<StateContentDTO>() {
           @Override
           public void onSuccess(final StateContentDTO result) {
-            NotifyUser.info(i18n.t("[%s] created succesfully", title));
+            NotifyUser.info(i18n.t("'[%s]' created succesfully", title),
+                i18n.t(CoreMessages.GADGETS_EXPERIMENTAL));
             stateManager.setRetrievedStateAndGo(result);
             contentViewer.blinkTitle();
           }

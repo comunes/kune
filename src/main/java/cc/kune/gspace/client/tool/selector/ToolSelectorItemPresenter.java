@@ -24,8 +24,9 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.IsWidget;
 
 public class ToolSelectorItemPresenter implements ToolSelectorItem {
@@ -33,7 +34,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
     HasClickHandlers getFocus();
 
-    HasText getLabel();
+    HasDirectionalText getLabel();
 
     void setSelected(boolean selected);
 
@@ -42,6 +43,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     void setVisible(boolean visible);
   }
 
+  private final Direction direction;
   private final String longName;
   private final String shortName;
   private StateToken token;
@@ -50,11 +52,12 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
   private ToolSelectorItemView view;
 
   public ToolSelectorItemPresenter(final String shortName, final String longName, final String tooltip,
-      final ToolSelector toolSelector) {
+      final ToolSelector toolSelector, final Direction direction) {
     this.shortName = shortName;
     this.longName = longName;
     this.tooltip = tooltip;
     this.toolSelector = toolSelector;
+    this.direction = direction;
   }
 
   @Override
@@ -76,7 +79,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
         History.newItem(token.toString());
       }
     });
-    view.getLabel().setText(longName);
+    view.getLabel().setText(longName, direction);
     view.setTooltip(tooltip);
   }
 

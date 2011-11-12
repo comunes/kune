@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
@@ -84,7 +84,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   }
 
   @Override
-  public HasText getLabel() {
+  public HasDirectionalText getLabel() {
     return label;
   }
 

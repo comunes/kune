@@ -23,12 +23,14 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
 
+import com.google.gwt.i18n.client.HasDirection.Direction;
+
 public abstract class AbstractClientTool {
 
   public AbstractClientTool(final String shortName, final String longName, final String tooltip,
-      final ToolSelector toolSelector) {
+      final ToolSelector toolSelector, final Direction direction) {
     final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName,
-        tooltip, toolSelector);
+        tooltip, toolSelector, direction);
     final ToolSelectorItemPanel panel = new ToolSelectorItemPanel();
     presenter.init(panel);
   }

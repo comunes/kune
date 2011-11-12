@@ -61,7 +61,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
       final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
       if (rightIcon != null) {
         iconLabel.setRightIconResource(rightIcon);
-        iconLabel.addRightIconStyle("k-fr");
+        // iconLabel.addRightIconStyle("k-fr");
       }
       button.addClickHandler(new ClickHandler() {
         @Override

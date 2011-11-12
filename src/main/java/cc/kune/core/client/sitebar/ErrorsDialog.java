@@ -57,7 +57,7 @@ public class ErrorsDialog {
     dialog = new BasicTopDialog.Builder(ERROR_LOGGER_ID, true, true, i18n.getDirection()).title(
         i18n.t("Errors info")).autoscroll(true).firstButtonTitle(i18n.t("Ok")).firstButtonId(
         ERROR_LOGGER_BUTTON_ID).tabIndexStart(1).width("400px").height("400px").build();
-    dialog.getTitleText().setText(i18n.t("Info about errors"));
+    dialog.getTitleText().setText(i18n.t("Info about errors"), i18n.getDirection());
     final InlineLabel subTitle = new InlineLabel(
         i18n.t("Please copy/paste this info to report problems"));
     dialog.getInnerPanel().add(subTitle);
@@ -76,7 +76,7 @@ public class ErrorsDialog {
         final NotifyLevel level = event.getLevel();
         final IconLabel iconMessage = new IconLabel();
         iconMessage.setLeftIconResource(UserMessageImagesUtil.getIcon(level));
-        iconMessage.setText(event.getMessage());
+        iconMessage.setText(event.getMessage(), i18n.getDirection());
         iconMessage.setWordWrap(true);
         panel.insert(iconMessage, 0);
       }

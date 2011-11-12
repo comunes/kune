@@ -105,6 +105,7 @@ public class I18nUITranslationService extends I18nTranslationService {
               isCurrentLangRTL = currentLang.getDirection().equals(RTL);
               eventBus.fireEvent(new I18nReadyEvent());
             }
+            I18nStyles.setRTL(isCurrentLangRTL);
           }
         });
         session.onUserSignIn(true, new UserSignInHandler() {

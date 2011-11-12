@@ -282,7 +282,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
   public void setTitle(final String title) {
     this.title = title;
     if (dialog != null) {
-      dialog.getTitleText().setText(title);
+      dialog.getTitleText().setText(title, direction);
     }
   }
 

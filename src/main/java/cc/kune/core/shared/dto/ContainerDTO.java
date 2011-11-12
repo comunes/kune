@@ -26,80 +26,84 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ContainerDTO implements IsSerializable {
-    private Long id;
-    private String name;
-    private String typeId;
-    private StateToken stateToken;
-    private Long parentFolderId;
-    private ContainerSimpleDTO[] absolutePath;
-    private List<ContainerSimpleDTO> childs;
-    private List<ContentSimpleDTO> contents;
+  private ContainerSimpleDTO[] absolutePath;
+  private List<ContainerSimpleDTO> childs;
+  private List<ContentSimpleDTO> contents;
+  private Long id;
+  private String name;
+  private Long parentFolderId;
+  private StateToken stateToken;
+  private String typeId;
 
-    public ContainerDTO() {
-    }
+  public ContainerDTO() {
+  }
 
-    public ContainerSimpleDTO[] getAbsolutePath() {
-        return absolutePath;
-    }
+  public ContainerSimpleDTO[] getAbsolutePath() {
+    return absolutePath;
+  }
 
-    public List<ContainerSimpleDTO> getChilds() {
-        return childs;
-    }
+  public List<ContainerSimpleDTO> getChilds() {
+    return childs;
+  }
 
-    public List<ContentSimpleDTO> getContents() {
-        return contents;
-    }
+  public List<ContentSimpleDTO> getContents() {
+    return contents;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public Long getParentFolderId() {
-        return parentFolderId;
-    }
+  public Long getParentFolderId() {
+    return parentFolderId;
+  }
 
-    public StateToken getStateToken() {
-        return stateToken;
-    }
+  public StateToken getStateToken() {
+    return stateToken;
+  }
 
-    public String getTypeId() {
-        return typeId;
-    }
+  public String getTypeId() {
+    return typeId;
+  }
 
-    public void setAbsolutePath(final ContainerSimpleDTO[] absolutePath) {
-        this.absolutePath = absolutePath;
-    }
+  public boolean isRoot() {
+    return parentFolderId == null;
+  }
 
-    public void setChilds(final List<ContainerSimpleDTO> childs) {
-        this.childs = childs;
-    }
+  public void setAbsolutePath(final ContainerSimpleDTO[] absolutePath) {
+    this.absolutePath = absolutePath;
+  }
 
-    public void setContents(final List<ContentSimpleDTO> contents) {
-        this.contents = contents;
-    }
+  public void setChilds(final List<ContainerSimpleDTO> childs) {
+    this.childs = childs;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setContents(final List<ContentSimpleDTO> contents) {
+    this.contents = contents;
+  }
 
-    public void setName(final String name) {
-        this.name = name;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setParentFolderId(final Long parentFolderId) {
-        this.parentFolderId = parentFolderId;
-    }
+  public void setName(final String name) {
+    this.name = name;
+  }
 
-    public void setStateToken(final StateToken stateToken) {
-        this.stateToken = stateToken;
-    }
+  public void setParentFolderId(final Long parentFolderId) {
+    this.parentFolderId = parentFolderId;
+  }
 
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
+  public void setStateToken(final StateToken stateToken) {
+    this.stateToken = stateToken;
+  }
+
+  public void setTypeId(final String typeId) {
+    this.typeId = typeId;
+  }
 
 }
