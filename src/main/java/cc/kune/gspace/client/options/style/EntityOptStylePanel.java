@@ -23,12 +23,9 @@ import gwtupload.client.IUploader.OnCancelUploaderHandler;
 import gwtupload.client.IUploader.OnChangeUploaderHandler;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
-import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
@@ -36,8 +33,6 @@ import cc.kune.gspace.client.options.logo.EntityUploaderForm;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
@@ -104,19 +99,20 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     // add(wsInfo);
 
     final VerticalPanel stylesPanel = new VerticalPanel();
-    final ClickHandler clickHandler = new ClickHandler() {
-
-      @Override
-      public void onClick(final ClickEvent event) {
-        NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
-      }
-    };
-    for (int i = 1; i <= 6; i++) {
-      final BasicThumb thumb = new BasicThumb("images/styles/styl" + i + ".png", "Style " + i,
-          clickHandler);
-      thumb.setTooltip(i18n.t("Click to select and configure this theme"));
-      // add(thumb);
-    }
+    // final ClickHandler clickHandler = new ClickHandler() {
+    //
+    // @Override
+    // public void onClick(final ClickEvent event) {
+    // NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
+    // }
+    // };
+    // for (int i = 1; i <= 6; i++) {
+    // final BasicThumb thumb = new BasicThumb(
+    // GWT.getModuleBaseURL() + "images/styles/styl" + i + ".png", "Style " + i,
+    // clickHandler);
+    // thumb.setTooltip(i18n.t("Click to select and configure this theme"));
+    // // add(thumb);
+    // }
     stylesPanel.addStyleName("oc-clean");
     add(stylesPanel);
     setBackImageVisibleImpl(false);

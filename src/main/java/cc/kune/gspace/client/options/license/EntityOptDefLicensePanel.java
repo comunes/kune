@@ -28,6 +28,7 @@ import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -86,7 +87,7 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
 
   @Override
   public void setLicense(final LicenseDTO defaultLicense) {
-    licenseImage.setUrl(defaultLicense.getImageUrl());
+    licenseImage.setUrl(GWT.getModuleBaseURL() + defaultLicense.getImageUrl());
     Tooltip.to(licenseImage, defaultLicense.getLongName());
   }
 }
