@@ -13,17 +13,8 @@ TODO-list for kune -*- mode: org; -*-
 
 * SHORT-TERM (URGENT)
 ** group.inexistentTool nasty error
-** styles/styl2.png" and /lic/ instead or /lic/ in group options
-styl2.png
-"NetworkError: 404 Not Found - http://beta.eurosur.org/images/styles/styl3.png"
-styl3.png
-"NetworkError: 404 Not Found - http://beta.eurosur.org/images/styles/styl4.png"
-styl4.png
-"NetworkError: 404 Not Found - http://beta.eurosur.org/images/styles/styl5.png"
-styl5.png
-"NetworkError: 404 Not Found - http://beta.eurosur.org/images/styles/styl6.png"
-styl6.png
-"NetworkError: 404 Not Found - http://beta.eurosur.org/images/lic/
+** calendar support
+*** gwt-cal + http://ical4j.sourceforge.net/introduction.html
 ** i18n usecase
 | logged | locale in URL  | i18n supported | useDB |
 | false  | false          | false          | true  |
@@ -39,6 +30,7 @@ styl6.png
 meta?
 
 ** TODO multi uploader
+http://code.google.com/p/upload4gwt/
 http://code.google.com/p/gwt-plupload/
 http://www.plupload.com/example_all_runtimes.php
 http://gxt-multiupload-demo.appspot.com/

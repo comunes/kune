@@ -1,0 +1,18 @@
+/* CSS for RTL langs (Arabic, etc) */
+
+.docHeader {
+  text-align: right;
+}
+
+.docHeader span {
+    padding-right: 10px;
+}
+
+.k-tool-panel {
+  text-align: rigth;
+}
+
+.entityTools {
+  text-align: right;
+}
+

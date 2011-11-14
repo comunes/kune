@@ -1,4 +1,4 @@
-/* Here the styles of cc.kune.commom (reused by other projects like gadgets and so on) */
+/* Here the styles of cc.kune.commom (reused by other projects like gadgets and so on) but for RTL langs */
 .k-iconlabel-text {
   float: left;
 }
@@ -17,17 +17,4 @@
 
 .k-menuimtem-title {
   float: right;
-}
-
-.k-tool-panel {
-  text-align: rigth;
-}
-
-.entityTools {
-  text-align: right;
-}
-
-.docHeader {
-  text-align: right;
-  padding-right: 10px;
 }
