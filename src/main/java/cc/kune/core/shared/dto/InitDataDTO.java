@@ -56,6 +56,7 @@ public class InitDataDTO implements IsSerializable {
   private String siteUrl;
   private String[] timezones;
   private boolean translatorEnabled;
+  private boolean useClientContentCache;
   private UserInfoDTO userInfo;
   private List<ToolSimpleDTO> userTools;
 
@@ -316,12 +317,20 @@ public class InitDataDTO implements IsSerializable {
     this.translatorEnabled = translatorEnabled;
   }
 
+  public void setUseClientContentCache(final boolean useClientContentCache) {
+    this.useClientContentCache = useClientContentCache;
+  }
+
   public void setUserInfo(final UserInfoDTO currentUser) {
     this.userInfo = currentUser;
   }
 
   public void setUserTools(final List<ToolSimpleDTO> userTools) {
     this.userTools = userTools;
+  }
+
+  public boolean useClientContentCache() {
+    return useClientContentCache;
   }
 
 }

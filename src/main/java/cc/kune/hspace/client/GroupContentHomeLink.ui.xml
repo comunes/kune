@@ -4,6 +4,7 @@
   <ui:style>
   </ui:style>
   <g:FlowPanel styleName="k-home-group-stats-item">
+    <!-- yes, we use url here because avatars are urls links not resources -->
     <g:Image ui:field="icon" width="22px" height="22px" styleName="k-home-group-cnt-icon"
     url="images/clear.png" />
     <g:Hyperlink ui:field="link" styleName="k-home-group-cnt-link" />

@@ -101,7 +101,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     onSocialNetworkChanged(false, new SocialNetworkChangedHandler() {
       @Override
       public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
-        contentCache.clearCacheOfGroup(event.getState().getStateToken().getGroup());
+        contentCache.removeCacheOfGroup(event.getState().getStateToken().getGroup());
       }
     });
   }
@@ -194,7 +194,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   @Override
   public void gotoStateToken(final StateToken token, final boolean useCache) {
     if (!useCache) {
-      contentCache.removeContent(token);
+      contentCache.remove(token);
     }
     gotoStateToken(token);
   }
@@ -367,7 +367,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     if (currentStateToken == null) {
       processCurrentHistoryToken();
     } else {
-      contentCache.removeContent(currentStateToken);
+      contentCache.remove(currentStateToken);
       getContent(currentStateToken);
     }
   }
@@ -375,6 +375,16 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   @Override
   public void removeBeforeStateChangeListener(final BeforeActionListener listener) {
     beforeStateChangeCollection.remove(listener);
+  }
+
+  @Override
+  public void removeCache(final StateToken parentToken) {
+    contentCache.remove(parentToken);
+  }
+
+  @Override
+  public void removeCacheOfGroup(final String group) {
+    contentCache.removeCacheOfGroup(group);
   }
 
   @Override

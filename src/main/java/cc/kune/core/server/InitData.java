@@ -64,6 +64,7 @@ public class InitData {
   private String siteUrl;
   private String[] timezones;
   private boolean translatorEnabled;
+  private boolean useClientContentCache;
   private UserInfo userInfo;
   private List<ToolSimple> userTools;
 
@@ -325,12 +326,20 @@ public class InitData {
     this.translatorEnabled = translatorEnabled;
   }
 
+  public void setUseClientContentCache(final boolean useClientContentCache) {
+    this.useClientContentCache = useClientContentCache;
+  }
+
   public void setUserInfo(final UserInfo currentUserInfo) {
     this.userInfo = currentUserInfo;
   }
 
   public void setUserTools(final List<ToolSimple> userTools) {
     this.userTools = userTools;
+  }
+
+  public boolean useClientContentCache() {
+    return useClientContentCache;
   }
 
 }

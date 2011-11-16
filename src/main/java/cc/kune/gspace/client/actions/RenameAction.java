@@ -25,9 +25,13 @@ import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.client.errors.NameNotPermittedException;
 import cc.kune.core.client.events.RenameContentEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
@@ -36,6 +40,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class RenameAction {
+  private final ContentCache contentCache;
   private final Provider<ContentServiceAsync> contentService;
   private final ErrorHandler errorHandler;
   private final EventBus eventBus;
@@ -44,12 +49,14 @@ public class RenameAction {
 
   @Inject
   public RenameAction(final I18nTranslationService i18n, final Session session, final EventBus eventBus,
-      final Provider<ContentServiceAsync> contentService, final ErrorHandler errorHandler) {
+      final Provider<ContentServiceAsync> contentService, final ErrorHandler errorHandler,
+      final ContentCache contentCache) {
     this.i18n = i18n;
     this.session = session;
     this.eventBus = eventBus;
     this.contentService = contentService;
     this.errorHandler = errorHandler;
+    this.contentCache = contentCache;
   }
 
   public void rename(final StateToken token, final String oldName, final String newName,
@@ -79,6 +86,14 @@ public class RenameAction {
           session.setCurrentState(state);
           listener.onSuccess(token, state.getTitle());
           RenameContentEvent.fire(eventBus, token, oldName, newName);
+          contentCache.remove(token);
+          // remove parent cache
+          if (state instanceof StateContentDTO) {
+            contentCache.remove(((StateContentDTO) state).getContainer().getStateToken());
+          } else if (state instanceof StateContainerDTO) {
+            final ContainerDTO container = ((StateContainerDTO) state).getContainer();
+            contentCache.remove(token.copy().setFolder(container.getParentFolderId()));
+          }
         }
       };
       if (token.isComplete()) {

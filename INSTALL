@@ -71,7 +71,7 @@ Compile with maven:
  # (in the trunk directory)
  mvn compile -Dliquibase.should.run=false && mvn gwt:compile
 
-NOTE: If you change these db passwords after compiling, you have to repeat the "mvn compile" because if not, probably you are using a old persistence.xml. See TROUBLESHOOT for more details.
+NOTE: If you change the previous db passwords after this compiling, you have to repeat the "mvn compile" because if not, probably you will use an old persistence.xml. See TROUBLESHOOT for more details.
 
 ===Configure upload directory===
 
@@ -155,26 +155,6 @@ With
   mvn package 
 an executable target/kune-VERSION.one-jar.jar is generated in target directory.
 
-===Apache proxy===
-
-You can configure your Apache with this kind of virtual host
-<VirtualHost *:80>
-    ServerName youkune.example.com
-
-    ProxyRequests Off
-    <Proxy *>
-        Order deny,allow
-        Allow from all
-    </Proxy>
-
-    ProxyPass / http://localhost:8080/
-    ProxyPassReverse / http://localhost:8080/
-    <Location />
-        Order allow,deny
-        Allow from all
-    </Location>
-</VirtualHost>
-
 ==Appendix A: Configuration of Openfire xmpp server==
 
 Install openfire in your system: http://www.igniterealtime.org/downloads/index.jsp
@@ -217,6 +197,11 @@ Change in 'Server > Server Manager > System Properties':
     org.jivesoftware.openfire.user.DefaultUserProvider
 
 In Server > Server Settings > HTTP Binding, enable "HTTP Bind Settings" and set the port to 5280. Check that port is not used by other service in your machine (we use 5280 as default, but if you want to use other change it your web.xml accordly)
+
+Because users are managed from the database of kune, we recommend to set:
+In Server > Server Settings > Registration & Login > Inband Account Registration > Disabled
+In Server > Server Settings > Registration & Login > Change Password > Disabled
+so this will not conflict with kune users management.
 
 Edit the openfire.xml in a terminal:
 * In debian (with a .deb installation) you can to edit the configuration in /etc/openfire directory.
@@ -284,6 +269,11 @@ and:
 http://www.google.com/support/a/bin/answer.py?answer=34143
 
 ==Appendix B: Apache configuration sample==
+
+WARNING: This should not work with current wave's websocket. Consider use nginx (that support websocket better) instead.
+http://serverfault.com/questions/290121/configuring-apache2-to-proxy-websocket
+
+You can configure your Apache with this kind of virtual host
 
 Enable this modules:
 a2enmod expires

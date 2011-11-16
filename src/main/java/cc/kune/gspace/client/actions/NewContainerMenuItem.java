@@ -31,6 +31,7 @@ import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
@@ -70,18 +71,20 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
       NotifyUser.showProgressProcessing();
       stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
       final String newName = (String) getValue(NEW_NAME);
-      contentService.get().addFolder(session.getUserHash(), session.getCurrentStateToken(), newName,
-          (String) getValue(ID), new AsyncCallbackSimple<StateContainerDTO>() {
+      final StateToken parentToken = session.getCurrentStateToken();
+      contentService.get().addFolder(session.getUserHash(), parentToken, newName, (String) getValue(ID),
+          new AsyncCallbackSimple<StateContainerDTO>() {
             @Override
             public void onSuccess(final StateContainerDTO state) {
               // contextNavigator.setEditOnNextStateChange(true);
+              stateManager.removeCache(parentToken);
               stateManager.setRetrievedStateAndGo(state);
               NotifyUser.hideProgress();
               NotifyUser.info(i18n.tWithNT("[%s] created", "New folder created, for instance", newName));
               folderViewer.highlightTitle();
             }
           });
-      cache.removeContent(session.getCurrentStateToken());
+      cache.remove(parentToken);
     }
 
   }

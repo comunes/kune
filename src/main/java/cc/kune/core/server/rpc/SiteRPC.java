@@ -150,6 +150,7 @@ public class SiteRPC implements RPC, SiteService {
     data.setSiteShortName(kuneProperties.get(KuneProperties.SITE_SHORTNAME));
     data.setSiteCommonName(kuneProperties.get(KuneProperties.SITE_COMMON_NAME));
     data.setTranslatorEnabled(kuneProperties.getBoolean(KuneProperties.UI_TRANSLATOR_ENABLED));
+    data.setUseClientContentCache(kuneProperties.getBoolean(KuneProperties.USE_CLIENT_CONTENT_CACHE));
     return data;
   }
 

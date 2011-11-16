@@ -32,6 +32,7 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -89,12 +90,13 @@ public class NewRoomBtn extends ButtonDescriptor {
           if (diag.isValid()) {
             NotifyUser.showProgressProcessing();
             final String groupShortName = session.getCurrentState().getGroup().getShortName();
-            contentService.get().addRoom(session.getUserHash(),
-                session.getContainerState().getRootContainer().getStateToken(),
+            final StateToken parentToken = session.getContainerState().getRootContainer().getStateToken();
+            contentService.get().addRoom(session.getUserHash(), parentToken,
                 groupShortName + "-" + diag.getTextFieldValue(),
                 new AsyncCallbackSimple<StateContainerDTO>() {
                   @Override
                   public void onSuccess(final StateContainerDTO state) {
+                    stateManager.removeCache(parentToken);
                     stateManager.setRetrievedStateAndGo(state);
                     NotifyUser.hideProgress();
                     NotifyUser.info(i18n.t("Chatroom created"));

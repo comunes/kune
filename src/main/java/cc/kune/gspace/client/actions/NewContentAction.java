@@ -24,9 +24,9 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -40,7 +40,6 @@ public class NewContentAction extends RolAction {
   public static final String ID = "ctnnewid";
   public static final String NEW_NAME = "ctnnewname";
 
-  private final ContentCache cache;
   private final Provider<ContentServiceAsync> contentService;
   private final ContentViewerPresenter contentViewer;
   private final I18nTranslationService i18n;
@@ -50,14 +49,13 @@ public class NewContentAction extends RolAction {
   @Inject
   public NewContentAction(final Session session, final StateManager stateManager,
       final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService,
-      final ContentViewerPresenter contentViewerPresenter, final ContentCache cache) {
+      final ContentViewerPresenter contentViewerPresenter) {
     super(AccessRolDTO.Editor, true);
     this.session = session;
     this.stateManager = stateManager;
     this.i18n = i18n;
     this.contentService = contentService;
     this.contentViewer = contentViewerPresenter;
-    this.cache = cache;
   }
 
   @Override
@@ -66,11 +64,12 @@ public class NewContentAction extends RolAction {
     // stateManager.gotoStateToken(((HasContent)
     // session.getCurrentState()).getContainer().getStateToken());
     final String newName = (String) getValue(NEW_NAME);
-    contentService.get().addContent(session.getUserHash(),
-        session.getCurrentStateToken().copy().clearDocument(), newName, (String) getValue(ID),
+    final StateToken parentToken = session.getCurrentStateToken().copy().clearDocument();
+    contentService.get().addContent(session.getUserHash(), parentToken, newName, (String) getValue(ID),
         new AsyncCallbackSimple<StateContentDTO>() {
           @Override
           public void onSuccess(final StateContentDTO state) {
+            stateManager.removeCache(parentToken);
             stateManager.setRetrievedStateAndGo(state);
             NotifyUser.hideProgress();
             // stateManager.refreshCurrentGroupState();
@@ -79,6 +78,5 @@ public class NewContentAction extends RolAction {
             contentViewer.blinkTitle();
           }
         });
-    cache.removeContent(session.getCurrentStateToken());
   }
 }

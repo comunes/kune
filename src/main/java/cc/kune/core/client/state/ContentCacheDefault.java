@@ -22,6 +22,8 @@ package cc.kune.core.client.state;
 import java.util.HashMap;
 import java.util.Map;
 
+import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
@@ -36,7 +38,7 @@ public class ContentCacheDefault implements ContentCache {
   private final Map<StateToken, StateAbstractDTO> cacheMap;
   private final EventBus eventBus;
   private final ContentServiceAsync server;
-  private final boolean useCache;
+  private boolean useCache = false;
 
   @Inject
   public ContentCacheDefault(final ContentServiceAsync server, final EventBus eventBus,
@@ -44,7 +46,14 @@ public class ContentCacheDefault implements ContentCache {
     this.server = server;
     this.eventBus = eventBus;
     this.cacheMap = new HashMap<StateToken, StateAbstractDTO>();
-    // Don't use while we don't check changes in the server
+    // Better, don't use while we don't check changes in the server (by others)
+    // and we do server pub/sub
+    session.onAppStart(true, new AppStartHandler() {
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+        useCache = event.getInitData().useClientContentCache();
+      }
+    });
     useCache = true;
     session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
       @Override
@@ -59,15 +68,6 @@ public class ContentCacheDefault implements ContentCache {
     assert encodeState != null;
     if (useCache) {
       cacheMap.put(encodeState, content);
-    }
-  }
-
-  @Override
-  public void clearCacheOfGroup(final String group) {
-    for (final StateToken entry : cacheMap.keySet()) {
-      if (entry.getGroup().equals(group)) {
-        cacheMap.remove(entry);
-      }
     }
   }
 
@@ -91,8 +91,17 @@ public class ContentCacheDefault implements ContentCache {
   }
 
   @Override
-  public void removeContent(final StateToken token) {
+  public void remove(final StateToken token) {
     cacheMap.remove(token);
+  }
+
+  @Override
+  public void removeCacheOfGroup(final String group) {
+    for (final StateToken entry : cacheMap.keySet()) {
+      if (entry.getGroup().equals(group)) {
+        cacheMap.put(entry, null);
+      }
+    }
   }
 
 }

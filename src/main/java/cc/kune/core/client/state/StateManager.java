@@ -64,6 +64,10 @@ public interface StateManager {
 
   void removeBeforeStateChangeListener(BeforeActionListener listener);
 
+  void removeCache(StateToken parentToken);
+
+  void removeCacheOfGroup(String group);
+
   void removeSiteToken(String token);
 
   void restorePreviousToken();

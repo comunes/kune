@@ -58,13 +58,9 @@ public class XMLActionsParser {
   private final ContentViewerPresenter contentViewer;
   private final ErrorHandler errHandler;
   private final I18nTranslationService i18n;
-
   private final NewMenusForTypeIdsRegistry newMenusRegistry;
-
   private final Session session;
-
   private final StateManager stateManager;
-
   private final HashMap<String, SubMenuDescriptor> submenus;
 
   @Inject

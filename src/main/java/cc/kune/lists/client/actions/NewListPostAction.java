@@ -107,7 +107,7 @@ public class NewListPostAction extends RolAction {
                     folderViewer.highlightTitle();
                   }
                 });
-            cache.removeContent(session.getCurrentStateToken());
+            cache.remove(session.getCurrentStateToken());
           }
         }
       });

@@ -80,6 +80,7 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
     if (view.isValid()) {
       NotifyUser.showProgress();
       final GroupDTO group = session.getCurrentState().getGroup();
+      final String previousGroupName = group.getShortName();
       final StateToken token = group.getStateToken().copy();
       group.setShortName(groupView.getShortName());
       group.setLongName(groupView.getLongName());
@@ -88,6 +89,7 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
             @Override
             public void onSuccess(final StateAbstractDTO result) {
               NotifyUser.hideProgress();
+              stateManager.removeCacheOfGroup(previousGroupName);
               stateManager.setRetrievedStateAndGo(result);
               setState();
               sendChangeEntityEvent();

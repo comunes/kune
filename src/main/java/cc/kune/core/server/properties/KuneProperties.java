@@ -62,6 +62,7 @@ public interface KuneProperties {
   String UPLOAD_LOCATION = "kune.upload.location";
   String UPLOAD_MAX_FILE_SIZE = "kune.upload.maxfilesizeinmegas";
   String UPLOAD_MAX_FILE_SIZE_IN_KS = "kune.upload.maxfilesizeinks";
+  String USE_CLIENT_CONTENT_CACHE = "kune.client.useContentCache";
   String WELCOME_WAVE = "kune.site.welcomewave";
   String WS_THEMES = "kune.wsthemes";
   String WS_THEMES_DEF = "kune.wsthemes.default";

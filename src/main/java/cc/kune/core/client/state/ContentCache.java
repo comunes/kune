@@ -28,10 +28,10 @@ public interface ContentCache {
 
   void cache(StateToken token, StateAbstractDTO content);
 
-  void clearCacheOfGroup(String group);
+  void removeCacheOfGroup(String group);
 
   void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
-  void removeContent(StateToken token);
+  void remove(StateToken token);
 
 }

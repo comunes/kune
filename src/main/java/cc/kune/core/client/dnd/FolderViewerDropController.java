@@ -23,6 +23,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -49,6 +50,7 @@ import com.google.inject.Inject;
  */
 public class FolderViewerDropController implements DropTarget {
 
+  private final ContentCache contentCache;
   private final ContentServiceAsync contentService;
   private final KuneDragController dragController;
   private SimpleDropController dropController;
@@ -61,13 +63,14 @@ public class FolderViewerDropController implements DropTarget {
   @Inject
   public FolderViewerDropController(final KuneDragController dragController,
       final ContentServiceAsync contentService, final Session session, final StateManager stateManager,
-      final ErrorHandler erroHandler, final I18nTranslationService i18n) {
+      final ErrorHandler erroHandler, final I18nTranslationService i18n, final ContentCache contentCache) {
     this.dragController = dragController;
     this.contentService = contentService;
     this.session = session;
     this.stateManager = stateManager;
     this.erroHandler = erroHandler;
     this.i18n = i18n;
+    this.contentCache = contentCache;
   }
 
   @Override
@@ -84,8 +87,9 @@ public class FolderViewerDropController implements DropTarget {
             if (target != null) {
               final StateToken destToken = (StateToken) target;
               widget.removeFromParent();
-              contentService.moveContent(session.getUserHash(), ((FolderItemWidget) widget).getToken(),
-                  destToken, new AsyncCallback<StateContainerDTO>() {
+              final StateToken tokenToMove = ((FolderItemWidget) widget).getToken();
+              contentService.moveContent(session.getUserHash(), tokenToMove, destToken,
+                  new AsyncCallback<StateContainerDTO>() {
                     @Override
                     public void onFailure(final Throwable caught) {
                       erroHandler.process(caught);
@@ -96,6 +100,8 @@ public class FolderViewerDropController implements DropTarget {
                     @Override
                     public void onSuccess(final StateContainerDTO result) {
                       NotifyUser.hideProgress();
+                      contentCache.remove(tokenToMove);
+                      contentCache.remove(destToken);
                     }
                   });
             } else {

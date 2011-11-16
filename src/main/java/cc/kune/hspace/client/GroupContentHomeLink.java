@@ -20,6 +20,8 @@
 package cc.kune.hspace.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -45,7 +47,12 @@ public class GroupContentHomeLink extends Composite {
   }
 
   public void setValues(final String logoImageUrl, final String text, final String historyToken) {
-    icon.setUrl(logoImageUrl);
+    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
+      public void execute() {
+        icon.setUrl(logoImageUrl);
+      }
+    });
     link.setText(text);
     link.setTargetHistoryToken(historyToken);
   }
