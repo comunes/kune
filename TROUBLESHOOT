@@ -73,6 +73,30 @@ Also, be sure you do a "mvn compile" if you change the persistence.xml file to n
 
 If you have this problem with openfire it's not enough to change the password in openfire.xml because probably it's already stored in the ofProperty openfire table and you need to change the password there.
 
+== Other mysql errors ==
+
+If you get this warning, probably you have connection problems between kune and your database:
+
+WARNING: Multiple Servlet injectors detected. This is a warning indicating that you have more than one GuiceFilter running in your web application. If this is deliberate, you may safely ignore this message. If this is NOT deliberate however, your application may not work as expected.
+
+A check list:
+- these files should be the same:
+  diff src/main/resources/META-INF/persistence.xml target/kune-0.1.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml
+if not "mvn compile -Dliquibase.should.run=false"
+- the persistence-unit you use, that is hardcoded (by now) in  
+src/main/java/cc/kune/core/server/KuneRackModule.java
+(...)
+  public KuneRackModule() {
+    this("production", "/ws", null);
+  }
+(...)
+find that name in persistence.xml (we are using production, but can be other). The db user/password configured in persistence.xml for that name should be the same to that one you used in the GRANT sentence of mysql database creation.
+
+To debug mysql logs, you can uncomment:
+#general_log_file        = /var/log/mysql/mysql.log
+#general_log             = 1
+in /etc/mysql/my.cnf
+
 == Eclipse & GWT ==
 
 If you have some tests with error like "can not be found in source packages. Check the inheritance chain from your module; it may not be inheriting a required module or a module may not be adding its source path entries properly" and you have installed GWTDesigner, uncheck "client classpath": http://code.google.com/webtoolkit/tools/gwtdesigner/preferences/gwt/preferences_builder.html
