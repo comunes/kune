@@ -34,7 +34,9 @@ import org.apache.log4j.PropertyConfigurator;
 import cc.kune.core.server.rack.ContainerListener;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class KuneContainerListener implements ContainerListener {
   private final Logger logger; // NOPMD by vjrj on 16/07/09 22:38
   private final KunePersistenceService persistenceService;

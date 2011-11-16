@@ -37,117 +37,122 @@ import org.hibernate.search.jpa.Search;
 import com.google.inject.Provider;
 
 public abstract class DefaultManager<T, K> {
-    private final Provider<EntityManager> provider;
-    private final Class<T> entityClass;
-    protected final Log log;
+  private final Class<T> entityClass;
+  protected final Log log;
+  private final Provider<EntityManager> provider;
 
-    public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
-        this.provider = provider;
-        this.entityClass = entityClass;
-        log = LogFactory.getLog(entityClass);
-    }
+  public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
+    this.provider = provider;
+    this.entityClass = entityClass;
+    log = LogFactory.getLog(entityClass);
+  }
 
-    public void clear() {
-        getEntityManager().clear();
-    }
+  public void clear() {
+    getEntityManager().clear();
+  }
 
-    public T find(final Long primaryKey) {
-        return getEntityManager().find(entityClass, primaryKey);
-    }
+  /**
+   * use carefully!!!
+   */
+  protected <X> X find(final Class<X> entityClass, final Long primaryKey) {
+    return getEntityManager().find(entityClass, primaryKey);
+  }
 
-    public <E> E merge(final E entity, final Class<E> entityClass) {
-        getEntityManager().merge(entity);
-        return entity;
-    }
+  public T find(final Long primaryKey) {
+    return getEntityManager().find(entityClass, primaryKey);
+  }
 
-    public T merge(final T entity) {
-        return getEntityManager().merge(entity);
-    }
+  private EntityManager getEntityManager() {
+    return provider.get();
+  }
 
-    public <E> E persist(final E entity, final Class<E> entityClass) {
-        getEntityManager().persist(entity);
-        return entity;
-    }
+  protected javax.persistence.Query getQuery(final String qlString) {
+    return getEntityManager().createQuery(qlString);
+  }
 
-    public T persist(final T entity) {
-        return persist(entity, entityClass);
-    }
+  public <E> E merge(final E entity, final Class<E> entityClass) {
+    getEntityManager().merge(entity);
+    return entity;
+  }
 
-    @SuppressWarnings("unchecked")
-    public void reIndex() {
-        // Inject this?
-        final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
-        fullTextEm.purgeAll(entityClass);
-        fullTextEm.getTransaction().commit();
-        fullTextEm.getTransaction().begin();
-        final List<T> entities = fullTextEm.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " AS e").getResultList();
-        for (final T e : entities) {
-            fullTextEm.index(e);
-        }
-        fullTextEm.getSearchFactory().optimize(entityClass);
-    }
+  public T merge(final T entity) {
+    return getEntityManager().merge(entity);
+  }
 
-    public void remove(final T entity) {
-        getEntityManager().remove(entity);
-    }
+  public <E> E persist(final E entity, final Class<E> entityClass) {
+    getEntityManager().persist(entity);
+    return entity;
+  }
 
-    public SearchResult<T> search(final Query query) {
-        return search(query, null, null);
-    }
+  public T persist(final T entity) {
+    return persist(entity, entityClass);
+  }
 
-    @SuppressWarnings("unchecked")
-    public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
-        final FullTextQuery emQuery = Search.getFullTextEntityManager(getEntityManager()).createFullTextQuery(query,
-                entityClass);
-        if (firstResult != null && maxResults != null) {
-            emQuery.setFirstResult(firstResult);
-            emQuery.setMaxResults(maxResults);
-        }
-        return new SearchResult<T>(emQuery.getResultSize(), emQuery.getResultList());
+  @SuppressWarnings("unchecked")
+  public void reIndex() {
+    // Inject this?
+    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
+    fullTextEm.purgeAll(entityClass);
+    fullTextEm.getTransaction().commit();
+    fullTextEm.getTransaction().begin();
+    final List<T> entities = fullTextEm.createQuery(
+        "SELECT e FROM " + entityClass.getSimpleName() + " AS e").getResultList();
+    for (final T e : entities) {
+      fullTextEm.index(e);
     }
+    fullTextEm.getSearchFactory().optimize(entityClass);
+  }
 
-    public SearchResult<T> search(final String query, final String[] fields, final BooleanClause.Occur[] flags,
-            final Integer firstResult, final Integer maxResults) {
-        Query queryQ;
-        try {
-            queryQ = MultiFieldQueryParser.parse(query, fields, flags, new StandardAnalyzer());
-        } catch (final ParseException e) {
-            throw new ServerManagerException("Error parsing search", e);
-        }
-        return search(queryQ, firstResult, maxResults);
-    }
+  public void remove(final T entity) {
+    getEntityManager().remove(entity);
+  }
 
-    public SearchResult<T> search(final String[] queries, final String[] fields, final BooleanClause.Occur[] flags,
-            final Integer firstResult, final Integer maxResults) {
-        Query query;
-        try {
-            query = MultiFieldQueryParser.parse(queries, fields, flags, new StandardAnalyzer());
-        } catch (final ParseException e) {
-            throw new ServerManagerException("Error parsing search", e);
-        }
-        return search(query, firstResult, maxResults);
-    }
+  public SearchResult<T> search(final Query query) {
+    return search(query, null, null);
+  }
 
-    public SearchResult<T> search(final String[] queries, final String[] fields, final Integer firstResult,
-            final Integer maxResults) {
-        Query query;
-        try {
-            query = MultiFieldQueryParser.parse(queries, fields, new StandardAnalyzer());
-        } catch (final ParseException e) {
-            throw new ServerManagerException("Error parsing search", e);
-        }
-        return search(query, firstResult, maxResults);
+  @SuppressWarnings("unchecked")
+  public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
+    final FullTextQuery emQuery = Search.getFullTextEntityManager(getEntityManager()).createFullTextQuery(
+        query, entityClass);
+    if (firstResult != null && maxResults != null) {
+      emQuery.setFirstResult(firstResult);
+      emQuery.setMaxResults(maxResults);
     }
+    return new SearchResult<T>(emQuery.getResultSize(), emQuery.getResultList());
+  }
 
-    /**
-     * use carefully!!!
-     */
-    protected <X> X find(final Class<X> entityClass, final Long primaryKey) {
-        return getEntityManager().find(entityClass, primaryKey);
+  public SearchResult<T> search(final String query, final String[] fields,
+      final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults) {
+    Query queryQ;
+    try {
+      queryQ = MultiFieldQueryParser.parse(query, fields, flags, new StandardAnalyzer());
+    } catch (final ParseException e) {
+      throw new ServerManagerException("Error parsing search", e);
     }
+    return search(queryQ, firstResult, maxResults);
+  }
 
-    private EntityManager getEntityManager() {
-        return provider.get();
+  public SearchResult<T> search(final String[] queries, final String[] fields,
+      final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults) {
+    Query query;
+    try {
+      query = MultiFieldQueryParser.parse(queries, fields, flags, new StandardAnalyzer());
+    } catch (final ParseException e) {
+      throw new ServerManagerException("Error parsing search", e);
     }
+    return search(query, firstResult, maxResults);
+  }
+
+  public SearchResult<T> search(final String[] queries, final String[] fields,
+      final Integer firstResult, final Integer maxResults) {
+    Query query;
+    try {
+      query = MultiFieldQueryParser.parse(queries, fields, new StandardAnalyzer());
+    } catch (final ParseException e) {
+      throw new ServerManagerException("Error parsing search", e);
+    }
+    return search(query, firstResult, maxResults);
+  }
 
 }

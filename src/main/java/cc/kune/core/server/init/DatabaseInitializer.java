@@ -29,6 +29,7 @@ import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.i18n.I18nTranslationServiceDefault;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
@@ -46,22 +47,22 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 import cc.kune.domain.License;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveService;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
 
+@Singleton
 public class DatabaseInitializer {
   private static final Log LOG = LogFactory.getLog(DatabaseInitializer.class);
   private final ContentManager contentManager;
   private final I18nCountryManager countryManager;
   private final GroupManager groupManager;
-  private final KuneWaveService kuneWaveManager;
   private final I18nLanguageManager languageManager;
   private final LicenseManager licenseManager;
   private final KuneBasicProperties properties;
   private final I18nTranslationManager translationManager;
-
+  private final I18nTranslationServiceDefault translationService;
   private final UserManager userManager;
 
   @Inject
@@ -69,7 +70,7 @@ public class DatabaseInitializer {
       final GroupManager groupManager, final LicenseManager licenseManager,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final I18nTranslationManager translationManager, final ContentManager contentManager,
-      final KuneWaveService kuneWaveManager) {
+      final I18nTranslationServiceDefault translationService) {
     this.properties = properties;
     this.userManager = userManager;
     this.groupManager = groupManager;
@@ -77,8 +78,8 @@ public class DatabaseInitializer {
     this.languageManager = languageManager;
     this.countryManager = countryManager;
     this.translationManager = translationManager;
+    this.translationService = translationService;
     this.contentManager = contentManager;
-    this.kuneWaveManager = kuneWaveManager;
   }
 
   private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
@@ -210,11 +211,12 @@ public class DatabaseInitializer {
     try {
       groupManager.getSiteDefaultGroup();
     } catch (final NoResultException e) {
-      LOG.info("The default group '" + properties.getDefaultSiteName()
+      LOG.warn("The default group '" + properties.getDefaultSiteName()
           + "' does not exist in Database, "
           + "creating it (see kune.default.site.shortName in kune.properties for more details)");
       initDatabase();
     }
+    translationService.init();
   }
 
   @Transactional

@@ -67,7 +67,9 @@ about how to fix it in your system.
 
 == Mysql: Caused by: java.sql.SQLException: Access denied for user 'kune'@'localhost' (using password: YES) ==
 
-Check that the password you have use in the database creation it's the same like the src/main/resources/META-INF/persistence.xml. If it's wrong maybe you have to remove the mysql user (DROP USER) and repeat the GRANT senteces of the INSTALL.
+Check that the password you have use in the database creation it's the same like the src/main/resources/META-INF/persistence.xml. If it's wrong maybe you have to remove the mysql user (DROP USER) and repeat the GRANT sentences of the INSTALL.
+
+Also, be sure you do a "mvn compile" if you change the persistence.xml file to not use the old one.
 
 If you have this problem with openfire it's not enough to change the password in openfire.xml because probably it's already stored in the ofProperty openfire table and you need to change the password there.
 

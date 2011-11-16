@@ -32,6 +32,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class I18nTranslationServiceDefault extends I18nTranslationService {
 
+  private boolean initiliazied = false;
   private final I18nTranslationManager translationManager;
   private final Provider<UserSessionManager> userSessionManager;
 
@@ -40,6 +41,10 @@ public class I18nTranslationServiceDefault extends I18nTranslationService {
       final Provider<UserSessionManager> userSessionManager) {
     this.translationManager = translationManager;
     this.userSessionManager = userSessionManager;
+  }
+
+  public void init() {
+    initiliazied = true;
   }
 
   @Override
@@ -78,7 +83,7 @@ public class I18nTranslationServiceDefault extends I18nTranslationService {
   @Override
   public String tWithNT(final String text, final String noteForTranslators) {
     String language;
-    if (userSessionManager.get().isUserLoggedIn()) {
+    if (initiliazied && userSessionManager.get().isUserLoggedIn()) {
       language = userSessionManager.get().getUser().getLanguage().getCode();
     } else {
       language = I18nTranslation.DEFAULT_LANG;

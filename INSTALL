@@ -71,6 +71,8 @@ Compile with maven:
  # (in the trunk directory)
  mvn compile -Dliquibase.should.run=false && mvn gwt:compile
 
+NOTE: If you change these db passwords after compiling, you have to repeat the "mvn compile" because if not, probably you are using a old persistence.xml. See TROUBLESHOOT for more details.
+
 ===Configure upload directory===
 
  sudo mkdir -p /var/lib/kune/uploads/
@@ -183,6 +185,9 @@ Currently only openfire xmpp server is supported (due to openfire can use our us
 
 Works in most of the openfire server versions after 3.5.1.
 See emite (our xmpp software) Server Compatibility: https://code.google.com/p/emite/wiki/ServerAndClientsCompatibility
+
+If your openfire don't start, chech the JAVA_HOME in /etc/init.d/openfire whe usually add this line there:
+  t=/usr/lib/jvm/java-6-openjdk && test -d $t && JAVA_HOME=$t
 
 Connect to openfire administration: http://localhost:9090/
 
