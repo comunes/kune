@@ -87,6 +87,10 @@ Configurate hibernate-search (GNU/Linux instructions, look persistence.xml if yo
  sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_dev/indexes
  sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_test/indexes
 
+ But in general you can do it recursively with:
+
+ sudo chown -R yourUser:yourUser /var/lib/kune/
+
 ====Aditional info for W$ users====
 
 Not verified:  In case you are using windows as dev platform you only have to create a couple of folders anywhere you like and then specify them in persistence.xml, as follows:
@@ -147,7 +151,7 @@ or running:
 
 ===Connecting to the server===
 
-Open your browser and connect to http://localhost:8888/ws/
+Open your browser and connect to http://localhost:8888/
 
 ==Production environment instructions==
 

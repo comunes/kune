@@ -1025,7 +1025,7 @@
           <!-- <style>PRETTY</style> -->
           <noServer>true</noServer>
           <gwtVersion>${gwt.version}</gwtVersion>
-          <runTarget>/ws/ws.html?log_level=DEBUG</runTarget>
+          <runTarget>/ws.html?log_level=DEBUG</runTarget>
           <hostedWebapp>${project.build.directory}/${project.build.finalName}
           </hostedWebapp>
           <modules>

@@ -1,1 +1,25 @@
-See INSTALL file for instructions
+= README of KUNE =
+
+See the INSTALL file for instructions of how to run Kune. Please follow closely.
+
+See the DEV-GUIDE for developers information and guidelines.
+
+See the TROUBLESHOOT file in you have problems with the installation or the development.
+
+See the CREDITS COPYRIGHT for legal info and author/contributors.
+
+and for BUGS for inform about problems/feedback etc.
+
+== Adapting Kune to your site ==
+
+Adapt as much as possible to your needs this files:
+
+- src/main/resources/kune.properties 
+- src/main/resources/wave-server.properties 
+- src/main/resources/log4j.properties 
+- src/main/webapp/ws.html
+
+The last one is the home that you get at start-up and have some configurations also. You can change the html inside to your needs but follow the commentaries and try not to remove important parts that make kune to start.
+
+Note: Remember that if you change this files in some point, you have to make 'mvn compile' so are copied to the target directoy.
+
