@@ -22,6 +22,7 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
+import cc.kune.core.client.sitebar.logo.SiteLogo;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
@@ -32,50 +33,51 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView {
 
-    private final Provider<AboutKuneDialog> aboutPanel;
-    private final ErrorsDialog errorPanel;
-    private final ActionSimplePanel toolbarLeft;
-    private final ActionSimplePanel toolbarRight;
+  private final Provider<AboutKuneDialog> aboutPanel;
+  private final ErrorsDialog errorPanel;
+  private final ActionSimplePanel toolbarLeft;
+  private final ActionSimplePanel toolbarRight;
 
-    @Inject
-    public SitebarActionsPanel(final GSpaceArmor armor, final ActionSimplePanel toolbarRight,
-            final ActionSimplePanel toolbarLeft, final I18nTranslationService i18n,
-            final Provider<AboutKuneDialog> aboutPanel, final ErrorsDialog errorPanel) {
-        this.toolbarRight = toolbarRight;
-        this.toolbarLeft = toolbarLeft;
-        this.aboutPanel = aboutPanel;
-        this.errorPanel = errorPanel;
-        toolbarRight.addStyleName("k-sitebar");
-        toolbarRight.addStyleName("k-floatright");
-        toolbarLeft.addStyleName("k-sitebar");
-        toolbarLeft.addStyleName("k-floatleft");
-        armor.getSitebar().add(toolbarLeft);
-        armor.getSitebar().add(toolbarRight);
-    }
+  @Inject
+  public SitebarActionsPanel(final GSpaceArmor armor, final ActionSimplePanel toolbarRight,
+      final ActionSimplePanel toolbarLeft, final I18nTranslationService i18n,
+      final Provider<AboutKuneDialog> aboutPanel, final ErrorsDialog errorPanel, final SiteLogo siteLogo) {
+    this.toolbarRight = toolbarRight;
+    this.toolbarLeft = toolbarLeft;
+    this.aboutPanel = aboutPanel;
+    this.errorPanel = errorPanel;
+    toolbarRight.addStyleName("k-sitebar");
+    toolbarRight.addStyleName("k-floatright");
+    toolbarLeft.addStyleName("k-sitebar");
+    toolbarLeft.addStyleName("k-floatleft");
+    armor.getSitebar().add(toolbarLeft);
+    armor.getSitebar().add(siteLogo);
+    armor.getSitebar().add(toolbarRight);
+  }
 
-    @Override
-    public Widget asWidget() {
-        return toolbarRight;
-    }
+  @Override
+  public Widget asWidget() {
+    return toolbarRight;
+  }
 
-    @Override
-    public IsActionExtensible getLeftBar() {
-        return toolbarLeft;
-    }
+  @Override
+  public IsActionExtensible getLeftBar() {
+    return toolbarLeft;
+  }
 
-    @Override
-    public IsActionExtensible getRightBar() {
-        return toolbarRight;
-    }
+  @Override
+  public IsActionExtensible getRightBar() {
+    return toolbarRight;
+  }
 
-    @Override
-    public void showAboutDialog() {
-        aboutPanel.get().showCentered();
-    }
+  @Override
+  public void showAboutDialog() {
+    aboutPanel.get().showCentered();
+  }
 
-    @Override
-    public void showErrorDialog() {
-        errorPanel.showCentered();
-    }
+  @Override
+  public void showErrorDialog() {
+    errorPanel.showCentered();
+  }
 
 }

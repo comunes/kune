@@ -43,10 +43,12 @@ public class WaveStatusIndicator {
     @Inject
     public WaveStatusAction(final Session session, final I18nTranslationService i18n) {
       super(session, true);
+      setVisible(false);
       ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
         private void goOnline() {
           putValue(Action.NAME, ""); // i18n.t("Online"));
           putValue(AbstractAction.STYLES, "k-sitebar-wave-status, k-sitebar-wave-status-online");
+          setVisible(false);
           NotifyUser.hideProgress();
         }
 
@@ -67,6 +69,7 @@ public class WaveStatusIndicator {
           case RECONNECTING:
             putValue(Action.NAME, i18n.t("Offline"));
             putValue(AbstractAction.STYLES, "k-sitebar-wave-status, k-sitebar-wave-status-offline");
+            setVisible(true);
             break;
           }
         }

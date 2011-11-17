@@ -23,7 +23,6 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.gxtui.AbstractGxtMenuGui;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
@@ -126,7 +125,8 @@ public class SitebarActionsPresenter extends
     OPTIONS_MENU.putValue(Action.NAME, i18n.t("More"));
     OPTIONS_MENU.putValue(Action.SMALL_ICON, res.arrowdownsitebar());
     OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
-    OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
+    // OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION,
+    // AbstractGxtMenuGui.MenuPosition.bl);
 
     final AbstractExtendedAction bugsAction = new AbstractExtendedAction() {
       @Override

@@ -60,6 +60,7 @@ public class InitData {
   private String siteCommonName;
   private String siteDomain;
   private String siteLogoUrl;
+  private String siteLogoUrlOnOver;
   private String siteShortName;
   private String siteUrl;
   private String[] timezones;
@@ -171,6 +172,10 @@ public class InitData {
 
   public String getSiteLogoUrl() {
     return siteLogoUrl;
+  }
+
+  public String getSiteLogoUrlOnOver() {
+    return siteLogoUrlOnOver;
   }
 
   public String getSiteShortName() {
@@ -308,6 +313,10 @@ public class InitData {
 
   public void setSiteLogoUrl(final String siteLogoUrl) {
     this.siteLogoUrl = siteLogoUrl;
+  }
+
+  public void setSiteLogoUrlOnOver(final String siteLogoUrlOnOver) {
+    this.siteLogoUrlOnOver = siteLogoUrlOnOver;
   }
 
   public void setSiteShortName(final String siteShortName) {

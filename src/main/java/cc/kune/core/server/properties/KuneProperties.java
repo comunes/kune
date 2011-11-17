@@ -48,6 +48,7 @@ public interface KuneProperties {
   String SITE_GROUP_AVAILABLE_TOOLS = "kune.tools.groupSiteAvailableTools";
   String SITE_GROUP_REGIST_ENABLED_TOOLS = "kune.tools.groupRegisEnabledTools";
   String SITE_LOGO_URL = "kune.sitelogourl";
+  String SITE_LOGO_URL_ONOVER = "kune.sitelogourl.onover";
   String SITE_NAME = "kune.default.site.name";
   String SITE_SHORTNAME = "kune.default.site.shortName";
   String SITE_SMTP_DEFAULT_FROM = "kune.site.smtp.defaultfrom";

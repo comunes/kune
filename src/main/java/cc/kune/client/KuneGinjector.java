@@ -41,7 +41,7 @@ import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
-import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
+import cc.kune.core.client.sitebar.logo.SiteLogo;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPresenter;
@@ -140,7 +140,7 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
 
   AsyncProvider<SitebarActionsPresenter> getSitebarActionsPresenter();
 
-  AsyncProvider<SiteLogoPresenter> getSiteLogoPresenter();
+  SiteLogo getSiteLogo();
 
   SiteTokenListeners getSiteTokenListeners();
 
