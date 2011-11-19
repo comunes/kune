@@ -34,9 +34,9 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
-  private static final String CANCEL_ID = "k-conf-dial";
-  private static final String DIALOG_ID = "k-conf-dial-nok";
-  private static final String OK_ID = "k-conf-dial-ok";
+  public static final String CANCEL_ID = "k-conf-dial";
+  public static final String DIALOG_ID = "k-conf-dial-nok";
+  public static final String OK_ID = "k-conf-dial-ok";
   private HandlerRegistration acceptHandler;
   private final HTML askLabel;
   private HandlerRegistration cancelHandler;

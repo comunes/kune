@@ -19,12 +19,14 @@
  */
 package cc.kune.core.client.state;
 
+import cc.kune.core.shared.domain.utils.StateToken;
+
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandler> { 
+public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandler> {
 
   public interface HasToolChangedHandlers extends HasHandlers {
     HandlerRegistration addToolChangedHandler(ToolChangedHandler handler);
@@ -36,24 +38,59 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   private static final Type<ToolChangedHandler> TYPE = new Type<ToolChangedHandler>();
 
-  public static void fire(HasHandlers source, java.lang.String previousTool, java.lang.String newTool) {
-    source.fireEvent(new ToolChangedEvent(previousTool, newTool));
+  public static void fire(final HasHandlers source, final StateToken previousToken,
+      final StateToken newToken) {
+    source.fireEvent(new ToolChangedEvent(previousToken, newToken));
   }
 
   public static Type<ToolChangedHandler> getType() {
     return TYPE;
   }
 
-  java.lang.String previousTool;
-  java.lang.String newTool;
-
-  public ToolChangedEvent(java.lang.String previousTool, java.lang.String newTool) {
-    this.previousTool = previousTool;
-    this.newTool = newTool;
-  }
+  private StateToken newToken;
+  private StateToken previousToken;
 
   protected ToolChangedEvent() {
     // Possibly for serialization.
+  }
+
+  public ToolChangedEvent(final StateToken previousToken, final StateToken newToken) {
+    this.previousToken = previousToken;
+    this.newToken = newToken;
+  }
+
+  @Override
+  protected void dispatch(final ToolChangedHandler handler) {
+    handler.onToolChanged(this);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final ToolChangedEvent other = (ToolChangedEvent) obj;
+    if (newToken == null) {
+      if (other.newToken != null) {
+        return false;
+      }
+    } else if (!newToken.equals(other.newToken)) {
+      return false;
+    }
+    if (previousToken == null) {
+      if (other.previousToken != null) {
+        return false;
+      }
+    } else if (!previousToken.equals(other.previousToken)) {
+      return false;
+    }
+    return true;
   }
 
   @Override
@@ -61,55 +98,33 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
     return TYPE;
   }
 
-  public java.lang.String getPreviousTool() {
-    return previousTool;
+  public StateToken getNewToken() {
+    return newToken;
   }
 
   public java.lang.String getNewTool() {
-    return newTool;
+    return newToken != null ? newToken.getTool() : null;
   }
 
-  @Override
-  protected void dispatch(ToolChangedHandler handler) {
-    handler.onToolChanged(this);
+  public StateToken getPreviousToken() {
+    return previousToken;
   }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-        return true;
-    if (obj == null)
-        return false;
-    if (getClass() != obj.getClass())
-        return false;
-    ToolChangedEvent other = (ToolChangedEvent) obj;
-    if (previousTool == null) {
-      if (other.previousTool != null)
-        return false;
-    } else if (!previousTool.equals(other.previousTool))
-      return false;
-    if (newTool == null) {
-      if (other.newTool != null)
-        return false;
-    } else if (!newTool.equals(other.newTool))
-      return false;
-    return true;
+  public java.lang.String getPreviousTool() {
+    return previousToken != null ? previousToken.getTool() : null;
   }
 
   @Override
   public int hashCode() {
-    int hashCode = 23;
-    hashCode = (hashCode * 37) + (previousTool == null ? 1 : previousTool.hashCode());
-    hashCode = (hashCode * 37) + (newTool == null ? 1 : newTool.hashCode());
-    return hashCode;
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((newToken == null) ? 0 : newToken.hashCode());
+    result = prime * result + ((previousToken == null) ? 0 : previousToken.hashCode());
+    return result;
   }
 
   @Override
   public String toString() {
-    return "ToolChangedEvent["
-                 + previousTool
-                 + ","
-                 + newTool
-    + "]";
+    return "ToolChangedEvent[" + getPreviousTool() + "," + getNewTool() + "]";
   }
 }

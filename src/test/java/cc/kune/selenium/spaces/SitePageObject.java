@@ -22,22 +22,38 @@ package cc.kune.selenium.spaces;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import cc.kune.core.client.notify.confirm.UserConfirmPanel;
+import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.SeleniumConstants;
 
-public class SpacesPageObject extends PageObject {
+public class SitePageObject extends PageObject {
 
+  @FindBy(id = SeleniumConstants.GWTDEV + UserConfirmPanel.CANCEL_ID)
+  public WebElement confirmationCancel;
+  @FindBy(id = SeleniumConstants.GWTDEV + UserConfirmPanel.OK_ID)
+  public WebElement confirmationOk;
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.GROUP_SPACE_ID)
   protected WebElement groupSpaceBtn;
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.HOME_SPACE_ID)
   protected WebElement homeSpaceBtn;
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.PUBLIC_SPACE_ID)
   protected WebElement publicSpaceBtn;
+  @FindBy(id = SeleniumConstants.GWTDEV + SitebarSearchPanel.SITE_SEARCH_TEXTBOX)
+  public WebElement searchTextBox;
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.USER_SPACE_ID)
   protected WebElement userSpaceBtn;
 
-  public SpacesPageObject() {
+  public SitePageObject() {
+  }
+
+  public WebElement getConfirmationCancel() {
+    return confirmationCancel;
+  }
+
+  public WebElement getConfirmationOk() {
+    return confirmationOk;
   }
 
   public WebElement groupBtn() {

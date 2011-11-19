@@ -55,7 +55,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   private final EventBus eventBus;
   private final HistoryWrapper history;
   private StateToken previousGroupToken;
-  private final StateToken previousToken;
   /**
    * When a historyChanged is interrupted (for instance because you are editing
    * something), the new history token is stored here
@@ -75,7 +74,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     this.session = session;
     this.history = history;
     this.previousGroupToken = null;
-    this.previousToken = null;
     this.resumedHistoryToken = null;
     tokenMatcher.init(GwtWaverefEncoder.INSTANCE);
     this.siteTokens = siteTokens;
@@ -126,7 +124,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     final String newTokenTool = newState.getStateToken().getTool();
     final String newToolName = newTokenTool == null ? "" : newTokenTool;
     if (startingUp() || previousToolName == null || !previousToolName.equals(newToolName)) {
-      ToolChangedEvent.fire(eventBus, previousToolName, newToolName);
+      ToolChangedEvent.fire(eventBus, previousGroupToken, newState.getStateToken());
     }
   }
 
@@ -233,8 +231,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     eventBus.addHandler(ToolChangedEvent.getType(), handler);
     final StateAbstractDTO currentState = session.getCurrentState();
     if (fireNow && currentState != null) {
-      handler.onToolChanged(new ToolChangedEvent(getPreviousTool(),
-          currentState.getStateToken().getTool()));
+      handler.onToolChanged(new ToolChangedEvent(previousGroupToken, currentState.getStateToken()));
     }
   }
 

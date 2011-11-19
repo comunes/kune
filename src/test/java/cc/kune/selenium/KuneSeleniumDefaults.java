@@ -26,7 +26,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -47,7 +48,7 @@ import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
 import cc.kune.selenium.spaces.GroupSpacePageObject;
 import cc.kune.selenium.spaces.HomeSpacePageObject;
-import cc.kune.selenium.spaces.SpacesPageObject;
+import cc.kune.selenium.spaces.SitePageObject;
 import cc.kune.selenium.spaces.UserSpacePageObject;
 
 import com.google.inject.Guice;
@@ -68,7 +69,7 @@ public class KuneSeleniumDefaults {
   protected LoginPageObject login;
   private final ResourceBundle messages;
   protected RegisterPageObject register;
-  protected final SpacesPageObject spaces;
+  protected final SitePageObject site;
   protected UserSpacePageObject userSpace;
   private final WebDriver webdriver;
 
@@ -95,7 +96,7 @@ public class KuneSeleniumDefaults {
     login = injector.getInstance(LoginPageObject.class);
     register = injector.getInstance(RegisterPageObject.class);
     entityHeader = injector.getInstance(EntityHeaderPageObject.class);
-    spaces = injector.getInstance(SpacesPageObject.class);
+    site = injector.getInstance(SitePageObject.class);
     chat = injector.getInstance(ChatPageObject.class);
     homeSpace = injector.getInstance(HomeSpacePageObject.class);
     userSpace = injector.getInstance(UserSpacePageObject.class);
@@ -105,7 +106,7 @@ public class KuneSeleniumDefaults {
     PageFactory.initElements(locator, login);
     PageFactory.initElements(locator, register);
     PageFactory.initElements(locator, entityHeader);
-    PageFactory.initElements(locator, spaces);
+    PageFactory.initElements(locator, site);
     PageFactory.initElements(locator, chat);
     PageFactory.initElements(locator, homeSpace);
     PageFactory.initElements(locator, userSpace);
@@ -124,8 +125,8 @@ public class KuneSeleniumDefaults {
 
   @BeforeSuite
   public void beforeSuite() {
-    home();
     resize();
+    home();
     SeleniumUtils.initCursor(webdriver);
     SeleniumUtils.showCursor(webdriver);
     SeleniumUtils.showCursor(webdriver, login.getAnonMsg());
@@ -202,8 +203,11 @@ public class KuneSeleniumDefaults {
     // 1024,769
     // 840,770
     // 806,707
-    final JavascriptExecutor js = (JavascriptExecutor) webdriver;
-    js.executeScript("window.resizeTo(806,707); window.moveTo(0,0);");
+    webdriver.manage().window().setPosition(new Point(0, 0));
+    webdriver.manage().window().setSize(new Dimension(806, 707));
+    // Before we were using:
+    // final JavascriptExecutor js = (JavascriptExecutor) webdriver;
+    // js.executeScript("window.resizeTo(806,707); window.moveTo(0,0);");
   }
 
   public void showCursor(final int x, final int y) {

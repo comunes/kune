@@ -205,24 +205,20 @@ public class RegisterPresenter extends
         }
 
         private void showWelcolmeDialog() {
-          NotifyUser.info(
-              i18n.t("Welcome"),
-              i18n.t(
-                  "Thanks for joining [%s]. "
-                      + "Now you can actively participate in [%s]. "
-                      + "You can also use your personal space to publish contents. "
-                      + "Note: your email is not verified, please follow the instructions you will receive by email.",
-                  siteCommonName, siteCommonName), Register.WELCOME_ID, true);
+          NotifyUser.info(i18n.t("Welcome"), i18n.t("Thanks for joining [%s]. "
+              + "Now you can actively participate in [%s]. "
+              + "You can also use your personal space to publish contents. ",
+          // +
+          // "Note: your email is not verified, please follow the instructions you will receive by email.",
+              siteCommonName, siteCommonName), Register.WELCOME_ID, true);
         }
 
         private void showWelcolmeDialogNoHomepage() {
-          NotifyUser.info(
-              i18n.t("Welcome"),
-              i18n.t(
-                  "Thanks for joining [%s]. "
-                      + "Now you can actively participate in [%s]. "
-                      + "Note: your email is not verified, please follow the instructions you will receive by email.",
-                  siteCommonName, siteCommonName), Register.WELCOME_ID, true);
+          NotifyUser.info(i18n.t("Welcome"), i18n.t("Thanks for joining [%s]. "
+              + "Now you can actively participate in [%s]. ",
+          // +
+          // "Note: your email is not verified, please follow the instructions you will receive by email.",
+              siteCommonName, siteCommonName), Register.WELCOME_ID, true);
         }
       };
       userServiceProvider.get().createUser(user, wantHomepage, callback);

@@ -39,6 +39,7 @@ import com.google.inject.Provider;
 
 public class AddEntityToThisGroupAction extends SNRolAction {
 
+  public static final String ADD_NEW_MEMBER_TEXTBOX = "kune-add-newMember-tbox";
   private final AddMemberSearchPanel searchPanel;
 
   @Inject
@@ -52,37 +53,37 @@ public class AddEntityToThisGroupAction extends SNRolAction {
     putValue(NAME, i18n.t("Add new member"));
     putValue(Action.SMALL_ICON, res.add());
     putValue(Action.STYLES, "k-sn-join");
-    searchPanel.init(new OnEntitySelectedInSearch() {
-      @Override
-      public void onSeleted(final String shortName) {
-        NotifyUser.askConfirmation(
-            i18n.t("Are you sure?"),
-            i18n.t("Do you want to add '[%s]' as a member of '[%s]'?", shortName,
-                session.getCurrentGroupShortName()), new SimpleResponseCallback() {
-              @Override
-              public void onCancel() {
-              }
+    searchPanel.init(// In the future, with this to false, we'll be add groups
+                     // to groups!
+        true, ADD_NEW_MEMBER_TEXTBOX, new OnEntitySelectedInSearch() {
+          @Override
+          public void onSeleted(final String shortName) {
+            NotifyUser.askConfirmation(
+                i18n.t("Are you sure?"),
+                i18n.t("Do you want to add '[%s]' as a member of '[%s]'?", shortName,
+                    session.getCurrentGroupShortName()), new SimpleResponseCallback() {
+                  @Override
+                  public void onCancel() {
+                  }
 
-              @Override
-              public void onSuccess() {
-                NotifyUser.showProgress();
-                snServiceProvider.get().addCollabMember(session.getUserHash(),
-                    session.getCurrentStateToken(), shortName,
-                    new AsyncCallbackSimple<SocialNetworkDataDTO>() {
-                      @Override
-                      public void onSuccess(final SocialNetworkDataDTO result) {
-                        NotifyUser.hideProgress();
-                        NotifyUser.info(i18n.t("Member added as collaborator"));
-                        stateManager.setSocialNetwork(result);
-                      }
-                    });
-              }
-            });
-      }
+                  @Override
+                  public void onSuccess() {
+                    NotifyUser.showProgress();
+                    snServiceProvider.get().addCollabMember(session.getUserHash(),
+                        session.getCurrentStateToken(), shortName,
+                        new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                          @Override
+                          public void onSuccess(final SocialNetworkDataDTO result) {
+                            NotifyUser.hideProgress();
+                            NotifyUser.info(i18n.t("Member added as collaborator"));
+                            stateManager.setSocialNetwork(result);
+                          }
+                        });
+                  }
+                });
+          }
 
-    },
-    // In the future, with this to false, we'll be add groups to groups!
-        true);
+        });
 
   }
 

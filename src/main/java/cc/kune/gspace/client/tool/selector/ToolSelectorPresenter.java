@@ -24,6 +24,7 @@ import java.util.List;
 
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.state.GroupChangedEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.StateChangedEvent;
@@ -83,16 +84,8 @@ public class ToolSelectorPresenter extends
     stateManager.onToolChanged(false, new ToolChangedHandler() {
       @Override
       public void onToolChanged(final ToolChangedEvent event) {
-        ToolSelectorPresenter.this.onToolChanged(event.getPreviousTool(), event.getNewTool());
-      }
-    });
-    stateManager.onStateChanged(true, new StateChangedHandler() {
-      @Override
-      public void onStateChanged(final StateChangedEvent event) {
-        final StateToken token = event.getState().getStateToken();
-        if (token.hasAll() || token.hasGroupToolAndFolder()) {
-          tools.get(token.getTool()).setToken(token);
-        }
+        ToolSelectorPresenter.this.onToolChanged(event.getPreviousTool(), event.getNewTool(),
+            event.getPreviousToken(), event.getNewToken());
       }
     });
   }
@@ -124,17 +117,20 @@ public class ToolSelectorPresenter extends
     }
   }
 
-  void onToolChanged(final String oldTool, final String newTool) {
+  void onToolChanged(final String oldTool, final String newTool, final StateToken oldToken,
+      final StateToken newToken) {
     Log.debug("Registered tools: " + tools.keySet().toString());
-    if (oldTool != null && !oldTool.equals("")) {
+    if (TextUtils.notEmpty(oldTool)) {
       final ToolSelectorItem tool = tools.get(oldTool);
       checkTool(tool);
       tool.setSelected(false);
+      tool.setToken(oldToken);
     }
-    if (!newTool.equals("")) {
+    if (TextUtils.notEmpty(newTool)) {
       final ToolSelectorItem tool = tools.get(newTool);
       checkTool(tool);
       tool.setSelected(true);
+      tool.setToken(newToken.copy().clearDocument().clearFolder());
     }
   }
 

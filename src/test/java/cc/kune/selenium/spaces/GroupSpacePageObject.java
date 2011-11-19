@@ -23,6 +23,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import cc.kune.core.client.sitebar.search.EntitySearchPanel;
+import cc.kune.core.client.sn.actions.AddEntityToThisGroupAction;
+import cc.kune.core.client.sn.actions.AddNewBuddiesAction;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.SeleniumConstants;
@@ -31,6 +33,10 @@ public class GroupSpacePageObject extends PageObject {
 
   @FindBy(id = SeleniumConstants.GWTDEV + UserSNConfActions.ADD_BUDDIE_BTN)
   private WebElement addBuddieBtn;
+  @FindBy(id = SeleniumConstants.GWTDEV + AddNewBuddiesAction.ADD_NEW_BUDDIES_TEXTBOX)
+  public WebElement addNewBuddieTextBox;
+  @FindBy(id = SeleniumConstants.GWTDEV + AddEntityToThisGroupAction.ADD_NEW_MEMBER_TEXTBOX)
+  public WebElement addNewMemberTextBox;
   @FindBy(xpath = "//div[2]/div/div[3]/div/span")
   private WebElement blogTool;
   @FindBy(xpath = "//div[2]/div/div[4]/div/span")
@@ -41,12 +47,12 @@ public class GroupSpacePageObject extends PageObject {
   private WebElement eventTool;
   @FindBy(xpath = "//td/img")
   private WebElement firstAvatarOfGroup;
+  @FindBy(xpath = "//td[2]/div/div/table/tbody/tr/td")
+  public WebElement firstFromSuggestionBox;
   @FindBy(xpath = "//div[2]/div/div[5]/div/span")
   private WebElement listTool;
   @FindBy(id = SeleniumConstants.GWTDEV + EntitySearchPanel.OK_ID)
   private WebElement searchEntitiesOk;
-  @FindBy(id = SeleniumConstants.GWTDEV + EntitySearchPanel.ENTITY_SEARCH_TEXTBOX)
-  private WebElement searchEntitiesTextBox;
   @FindBy(xpath = "//div[3]/div/button")
   private WebElement socialNetOptions;
   @FindBy(xpath = "//div[2]/div/div[7]/div/span")
@@ -84,10 +90,6 @@ public class GroupSpacePageObject extends PageObject {
 
   public WebElement searchEntitiesOk() {
     return searchEntitiesOk;
-  }
-
-  public WebElement searchEntitiesTextBox() {
-    return searchEntitiesTextBox;
   }
 
   public WebElement socialNetOptions() {

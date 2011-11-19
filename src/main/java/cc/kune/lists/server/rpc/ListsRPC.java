@@ -55,16 +55,26 @@ public class ListsRPC implements ListsService, RPC {
     this.contentManager = contentManager;
   }
 
+  private String composeListName(final StateToken parentToken, final String listname) {
+    // FIXME In the future use tabs here
+    return parentToken.getGroup() + "-" + listname;
+  }
+
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.container)
   @Transactional
   public StateContainerDTO createList(final String userHash, final StateToken parentToken,
-      final String title, final String description, final boolean isPublic) {
-    final StateContainerDTO result = contentRPC.addFolder(userHash, parentToken, title,
-        ListsConstants.TYPE_LIST);
+      final String listaName, final String description, final boolean isPublic) {
+    final StateContainerDTO result = contentRPC.addFolder(userHash, parentToken,
+        composeListName(parentToken, listaName), ListsConstants.TYPE_LIST);
     // Not public list, don't permit subscriptions neither view posts
     return contentRPC.getState(setContainerAcl(result.getStateToken(), isPublic));
+  }
+
+  private Container getContainer(final StateToken token) {
+    final Container container = contentManager.find(ContentUtils.parseId(token.getFolder()));
+    return container;
   }
 
   private Group getUserGroup() {
@@ -75,14 +85,17 @@ public class ListsRPC implements ListsService, RPC {
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.container)
   @Transactional
-  public StateContentDTO newPost(final String userHash, final StateToken parentToken, final String title) {
-    final StateContentDTO content = contentRPC.addContent(userHash, parentToken, title,
-        ListsConstants.TYPE_POST);
+  public StateContentDTO newPost(final String userHash, final StateToken parentToken,
+      final String postTitle) {
+    final Container container = getContainer(parentToken);
+    final StateContentDTO content = contentRPC.addContent(userHash, parentToken,
+        "[" + container.getName() + "] " + postTitle, ListsConstants.TYPE_POST);
+    // FIXME In the future use tabs here
     return content;
   }
 
   private Container setContainerAcl(final StateToken token, final boolean isPublic) {
-    final Container container = contentManager.find(ContentUtils.parseId(token.getFolder()));
+    final Container container = getContainer(token);
     final AccessLists acl = new AccessLists();
     acl.getAdmins().setMode(GroupListMode.NORMAL);
     acl.getAdmins().add(getUserGroup());
@@ -102,7 +115,7 @@ public class ListsRPC implements ListsService, RPC {
   }
 
   private Container setPublicAcl(final StateToken token, final boolean isPublic) {
-    final Container container = contentManager.find(ContentUtils.parseId(token.getFolder()));
+    final Container container = getContainer(token);
     final AccessLists acl = container.getAccessLists();
     setViewersAcl(isPublic, acl);
     contentManager.setAccessList(container, acl);
@@ -120,7 +133,7 @@ public class ListsRPC implements ListsService, RPC {
   @Transactional
   public StateContainerDTO subscribeToList(final String userHash, final StateToken token,
       final Boolean subscribe) {
-    final Container container = contentManager.find(ContentUtils.parseId(token.getFolder()));
+    final Container container = getContainer(token);
     final AccessLists acl = container.getAccessLists();
     if (subscribe) {
       if (!acl.getAdmins().includes(getUserGroup())

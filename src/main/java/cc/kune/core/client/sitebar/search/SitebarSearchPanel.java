@@ -43,7 +43,6 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
   private static final int SEARCH_TEXT_WIDTH_BIG = 160;
   private static final int SEARCH_TEXT_WIDTH_SMALL = 120;
   public static final String SITE_SEARCH_BUTTON = "kune-ssp-searchbt";
-
   public static final String SITE_SEARCH_TEXTBOX = "kune-ssp-tbox";
   private final PushButton searchButton;
   private final TextBoxBase searchTextBox;
@@ -55,7 +54,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
     searchButton = new PushButton(new Image(img.kuneSearchIco()), new Image(img.kuneSearchIcoPush()));
     searchButton.ensureDebugId(SITE_SEARCH_BUTTON);
     final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, false,
-        new OnEntitySelectedInSearch() {
+        SITE_SEARCH_TEXTBOX, new OnEntitySelectedInSearch() {
           @Override
           public void onSeleted(final String shortName) {
             stateManager.gotoHistoryToken(shortName);
@@ -63,7 +62,6 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
         });
     suggestBox = multivalueSBox.getSuggestBox();
     searchTextBox = suggestBox.getTextBox();
-    searchTextBox.ensureDebugId(SITE_SEARCH_TEXTBOX);
     searchTextBox.addStyleName("k-fr");
     searchTextBox.addStyleName("k-sitebarsearch");
     searchTextBox.addStyleName("k-fr");

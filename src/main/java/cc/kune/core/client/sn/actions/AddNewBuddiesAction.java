@@ -33,6 +33,7 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 
 public class AddNewBuddiesAction extends AbstractExtendedAction {
+  public static final String ADD_NEW_BUDDIES_TEXTBOX = "kune-add-newbuddies-tbox";
 
   private final EntitySearchPanel searchPanel;
 
@@ -42,7 +43,7 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
     this.searchPanel = searchPanel;
     putValue(Action.NAME, i18n.t("Add a new buddy"));
     putValue(Action.SMALL_ICON, res.addGreen());
-    searchPanel.init(new OnEntitySelectedInSearch() {
+    searchPanel.init(true, ADD_NEW_BUDDIES_TEXTBOX, new OnEntitySelectedInSearch() {
       @Override
       public void onSeleted(final String shortName) {
         NotifyUser.askConfirmation(i18n.t("Are you sure?"),
@@ -59,7 +60,7 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
               }
             });
       }
-    }, true);
+    });
   }
 
   @Override

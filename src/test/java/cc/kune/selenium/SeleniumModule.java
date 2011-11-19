@@ -38,7 +38,7 @@ import cc.kune.selenium.chat.ChatPageObject;
 import cc.kune.selenium.general.EntityHeaderPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
-import cc.kune.selenium.spaces.SpacesPageObject;
+import cc.kune.selenium.spaces.SitePageObject;
 
 import com.google.inject.Singleton;
 
@@ -69,7 +69,7 @@ public class SeleniumModule extends PageObjectModule {
     bind(RegisterPageObject.class).in(Singleton.class);
     bind(EntityHeaderPageObject.class).in(Singleton.class);
     bind(ChatPageObject.class).in(Singleton.class);
-    bind(SpacesPageObject.class).in(Singleton.class);
+    bind(SitePageObject.class).in(Singleton.class);
 
     final ResourceBundle english = ResourceBundle.getBundle("TestConstants", Locale.ENGLISH);
     final ResourceBundle spanish = ResourceBundle.getBundle("TestConstants", new Locale("es"));

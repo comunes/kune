@@ -43,6 +43,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateManagerDefaultTest {
 
+  private static final StateToken EMPTY_TOKEN = null;
+  private static final StateToken GROUP1_TOOL1 = new StateToken("group1.tool1");
+  private static final StateToken GROUP1_TOOL2 = new StateToken("group1.tool2");
+  private static final StateToken GROUP2_TOOL1 = new StateToken("group2.tool1");
   private static final String HASH = "someUserHash";
   private BeforeActionListener beforeChangeListener1;
   private BeforeActionListener beforeChangeListener2;
@@ -134,9 +138,10 @@ public class StateManagerDefaultTest {
         new GroupChangedEvent("", "group2"));
     Mockito.verify(groupChangeHandler, Mockito.times(1)).onGroupChanged(
         new GroupChangedEvent("group2", "group1"));
-    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(new ToolChangedEvent("", "tool1"));
     Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(
-        new ToolChangedEvent("tool1", "tool2"));
+        new ToolChangedEvent(EMPTY_TOKEN, GROUP2_TOOL1));
+    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(
+        new ToolChangedEvent(GROUP2_TOOL1, GROUP1_TOOL2));
   }
 
   @Test
@@ -156,7 +161,8 @@ public class StateManagerDefaultTest {
         new GroupChangedEvent("", "group1"));
     Mockito.verify(groupChangeHandler, Mockito.times(1)).onGroupChanged(
         new GroupChangedEvent("group1", "group2"));
-    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(new ToolChangedEvent("", "tool1"));
+    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(
+        new ToolChangedEvent(null, GROUP1_TOOL1));
 
   }
 
@@ -171,9 +177,10 @@ public class StateManagerDefaultTest {
         (ToolChangedEvent) Mockito.anyObject());
     Mockito.verify(groupChangeHandler, Mockito.times(1)).onGroupChanged(
         new GroupChangedEvent("", "group1"));
-    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(new ToolChangedEvent("", "tool1"));
     Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(
-        new ToolChangedEvent("tool1", "tool2"));
+        new ToolChangedEvent(EMPTY_TOKEN, GROUP1_TOOL1));
+    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(
+        new ToolChangedEvent(GROUP1_TOOL1, GROUP1_TOOL2));
   }
 
   @Test
@@ -187,8 +194,10 @@ public class StateManagerDefaultTest {
         (ToolChangedEvent) Mockito.anyObject());
     Mockito.verify(groupChangeHandler, Mockito.times(1)).onGroupChanged(
         new GroupChangedEvent("", "group1"));
-    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(new ToolChangedEvent("", "tool1"));
-    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(new ToolChangedEvent("tool1", ""));
+    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(
+        new ToolChangedEvent(EMPTY_TOKEN, GROUP1_TOOL1));
+    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(
+        new ToolChangedEvent(GROUP1_TOOL1, new StateToken("group1")));
   }
 
   @Test
@@ -202,7 +211,8 @@ public class StateManagerDefaultTest {
         (ToolChangedEvent) Mockito.anyObject());
     Mockito.verify(groupChangeHandler, Mockito.times(1)).onGroupChanged(
         new GroupChangedEvent("", "group1"));
-    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(new ToolChangedEvent("", "tool1"));
+    Mockito.verify(toolChangeHandler, Mockito.times(1)).onToolChanged(
+        new ToolChangedEvent(EMPTY_TOKEN, GROUP1_TOOL1));
   }
 
   private String confBeforeStateChangeListeners(final boolean value, final boolean value2) {

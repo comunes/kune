@@ -38,7 +38,6 @@ import com.google.gwt.user.client.ui.TextBoxBase;
 public abstract class EntitySearchPanel {
 
   public static final String DIALOG_ID = "entity-search-panel-diag";
-  public static final String ENTITY_SEARCH_TEXTBOX = "kune-ssp-tbox";
   public static final String OK_ID = "entity-search-panel-ok-id";
   private static final int SEARCH_TEXT_HEIGHT = 13;
   private static final int SEARCH_TEXT_WIDTH_BIG = 160;
@@ -68,14 +67,14 @@ public abstract class EntitySearchPanel {
     searchTextBox.setValue("");
   }
 
-  private void create() {
+  private void create(final String id) {
     dialog.getTitleText().setText(
         i18n.t(searchOnlyUsers ? "Type the name of the user and select him/her:"
             : "Type the name of the user or group and select it:"), i18n.getDirection());
-    final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, searchOnlyUsers, callback);
+    final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, searchOnlyUsers, id,
+        callback);
     suggestBox = multivalueSBox.getSuggestBox();
     searchTextBox = suggestBox.getTextBox();
-    searchTextBox.ensureDebugId(ENTITY_SEARCH_TEXTBOX);
     dialog.getInnerPanel().add(multivalueSBox);
     setTextSearchSmallImpl();
   }
@@ -92,10 +91,11 @@ public abstract class EntitySearchPanel {
     return searchTextBox;
   }
 
-  public void init(final OnEntitySelectedInSearch callback, final boolean searchOnlyUsers) {
+  public void init(final boolean searchOnlyUsers, final String id,
+      final OnEntitySelectedInSearch callback) {
     this.callback = callback;
     this.searchOnlyUsers = searchOnlyUsers;
-    create();
+    create(id);
   }
 
   public void selectSearchText() {

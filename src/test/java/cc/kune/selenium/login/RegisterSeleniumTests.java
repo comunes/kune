@@ -86,9 +86,14 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
 
     // group space
     showTitleSlide(t("Your personal public space"), t("here you can have your blog, etc"));
-    spaces.groupBtn().click();
+    site.groupBtn().click();
     groupSpace.addBuddieBtn().click();
-    groupSpace.searchEntitiesTextBox().sendKeys("admin\n");
+    groupSpace.addNewBuddieTextBox.click();
+    groupSpace.addNewBuddieTextBox.sendKeys("admin");
+    groupSpace.addNewBuddieTextBox.sendKeys(Keys.ARROW_DOWN);
+    sleep(500);
+    groupSpace.firstFromSuggestionBox.click();
+    site.confirmationOk.click();
     groupSpace.searchEntitiesOk().click();
     groupSpace.firstAvatarOfGroup().click();
     sleep(2000);
@@ -112,7 +117,7 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     chat.getSend(jids).click();
 
     showMsg(t("And you can chat event while going back/forward with your browser"));
-    spaces.homeBtn().click();
+    site.homeBtn().click();
     sleep(2000);
     chat.getTalkBox(jids).sendKeys(t("la la la"));
     chat.getSend(jids).click();
@@ -135,5 +140,4 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     showTitleSlide(t("Thank you"), t("and yes, feedback welcome"));
 
   }
-
 }
