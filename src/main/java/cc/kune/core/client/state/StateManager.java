@@ -26,8 +26,21 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 
 public interface StateManager {
 
+  /**
+   * @param listener
+   *          you can use this {@link BeforeActionListener} to intercept changes
+   *          of state (for instance if you are editing and what to save, etc.
+   */
   void addBeforeStateChangeListener(BeforeActionListener listener);
 
+  /**
+   * This permits to add custom #framents to urls and its associated actions
+   * 
+   * @param token
+   *          the url #fragment
+   * @param historyTokenCallback
+   *          the action that will be executed when the previous url fragment
+   */
   void addSiteToken(String token, HistoryTokenCallback historyTokenCallback);
 
   String getCurrentToken();

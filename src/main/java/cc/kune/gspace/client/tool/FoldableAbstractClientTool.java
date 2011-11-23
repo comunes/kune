@@ -31,6 +31,7 @@ import com.google.gwt.resources.client.ImageResource;
 
 public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
+  protected static final String EMPTY = "This folder is empty";
   protected final ContentCapabilitiesRegistry contentCapabilitiesRegistry;
   protected final I18nTranslationService i18n;
   protected final NavResources navResources;
@@ -85,6 +86,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
   public void registerEmptyMessages(final String contentTypeId, final String message) {
     contentCapabilitiesRegistry.getEmptyMessagesRegistry().register(contentTypeId, message);
+  }
+
+  public void registerEmptyMessagesNotLogged(final String contentTypeId, final String message) {
+    contentCapabilitiesRegistry.getEmptyMessagesRegistryNotLogged().register(contentTypeId, message);
   }
 
   protected void registerLicensableTypes(final String... typeIds) {

@@ -31,6 +31,7 @@ public class ContentCapabilitiesRegistry {
   private final DropableRegistry dropable;
   private final EmailSubscribeAbleRegistry emailSubscribeAble;
   private final EmptyMessagesRegistry emptyMessagesRegistry;
+  private final EmptyMessagesRegistry emptyMessagesRegistryNotLogged;
   private final IconsRegistry iconsRegistry;
   private final LicensableRegistry licensable;
   private final NewMenusForTypeIdsRegistry newMenus;
@@ -54,6 +55,7 @@ public class ContentCapabilitiesRegistry {
       final RateableRegistry rateable, final TageableRegistry tageable,
       final RenamableRegistry renamable, final TranslatableRegistry translatable,
       final VersionableRegistry versionable, final EmptyMessagesRegistry emptyMessagesRegistry,
+      final EmptyMessagesRegistry emptyMessagesRegistryNotLogged,
       final XmppComentableRegistry xmppComentable, final XmppNotifyCapableRegistry xmppNotifyCapable,
       final ShowDeletedRegistry showDeleted) {
     this.authorable = authorableRegistry;
@@ -73,6 +75,8 @@ public class ContentCapabilitiesRegistry {
     this.translatable = translatable;
     this.versionable = versionable;
     this.emptyMessagesRegistry = emptyMessagesRegistry;
+    this.emptyMessagesRegistryNotLogged = emptyMessagesRegistryNotLogged;
+
     this.xmppComentable = xmppComentable;
     this.xmppNotifyCapable = xmppNotifyCapable;
     this.showDeleted = showDeleted;
@@ -112,6 +116,10 @@ public class ContentCapabilitiesRegistry {
 
   public EmptyMessagesRegistry getEmptyMessagesRegistry() {
     return emptyMessagesRegistry;
+  }
+
+  public EmptyMessagesRegistry getEmptyMessagesRegistryNotLogged() {
+    return emptyMessagesRegistryNotLogged;
   }
 
   public IconsRegistry getIconsRegistry() {

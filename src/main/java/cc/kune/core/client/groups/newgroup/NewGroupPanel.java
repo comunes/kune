@@ -21,6 +21,7 @@ package cc.kune.core.client.groups.newgroup;
 
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
@@ -145,15 +146,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     publicDescField.setValidationDelay(1000);
     form.add(publicDescField);
 
-    tag1 = new TextField<String>();
-    tag1.setTabIndex(4);
-    tag1.setFieldLabel(i18n.t("Group tags"));
-    tag1.setName(TAGS_FIELD);
-    tag1.setWidth(DefaultForm.BIG_FIELD_WIDTH);
-    tag1.setAllowBlank(false);
-    tag1.setTitle(i18n.t("type some keyword that define your group"));
-    tag1.setValidationDelay(1000);
-    form.add(tag1);
+    form.add(createTagField(tag1));
+    // form.add(createTagField(tag2));
+    // form.add(createTagField(tag3));
 
     final FieldSet groupTypeFieldSet = new FieldSet();
     groupTypeFieldSet.setHeading(i18n.t("Group type"));
@@ -195,6 +190,18 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     communityRadio.setTabIndex(9);
 
     return form;
+  }
+
+  private TextField<String> createTagField(TextField<String> tag) {
+    tag = new TextField<String>();
+    tag.setTabIndex(4);
+    tag.setFieldLabel(i18n.t("Group tags"));
+    tag.setName(TAGS_FIELD);
+    tag.setWidth(DefaultForm.BIG_FIELD_WIDTH);
+    tag.setAllowBlank(false);
+    Tooltip.to(tag, i18n.t("type some keyword that define your group"));
+    tag.setValidationDelay(1000);
+    return tag;
   }
 
   @Override

@@ -35,6 +35,8 @@ import com.google.inject.Inject;
 
 public class DocsClientTool extends FoldableAbstractClientTool {
 
+  private static final String EMPTY_CREATE_SOME = "This folder is empty. You can create some document or folder here.";
+
   @Inject
   public DocsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
@@ -66,8 +68,10 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
-    registerEmptyMessages(TYPE_FOLDER, i18n.t("This folder is empty"));
-    registerEmptyMessages(TYPE_ROOT, i18n.t("This folder is empty"));
+    registerEmptyMessagesNotLogged(TYPE_FOLDER, i18n.t(EMPTY));
+    registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t(EMPTY));
+    registerEmptyMessages(TYPE_FOLDER, i18n.t(EMPTY_CREATE_SOME));
+    registerEmptyMessages(TYPE_ROOT, i18n.t(EMPTY_CREATE_SOME));
   }
 
 }

@@ -25,6 +25,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.EditEvent;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
 import cc.kune.common.client.ui.HasEditHandler;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.IconsRegistry;
@@ -97,7 +98,7 @@ public class FolderViewerPresenter extends
 
     void setSubheaderActions(GuiActionDescCollection actions);
 
-    void showEmptyMsg(String contentTypeId);
+    void showEmptyMsg(String message);
   }
 
   private final ActionRegistryByType actionsRegistry;
@@ -140,7 +141,8 @@ public class FolderViewerPresenter extends
     final String name = content.getName();
     final Object icon = mimeType != null ? getIcon(stateToken, typeId, mimeType) : getIcon(stateToken,
         typeId, status);
-    final String tooltip = getTooltip(stateToken, mimeType, capabilitiesRegistry.isDragable(typeId) && rights.isAdministrable());
+    final String tooltip = getTooltip(stateToken, mimeType, capabilitiesRegistry.isDragable(typeId)
+        && rights.isAdministrable());
     if (status.equals(ContentStatus.inTheDustbin)
         && (!capabilitiesRegistry.showDeleted(typeId) && !session.getShowDeletedContent())) {
       // Don't show
@@ -176,7 +178,15 @@ public class FolderViewerPresenter extends
 
   private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
     if (container.getContents().size() + container.getChilds().size() == 0) {
-      getView().showEmptyMsg(container.getTypeId());
+      String msg = null;
+      final String typeId = container.getTypeId();
+      if (session.isLogged()) {
+        msg = capabilitiesRegistry.getEmptyMessagesRegistry().getContentTypeIcon(typeId);
+      } else {
+        msg = capabilitiesRegistry.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
+      }
+      final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : i18n.t(msg);
+      getView().showEmptyMsg(emptyMessage);
     } else {
       // Folders
       for (final ContainerSimpleDTO childFolder : container.getChilds()) {

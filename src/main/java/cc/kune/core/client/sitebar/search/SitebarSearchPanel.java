@@ -41,7 +41,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   private static final int SEARCH_TEXT_HEIGHT = 13;
   private static final int SEARCH_TEXT_WIDTH_BIG = 160;
-  private static final int SEARCH_TEXT_WIDTH_SMALL = 120;
+  private static final int SEARCH_TEXT_WIDTH_SMALL = 80;
   public static final String SITE_SEARCH_BUTTON = "kune-ssp-searchbt";
   public static final String SITE_SEARCH_TEXTBOX = "kune-ssp-tbox";
   private final PushButton searchButton;

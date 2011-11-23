@@ -23,7 +23,6 @@ import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -136,9 +135,8 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   }
 
   @Override
-  public void showEmptyMsg(final String contentTypeId) {
+  public void showEmptyMsg(final String emptyMessage) {
+    emptyLabel.setText(emptyMessage);
     gsArmor.getDocContainer().add(emptyPanel);
-    final String msg = capabilitiesRegistry.getEmptyMessagesRegistry().getContentTypeIcon(contentTypeId);
-    emptyLabel.setText(TextUtils.empty(msg) ? i18n.t("This is empty.") : i18n.t(msg));
   }
 }

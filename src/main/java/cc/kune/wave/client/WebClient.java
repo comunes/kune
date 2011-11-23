@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
+import org.waveprotocol.box.webclient.client.HistoryProvider;
 import org.waveprotocol.box.webclient.client.HistorySupport;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.Session;
@@ -183,6 +184,12 @@ public class WebClient extends  Composite implements WaveClientView {
             final String message = stack.asString().replace("<br>", "\n");
             REMOTE_LOG.severe(message);
             NotifyUser.logError(message);
+            NotifyUser.showProgress("Error in editor");
+            new Timer() {
+              @Override
+              public void run() {
+                NotifyUser.hideProgress();
+              }}.schedule(3000);
           }
         });
       }
@@ -285,7 +292,19 @@ public class WebClient extends  Composite implements WaveClientView {
     //setupConnectionIndicator();
 
     // Done in StateManager
-    HistorySupport.kuneInit(tokenMatcher, session);
+    HistorySupport.init(new HistoryProvider() {
+      @Override
+      public String getToken() {
+        final String currentToken = History.getToken();
+        String waveToken = currentToken;
+        // FIXME what about preview?
+        if (tokenMatcher.isGroupToken(currentToken) || tokenMatcher.isHomeToken(currentToken)) {
+          waveToken = session.getContentState().getWaveRef();
+          LOG.info("Kune URL: " + currentToken + " = " + waveToken);
+        }
+        return waveToken;
+      }
+    });
 
     loginImpl();
 

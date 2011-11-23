@@ -34,6 +34,8 @@ import com.google.inject.Inject;
 
 public class WikiClientTool extends FoldableAbstractClientTool {
 
+  private static final String EMPTY_FOLDER = "This folder is empty, create some wikipage or folder";
+
   @Inject
   public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
@@ -65,8 +67,10 @@ public class WikiClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_WIKIPAGE, navResources.wikipage());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
-    registerEmptyMessages(TYPE_FOLDER, i18n.t("This folder is empty"));
-    registerEmptyMessages(TYPE_ROOT, i18n.t("This wiki is empty"));
+    registerEmptyMessages(TYPE_FOLDER, i18n.t(EMPTY_FOLDER));
+    registerEmptyMessages(TYPE_ROOT, i18n.t(EMPTY_FOLDER));
+    registerEmptyMessagesNotLogged(TYPE_FOLDER, i18n.t("This folder is empty"));
+    registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t("This wiki is empty"));
   }
 
 }

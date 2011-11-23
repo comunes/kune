@@ -124,13 +124,16 @@ public class ToolSelectorPresenter extends
       final ToolSelectorItem tool = tools.get(oldTool);
       checkTool(tool);
       tool.setSelected(false);
-      tool.setToken(oldToken);
+      if (newToken != null && oldToken != null && newToken.getGroup().equals(oldToken.getGroup())) {
+        // only if we don't change of group
+        tool.setToken(oldToken);
+      }
     }
     if (TextUtils.notEmpty(newTool)) {
       final ToolSelectorItem tool = tools.get(newTool);
       checkTool(tool);
       tool.setSelected(true);
-      tool.setToken(newToken.copy().clearDocument().clearFolder());
+      tool.setGroupShortName(newToken.getGroup());
     }
   }
 

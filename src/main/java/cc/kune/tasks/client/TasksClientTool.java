@@ -35,6 +35,8 @@ import com.google.inject.Inject;
 
 public class TasksClientTool extends FoldableAbstractClientTool {
 
+  private static final String NO_TASK = "There isn't any task";
+
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
@@ -66,9 +68,11 @@ public class TasksClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_FOLDER, navResources.taskfolder());
     registerContentTypeIcon(TYPE_TASK, navResources.task());
     registerContentTypeIcon(TYPE_TASK, ContentStatus.inTheDustbin, navResources.taskdone());
-    final String noTask = i18n.t("There isn't any task, create one");
-    registerEmptyMessages(TYPE_ROOT, noTask);
-    registerEmptyMessages(TYPE_FOLDER, noTask);
+    final String noTaskLogged = i18n.t(NO_TASK + ", create one");
+    registerEmptyMessages(TYPE_ROOT, noTaskLogged);
+    registerEmptyMessages(TYPE_FOLDER, noTaskLogged);
+    registerEmptyMessagesNotLogged(TYPE_ROOT, NO_TASK);
+    registerEmptyMessagesNotLogged(TYPE_FOLDER, NO_TASK);
     registerShowDeleted(TYPE_FOLDER, TYPE_ROOT, TYPE_TASK);
   }
 

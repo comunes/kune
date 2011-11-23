@@ -33,6 +33,8 @@ import com.google.inject.Inject;
 
 public class BartersClientTool extends FoldableAbstractClientTool {
 
+  private static final String THERE_ISN_T_ANY_BARTER = "There isn't any barter. ";
+
   @Inject
   public BartersClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
@@ -63,8 +65,10 @@ public class BartersClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
     registerContentTypeIcon(TYPE_ROOT, navResources.folder());
     registerContentTypeIcon(TYPE_BARTER, navResources.barter());
-    registerEmptyMessages(TYPE_FOLDER, i18n.t("This folder is empty"));
-    registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any barter"));
+    registerEmptyMessages(TYPE_FOLDER, i18n.t(THERE_ISN_T_ANY_BARTER + "You can create some here"));
+    registerEmptyMessages(TYPE_ROOT, i18n.t(THERE_ISN_T_ANY_BARTER));
+    registerEmptyMessagesNotLogged(TYPE_FOLDER, i18n.t(THERE_ISN_T_ANY_BARTER));
+    registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t(THERE_ISN_T_ANY_BARTER));
   }
 
 }

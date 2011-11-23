@@ -30,12 +30,14 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
+import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
@@ -97,7 +99,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
-      final EventBus eventBus) {
+      final EventBus eventBus, final StateManager stateManager) {
     this.gsArmor = wsArmor;
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
@@ -110,6 +112,15 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
             waveClear();
           }
         });
+    stateManager.addBeforeStateChangeListener(new BeforeActionListener() {
+      @Override
+      public boolean beforeAction() {
+        // This fix lot of problems when you are editing and move to other
+        // location (without stop editing)
+        waveClear();
+        return true;
+      }
+    });
   }
 
   @Override

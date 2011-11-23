@@ -66,8 +66,12 @@ public class ListsClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_POST, navResources.email());
     final String noWave = i18n.t("There is nothing posted yet. Post something");
     final String noList = i18n.t("There isn't any list, create one");
+    final String noWaveNotLogged = i18n.t("There is nothing posted yet");
+    final String noListNotLogged = i18n.t("There isn't any list");
     registerEmptyMessages(TYPE_ROOT, noList);
     registerEmptyMessages(TYPE_LIST, noWave);
+    registerEmptyMessagesNotLogged(TYPE_ROOT, noListNotLogged);
+    registerEmptyMessagesNotLogged(TYPE_LIST, noWaveNotLogged);
     // registerShowDeleted();
   }
 
