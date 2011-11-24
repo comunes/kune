@@ -32,6 +32,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String addGadget();
 
+  String addNewMember();
+
   String aDecentralizedWayToOfferOrAskForServicesAndGoodsToYourGroupsOrToAnyoneBarteringMeansTheExchangeOfGoo();
 
   String administrators();
@@ -216,6 +218,12 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String doubleClickToOpen();
 
+  String doubleClickToOpenDragAndDropToMoveThisToAnotherPlace();
+
+  String doYouWantToAddParamAsAMemberOfParam();
+
+  String doYouWantToAddParamToYourContacts();
+
   String doYouWantToJoinThisGroup();
 
   String doYouWantToWriteAMessageToTheAdministratorsOfThisGroup();
@@ -243,6 +251,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String enterToThisRoom();
 
   String error();
+
+  String errorConfiguringTheTool();
 
   String errorSettingTheLogo();
 
@@ -346,6 +356,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String memberAccepted();
 
+  String memberAddedAsCollaborator();
+
   String memberRemoved();
 
   String membershipRequestedWaitingForAdminsDecision();
@@ -365,6 +377,10 @@ public interface KuneConstants extends ConstantsWithLookup {
   String moving();
 
   String name();
+
+  String nameOfTheNewChatroom();
+
+  String nameOfTheNewList();
 
   String nConversationsUnread();
 
@@ -434,6 +450,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String notTranslated();
 
+  String nowadaysTheGadgetsMapsPollsEtcAreExperimentalInSomeBrowsersYouMightExperienceProblemsWithCertainGadg();
+
   String nRecentConversationsUnread();
 
   String nSubscribedNPosts();
@@ -498,11 +516,15 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String pleaseCopyPasteThisInfoToReportProblems();
 
+  String pleaseSignInOrRegisterToCreateAGroup();
+
   String pleaseSignInOrRegisterToGetFullAccessToParamToolsAndContents();
 
   String pleaseSupport();
 
   String post();
+
+  String postCreatedEditIt();
 
   String preview();
 
@@ -584,6 +606,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String selectTheLicenseYouPreferUsingForSharingYourGroupContentsWithOtherPeople();
 
+  String serverErrorSavingTheTranslation();
+
   String setYourChatStatus();
 
   String setYourGroupPreferencesHere();
@@ -596,11 +620,19 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String signIn();
 
+  String signInOrCreateAnAccountToAccessToYourInbox();
+
+  String signInOrCreateAnAccountToParticipateInThisGroup();
+
+  String signInOrRegisterToHelpWithTheTranslation();
+
   String signInToCollaborate();
 
   String signOut();
 
   String signOutOfChat();
+
+  String sorryThisGadgetHasProblemsWithItsnHeightWeHopeThisWillBeFixedSoonn();
 
   String startACollaborativeDocumentForTheMeetingMinutes();
 
@@ -611,6 +643,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String style();
 
   String subscribe();
+
+  String subscribed();
 
   String subscribeToThisList();
 
@@ -654,9 +688,13 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String theSocialNetworkOfThisUserIsNotPublic();
 
+  String theUsernamePasswordIsIncorrect();
+
   String thisBlogHasnTAnyPostCreateOne();
 
   String thisDemoOfKune();
+
+  String thisEmailAddressIsBeingUsedByAnotherUserPleaseTryWithAnotherOne();
 
   String thisFolderIsEmpty();
 
@@ -692,6 +730,10 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String thisListIsNowRestrictedToThePublic();
 
+  String thisNameAlreadyExistsItIsUsedWhenAFileOrAFolderWithTheSameNameAlreadyExists();
+
+  String thisNameInAlreadyInUsePleaseTryWithADifferentName();
+
   String thisNameIsAlreadyInUsePleaseTryWithADifferentName();
 
   String thisSite();
@@ -714,6 +756,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String tip();
 
+  String titleOfTheNewPost();
+
   String to();
 
   String toHelpWithTheTranslationOfThisSoftwarePleaseContactBeforeWithThisSiteAdministrators();
@@ -733,6 +777,16 @@ public interface KuneConstants extends ConstantsWithLookup {
   String typeSomeKeywordThatDefineYourGroup();
 
   String typeSomethingToSearchForUsersAndGroupsInParam();
+
+  String typeSomethingToSearchForUsersInParam();
+
+  String typeTheNameOfTheUserAndSelectHimHer();
+
+  String unsubscribe();
+
+  String unsubscribed();
+
+  String unsubscribeToThisList();
 
   String useACopyleftLicenseRecommended();
 
@@ -802,6 +856,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String youAreNowMemberOfThisGroup();
 
+  String youAreTryingToMoveThisToTheSameLocation();
+
   String youCanAlsoUploadABackground();
 
   String youCanChangeThisLicenseLater();
@@ -810,7 +866,11 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String youCannotDisableThisToolBecauseItSWhereYourHomePageIsLocatedToDoThatYouHaveToSelectOtherContentAsThe();
 
+  String youCannotWriteToNonBuddies();
+
   String youDidNotSignInSoYouCanJustSeeSomePublicContentsInParamButNotEditOrCollaborateWithOthersPleaseParamO();
+
+  String youDoNotHaveRightsToPerformThatAction();
 
   String yourGroups();
 

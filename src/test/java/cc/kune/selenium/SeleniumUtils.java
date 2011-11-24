@@ -19,10 +19,16 @@
  */
 package cc.kune.selenium;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -34,6 +40,16 @@ public class SeleniumUtils {
 
   private static boolean fastSpeed = true;
   private static final Log LOG = LogFactory.getLog(SeleniumUtils.class);
+
+  public static void doScreenshot(final WebDriver webdriver, final String filename) {
+    final File scrFile = ((TakesScreenshot) webdriver).getScreenshotAs(OutputType.FILE);
+    try {
+      FileUtils.copyFile(scrFile, new File(SeleniumConstants.SCREENSHOTS_DIR + "kune-" + filename
+          + ".png"));
+    } catch (final IOException e) {
+      LOG.info("Cannot take the screen shot", e);
+    }
+  }
 
   public static void fastSpeed(final boolean fastSpeed) {
     SeleniumUtils.fastSpeed = fastSpeed;
@@ -99,7 +115,7 @@ public class SeleniumUtils {
 
   public static void sleep(final int milliseconds) {
     try {
-      Thread.sleep(fastSpeed ? milliseconds / 10 : milliseconds);
+      Thread.sleep(fastSpeed ? milliseconds / 2 : milliseconds);
     } catch (final InterruptedException e) {
       Assert.fail("Exception in sleep method", e);
     }

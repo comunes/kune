@@ -30,7 +30,7 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
   @Override
   public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
     // SeleniumUtils.showCursor(driver);
-    sleep(600);
+    sleep(400);
   }
 
   @Override
@@ -65,7 +65,7 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
   @Override
   public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
     SeleniumUtils.hightlight(element, driver);
-    sleep(300);
+    sleep(150);
     // SeleniumUtils.hideCursor(driver);
   }
 
@@ -108,6 +108,6 @@ public class CustomWebDriverEventListener implements WebDriverEventListener {
   }
 
   private void slow() {
-    sleep(1000);
+    sleep(700);
   }
 }

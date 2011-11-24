@@ -27,6 +27,7 @@ import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterForm;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.selenium.SeleniumConstants;
+import cc.kune.selenium.SeleniumUtils;
 
 public class RegisterPageObject extends AbstractLoginObject {
 
@@ -48,7 +49,7 @@ public class RegisterPageObject extends AbstractLoginObject {
   }
 
   public void fillRegisterForm(final String nick, final String name, final String pass, final String em,
-      final boolean withReturn) {
+      final boolean withReturn, final boolean doScreenshot) {
     clearField(shortName);
     hightlight(shortName);
     shortName.sendKeys(nick);
@@ -62,6 +63,10 @@ public class RegisterPageObject extends AbstractLoginObject {
     hightlight(email);
     email.sendKeys(em);
     hightlight(registerButton);
+    if (doScreenshot) {
+      SeleniumUtils.doScreenshot(getWebDriver(), "register");
+      sleep(4000);
+    }
     if (withReturn) {
       email.sendKeys(Keys.RETURN);
     } else {

@@ -19,12 +19,15 @@
  */
 package cc.kune.selenium;
 
+import java.io.File;
+
 public final class SeleniumConstants {
 
   public static final String FIREFOX_PROFILE_NAME = "selenium";
   public static final String GWTDEV = "gwt-debug-";
 
   public static final String INPUT = "-input";
+  public static final String SCREENSHOTS_DIR = "img" + File.separator + "screenshots" + File.separator;
   /* Configure this for use other lang, site, or driver */
   public static final String USER_EMAIL = "admin@example.org";
   public static final String USER_LONGNAME = "Administrator";

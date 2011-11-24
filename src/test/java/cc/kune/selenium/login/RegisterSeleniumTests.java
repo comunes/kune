@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.selenium.KuneSeleniumTest;
+import cc.kune.selenium.SeleniumConf;
 import cc.kune.selenium.SeleniumConstants;
 import cc.kune.selenium.SeleniumUtils;
 
@@ -42,51 +43,55 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     final String prefix = getTempString();
     showTitleSlide(t("User registration"), t("to get full access to this site tools/contents"));
     login.createOne();
-    register.fillRegisterForm(shortName + prefix, longName + prefix, passwd, prefix + email, false);
+    register.fillRegisterForm(shortName + prefix, longName + prefix, passwd, prefix + email, false, true);
+    doScreenshot("register");
     sleep(1000);
     login.assertIsConnectedAs(prefix);
     entityHeader.waitForEntityTitle(longName + prefix);
     register.getWelcomeMsg().click();
 
-    // // home space
-    // showTitleSlide(t("Home space (your welcome page)"),
-    // t("Here you can see a summary of your activity in this site"));
-    // spaces.homeBtn().click();
-    // sleep(2000);
-    // homeSpace.getSndStats().click();
-    // sleep(2000);
-    // homeSpace.getTrdStats().click();
-    // sleep(2000);
-    //
-    // // user space
-    // showTitleSlide(t("User space (your Inbox)"),
-    // t("contents in which you participate"));
-    // showTooltip(spaces.userBtn());
-    // spaces.userBtn().click();
-    // showMsg(t("You can see this like an advanced email system..."));
-    // userSpace.getFirstWave().click();
-    // sleep(2000);
-    // userSpace.getNewWave().click();
-    // showMsg(t("where you can compose personal messages..."));
-    // showMsg(t("but also create contents to publish later"));
-    // userSpace.rootBlipText().sendKeys(t("Congratulations for your report\n\n"));
-    // sleep(1000);
-    // userSpace.getCursive().click();
-    // userSpace.rootBlipText().sendKeys(
-    // t("Hi there, Just to say that I like") +
-    // t("a lot your last report\n\n"));
-    // sleep(1000);
-    // userSpace.getCursive().click();
-    // userSpace.rootBlipText().sendKeys(t("Best\n\nJane"));
-    // sleep(3000);
-    // userSpace.getRootEdit().click();
-    // userSpace.getAddParcipant().click();
-    // answerOnNextPrompt("admin");
-    // sleep(5000);
+    // home space
+    showTitleSlide(t("Home space (your welcome page)"),
+        t("Here you can see a summary of your activity in this site"));
+    site.homeBtn().click();
+    sleep(2000);
+    homeSpace.getSndStats().click();
+    sleep(2000);
+    homeSpace.getTrdStats().click();
+    sleep(2000);
+
+    // user space
+    showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
+    showTooltip(site.userBtn());
+    site.userBtn().click();
+    showMsg(t("You can see this like an advanced email system..."));
+    userSpace.getFirstWave().click();
+    sleep(2000);
+    userSpace.getNewWave().click();
+    showMsg(t("where you can compose personal messages..."));
+    showMsg(t("but also create contents to publish later"));
+    userSpace.rootBlipText().sendKeys(t("Congratulations for your report\n\n"));
+    sleep(1000);
+    userSpace.getCursive().click();
+    userSpace.rootBlipText().sendKeys(
+        t("Hi there, Just to say that I like") + t("a lot your last report\n\n"));
+    sleep(1000);
+    userSpace.getCursive().click();
+    userSpace.rootBlipText().sendKeys(t("Best\n\nJane"));
+    sleep(3000);
+    userSpace.getRootEdit().click();
+    userSpace.getAddParcipant().click();
+    sleep(1000);
+    answerOnNextPrompt("admin");
+    sleep(5000);
 
     // group space
     showTitleSlide(t("Your personal public space"), t("here you can have your blog, etc"));
+    sleep(500);
     site.groupBtn().click();
+    site.groupBtn().click();
+    showMsg(t("Let's start adding some buddie to our social network"));
+    sleep(1000);
     groupSpace.addBuddieBtn().click();
     groupSpace.addNewBuddieTextBox.click();
     groupSpace.addNewBuddieTextBox.sendKeys("admin");
@@ -94,21 +99,23 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     sleep(500);
     groupSpace.firstFromSuggestionBox.click();
     site.confirmationOk.click();
+    sleep(500);
     groupSpace.searchEntitiesOk().click();
-    groupSpace.firstAvatarOfGroup().click();
+    // groupSpace.firstAvatarOfGroup().click();
     sleep(2000);
 
-    // chat
     showTitleSlide(t("Chat with your buddies"), t("compatible with gmail and similars"),
         SiteTokens.WAVEINBOX);
     // showTooltip(chat.icon());
     chat.show();
-    sleep(3000);
+    sleep(2000);
 
-    final XmppURI jid = XmppURI.jid(SeleniumConstants.USER_EMAIL);
+    final XmppURI jid = XmppURI.jid(SeleniumConstants.USER_SHORNAME + "@"
+        + SeleniumConf.SITE.getDomain());
     final String jids = jid.toString();
-    showMsg(t("We need to add buddies (contacts) before chat with them"));
-    chat.openChat(jid);
+    chat.getRosterItem("", jids).click();
+
+    // chat.openChat(jid);
 
     // chat.getPage(jids).click();
     chat.getTalkBox(jids).sendKeys(t("Helloo... ;)"));
@@ -129,6 +136,9 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     sleep(2000);
     showMsg(t("Browser history forward"));
     browserForward();
+    sleep(1000);
+    showMsg(t("And more options for your contacts"));
+    chat.getItemMenu("", jids).click();
     chat.getTalkBox(jids).sendKeys(t("goodbye!"));
     chat.getSend(jids).click();
     sleep(1000);

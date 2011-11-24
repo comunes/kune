@@ -58,6 +58,7 @@
   <!-- I18n ===================================================== -->
   <extend-property name="locale" values="en" />
   <extend-property name="locale" values="es" />
+  <extend-property name="locale" values="fr" />
   <!-- Hardcoded locale (to override emite italian support) ===== -->
   <!--   <set-property name="locale" value="en" /> -->
   <!-- Hardcoded log level ====================================== -->

@@ -39,6 +39,8 @@ public class ChatPageObject extends PageObject {
   private WebElement chatIcon;
   @FindBy(xpath = "//div[14]/div/div/div/div/div/table/tbody/tr/td[2]/div")
   private WebElement closeChat;
+  @FindBy(id = "//div[3]/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div")
+  public WebElement firstContact;
   @FindBy(id = SeleniumConstants.GWTDEV + "OpenChatWidget-jabberId")
   private WebElement jid;
   @FindBy(id = SeleniumConstants.GWTDEV + "HablarOpenChat-openAction")
@@ -57,6 +59,11 @@ public class ChatPageObject extends PageObject {
     return findElement(new ByIdOrName(headerId));
   }
 
+  public WebElement getItemMenu(final String groupId, final String jid) {
+    final String id = Idify.id("RosterItemWidget", groupId, Idify.uriId(jid), "roster-menu");
+    return findElement(new ByIdOrName("gwt-debug-" + id));
+  }
+
   public WebElement getList(final String uri) {
     final String pageId = Idify.uriId(uri);
     final String id = "gwt-debug-ChatWidget-list-Chat-" + pageId;
@@ -67,6 +74,11 @@ public class ChatPageObject extends PageObject {
     final String pageId = Idify.uriId(uri);
     final String headerId = "gwt-debug-ChatWidget-Chat-" + pageId;
     return findElement(new ByIdOrName(headerId));
+  }
+
+  public WebElement getRosterItem(final String groupId, final String jid) {
+    final String id = Idify.id("RosterItemWidget", groupId, Idify.uriId(jid));
+    return findElement(new ByIdOrName("gwt-debug-" + id));
   }
 
   public WebElement getSend(final String uri) {

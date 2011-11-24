@@ -1171,12 +1171,12 @@
       <plugin>
         <groupId>org.dstovall</groupId>
         <artifactId>onejar-maven-plugin</artifactId>
-        <version>1.4.4</version>
+        <version>1.4.4-SNAPSHOT</version>
         <executions>
           <execution>
             <configuration>
               <!-- Optional -->
-              <!-- <onejarVersion>0.97</onejarVersion> -->
+              <onejarVersion>0.97</onejarVersion>
               <!-- Optional, use only if you need to include native libraries
                 (dll's) -->
               <!-- <binlibs> -->

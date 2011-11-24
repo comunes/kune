@@ -60,7 +60,7 @@ public class KuneSeleniumDefaults {
 
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
   public static boolean mustCloseFinally = false;
-  private String baseUrl;
+  private final String baseUrl;
   protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
   protected final GroupSpacePageObject groupSpace;
@@ -74,23 +74,7 @@ public class KuneSeleniumDefaults {
   private final WebDriver webdriver;
 
   public KuneSeleniumDefaults() {
-    final String localeParam = "?locale=" + SeleniumConf.LANG;
-    switch (SeleniumConf.SITE) {
-    case demo:
-      baseUrl = "http://kune.beta.iepala.es/" + localeParam + "#";
-      break;
-    case localhost:
-      baseUrl = "http://127.0.0.1:8888/" + localeParam + "&log_level=INFO&gwt.codesvr=127.0.0.1:9997#";
-      break;
-    case eurosur:
-      baseUrl = "http://beta.eurosur.org/" + localeParam + "#";
-      break;
-    case kunecc:
-      baseUrl = "http://kune.cc/" + localeParam + "#";
-      break;
-    default:
-      break;
-    }
+    baseUrl = "http://" + SeleniumConf.SITE.getDomain() + "/" + SeleniumConf.SITE.getParams() + "#";
     injector = INJECTOR;
     webdriver = injector.getInstance(WebDriver.class);
     login = injector.getInstance(LoginPageObject.class);
@@ -171,6 +155,10 @@ public class KuneSeleniumDefaults {
     // Some pairs of user/passwd that must fail when try to login
     return new Object[][] { { "test1@localhost", "test1blabla" }, { "test1", "test1" },
         { "test1@localhost", "test" }, { "", "" } };
+  }
+
+  public void doScreenshot(final String filename) {
+    SeleniumUtils.doScreenshot(webdriver, filename);
   }
 
   public void get(final String url) {
