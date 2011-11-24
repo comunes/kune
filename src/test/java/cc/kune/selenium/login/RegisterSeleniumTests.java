@@ -53,7 +53,7 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     // home space
     showTitleSlide(t("Home space (your welcome page)"),
         t("Here you can see a summary of your activity in this site"));
-    site.homeBtn().click();
+    site.homeSpaceBtn.click();
     sleep(2000);
     homeSpace.getSndStats().click();
     sleep(2000);
@@ -62,8 +62,8 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
 
     // user space
     showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
-    showTooltip(site.userBtn());
-    site.userBtn().click();
+    showTooltip(site.userSpaceBtn);
+    site.userSpaceBtn.click();
     showMsg(t("You can see this like an advanced email system..."));
     userSpace.getFirstWave().click();
     sleep(2000);
@@ -88,8 +88,8 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     // group space
     showTitleSlide(t("Your personal public space"), t("here you can have your blog, etc"));
     sleep(500);
-    site.groupBtn().click();
-    site.groupBtn().click();
+    site.groupSpaceBtn.click();
+    site.groupSpaceBtn.click();
     showMsg(t("Let's start adding some buddie to our social network"));
     sleep(1000);
     groupSpace.addBuddieBtn().click();
@@ -124,7 +124,7 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     chat.getSend(jids).click();
 
     showMsg(t("And you can chat event while going back/forward with your browser"));
-    site.homeBtn().click();
+    site.homeSpaceBtn.click();
     sleep(2000);
     chat.getTalkBox(jids).sendKeys(t("la la la"));
     chat.getSend(jids).click();

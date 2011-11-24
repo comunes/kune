@@ -30,7 +30,6 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 
 public class SitebarNewGroupLink extends ButtonDescriptor {
-
   public static class SitebarNewGroupAction extends AbstractExtendedAction {
 
     private final StateManager stateManager;
@@ -40,6 +39,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
       super();
       this.stateManager = stateManager;
       putValue(Action.NAME, i18n.t("Create New Group"));
+
       putValue(Action.TOOLTIP, i18n.t("Create a new group for your initiative or organization "
           + "(NGO, collective, academic group...)"));
     }
@@ -47,15 +47,16 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
     @Override
     public void actionPerformed(final ActionEvent event) {
       stateManager.gotoHistoryToken(SiteTokens.NEWGROUP);
-      // stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.NEWGROUP);
     }
 
   }
 
+  public static final String NEW_GROUP_BTN_ID = "k-site-newgroup-btn";
+
   @Inject
   public SitebarNewGroupLink(final SitebarNewGroupAction action, final SitebarActions sitebarActions) {
     super(action);
-    setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
-    setParent(sitebarActions.getRightToolbar());
+    withId(NEW_GROUP_BTN_ID).withStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
+    withParent(sitebarActions.getRightToolbar());
   }
 }

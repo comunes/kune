@@ -42,12 +42,14 @@ import cc.kune.core.client.i18n.I18nUtils;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.sub.SubtitlesWidget;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.GroupType;
 import cc.kune.selenium.chat.ChatPageObject;
 import cc.kune.selenium.general.EntityHeaderPageObject;
 import cc.kune.selenium.login.LoginPageObject;
 import cc.kune.selenium.login.RegisterPageObject;
 import cc.kune.selenium.spaces.GroupSpacePageObject;
 import cc.kune.selenium.spaces.HomeSpacePageObject;
+import cc.kune.selenium.spaces.NewGroupPageObject;
 import cc.kune.selenium.spaces.SitePageObject;
 import cc.kune.selenium.spaces.UserSpacePageObject;
 
@@ -63,11 +65,12 @@ public class KuneSeleniumDefaults {
   private final String baseUrl;
   protected final ChatPageObject chat;
   protected final EntityHeaderPageObject entityHeader;
-  protected final GroupSpacePageObject groupSpace;
+  protected GroupSpacePageObject groupSpace;
   protected final HomeSpacePageObject homeSpace;
   private final Injector injector;
   protected LoginPageObject login;
   private final ResourceBundle messages;
+  protected NewGroupPageObject newGroup;
   protected RegisterPageObject register;
   protected final SitePageObject site;
   protected UserSpacePageObject userSpace;
@@ -76,7 +79,9 @@ public class KuneSeleniumDefaults {
   public KuneSeleniumDefaults() {
     baseUrl = "http://" + SeleniumConf.SITE.getDomain() + "/" + SeleniumConf.SITE.getParams() + "#";
     injector = INJECTOR;
+    final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
     webdriver = injector.getInstance(WebDriver.class);
+
     login = injector.getInstance(LoginPageObject.class);
     register = injector.getInstance(RegisterPageObject.class);
     entityHeader = injector.getInstance(EntityHeaderPageObject.class);
@@ -85,8 +90,8 @@ public class KuneSeleniumDefaults {
     homeSpace = injector.getInstance(HomeSpacePageObject.class);
     userSpace = injector.getInstance(UserSpacePageObject.class);
     groupSpace = injector.getInstance(GroupSpacePageObject.class);
-    messages = injector.getInstance(ResourceBundle.class);
-    final ElementLocatorFactory locator = injector.getInstance(ElementLocatorFactory.class);
+    newGroup = injector.getInstance(NewGroupPageObject.class);
+
     PageFactory.initElements(locator, login);
     PageFactory.initElements(locator, register);
     PageFactory.initElements(locator, entityHeader);
@@ -95,6 +100,9 @@ public class KuneSeleniumDefaults {
     PageFactory.initElements(locator, homeSpace);
     PageFactory.initElements(locator, userSpace);
     PageFactory.initElements(locator, groupSpace);
+    PageFactory.initElements(locator, newGroup);
+
+    messages = injector.getInstance(ResourceBundle.class);
   }
 
   public void answerOnNextPrompt(final String answer) {
@@ -180,6 +188,13 @@ public class KuneSeleniumDefaults {
   public void home() {
     assert baseUrl != null;
     webdriver.get(baseUrl);
+  }
+
+  @DataProvider(name = "newGroups")
+  public Object[][] newGroups() {
+    return new Object[][] { { "grp0", "Ecologist Group", GroupType.PROJECT },
+        { "grp1", "Chomsky Fan Club", GroupType.ORGANIZATION }, { "grp2", "吗台湾", GroupType.CLOSED },
+        { "grp3", "روبا", GroupType.COMMUNITY } };
   }
 
   public void open(final String url) {

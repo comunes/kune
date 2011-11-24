@@ -139,6 +139,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     publicDescField.setTabIndex(3);
     publicDescField.setFieldLabel(i18n.t("Public description"));
     publicDescField.setName(PUBLICDESC_FIELD);
+    publicDescField.setId(PUBLICDESC_FIELD);
     publicDescField.setWidth(DefaultForm.BIG_FIELD_WIDTH);
     publicDescField.setAllowBlank(false);
     publicDescField.setMinLength(10);
@@ -198,6 +199,8 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     tag.setTabIndex(4);
     tag.setFieldLabel(i18n.t("Group tags"));
     tag.setName(TAGS_FIELD);
+    // FIXME if we us this for several tags, we should use different ids
+    tag.setId(TAGS_FIELD);
     tag.setWidth(DefaultForm.BIG_FIELD_WIDTH);
     tag.setAllowBlank(false);
     Tooltip.to(tag, i18n.t("type some keyword that define your group"));
