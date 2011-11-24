@@ -184,12 +184,12 @@ public class WebClient extends  Composite implements WaveClientView {
             final String message = stack.asString().replace("<br>", "\n");
             REMOTE_LOG.severe(message);
             NotifyUser.logError(message);
-            NotifyUser.showProgress("Error in editor");
+            NotifyUser.showProgress("Error");
             new Timer() {
               @Override
               public void run() {
                 NotifyUser.hideProgress();
-              }}.schedule(3000);
+              }}.schedule(5000);
           }
         });
       }

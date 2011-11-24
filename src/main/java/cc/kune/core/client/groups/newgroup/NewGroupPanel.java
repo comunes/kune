@@ -146,7 +146,8 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     publicDescField.setValidationDelay(1000);
     form.add(publicDescField);
 
-    form.add(createTagField(tag1));
+    tag1 = createTagField(tag1);
+    form.add(tag1);
     // form.add(createTagField(tag2));
     // form.add(createTagField(tag3));
 
