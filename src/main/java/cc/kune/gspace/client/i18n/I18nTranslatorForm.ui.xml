@@ -39,6 +39,10 @@
       padding: 5px;
     }
 
+    .textarea {
+      resize: both;
+    }
+
     .tip {
       width: 180px;
       padding: 5px;
@@ -74,7 +78,7 @@
     </g:FlowPanel>
     <g:FlowPanel addStyleNames="{style.row}">
       <g:Label ui:field="toLanguageTitle" addStyleNames="{style.titles} {style.cell}"/>
-      <g:TextArea ui:field='translation' addStyleNames="{style.cell}"
+      <g:TextArea ui:field='translation' addStyleNames="{style.cell}{style.textarea}"
         visibleLines="5"/>
       <g:FlowPanel styleName="k-button"
         addStyleNames="{style.cell} {style.copyicon} k-button k-btn k-5corners">

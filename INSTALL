@@ -6,7 +6,11 @@
 
 * Install java-jdk (>=6), maven2, mysql (> 5.0) and eclipse (well, this depends on what IDE do you use for development). In debian and derivatives:
 
- sudo apt-get install subversion maven2 mercurial openjdk-6-jdk mysql-server
+For development environment:
+ sudo apt-get install subversion maven2 mercurial openjdk-6-jdk mysql-server libjmagick6-jni
+
+For production environment:
+ sudo apt-get install openjdk-6-jdk mysql-server libjmagick6-jni
 
 ===MYSQL configuration===
 
@@ -51,7 +55,7 @@ CREATE DATABASE kune_openfire;
 GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
 
-Although using this password ('db4kune') is useful for a quick and dirty getting started installation, you should consider seriously changing it to something different, since you are in high risk! In this case you should change the password acordingly in this other locations:
+Although using this password ('db4kune') is useful for a quick and dirty getting started installation (useful for development), you should consider seriously changing it to something different, since you are in high risk! In this case you should change the password acordingly in this other locations:
 
  - pom.xml
  - script/liquibase-migrate.sh
@@ -63,7 +67,7 @@ Although using this password ('db4kune') is useful for a quick and dirty getting
 
 also if you want to select the database used (by default kune_dev). The db used in runtime is hardcoded (by now) in KuneRackModule.java
 
-===Source code===
+===Source code (if you are installing Kune for development)===
 
 See the DEVGUIDE for instructions of how to download the Kune code.
 
@@ -73,7 +77,10 @@ Compile with maven:
 
 NOTE: If you change the previous db passwords after this compiling, you have to repeat the "mvn compile" because if not, probably you will use an old persistence.xml. See TROUBLESHOOT for more details.
 
-===Configure upload directory===
+===Configure directories===
+
+ sudo mkdir -p /var/www/kune/
+ sudo chown yourUser:yourUser /var/www/kune/
 
  sudo mkdir -p /var/lib/kune/uploads/
  sudo chown yourUser:yourUser /var/lib/kune/uploads
@@ -133,7 +140,13 @@ Not verified: in Windows you need to do something similar (copy the jmagick .dll
 
 Run the server for the first time and initialize the db:
 
- mvn exec:java
+I you are installing kuen for development:
+
+ bin/server.sh # or mvn exec:java
+
+or for production
+
+ bin/server.sh -j kune.jar # -h for more options
 
 Once started for the first time the db is initialized. Then you should stop (Ctrl-C) and start the db migration process: 
 
@@ -141,23 +154,46 @@ Once started for the first time the db is initialized. Then you should stop (Ctr
 
 === Normal kune server start (after initialization) === 
 
-After that, as a norma, you can start the server using the script:
+After that, you can start the server using the script:
 
- ./script/server.sh
+ bin/server.sh
 
-or running:
+or (again) running in production:
 
- mvn exec:java
+ bin/server.sh -j kune.jar # -h for more options
 
 ===Connecting to the server===
 
 Open your browser and connect to http://localhost:8888/
 
+(or any other port you configured in wave-server.properties)
+
 ==Production environment instructions==
 
 With 
   mvn package 
-an executable target/kune-VERSION.one-jar.jar is generated in target directory.
+an executable target/kune-VERSION-jar-with-dependencies.jar is generated in target directory. That you can use to start kune:
+
+bin/server.sh -j kune.jar
+
+TODO: configure/select db via properties
+
+=== Adapting Kune to your site ===
+
+Copy and adapt as much as possible to your needs these files:
+
+- src/main/resources/kune.properties 
+- src/main/resources/wave-server.properties 
+- src/main/resources/log4j.properties 
+- src/main/webapp/ws.html
+
+The best way to configure kune is to copy that files (for instance in /etc/kune/), to create a custom directory for ws.html and other of your custom html stuff (for instance /var/www/kune/), and add that directory to resources_base in wave-server.properties, for instance:
+
+resource_bases = your-www-dir,target/kune-0.1.0-SNAPSHOT/,src/main/webapp/
+
+The ws.html file is the home that you get at start-up and have some configurations also. You can change the html inside to your needs but follow the commentaries and try not to remove important parts that make kune to start. Also to change the main logo, favicon, etc.
+
+Note: Remember that if you are running kune using the source code (via mvn) and you change this src files in some point, you have to make 'mvn compile' so are copied to the target directoy. This is not applicable when you run kune via jar.
 
 ==Appendix A: Configuration of Openfire xmpp server==
 

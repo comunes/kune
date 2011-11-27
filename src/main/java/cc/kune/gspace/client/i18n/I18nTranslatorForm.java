@@ -130,7 +130,9 @@ public class I18nTranslatorForm extends Composite {
     toTranslateTitle.setText(i18n.t("translate this:"));
     noteForTranslatorsTittle.setText(i18n.t("Notes:"));
     keyboardRecomendationTitle.setText(i18n.t("Tip:"));
-    keyboardRecomendation.setText(i18n.t("Click Alt+PageUp or Alt+PageDown to move up/down in the list while translating, and Alt-V to copy the original text. The translations are autosaved"));
+    keyboardRecomendation.setText(i18n.t("You can resize the above textarea.")
+        + " "
+        + i18n.t("Click Alt+PageUp or Alt+PageDown to move up/down in the list while translating, and Alt-V to copy the original text. The translations are autosaved"));
   }
 
   private void saveIfNeeded() {

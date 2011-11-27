@@ -2,5 +2,4 @@
 - create /var/lib/kune/uploads and give permissions
 - create /var/lib/kune/lucene 
 - deps: libjmagick6-jni, csstidy
-- cp -a $EXTSRC/source/locale/ src/main/java/org/ourproject/kune/app/public/js/ext/source/
 

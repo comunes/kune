@@ -139,8 +139,6 @@
       </snapshots>
     </pluginRepository>
     <!-- cc -->
-    <!-- <pluginRepository> <id>gwt-maven</id> <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
-      </pluginRepository> -->
     <pluginRepository>
       <id>Codehaus Snapshots</id>
       <url>http://snapshots.repository.codehaus.org/</url>
@@ -162,14 +160,6 @@
       <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/
       </url>
       <name>Google Web Toolkit Plugin Repository</name>
-    </pluginRepository>
-    <pluginRepository>
-      <id>onejar-maven-plugin.googlecode.com-snap</id>
-      <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo-snapshot</url>
-    </pluginRepository>
-    <pluginRepository>
-      <id>onejar-maven-plugin.googlecode.com</id>
-      <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
     </pluginRepository>
   </pluginRepositories>
   <dependencies>
@@ -276,8 +266,6 @@
       <artifactId>dozer</artifactId>
       <version>4.0</version>
     </dependency>
-    <!-- <dependency> <groupId>com.calclab</groupId> <artifactId>suco</artifactId>
-      <version>0.6.5</version> </dependency> -->
     <dependency>
       <groupId>jmagick</groupId>
       <artifactId>jmagick</artifactId>
@@ -370,8 +358,6 @@
       <artifactId>hibernate-c3p0</artifactId>
       <version>3.3.1.GA</version>
     </dependency>
-    <!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId>
-      <version>0.9.1.2</version> </dependency> -->
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
@@ -382,25 +368,21 @@
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.16</version>
-      <!-- =roo -->
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
-      <!-- =roo -->
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
       <version>${slf4j.version}</version>
-      <!-- =roo -->
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>${slf4j.version}</version>
-      <!-- =roo -->
     </dependency>
     <!-- REST: xml and json (stax) -->
     <dependency>
@@ -484,7 +466,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.9</version>
-      <!-- =roo -->
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -851,14 +832,12 @@
         </configuration>
       </plugin>
       <plugin>
-        <!-- =roo -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.1-beta-1</version>
         <!-- <configuration> <webXml>target/web.xml</webXml> </configuration> -->
       </plugin>
       <plugin>
-        <!-- =roo -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.1</version>
@@ -870,7 +849,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <!-- =roo -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>2.4.2</version>
@@ -879,7 +857,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <!-- =roo + custom -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.8.1</version>
@@ -918,10 +895,15 @@
         </executions>
       </plugin>
       <plugin>
-        <!-- =roo -->
+        <!-- See: http://bit.ly/rQBe3Z -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
+          <archive>
+            <manifest>
+              <mainClass>cc.kune.wave.server.WaveMain</mainClass>
+            </manifest>
+          </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
@@ -930,6 +912,7 @@
               <scope>runtime</scope>
               <unpackOptions>
                 <excludes>
+                  <!-- FIXME this is needed? -->
                   <exclude>**/gxt/**</exclude>
                   <exclude>**/extjs/**</exclude>
                   <exclude>**extjs**</exclude>
@@ -941,7 +924,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <!-- =roo sin spring executions -->
         <artifactId>maven-eclipse-plugin</artifactId>
         <version>2.8</version>
         <configuration>
@@ -964,13 +946,11 @@
         </configuration>
       </plugin>
       <plugin>
-        <!-- =roo -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
         <version>2.5</version>
       </plugin>
       <plugin>
-        <!-- =roo -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-idea-plugin</artifactId>
         <version>2.2</version>
@@ -980,7 +960,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <!-- =roo -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>tomcat-maven-plugin</artifactId>
         <version>1.0</version>
@@ -989,11 +968,9 @@
         </configuration>
       </plugin>
       <plugin>
-        <!-- =roo -->
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>7.1.2.v20100523</version>
-        <!-- <version>7.2.1.v20101111</version> -->
+        <version>8.0.1.v20110908</version>
         <configuration>
           <webAppConfig>
             <!-- <contextPath>/${project.name}</contextPath> -->
@@ -1016,7 +993,6 @@
         <goal>test-process</goal> </goals> </execution> </executions> </plugin> -->
       <!-- BETTER user: http://code.google.com/p/acris/wiki/AnnotationProcessing -->
       <plugin>
-        <!-- =roo -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
         <version>${gwtmaven.version}</version>
@@ -1065,12 +1041,6 @@
           </dependency>
         </dependencies>
       </plugin>
-      <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>deb-maven-plugin</artifactId>
-        <version>1.0-SNAPSHOT</version> <configuration> <description>kune free/open/libre
-        collaboration platform</description> <maintainer>Kune Development Team &lt;kune-devel@lists.ourproject.org&gt;</maintainer>
-        <section>web</section> <priority>optional</priority> <architecture>all</architecture>
-        </configuration> <executions> <execution> <goals> <goal>deb</goal> </goals>
-        </execution> </executions> </plugin> -->
       <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-plugin</artifactId>
@@ -1120,120 +1090,11 @@
           </archive>
         </configuration>
         <executions>
-          <!-- <execution> -->
-          <!-- <id>core</id> -->
-          <!-- <phase>package</phase> -->
-          <!-- <goals> -->
-          <!-- <goal>jar</goal> -->
-          <!-- </goals> -->
-          <!-- <configuration> -->
-          <!-- <classifier>core</classifier> -->
-          <!-- <includes> -->
-          <!-- <include>**/KunePlatform.gwt.xml**</include> -->
-          <!-- <include>**/i18n/I18nTranslationService.**</include> -->
-          <!-- <include>**/i18n/I18nTranslationServiceMocked.** </include> -->
-          <!-- <include>**/TextUtils.**</include> -->
-          <!-- <include>**/IconLabelEditable.**</include> -->
-          <!-- <include>**/QuickTipsHelper.**</include> -->
-          <!-- <include>**/RichText.gwt.xml**</include> -->
-          <!-- <include>**/BasicDialog.**</include> -->
-          <!-- <include>**/HorizontalLine.**</include> -->
-          <!-- <include>**/AbstractLabel.**</include> -->
-          <!-- <include>**/IconLabel.**</include> -->
-          <!-- <include> **/EditableIconLabel.**</include> -->
-          <!-- <include> **/EditableClickListener.**</include> -->
-          <!-- <include>**/KuneStringUtils.**</include> -->
-          <!-- <include>**/IconHyperlink*.**</include> -->
-          <!-- <include>**/LabelWrapper*.**</include> -->
-          <!-- <include>**/KuneUiUtils.**</include> -->
-          <!-- <include>**/View.**</include> -->
-          <!-- <include>**/platf/**</include> <include>**/platf/client/extend/**</include> -->
-          <!-- <include>**/platf/client/*java</include> <include>**/platf/client/app/**</include> -->
-          <!-- <include>**/platf/client/dispatch/**</include> -->
-          <!-- </includes> -->
-          <!-- </configuration> -->
-          <!-- </execution> -->
-          <!-- <execution> -->
-          <!-- <id>helloworldmodule</id> -->
-          <!-- <phase>package</phase> -->
-          <!-- <goals> -->
-          <!-- <goal>jar</goal> -->
-          <!-- </goals> -->
-          <!-- <configuration> -->
-          <!-- <classifier>helloworldmodule</classifier> -->
-          <!-- <includes> -->
-          <!-- <include>**/HelloWorld*</include> -->
-          <!-- </includes> -->
-          <!-- </configuration> -->
-          <!-- </execution> -->
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.dstovall</groupId>
-        <artifactId>onejar-maven-plugin</artifactId>
-        <version>1.4.4-SNAPSHOT</version>
-        <executions>
-          <execution>
-            <configuration>
-              <!-- Optional -->
-              <onejarVersion>0.97</onejarVersion>
-              <!-- Optional, use only if you need to include native libraries
-                (dll's) -->
-              <!-- <binlibs> -->
-              <!-- <fileSet> -->
-              <!-- <directory>${project.build.directory}/${project.build.finalName}</directory> -->
-              <!-- <includes> -->
-              <!-- <include>**</include> -->
-              <!-- </includes> -->
-              <!-- </fileSet> -->
-              <!-- </binlibs> -->
-              <!-- Optional, default is false -->
-              <attachToBuild>true</attachToBuild>
-              <!-- Optional, default is "onejar" -->
-              <classifier>onejar</classifier>
-            </configuration>
-            <goals>
-              <goal>one-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- <plugin> -->
-      <!-- <groupId>org.codehaus.mojo</groupId> -->
-      <!-- <artifactId>selenium-maven-plugin</artifactId> -->
-      <!-- <configuration> -->
-      <!-- <port>4441</port> -->
-      <!-- </configuration> -->
-      <!-- <executions> -->
-      <!-- <execution> -->
-      <!-- <phase>pre-integration-test</phase> -->
-      <!-- <goals> -->
-      <!-- <goal>start-server</goal> -->
-      <!-- </goals> -->
-      <!-- <configuration> -->
-      <!-- <background>true</background> -->
-      <!-- </configuration> -->
-      <!-- </execution> -->
-      <!-- </executions> -->
-      <!-- </plugin> -->
-      <!-- <plugin> <artifactId>maven-clean-plugin</artifactId> <version>2.2</version>
-        <configuration> <filesets> <fileset> <directory>src/main/webapp/gwt/</directory>
-        <includes> <include>**/org.ourproject.kune.app.Kune*</include> <followSymlinks>false</followSymlinks>
-        </includes> </fileset> </filesets> </configuration> </plugin> -->
     </plugins>
-    <!-- <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory> -->
     <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes
     </outputDirectory>
-    <!-- <outputDirectory>war/WEB-INF/classes</outputDirectory> -->
-    <!-- <testOutputDirectory>war/WEB-INF/test-classes</testOutputDirectory> -->
-    <!-- <resources> -->
-    <!-- <resource> -->
-    <!-- <directory>src/main/resources</directory> -->
-    <!-- </resource> -->
-    <!-- <resource> -->
-    <!-- <directory>src/main/java</directory> -->
-    <!-- </resource> -->
-    <!-- </resources> -->
     <extensions>
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
