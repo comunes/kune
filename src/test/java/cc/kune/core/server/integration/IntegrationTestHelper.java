@@ -36,7 +36,8 @@ import cc.kune.core.server.KunePersistenceService;
 import cc.kune.core.server.PlatformServerModule;
 import cc.kune.core.server.TestConstants;
 import cc.kune.core.server.init.FinderRegistry;
-import cc.kune.core.server.properties.PropertiesFileName;
+import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.events.server.EventsServerModule;
 import cc.kune.lists.server.ListsServerModule;
@@ -71,7 +72,7 @@ public class IntegrationTestHelper {
             protected void configure() {
               bindScope(SessionScoped.class, Scopes.SINGLETON);
               bindScope(RequestScoped.class, Scopes.SINGLETON);
-              bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
+              bind(KuneProperties.class).toInstance(new KunePropertiesDefault("kune.properties"));
               bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
             }
           });

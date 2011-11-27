@@ -85,8 +85,6 @@ import cc.kune.core.server.manager.impl.ToolConfigurationManagerDefault;
 import cc.kune.core.server.manager.impl.UserManagerDefault;
 import cc.kune.core.server.mapper.DozerMapper;
 import cc.kune.core.server.mapper.Mapper;
-import cc.kune.core.server.properties.KuneProperties;
-import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.GroupRPC;
 import cc.kune.core.server.rpc.I18nRPC;
@@ -179,7 +177,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bindManagers();
     bindRPC();
     bindServices();
-    bind(KuneProperties.class).to(KunePropertiesDefault.class);
+    // bind(KuneProperties.class).to(KunePropertiesDefault.class);
     bind(Mapper.class).to(DozerMapper.class);
     bind(ServerToolRegistry.class);
     // bind(FileUploadManager.class).in(ServletScopes.REQUEST);

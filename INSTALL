@@ -14,7 +14,7 @@ For production environment:
 
 ===MYSQL configuration===
 
-====Before db creation====	
+====Before db creation====
 
 You have to configure mysql to support UTF8 by editing your c:\Windows\my.ini or /etc/mysql/my.cnf (on Unix) file and adding something like:
 
@@ -65,7 +65,7 @@ Although using this password ('db4kune') is useful for a quick and dirty getting
  - src/main/resources/META-INF/persistence.xml
  - src/main/webapp/WEB-INF/publicspace/config/database.yml
 
-also if you want to select the database used (by default kune_dev). The db used in runtime is hardcoded (by now) in KuneRackModule.java
+also if you want to select the database used (by default kune_dev) you have to configure it in kune.properties.
 
 ===Source code (if you are installing Kune for development)===
 
@@ -75,7 +75,7 @@ Compile with maven:
  # (in the trunk directory)
  mvn compile -Dliquibase.should.run=false && mvn gwt:compile
 
-NOTE: If you change the previous db passwords after this compiling, you have to repeat the "mvn compile" because if not, probably you will use an old persistence.xml. See TROUBLESHOOT for more details.
+NOTE: If you change the previous db passwords after this compiling, you have to repeat the "mvn compile" because if not, probably you will use an old kune.properties. See TROUBLESHOOT for more details.
 
 ===Configure directories===
 
@@ -148,11 +148,11 @@ or for production
 
  bin/server.sh -j kune.jar # -h for more options
 
-Once started for the first time the db is initialized. Then you should stop (Ctrl-C) and start the db migration process: 
+Once started for the first time the db is initialized. Then you should stop (Ctrl-C) and start the db migration process:
 
  ./script/liquibase-migrate.sh
 
-=== Normal kune server start (after initialization) === 
+=== Normal kune server start (after initialization) ===
 
 After that, you can start the server using the script:
 
@@ -170,8 +170,8 @@ Open your browser and connect to http://localhost:8888/
 
 ==Production environment instructions==
 
-With 
-  mvn package 
+With
+  mvn package
 an executable target/kune-VERSION-jar-with-dependencies.jar is generated in target directory. That you can use to start kune:
 
 bin/server.sh -j kune.jar
@@ -182,9 +182,9 @@ TODO: configure/select db via properties
 
 Copy and adapt as much as possible to your needs these files:
 
-- src/main/resources/kune.properties 
-- src/main/resources/wave-server.properties 
-- src/main/resources/log4j.properties 
+- src/main/resources/kune.properties
+- src/main/resources/wave-server.properties
+- src/main/resources/log4j.properties
 - src/main/webapp/ws.html
 
 The best way to configure kune is to copy that files (for instance in /etc/kune/), to create a custom directory for ws.html and other of your custom html stuff (for instance /var/www/kune/), and add that directory to resources_base in wave-server.properties, for instance:
@@ -231,7 +231,7 @@ Create the Administration Account. Is recommended to use the same password speci
 Configure the 'Group chat service' (in Group Chat > Group Chat Settings tab) with "rooms" additionally or instead of "conference" (or change kune.chat.roomHost in <trunk>/src/main/resources/kune.properties)
 
 Change in 'Server > Server Manager > System Properties':
-  provider.auth.className to org.jivesoftware.openfire.auth.JDBCAuthProvider instead of 
+  provider.auth.className to org.jivesoftware.openfire.auth.JDBCAuthProvider instead of
     org.jivesoftware.openfire.auth.DefaultAuthProvider
   provider.user.className to org.jivesoftware.openfire.user.JDBCUserProvider instead of
     org.jivesoftware.openfire.user.DefaultUserProvider
@@ -247,7 +247,7 @@ Edit the openfire.xml in a terminal:
 * In debian (with a .deb installation) you can to edit the configuration in /etc/openfire directory.
 * In Mac: /usr/local/openfire/conf
 
-Add these lines to conf/openfire.xml and check that the user/passwd of the db is the same here and in the persistence.xml:
+Add these lines to conf/openfire.xml and check that the user/passwd of the db is the same here and in kune.properties (the ones configured before):
 
 <pre>
 <jive>
@@ -284,7 +284,7 @@ Add these lines to conf/openfire.xml and check that the user/passwd of the db is
 </jive>
 </pre>
 
-Instead of: 
+Instead of:
   <jdbcAuthProvider/>
   <jdbcUserProvider/>
   <admin/>
@@ -297,7 +297,7 @@ http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integ
 Also you'll most likely want to change which usernames are authorized to login to the admin console adding then to <authorizedUsernames>.
 
 Restart openfire: /etc/init.d/openfire restart
-after that the previous values will be incorpored to Server > Server Manager > System Properties 
+after that the previous values will be incorpored to Server > Server Manager > System Properties
 
 After the section 'Run the server for the first time' you'll be able to use the password of the admin user of the kune instalation (specified in kune.properties), or other admin new users you want to register using kune and configure in the authorizedUsernames attribute.
 
@@ -337,7 +337,7 @@ a2enmod proxy_http
 
     <Files *.nocache.*>
         ExpiresActive Off
-    </Files> 
+    </Files>
 
     ProxyPass / http://localhost:8080/
     ProxyPassReverse / http://localhost:8080/
@@ -351,11 +351,11 @@ a2enmod proxy_http
 
 You should configure a SMTP server for use by Kune. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance test something like:
 
- echo "Bests," | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar 
+ echo "Bests," | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar
 
 http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#ProtocolSMTP
 http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#JavaMailSending
 
-And: 
+And:
 http://javamail.kenai.com/nonav/javadocs/com/sun/mail/smtp/package-summary.html
 for more specific configuration parameters that maybe you need with your smtp server.

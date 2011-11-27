@@ -38,7 +38,7 @@ public class KunePropertiesDefault implements KuneProperties {
   private final String fileName;
 
   @Inject
-  public KunePropertiesDefault(@PropertiesFileName final String fileName) {
+  public KunePropertiesDefault(final String fileName) {
     this.fileName = fileName;
     try {
       config = new CompositeConfiguration();

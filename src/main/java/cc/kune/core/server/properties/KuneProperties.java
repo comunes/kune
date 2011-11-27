@@ -43,6 +43,10 @@ public interface KuneProperties {
   String SITE_ADMIN_PASSWD = "kune.admin.password";
   String SITE_ADMIN_SHORTNAME = "kune.admin.shortName";
   String SITE_COMMON_NAME = "kune.default.site.commonname";
+  String SITE_DB_PASSWORD = "kune.db.password";
+  String SITE_DB_PERSISTENCE_NAME = "kune.db.persistence.name";
+  String SITE_DB_URL = "kune.db.url";
+  String SITE_DB_USER = "kune.db.user";
   String SITE_DEF_LICENSE = "kune.default.license";
   String SITE_DOMAIN = "kune.site.domain";
   String SITE_GROUP_AVAILABLE_TOOLS = "kune.tools.groupSiteAvailableTools";

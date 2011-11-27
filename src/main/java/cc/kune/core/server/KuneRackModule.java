@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server;
 
+import java.util.Properties;
+
 import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,7 +43,8 @@ import cc.kune.core.server.manager.file.FileDownloadManager;
 import cc.kune.core.server.manager.file.FileGwtUploadServlet;
 import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.manager.file.UserLogoDownloadManager;
-import cc.kune.core.server.properties.PropertiesFileName;
+import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
 import cc.kune.core.server.rack.filters.ForwardFilter;
@@ -75,24 +78,44 @@ public class KuneRackModule implements RackModule {
   public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
   private final Module configModule;
   private final String suffix;
+  final SystemConfiguration sysConf = new SystemConfiguration();
 
   public KuneRackModule() {
-    this("development", "/ws", null);
+    this(null, "/ws", null);
   }
 
-  public KuneRackModule(final String jpaUnit, final String suffix, final Scope sessionScope) {
-
+  public KuneRackModule(final String settedJpaUnit, final String suffix, final Scope sessionScope) {
     this.suffix = suffix;
-    final SystemConfiguration sysConf = new SystemConfiguration();
     final String kuneConfig = sysConf.getString("kune.server.config");
-
     configModule = new AbstractModule() {
       @Override
       public void configure() {
-        install(FinderRegistry.init(new JpaPersistModule(jpaUnit)));
+        final KunePropertiesDefault kuneProperties = new KunePropertiesDefault(kuneConfig);
+        bind(KuneProperties.class).toInstance(kuneProperties);
+        final String configuredJpaUnit = kuneProperties.get(KuneProperties.SITE_DB_PERSISTENCE_NAME);
+
+        // precedence method param > properties
+        final String jpaUnit = settedJpaUnit != null ? settedJpaUnit
+            : configuredJpaUnit != null ? configuredJpaUnit : "development";
+        LOG.info("Using persistence unit: " + jpaUnit);
+
+        final JpaPersistModule jpaPersistModule = new JpaPersistModule(jpaUnit);
+
+        if (!jpaUnit.equals("test")) {
+          final Properties dbProperties = new Properties();
+          dbProperties.setProperty("hibernate.connection.url",
+              kuneProperties.get(KuneProperties.SITE_DB_URL));
+          dbProperties.setProperty("hibernate.connection.username",
+              kuneProperties.get(KuneProperties.SITE_DB_USER));
+          dbProperties.setProperty("hibernate.connection.password",
+              kuneProperties.get(KuneProperties.SITE_DB_PASSWORD));
+          jpaPersistModule.properties(dbProperties);
+        }
+
+        install(FinderRegistry.init(jpaPersistModule));
         bindInterceptor(Matchers.annotatedWith(LogThis.class), new NotInObject(),
             new LoggerMethodInterceptor());
-        bindConstant().annotatedWith(PropertiesFileName.class).to(kuneConfig);
+        // bindConstant().annotatedWith(PropertiesFileName.class).to(kuneConfig);
         if (sessionScope != null) {
           bindScope(SessionScoped.class, sessionScope);
         }

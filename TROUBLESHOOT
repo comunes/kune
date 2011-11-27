@@ -75,9 +75,9 @@ Probably the client code is outdated from the server code (or viceversa). Try to
 
 == Mysql: Caused by: java.sql.SQLException: Access denied for user 'kune'@'localhost' (using password: YES) ==
 
-Check that the password you have use in the database creation it's the same like the src/main/resources/META-INF/persistence.xml. If it's wrong maybe you have to remove the mysql user (DROP USER) and repeat the GRANT sentences of the INSTALL.
+Check that the password you have use in the database creation it's the same like the kune.properties. If it's wrong maybe you have to remove the mysql user (DROP USER) and repeat the GRANT sentences of the INSTALL.
 
-Also, be sure you do a "mvn compile" if you change the persistence.xml file to not use the old one.
+Also, be sure you do a "mvn compile" if you are running kune from the source and you change the kune.properties file to not use the old one.
 
 If you have this problem with openfire it's not enough to change the password in openfire.xml because probably it's already stored in the ofProperty openfire table and you need to change the password there.
 
@@ -89,16 +89,11 @@ WARNING: Multiple Servlet injectors detected. This is a warning indicating that 
 
 A check list:
 - these files should be the same:
+  diff src/main/resources/kune.properties target/kune-0.1.0-SNAPSHOT/WEB-INF/classes/kune.properties
+  and:
   diff src/main/resources/META-INF/persistence.xml target/kune-0.1.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml
-if not "mvn compile -Dliquibase.should.run=false"
-- the persistence-unit you use, that is hardcoded (by now) in  
-src/main/java/cc/kune/core/server/KuneRackModule.java
-(...)
-  public KuneRackModule() {
-    this("production", "/ws", null);
-  }
-(...)
-find that name in persistence.xml (we are using production, but can be other). The db user/password configured in persistence.xml for that name should be the same to that one you used in the GRANT sentence of mysql database creation.
+  if not "mvn compile -Dliquibase.should.run=false"
+also check the persistence unit that you are using and find that name in persistence.xml (we are using development, but can be other). The db user/password configured in kune.properties for that name should be the same to that one you used in the GRANT sentence of mysql database creation.
 
 To debug mysql logs, you can uncomment:
 #general_log_file        = /var/log/mysql/mysql.log
@@ -141,7 +136,7 @@ If you want to compile less permutations (only for dev or testing), comment some
 
 Set M2_REPO to eclipse in Preferences > Java > Build Path > Classpath Variable (normally to /home/youruser/.m2/repository/)
 
-== Error generating CoreResources == 
+== Error generating CoreResources ==
 
 [INFO]       Computing all possible rebind results for 'cc.kune.core.client.resources.CoreResources' [INFO]          Rebinding cc.kune.core.client.resources.CoreResources [INFO]             Invoking generator com.google.gwt.resources.rebind.context.StaticClientBundleGenerator [INFO]                [ERROR] Generator 'com.google.gwt.resources.rebind.context.StaticClientBundleGenerator' threw an exception while rebinding 'cc.kune.cor
  [INFO]  at com.google.gwt.dev.util.Util.computeStrongName(Util.java:170) [INFO]  at com.google.gwt.dev.util.Util.computeStrongName(Util.java:145) [INFO]  at com.google.gwt.resources.rebind.context.StaticResourceContext.deploy(StaticResourceContext.java:61)

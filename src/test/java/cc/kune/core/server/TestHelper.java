@@ -35,7 +35,8 @@ import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.core.server.init.FinderRegistry;
 import cc.kune.core.server.integration.HttpServletRequestMocked;
-import cc.kune.core.server.properties.PropertiesFileName;
+import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.wave.server.CustomSettingsBinder;
 
 import com.google.inject.Binder;
@@ -64,7 +65,7 @@ public abstract class TestHelper {
         public void configure(final Binder binder) {
           binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
           binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
-          binder.bindConstant().annotatedWith(PropertiesFileName.class).to(propetiesFileName);
+          binder.bind(KuneProperties.class).toInstance(new KunePropertiesDefault(propetiesFileName));
           binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
         }
       });
