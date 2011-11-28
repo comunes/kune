@@ -20,12 +20,18 @@ Debug Options:
 
 # Default values
 
+
+if [ -z $KUNE_HOME ]
+then
+  KUNE_HOME=/etc/kune
+fi
+
 # See src/main/resources/kune.properties in svn
-KUNE_CONFIG=/etc/kune.properties 
+KUNE_CONFIG=$KUNE_HOME/kune.properties 
 # See src/main/resources/wave-server.properties in svn
-WAVE_CONFIG=/etc/kune/wave-server.properties
+WAVE_CONFIG=$KUNE_HOME/wave-server.properties
 # See src/main/resources/jaas.config in svn
-JAAS_CONFIG=src/main/resources/jaas.config
+JAAS_CONFIG=$KUNE_HOME/jaas.config
 
 SUSPEND="n"
 DEBUG=""
@@ -55,7 +61,13 @@ do
             ;;
 	p)
 	    # Debug port
-	    DEBUG_PORT=,address=$OPTARG
+	    PORT=$OPTARG
+	    if ! [[ $PORT =~ ^[0-9]+$ ]] 
+	    then
+		usage
+		exit 1
+	    fi
+	    DEBUG_PORT=",address=$PORT"
 	    ;;
 	u)
 	    SUSPEND="y"
@@ -99,7 +111,7 @@ fi
 if [[ -z $JAR ]] 
 then
     # Just run kune using the code and mave
-    mvn exec:java
+    mvn exec:java -Dexec.args="$DEBUG_FLAGS"
 else
     if [[ -n $DAEMON ]]
     then
