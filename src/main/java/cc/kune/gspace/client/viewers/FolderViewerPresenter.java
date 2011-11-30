@@ -21,44 +21,20 @@ package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.EditEvent;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
-import cc.kune.common.client.ui.HasEditHandler;
-import cc.kune.common.client.utils.TextUtils;
-import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.registry.IconsRegistry;
-import cc.kune.core.client.services.FileDownloadUtils;
-import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.ContentStatus;
-import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
-import cc.kune.core.shared.dto.BasicMimeTypeDTO;
-import cc.kune.core.shared.dto.ContainerDTO;
-import cc.kune.core.shared.dto.ContainerSimpleDTO;
-import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.HasContent;
-import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.RenameListener;
 import cc.kune.gspace.client.tool.ContentViewer;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.DoubleClickEvent;
-import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
@@ -71,101 +47,23 @@ public class FolderViewerPresenter extends
   public interface FolderViewerProxy extends Proxy<FolderViewerPresenter> {
   }
 
-  public interface FolderViewerView extends View {
-
+  public interface FolderViewerView extends AbstractFolderViewerView {
     long NO_DATE = 0;
-
-    void addItem(FolderItemDescriptor item, ClickHandler clickHandler,
-        DoubleClickHandler doubleClickHandler);
-
-    void attach();
-
-    void clear();
-
-    void detach();
-
-    void editTitle();
-
-    HasEditHandler getEditTitle();
-
-    void highlightTitle();
-
-    void setContainer(StateContainerDTO state);
-
-    void setEditableTitle(String title);
-
-    void setFooterActions(GuiActionDescCollection actions);
-
-    void setSubheaderActions(GuiActionDescCollection actions);
-
-    void showEmptyMsg(String message);
   }
 
-  private final ActionRegistryByType actionsRegistry;
-  private final ContentCapabilitiesRegistry capabilitiesRegistry;
-  private final Provider<FileDownloadUtils> downloadUtilsProvider;
   private HandlerRegistration editHandler;
-  private final I18nTranslationService i18n;
-  private final IconsRegistry iconsRegistry;
-  private final PathToolbarUtils pathToolbarUtils;
+  private final FolderViewerUtils folderViewerUtils;
   private final Provider<RenameAction> renameAction;
   private final Session session;
-  private final StateManager stateManager;
-  private final boolean useGenericImageIcon;
 
   @Inject
   public FolderViewerPresenter(final EventBus eventBus, final FolderViewerView view,
-      final FolderViewerProxy proxy, final Session session, final StateManager stateManager,
-      final I18nTranslationService i18n, final ActionRegistryByType actionsRegistry,
-      final Provider<FileDownloadUtils> downloadUtilsProvider,
-      final Provider<RenameAction> renameAction, final ContentCapabilitiesRegistry capabilitiesRegistry,
-      final PathToolbarUtils pathToolbarUtils) {
+      final FolderViewerProxy proxy, final Session session, final Provider<RenameAction> renameAction,
+      final FolderViewerUtils folderViewerUtils) {
     super(eventBus, view, proxy);
     this.session = session;
-    this.stateManager = stateManager;
-    this.i18n = i18n;
-    this.actionsRegistry = actionsRegistry;
-    this.downloadUtilsProvider = downloadUtilsProvider;
-    this.capabilitiesRegistry = capabilitiesRegistry;
-    this.pathToolbarUtils = pathToolbarUtils;
-    iconsRegistry = capabilitiesRegistry.getIconsRegistry();
-    useGenericImageIcon = false;
+    this.folderViewerUtils = folderViewerUtils;
     this.renameAction = renameAction;
-  }
-
-  private void addItem(final AbstractContentSimpleDTO content, final BasicMimeTypeDTO mimeType,
-      final ContentStatus status, final StateToken parentStateToken, final AccessRights rights,
-      final long modifiedOn) {
-    final StateToken stateToken = content.getStateToken();
-    final String typeId = content.getTypeId();
-    final String name = content.getName();
-    final Object icon = mimeType != null ? getIcon(stateToken, typeId, mimeType) : getIcon(stateToken,
-        typeId, status);
-    final String tooltip = getTooltip(stateToken, mimeType, capabilitiesRegistry.isDragable(typeId)
-        && rights.isAdministrable());
-    if (status.equals(ContentStatus.inTheDustbin)
-        && (!capabilitiesRegistry.showDeleted(typeId) && !session.getShowDeletedContent())) {
-      // Don't show
-      // NotifyUser.info("Deleted, don't show");
-    } else {
-      final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
-          genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,
-          capabilitiesRegistry.isDragable(typeId) && rights.isAdministrable(),
-          capabilitiesRegistry.isDropable(typeId) && rights.isAdministrable(),
-          actionsRegistry.getCurrentActions(content, typeId, status, session.isLogged(), rights,
-              ActionGroups.ITEM_MENU));
-      getView().addItem(item, new ClickHandler() {
-        @Override
-        public void onClick(final ClickEvent event) {
-          stateManager.gotoStateToken(stateToken);
-        }
-      }, new DoubleClickHandler() {
-        @Override
-        public void onDoubleClick(final DoubleClickEvent event) {
-          stateManager.gotoStateToken(stateToken);
-        }
-      });
-    }
   }
 
   @Override
@@ -173,33 +71,6 @@ public class FolderViewerPresenter extends
     getView().attach();
     if (editHandler == null) {
       createEditHandler();
-    }
-  }
-
-  private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
-    if (container.getContents().size() + container.getChilds().size() == 0) {
-      String msg = null;
-      final String typeId = container.getTypeId();
-      if (session.isLogged()) {
-        msg = capabilitiesRegistry.getEmptyMessagesRegistry().getContentTypeIcon(typeId);
-      } else {
-        msg = capabilitiesRegistry.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
-      }
-      final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : i18n.t(msg);
-      getView().showEmptyMsg(emptyMessage);
-    } else {
-      // Folders
-      for (final ContainerSimpleDTO childFolder : container.getChilds()) {
-        addItem(childFolder, null, ContentStatus.publishedOnline,
-            childFolder.getStateToken().copy().setFolder(childFolder.getParentFolderId()),
-            containerRights, FolderViewerView.NO_DATE);
-      }
-      // Other contents (docs, etc)
-      for (final ContentSimpleDTO content : container.getContents()) {
-        assert content != null;
-        addItem(content, content.getMimeType(), content.getStatus(),
-            content.getStateToken().copy().clearDocument(), content.getRights(), content.getModifiedOn());
-      }
     }
   }
 
@@ -233,34 +104,6 @@ public class FolderViewerPresenter extends
     getView().editTitle();
   }
 
-  private String genId(final StateToken token) {
-    return "k-cnav-" + token.toString().replace(StateToken.SEPARATOR, "-");
-  }
-
-  private Object getIcon(final StateToken token, final String contentTypeId,
-      final BasicMimeTypeDTO mimeType) {
-    if (!useGenericImageIcon && mimeType != null && mimeType.getType().equals("image")) {
-      return downloadUtilsProvider.get().getImageResizedUrl(token, ImageSize.ico);
-    } else {
-      return iconsRegistry.getContentTypeIcon(contentTypeId, mimeType);
-    }
-  }
-
-  private Object getIcon(final StateToken stateToken, final String typeId, final ContentStatus status) {
-    return iconsRegistry.getContentTypeIcon(typeId, status);
-  }
-
-  private String getTooltip(final StateToken token, final BasicMimeTypeDTO mimeType,
-      final boolean draggable) {
-    if (mimeType != null && (mimeType.isImage() || mimeType.isPdf())) {
-      // Used for previews
-      return null;
-    } else {
-      return draggable ? i18n.t("Double click to open. Drag and drop to move this to another place")
-          : i18n.t("Double click to open");
-    }
-  }
-
   public void highlightTitle() {
     getView().highlightTitle();
   }
@@ -276,17 +119,6 @@ public class FolderViewerPresenter extends
 
   @Override
   public void setContent(@Nonnull final HasContent state) {
-    getView().clear();
-    final StateContainerDTO stateContainer = (StateContainerDTO) state;
-    getView().setContainer(stateContainer);
-    final AccessRights rights = stateContainer.getContainerRights();
-    // NotifyUser.info("Rights: " + rights, true);
-    final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContainer.getGroup(),
-        stateContainer.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
-    final ContainerDTO container = stateContainer.getContainer();
-    final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(container, true);
-    getView().setSubheaderActions(actions);
-    getView().setFooterActions(pathActions);
-    createChildItems(container, stateContainer.getContainerRights());
+    folderViewerUtils.setContent(getView(), state);
   }
 }

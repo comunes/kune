@@ -49,16 +49,36 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<DelMeetingMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
-      final Provider<RefreshContentMenuItem> refresh) {
+      final Provider<Calendar1DayViewSelectBtn> cal1DayBtn,
+      final Provider<Calendar3DaysViewSelectBtn> cal3DaysBtn,
+      final Provider<Calendar7DaysViewSelectBtn> cal7DaysBtn,
+      final Provider<CalendarMonthViewSelectBtn> calMonthBtn,
+      final Provider<CalendarGoPrevBtn> calPrevBtn, final Provider<CalendarGoNextBtn> calNextBtn,
+      final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, all);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, goToday, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, calPrevBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, cal1DayBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, cal3DaysBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, cal7DaysBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, calMonthBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, calNextBtn, containers);
+
+    // For now, commented:
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn,
+    // containers);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn,
+    // contents);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, all);
+    // actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem,
+    // contents);
+    // actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem,
+    // containersNoRoot);
+    // actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem,
+    // contents);
+
   }
 
   @Override

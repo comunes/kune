@@ -694,6 +694,17 @@
       <artifactId>mail</artifactId>
       <version>1.4.4</version>
     </dependency>
+    <!-- calendar -->
+    <dependency>
+      <groupId>com.bradrydzewski</groupId>
+      <artifactId>gwt-cal</artifactId>
+      <version>0.9.3-dndCreation</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mnode.ical4j</groupId>
+      <artifactId>ical4j</artifactId>
+      <version>1.0.2</version>
+    </dependency>
   </dependencies>
 
   <!-- <dependency> -->
@@ -805,13 +816,13 @@
               <key>kune.server.config</key>
               <value>src/main/resources/kune.properties</value>
             </systemProperty>
-<!--             <systemProperty> -->
-<!--               <key>kune.db.persistence.name</key> -->
-              <!-- Persistence name, choose between: production, development,
-                test_db (testing environment using mysql db), test (testing environment using
-                h2 db). See persistence.xml -->
-<!--               <value>development</value> -->
-<!--             </systemProperty> -->
+            <!-- <systemProperty> -->
+            <!-- <key>kune.db.persistence.name</key> -->
+            <!-- Persistence name, choose between: production, development,
+              test_db (testing environment using mysql db), test (testing environment using
+              h2 db). See persistence.xml -->
+            <!-- <value>development</value> -->
+            <!-- </systemProperty> -->
             <systemProperty>
               <key>wave.server.config</key>
               <value>src/main/resources/wave-server.properties</value>

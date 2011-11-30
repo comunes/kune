@@ -21,10 +21,10 @@ package cc.kune.events.client;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.events.client.actions.EventsClientActions;
+import cc.kune.events.client.viewer.CalendarViewer;
 import cc.kune.events.shared.EventsConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
-import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -34,9 +34,10 @@ public class EventsParts {
   @Inject
   public EventsParts(final Session session, final Provider<EventsClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final EventsClientActions meetsActions,
-      final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
+      final ContentViewerPresenter contentViewer, final CalendarViewer calendarViewer) {
     clientTool.get();
+    // remove this...
     viewerSelector.register(contentViewer, true, EventsConstants.TYPE_MEETING);
-    viewerSelector.register(folderViewer, true, EventsConstants.TYPE_ROOT);
+    viewerSelector.register(calendarViewer, true, EventsConstants.TYPE_ROOT);
   }
 }

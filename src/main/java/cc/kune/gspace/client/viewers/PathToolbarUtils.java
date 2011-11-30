@@ -37,11 +37,6 @@ import com.google.inject.Provider;
 
 public class PathToolbarUtils {
 
-  protected static final String CSSBTN = "k-button, k-fl";
-  protected static final String CSSBTNC = "k-button, k-button-center, k-fl";
-  protected static final String CSSBTNL = "k-button, k-button-left, k-fl";
-  protected static final String CSSBTNR = "k-button, k-button-right, k-fl";
-
   private final Provider<FolderViewerDropController> dropController;
   private final EventBus eventBus;
   private final I18nTranslationService i18n;
@@ -61,15 +56,15 @@ public class PathToolbarUtils {
 
   String calculateStyle(final int pos, final int length) {
     if (length == 1) {
-      return CSSBTN;
+      return ToolbarStyles.CSSBTN;
     }
     if (pos == 0) {
-      return CSSBTNL;
+      return ToolbarStyles.CSSBTNL;
     }
     if (pos == length - 1) {
-      return CSSBTNR;
+      return ToolbarStyles.CSSBTNR;
     }
-    return CSSBTNC;
+    return ToolbarStyles.CSSBTNC;
   }
 
   public GuiActionDescCollection createPath(final ContainerDTO container, final boolean withDrop) {

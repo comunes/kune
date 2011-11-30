@@ -19,10 +19,14 @@
  */
 package cc.kune.events.client;
 
+import cc.kune.events.client.viewer.CalendarViewerPresenter;
+
+import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.Ginjector;
 
 public interface EventsGinjector extends Ginjector {
 
-  EventsParts getMeetingsParts();
+  AsyncProvider<CalendarViewerPresenter> getCalendarViewerPresenter();
 
+  EventsParts getMeetingsParts();
 }

@@ -1559,3 +1559,16 @@ div.jGrowl {
 .k-dotted-tabpanel .gwt-TabLayoutPanelTab-selected {
   background-color: #dd8a3d;
 }
+
+/* Calendar */
+
+.gwt-cal-MonthView {
+    bottom: 0 !important;
+    height: auto !important;
+    left: 0 !important;
+    overflow: auto !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    width: auto !important;
+}

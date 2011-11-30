@@ -114,6 +114,7 @@ import cc.kune.gspace.client.viewers.ContentViewerPanel;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerAsTablePanel;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
+import cc.kune.gspace.client.viewers.FolderViewerUtils;
 import cc.kune.gspace.client.viewers.NoHomePageViewer;
 import cc.kune.gspace.client.viewers.PathToolbarUtils;
 
@@ -129,7 +130,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
   @Override
   protected void configure() {
     s(PathToolbarUtils.class);
-
+    s(FolderViewerUtils.class);
     bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
         EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
     bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class,

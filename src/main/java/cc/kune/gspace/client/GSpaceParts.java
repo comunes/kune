@@ -74,7 +74,9 @@ public class GSpaceParts {
       final Provider<GiveUsFeedbackBtn> giveUsFeedback,
       final Provider<I18nToTranslateGridPanel> toTrans,
       final Provider<I18nTranslatorTabsCollection> gtranslator,
-      final Provider<WriteToBuddyHeaderButton> writeToBuddie) {
+      final Provider<WriteToBuddyHeaderButton> writeToBuddie
+
+  ) {
 
     session.onAppStart(true, new AppStartHandler() {
       @Override

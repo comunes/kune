@@ -19,17 +19,37 @@
  */
 package cc.kune.events.client;
 
+import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.events.client.actions.Calendar1DayViewSelectBtn;
+import cc.kune.events.client.actions.Calendar3DaysViewSelectBtn;
+import cc.kune.events.client.actions.Calendar7DaysViewSelectBtn;
+import cc.kune.events.client.actions.CalendarGoNextBtn;
+import cc.kune.events.client.actions.CalendarGoPrevBtn;
+import cc.kune.events.client.actions.CalendarGoTodayBtn;
+import cc.kune.events.client.actions.CalendarMonthViewSelectBtn;
 import cc.kune.events.client.actions.EventsClientActions;
+import cc.kune.events.client.viewer.CalendarViewer;
+import cc.kune.events.client.viewer.CalendarViewerPanel;
+import cc.kune.events.client.viewer.CalendarViewerPresenter;
 
 import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-public class EventsGinModule extends AbstractPresenterModule {
+public class EventsGinModule extends ExtendedGinModule {
 
   @Override
   protected void configure() {
-    bind(EventsClientTool.class).in(Singleton.class);
-    bind(EventsClientActions.class).in(Singleton.class);
+    s(EventsClientTool.class);
+    s(EventsClientActions.class);
+    s(Calendar1DayViewSelectBtn.class);
+    s(Calendar3DaysViewSelectBtn.class);
+    s(Calendar7DaysViewSelectBtn.class);
+    s(CalendarMonthViewSelectBtn.class);
+    s(CalendarGoPrevBtn.class);
+    s(CalendarGoNextBtn.class);
+    s(CalendarGoTodayBtn.class);
+    bindPresenter(CalendarViewerPresenter.class, CalendarViewerPresenter.CalendarViewerView.class,
+        CalendarViewerPanel.class, CalendarViewerPresenter.CalendarViewerProxy.class);
+    bind(CalendarViewer.class).to(CalendarViewerPresenter.class).in(Singleton.class);
   }
 
 }
