@@ -145,7 +145,13 @@ public class SpaceSelectorPresenter extends
     view.getGroupBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        restoreToken(groupToken);
+        if (groupToken.equals(SiteTokens.GROUP_HOME)) {
+          // as current home is equal to "no content" token, we shall go to
+          // group space def home page
+          stateManager.gotoDefaultHomepage();
+        } else {
+          restoreToken(groupToken);
+        }
         setDown(Space.groupSpace);
       }
     });

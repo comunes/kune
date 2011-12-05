@@ -66,11 +66,13 @@ public class AppStarterDefault implements AppStarter {
   }
 
   private void checkNavigatorCompatibility(final NavigatorSupport navSupport) {
-    if (Navigator.getUserAgent().toLowerCase().contains("msie")
-        || Navigator.getUserAgent().toLowerCase().contains("opera")) {
-      navSupport.onNotSupported();
-    } else {
+    // http://www.useragentstring.com/pages/useragentstring.php
+    final String userAgent = Navigator.getUserAgent().toLowerCase();
+    Log.info("User agent: " + userAgent);
+    if (userAgent.contains("chrome") || userAgent.contains("gecko")) {
       navSupport.onSupported();
+    } else {
+      navSupport.onNotSupported();
     }
   }
 

@@ -21,6 +21,7 @@ package cc.kune.core.client.auth;
 
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.i18n.I18nUITranslationService.I18nLanguageChangeNeeded;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -93,13 +94,22 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     session.setCurrentUserInfo(userInfoDTO);
     final I18nLanguageDTO language = userInfoDTO.getLanguage();
     session.setCurrentLanguage(language);
-    if (!i18n.changeToLanguageIfNecessary(language.getCode())) {
-      if (gotoHomePage) {
-        stateManager.gotoStateToken(new StateToken(userInfoDTO.getHomePage()).clearDocument());
-      } else {
-        stateManager.redirectOrRestorePreviousToken();
-      }
-    }
+    i18n.changeToLanguageIfNecessary(language.getCode(), language.getEnglishName(),
+        new I18nLanguageChangeNeeded() {
+
+          @Override
+          public void onChangeNeeded() {
+          }
+
+          @Override
+          public void onChangeNotNeeded() {
+            if (gotoHomePage) {
+              stateManager.gotoStateToken(new StateToken(userInfoDTO.getHomePage()).clearDocument());
+            } else {
+              stateManager.redirectOrRestorePreviousToken();
+            }
+          }
+        });
   }
 
   protected void saveAutocompleteLoginData(final String nickOrEmail, final String password) {

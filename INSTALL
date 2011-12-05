@@ -171,7 +171,7 @@ Open your browser and connect to http://localhost:8888/
 ==Production environment instructions==
 
 With
-  mvn package
+  mvn assembly:assembly
 an executable target/kune-VERSION-jar-with-dependencies.jar is generated in target directory. That you can use to start kune:
 
 bin/server.sh -j kune.jar

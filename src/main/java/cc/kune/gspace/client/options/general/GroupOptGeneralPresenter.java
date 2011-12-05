@@ -20,6 +20,7 @@
 package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.GroupChangedEvent;
@@ -29,7 +30,6 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.gwt.event.shared.EventBus;
@@ -43,7 +43,7 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
 
   @Inject
   public GroupOptGeneralPresenter(final StateManager stateManager, final Session session,
-      final EventBus eventBus, final I18nTranslationService i18n, final GroupOptions entityOptions,
+      final EventBus eventBus, final I18nUITranslationService i18n, final GroupOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GroupOptGeneralView view) {
     super(session, stateManager, eventBus, i18n, entityOptions);
     this.groupService = groupService;

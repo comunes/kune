@@ -20,6 +20,8 @@
 package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.i18n.I18nUITranslationService.I18nLanguageChangeNeeded;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -30,7 +32,6 @@ import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.UserOptions;
 
 import com.google.gwt.event.shared.EventBus;
@@ -44,7 +45,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
 
   @Inject
   public UserOptGeneralPresenter(final Session session, final StateManager stateManager,
-      final EventBus eventBus, final I18nTranslationService i18n, final UserOptions entityOptions,
+      final EventBus eventBus, final I18nUITranslationService i18n, final UserOptions entityOptions,
       final Provider<UserServiceAsync> userService, final UserOptGeneralView view) {
     super(session, stateManager, eventBus, i18n, entityOptions);
     this.userService = userService;
@@ -84,13 +85,25 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
       user.setId(currentUser.getId());
       final String longName = userView.getLongName();
       user.setName(longName);
+      final I18nLanguageSimpleDTO lang = userView.getLanguage();
       userService.get().updateUser(session.getUserHash(), user, userView.getLanguage(),
           new AsyncCallbackSimple<StateAbstractDTO>() {
             @Override
             public void onSuccess(final StateAbstractDTO result) {
               NotifyUser.hideProgress();
-              stateManager.setRetrievedStateAndGo(result);
-              sendChangeEntityEvent();
+              // Change language to new one if needed
+              i18n.changeToLanguageIfNecessary(lang.getCode(), lang.getEnglishName(),
+                  new I18nLanguageChangeNeeded() {
+                    @Override
+                    public void onChangeNeeded() {
+                    }
+
+                    @Override
+                    public void onChangeNotNeeded() {
+                      stateManager.setRetrievedStateAndGo(result);
+                      sendChangeEntityEvent();
+                    }
+                  });
             };
           }
 

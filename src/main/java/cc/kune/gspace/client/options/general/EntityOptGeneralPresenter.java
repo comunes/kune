@@ -19,9 +19,9 @@
  */
 package cc.kune.gspace.client.options.general;
 
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptions;
 import cc.kune.gspace.client.options.logo.CurrentEntityChangedEvent;
 
@@ -34,13 +34,13 @@ public abstract class EntityOptGeneralPresenter {
 
   protected final EntityOptions entityOptions;
   private final EventBus eventBus;
-  protected final I18nTranslationService i18n;
+  protected final I18nUITranslationService i18n;
   protected final Session session;
   protected final StateManager stateManager;
   protected EntityOptGeneralView view;
 
   public EntityOptGeneralPresenter(final Session session, final StateManager stateManager,
-      final EventBus eventBus, final I18nTranslationService i18n, final EntityOptions entityOptions) {
+      final EventBus eventBus, final I18nUITranslationService i18n, final EntityOptions entityOptions) {
     this.session = session;
     this.stateManager = stateManager;
     this.eventBus = eventBus;

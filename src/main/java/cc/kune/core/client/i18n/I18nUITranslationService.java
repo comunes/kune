@@ -27,9 +27,11 @@ import java.util.MissingResourceException;
 import java.util.Set;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.Location;
 import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.Pair;
+import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
@@ -48,6 +50,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
 public class I18nUITranslationService extends I18nTranslationService {
+  public interface I18nLanguageChangeNeeded {
+    void onChangeNeeded();
+
+    void onChangeNotNeeded();
+  }
   private I18nLanguageDTO currentLang;
   private String currentLanguageCode;
   private final Set<Pair<String, String>> earlyTexts;
@@ -57,6 +64,7 @@ public class I18nUITranslationService extends I18nTranslationService {
   private final KuneConstants kuneConstants;
   private HashMap<String, String> lexicon;
   private final Session session;
+
   private String siteCommonName;
 
   @Inject
@@ -101,11 +109,20 @@ public class I18nUITranslationService extends I18nTranslationService {
                 + ", isRTL: " + currentLang.getDirection() + " use properties: "
                 + shouldIuseProperties());
 
-            if (!changeToLanguageIfNecessary(getCurrentGWTlanguage(), currentLang.getCode())) {
-              isCurrentLangRTL = currentLang.getDirection().equals(RTL);
-              eventBus.fireEvent(new I18nReadyEvent());
-            }
-            I18nStyles.setRTL(isCurrentLangRTL);
+            changeToLanguageIfNecessary(getCurrentGWTlanguage(), currentLang.getCode(),
+                currentLang.getEnglishName(), new I18nLanguageChangeNeeded() {
+
+                  @Override
+                  public void onChangeNeeded() {
+                  }
+
+                  @Override
+                  public void onChangeNotNeeded() {
+                    isCurrentLangRTL = currentLang.getDirection().equals(RTL);
+                    eventBus.fireEvent(new I18nReadyEvent());
+                    I18nStyles.setRTL(isCurrentLangRTL);
+                  }
+                });
           }
         });
         session.onUserSignIn(true, new UserSignInHandler() {
@@ -162,8 +179,9 @@ public class I18nUITranslationService extends I18nTranslationService {
     changeHref("http://" + WindowUtils.getLocation().getHost() + newUrl);
   }
 
-  public boolean changeToLanguageIfNecessary(final String wantedLang) {
-    return changeToLanguageIfNecessary(currentLang.getCode(), wantedLang);
+  public void changeToLanguageIfNecessary(final String wantedLang, final String wantedLangEnglishName,
+      final I18nLanguageChangeNeeded listener) {
+    changeToLanguageIfNecessary(currentLang.getCode(), wantedLang, wantedLangEnglishName, listener);
   }
 
   /**
@@ -172,13 +190,29 @@ public class I18nUITranslationService extends I18nTranslationService {
    *          to check and to change to
    * @return true if we should reload the client with the new language
    */
-  public boolean changeToLanguageIfNecessary(final String currentLang, final String wantedLang) {
-    if (!currentLang.equals(wantedLang) && isInConstantProperties(wantedLang)) {
-      setCurrentLanguage(wantedLang);
-      changeLanguageInUrl(wantedLang);
-      return true;
+  private void changeToLanguageIfNecessary(final String currentLangCode, final String wantedLang,
+      final String wantedLangEnglishName, final I18nLanguageChangeNeeded listener) {
+    if (!currentLangCode.equals(wantedLang) && isInConstantProperties(wantedLang)) {
+      NotifyUser.askConfirmation(t("Confirm please"),
+          t("Do you want to reload this page to use '[%s]' language?", wantedLangEnglishName),
+          new SimpleResponseCallback() {
+            @Override
+            public void onCancel() {
+              // User no accepted to change the language...
+              listener.onChangeNotNeeded();
+            }
+
+            @Override
+            public void onSuccess() {
+              // User accepted to change the language...
+              listener.onChangeNeeded();
+              setCurrentLanguage(wantedLang);
+              changeLanguageInUrl(wantedLang);
+            }
+          });
+    } else {
+      listener.onChangeNotNeeded();
     }
-    return false;
   }
 
   public String formatDateWithLocale(final Date date) {

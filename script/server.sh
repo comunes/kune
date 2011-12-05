@@ -7,7 +7,7 @@ usage() {
     Example: $0 -j target/kune-0.1.0-SNAPSHOT-jar-with-dependencies.jar -l IGNORE -d -p -u 20000
 
 Options:
--j <jar file> : runs jar file generated via mvn package -Dmaven.test.skip=true
+-j <jar file> : runs jar file generated via mvn assembly:assembly
 -a: run as a daemon (only root user)
 -l LOGLEVEL : IGNORE|DEBUG|INFO|WARN
 

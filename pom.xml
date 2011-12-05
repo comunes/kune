@@ -927,6 +927,7 @@
           </descriptorRefs>
           <dependencySets>
             <dependencySet>
+              <outputDirectory>/</outputDirectory>
               <scope>runtime</scope>
               <unpackOptions>
                 <excludes>
@@ -936,9 +937,23 @@
                   <exclude>**extjs**</exclude>
                   <exclude>**gxt**</exclude>
                 </excludes>
+                <includes>
+                  <include>${basedir}/target/kune-0.1.0-SNAPSHOT/ws/**</include>
+                  <include>${basedir}/src/main/webapp/**</include>
+                </includes>
               </unpackOptions>
             </dependencySet>
           </dependencySets>
+          <fileSets>
+            <fileSet>
+              <directory>${basedir}</directory>
+              <outputDirectory>/</outputDirectory>
+              <includes>
+                <include>**/target/kune-0.1.0-SNAPSHOT/ws/**</include>
+                <include>**src/main/webapp**</include>
+              </includes>
+            </fileSet>
+          </fileSets>
         </configuration>
       </plugin>
       <plugin>
