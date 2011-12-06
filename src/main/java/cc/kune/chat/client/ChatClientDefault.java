@@ -44,6 +44,7 @@ import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
@@ -132,6 +133,7 @@ public class ChatClientDefault implements ChatClient {
   private final ChatOptions chatOptions;
   private final ChatResources chatResources;
   private Dialog dialog;
+  private final FileDownloadUtils downUtils;
   private final I18nTranslationService i18n;
   private final EventBus kuneEventBus;
   private final CoreResources res;
@@ -141,16 +143,18 @@ public class ChatClientDefault implements ChatClient {
   private final GlobalShortcutRegister shorcutRegister;
   private final SitebarActions siteActions;
   private final SubscriptionManager subscriptionManager;
+
   private final XmppSession xmppSession;
 
   @Inject
   public ChatClientDefault(final EventBus kuneEventBus, final I18nTranslationService i18n,
       final SitebarActions siteActions, final Session session, final CoreResources res,
-      final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions,
-      final ChatResources chatResources, final ChatInstances chatInstances) {
+      final FileDownloadUtils downUtils, final GlobalShortcutRegister shorcutRegister,
+      final ChatOptions chatOptions, final ChatResources chatResources, final ChatInstances chatInstances) {
     this.kuneEventBus = kuneEventBus;
     this.i18n = i18n;
     this.res = res;
+    this.downUtils = downUtils;
     this.chatInstances = chatInstances;
     action = new ChatClientAction(chatResources);
     this.siteActions = siteActions;
@@ -322,7 +326,7 @@ public class ChatClientDefault implements ChatClient {
     final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
     final Hablar hablar = widget.getHablar();
     HablarComplete.install(hablar, config);
-    new KuneHablarSignals(kuneEventBus, xmppSession, hablar, action, chatInstances);
+    new KuneHablarSignals(kuneEventBus, xmppSession, hablar, action, chatInstances, i18n, downUtils);
     if (htmlConfig.hasLogger) {
       new HablarConsole(hablar);
     }

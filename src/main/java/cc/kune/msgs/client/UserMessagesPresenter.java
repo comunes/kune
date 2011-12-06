@@ -23,21 +23,56 @@ import cc.kune.common.client.notify.NotifyLevel;
 
 public class UserMessagesPresenter {
 
-    public interface UserMessagesView {
-        void add(NotifyLevel level, String title, String message, String id, boolean closable, CloseCallback callback);
-    }
+  public interface UserMessagesView {
+    UserMessage add(NotifyLevel level, String title, String message, String id, Boolean closable,
+        CloseCallback callback);
+  }
 
-    private UserMessagesView view;
+  private boolean currentClosable;
+  private String currentId;
+  private NotifyLevel currentLevel;
+  private UserMessage currentMsg;
+  private String currentTitle;
+  private UserMessagesView view;
 
-    public UserMessagesPresenter() {
-    }
+  public UserMessagesPresenter() {
+  }
 
-    public void add(final NotifyLevel level, final String title, final String message, final String id,
-            final boolean closable, final CloseCallback closeCallback) {
-        view.add(level, title, message, id, closable, closeCallback);
+  public UserMessage add(final NotifyLevel level, final String title, final String message,
+      final String id, final boolean closable, final CloseCallback closeCallback) {
+    if ((currentMsg != null && !currentMsg.isAttached()) || !level.equals(currentLevel)
+        || !same(title, currentTitle) || !same(id, currentId) || closable != currentClosable) {
+      currentMsg = view.add(level, title, message, id, closable, closeCallback);
+    } else {
+      // Similar message, so, I'll reuse the widget
+      assert (currentMsg != null);
+      currentMsg.appendMsg(message);
     }
+    currentLevel = level;
+    currentTitle = title;
+    currentId = id;
+    currentClosable = closable;
+    return currentMsg;
+  }
 
-    public void init(final UserMessagesView view) {
-        this.view = view;
+  public void init(final UserMessagesView view) {
+    this.view = view;
+  }
+
+  private boolean same(final Object object, final Object otherObj) {
+    if (object == otherObj) {
+      return true;
     }
+    if (otherObj == null) {
+      return false;
+    }
+    if (object == null) {
+      if (otherObj != null) {
+        return false;
+      }
+    } else if (!object.equals(otherObj)) {
+      return false;
+    }
+    return true;
+  }
 }

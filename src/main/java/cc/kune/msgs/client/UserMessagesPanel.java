@@ -40,8 +40,7 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
 
   @UiField
   FlowPanel bottom;
-  private NotifyLevel currentLevel;
-  private UserMessage currentMsg;
+
   @UiField
   VerticalPanel panel;
 
@@ -50,12 +49,11 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
   }
 
   @Override
-  public void add(final NotifyLevel level, final String title, final String message, final String id,
-      final boolean closeable, final CloseCallback closeCallback) {
+  public UserMessage add(final NotifyLevel level, final String title, final String message,
+      final String id, final Boolean closeable, final CloseCallback closeCallback) {
 
-    final UserMessage msg = new UserMessage(level, title, message, id, closeable, closeCallback);
-    currentMsg = msg;
-    currentLevel = level;
+    final UserMessageWidget msg = new UserMessageWidget(level, title, message, id, closeable,
+        closeCallback);
 
     // msg.getText().
 
@@ -71,5 +69,10 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
         }
       }
     });
+    return msg;
+  }
+
+  public int getCurrentMsgCount() {
+    return panel.getWidgetCount();
   }
 }

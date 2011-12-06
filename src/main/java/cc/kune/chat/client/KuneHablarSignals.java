@@ -20,6 +20,8 @@
 package cc.kune.chat.client;
 
 import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
+import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.xep.storage.client.PrivateStorageManager;
@@ -34,7 +36,6 @@ import com.calclab.hablar.signals.client.preferences.SignalsPreferencesWidget;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.calclab.hablar.signals.client.unattended.UnattendedPresenter;
 import com.calclab.hablar.user.client.UserContainer;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasText;
@@ -70,7 +71,8 @@ public class KuneHablarSignals {
   // FIXME: move to gin
   @SuppressWarnings("deprecation")
   public KuneHablarSignals(final EventBus kuneEventBus, final XmppSession session, final Hablar hablar,
-      final ChatClientAction action, final ChatInstances chatInstances) {
+      final ChatClientAction action, final ChatInstances chatInstances,
+      final I18nTranslationService i18n, final FileDownloadUtils downUtils) {
     final HablarEventBus hablarEventBus = hablar.getEventBus();
     final PrivateStorageManager storageManager = chatInstances.privateStorageManager;
 
@@ -97,11 +99,10 @@ public class KuneHablarSignals {
     // notificationManager.addNotifier((BrowserPopupHablarNotifier)
     // GWT.create(BrowserPopupHablarNotifier.class),
     // true);
-    notificationManager.addNotifier((KuneChatNotifier) GWT.create(KuneChatNotifier.class), true);
+    notificationManager.addNotifier(new KuneChatNotifier(i18n, downUtils), true);
 
     final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(session,
         storageManager, hablarEventBus, preferences, new SignalsPreferencesWidget(), notificationManager);
     hablar.addPage(preferencesPage, UserContainer.ROL);
   }
-
 }

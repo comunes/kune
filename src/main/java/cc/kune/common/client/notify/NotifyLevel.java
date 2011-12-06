@@ -20,5 +20,24 @@
 package cc.kune.common.client.notify;
 
 public enum NotifyLevel {
-    error, important, info, log, veryImportant
+  avatar, error, important, info, log, veryImportant;
+
+  private String url;
+
+  NotifyLevel() {
+    this(null);
+  }
+
+  NotifyLevel(final String url) {
+    this.url = url;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public NotifyLevel url(final String url) {
+    this.url = url;
+    return this;
+  }
 }

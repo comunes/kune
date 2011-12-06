@@ -20,24 +20,45 @@
 package cc.kune.chat.client;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
+import com.google.gwt.regexp.shared.MatchResult;
+import com.google.gwt.regexp.shared.RegExp;
 
 public class KuneChatNotifier implements HablarNotifier {
+  private final FileDownloadUtils downUtils;
+  private final I18nTranslationService i18n;
+  private final RegExp regExp;
 
-    @Override
-    public String getDisplayName() {
-        return "Bottom notifier";
-    }
+  public KuneChatNotifier(final I18nTranslationService i18n, final FileDownloadUtils downUtils) {
+    this.i18n = i18n;
+    this.downUtils = downUtils;
+    regExp = RegExp.compile("User (.*) says «(.*)»");
+  }
 
-    @Override
-    public String getId() {
-        return "kuneChatNotifier";
-    }
+  @Override
+  public String getDisplayName() {
+    return "Bottom notifier";
+  }
 
-    @Override
-    public void show(final String userMessage, final String messageType) {
-        NotifyUser.info(userMessage);
+  @Override
+  public String getId() {
+    return "kuneChatNotifier";
+  }
+
+  @Override
+  public void show(final String userMessage, final String messageType) {
+    // FIXME Dirty hack while emite/hablar lib don't provide user info
+    if (regExp.test(userMessage)) {
+      final MatchResult m = regExp.exec(userMessage);
+      final String user = m.getGroup(1);
+      NotifyUser.avatar(downUtils.getUserAvatar(user),
+          i18n.t("User [%s] says «[%s]»", user, m.getGroup(2)));
+    } else {
+      NotifyUser.info(userMessage);
     }
+  }
 
 }

@@ -44,6 +44,10 @@ public class NotifyUser {
     askConfirmation(null, title, message, callback);
   }
 
+  public static void avatar(final String url, final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.avatar.url(url), message));
+  }
+
   public static void error(final String message) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message));
   }
