@@ -24,17 +24,23 @@ import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
 
 public class KuneChatNotifier implements HablarNotifier {
   private final FileDownloadUtils downUtils;
+  private final EventBus eventBus;
   private final I18nTranslationService i18n;
   private final RegExp regExp;
 
-  public KuneChatNotifier(final I18nTranslationService i18n, final FileDownloadUtils downUtils) {
+  public KuneChatNotifier(final I18nTranslationService i18n, final FileDownloadUtils downUtils,
+      final EventBus eventBus) {
     this.i18n = i18n;
     this.downUtils = downUtils;
+    this.eventBus = eventBus;
     regExp = RegExp.compile("User (.*) says «(.*)»");
   }
 
@@ -55,7 +61,12 @@ public class KuneChatNotifier implements HablarNotifier {
       final MatchResult m = regExp.exec(userMessage);
       final String user = m.getGroup(1);
       NotifyUser.avatar(downUtils.getUserAvatar(user),
-          i18n.t("User [%s] says «[%s]»", user, m.getGroup(2)));
+          i18n.t("User [%s] says «[%s]»", user, m.getGroup(2)), new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+              ShowChatDialogEvent.fire(eventBus, true);
+            }
+          });
     } else {
       NotifyUser.info(userMessage);
     }

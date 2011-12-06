@@ -99,7 +99,7 @@ public class KuneHablarSignals {
     // notificationManager.addNotifier((BrowserPopupHablarNotifier)
     // GWT.create(BrowserPopupHablarNotifier.class),
     // true);
-    notificationManager.addNotifier(new KuneChatNotifier(i18n, downUtils), true);
+    notificationManager.addNotifier(new KuneChatNotifier(i18n, downUtils, kuneEventBus), true);
 
     final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(session,
         storageManager, hablarEventBus, preferences, new SignalsPreferencesWidget(), notificationManager);

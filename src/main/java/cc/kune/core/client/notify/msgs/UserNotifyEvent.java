@@ -20,8 +20,8 @@
 package cc.kune.core.client.notify.msgs;
 
 import cc.kune.common.client.notify.NotifyLevel;
-import cc.kune.msgs.client.CloseCallback;
 
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -69,8 +69,8 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
     return TYPE;
   }
 
+  private ClickHandler clickHandler;
   private final Boolean closeable;
-  private CloseCallback closeCallback;
   private UserNotifyCloser closer;
   private java.lang.String id;
   private final NotifyLevel level;
@@ -112,12 +112,12 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
     return TYPE;
   }
 
-  public Boolean getCloseable() {
-    return closeable;
+  public ClickHandler getClickHandler() {
+    return clickHandler;
   }
 
-  public CloseCallback getCloseCallback() {
-    return closeCallback;
+  public Boolean getCloseable() {
+    return closeable;
   }
 
   public UserNotifyCloser getCloser() {
@@ -140,8 +140,8 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
     return title;
   }
 
-  public void setCloseCallback(final CloseCallback closeCallback) {
-    this.closeCallback = closeCallback;
+  public void setClickHandler(final ClickHandler clickHandler) {
+    this.clickHandler = clickHandler;
   }
 
   public void setCloser(final UserNotifyCloser closer) {

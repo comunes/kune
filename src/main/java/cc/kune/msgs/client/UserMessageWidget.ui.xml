@@ -17,7 +17,7 @@
   </ui:style>
   <ui:with field='img'
     type='cc.kune.msgs.client.resources.UserMessageImages'/>
-  <g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE"
+  <g:HorizontalPanel ui:field="panel" verticalAlignment="ALIGN_MIDDLE"
     addStyleNames="k-msg, k-3corners, {style.k-msg-width}">
     <g:SimplePanel addStyleNames="k-msg-icon">
       <g:Image width="100%" ui:field="icon" height="100%"/>

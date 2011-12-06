@@ -26,6 +26,7 @@ import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
 
@@ -44,8 +45,10 @@ public class NotifyUser {
     askConfirmation(null, title, message, callback);
   }
 
-  public static void avatar(final String url, final String message) {
-    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.avatar.url(url), message));
+  public static void avatar(final String url, final String message, final ClickHandler clickHandler) {
+    final UserNotifyEvent event = new UserNotifyEvent(NotifyLevel.avatar.url(url), message);
+    event.setClickHandler(clickHandler);
+    eventBus.fireEvent(event);
   }
 
   public static void error(final String message) {

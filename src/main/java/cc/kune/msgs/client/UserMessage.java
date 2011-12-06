@@ -1,6 +1,8 @@
 package cc.kune.msgs.client;
 
-public interface UserMessage {
+import com.google.gwt.event.dom.client.HasClickHandlers;
+
+public interface UserMessage extends HasClickHandlers {
 
   void appendMsg(String message);
 

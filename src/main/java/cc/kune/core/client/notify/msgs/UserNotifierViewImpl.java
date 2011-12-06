@@ -26,6 +26,7 @@ import cc.kune.msgs.client.UserMessage;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
 
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
@@ -62,6 +63,10 @@ public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierV
             popup.setCenterPosition();
           }
         });
+    final ClickHandler clickHandler = event.getClickHandler();
+    if (clickHandler != null) {
+      msg.addClickHandler(clickHandler);
+    }
     event.setCloser(new UserNotifyEvent.UserNotifyCloser() {
       @Override
       public void close() {

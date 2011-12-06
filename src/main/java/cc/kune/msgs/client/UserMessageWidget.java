@@ -30,6 +30,8 @@ import cc.kune.msgs.client.resources.UserMessageImagesUtil;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
@@ -40,6 +42,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.PushButton;
@@ -67,6 +70,7 @@ public class UserMessageWidget extends Composite implements HasText, UserMessage
   private static int fadeMills = 5000;
 
   private static final MsgTemplate MSG_NO_TITLE = GWT.create(MsgTemplate.class);
+
   private static final MsgWithTitleTemplate MSG_WITH_TITLE = GWT.create(MsgWithTitleTemplate.class);
   private static UserMessageWidgetUiBinder uiBinder = GWT.create(UserMessageWidgetUiBinder.class);
 
@@ -88,6 +92,9 @@ public class UserMessageWidget extends Composite implements HasText, UserMessage
 
   @UiField
   InlineHTML label;
+
+  @UiField
+  HorizontalPanel panel;
 
   private Timer time;
 
@@ -129,6 +136,12 @@ public class UserMessageWidget extends Composite implements HasText, UserMessage
 
   public UserMessageWidget(final String title, final String message, final CloseCallback closeCallback) {
     this(title, message, false, closeCallback);
+  }
+
+  @Override
+  public HandlerRegistration addClickHandler(final ClickHandler handler) {
+    panel.addStyleName("k-pointer");
+    return addDomHandler(handler, ClickEvent.getType());
   }
 
   @Override

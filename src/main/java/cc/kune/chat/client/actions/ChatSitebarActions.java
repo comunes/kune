@@ -74,6 +74,7 @@ public class ChatSitebarActions {
       session.logout();
     }
   }
+
   public class ChangeOnlineStatusAction extends AbstractExtendedAction {
     private final ImageResource icon;
     private final PresenceManager manager;
@@ -104,6 +105,7 @@ public class ChatSitebarActions {
       }
     }
   }
+  private static final int AWAY_TIMER_MILLSECS = 60000;
 
   private static final String GROUP_CHAT_STATUS = "k-group-chat-status";
   private static final String NO_STATUS = null;
@@ -203,7 +205,7 @@ public class ChatSitebarActions {
             }.schedule(1000);
           }
         } else {
-          awayTimer.schedule(3000);
+          awayTimer.schedule(AWAY_TIMER_MILLSECS);
         }
       }
     });
