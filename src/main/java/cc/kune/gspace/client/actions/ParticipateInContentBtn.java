@@ -56,7 +56,7 @@ public class ParticipateInContentBtn extends ButtonDescriptor {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      NotifyUser.showProgressProcessing();
+      NotifyUser.showProgress();
       contentService.get().addParticipant(session.getUserHash(), session.getCurrentStateToken(),
           session.getCurrentUser().getShortName(), new AsyncCallbackSimple<Void>() {
             @Override

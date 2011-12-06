@@ -31,6 +31,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.UIObject;
@@ -151,6 +152,11 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
   @Override
   public void setUserBtnDown(final boolean down) {
     userButton.setDown(down);
+  }
+
+  @Override
+  public void setWindowTitle(final String title) {
+    Window.setTitle(title);
   }
 
   @Override

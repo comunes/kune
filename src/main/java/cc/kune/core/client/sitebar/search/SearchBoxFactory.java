@@ -33,6 +33,7 @@ public class SearchBoxFactory {
   public static MultivalueSuggestBox create(final I18nUITranslationService i18n,
       final boolean searchOnlyUsers, final String id, final OnEntitySelectedInSearch callback) {
     final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(
+        i18n,
         searchOnlyUsers ? SearcherConstants.USER_DATA_PROXY_URL : SearcherConstants.GROUP_DATA_PROXY_URL,
         false, new OnExactMatch() {
 

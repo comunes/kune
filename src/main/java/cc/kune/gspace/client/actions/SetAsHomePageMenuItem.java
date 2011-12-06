@@ -56,7 +56,7 @@ public class SetAsHomePageMenuItem extends MenuItemDescriptor {
     @Override
     public void actionPerformed(final ActionEvent event) {
       final StateToken token = ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
-      NotifyUser.showProgressProcessing();
+      NotifyUser.showProgress();
       contentService.get().setAsDefaultContent(session.getUserHash(), token,
           new AsyncCallbackSimple<ContentSimpleDTO>() {
             @Override

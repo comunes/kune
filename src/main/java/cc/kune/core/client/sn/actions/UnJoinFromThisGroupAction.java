@@ -71,7 +71,7 @@ public class UnJoinFromThisGroupAction extends RolAction {
         new OnAcceptCallback() {
           @Override
           public void onSuccess() {
-            NotifyUser.showProgressProcessing();
+            NotifyUser.showProgress();
             snServiceProvider.get().unJoinGroup(session.getUserHash(),
                 ((GroupDTO) event.getTarget()).getStateToken(), new AsyncCallbackSimple<Void>() {
                   @Override

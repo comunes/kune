@@ -88,7 +88,7 @@ public class NewRoomBtn extends ButtonDescriptor {
         @Override
         public void onClick(final ClickEvent event) {
           if (diag.isValid()) {
-            NotifyUser.showProgressProcessing();
+            NotifyUser.showProgress();
             final String groupShortName = session.getCurrentState().getGroup().getShortName();
             final StateToken parentToken = session.getContainerState().getRootContainer().getStateToken();
             contentService.get().addRoom(session.getUserHash(), parentToken,

@@ -90,7 +90,7 @@ public class GSpaceThemeManager {
   }
 
   public void changeTheme(final StateToken token, final GSpaceTheme newTheme) {
-    NotifyUser.showProgressProcessing();
+    NotifyUser.showProgress();
     groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), token, newTheme.getName(),
         new AsyncCallbackSimple<Void>() {
           @Override
@@ -104,7 +104,7 @@ public class GSpaceThemeManager {
   }
 
   protected void onChangeGroupWsTheme(final GSpaceTheme newTheme) {
-    NotifyUser.showProgressProcessing();
+    NotifyUser.showProgress();
     groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(),
         session.getCurrentState().getStateToken(), newTheme.getName(), new AsyncCallbackSimple<Void>() {
           @Override

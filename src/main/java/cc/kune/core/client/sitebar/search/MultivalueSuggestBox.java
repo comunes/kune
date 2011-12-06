@@ -42,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.shared.SearcherConstants;
 
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -309,7 +311,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       if (totSize < 1) {
         // if there were no suggestions, then it's an invalid value
         updateFormFeedback(FormFeedback.ERROR, "Invalid: " + m_query);
-
+        final OptionSuggestion sugg = new OptionSuggestion(i18n.t("No results"), "#",
+            m_request.getQuery(), m_query);
+        suggs.add(sugg);
       } else if (false && totSize == 1) {
         // Patch to show always the suggestions
         // it's an exact match, so do not bother with showing suggestions,
@@ -420,7 +424,6 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       if (query.length() > 0 && mvalueMap.get(query) == null) {
         // JSUtil.println("getting Suggestions for: " + query);
         updateFormFeedback(FormFeedback.LOADING, null);
-
         queryOptions(query, mindexFrom, mindexTo, new RestSuggestCallback(mrequest, mcallback, query));
       }
     }
@@ -447,7 +450,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       mtimer.schedule(DELAY);
     }
   }
-  private static final int DELAY = 1000;
+  private static final int DELAY = 500;
 
   private static final String DISPLAY_SEPARATOR = ", ";
   private static final int FIND_EXACT_MATCH_QUERY_LIMIT = 20;
@@ -475,8 +478,10 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     return str;
   }
 
+  private final I18nUITranslationService i18n;
   private final FormFeedback mfeedback;
   private final SuggestBox mfield;
+
   private int mfindExactMatchesFound = 0;
 
   private final ArrayList<String> mfindExactMatchesNot = new ArrayList<String>();
@@ -488,14 +493,16 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   private int mindexTo = 0;
 
   private boolean misMultivalued = false;
-
   private final String mrestEndpointUrl;
+
   private final Map<String, String> mvalueMap;
 
   // private final OnExactMatch onExactMatch;
 
   /**
    * Constructor.
+   * 
+   * @param i18n
    * 
    * @param the
    *          URL for the REST endpoint. This URL should accept the parameters q
@@ -504,8 +511,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
    *          - true for allowing multiple values
    * @param onExactMatch
    */
-  public MultivalueSuggestBox(final String restEndpointUrl, final boolean isMultivalued,
-      final OnExactMatch onExactMatch) {
+  public MultivalueSuggestBox(final I18nUITranslationService i18n, final String restEndpointUrl,
+      final boolean isMultivalued, final OnExactMatch onExactMatch) {
+    this.i18n = i18n;
     mrestEndpointUrl = restEndpointUrl;
     misMultivalued = isMultivalued;
     // this.onExactMatch = onExactMatch;
@@ -917,8 +925,15 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     final TextBoxBase textBox = mfield.getTextBox();
     if (FormFeedback.LOADING == status) {
+      NotifyUser.showProgressSearching();
       // textBox.setEnabled(false);
     } else {
+      new Timer() {
+        @Override
+        public void run() {
+          NotifyUser.hideProgress();
+        }
+      }.schedule(1500);
       // textBox.setEnabled(true);
       textBox.setFocus(false); // Blur then focus b/c of a strange problem with
                                // the cursor or selection highlights no longer
@@ -927,5 +942,4 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       textBox.setFocus(true);
     }
   }
-
 }

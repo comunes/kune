@@ -86,6 +86,8 @@ public class SpaceSelectorPresenter extends
 
     void setUserBtnDown(boolean down);
 
+    void setWindowTitle(String title);
+
     void showGroupSpaceTooltip();
 
     void showHomeSpaceTooltip();
@@ -192,6 +194,7 @@ public class SpaceSelectorPresenter extends
     backManager.clearBackImage();
     setDown(Space.homeSpace);
     currentSpace = Space.homeSpace;
+    getView().setWindowTitle(i18n.t("Home"));
   }
 
   private void onPublicSpaceSelect(final boolean shouldRestoreToken) {
@@ -261,6 +264,7 @@ public class SpaceSelectorPresenter extends
       backManager.clearBackImage();
       setDown(Space.userSpace);
       currentSpace = Space.userSpace;
+      getView().setWindowTitle(i18n.t("Inbox"));
     } else {
       signIn.get().setErrorMessage(i18n.t("Sign in or create an account to access to your inbox"),
           NotifyLevel.info);

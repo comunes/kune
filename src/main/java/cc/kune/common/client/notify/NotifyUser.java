@@ -145,11 +145,12 @@ public class NotifyUser {
   }
 
   public static void showProgressLoading() {
+    // Better empty message
     eventBus.fireEvent(new ProgressShowEvent());
   }
 
-  public static void showProgressProcessing() {
-    eventBus.fireEvent(new ProgressShowEvent());
+  public static void showProgressSearching() {
+    eventBus.fireEvent(new ProgressShowEvent(i18n.t("Searching")));
   }
 
   public static void veryImportant(final String message) {

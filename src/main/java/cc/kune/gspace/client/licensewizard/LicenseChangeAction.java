@@ -53,7 +53,7 @@ public class LicenseChangeAction {
 
   public void changeLicense(final StateToken token, final LicenseDTO license,
       final SimpleResponseCallback callback) {
-    NotifyUser.showProgressProcessing();
+    NotifyUser.showProgress();
     groupService.get().changeDefLicense(session.getUserHash(), token, license,
         new AsyncCallbackSimple<Void>() {
           @Override

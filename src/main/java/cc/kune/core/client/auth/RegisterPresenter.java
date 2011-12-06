@@ -102,7 +102,7 @@ public class RegisterPresenter extends
   public void doRegister() {
     signInProvider.get().hide();
     if (!session.isLogged()) {
-      NotifyUser.showProgressProcessing();
+      NotifyUser.showProgress();
       getView().show();
       // getView().center();
       NotifyUser.hideProgress();

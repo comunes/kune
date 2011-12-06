@@ -68,7 +68,7 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      NotifyUser.showProgressProcessing();
+      NotifyUser.showProgress();
       stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
       final String newName = (String) getValue(NEW_NAME);
       final StateToken parentToken = session.getCurrentStateToken();

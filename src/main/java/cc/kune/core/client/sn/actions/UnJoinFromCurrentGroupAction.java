@@ -56,7 +56,7 @@ public class UnJoinFromCurrentGroupAction extends SNRolAction {
         new OnAcceptCallback() {
           @Override
           public void onSuccess() {
-            NotifyUser.showProgressProcessing();
+            NotifyUser.showProgress();
             snServiceProvider.get().unJoinGroup(session.getUserHash(),
                 session.getCurrentState().getStateToken(), new AsyncCallbackSimple<Void>() {
                   @Override

@@ -147,7 +147,7 @@ public class UserMessageWidget extends Composite implements HasText, UserMessage
   @Override
   public void appendMsg(final String message) {
     resetTimer();
-    label.setHTML(sanitize(label.getHTML() + "<p>" + message + "</p>"));
+    label.setHTML(sanitize(label.getHTML() + "<p class='k-msg-topsep'>" + message + "</p>"));
   }
 
   @Override

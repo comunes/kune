@@ -88,7 +88,7 @@ public class NewListAction extends RolAction {
       @Override
       public void onClick(final ClickEvent event) {
         if (diag.isValid()) {
-          NotifyUser.showProgressProcessing();
+          NotifyUser.showProgress();
           diag.hide();
           listsService.get().createList(session.getUserHash(), session.getCurrentStateToken(),
               diag.getTextFieldValue(), ListsConstants.TYPE_LIST, true,

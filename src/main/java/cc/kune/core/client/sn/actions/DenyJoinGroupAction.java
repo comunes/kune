@@ -36,35 +36,36 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class DenyJoinGroupAction extends AbstractExtendedAction {
-    private final I18nTranslationService i18n;
-    private final Session session;
-    private final Provider<SocialNetworkServiceAsync> snServiceProvider;
-    private final StateManager stateManager;
+  private final I18nTranslationService i18n;
+  private final Session session;
+  private final Provider<SocialNetworkServiceAsync> snServiceProvider;
+  private final StateManager stateManager;
 
-    @Inject
-    public DenyJoinGroupAction(final StateManager stateManager, final Session session,
-            final I18nTranslationService i18n, final CoreResources res,
-            final Provider<SocialNetworkServiceAsync> snServiceProvider) {
-        this.stateManager = stateManager;
-        this.session = session;
-        this.i18n = i18n;
-        this.snServiceProvider = snServiceProvider;
-        putValue(NAME, i18n.t("Reject as member"));
-        putValue(Action.SMALL_ICON, res.cancel());
-    }
+  @Inject
+  public DenyJoinGroupAction(final StateManager stateManager, final Session session,
+      final I18nTranslationService i18n, final CoreResources res,
+      final Provider<SocialNetworkServiceAsync> snServiceProvider) {
+    this.stateManager = stateManager;
+    this.session = session;
+    this.i18n = i18n;
+    this.snServiceProvider = snServiceProvider;
+    putValue(NAME, i18n.t("Reject as member"));
+    putValue(Action.SMALL_ICON, res.cancel());
+  }
 
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-        NotifyUser.showProgressProcessing();
-        snServiceProvider.get().denyJoinGroup(session.getUserHash(), session.getCurrentState().getStateToken(),
-                ((GroupDTO) event.getTarget()).getShortName(), new AsyncCallbackSimple<SocialNetworkDataDTO>() {
-                    @Override
-                    public void onSuccess(final SocialNetworkDataDTO result) {
-                        NotifyUser.hideProgress();
-                        NotifyUser.info(i18n.t("Member rejected"));
-                        stateManager.setSocialNetwork(result);
-                    }
-                });
-    }
+  @Override
+  public void actionPerformed(final ActionEvent event) {
+    NotifyUser.showProgress();
+    snServiceProvider.get().denyJoinGroup(session.getUserHash(),
+        session.getCurrentState().getStateToken(), ((GroupDTO) event.getTarget()).getShortName(),
+        new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+          @Override
+          public void onSuccess(final SocialNetworkDataDTO result) {
+            NotifyUser.hideProgress();
+            NotifyUser.info(i18n.t("Member rejected"));
+            stateManager.setSocialNetwork(result);
+          }
+        });
+  }
 
 }

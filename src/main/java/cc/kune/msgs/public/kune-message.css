@@ -29,6 +29,10 @@
   top: 0px;
 }
 
+.k-msg-topsep {
+  border-top: solid 1px wheat;
+}
+
 .k-msg-icon {
   padding: 10px 10px 5px;
 }

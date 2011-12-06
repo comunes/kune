@@ -55,7 +55,7 @@ public class ChangeToAdminAction extends AbstractExtendedAction {
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    NotifyUser.showProgressProcessing();
+    NotifyUser.showProgress();
     snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
         session.getCurrentState().getStateToken(), ((GroupDTO) event.getTarget()).getShortName(),
         new AsyncCallbackSimple<SocialNetworkDataDTO>() {

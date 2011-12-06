@@ -94,7 +94,7 @@ public class NewListPostAction extends RolAction {
         @Override
         public void onClick(final ClickEvent event) {
           if (diag.isValid()) {
-            NotifyUser.showProgressProcessing();
+            NotifyUser.showProgress();
             diag.hide();
             listsService.get().newPost(session.getUserHash(),
                 session.getCurrentStateToken().copy().clearDocument(), diag.getTextFieldValue(),

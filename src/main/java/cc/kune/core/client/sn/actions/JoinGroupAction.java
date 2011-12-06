@@ -70,7 +70,7 @@ public class JoinGroupAction extends SNRolAction {
 
             @Override
             public void onSuccess() {
-              NotifyUser.showProgressProcessing();
+              NotifyUser.showProgress();
               snServiceProvider.get().requestJoinGroup(session.getUserHash(),
                   session.getCurrentState().getStateToken(),
                   new AsyncCallbackSimple<SocialNetworkRequestResult>() {

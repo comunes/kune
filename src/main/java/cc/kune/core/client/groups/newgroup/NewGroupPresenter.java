@@ -98,7 +98,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
       @Override
       public void onSuccess(final Void result) {
         if (session.isLogged()) {
-          NotifyUser.showProgressProcessing();
+          NotifyUser.showProgress();
           getView().show();
           getView().focusOnShorName();
           NotifyUser.hideProgress();
