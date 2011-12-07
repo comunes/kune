@@ -26,6 +26,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +46,7 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   private static final String MESSAGE = "testing";
   private static final String NEW_PARTICIPANT = "newparti";
+  private static final String NEW_PARTICIPANT2 = "newparti2";
   private static final String RICHTEXT_MESSAGE = "<b>" + MESSAGE + "</b>";
   private static final String TEST_GADGET = "http://wave-api.appspot.com/public/gadgets/areyouin/gadget.xml";
   private static final String TITLE = "title";
@@ -52,26 +57,51 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
   ParticipantUtils participantUtils;
 
   @Test
-  public void addAndRemoveParticipant() throws IOException {
+  public void addAndDelParticipantTwice() throws IOException {
     doLogin();
-    final String whoDels = getSiteAdminShortName();
     final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
-    manager.addParticipants(waveletName, getSiteAdminShortName(), whoDels, NEW_PARTICIPANT);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        NEW_PARTICIPANT);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        NEW_PARTICIPANT, NEW_PARTICIPANT);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        NEW_PARTICIPANT, NEW_PARTICIPANT, NEW_PARTICIPANT);
     final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertEquals(2, fetchWavelet.getParticipants().size());
     assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
     assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
-    manager.delParticipants(waveletName, whoDels, NEW_PARTICIPANT);
+    // Del all
+    manager.delParticipants(waveletName, getSiteAdminShortName(), NEW_PARTICIPANT, NEW_PARTICIPANT,
+        getSiteAdminShortName(), getSiteAdminShortName());
+  }
+
+  @Test
+  public void addAndRemoveParticipant() throws IOException {
+    doLogin();
+    final String whoDels = getSiteAdminShortName();
+    final WaveRef waveletName = createTestWave();
+    assertNotNull(waveletName);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), whoDels, NEW_PARTICIPANT,
+        NEW_PARTICIPANT2);
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+    assertNotNull(fetchWavelet);
+    assertEquals(3, fetchWavelet.getParticipants().size());
+    assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
+    assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT2));
+    assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
+    manager.delParticipants(waveletName, whoDels, NEW_PARTICIPANT, NEW_PARTICIPANT2);
     final Wavelet fetchDelWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchDelWavelet);
     assertEquals(1, fetchDelWavelet.getParticipants().size());
     assertTrue(manager.isParticipant(fetchDelWavelet, getSiteAdminShortName()));
     assertFalse(manager.isParticipant(fetchDelWavelet, NEW_PARTICIPANT));
-    manager.addParticipants(waveletName, getSiteAdminShortName(), whoDels, NEW_PARTICIPANT);
-    // Del all
-    manager.delParticipants(waveletName, whoDels, getSiteAdminShortName(), NEW_PARTICIPANT);
+    assertFalse(manager.isParticipant(fetchDelWavelet, NEW_PARTICIPANT2));
+    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        NEW_PARTICIPANT);
+    // Del all (the last, the whoDels...)
+    manager.delParticipants(waveletName, whoDels, NEW_PARTICIPANT, getSiteAdminShortName());
   }
 
   @Test
@@ -82,29 +112,22 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     manager.addGadget(waveletName, getSiteAdminShortName(), new URL(TEST_GADGET));
   }
 
+  @Test
+  public void addingToSetMaintainsOrder() throws IOException {
+    final String[] array = new String[] { NEW_PARTICIPANT, NEW_PARTICIPANT, NEW_PARTICIPANT2,
+        NEW_PARTICIPANT2 };
+    final Set<String> set = new TreeSet<String>(Arrays.asList(array));
+    assertTrue(set.size() == 2);
+    final Iterator<String> iterator = set.iterator();
+    assertTrue(iterator.next().equals(NEW_PARTICIPANT));
+    assertTrue(iterator.next().equals(NEW_PARTICIPANT2));
+  }
+
   private void addParticipant(final String whoAdds) throws IOException {
     doLogin();
     final WaveRef waveletName = createTestWave();
     assertNotNull(waveletName);
     manager.addParticipants(waveletName, getSiteAdminShortName(), whoAdds, NEW_PARTICIPANT);
-    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
-    assertNotNull(fetchWavelet);
-    assertEquals(2, fetchWavelet.getParticipants().size());
-    assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
-    assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
-  }
-
-  @Test
-  public void addParticipantTwice() throws IOException {
-    doLogin();
-    final WaveRef waveletName = createTestWave();
-    assertNotNull(waveletName);
-    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
-        NEW_PARTICIPANT);
-    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
-        NEW_PARTICIPANT, NEW_PARTICIPANT);
-    manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
-        NEW_PARTICIPANT, NEW_PARTICIPANT, NEW_PARTICIPANT);
     final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
     assertNotNull(fetchWavelet);
     assertEquals(2, fetchWavelet.getParticipants().size());

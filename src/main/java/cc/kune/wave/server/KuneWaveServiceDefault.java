@@ -20,6 +20,7 @@
 package cc.kune.wave.server;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Nonnull;
 
@@ -70,6 +72,7 @@ import com.google.wave.api.Line;
 import com.google.wave.api.OperationQueue;
 import com.google.wave.api.OperationRequest;
 import com.google.wave.api.OperationRequest.Parameter;
+import com.google.wave.api.Participants;
 import com.google.wave.api.ProtocolVersion;
 import com.google.wave.api.Range;
 import com.google.wave.api.Wavelet;
@@ -186,26 +189,21 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   public void addParticipants(final WaveRef waveName, final String author, final String userWhoAdds,
       final String... newLocalParticipants) {
     final Wavelet wavelet = fetchWave(waveName, author);
-    final OperationQueue opQueue = new OperationQueue();
-
-    for (final String newLocalParticipant : newLocalParticipants) {
-      final String newPartWithDomain = participantUtils.of(newLocalParticipant).toString();
-      boolean mustAdd = true;
-      for (final String current : wavelet.getParticipants()) {
-        if (current.equals(newPartWithDomain)) {
-          // Current user is a participant already (issue #73)
-          mustAdd = false;
-          break;
-        }
-      }
-      if (mustAdd) {
+    final Participants currentParticipants = wavelet.getParticipants();
+    // Removing duplicates
+    for (final String participant : toSet(newLocalParticipants)) {
+      final String newPartWithDomain = participantUtils.of(participant).toString();
+      if (!currentParticipants.contains(newPartWithDomain)) {
+        // FIXME This is very costly. Seems like only one participant per
+        // opQueue is added (try to
+        // fix this in WAVE)
+        final OperationQueue opQueue = new OperationQueue();
+        LOG.debug("Adding as participant: " + newPartWithDomain);
         opQueue.addParticipantToWavelet(wavelet, newPartWithDomain);
+        final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
+            : author;
+        doOperation(whoAdd, opQueue, "add participant");
       }
-    }
-    if (opQueue.getPendingOperations().size() > 0) {
-      final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
-          : author;
-      doOperation(whoAdd, opQueue, "add participant");
     }
   }
 
@@ -307,37 +305,23 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     return createWave(title, message, NO_WAVE_TO_COPY, gadgetUrl, participantsArray);
   }
 
-  // public void appendGadget(final WaveRef waveName, URL gadgetUrl, final
-  // String author, boolean toRoot) {
-  // final Wavelet wavelet = fetchWave(waveName, author);
-  // final OperationQueue opQueue = new OperationQueue();
-  // opQueue.
-  // final Gadget gadget = new Gadget(gadgetUrl.toString());
-  // Blip blip = toRoot? wavelet.getRootBlip():
-  // opQueue.appendBlipToWavelet(wavelet, author);
-  // blip.append(gadget);
-  // }
-
   @Override
-  public void delParticipants(final WaveRef waveName, final String whoDel, final String... participants) {
+  public void delParticipants(final WaveRef waveName, final String whoDel,
+      final String... participantsToDel) {
     final Wavelet wavelet = fetchWave(waveName, whoDel);
-    final OperationQueue opQueue = new OperationQueue();
-
-    for (final String participant : participants) {
+    final Participants currentParticipants = wavelet.getParticipants();
+    final Set<String> set = toSet(participantsToDel);
+    LOG.debug("Removing participants: " + set.toString());
+    for (final String participant : set) {
+      // FIXME Seems like only one participant per opQueue is added (try to fix
+      // this in WAVE)
       final String partWithDomain = participantUtils.of(participant).toString();
-      boolean mustDel = false;
-      for (final String current : wavelet.getParticipants()) {
-        if (current.equals(partWithDomain)) {
-          mustDel = true;
-          break;
-        }
-      }
-      if (mustDel) {
+      if (currentParticipants.contains(partWithDomain)) {
+        final OperationQueue opQueue = new OperationQueue();
+        LOG.debug("Removing as participant: " + partWithDomain);
         opQueue.removeParticipantFromWavelet(wavelet, partWithDomain);
+        doOperation(whoDel, opQueue, "del participant");
       }
-    }
-    if (opQueue.getPendingOperations().size() > 0) {
-      doOperation(whoDel, opQueue, "add participant");
     }
   }
 
@@ -374,6 +358,17 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     OperationUtil.submitDeltas(context, waveletProvider, listener);
   }
 
+  // public void appendGadget(final WaveRef waveName, URL gadgetUrl, final
+  // String author, boolean toRoot) {
+  // final Wavelet wavelet = fetchWave(waveName, author);
+  // final OperationQueue opQueue = new OperationQueue();
+  // opQueue.
+  // final Gadget gadget = new Gadget(gadgetUrl.toString());
+  // Blip blip = toRoot? wavelet.getRootBlip():
+  // opQueue.appendBlipToWavelet(wavelet, author);
+  // blip.append(gadget);
+  // }
+
   @Override
   public Wavelet fetchWave(final WaveId waveId, final WaveletId waveletId, final String author) {
     final OperationQueue opQueue = new OperationQueue();
@@ -389,6 +384,7 @@ public class KuneWaveServiceDefault implements KuneWaveService {
       onFailure(context.getResponse(reqId).getErrorMessage());
     } else {
       // Duplicate code from WaveService
+      assert response != null;
       final WaveletData waveletData = (WaveletData) response.getData().get(ParamsProperty.WAVELET_DATA);
       final Map<String, Blip> blips = new HashMap<String, Blip>();
       final Map<String, BlipThread> threads = new HashMap<String, BlipThread>();
@@ -451,6 +447,12 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     final OperationQueue opQueue = new OperationQueue();
     opQueue.setTitleOfWavelet(wavelet, title);
     doOperation(author, opQueue, "set title");
+  }
+
+  private Set<String> toSet(final String[] array) {
+    final Set<String> set = new TreeSet<String>(Collections.reverseOrder());
+    set.addAll(Arrays.asList(array));
+    return set;
   }
 
 }

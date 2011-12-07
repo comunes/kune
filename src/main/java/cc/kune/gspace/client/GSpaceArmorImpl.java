@@ -127,7 +127,8 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
 
   @Override
   public void clearBackImage() {
-    DOM.setStyleAttribute(mainpanel.getElement(), CSS.A.BACKGROUND, "transparent");
+    final String bodyProp = "#FFFFFF";
+    DOM.setStyleAttribute(groupSpaceWrapper.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 
   @Override
