@@ -65,8 +65,8 @@ public class IntegrationTestHelper {
       final Injector childInjector = injector.createChildInjector(wavePersistModule,
           FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)),
           new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
-          new DocumentServerModule(), new ChatServerModule(), new ServerModule(false), federationModule,
-          new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
+          new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 2, 2),
+          federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
           new EventsServerModule(), new AbstractModule() {
             @Override
             protected void configure() {

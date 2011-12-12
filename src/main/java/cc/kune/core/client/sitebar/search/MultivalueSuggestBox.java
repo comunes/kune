@@ -311,9 +311,11 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       if (totSize < 1) {
         // if there were no suggestions, then it's an invalid value
         updateFormFeedback(FormFeedback.ERROR, "Invalid: " + m_query);
-        final OptionSuggestion sugg = new OptionSuggestion(i18n.t("No results"), "#",
-            m_request.getQuery(), m_query);
-        suggs.add(sugg);
+        if (showNoResult) {
+          final OptionSuggestion sugg = new OptionSuggestion(i18n.t("No results"), "#",
+              m_request.getQuery(), m_query);
+          suggs.add(sugg);
+        }
       } else if (false && totSize == 1) {
         // Patch to show always the suggestions
         // it's an exact match, so do not bother with showing suggestions,
@@ -497,6 +499,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   private final Map<String, String> mvalueMap;
 
+  private final boolean showNoResult;
+
   // private final OnExactMatch onExactMatch;
 
   /**
@@ -510,10 +514,14 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
    * @param isMultivalued
    *          - true for allowing multiple values
    * @param onExactMatch
+   * @param showNoResult
+   *          if we have to show noResult message when the search is empty or
+   *          not
    */
-  public MultivalueSuggestBox(final I18nUITranslationService i18n, final String restEndpointUrl,
-      final boolean isMultivalued, final OnExactMatch onExactMatch) {
+  public MultivalueSuggestBox(final I18nUITranslationService i18n, final boolean showNoResult,
+      final String restEndpointUrl, final boolean isMultivalued, final OnExactMatch onExactMatch) {
     this.i18n = i18n;
+    this.showNoResult = showNoResult;
     mrestEndpointUrl = restEndpointUrl;
     misMultivalued = isMultivalued;
     // this.onExactMatch = onExactMatch;

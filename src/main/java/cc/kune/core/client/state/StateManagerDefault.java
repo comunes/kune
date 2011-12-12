@@ -21,8 +21,8 @@
 package cc.kune.core.client.state;
 
 import org.waveprotocol.box.webclient.client.ClientEvents;
-import org.waveprotocol.box.webclient.client.HistorySupport;
 import org.waveprotocol.box.webclient.client.events.WaveSelectionEvent;
+import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.actions.BeforeActionCollection;
@@ -290,8 +290,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
           if (session.isLogged()) {
             SpaceConfEvent.fire(eventBus, Space.userSpace, newHistoryToken);
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
-            ClientEvents.get().fireEvent(
-                new WaveSelectionEvent(HistorySupport.waveRefFromHistoryToken(newHistoryToken)));
+            try {
+              ClientEvents.get().fireEvent(
+                  new WaveSelectionEvent(GwtWaverefEncoder.decodeWaveRefFromPath(newHistoryToken)));
+            } catch (final InvalidWaveRefException e) {
+              Log.error(nToken, e);
+            }
           } else {
             // Wave, but don't logged
             history.newItem(TokenUtils.addRedirect(SiteTokens.SIGNIN, newHistoryToken));

@@ -53,7 +53,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
       final StateManager stateManager, final I18nUITranslationService i18n) {
     searchButton = new PushButton(new Image(img.kuneSearchIco()), new Image(img.kuneSearchIcoPush()));
     searchButton.ensureDebugId(SITE_SEARCH_BUTTON);
-    final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, false,
+    final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, false, true,
         SITE_SEARCH_TEXTBOX, new OnEntitySelectedInSearch() {
           @Override
           public void onSeleted(final String shortName) {

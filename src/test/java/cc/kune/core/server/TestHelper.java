@@ -59,16 +59,16 @@ public abstract class TestHelper {
       final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
       final Injector childInjector = injector.createChildInjector(wavePersistModule, new ServerModule(
-          false), new RobotApiModule(), federationModule, FinderRegistry.init(new JpaPersistModule(
-          persistenceUnit)), module, new Module() {
-        @Override
-        public void configure(final Binder binder) {
-          binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
-          binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
-          binder.bind(KuneProperties.class).toInstance(new KunePropertiesDefault(propetiesFileName));
-          binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
-        }
-      });
+          false, 1, 2, 2), new RobotApiModule(), federationModule,
+          FinderRegistry.init(new JpaPersistModule(persistenceUnit)), module, new Module() {
+            @Override
+            public void configure(final Binder binder) {
+              binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
+              binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
+              binder.bind(KuneProperties.class).toInstance(new KunePropertiesDefault(propetiesFileName));
+              binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+            }
+          });
       try {
         childInjector.getInstance(WaveServerImpl.class).initialize();
       } catch (final WaveServerException e) {

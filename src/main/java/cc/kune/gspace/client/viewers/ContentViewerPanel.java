@@ -78,6 +78,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @UiField
   DeckPanel deck;
   private final GSpaceArmor gsArmor;
+  private final I18nTranslationService i18n;
   private IdGenerator idGenerator;
   private Element loading;
   @UiField
@@ -85,6 +86,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private ProfileManager profiles;
   /** The wave panel, if a wave is open. */
   private KuneStagesProvider wave;
+
   private final WaveClientProvider waveClientProv;
 
   private ImplPanel waveHolder;
@@ -103,6 +105,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     this.gsArmor = wsArmor;
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
+    this.i18n = i18n;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
     eventBus.addHandler(WaveClientClearEvent.getType(),
@@ -219,7 +222,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
       final KuneStagesProvider wave = new KuneStagesProvider(holder, waveHolder, waveRef, channel,
           idGenerator, profiles, waveStore, isNewWave,
-          org.waveprotocol.box.webclient.client.Session.get().getDomain(), true);
+          org.waveprotocol.box.webclient.client.Session.get().getDomain(), true, i18n);
       this.wave = wave;
       wave.load(new Command() {
         @Override

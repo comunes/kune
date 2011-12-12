@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
@@ -57,6 +58,27 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
   ParticipantUtils participantUtils;
 
   @Test
+  @Ignore
+  public void addAndDelMainParticipant() throws IOException {
+    doLogin();
+    final WaveRef waveletName = createTestWave();
+    assertNotNull(waveletName);
+    manager.addParticipants(waveletName, getSiteAdminShortName(), NEW_PARTICIPANT);
+
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+    assertNotNull(fetchWavelet);
+    assertEquals(2, fetchWavelet.getParticipants().size());
+    assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
+    assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
+    // Del all
+    manager.delParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName());
+    // This fails because we don't have a way to access to than wave now ...
+    // @domain don't work neither
+    final Wavelet fetchedAfterDeleted = manager.fetchWave(waveletName, "");
+    assertNotNull(fetchedAfterDeleted);
+  }
+
+  @Test
   public void addAndDelParticipantTwice() throws IOException {
     doLogin();
     final WaveRef waveletName = createTestWave();
@@ -72,7 +94,7 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     assertEquals(2, fetchWavelet.getParticipants().size());
     assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
     assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
-    // Del all
+    // Del main editor
     manager.delParticipants(waveletName, getSiteAdminShortName(), NEW_PARTICIPANT, NEW_PARTICIPANT,
         getSiteAdminShortName(), getSiteAdminShortName());
   }

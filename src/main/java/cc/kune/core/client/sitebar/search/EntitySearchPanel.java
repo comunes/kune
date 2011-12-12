@@ -71,7 +71,7 @@ public abstract class EntitySearchPanel {
     dialog.getTitleText().setText(
         i18n.t(searchOnlyUsers ? "Type the name of the user and select him/her:"
             : "Type the name of the user or group and select it:"), i18n.getDirection());
-    final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, searchOnlyUsers, id,
+    final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, searchOnlyUsers, true, id,
         callback);
     suggestBox = multivalueSBox.getSuggestBox();
     searchTextBox = suggestBox.getTextBox();

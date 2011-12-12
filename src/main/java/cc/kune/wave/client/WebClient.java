@@ -64,7 +64,9 @@ import org.waveprotocol.wave.client.widget.popup.UniversalPopup;
 import org.waveprotocol.wave.model.id.IdGenerator;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
+import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
+import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.errors.DefaultException;
@@ -72,6 +74,7 @@ import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenMatcher;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.wave.client.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.GWT;
@@ -225,13 +228,15 @@ public class WebClient extends  Composite implements WaveClientView {
 
   private final EventBus eventBus;
 
+  private final I18nTranslationService i18n;
+
   private IdGenerator idGenerator;
 
   private final InboxCountPresenter inboxCount;
 
   private final Element loading = new LoadingIndicator().getElement();
-
   private ParticipantId loggedInUser;
+
   @UiField
   DebugMessagePanel logPanel;
 
@@ -257,7 +262,6 @@ public class WebClient extends  Composite implements WaveClientView {
   ImplPanel waveHolder;
 
   private final WaveStore waveStore = new SimpleWaveStore();
-
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
    */
@@ -267,11 +271,12 @@ public class WebClient extends  Composite implements WaveClientView {
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session session) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session session, final I18nTranslationService i18n) {
     // Window.alert("webclient! " + new Date());
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
+    this.i18n = i18n;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
     ErrorHandler.install();
 
@@ -427,7 +432,7 @@ public class WebClient extends  Composite implements WaveClientView {
     waveHolder.getElement().appendChild(loading);
     final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
     final KuneStagesProvider wave = new KuneStagesProvider(
-        holder, waveHolder, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), true);
+        holder, waveHolder, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), true, i18n);
     this.wave = wave;
     wave.load(new Command() {
       @Override
@@ -438,8 +443,10 @@ public class WebClient extends  Composite implements WaveClientView {
     final String encodedToken = History.getToken();
     // Kune patch
     if (encodedToken != null && !encodedToken.isEmpty() && !encodedToken.equals(SiteTokens.WAVEINBOX)) {
-      final WaveRef fromWaveRef = HistorySupport.waveRefFromHistoryToken(encodedToken);
-      if (waveRef == null) {
+      WaveRef fromWaveRef;
+      try {
+        fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);
+      } catch (final InvalidWaveRefException e) {
         LOG.info("History token contains invalid path: " + encodedToken);
         return;
       }
@@ -450,7 +457,7 @@ public class WebClient extends  Composite implements WaveClientView {
         return;
       }
     }
-    final String tokenFromWaveref = HistorySupport.historyTokenFromWaveref(waveRef);
+    final String tokenFromWaveref = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
     SpaceConfEvent.fire(eventBus, Space.userSpace, tokenFromWaveref);
     History.newItem(tokenFromWaveref, false);
   }

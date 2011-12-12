@@ -84,7 +84,7 @@ public class ErrorHandler {
       final String msg = caught.getMessage();
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("You do not have rights to perform that action")
-              + (!TextUtils.empty(msg) && msg.length() > 1 ? ". " + i18n.t(msg) : "")));
+              + (!TextUtils.empty(msg) && msg.length() > 2 ? ". " + i18n.t(msg) : "")));
       goHome();
     } else if (caught instanceof SessionExpiredException) {
       logException(caught);
