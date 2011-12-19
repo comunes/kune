@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.sn.actions;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolActionAutoUpdated;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
@@ -26,7 +27,6 @@ import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

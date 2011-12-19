@@ -26,9 +26,9 @@ import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.client.ui.DefaultFormUtils;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;

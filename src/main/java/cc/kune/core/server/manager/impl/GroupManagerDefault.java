@@ -32,6 +32,7 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.hibernate.exception.ConstraintViolationException;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
@@ -52,7 +53,6 @@ import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;

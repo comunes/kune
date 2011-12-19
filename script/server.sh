@@ -8,6 +8,7 @@ usage() {
 
 Options:
 -j <jar file> : runs jar file generated via mvn assembly:assembly
+                or adding -Dgwt.compiler.skip=true to skip compilation
 -a: run as a daemon (only root user)
 -l LOGLEVEL : IGNORE|DEBUG|INFO|WARN
 

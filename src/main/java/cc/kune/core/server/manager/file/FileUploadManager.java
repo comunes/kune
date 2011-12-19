@@ -25,6 +25,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.access.AccessService;
 import cc.kune.core.server.auth.ActionLevel;
@@ -37,7 +38,6 @@ import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.utils.StringW;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;

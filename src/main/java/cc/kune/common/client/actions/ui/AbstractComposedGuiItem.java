@@ -28,16 +28,16 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.HasChilds;
 import cc.kune.common.client.errors.UIException;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.HasRTL;
 
 import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractComposedGuiItem extends Composite implements IsActionExtensible {
   private final GuiProvider bindings;
   private GuiActionDescCollection guiItems;
-  private final I18nTranslationService i18n;
+  private final HasRTL i18n;
 
-  public AbstractComposedGuiItem(final GuiProvider bindings, final I18nTranslationService i18n) {
+  public AbstractComposedGuiItem(final GuiProvider bindings, final HasRTL i18n) {
     super();
     this.bindings = bindings;
     this.i18n = i18n;

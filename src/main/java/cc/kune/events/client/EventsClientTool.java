@@ -23,9 +23,9 @@ import static cc.kune.events.shared.EventsConstants.NAME;
 import static cc.kune.events.shared.EventsConstants.ROOT_NAME;
 import static cc.kune.events.shared.EventsConstants.TYPE_MEETING;
 import static cc.kune.events.shared.EventsConstants.TYPE_ROOT;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 

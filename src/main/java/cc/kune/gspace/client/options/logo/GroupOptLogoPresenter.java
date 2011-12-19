@@ -19,12 +19,12 @@
  */
 package cc.kune.gspace.client.options.logo;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.GroupChangedEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.gwt.event.shared.EventBus;

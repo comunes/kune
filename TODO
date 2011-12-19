@@ -12,11 +12,13 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
-** Reu FLOSS Ocuppy 10pm EST
-   DEADLINE: <2011-11-16 mié 9pm EST> 
 ** group.inexistentTool nasty error
 ** calendar support
 *** gwt-cal + http://ical4j.sourceforge.net/introduction.html
+*** add --> event --> rpc --> gadget + wave
+*** modification --> event ---> rpc gadget + wave
+*** delete ---> ?
+*** get --> list<waveref> ---> list<app>
 ** i18n usecase
 | logged | locale in URL  | i18n supported | useDB |
 | false  | false          | false          | true  |

@@ -19,7 +19,7 @@
  */
 package cc.kune.events.client;
 
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.events.client.actions.Calendar1DayViewSelectBtn;
 import cc.kune.events.client.actions.Calendar3DaysViewSelectBtn;
 import cc.kune.events.client.actions.Calendar7DaysViewSelectBtn;

@@ -51,6 +51,7 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -80,6 +81,7 @@ import com.google.wave.api.data.converter.EventDataConverterManager;
 import com.google.wave.api.impl.DocumentModifyAction;
 import com.google.wave.api.impl.DocumentModifyAction.BundledAnnotation;
 import com.google.wave.api.impl.DocumentModifyAction.ModifyHow;
+import com.google.wave.api.impl.DocumentModifyQuery;
 import com.google.wave.api.impl.WaveletData;
 import com.google.wave.splash.rpc.ClientAction;
 import com.google.wave.splash.web.template.WaveRenderer;
@@ -178,10 +180,10 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     final OperationQueue opQueue = new OperationQueue();
     final Blip rootBlip = wavelet.getRootBlip();
 
-    opQueue.modifyDocument(rootBlip).addParameter(
-        Parameter.of(ParamsProperty.MODIFY_ACTION, new DocumentModifyAction(ModifyHow.INSERT, NO_VALUES,
-            NO_ANNOTATION_KEY, elementsIn, NO_BUNDLED_ANNOTATIONS, false)));
-    opQueue.modifyDocument(rootBlip).addParameter(Parameter.of(ParamsProperty.INDEX, 1));
+    final OperationRequest operationRequest = opQueue.modifyDocument(rootBlip);
+    operationRequest.addParameter(Parameter.of(ParamsProperty.MODIFY_ACTION, new DocumentModifyAction(
+        ModifyHow.INSERT, NO_VALUES, NO_ANNOTATION_KEY, elementsIn, NO_BUNDLED_ANNOTATIONS, false)));
+    operationRequest.addParameter(Parameter.of(ParamsProperty.INDEX, 1));
     doOperation(author, opQueue, "add gadget");
   }
 
@@ -326,26 +328,29 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   private void doOperation(final String author, final OperationQueue opQueue, final String logComment) {
+    // FIXME: do here a callback!!!
     final OperationContextImpl context = new OperationContextImpl(waveletProvider,
         converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
-    final OperationRequest request = opQueue.getPendingOperations().get(0);
-    OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.of(author));
-    final String reqId = request.getId();
-    final JsonRpcResponse response = context.getResponse(reqId);
-    if (response != null && response.isError()) {
-      onFailure(context.getResponse(reqId).getErrorMessage());
-    }
-    OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
-      @Override
-      public void onFailure(final String arg0) {
-        KuneWaveServiceDefault.this.onFailure("Wave " + logComment + " failed, onFailure: " + arg0);
+    for (final OperationRequest request : opQueue.getPendingOperations()) {
+      // final OperationRequest request = opQueue.getPendingOperations().get(0);
+      OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.of(author));
+      final String reqId = request.getId();
+      final JsonRpcResponse response = context.getResponse(reqId);
+      if (response != null && response.isError()) {
+        onFailure(context.getResponse(reqId).getErrorMessage());
       }
+      OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
+        @Override
+        public void onFailure(final String arg0) {
+          KuneWaveServiceDefault.this.onFailure("Wave " + logComment + " failed, onFailure: " + arg0);
+        }
 
-      @Override
-      public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
-        LOG.info("Wave " + logComment + " success: " + arg1);
-      }
-    });
+        @Override
+        public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
+          LOG.info("Wave " + logComment + " success: " + arg1);
+        }
+      });
+    }
   }
 
   public void doOperations(final WaveRef waveName, final String author, final OperationQueue opQueue,
@@ -357,17 +362,6 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     }
     OperationUtil.submitDeltas(context, waveletProvider, listener);
   }
-
-  // public void appendGadget(final WaveRef waveName, URL gadgetUrl, final
-  // String author, boolean toRoot) {
-  // final Wavelet wavelet = fetchWave(waveName, author);
-  // final OperationQueue opQueue = new OperationQueue();
-  // opQueue.
-  // final Gadget gadget = new Gadget(gadgetUrl.toString());
-  // Blip blip = toRoot? wavelet.getRootBlip():
-  // opQueue.appendBlipToWavelet(wavelet, author);
-  // blip.append(gadget);
-  // }
 
   @Override
   public Wavelet fetchWave(final WaveId waveId, final WaveletId waveletId, final String author) {
@@ -442,6 +436,41 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   @Override
+  public void setGadgetProperty(final WaveRef waveletName, final String author, final URL gadgetUrl,
+      final String someProperty, final String someValue) {
+    // See BlipContentRefs DocumentModifyService
+    final Wavelet wavelet = fetchWave(waveletName, author);
+    // FIXME
+    final OperationQueue opQueue = new OperationQueue();
+    final Blip rootBlip = wavelet.getRootBlip();
+    for (final Element elem : rootBlip.getElements().values()) {
+      if (elem.isGadget()) {
+        final Map<String, String> properties = elem.getProperties();
+        if (properties.get(Gadget.URL).equals(gadgetUrl.toString())) {
+          // This is the gadget we want to modify (the first of that type)
+          final List<Element> updatedElementsIn = Lists.newArrayListWithCapacity(1);
+          properties.put(someProperty, someValue);
+          // properties.put(propertyNameToDelete, null);
+          final Gadget gadget = (Gadget) elem;
+          gadget.setProperty(someProperty, someValue);
+          // updatedElementsIn.add(new Gadget(properties));
+          updatedElementsIn.add(gadget);
+          final OperationRequest operationRequest = opQueue.modifyDocument(rootBlip);
+          operationRequest.addParameter(Parameter.of(ParamsProperty.MODIFY_ACTION,
+              new DocumentModifyAction(ModifyHow.UPDATE_ELEMENT, NO_VALUES, NO_ANNOTATION_KEY,
+                  updatedElementsIn, NO_BUNDLED_ANNOTATIONS, false)));
+          operationRequest.addParameter(Parameter.of(
+              ParamsProperty.MODIFY_QUERY,
+              new DocumentModifyQuery(ElementType.GADGET, ImmutableMap.of(Gadget.URL,
+                  gadgetUrl.toString()), 1)));
+          doOperation(author, opQueue, "set gadget property");
+          break;
+        }
+      }
+    }
+  }
+
+  @Override
   public void setTitle(final WaveRef waveName, final String title, final String author) {
     final Wavelet wavelet = fetchWave(waveName, author);
     final OperationQueue opQueue = new OperationQueue();
@@ -454,5 +483,4 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     set.addAll(Arrays.asList(array));
     return set;
   }
-
 }

@@ -26,10 +26,10 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.dto.ToolSimpleDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
 import com.extjs.gxt.ui.client.event.BaseEvent;

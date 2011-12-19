@@ -20,8 +20,8 @@
 package cc.kune.lists.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 

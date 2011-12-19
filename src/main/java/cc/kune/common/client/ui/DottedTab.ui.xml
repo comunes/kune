@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:with field='res'
-    type='cc.kune.common.client.resources.CommonIconResources'/>
+    type='cc.kune.common.client.resources.CommonResources'/>
   <ui:style>
 
   </ui:style>

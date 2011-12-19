@@ -24,12 +24,12 @@ import java.util.List;
 import org.waveprotocol.wave.client.common.util.DateUtils;
 
 import cc.kune.common.client.ui.DottedTabPanel;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.hspace.client.HSpacePresenter.HSpaceView;
 

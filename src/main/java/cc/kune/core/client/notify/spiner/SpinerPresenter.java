@@ -19,8 +19,10 @@
  */
 package cc.kune.core.client.notify.spiner;
 
+import cc.kune.common.client.events.ProgressHideEvent;
+import cc.kune.common.client.events.ProgressShowEvent;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.i18n.I18nReadyEvent;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;

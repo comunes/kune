@@ -20,7 +20,7 @@
 package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

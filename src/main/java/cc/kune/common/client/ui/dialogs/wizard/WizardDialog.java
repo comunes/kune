@@ -23,8 +23,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
-import cc.kune.core.client.ui.DefaultForm;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -40,7 +39,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class WizardDialog implements WizardDialogView {
 
   private final Button backButton;
-  private final DeckPanel deck;
+  protected final DeckPanel deck;
   private final BasicTopDialog dialog;
   private final I18nTranslationService i18n;
   private WizardListener listener;
@@ -130,11 +129,9 @@ public class WizardDialog implements WizardDialogView {
   public void clear() {
   }
 
-  private int getWidgetCount(final IsWidget view) {
+  protected int getWidgetCount(final IsWidget view) {
     if (view instanceof Widget) {
       return deck.getWidgetIndex((Widget) view);
-    } else if (view instanceof DefaultForm) {
-      return deck.getWidgetIndex(((DefaultForm) view).getFormPanel());
     }
     return -1;
   }
@@ -261,11 +258,9 @@ public class WizardDialog implements WizardDialogView {
 
   }
 
-  private Widget toWidget(final IsWidget view) {
+  protected Widget toWidget(final IsWidget view) {
     if (view instanceof Widget) {
       return (Widget) view;
-    } else if (view instanceof DefaultForm) {
-      return ((DefaultForm) view).getFormPanel();
     } else {
       NotifyUser.error("Trying to add a unknown element in WizardDialog");
       return null;

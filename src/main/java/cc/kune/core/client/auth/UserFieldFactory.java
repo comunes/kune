@@ -20,9 +20,9 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.DefaultForm;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.inject.Inject;

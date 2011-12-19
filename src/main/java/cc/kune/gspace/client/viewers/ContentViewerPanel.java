@@ -30,21 +30,21 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
-import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
 import cc.kune.wave.client.KuneStagesProvider;
 import cc.kune.wave.client.WaveClientClearEvent;
 import cc.kune.wave.client.WaveClientProvider;
+import cc.kune.wave.client.WaveClientUtils;
 import cc.kune.wave.client.WaveClientView;
 import cc.kune.wave.client.WebClientMock;
 
@@ -84,6 +84,8 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @UiField
   InlineHTML onlyViewPanel;
   private ProfileManager profiles;
+  private final StateManager stateManager;
+
   /** The wave panel, if a wave is open. */
   private KuneStagesProvider wave;
 
@@ -93,9 +95,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   @UiField
   ImplPanel waveHolderParent;
-
   private final WaveStore waveStore = new SimpleWaveStore();
-
   private final Widget widget;
 
   @Inject
@@ -106,6 +106,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
     this.i18n = i18n;
+    this.stateManager = stateManager;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
     eventBus.addHandler(WaveClientClearEvent.getType(),
@@ -115,15 +116,6 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
             waveClear();
           }
         });
-    stateManager.addBeforeStateChangeListener(new BeforeActionListener() {
-      @Override
-      public boolean beforeAction() {
-        // This fix lot of problems when you are editing and move to other
-        // location (without stop editing)
-        waveClear();
-        return true;
-      }
-    });
   }
 
   @Override
@@ -178,6 +170,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       channel = webClient.getChannel();
       profiles = webClient.getProfiles();
       idGenerator = ClientIdGenerator.create();
+      WaveClientUtils.addListener(stateManager, wave, waveHolder, waveHolderParent);
     }
   }
 
@@ -266,18 +259,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   }
 
   private void waveClear() {
-    if (wave != null) {
-      // try {
-      wave.destroy();
-      // } catch (final RuntimeException e) {
-      // When editing: java.lang.RuntimeException: Component not found: MENU
-      // }
-      wave = null;
-    }
-    if (waveHolder != null && waveHolder.isAttached()) {
-      waveHolder.removeFromParent();
-      waveHolderParent.remove(waveHolder);
-    }
+    WaveClientUtils.clear(wave, waveHolder, waveHolderParent);
   }
 
 }

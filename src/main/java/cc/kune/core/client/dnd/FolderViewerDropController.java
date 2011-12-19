@@ -19,8 +19,10 @@
  */
 package cc.kune.core.client.dnd;
 
+import cc.kune.common.client.actions.ui.descrip.DropTarget;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.ContentCache;
@@ -28,7 +30,6 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.viewers.FolderItemWidget;
 
 import com.allen_sauer.gwt.dnd.client.DragContext;

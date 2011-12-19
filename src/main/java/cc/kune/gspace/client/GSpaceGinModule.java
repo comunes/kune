@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client;
 
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;

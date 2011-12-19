@@ -22,11 +22,11 @@ package cc.kune.core.client.auth;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.RegisterPresenter.RegisterView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.KuneUiUtils;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;

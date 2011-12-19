@@ -19,7 +19,7 @@
  */
 package cc.kune.tasks.client;
 
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.tasks.client.actions.TasksClientActions;
 import cc.kune.tasks.client.actions.TasksFolderNewMenu;
 import cc.kune.tasks.client.actions.TasksNewMenu;

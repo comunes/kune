@@ -19,8 +19,8 @@
  */
 package cc.kune.gspace.client.i18n;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 

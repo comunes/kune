@@ -58,6 +58,9 @@ public interface KuneWaveService {
 
   String render(WaveRef waveRef, String author);
 
+  void setGadgetProperty(WaveRef waveletName, String author, URL gadgetUrl, String someProperty,
+      String someValue);
+
   void setTitle(WaveRef waveName, String title, String author);
 
 }

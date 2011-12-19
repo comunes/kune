@@ -19,8 +19,8 @@
  */
 package cc.kune.barters.client.actions;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.actions.DelContainerMenuItem;
 
 import com.google.inject.Inject;

@@ -19,11 +19,11 @@
  */
 package cc.kune.core.client.sitebar;
 
+import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
-import cc.kune.core.client.notify.msgs.UserNotifyEvent;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.msgs.client.resources.UserMessageImagesUtil;
 
 import com.google.gwt.core.client.GWT;

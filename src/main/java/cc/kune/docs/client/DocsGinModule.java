@@ -19,7 +19,7 @@
  */
 package cc.kune.docs.client;
 
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.docs.client.actions.DocsClientActions;
 import cc.kune.docs.client.actions.DocsFolderNewMenu;
 import cc.kune.docs.client.actions.DocsNewMenu;

@@ -20,9 +20,9 @@
 package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;

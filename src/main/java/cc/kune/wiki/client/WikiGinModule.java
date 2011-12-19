@@ -19,7 +19,7 @@
  */
 package cc.kune.wiki.client;
 
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.wiki.client.actions.WikiClientActions;
 import cc.kune.wiki.client.actions.WikiFolderNewMenu;
 import cc.kune.wiki.client.actions.WikiPageNewMenu;

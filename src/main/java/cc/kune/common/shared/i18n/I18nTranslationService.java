@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.shared.i18n;
+package cc.kune.common.shared.i18n;
 
 import cc.kune.common.client.utils.Pair;
 
 import com.google.gwt.i18n.client.HasDirection.Direction;
 
-public abstract class I18nTranslationService {
+public abstract class I18nTranslationService implements HasRTL {
 
   protected static final String RTL = "rtl";
 
@@ -40,6 +40,7 @@ public abstract class I18nTranslationService {
     return isRTL() ? Direction.RTL : Direction.LTR;
   }
 
+  @Override
   public abstract boolean isRTL();
 
   /**

@@ -22,13 +22,13 @@ package cc.kune.core.server.state;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.TagUserContentManager;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;

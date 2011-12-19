@@ -22,7 +22,7 @@ package cc.kune.blogs.client;
 import cc.kune.blogs.client.actions.BlogsClientActions;
 import cc.kune.blogs.client.actions.BlogsNewMenu;
 import cc.kune.blogs.client.actions.PostNewMenu;
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 
 public class BlogsGinModule extends ExtendedGinModule {
 

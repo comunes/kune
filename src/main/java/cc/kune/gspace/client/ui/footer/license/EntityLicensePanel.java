@@ -21,8 +21,8 @@ package cc.kune.gspace.client.ui.footer.license;
 
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.KuneWindowUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.shared.dto.LicenseDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView;
 

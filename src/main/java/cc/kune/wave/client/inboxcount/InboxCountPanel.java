@@ -21,9 +21,9 @@ package cc.kune.wave.client.inboxcount;
 
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BlinkAnimation;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.wave.client.inboxcount.InboxCountPresenter.InboxCountView;
 
 import com.google.gwt.event.dom.client.ClickEvent;

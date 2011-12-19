@@ -21,8 +21,8 @@ package cc.kune.core.client.notify.confirm;
 
 import cc.kune.common.client.notify.ConfirmAskEvent;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmView;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

@@ -21,7 +21,7 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.resources.client.ImageResource;
 

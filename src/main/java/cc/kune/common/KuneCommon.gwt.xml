@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <!-- Inherit the core Web Toolkit stuff. -->
-  <inherits name='com.google.gwt.user.User' />
+  <inherits name='com.google.gwt.user.User'/>
   <!-- Other module inherits -->
   <!-- Specify the app entry point class. -->
   <!-- <entry-point class='cc.kune.msgs.client.KuneMessagesSampleEntryPoint'
     /> -->
   <!-- Specify the paths for translatable code -->
+  <source path="shared"/>
   <source path='client'
-    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
-  <public path="public" />
-  <inherits name='org.cobogw.gwt.user.User' />
-  <inherits name='com.google.gwt.inject.Inject' />
-  <inherits name="com.extjs.gxt.ui.GXT" />
-  <stylesheet src="kune-common.css" />
+  excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
+  <public path="public"/>
+  <inherits name='org.cobogw.gwt.user.User'/>
+  <inherits name='com.google.gwt.inject.Inject'/>
+  <inherits name="com.extjs.gxt.ui.GXT"/>
+  <stylesheet src="kune-common.css"/>
 </module>

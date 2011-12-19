@@ -19,11 +19,11 @@
  */
 package cc.kune.gspace.client.options.style;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.style.GSpaceBackManager;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;

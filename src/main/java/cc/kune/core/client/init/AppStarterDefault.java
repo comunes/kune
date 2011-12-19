@@ -19,13 +19,13 @@
  */
 package cc.kune.core.client.init;
 
+import cc.kune.common.client.events.ProgressHideEvent;
+import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.utils.SimpleResponseCallback;
-import cc.kune.core.client.notify.msgs.UserNotifyEvent;
-import cc.kune.core.client.notify.spiner.ProgressHideEvent;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -45,13 +45,13 @@ import com.google.inject.Inject;
 public class AppStarterDefault implements AppStarter {
   private final EventBus eventBus;
   private final PrefetchUtilities prefetchUtilities;
-  private final CoreResources res;
+  private final CommonResources res;
   private final Session session;
   private final SiteServiceAsync siteService;
 
   @Inject
   public AppStarterDefault(final Session session, final SiteServiceAsync siteService,
-      final EventBus eventBus, final PrefetchUtilities prefetchUtilities, final CoreResources res) {
+      final EventBus eventBus, final PrefetchUtilities prefetchUtilities, final CommonResources res) {
     this.session = session;
     this.siteService = siteService;
     this.eventBus = eventBus;

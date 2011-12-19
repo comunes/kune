@@ -97,4 +97,72 @@ public class UserSpacePageObject extends PageObject {
     return rootBlipText;
   }
 
+  // public void testCreation() {
+  // selenium.setSpeed("200");
+  // // selenium.while("index < 100");
+  // selenium.click("//div[2]/div[2]/div[4]");
+  // for (int second = 0;; second++) {
+  // if (second >= 60) {
+  // fail("timeout");
+  // }
+  // try {
+  // if (selenium.isElementPresent("//ul/div")) {
+  // break;
+  // }
+  // } catch (final Exception e) {
+  // }
+  // Thread.sleep(1000);
+  // }
+  //
+  // selenium.click("//ul/div");
+  // selenium.focus("//ul/div");
+  // selenium.mouseDownAt("//ul/div", "5,5");
+  // selenium.typeKeys("//ul/div", selenium.getEval("index"));
+  // selenium.clickAt("//div[3]/div/div/div/div/div/div/span", "5,5");
+  // selenium.clickAt("//div[10]/div/div/div/div[3]/div/div[2]", "5,5");
+  // selenium.click("//div[3]/div/div/div[2]/div/div/div/span");
+  // selenium.typeKeys("//div[2]/div/div[2]/div/div/ul/div",
+  // selenium.getEval("index + 'áñç|«@#|ð€Ω]'"));
+  // selenium.click("//div[@id='app']/div/div[2]/div/div[2]/div/div/div[10]/div/div[3]/div[2]/div/div");
+  // selenium.click("//div[@id='app']/div/div[2]/div/div[2]/div/div/div[10]/div/div[3]/div/div/div");
+  // for (int second = 0;; second++) {
+  // if (second >= 60) {
+  // fail("timeout");
+  // }
+  // try {
+  // if (selenium.isTextPresent("@#|")) {
+  // break;
+  // }
+  // } catch (final Exception e) {
+  // }
+  // Thread.sleep(1000);
+  // }
+  //
+  // for (int second = 0;; second++) {
+  // if (second >= 60) {
+  // fail("timeout");
+  // }
+  // try {
+  // if (selenium.isElementPresent("//div[3]/div/div/div[2]/div/div/div[3]")) {
+  // break;
+  // }
+  // } catch (final Exception e) {
+  // }
+  // Thread.sleep(1000);
+  // }
+  //
+  // selenium.clickAt("//div[3]/div/div/div[2]/div/div/div[3]", "1,1");
+  // selenium.clickAt("//div[3]/div/div/div/div/div/div/span[2]", "5,5");
+  // selenium.click("//div[2]/div/div/div/div[2]/div/div/ul/div");
+  // selenium.focus("//div[2]/div/div/div/div[2]/div/div/ul/div");
+  // selenium.mouseDownAt("//div[2]/div/div/div/div[2]/div/div/ul/div", "5,5");
+  // selenium.typeKeys("//div[2]/div/div/div/div[2]/div/div/ul/div",
+  // selenium.getEval("index + 'áñç|«@#|ð€Ω] la la la '"));
+  // selenium.clickAt("//div[10]/div/div/div/div[3]/div/div[2]", "5,5");
+  // selenium.clickAt("//div[3]/div/div[2]/div/div/ul/div", "5,5");
+  // selenium.typeKeys("//div[3]/div/div[2]/div/div/ul/div",
+  // selenium.getEval("index + 'áñç|«@#|ð€Ω] la la la la la'"));
+  // // selenium.endWhile();
+  // }
+
 }

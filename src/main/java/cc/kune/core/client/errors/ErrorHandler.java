@@ -22,15 +22,15 @@ package cc.kune.core.client.errors;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 
+import cc.kune.common.client.events.ProgressHideEvent;
+import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.TextUtils;
-import cc.kune.core.client.notify.msgs.UserNotifyEvent;
-import cc.kune.core.client.notify.spiner.ProgressHideEvent;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.wave.client.WaveClientProvider;
 
 import com.google.gwt.event.shared.EventBus;

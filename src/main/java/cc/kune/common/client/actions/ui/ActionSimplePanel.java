@@ -20,7 +20,7 @@
 package cc.kune.common.client.actions.ui;
 
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.HasRTL;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.inject.Inject;
@@ -30,7 +30,7 @@ public class ActionSimplePanel extends AbstractComposedGuiItem implements Action
   private final HorizontalPanel bar;
 
   @Inject
-  public ActionSimplePanel(final GuiProvider guiProvider, final I18nTranslationService i18n) {
+  public ActionSimplePanel(final GuiProvider guiProvider, final HasRTL i18n) {
     super(guiProvider, i18n);
     bar = new HorizontalPanel();
     initWidget(bar);

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.notify.msgs;
+package cc.kune.common.client.events;
 
 import cc.kune.common.client.notify.NotifyLevel;
 

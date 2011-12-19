@@ -23,10 +23,10 @@ import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.common.client.utils.OnAcceptCallback;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.SignInPresenter.SignInView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.KuneUiUtils;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.form.Field;

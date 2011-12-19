@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.auth;
 
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;

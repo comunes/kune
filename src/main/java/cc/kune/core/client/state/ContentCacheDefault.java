@@ -22,9 +22,9 @@ package cc.kune.core.client.state;
 import java.util.HashMap;
 import java.util.Map;
 
+import cc.kune.common.client.events.ProgressShowEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.shared.domain.utils.StateToken;

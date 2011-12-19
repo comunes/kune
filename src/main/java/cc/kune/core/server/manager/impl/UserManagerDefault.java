@@ -44,6 +44,7 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
@@ -65,7 +66,6 @@ import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.UserDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Group;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;

@@ -23,6 +23,7 @@ import java.util.List;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNProxy;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNView;
@@ -41,7 +42,6 @@ import cc.kune.core.shared.dto.ParticipationDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserBuddiesDataDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;

@@ -19,9 +19,9 @@
  */
 package cc.kune.gspace.client.licensewizard.pages;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.client.ui.DefaultFormUtils;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.Radio;

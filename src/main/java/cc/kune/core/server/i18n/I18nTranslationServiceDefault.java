@@ -20,9 +20,9 @@
 package cc.kune.core.server.i18n;
 
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;

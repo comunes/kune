@@ -33,7 +33,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.resources.CommonIconResources;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
@@ -47,7 +47,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
 
   private IconLabel iconLabel;
   private GwtBaseMenuItem item;
-  private final CommonIconResources res = CommonIconResources.INSTANCE;
+  private final CommonResources res = CommonResources.INSTANCE;
 
   private void confCheckListener(final MenuCheckItemDescriptor descriptor, final GwtCheckItem checkItem) {
     descriptor.addPropertyChangeListener(new PropertyChangeListener() {

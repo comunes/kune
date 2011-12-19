@@ -20,8 +20,8 @@
 package cc.kune.wiki.client.actions;
 
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentMenuItem;
 import cc.kune.wiki.shared.WikiConstants;

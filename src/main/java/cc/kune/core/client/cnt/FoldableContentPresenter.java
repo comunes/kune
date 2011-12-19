@@ -21,6 +21,7 @@ package cc.kune.core.client.cnt;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.services.MediaUtils;
@@ -33,7 +34,6 @@ import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Provider;
 

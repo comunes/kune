@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Set;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.content.ContainerManager;
@@ -39,7 +40,6 @@ import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.domain.ContentStatus;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;

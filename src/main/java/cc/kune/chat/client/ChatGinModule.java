@@ -22,7 +22,7 @@ package cc.kune.chat.client;
 import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
 import cc.kune.chat.client.actions.ChatClientActions;
 import cc.kune.chat.client.actions.ChatSitebarActions;
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.core.client.avatar.MediumAvatarDecorator;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.sn.SimpleContactManager;

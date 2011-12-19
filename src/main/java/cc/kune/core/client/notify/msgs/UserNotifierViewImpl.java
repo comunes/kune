@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.notify.msgs;
 
+import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.ui.PopupBottomPanel;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierView;
 import cc.kune.msgs.client.CloseCallback;

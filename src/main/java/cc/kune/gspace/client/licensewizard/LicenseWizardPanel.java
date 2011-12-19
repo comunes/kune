@@ -20,15 +20,15 @@
 package cc.kune.gspace.client.licensewizard;
 
 import cc.kune.common.client.ui.MaskWidget;
-import cc.kune.common.client.ui.dialogs.wizard.WizardDialog;
 import cc.kune.common.client.ui.dialogs.wizard.WizardListener;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.ui.dialogs.WizardFormDialog;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-public class LicenseWizardPanel extends WizardDialog implements LicenseWizardView {
+public class LicenseWizardPanel extends WizardFormDialog implements LicenseWizardView {
 
   public static final String BACK_BTN_ID = "k-lwp-back-btn";
   public static final String CANCEL_BTN_ID = "k-lwp-cancel-btn";

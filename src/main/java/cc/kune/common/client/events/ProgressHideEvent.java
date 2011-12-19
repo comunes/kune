@@ -17,15 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.notify.spiner;
+package cc.kune.common.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
-import com.gwtplatform.mvp.client.HasEventBus;
 
-public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHandler> { 
+public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHandler> {
 
   public interface HasProgressHideHandlers extends HasHandlers {
     HandlerRegistration addProgressHideHandler(ProgressHideHandler handler);
@@ -37,7 +36,7 @@ public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHa
 
   private static final Type<ProgressHideHandler> TYPE = new Type<ProgressHideHandler>();
 
-  public static void fire(HasEventBus source) {
+  public static void fire(final HasHandlers source) {
     source.fireEvent(new ProgressHideEvent());
   }
 
@@ -45,28 +44,26 @@ public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHa
     return TYPE;
   }
 
-
   public ProgressHideEvent() {
+  }
+
+  @Override
+  protected void dispatch(final ProgressHideHandler handler) {
+    handler.onProgressHide(this);
+  }
+
+  @Override
+  public boolean equals(final Object other) {
+    if (other != null && other.getClass().equals(this.getClass())) {
+      final ProgressHideEvent o = (ProgressHideEvent) other;
+      return true;
+    }
+    return false;
   }
 
   @Override
   public Type<ProgressHideHandler> getAssociatedType() {
     return TYPE;
-  }
-
-  @Override
-  protected void dispatch(ProgressHideHandler handler) {
-    handler.onProgressHide(this);
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other != null && other.getClass().equals(this.getClass())) {
-          ProgressHideEvent o = (ProgressHideEvent) other;
-      return true
-        ;
-    }
-    return false;
   }
 
   @Override
@@ -78,8 +75,7 @@ public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHa
 
   @Override
   public String toString() {
-    return "ProgressHideEvent["
-    + "]";
+    return "ProgressHideEvent[" + "]";
   }
 
 }

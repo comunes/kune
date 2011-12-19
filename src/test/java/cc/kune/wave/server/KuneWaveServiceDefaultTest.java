@@ -27,6 +27,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -41,6 +42,8 @@ import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 
 import com.google.inject.Inject;
+import com.google.wave.api.Element;
+import com.google.wave.api.Gadget;
 import com.google.wave.api.Wavelet;
 
 public class KuneWaveServiceDefaultTest extends IntegrationTest {
@@ -49,6 +52,8 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
   private static final String NEW_PARTICIPANT = "newparti";
   private static final String NEW_PARTICIPANT2 = "newparti2";
   private static final String RICHTEXT_MESSAGE = "<b>" + MESSAGE + "</b>";
+  private static final String SOME_PROPERTY = "someProperty";
+  private static final String SOME_VALUE = "someValue";
   private static final String TEST_GADGET = "http://wave-api.appspot.com/public/gadgets/areyouin/gadget.xml";
   private static final String TITLE = "title";
   private static final String TITLENEW = "titleNew";
@@ -135,6 +140,27 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
   }
 
   @Test
+  public void addGadgetAndCheckProperties() throws DefaultException, IOException {
+    doLogin();
+    final WaveRef waveletName = createTestWave();
+    assertNotNull(waveletName);
+    final URL gadgetUrl = new URL(TEST_GADGET);
+    manager.addGadget(waveletName, getSiteAdminShortName(), gadgetUrl);
+    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+    final Gadget gadget = getFirstGadget(fetchWavelet, TEST_GADGET);
+    assertEquals(gadget.getUrl(), TEST_GADGET);
+    assertEquals(2, gadget.getProperties().size());
+    assertEquals(3, fetchWavelet.getRootBlip().getElements().size());
+    manager.setGadgetProperty(waveletName, getSiteAdminShortName(), gadgetUrl, SOME_PROPERTY, SOME_VALUE);
+    final Wavelet updatedWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+    final Gadget gadgetUpdated = getFirstGadget(updatedWavelet, TEST_GADGET);
+    assertEquals(gadgetUpdated.getUrl(), TEST_GADGET);
+    assertEquals(3, updatedWavelet.getRootBlip().getElements().size());
+    assertEquals(3, gadgetUpdated.getProperties().size());
+    assertEquals(SOME_VALUE, gadgetUpdated.getProperties().get(SOME_PROPERTY));
+  }
+
+  @Test
   public void addingToSetMaintainsOrder() throws IOException {
     final String[] array = new String[] { NEW_PARTICIPANT, NEW_PARTICIPANT, NEW_PARTICIPANT2,
         NEW_PARTICIPANT2 };
@@ -204,6 +230,17 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     assertNotNull(fetchWavelet);
     assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
     assertEquals(TITLE, fetchWavelet.getTitle());
+  }
+
+  private Gadget getFirstGadget(final Wavelet fetchWavelet, final String testGadget) {
+    final Collection<Element> elements = fetchWavelet.getRootBlip().getElements().values();
+    // BlipContentRefs e = fetchWavelet.getRootBlip().first(ElementType.GADGET);
+    for (final Element e : elements) {
+      if (e.isGadget() && e.getProperty(Gadget.URL).equals(testGadget)) {
+        return (Gadget) e;
+      }
+    }
+    return null;
   }
 
   @Test

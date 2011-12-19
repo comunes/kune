@@ -21,9 +21,9 @@ package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
 import cc.kune.core.client.sitebar.logo.SiteLogo;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.Widget;

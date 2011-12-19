@@ -22,6 +22,7 @@ package cc.kune.chat.client.actions;
 import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.state.Session;
@@ -31,7 +32,6 @@ import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

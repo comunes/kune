@@ -21,6 +21,7 @@ package cc.kune.hspace.client;
 
 import java.util.List;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.InboxUnreadUpdatedEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.Session;
@@ -29,7 +30,6 @@ import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHan
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.HomeStatsDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasText;

@@ -5,7 +5,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SitebarActions;
 
@@ -23,7 +23,7 @@ public class HelloWorldActions {
   }
 
   @Inject
-  public HelloWorldActions(final CoreResources coreResources, final SitebarActions sitebarActions,
+  public HelloWorldActions(final CommonResources res, final SitebarActions sitebarActions,
       final SiteUserOptions siteUserOptions) {
 
     // We can share the action if we don't want to create several (and for
@@ -32,14 +32,14 @@ public class HelloWorldActions {
 
     // An action in the sitebar
     final ButtonDescriptor siteBarBtn = new ButtonDescriptor(sharedAction);
-    siteBarBtn.withText("HWorld!").withIcon(coreResources.info());
+    siteBarBtn.withText("HWorld!").withIcon(res.info());
     siteBarBtn.setParent(sitebarActions.getLeftToolbar());
 
     // Other action in the sitebar options menu
 
     // An action in the user options menu
     final MenuItemDescriptor menuItem = new MenuItemDescriptor(sharedAction);
-    menuItem.withText("HWorld!").withIcon(coreResources.alert());
+    menuItem.withText("HWorld!").withIcon(res.alert());
     siteUserOptions.addAction(menuItem);
 
     // Another action in the SocialNet menu

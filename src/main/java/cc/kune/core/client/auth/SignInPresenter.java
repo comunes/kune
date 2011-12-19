@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client.auth;
 
+import cc.kune.common.client.events.ProgressHideEvent;
+import cc.kune.common.client.events.ProgressShowEvent;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.utils.OnAcceptCallback;
@@ -29,8 +31,6 @@ import cc.kune.core.client.auth.SignInPresenter.SignInView;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.notify.spiner.ProgressHideEvent;
-import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;

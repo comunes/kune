@@ -37,9 +37,6 @@ public interface CoreResources extends ClientBundle {
   @Source("add-green.png")
   ImageResource addGreen();
 
-  @Source("alert.png")
-  ImageResource alert();
-
   @Source("anybody.png")
   ImageResource anybody();
 
@@ -349,9 +346,6 @@ public interface CoreResources extends ClientBundle {
   @Source("emite-room.png")
   ImageResource emiteRoom();
 
-  @Source("error.png")
-  ImageResource error();
-
   @Source("everybody.png")
   ImageResource everybody();
 
@@ -376,23 +370,8 @@ public interface CoreResources extends ClientBundle {
   @Source("group-home.png")
   ImageResource groupHome();
 
-  @Source("important.png")
-  ImageResource important();
-
-  @Source("important-32.png")
-  ImageResource important32();
-
-  @Source("info.png")
-  ImageResource info();
-
   @Source("info-light.png")
   ImageResource infoLight();
-
-  @Source("kune-anim.gif")
-  ImageResource kuneAnim();
-
-  @Source("kune-anim-g.gif")
-  ImageResource kuneAnimG();
 
   @Source("kune-close.png")
   ImageResource kuneClose();

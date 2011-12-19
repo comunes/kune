@@ -22,7 +22,7 @@ package cc.kune.common.client.actions.gwtui;
 import cc.kune.common.client.actions.ui.AbstractComposedGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.HasRTL;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
 
@@ -30,7 +30,7 @@ public class GwtSimpleGuiItem extends AbstractComposedGuiItem {
 
   private final HorizontalPanel bar;
 
-  public GwtSimpleGuiItem(final GuiProvider provider, final I18nTranslationService i18n) {
+  public GwtSimpleGuiItem(final GuiProvider provider, final HasRTL i18n) {
     super(provider, i18n);
     bar = new HorizontalPanel();
     initWidget(bar);

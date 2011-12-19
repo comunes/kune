@@ -22,6 +22,7 @@ package cc.kune.gspace.client.options.tools;
 import java.util.Collection;
 import java.util.List;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.GroupChangedEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
@@ -30,7 +31,6 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.ToolSimpleDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.inject.Inject;

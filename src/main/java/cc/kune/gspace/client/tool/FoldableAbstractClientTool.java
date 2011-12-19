@@ -20,11 +20,11 @@
 package cc.kune.gspace.client.tool;
 
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.gwt.resources.client.ImageResource;

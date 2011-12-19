@@ -19,7 +19,7 @@
  */
 package cc.kune.wave.client;
 
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.wave.client.inboxcount.InboxCountPanel;
 import cc.kune.wave.client.inboxcount.InboxCountPresenter;
 import cc.kune.wave.client.inboxcount.InboxCountPresenter.InboxCountView;

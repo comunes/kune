@@ -25,6 +25,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
@@ -33,7 +34,6 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Group;
 

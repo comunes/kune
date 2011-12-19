@@ -22,9 +22,9 @@ package cc.kune.gspace.client.viewers;
 import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.resources.client.ImageResource;

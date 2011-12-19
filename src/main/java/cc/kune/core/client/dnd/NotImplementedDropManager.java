@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.dnd;
 
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.event.logical.shared.AttachEvent;

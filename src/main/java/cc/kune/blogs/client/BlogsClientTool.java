@@ -25,9 +25,9 @@ import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
 import static cc.kune.blogs.shared.BlogsConstants.TYPE_ROOT;
 import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.blogs.shared.BlogsConstants;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 

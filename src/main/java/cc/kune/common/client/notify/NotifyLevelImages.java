@@ -19,31 +19,31 @@
  */
 package cc.kune.common.client.notify;
 
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.common.client.resources.CommonResources;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 
 public class NotifyLevelImages {
 
-    private final CoreResources images;
+  private final CommonResources res;
 
-    @Inject
-    public NotifyLevelImages(final CoreResources images) {
-        this.images = images;
-    }
+  @Inject
+  public NotifyLevelImages(final CommonResources res) {
+    this.res = res;
+  }
 
-    public ImageResource getImage(final NotifyLevel level) {
-        switch (level) {
-        case info:
-            return images.info();
-        case important:
-            return images.important();
-        case veryImportant:
-            return images.alert();
-        case error:
-        default:
-            return images.error();
-        }
+  public ImageResource getImage(final NotifyLevel level) {
+    switch (level) {
+    case info:
+      return res.info();
+    case important:
+      return res.important();
+    case veryImportant:
+      return res.alert();
+    case error:
+    default:
+      return res.error();
     }
+  }
 }

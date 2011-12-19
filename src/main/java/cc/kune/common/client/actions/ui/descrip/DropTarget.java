@@ -17,23 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.resources;
+package cc.kune.common.client.actions.ui.descrip;
 
-import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Widget;
 
-@Deprecated
-public final class IconConstants {
+public interface DropTarget {
 
-    @Deprecated
-    public static final String CSS_SUFFIX = "k-icon-";
+  void init(Widget dropTarget);
 
-    private static final String PATH_PREFIX = "images/";
-
-    @Deprecated
-    public static String toPath(final ImageResource img) {
-        return PATH_PREFIX + img.getName() + ".png";
-    }
-
-    private IconConstants() {
-    }
 }

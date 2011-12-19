@@ -39,6 +39,7 @@ import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.AvatarChangedEvent;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.init.AppStartEvent;
@@ -52,7 +53,6 @@ import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.UserInfoDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;

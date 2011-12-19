@@ -20,6 +20,7 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.client.errors.NameNotPermittedException;
@@ -32,7 +33,6 @@ import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;

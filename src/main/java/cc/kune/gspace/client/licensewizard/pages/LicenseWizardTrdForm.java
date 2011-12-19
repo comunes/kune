@@ -19,11 +19,12 @@
  */
 package cc.kune.gspace.client.licensewizard.pages;
 
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.utils.SimpleCallback;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.ui.DefaultForm;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.event.BaseEvent;
@@ -56,7 +57,8 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
   private Radio permitModSaRadio;
 
   @Inject
-  public LicenseWizardTrdForm(final I18nTranslationService i18n, final CoreResources res) {
+  public LicenseWizardTrdForm(final I18nTranslationService i18n, final CoreResources res,
+      final CommonResources commonRes) {
     super.setFrame(true);
     super.setPadding(10);
     super.setAutoHeight(true);
@@ -77,7 +79,7 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
     createRadios(i18n, commercialfieldSet, modificationsfieldSet);
     createRadioListeners();
 
-    info = new LicenseWizardFlags(res, i18n);
+    info = new LicenseWizardFlags(res, commonRes, i18n);
 
     add(intro);
     add(commercialfieldSet);

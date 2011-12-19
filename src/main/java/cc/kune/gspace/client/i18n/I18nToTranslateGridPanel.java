@@ -19,8 +19,8 @@
  */
 package cc.kune.gspace.client.i18n;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.IsWidget;

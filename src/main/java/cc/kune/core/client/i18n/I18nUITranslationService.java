@@ -34,12 +34,12 @@ import cc.kune.common.client.utils.Pair;
 import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;

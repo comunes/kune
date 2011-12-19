@@ -21,8 +21,8 @@ package cc.kune.chat.client;
 
 import cc.kune.common.client.ui.AbstractDecorator;
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.avatar.AvatarDecorator;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emite.core.client.events.StateChangedEvent;
 import com.calclab.emite.core.client.events.StateChangedHandler;

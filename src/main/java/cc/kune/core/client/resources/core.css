@@ -9,9 +9,9 @@
   margin-top: 2px;
 }
 
-@sprite div .k-icon-info {
-  gwt-image: "info";
-}
+/* @sprite div .k-icon-info { */
+/*   gwt-image: "info"; */
+/* } */
 
 @sprite div .k-icon-language {
   gwt-image: "language";

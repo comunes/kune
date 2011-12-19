@@ -20,8 +20,8 @@
 package cc.kune.chat.client;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.services.FileDownloadUtils;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
 import com.google.gwt.event.dom.client.ClickEvent;

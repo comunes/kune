@@ -20,6 +20,7 @@
 package cc.kune.core.client.sn.actions.registry;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.sn.actions.AcceptJoinGroupAction;
 import cc.kune.core.client.sn.actions.ChangeToAdminAction;
 import cc.kune.core.client.sn.actions.ChangeToCollabAction;
@@ -37,7 +38,6 @@ import cc.kune.core.client.sn.actions.conditions.IsMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsNotMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

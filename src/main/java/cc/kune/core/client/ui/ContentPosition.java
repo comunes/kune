@@ -21,7 +21,7 @@ package cc.kune.core.client.ui;
 
 import org.cobogw.gwt.user.client.CSS;
 
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;

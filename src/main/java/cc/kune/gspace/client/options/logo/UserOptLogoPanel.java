@@ -19,9 +19,9 @@
  */
 package cc.kune.gspace.client.options.logo;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.FileConstants;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;

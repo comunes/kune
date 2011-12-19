@@ -25,11 +25,10 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.bind.GuiBinding;
+import cc.kune.common.client.actions.ui.descrip.DropTarget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.utils.TextUtils;
-import cc.kune.core.client.dnd.DropTarget;
-import cc.kune.core.client.resources.IconConstants;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
@@ -154,7 +153,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   protected abstract void setIconBackground(String backgroundColor);
 
   public void setIconResource(final ImageResource icon) {
-    setIconStyle((IconConstants.CSS_SUFFIX + icon.getName()));
+    setIconStyle(("k-icon-" + icon.getName()));
   }
 
   protected abstract void setIconStyle(String style);

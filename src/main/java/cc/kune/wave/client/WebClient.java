@@ -69,12 +69,12 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenMatcher;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.wave.client.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.GWT;
@@ -248,6 +248,7 @@ public class WebClient extends  Composite implements WaveClientView {
   @UiField
   SplitLayoutPanel splitPanel;
 
+
   @UiField
   Style style;
 
@@ -260,7 +261,6 @@ public class WebClient extends  Composite implements WaveClientView {
   FramedPanel waveFrame;
 
   ImplPanel waveHolder;
-
   private final WaveStore waveStore = new SimpleWaveStore();
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
@@ -272,7 +272,6 @@ public class WebClient extends  Composite implements WaveClientView {
    */
   @Inject
   public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session session, final I18nTranslationService i18n) {
-    // Window.alert("webclient! " + new Date());
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
@@ -315,6 +314,8 @@ public class WebClient extends  Composite implements WaveClientView {
 
     setupUi();
 
+    //WaveClientUtils.addListener(stateManager, wave, waveHolder, waveFrame);
+
     if (tokenMatcher.isWaveToken(History.getToken())) {
       History.fireCurrentHistoryState();
     }
@@ -323,14 +324,8 @@ public class WebClient extends  Composite implements WaveClientView {
 
   @Override
   public void clear() {
-    // Duplicate below
-  if (wave != null) {
-    wave.destroy();
-    wave = null;
-  }
-  if (waveHolder.isAttached()) {
-    waveHolder.removeFromParent();
-  }
+  WaveClientUtils.clear(wave, waveHolder, waveFrame);
+  waveFrame.clear();
 }
 
   private void createWebSocket() {
@@ -416,15 +411,7 @@ public class WebClient extends  Composite implements WaveClientView {
     LOG.info("WebClient.openWave()");
 
     WaveClientClearEvent.fire(eventBus);
-    if (wave != null) {
-      wave.destroy();
-      wave = null;
-    }
-    if (waveHolder.isAttached()) {
-      waveHolder.removeFromParent();
-    }
-      waveFrame.remove(waveHolder);
-      waveFrame.clear();
+    clear();
     waveFrame.add(waveHolder);
 
     // Release the display:none.

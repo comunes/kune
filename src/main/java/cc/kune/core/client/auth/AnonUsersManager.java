@@ -19,13 +19,13 @@
  */
 package cc.kune.core.client.auth;
 
+import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.UserSignInEvent;

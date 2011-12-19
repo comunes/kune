@@ -20,8 +20,8 @@
 package cc.kune.chat.client.actions;
 
 import cc.kune.chat.client.ChatClient;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

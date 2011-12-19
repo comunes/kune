@@ -172,6 +172,13 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
   }
 
   @Override
+  public void setGadgetProperty(final WaveRef waveletName, final String author, final URL gadgetUrl,
+      final String someProperty, final String someValue) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
   public void setTitle(final WaveRef waveName, final String title, final String author) {
     // TODO Auto-generated method stub
 

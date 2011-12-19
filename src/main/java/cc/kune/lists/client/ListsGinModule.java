@@ -19,7 +19,7 @@
  */
 package cc.kune.lists.client;
 
-import cc.kune.common.client.ExtendedGinModule;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.lists.client.actions.ListsClientActions;
 import cc.kune.lists.client.actions.ListsNewMenu;
 import cc.kune.lists.client.actions.OptionsListMenu;

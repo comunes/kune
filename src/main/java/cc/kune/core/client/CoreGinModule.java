@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client;
 
-import cc.kune.common.client.ExtendedGinModule;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
@@ -28,6 +27,8 @@ import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
+import cc.kune.common.shared.i18n.HasRTL;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.actions.xml.XMLActionsParser;
 import cc.kune.core.client.auth.AnonUsersManager;
@@ -110,7 +111,6 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
 
@@ -138,6 +138,7 @@ public class CoreGinModule extends ExtendedGinModule {
     bind(RootPresenter.class).asEagerSingleton();
     bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
     s(I18nUITranslationService.class);
+    bind(HasRTL.class).to(I18nUITranslationService.class);
     bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
     bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
     s(AnonUsersManager.class);
@@ -191,6 +192,8 @@ public class CoreGinModule extends ExtendedGinModule {
 
     // UI
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
+
+    // FIXME: revise this!
     s(GxtGuiProvider.class);
     // s(GwtGuiProvider.class);
 

@@ -23,15 +23,36 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
-public interface CommonIconResources extends ClientBundle {
+public interface CommonResources extends ClientBundle {
 
-  public static final CommonIconResources INSTANCE = GWT.create(CommonIconResources.class);
+  public static final CommonResources INSTANCE = GWT.create(CommonResources.class);
+
+  @Source("alert.png")
+  ImageResource alert();
 
   @Source("checked.png")
   ImageResource checked();
 
   @Source("clear.png")
   ImageResource clear();
+
+  @Source("error.png")
+  ImageResource error();
+
+  @Source("important.png")
+  ImageResource important();
+
+  @Source("important-32.png")
+  ImageResource important32();
+
+  @Source("info.png")
+  ImageResource info();
+
+  @Source("kune-anim.gif")
+  ImageResource kuneAnim();
+
+  @Source("kune-anim-g.gif")
+  ImageResource kuneAnimG();
 
   @Source("kune-close.png")
   ImageResource kuneClose();

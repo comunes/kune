@@ -27,13 +27,13 @@ import static cc.kune.gallery.shared.GalleryConstants.TYPE_UPLOADEDFILE;
 
 import java.util.Arrays;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.server.AbstractServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Container;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;

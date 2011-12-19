@@ -19,9 +19,9 @@
  */
 package cc.kune.wiki.client.actions;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.actions.GoParentContainerBtn;
 import cc.kune.wiki.shared.WikiConstants;
 

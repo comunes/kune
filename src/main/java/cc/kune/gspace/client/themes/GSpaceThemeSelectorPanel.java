@@ -22,7 +22,7 @@ package cc.kune.gspace.client.themes;
 import cc.kune.common.client.actions.ui.ActionExtensibleView;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
-import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 

@@ -24,9 +24,9 @@ import static cc.kune.lists.shared.ListsConstants.ROOT_NAME;
 import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
 import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 

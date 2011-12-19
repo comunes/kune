@@ -19,9 +19,9 @@
  \*/
 package cc.kune.core.client.auth;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.DefaultForm;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
