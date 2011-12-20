@@ -5,6 +5,9 @@ import java.util.Date;
 import javax.annotation.Nonnull;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.client.utils.SimpleResponseCallback;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerView;
 import cc.kune.gspace.client.viewers.FolderViewerUtils;
@@ -19,14 +22,21 @@ import com.bradrydzewski.gwt.calendar.client.event.HasDeleteHandlers;
 import com.bradrydzewski.gwt.calendar.client.event.HasMouseOverHandlers;
 import com.bradrydzewski.gwt.calendar.client.event.HasTimeBlockClickHandlers;
 import com.bradrydzewski.gwt.calendar.client.event.HasUpdateHandlers;
+import com.bradrydzewski.gwt.calendar.client.event.MouseOverEvent;
+import com.bradrydzewski.gwt.calendar.client.event.MouseOverHandler;
 import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickEvent;
 import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler;
+import com.bradrydzewski.gwt.calendar.client.event.UpdateEvent;
+import com.bradrydzewski.gwt.calendar.client.event.UpdateHandler;
 import com.google.gwt.event.logical.shared.HasOpenHandlers;
 import com.google.gwt.event.logical.shared.HasSelectionHandlers;
+import com.google.gwt.event.logical.shared.OpenEvent;
+import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
@@ -67,12 +77,15 @@ public class CalendarViewerPresenter extends
   private CalendarViews currentCalView;
   private int currentDaysView = 7;
   private final FolderViewerUtils folderViewerUtils;
+  private final I18nTranslationService i18n;
 
   @Inject
   public CalendarViewerPresenter(final EventBus eventBus, final CalendarViewerView view,
-      final CalendarViewerProxy proxy, final FolderViewerUtils folderViewerUtils) {
+      final CalendarViewerProxy proxy, final FolderViewerUtils folderViewerUtils,
+      final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
     this.folderViewerUtils = folderViewerUtils;
+    this.i18n = i18n;
     addListeners();
     setViewImpl(DEF_VIEW, currentDaysView);
   }
@@ -81,13 +94,47 @@ public class CalendarViewerPresenter extends
     getView().addTimeBlockClickHandler(new TimeBlockClickHandler<Date>() {
       @Override
       public void onTimeBlockClick(final TimeBlockClickEvent<Date> event) {
-        getView().addAppointment("Only a test", event.getTarget());
-        NotifyUser.info("Appointment added but not yet saved (this is under development)");
+        NotifyUser.askConfirmation(i18n.t("Confirm, please"), i18n.t("Add a new appointment?"),
+            new SimpleResponseCallback() {
+              @Override
+              public void onCancel() {
+                // do nothing
+              }
+
+              @Override
+              public void onSuccess() {
+                getView().addAppointment("Only a test", event.getTarget());
+                NotifyUser.info("Appointment added but not yet saved (this is under development)");
+              }
+            });
+      }
+    });
+    getView().addMouseOverHandler(new MouseOverHandler<Appointment>() {
+      @Override
+      public void onMouseOver(final MouseOverEvent<Appointment> event) {
+        Tooltip.to((Widget) event.getSource(), "kk");
+        // final Tooltip tooltip = new Tooltip();
+        // tooltip.setText("lalala");
+        // tooltip.setPopupPosition(, currentDaysView)
+        // tooltip.showRelativeTo((UIObject) event.getElement());
+      }
+    });
+    getView().addUpdateHandler(new UpdateHandler<Appointment>() {
+      @Override
+      public void onUpdate(final UpdateEvent<Appointment> event) {
+        NotifyUser.info("updated handler");
+      }
+    });
+    getView().addOpenHandler(new OpenHandler<Appointment>() {
+      @Override
+      public void onOpen(final OpenEvent<Appointment> event) {
+        NotifyUser.info("open handler");
       }
     });
     getView().addSelectionHandler(new SelectionHandler<Appointment>() {
       @Override
       public void onSelection(final SelectionEvent<Appointment> event) {
+        NotifyUser.info("on selection");
         // getView().removeAppointment(event.getSelectedItem());
       }
     });
