@@ -19,10 +19,10 @@
  */
 package cc.kune.gspace.client.i18n;
 
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialog;
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialog;
+import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView;
@@ -41,7 +41,7 @@ public class I18nTranslatorPresenter extends
   }
 
   public interface I18nTranslatorView extends
-      cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView {
+      cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView {
 
     void init();
 

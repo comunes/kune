@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client.options;
 
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialog;
+import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialog;
 
 import com.google.gwt.user.client.ui.IsWidget;
 

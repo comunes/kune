@@ -20,10 +20,10 @@
 package cc.kune.gspace.client.i18n;
 
 import cc.kune.common.client.notify.NotifyLevelImages;
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView;
 

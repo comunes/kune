@@ -9,7 +9,7 @@
   <!-- Specify the paths for translatable code -->
   <source path="shared"/>
   <source path='client'
-  excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
+    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
   <public path="public"/>
   <inherits name='org.cobogw.gwt.user.User'/>
   <inherits name='com.google.gwt.inject.Inject'/>

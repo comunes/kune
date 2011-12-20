@@ -23,11 +23,11 @@ import cc.kune.common.client.actions.gxtui.AbstractGxtMenuGui;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.GSpaceArmor;
 
@@ -74,10 +74,11 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
     super.clear();
   }
 
-  public BasicThumb createThumb(final String text, final Object icon, final String tooltip,
+  public BasicDragableThumb createThumb(final String text, final Object icon, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menuitems,
       final DoubleClickHandler doubleClickHandler) {
-    final BasicThumb thumb = new BasicThumb(icon, ICONSIZE, text, ICONLABELMAXSIZE, false);
+    final BasicDragableThumb thumb = new BasicDragableThumb(icon, ICONSIZE, text, ICONLABELMAXSIZE,
+        false);
     final MenuDescriptor menu = new MenuDescriptor();
     menu.setStandalone(true);
     menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);

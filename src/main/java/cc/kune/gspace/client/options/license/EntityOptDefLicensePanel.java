@@ -22,9 +22,9 @@ package cc.kune.gspace.client.options.license;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.KuneWindowUtils;
-import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.gspace.client.options.EntityOptionsView;
 

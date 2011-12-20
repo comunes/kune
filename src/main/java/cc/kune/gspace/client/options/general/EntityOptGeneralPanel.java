@@ -21,8 +21,8 @@ package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.MaskWidget;
-import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.client.ui.DefaultForm;
+import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
 import com.extjs.gxt.ui.client.event.BaseEvent;

@@ -22,13 +22,13 @@ package cc.kune.core.client.sn;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
-import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNView;
+import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.gspace.client.GSpaceArmor;
@@ -76,7 +76,8 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   @Override
   public void addBuddie(final UserSimpleDTO user, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
-    final BasicThumb thumb = createThumb(user.getShortName(), avatarUrl, tooltip, tooltipTitle, menu);
+    final BasicDragableThumb thumb = createThumb(user.getShortName(), avatarUrl, tooltip, tooltipTitle,
+        menu);
     firstCategoryFlow.add((Widget) decorateAvatarWithXmppStatus(user.getShortName(), thumb));
   }
 

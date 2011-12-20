@@ -28,11 +28,11 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
-import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.dnd.NotImplementedDropManager;
+import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
@@ -133,9 +133,10 @@ public class AbstractSNPanel extends ViewImpl {
     actions.clear();
   }
 
-  public BasicThumb createThumb(final String text, final String avatarUrl, final String tooltip,
+  public BasicDragableThumb createThumb(final String text, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menuitems) {
-    final BasicThumb thumb = new BasicThumb(avatarUrl, AVATARSIZE, text, AVATARLABELMAXSIZE, false);
+    final BasicDragableThumb thumb = new BasicDragableThumb(avatarUrl, AVATARSIZE, text,
+        AVATARLABELMAXSIZE, false);
 
     final ClickHandler clickHand = new ClickHandler() {
       MenuDescriptor menu;
@@ -163,7 +164,8 @@ public class AbstractSNPanel extends ViewImpl {
     return thumb;
   }
 
-  public SmallAvatarDecorator decorateAvatarWithXmppStatus(final String shortname, final BasicThumb thumb) {
+  public SmallAvatarDecorator decorateAvatarWithXmppStatus(final String shortname,
+      final BasicDragableThumb thumb) {
     final SmallAvatarDecorator decorator = avatarDecoratorProv.get();
     decorator.setWidget(thumb);
     decorator.setItem(shortname);

@@ -24,11 +24,11 @@ import gwtupload.client.IUploader.OnChangeUploaderHandler;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
 import cc.kune.common.client.ui.IconLabel;
-import cc.kune.common.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.gspace.client.options.EntityOptionsView;
 

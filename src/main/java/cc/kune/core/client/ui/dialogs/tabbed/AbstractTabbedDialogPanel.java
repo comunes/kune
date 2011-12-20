@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.ui.dialogs.tabbed;
+package cc.kune.core.client.ui.dialogs.tabbed;
 
 import cc.kune.common.client.ProvidersCollection;
 import cc.kune.common.client.notify.NotifyLevel;
@@ -25,7 +25,7 @@ import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
-import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
+import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;

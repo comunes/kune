@@ -27,6 +27,7 @@ public class PromptTopDialog extends BasicTopDialog {
   public static class Builder extends BasicTopDialog.Builder {
 
     private boolean allowBlank = false;
+    private int fieldWidth;
     private int maxLength = 0;
     private String maxLengthText;
     private int minLength = 0;
@@ -51,6 +52,11 @@ public class PromptTopDialog extends BasicTopDialog {
     public PromptTopDialog build() {
       final PromptTopDialog dialog = new PromptTopDialog(this);
       return dialog;
+    }
+
+    public Builder fieldWidth(final int fieldWidth) {
+      this.fieldWidth = fieldWidth;
+      return this;
     }
 
     public Builder maxLength(final int maxLength) {
@@ -114,6 +120,7 @@ public class PromptTopDialog extends BasicTopDialog {
     if (builder.maxLength != 0) {
       textField.setMaxLength(builder.maxLength);
     }
+    textField.setWidth(builder.fieldWidth);
     textField.setAllowBlank(builder.allowBlank);
     super.getInnerPanel().add(textField);
   }

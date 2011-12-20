@@ -17,10 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.i18n;
+package cc.kune.common.shared.i18n;
 
 import cc.kune.common.client.utils.TextUtils;
-import cc.kune.common.shared.i18n.I18nTranslationService;
 
 public class I18nTranslationServiceMocked extends I18nTranslationService {
   @Override

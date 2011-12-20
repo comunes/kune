@@ -23,7 +23,6 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.utils.TextUtils;
 
-import com.allen_sauer.gwt.dnd.client.HasDragHandle;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
@@ -37,12 +36,11 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * BasicThumb.java
  */
-public class BasicThumb extends Composite implements HasDragHandle {
+public class BasicThumb extends Composite {
   private static final int NOSIZE = -1;
   private final Image image;
   private Tooltip imageTooltip;
@@ -150,8 +148,7 @@ public class BasicThumb extends Composite implements HasDragHandle {
     panel.addDomHandler(clickHandler, DoubleClickEvent.getType());
   }
 
-  @Override
-  public Widget getDragHandle() {
+  public Image getImage() {
     return image;
   }
 
