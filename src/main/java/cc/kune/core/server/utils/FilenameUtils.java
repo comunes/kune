@@ -21,22 +21,31 @@ package cc.kune.core.server.utils;
 
 import org.apache.commons.lang.StringUtils;
 
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.errors.NameNotPermittedException;
 
 public class FilenameUtils {
 
-    /**
-     * Check filename is not empty, or '.', or '..'
-     * 
-     * @param filename
-     */
-    public static void checkBasicFilename(final String filename) {
-        if (filename == null || filename.length() == 0 || filename.equals(".") || filename.equals("..")) {
-            throw new NameNotPermittedException();
-        }
+  /**
+   * Check filename is not empty, or '.', or '..'
+   * 
+   * @param filename
+   */
+  public static void checkBasicFilename(final String filename) {
+    if (TextUtils.empty(StringUtils.trimToEmpty(filename)) || filename.equals(".")
+        || filename.equals("..")) {
+      throw new NameNotPermittedException();
     }
+  }
 
-    public static String chomp(final String filename) {
-        return StringUtils.chomp(filename);
-    }
+  /**
+   * Chomp the filename using {@link StringUtils.chomp}
+   * 
+   * @param filename
+   *          the filename
+   * @return the filename chomped
+   */
+  public static String chomp(final String filename) {
+    return StringUtils.chomp(filename);
+  }
 }
