@@ -98,6 +98,10 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
     return (Boolean) super.getValue(MENU_STANDALONE);
   }
 
+  public void setMenuPosition(final Position position) {
+    putValue(MENU_SHOW_NEAR_TO, position);
+  }
+
   public void setRightIcon(final ImageResource icon) {
     putValue(MENU_RIGHTICON, icon);
   }
@@ -118,6 +122,13 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
   }
 
   /**
+   * Show the menu (remember to set the menu position before)
+   */
+  public void show() {
+    putValue(MENU_SHOW, !((Boolean) getValue(MENU_SHOW)));
+  }
+
+  /**
    * Show the menu near the Element object specified
    * 
    * @param object
@@ -125,7 +136,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
    */
   public void show(final Object object) {
     putValue(MENU_SHOW_NEAR_TO, object);
-    putValue(MENU_SHOW, !((Boolean) getValue(MENU_SHOW)));
+    show();
   }
 
   /**
@@ -135,8 +146,8 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
    *          the position to show menu near of it
    */
   public void show(final Position position) {
-    putValue(MENU_SHOW_NEAR_TO, position);
-    putValue(MENU_SHOW, !((Boolean) getValue(MENU_SHOW)));
+    setMenuPosition(position);
+    show();
   }
 
   /**
@@ -147,6 +158,6 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
    */
   public void show(final String id) {
     putValue(MENU_SHOW_NEAR_TO, id);
-    putValue(MENU_SHOW, !((Boolean) getValue(MENU_SHOW)));
+    show();
   }
 }

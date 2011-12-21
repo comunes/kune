@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.Position;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.events.client.actions.CalendarOnOverMenu;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerView;
@@ -37,6 +38,7 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
@@ -108,19 +110,24 @@ public class CalendarViewerPresenter extends
         appToEdit = NO_APPOINT;
         onOverDate = event.getTarget();
         updateMenuItems();
+        showMenu();
       }
     });
     getView().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        onOverMenu.get().show(new Position(event.getClientX(), event.getClientY()));
+        setMenuPosition(event.getClientX(), event.getClientY());
       }
+
     });
     getView().addMouseOverHandler(new MouseOverHandler<Appointment>() {
       @Override
       public void onMouseOver(final MouseOverEvent<Appointment> event) {
         NotifyUser.info("on mouse over");
-        // Tooltip.to((Widget) event.getSource(), "kk");
+        // final Element element = (Element) event.getElement();
+        // showMenu(element.getAbsoluteLeft() + 10, element.getAbsoluteTop() +
+        // 10);
+        Tooltip.to((Widget) event.getElement(), "kk");
         // final Tooltip tooltip = new Tooltip();
         // tooltip.setText("lalala");
         // tooltip.setPopupPosition(, currentDaysView)
@@ -146,6 +153,7 @@ public class CalendarViewerPresenter extends
         onOverDate = event.getSelectedItem().getStart();
         NotifyUser.info("on selection");
         updateMenuItems();
+        showMenu();
         // getView().removeAppointment(event.getSelectedItem());
       }
     });
@@ -220,6 +228,10 @@ public class CalendarViewerPresenter extends
     getView().setDate(date);
   }
 
+  private void setMenuPosition(final int x, final int y) {
+    onOverMenu.get().setMenuPosition(new Position(x, y));
+  }
+
   @Override
   public void setView(final CalendarViews calView) {
     setViewImpl(calView);
@@ -240,6 +252,10 @@ public class CalendarViewerPresenter extends
     this.currentCalView = calView;
     this.currentDaysView = days;
     getView().setView(calView, days);
+  }
+
+  private void showMenu() {
+    onOverMenu.get().show();
   }
 
   private void updateMenuItems() {
