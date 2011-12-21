@@ -37,7 +37,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * A form used for editing contacts.
+ * A form used for editing translations.
  */
 public class I18nTranslatorForm extends Composite {
 
@@ -167,7 +167,6 @@ public class I18nTranslatorForm extends Composite {
     toTranslate.setText("");
     translation.setText("");
     noteForTranslators.setVisible(false);
-
   }
 
   private void updateWithTimer() {

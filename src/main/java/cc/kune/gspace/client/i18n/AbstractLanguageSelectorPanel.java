@@ -112,6 +112,7 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
 
   private void createLangCombo(final boolean withEnglish) {
     // Field.setMsgTarget("side");
+    // NOTE: The Combo box in modal popups fails!
     langCombo = new ComboBox<LanguageData>();
     langCombo.setName(LANG_FIELD);
     langCombo.setMinChars(1);

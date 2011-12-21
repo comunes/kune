@@ -17,6 +17,7 @@ package cc.kune.gspace.client.i18n;
 
 import java.util.List;
 
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
@@ -70,6 +71,7 @@ public class I18nTranslationDataProvider {
   }
 
   public void setLanguage(final I18nLanguageSimpleDTO language, final boolean toTranslate) {
+    NotifyUser.showProgressLoading();
     dataProvider.getList().clear();
     dataProvider.refresh();
     i18n.getTranslatedLexicon(session.getUserHash(), language.getCode(), toTranslate,

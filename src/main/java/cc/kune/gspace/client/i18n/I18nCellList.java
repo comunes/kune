@@ -17,6 +17,7 @@
  */
 package cc.kune.gspace.client.i18n;
 
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
@@ -174,6 +175,7 @@ public class I18nCellList extends Composite {
       @Override
       public void onCallback() {
         translatorForm.focusToTranslate();
+        NotifyUser.hideProgress();
       }
     });
 

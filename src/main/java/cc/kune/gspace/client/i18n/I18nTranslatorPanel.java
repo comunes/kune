@@ -47,7 +47,8 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
       final LanguageSelectorWithoutEnglishPanel lanSelectorPanel,
       final I18nToTranslateGridPanel toTranslateGrid, final I18nTranslatedGridPanel translatedGrid,
       final I18nTranslateRecomendPanel transRecommend, final CoreResources res) {
-    super(TRANSLATOR_PANEL_ID, "", true, false, images, TRANSLATOR_ERROR_ID, i18n.t("Close"), null,
+    // Warning: Modal = true == you cannot select languages with mouse
+    super(TRANSLATOR_PANEL_ID, "", false, false, images, TRANSLATOR_ERROR_ID, i18n.t("Close"), null,
         null, null, transGroup, i18n.getDirection());
     setIcon(res.language());
     this.lanSelectorPanel = lanSelectorPanel;
