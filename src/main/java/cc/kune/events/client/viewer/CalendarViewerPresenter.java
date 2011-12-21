@@ -4,11 +4,10 @@ import java.util.Date;
 
 import javax.annotation.Nonnull;
 
+import cc.kune.common.client.actions.ui.descrip.Position;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.tooltip.Tooltip;
-import cc.kune.common.client.utils.SimpleResponseCallback;
-import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.shared.dto.HasContent;
+import cc.kune.events.client.actions.CalendarOnOverMenu;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerView;
 import cc.kune.gspace.client.viewers.FolderViewerUtils;
 
@@ -28,6 +27,8 @@ import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickEvent;
 import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler;
 import com.bradrydzewski.gwt.calendar.client.event.UpdateEvent;
 import com.bradrydzewski.gwt.calendar.client.event.UpdateHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.HasOpenHandlers;
 import com.google.gwt.event.logical.shared.HasSelectionHandlers;
 import com.google.gwt.event.logical.shared.OpenEvent;
@@ -36,7 +37,6 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
@@ -59,6 +59,8 @@ public class CalendarViewerPresenter extends
 
     void addAppointment(String title, Date date);
 
+    HandlerRegistration addClickHandler(ClickHandler clickHandler);
+
     HandlerRegistration addCreateHandler(CreateHandler<Appointment> handler);
 
     Date getDate();
@@ -74,45 +76,51 @@ public class CalendarViewerPresenter extends
   }
 
   private static final CalendarViews DEF_VIEW = CalendarViews.DAY;
+  public Appointment appToEdit = NO_APPOINT;
+
   private CalendarViews currentCalView;
   private int currentDaysView = 7;
   private final FolderViewerUtils folderViewerUtils;
-  private final I18nTranslationService i18n;
+  private Date onOverDate;
+  private final CalendarOnOverMenu onOverMenu;
 
   @Inject
   public CalendarViewerPresenter(final EventBus eventBus, final CalendarViewerView view,
       final CalendarViewerProxy proxy, final FolderViewerUtils folderViewerUtils,
-      final I18nTranslationService i18n) {
+      final CalendarOnOverMenu onOverMenu) {
     super(eventBus, view, proxy);
     this.folderViewerUtils = folderViewerUtils;
-    this.i18n = i18n;
+    this.onOverMenu = onOverMenu;
     addListeners();
     setViewImpl(DEF_VIEW, currentDaysView);
+  }
+
+  @Override
+  public void addAppointment(final String description, final Date onDate) {
+    getView().addAppointment(description, onDate);
   }
 
   private void addListeners() {
     getView().addTimeBlockClickHandler(new TimeBlockClickHandler<Date>() {
       @Override
       public void onTimeBlockClick(final TimeBlockClickEvent<Date> event) {
-        NotifyUser.askConfirmation(i18n.t("Confirm, please"), i18n.t("Add a new appointment?"),
-            new SimpleResponseCallback() {
-              @Override
-              public void onCancel() {
-                // do nothing
-              }
-
-              @Override
-              public void onSuccess() {
-                getView().addAppointment("Only a test", event.getTarget());
-                NotifyUser.info("Appointment added but not yet saved (this is under development)");
-              }
-            });
+        NotifyUser.info("on time block");
+        appToEdit = NO_APPOINT;
+        onOverDate = event.getTarget();
+        updateMenuItems();
+      }
+    });
+    getView().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        onOverMenu.get().show(new Position(event.getClientX(), event.getClientY()));
       }
     });
     getView().addMouseOverHandler(new MouseOverHandler<Appointment>() {
       @Override
       public void onMouseOver(final MouseOverEvent<Appointment> event) {
-        Tooltip.to((Widget) event.getSource(), "kk");
+        NotifyUser.info("on mouse over");
+        // Tooltip.to((Widget) event.getSource(), "kk");
         // final Tooltip tooltip = new Tooltip();
         // tooltip.setText("lalala");
         // tooltip.setPopupPosition(, currentDaysView)
@@ -134,7 +142,10 @@ public class CalendarViewerPresenter extends
     getView().addSelectionHandler(new SelectionHandler<Appointment>() {
       @Override
       public void onSelection(final SelectionEvent<Appointment> event) {
+        appToEdit = event.getSelectedItem();
+        onOverDate = event.getSelectedItem().getStart();
         NotifyUser.info("on selection");
+        updateMenuItems();
         // getView().removeAppointment(event.getSelectedItem());
       }
     });
@@ -156,8 +167,18 @@ public class CalendarViewerPresenter extends
   }
 
   @Override
+  public Appointment getAppToEdit() {
+    return appToEdit;
+  }
+
+  @Override
   public Date getDate() {
     return getView().getDate();
+  }
+
+  @Override
+  public Date getOnOverDate() {
+    return onOverDate;
   }
 
   @Override
@@ -219,5 +240,9 @@ public class CalendarViewerPresenter extends
     this.currentCalView = calView;
     this.currentDaysView = days;
     getView().setView(calView, days);
+  }
+
+  private void updateMenuItems() {
+    CalendarStateChangeEvent.fire(getEventBus());
   }
 }

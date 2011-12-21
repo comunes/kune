@@ -125,6 +125,10 @@ public class PromptTopDialog extends BasicTopDialog {
     super.getInnerPanel().add(textField);
   }
 
+  public void clearTextFieldValue() {
+    textField.reset();
+  }
+
   public void focusOnTextBox() {
     textField.focus();
   }

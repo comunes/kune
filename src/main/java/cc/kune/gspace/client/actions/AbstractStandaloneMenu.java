@@ -19,18 +19,15 @@
  */
 package cc.kune.gspace.client.actions;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.AccessRightsClientManager;
 
 import com.google.inject.Inject;
 
-public class AbstractNewMenu extends AbstractEditorsMenu {
+public class AbstractStandaloneMenu extends AbstractEditorsMenu {
 
   @Inject
-  public AbstractNewMenu(final CoreResources res, final I18nTranslationService i18n,
-      final AccessRightsClientManager rightsManager) {
+  public AbstractStandaloneMenu(final AccessRightsClientManager rightsManager) {
     super(rightsManager);
-    withText(i18n.t("More")).withIcon(res.addGreen());
+    setStandalone(true);
   }
 }

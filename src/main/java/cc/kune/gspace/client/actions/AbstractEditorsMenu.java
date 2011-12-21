@@ -19,18 +19,21 @@
  */
 package cc.kune.gspace.client.actions;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.core.client.state.AccessRightsChangedEvent;
+import cc.kune.core.client.state.AccessRightsChangedEvent.AccessRightsChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
 
-import com.google.inject.Inject;
+public class AbstractEditorsMenu extends MenuDescriptor {
 
-public class AbstractNewMenu extends AbstractEditorsMenu {
-
-  @Inject
-  public AbstractNewMenu(final CoreResources res, final I18nTranslationService i18n,
-      final AccessRightsClientManager rightsManager) {
-    super(rightsManager);
-    withText(i18n.t("More")).withIcon(res.addGreen());
+  public AbstractEditorsMenu(final AccessRightsClientManager rightsManager) {
+    super();
+    this.withStyles("k-button, k-btn, k-5corners, k-def-docbtn, k-fl");
+    rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
+      @Override
+      public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
+        AbstractEditorsMenu.this.setVisible(event.getCurrentRights().isEditable());
+      }
+    });
   }
 }

@@ -19,18 +19,27 @@
  */
 package cc.kune.gspace.client.actions;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 
-import com.google.inject.Inject;
+import com.google.inject.Provider;
 
-public class AbstractNewMenu extends AbstractEditorsMenu {
+/**
+ * The Class StandAloneMenuProvider is a way to create a kind of singletons for
+ * menu entries. This can be register in a list of Providers<GuiDescriptor> but
+ * in fact only references one item and can be used to select the parent of some
+ * menu items
+ */
+public abstract class StandaloneMenuProvider implements Provider<MenuDescriptor> {
 
-  @Inject
-  public AbstractNewMenu(final CoreResources res, final I18nTranslationService i18n,
-      final AccessRightsClientManager rightsManager) {
-    super(rightsManager);
-    withText(i18n.t("More")).withIcon(res.addGreen());
+  private final AbstractStandaloneMenu menu;
+
+  public StandaloneMenuProvider(final AbstractStandaloneMenu menu) {
+    this.menu = menu;
   }
+
+  @Override
+  public MenuDescriptor get() {
+    return menu;
+  }
+
 }

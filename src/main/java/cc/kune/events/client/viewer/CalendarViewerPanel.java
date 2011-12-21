@@ -24,12 +24,14 @@ import com.bradrydzewski.gwt.calendar.client.event.DeleteHandler;
 import com.bradrydzewski.gwt.calendar.client.event.MouseOverHandler;
 import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler;
 import com.bradrydzewski.gwt.calendar.client.event.UpdateHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Event;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -47,6 +49,9 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     // calendar.setWidth("auto");
     // calendar.setHeight("auto");
     widget = calendar;
+    calendar.sinkEvents(Event.ONMOUSEDOWN | Event.ONDBLCLICK | Event.KEYEVENTS | Event.ONMOUSEOVER
+        | Event.ONCLICK);
+
   }
 
   @Override
@@ -69,6 +74,11 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   @Override
   public void addAppointments(final ArrayList<Appointment> appointments) {
     calendar.addAppointments(appointments);
+  }
+
+  @Override
+  public HandlerRegistration addClickHandler(final ClickHandler clickHandler) {
+    return calendar.addHandler(clickHandler, ClickEvent.getType());
   }
 
   @Override

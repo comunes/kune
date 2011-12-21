@@ -27,6 +27,7 @@ import cc.kune.events.client.actions.CalendarGoNextBtn;
 import cc.kune.events.client.actions.CalendarGoPrevBtn;
 import cc.kune.events.client.actions.CalendarGoTodayBtn;
 import cc.kune.events.client.actions.CalendarMonthViewSelectBtn;
+import cc.kune.events.client.actions.CalendarOnOverMenu;
 import cc.kune.events.client.actions.EventsClientActions;
 import cc.kune.events.client.viewer.CalendarViewer;
 import cc.kune.events.client.viewer.CalendarViewerPanel;
@@ -47,6 +48,7 @@ public class EventsGinModule extends ExtendedGinModule {
     s(CalendarGoPrevBtn.class);
     s(CalendarGoNextBtn.class);
     s(CalendarGoTodayBtn.class);
+    s(CalendarOnOverMenu.class);
     bindPresenter(CalendarViewerPresenter.class, CalendarViewerPresenter.CalendarViewerView.class,
         CalendarViewerPanel.class, CalendarViewerPresenter.CalendarViewerProxy.class);
     bind(CalendarViewer.class).to(CalendarViewerPresenter.class).in(Singleton.class);

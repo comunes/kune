@@ -22,45 +22,45 @@ package cc.kune.common.client.actions;
 import com.google.gwt.resources.client.ImageResource;
 
 public abstract class AbstractExtendedAction extends AbstractAction {
-    public static final String NO_ICON = null;
-    public static final String NO_TEXT = null;
+  public static final String NO_ICON = null;
+  public static final String NO_TEXT = null;
 
-    public AbstractExtendedAction() {
-        super();
-    }
+  public AbstractExtendedAction() {
+    super();
+  }
 
-    public AbstractExtendedAction(final String text) {
-        this(text, null, null);
-    }
+  public AbstractExtendedAction(final String text) {
+    this(text, null, null);
+  }
 
-    public AbstractExtendedAction(final String text, final String iconCls) {
-        this(text, null, iconCls);
-    }
+  public AbstractExtendedAction(final String text, final String iconCls) {
+    this(text, null, iconCls);
+  }
 
-    public AbstractExtendedAction(final String text, final String tooltip, final String iconCls) {
-        super();
-        super.putValue(Action.NAME, text);
-        super.putValue(Action.TOOLTIP, tooltip);
-        super.putValue(Action.SMALL_ICON, iconCls);
-    }
+  public AbstractExtendedAction(final String text, final String tooltip, final String iconCls) {
+    super();
+    super.putValue(Action.NAME, text);
+    super.putValue(Action.TOOLTIP, tooltip);
+    super.putValue(Action.SMALL_ICON, iconCls);
+  }
 
-    public AbstractExtendedAction withIcon(final ImageResource icon) {
-        super.putValue(Action.TOOLTIP, icon);
-        return this;
-    }
+  public AbstractExtendedAction withIcon(final ImageResource icon) {
+    super.putValue(Action.SMALL_ICON, icon);
+    return this;
+  }
 
-    public AbstractExtendedAction withIconCls(final String icon) {
-        super.putValue(Action.TOOLTIP, icon);
-        return this;
-    }
+  public AbstractExtendedAction withIconCls(final String icon) {
+    super.putValue(Action.TOOLTIP, icon);
+    return this;
+  }
 
-    public AbstractExtendedAction withText(final String text) {
-        super.putValue(Action.NAME, text);
-        return this;
-    }
+  public AbstractExtendedAction withText(final String text) {
+    super.putValue(Action.NAME, text);
+    return this;
+  }
 
-    public AbstractExtendedAction withToolTip(final String tooltip) {
-        super.putValue(Action.TOOLTIP, tooltip);
-        return this;
-    }
+  public AbstractExtendedAction withToolTip(final String tooltip) {
+    super.putValue(Action.TOOLTIP, tooltip);
+    return this;
+  }
 }
