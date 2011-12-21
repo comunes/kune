@@ -26,8 +26,6 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.events.client.viewer.EventAddMenuItem;
-import cc.kune.events.client.viewer.EventEditMenuItem;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
@@ -56,6 +54,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<Calendar7DaysViewSelectBtn> cal7DaysBtn,
       final Provider<CalendarMonthViewSelectBtn> calMonthBtn,
       final Provider<EventAddMenuItem> eventAddMenuItem,
+      final Provider<EventRemoveMenuItem> eventRemoveMenuItem,
       final Provider<EventEditMenuItem> eventEditMenuItem, final Provider<CalendarGoPrevBtn> calPrevBtn,
       final Provider<CalendarGoNextBtn> calNextBtn, final CalendarOnOverMenu onOverMenu,
       final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh) {
@@ -74,6 +73,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, onOverMenu, containers);
     eventAddMenuItem.get();
     eventEditMenuItem.get();
+    eventRemoveMenuItem.get();
 
     // For now, commented:
     // actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn,

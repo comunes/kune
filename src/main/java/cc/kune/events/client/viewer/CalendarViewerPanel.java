@@ -24,6 +24,7 @@ import com.bradrydzewski.gwt.calendar.client.event.DeleteHandler;
 import com.bradrydzewski.gwt.calendar.client.event.MouseOverHandler;
 import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler;
 import com.bradrydzewski.gwt.calendar.client.event.UpdateHandler;
+import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
@@ -32,12 +33,16 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class CalendarViewerPanel extends AbstractFolderViewerPanel implements CalendarViewerView {
 
   private final Calendar calendar;
+  private int clientX;
+  private int clientY;
 
   @Inject
   public CalendarViewerPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
@@ -46,12 +51,21 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
       final Provider<FolderViewerDropController> dropControllerProv) {
     super(gsArmor, i18n, capabilitiesRegistry, dragController, dropControllerProv);
     calendar = new Calendar();
-    // calendar.setWidth("auto");
-    // calendar.setHeight("auto");
     widget = calendar;
     calendar.sinkEvents(Event.ONMOUSEDOWN | Event.ONDBLCLICK | Event.KEYEVENTS | Event.ONMOUSEOVER
         | Event.ONCLICK);
-
+    Event.addNativePreviewHandler(new NativePreviewHandler() {
+      @Override
+      public void onPreviewNativeEvent(final NativePreviewEvent eventPrev) {
+        // We store click position in onder to show the menu
+        final NativeEvent natEvent = eventPrev.getNativeEvent();
+        if (Event.getTypeInt(natEvent.getType()) != Event.ONCLICK) {
+          clientX = natEvent.getClientX();
+          clientY = natEvent.getClientY();
+          return;
+        }
+      }
+    });
   }
 
   @Override
@@ -146,6 +160,16 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   @Override
   public void fireEvent(final GwtEvent<?> event) {
     calendar.fireEvent(event);
+  }
+
+  @Override
+  public int getClientX() {
+    return clientX;
+  }
+
+  @Override
+  public int getClientY() {
+    return clientY;
   }
 
   @Override

@@ -6,7 +6,9 @@ import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.Position;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.events.client.actions.CalendarOnOverMenu;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerView;
@@ -28,7 +30,6 @@ import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickEvent;
 import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler;
 import com.bradrydzewski.gwt.calendar.client.event.UpdateEvent;
 import com.bradrydzewski.gwt.calendar.client.event.UpdateHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.HasOpenHandlers;
 import com.google.gwt.event.logical.shared.HasSelectionHandlers;
@@ -38,7 +39,6 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
@@ -65,6 +65,10 @@ public class CalendarViewerPresenter extends
 
     HandlerRegistration addCreateHandler(CreateHandler<Appointment> handler);
 
+    int getClientX();
+
+    int getClientY();
+
     Date getDate();
 
     void goToday();
@@ -74,7 +78,6 @@ public class CalendarViewerPresenter extends
     void setView(CalendarViews view);
 
     void setView(CalendarViews view, int days);
-
   }
 
   private static final CalendarViews DEF_VIEW = CalendarViews.DAY;
@@ -83,16 +86,23 @@ public class CalendarViewerPresenter extends
   private CalendarViews currentCalView;
   private int currentDaysView = 7;
   private final FolderViewerUtils folderViewerUtils;
+  private final I18nTranslationService i18n;
   private Date onOverDate;
   private final CalendarOnOverMenu onOverMenu;
+  private final Session session;
+  private final StateManager stateManager;
 
   @Inject
   public CalendarViewerPresenter(final EventBus eventBus, final CalendarViewerView view,
       final CalendarViewerProxy proxy, final FolderViewerUtils folderViewerUtils,
-      final CalendarOnOverMenu onOverMenu) {
+      final CalendarOnOverMenu onOverMenu, final Session session, final StateManager stateManager,
+      final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
     this.folderViewerUtils = folderViewerUtils;
     this.onOverMenu = onOverMenu;
+    this.session = session;
+    this.stateManager = stateManager;
+    this.i18n = i18n;
     addListeners();
     setViewImpl(DEF_VIEW, currentDaysView);
   }
@@ -113,30 +123,21 @@ public class CalendarViewerPresenter extends
         showMenu();
       }
     });
-    getView().addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        setMenuPosition(event.getClientX(), event.getClientY());
-      }
-
-    });
     getView().addMouseOverHandler(new MouseOverHandler<Appointment>() {
       @Override
       public void onMouseOver(final MouseOverEvent<Appointment> event) {
-        NotifyUser.info("on mouse over");
-        // final Element element = (Element) event.getElement();
-        // showMenu(element.getAbsoluteLeft() + 10, element.getAbsoluteTop() +
-        // 10);
-        Tooltip.to((Widget) event.getElement(), "kk");
-        // final Tooltip tooltip = new Tooltip();
-        // tooltip.setText("lalala");
-        // tooltip.setPopupPosition(, currentDaysView)
-        // tooltip.showRelativeTo((UIObject) event.getElement());
+        // NotifyUser.info("on mouse over");
       }
     });
     getView().addUpdateHandler(new UpdateHandler<Appointment>() {
       @Override
       public void onUpdate(final UpdateEvent<Appointment> event) {
+        final boolean editable = session.getCurrentState().getGroupRights().isEditable();
+        if (!editable) {
+          NotifyUser.error(i18n.t("Only members can update events"));
+        }
+        event.setCancelled(!editable);
+        // event.setCancelled(true);
         NotifyUser.info("updated handler");
       }
     });
@@ -154,7 +155,6 @@ public class CalendarViewerPresenter extends
         NotifyUser.info("on selection");
         updateMenuItems();
         showMenu();
-        // getView().removeAppointment(event.getSelectedItem());
       }
     });
   }
@@ -192,6 +192,10 @@ public class CalendarViewerPresenter extends
   @Override
   public void goToday() {
     getView().goToday();
+  }
+
+  private void hide() {
+    onOverMenu.get().hide();
   }
 
   @Override
@@ -255,6 +259,7 @@ public class CalendarViewerPresenter extends
   }
 
   private void showMenu() {
+    setMenuPosition(getView().getClientX(), getView().getClientY());
     onOverMenu.get().show();
   }
 
