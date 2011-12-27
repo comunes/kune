@@ -57,7 +57,7 @@ public class WaveEmailNotifier {
               final String address = user.getAddress();
               if (partUtils.isLocal(address)) {
                 final String userName = partUtils.getAddressName(address);
-                if (!usersOnline.isLogged(userName)) {
+                if (true || !usersOnline.isLogged(userName)) {
                   notifyService.send(NotifyType.email, FormatedString.build("You have a new message"),
                       body, true, userName);
                   notifyService.send(NotifyType.chat, FormatedString.build("New message"), body, true,

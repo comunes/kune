@@ -97,7 +97,14 @@ public class MailServiceDefault implements MailService {
     props.put("mail.smtp.host", smtpServer);
   }
 
-  private void send(final String from, final FormatedString subject, final FormatedString body,
+  @Override
+  public void send(final FormatedString subject, final FormatedString body, final boolean isHtml,
+      final String... tos) {
+    send(smtpDefaultFrom, subject, body, isHtml, tos);
+  }
+
+  @Override
+  public void send(final String from, final FormatedString subject, final FormatedString body,
       final boolean isHtml, final String... tos) {
     if (smtpSkip) {
       return;

@@ -19,6 +19,7 @@
  */
 package cc.kune.core.shared.dto;
 
+import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -32,6 +33,7 @@ public class UserSimpleDTO implements IsSerializable {
     private String shortName;
     private StateToken stateToken;
     private TimeZoneDTO timezone;
+    private EmailNotificationFrequency emailNotifFreq;
 
     public UserSimpleDTO() {
         this(null, null, null, null, null);
@@ -155,6 +157,14 @@ public class UserSimpleDTO implements IsSerializable {
     @Override
     public String toString() {
         return "UserSimpleDTO(" + shortName + ")";
+    }
+
+    public EmailNotificationFrequency getEmailNotifFreq() {
+      return emailNotifFreq;
+    }
+
+    public void setEmailNotifFreq(EmailNotificationFrequency emailNotifFreq) {
+      this.emailNotifFreq = emailNotifFreq;
     }
 
 }

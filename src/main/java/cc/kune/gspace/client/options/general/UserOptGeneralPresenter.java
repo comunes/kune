@@ -28,6 +28,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserDTO;
@@ -74,6 +75,8 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     final UserSimpleDTO currentUser = session.getCurrentUser();
     userView.setLongName(currentUser.getName());
     userView.setLanguage(I18nLanguageSimpleDTO.create(currentUser.getLanguage()));
+    userView.setEmailNofifField(currentUser.getEmailNotifFreq().equals(
+        EmailNotificationFrequency.immediately));
   }
 
   @Override
@@ -86,6 +89,8 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
       final String longName = userView.getLongName();
       user.setName(longName);
       final I18nLanguageSimpleDTO lang = userView.getLanguage();
+      user.setEmailNotifFreq(userView.isEmailNofifField() ? EmailNotificationFrequency.immediately
+          : EmailNotificationFrequency.no);
       userService.get().updateUser(session.getUserHash(), user, userView.getLanguage(),
           new AsyncCallbackSimple<StateAbstractDTO>() {
             @Override

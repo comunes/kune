@@ -27,6 +27,10 @@ public interface UserOptGeneralView extends EntityOptGeneralView {
 
   String getLongName();
 
+  boolean isEmailNofifField();
+
+  void setEmailNofifField(boolean value);
+
   void setLanguage(I18nLanguageSimpleDTO language);
 
   void setLongName(String longName);

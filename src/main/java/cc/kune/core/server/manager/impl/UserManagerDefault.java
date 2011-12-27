@@ -371,6 +371,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     final String longName = userDTO.getName();
     final String email = userDTO.getEmail();
     final Group userGroup = user.getUserGroup();
+    user.setEmailNotifFreq(userDTO.getEmailNotifFreq());
     // We don't allow to change shortName because we cannot change shotNames in
     // wave accounts
     // if (!shortName.equals(user.getShortName())) {

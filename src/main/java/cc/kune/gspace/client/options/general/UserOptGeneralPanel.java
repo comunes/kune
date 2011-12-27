@@ -26,6 +26,7 @@ import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.gspace.client.i18n.LanguageSelectorPanel;
 
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.inject.Inject;
@@ -33,6 +34,7 @@ import com.google.inject.Inject;
 public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOptGeneralView {
 
   private static final String LONG_NAME_FIELD = "k-uogp-lname";
+  private final CheckBox emailNotifField;
   private final LanguageSelectorPanel langSelector;
   private final TextField<String> longName;
 
@@ -48,6 +50,9 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     langSelector.setLabelAlign(LabelAlign.LEFT);
     langSelector.setLangSeparator(":");
     add(langSelector);
+    emailNotifField = new CheckBox();
+    emailNotifField.setFieldLabel(i18n.t("Email notifications"));
+    add(emailNotifField);
   }
 
   @Override
@@ -58,6 +63,14 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   @Override
   public String getLongName() {
     return longName.getValue();
+  }
+
+  public boolean isEmailNofifField() {
+    return emailNotifField.getValue();
+  }
+
+  public void setEmailNofifField(final boolean value) {
+    emailNotifField.setValue(value);
   }
 
   @Override

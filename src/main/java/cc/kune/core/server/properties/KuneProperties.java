@@ -49,6 +49,7 @@ public interface KuneProperties {
   String SITE_DB_USER = "kune.db.user";
   String SITE_DEF_LICENSE = "kune.default.license";
   String SITE_DOMAIN = "kune.site.domain";
+  String SITE_EMAIL_TEMPLATE = "kune.site.email.template";
   String SITE_GROUP_AVAILABLE_TOOLS = "kune.tools.groupSiteAvailableTools";
   String SITE_GROUP_REGIST_ENABLED_TOOLS = "kune.tools.groupRegisEnabledTools";
   String SITE_LOGO_URL = "kune.sitelogourl";

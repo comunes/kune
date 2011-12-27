@@ -1,24 +1,33 @@
 package cc.kune.core.server.notifier;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.persistence.NoResultException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.server.mail.MailService;
 import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.xmpp.XmppManager;
+import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.domain.User;
 import cc.kune.wave.server.KuneWaveService;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 public class NotifyServiceDefault implements NotifyService {
   public static final Log LOG = LogFactory.getLog(NotifyServiceDefault.class);
+  private final String emailTemplate;
   private final I18nTranslationManager i18n;
   private final MailService mailService;
   private final UserManager userManager;
@@ -27,12 +36,17 @@ public class NotifyServiceDefault implements NotifyService {
 
   @Inject
   public NotifyServiceDefault(final MailService mailService, final KuneWaveService waveService,
-      final XmppManager xmppManager, final UserManager userManager, final I18nTranslationManager i18n) {
+      final XmppManager xmppManager, final UserManager userManager, final I18nTranslationManager i18n,
+      final KuneProperties kuneProperties) throws IOException {
     this.mailService = mailService;
     this.waveService = waveService;
     this.xmppManager = xmppManager;
     this.userManager = userManager;
     this.i18n = i18n;
+    emailTemplate = FileUtils.readFileToString(new File(
+        kuneProperties.get(KuneProperties.SITE_EMAIL_TEMPLATE)));
+    Preconditions.checkNotNull(emailTemplate);
+    Preconditions.checkArgument(TextUtils.notEmpty(emailTemplate));
   }
 
   @Override
@@ -50,12 +64,14 @@ public class NotifyServiceDefault implements NotifyService {
       final String subjectTranslation = i18n.getTranslation(user.getLanguage().getCode(),
           subject.getTemplate(), "");
       if (subjectTranslation != null) {
-        subject.setTemplate(subjectTranslation);
+        // Right now commented because we are only testing
+        // subject.setTemplate(subjectTranslation);
       }
       final String bodyTranslation = i18n.getTranslation(user.getLanguage().getCode(),
           body.getTemplate(), "");
       if (bodyTranslation != null) {
-        body.setTemplate(bodyTranslation);
+        // Right now commented because we are only testing
+        // body.setTemplate(bodyTranslation);
       }
       switch (notifyType) {
       case chat:
@@ -63,11 +79,11 @@ public class NotifyServiceDefault implements NotifyService {
             String.format("<b>%s</b>%s", subject.getString(), body.getString()));
         break;
       case email:
-        final String email = user.getEmail();
-        if (isHtml) {
-          mailService.sendHtml(subject, body, email);
+        if (user.getEmailNotifFreq().equals(EmailNotificationFrequency.immediately)) {
+          mailService.send(subject, FormatedString.build(emailTemplate.replace("%s", body.getString())),
+              isHtml, user.getEmail());
         } else {
-          mailService.sendPlain(subject, body, email);
+          // TODO: handle other types of notifications frequencies
         }
         break;
       case wave:

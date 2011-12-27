@@ -24,6 +24,34 @@ import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
 public interface MailService {
 
   /**
+   * Sends email
+   * 
+   * @param subject
+   *          the email subject
+   * @param body
+   *          the body of the email in text or html format
+   * @param from
+   *          the sender
+   * @param tos
+   *          the recipients
+   */
+  void send(FormatedString subject, FormatedString body, boolean isHtml, String... tos);
+
+  /**
+   * Sends email
+   * 
+   * @param subject
+   *          the email subject
+   * @param body
+   *          the body of the email in text or html format
+   * @param from
+   *          the sender
+   * @param tos
+   *          the recipients
+   */
+  void send(String from, FormatedString subject, FormatedString body, boolean isHtml, String... tos);
+
+  /**
    * Sends html email with default site "from"
    * 
    * @param subject
