@@ -32,25 +32,54 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.server.LogThis;
 import cc.kune.core.server.properties.KuneProperties;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
+@LogThis
 public class MailServiceDefault implements MailService {
 
   public static class FormatedString {
+    public static FormatedString build(final String plainMsg) {
+      return new FormatedString(plainMsg);
+    }
 
-    private final String string;
+    public static FormatedString build(final String template, final Object... args) {
+      return new FormatedString(template, args);
+    }
+
+    private final Object[] args;
+    private String template;
+
+    public FormatedString(final String plainMsg) {
+      template = plainMsg;
+      args = null;
+    }
 
     public FormatedString(final String template, final Object... args) {
-      string = String.format(template, args);
+      this.template = template;
+      this.args = args;
     }
 
     public String getString() {
-      return string;
+      Preconditions.checkNotNull(template, "Template of FormatedString cannot be null");
+      return args == null ? template : String.format(template, args);
+    }
+
+    public String getTemplate() {
+      return template;
+    }
+
+    /*
+     * Used to translate the template to the user language (when you don't know
+     * already the language of the user)
+     */
+    public void setTemplate(final String template) {
+      this.template = template;
     }
   }
 
@@ -68,8 +97,8 @@ public class MailServiceDefault implements MailService {
     props.put("mail.smtp.host", smtpServer);
   }
 
-  private void send(final FormatedString subject, final FormatedString body, final boolean isHtml,
-      final String from, final String... tos) {
+  private void send(final String from, final FormatedString subject, final FormatedString body,
+      final boolean isHtml, final String... tos) {
     if (smtpSkip) {
       return;
     }
@@ -79,47 +108,50 @@ public class MailServiceDefault implements MailService {
 
     // Define message
     final MimeMessage message = new MimeMessage(session);
-    try {
-      message.setFrom(new InternetAddress(from));
-      for (final String to : tos) {
+    for (final String to : tos) {
+      try {
+        message.setFrom(new InternetAddress(from));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        final String formatedSubject = subject.getString();
+        message.setSubject(formatedSubject);
+        final String formatedBody = body.getString();
+        if (isHtml) {
+          message.setContent(formatedBody, "text/html");
+        } else {
+          message.setText(formatedBody);
+        }
+        // Send message
+        Transport.send(message);
+      } catch (final AddressException e) {
+      } catch (final MessagingException e) {
+        final String error = String.format(
+            "Error sendind an email to %s, with subject: %s, and body: %s", from, subject, to);
+        log.error(error, e);
+        // Better not to throw exceptions because users emails can be wrong...
+        // throw new DefaultException(error, e);
       }
-      final String formatedSubject = subject.getString();
-      message.setSubject(formatedSubject);
-      final String formatedBody = body.getString();
-      if (isHtml) {
-        message.setContent(formatedBody, "text/html");
-      } else {
-        message.setText(formatedBody);
-      }
-      // Send message
-      Transport.send(message);
-    } catch (final AddressException e) {
-    } catch (final MessagingException e) {
-      log.error("Error sending the email", e);
-      throw new DefaultException("Error sending an email");
     }
   }
 
   @Override
-  public void sendHtml(final FormatedString subject, final FormatedString body, final String to) {
-    send(subject, body, true, smtpDefaultFrom, to);
+  public void sendHtml(final FormatedString subject, final FormatedString body, final String... tos) {
+    send(smtpDefaultFrom, subject, body, true, tos);
   }
 
   @Override
-  public void sendHtml(final FormatedString subject, final FormatedString body, final String from,
+  public void sendHtml(final String from, final FormatedString subject, final FormatedString body,
       final String... tos) {
-    send(subject, body, true, from, tos);
+    send(from, subject, body, true, tos);
   }
 
   @Override
-  public void sendPlain(final FormatedString subject, final FormatedString body, final String to) {
-    send(subject, body, false, smtpDefaultFrom, to);
+  public void sendPlain(final FormatedString subject, final FormatedString body, final String... tos) {
+    send(smtpDefaultFrom, subject, body, false, tos);
   }
 
   @Override
-  public void sendPlain(final FormatedString subject, final FormatedString body, final String from,
+  public void sendPlain(final String from, final FormatedString subject, final FormatedString body,
       final String... tos) {
-    send(subject, body, false, from, tos);
+    send(from, subject, body, false, tos);
   }
 }

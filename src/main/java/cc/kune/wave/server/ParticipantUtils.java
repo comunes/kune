@@ -37,6 +37,7 @@ import com.google.inject.name.Named;
 @Singleton
 public class ParticipantUtils {
 
+  private String atDomain;
   private final String domain;
   private final ParticipantId superAdmin;
 
@@ -47,8 +48,24 @@ public class ParticipantUtils {
     superAdmin = ofImpl(databaseProperties.getAdminShortName());
   }
 
+  public String getAddressName(final String address) {
+    return address.contains(ParticipantId.DOMAIN_PREFIX) ? address.split(ParticipantId.DOMAIN_PREFIX)[0]
+        : address;
+  }
+
+  private String getAtDomain() {
+    if (atDomain == null) {
+      atDomain = ParticipantId.DOMAIN_PREFIX + domain;
+    }
+    return atDomain;
+  }
+
   public ParticipantId getSuperAdmin() {
     return superAdmin;
+  }
+
+  public boolean isLocal(final String address) {
+    return address.contains(getAtDomain());
   }
 
   public ParticipantId[] listFrom(final Set<Group> list) {
@@ -56,6 +73,14 @@ public class ParticipantUtils {
     final Iterator<Group> iterator = list.iterator();
     for (int i = 0; i < list.size(); i++) {
       array[i] = of(iterator.next().getShortName());
+    }
+    return array;
+  }
+
+  public ParticipantId[] listFrom(final String... list) {
+    final ParticipantId[] array = new ParticipantId[list.length];
+    for (int i = 0; i < list.length; i++) {
+      array[i] = of(list[i]);
     }
     return array;
   }
@@ -69,7 +94,7 @@ public class ParticipantUtils {
       if (username.contains(ParticipantId.DOMAIN_PREFIX)) {
         return ParticipantId.of(username);
       } else {
-        return ParticipantId.of(username + ParticipantId.DOMAIN_PREFIX + domain);
+        return ParticipantId.of(username + getAtDomain());
       }
     } catch (final InvalidParticipantAddress e) {
       throw new DefaultException("Error getting Wave participant Id");

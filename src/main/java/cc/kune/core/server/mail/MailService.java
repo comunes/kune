@@ -30,10 +30,10 @@ public interface MailService {
    *          the email subject
    * @param body
    *          the body of the email in html format
-   * @param to
-   *          the recipient
+   * @param tos
+   *          the recipients
    */
-  void sendHtml(FormatedString subject, FormatedString body, String to);
+  void sendHtml(FormatedString subject, FormatedString body, String... tos);
 
   /**
    * Sends html email
@@ -47,7 +47,7 @@ public interface MailService {
    * @param tos
    *          the recipients
    */
-  void sendHtml(FormatedString subject, FormatedString body, String from, String... tos);
+  void sendHtml(String from, FormatedString subject, FormatedString body, String... tos);
 
   /**
    * 
@@ -57,10 +57,10 @@ public interface MailService {
    *          the email subject
    * @param body
    *          the body of the email in text format
-   * @param to
-   *          the recipient
+   * @param tos
+   *          the recipients
    */
-  void sendPlain(FormatedString subject, FormatedString body, String to);
+  void sendPlain(FormatedString subject, FormatedString body, String... tos);
 
   /**
    * Sends plain email
@@ -74,6 +74,6 @@ public interface MailService {
    * @param tos
    *          the recipients
    */
-  void sendPlain(FormatedString subject, FormatedString body, String from, String... tos);
+  void sendPlain(String from, FormatedString subject, FormatedString body, String... tos);
 
 }

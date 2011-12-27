@@ -86,6 +86,9 @@ import cc.kune.core.server.manager.impl.ToolConfigurationManagerDefault;
 import cc.kune.core.server.manager.impl.UserManagerDefault;
 import cc.kune.core.server.mapper.DozerMapper;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.notifier.NotifyService;
+import cc.kune.core.server.notifier.NotifyServiceDefault;
+import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.GroupRPC;
 import cc.kune.core.server.rpc.I18nRPC;
@@ -93,6 +96,7 @@ import cc.kune.core.server.rpc.SiteRPC;
 import cc.kune.core.server.rpc.SocialNetworkRPC;
 import cc.kune.core.server.rpc.StatsRPC;
 import cc.kune.core.server.rpc.UserRPC;
+import cc.kune.core.server.scheduler.CronServerTasksManager;
 import cc.kune.core.server.state.StateService;
 import cc.kune.core.server.state.StateServiceDefault;
 import cc.kune.core.server.stats.StatsService;
@@ -109,7 +113,9 @@ import cc.kune.lists.server.rpc.ListsRPC;
 import cc.kune.wave.server.KuneWaveService;
 import cc.kune.wave.server.KuneWaveServiceDefault;
 import cc.kune.wave.server.ParticipantUtils;
+import cc.kune.wave.server.WaveEmailNotifier;
 
+import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 
 public class PlatformServerModule extends AbstractExtendedModule {
@@ -186,7 +192,11 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(EntityLogoUploadManager.class);
     bind(EntityLogoDownloadManager.class);
     bind(ParticipantUtils.class);
+    bind(UsersOnline.class).to(UserSessionManager.class).in(Singleton.class);
     requestStaticInjection(AccessRightsUtils.class);
+    bind(CronServerTasksManager.class).in(Singleton.class);
+    bind(NotifyService.class).to(NotifyServiceDefault.class).in(Singleton.class);
+    bind(WaveEmailNotifier.class).in(Singleton.class);
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
         outermostCall(new AuthenticatedMethodInterceptor()));
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),

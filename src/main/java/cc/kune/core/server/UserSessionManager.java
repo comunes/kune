@@ -19,7 +19,11 @@
  */
 package cc.kune.core.server;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
@@ -27,8 +31,9 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class UserSessionManager {
+public class UserSessionManager implements UsersOnline {
 
+  private final Set<String> logins;
   private final UserManager manager;
   private final Provider<UserSession> userSessionProv;
 
@@ -36,10 +41,23 @@ public class UserSessionManager {
   public UserSessionManager(final UserManager manager, final Provider<UserSession> userSessionProv) {
     this.manager = manager;
     this.userSessionProv = userSessionProv;
+    // For now the implementation of this can be very inaccurate (if we
+    // login/logout several times with different clients) and not scalable
+    // (stored in a MAP). Possible fix, to use jabber status
+    // More info:
+    // http://stackoverflow.com/questions/4592961/how-can-i-check-which-all-users-are-logged-into-my-application
+    //
+    // Best way maybe it's accessing openfire db:
+    // http://www.mastertheboss.com/jboss-howto/45-jboss-persistence/110-jboss-persistencexml-multiple-database.html
+    logins = new HashSet<String>();
   }
 
   public String getHash() {
     return getUserSession().getHash();
+  }
+
+  private String getUserLoggedShortName() {
+    return getUser().getShortName();
   }
 
   public User getUser() {
@@ -48,6 +66,11 @@ public class UserSessionManager {
 
   private UserSession getUserSession() {
     return userSessionProv.get();
+  }
+
+  @Override
+  public boolean isLogged(final String shortname) {
+    return logins.contains(shortname);
   }
 
   public boolean isUserLoggedIn() {
@@ -61,10 +84,20 @@ public class UserSessionManager {
   public void login(final Long userId, final String newUserHash) {
     getUserSession().setUserId(userId);
     getUserSession().setHash(newUserHash);
+    updateLoggedUser();
   }
 
   public void logout() {
+    if (isUserLoggedIn()) {
+      logins.remove(getUserLoggedShortName());
+    }
     getUserSession().setUserId(null);
     getUserSession().setHash(null);
+  }
+
+  public void updateLoggedUser() {
+    if (isUserLoggedIn()) {
+      logins.add(getUserLoggedShortName());
+    }
   }
 }

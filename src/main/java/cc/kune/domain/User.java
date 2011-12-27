@@ -46,6 +46,7 @@ import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Pattern;
 
 import cc.kune.core.shared.domain.UserSNetVisibility;
+import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.utils.HasId;
 
@@ -53,6 +54,8 @@ import cc.kune.domain.utils.HasId;
 @Indexed
 @Table(name = "kusers")
 public class User implements HasId {
+
+  private static final EmailNotificationFrequency DEF_EMAIL_FREQ = EmailNotificationFrequency.immediately;
 
   // public static final String PROPS_ID = "userprops";
   // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
@@ -80,13 +83,16 @@ public class User implements HasId {
   @Length(min = 1)
   private String email;
 
+  @Enumerated(EnumType.STRING)
+  private EmailNotificationFrequency emailNotifFreq;
+
+  // @OneToOne(cascade = CascadeType.REMOVE)
+  // private final CustomProperties customProperties;
+
   @Id
   @DocumentId
   @GeneratedValue
   private Long id;
-
-  // @OneToOne(cascade = CascadeType.REMOVE)
-  // private final CustomProperties customProperties;
 
   @ManyToOne
   @NotNull
@@ -146,6 +152,7 @@ public class User implements HasId {
     sNetVisibility = UserSNetVisibility.anyone;
     this.createdOn = System.currentTimeMillis();
     this.lastLogin = null;
+    emailNotifFreq = DEF_EMAIL_FREQ;
     // this.properties = properties;
   }
 
@@ -204,6 +211,10 @@ public class User implements HasId {
   // return customProperties;
   // }
 
+  public EmailNotificationFrequency getEmailNotifFreq() {
+    return emailNotifFreq == null ? DEF_EMAIL_FREQ : emailNotifFreq;
+  }
+
   public boolean getHasLogo() {
     return hasLogo();
   }
@@ -229,13 +240,13 @@ public class User implements HasId {
     return password;
   }
 
-  public byte[] getSalt() {
-    return salt;
-  }
-
   // public Properties getProperties() {
   // return properties;
   // }
+
+  public byte[] getSalt() {
+    return salt;
+  }
 
   public String getShortName() {
     return shortName;
@@ -281,6 +292,10 @@ public class User implements HasId {
 
   public void setEmail(final String email) {
     this.email = email;
+  }
+
+  public void setEmailNotifFreq(final EmailNotificationFrequency emailNotifFreq) {
+    this.emailNotifFreq = emailNotifFreq;
   }
 
   @Override

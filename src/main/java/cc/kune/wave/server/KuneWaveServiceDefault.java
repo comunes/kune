@@ -221,6 +221,11 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   @Override
+  public WaveRef createWave(final String title, final String message, final String... participantsArray) {
+    return createWave(title, message, participantUtils.listFrom(participantsArray));
+  }
+
+  @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
       final String waveIdToCopy, final URL gadgetUrl, @Nonnull final ParticipantId... participantsArray) {
     String newWaveId = null;

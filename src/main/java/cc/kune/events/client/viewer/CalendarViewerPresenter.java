@@ -139,6 +139,7 @@ public class CalendarViewerPresenter extends
         event.setCancelled(!editable);
         // event.setCancelled(true);
         NotifyUser.info("updated handler");
+        hideMenu();
       }
     });
     getView().addOpenHandler(new OpenHandler<Appointment>() {
@@ -194,7 +195,7 @@ public class CalendarViewerPresenter extends
     getView().goToday();
   }
 
-  private void hide() {
+  private void hideMenu() {
     onOverMenu.get().hide();
   }
 

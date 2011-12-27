@@ -162,16 +162,14 @@ public class UserRPC implements RPC, UserService {
   @Transactional
   public void logout(final String userHash) throws DefaultException {
     userSessionManager.logout();
-    // FIXME final SessionService sessionService =
-    // sessionServiceProvider.get();
-    // FIXME sessionService.getNewSession();
   }
 
   @Override
   @Authenticated(mandatory = false)
   @Transactional
   public void onlyCheckSession(final String userHash) throws DefaultException {
-    // Do nothing @Authenticated checks user session
+    // Do almost nothing @Authenticated checks user session
+    userSessionManager.updateLoggedUser();
   }
 
   @Override
@@ -179,6 +177,7 @@ public class UserRPC implements RPC, UserService {
   @Transactional
   public UserInfoDTO reloadUserInfo(final String userHash) throws DefaultException {
     final User user = userSessionManager.getUser();
+    userSessionManager.updateLoggedUser();
     return loadUserInfo(user);
   }
 
@@ -205,6 +204,7 @@ public class UserRPC implements RPC, UserService {
       throw new AccessViolationException();
     }
     final User userUpdated = userManager.update(id, user, lang);
+    userSessionManager.updateLoggedUser();
     return contentRPC.getContent(userHash, userUpdated.getUserGroup().getStateToken());
   }
 }

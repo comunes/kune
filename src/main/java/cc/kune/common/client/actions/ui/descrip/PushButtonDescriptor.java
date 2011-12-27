@@ -20,34 +20,40 @@
 package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.Action;
 
 public class PushButtonDescriptor extends ButtonDescriptor {
 
-    public static final String PUSHED = "pushed";
+  public static final String PUSHED = "pushed";
 
-    public PushButtonDescriptor(final AbstractAction action) {
-        super(action);
-        setPushedImpl(false);
-    }
+  public PushButtonDescriptor(final AbstractAction action) {
+    super(action);
+    setPushedImpl(false);
+  }
 
-    public PushButtonDescriptor(final PushButtonDescriptor button) {
-        this(button.getAction());
-    }
+  public PushButtonDescriptor(final PushButtonDescriptor button) {
+    this(button.getAction());
+  }
 
-    @Override
-    public Class<?> getType() {
-        return PushButtonDescriptor.class;
-    }
+  public PushButtonDescriptor(final String text, final AbstractAction action) {
+    this(action);
+    putValue(Action.NAME, text);
+  }
 
-    public boolean isPushed() {
-        return (Boolean) getValue(PUSHED);
-    }
+  @Override
+  public Class<?> getType() {
+    return PushButtonDescriptor.class;
+  }
 
-    public void setPushed(final boolean pushed) {
-        setPushedImpl(pushed);
-    }
+  public boolean isPushed() {
+    return (Boolean) getValue(PUSHED);
+  }
 
-    private void setPushedImpl(final boolean pushed) {
-        putValue(PUSHED, pushed);
-    }
+  public void setPushed(final boolean pushed) {
+    setPushedImpl(pushed);
+  }
+
+  private void setPushedImpl(final boolean pushed) {
+    putValue(PUSHED, pushed);
+  }
 }

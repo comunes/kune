@@ -62,8 +62,23 @@ public class KuneBasicProperties {
     return properties.get(KuneProperties.SITE_SHORTNAME);
   }
 
+  /**
+   * Gets the site common name (can be something like "this foo site" not
+   * necessary a domain)
+   * 
+   * @return the site common name
+   */
   public String getSiteCommonName() {
     return properties.get(KuneProperties.SITE_COMMON_NAME);
+  }
+
+  /**
+   * Gets the site domain (something like example.org)
+   * 
+   * @return the site domain
+   */
+  public String getSiteDomain() {
+    return properties.get(KuneProperties.SITE_DOMAIN);
   }
 
   public String getWelcomewave() {

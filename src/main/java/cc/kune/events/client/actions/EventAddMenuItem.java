@@ -28,7 +28,7 @@ public class EventAddMenuItem extends MenuItemDescriptor {
       super(AccessRolDTO.Editor, true);
       this.i18n = i18n;
       this.calendar = calendar;
-      withText(i18n.t("Add a appointment")).withIcon(res.calendarAdd());
+      withText(i18n.t("Add an appointment")).withIcon(res.calendarAdd());
     }
 
     @Override

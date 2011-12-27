@@ -19,142 +19,153 @@
  */
 package cc.kune.core.shared.dto;
 
+import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserDTO implements IsSerializable {
-    private Long id;
-    private String name;
-    private String shortName;
-    private I18nLanguageDTO language;
-    private I18nCountryDTO country;
-    private TimeZoneDTO timezone;
-    private String password;
-    private String email;
-    private String avatar;
-    private boolean publishRoster;
-    private SubscriptionMode subscriptionMode;
-    private String chatColor;
+  private String avatar;
+  private String chatColor;
+  private I18nCountryDTO country;
+  private String email;
+  private EmailNotificationFrequency emailNotifFreq;
+  private Long id;
+  private I18nLanguageDTO language;
+  private String name;
+  private String password;
+  private boolean publishRoster;
+  private String shortName;
+  private SubscriptionMode subscriptionMode;
+  private TimeZoneDTO timezone;
 
-    public UserDTO() {
-        this(null, null, null, null, null, null, null, null, true, null, null);
-    }
+  public UserDTO() {
+    this(null, null, null, null, null, null, null, null, true, null, null);
+  }
 
-    public UserDTO(final String shortName, final String name, final String password, final String email,
-            final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone,
-            final String avatar, final boolean publishRoster, final SubscriptionMode subscriptionMode,
-            final String chatColor) {
-        this.name = name;
-        this.shortName = shortName;
-        this.password = password;
-        this.email = email;
-        this.language = language;
-        this.country = country;
-        this.timezone = timezone;
-        this.avatar = avatar;
-        this.publishRoster = publishRoster;
-        this.subscriptionMode = subscriptionMode;
-        this.chatColor = chatColor;
-    }
+  public UserDTO(final String shortName, final String name, final String password, final String email,
+      final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone,
+      final String avatar, final boolean publishRoster, final SubscriptionMode subscriptionMode,
+      final String chatColor) {
+    this.name = name;
+    this.shortName = shortName;
+    this.password = password;
+    this.email = email;
+    this.language = language;
+    this.country = country;
+    this.timezone = timezone;
+    this.avatar = avatar;
+    this.publishRoster = publishRoster;
+    this.subscriptionMode = subscriptionMode;
+    this.chatColor = chatColor;
+  }
 
-    public String getAvatar() {
-        return avatar;
-    }
+  public String getAvatar() {
+    return avatar;
+  }
 
-    public String getChatColor() {
-        return chatColor;
-    }
+  public String getChatColor() {
+    return chatColor;
+  }
 
-    public I18nCountryDTO getCountry() {
-        return country;
-    }
+  public I18nCountryDTO getCountry() {
+    return country;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public EmailNotificationFrequency getEmailNotifFreq() {
+    return emailNotifFreq;
+  }
 
-    public I18nLanguageDTO getLanguage() {
-        return language;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public I18nLanguageDTO getLanguage() {
+    return language;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getShortName() {
-        return shortName;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public SubscriptionMode getSubscriptionMode() {
-        return subscriptionMode;
-    }
+  public String getShortName() {
+    return shortName;
+  }
 
-    public TimeZoneDTO getTimezone() {
-        return timezone;
-    }
+  public SubscriptionMode getSubscriptionMode() {
+    return subscriptionMode;
+  }
 
-    public boolean isPublishRoster() {
-        return publishRoster;
-    }
+  public TimeZoneDTO getTimezone() {
+    return timezone;
+  }
 
-    public void setAvatar(final String avatar) {
-        this.avatar = avatar;
-    }
+  public boolean isPublishRoster() {
+    return publishRoster;
+  }
 
-    public void setChatColor(final String chatColor) {
-        this.chatColor = chatColor;
-    }
+  public void setAvatar(final String avatar) {
+    this.avatar = avatar;
+  }
 
-    public void setCountry(final I18nCountryDTO country) {
-        this.country = country;
-    }
+  public void setChatColor(final String chatColor) {
+    this.chatColor = chatColor;
+  }
 
-    public void setEmail(final String email) {
-        this.email = email;
-    }
+  public void setCountry(final I18nCountryDTO country) {
+    this.country = country;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setEmail(final String email) {
+    this.email = email;
+  }
 
-    public void setLanguage(final I18nLanguageDTO language) {
-        this.language = language;
-    }
+  public void setEmailNotifFreq(final EmailNotificationFrequency emailNotifFreq) {
+    this.emailNotifFreq = emailNotifFreq;
+  }
 
-    public void setName(final String name) {
-        this.name = name;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setPassword(final String password) {
-        this.password = password;
-    }
+  public void setLanguage(final I18nLanguageDTO language) {
+    this.language = language;
+  }
 
-    public void setPublishRoster(final boolean publishRoster) {
-        this.publishRoster = publishRoster;
-    }
+  public void setName(final String name) {
+    this.name = name;
+  }
 
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
+  public void setPassword(final String password) {
+    this.password = password;
+  }
 
-    public void setSubscriptionMode(final SubscriptionMode subscriptionMode) {
-        this.subscriptionMode = subscriptionMode;
-    }
+  public void setPublishRoster(final boolean publishRoster) {
+    this.publishRoster = publishRoster;
+  }
 
-    public void setTimezone(final TimeZoneDTO timezone) {
-        this.timezone = timezone;
-    }
+  public void setShortName(final String shortName) {
+    this.shortName = shortName;
+  }
 
-    @Override
-    public String toString() {
-        return "UserDTO[" + shortName + "]";
-    }
+  public void setSubscriptionMode(final SubscriptionMode subscriptionMode) {
+    this.subscriptionMode = subscriptionMode;
+  }
+
+  public void setTimezone(final TimeZoneDTO timezone) {
+    this.timezone = timezone;
+  }
+
+  @Override
+  public String toString() {
+    return "UserDTO[" + shortName + "]";
+  }
 
 }

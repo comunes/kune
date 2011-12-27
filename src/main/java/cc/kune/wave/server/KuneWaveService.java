@@ -41,6 +41,8 @@ public interface KuneWaveService {
 
   WaveRef createWave(String title, String message, ParticipantId... participantsArray);
 
+  WaveRef createWave(String title, String message, String... participantsArray);
+
   WaveRef createWave(String title, String message, String waveIdToCopy, URL gadgetUrl,
       ParticipantId... participantsArray);
 

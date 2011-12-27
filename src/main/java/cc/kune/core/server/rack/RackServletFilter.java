@@ -32,11 +32,14 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.quartz.SchedulerException;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 
 import cc.kune.core.server.ServerException;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
+import cc.kune.core.server.scheduler.CronServerTasksManager;
+import cc.kune.wave.server.WaveEmailNotifier;
 
 import com.google.inject.Injector;
 
@@ -137,14 +140,18 @@ public class RackServletFilter implements Filter {
     final RackBuilder builder = new RackBuilder();
     module.configure(builder);
     rack = builder.getRack();
-    // final WaveStarter waveStarter = new WaveStarter();
-    // final Injector waveChildInjector = waveStarter.runMain();
     injector = (Injector) filterConfig.getServletContext().getAttribute(INJECTOR_PARENT_ATTRIBUTE);
     final Injector kuneChildInjector = installInjector(filterConfig, rack, injector);
     startContainerListeners(rack.getListeners(), kuneChildInjector);
     docks = rack.getDocks();
     excludes = rack.getExcludes();
     initFilters(filterConfig);
+    kuneChildInjector.getInstance(WaveEmailNotifier.class);
+    try {
+      kuneChildInjector.getInstance(CronServerTasksManager.class).start();
+    } catch (final SchedulerException e) {
+      LOG.error("Error starting cron scheduler", e);
+    }
     LOG.debug("INITIALIZATION DONE!");
   }
 
