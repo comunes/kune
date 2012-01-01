@@ -9,9 +9,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.mail.MailService;
-import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.properties.KuneProperties;
@@ -25,8 +25,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class NotifyServiceDefault implements NotifyService {
-  public static final Log LOG = LogFactory.getLog(NotifyServiceDefault.class);
+public class NotifySenderDefault implements NotifySender {
+  public static final Log LOG = LogFactory.getLog(NotifySenderDefault.class);
   private final String emailTemplate;
   private final I18nTranslationManager i18n;
   private final MailService mailService;
@@ -35,7 +35,7 @@ public class NotifyServiceDefault implements NotifyService {
   private final XmppManager xmppManager;
 
   @Inject
-  public NotifyServiceDefault(final MailService mailService, final KuneWaveService waveService,
+  public NotifySenderDefault(final MailService mailService, final KuneWaveService waveService,
       final XmppManager xmppManager, final UserManager userManager, final I18nTranslationManager i18n,
       final KuneProperties kuneProperties) throws IOException {
     this.mailService = mailService;
@@ -60,18 +60,22 @@ public class NotifyServiceDefault implements NotifyService {
         LOG.info(String.format("The recipient %s is not a local user, don't notify", recipient));
         continue;
       }
-      // Translate per recipient language
-      final String subjectTranslation = i18n.getTranslation(user.getLanguage().getCode(),
-          subject.getTemplate(), "");
-      if (subjectTranslation != null) {
-        // Right now commented because we are only testing
-        // subject.setTemplate(subjectTranslation);
+      if (subject.shouldBeTranslated()) {
+        // Translate per recipient language
+        final String subjectTranslation = i18n.getTranslation(user.getLanguage().getCode(),
+            subject.getTemplate(), "");
+        if (subjectTranslation != null) {
+          // Right now commented because we are only testing
+          // subject.setTemplate(subjectTranslation);
+        }
       }
-      final String bodyTranslation = i18n.getTranslation(user.getLanguage().getCode(),
-          body.getTemplate(), "");
-      if (bodyTranslation != null) {
-        // Right now commented because we are only testing
-        // body.setTemplate(bodyTranslation);
+      if (body.shouldBeTranslated()) {
+        final String bodyTranslation = i18n.getTranslation(user.getLanguage().getCode(),
+            body.getTemplate(), "");
+        if (bodyTranslation != null) {
+          // Right now commented because we are only testing
+          // body.setTemplate(bodyTranslation);
+        }
       }
       switch (notifyType) {
       case chat:

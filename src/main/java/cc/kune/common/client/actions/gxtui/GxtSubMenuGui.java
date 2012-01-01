@@ -22,7 +22,7 @@ package cc.kune.common.client.actions.gxtui;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 

@@ -19,11 +19,11 @@
  */
 package cc.kune.pspace.client;
 
-import cc.kune.common.client.utils.TextUtils;
-import cc.kune.common.client.utils.UrlParam;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.GroupChangedEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
@@ -57,7 +57,7 @@ public class PSpaceInDevelopment extends Composite {
   FlowPanel container;
   @UiField
   FlowPanel contentPanel;
-  private final Provider<FileDownloadUtils> downloadProvider;
+  private final Provider<ClientFileDownloadUtils> downloadProvider;
   @UiField
   Image entityLogo;
   @UiField
@@ -76,7 +76,7 @@ public class PSpaceInDevelopment extends Composite {
 
   @Inject
   public PSpaceInDevelopment(final StateManager stateManager, final CoreResources images,
-      final Session session, final Provider<FileDownloadUtils> downloadProvider,
+      final Session session, final Provider<ClientFileDownloadUtils> downloadProvider,
       final I18nTranslationService i18n, final EventBus eventBus) {
     this.images = images;
     this.downloadProvider = downloadProvider;
@@ -116,7 +116,7 @@ public class PSpaceInDevelopment extends Composite {
   }
 
   private void setLogoImage(final StateToken stateToken, final boolean noCache) {
-    entityLogo.setUrl(downloadProvider.get().getLogoImageUrl(stateToken)
+    entityLogo.setUrl(downloadProvider.get().getLogoImageUrl(stateToken.getGroup())
         + (noCache ? UrlParam.noCacheStringSuffix() : ""));
   }
 

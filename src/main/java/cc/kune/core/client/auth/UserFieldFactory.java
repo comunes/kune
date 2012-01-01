@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.auth;
 
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.DefaultForm;
 

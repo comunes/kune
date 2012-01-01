@@ -22,7 +22,7 @@ package cc.kune.core.client.sn;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sn.actions.registry.AbstractSNMembersActionsRegistry;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -37,10 +37,10 @@ public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?
 
   private static final int MAX_NUM_AVATAR_IN_A_ROW = 6;
 
-  protected final Provider<FileDownloadUtils> downloadProvider;
+  protected final Provider<ClientFileDownloadUtils> downloadProvider;
 
   public AbstractSNPresenter(final EventBus eventBus, final View view, final Proxy<?> proxy,
-      final Provider<FileDownloadUtils> downloadProvider) {
+      final Provider<ClientFileDownloadUtils> downloadProvider) {
     super(eventBus, view, proxy);
     this.downloadProvider = downloadProvider;
   }

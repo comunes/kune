@@ -3,12 +3,12 @@ package cc.kune.gspace.client.viewers;
 import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.IconsRegistry;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -36,7 +36,7 @@ public class FolderViewerUtils {
 
   private final ActionRegistryByType actionsRegistry;
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
-  private final Provider<FileDownloadUtils> downloadUtilsProvider;
+  private final Provider<ClientFileDownloadUtils> downloadUtilsProvider;
   private final I18nTranslationService i18n;
   private final IconsRegistry iconsRegistry;
   private final PathToolbarUtils pathToolbarUtils;
@@ -46,7 +46,7 @@ public class FolderViewerUtils {
 
   @Inject
   public FolderViewerUtils(final ContentCapabilitiesRegistry capabilitiesRegistry,
-      final Session session, final Provider<FileDownloadUtils> downloadUtilsProvider,
+      final Session session, final Provider<ClientFileDownloadUtils> downloadUtilsProvider,
       final I18nTranslationService i18n, final ActionRegistryByType actionsRegistry,
       final StateManager stateManager, final PathToolbarUtils pathToolbarUtils) {
     this.capabilitiesRegistry = capabilitiesRegistry;

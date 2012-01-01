@@ -24,7 +24,7 @@ import java.util.List;
 
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.state.GroupChangedEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.StateChangedEvent;

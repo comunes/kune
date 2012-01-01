@@ -37,15 +37,15 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.utils.SimpleResponseCallback;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.AvatarChangedEvent;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
@@ -133,7 +133,7 @@ public class ChatClientDefault implements ChatClient {
   private final ChatOptions chatOptions;
   private final ChatResources chatResources;
   private Dialog dialog;
-  private final FileDownloadUtils downUtils;
+  private final ClientFileDownloadUtils downUtils;
   private final I18nTranslationService i18n;
   private final EventBus kuneEventBus;
   private final CoreResources res;
@@ -149,7 +149,7 @@ public class ChatClientDefault implements ChatClient {
   @Inject
   public ChatClientDefault(final EventBus kuneEventBus, final I18nTranslationService i18n,
       final SitebarActions siteActions, final Session session, final CoreResources res,
-      final FileDownloadUtils downUtils, final GlobalShortcutRegister shorcutRegister,
+      final ClientFileDownloadUtils downUtils, final GlobalShortcutRegister shorcutRegister,
       final ChatOptions chatOptions, final ChatResources chatResources, final ChatInstances chatInstances) {
     this.kuneEventBus = kuneEventBus;
     this.i18n = i18n;

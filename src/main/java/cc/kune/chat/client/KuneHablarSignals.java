@@ -21,7 +21,7 @@ package cc.kune.chat.client;
 
 import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.xep.storage.client.PrivateStorageManager;
@@ -72,7 +72,7 @@ public class KuneHablarSignals {
   @SuppressWarnings("deprecation")
   public KuneHablarSignals(final EventBus kuneEventBus, final XmppSession session, final Hablar hablar,
       final ChatClientAction action, final ChatInstances chatInstances,
-      final I18nTranslationService i18n, final FileDownloadUtils downUtils) {
+      final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
     final HablarEventBus hablarEventBus = hablar.getEventBus();
     final PrivateStorageManager storageManager = chatInstances.privateStorageManager;
 

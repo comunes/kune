@@ -24,8 +24,8 @@ import java.util.Set;
 
 import org.waveprotocol.box.server.CoreSettings;
 
-import cc.kune.common.client.utils.Url;
-import cc.kune.common.client.utils.UrlParam;
+import cc.kune.common.shared.utils.Url;
+import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.shared.FileConstants;
 
 import com.google.common.base.Preconditions;
@@ -153,7 +153,7 @@ class ThreadedWaveRenderer implements WaveRenderer {
       avatar = new Url(FileConstants.AVATARDOWNLOADSERVLET, new UrlParam(FileConstants.USERNAME,
           address.split("@")[0])).toString();
     } else {
-      avatar = FileConstants.PERSON_NO_AVATAR_IMAGE;
+      avatar = FileConstants.PERSON_NO_AVATAR_IMAGE_PATH;
     }
     return avatar;
   }

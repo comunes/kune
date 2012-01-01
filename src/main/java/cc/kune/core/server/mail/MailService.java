@@ -19,8 +19,6 @@
  */
 package cc.kune.core.server.mail;
 
-import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
-
 public interface MailService {
 
   /**

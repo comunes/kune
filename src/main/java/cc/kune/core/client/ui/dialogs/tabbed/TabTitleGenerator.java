@@ -21,7 +21,7 @@ package cc.kune.core.client.ui.dialogs.tabbed;
 
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.resources.client.ImageResource;

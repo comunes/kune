@@ -20,7 +20,7 @@
 package cc.kune.common.client.ui.dialogs;
 
 import cc.kune.common.client.ui.IconLabel;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;

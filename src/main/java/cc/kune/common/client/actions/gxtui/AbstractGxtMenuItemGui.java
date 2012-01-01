@@ -32,7 +32,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.errors.NotImplementedException;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;

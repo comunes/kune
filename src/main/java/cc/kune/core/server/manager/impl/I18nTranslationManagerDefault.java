@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.persistence.EntityManager;
 
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;

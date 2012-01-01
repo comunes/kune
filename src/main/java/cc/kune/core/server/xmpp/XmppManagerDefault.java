@@ -39,7 +39,7 @@ import org.jivesoftware.smackx.Form;
 import org.jivesoftware.smackx.FormField;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.server.properties.ChatProperties;
 
 import com.google.inject.Inject;

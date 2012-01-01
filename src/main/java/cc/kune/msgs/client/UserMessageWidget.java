@@ -25,7 +25,7 @@ import org.adamtacy.client.ui.effects.examples.Fade;
 import org.adamtacy.client.ui.effects.examples.Show;
 
 import cc.kune.common.client.notify.NotifyLevel;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.msgs.client.resources.UserMessageImagesUtil;
 
 import com.google.gwt.core.client.GWT;

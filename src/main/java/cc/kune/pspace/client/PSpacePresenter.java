@@ -20,8 +20,8 @@
 package cc.kune.pspace.client;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;

@@ -21,7 +21,7 @@ package cc.kune.common.client.ui.dialogs;
 
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.PopupTopPanel;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

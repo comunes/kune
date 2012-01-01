@@ -19,9 +19,9 @@
  */
 package cc.kune.core.client.i18n;
 
-import cc.kune.common.client.utils.TextUtils;
-import cc.kune.common.client.utils.Url;
-import cc.kune.common.client.utils.UrlParam;
+import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.common.shared.utils.Url;
+import cc.kune.common.shared.utils.UrlParam;
 
 public class I18nUrlUtils {
 

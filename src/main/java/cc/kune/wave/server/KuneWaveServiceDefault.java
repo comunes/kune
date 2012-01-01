@@ -48,7 +48,7 @@ import org.waveprotocol.wave.model.version.HashedVersion;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 
 import com.google.common.collect.ImmutableMap;

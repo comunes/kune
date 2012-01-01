@@ -21,8 +21,8 @@ package cc.kune.core.client.dnd;
 
 import cc.kune.common.client.actions.ui.descrip.DropTarget;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.ContentCache;

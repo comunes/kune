@@ -30,9 +30,9 @@ public class MediaUtils {
 
     private final Session session;
 
-    private final FileDownloadUtils downloadUtils;
+    private final ClientFileDownloadUtils downloadUtils;
 
-    public MediaUtils(final Session session, final FileDownloadUtils downloadUtils) {
+    public MediaUtils(final Session session, final ClientFileDownloadUtils downloadUtils) {
         this.session = session;
         this.downloadUtils = downloadUtils;
     }

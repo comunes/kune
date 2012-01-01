@@ -28,6 +28,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.notifier.NotifyService;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -42,16 +43,19 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
   private final GroupManager groupManager;
   private final Mapper mapper;
+  private final NotifyService notifyService;
   private final SocialNetworkManager socialNetworkManager;
   private final UserSessionManager userSessionManager;
 
   @Inject
   public SocialNetworkRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
-      final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
+      final SocialNetworkManager socialNetworkManager, final Mapper mapper,
+      final NotifyService notifyService) {
     this.userSessionManager = userSessionManager;
     this.groupManager = groupManager;
     this.socialNetworkManager = socialNetworkManager;
     this.mapper = mapper;
+    this.notifyService = notifyService;
   }
 
   @Override
@@ -65,6 +69,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
     socialNetworkManager.acceptJoinGroup(userLogged, groupToAccept, group);
+    notifyService.notifyGroup(groupToAccept, group, "Accepted as member",
+        "You are now member of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -79,6 +85,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
     socialNetworkManager.addGroupToAdmins(userLogged, groupToAdd, group);
+    notifyService.notifyGroup(groupToAdd, group, "Accepted as admin", "You are now admin of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -93,6 +100,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
     socialNetworkManager.addGroupToCollabs(userLogged, groupToAdd, group);
+    notifyService.notifyGroup(groupToAdd, group, "Accepted as collaborator",
+        "You are now a collaborator of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -128,6 +137,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
     socialNetworkManager.deleteMember(userLogged, groupToDelete, group);
+    notifyService.notifyGroup(groupToDelete, group, "Removed as collaborator",
+        "You have been remove as collaborator of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -142,6 +153,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
     socialNetworkManager.denyJoinGroup(userLogged, groupToDenyJoin, group);
+    notifyService.notifyGroup(groupToDenyJoin, group, "Membership denied",
+        "Your membership to this group has been rejected");
     return generateResponse(userLogged, group);
   }
 
@@ -170,6 +183,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     final User user = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
+    notifyService.notifyGroupAdmins(group, group, "Pending collaborator",
+        "There is a pending collaborator in this group. Please accept or deny him/her");
     return socialNetworkManager.requestToJoin(user, group);
   }
 
@@ -184,6 +199,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
     socialNetworkManager.setAdminAsCollab(userLogged, groupToSetCollab, group);
+    notifyService.notifyGroup(groupToSetCollab, group, "Membership changed",
+        "Your membership to this group have changed. You are now a collaborator of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -198,6 +215,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
     socialNetworkManager.setCollabAsAdmin(userLogged, groupToSetAdmin, group);
+    notifyService.notifyGroup(groupToSetAdmin, group, "Membership changed",
+        "Your membership to this group have changed. You are now an admin of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -209,6 +228,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     socialNetworkManager.unJoinGroup(userLogged.getUserGroup(), group);
+    notifyService.notifyGroupAdmins(group, userLogged.getUserGroup(), "Some member left this group",
+        "Some member have left this group");
   }
 
 }

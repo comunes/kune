@@ -28,7 +28,7 @@ import cc.kune.common.client.actions.ui.bind.GuiBinding;
 import cc.kune.common.client.actions.ui.descrip.DropTarget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.NotImplementedException;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;

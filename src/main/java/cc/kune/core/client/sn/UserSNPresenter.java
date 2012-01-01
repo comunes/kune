@@ -24,7 +24,7 @@ import java.util.List;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNProxy;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNView;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
@@ -95,7 +95,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
   @Inject
   public UserSNPresenter(final EventBus eventBus, final UserSNView view, final UserSNProxy proxy,
       final I18nTranslationService i18n, final StateManager stateManager, final Session session,
-      final Provider<FileDownloadUtils> downloadProvider,
+      final Provider<ClientFileDownloadUtils> downloadProvider,
       final UserSNMenuItemsRegistry userMenuItemsRegistry, final UserSNConfActions confActionsRegistry) {
     super(eventBus, view, proxy, downloadProvider);
     this.i18n = i18n;

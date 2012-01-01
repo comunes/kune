@@ -25,11 +25,11 @@ import org.waveprotocol.wave.client.common.util.DateUtils;
 
 import cc.kune.common.client.ui.DottedTabPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.hspace.client.HSpacePresenter.HSpaceView;
 
@@ -58,7 +58,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   private static HSpacePanelUiBinder uiBinder = GWT.create(HSpacePanelUiBinder.class);
 
-  private final FileDownloadUtils downUtils;
+  private final SharedFileDownloadUtils downUtils;
   @UiField
   FlowPanel globalStats;
   private final RootPanel globalStatsParent;
@@ -103,7 +103,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   @Inject
   public HSpacePanel(final I18nTranslationService i18n, final GSpaceArmor armor,
-      final Provider<GroupContentHomeLink> linkProv, final FileDownloadUtils downUtils) {
+      final Provider<GroupContentHomeLink> linkProv, final SharedFileDownloadUtils downUtils) {
     this.linkProv = linkProv;
     this.downUtils = downUtils;
     widget = uiBinder.createAndBindUi(this);
@@ -165,7 +165,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     for (final ContentSimpleDTO content : lastContentsOfMyGroupsList) {
       final GroupContentHomeLink link = linkProv.get();
       final StateToken token = content.getStateToken();
-      link.setValues(downUtils.getLogoImageUrl(token.copy().clearDocument().clearFolder()),
+      link.setValues(downUtils.getLogoImageUrl(token.getGroup()),
           format(content.getModifiedOn(), content.getName()), token.toString());
       lastActivityInYourGroup.add(link);
     }
@@ -176,7 +176,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     lastGroups.clear();
     for (final GroupDTO group : lastGroupsList) {
       final GroupContentHomeLink link = linkProv.get();
-      link.setValues(downUtils.getLogoImageUrl(group.getStateToken()),
+      link.setValues(downUtils.getLogoImageUrl(group.getShortName()),
           format(group.getCreatedOn(), group.getLongName()), group.getShortName());
       lastGroups.add(link);
     }
@@ -189,7 +189,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
       final GroupContentHomeLink link = linkProv.get();
       final StateToken token = content.getStateToken();
       link.setValues(
-          downUtils.getLogoImageUrl(token.copy().clearDocument().clearFolder()),
+          downUtils.getLogoImageUrl(token.getGroup()),
           format(content.getModifiedOn(),
               "(" + content.getStateToken().getGroup() + ") " + content.getName()), token.toString());
       lastPublishedContents.add(link);

@@ -20,8 +20,8 @@
 package cc.kune.core.client.dnd;
 
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.allen_sauer.gwt.dnd.client.DragContext;
 import com.allen_sauer.gwt.dnd.client.VetoDragException;

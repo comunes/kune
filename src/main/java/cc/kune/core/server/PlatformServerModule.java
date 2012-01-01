@@ -86,8 +86,8 @@ import cc.kune.core.server.manager.impl.ToolConfigurationManagerDefault;
 import cc.kune.core.server.manager.impl.UserManagerDefault;
 import cc.kune.core.server.mapper.DozerMapper;
 import cc.kune.core.server.mapper.Mapper;
-import cc.kune.core.server.notifier.NotifyService;
-import cc.kune.core.server.notifier.NotifyServiceDefault;
+import cc.kune.core.server.notifier.NotifySender;
+import cc.kune.core.server.notifier.NotifySenderDefault;
 import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.GroupRPC;
@@ -195,7 +195,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(UsersOnline.class).to(UserSessionManager.class).in(Singleton.class);
     requestStaticInjection(AccessRightsUtils.class);
     bind(CronServerTasksManager.class).in(Singleton.class);
-    bind(NotifyService.class).to(NotifyServiceDefault.class).in(Singleton.class);
+    bind(NotifySender.class).to(NotifySenderDefault.class).in(Singleton.class);
     bind(WaveEmailNotifier.class).in(Singleton.class);
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
         outermostCall(new AuthenticatedMethodInterceptor()));

@@ -24,11 +24,11 @@ import gwtupload.client.IUploader;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
@@ -53,7 +53,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
   private final GSpaceBackManager backManager;
   private final EntityOptions entityOptions;
   private final EventBus eventBus;
-  private final FileDownloadUtils fileDownloadUtils;
+  private final ClientFileDownloadUtils fileDownloadUtils;
   private final Provider<GroupServiceAsync> groupService;
   private final I18nTranslationService i18n;
   private final Session session;
@@ -64,7 +64,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
       final StateManager stateManager, final EntityOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackManager backManager,
       final GSpaceThemeSelectorPresenter styleSelector, final I18nTranslationService i18n,
-      final FileDownloadUtils fileDownloadUtils) {
+      final ClientFileDownloadUtils fileDownloadUtils) {
     this.eventBus = eventBus;
     this.session = session;
     this.stateManager = stateManager;

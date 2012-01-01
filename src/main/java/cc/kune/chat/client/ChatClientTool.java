@@ -22,7 +22,7 @@ package cc.kune.chat.client;
 import static cc.kune.chat.shared.ChatConstants.NAME;
 import static cc.kune.chat.shared.ChatConstants.TYPE_ROOM;
 import cc.kune.chat.client.resources.ChatResources;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;

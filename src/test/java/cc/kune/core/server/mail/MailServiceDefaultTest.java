@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
 import cc.kune.core.server.properties.KunePropertiesDefault;
 
 public class MailServiceDefaultTest {

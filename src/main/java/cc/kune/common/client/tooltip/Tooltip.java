@@ -19,9 +19,9 @@
  */
 package cc.kune.common.client.tooltip;
 
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.common.client.utils.TimerWrapper.Executer;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;

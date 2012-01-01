@@ -1,45 +1,55 @@
 package cc.kune.core.server.notifier;
 
-import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
-/**
- * The Interface NotifyService.
- */
-public interface NotifyService {
+import org.apache.commons.collections.CollectionUtils;
 
-  /**
-   * Send a message to the recipients (also translate the subject/body using the
-   * user language)
-   * 
-   * @param notifyType
-   *          the notify type (email, etc)
-   * @param subject
-   *          the subject of the message (not translated)
-   * @param body
-   *          the body of the message (not translated) but with %s
-   *          {@link String.format} args
-   * @param isHtml
-   *          if the body is html
-   * @param recipients
-   *          the recipients shortnames (without domain)
-   */
-  void send(NotifyType notifyType, FormatedString subject, FormatedString body, boolean isHtml,
-      String... recipients);
+import cc.kune.core.server.mail.FormatedString;
+import cc.kune.domain.Group;
 
-  /**
-   * Send a message to the recipients (also translate the subject/body using the
-   * user language)
-   * 
-   * @param notifyType
-   *          the notify type (email, etc)
-   * @param subject
-   *          the subject of the message
-   * @param body
-   *          the body of the message (no translated) but with some %s
-   *          {@link String.format} args
-   * @param recipients
-   *          the recipients shortnames (without domain)
-   */
-  void send(NotifyType notifyType, FormatedString subject, FormatedString body, String... recipients);
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
+public class NotifyService {
+
+  private final NotifyHtmlHelper helper;
+  private final NotifySender sender;
+
+  @Inject
+  NotifyService(final NotifySender sender, final NotifyHtmlHelper helper) {
+    this.sender = sender;
+    this.helper = helper;
+  }
+
+  @SuppressWarnings("unchecked")
+  public void notifyGroup(final Group groupToNotify, final Group groupSender, final String subject,
+      final String message) {
+    final Set<Group> admins = groupToNotify.getSocialNetwork().getAccessLists().getAdmins().getList();
+    final Set<Group> collabs = groupToNotify.getSocialNetwork().getAccessLists().getEditors().getList();
+    final List<Group> groups = (List<Group>) CollectionUtils.union(admins, collabs);
+    notifyToAll(groupSender, subject, message, groups);
+  }
+
+  public void notifyGroupAdmins(final Group groupToNotify, final Group groupSender,
+      final String subject, final String message) {
+    final Set<Group> admins = groupToNotify.getSocialNetwork().getAccessLists().getAdmins().getList();
+    notifyToAll(groupSender, subject, message, admins);
+  }
+
+  private void notifyToAll(final Group groupSender, final String subject, final String message,
+      final Collection<Group> groups) {
+    for (final Group to : groups) {
+      sender.send(NotifyType.email, FormatedString.build(subject),
+          helper.groupNotification(groupSender.getShortName(), groupSender.hasLogo(), message),
+          to.getShortName());
+    }
+  }
+
+  public void notifyUser(final String to, final Group group, final String subject, final String message) {
+    sender.send(NotifyType.email, FormatedString.build(subject),
+        helper.groupNotification(group.getShortName(), group.hasLogo(), message), to);
+  }
 }

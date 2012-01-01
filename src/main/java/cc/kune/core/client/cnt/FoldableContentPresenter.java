@@ -22,7 +22,7 @@ package cc.kune.core.client.cnt;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.Session;
@@ -41,7 +41,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     FoldableContent {
 
   private final GuiActionDescCollection actionRegistry;
-  private final Provider<FileDownloadUtils> downloadProvider;
+  private final Provider<ClientFileDownloadUtils> downloadProvider;
   private final I18nTranslationService i18n;
   private final Provider<MediaUtils> mediaUtils;
   protected final Session session;
@@ -52,7 +52,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
 
   public FoldableContentPresenter(final String toolName, final StateManager stateManager,
       final Session session, final ActionContentToolbar toolbar,
-      final GuiActionDescCollection actionRegistry, final Provider<FileDownloadUtils> downloadProvider,
+      final GuiActionDescCollection actionRegistry, final Provider<ClientFileDownloadUtils> downloadProvider,
       final I18nTranslationService i18n, final Provider<MediaUtils> mediaUtils) {
     this.toolName = toolName;
     this.session = session;
@@ -154,7 +154,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     final StateToken token = state.getStateToken();
     final BasicMimeTypeDTO mimeType = state.getMimeType();
     if (mimeType != null) {
-      final FileDownloadUtils fileDownloadUtils = downloadProvider.get();
+      final ClientFileDownloadUtils fileDownloadUtils = downloadProvider.get();
       if (mimeType.isImage()) {
         view.showImage(fileDownloadUtils.getImageUrl(token),
             fileDownloadUtils.getImageResizedUrl(token, ImageSize.sized), false);

@@ -21,7 +21,7 @@ package cc.kune.gspace.client.options.style;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.options.GroupOptions;
@@ -40,7 +40,7 @@ public class GroupOptStylePresenter extends EntityOptStylePresenter implements
       final StateManager stateManager, final GroupOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackManager backManager,
       final GroupOptStyleView view, final GSpaceThemeSelectorPresenter styleSelector,
-      final I18nTranslationService i18n, final FileDownloadUtils fileDownUtils) {
+      final I18nTranslationService i18n, final ClientFileDownloadUtils fileDownUtils) {
     super(eventBus, session, stateManager, entityOptions, groupService, backManager, styleSelector,
         i18n, fileDownUtils);
     init(view);

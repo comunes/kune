@@ -14,7 +14,7 @@
    height="768"
    id="svg3182"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="web_template-2011.svg"
    inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
    inkscape:export-xdpi="90"
@@ -78,17 +78,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.16135477"
-     inkscape:cx="512"
+     inkscape:zoom="1.1201172"
+     inkscape:cx="-265.55632"
      inkscape:cy="384"
-     inkscape:current-layer="g8450"
+     inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:window-width="1078"
-     inkscape:window-height="897"
+     inkscape:window-width="1280"
+     inkscape:window-height="776"
      inkscape:window-x="0"
-     inkscape:window-y="947"
-     inkscape:window-maximized="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
      inkscape:snap-bbox="false"
      inkscape:bbox-paths="true"
      inkscape:bbox-nodes="true"
@@ -258,7 +258,7 @@
              id="g5365">
             <path
                transform="matrix(0.102065,0,0,0.102065,387.7515,-17.05636)"
-               d="m 277.35793,332.62314 a 26.82268,26.82268 0 1 1 -53.64536,0 26.82268,26.82268 0 1 1 53.64536,0 z"
+               d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
                sodipodi:ry="26.82268"
                sodipodi:rx="26.82268"
                sodipodi:cy="332.62314"
@@ -268,7 +268,7 @@
                sodipodi:type="arc" />
             <path
                transform="matrix(0.05245387,0,0,0.05245387,400.1808,-0.554549)"
-               d="m 277.35793,332.62314 a 26.82268,26.82268 0 1 1 -53.64536,0 26.82268,26.82268 0 1 1 53.64536,0 z"
+               d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
                sodipodi:ry="26.82268"
                sodipodi:rx="26.82268"
                sodipodi:cy="332.62314"
@@ -546,7 +546,7 @@
        transform="translate(-751,-12)">
       <path
          transform="translate(0,-3)"
-         d="m 333,232 a 11,11 0 1 1 -22,0 11,11 0 1 1 22,0 z"
+         d="m 333,232 c 0,6.07513 -4.92487,11 -11,11 -6.07513,0 -11,-4.92487 -11,-11 0,-6.07513 4.92487,-11 11,-11 6.07513,0 11,4.92487 11,11 z"
          sodipodi:ry="11"
          sodipodi:rx="11"
          sodipodi:cy="232"
@@ -2177,7 +2177,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
          transform="matrix(0.475,0,0,0.95,-21.570622,377.21335)"
-         d="m 110,32.362183 a 20,10 0 1 1 -40,0 20,10 0 1 1 40,0 z"
+         d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
          sodipodi:ry="10"
          sodipodi:rx="20"
          sodipodi:cy="32.362183"
@@ -2190,7 +2190,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,8.0842525,364.37023)"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          sodipodi:ry="1"
          sodipodi:rx="1"
          sodipodi:cy="16.362183"
@@ -2209,14 +2209,14 @@
          sodipodi:cy="16.362183"
          sodipodi:rx="1"
          sodipodi:ry="1"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,2.7154875,362.20909)" />
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,7.7663825,370.24449)"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          sodipodi:ry="1"
          sodipodi:rx="1"
          sodipodi:cy="16.362183"
@@ -2235,14 +2235,14 @@
          sodipodi:cy="16.362183"
          sodipodi:rx="1"
          sodipodi:ry="1"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,2.2467045,371.75097)" />
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,-0.8112855,366.96948)"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          sodipodi:ry="1"
          sodipodi:rx="1"
          sodipodi:cy="16.362183"
@@ -4035,7 +4035,81 @@
        x="-505.18716"
        y="159.15428"
        ry="3.5237386" />
-  </g>
+    <image
+       style="display:inline"
+       width="50"
+       height="50"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iii gAooooAKY7rGpZ2Cj1JxWZqmqfZAYoQDLjknoo9ff6Vzsksksu+RmdiTgk5IH9KuMG9SHNJ2OxS7 t5DtSeJm9A4JqeuAkQFeeTn86bZ67d6VMAXMttnDRk5x9Cen8v5hunbYFPueg0VXtbmK8to7iFw0 bjKkVYrMsKKKKACiiigAooooASmSyLFE8jfdVST9AKkqjqr+Xpk59QB+ZA/rQtxM5WSVppXlc5Zi SeeB7e1M5ySSDx+VAIx1PToKDyTxj6iuowGuODxkkevSsm+HBHBPt2rWkPB4zwayb08Ec/lQxo3v A98xe50+RjgASxg9hnDfqR+tdrXmXhCUp4ngUDiRXQ8+ik/j0Fem1zzWprHYKKKKkoKKKKACiiig AqnqieZps6+ilvy5/pVymSIJI2RujAgj60LRiZw579h/OgnoScDHAFDApIyMCHUkN7GkJGB06+vT /GuowGSnCEDIH0rFvXySMkjPY9K0rqXg9ck81hXMm44BwPek2M2fBsYl8SRt/wA80duvTIx/WvSx XDeAbbMt5dEYAVY1Prnk/wAh+ddzWE3qax2CiiipKCiiigAooooAKKKKAOL8QQGx1IygHy58sMDo 3cf1/Gsh7sADnt0B6V3er2UF9p8sNwwRfvCQn7hHQ15XK7xyFCc4OMjoa3hLQyktSzc3OSew+tZ5 JcjHJz6fp70E5JyMn3NdH4MsbS81NpZ5EMkADRxHALH+97gfzIP1G7K4Ja2Ox8OaadL0aGCQYmb9 5J/vHt+AwPwrXNFJWD1NRaKKKACiiigAoo7VSvr9LKIMRuduFUd6EribLbMEUsxAA6knisu71y3g ysX71/Y4X8+/4ZrBub2e7YtMxIB4UHAH4f1qD19cdMVtGn3Ic+xLfXlxfZEj/KOQo+6P8awbu0yT gcVs4Bzkkk+9RtGrk9CMHv1rSySsiLtnLNAwONpwT370+CGVZQ6MyuDlShIII7gjp9a3mtFJJwMC nR2ip2ANKwGxpPiK4WNYr8GUY/1q8MPqOn+e9dJb3cF2m6CVXHcA4I+o6iuLVAFHtTGDKwdGZWBy GU4I+hFQ6aexam+p6BRXH6X4meKZbfUG3RkgLMeCp/2vUe/866+smmty077C0UUUhiZwMnpXHX10 by6eTtnCj2H8v/r10uqS+Tp0zDqV2/mcVyJOBwCTjsela0l1M5voB4AGMnPbvQAc4GRkY5/zxSYx xwCBSnggDk/yrYzADgdScdh0oPAPTpQc4POKOAcZJP8AKgAI5PA6dqTqAegzwAOv+NL256+nrRwA ACSfYUABxk8frTWAK46nH+fpTiMEdc5/KkY/KcZJx2PSgDKvkwDwM57d66zwhqZvNOa1kJMtsQuT 3U9PywR+ArlrwYUjjIHNS+ErkweJI4x92ZGRvbjI/UD86zmrouL1PSaKKKwNTK14/wCgKPWQA/ka 5odvpRRW9LYxnuIOh/GjFFFaEinv9f6U0nCgiiigBcdKF+YjNFFAAOWx7Udh9KKKAM27+4341U0p jHr9gV4JuIx+bYooqHsyo7nrFFFFc5sf/9k= "
+       id="image15327-2"
+       x="-819.83234"
+       y="352.556"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <image
+       style="display:inline"
+       y="493.54968"
+       x="-697.43127"
+       id="image4197-7"
+       xlink:href="data:image/png;base64,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 YII= "
+       height="50"
+       width="50"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <flowRoot
+       transform="translate(-1742.5553,146.8489)"
+       id="flowRoot22983-8"
+       xml:space="preserve"
+       style="font-size:13px;display:inline"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:transform-center-x="-69.722141"
+       inkscape:transform-center-y="5.0305176"><flowRegion
+         id="flowRegion22985-0"><rect
+           y="337.25836"
+           x="1105.337"
+           height="98.930603"
+           width="725.66296"
+           id="rect22987-4"
+           style="font-size:13px" /></flowRegion><flowPara
+         id="flowPara22989-2"
+         style="font-size:13px;font-weight:bold">Some Group</flowPara></flowRoot>    <flowRoot
+       style="display:inline"
+       xml:space="preserve"
+       id="flowRoot17968-64"
+       transform="translate(-1740.9728,166.94552)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><flowRegion
+         id="flowRegion17970-1"><rect
+           id="rect17972-2"
+           width="725.66296"
+           height="98.930603"
+           x="1105.337"
+           y="337.25836" /></flowRegion><flowPara
+         id="flowPara8076">You are now admin of this group</flowPara><flowPara
+         id="flowPara8078">You are now a collaborator of this group</flowPara><flowPara
+         id="flowPara8105">You are not a member of this group</flowPara><flowPara
+         id="flowPara8101">Your membership to this group where not accepted by the admins</flowPara><flowPara
+         id="flowPara8099">There is a pending member in this group, please accept/deny this petition</flowPara><flowPara
+         id="flowPara8097" /></flowRoot>    <flowRoot
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       transform="translate(-1740.9728,246.55145)"
+       id="flowRoot8080"
+       xml:space="preserve"
+       style="fill:#0000ff;display:inline"><flowRegion
+         id="flowRegion8082"><rect
+           y="337.25836"
+           x="1105.337"
+           height="98.930603"
+           width="725.66296"
+           id="rect8084"
+           style="fill:#0000ff" /></flowRegion><flowPara
+         id="flowPara8090">More info</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer7"

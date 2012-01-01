@@ -17,40 +17,47 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package cc.kune.common.client.utils;
+package cc.kune.common.shared.utils;
 
-import java.util.Date;
+import java.util.ArrayList;
 
-public class UrlParam {
-  public static String noCacheStringSuffix() {
-    final String noCache = "&nocache=" + new Date().getTime();
-    return noCache;
-  }
-  private final String name;
+public class Url {
+  private final String base;
+  private final ArrayList<UrlParam> params;
 
-  private final String value;
-
-  public UrlParam(final String name, final boolean value) {
-    this.name = name;
-    this.value = value ? "true" : "false";
+  public Url(final String base) {
+    this.base = base;
+    params = new ArrayList<UrlParam>();
   }
 
-  public UrlParam(final String name, final String value) {
-    this.name = name;
-    this.value = value;
+  public Url(final String base, final UrlParam... iniParams) {
+    this(base);
+    for (final UrlParam param : iniParams) {
+      addImpl(param);
+    }
   }
 
-  public String getName() {
-    return name;
+  public void add(final UrlParam param) {
+    addImpl(param);
   }
 
-  public String getValue() {
-    return value;
+  private void addImpl(final UrlParam param) {
+    params.add(param);
   }
 
   @Override
   public String toString() {
-    return name + "=" + value;
+    String paramPart = "";
+    boolean first = true;
+    for (final UrlParam param : params) {
+      if (first) {
+        paramPart = "?" + param;
+        first = false;
+      } else {
+        paramPart += "&" + param;
+      }
+    }
+    return base + paramPart;
   }
 
 }

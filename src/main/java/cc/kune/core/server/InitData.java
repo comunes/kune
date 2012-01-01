@@ -165,11 +165,6 @@ public class InitData {
     return siteCommonName;
   }
 
-  @Deprecated
-  public String getSiteDomain() {
-    return siteDomain;
-  }
-
   public String getSiteLogoUrl() {
     return siteLogoUrl;
   }
@@ -304,11 +299,6 @@ public class InitData {
 
   public void setSiteCommonName(final String siteCommonName) {
     this.siteCommonName = siteCommonName;
-  }
-
-  @Deprecated
-  public void setSiteDomain(final String siteDomain) {
-    this.siteDomain = siteDomain;
   }
 
   public void setSiteLogoUrl(final String siteLogoUrl) {

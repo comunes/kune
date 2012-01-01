@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.registry;
 
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gxp.com.google.common.base.Nullable;
 

@@ -35,53 +35,12 @@ import org.apache.commons.logging.LogFactory;
 import cc.kune.core.server.LogThis;
 import cc.kune.core.server.properties.KuneProperties;
 
-import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 @LogThis
 public class MailServiceDefault implements MailService {
-
-  public static class FormatedString {
-    public static FormatedString build(final String plainMsg) {
-      return new FormatedString(plainMsg);
-    }
-
-    public static FormatedString build(final String template, final Object... args) {
-      return new FormatedString(template, args);
-    }
-
-    private final Object[] args;
-    private String template;
-
-    public FormatedString(final String plainMsg) {
-      template = plainMsg;
-      args = null;
-    }
-
-    public FormatedString(final String template, final Object... args) {
-      this.template = template;
-      this.args = args;
-    }
-
-    public String getString() {
-      Preconditions.checkNotNull(template, "Template of FormatedString cannot be null");
-      return args == null ? template : String.format(template, args);
-    }
-
-    public String getTemplate() {
-      return template;
-    }
-
-    /*
-     * Used to translate the template to the user language (when you don't know
-     * already the language of the user)
-     */
-    public void setTemplate(final String template) {
-      this.template = template;
-    }
-  }
 
   Log log = LogFactory.getLog(MailServiceDefault.class);
   private final Properties props;

@@ -21,7 +21,7 @@ package cc.kune.core.client.i18n;
 
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 /**
  * Copied some methods from org.apache.commons.lang.WordUtils

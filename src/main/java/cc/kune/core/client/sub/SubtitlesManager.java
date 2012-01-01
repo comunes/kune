@@ -21,7 +21,7 @@ package cc.kune.core.client.sub;
 
 import cc.kune.common.client.utils.Base64Utils;
 import cc.kune.common.client.utils.SimpleCallback;
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.state.StateManager;
 
 import com.google.gwt.event.shared.EventBus;

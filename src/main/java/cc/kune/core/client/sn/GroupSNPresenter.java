@@ -23,7 +23,7 @@ import java.util.Set;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNCollabsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
@@ -101,7 +101,7 @@ public class GroupSNPresenter extends
   @Inject
   public GroupSNPresenter(final EventBus eventBus, final GroupSNView view, final GroupSNProxy proxy,
       final StateManager stateManager, final Session session,
-      final Provider<FileDownloadUtils> downloadProvider,
+      final Provider<ClientFileDownloadUtils> downloadProvider,
       final GroupSNAdminsMenuItemsRegistry adminsMenuItemsRegistry,
       final GroupSNCollabsMenuItemsRegistry collabsMenuItemsRegistry,
       final GroupSNPendingsMenuItemsRegistry pendingsMenuItemsRegistry,

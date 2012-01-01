@@ -25,7 +25,7 @@ import org.waveprotocol.wave.client.account.impl.AbstractProfileManager;
 import org.waveprotocol.wave.client.account.impl.ProfileImpl;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.FileConstants;
 
 import com.google.inject.Inject;
@@ -39,11 +39,11 @@ import com.google.inject.Inject;
 public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> implements
     ProfileManager {
 
-  private final FileDownloadUtils downloadUtils;
+  private final ClientFileDownloadUtils downloadUtils;
   private String localDomain;
 
   @Inject
-  public KuneWaveProfileManager(final FileDownloadUtils downloadUtils) {
+  public KuneWaveProfileManager(final ClientFileDownloadUtils downloadUtils) {
     this.downloadUtils = downloadUtils;
   }
 

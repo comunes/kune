@@ -21,7 +21,7 @@ package cc.kune.core.server.utils;
 
 import org.apache.commons.lang.StringUtils;
 
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.NameNotPermittedException;
 
 public class FilenameUtils {

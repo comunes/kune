@@ -19,7 +19,7 @@
  */
 package cc.kune.common.shared.i18n;
 
-import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.shared.utils.TextUtils;
 
 public class I18nTranslationServiceMocked extends I18nTranslationService {
   @Override

@@ -19,25 +19,24 @@
  \*/
 package cc.kune.core.client.services;
 
-import cc.kune.common.client.utils.Url;
-import cc.kune.common.client.utils.UrlParam;
+import cc.kune.common.shared.utils.Url;
+import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.core.shared.dto.UserSimpleDTO;
+import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 
-public class FileDownloadUtils {
+public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   private final ImageUtils imageUtils;
   private final Session session;
 
   @Inject
-  public FileDownloadUtils(final Session session, final ImageUtils imageUtils) {
+  public ClientFileDownloadUtils(final Session session, final ImageUtils imageUtils) {
     this.session = session;
     this.imageUtils = imageUtils;
   }
@@ -73,12 +72,6 @@ public class FileDownloadUtils {
             imageSize.toString())).toString();
   }
 
-  public String getGroupLogo(final GroupDTO group) {
-    return group.hasLogo() ? getLogoImageUrl(group.getStateToken())
-        : group.isPersonal() ? FileConstants.PERSON_NO_AVATAR_IMAGE
-            : FileConstants.GROUP_NO_AVATAR_IMAGE;
-  }
-
   public String getImageResizedUrl(final StateToken token, final ImageSize imageSize) {
     return calculateUrl(token, false, true) + "&"
         + new UrlParam(FileConstants.IMGSIZE, imageSize.toString());
@@ -92,27 +85,15 @@ public class FileDownloadUtils {
       final boolean isPersonal, final int size, final int hvspace) {
     if (groupHasLogo) {
       return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
-          + "px; height: " + size + "px;' src='" + getLogoImageUrl(groupToken) + "'>";
+          + "px; height: " + size + "px;' src='" + getLogoImageUrl(groupToken.getGroup()) + "'>";
     } else {
       return isPersonal ? imageUtils.getImageHtml(ImageDescriptor.personDef)
           : imageUtils.getImageHtml(ImageDescriptor.groupDefIcon);
     }
   }
 
-  public String getLogoImageUrl(final StateToken token) {
-    return new Url(FileConstants.LOGODOWNLOADSERVLET,
-        new UrlParam(FileConstants.TOKEN, token.toString())).toString();
-  }
-
   public String getUrl(final StateToken token) {
     return calculateUrl(token, false, false);
   }
 
-  public String getUserAvatar(final String username) {
-    return new Url(FileConstants.AVATARDOWNLOADSERVLET, new UrlParam(FileConstants.USERNAME, username)).toString();
-  }
-
-  public String getUserAvatar(final UserSimpleDTO user) {
-    return user.hasLogo() ? getLogoImageUrl(user.getStateToken()) : FileConstants.PERSON_NO_AVATAR_IMAGE;
-  }
 }

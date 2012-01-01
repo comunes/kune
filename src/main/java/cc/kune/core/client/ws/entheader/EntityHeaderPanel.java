@@ -22,10 +22,10 @@ package cc.kune.core.client.ws.entheader;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.utils.UrlParam;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -44,7 +44,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
-  private final Provider<FileDownloadUtils> downloadProvider;
+  private final Provider<ClientFileDownloadUtils> downloadProvider;
   private final EntityTextLogo entityTextLogo;
   private final CoreResources images;
   private final HorizontalPanel mainPanel;
@@ -52,7 +52,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   private final VerticalPanel vpanel;
 
   @Inject
-  public EntityHeaderPanel(final Provider<FileDownloadUtils> downloadProvider,
+  public EntityHeaderPanel(final Provider<ClientFileDownloadUtils> downloadProvider,
       final CoreResources images, final GuiProvider bindings, final GSpaceArmor armor,
       final EntityTextLogo entityTextLogo, final I18nTranslationService i18n) {
     this.entityTextLogo = entityTextLogo;
@@ -108,7 +108,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   @Override
   public void setLogoImage(final GroupDTO group, final boolean noCache) {
-    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken())
+    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getShortName())
         + (noCache ? UrlParam.noCacheStringSuffix() : ""));
   }
 

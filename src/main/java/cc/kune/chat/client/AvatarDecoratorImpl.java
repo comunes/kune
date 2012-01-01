@@ -20,8 +20,8 @@
 package cc.kune.chat.client;
 
 import cc.kune.common.client.ui.AbstractDecorator;
-import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.avatar.AvatarDecorator;
 
 import com.calclab.emite.core.client.events.StateChangedEvent;

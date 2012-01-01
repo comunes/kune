@@ -18,8 +18,8 @@ import org.waveprotocol.wave.model.wave.data.ReadableWaveletData;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.core.server.LogThis;
-import cc.kune.core.server.mail.MailServiceDefault.FormatedString;
-import cc.kune.core.server.notifier.NotifyService;
+import cc.kune.core.server.mail.FormatedString;
+import cc.kune.core.server.notifier.NotifySender;
 import cc.kune.core.server.notifier.NotifyType;
 import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.properties.KuneBasicProperties;
@@ -31,7 +31,7 @@ public class WaveEmailNotifier {
   public static final Log LOG = LogFactory.getLog(WaveEmailNotifier.class);
 
   @Inject
-  public WaveEmailNotifier(final WaveBus waveBus, final NotifyService notifyService,
+  public WaveEmailNotifier(final WaveBus waveBus, final NotifySender notifyService,
       final UsersOnline usersOnline, final KuneBasicProperties basicProperties,
       final ParticipantUtils partUtils) {
     waveBus.subscribe(new Subscriber() {
@@ -51,12 +51,12 @@ public class WaveEmailNotifier {
               final ParticipantId user = ((AddParticipant) op).getParticipantId();
               final String url = KuneWaveUtils.getUrl(WaveRef.of(wavelet.getWaveId(), waveletId));
               final FormatedString body = FormatedString.build(
-                  // FIXME when SSL/ssl support
-                  "Hi there,<br><br>You have a new message in %s. <a href=\"http://%s/#%s\">Read more</a>.<br>",
-                  basicProperties.getSiteCommonName(), basicProperties.getSiteDomain(), url);
+                  "Hi there,<br><br>You have a new message in %s. <a href=\"%s#%s\">Read more</a>.<br>",
+                  basicProperties.getSiteCommonName(), basicProperties.getSiteUrl(), url);
               final String address = user.getAddress();
               if (partUtils.isLocal(address)) {
                 final String userName = partUtils.getAddressName(address);
+                // FIXME only for testing
                 if (true || !usersOnline.isLogged(userName)) {
                   notifyService.send(NotifyType.email, FormatedString.build("You have a new message"),
                       body, true, userName);

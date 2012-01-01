@@ -55,8 +55,9 @@ public class EntityLogoDownloadManager extends HttpServlet {
       }
 
       if (!group.hasLogo()) {
-        FileDownloadManagerUtils.returnFile("src/main/webapp/others/defgroup.gif",
-            resp.getOutputStream());
+        FileDownloadManagerUtils.returnFile("src/main/webapp/"
+            + (group.isPersonal() ? FileConstants.PERSON_NO_AVATAR_IMAGE
+                : FileConstants.GROUP_NO_AVATAR_IMAGE), resp.getOutputStream());
       } else {
         // Has logo
         final byte[] logo = group.getLogo();

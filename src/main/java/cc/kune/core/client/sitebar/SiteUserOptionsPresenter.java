@@ -33,7 +33,7 @@ import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -53,7 +53,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   public static final MenuDescriptor LOGGED_USER_MENU = new MenuDescriptor();
   public static final String LOGGED_USER_MENU_ID = "kune-sump-lum";
-  private final Provider<FileDownloadUtils> downloadProvider;
+  private final Provider<ClientFileDownloadUtils> downloadProvider;
   private final GotoGroupAction gotoGroupAction;
   private final I18nTranslationService i18n;
   private SubMenuDescriptor partiMenu;
@@ -65,7 +65,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   @Inject
   public SiteUserOptionsPresenter(final Session session, final StateManager stateManager,
-      final Provider<FileDownloadUtils> downloadProvider, final I18nTranslationService i18n,
+      final Provider<ClientFileDownloadUtils> downloadProvider, final I18nTranslationService i18n,
       final CoreResources img, final SitebarActions siteOptions, final GotoGroupAction gotoGroupAction) {
     super();
     this.session = session;

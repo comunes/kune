@@ -127,7 +127,6 @@ public class SiteRPC implements RPC, SiteService {
     data.setTimezones(TimeZone.getAvailableIDs());
     data.setChatHttpBase(chatProperties.getHttpBase());
     data.setChatDomain(chatProperties.getDomain());
-    data.setSiteDomain(kuneProperties.get(KuneProperties.SITE_DOMAIN));
     data.setChatRoomHost(chatProperties.getRoomHost());
     data.setDefaultLicense(licenseManager.getDefLicense());
     data.setCurrentCCversion(this.kuneProperties.get(KuneProperties.CURRENT_CC_VERSION));
