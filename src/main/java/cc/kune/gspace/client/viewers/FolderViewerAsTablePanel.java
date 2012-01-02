@@ -22,7 +22,7 @@ package cc.kune.gspace.client.viewers;
 import org.waveprotocol.wave.client.common.util.DateUtils;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;

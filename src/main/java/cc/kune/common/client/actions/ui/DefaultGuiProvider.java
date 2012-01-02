@@ -19,36 +19,27 @@
  */
 package cc.kune.common.client.actions.ui;
 
-import cc.kune.common.shared.i18n.HasRTL;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.inject.Inject;
 
-public class ActionSimplePanel extends AbstractComposedGuiItem implements ActionExtensibleView {
+import com.google.inject.Provider;
 
-  private final HorizontalPanel bar;
+public class DefaultGuiProvider implements GuiProvider {
 
-  @Inject
-  public ActionSimplePanel(final GuiProvider guiProvider, final HasRTL i18n) {
-    super(guiProvider, i18n);
-    bar = new HorizontalPanel();
-    initWidget(bar);
-  }
+    private final Map<Class<?>, Provider<?>> map;
 
-  @Override
-  protected void addWidget(final AbstractGuiItem item) {
-    bar.add(item);
-  }
+    public DefaultGuiProvider() {
+        map = new HashMap<Class<?>, Provider<?>>();
+    }
 
-  @Override
-  public void clear() {
-    super.clear();
-    bar.clear();
-  }
+    @Override
+    public <T> GuiBinding get(final Class<T> classType) {
+        return (GuiBinding) map.get(classType).get();
+    }
 
-  @Override
-  protected void insertWidget(final AbstractGuiItem item, final int position) {
-    final int count = bar.getWidgetCount();
-    bar.insert(item, count < position ? count : position);
-  }
+    @Override
+    public <T, Z> void register(final Class<T> classType, final Provider<Z> binding) {
+        map.put(classType, binding);
+    }
 }

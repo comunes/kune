@@ -61,12 +61,12 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.GroupList;
 import cc.kune.domain.License;
+import cc.kune.domain.ParticipationData;
 import cc.kune.domain.Revision;
 import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.SocialNetworkData;
 import cc.kune.domain.User;
-import cc.kune.domain.utils.ParticipationData;
-import cc.kune.domain.utils.SocialNetworkData;
-import cc.kune.domain.utils.UserBuddiesData;
+import cc.kune.domain.UserBuddiesData;
 
 import com.google.inject.Inject;
 

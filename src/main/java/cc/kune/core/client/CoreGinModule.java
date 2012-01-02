@@ -20,8 +20,8 @@
 package cc.kune.core.client;
 
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
-import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;
-import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.DefaultGuiProvider;
+import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.log.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
@@ -98,6 +98,7 @@ import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.client.state.HistoryWrapperDefault;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SessionDefault;
+import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
@@ -201,6 +202,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
     // Core App
     bind(Session.class).to(SessionDefault.class).in(Singleton.class);
+    s(SessionExpirationManager.class);
     s(ErrorHandler.class);
     s(StateManagerDefault.class);
     bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);

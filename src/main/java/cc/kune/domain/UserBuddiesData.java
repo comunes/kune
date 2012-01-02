@@ -17,12 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package cc.kune.domain.utils;
+package cc.kune.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.kune.domain.User;
 
 public class UserBuddiesData {
 

@@ -21,7 +21,7 @@ package cc.kune.common.client.actions.gwtui;
 
 import cc.kune.common.client.actions.ui.AbstractComposedGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.shared.i18n.HasRTL;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;

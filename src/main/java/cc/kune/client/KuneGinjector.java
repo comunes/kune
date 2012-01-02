@@ -26,7 +26,7 @@ import cc.kune.blogs.client.BlogsGinjector;
 import cc.kune.chat.client.ChatGinModule;
 import cc.kune.chat.client.ChatGinjector;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
-import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.log.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -46,6 +46,7 @@ import cc.kune.core.client.sitebar.logo.SiteLogo;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPresenter;
+import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenMatcher;
@@ -116,9 +117,9 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
 
   GwtGuiProvider getGwtGuiProvider();
 
-  // GxtGuiProvider getGxtGuiProvider();
-
   HSpaceParts getHSpaceParts();
+
+  // GxtGuiProvider getGxtGuiProvider();
 
   AsyncProvider<HSpacePresenter> getHSpacePresenter();
 
@@ -135,6 +136,8 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
   AsyncProvider<PSpacePresenter> getPSpacePresenter();
 
   AsyncProvider<RegisterPresenter> getRegisterPresenter();
+
+  SessionExpirationManager getSessionExpirationManager();
 
   AsyncProvider<SignInPresenter> getSignInPresenter();
 

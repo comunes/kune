@@ -187,7 +187,7 @@
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.ParticipationDataDTO </class-a>
-    <class-b> cc.kune.domain.utils.ParticipationData </class-b>
+    <class-b> cc.kune.domain.ParticipationData </class-b>
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.I18nLanguageDTO </class-a>
@@ -231,11 +231,11 @@
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.UserBuddiesDataDTO </class-a>
-    <class-b> cc.kune.domain.utils.UserBuddiesData </class-b>
+    <class-b> cc.kune.domain.UserBuddiesData </class-b>
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.SocialNetworkDataDTO </class-a>
-    <class-b> cc.kune.domain.utils.SocialNetworkData </class-b>
+    <class-b> cc.kune.domain.SocialNetworkData </class-b>
   </mapping>
     <mapping>
     <class-a> cc.kune.core.shared.dto.HomeStatsDTO </class-a>

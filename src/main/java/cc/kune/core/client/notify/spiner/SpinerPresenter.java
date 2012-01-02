@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.notify.spiner;
 
-import cc.kune.common.client.events.ProgressHideEvent;
-import cc.kune.common.client.events.ProgressShowEvent;
+import cc.kune.common.client.notify.ProgressHideEvent;
+import cc.kune.common.client.notify.ProgressShowEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.i18n.I18nReadyEvent;
 

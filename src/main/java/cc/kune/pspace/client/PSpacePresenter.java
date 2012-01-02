@@ -27,13 +27,13 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.StateTokenUtils;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupListDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.StateTokenUtils;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.HasText;

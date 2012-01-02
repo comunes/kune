@@ -19,11 +19,11 @@
  */
 package cc.kune.core.client.init;
 
-import cc.kune.common.client.events.ProgressHideEvent;
-import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.notify.ProgressHideEvent;
+import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;

@@ -27,9 +27,10 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
-import cc.kune.common.client.events.ProgressHideEvent;
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.utils.Pair;
+import cc.kune.core.client.events.GoHomeEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -100,6 +101,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       @Override
       public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
         contentCache.removeCacheOfGroup(event.getState().getStateToken().getGroup());
+      }
+    });
+    eventBus.addHandler(GoHomeEvent.getType(), new GoHomeEvent.GoHomeHandler() {
+      @Override
+      public void onGoHome(final GoHomeEvent event) {
+        gotoDefaultHomepage();
       }
     });
   }

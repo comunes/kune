@@ -5,7 +5,8 @@ import com.google.common.base.Preconditions;
 /**
  * The Class FormatedString is used to separate, String templates (usually html)
  * from args (indicated with %s) and also to allow the translation of this
- * templates.
+ * templates. More info
+ * http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html#syntax
  */
 public class FormatedString {
 

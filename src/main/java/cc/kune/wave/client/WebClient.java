@@ -71,6 +71,7 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
@@ -278,6 +279,19 @@ public class WebClient extends  Composite implements WaveClientView {
     this.i18n = i18n;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
     ErrorHandler.install();
+    eventBus.addHandler(StackErrorEvent.getType(), new StackErrorEvent.StackErrorHandler() {
+      @Override
+      public void onStackError(final StackErrorEvent event) {
+        getStackTraceAsync(event.getException(), new Accessor<SafeHtml>() {
+          @Override
+          public void use(final SafeHtml stack) {
+            final String stackAsString = stack.asString().replace("<br>", "\n");
+            NotifyUser.logError(stackAsString);
+            cc.kune.common.client.log.Log.error("Stack: " + stackAsString);
+          }
+        });
+      }
+    });
 
     ClientEvents.get().addWaveCreationEventHandler(
         new WaveCreationEventHandler() {

@@ -27,7 +27,7 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.domain.User;
-import cc.kune.domain.utils.UserBuddiesData;
+import cc.kune.domain.UserBuddiesData;
 
 public interface UserManager {
   User changePasswd(Long userId, String oldPassword, String newPassword);

@@ -17,12 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.domain.utils;
+package cc.kune.domain;
 
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
-import cc.kune.domain.SocialNetwork;
 
 public class SocialNetworkData {
     private SocialNetworkVisibility socialNetworkVisibility;

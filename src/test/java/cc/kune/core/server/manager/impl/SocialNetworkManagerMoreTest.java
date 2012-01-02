@@ -33,8 +33,8 @@ import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
+import cc.kune.domain.ParticipationData;
 import cc.kune.domain.User;
-import cc.kune.domain.utils.ParticipationData;
 
 import com.google.inject.Inject;
 

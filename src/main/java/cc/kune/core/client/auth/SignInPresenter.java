@@ -19,10 +19,10 @@
  */
 package cc.kune.core.client.auth;
 
-import cc.kune.common.client.events.ProgressHideEvent;
-import cc.kune.common.client.events.ProgressShowEvent;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.ProgressHideEvent;
+import cc.kune.common.client.notify.ProgressShowEvent;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.common.client.utils.TimerWrapper.Executer;

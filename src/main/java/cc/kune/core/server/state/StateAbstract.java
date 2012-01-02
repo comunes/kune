@@ -24,10 +24,10 @@ import java.util.List;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
+import cc.kune.domain.ParticipationData;
 import cc.kune.domain.SocialNetwork;
-import cc.kune.domain.utils.ParticipationData;
-import cc.kune.domain.utils.SocialNetworkData;
-import cc.kune.domain.utils.UserBuddiesData;
+import cc.kune.domain.SocialNetworkData;
+import cc.kune.domain.UserBuddiesData;
 
 public abstract class StateAbstract {
 

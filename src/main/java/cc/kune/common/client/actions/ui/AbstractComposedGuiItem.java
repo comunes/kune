@@ -21,8 +21,6 @@ package cc.kune.common.client.actions.ui;
 
 import java.util.List;
 
-import cc.kune.common.client.actions.ui.bind.GuiBinding;
-import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.AbstractParentGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;

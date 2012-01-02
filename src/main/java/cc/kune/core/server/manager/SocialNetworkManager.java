@@ -25,10 +25,10 @@ import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import cc.kune.domain.Group;
+import cc.kune.domain.ParticipationData;
 import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.SocialNetworkData;
 import cc.kune.domain.User;
-import cc.kune.domain.utils.ParticipationData;
-import cc.kune.domain.utils.SocialNetworkData;
 
 public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 

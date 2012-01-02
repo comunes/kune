@@ -17,14 +17,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.actions.ui.bind;
+package cc.kune.domain;
 
-import com.google.inject.Provider;
+import java.util.Set;
 
-public interface GuiProvider {
 
-    <T> GuiBinding get(final Class<T> classType);
+public class ParticipationData {
+  private Set<Group> groupsIsAdmin;
+  private Set<Group> groupsIsCollab;
 
-    <T, Z> void register(final Class<T> classType, final Provider<Z> provider);
+  public ParticipationData() {
+    this(null, null);
+  }
+
+  public ParticipationData(final Set<Group> groupsIsAdmin, final Set<Group> groupsIsCollab) {
+    this.groupsIsAdmin = groupsIsAdmin;
+    this.groupsIsCollab = groupsIsCollab;
+  }
+
+  public Set<Group> getGroupsIsAdmin() {
+    return groupsIsAdmin;
+  }
+
+  public Set<Group> getGroupsIsCollab() {
+    return groupsIsCollab;
+  }
+
+  public void setGroupsIsAdmin(final Set<Group> groupsIsAdmin) {
+    this.groupsIsAdmin = groupsIsAdmin;
+  }
+
+  public void setGroupsIsCollab(final Set<Group> groupsIsCollab) {
+    this.groupsIsCollab = groupsIsCollab;
+  }
 
 }

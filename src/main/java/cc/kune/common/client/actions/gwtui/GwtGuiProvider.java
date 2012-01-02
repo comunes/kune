@@ -19,7 +19,7 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
-import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;

@@ -20,7 +20,7 @@
 package cc.kune.core.client.cnt;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
-import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 

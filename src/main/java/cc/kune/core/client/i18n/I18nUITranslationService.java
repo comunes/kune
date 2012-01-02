@@ -125,6 +125,7 @@ public class I18nUITranslationService extends I18nTranslationService {
                 });
           }
         });
+
         session.onUserSignIn(true, new UserSignInHandler() {
           @Override
           public void onUserSignIn(final UserSignInEvent event) {

@@ -19,7 +19,6 @@
  */
 package cc.kune.common.client.actions.ui;
 
-import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.shared.i18n.HasRTL;
 
 import com.google.gwt.user.client.ui.FlowPanel;

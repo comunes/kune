@@ -41,12 +41,12 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import cc.kune.domain.Group;
+import cc.kune.domain.ParticipationData;
 import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.SocialNetworkData;
 import cc.kune.domain.User;
+import cc.kune.domain.UserBuddiesData;
 import cc.kune.domain.finders.GroupFinder;
-import cc.kune.domain.utils.ParticipationData;
-import cc.kune.domain.utils.SocialNetworkData;
-import cc.kune.domain.utils.UserBuddiesData;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

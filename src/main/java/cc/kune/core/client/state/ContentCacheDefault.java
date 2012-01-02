@@ -22,7 +22,7 @@ package cc.kune.core.client.state;
 import java.util.HashMap;
 import java.util.Map;
 
-import cc.kune.common.client.events.ProgressShowEvent;
+import cc.kune.common.client.notify.ProgressShowEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;

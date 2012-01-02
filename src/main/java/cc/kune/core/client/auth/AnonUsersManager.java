@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.auth;
 
-import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.i18n.I18nUITranslationService;

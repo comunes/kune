@@ -25,8 +25,8 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
+import cc.kune.domain.ParticipationData;
 import cc.kune.domain.User;
-import cc.kune.domain.utils.ParticipationData;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

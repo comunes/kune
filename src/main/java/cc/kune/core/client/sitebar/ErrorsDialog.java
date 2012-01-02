@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.shared.i18n.I18nTranslationService;

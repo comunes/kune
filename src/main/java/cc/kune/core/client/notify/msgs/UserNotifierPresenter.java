@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.notify.msgs;
 
-import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierView;
 

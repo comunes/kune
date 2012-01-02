@@ -24,7 +24,6 @@ import java.util.List;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.cookies.CookiesManager;
-import cc.kune.core.client.errors.SessionExpiredEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -72,12 +71,6 @@ public class SessionDefault implements Session {
     this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
     this.userServiceProvider = userServiceProvider;
     languagesArray = null;
-    eventBus.addHandler(SessionExpiredEvent.getType(), new SessionExpiredEvent.SessionExpiredHandler() {
-      @Override
-      public void onSessionExpired(final SessionExpiredEvent event) {
-        signOut();
-      }
-    });
     check(new AsyncCallbackSimple<Void>() {
       @Override
       public void onSuccess(final Void result) {

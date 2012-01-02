@@ -17,9 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.actions.ui.bind;
+package cc.kune.common.client.actions.ui;
 
-import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 public interface GuiBinding {

@@ -21,8 +21,8 @@ public class SharedFileDownloadUtils {
   public String getGroupLogo(final GroupDTO group) {
     return prefix
         + (group.hasLogo() ? getLogoImageUrl(group.getShortName())
-            : group.isPersonal() ? FileConstants.PERSON_NO_AVATAR_IMAGE_PATH
-                : FileConstants.GROUP_NO_AVATAR_IMAGE_PATH);
+            : group.isPersonal() ? FileConstants.PERSON_NO_AVATAR_IMAGE
+                : FileConstants.GROUP_NO_AVATAR_IMAGE);
   }
 
   public String getLogoAvatarHtml(final String groupName, final boolean groupHasLogo,
@@ -49,8 +49,7 @@ public class SharedFileDownloadUtils {
 
   public String getUserAvatar(final UserSimpleDTO user) {
     return prefix
-        + (user.hasLogo() ? getLogoImageUrl(user.getShortName())
-            : FileConstants.PERSON_NO_AVATAR_IMAGE_PATH);
+        + (user.hasLogo() ? getLogoImageUrl(user.getShortName()) : FileConstants.PERSON_NO_AVATAR_IMAGE);
   }
 
 }

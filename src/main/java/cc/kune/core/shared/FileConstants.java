@@ -29,10 +29,7 @@ public final class FileConstants {
   public static final String DOWNLOADSERVLET = ASITE_PREFIX + "servlets/FileDownloadManager";
   public final static String FILENAME = "filename";
   public final static String GROUP_LOGO_FIELD = "k-glogov-ff";
-  // public static final String GROUP_NO_AVATAR_IMAGE = ASITE_PREFIX +
-  // "images/group-def-icon.png";
   public static final String GROUP_NO_AVATAR_IMAGE = "others/defgroup.gif";
-  public static final String GROUP_NO_AVATAR_IMAGE_PATH = ASITE_PREFIX + GROUP_NO_AVATAR_IMAGE;
 
   public final static String HASH = "hash";
   public final static String IMGSIZE = "imgsize";
@@ -41,8 +38,7 @@ public final class FileConstants {
   public final static int LOGO_MIN_HEIGHT = 28;
   public final static int LOGO_MIN_WIDTH = 468;
   public static final String LOGODOWNLOADSERVLET = ASITE_PREFIX + "servlets/EntityLogoDownloadManager";
-  public final static String PERSON_NO_AVATAR_IMAGE = "images/unknown.jpg";
-  public final static String PERSON_NO_AVATAR_IMAGE_PATH = ASITE_PREFIX + PERSON_NO_AVATAR_IMAGE;
+  public final static String PERSON_NO_AVATAR_IMAGE = "others/unknown.jpg";
   public final static String TOKEN = "token";
   public final static String TYPE_ID = "typeid";
   public final static String USER_LOGO_FIELD = "k-ulogov-ff";

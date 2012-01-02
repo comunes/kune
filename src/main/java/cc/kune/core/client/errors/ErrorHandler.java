@@ -19,19 +19,16 @@
  */
 package cc.kune.core.client.errors;
 
-import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
-import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
-
-import cc.kune.common.client.events.ProgressHideEvent;
-import cc.kune.common.client.events.UserNotifyEvent;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.notify.ProgressHideEvent;
+import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
-import cc.kune.wave.client.WaveClientProvider;
+import cc.kune.core.client.events.GoHomeEvent;
+import cc.kune.core.client.events.StackErrorEvent;
+import cc.kune.core.client.events.UserMustBeLoggedEvent;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
@@ -41,28 +38,19 @@ public class ErrorHandler {
 
   private final EventBus eventBus;
   private final I18nTranslationService i18n;
-  private final Session session;
-  private final StateManager stateManager;
-  private final WaveClientProvider waveClient;
 
   @Inject
-  public ErrorHandler(final Session session, final I18nTranslationService i18n,
-      final StateManager stateManager, final EventBus eventBus, final WaveClientProvider waveClient) {
-    this.session = session;
+  public ErrorHandler(final I18nTranslationService i18n, final EventBus eventBus) {
     this.i18n = i18n;
-    this.stateManager = stateManager;
     this.eventBus = eventBus;
-    this.waveClient = waveClient;
   }
 
   public void doSessionExpired() {
     eventBus.fireEvent(new SessionExpiredEvent());
-    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info,
-        "Your session has expired. Please log in again."));
   }
 
   private void goHome() {
-    stateManager.gotoDefaultHomepage();
+    GoHomeEvent.fire(eventBus);
   }
 
   private void logException(final Throwable caught) {
@@ -91,12 +79,7 @@ public class ErrorHandler {
       doSessionExpired();
     } else if (caught instanceof UserMustBeLoggedException) {
       logException(caught);
-      if (session.isLogged()) {
-        doSessionExpired();
-      } else {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.important,
-            i18n.t("Please sign in or register to collaborate")));
-      }
+      UserMustBeLoggedEvent.fire(eventBus);
     } else if (caught instanceof GroupNotFoundException) {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, i18n.t("Group not found")));
@@ -148,14 +131,7 @@ public class ErrorHandler {
           i18n.t("Oops! Something has gone wrong with our servers. Retry later, please.")));
       final String error = "Other kind of exception received in ErrorHandler";
       Log.error(error, caught);
-      waveClient.get().getStackTraceAsync(caught, new Accessor<SafeHtml>() {
-        @Override
-        public void use(final SafeHtml stack) {
-          final String stackAsString = stack.asString().replace("<br>", "\n");
-          NotifyUser.logError(stackAsString);
-          Log.error("Stack: " + stackAsString);
-        }
-      });
+      StackErrorEvent.fire(eventBus, caught);
     }
   }
 

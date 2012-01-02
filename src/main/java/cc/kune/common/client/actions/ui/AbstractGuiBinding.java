@@ -17,28 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.actions.ui.bind;
+package cc.kune.common.client.actions.ui;
 
-import java.util.HashMap;
-import java.util.Map;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
-import com.google.inject.Provider;
+public abstract class AbstractGuiBinding implements GuiBinding {
 
-public class DefaultGuiProvider implements GuiProvider {
-
-    private final Map<Class<?>, Provider<?>> map;
-
-    public DefaultGuiProvider() {
-        map = new HashMap<Class<?>, Provider<?>>();
+    @Override
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) { // NOPMD
+                                                                       // by
+                                                                       // vjrj
+                                                                       // on
+                                                                       // 18/01/11
+                                                                       // 0:47
+        return null;
     }
 
     @Override
-    public <T> GuiBinding get(final Class<T> classType) {
-        return (GuiBinding) map.get(classType).get();
+    public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:47
+        return true;
     }
 
-    @Override
-    public <T, Z> void register(final Class<T> classType, final Provider<Z> binding) {
-        map.put(classType, binding);
-    }
 }

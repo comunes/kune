@@ -153,7 +153,7 @@ class ThreadedWaveRenderer implements WaveRenderer {
       avatar = new Url(FileConstants.AVATARDOWNLOADSERVLET, new UrlParam(FileConstants.USERNAME,
           address.split("@")[0])).toString();
     } else {
-      avatar = FileConstants.PERSON_NO_AVATAR_IMAGE_PATH;
+      avatar = FileConstants.PERSON_NO_AVATAR_IMAGE;
     }
     return avatar;
   }
