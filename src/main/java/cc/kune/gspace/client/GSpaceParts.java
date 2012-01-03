@@ -23,9 +23,13 @@ import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
+import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokenListeners;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
 import cc.kune.gspace.client.i18n.I18nToTranslateGridPanel;
+import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorTabsCollection;
 import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import cc.kune.gspace.client.options.GroupOptions;
@@ -74,10 +78,8 @@ public class GSpaceParts {
       final Provider<GiveUsFeedbackBtn> giveUsFeedback,
       final Provider<I18nToTranslateGridPanel> toTrans,
       final Provider<I18nTranslatorTabsCollection> gtranslator,
-      final Provider<WriteToBuddyHeaderButton> writeToBuddie
-
-  ) {
-
+      final Provider<I18nTranslator> translator, final Provider<WriteToBuddyHeaderButton> writeToBuddie,
+      final SiteTokenListeners tokenListener) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -121,6 +123,14 @@ public class GSpaceParts {
 
         // Others
         writeToBuddie.get();
+      }
+    });
+    tokenListener.put(SiteTokens.TRANSLATE, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        if (session.isLogged() && session.getInitData().isTranslatorEnabled()) {
+          translator.get().show();
+        }
       }
     });
   }

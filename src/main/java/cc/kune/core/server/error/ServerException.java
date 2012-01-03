@@ -17,34 +17,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server;
+package cc.kune.core.server.error;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class ServerException extends RuntimeException {
 
-    private static final long serialVersionUID = 2028618233098694418L;
+  private static final Log LOG = LogFactory.getLog(ServerException.class);
 
-    private static final Log LOG = LogFactory.getLog(ServerException.class);
+  private static final long serialVersionUID = 2028618233098694418L;
 
-    public ServerException() {
-        super();
-    }
+  public ServerException() {
+    super();
+  }
 
-    public ServerException(final String text) {
-        super(text);
-        LOG.error(text);
-    }
+  public ServerException(final String text) {
+    super(text);
+    LOG.error(text);
+  }
 
-    public ServerException(final String text, final Throwable cause) {
-        super(text, cause);
-        LOG.error(text, cause);
-    }
+  public ServerException(final String text, final Throwable cause) {
+    super(text, cause);
+    LOG.error(text, cause);
+  }
 
-    public ServerException(final Throwable cause) {
-        super(cause);
-        LOG.error("ServerManagerException", cause);
-    }
+  public ServerException(final Throwable cause) {
+    super(cause);
+    LOG.error("ServerException", cause);
+  }
 
 }

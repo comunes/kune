@@ -29,9 +29,7 @@ import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
-import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
@@ -64,12 +62,10 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
   }
 
   private final GroupOptions groupOptions;
-
   private final Provider<GroupServiceAsync> groupService;
   private final I18nTranslationService i18n;
   private final Session session;
   private final Provider<SignIn> signIn;
-
   private final StateManager stateManager;
 
   @Inject
@@ -84,12 +80,6 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     this.groupService = groupService;
     this.signIn = signIn;
     this.groupOptions = groupOptions;
-    stateManager.addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
-      @Override
-      public void onHistoryToken(final String token) {
-        doNewGroup();
-      }
-    });
   }
 
   @Override

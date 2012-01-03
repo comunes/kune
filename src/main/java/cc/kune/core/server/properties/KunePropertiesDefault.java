@@ -27,7 +27,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 
-import cc.kune.core.server.ServerException;
+import cc.kune.core.server.error.ServerException;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

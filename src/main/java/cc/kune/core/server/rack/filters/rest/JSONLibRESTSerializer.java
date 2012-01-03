@@ -23,7 +23,7 @@ import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
 
-import cc.kune.core.server.ServerException;
+import cc.kune.core.server.error.ServerException;
 
 public class JSONLibRESTSerializer implements RESTSerializer {
     private final JsonConfig config;

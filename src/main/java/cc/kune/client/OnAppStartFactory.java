@@ -19,19 +19,26 @@
  */
 package cc.kune.client;
 
+import cc.kune.core.client.auth.SignIn;
+import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokenListeners;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class OnAppStartFactory {
 
   @Inject
-  public OnAppStartFactory(final Session session) {
+  public OnAppStartFactory(final Session session, final Provider<NewGroup> newGroup,
+      final Provider<SignIn> signIn, final SiteTokenListeners tokenListener) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
+        newGroup.get();
+        //
       }
     });
   }

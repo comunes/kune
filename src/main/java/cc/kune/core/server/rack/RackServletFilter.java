@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
 import org.quartz.SchedulerException;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 
-import cc.kune.core.server.ServerException;
+import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.scheduler.CronServerTasksManager;

@@ -120,7 +120,6 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
       @Override
       public void onSuccess(final Void arg) {
-
         final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
           @Override
           public void onFailure(final Throwable caught) {

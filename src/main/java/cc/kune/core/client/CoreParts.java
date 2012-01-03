@@ -20,16 +20,27 @@
 package cc.kune.core.client;
 
 import cc.kune.core.client.auth.AnonUsersManager;
+import cc.kune.core.client.auth.Register;
+import cc.kune.core.client.auth.SignIn;
+import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.sitebar.AboutKuneDialog;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
+import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokenListeners;
+import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.sub.SubtitlesManager;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -41,7 +52,10 @@ public class CoreParts {
       final Provider<GroupSNConfActions> groupMembersConfActions,
       final Provider<UserSNConfActions> userSNConfActions, final Provider<AnonUsersManager> anonUsers,
       final Provider<SiteUserOptionsPresenter> userOptions,
-      final Provider<SpaceSelectorPresenter> spaceSelector) {
+      final Provider<SpaceSelectorPresenter> spaceSelector, final SiteTokenListeners tokenListener,
+      final Provider<SignIn> signIn, final Provider<Register> register,
+      final Provider<AboutKuneDialog> aboutKuneDialog, final Provider<NewGroup> newGroup,
+      final Provider<SubtitlesManager> subProvider, final EventBus eventBus) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -52,6 +66,49 @@ public class CoreParts {
         userOptions.get();
         anonUsers.get();
         spaceSelector.get();
+      }
+    });
+    tokenListener.put(SiteTokens.SIGNIN, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        signIn.get().showSignInDialog();
+      }
+    });
+    tokenListener.put(SiteTokens.ABOUTKUNE, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        // FIXME, something to come back
+        aboutKuneDialog.get().showCentered();
+      }
+    });
+    tokenListener.put(SiteTokens.REGISTER, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        register.get().doRegister();
+      }
+    });
+    tokenListener.put(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        newGroup.get().doNewGroup();
+      }
+    });
+    tokenListener.put(SiteTokens.SUBTITLES, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        subProvider.get().show(token);
+      }
+    });
+    tokenListener.put(SiteTokens.HOME, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        SpaceSelectEvent.fire(eventBus, Space.homeSpace);
+      }
+    });
+    tokenListener.put(SiteTokens.WAVEINBOX, new HistoryTokenCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        SpaceSelectEvent.fire(eventBus, Space.userSpace);
       }
     });
   }

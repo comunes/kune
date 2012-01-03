@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server;
 
+import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.init.DatabaseInitializer;
 
 import com.google.inject.Inject;

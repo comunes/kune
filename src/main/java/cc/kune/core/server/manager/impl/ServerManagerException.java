@@ -19,7 +19,7 @@
  */
 package cc.kune.core.server.manager.impl;
 
-import cc.kune.core.server.ServerException;
+import cc.kune.core.server.error.ServerException;
 
 public class ServerManagerException extends ServerException {
 

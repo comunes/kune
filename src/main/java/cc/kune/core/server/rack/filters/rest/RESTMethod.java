@@ -21,7 +21,7 @@ package cc.kune.core.server.rack.filters.rest;
 
 import java.lang.reflect.Method;
 
-import cc.kune.core.server.ServerException;
+import cc.kune.core.server.error.ServerException;
 
 public class RESTMethod {
     public static final String FORMAT_JSON = "json";
