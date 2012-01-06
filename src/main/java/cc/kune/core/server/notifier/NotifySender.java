@@ -1,6 +1,7 @@
 package cc.kune.core.server.notifier;
 
 import cc.kune.core.server.mail.FormatedString;
+import cc.kune.domain.User;
 
 /**
  * The Interface NotifySender.
@@ -21,10 +22,10 @@ public interface NotifySender {
    * @param isHtml
    *          if the body is html
    * @param recipients
-   *          the recipients shortnames (without domain)
+   *          the recipients
    */
   void send(NotifyType notifyType, FormatedString subject, FormatedString body, boolean isHtml,
-      String... recipients);
+      User... recipients);
 
   /**
    * Send a message to the recipients (also translate the subject/body using the
@@ -38,8 +39,8 @@ public interface NotifySender {
    *          the body of the message (no translated) but with some %s
    *          {@link String.format} args
    * @param recipients
-   *          the recipients shortnames (without domain)
+   *          the recipients
    */
-  void send(NotifyType notifyType, FormatedString subject, FormatedString body, String... recipients);
+  void send(NotifyType notifyType, FormatedString subject, FormatedString body, User... recipients);
 
 }

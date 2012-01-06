@@ -58,7 +58,6 @@ public class InitData {
   private String oggEmbedObject;
   private ReservedWordsRegistryDTO reservedWords;
   private String siteCommonName;
-  private String siteDomain;
   private String siteLogoUrl;
   private String siteLogoUrlOnOver;
   private String siteShortName;

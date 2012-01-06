@@ -94,8 +94,8 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
   @Override
   public int hashCode() {
     int hashCode = 23;
-    hashCode = (hashCode * 37) + new Integer(count).hashCode();
-    hashCode = (hashCode * 37) + new Boolean(greater).hashCode();
+    hashCode = (hashCode * 37) + Integer.valueOf(count).hashCode();
+    hashCode = (hashCode * 37) + Boolean.valueOf(greater).hashCode();
     return hashCode;
   }
 

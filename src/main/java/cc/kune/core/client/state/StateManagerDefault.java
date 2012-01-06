@@ -267,7 +267,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         // Log.debug("Is not a special hash");
         // token is not one of #newgroup #signin #translate ...
         final String nToken = newHistoryToken != null ? newHistoryToken.toLowerCase() : null;
-        if (tokenMatcher.hasRedirect(nToken)) {
+        if (nToken != null && tokenMatcher.hasRedirect(nToken)) {
           final Pair<String, String> redirect = tokenMatcher.getRedirect(nToken);
           final String firstToken = redirect.getLeft();
           final String sndToken = redirect.getRight();

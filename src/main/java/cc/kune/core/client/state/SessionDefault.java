@@ -104,7 +104,7 @@ public class SessionDefault implements Session {
     if (countriesArray == null) {
       countriesArray = mapCountries();
     }
-    return countriesArray;
+    return countriesArray.clone();
   }
 
   @Override
@@ -192,7 +192,7 @@ public class SessionDefault implements Session {
     if (languagesArray == null) {
       languagesArray = mapLangs();
     }
-    return languagesArray;
+    return languagesArray.clone();
   }
 
   @Override
@@ -216,7 +216,7 @@ public class SessionDefault implements Session {
     if (timezonesArray == null) {
       mapTimezones();
     }
-    return timezonesArray;
+    return timezonesArray.clone();
   }
 
   @Override

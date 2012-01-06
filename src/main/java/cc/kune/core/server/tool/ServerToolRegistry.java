@@ -34,7 +34,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ServerToolRegistry {
-  public static List<String> emptyToolList = new ArrayList<String>();
+  public static final List<String> emptyToolList = new ArrayList<String>();
 
   static Log log = LogFactory.getLog(ServerToolRegistry.class);
 

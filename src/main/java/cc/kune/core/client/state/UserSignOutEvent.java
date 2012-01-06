@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 import com.gwtplatform.mvp.client.HasEventBus;
 
-public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandler> { 
+public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandler> {
 
   public interface HasUserSignOutHandlers extends HasHandlers {
     HandlerRegistration addUserSignOutHandler(UserSignOutHandler handler);
@@ -37,7 +37,7 @@ public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandl
 
   private static final Type<UserSignOutHandler> TYPE = new Type<UserSignOutHandler>();
 
-  public static void fire(HasEventBus source) {
+  public static void fire(final HasEventBus source) {
     source.fireEvent(new UserSignOutEvent());
   }
 
@@ -45,28 +45,25 @@ public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandl
     return TYPE;
   }
 
-
   public UserSignOutEvent() {
+  }
+
+  @Override
+  protected void dispatch(final UserSignOutHandler handler) {
+    handler.onUserSignOut(this);
+  }
+
+  @Override
+  public boolean equals(final Object other) {
+    if (other != null && other.getClass().equals(this.getClass())) {
+      return true;
+    }
+    return false;
   }
 
   @Override
   public Type<UserSignOutHandler> getAssociatedType() {
     return TYPE;
-  }
-
-  @Override
-  protected void dispatch(UserSignOutHandler handler) {
-    handler.onUserSignOut(this);
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other != null && other.getClass().equals(this.getClass())) {
-          UserSignOutEvent o = (UserSignOutEvent) other;
-      return true
-        ;
-    }
-    return false;
   }
 
   @Override
@@ -78,8 +75,7 @@ public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandl
 
   @Override
   public String toString() {
-    return "UserSignOutEvent["
-    + "]";
+    return "UserSignOutEvent[" + "]";
   }
 
 }

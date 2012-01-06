@@ -3,8 +3,6 @@ package cc.kune.core.server.notifier;
 import java.io.File;
 import java.io.IOException;
 
-import javax.persistence.NoResultException;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,7 +11,6 @@ import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.mail.MailService;
 import cc.kune.core.server.manager.I18nTranslationManager;
-import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
@@ -30,18 +27,16 @@ public class NotifySenderDefault implements NotifySender {
   private final String emailTemplate;
   private final I18nTranslationManager i18n;
   private final MailService mailService;
-  private final UserManager userManager;
   private final KuneWaveService waveService;
   private final XmppManager xmppManager;
 
   @Inject
   public NotifySenderDefault(final MailService mailService, final KuneWaveService waveService,
-      final XmppManager xmppManager, final UserManager userManager, final I18nTranslationManager i18n,
+      final XmppManager xmppManager, final I18nTranslationManager i18n,
       final KuneProperties kuneProperties) throws IOException {
     this.mailService = mailService;
     this.waveService = waveService;
     this.xmppManager = xmppManager;
-    this.userManager = userManager;
     this.i18n = i18n;
     emailTemplate = FileUtils.readFileToString(new File(
         kuneProperties.get(KuneProperties.SITE_EMAIL_TEMPLATE)));
@@ -51,15 +46,9 @@ public class NotifySenderDefault implements NotifySender {
 
   @Override
   public void send(final NotifyType notifyType, final FormatedString subject, final FormatedString body,
-      final boolean isHtml, final String... recipients) {
-    for (final String recipient : recipients) {
-      User user;
-      try {
-        user = userManager.findByShortname(recipient);
-      } catch (final NoResultException e) {
-        LOG.info(String.format("The recipient %s is not a local user, don't notify", recipient));
-        continue;
-      }
+      final boolean isHtml, final User... recipients) {
+    for (final User user : recipients) {
+      final String username = user.getShortName();
       if (subject.shouldBeTranslated()) {
         // Translate per recipient language
         final String subjectTranslation = i18n.getTranslation(user.getLanguage().getCode(),
@@ -79,7 +68,7 @@ public class NotifySenderDefault implements NotifySender {
       }
       switch (notifyType) {
       case chat:
-        xmppManager.sendMessage(recipient,
+        xmppManager.sendMessage(username,
             String.format("<b>%s</b>%s", subject.getString(), body.getString()));
         break;
       case email:
@@ -94,7 +83,7 @@ public class NotifySenderDefault implements NotifySender {
         if (isHtml) {
           LOG.error("Wave html messages not supported yet");
         }
-        waveService.createWave(subject.getString(), body.getString(), recipient);
+        waveService.createWave(subject.getString(), body.getString(), username);
         break;
       }
     }
@@ -102,7 +91,7 @@ public class NotifySenderDefault implements NotifySender {
 
   @Override
   public void send(final NotifyType notifyType, final FormatedString subject, final FormatedString body,
-      final String... dests) {
+      final User... dests) {
     send(notifyType, subject, body, false, dests);
   }
 

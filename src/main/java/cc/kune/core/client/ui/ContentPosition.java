@@ -35,7 +35,7 @@ public class ContentPosition {
     public static final String RIGHT = "right";
     private static I18nTranslationService i18n;
     private static Object[][] positionObjs;
-    public static final String[][] POSITIONS = { new String[] { LEFT }, new String[] { CENTER }, new String[] { RIGHT } };
+    protected static final String[][] POSITIONS = { new String[] { LEFT }, new String[] { CENTER }, new String[] { RIGHT } };
 
     public synchronized static Object[][] getPositions() {
         if (positionObjs == null) {

@@ -1,5 +1,7 @@
 package cc.kune.wave.server;
 
+import javax.persistence.NoResultException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.box.common.DeltaSequence;
@@ -23,6 +25,8 @@ import cc.kune.core.server.notifier.NotifySender;
 import cc.kune.core.server.notifier.NotifyType;
 import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.properties.KuneBasicProperties;
+import cc.kune.domain.User;
+import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 
@@ -33,7 +37,7 @@ public class WaveEmailNotifier {
   @Inject
   public WaveEmailNotifier(final WaveBus waveBus, final NotifySender notifyService,
       final UsersOnline usersOnline, final KuneBasicProperties basicProperties,
-      final ParticipantUtils partUtils) {
+      final ParticipantUtils partUtils, final UserFinder userFinder) {
     waveBus.subscribe(new Subscriber() {
       @Override
       public void waveletCommitted(final WaveletName waveletName, final HashedVersion version) {
@@ -48,20 +52,25 @@ public class WaveEmailNotifier {
         for (final TransformedWaveletDelta delta : deltas) {
           for (final WaveletOperation op : delta) {
             if (op instanceof AddParticipant) {
-              final ParticipantId user = ((AddParticipant) op).getParticipantId();
+              final ParticipantId participant = ((AddParticipant) op).getParticipantId();
               final String url = KuneWaveUtils.getUrl(WaveRef.of(wavelet.getWaveId(), waveletId));
               final FormatedString body = FormatedString.build(
                   "Hi there,<br><br>You have a new message in %s. <a href=\"%s#%s\">Read more</a>.<br>",
                   basicProperties.getSiteCommonName(), basicProperties.getSiteUrl(), url);
-              final String address = user.getAddress();
+              final String address = participant.getAddress();
               if (partUtils.isLocal(address)) {
                 final String userName = partUtils.getAddressName(address);
                 // FIXME only for testing
-                if (true || !usersOnline.isLogged(userName)) {
-                  notifyService.send(NotifyType.email, FormatedString.build("You have a new message"),
-                      body, true, userName);
-                  notifyService.send(NotifyType.chat, FormatedString.build("New message"), body, true,
-                      userName);
+                try {
+                  final User user = userFinder.findByShortName(userName);
+                  if (true || !usersOnline.isLogged(userName)) {
+                    notifyService.send(NotifyType.email, FormatedString.build("You have a new message"),
+                        body, true, user);
+                    notifyService.send(NotifyType.chat, FormatedString.build("New message"), body, true,
+                        user);
+                  }
+                } catch (final NoResultException e) {
+                  // Seems is not a local user
                 }
               }
             } else if (op instanceof WaveletBlipOperation) {

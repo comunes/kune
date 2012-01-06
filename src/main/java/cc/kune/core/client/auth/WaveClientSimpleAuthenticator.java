@@ -19,10 +19,10 @@
  */
 package cc.kune.core.client.auth;
 
-import cc.kune.common.client.log.Log;
-import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.gspace.client.GSpaceArmor;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
@@ -35,65 +35,68 @@ import com.google.inject.Inject;
 
 public class WaveClientSimpleAuthenticator {
 
-    private final GSpaceArmor wsArmor;
+  private final EventBus eventBus;
+  private final GSpaceArmor wsArmor;
 
-    @Inject
-    public WaveClientSimpleAuthenticator(final GSpaceArmor wsArmor) {
-        this.wsArmor = wsArmor;
-    }
+  @Inject
+  public WaveClientSimpleAuthenticator(final GSpaceArmor wsArmor, final EventBus eventBus) {
+    this.wsArmor = wsArmor;
+    this.eventBus = eventBus;
+  }
 
-    public void doLogin(final String userWithoutDomain, final String passwd, final AsyncCallback<Void> callback) {
-        final RequestBuilder request = new RequestBuilder(RequestBuilder.POST, "/auth/signin");
-        final StringBuffer params = new StringBuffer();
-        params.append("address=");
-        params.append(URL.encodeQueryString(userWithoutDomain));
-        params.append("&password=");
-        params.append(URL.encodeQueryString(passwd));
-        params.append("&signIn=");
-        params.append(URL.encodeQueryString("Sign in"));
-        try {
-            request.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.sendRequest(params.toString(), new RequestCallback() {
-                @Override
-                public void onError(final Request request, final Throwable exception) {
-                    NotifyUser.error(exception.getStackTrace().toString(), true);
-                    callback.onFailure(exception);
-                }
-
-                @Override
-                public void onResponseReceived(final Request request, final Response response) {
-                    callback.onSuccess(null);
-                }
-            });
-        } catch (final RequestException e) {
-            Log.error(e.getStackTrace().toString());
+  public void doLogin(final String userWithoutDomain, final String passwd,
+      final AsyncCallback<Void> callback) {
+    final RequestBuilder request = new RequestBuilder(RequestBuilder.POST, "/auth/signin");
+    final StringBuffer params = new StringBuffer();
+    params.append("address=");
+    params.append(URL.encodeQueryString(userWithoutDomain));
+    params.append("&password=");
+    params.append(URL.encodeQueryString(passwd));
+    params.append("&signIn=");
+    params.append(URL.encodeQueryString("Sign in"));
+    try {
+      request.setHeader("Content-Type", "application/x-www-form-urlencoded");
+      request.sendRequest(params.toString(), new RequestCallback() {
+        @Override
+        public void onError(final Request request, final Throwable exception) {
+          StackErrorEvent.fire(eventBus, exception);
+          callback.onFailure(exception);
         }
-    }
 
-    public void doLogout(final AsyncCallback<Void> callback) {
-        // Original: <a href=\"/auth/signout?r=/\">"
-        final RequestBuilder request = new RequestBuilder(RequestBuilder.GET, "/auth/signout");
-        try {
-            request.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            final StringBuffer params = new StringBuffer();
-            request.sendRequest(params.toString(), new RequestCallback() {
-                @Override
-                public void onError(final Request request, final Throwable exception) {
-                    NotifyUser.error(exception.getStackTrace().toString(), true);
-                    callback.onFailure(exception);
-                }
-
-                @Override
-                public void onResponseReceived(final Request request, final Response response) {
-                    callback.onSuccess(null);
-                }
-            });
-        } catch (final RequestException e) {
-            Log.error(e.getStackTrace().toString());
+        @Override
+        public void onResponseReceived(final Request request, final Response response) {
+          callback.onSuccess(null);
         }
+      });
+    } catch (final RequestException e) {
+      StackErrorEvent.fire(eventBus, e);
     }
+  }
 
-    public String getCookieTokenValue() {
-        return Cookies.getCookie("JSESSIONID");
+  public void doLogout(final AsyncCallback<Void> callback) {
+    // Original: <a href=\"/auth/signout?r=/\">"
+    final RequestBuilder request = new RequestBuilder(RequestBuilder.GET, "/auth/signout");
+    try {
+      request.setHeader("Content-Type", "application/x-www-form-urlencoded");
+      final StringBuffer params = new StringBuffer();
+      request.sendRequest(params.toString(), new RequestCallback() {
+        @Override
+        public void onError(final Request request, final Throwable exception) {
+          StackErrorEvent.fire(eventBus, exception);
+          callback.onFailure(exception);
+        }
+
+        @Override
+        public void onResponseReceived(final Request request, final Response response) {
+          callback.onSuccess(null);
+        }
+      });
+    } catch (final RequestException e) {
+      StackErrorEvent.fire(eventBus, e);
     }
+  }
+
+  public String getCookieTokenValue() {
+    return Cookies.getCookie("JSESSIONID");
+  }
 }
