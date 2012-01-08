@@ -19,10 +19,10 @@
  */
 package cc.kune.gspace.client.options.license;
 
+import cc.kune.core.client.events.UserSignInEvent;
+import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.gspace.client.licensewizard.LicenseChangeAction;

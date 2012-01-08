@@ -24,14 +24,14 @@ import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.SignIn;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.WindowFocusEvent;
-import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
-import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.style.GSpaceBackManager;
 
 import com.google.gwt.event.dom.client.ClickEvent;

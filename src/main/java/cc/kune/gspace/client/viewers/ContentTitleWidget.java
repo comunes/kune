@@ -25,7 +25,7 @@ import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;

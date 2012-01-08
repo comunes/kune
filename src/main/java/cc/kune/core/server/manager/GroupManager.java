@@ -26,7 +26,6 @@ import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
-import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;

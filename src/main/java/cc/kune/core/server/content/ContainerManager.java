@@ -21,7 +21,7 @@ package cc.kune.core.server.content;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.Manager;
-import cc.kune.core.server.manager.impl.SearchResult;
+import cc.kune.core.server.manager.SearchResult;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Group;

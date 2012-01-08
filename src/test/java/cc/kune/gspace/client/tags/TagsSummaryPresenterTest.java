@@ -25,9 +25,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import cc.kune.core.client.state.EventBusTester;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.impl.EventBusTester;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
 import cc.kune.core.shared.dto.StateContainerDTO;

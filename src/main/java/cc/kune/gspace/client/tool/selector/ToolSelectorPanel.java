@@ -20,7 +20,7 @@
 package cc.kune.gspace.client.tool.selector;
 
 import cc.kune.core.client.dnd.FolderViewerDropController;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView;
 

@@ -37,6 +37,8 @@ import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import cc.kune.wave.server.kspecific.KuneAgent;
+
 import com.google.common.collect.Lists;
 import com.google.wave.api.Wavelet;
 

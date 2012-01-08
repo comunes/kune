@@ -29,7 +29,8 @@ import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

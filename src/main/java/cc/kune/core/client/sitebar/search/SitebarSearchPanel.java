@@ -24,7 +24,7 @@ import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;

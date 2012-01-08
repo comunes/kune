@@ -22,7 +22,7 @@ package cc.kune.core.server.mapper;
 import java.util.List;
 
 
-import cc.kune.core.server.manager.impl.SearchResult;
+import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.shared.dto.SearchResultDTO;
 
 public interface Mapper {

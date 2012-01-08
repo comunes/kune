@@ -24,7 +24,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.shared.dto.HasContent;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.tool.ContentViewer;
 
 import com.google.inject.Inject;

@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.pspace.client.PSpacePresenter.PSpaceView;
 
 import com.google.gwt.core.client.GWT;

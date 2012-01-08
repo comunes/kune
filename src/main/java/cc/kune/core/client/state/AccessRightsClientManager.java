@@ -19,7 +19,9 @@
  */
 package cc.kune.core.client.state;
 
-import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
+import cc.kune.core.client.events.AccessRightsChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 

@@ -44,7 +44,7 @@ import com.google.inject.name.Named;
 
 /**
  * The user registration servlet allows new users to register accounts.
- * 
+ *
  * @author josephg@gmail.com (Joseph Gentle)
  */
 @SuppressWarnings("serial")
@@ -53,17 +53,18 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
 
   private final AccountStore accountStore;
   private final String domain;
- // private final WelcomeRobot welcomeBot;
+  private final boolean registrationDisabled;
 
   private final Log LOG = Log.get(CustomUserRegistrationServlet.class);
 
   @Inject
   public CustomUserRegistrationServlet(AccountStore accountStore,
-      @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain) {
-      //, WelcomeRobot welcomeBot) {
+      @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain,
+      @Named(CoreSettings.DISABLE_REGISTRATION) boolean registrationDisabled) {
     this.accountStore = accountStore;
     this.domain = domain;
   //  this.welcomeBot = welcomeBot;
+    this.registrationDisabled = registrationDisabled;
   }
 
   @Override
@@ -71,26 +72,29 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
     writeRegistrationPage("", AuthenticationServlet.RESPONSE_STATUS_NONE, req.getLocale(), resp);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     req.setCharacterEncoding("UTF-8");
+    String message = null;
+    String responseType;
     String password = req.getParameter(HttpRequestBasedCallbackHandler.PASSWORD_FIELD);
     if (password == null) {
       // Register the user with an empty password.
       password = "";
     }
+    if (!registrationDisabled) {
     final PasswordDigest passwordDigest = new PasswordDigest(password.toCharArray());
-    String message =
+    message =
         tryCreateUser(req.getParameter(HttpRequestBasedCallbackHandler.ADDRESS_FIELD), passwordDigest);
-    String responseType = AuthenticationServlet.RESPONSE_STATUS_SUCCESS;
+    }
 
-    if (message != null) {
+    if (message != null || registrationDisabled) {
       resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
       responseType = AuthenticationServlet.RESPONSE_STATUS_FAILED;
     } else {
       message = "Registration complete.";
       resp.setStatus(HttpServletResponse.SC_OK);
+      responseType = AuthenticationServlet.RESPONSE_STATUS_SUCCESS;
     }
 
     writeRegistrationPage(message, responseType, req.getLocale(), resp);
@@ -101,7 +105,6 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
    * returns a string containing an error message. On success, returns null.
    */
   public String tryCreateUser(String username, final PasswordDigest passwordDigest) { // NOPMD by vjrj on 27/04/11 8:36
-    final String message = null;
     ParticipantId id = null;
 
     try {
@@ -159,6 +162,6 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
     dest.setCharacterEncoding("UTF-8");
     dest.setContentType("text/html;charset=utf-8");
     UserRegistrationPage.write(dest.getWriter(), new GxpContext(locale), domain, message,
-        responseType);
+        responseType, registrationDisabled);
   }
 }

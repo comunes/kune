@@ -32,8 +32,8 @@ import javax.servlet.ServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cc.kune.core.server.rack.RackHelper;
 import cc.kune.core.server.rack.filters.AbstractInjectedFilter;
+import cc.kune.core.server.rack.utils.RackHelper;
 
 import com.google.inject.Inject;
 

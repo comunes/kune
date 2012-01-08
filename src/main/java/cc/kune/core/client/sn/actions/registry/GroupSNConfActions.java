@@ -21,15 +21,18 @@ package cc.kune.core.client.sn.actions.registry;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
-import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.actions.AddEntityToThisGroupAction;
+import cc.kune.core.client.sn.actions.GroupSNModerationSubMenu;
+import cc.kune.core.client.sn.actions.GroupSNOptionsMenu;
+import cc.kune.core.client.sn.actions.GroupSNVisibilitySubMenu;
 import cc.kune.core.client.sn.actions.JoinGroupAction;
 import cc.kune.core.client.sn.actions.MembersModerationMenuItem;
 import cc.kune.core.client.sn.actions.MembersVisibilityMenuItem;
@@ -39,8 +42,6 @@ import cc.kune.core.client.sn.actions.WriteToMembers;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateChangedEvent;
-import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
@@ -60,10 +61,7 @@ import com.google.inject.Provider;
 @SuppressWarnings("serial")
 public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
-  public static final SubMenuDescriptor MODERATION_SUBMENU = new SubMenuDescriptor();
-  public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
   public static final String OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-nobackcolor, k-no-backimage, k-btn-min";
-  public static final SubMenuDescriptor VISIBILITY_SUBMENU = new SubMenuDescriptor();
 
   @Inject
   public GroupSNConfActions(final Session session, final StateManager stateManager,
@@ -72,8 +70,9 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
       final WriteToMembers writeToMembers, final WriteToAdmins writeToAdmins,
       final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction,
-      final AddEntityToThisGroupAction addEntityToThisGroupAction) {
-    OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
+      final AddEntityToThisGroupAction addEntityToThisGroupAction, final GroupSNOptionsMenu optionsMenu,
+      final GroupSNModerationSubMenu moderationSubMenu, final GroupSNVisibilitySubMenu visibilitySubMenu) {
+    optionsMenu.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
         OPTIONS_STYLES);
     final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
         SocialNetworkVisibility.anyone);
@@ -87,19 +86,19 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
         AdmissionType.Moderated);
     final MenuRadioItemDescriptor openItem = membersModeration.get().withModeration(AdmissionType.Open);
 
-    addImpl(OPTIONS_MENU);
-    new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
-    new MenuItemDescriptor(addEntityToThisGroupAction).withParent(OPTIONS_MENU).setPosition(0);
-    new MenuItemDescriptor(unJoinGroupAction).withParent(OPTIONS_MENU).setPosition(1);
+    addImpl(optionsMenu);
+    new MenuTitleItemDescriptor(i18n.t("Options")).withParent(optionsMenu);
+    new MenuItemDescriptor(addEntityToThisGroupAction).withParent(optionsMenu).setPosition(0);
+    new MenuItemDescriptor(unJoinGroupAction).withParent(optionsMenu).setPosition(1);
 
-    VISIBILITY_SUBMENU.withText(i18n.t("Users who can view this member list")).withParent(OPTIONS_MENU);
-    MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU);
-    anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone"));
-    onlyMembersItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only members"));
-    onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only administrators"));
-    moderatedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("moderate request to join"));
-    openItem.withParent(MODERATION_SUBMENU).withText(i18n.t("auto accept request to join"));
-    closedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("closed for new members"));
+    visibilitySubMenu.withText(i18n.t("Users who can view this member list")).withParent(optionsMenu);
+    moderationSubMenu.withText(i18n.t("New members policy")).withParent(optionsMenu);
+    anyoneItem.withParent(visibilitySubMenu).withText(i18n.t("anyone"));
+    onlyMembersItem.withParent(visibilitySubMenu).withText(i18n.t("only members"));
+    onlyAdminsItem.withParent(visibilitySubMenu).withText(i18n.t("only administrators"));
+    moderatedItem.withParent(moderationSubMenu).withText(i18n.t("moderate request to join"));
+    openItem.withParent(moderationSubMenu).withText(i18n.t("auto accept request to join"));
+    closedItem.withParent(moderationSubMenu).withText(i18n.t("closed for new members"));
 
     final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
     // final ButtonDescriptor unJoinBtn = new
@@ -116,8 +115,8 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       @Override
       public void onStateChanged(final StateChangedEvent event) {
         final boolean administrable = event.getState().getGroupRights().isAdministrable();
-        OPTIONS_MENU.setVisible(administrable);
-        OPTIONS_MENU.setEnabled(administrable);
+        optionsMenu.setVisible(administrable);
+        optionsMenu.setEnabled(administrable);
         final StateAbstractDTO state = event.getState();
         final GroupDTO currentGroup = state.getGroup();
         if (currentGroup.isNotPersonal()) {

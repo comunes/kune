@@ -20,9 +20,9 @@
 package cc.kune.core.client.sitebar.logo;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;

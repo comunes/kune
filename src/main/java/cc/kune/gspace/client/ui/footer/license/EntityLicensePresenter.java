@@ -19,9 +19,9 @@
  */
 package cc.kune.gspace.client.ui.footer.license;
 
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateChangedEvent;
-import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.LicenseDTO;

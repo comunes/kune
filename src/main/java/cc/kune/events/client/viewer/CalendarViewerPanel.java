@@ -10,9 +10,9 @@ import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerPanel;
-import cc.kune.gspace.client.viewers.FolderItemDescriptor;
+import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.bradrydzewski.gwt.calendar.client.AppointmentStyle;

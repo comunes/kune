@@ -20,17 +20,17 @@
 package cc.kune.wave.client;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.core.client.events.UserSignInEvent;
+import cc.kune.core.client.events.UserSignOutEvent;
+import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenMatcher;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.WaveClientParams;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.wave.client.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.JavaScriptObject;

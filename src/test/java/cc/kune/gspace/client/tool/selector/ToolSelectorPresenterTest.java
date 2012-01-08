@@ -23,8 +23,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import cc.kune.core.client.state.EventBusTester;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.impl.EventBusTester;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorProxy;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView;

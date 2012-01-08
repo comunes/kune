@@ -22,8 +22,8 @@ package cc.kune.gspace.client.options.general;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.options.EntityOptions;
-import cc.kune.gspace.client.options.logo.CurrentEntityChangedEvent;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;

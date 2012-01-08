@@ -19,8 +19,8 @@
  */
 package cc.kune.gspace.client;
 
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.core.client.state.HistoryTokenCallback;

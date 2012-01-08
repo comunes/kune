@@ -24,7 +24,7 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.wave.client.WaveClientManager;
 
 import com.google.gwt.event.dom.client.ClickEvent;

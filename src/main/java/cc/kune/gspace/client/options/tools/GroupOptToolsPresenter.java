@@ -23,9 +23,9 @@ import java.util.Collection;
 import java.util.List;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.events.GroupChangedEvent;
+import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
-import cc.kune.core.client.state.GroupChangedEvent;
-import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;

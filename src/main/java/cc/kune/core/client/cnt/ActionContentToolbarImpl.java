@@ -22,7 +22,7 @@ package cc.kune.core.client.cnt;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;

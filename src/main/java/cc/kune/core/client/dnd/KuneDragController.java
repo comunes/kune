@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.dnd;
 
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.allen_sauer.gwt.dnd.client.PickupDragController;
 import com.google.gwt.core.client.Scheduler;

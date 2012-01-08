@@ -39,7 +39,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
 import cc.kune.wave.client.KuneStagesProvider;
 import cc.kune.wave.client.WaveClientClearEvent;

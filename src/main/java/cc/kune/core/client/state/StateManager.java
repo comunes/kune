@@ -20,6 +20,10 @@
 package cc.kune.core.client.state;
 
 import cc.kune.common.client.actions.BeforeActionListener;
+import cc.kune.core.client.events.GroupChangedEvent;
+import cc.kune.core.client.events.SocialNetworkChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.ToolChangedEvent;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;

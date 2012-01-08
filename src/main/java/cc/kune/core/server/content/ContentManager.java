@@ -23,7 +23,7 @@ import java.util.Date;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.Manager;
-import cc.kune.core.server.manager.impl.SearchResult;
+import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.domain.Container;

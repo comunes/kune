@@ -29,9 +29,9 @@ import org.waveprotocol.box.webclient.search.Search.Listener;
 import cc.kune.core.client.events.InboxUnreadUpdatedEvent;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.events.SndClickEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInOrSignOutEvent;
-import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;

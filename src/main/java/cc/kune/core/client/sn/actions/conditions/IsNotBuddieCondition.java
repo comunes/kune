@@ -20,7 +20,7 @@
 package cc.kune.core.client.sn.actions.conditions;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.core.client.sn.SimpleContactManager;
+import cc.kune.core.client.contacts.SimpleContactManager;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;

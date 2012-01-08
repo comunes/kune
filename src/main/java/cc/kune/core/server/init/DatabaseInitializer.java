@@ -29,7 +29,7 @@ import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.content.ContentManager;
-import cc.kune.core.server.i18n.I18nTranslationServiceDefault;
+import cc.kune.core.server.i18n.impl.I18nTranslationServiceDefault;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;

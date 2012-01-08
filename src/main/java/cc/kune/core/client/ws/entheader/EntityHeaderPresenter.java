@@ -20,13 +20,13 @@
 package cc.kune.core.client.ws.entheader;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.core.client.state.GroupChangedEvent;
-import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
+import cc.kune.core.client.events.GroupChangedEvent;
+import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.gspace.client.options.logo.CurrentEntityChangedEvent;
-import cc.kune.gspace.client.options.logo.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
+import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
+import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;

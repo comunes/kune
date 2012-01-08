@@ -21,7 +21,7 @@ package cc.kune.chat.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
+import cc.kune.core.client.sn.actions.GroupSNOptionsMenu;
 
 import com.google.inject.Inject;
 
@@ -29,12 +29,12 @@ public class StartAssemblyWithMembers extends MenuItemDescriptor {
 
   @Inject
   public StartAssemblyWithMembers(final StartAssemblyWithMembersAction action,
-      final I18nTranslationService i18n) {
+      final I18nTranslationService i18n, final GroupSNOptionsMenu optionsMenu) {
     super(action);
     action.setInviteMembers(true);
     withText(i18n.t("Start a public assembly with members")).withToolTip(
         i18n.t("Enter to this group public chat room and invite members"));
-    setParent(GroupSNConfActions.OPTIONS_MENU);
+    setParent(optionsMenu);
     setPosition(0);
   }
 }

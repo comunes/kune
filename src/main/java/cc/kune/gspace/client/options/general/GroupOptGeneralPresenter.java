@@ -20,11 +20,11 @@
 package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.events.GroupChangedEvent;
+import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
-import cc.kune.core.client.state.GroupChangedEvent;
-import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;

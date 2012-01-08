@@ -23,12 +23,12 @@ import java.util.HashMap;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.CSSUtils;
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.GroupChangedEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
-import cc.kune.core.client.state.GroupChangedEvent;
-import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -36,7 +36,7 @@ import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.gspace.client.resources.GSpaceArmorResources;
+import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 import cc.kune.gspace.client.style.GSpaceBackManager;
 
 import com.google.gwt.dom.client.StyleElement;

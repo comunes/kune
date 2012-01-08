@@ -33,7 +33,7 @@ import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.ui.BasicDragableThumb;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

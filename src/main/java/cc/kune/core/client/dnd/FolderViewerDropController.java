@@ -30,7 +30,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.gspace.client.viewers.FolderItemWidget;
+import cc.kune.gspace.client.viewers.items.FolderItemWidget;
 
 import com.allen_sauer.gwt.dnd.client.DragContext;
 import com.allen_sauer.gwt.dnd.client.VetoDragException;
@@ -41,14 +41,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-/**
- * @author vjrj
- *
- */
-/**
- * @author vjrj
- * 
- */
 public class FolderViewerDropController implements DropTarget {
 
   private final ContentCache contentCache;

@@ -41,7 +41,10 @@ package cc.kune.core.client.state;
 import java.util.Collection;
 import java.util.List;
 
-import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.UserSignInEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nCountryDTO;

@@ -22,7 +22,6 @@ package cc.kune.core.server.manager;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
-import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.UserDTO;

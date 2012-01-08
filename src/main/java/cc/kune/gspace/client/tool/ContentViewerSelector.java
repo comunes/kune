@@ -27,11 +27,11 @@ import javax.annotation.Nonnull;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateChangedEvent;
-import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateAbstractDTO;

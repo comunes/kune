@@ -21,18 +21,18 @@ package cc.kune.core.client.sn.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 
 import com.google.inject.Inject;
 
 public class WriteToMembers extends MenuItemDescriptor {
 
   @Inject
-  public WriteToMembers(final WriteToAction action, final I18nTranslationService i18n) {
+  public WriteToMembers(final WriteToAction action, final I18nTranslationService i18n,
+      final GroupSNOptionsMenu optionsMenu) {
     super(action);
     action.setOnlyToAdmin(false);
     withText(i18n.t("Write to the members of this group"));
-    setParent(GroupSNConfActions.OPTIONS_MENU);
+    setParent(optionsMenu);
     setPosition(0);
   }
 }

@@ -21,9 +21,8 @@ package cc.kune.core.client.actions;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.core.client.sn.actions.RolComparator;
-import cc.kune.core.client.state.AccessRightsChangedEvent;
-import cc.kune.core.client.state.AccessRightsChangedEvent.AccessRightsChangedHandler;
+import cc.kune.core.client.events.AccessRightsChangedEvent;
+import cc.kune.core.client.events.AccessRightsChangedEvent.AccessRightsChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;

@@ -24,6 +24,7 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
+import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

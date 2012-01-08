@@ -30,7 +30,7 @@ import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.sn.GroupSNPresenter.GroupSNView;
 import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;

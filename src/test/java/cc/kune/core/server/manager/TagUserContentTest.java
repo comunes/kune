@@ -29,7 +29,7 @@ import org.junit.Test;
 
 import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.core.server.manager.TagManager;
-import cc.kune.core.server.manager.TagUserContentManagerDefault;
+import cc.kune.core.server.manager.impl.TagUserContentManagerDefault;
 import cc.kune.domain.Tag;
 import cc.kune.domain.TagUserContent;
 import cc.kune.domain.finders.TagUserContentFinder;

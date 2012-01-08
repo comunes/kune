@@ -23,10 +23,10 @@ import java.util.List;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.InboxUnreadUpdatedEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInOrSignOutEvent;
-import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.HomeStatsDTO;

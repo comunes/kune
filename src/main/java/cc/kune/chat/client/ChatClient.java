@@ -19,7 +19,7 @@
  */
 package cc.kune.chat.client;
 
-import cc.kune.core.client.sn.SimpleContactManager;
+import cc.kune.core.client.contacts.SimpleContactManager;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.xep.muc.client.Room;

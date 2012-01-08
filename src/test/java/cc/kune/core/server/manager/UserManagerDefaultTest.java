@@ -34,7 +34,6 @@ import org.junit.Test;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
-import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;

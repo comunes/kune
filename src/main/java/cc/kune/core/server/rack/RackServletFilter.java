@@ -38,8 +38,9 @@ import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
+import cc.kune.core.server.rack.utils.RackHelper;
 import cc.kune.core.server.scheduler.CronServerTasksManager;
-import cc.kune.wave.server.WaveEmailNotifier;
+import cc.kune.wave.server.kspecific.WaveEmailNotifier;
 
 import com.google.inject.Injector;
 
@@ -178,8 +179,6 @@ public class RackServletFilter implements Filter {
     }
   }
 
-  // FIXME: Dani, never used this:
-  @SuppressWarnings("unused")
   private void stopContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
       final Injector injector) {
     LOG.debug("STOPING CONTAINER LISTENERS...");

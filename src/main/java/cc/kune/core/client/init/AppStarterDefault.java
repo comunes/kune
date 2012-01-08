@@ -26,6 +26,8 @@ import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.utils.SimpleResponseCallback;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStopEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;

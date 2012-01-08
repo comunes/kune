@@ -33,12 +33,12 @@ import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.client.events.UserSignInEvent;
+import cc.kune.core.client.events.UserSignOutEvent;
+import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;

@@ -22,7 +22,7 @@ package cc.kune.gspace.client.actions;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.inject.Inject;
 

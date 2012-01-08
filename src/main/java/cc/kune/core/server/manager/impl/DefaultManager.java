@@ -34,6 +34,8 @@ import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 
+import cc.kune.core.server.manager.SearchResult;
+
 import com.google.inject.Provider;
 
 public abstract class DefaultManager<T, K> {

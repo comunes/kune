@@ -18,7 +18,7 @@ package org.waveprotocol.wave.client.wavepanel.view.dom.full;
 
 import org.waveprotocol.wave.client.editor.EditorImpl;
 
-import cc.kune.wave.client.KuneWaveResources;
+import cc.kune.wave.client.resources.KuneWaveResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.StyleInjector;

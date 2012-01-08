@@ -33,7 +33,7 @@ import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.resources.CoreResources;
 
 import com.google.gwt.event.shared.EventBus;

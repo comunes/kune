@@ -19,7 +19,8 @@
  */
 package cc.kune.gspace.client;
 
-import cc.kune.gspace.client.resources.GSpaceArmorResources;
+import cc.kune.gspace.client.armor.impl.GSpaceArmorImpl;
+import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

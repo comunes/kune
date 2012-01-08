@@ -21,9 +21,9 @@ package cc.kune.core.client.sn.actions;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInOrSignOutEvent;
-import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 
 import com.google.inject.Inject;
 

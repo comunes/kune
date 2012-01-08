@@ -36,9 +36,9 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
 import cc.kune.domain.finders.GroupFinder;
-import cc.kune.wave.server.KuneWaveService;
 import cc.kune.wave.server.KuneWaveUtils;
 import cc.kune.wave.server.ParticipantUtils;
+import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

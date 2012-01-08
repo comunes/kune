@@ -20,14 +20,14 @@
 package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.events.UserSignInEvent;
+import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.i18n.I18nUITranslationService.I18nLanguageChangeNeeded;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;

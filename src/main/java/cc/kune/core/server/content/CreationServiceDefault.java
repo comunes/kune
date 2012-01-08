@@ -35,7 +35,7 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveService;
+import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

@@ -35,10 +35,10 @@ import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.events.UserSignInEvent;
+import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 
 import com.google.gwt.core.client.Scheduler;

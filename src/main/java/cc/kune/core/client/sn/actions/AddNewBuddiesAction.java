@@ -25,10 +25,10 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.contacts.SimpleContactManager;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.EntitySearchPanel;
 import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
-import cc.kune.core.client.sn.SimpleContactManager;
 
 import com.google.inject.Inject;
 

@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
 import cc.kune.core.client.sitebar.logo.SiteLogo;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;

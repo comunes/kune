@@ -31,7 +31,7 @@ import javax.servlet.ServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cc.kune.core.server.rack.RackHelper;
+import cc.kune.core.server.rack.utils.RackHelper;
 
 public class LogFilter implements Filter {
   public static final Log LOG = LogFactory.getLog(LogFilter.class);

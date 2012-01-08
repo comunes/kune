@@ -21,7 +21,7 @@ package cc.kune.core.server.rest;
 
 
 import cc.kune.core.server.manager.GroupManager;
-import cc.kune.core.server.manager.impl.SearchResult;
+import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.rack.filters.rest.REST;
 import cc.kune.core.shared.SearcherConstants;

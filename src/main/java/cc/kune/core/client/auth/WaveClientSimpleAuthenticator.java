@@ -20,7 +20,7 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.core.client.events.StackErrorEvent;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.http.client.Request;

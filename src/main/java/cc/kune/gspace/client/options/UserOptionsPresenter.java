@@ -24,14 +24,14 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.events.UserSignInEvent;
+import cc.kune.core.client.events.UserSignOutEvent;
+import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.gspace.client.options.UserOptionsPresenter.UserOptionsView;
 

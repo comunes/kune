@@ -30,7 +30,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.utils.SharedFileDownloadUtils;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.hspace.client.HSpacePresenter.HSpaceView;
 
 import com.calclab.emite.core.client.packet.TextUtils;

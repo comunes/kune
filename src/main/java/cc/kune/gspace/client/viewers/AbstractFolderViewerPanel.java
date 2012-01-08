@@ -28,7 +28,7 @@ import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 
 import com.google.gwt.user.client.Window;

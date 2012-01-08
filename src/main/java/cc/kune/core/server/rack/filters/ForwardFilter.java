@@ -29,7 +29,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import cc.kune.core.server.rack.RackHelper;
+import cc.kune.core.server.rack.utils.RackHelper;
 
 public class ForwardFilter extends AbstractInjectedFilter {
     // private static final Log log = LogFactory.getLog(ForwardFilter.class);

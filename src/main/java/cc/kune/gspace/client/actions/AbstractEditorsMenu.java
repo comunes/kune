@@ -20,8 +20,8 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.core.client.state.AccessRightsChangedEvent;
-import cc.kune.core.client.state.AccessRightsChangedEvent.AccessRightsChangedHandler;
+import cc.kune.core.client.events.AccessRightsChangedEvent;
+import cc.kune.core.client.events.AccessRightsChangedEvent.AccessRightsChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
 
 public class AbstractEditorsMenu extends MenuDescriptor {

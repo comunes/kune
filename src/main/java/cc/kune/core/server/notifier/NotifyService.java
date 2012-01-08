@@ -33,6 +33,7 @@ public class NotifyService {
     this.userFinder = userFinder;
   }
 
+  @SuppressWarnings("unchecked")
   private void getAllUserMembers(final Set<User> users, final Group groupToNotify,
       final boolean onlyAdmins) {
     final Collection<Group> members;
@@ -60,7 +61,6 @@ public class NotifyService {
 
   }
 
-  @SuppressWarnings("unchecked")
   public void notifyGroup(final Group groupToNotify, final Group groupSender, final String subject,
       final String message) {
     final Set<User> members = new HashSet<User>();

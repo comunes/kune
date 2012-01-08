@@ -34,8 +34,10 @@ import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
+import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
+import cc.kune.gspace.client.viewers.items.FolderItemWidget;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

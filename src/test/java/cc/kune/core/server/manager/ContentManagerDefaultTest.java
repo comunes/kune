@@ -30,7 +30,6 @@ import org.junit.Test;
 import cc.kune.core.client.errors.MoveOnSameContainerException;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
-import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Content;
 

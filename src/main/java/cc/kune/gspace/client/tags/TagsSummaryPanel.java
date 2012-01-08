@@ -20,7 +20,7 @@
 package cc.kune.gspace.client.tags;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView;
 
 import com.google.gwt.event.dom.client.ClickHandler;

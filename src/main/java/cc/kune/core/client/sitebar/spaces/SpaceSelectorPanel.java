@@ -24,8 +24,8 @@ import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.core.client.state.Session;
-import cc.kune.gspace.client.GSpaceArmor;
-import cc.kune.gspace.client.resources.GSpaceArmorResources;
+import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;

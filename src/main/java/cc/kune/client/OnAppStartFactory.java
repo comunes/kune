@@ -20,9 +20,9 @@
 package cc.kune.client;
 
 import cc.kune.core.client.auth.SignIn;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.groups.newgroup.NewGroup;
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
 

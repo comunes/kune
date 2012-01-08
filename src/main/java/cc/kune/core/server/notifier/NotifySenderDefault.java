@@ -8,14 +8,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.server.i18n.I18nTranslationServiceMultiLang;
 import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.mail.MailService;
-import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveService;
+import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
@@ -25,14 +25,14 @@ import com.google.inject.Singleton;
 public class NotifySenderDefault implements NotifySender {
   public static final Log LOG = LogFactory.getLog(NotifySenderDefault.class);
   private final String emailTemplate;
-  private final I18nTranslationManager i18n;
+  private final I18nTranslationServiceMultiLang i18n;
   private final MailService mailService;
   private final KuneWaveService waveService;
   private final XmppManager xmppManager;
 
   @Inject
   public NotifySenderDefault(final MailService mailService, final KuneWaveService waveService,
-      final XmppManager xmppManager, final I18nTranslationManager i18n,
+      final XmppManager xmppManager, final I18nTranslationServiceMultiLang i18n,
       final KuneProperties kuneProperties) throws IOException {
     this.mailService = mailService;
     this.waveService = waveService;
@@ -51,20 +51,20 @@ public class NotifySenderDefault implements NotifySender {
       final String username = user.getShortName();
       if (subject.shouldBeTranslated()) {
         // Translate per recipient language
-        final String subjectTranslation = i18n.getTranslation(user.getLanguage().getCode(),
-            subject.getTemplate(), "");
-        if (subjectTranslation != null) {
-          // Right now commented because we are only testing
-          // subject.setTemplate(subjectTranslation);
-        }
+        // final String subjectTranslation = i18n.tWithNT(user.getLanguage(),
+        // subject.getTemplate(), "");
+        // if (subjectTranslation != null) {
+        // Right now commented because we are only testing
+        // subject.setTemplate(subjectTranslation);
+        // }
       }
       if (body.shouldBeTranslated()) {
-        final String bodyTranslation = i18n.getTranslation(user.getLanguage().getCode(),
-            body.getTemplate(), "");
-        if (bodyTranslation != null) {
-          // Right now commented because we are only testing
-          // body.setTemplate(bodyTranslation);
-        }
+        // final String bodyTranslation = i18n.tWithNT(user.getLanguage(),
+        // body.getTemplate(), "");
+        // if (bodyTranslation != null) {
+        // Right now commented because we are only testing
+        // body.setTemplate(bodyTranslation);
+        // }
       }
       switch (notifyType) {
       case chat:

@@ -23,8 +23,8 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.core.client.events.RenameContentEvent;
-import cc.kune.core.client.state.SocialNetworkChangedEvent;
-import cc.kune.core.client.state.SocialNetworkChangedEvent.SocialNetworkChangedHandler;
+import cc.kune.core.client.events.SocialNetworkChangedEvent;
+import cc.kune.core.client.events.SocialNetworkChangedEvent.SocialNetworkChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 

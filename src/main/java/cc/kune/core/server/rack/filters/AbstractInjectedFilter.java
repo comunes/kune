@@ -31,23 +31,23 @@ import com.google.inject.Injector;
 
 public abstract class AbstractInjectedFilter implements Filter {
 
-    protected ServletContext ctx;
+  protected ServletContext ctx;
 
-    @Override
-    public abstract void destroy();
+  @Override
+  public abstract void destroy();
 
-    public <T> T getInstance(final Class<T> type) {
-        return getInjector().getInstance(type);
-    }
+  private Injector getInjector() {
+    return (Injector) ctx.getAttribute(RackServletFilter.INJECTOR_ATTRIBUTE);
+  }
 
-    @Override
-    public void init(final FilterConfig filterConfig) throws ServletException {
-        this.ctx = filterConfig.getServletContext();
-        getInjector().injectMembers(this);
-    }
+  public <T> T getInstance(final Class<T> type) {
+    return getInjector().getInstance(type);
+  }
 
-    private Injector getInjector() {
-        return (Injector) ctx.getAttribute(RackServletFilter.INJECTOR_ATTRIBUTE);
-    }
+  @Override
+  public void init(final FilterConfig filterConfig) throws ServletException {
+    this.ctx = filterConfig.getServletContext();
+    getInjector().injectMembers(this);
+  }
 
 }

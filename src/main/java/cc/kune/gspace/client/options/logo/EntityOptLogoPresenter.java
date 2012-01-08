@@ -27,6 +27,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.options.EntityOptions;
 
 import com.google.gwt.event.shared.EventBus;

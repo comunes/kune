@@ -21,7 +21,6 @@ package cc.kune.core.server.manager;
 
 import org.apache.lucene.search.BooleanClause;
 
-import cc.kune.core.server.manager.impl.SearchResult;
 
 public interface Manager<T, X> {
 

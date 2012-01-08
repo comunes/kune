@@ -20,9 +20,9 @@
 package cc.kune.core.client.ws;
 
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.state.StateManagerDefault;
-import cc.kune.gspace.client.GSpaceArmorImpl;
-import cc.kune.gspace.client.resources.GSpaceArmorResources;
+import cc.kune.core.client.state.impl.StateManagerDefault;
+import cc.kune.gspace.client.armor.impl.GSpaceArmorImpl;
+import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;

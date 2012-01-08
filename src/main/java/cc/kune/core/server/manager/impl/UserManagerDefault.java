@@ -55,6 +55,7 @@ import cc.kune.core.client.errors.WrongCurrentPasswordException;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
+import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.notifier.NotifyService;
 import cc.kune.core.server.properties.ChatProperties;
@@ -72,8 +73,8 @@ import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.CustomUserRegistrationServlet;
-import cc.kune.wave.server.KuneWaveService;
 import cc.kune.wave.server.ParticipantUtils;
+import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

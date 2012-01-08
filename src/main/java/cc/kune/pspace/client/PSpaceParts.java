@@ -19,8 +19,8 @@
  */
 package cc.kune.pspace.client;
 
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;

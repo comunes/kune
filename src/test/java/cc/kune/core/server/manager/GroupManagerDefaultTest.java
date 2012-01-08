@@ -34,7 +34,6 @@ import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
-import cc.kune.core.server.manager.impl.SearchResult;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
