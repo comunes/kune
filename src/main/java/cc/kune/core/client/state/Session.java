@@ -65,7 +65,7 @@ public interface Session {
   long ANON_SESSION_DURATION = A_DAY;
   long ANON_SESSION_DURATION_AFTER_REG = A_DAY * 365;
   long SESSION_DURATION = A_DAY * 14; // two weeks login session duration
-  // long SESSION_DURATION = 1000;
+  // long SESSION_DURATION = 100; // For test
 
   String USERHASH = "k007userHash";
 

@@ -21,28 +21,25 @@ package cc.kune.core.server.manager;
 
 import org.apache.lucene.search.BooleanClause;
 
-
 public interface Manager<T, X> {
 
-    void clear();
+  T find(X id);
 
-    T find(X id);
+  T merge(T entity);
 
-    T merge(T entity);
+  T persist(T entity);
 
-    T persist(T entity);
+  void reIndex();
 
-    void reIndex();
+  void remove(T entity);
 
-    void remove(T entity);
+  SearchResult<T> search(final String query, final String[] fields, final BooleanClause.Occur[] flags,
+      final Integer firstResult, final Integer maxResults);
 
-    SearchResult<T> search(final String query, final String[] fields, final BooleanClause.Occur[] flags,
-            final Integer firstResult, final Integer maxResults);
+  SearchResult<T> search(final String[] queries, final String[] fields,
+      final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults);
 
-    SearchResult<T> search(final String[] queries, final String[] fields, final BooleanClause.Occur[] flags,
-            final Integer firstResult, final Integer maxResults);
-
-    SearchResult<T> search(final String[] queries, final String[] fields, final Integer firstResult,
-            final Integer maxResults);
+  SearchResult<T> search(final String[] queries, final String[] fields, final Integer firstResult,
+      final Integer maxResults);
 
 }

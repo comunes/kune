@@ -79,12 +79,13 @@ public class NotifyService {
       final Collection<User> users) {
     for (final User to : users) {
       sender.send(NotifyType.email, FormatedString.build(subject),
-          helper.groupNotification(groupSender.getShortName(), groupSender.hasLogo(), message), to);
+          helper.groupNotification(groupSender.getShortName(), groupSender.hasLogo(), message), true,
+          true, to);
     }
   }
 
   public void notifyUser(final User to, final Group group, final String subject, final String message) {
     sender.send(NotifyType.email, FormatedString.build(subject),
-        helper.groupNotification(group.getShortName(), group.hasLogo(), message), to);
+        helper.groupNotification(group.getShortName(), group.hasLogo(), message), true, true, to);
   }
 }

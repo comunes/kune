@@ -26,6 +26,9 @@ public class SessionExpirationManager {
     eventBus.addHandler(SessionExpiredEvent.getType(), new SessionExpiredEvent.SessionExpiredHandler() {
       @Override
       public void onSessionExpired(final SessionExpiredEvent event) {
+        if (session.isLogged()) {
+          session.signOut();
+        }
         NotifyUser.info(i18n.t("Please sign in again"));
       }
     });

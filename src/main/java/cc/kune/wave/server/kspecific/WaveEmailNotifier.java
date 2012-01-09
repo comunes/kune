@@ -23,7 +23,6 @@ import cc.kune.core.server.LogThis;
 import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.notifier.NotifySender;
 import cc.kune.core.server.notifier.NotifyType;
-import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
@@ -38,8 +37,8 @@ public class WaveEmailNotifier {
 
   @Inject
   public WaveEmailNotifier(final WaveBus waveBus, final NotifySender notifyService,
-      final UsersOnline usersOnline, final KuneBasicProperties basicProperties,
-      final ParticipantUtils partUtils, final UserFinder userFinder) {
+      final KuneBasicProperties basicProperties, final ParticipantUtils partUtils,
+      final UserFinder userFinder) {
     waveBus.subscribe(new Subscriber() {
       @Override
       public void waveletCommitted(final WaveletName waveletName, final HashedVersion version) {
@@ -62,15 +61,13 @@ public class WaveEmailNotifier {
               final String address = participant.getAddress();
               if (partUtils.isLocal(address)) {
                 final String userName = partUtils.getAddressName(address);
-                // FIXME only for testing
                 try {
                   final User user = userFinder.findByShortName(userName);
-                  if (!usersOnline.isLogged(userName)) {
-                    notifyService.send(NotifyType.email, FormatedString.build("You have a new message"),
-                        body, true, user);
-                    notifyService.send(NotifyType.chat, FormatedString.build("New message"), body, true,
-                        user);
-                  }
+                  notifyService.send(NotifyType.email, FormatedString.build("You have a new message"),
+                      body, true, false, user);
+                  // notifyService.send(NotifyType.chat,
+                  // FormatedString.build("New message"), body, true,
+                  // user);
                 } catch (final NoResultException e) {
                   // Seems is not a local user
                 }

@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.i18n.impl;
 
+import cc.kune.common.client.utils.Pair;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.server.UserSessionManager;
@@ -65,6 +66,19 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
   }
 
   /**
+   * Use [%s] to reference the string parameter
+   * 
+   */
+  // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
+  private String t(final I18nLanguage lang, final Pair<String, String> pair, final String... args) {
+    String translation = tWithNT(lang, pair.getLeft(), pair.getRight());
+    for (final String arg : args) {
+      translation = translation.replaceFirst("\\[%s\\]", arg);
+    }
+    return decodeHtml(translation);
+  }
+
+  /**
    * If the text is not in the db, it stores the text pending for translation.
    * 
    * Warning: text is escaped as html before insert in the db. Don't use html
@@ -87,6 +101,12 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
       translation = encodeText;
     }
     return decodeHtml(translation);
+  }
+
+  @Override
+  public String tWithNT(final I18nLanguage lang, final String text, final String noteForTranslators,
+      final String... args) {
+    return t(lang, Pair.create(text, noteForTranslators), args);
   }
 
   /**

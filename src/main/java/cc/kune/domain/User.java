@@ -128,7 +128,7 @@ public class User implements HasId {
   @NotNull
   private TimeZone timezone;
 
-  @OneToOne(cascade = CascadeType.REMOVE)
+  @OneToOne(cascade = CascadeType.ALL)
   private Group userGroup;
 
   public User() {

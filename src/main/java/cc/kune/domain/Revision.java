@@ -48,114 +48,114 @@ import cc.kune.domain.utils.DataFieldBridge;
 @Table(name = "revisions")
 @Indexed
 public class Revision {
-    @Id
-    @GeneratedValue
-    @DocumentId
-    private Long id;
+  // http://www.hibernate.org/112.html
+  @Lob
+  @Column(length = 2147483647)
+  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @FieldBridge(impl = DataFieldBridge.class)
+  char[] body;
 
-    @Field(index = Index.TOKENIZED, store = Store.NO)
-    String title;
+  @ContainedIn
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn
+  private Content content;
 
-    // http://www.hibernate.org/112.html
-    @Lob
-    @Column(length = 2147483647)
-    @Field(index = Index.TOKENIZED, store = Store.NO)
-    @FieldBridge(impl = DataFieldBridge.class)
-    char[] body;
+  @Basic(optional = false)
+  private Long createdOn;
 
-    @OneToOne
-    private User editor;
+  @OneToOne
+  private User editor;
 
-    @Basic(optional = false)
-    private Long createdOn;
+  @Id
+  @GeneratedValue
+  @DocumentId
+  private Long id;
 
-    @Version
-    private int version;
+  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private Revision previous;
 
-    @ContainedIn
-    @ManyToOne
-    @JoinColumn
-    private Content content;
+  @Field(index = Index.TOKENIZED, store = Store.NO)
+  String title;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Revision previous;
+  @Version
+  private int version;
 
-    public Revision() {
-        this(null);
-    }
+  public Revision() {
+    this(null);
+  }
 
-    public Revision(final Content content) {
-        this.content = content;
-        createdOn = System.currentTimeMillis();
-    }
+  public Revision(final Content content) {
+    this.content = content;
+    createdOn = System.currentTimeMillis();
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public char[] getBody() {
+    return body;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public Content getContent() {
+    return content;
+  }
 
-    public User getEditor() {
-        return editor;
-    }
+  public Long getCreatedOn() {
+    return createdOn;
+  }
 
-    public void setEditor(final User editor) {
-        this.editor = editor;
-    }
+  public User getEditor() {
+    return editor;
+  }
 
-    public Long getCreatedOn() {
-        return createdOn;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setCreatedOn(final Long modifiedOn) {
-        this.createdOn = modifiedOn;
-    }
+  public Revision getPrevious() {
+    return previous;
+  }
 
-    public int getVersion() {
-        return version;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setVersion(final int version) {
-        this.version = version;
-    }
+  public int getVersion() {
+    return version;
+  }
 
-    public Revision getPrevious() {
-        return previous;
-    }
+  @Transient
+  public boolean isLast() {
+    return content.getLastRevision().equals(this);
+  }
 
-    public void setPrevious(final Revision previous) {
-        this.previous = previous;
-    }
+  public void setBody(final String body) {
+    this.body = body.toCharArray();
+  }
 
-    public Content getContent() {
-        return content;
-    }
+  public void setContent(final Content content) {
+    this.content = content;
+  }
 
-    public void setContent(final Content content) {
-        this.content = content;
-    }
+  public void setCreatedOn(final Long modifiedOn) {
+    this.createdOn = modifiedOn;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setEditor(final User editor) {
+    this.editor = editor;
+  }
 
-    public void setTitle(final String title) {
-        this.title = title;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public char[] getBody() {
-        return body;
-    }
+  public void setPrevious(final Revision previous) {
+    this.previous = previous;
+  }
 
-    public void setBody(final String body) {
-        this.body = body.toCharArray();
-    }
+  public void setTitle(final String title) {
+    this.title = title;
+  }
 
-    @Transient
-    public boolean isLast() {
-        return content.getLastRevision().equals(this);
-    }
+  public void setVersion(final int version) {
+    this.version = version;
+  }
 
 }

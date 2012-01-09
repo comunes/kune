@@ -9,8 +9,8 @@ import cc.kune.domain.User;
 public interface NotifySender {
 
   /**
-   * Send a message to the recipients (also translate the subject/body using the
-   * user language)
+   * Send a html message to the recipients (also translate the subject/body
+   * using the user language)
    * 
    * @param notifyType
    *          the notify type (email, etc)
@@ -21,15 +21,17 @@ public interface NotifySender {
    *          {@link String.format} args
    * @param isHtml
    *          if the body is html
+   * @param forceSend
+   *          send even this user has "no notifications" selected
    * @param recipients
    *          the recipients
    */
   void send(NotifyType notifyType, FormatedString subject, FormatedString body, boolean isHtml,
-      User... recipients);
+      final boolean forceSend, User... recipients);
 
   /**
-   * Send a message to the recipients (also translate the subject/body using the
-   * user language)
+   * Send a text message to the recipients (also translate the subject/body
+   * using the user language)
    * 
    * @param notifyType
    *          the notify type (email, etc)
@@ -41,6 +43,7 @@ public interface NotifySender {
    * @param recipients
    *          the recipients
    */
+  @Deprecated
   void send(NotifyType notifyType, FormatedString subject, FormatedString body, User... recipients);
 
 }

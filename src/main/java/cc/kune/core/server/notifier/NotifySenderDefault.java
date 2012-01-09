@@ -27,28 +27,34 @@ public class NotifySenderDefault implements NotifySender {
   private final String emailTemplate;
   private final I18nTranslationServiceMultiLang i18n;
   private final MailService mailService;
+  private final String subjectPrefix;
+  private final UsersOnline usersOnline;
   private final KuneWaveService waveService;
   private final XmppManager xmppManager;
 
   @Inject
   public NotifySenderDefault(final MailService mailService, final KuneWaveService waveService,
       final XmppManager xmppManager, final I18nTranslationServiceMultiLang i18n,
-      final KuneProperties kuneProperties) throws IOException {
+      final UsersOnline usersOnline, final KuneProperties kuneProperties) throws IOException {
     this.mailService = mailService;
     this.waveService = waveService;
     this.xmppManager = xmppManager;
     this.i18n = i18n;
+    this.usersOnline = usersOnline;
     emailTemplate = FileUtils.readFileToString(new File(
         kuneProperties.get(KuneProperties.SITE_EMAIL_TEMPLATE)));
     Preconditions.checkNotNull(emailTemplate);
     Preconditions.checkArgument(TextUtils.notEmpty(emailTemplate));
+    subjectPrefix = new StringBuffer("[").append(kuneProperties.get(KuneProperties.SITE_NAME)).append(
+        "] ").toString();
   }
 
   @Override
   public void send(final NotifyType notifyType, final FormatedString subject, final FormatedString body,
-      final boolean isHtml, final User... recipients) {
+      final boolean isHtml, final boolean forceSend, final User... recipients) {
     for (final User user : recipients) {
       final String username = user.getShortName();
+      subject.setTemplate(subjectPrefix + subject.getTemplate());
       if (subject.shouldBeTranslated()) {
         // Translate per recipient language
         // final String subjectTranslation = i18n.tWithNT(user.getLanguage(),
@@ -68,15 +74,19 @@ public class NotifySenderDefault implements NotifySender {
       }
       switch (notifyType) {
       case chat:
+        // FIXME seems that html is not sending correctly... check server specs
         xmppManager.sendMessage(username,
             String.format("<b>%s</b>%s", subject.getString(), body.getString()));
         break;
       case email:
-        if (user.getEmailNotifFreq().equals(EmailNotificationFrequency.immediately)) {
-          mailService.send(subject, FormatedString.build(emailTemplate.replace("%s", body.getString())),
-              isHtml, user.getEmail());
-        } else {
-          // TODO: handle other types of notifications frequencies
+        if (forceSend || !usersOnline.isLogged(username)) {
+          if (user.getEmailNotifFreq().equals(EmailNotificationFrequency.immediately)) {
+            mailService.send(subject,
+                FormatedString.build(emailTemplate.replace("%s", body.getString())), isHtml,
+                user.getEmail());
+          } else {
+            // TODO: handle other types of notifications frequencies
+          }
         }
         break;
       case wave:
@@ -90,9 +100,10 @@ public class NotifySenderDefault implements NotifySender {
   }
 
   @Override
+  @Deprecated
   public void send(final NotifyType notifyType, final FormatedString subject, final FormatedString body,
       final User... dests) {
-    send(notifyType, subject, body, false, dests);
+    send(notifyType, subject, body, false, false, dests);
   }
 
 }

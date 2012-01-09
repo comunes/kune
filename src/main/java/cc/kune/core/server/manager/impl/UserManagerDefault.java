@@ -43,7 +43,6 @@ import org.waveprotocol.box.server.robots.agent.RobotAgentUtil;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
@@ -52,6 +51,7 @@ import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.client.errors.WrongCurrentPasswordException;
+import cc.kune.core.server.i18n.I18nTranslationServiceMultiLang;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
@@ -86,7 +86,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;
   private final GroupManager groupManager;
-  private final I18nTranslationService i18n;
+  private final I18nTranslationServiceMultiLang i18n;
   private final KuneWaveService kuneWaveManager;
   private final I18nLanguageManager languageManager;
   private final NotifyService notifyService;
@@ -101,7 +101,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   public UserManagerDefault(final Provider<EntityManager> provider, final UserFinder finder,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final XmppManager xmppManager, final ChatProperties chatProperties,
-      final I18nTranslationService i18n, final CustomUserRegistrationServlet waveUserRegister,
+      final I18nTranslationServiceMultiLang i18n, final CustomUserRegistrationServlet waveUserRegister,
       final AccountStore waveAccountStore, final KuneWaveService kuneWaveManager,
       final ParticipantUtils participantUtils, final KuneBasicProperties properties,
       final GroupManager groupManager, final NotifyService notifyService) {
@@ -201,13 +201,13 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
           passwdDigest.getSalt(), language, country, tz);
 
       final String defWave = properties.getWelcomewave();
+      groupManager.createUserGroup(user, wantPersonalHomepage);
       if (defWave != null) {
         welcome = kuneWaveManager.createWave(
             ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
                 properties.getDefaultSiteName()), "", defWave, null,
             participantUtils.of(properties.getAdminShortName()), participantUtils.of(shortName));
       }
-      groupManager.createUserGroup(user, wantPersonalHomepage);
       // Is this necessary? try to remove (used when we were setting the def
       // content
       // contentManager.save(userGroup.getDefaultContent());
@@ -318,6 +318,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         return null;
       }
     }
+    final I18nLanguage lang = user.getLanguage();
     if (user.getPassword().equals(passwd)) {
       if (user.getLastLogin() == null) {
         final String userName = user.getShortName();
@@ -325,13 +326,15 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         timer.schedule(new TimerTask() {
           @Override
           public void run() {
+            // FIXME: Use notifyService!
             xmppManager.sendMessage(
                 userName,
-                i18n.t(
+                i18n.tWithNT(
+                    lang,
                     "This is the chat window. "
                         + "Here you can communicate with other users of [%s] but also with other users with compatible accounts (like gmail accounts). "
-                        + "Just add some buddy and start to chat.",
-                    i18n.t(properties.getSiteCommonName())));
+                        + "Just add some buddy and start to chat.", "",
+                    i18n.tWithNT(lang, properties.getSiteCommonName(), "")));
           }
         }, 5000);
       }

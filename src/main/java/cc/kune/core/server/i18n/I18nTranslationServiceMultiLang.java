@@ -17,4 +17,16 @@ public interface I18nTranslationServiceMultiLang {
    * @return text translated in the specified language
    */
   public String tWithNT(I18nLanguage lang, final String text, final String noteForTranslators);
+
+  /**
+   * Use [%s] to reference the String parameter.
+   * 
+   * Also adds [%NT noteForTranslators] at the end of text. This tag is later
+   * renderer in the translator panel to inform translator how to do this
+   * translation
+   * 
+   */
+  public String tWithNT(I18nLanguage lang, final String text, final String noteForTranslators,
+      final String... args);
+
 }

@@ -49,10 +49,6 @@ public abstract class DefaultManager<T, K> {
     log = LogFactory.getLog(entityClass);
   }
 
-  public void clear() {
-    getEntityManager().clear();
-  }
-
   /**
    * use carefully!!!
    */
@@ -62,6 +58,10 @@ public abstract class DefaultManager<T, K> {
 
   public T find(final Long primaryKey) {
     return getEntityManager().find(entityClass, primaryKey);
+  }
+
+  public void flush() {
+    getEntityManager().flush();
   }
 
   private EntityManager getEntityManager() {

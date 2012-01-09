@@ -57,6 +57,7 @@ import org.waveprotocol.wave.model.id.ModernIdSerialiser;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.dom.client.Element;
@@ -270,15 +271,27 @@ public class KuneStagesProvider extends Stages {
       wave = null;
     }
     if (three != null) {
+      try {
         three.getEditActions().stopEditing();
+      } catch (final Exception e) {
+        Log.info("Some exception stoping editing", e);
+      }
       three = null;
     }
     if (two != null) {
+      try {
       two.getConnector().close();
+      } catch (final Exception e) {
+        Log.info("Some exception closing connector", e);
+      }
       two = null;
     }
     if (one != null) {
+      try {
       one.getWavePanel().destroy();
+      } catch (final Exception e) {
+        Log.info("Some exception destroying panel", e);
+      }
       one = null;
     }
     closed = true;

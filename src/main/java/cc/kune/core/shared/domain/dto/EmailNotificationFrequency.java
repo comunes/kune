@@ -22,8 +22,8 @@ package cc.kune.core.shared.domain.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum EmailNotificationFrequency implements IsSerializable {
-  daily, // at most daily,
-  hourly, // at most hourly
-  immediately, // almost immediately
-  no // I don't need email notifications
+  daily, // at most daily, (not used yet)
+  hourly, // at most hourly (not used yet)
+  immediately, // almost immediately (currently used)
+  no // I don't need email notifications (currently used)
 }

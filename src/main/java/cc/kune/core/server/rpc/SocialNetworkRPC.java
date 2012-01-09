@@ -85,7 +85,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
     socialNetworkManager.addGroupToAdmins(userLogged, groupToAdd, group);
-    notifyService.notifyGroup(groupToAdd, group, "Accepted as admin", "You are now admin of this group");
+    notifyService.notifyGroup(groupToAdd, group, "Added as administrator",
+        "You are now admin of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -100,7 +101,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
     socialNetworkManager.addGroupToCollabs(userLogged, groupToAdd, group);
-    notifyService.notifyGroup(groupToAdd, group, "Accepted as collaborator",
+    notifyService.notifyGroup(groupToAdd, group, "Added as collaborator",
         "You are now a collaborator of this group");
     return generateResponse(userLogged, group);
   }
