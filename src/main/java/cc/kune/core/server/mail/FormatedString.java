@@ -1,5 +1,8 @@
 package cc.kune.core.server.mail;
 
+import java.util.Arrays;
+
+import com.calclab.emite.core.client.packet.TextUtils;
 import com.google.common.base.Preconditions;
 
 /**
@@ -139,4 +142,11 @@ public class FormatedString {
   public boolean shouldBeTranslated() {
     return shouldBeTranslated;
   }
+
+  @Override
+  public String toString() {
+    return "FormatedString ['" + TextUtils.ellipsis(template, 40) + "', args=" + Arrays.toString(args)
+        + ", shouldBeTranslated=" + shouldBeTranslated + "]";
+  }
+
 }

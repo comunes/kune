@@ -44,7 +44,7 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveUtils;
+import cc.kune.wave.server.KuneWaveServerUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
@@ -91,7 +91,7 @@ public class ListsServerTool extends AbstractServerTool {
     }
     members.add(getUserGroup().getShortName());
     Collections.sort(members);
-    waveManager.addParticipants(KuneWaveUtils.getWaveRef(content),
+    waveManager.addParticipants(KuneWaveServerUtils.getWaveRef(content),
         content.getAuthors().get(0).getShortName(), getUserGroup().getShortName(),
         members.toArray(new String[members.size()]));
   }

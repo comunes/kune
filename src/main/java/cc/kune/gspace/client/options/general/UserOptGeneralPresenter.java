@@ -111,7 +111,6 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
                   });
             };
           }
-
       );
     }
   }

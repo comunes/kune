@@ -57,7 +57,7 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.UserManager;
-import cc.kune.core.server.notifier.NotifyService;
+import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.xmpp.ChatConnection;
@@ -89,7 +89,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final I18nTranslationServiceMultiLang i18n;
   private final KuneWaveService kuneWaveManager;
   private final I18nLanguageManager languageManager;
-  private final NotifyService notifyService;
+  private final NotificationService notifyService;
   private final ParticipantUtils participantUtils;
   private final KuneBasicProperties properties;
   private final UserFinder userFinder;
@@ -104,7 +104,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final I18nTranslationServiceMultiLang i18n, final CustomUserRegistrationServlet waveUserRegister,
       final AccountStore waveAccountStore, final KuneWaveService kuneWaveManager,
       final ParticipantUtils participantUtils, final KuneBasicProperties properties,
-      final GroupManager groupManager, final NotifyService notifyService) {
+      final GroupManager groupManager, final NotificationService notifyService) {
     super(provider, User.class);
     this.userFinder = finder;
     this.languageManager = languageManager;

@@ -28,7 +28,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.mapper.Mapper;
-import cc.kune.core.server.notifier.NotifyService;
+import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -43,14 +43,14 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
   private final GroupManager groupManager;
   private final Mapper mapper;
-  private final NotifyService notifyService;
+  private final NotificationService notifyService;
   private final SocialNetworkManager socialNetworkManager;
   private final UserSessionManager userSessionManager;
 
   @Inject
   public SocialNetworkRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
       final SocialNetworkManager socialNetworkManager, final Mapper mapper,
-      final NotifyService notifyService) {
+      final NotificationService notifyService) {
     this.userSessionManager = userSessionManager;
     this.groupManager = groupManager;
     this.socialNetworkManager = socialNetworkManager;

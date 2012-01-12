@@ -9,11 +9,11 @@ import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.core.server.utils.AbsoluteFileDownloadUtils;
 
-public class NotifyHtmlHelperTest {
+public class NotificationHtmlHelperTest {
   private static final String GROUP_NAME = "groupShortName";
   private static final String MESSAGE = "some message";
 
-  NotifyHtmlHelper helper;
+  NotificationHtmlHelper helper;
 
   @Test
   public void basicTest() {
@@ -23,7 +23,7 @@ public class NotifyHtmlHelperTest {
 
   @Before
   public void before() {
-    helper = new NotifyHtmlHelper(new AbsoluteFileDownloadUtils(new KuneBasicProperties(
+    helper = new NotificationHtmlHelper(new AbsoluteFileDownloadUtils(new KuneBasicProperties(
         new KunePropertiesDefault("kune.properties"))));
   }
 

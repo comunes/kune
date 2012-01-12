@@ -56,7 +56,7 @@ import cc.kune.domain.finders.ContainerFinder;
 import cc.kune.domain.finders.ContentFinder;
 import cc.kune.domain.finders.I18nLanguageFinder;
 import cc.kune.domain.finders.UserFinder;
-import cc.kune.wave.server.KuneWaveUtils;
+import cc.kune.wave.server.KuneWaveServerUtils;
 import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
@@ -104,7 +104,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   }
 
   public void addGadgetToContent(final User user, final Content content, final URL gadgetUrl) {
-    kuneWaveManager.addGadget(KuneWaveUtils.getWaveRef(content),
+    kuneWaveManager.addGadget(KuneWaveServerUtils.getWaveRef(content),
         participantUtils.of(user.getShortName()).toString(), gadgetUrl);
   }
 
@@ -112,7 +112,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public void addParticipant(final User user, final Long contentId, final String participant) {
     final Content content = finder.getContent(contentId);
     if (content.isWave()) {
-      kuneWaveManager.addParticipants(KuneWaveUtils.getWaveRef(content),
+      kuneWaveManager.addParticipants(KuneWaveServerUtils.getWaveRef(content),
           content.getAuthors().get(0).getShortName(), user.getShortName(), participant);
     }
   }
@@ -243,7 +243,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.getLastRevision().setTitle(newTitleWithoutNL);
     if (content.isWave()) {
       final String author = content.getAuthors().get(0).getShortName();
-      kuneWaveManager.setTitle(KuneWaveUtils.getWaveRef(content), newTitle, author);
+      kuneWaveManager.setTitle(KuneWaveServerUtils.getWaveRef(content), newTitle, author);
     }
     setModifiedTime(content);
     return content;

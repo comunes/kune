@@ -13,12 +13,15 @@ TODO-list for kune -*- mode: org; -*-
 
 * SHORT-TERM (URGENT)
 ** Emil notifications for new waves
+*** Migration of DB!!!!!
+*** Text for UI
 Email Notifications
 How often do you want to receive notifications?
     almost immediately
     at most hourly
     at most daily
     I don't need email notifications
+*** Cron and pseudocode
 ** group.inexistentTool nasty error
 ** calendar support
 *** gwt-cal + http://ical4j.sourceforge.net/introduction.html

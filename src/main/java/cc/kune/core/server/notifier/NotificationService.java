@@ -19,15 +19,16 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class NotifyService {
+public class NotificationService {
 
-  public static final Log LOG = LogFactory.getLog(NotifyService.class);
-  private final NotifyHtmlHelper helper;
-  private final NotifySender sender;
+  public static final Log LOG = LogFactory.getLog(NotificationService.class);
+  private final NotificationHtmlHelper helper;
+  private final PendingNotificationSender sender;
   private final UserFinder userFinder;
 
   @Inject
-  NotifyService(final NotifySender sender, final NotifyHtmlHelper helper, final UserFinder userFinder) {
+  NotificationService(final PendingNotificationSender sender, final NotificationHtmlHelper helper,
+      final UserFinder userFinder) {
     this.sender = sender;
     this.helper = helper;
     this.userFinder = userFinder;
@@ -78,14 +79,14 @@ public class NotifyService {
   private void notifyToAll(final Group groupSender, final String subject, final String message,
       final Collection<User> users) {
     for (final User to : users) {
-      sender.send(NotifyType.email, FormatedString.build(subject),
+      sender.add(NotificationType.email, FormatedString.build(subject),
           helper.groupNotification(groupSender.getShortName(), groupSender.hasLogo(), message), true,
           true, to);
     }
   }
 
   public void notifyUser(final User to, final Group group, final String subject, final String message) {
-    sender.send(NotifyType.email, FormatedString.build(subject),
+    sender.add(NotificationType.email, FormatedString.build(subject),
         helper.groupNotification(group.getShortName(), group.hasLogo(), message), true, true, to);
   }
 }

@@ -12,7 +12,7 @@ import com.google.inject.Singleton;
  * notifications.
  */
 @Singleton
-public class NotifyHtmlHelper {
+public class NotificationHtmlHelper {
 
   /** The template used from messages snippets from a group */
   private static String GROUP_TEMPLATE = "<table style=\"FIXME\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\" width=\"100%%\">"
@@ -32,7 +32,7 @@ public class NotifyHtmlHelper {
    *          the file download utils
    */
   @Inject
-  public NotifyHtmlHelper(final AbsoluteFileDownloadUtils fileDownloadUtils) {
+  public NotificationHtmlHelper(final AbsoluteFileDownloadUtils fileDownloadUtils) {
     this.fileDownloadUtils = fileDownloadUtils;
   }
 

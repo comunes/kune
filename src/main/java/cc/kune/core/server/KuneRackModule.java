@@ -57,12 +57,15 @@ import cc.kune.core.server.rest.GroupJSONService;
 import cc.kune.core.server.rest.I18nTranslationJSONService;
 import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
+import cc.kune.core.server.scheduler.CronServerTasksManager;
 import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.events.server.EventsServerModule;
 import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
+import cc.kune.wave.server.KuneWaveServerUtils;
+import cc.kune.wave.server.kspecific.WaveEmailNotifier;
 import cc.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.AbstractModule;
@@ -118,6 +121,7 @@ public class KuneRackModule implements RackModule {
         if (sessionScope != null) {
           bindScope(SessionScoped.class, sessionScope);
         }
+        requestStaticInjection(KuneWaveServerUtils.class);
       }
     };
   }
@@ -128,6 +132,10 @@ public class KuneRackModule implements RackModule {
     installGuiceModules(builder);
 
     builder.add(KuneContainerListener.class);
+    builder.add(WaveEmailNotifier.class);
+
+    // Cron tasks
+    builder.add(CronServerTasksManager.class);
 
     builder.exclude("/http-bind.*");
     builder.exclude("/public/.*");

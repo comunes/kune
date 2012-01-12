@@ -19,14 +19,49 @@
  */
 package cc.kune.wave.server;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.NoResultException;
+
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.domain.Content;
+import cc.kune.domain.User;
+import cc.kune.domain.finders.UserFinder;
+import cc.kune.wave.server.kspecific.KuneWaveService;
 
-public class KuneWaveUtils {
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.wave.api.Participants;
+
+public class KuneWaveServerUtils {
+
+  @Inject
+  static Provider<ParticipantUtils> participantUtils;
+  @Inject
+  static Provider<UserFinder> userFinder;
+  @Inject
+  static Provider<KuneWaveService> waveService;
+
+  public static Collection<User> getLocalParticipants(final WaveRef waveref, final String author) {
+    final Participants participants = waveService.get().getParticipants(waveref, author);
+    final Set<User> list = new HashSet<User>();
+    for (final String participant : participants) {
+      participantUtils.get().isLocal(participant);
+      try {
+        list.add(userFinder.get().findByShortName(participantUtils.get().getAddressName(participant)));
+      } catch (final NoResultException e) {
+        // Seems is not a local user
+      }
+    }
+    return list;
+  }
+
   public static String getUrl(final WaveRef waveref) {
     return JavaWaverefEncoder.encodeToUriPathSegment(waveref);
   }

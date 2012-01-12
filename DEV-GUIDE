@@ -222,6 +222,8 @@ We use [https://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinder.h
 
 ====JRuby-Rack====
 
+(This part in now not used, probably we should go back when we return to develop the public part)
+
 We use Rails via [http://kenai.com/projects/jruby-rack/pages/Home JRuby-Rack]. Ruby on Rails + Plugins + Gems are installed in trunk/src/main/webapp/WEB-INF/. Jetty uses these gems when running, but if you run ruby directly with script/server, take into account that you are using your installed local gems.
 
 To install gems inside this directory:
@@ -302,6 +304,14 @@ Check also trunk/HOWTO_ADD_A_NEW_TOOL to instructions of how to add a new tool i
 David Hearnden recommendations of Wave code development (read in an informal Wave conversation):
 
 "Being written in Java, we strongly recommend following the principles outlined in Effective Java. On top of that, patterns that aid testability (dependency injection, etc) are quite important. But beyond that, I don't know if there are any other patterns or practices that would be universal across the whole thing. The web client and the server run in very different environments, so the appropriate patterns change (e.g., the client-only code doesn't have to worry about thread safety, but should worry about excessive short-lived object creation)."
+
+=== Docs about OT, Wave Model, etc ===
+
+http://www.codecommit.com/blog/java/understanding-and-applying-operational-transformation
+Wave Model Deep Dive: http://www.youtube.com/watch?v=6ZqpeFydq4A
+
+Or for a list:
+http://www.youtube.com/user/GoogleDevelopers/search?query=Wave
 
 === Running Hosted Mode without Wave webclient ===
 

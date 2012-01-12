@@ -36,7 +36,7 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
 import cc.kune.domain.finders.GroupFinder;
-import cc.kune.wave.server.KuneWaveUtils;
+import cc.kune.wave.server.KuneWaveServerUtils;
 import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
@@ -71,7 +71,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     for (final String part : participants) {
       partIds.add(participantUtils.of(part));
     }
-    return KuneWaveUtils.getUrl(waveService.createWave(title, body,
+    return KuneWaveServerUtils.getUrl(waveService.createWave(title, body,
         partIds.toArray(new ParticipantId[0])));
   }
 
@@ -104,6 +104,6 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
         toList.addAll(group.getSocialNetwork().getAccessLists().getEditors().getList());
       }
     }
-    return KuneWaveUtils.getUrl(waveService.createWave(title, message, participantUtils.listFrom(toList)));
+    return KuneWaveServerUtils.getUrl(waveService.createWave(title, message, participantUtils.listFrom(toList)));
   }
 }

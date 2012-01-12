@@ -34,6 +34,7 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import com.google.wave.api.Participants;
 import com.google.wave.api.Wavelet;
 
 @SuppressWarnings("serial")
@@ -145,6 +146,12 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
   }
 
   @Override
+  public Participants getParticipants(final WaveRef waveref, final String author) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
   public String getRobotId() {
     return "kune-agent";
   }
@@ -157,6 +164,12 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
   @Override
   public String getRobotUri() {
     return ROBOT_URI;
+  }
+
+  @Override
+  public String getTitle(final WaveRef waveName, final String author) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   @Override

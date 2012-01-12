@@ -419,6 +419,17 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   @Override
+  public Participants getParticipants(final WaveRef waveref, final String author) {
+    return fetchWave(waveref, author).getParticipants();
+  }
+
+  @Override
+  public String getTitle(final WaveRef waveName, final String author) {
+    final Wavelet wavelet = fetchWave(waveName, author);
+    return wavelet.getTitle();
+  }
+
+  @Override
   public boolean isParticipant(final Wavelet wavelet, final String user) {
     return wavelet.getParticipants().contains(participantUtils.of(user).toString());
   }

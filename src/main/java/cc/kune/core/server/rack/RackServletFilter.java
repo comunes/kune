@@ -32,15 +32,13 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.quartz.SchedulerException;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.rack.utils.RackHelper;
-import cc.kune.core.server.scheduler.CronServerTasksManager;
-import cc.kune.wave.server.kspecific.WaveEmailNotifier;
+import cc.kune.core.server.scheduler.CustomJobFactory;
 
 import com.google.inject.Injector;
 
@@ -143,16 +141,12 @@ public class RackServletFilter implements Filter {
     rack = builder.getRack();
     injector = (Injector) filterConfig.getServletContext().getAttribute(INJECTOR_PARENT_ATTRIBUTE);
     final Injector kuneChildInjector = installInjector(filterConfig, rack, injector);
+    final CustomJobFactory jobFactory = kuneChildInjector.getInstance(CustomJobFactory.class);
+    jobFactory.setInjector(kuneChildInjector);
     startContainerListeners(rack.getListeners(), kuneChildInjector);
     docks = rack.getDocks();
     excludes = rack.getExcludes();
     initFilters(filterConfig);
-    kuneChildInjector.getInstance(WaveEmailNotifier.class);
-    try {
-      kuneChildInjector.getInstance(CronServerTasksManager.class).start();
-    } catch (final SchedulerException e) {
-      LOG.error("Error starting cron scheduler", e);
-    }
     LOG.debug("INITIALIZATION DONE!");
   }
 
@@ -181,7 +175,7 @@ public class RackServletFilter implements Filter {
 
   private void stopContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
       final Injector injector) {
-    LOG.debug("STOPING CONTAINER LISTENERS...");
+    LOG.debug("STOPPING CONTAINER LISTENERS...");
     for (final Class<? extends ContainerListener> listenerClass : listenerClasses) {
       final ContainerListener listener = injector.getInstance(listenerClass);
       listener.stop();

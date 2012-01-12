@@ -22,8 +22,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class NotifySenderDefault implements NotifySender {
-  public static final Log LOG = LogFactory.getLog(NotifySenderDefault.class);
+public class NotificationSenderDefault implements NotificationSender {
+  public static final Log LOG = LogFactory.getLog(NotificationSenderDefault.class);
   private final String emailTemplate;
   private final I18nTranslationServiceMultiLang i18n;
   private final MailService mailService;
@@ -33,7 +33,7 @@ public class NotifySenderDefault implements NotifySender {
   private final XmppManager xmppManager;
 
   @Inject
-  public NotifySenderDefault(final MailService mailService, final KuneWaveService waveService,
+  public NotificationSenderDefault(final MailService mailService, final KuneWaveService waveService,
       final XmppManager xmppManager, final I18nTranslationServiceMultiLang i18n,
       final UsersOnline usersOnline, final KuneProperties kuneProperties) throws IOException {
     this.mailService = mailService;
@@ -50,10 +50,15 @@ public class NotifySenderDefault implements NotifySender {
   }
 
   @Override
-  public void send(final NotifyType notifyType, final FormatedString subject, final FormatedString body,
-      final boolean isHtml, final boolean forceSend, final User... recipients) {
-    for (final User user : recipients) {
+  public void send(final PendingNotification notification, final EmailNotificationFrequency withFrequency) {
+    for (final User user : notification.getDestProvider().getDest()) {
       final String username = user.getShortName();
+      final FormatedString subject = notification.getSubject();
+      final FormatedString body = notification.getBody();
+      final NotificationType notifyType = notification.getNotifyType();
+      final boolean forceSend = notification.isForceSend();
+      final boolean isHtml = notification.isHtml();
+
       subject.setTemplate(subjectPrefix + subject.getTemplate());
       if (subject.shouldBeTranslated()) {
         // Translate per recipient language
@@ -79,14 +84,11 @@ public class NotifySenderDefault implements NotifySender {
             String.format("<b>%s</b>%s", subject.getString(), body.getString()));
         break;
       case email:
-        if (forceSend || !usersOnline.isLogged(username)) {
-          if (user.getEmailNotifFreq().equals(EmailNotificationFrequency.immediately)) {
-            mailService.send(subject,
-                FormatedString.build(emailTemplate.replace("%s", body.getString())), isHtml,
-                user.getEmail());
-          } else {
-            // TODO: handle other types of notifications frequencies
-          }
+        if (forceSend || (!usersOnline.isLogged(username) && withFrequency == user.getEmailNotifFreq())) {
+          // we'll send this notification if is mandatory or this user is not
+          // only and has this freq configured
+          mailService.send(subject, FormatedString.build(emailTemplate.replace("%s", body.getString())),
+              isHtml, user.getEmail());
         }
         break;
       case wave:
@@ -97,13 +99,7 @@ public class NotifySenderDefault implements NotifySender {
         break;
       }
     }
-  }
 
-  @Override
-  @Deprecated
-  public void send(final NotifyType notifyType, final FormatedString subject, final FormatedString body,
-      final User... dests) {
-    send(notifyType, subject, body, false, false, dests);
   }
 
 }

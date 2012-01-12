@@ -26,6 +26,7 @@ import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import com.google.wave.api.Participants;
 import com.google.wave.api.Wavelet;
 
 public interface KuneWaveService {
@@ -54,6 +55,10 @@ public interface KuneWaveService {
 
   Wavelet fetchWave(WaveRef waveRef, String author);
 
+  Participants getParticipants(WaveRef waveref, String author);
+
+  String getTitle(WaveRef waveName, String author);
+
   boolean isParticipant(Wavelet wavelet, String user);
 
   String render(Wavelet wavelet);
@@ -64,5 +69,4 @@ public interface KuneWaveService {
       String someValue);
 
   void setTitle(WaveRef waveName, String title, String author);
-
 }
