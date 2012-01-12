@@ -19,19 +19,21 @@
  */
 package cc.kune.gspace.client.options.general;
 
+import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 
 public interface UserOptGeneralView extends EntityOptGeneralView {
+
+  EmailNotificationFrequency getEmailNotif();
 
   I18nLanguageSimpleDTO getLanguage();
 
   String getLongName();
 
-  boolean isEmailNofifField();
-
-  void setEmailNofifField(boolean value);
+  void setEmailNotifChecked(EmailNotificationFrequency freq);
 
   void setLanguage(I18nLanguageSimpleDTO language);
 
   void setLongName(String longName);
+
 }

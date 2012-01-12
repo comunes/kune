@@ -258,7 +258,9 @@ public class SessionDefault implements Session {
     if (!isLogged()) {
       return false;
     }
-    if (getCurrentStateToken().getGroup().equals(getCurrentUser().getShortName())) {
+    final StateToken currentStateToken = getCurrentStateToken();
+    if (currentStateToken != null
+        && currentStateToken.getGroup().equals(getCurrentUser().getShortName())) {
       return true;
     }
     return false;
