@@ -8,6 +8,13 @@ import cc.kune.core.server.mail.FormatedString;
  */
 public class PendingNotification {
 
+  /**
+   * The Constant NONE is used when for instance, all the destinations are not
+   * local, so, we should not notify them by email
+   */
+  public static final PendingNotification NONE = new PendingNotification(null, null, null, false, false,
+      null);
+
   /** The body. */
   private final FormatedString body;
 

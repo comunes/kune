@@ -55,7 +55,7 @@ public class CronServerTasksManager implements ContainerListener {
     LOG.info("Starting cron manager");
     try {
       sched.start();
-      scheduleJob(PendingNotificationImmediateJob.class, "0 */2 * * * ?", "pendinnotifimmediate");
+      scheduleJob(PendingNotificationImmediateJob.class, "0 */1 * * * ?", "pendinnotifimmediate");
       scheduleJob(PendingNotificationHourlyJob.class, "0 0 * * * ?", "pendingnotifhourly");
       scheduleJob(ClearUpdatedWavesHourlyJob.class, "0 0 * * * ?", "clearupdatedwaveshourly");
       scheduleJob(PendingNotificationDailyJob.class, "0 5 0 * * ?", "pendingnotifdaily");

@@ -27,6 +27,7 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.server.notifier.PendingNotification;
+import cc.kune.core.server.notifier.PendingNotificationProvider;
 import cc.kune.core.server.notifier.PendingNotificationSender;
 import cc.kune.core.server.notifier.SimpleDestinationProvider;
 import cc.kune.core.server.notifier.WaveDestinationProvider;
@@ -76,29 +77,35 @@ public class WaveEmailNotifier implements ContainerListener {
     final String siteUrl = basicProperties.getSiteUrl();
     waveBus.subscribe(new Subscriber() {
 
-      private void addPendingNotif(final ParticipantId participant, final FormatedString subject,
-          final FormatedString body) {
+      private PendingNotification createPendingNotif(final ParticipantId participant,
+          final FormatedString subject, final FormatedString body) {
         final String address = participant.getAddress();
         if (partUtils.isLocal(address)) {
           final String userName = partUtils.getAddressName(address);
           try {
             final User user = userFinder.findByShortName(userName);
-            notificator.add(new PendingNotification(NotificationType.email, subject, body, true, false,
-                new SimpleDestinationProvider(user)));
+            return new PendingNotification(NotificationType.email, subject, body, true, false,
+                new SimpleDestinationProvider(user));
           } catch (final NoResultException e) {
             // Seems is not a local user
           }
         }
+        return PendingNotification.NONE;
+      }
+
+      private String getTitle(final ReadableWaveletData wavelet, final ParticipantId by) {
+        return waveService.getTitle(WaveRef.of(wavelet.getWaveId(), wavelet.getWaveletId()),
+            by.toString());
       }
 
       private String getUrl(final ReadableWaveletData wavelet, final WaveletId waveletId) {
         return KuneWaveServerUtils.getUrl(WaveRef.of(wavelet.getWaveId(), waveletId));
       }
 
-      private FormatedString newWaveTemplate(final String url) {
+      private FormatedString newWaveTemplate(final String by, final String url) {
         return FormatedString.build(
-            "Hi there,<br><br>You have a new message in your inbox at %s. <a href=\"%s#%s\">Read more</a>.<br>",
-            siteCommonName, siteUrl, url);
+            "Hi there,<br><br>You have a new message by '%s' in your inbox at %s. <a href=\"%s#%s\">Read more</a>.<br>",
+            by, siteCommonName, siteUrl, url);
       }
 
       private FormatedString removeWaveTemplate(final String by, final String title) {
@@ -107,10 +114,10 @@ public class WaveEmailNotifier implements ContainerListener {
             by, title, siteCommonName, siteUrl, SiteTokens.WAVEINBOX);
       }
 
-      private FormatedString updatedWaveTemplate(final String by, final String url) {
+      private FormatedString updatedWaveTemplate(final String by, final String title, final String url) {
         return FormatedString.build(
-            "Hi there,<br><br>You have an updated message by '%s' in your inbox at %s. <a href=\"%s#%s\">Read more</a>.<br>",
-            by, siteCommonName, siteUrl, url);
+            "Hi there,<br><br>The message '%s' was updated by '%s' in your inbox at %s. <a href=\"%s#%s\">Read more</a>.<br>",
+            title, by, siteCommonName, siteUrl, url);
       }
 
       @Override
@@ -126,29 +133,57 @@ public class WaveEmailNotifier implements ContainerListener {
         for (final TransformedWaveletDelta delta : deltas) {
           for (final WaveletOperation op : delta) {
             if (op instanceof AddParticipant) {
-              final ParticipantId participant = ((AddParticipant) op).getParticipantId();
-              addPendingNotif(participant, FormatedString.build("You have a new message"),
-                  newWaveTemplate(getUrl(wavelet, waveletId)));
+              notificator.add(new PendingNotificationProvider() {
+                @Override
+                public PendingNotification get() {
+                  final AddParticipant addParticipantOp = (AddParticipant) op;
+                  final ParticipantId by = addParticipantOp.getContext().getCreator();
+                  final ParticipantId to = addParticipantOp.getParticipantId();
+                  LOG.info(String.format("New wave from '%s' to '%s'", by, to));
+                  return createPendingNotif(to, FormatedString.build("You have a new message"),
+                      newWaveTemplate(by.toString(), getUrl(wavelet, waveletId)));
+                }
+              });
             } else if (op instanceof RemoveParticipant) {
-              final ParticipantId participant = ((RemoveParticipant) op).getParticipantId();
-              final ParticipantId by = ((RemoveParticipant) op).getContext().getCreator();
-              final String title = waveService.getTitle(WaveRef.of(wavelet.getWaveId(), waveletId),
-                  by.toString());
-              addPendingNotif(participant, FormatedString.build("You have been removed from message"),
-                  removeWaveTemplate(by.toString(), title));
+              notificator.add(new PendingNotificationProvider() {
+                @Override
+                public PendingNotification get() {
+                  final RemoveParticipant removeParticipantOp = (RemoveParticipant) op;
+                  final ParticipantId by = removeParticipantOp.getContext().getCreator();
+                  final ParticipantId to = removeParticipantOp.getParticipantId();
+                  final String title = getTitle(wavelet, by);
+                  LOG.info(String.format("'%s' removed from wave '%s' to '%s'", by, title, to));
+                  return createPendingNotif(to,
+                      FormatedString.build("You have been removed from message"),
+                      removeWaveTemplate(by.toString(), title));
+                }
+              });
             } else if (op instanceof WaveletBlipOperation) {
+              // Replies, etc
               final WaveId waveId = wavelet.getWaveId();
               if (!updatedWavesInLastHour.contains(waveId)) {
                 updatedWavesInLastHour.add(waveId);
-                // Replies, etc
-                final ParticipantId by = ((WaveletBlipOperation) op).getContext().getCreator();
-                // Duplicate code above
-                final WaveRef waveref = WaveRef.of(waveId, waveletId);
-                final String url = KuneWaveServerUtils.getUrl(waveref);
-                notificator.add(new PendingNotification(NotificationType.email,
-                    FormatedString.build("You have an updated message"), updatedWaveTemplate(
-                        by.toString(), url), true, false, new WaveDestinationProvider(waveref,
-                        by.toString())));
+                notificator.add(new PendingNotificationProvider() {
+                  @Override
+                  public PendingNotification get() {
+                    final WaveRef waveref = WaveRef.of(waveId, waveletId);
+                    final ParticipantId by = ((WaveletBlipOperation) op).getContext().getCreator();
+                    final String title = getTitle(wavelet, by);
+                    final String url = KuneWaveServerUtils.getUrl(waveref);
+                    LOG.info(String.format("'%s' updated wave '%s'", by, title));
+                    return new PendingNotification(NotificationType.email,
+                        FormatedString.build("You have an updated message"), updatedWaveTemplate(
+                            by.toString(), title, url), true, false, new WaveDestinationProvider(
+                            waveref, by.toString()));
+                  }
+                });
+                // notificator.add(new
+                // PendingNotification(NotificationType.email,
+                // FormatedString.build("You have an updated message"),
+                // updatedWaveTemplate(
+                // by.toString(), title, url), true, false, new
+                // WaveDestinationProvider(waveref,
+                // by.toString())));
               }
             }
           }

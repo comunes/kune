@@ -19,16 +19,18 @@ import com.google.inject.Singleton;
 public class PendingNotificationSender {
 
   /** The Constant NO_NEXT. */
-  private static final Collection<PendingNotification> NO_NEXT = null;
+  private static final Collection<PendingNotificationProvider> NO_NEXT = null;
 
+  // FIXME this should be in DB so we'll don't lose them in server restarts
   /** The daily pend notif. list */
-  private final Set<PendingNotification> dailyPendNotif;
+  private final Set<PendingNotificationProvider> dailyPendNotif;
 
+  // FIXME this should be in DB so we'll don't lose them in server restarts
   /** The houry pend notif. list */
-  private final Set<PendingNotification> hourlyPendNotif;
+  private final Set<PendingNotificationProvider> hourlyPendNotif;
 
   /** The immediate pend notif. list */
-  private final Set<PendingNotification> immediatePendNotif;
+  private final Set<PendingNotificationProvider> immediatePendNotif;
 
   /** The sender. */
   private final NotificationSender sender;
@@ -42,15 +44,20 @@ public class PendingNotificationSender {
   @Inject
   public PendingNotificationSender(final NotificationSender sender) {
     this.sender = sender;
-    immediatePendNotif = new HashSet<PendingNotification>();
-    hourlyPendNotif = new HashSet<PendingNotification>();
-    dailyPendNotif = new HashSet<PendingNotification>();
+    immediatePendNotif = new HashSet<PendingNotificationProvider>();
+    hourlyPendNotif = new HashSet<PendingNotificationProvider>();
+    dailyPendNotif = new HashSet<PendingNotificationProvider>();
   }
 
   public void add(final NotificationType type, final FormatedString subject, final FormatedString body,
       final boolean isHtml, final boolean forceSend, final User to) {
-    add(new PendingNotification(type, subject, body, isHtml, forceSend,
-        new SimpleDestinationProvider(to)));
+    add(new PendingNotificationProvider() {
+      @Override
+      public PendingNotification get() {
+        return new PendingNotification(type, subject, body, isHtml, forceSend,
+            new SimpleDestinationProvider(to));
+      }
+    });
   }
 
   /**
@@ -59,10 +66,10 @@ public class PendingNotificationSender {
    * @param notification
    *          the notification
    */
-  public void add(final PendingNotification notification) {
-    if (!hourlyPendNotif.contains(notification)) {
+  public void add(final PendingNotificationProvider notificationProv) {
+    if (!hourlyPendNotif.contains(notificationProv)) {
       // If we have send a similar notification this hour just ignore
-      immediatePendNotif.add(notification);
+      immediatePendNotif.add(notificationProv);
     }
   }
 
@@ -106,14 +113,18 @@ public class PendingNotificationSender {
    *          The current frequency of notifications, that is, we'll send
    *          notifications only to users with this frequency configured
    */
-  private void send(final Collection<PendingNotification> list,
-      final Collection<PendingNotification> nextList, final EmailNotificationFrequency currentFreq) {
-    for (final PendingNotification notification : list) {
-      sender.send(notification, currentFreq);
-      if (!notification.isForceSend() && nextList != NO_NEXT) {
-        // Forced Send, are send immediately (independent of how User has its
-        // notification configured)!
-        nextList.add(notification);
+  private void send(final Collection<PendingNotificationProvider> list,
+      final Collection<PendingNotificationProvider> nextList,
+      final EmailNotificationFrequency currentFreq) {
+    for (final PendingNotificationProvider notificationProv : list) {
+      final PendingNotification notification = notificationProv.get();
+      if (!notification.equals(PendingNotification.NONE)) {
+        sender.send(notification, currentFreq);
+        if (!notification.isForceSend() && nextList != NO_NEXT) {
+          // Forced Send, are send immediately (independent of how User has its
+          // notification configured)!
+          nextList.add(notificationProv);
+        }
       }
     }
     list.clear();

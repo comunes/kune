@@ -15,10 +15,10 @@ public class PendingNotificationSenderTest extends AbstractPendingNotificationTe
   private static final FormatedString OTHER_SUBJECT = FormatedString.build("Some other subject");
   private static final FormatedString SUBJECT = FormatedString.build("Some subject");
   private PendingNotificationSender manager;
-  private PendingNotification otherNotif;
+  private PendingNotificationProvider otherNotif;
   private NotificationSender sender;
-  private PendingNotification someForcedNotif;
-  private PendingNotification someNotif;
+  private PendingNotificationProvider someForcedNotif;
+  private PendingNotificationProvider someNotif;
 
   private void assertQueues(final int i, final int j, final int k) {
     // TODO Auto-generated method stub
@@ -32,12 +32,28 @@ public class PendingNotificationSenderTest extends AbstractPendingNotificationTe
   public void before() {
     sender = Mockito.mock(NotificationSender.class);
     manager = new PendingNotificationSender(sender);
-    someNotif = new PendingNotification(NotificationType.email, SUBJECT, BODY, false, false,
-        someUserProvider);
-    otherNotif = new PendingNotification(NotificationType.email, OTHER_SUBJECT, OTHER_BODY, false,
-        false, someUserProvider);
-    someForcedNotif = new PendingNotification(NotificationType.email, SUBJECT, BODY, false, true,
-        someUserProvider);
+    otherNotif = new PendingNotificationProvider() {
+      @Override
+      public PendingNotification get() {
+        return new PendingNotification(NotificationType.email, OTHER_SUBJECT, OTHER_BODY, false, false,
+            someUserProvider);
+      }
+    };
+    someForcedNotif = new PendingNotificationProvider() {
+      @Override
+      public PendingNotification get() {
+        return new PendingNotification(NotificationType.email, SUBJECT, BODY, false, true,
+            someUserProvider);
+      }
+    };
+
+    someNotif = new PendingNotificationProvider() {
+      @Override
+      public PendingNotification get() {
+        return new PendingNotification(NotificationType.email, SUBJECT, BODY, false, false,
+            someUserProvider);
+      }
+    };
   }
 
   @Test
