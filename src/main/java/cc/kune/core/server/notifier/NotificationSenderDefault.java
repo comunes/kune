@@ -49,34 +49,42 @@ public class NotificationSenderDefault implements NotificationSender {
         "] ").toString();
   }
 
+  private boolean noOnline(final String username) {
+    final boolean logged = usersOnline.isLogged(username);
+    LOG.debug(String.format("User '' is online for notifications? %s", username, logged));
+    return !logged;
+  }
+
   @Override
   public void send(final PendingNotification notification, final EmailNotificationFrequency withFrequency) {
+    final FormatedString subject = notification.getSubject();
+    final FormatedString body = notification.getBody();
+    final NotificationType notifyType = notification.getNotifyType();
+    final boolean forceSend = notification.isForceSend();
+    final boolean isHtml = notification.isHtml();
+
+    subject.setTemplate(subjectPrefix + subject.getTemplate());
+    if (subject.shouldBeTranslated()) {
+      // Translate per recipient language
+      // final String subjectTranslation = i18n.tWithNT(user.getLanguage(),
+      // subject.getTemplate(), "");
+      // if (subjectTranslation != null) {
+      // Right now commented because we are only testing
+      // subject.setTemplate(subjectTranslation);
+      // }
+    }
+    if (body.shouldBeTranslated()) {
+      // final String bodyTranslation = i18n.tWithNT(user.getLanguage(),
+      // body.getTemplate(), "");
+      // if (bodyTranslation != null) {
+      // Right now commented because we are only testing
+      // body.setTemplate(bodyTranslation);
+      // }
+    }
+
     for (final User user : notification.getDestProvider().getDest()) {
       final String username = user.getShortName();
-      final FormatedString subject = notification.getSubject();
-      final FormatedString body = notification.getBody();
-      final NotificationType notifyType = notification.getNotifyType();
-      final boolean forceSend = notification.isForceSend();
-      final boolean isHtml = notification.isHtml();
 
-      subject.setTemplate(subjectPrefix + subject.getTemplate());
-      if (subject.shouldBeTranslated()) {
-        // Translate per recipient language
-        // final String subjectTranslation = i18n.tWithNT(user.getLanguage(),
-        // subject.getTemplate(), "");
-        // if (subjectTranslation != null) {
-        // Right now commented because we are only testing
-        // subject.setTemplate(subjectTranslation);
-        // }
-      }
-      if (body.shouldBeTranslated()) {
-        // final String bodyTranslation = i18n.tWithNT(user.getLanguage(),
-        // body.getTemplate(), "");
-        // if (bodyTranslation != null) {
-        // Right now commented because we are only testing
-        // body.setTemplate(bodyTranslation);
-        // }
-      }
       switch (notifyType) {
       case chat:
         // FIXME seems that html is not sending correctly... check server specs
@@ -84,7 +92,7 @@ public class NotificationSenderDefault implements NotificationSender {
             String.format("<b>%s</b>%s", subject.getString(), body.getString()));
         break;
       case email:
-        if (forceSend || (!usersOnline.isLogged(username) && withFrequency == user.getEmailNotifFreq())) {
+        if (forceSend || (noOnline(username) && withFrequency == user.getEmailNotifFreq())) {
           // we'll send this notification if is mandatory or this user is not
           // only and has this freq configured
           mailService.send(subject, FormatedString.build(emailTemplate.replace("%s", body.getString())),

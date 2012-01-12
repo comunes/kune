@@ -18,20 +18,16 @@ public class PendingNotificationHourlyJob implements Job {
   public static final Log LOG = LogFactory.getLog(PendingNotificationHourlyJob.class);
   private final PendingNotificationSender pendingManager;
 
-  private final WaveEmailNotifier waveNotifier;
-
   @Inject
   public PendingNotificationHourlyJob(final PendingNotificationSender pendingManager,
       final WaveEmailNotifier waveNotifier) throws ParseException, SchedulerException {
     this.pendingManager = pendingManager;
-    this.waveNotifier = waveNotifier;
   }
 
   @Override
   public void execute(final JobExecutionContext context) throws JobExecutionException {
     LOG.info(String.format("Hourly notifications cron job start, %s", pendingManager));
     pendingManager.sendHourlyNotifications();
-    waveNotifier.clearUpdatedWaves();
     LOG.info(String.format("Hourly notifications cron job end, %s", pendingManager));
   }
 

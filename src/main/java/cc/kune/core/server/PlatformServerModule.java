@@ -89,6 +89,7 @@ import cc.kune.core.server.mapper.DozerMapper;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.notifier.NotificationSender;
 import cc.kune.core.server.notifier.NotificationSenderDefault;
+import cc.kune.core.server.notifier.PendingNotificationSender;
 import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.GroupRPC;
@@ -114,6 +115,7 @@ import cc.kune.lists.server.rpc.ListsRPC;
 import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 import cc.kune.wave.server.kspecific.KuneWaveServiceDefault;
+import cc.kune.wave.server.kspecific.WaveEmailNotifier;
 
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
@@ -195,8 +197,10 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(ParticipantUtils.class);
     bind(UsersOnline.class).to(UserSessionManager.class).in(Singleton.class);
     requestStaticInjection(AccessRightsUtils.class);
-    bind(CronServerTasksManager.class).in(Singleton.class);
+    bind(WaveEmailNotifier.class).in(Singleton.class);
+    bind(PendingNotificationSender.class).in(Singleton.class);
     bind(NotificationSender.class).to(NotificationSenderDefault.class).in(Singleton.class);
+    bind(CronServerTasksManager.class).in(Singleton.class);
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
         outermostCall(new AuthenticatedMethodInterceptor()));
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),

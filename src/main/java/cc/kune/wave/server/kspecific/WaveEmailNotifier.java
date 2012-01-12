@@ -24,7 +24,6 @@ import org.waveprotocol.wave.model.wave.data.ReadableWaveletData;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.core.client.state.SiteTokens;
-import cc.kune.core.server.LogThis;
 import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.server.notifier.PendingNotification;
@@ -41,20 +40,40 @@ import cc.kune.wave.server.ParticipantUtils;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-@LogThis
 @Singleton
 public class WaveEmailNotifier implements ContainerListener {
   public static final Log LOG = LogFactory.getLog(WaveEmailNotifier.class);
-  private HashSet<WaveId> updatedWavesInLastHour;
+
+  private final KuneBasicProperties basicProperties;
+  private final PendingNotificationSender notificator;
+  private final ParticipantUtils partUtils;
+  private final HashSet<WaveId> updatedWavesInLastHour;
+  private final UserFinder userFinder;
+  private final WaveBus waveBus;
+  private final KuneWaveService waveService;
 
   @Inject
   public WaveEmailNotifier(final WaveBus waveBus, final PendingNotificationSender notificator,
       final KuneBasicProperties basicProperties, final ParticipantUtils partUtils,
       final KuneWaveService waveService, final UserFinder userFinder) {
+    this.waveBus = waveBus;
+    this.notificator = notificator;
+    this.basicProperties = basicProperties;
+    this.partUtils = partUtils;
+    this.waveService = waveService;
+    this.userFinder = userFinder;
+    updatedWavesInLastHour = new HashSet<WaveId>();
+    LOG.info("WaveEmailNotifier created");
+  }
 
+  public void clearUpdatedWaves() {
+    updatedWavesInLastHour.clear();
+  }
+
+  @Override
+  public void start() {
     final String siteCommonName = basicProperties.getSiteCommonName();
     final String siteUrl = basicProperties.getSiteUrl();
-    updatedWavesInLastHour = new HashSet<WaveId>();
     waveBus.subscribe(new Subscriber() {
 
       private void addPendingNotif(final ParticipantId participant, final FormatedString subject,
@@ -136,14 +155,7 @@ public class WaveEmailNotifier implements ContainerListener {
         }
       }
     });
-  }
-
-  public void clearUpdatedWaves() {
-    updatedWavesInLastHour.clear();
-  }
-
-  @Override
-  public void start() {
+    LOG.info("WaveEmailNotifier started");
   }
 
   @Override

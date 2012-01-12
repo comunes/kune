@@ -16,6 +16,7 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 
+import cc.kune.core.server.notifier.ClearUpdatedWavesHourlyJob;
 import cc.kune.core.server.notifier.PendingNotificationDailyJob;
 import cc.kune.core.server.notifier.PendingNotificationHourlyJob;
 import cc.kune.core.server.notifier.PendingNotificationImmediateJob;
@@ -53,16 +54,17 @@ public class CronServerTasksManager implements ContainerListener {
   public void start() {
     LOG.info("Starting cron manager");
     try {
-
       sched.start();
       scheduleJob(PendingNotificationImmediateJob.class, "0 */2 * * * ?", "pendinnotifimmediate");
       scheduleJob(PendingNotificationHourlyJob.class, "0 0 * * * ?", "pendingnotifhourly");
+      scheduleJob(ClearUpdatedWavesHourlyJob.class, "0 0 * * * ?", "clearupdatedwaveshourly");
       scheduleJob(PendingNotificationDailyJob.class, "0 5 0 * * ?", "pendingnotifdaily");
     } catch (final SchedulerException e) {
       logError(e);
     } catch (final ParseException e) {
       logError(e);
     }
+    LOG.info("Cron manager started");
   }
 
   @Override

@@ -133,8 +133,6 @@ public class KuneRackModule implements RackModule {
 
     builder.add(KuneContainerListener.class);
     builder.add(WaveEmailNotifier.class);
-
-    // Cron tasks
     builder.add(CronServerTasksManager.class);
 
     builder.exclude("/http-bind.*");

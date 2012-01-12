@@ -123,7 +123,7 @@ public class PendingNotificationSender {
    * Send daily notifications.
    */
   public void sendDailyNotifications() {
-    send(dailyPendNotif, NO_NEXT, EmailNotificationFrequency.immediately);
+    send(dailyPendNotif, NO_NEXT, EmailNotificationFrequency.daily);
   }
 
   /**
@@ -137,7 +137,7 @@ public class PendingNotificationSender {
    * Send immediate notifications.
    */
   public void sendImmediateNotifications() {
-    send(immediatePendNotif, hourlyPendNotif, EmailNotificationFrequency.daily);
+    send(immediatePendNotif, hourlyPendNotif, EmailNotificationFrequency.immediately);
   }
 
   @Override
