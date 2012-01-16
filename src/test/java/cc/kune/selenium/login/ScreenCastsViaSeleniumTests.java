@@ -30,10 +30,10 @@ import cc.kune.selenium.SeleniumUtils;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 
-public class RegisterSeleniumTests extends KuneSeleniumTest {
+public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
 
   @Test(dataProvider = "correctregister")
-  public void basicRegister(final String shortNameUntrans, final String longNameUntrans,
+  public void globalScreencast(final String shortNameUntrans, final String longNameUntrans,
       final String passwd, final String emailUntrans) {
     final String shortName = t(shortNameUntrans);
     final String longName = t(longNameUntrans);
@@ -44,11 +44,39 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     showTitleSlide(t("User registration"), t("to get full access to this site tools/contents"));
     login.createOne();
     register.fillRegisterForm(shortName + prefix, longName + prefix, passwd, prefix + email, false, true);
-    doScreenshot("register");
     sleep(1000);
     login.assertIsConnectedAs(prefix);
     entityHeader.waitForEntityTitle(longName + prefix);
     register.getWelcomeMsg().click();
+
+    // group space
+    showTitleSlide(t("Group space (collaboration space)"),
+        t("Here you can create groups and collaborate within them"));
+    site.groupSpaceBtn.click();
+    site.groupSpaceBtn.click();
+    showMsg(t("Let's create a new group"));
+    site.newGroupBtn.click();
+    newGroup.shortName.sendKeys("yseg" + prefix);
+    newGroup.longName.sendKeys(t("Yellow Summarine Environmental Group ") + prefix);
+    newGroup.publicDescription.sendKeys(t("The Yellow Summarine Environmental Group is an Argentine-Based environmental"
+        + " direct action group. Currently we are focusing or activities in the environmental impact of mining."));
+    newGroup.tags.sendKeys(t("environmental, Argentina, action"));
+    newGroup.projectType.click();
+    showTooltip(newGroup.projectType);
+    doScreenshot("newgroup");
+    newGroup.registerBtn.click();
+    showTitleSlide(t("Group space (collaboration space) III "),
+        t("Let's see the diferent tools you have available"));
+    groupSpace.blogTool.click();
+    sleep(2000);
+    groupSpace.wikiTool.click();
+    sleep(2000);
+    groupSpace.listTool.click();
+    sleep(2000);
+    groupSpace.eventTool.click();
+
+    showTitleSlide(t("Group space (collaboration space) II"),
+        t("but also you can have your personal space (with blogs, etc)"));
 
     // home space
     showTitleSlide(t("Home space (your welcome page)"),
@@ -92,7 +120,7 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     site.groupSpaceBtn.click();
     showMsg(t("Let's start adding some buddie to our social network"));
     sleep(1000);
-    groupSpace.addBuddieBtn().click();
+    groupSpace.addBuddieBtn.click();
     groupSpace.addNewBuddieTextBox.click();
     groupSpace.addNewBuddieTextBox.sendKeys("admin");
     groupSpace.addNewBuddieTextBox.sendKeys(Keys.ARROW_DOWN);
@@ -100,7 +128,7 @@ public class RegisterSeleniumTests extends KuneSeleniumTest {
     groupSpace.firstFromSuggestionBox.click();
     site.confirmationOk.click();
     sleep(500);
-    groupSpace.searchEntitiesOk().click();
+    groupSpace.searchEntitiesOk.click();
     // groupSpace.firstAvatarOfGroup().click();
     sleep(2000);
 

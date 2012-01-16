@@ -56,8 +56,8 @@ public final class SeleniumConf {
 
   public static final Driver DRIVER = Driver.firefox;
   /* Configure this for use other lang, site, or driver */
-  public static final Lang LANG = Lang.es;
-  public static final Site SITE = Site.localhost;
+  public static final Lang LANG = Lang.en;
+  public static final Site SITE = Site.demo;
   public static final int TIMEOUT = 25;
 
   SeleniumConf() {

@@ -32,76 +32,32 @@ import cc.kune.selenium.SeleniumConstants;
 public class GroupSpacePageObject extends PageObject {
 
   @FindBy(id = SeleniumConstants.GWTDEV + UserSNConfActions.ADD_BUDDIE_BTN)
-  private WebElement addBuddieBtn;
+  public WebElement addBuddieBtn;
   @FindBy(id = SeleniumConstants.GWTDEV + AddNewBuddiesAction.ADD_NEW_BUDDIES_TEXTBOX)
   public WebElement addNewBuddieTextBox;
   @FindBy(id = SeleniumConstants.GWTDEV + AddEntityToThisGroupAction.ADD_NEW_MEMBER_TEXTBOX)
   public WebElement addNewMemberTextBox;
   @FindBy(xpath = "//div[2]/div/div[3]/div/span")
-  private WebElement blogTool;
+  public WebElement blogTool;
   @FindBy(xpath = "//div[2]/div/div[4]/div/span")
-  private WebElement chatTool;
+  public WebElement chatTool;
   @FindBy(xpath = "//div[3]/div/div[2]/div/div/div/span")
-  private WebElement docTool;
+  public WebElement docTool;
   @FindBy(xpath = "//div[2]/div/div[6]/div/span")
-  private WebElement eventTool;
+  public WebElement eventTool;
   @FindBy(xpath = "//td/img")
-  private WebElement firstAvatarOfGroup;
+  public WebElement firstAvatarOfGroup;
   @FindBy(xpath = "//td[2]/div/div/table/tbody/tr/td")
   public WebElement firstFromSuggestionBox;
   @FindBy(xpath = "//div[2]/div/div[5]/div/span")
-  private WebElement listTool;
+  public WebElement listTool;
   @FindBy(id = SeleniumConstants.GWTDEV + EntitySearchPanel.OK_ID)
-  private WebElement searchEntitiesOk;
+  public WebElement searchEntitiesOk;
   @FindBy(xpath = "//div[3]/div/button")
-  private WebElement socialNetOptions;
+  public WebElement socialNetOptions;
   @FindBy(xpath = "//div[2]/div/div[7]/div/span")
-  private WebElement taskTool;
+  public WebElement taskTool;
   @FindBy(xpath = "//div[2]/div/div[7]/div/span")
-  private WebElement wikiTool;
-
-  public WebElement addBuddieBtn() {
-    return addBuddieBtn;
-  }
-
-  public WebElement blogTool() {
-    return blogTool;
-  }
-
-  public WebElement chatTool() {
-    return chatTool;
-  }
-
-  public WebElement docTool() {
-    return docTool;
-  }
-
-  public WebElement eventTool() {
-    return eventTool;
-  }
-
-  public WebElement firstAvatarOfGroup() {
-    return firstAvatarOfGroup;
-  }
-
-  public WebElement listTool() {
-    return listTool;
-  }
-
-  public WebElement searchEntitiesOk() {
-    return searchEntitiesOk;
-  }
-
-  public WebElement socialNetOptions() {
-    return socialNetOptions;
-  }
-
-  public WebElement taskTool() {
-    return taskTool;
-  }
-
-  public WebElement wikiTool() {
-    return wikiTool;
-  }
+  public WebElement wikiTool;
 
 }

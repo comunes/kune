@@ -65,7 +65,7 @@ public class RegisterPageObject extends AbstractLoginObject {
     hightlight(registerButton);
     if (doScreenshot) {
       SeleniumUtils.doScreenshot(getWebDriver(), "register");
-      sleep(4000);
+      sleep(2000);
     }
     if (withReturn) {
       email.sendKeys(Keys.RETURN);
