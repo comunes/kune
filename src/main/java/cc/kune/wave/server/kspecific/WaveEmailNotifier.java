@@ -111,7 +111,7 @@ public class WaveEmailNotifier implements ContainerListener {
       private FormatedString removeWaveTemplate(final String by, final String title) {
         return FormatedString.build(
             "Hi there,<br><br>You have been removed by '%s' from message '%s' at %s. <a href=\"%s#%s\">Read more</a>.<br>",
-            by, title, siteCommonName, siteUrl, SiteTokens.WAVEINBOX);
+            by, title, siteCommonName, siteUrl, SiteTokens.WAVE_INBOX);
       }
 
       private FormatedString updatedWaveTemplate(final String by, final String title, final String url) {

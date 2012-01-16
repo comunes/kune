@@ -41,85 +41,87 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class TagsSummaryPresenter extends
-        Presenter<TagsSummaryPresenter.TagsSummaryView, TagsSummaryPresenter.TagsSummaryProxy> implements TagsSummary {
+    Presenter<TagsSummaryPresenter.TagsSummaryView, TagsSummaryPresenter.TagsSummaryProxy> implements
+    TagsSummary {
 
-    public interface TagsSummaryView extends View {
-        void addTag(String name, Long count, String style, ClickHandler clickHandler);
+  @ProxyCodeSplit
+  public interface TagsSummaryProxy extends Proxy<TagsSummaryPresenter> {
+  }
 
-        void clear();
+  public interface TagsSummaryView extends View {
+    void addTag(String name, Long count, String style, ClickHandler clickHandler);
 
-        void setVisible(boolean visible);
-    }
+    void clear();
 
-    @ProxyCodeSplit
-    public interface TagsSummaryProxy extends Proxy<TagsSummaryPresenter> {
-    }
+    void setVisible(boolean visible);
+  }
 
-    private static final int MINSIZE = 11;
-    private static final int MAXSIZE = 26;
+  private static final int MAXSIZE = 26;
+  private static final int MINSIZE = 11;
 
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
-
-    @Inject
-    public TagsSummaryPresenter(EventBus eventBus, TagsSummaryView view, TagsSummaryProxy proxy, final Session session,
-            final StateManager stateManager) {
-        super(eventBus, view, proxy);
-        stateManager.onStateChanged(true, new StateChangedHandler() {
-            @Override
-            public void onStateChanged(StateChangedEvent event) {
-                StateAbstractDTO state = event.getState();
-                if (state instanceof StateContainerDTO) {
-                    setState((StateContainerDTO) state);
-                } else {
-                    getView().setVisible(false);
-                }
-            }
-        });
-    }
-
-    public void doSearchTag(final String name) {
-        // searcherProvider.get().doSearchOfType(
-        // "group:" + session.getCurrentState().getGroup().getShortName() +
-        // " tag:" + name,
-        // SiteSearcherType.content);
-        NotifyUser.info("Searcher in development");
-    }
-
-    public void setGroupTags(final TagCloudResult tagCloud) {
-        setCloud(tagCloud);
-        getView().setVisible(true);
-    }
-
-    // @PMD:REVIEWED:DefaultPackage: by vjrj on 27/05/09 3:13
-    void setState(final StateContainerDTO state) {
-        if (state.getTagCloudResult() != null && state.getTagCloudResult().getTagCountList().size() > 0) {
-            Log.debug(state.getTagCloudResult().toString());
-            setCloud(state.getTagCloudResult());
-            getView().setVisible(true);
+  @Inject
+  public TagsSummaryPresenter(final EventBus eventBus, final TagsSummaryView view,
+      final TagsSummaryProxy proxy, final Session session, final StateManager stateManager) {
+    super(eventBus, view, proxy);
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        final StateAbstractDTO state = event.getState();
+        if (state instanceof StateContainerDTO) {
+          setState((StateContainerDTO) state);
         } else {
-            getView().setVisible(false);
+          getView().setVisible(false);
         }
-    }
+      }
+    });
+  }
 
-    private void setCloud(final TagCloudResult tagCloudResult) {
-        // Inspired in snippet http://www.bytemycode.com/snippets/snippet/415/
-        getView().clear();
-        final int max = tagCloudResult.getMaxValue();
-        final int min = tagCloudResult.getMinValue();
-        final int diff = max - min;
-        final int step = (MAXSIZE - MINSIZE) / (diff == 0 ? 1 : diff);
-        for (final TagCount tagCount : tagCloudResult.getTagCountList()) {
-            final String name = tagCount.getName();
-            final int size = Math.round((MINSIZE + (tagCount.getCount().floatValue() - min) * step));
-            getView().addTag(name, tagCount.getCount(), "kune-ft" + size + "px", new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent event) {
-                    doSearchTag(name);
-                }
-            });
+  public void doSearchTag(final String name) {
+    // searcherProvider.get().doSearchOfType(
+    // "group:" + session.getCurrentState().getGroup().getShortName() +
+    // " tag:" + name,
+    // SiteSearcherType.content);
+    NotifyUser.info("Searcher in development");
+  }
+
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
+  }
+
+  private void setCloud(final TagCloudResult tagCloudResult) {
+    // Inspired in snippet http://www.bytemycode.com/snippets/snippet/415/
+    getView().clear();
+    final int max = tagCloudResult.getMaxValue();
+    final int min = tagCloudResult.getMinValue();
+    final int diff = max - min;
+    final int step = (MAXSIZE - MINSIZE) / (diff == 0 ? 1 : diff);
+    for (final TagCount tagCount : tagCloudResult.getTagCountList()) {
+      final String name = tagCount.getName();
+      final int size = Math.round((MINSIZE + (tagCount.getCount().floatValue() - min) * step));
+      getView().addTag(name, tagCount.getCount(), "kune-ft" + size + "px", new ClickHandler() {
+        @Override
+        public void onClick(final ClickEvent event) {
+          doSearchTag(name);
         }
+      });
     }
+  }
+
+  @Override
+  public void setGroupTags(final TagCloudResult tagCloud) {
+    setCloud(tagCloud);
+    getView().setVisible(true);
+  }
+
+  // @PMD:REVIEWED:DefaultPackage: by vjrj on 27/05/09 3:13
+  void setState(final StateContainerDTO state) {
+    if (state.getTagCloudResult() != null && state.getTagCloudResult().getTagCountList().size() > 0) {
+      Log.debug(state.getTagCloudResult().toString());
+      setCloud(state.getTagCloudResult());
+      getView().setVisible(true);
+    } else {
+      getView().setVisible(false);
+    }
+  }
 }

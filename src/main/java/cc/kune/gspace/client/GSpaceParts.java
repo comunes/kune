@@ -23,7 +23,7 @@ import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
-import cc.kune.core.client.state.HistoryTokenCallback;
+import cc.kune.core.client.state.HistoryTokenMustBeAuthCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
@@ -125,7 +125,7 @@ public class GSpaceParts {
         writeToBuddie.get();
       }
     });
-    tokenListener.put(SiteTokens.TRANSLATE, new HistoryTokenCallback() {
+    tokenListener.put(SiteTokens.TRANSLATE, new HistoryTokenMustBeAuthCallback() {
       @Override
       public void onHistoryToken(final String token) {
         if (session.isLogged() && session.getInitData().isTranslatorEnabled()) {

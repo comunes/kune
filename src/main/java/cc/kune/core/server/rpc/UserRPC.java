@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.rpc;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
 import org.jivesoftware.smack.util.Base64;
@@ -28,6 +29,7 @@ import org.waveprotocol.box.server.authentication.SessionManager;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.EmailNotFoundException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.UserSession;
@@ -36,10 +38,12 @@ import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.manager.impl.EmailConfirmationType;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.properties.ReservedWordsRegistry;
 import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.server.users.UserInfoService;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -50,6 +54,7 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.CustomWaveClientServlet;
 
 import com.google.inject.Inject;
@@ -62,6 +67,7 @@ public class UserRPC implements RPC, UserService {
   private final ContentRPC contentRPC;
   private final Mapper mapper;
   private final ReservedWordsRegistry reserverdWords;
+  private final UserFinder userFinder;
   private final UserInfoService userInfoService;
   private final UserManager userManager;
   private final UserSessionManager userSessionManager;
@@ -75,7 +81,7 @@ public class UserRPC implements RPC, UserService {
       final UserInfoService userInfoService, final Mapper mapper,
       final SessionManager waveSessionManager, final CustomWaveClientServlet waveClientServlet,
       final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
-      final UserSessionManager userSessionManager) {
+      final UserSessionManager userSessionManager, final UserFinder userFinder) {
     this.userManager = userManager;
     this.useSocketIO = useSocketIO;
     this.userInfoService = userInfoService;
@@ -85,6 +91,26 @@ public class UserRPC implements RPC, UserService {
     this.reserverdWords = reserverdWords;
     this.contentRPC = contentRPC;
     this.userSessionManager = userSessionManager;
+    this.userFinder = userFinder;
+  }
+
+  @Authenticated
+  @Override
+  @Transactional
+  public void askForEmailConfirmation(final String userHash) throws DefaultException {
+    final User user = userSessionManager.getUser();
+    userManager.askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
+  }
+
+  @Override
+  @Transactional
+  public void askForEmailForgot(final String email) throws DefaultException {
+    try {
+      final User user = userFinder.findByEmail(email);
+      userManager.askForEmailConfirmation(user, EmailConfirmationType.passwordReset);
+    } catch (final NoResultException e) {
+      throw new EmailNotFoundException();
+    }
   }
 
   @Override
@@ -131,7 +157,7 @@ public class UserRPC implements RPC, UserService {
     final JSONObject sessionJson = waveClientServlet.getSessionJson(sessionFromToken);
     final JSONObject clientFlags = new JSONObject(); // waveClientServlet.getClientFlags();
     return new WaveClientParams(sessionJson.toString(), clientFlags.toString(), useSocketIO);
-  }
+  };
 
   private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
     final UserInfo userInfo = userInfoService.buildInfo(user, userSessionManager.getHash());
@@ -146,7 +172,7 @@ public class UserRPC implements RPC, UserService {
     // sessionService.getNewSession();
     final User user = userManager.login(nickOrEmail, passwd);
     return loginUser(user, waveToken);
-  };
+  }
 
   private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
     if (user != null) {
@@ -206,5 +232,13 @@ public class UserRPC implements RPC, UserService {
     final User userUpdated = userManager.update(id, user, lang);
     userSessionManager.updateLoggedUser();
     return contentRPC.getContent(userHash, userUpdated.getUserGroup().getStateToken());
+  }
+
+  @Authenticated
+  @Override
+  @Transactional
+  public void verifyPasswordHash(final String userHash, final String emailReceivedHash) {
+    final User user = userSessionManager.getUser();
+    userManager.verifyPasswordHash(user.getId(), emailReceivedHash, SessionConstants._AN_HOUR);
   }
 }

@@ -37,7 +37,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.WindowFocusEvent;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 
 import com.calclab.emite.core.client.events.StateChangedEvent;
 import com.calclab.emite.core.client.events.StateChangedHandler;
@@ -124,7 +124,7 @@ public class ChatSitebarActions {
   private final XmppSession xmppSession;
 
   @Inject
-  public ChatSitebarActions(final Session session, final ChatClient chatClient,
+  public ChatSitebarActions(final SessionConstants session, final ChatClient chatClient,
       final SiteUserOptions userOptions, final I18nTranslationService i18n, final ChatResources res,
       final ChatInstances chatInstances, final EventBus eventBus) {
     this.chatClient = chatClient;

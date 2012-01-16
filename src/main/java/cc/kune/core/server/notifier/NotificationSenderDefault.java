@@ -92,7 +92,8 @@ public class NotificationSenderDefault implements NotificationSender {
             String.format("<b>%s</b>%s", subject.getString(), body.getString()));
         break;
       case email:
-        if (forceSend || (noOnline(username) && withFrequency == user.getEmailNotifFreq())) {
+        if (forceSend
+            || (user.isEmailVerified() && noOnline(username) && withFrequency == user.getEmailNotifFreq())) {
           // we'll send this notification if is mandatory or this user is not
           // only and has this freq configured
           mailService.send(subject, FormatedString.build(emailTemplate.replace("%s", body.getString())),

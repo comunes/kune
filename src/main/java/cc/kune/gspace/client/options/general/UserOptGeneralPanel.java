@@ -28,13 +28,19 @@ import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.gspace.client.i18n.LanguageSelectorPanel;
 
+import com.extjs.gxt.ui.client.widget.form.AdapterField;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 
 public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOptGeneralView {
+
+  private static final String BIG_FIELD_SIZE = "310px";
 
   public static final String DAILY_TYPE_ID = "k-ngp-type_daily";
   public static final String HOURLY_TYPE_ID = "k-ngp-type_hourly";
@@ -43,11 +49,16 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   public static final String NO_TYPE_ID = "k-ngp-type_no";
   public static final String TYPEOFEMAILNOTIF_FIELD = "k-ngp-type_of_email_notif";
   private final Radio dailyRadio;
+  private final FieldSet emailNotifTypeFieldSet;
   private final Radio hourlyRadio;
   private final Radio immediateRadio;
   private final LanguageSelectorPanel langSelector;
   private final TextField<String> longName;
   private final Radio noRadio;
+  private final AdapterField notVerifLabelAdapter;
+  private final AdapterField resendEmailVerifAdapter;
+
+  private final Button resendEmailVerifBtn;
 
   @Inject
   public UserOptGeneralPanel(final I18nUITranslationService i18n, final CoreResources res,
@@ -62,11 +73,11 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     langSelector.setLangSeparator(":");
     add(langSelector);
 
-    final FieldSet emailNotifTypeFieldSet = new FieldSet();
+    emailNotifTypeFieldSet = new FieldSet();
     emailNotifTypeFieldSet.setHeading(i18n.t("How often do you want to receive email notifications?"));
     emailNotifTypeFieldSet.addStyleName("k-form-fieldset");
     emailNotifTypeFieldSet.setCollapsible(false);
-    emailNotifTypeFieldSet.setWidth("310px");
+    emailNotifTypeFieldSet.setWidth(BIG_FIELD_SIZE);
     emailNotifTypeFieldSet.setAutoHeight(true);
 
     immediateRadio = DefaultFormUtils.createRadio(emailNotifTypeFieldSet, i18n.t("almost immediately"),
@@ -98,8 +109,25 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
             i18n.getSiteCommonName()), NO_TYPE_ID);
     noRadio.setTabIndex(6);
     noRadio.setValue(false);
-
     add(emailNotifTypeFieldSet);
+
+    final Label notVerified = new Label(
+        i18n.t("Your email is not verified, so you will not receive email notifications"));
+    notVerified.setStyleName("oc-user-msg");
+    notVerified.addStyleName("k-3corners");
+    notVerifLabelAdapter = new AdapterField(notVerified);
+    notVerifLabelAdapter.setLabelSeparator("");
+    notVerifLabelAdapter.setWidth(BIG_FIELD_SIZE);
+    super.add(notVerifLabelAdapter);
+
+    resendEmailVerifBtn = new Button(i18n.t("Resend verification email"));
+    resendEmailVerifBtn.addStyleName("k-button");
+    resendEmailVerifAdapter = new AdapterField(resendEmailVerifBtn);
+    resendEmailVerifAdapter.setValidateOnBlur(false);
+    resendEmailVerifAdapter.setLabelSeparator("");
+    resendEmailVerifAdapter.setWidth(BIG_FIELD_SIZE);
+    // resendEmailVerifAdapter.setFieldLabel(i18n.t("Maybe you want receive again our verification email"));
+    add(resendEmailVerifAdapter);
   }
 
   @Override
@@ -128,6 +156,11 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   }
 
   @Override
+  public HasClickHandlers getResendEmailVerif() {
+    return resendEmailVerifBtn;
+  }
+
+  @Override
   public void setEmailNotifChecked(final EmailNotificationFrequency freq) {
     switch (freq) {
     case no:
@@ -146,6 +179,13 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   }
 
   @Override
+  public void setEmailVerified(final boolean verified) {
+    resendEmailVerifAdapter.setVisible(!verified);
+    notVerifLabelAdapter.setVisible(!verified);
+    emailNotifTypeFieldSet.setVisible(verified);
+  }
+
+  @Override
   public void setLanguage(final I18nLanguageSimpleDTO language) {
     langSelector.setLanguage(language);
   }
@@ -153,6 +193,11 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   @Override
   public void setLongName(final String longName) {
     this.longName.setValue(longName);
+  }
+
+  @Override
+  public void setResendEmailVerifEnabled(final boolean enabled) {
+    resendEmailVerifBtn.setEnabled(enabled);
   }
 
 }

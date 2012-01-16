@@ -19,7 +19,7 @@
  */
 package cc.kune.wiki.client;
 
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 public class WikiParts {
 
   @Inject
-  public WikiParts(final Session session, final Provider<WikiClientTool> clientTool,
+  public WikiParts(final SessionConstants session, final Provider<WikiClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final WikiClientActions wikiActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();

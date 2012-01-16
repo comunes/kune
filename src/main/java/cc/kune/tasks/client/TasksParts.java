@@ -19,7 +19,7 @@
  */
 package cc.kune.tasks.client;
 
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 public class TasksParts {
 
   @Inject
-  public TasksParts(final Session session, final Provider<TasksClientTool> clientTool,
+  public TasksParts(final SessionConstants session, final Provider<TasksClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final TasksClientActions tasksActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();

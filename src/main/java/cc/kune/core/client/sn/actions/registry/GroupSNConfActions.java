@@ -41,8 +41,8 @@ import cc.kune.core.client.sn.actions.WriteToAdmins;
 import cc.kune.core.client.sn.actions.WriteToMembers;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
-import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -64,7 +64,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
   public static final String OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-nobackcolor, k-no-backimage, k-btn-min";
 
   @Inject
-  public GroupSNConfActions(final Session session, final StateManager stateManager,
+  public GroupSNConfActions(final SessionConstants session, final StateManager stateManager,
       final I18nTranslationService i18n, final Provider<MembersVisibilityMenuItem> membersVisibility,
       final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
       final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,

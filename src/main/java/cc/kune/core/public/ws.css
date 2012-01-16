@@ -1,4 +1,4 @@
-GCHARSET                       "UTF-8                      "; body {
+GCHARSET                        "UTF-8                       "; body {
   background-color: transparent;
   color: black;
   font-family: 'Ubuntu', Arial;
@@ -324,12 +324,9 @@ a:visited {
   float: left;
 }
 
-.k-space-sel-btn-blink {
-/*   kfilter: alpha(opacity = */
-/*             30); */
-/*   -moz-opacity: 0.30; */
-/*   -khtml-opacity: 0.30; */
-/*   opacity: 0.30; */
+.k-space-sel-btn-blink { /*   kfilter: alpha(opacity = */
+  /*             30); */ /*   -moz-opacity: 0.30; */
+  /*   -khtml-opacity: 0.30; */ /*   opacity: 0.30; */
   visibility: hidden;
 }
 
@@ -953,7 +950,7 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   border-color: #CCCCCC !important;
   background: inherits !important;
   kfilter: alpha(opacity =
-            60) !important;
+             60) !important;
   -moz-opacity: 0.60 !important;
   -khtml-opacity: 0.60 !important;
   opacity: 0.60 !important;
@@ -1239,7 +1236,7 @@ table.k-folder-viewer {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   kfilter: alpha(opacity =
-            90);
+             90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1561,14 +1558,13 @@ div.jGrowl {
 }
 
 /* Calendar */
-
 .gwt-cal-MonthView {
-    bottom: 0 !important;
-    height: auto !important;
-    left: 0 !important;
-    overflow: auto !important;
-    position: absolute !important;
-    right: 0 !important;
-    top: 0 !important;
-    width: auto !important;
+  bottom: 0 !important;
+  height: auto !important;
+  left: 0 !important;
+  overflow: auto !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  width: auto !important;
 }

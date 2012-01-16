@@ -30,7 +30,7 @@ import cc.kune.core.client.sn.actions.RemoveMemberAction;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -38,7 +38,7 @@ import com.google.inject.Provider;
 public class GroupSNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
     @Inject
-    public GroupSNPendingsMenuItemsRegistry(final Session session, final IsCurrentStateAdministrableCondition isAdministrableCondition,
+    public GroupSNPendingsMenuItemsRegistry(final SessionConstants session, final IsCurrentStateAdministrableCondition isAdministrableCondition,
             final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
             final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
             final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,

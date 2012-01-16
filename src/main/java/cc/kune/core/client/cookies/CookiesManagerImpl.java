@@ -22,7 +22,7 @@ package cc.kune.core.client.cookies;
 import java.util.Date;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.user.client.Cookies;
 
@@ -40,7 +40,7 @@ public class CookiesManagerImpl implements CookiesManager {
 
   @Override
   public String getAuthCookie() {
-    return Cookies.getCookie(Session.USERHASH);
+    return Cookies.getCookie(SessionConstants.USERHASH);
   }
 
   @Override
@@ -55,23 +55,23 @@ public class CookiesManagerImpl implements CookiesManager {
     // issue:
     // http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/ded86778ee56690/515dc513c7d085eb?lnk=st&q=remove+cookie#515dc513c7d085eb
     // http://code.google.com/p/google-web-toolkit/issues/detail?id=1735&q=removeCookie
-    Cookies.removeCookie(Session.USERHASH);
+    Cookies.removeCookie(SessionConstants.USERHASH);
     // Workaround:
-    Cookies.setCookie(Session.USERHASH, null, new Date(0), null, "/", false);
+    Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), null, "/", false);
   }
 
   @Override
   public void setAnonCookie(final Boolean userRegister) {
     final Date expires = new Date(System.currentTimeMillis()
-        + (userRegister ? Session.ANON_SESSION_DURATION_AFTER_REG : Session.ANON_SESSION_DURATION));
+        + (userRegister ? SessionConstants.ANON_SESSION_DURATION_AFTER_REG : SessionConstants.ANON_SESSION_DURATION));
     Cookies.setCookie(ANON, userRegister.toString(), expires, null, "/", false);
   }
 
   @Override
   public void setAuthCookie(final String userHash) {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
-    final Date expires = new Date(System.currentTimeMillis() + Session.SESSION_DURATION);
-    Cookies.setCookie(Session.USERHASH, userHash, expires, null, "/", false);
+    final Date expires = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
+    Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, null, "/", false);
     Log.info("Received hash: " + userHash, null);
   }
 }

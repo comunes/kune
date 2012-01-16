@@ -13,8 +13,15 @@ import com.google.inject.Singleton;
 @Singleton
 public class AbsoluteFileDownloadUtils extends SharedFileDownloadUtils {
 
+  private final KuneBasicProperties properties;
+
   @Inject
   public AbsoluteFileDownloadUtils(final KuneBasicProperties properties) {
     super(properties.getSiteUrl());
+    this.properties = properties;
+  }
+
+  public String getSiteCommonName() {
+    return properties.getSiteCommonName();
   }
 }

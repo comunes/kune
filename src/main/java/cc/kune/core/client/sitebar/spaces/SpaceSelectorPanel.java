@@ -23,7 +23,7 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 
@@ -60,7 +60,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   @Inject
   public SpaceSelectorPanel(final GSpaceArmor armor, final I18nUITranslationService i18n,
-      final GSpaceArmorResources res, final Session session) {
+      final GSpaceArmorResources res, final SessionConstants session) {
     armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
     // homeButton.setVisible(false);
     final String siteCommonName = i18n.getSiteCommonName();

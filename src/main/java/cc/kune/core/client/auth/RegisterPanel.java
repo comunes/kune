@@ -25,8 +25,8 @@ import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.RegisterPresenter.RegisterView;
 import cc.kune.core.client.resources.CoreMessages;
-import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.KuneUiUtils;
+import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -46,7 +46,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
   private final RegisterForm registerForm;
 
   @Inject
-  public RegisterPanel(final I18nTranslationService i18n, final Session session,
+  public RegisterPanel(final I18nTranslationService i18n, final SessionConstants session,
       final MaskWidgetView mask, final NotifyLevelImages images, final UserFieldFactory userFieldFactory) {
     super(REGISTER_DIALOG, mask, i18n, i18n.t(CoreMessages.REGISTER_TITLE), true, true, true, "",
         i18n.t(CoreMessages.REGISTER_TITLE), REGISTER_BUTTON_ID,

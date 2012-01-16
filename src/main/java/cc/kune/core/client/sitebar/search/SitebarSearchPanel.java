@@ -22,8 +22,8 @@ package cc.kune.core.client.sitebar.search;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView;
-import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
@@ -49,7 +49,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
   private final SuggestBox suggestBox;
 
   @Inject
-  public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img, final Session session,
+  public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img, final SessionConstants session,
       final StateManager stateManager, final I18nUITranslationService i18n) {
     searchButton = new PushButton(new Image(img.kuneSearchIco()), new Image(img.kuneSearchIcoPush()));
     searchButton.ensureDebugId(SITE_SEARCH_BUTTON);

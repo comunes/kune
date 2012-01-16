@@ -29,16 +29,16 @@ import org.mockito.stubbing.Answer;
 
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.core.client.events.AppStartEvent;
-import cc.kune.core.client.events.GroupChangedEvent;
-import cc.kune.core.client.events.StateChangedEvent;
-import cc.kune.core.client.events.ToolChangedEvent;
-import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.GroupChangedEvent;
 import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
+import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
+import cc.kune.core.client.events.ToolChangedEvent;
 import cc.kune.core.client.events.ToolChangedEvent.ToolChangedHandler;
+import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.HistoryTokenCallback;
@@ -47,7 +47,6 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenMatcher;
-import cc.kune.core.client.state.impl.StateManagerDefault;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -237,7 +236,6 @@ public class StateManagerDefaultTest {
     return newToken;
   }
 
-  @SuppressWarnings("unchecked")
   @Test
   public void getDefGroup() {
     stateManager.processHistoryToken("site.docs");
@@ -248,7 +246,6 @@ public class StateManagerDefaultTest {
     stateManager.processHistoryToken("example.com/w+abcd/~/conv+root/b+45kg");
   }
 
-  @SuppressWarnings("unchecked")
   @Test
   public void normalStartLoggedUser() {
     // When a user enter reload state, also if the application is starting
@@ -258,7 +255,6 @@ public class StateManagerDefaultTest {
     verifyGetServerContent();
   }
 
-  @SuppressWarnings("unchecked")
   @Test
   public void oneBeforeStateChangeListenerAddAndRemove() {
     final String newToken = confBeforeStateChangeListeners(false, false);
@@ -294,7 +290,6 @@ public class StateManagerDefaultTest {
         (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
   }
 
-  @SuppressWarnings("unchecked")
   @Test
   public void oneBeforeStateChangeListenerReturnTrue() {
     stateManager.processHistoryToken(confBeforeStateChangeListeners(true, true));
@@ -306,13 +301,12 @@ public class StateManagerDefaultTest {
     stateManager.removeBeforeStateChangeListener(beforeChangeListener2);
   }
 
-  @SuppressWarnings("unchecked")
   @Test
   public void siteTokenFirstLoadDefContentAndFireListener() {
     final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
-    final String token = SiteTokens.SIGNIN;
+    final String token = SiteTokens.SIGN_IN;
     stateManager.addSiteToken(token, listener);
-    Mockito.when(siteTokens.get(SiteTokens.SIGNIN)).thenReturn(listener);
+    Mockito.when(siteTokens.get(SiteTokens.SIGN_IN)).thenReturn(listener);
     stateManager.processHistoryToken(token);
     Mockito.verify(listener, Mockito.times(1)).onHistoryToken(Mockito.anyString());
     verifyGetServerContent();
@@ -321,8 +315,8 @@ public class StateManagerDefaultTest {
   @Test
   public void siteTokenTest() {
     final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
-    stateManager.addSiteToken(SiteTokens.SIGNIN, listener);
-    Mockito.when(siteTokens.get(SiteTokens.SIGNIN)).thenReturn(listener);
+    stateManager.addSiteToken(SiteTokens.SIGN_IN, listener);
+    Mockito.when(siteTokens.get(SiteTokens.SIGN_IN)).thenReturn(listener);
     stateManager.processHistoryToken("signIn");
     Mockito.verify(listener, Mockito.times(1)).onHistoryToken(Mockito.anyString());
   }
@@ -335,6 +329,7 @@ public class StateManagerDefaultTest {
     verifyGetServerContent();
   }
 
+  @SuppressWarnings("unchecked")
   private void verifyGetServerContent() {
     Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
         (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());

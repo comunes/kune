@@ -20,8 +20,8 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.DefaultForm;
+import cc.kune.core.shared.SessionConstants;
 
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -46,7 +46,7 @@ public class RegisterForm extends DefaultForm {
 
   private final TextField<String> shortNameRegField;
 
-  public RegisterForm(final I18nTranslationService i18n, final Session session,
+  public RegisterForm(final I18nTranslationService i18n, final SessionConstants session,
       final UserFieldFactory userFieldFactory) {
     super.addStyleName("kune-Margin-Large-l");
 

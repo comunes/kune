@@ -52,7 +52,7 @@ public class AnonUsersManager {
             cookiesManager.setAnonCookie(false);
             final String register = TextUtils.generateHtmlLink("#" + SiteTokens.REGISTER,
                 i18n.tWithNT("register", "register, in lowercase"), false);
-            final String signin = TextUtils.generateHtmlLink("#" + SiteTokens.SIGNIN,
+            final String signin = TextUtils.generateHtmlLink("#" + SiteTokens.SIGN_IN,
                 i18n.tWithNT("sign in", "register, in lowercase"), false);
             final String siteCommonName = i18n.getSiteCommonName();
             notifyMsg = UserNotifyEvent.fire(

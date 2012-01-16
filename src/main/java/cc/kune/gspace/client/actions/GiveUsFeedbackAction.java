@@ -82,7 +82,7 @@ public class GiveUsFeedbackAction extends AbstractExtendedAction {
     } else {
       signIn.get().setErrorMessage(i18n.t("Sign in or create an account to give us feedback"),
           NotifyLevel.info);
-      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN,
+      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN,
           session.getCurrentStateToken().toString()));
     }
   }

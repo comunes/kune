@@ -118,6 +118,15 @@ public class ErrorHandler {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("This user is already a group member")));
+    } else if (caught instanceof EmailHashInvalidException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          i18n.t("This confirmation email is invalid")));
+    } else if (caught instanceof EmailHashExpiredException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(
+          NotifyLevel.error,
+          i18n.t("This email verification is expired. In your preferences, resend you the confirmation email")));
     } else if (caught instanceof MoveOnSameContainerException) {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info,

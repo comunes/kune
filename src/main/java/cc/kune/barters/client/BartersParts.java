@@ -21,7 +21,7 @@ package cc.kune.barters.client;
 
 import cc.kune.barters.client.actions.BartersClientActions;
 import cc.kune.barters.shared.BartersConstants;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 public class BartersParts {
 
   @Inject
-  public BartersParts(final Session session, final Provider<BartersClientTool> clientTool,
+  public BartersParts(final SessionConstants session, final Provider<BartersClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final BartersClientActions bartersActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();

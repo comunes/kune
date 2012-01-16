@@ -34,7 +34,10 @@ import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.gspace.client.options.UserOptions;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -67,6 +70,22 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
   @Override
   public void init(final EntityOptGeneralView view) {
     super.init(view);
+    userView.getResendEmailVerif().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        userView.setResendEmailVerifEnabled(false);
+        userService.get().askForEmailConfirmation(session.getUserHash(), new AsyncCallback<Void>() {
+          @Override
+          public void onFailure(final Throwable caught) {
+          }
+
+          @Override
+          public void onSuccess(final Void result) {
+            NotifyUser.info("Sended. Check your email for the verification link.");
+          }
+        });
+      }
+    });
   }
 
   @Override
@@ -75,6 +94,13 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     userView.setLongName(currentUser.getName());
     userView.setLanguage(I18nLanguageSimpleDTO.create(currentUser.getLanguage()));
     userView.setEmailNotifChecked(currentUser.getEmailNotifFreq());
+    userView.setEmailVerified(currentUser.isEmailVerified());
+    userView.setResendEmailVerifEnabled(!currentUser.isEmailVerified());
+  }
+
+  @Override
+  public void update() {
+    setState();
   }
 
   @Override

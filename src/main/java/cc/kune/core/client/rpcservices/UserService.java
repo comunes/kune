@@ -34,7 +34,11 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("UserService")
 public interface UserService extends RemoteService {
 
-  void changePasswd(String userHash, String oldPassword, String newPassword) throws DefaultException;;
+  void askForEmailConfirmation(String userHash);;
+
+  void askForEmailForgot(String email);
+
+  void changePasswd(String userHash, String oldPassword, String newPassword) throws DefaultException;
 
   void createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;
 
@@ -53,5 +57,7 @@ public interface UserService extends RemoteService {
   void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility);
 
   StateAbstractDTO updateUser(String userHash, UserDTO user, I18nLanguageSimpleDTO lang);
+
+  void verifyPasswordHash(String userHash, String emailReceivedHash);
 
 }

@@ -20,11 +20,13 @@
 package cc.kune.core.server.manager.impl;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -46,11 +48,15 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
+import cc.kune.core.client.errors.EmailHashExpiredException;
+import cc.kune.core.client.errors.EmailHashInvalidException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.client.errors.WrongCurrentPasswordException;
+import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.server.i18n.I18nTranslationServiceMultiLang;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
@@ -119,6 +125,35 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.properties = properties;
     this.groupManager = groupManager;
     this.notifyService = notifyService;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.UserManager#askForEmailConfirmation(cc.kune
+   * .domain.User, cc.kune.core.server.manager.impl.EmailConfirmationType)
+   */
+  @Override
+  public void askForEmailConfirmation(final User user, final EmailConfirmationType type)
+      throws DefaultException {
+    user.setEmailCheckDate(System.currentTimeMillis());
+    final String hash = UUID.randomUUID().toString();
+    user.setEmailConfirmHash(hash);
+    persist(user);
+
+    switch (type) {
+    case emailVerification:
+    case fstTimeEmailVerification:
+      notifyService.sendEmailToWithLink(user, "Please verify your email",
+          "Please click in the following link to verify your email at %s:",
+          TokenUtils.addRedirect(SiteTokens.VERIFY_EMAIL, hash));
+      break;
+    case passwordReset:
+      // FIXME
+    default:
+      break;
+    }
   }
 
   @Override
@@ -211,10 +246,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       // Is this necessary? try to remove (used when we were setting the def
       // content
       // contentManager.save(userGroup.getDefaultContent());
-
-      // FIXME: notifyService.
-      // mailService.sendPlain(new FormatedString("Welcome", ""), new
-      // FormatedString("welcome"), email);
+      askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
       return user;
     } catch (final RuntimeException e) {
       try {
@@ -400,4 +432,24 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     return user;
   }
 
+  @Override
+  public void verifyPasswordHash(final Long userId, final String emailReceivedHash, final long period)
+      throws DefaultException {
+    final User user = find(userId);
+    final Date on = new Date(user.getEmailCheckDate() + period);
+
+    final Date now = new Date();
+    if (on.before(now)) {
+      throw new EmailHashExpiredException();
+    }
+    final String emailConfirmHash = user.getEmailConfirmHash();
+    if (emailReceivedHash != null && emailConfirmHash != null
+        && emailReceivedHash.equals(emailConfirmHash)) {
+      user.setEmailVerified(true);
+      user.setEmailConfirmHash("");
+      persist(user);
+    } else {
+      throw new EmailHashInvalidException();
+    }
+  }
 }

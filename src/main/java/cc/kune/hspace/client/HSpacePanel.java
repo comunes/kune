@@ -117,7 +117,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     tabPanel.addTab(lastGroupsPanel);
     tabPanel.addTab(lastPublishedPanel);
     globalStats.removeFromParent();
-    unreadInYourInbox.setTargetHistoryToken(SiteTokens.WAVEINBOX);
+    unreadInYourInbox.setTargetHistoryToken(SiteTokens.WAVE_INBOX);
     globalStatsParent = RootPanel.get(K_HOME_GLOBAL_STATS);
     groupStatsParent = RootPanel.get(K_HOME_GROUP_STATS);
     if (globalStatsParent != null) {

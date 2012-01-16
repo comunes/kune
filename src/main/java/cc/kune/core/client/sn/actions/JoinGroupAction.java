@@ -98,7 +98,7 @@ public class JoinGroupAction extends SNRolAction {
     } else {
       signIn.get().setErrorMessage(i18n.t("Sign in or create an account to participate in this group"),
           NotifyLevel.info);
-      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN,
+      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN,
           session.getCurrentStateToken().toString()));
     }
 

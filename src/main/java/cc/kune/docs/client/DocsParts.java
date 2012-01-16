@@ -19,7 +19,7 @@
  */
 package cc.kune.docs.client;
 
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.docs.client.actions.DocsClientActions;
 import cc.kune.docs.shared.DocsConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 public class DocsParts {
 
   @Inject
-  public DocsParts(final Session session, final Provider<DocsClientTool> clientTool,
+  public DocsParts(final SessionConstants session, final Provider<DocsClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final DocsClientActions docsActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();

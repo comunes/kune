@@ -39,4 +39,12 @@ public class MailServiceDefaultTest {
     service.sendPlain(FormatedString.build("Some test subject"), FormatedString.build("Some body"),
         "vjrj@localhost");
   }
+
+  @Test
+  public void utf8Test() {
+    service.sendPlain(FormatedString.build("áéíóú"), FormatedString.build("Some body áéíóú"),
+        "vjrj@localhost");
+    service.sendHtml(FormatedString.build("áéíóú"), FormatedString.build("Some body áéíóú"),
+        "vjrj@localhost");
+  }
 }

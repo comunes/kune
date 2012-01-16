@@ -21,5 +21,14 @@ package cc.kune.gspace.client.options;
 
 public interface GroupOptions extends EntityOptions {
 
+  /**
+   * Show the group options dialog but also goes to this token (the group name
+   * usually).
+   * 
+   * @param token
+   *          the token
+   */
+  void show(String token);
+
   void showTooltip();
 }

@@ -83,11 +83,17 @@ public class User implements HasId {
   @Length(min = 1)
   private String email;
 
-  @Enumerated(EnumType.STRING)
-  private EmailNotificationFrequency emailNotifFreq;
+  private Long emailCheckDate;
 
   // @OneToOne(cascade = CascadeType.REMOVE)
   // private final CustomProperties customProperties;
+
+  private String emailConfirmHash;
+
+  @Enumerated(EnumType.STRING)
+  private EmailNotificationFrequency emailNotifFreq;
+
+  private Boolean emailVerified;
 
   @Id
   @DocumentId
@@ -154,11 +160,21 @@ public class User implements HasId {
     this.lastLogin = null;
     emailNotifFreq = DEF_EMAIL_FREQ;
     // this.properties = properties;
+    emailVerified = false;
   }
 
   // @OneToOne
   // @OnDelete(action = OnDeleteAction.CASCADE)
   // private Properties properties;
+
+  //
+  // public User(final String shortName, final String longName, final String
+  // email, final String passwd,
+  // final I18nLanguage language, final I18nCountry country, final TimeZone
+  // timezone) {
+  // this(shortName, longName, email, passwd, language, country, timezone,
+  // null);
+  // }
 
   @Override
   public boolean equals(final Object obj) {
@@ -182,15 +198,6 @@ public class User implements HasId {
     return true;
   }
 
-  //
-  // public User(final String shortName, final String longName, final String
-  // email, final String passwd,
-  // final I18nLanguage language, final I18nCountry country, final TimeZone
-  // timezone) {
-  // this(shortName, longName, email, passwd, language, country, timezone,
-  // null);
-  // }
-
   public I18nCountry getCountry() {
     return country;
   }
@@ -203,16 +210,28 @@ public class User implements HasId {
     return diggest;
   }
 
-  public String getEmail() {
-    return email;
-  }
-
   // public CustomProperties getCustomProperties() {
   // return customProperties;
   // }
 
+  public String getEmail() {
+    return email;
+  }
+
+  public Long getEmailCheckDate() {
+    return emailCheckDate;
+  }
+
+  public String getEmailConfirmHash() {
+    return emailConfirmHash;
+  }
+
   public EmailNotificationFrequency getEmailNotifFreq() {
     return emailNotifFreq == null ? DEF_EMAIL_FREQ : emailNotifFreq;
+  }
+
+  public boolean getEmailVerified() {
+    return isEmailVerified();
   }
 
   public boolean getHasLogo() {
@@ -223,6 +242,10 @@ public class User implements HasId {
   public Long getId() {
     return id;
   }
+
+  // public Properties getProperties() {
+  // return properties;
+  // }
 
   public I18nLanguage getLanguage() {
     return language;
@@ -239,10 +262,6 @@ public class User implements HasId {
   public String getPassword() {
     return password;
   }
-
-  // public Properties getProperties() {
-  // return properties;
-  // }
 
   public byte[] getSalt() {
     return salt;
@@ -282,6 +301,10 @@ public class User implements HasId {
     return getUserGroup().hasLogo();
   }
 
+  public boolean isEmailVerified() {
+    return emailVerified == null ? false : emailVerified;
+  }
+
   public void setCountry(final I18nCountry country) {
     this.country = country;
   }
@@ -294,8 +317,20 @@ public class User implements HasId {
     this.email = email;
   }
 
+  public void setEmailCheckDate(final Long emailCheckDate) {
+    this.emailCheckDate = emailCheckDate;
+  }
+
+  public void setEmailConfirmHash(final String emailConfirmHash) {
+    this.emailConfirmHash = emailConfirmHash;
+  }
+
   public void setEmailNotifFreq(final EmailNotificationFrequency emailNotifFreq) {
     this.emailNotifFreq = emailNotifFreq;
+  }
+
+  public void setEmailVerified(final boolean emailVerified) {
+    this.emailVerified = emailVerified;
   }
 
   @Override

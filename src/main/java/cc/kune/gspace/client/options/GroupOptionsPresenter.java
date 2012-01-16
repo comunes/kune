@@ -26,11 +26,12 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.StateChangedEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -63,7 +64,7 @@ public class GroupOptionsPresenter extends
   @Inject
   public GroupOptionsPresenter(final EventBus eventBus, final GroupOptionsProxy proxy,
       final StateManager stateManager, final Session session, final I18nTranslationService i18n,
-      final CoreResources img, final GroupOptionsView view) {
+      final CoreResources img, final GroupOptionsView view, final SiteTokenListeners tokenListener) {
     super(eventBus, view, proxy);
     this.stateManager = stateManager;
     this.session = session;
@@ -118,6 +119,13 @@ public class GroupOptionsPresenter extends
         getView().hide();
       }
     });
+
+  }
+
+  @Override
+  public void show(final String token) {
+    stateManager.gotoHistoryToken(token);
+    super.show();
   }
 
   @Override

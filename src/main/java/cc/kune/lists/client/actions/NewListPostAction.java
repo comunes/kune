@@ -114,7 +114,7 @@ public class NewListPostAction extends RolAction {
     } else {
       signIn.get().setErrorMessage(i18n.t("Sign in or create an account to susbscribe to this list"),
           NotifyLevel.info);
-      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN,
+      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN,
           session.getCurrentStateToken().toString()));
     }
   }

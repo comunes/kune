@@ -133,7 +133,7 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     sleep(2000);
 
     showTitleSlide(t("Chat with your buddies"), t("compatible with gmail and similars"),
-        SiteTokens.WAVEINBOX);
+        SiteTokens.WAVE_INBOX);
     // showTooltip(chat.icon());
     chat.show();
     sleep(2000);

@@ -31,18 +31,18 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.utils.Pair;
 import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.events.GoHomeEvent;
 import cc.kune.core.client.events.GroupChangedEvent;
+import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.events.SocialNetworkChangedEvent;
+import cc.kune.core.client.events.SocialNetworkChangedEvent.SocialNetworkChangedHandler;
 import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.events.ToolChangedEvent;
+import cc.kune.core.client.events.ToolChangedEvent.ToolChangedHandler;
 import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignOutEvent;
-import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
-import cc.kune.core.client.events.SocialNetworkChangedEvent.SocialNetworkChangedHandler;
-import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
-import cc.kune.core.client.events.ToolChangedEvent.ToolChangedHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
@@ -147,6 +147,20 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     final String newToolName = newTokenTool == null ? "" : newTokenTool;
     if (startingUp() || previousToolName == null || !previousToolName.equals(newToolName)) {
       ToolChangedEvent.fire(eventBus, previousGroupToken, newState.getStateToken());
+    }
+  }
+
+  private void doActionOrSignInIfNeeded(final HistoryTokenCallback tokenListener,
+      final String newHistoryToken) {
+    if (tokenListener.authMandatory() && session.isNotLogged()) {
+      Log.debug("login mandatory for " + newHistoryToken);
+      // Ok, we have to redirect because this token (for instance
+      // #translate) needs the user authenticated
+      redirectButSignInBefore(newHistoryToken);
+    } else {
+      // The auth is not mandatory, go ahead with the token action
+      Log.debug("Executing action related with historytoken " + newHistoryToken);
+      tokenListener.onHistoryToken(newHistoryToken);
     }
   }
 
@@ -278,8 +292,19 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         tokenListener = siteTokens.get(nToken);
       }
       Log.debug("StateManager: on history changed (" + newHistoryToken + ")");
-      if (tokenListener == null) {
-        // Log.debug("Is not a special hash");
+      if (tokenListener != null) {
+        Log.debug("token is one of #newgroup #signin #translate without #hash(redirection) ...");
+        if (startingUp()) {
+          // Starting with some token like "signin": load defContent
+          // also
+          getContent(new StateToken(SiteTokens.GROUP_HOME), false);
+          // processHistoryToken(SiteTokens.GROUP_HOME);
+          // SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+        }
+        // Fire the listener of this #hash token
+        doActionOrSignInIfNeeded(tokenListener, newHistoryToken);
+      } else {
+        Log.debug("Is not a special hash like #newgroup, etc, or maybe has a #hash(redirection)");
         // token is not one of #newgroup #signin #translate ...
         final String nToken = newHistoryToken != null ? newHistoryToken.toLowerCase() : null;
         if (nToken != null && tokenMatcher.hasRedirect(nToken)) {
@@ -291,23 +316,29 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             SpaceConfEvent.fire(eventBus, Space.groupSpace, sndToken);
             SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(sndToken));
             getContent(new StateToken(sndToken));
-          } else if (firstToken.equals(SiteTokens.SUBTITLES)) {
-            siteTokens.get(SiteTokens.SUBTITLES).onHistoryToken(
-                tokenMatcher.getRedirect(newHistoryToken).getRight());
-          } else if (firstToken.equals(SiteTokens.NEWGROUP)) {
-            siteTokens.get(SiteTokens.NEWGROUP).onHistoryToken(newHistoryToken);
-          } else if (firstToken.equals(SiteTokens.SIGNIN)) {
-            if (session.isLogged()) {
-              // We are logged, then redirect:
-              history.newItem(sndToken, false);
-              processHistoryToken(sndToken);
-            } else {
-              // We have to loggin
-              siteTokens.get(SiteTokens.SIGNIN).onHistoryToken(newHistoryToken);
+          } else {
+            final HistoryTokenCallback tokenWithRedirect = siteTokens.get(firstToken);
+            if (tokenWithRedirect != null) {
+              Log.info("Is some #subtitle(foo) or #verifyemail(hash) etc");
+              doActionOrSignInIfNeeded(tokenWithRedirect,
+                  tokenMatcher.getRedirect(newHistoryToken).getRight());
+            } else if (firstToken.equals(SiteTokens.NEW_GROUP)) {
+              siteTokens.get(SiteTokens.NEW_GROUP).onHistoryToken(newHistoryToken);
+            } else if (firstToken.equals(SiteTokens.SIGN_IN)) {
+              if (session.isLogged()) {
+                // We are logged, then redirect:
+                history.newItem(sndToken, false);
+                processHistoryToken(sndToken);
+              } else {
+                // We have to login
+                siteTokens.get(SiteTokens.SIGN_IN).onHistoryToken(newHistoryToken);
+              }
             }
           }
-        } else
-        // No redirection
+        } else {
+          // Is not a Redirect token
+          Log.debug("Is not a redirect token");
+        }
         if (tokenMatcher.isWaveToken(newHistoryToken)) {
           if (session.isLogged()) {
             SpaceConfEvent.fire(eventBus, Space.userSpace, newHistoryToken);
@@ -320,7 +351,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             }
           } else {
             // Wave, but don't logged
-            history.newItem(TokenUtils.addRedirect(SiteTokens.SIGNIN, newHistoryToken));
+            redirectButSignInBefore(newHistoryToken);
             if (startingUp()) {
               // Starting application (with Wave)
               getContent(new StateToken(SiteTokens.GROUP_HOME), false);
@@ -334,21 +365,14 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         } else {
           gotoDefaultHomepage();
         }
-      } else {
-        // token is one of #newgroup #signin #translate ...
-        if (startingUp()) {
-          // Starting with some token like "signin": load defContent
-          // also
-          getContent(new StateToken(SiteTokens.GROUP_HOME), false);
-          // processHistoryToken(SiteTokens.GROUP_HOME);
-          // SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-        }
-        // Fire the listener of this #hash token
-        tokenListener.onHistoryToken(newHistoryToken);
       }
     } else {
       resumedHistoryToken = newHistoryToken;
     }
+  }
+
+  private void redirectButSignInBefore(final String newHistoryToken) {
+    history.newItem(TokenUtils.addRedirect(SiteTokens.SIGN_IN, newHistoryToken));
   }
 
   @Override
@@ -357,7 +381,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     if (tokenMatcher.hasRedirect(token)) {
       // URL of the form signin(group.tool)
       final String previousToken = tokenMatcher.getRedirect(token).getRight();
-      if (previousToken.equals(SiteTokens.WAVEINBOX) && session.isNotLogged()) {
+      if (previousToken.equals(SiteTokens.WAVE_INBOX) && session.isNotLogged()) {
         // signin(inbox) && cancel
         restorePreviousToken();
       } else {

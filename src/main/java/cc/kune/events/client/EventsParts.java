@@ -19,7 +19,7 @@
  */
 package cc.kune.events.client;
 
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.events.client.actions.EventsClientActions;
 import cc.kune.events.client.viewer.CalendarViewer;
 import cc.kune.events.shared.EventsConstants;
@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 public class EventsParts {
 
   @Inject
-  public EventsParts(final Session session, final Provider<EventsClientTool> clientTool,
+  public EventsParts(final SessionConstants session, final Provider<EventsClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final EventsClientActions meetsActions,
       final ContentViewerPresenter contentViewer, final CalendarViewer calendarViewer) {
     clientTool.get();

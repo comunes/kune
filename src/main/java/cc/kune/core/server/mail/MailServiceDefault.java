@@ -77,14 +77,19 @@ public class MailServiceDefault implements MailService {
     for (final String to : tos) {
       try {
         message.setFrom(new InternetAddress(from));
+        // In case we should use utf8 also in address:
+        // http://stackoverflow.com/questions/2656478/send-javax-mail-internet-mimemessage-to-a-recipient-with-non-ascii-name
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        // If additional header should be added
+        // message.addHeader(name, MimeUtility.encodeText(value, "utf-8", "B"));
         final String formatedSubject = subject.getString();
-        message.setSubject(formatedSubject);
+        message.setSubject(formatedSubject, "utf-8");
         final String formatedBody = body.getString();
         if (isHtml) {
-          message.setContent(formatedBody, "text/html");
+          // message.setContent(formatedBody, "text/html");
+          message.setText(formatedBody, "UTF-8", "html");
         } else {
-          message.setText(formatedBody);
+          message.setText(formatedBody, "UTF-8");
         }
         // Send message
         Transport.send(message);

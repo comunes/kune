@@ -443,7 +443,7 @@ public class WebClient extends  Composite implements WaveClientView {
     });
     final String encodedToken = History.getToken();
     // Kune patch
-    if (encodedToken != null && !encodedToken.isEmpty() && !encodedToken.equals(SiteTokens.WAVEINBOX)) {
+    if (encodedToken != null && !encodedToken.isEmpty() && !encodedToken.equals(SiteTokens.WAVE_INBOX)) {
       WaveRef fromWaveRef;
       try {
         fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);

@@ -21,7 +21,7 @@ package cc.kune.blogs.client;
 
 import cc.kune.blogs.client.actions.BlogsClientActions;
 import cc.kune.blogs.shared.BlogsConstants;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 public class BlogsParts {
 
   @Inject
-  public BlogsParts(final Session session, final Provider<BlogsClientTool> clientTool,
+  public BlogsParts(final SessionConstants session, final Provider<BlogsClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final BlogsClientActions blogsActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();

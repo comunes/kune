@@ -17,27 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.state;
+package cc.kune.core.client.errors;
 
-/**
- * The Interface HistoryTokenCallback is used make relations between browser
- * hashs like #inbox #signin etc, with its actions
- */
-public interface HistoryTokenCallback {
+public class EmailHashInvalidException extends DefaultException {
 
-  /**
-   * Auth The user should be logged (mandatory).
-   * 
-   * @return true, if yes
-   */
-  boolean authMandatory();
-
-  /**
-   * On history token do some action (Example #inbox, #newgroup)
-   * 
-   * @param token
-   *          the token
-   */
-  void onHistoryToken(String token);
+  private static final long serialVersionUID = 7285974904505390494L;
 
 }

@@ -31,51 +31,50 @@ import cc.kune.core.client.state.impl.EventBusTester;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryProxy;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView;
 
 public class TagsSummaryPresenterTest {
 
-    private TagsSummaryPresenter tagsSummaryPresenter;
-    private TagsSummaryView view;
+  private TagsSummaryPresenter tagsSummaryPresenter;
+  private TagsSummaryView view;
 
-    @SuppressWarnings("unchecked")
-    @Before
-    public void before() {
-        final Session session = Mockito.mock(Session.class);
-        final StateManager stateManager = Mockito.mock(StateManager.class);
-        // final SiteSearcher searcher = Mockito.mock(SiteSearcher.class);
-        TagsSummaryProxy proxy = Mockito.mock(TagsSummaryProxy.class);
-        // Mockito.when(searcherProvider.get()).thenReturn(searcher);
-        view = Mockito.mock(TagsSummaryView.class);
-        EventBusTester eventBus = new EventBusTester();
-        tagsSummaryPresenter = new TagsSummaryPresenter(eventBus, view, proxy, session, stateManager);
-    }
+  @SuppressWarnings("unchecked")
+  @Before
+  public void before() {
+    final Session session = Mockito.mock(Session.class);
+    final StateManager stateManager = Mockito.mock(StateManager.class);
+    // final SiteSearcher searcher = Mockito.mock(SiteSearcher.class);
+    final TagsSummaryProxy proxy = Mockito.mock(TagsSummaryProxy.class);
+    // Mockito.when(searcherProvider.get()).thenReturn(searcher);
+    view = Mockito.mock(TagsSummaryView.class);
+    final EventBusTester eventBus = new EventBusTester();
+    tagsSummaryPresenter = new TagsSummaryPresenter(eventBus, view, proxy, session, stateManager);
+  }
 
-    @Test
-    public void noTagsViewNotVisible() {
-        final StateContainerDTO state = new StateContainerDTO();
-        tagsSummaryPresenter.setState(state);
-        Mockito.verify(view).setVisible(false);
-    }
+  @Test
+  public void noTagsViewNotVisible() {
+    final StateContainerDTO state = new StateContainerDTO();
+    tagsSummaryPresenter.setState(state);
+    Mockito.verify(view).setVisible(false);
+  }
 
-    @Test
-    public void withTagsViewFalse() {
-        final StateContainerDTO state = new StateContainerDTO();
-        final ArrayList<TagCount> list = new ArrayList<TagCount>();
-        state.setTagCloudResult(new TagCloudResult(list, 0, 0));
-        tagsSummaryPresenter.setState(state);
-        Mockito.verify(view).setVisible(false);
-    }
+  @Test
+  public void withTagsViewFalse() {
+    final StateContainerDTO state = new StateContainerDTO();
+    final ArrayList<TagCount> list = new ArrayList<TagCount>();
+    state.setTagCloudResult(new TagCloudResult(list, 0, 0));
+    tagsSummaryPresenter.setState(state);
+    Mockito.verify(view).setVisible(false);
+  }
 
-    @Test
-    public void withTagsViewVisible() {
-        final StateContainerDTO state = new StateContainerDTO();
-        final ArrayList<TagCount> list = new ArrayList<TagCount>();
-        list.add(new TagCount("abc", 1L));
-        state.setTagCloudResult(new TagCloudResult(list, 0, 0));
-        tagsSummaryPresenter.setState(state);
-        Mockito.verify(view).setVisible(true);
-    }
+  @Test
+  public void withTagsViewVisible() {
+    final StateContainerDTO state = new StateContainerDTO();
+    final ArrayList<TagCount> list = new ArrayList<TagCount>();
+    list.add(new TagCount("abc", 1L));
+    state.setTagCloudResult(new TagCloudResult(list, 0, 0));
+    tagsSummaryPresenter.setState(state);
+    Mockito.verify(view).setVisible(true);
+  }
 }

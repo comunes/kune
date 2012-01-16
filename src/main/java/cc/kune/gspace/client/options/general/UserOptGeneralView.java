@@ -22,6 +22,8 @@ package cc.kune.gspace.client.options.general;
 import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 
+import com.google.gwt.event.dom.client.HasClickHandlers;
+
 public interface UserOptGeneralView extends EntityOptGeneralView {
 
   EmailNotificationFrequency getEmailNotif();
@@ -30,10 +32,16 @@ public interface UserOptGeneralView extends EntityOptGeneralView {
 
   String getLongName();
 
+  HasClickHandlers getResendEmailVerif();
+
+  void setEmailVerified(boolean verified);
+
   void setEmailNotifChecked(EmailNotificationFrequency freq);
 
   void setLanguage(I18nLanguageSimpleDTO language);
 
   void setLongName(String longName);
+
+  void setResendEmailVerifEnabled(boolean enabled);
 
 }

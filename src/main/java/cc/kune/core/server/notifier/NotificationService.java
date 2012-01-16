@@ -34,6 +34,10 @@ public class NotificationService {
     this.userFinder = userFinder;
   }
 
+  private FormatedString createPlainSubject(final String subject) {
+    return FormatedString.build(subject);
+  }
+
   @SuppressWarnings("unchecked")
   private void getAllUserMembers(final Set<User> users, final Group groupToNotify,
       final boolean onlyAdmins) {
@@ -79,14 +83,34 @@ public class NotificationService {
   private void notifyToAll(final Group groupSender, final String subject, final String message,
       final Collection<User> users) {
     for (final User to : users) {
-      sender.add(NotificationType.email, FormatedString.build(subject),
+      sender.add(NotificationType.email, createPlainSubject(subject),
           helper.groupNotification(groupSender.getShortName(), groupSender.hasLogo(), message), true,
           true, to);
     }
   }
 
   public void notifyUser(final User to, final Group group, final String subject, final String message) {
-    sender.add(NotificationType.email, FormatedString.build(subject),
+    sender.add(NotificationType.email, createPlainSubject(subject),
         helper.groupNotification(group.getShortName(), group.hasLogo(), message), true, true, to);
+  }
+
+  /**
+   * Send email to an User with a link.The first an unique %s in body is changed
+   * by the site name.
+   * 
+   * @param to
+   *          the User to send the notification
+   * @param subject
+   *          the subject of the email
+   * @param body
+   *          the body of the email with a %s that will be replaced by the site
+   *          name
+   * @param hash
+   *          the hash an additional link that will be added at the end
+   */
+  public void sendEmailToWithLink(final User to, final String subject, final String body,
+      final String hash) {
+    sender.add(NotificationType.email, createPlainSubject(subject), helper.userNotification(body, hash),
+        true, true, to);
   }
 }

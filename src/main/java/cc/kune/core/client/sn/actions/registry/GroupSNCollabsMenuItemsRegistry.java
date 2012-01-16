@@ -37,7 +37,7 @@ import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 import cc.kune.core.client.sn.actions.conditions.IsMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsNotMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -45,7 +45,7 @@ import com.google.inject.Provider;
 public class GroupSNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
   @Inject
-  public GroupSNCollabsMenuItemsRegistry(final Session session, final I18nTranslationService i18n,
+  public GroupSNCollabsMenuItemsRegistry(final SessionConstants session, final I18nTranslationService i18n,
       final IsLoggedCondition isLogged,
       final IsCurrentStateAdministrableCondition isAdministrableCondition,
       final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,

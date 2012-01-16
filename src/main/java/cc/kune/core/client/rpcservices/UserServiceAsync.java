@@ -31,6 +31,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface UserServiceAsync {
 
+  void askForEmailConfirmation(String userHash, AsyncCallback<Void> callback);
+
+  void askForEmailForgot(String email, AsyncCallback<Void> callback);
+
   void changePasswd(String userHash, String oldPassword, String newPassword, AsyncCallback<Void> callback);
 
   void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<Void> asyncCallback);
@@ -53,4 +57,6 @@ public interface UserServiceAsync {
 
   void updateUser(String userHash, UserDTO user, I18nLanguageSimpleDTO lang,
       AsyncCallback<StateAbstractDTO> callback);
+
+  void verifyPasswordHash(String userHash, String emailReceivedHash, AsyncCallback<Void> asyncCallback);
 }

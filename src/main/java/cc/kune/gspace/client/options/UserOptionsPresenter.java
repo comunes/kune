@@ -25,8 +25,8 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.SiteUserOptions;
@@ -86,9 +86,6 @@ public class UserOptionsPresenter extends
 
       @Override
       public void actionPerformed(final ActionEvent event) {
-        if (!session.isInCurrentUserSpace()) {
-          stateManager.gotoStateToken(session.getCurrentUser().getStateToken());
-        }
         show();
       }
     };
@@ -103,5 +100,13 @@ public class UserOptionsPresenter extends
     final MenuItemDescriptor prefsItem = new MenuItemDescriptor(userPrefsAction);
     prefsItem.setPosition(1);
     userOptions.addAction(prefsItem);
+  }
+
+  @Override
+  public void show() {
+    if (!session.isInCurrentUserSpace()) {
+      stateManager.gotoStateToken(session.getCurrentUser().getStateToken());
+    }
+    super.show();
   }
 }

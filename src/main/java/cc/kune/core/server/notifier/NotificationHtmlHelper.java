@@ -2,7 +2,6 @@ package cc.kune.core.server.notifier;
 
 import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.utils.AbsoluteFileDownloadUtils;
-import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -23,7 +22,7 @@ public class NotificationHtmlHelper {
       + "%s"
       + "</td></tr></tbody></table>";
 
-  private final SharedFileDownloadUtils fileDownloadUtils;
+  private final AbsoluteFileDownloadUtils fileDownloadUtils;
 
   /**
    * Instantiates a new notify html helper.
@@ -51,9 +50,25 @@ public class NotificationHtmlHelper {
    */
   public FormatedString groupNotification(final String groupName, final boolean hasLogo,
       final String message) {
-    final String groupUrl = fileDownloadUtils.getPrefix() + "#" + groupName;
+    final String groupUrl = fileDownloadUtils.getUrl(groupName);
     return FormatedString.build(false, GROUP_TEMPLATE, groupUrl,
-        fileDownloadUtils.getLogoAvatarHtml(groupName, hasLogo, false, 50, 50), groupUrl, groupName,
+        fileDownloadUtils.getLogoAvatarHtml(groupName, hasLogo, false, 50, 5), groupUrl, groupName,
         message);
+  }
+
+  /**
+   * Format a user notification with an additional link. The first an unique %s
+   * in body is changed by the site name.
+   * 
+   * @param body
+   *          the body
+   * @param hash
+   *          the hash
+   * @return the formated string
+   */
+  public FormatedString userNotification(final String body, final String hash) {
+    final String hashUrl = fileDownloadUtils.getUrl(hash);
+    return FormatedString.build(false, body + "<br><a href='%s'>%s</a>",
+        fileDownloadUtils.getSiteCommonName(), hashUrl, hashUrl);
   }
 }

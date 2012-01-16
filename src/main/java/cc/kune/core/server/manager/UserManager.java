@@ -21,7 +21,9 @@ package cc.kune.core.server.manager;
 
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 
+import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.I18nNotFoundException;
+import cc.kune.core.server.manager.impl.EmailConfirmationType;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.UserDTO;
@@ -29,6 +31,16 @@ import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
 
 public interface UserManager {
+  /**
+   * Ask for email confirmation.
+   * 
+   * @param user
+   *          the user
+   * @param type
+   *          the type
+   */
+  void askForEmailConfirmation(User user, EmailConfirmationType type) throws DefaultException;
+
   User changePasswd(Long userId, String oldPassword, String newPassword);
 
   /**
@@ -82,5 +94,17 @@ public interface UserManager {
    * @return the User after updated
    */
   User update(Long userId, UserDTO user, I18nLanguageSimpleDTO lang);
+
+  /**
+   * Verify password hash of a user.
+   * 
+   * @param userId
+   *          the user id
+   * @param emailReceivedHash
+   *          the email received hash
+   * @param period
+   *          the period (1h or more if is a new account);
+   */
+  void verifyPasswordHash(Long userId, String emailReceivedHash, long period) throws DefaultException;
 
 }

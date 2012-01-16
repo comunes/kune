@@ -31,6 +31,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -43,7 +44,7 @@ public class SitebarSignInLink extends ButtonDescriptor {
 
     @Inject
     public SitebarSignInAction(final StateManager stateManager, final I18nUITranslationService i18n,
-        final Session session) {
+        final SessionConstants session) {
       super();
       this.stateManager = stateManager;
       putValue(Action.NAME, i18n.t("Sign in to collaborate"));
@@ -55,7 +56,7 @@ public class SitebarSignInLink extends ButtonDescriptor {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.SIGNIN);
+      stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.SIGN_IN);
     }
 
   }

@@ -19,7 +19,7 @@
  */
 package cc.kune.lists.client;
 
-import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 public class ListsParts {
 
   @Inject
-  public ListsParts(final Session session, final Provider<ListsClientTool> clientTool,
+  public ListsParts(final SessionConstants session, final Provider<ListsClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final ListsClientActions listsActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();

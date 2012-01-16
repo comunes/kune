@@ -28,8 +28,8 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -47,12 +47,12 @@ public class DelContainerMenuItem extends MenuItemDescriptor {
     private final EventBus eventBus;
     private final I18nTranslationService i18n;
     private final Provider<FolderViewerPresenter> presenter;
-    private final Session session;
+    private final SessionConstants session;
     private final StateManager stateManager;
 
     @Inject
     public DelContainerAction(final EventBus eventBus, final StateManager stateManager,
-        final Session session, final Provider<ContentServiceAsync> contentService,
+        final SessionConstants session, final Provider<ContentServiceAsync> contentService,
         final I18nTranslationService i18n, final Provider<FolderViewerPresenter> presenter) {
       super(AccessRolDTO.Administrator, true);
       this.eventBus = eventBus;

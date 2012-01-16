@@ -46,7 +46,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      stateManager.gotoHistoryToken(SiteTokens.NEWGROUP);
+      stateManager.gotoHistoryToken(SiteTokens.NEW_GROUP);
     }
 
   }

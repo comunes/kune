@@ -27,10 +27,10 @@ public class SharedFileDownloadUtils {
 
   public String getLogoAvatarHtml(final String groupName, final boolean groupHasLogo,
       final boolean isPersonal, final int size, final int hvspace) {
-    final String imgUrl = groupHasLogo ? getLogoImageUrl(groupName)
-        : isPersonal ? FileConstants.PERSON_NO_AVATAR_IMAGE : FileConstants.GROUP_NO_AVATAR_IMAGE;
+    final String imgUrl = groupHasLogo ? getLogoImageUrl(groupName) : isPersonal ? prefix + "/"
+        + FileConstants.PERSON_NO_AVATAR_IMAGE : prefix + "/" + FileConstants.GROUP_NO_AVATAR_IMAGE;
     return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
-        + "px; height: " + size + "px;' src='" + prefix + imgUrl + "'>";
+        + "px; height: " + size + "px;' src='" + imgUrl + "'>";
   }
 
   public String getLogoImageUrl(final String groupName) {
@@ -40,6 +40,10 @@ public class SharedFileDownloadUtils {
 
   public String getPrefix() {
     return prefix;
+  }
+
+  public String getUrl(final String hash) {
+    return getPrefix() + "#" + hash;
   }
 
   public String getUserAvatar(final String username) {

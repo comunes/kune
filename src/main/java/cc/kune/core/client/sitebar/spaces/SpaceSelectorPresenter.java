@@ -124,7 +124,7 @@ public class SpaceSelectorPresenter extends
     this.i18n = i18n;
     currentSpace = null;
     homeToken = SiteTokens.HOME;
-    inboxToken = SiteTokens.WAVEINBOX;
+    inboxToken = SiteTokens.WAVE_INBOX;
     groupToken = SiteTokens.GROUP_HOME;
     publicToken = TokenUtils.preview(SiteTokens.GROUP_HOME);
     view.getHomeBtn().addClickHandler(new ClickHandler() {
@@ -254,7 +254,7 @@ public class SpaceSelectorPresenter extends
     if (currentSpace == Space.userSpace) {
       restoreToken(homeToken);
     }
-    inboxToken = SiteTokens.WAVEINBOX;
+    inboxToken = SiteTokens.WAVE_INBOX;
   }
 
   private void onUserSpaceSelect(final boolean shouldRestoreToken) {
@@ -268,7 +268,7 @@ public class SpaceSelectorPresenter extends
     } else {
       signIn.get().setErrorMessage(i18n.t("Sign in or create an account to access to your inbox"),
           NotifyLevel.info);
-      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, inboxToken));
+      stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN, inboxToken));
       getView().setUserBtnDown(false);
     }
   }
