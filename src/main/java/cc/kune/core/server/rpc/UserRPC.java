@@ -210,7 +210,8 @@ public class UserRPC implements RPC, UserService {
 
   @Override
   @Transactional
-  public void resetPassword(final String passwdHash, final String newpasswd) {
+  public void resetPassword(final String passwdHash, final String newpasswd)
+      throws EmailHashInvalidException {
     try {
       final User user = userFinder.findByHash(passwdHash);
       userManager.changePasswd(user.getId(), null, newpasswd, false);

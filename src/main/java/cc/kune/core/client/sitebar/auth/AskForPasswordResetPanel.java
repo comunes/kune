@@ -12,14 +12,16 @@ import cc.kune.core.client.errors.EmailNotFoundException;
 import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ui.DefaultForm;
 
-import com.extjs.gxt.ui.client.widget.form.LabelField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -33,18 +35,21 @@ public class AskForPasswordResetPanel extends SignInAbstractPanel {
   public static final String ERRMSG = "k-ask-for-pwd-error";
   public static final String RESET_BUTTON_ID = "k-ask-for-pwd-reset";
   private final TextField<String> resetEmail;
+  private final StateManager stateManager;
 
   @Inject
   public AskForPasswordResetPanel(final I18nTranslationService i18n, final Session session,
       final MaskWidgetView mask, final NotifyLevelImages images, final EventBus eventbus,
-      final UserFieldFactory userFieldFactory, final Provider<UserServiceAsync> userService) {
+      final UserFieldFactory userFieldFactory, final Provider<UserServiceAsync> userService,
+      final StateManager stateManager) {
     super(ASK_PASSWD_RESET_DIALOG, mask, i18n, i18n.t("Reset your password"), true, true, true, "",
         i18n.t("Reset your password"), RESET_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
         CANCEL_BUTTON_ID, images, ERRMSG, 1);
+    this.stateManager = stateManager;
     final DefaultForm form = new DefaultForm();
-    final LabelField desc = new LabelField(
+    final Label desc = new Label(
         i18n.t("Please enter your email address. You will receive a link to create a new password via email."));
-    form.add(desc);
+    desc.setWidth("300px");
     resetEmail = userFieldFactory.createUserEmail(EMAIL_RESET_ID);
     resetEmail.setFieldLabel(i18n.t("email"));
     resetEmail.setTabIndex(1);
@@ -77,14 +82,15 @@ public class AskForPasswordResetPanel extends SignInAbstractPanel {
         }
       }
     });
-    super.getInnerPanel().add(form.getFormPanel());
     super.getSecondBtn().addClickHandler(new ClickHandler() {
-
       @Override
       public void onClick(final ClickEvent event) {
         hide();
       }
     });
+    super.getInnerPanel().add(desc);
+    super.getInnerPanel().add(form.getFormPanel());
+
   }
 
   @Override
@@ -92,6 +98,7 @@ public class AskForPasswordResetPanel extends SignInAbstractPanel {
     super.hide();
     super.messageErrorBar.hideErrorMessage();
     resetEmail.clear();
+    stateManager.gotoHistoryToken(SiteTokens.HOME);
   }
 
   @Override

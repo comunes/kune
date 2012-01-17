@@ -40,8 +40,10 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
   public static final String CANCEL_BUTTON_ID = "k-signinp-cb";
   public static final String CREATE_ONE = "k-signinp-create";
   public static final String ERROR_MSG = "k-sigp-errmsg";
+  public static final String FORGOT_PASSWD = "k-signinp-forgot";
   public static final String SIGN_IN_BUTTON_ID = "k-signinp-sib";
   public static final String SIGNIN_DIALOG = "k-signinp-dialog";
+  private Label forgotPasswordLabel;
   private Label registerLabel;
   private final SignInForm signInForm;
 
@@ -54,24 +56,31 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
     signInForm = new SignInForm(i18n);
     signInForm.setWidth(330);
-    signInForm.add(createNoAccountRegister());
+    signInForm.add(createRegisterAndForgotPasswd());
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     signInForm.add(messageErrorBar);
     super.getInnerPanel().add(signInForm.getFormPanel());
   }
 
-  private VerticalPanel createNoAccountRegister() {
+  private void createLink(final Label label, final String id) {
+    label.ensureDebugId(id);
+    label.addStyleName("k-link");
+    label.addStyleName("k-cursor");
+  }
+
+  private VerticalPanel createRegisterAndForgotPasswd() {
     final VerticalPanel noAccRegisterPanel = new VerticalPanel();
     final HorizontalPanel hpanel = new HorizontalPanel();
     final Label dontHaveAccount = new Label(i18n.t("Don't have an account?"));
     registerLabel = new Label(i18n.t("Create one."));
-    registerLabel.ensureDebugId(CREATE_ONE);
+    createLink(registerLabel, CREATE_ONE);
     registerLabel.addStyleName("kune-Margin-Medium-l");
-    registerLabel.addStyleName("k-link");
-    registerLabel.addStyleName("k-cursor");
+    forgotPasswordLabel = new Label(i18n.t("Lost your password?"));
+    createLink(forgotPasswordLabel, FORGOT_PASSWD);
     hpanel.add(dontHaveAccount);
     hpanel.add(registerLabel);
     noAccRegisterPanel.add(hpanel);
+    noAccRegisterPanel.add(forgotPasswordLabel);
     return noAccRegisterPanel;
   }
 
@@ -88,6 +97,11 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
   @Override
   public HasClickHandlers getAccountRegister() {
     return registerLabel;
+  }
+
+  @Override
+  public HasClickHandlers getForgotPasswd() {
+    return forgotPasswordLabel;
   }
 
   @Override

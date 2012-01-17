@@ -28,6 +28,7 @@ import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sitebar.auth.AskForPasswordResetPanel;
+import cc.kune.core.client.sitebar.auth.PasswordResetPanel;
 import cc.kune.core.client.sitebar.auth.VerifyEmailClientManager;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
@@ -63,7 +64,7 @@ public class CoreParts {
       final Provider<SubtitlesManager> subProvider, final EventBus eventBus,
       final Provider<VerifyEmailClientManager> verifyManager,
       final Provider<UserOptions> userOptionsDialog, final Provider<GroupOptions> groupOptionsDialog,
-      final Provider<AskForPasswordResetPanel> askForPass) {
+      final Provider<PasswordResetPanel> passReset, final Provider<AskForPasswordResetPanel> askForPass) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -140,6 +141,24 @@ public class CoreParts {
         }
       }
     });
+    tokenListener.put(SiteTokens.ASK_RESET_PASSWD, new HistoryTokenAuthNotNeededCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        if (!session.isLogged()) {
+          askForPass.get().show();
+        }
+      }
+    });
+    tokenListener.put(SiteTokens.RESET_PASSWD, new HistoryTokenAuthNotNeededCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        if (!session.isLogged()) {
+          passReset.get().setPasswordHash(token);
+          passReset.get().show();
+        }
+      }
+    });
     verifyManager.get();
+
   }
 }

@@ -29,6 +29,7 @@ import com.google.inject.Inject;
  */
 public final class SiteTokens {
   public static final String ABOUT_KUNE = "about";
+  public final static String ASK_RESET_PASSWD = "askresetpasswd";
   public final static String GROUP_HOME = "";
   public final static String GROUP_PREFS = "gprefs";
   public final static String HOME = "";

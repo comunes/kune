@@ -33,6 +33,7 @@ import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.sitebar.auth.AskForPasswordResetPanel;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
@@ -68,6 +69,8 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
     HasClickHandlers getAccountRegister();
 
+    HasClickHandlers getForgotPasswd();
+
     String getLoginPassword();
 
     String getNickOrEmail();
@@ -83,7 +86,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     void validate();
 
   }
-
+  private final Provider<AskForPasswordResetPanel> askPasswdReset;
   private final EventBus eventBus;
   private final Provider<Register> registerProvider;
   private final TimerWrapper timer;
@@ -95,13 +98,15 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
       final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
       final UserServiceAsync userService, final Provider<Register> registerProvider,
       final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete,
-      final TimerWrapper timeWrapper, final WaveClientSimpleAuthenticator waveClientAuthenticator) {
+      final TimerWrapper timeWrapper, final WaveClientSimpleAuthenticator waveClientAuthenticator,
+      final Provider<AskForPasswordResetPanel> askPasswdReset) {
     super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, autocomplete);
     this.eventBus = eventBus;
     this.userService = userService;
     this.registerProvider = registerProvider;
     this.timer = timeWrapper;
     this.waveClientAuthenticator = waveClientAuthenticator;
+    this.askPasswdReset = askPasswdReset;
   }
 
   @Override
@@ -183,6 +188,12 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
       @Override
       public void onClick(final ClickEvent event) {
         onAccountRegister();
+      }
+    });
+    getView().getForgotPasswd().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        askPasswdReset.get().show();
       }
     });
   }

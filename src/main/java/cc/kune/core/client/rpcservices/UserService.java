@@ -20,6 +20,7 @@
 package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.EmailHashInvalidException;
 import cc.kune.core.client.errors.EmailNotFoundException;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -55,7 +56,7 @@ public interface UserService extends RemoteService {
 
   UserInfoDTO reloadUserInfo(String userHash) throws DefaultException;
 
-  void resetPassword(String passwdHash, String newpasswd);
+  void resetPassword(String passwdHash, String newpasswd) throws EmailHashInvalidException;
 
   void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility);
 
