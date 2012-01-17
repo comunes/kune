@@ -33,7 +33,7 @@ public interface UserServiceAsync {
 
   void askForEmailConfirmation(String userHash, AsyncCallback<Void> callback);
 
-  void askForEmailForgot(String email, AsyncCallback<Void> callback);
+  void askForPasswordReset(String email, AsyncCallback<Void> callback);
 
   void changePasswd(String userHash, String oldPassword, String newPassword, AsyncCallback<Void> callback);
 
@@ -51,6 +51,8 @@ public interface UserServiceAsync {
   void onlyCheckSession(String userHash, AsyncCallback<Void> asyncCallback);
 
   void reloadUserInfo(String userHash, AsyncCallback<UserInfoDTO> asyncCallback);
+
+  void resetPassword(String passwdHash, String newpasswd, AsyncCallback<Void> callback);
 
   void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility,
       AsyncCallback<Void> asyncCallback);

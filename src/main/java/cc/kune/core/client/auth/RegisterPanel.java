@@ -26,7 +26,6 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.RegisterPresenter.RegisterView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.KuneUiUtils;
-import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -35,9 +34,7 @@ import com.google.inject.Inject;
 public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
   public static final String CANCEL_BUTTON_ID = "k-regp-cb";
-
   public static final String ERRMSG = "k-regp-errmsg";
-
   public static final String REGISTER_BUTTON_ID = "k-regp-rb";
   public static final String REGISTER_DIALOG = "k-regp-dialog";
   public static final String REGISTER_FORM = "k-regp-p";
@@ -46,12 +43,12 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
   private final RegisterForm registerForm;
 
   @Inject
-  public RegisterPanel(final I18nTranslationService i18n, final SessionConstants session,
-      final MaskWidgetView mask, final NotifyLevelImages images, final UserFieldFactory userFieldFactory) {
+  public RegisterPanel(final I18nTranslationService i18n, final MaskWidgetView mask,
+      final NotifyLevelImages images, final UserFieldFactory userFieldFactory) {
     super(REGISTER_DIALOG, mask, i18n, i18n.t(CoreMessages.REGISTER_TITLE), true, true, true, "",
         i18n.t(CoreMessages.REGISTER_TITLE), REGISTER_BUTTON_ID,
-        i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, images, ERRMSG, 5);
-    registerForm = new RegisterForm(i18n, session, userFieldFactory);
+        i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, images, ERRMSG, 4);
+    registerForm = new RegisterForm(i18n, userFieldFactory);
     registerForm.setWidth(330);
     registerForm.getFormPanel().setId(REGISTER_FORM);
     messageErrorBar = new MessageToolbar(images, errorLabelId);

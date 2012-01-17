@@ -133,6 +133,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
    * @see
    * cc.kune.core.server.manager.UserManager#askForEmailConfirmation(cc.kune
    * .domain.User, cc.kune.core.server.manager.impl.EmailConfirmationType)
+   * 
+   * More info: http://en.wikipedia.org/wiki/Self-service_password_reset
+   * http://en.wikipedia.org/wiki/Password_notification_e-mail
+   * http://stackoverflow
+   * .com/questions/1102781/best-way-for-a-forgot-password-implementation
    */
   @Override
   public void askForEmailConfirmation(final User user, final EmailConfirmationType type)
@@ -150,29 +155,43 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
           TokenUtils.addRedirect(SiteTokens.VERIFY_EMAIL, hash));
       break;
     case passwordReset:
-      // FIXME
+      notifyService.sendEmailToWithLink(
+          user,
+          "Verify password reset",
+          "You are receiving this email because a request has been made to change the password associated with this email address in %s.<br>"
+              + "If this was a mistake, just ignore this email and nothing will happen.<br>"
+              + "If you would like to reset the password for this account simply click on the link below or paste it into the url field on your favorite browser:",
+          TokenUtils.addRedirect(SiteTokens.RESET_PASSWD, hash));
     default:
       break;
     }
   }
 
   @Override
-  public User changePasswd(final Long userId, final String oldPassword, final String newPassword) {
+  public User changePasswd(final Long userId, final String oldPassword, final String newPassword,
+      final boolean checkOldPasswd) {
     final User user = find(userId);
     final ParticipantId participantId = participantUtils.of(user.getShortName());
-    // Check oldPasswd
-    try {
-      final AccountData account = waveAccountStore.getAccount(participantId);
-      if (TextUtils.notEmpty(oldPassword) && account != null
-          && !account.asHuman().getPasswordDigest().verify(oldPassword.toCharArray())) {
-        throw new WrongCurrentPasswordException();
+    if (checkOldPasswd) {
+      // Check oldPasswd
+      AccountData account;
+      try {
+        account = waveAccountStore.getAccount(participantId);
+        if (TextUtils.notEmpty(oldPassword) && account != null
+            && !account.asHuman().getPasswordDigest().verify(oldPassword.toCharArray())) {
+          throw new WrongCurrentPasswordException();
+        }
+      } catch (final PersistenceException e) {
+        thowExceptionChangingPasswd(e);
       }
+    }
+    try {
       // Wave change passwd
       RobotAgentUtil.changeUserPassword(newPassword, participantId, waveAccountStore);
     } catch (final IllegalArgumentException e) {
-      throw new DefaultException("Error changing user passwd", e);
+      thowExceptionChangingPasswd(e);
     } catch (final PersistenceException e) {
-      throw new DefaultException("Error changing user passwd", e);
+      thowExceptionChangingPasswd(e);
     }
     // Kune db change passwd
     final PasswordDigest newPasswordDigest = new PasswordDigest(newPassword.toCharArray());
@@ -400,6 +419,10 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   public void setSNetVisibility(final User user, final UserSNetVisibility visibility) {
     user.setSNetVisibility(visibility);
     persist(user);
+  }
+
+  private void thowExceptionChangingPasswd(final Exception e) {
+    throw new DefaultException("Error changing user passwd", e);
   }
 
   @Override

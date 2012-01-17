@@ -83,11 +83,13 @@ public class User implements HasId {
   @Length(min = 1)
   private String email;
 
+  @Basic(optional = true)
   private Long emailCheckDate;
 
   // @OneToOne(cascade = CascadeType.REMOVE)
   // private final CustomProperties customProperties;
 
+  @Column(unique = true, nullable = true)
   private String emailConfirmHash;
 
   @Enumerated(EnumType.STRING)

@@ -28,7 +28,7 @@ public class VerifyEmailClientManager {
             new AsyncCallbackSimple<Void>() {
               @Override
               public void onSuccess(final Void result) {
-                NotifyUser.info("Great. Your email is now verified.");
+                NotifyUser.info("Great. Your email is now verified");
                 session.getCurrentUser().setEmailVerified(true);
                 optGeneral.get().update();
               }

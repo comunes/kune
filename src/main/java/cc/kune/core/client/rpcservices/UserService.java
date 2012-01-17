@@ -20,6 +20,7 @@
 package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.EmailNotFoundException;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
@@ -34,9 +35,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("UserService")
 public interface UserService extends RemoteService {
 
-  void askForEmailConfirmation(String userHash);;
+  void askForEmailConfirmation(String userHash);
 
-  void askForEmailForgot(String email);
+  void askForPasswordReset(String email) throws EmailNotFoundException;
 
   void changePasswd(String userHash, String oldPassword, String newPassword) throws DefaultException;
 
@@ -53,6 +54,8 @@ public interface UserService extends RemoteService {
   void onlyCheckSession(String userHash) throws DefaultException;
 
   UserInfoDTO reloadUserInfo(String userHash) throws DefaultException;
+
+  void resetPassword(String passwdHash, String newpasswd);
 
   void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility);
 

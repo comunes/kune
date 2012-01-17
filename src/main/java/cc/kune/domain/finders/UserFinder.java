@@ -44,6 +44,9 @@ public interface UserFinder {
   @Finder(query = "from User where email = :email")
   public User findByEmail(@Named("email") final String email);
 
+  @Finder(query = "from User where emailConfirmHash = :emailConfirmHash")
+  public User findByHash(@Named("emailConfirmHash") final String emailConfirmHash);
+
   @Finder(query = "from User where id = :id")
   public User findById(@Named("id") final Long id);
 

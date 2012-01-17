@@ -12,7 +12,54 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
-** Emil notifications for new waves
+** Passwd reset
+Please enter your username or email address. You will receive a link to create a new password via email.
+Username or E-mail:
+Get New Password
+Check your e-mail for the confirmation link.
+
+
+Enter your new password below.
+
+New password
+Confirm new password
+Reset password
+
+Your password has been reset. Log in
+--------------------------------
+
+Please enter your username or email address. You will receive a link to create a new password via email.
+
+You are receiving this e-mail because a request has been made to change the FIXME password associated with this address (vruiz.jurado@gmail.com). If you would like to reset the password for this account simply click on the link below or paste it into the url field on your favorite browser:
+
+LINK
+
+If you didn't request this email then you can just ignore it -- your details have not been disclosed to anyone.
+If you have any questions about the system, feel free to contact us anytime at FIXME.
+
+Bla, bla, bla
+-----
+
+Someone requested that the password be reset for the following account:
+
+LINK
+Username: vjrj
+
+ReseIf this was a mistake, just ignore this email and nothing will happen.
+
+To reset your password, visit the following address:
+LINK
+
+
+
+
+
+** Connection persistence
+java.io.NotSerializableException: org.eclipse.jetty.websocket.WebSocketConnectionD13$WSFrameConnection
+java.io.NotSerializableException: com.glines.socketio.server.transport.jetty.JettyContinuationTransportHandler
+
+
+** Email notifications for new waves
 *** Migration of DB!!!!!
 *** Text for UI
 Email Notifications
@@ -21,7 +68,6 @@ How often do you want to receive notifications?
     at most hourly
     at most daily
     I don't need email notifications
-*** Cron and pseudocode
 ** group.inexistentTool nasty error
 ** calendar support
 *** gwt-cal + http://ical4j.sourceforge.net/introduction.html

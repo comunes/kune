@@ -27,6 +27,7 @@ import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
+import cc.kune.core.client.sitebar.auth.AskForPasswordResetPanel;
 import cc.kune.core.client.sitebar.auth.VerifyEmailClientManager;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
@@ -61,7 +62,8 @@ public class CoreParts {
       final Provider<AboutKuneDialog> aboutKuneDialog, final Provider<NewGroup> newGroup,
       final Provider<SubtitlesManager> subProvider, final EventBus eventBus,
       final Provider<VerifyEmailClientManager> verifyManager,
-      final Provider<UserOptions> userOptionsDialog, final Provider<GroupOptions> groupOptionsDialog) {
+      final Provider<UserOptions> userOptionsDialog, final Provider<GroupOptions> groupOptionsDialog,
+      final Provider<AskForPasswordResetPanel> askForPass) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -130,7 +132,14 @@ public class CoreParts {
         groupOptionsDialog.get().show(token);
       }
     });
-
+    tokenListener.put(SiteTokens.RESET_PASSWD, new HistoryTokenAuthNotNeededCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        if (!session.isLogged()) {
+          askForPass.get().show();
+        }
+      }
+    });
     verifyManager.get();
   }
 }

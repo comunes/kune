@@ -36,7 +36,7 @@ public final class SiteTokens {
   public final static String PREFS = "prefs";
   public static final String PREVIEW = "preview";
   public final static String REGISTER = "register";
-  public final static String RESET_PWD = "resetpasswd";
+  public final static String RESET_PASSWD = "resetpasswd";
   public final static String SIGN_IN = "signin";
   public final static String SUBTITLES = "sub";
   public final static String TRANSLATE = "translate";
@@ -58,6 +58,6 @@ public final class SiteTokens {
     reserverdWords.add(PREFS);
     reserverdWords.add(GROUP_PREFS);
     reserverdWords.add(VERIFY_EMAIL);
-    reserverdWords.add(RESET_PWD);
+    reserverdWords.add(RESET_PASSWD);
   }
 }

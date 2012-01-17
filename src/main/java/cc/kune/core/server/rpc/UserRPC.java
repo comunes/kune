@@ -29,6 +29,7 @@ import org.waveprotocol.box.server.authentication.SessionManager;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.EmailHashInvalidException;
 import cc.kune.core.client.errors.EmailNotFoundException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
@@ -104,7 +105,7 @@ public class UserRPC implements RPC, UserService {
 
   @Override
   @Transactional
-  public void askForEmailForgot(final String email) throws DefaultException {
+  public void askForPasswordReset(final String email) throws EmailNotFoundException {
     try {
       final User user = userFinder.findByEmail(email);
       userManager.askForEmailConfirmation(user, EmailConfirmationType.passwordReset);
@@ -119,7 +120,7 @@ public class UserRPC implements RPC, UserService {
   public void changePasswd(final String userHash, final String oldPassword, final String newPassword)
       throws DefaultException {
     final Long userId = userSessionManager.getUser().getId();
-    userManager.changePasswd(userId, oldPassword, newPassword);
+    userManager.changePasswd(userId, oldPassword, newPassword, true);
   }
 
   @Override
@@ -208,6 +209,17 @@ public class UserRPC implements RPC, UserService {
   }
 
   @Override
+  @Transactional
+  public void resetPassword(final String passwdHash, final String newpasswd) {
+    try {
+      final User user = userFinder.findByHash(passwdHash);
+      userManager.changePasswd(user.getId(), null, newpasswd, false);
+    } catch (final NoResultException e) {
+      throw new EmailHashInvalidException();
+    }
+  }
+
+  @Override
   @Authenticated(mandatory = true)
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
   @Transactional
@@ -241,4 +253,5 @@ public class UserRPC implements RPC, UserService {
     final User user = userSessionManager.getUser();
     userManager.verifyPasswordHash(user.getId(), emailReceivedHash, SessionConstants._AN_HOUR);
   }
+
 }

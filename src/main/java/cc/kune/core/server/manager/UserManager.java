@@ -41,7 +41,21 @@ public interface UserManager {
    */
   void askForEmailConfirmation(User user, EmailConfirmationType type) throws DefaultException;
 
-  User changePasswd(Long userId, String oldPassword, String newPassword);
+  /**
+   * Change passwd.
+   * 
+   * @param userId
+   *          the user id to change the passwd
+   * @param oldPassword
+   *          the old password
+   * @param newPassword
+   *          the new password
+   * @param checkOldPasswd
+   *          if we have to check the old passwd (not necessary if we are
+   *          reseting a unknown password)
+   * @return the user
+   */
+  User changePasswd(Long userId, String oldPassword, String newPassword, boolean checkOldPasswd);
 
   /**
    * CreateUser new method with language country and timezone params
