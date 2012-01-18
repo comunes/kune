@@ -27,6 +27,8 @@ public interface EntityOptGeneralView extends EntityOptionsTabView {
 
   void clear();
 
+  boolean isRendered();
+
   boolean isValid();
 
   void mask();

@@ -107,6 +107,7 @@ public abstract class EntityOptDefLicensePresenter {
 
   protected void setState() {
     if (applicable()) {
+      // Is a user and app is not starting up
       setLicense(getCurrentDefLicense());
     }
   }

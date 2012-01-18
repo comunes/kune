@@ -1,5 +1,6 @@
 package cc.kune.core.client.sitebar.auth;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.notify.NotifyUser;
@@ -14,7 +15,6 @@ import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.ui.DefaultForm;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -91,8 +91,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
                   public void onSuccess(final Void result) {
                     NotifyUser.info(i18n.t("Your password has been reset. Sign in"));
                     hide();
-                    stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.HOME,
-                        SiteTokens.SIGN_IN));
+                    stateManager.gotoHistoryToken(SiteTokens.SIGN_IN);
                   }
                 });
           }
@@ -111,6 +110,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
   }
 
   public String getPasswordHash() {
+    Log.debug("Password hash:" + passwordHash);
     return passwordHash;
   }
 

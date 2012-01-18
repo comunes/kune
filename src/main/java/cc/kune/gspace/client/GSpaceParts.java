@@ -33,20 +33,7 @@ import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorTabsCollection;
 import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import cc.kune.gspace.client.options.GroupOptions;
-import cc.kune.gspace.client.options.GroupOptionsCollection;
 import cc.kune.gspace.client.options.UserOptions;
-import cc.kune.gspace.client.options.UserOptionsCollection;
-import cc.kune.gspace.client.options.general.GroupOptGeneral;
-import cc.kune.gspace.client.options.general.UserOptGeneral;
-import cc.kune.gspace.client.options.general.UserOptPass;
-import cc.kune.gspace.client.options.license.GroupOptDefLicense;
-import cc.kune.gspace.client.options.license.UserOptDefLicense;
-import cc.kune.gspace.client.options.logo.GroupOptLogo;
-import cc.kune.gspace.client.options.logo.UserOptLogo;
-import cc.kune.gspace.client.options.style.GroupOptStyle;
-import cc.kune.gspace.client.options.style.UserOptStyle;
-import cc.kune.gspace.client.options.tools.GroupOptTools;
-import cc.kune.gspace.client.options.tools.UserOptTools;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.themes.GSpaceThemeManager;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -61,18 +48,20 @@ import com.google.inject.Provider;
 public class GSpaceParts {
 
   @Inject
-  public GSpaceParts(final Session session, final GSpaceThemeManager themeManager,
+  public GSpaceParts(
+      final Session session,
+      final GSpaceThemeManager themeManager,
       final Provider<EntityLicensePresenter> licenseFooter,
-      final Provider<TagsSummaryPresenter> tagsPresenter, final Provider<ToolSelector> toolSelector,
-      final Provider<NoHomePageViewer> noHome, final Provider<ContentViewerPresenter> docsViewer,
-      final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,
-      final Provider<UserOptions> uo, final Provider<GroupOptionsCollection> gocProv,
-      final Provider<UserOptionsCollection> uocProv, final Provider<GroupOptGeneral> gg,
-      final Provider<GroupOptDefLicense> gdl, final Provider<GroupOptStyle> gps,
-      final Provider<GroupOptLogo> gl, final Provider<GroupOptTools> gtc,
-      final Provider<UserOptGeneral> ug, final Provider<UserOptPass> up,
-      final Provider<UserOptDefLicense> udl, final Provider<UserOptStyle> ups,
-      final Provider<UserOptLogo> ul, final Provider<UserOptTools> utc,
+      final Provider<TagsSummaryPresenter> tagsPresenter,
+      final Provider<ToolSelector> toolSelector,
+      final Provider<NoHomePageViewer> noHome,
+      final Provider<ContentViewerPresenter> docsViewer,
+      final Provider<FolderViewerPresenter> folderViewer,
+      final Provider<GroupOptions> go,
+      final Provider<UserOptions> uo, // final Provider<GroupOptionsCollection>
+                                      // gocProv,
+      // final Provider<UserOptionsCollection> uocProv,
+
       final Provider<SitebarSearchPresenter> siteSearch,
       final Provider<SiteOptionsI18nTranslatorAction> transAction,
       final Provider<GiveUsFeedbackBtn> giveUsFeedback,
@@ -91,20 +80,9 @@ public class GSpaceParts {
         siteSearch.get();
         noHome.get();
 
-        // Add User & Groups Options
-        final GroupOptionsCollection goc = gocProv.get();
-        final UserOptionsCollection uoc = uocProv.get();
-        goc.add(gg);
-        goc.add(gtc);
-        goc.add(gl);
-        goc.add(gps);
-        goc.add(gdl);
-        uoc.add(ug);
-        uoc.add(up);
-        uoc.add(utc);
-        uoc.add(ul);
-        uoc.add(ups);
-        uoc.add(udl);
+        // // Add User & Groups Options
+        // final GroupOptionsCollection goc = gocProv.get();
+        // final UserOptionsCollection uoc = uocProv.get();
 
         // Init
         go.get();

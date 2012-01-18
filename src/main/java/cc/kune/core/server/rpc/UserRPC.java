@@ -29,6 +29,7 @@ import org.waveprotocol.box.server.authentication.SessionManager;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.EmailHashExpiredException;
 import cc.kune.core.client.errors.EmailHashInvalidException;
 import cc.kune.core.client.errors.EmailNotFoundException;
 import cc.kune.core.client.errors.UserAuthException;
@@ -215,6 +216,7 @@ public class UserRPC implements RPC, UserService {
     try {
       final User user = userFinder.findByHash(passwdHash);
       userManager.changePasswd(user.getId(), null, newpasswd, false);
+      userManager.clearPasswordHash(user);
     } catch (final NoResultException e) {
       throw new EmailHashInvalidException();
     }
@@ -250,7 +252,8 @@ public class UserRPC implements RPC, UserService {
   @Authenticated
   @Override
   @Transactional
-  public void verifyPasswordHash(final String userHash, final String emailReceivedHash) {
+  public void verifyPasswordHash(final String userHash, final String emailReceivedHash)
+      throws EmailHashInvalidException, EmailHashExpiredException {
     final User user = userSessionManager.getUser();
     userManager.verifyPasswordHash(user.getId(), emailReceivedHash, SessionConstants._AN_HOUR);
   }

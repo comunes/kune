@@ -21,6 +21,8 @@ package cc.kune.gspace.client.options.general;
 
 public interface UserOptGeneral extends EntityOptGeneral {
 
+  boolean isVisible();
+
   void update();
 
 }

@@ -151,20 +151,21 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   }
 
   private void doActionOrSignInIfNeeded(final HistoryTokenCallback tokenListener,
-      final String newHistoryToken) {
+      final String currentToken, final String secondPart) {
     if (tokenListener.authMandatory() && session.isNotLogged()) {
-      Log.debug("login mandatory for " + newHistoryToken);
+      Log.debug("login mandatory for " + currentToken);
       // Ok, we have to redirect because this token (for instance
       // #translate) needs the user authenticated
-      redirectButSignInBefore(newHistoryToken);
+      redirectButSignInBefore(currentToken);
     } else {
       // The auth is not mandatory, go ahead with the token action
-      Log.debug("Executing action related with historytoken " + newHistoryToken);
-      tokenListener.onHistoryToken(newHistoryToken);
+      Log.debug("Executing action related with historytoken " + secondPart);
+      tokenListener.onHistoryToken(secondPart);
     }
   }
 
   private void getContent(final StateToken newState) {
+    Log.debug("Get Content: " + newState);
     getContent(newState, false);
   }
 
@@ -204,6 +205,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   @Override
   public void gotoDefaultHomepage() {
+    Log.debug("Goto def page called");
     getContent(new StateToken(SiteTokens.GROUP_HOME), true);
   }
 
@@ -297,12 +299,13 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         if (startingUp()) {
           // Starting with some token like "signin": load defContent
           // also
+          Log.debug("Starting up with some token like #signin: load defContent also");
           getContent(new StateToken(SiteTokens.GROUP_HOME), false);
           // processHistoryToken(SiteTokens.GROUP_HOME);
           // SpaceSelectEvent.fire(eventBus, Space.groupSpace);
         }
         // Fire the listener of this #hash token
-        doActionOrSignInIfNeeded(tokenListener, newHistoryToken);
+        doActionOrSignInIfNeeded(tokenListener, newHistoryToken, newHistoryToken);
       } else {
         Log.debug("Is not a special hash like #newgroup, etc, or maybe has a #hash(redirection)");
         // token is not one of #newgroup #signin #translate ...
@@ -320,7 +323,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             final HistoryTokenCallback tokenWithRedirect = siteTokens.get(firstToken);
             if (tokenWithRedirect != null) {
               Log.info("Is some #subtitle(foo) or #verifyemail(hash) etc");
-              doActionOrSignInIfNeeded(tokenWithRedirect,
+              doActionOrSignInIfNeeded(tokenWithRedirect, newHistoryToken,
                   tokenMatcher.getRedirect(newHistoryToken).getRight());
             } else if (firstToken.equals(SiteTokens.NEW_GROUP)) {
               siteTokens.get(SiteTokens.NEW_GROUP).onHistoryToken(newHistoryToken);
@@ -363,7 +366,9 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
           SpaceSelectEvent.fire(eventBus, Space.groupSpace);
           getContent(new StateToken(newHistoryToken));
         } else {
-          gotoDefaultHomepage();
+          if (!startingUp()) {
+            // gotoDefaultHomepage();
+          }
         }
       }
     } else {

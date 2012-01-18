@@ -20,7 +20,30 @@
 package cc.kune.gspace.client.options;
 
 import cc.kune.common.client.ProvidersCollection;
+import cc.kune.gspace.client.options.general.UserOptGeneral;
+import cc.kune.gspace.client.options.general.UserOptPass;
+import cc.kune.gspace.client.options.license.UserOptDefLicense;
+import cc.kune.gspace.client.options.logo.UserOptLogo;
+import cc.kune.gspace.client.options.style.UserOptStyle;
+import cc.kune.gspace.client.options.tools.UserOptTools;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 @SuppressWarnings("serial")
+@Singleton
 public class UserOptionsCollection extends ProvidersCollection {
+
+  @Inject
+  public UserOptionsCollection(final Provider<UserOptGeneral> ug, final Provider<UserOptPass> up,
+      final Provider<UserOptTools> utc, final Provider<UserOptLogo> ul,
+      final Provider<UserOptStyle> ups, final Provider<UserOptDefLicense> udl) {
+    add(ug);
+    add(up);
+    add(utc);
+    add(ul);
+    add(ups);
+    add(udl);
+  }
 }

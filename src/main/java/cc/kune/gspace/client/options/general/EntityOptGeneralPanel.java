@@ -78,6 +78,11 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
   }
 
   @Override
+  public boolean isRendered() {
+    return super.getFormPanel().isRendered();
+  }
+
+  @Override
   public void mask() {
     maskWidget.mask(this);
   }

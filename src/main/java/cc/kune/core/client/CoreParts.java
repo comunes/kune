@@ -46,6 +46,8 @@ import cc.kune.core.client.sub.SubtitlesManager;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.UserOptions;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -80,7 +82,12 @@ public class CoreParts {
     tokenListener.put(SiteTokens.SIGN_IN, new HistoryTokenAuthNotNeededCallback() {
       @Override
       public void onHistoryToken(final String token) {
-        signIn.get().showSignInDialog();
+        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            signIn.get().showSignInDialog();
+          }
+        });
       }
     });
     tokenListener.put(SiteTokens.ABOUT_KUNE, new HistoryTokenAuthNotNeededCallback() {
@@ -99,7 +106,12 @@ public class CoreParts {
     tokenListener.put(SiteTokens.NEW_GROUP, new HistoryTokenMustBeAuthCallback() {
       @Override
       public void onHistoryToken(final String token) {
-        newGroup.get().doNewGroup();
+        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            newGroup.get().doNewGroup();
+          }
+        });
       }
     });
     tokenListener.put(SiteTokens.SUBTITLES, new HistoryTokenAuthNotNeededCallback() {
@@ -123,30 +135,51 @@ public class CoreParts {
     tokenListener.put(SiteTokens.PREFS, new HistoryTokenMustBeAuthCallback() {
       @Override
       public void onHistoryToken(final String token) {
-        SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-        userOptionsDialog.get().show();
+        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+            userOptionsDialog.get().show();
+          }
+        });
       }
     });
     tokenListener.put(SiteTokens.GROUP_PREFS, new HistoryTokenMustBeAuthCallback() {
       @Override
       public void onHistoryToken(final String token) {
-        groupOptionsDialog.get().show(token);
+        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            groupOptionsDialog.get().show(token);
+          }
+        });
       }
     });
     tokenListener.put(SiteTokens.RESET_PASSWD, new HistoryTokenAuthNotNeededCallback() {
       @Override
       public void onHistoryToken(final String token) {
-        if (!session.isLogged()) {
-          askForPass.get().show();
-        }
+        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            if (!session.isLogged()) {
+              askForPass.get().show();
+            }
+          }
+        });
       }
     });
     tokenListener.put(SiteTokens.ASK_RESET_PASSWD, new HistoryTokenAuthNotNeededCallback() {
       @Override
       public void onHistoryToken(final String token) {
-        if (!session.isLogged()) {
-          askForPass.get().show();
-        }
+        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            if (!session.isLogged()) {
+              askForPass.get().show();
+            }
+          }
+        });
+
       }
     });
     tokenListener.put(SiteTokens.RESET_PASSWD, new HistoryTokenAuthNotNeededCallback() {
@@ -159,6 +192,5 @@ public class CoreParts {
       }
     });
     verifyManager.get();
-
   }
 }

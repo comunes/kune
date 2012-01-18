@@ -158,8 +158,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       notifyService.sendEmailToWithLink(
           user,
           "Verify password reset",
-          "You are receiving this email because a request has been made to change the password associated with this email address in %s.<br>"
-              + "If this was a mistake, just ignore this email and nothing will happen.<br>"
+          "You are receiving this email because a request has been made to change the password associated with this email address in %s.<br><br>"
+              + "If this was a mistake, just ignore this email and nothing will happen.<br><br>"
               + "If you would like to reset the password for this account simply click on the link below or paste it into the url field on your favorite browser:",
           TokenUtils.addRedirect(SiteTokens.RESET_PASSWD, hash));
     default:
@@ -225,6 +225,13 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       throw new GroupShortNameInUseException();
     }
     groupManager.checkIfShortNameAreInUse(shortName);
+  }
+
+  @Override
+  public void clearPasswordHash(final User user) {
+    user.setEmailVerified(true);
+    user.setEmailCheckDate(0l);
+    user.setEmailConfirmHash("");
   }
 
   @Override
@@ -457,7 +464,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   @Override
   public void verifyPasswordHash(final Long userId, final String emailReceivedHash, final long period)
-      throws DefaultException {
+      throws EmailHashInvalidException, EmailHashExpiredException {
     final User user = find(userId);
     final Date on = new Date(user.getEmailCheckDate() + period);
 
@@ -468,8 +475,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     final String emailConfirmHash = user.getEmailConfirmHash();
     if (emailReceivedHash != null && emailConfirmHash != null
         && emailReceivedHash.equals(emailConfirmHash)) {
-      user.setEmailVerified(true);
-      user.setEmailConfirmHash("");
+      clearPasswordHash(user);
       persist(user);
     } else {
       throw new EmailHashInvalidException();

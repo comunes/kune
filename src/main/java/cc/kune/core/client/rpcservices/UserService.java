@@ -20,6 +20,7 @@
 package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.EmailHashExpiredException;
 import cc.kune.core.client.errors.EmailHashInvalidException;
 import cc.kune.core.client.errors.EmailNotFoundException;
 import cc.kune.core.shared.domain.UserSNetVisibility;
@@ -36,7 +37,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("UserService")
 public interface UserService extends RemoteService {
 
-  void askForEmailConfirmation(String userHash);
+  void askForEmailConfirmation(String userHash) throws EmailHashInvalidException,
+      EmailHashExpiredException;
 
   void askForPasswordReset(String email) throws EmailNotFoundException;
 
@@ -62,6 +64,7 @@ public interface UserService extends RemoteService {
 
   StateAbstractDTO updateUser(String userHash, UserDTO user, I18nLanguageSimpleDTO lang);
 
-  void verifyPasswordHash(String userHash, String emailReceivedHash);
+  void verifyPasswordHash(String userHash, String emailReceivedHash) throws EmailHashInvalidException,
+      EmailHashExpiredException;
 
 }

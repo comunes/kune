@@ -20,7 +20,27 @@
 package cc.kune.gspace.client.options;
 
 import cc.kune.common.client.ProvidersCollection;
+import cc.kune.gspace.client.options.general.GroupOptGeneral;
+import cc.kune.gspace.client.options.license.GroupOptDefLicense;
+import cc.kune.gspace.client.options.logo.GroupOptLogo;
+import cc.kune.gspace.client.options.style.GroupOptStyle;
+import cc.kune.gspace.client.options.tools.GroupOptTools;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 @SuppressWarnings("serial")
+@Singleton
 public class GroupOptionsCollection extends ProvidersCollection {
+  @Inject
+  public GroupOptionsCollection(final Provider<GroupOptGeneral> gg, final Provider<GroupOptTools> gtc,
+      final Provider<GroupOptLogo> gl, final Provider<GroupOptStyle> gps,
+      final Provider<GroupOptDefLicense> gdl) {
+    add(gg);
+    add(gtc);
+    add(gl);
+    add(gps);
+    add(gdl);
+  }
 }

@@ -89,6 +89,11 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
   }
 
   @Override
+  public boolean isVisible() {
+    return view.isRendered();
+  }
+
+  @Override
   protected void setState() {
     final UserSimpleDTO currentUser = session.getCurrentUser();
     userView.setLongName(currentUser.getName());

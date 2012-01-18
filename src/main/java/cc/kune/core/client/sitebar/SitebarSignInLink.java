@@ -24,8 +24,8 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
@@ -48,10 +48,10 @@ public class SitebarSignInLink extends ButtonDescriptor {
       super();
       this.stateManager = stateManager;
       putValue(Action.NAME, i18n.t("Sign in to collaborate"));
-      putValue(
-          Action.TOOLTIP,
-          i18n.t("Please sign in or register to get full access to [%s] tools and contents",
-              i18n.getSiteCommonName()));
+      // putValue(
+      // Action.TOOLTIP,
+      // i18n.t("Please sign in or register to get full access to [%s] tools and contents",
+      // i18n.getSiteCommonName()));
     }
 
     @Override
