@@ -66,6 +66,9 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
+  public interface OnFinishGetContent {
+    void finish();
+  }
   private final BeforeActionCollection beforeStateChangeCollection;
   private final ContentCache contentCache;
   private final EventBus eventBus;
@@ -152,6 +155,24 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   private void doActionOrSignInIfNeeded(final HistoryTokenCallback tokenListener,
       final String currentToken, final String secondPart) {
+    // First of all we see if we are starting up, and we get the def content
+    // first
+    if (startingUp()) {
+      // Starting with some token like "signin": load defContent first
+      Log.debug("Starting up with some token like #signin or #token(param): load defContent first");
+      getContent(new StateToken(SiteTokens.GROUP_HOME), false, new OnFinishGetContent() {
+        @Override
+        public void finish() {
+          doActionOrSignInIfNeededStarted(tokenListener, currentToken, secondPart);
+        }
+      });
+    } else {
+      doActionOrSignInIfNeededStarted(tokenListener, currentToken, secondPart);
+    }
+  }
+
+  private void doActionOrSignInIfNeededStarted(final HistoryTokenCallback tokenListener,
+      final String currentToken, final String secondPart) {
     if (tokenListener.authMandatory() && session.isNotLogged()) {
       Log.debug("login mandatory for " + currentToken);
       // Ok, we have to redirect because this token (for instance
@@ -170,6 +191,17 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   }
 
   private void getContent(final StateToken newState, final boolean setBrowserHistory) {
+    final OnFinishGetContent doNothing = new OnFinishGetContent() {
+      @Override
+      public void finish() {
+        // Do nothing
+      }
+    };
+    getContent(newState, setBrowserHistory, doNothing);
+  }
+
+  private void getContent(final StateToken newState, final boolean setBrowserHistory,
+      final OnFinishGetContent andThen) {
     // NotifyUser.info("loading: " + newState + " because current:" +
     // session.getCurrentStateToken());
     contentCache.getContent(session.getUserHash(), newState,
@@ -184,6 +216,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
               history.newItem(currentToken, false);
               SpaceSelectEvent.fire(eventBus, Space.groupSpace);
             }
+            andThen.finish();
           }
         });
   }
@@ -283,35 +316,25 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     processHistoryToken(history.getToken());
   }
 
-  void processHistoryToken(final String newHistoryToken) {
+  void processHistoryToken(final String newToken) {
     // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
     if (beforeStateChangeCollection.checkBeforeAction()) {
       // There isn't a beforeStateChange listener that stops this history
       // change
-      HistoryTokenCallback tokenListener = null;
-      if (newHistoryToken != null) {
-        final String nToken = newHistoryToken.toLowerCase();
-        tokenListener = siteTokens.get(nToken);
-      }
-      Log.debug("StateManager: on history changed (" + newHistoryToken + ")");
+      final HistoryTokenCallback tokenListener = newToken != null ? siteTokens.get(newToken.toLowerCase())
+          : null;
+      boolean isSpecialHash = false;
+      Log.debug("StateManager: on history changed (" + newToken + ")");
       if (tokenListener != null) {
+        isSpecialHash = true;
         Log.debug("token is one of #newgroup #signin #translate without #hash(redirection) ...");
-        if (startingUp()) {
-          // Starting with some token like "signin": load defContent
-          // also
-          Log.debug("Starting up with some token like #signin: load defContent also");
-          getContent(new StateToken(SiteTokens.GROUP_HOME), false);
-          // processHistoryToken(SiteTokens.GROUP_HOME);
-          // SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-        }
-        // Fire the listener of this #hash token
-        doActionOrSignInIfNeeded(tokenListener, newHistoryToken, newHistoryToken);
+        doActionOrSignInIfNeeded(tokenListener, newToken, newToken);
       } else {
         Log.debug("Is not a special hash like #newgroup, etc, or maybe has a #hash(redirection)");
         // token is not one of #newgroup #signin #translate ...
-        final String nToken = newHistoryToken != null ? newHistoryToken.toLowerCase() : null;
-        if (nToken != null && tokenMatcher.hasRedirect(nToken)) {
-          final Pair<String, String> redirect = tokenMatcher.getRedirect(nToken);
+        final String newTokenLower = newToken != null ? newToken.toLowerCase() : null;
+        if (newTokenLower != null && tokenMatcher.hasRedirect(newTokenLower)) {
+          final Pair<String, String> redirect = tokenMatcher.getRedirect(newTokenLower);
           final String firstToken = redirect.getLeft();
           final String sndToken = redirect.getRight();
           if (firstToken.equals(SiteTokens.PREVIEW)) {
@@ -322,11 +345,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
           } else {
             final HistoryTokenCallback tokenWithRedirect = siteTokens.get(firstToken);
             if (tokenWithRedirect != null) {
+              isSpecialHash = true;
               Log.info("Is some #subtitle(foo) or #verifyemail(hash) etc");
-              doActionOrSignInIfNeeded(tokenWithRedirect, newHistoryToken,
-                  tokenMatcher.getRedirect(newHistoryToken).getRight());
+              doActionOrSignInIfNeeded(tokenWithRedirect, newToken,
+                  tokenMatcher.getRedirect(newToken).getRight());
             } else if (firstToken.equals(SiteTokens.NEW_GROUP)) {
-              siteTokens.get(SiteTokens.NEW_GROUP).onHistoryToken(newHistoryToken);
+              siteTokens.get(SiteTokens.NEW_GROUP).onHistoryToken(newToken);
             } else if (firstToken.equals(SiteTokens.SIGN_IN)) {
               if (session.isLogged()) {
                 // We are logged, then redirect:
@@ -334,45 +358,43 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                 processHistoryToken(sndToken);
               } else {
                 // We have to login
-                siteTokens.get(SiteTokens.SIGN_IN).onHistoryToken(newHistoryToken);
+                siteTokens.get(SiteTokens.SIGN_IN).onHistoryToken(newToken);
               }
             }
           }
-        } else {
-          // Is not a Redirect token
-          Log.debug("Is not a redirect token");
         }
-        if (tokenMatcher.isWaveToken(newHistoryToken)) {
+        if (tokenMatcher.isWaveToken(newToken)) {
           if (session.isLogged()) {
-            SpaceConfEvent.fire(eventBus, Space.userSpace, newHistoryToken);
+            SpaceConfEvent.fire(eventBus, Space.userSpace, newToken);
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
             try {
               ClientEvents.get().fireEvent(
-                  new WaveSelectionEvent(GwtWaverefEncoder.decodeWaveRefFromPath(newHistoryToken)));
+                  new WaveSelectionEvent(GwtWaverefEncoder.decodeWaveRefFromPath(newToken)));
             } catch (final InvalidWaveRefException e) {
-              Log.error(nToken, e);
+              Log.error(newToken, e);
             }
           } else {
             // Wave, but don't logged
-            redirectButSignInBefore(newHistoryToken);
+            redirectButSignInBefore(newToken);
             if (startingUp()) {
               // Starting application (with Wave)
               getContent(new StateToken(SiteTokens.GROUP_HOME), false);
             }
           }
-        } else if (tokenMatcher.isGroupToken(newHistoryToken)) {
-          SpaceConfEvent.fire(eventBus, Space.groupSpace, newHistoryToken);
-          SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newHistoryToken));
-          SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-          getContent(new StateToken(newHistoryToken));
-        } else {
-          if (!startingUp()) {
-            // gotoDefaultHomepage();
+        } else if (!isSpecialHash) {
+          if (tokenMatcher.isGroupToken(newToken)) {
+            SpaceConfEvent.fire(eventBus, Space.groupSpace, newToken);
+            SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newToken));
+            SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+            getContent(new StateToken(newToken));
+          } else {
+            Log.debug("Last option, get default with token: " + newToken);
+            getContent(new StateToken(SiteTokens.GROUP_HOME), false);
           }
         }
       }
     } else {
-      resumedHistoryToken = newHistoryToken;
+      resumedHistoryToken = newToken;
     }
   }
 

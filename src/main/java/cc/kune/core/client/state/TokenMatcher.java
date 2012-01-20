@@ -30,59 +30,59 @@ import com.google.inject.Inject;
 
 public class TokenMatcher {
 
-    private WaverefEncoder encoder;
-    private final ReservedWordsRegistryDTO reservedWordsRegistry;
+  private WaverefEncoder encoder;
+  private final ReservedWordsRegistryDTO reservedWordsRegistry;
 
-    @Inject
-    public TokenMatcher(final ReservedWordsRegistryDTO reservedWordsRegistry) {
-        this.reservedWordsRegistry = reservedWordsRegistry;
-    }
+  @Inject
+  public TokenMatcher(final ReservedWordsRegistryDTO reservedWordsRegistry) {
+    this.reservedWordsRegistry = reservedWordsRegistry;
+  }
 
-    public Pair<String, String> getRedirect(final String token) {
-        final String[] splited = splitRedirect(token);
-        if (hasRedirect(token, splited)) {
-            return Pair.create(splited[0], splited[1].replaceAll("\\)$", ""));
-        }
-        return null;
+  public Pair<String, String> getRedirect(final String token) {
+    final String[] splited = splitRedirect(token);
+    if (hasRedirect(token, splited)) {
+      return Pair.create(splited[0], splited[1].replaceAll("\\)$", ""));
     }
+    return null;
+  }
 
-    public boolean hasRedirect(final String token) {
-        final String[] splited = splitRedirect(token);
-        if (hasRedirect(token, splited)) {
-            return true;
-        }
-        return false;
+  public boolean hasRedirect(final String token) {
+    final String[] splited = splitRedirect(token);
+    if (hasRedirect(token, splited)) {
+      return true;
     }
+    return false;
+  }
 
-    private boolean hasRedirect(final String token, final String[] splited) {
-        return token.endsWith(")") && splited.length == 2;
-    }
+  private boolean hasRedirect(final String token, final String[] splited) {
+    return token.endsWith(")") && splited.length == 2;
+  }
 
-    public void init(final WaverefEncoder encoder) {
-        assert encoder != null;
-        this.encoder = encoder;
-    }
+  public void init(final WaverefEncoder encoder) {
+    assert encoder != null;
+    this.encoder = encoder;
+  }
 
-    public boolean isGroupToken(final String token) {
-        return token != null && !isWaveToken(token) && !hasRedirect(token) && !reservedWordsRegistry.contains(token)
-                && !new StateToken(token).hasNothing();
-    }
+  public boolean isGroupToken(final String token) {
+    return token != null && !isWaveToken(token) && !hasRedirect(token)
+        && !reservedWordsRegistry.contains(token) && !new StateToken(token).hasNothing();
+  }
 
-    public boolean isHomeToken(final String currentToken) {
-        return SiteTokens.HOME.equals(currentToken);
-    }
+  public boolean isHomeToken(final String currentToken) {
+    return SiteTokens.HOME.equals(currentToken);
+  }
 
-    public boolean isWaveToken(final String token) {
-        assert encoder != null;
-        try {
-            return token == null ? false : encoder.decodeWaveRefFromPath(token) != null;
-        } catch (final InvalidWaveRefException e) {
-            return false;
-        }
+  public boolean isWaveToken(final String token) {
+    assert encoder != null;
+    try {
+      return token == null ? false : encoder.decodeWaveRefFromPath(token) != null;
+    } catch (final InvalidWaveRefException e) {
+      return false;
     }
+  }
 
-    private String[] splitRedirect(final String token) {
-        return token.split("\\(", 2);
-    }
+  private String[] splitRedirect(final String token) {
+    return token.split("\\(", 2);
+  }
 
 }

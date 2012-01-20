@@ -65,6 +65,7 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     showTooltip(newGroup.projectType);
     doScreenshot("newgroup");
     newGroup.registerBtn.click();
+    sleep(2000);
     showTitleSlide(t("Group space (collaboration space) III "),
         t("Let's see the diferent tools you have available"));
     groupSpace.blogTool.click();

@@ -170,7 +170,7 @@ public class WaveEmailNotifier implements ContainerListener {
                     final ParticipantId by = ((WaveletBlipOperation) op).getContext().getCreator();
                     final String title = getTitle(wavelet, by);
                     final String url = KuneWaveServerUtils.getUrl(waveref);
-                    LOG.info(String.format("'%s' updated wave '%s'", by, title));
+                    LOG.info(String.format("'%s' update wave '%s'", by, title));
                     return new PendingNotification(NotificationType.email,
                         FormatedString.build("You have an updated message"), updatedWaveTemplate(
                             by.toString(), title, url), true, false, new WaveDestinationProvider(

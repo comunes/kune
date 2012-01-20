@@ -49,6 +49,7 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -79,7 +80,7 @@ public class StateManagerDefaultTest {
     contentProvider = Mockito.mock(ContentCache.class);
     session = Mockito.mock(Session.class);
     history = Mockito.mock(HistoryWrapper.class);
-    tokenMatcher = Mockito.mock(TokenMatcher.class);
+    tokenMatcher = new TokenMatcher(new ReservedWordsRegistryDTO());
     siteTokens = Mockito.mock(SiteTokenListeners.class);
     eventBus = new EventBusTester();
     Mockito.when(session.getUserHash()).thenReturn(HASH);
@@ -334,4 +335,5 @@ public class StateManagerDefaultTest {
     Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
         (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
   }
+
 }
