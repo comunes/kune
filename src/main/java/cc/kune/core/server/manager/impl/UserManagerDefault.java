@@ -231,7 +231,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   public void clearPasswordHash(final User user) {
     user.setEmailVerified(true);
     user.setEmailCheckDate(0l);
-    user.setEmailConfirmHash("");
+    user.setEmailConfirmHash(null);
   }
 
   @Override
