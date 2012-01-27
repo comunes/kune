@@ -10,10 +10,17 @@ import cc.kune.domain.User;
  */
 public interface DestinationProvider {
 
+  @Override
+  boolean equals(final Object obj);
+
   /**
    * Gets the destination list
    * 
    * @return the destination
    */
   Collection<User> getDest();
+
+  @Override
+  int hashCode();
+
 }

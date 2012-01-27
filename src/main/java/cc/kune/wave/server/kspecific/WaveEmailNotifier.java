@@ -23,6 +23,7 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.wave.data.ReadableWaveletData;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.notifier.NotificationType;
@@ -94,8 +95,9 @@ public class WaveEmailNotifier implements ContainerListener {
       }
 
       private String getTitle(final ReadableWaveletData wavelet, final ParticipantId by) {
-        return waveService.getTitle(WaveRef.of(wavelet.getWaveId(), wavelet.getWaveletId()),
-            by.toString());
+        final String title = waveService.getTitle(
+            WaveRef.of(wavelet.getWaveId(), wavelet.getWaveletId()), by.toString());
+        return TextUtils.notEmpty(title) ? title : "Not subject";
       }
 
       private String getUrl(final ReadableWaveletData wavelet, final WaveletId waveletId) {
@@ -177,13 +179,6 @@ public class WaveEmailNotifier implements ContainerListener {
                             waveref, by.toString()));
                   }
                 });
-                // notificator.add(new
-                // PendingNotification(NotificationType.email,
-                // FormatedString.build("You have an updated message"),
-                // updatedWaveTemplate(
-                // by.toString(), title, url), true, false, new
-                // WaveDestinationProvider(waveref,
-                // by.toString())));
               }
             }
           }

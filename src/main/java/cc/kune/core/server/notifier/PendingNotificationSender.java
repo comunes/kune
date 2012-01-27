@@ -1,8 +1,7 @@
 package cc.kune.core.server.notifier;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
@@ -23,14 +22,14 @@ public class PendingNotificationSender {
 
   // FIXME this should be in DB so we'll don't lose them in server restarts
   /** The daily pend notif. list */
-  private final Set<PendingNotificationProvider> dailyPendNotif;
+  private final ConcurrentLinkedQueue<PendingNotificationProvider> dailyPendNotif;
 
   // FIXME this should be in DB so we'll don't lose them in server restarts
   /** The houry pend notif. list */
-  private final Set<PendingNotificationProvider> hourlyPendNotif;
+  private final ConcurrentLinkedQueue<PendingNotificationProvider> hourlyPendNotif;
 
   /** The immediate pend notif. list */
-  private final Set<PendingNotificationProvider> immediatePendNotif;
+  private final ConcurrentLinkedQueue<PendingNotificationProvider> immediatePendNotif;
 
   /** The sender. */
   private final NotificationSender sender;
@@ -44,9 +43,15 @@ public class PendingNotificationSender {
   @Inject
   public PendingNotificationSender(final NotificationSender sender) {
     this.sender = sender;
-    immediatePendNotif = new HashSet<PendingNotificationProvider>();
-    hourlyPendNotif = new HashSet<PendingNotificationProvider>();
-    dailyPendNotif = new HashSet<PendingNotificationProvider>();
+    immediatePendNotif = new ConcurrentLinkedQueue<PendingNotificationProvider>();
+    hourlyPendNotif = new ConcurrentLinkedQueue<PendingNotificationProvider>();
+    dailyPendNotif = new ConcurrentLinkedQueue<PendingNotificationProvider>();
+    // immediatePendNotif = Collections.synchronizedSet(new
+    // LinkedHashSet<PendingNotificationProvider>());
+    // hourlyPendNotif = Collections.synchronizedSet(new
+    // LinkedHashSet<PendingNotificationProvider>());
+    // dailyPendNotif = Collections.synchronizedSet(new
+    // LinkedHashSet<PendingNotificationProvider>());
   }
 
   public void add(final NotificationType type, final FormatedString subject, final FormatedString body,
@@ -67,7 +72,7 @@ public class PendingNotificationSender {
    *          the notification
    */
   public void add(final PendingNotificationProvider notificationProv) {
-    if (!hourlyPendNotif.contains(notificationProv)) {
+    if (!immediatePendNotif.contains(notificationProv) && !hourlyPendNotif.contains(notificationProv)) {
       // If we have send a similar notification this hour just ignore
       immediatePendNotif.add(notificationProv);
     }
@@ -116,18 +121,22 @@ public class PendingNotificationSender {
   private void send(final Collection<PendingNotificationProvider> list,
       final Collection<PendingNotificationProvider> nextList,
       final EmailNotificationFrequency currentFreq) {
-    for (final PendingNotificationProvider notificationProv : list) {
+    // http://en.wikipedia.org/wiki/Thread_pool_pattern
+    while (!list.isEmpty()) {
+      final PendingNotificationProvider notificationProv = ((ConcurrentLinkedQueue<PendingNotificationProvider>) list).poll();
       final PendingNotification notification = notificationProv.get();
       if (!notification.equals(PendingNotification.NONE)) {
         sender.send(notification, currentFreq);
         if (!notification.isForceSend() && nextList != NO_NEXT) {
           // Forced Send, are send immediately (independent of how User has its
           // notification configured)!
-          nextList.add(notificationProv);
+          if (!nextList.contains(notificationProv)) {
+            // We only add to the next queue if does not exists
+            nextList.add(notificationProv);
+          }
         }
       }
     }
-    list.clear();
   }
 
   /**

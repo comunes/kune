@@ -60,6 +60,51 @@ public class PendingNotification {
     this.destProvider = destProvider;
   }
 
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final PendingNotification other = (PendingNotification) obj;
+    if (body == null) {
+      if (other.body != null) {
+        return false;
+      }
+    } else if (!body.equals(other.body)) {
+      return false;
+    }
+    if (destProvider == null) {
+      if (other.destProvider != null) {
+        return false;
+      }
+    } else if (!destProvider.equals(other.destProvider)) {
+      return false;
+    }
+    if (forceSend != other.forceSend) {
+      return false;
+    }
+    if (isHtml != other.isHtml) {
+      return false;
+    }
+    if (notifyType != other.notifyType) {
+      return false;
+    }
+    if (subject == null) {
+      if (other.subject != null) {
+        return false;
+      }
+    } else if (!subject.equals(other.subject)) {
+      return false;
+    }
+    return true;
+  }
+
   /**
    * Gets the body.
    * 
@@ -94,6 +139,19 @@ public class PendingNotification {
    */
   public FormatedString getSubject() {
     return subject;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((body == null) ? 0 : body.hashCode());
+    result = prime * result + ((destProvider == null) ? 0 : destProvider.hashCode());
+    result = prime * result + (forceSend ? 1231 : 1237);
+    result = prime * result + (isHtml ? 1231 : 1237);
+    result = prime * result + ((notifyType == null) ? 0 : notifyType.hashCode());
+    result = prime * result + ((subject == null) ? 0 : subject.hashCode());
+    return result;
   }
 
   /**

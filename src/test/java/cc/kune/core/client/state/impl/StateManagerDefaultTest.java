@@ -309,17 +309,7 @@ public class StateManagerDefaultTest {
     stateManager.addSiteToken(token, listener);
     Mockito.when(siteTokens.get(SiteTokens.SIGN_IN)).thenReturn(listener);
     stateManager.processHistoryToken(token);
-    Mockito.verify(listener, Mockito.times(1)).onHistoryToken(Mockito.anyString());
     verifyGetServerContent();
-  }
-
-  @Test
-  public void siteTokenTest() {
-    final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
-    stateManager.addSiteToken(SiteTokens.SIGN_IN, listener);
-    Mockito.when(siteTokens.get(SiteTokens.SIGN_IN)).thenReturn(listener);
-    stateManager.processHistoryToken("signIn");
-    Mockito.verify(listener, Mockito.times(1)).onHistoryToken(Mockito.anyString());
   }
 
   @Test

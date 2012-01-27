@@ -1,6 +1,7 @@
 package cc.kune.core.server.notifier;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,12 +20,12 @@ public class PendingNotificationSenderTest extends AbstractPendingNotificationTe
   private NotificationSender sender;
   private PendingNotificationProvider someForcedNotif;
   private PendingNotificationProvider someNotif;
+  private PendingNotificationProvider someSimilarNotif;
 
   private void assertQueues(final int i, final int j, final int k) {
-    // TODO Auto-generated method stub
-    assertEquals(manager.getImmediateCount(), i);
-    assertEquals(manager.getHourlyCount(), j);
-    assertEquals(manager.getDailyCount(), k);
+    assertEquals(i, manager.getImmediateCount());
+    assertEquals(j, manager.getHourlyCount());
+    assertEquals(k, manager.getDailyCount());
   }
 
   @Override
@@ -54,6 +55,22 @@ public class PendingNotificationSenderTest extends AbstractPendingNotificationTe
             someUserProvider);
       }
     };
+
+    someSimilarNotif = new PendingNotificationProvider() {
+      @Override
+      public PendingNotification get() {
+        return new PendingNotification(NotificationType.email, SUBJECT, BODY, false, false,
+            someUserProvider);
+      }
+    };
+  }
+
+  @Test
+  public void compareNotif() {
+    assertEquals(someNotif.get(), someNotif.get());
+    assertEquals(someSimilarNotif.get(), someNotif.get());
+    assertFalse(otherNotif.get().equals(someNotif.get()));
+
   }
 
   @Test

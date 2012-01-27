@@ -93,6 +93,38 @@ public class FormatedString {
     this.shouldBeTranslated = true;
   }
 
+  public FormatedString copy() {
+    return new FormatedString(shouldBeTranslated, template, args);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final FormatedString other = (FormatedString) obj;
+    if (!Arrays.equals(args, other.args)) {
+      return false;
+    }
+    if (shouldBeTranslated != other.shouldBeTranslated) {
+      return false;
+    }
+    if (template == null) {
+      if (other.template != null) {
+        return false;
+      }
+    } else if (!template.equals(other.template)) {
+      return false;
+    }
+    return true;
+  }
+
   /**
    * Gets the string.
    * 
@@ -110,6 +142,16 @@ public class FormatedString {
    */
   public String getTemplate() {
     return template;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + Arrays.hashCode(args);
+    result = prime * result + (shouldBeTranslated ? 1231 : 1237);
+    result = prime * result + ((template == null) ? 0 : template.hashCode());
+    return result;
   }
 
   /**

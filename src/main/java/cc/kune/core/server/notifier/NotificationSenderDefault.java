@@ -57,7 +57,7 @@ public class NotificationSenderDefault implements NotificationSender {
 
   @Override
   public void send(final PendingNotification notification, final EmailNotificationFrequency withFrequency) {
-    final FormatedString subject = notification.getSubject();
+    final FormatedString subject = notification.getSubject().copy();
     final FormatedString body = notification.getBody();
     final NotificationType notifyType = notification.getNotifyType();
     final boolean forceSend = notification.isForceSend();

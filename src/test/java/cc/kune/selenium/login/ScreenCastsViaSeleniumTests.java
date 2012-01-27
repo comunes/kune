@@ -22,13 +22,8 @@ package cc.kune.selenium.login;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
-import cc.kune.core.client.state.SiteTokens;
 import cc.kune.selenium.KuneSeleniumTest;
-import cc.kune.selenium.SeleniumConf;
-import cc.kune.selenium.SeleniumConstants;
 import cc.kune.selenium.SeleniumUtils;
-
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 
 public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
 
@@ -49,6 +44,95 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     entityHeader.waitForEntityTitle(longName + prefix);
     register.getWelcomeMsg().click();
 
+    // home space
+    showTitleSlide(t("Home space (your welcome page)"),
+        t("Here you can see a summary of your activity in this site"));
+    site.homeSpaceBtn.click();
+    sleep(2000);
+    homeSpace.getSndStats().click();
+    doScreenshot("home-stats");
+    sleep(2000);
+    homeSpace.getTrdStats().click();
+    sleep(2000);
+
+    // user space
+    showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
+    showTooltip(site.userSpaceBtn);
+    site.userSpaceBtn.click();
+    showMsg(t("You can see this like an advanced email system..."));
+    userSpace.getFirstWave().click();
+    sleep(2000);
+    userSpace.getNewWave().click();
+    showMsg(t("where you can compose personal messages..."));
+    showMsg(t("but also create contents to publish later"));
+    userSpace.rootBlipText().sendKeys(t("Congratulations for your report\n\n"));
+    sleep(1000);
+    userSpace.getCursive().click();
+    userSpace.rootBlipText().sendKeys(
+        t("Hi there, Just to say that I like") + t("a lot your last report\n\n"));
+    sleep(1000);
+    userSpace.getCursive().click();
+    userSpace.rootBlipText().sendKeys(t("Best\n\nJane"));
+    sleep(3000);
+    userSpace.getRootEdit().click();
+    userSpace.getAddParcipant().click();
+    sleep(1000);
+    answerOnNextPrompt("admin");
+    sleep(2000);
+    doScreenshot("inbox");
+    sleep(3000);
+
+    // group space
+    showTitleSlide(t("Your personal public space"), t("here you can have your blog, etc"));
+    sleep(500);
+    site.groupSpaceBtn.click();
+    site.groupSpaceBtn.click();
+    showMsg(t("Let's start adding some buddie to our social network"));
+    sleep(1000);
+    groupSpace.addBuddieBtn.click();
+    groupSpace.addNewBuddieTextBox.click();
+    groupSpace.addNewBuddieTextBox.sendKeys("admin");
+    groupSpace.addNewBuddieTextBox.sendKeys(Keys.ARROW_DOWN);
+    sleep(500);
+    groupSpace.firstFromSuggestionBox.click();
+    doScreenshot("social-net");
+    site.confirmationOk.click();
+    sleep(500);
+    groupSpace.searchEntitiesOk.click();
+    // groupSpace.firstAvatarOfGroup().click();
+    sleep(2000);
+
+    /*
+     * showTitleSlide(t("Chat with your buddies"),
+     * t("compatible with gmail and similars"), SiteTokens.WAVE_INBOX); //
+     * showTooltip(chat.icon()); chat.show(); sleep(2000);
+     * 
+     * final XmppURI jid = XmppURI.jid(SeleniumConstants.USER_SHORNAME + "@" +
+     * SeleniumConf.SITE.getDomain()); final String jids = jid.toString();
+     * chat.getRosterItem("", jids).click();
+     * 
+     * chat.openChat(jid);
+     * 
+     * chat.getPage(jids).click();
+     * chat.getTalkBox(jids).sendKeys(t("Helloo... ;)"));
+     * chat.getSend(jids).click();
+     * chat.getTalkBox(jids).sendKeys(t("I'm just testing"));
+     * chat.getSend(jids).click(); doScreenshot("chat");
+     * 
+     * showMsg(t("And you can chat event while going back/forward with your browser"
+     * )); site.homeSpaceBtn.click(); sleep(2000);
+     * chat.getTalkBox(jids).sendKeys(t("la la la"));
+     * chat.getSend(jids).click(); showMsg(t("Browser history back"));
+     * browserBack(); sleep(2000);
+     * chat.getTalkBox(jids).sendKeys(t("I can continue chat smoothly ;)"));
+     * chat.getSend(jids).click(); sleep(2000);
+     * showMsg(t("Browser history forward")); browserForward(); sleep(1000);
+     * showMsg(t("And more options for your contacts")); chat.getItemMenu("",
+     * jids).click(); chat.getTalkBox(jids).sendKeys(t("goodbye!"));
+     * chat.getSend(jids).click(); sleep(1000);
+     * chat.getTalkBox(jids).sendKeys(Keys.chord(Keys.ALT, "C")); //
+     * chat.close();
+     */
     // group space
     showTitleSlide(t("Group space (collaboration space)"),
         t("Here you can create groups and collaborate within them"));
@@ -78,101 +162,6 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
 
     showTitleSlide(t("Group space (collaboration space) II"),
         t("but also you can have your personal space (with blogs, etc)"));
-
-    // home space
-    showTitleSlide(t("Home space (your welcome page)"),
-        t("Here you can see a summary of your activity in this site"));
-    site.homeSpaceBtn.click();
-    sleep(2000);
-    homeSpace.getSndStats().click();
-    sleep(2000);
-    homeSpace.getTrdStats().click();
-    sleep(2000);
-
-    // user space
-    showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
-    showTooltip(site.userSpaceBtn);
-    site.userSpaceBtn.click();
-    showMsg(t("You can see this like an advanced email system..."));
-    userSpace.getFirstWave().click();
-    sleep(2000);
-    userSpace.getNewWave().click();
-    showMsg(t("where you can compose personal messages..."));
-    showMsg(t("but also create contents to publish later"));
-    userSpace.rootBlipText().sendKeys(t("Congratulations for your report\n\n"));
-    sleep(1000);
-    userSpace.getCursive().click();
-    userSpace.rootBlipText().sendKeys(
-        t("Hi there, Just to say that I like") + t("a lot your last report\n\n"));
-    sleep(1000);
-    userSpace.getCursive().click();
-    userSpace.rootBlipText().sendKeys(t("Best\n\nJane"));
-    sleep(3000);
-    userSpace.getRootEdit().click();
-    userSpace.getAddParcipant().click();
-    sleep(1000);
-    answerOnNextPrompt("admin");
-    sleep(5000);
-
-    // group space
-    showTitleSlide(t("Your personal public space"), t("here you can have your blog, etc"));
-    sleep(500);
-    site.groupSpaceBtn.click();
-    site.groupSpaceBtn.click();
-    showMsg(t("Let's start adding some buddie to our social network"));
-    sleep(1000);
-    groupSpace.addBuddieBtn.click();
-    groupSpace.addNewBuddieTextBox.click();
-    groupSpace.addNewBuddieTextBox.sendKeys("admin");
-    groupSpace.addNewBuddieTextBox.sendKeys(Keys.ARROW_DOWN);
-    sleep(500);
-    groupSpace.firstFromSuggestionBox.click();
-    site.confirmationOk.click();
-    sleep(500);
-    groupSpace.searchEntitiesOk.click();
-    // groupSpace.firstAvatarOfGroup().click();
-    sleep(2000);
-
-    showTitleSlide(t("Chat with your buddies"), t("compatible with gmail and similars"),
-        SiteTokens.WAVE_INBOX);
-    // showTooltip(chat.icon());
-    chat.show();
-    sleep(2000);
-
-    final XmppURI jid = XmppURI.jid(SeleniumConstants.USER_SHORNAME + "@"
-        + SeleniumConf.SITE.getDomain());
-    final String jids = jid.toString();
-    chat.getRosterItem("", jids).click();
-
-    // chat.openChat(jid);
-
-    // chat.getPage(jids).click();
-    chat.getTalkBox(jids).sendKeys(t("Helloo... ;)"));
-    chat.getSend(jids).click();
-    chat.getTalkBox(jids).sendKeys(t("I'm just testing"));
-    chat.getSend(jids).click();
-
-    showMsg(t("And you can chat event while going back/forward with your browser"));
-    site.homeSpaceBtn.click();
-    sleep(2000);
-    chat.getTalkBox(jids).sendKeys(t("la la la"));
-    chat.getSend(jids).click();
-    showMsg(t("Browser history back"));
-    browserBack();
-    sleep(2000);
-    chat.getTalkBox(jids).sendKeys(t("I can continue chat smoothly ;)"));
-    chat.getSend(jids).click();
-    sleep(2000);
-    showMsg(t("Browser history forward"));
-    browserForward();
-    sleep(1000);
-    showMsg(t("And more options for your contacts"));
-    chat.getItemMenu("", jids).click();
-    chat.getTalkBox(jids).sendKeys(t("goodbye!"));
-    chat.getSend(jids).click();
-    sleep(1000);
-    chat.getTalkBox(jids).sendKeys(Keys.chord(Keys.ALT, "C"));
-    // chat.close();
 
     login.logout();
 
