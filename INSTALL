@@ -230,18 +230,20 @@ Create the Administration Account. Is recommended to use the same password speci
 
 Configure the 'Group chat service' (in Group Chat > Group Chat Settings tab) with "rooms" additionally or instead of "conference" (or change kune.chat.roomHost in <trunk>/src/main/resources/kune.properties)
 
-Change in 'Server > Server Manager > System Properties':
-  provider.auth.className to org.jivesoftware.openfire.auth.JDBCAuthProvider instead of
-    org.jivesoftware.openfire.auth.DefaultAuthProvider
-  provider.user.className to org.jivesoftware.openfire.user.JDBCUserProvider instead of
-    org.jivesoftware.openfire.user.DefaultUserProvider
-
 In Server > Server Settings > HTTP Binding, enable "HTTP Bind Settings" and set the port to 5280. Check that port is not used by other service in your machine (we use 5280 as default, but if you want to use other change it your web.xml accordly)
 
 Because users are managed from the database of kune, we recommend to set:
 In Server > Server Settings > Registration & Login > Inband Account Registration > Disabled
 In Server > Server Settings > Registration & Login > Change Password > Disabled
 so this will not conflict with kune users management.
+
+Change in 'Server > Server Manager > System Properties':
+  provider.auth.className to org.jivesoftware.openfire.auth.JDBCAuthProvider instead of
+    org.jivesoftware.openfire.auth.DefaultAuthProvider
+  provider.user.className to org.jivesoftware.openfire.user.JDBCUserProvider instead of
+    org.jivesoftware.openfire.user.DefaultUserProvider
+
+This is used to set the database of users of openfire to kune users database table. When you do that you have to follow the next step (or you will get authentication problems).
 
 Edit the openfire.xml in a terminal:
 * In debian (with a .deb installation) you can to edit the configuration in /etc/openfire directory.
@@ -290,6 +292,8 @@ Instead of:
   <admin/>
 
 (Be sure that the password matches if you changed de default password 'db4kune', also the database name if you use another different like production one).
+
+When you add this to the configuration and you restart, openfire will import (and remove) this part of the configuration to its database so you will see it in 'Server > Server Manager > System Properties'.
 
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
