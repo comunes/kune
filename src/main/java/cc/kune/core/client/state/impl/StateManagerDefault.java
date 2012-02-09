@@ -382,6 +382,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             }
           }
         } else if (!isSpecialHash) {
+          // FIXME This can be in the top of isWaveToken....
           if (tokenMatcher.isGroupToken(newToken)) {
             SpaceConfEvent.fire(eventBus, Space.groupSpace, newToken);
             SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newToken));

@@ -378,11 +378,12 @@ public class WebClient extends  Composite implements WaveClientView {
   }
 
   /**
-   * Returns <code>ws://yourhost[:port]/</code>.
+   * Returns <code>ws(s)://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl(String moduleBase) /*-{
-		return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+		return ((window.location.protocol == "https:") ? "wss" : "ws")
+				+ /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
   }-*/;
 
   @Override
