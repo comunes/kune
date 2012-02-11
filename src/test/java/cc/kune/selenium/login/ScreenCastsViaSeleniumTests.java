@@ -133,6 +133,7 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
      * chat.getTalkBox(jids).sendKeys(Keys.chord(Keys.ALT, "C")); //
      * chat.close();
      */
+
     // group space
     showTitleSlide(t("Group space (collaboration space)"),
         t("Here you can create groups and collaborate within them"));

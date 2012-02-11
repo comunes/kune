@@ -12,10 +12,12 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
-** Connection persistence
-java.io.NotSerializableException: org.eclipse.jetty.websocket.WebSocketConnectionD13$WSFrameConnection
-java.io.NotSerializableException: com.glines.socketio.server.transport.jetty.JettyContinuationTransportHandler
-
+** deploy automatize (update)
+*** copy jar
+*** copy via rsync gwt compilation (no delete to prevent code fail message)
+*** copy the jar and the compilation to other sites in the same lan
+*** update /etc/kune (if needed)
+*** migrate the database (if needed)
 ** group.inexistentTool nasty error
 ** calendar support
 *** gwt-cal + http://ical4j.sourceforge.net/introduction.html

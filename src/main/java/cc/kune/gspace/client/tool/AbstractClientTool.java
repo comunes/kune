@@ -29,7 +29,7 @@ public abstract class AbstractClientTool {
       final ToolSelector toolSelector) {
     final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName,
         tooltip, toolSelector);
-    final ToolSelectorItemPanel panel = new ToolSelectorItemPanel();
+    final ToolSelectorItemPanel panel = new ToolSelectorItemPanel(shortName);
     presenter.init(panel);
   }
 

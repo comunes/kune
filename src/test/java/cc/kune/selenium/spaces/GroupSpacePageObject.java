@@ -22,12 +22,20 @@ package cc.kune.selenium.spaces;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import cc.kune.blogs.shared.BlogsConstants;
+import cc.kune.chat.shared.ChatConstants;
 import cc.kune.core.client.sitebar.search.EntitySearchPanel;
 import cc.kune.core.client.sn.actions.AddEntityToThisGroupAction;
 import cc.kune.core.client.sn.actions.AddNewBuddiesAction;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
+import cc.kune.docs.shared.DocsConstants;
+import cc.kune.events.shared.EventsConstants;
+import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
+import cc.kune.lists.shared.ListsConstants;
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.SeleniumConstants;
+import cc.kune.tasks.shared.TasksConstants;
+import cc.kune.wiki.shared.WikiConstants;
 
 public class GroupSpacePageObject extends PageObject {
 
@@ -37,27 +45,27 @@ public class GroupSpacePageObject extends PageObject {
   public WebElement addNewBuddieTextBox;
   @FindBy(id = SeleniumConstants.GWTDEV + AddEntityToThisGroupAction.ADD_NEW_MEMBER_TEXTBOX)
   public WebElement addNewMemberTextBox;
-  @FindBy(xpath = "//div[2]/div/div[3]/div/span")
+  @FindBy(id = ToolSelectorItemPanel.TOOL_ID_PREFIX + BlogsConstants.NAME)
   public WebElement blogTool;
-  @FindBy(xpath = "//div[2]/div/div[4]/div/span")
+  @FindBy(id = ToolSelectorItemPanel.TOOL_ID_PREFIX + ChatConstants.NAME)
   public WebElement chatTool;
-  @FindBy(xpath = "//div[3]/div/div[2]/div/div/div/span")
+  @FindBy(id = ToolSelectorItemPanel.TOOL_ID_PREFIX + DocsConstants.NAME)
   public WebElement docTool;
-  @FindBy(xpath = "//div[2]/div/div[6]/div/span")
+  @FindBy(id = ToolSelectorItemPanel.TOOL_ID_PREFIX + EventsConstants.NAME)
   public WebElement eventTool;
   @FindBy(xpath = "//td/img")
   public WebElement firstAvatarOfGroup;
   @FindBy(xpath = "//td[2]/div/div/table/tbody/tr/td")
   public WebElement firstFromSuggestionBox;
-  @FindBy(xpath = "//div[2]/div/div[5]/div/span")
+  @FindBy(id = ToolSelectorItemPanel.TOOL_ID_PREFIX + ListsConstants.NAME)
   public WebElement listTool;
   @FindBy(id = SeleniumConstants.GWTDEV + EntitySearchPanel.OK_ID)
   public WebElement searchEntitiesOk;
   @FindBy(xpath = "//div[3]/div/button")
   public WebElement socialNetOptions;
-  @FindBy(xpath = "//div[2]/div/div[7]/div/span")
+  @FindBy(id = ToolSelectorItemPanel.TOOL_ID_PREFIX + TasksConstants.NAME)
   public WebElement taskTool;
-  @FindBy(xpath = "//div[2]/div/div[7]/div/span")
+  @FindBy(id = ToolSelectorItemPanel.TOOL_ID_PREFIX + WikiConstants.NAME)
   public WebElement wikiTool;
 
 }

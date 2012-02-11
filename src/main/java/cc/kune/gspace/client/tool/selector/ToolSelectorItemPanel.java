@@ -43,6 +43,8 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   interface ToolSelectorItemPanelUiBinder extends UiBinder<Widget, ToolSelectorItemPanel> {
   }
 
+  public static final String TOOL_ID_PREFIX = "k-tool-item-";
+
   private static ToolSelectorItemPanelUiBinder uiBinder = GWT.create(ToolSelectorItemPanelUiBinder.class);
 
   @UiField
@@ -58,8 +60,9 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   @UiField
   FocusPanel self;
 
-  public ToolSelectorItemPanel() {
+  public ToolSelectorItemPanel(final String shortName) {
     initWidget(uiBinder.createAndBindUi(this));
+    ensureDebugId(TOOL_ID_PREFIX + shortName);
     setVisibleImpl(false);
     iconLeft.setVisible(false);
   }
@@ -131,4 +134,5 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     self.addStyleDependentName("nofocus");
     self.removeStyleDependentName("focus");
   }
+
 }
