@@ -33,6 +33,8 @@ import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ws.entheader.EntityHeader;
@@ -43,20 +45,24 @@ import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.emite.im.client.roster.events.RosterRetrievedEvent;
 import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class AddAsBuddieHeaderButton {
 
   public static class AddAsBuddieHeaderAction extends AbstractExtendedAction {
     private final ChatClient chatEngine;
     private final Session session;
+    private final Provider<SocialNetworkServiceAsync> snService;
 
     @Inject
     public AddAsBuddieHeaderAction(final ChatClient chatEngine, final Session session,
         final ChatInstances chatInstances, final StateManager stateManager,
-        final I18nTranslationService i18n, final CoreResources img) {
+        final I18nTranslationService i18n, final CoreResources img,
+        final Provider<SocialNetworkServiceAsync> snService) {
       super();
       this.chatEngine = chatEngine;
       this.session = session;
+      this.snService = snService;
       stateManager.onStateChanged(true, new StateChangedHandler() {
         @Override
         public void onStateChanged(final StateChangedEvent event) {
@@ -81,9 +87,14 @@ public class AddAsBuddieHeaderButton {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      chatEngine.addNewBuddy(session.getCurrentState().getGroup().getShortName());
-      // NotifyUser.info("Added as buddy. Waiting buddy response");
+      final String username = session.getCurrentState().getGroup().getShortName();
+      chatEngine.addNewBuddy(username);
       setEnabled(false);
+      snService.get().addAsBuddie(session.getUserHash(), username, new AsyncCallbackSimple<Void>() {
+        @Override
+        public void onSuccess(final Void result) {
+        }
+      });
     }
 
     private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {

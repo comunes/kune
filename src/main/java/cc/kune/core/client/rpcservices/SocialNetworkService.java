@@ -36,6 +36,8 @@ public interface SocialNetworkService extends RemoteService {
   SocialNetworkDataDTO addAdminMember(String hash, StateToken groupToken, String groupToAddShortName)
       throws DefaultException;
 
+  void addAsBuddie(String hash, String userName) throws DefaultException;
+
   SocialNetworkDataDTO addCollabMember(String hash, StateToken groupToken, String groupToAddShortName)
       throws DefaultException;
 

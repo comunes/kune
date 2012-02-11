@@ -33,6 +33,8 @@ public interface SocialNetworkServiceAsync {
   void addAdminMember(String hash, StateToken groupToken, String groupToAddShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
+  void addAsBuddie(String hash, String userName, AsyncCallback<Void> callback);
+
   void addCollabMember(String hash, StateToken groupToken, String groupToAddShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 

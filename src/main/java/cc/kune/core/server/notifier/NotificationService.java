@@ -80,6 +80,12 @@ public class NotificationService {
     notifyToAll(groupSender, subject, message, adminMembers);
   }
 
+  public void notifyGroupToUser(final Group group, final User to, final String subject,
+      final String message) {
+    sender.add(NotificationType.email, createPlainSubject(subject),
+        helper.groupNotification(group.getShortName(), group.hasLogo(), message), true, false, to);
+  }
+
   private void notifyToAll(final Group groupSender, final String subject, final String message,
       final Collection<User> users) {
     for (final User to : users) {
@@ -89,14 +95,14 @@ public class NotificationService {
     }
   }
 
-  public void notifyUser(final User to, final Group group, final String subject, final String message) {
+  public void notifyUserToUser(final User from, final User to, final String subject, final String message) {
     sender.add(NotificationType.email, createPlainSubject(subject),
-        helper.groupNotification(group.getShortName(), group.hasLogo(), message), true, true, to);
+        helper.userNotification(from.getShortName(), from.hasLogo(), message), true, false, to);
   }
 
   /**
-   * Send email to an User with a link.The first an unique %s in body is changed
-   * by the site name.
+   * Send email to an User with a link. The first an unique %s in body is
+   * changed by the site name.
    * 
    * @param to
    *          the User to send the notification

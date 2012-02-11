@@ -116,7 +116,7 @@ public class CalendarViewerPresenter extends
     getView().addTimeBlockClickHandler(new TimeBlockClickHandler<Date>() {
       @Override
       public void onTimeBlockClick(final TimeBlockClickEvent<Date> event) {
-        NotifyUser.info("on time block");
+        // NotifyUser.info("on time block");
         appToEdit = NO_APPOINT;
         onOverDate = event.getTarget();
         updateMenuItems();
@@ -138,14 +138,14 @@ public class CalendarViewerPresenter extends
         }
         event.setCancelled(!editable);
         // event.setCancelled(true);
-        NotifyUser.info("updated handler");
+        // NotifyUser.info("updated handler");
         hideMenu();
       }
     });
     getView().addOpenHandler(new OpenHandler<Appointment>() {
       @Override
       public void onOpen(final OpenEvent<Appointment> event) {
-        NotifyUser.info("open handler");
+        // NotifyUser.info("open handler");
       }
     });
     getView().addSelectionHandler(new SelectionHandler<Appointment>() {
@@ -153,7 +153,7 @@ public class CalendarViewerPresenter extends
       public void onSelection(final SelectionEvent<Appointment> event) {
         appToEdit = event.getSelectedItem();
         onOverDate = event.getSelectedItem().getStart();
-        NotifyUser.info("on selection");
+        // NotifyUser.info("on selection");
         updateMenuItems();
         showMenu();
       }

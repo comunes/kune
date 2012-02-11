@@ -35,6 +35,7 @@ import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -45,16 +46,18 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
   private final Mapper mapper;
   private final NotificationService notifyService;
   private final SocialNetworkManager socialNetworkManager;
+  private final UserFinder userFinder;
   private final UserSessionManager userSessionManager;
 
   @Inject
   public SocialNetworkRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
-      final SocialNetworkManager socialNetworkManager, final Mapper mapper,
+      final SocialNetworkManager socialNetworkManager, final Mapper mapper, final UserFinder userFinder,
       final NotificationService notifyService) {
     this.userSessionManager = userSessionManager;
     this.groupManager = groupManager;
     this.socialNetworkManager = socialNetworkManager;
     this.mapper = mapper;
+    this.userFinder = userFinder;
     this.notifyService = notifyService;
   }
 
@@ -88,6 +91,15 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     notifyService.notifyGroup(groupToAdd, group, "Added as administrator",
         "You are now admin of this group");
     return generateResponse(userLogged, group);
+  }
+
+  @Override
+  @Authenticated
+  @Transactional
+  public void addAsBuddie(final String hash, final String userName) throws DefaultException {
+    final User userLogged = userSessionManager.getUser();
+    final User toUser = userFinder.findByShortName(userName);
+    notifyService.notifyUserToUser(userLogged, toUser, "Added as buddie", "He/she added you as buddie");
   }
 
   @Override
@@ -232,5 +244,4 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     notifyService.notifyGroupAdmins(group, userLogged.getUserGroup(), "Some member left this group",
         "Some member have left this group");
   }
-
 }

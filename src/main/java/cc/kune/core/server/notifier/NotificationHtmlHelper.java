@@ -35,6 +35,14 @@ public class NotificationHtmlHelper {
     this.fileDownloadUtils = fileDownloadUtils;
   }
 
+  private FormatedString entityNotification(final String groupName, final boolean hasLogo,
+      final String message, final boolean isPersonal) {
+    final String groupUrl = fileDownloadUtils.getUrl(groupName);
+    return FormatedString.build(false, GROUP_TEMPLATE, groupUrl,
+        fileDownloadUtils.getLogoAvatarHtml(groupName, hasLogo, isPersonal, 50, 5), groupUrl, groupName,
+        message);
+  }
+
   /**
    * Generates a group notification in html like [logo|message]
    * 
@@ -50,10 +58,25 @@ public class NotificationHtmlHelper {
    */
   public FormatedString groupNotification(final String groupName, final boolean hasLogo,
       final String message) {
-    final String groupUrl = fileDownloadUtils.getUrl(groupName);
-    return FormatedString.build(false, GROUP_TEMPLATE, groupUrl,
-        fileDownloadUtils.getLogoAvatarHtml(groupName, hasLogo, false, 50, 5), groupUrl, groupName,
-        message);
+    return entityNotification(groupName, hasLogo, message, false);
+  }
+
+  /**
+   * Generates a user notification in html like [logo|message]
+   * 
+   * @param userName
+   *          the user name you want to get the notification
+   * @param hasLogo
+   *          the has logo?
+   * @param message
+   *          the message to show close to the logo
+   * @param readMoreMsg
+   *          the read more msg
+   * @return the html string
+   */
+  public FormatedString userNotification(final String userName, final boolean hasLogo,
+      final String message) {
+    return entityNotification(userName, hasLogo, message, true);
   }
 
   /**

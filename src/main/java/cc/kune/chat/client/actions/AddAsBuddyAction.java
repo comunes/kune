@@ -27,20 +27,29 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class AddAsBuddyAction extends AbstractExtendedAction {
   private final ChatClient chatEngine;
+  private final Session session;
+  private final Provider<SocialNetworkServiceAsync> snService;
 
   @Inject
   public AddAsBuddyAction(final ChatClient chatEngine, final ChatInstances chatInstances,
-      final StateManager stateManager, final I18nTranslationService i18n, final CoreResources img) {
+      final StateManager stateManager, final I18nTranslationService i18n, final CoreResources img,
+      final Provider<SocialNetworkServiceAsync> snService, final Session session) {
     super();
     this.chatEngine = chatEngine;
+    this.snService = snService;
+    this.session = session;
     putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDY));
     putValue(Action.SMALL_ICON, img.addGreen());
   }
@@ -55,8 +64,12 @@ public class AddAsBuddyAction extends AbstractExtendedAction {
     }
     if (username != null) {
       chatEngine.addNewBuddy(username);
-      // NotifyUser.info("Added as buddy. Waiting buddy response");
       setEnabled(false);
+      snService.get().addAsBuddie(session.getUserHash(), username, new AsyncCallbackSimple<Void>() {
+        @Override
+        public void onSuccess(final Void result) {
+        }
+      });
     }
   }
 }
