@@ -60,6 +60,8 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
   interface FolderViewerAsTablePanelUiBinder extends UiBinder<Widget, FolderViewerAsTablePanel> {
   }
 
+  public static final String ITEM_ID = "k-fvat-item-";
+
   private static FolderViewerAsTablePanelUiBinder uiBinder = GWT.create(FolderViewerAsTablePanelUiBinder.class);
 
   @UiField
@@ -86,7 +88,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       final DoubleClickHandler doubleClickHandler) {
     final int rowCount = flex.getRowCount();
     final FolderItemWidget itemWidget = new FolderItemWidget((ImageResource) item.getIcon(),
-        item.getText(), item.getStateToken());
+        item.getText(), item.getStateToken(), ITEM_ID + (flex.getRowCount() + 1));
     final ActionSimplePanel toolbar = new ActionSimplePanel(guiProvider, i18n);
     final long modifiedOn = item.getModififiedOn();
     if (modifiedOn != FolderViewerView.NO_DATE) {

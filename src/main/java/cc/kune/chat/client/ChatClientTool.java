@@ -21,6 +21,7 @@ package cc.kune.chat.client;
 
 import static cc.kune.chat.shared.ChatConstants.NAME;
 import static cc.kune.chat.shared.ChatConstants.TYPE_ROOM;
+import static cc.kune.chat.shared.ChatConstants.TYPE_ROOT;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -34,6 +35,7 @@ import com.google.inject.Inject;
 
 public class ChatClientTool extends FoldableAbstractClientTool {
 
+  private final IconicResources icons;
   private final ChatResources res;
 
   @Inject
@@ -48,6 +50,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
             "A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from [%s] or other sites (compatible with gmail chat)",
             i18n.getSiteCommonName()), icons.chats(), toolSelector, cntCapRegistry, i18n, navResources);
     this.res = res;
+    this.icons = icons;
     registerIcons();
   }
 
@@ -57,6 +60,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
+    registerContentTypeIcon(TYPE_ROOT, icons.chats());
     registerContentTypeIcon(TYPE_ROOM, res.groupChat());
     final String emptyMsg = i18n.tWithNT("See the archive of old conversations"
         + TextUtils.IN_DEVELOPMENT_P, "with Brackets");

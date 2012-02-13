@@ -22,9 +22,12 @@ package cc.kune.selenium.spaces;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import cc.kune.common.client.errors.UIException;
 import cc.kune.core.client.groups.newgroup.NewGroupPanel;
+import cc.kune.core.shared.dto.GroupType;
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.SeleniumConstants;
+import cc.kune.selenium.SeleniumUtils;
 
 public class NewGroupPageObject extends PageObject {
 
@@ -47,4 +50,34 @@ public class NewGroupPageObject extends PageObject {
   @FindBy(id = NewGroupPanel.TAGS_FIELD + SeleniumConstants.INPUT)
   public WebElement tags;
 
+  public void create(final String sufix, final String shortname, final String longname,
+      final String description, final String tagsS, final GroupType groupType) {
+    shortName.sendKeys(shortname + sufix);
+    longName.sendKeys(longname + " " + sufix);
+    publicDescription.sendKeys(description);
+    tags.sendKeys(tagsS);
+
+    switch (groupType) {
+    case PROJECT:
+      projectType.click();
+      showTooltip(projectType);
+      break;
+    case ORGANIZATION:
+      orgType.click();
+      showTooltip(orgType);
+      break;
+    case CLOSED:
+      closedType.click();
+      showTooltip(closedType);
+      break;
+    case COMMUNITY:
+      closedType.click();
+      showTooltip(communityType);
+      break;
+    default:
+      throw new UIException("New group types?");
+    }
+    SeleniumUtils.doScreenshot(getWebDriver(), "newgroup");
+    registerBtn.click();
+  }
 }

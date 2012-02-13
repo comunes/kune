@@ -16,5 +16,5 @@ RHEIGHT=649
 
 if [[ $? -eq 0 ]]
 then
-  recordmydesktop -x 0 -y 83 --width $RWIDTH --height $RHEIGHT --fps 25 --no-sound -o doc/screencasts/kune-screencast.ogv
+  recordmydesktop -x 0 -y 83 --width $RWIDTH --height $RHEIGHT --fps 25 --no-sound -o docs/screencasts/kune-screencast.ogv
 fi

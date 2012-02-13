@@ -37,6 +37,7 @@ import com.google.inject.Inject;
 public class TasksClientTool extends FoldableAbstractClientTool {
 
   private static final String NO_TASK = "There isn't any task";
+  private final IconicResources icons;
 
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
@@ -47,6 +48,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
         icons.tasks(), toolSelector, cntCapRegistry, i18n, navResources);
+    this.icons = icons;
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_TASK);
@@ -66,7 +68,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOT, navResources.taskfolder());
+    registerContentTypeIcon(TYPE_ROOT, icons.tasks());
     registerContentTypeIcon(TYPE_FOLDER, navResources.taskfolder());
     registerContentTypeIcon(TYPE_TASK, navResources.task());
     registerContentTypeIcon(TYPE_TASK, ContentStatus.inTheDustbin, navResources.taskdone());

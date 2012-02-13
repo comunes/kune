@@ -26,11 +26,14 @@ import com.google.inject.Inject;
 
 public class ContentViewerOptionsMenu extends MenuDescriptor {
 
+  private static final String ID = "k-cnt-viewer-opt-menu";
+
   @Inject
   public ContentViewerOptionsMenu(final CoreResources res) {
     super();
     this.withIcon(res.arrowdownsitebar()).withStyles(
-        "k-def-docbtn, k-fr, k-noborder, k-no-backimage, k-nobackcolor");
+        "k-def-docbtn, k-fr, k-noborder, k-no-backimage, k-nobackcolor").withId(ID);
+
   }
 
 }

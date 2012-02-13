@@ -134,8 +134,8 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   private void createDialog() {
     final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal, direction).autoscroll(
-        true).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(
-        dialogId).sndButtonTitle(sndBtnTitle).sndButtonId(sndBtnId).title(title);
+        true).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonTitle(
+        sndBtnTitle).sndButtonId(sndBtnId).title(title);
     if (width != NO_SIZE) {
       builder.width(String.valueOf(width + 20) + "px");
     }

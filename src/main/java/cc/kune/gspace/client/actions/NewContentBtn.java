@@ -26,6 +26,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import com.google.gwt.resources.client.ImageResource;
 
 public abstract class NewContentBtn extends ButtonDescriptor {
+  public static final String BTN_ID = "k-newctn-id";
 
   public NewContentBtn(final I18nTranslationService i18n, final NewContentAction action,
       final ImageResource icon, final GlobalShortcutRegister shorcutReg, final String title,
@@ -33,6 +34,7 @@ public abstract class NewContentBtn extends ButtonDescriptor {
     super(action);
     action.putValue(NewContentAction.NEW_NAME, newName);
     action.putValue(NewContentAction.ID, id);
-    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fl");
+    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fl").withId(
+        BTN_ID);
   }
 }

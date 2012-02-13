@@ -43,10 +43,10 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class NewListAction extends RolAction {
-  private static final String CANCEL_ID = "k-nla-cancel";
-  private static final String CREATE_ID = "k-nla-create";
-  private static final String ID = "k-nla-dialog";
-  private static final String TEXTBOX_ID = "k-nla-textbox";
+  public static final String CANCEL_ID = "k-nla-cancel";
+  public static final String CREATE_ID = "k-nla-create";
+  public static final String ID = "k-nla-dialog";
+  public static final String TEXTBOX_ID = "k-nla-textbox";
 
   private final ContentCache cache;
   private final FolderViewerPresenter folderViewer;

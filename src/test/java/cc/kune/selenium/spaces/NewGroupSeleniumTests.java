@@ -21,7 +21,6 @@ package cc.kune.selenium.spaces;
 
 import org.testng.annotations.Test;
 
-import cc.kune.common.client.errors.UIException;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.selenium.KuneSeleniumTest;
 import cc.kune.selenium.SeleniumConstants;
@@ -30,41 +29,19 @@ import cc.kune.selenium.SeleniumUtils;
 public class NewGroupSeleniumTests extends KuneSeleniumTest {
 
   @Test(dataProvider = "newGroups")
-  public void basicSignIn(final String shortname, final String longname, final GroupType groupType) {
-    SeleniumUtils.fastSpeed(true);
+  public void basicSignIn(final String shortname, final String longname, final String description,
+      final String tags, final GroupType groupType) {
+    SeleniumUtils.fastSpeed(false);
     login.assertIsDisconnected();
 
     login.signIn(SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_PASSWD);
     login.assertIsConnectedAs(SeleniumConstants.USER_SHORNAME);
-    site.groupSpaceBtn.click();
-    site.newGroupBtn.click();
 
-    final String prefix = getTempString();
+    final String sufix = getTempString();
 
-    newGroup.shortName.sendKeys(shortname + prefix);
-    final String longNameTranslated = t(longname) + " " + prefix;
-    newGroup.longName.sendKeys(longNameTranslated);
-    newGroup.publicDescription.sendKeys(t("This is only a test group"));
-    newGroup.tags.sendKeys("tag1 tag2");
-    switch (groupType) {
-    case PROJECT:
-      newGroup.projectType.click();
-      break;
-    case ORGANIZATION:
-      newGroup.orgType.click();
-      break;
-    case CLOSED:
-      newGroup.closedType.click();
-      break;
-    case COMMUNITY:
-      newGroup.closedType.click();
-      break;
-    default:
-      throw new UIException("New group types?");
-    }
-    newGroup.registerBtn.click();
+    groupCreation(shortname, longname, description, tags, groupType, sufix);
 
-    entityHeader.waitForEntityTitle(longNameTranslated);
+    logout();
 
     login.assertIsDisconnected();
   }

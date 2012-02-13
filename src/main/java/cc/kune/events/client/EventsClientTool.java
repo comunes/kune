@@ -34,12 +34,15 @@ import com.google.inject.Inject;
 
 public class EventsClientTool extends FoldableAbstractClientTool {
 
+  private final IconicResources icons;
+
   @Inject
   public EventsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
     super(NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
         icons.events(), toolSelector, cntCapRegistry, i18n, navResources);
+    this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_MEETING);
@@ -60,7 +63,7 @@ public class EventsClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOT, navResources.folder());
+    registerContentTypeIcon(TYPE_ROOT, icons.events());
     registerContentTypeIcon(TYPE_MEETING, navResources.calendar());
     registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any meeting, create one"));
     registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t("There isn't any meeting"));

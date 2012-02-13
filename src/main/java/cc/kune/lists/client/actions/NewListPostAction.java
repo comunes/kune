@@ -46,10 +46,10 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class NewListPostAction extends RolAction {
-  private static final String CANCEL_ID = "k-nlistpa-cancel";
-  private static final String CREATE_ID = "k-nlistpa-create";
-  private static final String ID = "k-nlistpa-dialog";
-  private static final String TEXTBOX_ID = "k-nlistpa-textbox";
+  public static final String CANCEL_ID = "k-nlistpa-cancel";
+  public static final String CREATE_ID = "k-nlistpa-create";
+  public static final String ID = "k-nlistpa-dialog";
+  public static final String TEXTBOX_ID = "k-nlistpa-textbox";
 
   private final ContentCache cache;
   private final FolderViewerPresenter folderViewer;

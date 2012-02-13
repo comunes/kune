@@ -31,6 +31,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
@@ -49,6 +50,15 @@ public class SeleniumUtils {
     } catch (final IOException e) {
       LOG.info("Cannot take the screen shot", e);
     }
+  }
+
+  public static void doubleClick(final WebDriver webdriver, final WebElement element) {
+    SeleniumUtils.moveMouseTo(webdriver, element);
+    sleep(300);
+    SeleniumUtils.hightlight(element, webdriver);
+    final Actions builder = new Actions(webdriver);
+    final Action doubleClick = builder.doubleClick(element).build();
+    doubleClick.perform();
   }
 
   public static void fastSpeed(final boolean fastSpeed) {
@@ -82,8 +92,29 @@ public class SeleniumUtils {
   }
 
   public static void moveMouseTo(final WebDriver webdriver, final WebElement element) {
+    SeleniumUtils.showCursor(webdriver, element);
+    final Actions builder = new Actions(webdriver);
+    final Action action = builder.moveToElement(element).build();
+    action.perform();
+  }
+
+  public static void moveMouseTo(final WebDriver webdriver, final WebElement element, final int xOffset,
+      final int yOffset) {
+    showCursor(webdriver, element, xOffset, yOffset);
     final Actions actions = new Actions(webdriver);
-    actions.moveToElement(element);
+    actions.moveToElement(element, xOffset, yOffset);
+    final Action action = actions.build();
+    action.perform();
+  }
+
+  public static void moveMouseToAndClick(final WebDriver webdriver, final WebElement element,
+      final int xOffset, final int yOffset) {
+    // showCursor(webdriver, element, xOffset, yOffset);
+    final Actions actions = new Actions(webdriver);
+    actions.moveToElement(element, xOffset, yOffset);
+    actions.click();
+    final Action action = actions.build();
+    action.perform();
   }
 
   public static void showCursor(final WebDriver webdriver) {
@@ -92,12 +123,18 @@ public class SeleniumUtils {
 
   public static void showCursor(final WebDriver webdriver, final int x, final int y) {
     // LOG.info("Mover cursor to x: " + x + ", y: " + y);
-    jsExec(webdriver).executeScript("kmove(" + x + "," + y + ");");
+    jsExec(webdriver).executeScript("kmove(" + (x + 15) + "," + (y + 3) + ");");
   }
 
   public static void showCursor(final WebDriver webdriver, final WebElement element) {
     final Point location = element.getLocation();
     showCursor(webdriver, location.getX(), location.getY());
+  }
+
+  public static void showCursor(final WebDriver webdriver, final WebElement element, final int xOffset,
+      final int yOffset) {
+    final Point location = element.getLocation();
+    SeleniumUtils.showCursor(webdriver, location.getX() + xOffset, location.getY() + yOffset);
   }
 
   public static void showMsg(final WebDriver webdriver, final String header, final String msg) {

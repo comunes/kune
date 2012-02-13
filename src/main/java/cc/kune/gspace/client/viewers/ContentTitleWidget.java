@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 
 public class ContentTitleWidget extends Composite {
+  public static final String ID = "k-cnt-title-id";
   private final EditableLabel editableTitle;
   private final GSpaceArmor gsArmor;
   private final I18nTranslationService i18n;
@@ -51,6 +52,7 @@ public class ContentTitleWidget extends Composite {
     flow.add(titleIcon);
     flow.add(editableTitle);
     initWidget(flow);
+    ensureDebugId(ID);
   }
 
   public void edit() {

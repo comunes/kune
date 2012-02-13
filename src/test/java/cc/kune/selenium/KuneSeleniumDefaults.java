@@ -73,6 +73,7 @@ public class KuneSeleniumDefaults {
   protected NewGroupPageObject newGroup;
   protected RegisterPageObject register;
   protected final SitePageObject site;
+  private WebElement subtitlePopup;
   protected UserSpacePageObject userSpace;
   private final WebDriver webdriver;
 
@@ -173,6 +174,13 @@ public class KuneSeleniumDefaults {
     webdriver.get(url);
   }
 
+  public String getCurrentHistoryToken() {
+    final String currentUrl = webdriver.getCurrentUrl();
+    LOG.info(String.format("Current url: %s", currentUrl));
+    final String[] splitted = currentUrl.split("#");
+    return splitted.length > 1 ? splitted[1] : "";
+  }
+
   public String getPageSource() {
     return webdriver.getPageSource();
   }
@@ -192,9 +200,10 @@ public class KuneSeleniumDefaults {
 
   @DataProvider(name = "newGroups")
   public Object[][] newGroups() {
-    return new Object[][] { { "grp0", "Ecologist Group", GroupType.PROJECT },
-        { "grp1", "Chomsky Fan Club", GroupType.ORGANIZATION }, { "grp2", "吗台湾", GroupType.CLOSED },
-        { "grp3", "روبا", GroupType.COMMUNITY } };
+    return new Object[][] { { "grp1", "吗台湾", "吗台湾 吗台湾 吗台湾 吗台湾", "吗 台湾", GroupType.CLOSED },
+        { "grp2", "Chomsky Fan Club", "Some chomsky fan club", "chomsky", GroupType.ORGANIZATION },
+        { "grp3", "روبا", "روبا روبا روبا روبا", "روبا", GroupType.COMMUNITY },
+        { "grp0", "Ecologist Group", "Melbourne eco feminist group", "eco feminism", GroupType.PROJECT } };
   }
 
   public void open(final String url) {
@@ -213,6 +222,26 @@ public class KuneSeleniumDefaults {
     // js.executeScript("window.resizeTo(806,707); window.moveTo(0,0);");
   }
 
+  /**
+   * Send keys but in a slow way (word by word)
+   * 
+   * @param element
+   *          the element
+   * @param strings
+   *          the strings
+   */
+  public void sendKeys(final WebElement element, final String... strings) {
+    for (final String s : strings) {
+      final String[] splitted = s.split(" ");
+      for (int i = 0; i < splitted.length; i++) {
+        element.sendKeys(splitted[i]);
+        if (i < splitted.length - 1) {
+          element.sendKeys(" ");
+        }
+      }
+    }
+  }
+
   public void showCursor(final int x, final int y) {
     SeleniumUtils.showCursor(webdriver, x, y);
   }
@@ -226,17 +255,22 @@ public class KuneSeleniumDefaults {
   }
 
   public void showTitleSlide(final String title) {
-    showTitleSlide(title, "", "");
+    showTitleSlide(title, "", getCurrentHistoryToken());
   }
 
   public void showTitleSlide(final String title, final String description) {
-    showTitleSlide(title, description, "");
+    showTitleSlide(title, description, getCurrentHistoryToken());
   }
 
   public void showTitleSlide(final String title, final String description, final String token) {
     gotoToken(TokenUtils.subtitle(title, description, token));
     sleep(4000);
-    webdriver.findElement(By.id(SeleniumConstants.GWTDEV + SubtitlesWidget.SUBTITLE_MANAGER_ID)).click();
+    if (subtitlePopup == null) {
+      subtitlePopup = webdriver.findElement(By.id(SeleniumConstants.GWTDEV
+          + SubtitlesWidget.SUBTITLE_MANAGER_ID));
+    }
+    subtitlePopup.click();
+    // SeleniumUtils.moveMouseToAndClick(webdriver, subtitlePopup, 100, 100);
   }
 
   public void showTooltip(final WebElement element) {

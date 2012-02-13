@@ -31,10 +31,12 @@ import com.google.inject.Provider;
  */
 public abstract class NewMenuProvider implements Provider<MenuDescriptor> {
 
+  public static final String MENU_ID = "k-newmenu-id";
   private final AbstractNewMenu menu;
 
   public NewMenuProvider(final AbstractNewMenu menu) {
     this.menu = menu;
+    menu.setId(MENU_ID);
   }
 
   @Override

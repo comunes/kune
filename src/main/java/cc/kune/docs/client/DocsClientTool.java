@@ -37,6 +37,7 @@ import com.google.inject.Inject;
 public class DocsClientTool extends FoldableAbstractClientTool {
 
   private static final String EMPTY_CREATE_SOME = "This folder is empty. You can create some document or folder here.";
+  private final IconicResources icons;
 
   @Inject
   public DocsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
@@ -47,6 +48,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
         i18n.t(DocsConstants.ROOT_NAME),
         i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs can be static pages in your web page if you publish them"),
         icons.docs(), toolSelector, cntCapRegistry, i18n, navResources);
+    this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -67,7 +69,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
 
   private void registerIcons() {
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
-    registerContentTypeIcon(TYPE_ROOT, navResources.folder());
+    registerContentTypeIcon(TYPE_ROOT, icons.docs());
     registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessagesNotLogged(TYPE_FOLDER, i18n.t(EMPTY));

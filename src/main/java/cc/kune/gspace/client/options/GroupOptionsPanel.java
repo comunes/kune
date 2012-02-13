@@ -32,14 +32,15 @@ import com.google.inject.Inject;
 public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements GroupOptionsView {
 
   public static final String GROUP_OP_PANEL_ID = "k-gop-diagpan";
+  public static final String GROUP_OP_PANEL_ID_CLOSE = GROUP_OP_PANEL_ID + "-close";
   public static final String GROUP_OPTIONS_ERROR_ID = "k-gop-err-mess";
   private final EntityHeader entityHeader;
 
   @Inject
   public GroupOptionsPanel(final EntityHeader entityHeader, final I18nTranslationService i18n,
       final NotifyLevelImages images, final GroupOptionsCollection entityOptionsGroup) {
-    super(GROUP_OP_PANEL_ID, "", false, false, images, GROUP_OPTIONS_ERROR_ID, i18n.t("Close"), null,
-        null, null, entityOptionsGroup, i18n.getDirection());
+    super(GROUP_OP_PANEL_ID, "", false, false, images, GROUP_OPTIONS_ERROR_ID, i18n.t("Close"),
+        GROUP_OP_PANEL_ID_CLOSE, null, null, entityOptionsGroup, i18n.getDirection());
     this.entityHeader = entityHeader;
     super.setIconCls("k-options-icon");
     super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE));

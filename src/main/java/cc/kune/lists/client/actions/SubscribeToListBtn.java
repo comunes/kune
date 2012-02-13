@@ -28,6 +28,8 @@ import com.google.inject.Inject;
 
 public class SubscribeToListBtn extends ButtonDescriptor {
 
+  public static final String ID = "k-list-subs";
+
   @Inject
   public SubscribeToListBtn(final I18nTranslationService i18n, final SubscriteToListAction action,
       final Session session, final CoreResources res) {
@@ -46,5 +48,6 @@ public class SubscribeToListBtn extends ButtonDescriptor {
       withIcon(res.remove());
       withToolTip(i18n.t("Unsubscribe to this list"));
     }
+    withId(ID);
   }
 }

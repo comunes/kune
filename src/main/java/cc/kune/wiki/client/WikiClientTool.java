@@ -36,6 +36,7 @@ import com.google.inject.Inject;
 public class WikiClientTool extends FoldableAbstractClientTool {
 
   private static final String EMPTY_FOLDER = "This folder is empty, create some wikipage or folder";
+  private final IconicResources icons;
 
   @Inject
   public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
@@ -47,6 +48,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
         i18n.t(
             "Wiki-pages are Documents that can be edited by any visitor (in [%s]), instead of only by the group. This accelerates updating and construction",
             i18n.getSiteCommonName()), icons.wikis(), toolSelector, cntCapRegistry, i18n, navResources);
+    this.icons = icons;
 
     registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
     registerDragableTypes(TYPE_WIKIPAGE, TYPE_FOLDER, TYPE_UPLOADEDFILE);
@@ -66,7 +68,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
 
   private void registerIcons() {
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
-    registerContentTypeIcon(TYPE_ROOT, navResources.folder());
+    registerContentTypeIcon(TYPE_ROOT, icons.wikis());
     registerContentTypeIcon(TYPE_WIKIPAGE, navResources.wikipage());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessages(TYPE_FOLDER, i18n.t(EMPTY_FOLDER));

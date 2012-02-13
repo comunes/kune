@@ -37,6 +37,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGeneralView {
+  public static final String TAB_ID = "k-eodlp-gen-id";
   private final MaskWidget maskWidget;
   private final IconLabel tabTitle;
 
@@ -44,7 +45,7 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
       final String introMessage) {
     this.maskWidget = maskWidget;
 
-    tabTitle = TabTitleGenerator.generate(img, title, MAX_TABTITLE_LENGTH);
+    tabTitle = TabTitleGenerator.generate(img, title, MAX_TABTITLE_LENGTH, TAB_ID);
     super.setWidth(EntityOptionsView.WIDTH);
     super.setFrame(true);
     super.getFormPanel().setLabelWidth(100);

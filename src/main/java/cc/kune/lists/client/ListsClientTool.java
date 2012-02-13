@@ -35,6 +35,8 @@ import com.google.inject.Inject;
 
 public class ListsClientTool extends FoldableAbstractClientTool {
 
+  private final IconicResources icons;
+
   @Inject
   public ListsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
@@ -44,6 +46,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
         i18n.t(ROOT_NAME),
         i18n.t("Lists behave like a mailing list or a forum. You can subscribe and discuss about specific topics"),
         icons.lists(), toolSelector, cntCapRegistry, i18n, navResources);
+    this.icons = icons;
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST);
@@ -63,7 +66,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOT, navResources.list());
+    registerContentTypeIcon(TYPE_ROOT, icons.lists());
     registerContentTypeIcon(TYPE_LIST, navResources.list());
     registerContentTypeIcon(TYPE_POST, navResources.email());
     final String noWave = i18n.t("There is nothing posted yet. Post something");

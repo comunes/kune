@@ -39,12 +39,13 @@ import com.google.gwt.user.client.ui.Label;
 
 public class EntityOptDefLicensePanel extends Composite implements EntityOptDefLicenseView {
 
+  public static final String TAB_ID = "k-eodlp-lic-id";
   private final Button change;
   private final Image licenseImage;
   private final IconLabel tabTitle;
 
   public EntityOptDefLicensePanel(final I18nTranslationService i18n, final CoreResources res) {
-    tabTitle = TabTitleGenerator.generate(res.copyleft(), i18n.t("License"), MAX_TABTITLE_LENGTH);
+    tabTitle = TabTitleGenerator.generate(res.copyleft(), i18n.t("License"), MAX_TABTITLE_LENGTH, TAB_ID);
     final FlowPanel flow = new FlowPanel();
     final Label intro = new Label();
     intro.setWordWrap(true);

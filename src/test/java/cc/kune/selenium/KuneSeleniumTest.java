@@ -23,6 +23,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import cc.kune.core.shared.dto.GroupType;
+
 /**
  * Shared behaviour in selenium tests
  */
@@ -32,6 +34,125 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
     final DateFormat dateFormat = new SimpleDateFormat("yyMMddHHmm");
     final String value = dateFormat.format(new Date());
     return value;
+  }
+
+  public void groupCreation(final String shortname, final String longname, final String description,
+      final String tags, final GroupType groupType, final String sufix) {
+
+    site.groupSpaceBtn.click();
+    showTitleSlide(t("Group space (collaboration space)"),
+        t("Here you can create groups and collaborate within them"));
+    // showMsg(t("Let's create a new group"));
+    // sleep(<1000);
+    site.newGroupBtn.click();
+
+    newGroup.create(sufix, shortname, longname, description, tags, groupType);
+
+    entityHeader.waitForEntityTitle(longname);
+    sleep(1000);
+
+    showTitleSlide(t("Group space (collaboration space) II "), t("Let's see the group preferences"));
+
+    groupSpace.groupOptions.click();
+    sleep(1000);
+    groupSpace.groupOptionsTools.click();
+    sleep(1000);
+    doScreenshot("groupOptions");
+    groupSpace.groupOptionsLicense.click();
+    sleep(2000);
+    groupSpace.groupOptionsClose.click();
+
+    groupSpace.socialNetOptions.click();
+    doScreenshot("socialNetOptions");
+    sleep(3000);
+
+    showTitleSlide(t("Group space (collaboration space) III "),
+        t("Let's see the different tools you have available"));
+
+    showTooltip(groupSpace.firstFolderItem);
+    sleep(1500);
+    groupSpace.openFirtsContent();
+
+    groupSpace.entityTitle.click();
+    sendKeys(groupSpace.entityTitleTextarea, t("About us\n"));
+    sleep(2000);
+
+    groupSpace.goParentBtn.click();
+    groupSpace.newContainerBtn.click();
+    groupSpace.entityTitle.click();
+    groupSpace.entityTitleTextarea.sendKeys(t("Archive\n"));
+    sleep(1000);
+    groupSpace.goParentBtn.click();
+    groupSpace.newMenuBtn.click();
+    sleep(2000);
+    // FIXME move content?
+
+    groupSpace.blogTool.click();
+    groupSpace.openFirtsContent();
+    sleep(2000);
+    groupSpace.newContentBtn.click();
+    sleep(1000);
+    groupSpace.goParentBtn.click();
+
+    groupSpace.chatTool.click();
+    showTooltip(groupSpace.chatTool);
+    sleep(2000);
+    groupSpace.openFirtsContent();
+    sleep(2000);
+    groupSpace.openRoomBtn.click();
+    sleep(2000);
+    chat.chatIcon.click();
+
+    groupSpace.listTool.click();
+    showTooltip(groupSpace.listTool);
+    sleep(2000);
+    groupSpace.newContainerBtn.click();
+    sleep(1000);
+    groupSpace.newListText.sendKeys(t("News"));
+    sleep(1000);
+    groupSpace.newListCreateBtn.click();
+    sleep(1000);
+    groupSpace.listSubscribeBtn.click();
+    sleep(2000);
+    doScreenshot("newlist");
+
+    groupSpace.newContentBtn.click();
+    sleep(1000);
+    groupSpace.newListPostText.sendKeys(t("Welcome to this list"));
+    sleep(1000);
+    groupSpace.newListPostCreateBtn.click();
+    sleep(1000);
+    groupSpace.goParentBtn.click();
+    // sleep(2000);
+
+    site.userSpaceBtn.click();
+    showMsg(t("All new contents are shown also in your Inbox"));
+    sleep(2000);
+    // userSpace.getFirstWave().click();
+    // sleep(1000);
+    site.groupSpaceBtn.click();
+
+    groupSpace.eventTool.click();
+    showTooltip(groupSpace.eventTool);
+    sleep(2000);
+    doScreenshot("calendar");
+    // groupSpace.openFirtsContent();
+    // sleep(2000);
+
+    groupSpace.taskTool.click();
+    showTooltip(groupSpace.taskTool);
+    sleep(2000);
+    groupSpace.openFirtsContent();
+    sleep(2000);
+    doScreenshot("tasks");
+    groupSpace.openFirtsContent();
+    sleep(2000);
+
+    groupSpace.wikiTool.click();
+    showTooltip(groupSpace.wikiTool);
+    sleep(2000);
+    groupSpace.openFirtsContent();
+    sleep(3000);
   }
 
   protected void login() {

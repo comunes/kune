@@ -46,6 +46,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
   public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
       + "servlets/EntityBackgroundUploadManager";
+  public static final String TAB_ID = "k-eodlp-style-id";
   private final Label backgroundLabel;
   private final Image backImage;
   private final String changeImage;
@@ -60,7 +61,8 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   public EntityOptStylePanel(final I18nTranslationService i18n, final CoreResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
     this.i18n = i18n;
-    tabTitle = TabTitleGenerator.generate(res.themeChoose(), i18n.t("Style"), MAX_TABTITLE_LENGTH);
+    tabTitle = TabTitleGenerator.generate(res.themeChoose(), i18n.t("Style"), MAX_TABTITLE_LENGTH,
+        TAB_ID);
     // super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     super.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
 

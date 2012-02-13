@@ -32,14 +32,17 @@ public class TabTitleGenerator {
     return TextUtils.ellipsis(title, maxLength);
   }
 
-  public static IconLabel generate(final ImageResource res, final String title) {
-    final IconLabel tabTitle = new IconLabel(res, title);
+  public static IconLabel generate(final ImageResource res, final String title, final int maxLength,
+      final String id) {
+    final IconLabel tabTitle = new IconLabel(res, format(title, maxLength));
+    setTooltip(title, maxLength, tabTitle);
+    tabTitle.ensureDebugId(id);
     return tabTitle;
   }
 
-  public static IconLabel generate(final ImageResource res, final String title, final int maxLength) {
-    final IconLabel tabTitle = new IconLabel(res, format(title, maxLength));
-    setTooltip(title, maxLength, tabTitle);
+  public static IconLabel generate(final ImageResource res, final String title, final String id) {
+    final IconLabel tabTitle = new IconLabel(res, title);
+    tabTitle.ensureDebugId(id);
     return tabTitle;
   }
 

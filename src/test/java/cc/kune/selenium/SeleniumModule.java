@@ -104,9 +104,14 @@ public class SeleniumModule extends PageObjectModule {
   private FirefoxDriver creatFirefoxDriver() {
     // http://code.google.com/p/selenium/wiki/FirefoxDriver
     System.setProperty("webdriver.firefox.useExisting", "true");
+
     final ProfilesIni allProfiles = new ProfilesIni();
     final FirefoxProfile profile = allProfiles.getProfile(SeleniumConstants.FIREFOX_PROFILE_NAME);
     // final FirefoxProfile profile = allProfiles.getProfile("76tp2vh0.ff5");
+
+    // http://code.google.com/p/selenium/wiki/AdvancedUserInteractions#Mouse
+    // profile.setEnableNativeEvents(true);
+
     final FirefoxDriver driver = new FirefoxDriver(profile);
     return driver;
   }

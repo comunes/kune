@@ -42,6 +42,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsView {
+  public static final String TAB_ID = "k-eodlp-tools-id";
   private final HashMap<String, CheckBox> fields;
   private final I18nTranslationService i18n;
   private final MaskWidget maskWidget;
@@ -50,7 +51,8 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
   public EntityOptToolsPanel(final I18nTranslationService i18n, final CoreResources res,
       final MaskWidget maskWidget) {
     this.maskWidget = maskWidget;
-    tabTitle = TabTitleGenerator.generate(res.kunePreferences(), i18n.t("Tools"), MAX_TABTITLE_LENGTH);
+    tabTitle = TabTitleGenerator.generate(res.kunePreferences(), i18n.t("Tools"), MAX_TABTITLE_LENGTH,
+        TAB_ID);
     this.i18n = i18n;
     // super.setHeight(EntityOptionsView.HEIGHT);
     super.setWidth(EntityOptionsView.WIDTH);

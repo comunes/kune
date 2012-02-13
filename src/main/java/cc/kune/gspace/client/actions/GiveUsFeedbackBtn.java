@@ -28,6 +28,8 @@ import com.google.inject.Inject;
 
 public class GiveUsFeedbackBtn extends ButtonDescriptor {
 
+  public static final String ID = "k-give-feedback-btn";
+
   @Inject
   public GiveUsFeedbackBtn(final GiveUsFeedbackAction action, final I18nUITranslationService i18n,
       final NavResources res, final GSpaceArmor armor) {
@@ -37,6 +39,7 @@ public class GiveUsFeedbackBtn extends ButtonDescriptor {
     withToolTip(i18n.t("Write us with some feedback for help us to improve the services on [%s]",
         i18n.getSiteCommonName()));
     withStyles("k-noborder, k-nobackcolor, k-no-backimage, k-fl");
+    withId(ID);
     armor.getEntityFooterToolbar().add(this);
   }
 

@@ -27,10 +27,13 @@ import com.google.inject.Inject;
 
 public class OpenRoomBtn extends ButtonDescriptor {
 
+  public static final String ID = "k-open-room";
+
   @Inject
   public OpenRoomBtn(final I18nTranslationService i18n, final OpenChatAction action,
       final NavResources res) {
     super(action);
-    this.withText(i18n.t("Enter to this room")).withIcon(res.room()).withStyles("k-def-docbtn, k-fl");
+    withText(i18n.t("Enter to this room")).withIcon(res.room()).withStyles("k-def-docbtn, k-fl");
+    withId(ID);
   }
 }

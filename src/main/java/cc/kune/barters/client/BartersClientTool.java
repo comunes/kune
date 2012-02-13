@@ -35,6 +35,7 @@ import com.google.inject.Inject;
 public class BartersClientTool extends FoldableAbstractClientTool {
 
   private static final String THERE_ISN_T_ANY_BARTER = "There isn't any barter. ";
+  private final IconicResources icons;
 
   @Inject
   public BartersClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
@@ -45,6 +46,7 @@ public class BartersClientTool extends FoldableAbstractClientTool {
         i18n.t("barters"),
         i18n.t("A decentralized way to offer (or ask for) services and goods to your groups or to anyone. Bartering means the exchange of goods by the agreement of two people"),
         icons.barters(), toolSelector, cntCapRegistry, i18n, navResources);
+    this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_BARTER);
@@ -65,7 +67,7 @@ public class BartersClientTool extends FoldableAbstractClientTool {
 
   private void registerIcons() {
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
-    registerContentTypeIcon(TYPE_ROOT, navResources.folder());
+    registerContentTypeIcon(TYPE_ROOT, icons.barters());
     registerContentTypeIcon(TYPE_BARTER, navResources.barter());
     registerEmptyMessages(TYPE_FOLDER, i18n.t(THERE_ISN_T_ANY_BARTER + "You can create some here"));
     registerEmptyMessages(TYPE_ROOT, i18n.t(THERE_ISN_T_ANY_BARTER));

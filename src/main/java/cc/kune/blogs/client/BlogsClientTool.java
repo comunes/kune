@@ -36,6 +36,8 @@ import com.google.inject.Inject;
 
 public class BlogsClientTool extends FoldableAbstractClientTool {
 
+  private final IconicResources icons;
+
   @Inject
   public BlogsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
@@ -45,6 +47,7 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
         i18n.t(BlogsConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
         icons.blogs(), toolSelector, cntCapRegistry, i18n, navResources);
+    this.icons = icons;
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
@@ -64,7 +67,7 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOT, navResources.blog());
+    registerContentTypeIcon(TYPE_ROOT, icons.blogs());
     registerContentTypeIcon(TYPE_BLOG, navResources.blog());
     registerContentTypeIcon(TYPE_POST, navResources.post());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);

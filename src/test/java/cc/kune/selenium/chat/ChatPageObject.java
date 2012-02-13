@@ -36,7 +36,7 @@ public class ChatPageObject extends PageObject {
   @FindBy(id = SeleniumConstants.GWTDEV + "OpenChatWidget-addToRoster" + SeleniumConstants.INPUT)
   private WebElement addToRoster;
   @FindBy(id = SeleniumConstants.GWTDEV + ChatClient.CHAT_CLIENT_ICON_ID)
-  private WebElement chatIcon;
+  public WebElement chatIcon;
   @FindBy(xpath = "//div[14]/div/div/div/div/div/table/tbody/tr/td[2]/div")
   private WebElement closeChat;
   @FindBy(id = "//div[3]/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div")

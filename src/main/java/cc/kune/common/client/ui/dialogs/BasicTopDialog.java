@@ -134,6 +134,8 @@ public class BasicTopDialog extends BasicDialog {
 
   }
 
+  public static final String CLOSE_ID = "-close";
+
   private HandlerRegistration closeClickHandler;
   private String height;
   private final PopupTopPanel popup;
@@ -143,6 +145,7 @@ public class BasicTopDialog extends BasicDialog {
     popup = new PopupTopPanel(builder.autohide, builder.modal);
     popup.add(this);
     popup.ensureDebugId(builder.dialogId);
+    closeBtn.ensureDebugId(builder.dialogId + CLOSE_ID);
     super.getTitleText().setText(builder.title, builder.direction);
     if (TextUtils.notEmpty(builder.icon)) {
       super.setTitleIcon(builder.icon);

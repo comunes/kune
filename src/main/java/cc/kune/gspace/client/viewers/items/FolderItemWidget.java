@@ -49,6 +49,8 @@ public class FolderItemWidget extends Composite implements HasText {
   interface FolderItemWidgetUiBinder extends UiBinder<Widget, FolderItemWidget> {
   }
 
+  public static final String MENU_ID = "-menu";
+
   private static FolderItemWidgetUiBinder uiBinder = GWT.create(FolderItemWidgetUiBinder.class);
 
   @UiField
@@ -66,11 +68,14 @@ public class FolderItemWidget extends Composite implements HasText {
 
   private final StateToken token;
 
-  public FolderItemWidget(final ImageResource iconResource, final String title, final StateToken token) {
+  public FolderItemWidget(final ImageResource iconResource, final String title, final StateToken token,
+      final String id) {
     this.token = token;
     initWidget(uiBinder.createAndBindUi(this));
     this.title.setText(title);
     icon.setResource(iconResource);
+    this.ensureDebugId(id);
+    menu.ensureDebugId(id + MENU_ID);
   }
 
   private void clearFocusStyles() {

@@ -31,13 +31,14 @@ import com.google.inject.Inject;
 public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserOptionsView {
 
   public static final String USER_OP_PANEL_ID = "k-uop-diagpan";
+  public static final String USER_OP_PANEL_ID_CLOSE = USER_OP_PANEL_ID + "-close";
   public static final String USER_OPTIONS_ERROR_ID = "k-uop-err-mess";
 
   @Inject
   public UserOptionsPanel(final EntityHeader entityHeader, final I18nTranslationService i18n,
       final NotifyLevelImages images, final UserOptionsCollection userOptionsGroup) {
-    super(USER_OP_PANEL_ID, "", false, images, USER_OPTIONS_ERROR_ID, i18n.t("Close"), null, null, null,
-        userOptionsGroup, i18n.getDirection());
+    super(USER_OP_PANEL_ID, "", false, images, USER_OPTIONS_ERROR_ID, i18n.t("Close"),
+        USER_OP_PANEL_ID_CLOSE, null, null, userOptionsGroup, i18n.getDirection());
     super.setIconCls("k-options-icon");
     super.setTitle(i18n.t(CoreMessages.USER_OPTIONS_DIALOG_TITLE));
   }

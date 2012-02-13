@@ -42,6 +42,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
 
   public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
       + "servlets/EntityLogoUploadManager";
+  public static final String TAB_ID = "k-eodlp-logo-id";
   private final I18nTranslationService i18n;
   private final IconLabel tabTitle;
   private final EntityUploaderForm uploader;
@@ -50,7 +51,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
       final String panelId, final String buttonId, final String inputId, final NavResources res) {
     super();
     this.i18n = i18n;
-    tabTitle = TabTitleGenerator.generate(res.picture(), "");
+    tabTitle = TabTitleGenerator.generate(res.picture(), "", TAB_ID);
     uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, i18n.t("Choose"));
 
     initWidget(uploader);

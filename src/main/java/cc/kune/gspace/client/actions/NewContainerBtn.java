@@ -82,6 +82,7 @@ public class NewContainerBtn extends ButtonDescriptor {
 
   }
 
+  public static final String BTN_ID = "k-newctner-id";
   private static final String ID = "ctnernewid";
   private static final String NEW_NAME = "ctnernewname";
 
@@ -91,7 +92,9 @@ public class NewContainerBtn extends ButtonDescriptor {
     super(action);
     // The name given to this new content
     action.putValue(NEW_NAME, newName);
+    // The type id of the container
     action.putValue(ID, id);
-    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fl");
+    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fl").withId(
+        BTN_ID);
   }
 }
