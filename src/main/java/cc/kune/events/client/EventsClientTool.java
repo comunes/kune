@@ -25,6 +25,7 @@ import static cc.kune.events.shared.EventsConstants.TYPE_MEETING;
 import static cc.kune.events.shared.EventsConstants.TYPE_ROOT;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -35,9 +36,10 @@ public class EventsClientTool extends FoldableAbstractClientTool {
 
   @Inject
   public EventsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
-    super(NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"), toolSelector,
-        cntCapRegistry, i18n, navResources);
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
+      final IconicResources icons) {
+    super(NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
+        icons.events(), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_MEETING);

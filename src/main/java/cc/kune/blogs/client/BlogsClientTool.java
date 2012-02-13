@@ -27,6 +27,7 @@ import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -37,12 +38,13 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
 
   @Inject
   public BlogsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
+      final IconicResources icons) {
     super(
         NAME,
         i18n.t(BlogsConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
-        toolSelector, cntCapRegistry, i18n, navResources);
+        icons.blogs(), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);

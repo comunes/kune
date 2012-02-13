@@ -26,6 +26,7 @@ import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
 import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.docs.shared.DocsConstants;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -39,12 +40,13 @@ public class DocsClientTool extends FoldableAbstractClientTool {
 
   @Inject
   public DocsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
+      final IconicResources icons) {
     super(
         NAME,
         i18n.t(DocsConstants.ROOT_NAME),
         i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs can be static pages in your web page if you publish them"),
-        toolSelector, cntCapRegistry, i18n, navResources);
+        icons.docs(), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);

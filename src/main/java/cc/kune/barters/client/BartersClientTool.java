@@ -25,6 +25,7 @@ import static cc.kune.barters.shared.BartersConstants.TYPE_FOLDER;
 import static cc.kune.barters.shared.BartersConstants.TYPE_ROOT;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -37,12 +38,13 @@ public class BartersClientTool extends FoldableAbstractClientTool {
 
   @Inject
   public BartersClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
+      final IconicResources icons) {
     super(
         NAME,
         i18n.t("barters"),
         i18n.t("A decentralized way to offer (or ask for) services and goods to your groups or to anyone. Bartering means the exchange of goods by the agreement of two people"),
-        toolSelector, cntCapRegistry, i18n, navResources);
+        icons.barters(), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_BARTER);

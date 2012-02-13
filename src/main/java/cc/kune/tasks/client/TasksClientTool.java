@@ -26,6 +26,7 @@ import static cc.kune.tasks.shared.TasksConstants.TYPE_ROOT;
 import static cc.kune.tasks.shared.TasksConstants.TYPE_TASK;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -39,12 +40,13 @@ public class TasksClientTool extends FoldableAbstractClientTool {
 
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
+      final IconicResources icons) {
     super(
         NAME,
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
-        toolSelector, cntCapRegistry, i18n, navResources);
+        icons.tasks(), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_TASK);

@@ -25,6 +25,7 @@ import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -38,14 +39,14 @@ public class ChatClientTool extends FoldableAbstractClientTool {
   @Inject
   public ChatClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final ChatResources res) {
+      final ChatResources res, final IconicResources icons) {
     // FIXME: change this in ChatConstants and in db via migration
     super(
         NAME,
         i18n.t("chatrooms"),
         i18n.t(
             "A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from [%s] or other sites (compatible with gmail chat)",
-            i18n.getSiteCommonName()), toolSelector, cntCapRegistry, i18n, navResources);
+            i18n.getSiteCommonName()), icons.chats(), toolSelector, cntCapRegistry, i18n, navResources);
     this.res = res;
     registerIcons();
   }

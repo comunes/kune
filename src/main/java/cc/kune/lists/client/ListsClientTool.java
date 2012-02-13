@@ -26,6 +26,7 @@ import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
 import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -36,12 +37,13 @@ public class ListsClientTool extends FoldableAbstractClientTool {
 
   @Inject
   public ListsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
+      final IconicResources icons) {
     super(
         NAME,
         i18n.t(ROOT_NAME),
         i18n.t("Lists behave like a mailing list or a forum. You can subscribe and discuss about specific topics"),
-        toolSelector, cntCapRegistry, i18n, navResources);
+        icons.lists(), toolSelector, cntCapRegistry, i18n, navResources);
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST);

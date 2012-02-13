@@ -17,23 +17,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.tool;
+package cc.kune.core.client.resources.iconic;
 
-import cc.kune.gspace.client.tool.selector.ToolSelector;
-import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
-import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
-
+import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
-public abstract class AbstractClientTool {
+public interface IconicResources extends ClientBundle {
 
-  public AbstractClientTool(final String shortName, final String longName, final String tooltip,
-      final ImageResource icon, final ToolSelector toolSelector) {
-    final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName,
-        tooltip, toolSelector);
-    final ToolSelectorItemPanel panel = new ToolSelectorItemPanel(shortName, icon);
-    presenter.init(panel);
-  }
+  @Source("barters.png")
+  ImageResource barters();
 
-  public abstract String getName();
+  @Source("blogs.png")
+  ImageResource blogs();
+
+  @Source("chats.png")
+  ImageResource chats();
+
+  @Source("docs.png")
+  ImageResource docs();
+
+  @Source("events.png")
+  ImageResource events();
+
+  @Source("lists.png")
+  ImageResource lists();
+
+  @Source("tasks.png")
+  ImageResource tasks();
+
+  @Source("wikis.png")
+  ImageResource wikis();
 }

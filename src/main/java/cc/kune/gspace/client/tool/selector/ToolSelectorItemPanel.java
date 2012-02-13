@@ -26,6 +26,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -60,11 +61,11 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   @UiField
   FocusPanel self;
 
-  public ToolSelectorItemPanel(final String shortName) {
+  public ToolSelectorItemPanel(final String shortName, final ImageResource icon) {
     initWidget(uiBinder.createAndBindUi(this));
     ensureDebugId(TOOL_ID_PREFIX + shortName);
     setVisibleImpl(false);
-    iconLeft.setVisible(false);
+    iconLeft.setResource(icon);
   }
 
   @Override

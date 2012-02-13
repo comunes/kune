@@ -12,6 +12,18 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
+** icons in WIAB
+<div class="NWC">
+<div class="ILC"></div>
+</div>
+
+.ILC {
+    background: url("data:image/png;base6,4iVBORw0KGgoAAAANSUhEUgAAAA4AAAAWCAYAAADwza0nAAAAXUlEQVR42mNgGAWUgbS0tP8gTLKmp0+f/r927RrxmmGaQPTx48f/79y5k7BmZJtAmkD8VatW4deIrglkE0wTCAxlTcihR1ATTCO20MOrCaaRJJvQkxQME6VpFOAGALlX45hq7h8nAAAAAElFTkSuQmCC") no-repeat scroll 0 0 transparent;
+    height: 22px;
+    overflow: hidden;
+    width: 14px;
+}
+
 ** deploy automatize (update)
 *** copy jar
 *** copy via rsync gwt compilation (no delete to prevent code fail message)
