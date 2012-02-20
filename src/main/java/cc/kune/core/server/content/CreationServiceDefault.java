@@ -21,6 +21,8 @@ package cc.kune.core.server.content;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,7 +74,8 @@ public class CreationServiceDefault implements CreationService {
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeId);
     final URL gagdetUrl = tool instanceof ServerWaveTool ? ((ServerWaveTool) tool).getGadgetUrl()
         : KuneWaveService.WITHOUT_GADGET;
-    final Content content = contentManager.createContent(title, body, user, container, typeId, gagdetUrl);
+    final Content content = contentManager.createContent(title, body, user, container, typeId,
+        gagdetUrl, Collections.<String, String> emptyMap());
     tool.onCreateContent(content, container);
     return content;
   }
@@ -90,12 +93,13 @@ public class CreationServiceDefault implements CreationService {
 
   @Override
   public Content createGadget(final User user, final Container container, final String gadgetname,
-      final String typeIdChild, final String title, final String body) {
+      final String typeIdChild, final String title, final String body,
+      final Map<String, String> gadgetProperties) {
     final String toolName = container.getToolName();
     final ServerTool tool = tools.get(toolName);
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeIdChild);
     final Content content = contentManager.createContent(title, body, user, container, typeIdChild,
-        getGadgetUrl(gadgetname));
+        getGadgetUrl(gadgetname), gadgetProperties);
     tool.onCreateContent(content, container);
     return content;
   }

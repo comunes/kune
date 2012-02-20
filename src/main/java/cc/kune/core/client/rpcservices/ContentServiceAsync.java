@@ -20,6 +20,7 @@
 package cc.kune.core.client.rpcservices;
 
 import java.util.Date;
+import java.util.Map;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -50,6 +51,10 @@ public interface ContentServiceAsync {
 
   void addNewContentWithGadget(String userHash, StateToken currentStateToken, String gadgetName,
       String typeId, String title, String body, AsyncCallback<StateContentDTO> asyncCallback);
+
+  void addNewContentWithGadgetAndState(String userHash, StateToken currentStateToken, String gadgetName,
+      String typeId, String title, String body, Map<String, String> gadgetState,
+      AsyncCallback<StateContentDTO> callback);
 
   void addParticipant(String userHash, StateToken token, String authorShortName,
       AsyncCallback<Void> asyncCallback) throws DefaultException;

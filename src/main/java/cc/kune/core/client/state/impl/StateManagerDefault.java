@@ -29,7 +29,7 @@ import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.ProgressHideEvent;
-import cc.kune.common.client.utils.Pair;
+import cc.kune.common.shared.utils.Pair;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.events.GoHomeEvent;

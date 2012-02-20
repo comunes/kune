@@ -20,6 +20,7 @@
 package cc.kune.core.client.rpcservices;
 
 import java.util.Date;
+import java.util.Map;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -50,6 +51,9 @@ public interface ContentService extends RemoteService {
 
   StateContentDTO addNewContentWithGadget(String userHash, StateToken currentStateToken,
       String gadgetName, String typeId, String title, String body);
+
+  StateContentDTO addNewContentWithGadgetAndState(String userHash, StateToken currentStateToken,
+      String gadgetName, String typeId, String tile, String body, Map<String, String> gadgetState);
 
   void addParticipant(String userHash, StateToken token, String participant) throws DefaultException;
 

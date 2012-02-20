@@ -20,16 +20,25 @@
 package cc.kune.wave.server.kspecific;
 
 import java.net.URL;
+import java.util.Map;
 
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import cc.kune.common.shared.utils.SimpleArgCallback;
+
 import com.google.wave.api.Participants;
 import com.google.wave.api.Wavelet;
 
 public interface KuneWaveService {
+  public static final SimpleArgCallback<WaveRef> DO_NOTHING_CBACK = new SimpleArgCallback<WaveRef>() {
+    @Override
+    public void onCallback(final WaveRef arg) {
+      // Do nothing
+    }
+  };
   public static final String NO_MESSAGE = "";
   public static final String NO_TITLE = "";
   public static final URL WITHOUT_GADGET = null;
@@ -38,16 +47,26 @@ public interface KuneWaveService {
 
   void addParticipants(WaveRef waveName, String author, String userWhoAdd, String... newParticipants);
 
-  WaveRef createWave(String message, ParticipantId... participants);
+  WaveRef createWave(String message, SimpleArgCallback<WaveRef> onCreate, ParticipantId... participants);
 
-  WaveRef createWave(String title, String message, ParticipantId... participantsArray);
-
-  WaveRef createWave(String title, String message, String... participantsArray);
-
-  WaveRef createWave(String title, String message, String waveIdToCopy, URL gadgetUrl,
+  WaveRef createWave(String title, String message, SimpleArgCallback<WaveRef> onCreate,
       ParticipantId... participantsArray);
 
-  WaveRef createWave(String title, String message, URL gadgetUrl, ParticipantId... participantsArray);
+  WaveRef createWave(String title, String message, SimpleArgCallback<WaveRef> onCreate,
+      String... participantsArray);
+
+  WaveRef createWave(String newtitle, String body, SimpleArgCallback<WaveRef> simpleArgCallback,
+      URL gadgetUrl, Map<String, String> gadgetProperties, ParticipantId... participantsArray);
+
+  WaveRef createWave(String title, String message, SimpleArgCallback<WaveRef> onCreate, URL gadgetUrl,
+      ParticipantId... participantsArray);
+
+  WaveRef createWave(String title, String message, String waveIdToCopy,
+      SimpleArgCallback<WaveRef> onCreate, URL gadgetUrl, Map<String, String> gadgetProperties,
+      ParticipantId... participantsArray);
+
+  WaveRef createWave(String title, String message, String waveIdToCopy,
+      SimpleArgCallback<WaveRef> onCreate, URL gadgetUrl, ParticipantId... participantsArray);
 
   void delParticipants(WaveRef waveName, String whoDel, String... participants);
 
@@ -65,8 +84,9 @@ public interface KuneWaveService {
 
   String render(WaveRef waveRef, String author);
 
-  void setGadgetProperty(WaveRef waveletName, String author, URL gadgetUrl, String someProperty,
-      String someValue);
+  void setGadgetProperty(WaveRef waveletName, String author, URL gadgetUrl,
+      Map<String, String> newProperties);
 
   void setTitle(WaveRef waveName, String title, String author);
+
 }

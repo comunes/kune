@@ -10,7 +10,7 @@ import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 public interface CalendarViewer extends ContentViewer {
   public static final Appointment NO_APPOINT = new Appointment();
 
-  void addAppointment(String description, Date onDate);
+  Appointment addAppointment(String description, Date onDate);
 
   void decrement();
 

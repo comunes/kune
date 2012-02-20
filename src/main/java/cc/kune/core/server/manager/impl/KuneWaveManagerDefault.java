@@ -71,7 +71,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     for (final String part : participants) {
       partIds.add(participantUtils.of(part));
     }
-    return KuneWaveServerUtils.getUrl(waveService.createWave(title, body,
+    return KuneWaveServerUtils.getUrl(waveService.createWave(title, body, KuneWaveService.DO_NOTHING_CBACK,
         partIds.toArray(new ParticipantId[0])));
   }
 
@@ -104,6 +104,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
         toList.addAll(group.getSocialNetwork().getAccessLists().getEditors().getList());
       }
     }
-    return KuneWaveServerUtils.getUrl(waveService.createWave(title, message, participantUtils.listFrom(toList)));
+    return KuneWaveServerUtils.getUrl(waveService.createWave(title, message, KuneWaveService.DO_NOTHING_CBACK,
+        participantUtils.listFrom(toList)));
   }
 }

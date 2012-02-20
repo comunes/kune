@@ -24,7 +24,7 @@ import org.adamtacy.client.ui.effects.events.EffectCompletedHandler;
 import org.adamtacy.client.ui.effects.examples.Show;
 import org.adamtacy.client.ui.effects.examples.SlideRight;
 
-import cc.kune.common.client.utils.SimpleCallback;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.sub.SubtitlesManager.SubtitlesView;
 
 import com.google.gwt.core.client.GWT;

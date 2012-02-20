@@ -6,4 +6,8 @@
   <inherits name='com.bradrydzewski.gwt.calendar.Calendar'/>
   <inherits name='com.bradrydzewski.gwt.calendar.theme.google.Google'/>
   <inherits name='com.allen_sauer.gwt.dnd.gwt-dnd'/>
+  <source path='client'
+    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
+  <source path='shared'
+    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
 </module>

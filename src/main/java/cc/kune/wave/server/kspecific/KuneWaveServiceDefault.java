@@ -48,6 +48,7 @@ import org.waveprotocol.wave.model.version.HashedVersion;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import cc.kune.common.shared.utils.SimpleArgCallback;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.wave.server.ParticipantUtils;
@@ -211,24 +212,42 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   @Override
-  public WaveRef createWave(final String message, final ParticipantId... participants) {
-    return createWave(NO_TITLE, message, participants);
+  public WaveRef createWave(final String message, final SimpleArgCallback<WaveRef> onCreate,
+      final ParticipantId... participants) {
+    return createWave(NO_TITLE, message, onCreate, participants);
   }
 
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
+      final SimpleArgCallback<WaveRef> onCreate, @Nonnull final ParticipantId... participantsArray) {
+    return createWave(title, message, onCreate, WITHOUT_GADGET, participantsArray);
+  }
+
+  @Override
+  public WaveRef createWave(final String title, final String message,
+      final SimpleArgCallback<WaveRef> onCreate, final String... participantsArray) {
+    return createWave(title, message, onCreate, participantUtils.listFrom(participantsArray));
+  }
+
+  @Override
+  public WaveRef createWave(final String title, final String message,
+      final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
+      final Map<String, String> gadgetProperties, final ParticipantId... participantsArray) {
+    return createWave(title, message, NO_WAVE_TO_COPY, onCreate, gadgetUrl, gadgetProperties,
+        participantsArray);
+  }
+
+  @Override
+  public WaveRef createWave(@Nonnull final String title, final String message,
+      final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
       @Nonnull final ParticipantId... participantsArray) {
-    return createWave(title, message, WITHOUT_GADGET, participantsArray);
-  }
-
-  @Override
-  public WaveRef createWave(final String title, final String message, final String... participantsArray) {
-    return createWave(title, message, participantUtils.listFrom(participantsArray));
+    return createWave(title, message, NO_WAVE_TO_COPY, onCreate, gadgetUrl, participantsArray);
   }
 
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
-      final String waveIdToCopy, final URL gadgetUrl, @Nonnull final ParticipantId... participantsArray) {
+      final String waveIdToCopy, final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
+      final Map<String, String> gadgetProperties, @Nonnull final ParticipantId... participantsArray) {
     String newWaveId = null;
     String newWaveletId = null;
     final Set<String> participants = new HashSet<String>();
@@ -259,7 +278,13 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     }
 
     if (gadgetUrl != WITHOUT_GADGET) {
-      final Gadget gadget = new Gadget(gadgetUrl.toString());
+      Gadget gadget;
+      if (gadgetProperties.size() > 0) {
+        gadgetProperties.put(Gadget.URL, gadgetUrl.toString());
+        gadget = new Gadget(gadgetProperties);
+      } else {
+        gadget = new Gadget(gadgetUrl.toString());
+      }
       rootBlip.append(gadget);
     }
 
@@ -285,18 +310,6 @@ public class KuneWaveServiceDefault implements KuneWaveService {
         }
       }
     }
-    OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
-      @Override
-      public void onFailure(final String arg0) {
-        KuneWaveServiceDefault.this.onFailure("Wave creation failed, onFailure: " + arg0);
-      }
-
-      @Override
-      public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
-        LOG.info("Wave creation success: " + arg1);
-      }
-    });
-    LOG.info("WaveId: " + newWaveId + " waveletId: " + newWaveletId);
     WaveRef wavename;
     try {
       wavename = WaveRef.of(ApiIdSerializer.instance().deserialiseWaveId(newWaveId),
@@ -304,13 +317,17 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     } catch (final InvalidIdException e) {
       throw new DefaultException("Error getting wave id");
     }
+    doSubmit(onCreate, context, wavename);
+    LOG.info("WaveId: " + newWaveId + " waveletId: " + newWaveletId);
     return wavename;
   }
 
   @Override
-  public WaveRef createWave(@Nonnull final String title, final String message, final URL gadgetUrl,
+  public WaveRef createWave(@Nonnull final String title, final String message,
+      final String waveIdToCopy, final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
       @Nonnull final ParticipantId... participantsArray) {
-    return createWave(title, message, NO_WAVE_TO_COPY, gadgetUrl, participantsArray);
+    return createWave(title, message, waveIdToCopy, onCreate, gadgetUrl,
+        Collections.<String, String> emptyMap(), participantsArray);
   }
 
   @Override
@@ -367,6 +384,22 @@ public class KuneWaveServiceDefault implements KuneWaveService {
       OperationUtil.executeOperation(req, operationRegistry, context, participantUtils.of(author));
     }
     OperationUtil.submitDeltas(context, waveletProvider, listener);
+  }
+
+  private void doSubmit(final SimpleArgCallback<WaveRef> onCreate, final OperationContextImpl context,
+      final WaveRef wavename) {
+    OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
+      @Override
+      public void onFailure(final String arg0) {
+        KuneWaveServiceDefault.this.onFailure("Wave creation failed, onFailure: " + arg0);
+      }
+
+      @Override
+      public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
+        LOG.info("Wave creation success: " + arg1);
+        onCreate.onCallback(wavename);
+      }
+    });
   }
 
   @Override
@@ -454,11 +487,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
 
   @Override
   public void setGadgetProperty(final WaveRef waveletName, final String author, final URL gadgetUrl,
-      final String someProperty, final String someValue) {
-    // See BlipContentRefs DocumentModifyService
+      final Map<String, String> newProperties) {
+    // Note: See BlipContentRefs DocumentModifyService
     final Wavelet wavelet = fetchWave(waveletName, author);
-    // FIXME
-    final OperationQueue opQueue = new OperationQueue();
     final Blip rootBlip = wavelet.getRootBlip();
     for (final Element elem : rootBlip.getElements().values()) {
       if (elem.isGadget()) {
@@ -466,11 +497,15 @@ public class KuneWaveServiceDefault implements KuneWaveService {
         if (properties.get(Gadget.URL).equals(gadgetUrl.toString())) {
           // This is the gadget we want to modify (the first of that type)
           final List<Element> updatedElementsIn = Lists.newArrayListWithCapacity(1);
-          properties.put(someProperty, someValue);
-          // properties.put(propertyNameToDelete, null);
           final Gadget gadget = (Gadget) elem;
-          gadget.setProperty(someProperty, someValue);
-          // updatedElementsIn.add(new Gadget(properties));
+          final OperationQueue opQueue = new OperationQueue();
+          for (final String propKey : newProperties.keySet()) {
+            final String value = newProperties.get(propKey);
+            properties.put(propKey, value);
+            // properties.put(propertyNameToDelete, null);
+            gadget.setProperty(propKey, value);
+            // updatedElementsIn.add(new Gadget(properties));
+          }
           updatedElementsIn.add(gadget);
           final OperationRequest operationRequest = opQueue.modifyDocument(rootBlip);
           operationRequest.addParameter(Parameter.of(ParamsProperty.MODIFY_ACTION,
@@ -479,7 +514,7 @@ public class KuneWaveServiceDefault implements KuneWaveService {
           operationRequest.addParameter(Parameter.of(
               ParamsProperty.MODIFY_QUERY,
               new DocumentModifyQuery(ElementType.GADGET, ImmutableMap.of(Gadget.URL,
-                  gadgetUrl.toString()), 1)));
+                  gadgetUrl.toString()), -1)));
           doOperation(author, opQueue, "set gadget property");
           break;
         }
@@ -500,4 +535,5 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     set.addAll(Arrays.asList(array));
     return set;
   }
+
 }

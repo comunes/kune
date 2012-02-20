@@ -20,6 +20,7 @@
 package cc.kune.common.client.utils;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 
 public abstract class OnAcceptCallback implements SimpleResponseCallback {
 

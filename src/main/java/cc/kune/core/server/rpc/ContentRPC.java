@@ -19,7 +19,9 @@
  */
 package cc.kune.core.server.rpc;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 
 import javax.persistence.NoResultException;
 
@@ -158,11 +160,22 @@ public class ContentRPC implements ContentService, RPC {
   public StateContentDTO addNewContentWithGadget(final String userHash, final StateToken parentToken,
       final String gadgetname, final String typeId, final String title, final String body)
       throws DefaultException {
+    return addNewContentWithGadgetAndState(userHash, parentToken, gadgetname, typeId, title, body,
+        Collections.<String, String> emptyMap());
+  }
+
+  @Override
+  @Authenticated
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
+  @Transactional
+  public StateContentDTO addNewContentWithGadgetAndState(final String userHash,
+      final StateToken parentToken, final String gadgetname, final String typeId, final String title,
+      final String body, final Map<String, String> gadgetProperties) throws DefaultException {
     final User user = getCurrentUser();
     final Container container = accessService.accessToContainer(
         ContentUtils.parseId(parentToken.getFolder()), user, AccessRol.Editor);
     final Content addedContent = creationService.createGadget(user, container, gadgetname, typeId,
-        title, body);
+        title, body, gadgetProperties);
     return getState(user, addedContent);
   }
 

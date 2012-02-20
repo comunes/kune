@@ -45,7 +45,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
       final java.lang.String message, final java.lang.String acceptBtnMsg,
       final java.lang.String cancelBtnMsg, final java.lang.String acceptBtnTooltip,
       final java.lang.String cancelBtnTooltip,
-      final cc.kune.common.client.utils.SimpleResponseCallback callback) {
+      final cc.kune.common.shared.utils.SimpleResponseCallback callback) {
     source.fireEvent(new ConfirmAskEvent(title, message, acceptBtnMsg, cancelBtnMsg, acceptBtnTooltip,
         cancelBtnTooltip, callback));
   }
@@ -56,7 +56,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   java.lang.String acceptBtnMsg;
   java.lang.String acceptBtnTooltip;
-  cc.kune.common.client.utils.SimpleResponseCallback callback;
+  cc.kune.common.shared.utils.SimpleResponseCallback callback;
   java.lang.String cancelBtnMsg;
   java.lang.String cancelBtnTooltip;
   ImageResource icon;
@@ -70,7 +70,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
   public ConfirmAskEvent(final ImageResource icon, final java.lang.String title,
       final java.lang.String message, final java.lang.String acceptBtnMsg,
       final java.lang.String cancelBtnMsg,
-      final cc.kune.common.client.utils.SimpleResponseCallback callback) {
+      final cc.kune.common.shared.utils.SimpleResponseCallback callback) {
     this(title, message, acceptBtnMsg, cancelBtnMsg, acceptBtnMsg, cancelBtnMsg, callback);
     this.icon = icon;
   }
@@ -79,7 +79,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
       final java.lang.String message, final java.lang.String acceptBtnMsg,
       final java.lang.String cancelBtnMsg, final java.lang.String acceptBtnTooltip,
       final java.lang.String cancelBtnTooltip,
-      final cc.kune.common.client.utils.SimpleResponseCallback callback) {
+      final cc.kune.common.shared.utils.SimpleResponseCallback callback) {
     this(title, message, acceptBtnMsg, cancelBtnMsg, acceptBtnTooltip, cancelBtnTooltip, callback);
     this.icon = icon;
   }
@@ -90,7 +90,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   public ConfirmAskEvent(final java.lang.String title, final java.lang.String message,
       final java.lang.String acceptBtnMsg, final java.lang.String cancelBtnMsg,
-      final cc.kune.common.client.utils.SimpleResponseCallback callback) {
+      final cc.kune.common.shared.utils.SimpleResponseCallback callback) {
     this.title = title;
     this.message = message;
     this.acceptBtnMsg = acceptBtnMsg;
@@ -101,7 +101,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
   public ConfirmAskEvent(final java.lang.String title, final java.lang.String message,
       final java.lang.String acceptBtnMsg, final java.lang.String cancelBtnMsg,
       final java.lang.String acceptBtnTooltip, final java.lang.String cancelBtnTooltip,
-      final cc.kune.common.client.utils.SimpleResponseCallback callback) {
+      final cc.kune.common.shared.utils.SimpleResponseCallback callback) {
     this(title, message, acceptBtnMsg, cancelBtnMsg, callback);
     this.acceptBtnTooltip = acceptBtnTooltip;
     this.cancelBtnTooltip = cancelBtnTooltip;
@@ -189,7 +189,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     return TYPE;
   }
 
-  public cc.kune.common.client.utils.SimpleResponseCallback getCallback() {
+  public cc.kune.common.shared.utils.SimpleResponseCallback getCallback() {
     return callback;
   }
 

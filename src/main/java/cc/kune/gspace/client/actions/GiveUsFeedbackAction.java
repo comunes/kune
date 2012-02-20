@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.utils.SimpleResponseCallback;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;

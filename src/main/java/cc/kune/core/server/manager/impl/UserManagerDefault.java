@@ -45,6 +45,7 @@ import org.waveprotocol.box.server.robots.agent.RobotAgentUtil;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
+import cc.kune.common.shared.utils.SimpleArgCallback;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
@@ -266,13 +267,17 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       if (defWave != null) {
         welcome = kuneWaveManager.createWave(
             ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
-                properties.getDefaultSiteName()), "", defWave, null,
-            participantUtils.of(properties.getAdminShortName()), participantUtils.of(shortName));
+                properties.getDefaultSiteName()), "", defWave, new SimpleArgCallback<WaveRef>() {
+              @Override
+              public void onCallback(final WaveRef arg) {
+                // Is this necessary? try to remove (used when we were setting
+                // the def
+                // content
+                // contentManager.save(userGroup.getDefaultContent());
+                askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
+              }
+            }, null, participantUtils.of(properties.getAdminShortName()), participantUtils.of(shortName));
       }
-      // Is this necessary? try to remove (used when we were setting the def
-      // content
-      // contentManager.save(userGroup.getDefaultContent());
-      askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
       return user;
     } catch (final RuntimeException e) {
       try {

@@ -104,7 +104,8 @@ public class NotificationSenderDefault implements NotificationSender {
         if (isHtml) {
           LOG.error("Wave html messages not supported yet");
         }
-        waveService.createWave(subject.getString(), body.getString(), username);
+        waveService.createWave(subject.getString(), body.getString(), KuneWaveService.DO_NOTHING_CBACK,
+            username);
         break;
       }
     }

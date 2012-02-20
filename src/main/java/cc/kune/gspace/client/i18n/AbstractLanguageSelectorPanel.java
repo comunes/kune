@@ -20,8 +20,8 @@
 package cc.kune.gspace.client.i18n;
 
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;

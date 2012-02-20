@@ -9,6 +9,7 @@ import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerPanel;
@@ -74,15 +75,18 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   }
 
   @Override
-  public void addAppointment(final String title, final Date date) {
+  public Appointment addAppointment(final String title, final Date date) {
     // Should this be used or serialize from server side?
     final Appointment appt = new Appointment();
     appt.setStart(date);
-    appt.setEnd(date);
+    // http://stackoverflow.com/questions/2527845/how-to-do-calendar-operations-in-java-gwt-how-to-add-days-to-a-dateSessionConstants._AN_HOUR
+    final Date endDate = new Date(date.getTime() + SessionConstants._AN_HOUR + SessionConstants._AN_HOUR
+        / 2);
+    appt.setEnd(endDate);
     appt.setTitle(title);
     appt.setStyle(AppointmentStyle.ORANGE);
     calendar.addAppointment(appt);
-    // FIXME NotiUser
+    return appt;
   }
 
   @Override

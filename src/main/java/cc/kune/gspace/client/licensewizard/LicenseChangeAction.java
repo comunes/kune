@@ -20,8 +20,8 @@
 package cc.kune.gspace.client.licensewizard;
 
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;

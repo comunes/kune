@@ -21,7 +21,7 @@ package cc.kune.common.client.ui;
 
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.EditEvent.EditHandler;
-import cc.kune.common.client.utils.SimpleCallback;
+import cc.kune.common.shared.utils.SimpleCallback;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;

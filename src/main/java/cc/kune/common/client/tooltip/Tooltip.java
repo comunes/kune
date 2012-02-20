@@ -62,10 +62,7 @@ public class Tooltip extends PopupPanel {
     }
   }
 
-  public static Tooltip to(final Widget widget, final String text) {
-    final Tooltip tip = new Tooltip();
-    tip.to(widget);
-    tip.setText(text);
+  private static void setHideOnDetachListener(final Widget widget, final Tooltip tip) {
     widget.addAttachHandler(new Handler() {
       @Override
       public void onAttachOrDetach(final AttachEvent event) {
@@ -73,8 +70,14 @@ public class Tooltip extends PopupPanel {
           tip.hide();
         }
       }
-
     });
+  }
+
+  public static Tooltip to(final Widget widget, final String text) {
+    final Tooltip tip = new Tooltip();
+    tip.to(widget);
+    tip.setText(text);
+    setHideOnDetachListener(widget, tip);
     return tip;
   }
 
@@ -82,8 +85,10 @@ public class Tooltip extends PopupPanel {
     final Tooltip tip = new Tooltip();
     tip.to(widget);
     tip.setContent(withContent);
+    setHideOnDetachListener(widget, tip);
     return tip;
   }
+
   @UiField
   HTMLPanel arrow;
   @UiField
@@ -96,13 +101,10 @@ public class Tooltip extends PopupPanel {
   private Widget ofWidget;
   private final Label textLabel;
   private final TooltipTimers timers;
-
   @UiField
   InlineLabel title;
-
   @UiField
   HTMLPanel tooltip;
-
   private int width = WIDTH_NOT_DEFINED;
 
   public Tooltip() {
@@ -129,6 +131,12 @@ public class Tooltip extends PopupPanel {
     securityTimer.configure(hideExecuter);
     timers = new TooltipTimers(overTimer, outTimer, securityTimer);
     textLabel = new Label();
+  }
+
+  private TooltipPosition calculatePosition() {
+    return TooltipPositionCalculator.calculate(Window.getClientWidth(), Window.getClientHeight(),
+        ofWidget.getAbsoluteLeft(), ofWidget.getAbsoluteTop(), ofWidget.getOffsetWidth(),
+        ofWidget.getOffsetHeight(), Tooltip.this.getWidth(), Tooltip.this.getHeight());
   }
 
   protected int getHeight() {
@@ -193,10 +201,7 @@ public class Tooltip extends PopupPanel {
   }
 
   private void showAt() {
-    Tooltip.this.showAt(TooltipPositionCalculator.calculate(Window.getClientWidth(),
-        Window.getClientHeight(), ofWidget.getAbsoluteLeft(), ofWidget.getAbsoluteTop(),
-        ofWidget.getOffsetWidth(), ofWidget.getOffsetHeight(), Tooltip.this.getWidth(),
-        Tooltip.this.getHeight()));
+    Tooltip.this.showAt(calculatePosition());
   }
 
   protected void showAt(final TooltipPosition position) {

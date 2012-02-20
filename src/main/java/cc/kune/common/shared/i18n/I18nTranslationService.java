@@ -19,7 +19,7 @@
  */
 package cc.kune.common.shared.i18n;
 
-import cc.kune.common.client.utils.Pair;
+import cc.kune.common.shared.utils.Pair;
 
 import com.google.gwt.i18n.client.HasDirection.Direction;
 

@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client.licensewizard.pages;
 
-import cc.kune.common.client.utils.SimpleCallback;
+import cc.kune.common.shared.utils.SimpleCallback;
 
 import com.google.gwt.user.client.ui.IsWidget;
 

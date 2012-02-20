@@ -19,8 +19,8 @@
  */
 package cc.kune.common.client.notify;
 
-import cc.kune.common.client.utils.SimpleResponseCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.event.dom.client.ClickHandler;

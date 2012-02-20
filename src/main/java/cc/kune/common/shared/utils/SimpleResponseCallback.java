@@ -17,11 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.utils;
+package cc.kune.common.shared.utils;
 
-public interface SimpleCallback {
-  /**
-   * Notifies this callback
-   */
-  void onCallback();
+public interface SimpleResponseCallback {
+    /**
+     * Notifies this callback of an accept response.
+     */
+    void onSuccess();
+
+    /**
+     * Notifies this callback of a cancel.
+     */
+    void onCancel();
 }

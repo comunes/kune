@@ -24,6 +24,7 @@ public final class EventsConstants {
   public static final String NAME = "events";
   public static final String ROOT_NAME = "events";
   public static final String TYPE_MEETING = NAME + "." + "meeting";
+  public static final String TYPE_MEETING_DEF_GADGETNAME = "massmob";
   public static final String TYPE_ROOT = NAME + "." + "root";
 
   private EventsConstants() {

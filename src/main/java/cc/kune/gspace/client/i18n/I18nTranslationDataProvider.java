@@ -18,7 +18,7 @@ package cc.kune.gspace.client.i18n;
 import java.util.List;
 
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.utils.SimpleCallback;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;

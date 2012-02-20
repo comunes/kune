@@ -19,10 +19,6 @@
  */
 package cc.kune.wave.server;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -35,12 +31,10 @@ import org.waveprotocol.box.server.robots.agent.AbstractBaseRobotAgent.ServerFro
 import org.waveprotocol.wave.model.id.TokenGenerator;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
-import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.wave.server.kspecific.KuneAgent;
 
 import com.google.common.collect.Lists;
-import com.google.wave.api.Wavelet;
 
 public class KuneAgentTest {
   private static final String MESSAGE = "testing";
@@ -81,13 +75,14 @@ public class KuneAgentTest {
   @Ignore
   @Test
   public void testBasicCreation() throws InvalidParticipantAddress {
-    final WaveRef waveletName = manager.createWave(RICHTEXT_MESSAGE,
-        ParticipantId.of(getSiteAdminShortName()));
-    assertNotNull(waveletName);
-    final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
-    assertNotNull(fetchWavelet);
-    assertTrue(fetchWavelet.getRootBlip().getAnnotations().size() > 0);
-    assertEquals("", fetchWavelet.getRootBlip().getContent());
-    assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
+    // final WaveRef waveletName = manager.createWave(RICHTEXT_MESSAGE, null,
+    // ParticipantId.of(getSiteAdminShortName()));
+    // assertNotNull(waveletName);
+    // final Wavelet fetchWavelet = manager.fetchWave(waveletName,
+    // getSiteAdminShortName());
+    // assertNotNull(fetchWavelet);
+    // assertTrue(fetchWavelet.getRootBlip().getAnnotations().size() > 0);
+    // assertEquals("", fetchWavelet.getRootBlip().getContent());
+    // assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
   }
 }

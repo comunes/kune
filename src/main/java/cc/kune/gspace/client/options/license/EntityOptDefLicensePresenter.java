@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client.options.license;
 
-import cc.kune.common.client.utils.SimpleResponseCallback;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LicenseDTO;

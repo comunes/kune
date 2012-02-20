@@ -24,7 +24,7 @@ import java.util.List;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.wizard.WizardListener;
-import cc.kune.common.client.utils.SimpleCallback;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.gspace.client.licensewizard.pages.LicenseWizardFirstFormView;

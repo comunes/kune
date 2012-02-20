@@ -22,7 +22,7 @@ package cc.kune.core.client.state;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaverefEncoder;
 
-import cc.kune.common.client.utils.Pair;
+import cc.kune.common.shared.utils.Pair;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 

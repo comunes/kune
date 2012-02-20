@@ -19,8 +19,8 @@
  */
 package cc.kune.core.server.i18n.impl;
 
-import cc.kune.common.client.utils.Pair;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.Pair;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.i18n.I18nTranslationServiceMultiLang;

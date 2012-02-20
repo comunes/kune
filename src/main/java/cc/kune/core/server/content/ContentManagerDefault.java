@@ -20,8 +20,10 @@
 package cc.kune.core.server.content;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 
@@ -119,11 +121,13 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   protected Content createContent(final String title, final String body, final User author,
       final Container container, final String typeId) {
-    return createContent(title, body, author, container, typeId, KuneWaveService.WITHOUT_GADGET);
+    return createContent(title, body, author, container, typeId, KuneWaveService.WITHOUT_GADGET,
+        Collections.<String, String> emptyMap());
   }
 
   protected Content createContent(final String title, final String body, final User author,
-      final Container container, final String typeId, final URL gadgetUrl) {
+      final Container container, final String typeId, final URL gadgetUrl,
+      final Map<String, String> gadgetProperties) {
     FilenameUtils.checkBasicFilename(title);
     final String newtitle = findInexistentTitle(container, title);
     final Content newContent = new Content();
@@ -136,8 +140,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     revision.setTitle(newtitle);
     // Duplicate in StateServiceDefault
     if (newContent.isWave()) {
-      final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body, gadgetUrl,
-          participantUtils.of(author.getShortName()));
+      final String authorName = author.getShortName();
+      final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body,
+          KuneWaveService.DO_NOTHING_CBACK, gadgetUrl, gadgetProperties, participantUtils.of(authorName));
       newContent.setWaveId(JavaWaverefEncoder.encodeToUriPathSegment(waveRef));
       newContent.setModifiedOn((new Date()).getTime());
     }

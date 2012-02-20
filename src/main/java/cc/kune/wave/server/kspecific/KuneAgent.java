@@ -21,6 +21,7 @@ package cc.kune.wave.server.kspecific;
 
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
@@ -30,6 +31,8 @@ import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
+
+import cc.kune.common.shared.utils.SimpleArgCallback;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -71,31 +74,35 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
   }
 
   @Override
-  public WaveRef createWave(final String message, final ParticipantId... participants) {
-    return createWave(NO_TITLE, message, participants);
+  public WaveRef createWave(final String message, final SimpleArgCallback<WaveRef> onCreate,
+      final ParticipantId... participants) {
+    return createWave(NO_TITLE, message, onCreate, participants);
   }
 
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
-      @Nonnull final ParticipantId... participantsArray) {
-    return createWave(title, message, WITHOUT_GADGET, participantsArray);
+      final SimpleArgCallback<WaveRef> onCreate, @Nonnull final ParticipantId... participantsArray) {
+    return createWave(title, message, onCreate, WITHOUT_GADGET, participantsArray);
   }
 
   @Override
-  public WaveRef createWave(final String title, final String message, final String... participantsArray) {
+  public WaveRef createWave(final String title, final String message,
+      final SimpleArgCallback<WaveRef> onCreate, final String... participantsArray) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public WaveRef createWave(final String title, final String message, final String waveIdToCopy,
-      final URL gadgetUrl, final ParticipantId... participantsArray) {
+  public WaveRef createWave(final String newtitle, final String body,
+      final SimpleArgCallback<WaveRef> simpleArgCallback, final URL gadgetUrl,
+      final Map<String, String> gadgetProperties, final ParticipantId... participantsArray) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public WaveRef createWave(final String title, final String message, final URL gadgetUrl,
+  public WaveRef createWave(final String title, final String message,
+      final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
       final ParticipantId... participantsArray) {
     // super.newWave(getWaveDomain(), participantsArray);
     final HashSet<String> parts = new HashSet<String>();
@@ -103,7 +110,22 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
       parts.add(part.getAddress());
     }
     final Wavelet wave = newWave(getWaveDomain(), parts);
-    return WaveRef.of(wave.getWaveId(), wave.getWaveletId());
+    return null;
+  }
+
+  @Override
+  public WaveRef createWave(final String title, final String message, final String waveIdToCopy,
+      final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
+      final Map<String, String> gadgetProperties, final ParticipantId... participantsArray) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public WaveRef createWave(final String title, final String message, final String waveIdToCopy,
+      final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
+      final ParticipantId... participantsArray) {
+    return null;
   }
 
   @Override
@@ -192,7 +214,7 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
 
   @Override
   public void setGadgetProperty(final WaveRef waveletName, final String author, final URL gadgetUrl,
-      final String someProperty, final String someValue) {
+      final Map<String, String> newProperties) {
     // TODO Auto-generated method stub
 
   }

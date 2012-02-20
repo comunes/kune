@@ -7,18 +7,15 @@ import java.util.Date;
 
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.util.Dates;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
+import cc.kune.events.shared.BasicCalendarTest;
+
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 
-public class CalendarServerUtilsTest {
-
-  private static final String DESCRIPTION = "some description";
-  private static final String ID = "some id";
-  private static final String TITLE = "some title";
+public class CalendarServerUtilsTest extends BasicCalendarTest {
 
   private void checkConversionFromAndTo(final Appointment initialApp, final boolean allDay) {
     final VEvent vevent = CalendarServerUtils.from(initialApp);
@@ -51,30 +48,17 @@ public class CalendarServerUtilsTest {
 
   @Test
   public void testFromToFrom() {
-    final Appointment initialApp = new Appointment();
-    initialApp.setTitle(TITLE);
-    initialApp.setDescription(DESCRIPTION);
-    initialApp.setStart(new Date(Dates.getCurrentTimeRounded()));
-    initialApp.setEnd(new Date(Dates.getCurrentTimeRounded()));
-    initialApp.setId(ID);
     final boolean allDay = false;
+    final Appointment initialApp = createAppointment(allDay);
     initialApp.setAllDay(allDay);
-
     checkConversionFromAndTo(initialApp, allDay);
   }
 
   @Ignore
   @Test
   public void testFromToFromAllDay() {
-    final Appointment initialApp = new Appointment();
-    initialApp.setTitle(TITLE);
-    initialApp.setDescription(DESCRIPTION);
-    initialApp.setStart(new Date(Dates.getCurrentTimeRounded()));
-    initialApp.setEnd(new Date(Dates.getCurrentTimeRounded()));
-    initialApp.setId(ID);
     final boolean allDay = true;
-    initialApp.setAllDay(allDay);
-
+    final Appointment initialApp = createAppointment(allDay);
     checkConversionFromAndTo(initialApp, allDay);
   }
 
