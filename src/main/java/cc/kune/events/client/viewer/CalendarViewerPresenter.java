@@ -59,7 +59,8 @@ public class CalendarViewerPresenter extends
       HasUpdateHandlers<Appointment>, HasDateRequestHandlers<Date>, HasMouseOverHandlers<Appointment>,
       HasLayout, HasAppointments, AbstractFolderViewerView {
 
-    Appointment addAppointment(String title, Date date);
+    @Override
+    void addAppointment(Appointment app);
 
     HandlerRegistration addClickHandler(ClickHandler clickHandler);
 
@@ -72,6 +73,9 @@ public class CalendarViewerPresenter extends
     Date getDate();
 
     void goToday();
+
+    @Override
+    void removeAppointment(Appointment app);
 
     void setDate(Date date);
 
@@ -108,8 +112,8 @@ public class CalendarViewerPresenter extends
   }
 
   @Override
-  public Appointment addAppointment(final String description, final Date onDate) {
-    return getView().addAppointment(description, onDate);
+  public void addAppointment(final Appointment app) {
+    getView().addAppointment(app);
   }
 
   private void addListeners() {
@@ -216,6 +220,11 @@ public class CalendarViewerPresenter extends
       break;
     }
     setDate(date);
+  }
+
+  @Override
+  public void removeAppointment(final Appointment app) {
+    getView().removeAppointment(app);
   }
 
   @Override

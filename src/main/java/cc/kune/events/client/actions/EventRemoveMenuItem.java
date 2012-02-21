@@ -15,7 +15,9 @@ import cc.kune.events.client.viewer.CalendarViewer;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
+@Singleton
 public class EventRemoveMenuItem extends MenuItemDescriptor {
   public static class EventEditAction extends RolAction {
     private final Provider<CalendarViewer> calendar;

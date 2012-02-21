@@ -68,6 +68,8 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, cal7DaysBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, calMonthBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, calNextBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
 
     // On over calendar menu
     actionsRegistry.addAction(ActionGroups.TOOLBAR, onOverMenu, containers);
@@ -78,9 +80,6 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     // For now, commented:
     // actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn,
     // containers);
-    // actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn,
-    // contents);
-    // actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, all);
     // actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem,
     // contents);
     // actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem,

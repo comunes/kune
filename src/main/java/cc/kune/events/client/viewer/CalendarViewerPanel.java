@@ -9,14 +9,12 @@ import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.shared.SessionConstants;
 import cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerPanel;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
-import com.bradrydzewski.gwt.calendar.client.AppointmentStyle;
 import com.bradrydzewski.gwt.calendar.client.Calendar;
 import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 import com.bradrydzewski.gwt.calendar.client.event.CreateHandler;
@@ -72,21 +70,6 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   @Override
   public void addAppointment(final Appointment appointment) {
     calendar.addAppointment(appointment);
-  }
-
-  @Override
-  public Appointment addAppointment(final String title, final Date date) {
-    // Should this be used or serialize from server side?
-    final Appointment appt = new Appointment();
-    appt.setStart(date);
-    // http://stackoverflow.com/questions/2527845/how-to-do-calendar-operations-in-java-gwt-how-to-add-days-to-a-dateSessionConstants._AN_HOUR
-    final Date endDate = new Date(date.getTime() + SessionConstants._AN_HOUR + SessionConstants._AN_HOUR
-        / 2);
-    appt.setEnd(endDate);
-    appt.setTitle(title);
-    appt.setStyle(AppointmentStyle.ORANGE);
-    calendar.addAppointment(appt);
-    return appt;
   }
 
   @Override
@@ -154,6 +137,12 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   @Override
   public void clearAppointments() {
     calendar.clearAppointments();
+  }
+
+  @Override
+  public void detach() {
+    super.detach();
+
   }
 
   @Override

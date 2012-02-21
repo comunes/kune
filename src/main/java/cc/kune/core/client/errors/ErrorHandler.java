@@ -131,6 +131,9 @@ public class ErrorHandler {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info,
           i18n.t("You are trying to move this to the same location")));
+    } else if (caught instanceof NameNotPermittedException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t("This name is not permitted")));
     } else if (caught instanceof UnderDevelopmentException) {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t(TextUtils.IN_DEVELOPMENT)));
