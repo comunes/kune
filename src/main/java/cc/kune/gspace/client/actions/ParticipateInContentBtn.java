@@ -76,7 +76,7 @@ public class ParticipateInContentBtn extends ButtonDescriptor {
       final IsCurrentStateEditableCondition isEditable,
       final IsNotParticipantOfCurrentStateCondition isNotParticipant, final CoreResources res) {
     super(action);
-    this.withText(i18n.t("Participate")).withToolTip("Participate in the edition of this page").withIcon(
+    this.withText(i18n.t("Participate")).withToolTip(i18n.t("Participate in the edition of this page")).withIcon(
         res.contentEdit()).withStyles("k-def-docbtn, k-fl");
     super.add(isLogged);
     super.add(isEditable);
