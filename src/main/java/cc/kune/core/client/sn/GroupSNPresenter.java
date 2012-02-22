@@ -26,8 +26,8 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.client.events.SocialNetworkChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
@@ -204,21 +204,26 @@ public class GroupSNPresenter extends
       if (userCanView) {
         for (final GroupDTO admin : adminsList) {
           final String avatar = getAvatar(admin);
-          getView().addAdmin(admin, avatar, admin.getLongName(), "",
-              createMenuItems(admin, adminsMenuItemsRegistry, admin.getLongName()));
+          getView().addAdmin(admin, avatar, admin.getCompoundName(), "",
+              createMenuItems(admin, adminsMenuItemsRegistry, admin.getCompoundName()));
         }
         getView().setCollabsVisible(numCollabs > 0, areMany(numCollabs));
         for (final GroupDTO collab : collabList) {
           final String avatar = getAvatar(collab);
-          getView().addCollab(collab, avatar, collab.getLongName(), "",
-              createMenuItems(collab, collabsMenuItemsRegistry, collab.getLongName()));
+          getView().addCollab(collab, avatar, collab.getCompoundName(), "",
+              createMenuItems(collab, collabsMenuItemsRegistry, collab.getCompoundName()));
         }
         if (userIsAdmin) {
           getView().setPendingVisible(numPendings > 0, areMany(numPendings));
           for (final GroupDTO pendingCollab : pendingCollabsList) {
             final String avatar = getAvatar(pendingCollab);
-            getView().addPending(pendingCollab, avatar, pendingCollab.getLongName(), "",
-                createMenuItems(pendingCollab, pendingsMenuItemsRegistry, pendingCollab.getLongName()));
+            getView().addPending(
+                pendingCollab,
+                avatar,
+                pendingCollab.getCompoundName(),
+                "",
+                createMenuItems(pendingCollab, pendingsMenuItemsRegistry,
+                    pendingCollab.getCompoundName()));
           }
         } else {
           getView().setPendingVisible(false, false);

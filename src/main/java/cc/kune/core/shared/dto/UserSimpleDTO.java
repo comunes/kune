@@ -25,6 +25,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserSimpleDTO implements IsSerializable {
+  private String compoundName;
   private I18nCountryDTO country;
   private EmailNotificationFrequency emailNotifFreq;
   private boolean emailVerified;
@@ -47,6 +48,7 @@ public class UserSimpleDTO implements IsSerializable {
     this.language = language;
     this.country = country;
     this.timezone = timezone;
+
   }
 
   @Override
@@ -76,6 +78,13 @@ public class UserSimpleDTO implements IsSerializable {
       return false;
     }
     return true;
+  }
+
+  public String getCompoundName() {
+    if (compoundName == null) {
+      compoundName = !name.equals(shortName) ? name + " (" + shortName + ")" : shortName;
+    }
+    return compoundName;
   }
 
   public I18nCountryDTO getCountry() {

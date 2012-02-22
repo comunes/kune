@@ -880,8 +880,10 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
             final JSONObject jsonOpt = optionsArray.get(i).isObject();
             final Option option = new Option();
-            option.setName(jsonOpt.get(OptionResultSet.DISPLAY_NAME).isString().stringValue() + " ("
-                + jsonOpt.get(OptionResultSet.VALUE).isString().stringValue() + ")");
+
+            final String longName = jsonOpt.get(OptionResultSet.DISPLAY_NAME).isString().stringValue();
+            final String shortName = jsonOpt.get(OptionResultSet.VALUE).isString().stringValue();
+            option.setName(!longName.equals(shortName) ? longName + " (" + shortName + ")" : shortName);
             option.setValue(jsonOpt.get(OptionResultSet.VALUE).isString().stringValue());
             options.addOption(option);
           }

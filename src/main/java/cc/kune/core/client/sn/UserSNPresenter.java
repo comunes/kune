@@ -27,8 +27,8 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.SocialNetworkChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNProxy;
@@ -179,8 +179,8 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     final List<UserSimpleDTO> buddies = userBuddiesData.getBuddies();
     for (final UserSimpleDTO user : buddies) {
       final String avatarUrl = downloadProvider.get().getUserAvatar(user);
-      getView().addBuddie(user, avatarUrl, user.getName(), "",
-          createMenuItems(user, userMenuItemsRegistry, user.getName()));
+      getView().addBuddie(user, avatarUrl, user.getCompoundName(), "",
+          createMenuItems(user, userMenuItemsRegistry, user.getCompoundName()));
     }
     final boolean hasLocalBuddies = buddies.size() > 0;
     final int numExtBuddies = userBuddiesData.getOtherExtBuddies();
@@ -211,12 +211,12 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     final int numAdmins = groupsIsAdmin.size();
     final int numCollaborators = groupsIsCollab.size();
     for (final GroupDTO group : groupsIsAdmin) {
-      getView().addParticipation(group, getAvatar(group), group.getLongName(), "",
-          createMenuItems(group, userMenuItemsRegistry, group.getLongName()));
+      getView().addParticipation(group, getAvatar(group), group.getCompoundName(), "",
+          createMenuItems(group, userMenuItemsRegistry, group.getCompoundName()));
     }
     for (final GroupDTO group : groupsIsCollab) {
-      getView().addParticipation(group, getAvatar(group), group.getLongName(), "",
-          createMenuItems(group, userMenuItemsRegistry, group.getLongName()));
+      getView().addParticipation(group, getAvatar(group), group.getCompoundName(), "",
+          createMenuItems(group, userMenuItemsRegistry, group.getCompoundName()));
     }
     final int totalGroups = numAdmins + numCollaborators;
     // getView().setParticipationCount(totalGroups);

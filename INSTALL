@@ -245,10 +245,6 @@ Change in 'Server > Server Manager > System Properties':
 
 This is used to set the database of users of openfire to kune users database table. When you do that you have to follow the next step (or you will get authentication problems).
 
-Edit the openfire.xml in a terminal:
-* In debian (with a .deb installation) you can to edit the configuration in /etc/openfire directory.
-* In Mac: /usr/local/openfire/conf
-
 Also in 'Server > Server Manager > System Properties' set (verify that the mysql connection user and password is the same as the password you choose to configure your database):
 
 jdbcProvider.driver = com.mysql.jdbc.Driver
@@ -266,7 +262,10 @@ jdbcUserProvider.userCountSQL = SELECT COUNT(*) FROM kune_dev.kusers
 jdbcUserProvider.usernameField = shortName
 admin.authorizedJIDs = admin@PUT_HERE_YOUR_DOMAIN
 
-Or, alternatively (if is more easy for you), add these lines to conf/openfire.xml. Again check that the user/passwd of the db is the same here and in kune.properties (the ones configured before):
+Or, alternatively (if is more easy for you), add these lines to conf/openfire.xml
+* In debian (with a .deb installation) you can to edit the configuration in /etc/openfire directory.
+* In Mac: /usr/local/openfire/conf
+(Again check that the user/passwd of the db is the same here and in kune.properties the ones configured before):
 
 <pre>
 <jive>

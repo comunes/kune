@@ -65,8 +65,8 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   @Override
   public void addAdmin(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
-    final BasicDragableThumb thumb = createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle,
-        menu);
+    final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
+        tooltipTitle, menu);
     firstCategoryFlow.add(group.isPersonal() ? (Widget) decorateAvatarWithXmppStatus(
         group.getShortName(), thumb) : thumb);
   }
@@ -74,8 +74,8 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   @Override
   public void addCollab(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
-    final BasicDragableThumb thumb = createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle,
-        menu);
+    final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
+        tooltipTitle, menu);
     sndCategoryFlow.add(group.isPersonal() ? (Widget) decorateAvatarWithXmppStatus(group.getShortName(),
         thumb) : thumb);
   }
@@ -83,8 +83,8 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   @Override
   public void addPending(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
-    final BasicDragableThumb thumb = createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle,
-        menu);
+    final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
+        tooltipTitle, menu);
     trdCategoryFlow.add(thumb);
   }
 

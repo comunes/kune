@@ -16,7 +16,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class EventEditMenuItem extends MenuItemDescriptor {
+public class EventOpenMenuItem extends MenuItemDescriptor {
   public static class EventEditAction extends CalendarRolAction {
     private final Provider<CalendarViewer> calendar;
     private final StateManager stateManager;
@@ -25,10 +25,10 @@ public class EventEditMenuItem extends MenuItemDescriptor {
     public EventEditAction(final NavResources res, final I18nTranslationService i18n,
         final Provider<CalendarViewer> calendar, final EventBus eventBus,
         final StateManager stateManager, final Session session, final AccessRightsClientManager rightsMan) {
-      super(eventBus, session, calendar, AccessRolDTO.Editor, true, true);
+      super(eventBus, session, calendar, AccessRolDTO.Viewer, false, true);
       this.calendar = calendar;
       this.stateManager = stateManager;
-      withText(i18n.t("Edit the appointment")).withIcon(res.go());
+      withText(i18n.t("Open the appointment")).withIcon(res.go());
     }
 
     @Override
@@ -38,7 +38,7 @@ public class EventEditMenuItem extends MenuItemDescriptor {
   }
 
   @Inject
-  public EventEditMenuItem(final EventEditAction action, final CalendarOnOverMenu cal) {
+  public EventOpenMenuItem(final EventEditAction action, final CalendarOnOverMenu cal) {
     super(action);
     setParent(cal.get());
   }

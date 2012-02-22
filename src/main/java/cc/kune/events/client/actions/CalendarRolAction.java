@@ -23,7 +23,7 @@ public abstract class CalendarRolAction extends RolAction {
           public void onCalendarStateChange(final CalendarStateChangeEvent event) {
             // if the calendar is not selecting a appointment don't show this
             final AccessRights rights = session.getContainerState().getContainerRights();
-            final boolean isEnabled = RolComparator.isEnabled(AccessRolDTO.Editor, rights);
+            final boolean isEnabled = RolComparator.isEnabled(rolRequired, rights);
             final boolean isMember = RolComparator.isMember(rights);
             final boolean isOnApp = !calendar.get().getAppToEdit().equals(CalendarViewer.NO_APPOINT);
             final boolean newEnabled = isMember && isEnabled && (!onlyOnApp || isOnApp);

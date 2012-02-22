@@ -84,7 +84,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   @Override
   public void addParticipation(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
-    sndCategoryFlow.add(createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle, menu));
+    sndCategoryFlow.add(createThumb(group.getCompoundName(), avatarUrl, tooltip, tooltipTitle, menu));
   }
 
   @Override

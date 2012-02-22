@@ -28,6 +28,7 @@ public class GroupDTO implements IsSerializable {
 
   AdmissionType admissionType;
   private String backgroundImage;
+  private String compoundName;
   private Long createdOn;
   private ContentSimpleDTO defaultContent;
   private LicenseDTO defaultLicense;
@@ -77,6 +78,13 @@ public class GroupDTO implements IsSerializable {
 
   public String getBackgroundImage() {
     return backgroundImage;
+  }
+
+  public String getCompoundName() {
+    if (compoundName == null) {
+      compoundName = !longName.equals(shortName) ? longName + " (" + shortName + ")" : shortName;
+    }
+    return compoundName;
   }
 
   public Long getCreatedOn() {
