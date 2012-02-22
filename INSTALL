@@ -249,7 +249,24 @@ Edit the openfire.xml in a terminal:
 * In debian (with a .deb installation) you can to edit the configuration in /etc/openfire directory.
 * In Mac: /usr/local/openfire/conf
 
-Add these lines to conf/openfire.xml and check that the user/passwd of the db is the same here and in kune.properties (the ones configured before):
+Also in 'Server > Server Manager > System Properties' set (verify that the mysql connection user and password is the same as the password you choose to configure your database):
+
+jdbcProvider.driver = com.mysql.jdbc.Driver
+jdbcProvider.connectionString = jdbc:mysql://localhost/kune_dev?user=kune&password=db4kune&useUnicode=true&characterEncoding=utf-8
+provider.auth.className = org.jivesoftware.openfire.auth.JDBCAuthProvider
+provider.user.className = org.jivesoftware.openfire.user.JDBCUserProvider
+jdbcAuthProvider.passwordSQL = SELECT password FROM kune_dev.kusers WHERE shortName=?
+jdbcAuthProvider.passwordType = plain
+jdbcUserProvider.allUsersSQL = SELECT shortName FROM kune_dev.kusers	
+jdbcUserProvider.emailField = email	
+jdbcUserProvider.loadUserSQL = SELECT shortName,email FROM kune_dev.kusers WHERE shortName=?	
+jdbcUserProvider.nameField = name	
+jdbcUserProvider.searchSQL = SELECT shortName FROM kune_dev.kusers WHERE	
+jdbcUserProvider.userCountSQL = SELECT COUNT(*) FROM kune_dev.kusers	
+jdbcUserProvider.usernameField = shortName
+admin.authorizedJIDs = admin@PUT_HERE_YOUR_DOMAIN
+
+Or, alternatively (if is more easy for you), add these lines to conf/openfire.xml. Again check that the user/passwd of the db is the same here and in kune.properties (the ones configured before):
 
 <pre>
 <jive>
@@ -291,7 +308,7 @@ Instead of:
   <jdbcUserProvider/>
   <admin/>
 
-(Be sure that the password matches if you changed de default password 'db4kune', also the database name if you use another different like production one).
+(Be sure that the user and the password matches if you changed de default password 'db4kune', also the database name if you use another different like production one).
 
 When you add this to the configuration and you restart, openfire will import (and remove) this part of the configuration to its database so you will see it in 'Server > Server Manager > System Properties'.
 
