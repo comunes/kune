@@ -70,6 +70,8 @@ public class CalendarViewerPresenter extends
 
     int getClientY();
 
+    Date getCurrentDate();
+
     Date getDate();
 
     void goToday();
@@ -82,6 +84,8 @@ public class CalendarViewerPresenter extends
     void setView(CalendarViews view);
 
     void setView(CalendarViews view, int days);
+
+    void updateTitle(CalendarViews currentCalView);
   }
 
   private static final CalendarViews DEF_VIEW = CalendarViews.DAY;
@@ -171,6 +175,7 @@ public class CalendarViewerPresenter extends
   @Override
   public void attach() {
     getView().attach();
+    updateTitle();
   }
 
   @Override
@@ -201,6 +206,7 @@ public class CalendarViewerPresenter extends
   @Override
   public void goToday() {
     getView().goToday();
+    updateTitle();
   }
 
   private void hideMenu() {
@@ -224,6 +230,7 @@ public class CalendarViewerPresenter extends
       break;
     }
     setDate(date);
+    updateTitle();
   }
 
   @Override
@@ -265,12 +272,14 @@ public class CalendarViewerPresenter extends
     this.currentCalView = calView;
     this.currentDaysView = 1;
     getView().setView(calView);
+    updateTitle();
   }
 
   private void setViewImpl(final CalendarViews calView, final int days) {
     this.currentCalView = calView;
     this.currentDaysView = days;
     getView().setView(calView, days);
+    updateTitle();
   }
 
   private void showMenu() {
@@ -280,5 +289,9 @@ public class CalendarViewerPresenter extends
 
   private void updateMenuItems() {
     CalendarStateChangeEvent.fire(getEventBus());
+  }
+
+  private void updateTitle() {
+    getView().updateTitle(currentCalView);
   }
 }

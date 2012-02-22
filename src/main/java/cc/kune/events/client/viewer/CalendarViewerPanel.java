@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cc.kune.common.client.actions.ui.GuiProvider;
+import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView;
+import cc.kune.events.shared.EventsConstants;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerPanel;
+import cc.kune.gspace.client.viewers.ContentTitleWidget;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
@@ -31,9 +34,11 @@ import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -42,6 +47,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   private final Calendar calendar;
   private int clientX;
   private int clientY;
+  private ContentTitleWidget contentTitle;
 
   @Inject
   public CalendarViewerPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
@@ -65,6 +71,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
         }
       }
     });
+    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
   }
 
   @Override
@@ -166,6 +173,11 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   }
 
   @Override
+  public Date getCurrentDate() {
+    return calendar.getDate();
+  }
+
+  @Override
   public Date getDate() {
     return calendar.getDate();
   }
@@ -230,6 +242,29 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   @Override
   public void suspendLayout() {
     calendar.suspendLayout();
+  }
+
+  @Override
+  public void updateTitle(final CalendarViews currentCalView) {
+    final Date currentDate = getDate();
+    DateTimeFormat fmt = null;
+    // More info about formats:
+    // http://google-web-toolkit.googlecode.com/svn/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
+    switch (currentCalView) {
+    case DAY:
+    case AGENDA:
+      fmt = DateTimeFormat.getFormat("EEEE, MMMM dd, yyyy");
+      break;
+    case MONTH:
+      fmt = DateTimeFormat.getFormat("MMMM yyyy");
+      break;
+    }
+    final String dateFormatted = fmt.format(currentDate);
+    final ForIsWidget docHeader = gsArmor.getDocHeader();
+    UiUtils.clear(docHeader);
+    contentTitle.setTitle(i18n.tWithNT("Events in [%s]", dateFormatted), EventsConstants.TYPE_ROOT,
+        null, false);
+    docHeader.add(contentTitle);
   }
 
 }
