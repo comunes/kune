@@ -1,20 +1,26 @@
 package cc.kune.events.client.viewer;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.Position;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.ICalConstants;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.HasContent;
+import cc.kune.core.shared.dto.StateEventContainerDTO;
 import cc.kune.events.client.actions.CalendarOnOverMenu;
+import cc.kune.events.shared.EventsClientConversionUtil;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerView;
 import cc.kune.gspace.client.viewers.FolderViewerUtils;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
+import com.bradrydzewski.gwt.calendar.client.AppointmentStyle;
 import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 import com.bradrydzewski.gwt.calendar.client.HasAppointments;
 import com.bradrydzewski.gwt.calendar.client.HasLayout;
@@ -233,6 +239,10 @@ public class CalendarViewerPresenter extends
     updateTitle();
   }
 
+  private boolean isValid(final Appointment app) {
+    return app.getStart() != null && app.getEnd() != null;
+  }
+
   @Override
   public void removeAppointment(final Appointment app) {
     getView().removeAppointment(app);
@@ -246,7 +256,22 @@ public class CalendarViewerPresenter extends
   @Override
   public void setContent(@Nonnull final HasContent state) {
     folderViewerUtils.setContent(getView(), state);
+    final StateEventContainerDTO eventState = (StateEventContainerDTO) state;
     updateMenuItems();
+    getView().clearAppointments();
+    getView().suspendLayout();
+    for (final Map<String, String> map : eventState.getAppointments()) {
+      final Appointment app = EventsClientConversionUtil.toApp(map);
+      app.setId(map.get(ICalConstants._INTERNAL_ID));
+      app.setStyle(AppointmentStyle.GREEN);
+      if (isValid(app)) {
+        getView().addAppointment(app);
+
+      } else {
+        Log.error("Appointment is not valid: " + app);
+      }
+    }
+    getView().resumeLayout();
   }
 
   @Override

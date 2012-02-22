@@ -35,6 +35,8 @@ import cc.kune.domain.Group;
 import cc.kune.domain.License;
 import cc.kune.domain.Revision;
 import cc.kune.domain.User;
+import cc.kune.events.server.CalendarServerUtils;
+import cc.kune.events.shared.EventsConstants;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
@@ -72,7 +74,8 @@ public class StateServiceDefault implements StateService {
 
   @Override
   public StateContainer create(final User userLogged, final Container container) {
-    final StateContainer state = new StateContainer();
+    final boolean isCalendar = container.getTypeId().equals(EventsConstants.TYPE_ROOT);
+    final StateContainer state = isCalendar ? new StateEventContainer() : new StateContainer();
     state.setTitle(container.getName());
     state.setTypeId(container.getTypeId());
     state.setLanguage(container.getLanguage());
@@ -82,6 +85,9 @@ public class StateServiceDefault implements StateService {
     state.setAccessLists(container.getAccessLists());
     final Group group = container.getOwner();
     setCommon(state, userLogged, group, container);
+    if (isCalendar) {
+      ((StateEventContainer) state).setAppointments(CalendarServerUtils.getAppointments(container));
+    }
     return state;
   }
 

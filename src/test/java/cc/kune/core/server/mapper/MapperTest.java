@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Before;
@@ -39,6 +40,7 @@ import cc.kune.core.server.TestDomainHelper;
 import cc.kune.core.server.TestHelper;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.state.StateContent;
+import cc.kune.core.server.state.StateEventContainer;
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.UserSNetVisibility;
@@ -55,6 +57,7 @@ import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateEventContainerDTO;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
@@ -169,6 +172,20 @@ public class MapperTest {
   @Before
   public void inject() {
     TestHelper.inject(this);
+  }
+
+  @Test
+  public void mapEventContainer() {
+    final StateEventContainer c = new StateEventContainer();
+    final HashMap<String, String> map = new HashMap<String, String>();
+    map.put("prop", "value");
+    map.put("prop2", "value2");
+    final List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+    list.add(map);
+    c.setAppointments(list);
+    final StateEventContainerDTO dto = mapper.map(c, StateEventContainerDTO.class);
+    assertEquals(dto.getAppointments().get(0).get("prop"), "value");
+    assertEquals(dto.getAppointments().get(0).get("prop2"), "value2");
   }
 
   @Test

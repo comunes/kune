@@ -29,6 +29,7 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.shared.utils.SimpleArgCallback;
 
+import com.google.wave.api.Gadget;
 import com.google.wave.api.Participants;
 import com.google.wave.api.Wavelet;
 
@@ -73,6 +74,8 @@ public interface KuneWaveService {
   Wavelet fetchWave(WaveId waveId, WaveletId waveletId, String author);
 
   Wavelet fetchWave(WaveRef waveRef, String author);
+
+  Gadget getGadget(WaveRef waveletName, String author, URL gadgetUrl);
 
   Participants getParticipants(WaveRef waveref, String author);
 

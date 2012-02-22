@@ -262,8 +262,8 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     final String dateFormatted = fmt.format(currentDate);
     final ForIsWidget docHeader = gsArmor.getDocHeader();
     UiUtils.clear(docHeader);
-    contentTitle.setTitle(i18n.tWithNT("Events in [%s]", dateFormatted), EventsConstants.TYPE_ROOT,
-        null, false);
+    contentTitle.setTitle(i18n.t("Events in [%s]", dateFormatted), EventsConstants.TYPE_ROOT, null,
+        false);
     docHeader.add(contentTitle);
   }
 

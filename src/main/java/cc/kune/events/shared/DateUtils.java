@@ -12,9 +12,9 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 public class DateUtils {
 
   private static String RFC_DATE_TIME_FORMAT = "'DTSTART':yyyyMMdd'T'hhmmss";
+  // This is not tested
   private static String RFC_DATE_TIME_FORMAT_TZ = "'DTSTART;TZID='v:yyyyMMdd'T'hhmmss";
   private static DateTimeFormat rfcDateFormat = DateTimeFormat.getFormat(RFC_DATE_TIME_FORMAT);
-  private static DateTimeFormat rfcDateFormatTz = DateTimeFormat.getFormat(RFC_DATE_TIME_FORMAT_TZ);
 
   public static Date toDate(final String date) {
     return rfcDateFormat.parse(date);

@@ -452,6 +452,21 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   @Override
+  public Gadget getGadget(final WaveRef waveletName, final String author, final URL gadgetUrl) {
+    final Wavelet wavelet = fetchWave(waveletName, author);
+    final Blip rootBlip = wavelet.getRootBlip();
+    for (final Element elem : rootBlip.getElements().values()) {
+      if (elem.isGadget()) {
+        final Map<String, String> properties = elem.getProperties();
+        if (properties.get(Gadget.URL).equals(gadgetUrl.toString())) {
+          return (Gadget) elem;
+        }
+      }
+    }
+    return null;
+  }
+
+  @Override
   public Participants getParticipants(final WaveRef waveref, final String author) {
     return fetchWave(waveref, author).getParticipants();
   }

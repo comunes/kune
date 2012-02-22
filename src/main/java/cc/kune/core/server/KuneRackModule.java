@@ -59,6 +59,7 @@ import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
 import cc.kune.core.server.scheduler.CronServerTasksManager;
 import cc.kune.docs.server.DocumentServerModule;
+import cc.kune.events.server.CalendarServerUtils;
 import cc.kune.events.server.EventsServerModule;
 import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
@@ -121,7 +122,11 @@ public class KuneRackModule implements RackModule {
         if (sessionScope != null) {
           bindScope(SessionScoped.class, sessionScope);
         }
+
+        // This can be used also in Gin:
+        // http://code.google.com/p/google-gin/issues/detail?id=60
         requestStaticInjection(KuneWaveServerUtils.class);
+        requestStaticInjection(CalendarServerUtils.class);
       }
     };
   }

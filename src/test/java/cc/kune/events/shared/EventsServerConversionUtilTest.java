@@ -9,14 +9,14 @@ import org.junit.Test;
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.google.gwt.editor.client.Editor.Ignore;
 
-public class EventsConversionUtilTest extends BasicCalendarTest {
+public class EventsServerConversionUtilTest extends BasicCalendarTest {
 
   @Test
   @Ignore
   public void testToMap() {
     final Appointment app = createAppointment(false);
-    final Map<String, String> map = EventsConversionUtil.toMap(app);
-    final Appointment appReConverted = EventsConversionUtil.toApp(map);
+    final Map<String, String> map = EventsClientConversionUtil.toMap(app);
+    final Appointment appReConverted = EventsClientConversionUtil.toApp(map);
     assertEquals(app.getStart(), appReConverted.getStart());
     assertEquals(app.getEnd(), appReConverted.getEnd());
     assertEquals(app.getDescription(), appReConverted.getDescription());

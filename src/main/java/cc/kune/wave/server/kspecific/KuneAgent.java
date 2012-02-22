@@ -37,6 +37,7 @@ import cc.kune.common.shared.utils.SimpleArgCallback;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import com.google.wave.api.Gadget;
 import com.google.wave.api.Participants;
 import com.google.wave.api.Wavelet;
 
@@ -164,6 +165,12 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     // return null;
     // }
     // }
+    return null;
+  }
+
+  @Override
+  public Gadget getGadget(final WaveRef waveletName, final String author, final URL gadgetUrl) {
+    // TODO Auto-generated method stub
     return null;
   }
 

@@ -50,6 +50,7 @@ import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.state.StateContainer;
 import cc.kune.core.server.state.StateContent;
+import cc.kune.core.server.state.StateEventContainer;
 import cc.kune.core.server.state.StateService;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -62,6 +63,7 @@ import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateEventContainerDTO;
 import cc.kune.core.shared.dto.StateNoContentDTO;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
@@ -322,7 +324,9 @@ public class ContentRPC implements ContentService, RPC {
   }
 
   private StateContainerDTO mapState(final StateContainer state, final User user) {
-    final StateContainerDTO stateDTO = mapper.map(state, StateContainerDTO.class);
+    final StateContainerDTO stateDTO = state instanceof StateEventContainer ? mapper.map(state,
+        StateEventContainerDTO.class) : mapper.map(state, StateContainerDTO.class);
+
     final AccessLists groupAccessList = state.getGroup().getSocialNetwork().getAccessLists();
     for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
       mapContentRightsInstate(user, groupAccessList, siblingDTO);

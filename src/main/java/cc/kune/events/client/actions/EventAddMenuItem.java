@@ -17,7 +17,7 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.events.client.viewer.CalendarViewer;
 import cc.kune.events.shared.EventsConstants;
-import cc.kune.events.shared.EventsConversionUtil;
+import cc.kune.events.shared.EventsClientConversionUtil;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.bradrydzewski.gwt.calendar.client.AppointmentStyle;
@@ -75,7 +75,7 @@ public class EventAddMenuItem extends MenuItemDescriptor {
               contService.get().addNewContentWithGadgetAndState(session.getUserHash(),
                   session.getContainerState().getStateToken(),
                   EventsConstants.TYPE_MEETING_DEF_GADGETNAME, EventsConstants.TYPE_MEETING, title,
-                  title, EventsConversionUtil.toMap(appt), new AsyncCallbackSimple<StateContentDTO>() {
+                  title, EventsClientConversionUtil.toMap(appt), new AsyncCallbackSimple<StateContentDTO>() {
                     @Override
                     public void onFailure(final Throwable caught) {
                       super.onFailure(caught);

@@ -94,6 +94,16 @@
     <class-b>cc.kune.core.server.state.StateContainer</class-b>
   </mapping>
   <mapping>
+    <class-a>cc.kune.core.shared.dto.StateEventContainerDTO</class-a>
+    <class-b>cc.kune.core.server.state.StateEventContainer</class-b>
+    <field>
+      <a>appointments</a>
+      <b>appointments</b>
+      <a-hint>java.util.HashMap</a-hint>
+      <b-hint>java.util.HashMap</b-hint>
+    </field>
+  </mapping>
+  <mapping>
     <class-a>cc.kune.core.shared.dto.StateAbstractDTO</class-a>
     <class-b>cc.kune.core.server.state.StateAbstract</class-b>
   </mapping>
@@ -237,7 +247,7 @@
     <class-a> cc.kune.core.shared.dto.SocialNetworkDataDTO </class-a>
     <class-b> cc.kune.domain.SocialNetworkData </class-b>
   </mapping>
-    <mapping>
+  <mapping>
     <class-a> cc.kune.core.shared.dto.HomeStatsDTO </class-a>
     <class-b> cc.kune.core.server.stats.HomeStats </class-b>
     <field>
@@ -252,5 +262,5 @@
       <a-hint> cc.kune.core.shared.dto.ContentSimpleDTO </a-hint>
       <b-hint> cc.kune.domain.Content </b-hint>
     </field>
-    </mapping>
+  </mapping>
 </mappings>
