@@ -59,25 +59,23 @@ public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
   public void refreshStatus(final AccessRolDTO rolRequired, final boolean authNeed,
       final boolean isLogged, final boolean visibleForMembers, final boolean visibleForNonMemb,
       final AccessRights newRights) {
-    boolean newVisibility = false;
     boolean newEnabled = false;
     if (authNeed && !isLogged) {
-      newVisibility = newEnabled = false;
+      newEnabled = false;
     } else {
       // Auth ok
       newEnabled = RolComparator.isEnabled(rolRequired, newRights);
       if (newEnabled) {
         final boolean isMember = RolComparator.isMember(newRights);
-        newEnabled = newVisibility = isMember && visibleForMembers || !isMember && visibleForNonMemb;
-      } else {
-        newVisibility = false;
+        newEnabled = isMember && visibleForMembers || !isMember && visibleForNonMemb;
       }
     }
     setEnabled(!newEnabled);
     setEnabled(newEnabled);
+
     // Workaround to force change ...
-    putValue(GuiActionDescrip.VISIBLE, !newVisibility);
-    putValue(GuiActionDescrip.VISIBLE, newVisibility);
+    putValue(GuiActionDescrip.VISIBLE, !newEnabled);
+    putValue(GuiActionDescrip.VISIBLE, newEnabled);
     // NotifyUser.info("Set '" + getValue(Action.NAME) + "' visible: " +
     // newVisibility, true);
   }

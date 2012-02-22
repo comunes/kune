@@ -6,10 +6,11 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.events.client.viewer.CalendarStateChangeEvent;
 import cc.kune.events.client.viewer.CalendarViewer;
 
 import com.google.gwt.event.shared.EventBus;
@@ -19,25 +20,19 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class EventRemoveMenuItem extends MenuItemDescriptor {
-  public static class EventEditAction extends RolAction {
+  public static class EventEditAction extends CalendarRolAction {
     private final Provider<CalendarViewer> calendar;
     private PromptTopDialog dialog;
     private final I18nTranslationService i18n;
 
     @Inject
     public EventEditAction(final CoreResources res, final I18nTranslationService i18n,
-        final Provider<CalendarViewer> calendar, final EventBus eventBus) {
-      super(AccessRolDTO.Editor, true);
+        final Provider<CalendarViewer> calendar, final EventBus eventBus, final Session session,
+        final StateManager stateManager, final AccessRightsClientManager rightsMan) {
+      super(eventBus, session, calendar, AccessRolDTO.Administrator, true, true);
       this.i18n = i18n;
       this.calendar = calendar;
       withText(i18n.t("Remove this appointment")).withIcon(res.cancel());
-      eventBus.addHandler(CalendarStateChangeEvent.getType(),
-          new CalendarStateChangeEvent.CalendarStateChangeHandler() {
-            @Override
-            public void onCalendarStateChange(final CalendarStateChangeEvent event) {
-              setEnabled(!calendar.get().getAppToEdit().equals(CalendarViewer.NO_APPOINT));
-            }
-          });
     }
 
     @Override

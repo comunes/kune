@@ -73,6 +73,14 @@ public class EventsClientActions extends AbstractFoldableToolActions {
 
     // On over calendar menu
     actionsRegistry.addAction(ActionGroups.TOOLBAR, onOverMenu, containers);
+
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, eventAddMenuItem,
+    // containers);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, eventEditMenuItem,
+    // containers);
+    // actionsRegistry.addAction(ActionGroups.TOOLBAR, eventRemoveMenuItem,
+    // containers);
+
     eventAddMenuItem.get();
     eventEditMenuItem.get();
     eventRemoveMenuItem.get();

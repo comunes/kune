@@ -4,7 +4,9 @@ import cc.kune.gspace.client.actions.AbstractStandaloneMenu;
 import cc.kune.gspace.client.actions.StandaloneMenuProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class CalendarOnOverMenu extends StandaloneMenuProvider {
 
   @Inject

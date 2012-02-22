@@ -150,6 +150,8 @@ public class CalendarViewerPresenter extends
       @Override
       public void onOpen(final OpenEvent<Appointment> event) {
         // NotifyUser.info("open handler");
+        updateMenuItems();
+        showMenu();
       }
     });
     getView().addSelectionHandler(new SelectionHandler<Appointment>() {
@@ -158,8 +160,10 @@ public class CalendarViewerPresenter extends
         appToEdit = event.getSelectedItem();
         onOverDate = event.getSelectedItem().getStart();
         // NotifyUser.info("on selection");
-        updateMenuItems();
-        showMenu();
+
+        // This is not very usable:
+        // updateMenuItems();
+        // showMenu();
       }
     });
   }
@@ -235,6 +239,7 @@ public class CalendarViewerPresenter extends
   @Override
   public void setContent(@Nonnull final HasContent state) {
     folderViewerUtils.setContent(getView(), state);
+    updateMenuItems();
   }
 
   @Override

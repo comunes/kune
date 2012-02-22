@@ -7,11 +7,11 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
@@ -23,13 +23,14 @@ import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.bradrydzewski.gwt.calendar.client.AppointmentStyle;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
 public class EventAddMenuItem extends MenuItemDescriptor {
-  public static class EventAddAction extends RolAction {
+  public static class EventAddAction extends CalendarRolAction {
     private final Provider<CalendarViewer> calendar;
     private final Provider<ContentServiceAsync> contService;
     private PromptTopDialog dialog;
@@ -39,8 +40,8 @@ public class EventAddMenuItem extends MenuItemDescriptor {
     @Inject
     public EventAddAction(final NavResources res, final I18nTranslationService i18n,
         final Provider<CalendarViewer> calendar, final Provider<ContentServiceAsync> contService,
-        final Session session) {
-      super(AccessRolDTO.Editor, true);
+        final Session session, final StateManager stateManager, final EventBus eventBus) {
+      super(eventBus, session, calendar, AccessRolDTO.Editor, true, false);
       this.i18n = i18n;
       this.calendar = calendar;
       this.contService = contService;
