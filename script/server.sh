@@ -11,6 +11,8 @@ Options:
                 or adding -Dgwt.compiler.skip=true to skip compilation
 -a: run as a daemon (only root user)
 -l LOGLEVEL : IGNORE|DEBUG|INFO|WARN
+-x: -Xmx memory value
+-m: -Xms memory value
 
 Debug Options:
 -d: debug
@@ -40,8 +42,10 @@ DEBUG_PORT=""
 LOG_LEVEL="INFO"
 LOGFILE=/var/log/kune.log
 PIDFILE=/var/run/kune.pid
+MX=""
+MS=""
 
-while getopts “hj:k:w:s:up:l:da” OPTION
+while getopts “hm:x:j:k:w:s:up:l:da” OPTION
 do
     case $OPTION in
 	h)
@@ -59,6 +63,12 @@ do
 	    ;;
 	s)
             JAAS_CONFIG=$OPTARG
+            ;;
+	x)
+            MX="-Xmx"$OPTARG
+            ;;
+	m)
+            MS="-Xms"$OPTARG
             ;;
 	p)
 	    # Debug port
@@ -124,6 +134,8 @@ else
 	    -Djava.security.auth.login.config=$JAAS_CONFIG \
 	    -Dkune.server.config=$KUNE_CONFIG \
 	    -Dwave.server.config=$WAVE_CONFIG \
+            $MS \
+	    $MX \
 	    -jar $JAR </dev/null > $LOGFILE 2>&1 &
 	echo $! > $PIDFILE
     else
@@ -132,6 +144,8 @@ else
 	    -Djava.security.auth.login.config=$JAAS_CONFIG \
 	    -Dkune.server.config=$KUNE_CONFIG \
 	    -Dwave.server.config=$WAVE_CONFIG \
+            $MS \
+	    $MX \
 	    -jar $JAR
     fi
 fi
