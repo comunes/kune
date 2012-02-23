@@ -152,7 +152,7 @@ public class ContentRPC implements ContentService, RPC {
     final User user = getCurrentUser();
     final Content content = accessService.accessToContent(
         ContentUtils.parseId(currentStateToken.getDocument()), user, AccessRol.Editor);
-    creationService.addGadgetToContent(user, content, gadgetName);
+    contentManager.addGadgetToContent(user, content, gadgetName);
   }
 
   @Override
@@ -176,8 +176,8 @@ public class ContentRPC implements ContentService, RPC {
     final User user = getCurrentUser();
     final Container container = accessService.accessToContainer(
         ContentUtils.parseId(parentToken.getFolder()), user, AccessRol.Editor);
-    final Content addedContent = creationService.createGadget(user, container, gadgetname, typeId,
-        title, body, gadgetProperties);
+    final Content addedContent = contentManager.createGadget(user, container, gadgetname, typeId, title,
+        body, gadgetProperties);
     return getState(user, addedContent);
   }
 
@@ -460,7 +460,7 @@ public class ContentRPC implements ContentService, RPC {
     final Long contentId = ContentUtils.parseId(token.getDocument());
     final User user = getCurrentUser();
     final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
-    creationService.saveContent(user, content, textContent);
+    contentManager.save(user, content, textContent);
   }
 
   @Override
@@ -480,6 +480,18 @@ public class ContentRPC implements ContentService, RPC {
     final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
     groupManager.setDefaultContent(token.getGroup(), content);
     return mapper.map(content, ContentSimpleDTO.class);
+  }
+
+  @Override
+  @Authenticated
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
+  @Transactional
+  public void setGadgetProperties(final String userHash, final StateToken currentStateToken,
+      final String gadgetName, final Map<String, String> properties) {
+    final User user = getCurrentUser();
+    final Content content = accessService.accessToContent(
+        ContentUtils.parseId(currentStateToken.getDocument()), user, AccessRol.Editor);
+    contentManager.setGadgetProperties(user, content, gadgetName, properties);
   }
 
   @Override

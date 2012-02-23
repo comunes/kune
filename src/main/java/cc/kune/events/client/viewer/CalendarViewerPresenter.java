@@ -1,6 +1,7 @@
 package cc.kune.events.client.viewer;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
@@ -10,12 +11,17 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.res.ICalConstants;
+import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateEventContainerDTO;
 import cc.kune.events.client.actions.CalendarOnOverMenu;
+import cc.kune.events.shared.DateUtils;
 import cc.kune.events.shared.EventsClientConversionUtil;
+import cc.kune.events.shared.EventsConstants;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerView;
 import cc.kune.gspace.client.viewers.FolderViewerUtils;
 
@@ -25,6 +31,8 @@ import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 import com.bradrydzewski.gwt.calendar.client.HasAppointments;
 import com.bradrydzewski.gwt.calendar.client.HasLayout;
 import com.bradrydzewski.gwt.calendar.client.event.CreateHandler;
+import com.bradrydzewski.gwt.calendar.client.event.DeleteEvent;
+import com.bradrydzewski.gwt.calendar.client.event.DeleteHandler;
 import com.bradrydzewski.gwt.calendar.client.event.HasDateRequestHandlers;
 import com.bradrydzewski.gwt.calendar.client.event.HasDeleteHandlers;
 import com.bradrydzewski.gwt.calendar.client.event.HasMouseOverHandlers;
@@ -45,8 +53,10 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
@@ -97,6 +107,7 @@ public class CalendarViewerPresenter extends
   private static final CalendarViews DEF_VIEW = CalendarViews.DAY;
   public Appointment appToEdit = NO_APPOINT;
 
+  private final Provider<ContentServiceAsync> contentService;
   private CalendarViews currentCalView;
   private int currentDaysView = 7;
   private final FolderViewerUtils folderViewerUtils;
@@ -110,13 +121,14 @@ public class CalendarViewerPresenter extends
   public CalendarViewerPresenter(final EventBus eventBus, final CalendarViewerView view,
       final CalendarViewerProxy proxy, final FolderViewerUtils folderViewerUtils,
       final CalendarOnOverMenu onOverMenu, final Session session, final StateManager stateManager,
-      final I18nTranslationService i18n) {
+      final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService) {
     super(eventBus, view, proxy);
     this.folderViewerUtils = folderViewerUtils;
     this.onOverMenu = onOverMenu;
     this.session = session;
     this.stateManager = stateManager;
     this.i18n = i18n;
+    this.contentService = contentService;
     addListeners();
     setViewImpl(DEF_VIEW, currentDaysView);
   }
@@ -127,6 +139,13 @@ public class CalendarViewerPresenter extends
   }
 
   private void addListeners() {
+    getView().addDeleteHandler(new DeleteHandler<Appointment>() {
+      @Override
+      public void onDelete(final DeleteEvent<Appointment> event) {
+        NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
+        event.setCancelled(true);
+      }
+    });
     getView().addTimeBlockClickHandler(new TimeBlockClickHandler<Date>() {
       @Override
       public void onTimeBlockClick(final TimeBlockClickEvent<Date> event) {
@@ -151,8 +170,21 @@ public class CalendarViewerPresenter extends
           NotifyUser.error(i18n.t("Only members can update events"));
         }
         event.setCancelled(!editable);
-        // event.setCancelled(true);
-        // NotifyUser.info("updated handler");
+        final Appointment app = event.getTarget();
+        final Map<String, String> map = new HashMap<String, String>();
+        map.put(ICalConstants.DATE_TIME_START, DateUtils.toString(app.getStart()));
+        map.put(ICalConstants.DATE_TIME_END, DateUtils.toString(app.getEnd()));
+        contentService.get().setGadgetProperties(session.getUserHash(), new StateToken(app.getId()),
+            EventsConstants.TYPE_MEETING_DEF_GADGETNAME, map, new AsyncCallback<Void>() {
+              @Override
+              public void onFailure(final Throwable caught) {
+                event.setCancelled(true);
+              }
+
+              @Override
+              public void onSuccess(final Void result) {
+              }
+            });
         hideMenu();
       }
     });

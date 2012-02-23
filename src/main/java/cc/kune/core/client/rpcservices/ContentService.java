@@ -48,14 +48,14 @@ public interface ContentService extends RemoteService {
       throws DefaultException;
 
   void addGadgetToContent(String userHash, StateToken currentStateToken, String gadgetName)
-      throws DefaultException;;
+      throws DefaultException;
 
   StateContentDTO addNewContentWithGadget(String userHash, StateToken currentStateToken,
       String gadgetName, String typeId, String title, String body) throws DefaultException;;
 
   StateContentDTO addNewContentWithGadgetAndState(String userHash, StateToken currentStateToken,
       String gadgetName, String typeId, String tile, String body, Map<String, String> gadgetState)
-      throws DefaultException;
+      throws DefaultException;;
 
   void addParticipant(String userHash, StateToken token, String participant) throws DefaultException;
 
@@ -85,6 +85,9 @@ public interface ContentService extends RemoteService {
   String sendFeedback(String userHash, String title, String body);
 
   ContentSimpleDTO setAsDefaultContent(String userHash, StateToken token);
+
+  void setGadgetProperties(final String userHash, final StateToken currentStateToken,
+      final String gadgetName, final Map<String, String> properties) throws DefaultException;
 
   I18nLanguageDTO setLanguage(String userHash, StateToken token, String languageCode)
       throws DefaultException;

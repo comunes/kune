@@ -20,6 +20,7 @@
 package cc.kune.core.server.content;
 
 import java.util.Date;
+import java.util.Map;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.Manager;
@@ -46,7 +47,12 @@ public interface ContentManager extends Manager<Content, Long> {
 
   void addAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
+  void addGadgetToContent(User user, Content content, String gadgetName);
+
   void addParticipant(User user, Long contentId, String participant);
+
+  Content createGadget(User user, Container container, String gadgetname, String typeIdChild,
+      String title, String body, Map<String, String> gadgetProperties);
 
   boolean findIfExistsTitle(Container container, String title);
 
@@ -77,6 +83,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
   SearchResult<?> searchMime(String search, Integer firstResult, Integer maxResults, String group,
       String mimetype, String mimetype2);
+
+  void setGadgetProperties(User user, Content content, String gadgetName, Map<String, String> properties);
 
   I18nLanguage setLanguage(User user, Long contentId, String languageCode) throws DefaultException;
 

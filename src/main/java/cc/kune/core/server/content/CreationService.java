@@ -19,8 +19,6 @@
  */
 package cc.kune.core.server.content;
 
-import java.util.Map;
-
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -29,18 +27,11 @@ import cc.kune.domain.User;
 
 public interface CreationService {
 
-  void addGadgetToContent(User user, Content content, String gadgetName);
-
   Content createContent(String title, String body, User user, Container container, String typeId);
 
   Container createFolder(Group group, Long parentFolderId, String name, I18nLanguage language,
       String contentTypeId);
 
-  Content createGadget(User user, Container container, String gadgetname, String typeId, String title,
-      String body, Map<String, String> gadgetProperties);
-
   Container createRootFolder(Group group, String name, String rootName, String typeRoot);
-
-  Content saveContent(User editor, Content descriptor, String content);
 
 }

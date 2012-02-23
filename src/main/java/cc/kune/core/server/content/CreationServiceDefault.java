@@ -19,16 +19,9 @@
  */
 package cc.kune.core.server.content;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
-import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import cc.kune.core.client.actions.xml.XMLKuneClientActions;
-import cc.kune.core.client.actions.xml.XMLWaveExtension;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.tool.ServerWaveTool;
@@ -44,26 +37,18 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class CreationServiceDefault implements CreationService {
-  private final XMLKuneClientActions actions;
+
   private final ContainerManager containerManager;
   private final ContentManagerDefault contentManager;
-  private final Log LOG = LogFactory.getLog(CreationServiceDefault.class);
+
   private final ServerToolRegistry tools;
 
   @Inject
   public CreationServiceDefault(final ContainerManager containerManager,
-      final ContentManager contentManager, final ServerToolRegistry toolRegistry,
-      final XMLActionReader xmlActionReader) {
+      final ContentManager contentManager, final ServerToolRegistry toolRegistry) {
     this.containerManager = containerManager;
     this.contentManager = (ContentManagerDefault) contentManager;
     this.tools = toolRegistry;
-    this.actions = xmlActionReader.getActions();
-  }
-
-  @Override
-  public void addGadgetToContent(final User user, final Content content, final String gadgetName) {
-    final URL gadgetUrl = getGadgetUrl(gadgetName);
-    contentManager.addGadgetToContent(user, content, gadgetUrl);
   }
 
   @Override
@@ -92,41 +77,10 @@ public class CreationServiceDefault implements CreationService {
   }
 
   @Override
-  public Content createGadget(final User user, final Container container, final String gadgetname,
-      final String typeIdChild, final String title, final String body,
-      final Map<String, String> gadgetProperties) {
-    final String toolName = container.getToolName();
-    final ServerTool tool = tools.get(toolName);
-    tool.checkTypesBeforeContentCreation(container.getTypeId(), typeIdChild);
-    final Content content = contentManager.createContent(title, body, user, container, typeIdChild,
-        getGadgetUrl(gadgetname), gadgetProperties);
-    tool.onCreateContent(content, container);
-    return content;
-  }
-
-  @Override
   public Container createRootFolder(final Group group, final String name, final String rootName,
       final String typeRoot) {
     // FIXME Check that does not exist yet
     return containerManager.createRootFolder(group, name, rootName, typeRoot);
-  }
-
-  private URL getGadgetUrl(final String gadgetname) {
-    URL gadgetUrl = null;
-    final XMLWaveExtension extension = actions.getExtensions().get(gadgetname);
-    assert extension != null;
-    final String urlS = extension.getGadgetUrl();
-    try {
-      gadgetUrl = new URL(urlS);
-    } catch (final MalformedURLException e) {
-      LOG.error("Parsing gadget URL: " + urlS, e);
-    }
-    return gadgetUrl;
-  }
-
-  @Override
-  public Content saveContent(final User editor, final Content content, final String body) {
-    return contentManager.save(editor, content, body);
   }
 
 }

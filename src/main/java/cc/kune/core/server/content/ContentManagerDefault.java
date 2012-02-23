@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.content;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
@@ -27,6 +28,8 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
@@ -34,6 +37,8 @@ import org.apache.lucene.search.Query;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
+import cc.kune.core.client.actions.xml.XMLKuneClientActions;
+import cc.kune.core.client.actions.xml.XMLWaveExtension;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.MoveOnSameContainerException;
@@ -45,6 +50,8 @@ import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.manager.impl.DefaultManager;
 import cc.kune.core.server.manager.impl.ServerManagerException;
+import cc.kune.core.server.tool.ServerTool;
+import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.utils.FilenameUtils;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
@@ -69,20 +76,24 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContentManagerDefault extends DefaultManager<Content, Long> implements ContentManager {
 
+  private final XMLKuneClientActions actions;
   private final ContainerFinder containerFinder;
   private final ContentFinder contentFinder;
   private final FinderService finder;
   private final KuneWaveService kuneWaveManager;
   private final I18nLanguageFinder languageFinder;
+  private final Log LOG = LogFactory.getLog(ContentManagerDefault.class);
   private final ParticipantUtils participantUtils;
   private final TagUserContentManager tagManager;
+  private final ServerToolRegistry tools;
   private final UserFinder userFinder;
 
   @Inject
   public ContentManagerDefault(final ContentFinder contentFinder, final ContainerFinder containerFinder,
       final Provider<EntityManager> provider, final FinderService finder, final UserFinder userFinder,
       final I18nLanguageFinder languageFinder, final TagUserContentManager tagManager,
-      final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils) {
+      final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils,
+      final ServerToolRegistry tools, final XMLActionReader xmlActionReader) {
     super(provider, Content.class);
     this.contentFinder = contentFinder;
     this.containerFinder = containerFinder;
@@ -92,6 +103,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     this.tagManager = tagManager;
     this.kuneWaveManager = kuneWaveManager;
     this.participantUtils = participantUtils;
+    this.tools = tools;
+    this.actions = xmlActionReader.getActions();
   }
 
   @Override
@@ -105,6 +118,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.addAuthor(author);
   }
 
+  @Override
+  public void addGadgetToContent(final User user, final Content content, final String gadgetName) {
+    final URL gadgetUrl = getGadgetUrl(gadgetName);
+    addGadgetToContent(user, content, gadgetUrl);
+  }
+
   public void addGadgetToContent(final User user, final Content content, final URL gadgetUrl) {
     kuneWaveManager.addGadget(KuneWaveServerUtils.getWaveRef(content),
         participantUtils.of(user.getShortName()).toString(), gadgetUrl);
@@ -115,7 +134,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     final Content content = finder.getContent(contentId);
     if (content.isWave()) {
       kuneWaveManager.addParticipants(KuneWaveServerUtils.getWaveRef(content),
-          content.getAuthors().get(0).getShortName(), user.getShortName(), participant);
+          getContentAuthor(content), user.getShortName(), participant);
     }
   }
 
@@ -151,6 +170,19 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return save(newContent);
   }
 
+  @Override
+  public Content createGadget(final User user, final Container container, final String gadgetname,
+      final String typeIdChild, final String title, final String body,
+      final Map<String, String> gadgetProperties) {
+    final String toolName = container.getToolName();
+    final ServerTool tool = tools.get(toolName);
+    tool.checkTypesBeforeContentCreation(container.getTypeId(), typeIdChild);
+    final Content content = createContent(title, body, user, container, typeIdChild,
+        getGadgetUrl(gadgetname), gadgetProperties);
+    tool.onCreateContent(content, container);
+    return content;
+  }
+
   private MultiFieldQueryParser createMultiFieldParser() {
     final MultiFieldQueryParser parser = new MultiFieldQueryParser(DEF_GLOBAL_SEARCH_FIELDS,
         new StandardAnalyzer());
@@ -169,6 +201,23 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
       initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
     }
     return initialTitle;
+  }
+
+  private String getContentAuthor(final Content content) {
+    return content.getAuthors().get(0).getShortName();
+  }
+
+  private URL getGadgetUrl(final String gadgetname) {
+    URL gadgetUrl = null;
+    final XMLWaveExtension extension = actions.getExtensions().get(gadgetname);
+    assert extension != null;
+    final String urlS = extension.getGadgetUrl();
+    try {
+      gadgetUrl = new URL(urlS);
+    } catch (final MalformedURLException e) {
+      LOG.error("Parsing gadget URL: " + urlS, e);
+    }
+    return gadgetUrl;
   }
 
   @Override
@@ -247,8 +296,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
     content.getLastRevision().setTitle(newTitleWithoutNL);
     if (content.isWave()) {
-      final String author = content.getAuthors().get(0).getShortName();
-      kuneWaveManager.setTitle(KuneWaveServerUtils.getWaveRef(content), newTitle, author);
+      kuneWaveManager.setTitle(KuneWaveServerUtils.getWaveRef(content), newTitle,
+          getContentAuthor(content));
     }
     setModifiedTime(content);
     return content;
@@ -310,6 +359,14 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   }
 
   @Override
+  public void setGadgetProperties(final User user, final Content content, final String gadgetName,
+      final Map<String, String> properties) {
+    final URL gadgetUrl = getGadgetUrl(gadgetName);
+    kuneWaveManager.setGadgetProperty(KuneWaveServerUtils.getWaveRef(content),
+        getContentAuthor(content), gadgetUrl, properties);
+  }
+
+  @Override
   public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
       throws DefaultException {
     final Content content = finder.getContent(contentId);
@@ -361,4 +418,5 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     final Content content = finder.getContent(contentId);
     tagManager.setTags(user, content, tags);
   }
+
 }

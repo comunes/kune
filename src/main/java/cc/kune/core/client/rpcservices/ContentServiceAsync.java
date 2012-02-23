@@ -90,6 +90,9 @@ public interface ContentServiceAsync {
   void setAsDefaultContent(String userHash, StateToken token,
       AsyncCallback<ContentSimpleDTO> asyncCallback);
 
+  void setGadgetProperties(String userHash, StateToken currentStateToken, String gadgetName,
+      Map<String, String> properties, AsyncCallback<Void> callback);
+
   void setLanguage(String userHash, StateToken token, String languageCode,
       AsyncCallback<I18nLanguageDTO> asyncCallback);
 
