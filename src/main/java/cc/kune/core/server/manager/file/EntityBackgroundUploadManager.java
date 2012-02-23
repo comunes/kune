@@ -98,6 +98,6 @@ public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet 
     } catch (final Exception e) {
       return i18n.t("Error uploading background");
     }
-    return i18n.t("Backgroup changed");
+    return i18n.t("Background changed");
   }
 }

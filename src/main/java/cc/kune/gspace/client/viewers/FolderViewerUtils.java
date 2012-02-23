@@ -100,11 +100,13 @@ public class FolderViewerUtils {
       String msg = null;
       final String typeId = container.getTypeId();
       if (session.isLogged()) {
+        // msg is already translated
         msg = capabilitiesRegistry.getEmptyMessagesRegistry().getContentTypeIcon(typeId);
       } else {
         msg = capabilitiesRegistry.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
       }
-      final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : i18n.t(msg);
+      // msg is already translated
+      final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : msg;
       getView().showEmptyMsg(emptyMessage);
     } else {
       // Folders

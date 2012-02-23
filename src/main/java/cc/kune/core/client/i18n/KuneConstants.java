@@ -881,4 +881,5 @@ public interface KuneConstants extends ConstantsWithLookup {
   String yourLanguage();
 
   String yourPreferences();
+
 }
