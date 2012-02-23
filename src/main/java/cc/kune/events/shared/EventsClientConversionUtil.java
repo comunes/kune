@@ -2,6 +2,7 @@ package cc.kune.events.shared;
 
 import java.util.Map;
 
+import cc.kune.common.client.utils.DateUtils;
 import cc.kune.common.shared.res.ICalConstants;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
