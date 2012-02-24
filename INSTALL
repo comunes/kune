@@ -323,7 +323,7 @@ After the section 'Run the server for the first time' you'll be able to use the 
 
 === Configure your DNS for your XMPP service correctly ===
 
-You have to configure your DNS domain adding SRV records for your XMPP services. This permit that your XMPP server comunicates with other similar servers correctly. You should follow:
+You have to configure your DNS domain adding SRV records for your XMPP services if you wanna use kune in production (not necessary for development). This permit that your XMPP server comunicates with other similar servers correctly. You should follow:
 http://jabberd.org/1.4/doc/adminguide#dnssrv
 and:
 http://www.google.com/support/a/bin/answer.py?answer=34143
@@ -369,7 +369,7 @@ a2enmod proxy_http
 
 ==Appendix C: Configure your SMTP mail server==
 
-You should configure a SMTP server for use by Kune. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance test something like:
+You should configure a SMTP server for use by Kune in production sites. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance test something like:
 
  echo "Bests," | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar
 

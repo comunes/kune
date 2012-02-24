@@ -108,9 +108,24 @@ Only after making sure the previous steps have been finished, you can proceed to
 
 ===GWT's Hosted Mode===
 
-To start the hosted mode, you can both execute the launch 'kune client -no-server' from your Eclipse or run from command line:
+Before run hosted mode for the first timp compile once with:
+ mvn compile && mvn gwt:compile
+and deploy with:
+ script/deploy_gwt.sh 
 
- mvn gwt:run
+Kune runs a specific jetty server (not necessary the one used by GWT), so we run the server and the client separately.
+
+In /script directory exist two (mainly) launch configurations:
+- kune server via mvn.launch
+- kune client  -no-server.launch
+these configurations are eclipse run configurations that are normally imported by eclipse when you import the project (in GNU/Linux at least). See the Run icon in the Eclipse toolbar. If is not there, try to import it: 
+http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.user/reference/wizards/ref-import_launch_configs.htm
+
+The first lauch starts the kune server alone (the first time that starts, initialize the database). The second starts kune in hosted mode, so you can make code modifications, and refresh the browser to see the changes.
+
+==== Optionally ==== 
+
+You can run the server via script/server.sh (also you can run server in debug mode, see TROUBLESHOOT or -h for help). This is quite useful to put breakpoints in the server code.
 
 FIXME: this part is outdated
 
@@ -122,17 +137,11 @@ You can create a custom launch also at "Run configuration" (Run > Open Run Dialo
 If you have memory problems running the hosted mode, increase it in VM arguments:
  -Xmx1024M
 
-before run hosted mode compile once with:
- mvn compile && mvn gwt:compile
-and deploy with:
- script/deploy_gwt.sh 
-and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT). This is quite useful to put breakpoints in the server code.
-
 ==Some relevant docs for Kune development==
 
 See this files in trunk directory:
 
-* trunk/img/kune-arch.png          # architecture diagram
+* trunk/img/kune-arch.png          # architecture diagram (outdated)
 * trunk/INSTALL
 * trunk/TROUBLESHOOT
 * trunk/FAQ
@@ -140,7 +149,7 @@ See this files in trunk directory:
 
 If you are interested in the db schema:
 * trunk/img/kune-hibernate-diagram-oct-08.png
-but is more easy to look in the Java classes of package cc.kune.domain
+but is more easy to look in the Java classes of package cc.kune.domain, because this schema is probably outdated
 
 * [http://kune.ourproject.org/2009/01/status-jan09/ Video/presentation of Kune]
 * trunk/img/kune-diagram-part1-0.1.png # old diagrams but a good summary
