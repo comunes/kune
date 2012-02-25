@@ -2801,22 +2801,24 @@
     <rect
        y="301.17221"
        x="8.9246902"
-       height="179.46408"
+       height="203.80309"
        width="534.4826"
        id="rect19453"
        style="opacity:0.5;fill:none;stroke:#008080;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <text
        xml:space="preserve"
        style="font-size:22.35296059px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="117.2879"
-       y="473.3988"
+       x="113.81091"
+       y="485.57556"
        id="text20533"
        sodipodi:linespacing="125%"><tspan
          id="tspan20539"
          sodipodi:role="line"
-         x="117.2879"
-         y="473.3988"
-         style="font-size:22.35296059px;font-weight:normal;fill:#aa4400">duplicación del mismo documento</tspan></text>
+         x="113.81091"
+         y="485.57556"
+         style="font-size:22.35296059px;font-weight:normal;fill:#aa4400"><tspan
+   style="font-weight:bold"
+   id="tspan20549">duplicación</tspan> del mismo documento</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
