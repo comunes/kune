@@ -68,6 +68,8 @@ generates .project and download necessary code jars. Then you can import the pro
 
 Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/youruser/.m2/repository).
 
+Note: We actually use script/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line.
+
 ===UTF 8===
 
 The charset used in Kune is UTF8. In Eclipse, check the text-file enconding in Package Explorer > Preferences > Resource > Text file encoding.
