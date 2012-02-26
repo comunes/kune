@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="blogs.svg">
+   sodipodi:docname="lists.svg">
   <!-- Start kune i18n part -->
   <script
      id="kunelangtable">
@@ -38,10 +38,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.8253692"
-     inkscape:cx="265.18781"
-     inkscape:cy="1271.6673"
+     inkscape:cx="191.23017"
+     inkscape:cy="1227.8405"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer7"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
@@ -1830,7 +1830,7 @@
            style="font-size:32px;font-weight:bold;fill:#aa4400"
            y="122.68937"
            x="101.1684"
-           sodipodi:role="line">blogs</tspan></text>
+           sodipodi:role="line">listas</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -1843,7 +1843,7 @@
            x="101.42439"
            y="95.114334"
            style="font-size:16px;font-style:normal;font-weight:normal;fill:#aa4400"
-           id="tspan21402">explicando los</tspan></text>
+           id="tspan21402">explicando las</tspan></text>
     </g>
     <text
        xml:space="preserve"
@@ -1940,16 +1940,18 @@
          sodipodi:role="line"
          x="154.17371"
          y="581.2572"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">nuevos <tspan
-   id="tspan8923"
-   style="font-weight:bold">blogs</tspan> y </tspan><tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">nuevas <tspan
+   style="font-weight:bold"
+   id="tspan18194">listas</tspan> y </tspan><tspan
          id="tspan14251"
          sodipodi:role="line"
          x="154.17371"
          y="596.2572"
-         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400">posts<tspan
-   id="tspan8937"
-   style="font-weight:normal">...</tspan></tspan></text>
+         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400"><tspan
+           id="tspan8937"
+           style="font-weight:normal"><tspan
+   style="font-weight:bold"
+   id="tspan18196">mensajes</tspan>...</tspan></tspan></text>
   </g>
   <g
      style="display:none"
@@ -1968,7 +1970,7 @@
          style="font-size:32px;font-weight:bold;fill:#aa4400"
          y="166.0929"
          x="207.26842"
-         sodipodi:role="line">blogs</tspan></text>
+         sodipodi:role="line">lists</tspan></text>
     <text
        transform="translate(0,435.82679)"
        sodipodi:linespacing="125%"
@@ -2060,8 +2062,8 @@
          x="154.17371"
          sodipodi:role="line"
          id="tspan11751">your new <tspan
-   id="tspan11818"
-   style="font-weight:bold">blogs</tspan> and</tspan><tspan
+   style="font-weight:bold"
+   id="tspan18192">lists</tspan> and</tspan><tspan
          id="tspan11814"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="596.2572"

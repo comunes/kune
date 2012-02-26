@@ -57,7 +57,7 @@
     ];
   </script>
   <script
-     xlink:href="/home/vjrj/proyectos/dev/kune/trunk/docs/tutorials/lang.js"
+     xlink:href="lang.js"
      id="kunelang" />
   <!-- End kune i18n part -->
   <defs
