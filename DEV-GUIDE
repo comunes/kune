@@ -62,13 +62,15 @@ http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN
 
 Check out if Kune's code includes Eclipse project definition files (i.e. '.project' & '.classpath') in the trunk directory. If these files do not exist, run (again in the trunk directory):
 
- mvn eclipse:eclipse 
+ mvn eclipse:eclipse (*) 
 
-generates .project and download necessary code jars. Then you can import the project in eclipse (File > Import > Existing Projects into Workspace). 
+generates .project and download necessary code jars (this download process is long, so, take a rest). 
+
+After that, you can import the project in eclipse (File > Import > Existing Projects into Workspace). 
 
 Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/youruser/.m2/repository).
 
-Note: We actually use script/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line.
+(*) Note: We actually use script/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line.
 
 ===UTF 8===
 
@@ -110,20 +112,22 @@ Only after making sure the previous steps have been finished, you can proceed to
 
 ===GWT's Hosted Mode===
 
-Before run hosted mode for the first timp compile once with:
+Before run hosted mode for the first time compile once with:
  mvn compile && mvn gwt:compile
 and deploy with:
  script/deploy_gwt.sh 
 
 Kune runs a specific jetty server (not necessary the one used by GWT), so we run the server and the client separately.
 
+For now It's better not to use the "internal server" of GWT hosted mode because we need to control the version of the (jetty) server that we use for compatibilities reasons. This is why we run separately the client (hosted mode) and the server. 
+
 In /script directory exist two (mainly) launch configurations:
 - kune server via mvn.launch
 - kune client  -no-server.launch
-these configurations are eclipse run configurations that are normally imported by eclipse when you import the project (in GNU/Linux at least). See the Run icon in the Eclipse toolbar. If is not there, try to import it: 
+these configurations are eclipse run configurations that are normally imported by eclipse when you import the project (in GNU/Linux at least). See the Run and the Run External icon in the Eclipse toolbar to find these launchs. If is not there, try to import it: 
 http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.user/reference/wizards/ref-import_launch_configs.htm
 
-The first lauch starts the kune server alone (the first time that starts, initialize the database). The second starts kune in hosted mode, so you can make code modifications, and refresh the browser to see the changes.
+Lauch the first to start the kune server (the first time that starts, will initialize the database). After that, launch the second to start kune in hosted mode and connect to the previous server, so you can make code modifications, and refresh the browser to see the changes. 
 
 ==== Optionally ==== 
 
