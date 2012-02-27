@@ -36,7 +36,7 @@ import com.google.inject.Provider;
 public class FolderViewerUtils {
 
   private final ActionRegistryByType actionsRegistry;
-  private final ContentCapabilitiesRegistry capabilitiesRegistry;
+  private final ContentCapabilitiesRegistry capabReg;
   private final Provider<ClientFileDownloadUtils> downloadUtilsProvider;
   private final I18nTranslationService i18n;
   private final IconsRegistry iconsRegistry;
@@ -50,7 +50,7 @@ public class FolderViewerUtils {
       final Session session, final Provider<ClientFileDownloadUtils> downloadUtilsProvider,
       final I18nTranslationService i18n, final ActionRegistryByType actionsRegistry,
       final StateManager stateManager, final PathToolbarUtils pathToolbarUtils) {
-    this.capabilitiesRegistry = capabilitiesRegistry;
+    this.capabReg = capabilitiesRegistry;
     this.session = session;
     this.downloadUtilsProvider = downloadUtilsProvider;
     this.i18n = i18n;
@@ -68,19 +68,18 @@ public class FolderViewerUtils {
     final String name = content.getName();
     final Object icon = mimeType != null ? getIcon(stateToken, typeId, mimeType) : getIcon(stateToken,
         typeId, status);
-    final String tooltip = getTooltip(stateToken, mimeType, capabilitiesRegistry.isDragable(typeId)
-        && rights.isAdministrable());
+    final String tooltip = getTooltip(stateToken, mimeType,
+        capabReg.isDragable(typeId) && rights.isAdministrable());
     if (status.equals(ContentStatus.inTheDustbin)
-        && (!capabilitiesRegistry.showDeleted(typeId) && !session.getShowDeletedContent())) {
+        && (!capabReg.showDeleted(typeId) && !session.getShowDeletedContent())) {
       // Don't show
       // NotifyUser.info("Deleted, don't show");
     } else {
       final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
           genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,
-          capabilitiesRegistry.isDragable(typeId) && rights.isAdministrable(),
-          capabilitiesRegistry.isDropable(typeId) && rights.isAdministrable(),
-          actionsRegistry.getCurrentActions(content, typeId, status, session.isLogged(), rights,
-              ActionGroups.ITEM_MENU));
+          capabReg.isDragable(typeId) && rights.isAdministrable(), capabReg.isDropable(typeId)
+              && rights.isAdministrable(), actionsRegistry.getCurrentActions(content, typeId, status,
+              session.isLogged(), rights, ActionGroups.ITEM_MENU));
       getView().addItem(item, new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
@@ -97,15 +96,11 @@ public class FolderViewerUtils {
 
   private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
     if (container.getContents().size() + container.getChilds().size() == 0) {
-      String msg = null;
+      // No elements here, so, we show a empty message
       final String typeId = container.getTypeId();
-      if (session.isLogged()) {
-        // msg is already translated
-        msg = capabilitiesRegistry.getEmptyMessagesRegistry().getContentTypeIcon(typeId);
-      } else {
-        msg = capabilitiesRegistry.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
-      }
       // msg is already translated
+      final String msg = session.isLogged() ? capabReg.getEmptyMessagesRegistry().getContentTypeIcon(
+          typeId) : capabReg.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
       final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : msg;
       getView().showEmptyMsg(emptyMessage);
     } else {

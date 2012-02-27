@@ -48,6 +48,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   private final FlowPanel emptyPanel;
   protected final GSpaceArmor gsArmor;
   protected final I18nTranslationService i18n;
+  private final TutorialViewer tutorialViewer;
   protected Widget widget;
 
   public AbstractFolderViewerPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
@@ -63,6 +64,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     emptyLabel.setStyleName("k-empty-msg");
     emptyPanel.setStyleName("k-empty-folder-panel");
     emptyPanel.add(emptyLabel);
+    tutorialViewer = new TutorialViewer();
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
   }
 
@@ -138,5 +140,10 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   public void showEmptyMsg(final String emptyMessage) {
     emptyLabel.setText(emptyMessage);
     gsArmor.getDocContainer().add(emptyPanel);
+  }
+
+  @Override
+  public void showTutorial(final String url) {
+    gsArmor.getDocContainer().add(tutorialViewer.setUrl(url));
   }
 }

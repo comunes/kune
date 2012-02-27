@@ -34,4 +34,6 @@ public interface AbstractFolderViewerView extends View {
   void setSubheaderActions(GuiActionDescCollection actions);
 
   void showEmptyMsg(String message);
+
+  void showTutorial(String url);
 }

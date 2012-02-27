@@ -30,8 +30,8 @@ import cc.kune.common.client.ui.EditEvent.EditHandler;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -180,11 +180,6 @@ public class ContentViewerPresenter extends
         // is already participant, show wave editor
         final org.waveprotocol.box.webclient.client.Session waveSession = org.waveprotocol.box.webclient.client.Session.get();
         if (waveSession != null && waveSession.isLoggedIn()) {
-          // final String typeId = stateContent.getTypeId();
-          // if (typeId.equals(BartersConstants.TYPE_BARTER)
-          // || typeId.equals(MeetingsConstants.TYPE_MEETING)) {
-          // NotifyUser.important("Currently we are experiencing problems with this tool. We'll fix ASAP...");
-          // }
           getView().setEditableContent(stateContent);
         } else {
           getView().setContent(stateContent);
