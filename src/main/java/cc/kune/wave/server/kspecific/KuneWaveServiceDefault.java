@@ -190,8 +190,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   @Override
-  public void addParticipants(final WaveRef waveName, final String author, final String userWhoAdds,
+  public boolean addParticipants(final WaveRef waveName, final String author, final String userWhoAdds,
       final String... newLocalParticipants) {
+    boolean added = false;
     final Wavelet wavelet = fetchWave(waveName, author);
     final Participants currentParticipants = wavelet.getParticipants();
     // Removing duplicates
@@ -207,8 +208,10 @@ public class KuneWaveServiceDefault implements KuneWaveService {
         final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
             : author;
         doOperation(whoAdd, opQueue, "add participant");
+        added = true;
       }
     }
+    return added;
   }
 
   @Override

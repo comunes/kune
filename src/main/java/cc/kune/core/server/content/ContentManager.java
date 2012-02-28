@@ -49,7 +49,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
   void addGadgetToContent(User user, Content content, String gadgetName);
 
-  void addParticipant(User user, Long contentId, String participant);
+  boolean addParticipant(User user, Long contentId, String participant);
 
   Content createGadget(User user, Container container, String gadgetname, String typeIdChild,
       String title, String body, Map<String, String> gadgetProperties);

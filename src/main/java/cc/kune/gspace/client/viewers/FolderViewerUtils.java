@@ -72,7 +72,7 @@ public class FolderViewerUtils {
 
   private void addItem(final AbstractContentSimpleDTO content, final BasicMimeTypeDTO mimeType,
       final ContentStatus status, final StateToken parentStateToken, final AccessRights rights,
-      final long modifiedOn) {
+      final long modifiedOn, final boolean isContainer) {
     final StateToken stateToken = content.getStateToken();
     final String typeId = content.getTypeId();
     final String name = content.getName();
@@ -89,7 +89,7 @@ public class FolderViewerUtils {
           genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,
           capabReg.isDragable(typeId) && rights.isAdministrable(), capabReg.isDropable(typeId)
               && rights.isAdministrable(), actionsRegistry.getCurrentActions(content, typeId, status,
-              session.isLogged(), rights, ActionGroups.ITEM_MENU));
+              session.isLogged(), rights, ActionGroups.ITEM_MENU), isContainer);
       getView().addItem(item, new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
@@ -124,13 +124,14 @@ public class FolderViewerUtils {
       for (final ContainerSimpleDTO childFolder : container.getChilds()) {
         addItem(childFolder, null, ContentStatus.publishedOnline,
             childFolder.getStateToken().copy().setFolder(childFolder.getParentFolderId()),
-            containerRights, FolderViewerView.NO_DATE);
+            containerRights, FolderViewerView.NO_DATE, true);
       }
       // Other contents (docs, etc)
       for (final ContentSimpleDTO content : container.getContents()) {
         assert content != null;
         addItem(content, content.getMimeType(), content.getStatus(),
-            content.getStateToken().copy().clearDocument(), content.getRights(), content.getModifiedOn());
+            content.getStateToken().copy().clearDocument(), content.getRights(),
+            content.getModifiedOn(), false);
       }
     }
   }

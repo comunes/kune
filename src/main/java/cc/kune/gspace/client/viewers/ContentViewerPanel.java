@@ -77,6 +77,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private final ContentTitleWidget contentTitle;
   @UiField
   DeckPanel deck;
+  private final ContentDropController dropController;
   private final GSpaceArmor gsArmor;
   private final I18nTranslationService i18n;
   private IdGenerator idGenerator;
@@ -84,6 +85,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @UiField
   InlineHTML onlyViewPanel;
   private ProfileManager profiles;
+
   private final StateManager stateManager;
 
   /** The wave panel, if a wave is open. */
@@ -92,21 +94,23 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private final WaveClientProvider waveClientProv;
 
   private ImplPanel waveHolder;
-
   @UiField
   ImplPanel waveHolderParent;
   private final WaveStore waveStore = new SimpleWaveStore();
+
   private final Widget widget;
 
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
-      final EventBus eventBus, final StateManager stateManager) {
+      final EventBus eventBus, final StateManager stateManager,
+      final ContentDropController dropController) {
     this.gsArmor = wsArmor;
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
     this.i18n = i18n;
     this.stateManager = stateManager;
+    this.dropController = dropController;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
     eventBus.addHandler(WaveClientClearEvent.getType(),
@@ -167,6 +171,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       final WaveClientView webClient = waveClientProv.get();
       loading = webClient.getLoading();
       waveHolder = webClient.getWaveHolder();
+      dropController.init(waveHolder);
       channel = webClient.getChannel();
       profiles = webClient.getProfiles();
       idGenerator = ClientIdGenerator.create();
@@ -177,6 +182,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @Override
   public void setContent(final StateContentDTO state) {
     final boolean editable = state.getContentRights().isEditable();
+    if (editable) {
+      dropController.setTarget(state.getStateToken());
+    }
     gsArmor.enableCenterScroll(true);
     setTitle(state, editable);
     onlyViewPanel.setHTML(SafeHtmlUtils.fromTrustedString(state.getContent()));
@@ -186,6 +194,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @Override
   public void setEditableContent(final StateContentDTO state) {
     gsArmor.enableCenterScroll(false);
+    dropController.setTarget(state.getStateToken());
     setTitle(state, true);
     setEditableWaveContent(state.getWaveRef(), false);
     deck.showWidget(0);

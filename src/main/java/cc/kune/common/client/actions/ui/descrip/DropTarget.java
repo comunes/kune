@@ -21,8 +21,17 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * The Interface DropTarget is used to allow drop to this widget
+ */
 public interface DropTarget {
 
+  /**
+   * Initialize the drop target widget
+   * 
+   * @param dropTarget
+   *          the drop target
+   */
   void init(Widget dropTarget);
 
 }

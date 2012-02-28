@@ -77,14 +77,15 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   public void addBuddie(final UserSimpleDTO user, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
     final BasicDragableThumb thumb = createThumb(user.getShortName(), avatarUrl, tooltip, tooltipTitle,
-        menu);
+        menu, user.getStateToken());
     firstCategoryFlow.add((Widget) decorateAvatarWithXmppStatus(user.getShortName(), thumb));
   }
 
   @Override
   public void addParticipation(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu) {
-    sndCategoryFlow.add(createThumb(group.getCompoundName(), avatarUrl, tooltip, tooltipTitle, menu));
+    sndCategoryFlow.add(createThumb(group.getCompoundName(), avatarUrl, tooltip, tooltipTitle, menu,
+        group.getStateToken()));
   }
 
   @Override

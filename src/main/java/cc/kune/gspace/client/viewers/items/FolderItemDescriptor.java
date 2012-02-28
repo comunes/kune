@@ -30,6 +30,7 @@ public class FolderItemDescriptor {
   private final ContentStatus contentStatus;
   private final Object icon;
   private final String id;
+  private final boolean isContainer;
   private final long modififiedOn;
   private final String parentId;
   private final String text;
@@ -39,7 +40,7 @@ public class FolderItemDescriptor {
   public FolderItemDescriptor(final String id, final String parentId, final Object icon,
       final String text, final String tooltip, final ContentStatus contentStatus,
       final StateToken token, final long modififiedOn, final boolean allowDrag, final boolean allowDrop,
-      final GuiActionDescCollection actionCollection) {
+      final GuiActionDescCollection actionCollection, final boolean isContainer) {
     this.id = id;
     this.parentId = parentId;
     this.icon = icon;
@@ -51,6 +52,7 @@ public class FolderItemDescriptor {
     this.allowDrag = allowDrag;
     this.allowDrop = allowDrop;
     this.actionCollection = actionCollection;
+    this.isContainer = isContainer;
   }
 
   public GuiActionDescCollection getActionCollection() {
@@ -87,6 +89,10 @@ public class FolderItemDescriptor {
 
   public String getTooltip() {
     return tooltip;
+  }
+
+  public boolean isContainer() {
+    return isContainer;
   }
 
   public boolean isDraggable() {

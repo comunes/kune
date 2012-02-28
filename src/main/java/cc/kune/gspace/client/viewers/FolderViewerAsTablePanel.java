@@ -28,7 +28,8 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.dnd.FolderViewerDropController;
+import cc.kune.core.client.dnd.FolderContainerDropController;
+import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
@@ -76,9 +77,11 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
   public FolderViewerAsTablePanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
       final EventBus eventBus, final GuiProvider guiProvider, final CoreResources res,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
-      final Provider<FolderViewerDropController> dropControllerProv, final TutorialViewer tutorialViewer) {
-    super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, dropControllerProv,
-        tutorialViewer);
+      final Provider<FolderContentDropController> contentDropControllerProv,
+      final Provider<FolderContainerDropController> containerDropControllerProv,
+      final TutorialViewer tutorialViewer) {
+    super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
+        containerDropControllerProv, tutorialViewer);
     this.guiProvider = guiProvider;
     this.res = res;
     widget = uiBinder.createAndBindUi(this);
@@ -155,13 +158,15 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     flex.setWidget(rowCount + 1, 0, itemWidget);
     if (item.isDraggable()) {
       dragController.makeDraggable(itemWidget, itemWidget.getTitleWidget());
-      // Tooltip.to(itemWidget,
-      // i18n.t("Drag and drop to move this. Double click to open"));
-    } else {
-      // Tooltip.to(itemWidget, i18n.t("Double click to open"));
     }
-    if (item.isDroppable()) {
-      final FolderViewerDropController dropController = dropControllerProv.get();
+
+    if (!item.isContainer() && item.isDroppable()) {
+      final FolderContentDropController dropController = contentDropControllerProv.get();
+      dropController.init(itemWidget);
+      dropController.setTarget(item.getStateToken());
+    }
+    if (item.isContainer() && item.isDroppable()) {
+      final FolderContainerDropController dropController = containerDropControllerProv.get();
       dropController.init(itemWidget);
       dropController.setTarget(item.getStateToken());
     }

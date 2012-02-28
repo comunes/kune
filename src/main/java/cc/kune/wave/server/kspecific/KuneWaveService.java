@@ -46,7 +46,7 @@ public interface KuneWaveService {
 
   void addGadget(WaveRef waveName, String author, URL gadgetUrl);
 
-  void addParticipants(WaveRef waveName, String author, String userWhoAdd, String... newParticipants);
+  boolean addParticipants(WaveRef waveName, String author, String userWhoAdd, String... newParticipants);
 
   WaveRef createWave(String message, SimpleArgCallback<WaveRef> onCreate, ParticipantId... participants);
 

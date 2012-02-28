@@ -58,9 +58,9 @@ public class ParticipateInContentBtn extends ButtonDescriptor {
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.showProgress();
       contentService.get().addParticipant(session.getUserHash(), session.getCurrentStateToken(),
-          session.getCurrentUser().getShortName(), new AsyncCallbackSimple<Void>() {
+          session.getCurrentUser().getShortName(), new AsyncCallbackSimple<Boolean>() {
             @Override
-            public void onSuccess(final Void arg) {
+            public void onSuccess(final Boolean arg) {
               NotifyUser.hideProgress();
               stateManager.refreshCurrentStateWithoutCache();
               // issue #73

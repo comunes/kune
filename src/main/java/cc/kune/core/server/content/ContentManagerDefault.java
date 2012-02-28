@@ -130,12 +130,13 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   }
 
   @Override
-  public void addParticipant(final User user, final Long contentId, final String participant) {
+  public boolean addParticipant(final User user, final Long contentId, final String participant) {
     final Content content = finder.getContent(contentId);
     if (content.isWave()) {
-      kuneWaveManager.addParticipants(KuneWaveServerUtils.getWaveRef(content),
+      return kuneWaveManager.addParticipants(KuneWaveServerUtils.getWaveRef(content),
           getContentAuthor(content), user.getShortName(), participant);
     }
+    return false;
   }
 
   protected Content createContent(final String title, final String body, final User author,

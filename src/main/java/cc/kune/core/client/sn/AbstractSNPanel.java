@@ -33,6 +33,7 @@ import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.ui.BasicDragableThumb;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
@@ -134,9 +135,9 @@ public class AbstractSNPanel extends ViewImpl {
   }
 
   public BasicDragableThumb createThumb(final String text, final String avatarUrl, final String tooltip,
-      final String tooltipTitle, final GuiActionDescCollection menuitems) {
+      final String tooltipTitle, final GuiActionDescCollection menuitems, final StateToken token) {
     final BasicDragableThumb thumb = new BasicDragableThumb(avatarUrl, AVATARSIZE, text,
-        AVATARLABELMAXSIZE, false);
+        AVATARLABELMAXSIZE, false, token);
 
     final ClickHandler clickHand = new ClickHandler() {
       MenuDescriptor menu;

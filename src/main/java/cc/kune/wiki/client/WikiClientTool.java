@@ -68,7 +68,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
 
   private void registerIcons() {
     registerTutorial(TYPE_ROOT);
-    registerTutorial(TYPE_FOLDER);
+    // registerTutorial(TYPE_FOLDER);
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
     registerContentTypeIcon(TYPE_ROOT, icons.wikis());
     registerContentTypeIcon(TYPE_WIKIPAGE, navResources.wikipage());

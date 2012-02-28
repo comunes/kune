@@ -24,10 +24,12 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.dnd.FolderViewerDropController;
+import cc.kune.core.client.dnd.FolderContainerDropController;
+import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.ui.BasicDragableThumb;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
@@ -58,9 +60,11 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
   public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
       final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
       final KuneDragController dragController,
-      final Provider<FolderViewerDropController> dropControllerProv, final TutorialViewer tutorialViewer) {
-    super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, dropControllerProv,
-        tutorialViewer);
+      final Provider<FolderContentDropController> contentDropControllerProv,
+      final Provider<FolderContainerDropController> containerDropControllerProv,
+      final TutorialViewer tutorialViewer) {
+    super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
+        containerDropControllerProv, tutorialViewer);
     widget = uiBinder.createAndBindUi(this);
   }
 
@@ -69,7 +73,7 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
       final DoubleClickHandler doubleClickHandler) {
     // In this viewer we don't use the clickHandler from the presenter
     flow.add(createThumb(item.getText(), item.getIcon(), item.getTooltip(), "",
-        item.getActionCollection(), doubleClickHandler));
+        item.getActionCollection(), doubleClickHandler, item.getStateToken()));
   }
 
   @Override
@@ -80,9 +84,9 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   public BasicDragableThumb createThumb(final String text, final Object icon, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menuitems,
-      final DoubleClickHandler doubleClickHandler) {
+      final DoubleClickHandler doubleClickHandler, final StateToken token) {
     final BasicDragableThumb thumb = new BasicDragableThumb(icon, ICONSIZE, text, ICONLABELMAXSIZE,
-        false);
+        false, token);
     final MenuDescriptor menu = new MenuDescriptor();
     menu.setStandalone(true);
     menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);

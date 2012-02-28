@@ -53,7 +53,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerDragableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
-    registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
+    registerDropableTypes(TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT);
     registerPublishModerableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
@@ -69,7 +69,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
 
   private void registerIcons() {
     registerTutorial(TYPE_ROOT);
-    registerTutorial(TYPE_FOLDER);
+    // registerTutorial(TYPE_FOLDER);
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
     registerContentTypeIcon(TYPE_ROOT, icons.docs());
     registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());

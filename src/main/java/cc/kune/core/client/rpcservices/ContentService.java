@@ -57,7 +57,7 @@ public interface ContentService extends RemoteService {
       String gadgetName, String typeId, String tile, String body, Map<String, String> gadgetState)
       throws DefaultException;;
 
-  void addParticipant(String userHash, StateToken token, String participant) throws DefaultException;
+  Boolean addParticipant(String userHash, StateToken token, String participant) throws DefaultException;
 
   StateContainerDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
 

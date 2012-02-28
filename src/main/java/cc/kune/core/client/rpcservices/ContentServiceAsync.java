@@ -22,7 +22,6 @@ package cc.kune.core.client.rpcservices;
 import java.util.Date;
 import java.util.Map;
 
-import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.domain.TagCloudResult;
@@ -56,8 +55,8 @@ public interface ContentServiceAsync {
       String typeId, String title, String body, Map<String, String> gadgetState,
       AsyncCallback<StateContentDTO> callback);
 
-  void addParticipant(String userHash, StateToken token, String authorShortName,
-      AsyncCallback<Void> asyncCallback) throws DefaultException;
+  void addParticipant(String userHash, StateToken token, String participant,
+      AsyncCallback<Boolean> asyncCallback);
 
   void addRoom(String user, StateToken parentToken, String name,
       AsyncCallback<StateContainerDTO> callback);

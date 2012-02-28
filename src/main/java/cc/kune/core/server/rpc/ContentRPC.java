@@ -185,11 +185,11 @@ public class ContentRPC implements ContentService, RPC {
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
   @Transactional
-  public void addParticipant(final String userHash, final StateToken token, final String participant)
+  public Boolean addParticipant(final String userHash, final StateToken token, final String participant)
       throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
     final User user = getCurrentUser();
-    contentManager.addParticipant(user, contentId, participant);
+    return contentManager.addParticipant(user, contentId, participant);
   }
 
   @Override

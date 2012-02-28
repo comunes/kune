@@ -20,6 +20,8 @@
 package cc.kune.gspace.client;
 
 import cc.kune.core.client.ExtendedGinModule;
+import cc.kune.core.client.dnd.FolderContainerDropController;
+import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
@@ -112,6 +114,7 @@ import cc.kune.gspace.client.tool.selector.ToolSelectorPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePanel;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
+import cc.kune.gspace.client.viewers.ContentDropController;
 import cc.kune.gspace.client.viewers.ContentViewerPanel;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerAsTablePanel;
@@ -134,6 +137,9 @@ public class GSpaceGinModule extends ExtendedGinModule {
   protected void configure() {
     s(PathToolbarUtils.class);
     s(FolderViewerUtils.class);
+    s(ContentDropController.class);
+    s(FolderContainerDropController.class);
+    s(FolderContentDropController.class);
     bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
         EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
     bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class,

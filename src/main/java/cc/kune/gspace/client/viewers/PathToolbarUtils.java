@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.dnd.FolderViewerDropController;
+import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.client.state.StateManager;
@@ -37,14 +37,14 @@ import com.google.inject.Provider;
 
 public class PathToolbarUtils {
 
-  private final Provider<FolderViewerDropController> dropController;
+  private final Provider<FolderContainerDropController> dropController;
   private final EventBus eventBus;
   private final I18nTranslationService i18n;
   private final IconsRegistry iconsRegistry;
   private final StateManager stateManager;
 
   @Inject
-  public PathToolbarUtils(final Provider<FolderViewerDropController> dropController,
+  public PathToolbarUtils(final Provider<FolderContainerDropController> dropController,
       final StateManager stateManager, final ContentCapabilitiesRegistry capabilitiesRegistry,
       final EventBus eventBus, final I18nTranslationService i18n) {
     this.dropController = dropController;
@@ -78,7 +78,7 @@ public class PathToolbarUtils {
         final ButtonDescriptor btn = createPathButton(path[i], pathLength, i);
         if (withDrop) {
           if (i != pathLength - 1) {
-            final FolderViewerDropController dropTarget = dropController.get();
+            final FolderContainerDropController dropTarget = dropController.get();
             dropTarget.setTarget(path[i].getStateToken());
             btn.setDropTarget(dropTarget);
           }

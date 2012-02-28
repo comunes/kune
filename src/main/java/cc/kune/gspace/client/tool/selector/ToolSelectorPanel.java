@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client.tool.selector;
 
-import cc.kune.core.client.dnd.FolderViewerDropController;
+import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView;
@@ -40,14 +40,14 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
 
   private static ToolSelectorPanelUiBinder uiBinder = GWT.create(ToolSelectorPanelUiBinder.class);
 
-  private final Provider<FolderViewerDropController> dropControllerProv;
+  private final Provider<FolderContainerDropController> dropControllerProv;
 
   @UiField
   FlowPanel flow;
 
   @Inject
   public ToolSelectorPanel(final GSpaceArmor wsArmor,
-      final Provider<FolderViewerDropController> dropControllerProv) {
+      final Provider<FolderContainerDropController> dropControllerProv) {
     this.dropControllerProv = dropControllerProv;
     wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
   }

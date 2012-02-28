@@ -25,7 +25,8 @@ import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.Pair;
-import cc.kune.core.client.dnd.FolderViewerDropController;
+import cc.kune.core.client.dnd.FolderContainerDropController;
+import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
@@ -45,9 +46,10 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public abstract class AbstractFolderViewerPanel extends ViewImpl implements FolderViewerView {
   protected final ContentCapabilitiesRegistry capabilitiesRegistry;
+  protected final Provider<FolderContainerDropController> containerDropControllerProv;
+  protected final Provider<FolderContentDropController> contentDropControllerProv;
   private final ContentTitleWidget contentTitle;
   protected final KuneDragController dragController;
-  protected final Provider<FolderViewerDropController> dropControllerProv;
   private final InlineLabel emptyLabel;
   private final FlowPanel emptyPanel;
   protected final GSpaceArmor gsArmor;
@@ -58,12 +60,15 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   public AbstractFolderViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
       final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
       final KuneDragController dragController,
-      final Provider<FolderViewerDropController> dropControllerProv, final TutorialViewer tutorialViewer) {
+      final Provider<FolderContentDropController> contentDropControllerProv,
+      final Provider<FolderContainerDropController> containerDropControllerProv,
+      final TutorialViewer tutorialViewer) {
     this.gsArmor = gsArmor;
     this.i18n = i18n;
     this.capabilitiesRegistry = capabilitiesRegistry;
     this.dragController = dragController;
-    this.dropControllerProv = dropControllerProv;
+    this.contentDropControllerProv = contentDropControllerProv;
+    this.containerDropControllerProv = containerDropControllerProv;
     this.tutorialViewer = tutorialViewer;
     emptyPanel = new FlowPanel();
     emptyLabel = new InlineLabel(i18n.t("This is empty."));

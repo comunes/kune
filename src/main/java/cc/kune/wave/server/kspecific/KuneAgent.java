@@ -68,10 +68,10 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
   }
 
   @Override
-  public void addParticipants(final WaveRef waveName, final String author, final String userWhoAdd,
+  public boolean addParticipants(final WaveRef waveName, final String author, final String userWhoAdd,
       final String... newParticipants) {
     // TODO Auto-generated method stub
-
+    return false;
   }
 
   @Override
