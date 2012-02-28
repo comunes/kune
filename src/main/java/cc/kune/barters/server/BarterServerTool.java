@@ -72,10 +72,6 @@ public class BarterServerTool extends AbstractServerTool implements ServerWaveTo
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     final Container rootFolder = createRoot(group);
     setContainerAcl(rootFolder);
-    createInitialContent(user, group, rootFolder, i18n.t("Barter sample"),
-        i18n.t("This is only a barter sample. You can invite other participants to this barter, "
-            + "but also publish to the general public allowing you to share services, goods, etc."),
-        TYPE_BARTER);
     return group;
   }
 

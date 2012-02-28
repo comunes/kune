@@ -35,5 +35,5 @@ public interface AbstractFolderViewerView extends View {
 
   void showEmptyMsg(String message);
 
-  void showTutorial(String url);
+  void showTutorial(String tool);
 }

@@ -34,6 +34,7 @@ public class InitDataDTO implements IsSerializable {
   private String currentCCversion;
   private LicenseDTO defaultLicense;
   private String defaultWsTheme;
+  private String defTutorialLanguage;
   private List<ExtMediaDescripDTO> extMediaDescrips;
   private boolean feedbackEnabled;
   private String flvEmbedObject;
@@ -56,6 +57,7 @@ public class InitDataDTO implements IsSerializable {
   private String siteUrl;
   private String[] timezones;
   private boolean translatorEnabled;
+  private List<String> tutorialLanguages;
   private boolean useClientContentCache;
   private UserInfoDTO userInfo;
   private List<ToolSimpleDTO> userTools;
@@ -93,6 +95,10 @@ public class InitDataDTO implements IsSerializable {
 
   public String getDefaultWsTheme() {
     return defaultWsTheme;
+  }
+
+  public String getDefTutorialLanguage() {
+    return defTutorialLanguage;
   }
 
   public List<ExtMediaDescripDTO> getExtMediaDescrips() {
@@ -176,6 +182,10 @@ public class InitDataDTO implements IsSerializable {
     return timezones;
   }
 
+  public List<String> getTutorialLanguages() {
+    return tutorialLanguages;
+  }
+
   public UserInfoDTO getUserInfo() {
     return userInfo;
   }
@@ -226,6 +236,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setDefaultWsTheme(final String defaultWsTheme) {
     this.defaultWsTheme = defaultWsTheme;
+  }
+
+  public void setDefTutorialLanguage(final String defTutorialLanguage) {
+    this.defTutorialLanguage = defTutorialLanguage;
   }
 
   public void setExtMediaDescrips(final List<ExtMediaDescripDTO> extMediaDescrips) {
@@ -314,6 +328,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setTranslatorEnabled(final boolean translatorEnabled) {
     this.translatorEnabled = translatorEnabled;
+  }
+
+  public void setTutorialLanguages(final List<String> tutorialLanguages) {
+    this.tutorialLanguages = tutorialLanguages;
   }
 
   public void setUseClientContentCache(final boolean useClientContentCache) {

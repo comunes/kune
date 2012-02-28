@@ -35,9 +35,7 @@ import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
-import cc.kune.domain.Container;
 import cc.kune.domain.Group;
-import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
@@ -55,14 +53,7 @@ public class BlogServerTool extends AbstractServerTool {
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
-    final Container rootFolder = createRoot(group);
-
-    final I18nLanguage language = user.getLanguage();
-    final Container blog = creationService.createFolder(group, rootFolder.getId(),
-        i18n.t("Blog sample"), language, TYPE_BLOG);
-
-    createInitialContent(user, group, blog, i18n.t("A post sample"),
-        i18n.t("This is only a post sample. You can edit it, rename the post and this blog"), TYPE_POST);
+    createRoot(group);
     return group;
   }
 }

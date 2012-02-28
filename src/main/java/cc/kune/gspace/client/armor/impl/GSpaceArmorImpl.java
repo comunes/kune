@@ -23,6 +23,7 @@ import org.cobogw.gwt.user.client.CSS;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.shared.utils.Pair;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
@@ -150,6 +151,11 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   @Override
   public ForIsWidget getDocContainer() {
     return docContainer;
+  }
+
+  @Override
+  public Pair<Integer, Integer> getDocContainerSize() {
+    return Pair.create(centerScroll.getOffsetHeight(), centerScroll.getOffsetWidth());
   }
 
   @Override

@@ -41,6 +41,7 @@ public class ContentCapabilitiesRegistry {
   private final ShowDeletedRegistry showDeleted;
   private final TageableRegistry tageable;
   private final TranslatableRegistry translatable;
+  private final TutorialRegistry tutorialRegistry;
   private final VersionableRegistry versionable;
   private final XmppComentableRegistry xmppComentable;
   private final XmppNotifyCapableRegistry xmppNotifyCapable;
@@ -57,7 +58,7 @@ public class ContentCapabilitiesRegistry {
       final VersionableRegistry versionable, final EmptyMessagesRegistry emptyMessagesRegistry,
       final EmptyMessagesRegistry emptyMessagesRegistryNotLogged,
       final XmppComentableRegistry xmppComentable, final XmppNotifyCapableRegistry xmppNotifyCapable,
-      final ShowDeletedRegistry showDeleted) {
+      final ShowDeletedRegistry showDeleted, final TutorialRegistry tutorialRegistry) {
     this.authorable = authorableRegistry;
     this.newMenus = newMenus;
     this.aclEditable = aclEditableRegistry;
@@ -76,10 +77,10 @@ public class ContentCapabilitiesRegistry {
     this.versionable = versionable;
     this.emptyMessagesRegistry = emptyMessagesRegistry;
     this.emptyMessagesRegistryNotLogged = emptyMessagesRegistryNotLogged;
-
     this.xmppComentable = xmppComentable;
     this.xmppNotifyCapable = xmppNotifyCapable;
     this.showDeleted = showDeleted;
+    this.tutorialRegistry = tutorialRegistry;
   }
 
   public boolean canBeHomepage(final String typeId) {
@@ -156,6 +157,10 @@ public class ContentCapabilitiesRegistry {
 
   public TranslatableRegistry getTranslatable() {
     return translatable;
+  }
+
+  public TutorialRegistry getTutorialRegistry() {
+    return tutorialRegistry;
   }
 
   public VersionableRegistry getVersionable() {

@@ -67,6 +67,8 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
+    registerTutorial(TYPE_ROOT);
+    registerTutorial(TYPE_BLOG);
     registerContentTypeIcon(TYPE_ROOT, icons.blogs());
     registerContentTypeIcon(TYPE_BLOG, navResources.blog());
     registerContentTypeIcon(TYPE_POST, navResources.post());

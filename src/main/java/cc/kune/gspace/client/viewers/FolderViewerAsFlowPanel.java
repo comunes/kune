@@ -36,6 +36,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -54,10 +55,12 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
   FlowPanel flow;
 
   @Inject
-  public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
-      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
-      final Provider<FolderViewerDropController> dropControllerProv) {
-    super(gsArmor, i18n, capabilitiesRegistry, dragController, dropControllerProv);
+  public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
+      final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
+      final KuneDragController dragController,
+      final Provider<FolderViewerDropController> dropControllerProv, final TutorialViewer tutorialViewer) {
+    super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, dropControllerProv,
+        tutorialViewer);
     widget = uiBinder.createAndBindUi(this);
   }
 

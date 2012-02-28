@@ -51,8 +51,8 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
   public SignInPanel(final I18nTranslationService i18n, final MaskWidgetView mask,
       final NotifyLevelImages images) {
     super(SIGNIN_DIALOG, mask, i18n, i18n.t(CoreMessages.SIGN_IN_TITLE), true, true, true, "",
-        i18n.t(CoreMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
-        CANCEL_BUTTON_ID, images, ERROR_MSG, 102);
+        i18n.t(CoreMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.t("Cancel"), CANCEL_BUTTON_ID,
+        images, ERROR_MSG, 102);
 
     signInForm = new SignInForm(i18n);
     signInForm.setWidth(330);

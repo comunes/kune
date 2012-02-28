@@ -60,11 +60,7 @@ public class WikiServerTool extends AbstractServerTool {
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
-    final Container rootFolder = createRoot(group);
-
-    super.createInitialContent(user, group, rootFolder, i18n.t("Wiki page sample"),
-        i18n.t("This is only a wiki page sample. You can edit or rename it, but also any other user."),
-        TYPE_WIKIPAGE);
+    createRoot(group);
     return group;
   }
 

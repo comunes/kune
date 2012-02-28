@@ -38,18 +38,18 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.8253692"
-     inkscape:cx="191.23017"
-     inkscape:cy="942.96667"
+     inkscape:cx="121.6552"
+     inkscape:cy="1293.5807"
      inkscape:document-units="px"
-     inkscape:current-layer="layer8"
+     inkscape:current-layer="layer6"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="1000"
+     inkscape:window-width="1078"
+     inkscape:window-height="919"
      inkscape:window-x="0"
      inkscape:window-y="24"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="0" />
   <defs
      id="defs4">
     <marker
@@ -265,7 +265,8 @@
      transform="translate(0,435.82679)"
      id="layer1"
      inkscape:groupmode="layer"
-     inkscape:label="layers">
+     inkscape:label="layers"
+     style="display:none">
     <rect
        y="-403.77679"
        x="30.756149"
@@ -306,7 +307,7 @@
          style="display:inline">
         <path
            transform="translate(835.07499,-335.32678)"
-           d="m -215,554.68896 c 0,6.35128 -5.14873,11.5 -11.5,11.5 -6.35127,0 -11.5,-5.14872 -11.5,-11.5 0,-6.35127 5.14873,-11.5 11.5,-11.5 6.35127,0 11.5,5.14873 11.5,11.5 z"
+           d="m -215,554.68896 a 11.5,11.5 0 1 1 -23,0 11.5,11.5 0 1 1 23,0 z"
            sodipodi:ry="11.5"
            sodipodi:rx="11.5"
            sodipodi:cy="554.68896"
@@ -336,7 +337,7 @@
        sodipodi:cy="379.86218"
        sodipodi:rx="17.5"
        sodipodi:ry="12.5"
-       d="m 290,379.86218 c 0,6.90356 -7.83502,12.5 -17.5,12.5 -9.66498,0 -17.5,-5.59644 -17.5,-12.5 0,-6.90356 7.83502,-12.5 17.5,-12.5 9.66498,0 17.5,5.59644 17.5,12.5 z"
+       d="m 290,379.86218 a 17.5,12.5 0 1 1 -35,0 17.5,12.5 0 1 1 35,0 z"
        transform="translate(-1008.4256,-287.55371)" />
     <g
        id="g3313"
@@ -1536,7 +1537,7 @@
            inkscape:export-xdpi="90"
            inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/wspace/client/resources/groupSpaceEnabled.png"
            transform="matrix(2.375,0,0,4.7499998,-102.75,10.817397)"
-           d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
+           d="m 110,32.362183 a 20,10 0 1 1 -40,0 20,10 0 1 1 40,0 z"
            sodipodi:ry="10"
            sodipodi:rx="20"
            sodipodi:cy="32.362183"
@@ -1549,7 +1550,7 @@
            inkscape:export-xdpi="90"
            inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
            transform="matrix(9.4200602,3.355959,-3.355959,9.4200602,45.524372,-53.39817)"
-           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
            sodipodi:ry="1"
            sodipodi:rx="1"
            sodipodi:cy="16.362183"
@@ -1568,14 +1569,14 @@
            sodipodi:cy="16.362183"
            sodipodi:rx="1"
            sodipodi:ry="1"
-           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
            transform="matrix(9.4200602,3.355959,-3.355959,9.4200602,18.680548,-64.20388)" />
         <path
            inkscape:export-ydpi="90"
            inkscape:export-xdpi="90"
            inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
            transform="matrix(9.4200602,3.355959,-3.355959,9.4200602,43.935022,-24.026857)"
-           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
            sodipodi:ry="1"
            sodipodi:rx="1"
            sodipodi:cy="16.362183"
@@ -1594,14 +1595,14 @@
            sodipodi:cy="16.362183"
            sodipodi:rx="1"
            sodipodi:ry="1"
-           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
            transform="matrix(9.4200602,3.355959,-3.355959,9.4200602,16.336633,-16.494463)" />
         <path
            inkscape:export-ydpi="90"
            inkscape:export-xdpi="90"
            inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
            transform="matrix(11.211448,3.9941526,-3.9941526,11.211448,-16.590722,-79.68006)"
-           d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
+           d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
            sodipodi:ry="1"
            sodipodi:rx="1"
            sodipodi:cy="16.362183"
@@ -1642,7 +1643,7 @@
          id="tspan6264">varias personas de</tspan><tspan
          id="tspan13782"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="129.53362"
+         y="129.5336"
          x="-830.94623"
          sodipodi:role="line">tu grupos</tspan></text>
     <text
@@ -1786,13 +1787,63 @@
      inkscape:label="graphics"
      id="layer6"
      inkscape:groupmode="layer">
-    <path
-       style="fill:#231f20;display:inline"
-       d="m 179.41811,-298.39465 -34.4,0 0,50.03594 c 20.3125,0 29.6875,0 50,0 l 0,-34.39844 z m 9.35,43.78594 c -17.04308,0 -16.84912,0 -37.5,0 0,0 0.009,-33.50157 0.009,-37.63126 3.28125,0 12.19844,0 18.75938,0 l 0,18.76563 18.76562,0 c -0.001,4.27031 -0.0344,18.86563 -0.0344,18.86563 z m -12.475,-25.12188 c 0,-2.41094 0,-9.24687 0,-12.50938 2.52344,2.52969 10.00312,10.00626 12.50937,12.50938 -3.19844,0 -10.08437,0 -12.50937,0 z"
-       id="path3"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccccccccccc"
-       transform="translate(0,435.82679)" />
+    <g
+       id="g3"
+       transform="matrix(1.5625,0,0,1.5636219,145.02002,137.31615)">
+      <polygon
+         style="fill:#231f20"
+         points="32,32 0,32 0,4 4,4 4,28 28,28 28,4 32,4 32,32 "
+         id="polygon5" />
+      <rect
+         x="6"
+         y="12"
+         style="fill:#231f20"
+         width="4"
+         height="4"
+         id="rect7" />
+      <rect
+         x="14"
+         y="12.008"
+         style="fill:#231f20"
+         width="4"
+         height="4"
+         id="rect9" />
+      <rect
+         x="22"
+         y="12"
+         style="fill:#231f20"
+         width="4"
+         height="4"
+         id="rect11" />
+      <rect
+         x="6"
+         y="20"
+         style="fill:#231f20"
+         width="4"
+         height="4"
+         id="rect13" />
+      <rect
+         x="14"
+         y="20"
+         style="fill:#231f20"
+         width="4"
+         height="4"
+         id="rect15" />
+      <polygon
+         style="fill:#231f20"
+         points="22,24 22,20 26,20 "
+         id="polygon17" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#231f20"
+         d="M 8,6 V 2 c 0,-1.104 0.895,-2 2,-2 1.105,0 2,0.896 2,2 V 6 C 12,7.104 11.105,8 10,8 8.895,8 8,7.104 8,6 z"
+         id="path19" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#231f20"
+         d="M 20,6 V 2 c 0,-1.104 0.895,-2 2,-2 1.105,0 2,0.896 2,2 V 6 C 24,7.104 23.105,8 22,8 20.895,8 20,7.104 20,6 z"
+         id="path21" />
+    </g>
     <path
        style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 174.035,690.39519 c -36.78501,6.53254 -42.5348,26.83565 -42.5348,26.83565 l -2.47152,7.12811"

@@ -88,6 +88,7 @@ public class ContentViewerPresenter extends
     void signIn();
 
     void signOut();
+
   }
 
   private final ActionRegistryByType actionsRegistry;

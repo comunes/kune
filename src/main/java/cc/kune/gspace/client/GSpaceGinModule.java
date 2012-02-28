@@ -119,6 +119,7 @@ import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerUtils;
 import cc.kune.gspace.client.viewers.NoHomePageViewer;
 import cc.kune.gspace.client.viewers.PathToolbarUtils;
+import cc.kune.gspace.client.viewers.TutorialViewer;
 
 import com.google.inject.Singleton;
 
@@ -151,6 +152,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
         SitebarSearchPanel.class, SitebarSearchPresenter.SitebarSearchProxy.class);
 
     s(NoHomePageViewer.class);
+    s(TutorialViewer.class);
 
     bindPresenter(GroupOptionsPresenter.class, GroupOptionsView.class, GroupOptionsPanel.class,
         GroupOptionsPresenter.GroupOptionsProxy.class);

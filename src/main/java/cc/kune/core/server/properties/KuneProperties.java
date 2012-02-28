@@ -35,6 +35,8 @@ public interface KuneProperties {
   String IMAGES_ICONSIZE = "kune.images.iconsize";
   String IMAGES_RESIZEWIDTH = "kune.images.resizewidth";
   String IMAGES_THUMBSIZE = "kune.images.thumbsize";
+  String KUNE_TUTORIALS_DEFLANG = "kune.tutorial.defaultlang";
+  String KUNE_TUTORIALS_LANGS = "kune.tutorial.langs";
   String MP3_EMBEDED_OBJECT = "kune.media.mp3embededobject";
   String OGG_EMBEDED_OBJECT = "kune.media.oggembededobject";
   String RESERVED_WORDS = "kune.server.names.reservedwords";

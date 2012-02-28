@@ -5,12 +5,10 @@
     .frame {
       margin: 5 auto;
       padding: 0;
-      height: 100%;
       display: block;
       width: 100%;
       border: none;
           }
   </ui:style>
-  <g:Frame styleName="{style.frame}"
-    ui:field="frame" />
+  <g:Frame styleName="{style.frame}" ui:field="frame" />
 </ui:UiBinder>

@@ -47,6 +47,7 @@ import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -73,10 +74,11 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   @Inject
   public FolderViewerAsTablePanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
-      final GuiProvider guiProvider, final CoreResources res,
+      final EventBus eventBus, final GuiProvider guiProvider, final CoreResources res,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
-      final Provider<FolderViewerDropController> dropControllerProv) {
-    super(gsArmor, i18n, capabilitiesRegistry, dragController, dropControllerProv);
+      final Provider<FolderViewerDropController> dropControllerProv, final TutorialViewer tutorialViewer) {
+    super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, dropControllerProv,
+        tutorialViewer);
     this.guiProvider = guiProvider;
     this.res = res;
     widget = uiBinder.createAndBindUi(this);

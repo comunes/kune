@@ -52,7 +52,9 @@ public class KunePropertiesDefault implements KuneProperties {
 
   private void checkNull(final String key, final Object value) {
     if (value == null) {
-      throw new ServerException("PROPERTY: " + key + " not defined in " + fileName);
+      throw new ServerException(
+          String.format("PROPERTY '%s' not defined in file %s. Please updated this configuration file.",
+              key, fileName));
     }
   }
 

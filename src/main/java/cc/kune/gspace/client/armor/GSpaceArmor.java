@@ -20,6 +20,7 @@
 package cc.kune.gspace.client.armor;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.shared.utils.Pair;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -32,6 +33,8 @@ public interface GSpaceArmor {
   void enableCenterScroll(boolean enable);
 
   ForIsWidget getDocContainer();
+
+  Pair<Integer, Integer> getDocContainerSize();
 
   ForIsWidget getDocFooter();
 

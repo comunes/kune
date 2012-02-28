@@ -60,6 +60,8 @@ public class ChatClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
+    registerTutorial(TYPE_ROOT);
+    registerTutorial(TYPE_ROOM);
     registerContentTypeIcon(TYPE_ROOT, icons.chats());
     registerContentTypeIcon(TYPE_ROOM, res.groupChat());
     final String emptyMsg = i18n.tWithNT("See the archive of old conversations"

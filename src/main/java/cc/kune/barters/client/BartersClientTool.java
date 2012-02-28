@@ -66,6 +66,8 @@ public class BartersClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
+    registerTutorial(TYPE_ROOT);
+    registerTutorial(TYPE_FOLDER);
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
     registerContentTypeIcon(TYPE_ROOT, icons.barters());
     registerContentTypeIcon(TYPE_BARTER, navResources.barter());

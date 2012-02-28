@@ -125,6 +125,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     contentCapabilitiesRegistry.getTranslatable().register(typeIds);
   }
 
+  public void registerTutorial(final String contentTypeId) {
+    contentCapabilitiesRegistry.getTutorialRegistry().register(contentTypeId);
+  }
+
   protected void registerUploadTypesAndMimes(final String typeUploadedfile) {
     registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("image"), "images/nav/picture.png");
     registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("video"), "images/nav/film.png");

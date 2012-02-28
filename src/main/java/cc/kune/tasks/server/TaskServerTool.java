@@ -55,6 +55,7 @@ public class TaskServerTool extends AbstractServerTool {
         containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }
 
+  @SuppressWarnings("unused")
   private Container createFolder(final Group group, final Container rootFolder,
       final I18nLanguage language, final String title) {
     final Container shortTerm = creationService.createFolder(group, rootFolder.getId(), i18n.t(title),
@@ -62,6 +63,7 @@ public class TaskServerTool extends AbstractServerTool {
     return shortTerm;
   }
 
+  @SuppressWarnings("unused")
   private void createTask(final User user, final Group group, final Container shortTerm,
       final String text) {
     createInitialContent(user, group, shortTerm, i18n.t(text),
@@ -70,17 +72,7 @@ public class TaskServerTool extends AbstractServerTool {
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
-    final Container rootFolder = createRoot(group);
-
-    final I18nLanguage language = user.getLanguage();
-
-    final Container longTerm = createFolder(group, rootFolder, language, "Long-term tasks");
-    final Container midTerm = createFolder(group, rootFolder, language, "Mid-term tasks");
-    final Container shortTerm = createFolder(group, rootFolder, language, "Short-term (urgent) tasks");
-
-    createTask(user, group, longTerm, "A long-term task sample");
-    createTask(user, group, midTerm, "A mid-term task sample");
-    createTask(user, group, shortTerm, "A short-term task sample");
+    createRoot(group);
     return group;
   }
 

@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.Pair;
 import cc.kune.core.client.dnd.FolderViewerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -31,6 +32,9 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -51,21 +55,29 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   private final TutorialViewer tutorialViewer;
   protected Widget widget;
 
-  public AbstractFolderViewerPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
-      final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
-      final Provider<FolderViewerDropController> dropControllerProv) {
+  public AbstractFolderViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
+      final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
+      final KuneDragController dragController,
+      final Provider<FolderViewerDropController> dropControllerProv, final TutorialViewer tutorialViewer) {
     this.gsArmor = gsArmor;
     this.i18n = i18n;
     this.capabilitiesRegistry = capabilitiesRegistry;
     this.dragController = dragController;
     this.dropControllerProv = dropControllerProv;
+    this.tutorialViewer = tutorialViewer;
     emptyPanel = new FlowPanel();
     emptyLabel = new InlineLabel(i18n.t("This is empty."));
     emptyLabel.setStyleName("k-empty-msg");
     emptyPanel.setStyleName("k-empty-folder-panel");
     emptyPanel.add(emptyLabel);
-    tutorialViewer = new TutorialViewer();
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+    Window.addResizeHandler(new ResizeHandler() {
+      @Override
+      public void onResize(final ResizeEvent event) {
+        // iframe height 100% does not work, so we have to do this kind of hacks
+        resizeTutorialFrame();
+      }
+    });
   }
 
   @Override
@@ -108,6 +120,11 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     contentTitle.highlightTitle();
   }
 
+  private void resizeTutorialFrame() {
+    final Pair<Integer, Integer> size = gsArmor.getDocContainerSize();
+    tutorialViewer.setHeigth(size.getLeft());
+  }
+
   @Override
   public void setContainer(final StateContainerDTO state) {
     final String title = state.getContainer().isRoot() ? i18n.t(state.getTitle()) : state.getTitle();
@@ -143,7 +160,9 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   }
 
   @Override
-  public void showTutorial(final String url) {
-    gsArmor.getDocContainer().add(tutorialViewer.setUrl(url));
+  public void showTutorial(final String tool) {
+    UiUtils.clear(gsArmor.getDocContainer());
+    resizeTutorialFrame();
+    gsArmor.getDocContainer().add(tutorialViewer.show(tool));
   }
 }

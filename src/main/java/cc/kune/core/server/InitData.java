@@ -41,6 +41,7 @@ public class InitData {
   private String currentCCversion;
   private License defaultLicense;
   private String defaultWsTheme;
+  private String defTutorialLanguage;
   private List<ExtMediaDescrip> extMediaDescrips;
   private boolean feedbackEnabled;
   private String flvEmbedObject;
@@ -64,6 +65,7 @@ public class InitData {
   private String siteUrl;
   private String[] timezones;
   private boolean translatorEnabled;
+  private List<String> tutorialLanguages;
   private boolean useClientContentCache;
   private UserInfo userInfo;
   private List<ToolSimple> userTools;
@@ -98,6 +100,10 @@ public class InitData {
 
   public String getDefaultWsTheme() {
     return defaultWsTheme;
+  }
+
+  public String getDefTutorialLanguage() {
+    return defTutorialLanguage;
   }
 
   public List<ExtMediaDescrip> getExtMediaDescrips() {
@@ -184,6 +190,10 @@ public class InitData {
     return timezones;
   }
 
+  public List<String> getTutorialLanguages() {
+    return tutorialLanguages;
+  }
+
   public UserInfo getUserInfo() {
     return userInfo;
   }
@@ -230,6 +240,10 @@ public class InitData {
 
   public void setDefaultWsTheme(final String defaultWsTheme) {
     this.defaultWsTheme = defaultWsTheme;
+  }
+
+  public void setDefTutorialLanguage(final String defTutorialLanguage) {
+    this.defTutorialLanguage = defTutorialLanguage;
   }
 
   public void setExtMediaDescrips(final List<ExtMediaDescrip> extMediaDescrips) {
@@ -322,6 +336,10 @@ public class InitData {
 
   public void setTranslatorEnabled(final boolean translatorEnabled) {
     this.translatorEnabled = translatorEnabled;
+  }
+
+  public void setTutorialLanguages(final List<String> tutorialLanguages) {
+    this.tutorialLanguages = tutorialLanguages;
   }
 
   public void setUseClientContentCache(final boolean useClientContentCache) {

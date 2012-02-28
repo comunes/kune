@@ -15,6 +15,7 @@ import cc.kune.events.shared.EventsConstants;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerPanel;
 import cc.kune.gspace.client.viewers.ContentTitleWidget;
+import cc.kune.gspace.client.viewers.TutorialViewer;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
@@ -33,6 +34,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -51,11 +53,12 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   private ContentTitleWidget contentTitle;
 
   @Inject
-  public CalendarViewerPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
-      final GuiProvider guiProvider, final CoreResources res,
+  public CalendarViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
+      final I18nTranslationService i18n, final GuiProvider guiProvider, final CoreResources res,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
-      final Provider<FolderViewerDropController> dropControllerProv) {
-    super(gsArmor, i18n, capabilitiesRegistry, dragController, dropControllerProv);
+      final Provider<FolderViewerDropController> dropControllerProv, final TutorialViewer tutorialViewer) {
+    super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, dropControllerProv,
+        tutorialViewer);
     final CalendarSettings settings = new CalendarSettings();
     settings.setIntervalsPerHour(4);
     settings.setPixelsPerInterval(10);
@@ -244,6 +247,12 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   public void setView(final CalendarViews view, final int days) {
     calendar.setView(view, days);
     calendar.scrollToHour(6);
+  }
+
+  @Override
+  public void showEmptyMsg(final String emptyMessage) {
+    // Don't do nothing
+    // super.showEmptyMsg(emptyMessage);
   }
 
   @Override

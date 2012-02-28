@@ -36,6 +36,7 @@ import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
 import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.gwt.core.client.Scheduler;
@@ -45,6 +46,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
@@ -187,15 +189,21 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
         @Override
         public void onSuccess(final StateAbstractDTO state) {
           stateManager.setRetrievedStateAndGo(state);
+          getView().hide();
+          reset();
+          getView().unMask();
           Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {
               groupOptions.showTooltip();
+              new Timer() {
+
+                @Override
+                public void run() {
+                  ShowHelpContainerEvent.fire(getEventBus(), state.getStateToken().getTool());
+                }}.schedule(2000);
             }
           });
-          getView().hide();
-          reset();
-          getView().unMask();
         }
       };
       groupService.get().createNewGroup(session.getUserHash(), group, publicDesc, getView().getTags(),

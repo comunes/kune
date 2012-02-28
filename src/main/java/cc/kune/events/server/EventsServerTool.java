@@ -70,13 +70,7 @@ public class EventsServerTool extends AbstractServerTool implements ServerWaveTo
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
-    final Container rootFolder = createRoot(group);
-
-    createInitialContent(user, group, rootFolder, i18n.t("Meeting sample"),
-        i18n.t("This is only a meet sample. You can invite other participants to this meeting, "
-            + "but also publish to the general public allowing you to to help in the organization, "
-            + "call and speed-up of events."), TYPE_MEETING);
-
+    createRoot(group);
     return group;
   }
 

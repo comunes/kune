@@ -23,6 +23,7 @@ import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.actions.ActionGroups;
+import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
@@ -30,6 +31,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -47,9 +49,10 @@ public class FolderViewerUtils {
 
   @Inject
   public FolderViewerUtils(final ContentCapabilitiesRegistry capabilitiesRegistry,
-      final Session session, final Provider<ClientFileDownloadUtils> downloadUtilsProvider,
-      final I18nTranslationService i18n, final ActionRegistryByType actionsRegistry,
-      final StateManager stateManager, final PathToolbarUtils pathToolbarUtils) {
+      final EventBus eventBus, final Session session,
+      final Provider<ClientFileDownloadUtils> downloadUtilsProvider, final I18nTranslationService i18n,
+      final ActionRegistryByType actionsRegistry, final StateManager stateManager,
+      final PathToolbarUtils pathToolbarUtils) {
     this.capabReg = capabilitiesRegistry;
     this.session = session;
     this.downloadUtilsProvider = downloadUtilsProvider;
@@ -58,6 +61,13 @@ public class FolderViewerUtils {
     this.stateManager = stateManager;
     this.iconsRegistry = capabilitiesRegistry.getIconsRegistry();
     this.pathToolbarUtils = pathToolbarUtils;
+    eventBus.addHandler(ShowHelpContainerEvent.getType(),
+        new ShowHelpContainerEvent.ShowHelpContainerHandler() {
+          @Override
+          public void onShowHelpContainer(final ShowHelpContainerEvent event) {
+            getView().showTutorial(event.getTool());
+          }
+        });
   }
 
   private void addItem(final AbstractContentSimpleDTO content, final BasicMimeTypeDTO mimeType,
@@ -96,13 +106,19 @@ public class FolderViewerUtils {
 
   private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
     if (container.getContents().size() + container.getChilds().size() == 0) {
-      // No elements here, so, we show a empty message
       final String typeId = container.getTypeId();
-      // msg is already translated
-      final String msg = session.isLogged() ? capabReg.getEmptyMessagesRegistry().getContentTypeIcon(
-          typeId) : capabReg.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
-      final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : msg;
-      getView().showEmptyMsg(emptyMessage);
+      // No elements here, so, we show a empty message (or a tutorial)
+      if (session.isLogged() && capabReg.getTutorialRegistry().hasTutorial(typeId)) {
+        // If we have a tutorial, we show it.
+        getView().showTutorial(container.getStateToken().getTool());
+      } else {
+        // If not, we show the empty message
+        // msg is already translated
+        final String msg = session.isLogged() ? capabReg.getEmptyMessagesRegistry().getContentTypeIcon(
+            typeId) : capabReg.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
+        final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : msg;
+        getView().showEmptyMsg(emptyMessage);
+      }
     } else {
       // Folders
       for (final ContainerSimpleDTO childFolder : container.getChilds()) {
