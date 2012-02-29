@@ -66,6 +66,8 @@ import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
+import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
@@ -85,7 +87,6 @@ import cc.kune.core.client.sn.UserSNPanel;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.sn.actions.AddBuddieSearchPanel;
 import cc.kune.core.client.sn.actions.AddMemberSearchPanel;
-import cc.kune.core.client.sn.actions.SocialNetClientUtils;
 import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNCollabsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
@@ -232,7 +233,9 @@ public class CoreGinModule extends ExtendedGinModule {
     s(UserSNConfActions.class);
     s(AddBuddieSearchPanel.class);
     s(AddMemberSearchPanel.class);
-    s(SocialNetClientUtils.class);
+
+    s(ContentServiceHelper.class);
+    s(SocialNetServiceHelper.class);
 
     s(SiteUserOptionsPresenter.class);
     s(SiteUserOptions.class, SiteUserOptionsPresenter.class);

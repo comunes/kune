@@ -27,8 +27,8 @@ import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-@RemoteServiceRelativePath("SocialNetworkService")
-public interface SocialNetworkService extends RemoteService {
+@RemoteServiceRelativePath("SocialNetService")
+public interface SocialNetService extends RemoteService {
 
   SocialNetworkDataDTO acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName)
       throws DefaultException;

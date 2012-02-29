@@ -1,12 +1,10 @@
 package cc.kune.core.client.sn;
 
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.dnd.AbstractDropController;
 import cc.kune.core.client.dnd.KuneDragController;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.sn.actions.SocialNetClientUtils;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
+import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
@@ -18,20 +16,19 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class GroupSNDropController extends AbstractDropController {
 
-  private final ContentServiceAsync contentService;
-  private final I18nTranslationService i18n;
+  private final ContentServiceHelper contentService;
   private final Session session;
-  private final SocialNetClientUtils sNClientUtils;
+  private final SocialNetServiceHelper sNClientUtils;
   private final SocialNetworkSubGroup subGroup;
 
   public GroupSNDropController(final KuneDragController dragController,
-      final SocialNetworkSubGroup subGroup, final ContentServiceAsync contentService,
-      final Session session, final I18nTranslationService i18n, final SocialNetClientUtils sNClientUtils) {
+      final SocialNetworkSubGroup subGroup, final ContentServiceHelper contentService,
+      final Session session, final I18nTranslationService i18n,
+      final SocialNetServiceHelper sNClientUtils) {
     super(dragController);
     this.subGroup = subGroup;
     this.contentService = contentService;
     this.session = session;
-    this.i18n = i18n;
     this.sNClientUtils = sNClientUtils;
     registerType(FolderItemWidget.class);
     registerType(BasicDragableThumb.class);
@@ -40,14 +37,7 @@ public class GroupSNDropController extends AbstractDropController {
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
     if (widget instanceof FolderItemWidget) {
-      contentService.addParticipants(session.getUserHash(), ((FolderItemWidget) widget).getToken(),
-          session.getCurrentGroupShortName(), subGroup, new AsyncCallbackSimple<Boolean>() {
-            @Override
-            public void onSuccess(final Boolean result) {
-              NotifyUser.info(result ? i18n.t("Shared with members")
-                  : i18n.t("All these members are already partipating"));
-            }
-          });
+      contentService.addParticipants(((FolderItemWidget) widget).getToken(), subGroup);
     }
     if (widget instanceof BasicDragableThumb) {
       final String shortName = ((BasicDragableThumb) widget).getToken().getGroup();

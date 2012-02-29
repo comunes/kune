@@ -17,32 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.sn.actions;
+package cc.kune.gspace.client.actions;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.Action;
-import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
-import cc.kune.core.shared.dto.GroupDTO;
 
 import com.google.inject.Inject;
 
-public class ChangeToCollabAction extends AbstractExtendedAction {
-  private final SocialNetServiceHelper sNClientUtils;
+/**
+ * The Class ContentViewerOptionsShareSubMenu (not used yet)
+ */
+public class ContentViewerOptionsShareSubMenu extends SubMenuDescriptor {
+
+  public static final String ID = "k-cnt-viewer-share-opt-submenu";
 
   @Inject
-  public ChangeToCollabAction(final I18nTranslationService i18n, final CoreResources res,
-      final SocialNetServiceHelper sNClientUtils) {
-    this.sNClientUtils = sNClientUtils;
-    putValue(NAME, i18n.t("Change to collaborator"));
-    putValue(Action.SMALL_ICON, res.arrowDownGreen());
-  }
-
-  @Override
-  public void actionPerformed(final ActionEvent event) {
-    sNClientUtils.changeToCollab(((GroupDTO) event.getTarget()).getShortName());
+  public ContentViewerOptionsShareSubMenu(final I18nTranslationService i18n, final CoreResources res,
+      final ContentViewerOptionsMenu parent) {
+    super();
+    this.withText(i18n.t("Share")).withIcon(res.addGreen()).withId(ID).withParent(parent, false);
   }
 
 }

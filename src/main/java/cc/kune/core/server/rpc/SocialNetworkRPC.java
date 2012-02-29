@@ -20,7 +20,7 @@
 package cc.kune.core.server.rpc;
 
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.client.rpcservices.SocialNetService;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
@@ -40,7 +40,7 @@ import cc.kune.domain.finders.UserFinder;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
-public class SocialNetworkRPC implements SocialNetworkService, RPC {
+public class SocialNetworkRPC implements SocialNetService, RPC {
 
   private final GroupManager groupManager;
   private final Mapper mapper;

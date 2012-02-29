@@ -29,6 +29,9 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
+import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
@@ -51,11 +54,17 @@ public class BartersClientActions extends AbstractFoldableToolActions {
       final Provider<OpenBartersMenuItem> openContentMenuItem,
       final Provider<DelBartersMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
+      final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
+      final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
+      final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
       final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem, final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
@@ -67,6 +76,9 @@ public class BartersClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
   }
 
   @Override

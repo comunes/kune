@@ -27,7 +27,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
+import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -46,13 +46,13 @@ public class UnJoinFromThisGroupAction extends RolAction {
 
   private final I18nTranslationService i18n;
   private final Session session;
-  private final Provider<SocialNetworkServiceAsync> snServiceProvider;
+  private final Provider<SocialNetServiceAsync> snServiceProvider;
   private final StateManager stateManager;
 
   @Inject
   public UnJoinFromThisGroupAction(final StateManager stateManager, final Session session,
       final I18nTranslationService i18n, final CoreResources res,
-      final Provider<SocialNetworkServiceAsync> snServiceProvider,
+      final Provider<SocialNetServiceAsync> snServiceProvider,
       final AccessRightsClientManager rightsClientManager) {
     super(AccessRolDTO.Editor, true);
     this.stateManager = stateManager;

@@ -33,6 +33,9 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
+import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
@@ -60,6 +63,9 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<TutorialContainerBtn> tutorialBtn,
+      final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
+      final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
+      final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
       final Provider<DelFolderMenuItem> delFolderMenuItem, final Provider<NewFolderBtn> newFolderBtn,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
@@ -67,6 +73,9 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final WikiPageNewMenu wikipageNewMenu) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newWikiIconBtn, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
@@ -87,6 +96,9 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, setAsHomePage, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());

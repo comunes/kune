@@ -29,6 +29,7 @@ import cc.kune.core.client.sn.AllMembersGroupSNDropController;
 import cc.kune.core.client.sn.CollabsGroupSNDropController;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
+import cc.kune.gspace.client.actions.ContentViewerOptionsShareSubMenu;
 import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.armor.GSpaceArmor;
@@ -208,6 +209,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     // Actions
     s(ContentViewerOptionsMenu.class);
+    s(ContentViewerOptionsShareSubMenu.class);
     s(RenameAction.class);
     s(GiveUsFeedbackBtn.class);
     s(WriteToBuddyHeaderButton.class);

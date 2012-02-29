@@ -28,7 +28,7 @@ import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
+import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
@@ -47,7 +47,7 @@ public class JoinGroupAction extends SNRolAction {
   @Inject
   public JoinGroupAction(final StateManager stateManager, final Session session,
       final I18nTranslationService i18n, final CoreResources res,
-      final Provider<SocialNetworkServiceAsync> snServiceProvider, final Provider<SignIn> signIn,
+      final Provider<SocialNetServiceAsync> snServiceProvider, final Provider<SignIn> signIn,
       final AccessRightsClientManager rightsClientManager) {
     super(stateManager, session, i18n, res, snServiceProvider, rightsClientManager, AccessRolDTO.Viewer,
         false, true, false);

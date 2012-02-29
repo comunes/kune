@@ -34,7 +34,7 @@ import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
+import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ws.entheader.EntityHeader;
@@ -52,13 +52,13 @@ public class AddAsBuddieHeaderButton {
   public static class AddAsBuddieHeaderAction extends AbstractExtendedAction {
     private final ChatClient chatEngine;
     private final Session session;
-    private final Provider<SocialNetworkServiceAsync> snService;
+    private final Provider<SocialNetServiceAsync> snService;
 
     @Inject
     public AddAsBuddieHeaderAction(final ChatClient chatEngine, final Session session,
         final ChatInstances chatInstances, final StateManager stateManager,
         final I18nTranslationService i18n, final CoreResources img,
-        final Provider<SocialNetworkServiceAsync> snService) {
+        final Provider<SocialNetServiceAsync> snService) {
       super();
       this.chatEngine = chatEngine;
       this.session = session;

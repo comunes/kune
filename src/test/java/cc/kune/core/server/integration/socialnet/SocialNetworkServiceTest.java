@@ -26,7 +26,7 @@ import org.junit.Test;
 
 import cc.kune.core.client.errors.AlreadyUserMemberException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
-import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.client.rpcservices.SocialNetService;
 import cc.kune.core.server.UserSession;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
@@ -39,7 +39,7 @@ public class SocialNetworkServiceTest extends IntegrationTest {
     @Inject
     UserSession session;
     @Inject
-    SocialNetworkService socialNetworkService;
+    SocialNetService socialNetworkService;
 
     private StateToken groupToken;
 

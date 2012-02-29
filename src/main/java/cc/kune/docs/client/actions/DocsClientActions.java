@@ -33,11 +33,14 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
+import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
-import cc.kune.gspace.client.actions.TutorialContainerBtn;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
+import cc.kune.gspace.client.actions.TutorialContainerBtn;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -59,6 +62,9 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<OpenDocMenuItem> openContentMenuItem, final Provider<NewFolderBtn> newFolderBtn,
       final Provider<DelDocMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
+      final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
+      final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
+      final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<TutorialContainerBtn> tutorialBtn, final Provider<ChatAboutContentBtn> chatAbout,
@@ -69,6 +75,9 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocIconBtn, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, foldersNewMenu, containers);
@@ -85,6 +94,9 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, setAsHomePage, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
     newMenusRegistry.register(TYPE_FOLDER, foldersNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, foldersNewMenu.get());
     newMenusRegistry.register(TYPE_DOCUMENT,

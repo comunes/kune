@@ -17,32 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.sn.actions;
+package cc.kune.gspace.client.actions;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.Action;
-import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
-import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
 import com.google.inject.Inject;
 
-public class ChangeToCollabAction extends AbstractExtendedAction {
-  private final SocialNetServiceHelper sNClientUtils;
+public class AddAdminMembersToContentMenuItem extends AddMembersToContentMenuItem {
 
   @Inject
-  public ChangeToCollabAction(final I18nTranslationService i18n, final CoreResources res,
-      final SocialNetServiceHelper sNClientUtils) {
-    this.sNClientUtils = sNClientUtils;
-    putValue(NAME, i18n.t("Change to collaborator"));
-    putValue(Action.SMALL_ICON, res.arrowDownGreen());
-  }
-
-  @Override
-  public void actionPerformed(final ActionEvent event) {
-    sNClientUtils.changeToCollab(((GroupDTO) event.getTarget()).getShortName());
+  public AddAdminMembersToContentMenuItem(final I18nTranslationService i18n,
+      final AddMembersToContentAction action, final ContentViewerOptionsMenu optionsMenu,
+      final CoreResources res) {
+    super(i18n.t("Share with admins"), SocialNetworkSubGroup.admins, action, optionsMenu, res);
   }
 
 }

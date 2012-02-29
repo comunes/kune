@@ -33,6 +33,9 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
+import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
@@ -62,13 +65,18 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<TutorialContainerBtn> tutorialBtn,
-
+      final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
+      final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
+      final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
       final TasksFolderNewMenu taskFolderNewMenu, final TasksNewMenu taskNewMenu,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskIconBtn, all);
     // actionsRegistry.addAction(ActionGroups.TOOLBAR, taskFolderNewMenu,
@@ -90,6 +98,9 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsNotDoneMenuItem,
         ContentStatus.inTheDustbin, TYPE_TASK);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, taskFolderNewMenu.get());

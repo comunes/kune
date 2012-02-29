@@ -32,7 +32,7 @@ import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
 import cc.kune.core.client.rpcservices.SiteService;
-import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.client.rpcservices.SocialNetService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.init.FinderRegistry;
 import cc.kune.core.server.manager.file.EntityBackgroundDownloadManager;
@@ -180,7 +180,7 @@ public class KuneRackModule implements RackModule {
         new ForwardFilter(suffix + "/ws.html"));
 
     builder.installGWTServices("^" + suffix + "/", SiteService.class, GroupService.class,
-        ContentService.class, UserService.class, SocialNetworkService.class, I18nService.class,
+        ContentService.class, UserService.class, SocialNetService.class, I18nService.class,
         ListsService.class, ClientStatsService.class);
     builder.installRESTServices("^" + suffix + "/json/", TestJSONService.class, GroupJSONService.class,
         UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);

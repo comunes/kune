@@ -25,7 +25,7 @@ import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public interface SocialNetworkServiceAsync {
+public interface SocialNetServiceAsync {
 
   void acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);

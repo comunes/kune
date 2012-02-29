@@ -27,7 +27,7 @@ import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
 import cc.kune.core.client.rpcservices.SiteService;
-import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.client.rpcservices.SocialNetService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.access.AccessRightsServiceDefault;
@@ -156,7 +156,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(GroupService.class).to(GroupRPC.class);
     bind(ContentService.class).to(ContentRPC.class);
     bind(UserService.class).to(UserRPC.class);
-    bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
+    bind(SocialNetService.class).to(SocialNetworkRPC.class);
     bind(I18nService.class).to(I18nRPC.class);
     bind(ListsService.class).to(ListsRPC.class);
     bind(ClientStatsService.class).to(StatsRPC.class);

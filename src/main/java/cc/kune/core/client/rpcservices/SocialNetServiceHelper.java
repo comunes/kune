@@ -1,9 +1,7 @@
-package cc.kune.core.client.sn.actions;
+package cc.kune.core.client.rpcservices;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -11,16 +9,16 @@ import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class SocialNetClientUtils {
+public class SocialNetServiceHelper {
 
   private final I18nTranslationService i18n;
   private final Session session;
-  private final Provider<SocialNetworkServiceAsync> snServiceProvider;
+  private final Provider<SocialNetServiceAsync> snServiceProvider;
   private final StateManager stateManager;
 
   @Inject
-  public SocialNetClientUtils(final StateManager stateManager, final Session session,
-      final I18nTranslationService i18n, final Provider<SocialNetworkServiceAsync> snServiceProvider) {
+  public SocialNetServiceHelper(final StateManager stateManager, final Session session,
+      final I18nTranslationService i18n, final Provider<SocialNetServiceAsync> snServiceProvider) {
     this.stateManager = stateManager;
     this.session = session;
     this.i18n = i18n;
@@ -34,7 +32,7 @@ public class SocialNetClientUtils {
         new AsyncCallbackSimple<SocialNetworkDataDTO>() {
           @Override
           public void onSuccess(final SocialNetworkDataDTO result) {
-            SocialNetClientUtils.this.onSuccess(result);
+            SocialNetServiceHelper.this.onSuccess(result);
           }
         });
   }
@@ -46,7 +44,7 @@ public class SocialNetClientUtils {
         new AsyncCallbackSimple<SocialNetworkDataDTO>() {
           @Override
           public void onSuccess(final SocialNetworkDataDTO result) {
-            SocialNetClientUtils.this.onSuccess(result);
+            SocialNetServiceHelper.this.onSuccess(result);
           }
         });
   }
