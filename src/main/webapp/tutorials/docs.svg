@@ -25,7 +25,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.7686691"
-     inkscape:cx="233.45046"
+     inkscape:cx="157.12188"
      inkscape:cy="1004.2198"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
@@ -447,7 +447,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="frames"
-     style="display:inline">
+     style="display:none">
     <rect
        transform="translate(0,435.8268)"
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
