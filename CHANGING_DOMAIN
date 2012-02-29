@@ -33,6 +33,9 @@ Server > Server Manager > Edit Server Properties
 Restart the openfire server 
   /etc/init.d/openfire restart
 
+===Update your SMTP configuration (and MX record) ===
+So emails like someone@domain.new are propertly sended.
+
 ===Certificates===
 Update your ssl certificates (openfire, wave keystore, wave federation, etc), if you have configured before with domain.old
 
