@@ -34,6 +34,7 @@ import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
+import cc.kune.gspace.client.actions.TutorialContainerBtn;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -56,6 +57,8 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshListMenuItem> refresh, final Provider<SubscribeToListBtn> subscribeBtn,
       final Provider<OptionsListMenu> optionsMenuContent,
       final Provider<ShowSubscribersOfListBtn> subscribersCount,
+      final Provider<TutorialContainerBtn> tutorialBtn,
+
       final Provider<SetListOpenessMenuItem> listOpenessMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn, final ListsNewMenu listNewMenu,
       final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
@@ -75,6 +78,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     // TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribersCount, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);

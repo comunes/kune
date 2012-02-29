@@ -34,6 +34,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
+import cc.kune.gspace.client.actions.TutorialContainerBtn;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
@@ -60,7 +61,8 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
-      final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
+      final Provider<TutorialContainerBtn> tutorialBtn, final Provider<ChatAboutContentBtn> chatAbout,
+      final Provider<RefreshContentMenuItem> refresh,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu foldersNewMenu,
       final DocsNewMenu docsNewMenu) {
@@ -74,6 +76,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newDocMenuItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderMenuItem, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);

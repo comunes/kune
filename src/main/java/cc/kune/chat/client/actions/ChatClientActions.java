@@ -30,6 +30,7 @@ import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
+import cc.kune.gspace.client.actions.TutorialContainerBtn;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -47,13 +48,14 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshContentMenuItem> refresh, final Provider<NewRoomBtn> newRoomBtn,
       final Provider<OpenRoomMenuItem> openRoomMenuItem, final Provider<GoParentChatBtn> folderGoUp,
       final Provider<OpenRoomArchiveMenuItem> openRoomArchiveMenuItem,
-      final Provider<OpenRoomBtn> openRoomBtn,
+      final Provider<OpenRoomBtn> openRoomBtn, final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newRoomBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, openRoomBtn, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openRoomMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openRoomArchiveMenuItem, containersNoRoot);

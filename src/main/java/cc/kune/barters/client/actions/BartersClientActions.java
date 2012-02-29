@@ -32,6 +32,7 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
+import cc.kune.gspace.client.actions.TutorialContainerBtn;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -50,6 +51,7 @@ public class BartersClientActions extends AbstractFoldableToolActions {
       final Provider<OpenBartersMenuItem> openContentMenuItem,
       final Provider<DelBartersMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
+      final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem, final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
@@ -57,6 +59,7 @@ public class BartersClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newBartersBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);

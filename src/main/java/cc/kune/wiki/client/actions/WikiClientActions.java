@@ -37,6 +37,7 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
+import cc.kune.gspace.client.actions.TutorialContainerBtn;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -58,6 +59,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<DelWikiMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
+      final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem, final Provider<NewFolderBtn> newFolderBtn,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
@@ -77,6 +79,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     // containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);

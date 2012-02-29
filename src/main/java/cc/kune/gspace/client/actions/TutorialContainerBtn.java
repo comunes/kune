@@ -21,17 +21,20 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-public class InfoContainerBtn extends ButtonDescriptor {
+@Singleton
+public class TutorialContainerBtn extends ButtonDescriptor {
 
+  @Singleton
   public static class GoParentContainerAction extends RolAction {
 
     private final EventBus bus;
@@ -53,10 +56,11 @@ public class InfoContainerBtn extends ButtonDescriptor {
 
   public static final String INFO_CONTAINER_ID = "k-container-info-id";
 
-  public InfoContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
-      final CoreResources res) {
+  @Inject
+  public TutorialContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
+      final CommonResources res) {
     super(action);
-    this.withToolTip(i18n.t("New to this tool? Here there is some help")).withIcon(res.infoLight()).withStyles(
+    this.withToolTip(i18n.t("New to this tool? Here there is some help")).withIcon(res.info()).withStyles(
         "k-btn-min, k-fr");
     this.withId(INFO_CONTAINER_ID);
   }
