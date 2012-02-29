@@ -67,6 +67,12 @@ Although using this password ('db4kune') is useful for a quick and dirty getting
 
 also if you want to select the database used (by default kune_dev) you have to configure it in kune.properties.
 
+===Configure your domain===
+
+Be sure that the domain you want to use with kune resolv correctly:
+   dig example.org
+For development we recommend to use some domain with zone like local.net (add to you /etc/hosts if it's not yet there). If you want to use another different domain from local.net, you have to update src/main/resources/kune.properties and src/main/resources/wave-server*
+
 ===Source code (if you are installing Kune for development)===
 
 See the DEVGUIDE for instructions of how to download the Kune code.

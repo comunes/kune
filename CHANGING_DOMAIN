@@ -1,0 +1,39 @@
+=CHANGING THE DOMAIN OF A KUNE SERVER=
+
+Suppose that we want to change from domain.old to domain.new in a kune server deployment.
+
+==Prerrequisites==
+
+* Make a backup of /var/lib/kune/, your db and any other location for wave info (_accounts, _deltas, etc)
+* Be sure that domain.new can be resolved correctly ($ dig domain.new), also the SRV records (see INSTALL)
+* stop kune
+
+==Do the job== 
+
+===Update configurations and stores===
+* in _accounts, _deltas 
+
+for i in `grep -ril domain.old /var/lib/kune/_accounts`; do perl -p -i -e 's/domain.old/domain.new/g' $i ; done
+for i in `grep -ril domain.old /var/lib/kune/_deltas`; do perl -p -i -e 's/domain.old/domain.new/g' $i ; done
+
+perl -p -i -e 's/domain.old/domain.new/g' src/main/resources/kune.properties # or in /etc/kune
+perl -p -i -e 's/domain.old/domain.new/g' src/main/resources/wave-server.properties # or in /etc/kune
+perl -p -i -e 's/domain.old/domain.new/g' src/main/webapp/ws.html
+or in production
+perl -p -i -e 's/domain.old/domain.new/g' /var/www/kune/ws.html
+
+rename 's/domain.old/domain.new/g' /var/lib/kune/_accounts
+
+Remove old persisted sessions:
+rm /var/lib/kune/_sessions/*
+
+===Update the openfire configuration===
+Update your new domain in:
+Server > Server Manager > Edit Server Properties 
+Restart the openfire server 
+  /etc/init.d/openfire restart
+
+===Certificates===
+Update your ssl certificates (openfire, wave keystore, wave federation, etc), if you have configured before with domain.old
+
+Restart kune and check if all it's ok.
