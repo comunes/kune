@@ -150,6 +150,11 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
   }
 
   @Override
+  public void setPublicVisible(final boolean visible) {
+    publicButton.setVisible(visible);
+  }
+
+  @Override
   public void setUserBtnDown(final boolean down) {
     userButton.setDown(down);
   }

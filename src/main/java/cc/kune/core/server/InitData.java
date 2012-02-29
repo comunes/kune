@@ -57,6 +57,7 @@ public class InitData {
   private String maxFileSizeInMb;
   private String mp3EmbedObject;
   private String oggEmbedObject;
+  private boolean publicSpaceVisible;
   private ReservedWordsRegistryDTO reservedWords;
   private String siteCommonName;
   private String siteLogoUrl;
@@ -206,6 +207,10 @@ public class InitData {
     return feedbackEnabled;
   }
 
+  public boolean isPublicSpaceVisible() {
+    return publicSpaceVisible;
+  }
+
   public boolean isTranslatorEnabled() {
     return translatorEnabled;
   }
@@ -304,6 +309,10 @@ public class InitData {
 
   public void setOggEmbedObject(final String oggEmbedObject) {
     this.oggEmbedObject = oggEmbedObject;
+  }
+
+  public void setPublicSpaceVisible(final boolean publicSpaceVisible) {
+    this.publicSpaceVisible = publicSpaceVisible;
   }
 
   public void setReservedWords(final ReservedWordsRegistryDTO reservedWords) {

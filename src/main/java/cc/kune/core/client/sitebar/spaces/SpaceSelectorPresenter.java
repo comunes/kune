@@ -25,6 +25,7 @@ import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.WindowFocusEvent;
 import cc.kune.core.client.state.Session;
@@ -83,6 +84,8 @@ public class SpaceSelectorPresenter extends
     void setHomeBtnDown(boolean down);
 
     void setPublicBtnDown(boolean down);
+
+    void setPublicVisible(boolean visible);
 
     void setUserBtnDown(boolean down);
 
@@ -171,6 +174,12 @@ public class SpaceSelectorPresenter extends
         if (event.isHasFocus() && !mask.isShowing()) {
           // showTooltipWithDelay();
         }
+      }
+    });
+    session.onAppStart(true, new AppStartHandler() {
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+        getView().setPublicVisible(event.getInitData().isPublicSpaceVisible());
       }
     });
   }

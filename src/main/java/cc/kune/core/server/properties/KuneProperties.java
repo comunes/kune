@@ -39,6 +39,7 @@ public interface KuneProperties {
   String KUNE_TUTORIALS_LANGS = "kune.tutorial.langs";
   String MP3_EMBEDED_OBJECT = "kune.media.mp3embededobject";
   String OGG_EMBEDED_OBJECT = "kune.media.oggembededobject";
+  String PUBLIC_SPACE_VISIBLE = "kune.publispace.toolicon.visible";
   String RESERVED_WORDS = "kune.server.names.reservedwords";
   String SITE_ADMIN_EMAIL = "kune.admin.email";
   String SITE_ADMIN_NAME = "kune.admin.name";

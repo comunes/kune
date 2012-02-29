@@ -153,6 +153,7 @@ public class SiteRPC implements RPC, SiteService {
     data.setUseClientContentCache(kuneProperties.getBoolean(KuneProperties.USE_CLIENT_CONTENT_CACHE));
     data.setDefTutorialLanguage(kuneProperties.get(KuneProperties.KUNE_TUTORIALS_DEFLANG));
     data.setTutorialLanguages(kuneProperties.getList(KuneProperties.KUNE_TUTORIALS_LANGS));
+    data.setPublicSpaceVisible(kuneProperties.getBoolean(KuneProperties.PUBLIC_SPACE_VISIBLE));
     return data;
   }
 
