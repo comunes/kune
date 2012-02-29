@@ -46,8 +46,8 @@ import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Pattern;
 
 import cc.kune.core.shared.domain.UserSNetVisibility;
-import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.domain.utils.HasId;
 
 @Entity

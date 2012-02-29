@@ -27,6 +27,7 @@ import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.AlreadyGroupMemberException;
 import cc.kune.core.client.errors.AlreadyUserMemberException;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.InvalidSNOperationException;
 import cc.kune.core.client.errors.LastAdminInGroupException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.access.AccessRightsService;
@@ -314,7 +315,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       sn.removeAdmin(group);
       sn.addCollaborator(group);
     } else {
-      throw new DefaultException("Person/Group is not an admin");
+      throw new InvalidSNOperationException("Person/Group is not an admin");
     }
   }
 
@@ -327,7 +328,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       sn.removeCollaborator(group);
       sn.addAdmin(group);
     } else {
-      throw new DefaultException("Person/Group is not a collaborator");
+      throw new InvalidSNOperationException("Person/Group is not a collaborator");
     }
   }
 

@@ -22,50 +22,26 @@ package cc.kune.core.client.sn.actions;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class ChangeToCollabAction extends AbstractExtendedAction {
-  private final I18nTranslationService i18n;
-  private final Session session;
-  private final Provider<SocialNetworkServiceAsync> snServiceProvider;
-  private final StateManager stateManager;
+  private final SocialNetClientUtils sNClientUtils;
 
   @Inject
-  public ChangeToCollabAction(final StateManager stateManager, final Session session,
-      final I18nTranslationService i18n, final CoreResources res,
-      final Provider<SocialNetworkServiceAsync> snServiceProvider) {
-    this.stateManager = stateManager;
-    this.session = session;
-    this.i18n = i18n;
-    this.snServiceProvider = snServiceProvider;
+  public ChangeToCollabAction(final I18nTranslationService i18n, final CoreResources res,
+      final SocialNetClientUtils sNClientUtils) {
+    this.sNClientUtils = sNClientUtils;
     putValue(NAME, i18n.t("Change to collaborator"));
     putValue(Action.SMALL_ICON, res.arrowDownGreen());
   }
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    NotifyUser.showProgress();
-    snServiceProvider.get().setAdminAsCollab(session.getUserHash(),
-        session.getCurrentState().getStateToken(), ((GroupDTO) event.getTarget()).getShortName(),
-        new AsyncCallbackSimple<SocialNetworkDataDTO>() {
-          @Override
-          public void onSuccess(final SocialNetworkDataDTO result) {
-            NotifyUser.hideProgress();
-            NotifyUser.info(i18n.t("Member type changed"));
-            stateManager.setSocialNetwork(result);
-          }
-        });
+    sNClientUtils.changeToCollab(((GroupDTO) event.getTarget()).getShortName());
   }
 
 }

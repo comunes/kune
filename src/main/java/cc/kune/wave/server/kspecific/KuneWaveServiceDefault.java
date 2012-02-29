@@ -195,22 +195,22 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     boolean added = false;
     final Wavelet wavelet = fetchWave(waveName, author);
     final Participants currentParticipants = wavelet.getParticipants();
-    // Removing duplicates
+    final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
+        : author;
+    final OperationQueue opQueue = new OperationQueue();
     for (final String participant : toSet(newLocalParticipants)) {
       final String newPartWithDomain = participantUtils.of(participant).toString();
+      // Removing duplicates
       if (!currentParticipants.contains(newPartWithDomain)) {
         // FIXME This is very costly. Seems like only one participant per
         // opQueue is added (try to
         // fix this in WAVE)
-        final OperationQueue opQueue = new OperationQueue();
         LOG.debug("Adding as participant: " + newPartWithDomain);
         opQueue.addParticipantToWavelet(wavelet, newPartWithDomain);
-        final String whoAdd = wavelet.getParticipants().contains(participantUtils.of(userWhoAdds)) ? userWhoAdds
-            : author;
-        doOperation(whoAdd, opQueue, "add participant");
         added = true;
       }
     }
+    doOperation(whoAdd, opQueue, "add participant");
     return added;
   }
 
@@ -340,17 +340,17 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     final Participants currentParticipants = wavelet.getParticipants();
     final Set<String> set = toSet(participantsToDel);
     LOG.debug("Removing participants: " + set.toString());
+    final OperationQueue opQueue = new OperationQueue();
     for (final String participant : set) {
       // FIXME Seems like only one participant per opQueue is added (try to fix
       // this in WAVE)
       final String partWithDomain = participantUtils.of(participant).toString();
       if (currentParticipants.contains(partWithDomain)) {
-        final OperationQueue opQueue = new OperationQueue();
         LOG.debug("Removing as participant: " + partWithDomain);
         opQueue.removeParticipantFromWavelet(wavelet, partWithDomain);
-        doOperation(whoDel, opQueue, "del participant");
       }
     }
+    doOperation(whoDel, opQueue, "del participant");
   }
 
   private void doOperation(final String author, final OperationQueue opQueue, final String logComment) {

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cc.kune.core.server.mail.FormatedString;
-import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
+import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;

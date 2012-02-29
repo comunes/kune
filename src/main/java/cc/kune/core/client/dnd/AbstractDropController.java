@@ -116,7 +116,7 @@ public abstract class AbstractDropController implements DropTarget {
       public void onPreviewDrop(final DragContext context) throws VetoDragException {
         for (final Widget widget : context.selectedWidgets) {
           if (acceptedTypes.contains(widget.getClass())) {
-            onPreviewAllowed(this);
+            onPreviewAllowed(widget, this);
           } else {
             throw new VetoDragException();
           }
@@ -187,10 +187,14 @@ public abstract class AbstractDropController implements DropTarget {
   /**
    * On preview allowed.
    * 
+   * @param widget
+   * 
    * @param dropController
    *          the drop controller
+   * @throws VetoDragException
    */
-  public void onPreviewAllowed(final SimpleDropController dropController) {
+  public void onPreviewAllowed(final Widget widget, final SimpleDropController dropController)
+      throws VetoDragException {
     dropController.getDropTarget().removeStyleName("k-drop-allowed-hover");
   }
 

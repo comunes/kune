@@ -110,6 +110,10 @@ public class ErrorHandler {
       NotifyUser.showAlertMessage(i18n.t("Warning"),
           i18n.t("Sorry, you are the last admin of this group."
               + " Look for someone to substitute you appropriately as admin before leaving this group."));
+
+    } else if (caught instanceof InvalidSNOperationException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("Invalid operation")));
     } else if (caught instanceof AlreadyGroupMemberException) {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,

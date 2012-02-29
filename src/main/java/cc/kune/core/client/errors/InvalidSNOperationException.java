@@ -17,31 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.options.general;
+package cc.kune.core.client.errors;
 
-import cc.kune.core.shared.dto.EmailNotificationFrequency;
-import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
+public class InvalidSNOperationException extends DefaultException {
 
-import com.google.gwt.event.dom.client.HasClickHandlers;
+  private static final long serialVersionUID = -3027252154297955075L;
 
-public interface UserOptGeneralView extends EntityOptGeneralView {
+  public InvalidSNOperationException() {
+    super();
+  }
 
-  EmailNotificationFrequency getEmailNotif();
-
-  I18nLanguageSimpleDTO getLanguage();
-
-  String getLongName();
-
-  HasClickHandlers getResendEmailVerif();
-
-  void setEmailVerified(boolean verified);
-
-  void setEmailNotifChecked(EmailNotificationFrequency freq);
-
-  void setLanguage(I18nLanguageSimpleDTO language);
-
-  void setLongName(String longName);
-
-  void setResendEmailVerifEnabled(boolean enabled);
-
+  public InvalidSNOperationException(final String message) {
+    super(message);
+  }
 }

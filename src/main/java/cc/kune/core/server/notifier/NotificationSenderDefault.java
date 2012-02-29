@@ -13,7 +13,7 @@ import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.mail.MailService;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.xmpp.XmppManager;
-import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
+import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.domain.User;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 

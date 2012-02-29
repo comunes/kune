@@ -1,6 +1,6 @@
 package cc.kune.core.server.notifier;
 
-import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
+import cc.kune.core.shared.dto.EmailNotificationFrequency;
 
 /**
  * The Interface PendingNotificationSender. Used to send pending notifications

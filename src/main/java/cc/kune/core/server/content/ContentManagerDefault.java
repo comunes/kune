@@ -23,8 +23,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 
@@ -49,14 +51,17 @@ import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.manager.impl.DefaultManager;
+import cc.kune.core.server.manager.impl.GroupServerUtils;
 import cc.kune.core.server.manager.impl.ServerManagerException;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.utils.FilenameUtils;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
+import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.Rate;
 import cc.kune.domain.Revision;
@@ -132,11 +137,35 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   @Override
   public boolean addParticipant(final User user, final Long contentId, final String participant) {
     final Content content = finder.getContent(contentId);
+    return addParticipants(user, content, participant);
+  }
+
+  /**
+   * Adds the participant to a wave
+   * 
+   * @param user
+   *          the user
+   * @param content
+   *          the content
+   * @param participant
+   *          the participant
+   * @return true, if successful added (not already participant)
+   */
+  private boolean addParticipants(final User user, final Content content, final String... participants) {
     if (content.isWave()) {
       return kuneWaveManager.addParticipants(KuneWaveServerUtils.getWaveRef(content),
-          getContentAuthor(content), user.getShortName(), participant);
+          getContentAuthor(content), user.getShortName(), participants);
     }
     return false;
+  }
+
+  @Override
+  public boolean addParticipants(final User user, final Long contentId, final Group group,
+      final SocialNetworkSubGroup whichOnes) {
+    final Set<String> members = new HashSet<String>();
+    GroupServerUtils.getAllUserMembersAsString(members, group, SocialNetworkSubGroup.admins);
+    final Content content = finder.getContent(contentId);
+    return addParticipants(user, content, members.toArray(new String[members.size()]));
   }
 
   protected Content createContent(final String title, final String body, final User author,

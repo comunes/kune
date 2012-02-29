@@ -28,7 +28,7 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.properties.KuneBasicProperties;
-import cc.kune.domain.Group;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -68,9 +68,9 @@ public class ParticipantUtils {
     return address.contains(getAtDomain());
   }
 
-  public ParticipantId[] listFrom(final Set<Group> list) {
+  public ParticipantId[] listFrom(final Set<User> list) {
     final ParticipantId[] array = new ParticipantId[list.size()];
-    final Iterator<Group> iterator = list.iterator();
+    final Iterator<User> iterator = list.iterator();
     for (int i = 0; i < list.size(); i++) {
       array[i] = of(iterator.next().getShortName());
     }

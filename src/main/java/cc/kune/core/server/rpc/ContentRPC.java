@@ -60,6 +60,7 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
@@ -190,6 +191,18 @@ public class ContentRPC implements ContentService, RPC {
     final Long contentId = ContentUtils.parseId(token.getDocument());
     final User user = getCurrentUser();
     return contentManager.addParticipant(user, contentId, participant);
+  }
+
+  @Override
+  @Authenticated
+  @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = true)
+  @Transactional
+  public Boolean addParticipants(final String userHash, final StateToken token, final String groupName,
+      final SocialNetworkSubGroup subGroup) throws DefaultException {
+    final Long contentId = ContentUtils.parseId(token.getDocument());
+    final Group group = groupManager.findByShortName(groupName);
+    final User user = getCurrentUser();
+    return contentManager.addParticipants(user, contentId, group, subGroup);
   }
 
   @Override

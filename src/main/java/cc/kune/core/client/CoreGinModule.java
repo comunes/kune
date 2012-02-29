@@ -85,6 +85,7 @@ import cc.kune.core.client.sn.UserSNPanel;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.sn.actions.AddBuddieSearchPanel;
 import cc.kune.core.client.sn.actions.AddMemberSearchPanel;
+import cc.kune.core.client.sn.actions.SocialNetClientUtils;
 import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNCollabsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
@@ -231,6 +232,7 @@ public class CoreGinModule extends ExtendedGinModule {
     s(UserSNConfActions.class);
     s(AddBuddieSearchPanel.class);
     s(AddMemberSearchPanel.class);
+    s(SocialNetClientUtils.class);
 
     s(SiteUserOptionsPresenter.class);
     s(SiteUserOptions.class, SiteUserOptionsPresenter.class);

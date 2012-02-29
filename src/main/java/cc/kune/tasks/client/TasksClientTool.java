@@ -53,7 +53,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_TASK);
     registerDragableTypes(TYPE_TASK, TYPE_FOLDER);
-    registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
+    registerDropableTypes(TYPE_ROOT, TYPE_FOLDER, TYPE_TASK);
     registerPublishModerableTypes(TYPE_TASK);
     registerRateableTypes(TYPE_TASK);
     registerRenamableTypes(TYPE_FOLDER, TYPE_TASK);

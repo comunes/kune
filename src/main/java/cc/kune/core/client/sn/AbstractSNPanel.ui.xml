@@ -25,7 +25,7 @@
             </g:FlowPanel>
           </g:north>
           <g:center>
-            <g:ScrollPanel width="100%" addStyleNames="k-sn-adminsscroll">
+            <g:ScrollPanel width="100%" addStyleNames="k-sn-adminsscroll" ui:field="firstCategoryScroll">
               <g:FlowPanel addStyleNames="k-sn-adminsflow"
                 ui:field="firstCategoryFlow" />
             </g:ScrollPanel>

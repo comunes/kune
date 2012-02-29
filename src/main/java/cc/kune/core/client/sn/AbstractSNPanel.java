@@ -31,7 +31,6 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.dnd.KuneDragController;
-import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.gspace.client.armor.GSpaceArmor;
@@ -58,7 +57,7 @@ public class AbstractSNPanel extends ViewImpl {
   private final static int AVATARLABELMAXSIZE = 4;
   private final static int AVATARSIZE = 22;
   private final static String CATEG_HEIGHT = "84px";
-  private final static String CATEG_MIN_HEIGHT = "55px";
+  private final static String CATEG_MIN_HEIGHT = "57px";
   private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
   protected final ActionSimplePanel actions;
   protected final GSpaceArmor armor;
@@ -79,6 +78,8 @@ public class AbstractSNPanel extends ViewImpl {
   Label firstCategoryLabel;
   @UiField
   DockLayoutPanel firstCategoryPanel;
+  @UiField
+  ScrollPanel firstCategoryScroll;
   @UiField
   Label firstDeckLabel;
   @UiField
@@ -111,15 +112,12 @@ public class AbstractSNPanel extends ViewImpl {
 
   public AbstractSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
       final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
-      final KuneDragController dragController, final NotImplementedDropManager notDrop) {
+      final KuneDragController dragController) {
     this.armor = armor;
     this.avatarDecoratorProv = avatarDecorator;
     this.dragController = dragController;
     widget = uiBinder.createAndBindUi(this);
     actions = new ActionSimplePanel(guiProvider, i18n);
-    notDrop.register(firstCategoryFlow);
-    notDrop.register(sndCategoryFlow);
-    notDrop.register(trdCategoryFlow);
   }
 
   @Override
@@ -135,7 +133,8 @@ public class AbstractSNPanel extends ViewImpl {
   }
 
   public BasicDragableThumb createThumb(final String text, final String avatarUrl, final String tooltip,
-      final String tooltipTitle, final GuiActionDescCollection menuitems, final StateToken token) {
+      final String tooltipTitle, final GuiActionDescCollection menuitems, final StateToken token,
+      final boolean dragable) {
     final BasicDragableThumb thumb = new BasicDragableThumb(avatarUrl, AVATARSIZE, text,
         AVATARLABELMAXSIZE, false, token);
 
@@ -161,7 +160,9 @@ public class AbstractSNPanel extends ViewImpl {
     thumb.addClickHandler(clickHand);
     thumb.setTooltip(tooltipTitle, tooltip);
     thumb.setLabelVisible(false);
-    dragController.makeDraggable(thumb);
+    if (dragable) {
+      dragController.makeDraggable(thumb);
+    }
     return thumb;
   }
 

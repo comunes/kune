@@ -52,7 +52,7 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
     registerDragableTypes(TYPE_UPLOADEDFILE);
-    registerDropableTypes(TYPE_ROOT);
+    registerDropableTypes(TYPE_ROOT, TYPE_POST);
     registerPublishModerableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
     registerRateableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
     registerRenamableTypes(TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE);

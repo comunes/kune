@@ -28,6 +28,7 @@ import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
@@ -57,6 +58,9 @@ public interface ContentServiceAsync {
 
   void addParticipant(String userHash, StateToken token, String participant,
       AsyncCallback<Boolean> asyncCallback);
+
+  void addParticipants(String userHash, StateToken token, String groupName,
+      SocialNetworkSubGroup subGroup, AsyncCallback<Boolean> callback);
 
   void addRoom(String user, StateToken parentToken, String name,
       AsyncCallback<StateContainerDTO> callback);

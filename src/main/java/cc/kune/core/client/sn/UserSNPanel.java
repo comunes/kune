@@ -48,7 +48,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
       final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
       final KuneDragController dragController, final NotImplementedDropManager notDrop) {
-    super(i18n, guiProvider, armor, avatarDecorator, dragController, notDrop);
+    super(i18n, guiProvider, armor, avatarDecorator, dragController);
     this.i18n = i18n;
 
     setVisibleImpl(false);
@@ -71,21 +71,24 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     noBuddies.addStyleName("kune-Margin-Medium-l");
     noPublic = new Label(i18n.t(CoreMessages.BUDDIES_NOT_PUBLIC));
     noPublic.addStyleName("kune-Margin-Medium-l");
+    notDrop.register(firstCategoryScroll);
+    notDrop.register(sndCategoryScroll);
+    notDrop.register(trdCategoryScroll);
   }
 
   @Override
   public void addBuddie(final UserSimpleDTO user, final String avatarUrl, final String tooltip,
-      final String tooltipTitle, final GuiActionDescCollection menu) {
+      final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
     final BasicDragableThumb thumb = createThumb(user.getShortName(), avatarUrl, tooltip, tooltipTitle,
-        menu, user.getStateToken());
+        menu, user.getStateToken(), dragable);
     firstCategoryFlow.add((Widget) decorateAvatarWithXmppStatus(user.getShortName(), thumb));
   }
 
   @Override
   public void addParticipation(final GroupDTO group, final String avatarUrl, final String tooltip,
-      final String tooltipTitle, final GuiActionDescCollection menu) {
+      final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
     sndCategoryFlow.add(createThumb(group.getCompoundName(), avatarUrl, tooltip, tooltipTitle, menu,
-        group.getStateToken()));
+        group.getStateToken(), dragable));
   }
 
   @Override

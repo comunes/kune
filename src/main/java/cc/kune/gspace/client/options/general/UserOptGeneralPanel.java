@@ -24,7 +24,7 @@ import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.ui.DefaultFormUtils;
-import cc.kune.core.shared.domain.dto.EmailNotificationFrequency;
+import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.gspace.client.i18n.LanguageSelectorPanel;
 

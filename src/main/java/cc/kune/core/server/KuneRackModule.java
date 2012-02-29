@@ -43,6 +43,7 @@ import cc.kune.core.server.manager.file.FileDownloadManager;
 import cc.kune.core.server.manager.file.FileGwtUploadServlet;
 import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.manager.file.UserLogoDownloadManager;
+import cc.kune.core.server.manager.impl.GroupServerUtils;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.core.server.rack.RackBuilder;
@@ -127,6 +128,7 @@ public class KuneRackModule implements RackModule {
         // http://code.google.com/p/google-gin/issues/detail?id=60
         requestStaticInjection(KuneWaveServerUtils.class);
         requestStaticInjection(CalendarServerUtils.class);
+        requestStaticInjection(GroupServerUtils.class);
       }
     };
   }

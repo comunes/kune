@@ -60,10 +60,10 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
   public interface UserSNView extends View {
 
     void addBuddie(UserSimpleDTO user, String avatarUrl, String tooltip, String tooltipTitle,
-        GuiActionDescCollection menu);
+        GuiActionDescCollection menu, boolean dragable);
 
     void addParticipation(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
-        GuiActionDescCollection menu);
+        GuiActionDescCollection menu, boolean dragable);
 
     void addTextToBuddieList(String text);
 
@@ -180,7 +180,8 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     for (final UserSimpleDTO user : buddies) {
       final String avatarUrl = downloadProvider.get().getUserAvatar(user);
       getView().addBuddie(user, avatarUrl, user.getCompoundName(), "",
-          createMenuItems(user, userMenuItemsRegistry, user.getCompoundName()));
+          createMenuItems(user, userMenuItemsRegistry, user.getCompoundName()),
+          state.getGroupRights().isAdministrable());
     }
     final boolean hasLocalBuddies = buddies.size() > 0;
     final int numExtBuddies = userBuddiesData.getOtherExtBuddies();
@@ -212,11 +213,13 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     final int numCollaborators = groupsIsCollab.size();
     for (final GroupDTO group : groupsIsAdmin) {
       getView().addParticipation(group, getAvatar(group), group.getCompoundName(), "",
-          createMenuItems(group, userMenuItemsRegistry, group.getCompoundName()));
+          createMenuItems(group, userMenuItemsRegistry, group.getCompoundName()),
+          state.getGroupRights().isAdministrable());
     }
     for (final GroupDTO group : groupsIsCollab) {
       getView().addParticipation(group, getAvatar(group), group.getCompoundName(), "",
-          createMenuItems(group, userMenuItemsRegistry, group.getCompoundName()));
+          createMenuItems(group, userMenuItemsRegistry, group.getCompoundName()),
+          state.getGroupRights().isAdministrable());
     }
     final int totalGroups = numAdmins + numCollaborators;
     // getView().setParticipationCount(totalGroups);

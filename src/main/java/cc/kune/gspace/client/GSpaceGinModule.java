@@ -24,6 +24,9 @@ import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
+import cc.kune.core.client.sn.AdminsGroupSNDropController;
+import cc.kune.core.client.sn.AllMembersGroupSNDropController;
+import cc.kune.core.client.sn.CollabsGroupSNDropController;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
@@ -140,6 +143,9 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(ContentDropController.class);
     s(FolderContainerDropController.class);
     s(FolderContentDropController.class);
+    s(AdminsGroupSNDropController.class);
+    s(CollabsGroupSNDropController.class);
+    s(AllMembersGroupSNDropController.class);
     bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
         EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
     bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class,

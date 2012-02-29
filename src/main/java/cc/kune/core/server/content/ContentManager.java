@@ -27,8 +27,10 @@ import cc.kune.core.server.manager.Manager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
+import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
 
@@ -50,6 +52,8 @@ public interface ContentManager extends Manager<Content, Long> {
   void addGadgetToContent(User user, Content content, String gadgetName);
 
   boolean addParticipant(User user, Long contentId, String participant);
+
+  boolean addParticipants(User user, Long contentId, Group group, SocialNetworkSubGroup whichOnes);
 
   Content createGadget(User user, Container container, String gadgetname, String typeIdChild,
       String title, String body, Map<String, String> gadgetProperties);

@@ -60,13 +60,13 @@ public class GroupSNPresenter extends
   public interface GroupSNView extends View {
 
     void addAdmin(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
-        GuiActionDescCollection menu);
+        GuiActionDescCollection menu, boolean dragable);
 
     void addCollab(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
-        GuiActionDescCollection menu);
+        GuiActionDescCollection menu, boolean dragable);
 
     void addPending(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
-        GuiActionDescCollection menu);
+        GuiActionDescCollection menu, boolean dragable);
 
     void clear();
 
@@ -199,19 +199,20 @@ public class GroupSNPresenter extends
       getView().showOrphan();
     } else {
       final boolean userIsAdmin = rights.isAdministrable();
+      final boolean userIsEditor = rights.isEditable();
       final boolean userCanView = rights.isVisible();
       getView().setAdminsVisible(true, areMany(numAdmins));
       if (userCanView) {
         for (final GroupDTO admin : adminsList) {
           final String avatar = getAvatar(admin);
           getView().addAdmin(admin, avatar, admin.getCompoundName(), "",
-              createMenuItems(admin, adminsMenuItemsRegistry, admin.getCompoundName()));
+              createMenuItems(admin, adminsMenuItemsRegistry, admin.getCompoundName()), userIsEditor);
         }
         getView().setCollabsVisible(numCollabs > 0, areMany(numCollabs));
         for (final GroupDTO collab : collabList) {
           final String avatar = getAvatar(collab);
           getView().addCollab(collab, avatar, collab.getCompoundName(), "",
-              createMenuItems(collab, collabsMenuItemsRegistry, collab.getCompoundName()));
+              createMenuItems(collab, collabsMenuItemsRegistry, collab.getCompoundName()), userIsEditor);
         }
         if (userIsAdmin) {
           getView().setPendingVisible(numPendings > 0, areMany(numPendings));
@@ -223,7 +224,7 @@ public class GroupSNPresenter extends
                 pendingCollab.getCompoundName(),
                 "",
                 createMenuItems(pendingCollab, pendingsMenuItemsRegistry,
-                    pendingCollab.getCompoundName()));
+                    pendingCollab.getCompoundName()), userIsEditor);
           }
         } else {
           getView().setPendingVisible(false, false);

@@ -26,7 +26,6 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.dnd.KuneDragController;
-import cc.kune.core.client.dnd.NotImplementedDropManager;
 import cc.kune.core.client.sn.GroupSNPresenter.GroupSNView;
 import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -41,8 +40,10 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   @Inject
   public GroupSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
       final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
-      final KuneDragController dragController, final NotImplementedDropManager notDrop) {
-    super(i18n, guiProvider, armor, avatarDecorator, dragController, notDrop);
+      final KuneDragController dragController, final AdminsGroupSNDropController adminsDropController,
+      final CollabsGroupSNDropController collabsDropController,
+      final AllMembersGroupSNDropController allMembersDropController) {
+    super(i18n, guiProvider, armor, avatarDecorator, dragController);
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("Group members"));
     Tooltip.to(mainTitle, i18n.t("Users and groups collaborating in this group"));
@@ -60,31 +61,36 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);
     deck.showWidget(2);
+    adminsDropController.init(firstCategoryScroll);
+    adminsDropController.init(firstCategoryLabel);
+    collabsDropController.init(sndCategoryScroll);
+    collabsDropController.init(sndCategoryLabel);
+    allMembersDropController.init(mainTitle);
   }
 
   @Override
   public void addAdmin(final GroupDTO group, final String avatarUrl, final String tooltip,
-      final String tooltipTitle, final GuiActionDescCollection menu) {
+      final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
     final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
-        tooltipTitle, menu, group.getStateToken());
+        tooltipTitle, menu, group.getStateToken(), dragable);
     firstCategoryFlow.add(group.isPersonal() ? (Widget) decorateAvatarWithXmppStatus(
         group.getShortName(), thumb) : thumb);
   }
 
   @Override
   public void addCollab(final GroupDTO group, final String avatarUrl, final String tooltip,
-      final String tooltipTitle, final GuiActionDescCollection menu) {
+      final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
     final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
-        tooltipTitle, menu, group.getStateToken());
+        tooltipTitle, menu, group.getStateToken(), dragable);
     sndCategoryFlow.add(group.isPersonal() ? (Widget) decorateAvatarWithXmppStatus(group.getShortName(),
         thumb) : thumb);
   }
 
   @Override
   public void addPending(final GroupDTO group, final String avatarUrl, final String tooltip,
-      final String tooltipTitle, final GuiActionDescCollection menu) {
+      final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
     final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
-        tooltipTitle, menu, group.getStateToken());
+        tooltipTitle, menu, group.getStateToken(), dragable);
     trdCategoryFlow.add(thumb);
   }
 

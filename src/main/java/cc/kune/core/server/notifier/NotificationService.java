@@ -4,16 +4,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.NoResultException;
-
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.server.mail.FormatedString;
+import cc.kune.core.server.manager.impl.GroupServerUtils;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
-import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -24,59 +22,28 @@ public class NotificationService {
   public static final Log LOG = LogFactory.getLog(NotificationService.class);
   private final NotificationHtmlHelper helper;
   private final PendingNotificationSender sender;
-  private final UserFinder userFinder;
 
   @Inject
-  NotificationService(final PendingNotificationSender sender, final NotificationHtmlHelper helper,
-      final UserFinder userFinder) {
+  NotificationService(final PendingNotificationSender sender, final NotificationHtmlHelper helper) {
     this.sender = sender;
     this.helper = helper;
-    this.userFinder = userFinder;
   }
 
   private FormatedString createPlainSubject(final String subject) {
     return FormatedString.build(subject);
   }
 
-  @SuppressWarnings("unchecked")
-  private void getAllUserMembers(final Set<User> users, final Group groupToNotify,
-      final boolean onlyAdmins) {
-    final Collection<Group> members;
-    final Set<Group> admins = groupToNotify.getSocialNetwork().getAccessLists().getAdmins().getList();
-    if (onlyAdmins) {
-      members = admins;
-    } else {
-      final Set<Group> collabs = groupToNotify.getSocialNetwork().getAccessLists().getEditors().getList();
-      members = CollectionUtils.union(admins, collabs);
-    }
-    for (final Group member : members) {
-      if (member.isPersonal()) {
-        final String shortName = member.getShortName();
-        try {
-          final User user = userFinder.findByShortName(shortName);
-          users.add(user);
-        } catch (final NoResultException e) {
-          LOG.error(String.format("This personal group %s is not a local user", shortName));
-        }
-      } else {
-        // Is a group, so go recursively
-        getAllUserMembers(users, member, onlyAdmins);
-      }
-    }
-
-  }
-
   public void notifyGroup(final Group groupToNotify, final Group groupSender, final String subject,
       final String message) {
     final Set<User> members = new HashSet<User>();
-    getAllUserMembers(members, groupToNotify, false);
+    GroupServerUtils.getAllUserMembers(members, groupToNotify, SocialNetworkSubGroup.all);
     notifyToAll(groupSender, subject, message, members);
   }
 
   public void notifyGroupAdmins(final Group groupToNotify, final Group groupSender,
       final String subject, final String message) {
     final Set<User> adminMembers = new HashSet<User>();
-    getAllUserMembers(adminMembers, groupToNotify, true);
+    GroupServerUtils.getAllUserMembers(adminMembers, groupToNotify, SocialNetworkSubGroup.admins);
     notifyToAll(groupSender, subject, message, adminMembers);
   }
 

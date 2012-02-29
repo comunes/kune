@@ -20,7 +20,7 @@
 package cc.kune.core.server.manager.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,10 +32,12 @@ import cc.kune.core.server.manager.KuneWaveManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.AccessRol;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
 import cc.kune.domain.finders.GroupFinder;
+import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.KuneWaveServerUtils;
 import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
@@ -49,17 +51,19 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   private final GroupFinder groupFinder;
   private final KuneProperties kuneProperties;
   private final ParticipantUtils participantUtils;
+  private final UserFinder userFinder;
   private final UserManager userManager;
   private final KuneWaveService waveService;
 
   @Inject
   public KuneWaveManagerDefault(final KuneWaveService waveService,
       final ParticipantUtils participantUtils, final KuneProperties kuneProperties,
-      final GroupFinder groupFinder, final UserManager userManager) {
+      final GroupFinder groupFinder, final UserFinder userFinder, final UserManager userManager) {
     this.waveService = waveService;
     this.participantUtils = participantUtils;
     this.kuneProperties = kuneProperties;
     this.groupFinder = groupFinder;
+    this.userFinder = userFinder;
     this.userManager = userManager;
   }
 
@@ -71,8 +75,8 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     for (final String part : participants) {
       partIds.add(participantUtils.of(part));
     }
-    return KuneWaveServerUtils.getUrl(waveService.createWave(title, body, KuneWaveService.DO_NOTHING_CBACK,
-        partIds.toArray(new ParticipantId[0])));
+    return KuneWaveServerUtils.getUrl(waveService.createWave(title, body,
+        KuneWaveService.DO_NOTHING_CBACK, partIds.toArray(new ParticipantId[0])));
   }
 
   @Override
@@ -84,12 +88,12 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
   public String writeTo(final User user, final String groupName, final boolean onlyToAdmins,
       final String title, final String message) {
     final Group group = groupFinder.findByShortName(groupName);
-    final Set<Group> toList = new HashSet<Group>();
-    toList.add(user.getUserGroup());
+    final Set<User> toList = new LinkedHashSet<User>();
+    toList.add(user);
     if (group.isPersonal()) {
       final UserBuddiesData userBuddies = userManager.getUserBuddies(groupName);
       if (userBuddies.contains(user.getShortName())) {
-        toList.add(group);
+        toList.add(userFinder.findByShortName(group.getShortName()));
       } else {
         throw new AccessViolationException("You cannot write to non buddies");
       }
@@ -97,14 +101,10 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
       if (!AccessRightsUtils.correctMember(user, group, AccessRol.Editor)) {
         throw new AccessViolationException("You cannot write because you are not a member");
       }
-      if (onlyToAdmins) {
-        toList.addAll(group.getSocialNetwork().getAccessLists().getAdmins().getList());
-      } else {
-        toList.addAll(group.getSocialNetwork().getAccessLists().getAdmins().getList());
-        toList.addAll(group.getSocialNetwork().getAccessLists().getEditors().getList());
-      }
+      GroupServerUtils.getAllUserMembers(toList, group, onlyToAdmins ? SocialNetworkSubGroup.admins
+          : SocialNetworkSubGroup.all);
     }
-    return KuneWaveServerUtils.getUrl(waveService.createWave(title, message, KuneWaveService.DO_NOTHING_CBACK,
-        participantUtils.listFrom(toList)));
+    return KuneWaveServerUtils.getUrl(waveService.createWave(title, message,
+        KuneWaveService.DO_NOTHING_CBACK, participantUtils.listFrom(toList)));
   }
 }

@@ -51,7 +51,7 @@ public class BartersClientTool extends FoldableAbstractClientTool {
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_BARTER);
     registerDragableTypes(TYPE_BARTER, TYPE_FOLDER);
-    registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
+    registerDropableTypes(TYPE_ROOT, TYPE_FOLDER, TYPE_BARTER);
     // registerPublishModerableTypes();
     registerRateableTypes(TYPE_BARTER);
     registerRenamableTypes(TYPE_FOLDER, TYPE_BARTER);

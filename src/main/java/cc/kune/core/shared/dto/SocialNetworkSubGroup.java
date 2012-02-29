@@ -17,13 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.shared.domain.dto;
+package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public enum EmailNotificationFrequency implements IsSerializable {
-  daily, // at most daily, (not used yet)
-  hourly, // at most hourly (not used yet)
-  immediately, // almost immediately (currently used)
-  no // I don't need email notifications (currently used)
+/**
+ * The Enum SocialNetworkSubGroup is a way to indicate a part of a group
+ * SNetwork.
+ */
+public enum SocialNetworkSubGroup implements IsSerializable {
+  /** The admins members only */
+  admins,
+  /** all members */
+  all,
+  /** The collabs members only */
+  collabs
 }

@@ -51,7 +51,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST);
     registerDragableTypes();
-    registerDropableTypes();
+    registerDropableTypes(TYPE_POST);
     registerPublishModerableTypes();
     registerRateableTypes(TYPE_POST);
     registerRenamableTypes(TYPE_LIST, TYPE_POST);
