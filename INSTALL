@@ -184,22 +184,25 @@ bin/server.sh -j kune.jar
 
 TODO: configure/select db via properties
 
-=== Adapting Kune to your site ===
+=== Customization: Adapting Kune to your site ===
 
 Copy and adapt as much as possible to your needs these files:
 
 - src/main/resources/kune.properties
 - src/main/resources/wave-server.properties
 - src/main/resources/log4j.properties
-- src/main/webapp/ws.html
+- src/main/webapp/ws.html 
+- src/main/webapp/ in general
 
-The best way to configure kune is to copy that files (for instance in /etc/kune/), to create a custom directory for ws.html and other of your custom html stuff (for instance /var/www/kune/), and add that directory to resources_base in wave-server.properties, for instance:
+The best way to configure kune is to copy that files (for instance in /etc/kune/), to create a custom directory for ws.html and other of your custom html stuff (for instance in /var/www/kune/), and configure that directory to resources_base in wave-server.properties, for instance:
 
-resource_bases = your-www-dir,target/kune-0.1.0-SNAPSHOT/,src/main/webapp/
+resource_bases = /var/www/kune/,target/kune-0.1.0-SNAPSHOT/
 
 The ws.html file is the home that you get at start-up and have some configurations also. You can change the html inside to your needs but follow the commentaries and try not to remove important parts that make kune to start. Also to change the main logo, favicon, etc.
 
 Note: Remember that if you are running kune using the source code (via mvn) and you change this src files in some point, you have to make 'mvn compile' so are copied to the target directoy. This is not applicable when you run kune via jar.
+
+Also you can make diferent tutorials (see src/main/webapp/tutorials)
 
 ==Appendix A: Configuration of Openfire xmpp server==
 
