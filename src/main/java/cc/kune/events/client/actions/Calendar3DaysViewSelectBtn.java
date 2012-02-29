@@ -10,7 +10,7 @@ public class Calendar3DaysViewSelectBtn extends AbstractCalendarViewSelectBtn {
   @Inject
   public Calendar3DaysViewSelectBtn(final CalendarViewSelectAction action,
       final I18nTranslationService i18n) {
-    super(action, i18n.t("3 Days"), 3, CalendarViews.DAY);
+    super(action, i18n.t("[%d] Days", 3), 3, CalendarViews.DAY);
   }
 
 }

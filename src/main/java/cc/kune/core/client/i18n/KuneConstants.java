@@ -26,6 +26,10 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String actions();
 
+  String add();
+
+  String addAnAppointment();
+
   String addANewBuddy();
 
   String addAsABuddy();
@@ -41,6 +45,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String allowAnyUsesOfYourWorkIncludingCommercial();
 
   String allowModificationsOfYourWork();
+
+  String almostImmediately();
 
   String aLongTermTaskSample();
 
@@ -66,6 +72,10 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String aShortTermTaskSample();
 
+  String atMostDaily();
+
+  String atMostHourly();
+
   String autoAcceptRequestToJoin();
 
   String available();
@@ -73,6 +83,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String availableForChat();
 
   String away();
+
+  String backgroupChanged();
 
   String backUsedInButton();
 
@@ -134,6 +146,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String chatWithYourBuddy();
 
+  String checkYourEmailForTheConfirmationLink();
+
   String choose();
 
   String clear();
@@ -157,6 +171,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String commonLicensesForCulturalWorks();
 
   String community();
+
+  String confirm();
 
   String confirmNewBuddy();
 
@@ -212,6 +228,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String delete();
 
+  String descriptionOfTheAppointment();
+
   String documents();
 
   String donTHaveAnAccount();
@@ -224,7 +242,11 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String doYouWantToAddParamToYourContacts();
 
+  String doYouWantToCollaborativelyEditYourMeetingMinutesInANewDocument();
+
   String doYouWantToJoinThisGroup();
+
+  String doYouWantToReloadThisPageToUseParamLanguage();
 
   String doYouWantToWriteAMessageToTheAdministratorsOfThisGroup();
 
@@ -240,7 +262,15 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String editAndWriteHereYourFeedback();
 
+  String editTheAppointment();
+
+  String editThisToInsertResizeAndAnnotatenAnynImageFromTheWebTheImageCanBeAnnotatedDoubleClicknOnnItByAnyPar();
+
   String email();
+
+  String emailConfirmationCodeExpired();
+
+  String emailNotifications();
 
   String enterLanguage();
 
@@ -250,17 +280,27 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String enterToThisRoom();
 
+  String enterYourNewPasswordBelow();
+
   String error();
 
   String errorConfiguringTheTool();
+
+  String errorCreatingGroup();
+
+  String errorRenaming();
 
   String errorSettingTheLogo();
 
   String errorsInfo();
 
+  String esteBlogNoTieneNingnPostCreaUno();
+
   String eurosurAThemeName();
 
   String events();
+
+  String eventsInParam();
 
   String feedbackOfParam();
 
@@ -269,6 +309,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String general();
 
   String giveUsFeedback();
+
+  String goToToday();
 
   String goUpOpenTheContainerFolder();
 
@@ -302,15 +344,31 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String hisHerNetwork();
 
+  String home();
+
+  String homePageOfParam();
+
   String hostedGroups();
+
+  String howOftenDoYouWantToReceiveEmailNotifications();
+
+  String iDonTNeedEmailNotifications();
+
+  String inbox();
 
   String inDevelopment();
 
   String infoAboutErrors();
 
+  String invalidAddressParam();
+
+  String invalidEmail();
+
   String join();
 
   String joinsIn();
+
+  String joinUsInParamPublicRoom();
 
   String keywordsOrTermsAssociatedWithThisGroup();
 
@@ -340,6 +398,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String longTermTasks();
 
+  String lostYourPassword();
+
   String makeThisListNotPublic();
 
   String makeThisListPublic();
@@ -358,6 +418,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String memberAddedAsCollaborator();
 
+  String memberRejected();
+
   String memberRemoved();
 
   String membershipRequestedWaitingForAdminsDecision();
@@ -371,6 +433,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String midTermTasks();
 
   String moderateRequestToJoin();
+
+  String month();
 
   String more();
 
@@ -400,6 +464,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String newGadget();
 
+  String newImage();
+
   String newImageAndLetsAnnotate();
 
   String newImagePainter();
@@ -411,6 +477,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String newMeetCoordination();
 
   String newMeeting();
+
+  String newMeetPlaner();
 
   String newMembersPolicy();
 
@@ -440,9 +508,17 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String newYoutubeVideo();
 
+  String next();
+
   String nextUsedInButton();
 
   String no();
+
+  String noHayListasCrearUna();
+
+  String noResults();
+
+  String noSeHaPublicadoNadaTodavaPublicaAlgo();
 
   String notes();
 
@@ -468,6 +544,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String onlyMembers();
 
+  String onlyMembersCanUpdateEvents();
+
   String onlyToAuthorizedTranslators();
 
   String onlyYou();
@@ -480,11 +558,15 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String openArchive();
 
+  String openTheAppointment();
+
   String openTheConversationsArchiveOfThisRoom();
 
   String options();
 
   String organization();
+
+  String otherErrorTryingToVerifyYourPassword();
 
   String otherKindOfLicenses();
 
@@ -504,6 +586,10 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String paramUnderLicenseParam();
 
+  String participate();
+
+  String participateInTheEditionOfThisPage();
+
   String password();
 
   String passwordChangedSuccessfully();
@@ -516,6 +602,10 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String pleaseCopyPasteThisInfoToReportProblems();
 
+  String pleaseEnterYourEmailAddressYouWillReceiveALinkToCreateANewPasswordViaEmail();
+
+  String pleaseSignInAgain();
+
   String pleaseSignInOrRegisterToCreateAGroup();
 
   String pleaseSignInOrRegisterToGetFullAccessToParamToolsAndContents();
@@ -527,6 +617,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String postCreatedEditIt();
 
   String preview();
+
+  String previous();
 
   String processing();
 
@@ -562,6 +654,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String removedAsMember();
 
+  String removeThisAppointment();
+
   String removeThisMember();
 
   String renaming();
@@ -569,6 +663,10 @@ public interface KuneConstants extends ConstantsWithLookup {
   String reportKuneIssuesProblems();
 
   String requestToJoinInThisGroup();
+
+  String resendVerificationEmail();
+
+  String resetYourPassword();
 
   String rightNowThePublicWebSpaceOfThisGroupItSUnderConstruction();
 
@@ -620,9 +718,15 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String signIn();
 
+  String signInOrCreateAnAccountToAccessToThisRoom();
+
   String signInOrCreateAnAccountToAccessToYourInbox();
 
+  String signInOrCreateAnAccountToGiveUsFeedback();
+
   String signInOrCreateAnAccountToParticipateInThisGroup();
+
+  String signInOrCreateAnAccountToSusbscribeToThisList();
 
   String signInOrRegisterToHelpWithTheTranslation();
 
@@ -674,21 +778,33 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String thePasswordMustBeBetween6And40Characters();
 
+  String thereIsNothingPostedYet();
+
   String thereIsNothingPostedYetPostSomething();
 
   String thereIsnTAnyBarter();
 
+  String thereIsnTAnyBarterYouCanCreateSomeHere();
+
+  String thereIsnTAnyBlog();
+
   String thereIsnTAnyBlogCreateOne();
+
+  String thereIsnTAnyList();
 
   String thereIsnTAnyListCreateOne();
 
   String thereIsnTAnyMeeting();
+
+  String thereIsnTAnyMeetingCreateOne();
 
   String thereIsnTAnyTaskCreateOne();
 
   String theSocialNetworkOfThisUserIsNotPublic();
 
   String theUsernamePasswordIsIncorrect();
+
+  String thisBlogHasnTAnyPost();
 
   String thisBlogHasnTAnyPostCreateOne();
 
@@ -697,6 +813,10 @@ public interface KuneConstants extends ConstantsWithLookup {
   String thisEmailAddressIsBeingUsedByAnotherUserPleaseTryWithAnotherOne();
 
   String thisFolderIsEmpty();
+
+  String thisFolderIsEmptyCreateSomeWikipageOrFolder();
+
+  String thisFolderIsEmptyYouCanCreateSomeDocumentOrFolderHere();
 
   String thisIsACopyleftLicense();
 
@@ -760,6 +880,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String to();
 
+  String today();
+
   String toHelpWithTheTranslationOfThisSoftwarePleaseContactBeforeWithThisSiteAdministrators();
 
   String toJoinAChatroomYouNeedToBeOnline();
@@ -795,6 +917,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String username();
 
   String userOptions();
+
+  String userParamSaysParam();
 
   String usersAndGroupsCollaboratingInThisGroup();
 
@@ -862,15 +986,21 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String youCanChangeThisLicenseLater();
 
+  String youCanCollaborativelyEditTheMeetingMinutesShownInThisDocument();
+
   String youCanCollaborativelyEditThisDocumentWithTheMeetingMinutes();
 
   String youCannotDisableThisToolBecauseItSWhereYourHomePageIsLocatedToDoThatYouHaveToSelectOtherContentAsThe();
 
   String youCannotWriteToNonBuddies();
 
+  String youCanResizeTheAboveTextarea();
+
   String youDidNotSignInSoYouCanJustSeeSomePublicContentsInParamButNotEditOrCollaborateWithOthersPleaseParamO();
 
   String youDoNotHaveRightsToPerformThatAction();
+
+  String yourEmailIsNotVerifiedSoYouWillNotReceiveEmailNotifications();
 
   String yourGroups();
 
@@ -880,6 +1010,15 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String yourLanguage();
 
+  String yourPasswordHasBeenResetSignIn();
+
   String yourPreferences();
 
+  String youWillNoReceiveAnEmailWithAnyNewMessagesInYourInboxAtParam();
+
+  String youWillReceiveAnEmailWithAnyNewMessagesInYourInboxAtParamAlmostImmediately();
+
+  String youWillReceiveAnEmailWithAnyNewMessagesInYourInboxAtParamAtMostDaily();
+
+  String youWillReceiveAnEmailWithAnyNewMessagesInYourInboxAtParamAtMostHourly();
 }

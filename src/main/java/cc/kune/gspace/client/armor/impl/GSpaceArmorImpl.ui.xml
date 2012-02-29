@@ -94,7 +94,7 @@
                 </g:DockLayoutPanel>
               </g:center>
               <!-- east to RTL (plus css changes in corners and menus) -->
-              <g:west size="200.0">
+              <g:west size="202.0">
                 <g:DockLayoutPanel unit="PX"
                   styleName="{res.style.entityTools}" ui:field="splitEast">
                   <g:center>

@@ -366,7 +366,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
 .k-btn-sitebar,.k-btn-sitebar button,.k-sitebar button,.k-btn-sitebar div,.k-btn-sitebar button div,.k-sitebar button div
   {
   font: 13px 'Ubuntu', arial;
-  color: #B3B3B3;
+  color: #999;
   cursor: pointer;
   white-space: nowrap;
   background: none;
@@ -378,7 +378,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
 .k-sitebar-wave-status {
   font: 13px 'Ubuntu', arial;
   /* font-weight: bold; */
-  color: #B3B3B3;
+  color: #999;
   white-space: nowrap;
   background: none;
   border: 0px;
@@ -1262,7 +1262,7 @@ table.k-folder-viewer {
   border: 1px solid #E4A374;
   margin: 1px 6px 0 3px;
   padding-left: 1px;
-  color: #B3B3B3;
+  color: #999;
   background: transparent;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;

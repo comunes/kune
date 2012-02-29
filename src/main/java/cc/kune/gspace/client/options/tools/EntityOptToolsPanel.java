@@ -68,7 +68,7 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
   public void add(final ToolSimpleDTO tool, final boolean enabled, final boolean checked,
       final ClickHandler handler) {
     final CheckBox checkbox = new CheckBox();
-    checkbox.setFieldLabel(tool.getRootName());
+    checkbox.setFieldLabel(i18n.t(tool.getRootName()));
     // checkbox.setFireChangeEventOnSetValue(false);
     checkbox.setValue(checked);
     setEnabled(checkbox, enabled);

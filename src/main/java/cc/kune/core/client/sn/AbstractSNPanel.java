@@ -56,7 +56,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   private final static int AVATARLABELMAXSIZE = 4;
   private final static int AVATARSIZE = 22;
-  private final static String CATEG_HEIGHT = "84px";
+  private final static String CATEG_HEIGHT = "86px";
   private final static String CATEG_MIN_HEIGHT = "57px";
   private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
   protected final ActionSimplePanel actions;

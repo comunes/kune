@@ -15,7 +15,6 @@ import cc.kune.common.shared.res.ICalConstants;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateEventContainerDTO;
@@ -115,18 +114,16 @@ public class CalendarViewerPresenter extends
   private Date onOverDate;
   private final CalendarOnOverMenu onOverMenu;
   private final Session session;
-  private final StateManager stateManager;
 
   @Inject
   public CalendarViewerPresenter(final EventBus eventBus, final CalendarViewerView view,
       final CalendarViewerProxy proxy, final FolderViewerUtils folderViewerUtils,
-      final CalendarOnOverMenu onOverMenu, final Session session, final StateManager stateManager,
-      final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService) {
+      final CalendarOnOverMenu onOverMenu, final Session session, final I18nTranslationService i18n,
+      final Provider<ContentServiceAsync> contentService) {
     super(eventBus, view, proxy);
     this.folderViewerUtils = folderViewerUtils;
     this.onOverMenu = onOverMenu;
     this.session = session;
-    this.stateManager = stateManager;
     this.i18n = i18n;
     this.contentService = contentService;
     addListeners();
