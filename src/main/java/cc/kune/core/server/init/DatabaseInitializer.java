@@ -25,6 +25,7 @@ import javax.persistence.NoResultException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.exception.SQLGrammarException;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
@@ -211,10 +212,11 @@ public class DatabaseInitializer {
     try {
       groupManager.getSiteDefaultGroup();
     } catch (final NoResultException e) {
-      LOG.warn("The default group '" + properties.getDefaultSiteName()
-          + "' does not exist in Database, "
-          + "creating it (see kune.default.site.shortName in kune.properties for more details)");
-      initDatabase();
+      initialize();
+      // } catch (final MySQLSyntaxErrorException e2) {
+    } catch (final SQLGrammarException e3) {
+      // Seems like in Windows we get this Exception instead
+      initialize();
     }
     translationService.init();
   }
@@ -225,5 +227,11 @@ public class DatabaseInitializer {
     createLicenses();
     createProperties();
     createDefUsersGroup();
+  }
+
+  private void initialize() throws Exception {
+    LOG.warn("The default group '" + properties.getDefaultSiteName() + "' does not exist in Database, "
+        + "creating it (see kune.default.site.shortName in kune.properties for more details)");
+    initDatabase();
   }
 }
