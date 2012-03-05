@@ -144,7 +144,9 @@ Not verified: in Windows you need to do something similar (copy the jmagick .dll
 
 ===Initialize the kune database===
 
-mysql -p -u kune < script/kune_initialize.sql
+mysql -p -u kune < script/kune_initialize.sql 
+
+(Windows users can use Mysql Browser to execute this SQL).
 
 And if all goes ok, migrate the database:
 
