@@ -43,6 +43,14 @@ public interface GroupManager extends Manager<Group, Long> {
 
   void clearGroupBackImage(Group group);
 
+  /**
+   * Count # of registered groups (only used to see in the database is
+   * initialized)
+   * 
+   * @return the int
+   */
+  int count();
+
   Group createGroup(Group group, User user, String publicDescrip) throws GroupShortNameInUseException,
       UserMustBeLoggedException;
 

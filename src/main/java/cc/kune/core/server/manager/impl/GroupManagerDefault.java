@@ -144,6 +144,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   @Override
+  public int count() {
+    return super.size();
+  }
+
+  @Override
   public Group createGroup(final Group group, final User user, final String publicDescrip)
       throws GroupShortNameInUseException, GroupLongNameInUseException, UserMustBeLoggedException {
     checkIfShortNameAreInUse(group.getShortName());

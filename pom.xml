@@ -712,18 +712,43 @@
       <version>1.0.2</version>
     </dependency>
     <!-- openfire auth integration -->
-    <dependency>
-      <groupId>org.igniterealtime</groupId>
-      <artifactId>openfire</artifactId>
-      <version>3.7.0</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.eclipse.jetty</groupId>
-          <!-- <artifactId>hibernate</artifactId> -->
-        </exclusion>
-      </exclusions>
-    </dependency>
+<!--     <dependency> -->
+<!--       <groupId>org.igniterealtime</groupId> -->
+<!--       <artifactId>openfire</artifactId> -->
+<!--       <version>3.7.0</version> -->
+<!--       <scope>provided</scope> -->
+<!--       <exclusions> -->
+<!--         <exclusion> -->
+<!--           <groupId>org.eclipse.jetty</groupId> -->
+<!--           <artifactId>hibernate</artifactId> -->
+<!--         </exclusion> -->
+<!--         <exclusion> -->
+<!--           <groupId>org.slf4j</groupId> -->
+<!--           <artifactId>spi</artifactId> -->
+<!--         </exclusion> -->
+<!--         <exclusion> -->
+<!--           <groupId>org.slf4j</groupId> -->
+<!--           <artifactId>slf4j-api</artifactId> -->
+<!--         </exclusion> -->
+<!--         <exclusion> -->
+<!--           <groupId>org.slf4j</groupId> -->
+<!--           <artifactId>jcl-over-slf4j</artifactId> -->
+<!--         </exclusion> -->
+<!--         <exclusion> -->
+<!--           <groupId>org.slf4j</groupId> -->
+<!--           <artifactId>jcl-over-slf4j</artifactId> -->
+<!--         </exclusion> -->
+<!--         <exclusion> -->
+<!--           <groupId>org.apache</groupId> -->
+<!--           <artifactId>commons</artifactId> -->
+<!--         </exclusion> -->
+<!--         <exclusion> -->
+<!--           <groupId>org.apache.commons</groupId> -->
+<!--           <artifactId>logging</artifactId> -->
+<!--         </exclusion> -->
+<!--       </exclusions> -->
+
+<!--     </dependency> -->
   </dependencies>
   <!-- <dependency> -->
   <!-- <groupId>dom4j</groupId> -->

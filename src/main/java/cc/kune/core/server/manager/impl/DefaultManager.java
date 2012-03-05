@@ -157,4 +157,12 @@ public abstract class DefaultManager<T, K> {
     return search(query, firstResult, maxResults);
   }
 
+  @SuppressWarnings("unchecked")
+  public int size() {
+    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
+    final List<T> entities = fullTextEm.createQuery(
+        "SELECT e FROM " + entityClass.getSimpleName() + " AS e").getResultList();
+    return entities.size();
+  }
+
 }

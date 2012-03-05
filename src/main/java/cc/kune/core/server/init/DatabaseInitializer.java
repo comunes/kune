@@ -21,11 +21,8 @@ package cc.kune.core.server.init;
 
 import java.util.TimeZone;
 
-import javax.persistence.NoResultException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.exception.SQLGrammarException;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
@@ -178,43 +175,8 @@ public class DatabaseInitializer {
     translationManager.persist(test);
   }
 
-  private void createProperties() {
-    // final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
-    // final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
-    // propGroupManager.persist(userProps);
-    // propGroupManager.persist(groupProps);
-    // final PropertySubgroup userXmppProps = new
-    // PropertySubgroup("user-xmpp");
-    // propSubgroupManager.persist(userXmppProps);
-
-    // final Property colorProp = new Property("xmpp_color",
-    // "Choose your color", Property.Type.STRING, true, "blue",
-    // userProps, userXmppProps);
-    // final ArrayList<String> subValues = new ArrayList<String>();
-    // subValues.add(SubscriptionMode.autoAcceptAll.toString());
-    // subValues.add(SubscriptionMode.autoRejectAll.toString());
-    // subValues.add(SubscriptionMode.manual.toString());
-    // final Property subProp = new Property("xmpp_subcriptionmode",
-    // "New buddies options", Property.Type.ENUM, true,
-    // SubscriptionMode.manual.toString(), subValues, userProps,
-    // userXmppProps);
-    // final Property unanavProp = new
-    // Property("xmpp_unanavailableitemsvisible",
-    // "Show unavailable buddies",
-    // Property.Type.BOOL, true, Boolean.toString(true), userProps,
-    // userXmppProps);
-    // propertyManager.persist(colorProp);
-    // propertyManager.persist(subProp);
-    // propertyManager.persist(unanavProp);
-  }
-
   public void initConditional() throws Exception {
-    try {
-      groupManager.getSiteDefaultGroup();
-    } catch (final NoResultException e) {
-      initialize();
-    } catch (final SQLGrammarException e3) {
-      // Seems like in Windows we get this Exception instead
+    if (groupManager.count() == 0) {
       initialize();
     }
     translationService.init();
@@ -224,7 +186,6 @@ public class DatabaseInitializer {
   public void initDatabase() throws Exception {
     createOthers();
     createLicenses();
-    createProperties();
     createDefUsersGroup();
   }
 
