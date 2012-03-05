@@ -176,9 +176,12 @@ public class DatabaseInitializer {
   }
 
   public void initConditional() throws Exception {
+    final Group dummyGroup = new Group("dummygr", "dummygr");
+    groupManager.persist(dummyGroup);
     if (groupManager.count() == 0) {
       initialize();
     }
+    groupManager.remove(dummyGroup);
     translationService.init();
   }
 
