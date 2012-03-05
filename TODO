@@ -12,18 +12,13 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
-** icons in WIAB
-<div class="NWC">
-<div class="ILC"></div>
-</div>
-
-.ILC {
-    background: url("data:image/png;base6,4iVBORw0KGgoAAAANSUhEUgAAAA4AAAAWCAYAAADwza0nAAAAXUlEQVR42mNgGAWUgbS0tP8gTLKmp0+f/r927RrxmmGaQPTx48f/79y5k7BmZJtAmkD8VatW4deIrglkE0wTCAxlTcihR1ATTCO20MOrCaaRJJvQkxQME6VpFOAGALlX45hq7h8nAAAAAElFTkSuQmCC") no-repeat scroll 0 0 transparent;
-    height: 22px;
-    overflow: hidden;
-    width: 14px;
-}
-
+** Custom Auth
+    http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/javadoc/org/jivesoftware/openfire/auth/HybridAuthProvider.html
+    provider.auth.className=org.jivesoftware.openfire.auth.HybridAuthProvider
+    hybridAuthProvider.primaryProvider.className = org.jivesoftware.openfire.auth.JDBCAuthProvider    
+    hybridAuthProvider.secondaryProvider.className = cc.kune.core.server.auth.openfire.KuneAuthProvider
+cp /tmp/model.jar apache-wave-model.jar
+cp /tmp/kune-0.1.0-SNAPSHOT-jar-openfire-customauth.jar kune-authprovider.jar
 ** deploy automatize (update)
 *** copy jar
 *** copy via rsync gwt compilation (no delete to prevent code fail message)
@@ -127,7 +122,6 @@ public interface WaveSocket {
 ***** People must be invited to join the group and post or read messages. Your group and its archives do not appear in public Google search results or the directory.
 ***** In Kune: no
 ** TODO >> Delete host/room conf in ws.html
-** TODO >> kune.properties from cmd line
 ** TODO HelloWorld with samples of extensions: sitebar, sitebar options menu, siteuseroptions, sn, ...
 ** WIAB under proxies
 https://groups.google.com/group/wave-protocol/browse_thread/thread/202dee4bfdbdeee6
@@ -171,15 +165,18 @@ http://www.thinkplexx.com/learn/howto/maven2/debug/fixing-too-many-open-files-ma
 - gtx
 - smartclient
 - 
-** wave client integration
-*** Documentation
-**** Debug: client / server (see launch confs)
-**** Hosted Mode support for websocket
-***** Test that websocket is supported in your GWT Hosted Mode browser:
+** Documentation
+   CLOSED: [2012-03-04 dom 22:51] 
+*** Windows users
+http://dev.mysql.com/downloads/mysql/
+http://dev.mysql.com/downloads/gui-tools/5.0.html (recomended)
+*** Debug: client / server (see launch confs)
+*** Hosted Mode support for websocket
+**** Test that websocket is supported in your GWT Hosted Mode browser:
 http://www.websockets.org/
 http://jimbergman.net/websocket-web-browser-test/
-***** if not:
-****** Install nighty firefox (for hosted-mode and websocket support)
+**** if not:
+***** Install newest firefox (for hosted-mode and websocket support)
 add-apt-repository ppa:ubuntu-mozilla-daily/ppa
 apt-get update
 
@@ -192,8 +189,6 @@ and use:
 for user bookmarks/favorites/links
 ** Do something with jetty/jruby alias issue
    http://jetty.mortbay.org/jetty5/faq/faq_s_400-Security_t_Aliases.html
-** Use of webdriver instead of plain selenium
-   http://code.google.com/p/webdriver/
 ** New Action (Command) class
 *** Things to support
 - [X] menu and toolbars separators (space, bar, expand)

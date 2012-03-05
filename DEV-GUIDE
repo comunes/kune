@@ -129,7 +129,7 @@ http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.user/reference/wizards/
 
 Lauch the first to start the kune server (the first time that starts, will initialize the database). After that, launch the second to start kune in hosted mode and connect to the previous server, so you can make code modifications, and refresh the browser to see the changes. 
 
-Window users should create a kune server run external configuration to run "mvn exec:java" because the previous lauch runs in GNU/Linux systems.
+Window users should create a kune server run external configuration to run "mvn exec:java" because the previous launch runs in GNU/Linux systems.
 
 ==== Optionally ==== 
 

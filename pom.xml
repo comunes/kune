@@ -20,6 +20,7 @@
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
     <wiab.version>0.3.12</wiab.version>
+    <jetty.version>8.0.1.v20110908</jetty.version>
     <skipTests>true</skipTests>
   </properties>
   <repositories>
@@ -74,10 +75,10 @@
       <url>http://gwt-maven-rewraps.googlecode.com/hg/</url>
     </repository>
     <!-- cc -->
-    <repository>
-      <id>dyndns-repo</id>
-      <url>http://maven.dyndns.org/2</url>
-    </repository>
+    <!-- <repository> -->
+    <!-- <id>dyndns-repo</id> -->
+    <!-- <url>http://maven.dyndns.org/2</url> -->
+    <!-- </repository> -->
     <!-- seems that these are not working/neccesary now: -->
     <!-- <repository> <id>google-maven-snapshot-repository</id> <name>Google
       Maven Snapshot Repository</name> <url>https://oss.sonatype.org/content/repositories/google-snapshots/
@@ -710,8 +711,20 @@
       <artifactId>ical4j</artifactId>
       <version>1.0.2</version>
     </dependency>
+    <!-- openfire auth integration -->
+    <dependency>
+      <groupId>org.igniterealtime</groupId>
+      <artifactId>openfire</artifactId>
+      <version>3.7.0</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.eclipse.jetty</groupId>
+          <!-- <artifactId>hibernate</artifactId> -->
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
-
   <!-- <dependency> -->
   <!-- <groupId>dom4j</groupId> -->
   <!-- <artifactId>dom4j</artifactId> -->
@@ -930,21 +943,21 @@
               <mainClass>cc.kune.wave.server.WaveMain</mainClass>
             </manifest>
           </archive>
-<!--           <descriptorRefs> -->
-<!--             <descriptorRef>jar-with-dependencies</descriptorRef> -->
-<!--           </descriptorRefs> -->
+          <!-- <descriptorRefs> -->
+          <!-- <descriptorRef>jar-with-dependencies</descriptorRef> -->
+          <!-- </descriptorRefs> -->
           <dependencySets>
             <dependencySet>
               <outputDirectory>/</outputDirectory>
               <scope>runtime</scope>
               <unpackOptions>
-<!--                 <excludes> -->
-<!--                   FIXME this is needed? -->
-<!--                   <exclude>**/gxt/**</exclude> -->
-<!--                   <exclude>**/extjs/**</exclude> -->
-<!--                   <exclude>**extjs**</exclude> -->
-<!--                   <exclude>**gxt**</exclude> -->
-<!--                 </excludes> -->
+                <!-- <excludes> -->
+                <!-- FIXME this is needed? -->
+                <!-- <exclude>**/gxt/**</exclude> -->
+                <!-- <exclude>**/extjs/**</exclude> -->
+                <!-- <exclude>**extjs**</exclude> -->
+                <!-- <exclude>**gxt**</exclude> -->
+                <!-- </excludes> -->
                 <includes>
                   <include>${basedir}/target/kune-0.1.0-SNAPSHOT/ws/**</include>
                   <include>${basedir}/src/main/webapp/**</include>
@@ -1011,7 +1024,7 @@
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>8.0.1.v20110908</version>
+        <version>${jetty.version}</version>
         <configuration>
           <webAppConfig>
             <!-- <contextPath>/${project.name}</contextPath> -->

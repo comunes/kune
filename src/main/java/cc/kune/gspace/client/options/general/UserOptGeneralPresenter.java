@@ -81,7 +81,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
 
           @Override
           public void onSuccess(final Void result) {
-            NotifyUser.info("Sended. Check your email for the verification link.");
+            NotifyUser.info(i18n.t("Sended. Check your email for the verification link."));
           }
         });
       }

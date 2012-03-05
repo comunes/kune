@@ -283,6 +283,24 @@ com.google.wave.api.InvalidRequestException: Wavelet [WaveletName localhost/w+1v
   :ARCHIVE_CATEGORY: TODO
   :ARCHIVE_TODO: TODO
   :END:
+* icons in WIAB							    :ARCHIVE:
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2012-03-05 lun 04:48
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :END:
+<div class="NWC">
+<div class="ILC"></div>
+</div>
+
+.ILC {
+    background: url("data:image/png;base6,4iVBORw0KGgoAAAANSUhEUgAAAA4AAAAWCAYAAADwza0nAAAAXUlEQVR42mNgGAWUgbS0tP8gTLKmp0+f/r927RrxmmGaQPTx48f/79y5k7BmZJtAmkD8VatW4deIrglkE0wTCAxlTcihR1ATTCO20MOrCaaRJJvQkxQME6VpFOAGALlX45hq7h8nAAAAAElFTkSuQmCC") no-repeat scroll 0 0 transparent;
+    height: 22px;
+    overflow: hidden;
+    width: 14px;
+}
+
 
 
 

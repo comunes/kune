@@ -213,7 +213,6 @@ public class DatabaseInitializer {
       groupManager.getSiteDefaultGroup();
     } catch (final NoResultException e) {
       initialize();
-      // } catch (final MySQLSyntaxErrorException e2) {
     } catch (final SQLGrammarException e3) {
       // Seems like in Windows we get this Exception instead
       initialize();
