@@ -22,7 +22,7 @@ perl -p -i -e 's/domain.old/domain.new/g' src/main/webapp/ws.html
 or in production
 perl -p -i -e 's/domain.old/domain.new/g' /var/www/kune/ws.html
 
-rename 's/domain.old/domain.new/g' /var/lib/kune/_accounts
+rename 's/domain.old/domain.new/g' /var/lib/kune/_accounts/*
 
 Remove old persisted sessions:
 rm /var/lib/kune/_sessions/*
