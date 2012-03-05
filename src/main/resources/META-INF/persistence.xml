@@ -50,7 +50,7 @@
       <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production
         (NO!, use liquibase, for instance) -->
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.hbm2ddl.auto" value="validate"/>
       <!-- https://www.hibernate.org/214.html -->
       <property name="hibernate.connection.provider_class"
         value="org.hibernate.connection.C3P0ConnectionProvider"/>

@@ -142,29 +142,25 @@ or
 
 Not verified: in Windows you need to do something similar (copy the jmagick .dll of the same version in the Windows directory)
 
-===Run the server for the first time===
+===Initialize the kune database===
+
+mysql -p -u kune < script/kune_initialize.sql
+
+And if all goes ok, migrate the database:
+
+script/liquibase-migrate.sh
+
+Windows users should do this by hand or adapt this (simple) script to Windows.
+
+===Run the server===
 
 Run the server for the first time and initialize the db:
 
-I you are installing kuen for development:
+I you are installing kune for development:
 
  bin/server.sh # or mvn exec:java
 
 or for production
-
- bin/server.sh -j kune.jar # -h for more options
-
-Once started for the first time the db is initialized. Then you should stop (Ctrl-C) and start the db migration process:
-
- ./script/liquibase-migrate.sh
-
-=== Normal kune server start (after initialization) ===
-
-After that, you can start the server using the script:
-
- bin/server.sh
-
-or (again) running in production:
 
  bin/server.sh -j kune.jar # -h for more options
 
