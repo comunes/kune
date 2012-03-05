@@ -58,10 +58,12 @@ public class ChatServerTool extends AbstractServerTool {
 
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
+    @SuppressWarnings("unused")
     final Container rootFolder = createRoot(group);
-    final String groupShortName = group.getShortName();
-    chatManager.addRoom("none", user, rootFolder.getStateToken(), groupShortName,
-        i18n.t("Welcome to the [%s] public chat room", groupShortName));
+    // final String groupShortName = group.getShortName();
+    // chatManager.addRoom("FIXME", user, rootFolder.getStateToken(),
+    // groupShortName,
+    // i18n.t("Welcome to the [%s] public chat room", groupShortName));
     return group;
   }
 

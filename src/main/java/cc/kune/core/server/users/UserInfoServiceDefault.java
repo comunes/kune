@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.users;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
@@ -34,40 +33,39 @@ import com.google.inject.Singleton;
 @Singleton
 public class UserInfoServiceDefault implements UserInfoService {
 
-    private final GroupManager groupManager;
-    private final SocialNetworkManager socialNetworkManager;
+  private final GroupManager groupManager;
+  private final SocialNetworkManager socialNetworkManager;
 
-    @Inject
-    public UserInfoServiceDefault(final SocialNetworkManager socialNetwork, final GroupManager groupManager) {
-        this.socialNetworkManager = socialNetwork;
-        this.groupManager = groupManager;
+  @Inject
+  public UserInfoServiceDefault(final SocialNetworkManager socialNetwork, final GroupManager groupManager) {
+    this.socialNetworkManager = socialNetwork;
+    this.groupManager = groupManager;
+  }
+
+  @Override
+  public UserInfo buildInfo(final User user, final String userHash) throws DefaultException {
+    UserInfo userInfo = null;
+    if (User.isKnownUser(user)) {
+      userInfo = new UserInfo();
+
+      userInfo.setUser(user);
+      userInfo.setChatName(user.getShortName());
+      userInfo.setUserHash(userHash);
+      // FIXME: save this in user properties
+      userInfo.setShowDeletedContent(false);
+
+      final Group userGroup = user.getUserGroup();
+
+      final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
+      userInfo.setGroupsIsAdmin(participation.getGroupsIsAdmin());
+      userInfo.setGroupsIsCollab(participation.getGroupsIsCollab());
+      userInfo.setEnabledTools(groupManager.findEnabledTools(userGroup.getId()));
+      final Content defaultContent = userGroup.getDefaultContent();
+      userInfo.setUserGroup(userGroup);
+      if (defaultContent != null) {
+        userInfo.setHomePage(defaultContent.getStateToken().toString());
+      }
     }
-
-    @Override
-    public UserInfo buildInfo(final User user, final String userHash) throws DefaultException {
-        UserInfo userInfo = null;
-        if (User.isKnownUser(user)) {
-            userInfo = new UserInfo();
-
-            userInfo.setUser(user);
-            userInfo.setChatName(user.getShortName());
-            userInfo.setChatPassword(user.getPassword());
-            userInfo.setUserHash(userHash);
-            // FIXME: save this in user properties
-            userInfo.setShowDeletedContent(false);
-
-            final Group userGroup = user.getUserGroup();
-
-            final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
-            userInfo.setGroupsIsAdmin(participation.getGroupsIsAdmin());
-            userInfo.setGroupsIsCollab(participation.getGroupsIsCollab());
-            userInfo.setEnabledTools(groupManager.findEnabledTools(userGroup.getId()));
-            final Content defaultContent = userGroup.getDefaultContent();
-            userInfo.setUserGroup(userGroup);
-            if (defaultContent != null) {
-                userInfo.setHomePage(defaultContent.getStateToken().toString());
-            }
-        }
-        return userInfo;
-    }
+    return userInfo;
+  }
 }

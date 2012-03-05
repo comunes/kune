@@ -26,7 +26,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserInfoDTO implements IsSerializable {
   private String chatName;
-  private String chatPassword;
   private List<String> enabledTools;
   private Set<GroupDTO> groupsIsAdmin;
   private Set<GroupDTO> groupsIsCollab;
@@ -38,11 +37,6 @@ public class UserInfoDTO implements IsSerializable {
 
   public String getChatName() {
     return chatName;
-  }
-
-  @Deprecated
-  public String getChatPassword() {
-    return chatPassword;
   }
 
   public I18nCountryDTO getCountry() {
@@ -95,12 +89,6 @@ public class UserInfoDTO implements IsSerializable {
 
   public void setChatName(final String chatName) {
     this.chatName = chatName;
-  }
-
-  @Deprecated
-  public void setChatPassword(final String password) {
-    this.chatPassword = password;
-
   }
 
   public void setEnabledTools(final List<String> enabledTools) {

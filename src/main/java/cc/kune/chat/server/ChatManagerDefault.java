@@ -55,7 +55,7 @@ public class ChatManagerDefault implements ChatManager {
       final String roomName, final String subject) {
     final String groupShortName = parentToken.getGroup();
     final String userShortName = user.getShortName();
-    final ChatConnection connection = xmppManager.login(userShortName, user.getPassword(), userHash);
+    final ChatConnection connection = xmppManager.login(userShortName, userHash, userHash);
     if (!xmppManager.existRoom(connection, roomName)) {
       xmppManager.createRoom(connection, roomName, userShortName + userHash, subject);
       xmppManager.disconnect(connection);

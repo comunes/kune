@@ -72,6 +72,8 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
       siteGroup = groupFinder.get().findByShortName(
           kuneProperties.get().get(KuneProperties.DEFAULT_SITE_SHORT_NAME));
     }
+    LOG.info(String.format("SuperAuth for group: %s", siteGroup.getShortName()));
+    LOG.info(String.format("Auth rol required: %s", rol.toString()));
 
     if (userHash == null) {
       throw new UserMustBeLoggedException();
@@ -81,6 +83,8 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
     } else {
       final User user = userSessionManager.getUser();
       if (!AccessRightsUtils.correctMember(user, siteGroup, rol)) {
+        LOG.info(String.format("Don't have rights for do that. User: %s, not %s member of %s",
+            user.getShortName(), rol, siteGroup.getShortName()));
         throw new AccessViolationException();
       }
     }

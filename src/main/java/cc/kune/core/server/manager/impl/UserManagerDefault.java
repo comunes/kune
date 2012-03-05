@@ -324,7 +324,6 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   }
 
   @Override
-  @Deprecated
   public UserBuddiesData getUserBuddies(final String shortName) {
     // XEP-133 get roster by admin part is not implemented in openfire
     // also access to the openfire db is not easy with hibernate (the use of

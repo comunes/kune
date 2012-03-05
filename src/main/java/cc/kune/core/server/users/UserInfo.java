@@ -29,7 +29,6 @@ import cc.kune.domain.User;
 
 public class UserInfo {
   private String chatName;
-  private String chatPassword;
   private List<String> enabledTools;
   private Set<Group> groupsIsAdmin;
   private Set<Group> groupsIsCollab;
@@ -41,10 +40,6 @@ public class UserInfo {
 
   public String getChatName() {
     return chatName;
-  }
-
-  public String getChatPassword() {
-    return chatPassword;
   }
 
   public I18nCountry getCountry() {
@@ -97,11 +92,6 @@ public class UserInfo {
 
   public void setChatName(final String chatName) {
     this.chatName = chatName;
-  }
-
-  @Deprecated
-  public void setChatPassword(final String chatPassword) {
-    this.chatPassword = chatPassword;
   }
 
   public void setEnabledTools(final List<String> enabledTools) {

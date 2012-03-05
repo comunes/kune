@@ -47,7 +47,6 @@ public class UserSimpleDTO implements IsSerializable {
     this.language = language;
     this.country = country;
     this.timezone = timezone;
-
   }
 
   @Override

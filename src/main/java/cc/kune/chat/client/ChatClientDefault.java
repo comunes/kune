@@ -45,8 +45,8 @@ import cc.kune.core.client.events.AppStopEvent;
 import cc.kune.core.client.events.AvatarChangedEvent;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
@@ -299,14 +299,14 @@ public class ChatClientDefault implements ChatClient {
   @Override
   public void doLogin() {
     assert session.getCurrentUserInfo() != null;
-    doLogin(session.getCurrentUserInfo());
+    doLogin(session.getCurrentUserInfo(), session.getUserHash());
   }
 
-  private void doLogin(final UserInfoDTO user) {
+  private void doLogin(final UserInfoDTO user, final String token) {
     createActionIfNeeded();
     createDialogIfNeeded();
     chatOptions.username = user.getChatName();
-    chatOptions.passwd = user.getChatPassword();
+    chatOptions.passwd = token;
     chatOptions.resource = "emite-" + new Date().getTime() + "-kune";
     chatOptions.useruri = XmppURI.uri(chatOptions.username, chatOptions.domain, chatOptions.resource);
     createActionIfNeeded();
