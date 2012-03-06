@@ -93,7 +93,7 @@ NOTE: If you change the previous db passwords after this compiling, you have to 
 
 You can use other location (see kune.properties).
 
-Configurate hibernate-search (GNU/Linux instructions, look persistence.xml if you want to change indexes destination):
+Configurate hibernate/lucene indexes directories (these are GNU/Linux instructions, Windows developers: look and tune "hibernate.search.default.indexBase" variables in persistence.xml if you want to change indexes destination to other place):
  # yourUser is the user you are using to develop/run the application
  sudo mkdir -p /var/lib/kune/lucene/kune_dev/indexes
  sudo mkdir -p /var/lib/kune/lucene/kune_test/indexes

@@ -72,6 +72,18 @@ Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java 
 
 (*) Note: We actually use script/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line.
 
+====Configure Google GWT Plugin===
+
+For now we are using GWT 2.1.1 (not necessary match the one from the eclipse GWT plugin) so probably you have to download the SDK from:
+http://code.google.com/p/google-web-toolkit/downloads/list
+unzip, and add that SDK in Eclipse (Windows > Preferences > Google > Web Toolkit > Add). 
+
+Don't use other upper GWT SDK versions because our code (and dependencies) are not compatible with upper versions and we should do a coordinated migration.
+
+After that, right click Kune project in the PackageExplorer > Google > WebApplication > WAR directory: set to src/main/webapp and Uncheck the "Launch and deploy from this directory".
+
+Also in Kune project properties > Google > Web Toolkit > Check that you are using the 2.1.1 SDK. 
+
 ===UTF 8===
 
 The charset used in Kune is UTF8. In Eclipse, check the text-file enconding in Package Explorer > Preferences > Resource > Text file encoding.
@@ -124,12 +136,9 @@ For now It's better not to use the "internal server" of GWT hosted mode because 
 In /script directory exist two (mainly) launch configurations:
 - kune server via mvn.launch
 - kune client  -no-server.launch
-these configurations are eclipse run configurations that are normally imported by eclipse when you import the project (in GNU/Linux at least). See the Run and the Run External icon in the Eclipse toolbar to find these launchs. If is not there, try to import it: 
-http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.user/reference/wizards/ref-import_launch_configs.htm
+these configurations are eclipse run configurations that are normally imported by eclipse when you import the project (in GNU/Linux at least). See the Run and the Run External icon and menu options in the Eclipse toolbar to find these launchs. If is not there, try to import it (in Eclipse: File > Import > Launch Configurations > select the launchs from script directory). Also try to fix the path for the mvn command (especially Windows users). Other option is to create a new one launch to run a external "mvn exec:java" because the previous launch were created in GNU/Linux systems.
 
-Lauch the first to start the kune server (the first time that starts, will initialize the database). After that, launch the second to start kune in hosted mode and connect to the previous server, so you can make code modifications, and refresh the browser to see the changes. 
-
-Window users should create a kune server run external configuration to run "mvn exec:java" because the previous launch runs in GNU/Linux systems.
+Run it! Launch the first (it's equivalent to mvn exec:java) to start the kune server. After that, launch the second to start kune in hosted mode and connect to the previous server, so you can make code modifications, and refresh the browser to see the changes.
 
 ==== Optionally ==== 
 
