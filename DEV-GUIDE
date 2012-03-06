@@ -53,7 +53,14 @@ Ensure Eclipse is configured to use Java 1.6.
 
 Of course, you can use other IDEs (and please help us to improve this doc in this case).
 
-===Optional maven-eclipse integration ===
+====Some mandatory plugins for Eclipse====
+
+From the Eclipse Marketplace (Help > Eclipse Marketplace) install:
+
+* Google Plugin for Eclipse https://code.google.com/intl/en/eclipse/docs/getting_started.html
+* Subversive or Subclipse
+
+====Optional maven-eclipse integration ====
 
 Check:
 http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN.txt
@@ -72,7 +79,7 @@ Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java 
 
 (*) Note: We actually use script/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line.
 
-====Configure Google GWT Plugin===
+====Configure Google GWT Plugin====
 
 For now we are using GWT 2.1.1 (not necessary match the one from the eclipse GWT plugin) so probably you have to download the SDK from:
 http://code.google.com/p/google-web-toolkit/downloads/list
@@ -84,18 +91,19 @@ After that, right click Kune project in the PackageExplorer > Google > WebApplic
 
 Also in Kune project properties > Google > Web Toolkit > Check that you are using the 2.1.1 SDK. 
 
-===UTF 8===
+====Configure the Firefox GWT Plugin====
+
+For that check this from Firefox:
+http://gwt.google.com/missing-plugin/MissingPlugin.html
+some times GWT plugin is not available for newers FF, so you have to search in the GWT dev forums for a nightly extension.
+
+====UTF 8====
 
 The charset used in Kune is UTF8. In Eclipse, check the text-file enconding in Package Explorer > Preferences > Resource > Text file encoding.
 
-Please don't send patchs in other charsets.
+You can change this globally in General > Workspace.
 
-====Some mandatory plugins for Eclipse====
-
-From the Eclipse Marketplace (Help > Eclipse Marketplace) install:
-
-* Google Plugin for Eclipse https://code.google.com/intl/en/eclipse/docs/getting_started.html
-* Subversive or Subclipse
+Note: Please don't send patchs in other charsets.
 
 ====Some other recomended & suggested plugins for Eclipse==== 
 
@@ -120,12 +128,12 @@ http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
 
 ===Install Kune===
 
-Only after making sure the previous steps have been finished, you can proceed to the installation of Kune. For doing so, you need to follow the instructions of the document INSTALL, available in kune/trunk/INSTALL. Afterwards you will be able to run Kune for the first time. This will initialize the database, and configure the XMPP server, among other things.
+Only after making sure the previous steps have been finished, you can proceed to the installation of the rest of Kune. For doing so, you need to follow the instructions of the document INSTALL, available in kune/trunk/INSTALL. Afterwards you will be able to run Kune for the first time.
 
 ===GWT's Hosted Mode===
 
 Before run hosted mode for the first time compile once with:
- mvn compile && mvn gwt:compile
+ mvn compile -Dliquibase.should.run=false && mvn gwt:compile
 and deploy with:
  script/deploy_gwt.sh 
 

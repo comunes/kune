@@ -146,13 +146,14 @@ Not verified: in Windows you need to do something similar (copy the jmagick .dll
 
 mysql -p -u kune < script/kune_initialize.sql 
 
-(Windows users can use Mysql Browser to execute this SQL).
+(Windows users can use Mysql Browser to execute this SQL: File > Open Script > Select "script\kune_initialize.sql" > Execute).
 
 And if all goes ok, migrate the database:
 
 script/liquibase-migrate.sh
 
-Windows users should do this by hand or adapt this (simple) script to Windows.
+Windows developer users should do this by hand or adapt this (simple) script to Windows or simple:
+mvn compile -Dliquibase.should.run=true (or mvn compile)
 
 ===Run the server===
 
