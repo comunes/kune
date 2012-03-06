@@ -19,7 +19,9 @@
  */
 package cc.kune.core.server.rack;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,7 +42,13 @@ import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.rack.utils.RackHelper;
 import cc.kune.core.server.scheduler.CustomJobFactory;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.grapher.GrapherModule;
+import com.google.inject.grapher.InjectorGrapher;
+import com.google.inject.grapher.graphviz.GraphvizModule;
+import com.google.inject.grapher.graphviz.GraphvizRenderer;
 
 public class RackServletFilter implements Filter {
   public static class DockChain implements FilterChain {
@@ -132,6 +140,20 @@ public class RackServletFilter implements Filter {
     return moduleName;
   }
 
+  @SuppressWarnings("unused")
+  private void graph(final String filename, final Injector kuneInjector) {
+    try {
+      final PrintWriter out = new PrintWriter(new File(filename), "UTF-8");
+
+      final Injector injector = Guice.createInjector(new GrapherModule(), new GraphvizModule());
+      final GraphvizRenderer renderer = injector.getInstance(GraphvizRenderer.class);
+      renderer.setOut(out).setRankdir("TB");
+      injector.getInstance(InjectorGrapher.class).of(kuneInjector).graph();
+    } catch (final IOException e) {
+      LOG.debug("Exception creation guice graph", e);
+    }
+  }
+
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
     LOG.debug("INITIALIZING RackServletFilter...");
@@ -140,6 +162,9 @@ public class RackServletFilter implements Filter {
     module.configure(builder);
     rack = builder.getRack();
     injector = (Injector) filterConfig.getServletContext().getAttribute(INJECTOR_PARENT_ATTRIBUTE);
+    // final Injector oInjector = injector.createChildInjector(new
+    // OpenfireModule());
+
     final Injector kuneChildInjector = installInjector(filterConfig, rack, injector);
     final CustomJobFactory jobFactory = kuneChildInjector.getInstance(CustomJobFactory.class);
     jobFactory.setInjector(kuneChildInjector);
@@ -148,6 +173,10 @@ public class RackServletFilter implements Filter {
     excludes = rack.getExcludes();
     initFilters(filterConfig);
     LOG.debug("INITIALIZATION DONE!");
+
+    // Uncomment to generate the graph
+    graph("docs/wave-guice-graph.dot", injector);
+    graph("docs/kune-guice-graph.dot", kuneChildInjector);
   }
 
   private void initFilters(final FilterConfig filterConfig) throws ServletException {
@@ -158,8 +187,9 @@ public class RackServletFilter implements Filter {
 
   private Injector installInjector(final FilterConfig filterConfig, final Rack rack,
       final Injector waveChildInjector) {
-    // final Injector injector = Guice.createInjector();
-    final Injector childInjector = waveChildInjector.createChildInjector(rack.getGuiceModules());
+    final List<Module> guiceModules = rack.getGuiceModules();
+
+    final Injector childInjector = waveChildInjector.createChildInjector(guiceModules);
     filterConfig.getServletContext().setAttribute(INJECTOR_ATTRIBUTE, childInjector);
     return childInjector;
   }

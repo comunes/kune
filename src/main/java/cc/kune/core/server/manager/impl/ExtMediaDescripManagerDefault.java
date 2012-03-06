@@ -23,7 +23,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.ExtMediaDescripManager;
 import cc.kune.domain.ExtMediaDescrip;
 import cc.kune.domain.finders.ExtMediaDescripFinder;
@@ -34,19 +34,19 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ExtMediaDescripManagerDefault extends DefaultManager<ExtMediaDescrip, Long> implements
-        ExtMediaDescripManager {
+    ExtMediaDescripManager {
 
-    private final ExtMediaDescripFinder extMediaFinder;
+  private final ExtMediaDescripFinder extMediaFinder;
 
-    @Inject
-    public ExtMediaDescripManagerDefault(final Provider<EntityManager> provider,
-            final ExtMediaDescripFinder extMediaFinder) {
-        super(provider, ExtMediaDescrip.class);
-        this.extMediaFinder = extMediaFinder;
-    }
+  @Inject
+  public ExtMediaDescripManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final ExtMediaDescripFinder extMediaFinder) {
+    super(provider, ExtMediaDescrip.class);
+    this.extMediaFinder = extMediaFinder;
+  }
 
-    @Override
-    public List<ExtMediaDescrip> getAll() {
-        return extMediaFinder.getAll();
-    }
+  @Override
+  public List<ExtMediaDescrip> getAll() {
+    return extMediaFinder.getAll();
+  }
 }

@@ -21,7 +21,7 @@ package cc.kune.core.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
-
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.TagManager;
 import cc.kune.domain.Tag;
 import cc.kune.domain.finders.TagFinder;
@@ -33,16 +33,17 @@ import com.google.inject.Singleton;
 @Singleton
 public class TagManagerDefault extends DefaultManager<Tag, Long> implements TagManager {
 
-    private final TagFinder tagFinder;
+  private final TagFinder tagFinder;
 
-    @Inject
-    public TagManagerDefault(final Provider<EntityManager> provider, final TagFinder tagFinder) {
-        super(provider, Tag.class);
-        this.tagFinder = tagFinder;
-    }
+  @Inject
+  public TagManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final TagFinder tagFinder) {
+    super(provider, Tag.class);
+    this.tagFinder = tagFinder;
+  }
 
-    @Override
-    public Tag findByTagName(final String tag) {
-        return tagFinder.findByTagName(tag);
-    }
+  @Override
+  public Tag findByTagName(final String tag) {
+    return tagFinder.findByTagName(tag);
+  }
 }

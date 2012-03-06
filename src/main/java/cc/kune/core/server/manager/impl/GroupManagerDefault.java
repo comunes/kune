@@ -39,6 +39,7 @@ import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.FileManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.LicenseManager;
@@ -84,8 +85,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   private final UserFinder userFinder;
 
   @Inject
-  public GroupManagerDefault(final Provider<EntityManager> provider, final GroupFinder finder,
-      final UserFinder userFinder, final KuneProperties kuneProperties,
+  public GroupManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final GroupFinder finder, final UserFinder userFinder, final KuneProperties kuneProperties,
       final KuneBasicProperties properties, final ServerToolRegistry registry,
       final LicenseManager licenseManager, final LicenseFinder licenseFinder,
       final FileManager fileManager, final ServerToolRegistry serverToolRegistry,

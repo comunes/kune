@@ -46,6 +46,7 @@ import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.MoveOnSameContainerException;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.client.errors.UserNotFoundException;
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.access.FinderService;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.TagUserContentManager;
@@ -94,11 +95,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   private final UserFinder userFinder;
 
   @Inject
-  public ContentManagerDefault(final ContentFinder contentFinder, final ContainerFinder containerFinder,
-      final Provider<EntityManager> provider, final FinderService finder, final UserFinder userFinder,
-      final I18nLanguageFinder languageFinder, final TagUserContentManager tagManager,
-      final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils,
-      final ServerToolRegistry tools, final XMLActionReader xmlActionReader) {
+  public ContentManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final ContentFinder contentFinder, final ContainerFinder containerFinder,
+      final FinderService finder, final UserFinder userFinder, final I18nLanguageFinder languageFinder,
+      final TagUserContentManager tagManager, final KuneWaveService kuneWaveManager,
+      final ParticipantUtils participantUtils, final ServerToolRegistry tools,
+      final XMLActionReader xmlActionReader) {
     super(provider, Content.class);
     this.contentFinder = contentFinder;
     this.containerFinder = containerFinder;

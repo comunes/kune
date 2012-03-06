@@ -24,18 +24,14 @@ import cc.kune.core.server.init.DatabaseInitializer;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.persist.PersistService;
 
 @Singleton
 public class KunePersistenceService {
   @Inject
   DatabaseInitializer databaseInitializer;
-  @Inject
-  PersistService persistenceService;
 
   public void start() {
     try {
-      persistenceService.start();
       databaseInitializer.initConditional();
     } catch (final Exception e) {
       throw new ServerException("Error starting persistence service", e);

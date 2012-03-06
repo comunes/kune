@@ -6,9 +6,12 @@
   <packaging>jar</packaging>
   <version>0.1.0-SNAPSHOT</version>
   <name>kune</name>
-  <description> kune free/open/libre collaboration platform
-  </description>
+  <description>kune free/open/libre collaboration platform</description>
   <url>http://kune.ourproject.org</url>
+  <ciManagement>
+    <url>http://ci.comunes.org/job/kune/</url>
+    <system>Hudson</system>
+  </ciManagement>
   <properties>
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
     <gwt.version>2.1.1</gwt.version>
@@ -80,11 +83,11 @@
     <!-- <url>http://maven.dyndns.org/2</url> -->
     <!-- </repository> -->
     <!-- seems that these are not working/neccesary now: -->
-    <!-- <repository> <id>google-maven-snapshot-repository</id> <name>Google
-      Maven Snapshot Repository</name> <url>https://oss.sonatype.org/content/repositories/google-snapshots/
-      </url> <snapshots> <enabled>true</enabled> </snapshots> </repository> <repository>
-      <id>gwtplatform.snapshot.repo</id> <name>Gwtplatform snapshot repository</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/ </url> <layout>default</layout>
+    <!-- <repository> <id>google-maven-snapshot-repository</id> <name>Google 
+      Maven Snapshot Repository</name> <url>https://oss.sonatype.org/content/repositories/google-snapshots/ 
+      </url> <snapshots> <enabled>true</enabled> </snapshots> </repository> <repository> 
+      <id>gwtplatform.snapshot.repo</id> <name>Gwtplatform snapshot repository</name> 
+      <url>https://oss.sonatype.org/content/repositories/snapshots/ </url> <layout>default</layout> 
       </repository> -->
     <repository>
       <id>openqa.org</id>
@@ -182,7 +185,7 @@
       <!-- <version>2.1-SNAPSHOT-r1160</version> -->
       <version>3.0</version>
     </dependency>
-    <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId>
+    <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId> 
       <version>gin-1.1-SNAPSHOT</version> </dependency> -->
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
@@ -192,6 +195,11 @@
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-persist</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-grapher</artifactId>
       <version>3.0</version>
     </dependency>
     <dependency>
@@ -242,8 +250,8 @@
       <artifactId>gwt-fx</artifactId>
       <version>r464</version>
     </dependency>
-    <!-- <dependency> <groupId>com.jhickman.web.gwt</groupId> <artifactId>gwt-customuibinder</artifactId>
-      <version>0.1</version> </dependency> <dependency> <groupId>com.jhickman.web.gwt</groupId>
+    <!-- <dependency> <groupId>com.jhickman.web.gwt</groupId> <artifactId>gwt-customuibinder</artifactId> 
+      <version>0.1</version> </dependency> <dependency> <groupId>com.jhickman.web.gwt</groupId> 
       <artifactId>gxt-uibinder</artifactId> <version>0.6</version> </dependency> -->
     <!-- cc -->
     <dependency>
@@ -492,7 +500,7 @@
       <version>3.3.5</version>
       <!-- <scope>test</scope> -->
     </dependency>
-    <!-- If you want to start a selenium server, you will need the following
+    <!-- If you want to start a selenium server, you will need the following 
       dependency: -->
     <!-- <dependency> -->
     <!-- <groupId>org.seleniumhq.selenium</groupId> -->
@@ -723,31 +731,30 @@
 <!--           <artifactId>hibernate</artifactId> -->
 <!--         </exclusion> -->
 <!--         <exclusion> -->
-<!--           <groupId>org.slf4j</groupId> -->
-<!--           <artifactId>spi</artifactId> -->
+<!--         <groupId>org.slf4j</groupId> -->
+<!--         <artifactId>spi</artifactId> -->
 <!--         </exclusion> -->
 <!--         <exclusion> -->
-<!--           <groupId>org.slf4j</groupId> -->
-<!--           <artifactId>slf4j-api</artifactId> -->
+<!--         <groupId>org.slf4j</groupId> -->
+<!--         <artifactId>slf4j-api</artifactId> -->
 <!--         </exclusion> -->
 <!--         <exclusion> -->
-<!--           <groupId>org.slf4j</groupId> -->
-<!--           <artifactId>jcl-over-slf4j</artifactId> -->
+<!--         <groupId>org.slf4j</groupId> -->
+<!--         <artifactId>jcl-over-slf4j</artifactId> -->
 <!--         </exclusion> -->
 <!--         <exclusion> -->
-<!--           <groupId>org.slf4j</groupId> -->
-<!--           <artifactId>jcl-over-slf4j</artifactId> -->
+<!--         <groupId>org.slf4j</groupId> -->
+<!--         <artifactId>jcl-over-slf4j</artifactId> -->
 <!--         </exclusion> -->
 <!--         <exclusion> -->
-<!--           <groupId>org.apache</groupId> -->
-<!--           <artifactId>commons</artifactId> -->
+<!--         <groupId>org.apache</groupId> -->
+<!--         <artifactId>commons</artifactId> -->
 <!--         </exclusion> -->
 <!--         <exclusion> -->
-<!--           <groupId>org.apache.commons</groupId> -->
-<!--           <artifactId>logging</artifactId> -->
+<!--         <groupId>org.apache.commons</groupId> -->
+<!--         <artifactId>logging</artifactId> -->
 <!--         </exclusion> -->
 <!--       </exclusions> -->
-
 <!--     </dependency> -->
   </dependencies>
   <!-- <dependency> -->
@@ -861,8 +868,8 @@
             </systemProperty>
             <!-- <systemProperty> -->
             <!-- <key>kune.db.persistence.name</key> -->
-            <!-- Persistence name, choose between: production, development,
-              test_db (testing environment using mysql db), test (testing environment using
+            <!-- Persistence name, choose between: production, development, 
+              test_db (testing environment using mysql db), test (testing environment using 
               h2 db). See persistence.xml -->
             <!-- <value>development</value> -->
             <!-- </systemProperty> -->
@@ -905,7 +912,7 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
-          <!-- Uncomment and run mvn with -X -e if we have same compile problems
+          <!-- Uncomment and run mvn with -X -e if we have same compile problems 
             <compilerArgument>-verbose</compilerArgument> <fork>true</fork> <verbose>true</verbose> -->
         </configuration>
       </plugin>
@@ -939,7 +946,7 @@
             <name>junit</name>
             <value>true</value>
           </property>
-          <!-- Skip the normal tests, we'll run them in the integration-test
+          <!-- Skip the normal tests, we'll run them in the integration-test 
             phase -->
           <skipTests>${skipTests}</skipTests>
         </configuration>
@@ -1064,11 +1071,11 @@
       <!-- gwtp & GenEvent need this plugin -->
       <!-- maybe test: http://mojo.codehaus.org/apt-maven-plugin/index.html -->
       <!-- instead of this: https://code.google.com/p/maven-annotation-plugin/ -->
-      <!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId>
-        <version>1.3.7</version> <executions> <execution> <id>process</id> <goals>
-        <goal>process</goal> </goals> <phase>generate-sources</phase> </execution>
-        </executions> </plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>apt-maven-plugin</artifactId>
-        <version>1.0-alpha-4</version> <executions> <execution> <goals> <goal>process</goal>
+      <!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId> 
+        <version>1.3.7</version> <executions> <execution> <id>process</id> <goals> 
+        <goal>process</goal> </goals> <phase>generate-sources</phase> </execution> 
+        </executions> </plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>apt-maven-plugin</artifactId> 
+        <version>1.0-alpha-4</version> <executions> <execution> <goals> <goal>process</goal> 
         <goal>test-process</goal> </goals> </execution> </executions> </plugin> -->
       <!-- BETTER user: http://code.google.com/p/acris/wiki/AnnotationProcessing -->
       <plugin>
@@ -1089,7 +1096,7 @@
           </modules>
           <copyWebapp>true</copyWebapp>
           <compileReport>false</compileReport>
-          <localWorkers>1</localWorkers><!-- Using all workers can temporarily
+          <localWorkers>1</localWorkers><!-- Using all workers can temporarily 
             hang the mouse and isn't much faster -->
           <extraJvmArgs>-Xmx1024m</extraJvmArgs>
         </configuration>
@@ -1137,7 +1144,7 @@
               <password>db4kune</password>
               <verbose>true</verbose>
             </configuration>
-            <!-- <configuration> <verbose>true</verbose> <propertiesFile>
+            <!-- <configuration> <verbose>true</verbose> <propertiesFile> 
               src/main/resources/db/liquibase.properties </propertiesFile> </configuration> -->
             <goals>
               <goal>update</goal>
@@ -1156,7 +1163,7 @@
               <mainClass>cc.kune.wave.server.WaveMain</mainClass>
               <!-- <classpathPrefix>~/.m2/repository/</classpathPrefix> -->
               <!-- <classpathLayoutType>repository</classpathLayoutType> -->
-              <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType'
+              <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType' 
                 instead. -->
               <classpathMavenRepositoryLayout>true
               </classpathMavenRepositoryLayout>

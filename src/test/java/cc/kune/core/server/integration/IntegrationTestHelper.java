@@ -33,11 +33,9 @@ import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.chat.server.ChatServerModule;
 import cc.kune.core.server.KunePersistenceService;
+import cc.kune.core.server.DataSourceKunePersistModule;
 import cc.kune.core.server.PlatformServerModule;
 import cc.kune.core.server.TestConstants;
-import cc.kune.core.server.init.FinderRegistry;
-import cc.kune.core.server.properties.KuneProperties;
-import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.events.server.EventsServerModule;
 import cc.kune.lists.server.ListsServerModule;
@@ -49,7 +47,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Scopes;
-import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
 
@@ -62,20 +59,25 @@ public class IntegrationTestHelper {
           TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
       final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
-      final Injector childInjector = injector.createChildInjector(wavePersistModule,
-          FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)),
-          new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
-          new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 2, 2),
-          federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
-          new EventsServerModule(), new AbstractModule() {
+      final Injector childInjector = injector.createChildInjector(
+          wavePersistModule,
+          new AbstractModule() {
             @Override
             protected void configure() {
               bindScope(SessionScoped.class, Scopes.SINGLETON);
               bindScope(RequestScoped.class, Scopes.SINGLETON);
-              bind(KuneProperties.class).toInstance(new KunePropertiesDefault("kune.properties"));
+
               bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
             }
-          });
+          },
+
+          new DataSourceKunePersistModule("kune.properties", TestConstants.PERSISTENCE_UNIT),
+          // new MyDataSourceTwoPersistModule(),
+
+          new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
+          new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 2, 2),
+          federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
+          new EventsServerModule());
       try {
         childInjector.getInstance(WaveServerImpl.class).initialize();
       } catch (final WaveServerException e) {

@@ -19,9 +19,6 @@
  */
 package cc.kune.core.server;
 
-import java.util.Properties;
-
-import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,7 +31,6 @@ import cc.kune.core.client.rpcservices.I18nService;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SocialNetService;
 import cc.kune.core.client.rpcservices.UserService;
-import cc.kune.core.server.init.FinderRegistry;
 import cc.kune.core.server.manager.file.EntityBackgroundDownloadManager;
 import cc.kune.core.server.manager.file.EntityBackgroundUploadManager;
 import cc.kune.core.server.manager.file.EntityLogoDownloadManager;
@@ -44,8 +40,6 @@ import cc.kune.core.server.manager.file.FileGwtUploadServlet;
 import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.manager.file.UserLogoDownloadManager;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
-import cc.kune.core.server.properties.KuneProperties;
-import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
 import cc.kune.core.server.rack.filters.ForwardFilter;
@@ -74,56 +68,31 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Module;
 import com.google.inject.Scope;
 import com.google.inject.matcher.Matchers;
-import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.ServletModule;
 import com.google.inject.servlet.SessionScoped;
 
 public class KuneRackModule implements RackModule {
+
   public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
   private final Module configModule;
   private final String suffix;
-  final SystemConfiguration sysConf = new SystemConfiguration();
 
   public KuneRackModule() {
     this(null, "/ws", null);
   }
 
-  public KuneRackModule(final String settedJpaUnit, final String suffix, final Scope sessionScope) {
+  private KuneRackModule(final String settedJpaUnit, final String suffix, final Scope sessionScope) {
     this.suffix = suffix;
-    final String kuneConfig = sysConf.getString("kune.server.config");
+
     configModule = new AbstractModule() {
       @Override
       public void configure() {
-        final KunePropertiesDefault kuneProperties = new KunePropertiesDefault(kuneConfig);
-        bind(KuneProperties.class).toInstance(kuneProperties);
-        final String configuredJpaUnit = kuneProperties.get(KuneProperties.SITE_DB_PERSISTENCE_NAME);
-
-        // precedence method param > properties
-        final String jpaUnit = settedJpaUnit != null ? settedJpaUnit
-            : configuredJpaUnit != null ? configuredJpaUnit : "development";
-        LOG.info("Using persistence unit: " + jpaUnit);
-
-        final JpaPersistModule jpaPersistModule = new JpaPersistModule(jpaUnit);
-
-        if (!jpaUnit.equals("test")) {
-          final Properties dbProperties = new Properties();
-          dbProperties.setProperty("hibernate.connection.url",
-              kuneProperties.get(KuneProperties.SITE_DB_URL));
-          dbProperties.setProperty("hibernate.connection.username",
-              kuneProperties.get(KuneProperties.SITE_DB_USER));
-          dbProperties.setProperty("hibernate.connection.password",
-              kuneProperties.get(KuneProperties.SITE_DB_PASSWORD));
-          jpaPersistModule.properties(dbProperties);
-        }
-
-        install(FinderRegistry.init(jpaPersistModule));
         bindInterceptor(Matchers.annotatedWith(LogThis.class), new NotInObject(),
             new LoggerMethodInterceptor());
         if (sessionScope != null) {
           bindScope(SessionScoped.class, sessionScope);
         }
-
         // This can be used also in Gin:
         // http://code.google.com/p/google-gin/issues/detail?id=60
         requestStaticInjection(KuneWaveServerUtils.class);
@@ -198,7 +167,14 @@ public class KuneRackModule implements RackModule {
     builder.use(new ServletModule() {
       @Override
       protected void configureServlets() {
-        filter("/*").through(CustomPersistFilter.class);
+        install(new DataSourceKunePersistModule());
+        // install(new MyDataSourceTwoPersistModule());
+
+        // more bindings
+
+        filter("/*").through(DataSourceKunePersistModule.MY_DATA_SOURCE_ONE_FILTER_KEY);
+        // filter("/*").through(MyDataSourceTwoPersistModule.MY_DATA_SOURCE_TWO_FILTER_KEY);
+
         super.configureServlets();
       }
     });

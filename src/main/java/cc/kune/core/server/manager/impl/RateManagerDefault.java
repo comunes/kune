@@ -22,7 +22,7 @@ package cc.kune.core.server.manager.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.RateManager;
 import cc.kune.domain.Content;
 import cc.kune.domain.Rate;
@@ -36,31 +36,32 @@ import com.google.inject.Singleton;
 @Singleton
 public class RateManagerDefault extends DefaultManager<Rate, Long> implements RateManager {
 
-    private final RateFinder finder;
+  private final RateFinder finder;
 
-    @Inject
-    public RateManagerDefault(final Provider<EntityManager> provider, final RateFinder finder) {
-        super(provider, Rate.class);
-        this.finder = finder;
-    }
+  @Inject
+  public RateManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final RateFinder finder) {
+    super(provider, Rate.class);
+    this.finder = finder;
+  }
 
-    @Override
-    public Rate find(final User user, final Content content) {
-        try {
-            return finder.find(user, content);
-        } catch (final NoResultException e) {
-            return null;
-        }
+  @Override
+  public Rate find(final User user, final Content content) {
+    try {
+      return finder.find(user, content);
+    } catch (final NoResultException e) {
+      return null;
     }
+  }
 
-    @Override
-    public Double getRateAvg(final Content content) {
-        return finder.calculateRate(content);
-    }
+  @Override
+  public Double getRateAvg(final Content content) {
+    return finder.calculateRate(content);
+  }
 
-    @Override
-    public Long getRateByUsers(final Content content) {
-        return finder.calculateRateNumberOfUsers(content);
-    }
+  @Override
+  public Long getRateByUsers(final Content content) {
+    return finder.calculateRateNumberOfUsers(content);
+  }
 
 }

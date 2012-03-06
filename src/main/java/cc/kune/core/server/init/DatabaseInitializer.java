@@ -68,7 +68,10 @@ public class DatabaseInitializer {
       final GroupManager groupManager, final LicenseManager licenseManager,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final I18nTranslationManager translationManager, final ContentManager contentManager,
-      final I18nTranslationServiceDefault translationService) {
+      final I18nTranslationServiceDefault translationService
+
+  // , final XmppRosterProvider borrar) {
+  ) {
     this.properties = properties;
     this.userManager = userManager;
     this.groupManager = groupManager;
@@ -78,8 +81,11 @@ public class DatabaseInitializer {
     this.translationManager = translationManager;
     this.translationService = translationService;
     this.contentManager = contentManager;
+    // assert borrar != null;
+    // LOG.info("Roster items: " + borrar.count());
   }
 
+  @Transactional
   private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
     final String adminName = properties.getAdminUserName();
     final String adminShortName = properties.getAdminShortName();
@@ -112,9 +118,9 @@ public class DatabaseInitializer {
 
     userManager.reIndex();
     groupManager.reIndex();
-
   }
 
+  @Transactional
   private void createLicenses() {
     // FIXME: Add CC RDF info (seems CC is working on new forms to add
     // license metadata)
@@ -161,6 +167,7 @@ public class DatabaseInitializer {
     licenseManager.persist(license);
   }
 
+  @Transactional
   public void createOthers() {
     final I18nLanguage english = new I18nLanguage(Long.valueOf(1819), "en", "ltr", "English", "", "",
         "en", "eng", "eng", false, "", "", "", "c == 1 ? 1 : 2", null, "L", "MMM d\\, yyyy");
@@ -184,8 +191,10 @@ public class DatabaseInitializer {
 
   @Transactional
   public void initDatabase() throws Exception {
-    createOthers();
     createLicenses();
+    createOthers();
+    LOG.warn("langs: " + languageManager.getAll().size());
+    // createLicenses();
     createDefUsersGroup();
   }
 

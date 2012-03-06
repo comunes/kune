@@ -58,6 +58,7 @@ import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.client.errors.WrongCurrentPasswordException;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenUtils;
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.i18n.I18nTranslationServiceMultiLang;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
@@ -105,13 +106,14 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final XmppManager xmppManager;
 
   @Inject
-  public UserManagerDefault(final Provider<EntityManager> provider, final UserFinder finder,
-      final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-      final XmppManager xmppManager, final ChatProperties chatProperties,
-      final I18nTranslationServiceMultiLang i18n, final CustomUserRegistrationServlet waveUserRegister,
-      final AccountStore waveAccountStore, final KuneWaveService kuneWaveManager,
-      final ParticipantUtils participantUtils, final KuneBasicProperties properties,
-      final GroupManager groupManager, final NotificationService notifyService) {
+  public UserManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final UserFinder finder, final I18nLanguageManager languageManager,
+      final I18nCountryManager countryManager, final XmppManager xmppManager,
+      final ChatProperties chatProperties, final I18nTranslationServiceMultiLang i18n,
+      final CustomUserRegistrationServlet waveUserRegister, final AccountStore waveAccountStore,
+      final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils,
+      final KuneBasicProperties properties, final GroupManager groupManager,
+      final NotificationService notifyService) {
     super(provider, User.class);
     this.userFinder = finder;
     this.languageManager = languageManager;

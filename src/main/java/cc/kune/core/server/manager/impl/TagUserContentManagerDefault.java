@@ -26,6 +26,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.TagManager;
 import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.shared.domain.TagCloudResult;
@@ -49,7 +50,7 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
   private final TagManager tagManager;
 
   @Inject
-  public TagUserContentManagerDefault(final Provider<EntityManager> provider,
+  public TagUserContentManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final TagManager tagManager, final TagUserContentFinder finder) {
     super(provider, TagUserContent.class);
     this.provider = provider;

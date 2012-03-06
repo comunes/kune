@@ -33,10 +33,7 @@ import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveServerImpl;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
-import cc.kune.core.server.init.FinderRegistry;
 import cc.kune.core.server.integration.HttpServletRequestMocked;
-import cc.kune.core.server.properties.KuneProperties;
-import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.wave.server.CustomSettingsBinder;
 
 import com.google.inject.Binder;
@@ -46,7 +43,6 @@ import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.Scopes;
 import com.google.inject.name.Names;
-import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
 
@@ -59,16 +55,17 @@ public abstract class TestHelper {
       final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
       final Injector childInjector = injector.createChildInjector(wavePersistModule, new ServerModule(
-          false, 1, 2, 2), new RobotApiModule(), federationModule,
-          FinderRegistry.init(new JpaPersistModule(persistenceUnit)), module, new Module() {
-            @Override
-            public void configure(final Binder binder) {
-              binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
-              binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
-              binder.bind(KuneProperties.class).toInstance(new KunePropertiesDefault(propetiesFileName));
-              binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
-            }
-          });
+          false, 1, 2, 2), new RobotApiModule(), federationModule, new DataSourceKunePersistModule(
+          "kune.properties", TestConstants.PERSISTENCE_UNIT), module, new Module() {
+        @Override
+        public void configure(final Binder binder) {
+          binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
+          binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
+          // binder.bind(KuneProperties.class).toInstance(new
+          // KunePropertiesDefault(propetiesFileName));
+          binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+        }
+      });
       try {
         childInjector.getInstance(WaveServerImpl.class).initialize();
       } catch (final WaveServerException e) {

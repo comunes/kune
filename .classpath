@@ -48,6 +48,9 @@
   <classpathentry kind="var" path="M2_REPO/com/google/guava/guava-gwt/r09/guava-gwt-r09.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/guice/3.0/guice-3.0.jar" sourcepath="M2_REPO/com/google/inject/guice/3.0/guice-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-assisted-inject/2.0/guice-assisted-inject-2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-assistedinject/3.0/guice-assistedinject-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-assistedinject/3.0/guice-assistedinject-3.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-grapher/3.0/guice-grapher-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-grapher/3.0/guice-grapher-3.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-multibindings/3.0/guice-multibindings-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-multibindings/3.0/guice-multibindings-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-persist/3.0/guice-persist-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-persist/3.0/guice-persist-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-servlet/3.0/guice-servlet-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-servlet/3.0/guice-servlet-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/bradrydzewski/gwt-cal/0.9.3-dndCreation/gwt-cal-0.9.3-dndCreation.jar"/>

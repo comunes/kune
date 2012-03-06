@@ -27,6 +27,7 @@ import javax.persistence.EntityManager;
 
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
@@ -48,7 +49,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   private final I18nLanguageManager languageManager;
 
   @Inject
-  public I18nTranslationManagerDefault(final Provider<EntityManager> provider,
+  public I18nTranslationManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final I18nTranslationFinder finder, final I18nLanguageManager languageManager) {
     super(provider, I18nTranslation.class);
     this.finder = finder;

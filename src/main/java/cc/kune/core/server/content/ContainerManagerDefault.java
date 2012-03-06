@@ -30,6 +30,7 @@ import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.MoveOnSameContainerException;
 import cc.kune.core.client.errors.NameInUseException;
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.manager.impl.DefaultManager;
@@ -53,8 +54,8 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
   private final ContentFinder contentFinder;
 
   @Inject
-  public ContainerManagerDefault(final ContentFinder contentFinder,
-      final ContainerFinder containerFinder, final Provider<EntityManager> provider) {
+  public ContainerManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final ContentFinder contentFinder, final ContainerFinder containerFinder) {
     super(provider, Container.class);
     this.contentFinder = contentFinder;
     this.containerFinder = containerFinder;

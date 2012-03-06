@@ -27,67 +27,69 @@ import org.junit.Before;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import com.google.inject.persist.PersistService;
 import com.google.inject.persist.Transactional;
 
 public abstract class PersistenceTest {
-    private final String persistenceUnit;
-    private final String propetiesFileName;
-    @Inject
-    Provider<EntityManager> provider;
+  private final String persistenceUnit;
+  private final String propetiesFileName;
+  @Inject
+  @DataSourceKune
+  Provider<EntityManager> provider;
 
-    public PersistenceTest() {
-        // test: use memory
-        // test_db: use mysql
-        // Also configurable ein TestHelper
-        this(TestConstants.PERSISTENCE_UNIT, "kune.properties");
-    }
+  public PersistenceTest() {
+    // test: use memory
+    // test_db: use mysql
+    // Also configurable ein TestHelper
+    this(TestConstants.PERSISTENCE_MYSQL_UNIT, "kune.properties");
+  }
 
-    public PersistenceTest(final String persistenceUnit, final String propetiesFileName) {
-        this.persistenceUnit = persistenceUnit;
-        this.propetiesFileName = propetiesFileName;
-    }
+  public PersistenceTest(final String persistenceUnit, final String propetiesFileName) {
+    this.persistenceUnit = persistenceUnit;
+    this.propetiesFileName = propetiesFileName;
+  }
 
-    public void closeTransaction() {
-        getManager().getTransaction().commit();
-    }
+  public void closeTransaction() {
+    getManager().getTransaction().commit();
+  }
 
-    protected EntityManager getManager() {
-        return provider.get();
-    }
+  protected EntityManager getManager() {
+    return provider.get();
+  }
 
-    public EntityTransaction getTransaction() {
-        return getManager().getTransaction();
-    }
+  public EntityTransaction getTransaction() {
+    return getManager().getTransaction();
+  }
 
-    public EntityManager openTransaction() {
-        final EntityManager manager = getManager();
-        final EntityTransaction transaction = manager.getTransaction();
-        transaction.begin();
-        return manager;
-    }
+  public EntityManager openTransaction() {
+    final EntityManager manager = getManager();
+    final EntityTransaction transaction = manager.getTransaction();
+    transaction.begin();
+    return manager;
+  }
 
-    public void persist(final Object... entities) {
-        for (final Object entity : entities) {
-            getManager().persist(entity);
-        }
+  public void persist(final Object... entities) {
+    for (final Object entity : entities) {
+      getManager().persist(entity);
     }
+  }
 
-    @Transactional
-    @Before
-    public void prepare() {
-        final Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit, propetiesFileName);
-        final PersistService persistence = injector.getInstance(PersistService.class);
-        // To Debug insert breakpoint here
-        persistence.start();
-        injector.injectMembers(this);
-    }
+  @Transactional
+  @Before
+  public void prepare() {
+    final Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit,
+        propetiesFileName);
+    // final PersistService persistence =
+    // injector.getInstance(PersistService.class);
+    // To Debug insert breakpoint here
+    // persistence.start();
+    injector.injectMembers(this);
+  }
 
-    public void rollbackTransaction() {
-        final EntityTransaction transaction = getManager().getTransaction();
-        if (transaction.isActive()) {
-            transaction.rollback();
-        }
+  public void rollbackTransaction() {
+    final EntityTransaction transaction = getManager().getTransaction();
+    if (transaction.isActive()) {
+      transaction.rollback();
     }
+  }
 
 }

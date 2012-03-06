@@ -23,7 +23,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.domain.License;
@@ -35,51 +35,51 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class LicenseManagerDefault extends DefaultManager<License, Long> implements LicenseManager {
-    private LicenseFinder licenseFinder;
-    private final KuneBasicProperties properties;
+  private LicenseFinder licenseFinder;
+  private final KuneBasicProperties properties;
 
-    @Inject
-    public LicenseManagerDefault(final Provider<EntityManager> provider, final KuneBasicProperties properties,
-            final LicenseFinder licenseFinder) {
-        super(provider, License.class);
-        this.properties = properties;
-        this.licenseFinder = licenseFinder;
-    }
+  @Inject
+  public LicenseManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final KuneBasicProperties properties, final LicenseFinder licenseFinder) {
+    super(provider, License.class);
+    this.properties = properties;
+    this.licenseFinder = licenseFinder;
+  }
 
-    @Override
-    public License findByShortName(final String shortName) {
-        return licenseFinder.findByShortName(shortName);
-    }
+  @Override
+  public License findByShortName(final String shortName) {
+    return licenseFinder.findByShortName(shortName);
+  }
 
-    @Override
-    public List<License> getAll() {
-        return licenseFinder.getAll();
-    }
+  @Override
+  public List<License> getAll() {
+    return licenseFinder.getAll();
+  }
 
-    @Override
-    public List<License> getCC() {
-        return licenseFinder.getCC();
-    }
+  @Override
+  public List<License> getCC() {
+    return licenseFinder.getCC();
+  }
 
-    @Override
-    public License getDefLicense() {
-        final String licenseDefId = properties.getDefaultLicense();
-        return licenseFinder.findByShortName(licenseDefId);
-    }
+  @Override
+  public License getDefLicense() {
+    final String licenseDefId = properties.getDefaultLicense();
+    return licenseFinder.findByShortName(licenseDefId);
+  }
 
-    @Override
-    public List<License> getNotCC() {
-        return licenseFinder.getNotCC();
-    }
+  @Override
+  public List<License> getNotCC() {
+    return licenseFinder.getNotCC();
+  }
 
-    @Override
-    public License persist(final License license) {
-        return super.persist(license);
-    }
+  @Override
+  public License persist(final License license) {
+    return super.persist(license);
+  }
 
-    @Override
-    @Inject
-    public void setLicenseFinder(final LicenseFinder licenseFinder) {
-        this.licenseFinder = licenseFinder;
-    }
+  @Override
+  @Inject
+  public void setLicenseFinder(final LicenseFinder licenseFinder) {
+    this.licenseFinder = licenseFinder;
+  }
 }

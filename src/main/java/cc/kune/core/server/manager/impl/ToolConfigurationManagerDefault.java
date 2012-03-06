@@ -21,7 +21,7 @@ package cc.kune.core.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
-
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.domain.ToolConfiguration;
 
@@ -31,11 +31,11 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ToolConfigurationManagerDefault extends DefaultManager<ToolConfiguration, Long> implements
-        ToolConfigurationManager {
+    ToolConfigurationManager {
 
-    @Inject
-    public ToolConfigurationManagerDefault(final Provider<EntityManager> provider) {
-        super(provider, ToolConfiguration.class);
-    }
+  @Inject
+  public ToolConfigurationManagerDefault(@DataSourceKune final Provider<EntityManager> provider) {
+    super(provider, ToolConfiguration.class);
+  }
 
 }

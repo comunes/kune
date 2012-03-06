@@ -23,7 +23,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.finders.I18nCountryFinder;
@@ -33,23 +33,25 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class I18nCountryManagerDefault extends DefaultManager<I18nCountry, Long> implements I18nCountryManager {
+public class I18nCountryManagerDefault extends DefaultManager<I18nCountry, Long> implements
+    I18nCountryManager {
 
-    private final I18nCountryFinder finder;
+  private final I18nCountryFinder finder;
 
-    @Inject
-    public I18nCountryManagerDefault(final Provider<EntityManager> provider, final I18nCountryFinder finder) {
-        super(provider, I18nCountry.class);
-        this.finder = finder;
-    }
+  @Inject
+  public I18nCountryManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final I18nCountryFinder finder) {
+    super(provider, I18nCountry.class);
+    this.finder = finder;
+  }
 
-    @Override
-    public I18nCountry findByCode(final String country) {
-        return finder.findByCode(country);
-    }
+  @Override
+  public I18nCountry findByCode(final String country) {
+    return finder.findByCode(country);
+  }
 
-    @Override
-    public List<I18nCountry> getAll() {
-        return finder.getAll();
-    }
+  @Override
+  public List<I18nCountry> getAll() {
+    return finder.getAll();
+  }
 }

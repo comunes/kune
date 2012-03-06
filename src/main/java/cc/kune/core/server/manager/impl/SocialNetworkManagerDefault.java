@@ -30,6 +30,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.InvalidSNOperationException;
 import cc.kune.core.client.errors.LastAdminInGroupException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.manager.SocialNetworkManager;
@@ -62,8 +63,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
   private final UserManager userManager;
 
   @Inject
-  public SocialNetworkManagerDefault(final Provider<EntityManager> provider, final GroupFinder finder,
-      final AccessRightsService accessRightsService, final UserManager userManager) {
+  public SocialNetworkManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
+      final GroupFinder finder, final AccessRightsService accessRightsService,
+      final UserManager userManager) {
     super(provider, SocialNetwork.class);
     this.finder = finder;
     this.accessRightsService = accessRightsService;

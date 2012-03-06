@@ -87,6 +87,7 @@ public class CustomPersistFilter implements Filter {
 
   @Override
   public void destroy() {
+    // Commented in kune
     // persistService.stop();
   }
 
@@ -104,6 +105,7 @@ public class CustomPersistFilter implements Filter {
 
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
+    // Commented in kune
     // persistService.start();
   }
 }
