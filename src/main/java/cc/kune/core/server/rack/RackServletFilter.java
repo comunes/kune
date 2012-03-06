@@ -175,8 +175,8 @@ public class RackServletFilter implements Filter {
     LOG.debug("INITIALIZATION DONE!");
 
     // Uncomment to generate the graph
-    graph("docs/wave-guice-graph.dot", injector);
-    graph("docs/kune-guice-graph.dot", kuneChildInjector);
+    // graph("docs/wave-guice-graph.dot", injector);
+    // graph("docs/kune-guice-graph.dot", kuneChildInjector);
   }
 
   private void initFilters(final FilterConfig filterConfig) throws ServletException {

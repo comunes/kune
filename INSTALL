@@ -183,7 +183,7 @@ bin/server.sh -j kune.jar
 
 TODO: configure/select db via properties
 
-=== Customization: Adapting Kune to your site ===
+===Customization: Adapting Kune to your site===
 
 Copy and adapt as much as possible to your needs these files:
 
@@ -319,6 +319,8 @@ Instead of:
 
 When you add this to the configuration and you restart, openfire will import (and remove) this part of the configuration to its database so you will see it in 'Server > Server Manager > System Properties'.
 
+Troubleshooting: If you cannot login to openfire after the kune installation, or the chat client don't login correctly you can check if the previous values are correct looking in the table ofProperty of openfire database. Using mysql command line, or MySql Browser you can fix there also the System Properties.
+
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
 
@@ -329,7 +331,7 @@ after that the previous values will be incorpored to Server > Server Manager > S
 
 After the section 'Run the server for the first time' you'll be able to use the password of the admin user of the kune instalation (specified in kune.properties), or other admin new users you want to register using kune and configure in the authorizedUsernames attribute.
 
-=== Configure your DNS for your XMPP service correctly ===
+===Configure your DNS for your XMPP service correctly===
 
 You have to configure your DNS domain adding SRV records for your XMPP services if you wanna use kune in production (not necessary for development). This permit that your XMPP server comunicates with other similar servers correctly. You should follow:
 http://jabberd.org/1.4/doc/adminguide#dnssrv
