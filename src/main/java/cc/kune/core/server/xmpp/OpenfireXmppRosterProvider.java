@@ -5,8 +5,8 @@ import javax.persistence.EntityManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cc.kune.core.server.DataSourceOpenfire;
 import cc.kune.core.server.manager.impl.DefaultManager;
+import cc.kune.core.server.persist.DataSourceOpenfire;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -27,9 +27,9 @@ import javax.persistence.EntityManager;
 
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
+import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
 import cc.kune.core.shared.dto.SearchResultDTO;
 import cc.kune.domain.I18nLanguage;

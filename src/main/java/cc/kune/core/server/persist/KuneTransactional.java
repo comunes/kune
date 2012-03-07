@@ -1,4 +1,4 @@
-package cc.kune.core.server;
+package cc.kune.core.server.persist;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

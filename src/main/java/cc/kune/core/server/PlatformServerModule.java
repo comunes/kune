@@ -91,6 +91,7 @@ import cc.kune.core.server.notifier.NotificationSender;
 import cc.kune.core.server.notifier.NotificationSenderDefault;
 import cc.kune.core.server.notifier.PendingNotificationSender;
 import cc.kune.core.server.notifier.UsersOnline;
+import cc.kune.core.server.persist.KunePersistenceService;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.GroupRPC;
 import cc.kune.core.server.rpc.I18nRPC;

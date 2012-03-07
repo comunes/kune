@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server;
+package cc.kune.core.server.persist;
 
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.init.DatabaseInitializer;

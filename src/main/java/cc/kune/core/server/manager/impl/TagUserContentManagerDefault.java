@@ -26,9 +26,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.TagManager;
 import cc.kune.core.server.manager.TagUserContentManager;
+import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
 import cc.kune.domain.Content;

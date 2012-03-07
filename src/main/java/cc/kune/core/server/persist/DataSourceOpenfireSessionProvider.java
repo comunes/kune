@@ -1,4 +1,4 @@
-package cc.kune.core.server;
+package cc.kune.core.server.persist;
 
 import javax.persistence.EntityManager;
 
@@ -7,10 +7,10 @@ import org.hibernate.Session;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class DataSourceKuneSessionProvider implements Provider<Session> {
+public class DataSourceOpenfireSessionProvider implements Provider<Session> {
   /** The entity manger to retrieve the session from. */
   @Inject
-  @DataSourceKune
+  @DataSourceOpenfire
   private Provider<EntityManager> entityManagerProvider;
 
   /**

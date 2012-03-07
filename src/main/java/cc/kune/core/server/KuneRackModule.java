@@ -40,6 +40,7 @@ import cc.kune.core.server.manager.file.FileGwtUploadServlet;
 import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.manager.file.UserLogoDownloadManager;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
+import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
 import cc.kune.core.server.rack.filters.ForwardFilter;

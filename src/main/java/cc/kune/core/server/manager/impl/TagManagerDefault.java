@@ -21,8 +21,8 @@ package cc.kune.core.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
-import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.TagManager;
+import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.domain.Tag;
 import cc.kune.domain.finders.TagFinder;
 

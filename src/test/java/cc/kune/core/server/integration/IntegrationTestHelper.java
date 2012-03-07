@@ -32,10 +32,10 @@ import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.chat.server.ChatServerModule;
-import cc.kune.core.server.KunePersistenceService;
-import cc.kune.core.server.DataSourceKunePersistModule;
 import cc.kune.core.server.PlatformServerModule;
 import cc.kune.core.server.TestConstants;
+import cc.kune.core.server.persist.DataSourceKunePersistModule;
+import cc.kune.core.server.persist.KunePersistenceService;
 import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.events.server.EventsServerModule;
 import cc.kune.lists.server.ListsServerModule;

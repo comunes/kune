@@ -22,8 +22,8 @@ package cc.kune.core.server.manager.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.RateManager;
+import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.domain.Content;
 import cc.kune.domain.Rate;
 import cc.kune.domain.User;

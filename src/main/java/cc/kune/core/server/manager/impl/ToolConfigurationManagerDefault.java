@@ -21,8 +21,8 @@ package cc.kune.core.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
-import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.ToolConfigurationManager;
+import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.domain.ToolConfiguration;
 
 import com.google.inject.Inject;

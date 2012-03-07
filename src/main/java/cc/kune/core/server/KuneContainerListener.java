@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 
 import org.apache.log4j.PropertyConfigurator;
 
+import cc.kune.core.server.persist.KunePersistenceService;
 import cc.kune.core.server.rack.ContainerListener;
 
 import com.google.inject.Inject;

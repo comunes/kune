@@ -23,8 +23,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.LicenseManager;
+import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.domain.License;
 import cc.kune.domain.finders.LicenseFinder;

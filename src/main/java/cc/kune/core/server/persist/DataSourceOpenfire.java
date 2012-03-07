@@ -1,4 +1,4 @@
-package cc.kune.core.server;
+package cc.kune.core.server.persist;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

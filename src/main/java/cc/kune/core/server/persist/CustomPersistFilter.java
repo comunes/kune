@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cc.kune.core.server;
+package cc.kune.core.server.persist;
 
 import java.io.IOException;
 
@@ -105,7 +105,7 @@ public class CustomPersistFilter implements Filter {
 
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
-    // Commented in kune
+    // Commented in kune (because if not this is started twice)
     // persistService.start();
   }
 }

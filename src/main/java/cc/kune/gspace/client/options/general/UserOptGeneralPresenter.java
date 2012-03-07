@@ -43,7 +43,7 @@ import com.google.inject.Provider;
 
 public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implements UserOptGeneral {
 
-  private boolean changeLanguage = true;
+  private boolean askChangeLanguage = true;
   private final Provider<UserServiceAsync> userService;
 
   private final UserOptGeneralView userView;
@@ -128,8 +128,8 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
             @Override
             public void onSuccess(final StateAbstractDTO result) {
               NotifyUser.hideProgress();
-              if (changeLanguage) {
-                i18n.changeToLanguageIfNecessary(lang.getCode(), lang.getEnglishName(), true,
+              if (askChangeLanguage) {
+                i18n.changeToLanguageIfNecessary(lang.getCode(), i18n.t(lang.getEnglishName()), true,
                     new I18nLanguageChangeNeeded() {
                       @Override
                       public void onChangeNeeded() {
@@ -137,7 +137,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
 
                       @Override
                       public void onChangeNotNeeded() {
-                        changeLanguage = false;
+                        askChangeLanguage = false;
                         stateManager.setRetrievedStateAndGo(result);
                         sendChangeEntityEvent();
                       }

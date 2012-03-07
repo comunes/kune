@@ -23,8 +23,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import cc.kune.core.server.DataSourceKune;
 import cc.kune.core.server.manager.ExtMediaDescripManager;
+import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.domain.ExtMediaDescrip;
 import cc.kune.domain.finders.ExtMediaDescripFinder;
 

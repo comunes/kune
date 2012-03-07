@@ -24,6 +24,8 @@ import javax.persistence.EntityTransaction;
 
 import org.junit.Before;
 
+import cc.kune.core.server.persist.DataSourceKune;
+
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;

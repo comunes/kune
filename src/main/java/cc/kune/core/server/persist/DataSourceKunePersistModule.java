@@ -1,4 +1,4 @@
-package cc.kune.core.server;
+package cc.kune.core.server.persist;
 
 import java.util.Properties;
 
@@ -30,17 +30,23 @@ import com.google.inject.Provider;
 import com.google.inject.persist.jpa.JpaPersistModule;
 
 public class DataSourceKunePersistModule extends AbstractModule {
+  // FIXME Trying to make this PrivateModule so we can have two Persist sources
+  // http://code.google.com/p/google-guice/wiki/GuicePersistMultiModules
+
   public static final Log LOG = LogFactory.getLog(DataSourceKunePersistModule.class);
   public static final Key<CustomPersistFilter> MY_DATA_SOURCE_ONE_FILTER_KEY = Key.get(
       CustomPersistFilter.class, DataSourceKune.class);
   private String settedJpaUnit = null;
   private String settedProperties = null;
 
+  /**
+   * Instantiates this module (main constructor)
+   */
   public DataSourceKunePersistModule() {
   }
 
   /**
-   * Instantiates this module during tests
+   * Instantiates this module only during tests
    * 
    * @param settedProperties
    *          the setted properties
@@ -98,9 +104,9 @@ public class DataSourceKunePersistModule extends AbstractModule {
     bind(Session.class).annotatedWith(DataSourceKune.class).toProvider(
         DataSourceKuneSessionProvider.class);
 
-    // bind(UnitOfWork.class).annotatedWith(DataSourceKune.class).toProvider(
-    // DataSourceKuneUnitOfWorkProvider.class);
-    // expose(UnitOfWork.class).annotatedWith(DataSourceKune.class);
+    // FIXME: Trying to use a custom JpaLocalTxnInterceptor because when this
+    // module is private the objects are not persisted with the guice-persist
+    // @Transactional
 
     // final KuneJpaLocalTxnInterceptor transactionInterceptor = new
     // KuneJpaLocalTxnInterceptor();

@@ -1,4 +1,4 @@
-package cc.kune.core.server;
+package cc.kune.core.server.persist;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.PersistService;

@@ -24,7 +24,7 @@ import javax.persistence.EntityTransaction;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-import cc.kune.core.server.KuneTransactional;
+import cc.kune.core.server.persist.KuneTransactional;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.UnitOfWork;

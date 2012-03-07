@@ -34,6 +34,7 @@ import org.waveprotocol.box.server.waveserver.WaveServerImpl;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.core.server.integration.HttpServletRequestMocked;
+import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.wave.server.CustomSettingsBinder;
 
 import com.google.inject.Binder;
