@@ -5,6 +5,6 @@ package cc.kune.core.server.manager.impl;
  * types of email confirmation/verification
  */
 public enum EmailConfirmationType {
-  emailVerification, fstTimeEmailVerification, passwordReset
+  emailVerification, passwordReset
 
 }

@@ -80,7 +80,7 @@ public class GroupOptionsPresenter extends
       }
     };
     // groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
-    groupPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
+    groupPrefsAction.putValue(Action.SMALL_ICON, img.prefGrey());
     prefsItem = new ButtonDescriptor(groupPrefsAction);
     prefsItem.withStyles("k-ent-header-btn, k-btn-min");
     // k-noborder,

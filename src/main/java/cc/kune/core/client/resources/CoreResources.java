@@ -442,8 +442,17 @@ public interface CoreResources extends ClientBundle {
   @Source("person-def.png")
   ImageResource personDef();
 
+  @Source("pref-black.png")
+  ImageResource prefBlack();
+
+  @Source("pref-grey.png")
+  ImageResource prefGrey();
+
   @Source("prefs.png")
   ImageResource prefs();
+
+  @Source("pref-white.png")
+  ImageResource prefWhite();
 
   @Source("question32.png")
   ImageResource question32();

@@ -110,7 +110,7 @@ public class I18nUITranslationService extends I18nTranslationService {
                 + shouldIuseProperties());
 
             changeToLanguageIfNecessary(getCurrentGWTlanguage(), currentLang.getCode(),
-                currentLang.getEnglishName(), new I18nLanguageChangeNeeded() {
+                currentLang.getEnglishName(), false, new I18nLanguageChangeNeeded() {
 
                   @Override
                   public void onChangeNeeded() {
@@ -181,8 +181,8 @@ public class I18nUITranslationService extends I18nTranslationService {
   }
 
   public void changeToLanguageIfNecessary(final String wantedLang, final String wantedLangEnglishName,
-      final I18nLanguageChangeNeeded listener) {
-    changeToLanguageIfNecessary(currentLang.getCode(), wantedLang, wantedLangEnglishName, listener);
+      final boolean ask, final I18nLanguageChangeNeeded listener) {
+    changeToLanguageIfNecessary(currentLang.getCode(), wantedLang, wantedLangEnglishName, ask, listener);
   }
 
   /**
@@ -192,25 +192,31 @@ public class I18nUITranslationService extends I18nTranslationService {
    * @return true if we should reload the client with the new language
    */
   private void changeToLanguageIfNecessary(final String currentLangCode, final String wantedLang,
-      final String wantedLangEnglishName, final I18nLanguageChangeNeeded listener) {
+      final String wantedLangEnglishName, final boolean ask, final I18nLanguageChangeNeeded listener) {
     if (!currentLangCode.equals(wantedLang) && isInConstantProperties(wantedLang)) {
-      NotifyUser.askConfirmation(t("Confirm please"),
-          t("Do you want to reload this page to use '[%s]' language?", wantedLangEnglishName),
-          new SimpleResponseCallback() {
-            @Override
-            public void onCancel() {
-              // User no accepted to change the language...
-              listener.onChangeNotNeeded();
-            }
+      if (!ask) {
+        listener.onChangeNeeded();
+        setCurrentLanguage(wantedLang);
+        changeLanguageInUrl(wantedLang);
+      } else {
+        NotifyUser.askConfirmation(t("Confirm please"),
+            t("Do you want to reload this page to use '[%s]' language?", wantedLangEnglishName),
+            new SimpleResponseCallback() {
+              @Override
+              public void onCancel() {
+                // User no accepted to change the language...
+                listener.onChangeNotNeeded();
+              }
 
-            @Override
-            public void onSuccess() {
-              // User accepted to change the language...
-              listener.onChangeNeeded();
-              setCurrentLanguage(wantedLang);
-              changeLanguageInUrl(wantedLang);
-            }
-          });
+              @Override
+              public void onSuccess() {
+                // User accepted to change the language...
+                listener.onChangeNeeded();
+                setCurrentLanguage(wantedLang);
+                changeLanguageInUrl(wantedLang);
+              }
+            });
+      }
     } else {
       listener.onChangeNotNeeded();
     }

@@ -22,6 +22,7 @@ package cc.kune.common.client.ui;
 import java.util.Iterator;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -74,7 +75,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     initWidget(uiBinder.createAndBindUi(this));
     label.setText(text);
     label.addStyleName("k-space-nowrap");
-    label.addStyleName("k-iconlabel-text");
+    label.setStylePrimaryName("k-iconlabel");
+    setTextStyle(text);
     iconLeft.setVisible(false);
     iconRight.setVisible(false);
   }
@@ -202,11 +204,18 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   @Override
   public void setText(final String text) {
     label.setText(text, Direction.LTR);
+    setTextStyle(text);
   }
 
   @Override
   public void setText(final String text, final Direction dir) {
     label.setText(text, dir);
+    setTextStyle(text);
+  }
+
+  private void setTextStyle(final String text) {
+    label.setStyleDependentName("notext", TextUtils.empty(text));
+    label.setStyleDependentName("text", !TextUtils.empty(text));
   }
 
   public void setTooltip(final String text) {

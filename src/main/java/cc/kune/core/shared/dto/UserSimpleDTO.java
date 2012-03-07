@@ -26,6 +26,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class UserSimpleDTO implements IsSerializable {
   private String compoundName;
   private I18nCountryDTO country;
+  private String email;
   private EmailNotificationFrequency emailNotifFreq;
   private boolean emailVerified;
   private boolean hasLogo;
@@ -89,6 +90,10 @@ public class UserSimpleDTO implements IsSerializable {
     return country;
   }
 
+  public String getEmail() {
+    return email;
+  }
+
   public EmailNotificationFrequency getEmailNotifFreq() {
     return emailNotifFreq;
   }
@@ -144,6 +149,10 @@ public class UserSimpleDTO implements IsSerializable {
 
   public void setCountry(final I18nCountryDTO country) {
     this.country = country;
+  }
+
+  public void setEmail(final String email) {
+    this.email = email;
   }
 
   public void setEmailNotifFreq(final EmailNotificationFrequency emailNotifFreq) {

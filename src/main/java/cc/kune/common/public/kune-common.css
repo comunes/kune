@@ -471,9 +471,17 @@
 
 .k-iconlabel-text {
   vertical-align: top;
+  float: right;
+}
+
+.k-iconlabel-text {
   padding-left: 3px;
   padding-right: 3px;
-  float: right;
+}
+
+.k-iconlabel-notext {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .k-iconlabel-left {

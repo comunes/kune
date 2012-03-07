@@ -44,7 +44,7 @@ public class EntityUploaderForm extends Composite {
 
   public EntityUploaderForm(final String servlet, final String btnText) {
     btn = new EntityOptUploadButton(btnText);
-    uploader = new MultiUploader(FileInputType.CUSTOM.with(btn));
+    uploader = new MultiUploader(FileInputType.CUSTOM.with(btn, true));
     uploader.setServletPath(servlet);
     uploader.setMaximumFiles(1);
     uploader.setValidExtensions("png", "jpg", "gif", "jpeg", "bmp");

@@ -29,9 +29,11 @@ import org.waveprotocol.box.server.authentication.SessionManager;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.EmailHashExpiredException;
 import cc.kune.core.client.errors.EmailHashInvalidException;
 import cc.kune.core.client.errors.EmailNotFoundException;
+import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.UserSession;
@@ -239,7 +241,8 @@ public class UserRPC implements RPC, UserService {
   @Authenticated
   @Transactional
   public StateAbstractDTO updateUser(final String userHash, final UserDTO user,
-      final I18nLanguageSimpleDTO lang) throws DefaultException {
+      final I18nLanguageSimpleDTO lang) throws DefaultException, EmailAddressInUseException,
+      GroupLongNameInUseException {
     final Long id = userSessionManager.getUser().getId();
     if (!id.equals(user.getId())) {
       throw new AccessViolationException();

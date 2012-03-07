@@ -43,7 +43,9 @@ import com.google.inject.Provider;
 
 public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implements UserOptGeneral {
 
+  private boolean changeLanguage = true;
   private final Provider<UserServiceAsync> userService;
+
   private final UserOptGeneralView userView;
 
   @Inject
@@ -101,6 +103,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     userView.setEmailNotifChecked(currentUser.getEmailNotifFreq());
     userView.setEmailVerified(currentUser.isEmailVerified());
     userView.setResendEmailVerifEnabled(!currentUser.isEmailVerified());
+    userView.setEmail(currentUser.getEmail());
   }
 
   @Override
@@ -117,6 +120,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
       user.setId(currentUser.getId());
       final String longName = userView.getLongName();
       user.setName(longName);
+      user.setEmail(userView.getEmail());
       final I18nLanguageSimpleDTO lang = userView.getLanguage();
       user.setEmailNotifFreq(userView.getEmailNotif());
       userService.get().updateUser(session.getUserHash(), user, userView.getLanguage(),
@@ -124,19 +128,21 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
             @Override
             public void onSuccess(final StateAbstractDTO result) {
               NotifyUser.hideProgress();
-              // Change language to new one if needed
-              i18n.changeToLanguageIfNecessary(lang.getCode(), lang.getEnglishName(),
-                  new I18nLanguageChangeNeeded() {
-                    @Override
-                    public void onChangeNeeded() {
-                    }
+              if (changeLanguage) {
+                i18n.changeToLanguageIfNecessary(lang.getCode(), lang.getEnglishName(), true,
+                    new I18nLanguageChangeNeeded() {
+                      @Override
+                      public void onChangeNeeded() {
+                      }
 
-                    @Override
-                    public void onChangeNotNeeded() {
-                      stateManager.setRetrievedStateAndGo(result);
-                      sendChangeEntityEvent();
-                    }
-                  });
+                      @Override
+                      public void onChangeNotNeeded() {
+                        changeLanguage = false;
+                        stateManager.setRetrievedStateAndGo(result);
+                        sendChangeEntityEvent();
+                      }
+                    });
+              }
             };
           });
     }

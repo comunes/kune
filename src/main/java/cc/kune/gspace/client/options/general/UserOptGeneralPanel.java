@@ -43,12 +43,15 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   private static final String BIG_FIELD_SIZE = "310px";
 
   public static final String DAILY_TYPE_ID = "k-ngp-type_daily";
+  public static final String EMAIL_FIELD = "k-ngp-emial";
   public static final String HOURLY_TYPE_ID = "k-ngp-type_hourly";
   public static final String IMMEDIATE_TYPE_ID = "k-ngp-type_immedi";
-  private static final String LONG_NAME_FIELD = "k-uogp-lname";
+  public static final String LONG_NAME_FIELD = "k-uogp-lname";
   public static final String NO_TYPE_ID = "k-ngp-type_no";
   public static final String TYPEOFEMAILNOTIF_FIELD = "k-ngp-type_of_email_notif";
+
   private final Radio dailyRadio;
+  private final TextField<String> email;
   private final FieldSet emailNotifTypeFieldSet;
   private final Radio hourlyRadio;
   private final Radio immediateRadio;
@@ -57,7 +60,6 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   private final Radio noRadio;
   private final AdapterField notVerifLabelAdapter;
   private final AdapterField resendEmailVerifAdapter;
-
   private final Button resendEmailVerifBtn;
 
   @Inject
@@ -72,6 +74,9 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     langSelector.setLabelAlign(LabelAlign.LEFT);
     langSelector.setLangSeparator(":");
     add(langSelector);
+
+    email = userFieldFactory.createUserEmail(EMAIL_FIELD);
+    add(email);
 
     emailNotifTypeFieldSet = new FieldSet();
     emailNotifTypeFieldSet.setHeading(i18n.t("How often do you want to receive email notifications?"));
@@ -131,6 +136,11 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   }
 
   @Override
+  public String getEmail() {
+    return email.getValue();
+  }
+
+  @Override
   public EmailNotificationFrequency getEmailNotif() {
     if (immediateRadio.getValue()) {
       return EmailNotificationFrequency.immediately;
@@ -158,6 +168,11 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   @Override
   public HasClickHandlers getResendEmailVerif() {
     return resendEmailVerifBtn;
+  }
+
+  @Override
+  public void setEmail(final String email) {
+    this.email.setValue(email);
   }
 
   @Override

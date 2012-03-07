@@ -26,6 +26,8 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 
 public interface UserOptGeneralView extends EntityOptGeneralView {
 
+  String getEmail();
+
   EmailNotificationFrequency getEmailNotif();
 
   I18nLanguageSimpleDTO getLanguage();
@@ -34,9 +36,11 @@ public interface UserOptGeneralView extends EntityOptGeneralView {
 
   HasClickHandlers getResendEmailVerif();
 
-  void setEmailVerified(boolean verified);
+  void setEmail(String email);
 
   void setEmailNotifChecked(EmailNotificationFrequency freq);
+
+  void setEmailVerified(boolean verified);
 
   void setLanguage(I18nLanguageSimpleDTO language);
 

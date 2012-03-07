@@ -152,7 +152,6 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
     switch (type) {
     case emailVerification:
-    case fstTimeEmailVerification:
       notifyService.sendEmailToWithLink(user, "Please verify your email",
           "Please click in the following link to verify your email at %s:",
           TokenUtils.addRedirect(SiteTokens.VERIFY_EMAIL, hash));
@@ -461,6 +460,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     if (email != null && !email.equals(user.getEmail())) {
       checkIfEmailAreInUse(email);
       user.setEmail(email);
+      user.setEmailVerified(false);
+      askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
     }
     user.setLanguage(findLanguage(lang.getCode()));
     persist(user);
