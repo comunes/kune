@@ -55,12 +55,14 @@ public class DatabaseInitializer {
   private static final Log LOG = LogFactory.getLog(DatabaseInitializer.class);
   private final ContentManager contentManager;
   private final I18nCountryManager countryManager;
+
   private final GroupManager groupManager;
   private final I18nLanguageManager languageManager;
   private final LicenseManager licenseManager;
   private final KuneBasicProperties properties;
   private final I18nTranslationManager translationManager;
   private final I18nTranslationServiceDefault translationService;
+
   private final UserManager userManager;
 
   @Inject
@@ -85,7 +87,6 @@ public class DatabaseInitializer {
     // LOG.info("Roster items: " + borrar.count());
   }
 
-  @Transactional
   private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
     final String adminName = properties.getAdminUserName();
     final String adminShortName = properties.getAdminShortName();
@@ -120,7 +121,6 @@ public class DatabaseInitializer {
     groupManager.reIndex();
   }
 
-  @Transactional
   private void createLicenses() {
     // FIXME: Add CC RDF info (seems CC is working on new forms to add
     // license metadata)
@@ -167,7 +167,6 @@ public class DatabaseInitializer {
     licenseManager.persist(license);
   }
 
-  @Transactional
   public void createOthers() {
     final I18nLanguage english = new I18nLanguage(Long.valueOf(1819), "en", "ltr", "English", "", "",
         "en", "eng", "eng", false, "", "", "", "c == 1 ? 1 : 2", null, "L", "MMM d\\, yyyy");
@@ -193,8 +192,6 @@ public class DatabaseInitializer {
   public void initDatabase() throws Exception {
     createLicenses();
     createOthers();
-    LOG.warn("langs: " + languageManager.getAll().size());
-    // createLicenses();
     createDefUsersGroup();
   }
 

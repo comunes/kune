@@ -59,7 +59,6 @@ public class DatabaseInitializerTest {
   I18nLanguageManager languageManager;
   @Inject
   LicenseManager licenseManager;
-
   @Inject
   I18nTranslationManager transManager;
 

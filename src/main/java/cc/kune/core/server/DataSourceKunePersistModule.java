@@ -60,7 +60,6 @@ public class DataSourceKunePersistModule extends AbstractModule {
 
     final KunePropertiesDefault kuneProperties = new KunePropertiesDefault(kuneConfig);
     bind(KuneProperties.class).toInstance(kuneProperties);
-    // expose(KuneProperties.class);
 
     // precedence method param > properties
     final String configuredJpaUnit = kuneProperties.get(KuneProperties.SITE_DB_PERSISTENCE_NAME);
@@ -95,6 +94,31 @@ public class DataSourceKunePersistModule extends AbstractModule {
     jpm.addFinder(TagUserContentFinder.class);
     jpm.addFinder(UserFinder.class);
     install(jpm);
+
+    bind(Session.class).annotatedWith(DataSourceKune.class).toProvider(
+        DataSourceKuneSessionProvider.class);
+
+    // bind(UnitOfWork.class).annotatedWith(DataSourceKune.class).toProvider(
+    // DataSourceKuneUnitOfWorkProvider.class);
+    // expose(UnitOfWork.class).annotatedWith(DataSourceKune.class);
+
+    // final KuneJpaLocalTxnInterceptor transactionInterceptor = new
+    // KuneJpaLocalTxnInterceptor();
+    // requestInjection(transactionInterceptor);
+    //
+    // bindInterceptor(annotatedWith(KuneTransactional.class), any(),
+    // transactionInterceptor);
+    // bindInterceptor(any(), annotatedWith(KuneTransactional.class),
+    // transactionInterceptor);
+
+    final Provider<EntityManager> entityManagerProvider = binder().getProvider(EntityManager.class);
+    bind(EntityManager.class).annotatedWith(DataSourceKune.class).toProvider(entityManagerProvider);
+
+    bind(MY_DATA_SOURCE_ONE_FILTER_KEY).to(CustomPersistFilter.class);
+
+    // expose(EntityManager.class).annotatedWith(DataSourceKune.class);
+    // expose(Session.class).annotatedWith(DataSourceKune.class);
+    // expose(KuneProperties.class);
     // expose(ContainerFinder.class);
     // expose(ContentFinder.class);
     // expose(ExtMediaDescripFinder.class);
@@ -107,16 +131,6 @@ public class DataSourceKunePersistModule extends AbstractModule {
     // expose(TagFinder.class);
     // expose(TagUserContentFinder.class);
     // expose(UserFinder.class);
-
-    bind(Session.class).annotatedWith(DataSourceKune.class).toProvider(
-        DataSourceKuneSessionProvider.class);
-    // expose(Session.class).annotatedWith(MyDataSourceOne.class);
-
-    final Provider<EntityManager> entityManagerProvider = binder().getProvider(EntityManager.class);
-    bind(EntityManager.class).annotatedWith(DataSourceKune.class).toProvider(entityManagerProvider);
-    // expose(EntityManager.class).annotatedWith(MyDataSourceOne.class);
-
-    bind(MY_DATA_SOURCE_ONE_FILTER_KEY).to(CustomPersistFilter.class);
     // expose(MY_DATA_SOURCE_ONE_FILTER_KEY);
 
     bind(GenericPersistenceInitializer.class).asEagerSingleton();
