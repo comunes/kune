@@ -111,7 +111,6 @@ public class DataSourceKunePersistModule extends AbstractModule {
     // final KuneJpaLocalTxnInterceptor transactionInterceptor = new
     // KuneJpaLocalTxnInterceptor();
     // requestInjection(transactionInterceptor);
-    //
     // bindInterceptor(annotatedWith(KuneTransactional.class), any(),
     // transactionInterceptor);
     // bindInterceptor(any(), annotatedWith(KuneTransactional.class),
