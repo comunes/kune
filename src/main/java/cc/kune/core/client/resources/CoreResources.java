@@ -443,17 +443,8 @@ public interface CoreResources extends CommonResources {
   @Source("person-def.png")
   ImageResource personDef();
 
-  @Source("icons/pref-black.png")
-  ImageResource prefBlack();
-
-  @Source("icons/pref-grey.png")
-  ImageResource prefGrey();
-
   @Source("prefs.png")
   ImageResource prefs();
-
-  @Source("icons/pref-white.png")
-  ImageResource prefWhite();
 
   @Source("question32.png")
   ImageResource question32();

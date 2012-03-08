@@ -30,11 +30,38 @@ public interface CommonResources extends ClientBundle {
   @Source("alert.png")
   ImageResource alert();
 
+  @Source("icons/chain-close-black.png")
+  ImageResource chainCloseBlack();
+
+  @Source("icons/chain-closed-grey.png")
+  ImageResource chainClosedGrey();
+
+  @Source("icons/chain-close-white.png")
+  ImageResource chainCloseWhite();
+
+  @Source("icons/chain-open-black.png")
+  ImageResource chainOpenBlack();
+
+  @Source("icons/chain-open-grey.png")
+  ImageResource chainOpenGrey();
+
+  @Source("icons/chain-open-white.png")
+  ImageResource chainOpenWhite();
+
   @Source("checked.png")
   ImageResource checked();
 
   @Source("clear.png")
   ImageResource clear();
+
+  @Source("icons/edit-black.png")
+  ImageResource editBlack();
+
+  @Source("icons/edit-gray_dark.png")
+  ImageResource editGrayDark();
+
+  @Source("icons/edit-white.png")
+  ImageResource editWhite();
 
   @Source("error.png")
   ImageResource error();
@@ -63,32 +90,14 @@ public interface CommonResources extends ClientBundle {
   @Source("kune-close-greylight.png")
   ImageResource kuneCloseGreylight();
 
-  @Source("radiochecked.png")
-  ImageResource radioChecked();
+  @Source("icons/location-black.png")
+  ImageResource locationBlack();
 
-  @Source("radiounchecked.png")
-  ImageResource radioUnChecked();
+  @Source("icons/location-grey.png")
+  ImageResource locationGrey();
 
-  @Source("cross.png")
-  ImageResource redCross();
-  
-  @Source("icons/chain-close-black.png")
-  ImageResource chainCloseBlack();
-
-  @Source("icons/chain-close-white.png")
-  ImageResource chainCloseWhite();
-
-  @Source("icons/chain-closed-grey.png")
-  ImageResource chainClosedGrey();
-
-  @Source("icons/chain-open-black.png")
-  ImageResource chainOpenBlack();
-
-  @Source("icons/chain-open-grey.png")
-  ImageResource chainOpenGrey();
-
-  @Source("icons/chain-open-white.png")
-  ImageResource chainOpenWhite();
+  @Source("icons/location-white.png")
+  ImageResource locationWhite();
 
   @Source("icons/picture-black.png")
   ImageResource pictureBlack();
@@ -98,7 +107,25 @@ public interface CommonResources extends ClientBundle {
 
   @Source("icons/picture-white.png")
   ImageResource pictureWhite();
-  
+
+  @Source("icons/pref-black.png")
+  ImageResource prefBlack();
+
+  @Source("icons/pref-grey.png")
+  ImageResource prefGrey();
+
+  @Source("icons/pref-white.png")
+  ImageResource prefWhite();
+
+  @Source("radiochecked.png")
+  ImageResource radioChecked();
+
+  @Source("radiounchecked.png")
+  ImageResource radioUnChecked();
+
+  @Source("cross.png")
+  ImageResource redCross();
+
   @Source("unchecked.png")
   ImageResource unChecked();
 }
