@@ -75,7 +75,7 @@ public class EventAddMenuItem extends MenuItemDescriptor {
               contService.get().addNewContentWithGadgetAndState(session.getUserHash(),
                   session.getContainerState().getStateToken(),
                   EventsConstants.TYPE_MEETING_DEF_GADGETNAME, EventsConstants.TYPE_MEETING, title,
-                  title, EventsClientConversionUtil.toMap(appt), new AsyncCallbackSimple<StateContentDTO>() {
+                  "", EventsClientConversionUtil.toMap(appt), new AsyncCallbackSimple<StateContentDTO>() {
                     @Override
                     public void onFailure(final Throwable caught) {
                       super.onFailure(caught);

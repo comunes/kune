@@ -22,6 +22,7 @@
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client/0.3.12/client-0.3.12.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-common/0.3.12/client-common-0.3.12.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-common-src/0.3.12/client-common-src-0.3.12.jar" sourcepath="M2_REPO/org/waveprotocol/client-common-src/0.3.12/client-common-src-0.3.12-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-scheduler/0.3.12/client-scheduler-0.3.12.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-scheduler-src/0.3.12/client-scheduler-src-0.3.12.jar" sourcepath="M2_REPO/org/waveprotocol/client-scheduler-src/0.3.12/client-scheduler-src-0.3.12-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-src/0.3.12/client-src-0.3.12.jar" sourcepath="M2_REPO/org/waveprotocol/client-src/0.3.12/client-src-0.3.12-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/cobogw/gwt/cobogw/1.3.1/cobogw-1.3.1.jar"/>

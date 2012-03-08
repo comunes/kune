@@ -60,8 +60,8 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<Calendar7DaysViewSelectBtn> cal7DaysBtn,
       final Provider<CalendarMonthViewSelectBtn> calMonthBtn,
       final Provider<EventAddMenuItem> eventAddMenuItem,
-      final Provider<EventRemoveMenuItem> eventRemoveMenuItem,
       final Provider<EventOpenMenuItem> eventOpenMenuItem, final Provider<CalendarGoPrevBtn> calPrevBtn,
+      final Provider<EventRemoveMenuItem> eventRemoveMenuItem,
       final Provider<CalendarGoNextBtn> calNextBtn, final CalendarOnOverMenu onOverMenu,
       final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
@@ -82,8 +82,8 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     // On over calendar menu
     actionsRegistry.addAction(ActionGroups.TOOLBAR, onOverMenu, containers);
 
-    eventAddMenuItem.get();
     eventOpenMenuItem.get();
+    eventAddMenuItem.get();
     eventRemoveMenuItem.get();
 
     // For now, commented:

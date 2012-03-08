@@ -71,7 +71,34 @@ public interface CommonResources extends ClientBundle {
 
   @Source("cross.png")
   ImageResource redCross();
+  
+  @Source("icons/chain-close-black.png")
+  ImageResource chainCloseBlack();
 
+  @Source("icons/chain-close-white.png")
+  ImageResource chainCloseWhite();
+
+  @Source("icons/chain-closed-grey.png")
+  ImageResource chainClosedGrey();
+
+  @Source("icons/chain-open-black.png")
+  ImageResource chainOpenBlack();
+
+  @Source("icons/chain-open-grey.png")
+  ImageResource chainOpenGrey();
+
+  @Source("icons/chain-open-white.png")
+  ImageResource chainOpenWhite();
+
+  @Source("icons/picture-black.png")
+  ImageResource pictureBlack();
+
+  @Source("icons/picture-grey.png")
+  ImageResource pictureGrey();
+
+  @Source("icons/picture-white.png")
+  ImageResource pictureWhite();
+  
   @Source("unchecked.png")
   ImageResource unChecked();
 }

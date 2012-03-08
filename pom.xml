@@ -638,6 +638,11 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
+      <artifactId>client-scheduler</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
       <artifactId>client-scheduler-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>

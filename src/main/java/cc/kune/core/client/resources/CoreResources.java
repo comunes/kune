@@ -19,11 +19,12 @@
  */
 package cc.kune.core.client.resources;
 
-import com.google.gwt.resources.client.ClientBundle;
+import cc.kune.common.client.resources.CommonResources;
+
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 
-public interface CoreResources extends ClientBundle {
+public interface CoreResources extends CommonResources {
   public interface Style extends CssResource {
     String loadingSpiner();
   }
@@ -442,16 +443,16 @@ public interface CoreResources extends ClientBundle {
   @Source("person-def.png")
   ImageResource personDef();
 
-  @Source("pref-black.png")
+  @Source("icons/pref-black.png")
   ImageResource prefBlack();
 
-  @Source("pref-grey.png")
+  @Source("icons/pref-grey.png")
   ImageResource prefGrey();
 
   @Source("prefs.png")
   ImageResource prefs();
 
-  @Source("pref-white.png")
+  @Source("icons/pref-white.png")
   ImageResource prefWhite();
 
   @Source("question32.png")
@@ -546,5 +547,7 @@ public interface CoreResources extends ClientBundle {
 
   @Source("wave-icon.png")
   ImageResource waveIcon();
+
+
 
 }
