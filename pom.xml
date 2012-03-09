@@ -523,7 +523,12 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>gwt-util-src</artifactId>
+      <artifactId>client-common</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>client-common-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -539,31 +544,6 @@
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>box-src</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>model-src</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client-src</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client-common</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client-common-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -573,27 +553,7 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>proto-msg</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
       <artifactId>gwt-util-src</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava-gwt</artifactId>
-      <version>r09</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>box</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>box-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -609,16 +569,6 @@
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>client-src</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client-common</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client-common-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -725,42 +675,42 @@
       <version>1.0.2</version>
     </dependency>
     <!-- openfire auth integration -->
-<!--     <dependency> -->
-<!--       <groupId>org.igniterealtime</groupId> -->
-<!--       <artifactId>openfire</artifactId> -->
-<!--       <version>3.7.0</version> -->
-<!--       <scope>provided</scope> -->
-<!--       <exclusions> -->
-<!--         <exclusion> -->
-<!--           <groupId>org.eclipse.jetty</groupId> -->
-<!--           <artifactId>hibernate</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--         <groupId>org.slf4j</groupId> -->
-<!--         <artifactId>spi</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--         <groupId>org.slf4j</groupId> -->
-<!--         <artifactId>slf4j-api</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--         <groupId>org.slf4j</groupId> -->
-<!--         <artifactId>jcl-over-slf4j</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--         <groupId>org.slf4j</groupId> -->
-<!--         <artifactId>jcl-over-slf4j</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--         <groupId>org.apache</groupId> -->
-<!--         <artifactId>commons</artifactId> -->
-<!--         </exclusion> -->
-<!--         <exclusion> -->
-<!--         <groupId>org.apache.commons</groupId> -->
-<!--         <artifactId>logging</artifactId> -->
-<!--         </exclusion> -->
-<!--       </exclusions> -->
-<!--     </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.igniterealtime</groupId> -->
+    <!-- <artifactId>openfire</artifactId> -->
+    <!-- <version>3.7.0</version> -->
+    <!-- <scope>provided</scope> -->
+    <!-- <exclusions> -->
+    <!-- <exclusion> -->
+    <!-- <groupId>org.eclipse.jetty</groupId> -->
+    <!-- <artifactId>hibernate</artifactId> -->
+    <!-- </exclusion> -->
+    <!-- <exclusion> -->
+    <!-- <groupId>org.slf4j</groupId> -->
+    <!-- <artifactId>spi</artifactId> -->
+    <!-- </exclusion> -->
+    <!-- <exclusion> -->
+    <!-- <groupId>org.slf4j</groupId> -->
+    <!-- <artifactId>slf4j-api</artifactId> -->
+    <!-- </exclusion> -->
+    <!-- <exclusion> -->
+    <!-- <groupId>org.slf4j</groupId> -->
+    <!-- <artifactId>jcl-over-slf4j</artifactId> -->
+    <!-- </exclusion> -->
+    <!-- <exclusion> -->
+    <!-- <groupId>org.slf4j</groupId> -->
+    <!-- <artifactId>jcl-over-slf4j</artifactId> -->
+    <!-- </exclusion> -->
+    <!-- <exclusion> -->
+    <!-- <groupId>org.apache</groupId> -->
+    <!-- <artifactId>commons</artifactId> -->
+    <!-- </exclusion> -->
+    <!-- <exclusion> -->
+    <!-- <groupId>org.apache.commons</groupId> -->
+    <!-- <artifactId>logging</artifactId> -->
+    <!-- </exclusion> -->
+    <!-- </exclusions> -->
+    <!-- </dependency> -->
   </dependencies>
   <!-- <dependency> -->
   <!-- <groupId>dom4j</groupId> -->

@@ -27,11 +27,12 @@ public final class FileConstants {
       + "servlets/EntityBackgroundDownloadManager";
   public final static String DOWNLOAD = "download";
   public static final String DOWNLOADSERVLET = ASITE_PREFIX + "servlets/FileDownloadManager";
+  public static final String EVENTSSERVLET = ASITE_PREFIX + "servlets/EventsServlet";
   public final static String FILENAME = "filename";
   public final static String GROUP_LOGO_FIELD = "k-glogov-ff";
   public static final String GROUP_NO_AVATAR_IMAGE = "others/defgroup.gif";
-  public final static String HASH = "hash";
 
+  public final static String HASH = "hash";
   public final static String IMGSIZE = "imgsize";
   public final static int LOGO_DEF_HEIGHT = 60;
   public final static int LOGO_DEF_WIDTH = 468;

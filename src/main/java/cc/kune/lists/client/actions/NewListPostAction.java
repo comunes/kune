@@ -24,6 +24,7 @@ import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
+import cc.kune.common.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.auth.SignIn;
@@ -52,6 +53,7 @@ public class NewListPostAction extends RolAction {
   public static final String TEXTBOX_ID = "k-nlistpa-textbox";
 
   private final ContentCache cache;
+  private PromptTopDialog diag;
   private final FolderViewerPresenter folderViewer;
   private final I18nTranslationService i18n;
   private final Provider<ListsServiceAsync> listsService;
@@ -77,11 +79,16 @@ public class NewListPostAction extends RolAction {
   public void actionPerformed(final ActionEvent event) {
     if (session.isLogged()) {
       final Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Title of the new post?"), false,
-          true, i18n.getDirection());
+          true, i18n.getDirection(), new OnEnter() {
+            @Override
+            public void onEnter() {
+              doAction();
+            }
+          });
       builder.width("300px").height("50px").firstButtonTitle(i18n.t("Post")).sndButtonTitle(
           i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID).width(270);
       builder.textboxId(TEXTBOX_ID);
-      final PromptTopDialog diag = builder.build();
+      diag = builder.build();
       diag.showCentered();
       diag.focusOnTextBox();
       diag.getSecondBtn().addClickHandler(new ClickHandler() {
@@ -93,22 +100,7 @@ public class NewListPostAction extends RolAction {
       diag.getFirstBtn().addClickHandler(new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
-          if (diag.isValid()) {
-            NotifyUser.showProgress();
-            diag.hide();
-            listsService.get().newPost(session.getUserHash(),
-                session.getCurrentStateToken().copy().clearDocument(), diag.getTextFieldValue(),
-                new AsyncCallbackSimple<StateContentDTO>() {
-                  @Override
-                  public void onSuccess(final StateContentDTO state) {
-                    stateManager.setRetrievedStateAndGo(state);
-                    NotifyUser.hideProgress();
-                    NotifyUser.info(i18n.t("Post created. Edit it"));
-                    folderViewer.highlightTitle();
-                  }
-                });
-            cache.remove(session.getCurrentStateToken());
-          }
+          doAction();
         }
       });
     } else {
@@ -116,6 +108,25 @@ public class NewListPostAction extends RolAction {
           NotifyLevel.info);
       stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN,
           session.getCurrentStateToken().toString()));
+    }
+  }
+
+  private void doAction() {
+    if (diag.isValid()) {
+      NotifyUser.showProgress();
+      diag.hide();
+      listsService.get().newPost(session.getUserHash(),
+          session.getCurrentStateToken().copy().clearDocument(), diag.getTextFieldValue(),
+          new AsyncCallbackSimple<StateContentDTO>() {
+            @Override
+            public void onSuccess(final StateContentDTO state) {
+              stateManager.setRetrievedStateAndGo(state);
+              NotifyUser.hideProgress();
+              NotifyUser.info(i18n.t("Post created. Edit it"));
+              folderViewer.highlightTitle();
+            }
+          });
+      cache.remove(session.getCurrentStateToken());
     }
   }
 

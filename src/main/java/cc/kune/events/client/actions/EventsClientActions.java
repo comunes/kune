@@ -62,8 +62,9 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<EventAddMenuItem> eventAddMenuItem,
       final Provider<EventOpenMenuItem> eventOpenMenuItem, final Provider<CalendarGoPrevBtn> calPrevBtn,
       final Provider<EventRemoveMenuItem> eventRemoveMenuItem,
-      final Provider<CalendarGoNextBtn> calNextBtn, final CalendarOnOverMenu onOverMenu,
-      final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh) {
+      final Provider<ExportCalendarMenuItem> export, final Provider<CalendarGoNextBtn> calNextBtn,
+      final CalendarOnOverMenu onOverMenu, final Provider<CalendarGoTodayBtn> goToday,
+      final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
@@ -78,6 +79,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, calMonthBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, calNextBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, export, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     // On over calendar menu
     actionsRegistry.addAction(ActionGroups.TOOLBAR, onOverMenu, containers);
@@ -86,9 +88,9 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     eventAddMenuItem.get();
     eventRemoveMenuItem.get();
 
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn, containers);
+
     // For now, commented:
-    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn,
-    // containers);
     // actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem,
     // contents);
     // actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem,

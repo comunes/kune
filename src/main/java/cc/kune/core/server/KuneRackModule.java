@@ -55,8 +55,9 @@ import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
 import cc.kune.core.server.scheduler.CronServerTasksManager;
 import cc.kune.docs.server.DocumentServerModule;
-import cc.kune.events.server.CalendarServerUtils;
+import cc.kune.events.server.EventsServlet;
 import cc.kune.events.server.EventsServerModule;
+import cc.kune.events.server.utils.EventsServerConversionUtil;
 import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.ListsServerModule;
@@ -97,7 +98,7 @@ public class KuneRackModule implements RackModule {
         // This can be used also in Gin:
         // http://code.google.com/p/google-gin/issues/detail?id=60
         requestStaticInjection(KuneWaveServerUtils.class);
-        requestStaticInjection(CalendarServerUtils.class);
+        requestStaticInjection(EventsServerConversionUtil.class);
         requestStaticInjection(GroupServerUtils.class);
       }
     };
@@ -157,7 +158,7 @@ public class KuneRackModule implements RackModule {
     builder.installServlet("^" + suffix + "/servlets/", FileUploadManager.class,
         FileDownloadManager.class, EntityLogoUploadManager.class, EntityLogoDownloadManager.class,
         FileGwtUploadServlet.class, EntityBackgroundDownloadManager.class,
-        EntityBackgroundUploadManager.class, UserLogoDownloadManager.class);
+        EntityBackgroundUploadManager.class, UserLogoDownloadManager.class, EventsServlet.class);
 
     builder.at("^" + suffix + "/(.*)$").install(
         new ForwardFilter("^" + suffix + "/(.*)$", suffix + "/{0}"));

@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
+import cc.kune.common.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -49,6 +50,7 @@ public class NewListAction extends RolAction {
   public static final String TEXTBOX_ID = "k-nla-textbox";
 
   private final ContentCache cache;
+  private PromptTopDialog diag;
   private final FolderViewerPresenter folderViewer;
   private final I18nTranslationService i18n;
   private final Provider<ListsServiceAsync> listsService;
@@ -71,11 +73,16 @@ public class NewListAction extends RolAction {
   @Override
   public void actionPerformed(final ActionEvent event) {
     final Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Name of the new list?"), false,
-        true, i18n.getDirection());
+        true, i18n.getDirection(), new OnEnter() {
+          @Override
+          public void onEnter() {
+            doAction();
+          }
+        });
     builder.width("300px").height("50px").firstButtonTitle(i18n.t("Create")).sndButtonTitle(
         i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID).width(270);
     builder.textboxId(TEXTBOX_ID);
-    final PromptTopDialog diag = builder.build();
+    diag = builder.build();
     diag.showCentered();
     diag.focusOnTextBox();
     diag.getSecondBtn().addClickHandler(new ClickHandler() {
@@ -85,28 +92,33 @@ public class NewListAction extends RolAction {
       }
     });
     diag.getFirstBtn().addClickHandler(new ClickHandler() {
+
       @Override
       public void onClick(final ClickEvent event) {
-        if (diag.isValid()) {
-          NotifyUser.showProgress();
-          diag.hide();
-          listsService.get().createList(session.getUserHash(), session.getCurrentStateToken(),
-              diag.getTextFieldValue(), ListsConstants.TYPE_LIST, true,
-              new AsyncCallbackSimple<StateContainerDTO>() {
-                @Override
-                public void onSuccess(final StateContainerDTO state) {
-                  stateManager.setRetrievedStateAndGo(state);
-                  NotifyUser.hideProgress();
-
-                  NotifyUser.info(i18n.t("List created"));
-                  folderViewer.highlightTitle();
-                }
-              });
-          cache.remove(session.getCurrentStateToken());
-        }
+        doAction();
       }
     });
 
+  }
+
+  private void doAction() {
+    if (diag.isValid()) {
+      NotifyUser.showProgress();
+      diag.hide();
+      listsService.get().createList(session.getUserHash(), session.getCurrentStateToken(),
+          diag.getTextFieldValue(), ListsConstants.TYPE_LIST, true,
+          new AsyncCallbackSimple<StateContainerDTO>() {
+            @Override
+            public void onSuccess(final StateContainerDTO state) {
+              stateManager.setRetrievedStateAndGo(state);
+              NotifyUser.hideProgress();
+
+              NotifyUser.info(i18n.t("List created"));
+              folderViewer.highlightTitle();
+            }
+          });
+      cache.remove(session.getCurrentStateToken());
+    }
   }
 
 }

@@ -290,14 +290,18 @@ public class CalendarViewerPresenter extends
     getView().clearAppointments();
     getView().suspendLayout();
     for (final Map<String, String> map : eventState.getAppointments()) {
-      final Appointment app = EventsClientConversionUtil.toApp(map);
-      app.setId(map.get(ICalConstants._INTERNAL_ID));
-      app.setStyle(AppointmentStyle.GREEN);
-      if (isValid(app)) {
-        getView().addAppointment(app);
-
-      } else {
-        Log.error("Appointment is not valid: " + app);
+      Appointment app;
+      try {
+        app = EventsClientConversionUtil.toApp(map);
+        app.setId(map.get(ICalConstants._INTERNAL_ID));
+        app.setStyle(AppointmentStyle.GREEN);
+        if (isValid(app)) {
+          getView().addAppointment(app);
+        } else {
+          Log.error("Appointment is not valid: " + app);
+        }
+      } catch (final Exception e) {
+        Log.error("Appointment is not valid");
       }
     }
     getView().resumeLayout();

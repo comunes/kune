@@ -69,7 +69,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
         resp.getOutputStream().write(logo);
       }
     } catch (final NoResultException e) {
-      FileDownloadManagerUtils.returnNotFound(resp);
+      FileDownloadManagerUtils.returnNotFound404(resp);
       return;
     }
   }

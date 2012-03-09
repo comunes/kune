@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
+import cc.kune.common.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.actions.RolAction;
@@ -50,6 +51,7 @@ public class NewRoomBtn extends ButtonDescriptor {
     private static final String ID = "k-nrbt-dialog";
     private static final String TEXTBOX_ID = "k-nrbt-textbox";
     private final Provider<ContentServiceAsync> contentService;
+    private PromptTopDialog diag;
     private final I18nTranslationService i18n;
     private final Session session;
     private final StateManager stateManager;
@@ -67,7 +69,12 @@ public class NewRoomBtn extends ButtonDescriptor {
     @Override
     public void actionPerformed(final ActionEvent event) {
       final Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Name of the new chatroom?"),
-          false, true, i18n.getDirection());
+          false, true, i18n.getDirection(), new OnEnter() {
+            @Override
+            public void onEnter() {
+              doAction();
+            }
+          });
       builder.width("200px").height("50px").firstButtonTitle(i18n.t("Create")).sndButtonTitle(
           i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID);
       builder.regex(TextUtils.UNIX_NAME).regexText(
@@ -75,7 +82,7 @@ public class NewRoomBtn extends ButtonDescriptor {
       builder.minLength(3).maxLength(15).allowBlank(false).minLengthText(
           CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS).maxLengthText(
           CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS);
-      final PromptTopDialog diag = builder.build();
+      diag = builder.build();
       diag.showCentered();
       diag.focusOnTextBox();
       diag.getSecondBtn().addClickHandler(new ClickHandler() {
@@ -87,25 +94,29 @@ public class NewRoomBtn extends ButtonDescriptor {
       diag.getFirstBtn().addClickHandler(new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
-          if (diag.isValid()) {
-            NotifyUser.showProgress();
-            final String groupShortName = session.getCurrentState().getGroup().getShortName();
-            final StateToken parentToken = session.getContainerState().getRootContainer().getStateToken();
-            contentService.get().addRoom(session.getUserHash(), parentToken,
-                groupShortName + "-" + diag.getTextFieldValue(),
-                new AsyncCallbackSimple<StateContainerDTO>() {
-                  @Override
-                  public void onSuccess(final StateContainerDTO state) {
-                    stateManager.removeCache(parentToken);
-                    stateManager.setRetrievedStateAndGo(state);
-                    NotifyUser.hideProgress();
-                    NotifyUser.info(i18n.t("Chatroom created"));
-                  }
-                });
-            diag.hide();
-          }
+          doAction();
         }
       });
+    }
+
+    private void doAction() {
+      if (diag.isValid()) {
+        NotifyUser.showProgress();
+        final String groupShortName = session.getCurrentState().getGroup().getShortName();
+        final StateToken parentToken = session.getContainerState().getRootContainer().getStateToken();
+        contentService.get().addRoom(session.getUserHash(), parentToken,
+            groupShortName + "-" + diag.getTextFieldValue(),
+            new AsyncCallbackSimple<StateContainerDTO>() {
+              @Override
+              public void onSuccess(final StateContainerDTO state) {
+                stateManager.removeCache(parentToken);
+                stateManager.setRetrievedStateAndGo(state);
+                NotifyUser.hideProgress();
+                NotifyUser.info(i18n.t("Chatroom created"));
+              }
+            });
+        diag.hide();
+      }
     }
   }
 

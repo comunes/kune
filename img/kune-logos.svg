@@ -57,15 +57,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="518.29119"
-     inkscape:cy="649.99995"
+     inkscape:zoom="1.27"
+     inkscape:cx="372.04724"
+     inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1078"
      inkscape:window-height="1867"
-     inkscape:window-x="1"
-     inkscape:window-y="52"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:guide-points="true"
@@ -806,6 +806,114 @@
          d="m 372.87905,411.27704 64.93441,0"
          id="path4197"
          transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#a56941;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="613"
+       y="545.36218"
+       id="text3299"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3301"
+         x="613"
+         y="545.36218"
+         style="font-size:46px;fill:#a56941;fill-opacity:1">kune</tspan></text>
+    <g
+       id="g3393"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kunecc-avatar.png"
+       inkscape:export-xdpi="90.000046"
+       inkscape:export-ydpi="90.000046">
+      <rect
+         y="501.61716"
+         x="544.79126"
+         height="60"
+         width="60"
+         id="rect3297"
+         style="color:#000000;fill:none;stroke:none;stroke-width:0.98360658;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         id="g3384">
+        <path
+           style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.11000001;color:#000000;fill:#dd8a3d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:12.30341816;marker:none;visibility:visible;display:block;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+           d="m 551.98038,509.70847 a 4.489481,4.489481 0 0 0 -1.91552,8.52862 l 10.07928,5.13085 -4.72039,9.23554 a 4.4894802,4.4894802 0 0 0 -0.25084,0.50168 l -7.06917,13.81909 a 4.4924325,4.4924325 0 1 0 8.00413,4.08188 l 5.10804,-10.01086 9.646,4.90281 a 4.4924325,4.4924325 0 0 0 0.0228,0.0228 l 13.97872,7.11478 a 4.4924325,4.4924325 0 1 0 4.08188,-8.00413 l -10.07928,-5.13085 4.33272,-8.50582 a 4.4894789,4.4894789 0 0 0 1.09458,-2.16636 l 6.6131,-12.92974 a 4.4894795,4.4894795 0 0 0 -4.17309,-6.56749 4.4894795,4.4894795 0 0 0 -3.83104,2.48561 l -5.10805,10.01086 -0.72972,-0.38766 a 4.4894789,4.4894789 0 0 0 -0.72972,-0.29645 4.4894789,4.4894789 0 0 0 -0.11402,-0.0456 l -7.16038,-3.67141 a 4.4894799,4.4894799 0 0 0 -1.68748,-0.84374 l -13.249,-6.74992 a 4.489481,4.489481 0 0 0 -2.14356,-0.52449 z m 16.16788,17.74135 5.54132,2.82767 -2.82767,5.54132 -5.54132,-2.82767 2.82767,-5.54132 z"
+           id="path3318"
+           inkscape:connector-curvature="0" />
+        <g
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-ico.png"
+           transform="matrix(0.26464389,0,0,0.26430342,550.52866,280.17578)"
+           id="g3303">
+          <path
+             inkscape:connector-curvature="0"
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path3306"
+             d="m 60.321717,411.99998 377.014613,0"
+             style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23953247;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+          <path
+             inkscape:connector-curvature="0"
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path3308"
+             d="m 252.61203,788.60332 0,-377.01178"
+             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffdb6b;stroke-width:109.23950958;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+          <path
+             inkscape:connector-curvature="0"
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path3310"
+             d="m 252.86937,597.15755 377.0124,0"
+             style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#69312f;stroke-width:109.23951721;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+          <path
+             inkscape:connector-curvature="0"
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path3312"
+             d="m 437.45588,596.97447 0,-377.01491"
+             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cc6633;stroke-width:109.23950195;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+          <path
+             inkscape:connector-curvature="0"
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path3314"
+             d="m 372.87905,411.27704 64.93441,0"
+             style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947906;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+        </g>
+      </g>
+    </g>
+    <g
+       style="opacity:0.2"
+       inkscape:export-ydpi="1797.08"
+       inkscape:export-xdpi="1797.08"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kunecc-background.png"
+       transform="matrix(0.41681287,0,0,0.41627661,518.36566,339.18061)"
+       id="g3338">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path3340"
+         d="m 60.321717,411.99998 377.014613,0"
+         style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23953247000000033;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path3342"
+         d="m 252.61203,788.60332 0,-377.01178"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffdb6b;stroke-width:109.23950958000000355;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path3344"
+         d="m 252.86937,597.15755 377.0124,0"
+         style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#69312f;stroke-width:109.23951720999998827;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path3346"
+         d="m 437.45588,596.97447 0,-377.01491"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cc6633;stroke-width:109.23950195000000463;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path3348"
+         d="m 372.87905,411.27704 64.93441,0"
+         style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947905999999364;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:block" />
     </g>
   </g>
 </svg>

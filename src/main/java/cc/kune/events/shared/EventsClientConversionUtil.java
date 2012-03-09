@@ -13,7 +13,7 @@ import com.bradrydzewski.gwt.calendar.client.Appointment;
  */
 public class EventsClientConversionUtil extends EventsSharedConversionUtil {
 
-  public static Appointment toApp(final Map<String, String> properties) {
+  public static Appointment toApp(final Map<String, String> properties) throws Exception {
     final Appointment app = EventsSharedConversionUtil.toApp(properties);
     final String start = properties.get(ICalConstants.DATE_TIME_START);
     if (start != null) {
@@ -23,9 +23,6 @@ public class EventsClientConversionUtil extends EventsSharedConversionUtil {
     if (end != null) {
       app.setEnd(DateUtils.toDate(end));
     }
-    String allDay = properties.get(ICalConstants._ALL_DAY);
-    if (allDay != null)
-      app.setAllDay(Boolean.parseBoolean(allDay));
     return app;
   }
 
@@ -33,7 +30,6 @@ public class EventsClientConversionUtil extends EventsSharedConversionUtil {
     final Map<String, String> properties = EventsSharedConversionUtil.toMap(app);
     properties.put(ICalConstants.DATE_TIME_START, DateUtils.toString(app.getStart()));
     properties.put(ICalConstants.DATE_TIME_END, DateUtils.toString(app.getEnd()));
-    properties.put(ICalConstants._ALL_DAY, Boolean.toString(app.isAllDay()));
     return properties;
   }
 

@@ -6,6 +6,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
+import cc.kune.common.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -16,8 +17,8 @@ import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.events.client.viewer.CalendarViewer;
-import cc.kune.events.shared.EventsConstants;
 import cc.kune.events.shared.EventsClientConversionUtil;
+import cc.kune.events.shared.EventsConstants;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.bradrydzewski.gwt.calendar.client.AppointmentStyle;
@@ -35,7 +36,9 @@ public class EventAddMenuItem extends MenuItemDescriptor {
     private final Provider<ContentServiceAsync> contService;
     private PromptTopDialog dialog;
     private final I18nTranslationService i18n;
+    private boolean openAfterCreation;
     private final Session session;
+    private final StateManager stateManager;
 
     @Inject
     public EventAddAction(final NavResources res, final I18nTranslationService i18n,
@@ -46,6 +49,7 @@ public class EventAddMenuItem extends MenuItemDescriptor {
       this.calendar = calendar;
       this.contService = contService;
       this.session = session;
+      this.stateManager = stateManager;
       withText(i18n.t("Add an appointment")).withIcon(res.calendarAdd());
     }
 
@@ -53,43 +57,19 @@ public class EventAddMenuItem extends MenuItemDescriptor {
     public void actionPerformed(final ActionEvent event) {
       if (dialog == null) {
         final Builder builder = new PromptTopDialog.Builder(CREATE_APP_ID,
-            i18n.t("Description of the appointment"), true, true, i18n.getDirection());
+            i18n.t("Description of the appointment"), true, true, i18n.getDirection(), new OnEnter() {
+              @Override
+              public void onEnter() {
+                doAction();
+              }
+            });
         builder.firstButtonTitle(i18n.t("Add")).firstButtonId(CREATE_APP_ADD_ID);
         builder.sndButtonTitle(i18n.t("Cancel")).sndButtonId(CREATE_APP_CANCEL_ID);
         dialog = builder.build();
         dialog.getFirstBtn().addClickHandler(new ClickHandler() {
           @Override
           public void onClick(final ClickEvent event) {
-            if (dialog.isValid()) {
-
-              final String title = dialog.getTextFieldValue();
-              final Date onOverDate = calendar.get().getOnOverDate();
-              final Appointment appt = new Appointment();
-              appt.setStart(onOverDate);
-              // http://stackoverflow.com/questions/2527845/how-to-do-calendar-operations-in-java-gwt-how-to-add-days-to-a-dateSessionConstants._AN_HOUR
-              final Date endDate = new Date(onOverDate.getTime() + SessionConstants._AN_HOUR);
-              appt.setEnd(endDate);
-              appt.setTitle(title);
-              appt.setStyle(AppointmentStyle.ORANGE);
-
-              contService.get().addNewContentWithGadgetAndState(session.getUserHash(),
-                  session.getContainerState().getStateToken(),
-                  EventsConstants.TYPE_MEETING_DEF_GADGETNAME, EventsConstants.TYPE_MEETING, title,
-                  "", EventsClientConversionUtil.toMap(appt), new AsyncCallbackSimple<StateContentDTO>() {
-                    @Override
-                    public void onFailure(final Throwable caught) {
-                      super.onFailure(caught);
-                    }
-
-                    @Override
-                    public void onSuccess(final StateContentDTO result) {
-                      appt.setId(result.getStateToken().toString());
-                      // Should this be used or serialize from server side?
-                      calendar.get().addAppointment(appt);
-                    }
-                  });
-              dialog.hide();
-            }
+            doAction();
           }
         });
         dialog.getSecondBtn().addClickHandler(new ClickHandler() {
@@ -103,6 +83,51 @@ public class EventAddMenuItem extends MenuItemDescriptor {
       dialog.showCentered();
       dialog.focusOnTextBox();
     }
+
+    private void doAction() {
+      if (dialog.isValid()) {
+
+        final String title = dialog.getTextFieldValue();
+        final Date onOverDate = calendar.get().getOnOverDate();
+        final Appointment appt = new Appointment();
+        final Date startDate = onOverDate != null ? onOverDate : new Date();
+        if (onOverDate != null) {
+          openAfterCreation = false;
+        }
+        appt.setStart(startDate);
+        // http://stackoverflow.com/questions/2527845/how-to-do-calendar-operations-in-java-gwt-how-to-add-days-to-a-dateSessionConstants._AN_HOUR
+        final Date endDate = new Date(startDate.getTime() + SessionConstants._AN_HOUR);
+        appt.setEnd(endDate);
+        appt.setTitle(title);
+        appt.setStyle(AppointmentStyle.ORANGE);
+
+        contService.get().addNewContentWithGadgetAndState(session.getUserHash(),
+            session.getContainerState().getStateToken(), EventsConstants.TYPE_MEETING_DEF_GADGETNAME,
+            EventsConstants.TYPE_MEETING, title, "", EventsClientConversionUtil.toMap(appt),
+            new AsyncCallbackSimple<StateContentDTO>() {
+              @Override
+              public void onFailure(final Throwable caught) {
+                super.onFailure(caught);
+              }
+
+              @Override
+              public void onSuccess(final StateContentDTO result) {
+                // FIXME this should be setted for real...
+                appt.setId(result.getStateToken().toString());
+                // Should this be used or serialize from server side?
+                calendar.get().addAppointment(appt);
+                if (openAfterCreation) {
+                  stateManager.gotoHistoryToken(appt.getId());
+                }
+              }
+            });
+        dialog.hide();
+      }
+    }
+
+    public void setOpenAfterCreation(final boolean openAfterCreation) {
+      this.openAfterCreation = openAfterCreation;
+    }
   }
 
   public static final String CREATE_APP_ADD_ID = "event-add-menu-item-add-btn";
@@ -113,5 +138,6 @@ public class EventAddMenuItem extends MenuItemDescriptor {
   public EventAddMenuItem(final EventAddAction action, final CalendarOnOverMenu cal) {
     super(action);
     setParent(cal.get());
+    action.setOpenAfterCreation(false);
   }
 }

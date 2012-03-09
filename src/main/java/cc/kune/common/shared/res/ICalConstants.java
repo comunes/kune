@@ -12,6 +12,7 @@ public class ICalConstants {
   public static final String LOCATION = "LOCATION";
   public static final String ORGANIZER = "ORGANIZER";
   public static final String SUMMARY = "SUMMARY";
-  public static final String[] TOTAL_LIST = new String[] { DATE_TIME_START, DATE_TIME_END, DESCRIPTION,
-      LOCATION, ORGANIZER, SUMMARY, _ALL_DAY, _INTERNAL_ID };
+  public static final String UID = "UID";
+  public static final String[] ZTOTAL_LIST = new String[] { DATE_TIME_START, DATE_TIME_END, DESCRIPTION,
+      LOCATION, ORGANIZER, SUMMARY, _ALL_DAY, _INTERNAL_ID, UID };
 }

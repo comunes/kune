@@ -22,7 +22,6 @@ import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.bradrydzewski.gwt.calendar.client.Calendar;
 import com.bradrydzewski.gwt.calendar.client.CalendarSettings;
-import com.bradrydzewski.gwt.calendar.client.CalendarSettings.Click;
 import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 import com.bradrydzewski.gwt.calendar.client.event.CreateHandler;
 import com.bradrydzewski.gwt.calendar.client.event.DateRequestHandler;
@@ -66,7 +65,8 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     final CalendarSettings settings = new CalendarSettings();
     settings.setIntervalsPerHour(4);
     settings.setPixelsPerInterval(10);
-    settings.setTimeBlockClickNumber(Click.Single);
+    // With Single is very annoying
+    // settings.setTimeBlockClickNumber(Click.Single);
     // settings.setOffsetHourLabels(true);
     settings.setScrollToHour(8);
     calendar = new Calendar();

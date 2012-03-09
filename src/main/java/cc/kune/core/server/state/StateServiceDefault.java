@@ -35,7 +35,7 @@ import cc.kune.domain.Group;
 import cc.kune.domain.License;
 import cc.kune.domain.Revision;
 import cc.kune.domain.User;
-import cc.kune.events.server.CalendarServerUtils;
+import cc.kune.events.server.utils.EventsServerConversionUtil;
 import cc.kune.events.shared.EventsConstants;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
@@ -86,7 +86,7 @@ public class StateServiceDefault implements StateService {
     final Group group = container.getOwner();
     setCommon(state, userLogged, group, container);
     if (isCalendar) {
-      ((StateEventContainer) state).setAppointments(CalendarServerUtils.getAppointments(container));
+      ((StateEventContainer) state).setAppointments(EventsServerConversionUtil.getAppointments(container));
     }
     return state;
   }

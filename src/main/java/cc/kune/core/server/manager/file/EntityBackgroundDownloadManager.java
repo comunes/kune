@@ -113,7 +113,7 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
       final OutputStream out = resp.getOutputStream();
       FileDownloadManagerUtils.returnFile(absFilename, out);
     } catch (final ContentNotFoundException e) {
-      FileDownloadManagerUtils.returnNotFound(resp);
+      FileDownloadManagerUtils.returnNotFound404(resp);
       return;
     }
   }

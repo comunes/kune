@@ -33,9 +33,6 @@ public interface ContainerManager extends Manager<Container, Long> {
 
   Container createRootFolder(Group group, String toolName, String name, String type);
 
-  @Override
-  Container find(Long id);
-
   boolean findIfExistsTitle(Container container, String title);
 
   void moveContainer(Container container, Container newContainer);

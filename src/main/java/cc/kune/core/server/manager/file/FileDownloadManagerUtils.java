@@ -47,7 +47,7 @@ public class FileDownloadManagerUtils {
         }
     }
 
-    public static void returnNotFound(final HttpServletResponse resp) throws IOException {
+    public static void returnNotFound404(final HttpServletResponse resp) throws IOException {
         resp.getWriter().println("Content not found");
         resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
