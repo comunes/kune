@@ -29,9 +29,8 @@ public class AddCollabMembersToContentMenuItem extends AddMembersToContentMenuIt
 
   @Inject
   public AddCollabMembersToContentMenuItem(final I18nTranslationService i18n,
-      final AddMembersToContentAction action, final ContentViewerOptionsMenu optionsMenu,
-      final CoreResources res) {
-    super(i18n.t("Share with collaborators"), SocialNetworkSubGroup.collabs, action, optionsMenu, res);
+      final AddMembersToContentAction action, final ContentViewerShareMenu menu, final CoreResources res) {
+    super(i18n.t("Share with collaborators"), SocialNetworkSubGroup.COLLABS, action, menu, res);
   }
 
 }

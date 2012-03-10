@@ -41,10 +41,10 @@ public class GroupSNDropController extends AbstractDropController {
     }
     if (widget instanceof BasicDragableThumb) {
       final String shortName = ((BasicDragableThumb) widget).getToken().getGroup();
-      if (subGroup.equals(SocialNetworkSubGroup.admins)) {
+      if (subGroup.equals(SocialNetworkSubGroup.ADMINS)) {
         sNClientUtils.changeToAdmin(shortName);
       }
-      if (subGroup.equals(SocialNetworkSubGroup.collabs)) {
+      if (subGroup.equals(SocialNetworkSubGroup.COLLABS)) {
         sNClientUtils.changeToCollab(shortName);
       }
     }

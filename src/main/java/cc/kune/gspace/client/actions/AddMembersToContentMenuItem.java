@@ -26,11 +26,10 @@ import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 public class AddMembersToContentMenuItem extends MenuItemDescriptor {
 
   public AddMembersToContentMenuItem(final String text, final SocialNetworkSubGroup subGroup,
-      final AddMembersToContentAction action, final ContentViewerOptionsMenu optionsMenu,
-      final CoreResources res) {
+      final AddMembersToContentAction action, final ContentViewerShareMenu menu, final CoreResources res) {
     super(action);
     action.setSubGroup(subGroup);
-    this.withText(text).withIcon(res.addGreen()).withParent(optionsMenu, false);
+    this.withText(text).withIcon(res.addParticipant()).withParent(menu, false);
   }
 
 }

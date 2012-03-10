@@ -165,7 +165,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public boolean addParticipants(final User user, final Long contentId, final Group group,
       final SocialNetworkSubGroup whichOnes) {
     final Set<String> members = new HashSet<String>();
-    GroupServerUtils.getAllUserMembersAsString(members, group, whichOnes);
+    if (whichOnes.equals(SocialNetworkSubGroup.PUBLIC)) {
+      members.add(participantUtils.getPublicParticipantId().toString());
+    } else {
+      GroupServerUtils.getAllUserMembersAsString(members, group, whichOnes);
+    }
     final Content content = finder.getContent(contentId);
     return addParticipants(user, content, members.toArray(new String[members.size()]));
   }

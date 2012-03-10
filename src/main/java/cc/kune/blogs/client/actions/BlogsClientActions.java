@@ -36,7 +36,9 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
+import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
@@ -63,18 +65,17 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<DelPostMenuItem> delContentMenuItem,
       final Provider<RefreshContentMenuItem> refresh, final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
+      final Provider<ContentViewerShareMenu> shareMenuContent,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
+      final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn, final BlogsNewMenu blogNewMenu,
       final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelBlogMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, blogNewMenu, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, postNewMenu, contents);
@@ -83,6 +84,11 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newBlogBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addPublicMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
@@ -93,6 +99,7 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
     newMenusRegistry.register(TYPE_BLOG, blogNewMenu.get());
     newMenusRegistry.register(TYPE_POST,
         (MenuDescriptor) postNewMenu.get().withText(i18n.t("Add Gadget")));

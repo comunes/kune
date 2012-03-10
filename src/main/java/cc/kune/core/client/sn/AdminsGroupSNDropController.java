@@ -15,7 +15,7 @@ public class AdminsGroupSNDropController extends GroupSNDropController {
   public AdminsGroupSNDropController(final KuneDragController dragController,
       final ContentServiceHelper contentService, final Session session,
       final I18nTranslationService i18n, final SocialNetServiceHelper sNClientUtils) {
-    super(dragController, SocialNetworkSubGroup.admins, contentService, session, i18n, sNClientUtils);
+    super(dragController, SocialNetworkSubGroup.ADMINS, contentService, session, i18n, sNClientUtils);
   }
 
 }

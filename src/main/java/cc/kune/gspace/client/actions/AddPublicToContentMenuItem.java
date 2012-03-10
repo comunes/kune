@@ -25,12 +25,12 @@ import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
 import com.google.inject.Inject;
 
-public class AddAllMembersToContentMenuItem extends AddMembersToContentMenuItem {
+public class AddPublicToContentMenuItem extends AddMembersToContentMenuItem {
 
   @Inject
-  public AddAllMembersToContentMenuItem(final I18nTranslationService i18n,
+  public AddPublicToContentMenuItem(final I18nTranslationService i18n,
       final AddMembersToContentAction action, final ContentViewerShareMenu menu, final CoreResources res) {
-    super(i18n.t("Share with all group members"), SocialNetworkSubGroup.ALL_GROUP_MEMBERS, action, menu, res);
+    super(i18n.t("Allow any person to edit this"), SocialNetworkSubGroup.PUBLIC, action, menu, res);
+    this.withIcon(res.world16());
   }
-
 }

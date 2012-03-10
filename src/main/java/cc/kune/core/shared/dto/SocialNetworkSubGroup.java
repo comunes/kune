@@ -27,9 +27,11 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  */
 public enum SocialNetworkSubGroup implements IsSerializable {
   /** The admins members only */
-  admins,
+  ADMINS,
   /** all members */
-  all,
+  ALL_GROUP_MEMBERS,
   /** The collabs members only */
-  collabs
+  COLLABS,
+  /** Public in general **/
+  PUBLIC
 }

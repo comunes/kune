@@ -55,11 +55,11 @@ public class GroupServerUtils {
   public static final Collection<Group> getGroupMembers(final Group ofGroup,
       final SocialNetworkSubGroup subGroup) {
     final Collection<Group> members = new LinkedHashSet<Group>();
-    if (subGroup.equals(SocialNetworkSubGroup.admins) || subGroup.equals(SocialNetworkSubGroup.all)) {
+    if (subGroup.equals(SocialNetworkSubGroup.ADMINS) || subGroup.equals(SocialNetworkSubGroup.ALL_GROUP_MEMBERS)) {
       final Set<Group> admins = ofGroup.getSocialNetwork().getAccessLists().getAdmins().getList();
       members.addAll(admins);
     }
-    if (subGroup.equals(SocialNetworkSubGroup.collabs) || subGroup.equals(SocialNetworkSubGroup.all)) {
+    if (subGroup.equals(SocialNetworkSubGroup.COLLABS) || subGroup.equals(SocialNetworkSubGroup.ALL_GROUP_MEMBERS)) {
       final Set<Group> collabs = ofGroup.getSocialNetwork().getAccessLists().getEditors().getList();
       members.addAll(collabs);
     }

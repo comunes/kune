@@ -128,4 +128,7 @@ public interface CommonResources extends ClientBundle {
 
   @Source("unchecked.png")
   ImageResource unChecked();
+
+  @Source("icons/world-16.png")
+  ImageResource world16();
 }

@@ -6,6 +6,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -25,10 +26,16 @@ public class ContentServiceHelper {
 
   public void addParticipants(final StateToken token, final SocialNetworkSubGroup subGroup) {
     contentService.get().addParticipants(session.getUserHash(), token,
-        session.getCurrentGroupShortName(), subGroup, new AsyncCallbackSimple<Boolean>() {
+        session.getCurrentGroupShortName(), subGroup, new AsyncCallback<Boolean>() {
+          @Override
+          public void onFailure(final Throwable caught) {
+            NotifyUser.important(i18n.t("Seems that the list of partipants were added partially. Please, retry"));
+          }
+
           @Override
           public void onSuccess(final Boolean result) {
-            NotifyUser.info(result ? i18n.t("Shared with members")
+            NotifyUser.info(result ? subGroup.equals(SocialNetworkSubGroup.PUBLIC) ? i18n.t("Shared with general public. Now anyone can participate")
+                : i18n.t("Shared with members")
                 : i18n.t("All these members are already partipating"));
           }
         });

@@ -539,6 +539,9 @@ public interface CoreResources extends CommonResources {
   @Source("wave-icon.png")
   ImageResource waveIcon();
 
+  @Source("icons/add-participant.png")
+  ImageResource addParticipant();
+
 
 
 }

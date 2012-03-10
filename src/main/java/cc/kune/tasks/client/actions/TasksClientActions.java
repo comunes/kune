@@ -36,7 +36,9 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
+import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
@@ -63,20 +65,19 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<MarkAsNotDoneTaskMenuItem> marksAsNotDoneMenuItem,
       final Provider<RefreshContentMenuItem> refresh,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
+      final Provider<ContentViewerShareMenu> shareMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
+      final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final TasksFolderNewMenu taskFolderNewMenu, final TasksNewMenu taskNewMenu,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final Provider<ChatAboutContentBtn> chatAbout,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskIconBtn, all);
     // actionsRegistry.addAction(ActionGroups.TOOLBAR, taskFolderNewMenu,
@@ -87,6 +88,11 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addPublicMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
@@ -101,6 +107,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, taskFolderNewMenu.get());

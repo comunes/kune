@@ -60,6 +60,10 @@ public class ParticipantUtils {
     return atDomain;
   }
 
+  public ParticipantId getPublicParticipantId() {
+    return of(getAtDomain());
+  }
+
   public ParticipantId getSuperAdmin() {
     return superAdmin;
   }

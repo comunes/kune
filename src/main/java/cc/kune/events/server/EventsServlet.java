@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -75,6 +76,9 @@ public class EventsServlet extends HttpServlet {
             events.add(vEvent);
           } catch (final Exception e) {
             LOG.warn("Invalid appointments in " + token, e);
+            for (final Entry<String, String> val : props.entrySet()) {
+              LOG.warn(String.format("Prop: %s, value: %s", val.getKey(), val.getValue()));
+            }
           }
         }
       } else {

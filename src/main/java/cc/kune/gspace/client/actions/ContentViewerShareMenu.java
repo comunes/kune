@@ -19,18 +19,21 @@
  */
 package cc.kune.gspace.client.actions;
 
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
 import com.google.inject.Inject;
 
-public class AddAllMembersToContentMenuItem extends AddMembersToContentMenuItem {
+public class ContentViewerShareMenu extends MenuDescriptor {
+
+  private static final String ID = "k-cnt-viewer-share-menu";
 
   @Inject
-  public AddAllMembersToContentMenuItem(final I18nTranslationService i18n,
-      final AddMembersToContentAction action, final ContentViewerShareMenu menu, final CoreResources res) {
-    super(i18n.t("Share with all group members"), SocialNetworkSubGroup.ALL_GROUP_MEMBERS, action, menu, res);
+  public ContentViewerShareMenu(final CoreResources res, final I18nTranslationService i18n) {
+    super();
+    this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
+        res.world16()).withStyles(ActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID);
   }
 
 }

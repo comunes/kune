@@ -31,7 +31,9 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
+import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 
@@ -51,9 +53,11 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<OpenMeetingMenuItem> openContentMenuItem,
       final Provider<DelMeetingMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
+      final Provider<ContentViewerShareMenu> shareMenuContent,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
+      final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<Calendar1DayViewSelectBtn> cal1DayBtn,
       final Provider<Calendar3DaysViewSelectBtn> cal3DaysBtn,
@@ -67,9 +71,6 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, goToday, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, calPrevBtn, containers);
@@ -81,6 +82,11 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, export, all);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addPublicMenuItem, contents);
     // On over calendar menu
     actionsRegistry.addAction(ActionGroups.TOOLBAR, onOverMenu, containers);
 

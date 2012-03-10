@@ -29,9 +29,8 @@ public class AddAdminMembersToContentMenuItem extends AddMembersToContentMenuIte
 
   @Inject
   public AddAdminMembersToContentMenuItem(final I18nTranslationService i18n,
-      final AddMembersToContentAction action, final ContentViewerOptionsMenu optionsMenu,
-      final CoreResources res) {
-    super(i18n.t("Share with admins"), SocialNetworkSubGroup.admins, action, optionsMenu, res);
+      final AddMembersToContentAction action, final ContentViewerShareMenu menu, final CoreResources res) {
+    super(i18n.t("Share with admins"), SocialNetworkSubGroup.ADMINS, action, menu, res);
   }
 
 }

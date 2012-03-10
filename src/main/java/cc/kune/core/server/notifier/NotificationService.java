@@ -36,14 +36,14 @@ public class NotificationService {
   public void notifyGroup(final Group groupToNotify, final Group groupSender, final String subject,
       final String message) {
     final Set<User> members = new HashSet<User>();
-    GroupServerUtils.getAllUserMembers(members, groupToNotify, SocialNetworkSubGroup.all);
+    GroupServerUtils.getAllUserMembers(members, groupToNotify, SocialNetworkSubGroup.ALL_GROUP_MEMBERS);
     notifyToAll(groupSender, subject, message, members);
   }
 
   public void notifyGroupAdmins(final Group groupToNotify, final Group groupSender,
       final String subject, final String message) {
     final Set<User> adminMembers = new HashSet<User>();
-    GroupServerUtils.getAllUserMembers(adminMembers, groupToNotify, SocialNetworkSubGroup.admins);
+    GroupServerUtils.getAllUserMembers(adminMembers, groupToNotify, SocialNetworkSubGroup.ADMINS);
     notifyToAll(groupSender, subject, message, adminMembers);
   }
 

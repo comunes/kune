@@ -15,7 +15,7 @@ public class CollabsGroupSNDropController extends GroupSNDropController {
   public CollabsGroupSNDropController(final KuneDragController dragController,
       final ContentServiceHelper contentService, final Session session,
       final I18nTranslationService i18n, final SocialNetServiceHelper sNClientUtils) {
-    super(dragController, SocialNetworkSubGroup.collabs, contentService, session, i18n, sNClientUtils);
+    super(dragController, SocialNetworkSubGroup.COLLABS, contentService, session, i18n, sNClientUtils);
   }
 
 }

@@ -28,7 +28,7 @@ public class AbstractEditorsMenu extends MenuDescriptor {
 
   public AbstractEditorsMenu(final AccessRightsClientManager rightsManager) {
     super();
-    this.withStyles("k-button, k-btn, k-5corners, k-def-docbtn, k-fl");
+    this.withStyles(ActionStyles.MENU_BTN_STYLE_LEFT);
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override
       public void onAccessRightsChanged(final AccessRightsChangedEvent event) {

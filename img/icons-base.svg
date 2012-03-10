@@ -14,7 +14,7 @@
    height="297mm"
    id="svg21019"
    sodipodi:version="0.32"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="icons-base.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/tmp/buttons.png"
@@ -35,8 +35,8 @@
      inkscape:current-layer="layer1"
      inkscape:window-width="1078"
      inkscape:window-height="897"
-     inkscape:window-x="0"
-     inkscape:window-y="947"
+     inkscape:window-x="-40"
+     inkscape:window-y="957"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -1914,7 +1914,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -4695,11 +4695,11 @@
     <image
        sodipodi:absref="/home/vjrj/proyectos/dev/kune/trunk/img/icons/lock_break.png"
        xlink:href="icons/lock_break.png"
-       width="16"
-       height="16"
-       id="image2972"
+       y="450.82797"
        x="330.84604"
-       y="450.82797" />
+       id="image2972"
+       height="16"
+       width="16" />
     <use
        x="0"
        y="0"
@@ -4790,12 +4790,12 @@
     <image
        sodipodi:absref="/home/vjrj/proyectos/dev/kune/trunk/img/icons/lock_break.png"
        xlink:href="icons/lock_break.png"
-       transform="scale(-1,1)"
-       width="16"
-       height="16"
-       id="image3958"
+       y="432.36218"
        x="-371"
-       y="432.36218" />
+       id="image3958"
+       height="16"
+       width="16"
+       transform="scale(-1,1)" />
     <g
        id="g3962"
        transform="translate(-43.509019,-21.462476)">
@@ -5711,5 +5711,34 @@
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/java/cc/kune/core/client/resources/nav/task.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <image
+       y="330.36218"
+       x="321"
+       id="image11985"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAYCAYAAAB0kZQKAAAABHNCSVQICAgIfAhkiAAAA+JJREFU
+SIm9lk9II1ccx78vzCTjTCaaxJiooLsxQaMDWyqi0oNFe+mp0D/soYc97NJLRaQXL7304MHSgkhv
+28Me+ufc0kOhFioU6s0ENGijqIkRMpMYjZOZTEze66FE1t2oma7bDzx47/H7vff9vfd+jx/BNSST
+yX5d1z83TfPtSqXSWyqV2q6zbYbH4zEFQciKorg2Njb25CZb0mzz09PTZ6qqTgmCQAKBAHp6euD1
+euF0OkHISy4vYZomNE3D8fExNE0DpZR1dXWteTyeR4qipG8UEY/HHx4dHX0nyzKnKAp8Pl8LMd8M
+Ywz5fB6JRAKU0ove3t5PFEV51lREPB5/eHBw8KOiKGRgYACMMTDGXllEg4uLC6RSKezv72N4eHgh
+Eol8eUVEMpns39nZ2R8cHCSxWAyU0jsV8DxbW1vIZrMYHx9/1+/3/woAHACoqvpbZ2cnicViqNfr
+oJS+FgEAEI1Gkc/nsbu7+zNjLEAIOXNsbGy8VSwWoyMjI6CUolargVL62prD4cDQ0BDS6TRvWda3
+AMCZpvmZLMvo6OiAZVm2rmF+fh4AsLy8bOs0vF4vRFFEOp3+gDHWwRmGMREKhUApRb1et7VYA57n
+YVmWLZ9AIABVVWk0Gn3EmabZFQwGL6/hv8AYs+3r8/mwvb1NAExxlUqFkyQJtVrtlTLCrq8oijBN
+0wHgAccYA8/zKJfLty60sLDQdH52dvbKeGlp6VYRPM83uvc4AJdpeVd/gyiK0HX9RptarXbZ5wRB
+qOm6zhFCbr3XxcVFyLJ8OZ6bmwMArKysXLFr5Y2USiW4XK4aAAcnCIKmqmp3d3d3S9lRKpVszV9H
+sViEJEklAKcOl8v1VzabBcdxtj+eBo3I7bRCoQC/368BSHA8z3+dz+ffr1ar/1uKlstlGIaBcDjM
+A/iDAMDq6uq+JEn37t+/f+XBtILX6wXw7/G2yubmJnieT09PT/cAiHAAIIrix7lc7s/29nYiSVJL
+hUuDQqFgS7SqqjAMg83MzJwA+J0Qcni52/r6+jeZTObTSCRyJ8XMizDGkMlkoGkaGx0dfdrX1/ch
+gDeviACAZDL5NJVKPRFFEaFQCG63+04E6LqOdDoNy7LY5OTkL6FQaBLAO4SQBNCkxiwUCh8dHh7+
+sLe3xwmCALfbDVmWIYpiSzUmpRTVahXlchnn5+fQdR31ep35fL6/JyYmDJfL1Q9guiGgqQgAYIy1
+G4bxlaZpj3O5XO3k5ITous7Zib6tra3idrvPgsHgWTgcdjmdzjYA3wP4ghBy9rztjWExxtoBvAdg
+CsAbAB7YEQIgASAOYA3ATy9u3uAfDs9TNu1kEp0AAAAASUVORK5CYII=
+"
+       height="24"
+       width="33"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/resources/icons/add-participant.png"
+       inkscape:export-xdpi="45"
+       inkscape:export-ydpi="45" />
   </g>
 </svg>

@@ -101,8 +101,8 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
       if (!AccessRightsUtils.correctMember(user, group, AccessRol.Editor)) {
         throw new AccessViolationException("You cannot write because you are not a member");
       }
-      GroupServerUtils.getAllUserMembers(toList, group, onlyToAdmins ? SocialNetworkSubGroup.admins
-          : SocialNetworkSubGroup.all);
+      GroupServerUtils.getAllUserMembers(toList, group, onlyToAdmins ? SocialNetworkSubGroup.ADMINS
+          : SocialNetworkSubGroup.ALL_GROUP_MEMBERS);
     }
     return KuneWaveServerUtils.getUrl(waveService.createWave(title, message,
         KuneWaveService.DO_NOTHING_CBACK, participantUtils.listFrom(toList)));

@@ -35,6 +35,8 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
+import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import cc.kune.gspace.client.actions.TutorialContainerBtn;
@@ -59,11 +61,13 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<OpenFolderMenuItem> openContentMenuItem,
       final Provider<RefreshListMenuItem> refresh, final Provider<SubscribeToListBtn> subscribeBtn,
       final Provider<OptionsListMenu> optionsMenuContent,
+      final Provider<ContentViewerShareMenu> shareMenuContent,
       final Provider<ShowSubscribersOfListBtn> subscribersCount,
       final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
+      final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final Provider<SetListOpenessMenuItem> listOpenessMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn, final ListsNewMenu listNewMenu,
       final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
@@ -71,9 +75,6 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newListBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listNewMenu, containersNoRoot);
@@ -87,6 +88,11 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, addPublicMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribersCount, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
@@ -96,6 +102,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
     newMenusRegistry.register(TYPE_LIST, listNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, listNewMenu.get());
     newMenusRegistry.register(TYPE_POST,
