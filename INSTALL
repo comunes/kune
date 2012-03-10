@@ -245,11 +245,28 @@ In Server > Server Settings > Registration & Login > Inband Account Registration
 In Server > Server Settings > Registration & Login > Change Password > Disabled
 so this will not conflict with kune users management.
 
-Change in 'Server > Server Manager > System Properties':
-  provider.auth.className to org.jivesoftware.openfire.auth.JDBCAuthProvider instead of
-    org.jivesoftware.openfire.auth.DefaultAuthProvider
-  provider.user.className to org.jivesoftware.openfire.user.JDBCUserProvider instead of
-    org.jivesoftware.openfire.user.DefaultUserProvider
+===Openfire auth via Kune===
+
+Download from http://kune.cc/downloads/openfireauth model-VERSION.jar and kune-openfireauth-VERSION.jar and copy to /usr/share/openfire/lib as root. Set the correct owner:
+
+chown openfire:openfire /usr/share/openfire/lib/model-VERSION.jar
+chown openfire:openfire /usr/share/openfire/lib/kune-openfireauth-VERSION.jar
+
+(do something equivalent in Windows systems in the openfire folder).
+
+Execute this:
+
+$ mysql -p -u kune kune_openfire # or mysql -p -u root
+DELETE FROM `ofProperty` WHERE name='provider.auth.className';
+DELETE FROM `ofProperty` WHERE name='hybridAuthProvider.primaryProvider.className';
+DELETE FROM `ofProperty` WHERE name='hybridAuthProvider.secondaryProvider.className';
+DELETE FROM `ofProperty` WHERE name='hybridAuthProvider.tertiaryProvider.className';
+INSERT INTO `ofProperty` VALUES ('provider.auth.className','org.jivesoftware.openfire.auth.HybridAuthProvider');
+INSERT INTO `ofProperty` VALUES('hybridAuthProvider.primaryProvider.className','cc.kune.core.server.auth.openfire.KuneAuthProvider');
+INSERT INTO `ofProperty` VALUES('hybridAuthProvider.secondaryProvider.className','org.jivesoftware.openfire.auth.JDBCAuthProvider');
+INSERT INTO `ofProperty` VALUES('hybridAuthProvider.tertiaryProvider.className','org.jivesoftware.openfire.auth.DefaultAuthProvider');
+
+Alternatively you can do this via 'Server > Server Manager > System Properties'.
 
 This is used to set the database of users of openfire to kune users database table. When you do that you have to follow the next step (or you will get authentication problems).
 
@@ -257,7 +274,6 @@ Also in 'Server > Server Manager > System Properties' set (verify that the mysql
 
 jdbcProvider.driver = com.mysql.jdbc.Driver
 jdbcProvider.connectionString = jdbc:mysql://localhost/kune_dev?user=kune&password=db4kune&useUnicode=true&characterEncoding=utf-8
-provider.auth.className = org.jivesoftware.openfire.auth.JDBCAuthProvider
 provider.user.className = org.jivesoftware.openfire.user.JDBCUserProvider
 jdbcAuthProvider.passwordSQL = SELECT password FROM kune_dev.kusers WHERE shortName=?
 jdbcAuthProvider.passwordType = plain
@@ -283,9 +299,6 @@ Or, alternatively (if is more easy for you), add these lines to conf/openfire.xm
     <connectionString>jdbc:mysql://localhost/kune_dev?user=kune&amp;password=db4kune&amp;useUnicode=true&amp;characterEncoding=utf-8</connectionString>
   </jdbcProvider>
   <provider>
-    <auth>
-      <className>org.jivesoftware.openfire.auth.JDBCAuthProvider</className>
-    </auth>
     <user>
       <className>org.jivesoftware.openfire.user.JDBCUserProvider</className>
     </user>
