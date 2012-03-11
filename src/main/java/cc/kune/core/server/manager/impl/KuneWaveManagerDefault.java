@@ -20,13 +20,17 @@
 package cc.kune.core.server.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.waveprotocol.wave.model.wave.ParticipantId;
+import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.access.AccessRightsUtils;
 import cc.kune.core.server.manager.KuneWaveManager;
 import cc.kune.core.server.manager.UserManager;
@@ -44,6 +48,7 @@ import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.wave.api.Participants;
 
 @Singleton
 public class KuneWaveManagerDefault implements KuneWaveManager {
@@ -106,5 +111,21 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     }
     return KuneWaveServerUtils.getUrl(waveService.createWave(title, message,
         KuneWaveService.DO_NOTHING_CBACK, participantUtils.listFrom(toList)));
+  }
+
+  @Override
+  public String writeToParticipants(final String author, final String from, final String waveId) {
+    try {
+      final Participants parts = waveService.getParticipants(
+          JavaWaverefEncoder.decodeWaveRefFromPath(waveId), author);
+      final List<String> list = new ArrayList<String>();
+      // From the first in the list
+      list.add(from);
+      list.addAll(Arrays.asList(parts.toArray(new String[parts.size()])));
+      return KuneWaveServerUtils.getUrl(waveService.createWave("", KuneWaveService.DO_NOTHING_CBACK,
+          participantUtils.listFrom(list)));
+    } catch (final InvalidWaveRefException e) {
+      throw new DefaultException("Cannot access to the wave to copy");
+    }
   }
 }

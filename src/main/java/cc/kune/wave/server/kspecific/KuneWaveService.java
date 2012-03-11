@@ -42,6 +42,7 @@ public interface KuneWaveService {
   };
   public static final String NO_MESSAGE = "";
   public static final String NO_TITLE = "";
+  public static final WaveRef NO_WAVE_TO_COPY = null;
   public static final URL WITHOUT_GADGET = null;
 
   void addGadget(WaveRef waveName, String author, URL gadgetUrl);
@@ -62,11 +63,11 @@ public interface KuneWaveService {
   WaveRef createWave(String title, String message, SimpleArgCallback<WaveRef> onCreate, URL gadgetUrl,
       ParticipantId... participantsArray);
 
-  WaveRef createWave(String title, String message, String waveIdToCopy,
+  WaveRef createWave(String title, String message, WaveRef waveIdToCopy,
       SimpleArgCallback<WaveRef> onCreate, URL gadgetUrl, Map<String, String> gadgetProperties,
       ParticipantId... participantsArray);
 
-  WaveRef createWave(String title, String message, String waveIdToCopy,
+  WaveRef createWave(String title, String message, WaveRef waveIdToCopy,
       SimpleArgCallback<WaveRef> onCreate, URL gadgetUrl, ParticipantId... participantsArray);
 
   void delParticipants(WaveRef waveName, String whoDel, String... participants);

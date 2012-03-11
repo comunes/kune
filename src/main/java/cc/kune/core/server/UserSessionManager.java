@@ -56,12 +56,12 @@ public class UserSessionManager implements UsersOnline {
     return getUserSession().getHash();
   }
 
-  private String getUserLoggedShortName() {
-    return getUser().getShortName();
-  }
-
   public User getUser() {
     return manager.find(getUserSession().getUserId());
+  }
+
+  private String getUserLoggedShortName() {
+    return getUser().getShortName();
   }
 
   private UserSession getUserSession() {
@@ -81,8 +81,9 @@ public class UserSessionManager implements UsersOnline {
     return !isUserLoggedIn();
   }
 
-  public void login(final Long userId, final String newUserHash) {
+  public void login(final Long userId, final String name, final String newUserHash) {
     getUserSession().setUserId(userId);
+    getUserSession().setUserName(name);
     getUserSession().setHash(newUserHash);
     updateLoggedUser();
   }
@@ -92,6 +93,7 @@ public class UserSessionManager implements UsersOnline {
       logins.remove(getUserLoggedShortName());
     }
     getUserSession().setUserId(null);
+    getUserSession().setUserName(null);
     getUserSession().setHash(null);
   }
 

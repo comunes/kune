@@ -55,6 +55,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
   boolean addParticipants(User user, Long contentId, Group group, SocialNetworkSubGroup whichOnes);
 
+  Content copyContent(User user, Container container, Content contentToCopy);
+
   Content createGadget(User user, Container container, String gadgetname, String typeIdChild,
       String title, String body, Map<String, String> gadgetProperties);
 

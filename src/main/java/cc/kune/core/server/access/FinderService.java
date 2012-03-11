@@ -29,6 +29,8 @@ import cc.kune.domain.User;
 
 public interface FinderService {
 
+  Container getContainer(Long folderId) throws DefaultException;
+
   Content getContent(Long contentId) throws DefaultException;
 
   Content getContent(StateToken token, Group defaultGroup) throws DefaultException;

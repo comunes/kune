@@ -59,8 +59,8 @@ public class CreationServiceDefault implements CreationService {
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeId);
     final URL gagdetUrl = tool instanceof ServerWaveTool ? ((ServerWaveTool) tool).getGadgetUrl()
         : KuneWaveService.WITHOUT_GADGET;
-    final Content content = contentManager.createContent(title, body, user, container, typeId,
-        gagdetUrl, Collections.<String, String> emptyMap());
+    final Content content = contentManager.createContent(title, body, KuneWaveService.NO_WAVE_TO_COPY,
+        user, container, typeId, gagdetUrl, Collections.<String, String> emptyMap());
     tool.onCreateContent(content, container);
     return content;
   }

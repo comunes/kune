@@ -36,9 +36,11 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
+import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.xml.XMLKuneClientActions;
 import cc.kune.core.client.actions.xml.XMLWaveExtension;
 import cc.kune.core.client.errors.DefaultException;
@@ -86,6 +88,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   private final ContainerFinder containerFinder;
   private final ContentFinder contentFinder;
   private final FinderService finder;
+  private final I18nTranslationService i18n;
   private final KuneWaveService kuneWaveManager;
   private final I18nLanguageFinder languageFinder;
   private final Log LOG = LogFactory.getLog(ContentManagerDefault.class);
@@ -100,7 +103,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
       final FinderService finder, final UserFinder userFinder, final I18nLanguageFinder languageFinder,
       final TagUserContentManager tagManager, final KuneWaveService kuneWaveManager,
       final ParticipantUtils participantUtils, final ServerToolRegistry tools,
-      final XMLActionReader xmlActionReader) {
+      final XMLActionReader xmlActionReader, final I18nTranslationService i18n) {
     super(provider, Content.class);
     this.contentFinder = contentFinder;
     this.containerFinder = containerFinder;
@@ -111,6 +114,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     this.kuneWaveManager = kuneWaveManager;
     this.participantUtils = participantUtils;
     this.tools = tools;
+    this.i18n = i18n;
     this.actions = xmlActionReader.getActions();
   }
 
@@ -174,14 +178,27 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return addParticipants(user, content, members.toArray(new String[members.size()]));
   }
 
-  protected Content createContent(final String title, final String body, final User author,
-      final Container container, final String typeId) {
-    return createContent(title, body, author, container, typeId, KuneWaveService.WITHOUT_GADGET,
-        Collections.<String, String> emptyMap());
+  @Override
+  public Content copyContent(final User user, final Container destination, final Content contentToCopy) {
+    try {
+      return createContent(
+          findInexistentTitle(destination, i18n.t("Copy of [%s]", contentToCopy.getTitle())), "",
+          JavaWaverefEncoder.decodeWaveRefFromPath(contentToCopy.getWaveId()), user, destination,
+          contentToCopy.getTypeId(), KuneWaveService.WITHOUT_GADGET,
+          Collections.<String, String> emptyMap());
+    } catch (final InvalidWaveRefException e) {
+      throw new DefaultException("Error copying wave", e);
+    }
   }
 
   protected Content createContent(final String title, final String body, final User author,
-      final Container container, final String typeId, final URL gadgetUrl,
+      final Container container, final String typeId) {
+    return createContent(title, body, KuneWaveService.NO_WAVE_TO_COPY, author, container, typeId,
+        KuneWaveService.WITHOUT_GADGET, Collections.<String, String> emptyMap());
+  }
+
+  protected Content createContent(final String title, final String body, final WaveRef waveIdToCopy,
+      final User author, final Container container, final String typeId, final URL gadgetUrl,
       final Map<String, String> gadgetProperties) {
     FilenameUtils.checkBasicFilename(title);
     final String newtitle = findInexistentTitle(container, title);
@@ -196,7 +213,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     // Duplicate in StateServiceDefault
     if (newContent.isWave()) {
       final String authorName = author.getShortName();
-      final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body,
+      final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body, waveIdToCopy,
           KuneWaveService.DO_NOTHING_CBACK, gadgetUrl, gadgetProperties, participantUtils.of(authorName));
       newContent.setWaveId(JavaWaverefEncoder.encodeToUriPathSegment(waveRef));
       newContent.setModifiedOn((new Date()).getTime());
@@ -213,8 +230,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     final String toolName = container.getToolName();
     final ServerTool tool = tools.get(toolName);
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeIdChild);
-    final Content content = createContent(title, body, user, container, typeIdChild,
-        getGadgetUrl(gadgetname), gadgetProperties);
+    final Content content = createContent(title, body, KuneWaveService.NO_WAVE_TO_COPY, user, container,
+        typeIdChild, getGadgetUrl(gadgetname), gadgetProperties);
     tool.onCreateContent(content, container);
     return content;
   }

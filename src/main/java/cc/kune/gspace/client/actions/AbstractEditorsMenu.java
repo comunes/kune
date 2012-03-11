@@ -19,15 +19,14 @@
  */
 package cc.kune.gspace.client.actions;
 
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.events.AccessRightsChangedEvent;
 import cc.kune.core.client.events.AccessRightsChangedEvent.AccessRightsChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
 
-public class AbstractEditorsMenu extends MenuDescriptor {
+public class AbstractEditorsMenu extends MenuLoggedDescriptor {
 
   public AbstractEditorsMenu(final AccessRightsClientManager rightsManager) {
-    super();
+    super(rightsManager);
     this.withStyles(ActionStyles.MENU_BTN_STYLE_LEFT);
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override

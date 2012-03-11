@@ -30,6 +30,7 @@ public class UserSession implements Serializable {
 
   private String userHash;
   private Long userId;
+  private String userName;
 
   public UserSession() {
   }
@@ -42,12 +43,20 @@ public class UserSession implements Serializable {
     return userId;
   }
 
+  public String getUserName() {
+    return userName;
+  }
+
   public void setHash(final String hash) {
     this.userHash = hash;
   }
 
   public void setUserId(final Long userId) {
     this.userId = userId;
+  }
+
+  public void setUserName(final String userName) {
+    this.userName = userName;
   }
 
 }

@@ -29,4 +29,6 @@ public interface KuneWaveManager {
 
   String writeTo(User user, String groupName, boolean onlyToAdmins, String title, String content);
 
+  String writeToParticipants(String author, String from, String waveId);
+
 }

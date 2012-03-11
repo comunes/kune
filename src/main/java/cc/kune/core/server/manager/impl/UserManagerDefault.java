@@ -31,6 +31,8 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
@@ -42,6 +44,8 @@ import org.waveprotocol.box.server.authentication.PasswordDigest;
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.robots.agent.RobotAgentUtil;
+import org.waveprotocol.wave.model.id.InvalidIdException;
+import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
@@ -91,6 +95,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
 
+  public static final Log LOG = LogFactory.getLog(UserManagerDefault.class);
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;
   private final GroupManager groupManager;
@@ -259,25 +264,32 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       throw e;
     }
     WaveRef welcome = null;
-    try {
-      final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
-          passwdDigest.getSalt(), language, country, tz);
+    final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
+        passwdDigest.getSalt(), language, country, tz);
 
-      final String defWave = properties.getWelcomewave();
-      groupManager.createUserGroup(user, wantPersonalHomepage);
-      if (defWave != null) {
-        welcome = kuneWaveManager.createWave(
-            ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
-                properties.getDefaultSiteName()), "", defWave, new SimpleArgCallback<WaveRef>() {
-              @Override
-              public void onCallback(final WaveRef arg) {
-                // Is this necessary? try to remove (used when we were setting
-                // the def
-                // content
-                // contentManager.save(userGroup.getDefaultContent());
-                askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
-              }
-            }, null, participantUtils.of(properties.getAdminShortName()), participantUtils.of(shortName));
+    final String defWave = properties.getWelcomewave();
+    groupManager.createUserGroup(user, wantPersonalHomepage);
+    try {
+      try {
+        if (defWave != null) {
+          final WaveId copyWaveId = WaveId.ofChecked(participantUtils.getDomain(), defWave);
+          welcome = kuneWaveManager.createWave(
+              ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
+                  properties.getDefaultSiteName()), "", WaveRef.of(copyWaveId),
+              new SimpleArgCallback<WaveRef>() {
+                @Override
+                public void onCallback(final WaveRef arg) {
+                  // Is this necessary? try to remove (used when we were setting
+                  // the def
+                  // content
+                  // contentManager.save(userGroup.getDefaultContent());
+                  askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
+                }
+              }, null, participantUtils.of(properties.getAdminShortName()),
+              participantUtils.of(shortName));
+        }
+      } catch (final InvalidIdException e) {
+        LOG.error("Cannot create a welcome wave", e);
       }
       return user;
     } catch (final RuntimeException e) {

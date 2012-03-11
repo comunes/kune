@@ -160,11 +160,6 @@ http://www.thinkplexx.com/learn/howto/maven2/debug/fixing-too-many-open-files-ma
 *** Add -startupUrl to your GWT Run launch with /ws/?locale=en&log_level=INFO (or similar)
 *** When you compile/run gwt web-app from eclipse, select target/kune-CURRENT-VERSION as War directory selection
 *** src/main/webapp in GWTDesigner???
-** new UI library (gwt-ext is dead)
-- mosaic, 
-- gtx
-- smartclient
-- 
 ** Documentation
    CLOSED: [2012-03-04 dom 22:51] 
 *** Windows users
@@ -219,49 +214,6 @@ avatar (des) ------------> Widget
          action (act)
 
 lista de (des) ---> lista de views
-
-** <s> Changes in UI
-   - [ ] 2:21 (video) add member dialog with confirmation (other way to do confirmation)
-   - [ ] Leave this group, with green icon
-   - [ ] 2.23 "page 1 de 1"
-   - [ ] "Those who can view..." too long
-   - [ ] cute menus ala  https://addons.mozilla.org/es-ES/firefox/addon/1330
-   - [ ] 2:27 (?) icon ...
-   - [ ] 2:35 "Start a chat with this member"-> chat! and other long items
-   - [ ] 2.41 long submenus...
-   - [ ] scroll of licenses
-** maven-gwt problem (using another plugin from codehaus)	    :ARCHIVE:
-   mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:compile
-   and so on.
-   More info:
-   http://code.google.com/p/gwt-maven/wiki/M2FAQ
-** vjrj use xwiki maven repo
-   http://maven.xwiki.org/releases/com/xpn/xwiki/platform/xwiki-web-wysiwyg/1.8-rc-2/
-** vjrj <v> better RTE						    :ARCHIVE:
-*** Pending
-**** Insert/Edit link
-***** use cases
-     ^<a href="http://example.com">sample</a>^   --- Parse and edit
-     <a href="http://example.com">s^ample</a>    --- Parse and edit
-     <a href="http://example.com">s^amp^le</a>   --- Parse and edit
-     <a href="http://example.com">s^a<em>kk</em>mp^le</a>   --- Parse, get contains and edit
-     ^some text <a href="http://example.com">samp^le</a>   --- new link with get inner content?
-**** bidi support
-**** images (local/remote) with preview
-**** youtube videos/podcasts
-**** File > Rename (F2)
-**** Insert > Page break (for printing)
-**** Shortcut to fonts (Ctrl + numbers)
-*** Links
-   http://www.ongwt.com/post/2009/01/08/XWiki-:-Wysiwyg-editor-based-on-GWT
-   http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/samples/internet/ie55/EditRegions/default.asp
-   http://www.mozilla.org/editor/midas-spec.html
-   http://mozilla.org/editor/midasdemo/
-** vjrj <v> GWT 1.6						    :ARCHIVE:
-   http://code.google.com/intl/es/webtoolkit/doc/1.6/ReleaseNotes_1_6.html#Upgrading
-   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/3e7e6cc3b35ad98a
-   http://code.google.com/p/google-web-toolkit/wiki/WAR_Design_1_6
-   http://www.gwt-ext.com/forum/viewtopic.php?f=5&p=12038
 ** TODO <v> User preferences storing
 *** links:
 **** http://download.oracle.com/javase/1.4.2/docs/guide/lang/preferences.html (Preferences API)

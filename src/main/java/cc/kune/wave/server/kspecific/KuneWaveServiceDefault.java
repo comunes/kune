@@ -68,10 +68,8 @@ import com.google.wave.api.Element;
 import com.google.wave.api.ElementType;
 import com.google.wave.api.FormElement;
 import com.google.wave.api.Gadget;
-import com.google.wave.api.Image;
 import com.google.wave.api.JsonRpcConstant.ParamsProperty;
 import com.google.wave.api.JsonRpcResponse;
-import com.google.wave.api.Line;
 import com.google.wave.api.OperationQueue;
 import com.google.wave.api.OperationRequest;
 import com.google.wave.api.OperationRequest.Parameter;
@@ -95,7 +93,6 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   private static final String NO_ANNOTATION_KEY = null;
   private static final List<BundledAnnotation> NO_BUNDLED_ANNOTATIONS = Collections.emptyList();
   private static final List<String> NO_VALUES = Collections.<String> emptyList();
-  private static final String NO_WAVE_TO_COPY = null;
 
   /**
    * 
@@ -134,14 +131,16 @@ public class KuneWaveServiceDefault implements KuneWaveService {
         result = new FormElement(type, entry.getValue().getProperties());
       } else if (type == ElementType.GADGET) {
         result = new Gadget(entry.getValue().getProperties());
-      } else if (type == ElementType.IMAGE) {
-        result = new Image(entry.getValue().getProperties());
-      } else if (type == ElementType.LINE) {
-        result = new Line(entry.getValue().getProperties());
-      } else {
-        result = new Element(type, entry.getValue().getProperties());
+        // } else if (type == ElementType.IMAGE) {
+        // result = new Image(entry.getValue().getProperties());
+        // } else if (type == ElementType.LINE) {
+        // result = new Line(entry.getValue().getProperties());
+        // } else {
+        // result = new Element(type, entry.getValue().getProperties());
       }
-      toBlip.append(result);
+      if (result != null) {
+        toBlip.append(result);
+      }
     }
   }
 
@@ -249,7 +248,7 @@ public class KuneWaveServiceDefault implements KuneWaveService {
 
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
-      final String waveIdToCopy, final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
+      final WaveRef waveIdToCopy, final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
       final Map<String, String> gadgetProperties, @Nonnull final ParticipantId... participantsArray) {
     String newWaveId = null;
     String newWaveletId = null;
@@ -264,17 +263,16 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     final Blip rootBlip = newWavelet.getRootBlip();
     rootBlip.append(new com.google.wave.api.Markup(message).getText());
 
-    if (waveIdToCopy != NO_WAVE_TO_COPY && TextUtils.notEmpty(waveIdToCopy)) {
+    if (waveIdToCopy != NO_WAVE_TO_COPY) {
       try {
-        WaveId copyWaveId;
-        copyWaveId = WaveId.ofChecked(domain, waveIdToCopy);
-        final Wavelet waveletToCopy = fetchWave(copyWaveId, WaveletId.of(domain, "conv+root"),
+        // WaveId copyWaveId;
+        // copyWaveId = WaveId.ofChecked(domain, waveIdToCopy);
+        final Wavelet waveletToCopy = fetchWave(waveIdToCopy.getWaveId(), waveIdToCopy.getWaveletId(),
             participantsArray[0].toString());
         if (waveletToCopy != null) {
           copyWavelet(waveletToCopy.getRootBlip(), rootBlip);
+          copyWaveletElements(waveletToCopy.getRootBlip(), rootBlip);
         }
-      } catch (final InvalidIdException e) {
-        LOG.error("Error copying wave content", e);
       } catch (final DefaultException e2) {
         LOG.error("Error copying wave content", e2);
       }
@@ -327,7 +325,7 @@ public class KuneWaveServiceDefault implements KuneWaveService {
 
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
-      final String waveIdToCopy, final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
+      final WaveRef waveIdToCopy, final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
       @Nonnull final ParticipantId... participantsArray) {
     return createWave(title, message, waveIdToCopy, onCreate, gadgetUrl,
         Collections.<String, String> emptyMap(), participantsArray);

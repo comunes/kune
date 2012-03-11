@@ -65,6 +65,9 @@ public interface ContentServiceAsync {
   void addRoom(String user, StateToken parentToken, String name,
       AsyncCallback<StateContainerDTO> callback);
 
+  void copyContent(String userHash, StateToken parentToken, StateToken token,
+      AsyncCallback<StateContentDTO> callback);
+
   void delContent(String userHash, StateToken token, AsyncCallback<StateContentDTO> asyncCallback);
 
   void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
@@ -115,5 +118,7 @@ public interface ContentServiceAsync {
 
   void writeTo(String userHash, StateToken token, boolean onlyToAdmins, String title, String message,
       AsyncCallback<String> callback);
+
+  void writeToParticipants(String userHash, StateToken token, AsyncCallback<String> callback);
 
 }

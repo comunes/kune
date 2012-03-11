@@ -215,6 +215,22 @@ public class ContentRPC implements ContentService, RPC {
     return getState(user, chatManager.addRoom(userHash, user, parentToken, roomName, ""));
   }
 
+  @Authenticated
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = true)
+  @Transactional
+  public StateContentDTO copyContent(final String userHash, final StateToken parentToken,
+      final StateToken token) throws DefaultException {
+    final User user = getCurrentUser();
+    final Content contentToCopy = finderService.getContent(ContentUtils.parseId(token.getDocument()));
+    final Container container = finderService.getContainer(ContentUtils.parseId(parentToken.getFolder()));
+    if (rightsService.get(user, contentToCopy.getAccessLists()).isVisible()) {
+      return mapper.map(contentManager.copyContent(user, container, contentToCopy),
+          StateContentDTO.class);
+    } else {
+      throw new AccessViolationException();
+    }
+  }
+
   private StateContentDTO createContent(final StateToken parentToken, final String title,
       final String typeId) {
     final User user = getCurrentUser();
@@ -584,6 +600,17 @@ public class ContentRPC implements ContentService, RPC {
       final String title, final String message) throws DefaultException {
     final User user = getCurrentUser();
     return waveManager.writeTo(user, token.getGroup(), onlyToAdmins, title, message);
+  }
+
+  @Authenticated
+  @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
+  @Transactional
+  public String writeToParticipants(final String userHash, final StateToken token)
+      throws DefaultException {
+    final User user = getCurrentUser();
+    final Content content = finderService.getContent(ContentUtils.parseId(token.getDocument()));
+    return waveManager.writeToParticipants(content.getAuthors().get(0).getShortName(),
+        user.getShortName(), content.getWaveId());
   }
 
 }

@@ -186,4 +186,9 @@ public class FinderServiceDefault implements FinderService {
     return rateManager.getRateByUsers(content);
   }
 
+  @Override
+  public Container getContainer(Long folderId) throws DefaultException {
+    return getFolder(folderId);
+  }
+
 }

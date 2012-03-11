@@ -24,6 +24,7 @@ import java.util.TreeSet;
 
 import org.waveprotocol.wave.client.editor.content.paragraph.DefaultParagraphHtmlRenderer;
 import org.waveprotocol.wave.client.editor.content.paragraph.Paragraph;
+import org.waveprotocol.wave.client.editor.content.paragraph.Paragraph.Alignment;
 
 import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.inject.Inject;
@@ -99,6 +100,7 @@ public class ContentRenderer {
 
   private final GadgetRenderer gadgetRenderer;
   private boolean identing;
+  private boolean inAlign = false;
   private boolean inheader = false;
   private final WaveRenderer waveRenderer;
 
@@ -117,7 +119,13 @@ public class ContentRenderer {
   }
 
   private void emitAnnotation(final Marker marker, final StringBuilder builder) {
-    if (marker.isEnd) {
+    if (marker.annotation.getName().startsWith("link")) {
+      if (marker.isEnd) {
+        builder.append("</a>");
+      } else {
+        builder.append("<a href=\"" + marker.annotation.getValue() + "\" target=\"_blank\">");
+      }
+    } else if (marker.isEnd) {
       // if (marker.annotation.getName().)
       builder.append("</span>");
     } else {
@@ -147,12 +155,19 @@ public class ContentRenderer {
       final String i = element.getProperty(Line.INDENT);
       final String a = element.getProperty(Line.ALIGNMENT);
       final String d = element.getProperty(Line.DIRECTION);
+      // For direction stuff (RTL etc) see DefaultParagraphHtml
+      if (inAlign) {
+        // Close identations
+        inAlign = false;
+        builder.append("</div><!-- end of align -->");
+      }
       final Integer ident = i != null ? Integer.valueOf(i) : 0;
       if (inheader) {
         // New line, we close previous header
         builder.append("</div> <!-- end h1/h2... header -->");
         inheader = false;
       }
+
       if (t != null && t.equals(Paragraph.LIST_TYPE)) {
         // type-0 to 2, margin 22px * i <li class="bullet-type-0"
         // style="margin-left: 88px;">
@@ -165,6 +180,10 @@ public class ContentRenderer {
         identing = true;
       } else {
         closeIndentIfNecessary(builder);
+      }
+      if (a != null) {
+        builder.append("<div style=\"text-align:" + Alignment.fromValue(a).cssValue() + ";\">");
+        inAlign = true;
       }
       if (t != null && t.startsWith("h")) {
         // See DefaultParagraphHtml
@@ -249,6 +268,9 @@ public class ContentRenderer {
       if (annotationName.startsWith("style")) {
         markers.add(Marker.fromAnnotation(annotation, annotation.getRange().getStart(), false));
         markers.add(Marker.fromAnnotation(annotation, annotation.getRange().getEnd(), true));
+      } else if (annotationName.startsWith("link")) {
+        markers.add(Marker.fromAnnotation(annotation, annotation.getRange().getStart(), false));
+        markers.add(Marker.fromAnnotation(annotation, annotation.getRange().getEnd(), true));
       } else if ("conv/title".equals(annotationName)) {
         // Find the first newline and make sure the annotation only gets to that
         // point.
@@ -261,6 +283,8 @@ public class ContentRenderer {
           // "bold", start, end);
           // markers.add(Marker.fromAnnotation(title, start, false));
           // markers.add(Marker.fromAnnotation(title, end, true));
+        } else {
+          // LOG?
         }
       }
     }

@@ -39,10 +39,12 @@ import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import cc.kune.gspace.client.actions.TutorialContainerBtn;
+import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -74,6 +76,8 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final WikiFolderNewMenu folderNewMenu,
+      final Provider<CopyContentMenuItem> copyContent,
+      final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final WikiPageNewMenu wikipageNewMenu) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
@@ -97,6 +101,8 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, copyContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, writeToParticipants, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
@@ -106,6 +112,8 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, copyContent, contents);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, writeToParticipants, contents);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());

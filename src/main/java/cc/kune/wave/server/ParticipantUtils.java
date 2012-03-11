@@ -20,6 +20,7 @@
 package cc.kune.wave.server;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.waveprotocol.box.server.CoreSettings;
@@ -60,6 +61,10 @@ public class ParticipantUtils {
     return atDomain;
   }
 
+  public String getDomain() {
+    return domain;
+  }
+
   public ParticipantId getPublicParticipantId() {
     return of(getAtDomain());
   }
@@ -70,6 +75,14 @@ public class ParticipantUtils {
 
   public boolean isLocal(final String address) {
     return address.contains(getAtDomain());
+  }
+
+  public ParticipantId[] listFrom(final List<String> list) {
+    final ParticipantId[] array = new ParticipantId[list.size()];
+    for (int i = 0; i < list.size(); i++) {
+      array[i] = of(list.get(i));
+    }
+    return array;
   }
 
   public ParticipantId[] listFrom(final Set<User> list) {
