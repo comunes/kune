@@ -3,6 +3,7 @@
 
 <svg
    xmlns:ns1="http://sozi.baierouge.fr"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -25,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.7686691"
-     inkscape:cx="157.12188"
-     inkscape:cy="1004.2198"
+     inkscape:cx="759.91175"
+     inkscape:cy="800.67692"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer5"
      showgrid="false"
      inkscape:window-width="1078"
      inkscape:window-height="1867"
@@ -61,8 +62,12 @@
      id="kunelang" />
   <!-- End kune i18n part -->
   <!-- Start kune font part -->
-  <link xmlns="http://www.w3.org/1999/xhtml" href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css' />
-  <style>
+  <xhtml:link
+     href="http://fonts.googleapis.com/css?family=Ubuntu"
+     rel="stylesheet"
+     type="text/css" />
+  <style
+     id="style5739">
     text { font-family: 'Ubuntu'; text-rendering: geometricPrecision; }
   </style>
   <!-- End kune font part -->
@@ -453,7 +458,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="frames"
-     style="display:none">
+     style="display:inline">
     <rect
        transform="translate(0,435.8268)"
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
@@ -527,13 +532,12 @@
        id="rect4613"
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
     <rect
-       transform="translate(0,435.8268)"
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635478;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.67463589;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
        id="rect4615"
-       width="450.60675"
-       height="126.35458"
-       x="56.57436"
-       y="649.0448" />
+       width="461.9064"
+       height="126.34631"
+       x="56.578499"
+       y="1084.8757" />
     <rect
        transform="translate(0,435.8268)"
        y="638.16895"
@@ -543,13 +547,12 @@
        id="rect4617"
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
     <rect
-       transform="translate(0,435.8268)"
-       y="259.67014"
-       x="579.32373"
-       height="181.08757"
-       width="269.94962"
+       y="695.49902"
+       x="579.32581"
+       height="181.0834"
+       width="273.33783"
        id="rect11260"
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635466;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.67051572;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
     <rect
        transform="translate(0,435.8268)"
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635466;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
@@ -559,21 +562,19 @@
        x="579.32373"
        y="449.67017" />
     <rect
-       transform="translate(0,435.8268)"
-       y="649.67017"
-       x="579.32373"
-       height="91.091072"
-       width="194.71678"
+       y="1085.5693"
+       x="579.39606"
+       height="109.03915"
+       width="240.93471"
        id="rect6444"
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635466;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.8109737;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
     <rect
-       transform="translate(0,435.8268)"
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635466;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.83530349;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
        id="rect14204"
-       width="185.77141"
-       height="91.091072"
-       x="579.32373"
-       y="749.67017" />
+       width="251.75389"
+       height="105.62244"
+       x="579.4082"
+       y="1200.8811" />
     <rect
        transform="translate(0,435.8268)"
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635466;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
@@ -4569,7 +4570,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path14206"
-       d="m 640.43291,797.81794 c -36.78501,6.53254 -42.5348,26.83565 -42.5348,26.83565 l -2.47152,7.12811"
+       d="m 640.43291,827.81794 c -36.78501,6.53254 -42.5348,26.83565 -42.5348,26.83565 l -2.47152,7.12811"
        style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <g
        transform="translate(-140.89103,111.71068)"
@@ -10157,7 +10158,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="es"
-     style="display:none"
+     style="display:inline"
      transform="translate(0,435.8268)">
     <text
        sodipodi:linespacing="125%"
@@ -10233,7 +10234,7 @@
          id="tspan3916"
          x="233.72658"
          y="70.182861"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">para su edición colaborativa </tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400">para su edición colaborativa, </tspan><tspan
          sodipodi:role="line"
          x="233.72658"
          y="85.182861"
@@ -10381,35 +10382,45 @@
     <text
        sodipodi:linespacing="125%"
        id="text3990"
-       y="688.32764"
-       x="334.03564"
+       y="669.32764"
+       x="323.03564"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        xml:space="preserve"><tspan
          id="tspan4013"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="688.32764"
-         x="334.03564"
-         sodipodi:role="line">pero esos documentos,</tspan><tspan
+         y="669.32764"
+         x="323.03564"
+         sodipodi:role="line">o volver a versiones anteriores.</tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="684.32764"
+         x="323.03564"
+         sodipodi:role="line"
+         id="tspan8077"></tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="699.32764"
+         x="323.03564"
+         sodipodi:role="line"
+         id="tspan8079">pero además estos documentos,</tspan><tspan
          id="tspan4017"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="703.32764"
-         x="334.03564"
+         y="714.32764"
+         x="323.03564"
          sodipodi:role="line">pueden ser textos básicos  </tspan><tspan
          id="tspan4021"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="718.32764"
-         x="334.03564"
-         sodipodi:role="line">(un artículo, un libro, una </tspan><tspan
+         y="729.32764"
+         x="323.03564"
+         sodipodi:role="line">(un artículo, un libro, un </tspan><tspan
          id="tspan4075"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="733.32764"
-         x="334.03564"
-         sodipodi:role="line">oferta, una redacción, </tspan><tspan
+         y="744.32764"
+         x="323.03564"
+         sodipodi:role="line">contrato, una redacción, </tspan><tspan
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="748.32764"
-         x="334.03564"
+         y="759.32764"
+         x="323.03564"
          sodipodi:role="line"
-         id="tspan4000">una tesis)</tspan></text>
+         id="tspan4000">una tesis)...</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -11324,12 +11335,12 @@
          style="font-size:12px;font-weight:normal;fill:#aa4400"
          y="-360.6748"
          x="596.65607"
-         sodipodi:role="line">pero pueden ser de muchos más </tspan><tspan
+         sodipodi:role="line">...pero pueden ser de muchos </tspan><tspan
          id="tspan8764"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
          y="-345.6748"
          x="596.65607"
-         sodipodi:role="line">tipos y formas:</tspan><tspan
+         sodipodi:role="line">más tipos y formas:</tspan><tspan
          style="font-size:12px;font-weight:normal;fill:#aa4400"
          y="-330.6748"
          x="596.65607"
@@ -11803,40 +11814,40 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        x="648.23376"
-       y="757.7229"
+       y="787.7229"
        id="text14208"
        sodipodi:linespacing="125%"><tspan
          id="tspan14210"
          sodipodi:role="line"
          x="648.23376"
-         y="757.7229"
+         y="787.7229"
          style="font-size:12px;font-weight:normal;fill:#aa4400" /><tspan
          sodipodi:role="line"
          x="648.23376"
-         y="772.7229"
+         y="802.7229"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
          id="tspan14212">Esto es todo, </tspan><tspan
          id="tspan14214"
          sodipodi:role="line"
          x="648.23376"
-         y="787.7229"
+         y="817.7229"
          style="font-size:12px;font-weight:normal;fill:#aa4400">danos tu <tspan
    style="font-weight:bold"
    id="tspan14216">feedback </tspan></tspan><tspan
          id="tspan14218"
          sodipodi:role="line"
          x="648.23376"
-         y="802.7229"
+         y="832.7229"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">y participa para </tspan><tspan
          sodipodi:role="line"
          x="648.23376"
-         y="817.7229"
+         y="847.7229"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          id="tspan14220">mejorar esta </tspan><tspan
          id="tspan14222"
          sodipodi:role="line"
          x="648.23376"
-         y="832.7229"
+         y="862.7229"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">herramienta...</tspan></text>
     <text
        xml:space="preserve"
