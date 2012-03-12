@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2856989"
-     inkscape:cx="224.39428"
-     inkscape:cy="868.00122"
+     inkscape:zoom="1.5869046"
+     inkscape:cx="243.10117"
+     inkscape:cy="1308.5714"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -49,7 +49,7 @@
   </script>
   <script
      id="kunelang"
-     xlink:href="/home/vjrj/proyectos/dev/kune/trunk/src/main/webapp/tutorials/lang.js" />
+     xlink:href="lang.js" />
   <!-- End kune i18n part -->
   <!-- Start kune font part -->
   <xhtml:link
@@ -359,9 +359,9 @@
        y="174.29231"
        x="409.76224"
        height="112.1397"
-       width="470.47549"
+       width="404.62628"
        id="rect5942-3"
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.7571848;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.70219934;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
     <rect
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.80179667;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
        id="rect28365"
@@ -377,12 +377,12 @@
        x="444.06342"
        y="497.46411" />
     <rect
-       y="603.68451"
-       x="444.06342"
-       height="126.21635"
-       width="432.35724"
+       y="603.66608"
+       x="501.32425"
+       height="119.25312"
+       width="357.22574"
        id="rect28385"
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.77007484;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.68039328;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
     <rect
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.80487037;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
        id="rect28387"
@@ -408,22 +408,22 @@
            style="fill:#231f20"
            transform="matrix(-1,0,0,1,52,0)"
            id="polygon8"
-           points="20,32 24.586,27.414 29.172,32 32,29.172 27.414,24.586 32,20 20,20 " />
+           points="32,29.172 27.414,24.586 32,20 20,20 20,32 24.586,27.414 29.172,32 " />
         <polygon
            style="fill:#231f20"
            transform="matrix(-1,0,0,-1,32,12)"
            id="polygon10"
-           points="4.586,7.414 0,12 12,12 12,0 7.414,4.586 2.875,0.043 0.047,2.871 " />
+           points="12,0 7.414,4.586 2.875,0.043 0.047,2.871 4.586,7.414 0,12 12,12 " />
         <polygon
            transform="matrix(1,0,0,-1,0,52)"
            style="fill:#231f20"
            id="polygon12"
-           points="2.828,32 7.414,27.414 12,32 12,20 0,20 4.586,24.586 0,29.172 " />
+           points="12,20 0,20 4.586,24.586 0,29.172 2.828,32 7.414,27.414 12,32 " />
         <polygon
            style="fill:#231f20"
            transform="translate(-20,0)"
            id="polygon14"
-           points="31.961,2.871 29.133,0.043 24.586,4.586 20,0 20,12 32,12 27.414,7.414 " />
+           points="20,0 20,12 32,12 27.414,7.414 31.961,2.871 29.133,0.043 24.586,4.586 " />
       </g>
     </g>
     <path
@@ -463,7 +463,7 @@
     <g
        style="display:inline"
        id="g6729-5"
-       transform="matrix(0.55742735,0,0,0.55742735,627.31778,593.30421)"
+       transform="matrix(0.55742735,0,0,0.55742735,572.31778,603.30421)"
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/world-90.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -510,7 +510,7 @@
     <g
        style="display:inline"
        id="g3761"
-       transform="translate(-81.710878,115.92333)">
+       transform="translate(-78.560088,119.70429)">
       <g
          transform="matrix(0.32896515,0,0,0.32896515,-160.43506,33.34333)"
          id="g3697">
@@ -710,7 +710,7 @@
     </g>
     <g
        style="display:inline"
-       transform="matrix(0.25680189,0,0,0.25680189,332.52425,482.82449)"
+       transform="matrix(0.25680189,0,0,0.25680189,331.52425,490.82449)"
        id="g2556">
       <text
          xml:space="preserve"
@@ -1095,40 +1095,6 @@
        id="path27787"
        style="color:#000000;fill:none;stroke:#d40000;stroke-width:2.85714293;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        sodipodi:type="arc" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text6088"
-       y="1214.7278"
-       x="459.61835"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       xml:space="preserve"><tspan
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="1214.7278"
-         x="459.61835"
-         sodipodi:role="line"
-         id="tspan6102">Se basa en un sistema ancestral japonés</tspan><tspan
-         id="tspan6128"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="1229.7278"
-         x="459.61835"
-         sodipodi:role="line">de <tspan
-   id="tspan6038"
-   style="font-weight:bold">intercambio de arroz</tspan>. Te ofrezco </tspan><tspan
-         id="tspan6179"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="1244.7278"
-         x="459.61835"
-         sodipodi:role="line">mis semillas a cambio que me devuelvas </tspan><tspan
-         id="tspan6181"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="1259.7278"
-         x="459.61835"
-         sodipodi:role="line">en cierto tiempo, la misma cantidad de semillas </tspan><tspan
-         id="tspan6183"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="1274.7278"
-         x="459.61835"
-         sodipodi:role="line">u otra cosa que acordemos</tspan></text>
     <path
        inkscape:transform-center-y="-5.4174412"
        transform="matrix(0,-1.0759068,1.0761407,0,492.25529,955.70238)"
@@ -1149,7 +1115,7 @@
     <g
        style="display:inline"
        id="g23017"
-       transform="matrix(1.462292,0,0,1.462292,490.42028,1080.111)">
+       transform="matrix(1.462292,0,0,1.462292,523.08734,1066.8886)">
       <path
          sodipodi:type="arc"
          style="color:#000000;fill:none;stroke:#231f20;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -1191,6 +1157,14 @@
          d="m 11.354105,8.365065 9.324457,4.610602"
          style="fill:#231f20;fill-opacity:1;stroke:#231f20;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
+    <rect
+       ry="2.2214503"
+       y="827.77374"
+       x="603.9718"
+       height="73.678093"
+       width="184.97711"
+       id="rect21697"
+       style="color:#000000;fill:#f2f2f2;fill-opacity:1;fill-rule:evenodd;stroke:#808080;stroke-width:0.64064145;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <g
        style="display:inline"
        transform="translate(-296.89921,-220.94289)"
@@ -1661,14 +1635,6 @@
        d="m 702.25742,880.71611 -5.36043,4.8224 -1.73565,-1.9979 -2.12388,2.178 c 1.53383,1.36 2.67679,2.3291 3.95004,3.637 2.1409,-2.0067 4.33392,-3.5965 6.65723,-5.1081 -0.35399,-1.51046 -0.81264,-2.55202 -1.38731,-3.5314 z"
        style="color:#000000;fill:#aad400;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:0.70774376;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:connector-curvature="0" />
-    <rect
-       ry="2.2214503"
-       y="827.77374"
-       x="603.9718"
-       height="73.678093"
-       width="184.97711"
-       id="rect21697"
-       style="color:#000000;fill:#f2f2f2;fill-opacity:1;fill-rule:evenodd;stroke:#808080;stroke-width:0.64064145;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -1725,35 +1691,40 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        x="586.51654"
-       y="1075.2544"
+       y="1065.2544"
        id="text3071-9-1"
        sodipodi:linespacing="125%"><tspan
          id="tspan6072"
          sodipodi:role="line"
          x="586.51654"
-         y="1075.2544"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">Nuestro sistema de trueque permite </tspan><tspan
+         y="1065.2544"
+         style="font-size:12px;font-weight:normal;fill:#aa4400">Nuestro sistema (aún experimental)</tspan><tspan
          id="tspan6074"
          sodipodi:role="line"
          x="586.51654"
-         y="1090.2544"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">intercambiar bienes y servicios de forma </tspan><tspan
+         y="1080.2544"
+         style="font-size:12px;font-weight:normal;fill:#aa4400">de trueque permite intercambiar bienes </tspan><tspan
          id="tspan6084"
          sodipodi:role="line"
          x="586.51654"
-         y="1105.2544"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"><tspan
+         y="1095.2544"
+         style="font-size:12px;font-weight:normal;fill:#aa4400">y servicios de forma <tspan
    id="tspan6080"
-   style="font-weight:bold">descentralizada </tspan>entre sistemas similares</tspan><tspan
+   style="font-weight:bold">descentralizada </tspan></tspan><tspan
          id="tspan6395"
          sodipodi:role="line"
          x="586.51654"
-         y="1120.2544"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">al contrario que otros servicios centralizados </tspan><tspan
+         y="1110.2544"
+         style="font-size:12px;font-weight:normal;fill:#aa4400">entre sistemas similares, al contrario </tspan><tspan
+         sodipodi:role="line"
+         x="586.51654"
+         y="1125.2544"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         id="tspan3445">que otros servicios centralizados </tspan><tspan
          id="tspan6399"
          sodipodi:role="line"
          x="586.51654"
-         y="1135.2544"
+         y="1140.2544"
          style="font-size:12px;font-weight:normal;fill:#aa4400">como ebay</tspan></text>
     <text
        xml:space="preserve"
@@ -1828,24 +1799,24 @@
          style="font-size:12px;font-weight:normal;fill:#aa4400"
          id="tspan6136">Con nuestro <tspan
    id="tspan6369"
-   style="font-weight:bold">troco</tspan>, ofreces los bienes <tspan
-   id="tspan5948"
-   style="font-weight:bold">o servicios</tspan></tspan><tspan
+   style="font-weight:bold">troco</tspan>, ofreces los bienes</tspan><tspan
          id="tspan6205"
          sodipodi:role="line"
          x="514.38214"
          y="659.05975"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">que quieres compartir, a tus contactos, </tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"><tspan
+   id="tspan5948"
+   style="font-weight:bold">o servicios</tspan>que quieres compartir, </tspan><tspan
          id="tspan6207"
          sodipodi:role="line"
          x="514.38214"
          y="674.05975"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">o a tus grupos,  o incluso al público en general y </tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400">a tus contactos, o a tus grupos,  o incluso </tspan><tspan
          id="tspan6286"
          sodipodi:role="line"
          x="514.38214"
          y="689.05975"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">esta información permanece en tu sitio de confiaza</tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400">al público en general y esta información </tspan><tspan
          id="tspan5944"
          sodipodi:role="line"
          x="514.38214"
@@ -1944,28 +1915,26 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        x="128.6837"
-       y="695.94843"
+       y="694.94836"
        id="text6288"
        sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="128.6837"
-         y="695.94843"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         id="tspan6294">todo esto además genera un</tspan><tspan
          id="tspan6301"
          sodipodi:role="line"
          x="128.6837"
-         y="710.94843"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"><tspan
+         y="694.94836"
+         style="font-size:12px;font-weight:normal;fill:#aa4400">todo esto genera muchos<tspan
    id="tspan5936"
-   style="font-weight:bold"><tspan
-   id="tspan5938"
-   style="font-weight:normal">muchos</tspan> correos</tspan>, de facturas,</tspan><tspan
+   style="font-weight:bold"> correos</tspan>, </tspan><tspan
          id="tspan6303"
          sodipodi:role="line"
          x="128.6837"
-         y="725.94843"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">de notificaciones con cada operación</tspan></text>
+         y="709.94836"
+         style="font-size:12px;font-weight:normal;fill:#aa4400">con las facturas, notificaciones </tspan><tspan
+         sodipodi:role="line"
+         x="128.6837"
+         y="724.94836"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         id="tspan3412">con cada operación</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -1995,12 +1964,12 @@
     <text
        sodipodi:linespacing="125%"
        id="text6352"
-       y="859.07855"
+       y="855.74518"
        x="111.73485"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        xml:space="preserve"><tspan
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="859.07855"
+         y="855.74518"
          x="111.73485"
          sodipodi:role="line"
          id="tspan6358">y todo está <tspan
@@ -2008,12 +1977,12 @@
    style="font-weight:bold">centralizado</tspan> en un sitio</tspan><tspan
          id="tspan6365"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="874.07855"
+         y="870.74518"
          x="111.73485"
          sodipodi:role="line">que cobra por cada transacción y que </tspan><tspan
          id="tspan6367"
          style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="889.07855"
+         y="885.74518"
          x="111.73485"
          sodipodi:role="line">dispone de toda la información</tspan></text>
     <text
@@ -2057,6 +2026,40 @@
          x="657.36047"
          y="888.56079"
          id="tspan27648">acepto</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text6088"
+       y="1214.7278"
+       x="459.61835"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="1214.7278"
+         x="459.61835"
+         sodipodi:role="line"
+         id="tspan6102">Se basa en un sistema ancestral japonés</tspan><tspan
+         id="tspan6128"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="1229.7278"
+         x="459.61835"
+         sodipodi:role="line">de <tspan
+   id="tspan6038"
+   style="font-weight:bold">intercambio de arroz</tspan>: te ofrezco </tspan><tspan
+         id="tspan6179"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="1244.7278"
+         x="459.61835"
+         sodipodi:role="line">mis semillas a cambio que me devuelvas </tspan><tspan
+         id="tspan6181"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="1259.7278"
+         x="459.61835"
+         sodipodi:role="line">en cierto tiempo, la misma cantidad de semillas </tspan><tspan
+         id="tspan6183"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="1274.7278"
+         x="459.61835"
+         sodipodi:role="line">u otra cosa que acordemos</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
