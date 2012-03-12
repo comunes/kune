@@ -49,7 +49,7 @@
   </script>
   <script
      id="kunelang"
-     xlink:href="/home/vjrj/proyectos/dev/kune/trunk/src/main/webapp/tutorials/lang.js" />
+     xlink:href="lang.js" />
   <!-- End kune i18n part -->
   <!-- Start kune font part -->
   <xhtml:link
