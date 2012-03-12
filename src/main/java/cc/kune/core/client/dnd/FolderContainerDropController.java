@@ -36,6 +36,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+/**
+ * The Class FolderContainerDropController is responsable of the drop process to
+ * folders. Must not be a @singleton, and should exist one drop controller per
+ * item
+ */
 public class FolderContainerDropController extends AbstractDropController {
 
   private final ContentCache contentCache;

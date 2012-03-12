@@ -31,6 +31,11 @@ import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+/**
+ * The Class FolderContentDropController is responsible of the drop process to
+ * contents (for instance of user, to add then as participants). Must not be a
+ * @singleton, and should exist one drop controller per item
+ */
 public class FolderContentDropController extends AbstractDropController {
 
   private final ContentServiceAsync contentService;

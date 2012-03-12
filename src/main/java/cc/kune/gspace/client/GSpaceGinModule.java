@@ -20,8 +20,6 @@
 package cc.kune.gspace.client;
 
 import cc.kune.core.client.ExtendedGinModule;
-import cc.kune.core.client.dnd.FolderContainerDropController;
-import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.AdminsGroupSNDropController;
@@ -143,8 +141,6 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(PathToolbarUtils.class);
     s(FolderViewerUtils.class);
     s(ContentDropController.class);
-    s(FolderContainerDropController.class);
-    s(FolderContentDropController.class);
     s(AdminsGroupSNDropController.class);
     s(CollabsGroupSNDropController.class);
     s(AllMembersGroupSNDropController.class);

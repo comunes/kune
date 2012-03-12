@@ -83,7 +83,7 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
 
   private static final String GADGET_RELAY_PATH = "gadgets/files/container/rpc_relay.html";
   private static final int DEFAULT_HEIGHT_PX = 100;
-  private static final int DEFAULT_WIDTH_PX = -1;
+  private static final int DEFAULT_WIDTH_PX = 600;
 
   /**
    * Helper class to analyze element changes in the gadget state and prefs.
@@ -366,7 +366,7 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
   }
 
   private static native boolean gadgetLibraryLoaded() /*-{
-    return ($wnd.gadgets && $wnd.gadgets.rpc) ? true : false;
+		return ($wnd.gadgets && $wnd.gadgets.rpc) ? true : false;
   }-*/;
 
   /**
@@ -626,8 +626,6 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
       ui.setIframeWidth(width + "px");
       ui.makeInline();
       scheduleGadgetAttributeUpdate(LAST_KNOWN_WIDTH_ATTRIBUTE, Long.toString(width));
-    } else {
-      ui.setIframeWidth("100%");
     }
     if (!hasAttribute(LAST_KNOWN_HEIGHT_ATTRIBUTE) && (height != 0)) {
       ui.setIframeHeight(height);
@@ -1345,9 +1343,7 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
     log("Set IFrame width ", width);
     try {
       int widthValue = parseSizeString(width);
-      if (widthValue <= 0) {
-        ui.setIframeWidth("100%");
-      } else {
+      if (widthValue > 0) {
         ui.setIframeWidth(widthValue + "px");
       }
       ui.makeInline();

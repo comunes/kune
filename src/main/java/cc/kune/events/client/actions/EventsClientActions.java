@@ -37,6 +37,7 @@ import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
+import cc.kune.gspace.client.actions.TutorialContainerBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 
 import com.google.inject.Inject;
@@ -68,7 +69,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<EventAddMenuItem> eventAddMenuItem,
       final Provider<EventOpenMenuItem> eventOpenMenuItem, final Provider<CalendarGoPrevBtn> calPrevBtn,
       final Provider<EventRemoveMenuItem> eventRemoveMenuItem,
-      final Provider<CopyContentMenuItem> copyContent,
+      final Provider<CopyContentMenuItem> copyContent, final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<ExportCalendarMenuItem> export, final Provider<CalendarGoNextBtn> calNextBtn,
       final CalendarOnOverMenu onOverMenu, final Provider<CalendarGoTodayBtn> goToday,
@@ -91,6 +92,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, addPublicMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, copyContent, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, writeToParticipants, contents);
     // On over calendar menu
