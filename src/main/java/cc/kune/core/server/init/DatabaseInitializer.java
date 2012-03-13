@@ -35,6 +35,7 @@ import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.manager.impl.ContentConstants;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.GroupType;
@@ -48,7 +49,6 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.persist.Transactional;
 
 @Singleton
 public class DatabaseInitializer {
@@ -70,10 +70,7 @@ public class DatabaseInitializer {
       final GroupManager groupManager, final LicenseManager licenseManager,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final I18nTranslationManager translationManager, final ContentManager contentManager,
-      final I18nTranslationServiceDefault translationService
-
-  // , final XmppRosterProvider borrar) {
-  ) {
+      final I18nTranslationServiceDefault translationService) {
     this.properties = properties;
     this.userManager = userManager;
     this.groupManager = groupManager;
@@ -83,8 +80,6 @@ public class DatabaseInitializer {
     this.translationManager = translationManager;
     this.translationService = translationService;
     this.contentManager = contentManager;
-    // assert borrar != null;
-    // LOG.info("Roster items: " + borrar.count());
   }
 
   private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
@@ -188,7 +183,7 @@ public class DatabaseInitializer {
     translationService.init();
   }
 
-  @Transactional
+  @KuneTransactional
   public void initDatabase() throws Exception {
     createLicenses();
     createOthers();

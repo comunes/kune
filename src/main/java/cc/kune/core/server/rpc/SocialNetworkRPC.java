@@ -29,6 +29,7 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.notifier.NotificationService;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -38,7 +39,6 @@ import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 
 public class SocialNetworkRPC implements SocialNetService, RPC {
 
@@ -64,7 +64,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO acceptJoinGroup(final String hash, final StateToken groupToken,
       final String groupToAcceptShortName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
@@ -80,7 +80,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO addAdminMember(final String hash, final StateToken groupToken,
       final String groupToAddShortName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
@@ -95,7 +95,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public void addAsBuddie(final String hash, final String userName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
     final User toUser = userFinder.findByShortName(userName);
@@ -105,7 +105,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO addCollabMember(final String hash, final StateToken groupToken,
       final String groupToAddShortName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
@@ -121,7 +121,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO addViewerMember(final String hash, final StateToken groupToken,
       final String groupToAddShortName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
@@ -142,7 +142,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO deleteMember(final String hash, final StateToken groupToken,
       final String groupToDeleleShortName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
@@ -158,7 +158,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO denyJoinGroup(final String hash, final StateToken groupToken,
       final String groupToDenyShortName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
@@ -180,7 +180,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Authenticated(mandatory = false)
   // At least you can access as Viewer to the Group
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO getSocialNetwork(final String hash, final StateToken groupToken)
       throws DefaultException {
     final User user = userSessionManager.getUser();
@@ -190,7 +190,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public SocialNetworkRequestResult requestJoinGroup(final String hash, final StateToken groupToken)
       throws DefaultException {
     final User user = userSessionManager.getUser();
@@ -204,7 +204,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO setAdminAsCollab(final String hash, final StateToken groupToken,
       final String groupToSetCollabShortName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
@@ -220,7 +220,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public SocialNetworkDataDTO setCollabAsAdmin(final String hash, final StateToken groupToken,
       final String groupToSetAdminShortName) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
@@ -235,7 +235,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public void unJoinGroup(final String hash, final StateToken groupToken) throws DefaultException {
     final User userLogged = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());

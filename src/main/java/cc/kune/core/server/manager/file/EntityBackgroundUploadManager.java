@@ -31,6 +31,7 @@ import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.FileManager;
 import cc.kune.core.server.manager.GroupManager;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -38,7 +39,6 @@ import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 
 public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet {
 
@@ -60,7 +60,7 @@ public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet 
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-  @Transactional
+  @KuneTransactional
   protected String createUploadedFile(final String userHash, final StateToken stateToken,
       final String fileName, final FileItem origFile, final String typeId) {
     try {

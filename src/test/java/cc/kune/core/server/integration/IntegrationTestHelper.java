@@ -19,6 +19,9 @@
  */
 package cc.kune.core.server.integration;
 
+import static com.google.inject.matcher.Matchers.annotatedWith;
+import static com.google.inject.matcher.Matchers.any;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
@@ -35,7 +38,9 @@ import cc.kune.chat.server.ChatServerModule;
 import cc.kune.core.server.PlatformServerModule;
 import cc.kune.core.server.TestConstants;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
+import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
 import cc.kune.core.server.persist.KunePersistenceService;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.events.server.EventsServerModule;
 import cc.kune.lists.server.ListsServerModule;
@@ -59,8 +64,12 @@ public class IntegrationTestHelper {
           TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
       final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
+      final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
+          "kune.properties", TestConstants.PERSISTENCE_UNIT);
       final Injector childInjector = injector.createChildInjector(
           wavePersistModule,
+          kuneDataSource,
+          new DataSourceOpenfirePersistModule(),
           new AbstractModule() {
             @Override
             protected void configure() {
@@ -68,10 +77,14 @@ public class IntegrationTestHelper {
               bindScope(RequestScoped.class, Scopes.SINGLETON);
 
               bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+              bindInterceptor(annotatedWith(KuneTransactional.class), any(),
+                  kuneDataSource.getTransactionInterceptor());
+              bindInterceptor(any(), annotatedWith(KuneTransactional.class),
+                  kuneDataSource.getTransactionInterceptor());
+              install(kuneDataSource);
             }
           },
 
-          new DataSourceKunePersistModule("kune.properties", TestConstants.PERSISTENCE_UNIT),
           // new MyDataSourceTwoPersistModule(),
 
           new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),

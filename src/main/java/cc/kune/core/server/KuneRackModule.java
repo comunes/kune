@@ -19,6 +19,9 @@
  */
 package cc.kune.core.server;
 
+import static com.google.inject.matcher.Matchers.annotatedWith;
+import static com.google.inject.matcher.Matchers.any;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -41,6 +44,8 @@ import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.manager.file.UserLogoDownloadManager;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
+import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
 import cc.kune.core.server.rack.filters.ForwardFilter;
@@ -55,8 +60,8 @@ import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
 import cc.kune.core.server.scheduler.CronServerTasksManager;
 import cc.kune.docs.server.DocumentServerModule;
-import cc.kune.events.server.EventsServlet;
 import cc.kune.events.server.EventsServerModule;
+import cc.kune.events.server.EventsServlet;
 import cc.kune.events.server.utils.EventsServerConversionUtil;
 import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
@@ -169,14 +174,18 @@ public class KuneRackModule implements RackModule {
     builder.use(new ServletModule() {
       @Override
       protected void configureServlets() {
-        install(new DataSourceKunePersistModule());
-        // install(new MyDataSourceTwoPersistModule());
+        final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule();
+        install(kuneDataSource);
+        install(new DataSourceOpenfirePersistModule());
+        bindInterceptor(annotatedWith(KuneTransactional.class), any(),
+            kuneDataSource.getTransactionInterceptor());
+        bindInterceptor(any(), annotatedWith(KuneTransactional.class),
+            kuneDataSource.getTransactionInterceptor());
 
         // more bindings
 
         filter("/*").through(DataSourceKunePersistModule.MY_DATA_SOURCE_ONE_FILTER_KEY);
-        // filter("/*").through(MyDataSourceTwoPersistModule.MY_DATA_SOURCE_TWO_FILTER_KEY);
-
+        filter("/*").through(DataSourceOpenfirePersistModule.MY_DATA_SOURCE_TWO_FILTER_KEY);
         super.configureServlets();
       }
     });

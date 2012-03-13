@@ -24,12 +24,13 @@ import cc.kune.domain.finders.TagFinder;
 import cc.kune.domain.finders.TagUserContentFinder;
 import cc.kune.domain.finders.UserFinder;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Key;
+import com.google.inject.PrivateModule;
 import com.google.inject.Provider;
 import com.google.inject.persist.jpa.JpaPersistModule;
+import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
 
-public class DataSourceKunePersistModule extends AbstractModule {
+public class DataSourceKunePersistModule extends PrivateModule {
   // FIXME Trying to make this PrivateModule so we can have two Persist sources
   // http://code.google.com/p/google-guice/wiki/GuicePersistMultiModules
 
@@ -38,6 +39,7 @@ public class DataSourceKunePersistModule extends AbstractModule {
       CustomPersistFilter.class, DataSourceKune.class);
   private String settedJpaUnit = null;
   private String settedProperties = null;
+  private KuneJpaLocalTxnInterceptor transactionInterceptor;
 
   /**
    * Instantiates this module (main constructor)
@@ -104,40 +106,35 @@ public class DataSourceKunePersistModule extends AbstractModule {
     bind(Session.class).annotatedWith(DataSourceKune.class).toProvider(
         DataSourceKuneSessionProvider.class);
 
-    // FIXME: Trying to use a custom JpaLocalTxnInterceptor because when this
-    // module is private the objects are not persisted with the guice-persist
-    // @Transactional
-
-    // final KuneJpaLocalTxnInterceptor transactionInterceptor = new
-    // KuneJpaLocalTxnInterceptor();
-    // requestInjection(transactionInterceptor);
-    // bindInterceptor(annotatedWith(KuneTransactional.class), any(),
-    // transactionInterceptor);
-    // bindInterceptor(any(), annotatedWith(KuneTransactional.class),
-    // transactionInterceptor);
-
     final Provider<EntityManager> entityManagerProvider = binder().getProvider(EntityManager.class);
     bind(EntityManager.class).annotatedWith(DataSourceKune.class).toProvider(entityManagerProvider);
 
+    transactionInterceptor = new KuneJpaLocalTxnInterceptor();
+    requestInjection(transactionInterceptor);
+
     bind(MY_DATA_SOURCE_ONE_FILTER_KEY).to(CustomPersistFilter.class);
 
-    // expose(EntityManager.class).annotatedWith(DataSourceKune.class);
-    // expose(Session.class).annotatedWith(DataSourceKune.class);
-    // expose(KuneProperties.class);
-    // expose(ContainerFinder.class);
-    // expose(ContentFinder.class);
-    // expose(ExtMediaDescripFinder.class);
-    // expose(GroupFinder.class);
-    // expose(I18nCountryFinder.class);
-    // expose(I18nLanguageFinder.class);
-    // expose(I18nTranslationFinder.class);
-    // expose(LicenseFinder.class);
-    // expose(RateFinder.class);
-    // expose(TagFinder.class);
-    // expose(TagUserContentFinder.class);
-    // expose(UserFinder.class);
-    // expose(MY_DATA_SOURCE_ONE_FILTER_KEY);
+    expose(EntityManager.class).annotatedWith(DataSourceKune.class);
+    expose(Session.class).annotatedWith(DataSourceKune.class);
+    expose(KuneProperties.class);
+    expose(ContainerFinder.class);
+    expose(ContentFinder.class);
+    expose(ExtMediaDescripFinder.class);
+    expose(GroupFinder.class);
+    expose(I18nCountryFinder.class);
+    expose(I18nLanguageFinder.class);
+    expose(I18nTranslationFinder.class);
+    expose(LicenseFinder.class);
+    expose(RateFinder.class);
+    expose(TagFinder.class);
+    expose(TagUserContentFinder.class);
+    expose(UserFinder.class);
+    expose(MY_DATA_SOURCE_ONE_FILTER_KEY);
 
     bind(GenericPersistenceInitializer.class).asEagerSingleton();
+  }
+
+  public KuneJpaLocalTxnInterceptor getTransactionInterceptor() {
+    return transactionInterceptor;
   }
 }

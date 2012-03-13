@@ -48,6 +48,7 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.KuneWaveManager;
 import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.state.StateContainer;
 import cc.kune.core.server.state.StateContent;
 import cc.kune.core.server.state.StateEventContainer;
@@ -73,7 +74,6 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 
 public class ContentRPC implements ContentService, RPC {
   private final AccessService accessService;
@@ -115,7 +115,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public void addAuthor(final String userHash, final StateToken token, final String authorShortName)
       throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
@@ -126,7 +126,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public StateContentDTO addContent(final String userHash, final StateToken parentToken,
       final String title, final String typeId) throws DefaultException {
     return createContent(parentToken, title, typeId);
@@ -135,7 +135,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public StateContainerDTO addFolder(final String userHash, final StateToken parentToken,
       final String title, final String contentTypeId) throws DefaultException {
     final User user = getCurrentUser();
@@ -147,7 +147,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public void addGadgetToContent(final String userHash, final StateToken currentStateToken,
       final String gadgetName) throws DefaultException {
     final User user = getCurrentUser();
@@ -159,7 +159,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public StateContentDTO addNewContentWithGadget(final String userHash, final StateToken parentToken,
       final String gadgetname, final String typeId, final String title, final String body)
       throws DefaultException {
@@ -170,7 +170,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public StateContentDTO addNewContentWithGadgetAndState(final String userHash,
       final StateToken parentToken, final String gadgetname, final String typeId, final String title,
       final String body, final Map<String, String> gadgetProperties) throws DefaultException {
@@ -185,7 +185,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public Boolean addParticipant(final String userHash, final StateToken token, final String participant)
       throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
@@ -196,7 +196,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = true)
-  @Transactional
+  @KuneTransactional
   public Boolean addParticipants(final String userHash, final StateToken token, final String groupName,
       final SocialNetworkSubGroup subGroup) throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
@@ -208,16 +208,17 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public StateContainerDTO addRoom(final String userHash, final StateToken parentToken,
       final String roomName) throws DefaultException {
     final User user = getCurrentUser();
     return getState(user, chatManager.addRoom(userHash, user, parentToken, roomName, ""));
   }
 
+  @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = true)
-  @Transactional
+  @KuneTransactional
   public StateContentDTO copyContent(final String userHash, final StateToken parentToken,
       final StateToken token) throws DefaultException {
     final User user = getCurrentUser();
@@ -253,7 +254,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public StateContentDTO delContent(final String userHash, final StateToken token)
       throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
@@ -262,7 +263,7 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated(mandatory = false)
-  @Transactional
+  @KuneTransactional
   public StateAbstractDTO getContent(final String userHash, final StateToken token)
       throws DefaultException {
     Group defaultGroup;
@@ -335,7 +336,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated(mandatory = false)
   @Authorizated(accessRolRequired = AccessRol.Viewer)
-  @Transactional
+  @KuneTransactional
   public TagCloudResult getSummaryTags(final String userHash, final StateToken groupToken) {
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     return getSummaryTags(group);
@@ -381,7 +382,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public StateContainerDTO moveContent(final String userHash, final StateToken movedToken,
       final StateToken newContainerToken) throws DefaultException {
     final User user = getCurrentUser();
@@ -414,7 +415,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer)
-  @Transactional
+  @KuneTransactional
   public RateResult rateContent(final String userHash, final StateToken token, final Double value)
       throws DefaultException {
     final User rater = getCurrentUser();
@@ -430,7 +431,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public void removeAuthor(final String userHash, final StateToken token, final String authorShortName)
       throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
@@ -441,7 +442,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public StateAbstractDTO renameContainer(final String userHash, final StateToken token,
       final String newName) throws DefaultException {
     renameFolder(token.getGroup(), ContentUtils.parseId(token.getFolder()), newName);
@@ -451,7 +452,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public StateAbstractDTO renameContent(final String userHash, final StateToken token,
       final String newName) throws DefaultException {
     final User user = getCurrentUser();
@@ -482,7 +483,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public void save(final String userHash, final StateToken token, final String textContent)
       throws DefaultException {
 
@@ -494,7 +495,7 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public String sendFeedback(final String userHash, final String title, final String body)
       throws DefaultException {
     final User user = getCurrentUser();
@@ -504,7 +505,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public ContentSimpleDTO setAsDefaultContent(final String userHash, final StateToken token) {
     final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
     groupManager.setDefaultContent(token.getGroup(), content);
@@ -514,7 +515,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
-  @Transactional
+  @KuneTransactional
   public void setGadgetProperties(final String userHash, final StateToken currentStateToken,
       final String gadgetName, final Map<String, String> properties) {
     final User user = getCurrentUser();
@@ -526,7 +527,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public I18nLanguageDTO setLanguage(final String userHash, final StateToken token,
       final String languageCode) throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
@@ -537,7 +538,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public void setPublishedOn(final String userHash, final StateToken token, final Date publishedOn)
       throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
@@ -548,7 +549,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor)
-  @Transactional
+  @KuneTransactional
   public StateAbstractDTO setStatus(final String userHash, final StateToken token,
       final ContentStatus status) {
     if (status.equals(ContentStatus.publishedOnline) || status.equals(ContentStatus.rejected)
@@ -563,7 +564,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public StateAbstractDTO setStatusAsAdmin(final String userHash, final StateToken token,
       final ContentStatus status) {
     final Content content = contentManager.setStatus(ContentUtils.parseId(token.getDocument()),
@@ -574,7 +575,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public TagCloudResult setTags(final String userHash, final StateToken token, final String tags)
       throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
@@ -586,7 +587,7 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public String writeTo(final String userHash, final StateToken token, final boolean onlyToAdmins)
       throws DefaultException {
     final User user = getCurrentUser();
@@ -595,16 +596,17 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public String writeTo(final String userHash, final StateToken token, final boolean onlyToAdmins,
       final String title, final String message) throws DefaultException {
     final User user = getCurrentUser();
     return waveManager.writeTo(user, token.getGroup(), onlyToAdmins, title, message);
   }
 
+  @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   public String writeToParticipants(final String userHash, final StateToken token)
       throws DefaultException {
     final User user = getCurrentUser();

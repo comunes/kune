@@ -34,6 +34,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.content.ContentUtils;
 import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.FileManager;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.utils.StringW;
 import cc.kune.core.shared.domain.AccessRol;
@@ -44,7 +45,6 @@ import cc.kune.domain.Content;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 import com.google.inject.servlet.RequestScoped;
 
 @RequestScoped
@@ -100,7 +100,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
 
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container, mustCheckMembership = false)
-  @Transactional
+  @KuneTransactional
   Content createUploadedFileWrapped(final String userHash, final StateToken stateToken,
       final String fileName, final FileItem fileUploadItem, final String typeId) throws Exception {
     final String relDir = FileUtils.toDir(stateToken);

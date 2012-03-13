@@ -29,6 +29,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.ReservedWordsRegistry;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.AdmissionType;
@@ -41,7 +42,6 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 
 public class GroupRPC implements RPC, GroupService {
   private final ContentManager contentManager;
@@ -66,7 +66,7 @@ public class GroupRPC implements RPC, GroupService {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public void changeDefLicense(final String userHash, final StateToken groupToken,
       final LicenseDTO license) {
     final User user = getUserLogged();
@@ -77,7 +77,7 @@ public class GroupRPC implements RPC, GroupService {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public void changeGroupWsTheme(final String userHash, final StateToken groupToken, final String theme)
       throws DefaultException {
     final User user = getUserLogged();
@@ -88,7 +88,7 @@ public class GroupRPC implements RPC, GroupService {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public GroupDTO clearGroupBackImage(final String userHash, final StateToken token) {
     final Group group = groupManager.findByShortName(token.getGroup());
     groupManager.clearGroupBackImage(group);
@@ -97,7 +97,7 @@ public class GroupRPC implements RPC, GroupService {
 
   @Override
   @Authenticated
-  @Transactional(rollbackOn = DefaultException.class)
+  @KuneTransactional(rollbackOn = DefaultException.class)
   public StateAbstractDTO createNewGroup(final String userHash, final GroupDTO groupDTO,
       final String publicDesc, final String tags, final String[] enabledTools) throws DefaultException {
     final User user = getUserLogged();
@@ -127,7 +127,7 @@ public class GroupRPC implements RPC, GroupService {
   @Override
   @Authenticated(mandatory = true)
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-  @Transactional
+  @KuneTransactional
   public void setGroupNewMembersJoiningPolicy(final String userHash, final StateToken token,
       final AdmissionType admissionPolicy) {
     final Group group = groupManager.findByShortName(token.getGroup());
@@ -137,7 +137,7 @@ public class GroupRPC implements RPC, GroupService {
   @Override
   @Authenticated(mandatory = true)
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-  @Transactional
+  @KuneTransactional
   public void setSocialNetworkVisibility(final String userHash, final StateToken token,
       final SocialNetworkVisibility visibility) {
     final Group group = groupManager.findByShortName(token.getGroup());
@@ -147,7 +147,7 @@ public class GroupRPC implements RPC, GroupService {
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-  @Transactional
+  @KuneTransactional
   public void setToolEnabled(final String userHash, final StateToken groupToken, final String toolName,
       final boolean enabled) {
     groupManager.setToolEnabled(getUserLogged(), groupToken.getGroup(), toolName, enabled);
@@ -155,7 +155,7 @@ public class GroupRPC implements RPC, GroupService {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
   public StateAbstractDTO updateGroup(final String userHash, final StateToken token,
       final GroupDTO groupDTO) throws DefaultException {

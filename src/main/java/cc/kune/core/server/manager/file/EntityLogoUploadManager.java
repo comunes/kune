@@ -34,6 +34,7 @@ import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.GroupManager;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.AccessRol;
@@ -42,7 +43,6 @@ import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 
 public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
 
@@ -89,7 +89,7 @@ public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-  @Transactional
+  @KuneTransactional
   protected String createUploadedFile(final String userHash, final StateToken stateToken,
       final String fileName, final FileItem file, final String typeId) {
     final String mimeTypeS = file.getContentType();

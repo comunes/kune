@@ -33,6 +33,7 @@ import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.properties.ReservedWordsRegistry;
@@ -45,7 +46,6 @@ import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 
 public class SiteRPC implements RPC, SiteService {
   private final ChatProperties chatProperties;
@@ -88,7 +88,7 @@ public class SiteRPC implements RPC, SiteService {
   }
 
   @Override
-  @Transactional
+  @KuneTransactional
   public InitDataDTO getInitData(final String userHash) throws DefaultException {
     final InitDataDTO dataMapped = mapper.map(data, InitDataDTO.class);
 

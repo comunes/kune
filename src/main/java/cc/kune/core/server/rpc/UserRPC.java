@@ -44,6 +44,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.manager.impl.EmailConfirmationType;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.ReservedWordsRegistry;
 import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.server.users.UserInfoService;
@@ -64,7 +65,6 @@ import cc.kune.wave.server.CustomWaveClientServlet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
-import com.google.inject.persist.Transactional;
 
 public class UserRPC implements RPC, UserService {
 
@@ -100,14 +100,14 @@ public class UserRPC implements RPC, UserService {
 
   @Authenticated
   @Override
-  @Transactional
+  @KuneTransactional
   public void askForEmailConfirmation(final String userHash) throws DefaultException {
     final User user = userSessionManager.getUser();
     userManager.askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
   }
 
   @Override
-  @Transactional
+  @KuneTransactional
   public void askForPasswordReset(final String email) throws EmailNotFoundException {
     try {
       final User user = userFinder.findByEmail(email);
@@ -119,7 +119,7 @@ public class UserRPC implements RPC, UserService {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public void changePasswd(final String userHash, final String oldPassword, final String newPassword)
       throws DefaultException {
     final Long userId = userSessionManager.getUser().getId();
@@ -127,7 +127,7 @@ public class UserRPC implements RPC, UserService {
   }
 
   @Override
-  @Transactional(rollbackOn = DefaultException.class)
+  @KuneTransactional(rollbackOn = DefaultException.class)
   public void createUser(final UserDTO userDTO, final boolean wantPersonalHomepage)
       throws DefaultException {
     reserverdWords.check(userDTO.getShortName(), userDTO.getName());
@@ -138,7 +138,7 @@ public class UserRPC implements RPC, UserService {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
   public String getUserAvatarBaser64(final String userHash, final StateToken userToken)
       throws DefaultException {
@@ -169,7 +169,7 @@ public class UserRPC implements RPC, UserService {
   }
 
   @Override
-  @Transactional
+  @KuneTransactional
   public UserInfoDTO login(final String nickOrEmail, final String passwd, final String waveToken)
       throws DefaultException {
     // final SessionService sessionService = sessionServiceProvider.get();
@@ -189,14 +189,14 @@ public class UserRPC implements RPC, UserService {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public void logout(final String userHash) throws DefaultException {
     userSessionManager.logout();
   }
 
   @Override
   @Authenticated(mandatory = false)
-  @Transactional
+  @KuneTransactional
   public void onlyCheckSession(final String userHash) throws DefaultException {
     // Do almost nothing @Authenticated checks user session
     userSessionManager.updateLoggedUser();
@@ -204,7 +204,7 @@ public class UserRPC implements RPC, UserService {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public UserInfoDTO reloadUserInfo(final String userHash) throws DefaultException {
     final User user = userSessionManager.getUser();
     userSessionManager.updateLoggedUser();
@@ -212,7 +212,7 @@ public class UserRPC implements RPC, UserService {
   }
 
   @Override
-  @Transactional
+  @KuneTransactional
   public void resetPassword(final String passwdHash, final String newpasswd)
       throws EmailHashInvalidException {
     try {
@@ -227,7 +227,7 @@ public class UserRPC implements RPC, UserService {
   @Override
   @Authenticated(mandatory = true)
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-  @Transactional
+  @KuneTransactional
   public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
       final UserSNetVisibility visibility) {
     final User user = userSessionManager.getUser();
@@ -239,7 +239,7 @@ public class UserRPC implements RPC, UserService {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public StateAbstractDTO updateUser(final String userHash, final UserDTO user,
       final I18nLanguageSimpleDTO lang) throws DefaultException, EmailAddressInUseException,
       GroupLongNameInUseException {
@@ -254,7 +254,7 @@ public class UserRPC implements RPC, UserService {
 
   @Authenticated
   @Override
-  @Transactional
+  @KuneTransactional
   public void verifyPasswordHash(final String userHash, final String emailReceivedHash)
       throws EmailHashInvalidException, EmailHashExpiredException {
     final User user = userSessionManager.getUser();

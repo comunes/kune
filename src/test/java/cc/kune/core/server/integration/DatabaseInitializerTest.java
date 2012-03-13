@@ -37,13 +37,13 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.manager.LicenseManager;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.ToolConfiguration;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 
 public class DatabaseInitializerTest {
   @Inject
@@ -62,7 +62,7 @@ public class DatabaseInitializerTest {
   @Inject
   I18nTranslationManager transManager;
 
-  @Transactional
+  @KuneTransactional
   @Before
   public void init() {
     new IntegrationTestHelper(this);

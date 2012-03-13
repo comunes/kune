@@ -55,6 +55,6 @@ public class DataSourceOpenfirePersistModule extends PrivateModule {
     bind(MY_DATA_SOURCE_TWO_FILTER_KEY).to(CustomPersistFilter.class);
     expose(MY_DATA_SOURCE_TWO_FILTER_KEY);
 
-    // bind(KunePersistenceInitializer.class).asEagerSingleton();
+    bind(GenericPersistenceInitializer.class).asEagerSingleton();
   }
 }

@@ -26,6 +26,7 @@ import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentUtils;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.RPC;
 import cc.kune.core.shared.domain.AccessRol;
@@ -40,7 +41,6 @@ import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.shared.ListsConstants;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 
 public class ListsRPC implements ListsService, RPC {
   private final ContainerManager contentManager;
@@ -63,7 +63,7 @@ public class ListsRPC implements ListsService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.container)
-  @Transactional
+  @KuneTransactional
   public StateContainerDTO createList(final String userHash, final StateToken parentToken,
       final String listaName, final String description, final boolean isPublic) {
     final StateContainerDTO result = contentRPC.addFolder(userHash, parentToken,
@@ -84,7 +84,7 @@ public class ListsRPC implements ListsService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.container)
-  @Transactional
+  @KuneTransactional
   public StateContentDTO newPost(final String userHash, final StateToken parentToken,
       final String postTitle) {
     final Container container = getContainer(parentToken);
@@ -108,7 +108,7 @@ public class ListsRPC implements ListsService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.container)
-  @Transactional
+  @KuneTransactional
   public StateContainerDTO setPublic(final String hash, final StateToken token, final Boolean isPublic) {
     final Container container = setPublicAcl(token, isPublic);
     return contentRPC.getState(container);
@@ -130,7 +130,7 @@ public class ListsRPC implements ListsService, RPC {
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.container)
-  @Transactional
+  @KuneTransactional
   public StateContainerDTO subscribeToList(final String userHash, final StateToken token,
       final Boolean subscribe) {
     final Container container = getContainer(token);

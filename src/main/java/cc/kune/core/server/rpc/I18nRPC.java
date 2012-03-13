@@ -34,6 +34,7 @@ import cc.kune.core.server.auth.SuperAdmin;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
@@ -42,7 +43,6 @@ import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.persist.Transactional;
 
 public class I18nRPC implements RPC, I18nService {
   private final I18nTranslationManager i18nTranslationManager;
@@ -63,7 +63,7 @@ public class I18nRPC implements RPC, I18nService {
   }
 
   @Override
-  @Transactional
+  @KuneTransactional
   public I18nLanguageDTO getInitialLanguage(final String localeParam) {
     String initLanguage;
     I18nLanguage lang;
@@ -97,14 +97,14 @@ public class I18nRPC implements RPC, I18nService {
   }
 
   @Override
-  @Transactional
+  @KuneTransactional
   public HashMap<String, String> getLexicon(final String language) {
     return i18nTranslationManager.getLexicon(language);
   }
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   public List<I18nTranslationDTO> getTranslatedLexicon(final String userHash, final String language,
       final boolean toTranslate) {
     if (toTranslate) {
@@ -115,7 +115,7 @@ public class I18nRPC implements RPC, I18nService {
   }
 
   @Override
-  @Transactional
+  @KuneTransactional
   public String getTranslation(final String userHash, final String language, final String text,
       final String noteForTranslators) {
     String translation = null;
@@ -134,7 +134,7 @@ public class I18nRPC implements RPC, I18nService {
 
   @Override
   @Authenticated
-  @Transactional
+  @KuneTransactional
   @SuperAdmin(rol = AccessRol.Editor)
   public String setTranslation(final String userHash, final Long id, final String translation)
       throws DefaultException {
