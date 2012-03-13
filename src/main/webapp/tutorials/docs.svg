@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.7686691"
-     inkscape:cx="759.91175"
-     inkscape:cy="800.67692"
+     inkscape:zoom="1.3073873"
+     inkscape:cx="292.56466"
+     inkscape:cy="1317.1764"
      inkscape:document-units="px"
      inkscape:current-layer="layer5"
      showgrid="false"
@@ -458,7 +458,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="frames"
-     style="display:inline">
+     style="display:none">
     <rect
        transform="translate(0,435.8268)"
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
@@ -10158,7 +10158,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="es"
-     style="display:inline"
+     style="display:none"
      transform="translate(0,435.8268)">
     <text
        sodipodi:linespacing="125%"
@@ -10395,7 +10395,7 @@
          y="684.32764"
          x="323.03564"
          sodipodi:role="line"
-         id="tspan8077"></tspan><tspan
+         id="tspan8077" /><tspan
          style="font-size:12px;font-weight:normal;fill:#aa4400"
          y="699.32764"
          x="323.03564"

@@ -3,6 +3,7 @@ package cc.kune.gspace.client.viewers;
 import java.util.List;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.ui.dialogs.CloseDialogButton;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.FileConstants;
@@ -24,6 +25,8 @@ public class TutorialViewer extends Composite {
 
   private static final int FOOTBAR = 12;
   private static TutorialViewerUiBinder uiBinder = GWT.create(TutorialViewerUiBinder.class);
+  @UiField
+  CloseDialogButton closeBtn;
   private String defLang;
   @UiField
   public Frame frame;

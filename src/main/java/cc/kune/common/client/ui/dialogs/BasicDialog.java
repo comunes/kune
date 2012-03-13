@@ -32,7 +32,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -46,7 +45,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
   @UiField
   FlowPanel btnPanel;
   @UiField
-  PushButton closeBtn;
+  CloseDialogButton closeBtn;
   @UiField
   Button firstBtn;
   @UiField

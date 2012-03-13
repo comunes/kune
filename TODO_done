@@ -387,6 +387,20 @@ com.google.wave.api.InvalidRequestException: Wavelet [WaveletName localhost/w+1v
   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/3e7e6cc3b35ad98a
   http://code.google.com/p/google-web-toolkit/wiki/WAR_Design_1_6
   http://www.gwt-ext.com/forum/viewtopic.php?f=5&p=12038
+* Custom Auth
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2012-03-13 mar 12:24
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :END:
+    http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/javadoc/org/jivesoftware/openfire/auth/HybridAuthProvider.html
+    provider.auth.className=org.jivesoftware.openfire.auth.HybridAuthProvider
+    hybridAuthProvider.primaryProvider.className = org.jivesoftware.openfire.auth.JDBCAuthProvider    
+    hybridAuthProvider.secondaryProvider.className = cc.kune.core.server.auth.openfire.KuneAuthProvider
+cp /tmp/model.jar apache-wave-model.jar
+cp /tmp/kune-0.1.0-SNAPSHOT-jar-openfire-customauth.jar kune-authprovider.jar
+
 
 
 

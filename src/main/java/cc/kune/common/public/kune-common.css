@@ -181,9 +181,17 @@
   color: #181817 !important;
   border: 0 none !important;
   position: relative;
-  top: -26px;
   height: 17px !important;
+}
+
+.k-dialog-close-btn-dialog {
+  top: -26px;  
   left: 1px;
+}
+
+.k-dialog-close-btn-normal {
+  top: 10px;
+  left: 0px;  
 }
 
 .k-dialog-firstBtn {
