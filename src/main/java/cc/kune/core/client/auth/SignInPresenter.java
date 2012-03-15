@@ -133,7 +133,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
           @Override
           public void onSuccess(final UserInfoDTO userInfoDTO) {
-            onSignIn(userInfoDTO, gotoHomePage);
+            onSignIn(userInfoDTO, gotoHomePage, passwd);
             extCallback.onSuccess(null);
           }
         };

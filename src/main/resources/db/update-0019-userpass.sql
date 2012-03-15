@@ -1,0 +1,3 @@
+BEGIN WORK;
+ALTER TABLE kusers DROP COLUMN password;
+COMMIT;

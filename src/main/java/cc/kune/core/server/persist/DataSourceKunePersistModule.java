@@ -37,14 +37,16 @@ public class DataSourceKunePersistModule extends PrivateModule {
   public static final Log LOG = LogFactory.getLog(DataSourceKunePersistModule.class);
   public static final Key<CustomPersistFilter> MY_DATA_SOURCE_ONE_FILTER_KEY = Key.get(
       CustomPersistFilter.class, DataSourceKune.class);
+  private String kuneConfig;
+  private KunePropertiesDefault kuneProperties;
   private String settedJpaUnit = null;
-  private String settedProperties = null;
   private KuneJpaLocalTxnInterceptor transactionInterceptor;
 
   /**
    * Instantiates this module (main constructor)
    */
   public DataSourceKunePersistModule() {
+    init(null);
   }
 
   /**
@@ -56,17 +58,13 @@ public class DataSourceKunePersistModule extends PrivateModule {
    *          the setted jpa unit
    */
   public DataSourceKunePersistModule(final String settedProperties, final String settedJpaUnit) {
-    this.settedProperties = settedProperties;
     this.settedJpaUnit = settedJpaUnit;
+    init(settedProperties);
   }
 
   @Override
   public void configure() {
-    final SystemConfiguration sysConf = new SystemConfiguration();
-    final String kuneConfig = settedProperties != null ? settedProperties
-        : sysConf.getString("kune.server.config");
 
-    final KunePropertiesDefault kuneProperties = new KunePropertiesDefault(kuneConfig);
     bind(KuneProperties.class).toInstance(kuneProperties);
 
     // precedence method param > properties
@@ -134,7 +132,17 @@ public class DataSourceKunePersistModule extends PrivateModule {
     bind(GenericPersistenceInitializer.class).asEagerSingleton();
   }
 
+  public KuneProperties getKuneProperties() {
+    return kuneProperties;
+  }
+
   public KuneJpaLocalTxnInterceptor getTransactionInterceptor() {
     return transactionInterceptor;
+  }
+
+  private void init(final String settedProperties) {
+    final SystemConfiguration sysConf = new SystemConfiguration();
+    kuneConfig = settedProperties != null ? settedProperties : sysConf.getString("kune.server.config");
+    kuneProperties = new KunePropertiesDefault(kuneConfig);
   }
 }

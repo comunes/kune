@@ -106,7 +106,7 @@ public class AppStarterDefault implements AppStarter {
       @Override
       public void onSuccess(final InitDataDTO initData) {
         session.setInitData(initData);
-        session.setCurrentUserInfo(initData.getUserInfo());
+        session.setCurrentUserInfo(initData.getUserInfo(), null);
         hideInitialPanels();
         checkNavigatorCompatibility(new NavigatorSupport() {
           @Override

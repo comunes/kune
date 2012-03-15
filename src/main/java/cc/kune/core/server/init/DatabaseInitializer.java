@@ -90,11 +90,11 @@ public class DatabaseInitializer {
 
     final PasswordDigest passwdDigest = new PasswordDigest(adminPassword.toCharArray());
     userManager.createWaveAccount(adminShortName, passwdDigest);
-    final User user = new User(adminShortName, adminName, adminEmail, adminPassword,
-        passwdDigest.getDigest(), passwdDigest.getSalt(), languageManager.findByCode("en"),
-        countryManager.findByCode("GB"), TimeZone.getDefault());
+    final User user = new User(adminShortName, adminName, adminEmail, passwdDigest.getDigest(),
+        passwdDigest.getSalt(), languageManager.findByCode("en"), countryManager.findByCode("GB"),
+        TimeZone.getDefault());
     groupManager.createUserGroup(user, false);
-    final User dummyUser = new User("dummy", "dummy user", "example@example.com", adminPassword,
+    final User dummyUser = new User("dummy", "dummy user", "example@example.com",
         passwdDigest.getDigest(), passwdDigest.getSalt(), languageManager.findByCode("en"),
         countryManager.findByCode("GB"), TimeZone.getDefault());
     groupManager.createUserGroup(dummyUser, false);

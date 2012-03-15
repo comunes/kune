@@ -174,6 +174,7 @@ public class UserRPC implements RPC, UserService {
       throws DefaultException {
     // final SessionService sessionService = sessionServiceProvider.get();
     // sessionService.getNewSession();
+
     final User user = userManager.login(nickOrEmail, passwd);
     return loginUser(user, waveToken);
   }

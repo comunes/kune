@@ -69,7 +69,10 @@ public class EventsServerConversionUtil extends EventsSharedConversionUtil {
         map.put(ICalConstants._INTERNAL_ID, content.getStateToken().toString());
         list.add(map);
       } catch (final InvalidWaveRefException e) {
-        LOG.log(Level.SEVERE, "Invalid Waveref", e);
+        LOG.log(Level.SEVERE, "Invalid Waveref: " + waveId, e);
+      } catch (final Exception e2) {
+        LOG.log(Level.SEVERE, "Invalid Wave in content: " + content.getStateToken() + " waveref: "
+            + waveId, e2);
       }
     }
     return list;

@@ -69,7 +69,7 @@ public class IntegrationTestHelper {
       final Injector childInjector = injector.createChildInjector(
           wavePersistModule,
           kuneDataSource,
-          new DataSourceOpenfirePersistModule(),
+          new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()),
           new AbstractModule() {
             @Override
             protected void configure() {

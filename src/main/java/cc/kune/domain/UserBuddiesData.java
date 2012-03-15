@@ -22,46 +22,45 @@ package cc.kune.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class UserBuddiesData {
 
-    public static final UserBuddiesData EMPTY = new UserBuddiesData();
+  public static final UserBuddiesData EMPTY = new UserBuddiesData();
 
-    private List<User> buddies;
-    private int otherExtBuddies;
+  private List<User> buddies;
+  private int otherExtBuddies;
 
-    public UserBuddiesData() {
-        otherExtBuddies = 0;
-        buddies = new ArrayList<User>();
+  public UserBuddiesData() {
+    otherExtBuddies = 0;
+    buddies = new ArrayList<User>();
+  }
+
+  public boolean contains(final String shortName) {
+    for (final User buddie : buddies) {
+      if (buddie.getShortName().equals(shortName)) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    public boolean contains(final String shortName) {
-        for (User buddie : buddies) {
-            if (buddie.getShortName().equals(shortName)) {
-                return true;
-            }
-        }
-        return false;
-    }
+  public List<User> getBuddies() {
+    return buddies;
+  }
 
-    public List<User> getBuddies() {
-        return buddies;
-    }
+  public int getOtherExtBuddies() {
+    return otherExtBuddies;
+  }
 
-    public int getOtherExtBuddies() {
-        return otherExtBuddies;
-    }
+  public void setBuddies(final List<User> buddies) {
+    this.buddies = buddies;
+  }
 
-    public void setBuddies(final List<User> buddies) {
-        this.buddies = buddies;
-    }
+  public void setOtherExtBuddies(final int otherExtBuddies) {
+    this.otherExtBuddies = otherExtBuddies;
+  }
 
-    public void setOtherExtBuddies(final int otherExtBuddies) {
-        this.otherExtBuddies = otherExtBuddies;
-    }
-
-    @Override
-    public String toString() {
-        return "UserBuddiesData[ext: " + otherExtBuddies + " / int: " + buddies + "]";
-    }
+  @Override
+  public String toString() {
+    return "UserBuddiesData[ext: " + otherExtBuddies + " / int: " + buddies + "]";
+  }
 }

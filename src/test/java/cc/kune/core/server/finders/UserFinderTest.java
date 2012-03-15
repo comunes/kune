@@ -35,27 +35,27 @@ import cc.kune.domain.finders.UserFinder;
 import com.google.inject.Inject;
 
 public class UserFinderTest extends PersistencePreLoadedDataTest {
-    @Inject
-    UserFinder finder;
+  @Inject
+  UserFinder finder;
 
-    @Test
-    public void findAll() {
-        final List<User> all = finder.getAll();
-        assertEquals(3, all.size());
-    }
+  @Test
+  public void findAll() {
+    final List<User> all = finder.getAll();
+    assertEquals(3, all.size());
+  }
 
-    @Test
-    public void findByEmail() {
-        final User user = finder.findByEmail("one@here.com");
-        assertNotNull(user);
-    }
+  @Test
+  public void findByEmail() {
+    final User user = finder.findByEmail("one@here.com");
+    assertNotNull(user);
+  }
 
-    @Before
-    public void initData() {
-        persist(new User("shortname1", "the name1", "one@here.com", "password1", "diggest".getBytes(),
-                "salt".getBytes(), english, gb, TimeZone.getDefault()));
-        persist(new User("shortname2", "the name2", "two@here.com", "password1", "somediggest".getBytes(),
-                "salt".getBytes(), english, gb, TimeZone.getDefault()));
-    }
+  @Before
+  public void initData() {
+    persist(new User("shortname1", "the name1", "one@here.com", "diggest".getBytes(), "salt".getBytes(),
+        english, gb, TimeZone.getDefault()));
+    persist(new User("shortname2", "the name2", "two@here.com", "somediggest".getBytes(),
+        "salt".getBytes(), english, gb, TimeZone.getDefault()));
+  }
 
 }

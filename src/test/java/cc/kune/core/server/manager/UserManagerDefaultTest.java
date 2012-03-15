@@ -46,21 +46,21 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   @Test
   public void emailCorrect() {
-    user = new User("test1", "test1 name", "test@example.com", "some passwd", "somediggest".getBytes(),
+    user = new User("test1", "test1 name", "test@example.com", "somediggest".getBytes(),
         "some salt".getBytes(), english, gb, getTimeZone());
     persist(user);
   }
 
   @Test(expected = PersistenceException.class)
   public void emailEmpty() {
-    user = new User("test1", "test1 name", null, "some passwd", "somediggest".getBytes(),
-        "some salt".getBytes(), english, gb, getTimeZone());
+    user = new User("test1", "test1 name", null, "somediggest".getBytes(), "some salt".getBytes(),
+        english, gb, getTimeZone());
     persist(user);
   }
 
   @Test(expected = InvalidStateException.class)
   public void emailIncorrect() {
-    user = new User("test1", "test1 name", "falseEmail@", "some passwd", "somediggest".getBytes(),
+    user = new User("test1", "test1 name", "falseEmail@", "somediggest".getBytes(),
         "some salt".getBytes(), english, gb, getTimeZone());
     persist(user);
   }
@@ -89,8 +89,8 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   @Test(expected = InvalidStateException.class)
   public void passwdLengthIncorrect() {
-    user = new User("test1", "test1 name", "test@example.com", "pass", "diggest".getBytes(),
-        "salt".getBytes(), english, gb, getTimeZone());
+    user = new User("test1", "test1 name", "test@example.com", "diggest".getBytes(), "salt".getBytes(),
+        english, gb, getTimeZone());
     persist(user);
   }
 
@@ -110,8 +110,8 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   @Test(expected = InvalidStateException.class)
   public void userNameLengthIncorrect() {
-    user = new User("test1", "te", "test@example.com", "some passwd", "diggest".getBytes(),
-        "salt".getBytes(), english, gb, getTimeZone());
+    user = new User("test1", "te", "test@example.com", "diggest".getBytes(), "salt".getBytes(), english,
+        gb, getTimeZone());
     persist(user);
   }
 
@@ -126,14 +126,14 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   @Test(expected = InvalidStateException.class)
   public void userShortNameIncorrect() {
-    user = new User("test1A", "test1 name", "test@example.com", "some passwd", "diggest".getBytes(),
-        "salt".getBytes(), english, gb, getTimeZone());
+    user = new User("test1A", "test1 name", "test@example.com", "diggest".getBytes(), "salt".getBytes(),
+        english, gb, getTimeZone());
     persist(user);
   }
 
   @Test
   public void visibilityPersist() {
-    user = new User("test1", "test1 name", "test@example.com", "some passwd", "somediggest".getBytes(),
+    user = new User("test1", "test1 name", "test@example.com", "somediggest".getBytes(),
         "some salt".getBytes(), english, gb, getTimeZone());
     for (final UserSNetVisibility visibility : UserSNetVisibility.values()) {
       user.setSNetVisibility(visibility);

@@ -21,7 +21,6 @@ package cc.kune.core.server.manager.impl;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.Timer;
@@ -37,8 +36,6 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
-import org.jivesoftware.smack.RosterEntry;
-import org.jivesoftware.smack.packet.RosterPacket.ItemType;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 import org.waveprotocol.box.server.persistence.AccountStore;
@@ -72,9 +69,9 @@ import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneBasicProperties;
-import cc.kune.core.server.xmpp.ChatConnection;
-import cc.kune.core.server.xmpp.ChatException;
+import cc.kune.core.server.xmpp.RosterItem;
 import cc.kune.core.server.xmpp.XmppManager;
+import cc.kune.core.server.xmpp.XmppRosterProvider;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.UserDTO;
@@ -109,6 +106,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final AccountStore waveAccountStore;
   private final CustomUserRegistrationServlet waveUserRegister;
   private final XmppManager xmppManager;
+  private final XmppRosterProvider xmppRoster;
 
   @Inject
   public UserManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -118,7 +116,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final CustomUserRegistrationServlet waveUserRegister, final AccountStore waveAccountStore,
       final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils,
       final KuneBasicProperties properties, final GroupManager groupManager,
-      final NotificationService notifyService) {
+      final NotificationService notifyService, final XmppRosterProvider xmppRoster) {
     super(provider, User.class);
     this.userFinder = finder;
     this.languageManager = languageManager;
@@ -133,6 +131,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.properties = properties;
     this.groupManager = groupManager;
     this.notifyService = notifyService;
+    this.xmppRoster = xmppRoster;
   }
 
   /*
@@ -202,7 +201,6 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
     // Kune db change passwd
     final PasswordDigest newPasswordDigest = new PasswordDigest(newPassword.toCharArray());
-    user.setPassword(newPassword);
     user.setSalt(newPasswordDigest.getSalt());
     user.setDiggest(newPasswordDigest.getDigest());
     return persist(user);
@@ -264,14 +262,14 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       throw e;
     }
     WaveRef welcome = null;
-    final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
+    final User user = new User(shortName, longName, email, passwdDigest.getDigest(),
         passwdDigest.getSalt(), language, country, tz);
 
     final String defWave = properties.getWelcomewave();
     groupManager.createUserGroup(user, wantPersonalHomepage);
     try {
       try {
-        if (defWave != null) {
+        if (!TextUtils.empty(defWave)) {
           final WaveId copyWaveId = WaveId.ofChecked(participantUtils.getDomain(), defWave);
           welcome = kuneWaveManager.createWave(
               ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
@@ -347,26 +345,17 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     final UserBuddiesData buddiesData = new UserBuddiesData();
 
     final User user = userFinder.findByShortName(shortName);
-    Collection<RosterEntry> roster;
-    try {
-      final ChatConnection connection = xmppManager.login(user.getShortName() + domain,
-          user.getPassword(), "kserver");
-      roster = xmppManager.getRoster(connection);
-      xmppManager.disconnect(connection);
-    } catch (final ChatException e) {
-      // Seems that it not possible to get the buddies list, then we follow
-      // with a empty buddy list
-      log.error("Cannot retrieve the buddies list", e);
-      roster = new HashSet<RosterEntry>();
-    }
-    for (final RosterEntry entry : roster) {
-      if (entry.getType().equals(ItemType.both)) {
+    Collection<RosterItem> roster;
+    roster = xmppRoster.getRoster(user.getShortName());
+    for (final RosterItem entry : roster) {
+      if (entry.getSubStatus() == 3) {
         // only show buddies with subscription 'both'
-        final int index = entry.getUser().indexOf(domain);
+        final String jid = entry.getJid();
+        final int index = jid.indexOf(domain);
         if (index > 0) {
           // local user
           try {
-            final String username = entry.getUser().substring(0, index);
+            final String username = jid.substring(0, index);
             final User buddie = userFinder.findByShortName(username);
             buddiesData.getBuddies().add(buddie);
           } catch (final NoResultException e) {
@@ -383,6 +372,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   @Override
   public User login(final String nickOrEmail, final String passwd) {
+    final PasswordDigest passwdDigest = new PasswordDigest(passwd.toCharArray());
     User user;
     try {
       user = userFinder.findByShortName(nickOrEmail);
@@ -393,8 +383,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         return null;
       }
     }
-    final I18nLanguage lang = user.getLanguage();
-    if (user.getPassword().equals(passwd)) {
+    if (PasswordDigest.from(user.getSalt(), user.getDiggest()).verify(passwd.toCharArray())) {
+      final I18nLanguage lang = user.getLanguage();
       if (user.getLastLogin() == null) {
         final String userName = user.getShortName();
         final Timer timer = new Timer();

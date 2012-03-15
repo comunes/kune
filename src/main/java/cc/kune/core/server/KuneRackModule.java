@@ -176,7 +176,7 @@ public class KuneRackModule implements RackModule {
       protected void configureServlets() {
         final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule();
         install(kuneDataSource);
-        install(new DataSourceOpenfirePersistModule());
+        install(new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()));
         bindInterceptor(annotatedWith(KuneTransactional.class), any(),
             kuneDataSource.getTransactionInterceptor());
         bindInterceptor(any(), annotatedWith(KuneTransactional.class),
@@ -202,5 +202,4 @@ public class KuneRackModule implements RackModule {
     builder.use(new RESTServicesModule());
     builder.use(configModule);
   }
-
 }

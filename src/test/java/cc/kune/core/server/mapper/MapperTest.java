@@ -365,8 +365,8 @@ public class MapperTest {
 
   @Test
   public void testUserToLinkMappping() {
-    final User user = new User("shortName", "longName", "", "", "".getBytes(), "".getBytes(), null,
-        null, null);
+    final User user = new User("shortName", "longName", "", "".getBytes(), "".getBytes(), null, null,
+        null);
     final LinkDTO dto = mapper.map(user, LinkDTO.class);
     assertEquals("shortName", dto.getShortName());
     assertEquals("longName", dto.getLongName());

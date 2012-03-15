@@ -86,12 +86,12 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     }
   }
 
-  protected void onSignIn(final UserInfoDTO userInfoDTO, final boolean gotoHomePage) {
+  protected void onSignIn(final UserInfoDTO userInfoDTO, final boolean gotoHomePage, final String passwd) {
     final String userHash = userInfoDTO.getUserHash();
     cookiesManager.setAuthCookie(userHash);
     getView().reset();
     session.setUserHash(userHash);
-    session.setCurrentUserInfo(userInfoDTO);
+    session.setCurrentUserInfo(userInfoDTO, passwd);
     final I18nLanguageDTO language = userInfoDTO.getLanguage();
     session.setCurrentLanguage(language);
     i18n.changeToLanguageIfNecessary(language.getCode(), language.getEnglishName(), true,

@@ -153,7 +153,7 @@ public interface Session {
 
   void setCurrentState(final StateAbstractDTO currentState);
 
-  void setCurrentUserInfo(UserInfoDTO currentUserInfo);
+  void setCurrentUserInfo(UserInfoDTO currentUserInfo, String passwd);
 
   void setInitData(InitDataDTO initData);
 

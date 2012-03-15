@@ -24,8 +24,8 @@ import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.events.AppStartEvent;
-import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
@@ -81,7 +81,7 @@ public class AnonUsersManager {
       public void onUserSignIn(final UserSignInEvent event) {
         cookiesManager.setAnonCookie(true);
         if (notifyMsg != null) {
-          // Isue #168, after register/sign-in the message not remains visible
+          // Issue #168, after register/sign-in the message not remains visible
           notifyMsg.getCloser().close();
         }
       }

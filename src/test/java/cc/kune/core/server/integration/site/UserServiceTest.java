@@ -64,7 +64,6 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.UnitOfWork;
 
 public class UserServiceTest extends IntegrationTest {
   @Inject
@@ -81,8 +80,6 @@ public class UserServiceTest extends IntegrationTest {
   @Inject
   SocialNetworkRPC sn;
   private TimeZoneDTO timezone;
-  @Inject
-  UnitOfWork unitOfWork;
   @Inject
   UserInfoService userInfoService;
   @Inject

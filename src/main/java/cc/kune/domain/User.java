@@ -114,10 +114,6 @@ public class User implements HasId {
   @Length(min = 3, max = 50)
   private String name;
 
-  @Column(nullable = false)
-  @Length(min = 6, max = 40)
-  private String password;
-
   @Basic
   @Lob
   @Column(nullable = false)
@@ -140,16 +136,14 @@ public class User implements HasId {
   private Group userGroup;
 
   public User() {
-    this(null, null, null, null, null, null, null, null, null);
+    this(null, null, null, null, null, null, null, null);
   }
 
-  public User(final String shortName, final String longName, final String email, final String passwd,
-      final byte[] diggets, final byte[] salt, final I18nLanguage language, final I18nCountry country,
-      final TimeZone timezone) {
+  public User(final String shortName, final String longName, final String email, final byte[] diggets,
+      final byte[] salt, final I18nLanguage language, final I18nCountry country, final TimeZone timezone) {
     this.shortName = shortName;
     this.name = longName;
     this.email = email;
-    this.password = passwd;
     this.diggest = diggets;
     this.salt = salt;
     this.userGroup = null;
@@ -261,10 +255,6 @@ public class User implements HasId {
     return name;
   }
 
-  public String getPassword() {
-    return password;
-  }
-
   public byte[] getSalt() {
     return salt;
   }
@@ -350,10 +340,6 @@ public class User implements HasId {
 
   public void setName(final String name) {
     this.name = name;
-  }
-
-  public void setPassword(final String password) {
-    this.password = password;
   }
 
   public void setSalt(final byte[] salt) {

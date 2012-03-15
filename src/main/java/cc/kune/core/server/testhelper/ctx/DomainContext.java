@@ -31,67 +31,67 @@ import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.User;
 
 public class DomainContext {
-    private final HashMap<String, Group> groups;
-    private final HashMap<String, User> users;
+  private final HashMap<String, Group> groups;
+  private final HashMap<String, User> users;
 
-    public DomainContext() {
-        this.users = new HashMap<String, User>();
-        this.groups = new HashMap<String, Group>();
-    }
+  public DomainContext() {
+    this.users = new HashMap<String, User>();
+    this.groups = new HashMap<String, Group>();
+  }
 
-    public void createGroups(final String... groupNames) {
-        Group group;
-        for (final String name : groupNames) {
-            group = new Group("name", "Some group: " + name);
-            groups.put(name, group);
-        }
+  public void createGroups(final String... groupNames) {
+    Group group;
+    for (final String name : groupNames) {
+      group = new Group("name", "Some group: " + name);
+      groups.put(name, group);
     }
+  }
 
-    public void createOrphanGroup(final String... groupNames) {
-        Group group;
-        for (final String name : groupNames) {
-            group = new Group("name", "Some group: " + name);
-            group.setGroupType(GroupType.ORPHANED_PROJECT);
-            groups.put(name, group);
-        }
+  public void createOrphanGroup(final String... groupNames) {
+    Group group;
+    for (final String name : groupNames) {
+      group = new Group("name", "Some group: " + name);
+      group.setGroupType(GroupType.ORPHANED_PROJECT);
+      groups.put(name, group);
     }
+  }
 
-    public void createUsers(final String... userNames) {
-        User user;
-        for (final String name : userNames) {
-            user = new User(name, "long" + name, name + "@email.com", ("password" + name), "diggest".getBytes(),
-                    "salt".getBytes(), new I18nLanguage(), new I18nCountry(), TimeZone.getDefault());
-            user.setUserGroup(new Group(name, "groupLong" + name));
-            users.put(name, user);
-        }
+  public void createUsers(final String... userNames) {
+    User user;
+    for (final String name : userNames) {
+      user = new User(name, "long" + name, name + "@email.com", "diggest".getBytes(), "salt".getBytes(),
+          new I18nLanguage(), new I18nCountry(), TimeZone.getDefault());
+      user.setUserGroup(new Group(name, "groupLong" + name));
+      users.put(name, user);
     }
+  }
 
-    public AccessLists getDefaultAccessListOf(final String userName) {
-        return getSocialNetworkOf(userName).getAccessLists();
-    }
+  public AccessLists getDefaultAccessListOf(final String userName) {
+    return getSocialNetworkOf(userName).getAccessLists();
+  }
 
-    public Group getGroup(final String groupName) {
-        return groups.get(groupName);
-    }
+  public Group getGroup(final String groupName) {
+    return groups.get(groupName);
+  }
 
-    public Group getGroupOf(final String userName) {
-        final User user = getUser(userName);
-        final Group userGroup = user.getUserGroup();
-        return userGroup;
-    }
+  public Group getGroupOf(final String userName) {
+    final User user = getUser(userName);
+    final Group userGroup = user.getUserGroup();
+    return userGroup;
+  }
 
-    private SocialNetwork getSocialNetworkOf(final String userName) {
-        final Group userGroup = getGroupOf(userName);
-        final SocialNetwork socialNetwork = userGroup.getSocialNetwork();
-        return socialNetwork;
-    }
+  private SocialNetwork getSocialNetworkOf(final String userName) {
+    final Group userGroup = getGroupOf(userName);
+    final SocialNetwork socialNetwork = userGroup.getSocialNetwork();
+    return socialNetwork;
+  }
 
-    public User getUser(final String userName) {
-        return users.get(userName);
-    }
+  public User getUser(final String userName) {
+    return users.get(userName);
+  }
 
-    public SocialNetworkOperator inSocialNetworkOf(final String userName) {
-        return new SocialNetworkOperator(this, getSocialNetworkOf(userName));
-    }
+  public SocialNetworkOperator inSocialNetworkOf(final String userName) {
+    return new SocialNetworkOperator(this, getSocialNetworkOf(userName));
+  }
 
 }

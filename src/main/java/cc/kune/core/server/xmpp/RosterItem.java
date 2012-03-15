@@ -8,15 +8,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ofRoster")
-public class Roster {
+public class RosterItem {
 
   @Id
   @GeneratedValue
   @Column(name = "rosterID")
   private Long id;
-
   private String jid;
+
   private String nick;
+
+  @Column(name = "sub")
+  private byte subStatus;
+
   private String username;
 
   public Long getId() {
@@ -29,6 +33,24 @@ public class Roster {
 
   public String getNick() {
     return nick;
+  }
+
+  /**
+   * <p>
+   * 0 - None subscribed
+   * <p>
+   * <p>
+   * 1 - The roster owner has a subscription to the roster item's presence.
+   * </p>
+   * <p>
+   * 2 - The roster item has a subscription to the roster owner's presence.
+   * </p>
+   * <p>
+   * 3 - The roster item and owner have a mutual subscription.
+   * </p>
+   */
+  public byte getSubStatus() {
+    return subStatus;
   }
 
   public String getUsername() {
@@ -47,17 +69,19 @@ public class Roster {
     this.nick = nick;
   }
 
+  public void setSubStatus(final byte subStatus) {
+    this.subStatus = subStatus;
+  }
+
   public void setUsername(final String username) {
     this.username = username;
   }
-
   // protected RecvType recvStatus;
   //
   // protected Set<String> sharedGroups = new HashSet<String>();
   //
   // protected Set<String> invisibleSharedGroups = new HashSet<String>();
   //
-  // protected SubType subStatus;
   //
   // protected AskType askStatus;
 }

@@ -180,7 +180,7 @@ public class ChatClientDefault implements ChatClient {
         session.onUserSignIn(true, new UserSignInHandler() {
           @Override
           public void onUserSignIn(final UserSignInEvent event) {
-            doLogin();
+            doLogin(event.getPassword());
           }
         });
         session.onUserSignOut(true, new UserSignOutHandler() {
@@ -298,15 +298,19 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public void doLogin() {
-    assert session.getCurrentUserInfo() != null;
-    doLogin(session.getCurrentUserInfo(), session.getUserHash());
+    doLogin(null);
   }
 
-  private void doLogin(final UserInfoDTO user, final String token) {
+  private void doLogin(final String password) {
+    assert session.getCurrentUserInfo() != null;
+    doLogin(session.getCurrentUserInfo(), password == null ? session.getUserHash() : password);
+  }
+
+  private void doLogin(final UserInfoDTO user, final String tokenOrPassword) {
     createActionIfNeeded();
     createDialogIfNeeded();
     chatOptions.username = user.getChatName();
-    chatOptions.passwd = token;
+    chatOptions.passwd = tokenOrPassword;
     chatOptions.resource = "emite-" + new Date().getTime() + "-kune";
     chatOptions.useruri = XmppURI.uri(chatOptions.username, chatOptions.domain, chatOptions.resource);
     createActionIfNeeded();

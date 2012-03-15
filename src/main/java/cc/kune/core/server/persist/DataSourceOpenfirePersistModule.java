@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
 
+import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.xmpp.OpenfireXmppRosterFinder;
 import cc.kune.core.server.xmpp.OpenfireXmppRosterProvider;
 import cc.kune.core.server.xmpp.XmppRosterProvider;
@@ -19,23 +20,25 @@ import com.google.inject.persist.jpa.JpaPersistModule;
 public class DataSourceOpenfirePersistModule extends PrivateModule {
   public static final Key<CustomPersistFilter> MY_DATA_SOURCE_TWO_FILTER_KEY = Key.get(
       CustomPersistFilter.class, DataSourceOpenfire.class);
+  private final KuneProperties kuneProperties;
+
+  public DataSourceOpenfirePersistModule(final KuneProperties kuneProperties) {
+    this.kuneProperties = kuneProperties;
+  }
 
   @Override
   public void configure() {
     final JpaPersistModule jpm = new JpaPersistModule("openfire");
-    // jpm.properties(new Properties());
 
     final Properties dbProperties = new Properties();
-    dbProperties.setProperty(
-        "hibernate.connection.url",
-        "jdbc:mysql://localhost/openfire4?createDatabaseIfNotExist=false&amp;useUnicode=true&amp;characterEncoding=UTF-8");
-    // kuneProperties.get(KuneProperties.SITE_DB_URL));
-    dbProperties.setProperty("hibernate.connection.username", "openfire");
-    // kuneProperties.get(KuneProperties.SITE_DB_USER));
-    dbProperties.setProperty("hibernate.connection.password", "easyeasy");
-    dbProperties.setProperty("exclude-unlisted-classes", "true");
 
-    // kuneProperties.get(KuneProperties.SITE_DB_PASSWORD));
+    dbProperties.setProperty("hibernate.connection.url",
+        kuneProperties.get(KuneProperties.SITE_OPENFIRE_DB_URL));
+    dbProperties.setProperty("hibernate.connection.username",
+        kuneProperties.get(KuneProperties.SITE_OPENFIRE_DB_USER));
+    dbProperties.setProperty("hibernate.connection.password",
+        kuneProperties.get(KuneProperties.SITE_OPENFIRE_DB_PASSWORD));
+    dbProperties.setProperty("exclude-unlisted-classes", "true");
 
     jpm.properties(dbProperties);
     install(jpm.addFinder(OpenfireXmppRosterFinder.class));

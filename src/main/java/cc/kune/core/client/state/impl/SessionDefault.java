@@ -319,7 +319,7 @@ public class SessionDefault implements Session {
   public void onUserSignIn(final boolean fireNow, final UserSignInHandler handler) {
     eventBus.addHandler(UserSignInEvent.getType(), handler);
     if (fireNow && isLogged() && currentUserInfo != null) {
-      handler.onUserSignIn(new UserSignInEvent(currentUserInfo));
+      handler.onUserSignIn(new UserSignInEvent(currentUserInfo, null));
     }
   }
 
@@ -350,10 +350,10 @@ public class SessionDefault implements Session {
   }
 
   @Override
-  public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
+  public void setCurrentUserInfo(final UserInfoDTO currentUserInfo, final String password) {
     this.currentUserInfo = currentUserInfo;
     if (currentUserInfo != null) {
-      eventBus.fireEvent(new UserSignInEvent(this.currentUserInfo));
+      eventBus.fireEvent(new UserSignInEvent(this.currentUserInfo, password));
     } else {
       eventBus.fireEvent(new UserSignOutEvent());
     }
@@ -374,6 +374,6 @@ public class SessionDefault implements Session {
   public void signOut() {
     cookieManager.removeAuthCookie();
     setUserHash(null);
-    setCurrentUserInfo(null);
+    setCurrentUserInfo(null, null);
   }
 }
