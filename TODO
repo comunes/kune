@@ -22,6 +22,11 @@ TODO-list for kune -*- mode: org; -*-
 *** copy the jar and the compilation to other sites in the same lan
 *** update /etc/kune (if needed)
 *** migrate the database (if needed)
+** users presence vi API (for better notifications)
+http://www.igniterealtime.org/projects/openfire/plugins/presence/readme.html
+http://127.0.0.1:9090/plugins/presence/status?jid=admin@localhost&type=xml
+http://community.igniterealtime.org/thread/29064
+http://www.igniterealtime.org/builds/wildfire/docs/3.3.0_alpha_1/documentation/javadoc/org/jivesoftware/wildfire/commands/admin/GetUsersPresence.html
 ** group.inexistentTool nasty error
 ** calendar support
 *** gwt-cal + http://ical4j.sourceforge.net/introduction.html

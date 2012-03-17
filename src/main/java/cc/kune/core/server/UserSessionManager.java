@@ -81,9 +81,8 @@ public class UserSessionManager implements UsersOnline {
     return !isUserLoggedIn();
   }
 
-  public void login(final Long userId, final String name, final String newUserHash) {
+  public void login(final Long userId, final String newUserHash) {
     getUserSession().setUserId(userId);
-    getUserSession().setUserName(name);
     getUserSession().setHash(newUserHash);
     updateLoggedUser();
   }

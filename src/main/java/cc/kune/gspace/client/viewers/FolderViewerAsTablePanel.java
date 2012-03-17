@@ -40,8 +40,8 @@ import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 import cc.kune.gspace.client.viewers.items.FolderItemWidget;
 
+import com.calclab.emite.core.client.packet.TextUtils;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.MouseOutEvent;
@@ -71,7 +71,6 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   private final GuiProvider guiProvider;
   private final CoreResources res;
-  protected FolderItemWidget selected;
 
   @Inject
   public FolderViewerAsTablePanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
@@ -93,7 +92,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       final DoubleClickHandler doubleClickHandler) {
     final int rowCount = flex.getRowCount();
     final FolderItemWidget itemWidget = new FolderItemWidget((ImageResource) item.getIcon(),
-        item.getText(), item.getStateToken(), ITEM_ID + (flex.getRowCount() + 1));
+        TextUtils.ellipsis(item.getText(), 70), item.getStateToken(), ITEM_ID + (flex.getRowCount() + 1));
     final ActionSimplePanel toolbar = new ActionSimplePanel(guiProvider, i18n);
     final long modifiedOn = item.getModififiedOn();
     if (modifiedOn != FolderViewerView.NO_DATE) {
@@ -103,16 +102,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     itemWidget.setMenu(toolbar);
     Tooltip.to(itemWidget, item.getTooltip());
     // FIXME make this under demand
-    itemWidget.getRowClick().addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        if (selected != null) {
-          selected.setSelect(false);
-        }
-        itemWidget.setSelect(true);
-        selected = itemWidget;
-      }
-    });
+    itemWidget.getRowClick().addClickHandler(clickHandler);
     if (ContentStatus.inTheDustbin.equals(item.getContentStatus())) {
       itemWidget.getTitleWidget().addStyleName("k-line-through");
     }
@@ -121,9 +111,6 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       @Override
       public void onMouseOut(final MouseOutEvent event) {
         itemWidget.setMenuVisible(false);
-        // menu.setVisible(false);
-        // itemWidget.setSelect(false);
-        // menu.hide();
       }
     });
     final MenuDescriptor menu = new MenuDescriptor(i18n.t("Actions"));
@@ -151,7 +138,6 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
           init(item, itemWidget, toolbar);
           initialized = true;
         }
-        // menu.setVisible(true);
         itemWidget.setMenuVisible(true);
       }
     });

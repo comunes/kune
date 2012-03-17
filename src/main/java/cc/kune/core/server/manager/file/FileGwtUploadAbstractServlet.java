@@ -83,8 +83,12 @@ public abstract class FileGwtUploadAbstractServlet extends UploadAction {
         file = item;
       }
     }
+    final String response = createUploadedFile(userHash, stateToken, fileName, file, typeId);
 
-    return createUploadedFile(userHash, stateToken, fileName, file, typeId);
+    // Remove files from session because we have a copy of them
+    removeSessionFileItems(request);
+
+    return response;
 
   }
 

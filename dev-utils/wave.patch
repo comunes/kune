@@ -1,0 +1,891 @@
+diff --git a/.classpath b/.classpath
+index dbfd956..1ab7f02 100644
+--- a/.classpath
++++ b/.classpath
+@@ -37,7 +37,7 @@
+ 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-io-8.0.1.v20110908.jar"/>
+ 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-security-8.0.1.v20110908.jar"/>
+ 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-server-8.0.1.v20110908.jar"/>
+-	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-servlet-8.0.1.v20110908.jar"/>
++	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-servlet-8.0.1.v20110908.jar" sourcepath="/home/vjrj/.m2/repository/org/eclipse/jetty/jetty-servlet/8.0.1.v20110908/jetty-servlet-8.0.1.v20110908-sources.jar"/>
+ 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-servlets-8.0.1.v20110908.jar"/>
+ 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-util-8.0.1.v20110908.jar"/>
+ 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-webapp-8.0.1.v20110908.jar"/>
+@@ -67,7 +67,7 @@
+ 	<classpathentry kind="lib" path="third_party/test/hamcrest/hamcrest-all-1.2.jar"/>
+ 	<classpathentry kind="lib" path="third_party/test/jmock/jmock-2.5.1.jar"/>
+ 	<classpathentry kind="lib" path="third_party/test/jmock/jmock-junit3-2.5.1.jar"/>
+-	<classpathentry kind="lib" path="third_party/test/junit/junit.jar"/>
++	<classpathentry kind="lib" path="third_party/test/junit/junit.jar" sourcepath="/home/vjrj/.m2/repository/junit/junit/3.8.2/junit-3.8.2-sources.jar"/>
+ 	<classpathentry kind="lib" path="third_party/test/junit/src.jar"/>
+ 	<classpathentry kind="lib" path="third_party/test/mockito/mockito-all-1.8.2.jar"/>
+ 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+diff --git a/.settings/org.eclipse.jdt.ui.prefs b/.settings/org.eclipse.jdt.ui.prefs
+index d34cf38..02223a6 100644
+--- a/.settings/org.eclipse.jdt.ui.prefs
++++ b/.settings/org.eclipse.jdt.ui.prefs
+@@ -1,8 +1,61 @@
+-#Fri Sep 03 16:36:23 EST 2010
++#Thu Feb 09 02:06:43 CET 2012
+ eclipse.preferences.version=1
++editor_save_participant_org.eclipse.jdt.ui.postsavelistener.cleanup=false
+ formatter_profile=_Wave Protocol Format
+ formatter_settings_version=11
+ org.eclipse.jdt.ui.ignorelowercasenames=true
+ org.eclipse.jdt.ui.importorder=com.google;com;edu;freemarker;junit;net;org;java;javax;
+ org.eclipse.jdt.ui.ondemandthreshold=99
+ org.eclipse.jdt.ui.staticondemandthreshold=99
++sp_cleanup.add_default_serial_version_id=true
++sp_cleanup.add_generated_serial_version_id=false
++sp_cleanup.add_missing_annotations=true
++sp_cleanup.add_missing_deprecated_annotations=true
++sp_cleanup.add_missing_methods=false
++sp_cleanup.add_missing_nls_tags=false
++sp_cleanup.add_missing_override_annotations=true
++sp_cleanup.add_missing_override_annotations_interface_methods=true
++sp_cleanup.add_serial_version_id=false
++sp_cleanup.always_use_blocks=true
++sp_cleanup.always_use_parentheses_in_expressions=false
++sp_cleanup.always_use_this_for_non_static_field_access=false
++sp_cleanup.always_use_this_for_non_static_method_access=false
++sp_cleanup.convert_to_enhanced_for_loop=true
++sp_cleanup.correct_indentation=true
++sp_cleanup.format_source_code=false
++sp_cleanup.format_source_code_changes_only=false
++sp_cleanup.make_local_variable_final=true
++sp_cleanup.make_parameters_final=true
++sp_cleanup.make_private_fields_final=true
++sp_cleanup.make_type_abstract_if_missing_method=false
++sp_cleanup.make_variable_declarations_final=true
++sp_cleanup.never_use_blocks=false
++sp_cleanup.never_use_parentheses_in_expressions=true
++sp_cleanup.on_save_use_additional_actions=false
++sp_cleanup.organize_imports=false
++sp_cleanup.qualify_static_field_accesses_with_declaring_class=false
++sp_cleanup.qualify_static_member_accesses_through_instances_with_declaring_class=true
++sp_cleanup.qualify_static_member_accesses_through_subtypes_with_declaring_class=true
++sp_cleanup.qualify_static_member_accesses_with_declaring_class=false
++sp_cleanup.qualify_static_method_accesses_with_declaring_class=false
++sp_cleanup.remove_private_constructors=true
++sp_cleanup.remove_trailing_whitespaces=true
++sp_cleanup.remove_trailing_whitespaces_all=true
++sp_cleanup.remove_trailing_whitespaces_ignore_empty=false
++sp_cleanup.remove_unnecessary_casts=true
++sp_cleanup.remove_unnecessary_nls_tags=false
++sp_cleanup.remove_unused_imports=true
++sp_cleanup.remove_unused_local_variables=false
++sp_cleanup.remove_unused_private_fields=true
++sp_cleanup.remove_unused_private_members=false
++sp_cleanup.remove_unused_private_methods=true
++sp_cleanup.remove_unused_private_types=true
++sp_cleanup.sort_members=true
++sp_cleanup.sort_members_all=true
++sp_cleanup.use_blocks=true
++sp_cleanup.use_blocks_only_for_return_and_throw=false
++sp_cleanup.use_parentheses_in_expressions=false
++sp_cleanup.use_this_for_non_static_field_access=false
++sp_cleanup.use_this_for_non_static_field_access_only_if_necessary=true
++sp_cleanup.use_this_for_non_static_method_access=false
++sp_cleanup.use_this_for_non_static_method_access_only_if_necessary=true
+diff --git a/src/org/waveprotocol/box/server/ServerMain.java b/src/org/waveprotocol/box/server/ServerMain.java
+index 7ce78fb..abc5a4e 100644
+--- a/src/org/waveprotocol/box/server/ServerMain.java
++++ b/src/org/waveprotocol/box/server/ServerMain.java
+@@ -211,23 +211,23 @@ public class ServerMain {
+   }
+ 
+   private static void initializeServlets(Injector injector, ServerRpcProvider server) {
+-    server.addServlet("/attachment/*", AttachmentServlet.class);
++    server.addServlet("/attachment/*", injector.getInstance(AttachmentServlet.class));
+ 
+-    server.addServlet(SessionManager.SIGN_IN_URL, AuthenticationServlet.class);
+-    server.addServlet("/auth/signout", SignOutServlet.class);
+-    server.addServlet("/auth/register", UserRegistrationServlet.class);
++    server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));
++    server.addServlet("/auth/signout", injector.getInstance(SignOutServlet.class));
++    server.addServlet("/auth/register", injector.getInstance(UserRegistrationServlet.class));
+ 
+-    server.addServlet("/fetch/*", FetchServlet.class);
+-    server.addServlet("/search/*", SearchServlet.class);
++    server.addServlet("/fetch/*", injector.getInstance(FetchServlet.class));
++    server.addServlet("/search/*", injector.getInstance(SearchServlet.class));
+ 
+-    server.addServlet("/robot/dataapi", DataApiServlet.class);
+-    server.addServlet(DataApiOAuthServlet.DATA_API_OAUTH_PATH + "/*", DataApiOAuthServlet.class);
+-    server.addServlet("/robot/dataapi/rpc", DataApiServlet.class);
+-    server.addServlet("/robot/register/*", RobotRegistrationServlet.class);
+-    server.addServlet("/robot/rpc", ActiveApiServlet.class);
+-    server.addServlet("/webclient/remote_logging", RemoteLoggingServiceImpl.class);
+-    server.addServlet("/profile/*", FetchProfilesServlet.class);
+-    server.addServlet("/waveref/*", WaveRefServlet.class);
++    server.addServlet("/robot/dataapi", injector.getInstance(DataApiServlet.class));
++    server.addServlet(DataApiOAuthServlet.DATA_API_OAUTH_PATH + "/*", injector.getInstance(DataApiOAuthServlet.class));
++    server.addServlet("/robot/dataapi/rpc", injector.getInstance(DataApiServlet.class));
++    server.addServlet("/robot/register/*", injector.getInstance(RobotRegistrationServlet.class));
++    server.addServlet("/robot/rpc", injector.getInstance(ActiveApiServlet.class));
++    server.addServlet("/webclient/remote_logging", injector.getInstance(RemoteLoggingServiceImpl.class));
++    server.addServlet("/profile/*", injector.getInstance(FetchProfilesServlet.class));
++    server.addServlet("/waveref/*", injector.getInstance(WaveRefServlet.class));
+ 
+     String gadgetHostName =
+         injector
+@@ -236,9 +236,9 @@ public class ServerMain {
+         injector.getInstance(Key.get(Integer.class, Names.named(CoreSettings.GADGET_SERVER_PORT)));
+     Map<String, String> initParams =
+         Collections.singletonMap("HostHeader", gadgetHostName + ":" + port);
+-    server.addServlet("/gadgets/*", GadgetProxyServlet.class, initParams);
++    server.addServlet("/gadgets/*", injector.getInstance(GadgetProxyServlet.class), initParams);
+ 
+-    server.addServlet("/", WaveClientServlet.class);
++    server.addServlet("/", injector.getInstance(WaveClientServlet.class));
+   }
+ 
+   private static void initializeRobots(Injector injector, WaveBus waveBus) {
+@@ -247,10 +247,10 @@ public class ServerMain {
+   }
+ 
+   private static void initializeRobotAgents(Injector injector, ServerRpcProvider server) {
+-    server.addServlet(PasswordRobot.ROBOT_URI + "/*", PasswordRobot.class);
+-    server.addServlet(PasswordAdminRobot.ROBOT_URI + "/*", PasswordAdminRobot.class);
+-    server.addServlet(WelcomeRobot.ROBOT_URI + "/*", WelcomeRobot.class);
+-    server.addServlet(RegistrationRobot.ROBOT_URI + "/*", RegistrationRobot.class);
++    //server.addServlet(PasswordRobot.ROBOT_URI + "/*", injector.getInstance(PasswordRobot.class));
++    //server.addServlet(PasswordAdminRobot.ROBOT_URI + "/*", injector.getInstance(PasswordAdminRobot.class));
++    //server.addServlet(WelcomeRobot.ROBOT_URI + "/*", injector.getInstance(WelcomeRobot.class));
++    //server.addServlet(RegistrationRobot.ROBOT_URI + "/*", injector.getInstance(RegistrationRobot.class));
+   }
+ 
+   private static void initializeFrontend(Injector injector, ServerRpcProvider server,
+diff --git a/src/org/waveprotocol/box/server/persistence/file/DeltaIndex.java b/src/org/waveprotocol/box/server/persistence/file/DeltaIndex.java
+index aea036c..cf2f4df 100644
+--- a/src/org/waveprotocol/box/server/persistence/file/DeltaIndex.java
++++ b/src/org/waveprotocol/box/server/persistence/file/DeltaIndex.java
+@@ -177,7 +177,7 @@ public class DeltaIndex {
+     // We're expected to append the new delta
+     long fileLength = file.length();
+     Preconditions.checkState(position == fileLength,
+-        "position = %d, file=%d", position, fileLength);
++        "position = %d, file=%d, filename=%s", position, fileLength, fileRef.getAbsoluteFile());
+     file.seek(position);
+     file.writeLong(offset);
+     // fill in the additional positions with the 1-complement of the offset,
+diff --git a/src/org/waveprotocol/box/server/persistence/file/FileDeltaCollection.java b/src/org/waveprotocol/box/server/persistence/file/FileDeltaCollection.java
+index 78294bd..ef21db7 100644
+--- a/src/org/waveprotocol/box/server/persistence/file/FileDeltaCollection.java
++++ b/src/org/waveprotocol/box/server/persistence/file/FileDeltaCollection.java
+@@ -309,7 +309,7 @@ public class FileDeltaCollection implements DeltasAccess {
+                 nextRecord = Pair.of(Pair.of(transformed.getAppliedAtVersion(),
+                         transformed.size()), nextPosition);
+                 nextPosition = file.getFilePointer();
+-              } catch (IOException e) {
++              } catch (Exception e) {
+                 // The next entry is invalid. There was probably a write error / crash.
+                 LOG.severe("Error reading delta file for " + waveletName + " starting at " +
+                     nextPosition, e);
+diff --git a/src/org/waveprotocol/box/server/rpc/ServerRpcProvider.java b/src/org/waveprotocol/box/server/rpc/ServerRpcProvider.java
+index 82c3c8d..df08f85 100755
+--- a/src/org/waveprotocol/box/server/rpc/ServerRpcProvider.java
++++ b/src/org/waveprotocol/box/server/rpc/ServerRpcProvider.java
+@@ -25,9 +25,7 @@ import com.google.inject.Inject;
+ import com.google.inject.Injector;
+ import com.google.inject.Singleton;
+ import com.google.inject.name.Named;
+-import com.google.inject.servlet.GuiceFilter;
+-import com.google.inject.servlet.GuiceServletContextListener;
+-import com.google.inject.servlet.ServletModule;
++import com.google.inject.servlet.SessionScoped;
+ import com.google.protobuf.Descriptors;
+ import com.google.protobuf.Descriptors.MethodDescriptor;
+ import com.google.protobuf.Message;
+@@ -45,11 +43,11 @@ import com.glines.socketio.server.transport.XHRPollingTransport;
+ import com.glines.socketio.server.transport.jetty.JettyWebSocketTransport;
+ 
+ import org.eclipse.jetty.http.ssl.SslContextFactory;
+-import org.eclipse.jetty.server.ssl.SslSelectChannelConnector;
+ import org.eclipse.jetty.server.Connector;
+ import org.eclipse.jetty.server.Server;
+ import org.eclipse.jetty.server.nio.SelectChannelConnector;
+ import org.eclipse.jetty.server.session.HashSessionManager;
++import org.eclipse.jetty.server.ssl.SslSelectChannelConnector;
+ import org.eclipse.jetty.servlet.DefaultServlet;
+ import org.eclipse.jetty.servlet.ServletHolder;
+ import org.eclipse.jetty.servlets.GzipFilter;
+@@ -81,7 +79,6 @@ import java.util.concurrent.Executors;
+ import javax.annotation.Nullable;
+ import javax.servlet.DispatcherType;
+ import javax.servlet.ServletConfig;
+-import javax.servlet.ServletContextListener;
+ import javax.servlet.ServletException;
+ import javax.servlet.ServletRequest;
+ import javax.servlet.ServletResponse;
+@@ -105,6 +102,9 @@ public class ServerRpcProvider {
+    */
+   private static final int BUFFER_SIZE = 1024 * 1024;
+ 
++  // We can retrieve the injector from the context attributes via this attribute name
++  public static final String INJECTOR_ATTRIBUTE = Injector.class.getName();
++
+   private final InetSocketAddress[] httpAddresses;
+   private final Integer flashsocketPolicyPort;
+   private final ExecutorService threadPool;
+@@ -157,7 +157,7 @@ public class ServerRpcProvider {
+       return socketChannel;
+     }
+   }
+-
++  @SessionScoped
+   static class SocketIOConnection extends Connection {
+     private final SocketIOServerChannel socketChannel;
+ 
+@@ -364,6 +364,7 @@ public class ServerRpcProvider {
+     final WebAppContext context = new WebAppContext();
+ 
+     context.setParentLoaderPriority(true);
++    context.setAttribute(INJECTOR_ATTRIBUTE, injector);
+ 
+     if (jettySessionManager != null) {
+       // This disables JSessionIDs in URLs redirects
+@@ -376,29 +377,42 @@ public class ServerRpcProvider {
+     final ResourceCollection resources = new ResourceCollection(resourceBases);
+     context.setBaseResource(resources);
+ 
+-    addWebSocketServlets();
++    addWebSocketServlets(context);
+ 
+     try {
+-      final Injector parentInjector = injector;
+-
+-      final ServletModule servletModule = getServletModule(parentInjector);
+-
+-      ServletContextListener contextListener = new GuiceServletContextListener() {
+-
+-        private final Injector childInjector = parentInjector.createChildInjector(servletModule);
+-
+-        @Override
+-        protected Injector getInjector() {
+-          return childInjector;
+-        }
+-      };
+-
+-      context.addEventListener(contextListener);
+-      context.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
++//      final Injector parentInjector = injector;
++
++//      final ServletModule servletModule = getServletModule(parentInjector);
++
++//      ServletContextListener contextListener = new GuiceServletContextListener() {
++//
++//        private final Injector childInjector = parentInjector.createChildInjector(servletModule);
++//
++//        @Override
++//        protected Injector getInjector() {
++//          return childInjector;
++//        }
++//      };
++//
++//      context.addEventListener(contextListener);
++//      context.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
+       context.addFilter(GzipFilter.class, "/webclient/*", EnumSet.allOf(DispatcherType.class));
+       httpServer.setHandler(context);
+-
+-      httpServer.start();
++            try {
++                httpServer.start();
++                // We add servlets here to override the DefaultServlet automatic registered by WebAppContext
++                // in path "/" with our WaveClientServlet. Any other way to do this?
++                // Related question (unanswered) http://web.archiveorange.com/archive/v/d0LdlXf1kN0OXyPNyQZp
++                for (Pair<String, ServletHolder> servlet : servletRegistry) {
++                  context.addServlet(servlet.getSecond(), servlet.getFirst());
++                 }
++
++           } catch (Exception e) { // yes, .start() throws "Exception"
++                  LOG.severe("Fatal error starting http server.", e);
++                  return;
++                }
++
++      //httpServer.start();
+       restoreSessions();
+ 
+     } catch (Exception e) { // yes, .start() throws "Exception"
+@@ -419,14 +433,18 @@ public class ServerRpcProvider {
+       LOG.warning("Cannot restore sessions");
+     }
+   }
+-  public void addWebSocketServlets() {
++  public void addWebSocketServlets(WebAppContext context) {
+     // Servlet where the websocket connection is served from.
+-    ServletHolder wsholder = addServlet("/socket", WaveWebSocketServlet.class);
++    //ServletHolder wsholder = addServlet("/socket", WaveWebSocketServlet.class);
++    ServletHolder wsholder = new ServletHolder(new WaveWebSocketServlet(this));
++    context.addServlet(wsholder, "/socket");
+     // TODO(zamfi): fix to let messages span frames.
+     wsholder.setInitParameter("bufferSize", "" + BUFFER_SIZE);
+ 
+     // Servlet where the websocket connection is served from.
+-    ServletHolder sioholder = addServlet("/socket.io/*", WaveSocketIOServlet.class );
++    //ServletHolder sioholder = addServlet("/socket.io/*", WaveSocketIOServlet.class );
++    ServletHolder sioholder = new ServletHolder(new WaveSocketIOServlet(this));
++    context.addServlet(sioholder, "/socket.io/*");
+     // TODO(zamfi): fix to let messages span frames.
+     sioholder.setInitParameter("bufferSize", "" + BUFFER_SIZE);
+     // Set flash policy server parameters
+@@ -457,30 +475,31 @@ public class ServerRpcProvider {
+ 
+     // Serve the static content and GWT web client with the default servlet
+     // (acts like a standard file-based web server).
+-    addServlet("/static/*", DefaultServlet.class);
+-    addServlet("/webclient/*", DefaultServlet.class);
++    ServletHolder defaultServlet = new ServletHolder(new DefaultServlet());
++    context.addServlet(defaultServlet, "/static/*");
++    context.addServlet(defaultServlet, "/webclient/*");
+   }
+ 
+-  public ServletModule getServletModule(final Injector injector) {
+-
+-    return new ServletModule() {
+-      @Override
+-      protected void configureServlets() {
+-        // We add servlets here to override the DefaultServlet automatic registered by WebAppContext
+-        // in path "/" with our WaveClientServlet. Any other way to do this?
+-        // Related question (unanswered 08-Apr-2011)
+-        // http://web.archiveorange.com/archive/v/d0LdlXf1kN0OXyPNyQZp
+-        for (Pair<String, ServletHolder> servlet : servletRegistry) {
+-          String url = servlet.getFirst();
+-          @SuppressWarnings("unchecked")
+-          Class<HttpServlet> clazz = (Class<HttpServlet>) servlet.getSecond().getHeldClass();
+-          Map<String,String> params = servlet.getSecond().getInitParameters();
+-          serve(url).with(clazz,params);
+-          bind(clazz).in(Singleton.class);
+-        }
+-      }
+-    };
+-  }
++//  public ServletModule getServletModule(final Injector injector) {
++//
++//    return new ServletModule() {
++//      @Override
++//      protected void configureServlets() {
++//        // We add servlets here to override the DefaultServlet automatic registered by WebAppContext
++//        // in path "/" with our WaveClientServlet. Any other way to do this?
++//        // Related question (unanswered 08-Apr-2011)
++//        // http://web.archiveorange.com/archive/v/d0LdlXf1kN0OXyPNyQZp
++//        for (Pair<String, ServletHolder> servlet : servletRegistry) {
++//          String url = servlet.getFirst();
++//          @SuppressWarnings("unchecked")
++//          Class<HttpServlet> clazz = (Class<HttpServlet>) servlet.getSecond().getHeldClass();
++//          Map<String,String> params = servlet.getSecond().getInitParameters();
++//          serve(url).with(clazz,params);
++//          bind(clazz).in(Singleton.class);
++//        }
++//      }
++//    };
++//  }
+ 
+   private static InetSocketAddress[] parseAddressList(List<String> addressList) {
+     if (addressList == null || addressList.size() == 0) {
+@@ -665,7 +684,7 @@ public class ServerRpcProvider {
+    * @param initParams the map with init params, can be null or empty.
+    * @return the {@link ServletHolder} that holds the servlet.
+    */
+-  public ServletHolder addServlet(String urlPattern, Class<? extends HttpServlet> servlet,
++  public ServletHolder addServlet(String urlPattern, HttpServlet servlet,
+       @Nullable Map<String, String> initParams) {
+     ServletHolder servletHolder = new ServletHolder(servlet);
+     if (initParams != null) {
+@@ -675,14 +694,18 @@ public class ServerRpcProvider {
+     return servletHolder;
+   }
+ 
++
+   /**
+    * Add a servlet to the servlet registry. This servlet will be attached to the
+    * specified URL pattern when the server is started up.
+-   * @param urlPattern the URL pattern for paths. Eg, '/foo', '/foo/*'.
+-   * @param servlet the servlet class to bind to the specified paths.
++   *
++   * @param urlPattern URL pattern for paths. Eg, '/foo', '/foo/*'
++   * @param servlet The servlet object to bind to the specified paths
+    * @return the {@link ServletHolder} that holds the servlet.
+    */
+-  public ServletHolder addServlet(String urlPattern, Class<? extends HttpServlet> servlet) {
+-    return addServlet(urlPattern, servlet, null);
++  public ServletHolder addServlet(String urlPattern, HttpServlet servlet) {
++    ServletHolder servletHolder = new ServletHolder(servlet);
++    servletRegistry.add(new Pair<String, ServletHolder>(urlPattern, servletHolder));
++    return servletHolder;
+   }
+ }
+diff --git a/src/org/waveprotocol/box/server/rpc/UserRegistrationServlet.java b/src/org/waveprotocol/box/server/rpc/UserRegistrationServlet.java
+index 3e0fc9d..ad6c9bb 100644
+--- a/src/org/waveprotocol/box/server/rpc/UserRegistrationServlet.java
++++ b/src/org/waveprotocol/box/server/rpc/UserRegistrationServlet.java
+@@ -28,7 +28,6 @@ import org.waveprotocol.box.server.authentication.PasswordDigest;
+ import org.waveprotocol.box.server.gxp.UserRegistrationPage;
+ import org.waveprotocol.box.server.persistence.AccountStore;
+ import org.waveprotocol.box.server.persistence.PersistenceException;
+-import org.waveprotocol.box.server.robots.agent.welcome.WelcomeRobot;
+ import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
+ import org.waveprotocol.wave.model.wave.ParticipantId;
+ import org.waveprotocol.wave.util.logging.Log;
+@@ -52,18 +51,17 @@ public final class UserRegistrationServlet extends HttpServlet {
+ 
+   private final AccountStore accountStore;
+   private final String domain;
+-  private final WelcomeRobot welcomeBot;
+   private final boolean registrationDisabled;
+ 
+   private final Log LOG = Log.get(UserRegistrationServlet.class);
+ 
+   @Inject
+   public UserRegistrationServlet(AccountStore accountStore,
+-      @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain, WelcomeRobot welcomeBot,
++      @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain, 
+       @Named(CoreSettings.DISABLE_REGISTRATION) boolean registrationDisabled) {
+     this.accountStore = accountStore;
+     this.domain = domain;
+-    this.welcomeBot = welcomeBot;
++    // this.welcomeBot = welcomeBot;
+     this.registrationDisabled = registrationDisabled;
+   }
+ 
+@@ -149,11 +147,11 @@ public final class UserRegistrationServlet extends HttpServlet {
+       LOG.severe("Failed to create new account for " + id, e);
+       return "An unexpected error occured while trying to create the account";
+     }
+-    try {
+-      welcomeBot.greet(account.getId());
+-    } catch (IOException e) {
+-      LOG.warning("Failed to create a welcome wavelet for " + id, e);
+-    }
++    // try {
++      // welcomeBot.greet(account.getId());
++    // } catch (IOException e) {
++      // LOG.warning("Failed to create a welcome wavelet for " + id, e);
++    // }
+     return null;
+   }
+ 
+diff --git a/src/org/waveprotocol/box/webclient/search/SearchPanel.css b/src/org/waveprotocol/box/webclient/search/SearchPanel.css
+index 665c2ec..dfb8c30 100644
+--- a/src/org/waveprotocol/box/webclient/search/SearchPanel.css
++++ b/src/org/waveprotocol/box/webclient/search/SearchPanel.css
+@@ -26,6 +26,7 @@
+   border-left: 1px solid #E4F1FE;
+   background-color: #c9e2fc;
+   overflow: hidden;
++  display: none;
+ }
+ 
+ @sprite .toolbar {
+diff --git a/src/org/waveprotocol/box/webclient/search/SearchPanelWidget.java b/src/org/waveprotocol/box/webclient/search/SearchPanelWidget.java
+index 4402b8e..2b9d9f1 100644
+--- a/src/org/waveprotocol/box/webclient/search/SearchPanelWidget.java
++++ b/src/org/waveprotocol/box/webclient/search/SearchPanelWidget.java
+@@ -72,7 +72,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
+    * Positioning constants for components of this panel.
+    */
+   static class CssConstants {
+-    private static int SEARCH_HEIGHT_PX = 51; // To match wave panel.
++    private static int SEARCH_HEIGHT_PX = 0; // To match wave panel.
+     private static int TOOLBAR_HEIGHT_PX =
+         SearchPanelResourceLoader.getPanel().emptyToolbar().getHeight();
+     private static int TOOLBAR_TOP_PX = 0 + SEARCH_HEIGHT_PX;
+diff --git a/src/org/waveprotocol/box/webclient/search/SearchPresenter.java b/src/org/waveprotocol/box/webclient/search/SearchPresenter.java
+index b136c88..9f1b2ab 100644
+--- a/src/org/waveprotocol/box/webclient/search/SearchPresenter.java
++++ b/src/org/waveprotocol/box/webclient/search/SearchPresenter.java
+@@ -95,7 +95,7 @@ public final class SearchPresenter
+   private int querySize = DEFAULT_PAGE_SIZE;
+   /** Current selected digest. */
+   private DigestView selected;
+-  
++
+   /** The dispatcher of profiles events. */
+   SourcesEvents<ProfileListener> profiles;
+ 
+@@ -160,7 +160,7 @@ public final class SearchPresenter
+   private void initToolbarMenu() {
+     GroupingToolbar.View toolbarUi = searchUi.getToolbar();
+     ToolbarView group = toolbarUi.addGroup();
+-    new ToolbarButtonViewBuilder().setText("New Wave").applyTo(
++    new ToolbarButtonViewBuilder().setText("New Message").setTooltip("Create a New Message (a Wave)").applyTo(
+         group.addClickButton(), new ToolbarClickButton.Listener() {
+           @Override
+           public void onClicked() {
+diff --git a/src/org/waveprotocol/wave/client/doodad/link/Link.java b/src/org/waveprotocol/wave/client/doodad/link/Link.java
+index f5fb0e4..6b7899c 100644
+--- a/src/org/waveprotocol/wave/client/doodad/link/Link.java
++++ b/src/org/waveprotocol/wave/client/doodad/link/Link.java
+@@ -39,6 +39,14 @@ public final class Link {
+ 
+   private static final ReadableStringSet WEB_SCHEMES = CollectionUtils.newStringSet(
+       "http", "https", "ftp", "mailto");
++  /**
++   * http://en.wikipedia.org/wiki/Fragment_identifier
++   * http://tools.ietf.org/html/rfc3986#section-3.5
++   * fragment    = *( pchar / "/" / "?" )
++   */
++  private static final String COMMON_REGEX = "[\\w\\-:@!\\$&\'\\(\\)\\*\\+,;=\\/\\?\\.]+";
++  private static final String FRAGMENT_URI_REGEX = "#(" + COMMON_REGEX + "|$)";
++  private static final String QUERY_REGEX = "(\\?" + COMMON_REGEX +"|)($|"+ FRAGMENT_URI_REGEX + ")";
+ 
+   private static final String INVALID_LINK_MSG =
+       "Invalid link. Should either be a web url\n" +
+@@ -125,7 +133,7 @@ public final class Link {
+       }
+     }
+ 
+-    assert EscapeUtils.extractScheme(uri) != null;
++    assert uri.matches(QUERY_REGEX) || EscapeUtils.extractScheme(uri) != null;
+ 
+     // Otherwise, just return the given link.
+     return uri;
+@@ -145,7 +153,7 @@ public final class Link {
+     String scheme = parts != null ? parts[0] : null;
+ 
+     // Normal web url
+-    if (scheme != null && WEB_SCHEMES.contains(scheme)) {
++    if (rawLinkValue.matches(QUERY_REGEX) || (scheme != null && WEB_SCHEMES.contains(scheme))) {
+       return rawLinkValue;
+     }
+ 
+diff --git a/src/org/waveprotocol/wave/client/gadget/renderer/GadgetWidget.java b/src/org/waveprotocol/wave/client/gadget/renderer/GadgetWidget.java
+index 7088f80..1e38273 100644
+--- a/src/org/waveprotocol/wave/client/gadget/renderer/GadgetWidget.java
++++ b/src/org/waveprotocol/wave/client/gadget/renderer/GadgetWidget.java
+@@ -906,6 +906,7 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
+     String url = cleanUrl(metadata.getIframeUrl(view));
+     if (url.equals(iframeUrl) && ((token == null) || token.isEmpty())) {
+       log("Received metadata matches the cached information.");
++      constructGadgetSizeFromMetadata(metadata, view, url);
+       return;
+     }
+     // NOTE(user): Technically we should not save iframe URLs for gadgets with security tokens,
+@@ -921,6 +922,10 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
+     if ("".equals(ui.getTitleLabelText()) && metadata.hasTitle()) {
+       ui.setTitleLabelText(metadata.getTitle());
+     }
++    constructGadgetSizeFromMetadata(metadata, view, url);
++  }
++
++  private void constructGadgetSizeFromMetadata(GadgetMetadata metadata, String view, String url) {
+     int height =
+         (int) (metadata.hasHeight() ? metadata.getHeight() : metadata.getPreferredHeight(view));
+     int width =
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/EditToolbar.java b/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/EditToolbar.java
+index 73a6cfc..b8d4428 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/EditToolbar.java
++++ b/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/EditToolbar.java
+@@ -56,9 +56,11 @@ import org.waveprotocol.wave.client.widget.toolbar.buttons.ToolbarClickButton;
+ import org.waveprotocol.wave.client.widget.toolbar.buttons.ToolbarToggleButton;
+ import org.waveprotocol.wave.media.model.AttachmentIdGenerator;
+ import org.waveprotocol.wave.media.model.AttachmentIdGeneratorImpl;
++import org.waveprotocol.wave.model.document.util.DocHelper;
+ import org.waveprotocol.wave.model.document.util.FocusedRange;
+ import org.waveprotocol.wave.model.document.util.LineContainers;
+ import org.waveprotocol.wave.model.document.util.Point;
++import org.waveprotocol.wave.model.document.util.Range;
+ import org.waveprotocol.wave.model.document.util.XmlStringBuilder;
+ import org.waveprotocol.wave.model.id.IdGenerator;
+ import org.waveprotocol.wave.model.id.WaveId;
+@@ -425,18 +427,27 @@ public class EditToolbar {
+                   Window.alert("Select some text to create a link.");
+                   return;
+                 }
+-                String rawLinkValue =
+-                    Window.prompt("Enter link: URL or Wave ID.", WaveRefConstants.WAVE_URI_PREFIX);
+-                // user hit "ESC" or "cancel"
+-                if (rawLinkValue == null) {
+-                  return;
+-                }
+                 try {
+-                  String linkAnnotationValue = Link.normalizeLink(rawLinkValue);
++                  // We try to create a link with the current selection, if fails, we ask for a link
++                  Range rg = range.asRange();
++                  String text = DocHelper.getText(editor.getDocument(), rg.getStart(), rg.getEnd());
++                  String linkAnnotationValue = Link.normalizeLink(text);
+                   EditorAnnotationUtil.setAnnotationOverSelection(editor, Link.KEY,
+                       linkAnnotationValue);
+                 } catch (InvalidLinkException e) {
+-                  Window.alert(e.getLocalizedMessage());
++                  String rawLinkValue =
++                      Window.prompt("Enter link: URL or Wave ID.", "http://");
++                  // user hit "ESC" or "cancel"
++                  if (rawLinkValue == null) {
++                    return;
++                  }
++                  try {
++                    String linkAnnotationValue = Link.normalizeLink(rawLinkValue);
++                    EditorAnnotationUtil.setAnnotationOverSelection(editor, Link.KEY,
++                        linkAnnotationValue);
++                  } catch (InvalidLinkException e2) {
++                    Window.alert(e2.getLocalizedMessage());
++                  }
+                 }
+               }
+             });
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/gadget/GadgetInfoWidget.ui.xml b/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/gadget/GadgetInfoWidget.ui.xml
+index c8b7a81..5f41486 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/gadget/GadgetInfoWidget.ui.xml
++++ b/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/gadget/GadgetInfoWidget.ui.xml
+@@ -17,7 +17,7 @@
+ <ui:UiBinder
+     xmlns:ui="urn:ui:com.google.gwt.uibinder"
+     xmlns:w="urn:import:org.waveprotocol.wave.client.widget.common" >
+-    
++
+   <ui:style>
+     .self {
+       overflow: hidden;
+@@ -25,30 +25,32 @@
+       border: 1px solid #ccc;
+       margin: 15px 0px;
+     }
+-    
++
+     .self:hover {
+       background: #ddd;
+     }
+-    
++
+     .img {
+       float: left;
++      display: none;
+     }
+-    
++
+     .img img {
+-      width: 120px;
+-      height: 120px;
++      width: 0px;
++      height: 0px;
+     }
+-    
++
+     .description {
+       overflow: hidden;
+       color: #888;
+     }
+-    
+-    .img, .description, .self h3 {     
++
++    .img, .description, .self h3 {
+       margin: 15px;
+     }
++
+   </ui:style>
+-  
++
+   <w:ImplPanel ui:field="self" styleName="{style.self}">
+     <div class="{style.img}">
+       <img ui:field="image"/>
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/view/dom/BlipMenuItemDomImpl.java b/src/org/waveprotocol/wave/client/wavepanel/view/dom/BlipMenuItemDomImpl.java
+index 4b97489..1507f83 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/view/dom/BlipMenuItemDomImpl.java
++++ b/src/org/waveprotocol/wave/client/wavepanel/view/dom/BlipMenuItemDomImpl.java
+@@ -36,7 +36,7 @@ public final class BlipMenuItemDomImpl implements DomView, IntrinsicBlipMenuItem
+ 
+   /** The CSS classes used to manipulate style based on state changes. */
+   private final BlipViewBuilder.Css css;
+-  
++
+   BlipMenuItemDomImpl(Element self, BlipViewBuilder.Css css) {
+     this.self = self;
+     this.css = css;
+@@ -63,13 +63,13 @@ public final class BlipMenuItemDomImpl implements DomView, IntrinsicBlipMenuItem
+   @Override
+   public void select() {
+     self.setAttribute(OPTION_SELECTED_ATTRIBUTE, "s");
+-    self.setClassName(css.menuOption() + " " + css.menuOptionSelected());
++    self.addClassName(css.menuOptionSelected());
+   }
+ 
+   @Override
+   public void deselect() {
+     self.removeAttribute(OPTION_SELECTED_ATTRIBUTE);
+-    self.setClassName(css.menuOption());
++    self.removeClassName(css.menuOptionSelected());
+   }
+ 
+   @Override
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/view/dom/CollapsibleDomImpl.java b/src/org/waveprotocol/wave/client/wavepanel/view/dom/CollapsibleDomImpl.java
+index c201793..5ab061d 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/view/dom/CollapsibleDomImpl.java
++++ b/src/org/waveprotocol/wave/client/wavepanel/view/dom/CollapsibleDomImpl.java
+@@ -156,13 +156,13 @@ final class CollapsibleDomImpl implements DomView {
+ 
+   public void setTotalBlipCount(int totalBlipCount) {
+     self.setAttribute(TOTAL_BLIPS_ATTRIBUTE, "" + totalBlipCount);
+-    getCountTotal().setInnerText("" + totalBlipCount);
++    getCountTotal().setInnerText("" + totalBlipCount + (totalBlipCount > 1? " replies": " reply"));
+   }
+ 
+   public void setUnreadBlipCount(int unreadBlipCount) {
+     self.setAttribute(UNREAD_BLIPS_ATTRIBUTE, "" + unreadBlipCount);
+     Element unread = getCountUnread();
+-    unread.setInnerText("(" + unreadBlipCount + ")");
++    unread.setInnerText(" (" + unreadBlipCount + " unread)");
+     if (unreadBlipCount > 0) {
+       unread.getStyle().clearDisplay();
+     } else {
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/Blip.css b/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/Blip.css
+index 57294ec..72b1a86 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/Blip.css
++++ b/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/Blip.css
+@@ -50,7 +50,7 @@
+  * metabar element is positioned left by 0.3em with a 0.3em border.
+  */
+ 
+-.blip {  
++.blip {
+   /* Positioned container for focus frame. */
+   position: relative;
+   padding: 3px;
+@@ -139,7 +139,7 @@
+   -moz-border-radius: 0.3em;
+   -webkit-border-radius: 0.3em;
+   cursor: pointer;
+-  padding: 0.3em;     /* Matches metabar padding. */
++  padding: 0.3em 0.5em 0.3em 1.4em;     /* Matches metabar padding. */
+ }
+ 
+ .read .menuOption:hover {
+@@ -168,7 +168,7 @@
+ }
+ 
+ .privateReplies {
+-  margin: 0 1em 1em 4.5em;  
++  margin: 0 1em 1em 4.5em;
+ }
+ 
+ .contentContainer, .replies, .privateReplies{word-wrap: break-word;}
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/BlipMetaViewBuilder.java b/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/BlipMetaViewBuilder.java
+index 9ec4aaf..6ccc1d1 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/BlipMetaViewBuilder.java
++++ b/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/BlipMetaViewBuilder.java
+@@ -81,16 +81,26 @@ public final class BlipMetaViewBuilder implements UiBuilder, IntrinsicBlipMetaVi
+   private final static Map<MenuOption, SafeHtml> MENU_LABELS =
+       new EnumMap<MenuOption, SafeHtml>(MenuOption.class);
+ 
++  private final static Map<MenuOption, SafeHtml> MENU_ICONS =
++      new EnumMap<MenuOption, SafeHtml>(MenuOption.class);
++
+   private final static StringMap<MenuOption> MENU_OPTIONS = CollectionUtils.createStringMap();
+ 
+   public static final String OPTION_ID_ATTRIBUTE = "o";
+   public static final String OPTION_SELECTED_ATTRIBUTE = "s";
+ 
+   static {
++    BlipIconResources.Css css = BlipIconResources.Loader.res.css();
++    MENU_ICONS.put(MenuOption.EDIT, EscapeUtils.fromSafeConstant(css.edit()));
++    MENU_ICONS.put(MenuOption.REPLY, EscapeUtils.fromSafeConstant(css.reply()));
++    MENU_ICONS.put(MenuOption.DELETE, EscapeUtils.fromSafeConstant(css.delete()));
++    MENU_ICONS.put(MenuOption.LINK, EscapeUtils.fromSafeConstant(css.link()));
++
+     MENU_CODES.put(MenuOption.EDIT, EscapeUtils.fromSafeConstant("e"));
+     MENU_CODES.put(MenuOption.REPLY, EscapeUtils.fromSafeConstant("r"));
+     MENU_CODES.put(MenuOption.DELETE, EscapeUtils.fromSafeConstant("d"));
+     MENU_CODES.put(MenuOption.LINK, EscapeUtils.fromSafeConstant("l"));
++
+     MENU_LABELS.put(MenuOption.EDIT, EscapeUtils.fromSafeConstant("Edit"));
+     MENU_LABELS.put(MenuOption.REPLY, EscapeUtils.fromSafeConstant("Reply"));
+     MENU_LABELS.put(MenuOption.DELETE, EscapeUtils.fromSafeConstant("Delete"));
+@@ -245,6 +255,7 @@ public final class BlipMetaViewBuilder implements UiBuilder, IntrinsicBlipMetaVi
+           out.append(EscapeUtils.fromSafeConstant("|"));
+           String style = selected.contains(option) //
+               ? css.menuOption() + css.menuOptionSelected() : css.menuOption();
++          style += " " + MENU_ICONS.get(option).asString();
+           String extra = OPTION_ID_ATTRIBUTE + "='" + MENU_CODES.get(option).asString() + "'"
+               + (selected.contains(option) ? " " + OPTION_SELECTED_ATTRIBUTE + "='s'" : "");
+           openSpanWith(out, null, style, TypeCodes.kind(Type.MENU_ITEM), extra);
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/CollapsibleBuilder.java b/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/CollapsibleBuilder.java
+index 8436997..8efe09f 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/CollapsibleBuilder.java
++++ b/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/CollapsibleBuilder.java
+@@ -226,11 +226,12 @@ public final class CollapsibleBuilder implements UiBuilder {
+         {
+           openSpan(output, Components.COUNT_TOTAL.getDomId(id), null, null);
+           output.append(totalBlipCount);
++          output.appendEscaped(totalBlipCount > 1? " replies": " reply");
+           closeSpan(output);
+ 
+           String unreadExtra = unreadBlipCount <= 0 ? " style='display: none;'" : "";
+           openSpanWith(output, Components.COUNT_UNREAD.getDomId(id), null, null, unreadExtra);
+-          output.appendEscaped("(" + unreadBlipCount + ")");
++          output.appendEscaped(" (" + unreadBlipCount + " unread)");
+           closeSpan(output);
+ 
+           openSpan(output, Components.DROP_CONTAINER.getDomId(id), css.dropContainer() +
+diff --git a/test/org/waveprotocol/box/server/rpc/UserRegistrationServletTest.java b/test/org/waveprotocol/box/server/rpc/UserRegistrationServletTest.java
+index 8b91e7b..100c90b 100644
+--- a/test/org/waveprotocol/box/server/rpc/UserRegistrationServletTest.java
++++ b/test/org/waveprotocol/box/server/rpc/UserRegistrationServletTest.java
+@@ -33,7 +33,6 @@ import org.waveprotocol.box.server.account.HumanAccountDataImpl;
+ import org.waveprotocol.box.server.authentication.PasswordDigest;
+ import org.waveprotocol.box.server.persistence.AccountStore;
+ import org.waveprotocol.box.server.persistence.memory.MemoryStore;
+-import org.waveprotocol.box.server.robots.agent.welcome.WelcomeRobot;
+ import org.waveprotocol.wave.model.wave.ParticipantId;
+ 
+ import java.io.IOException;
+@@ -55,8 +54,6 @@ public class UserRegistrationServletTest extends TestCase {
+   @Mock private HttpServletRequest req;
+   @Mock private HttpServletResponse resp;
+ 
+-  @Mock private WelcomeRobot welcomeBot;
+-
+   @Override
+   protected void setUp() throws Exception {
+     MockitoAnnotations.initMocks(this);
+@@ -73,7 +70,6 @@ public class UserRegistrationServletTest extends TestCase {
+     AccountData account = store.getAccount(participantId);
+     assertNotNull(account);
+     assertTrue(account.asHuman().getPasswordDigest().verify("internet".toCharArray()));
+-    verify(welcomeBot).greet(eq(participantId));
+   }
+ 
+   public void testRegisterNewUserDisabled() throws Exception {
+@@ -128,8 +124,8 @@ public class UserRegistrationServletTest extends TestCase {
+       HttpServletRequest req, HttpServletResponse resp, String address,
+       String password, boolean disabledRegistration) throws IOException {
+ 
+-    UserRegistrationServlet enabledServlet = new UserRegistrationServlet(store, "example.com", welcomeBot, false);
+-    UserRegistrationServlet disabledServlet = new UserRegistrationServlet(store, "example.com", welcomeBot, true);
++    UserRegistrationServlet enabledServlet = new UserRegistrationServlet(store, "example.com", false);
++    UserRegistrationServlet disabledServlet = new UserRegistrationServlet(store, "example.com", true);
+ 
+     when(req.getParameter("address")).thenReturn(address);
+     when(req.getParameter("password")).thenReturn(password);
+diff --git a/test/org/waveprotocol/wave/client/doodad/link/LinkTest.java b/test/org/waveprotocol/wave/client/doodad/link/LinkTest.java
+index 316717d..e68d63b 100644
+--- a/test/org/waveprotocol/wave/client/doodad/link/LinkTest.java
++++ b/test/org/waveprotocol/wave/client/doodad/link/LinkTest.java
+@@ -47,6 +47,15 @@ public class LinkTest extends TestCase {
+     checkNormalize("https://example.com/abcd");
+     checkNormalize("ftp://example.com/abcd");
+     checkNormalize("mailto://example.com/abcd");
++    checkNormalize("#");
++    checkNormalize("#example.com/w+N0tgD7rctjA");
++    checkNormalize("#fragment");
++    checkNormalize("#fragment/?+-:@!$&'()*+,;=");
++    checkNormalize("?param=1&param2");
++    checkNormalize("?param=1&param2#");
++    checkNormalize("?param=1&param2#fragment/?+-:@!$&'()*+,;=");
++    checkNormalizeRejects("#fragment<>");
++    checkNormalizeRejects("?param=1&param2<>");
+   }
+ 
+   public void testConvertUri() {
+@@ -56,6 +65,12 @@ public class LinkTest extends TestCase {
+ 
+     assertEquals("http://example.com/abcd", Link.toHrefFromUri("http://example.com/abcd"));
+     assertEquals("#example.com/abcd", Link.toHrefFromUri("wave://example.com/abcd"));
++    assertEquals("#", Link.toHrefFromUri("#"));
++    assertEquals("#fragment", Link.toHrefFromUri("#fragment"));
++    assertEquals("#fragment/?+-:@!$&'()*+,;=", Link.toHrefFromUri("#fragment/?+-:@!$&'()*+,;="));
++    assertEquals("?param=1&param2", Link.toHrefFromUri("?param=1&param2"));
++    assertEquals("?param=1&param2#", Link.toHrefFromUri("?param=1&param2#"));
++    assertEquals("?param=1&param2#fragment/?+-:@!$&'()*+,;=", Link.toHrefFromUri("?param=1&param2#fragment/?+-:@!$&'()*+,;="));
+   }
+ 
+ 

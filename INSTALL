@@ -247,9 +247,8 @@ so this will not conflict with kune users management.
 
 ===Openfire auth via Kune===
 
-Download from http://kune.cc/downloads/openfireauth model-VERSION.jar and kune-openfireauth-VERSION.jar and copy to /usr/share/openfire/lib as root. Set the correct owner:
+Download from http://kune.cc/downloads/openfireauth kune-openfireauth-VERSION.jar and copy to /usr/share/openfire/lib as root. Set the correct owner:
 
-chown openfire:openfire /usr/share/openfire/lib/model-VERSION.jar
 chown openfire:openfire /usr/share/openfire/lib/kune-openfireauth-VERSION.jar
 
 (do something equivalent in Windows systems in the openfire folder).
@@ -263,8 +262,7 @@ DELETE FROM `ofProperty` WHERE name='hybridAuthProvider.secondaryProvider.classN
 DELETE FROM `ofProperty` WHERE name='hybridAuthProvider.tertiaryProvider.className';
 INSERT INTO `ofProperty` VALUES ('provider.auth.className','org.jivesoftware.openfire.auth.HybridAuthProvider');
 INSERT INTO `ofProperty` VALUES('hybridAuthProvider.primaryProvider.className','cc.kune.core.server.auth.openfire.KuneAuthProvider');
-INSERT INTO `ofProperty` VALUES('hybridAuthProvider.secondaryProvider.className','org.jivesoftware.openfire.auth.JDBCAuthProvider');
-INSERT INTO `ofProperty` VALUES('hybridAuthProvider.tertiaryProvider.className','org.jivesoftware.openfire.auth.DefaultAuthProvider');
+INSERT INTO `ofProperty` VALUES('hybridAuthProvider.secondaryProvider.className','org.jivesoftware.openfire.auth.DefaultAuthProvider');
 
 Alternatively you can do this via 'Server > Server Manager > System Properties'.
 
@@ -275,8 +273,6 @@ Also in 'Server > Server Manager > System Properties' set (verify that the mysql
 jdbcProvider.driver = com.mysql.jdbc.Driver
 jdbcProvider.connectionString = jdbc:mysql://localhost/kune_dev?user=kune&password=db4kune&useUnicode=true&characterEncoding=utf-8
 provider.user.className = org.jivesoftware.openfire.user.JDBCUserProvider
-jdbcAuthProvider.passwordSQL = SELECT password FROM kune_dev.kusers WHERE shortName=?
-jdbcAuthProvider.passwordType = plain
 jdbcUserProvider.allUsersSQL = SELECT shortName FROM kune_dev.kusers	
 jdbcUserProvider.emailField = email	
 jdbcUserProvider.loadUserSQL = SELECT shortName,email FROM kune_dev.kusers WHERE shortName=?	
@@ -303,10 +299,6 @@ Or, alternatively (if is more easy for you), add these lines to conf/openfire.xm
       <className>org.jivesoftware.openfire.user.JDBCUserProvider</className>
     </user>
   </provider>
-  <jdbcAuthProvider>
-    <passwordSQL>SELECT password FROM kune_dev.kusers WHERE shortName=?</passwordSQL>
-    <passwordType>plain</passwordType>
-  </jdbcAuthProvider>
   <jdbcUserProvider>
     <loadUserSQL>SELECT shortName,email FROM kune_dev.kusers WHERE shortName=?</loadUserSQL>
     <userCountSQL>SELECT COUNT(*) FROM kune_dev.kusers</userCountSQL>
@@ -324,7 +316,6 @@ Or, alternatively (if is more easy for you), add these lines to conf/openfire.xm
 </pre>
 
 Instead of:
-  <jdbcAuthProvider/>
   <jdbcUserProvider/>
   <admin/>
 

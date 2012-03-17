@@ -24,7 +24,9 @@ import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.AccessRightsClientManager;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class ContentViewerShareMenu extends MenuLoggedDescriptor {
 
   private static final String ID = "k-cnt-viewer-share-menu";

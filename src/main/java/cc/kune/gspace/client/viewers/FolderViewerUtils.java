@@ -159,8 +159,8 @@ public class FolderViewerUtils {
       // Used for previews
       return null;
     } else {
-      return draggable ? i18n.t("Double click to open. Drag and drop to move this to another place")
-          : i18n.t("Double click to open");
+      return draggable ? i18n.t("Click to open. Drag and drop to move this to another place")
+          : i18n.t("Click to open");
     }
   }
 

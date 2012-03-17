@@ -66,6 +66,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
       button.addClickHandler(new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
+          event.stopPropagation();
           show(button);
         }
       });

@@ -36,9 +36,11 @@ import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
+import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import cc.kune.gspace.client.actions.TutorialContainerBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
@@ -61,8 +63,9 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<NewListPostIconBtn> newPostIconBtn,
       final Provider<NewListMenuItem> newListMenuItem, final Provider<NewListBtn> newListBtn,
       final Provider<OpenFolderMenuItem> openContentMenuItem,
-      final Provider<RefreshListMenuItem> refresh, final Provider<SubscribeToListBtn> subscribeBtn,
-      final Provider<OptionsListMenu> optionsMenuContent,
+      final Provider<RefreshListMenuItem> refreshList, final Provider<SubscribeToListBtn> subscribeBtn,
+      final Provider<OptionsListMenu> optionsMenuContainer,
+      final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ContentViewerShareMenu> shareMenuContent,
       final Provider<ShowSubscribersOfListBtn> subscribersCount,
       final Provider<TutorialContainerBtn> tutorialBtn,
@@ -73,18 +76,21 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<SetListOpenessMenuItem> listOpenessMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<CopyContentMenuItem> copyContent,
+      final Provider<RefreshContentMenuItem> refreshPost,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants, final ListsNewMenu listNewMenu,
       final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelListMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContainer, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostIconBtn, noRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newListBtn, TYPE_ROOT);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listNewMenu, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, postNewMenu, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribeBtn, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, refreshList, containers);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, refreshPost, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, listOpenessMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, newPostItem, containersNoRoot);
     // actionsRegistry.addAction(ActionGroups.TOOLBAR, newListMenuItem,
@@ -99,8 +105,8 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.TOOLBAR, addPublicMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, subscribersCount, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, copyContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOOLBAR, chatAbout, contents);
     actionsRegistry.addAction(ActionGroups.TOOLBAR, writeToParticipants, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);

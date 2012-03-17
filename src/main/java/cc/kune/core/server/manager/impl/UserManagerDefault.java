@@ -372,7 +372,6 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   @Override
   public User login(final String nickOrEmail, final String passwd) {
-    final PasswordDigest passwdDigest = new PasswordDigest(passwd.toCharArray());
     User user;
     try {
       user = userFinder.findByShortName(nickOrEmail);
