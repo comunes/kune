@@ -37,7 +37,7 @@ import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Container;
 import cc.kune.events.server.utils.EventsServerConversionUtil;
-import cc.kune.events.shared.EventsConstants;
+import cc.kune.events.shared.EventsToolConstants;
 
 import com.google.inject.Inject;
 
@@ -68,7 +68,7 @@ public class EventsServlet extends HttpServlet {
 
     try {
       final Container cnt = getContainer(userHash, token);
-      if (cnt.getTypeId().equals(EventsConstants.TYPE_ROOT)) {
+      if (cnt.getTypeId().equals(EventsToolConstants.TYPE_ROOT)) {
         final List<Map<String, String>> listOfProps = EventsServerConversionUtil.getAppointments(cnt);
         for (final Map<String, String> props : listOfProps) {
           try {

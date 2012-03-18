@@ -21,7 +21,7 @@ package cc.kune.docs.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.gspace.client.actions.NewContainerMenuItem;
 
 import com.google.inject.Inject;
@@ -33,7 +33,7 @@ public class NewFolderMenuItem extends NewContainerMenuItem {
       final NavResources res, final DocsFolderNewMenu docsFolderNewMenu) {
     super(i18n, action, res.folderAdd(), i18n.t("New folder"),
         i18n.t("Create a new folder. A folder will be a 'section' in the public web"),
-        i18n.t("New folder"), DocsConstants.TYPE_FOLDER, docsFolderNewMenu.get());
+        i18n.t("New folder"), DocsToolConstants.TYPE_FOLDER, docsFolderNewMenu.get());
   }
 
 }

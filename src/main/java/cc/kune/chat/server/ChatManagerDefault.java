@@ -19,7 +19,7 @@
  */
 package cc.kune.chat.server;
 
-import cc.kune.chat.shared.ChatConstants;
+import cc.kune.chat.shared.ChatToolConstants;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.errors.GroupNotFoundException;
@@ -63,7 +63,7 @@ public class ChatManagerDefault implements ChatManager {
     try {
       return creationService.createFolder(groupManager.findByShortName(groupShortName),
           ContentUtils.parseId(parentToken.getFolder()), roomName, user.getLanguage(),
-          ChatConstants.TYPE_ROOM);
+          ChatToolConstants.TYPE_ROOM);
     } catch (final ContentNotFoundException e) {
       xmppManager.destroyRoom(connection, roomName);
       throw new ContentNotFoundException();

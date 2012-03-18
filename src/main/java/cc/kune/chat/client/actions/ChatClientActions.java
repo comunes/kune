@@ -19,8 +19,8 @@
  \*/
 package cc.kune.chat.client.actions;
 
-import static cc.kune.chat.shared.ChatConstants.TYPE_ROOM;
-import static cc.kune.chat.shared.ChatConstants.TYPE_ROOT;
+import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOM;
+import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOT;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;

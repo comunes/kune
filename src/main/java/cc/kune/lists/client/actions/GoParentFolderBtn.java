@@ -23,7 +23,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.gspace.client.actions.GoParentContainerBtn;
-import cc.kune.lists.shared.ListsConstants;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
@@ -32,7 +32,7 @@ public class GoParentFolderBtn extends GoParentContainerBtn {
   @Inject
   public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
       final CoreResources res, final Session session) {
-    super(i18n, action, res, session, ListsConstants.TYPE_ROOT);
+    super(i18n, action, res, session, ListsToolConstants.TYPE_ROOT);
   }
 
 }

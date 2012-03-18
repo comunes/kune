@@ -12,7 +12,7 @@ import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView;
-import cc.kune.events.shared.EventsConstants;
+import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerPanel;
 import cc.kune.gspace.client.viewers.ContentTitleWidget;
@@ -283,7 +283,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     final String dateFormatted = fmt.format(currentDate);
     final ForIsWidget docHeader = gsArmor.getDocHeader();
     UiUtils.clear(docHeader);
-    contentTitle.setTitle(i18n.t("Events in [%s]", dateFormatted), EventsConstants.TYPE_ROOT, null,
+    contentTitle.setTitle(i18n.t("Events in [%s]", dateFormatted), EventsToolConstants.TYPE_ROOT, null,
         false);
     docHeader.add(contentTitle);
   }

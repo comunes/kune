@@ -34,8 +34,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.gspace.client.viewers.FolderViewerPresenter;
+import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -48,21 +47,19 @@ public class DelContentMenuItem extends MenuItemDescriptor {
     private final Provider<ContentServiceAsync> contentService;
     private final EventBus eventBus;
     private final I18nTranslationService i18n;
-    private final Provider<FolderViewerPresenter> presenter;
     private final Session session;
     private final StateManager stateManager;
 
     @Inject
     public DelContentAction(final EventBus eventBus, final StateManager stateManager,
         final Session session, final Provider<ContentServiceAsync> contentService,
-        final I18nTranslationService i18n, final Provider<FolderViewerPresenter> presenter) {
+        final I18nTranslationService i18n) {
       super(AccessRolDTO.Administrator, true);
       this.eventBus = eventBus;
       this.stateManager = stateManager;
       this.session = session;
       this.contentService = contentService;
       this.i18n = i18n;
-      this.presenter = presenter;
     }
 
     @Override
@@ -74,20 +71,14 @@ public class DelContentMenuItem extends MenuItemDescriptor {
             public void onSuccess() {
               NotifyUser.showProgress();
               contentService.get().delContent(session.getUserHash(), token,
-                  new AsyncCallbackSimple<StateContentDTO>() {
+                  new AsyncCallbackSimple<StateContainerDTO>() {
                     @Override
-                    public void onSuccess(final StateContentDTO state) {
-                      // Is this necessary?
-                      // session.setCurrentState(state);
-                      final StateToken parent = token.copy().clearDocument();
-                      if (session.getCurrentStateToken().equals(parent)) {
-                        stateManager.refreshCurrentStateWithoutCache();
-                        // Warning: the previous action
-                        // is asynchronous (it gets a
-                        // content)
-                        presenter.get().refreshState();
+                    public void onSuccess(final StateContainerDTO state) {
+                      final StateToken parentToken = state.getStateToken();
+                      if (session.getCurrentStateToken().equals(parentToken)) {
+                        stateManager.setRetrievedStateAndGo(state);
                       } else {
-                        stateManager.gotoStateToken(parent, false);
+                        stateManager.gotoStateToken(parentToken, false);
                       }
                       NotifyUser.hideProgress();
                     }

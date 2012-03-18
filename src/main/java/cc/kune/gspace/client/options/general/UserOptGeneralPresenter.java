@@ -128,6 +128,8 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
             @Override
             public void onSuccess(final StateAbstractDTO result) {
               NotifyUser.hideProgress();
+              stateManager.setRetrievedStateAndGo(result);
+              sendChangeEntityEvent();
               if (askChangeLanguage) {
                 i18n.changeToLanguageIfNecessary(lang.getCode(), i18n.t(lang.getEnglishName()), true,
                     new I18nLanguageChangeNeeded() {
@@ -138,8 +140,6 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
                       @Override
                       public void onChangeNotNeeded() {
                         askChangeLanguage = false;
-                        stateManager.setRetrievedStateAndGo(result);
-                        sendChangeEntityEvent();
                       }
                     });
               }

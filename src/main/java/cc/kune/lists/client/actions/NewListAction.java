@@ -34,7 +34,7 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import cc.kune.lists.client.rpc.ListsServiceAsync;
-import cc.kune.lists.shared.ListsConstants;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -106,7 +106,7 @@ public class NewListAction extends RolAction {
       NotifyUser.showProgress();
       diag.hide();
       listsService.get().createList(session.getUserHash(), session.getCurrentStateToken(),
-          diag.getTextFieldValue(), ListsConstants.TYPE_LIST, true,
+          diag.getTextFieldValue(), ListsToolConstants.TYPE_LIST, true,
           new AsyncCallbackSimple<StateContainerDTO>() {
             @Override
             public void onSuccess(final StateContainerDTO state) {

@@ -19,10 +19,10 @@
  */
 package cc.kune.events.server;
 
-import static cc.kune.events.shared.EventsConstants.NAME;
-import static cc.kune.events.shared.EventsConstants.ROOT_NAME;
-import static cc.kune.events.shared.EventsConstants.TYPE_MEETING;
-import static cc.kune.events.shared.EventsConstants.TYPE_ROOT;
+import static cc.kune.events.shared.EventsToolConstants.NAME;
+import static cc.kune.events.shared.EventsToolConstants.ROOT_NAME;
+import static cc.kune.events.shared.EventsToolConstants.TYPE_MEETING;
+import static cc.kune.events.shared.EventsToolConstants.TYPE_ROOT;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -59,7 +59,7 @@ public class EventsServerTool extends AbstractServerTool implements ServerWaveTo
       final CreationService creationService) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_MEETING), Arrays.asList(TYPE_ROOT),
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
-        creationService, configurationManager, i18n, ServerToolTarget.forGroups);
+        creationService, configurationManager, i18n, ServerToolTarget.forBoth);
     gadgetUrl = UrlUtils.of(MEETING_GADGET);
   }
 

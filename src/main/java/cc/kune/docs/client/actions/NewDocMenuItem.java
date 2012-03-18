@@ -22,7 +22,7 @@ package cc.kune.docs.client.actions;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentMenuItem;
 
@@ -42,7 +42,7 @@ public class NewDocMenuItem extends NewContentMenuItem {
         i18n.t("New document"),
         i18n.t("Create a New Document here. "
             + "If you choose to publish it, this document will appear as a new 'Page' in the public web"),
-        i18n.t("New document"), DocsConstants.TYPE_DOCUMENT, docsFolderNewMenu.get());
+        i18n.t("New document"), DocsToolConstants.TYPE_DOCUMENT, docsFolderNewMenu.get());
   }
 
 }

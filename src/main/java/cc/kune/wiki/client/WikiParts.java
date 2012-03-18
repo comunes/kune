@@ -24,7 +24,7 @@ import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import cc.kune.wiki.client.actions.WikiClientActions;
-import cc.kune.wiki.shared.WikiConstants;
+import cc.kune.wiki.shared.WikiToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -36,7 +36,7 @@ public class WikiParts {
       final ContentViewerSelector viewerSelector, final WikiClientActions wikiActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
-    viewerSelector.register(contentViewer, true, WikiConstants.TYPE_WIKIPAGE);
-    viewerSelector.register(folderViewer, true, WikiConstants.TYPE_ROOT, WikiConstants.TYPE_FOLDER);
+    viewerSelector.register(contentViewer, true, WikiToolConstants.TYPE_WIKIPAGE);
+    viewerSelector.register(folderViewer, true, WikiToolConstants.TYPE_ROOT, WikiToolConstants.TYPE_FOLDER);
   }
 }

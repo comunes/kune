@@ -20,7 +20,7 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateEventContainerDTO;
 import cc.kune.events.client.actions.CalendarOnOverMenu;
 import cc.kune.events.shared.EventsClientConversionUtil;
-import cc.kune.events.shared.EventsConstants;
+import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerView;
 import cc.kune.gspace.client.viewers.FolderViewerUtils;
 
@@ -172,7 +172,7 @@ public class CalendarViewerPresenter extends
         map.put(ICalConstants.DATE_TIME_START, DateUtils.toString(app.getStart()));
         map.put(ICalConstants.DATE_TIME_END, DateUtils.toString(app.getEnd()));
         contentService.get().setGadgetProperties(session.getUserHash(), new StateToken(app.getId()),
-            EventsConstants.TYPE_MEETING_DEF_GADGETNAME, map, new AsyncCallback<Void>() {
+            EventsToolConstants.TYPE_MEETING_DEF_GADGETNAME, map, new AsyncCallback<Void>() {
               @Override
               public void onFailure(final Throwable caught) {
                 event.setCancelled(true);

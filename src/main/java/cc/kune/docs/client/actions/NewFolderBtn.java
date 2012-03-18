@@ -21,7 +21,7 @@ package cc.kune.docs.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.gspace.client.actions.NewContainerBtn;
 
 import com.google.inject.Inject;
@@ -32,7 +32,7 @@ public class NewFolderBtn extends NewContainerBtn {
   public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
       final NavResources res) {
     super(i18n, action, res.folderAdd(), i18n.t("New folder"), i18n.t("Create a new folder"),
-        i18n.t("New folder"), DocsConstants.TYPE_FOLDER);
+        i18n.t("New folder"), DocsToolConstants.TYPE_FOLDER);
   }
 
 }

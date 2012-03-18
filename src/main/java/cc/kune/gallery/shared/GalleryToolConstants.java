@@ -17,16 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.barters.shared;
+package cc.kune.gallery.shared;
 
-public final class BartersConstants {
+import cc.kune.core.shared.ToolConstants;
 
-  public static final String NAME = "barters";
-  public static final String ROOT_NAME = "barters";
-  public static final String TYPE_BARTER = NAME + "." + "barter";
-  public static final String TYPE_FOLDER = NAME + "." + "folder";
+public final class GalleryToolConstants {
+  public static final String NAME = "gallery";
+  public static final String ROOT_NAME = "gallery";
+  public static final String TYPE_ALBUM = NAME + "." + "album";
   public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
-  private BartersConstants() {
+  private GalleryToolConstants() {
   }
 }

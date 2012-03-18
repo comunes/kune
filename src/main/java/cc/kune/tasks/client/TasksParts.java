@@ -24,7 +24,7 @@ import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import cc.kune.tasks.client.actions.TasksClientActions;
-import cc.kune.tasks.shared.TasksConstants;
+import cc.kune.tasks.shared.TasksToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -36,7 +36,7 @@ public class TasksParts {
       final ContentViewerSelector viewerSelector, final TasksClientActions tasksActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
-    viewerSelector.register(contentViewer, true, TasksConstants.TYPE_TASK);
-    viewerSelector.register(folderViewer, true, TasksConstants.TYPE_ROOT, TasksConstants.TYPE_FOLDER);
+    viewerSelector.register(contentViewer, true, TasksToolConstants.TYPE_TASK);
+    viewerSelector.register(folderViewer, true, TasksToolConstants.TYPE_ROOT, TasksToolConstants.TYPE_FOLDER);
   }
 }

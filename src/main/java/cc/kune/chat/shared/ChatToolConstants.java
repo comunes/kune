@@ -19,7 +19,7 @@
  */
 package cc.kune.chat.shared;
 
-public final class ChatConstants {
+public final class ChatToolConstants {
 
   public static final String NAME = "chats";
   public static final String ROOT_NAME = "chats";
@@ -27,6 +27,6 @@ public final class ChatConstants {
   public static final String TYPE_ROOM = NAME + "." + "room";
   public static final String TYPE_ROOT = NAME + "." + "root";
 
-  private ChatConstants() {
+  private ChatToolConstants() {
   }
 }

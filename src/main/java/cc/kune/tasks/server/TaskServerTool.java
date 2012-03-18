@@ -19,11 +19,11 @@
  */
 package cc.kune.tasks.server;
 
-import static cc.kune.tasks.shared.TasksConstants.NAME;
-import static cc.kune.tasks.shared.TasksConstants.ROOT_NAME;
-import static cc.kune.tasks.shared.TasksConstants.TYPE_FOLDER;
-import static cc.kune.tasks.shared.TasksConstants.TYPE_ROOT;
-import static cc.kune.tasks.shared.TasksConstants.TYPE_TASK;
+import static cc.kune.tasks.shared.TasksToolConstants.NAME;
+import static cc.kune.tasks.shared.TasksToolConstants.ROOT_NAME;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_FOLDER;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_ROOT;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_TASK;
 
 import java.util.Arrays;
 import java.util.Date;

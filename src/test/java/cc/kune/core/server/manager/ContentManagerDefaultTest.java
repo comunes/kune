@@ -19,8 +19,8 @@
  */
 package cc.kune.core.server.manager;
 
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
-import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_UPLOADEDFILE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

@@ -28,7 +28,7 @@ import cc.kune.chat.client.actions.StartAssemblyWithMembers;
 import cc.kune.chat.client.actions.StartChatWithMemberAction;
 import cc.kune.chat.client.actions.StartChatWithThisBuddyAction;
 import cc.kune.chat.client.actions.StartChatWithThisPersonAction;
-import cc.kune.chat.shared.ChatConstants;
+import cc.kune.chat.shared.ChatToolConstants;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
@@ -81,8 +81,8 @@ public class ChatParts {
       final Provider<OpenGroupPublicChatRoomAction> openGroupRoomAction,
       // final Provider<OpenGroupPublicChatRoomButton> openGroupRoom,
       final ContentViewerSelector viewerSelector, final FolderViewerPresenter folderViewer) {
-    viewerSelector.register(folderViewer, true, ChatConstants.TYPE_ROOT);
-    viewerSelector.register(folderViewer, true, ChatConstants.TYPE_ROOM);
+    viewerSelector.register(folderViewer, true, ChatToolConstants.TYPE_ROOT);
+    viewerSelector.register(folderViewer, true, ChatToolConstants.TYPE_ROOM);
     clientTool.get();
     session.onAppStart(true, new AppStartHandler() {
       @Override

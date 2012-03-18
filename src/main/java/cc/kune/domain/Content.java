@@ -52,16 +52,16 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.validator.NotNull;
 
-import cc.kune.barters.shared.BartersConstants;
-import cc.kune.blogs.shared.BlogsConstants;
+import cc.kune.barters.shared.BartersToolConstants;
+import cc.kune.blogs.shared.BlogsToolConstants;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.domain.utils.HasStateToken;
-import cc.kune.events.shared.EventsConstants;
-import cc.kune.lists.shared.ListsConstants;
-import cc.kune.tasks.shared.TasksConstants;
-import cc.kune.wiki.shared.WikiConstants;
+import cc.kune.events.shared.EventsToolConstants;
+import cc.kune.lists.shared.ListsToolConstants;
+import cc.kune.tasks.shared.TasksToolConstants;
+import cc.kune.wiki.shared.WikiToolConstants;
 
 @Entity
 @Table(name = "contents")
@@ -265,11 +265,11 @@ public class Content implements HasStateToken {
 
   @Transient
   public boolean isWave() {
-    return (typeId.equals(DocsConstants.TYPE_DOCUMENT))
-        || typeId.equals(TasksConstants.TYPE_TASK)
-        || typeId.equals(ListsConstants.TYPE_POST)
-        || typeId.equals(WikiConstants.TYPE_WIKIPAGE)
-        || (typeId.equals(BlogsConstants.TYPE_POST) || typeId.equals(BartersConstants.TYPE_BARTER) || typeId.equals(EventsConstants.TYPE_MEETING));
+    return (typeId.equals(DocsToolConstants.TYPE_DOCUMENT))
+        || typeId.equals(TasksToolConstants.TYPE_TASK)
+        || typeId.equals(ListsToolConstants.TYPE_POST)
+        || typeId.equals(WikiToolConstants.TYPE_WIKIPAGE)
+        || (typeId.equals(BlogsToolConstants.TYPE_POST) || typeId.equals(BartersToolConstants.TYPE_BARTER) || typeId.equals(EventsToolConstants.TYPE_MEETING));
   }
 
   public void removeAuthor(final User user) {

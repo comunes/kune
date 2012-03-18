@@ -19,7 +19,7 @@
  */
 package cc.kune.core.server.integration.content;
 
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -42,7 +42,7 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
@@ -121,7 +121,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     final String oldTitle = "some title";
     String newTitle = "folder new name";
     final StateContainerDTO newState = contentService.addFolder(session.getHash(),
-        defaultContent.getStateToken(), oldTitle, DocsConstants.TYPE_FOLDER);
+        defaultContent.getStateToken(), oldTitle, DocsToolConstants.TYPE_FOLDER);
 
     final ContainerDTO newFolder = newState.getContainer();
 
@@ -229,7 +229,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     final String oldTitle = "some title";
     String newTitle = "folder new name";
     final StateContainerDTO newState = contentService.addFolder(session.getHash(),
-        folder.getStateToken(), oldTitle, DocsConstants.TYPE_FOLDER);
+        folder.getStateToken(), oldTitle, DocsToolConstants.TYPE_FOLDER);
 
     final ContainerDTO newFolder = newState.getContainer();
 

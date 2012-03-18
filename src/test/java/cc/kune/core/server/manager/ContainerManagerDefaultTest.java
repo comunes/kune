@@ -19,7 +19,7 @@
  */
 package cc.kune.core.server.manager;
 
-import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -30,7 +30,7 @@ import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.MoveOnSameContainerException;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.server.PersistencePreLoadedDataTest;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.domain.Container;
 
 public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
@@ -39,8 +39,8 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   @Before
   public void before() {
-    rootFolder = containerManager.createRootFolder(user.getUserGroup(), DocsConstants.NAME,
-        DocsConstants.ROOT_NAME, TYPE_FOLDER);
+    rootFolder = containerManager.createRootFolder(user.getUserGroup(), DocsToolConstants.NAME,
+        DocsToolConstants.ROOT_NAME, TYPE_FOLDER);
   }
 
   private Container createContainer(final Container parent) {

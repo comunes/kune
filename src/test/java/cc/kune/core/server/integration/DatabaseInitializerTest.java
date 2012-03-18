@@ -19,8 +19,8 @@
  */
 package cc.kune.core.server.integration;
 
-import static cc.kune.docs.shared.DocsConstants.NAME;
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsToolConstants.NAME;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -104,6 +104,7 @@ public class DatabaseInitializerTest {
     final List<String> enabledTools = groupManager.findEnabledTools(defaultGroup.getId());
     assertNotNull(enabledTools);
     assertTrue(enabledTools.size() > 0);
+    assertNotNull(containerManager.getTrashFolder(defaultGroup).getId());
   }
 
 }

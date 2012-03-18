@@ -19,7 +19,7 @@
  */
 package cc.kune.blogs.client.actions;
 
-import cc.kune.blogs.shared.BlogsConstants;
+import cc.kune.blogs.shared.BlogsToolConstants;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
@@ -32,7 +32,7 @@ public class GoParentBlogBtn extends GoParentContainerBtn {
   @Inject
   public GoParentBlogBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
       final CoreResources res, final Session session) {
-    super(i18n, action, res, session, BlogsConstants.TYPE_ROOT);
+    super(i18n, action, res, session, BlogsToolConstants.TYPE_ROOT);
   }
 
 }

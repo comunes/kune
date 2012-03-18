@@ -19,11 +19,11 @@
  */
 package cc.kune.lists.server;
 
-import static cc.kune.lists.shared.ListsConstants.NAME;
-import static cc.kune.lists.shared.ListsConstants.ROOT_NAME;
-import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
-import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
-import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
+import static cc.kune.lists.shared.ListsToolConstants.NAME;
+import static cc.kune.lists.shared.ListsToolConstants.ROOT_NAME;
+import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
+import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
+import static cc.kune.lists.shared.ListsToolConstants.TYPE_ROOT;
 
 import java.util.ArrayList;
 import java.util.Arrays;

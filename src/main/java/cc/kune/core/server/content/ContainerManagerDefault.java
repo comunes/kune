@@ -42,6 +42,7 @@ import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.finders.ContainerFinder;
 import cc.kune.domain.finders.ContentFinder;
+import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -76,9 +77,9 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
   @Override
   public Container createRootFolder(final Group group, final String toolName, final String name,
-      final String type) {
+      final String rootType) {
     final Container container = new Container(name, group, toolName);
-    container.setTypeId(type);
+    container.setTypeId(rootType);
     return persist(container);
   }
 
@@ -96,6 +97,16 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
       initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
     }
     return initialTitle;
+  }
+
+  @Override
+  public Container getTrashFolder(final Group group) {
+    return containerFinder.findTypeId(group, TrashToolConstants.TYPE_ROOT);
+  }
+
+  @Override
+  public boolean hasTrashFolder(final Group group) {
+    return containerFinder.findIfExistsTypeId(group, TrashToolConstants.TYPE_ROOT) > 0;
   }
 
   @Override

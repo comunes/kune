@@ -20,7 +20,7 @@
 package cc.kune.blogs.client;
 
 import cc.kune.blogs.client.actions.BlogsClientActions;
-import cc.kune.blogs.shared.BlogsConstants;
+import cc.kune.blogs.shared.BlogsToolConstants;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
@@ -36,7 +36,7 @@ public class BlogsParts {
       final ContentViewerSelector viewerSelector, final BlogsClientActions blogsActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
-    viewerSelector.register(contentViewer, true, BlogsConstants.TYPE_POST);
-    viewerSelector.register(folderViewer, true, BlogsConstants.TYPE_ROOT, BlogsConstants.TYPE_BLOG);
+    viewerSelector.register(contentViewer, true, BlogsToolConstants.TYPE_POST);
+    viewerSelector.register(folderViewer, true, BlogsToolConstants.TYPE_ROOT, BlogsToolConstants.TYPE_BLOG);
   }
 }

@@ -40,7 +40,6 @@ public class CreationServiceDefault implements CreationService {
 
   private final ContainerManager containerManager;
   private final ContentManagerDefault contentManager;
-
   private final ServerToolRegistry tools;
 
   @Inject

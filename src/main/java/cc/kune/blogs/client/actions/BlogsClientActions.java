@@ -19,10 +19,10 @@
  \*/
 package cc.kune.blogs.client.actions;
 
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_BLOG;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_ROOT;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_BLOG;
+import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_POST;
+import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_ROOT;
+import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_UPLOADEDFILE;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;

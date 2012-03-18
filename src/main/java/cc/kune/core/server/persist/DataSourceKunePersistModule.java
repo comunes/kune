@@ -87,6 +87,11 @@ public class DataSourceKunePersistModule extends PrivateModule {
       jpm.properties(dbProperties);
     }
 
+    // http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html
+    // (...) Just-in-time bindings created for child injectors will be
+    // created in an ancestor injector whenever possible (...)
+    // (This fails with finders, then we make explicit bindings)
+
     jpm.addFinder(ContainerFinder.class);
     jpm.addFinder(ContentFinder.class);
     jpm.addFinder(ExtMediaDescripFinder.class);

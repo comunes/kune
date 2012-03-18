@@ -19,9 +19,9 @@
  \*/
 package cc.kune.tasks.client.actions;
 
-import static cc.kune.tasks.shared.TasksConstants.TYPE_FOLDER;
-import static cc.kune.tasks.shared.TasksConstants.TYPE_ROOT;
-import static cc.kune.tasks.shared.TasksConstants.TYPE_TASK;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_FOLDER;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_ROOT;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_TASK;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;

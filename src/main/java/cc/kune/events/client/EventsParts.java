@@ -22,7 +22,7 @@ package cc.kune.events.client;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.events.client.actions.EventsClientActions;
 import cc.kune.events.client.viewer.CalendarViewer;
-import cc.kune.events.shared.EventsConstants;
+import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 
@@ -37,7 +37,7 @@ public class EventsParts {
       final ContentViewerPresenter contentViewer, final CalendarViewer calendarViewer) {
     clientTool.get();
     // remove this...
-    viewerSelector.register(contentViewer, true, EventsConstants.TYPE_MEETING);
-    viewerSelector.register(calendarViewer, true, EventsConstants.TYPE_ROOT);
+    viewerSelector.register(contentViewer, true, EventsToolConstants.TYPE_MEETING);
+    viewerSelector.register(calendarViewer, true, EventsToolConstants.TYPE_ROOT);
   }
 }

@@ -28,6 +28,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -86,6 +87,10 @@ public class ServerToolRegistry {
   }
 
   public void register(final ServerTool tool) {
+    if (tool.getName().equals(TrashToolConstants.NAME)) {
+      // Trash is a special tool but we don't register it
+      return;
+    }
     final String name = tool.getName();
     final String rootName = tool.getRootName();
     final boolean userAvailable = usersAvailableToolsInProp.contains(name);

@@ -19,11 +19,9 @@
  */
 package cc.kune.core.server.state;
 
-import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
@@ -36,7 +34,7 @@ import cc.kune.domain.License;
 import cc.kune.domain.Revision;
 import cc.kune.domain.User;
 import cc.kune.events.server.utils.EventsServerConversionUtil;
-import cc.kune.events.shared.EventsConstants;
+import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
@@ -74,7 +72,7 @@ public class StateServiceDefault implements StateService {
 
   @Override
   public StateContainer create(final User userLogged, final Container container) {
-    final boolean isCalendar = container.getTypeId().equals(EventsConstants.TYPE_ROOT);
+    final boolean isCalendar = container.getTypeId().equals(EventsToolConstants.TYPE_ROOT);
     final StateContainer state = isCalendar ? new StateEventContainer() : new StateContainer();
     state.setTitle(container.getName());
     state.setTypeId(container.getTypeId());
@@ -126,8 +124,12 @@ public class StateServiceDefault implements StateService {
         state.setTitle(wavelet.getTitle());
         state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveManager.isParticipant(wavelet,
             userLogged.getShortName()) : false);
-      } catch (final InvalidWaveRefException e) {
-        throw new DefaultException("Error retriving Wave");
+      } catch (final Exception e) {
+        state.setContent(i18n.t("Error accessing this document. "
+            + "Please contact the administrators providing this reference ([%s]) "
+            + "and any other relevant info.", waveId));
+        state.setTitle(revision.getTitle());
+        // throw new DefaultException("Error retriving Wave");
       }
     } else {
       state.setContent(textBody);

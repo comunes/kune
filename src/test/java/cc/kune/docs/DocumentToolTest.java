@@ -19,23 +19,23 @@
  */
 package cc.kune.docs;
 
-import static cc.kune.docs.shared.DocsConstants.NAME;
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
-import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
-import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
+import static cc.kune.docs.shared.DocsToolConstants.NAME;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_ROOT;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 
 public class DocumentToolTest {
 
     @Test
     public void clientAndServerSync() {
-        assertEquals(NAME, DocsConstants.NAME);
-        assertEquals(TYPE_ROOT, DocsConstants.TYPE_ROOT);
-        assertEquals(TYPE_FOLDER, DocsConstants.TYPE_FOLDER);
-        assertEquals(TYPE_DOCUMENT, DocsConstants.TYPE_DOCUMENT);
+        assertEquals(NAME, DocsToolConstants.NAME);
+        assertEquals(TYPE_ROOT, DocsToolConstants.TYPE_ROOT);
+        assertEquals(TYPE_FOLDER, DocsToolConstants.TYPE_FOLDER);
+        assertEquals(TYPE_DOCUMENT, DocsToolConstants.TYPE_DOCUMENT);
     }
 }

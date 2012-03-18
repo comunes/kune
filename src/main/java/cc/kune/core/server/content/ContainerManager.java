@@ -31,9 +31,13 @@ public interface ContainerManager extends Manager<Container, Long> {
 
   Container createFolder(Group group, Container parent, String name, I18nLanguage language, String typeId);
 
-  Container createRootFolder(Group group, String toolName, String name, String type);
+  Container createRootFolder(Group group, String toolName, String name, final String rootType);
 
   boolean findIfExistsTitle(Container container, String title);
+
+  Container getTrashFolder(Group group);
+
+  boolean hasTrashFolder(Group group);
 
   void moveContainer(Container container, Container newContainer);
 

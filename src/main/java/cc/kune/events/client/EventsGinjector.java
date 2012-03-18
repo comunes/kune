@@ -28,5 +28,5 @@ public interface EventsGinjector extends Ginjector {
 
   AsyncProvider<CalendarViewerPresenter> getCalendarViewerPresenter();
 
-  EventsParts getMeetingsParts();
+  EventsParts getEventsParts();
 }

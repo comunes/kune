@@ -19,12 +19,12 @@
  */
 package cc.kune.blogs.client;
 
-import static cc.kune.blogs.shared.BlogsConstants.NAME;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_BLOG;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_ROOT;
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
-import cc.kune.blogs.shared.BlogsConstants;
+import static cc.kune.blogs.shared.BlogsToolConstants.NAME;
+import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_BLOG;
+import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_POST;
+import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_ROOT;
+import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_UPLOADEDFILE;
+import cc.kune.blogs.shared.BlogsToolConstants;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
@@ -44,7 +44,7 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
       final IconicResources icons) {
     super(
         NAME,
-        i18n.t(BlogsConstants.ROOT_NAME),
+        i18n.t(BlogsToolConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
         icons.blogs(), toolSelector, cntCapRegistry, i18n, navResources);
     this.icons = icons;

@@ -109,7 +109,6 @@ import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.server.users.UserInfoServiceDefault;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.server.xmpp.XmppManagerDefault;
-import cc.kune.domain.SocialNetwork;
 import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.rpc.ListsRPC;
@@ -123,12 +122,7 @@ import com.google.inject.matcher.Matchers;
 
 public class PlatformServerModule extends AbstractExtendedModule {
   private void bindFinders() {
-    // http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html
-    // (...) Just-in-time bindings created for child injectors will be
-    // created in an ancestor injector whenever possible (...)
-    // (This fails with finders, then we make explicit bindings)
-
-    bind(SocialNetwork.class);
+    // ?? bind(SocialNetwork.class);
   }
 
   private void bindManagers() {

@@ -19,9 +19,9 @@
  */
 package cc.kune.chat.client;
 
-import static cc.kune.chat.shared.ChatConstants.NAME;
-import static cc.kune.chat.shared.ChatConstants.TYPE_ROOM;
-import static cc.kune.chat.shared.ChatConstants.TYPE_ROOT;
+import static cc.kune.chat.shared.ChatToolConstants.NAME;
+import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOM;
+import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOT;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -61,7 +61,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
 
   private void registerIcons() {
     registerTutorial(TYPE_ROOT);
-    registerTutorial(TYPE_ROOM);
+    // registerTutorial(TYPE_ROOM);
     registerContentTypeIcon(TYPE_ROOT, icons.chats());
     registerContentTypeIcon(TYPE_ROOM, res.groupChat());
     final String emptyMsg = i18n.tWithNT("See the archive of old conversations"

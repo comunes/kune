@@ -19,9 +19,9 @@
  */
 package cc.kune.core.server.integration.content;
 
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
-import static cc.kune.wiki.shared.WikiConstants.NAME;
-import static cc.kune.wiki.shared.WikiConstants.TYPE_WIKIPAGE;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
+import static cc.kune.wiki.shared.WikiToolConstants.NAME;
+import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -40,7 +40,7 @@ import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
@@ -95,7 +95,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     final ContainerDTO parent = defaultContent.getContainer();
     final String title = "folder name";
     final StateContainerDTO newState = contentService.addFolder(session.getHash(),
-        parent.getStateToken(), title, DocsConstants.TYPE_FOLDER);
+        parent.getStateToken(), title, DocsToolConstants.TYPE_FOLDER);
     assertNotNull(newState);
     assertNotNull(newState.getGroupMembers());
     assertNotNull(newState.getParticipation());
@@ -130,11 +130,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     final ContainerDTO parent = defaultContent.getContainer();
     final String title = "folder name";
     final StateContainerDTO newState = contentService.addFolder(session.getHash(),
-        parent.getStateToken(), title, DocsConstants.TYPE_FOLDER);
+        parent.getStateToken(), title, DocsToolConstants.TYPE_FOLDER);
     assertNotNull(newState);
 
     final StateContainerDTO newState2 = contentService.addFolder(session.getHash(),
-        parent.getStateToken(), title, DocsConstants.TYPE_FOLDER);
+        parent.getStateToken(), title, DocsToolConstants.TYPE_FOLDER);
     assertNotNull(newState2);
 
     final ContainerDTO parentAgain = getSiteDefaultContent().getContainer();

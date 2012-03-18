@@ -255,10 +255,19 @@ public class ContentRPC implements ContentService, RPC {
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator)
   @KuneTransactional
-  public StateContentDTO delContent(final String userHash, final StateToken token)
+  public StateContainerDTO delContent(final String userHash, final StateToken token)
       throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
-    return getState(getCurrentUser(), contentManager.setStatus(contentId, ContentStatus.inTheDustbin));
+    final Content content = finderService.getContent(contentId);
+    contentManager.setStatus(contentId, ContentStatus.inTheDustbin);
+    final Container previousParent = content.getContainer();
+    final Group group = previousParent.getOwner();
+    if (!containerManager.hasTrashFolder(group)) {
+      groupManager.initTrash(group);
+    }
+    final Container trash = containerManager.getTrashFolder(group);
+    moveContent(userHash, token, trash.getStateToken());
+    return getState(getCurrentUser(), previousParent);
   }
 
   @Override

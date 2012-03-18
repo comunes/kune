@@ -19,12 +19,12 @@
  */
 package cc.kune.wiki.server;
 
-import static cc.kune.wiki.shared.WikiConstants.NAME;
-import static cc.kune.wiki.shared.WikiConstants.ROOT_NAME;
-import static cc.kune.wiki.shared.WikiConstants.TYPE_FOLDER;
-import static cc.kune.wiki.shared.WikiConstants.TYPE_ROOT;
-import static cc.kune.wiki.shared.WikiConstants.TYPE_UPLOADEDFILE;
-import static cc.kune.wiki.shared.WikiConstants.TYPE_WIKIPAGE;
+import static cc.kune.wiki.shared.WikiToolConstants.NAME;
+import static cc.kune.wiki.shared.WikiToolConstants.ROOT_NAME;
+import static cc.kune.wiki.shared.WikiToolConstants.TYPE_FOLDER;
+import static cc.kune.wiki.shared.WikiToolConstants.TYPE_ROOT;
+import static cc.kune.wiki.shared.WikiToolConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
 
 import java.util.Arrays;
 import java.util.Date;

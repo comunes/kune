@@ -24,8 +24,8 @@ import java.util.Map;
 
 import cc.kune.common.client.notify.ProgressShowEvent;
 import cc.kune.core.client.events.AppStartEvent;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.ContentCache;
@@ -76,7 +76,9 @@ public class ContentCacheDefault implements ContentCache {
 
   private StateAbstractDTO getCached(final StateToken newState) {
     assert newState != null;
-    return useCache ? cacheMap.get(newState) : null;
+    final StateAbstractDTO cached = cacheMap.get(newState);
+    // We use cache always for docs (waves)
+    return useCache ? cached : newState.hasAll() ? cached : null;
   }
 
   @Override

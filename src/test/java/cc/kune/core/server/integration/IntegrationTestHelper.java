@@ -45,6 +45,7 @@ import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.events.server.EventsServerModule;
 import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
+import cc.kune.trash.server.TrashServerModule;
 import cc.kune.wave.server.CustomSettingsBinder;
 import cc.kune.wiki.server.WikiServerModule;
 
@@ -90,7 +91,7 @@ public class IntegrationTestHelper {
           new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
           new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 2, 2),
           federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
-          new EventsServerModule());
+          new EventsServerModule(), new TrashServerModule());
       try {
         childInjector.getInstance(WaveServerImpl.class).initialize();
       } catch (final WaveServerException e) {

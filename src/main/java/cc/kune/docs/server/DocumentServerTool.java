@@ -19,12 +19,12 @@
  */
 package cc.kune.docs.server;
 
-import static cc.kune.docs.shared.DocsConstants.NAME;
-import static cc.kune.docs.shared.DocsConstants.ROOT_NAME;
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
-import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
-import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
-import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.docs.shared.DocsToolConstants.NAME;
+import static cc.kune.docs.shared.DocsToolConstants.ROOT_NAME;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_ROOT;
+import static cc.kune.docs.shared.DocsToolConstants.TYPE_UPLOADEDFILE;
 
 import java.util.Arrays;
 
@@ -35,7 +35,7 @@ import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -62,7 +62,7 @@ public class DocumentServerTool extends AbstractServerTool {
     final boolean hasVars = otherVars.length >= 2;
     final String title = hasVars ? (String) otherVars[0] : i18n.t("Document sample");
     final String body = hasVars ? (String) otherVars[1] : i18n.t("This is only a sample of document");
-    final String contentType = DocsConstants.TYPE_DOCUMENT;
+    final String contentType = DocsToolConstants.TYPE_DOCUMENT;
 
     final Content content = createInitialContent(user, group, rootFolder, title, body, contentType);
     group.setDefaultContent(content);

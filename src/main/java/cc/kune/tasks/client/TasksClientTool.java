@@ -19,11 +19,11 @@
  */
 package cc.kune.tasks.client;
 
-import static cc.kune.tasks.shared.TasksConstants.NAME;
-import static cc.kune.tasks.shared.TasksConstants.ROOT_NAME;
-import static cc.kune.tasks.shared.TasksConstants.TYPE_FOLDER;
-import static cc.kune.tasks.shared.TasksConstants.TYPE_ROOT;
-import static cc.kune.tasks.shared.TasksConstants.TYPE_TASK;
+import static cc.kune.tasks.shared.TasksToolConstants.NAME;
+import static cc.kune.tasks.shared.TasksToolConstants.ROOT_NAME;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_FOLDER;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_ROOT;
+import static cc.kune.tasks.shared.TasksToolConstants.TYPE_TASK;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;

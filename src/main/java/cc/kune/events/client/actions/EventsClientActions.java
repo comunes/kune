@@ -19,8 +19,8 @@
  \*/
 package cc.kune.events.client.actions;
 
-import static cc.kune.events.shared.EventsConstants.TYPE_MEETING;
-import static cc.kune.events.shared.EventsConstants.TYPE_ROOT;
+import static cc.kune.events.shared.EventsToolConstants.TYPE_MEETING;
+import static cc.kune.events.shared.EventsToolConstants.TYPE_ROOT;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;

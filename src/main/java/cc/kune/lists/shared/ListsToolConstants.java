@@ -19,7 +19,7 @@
  */
 package cc.kune.lists.shared;
 
-public final class ListsConstants {
+public final class ListsToolConstants {
 
   public static final String NAME = "lists";
   public static final String ROOT_NAME = "lists";
@@ -27,6 +27,6 @@ public final class ListsConstants {
   public static final String TYPE_POST = NAME + "." + "post";
   public static final String TYPE_ROOT = NAME + "." + "root";
 
-  private ListsConstants() {
+  private ListsToolConstants() {
   }
 }

@@ -22,7 +22,7 @@ package cc.kune.wiki.client.actions;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.actions.NewContainerMenuItem;
-import cc.kune.wiki.shared.WikiConstants;
+import cc.kune.wiki.shared.WikiToolConstants;
 
 import com.google.inject.Inject;
 
@@ -33,7 +33,7 @@ public class NewFolderMenuItem extends NewContainerMenuItem {
       final NavResources res, final WikiFolderNewMenu wikiFolderNewMenu) {
     super(i18n, action, res.wikiAdd(), i18n.t("New folder"),
         i18n.t("Create a new folder. A folder will be a 'section' in the public web"),
-        i18n.t("New folder"), WikiConstants.TYPE_FOLDER, wikiFolderNewMenu.get());
+        i18n.t("New folder"), WikiToolConstants.TYPE_FOLDER, wikiFolderNewMenu.get());
   }
 
 }

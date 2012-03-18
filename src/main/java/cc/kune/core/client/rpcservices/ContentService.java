@@ -68,7 +68,7 @@ public interface ContentService extends RemoteService {
   StateContentDTO copyContent(String userHash, StateToken parentToken, StateToken token)
       throws DefaultException;
 
-  StateContentDTO delContent(String userHash, StateToken token) throws DefaultException;
+  StateContainerDTO delContent(String userHash, StateToken token) throws DefaultException;
 
   StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 

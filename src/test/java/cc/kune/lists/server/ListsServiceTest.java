@@ -41,7 +41,7 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.lists.client.rpc.ListsService;
-import cc.kune.lists.shared.ListsConstants;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
@@ -60,7 +60,7 @@ public class ListsServiceTest extends IntegrationTest {
     final UserInfoDTO userInfoDTO = doLogin();
     userGroup = userInfoDTO.getUserGroup();
     final StateAbstractDTO rootList = contentService.getContent(getHash(), new StateToken(
-        getDefSiteShortName(), ListsConstants.ROOT_NAME));
+        getDefSiteShortName(), ListsToolConstants.ROOT_NAME));
     openList = listsService.createList(getHash(), rootList.getStateToken(), "test list", "", true);
     closeList = listsService.createList(getHash(), rootList.getStateToken(), "test list", "", false);
   }

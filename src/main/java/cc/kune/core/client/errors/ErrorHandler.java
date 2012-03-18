@@ -148,7 +148,8 @@ public class ErrorHandler {
       logException(caught, true);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("Oops! Something has gone wrong with our servers. Retry later, please.")));
-      final String error = "Other kind of exception received in ErrorHandler";
+      final String error = "Other kind of exception received in ErrorHandler (" + caught.getMessage()
+          + ")";
       Log.error(error, caught);
       StackErrorEvent.fire(eventBus, caught);
     }

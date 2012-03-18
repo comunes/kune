@@ -17,16 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.tasks.shared;
+package cc.kune.blogs.shared;
 
-public final class TasksConstants {
+import cc.kune.core.shared.ToolConstants;
 
-  public static final String NAME = "tasks";
-  public static final String ROOT_NAME = "tasks";
-  public static final String TYPE_FOLDER = NAME + "." + "folder";
+public final class BlogsToolConstants {
+
+  public static final String NAME = "blogs";
+  public static final String ROOT_NAME = "blogs";
+  public static final String TYPE_BLOG = NAME + "." + "blog";
+  public static final String TYPE_POST = NAME + "." + "post";
   public static final String TYPE_ROOT = NAME + "." + "root";
-  public static final String TYPE_TASK = NAME + "." + "task";
+  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
-  private TasksConstants() {
+  private BlogsToolConstants() {
   }
 }

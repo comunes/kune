@@ -21,7 +21,7 @@ package cc.kune.docs.client;
 
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.docs.client.actions.DocsClientActions;
-import cc.kune.docs.shared.DocsConstants;
+import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
@@ -36,7 +36,7 @@ public class DocsParts {
       final ContentViewerSelector viewerSelector, final DocsClientActions docsActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
-    viewerSelector.register(contentViewer, true, DocsConstants.TYPE_DOCUMENT);
-    viewerSelector.register(folderViewer, true, DocsConstants.TYPE_ROOT, DocsConstants.TYPE_FOLDER);
+    viewerSelector.register(contentViewer, true, DocsToolConstants.TYPE_DOCUMENT);
+    viewerSelector.register(folderViewer, true, DocsToolConstants.TYPE_ROOT, DocsToolConstants.TYPE_FOLDER);
   }
 }

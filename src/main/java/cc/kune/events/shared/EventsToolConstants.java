@@ -17,19 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wiki.shared;
+package cc.kune.events.shared;
 
-import cc.kune.core.shared.ToolConstants;
+public final class EventsToolConstants {
 
-public final class WikiConstants {
-
-  public static final String NAME = "wiki";
-  public static final String ROOT_NAME = "wiki";
-  public static final String TYPE_FOLDER = NAME + "." + "folder";
+  public static final String NAME = "events";
+  public static final String ROOT_NAME = "events";
+  public static final String TYPE_MEETING = NAME + "." + "meeting";
+  public static final String TYPE_MEETING_DEF_GADGETNAME = "massmob";
   public static final String TYPE_ROOT = NAME + "." + "root";
-  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
-  public static final String TYPE_WIKIPAGE = NAME + "." + "wikipage";
 
-  private WikiConstants() {
+  private EventsToolConstants() {
   }
 }

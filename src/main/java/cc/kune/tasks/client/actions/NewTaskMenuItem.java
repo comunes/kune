@@ -24,7 +24,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentMenuItem;
-import cc.kune.tasks.shared.TasksConstants;
+import cc.kune.tasks.shared.TasksToolConstants;
 
 import com.google.inject.Inject;
 
@@ -34,7 +34,7 @@ public class NewTaskMenuItem extends NewContentMenuItem {
   public NewTaskMenuItem(final I18nTranslationService i18n, final NewContentAction action,
       final NavResources res, final GlobalShortcutRegister shorcutReg, final TasksFolderNewMenu tasksNewMenu) {
     super(i18n, action, res.taskadd(), shorcutReg, i18n.t("New task"), i18n.t("Create a new task"),
-        i18n.t("New task"), TasksConstants.TYPE_TASK, tasksNewMenu.get());
+        i18n.t("New task"), TasksToolConstants.TYPE_TASK, tasksNewMenu.get());
   }
 
 }

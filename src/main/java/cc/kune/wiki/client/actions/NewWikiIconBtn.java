@@ -24,7 +24,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentBtn;
-import cc.kune.wiki.shared.WikiConstants;
+import cc.kune.wiki.shared.WikiToolConstants;
 
 import com.google.inject.Inject;
 
@@ -41,7 +41,7 @@ public class NewWikiIconBtn extends NewContentBtn {
         i18n.t("New wikipage"),
         i18n.t("Create a New Wikipage here. "
             + "If you choose to publish it, this document will appear as a new 'Page' in the public web"),
-        i18n.t("New wikipage"), WikiConstants.TYPE_WIKIPAGE);
+        i18n.t("New wikipage"), WikiToolConstants.TYPE_WIKIPAGE);
     withStyles("k-btn-min, k-fl");
   }
 

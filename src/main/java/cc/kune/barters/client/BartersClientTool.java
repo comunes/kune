@@ -19,10 +19,10 @@
  */
 package cc.kune.barters.client;
 
-import static cc.kune.barters.shared.BartersConstants.NAME;
-import static cc.kune.barters.shared.BartersConstants.TYPE_BARTER;
-import static cc.kune.barters.shared.BartersConstants.TYPE_FOLDER;
-import static cc.kune.barters.shared.BartersConstants.TYPE_ROOT;
+import static cc.kune.barters.shared.BartersToolConstants.NAME;
+import static cc.kune.barters.shared.BartersToolConstants.TYPE_BARTER;
+import static cc.kune.barters.shared.BartersToolConstants.TYPE_FOLDER;
+import static cc.kune.barters.shared.BartersToolConstants.TYPE_ROOT;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;

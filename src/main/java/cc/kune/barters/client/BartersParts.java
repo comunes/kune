@@ -20,7 +20,7 @@
 package cc.kune.barters.client;
 
 import cc.kune.barters.client.actions.BartersClientActions;
-import cc.kune.barters.shared.BartersConstants;
+import cc.kune.barters.shared.BartersToolConstants;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
@@ -36,7 +36,7 @@ public class BartersParts {
       final ContentViewerSelector viewerSelector, final BartersClientActions bartersActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
-    viewerSelector.register(contentViewer, true, BartersConstants.TYPE_BARTER);
-    viewerSelector.register(folderViewer, true, BartersConstants.TYPE_ROOT, BartersConstants.TYPE_FOLDER);
+    viewerSelector.register(contentViewer, true, BartersToolConstants.TYPE_BARTER);
+    viewerSelector.register(folderViewer, true, BartersToolConstants.TYPE_ROOT, BartersToolConstants.TYPE_FOLDER);
   }
 }

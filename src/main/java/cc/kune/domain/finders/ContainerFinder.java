@@ -20,11 +20,19 @@
 package cc.kune.domain.finders;
 
 import cc.kune.domain.Container;
+import cc.kune.domain.Group;
 
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
 public interface ContainerFinder {
-    @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.parent = :container AND c.name LIKE :title")
-    public Long findIfExistsTitle(@Named("container") final Container container, @Named("title") final String title);
+  @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.parent = :container AND c.name LIKE :title")
+  public Long findIfExistsTitle(@Named("container") final Container container,
+      @Named("title") final String title);
+
+  @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.typeId = :typeId AND c.owner = :owner")
+  public Long findIfExistsTypeId(@Named("owner") final Group group, @Named("typeId") final String typeId);
+
+  @Finder(query = "FROM Container c WHERE c.typeId = :typeId AND c.owner = :owner")
+  public Container findTypeId(@Named("owner") final Group group, @Named("typeId") final String typeId);
 }

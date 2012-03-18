@@ -19,10 +19,10 @@
  */
 package cc.kune.chat.server;
 
-import static cc.kune.chat.shared.ChatConstants.NAME;
-import static cc.kune.chat.shared.ChatConstants.ROOT_NAME;
-import static cc.kune.chat.shared.ChatConstants.TYPE_ROOM;
-import static cc.kune.chat.shared.ChatConstants.TYPE_ROOT;
+import static cc.kune.chat.shared.ChatToolConstants.NAME;
+import static cc.kune.chat.shared.ChatToolConstants.ROOT_NAME;
+import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOM;
+import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOT;
 
 import java.util.Arrays;
 import java.util.Collections;

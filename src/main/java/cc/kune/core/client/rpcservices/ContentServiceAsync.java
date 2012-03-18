@@ -68,7 +68,7 @@ public interface ContentServiceAsync {
   void copyContent(String userHash, StateToken parentToken, StateToken token,
       AsyncCallback<StateContentDTO> callback);
 
-  void delContent(String userHash, StateToken token, AsyncCallback<StateContentDTO> asyncCallback);
+  void delContent(String userHash, StateToken token, AsyncCallback<StateContainerDTO> asyncCallback);
 
   void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 

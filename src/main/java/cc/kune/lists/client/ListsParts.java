@@ -24,7 +24,7 @@ import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import cc.kune.lists.client.actions.ListsClientActions;
-import cc.kune.lists.shared.ListsConstants;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -36,7 +36,7 @@ public class ListsParts {
       final ContentViewerSelector viewerSelector, final ListsClientActions listsActions,
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
-    viewerSelector.register(contentViewer, true, ListsConstants.TYPE_POST);
-    viewerSelector.register(folderViewer, true, ListsConstants.TYPE_ROOT, ListsConstants.TYPE_LIST);
+    viewerSelector.register(contentViewer, true, ListsToolConstants.TYPE_POST);
+    viewerSelector.register(folderViewer, true, ListsToolConstants.TYPE_ROOT, ListsToolConstants.TYPE_LIST);
   }
 }

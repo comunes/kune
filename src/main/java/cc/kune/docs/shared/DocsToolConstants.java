@@ -17,16 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.events.shared;
+package cc.kune.docs.shared;
 
-public final class EventsConstants {
+import cc.kune.core.shared.ToolConstants;
 
-  public static final String NAME = "events";
-  public static final String ROOT_NAME = "events";
-  public static final String TYPE_MEETING = NAME + "." + "meeting";
-  public static final String TYPE_MEETING_DEF_GADGETNAME = "massmob";
+public final class DocsToolConstants {
+
+  public static final String NAME = "docs";
+  public static final String ROOT_NAME = "documents";
+  public static final String TYPE_DOCUMENT = NAME + "." + "doc";
+  public static final String TYPE_FOLDER = NAME + "." + "folder";
   public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
-  private EventsConstants() {
+  private DocsToolConstants() {
   }
 }

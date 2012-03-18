@@ -65,6 +65,7 @@ import cc.kune.domain.User;
 import cc.kune.domain.finders.GroupFinder;
 import cc.kune.domain.finders.LicenseFinder;
 import cc.kune.domain.finders.UserFinder;
+import cc.kune.trash.server.TrashServerTool;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -80,27 +81,27 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   private final LicenseFinder licenseFinder;
   private final LicenseManager licenseManager;
   private final KuneBasicProperties properties;
-  private final ServerToolRegistry registry;
   private final ServerToolRegistry serverToolRegistry;
+  private final Provider<TrashServerTool> trashTool;
   private final UserFinder userFinder;
 
   @Inject
   public GroupManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final GroupFinder finder, final UserFinder userFinder, final KuneProperties kuneProperties,
-      final KuneBasicProperties properties, final ServerToolRegistry registry,
-      final LicenseManager licenseManager, final LicenseFinder licenseFinder,
-      final FileManager fileManager, final ServerToolRegistry serverToolRegistry,
+      final KuneBasicProperties properties, final LicenseManager licenseManager,
+      final LicenseFinder licenseFinder, final FileManager fileManager,
+      final ServerToolRegistry serverToolRegistry, final Provider<TrashServerTool> trashTool,
       final I18nTranslationService i18n) {
     super(provider, Group.class);
     this.finder = finder;
     this.userFinder = userFinder;
     this.kuneProperties = kuneProperties;
     this.properties = properties;
-    this.registry = registry;
     this.licenseManager = licenseManager;
     this.licenseFinder = licenseFinder;
     this.fileManager = fileManager;
     this.serverToolRegistry = serverToolRegistry;
+    this.trashTool = trashTool;
     this.i18n = i18n;
   }
 
@@ -271,11 +272,13 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       }
       throw e;
     }
-    for (final ServerTool tool : registry.all()) {
+    for (final ServerTool tool : serverToolRegistry.all()) {
       if (toolsToEnable.contains(tool.getName())) {
         tool.initGroup(user, group, vars);
       }
     }
+    // Init always the trash
+    initTrash(group);
   }
 
   private void initSocialNetwork(final Group group, final Group userGroup,
@@ -288,6 +291,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       network.addAdmin(userGroup);
     }
     network.setVisibility(snVisibility);
+  }
+
+  @Override
+  public void initTrash(final Group group) {
+    trashTool.get().initGroup(group);
   }
 
   @Override

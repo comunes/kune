@@ -38,7 +38,7 @@ import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Group;
 import cc.kune.lists.client.rpc.ListsService;
-import cc.kune.lists.shared.ListsConstants;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
@@ -67,7 +67,7 @@ public class ListsRPC implements ListsService, RPC {
   public StateContainerDTO createList(final String userHash, final StateToken parentToken,
       final String listaName, final String description, final boolean isPublic) {
     final StateContainerDTO result = contentRPC.addFolder(userHash, parentToken,
-        composeListName(parentToken, listaName), ListsConstants.TYPE_LIST);
+        composeListName(parentToken, listaName), ListsToolConstants.TYPE_LIST);
     // Not public list, don't permit subscriptions neither view posts
     return contentRPC.getState(setContainerAcl(result.getStateToken(), isPublic));
   }
@@ -89,7 +89,7 @@ public class ListsRPC implements ListsService, RPC {
       final String postTitle) {
     final Container container = getContainer(parentToken);
     final StateContentDTO content = contentRPC.addContent(userHash, parentToken,
-        "[" + container.getName() + "] " + postTitle, ListsConstants.TYPE_POST);
+        "[" + container.getName() + "] " + postTitle, ListsToolConstants.TYPE_POST);
     // FIXME In the future use tabs here
     return content;
   }

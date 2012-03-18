@@ -19,9 +19,9 @@
  \*/
 package cc.kune.lists.client.actions;
 
-import static cc.kune.lists.shared.ListsConstants.TYPE_LIST;
-import static cc.kune.lists.shared.ListsConstants.TYPE_POST;
-import static cc.kune.lists.shared.ListsConstants.TYPE_ROOT;
+import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
+import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
+import static cc.kune.lists.shared.ListsToolConstants.TYPE_ROOT;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;
