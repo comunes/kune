@@ -65,7 +65,10 @@ public class FolderViewerUtils {
         new ShowHelpContainerEvent.ShowHelpContainerHandler() {
           @Override
           public void onShowHelpContainer(final ShowHelpContainerEvent event) {
-            getView().showTutorial(event.getTool());
+            final AbstractFolderViewerView currentView = getView();
+            if (currentView != null) {
+              currentView.showTutorial(event.getTool());
+            }
           }
         });
   }

@@ -22,7 +22,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
-    <wiab.version>0.3.13</wiab.version>
+    <wiab.version>0.3.14</wiab.version>
     <jetty.version>8.0.1.v20110908</jetty.version>
     <skipTests>true</skipTests>
   </properties>
@@ -537,6 +537,11 @@
       <version>r09</version>
     </dependency>
     <dependency>
+      <groupId>com.google.gxp</groupId>
+      <artifactId>google-gxp</artifactId>
+      <version>0.2.4-beta</version>
+    </dependency>
+    <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>box</artifactId>
       <version>${wiab.version}</version>
@@ -546,11 +551,11 @@
       <artifactId>box-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>waveinabox-server-0.3</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
+  <dependency>
+    <groupId>org.waveprotocol</groupId>
+    <artifactId>waveinabox-server-0.3</artifactId>
+    <version>${wiab.version}</version>
+  </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>gwt-util-src</artifactId>

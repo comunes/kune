@@ -63,7 +63,8 @@ public class CookiesManagerImpl implements CookiesManager {
   @Override
   public void setAnonCookie(final Boolean userRegister) {
     final Date expires = new Date(System.currentTimeMillis()
-        + (userRegister ? SessionConstants.ANON_SESSION_DURATION_AFTER_REG : SessionConstants.ANON_SESSION_DURATION));
+        + (userRegister ? SessionConstants.ANON_SESSION_DURATION_AFTER_REG
+            : SessionConstants.ANON_SESSION_DURATION));
     Cookies.setCookie(ANON, userRegister.toString(), expires, null, "/", false);
   }
 
@@ -72,6 +73,7 @@ public class CookiesManagerImpl implements CookiesManager {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
     final Date expires = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
     Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, null, "/", false);
+    Cookies.setCookie("JSESSIONID", userHash, expires, null, "/", false);
     Log.info("Received hash: " + userHash, null);
   }
 }

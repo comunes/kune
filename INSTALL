@@ -249,11 +249,13 @@ so this will not conflict with kune users management.
 
 Download from http://kune.cc/downloads/openfireauth kune-openfireauth-VERSION.jar and copy to /usr/share/openfire/lib as root. Set the correct owner:
 
-chown openfire:openfire /usr/share/openfire/lib/kune-openfireauth-VERSION.jar
+sudo chown openfire:openfire /usr/share/openfire/lib/kune-openfireauth-VERSION.jar
+sudo ln -s /etc/kune/wave-server.properties /usr/share/openfire/lib/wave-server.properties
+(do something equivalent in Windows systems in the openfire folder)
 
-(do something equivalent in Windows systems in the openfire folder).
+The wave-server.properties file is in src/main/resources in the devel environment.
 
-Execute this:
+Next, execute this:
 
 $ mysql -p -u kune kune_openfire # or mysql -p -u root
 DELETE FROM `ofProperty` WHERE name='provider.auth.className';

@@ -43,6 +43,7 @@ import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.robots.agent.RobotAgentUtil;
 import org.waveprotocol.wave.model.id.InvalidIdException;
 import org.waveprotocol.wave.model.id.WaveId;
+import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
@@ -270,10 +271,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     try {
       try {
         if (!TextUtils.empty(defWave)) {
-          final WaveId copyWaveId = WaveId.ofChecked(participantUtils.getDomain(), defWave);
+          final String domain = participantUtils.getDomain();
+          final WaveId copyWaveId = WaveId.ofChecked(domain, defWave);
           welcome = kuneWaveManager.createWave(
               ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
-                  properties.getDefaultSiteName()), "", WaveRef.of(copyWaveId),
+                  properties.getDefaultSiteName()), "",
+              WaveRef.of(copyWaveId, WaveletId.of(domain, "conv+root")),
               new SimpleArgCallback<WaveRef>() {
                 @Override
                 public void onCallback(final WaveRef arg) {
