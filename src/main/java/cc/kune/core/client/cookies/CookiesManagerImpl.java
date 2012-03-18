@@ -56,8 +56,10 @@ public class CookiesManagerImpl implements CookiesManager {
     // http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/ded86778ee56690/515dc513c7d085eb?lnk=st&q=remove+cookie#515dc513c7d085eb
     // http://code.google.com/p/google-web-toolkit/issues/detail?id=1735&q=removeCookie
     Cookies.removeCookie(SessionConstants.USERHASH);
+    Cookies.removeCookie(SessionConstants.JSESSIONID);
     // Workaround:
     Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), null, "/", false);
+    Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), null, "/", false);
   }
 
   @Override
@@ -73,7 +75,7 @@ public class CookiesManagerImpl implements CookiesManager {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
     final Date expires = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
     Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, null, "/", false);
-    Cookies.setCookie("JSESSIONID", userHash, expires, null, "/", false);
+    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, expires, null, "/", false);
     Log.info("Received hash: " + userHash, null);
   }
 }
