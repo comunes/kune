@@ -24,6 +24,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -37,10 +38,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
   protected final NavResources navResources;
 
   public FoldableAbstractClientTool(final String shortName, final String longName, final String tooltip,
-      final ImageResource icon, final ToolSelector toolSelector,
+      final ImageResource icon, final AccessRolDTO visibleForRol, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry contentCapabilitiesRegistry, final I18nTranslationService i18n,
       final NavResources navResources) {
-    super(shortName, longName, tooltip, icon, toolSelector);
+    super(shortName, longName, tooltip, icon, visibleForRol, toolSelector);
     this.contentCapabilitiesRegistry = contentCapabilitiesRegistry;
     this.i18n = i18n;
     this.navResources = navResources;

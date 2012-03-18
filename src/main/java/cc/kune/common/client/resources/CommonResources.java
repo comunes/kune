@@ -131,4 +131,10 @@ public interface CommonResources extends ClientBundle {
 
   @Source("icons/world-16.png")
   ImageResource world16();
+
+  @Source("icons/trash-black.png")
+  ImageResource trashBlack();
+
+  @Source("icons/trash-white.png")
+  ImageResource trashWhite();
 }

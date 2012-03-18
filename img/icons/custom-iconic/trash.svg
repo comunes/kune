@@ -62,7 +62,10 @@
    d="M 1,0 C 0.44600003,0 0,0.446 0,1 l 0,2 c 0,0.554 0.44600003,1 1,1 1.3041959,0 1.6744253,0 3,0 l 0,22 c 0,3.312 2.688,6 6,6 l 12,0 c 3.312,0 6,-2.688 6,-6 l 0,-22 2,0 1,0 c 0.554,0 1,-0.446 1,-1 L 32,1 C 32,0.446 31.554,0 31,0 L 30,0 26,0 C 24.589979,0 24,0.5207576 24,2.03125 L 24,26 c 0,1.102 -0.898,2 -2,2 L 10,28 C 8.898,28 8,27.102 8,26 8.00153,18.235176 8.00126,7.8861416 8,1 8,0.43960056 7.5213789,0 7,0 5.3333333,0 2.6666667,0 1,0 z"
    id="rect3871"
    inkscape:connector-curvature="0"
-   sodipodi:nodetypes="cssccssssccsssscssssscccc" />
+   sodipodi:nodetypes="cssccssssccsssscssssscccc"
+   inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/resources/icons/trash-black.png"
+   inkscape:export-xdpi="45"
+   inkscape:export-ydpi="45" />
 <rect
    style="color:#000000;fill:#231f20;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
    id="rect3086"
@@ -71,7 +74,10 @@
    x="10"
    y="4"
    ry="0.99999994"
-   rx="1" /><rect
+   rx="1"
+   inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/resources/icons/trash-black.png"
+   inkscape:export-xdpi="45"
+   inkscape:export-ydpi="45" /><rect
    style="color:#000000;fill:#231f20;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
    id="rect3860"
    width="4"
@@ -79,4 +85,7 @@
    x="18"
    y="4"
    ry="0.99999994"
-   rx="1" /></svg>
+   rx="1"
+   inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/resources/icons/trash-black.png"
+   inkscape:export-xdpi="45"
+   inkscape:export-ydpi="45" /></svg>

@@ -26,6 +26,7 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
+import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -83,10 +84,13 @@ public class FolderViewerUtils {
         typeId, status);
     final String tooltip = getTooltip(stateToken, mimeType,
         capabReg.isDragable(typeId) && rights.isAdministrable());
-    if (status.equals(ContentStatus.inTheDustbin)
-        && (!capabReg.showDeleted(typeId) && !session.getShowDeletedContent())) {
+    final boolean thisTypeShouldShowDelete = capabReg.showDeleted(typeId)
+        || parentStateToken.getTool().equals(TrashToolConstants.NAME);
+    final boolean showAllDeleted = session.getShowDeletedContent();
+    if (status.equals(ContentStatus.inTheDustbin) && !(thisTypeShouldShowDelete || showAllDeleted)) {
       // Don't show
-      // NotifyUser.info("Deleted, don't show");
+      // NotifyUser.info("Deleted, don't show: " + parentStateToken + "  " +
+      // thisTypeShouldShowDelete);
     } else {
       final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
           genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,

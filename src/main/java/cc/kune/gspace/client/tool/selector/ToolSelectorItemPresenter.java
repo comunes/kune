@@ -20,6 +20,7 @@
 package cc.kune.gspace.client.tool.selector;
 
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -43,6 +44,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
   }
 
   private final String longName;
+  private final AccessRolDTO visibleFoRol;
   private final String shortName;
   private StateToken token;
   private final ToolSelector toolSelector;
@@ -50,11 +52,17 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
   private ToolSelectorItemView view;
 
   public ToolSelectorItemPresenter(final String shortName, final String longName, final String tooltip,
-      final ToolSelector toolSelector) {
+      final AccessRolDTO visibleForRol, final ToolSelector toolSelector) {
     this.shortName = shortName;
     this.longName = longName;
     this.tooltip = tooltip;
+    this.visibleFoRol = visibleForRol;
     this.toolSelector = toolSelector;
+  }
+
+  @Override
+  public AccessRolDTO getVisibleForRol() {
+    return visibleFoRol;
   }
 
   @Override

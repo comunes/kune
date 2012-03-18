@@ -17,23 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.content;
+package cc.kune.trash.client;
 
-import cc.kune.domain.Container;
-import cc.kune.domain.Content;
-import cc.kune.domain.Group;
-import cc.kune.domain.I18nLanguage;
-import cc.kune.domain.User;
+import cc.kune.core.client.ExtendedGinModule;
+import cc.kune.trash.client.actions.TrashClientActions;
 
-public interface CreationService {
+public class TrashGinModule extends ExtendedGinModule {
 
-  Content copyContent(User user, Container container, Content contentToCopy);
-
-  Content createContent(String title, String body, User user, Container container, String typeId);
-
-  Container createFolder(Group group, Long parentFolderId, String name, I18nLanguage language,
-      String contentTypeId);
-
-  Container createRootFolder(Group group, String name, String rootName, String typeRoot);
+  @Override
+  protected void configure() {
+    s(TrashClientTool.class);
+    s(TrashClientActions.class);
+  }
 
 }

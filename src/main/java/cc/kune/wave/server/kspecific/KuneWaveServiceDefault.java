@@ -66,7 +66,6 @@ import com.google.wave.api.BlipData;
 import com.google.wave.api.BlipThread;
 import com.google.wave.api.Element;
 import com.google.wave.api.ElementType;
-import com.google.wave.api.FormElement;
 import com.google.wave.api.Gadget;
 import com.google.wave.api.JsonRpcConstant.ParamsProperty;
 import com.google.wave.api.JsonRpcResponse;
@@ -127,9 +126,11 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     for (final Entry<Integer, Element> entry : fromBlip.getElements().entrySet()) {
       final ElementType type = entry.getValue().getType();
       Element result = null;
-      if (FormElement.getFormElementTypes().contains(type)) {
-        result = new FormElement(type, entry.getValue().getProperties());
-      } else if (type == ElementType.GADGET) {
+      // if (FormElement.getFormElementTypes().contains(type)) {
+      // result = new FormElement(type, entry.getValue().getProperties());
+      // } else
+
+      if (type == ElementType.GADGET) {
         result = new Gadget(entry.getValue().getProperties());
         // } else if (type == ElementType.IMAGE) {
         // result = new Image(entry.getValue().getProperties());
@@ -271,7 +272,7 @@ public class KuneWaveServiceDefault implements KuneWaveService {
             participantsArray[0].toString());
         if (waveletToCopy != null) {
           copyWavelet(waveletToCopy.getRootBlip(), rootBlip);
-          copyWaveletElements(waveletToCopy.getRootBlip(), rootBlip);
+          // copyWaveletElements(waveletToCopy.getRootBlip(), rootBlip);
         }
       } catch (final DefaultException e2) {
         LOG.error("Error copying wave content", e2);

@@ -27,6 +27,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -41,7 +42,7 @@ public class EventsClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
     super(NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
-        icons.events(), toolSelector, cntCapRegistry, i18n, navResources);
+        icons.events(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
     this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);

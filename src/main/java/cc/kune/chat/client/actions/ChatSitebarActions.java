@@ -220,7 +220,7 @@ public class ChatSitebarActions {
             public void run() {
               ChatSitebarActions.this.chatClient.loginIfNecessary();
             }
-          }.schedule(2000);
+          }.schedule(4000);
           break;
         case DISCONNECTED:
         case RECONNECTING:

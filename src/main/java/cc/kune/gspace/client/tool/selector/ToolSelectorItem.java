@@ -20,9 +20,12 @@
 package cc.kune.gspace.client.tool.selector;
 
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 
 public interface ToolSelectorItem {
+
+  AccessRolDTO getVisibleForRol();
 
   String getShortName();
 

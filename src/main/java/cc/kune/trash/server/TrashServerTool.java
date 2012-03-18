@@ -14,6 +14,11 @@ import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.GroupListMode;
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
@@ -38,5 +43,21 @@ public class TrashServerTool extends AbstractServerTool {
   public Group initGroup(final User user, final Group group, final Object... vars) {
     createRoot(group);
     return group;
+  }
+
+  @Override
+  public void onCreateContent(final Content content, final Container parent) {
+    content.setStatus(ContentStatus.inTheDustbin);
+    super.onCreateContent(content, parent);
+  }
+
+  @Override
+  protected void setContainerAcl(final Container container) {
+    final AccessLists wikiAcl = new AccessLists();
+    wikiAcl.getAdmins().setMode(GroupListMode.NORMAL);
+    wikiAcl.getAdmins().add(container.getOwner());
+    wikiAcl.getEditors().setMode(GroupListMode.NORMAL);
+    wikiAcl.getViewers().setMode(GroupListMode.NORMAL);
+    setAccessList(container, wikiAcl);
   }
 }

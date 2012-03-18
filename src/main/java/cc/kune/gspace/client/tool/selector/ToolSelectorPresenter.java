@@ -25,14 +25,16 @@ import java.util.List;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.actions.RolComparator;
 import cc.kune.core.client.events.GroupChangedEvent;
-import cc.kune.core.client.events.StateChangedEvent;
-import cc.kune.core.client.events.ToolChangedEvent;
 import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
+import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
+import cc.kune.core.client.events.ToolChangedEvent;
 import cc.kune.core.client.events.ToolChangedEvent.ToolChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 
 import com.google.gwt.event.shared.EventBus;
@@ -65,12 +67,15 @@ public class ToolSelectorPresenter extends
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {
-        for (final String tool : tools.keySet()) {
-          final List<String> enabledTools = event.getState().getEnabledTools();
-          if (enabledTools != null && enabledTools.contains(tool)) {
-            tools.get(tool).setVisible(true);
+        for (final String toolName : tools.keySet()) {
+          final StateAbstractDTO state = event.getState();
+          final List<String> enabledTools = state.getEnabledTools();
+          if (enabledTools != null && enabledTools.contains(toolName)) {
+            final ToolSelectorItem tool = tools.get(toolName);
+            // Set visible only when allowed
+            tool.setVisible(RolComparator.isEnabled(tool.getVisibleForRol(), state.getGroupRights()));
           } else {
-            tools.get(tool).setVisible(false);
+            tools.get(toolName).setVisible(false);
           }
         }
       }
@@ -101,7 +106,9 @@ public class ToolSelectorPresenter extends
     }
     tools.put(name, item);
     item.setSelected(false);
+    // if (!name.equals(TrashToolConstants.NAME)) {
     getView().addItem(item.getView());
+    // }
   }
 
   private void checkTool(final ToolSelectorItem tool) {

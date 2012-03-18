@@ -29,6 +29,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -46,7 +47,7 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
         NAME,
         i18n.t(BlogsToolConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
-        icons.blogs(), toolSelector, cntCapRegistry, i18n, navResources);
+        icons.blogs(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
     this.icons = icons;
 
     // registerAclEditableTypes();

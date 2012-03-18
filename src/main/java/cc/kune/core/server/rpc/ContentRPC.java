@@ -225,7 +225,7 @@ public class ContentRPC implements ContentService, RPC {
     final Content contentToCopy = finderService.getContent(ContentUtils.parseId(token.getDocument()));
     final Container container = finderService.getContainer(ContentUtils.parseId(parentToken.getFolder()));
     if (rightsService.get(user, contentToCopy.getAccessLists()).isVisible()) {
-      return mapper.map(contentManager.copyContent(user, container, contentToCopy),
+      return mapper.map(creationService.copyContent(user, container, contentToCopy),
           StateContentDTO.class);
     } else {
       throw new AccessViolationException();

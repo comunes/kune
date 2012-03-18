@@ -28,6 +28,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -48,7 +49,8 @@ public class ChatClientTool extends FoldableAbstractClientTool {
         i18n.t("chatrooms"),
         i18n.t(
             "A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from [%s] or other sites (compatible with gmail chat)",
-            i18n.getSiteCommonName()), icons.chats(), toolSelector, cntCapRegistry, i18n, navResources);
+            i18n.getSiteCommonName()), icons.chats(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry,
+        i18n, navResources);
     this.res = res;
     this.icons = icons;
     registerIcons();

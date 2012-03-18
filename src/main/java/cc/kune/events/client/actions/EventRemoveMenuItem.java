@@ -2,14 +2,12 @@ package cc.kune.events.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.events.client.viewer.CalendarViewer;
 
@@ -22,22 +20,21 @@ import com.google.inject.Singleton;
 public class EventRemoveMenuItem extends MenuItemDescriptor {
   public static class EventEditAction extends CalendarRolAction {
     private final Provider<CalendarViewer> calendar;
-    private PromptTopDialog dialog;
-    private final I18nTranslationService i18n;
+    private final ContentServiceHelper contentService;
 
     @Inject
-    public EventEditAction(final CoreResources res, final I18nTranslationService i18n,
-        final Provider<CalendarViewer> calendar, final EventBus eventBus, final Session session,
-        final StateManager stateManager, final AccessRightsClientManager rightsMan) {
+    public EventEditAction(final CoreResources res, final Provider<CalendarViewer> calendar,
+        final EventBus eventBus, final Session session, final I18nTranslationService i18n,
+        final AccessRightsClientManager rightsMan, final ContentServiceHelper contentService) {
       super(eventBus, session, calendar, AccessRolDTO.Administrator, true, true);
-      this.i18n = i18n;
       this.calendar = calendar;
+      this.contentService = contentService;
       withText(i18n.t("Remove this appointment")).withIcon(res.cancel());
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
+      contentService.delContent(new StateToken(calendar.get().getAppToEdit().getId()));
     }
   }
 

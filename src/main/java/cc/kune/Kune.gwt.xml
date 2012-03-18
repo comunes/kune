@@ -14,6 +14,7 @@
   <inherits name="cc.kune.events.KuneEvents" />
   <inherits name="cc.kune.tasks.KuneTasks" />
   <inherits name="cc.kune.lists.KuneLists" />
+  <inherits name="cc.kune.trash.KuneTrash" />
   <inherits name="cc.kune.pspace.PSpace" />
   <inherits name="cc.kune.hspace.HSpace" />
   <inherits name="com.calclab.suco.Suco" />

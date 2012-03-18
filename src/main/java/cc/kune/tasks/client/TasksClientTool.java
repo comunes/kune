@@ -29,6 +29,7 @@ import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
@@ -47,7 +48,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
         NAME,
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
-        icons.tasks(), toolSelector, cntCapRegistry, i18n, navResources);
+        icons.tasks(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
     this.icons = icons;
 
     // registerAclEditableTypes();

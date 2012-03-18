@@ -51,10 +51,17 @@ public class CreationServiceDefault implements CreationService {
   }
 
   @Override
+  public Content copyContent(final User user, final Container container, final Content contentToCopy) {
+    final ServerTool tool = tools.get(container.getToolName());
+    final Content content = contentManager.copyContent(user, container, contentToCopy);
+    tool.onCreateContent(content, container);
+    return content;
+  }
+
+  @Override
   public Content createContent(final String title, final String body, final User user,
       final Container container, final String typeId) {
-    final String toolName = container.getToolName();
-    final ServerTool tool = tools.get(toolName);
+    final ServerTool tool = tools.get(container.getToolName());
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeId);
     final URL gagdetUrl = tool instanceof ServerWaveTool ? ((ServerWaveTool) tool).getGadgetUrl()
         : KuneWaveService.WITHOUT_GADGET;

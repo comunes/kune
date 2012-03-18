@@ -87,12 +87,13 @@ public class ServerToolRegistry {
   }
 
   public void register(final ServerTool tool) {
-    if (tool.getName().equals(TrashToolConstants.NAME)) {
-      // Trash is a special tool but we don't register it
-      return;
-    }
     final String name = tool.getName();
     final String rootName = tool.getRootName();
+    if (tool.getName().equals(TrashToolConstants.NAME)) {
+      tools.put(name, tool);
+      // Trash is a special tool but we don't register it fully
+      return;
+    }
     final boolean userAvailable = usersAvailableToolsInProp.contains(name);
     final boolean groupAvailable = groupsAvailableToolsInProp.contains(name);
     if (userAvailable && usersRegisEnabledToolsInProp.contains(name)) {
