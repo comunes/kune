@@ -60,8 +60,10 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   InlineLabel label;
   @UiField
   FocusPanel self;
+  private final String shortName;
 
   public ToolSelectorItemPanel(final String shortName, final ImageResource icon) {
+    this.shortName = shortName;
     initWidget(uiBinder.createAndBindUi(this));
     ensureDebugId(TOOL_ID_PREFIX + shortName);
     setVisibleImpl(false);
@@ -90,6 +92,15 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   @Override
   public HasText getLabel() {
     return label;
+  }
+
+  public String getName() {
+    return shortName;
+  }
+
+  @Override
+  public Object getTarget() {
+    return this;
   }
 
   @UiHandler("self")

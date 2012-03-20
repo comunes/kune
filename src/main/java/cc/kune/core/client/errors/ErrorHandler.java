@@ -141,6 +141,14 @@ public class ErrorHandler {
     } else if (caught instanceof NameNotPermittedException) {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t("This name is not permitted")));
+    } else if (caught instanceof ContainerNotEmptyException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("This is not empty")));
+    } else if (caught instanceof CannotDeleteDefaultContentException) {
+      logException(caught);
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          i18n.t("This is the default content of the group, you cannot delete it. "
+              + "Please select other content as default group content before delete this")));
     } else if (caught instanceof UnderDevelopmentException) {
       logException(caught);
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t(TextUtils.IN_DEVELOPMENT)));

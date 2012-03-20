@@ -38,7 +38,7 @@ public class DelContentMenuItem extends MenuItemDescriptor {
 
     @Inject
     public DelContentAction(final ContentServiceHelper contentService) {
-      super(AccessRolDTO.Administrator, true);
+      super(AccessRolDTO.Editor, true);
       this.contentService = contentService;
 
     }

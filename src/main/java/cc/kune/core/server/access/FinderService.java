@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.access;
 
+import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Container;
@@ -29,11 +30,17 @@ import cc.kune.domain.User;
 
 public interface FinderService {
 
+  Content findByRootOnGroup(String groupName, String toolName) throws DefaultException;
+
   Container getContainer(Long folderId) throws DefaultException;
+
+  Container getContainer(String folderId);
 
   Content getContent(Long contentId) throws DefaultException;
 
   Content getContent(StateToken token, Group defaultGroup) throws DefaultException;
+
+  Content getContent(String contentId) throws ContentNotFoundException;
 
   Container getFolder(Long folderId) throws DefaultException;
 

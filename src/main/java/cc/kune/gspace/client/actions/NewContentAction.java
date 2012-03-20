@@ -74,7 +74,8 @@ public class NewContentAction extends RolAction {
             NotifyUser.hideProgress();
             // stateManager.refreshCurrentGroupState();
             // contextNavigator.setEditOnNextStateChange(true);
-            NotifyUser.info(i18n.tWithNT("[%s] created", "New content created, for instance", newName));
+            // NotifyUser.info(i18n.tWithNT("[%s] created",
+            // "New content created, for instance", newName));
             contentViewer.blinkTitle();
           }
         });

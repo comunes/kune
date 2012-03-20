@@ -39,7 +39,7 @@ public interface ContainerManager extends Manager<Container, Long> {
 
   boolean hasTrashFolder(Group group);
 
-  void moveContainer(Container container, Container newContainer);
+  Container moveContainer(Container container, Container newContainer);
 
   Container renameFolder(Group group, Container container, String newName) throws DefaultException;
 

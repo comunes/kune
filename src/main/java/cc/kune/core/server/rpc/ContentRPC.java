@@ -27,6 +27,8 @@ import javax.persistence.NoResultException;
 
 import cc.kune.chat.server.ChatManager;
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.CannotDeleteDefaultContentException;
+import cc.kune.core.client.errors.ContainerNotEmptyException;
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 import cc.kune.core.client.errors.DefaultException;
@@ -72,6 +74,7 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
 
@@ -253,21 +256,25 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
-  @Authorizated(accessRolRequired = AccessRol.Administrator)
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
   @KuneTransactional
   public StateContainerDTO delContent(final String userHash, final StateToken token)
       throws DefaultException {
-    final Long contentId = ContentUtils.parseId(token.getDocument());
-    final Content content = finderService.getContent(contentId);
-    contentManager.setStatus(contentId, ContentStatus.inTheDustbin);
-    final Container previousParent = content.getContainer();
+    final boolean isContent = token.hasAll();
+    Container previousParent;
+    if (isContent) {
+      final Content content = setStatusInTheDustbin(token);
+      previousParent = content.getContainer();
+    } else {
+      previousParent = finderService.getContainer(token.getFolder());
+    }
     final Group group = previousParent.getOwner();
     if (!containerManager.hasTrashFolder(group)) {
       groupManager.initTrash(group);
     }
     final Container trash = containerManager.getTrashFolder(group);
-    moveContent(userHash, token, trash.getStateToken());
-    return getState(getCurrentUser(), previousParent);
+    return moveContent(userHash, token, trash.getStateToken());
+    // return getState(getCurrentUser(), previousParent);
   }
 
   @Override
@@ -395,24 +402,42 @@ public class ContentRPC implements ContentService, RPC {
   public StateContainerDTO moveContent(final String userHash, final StateToken movedToken,
       final StateToken newContainerToken) throws DefaultException {
     final User user = getCurrentUser();
+    final boolean toTrash = newContainerToken.getTool().equals(TrashToolConstants.NAME);
+    // Search the container id (because sometimes we get only #group.tool
+    // tokens)
+    final Long newContainerId = newContainerToken.hasGroupToolAndFolder() ? ContentUtils.parseId(newContainerToken.getFolder())
+        : finderService.findByRootOnGroup(newContainerToken.getGroup(), newContainerToken.getTool()).getContainer().getId();
     try {
       if (movedToken.isComplete()) {
-        final Content content = accessService.accessToContent(
-            ContentUtils.parseId(movedToken.getDocument()), user, AccessRol.Editor);
-        final Container newContainer = accessService.accessToContainer(
-            ContentUtils.parseId(newContainerToken.getFolder()), user, AccessRol.Editor);
+        final Long contentId = ContentUtils.parseId(movedToken.getDocument());
+        final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
+
+        if (content.equals(content.getContainer().getOwner().getDefaultContent())) {
+          throw new CannotDeleteDefaultContentException();
+        }
+
+        final Container newContainer = accessService.accessToContainer(newContainerId, user,
+            AccessRol.Editor);
+
         final Container oldContainer = content.getContainer();
+        if (toTrash) {
+          // Remove operation
+          setStatusInTheDustbin(movedToken);
+        }
         contentManager.moveContent(content, newContainer);
         return getState(user, oldContainer);
       } else if (movedToken.hasGroupToolAndFolder()) {
-        // Folder to folder
+        // Folder to folder move
         final Container container = accessService.accessToContainer(
             ContentUtils.parseId(movedToken.getFolder()), user, AccessRol.Editor);
-        final Container newContainer = accessService.accessToContainer(
-            ContentUtils.parseId(newContainerToken.getFolder()), user, AccessRol.Editor);
         final Container oldParent = container.getParent();
+        if (toTrash && !container.isLeaf()) {
+          throw new ContainerNotEmptyException();
+        }
+        final Container newContainer = accessService.accessToContainer(newContainerId, user,
+            AccessRol.Editor);
         containerManager.moveContainer(container, newContainer);
-        return getState(user, oldParent);
+        return getState(user, finderService.getContainer(oldParent.getId()));
       } else {
         throw new ContentNotPermittedException();
       }
@@ -579,6 +604,13 @@ public class ContentRPC implements ContentService, RPC {
     final Content content = contentManager.setStatus(ContentUtils.parseId(token.getDocument()),
         ContentStatus.valueOf(status.toString()));
     return getState(getCurrentUser(), content);
+  }
+
+  private Content setStatusInTheDustbin(final StateToken token) {
+    final Long contentId = ContentUtils.parseId(token.getDocument());
+    final Content content = finderService.getContent(contentId);
+    contentManager.setStatus(contentId, ContentStatus.inTheDustbin);
+    return content;
   }
 
   @Override

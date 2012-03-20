@@ -57,7 +57,7 @@ public class GoParentContainerBtn extends ButtonDescriptor {
         stateToken = ((StateContentDTO) state).getContainer().getStateToken();
       } else {
         final ContainerDTO container = ((StateContainerDTO) state).getContainer();
-        stateToken = container.getStateToken().copy().setFolder(container.getParentFolderId());
+        stateToken = container.getParentToken();
       }
       stateManager.gotoStateToken(stateToken);
       // NotifyUser.hideProgress();

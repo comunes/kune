@@ -74,7 +74,7 @@ public class SetAsHomePageMenuItem extends MenuItemDescriptor {
   public SetAsHomePageMenuItem(final I18nTranslationService i18n, final SetAsHomePageAction action,
       final CoreResources res) {
     super(action);
-    this.withText(i18n.t("Delete")).withIcon(res.groupHome()).withText(i18n.t("Select as the homepage"));
+    this.withIcon(res.groupHome()).withText(i18n.t("Select as the homepage"));
   }
 
 }

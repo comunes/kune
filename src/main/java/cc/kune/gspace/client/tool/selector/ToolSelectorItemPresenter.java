@@ -36,6 +36,8 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
     HasText getLabel();
 
+    Object getTarget();
+
     void setSelected(boolean selected);
 
     void setTooltip(String tooltip);
@@ -44,12 +46,12 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
   }
 
   private final String longName;
-  private final AccessRolDTO visibleFoRol;
   private final String shortName;
   private StateToken token;
   private final ToolSelector toolSelector;
   private final String tooltip;
   private ToolSelectorItemView view;
+  private final AccessRolDTO visibleFoRol;
 
   public ToolSelectorItemPresenter(final String shortName, final String longName, final String tooltip,
       final AccessRolDTO visibleForRol, final ToolSelector toolSelector) {
@@ -61,11 +63,6 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
   }
 
   @Override
-  public AccessRolDTO getVisibleForRol() {
-    return visibleFoRol;
-  }
-
-  @Override
   public String getShortName() {
     return shortName;
   }
@@ -73,6 +70,11 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
   @Override
   public ToolSelectorItemView getView() {
     return view;
+  }
+
+  @Override
+  public AccessRolDTO getVisibleForRol() {
+    return visibleFoRol;
   }
 
   public void init(final ToolSelectorItemView view) {

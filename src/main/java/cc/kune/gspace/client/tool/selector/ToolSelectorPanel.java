@@ -56,9 +56,9 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
   public void addItem(final ToolSelectorItemView item) {
     final Widget widget = item.asWidget();
     flow.add(widget);
-    // dropControllerProv.get().init((InlineLabel) ((ToolSelectorItemPanel)
-    // widget).getLabel());
-    dropControllerProv.get().init(((ToolSelectorItemPanel) widget).getFocusPanel());
+    final FolderContainerDropController dropController = dropControllerProv.get();
+    dropController.init(((ToolSelectorItemPanel) widget).getFocusPanel());
+    dropController.setTarget(item.getTarget());
   }
 
   @Override

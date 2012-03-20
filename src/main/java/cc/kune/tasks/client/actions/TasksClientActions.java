@@ -70,6 +70,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<ContentViewerShareMenu> shareMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<TutorialContainerBtn> tutorialBtn,
+      final Provider<DelTaskMenuItem> delContentMenuItem,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
@@ -110,6 +111,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsNotDoneMenuItem,
         ContentStatus.inTheDustbin, TYPE_TASK);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);

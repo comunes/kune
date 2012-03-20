@@ -34,6 +34,7 @@ import com.calclab.emite.xep.storage.client.PrivateStorageManager;
 import com.calclab.suco.client.Suco;
 import com.google.inject.Provider;
 
+@SuppressWarnings("deprecation")
 public class ChatInstances {
 
   public static class AvatarManagerProvider implements Provider<AvatarManager> {

@@ -29,6 +29,7 @@ import cc.kune.core.client.errors.NoDefaultContentException;
 import cc.kune.core.client.errors.ToolNotFoundException;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
+import cc.kune.core.server.content.ContentUtils;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.RateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -97,7 +98,8 @@ public class FinderServiceDefault implements FinderService {
     }
   }
 
-  private Content findByRootOnGroup(final String groupName, final String toolName)
+  @Override
+  public Content findByRootOnGroup(final String groupName, final String toolName)
       throws DefaultException {
     try {
       final Group group = groupManager.findByShortName(groupName);
@@ -132,6 +134,16 @@ public class FinderServiceDefault implements FinderService {
   }
 
   @Override
+  public Container getContainer(final Long folderId) throws DefaultException {
+    return getFolder(folderId);
+  }
+
+  @Override
+  public Container getContainer(final String folderId) throws DefaultException {
+    return getContainer(ContentUtils.parseId(folderId));
+  }
+
+  @Override
   public Content getContent(final Long contentId) throws ContentNotFoundException {
     try {
       return contentManager.find(contentId);
@@ -162,6 +174,11 @@ public class FinderServiceDefault implements FinderService {
   }
 
   @Override
+  public Content getContent(final String contentId) throws ContentNotFoundException {
+    return getContent(ContentUtils.parseId(contentId));
+  }
+
+  @Override
   public Container getFolder(final Long folderId) throws ContentNotFoundException {
     try {
       return containerManager.find(folderId);
@@ -184,11 +201,6 @@ public class FinderServiceDefault implements FinderService {
   @Override
   public Long getRateByUsers(final Content content) {
     return rateManager.getRateByUsers(content);
-  }
-
-  @Override
-  public Container getContainer(Long folderId) throws DefaultException {
-    return getFolder(folderId);
   }
 
 }

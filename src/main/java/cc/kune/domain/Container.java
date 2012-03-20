@@ -202,8 +202,8 @@ public class Container implements HasId, HasStateToken {
     return parent;
   }
 
-  public Long getParentFolderId() {
-    return parent != null ? parent.getId() : null;
+  public StateToken getParentToken() {
+    return parent != null ? parent.getStateToken() : null;
   }
 
   @Override

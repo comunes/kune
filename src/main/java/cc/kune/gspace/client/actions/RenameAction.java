@@ -92,7 +92,7 @@ public class RenameAction {
             contentCache.remove(((StateContentDTO) state).getContainer().getStateToken());
           } else if (state instanceof StateContainerDTO) {
             final ContainerDTO container = ((StateContainerDTO) state).getContainer();
-            contentCache.remove(token.copy().setFolder(container.getParentFolderId()));
+            contentCache.remove(container.getParentToken());
           }
         }
       };

@@ -29,7 +29,9 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
 import cc.kune.gspace.client.viewers.items.FolderItemWidget;
+import cc.kune.trash.shared.TrashToolConstants;
 
 import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -64,36 +66,60 @@ public class FolderContainerDropController extends AbstractDropController {
     this.contentCache = contentCache;
   }
 
+  private void move(final Widget widget, final StateToken destToken) {
+    widget.removeFromParent();
+    final StateToken tokenToMove = ((FolderItemWidget) widget).getToken();
+    contentService.moveContent(session.getUserHash(), tokenToMove, destToken,
+        new AsyncCallback<StateContainerDTO>() {
+          @Override
+          public void onFailure(final Throwable caught) {
+            erroHandler.process(caught);
+            stateManager.refreshCurrentState();
+            NotifyUser.hideProgress();
+          }
+
+          @Override
+          public void onSuccess(final StateContainerDTO result) {
+            NotifyUser.hideProgress();
+            contentCache.remove(tokenToMove);
+            contentCache.remove(destToken);
+          }
+        });
+  }
+
+  private void notImplemented() {
+    NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
+    NotifyUser.hideProgress();
+  }
+
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
     dropController.getDropTarget().removeStyleName("k-drop-allowed-hover");
     if (widget instanceof FolderItemWidget) {
       NotifyUser.showProgress(i18n.t("Moving"));
       if (getTarget() != null) {
-        final StateToken destToken = (StateToken) getTarget();
-        widget.removeFromParent();
-        final StateToken tokenToMove = ((FolderItemWidget) widget).getToken();
-        contentService.moveContent(session.getUserHash(), tokenToMove, destToken,
-            new AsyncCallback<StateContainerDTO>() {
-              @Override
-              public void onFailure(final Throwable caught) {
-                erroHandler.process(caught);
-                stateManager.refreshCurrentState();
-                NotifyUser.hideProgress();
-              }
-
-              @Override
-              public void onSuccess(final StateContainerDTO result) {
-                NotifyUser.hideProgress();
-                contentCache.remove(tokenToMove);
-                contentCache.remove(destToken);
-              }
-            });
+        StateToken destToken;
+        if (getTarget() instanceof StateToken) {
+          destToken = (StateToken) getTarget();
+        } else if (getTarget() instanceof ToolSelectorItemPanel) {
+          destToken = new StateToken(session.getCurrentGroupShortName(),
+              ((ToolSelectorItemPanel) getTarget()).getName());
+          if (!destToken.getTool().equals(TrashToolConstants.NAME)) {
+            // By now only move to trash
+            notImplemented();
+            return;
+          }
+        } else {
+          // No implemented
+          notImplemented();
+          return;
+        }
+        move(widget, destToken);
       } else {
-        NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
-        NotifyUser.hideProgress();
+        notImplemented();
       }
+    } else {
+      notImplemented();
     }
   }
-
 }

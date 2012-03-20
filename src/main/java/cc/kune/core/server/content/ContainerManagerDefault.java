@@ -110,7 +110,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
   }
 
   @Override
-  public void moveContainer(final Container container, final Container newContainer) {
+  public Container moveContainer(final Container container, final Container newContainer) {
     if (newContainer.equals(container.getParent())) {
       throw new MoveOnSameContainerException();
     }
@@ -125,7 +125,8 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     final Container oldContainer = container.getParent();
     oldContainer.removeChild(container);
     newContainer.addChild(container);
-    persist(container);
+    container.setParent(newContainer);
+    return persist(container);
   }
 
   @Override

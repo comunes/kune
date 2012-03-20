@@ -31,7 +31,7 @@ public class ContainerDTO implements IsSerializable {
   private List<ContentSimpleDTO> contents;
   private Long id;
   private String name;
-  private Long parentFolderId;
+  private StateToken parentToken;
   private StateToken stateToken;
   private String typeId;
 
@@ -58,8 +58,8 @@ public class ContainerDTO implements IsSerializable {
     return name;
   }
 
-  public Long getParentFolderId() {
-    return parentFolderId;
+  public StateToken getParentToken() {
+    return parentToken;
   }
 
   public StateToken getStateToken() {
@@ -71,7 +71,7 @@ public class ContainerDTO implements IsSerializable {
   }
 
   public boolean isRoot() {
-    return parentFolderId == null;
+    return parentToken == null;
   }
 
   public void setAbsolutePath(final ContainerSimpleDTO[] absolutePath) {
@@ -94,8 +94,8 @@ public class ContainerDTO implements IsSerializable {
     this.name = name;
   }
 
-  public void setParentFolderId(final Long parentFolderId) {
-    this.parentFolderId = parentFolderId;
+  public void setParentToken(final StateToken parentToken) {
+    this.parentToken = parentToken;
   }
 
   public void setStateToken(final StateToken stateToken) {
