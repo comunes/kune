@@ -1,0 +1,219 @@
+package cc.kune.core.server.rpc;
+
+import java.util.Date;
+import java.util.Map;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.rpcservices.ContentService;
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.RateResult;
+import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+
+public class ContentRPCMock implements ContentService, RPC {
+
+  private final StateContainerDTO containerMock;
+  private final StateContentDTO contentMock;
+
+  public ContentRPCMock() {
+    containerMock = new StateContainerDTO();
+    contentMock = new StateContentDTO();
+  }
+
+  @Override
+  public void addAuthor(final String userHash, final StateToken token, final String authorShortName)
+      throws DefaultException {
+  }
+
+  @Override
+  public StateContentDTO addContent(final String user, final StateToken parentToken, final String name,
+      final String typeId) throws DefaultException {
+    return contentMock;
+  }
+
+  @Override
+  public StateContainerDTO addFolder(final String hash, final StateToken parentToken,
+      final String typeId, final String title) throws DefaultException {
+    return containerMock;
+  }
+
+  @Override
+  public void addGadgetToContent(final String userHash, final StateToken currentStateToken,
+      final String gadgetName) throws DefaultException {
+  }
+
+  @Override
+  public StateContentDTO addNewContentWithGadget(final String userHash,
+      final StateToken currentStateToken, final String gadgetName, final String typeId,
+      final String title, final String body) throws DefaultException {
+    return contentMock;
+  }
+
+  @Override
+  public StateContentDTO addNewContentWithGadgetAndState(final String userHash,
+      final StateToken currentStateToken, final String gadgetName, final String typeId,
+      final String tile, final String body, final Map<String, String> gadgetState)
+      throws DefaultException {
+    return contentMock;
+  }
+
+  @Override
+  public Boolean addParticipant(final String userHash, final StateToken token, final String participant)
+      throws DefaultException {
+    return true;
+  }
+
+  @Override
+  public Boolean addParticipants(final String userHash, final StateToken token, final String groupName,
+      final SocialNetworkSubGroup subGroup) throws DefaultException {
+    return true;
+  }
+
+  @Override
+  public StateContainerDTO addRoom(final String user, final StateToken parentToken, final String name)
+      throws DefaultException {
+    return containerMock;
+  }
+
+  @Override
+  public StateContentDTO copyContent(final String userHash, final StateToken parentToken,
+      final StateToken token) throws DefaultException {
+    return contentMock;
+  }
+
+  @Override
+  public StateContainerDTO delContent(final String userHash, final StateToken token)
+      throws DefaultException {
+    return containerMock;
+  }
+
+  @Override
+  public StateAbstractDTO getContent(final String userHash, final StateToken token)
+      throws DefaultException {
+    return contentMock;
+  }
+
+  @Override
+  public TagCloudResult getSummaryTags(final String userHash, final StateToken groupToken)
+      throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public StateContainerDTO moveContent(final String userHash, final StateToken contentToken,
+      final StateToken newContainerToken) throws DefaultException {
+    return containerMock;
+  }
+
+  @Override
+  public RateResult rateContent(final String userHash, final StateToken token, final Double value)
+      throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void removeAuthor(final String userHash, final StateToken token, final String authorShortName)
+      throws DefaultException {
+  }
+
+  @Override
+  public StateAbstractDTO renameContainer(final String userHash, final StateToken token,
+      final String newName) throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public StateAbstractDTO renameContent(final String userHash, final StateToken token,
+      final String newName) throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void save(final String user, final StateToken token, final String content)
+      throws DefaultException {
+  }
+
+  @Override
+  public String sendFeedback(final String userHash, final String title, final String body) {
+    return "#fixme";
+  }
+
+  @Override
+  public ContentSimpleDTO setAsDefaultContent(final String userHash, final StateToken token) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void setGadgetProperties(final String userHash, final StateToken currentStateToken,
+      final String gadgetName, final Map<String, String> properties) throws DefaultException {
+  }
+
+  @Override
+  public I18nLanguageDTO setLanguage(final String userHash, final StateToken token,
+      final String languageCode) throws DefaultException {
+    final I18nLanguageDTO lang = new I18nLanguageDTO();
+
+    return lang;
+  }
+
+  @Override
+  public void setPublishedOn(final String userHash, final StateToken token, final Date date)
+      throws DefaultException {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public StateAbstractDTO setStatus(final String userHash, final StateToken stateToken,
+      final ContentStatus status) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public StateAbstractDTO setStatusAsAdmin(final String userHash, final StateToken stateToken,
+      final ContentStatus status) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public TagCloudResult setTags(final String userHash, final StateToken token, final String tags)
+      throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String writeTo(final String userHash, final StateToken token, final boolean onlyToAdmins)
+      throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String writeTo(final String userHash, final StateToken token, final boolean onlyToAdmins,
+      final String title, final String message) throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String writeToParticipants(final String userHash, final StateToken token)
+      throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+}

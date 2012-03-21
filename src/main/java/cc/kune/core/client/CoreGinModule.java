@@ -41,8 +41,8 @@ import cc.kune.core.client.auth.SignInPanel;
 import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.auth.SignInPresenter.SignInView;
 import cc.kune.core.client.auth.UserFieldFactory;
-import cc.kune.core.client.auth.UserPassAutocompleteManager;
-import cc.kune.core.client.auth.UserPassAutocompleteManagerImpl;
+import cc.kune.core.client.auth.LoginRememberManager;
+import cc.kune.core.client.auth.LoginRememberManagerImpl;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
 import cc.kune.core.client.dnd.KuneDragController;
@@ -183,7 +183,7 @@ public class CoreGinModule extends ExtendedGinModule {
     bindPresenter(SubtitlesManager.class, SubtitlesManager.SubtitlesView.class, SubtitlesWidget.class,
         SubtitlesManager.SubtitlesProxy.class);
 
-    bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
+    bind(LoginRememberManager.class).to(LoginRememberManagerImpl.class).in(Singleton.class);
     bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
     bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
     bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);

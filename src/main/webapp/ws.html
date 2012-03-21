@@ -300,12 +300,16 @@ body {
 
 		<!-- Banner for wave errors -->
 		<div class="banner" id="banner"></div>
-		<!-- Autocomplete user/pass -->
-		<form method="post" action="javascript:void(0)" style="display: none">
-				<input type="text" id="address" name="address" value="" /> <input
-						type="password" id="password" name="password" value="" /> <input
-						type="submit" value="Login" id="login" /> <input type="submit"
-						class="wiab le button" name="signIn" id="signIn" value="Sign in">
+		<!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
+		<form id="loginrender" action="javascript:;" style="display: none;">
+				<input type="text" id="usernamerender" name="usernamerender"
+						value="" /> <input type="password" id="passwordrender"
+						name="passwordrender" value="" />
+		</form>
+		<!-- Remember user/pass (this part is used to send the values to the browser) -->
+		<form id="login" action="javascript:;" style="display: none;">
+				<input type="text" id="username" name="username" value="" /> <input
+						type="password" id="password" name="password" value="" />
 		</form>
 		<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
 		<noscript>

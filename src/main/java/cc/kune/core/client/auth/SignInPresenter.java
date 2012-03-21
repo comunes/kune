@@ -97,10 +97,10 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
   public SignInPresenter(final EventBus eventBus, final SignInView view, final SignInProxy proxy,
       final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
       final UserServiceAsync userService, final Provider<Register> registerProvider,
-      final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete,
+      final CookiesManager cookiesManager, final LoginRememberManager loginRemember,
       final TimerWrapper timeWrapper, final WaveClientSimpleAuthenticator waveClientAuthenticator,
       final Provider<AskForPasswordResetPanel> askPasswdReset) {
-    super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, autocomplete);
+    super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, loginRemember);
     this.eventBus = eventBus;
     this.userService = userService;
     this.registerProvider = registerProvider;
@@ -258,8 +258,8 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
       timer.configure(new Executer() {
         @Override
         public void execute() {
-          final String savedLogin = autocomplete.getNickOrEmail();
-          final String savedPasswd = autocomplete.getPassword();
+          final String savedLogin = loginRemember.getNickOrEmail();
+          final String savedPasswd = loginRemember.getPassword();
           if (TextUtils.notEmpty(savedLogin)) {
             getView().setNickOrEmail(savedLogin);
             getView().setLoginPassword(savedPasswd);

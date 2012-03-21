@@ -28,10 +28,8 @@ import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class DelContainerMenuItem extends MenuItemDescriptor {
 
@@ -40,8 +38,7 @@ public class DelContainerMenuItem extends MenuItemDescriptor {
     private final ContentServiceHelper contentService;
 
     @Inject
-    public DelContainerAction(final Provider<FolderViewerPresenter> presenter,
-        final ContentServiceHelper contentService) {
+    public DelContainerAction(final ContentServiceHelper contentService) {
       super(AccessRolDTO.Editor, true);
       this.contentService = contentService;
     }

@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.auth;
 
-public interface UserPassAutocompleteManager {
+public interface LoginRememberManager {
 
     void clickFormLogin();
 

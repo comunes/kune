@@ -26,10 +26,15 @@ import cc.kune.core.client.ui.DefaultForm;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.ComponentHelper;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.RootPanel;
 
 public class SignInForm extends DefaultForm {
+  private static final String LOGIN_ID = "loginrender";
   public static final String PASSWORD_FIELD_ID = "kune-sif-psf";
   public static final String USER_FIELD_ID = "kune-sif-nkf";
 
@@ -37,28 +42,56 @@ public class SignInForm extends DefaultForm {
   private final TextField<String> loginPassField;
   private OnAcceptCallback onAcceptCallback;
 
+  /**
+   * Remember user/pass implementation <a href=
+   * "http://stackoverflow.com/questions/1245174/is-it-possible-to-implement-cross-browser-username-password-autocomplete-in-gxt"
+   * >based in this</a> and <a href=
+   * "http://www.sencha.com/forum/showthread.php?72027-Auto-complete-login-form"
+   * >this</a>.
+   */
   public SignInForm(final I18nTranslationService i18n) {
     super.addStyleName("kune-Margin-Large-trbl");
-
-    loginNickOrEmailField = new TextField<String>();
+    loginNickOrEmailField = new TextField<String>() {
+      @Override
+      protected void onRender(final Element target, final int index) {
+        if (el() == null) {
+          setElement(Document.get().getElementById("usernamerender"));
+        }
+        super.onRender(target, index);
+      }
+    };
     loginNickOrEmailField.setFieldLabel(i18n.t("Username"));
     loginNickOrEmailField.setName(USER_FIELD_ID);
     loginNickOrEmailField.setWidth(DEF_SMALL_FIELD_WIDTH);
     loginNickOrEmailField.setAllowBlank(false);
-    loginNickOrEmailField.setValidationDelay(1000);
+    loginNickOrEmailField.setValidationDelay(3000);
     loginNickOrEmailField.setId(USER_FIELD_ID);
     loginNickOrEmailField.setTabIndex(100);
+    loginNickOrEmailField.render(RootPanel.get(LOGIN_ID).getElement());
+    ComponentHelper.doAttach(loginNickOrEmailField);
     super.add(loginNickOrEmailField);
 
-    loginPassField = new TextField<String>();
+    loginPassField = new TextField<String>() {
+      @Override
+      protected void onRender(final Element target, final int index) {
+        if (el() == null) {
+          final String elementId = "passwordrender";
+          setElement(Document.get().getElementById(elementId));
+        }
+        super.onRender(target, index);
+      }
+    };
     loginPassField.setFieldLabel(i18n.t("Password"));
     loginPassField.setName(PASSWORD_FIELD_ID);
     loginPassField.setWidth(DEF_MEDIUM_FIELD_WIDTH);
     loginPassField.setPassword(true);
     loginPassField.setAllowBlank(false);
-    loginPassField.setValidationDelay(1000);
+    loginPassField.setValidationDelay(3000);
     loginPassField.setId(PASSWORD_FIELD_ID);
     loginPassField.setTabIndex(101);
+    loginPassField.render(RootPanel.get(LOGIN_ID).getElement());
+    ComponentHelper.doAttach(loginPassField);
+
     loginPassField.addListener(Events.OnKeyPress, new Listener<FieldEvent>() {
       @Override
       public void handleEvent(final FieldEvent fe) {

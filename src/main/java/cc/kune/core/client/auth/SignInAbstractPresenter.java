@@ -36,7 +36,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Proxy<?>> extends
     Presenter<View, Proxy<?>> {
 
-  protected final UserPassAutocompleteManager autocomplete;
+  protected final LoginRememberManager loginRemember;
   protected final CookiesManager cookiesManager;
   private String gotoTokenOnCancel;
   protected final I18nUITranslationService i18n;
@@ -45,13 +45,13 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   public SignInAbstractPresenter(final EventBus eventBus, final View view, final Proxy<?> proxy,
       final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
-      final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete) {
+      final CookiesManager cookiesManager, final LoginRememberManager loginRemember) {
     super(eventBus, view, proxy);
     this.session = session;
     this.stateManager = stateManager;
     this.i18n = i18n;
     this.cookiesManager = cookiesManager;
-    this.autocomplete = autocomplete;
+    this.loginRemember = loginRemember;
   }
 
   public String getGotoTokenOnCancel() {
@@ -113,9 +113,9 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
   }
 
   protected void saveAutocompleteLoginData(final String nickOrEmail, final String password) {
-    autocomplete.setNickOrEmail(nickOrEmail);
-    autocomplete.setPassword(password);
-    autocomplete.clickFormLogin();
+    loginRemember.setNickOrEmail(nickOrEmail);
+    loginRemember.setPassword(password);
+    loginRemember.clickFormLogin();
   }
 
   public void setGotoTokenOnCancel(final String gotoTokenOnCancel) {

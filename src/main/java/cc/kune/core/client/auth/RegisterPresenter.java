@@ -94,8 +94,8 @@ public class RegisterPresenter extends
   public RegisterPresenter(final EventBus eventBus, final RegisterView view, final RegisterProxy proxy,
       final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
       final Provider<UserServiceAsync> userServiceProvider, final Provider<SignIn> signInProvider,
-      final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete) {
-    super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, autocomplete);
+      final CookiesManager cookiesManager, final LoginRememberManager loginRemember) {
+    super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, loginRemember);
     this.userServiceProvider = userServiceProvider;
     this.signInProvider = signInProvider;
   }
