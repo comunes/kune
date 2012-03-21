@@ -379,7 +379,7 @@ public class ChatClientDefault implements ChatClient {
   }
 
   @Override
-  public boolean isLoggedIn() {
+  public boolean isXmppLoggedIn() {
     return xmppSession.isReady();
   }
 
@@ -436,7 +436,7 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public boolean loginIfNecessary() {
-    if (!isLoggedIn()) {
+    if (!isXmppLoggedIn() && session.isLogged()) {
       doLogin();
       return true;
     }
@@ -448,7 +448,7 @@ public class ChatClientDefault implements ChatClient {
     if (dialogVisible()) {
       dialog.hide();
     }
-    if (isLoggedIn()) {
+    if (isXmppLoggedIn()) {
       xmppSession.logout();
     }
   }

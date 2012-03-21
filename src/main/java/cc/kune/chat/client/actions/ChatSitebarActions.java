@@ -167,7 +167,7 @@ public class ChatSitebarActions {
       @Override
       public void run() {
         final Presence awayPresence = Presence.build(NO_STATUS, Show.away);
-        if (chatClient.isLoggedIn()) {
+        if (chatClient.isXmppLoggedIn()) {
           presenceManager.changeOwnPresence(awayPresence);
           updateMenuPresence(awayPresence);
         }
@@ -196,7 +196,7 @@ public class ChatSitebarActions {
       public void onWindowFocus(final WindowFocusEvent event) {
         if (event.isHasFocus()) {
           awayTimer.cancel();
-          if (chatClient.isLoggedIn()) {
+          if (chatClient.isXmppLoggedIn()) {
             new Timer() {
               @Override
               public void run() {
@@ -220,7 +220,7 @@ public class ChatSitebarActions {
             public void run() {
               ChatSitebarActions.this.chatClient.loginIfNecessary();
             }
-          }.schedule(4000);
+          }.schedule(2000);
           break;
         case DISCONNECTED:
         case RECONNECTING:

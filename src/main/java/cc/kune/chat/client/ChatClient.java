@@ -33,7 +33,7 @@ public interface ChatClient extends SimpleContactManager {
 
   boolean isBuddy(XmppURI jid);
 
-  boolean isLoggedIn();
+  boolean isXmppLoggedIn();
 
   Room joinRoom(String roomName, String userAlias);
 

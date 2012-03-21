@@ -48,7 +48,7 @@ public class StartChatWithMemberAction extends AbstractExtendedAction {
   @Override
   public void actionPerformed(final ActionEvent event) {
     chatClient.get().show();
-    if (chatClient.get().isLoggedIn()) {
+    if (chatClient.get().isXmppLoggedIn()) {
       String username = null;
       if (event.getTarget() instanceof GroupDTO) {
         username = ((GroupDTO) event.getTarget()).getShortName();
