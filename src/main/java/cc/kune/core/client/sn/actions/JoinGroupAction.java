@@ -26,6 +26,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.auth.SignIn;
+import cc.kune.core.client.events.MyGroupsChangedEvent;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
@@ -37,20 +38,23 @@ import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class JoinGroupAction extends SNRolAction {
 
+  private final EventBus eventBus;
   private final Provider<SignIn> signIn;
 
   @Inject
   public JoinGroupAction(final StateManager stateManager, final Session session,
-      final I18nTranslationService i18n, final CoreResources res,
+      final I18nTranslationService i18n, final CoreResources res, final EventBus eventBus,
       final Provider<SocialNetServiceAsync> snServiceProvider, final Provider<SignIn> signIn,
       final AccessRightsClientManager rightsClientManager) {
     super(stateManager, session, i18n, res, snServiceProvider, rightsClientManager, AccessRolDTO.Viewer,
         false, true, false);
+    this.eventBus = eventBus;
     this.signIn = signIn;
     putValue(NAME, i18n.t("Join"));
     putValue(TOOLTIP, i18n.t("Request to Join in this group"));
@@ -80,6 +84,9 @@ public class JoinGroupAction extends SNRolAction {
                       switch ((result)) {
                       case accepted:
                         NotifyUser.info(i18n.t("You are now member of this group"));
+                        session.getCurrentUserInfo().getGroupsIsCollab().add(
+                            session.getCurrentState().getGroup());
+                        MyGroupsChangedEvent.fire(eventBus);
                         stateManager.refreshCurrentStateWithoutCache();
                         break;
                       case denied:

@@ -19,9 +19,7 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
@@ -156,14 +154,6 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   }
 
   @Override
-  public void setToolTipText(final String tooltipText) {
-    if (tooltipText != null && !tooltipText.isEmpty()) {
-      final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-      tooltip = Tooltip.to(button, key == null ? tooltipText : tooltipText + key.toString());
-    }
-  }
-
-  @Override
   public void setVisible(final boolean visible) {
     button.setVisible(visible);
   }
@@ -171,17 +161,6 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   @Override
   public boolean shouldBeAdded() {
     return !descriptor.isChild();
-  }
-
-  @Override
-  protected void toogleTooltipVisible() {
-    if (tooltip != null) {
-      if (tooltip.isVisibleOrWillBe()) {
-        tooltip.hide();
-      } else {
-        tooltip.showTemporally();
-      }
-    }
   }
 
 }

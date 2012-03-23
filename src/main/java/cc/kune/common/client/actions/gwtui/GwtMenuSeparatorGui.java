@@ -59,10 +59,6 @@ public class GwtMenuSeparatorGui extends AbstractGuiItem {
   }
 
   @Override
-  protected void setToolTipText(final String text) {
-  }
-
-  @Override
   public boolean shouldBeAdded() {
     return false;
   }

@@ -65,10 +65,6 @@ public class GxtMenuSeparatorGui extends AbstractChildGuiItem implements ParentW
   }
 
   @Override
-  protected void setToolTipText(final String text) {
-  }
-
-  @Override
   public boolean shouldBeAdded() {
     return false;
   }

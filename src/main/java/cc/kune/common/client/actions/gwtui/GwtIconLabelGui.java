@@ -20,9 +20,7 @@
 package cc.kune.common.client.actions.gwtui;
 
 import cc.kune.common.client.actions.AbstractAction;
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
@@ -94,12 +92,6 @@ public class GwtIconLabelGui extends AbstractGuiItem {
   @Override
   public void setText(final String text) {
     iconLabel.setText(text, descriptor.getDirection());
-  }
-
-  @Override
-  public void setToolTipText(final String tooltip) {
-    final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-    iconLabel.setTooltip(key == null ? tooltip : tooltip + key.toString());
   }
 
   @Override

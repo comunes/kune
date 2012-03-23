@@ -21,16 +21,11 @@ package cc.kune.core.client.sn.actions;
 
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
+import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.client.state.AccessRightsClientManager;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -44,20 +39,13 @@ import com.google.inject.Provider;
  */
 public class UnJoinFromThisGroupAction extends RolAction {
 
-  private final I18nTranslationService i18n;
-  private final Session session;
-  private final Provider<SocialNetServiceAsync> snServiceProvider;
-  private final StateManager stateManager;
+  private final Provider<SocialNetServiceHelper> snServiceProvider;
 
   @Inject
-  public UnJoinFromThisGroupAction(final StateManager stateManager, final Session session,
-      final I18nTranslationService i18n, final CoreResources res,
-      final Provider<SocialNetServiceAsync> snServiceProvider,
+  public UnJoinFromThisGroupAction(final I18nTranslationService i18n, final CoreResources res,
+      final Provider<SocialNetServiceHelper> snServiceProvider,
       final AccessRightsClientManager rightsClientManager) {
     super(AccessRolDTO.Editor, true);
-    this.stateManager = stateManager;
-    this.session = session;
-    this.i18n = i18n;
     this.snServiceProvider = snServiceProvider;
     putValue(NAME, i18n.t("Leave this group"));
     // putValue(TOOLTIP, i18n.t("I want to leave this group"));
@@ -67,22 +55,7 @@ public class UnJoinFromThisGroupAction extends RolAction {
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    NotifyUser.askConfirmation(i18n.t("Leave this group"), i18n.t("Are you sure?"),
-        new OnAcceptCallback() {
-          @Override
-          public void onSuccess() {
-            NotifyUser.showProgress();
-            snServiceProvider.get().unJoinGroup(session.getUserHash(),
-                ((GroupDTO) event.getTarget()).getStateToken(), new AsyncCallbackSimple<Void>() {
-                  @Override
-                  public void onSuccess(final Void result) {
-                    NotifyUser.hideProgress();
-                    NotifyUser.info(i18n.t("Removed as member"));
-                    stateManager.refreshCurrentStateWithoutCache();
-                  }
-                });
-          }
-        });
+    snServiceProvider.get().unJoinGroup(((GroupDTO) event.getTarget()).getStateToken());
   }
 
 }

@@ -32,6 +32,8 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.actions.xml.XMLActionsParser;
 import cc.kune.core.client.auth.AnonUsersManager;
+import cc.kune.core.client.auth.LoginRememberManager;
+import cc.kune.core.client.auth.LoginRememberManagerImpl;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.core.client.auth.RegisterPresenter;
@@ -41,8 +43,6 @@ import cc.kune.core.client.auth.SignInPanel;
 import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.auth.SignInPresenter.SignInView;
 import cc.kune.core.client.auth.UserFieldFactory;
-import cc.kune.core.client.auth.LoginRememberManager;
-import cc.kune.core.client.auth.LoginRememberManagerImpl;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
 import cc.kune.core.client.dnd.KuneDragController;
@@ -69,12 +69,13 @@ import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.client.sitebar.ErrorsDialog;
+import cc.kune.core.client.sitebar.MyGroupsMenu;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.sitebar.SitebarActionsPanel;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
-import cc.kune.core.client.sitebar.SitebarNewGroupLink;
+import cc.kune.core.client.sitebar.SitebarGroupsLink;
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
@@ -237,9 +238,10 @@ public class CoreGinModule extends ExtendedGinModule {
     s(ContentServiceHelper.class);
     s(SocialNetServiceHelper.class);
 
+    s(MyGroupsMenu.class);
     s(SiteUserOptionsPresenter.class);
     s(SiteUserOptions.class, SiteUserOptionsPresenter.class);
-    s(SitebarNewGroupLink.class);
+    s(SitebarGroupsLink.class);
     s(SitebarSignInLink.class);
     s(SitebarSignOutLink.class);
 
@@ -247,5 +249,4 @@ public class CoreGinModule extends ExtendedGinModule {
     s(XMLActionsParser.class);
     s(Services.class, GWTServices.class);
   }
-
 }

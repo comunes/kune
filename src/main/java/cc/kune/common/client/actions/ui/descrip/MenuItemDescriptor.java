@@ -23,6 +23,8 @@ import cc.kune.common.client.actions.AbstractAction;
 
 public class MenuItemDescriptor extends AbstractGuiActionDescrip {
 
+  public static String UI = "menuitem-ui";
+
   public static MenuItemDescriptor build(final AbstractAction action) {
     return new MenuItemDescriptor(action);
   }

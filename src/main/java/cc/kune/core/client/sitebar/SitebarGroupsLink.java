@@ -20,16 +20,21 @@
 package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.events.MyGroupsChangedEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
-public class SitebarNewGroupLink extends ButtonDescriptor {
+public class SitebarGroupsLink extends ButtonDescriptor {
   public static class SitebarNewGroupAction extends AbstractExtendedAction {
 
     private final StateManager stateManager;
@@ -38,9 +43,8 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
     public SitebarNewGroupAction(final StateManager stateManager, final I18nTranslationService i18n) {
       super();
       this.stateManager = stateManager;
-      putValue(Action.NAME, i18n.t("Create New Group"));
-
-      putValue(Action.TOOLTIP, i18n.t("Create a new group for your initiative or organization "
+      withText(i18n.t("Create New Group"));
+      withToolTip(i18n.t("Create a new group for your initiative or organization "
           + "(NGO, collective, academic group...)"));
     }
 
@@ -48,15 +52,42 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
     public void actionPerformed(final ActionEvent event) {
       stateManager.gotoHistoryToken(SiteTokens.NEW_GROUP);
     }
-
   }
 
   public static final String NEW_GROUP_BTN_ID = "k-site-newgroup-btn";
+  private final Session session;
 
   @Inject
-  public SitebarNewGroupLink(final SitebarNewGroupAction action, final SitebarActions sitebarActions) {
-    super(action);
+  public SitebarGroupsLink(final SitebarNewGroupAction newGroupAction,
+      final SitebarActions sitebarActions, final I18nTranslationService i18n, final EventBus eventBus,
+      final CoreResources coreResources, final Session session) {
+    super(newGroupAction);
+    this.session = session;
     withId(NEW_GROUP_BTN_ID).withStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
     withParent(sitebarActions.getRightToolbar());
+    eventBus.addHandler(MyGroupsChangedEvent.getType(),
+        new MyGroupsChangedEvent.MyGroupsChangedHandler() {
+          @Override
+          public void onMyGroupsChanged(final MyGroupsChangedEvent event) {
+            recalculate(session.isNotLogged());
+          }
+        });
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        final boolean notLogged = !event.isLogged();
+        recalculate(notLogged);
+      }
+    });
+
   }
+
+  private void recalculate(final boolean notLogged) {
+    if (notLogged) {
+      setVisible(true);
+    } else {
+      setVisible(!session.userIsJoiningGroups());
+    }
+  }
+
 }

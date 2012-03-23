@@ -65,12 +65,13 @@ public class SitebarActionsPresenter extends
     void showErrorDialog();
   }
   private static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
-  private static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
+  private static final MenuDescriptor MORE_MENU = new MenuDescriptor();
   private static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
   public static final String SITE_OPTIONS_MENU = "kune-sop-om";
   private final CommonResources commonRes;
   private final I18nTranslationService i18n;
-  private final Provider<SitebarNewGroupLink> newGroupLink;
+  private final Provider<MyGroupsMenu> myGroupsMenu;
+  private final Provider<SitebarGroupsLink> newGroupLink;
   private final CoreResources res;
   private final Provider<SitebarSignInLink> signInLink;
   private final Provider<SitebarSignOutLink> signOutLink;
@@ -78,27 +79,27 @@ public class SitebarActionsPresenter extends
   @Inject
   public SitebarActionsPresenter(final EventBus eventBus, final SitebarActionsView view,
       final SitebarActionsProxy proxy, final I18nTranslationService i18n,
-      final Provider<SitebarNewGroupLink> newGroupLink, final Provider<SitebarSignOutLink> signOutLink,
+      final Provider<SitebarGroupsLink> newGroupLink, final Provider<SitebarSignOutLink> signOutLink,
       final Provider<SitebarSignInLink> signInLink, final CoreResources res,
-      final CommonResources commonRes) {
+      final CommonResources commonRes, final Provider<MyGroupsMenu> myGroupsMenu) {
     super(eventBus, view, proxy);
     this.i18n = i18n;
     this.newGroupLink = newGroupLink;
     this.signOutLink = signOutLink;
     this.signInLink = signInLink;
+    this.myGroupsMenu = myGroupsMenu;
     this.res = res;
     this.commonRes = commonRes;
     init();
   }
 
   private MenuItemDescriptor createGotoKune() {
-    final MenuItemDescriptor gotoKuneDevSite = new MenuItemDescriptor(OPTIONS_MENU,
-        new AbstractAction() {
-          @Override
-          public void actionPerformed(final ActionEvent event) {
-            KuneWindowUtils.open("http://kune.ourproject.org/");
-          }
-        });
+    final MenuItemDescriptor gotoKuneDevSite = new MenuItemDescriptor(MORE_MENU, new AbstractAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        KuneWindowUtils.open("http://kune.ourproject.org/");
+      }
+    });
     gotoKuneDevSite.putValue(Action.NAME, i18n.t("kune development site"));
     gotoKuneDevSite.putValue(Action.SMALL_ICON, res.kuneIcon16());
     return gotoKuneDevSite;
@@ -110,7 +111,7 @@ public class SitebarActionsPresenter extends
   }
 
   public MenuDescriptor getOptionsMenu() {
-    return OPTIONS_MENU;
+    return MORE_MENU;
   }
 
   @Override
@@ -119,14 +120,14 @@ public class SitebarActionsPresenter extends
   }
 
   private void init() {
-    OPTIONS_MENU.withId(SITE_OPTIONS_MENU);
+    MORE_MENU.withId(SITE_OPTIONS_MENU);
   }
 
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
-    OPTIONS_MENU.putValue(Action.NAME, i18n.t("More"));
-    OPTIONS_MENU.putValue(Action.SMALL_ICON, res.arrowdownsitebar());
-    OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
+    MORE_MENU.withText(i18n.t("More"));
+    MORE_MENU.withIcon(res.arrowdownsitebar());
+    MORE_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     // OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION,
     // AbstractGxtMenuGui.MenuPosition.bl);
 
@@ -170,17 +171,17 @@ public class SitebarActionsPresenter extends
     // shortcutReg.put(shortcut, aboutAction);
 
     signInLink.get();
-    signOutLink.get();
-    new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
+    myGroupsMenu.get();
     newGroupLink.get();
     new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
     createGotoKune();
-    MenuItemDescriptor.build(OPTIONS_MENU, bugsAction);
-    MenuItemDescriptor.build(OPTIONS_MENU, errorAction);
-    MenuItemDescriptor.build(OPTIONS_MENU, aboutAction);
-    MenuSeparatorDescriptor.build(OPTIONS_MENU);
-    MenuItemDescriptor.build(OPTIONS_MENU, wavePowered);
-    OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
+    MenuItemDescriptor.build(MORE_MENU, bugsAction);
+    MenuItemDescriptor.build(MORE_MENU, errorAction);
+    MenuItemDescriptor.build(MORE_MENU, aboutAction);
+    MenuSeparatorDescriptor.build(MORE_MENU);
+    MenuItemDescriptor.build(MORE_MENU, wavePowered);
+    MORE_MENU.setParent(RIGHT_TOOLBAR);
+    signOutLink.get();
     refreshActionsImpl();
   }
 

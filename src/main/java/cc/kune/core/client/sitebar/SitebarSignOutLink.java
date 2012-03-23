@@ -24,19 +24,18 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.ProgressShowEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.WaveClientSimpleAuthenticator;
-import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
-import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
-import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 
@@ -54,7 +53,6 @@ public class SitebarSignOutLink extends ButtonDescriptor {
   public static class SitebarSignOutAction extends AbstractExtendedAction {
 
     private final BeforeSignOut beforeSignOut;
-    private final CookiesManager cookiesManager;
     private final EventBus eventBus;
     private final Session session;
     private final Provider<UserServiceAsync> userService;
@@ -63,13 +61,11 @@ public class SitebarSignOutLink extends ButtonDescriptor {
     @Inject
     public SitebarSignOutAction(final EventBus eventBus, final I18nTranslationService i18n,
         final BeforeSignOut beforeSignOut, final Provider<UserServiceAsync> userService,
-        final Session session, final CookiesManager cookiesManager,
-        final WaveClientSimpleAuthenticator waveAuth) {
+        final Session session, final WaveClientSimpleAuthenticator waveAuth) {
       super();
       this.eventBus = eventBus;
       this.userService = userService;
       this.session = session;
-      this.cookiesManager = cookiesManager;
       this.beforeSignOut = beforeSignOut;
       this.waveAuth = waveAuth;
       putValue(Action.NAME, i18n.t("Sign out"));
@@ -126,19 +122,17 @@ public class SitebarSignOutLink extends ButtonDescriptor {
       final ErrorHandler errorHandler, final Session session, final SitebarActions sitebarActions) {
     super(action);
     setId(SITE_SIGN_OUT);
+    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
+        sitebarActions.getRightToolbar());
     setParent(sitebarActions.getRightToolbar());
     setVisible(session.isLogged());
     setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
-    session.onUserSignIn(true, new UserSignInHandler() {
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
-      public void onUserSignIn(final UserSignInEvent event) {
-        SitebarSignOutLink.this.setVisible(true);
-      }
-    });
-    session.onUserSignOut(true, new UserSignOutHandler() {
-      @Override
-      public void onUserSignOut(final UserSignOutEvent event) {
-        SitebarSignOutLink.this.setVisible(false);
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        final boolean logged = event.isLogged();
+        SitebarSignOutLink.this.setVisible(logged);
+        separator.setVisible(logged);
       }
     });
   }

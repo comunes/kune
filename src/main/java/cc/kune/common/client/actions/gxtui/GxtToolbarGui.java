@@ -97,9 +97,4 @@ public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
   protected void setText(final String text) {
   }
 
-  @Override
-  protected void setToolTipText(final String text) {
-    toolbar.setTitle(text);
-  }
-
 }

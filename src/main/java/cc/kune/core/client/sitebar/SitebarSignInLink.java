@@ -23,10 +23,10 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
-import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.events.UserSignOutEvent;
-import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
@@ -72,16 +72,14 @@ public class SitebarSignInLink extends ButtonDescriptor {
     setVisible(!session.isLogged());
     setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
     setParent(sitebarActions.getRightToolbar());
-    session.onUserSignIn(true, new UserSignInHandler() {
+    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
+        sitebarActions.getRightToolbar());
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
-      public void onUserSignIn(final UserSignInEvent event) {
-        SitebarSignInLink.this.setVisible(false);
-      }
-    });
-    session.onUserSignOut(true, new UserSignOutHandler() {
-      @Override
-      public void onUserSignOut(final UserSignOutEvent event) {
-        SitebarSignInLink.this.setVisible(true);
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        final boolean logged = event.isLogged();
+        SitebarSignInLink.this.setVisible(!logged);
+        separator.setVisible(!logged);
       }
     });
   }

@@ -23,7 +23,6 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -67,7 +66,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
         @Override
         public void onClick(final ClickEvent event) {
           event.stopPropagation();
-          show(button);
+          show();
         }
       });
       final String id = descriptor.getId();
@@ -139,9 +138,9 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   }
 
   @Override
-  public void setToolTipText(final String tooltip) {
+  public void setToolTipText(final String tooltipText) {
     if (notStandAlone) {
-      Tooltip.to(button, tooltip);
+      setToolTipTextNextTo(button, tooltipText);
     }
   }
 
@@ -151,6 +150,15 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
       button.setVisible(visible);
     } else {
       // button.setVisible(visible);
+    }
+  }
+
+  @Override
+  protected void show() {
+    if (notStandAlone) {
+      showRelativeTo(button);
+    } else {
+      showRelativeTo(descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO));
     }
   }
 

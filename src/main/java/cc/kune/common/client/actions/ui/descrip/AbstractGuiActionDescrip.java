@@ -27,6 +27,8 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ChangeableObject;
 import cc.kune.common.client.actions.KeyStroke;
+import cc.kune.common.client.actions.Shortcut;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 
 import com.google.gwt.i18n.client.HasDirection.Direction;
 
@@ -36,7 +38,7 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 public abstract class AbstractGuiActionDescrip extends ChangeableObject implements GuiActionDescrip {
 
   /** The action. */
-  private final AbstractAction action;
+  private AbstractAction action;
 
   private final List<GuiAddCondition> addConditions;
 
@@ -178,6 +180,10 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     return result;
   }
 
+  public void setAction(final AbstractAction action) {
+    this.action = action;
+  }
+
   @Override
   public void setDropTarget(final DropTarget dropTarget) {
     putValue(DROP_TARGET, dropTarget);
@@ -258,10 +264,22 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     putValue(VISIBLE, visible);
   }
 
+  /**
+   * Toggle the value of a boolean property
+   * 
+   * @param property
+   *          the property
+   */
+  protected void toggle(final String property) {
+    // Action detects changes in values, then we fire a change (whatever) to
+    // fire this method in the UI
+    final Object value = getValue(property);
+    putValue(property, value == null ? true : !((Boolean) value));
+  }
+
   @Override
   public void toggleTooltipVisible() {
-    final Object value = getValue(TOOGLE_TOOLTIP_VISIBLE);
-    putValue(TOOGLE_TOOLTIP_VISIBLE, value == null ? true : !(Boolean) value);
+    toggle(TOOGLE_TOOLTIP_VISIBLE);
   }
 
   @Override
@@ -275,6 +293,12 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     final String tooltip = (String) getValue(Action.TOOLTIP);
     return "[GuiActionDescrip: " + getClass().getName() + (name == null ? "" : " " + name)
         + (tooltip == null ? "" : " " + tooltip) + "]";
+  }
+
+  @Override
+  public GuiActionDescrip withAction(final AbstractAction action) {
+    setAction(action);
+    return this;
   }
 
   @Override
@@ -308,8 +332,22 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   }
 
   @Override
-  public GuiActionDescrip withShortcut(final KeyStroke shortcut) {
+  public GuiActionDescrip withShortcut(final KeyStroke shortcut, final GlobalShortcutRegister register) {
     putValue(Action.ACCELERATOR_KEY, shortcut);
+    register.put(shortcut, action);
+    return this;
+  }
+
+  @Override
+  public GuiActionDescrip withShortcut(final String keys, final GlobalShortcutRegister register) {
+    final boolean hasCtrl = keys.contains("Ctrl");
+    final boolean hasAlt = keys.contains("Alt");
+    final boolean hasMeta = keys.contains("Meta");
+    final boolean hasShift = keys.contains("Shift");
+    final Character key = keys.charAt(keys.length() - 1);
+    final KeyStroke shortcut = Shortcut.getShortcut(hasCtrl, hasAlt, hasShift, hasMeta, key);
+    putValue(Action.ACCELERATOR_KEY, shortcut);
+    register.put(shortcut, action);
     return this;
   }
 

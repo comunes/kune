@@ -32,7 +32,6 @@ import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.errors.NotImplementedException;
-import cc.kune.common.shared.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -157,13 +156,6 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
         item.setText(text + createShortCut(key, "oc-mshortcut-hidden")
             + createShortCut(key, "oc-mshortcut"));
       }
-    }
-  }
-
-  @Override
-  protected void setToolTipText(final String tooltip) {
-    if (TextUtils.notEmpty(tooltip)) {
-      item.setToolTip(new GxtDefTooltip(tooltip));
     }
   }
 

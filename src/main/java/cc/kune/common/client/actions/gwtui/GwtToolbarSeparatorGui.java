@@ -80,10 +80,6 @@ public class GwtToolbarSeparatorGui extends AbstractGuiItem {
   }
 
   @Override
-  protected void setToolTipText(final String text) {
-  }
-
-  @Override
   public void setVisible(final boolean visible) {
     widget.setVisible(visible);
   }

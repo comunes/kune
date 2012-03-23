@@ -50,6 +50,15 @@ public class SignInForm extends DefaultForm {
    * >this</a>.
    */
   public SignInForm(final I18nTranslationService i18n) {
+    final Listener<FieldEvent> enterListener = new Listener<FieldEvent>() {
+      @Override
+      public void handleEvent(final FieldEvent fe) {
+        if (fe.getEvent().getKeyCode() == 13) {
+          onAcceptCallback.onSuccess();
+        }
+      }
+    };
+
     super.addStyleName("kune-Margin-Large-trbl");
     loginNickOrEmailField = new TextField<String>() {
       @Override
@@ -70,6 +79,7 @@ public class SignInForm extends DefaultForm {
     loginNickOrEmailField.render(RootPanel.get(LOGIN_ID).getElement());
     ComponentHelper.doAttach(loginNickOrEmailField);
     super.add(loginNickOrEmailField);
+    loginNickOrEmailField.addListener(Events.OnKeyPress, enterListener);
 
     loginPassField = new TextField<String>() {
       @Override
@@ -91,15 +101,7 @@ public class SignInForm extends DefaultForm {
     loginPassField.setTabIndex(101);
     loginPassField.render(RootPanel.get(LOGIN_ID).getElement());
     ComponentHelper.doAttach(loginPassField);
-
-    loginPassField.addListener(Events.OnKeyPress, new Listener<FieldEvent>() {
-      @Override
-      public void handleEvent(final FieldEvent fe) {
-        if (fe.getEvent().getKeyCode() == 13) {
-          onAcceptCallback.onSuccess();
-        }
-      }
-    });
+    loginPassField.addListener(Events.OnKeyPress, enterListener);
     super.add(loginPassField);
   }
 

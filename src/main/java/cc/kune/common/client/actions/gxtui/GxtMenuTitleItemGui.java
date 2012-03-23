@@ -87,7 +87,7 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
   }
 
   @Override
-  protected void setToolTipText(final String tooltip) {
+  public void setToolTipText(final String tooltip) {
     if (TextUtils.notEmpty(tooltip)) {
       item.setToolTip(new GxtDefTooltip(tooltip));
     }

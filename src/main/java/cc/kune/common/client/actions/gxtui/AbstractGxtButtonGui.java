@@ -19,9 +19,7 @@
  */
 package cc.kune.common.client.actions.gxtui;
 
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
@@ -130,21 +128,6 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
   @Override
   protected void setText(final String text) {
     button.setText(text);
-  }
-
-  @Override
-  protected void setToolTipText(final String tooltip) {
-    if (tooltip != null && !tooltip.isEmpty()) {
-      final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-      if (key == null) {
-        // button.setToolTip(new GxtDefTooltip(tooltip));
-        button.setTitle(tooltip);
-      } else {
-        // button.setToolTip(new GxtDefTooltip(tooltip +
-        // key.toString()));
-        button.setTitle(tooltip + key.toString());
-      }
-    }
   }
 
   @Override

@@ -26,6 +26,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
+import cc.kune.core.client.events.MyGroupsChangedEvent;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
@@ -192,6 +193,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
           getView().hide();
           reset();
           getView().unMask();
+          // Add the new group to your info
+          session.getCurrentUserInfo().getGroupsIsAdmin().add(state.getGroup());
+          MyGroupsChangedEvent.fire(getEventBus());
           Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {
@@ -201,7 +205,8 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
                 @Override
                 public void run() {
                   ShowHelpContainerEvent.fire(getEventBus(), state.getStateToken().getTool());
-                }}.schedule(2000);
+                }
+              }.schedule(2000);
             }
           });
         }

@@ -19,33 +19,26 @@
  \*/
 package cc.kune.core.client.sitebar;
 
-import java.util.Set;
-
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.core.client.services.ClientFileDownloadUtils;
-import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
@@ -53,10 +46,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   public static final MenuDescriptor LOGGED_USER_MENU = new MenuDescriptor();
   public static final String LOGGED_USER_MENU_ID = "kune-sump-lum";
-  private final Provider<ClientFileDownloadUtils> downloadProvider;
-  private final GotoGroupAction gotoGroupAction;
   private final I18nTranslationService i18n;
-  private SubMenuDescriptor partiMenu;
   private final CoreResources res;
   private ToolbarSeparatorDescriptor separator;
   private final Session session;
@@ -65,16 +55,13 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   @Inject
   public SiteUserOptionsPresenter(final Session session, final StateManager stateManager,
-      final Provider<ClientFileDownloadUtils> downloadProvider, final I18nTranslationService i18n,
-      final CoreResources img, final SitebarActions siteOptions, final GotoGroupAction gotoGroupAction) {
+      final I18nTranslationService i18n, final CoreResources img, final SitebarActions siteOptions) {
     super();
     this.session = session;
     this.stateManager = stateManager;
-    this.downloadProvider = downloadProvider;
     this.i18n = i18n;
     this.res = img;
     this.siteOptions = siteOptions;
-    this.gotoGroupAction = gotoGroupAction;
     createActions();
     separator.setVisible(false);
     session.onUserSignIn(true, new UserSignInHandler() {
@@ -103,24 +90,12 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     descriptor.setParent(LOGGED_USER_MENU, true);
   }
 
-  private void addPartipation(final GroupDTO group) {
-    final String logoImageUrl = downloadProvider.get().getGroupLogo(group);
-    final MenuItemDescriptor participant = new MenuItemDescriptor(gotoGroupAction);
-    participant.setTarget(group);
-    participant.putValue(Action.NAME, group.getLongName());
-    participant.putValue(Action.SMALL_ICON, logoImageUrl);
-    participant.setParent(partiMenu, true);
-    // siteOptions.getRightToolbar().add(participant);
-  }
-
   private void createActions() {
     LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
     LOGGED_USER_MENU.setParent(siteOptions.getRightToolbar());
     LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     LOGGED_USER_MENU.setRightIcon(res.arrowdownsitebar());
     separator = new ToolbarSeparatorDescriptor(Type.separator, siteOptions.getRightToolbar());
-    partiMenu = new SubMenuDescriptor(i18n.t("Your groups"));
-    addActionImpl(partiMenu);
 
     final AbstractExtendedAction userHomeAction = new AbstractExtendedAction() {
       @Override
@@ -143,16 +118,6 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     LOGGED_USER_MENU.setVisible(true);
     LOGGED_USER_MENU.setEnabled(true);
     setLoggedUserName(userInfoDTO.getShortName());
-    partiMenu.clear();
-    final Set<GroupDTO> groupsIsAdmin = userInfoDTO.getGroupsIsAdmin();
-    final Set<GroupDTO> groupsIsCollab = userInfoDTO.getGroupsIsCollab();
-    for (final GroupDTO group : groupsIsAdmin) {
-      addPartipation(group);
-    }
-    for (final GroupDTO group : groupsIsCollab) {
-      addPartipation(group);
-    }
-    partiMenu.setEnabled((groupsIsAdmin.size() + groupsIsCollab.size()) > 0);
     siteOptions.refreshActions();
   }
 

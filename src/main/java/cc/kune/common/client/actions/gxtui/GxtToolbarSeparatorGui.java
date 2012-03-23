@@ -77,11 +77,6 @@ public class GxtToolbarSeparatorGui extends AbstractChildGuiItem {
   }
 
   @Override
-  protected void setToolTipText(final String text) {
-    // do nothing
-  }
-
-  @Override
   public boolean shouldBeAdded() {
     return false;
   }

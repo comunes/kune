@@ -22,14 +22,17 @@ package cc.kune.common.client.actions.gwtui;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.user.client.ui.MenuItem;
 
-public class GwtSubMenuGui extends AbstractGwtMenuGui {
+public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
 
   private IconLabel iconLabel;
   private MenuItem item;
+  private AbstractGwtMenuGui parentMenu;
 
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -38,8 +41,7 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
     item = new MenuItem("", menu);
     iconLabel = new IconLabel("");
     configureItemFromProperties();
-    final AbstractGwtMenuGui parentMenu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(
-        PARENT_UI));
+    parentMenu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(PARENT_UI));
     final int position = descriptor.getPosition();
     if (position == GuiActionDescrip.NO_POSITION) {
       parentMenu.add(item);
@@ -47,7 +49,13 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
       parentMenu.insert(position, item);
     }
     descriptor.putValue(ParentWidget.PARENT_UI, this);
+    descriptor.putValue(MenuItemDescriptor.UI, this);
     return this;
+  }
+
+  @Override
+  public MenuItem getMenuItem() {
+    return item;
   }
 
   private void layout() {
@@ -85,7 +93,9 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
 
   @Override
   public void setToolTipText(final String tooltip) {
-    item.setTitle(tooltip);
+    if (TextUtils.notEmpty(tooltip)) {
+      item.setTitle(tooltip);
+    }
   }
 
   @Override
@@ -93,5 +103,11 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
     item.setVisible(visible);
     iconLabel.setVisible(visible);
     layout();
+  }
+
+  @Override
+  protected void show() {
+    parentMenu.show();
+    // FIXME: item.selectItem
   }
 }

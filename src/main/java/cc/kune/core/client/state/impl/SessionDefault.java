@@ -376,4 +376,9 @@ public class SessionDefault implements Session {
     setUserHash(null);
     setCurrentUserInfo(null, null);
   }
+
+  @Override
+  public boolean userIsJoiningGroups() {
+    return currentUserInfo.getGroupsIsAdmin().size() + currentUserInfo.getGroupsIsCollab().size() > 0;
+  }
 }

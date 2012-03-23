@@ -31,7 +31,10 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
   public static final String MENU_HIDE = "hidemenu";
   public static final String MENU_ONHIDE = "menuonhide";
   public static final String MENU_ONSHOW = "menuonshow";
-  protected static final String MENU_RIGHTICON = "menurighicon";
+  protected static final String MENU_RIGHTICON = "menurighticon";
+  public static final String MENU_SELECT_ITEM = "menuselitem";
+  public static final String MENU_SELECTION_DOWN = "menuseldown";
+  public static final String MENU_SELECTION_UP = "menuselup";
   public static final String MENU_SHOW = "showmenu";
   public static final String MENU_SHOW_NEAR_TO = "showmenunearto";
   protected static final String MENU_STANDALONE = "menustandalone";
@@ -51,6 +54,8 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
     putValue(MENU_SHOW, false);
     putValue(MENU_CLEAR, false);
     putValue(MENU_STANDALONE, false);
+    putValue(MENU_SELECTION_DOWN, false);
+    putValue(MENU_SELECTION_UP, false);
   }
 
   public MenuDescriptor(final String text) {
@@ -75,9 +80,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
 
   @Override
   public void clear() {
-    // Action detects changes in values, then we fire a change (whatever) to
-    // fire this method in the UI
-    putValue(MENU_CLEAR, !((Boolean) getValue(MENU_CLEAR)));
+    toggle(MENU_CLEAR);
     super.clear();
   }
 
@@ -91,11 +94,23 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
   }
 
   public void hide() {
-    putValue(MENU_HIDE, !((Boolean) getValue(MENU_HIDE)));
+    toggle(MENU_HIDE);
   }
 
   public boolean isStandalone() {
     return (Boolean) super.getValue(MENU_STANDALONE);
+  }
+
+  public void moveSelectionDown() {
+    toggle(MENU_SELECTION_DOWN);
+  }
+
+  public void moveSelectionUp() {
+    toggle(MENU_SELECTION_UP);
+  }
+
+  public void selectMenu(final MenuItemDescriptor item) {
+    putValue(MENU_SELECT_ITEM, item);
   }
 
   public void setMenuPosition(final Position position) {
@@ -125,7 +140,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
    * Show the menu (remember to set the menu position before)
    */
   public void show() {
-    putValue(MENU_SHOW, !((Boolean) getValue(MENU_SHOW)));
+    toggle(MENU_SHOW);
   }
 
   /**

@@ -34,7 +34,6 @@ import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.resources.CommonResources;
-import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.resources.client.ImageResource;
@@ -42,10 +41,12 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.MenuItem;
 
-public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
+public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements HasMenuItem {
 
   private IconLabel iconLabel;
+
   private GwtBaseMenuItem item;
   private final CommonResources res = CommonResources.INSTANCE;
 
@@ -100,7 +101,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     } else {
       item = new GwtBaseMenuItem("", true);
     }
-
+    descriptor.putValue(MenuItemDescriptor.UI, this);
     final String id = descriptor.getId();
     if (id != null) {
       item.ensureDebugId(id);
@@ -164,6 +165,11 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     return item;
   }
 
+  @Override
+  public MenuItem getMenuItem() {
+    return item;
+  }
+
   private AbstractGwtMenuGui getParentMenu(final GuiActionDescrip descriptor) {
     return ((AbstractGwtMenuGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
   }
@@ -224,16 +230,6 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
       }
     }
     layout();
-  }
-
-  @Override
-  protected void setToolTipText(final String text) {
-    if (text != null) {
-      final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-      // FIXME This doesn't works... (don't show the tooltip)
-      Tooltip.to(iconLabel, key == null ? text : text + key.toString());
-      layout();
-    }
   }
 
   @Override

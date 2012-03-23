@@ -161,4 +161,11 @@ public interface Session {
 
   void signOut();
 
+  /**
+   * User is joining to some groups (as admin or collaborator).
+   * 
+   * @return true, if successful
+   */
+  boolean userIsJoiningGroups();
+
 }

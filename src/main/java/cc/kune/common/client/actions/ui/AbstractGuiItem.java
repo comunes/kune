@@ -22,19 +22,23 @@ package cc.kune.common.client.actions.ui;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.DropTarget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   protected GuiActionDescrip descriptor;
+  protected Tooltip tooltip;
 
   public AbstractGuiItem() {
     super();
@@ -116,13 +120,13 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     // the action, if not we only pass the menuitem
     return descriptor.hasTarget() ? descriptor.getTarget()
         : descriptor.isChild() ? descriptor.getParent().getTarget() : ActionEvent.NO_TARGET;
-  };
+  }
 
   private void setDropTarget(final DropTarget dropTarget) {
     if (dropTarget != null) {
       dropTarget.init(this);
     }
-  }
+  };
 
   protected abstract void setEnabled(boolean enabled);
 
@@ -170,7 +174,19 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   protected abstract void setText(String text);
 
-  protected abstract void setToolTipText(String text);
+  public void setToolTipText(final String tooltipText) {
+    if (shouldBeAdded()) {
+      setToolTipTextNextTo(getWidget(), tooltipText);
+    }
+  }
+
+  public void setToolTipTextNextTo(final Widget widget, final String tooltipText) {
+    if (tooltipText != null && !tooltipText.isEmpty()) {
+      final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
+      final String compountTooltip = key == null ? tooltipText : tooltipText + key.toString();
+      tooltip = Tooltip.to(widget, compountTooltip);
+    }
+  }
 
   private void setVisible(final Boolean visible) {
     // if you have problems with setVisible check if the GuiItem calls
@@ -183,8 +199,13 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     return true;
   }
 
-  protected void toogleTooltipVisible() {
-    // do nothing by default
-    return;
+  public void toogleTooltipVisible() {
+    if (tooltip != null) {
+      if (tooltip.isVisibleOrWillBe()) {
+        tooltip.hide();
+      } else {
+        tooltip.showTemporally();
+      }
+    }
   }
 }

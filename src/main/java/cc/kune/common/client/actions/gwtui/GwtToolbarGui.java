@@ -83,11 +83,6 @@ public class GwtToolbarGui extends AbstractGuiItem implements ParentWidget {
   }
 
   @Override
-  protected void setToolTipText(final String text) {
-    toolbar.setTitle(text);
-  }
-
-  @Override
   public boolean shouldBeAdded() {
     return true;
   }

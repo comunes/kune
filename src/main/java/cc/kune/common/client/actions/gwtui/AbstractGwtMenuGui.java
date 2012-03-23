@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.Position;
 import cc.kune.common.client.resources.SubMenuResources;
 
@@ -86,14 +87,15 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
           if (popup != null && popup.isShowing()) {
             popup.hide();
           }
-        }
-      }
-    });
-    descriptor.addPropertyChangeListener(new PropertyChangeListener() {
-      @Override
-      public void propertyChange(final PropertyChangeEvent event) {
-        if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
-          show(descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO));
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
+          show();
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_DOWN)) {
+          menu.moveSelectionDown();
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_UP)) {
+          menu.moveSelectionUp();
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECT_ITEM)) {
+          final HasMenuItem item = (HasMenuItem) ((MenuItemDescriptor) descriptor.getValue(MenuDescriptor.MENU_SELECT_ITEM)).getValue(MenuItemDescriptor.UI);
+          menu.selectItem(item.getMenuItem());
         }
       }
     });
@@ -130,8 +132,12 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     return !descriptor.isChild();
   }
 
-  public void show(final Object relative) {
-    createPopup();
+  protected abstract void show();
+
+  public void showRelativeTo(final Object relative) {
+    if (popup == null) {
+      createPopup();
+    }
     if (relative instanceof String) {
       popup.showRelativeTo(RootPanel.get((String) relative));
     } else if (relative instanceof UIObject) {

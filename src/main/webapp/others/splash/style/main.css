@@ -87,12 +87,6 @@ input, select, table, textarea {
 }
 
 h1 {
-  float: left;
-  width: 180px;
-  height: 43px;
-  margin: 6px 10px 0 10px;
-  background-image: url(../images/logo_on_black.png);
-  background-repeat: no-repeat;
 }
 
 h1 a {
