@@ -8,12 +8,14 @@ import cc.kune.core.server.mail.FormatedString;
  */
 public class PendingNotification {
 
+  public static final String DEFAULT_SUBJECT_PREFIX = new String();
+
   /**
    * The Constant NONE is used when for instance, all the destinations are not
    * local, so, we should not notify them by email
    */
-  public static final PendingNotification NONE = new PendingNotification(null, null, null, false, false,
-      null);
+  public static final PendingNotification NONE = new PendingNotification(null, null, null, null, false,
+      false, null);
 
   /** The body. */
   private final FormatedString body;
@@ -32,6 +34,9 @@ public class PendingNotification {
 
   /** The subject. */
   private final FormatedString subject;
+
+  /** The subject prefix [sitename] */
+  private final String subjectPrefix;
 
   /**
    * Instantiates a new pending notification
@@ -52,7 +57,30 @@ public class PendingNotification {
   public PendingNotification(final NotificationType notifyType, final FormatedString subject,
       final FormatedString body, final boolean isHtml, final boolean forceSend,
       final DestinationProvider destProvider) {
+    this(notifyType, DEFAULT_SUBJECT_PREFIX, subject, body, isHtml, forceSend, destProvider);
+  }
+
+  /**
+   * Instantiates a new pending notification
+   * 
+   * @param notifyType
+   *          the notify type
+   * @param subject
+   *          the subject
+   * @param body
+   *          the body
+   * @param isHtml
+   *          the is html
+   * @param forceSend
+   *          the force send
+   * @param destProvider
+   *          the dest provider
+   */
+  public PendingNotification(final NotificationType notifyType, final String subjectPrefix,
+      final FormatedString subject, final FormatedString body, final boolean isHtml,
+      final boolean forceSend, final DestinationProvider destProvider) {
     this.notifyType = notifyType;
+    this.subjectPrefix = subjectPrefix;
     this.subject = subject;
     this.body = body;
     this.isHtml = isHtml;
@@ -139,6 +167,10 @@ public class PendingNotification {
    */
   public FormatedString getSubject() {
     return subject;
+  }
+
+  public String getSubjectPrefix() {
+    return subjectPrefix;
   }
 
   @Override

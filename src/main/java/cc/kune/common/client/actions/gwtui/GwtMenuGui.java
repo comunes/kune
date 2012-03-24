@@ -56,6 +56,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     if (notStandAlone) {
       button = new Button();
       button.removeStyleName("gwt-Button");
+      descriptor.putValue(MenuDescriptor.MENU_SHOW_NEAR_TO, button);
       iconLabel = new IconLabel("");
       final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
       if (rightIcon != null) {
@@ -66,7 +67,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
         @Override
         public void onClick(final ClickEvent event) {
           event.stopPropagation();
-          show();
+          showRelativeTo(button);
         }
       });
       final String id = descriptor.getId();
@@ -155,11 +156,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
 
   @Override
   protected void show() {
-    if (notStandAlone) {
-      showRelativeTo(button);
-    } else {
-      showRelativeTo(descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO));
-    }
+    showRelativeTo(descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO));
   }
 
 }

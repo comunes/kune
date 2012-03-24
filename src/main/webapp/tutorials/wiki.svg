@@ -3,6 +3,7 @@
 
 <svg
    xmlns:ns1="http://sozi.baierouge.fr"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -31,8 +32,12 @@
      id="kunelang" />
   <!-- End kune i18n part -->
   <!-- Start kune font part -->
-  <link xmlns="http://www.w3.org/1999/xhtml" href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css' />
-  <style>
+  <xhtml:link
+     href="http://fonts.googleapis.com/css?family=Ubuntu"
+     rel="stylesheet"
+     type="text/css" />
+  <style
+     id="style27450">
     text { font-family: 'Ubuntu'; text-rendering: geometricPrecision; }
   </style>
   <!-- End kune font part -->
@@ -44,10 +49,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.9126846"
-     inkscape:cx="290.08937"
+     inkscape:cx="150.93944"
      inkscape:cy="990.73615"
      inkscape:document-units="px"
-     inkscape:current-layer="layer7"
+     inkscape:current-layer="g27812"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
@@ -2076,6 +2081,131 @@
          y="184.92917"
          x="207.5244"
          sodipodi:role="line">explained</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g27812"
+     inkscape:label="en-working"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="207.26842"
+       y="166.0929"
+       id="text27814"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99912117,1.0008796)"><tspan
+         sodipodi:role="line"
+         x="207.26842"
+         y="166.0929"
+         style="font-size:32px;font-weight:bold;fill:#aa4400"
+         id="tspan27816">wiki</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="149.85907"
+       y="-168.92439"
+       id="text27818"
+       sodipodi:linespacing="125%"
+       transform="translate(0,435.82679)"><tspan
+         y="-168.92439"
+         x="149.85907"
+         id="tspan27820"
+         sodipodi:role="line"
+         style="font-style:italic">click to continue</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text27822"
+       y="409.18921"
+       x="134.0341"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"><tspan
+         id="tspan27824"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="409.18921"
+         x="134.0341"
+         sodipodi:role="line">Sorry, we are</tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="424.18921"
+         x="134.0341"
+         sodipodi:role="line"
+         id="tspan27826">still designing </tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="439.18921"
+         x="134.0341"
+         sodipodi:role="line"
+         id="tspan27828">this tutorial.</tspan><tspan
+         id="tspan27830"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="454.18921"
+         x="134.0341"
+         sodipodi:role="line">Meanwhile...</tspan><tspan
+         id="tspan27832"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="469.18921"
+         x="134.0341"
+         sodipodi:role="line" /></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text27834"
+       y="650.30011"
+       x="181.83585"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="650.30011"
+         x="181.83585"
+         sodipodi:role="line"
+         id="tspan27836" /><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         y="665.30011"
+         x="181.83585"
+         sodipodi:role="line"
+         id="tspan27838">...give us your <tspan
+   id="tspan27840"
+   style="font-weight:bold">feedback </tspan></tspan><tspan
+         id="tspan27842"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         y="680.30011"
+         x="181.83585"
+         sodipodi:role="line">and participate</tspan><tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         y="695.30011"
+         x="181.83585"
+         sodipodi:role="line"
+         id="tspan27844">to improve this tool...</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="154.17371"
+       y="566.2572"
+       id="text27846"
+       sodipodi:linespacing="125%"><tspan
+         id="tspan27848"
+         sodipodi:role="line"
+         x="154.17371"
+         y="566.2572"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">...here you can create</tspan><tspan
+         sodipodi:role="line"
+         x="154.17371"
+         y="581.2572"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         id="tspan27850">your new <tspan
+   id="tspan27852"
+   style="font-weight:bold">wiki pages</tspan>...</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="207.5244"
+       y="184.92917"
+       id="text27854"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99912117,1.0008796)"><tspan
+         sodipodi:role="line"
+         x="207.5244"
+         y="184.92917"
+         style="font-size:16px;font-style:normal;font-weight:normal;fill:#aa4400"
+         id="tspan27856">explained</tspan></text>
   </g>
   <g
      style="display:none"

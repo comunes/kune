@@ -206,7 +206,6 @@ public class ChatClientDefault implements ChatClient {
         });
         kuneEventBus.addHandler(AvatarChangedEvent.getType(),
             new AvatarChangedEvent.AvatarChangedHandler() {
-
               @Override
               public void onAvatarChanged(final AvatarChangedEvent event) {
                 setAvatar(event.getPhotoBinary());

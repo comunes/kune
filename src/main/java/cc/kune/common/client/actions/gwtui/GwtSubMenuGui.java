@@ -22,6 +22,7 @@ package cc.kune.common.client.actions.gwtui;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.utils.TextUtils;
@@ -108,6 +109,6 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
   @Override
   protected void show() {
     parentMenu.show();
-    // FIXME: item.selectItem
+    ((MenuDescriptor) descriptor.getParent()).selectMenu((MenuItemDescriptor) descriptor);
   }
 }

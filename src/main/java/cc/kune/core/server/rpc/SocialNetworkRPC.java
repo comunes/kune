@@ -31,6 +31,7 @@ import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.shared.domain.AccessRol;
+import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
@@ -72,8 +73,13 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
     socialNetworkManager.acceptJoinGroup(userLogged, groupToAccept, group);
-    notifyService.notifyGroup(groupToAccept, group, "Accepted as member",
+    notifyService.notifyGroupMembers(groupToAccept, group, "Accepted as member",
         "You are now member of this group");
+    // notifyService.notifyGroupAdmins(group, group, hash,
+    // groupToAcceptShortName)
+    // "%admin approved the membership of the %user in the group %group".
+    // notifyService.notifyGroupAdmins(group, group, "Collaborator accepted",
+    // "There is a pending collaborator in this group. Please accept or deny him/her");
     return generateResponse(userLogged, group);
   }
 
@@ -88,7 +94,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
     socialNetworkManager.addGroupToAdmins(userLogged, groupToAdd, group);
-    notifyService.notifyGroup(groupToAdd, group, "Added as administrator",
+    notifyService.notifyGroupMembers(groupToAdd, group, "Added as administrator",
         "You are now admin of this group");
     return generateResponse(userLogged, group);
   }
@@ -113,7 +119,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
     socialNetworkManager.addGroupToCollabs(userLogged, groupToAdd, group);
-    notifyService.notifyGroup(groupToAdd, group, "Added as collaborator",
+    notifyService.notifyGroupMembers(groupToAdd, group, "Added as collaborator",
         "You are now a collaborator of this group");
     return generateResponse(userLogged, group);
   }
@@ -150,7 +156,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
     socialNetworkManager.deleteMember(userLogged, groupToDelete, group);
-    notifyService.notifyGroup(groupToDelete, group, "Removed as collaborator",
+    notifyService.notifyGroupMembers(groupToDelete, group, "Removed as collaborator",
         "You have been remove as collaborator of this group");
     return generateResponse(userLogged, group);
   }
@@ -166,7 +172,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
     socialNetworkManager.denyJoinGroup(userLogged, groupToDenyJoin, group);
-    notifyService.notifyGroup(groupToDenyJoin, group, "Membership denied",
+    notifyService.notifyGroupMembers(groupToDenyJoin, group, "Membership denied",
         "Your membership to this group has been rejected");
     return generateResponse(userLogged, group);
   }
@@ -196,8 +202,10 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     final User user = userSessionManager.getUser();
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
-    notifyService.notifyGroupAdmins(group, group, "Pending collaborator",
-        "There is a pending collaborator in this group. Please accept or deny him/her");
+    if (!group.getAdmissionType().equals(AdmissionType.Open)) {
+      notifyService.notifyGroupAdmins(group, group, "Pending collaborator",
+          "There is a pending collaborator in this group. Please accept or deny him/her");
+    }
     return socialNetworkManager.requestToJoin(user, group);
   }
 
@@ -212,7 +220,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
     socialNetworkManager.setAdminAsCollab(userLogged, groupToSetCollab, group);
-    notifyService.notifyGroup(groupToSetCollab, group, "Membership changed",
+    notifyService.notifyGroupMembers(groupToSetCollab, group, "Membership changed",
         "Your membership to this group have changed. You are now a collaborator of this group");
     return generateResponse(userLogged, group);
   }
@@ -228,7 +236,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     checkIsNotPersonalGroup(group);
     final Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
     socialNetworkManager.setCollabAsAdmin(userLogged, groupToSetAdmin, group);
-    notifyService.notifyGroup(groupToSetAdmin, group, "Membership changed",
+    notifyService.notifyGroupMembers(groupToSetAdmin, group, "Membership changed",
         "Your membership to this group have changed. You are now an admin of this group");
     return generateResponse(userLogged, group);
   }

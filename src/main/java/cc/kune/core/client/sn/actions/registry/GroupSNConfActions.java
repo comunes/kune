@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.StateChangedEvent;
@@ -87,10 +88,11 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     final MenuRadioItemDescriptor openItem = membersModeration.get().withModeration(AdmissionType.Open);
 
     addImpl(optionsMenu);
+    new MenuSeparatorDescriptor(optionsMenu);
     new MenuTitleItemDescriptor(i18n.t("Options")).withParent(optionsMenu);
     new MenuItemDescriptor(addEntityToThisGroupAction).withParent(optionsMenu).setPosition(0);
     new MenuItemDescriptor(unJoinGroupAction).withParent(optionsMenu).setPosition(1);
-
+    // new MenuSeparatorDescriptor(optionsMenu).setPosition(2);
     visibilitySubMenu.withText(i18n.t("Users who can view this member list")).withParent(optionsMenu);
     moderationSubMenu.withText(i18n.t("New members policy")).withParent(optionsMenu);
     anyoneItem.withParent(visibilitySubMenu).withText(i18n.t("anyone"));

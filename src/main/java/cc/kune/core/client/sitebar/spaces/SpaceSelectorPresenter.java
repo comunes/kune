@@ -19,8 +19,13 @@
  */
 package cc.kune.core.client.sitebar.spaces;
 
+import cc.kune.common.client.actions.AbstractExtendedAction;
+import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.KeyStroke;
+import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.SignIn;
@@ -117,7 +122,8 @@ public class SpaceSelectorPresenter extends
   public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
       final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
       final Session session, final Provider<SignIn> signIn, final GSpaceBackManager backManager,
-      final I18nTranslationService i18n, final MaskWidgetView mask) {
+      final I18nTranslationService i18n, final MaskWidgetView mask,
+      final GlobalShortcutRegister shortcutRegister) {
     super(eventBus, view, proxy);
     this.stateManager = stateManager;
     this.armor = armor;
@@ -140,11 +146,7 @@ public class SpaceSelectorPresenter extends
     view.getUserBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        signIn.get().setGotoTokenOnCancel(stateManager.getCurrentToken());
-        restoreToken(inboxToken);
-        if (session.isLogged()) {
-          setDown(Space.userSpace);
-        }
+        onUserBtnClick(stateManager, session, signIn);
       }
     });
     view.getGroupBtn().addClickHandler(new ClickHandler() {
@@ -182,6 +184,13 @@ public class SpaceSelectorPresenter extends
         getView().setPublicVisible(event.getInitData().isPublicSpaceVisible());
       }
     });
+    final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('I'));
+    shortcutRegister.put(shortcut, new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        onUserBtnClick(stateManager, session, signIn);
+      }
+    });
   }
 
   @ProxyEvent
@@ -204,6 +213,10 @@ public class SpaceSelectorPresenter extends
     setDown(Space.homeSpace);
     currentSpace = Space.homeSpace;
     getView().setWindowTitle(i18n.t("Home"));
+  }
+
+  private void onPublicClick() {
+
   }
 
   private void onPublicSpaceSelect(final boolean shouldRestoreToken) {
@@ -255,6 +268,15 @@ public class SpaceSelectorPresenter extends
       default:
         break;
       }
+    }
+  }
+
+  private void onUserBtnClick(final StateManager stateManager, final Session session,
+      final Provider<SignIn> signIn) {
+    signIn.get().setGotoTokenOnCancel(stateManager.getCurrentToken());
+    restoreToken(inboxToken);
+    if (session.isLogged()) {
+      setDown(Space.userSpace);
     }
   }
 

@@ -25,9 +25,10 @@ import com.google.inject.Singleton;
 public class NotificationSenderDefault implements NotificationSender {
   public static final Log LOG = LogFactory.getLog(NotificationSenderDefault.class);
   private final String emailTemplate;
+  @SuppressWarnings("unused")
   private final I18nTranslationServiceMultiLang i18n;
   private final MailService mailService;
-  private final String subjectPrefix;
+  private final String siteName;
   private final UsersOnline usersOnline;
   private final KuneWaveService waveService;
   private final XmppManager xmppManager;
@@ -45,8 +46,11 @@ public class NotificationSenderDefault implements NotificationSender {
         kuneProperties.get(KuneProperties.SITE_EMAIL_TEMPLATE)));
     Preconditions.checkNotNull(emailTemplate);
     Preconditions.checkArgument(TextUtils.notEmpty(emailTemplate));
-    subjectPrefix = new StringBuffer("[").append(kuneProperties.get(KuneProperties.SITE_NAME)).append(
-        "] ").toString();
+    siteName = kuneProperties.get(KuneProperties.SITE_NAME);
+  }
+
+  private String addBraquet(final String subjectPrefix) {
+    return new StringBuffer("[").append(subjectPrefix).append("] ").toString();
   }
 
   private boolean noOnline(final String username) {
@@ -62,8 +66,10 @@ public class NotificationSenderDefault implements NotificationSender {
     final NotificationType notifyType = notification.getNotifyType();
     final boolean forceSend = notification.isForceSend();
     final boolean isHtml = notification.isHtml();
-
-    subject.setTemplate(subjectPrefix + subject.getTemplate());
+    final String subjectPrefix = notification.getSubjectPrefix();
+    final String subjectWithoutBra = subjectPrefix.equals(PendingNotification.DEFAULT_SUBJECT_PREFIX) ? siteName
+        : subjectPrefix;
+    subject.setTemplate(addBraquet(subjectWithoutBra) + subject.getTemplate());
     if (subject.shouldBeTranslated()) {
       // Translate per recipient language
       // final String subjectTranslation = i18n.tWithNT(user.getLanguage(),
@@ -111,5 +117,4 @@ public class NotificationSenderDefault implements NotificationSender {
     }
 
   }
-
 }

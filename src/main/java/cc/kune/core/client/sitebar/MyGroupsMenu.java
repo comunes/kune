@@ -6,6 +6,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuShowAction;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.Url;
 import cc.kune.core.client.events.MyGroupsChangedEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
@@ -41,7 +42,7 @@ public class MyGroupsMenu extends MenuDescriptor {
     this.session = session;
     this.newGroupAction = newGroupAction;
     this.siteOptions = siteOptions;
-    // menuShowAction.setMenu(this);
+    menuShowAction.setMenu(this);
     setId(MENU_ID);
     setParent(siteOptions.getRightToolbar());
     setStyles("k-no-backimage, k-btn-sitebar");
@@ -69,11 +70,10 @@ public class MyGroupsMenu extends MenuDescriptor {
   }
 
   private void addPartipationToMenu(final GroupDTO group) {
-    // FIXME, better user URL in GuiDescritors...
-    final String logoImageUrl = session.getSiteUrl() + "/" + downloadProvider.get().getGroupLogo(group);
     final MenuItemDescriptor participant = new MenuItemDescriptor(gotoGroupAction);
     participant.setTarget(group);
-    participant.withText(group.getLongName()).withIcon(logoImageUrl).setParent(this, true);
+    participant.withText(group.getLongName()).withIcon(
+        new Url(downloadProvider.get().getGroupLogo(group))).setParent(this, true);
   }
 
   private void regenerateMenu(final boolean isLogged) {

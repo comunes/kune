@@ -3,6 +3,7 @@
 
 <svg
    xmlns:ns1="http://sozi.baierouge.fr"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -31,8 +32,12 @@
      id="kunelang" />
   <!-- End kune i18n part -->
   <!-- Start kune font part -->
-  <link xmlns="http://www.w3.org/1999/xhtml" href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css' />
-  <style>
+  <xhtml:link
+     href="http://fonts.googleapis.com/css?family=Ubuntu"
+     rel="stylesheet"
+     type="text/css" />
+  <style
+     id="style26201">
     text { font-family: 'Ubuntu'; text-rendering: geometricPrecision; }
   </style>
   <!-- End kune font part -->
@@ -44,10 +49,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.8253692"
-     inkscape:cx="121.6552"
+     inkscape:cx="52.080234"
      inkscape:cy="1258.8941"
      inkscape:document-units="px"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="g26610"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
@@ -1953,6 +1958,143 @@
    style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">nuevas </tspan>tareas<tspan
    id="tspan8937"
    style="font-weight:normal">...</tspan></tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g26610"
+     inkscape:label="en-working"
+     style="display:none">
+    <g
+       style="display:inline"
+       id="g26612"
+       transform="translate(106.00677,59.44173)">
+      <text
+         xml:space="preserve"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         x="101.1684"
+         y="122.68937"
+         id="text26614"
+         sodipodi:linespacing="125%"
+         transform="scale(0.99912117,1.0008796)"><tspan
+           sodipodi:role="line"
+           x="101.1684"
+           y="122.68937"
+           style="font-size:32px;font-weight:bold;fill:#aa4400"
+           id="tspan26616">tareas</tspan></text>
+      <text
+         transform="scale(0.99912117,1.0008796)"
+         sodipodi:linespacing="125%"
+         id="text26618"
+         y="95.114334"
+         x="101.42439"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         xml:space="preserve"><tspan
+           id="tspan26620"
+           style="font-size:16px;font-style:normal;font-weight:normal;fill:#aa4400"
+           y="95.114334"
+           x="101.42439"
+           sodipodi:role="line">explicando las</tspan></text>
+    </g>
+    <text
+       transform="translate(0,435.82679)"
+       sodipodi:linespacing="125%"
+       id="text26622"
+       y="-168.92439"
+       x="149.85907"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"><tspan
+         style="font-style:italic"
+         sodipodi:role="line"
+         id="tspan26624"
+         x="149.85907"
+         y="-168.92439">pulsa con tu ratón para continuar</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="135.67761"
+       y="406.39865"
+       id="text26626"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="135.67761"
+         y="406.39865"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         id="tspan26628">Lo siento, estamos</tspan><tspan
+         sodipodi:role="line"
+         x="135.67761"
+         y="421.39865"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         id="tspan26630">diseñando este</tspan><tspan
+         sodipodi:role="line"
+         x="135.67761"
+         y="436.39865"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         id="tspan26632">tutorial.</tspan><tspan
+         sodipodi:role="line"
+         x="135.67761"
+         y="451.39865"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         id="tspan26634">Mientras tanto...</tspan><tspan
+         sodipodi:role="line"
+         x="135.67761"
+         y="466.39865"
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         id="tspan26636" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="181.83585"
+       y="650.30011"
+       id="text26638"
+       sodipodi:linespacing="125%"><tspan
+         id="tspan26640"
+         sodipodi:role="line"
+         x="181.83585"
+         y="650.30011"
+         style="font-size:12px;font-weight:normal;fill:#aa4400" /><tspan
+         id="tspan26642"
+         sodipodi:role="line"
+         x="181.83585"
+         y="665.30011"
+         style="font-size:12px;font-weight:normal;fill:#aa4400">...darnos tu <tspan
+   style="font-weight:bold"
+   id="tspan26644">feedback </tspan></tspan><tspan
+         id="tspan26646"
+         sodipodi:role="line"
+         x="181.83585"
+         y="680.30011"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">y participar para </tspan><tspan
+         sodipodi:role="line"
+         x="181.83585"
+         y="695.30011"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         id="tspan26648">mejorar esta </tspan><tspan
+         id="tspan26650"
+         sodipodi:role="line"
+         x="181.83585"
+         y="710.30011"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">herramienta...</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text26652"
+       y="566.2572"
+       x="154.17371"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"><tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         y="566.2572"
+         x="154.17371"
+         sodipodi:role="line"
+         id="tspan26654">...aquí puedes crear </tspan><tspan
+         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400"
+         y="581.2572"
+         x="154.17371"
+         sodipodi:role="line"
+         id="tspan26656"><tspan
+   style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+   id="tspan26658">nuevas </tspan>tareas<tspan
+   style="font-weight:normal"
+   id="tspan26660">...</tspan></tspan></text>
   </g>
   <g
      style="display:none"

@@ -54,12 +54,12 @@ public class PendingNotificationSender {
     // LinkedHashSet<PendingNotificationProvider>());
   }
 
-  public void add(final NotificationType type, final FormatedString subject, final FormatedString body,
-      final boolean isHtml, final boolean forceSend, final User to) {
+  public void add(final NotificationType type, final String subjectPrefix, final FormatedString subject,
+      final FormatedString body, final boolean isHtml, final boolean forceSend, final User to) {
     add(new PendingNotificationProvider() {
       @Override
       public PendingNotification get() {
-        return new PendingNotification(type, subject, body, isHtml, forceSend,
+        return new PendingNotification(type, subjectPrefix, subject, body, isHtml, forceSend,
             new SimpleDestinationProvider(to));
       }
     });

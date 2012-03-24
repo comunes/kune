@@ -30,6 +30,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.common.shared.utils.Url;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
@@ -137,6 +138,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   private void setIcon(final Object icon) {
     if (icon instanceof ImageResource) {
       setIconResource((ImageResource) icon);
+    } else if (icon instanceof Url) {
+      setIconUrl(((Url) icon).toString());
     } else if (icon instanceof String) {
       final String iconS = (String) icon;
       if (iconS.startsWith("http")) {

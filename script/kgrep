@@ -1,0 +1,1 @@
+egrep -ri "$*" src/main/java/cc | egrep -v "\.properties|svn-base"

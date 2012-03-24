@@ -33,13 +33,6 @@ public class NotificationService {
     return FormatedString.build(subject);
   }
 
-  public void notifyGroup(final Group groupToNotify, final Group groupSender, final String subject,
-      final String message) {
-    final Set<User> members = new HashSet<User>();
-    GroupServerUtils.getAllUserMembers(members, groupToNotify, SocialNetworkSubGroup.ALL_GROUP_MEMBERS);
-    notifyToAll(groupSender, subject, message, members);
-  }
-
   public void notifyGroupAdmins(final Group groupToNotify, final Group groupSender,
       final String subject, final String message) {
     final Set<User> adminMembers = new HashSet<User>();
@@ -47,23 +40,31 @@ public class NotificationService {
     notifyToAll(groupSender, subject, message, adminMembers);
   }
 
+  public void notifyGroupMembers(final Group groupToNotify, final Group groupSender,
+      final String subject, final String message) {
+    final Set<User> members = new HashSet<User>();
+    GroupServerUtils.getAllUserMembers(members, groupToNotify, SocialNetworkSubGroup.ALL_GROUP_MEMBERS);
+    notifyToAll(groupSender, subject, message, members);
+  }
+
   public void notifyGroupToUser(final Group group, final User to, final String subject,
       final String message) {
-    sender.add(NotificationType.email, createPlainSubject(subject),
+    sender.add(NotificationType.email, group.getShortName(), createPlainSubject(subject),
         helper.groupNotification(group.getShortName(), group.hasLogo(), message), true, false, to);
   }
 
   private void notifyToAll(final Group groupSender, final String subject, final String message,
       final Collection<User> users) {
     for (final User to : users) {
-      sender.add(NotificationType.email, createPlainSubject(subject),
+      sender.add(NotificationType.email, groupSender.getShortName(), createPlainSubject(subject),
           helper.groupNotification(groupSender.getShortName(), groupSender.hasLogo(), message), true,
           true, to);
     }
   }
 
   public void notifyUserToUser(final User from, final User to, final String subject, final String message) {
-    sender.add(NotificationType.email, createPlainSubject(subject),
+    sender.add(NotificationType.email, PendingNotification.DEFAULT_SUBJECT_PREFIX,
+        createPlainSubject(subject),
         helper.userNotification(from.getShortName(), from.hasLogo(), message), true, false, to);
   }
 
@@ -83,7 +84,7 @@ public class NotificationService {
    */
   public void sendEmailToWithLink(final User to, final String subject, final String body,
       final String hash) {
-    sender.add(NotificationType.email, createPlainSubject(subject), helper.userNotification(body, hash),
-        true, true, to);
+    sender.add(NotificationType.email, PendingNotification.DEFAULT_SUBJECT_PREFIX,
+        createPlainSubject(subject), helper.userNotification(body, hash), true, true, to);
   }
 }
