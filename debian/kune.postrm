@@ -21,7 +21,7 @@ set -e
 
 case "$1" in
     purge)
-	echo rm -rf $(ETCDIC)
+	rm -rf /etc/kune
         
         #TODO (the rest) and deluser/group
     ;; 
