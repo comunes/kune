@@ -48,16 +48,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8253692"
-     inkscape:cx="52.080234"
-     inkscape:cy="1258.8941"
+     inkscape:zoom="1.5869046"
+     inkscape:cx="243.10117"
+     inkscape:cy="1308.5714"
      inkscape:document-units="px"
-     inkscape:current-layer="g26610"
+     inkscape:current-layer="layer1"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
      inkscape:window-width="1078"
-     inkscape:window-height="919"
+     inkscape:window-height="1867"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="0" />
@@ -1816,11 +1816,6 @@
        id="path5858-1"
        d="m 145.09495,570.24435 c -36.78501,-6.53253 -42.5348,-26.83565 -42.5348,-26.83565 l -2.47152,-7.1281"
        style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <path
-       id="path3-6"
-       d="m 110.34936,428.52925 v -8 h -4.734 c -0.141,-0.391 -0.289,-0.771 -0.469,-1.146 l 3.344,-3.339 -5.656,-5.661 -3.344,3.344 c -0.364,-0.172 -0.766,-0.265 -1.141,-0.406 v -4.792 h -8 v 4.792 c -0.383,0.141 -0.781,0.234 -1.145,0.406 l -3.34,-3.344 -5.66,5.661 3.34,3.339 c -0.175,0.375 -0.324,0.755 -0.461,1.146 h -4.734 v 8 h 4.734 c 0.137,0.391 0.285,0.771 0.461,1.146 l -3.34,3.339 5.66,5.661 3.34,-3.344 c 0.363,0.172 0.762,0.266 1.145,0.406 v 4.792 h 8 v -4.792 c 0.375,-0.141 0.777,-0.234 1.141,-0.406 l 3.344,3.344 5.656,-5.661 -3.344,-3.339 c 0.18,-0.375 0.328,-0.755 0.469,-1.146 h 4.734 z m -16,0.083 c -2.211,0 -4,-1.791 -4,-4 0,-2.208 1.789,-4 4,-4 2.207,0 4,1.792 4,4 0,2.209 -1.793,4 -4,4 z"
-       style="fill:#231f20;display:inline"
-       inkscape:connector-curvature="0" />
   </g>
   <g
      style="display:none"
@@ -2115,51 +2110,6 @@
          x="207.26842"
          sodipodi:role="line">tasks</tspan></text>
     <text
-       transform="translate(0,435.82679)"
-       sodipodi:linespacing="125%"
-       id="text11713"
-       y="-168.92439"
-       x="149.85907"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       xml:space="preserve"><tspan
-         style="font-style:italic"
-         sodipodi:role="line"
-         id="tspan11715"
-         x="149.85907"
-         y="-168.92439">click to continue</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="134.0341"
-       y="409.18921"
-       id="text11717"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="134.0341"
-         y="409.18921"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         id="tspan11719">Sorry, we are</tspan><tspan
-         id="tspan11791"
-         sodipodi:role="line"
-         x="134.0341"
-         y="424.18921"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">still designing </tspan><tspan
-         id="tspan11793"
-         sodipodi:role="line"
-         x="134.0341"
-         y="439.18921"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">this tutorial.</tspan><tspan
-         sodipodi:role="line"
-         x="134.0341"
-         y="454.18921"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         id="tspan11725">Meanwhile...</tspan><tspan
-         sodipodi:role="line"
-         x="134.0341"
-         y="469.18921"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         id="tspan11727" /></text>
-    <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        x="181.83585"
@@ -2220,6 +2170,55 @@
          y="184.92917"
          x="207.5244"
          sodipodi:role="line">explained</tspan></text>
+    <g
+       id="g20363"
+       transform="translate(119,14)">
+      <g
+         id="g20352">
+        <text
+           sodipodi:linespacing="125%"
+           id="text11717-5"
+           y="204.56917"
+           x="88.778992"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+           xml:space="preserve"><tspan
+             id="tspan11719-7"
+             style="font-size:12px;font-weight:normal;fill:#aa4400"
+             y="204.56917"
+             x="88.778992"
+             sodipodi:role="line">Sorry, we are</tspan><tspan
+             style="font-size:12px;font-weight:normal;fill:#aa4400"
+             y="219.56917"
+             x="88.778992"
+             sodipodi:role="line"
+             id="tspan11791-7">still designing </tspan><tspan
+             id="tspan11725-4"
+             style="font-size:12px;font-weight:normal;fill:#aa4400"
+             y="234.56917"
+             x="88.778992"
+             sodipodi:role="line">this tutorial.</tspan><tspan
+             id="tspan11727-0"
+             style="font-size:12px;font-weight:normal;fill:#aa4400"
+             y="249.56917"
+             x="88.778992"
+             sodipodi:role="line" /></text>
+        <g
+           id="g16880"
+           transform="matrix(0.75024247,0,0,0.75024247,57.124219,194.2229)"
+           style="display:inline">
+          <g
+             id="Layer_1-8" />
+          <g
+             id="cog_x5F_alt_x5F_32x32">
+            <path
+               id="path16872"
+               d="m 32,17.969 v -4 L 27.219,11.977 C 27.086,11.602 26.946,11.24 26.774,10.883 L 28.704,6.078 25.875,3.25 21.112,5.211 C 20.75,5.036 20.378,4.888 19.995,4.75 L 17.969,0 h -4 L 11.992,4.734 C 11.594,4.875 11.211,5.023 10.831,5.203 L 6.078,3.294 3.25,6.122 5.188,10.833 C 5,11.219 4.847,11.614 4.703,12.021 L 0,14.031 v 4 l 4.706,1.961 c 0.146,0.406 0.302,0.802 0.489,1.188 l -1.903,4.742 2.828,2.828 4.724,-1.945 c 0.378,0.18 0.766,0.325 1.164,0.461 L 14.031,32 h 4 l 1.979,-4.758 c 0.38,-0.141 0.755,-0.289 1.114,-0.461 l 4.797,1.922 2.828,-2.828 -1.969,-4.773 c 0.167,-0.359 0.305,-0.722 0.438,-1.094 L 32,17.969 z M 15.969,22 c -3.312,0 -6,-2.688 -6,-6 0,-3.312 2.688,-6 6,-6 3.312,0 6,2.688 6,6 0,3.312 -2.688,6 -6,6 z"
+               inkscape:connector-curvature="0"
+               style="fill:#231f20" />
+          </g>
+        </g>
+      </g>
+    </g>
   </g>
   <g
      style="display:none"
