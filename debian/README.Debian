@@ -1,0 +1,10 @@
+kune for Debian
+---------------
+
+Add to /etc/security/limits.conf:
+*       soft    nofile          20000
+*       hard    nofile          20000
+to prevent "Too many files open" error.
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 25 Mar 2012 20:35:20 +0200
+

@@ -1,0 +1,58 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+#%:
+#	dh $@
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/rules/patchsys-quilt.mk
+#include /usr/share/cdbs/1/class/maven.mk
+
+DEST := $(CURDIR)/debian/kune
+TARGET := $(CURDIR)/target
+RESOURCES := $(CURDIR)/src/main/resources
+WEBAPP := $(CURDIR)/src/main/webapp
+TARGETC := $(TARGET)/kune-0.1.0-SNAPSHOT
+
+KUNE := $(DEST)/usr/share/kune
+ETCDIR := $(DEST)/etc/kune
+LOGDIR := $(DEST)/var/log/kune
+VARDIR := $(DEST)/var/lib/kune
+
+NO_GWT=true
+
+JAVA_HOME := /usr/lib/jvm/java-6-openjdk
+
+build/kune::
+
+#	mvn assembly:assembly -Dgwt.compiler.skip=$(NO_GWT)
+
+binary/kune::
+
+binary-arch/kune::
+
+binary-indep/kune::
+
+reverse-config/kune::
+
+clean/kune::
+
+	mvn clean:clean
+
+install/kune::
+
+	cp $(CURDIR)/script/server.sh $(KUNE)/bin/
+	cp $(TARGET)/kune-0.1.0-SNAPSHOT-complete.jar $(KUNE)/lib/kune-complete.jar
+	cp $(RESOURCES)/kune.properties $(ETCDIR)
+	cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
+	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
+	cp $(RESOURCES)/jaas.config $(ETCDIR)
+	cp $(RESOURCES)/mail-notif-template.html $(ETCDIR)
+	rsync -aC $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
+	rsync -aC $(TARGETC)/ws/* $(KUNE)/ws
+
+#get-orig-source:
+#        sh -e debian/orig-tar.sh

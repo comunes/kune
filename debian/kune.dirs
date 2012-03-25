@@ -1,0 +1,9 @@
+/etc/kune/
+/usr/share/kune/
+/usr/share/kune/ws/
+/usr/share/kune/bin/
+/usr/share/kune/lib/
+/usr/share/kune/custom/
+/usr/share/kune/webapp/
+/var/lib/kune/uploads/
+/var/lib/kune/lucene/kune_prod/indexes/
