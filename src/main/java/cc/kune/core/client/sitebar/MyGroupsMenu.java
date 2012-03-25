@@ -5,11 +5,12 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuShowAction;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
 import cc.kune.core.client.events.MyGroupsChangedEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.SitebarGroupsLink.SitebarNewGroupAction;
@@ -33,8 +34,7 @@ public class MyGroupsMenu extends MenuDescriptor {
   private final SitebarActions siteOptions;
 
   @Inject
-  public MyGroupsMenu(final I18nTranslationService i18n,
-      final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources res,
+  public MyGroupsMenu(final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources res,
       final Session session, final GotoGroupAction gotoGroupAction,
       final SitebarNewGroupAction newGroupAction, final SitebarActions siteOptions,
       final GlobalShortcutRegister global, final MenuShowAction menuShowAction, final EventBus eventBus) {
@@ -48,8 +48,8 @@ public class MyGroupsMenu extends MenuDescriptor {
     setStyles("k-no-backimage, k-btn-sitebar");
     this.downloadProvider = downloadProvider;
     this.gotoGroupAction = gotoGroupAction;
-    withText(i18n.t("Your groups"));
-    withToolTip(i18n.t("See your groups or create a new one"));
+    withText(I18n.t("Your groups"));
+    withToolTip(I18n.t("See your groups or create a new one"));
     withIcon(res.arrowdownsitebar());
     withShortcut("Alt+G", global);
     eventBus.addHandler(MyGroupsChangedEvent.getType(),
@@ -72,7 +72,7 @@ public class MyGroupsMenu extends MenuDescriptor {
   private void addPartipationToMenu(final GroupDTO group) {
     final MenuItemDescriptor participant = new MenuItemDescriptor(gotoGroupAction);
     participant.setTarget(group);
-    participant.withText(group.getLongName()).withIcon(
+    participant.withText(TextUtils.ellipsis(group.getLongName(), 26)).withIcon(
         new Url(downloadProvider.get().getGroupLogo(group))).setParent(this, true);
   }
 

@@ -22,6 +22,8 @@ package cc.kune.core.server;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.jetty.server.session.HashSessionManager;
+
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.domain.User;
@@ -38,9 +40,14 @@ public class UserSessionManager implements UsersOnline {
   private final Provider<UserSession> userSessionProv;
 
   @Inject
-  public UserSessionManager(final UserManager manager, final Provider<UserSession> userSessionProv) {
+  public UserSessionManager(final UserManager manager, final Provider<UserSession> userSessionProv,
+      final org.eclipse.jetty.server.SessionManager jettySessionManager) {
     this.manager = manager;
     this.userSessionProv = userSessionProv;
+    final HashSessionManager hSessionManager = (HashSessionManager) jettySessionManager;
+    hSessionManager.setMaxInactiveInterval(-1);
+    hSessionManager.setUsingCookies(true);
+    hSessionManager.setSavePeriod(5);
     // For now the implementation of this can be very inaccurate (if we
     // login/logout several times with different clients) and not scalable
     // (stored in a MAP). Possible fix, to use jabber status

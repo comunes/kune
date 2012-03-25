@@ -53,6 +53,7 @@ import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.groups.newgroup.NewGroupPanel;
 import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
 import cc.kune.core.client.groups.newgroup.NewGroupView;
+import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.init.AppStarterDefault;
@@ -141,10 +142,15 @@ public class CoreGinModule extends ExtendedGinModule {
     bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
     bind(RootPresenter.class).asEagerSingleton();
     bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
+
     s(I18nUITranslationService.class);
     bind(HasRTL.class).to(I18nUITranslationService.class);
     bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
+    s(I18n.class);
+    requestStaticInjection(I18n.class);
+
     bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+
     s(AnonUsersManager.class);
 
     // DnD
