@@ -1,8 +1,0 @@
-#List of dependencies for libkune-java, generated for use by debian/control
-#Sun Sep 11 19:31:18 CEST 2011
-maven.CompileDepends=libmaven-compiler-plugin-java (>\= 2.0.2), libmaven-resources-plugin-java (>\= 2.3), libsurefire-java (>\= 2.4.3)
-maven.Depends=
-maven.OptionalDepends=
-maven.TestDepends=
-maven.DocOptionalDepends=
-maven.DocDepends=default-jdk-doc

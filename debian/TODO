@@ -1,5 +1,0 @@
-- create user kune
-- create /var/lib/kune/uploads and give permissions
-- create /var/lib/kune/lucene 
-- deps: libjmagick6-jni, csstidy
-
