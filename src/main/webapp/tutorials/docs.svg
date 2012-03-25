@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.3383772"
-     inkscape:cx="778.14479"
-     inkscape:cy="271.13348"
+     inkscape:cx="257.41982"
+     inkscape:cy="1227.5156"
      inkscape:document-units="px"
      inkscape:current-layer="layer6"
      showgrid="false"
@@ -12089,7 +12089,7 @@
          x="153.85231"
          id="tspan7298"
          sodipodi:role="line"
-         style="font-style:italic">click with the mouse in order to continue</tspan></text>
+         style="font-style:italic">Mouse click to continue</tspan></text>
     <text
        transform="translate(0,435.8268)"
        sodipodi:linespacing="125%"
@@ -12296,8 +12296,8 @@
          y="604.3252"
          x="109.65604"
          sodipodi:role="line"><tspan
-   id="tspan5752"
-   style="font-size:12px;font-weight:normal;fill:#aa4400">even</tspan></tspan><tspan
+           id="tspan5752"
+           style="font-size:12px;font-weight:normal;fill:#aa4400">even</tspan></tspan><tspan
          style="font-size:12px;font-weight:bold;fill:#aa4400"
          y="619.3252"
          x="109.65604"
