@@ -61,6 +61,7 @@ public interface KuneProperties {
   String SITE_OPENFIRE_DB_PASSWORD = "kune.openfire.db.password";
   String SITE_OPENFIRE_DB_URL = "kune.openfire.db.url";
   String SITE_OPENFIRE_DB_USER = "kune.openfire.db.user";
+  String SITE_OPENFIRE_IGNORE = "kune.openfire.ignore";
   String SITE_SHORTNAME = "kune.default.site.shortName";
   String SITE_SMTP_DEFAULT_FROM = "kune.site.smtp.defaultfrom";
   String SITE_SMTP_HOST = "kune.site.smtp.host";

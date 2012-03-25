@@ -46,6 +46,7 @@ import cc.kune.core.server.manager.impl.GroupServerUtils;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
 import cc.kune.core.server.persist.KuneTransactional;
+import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
 import cc.kune.core.server.rack.filters.ForwardFilter;
@@ -177,16 +178,18 @@ public class KuneRackModule implements RackModule {
       protected void configureServlets() {
         final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule();
         install(kuneDataSource);
-        install(new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()));
+        final KuneProperties kuneProperties = kuneDataSource.getKuneProperties();
+        install(new DataSourceOpenfirePersistModule(kuneProperties));
         bindInterceptor(annotatedWith(KuneTransactional.class), any(),
             kuneDataSource.getTransactionInterceptor());
         bindInterceptor(any(), annotatedWith(KuneTransactional.class),
             kuneDataSource.getTransactionInterceptor());
-
-        // more bindings
-
         filter("/*").through(DataSourceKunePersistModule.MY_DATA_SOURCE_ONE_FILTER_KEY);
-        filter("/*").through(DataSourceOpenfirePersistModule.MY_DATA_SOURCE_TWO_FILTER_KEY);
+
+        if (!kuneProperties.getBoolean(KuneProperties.SITE_OPENFIRE_IGNORE)) {
+          filter("/*").through(DataSourceOpenfirePersistModule.MY_DATA_SOURCE_TWO_FILTER_KEY);
+        }
+
         super.configureServlets();
       }
     });

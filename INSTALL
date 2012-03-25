@@ -205,6 +205,8 @@ Also you can make diferent tutorials (see src/main/webapp/tutorials)
 
 ==Appendix A: Configuration of Openfire xmpp server==
 
+If you want to INSTALL kune without openfire dependency (useful for development or testing), you can skip this part (configure kune.openfire.ignore in kune.properties accordingly).
+
 Install openfire in your system: http://www.igniterealtime.org/downloads/index.jsp
 
 In debian and derivatives, to install the .deb its highly recomended.
