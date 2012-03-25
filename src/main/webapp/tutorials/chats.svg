@@ -27,15 +27,15 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.5916065"
      inkscape:cx="243.10117"
-     inkscape:cy="1308.5714"
+     inkscape:cy="328.42964"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g19891"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
-     inkscape:window-width="1080"
-     inkscape:window-height="1868"
-     inkscape:window-x="0"
+     inkscape:window-width="1306"
+     inkscape:window-height="744"
+     inkscape:window-x="60"
      inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <!-- Start kune i18n part -->
@@ -403,11 +403,11 @@
          sodipodi:cy="3.6610169"
          sodipodi:rx="5.1525426"
          sodipodi:ry="5.1525426"
-         d="m -13.152542,3.6610169 a 5.1525426,5.1525426 0 1 1 -10.305085,0 5.1525426,5.1525426 0 1 1 10.305085,0 z"
+         d="m -13.152542,3.6610169 c 0,2.8456707 -2.306872,5.1525426 -5.152542,5.1525426 -2.845671,0 -5.152543,-2.3068719 -5.152543,-5.1525426 0,-2.84567065 2.306872,-5.1525426 5.152543,-5.1525426 2.84567,0 5.152542,2.30687195 5.152542,5.1525426 z"
          transform="matrix(1.7017328,0,0,1.7017328,109.33073,517.00513)" />
       <path
          transform="matrix(1.7017328,0,0,1.7017328,109.33073,548.30382)"
-         d="m -13.152542,3.6610169 a 5.1525426,5.1525426 0 1 1 -10.305085,0 5.1525426,5.1525426 0 1 1 10.305085,0 z"
+         d="m -13.152542,3.6610169 c 0,2.8456707 -2.306872,5.1525426 -5.152542,5.1525426 -2.845671,0 -5.152543,-2.3068719 -5.152543,-5.1525426 0,-2.84567065 2.306872,-5.1525426 5.152543,-5.1525426 2.84567,0 5.152542,2.30687195 5.152542,5.1525426 z"
          sodipodi:ry="5.1525426"
          sodipodi:rx="5.1525426"
          sodipodi:cy="3.6610169"
@@ -423,7 +423,7 @@
          sodipodi:cy="3.6610169"
          sodipodi:rx="5.1525426"
          sodipodi:ry="5.1525426"
-         d="m -13.152542,3.6610169 a 5.1525426,5.1525426 0 1 1 -10.305085,0 5.1525426,5.1525426 0 1 1 10.305085,0 z"
+         d="m -13.152542,3.6610169 c 0,2.8456707 -2.306872,5.1525426 -5.152542,5.1525426 -2.845671,0 -5.152543,-2.3068719 -5.152543,-5.1525426 0,-2.84567065 2.306872,-5.1525426 5.152543,-5.1525426 2.84567,0 5.152542,2.30687195 5.152542,5.1525426 z"
          transform="matrix(1.7017328,0,0,1.7017328,140.62945,532.72866)" />
       <path
          style="fill:none;stroke:#231f20;stroke-width:6.95526648;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -544,7 +544,7 @@
          sodipodi:role="line"
          id="tspan14251">nuevas<tspan
    id="tspan13694"
-   style="font-weight:bold"> salas de chat</tspan></tspan></text>
+   style="font-weight:bold"> salas de chat</tspan>...</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text13611"
@@ -580,7 +580,7 @@
          x="155.08841"
          sodipodi:role="line"><tspan
    id="tspan24195"
-   style="font-weight:bold">sistemas compatibles</tspan> (como gmail)</tspan></text>
+   style="font-weight:bold">sistemas compatibles</tspan> (como Gmail)</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -618,7 +618,7 @@
          sodipodi:role="line"
          x="119.05811"
          y="650.00122"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">navegador</tspan></text>
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">navegador, y el chat se mantendrá intacto</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text15572"
@@ -630,29 +630,34 @@
          y="939.13818"
          x="127.9239"
          sodipodi:role="line"
-         id="tspan15578">Más ventajas: este es un sistema <tspan
+         id="tspan13522">Más ventajas: éste es un sistema <tspan
    id="tspan24241"
-   style="font-weight:bold">descentralizado</tspan>, </tspan><tspan
-         id="tspan21342"
+   style="font-weight:bold">descentralizado </tspan>que</tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="954.13818"
          x="127.9239"
-         sodipodi:role="line">es decir, que pones los datos de tus contactos </tspan><tspan
+         sodipodi:role="line"
+         id="tspan13695">mantiene tu privacidad. Es decir, que al usarlo y tener </tspan><tspan
          id="tspan21344"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="969.13818"
          x="127.9239"
-         sodipodi:role="line">en un sitio que te de confianza (como quizás este) </tspan><tspan
+         sodipodi:role="line">aquí tu lista de contactos, ésta estará en un sistema </tspan><tspan
          id="tspan15585"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="984.13818"
          x="127.9239"
-         sodipodi:role="line">mientras que a la vez te comunicas con usuarios/as </tspan><tspan
-         id="tspan21348"
+         sodipodi:role="line">que te dé confianza (como quizás éste), mientras que </tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="999.13818"
          x="127.9239"
-         sodipodi:role="line">de otros sitios similares</tspan></text>
+         sodipodi:role="line"
+         id="tspan13553">a su vez te puedes comunicar con usuarios/as que </tspan><tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         y="1014.1382"
+         x="127.9239"
+         sodipodi:role="line"
+         id="tspan13557">hayan elegido otros sistemas fuera de este sitio</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -664,7 +669,7 @@
          sodipodi:role="line"
          x="116.10284"
          y="784.43695"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">Puede tener asambleas virtuales o reuniones, </tspan><tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">Puede tener reuniones virtuales o asambleas, </tspan><tspan
          id="tspan15597"
          sodipodi:role="line"
          x="116.10284"
@@ -681,7 +686,7 @@
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">las notas sobre el encuentro</tspan></text>
   </g>
   <g
-     style="display:none"
+     style="display:inline"
      inkscape:label="en-working"
      id="g19891"
      inkscape:groupmode="layer">
@@ -714,7 +719,7 @@
            x="101.42439"
            y="95.114334"
            style="font-size:16px;font-style:normal;font-weight:normal;fill:#aa4400"
-           id="tspan19901">explicando los</tspan></text>
+           id="tspan19901">explaining the</tspan></text>
     </g>
     <text
        xml:space="preserve"
@@ -728,7 +733,7 @@
          x="149.85907"
          id="tspan19905"
          sodipodi:role="line"
-         style="font-style:italic">pulsa con tu ratón para continuar</tspan></text>
+         style="font-style:italic">Mouse click to continue</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text19907"
@@ -745,24 +750,24 @@
          y="1191.7134"
          x="149.82024"
          sodipodi:role="line"
-         id="tspan19911">...darnos tu <tspan
-   id="tspan19913"
-   style="font-weight:bold">feedback </tspan></tspan><tspan
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         id="tspan19911">...and give us your</tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
          y="1206.7134"
          x="149.82024"
          sodipodi:role="line"
-         id="tspan19915">y participar para </tspan><tspan
-         id="tspan19917"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         id="tspan13788"><tspan
+   id="tspan19913"
+   style="font-weight:bold">feedback</tspan>, and even</tspan><tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400"
          y="1221.7134"
          x="149.82024"
-         sodipodi:role="line">mejorar esta </tspan><tspan
+         sodipodi:role="line"
+         id="tspan13793">join to improve </tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="1236.7134"
          x="149.82024"
          sodipodi:role="line"
-         id="tspan19919">herramienta...</tspan></text>
+         id="tspan19919">this tool</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -774,14 +779,14 @@
          sodipodi:role="line"
          x="122.1581"
          y="1092.6705"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">...aquí puedes crear </tspan><tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">From here you can </tspan><tspan
          id="tspan19925"
          sodipodi:role="line"
          x="122.1581"
          y="1107.6705"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">nuevas<tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">create new <tspan
    style="font-weight:bold"
-   id="tspan19927"> salas de chat</tspan></tspan></text>
+   id="tspan13786">chat-rooms</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -793,31 +798,33 @@
          x="155.08841"
          y="419.41821"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan19931">Mientras modificas contenidos, </tspan><tspan
+         id="tspan19931">While you modify the contents, you can</tspan><tspan
          sodipodi:role="line"
          x="155.08841"
          y="434.41821"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan19933">puedes chatear con colegas o</tspan><tspan
+         id="tspan13563">chat with your colleagues or have a </tspan><tspan
          sodipodi:role="line"
          x="155.08841"
          y="449.41821"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan19935">tener <tspan
+         id="tspan13565"><tspan
    style="font-weight:bold"
-   id="tspan19937">charlas en grupo</tspan> con usuarios/as </tspan><tspan
+   id="tspan13569">group chat</tspan> with other users from this site, </tspan><tspan
          sodipodi:role="line"
          x="155.08841"
          y="464.41821"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan19939">de este sitio, pero también de otros</tspan><tspan
+         id="tspan13571">and also with users from <tspan
+   style="font-weight:bold"
+   id="tspan13604">compatible </tspan></tspan><tspan
          sodipodi:role="line"
          x="155.08841"
          y="479.41821"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          id="tspan19941"><tspan
    style="font-weight:bold"
-   id="tspan19943">sistemas compatibles</tspan> (como gmail)</tspan></text>
+   id="tspan13606">systems</tspan> (such as Gmail)</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text19945"
@@ -829,33 +836,33 @@
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="590.00122"
          x="119.05811"
-         sodipodi:role="line">Y lo puedes hacer incluso, <tspan
+         sodipodi:role="line">You can do it even <tspan
    style="font-weight:bold"
-   id="tspan19949">mientras navegas </tspan></tspan><tspan
+   id="tspan13613">while you surf</tspan> through </tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="605.00122"
          x="119.05811"
          sodipodi:role="line"
-         id="tspan19951">por este sitio (prueba a navegar entre páginas </tspan><tspan
+         id="tspan13611">this website (try to surf in these pages while </tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="620.00122"
          x="119.05811"
          sodipodi:role="line"
-         id="tspan19953">mientras chateas), sin perder las conversaciones. </tspan><tspan
+         id="tspan13615">you chat), without fear of losing conversations.</tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="635.00122"
          x="119.05811"
          sodipodi:role="line"
-         id="tspan19955">Puedes pulsar sin miedo <tspan
+         id="tspan13617">You can click <tspan
    style="font-weight:bold"
-   id="tspan19957">atrás</tspan> y <tspan
+   id="tspan13649">Back</tspan> and <tspan
    style="font-weight:bold"
-   id="tspan19959">delante</tspan> en tu </tspan><tspan
+   id="tspan13647">Forward</tspan> in your browser</tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="650.00122"
          x="119.05811"
          sodipodi:role="line"
-         id="tspan19961">navegador</tspan></text>
+         id="tspan19961">while using your open chat </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -867,29 +874,34 @@
          sodipodi:role="line"
          x="127.9239"
          y="939.13818"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">Más ventajas: este es un sistema <tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">Other benefits: this is a <tspan
    style="font-weight:bold"
-   id="tspan19967">descentralizado</tspan>, </tspan><tspan
+   id="tspan13686">decentralized </tspan>system that</tspan><tspan
          sodipodi:role="line"
          x="127.9239"
          y="954.13818"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan19969">es decir, que pones los datos de tus contactos </tspan><tspan
+         id="tspan13749">protects your privacy. That is, while you use it and</tspan><tspan
          sodipodi:role="line"
          x="127.9239"
          y="969.13818"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan19971">en un sitio que te de confianza (como quizás este) </tspan><tspan
+         id="tspan13751">thus keep here your contact list, such info can be in a</tspan><tspan
          sodipodi:role="line"
          x="127.9239"
          y="984.13818"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan19973">mientras que a la vez te comunicas con usuarios/as </tspan><tspan
+         id="tspan13753">system you trust (as maybe this one), while you can</tspan><tspan
          sodipodi:role="line"
          x="127.9239"
          y="999.13818"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan19975">de otros sitios similares</tspan></text>
+         id="tspan13755">still communicate with other users that chose other</tspan><tspan
+         sodipodi:role="line"
+         x="127.9239"
+         y="1014.1382"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+         id="tspan13747">systems outside of this one.</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text19977"
@@ -901,21 +913,21 @@
          y="784.43695"
          x="116.10284"
          sodipodi:role="line"
-         id="tspan19979">Puede tener asambleas virtuales o reuniones, </tspan><tspan
+         id="tspan19979">You can have virtual meetings or assemblies, </tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="799.43695"
          x="116.10284"
          sodipodi:role="line"
-         id="tspan19981">y por ejemplo, <tspan
+         id="tspan13653">and for instance, <tspan
    style="font-weight:bold"
-   id="tspan19983">editar <tspan
-   id="tspan19985"
-   style="font-weight:normal">entre todos/as</tspan> el acta</tspan> o </tspan><tspan
+   id="tspan13668">edit</tspan> all together the <tspan
+   style="font-weight:bold"
+   id="tspan13670">minutes</tspan></tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="814.43695"
          x="116.10284"
          sodipodi:role="line"
-         id="tspan19987">las notas sobre el encuentro</tspan></text>
+         id="tspan19987">or event notes</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
