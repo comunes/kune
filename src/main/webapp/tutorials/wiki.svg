@@ -17,7 +17,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="wiki2.svg">
+   sodipodi:docname="wiki.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,17 +25,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5869046"
-     inkscape:cx="243.10116"
-     inkscape:cy="1308.5714"
+     inkscape:zoom="1.122111"
+     inkscape:cx="220.00791"
+     inkscape:cy="632.83761"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g26610"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
      inkscape:window-width="1078"
-     inkscape:window-height="1867"
-     inkscape:window-x="0"
+     inkscape:window-height="714"
+     inkscape:window-x="60"
      inkscape:window-y="24"
      inkscape:window-maximized="0" />
   <!-- Start kune i18n part -->
@@ -48,8 +48,8 @@
     ];
   </script>
   <script
-     id="kunelang"
-     xlink:href="lang.js" />
+     xlink:href="lang.js"
+     id="kunelang" />
   <!-- End kune i18n part -->
   <!-- Start kune font part -->
   <xhtml:link
@@ -2042,7 +2042,7 @@
          y="232.54723" /></text>
   </g>
   <g
-     style="display:none"
+     style="display:inline"
      inkscape:label="en-working"
      id="g26610"
      inkscape:groupmode="layer">
@@ -2058,7 +2058,7 @@
          x="149.85907"
          id="tspan21534"
          sodipodi:role="line"
-         style="font-style:italic">pulsa con tu ratón para continuar</tspan></text>
+         style="font-style:italic">Mouse click to continue</tspan></text>
     <g
        transform="translate(104.08186,59.60747)"
        id="g21572"
@@ -2088,7 +2088,7 @@
            x="101.42439"
            y="95.114334"
            style="font-size:16px;font-style:normal;font-weight:normal;fill:#aa4400"
-           id="tspan21580">explicando el</tspan></text>
+           id="tspan21580">explaining the</tspan></text>
     </g>
     <text
        transform="translate(0,435.82679)"
@@ -2103,28 +2103,26 @@
          x="179.91093"
          sodipodi:role="line"
          id="tspan21584" /><tspan
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="449.63907"
          x="179.91093"
          sodipodi:role="line"
-         id="tspan21586">...darnos tu <tspan
-   id="tspan21588"
-   style="font-weight:bold">feedback </tspan></tspan><tspan
+         id="tspan21594">....and give us your</tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="464.63907"
          x="179.91093"
          sodipodi:role="line"
-         id="tspan21590">y participar para </tspan><tspan
-         id="tspan21592"
+         id="tspan16964">feedback, and even</tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="479.63907"
          x="179.91093"
-         sodipodi:role="line">mejorar esta </tspan><tspan
+         sodipodi:role="line"
+         id="tspan16966">join to improve </tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="494.63907"
          x="179.91093"
          sodipodi:role="line"
-         id="tspan21594">herramienta...</tspan></text>
+         id="tspan16968">this tool</tspan></text>
     <text
        transform="translate(0,435.82679)"
        xml:space="preserve"
@@ -2133,20 +2131,18 @@
        y="350.59613"
        id="text21596"
        sodipodi:linespacing="125%"><tspan
-         id="tspan21598"
-         sodipodi:role="line"
-         x="152.24879"
-         y="350.59613"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">...aquí puedes crear </tspan><tspan
          id="tspan21600"
          sodipodi:role="line"
          x="152.24879"
+         y="350.59613"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">From here you can </tspan><tspan
+         sodipodi:role="line"
+         x="152.24879"
          y="365.59613"
-         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400"><tspan
-   id="tspan21602"
-   style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">nuevas </tspan>páginas wiki<tspan
-   id="tspan21604"
-   style="font-weight:normal">...</tspan></tspan></text>
+         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400"
+         id="tspan16070"><tspan
+   style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
+   id="tspan16072">create new </tspan>wiki pages</tspan></text>
     <text
        transform="translate(0,435.82679)"
        xml:space="preserve"
@@ -2162,15 +2158,15 @@
          y="187.54723"
          x="195.88776"
          id="tspan21610"
-         sodipodi:role="line">Esto acelera su actualización</tspan><tspan
+         sodipodi:role="line">This feature speeds up the </tspan><tspan
          y="202.54723"
          x="195.88776"
          sodipodi:role="line"
-         id="tspan21612">y construcción</tspan><tspan
+         id="tspan16059">process of updating and building</tspan><tspan
          y="217.54723"
          x="195.88776"
          id="tspan21614"
-         sodipodi:role="line" /><tspan
+         sodipodi:role="line">them</tspan><tspan
          y="232.54723"
          x="195.88776"
          id="tspan21616"
@@ -2186,22 +2182,15 @@
          sodipodi:role="line"
          x="199.21805"
          y="-9.6079397"
-         id="tspan27457">Las páginas Wiki son <tspan
-   id="tspan27459"
-   style="font-weight:bold">similares a los documentos</tspan></tspan><tspan
+         id="tspan27465">The Wiki pages are similar to the documents.</tspan><tspan
          sodipodi:role="line"
          x="199.21805"
          y="5.3920603"
-         id="tspan27461">pero a diferencia de estos las wikis </tspan><tspan
-         style="font-weight:bold"
-         id="tspan27463"
+         id="tspan16055">However, wikis can be edited by anyone</tspan><tspan
          sodipodi:role="line"
          x="199.21805"
-         y="20.392059">pueden ser editadas por cualquiera</tspan><tspan
-         sodipodi:role="line"
-         x="199.21805"
-         y="35.392059"
-         id="tspan27465">no solo por los miembros del grupo</tspan></text>
+         y="20.392059"
+         id="tspan16057">and not only by the group members</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
