@@ -26,6 +26,12 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cc.kune.core.client.actions.xml.XMLActionsParser;
 import cc.kune.core.client.actions.xml.XMLKuneClientActions;
 
@@ -33,24 +39,46 @@ import com.calclab.emite.xtesting.ServicesTester;
 import com.google.inject.Singleton;
 
 @Singleton
-public class XMLActionReader {
-
+public class XMLActionReader implements ServletContextListener {
+  public static final Log LOG = LogFactory.getLog(XMLActionReader.class);
   private XMLKuneClientActions actions;
 
   public XMLActionReader() throws IOException {
-    final File xmlFile = new File("src/main/webapp/" + XMLActionsParser.ACTIONS_XML_LOCATION);
+  }
 
+  @Override
+  public void contextDestroyed(final ServletContextEvent sce) {
+  }
+
+  @Override
+  public void contextInitialized(final ServletContextEvent sce) {
+    final File xmlFile = new File(sce.getServletContext().getRealPath(
+        XMLActionsParser.ACTIONS_XML_LOCATION_PATH_ABS));
     // Inspired in:
-    // http://stackoverflow.com/questions/326390/how-to-create-a-java-string-from-the-contents-of-a-file
-    final FileInputStream stream = new FileInputStream(xmlFile);
+    //
+    // stackoverflow.com/questions/326390/how-to-create-a-java-string-from-the-contents-of-a-file
+    FileInputStream stream;
     try {
+      stream = new FileInputStream(xmlFile);
       final FileChannel fc = stream.getChannel();
       final MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
       final String xml = Charset.forName("UTF-8").decode(bb).toString();
       actions = new XMLKuneClientActions(new ServicesTester(), xml);
-    } finally {
       stream.close();
+    } catch (final IOException e) {
+      LOG.error("Error reading extension actions", e);
     }
+
+    // Other option:
+
+    // final InputStream iStream =
+    // this.getClass().getClassLoader().getResourceAsStream(
+    // XMLActionsParser.ACTIONS_XML_LOCATION_FILE);
+    // final StringWriter writer = new StringWriter();
+    // IOUtils.copy(iStream, writer, "UTF-8");
+    // final String xml = writer.toString();
+    // actions = new XMLKuneClientActions(new ServicesTester(), xml);
+
   }
 
   public XMLKuneClientActions getActions() {

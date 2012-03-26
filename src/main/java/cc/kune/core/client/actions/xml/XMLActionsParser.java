@@ -49,7 +49,8 @@ import com.google.inject.Provider;
 
 public class XMLActionsParser {
 
-  public static final String ACTIONS_XML_LOCATION = "/others/kune-client-actions.xml";
+  public static final String ACTIONS_XML_LOCATION_FILE = "kune-client-actions.xml";
+  public static final String ACTIONS_XML_LOCATION_PATH_ABS = "/others/" + ACTIONS_XML_LOCATION_FILE;
 
   private static final String SEP = "»";
 
@@ -80,7 +81,8 @@ public class XMLActionsParser {
 
     // Based on:
     // http://www.roseindia.net/tutorials/gwt/retrieving-xml-data.shtml
-    final RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, ACTIONS_XML_LOCATION);
+    final RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET,
+        ACTIONS_XML_LOCATION_PATH_ABS);
     try {
       requestBuilder.sendRequest(null, new RequestCallback() {
         @Override

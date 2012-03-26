@@ -191,6 +191,7 @@ Copy and adapt as much as possible to your needs these files:
 - src/main/resources/wave-server.properties
 - src/main/resources/log4j.properties
 - src/main/webapp/ws.html 
+- src/main/webapp/others/kune-client-actions.xml (extensions definitions)
 - src/main/webapp/ in general
 
 The best way to configure kune is to copy that files (for instance in /etc/kune/), to create a custom directory for ws.html and other of your custom html stuff (for instance in /var/www/kune/), and configure that directory to resources_base in wave-server.properties, for instance:
