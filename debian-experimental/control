@@ -1,0 +1,24 @@
+Source: kune
+Section: java
+Priority: optional
+Build-Depends: debhelper (>= 5), cdbs, sun-java6-jre | openjdk-6-jdk 
+Homepage: http://kune.ourproject.org
+Standards-Version: 3.9.2
+
+Package: kune
+Version: 0.1.0-0.1.0
+Maintainer: Vicente J. Ruiz Jurado <vjrj@ourproject.org>
+Pre-Depends: 
+Depends: libjmagick6-jni, sun-java6-jre | openjdk-6-jdk
+Recommends: openfire (>= 3.7.1)
+Suggests:
+Architecture: all
+Copyright: ../COPYRIGHT
+#Extra-Files: ../BUGS, ../COPYRIGHT, ../CREDITS, ../INSTALL, ../README, ../TROUBLESHOOT, ../TODO
+# Files: <pair of space-separated paths; First is file to include, second is destination>
+#  <more pairs, if there's more than one file to include. Notice the starting space>
+Description: Kune a distributed social network of collaborative tools for groups
+ Kune (which means together in esperanto) is a web tool, for creating environments of constant inter-communication, collective intelligence, knowledge and shared work. It integrates Apache Wave.
+ .
+ Kune’s main objective is to multiply the capacity and skills of people, communities and organizations, allowing their constant cooperation, regardless of physical distance. Therefore, it aims to facilitate virtual meetings, coordinate common agendas, join people with similar interests and develop projects collaboratively. Other features include managing projects and contents, and sharing them freely with anyone, anywhere
+
