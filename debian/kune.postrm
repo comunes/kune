@@ -23,7 +23,8 @@ case "$1" in
     purge)
 	rm -rf /etc/kune
         
-        #TODO (the rest) and deluser/group
+        #TODO (the rest) and deluser/group, database
+
     ;; 
 
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)

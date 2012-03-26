@@ -32,6 +32,7 @@ case "$1" in
     mkdir -p /usr/share/kune/lib
     mkdir -p /usr/share/kune/webapp
     mkdir -p /usr/share/kune/custom
+    mkdir -p /usr/share/kune/templates
     mkdir -p /var/lib/kune/uploads
     mkdir -p /var/lib/kune/lucene/kune_prod/indexes
 
@@ -43,6 +44,7 @@ case "$1" in
     chown kune:kune /usr/share/kune/lib
     chown kune:kune /usr/share/kune/webapp
     chown kune:kune /usr/share/kune/custom
+    chown kune:kune /usr/share/kune/templates
     chown kune:kune /var/lib/kune/uploads
     chown kune:kune /var/lib/kune/lucene/kune_prod/indexes
 
@@ -54,6 +56,7 @@ case "$1" in
     chown 0755 /usr/share/kune/lib
     chown 0755 /usr/share/kune/webapp
     chown 0755 /usr/share/kune/custom
+    chown 0755 /usr/share/kune/templates
     chmod 0755 /var/lib/kune/uploads
     chmod 0755 /var/lib/kune/lucene/kune_prod/indexes
 

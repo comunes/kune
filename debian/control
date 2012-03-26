@@ -10,12 +10,11 @@ Standards-Version: 3.9.2
 
 Package: kune
 Pre-Depends: 
-Depends: libjmagick6-jni, sun-java6-jre | openjdk-6-jdk, mysql-server (>= 5.1) , adduser
-Recommends: openfire (>= 3.7.1)
+Depends: libjmagick6-jni, sun-java6-jre | openjdk-6-jdk, mysql-server (>= 5.1) , adduser, dbconfig-common
+Recommends: openfire (>= 3.7.1), mysql-client
 Suggests:
 Architecture: all
-#Extra-Files: ../BUGS, ../COPYRIGHT, ../CREDITS, ../INSTALL, ../README, ../TROUBLESHOOT, ../TODO
-Description: distributed social network of collaborative tools for groups
+Description: Distributed social net of collaborative web tools
  Kune (which means together in esperanto) is a web tool, for creating 
  environments of constant inter-communication, collective intelligence, 
  knowledge and shared work. It integrates Apache Wave.

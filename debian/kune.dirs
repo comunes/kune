@@ -4,7 +4,9 @@
 /usr/share/kune/lib/
 /usr/share/kune/custom/
 /usr/share/kune/webapp/
+/usr/share/kune/templates/
 /usr/share/kune/webclient/
 /usr/share/kune/webclient/ws/
 /var/lib/kune/uploads/
 /var/lib/kune/lucene/kune_prod/indexes/
+/usr/share/dbconfig-common/data/kune/install/

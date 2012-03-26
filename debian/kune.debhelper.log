@@ -1,6 +1,8 @@
 dh_prep
 dh_installdirs
 dh_installdirs
+dh_installdebconf
+dh_installdeb
 dh_installdocs
 dh_installexamples
 dh_installman
