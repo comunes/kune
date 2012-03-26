@@ -126,6 +126,19 @@ If you want to compile less permutations (only for dev or testing), comment some
 Check, for instance, the first points of:
 http://www.beyondlinux.com/2011/06/25/speed-up-your-eclipse-as-a-super-fast-ide/
 
+** Error: ChatException: remote-server-not-found(404) trying to create a room.
+
+ error: Caused by: org.ourproject.kune.chat.server.managers.ChatException: remote-server-not-found(404) trying to create a room.
+
+Check that the openfire server name is the same in the kune.properties file, and you can resolv the names :
+  $ host yourhostname
+and
+  $ host rooms.yourhostname
+
+** Error: Incorrect string value: '\xEF\xBF\xBD\xEF\xBF\xBD...' for column 'native_name' at row 1
+
+Verify that your system supports UTF8 (in debian systems check /etc/locale.gen and locale-gen)
+
 ** Emite troubleshooting
 
 See:
