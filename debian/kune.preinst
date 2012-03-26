@@ -28,7 +28,7 @@ case "$1" in
 
     mkdir -p /etc/kune
     mkdir -p /usr/share/kune/bin
-    mkdir -p /usr/share/kune/ws
+    mkdir -p /usr/share/kune/webclient/ws
     mkdir -p /usr/share/kune/lib
     mkdir -p /usr/share/kune/webapp
     mkdir -p /usr/share/kune/custom
@@ -38,7 +38,8 @@ case "$1" in
     chown kune:kune /etc/kune
     chown kune:kune /usr/share/kune
     chown kune:kune /usr/share/kune/bin
-    chown kune:kune /usr/share/kune/ws
+    chown kune:kune /usr/share/kune/webclient
+    chown kune:kune /usr/share/kune/webclient/ws
     chown kune:kune /usr/share/kune/lib
     chown kune:kune /usr/share/kune/webapp
     chown kune:kune /usr/share/kune/custom
@@ -47,7 +48,8 @@ case "$1" in
 
     chmod 0755 /etc/kune
     chown 0755 /usr/share/kune
-    chown 0755 /usr/share/kune/ws
+    chown 0755 /usr/share/kune/webclient
+    chown 0755 /usr/share/kune/webclient/ws
     chown 0755 /usr/share/kune/bin
     chown 0755 /usr/share/kune/lib
     chown 0755 /usr/share/kune/webapp

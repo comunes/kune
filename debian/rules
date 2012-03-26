@@ -44,15 +44,20 @@ clean/kune::
 
 install/kune::
 
+# FIXME make this via http://www.debian.org/doc/manuals/maint-guide/dother.en.html#conffiles
+# FIXME user owner and perms of this
 	cp $(CURDIR)/script/server.sh $(KUNE)/bin/
 	cp $(TARGET)/kune-0.1.0-SNAPSHOT-complete.jar $(KUNE)/lib/kune-complete.jar
-	cp $(RESOURCES)/kune.properties $(ETCDIR)
+	cp $(RESOURCES)/kune-production.properties $(ETCDIR)
 	cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
 	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
 	cp $(RESOURCES)/jaas.config $(ETCDIR)
 	cp $(RESOURCES)/mail-notif-template.html $(ETCDIR)
+
+# FIXME find another better way to do this (and remove rsync build dep)
+# FIXME user owner and perms of this
 	rsync -aC $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
-	rsync -aC $(TARGETC)/ws/* $(KUNE)/ws
+	rsync -aC $(TARGETC)/ws/* $(KUNE)/webclient/ws
 
 #get-orig-source:
 #        sh -e debian/orig-tar.sh
