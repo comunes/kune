@@ -85,8 +85,8 @@ NOTE: If you change the previous db passwords after this compiling, you have to 
 
 ===Configure directories===
 
- sudo mkdir -p /var/www/kune/
- sudo chown yourUser:yourUser /var/www/kune/
+ sudo mkdir -p /usr/share/kune/
+ sudo chown yourUser:yourUser /usr/share/kune/
 
  sudo mkdir -p /var/lib/kune/uploads/
  sudo chown yourUser:yourUser /var/lib/kune/uploads
@@ -144,7 +144,7 @@ Not verified: in Windows you need to do something similar (copy the jmagick .dll
 
 ===Initialize the kune database===
 
-mysql -p -u kune < script/kune_initialize.sql 
+mysql -p -u kune < src/main/resources/db/kune_initialize.sql 
 
 (Windows users can use Mysql Browser to execute this SQL: File > Open Script > Select "script\kune_initialize.sql" > Execute).
 
@@ -183,6 +183,10 @@ bin/server.sh -j kune.jar
 
 TODO: configure/select db via properties
 
+==Debian package generation==
+In trunk run:
+debuild -us -uc -b
+
 ===Customization: Adapting Kune to your site===
 
 Copy and adapt as much as possible to your needs these files:
@@ -194,9 +198,9 @@ Copy and adapt as much as possible to your needs these files:
 - src/main/webapp/others/kune-client-actions.xml (extensions definitions)
 - src/main/webapp/ in general
 
-The best way to configure kune is to copy that files (for instance in /etc/kune/), to create a custom directory for ws.html and other of your custom html stuff (for instance in /var/www/kune/), and configure that directory to resources_base in wave-server.properties, for instance:
+The best way to configure kune is to copy that files (for instance in /etc/kune/), to create a custom directory for ws.html and other of your custom html stuff (for instance in /usr/share/kune/), and configure that directory to resources_base in wave-server.properties, for instance:
 
-resource_bases = /var/www/kune/,target/kune-0.1.0-SNAPSHOT/
+resource_bases = /usr/share/kune,target/kune-0.1.0-SNAPSHOT/
 
 The ws.html file is the home that you get at start-up and have some configurations also. You can change the html inside to your needs but follow the commentaries and try not to remove important parts that make kune to start. Also to change the main logo, favicon, etc.
 

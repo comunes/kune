@@ -21,14 +21,31 @@ set -e
 
 case "$1" in
     configure)
+	# http://people.debian.org/~seanius/policy/dbconfig-common-using.html/ch-develguide.html
 	alias ucf="ucf --debconf-ok"
 	dbc_generate_include=template:/etc/kune/kune.properties
 	dbc_generate_include_args="-o template_infile=/usr/share/kune/templates/kune-production.properties -U"
-	dbc_dbname="kune_prod"
-	dbc_dbuser="kune"
+	dbc_generate_include_owner="kune:kune"
+	dbc_generate_include_perms="640"
+	dbc_mysql_createdb_encoding="UTF8"
 	#dbc_sql_substitutions=yes
 	. /usr/share/dbconfig-common/dpkg/postinst.mysql
+	
 	dbc_go kune $@
+
+	chown -R kune:kune /etc/kune
+	chown -R kune:kune /usr/share/kune
+	chown -R kune:kune /var/log/kune/
+	chown -R kune:kune /var/lib/kune/uploads
+	chown -R kune:kune /var/lib/kune/lucene/
+
+	chmod -R 0755 /etc/kune
+	chmod -R 0755 /usr/share/kune
+	chmod -R 0755 /var/log/kune/
+	chmod -R 0755 /var/lib/kune/uploads
+	chmod -R 0755 /var/lib/kune/lucene/
+
+    # TODO do the same (remove the user/dirs) in rm.ex
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

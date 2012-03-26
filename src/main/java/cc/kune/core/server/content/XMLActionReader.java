@@ -19,69 +19,46 @@
  */
 package cc.kune.core.server.content;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.List;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.waveprotocol.box.server.CoreSettings;
 
-import cc.kune.core.client.actions.xml.XMLActionsParser;
 import cc.kune.core.client.actions.xml.XMLKuneClientActions;
+import cc.kune.core.server.manager.file.FileDownloadManagerUtils;
+import cc.kune.core.shared.actions.xml.XMLActionsConstants;
 
 import com.calclab.emite.xtesting.ServicesTester;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 @Singleton
-public class XMLActionReader implements ServletContextListener {
+public class XMLActionReader {
   public static final Log LOG = LogFactory.getLog(XMLActionReader.class);
   private XMLKuneClientActions actions;
 
-  public XMLActionReader() throws IOException {
-  }
-
-  @Override
-  public void contextDestroyed(final ServletContextEvent sce) {
-  }
-
-  @Override
-  public void contextInitialized(final ServletContextEvent sce) {
-    final File xmlFile = new File(sce.getServletContext().getRealPath(
-        XMLActionsParser.ACTIONS_XML_LOCATION_PATH_ABS));
-    // Inspired in:
-    //
-    // stackoverflow.com/questions/326390/how-to-create-a-java-string-from-the-contents-of-a-file
-    FileInputStream stream;
+  @Inject
+  public XMLActionReader(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
     try {
-      stream = new FileInputStream(xmlFile);
-      final FileChannel fc = stream.getChannel();
-      final MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-      final String xml = Charset.forName("UTF-8").decode(bb).toString();
+      final InputStream iStream = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
+          XMLActionsConstants.ACTIONS_XML_LOCATION_PATH_ABS);
+      final StringWriter writer = new StringWriter();
+      IOUtils.copy(iStream, writer, "UTF-8");
+      final String xml = writer.toString();
       actions = new XMLKuneClientActions(new ServicesTester(), xml);
-      stream.close();
     } catch (final IOException e) {
       LOG.error("Error reading extension actions", e);
     }
-
-    // Other option:
-
-    // final InputStream iStream =
-    // this.getClass().getClassLoader().getResourceAsStream(
-    // XMLActionsParser.ACTIONS_XML_LOCATION_FILE);
-    // final StringWriter writer = new StringWriter();
-    // IOUtils.copy(iStream, writer, "UTF-8");
-    // final String xml = writer.toString();
-    // actions = new XMLKuneClientActions(new ServicesTester(), xml);
-
   }
 
   public XMLKuneClientActions getActions() {
     return actions;
   }
+
 }

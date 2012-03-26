@@ -35,12 +35,14 @@ KUNE_CONFIG=$KUNE_HOME/kune.properties
 WAVE_CONFIG=$KUNE_HOME/wave-server.properties
 # See src/main/resources/jaas.config in svn
 JAAS_CONFIG=$KUNE_HOME/jaas.config
+# See src/main/resources/log4j.properties in svn
+LOGJ4_CONFIG=$KUNE_HOME/log4j.properties
 
 SUSPEND="n"
 DEBUG=""
 DEBUG_PORT=""
 LOG_LEVEL="INFO"
-LOGFILE=/var/log/kune.log
+LOGFILE=/var/log/kune/kune.log
 PIDFILE=/var/run/kune.pid
 MX=""
 MS=""
@@ -132,6 +134,7 @@ else
 	nohup java $DEBUG_FLAGS \
 	    -Dorg.eclipse.jetty.util.log.$LOG_LEVEL=true \
 	    -Djava.security.auth.login.config=$JAAS_CONFIG \
+	    -Dlog4j.configuration=$LOGJ4_CONFIG \
 	    -Dkune.server.config=$KUNE_CONFIG \
 	    -Dwave.server.config=$WAVE_CONFIG \
             $MS \
@@ -142,6 +145,7 @@ else
 	exec java $DEBUG_FLAGS \
 	    -Dorg.eclipse.jetty.util.log.$LOG_LEVEL=true \
 	    -Djava.security.auth.login.config=$JAAS_CONFIG \
+	    -Dlog4j.configuration=$LOGJ4_CONFIG \
 	    -Dkune.server.config=$KUNE_CONFIG \
 	    -Dwave.server.config=$WAVE_CONFIG \
             $MS \

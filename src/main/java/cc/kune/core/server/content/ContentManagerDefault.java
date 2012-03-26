@@ -41,7 +41,6 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.actions.xml.XMLKuneClientActions;
 import cc.kune.core.client.actions.xml.XMLWaveExtension;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.I18nNotFoundException;
@@ -83,8 +82,6 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ContentManagerDefault extends DefaultManager<Content, Long> implements ContentManager {
-
-  private final XMLKuneClientActions actions;
   private final ContainerFinder containerFinder;
   private final ContentFinder contentFinder;
   private final FinderService finder;
@@ -96,6 +93,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   private final TagUserContentManager tagManager;
   private final ServerToolRegistry tools;
   private final UserFinder userFinder;
+  private final XMLActionReader xmlActionReader;
 
   @Inject
   public ContentManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -114,8 +112,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     this.kuneWaveManager = kuneWaveManager;
     this.participantUtils = participantUtils;
     this.tools = tools;
+    this.xmlActionReader = xmlActionReader;
     this.i18n = i18n;
-    this.actions = xmlActionReader.getActions();
   }
 
   @Override
@@ -262,7 +260,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   private URL getGadgetUrl(final String gadgetname) {
     URL gadgetUrl = null;
-    final XMLWaveExtension extension = actions.getExtensions().get(gadgetname);
+    final XMLWaveExtension extension = xmlActionReader.getActions().getExtensions().get(gadgetname);
     assert extension != null;
     final String urlS = extension.getGadgetUrl();
     try {

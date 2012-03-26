@@ -20,6 +20,8 @@
 package cc.kune.core.server.manager.file;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
@@ -27,24 +29,41 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.waveprotocol.box.server.CoreSettings;
+
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class EntityLogoDownloadManager extends HttpServlet {
 
+  public static final Log LOG = LogFactory.getLog(EntityLogoDownloadManager.class);
+
   private static final long serialVersionUID = -1958945058088446881L;
-  @Inject
+  private final InputStream groupLogo;
   GroupManager groupManager;
+  private final InputStream personLogo;
+
+  @Inject
+  public EntityLogoDownloadManager(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases,
+      final GroupManager groupManager) {
+    this.groupManager = groupManager;
+    personLogo = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
+        FileConstants.PERSON_NO_AVATAR_IMAGE);
+    groupLogo = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
+        FileConstants.GROUP_NO_AVATAR_IMAGE);
+  }
 
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
       throws ServletException, IOException {
 
-    // final String userHash = req.getParameter(FileParams.HASH);
     final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
 
     Group group = Group.NO_GROUP;
@@ -55,9 +74,8 @@ public class EntityLogoDownloadManager extends HttpServlet {
       }
 
       if (!group.hasLogo()) {
-        FileDownloadManagerUtils.returnFile("src/main/webapp/"
-            + (group.isPersonal() ? FileConstants.PERSON_NO_AVATAR_IMAGE
-                : FileConstants.GROUP_NO_AVATAR_IMAGE), resp.getOutputStream());
+        FileDownloadManagerUtils.returnFile((group.isPersonal() ? personLogo : groupLogo),
+            resp.getOutputStream());
       } else {
         // Has logo
         final byte[] logo = group.getLogo();
@@ -73,4 +91,5 @@ public class EntityLogoDownloadManager extends HttpServlet {
       return;
     }
   }
+
 }

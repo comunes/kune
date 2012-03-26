@@ -39,7 +39,7 @@ public class XMLKuneClientActionsTest {
 
   @Before
   public void before() throws IOException {
-    actions = new XMLActionReader().getActions();
+    actions = new XMLActionReader(java.util.Arrays.asList("src/main/webapp/")).getActions();
     extensions = actions.getExtensions();
     guiActionDescriptors = actions.getGuiActionDescriptors();
   }

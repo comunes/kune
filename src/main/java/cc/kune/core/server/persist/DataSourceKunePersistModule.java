@@ -78,13 +78,15 @@ public class DataSourceKunePersistModule extends PrivateModule {
     if (!jpaUnit.equals("test")) {
       // In tests (and development) we don't override this db info)
       final Properties dbProperties = new Properties();
-      dbProperties.setProperty("hibernate.connection.url",
-          kuneProperties.get(KuneProperties.SITE_DB_URL));
-      dbProperties.setProperty("hibernate.connection.username",
-          kuneProperties.get(KuneProperties.SITE_DB_USER));
-      dbProperties.setProperty("hibernate.connection.password",
-          kuneProperties.get(KuneProperties.SITE_DB_PASSWORD));
+      final String dbUrl = kuneProperties.get(KuneProperties.SITE_DB_URL);
+      final String dbUser = kuneProperties.get(KuneProperties.SITE_DB_USER);
+      final String dbPass = kuneProperties.get(KuneProperties.SITE_DB_PASSWORD);
+      dbProperties.setProperty("hibernate.connection.url", dbUrl);
+      dbProperties.setProperty("hibernate.connection.username", dbUser);
+      dbProperties.setProperty("hibernate.connection.password", dbPass);
       jpm.properties(dbProperties);
+      LOG.info(String.format("Using user '%s' and connection '%s'", dbUser, dbUrl));
+      LOG.debug(String.format("dbpass '%s'", dbPass));
     }
 
     // http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html

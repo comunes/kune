@@ -41,7 +41,6 @@ import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.server.manager.file.FileDownloadManager;
 import cc.kune.core.server.manager.file.FileGwtUploadServlet;
 import cc.kune.core.server.manager.file.FileUploadManager;
-import cc.kune.core.server.manager.file.UserLogoDownloadManager;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
@@ -165,7 +164,7 @@ public class KuneRackModule implements RackModule {
     builder.installServlet("^" + suffix + "/servlets/", FileUploadManager.class,
         FileDownloadManager.class, EntityLogoUploadManager.class, EntityLogoDownloadManager.class,
         FileGwtUploadServlet.class, EntityBackgroundDownloadManager.class,
-        EntityBackgroundUploadManager.class, UserLogoDownloadManager.class, EventsServlet.class);
+        EntityBackgroundUploadManager.class, EventsServlet.class);
 
     builder.at("^" + suffix + "/(.*)$").install(
         new ForwardFilter("^" + suffix + "/(.*)$", suffix + "/{0}"));

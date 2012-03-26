@@ -1,0 +1,4 @@
+# We mention all the license of our dependencies
+kune binary: copyright-refers-to-deprecated-bsd-license-file
+# We want to include INSTALL documentation
+kune binary: package-contains-upstream-install-documentation

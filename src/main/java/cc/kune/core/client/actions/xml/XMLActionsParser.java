@@ -35,6 +35,7 @@ import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.actions.xml.XMLActionsConstants;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 
@@ -48,10 +49,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class XMLActionsParser {
-
-  public static final String ACTIONS_XML_LOCATION_FILE = "kune-client-actions.xml";
-  public static final String ACTIONS_XML_LOCATION_PATH_ABS = "/others/" + ACTIONS_XML_LOCATION_FILE;
-
   private static final String SEP = "»";
 
   private final ActionRegistryByType actionRegistry;
@@ -82,7 +79,7 @@ public class XMLActionsParser {
     // Based on:
     // http://www.roseindia.net/tutorials/gwt/retrieving-xml-data.shtml
     final RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET,
-        ACTIONS_XML_LOCATION_PATH_ABS);
+        XMLActionsConstants.ACTIONS_XML_LOCATION_PATH_ABS);
     try {
       requestBuilder.sendRequest(null, new RequestCallback() {
         @Override

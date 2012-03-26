@@ -47,7 +47,7 @@ public class SharedFileDownloadUtils {
 
   public String getUserAvatar(final String username) {
     return prefix
-        + new Url(FileConstants.AVATARDOWNLOADSERVLET, new UrlParam(FileConstants.USERNAME, username)).toString();
+        + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, username)).toString();
   }
 
   public String getUserAvatar(final UserSimpleDTO user) {

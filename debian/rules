@@ -40,32 +40,28 @@ clean/kune::
 
 install/kune::
 
-#	dh_testdir
-#	dh_clean -k
-#	dh_installdirs
 # FIXME make this via http://www.debian.org/doc/manuals/maint-guide/dother.en.html#conffiles
-# FIXME user owner and perms of this
 	cp $(CURDIR)/script/server.sh $(KUNE)/bin/
 	cp $(TARGET)/kune-0.1.0-SNAPSHOT-complete.jar $(KUNE)/lib/kune-complete.jar
-#FIXME this fails
 	cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
 	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
 	cp $(RESOURCES)/jaas.config $(ETCDIR)
+	cp $(RESOURCES)/log4j.prod.properties $(ETCDIR)/log4j.properties
 	cp $(RESOURCES)/mail-notif-template.html $(ETCDIR)
-	cp $(CURDIR)/script/kune_initialize.sql $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
-#	cp upgrade_0.6.0.sql $(DEST)/usr/share/dbconfig-common/data/confusa/upgrade/mysql/0.6.0.sql
+	cp $(CURDIR)/src/main/resources/db/kune_initialize.sql $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
+#	cp $(CURDIR)/script/upgrade_0.6.0.sql $(DEST)/usr/share/dbconfig-common/data/confusa/upgrade/mysql/0.6.0.sql
 
 # FIXME
 #	cp logrotate $(DEST)/etc/logrotate.d/
 
 # FIXME find another better way to do this (and remove rsync build dep)
-# FIXME user owner and perms of this
 	rsync -aC $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
 	rsync -aC $(TARGETC)/ws/* $(KUNE)/webclient/ws
 
-	dh_installdebconf
-	dh_installdeb
+#	dh_installdebconf
+#	dh_installdeb
 
+# FIXME utf8 in database
 
 #get-orig-source:
 #        sh -e debian/orig-tar.sh

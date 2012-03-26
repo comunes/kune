@@ -168,7 +168,6 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(I18nTranslationServiceMultiLang.class).to(I18nTranslationServiceDefault.class);
     bind(KuneWaveService.class).to(KuneWaveServiceDefault.class);
     bind(MailService.class).to(MailServiceDefault.class);
-    bind(XMLActionReader.class);
     bind(StatsService.class).to(StatsServiceDefault.class);
   }
 
@@ -196,6 +195,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(PendingNotificationSender.class).in(Singleton.class);
     bind(NotificationSender.class).to(NotificationSenderDefault.class).in(Singleton.class);
     bind(CronServerTasksManager.class).in(Singleton.class);
+    bind(XMLActionReader.class).in(Singleton.class);
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
         outermostCall(new AuthenticatedMethodInterceptor()));
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),

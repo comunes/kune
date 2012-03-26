@@ -9,9 +9,9 @@ Standards-Version: 3.9.2
 #Vcs-Browser: http://ourproject.org/scm/?group_id=407
 
 Package: kune
-Pre-Depends: 
+Pre-Depends: ucf
 Depends: libjmagick6-jni, sun-java6-jre | openjdk-6-jdk, mysql-server (>= 5.1) , adduser, dbconfig-common
-Recommends: openfire (>= 3.7.1), mysql-client
+Recommends: openfire (>= 3.7.1), mysql-client, postfix | exim4
 Suggests:
 Architecture: all
 Description: Distributed social net of collaborative web tools

@@ -49,51 +49,50 @@ import cc.kune.core.server.rack.dock.RequestMatcher;
 import com.google.inject.Module;
 
 public class Rack {
-    public static final Log LOG = LogFactory.getLog(Rack.class);
-    private final ArrayList<Dock> docks;
-    private final ArrayList<Module> modules;
-    private final ArrayList<RequestMatcher> excludes;
-    private final ArrayList<Class<? extends ContainerListener>> listeners;
+  public static final Log LOG = LogFactory.getLog(Rack.class);
+  private final ArrayList<Dock> docks;
+  private final ArrayList<RequestMatcher> excludes;
+  private final ArrayList<Class<? extends ContainerListener>> listeners;
+  private final ArrayList<Module> modules;
 
-    public Rack() {
-        this.docks = new ArrayList<Dock>();
-        this.modules = new ArrayList<Module>();
-        this.excludes = new ArrayList<RequestMatcher>();
-        this.listeners = new ArrayList<Class<? extends ContainerListener>>();
-    }
+  public Rack() {
+    this.docks = new ArrayList<Dock>();
+    this.modules = new ArrayList<Module>();
+    this.excludes = new ArrayList<RequestMatcher>();
+    this.listeners = new ArrayList<Class<? extends ContainerListener>>();
+  }
 
-    public void add(final Class<? extends ContainerListener> listenerType) {
-        listeners.add(listenerType);
+  public void add(final Class<? extends ContainerListener> listenerType) {
+    listeners.add(listenerType);
+  }
 
-    }
+  public void add(final Dock dock) {
+    LOG.debug("INSTALLING: " + dock.toString());
+    docks.add(dock);
+  }
 
-    public void add(final Dock dock) {
-        LOG.debug("INSTALLING: " + dock.toString());
-        docks.add(dock);
-    }
+  public void add(final Module module) {
+    modules.add(module);
+  }
 
-    public void add(final Module module) {
-        modules.add(module);
-    }
+  public void addExclusion(final RequestMatcher matcher) {
+    excludes.add(matcher);
+  }
 
-    public void addExclusion(RequestMatcher matcher) {
-        excludes.add(matcher);
-    }
+  public List<Dock> getDocks() {
+    return docks;
+  }
 
-    public List<Dock> getDocks() {
-        return docks;
-    }
+  public List<RequestMatcher> getExcludes() {
+    return excludes;
+  }
 
-    public List<RequestMatcher> getExcludes() {
-        return excludes;
-    }
+  public List<Module> getGuiceModules() {
+    return modules;
+  }
 
-    public List<Module> getGuiceModules() {
-        return modules;
-    }
-
-    public List<Class<? extends ContainerListener>> getListeners() {
-        return listeners;
-    }
+  public List<Class<? extends ContainerListener>> getListeners() {
+    return listeners;
+  }
 
 }

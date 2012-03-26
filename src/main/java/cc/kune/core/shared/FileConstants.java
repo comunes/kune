@@ -22,7 +22,6 @@ package cc.kune.core.shared;
 public final class FileConstants {
 
   public final static String ASITE_PREFIX = "/ws/";
-  public final static String AVATARDOWNLOADSERVLET = ASITE_PREFIX + "servlets/UserLogoDownloadManager";
   public final static String BACKDOWNLOADSERVLET = ASITE_PREFIX
       + "servlets/EntityBackgroundDownloadManager";
   public final static String DOWNLOAD = "download";
@@ -44,7 +43,6 @@ public final class FileConstants {
   public final static String TUTORIALS_PREFIX = "/tutorials/";
   public final static String TYPE_ID = "typeid";
   public final static String USER_LOGO_FIELD = "k-ulogov-ff";
-  public final static String USERNAME = "username";
   public final static String WORLD_AVATAR_IMAGE = ASITE_PREFIX + "images/world-90.gif";
 
   public FileConstants() {

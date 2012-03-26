@@ -1,12 +1,14 @@
 kune for Debian
 ---------------
+If you install openfire, configure /etc/kune/kune.properties accordingly. 
+
+Also you should install a MTA (exim4 or postfix) and configure kune.properties in the same way
 
 Add to /etc/security/limits.conf:
 *       soft    nofile          20000
 *       hard    nofile          20000
 to prevent "Too many files open" error.
 
-If you install openfire, configure /etc/kune/kune.properties accordingly. 
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 25 Mar 2012 20:35:20 +0200
 

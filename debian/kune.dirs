@@ -7,6 +7,7 @@
 /usr/share/kune/templates/
 /usr/share/kune/webclient/
 /usr/share/kune/webclient/ws/
+/var/log/kune
 /var/lib/kune/uploads/
 /var/lib/kune/lucene/kune_prod/indexes/
 /usr/share/dbconfig-common/data/kune/install/

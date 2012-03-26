@@ -27,89 +27,91 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import cc.kune.core.shared.domain.AccessRol;
 
 @Entity
+@Indexed
 @Table(name = "access_lists")
 public class AccessLists {
 
-    @OneToOne(cascade = CascadeType.ALL)
-    protected GroupList admins;
+  @OneToOne(cascade = CascadeType.ALL)
+  protected GroupList admins;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    protected GroupList editors;
+  @OneToOne(cascade = CascadeType.ALL)
+  protected GroupList editors;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    protected GroupList viewers;
+  @Id
+  @GeneratedValue
+  @DocumentId
+  private Long id;
 
-    @Id
-    @GeneratedValue
-    @DocumentId
-    private Long id;
+  @OneToOne(cascade = CascadeType.ALL)
+  protected GroupList viewers;
 
-    public AccessLists() {
-        this.admins = new GroupList();
-        this.editors = new GroupList();
-        this.viewers = new GroupList();
+  public AccessLists() {
+    this.admins = new GroupList();
+    this.editors = new GroupList();
+    this.viewers = new GroupList();
+  }
+
+  public void addAdmin(final Group group) {
+    admins.add(group);
+  }
+
+  public void addEditor(final Group group) {
+    editors.add(group);
+  }
+
+  public void addViewer(final Group group) {
+    viewers.add(group);
+  }
+
+  public GroupList getAdmins() {
+    return admins;
+  }
+
+  public GroupList getEditors() {
+    return editors;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public GroupList getList(final AccessRol rol) {
+    if (rol == AccessRol.Administrator) {
+      return getAdmins();
+    } else if (rol == AccessRol.Editor) {
+      return getEditors();
+    } else {
+      return getViewers();
     }
+  }
 
-    public void addAdmin(final Group group) {
-        admins.add(group);
-    }
+  public GroupList getViewers() {
+    return viewers;
+  }
 
-    public void addEditor(final Group group) {
-        editors.add(group);
-    }
+  public void removeAdmin(final Group group) {
+    admins.remove(group);
+  }
 
-    public void addViewer(final Group group) {
-        viewers.add(group);
-    }
+  public void removeEditor(final Group group) {
+    editors.remove(group);
+  }
 
-    public GroupList getAdmins() {
-        return admins;
-    }
+  public void removeViewer(final Group group) {
+    viewers.remove(group);
+  }
 
-    public GroupList getEditors() {
-        return editors;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public Long getId() {
-        return id;
-    }
-
-    public GroupList getList(final AccessRol rol) {
-        if (rol == AccessRol.Administrator) {
-            return getAdmins();
-        } else if (rol == AccessRol.Editor) {
-            return getEditors();
-        } else {
-            return getViewers();
-        }
-    }
-
-    public GroupList getViewers() {
-        return viewers;
-    }
-
-    public void removeAdmin(final Group group) {
-        admins.remove(group);
-    }
-
-    public void removeEditor(final Group group) {
-        editors.remove(group);
-    }
-
-    public void removeViewer(final Group group) {
-        viewers.remove(group);
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "AccessList[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";
-    }
+  @Override
+  public String toString() {
+    return "AccessList[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";
+  }
 }

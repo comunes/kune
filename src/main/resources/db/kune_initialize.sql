@@ -400,7 +400,6 @@ CREATE TABLE `kusers` (
   `emailVerified` bit(1) DEFAULT NULL,
   `lastLogin` bigint(20) DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_bin NOT NULL,
-  `password` varchar(40) COLLATE utf8_bin NOT NULL,
   `sNetVisibility` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `salt` longblob NOT NULL,
   `shortName` varchar(15) COLLATE utf8_bin DEFAULT NULL,

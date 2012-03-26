@@ -20,35 +20,79 @@
 package cc.kune.core.server.manager.file;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class FileDownloadManagerUtils {
 
-    public static void returnFile(final String filename, final OutputStream out) throws FileNotFoundException,
-            IOException {
-        InputStream in = null;
-        try {
-            in = new BufferedInputStream(new FileInputStream(filename));
-            final byte[] buf = new byte[4 * 1024]; // 4K buffer
-            int bytesRead;
-            while ((bytesRead = in.read(buf)) != -1) {
-                out.write(buf, 0, bytesRead);
-            }
-        } finally {
-            if (in != null) {
-                in.close();
-            }
-        }
-    }
+  public static final Log LOG = LogFactory.getLog(FileDownloadManagerUtils.class);
 
-    public static void returnNotFound404(final HttpServletResponse resp) throws IOException {
-        resp.getWriter().println("Content not found");
-        resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+  public static void returnFile(final InputStream in, final OutputStream out)
+      throws FileNotFoundException, IOException {
+    try {
+      final byte[] buf = new byte[4 * 1024]; // 4K buffer
+      int bytesRead;
+      while ((bytesRead = in.read(buf)) != -1) {
+        out.write(buf, 0, bytesRead);
+      }
+    } finally {
+      if (in != null) {
+        in.close();
+      }
     }
+  }
+
+  public static void returnFile(final String filename, final OutputStream out)
+      throws FileNotFoundException, IOException {
+    InputStream in = null;
+    try {
+      in = new BufferedInputStream(new FileInputStream(filename));
+      final byte[] buf = new byte[4 * 1024]; // 4K buffer
+      int bytesRead;
+      while ((bytesRead = in.read(buf)) != -1) {
+        out.write(buf, 0, bytesRead);
+      }
+    } finally {
+      if (in != null) {
+        in.close();
+      }
+    }
+  }
+
+  public static void returnNotFound404(final HttpServletResponse resp) throws IOException {
+    resp.getWriter().println("Content not found");
+    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+  }
+
+  public static InputStream searchFileInResourcBases(final List<String> resourceBases,
+      final String filename) {
+    InputStream in = null;
+    File icon = null;
+    for (final String path : resourceBases) {
+      final String fileName = path + (path.endsWith(File.separator) ? "" : File.separator) + filename;
+      final File file = new File(fileName);
+      if (file.exists()) {
+        icon = file;
+        break;
+      }
+    }
+    try {
+      if (icon != null) {
+        in = new BufferedInputStream(new FileInputStream(icon));
+      }
+    } catch (final FileNotFoundException e) {
+      LOG.error(String.format("Cannot read filename: %s in %s", filename, resourceBases.toString()));
+    }
+    return in;
+  }
 }
