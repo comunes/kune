@@ -139,7 +139,7 @@ else
 	    -Dwave.server.config=$WAVE_CONFIG \
             $MS \
 	    $MX \
-	    -jar $JAR </dev/null > $LOGFILE 2>&1 &
+	    -jar $JAR </dev/null >> $LOGFILE 2>&1 &
 	echo $! > $PIDFILE
     else
 	exec java $DEBUG_FLAGS \

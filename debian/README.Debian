@@ -1,8 +1,13 @@
 kune for Debian
 ---------------
-If you install openfire, configure /etc/kune/kune.properties accordingly. 
 
-Also you should install a MTA (exim4 or postfix) and configure kune.properties in the same way
+See /etc/kune for the default configuration and tune there your installation.
+
+Also check START variable in /etc/default/kune
+
+If you install openfire (recommended), configure /etc/kune/kune.properties accordingly.
+
+Also you should install a MTA (exim4 or postfix) and configure kune.properties in the same way if you want to send notifications to your users (email confirmations, etc).
 
 Add to /etc/security/limits.conf:
 *       soft    nofile          20000

@@ -46,6 +46,7 @@ is_true() {
 do_start()
 {
         if is_true "$START" ; then       
+        log_daemon_msg "Starting kune"
 	# Return
 	#   0 if daemon has been started
 	#   1 if daemon was already running
@@ -59,7 +60,7 @@ do_start()
 	# to handle requests from services started subsequently which depend
 	# on this one.  As a last resort, sleep for some time.
         else
-           echo "Skiping start (see /etc/default/kune)" >&2
+           log_daemon_msg "Skipping start of kune (see /etc/default/kune)"
         fi
 }
 
@@ -73,6 +74,7 @@ do_stop()
 	#   1 if daemon was already stopped
 	#   2 if daemon could not be stopped
 	#   other if a failure occurred
+        log_daemon_msg "Stopping kune"
 	start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $PIDFILE --name $NAME
 	RETVAL="$?"
 	[ "$RETVAL" = 2 ] && return 2
@@ -98,6 +100,7 @@ do_reload() {
 	# restarting (for example, when it is sent a SIGHUP),
 	# then implement that here.
 	#
+        log_daemon_msg "Reloading kune"
 	start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE --name $NAME
 	return 0
 }

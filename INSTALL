@@ -185,7 +185,9 @@ TODO: configure/select db via properties
 
 ==Debian package generation==
 In trunk run:
-debuild -us -uc -b
+  mvn assembly:assembly
+and generate the debian package with
+  debuild -us -uc -b
 
 ===Customization: Adapting Kune to your site===
 

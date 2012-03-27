@@ -10,7 +10,7 @@ set -e
   	 			         
 if [ -f /usr/share/dbconfig-common/dpkg/config.mysql ]; then
    . /usr/share/dbconfig-common/dpkg/config.mysql 
-   dbc_dbuser=kune
+   dbc_dbuser=kune_prod
    dbc_dbname=kune_prod
    dbc_mysql_createdb_encoding="UTF8"
    dbc_go kune $@

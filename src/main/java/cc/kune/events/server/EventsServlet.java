@@ -68,7 +68,7 @@ public class EventsServlet extends HttpServlet {
 
     try {
       final Container cnt = getContainer(userHash, token);
-      if (cnt.getTypeId().equals(EventsToolConstants.TYPE_ROOT)) {
+      if (cnt != null && cnt.getTypeId().equals(EventsToolConstants.TYPE_ROOT)) {
         final List<Map<String, String>> listOfProps = EventsServerConversionUtil.getAppointments(cnt);
         for (final Map<String, String> props : listOfProps) {
           try {

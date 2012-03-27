@@ -17,14 +17,13 @@
   </dependencySets>
   <fileSets>
     <!-- <fileSet> -->
-      <!-- ${module.groupId}-${module.artifactId}-${module.version}.${module.extension} -->
-      <!-- <directory>target/kune-0.1.0-SNAPSHOT/ws/</directory>
-      <outputDirectory>META-INF/resources/ws</outputDirectory>
-    </fileSet>-->
-    <fileSet>
-      <directory>${project.basedir}/src/main/webapp/</directory>
-      <outputDirectory>META-INF/resources/webapp</outputDirectory>
-      <filtered>true</filtered>
-    </fileSet>
+    <!-- ${module.groupId}-${module.artifactId}-${module.version}.${module.extension} -->
+    <!-- <directory>target/kune-0.1.0-SNAPSHOT/ws/</directory> <outputDirectory>META-INF/resources/ws</outputDirectory> 
+      </fileSet> -->
+    <!-- <fileSet> -->
+    <!-- <directory>${project.basedir}/src/main/webapp/</directory> -->
+    <!-- <outputDirectory>META-INF/resources/webapp</outputDirectory> -->
+    <!-- <filtered>true</filtered> -->
+    <!-- </fileSet> -->
   </fileSets>
 </assembly>

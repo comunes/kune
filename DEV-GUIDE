@@ -351,7 +351,7 @@ http://www.youtube.com/user/GoogleDevelopers/search?query=Wave
 
 See class WaveClientProvider in Kune (in a short term, we should define this in a .gwt.xml not there, but this is a start point).
 
-== kune maven repo ==
+==kune maven repo==
 
 For upload packages you need to configure in .m2/settings.xml something like:
 
