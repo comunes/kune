@@ -19,9 +19,13 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
+import cc.kune.common.client.events.EventBusInstance;
+import cc.kune.common.client.shortcuts.OnEscapePressedEvent;
+import cc.kune.common.client.shortcuts.OnEscapePressedEvent.OnEscapePressedHandler;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.i18n.I18n;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -188,6 +192,15 @@ public class BasicTopDialog extends BasicDialog {
   private void setCloseBtn(final boolean closeBtn) {
     setCloseBtnVisible(closeBtn);
     if (closeBtn) {
+      setCloseBtnTooltip(I18n.t("Close") + " (Esc)");
+      EventBusInstance.get().addHandler(OnEscapePressedEvent.getType(), new OnEscapePressedHandler() {
+        @Override
+        public void onOnEscapePressed(final OnEscapePressedEvent event) {
+          if (popup.isShowing()) {
+            popup.hide();
+          }
+        }
+      });
       if (closeClickHandler == null) {
         closeClickHandler = super.getCloseBtn().addClickHandler(new ClickHandler() {
           @Override

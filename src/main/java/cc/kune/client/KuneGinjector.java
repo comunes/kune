@@ -27,7 +27,7 @@ import cc.kune.chat.client.ChatGinModule;
 import cc.kune.chat.client.ChatGinjector;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
-import cc.kune.common.client.log.EventBusWithLogging;
+import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.CoreGinModule;

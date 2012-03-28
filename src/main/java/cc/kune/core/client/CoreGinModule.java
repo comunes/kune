@@ -22,9 +22,11 @@ package cc.kune.core.client;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
-import cc.kune.common.client.log.EventBusWithLogging;
-import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
+import cc.kune.common.client.events.EventBusInstance;
+import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
+import cc.kune.common.client.shortcuts.GlobalShortcuts;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.HasRTL;
@@ -139,6 +141,8 @@ public class CoreGinModule extends ExtendedGinModule {
   @Override
   protected void configure() {
     bind(EventBus.class).to(EventBusWithLogging.class).in(Singleton.class);
+    requestStaticInjection(EventBusInstance.class);
+
     bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
     bind(RootPresenter.class).asEagerSingleton();
     bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
@@ -149,7 +153,8 @@ public class CoreGinModule extends ExtendedGinModule {
     s(I18n.class);
     requestStaticInjection(I18n.class);
 
-    bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+    bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
+    bind(GlobalShortcuts.class).in(Singleton.class);
 
     s(AnonUsersManager.class);
 

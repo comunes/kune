@@ -64,16 +64,19 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
     armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
     // homeButton.setVisible(false);
     final String siteCommonName = i18n.getSiteCommonName();
-    homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in [%s]", siteCommonName));
+    homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in [%s]", siteCommonName)
+        + " (Alt+H)");
     userSpaceTooltip = Tooltip.to(
         userButton,
         i18n.t("User space: it shows a list of all documents and contents " + "in which you participate")
             + " (Alt+I)");
     groupSpaceTooltip = Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
-        + "and publish contents for your personal or group web spaces"));
+        + "and publish contents for your personal or group web spaces")
+        + " (Alt+G)");
     publicSpaceTooltip = Tooltip.to(publicButton,
         i18n.t("Public space: Where you can see a preview of how your Personal or "
-            + "Group Space looks like on the web"));
+            + "Group Space looks like on the web")
+            + " (Alt+P)");
     // homeSpaceTooltip.setWidth(0);
     userSpaceTooltip.setWidth(190);
     groupSpaceTooltip.setWidth(170);

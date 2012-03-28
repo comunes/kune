@@ -22,11 +22,13 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
@@ -50,18 +52,21 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
   private final CoreResources res;
   private ToolbarSeparatorDescriptor separator;
   private final Session session;
+  private final GlobalShortcutRegister shortCutRegister;
   private final SitebarActions siteOptions;
   private final StateManager stateManager;
 
   @Inject
   public SiteUserOptionsPresenter(final Session session, final StateManager stateManager,
-      final I18nTranslationService i18n, final CoreResources img, final SitebarActions siteOptions) {
+      final I18nTranslationService i18n, final CoreResources img, final SitebarActions siteOptions,
+      final GlobalShortcutRegister shortCutRegister) {
     super();
     this.session = session;
     this.stateManager = stateManager;
     this.i18n = i18n;
     this.res = img;
     this.siteOptions = siteOptions;
+    this.shortCutRegister = shortCutRegister;
     createActions();
     separator.setVisible(false);
     session.onUserSignIn(true, new UserSignInHandler() {
@@ -106,6 +111,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     userHomeAction.putValue(Action.NAME, i18n.t(CoreMessages.YOUR_HOMEPAGE));
     userHomeAction.putValue(Action.SMALL_ICON, res.groupHome());
     final MenuItemDescriptor item = new MenuItemDescriptor(userHomeAction);
+    item.withShortcut(Shortcut.getShortcut("Alt+U"), shortCutRegister);
     item.setPosition(0);
     addActionImpl(item);
   }

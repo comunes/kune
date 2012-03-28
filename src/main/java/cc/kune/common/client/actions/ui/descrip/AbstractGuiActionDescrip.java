@@ -340,12 +340,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
   @Override
   public GuiActionDescrip withShortcut(final String keys, final GlobalShortcutRegister register) {
-    final boolean hasCtrl = keys.contains("Ctrl");
-    final boolean hasAlt = keys.contains("Alt");
-    final boolean hasMeta = keys.contains("Meta");
-    final boolean hasShift = keys.contains("Shift");
-    final Character key = keys.charAt(keys.length() - 1);
-    final KeyStroke shortcut = Shortcut.getShortcut(hasCtrl, hasAlt, hasShift, hasMeta, key);
+    final KeyStroke shortcut = Shortcut.getShortcut(keys);
     putValue(Action.ACCELERATOR_KEY, shortcut);
     register.put(shortcut, action);
     return this;

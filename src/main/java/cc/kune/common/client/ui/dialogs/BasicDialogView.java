@@ -27,23 +27,25 @@ public interface BasicDialogView {
 
   ForIsWidget getBottomPanel();
 
+  HasClickHandlers getCloseBtn();
+
   HasClickHandlers getFirstBtn();
 
   ForIsWidget getInnerPanel();
 
   HasClickHandlers getSecondBtn();
 
-  HasClickHandlers getCloseBtn();
-
   HasDirectionalText getTitleText();
+
+  void setCloseBtnTooltip(String tooltip);
+
+  void setCloseBtnVisible(boolean visible);
 
   void setFirstBtnText(String text);
 
   void setFirstBtnTitle(String title);
 
   void setFirstBtnVisible(boolean visible);
-
-  void setCloseBtnVisible(boolean visible);
 
   void setSecondBtnText(String text);
 

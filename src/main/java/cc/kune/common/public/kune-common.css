@@ -369,6 +369,8 @@
   background: #ffffff;
 }
 
+/* shorcuts, only used in gxt guidescriptors */
+
 #oc-mshortcut {
   position: absolute;
   right: 10px;

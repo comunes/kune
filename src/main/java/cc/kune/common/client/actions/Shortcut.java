@@ -23,22 +23,39 @@ import cc.kune.common.client.shortcuts.Keyboard;
 
 public final class Shortcut {
 
-    public static KeyStroke getShortcut(final boolean ctrl, final boolean alt, final boolean shift, final boolean meta,
-            final Character character) {
-        return KeyStroke.getKeyStroke(character, (ctrl ? Keyboard.MODIFIER_CTRL : 0)
-                + (alt ? Keyboard.MODIFIER_ALT : 0) + (shift ? Keyboard.MODIFIER_SHIFT : 0)
-                + (meta ? Keyboard.MODIFIER_META : 0));
-    }
+  public static KeyStroke getShortcut(final boolean ctrl, final boolean alt, final boolean shift,
+      final boolean meta, final Character character) {
+    return KeyStroke.getKeyStroke(character, (ctrl ? Keyboard.MODIFIER_CTRL : 0)
+        + (alt ? Keyboard.MODIFIER_ALT : 0) + (shift ? Keyboard.MODIFIER_SHIFT : 0)
+        + (meta ? Keyboard.MODIFIER_META : 0));
+  }
 
-    public static KeyStroke getShortcut(final boolean ctrl, final boolean shift, final Character character) {
-        return getShortcut(ctrl, false, shift, false, character);
-    }
+  public static KeyStroke getShortcut(final boolean ctrl, final boolean shift, final Character character) {
+    return getShortcut(ctrl, false, shift, false, character);
+  }
 
-    public static KeyStroke getShortcut(final boolean ctrl, final Character character) {
-        return getShortcut(ctrl, false, false, false, character);
-    }
+  public static KeyStroke getShortcut(final boolean ctrl, final Character character) {
+    return getShortcut(ctrl, false, false, false, character);
+  }
 
-    private Shortcut() {
-    }
+  /**
+   * Gets the shortcut using as parameter something like "Alt+A" "Ctrl+M" or
+   * "Meta+Shift+R"
+   * 
+   * @param keys
+   *          the keys
+   * @return the shortcut
+   */
+  public static KeyStroke getShortcut(final String keys) {
+    final boolean hasCtrl = keys.contains("Ctrl");
+    final boolean hasAlt = keys.contains("Alt");
+    final boolean hasMeta = keys.contains("Meta");
+    final boolean hasShift = keys.contains("Shift");
+    final Character key = keys.charAt(keys.length() - 1);
+    return Shortcut.getShortcut(hasCtrl, hasAlt, hasShift, hasMeta, key);
+  }
+
+  private Shortcut() {
+  }
 
 }

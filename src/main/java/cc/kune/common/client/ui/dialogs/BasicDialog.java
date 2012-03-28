@@ -19,6 +19,7 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.utils.TextUtils;
 
@@ -103,6 +104,11 @@ public class BasicDialog extends Composite implements BasicDialogView {
   @Override
   public HasDirectionalText getTitleText() {
     return title;
+  }
+
+  @Override
+  public void setCloseBtnTooltip(final String tooltip) {
+    Tooltip.to(closeBtn, tooltip);
   }
 
   @Override

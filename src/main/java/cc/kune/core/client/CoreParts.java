@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client;
 
+import cc.kune.common.client.shortcuts.GlobalShortcuts;
 import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.SignIn;
@@ -66,7 +67,8 @@ public class CoreParts {
       final Provider<SubtitlesManager> subProvider, final EventBus eventBus,
       final Provider<VerifyEmailClientManager> verifyManager,
       final Provider<UserOptions> userOptionsDialog, final Provider<GroupOptions> groupOptionsDialog,
-      final Provider<PasswordResetPanel> passReset, final Provider<AskForPasswordResetPanel> askForPass) {
+      final Provider<PasswordResetPanel> passReset, final Provider<AskForPasswordResetPanel> askForPass,
+      final GlobalShortcuts shortcuts) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {

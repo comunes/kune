@@ -38,8 +38,6 @@ import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.MenuItem;
 
@@ -153,14 +151,6 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
     return checkItem;
   }
 
-  private String createShortCut(final KeyStroke key, final String style) {
-    // See: https://yui-ext.com/forum/showthread.php?t=5762
-    final Element keyLabel = DOM.createSpan();
-    keyLabel.setId(style);
-    keyLabel.setInnerText(key.toString());
-    return keyLabel.getString();
-  }
-
   public GwtBaseMenuItem getItem() {
     return item;
   }
@@ -224,9 +214,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
       if (key == null) {
         iconLabel.setText(text, descriptor.getDirection());
       } else {
-        iconLabel.setText(
-            text + createShortCut(key, "oc-mshortcut-hidden") + createShortCut(key, "oc-mshortcut"),
-            descriptor.getDirection());
+        iconLabel.setText(text + " " + key.toString(), descriptor.getDirection());
       }
     }
     layout();

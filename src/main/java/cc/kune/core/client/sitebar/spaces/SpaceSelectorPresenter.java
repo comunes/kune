@@ -21,7 +21,6 @@ package cc.kune.core.client.sitebar.spaces;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
@@ -32,7 +31,6 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
-import cc.kune.core.client.events.WindowFocusEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
@@ -115,6 +113,7 @@ public class SpaceSelectorPresenter extends
   private String inboxToken;
   private String publicToken;
   private final Session session;
+  private final GlobalShortcutRegister shortcutRegister;
   private final Provider<SignIn> signIn;
   private final StateManager stateManager;
 
@@ -131,71 +130,102 @@ public class SpaceSelectorPresenter extends
     this.signIn = signIn;
     this.backManager = backManager;
     this.i18n = i18n;
+    this.shortcutRegister = shortcutRegister;
     currentSpace = null;
     homeToken = SiteTokens.HOME;
     inboxToken = SiteTokens.WAVE_INBOX;
     groupToken = SiteTokens.GROUP_HOME;
     publicToken = TokenUtils.preview(SiteTokens.GROUP_HOME);
-    view.getHomeBtn().addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        restoreToken(homeToken);
-        setDown(Space.homeSpace);
-      }
-    });
-    view.getUserBtn().addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        onUserBtnClick(stateManager, session, signIn);
-      }
-    });
-    view.getGroupBtn().addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        if (groupToken.equals(SiteTokens.GROUP_HOME)) {
-          // as current home is equal to "no content" token, we shall go to
-          // group space def home page
-          stateManager.gotoDefaultHomepage();
-        } else {
-          restoreToken(groupToken);
-        }
-        setDown(Space.groupSpace);
-      }
-    });
-    view.getPublicBtn().addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        restoreToken(publicToken);
-        setDown(Space.publicSpace);
-      }
-
-    });
-    eventBus.addHandler(WindowFocusEvent.getType(), new WindowFocusEvent.WindowFocusHandler() {
-      @Override
-      public void onWindowFocus(final WindowFocusEvent event) {
-        if (event.isHasFocus() && !mask.isShowing()) {
-          // showTooltipWithDelay();
-        }
-      }
-    });
+    configureClickListeners();
+    configureShortcuts();
+    // eventBus.addHandler(WindowFocusEvent.getType(), new
+    // WindowFocusEvent.WindowFocusHandler() {
+    // @Override
+    // public void onWindowFocus(final WindowFocusEvent event) {
+    // if (event.isHasFocus() && !mask.isShowing()) {
+    // // showTooltipWithDelay();
+    // }
+    // }
+    // });
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
         getView().setPublicVisible(event.getInitData().isPublicSpaceVisible());
       }
     });
-    final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('I'));
-    shortcutRegister.put(shortcut, new AbstractExtendedAction() {
+  }
+
+  private void configureClickListeners() {
+    getView().getHomeBtn().addClickHandler(new ClickHandler() {
       @Override
-      public void actionPerformed(final ActionEvent event) {
-        onUserBtnClick(stateManager, session, signIn);
+      public void onClick(final ClickEvent event) {
+        onHomeBtnClick();
+      }
+
+    });
+    getView().getUserBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        onUserBtnClick();
       }
     });
+    getView().getGroupBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        onGroupBtnClick();
+      }
+
+    });
+    getView().getPublicBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        onPublicBtnClick();
+      }
+    });
+  }
+
+  private void configureShortcuts() {
+    shortcutRegister.put(Shortcut.getShortcut("Alt+H"), new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        onHomeBtnClick();
+      }
+    });
+    shortcutRegister.put(Shortcut.getShortcut("Alt+I"), new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        onUserBtnClick();
+      }
+    });
+    shortcutRegister.put(Shortcut.getShortcut("Alt+G"), new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        onGroupBtnClick();
+      }
+    });
+    shortcutRegister.put(Shortcut.getShortcut("Alt+P"), new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        onPublicBtnClick();
+      }
+    });
+
   }
 
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
     showTooltipWithDelay();
+  }
+
+  private void onGroupBtnClick() {
+    if (groupToken.equals(SiteTokens.GROUP_HOME)) {
+      // as current home is equal to "no content" token, we shall go to
+      // group space def home page
+      stateManager.gotoDefaultHomepage();
+    } else {
+      restoreToken(groupToken);
+    }
+    setDown(Space.groupSpace);
   }
 
   private void onGroupSpaceSelect(final boolean shouldRestoreToken) {
@@ -204,6 +234,11 @@ public class SpaceSelectorPresenter extends
     backManager.restoreBackImage();
     setDown(Space.groupSpace);
     currentSpace = Space.groupSpace;
+  }
+
+  private void onHomeBtnClick() {
+    restoreToken(homeToken);
+    setDown(Space.homeSpace);
   }
 
   private void onHomeSpaceSelect(final boolean shouldRestoreToken) {
@@ -215,8 +250,9 @@ public class SpaceSelectorPresenter extends
     getView().setWindowTitle(i18n.t("Home"));
   }
 
-  private void onPublicClick() {
-
+  private void onPublicBtnClick() {
+    restoreToken(publicToken);
+    setDown(Space.publicSpace);
   }
 
   private void onPublicSpaceSelect(final boolean shouldRestoreToken) {
@@ -271,8 +307,7 @@ public class SpaceSelectorPresenter extends
     }
   }
 
-  private void onUserBtnClick(final StateManager stateManager, final Session session,
-      final Provider<SignIn> signIn) {
+  private void onUserBtnClick() {
     signIn.get().setGotoTokenOnCancel(stateManager.getCurrentToken());
     restoreToken(inboxToken);
     if (session.isLogged()) {

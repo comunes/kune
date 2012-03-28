@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
-import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -36,6 +36,6 @@ public class SampleGinModule extends AbstractGinModule {
         bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
         bind(GxtGuiProvider.class).in(Singleton.class);
         bind(GwtGuiProvider.class).in(Singleton.class);
-        bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+        bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
     }
 }

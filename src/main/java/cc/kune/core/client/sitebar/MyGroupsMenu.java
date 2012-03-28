@@ -70,7 +70,7 @@ public class MyGroupsMenu extends MenuDescriptor {
     withText(I18n.t("Your groups"));
     withToolTip(I18n.t("See your groups or create a new one"));
     withIcon(res.arrowdownsitebar());
-    withShortcut("Alt+G", global);
+    withShortcut("Alt+M", global);
     eventBus.addHandler(MyGroupsChangedEvent.getType(),
         new MyGroupsChangedEvent.MyGroupsChangedHandler() {
           @Override

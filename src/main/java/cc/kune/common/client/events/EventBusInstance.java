@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,16 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.log;
 
+package cc.kune.common.client.events;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Inject;
 
-public class EventBusWithLogging extends SimpleEventBus {
-    @Override
-    public void fireEvent(final GwtEvent<?> event) {
-        Log.debug(event.toDebugString() + " " + event.toString());
-        super.fireEvent(event);
-    }
+public class EventBusInstance {
+
+  @Inject
+  private static EventBus eventBus;
+
+  public static EventBus get() {
+    return eventBus;
+  }
 }
