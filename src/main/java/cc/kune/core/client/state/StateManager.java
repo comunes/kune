@@ -73,7 +73,7 @@ public interface StateManager {
 
   void onToolChanged(boolean fireNow, ToolChangedEvent.ToolChangedHandler handler);
 
-  void redirectOrRestorePreviousToken();
+  void redirectOrRestorePreviousToken(boolean fireChange);
 
   void refreshCurrentState();
 
@@ -87,9 +87,17 @@ public interface StateManager {
 
   void removeSiteToken(String token);
 
-  void restorePreviousToken();
+  /**
+   * Restore previous token
+   * 
+   * @param fireChange
+   *          if only change the browser #token or also fire the event
+   */
+  void restorePreviousToken(boolean fireChange);
 
   void resumeTokenChange();
+
+  void setHistoryStateToken(StateToken newToken);
 
   void setRetrievedState(StateAbstractDTO state);
 

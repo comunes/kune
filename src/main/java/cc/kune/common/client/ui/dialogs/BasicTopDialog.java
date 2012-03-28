@@ -19,10 +19,13 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
+import static com.google.gwt.query.client.GQuery.$;
+import static com.google.gwt.query.client.GQuery.Effects;
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.shortcuts.OnEscapePressedEvent;
 import cc.kune.common.client.shortcuts.OnEscapePressedEvent.OnEscapePressedHandler;
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.client.ui.Animations;
 import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.i18n.I18n;
@@ -34,6 +37,7 @@ import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.HasDirection.Direction;
+import com.google.gwt.query.client.Function;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.UIObject;
@@ -182,7 +186,18 @@ public class BasicTopDialog extends BasicDialog {
   }
 
   public void hide() {
-    popup.hide();
+    if (popup.isShowing()) {
+      if (Animations.enabled) {
+        $(popup).as(Effects).slideUp(new Function() {
+          @Override
+          public void f() {
+            popup.hide();
+          }
+        });
+      } else {
+        popup.hide();
+      }
+    }
   }
 
   public void recalculateSize() {
@@ -197,7 +212,7 @@ public class BasicTopDialog extends BasicDialog {
         @Override
         public void onOnEscapePressed(final OnEscapePressedEvent event) {
           if (popup.isShowing()) {
-            popup.hide();
+            hide();
           }
         }
       });
@@ -205,7 +220,7 @@ public class BasicTopDialog extends BasicDialog {
         closeClickHandler = super.getCloseBtn().addClickHandler(new ClickHandler() {
           @Override
           public void onClick(final ClickEvent event) {
-            popup.hide();
+            hide();
           }
         });
       }
@@ -274,10 +289,24 @@ public class BasicTopDialog extends BasicDialog {
 
   public void showCentered() {
     Tooltip.hideCurrent();
+    showEffect();
     popup.showCentered();
   }
 
+  private void showEffect() {
+    if (Animations.enabled) {
+      $(popup).stop(true).show();
+      // $(popup).stop(true).hide().as(Effects).slideDown(new Function() {
+      // @Override
+      // public void f() {
+      // }
+      // });
+    }
+  }
+
   public void showRelativeTo(final UIObject object) {
+    showEffect();
     popup.showRelativeTo(object);
   }
+
 }

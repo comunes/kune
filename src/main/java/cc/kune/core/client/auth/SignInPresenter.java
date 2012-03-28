@@ -248,7 +248,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     registerProvider.get().hide();
     registerProvider.get().setGotoTokenOnCancel(this.getGotoTokenOnCancel());
     if (session.isLogged()) {
-      stateManager.restorePreviousToken();
+      stateManager.restorePreviousToken(false);
     } else {
       eventBus.fireEvent(new ProgressShowEvent());
       getView().show();

@@ -76,8 +76,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   private TextField<String> shortNameField;
   private TextField<String> tag1;
-  private TextField<String> tag2;
-  private TextField<String> tag3;
+
+  // private TextField<String> tag2;
+  // private TextField<String> tag3;
 
   @Inject
   public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img,
@@ -251,7 +252,6 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   @Override
   public void hide() {
     dialog.hide();
-
   }
 
   @Override

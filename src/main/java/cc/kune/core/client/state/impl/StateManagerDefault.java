@@ -404,20 +404,20 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   }
 
   @Override
-  public void redirectOrRestorePreviousToken() {
+  public void redirectOrRestorePreviousToken(final boolean fireChange) {
     final String token = history.getToken();
     if (tokenMatcher.hasRedirect(token)) {
       // URL of the form signin(group.tool)
       final String previousToken = tokenMatcher.getRedirect(token).getRight();
       if (previousToken.equals(SiteTokens.WAVE_INBOX) && session.isNotLogged()) {
         // signin(inbox) && cancel
-        restorePreviousToken();
+        restorePreviousToken(fireChange);
       } else {
         history.newItem(previousToken); // FIXMEKK
       }
     } else {
       // No redirect then restore previous token
-      restorePreviousToken();
+      restorePreviousToken(fireChange);
     }
   }
 
@@ -468,9 +468,13 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   }
 
   @Override
-  public void restorePreviousToken() {
+  public void restorePreviousToken(final boolean fireChange) {
     if (previousGroupToken != null) {
-      gotoStateToken(previousGroupToken);
+      if (fireChange) {
+        gotoStateToken(previousGroupToken);
+      } else {
+        setHistoryStateToken(previousGroupToken);
+      }
     }
   }
 
@@ -482,6 +486,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       gotoHistoryToken(resumedHistoryToken);
       resumedHistoryToken = null;
     }
+  }
+
+  @Override
+  public void setHistoryStateToken(final StateToken newToken) {
+    Log.debug("StateManager: history goto-token: " + newToken + ", previous: " + previousGroupToken);
+    history.newItem(newToken.getEncoded(), false);
   }
 
   @Override

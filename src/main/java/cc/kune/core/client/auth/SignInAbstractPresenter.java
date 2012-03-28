@@ -36,10 +36,10 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Proxy<?>> extends
     Presenter<View, Proxy<?>> {
 
-  protected final LoginRememberManager loginRemember;
   protected final CookiesManager cookiesManager;
   private String gotoTokenOnCancel;
   protected final I18nUITranslationService i18n;
+  protected final LoginRememberManager loginRemember;
   protected final Session session;
   protected final StateManager stateManager;
 
@@ -81,7 +81,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
         stateManager.gotoHistoryToken(gotoTokenOnCancel);
         gotoTokenOnCancel = null;
       } else {
-        stateManager.redirectOrRestorePreviousToken();
+        stateManager.redirectOrRestorePreviousToken(false);
       }
     }
   }
@@ -96,7 +96,6 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     session.setCurrentLanguage(language);
     i18n.changeToLanguageIfNecessary(language.getCode(), language.getEnglishName(), true,
         new I18nLanguageChangeNeeded() {
-
           @Override
           public void onChangeNeeded() {
           }
@@ -106,7 +105,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
             if (gotoHomePage) {
               stateManager.gotoStateToken(new StateToken(userInfoDTO.getHomePage()).clearDocument());
             } else {
-              stateManager.redirectOrRestorePreviousToken();
+              stateManager.redirectOrRestorePreviousToken(false);
             }
           }
         });

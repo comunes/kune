@@ -106,10 +106,9 @@ public class RegisterPresenter extends
     if (!session.isLogged()) {
       NotifyUser.showProgress();
       getView().show();
-      // getView().center();
       NotifyUser.hideProgress();
     } else {
-      stateManager.restorePreviousToken();
+      stateManager.restorePreviousToken(false);
     }
   }
 

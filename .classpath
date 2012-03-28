@@ -76,6 +76,7 @@
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-mvp-client/0.5/gwtp-mvp-client-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-mvp-client/0.5/gwtp-mvp-client-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-processors/0.5/gwtp-processors-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-processors/0.5/gwtp-processors-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-tester/0.5/gwtp-tester-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-tester/0.5/gwtp-tester-0.5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtquery/gwtquery/1.1.0/gwtquery-1.1.0-2.1.0.jar" sourcepath="M2_REPO/com/googlecode/gwtquery/gwtquery/1.1.0/gwtquery-1.1.0-2.1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat.jar" sourcepath="M2_REPO/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/extjs/gxt/2.2.1/gxt-2.2.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.0.20070617/h2-1.0.20070617.jar"/>

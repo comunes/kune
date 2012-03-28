@@ -67,6 +67,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
   private final GroupOptions groupOptions;
   private final Provider<GroupServiceAsync> groupService;
   private final I18nTranslationService i18n;
+  private boolean justCreatedAGroup;
   private final Session session;
   private final Provider<SignIn> signIn;
   private final StateManager stateManager;
@@ -87,6 +88,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   @Override
   public void doNewGroup() {
+    justCreatedAGroup = false;
     session.check(new AsyncCallbackSimple<Void>() {
       @Override
       public void onSuccess(final Void result) {
@@ -96,7 +98,6 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
           getView().focusOnShorName();
           NotifyUser.hideProgress();
         } else {
-          // stateManager.restorePreviousToken();
           signIn.get().setErrorMessage(i18n.t(CoreMessages.REGISTER_TO_CREATE_A_GROUP), NotifyLevel.info);
           signIn.get().showSignInDialog();
         }
@@ -142,11 +143,14 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   public void onCancel() {
     getView().hide();
-    stateManager.redirectOrRestorePreviousToken();
+    getView().unMask();
   }
 
   public void onClose() {
     reset();
+    if (!justCreatedAGroup) {
+      stateManager.redirectOrRestorePreviousToken(false);
+    }
   }
 
   private void onRegister() {
@@ -189,9 +193,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
         @Override
         public void onSuccess(final StateAbstractDTO state) {
+          justCreatedAGroup = true;
           stateManager.setRetrievedStateAndGo(state);
           getView().hide();
-          reset();
           getView().unMask();
           // Add the new group to your info
           session.getCurrentUserInfo().getGroupsIsAdmin().add(state.getGroup());
