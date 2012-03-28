@@ -86,7 +86,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
       dbProperties.setProperty("hibernate.connection.password", dbPass);
       jpm.properties(dbProperties);
       LOG.info(String.format("Using user '%s' and connection '%s'", dbUser, dbUrl));
-      LOG.debug(String.format("dbpass '%s'", dbPass));
+      // LOG.debug(String.format("dbpass '%s'", dbPass));
     }
 
     // http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html

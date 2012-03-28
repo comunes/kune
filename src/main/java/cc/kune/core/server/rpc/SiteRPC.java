@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
+import sun.misc.SignalHandler;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.server.InitData;
@@ -56,9 +57,9 @@ public class SiteRPC implements RPC, SiteService {
   private final I18nLanguageManager languageManager;
   private final LicenseManager licenseManager;
   private final Mapper mapper;
-  private final ReservedWordsRegistryDTO reservedWords;
+  private ReservedWordsRegistryDTO reservedWords;
   private final ServerToolRegistry serverToolRegistry;
-  private final HashMap<String, GSpaceTheme> siteThemes;
+  private HashMap<String, GSpaceTheme> siteThemes;
   private final UserInfoService userInfoService;
   private final UserSessionManager userSessionManager;
 
@@ -78,9 +79,13 @@ public class SiteRPC implements RPC, SiteService {
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
     this.extMediaDescManager = extMediaDescManager;
-    data = loadInitData();
-    siteThemes = getSiteThemes(this.kuneProperties.getList(KuneProperties.WS_THEMES));
-    reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
+    sun.misc.Signal.handle(new sun.misc.Signal("HUP"), new SignalHandler() {
+      @Override
+      public void handle(final sun.misc.Signal sig) {
+        loadProperties(kuneProperties);
+      }
+    });
+    loadProperties(kuneProperties);
   }
 
   private String[] getColors(final String key) {
@@ -155,6 +160,12 @@ public class SiteRPC implements RPC, SiteService {
     data.setTutorialLanguages(kuneProperties.getList(KuneProperties.KUNE_TUTORIALS_LANGS));
     data.setPublicSpaceVisible(kuneProperties.getBoolean(KuneProperties.PUBLIC_SPACE_VISIBLE));
     return data;
+  }
+
+  private void loadProperties(final KuneProperties kuneProperties) {
+    data = loadInitData();
+    siteThemes = getSiteThemes(this.kuneProperties.getList(KuneProperties.WS_THEMES));
+    reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
   }
 
 }

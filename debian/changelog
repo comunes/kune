@@ -1,3 +1,9 @@
+kune (0.1.0+b2) unstable; urgency=low
+
+  * Perms in daemon. SIGHUP to reload. Other minor changes
+
+ --  Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 28 Mar 2012 01:35:15 +0200
+
 kune (0.1.0+b1) unstable; urgency=low
 
   * For a full changelog see trunk/ChangeLog in svn repo

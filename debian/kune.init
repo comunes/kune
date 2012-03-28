@@ -51,9 +51,9 @@ do_start()
 	#   0 if daemon has been started
 	#   1 if daemon was already running
 	#   2 if daemon could not be started
-	start-stop-daemon --start --quiet --pidfile $PIDFILE -d /usr/share/kune/ --exec $DAEMON --test > /dev/null \
+	start-stop-daemon --start --quiet --pidfile $PIDFILE -d /usr/share/kune/ -c $NAME:$NAME -b --exec $DAEMON --test > /dev/null \
 		|| return 1
-	start-stop-daemon --start --quiet --pidfile $PIDFILE -d /usr/share/kune/ --exec $DAEMON -- \
+	start-stop-daemon --start --quiet --pidfile $PIDFILE -d /usr/share/kune/ -c $NAME:$NAME -b --exec $DAEMON -- \
 		$DAEMON_ARGS \
 		|| return 2
 	# Add code here, if necessary, that waits for the process to be ready
@@ -101,7 +101,9 @@ do_reload() {
 	# then implement that here.
 	#
         log_daemon_msg "Reloading kune"
-	start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE --name $NAME
+	# Seems that dont works if the user/group is not the same:
+	# http://stackoverflow.com/questions/4147288/how-to-trap-a-signal-in-a-java-application-initialized-using-a-bash-script
+	start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE --user $NAME --group $NAME --name $NAME
 	return 0
 }
 
@@ -125,15 +127,14 @@ case "$1" in
   status)
        status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
        ;;
-  #reload|force-reload)
+  reload|force-reload)
 	#
 	# If do_reload() is not implemented then leave this commented out
 	# and leave 'force-reload' as an alias for 'restart'.
 	#
-	#log_daemon_msg "Reloading $DESC" "$NAME"
-	#do_reload
-	#log_end_msg $?
-	#;;
+	do_reload
+	log_end_msg $?
+	;;
   restart|force-reload)
 	#
 	# If the "reload" option is implemented then remove the

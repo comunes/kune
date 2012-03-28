@@ -26,7 +26,10 @@ import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+import sun.misc.SignalHandler;
 import cc.kune.core.server.error.ServerException;
 
 import com.google.inject.Inject;
@@ -34,20 +37,23 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class KunePropertiesDefault implements KuneProperties {
+  public static final Log LOG = LogFactory.getLog(KunePropertiesDefault.class);
   private CompositeConfiguration config;
   private final String fileName;
 
   @Inject
   public KunePropertiesDefault(final String fileName) {
     this.fileName = fileName;
-    try {
-      config = new CompositeConfiguration();
-      config.addConfiguration(new SystemConfiguration());
-      config.addConfiguration(new PropertiesConfiguration(fileName));
-    } catch (final ConfigurationException e) {
-      final String msg = MessageFormat.format("Couldn't open property file {0}", fileName);
-      throw new ServerException(msg, e);
-    }
+    // http://stackoverflow.com/questions/40376/handle-signals-in-the-java-virtual-machine
+    // Runtime.getRuntime().addShutdownHook() ??
+    sun.misc.Signal.handle(new sun.misc.Signal("HUP"), new SignalHandler() {
+      @Override
+      public void handle(final sun.misc.Signal sig) {
+        LOG.warn("Received SIGHUP signal. Will reload kune.properties");
+        loadConfiguration();
+      }
+    });
+    loadConfiguration();
   }
 
   private void checkNull(final String key, final Object value) {
@@ -98,6 +104,17 @@ public class KunePropertiesDefault implements KuneProperties {
     final Long value = config.getLong(key);
     checkNull(key, value);
     return value;
+  }
+
+  private void loadConfiguration() {
+    try {
+      config = new CompositeConfiguration();
+      config.addConfiguration(new SystemConfiguration());
+      config.addConfiguration(new PropertiesConfiguration(fileName));
+    } catch (final ConfigurationException e) {
+      final String msg = MessageFormat.format("Couldn't open property file {0}", fileName);
+      throw new ServerException(msg, e);
+    }
   }
 
 }

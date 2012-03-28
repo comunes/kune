@@ -39,9 +39,15 @@ public class LoginRememberManagerImpl implements LoginRememberManager {
 		return $doc.getElementById(domId).value;
   }-*/;
 
+  /**
+   * login.submit() only works in FF // $doc.getElementById("login").submit();
+   * http
+   * ://stackoverflow.com/questions/4254284/browser-stored-username-passwords
+   * -in-chrome
+   */
   @Override
   public native void clickFormLogin() /*-{
-		$doc.getElementById("login").submit();
+		$doc.getElementById("loginsubmit").click();
   }-*/;
 
   @Override

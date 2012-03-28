@@ -109,9 +109,9 @@ public class Templates {
 
     FileInputStream stream = null;
     try {
-      stream = new FileInputStream(new File("src/main/webapp/others/splash/" + file));
+      stream = new FileInputStream(new File((productionMode ? "/usr/share/kune/webapp"
+          : "src/main/webapp") + "/others/splash/" + file));
     } catch (final FileNotFoundException e) {
-      // TODO Auto-generated catch block
       LOG.info("Could not find resource named: " + file);
     }
     return stream;

@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.state;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -43,7 +45,7 @@ import com.google.wave.api.Wavelet;
 
 @Singleton
 public class StateServiceDefault implements StateService {
-
+  public static final Log LOG = LogFactory.getLog(StateServiceDefault.class);
   private final ContentManager contentManager;
   private final GroupManager groupManager;
   private final I18nTranslationService i18n;
@@ -125,6 +127,7 @@ public class StateServiceDefault implements StateService {
         state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveManager.isParticipant(wavelet,
             userLogged.getShortName()) : false);
       } catch (final Exception e) {
+        LOG.error("Error accessing wave " + waveId, e);
         state.setContent(i18n.t("Error accessing this document. "
             + "Please contact the administrators providing this reference ([%s]) "
             + "and any other relevant info.", waveId));
