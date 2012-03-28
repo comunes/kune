@@ -38,16 +38,16 @@
 }
 
 .entityHeader {
-  -webkit-border-top-right-radius: 7px;
-  -moz-border-radius-topright: 7px;
-  border-top-right-radius: 7px;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-right-radius: 4px;
   overflow: hidden;
 }
 
 .entityFooter {
-  -webkit-border-bottom-right-radius: 7px;
-  -moz-border-radius-bottomright: 7px;
-  border-bottom-right-radius: 7px;
+  -webkit-border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  border-bottom-right-radius: 4px;
   overflow: hidden;
 }
 
@@ -130,12 +130,12 @@
   border-left: 1px solid #959595;
   border-right: 1px solid #959595;
   border-top: 1px solid #959595;
-  -webkit-border-top-left-radius: 7px;
-  -moz-border-radius-topleft: 7px;
-  border-top-left-radius: 7px;
-  -webkit-border-top-right-radius: 7px;
-  -moz-border-radius-topright: 7px;
-  border-top-right-radius: 7px;
+  -webkit-border-top-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  border-top-right-radius: 3px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -149,24 +149,24 @@
   bottom: 0;
   left: 0;
   right: 0;
-  -webkit-border-top-left-radius: 7px;
-  -moz-border-radius-topleft: 7px;
-  border-top-left-radius: 7px;
-  -webkit-border-top-right-radius: 7px;
-  -moz-border-radius-topright: 7px;
-  border-top-right-radius: 7px;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-right-radius: 4px;
 }
 
 .docFooter {
   border-left: 1px solid #959595;
   border-right: 1px solid #959595;
   border-bottom: 1px solid #959595;
-  -webkit-border-bottom-left-radius: 7px;
-  -moz-border-radius-bottomleft: 7px;
-  border-bottom-left-radius: 7px;
-  -webkit-border-bottom-right-radius: 7px;
-  -moz-border-radius-bottomright: 7px;
-  border-bottom-right-radius: 7px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-left-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  border-bottom-right-radius: 4px;
   padding: 1px 7px 0 7px;
   overflow: hidden;
   border-collapse: separate;
@@ -178,12 +178,12 @@
 }
 
 .entityTools {
-  -webkit-border-top-left-radius: 7px;
-  -moz-border-radius-topleft: 7px;
-  border-top-left-radius: 7px;
-  -webkit-border-bottom-left-radius: 7px;
-  -moz-border-radius-bottomleft: 7px;
-  border-bottom-left-radius: 7px;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .entityToolsNorth {
@@ -208,9 +208,9 @@
   border-top: 2px solid #FFF;
   padding: 10px;
   border-collapse: separate;
-  -webkit-border-bottom-left-radius: 7px;
-  -moz-border-radius-bottomleft: 7px;
-  border-bottom-left-radius: 7px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .entityToolsSouth span {
