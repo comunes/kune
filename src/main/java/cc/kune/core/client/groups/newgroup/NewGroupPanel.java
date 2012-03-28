@@ -210,7 +210,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   }
 
   @Override
-  public void focusOnShorName() {
+  public void focusOnShortName() {
     shortNameField.focus();
   }
 

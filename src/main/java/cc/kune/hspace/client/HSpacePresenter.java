@@ -21,12 +21,20 @@ package cc.kune.hspace.client;
 
 import java.util.List;
 
+import cc.kune.common.client.actions.AbstractExtendedAction;
+import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.InboxUnreadUpdatedEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.i18n.I18n;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.HomeStatsDTO;
@@ -41,16 +49,20 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpacePresenter.HSpaceProxy> {
+public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpacePresenter.HSpaceProxy>
+    implements HSpace {
 
   @ProxyCodeSplit
   public interface HSpaceProxy extends Proxy<HSpacePresenter> {
   }
+
   public interface HSpaceView extends View {
 
     HasText getGlobalStatsTotalGroupsCount();
 
     HasText getGlobalStatsTotalUsersCount();
+
+    IsActionExtensible getToolbar();
 
     HasText getUnreadInYourInbox();
 
@@ -67,11 +79,18 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
     void setUserGroupsActivityVisible(boolean visible);
   }
 
+  private final Session session;
+  private final StateManager stateManager;
+  private final Provider<ClientStatsServiceAsync> statsService;
+
   @Inject
   public HSpacePresenter(final Session session, final EventBus eventBus, final HSpaceView view,
       final HSpaceProxy proxy, final Provider<ClientStatsServiceAsync> statsService,
-      final I18nTranslationService i18n) {
+      final StateManager stateManager, final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
+    this.session = session;
+    this.statsService = statsService;
+    this.stateManager = stateManager;
     eventBus.addHandler(InboxUnreadUpdatedEvent.getType(),
         new InboxUnreadUpdatedEvent.InboxUnreadUpdatedHandler() {
           @Override
@@ -87,6 +106,33 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
             }
           }
         });
+  }
+
+  @Override
+  public IsActionExtensible getToolbar() {
+    return getView().getToolbar();
+  }
+
+  @Override
+  protected void onBind() {
+    super.onBind();
+
+    final ButtonDescriptor signInHomeBtn = new ButtonDescriptor(new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.SIGN_IN);
+      }
+    });
+    signInHomeBtn.withText(I18n.t(CoreMessages.SIGN_IN_TITLE)).withStyles("k-home-toolbar-btn, k-fl");
+    final ButtonDescriptor newGroupHomeBtn = new ButtonDescriptor(new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        stateManager.gotoHistoryToken(SiteTokens.NEW_GROUP);
+      }
+    });
+    newGroupHomeBtn.withText(I18n.t(CoreMessages.NEW_GROUP_TITLE)).withStyles("k-home-toolbar-btn, k-fr");
+    getView().getToolbar().add(signInHomeBtn);
+    getView().getToolbar().add(newGroupHomeBtn);
     final AsyncCallbackSimple<HomeStatsDTO> callback = new AsyncCallbackSimple<HomeStatsDTO>() {
       @Override
       public void onSuccess(final HomeStatsDTO result) {
@@ -99,7 +145,6 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
         final boolean logged = session.isLogged();
         final boolean myGroupsHasActivity = logged && lastContentsOfMyGroups != null
             && lastContentsOfMyGroups.size() > 0;
-        // NotifyUser.info("" + lastContentsOfMyGroups.size(), true);
         if (myGroupsHasActivity) {
           getView().setLastContentsOfMyGroup(lastContentsOfMyGroups);
         }
@@ -111,6 +156,7 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
         final boolean logged = event.isLogged();
+        signInHomeBtn.setVisible(!logged);
         if (logged) {
           statsService.get().getHomeStats(session.getUserHash(), callback);
         } else {

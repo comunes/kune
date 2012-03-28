@@ -103,7 +103,7 @@ public class GSpaceParts {
         writeToBuddie.get();
       }
     });
-    tokenListener.put(SiteTokens.TRANSLATE, new HistoryTokenMustBeAuthCallback() {
+    tokenListener.put(SiteTokens.TRANSLATE, new HistoryTokenMustBeAuthCallback("") {
       @Override
       public void onHistoryToken(final String token) {
         if (session.isLogged() && session.getInitData().isTranslatorEnabled()) {

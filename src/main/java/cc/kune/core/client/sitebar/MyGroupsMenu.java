@@ -32,7 +32,7 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHa
 import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
-import cc.kune.core.client.sitebar.SitebarGroupsLink.SitebarNewGroupAction;
+import cc.kune.core.client.sitebar.SitebarNewGroupLink.SitebarNewGroupAction;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;

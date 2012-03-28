@@ -375,6 +375,14 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
   height: 17px !important;
 }
 
+div div.siteBar table.k-sitebar img.k-iconlabel-left {
+  margin: 0px !important;  
+}
+
+div div.siteBar table.k-sitebar div.k-iconlabel-left {
+  margin: 0px !important;  
+}
+
 .k-sitebar-wave-status {
   font: 13px 'Ubuntu', arial;
   /* font-weight: bold; */
@@ -862,7 +870,6 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
   border: 2px solid #CCCCCC;
   cursor: pointer;
   margin: 0;
-  padding: 3px 0;
   text-decoration: none;
   background-color: #F2F2F2;
   color: #A05A2C;
@@ -875,7 +882,12 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
   width: auto !IMPORTANT;
   width: 50px;
   min-width: 40px;
-  height: 28px;
+  height: 26px;
+}
+
+button.k-button 
+{
+  padding: 0 2px;
 }
 
 .k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover,button.k-button:hover,button.gwt-Button:hover
@@ -954,6 +966,13 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   -moz-opacity: 0.60 !important;
   -khtml-opacity: 0.60 !important;
   opacity: 0.60 !important;
+}
+
+button.k-optionsborder img.k-iconlabel-left {
+  border: 2px solid #CCCCCC;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 /* end buttons */
@@ -1568,3 +1587,5 @@ div.jGrowl {
   top: 0 !important;
   width: auto !important;
 }
+
+

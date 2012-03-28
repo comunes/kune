@@ -23,6 +23,7 @@ import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.i18n.I18nUITranslationService.I18nLanguageChangeNeeded;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
@@ -65,12 +66,12 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   public void hide() {
     getView().hide();
+    getView().reset();
+    getView().hideMessages();
   }
 
   public void onCancel() {
-    getView().reset();
-    getView().hideMessages();
-    getView().hide();
+    hide();
   }
 
   public void onClose() {
@@ -78,7 +79,9 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     getView().hideMessages();
     if (!session.isLogged()) {
       if (gotoTokenOnCancel != null) {
-        stateManager.gotoHistoryToken(gotoTokenOnCancel);
+        if (!gotoTokenOnCancel.equals(SiteTokens.NEW_GROUP)) {
+          stateManager.gotoHistoryToken(gotoTokenOnCancel);
+        }
         gotoTokenOnCancel = null;
       } else {
         stateManager.redirectOrRestorePreviousToken(false);

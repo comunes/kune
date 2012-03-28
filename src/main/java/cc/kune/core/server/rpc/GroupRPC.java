@@ -161,7 +161,7 @@ public class GroupRPC implements RPC, GroupService {
       final GroupDTO groupDTO) throws DefaultException {
     final Group group = groupManager.findByShortName(token.getGroup());
     final Long id = group.getId();
-    if (!id.equals(groupDTO.getId())) {
+    if (!id.equals(groupDTO.getId()) || group.isPersonal()) {
       throw new AccessViolationException();
     }
     final Group updatedGroup = groupManager.update(id, groupDTO);

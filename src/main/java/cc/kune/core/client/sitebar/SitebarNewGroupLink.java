@@ -26,6 +26,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.MyGroupsChangedEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
@@ -34,7 +35,7 @@ import cc.kune.core.client.state.StateManager;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
-public class SitebarGroupsLink extends ButtonDescriptor {
+public class SitebarNewGroupLink extends ButtonDescriptor {
   public static class SitebarNewGroupAction extends AbstractExtendedAction {
 
     private final StateManager stateManager;
@@ -43,7 +44,7 @@ public class SitebarGroupsLink extends ButtonDescriptor {
     public SitebarNewGroupAction(final StateManager stateManager, final I18nTranslationService i18n) {
       super();
       this.stateManager = stateManager;
-      withText(i18n.t("Create New Group"));
+      withText(i18n.t(CoreMessages.NEW_GROUP_TITLE));
       withToolTip(i18n.t("Create a new group for your initiative or organization "
           + "(NGO, collective, academic group...)"));
     }
@@ -58,7 +59,7 @@ public class SitebarGroupsLink extends ButtonDescriptor {
   private final Session session;
 
   @Inject
-  public SitebarGroupsLink(final SitebarNewGroupAction newGroupAction,
+  public SitebarNewGroupLink(final SitebarNewGroupAction newGroupAction,
       final SitebarActions sitebarActions, final I18nTranslationService i18n, final EventBus eventBus,
       final CoreResources coreResources, final Session session) {
     super(newGroupAction);

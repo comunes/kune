@@ -503,6 +503,14 @@
   /*   margin-left: 5px; */
 }
 
+img.k-iconlabel-left {
+  margin-top: -2px;
+}
+
+div.k-iconlabel {
+  margin-top: -2px;
+}
+
 .k-menuimtem-title {
   color: white;
   font-size: 15px;

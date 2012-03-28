@@ -71,7 +71,7 @@ public class SitebarActionsPresenter extends
   private final CommonResources commonRes;
   private final I18nTranslationService i18n;
   private final Provider<MyGroupsMenu> myGroupsMenu;
-  private final Provider<SitebarGroupsLink> newGroupLink;
+  private final Provider<SitebarNewGroupLink> newGroupLink;
   private final CoreResources res;
   private final Provider<SitebarSignInLink> signInLink;
   private final Provider<SitebarSignOutLink> signOutLink;
@@ -79,7 +79,7 @@ public class SitebarActionsPresenter extends
   @Inject
   public SitebarActionsPresenter(final EventBus eventBus, final SitebarActionsView view,
       final SitebarActionsProxy proxy, final I18nTranslationService i18n,
-      final Provider<SitebarGroupsLink> newGroupLink, final Provider<SitebarSignOutLink> signOutLink,
+      final Provider<SitebarNewGroupLink> newGroupLink, final Provider<SitebarSignOutLink> signOutLink,
       final Provider<SitebarSignInLink> signInLink, final CoreResources res,
       final CommonResources commonRes, final Provider<MyGroupsMenu> myGroupsMenu) {
     super(eventBus, view, proxy);

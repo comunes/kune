@@ -28,26 +28,26 @@ import com.gwtplatform.mvp.client.View;
 
 public interface SignInAbstractView extends View {
 
-    HasCloseHandlers<PopupPanel> getClose();
+  HasCloseHandlers<PopupPanel> getClose();
 
-    HasClickHandlers getFirstBtn();
+  HasClickHandlers getFirstBtn();
 
-    HasClickHandlers getSecondBtn();
+  HasClickHandlers getSecondBtn();
 
-    void hide();
+  void hide();
 
-    void hideMessages();
+  void hideMessages();
 
-    void mask(final String message);
+  void mask(final String message);
 
-    void maskProcessing();
+  void maskProcessing();
 
-    void reset();
+  void reset();
 
-    void setErrorMessage(final String message, final NotifyLevel level);
+  void setErrorMessage(final String message, final NotifyLevel level);
 
-    void show();
+  void show();
 
-    void unMask();
+  void unMask();
 
 }

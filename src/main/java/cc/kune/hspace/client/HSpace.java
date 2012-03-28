@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,27 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.state;
 
-/**
- * The Class HistoryTokenNotLoggedCallback is used to indicate the action
- * related to this token (like #about, etc) should not be authenticated.
- */
-public abstract class HistoryTokenAuthNotNeededCallback implements HistoryTokenCallback {
+package cc.kune.hspace.client;
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.core.client.state.HistoryTokenCallback#authMandatory()
-   */
-  @Override
-  public boolean authMandatory() {
-    return false;
-  }
+import cc.kune.common.client.actions.ui.IsActionExtensible;
 
-  @Override
-  public String getInfoMessage() {
-    return "";
-  }
-
+public interface HSpace {
+  IsActionExtensible getToolbar();
 }

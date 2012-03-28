@@ -34,7 +34,7 @@ public class ContentViewerOptionsMenu extends MenuDescriptor {
   public ContentViewerOptionsMenu(final CoreResources res) {
     super();
     this.withIcon(res.arrowdownsitebar()).withStyles(
-        "k-def-docbtn, k-fr, k-noborder, k-no-backimage, k-nobackcolor").withId(ID);
+        "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor").withId(ID);
 
   }
 

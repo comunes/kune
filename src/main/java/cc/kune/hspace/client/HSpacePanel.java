@@ -23,6 +23,8 @@ import java.util.List;
 
 import org.waveprotocol.wave.client.common.util.DateUtils;
 
+import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.ui.DottedTabPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.state.SiteTokens;
@@ -52,9 +54,11 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   interface HSpacePanelUiBinder extends UiBinder<Widget, HSpacePanel> {
   }
-  public static final String K_HOME_GLOBAL_STATS = "k-home-global-stats";
 
+  public static final String K_HOME_GLOBAL_STATS = "k-home-global-stats";
   public static final String K_HOME_GROUP_STATS = "k-home-group-stats";
+
+  public static final String K_HOME_TOOLBAR = "k-home-toolbar";
 
   private static HSpacePanelUiBinder uiBinder = GWT.create(HSpacePanelUiBinder.class);
 
@@ -73,6 +77,8 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   @UiField
   public InlineLabel globalStatsTotalUsersTitle;
   private final RootPanel groupStatsParent;
+
+  private final ActionSimplePanel homeToolbar;
   @UiField
   public FlowPanel lastActivityInYourGroup;
   @UiField
@@ -89,6 +95,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   public FlowPanel lastPublishedContents;
   @UiField
   public Label lastPublishedContentsTitle;
+
   @UiField
   FlowPanel lastPublishedPanel;
 
@@ -98,14 +105,15 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   @UiField
   public Hyperlink unreadInYourInbox;
-
   private final Widget widget;
 
   @Inject
   public HSpacePanel(final I18nTranslationService i18n, final GSpaceArmor armor,
-      final Provider<GroupContentHomeLink> linkProv, final SharedFileDownloadUtils downUtils) {
+      final Provider<GroupContentHomeLink> linkProv, final SharedFileDownloadUtils downUtils,
+      final ActionSimplePanel homeToolbar) {
     this.linkProv = linkProv;
     this.downUtils = downUtils;
+    this.homeToolbar = homeToolbar;
     widget = uiBinder.createAndBindUi(this);
     globalStatsTitle.setText(i18n.t("Stats"));
     globalStatsTotalGroupsTitle.setText(i18n.t("Hosted groups:"));
@@ -120,6 +128,10 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     unreadInYourInbox.setTargetHistoryToken(SiteTokens.WAVE_INBOX);
     globalStatsParent = RootPanel.get(K_HOME_GLOBAL_STATS);
     groupStatsParent = RootPanel.get(K_HOME_GROUP_STATS);
+    final RootPanel homeToolbarParent = RootPanel.get(K_HOME_TOOLBAR);
+    if (homeToolbarParent != null) {
+      homeToolbarParent.add(homeToolbar);
+    }
     if (globalStatsParent != null) {
       globalStatsParent.add(globalStats);
     }
@@ -147,6 +159,11 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   @Override
   public HasText getGlobalStatsTotalUsersCount() {
     return globalStatsTotalUsersCount;
+  }
+
+  @Override
+  public IsActionExtensible getToolbar() {
+    return homeToolbar;
   }
 
   @Override

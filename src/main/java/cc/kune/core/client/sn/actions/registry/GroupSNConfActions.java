@@ -62,7 +62,7 @@ import com.google.inject.Provider;
 @SuppressWarnings("serial")
 public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
-  public static final String OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-nobackcolor, k-no-backimage, k-btn-min";
+  public static final String OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-optionsborder, k-nobackcolor, k-no-backimage, k-btn-min";
 
   @Inject
   public GroupSNConfActions(final SessionConstants session, final StateManager stateManager,

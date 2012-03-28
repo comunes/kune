@@ -72,6 +72,15 @@ public class GroupOptionsPresenter extends
     this.img = img;
   }
 
+  private void checkState(final StateAbstractDTO state) {
+    if (!state.getGroup().isPersonal() && state.getGroupRights().isAdministrable()) {
+      prefsItem.setVisible(true);
+    } else {
+      getView().hide();
+      prefsItem.setVisible(false);
+    }
+  }
+
   private void createActions() {
     final AbstractExtendedAction groupPrefsAction = new AbstractExtendedAction() {
       @Override
@@ -105,12 +114,7 @@ public class GroupOptionsPresenter extends
       @Override
       public void onStateChanged(final StateChangedEvent event) {
         final StateAbstractDTO state = event.getState();
-        if (!state.getGroup().isPersonal() && state.getGroupRights().isAdministrable()) {
-          prefsItem.setVisible(true);
-        } else {
-          getView().hide();
-          prefsItem.setVisible(false);
-        }
+        checkState(state);
       }
     });
     session.onUserSignOut(false, new UserSignOutHandler() {
@@ -126,6 +130,7 @@ public class GroupOptionsPresenter extends
   public void show(final String token) {
     stateManager.gotoHistoryToken(token);
     super.show();
+    checkState(session.getCurrentState());
   }
 
   @Override

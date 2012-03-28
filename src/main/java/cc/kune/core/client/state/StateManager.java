@@ -97,7 +97,7 @@ public interface StateManager {
 
   void resumeTokenChange();
 
-  void setHistoryStateToken(StateToken newToken);
+  void setHistoryStateToken(String token);
 
   void setRetrievedState(StateAbstractDTO state);
 

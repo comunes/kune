@@ -25,41 +25,60 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import cc.kune.core.shared.FileConstants;
+
 public class SharedFileDownloadUtilsTest {
 
   private static final String GROUP = "groupname";
-  private SharedFileDownloadUtils noPrefixUtils;
-  private SharedFileDownloadUtils prefixUtils;
+  private SharedFileDownloadUtils[] prefixUtils;
+  private SharedFileDownloadUtils utilNoPrefix;
+  private SharedFileDownloadUtils utilPrefix;
+  private SharedFileDownloadUtils utilPrefixWithSlash;
 
   @Before
   public void before() {
-    prefixUtils = new SharedFileDownloadUtils("http://example.org");
-    noPrefixUtils = new SharedFileDownloadUtils("");
+    utilPrefix = new SharedFileDownloadUtils("http://example.org");
+    utilPrefixWithSlash = new SharedFileDownloadUtils("http://example.org/");
+    utilNoPrefix = new SharedFileDownloadUtils("");
+    prefixUtils = new SharedFileDownloadUtils[] { utilPrefix, utilPrefixWithSlash };
   }
 
   @Test
   public void testGetLogoHtml() {
-    assertTrue(prefixUtils.getLogoAvatarHtml(GROUP, false, false, 50, 5).contains(
-        "'http://example.org/others/defgroup.gif"));
-    assertTrue(noPrefixUtils.getLogoAvatarHtml(GROUP, false, true, 50, 5),
-        prefixUtils.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains("/others/unknown.jpg"));
+    for (final SharedFileDownloadUtils util : prefixUtils) {
+      assertTrue(util.getLogoAvatarHtml(GROUP, false, false, 50, 5).contains(
+          "'http://example.org/others/defgroup.gif"));
+      assertTrue(
+          util.getLogoAvatarHtml(GROUP, false, false, 50, 5),
+          util.getLogoAvatarHtml(GROUP, false, false, 50, 5).contains(
+              "http://example.org/others/defgroup.gif"));
+      assertTrue(
+          util.getLogoAvatarHtml(GROUP, false, true, 50, 5),
+          util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains(
+              "http://example.org/others/unknown.jpg"));
+      assertTrue(utilNoPrefix.getLogoAvatarHtml(GROUP, false, true, 50, 5),
+          util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains("/others/unknown.jpg"));
+      assertTrue(
+          util.getLogoAvatarHtml(GROUP, true, false, 50, 5),
+          util.getLogoAvatarHtml(GROUP, true, false, 50, 5).contains(
+              "'http://example.org/ws/servlets/EntityLogoDownloadManager?token=groupname"));
+    }
+
     assertTrue(
-        prefixUtils.getLogoAvatarHtml(GROUP, true, false, 50, 5),
-        prefixUtils.getLogoAvatarHtml(GROUP, true, false, 50, 5).contains(
-            "'http://example.org/ws/servlets/EntityLogoDownloadManager?token=groupname"));
-    assertTrue(
-        noPrefixUtils.getLogoAvatarHtml(GROUP, true, true, 50, 5),
-        noPrefixUtils.getLogoAvatarHtml(GROUP, true, true, 50, 5).contains(
+        utilNoPrefix.getLogoAvatarHtml(GROUP, true, true, 50, 5),
+        utilNoPrefix.getLogoAvatarHtml(GROUP, true, true, 50, 5).contains(
             "/ws/servlets/EntityLogoDownloadManager?token=groupname"));
-    assertTrue(!noPrefixUtils.getLogoAvatarHtml(GROUP, true, true, 50, 5).contains("http"));
+    assertTrue(!utilNoPrefix.getLogoAvatarHtml(GROUP, true, true, 50, 5).contains("http"));
   }
 
   @Test
   public void testUserAvatar() {
-    assertEquals("http://example.org/ws/servlets/UserLogoDownloadManager?username=groupname",
-        prefixUtils.getUserAvatar(GROUP));
-    assertEquals("/ws/servlets/UserLogoDownloadManager?username=groupname",
-        noPrefixUtils.getUserAvatar(GROUP));
+    assertEquals("http://example.org" + FileConstants.LOGODOWNLOADSERVLET + "?token=groupname",
+        utilPrefix.getUserAvatar(GROUP));
+    assertEquals("http://example.org" + FileConstants.LOGODOWNLOADSERVLET + "?token=groupname",
+        utilPrefixWithSlash.getUserAvatar(GROUP));
+    assertEquals(FileConstants.LOGODOWNLOADSERVLET + "?token=groupname",
+        utilNoPrefix.getUserAvatar(GROUP));
   }
 
 }

@@ -31,6 +31,7 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
@@ -332,8 +333,7 @@ public class SpaceSelectorPresenter extends
       currentSpace = Space.userSpace;
       getView().setWindowTitle(i18n.t("Inbox"));
     } else {
-      signIn.get().setErrorMessage(i18n.t("Sign in or create an account to access to your inbox"),
-          NotifyLevel.info);
+      signIn.get().setErrorMessage(i18n.t(CoreMessages.SIGN_IN_TO_ACCESS_INBOX), NotifyLevel.info);
       stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN, inboxToken));
       getView().setUserBtnDown(false);
     }

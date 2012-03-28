@@ -35,11 +35,12 @@ public final class CoreMessages {
   public final static String NAME_IN_ALREADY_IN_USE = "This name is already in use. Please try with a different name";
   public final static String NAME_IN_USE = "This name in already in use. Please try with a different name";
   public final static String NAME_RESTRICTED = "This user name can not be used. Please try with a different name";
+  public final static String NEW_GROUP_TITLE = "Create New Group";
   public final static String PASSWD_MUST_BE_BETWEEN_6_AND_40 = "The password must be between 6 and 40 characters";
-  public final static String REGISTER_A_NEW_GROUP_TITLE = "Register a new Group";
   public final static String REGISTER_TITLE = "Register";
   public final static String REGISTER_TO_CREATE_A_GROUP = "Please, sign in or register to create a group";
   public final static String SIGN_IN_TITLE = "Sign in";
+  public final static String SIGN_IN_TO_ACCESS_INBOX = "Sign in or create an account to access to your inbox";
   public final static String USER_DOESN_T_HAVE_A_HOMEPAGE = "This user does not have a homepage";
   public final static String USER_OPTIONS_DIALOG_TITLE = "User options";
   public final static String YOUR_HOMEPAGE = "Your " + "homepage";

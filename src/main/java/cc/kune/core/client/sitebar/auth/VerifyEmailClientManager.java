@@ -42,33 +42,35 @@ public class VerifyEmailClientManager {
   VerifyEmailClientManager(final Session session, final SiteTokenListeners tokens,
       final Provider<UserOptGeneral> optGeneral, final I18nTranslationService i18n,
       final Provider<UserServiceAsync> userService) {
-    tokens.put(SiteTokens.VERIFY_EMAIL, new HistoryTokenMustBeAuthCallback() {
-      @Override
-      public void onHistoryToken(final String token) {
-        userService.get().verifyPasswordHash(session.getUserHash(), token, new AsyncCallback<Void>() {
+    tokens.put(SiteTokens.VERIFY_EMAIL,
+        new HistoryTokenMustBeAuthCallback(i18n.t("Sign in to verify your email")) {
           @Override
-          public void onFailure(final Throwable caught) {
-            if (caught instanceof EmailHashExpiredException) {
-              NotifyUser.error(i18n.t("Email confirmation code expired"), true);
-            } else if (caught instanceof EmailHashInvalidException) {
-              NotifyUser.error(i18n.t("Invalid confirmation code"), true);
-            } else {
-              NotifyUser.error(i18n.t("Other error trying to verify your password"), true);
-            }
-          }
+          public void onHistoryToken(final String token) {
+            userService.get().verifyPasswordHash(session.getUserHash(), token,
+                new AsyncCallback<Void>() {
+                  @Override
+                  public void onFailure(final Throwable caught) {
+                    if (caught instanceof EmailHashExpiredException) {
+                      NotifyUser.error(i18n.t("Email confirmation code expired"), true);
+                    } else if (caught instanceof EmailHashInvalidException) {
+                      NotifyUser.error(i18n.t("Invalid confirmation code"), true);
+                    } else {
+                      NotifyUser.error(i18n.t("Other error trying to verify your password"), true);
+                    }
+                  }
 
-          @Override
-          public void onSuccess(final Void result) {
-            NotifyUser.info("Great. Your email is now verified");
-            session.getCurrentUser().setEmailVerified(true);
-            // This get NPE
-            // if (optGeneral.get().isVisible()) {
-            // optGeneral.get().update();
-            // }
+                  @Override
+                  public void onSuccess(final Void result) {
+                    NotifyUser.info("Great. Your email is now verified");
+                    session.getCurrentUser().setEmailVerified(true);
+                    // This get NPE
+                    // if (optGeneral.get().isVisible()) {
+                    // optGeneral.get().update();
+                    // }
+                  }
+                });
           }
         });
-      }
-    });
 
   }
 }

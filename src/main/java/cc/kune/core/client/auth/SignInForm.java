@@ -68,6 +68,10 @@ public class SignInForm extends DefaultForm {
         }
         super.onRender(target, index);
       }
+
+      @Override
+      protected void setAriaState(final String stateName, final String stateValue) {
+      }
     };
     loginNickOrEmailField.setFieldLabel(i18n.t("Username"));
     loginNickOrEmailField.setName(USER_FIELD_ID);
@@ -89,6 +93,10 @@ public class SignInForm extends DefaultForm {
           setElement(Document.get().getElementById(elementId));
         }
         super.onRender(target, index);
+      }
+
+      @Override
+      protected void setAriaState(final String stateName, final String stateValue) {
       }
     };
     loginPassField.setFieldLabel(i18n.t("Password"));

@@ -131,12 +131,10 @@ body {
   min-width: 320px;
 }
 
-#k-home-ini { /*   clear: both; */
-  font-size: 20px;
+#k-home-ini {
+  font-size: 17px;
   color: #69312f;
   text-align: justify;
-  /*   padding: 27px 0; */
-  /*   line-height: 1.3em; */
 }
 
 #k-home-ini a {
@@ -191,7 +189,7 @@ body {
   line-height: 45px;
 }
 
-#k-home-body { /* display: table-row;*/
+#k-home-body {
   clear: both;
   display: block;
 }
@@ -211,14 +209,38 @@ body {
 }
 
 #k-home-summary-right {
-  padding-top: 42px;
-  vertical-align: bottom;
+  padding-top: 45px;
+  vertical-align: top;
 }
 
-#k-home-right { /*   white-space: nowrap; */
+#k-home-right {
   vertical-align: top;
   padding-top: 20px;
-  /*   float: right; */
+}
+
+#k-home-toolbar {
+  width: 100%;
+  padding-top: 10px;
+}
+
+div#k-home-toolbar table {
+  width: 100%;
+}
+
+.k-home-toolbar-btn {
+  font-size: 18px !important;
+  min-height: 40px;
+  height: auto !important;
+  max-width: 150px;
+  min-height: 45px;
+}
+
+div#k-home-toolbar table tbody tr td button.gwt-Button div.k-iconlabel {
+  white-space: normal !important;
+}
+
+div#k-home-toolbar table tbody tr td button.gwt-Button {
+  padding: 0px !important;
 }
 
 #k-home-group-stats {
@@ -234,7 +256,6 @@ body {
   font-size: 18px;
   font-weight: bold;
   padding-top: 10px;
-  /*   clear: both; */
 }
 
 .k-home-normal-text {
@@ -367,11 +388,15 @@ body {
 																share, collaborate with others and create your web
 																spaces easily</strong>. <a href="#signin">Join!</a>
 												</div>
-												<!--  div home-ini -->
-												<!-- k-home-summary-right -->
+												<!--  div k-home-ini -->
+												<div id="k-home-toolbar">
+														<!-- This id is optional for kune (you can create a different .html but preserve this id if you want the home signin/newgroup home buttons) -->
+												</div>
+												<!--  div k-home-toolbar -->
 										</div>
-										<!-- div home-header -->
+										<!-- k-home-summary-right -->
 								</div>
+								<!-- div home-intro -->
 								<div id="k-home-body">
 										<div id="k-home-left">
 												<div id="k-home-group-stats" style="display: none;">
@@ -382,7 +407,7 @@ body {
 										<!-- div k-home-left -->
 										<div id="k-home-right">
 												<div id="k-home-global-stats" style="display: none;">
-														<!-- This id is optinal for kune (you can create a different .html but preserve this id if you want this stats) -->
+														<!-- This id is optional for kune (you can create a different .html but preserve this id if you want this stats) -->
 												</div>
 										</div>
 										<!-- div k-home-right -->

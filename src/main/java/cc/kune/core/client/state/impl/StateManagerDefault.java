@@ -28,8 +28,11 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.shared.utils.Pair;
+import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.events.GoHomeEvent;
@@ -64,6 +67,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
   public interface OnFinishGetContent {
@@ -74,25 +78,29 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   private final EventBus eventBus;
   private final HistoryWrapper history;
   private StateToken previousGroupToken;
+  private String previousHash;
   /**
    * When a historyChanged is interrupted (for instance because you are editing
    * something), the new history token is stored here
    */
   private String resumedHistoryToken;
   private final Session session;
+  private final Provider<SignIn> signIn;
   private final SiteTokenListeners siteTokens;
   private final TokenMatcher tokenMatcher;
 
   @Inject
   public StateManagerDefault(final ContentCache contentProvider, final Session session,
       final HistoryWrapper history, final TokenMatcher tokenMatcher, final EventBus eventBus,
-      final SiteTokenListeners siteTokens) {
+      final SiteTokenListeners siteTokens, final Provider<SignIn> signIn) {
     this.tokenMatcher = tokenMatcher;
     this.eventBus = eventBus;
     this.contentCache = contentProvider;
     this.session = session;
     this.history = history;
+    this.signIn = signIn;
     this.previousGroupToken = null;
+    this.previousHash = null;
     this.resumedHistoryToken = null;
     tokenMatcher.init(GwtWaverefEncoder.INSTANCE);
     this.siteTokens = siteTokens;
@@ -177,6 +185,10 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       Log.debug("login mandatory for " + currentToken);
       // Ok, we have to redirect because this token (for instance
       // #translate) needs the user authenticated
+      final String infoMessage = tokenListener.getInfoMessage();
+      if (TextUtils.notEmpty(infoMessage)) {
+        signIn.get().setErrorMessage(infoMessage, NotifyLevel.info);
+      }
       redirectButSignInBefore(currentToken);
     } else {
       // The auth is not mandatory, go ahead with the token action
@@ -213,6 +225,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             SpaceConfEvent.fire(eventBus, Space.groupSpace, currentToken);
             SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(currentToken));
             if (setBrowserHistory) {
+              previousHash = history.getToken();
               history.newItem(currentToken, false);
               SpaceSelectEvent.fire(eventBus, Space.groupSpace);
             }
@@ -245,18 +258,19 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   @Override
   public void gotoHistoryToken(final String token) {
     Log.debug("StateManager: history goto-string-token: " + token);
+    previousHash = history.getToken();
     history.newItem(token);
   }
 
   @Override
   public void gotoHistoryTokenButRedirectToCurrent(final String token) {
     gotoHistoryToken(TokenUtils.addRedirect(token, history.getToken()));
-
   }
 
   @Override
   public void gotoStateToken(final StateToken newToken) {
     Log.debug("StateManager: history goto-token: " + newToken + ", previous: " + previousGroupToken);
+    previousHash = history.getToken();
     history.newItem(newToken.getEncoded());
   }
 
@@ -413,7 +427,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         // signin(inbox) && cancel
         restorePreviousToken(fireChange);
       } else {
-        history.newItem(previousToken); // FIXMEKK
+        history.newItem(previousHash);
       }
     } else {
       // No redirect then restore previous token
@@ -469,11 +483,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   @Override
   public void restorePreviousToken(final boolean fireChange) {
-    if (previousGroupToken != null) {
+    if (previousHash != null) {
       if (fireChange) {
-        gotoStateToken(previousGroupToken);
+        gotoHistoryToken(previousHash);
       } else {
-        setHistoryStateToken(previousGroupToken);
+        setHistoryStateToken(previousHash);
       }
     }
   }
@@ -489,9 +503,10 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   }
 
   @Override
-  public void setHistoryStateToken(final StateToken newToken) {
+  public void setHistoryStateToken(final String newToken) {
     Log.debug("StateManager: history goto-token: " + newToken + ", previous: " + previousGroupToken);
-    history.newItem(newToken.getEncoded(), false);
+    previousHash = history.getToken();
+    history.newItem(newToken, false);
   }
 
   @Override
@@ -506,6 +521,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     if (history.getToken().equals(token)) {
       setState(newState);
     }
+    previousHash = history.getToken();
     history.newItem(token);
   }
 

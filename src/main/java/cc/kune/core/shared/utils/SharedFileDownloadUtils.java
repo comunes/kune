@@ -34,7 +34,12 @@ public class SharedFileDownloadUtils {
   }
 
   public SharedFileDownloadUtils(final String prefix) {
-    this.prefix = prefix;
+    if (prefix.endsWith("/")) {
+      final int lastSlash = prefix.lastIndexOf("/");
+      this.prefix = prefix.substring(0, lastSlash == -1 ? prefix.length() : lastSlash);
+    } else {
+      this.prefix = prefix;
+    }
   }
 
   public String getGroupLogo(final GroupDTO group) {

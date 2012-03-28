@@ -33,6 +33,14 @@ public interface HistoryTokenCallback {
   boolean authMandatory();
 
   /**
+   * Info message used to show some message to the user (like
+   * "sign-in to create a new group");
+   * 
+   * @return the string
+   */
+  String getInfoMessage();
+
+  /**
    * On history token do some action (Example #inbox, #newgroup)
    * 
    * @param token

@@ -78,7 +78,7 @@ import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.sitebar.SitebarActionsPanel;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
-import cc.kune.core.client.sitebar.SitebarGroupsLink;
+import cc.kune.core.client.sitebar.SitebarNewGroupLink;
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
@@ -252,7 +252,7 @@ public class CoreGinModule extends ExtendedGinModule {
     s(MyGroupsMenu.class);
     s(SiteUserOptionsPresenter.class);
     s(SiteUserOptions.class, SiteUserOptionsPresenter.class);
-    s(SitebarGroupsLink.class);
+    s(SitebarNewGroupLink.class);
     s(SitebarSignInLink.class);
     s(SitebarSignOutLink.class);
 

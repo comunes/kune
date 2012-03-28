@@ -20,12 +20,14 @@
 package cc.kune.core.client;
 
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.groups.newgroup.NewGroup;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sitebar.auth.AskForPasswordResetPanel;
@@ -68,7 +70,7 @@ public class CoreParts {
       final Provider<VerifyEmailClientManager> verifyManager,
       final Provider<UserOptions> userOptionsDialog, final Provider<GroupOptions> groupOptionsDialog,
       final Provider<PasswordResetPanel> passReset, final Provider<AskForPasswordResetPanel> askForPass,
-      final GlobalShortcuts shortcuts) {
+      final GlobalShortcuts shortcuts, final I18nTranslationService i18n) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -105,17 +107,18 @@ public class CoreParts {
         register.get().doRegister();
       }
     });
-    tokenListener.put(SiteTokens.NEW_GROUP, new HistoryTokenMustBeAuthCallback() {
-      @Override
-      public void onHistoryToken(final String token) {
-        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+    tokenListener.put(SiteTokens.NEW_GROUP,
+        new HistoryTokenMustBeAuthCallback(i18n.t(CoreMessages.REGISTER_TO_CREATE_A_GROUP)) {
           @Override
-          public void execute() {
-            newGroup.get().doNewGroup();
+          public void onHistoryToken(final String token) {
+            Scheduler.get().scheduleFinally(new ScheduledCommand() {
+              @Override
+              public void execute() {
+                newGroup.get().doNewGroup();
+              }
+            });
           }
         });
-      }
-    });
     tokenListener.put(SiteTokens.SUBTITLES, new HistoryTokenAuthNotNeededCallback() {
       @Override
       public void onHistoryToken(final String token) {
@@ -128,13 +131,14 @@ public class CoreParts {
         SpaceSelectEvent.fire(eventBus, Space.homeSpace);
       }
     });
-    tokenListener.put(SiteTokens.WAVE_INBOX, new HistoryTokenMustBeAuthCallback() {
-      @Override
-      public void onHistoryToken(final String token) {
-        SpaceSelectEvent.fire(eventBus, Space.userSpace);
-      }
-    });
-    tokenListener.put(SiteTokens.PREFS, new HistoryTokenMustBeAuthCallback() {
+    tokenListener.put(SiteTokens.WAVE_INBOX,
+        new HistoryTokenMustBeAuthCallback(i18n.t(CoreMessages.SIGN_IN_TO_ACCESS_INBOX)) {
+          @Override
+          public void onHistoryToken(final String token) {
+            SpaceSelectEvent.fire(eventBus, Space.userSpace);
+          }
+        });
+    tokenListener.put(SiteTokens.PREFS, new HistoryTokenMustBeAuthCallback("") {
       @Override
       public void onHistoryToken(final String token) {
         Scheduler.get().scheduleFinally(new ScheduledCommand() {
@@ -146,7 +150,7 @@ public class CoreParts {
         });
       }
     });
-    tokenListener.put(SiteTokens.GROUP_PREFS, new HistoryTokenMustBeAuthCallback() {
+    tokenListener.put(SiteTokens.GROUP_PREFS, new HistoryTokenMustBeAuthCallback("") {
       @Override
       public void onHistoryToken(final String token) {
         Scheduler.get().scheduleFinally(new ScheduledCommand() {

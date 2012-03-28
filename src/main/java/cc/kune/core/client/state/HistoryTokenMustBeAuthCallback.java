@@ -25,6 +25,12 @@ package cc.kune.core.client.state;
  */
 public abstract class HistoryTokenMustBeAuthCallback implements HistoryTokenCallback {
 
+  private final String infoMessage;
+
+  public HistoryTokenMustBeAuthCallback(final String signInMessage) {
+    this.infoMessage = signInMessage;
+  }
+
   /*
    * (non-Javadoc)
    * 
@@ -33,6 +39,11 @@ public abstract class HistoryTokenMustBeAuthCallback implements HistoryTokenCall
   @Override
   public boolean authMandatory() {
     return true;
+  }
+
+  @Override
+  public String getInfoMessage() {
+    return infoMessage;
   }
 
 }

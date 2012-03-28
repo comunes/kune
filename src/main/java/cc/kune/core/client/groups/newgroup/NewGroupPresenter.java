@@ -31,7 +31,9 @@ import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
@@ -95,11 +97,13 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
         if (session.isLogged()) {
           NotifyUser.showProgress();
           getView().show();
-          getView().focusOnShorName();
+          getView().focusOnShortName();
           NotifyUser.hideProgress();
         } else {
+          // signIn.get().showSignInDialog();
           signIn.get().setErrorMessage(i18n.t(CoreMessages.REGISTER_TO_CREATE_A_GROUP), NotifyLevel.info);
-          signIn.get().showSignInDialog();
+          stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN,
+              session.getCurrentStateToken().toString()));
         }
       }
     });
@@ -205,7 +209,6 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
             public void execute() {
               groupOptions.showTooltip();
               new Timer() {
-
                 @Override
                 public void run() {
                   ShowHelpContainerEvent.fire(getEventBus(), state.getStateToken().getTool());
