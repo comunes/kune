@@ -69,21 +69,21 @@ public class BartersClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshContentMenuItem> refresh, final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, shareMenuContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newBartersBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newFolderBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, copyContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, writeToParticipants, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, addPublicMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, newBartersBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, newFolderBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, copyContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, writeToParticipants, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);

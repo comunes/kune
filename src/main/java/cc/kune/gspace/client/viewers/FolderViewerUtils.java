@@ -201,12 +201,17 @@ public class FolderViewerUtils {
     getView().setContainer(stateContainer);
     final AccessRights rights = stateContainer.getContainerRights();
     // NotifyUser.info("Rights: " + rights, true);
-    final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContainer.getGroup(),
-        stateContainer.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
+    final GuiActionDescCollection topActions = actionsRegistry.getCurrentActions(
+        stateContainer.getGroup(), stateContainer.getTypeId(), session.isLogged(), rights,
+        ActionGroups.TOPBAR);
+    final GuiActionDescCollection bottomActions = actionsRegistry.getCurrentActions(
+        stateContainer.getGroup(), stateContainer.getTypeId(), session.isLogged(), rights,
+        ActionGroups.BOTTOMBAR);
     final ContainerDTO container = stateContainer.getContainer();
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(container, true);
-    getView().setSubheaderActions(actions);
-    getView().setFooterActions(pathActions);
+    bottomActions.addAll(pathActions);
+    getView().setSubheaderActions(topActions);
+    getView().setFooterActions(bottomActions);
     createChildItems(container, stateContainer.getContainerRights());
   }
 }

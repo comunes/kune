@@ -47,8 +47,8 @@ public class TrashClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshContentMenuItem> refresh, final Provider<GoParentChatBtn> folderGoUp,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, refresh, all);
     // actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp,
     // DocsToolConstants.TYPE_DOCUMENT);
     // actionsRegistry.addAction(ActionGroups.ITEM_MENU, action,

@@ -132,7 +132,7 @@ public class XMLActionsParser {
         subMenuDescriptor = new SubMenuDescriptor(parent, false, i18n.t(name));
         // subMenuDescriptor.setVisible(false);
         submenus.put(subpathId, subMenuDescriptor);
-        actionRegistry.addAction(ActionGroups.TOOLBAR, subMenuDescriptor, typeId);
+        actionRegistry.addAction(ActionGroups.TOPBAR, subMenuDescriptor, typeId);
       }
       current = subMenuDescriptor;
     }
@@ -176,7 +176,7 @@ public class XMLActionsParser {
                 descrip.getNewContentTitle(), TextUtils.empty(contentIntro) ? "" : contentIntro);
           }
           final Provider<GuiActionDescrip> menuItemProvider = createMenuItem(descrip, origTypeId, action);
-          actionRegistry.addAction(ActionGroups.TOOLBAR, menuItemProvider, origTypeId);
+          actionRegistry.addAction(ActionGroups.TOPBAR, menuItemProvider, origTypeId);
         }
       }
     }

@@ -198,11 +198,16 @@ public class ContentViewerPresenter extends
         throw new UIException("Unexpected status in Viewer");
       }
     }
-    final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContent.getGroup(),
-        stateContent.getTypeId(), session.isLogged(), rights, ActionGroups.TOOLBAR);
+    final GuiActionDescCollection topActions = actionsRegistry.getCurrentActions(
+        stateContent.getGroup(), stateContent.getTypeId(), session.isLogged(), rights,
+        ActionGroups.TOPBAR);
+    final GuiActionDescCollection bottomActions = actionsRegistry.getCurrentActions(
+        stateContent.getGroup(), stateContent.getTypeId(), session.isLogged(), rights,
+        ActionGroups.BOTTOMBAR);
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContent.getContainer(),
         true);
-    getView().setFooterActions(pathActions);
-    getView().setSubheaderActions(actions);
+    bottomActions.addAll(pathActions);
+    getView().setSubheaderActions(topActions);
+    getView().setFooterActions(bottomActions);
   }
 }

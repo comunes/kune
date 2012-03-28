@@ -24,10 +24,11 @@ package cc.kune.gspace.client.actions;
  * edit, etc)
  */
 public final class ActionGroups {
-    public final static String EDIT = "edit";
-    public final static String ITEM_MENU = "menu-item";
-    public final static String TOOLBAR = "view";
+  public final static String BOTTOMBAR = "bottombar";
+  public final static String EDIT = "edit";
+  public final static String ITEM_MENU = "menu-item";
+  public final static String TOPBAR = "topbar";
 
-    private ActionGroups() {
-    }
+  private ActionGroups() {
+  }
 }

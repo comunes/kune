@@ -75,34 +75,34 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final CalendarOnOverMenu onOverMenu, final Provider<CalendarGoTodayBtn> goToday,
       final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, goToday, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, calPrevBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, cal1DayBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, cal3DaysBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, cal7DaysBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, calMonthBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, calNextBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, export, all);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, shareMenuContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, tutorialBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, copyContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, writeToParticipants, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, refresh, all);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, goToday, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, calPrevBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, cal1DayBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, cal3DaysBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, cal7DaysBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, calMonthBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, calNextBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, participateBtn, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, export, all);
+    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, addPublicMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, copyContent, contents);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, writeToParticipants, contents);
     // On over calendar menu
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, onOverMenu, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, onOverMenu, containers);
 
     eventOpenMenuItem.get();
     eventAddMenuItem.get();
     eventRemoveMenuItem.get();
 
-    actionsRegistry.addAction(ActionGroups.TOOLBAR, newMeetingsBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, newMeetingsBtn, containers);
 
     // For now, commented:
     // actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem,
