@@ -249,7 +249,7 @@ public class ChatClientDefault implements ChatClient {
   private void createActionIfNeeded() {
     if (chatIcon == null) {
       chatIcon = new IconLabelDescriptor(action);
-      chatIcon.setParent(siteActions.getLeftToolbar());
+      chatIcon.setParent(SitebarActions.LEFT_TOOLBAR);
       chatIcon.setId(CHAT_CLIENT_ICON_ID);
       chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
       chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
@@ -259,9 +259,9 @@ public class ChatClientDefault implements ChatClient {
       shorcutRegister.put(shortcut, action);
       action.setShortcut(shortcut);
       chatIcon.setVisible(session.isLogged());
-      ToolbarSeparatorDescriptor.build(Type.spacer, siteActions.getLeftToolbar());
-      ToolbarSeparatorDescriptor.build(Type.spacer, siteActions.getLeftToolbar());
-      ToolbarSeparatorDescriptor.build(Type.spacer, siteActions.getLeftToolbar());
+      ToolbarSeparatorDescriptor.build(Type.spacer, SitebarActions.LEFT_TOOLBAR);
+      ToolbarSeparatorDescriptor.build(Type.spacer, SitebarActions.LEFT_TOOLBAR);
+      ToolbarSeparatorDescriptor.build(Type.spacer, SitebarActions.LEFT_TOOLBAR);
     }
   }
 

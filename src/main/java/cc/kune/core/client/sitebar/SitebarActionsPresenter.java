@@ -27,7 +27,6 @@ import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.resources.CommonResources;
@@ -64,9 +63,7 @@ public class SitebarActionsPresenter extends
 
     void showErrorDialog();
   }
-  private static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
-  private static final MenuDescriptor MORE_MENU = new MenuDescriptor();
-  private static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
+
   public static final String SITE_OPTIONS_MENU = "kune-sop-om";
   private final CommonResources commonRes;
   private final I18nTranslationService i18n;
@@ -105,18 +102,8 @@ public class SitebarActionsPresenter extends
     return gotoKuneDevSite;
   }
 
-  @Override
-  public ToolbarDescriptor getLeftToolbar() {
-    return LEFT_TOOLBAR;
-  }
-
   public MenuDescriptor getOptionsMenu() {
     return MORE_MENU;
-  }
-
-  @Override
-  public ToolbarDescriptor getRightToolbar() {
-    return RIGHT_TOOLBAR;
   }
 
   private void init() {

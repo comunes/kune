@@ -43,7 +43,7 @@
                 <g:DockLayoutPanel unit="PX" ui:field="splitCenter"
                   styleName="{res.style.entityCentralContainer}">
                   <g:north size="153">
-                    <g:VerticalPanel width="100%"
+                    <g:VerticalPanel width="100%" ui:field="centerNorth"
                       height="153px">
                       <g:FlowPanel height="70px" width="100%"
                         styleName="{res.style.entityHeader}" ui:field="entityHeader">

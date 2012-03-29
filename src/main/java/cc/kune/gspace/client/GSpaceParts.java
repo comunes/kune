@@ -32,6 +32,7 @@ import cc.kune.gspace.client.i18n.I18nToTranslateGridPanel;
 import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorTabsCollection;
 import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
+import cc.kune.gspace.client.maxmin.MaxMinWorkspace;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
@@ -48,23 +49,14 @@ import com.google.inject.Provider;
 public class GSpaceParts {
 
   @Inject
-  public GSpaceParts(
-      final Session session,
-      final GSpaceThemeManager themeManager,
+  public GSpaceParts(final Session session, final GSpaceThemeManager themeManager,
       final Provider<EntityLicensePresenter> licenseFooter,
-      final Provider<TagsSummaryPresenter> tagsPresenter,
-      final Provider<ToolSelector> toolSelector,
-      final Provider<NoHomePageViewer> noHome,
-      final Provider<ContentViewerPresenter> docsViewer,
-      final Provider<FolderViewerPresenter> folderViewer,
-      final Provider<GroupOptions> go,
-      final Provider<UserOptions> uo, // final Provider<GroupOptionsCollection>
-                                      // gocProv,
-      // final Provider<UserOptionsCollection> uocProv,
-
-      final Provider<SitebarSearchPresenter> siteSearch,
+      final Provider<TagsSummaryPresenter> tagsPresenter, final Provider<ToolSelector> toolSelector,
+      final Provider<NoHomePageViewer> noHome, final Provider<ContentViewerPresenter> docsViewer,
+      final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,
+      final Provider<UserOptions> uo, final Provider<SitebarSearchPresenter> siteSearch,
       final Provider<SiteOptionsI18nTranslatorAction> transAction,
-      final Provider<GiveUsFeedbackBtn> giveUsFeedback,
+      final Provider<MaxMinWorkspace> maxMinWorkspace, final Provider<GiveUsFeedbackBtn> giveUsFeedback,
       final Provider<I18nToTranslateGridPanel> toTrans,
       final Provider<I18nTranslatorTabsCollection> gtranslator,
       final Provider<I18nTranslator> translator, final Provider<WriteToBuddyHeaderButton> writeToBuddie,
@@ -79,7 +71,7 @@ public class GSpaceParts {
         folderViewer.get();
         siteSearch.get();
         noHome.get();
-
+        maxMinWorkspace.get();
         // // Add User & Groups Options
         // final GroupOptionsCollection goc = gocProv.get();
         // final UserOptionsCollection uoc = uocProv.get();

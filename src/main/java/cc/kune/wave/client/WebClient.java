@@ -464,6 +464,11 @@ public class WebClient extends  Composite implements WaveClientView {
     History.newItem(tokenFromWaveref, false);
   }
 
+  @Override
+  public void setMaximized(final boolean maximized) {
+    splitPanel.setWidgetSize(searchPanel, maximized ? 0 : 400);    
+  }
+
   private void setupConnectionIndicator() {
     ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
 
@@ -498,49 +503,49 @@ public class WebClient extends  Composite implements WaveClientView {
       }
     });
   }
+private void setupSearchPanel() {
+  // On wave action fire an event.
+  final SearchPresenter.WaveActionHandler actionHandler =
+      new SearchPresenter.WaveActionHandler() {
+        @Override
+        public void onCreateWave() {
+          ClientEvents.get().fireEvent(WaveCreationEvent.CREATE_NEW_WAVE);
+        }
 
-  private void setupSearchPanel() {
-    // On wave action fire an event.
-    final SearchPresenter.WaveActionHandler actionHandler =
-        new SearchPresenter.WaveActionHandler() {
-          @Override
-          public void onCreateWave() {
-            ClientEvents.get().fireEvent(WaveCreationEvent.CREATE_NEW_WAVE);
-          }
-
-          @Override
-          public void onWaveSelected(final WaveId id) {
-            ClientEvents.get().fireEvent(new WaveSelectionEvent(WaveRef.of(id)));
-          }
-        };
-    final Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
-    search.addListener(inboxCount.getSearchListener());
-    SearchPresenter.create(search, searchPanel, actionHandler, profiles);
-  }
-private void setupUi() {
-  // Set up UI
-  final DockLayoutPanel self = BINDER.createAndBindUi(this);
-  // kune-patch
-  // RootPanel.get("app").add(self);
-  initWidget(self);
-  waveHolder = new ImplPanel("");
-  waveHolder.addStyleName("k-waveHolder");
-  waveFrame.add(waveHolder);
-  // DockLayoutPanel forcibly conflicts with sensible layout control, and
-  // sticks inline styles on elements without permission. They must be
-  // cleared.
-  self.getElement().getStyle().clearPosition();
-  splitPanel.setWidgetMinSize(searchPanel, 300);
-
-  if (LogLevel.showDebug()) {
-    logPanel.enable();
-  } else {
-    logPanel.removeFromParent();
-  }
-
-  setupSearchPanel();
-  setupWavePanel();
+        @Override
+        public void onWaveSelected(final WaveId id) {
+          ClientEvents.get().fireEvent(new WaveSelectionEvent(WaveRef.of(id)));
+        }
+      };
+  final Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
+  search.addListener(inboxCount.getSearchListener());
+  SearchPresenter.create(search, searchPanel, actionHandler, profiles);
 }
+  private void setupUi() {
+    // Set up UI
+    final DockLayoutPanel self = BINDER.createAndBindUi(this);
+    // kune-patch
+    // RootPanel.get("app").add(self);
+    initWidget(self);
+    waveHolder = new ImplPanel("");
+    waveHolder.addStyleName("k-waveHolder");
+    waveFrame.add(waveHolder);
+    // DockLayoutPanel forcibly conflicts with sensible layout control, and
+    // sticks inline styles on elements without permission. They must be
+    // cleared.
+    self.getElement().getStyle().clearPosition();
+    splitPanel.setWidgetMinSize(searchPanel, 300);
+  
+    if (LogLevel.showDebug()) {
+      logPanel.enable();
+    } else {
+      logPanel.removeFromParent();
+    }
+  
+    setupSearchPanel();
+    setupWavePanel();
+  }
+
   private void setupWavePanel() {
     // Hide the frame until waves start getting opened.
     UIObject.setVisible(waveFrame.getElement(), false);

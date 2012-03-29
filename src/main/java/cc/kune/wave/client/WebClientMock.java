@@ -83,4 +83,8 @@ public class WebClientMock extends Composite implements WaveClientView {
   public void logout() {
   }
 
+  @Override
+  public void setMaximized(final boolean maximized) {
+  }
+
 }

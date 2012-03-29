@@ -22,6 +22,7 @@ package cc.kune.gspace.client;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter;
 import cc.kune.gspace.client.licensewizard.LicenseWizardPresenter;
+import cc.kune.gspace.client.maxmin.MaxMinWorkspacePresenter;
 import cc.kune.gspace.client.options.GroupOptionsPresenter;
 import cc.kune.gspace.client.options.UserOptionsPresenter;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
@@ -51,6 +52,8 @@ public interface GSpaceGinjector extends Ginjector {
   AsyncProvider<I18nTranslatorPresenter> getI18nTranslatorPresenter();
 
   AsyncProvider<LicenseWizardPresenter> getLicenseWizardPresenter();
+
+  AsyncProvider<MaxMinWorkspacePresenter> getMaxMinWorkspacePresenter();
 
   AsyncProvider<SitebarSearchPresenter> getSitebarSearchPresenter();
 

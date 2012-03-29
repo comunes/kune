@@ -23,8 +23,7 @@ public class HelloWorldActions {
   }
 
   @Inject
-  public HelloWorldActions(final CommonResources res, final SitebarActions sitebarActions,
-      final SiteUserOptions siteUserOptions) {
+  public HelloWorldActions(final CommonResources res, final SiteUserOptions siteUserOptions) {
 
     // We can share the action if we don't want to create several (and for
     // instance it doesn't store any value)
@@ -33,7 +32,7 @@ public class HelloWorldActions {
     // An action in the sitebar
     final ButtonDescriptor siteBarBtn = new ButtonDescriptor(sharedAction);
     siteBarBtn.withText("HWorld!").withIcon(res.info());
-    siteBarBtn.setParent(sitebarActions.getLeftToolbar());
+    siteBarBtn.setParent(SitebarActions.LEFT_TOOLBAR);
 
     // Other action in the sitebar options menu
 

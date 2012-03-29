@@ -42,6 +42,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -50,9 +51,14 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
 
   interface WsArmorImplUiBinder extends UiBinder<Widget, GSpaceArmorImpl> {
   }
+  private static final int CENTER_NORTH_HEIGHT = 153;
+  private static final int CENTER_SOUTH_HEIGHT = 36;
+  private static final int EAST_WIDTH = 220;
 
   private static WsArmorImplUiBinder uiBinder = GWT.create(WsArmorImplUiBinder.class);
 
+  @UiField
+  VerticalPanel centerNorth;
   @UiField
   ScrollPanel centerScroll;
   @UiField
@@ -275,10 +281,35 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   }
 
   @Override
-  public void setContentVisible(final boolean visible) {
-    // FIXME: remove this?
-    // NotifyUser.info("Visible: " + visible);
-    // docContainer.getElement().getStyle().setOpacity(visible ? 1d : .0d);
-    // docFooter.getElement().getStyle().setOpacity(visible ? 1d : .0d);
+  public void setMaximized(final boolean maximized) {
+    // setMaximized(docFooter.getParent(), maximized);
+    // setMaximized(entityFooter.getParent(), maximized);
+    // setMaximized(entityHeader.getParent(), maximized);
+    // setMaximized(entityToolsContainer, maximized);
+    // splitCenter.setWidgetSize(centerScroll, getAbsoluteLeft())
+    // setMaximized(splitCenter.getWidget(0), maximized);
+    // setMaximized(splitCenter.getWidget(2), maximized);
+    // setMaximized(splitEast, maximized);
+    groupSpace.setWidgetSize(splitEast, maximized ? 0 : EAST_WIDTH);
+    splitCenter.setWidgetSize(centerNorth, maximized ? 7 : CENTER_NORTH_HEIGHT);
+    splitCenter.setWidgetSize(entityFooter, maximized ? 7 : CENTER_SOUTH_HEIGHT);
+  }
+
+  private void setMaximized(final Widget widget, final boolean maximized) {
+    widget.setVisible(!maximized);
+    if (maximized) {
+      // // $((Widget) gsArmor.getHeaderToolbar()).as(Effects).
+      // $(widget).as(Effects).slideDown(new Function() {
+      // @Override
+      // public void f() {
+      // }
+      // });
+    } else {
+      // $(widget).parent().as(Effects).slideUp(new Function() {
+      // @Override
+      // public void f() {
+      // }
+      // });
+    }
   }
 }

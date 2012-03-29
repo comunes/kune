@@ -97,10 +97,10 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   private void createActions() {
     LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
-    LOGGED_USER_MENU.setParent(siteOptions.getRightToolbar());
+    LOGGED_USER_MENU.setParent(SitebarActions.RIGHT_TOOLBAR);
     LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     LOGGED_USER_MENU.setRightIcon(res.arrowdownsitebar());
-    separator = new ToolbarSeparatorDescriptor(Type.separator, siteOptions.getRightToolbar());
+    separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
 
     final AbstractExtendedAction userHomeAction = new AbstractExtendedAction() {
       @Override

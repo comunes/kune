@@ -26,10 +26,12 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 
+import cc.kune.gspace.client.maxmin.IsMaximizable;
+
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.IsWidget;
 
-public interface WaveClientView extends IsWidget {
+public interface WaveClientView extends IsWidget, IsMaximizable {
 
   void clear();
 

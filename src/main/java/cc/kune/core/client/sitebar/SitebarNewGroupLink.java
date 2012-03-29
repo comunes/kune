@@ -65,7 +65,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
     super(newGroupAction);
     this.session = session;
     withId(NEW_GROUP_BTN_ID).withStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
-    withParent(sitebarActions.getRightToolbar());
+    withParent(SitebarActions.RIGHT_TOOLBAR);
     eventBus.addHandler(MyGroupsChangedEvent.getType(),
         new MyGroupsChangedEvent.MyGroupsChangedHandler() {
           @Override

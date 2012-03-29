@@ -867,7 +867,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 .k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button,.gwt-FileUpload,button.gwt-Button
   {
   font: 14px 'Ubuntu', arial;
-  border: 2px solid #CCCCCC;
+  border: 1px solid #ACACAC;
   cursor: pointer;
   margin: 0;
   text-decoration: none;
@@ -892,7 +892,7 @@ button.k-button
 
 .k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover,button.k-button:hover,button.gwt-Button:hover
   {
-  border: 2px orange solid;
+  border: 1px orange solid;
   outline: 0 none;
   /* background: #f0f0f0; */
 }
@@ -962,14 +962,14 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   border-color: #CCCCCC !important;
   background: inherits !important;
   kfilter: alpha(opacity =
-              60) !important;
-  -moz-opacity: 0.60 !important;
-  -khtml-opacity: 0.60 !important;
-  opacity: 0.60 !important;
+              50) !important;
+  -moz-opacity: 0.50 !important;
+  -khtml-opacity: 0.50 !important;
+  opacity: 0.50 !important;
 }
 
 button.k-optionsborder img.k-iconlabel-left {
-  border: 2px solid #CCCCCC;
+  border: 1px solid #ACACAC;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;

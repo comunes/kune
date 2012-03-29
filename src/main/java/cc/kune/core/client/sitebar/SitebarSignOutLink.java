@@ -123,8 +123,8 @@ public class SitebarSignOutLink extends ButtonDescriptor {
     super(action);
     setId(SITE_SIGN_OUT);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
-        sitebarActions.getRightToolbar());
-    setParent(sitebarActions.getRightToolbar());
+        SitebarActions.RIGHT_TOOLBAR);
+    setParent(SitebarActions.RIGHT_TOOLBAR);
     setVisible(session.isLogged());
     setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {

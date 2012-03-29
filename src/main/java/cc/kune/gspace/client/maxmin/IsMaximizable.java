@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,18 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
+package cc.kune.gspace.client.maxmin;
 
-public interface SitebarActions {
-
-  static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
-  static final MenuDescriptor MORE_MENU = new MenuDescriptor();
-
-  static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
-
-  void refreshActions();
-
+public interface IsMaximizable {
+  void setMaximized(boolean maximized);
 }

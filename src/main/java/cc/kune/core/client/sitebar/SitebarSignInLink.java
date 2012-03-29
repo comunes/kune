@@ -65,15 +65,15 @@ public class SitebarSignInLink extends ButtonDescriptor {
 
   @Inject
   public SitebarSignInLink(final SitebarSignInAction action, final EventBus eventBus,
-      final Session session, final SitebarActions sitebarActions) {
+      final Session session) {
     super(action);
     // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
     setId(SITE_SIGN_IN);
     setVisible(!session.isLogged());
     setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
-    setParent(sitebarActions.getRightToolbar());
+    setParent(SitebarActions.RIGHT_TOOLBAR);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
-        sitebarActions.getRightToolbar());
+        SitebarActions.RIGHT_TOOLBAR);
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {

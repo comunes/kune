@@ -63,7 +63,7 @@ public class MyGroupsMenu extends MenuDescriptor {
     this.siteOptions = siteOptions;
     menuShowAction.setMenu(this);
     setId(MENU_ID);
-    setParent(siteOptions.getRightToolbar());
+    setParent(SitebarActions.RIGHT_TOOLBAR);
     setStyles("k-no-backimage, k-btn-sitebar");
     this.downloadProvider = downloadProvider;
     this.gotoGroupAction = gotoGroupAction;

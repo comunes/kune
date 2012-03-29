@@ -21,12 +21,13 @@ package cc.kune.gspace.client.armor;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.shared.utils.Pair;
+import cc.kune.gspace.client.maxmin.IsMaximizable;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-public interface GSpaceArmor {
+public interface GSpaceArmor extends IsMaximizable {
 
   void clearBackImage();
 
@@ -81,6 +82,4 @@ public interface GSpaceArmor {
   void selectUserSpace();
 
   void setBackImage(String url);
-
-  void setContentVisible(boolean visible);
 }

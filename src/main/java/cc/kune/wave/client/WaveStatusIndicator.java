@@ -30,7 +30,7 @@ import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.sitebar.SitebarActionsPresenter;
+import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.sn.actions.SessionAction;
 import cc.kune.core.client.state.Session;
 
@@ -84,9 +84,9 @@ public class WaveStatusIndicator {
   }
 
   @Inject
-  public WaveStatusIndicator(final SitebarActionsPresenter sitebar, final WaveStatusAction action) {
+  public WaveStatusIndicator(final WaveStatusAction action) {
     final IconLabelDescriptor status = new IconLabelDescriptor(action);
     status.setPosition(0);
-    sitebar.getRightToolbar().add(status);
+    SitebarActions.RIGHT_TOOLBAR.add(status);
   }
 }
