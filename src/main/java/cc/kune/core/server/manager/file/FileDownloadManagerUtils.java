@@ -79,8 +79,8 @@ public class FileDownloadManagerUtils {
     InputStream in = null;
     File icon = null;
     for (final String path : resourceBases) {
-      final String fileName = path + (path.endsWith(File.separator) ? "" : File.separator) + filename;
-      final File file = new File(fileName);
+      final String pathAndfilename = path + (path.endsWith(File.separator) ? "" : File.separator) + filename;
+      final File file = new File(pathAndfilename);
       if (file.exists()) {
         icon = file;
         break;

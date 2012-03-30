@@ -896,6 +896,11 @@ button.k-button {
   padding: 0 2px;
 }
 
+
+button.k-btn-go-up {
+  margin-right: 5px;
+}
+
 .k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover,button.k-button:hover,button.gwt-Button:hover
   {
   border: 1px orange solid;
@@ -1593,3 +1598,4 @@ div.jGrowl {
   top: 0 !important;
   width: auto !important;
 }
+

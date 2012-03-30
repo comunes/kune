@@ -167,7 +167,7 @@
   -webkit-border-bottom-right-radius: 4px;
   -moz-border-radius-bottomright: 4px;
   border-bottom-right-radius: 4px;
-  padding: 1px 7px 0 7px;
+  padding: 3px 7px 0 5px;
   overflow: hidden;
   border-collapse: separate;
 }

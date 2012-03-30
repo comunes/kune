@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Logger;
@@ -31,6 +32,7 @@ import org.mvel2.templates.CompiledTemplate;
 import org.mvel2.templates.TemplateCompiler;
 import org.mvel2.templates.TemplateRuntime;
 import org.mvel2.templates.util.TemplateTools;
+import org.waveprotocol.box.server.CoreSettings;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -38,6 +40,7 @@ import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import com.google.wave.splash.text.Markup;
 
 /**
@@ -55,13 +58,13 @@ public class Templates {
   private static final Logger LOG = Logger.getLogger(Templates.class.getName());
   public static final String MOBILE_TEMPLATE = "mobile_client.html";
   public static final String PERMALINK_WAVE_TEMPLATE = "permalink_client.html";
-
+  private static final String TEMPLATES_LOCATION = "others/splash/";
   public static final String WAVE_NOT_FOUND_TEMPLATE = "wave_not_found.html.fragment";
 
   private final Markup markup;
+  private String prefix;
 
   private final boolean productionMode = true;
-
   /**
    * file name of template -> compiled template lazy cache.
    */
@@ -73,8 +76,19 @@ public class Templates {
   });
 
   @Inject
-  public Templates(final Markup markup) {
+  public Templates(final Markup markup,
+      @Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
     this.markup = markup;
+    for (final String path : resourceBases) {
+      final String prefix = path + (path.endsWith(File.separator) ? "" : File.separator);
+      final String pathAndfilename = prefix + TEMPLATES_LOCATION + Templates.BLIP_TEMPLATE;
+      final File file = new File(pathAndfilename);
+      if (file.exists()) {
+        this.prefix = prefix;
+        break;
+      }
+    }
+    Preconditions.checkArgument(prefix != null, "Could not find templates");
   }
 
   private CompiledTemplate loadTemplate(final String template) {
@@ -109,8 +123,7 @@ public class Templates {
 
     FileInputStream stream = null;
     try {
-      stream = new FileInputStream(new File((productionMode ? "/usr/share/kune/webapp"
-          : "src/main/webapp") + "/others/splash/" + file));
+      stream = new FileInputStream(new File(prefix + TEMPLATES_LOCATION + file));
     } catch (final FileNotFoundException e) {
       LOG.info("Could not find resource named: " + file);
     }
