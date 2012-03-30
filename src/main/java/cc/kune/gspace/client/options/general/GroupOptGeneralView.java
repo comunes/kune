@@ -19,7 +19,11 @@
  */
 package cc.kune.gspace.client.options.general;
 
+import cc.kune.core.shared.dto.GroupType;
+
 public interface GroupOptGeneralView extends EntityOptGeneralView {
+
+  GroupType getGroupType();
 
   String getLongName();
 

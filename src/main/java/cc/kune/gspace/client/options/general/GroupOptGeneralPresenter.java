@@ -78,12 +78,13 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
   @Override
   protected void updateInServer() {
     if (view.isValid()) {
-      NotifyUser.showProgress();
+      NotifyUser.showProgress(i18n.t("Saving"));
       final GroupDTO group = session.getCurrentState().getGroup();
       final String previousGroupName = group.getShortName();
       final StateToken token = group.getStateToken().copy();
       group.setShortName(groupView.getShortName());
       group.setLongName(groupView.getLongName());
+      group.setGroupType(groupView.getGroupType());
       groupService.get().updateGroup(session.getUserHash(), token, group,
           new AsyncCallbackSimple<StateAbstractDTO>() {
             @Override

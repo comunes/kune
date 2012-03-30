@@ -22,7 +22,10 @@ package cc.kune.core.client.groups.newgroup;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.DefaultForm;
+import cc.kune.core.client.ui.DefaultFormUtils;
 
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -37,7 +40,28 @@ public class GroupFieldFactory {
     this.i18n = i18n;
   }
 
-  public TextField<String> createUserLongName(final String fieldId) {
+  public Radio createClosedRadio(final FieldSet fieldSet, final String fieldSetId, final String radioId) {
+    final Radio radio = DefaultFormUtils.createRadio(
+        fieldSet,
+        i18n.t("Closed"),
+        fieldSetId,
+        i18n.t("A Closed group is a private project, which contents are only accessible to its members (by default)."),
+        radioId);
+    return radio;
+  }
+
+  public Radio createCommunityRadio(final FieldSet fieldSet, final String fieldSetId,
+      final String radioId) {
+    final Radio radio = DefaultFormUtils.createRadio(
+        fieldSet,
+        i18n.t("Community"),
+        fieldSetId,
+        i18n.t("A community is a group of users with shared interests (for instance the environmental community or the LGBT community). It is open to any new member to join freely without the moderation of the administrators."),
+        radioId);
+    return radio;
+  }
+
+  public TextField<String> createLongName(final String fieldId) {
     final TextField<String> field = new TextField<String>();
     field.setFieldLabel(i18n.t("Long name"));
     field.setName(fieldId);
@@ -48,6 +72,23 @@ public class GroupFieldFactory {
     field.setMaxLength(50); /* Same in Group.java/longName */
     field.setValidationDelay(1000);
     return field;
+  }
+
+  public Radio createOrgRadio(final FieldSet fieldSet, final String fieldSetId, final String radioId) {
+    final Radio radio = DefaultFormUtils.createRadio(fieldSet, i18n.t("Organization"), fieldSetId,
+        i18n.t("An organization works the same way as a project, "
+            + "except that it must be a legal entity."), radioId);
+    return radio;
+  }
+
+  public Radio createProjectRadio(final FieldSet fieldSet, final String fieldSetId, final String radioId) {
+    final Radio radio = DefaultFormUtils.createRadio(
+        fieldSet,
+        i18n.t("Project"),
+        fieldSetId,
+        i18n.t("A project is a kind of group in which the joining of new members is moderated by the project administrators."),
+        radioId);
+    return radio;
   }
 
   public TextField<String> createUserShortName(final String fieldId) {
@@ -67,4 +108,5 @@ public class GroupFieldFactory {
     field.setValidationDelay(1000);
     return field;
   }
+
 }

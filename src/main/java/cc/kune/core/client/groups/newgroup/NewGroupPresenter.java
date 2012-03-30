@@ -110,6 +110,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
   }
 
   private GroupType getTypeOfGroup() {
+    // Duplicate in GroupOptGeneralPanel
     if (getView().isProject()) {
       return GroupType.PROJECT;
     } else if (getView().isOrganization()) {

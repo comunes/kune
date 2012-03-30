@@ -82,6 +82,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   private final LicenseManager licenseManager;
   private final KuneBasicProperties properties;
   private final ServerToolRegistry serverToolRegistry;
+  private final SocialNetworkCache snCache;
   private final Provider<TrashServerTool> trashTool;
   private final UserFinder userFinder;
 
@@ -91,7 +92,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       final KuneBasicProperties properties, final LicenseManager licenseManager,
       final LicenseFinder licenseFinder, final FileManager fileManager,
       final ServerToolRegistry serverToolRegistry, final Provider<TrashServerTool> trashTool,
-      final I18nTranslationService i18n) {
+      final I18nTranslationService i18n, final SocialNetworkCache snCache) {
     super(provider, Group.class);
     this.finder = finder;
     this.userFinder = userFinder;
@@ -103,6 +104,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     this.serverToolRegistry = serverToolRegistry;
     this.trashTool = trashTool;
     this.i18n = i18n;
+    this.snCache = snCache;
   }
 
   @Override
@@ -157,26 +159,14 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     checkIfLongNameAreInUse(group.getLongName());
     final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
     if (User.isKnownUser(user)) {
-      GroupListMode publicVisibility = GroupListMode.EVERYONE;
-      SocialNetworkVisibility snVisibility = SocialNetworkVisibility.anyone;
-      if (group.getGroupType().equals(GroupType.COMMUNITY)) {
-        group.setAdmissionType(AdmissionType.Open);
-      } else if (group.getGroupType().equals(GroupType.CLOSED)) {
-        group.setAdmissionType(AdmissionType.Closed);
-        publicVisibility = GroupListMode.NORMAL;
-        snVisibility = SocialNetworkVisibility.onlymembers;
-      } else if (group.getGroupType().equals(GroupType.ORGANIZATION)) {
-        group.setAdmissionType(AdmissionType.Moderated);
-      } else if (group.getGroupType().equals(GroupType.PROJECT)) {
-        group.setAdmissionType(AdmissionType.Moderated);
-      } else if (group.getGroupType().equals(GroupType.ORPHANED_PROJECT)) {
-        group.setAdmissionType(AdmissionType.Open);
-      }
+      setAdmissionType(group);
       final String licName = group.getDefaultLicense().getShortName();
       final License license = licenseFinder.findByShortName(licName);
       group.setDefaultLicense(license);
       group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
-      initSocialNetwork(group, user.getUserGroup(), publicVisibility, snVisibility);
+      final boolean isClosed = group.getGroupType().equals(GroupType.CLOSED);
+      initSocialNetwork(group, user.getUserGroup(), getDefGroupMode(isClosed),
+          getDefSNVisibility(isClosed));
       final String title = i18n.t("About [%s]", group.getLongName());
       initGroup(user, group, serverToolRegistry.getToolsRegisEnabledForGroups(), title, publicDescrip);
       return group;
@@ -249,6 +239,14 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     return finder.findEnabledTools(id);
   }
 
+  private GroupListMode getDefGroupMode(final boolean isClosed) {
+    return isClosed ? GroupListMode.NORMAL : GroupListMode.EVERYONE;
+  }
+
+  private SocialNetworkVisibility getDefSNVisibility(final boolean isClosed) {
+    return isClosed ? SocialNetworkVisibility.onlymembers : SocialNetworkVisibility.anyone;
+  }
+
   @Override
   public Group getGroupOfUserWithId(final Long userId) {
     return userId != null ? find(User.class, userId).getUserGroup() : null;
@@ -283,14 +281,10 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   private void initSocialNetwork(final Group group, final Group userGroup,
       final GroupListMode publicVisibility, final SocialNetworkVisibility snVisibility) {
-    final SocialNetwork network = group.getSocialNetwork();
-    final AccessLists lists = network.getAccessLists();
-    lists.getEditors().setMode(GroupListMode.NOBODY);
-    lists.getViewers().setMode(publicVisibility);
+    final SocialNetwork network = setSocialNetwork(group, publicVisibility, snVisibility);
     if (!group.getGroupType().equals(GroupType.ORPHANED_PROJECT)) {
       network.addAdmin(userGroup);
     }
-    network.setVisibility(snVisibility);
   }
 
   @Override
@@ -317,6 +311,23 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     return super.search(query, firstResult, maxResults);
   }
 
+  private void setAdmissionType(final Group group) {
+    final GroupType groupType = group.getGroupType();
+    if (groupType.equals(GroupType.COMMUNITY)) {
+      group.setAdmissionType(AdmissionType.Open);
+    } else {
+      if (groupType.equals(GroupType.CLOSED)) {
+        group.setAdmissionType(AdmissionType.Closed);
+      } else if (groupType.equals(GroupType.ORGANIZATION)) {
+        group.setAdmissionType(AdmissionType.Moderated);
+      } else if (groupType.equals(GroupType.PROJECT)) {
+        group.setAdmissionType(AdmissionType.Moderated);
+      } else if (groupType.equals(GroupType.ORPHANED_PROJECT)) {
+        group.setAdmissionType(AdmissionType.Open);
+      }
+    }
+  }
+
   @Override
   public void setDefaultContent(final String groupShortName, final Content content) {
     final Group group = findByShortName(groupShortName);
@@ -329,6 +340,16 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     clearGroupBackImage(group);
     group.setBackgroundImage(backgroundFileName);
     group.setBackgroundMime(mime);
+  }
+
+  private SocialNetwork setSocialNetwork(final Group group, final GroupListMode publicVisibility,
+      final SocialNetworkVisibility snVisibility) {
+    final SocialNetwork network = group.getSocialNetwork();
+    final AccessLists lists = network.getAccessLists();
+    lists.getEditors().setMode(GroupListMode.NOBODY);
+    lists.getViewers().setMode(publicVisibility);
+    network.setVisibility(snVisibility);
+    return network;
   }
 
   @Override
@@ -366,7 +387,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       }
       group.setShortName(shortName);
     }
+    group.setGroupType(groupDTO.getGroupType());
+    setAdmissionType(group);
+    final boolean isClosed = group.getGroupType().equals(GroupType.CLOSED);
+    setSocialNetwork(group, getDefGroupMode(isClosed), getDefSNVisibility(isClosed));
     persist(group);
+    snCache.expire(group);
     return group;
   }
 

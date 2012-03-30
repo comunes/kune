@@ -28,6 +28,23 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 
 public class DefaultFormUtils {
+
+  public static final String BIG_FIELD_SIZE = "310px";
+
+  public static FieldSet createFieldSet(final String heading) {
+    return createFieldSet(heading, BIG_FIELD_SIZE);
+  }
+
+  public static FieldSet createFieldSet(final String heading, final String width) {
+    final FieldSet fieldSet = new FieldSet();
+    fieldSet.setHeading(heading);
+    fieldSet.addStyleName("k-form-fieldset");
+    fieldSet.setCollapsible(false);
+    fieldSet.setWidth(width);
+    fieldSet.setAutoHeight(true);
+    return fieldSet;
+  }
+
   public static Radio createRadio(final FieldSet fieldSet, final String radioLabel,
       final String radioFieldName, final String radioTip, final String id) {
     final Radio radio = new Radio();

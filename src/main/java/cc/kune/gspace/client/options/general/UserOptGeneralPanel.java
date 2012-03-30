@@ -40,8 +40,6 @@ import com.google.inject.Inject;
 
 public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOptGeneralView {
 
-  private static final String BIG_FIELD_SIZE = "310px";
-
   public static final String DAILY_TYPE_ID = "k-ngp-type_daily";
   public static final String EMAIL_FIELD = "k-ngp-emial";
   public static final String HOURLY_TYPE_ID = "k-ngp-type_hourly";
@@ -78,12 +76,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     email = userFieldFactory.createUserEmail(EMAIL_FIELD);
     add(email);
 
-    emailNotifTypeFieldSet = new FieldSet();
-    emailNotifTypeFieldSet.setHeading(i18n.t("How often do you want to receive email notifications?"));
-    emailNotifTypeFieldSet.addStyleName("k-form-fieldset");
-    emailNotifTypeFieldSet.setCollapsible(false);
-    emailNotifTypeFieldSet.setWidth(BIG_FIELD_SIZE);
-    emailNotifTypeFieldSet.setAutoHeight(true);
+    emailNotifTypeFieldSet = DefaultFormUtils.createFieldSet(i18n.t("How often do you want to receive email notifications?"));
 
     immediateRadio = DefaultFormUtils.createRadio(emailNotifTypeFieldSet, i18n.t("almost immediately"),
         TYPEOFEMAILNOTIF_FIELD, i18n.t(
@@ -122,7 +115,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     notVerified.addStyleName("k-3corners");
     notVerifLabelAdapter = new AdapterField(notVerified);
     notVerifLabelAdapter.setLabelSeparator("");
-    notVerifLabelAdapter.setWidth(BIG_FIELD_SIZE);
+    notVerifLabelAdapter.setWidth(DefaultFormUtils.BIG_FIELD_SIZE);
     super.add(notVerifLabelAdapter);
 
     resendEmailVerifBtn = new Button(i18n.t("Resend verification email"));
@@ -130,7 +123,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     resendEmailVerifAdapter = new AdapterField(resendEmailVerifBtn);
     resendEmailVerifAdapter.setValidateOnBlur(false);
     resendEmailVerifAdapter.setLabelSeparator("");
-    resendEmailVerifAdapter.setWidth(BIG_FIELD_SIZE);
+    resendEmailVerifAdapter.setWidth(DefaultFormUtils.BIG_FIELD_SIZE);
     // resendEmailVerifAdapter.setFieldLabel(i18n.t("Maybe you want receive again our verification email"));
     add(resendEmailVerifAdapter);
   }

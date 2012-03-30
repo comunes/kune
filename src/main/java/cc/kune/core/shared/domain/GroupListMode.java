@@ -21,6 +21,15 @@ package cc.kune.core.shared.domain;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+/**
+ * The Enum GroupListMode describe the group list behavior
+ */
 public enum GroupListMode implements IsSerializable {
-    NORMAL, NOBODY, EVERYONE;
+
+  /** EVERYONE: means that everybody is allowed */
+  EVERYONE,
+  /** NOBODY: means that nobody is allowed */
+  NOBODY,
+  /** NORMAL means that that only groups in this list are allowed */
+  NORMAL;
 }
