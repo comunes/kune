@@ -52,7 +52,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
   @Inject
   public EventsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<NewMeetingBtn> newMeetingsBtn, final Provider<GoParentFolderBtn> folderGoUp,
+      final Provider<NewEventBtn> newEventBtn, final Provider<GoParentFolderBtn> folderGoUp,
       final Provider<OpenMeetingMenuItem> openContentMenuItem,
       final Provider<DelMeetingMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
@@ -102,7 +102,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     eventAddMenuItem.get();
     eventRemoveMenuItem.get();
 
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newMeetingsBtn, containers);
+    actionsRegistry.addAction(ActionGroups.TOPBAR, newEventBtn, containers);
 
     // For now, commented:
     // actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem,

@@ -23,6 +23,9 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.AlreadyGroupMemberException;
 import cc.kune.core.client.errors.AlreadyUserMemberException;
@@ -57,19 +60,22 @@ import com.google.inject.Singleton;
 @Singleton
 public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, Long> implements
     SocialNetworkManager {
+  public static final Log LOG = LogFactory.getLog(SocialNetworkManagerDefault.class);
 
   private final AccessRightsService accessRightsService;
   private final GroupFinder finder;
+  private final SocialNetworkCache snCache;
   private final UserManager userManager;
 
   @Inject
   public SocialNetworkManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final GroupFinder finder, final AccessRightsService accessRightsService,
-      final UserManager userManager) {
+      final UserManager userManager, final SocialNetworkCache snCache) {
     super(provider, SocialNetwork.class);
     this.finder = finder;
     this.accessRightsService = accessRightsService;
     this.userManager = userManager;
+    this.snCache = snCache;
   }
 
   @Override
@@ -81,6 +87,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (pendingCollabs.contains(group)) {
       sn.addCollaborator(group);
       sn.removePendingCollaborator(group);
+      snCache.expire(inGroup);
     } else {
       throw new DefaultException("User is not a pending collaborator");
     }
@@ -89,6 +96,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
   void addAdmin(final User newAdmin, final Group group) {
     final SocialNetwork sn = group.getSocialNetwork();
     sn.addAdmin(newAdmin.getUserGroup());
+    snCache.expire(group);
   }
 
   @Override
@@ -102,6 +110,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (sn.isPendingCollab(group)) {
       sn.removePendingCollaborator(group);
     }
+    snCache.expire(inGroup);
   }
 
   @Override
@@ -115,6 +124,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (sn.isPendingCollab(group)) {
       sn.removePendingCollaborator(group);
     }
+    snCache.expire(inGroup);
   }
 
   @Override
@@ -128,6 +138,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (sn.isPendingCollab(group)) {
       sn.removePendingCollaborator(group);
     }
+    snCache.expire(inGroup);
   }
 
   private void checkGroupAddingToSelf(final Group group, final Group inGroup) throws DefaultException {
@@ -157,6 +168,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     checkUserLoggedIsAdmin(userLogged, sn);
     unJoinGroup(group, inGroup);
+    snCache.expire(inGroup);
   }
 
   @Override
@@ -170,6 +182,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     } else {
       throw new DefaultException("Person/Group is not a pending collaborator");
     }
+    snCache.expire(inGroup);
   }
 
   @Override
@@ -202,10 +215,16 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
   public SocialNetworkData getSocialNetworkData(final User userLogged, final Group group) {
     final SocialNetworkData socialNetData = new SocialNetworkData();
     socialNetData.setGroupMembers(get(userLogged, group));
+
+    final SocialNetworkData cached = snCache.get(userLogged, group);
+    if (cached != null) {
+      LOG.debug("Returning cached SN");
+      return cached;
+    }
     final AccessRights groupRights = accessRightsService.get(userLogged, group.getAccessLists());
     socialNetData.setGroupRights(groupRights);
     socialNetData.setUserParticipation(findParticipation(userLogged, group));
-    socialNetData.setGroupMembers(get(userLogged, group));
+    // socialNetData.setGroupMembers(get(userLogged, group));
     if (group.isPersonal()) {
       final UserBuddiesData userBuddies = userManager.getUserBuddies(group.getShortName());
       final User userGroup = userManager.findByShortname(group.getShortName());
@@ -253,6 +272,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       socialNetData.setSocialNetworkVisibility(visibility);
       socialNetData.setUserBuddies(UserBuddiesData.EMPTY);
     }
+    snCache.put(userLogged, group, socialNetData);
     return socialNetData;
   }
 
@@ -287,6 +307,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     checkGroupIsNotAlreadyAMember(userGroup, sn);
     if (isModerated(admissionType)) {
       sn.addPendingCollaborator(userGroup);
+      snCache.expire(inGroup);
       return SocialNetworkRequestResult.moderated;
     } else if (isOpen(admissionType)) {
       if (inGroup.getGroupType().equals(GroupType.ORPHANED_PROJECT)) {
@@ -297,6 +318,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       } else {
         sn.addCollaborator(userGroup);
       }
+      snCache.expire(inGroup);
       return SocialNetworkRequestResult.accepted;
     } else if (isClosed(admissionType)) {
       return SocialNetworkRequestResult.denied;
@@ -316,6 +338,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       }
       sn.removeAdmin(group);
       sn.addCollaborator(group);
+      snCache.expire(inGroup);
     } else {
       throw new InvalidSNOperationException("Person/Group is not an admin");
     }
@@ -327,6 +350,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     final SocialNetwork sn = inGroup.getSocialNetwork();
     checkUserLoggedIsAdmin(userLogged, sn);
     if (sn.isCollab(group)) {
+      snCache.expire(inGroup);
       sn.removeCollaborator(group);
       sn.addAdmin(group);
     } else {
@@ -351,12 +375,15 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         if (sn.getAccessLists().getEditors().getList().size() > 0) {
           throw new LastAdminInGroupException();
         } else {
+          snCache.expire(inGroup);
           inGroup.setGroupType(GroupType.ORPHANED_PROJECT);
           inGroup.setAdmissionType(AdmissionType.Open);
         }
       }
+      snCache.expire(inGroup);
       sn.removeAdmin(groupToUnJoin);
     } else if (sn.isCollab(groupToUnJoin)) {
+      snCache.expire(inGroup);
       sn.removeCollaborator(groupToUnJoin);
     } else {
       throw new DefaultException("Person/Group is not a collaborator");

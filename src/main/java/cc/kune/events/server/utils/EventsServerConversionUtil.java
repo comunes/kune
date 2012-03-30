@@ -60,6 +60,9 @@ import com.google.wave.api.Gadget;
 public class EventsServerConversionUtil extends EventsSharedConversionUtil {
 
   @Inject
+  static EventsCache eventsCache;
+
+  @Inject
   private static EventsServerTool eventTool;
 
   @Inject
@@ -94,7 +97,16 @@ public class EventsServerConversionUtil extends EventsSharedConversionUtil {
             + waveId, e2);
       }
     }
+    eventsCache.put(container, list);
     return list;
+  }
+
+  public static List<Map<String, String>> getAppointmentsUsingCache(final Container container) {
+    final List<Map<String, String>> cached = eventsCache.get(container);
+    if (cached != null) {
+      return cached;
+    }
+    return getAppointments(container);
   }
 
   public static Appointment to(final VEvent event) {

@@ -35,6 +35,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.NoDefaultContentException;
 import cc.kune.core.client.errors.ToolNotFoundException;
 import cc.kune.core.client.rpcservices.ContentService;
+import cc.kune.core.server.LogThis;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.access.AccessService;
@@ -74,16 +75,19 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.events.server.utils.EventsCache;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
 
+@LogThis
 public class ContentRPC implements ContentService, RPC {
   private final AccessService accessService;
   private final ChatManager chatManager;
   private final ContainerManager containerManager;
   private final ContentManager contentManager;
   private final CreationService creationService;
+  private final EventsCache eventsCache;
   private final FinderService finderService;
   private final GroupManager groupManager;
   private final Mapper mapper;
@@ -99,7 +103,8 @@ public class ContentRPC implements ContentService, RPC {
       final StateService stateService, final CreationService creationService,
       final GroupManager groupManager, final ContentManager contentManager,
       final ContainerManager containerManager, final TagUserContentManager tagManager,
-      final Mapper mapper, final ChatManager chatManager, final KuneWaveManager waveManager) {
+      final Mapper mapper, final ChatManager chatManager, final KuneWaveManager waveManager,
+      final EventsCache eventsCache) {
     this.finderService = finderService;
     this.userSession = userSession;
     this.accessService = accessService;
@@ -113,6 +118,7 @@ public class ContentRPC implements ContentService, RPC {
     this.mapper = mapper;
     this.chatManager = chatManager;
     this.waveManager = waveManager;
+    this.eventsCache = eventsCache;
   }
 
   @Override
@@ -274,7 +280,6 @@ public class ContentRPC implements ContentService, RPC {
     }
     final Container trash = containerManager.getTrashFolder(group);
     return moveContent(userHash, token, trash.getStateToken());
-    // return getState(getCurrentUser(), previousParent);
   }
 
   @Override

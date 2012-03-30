@@ -536,7 +536,7 @@ div.k-iconlabel {
 /* tooltips, adaptation of http://jonrohan.me/guide/css/creating-triangles-in-css/ */
 .k-tooltip {
   background-color: #FEFFF1;
-  border: 2px solid #666666;
+  border: 1px solid #666666;
   line-height: 1.3em;
   padding: 5px;
 }

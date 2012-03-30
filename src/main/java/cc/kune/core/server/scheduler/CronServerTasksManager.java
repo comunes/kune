@@ -35,11 +35,13 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 
+import cc.kune.core.server.manager.impl.SocialNetworkCacheClearDailyJob;
 import cc.kune.core.server.notifier.ClearUpdatedWavesHourlyJob;
 import cc.kune.core.server.notifier.PendingNotificationDailyJob;
 import cc.kune.core.server.notifier.PendingNotificationHourlyJob;
 import cc.kune.core.server.notifier.PendingNotificationImmediateJob;
 import cc.kune.core.server.rack.ContainerListener;
+import cc.kune.events.server.utils.EventsCacheClearDailyJob;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -78,6 +80,8 @@ public class CronServerTasksManager implements ContainerListener {
       scheduleJob(PendingNotificationHourlyJob.class, "0 0 * * * ?", "pendingnotifhourly");
       scheduleJob(ClearUpdatedWavesHourlyJob.class, "0 0 * * * ?", "clearupdatedwaveshourly");
       scheduleJob(PendingNotificationDailyJob.class, "0 5 0 * * ?", "pendingnotifdaily");
+      scheduleJob(EventsCacheClearDailyJob.class, "0 6 0 * * ?", "cleareventscachedaily");
+      scheduleJob(SocialNetworkCacheClearDailyJob.class, "0 6 0 * * ?", "clearcontentcachedaily");
     } catch (final SchedulerException e) {
       logError(e);
     } catch (final ParseException e) {

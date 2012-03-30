@@ -146,14 +146,15 @@ public class StateServiceDefault implements StateService {
     state.setContentRights(rightsService.get(userLogged, content.getAccessLists()));
     state.setAccessLists(content.getAccessLists());
     setCommon(state, userLogged, group, container);
-    if (userLogged != User.UNKNOWN_USER) {
-      state.setCurrentUserRate(contentManager.getRateContent(userLogged, content));
-    }
+    // if (userLogged != User.UNKNOWN_USER) {
+    // state.setCurrentUserRate(contentManager.getRateContent(userLogged,
+    // content));
+    // }
     // FIXME: user RateResult
-    final Double rateAvg = contentManager.getRateAvg(content);
-    state.setRate(rateAvg != null ? rateAvg : 0D);
-    final Long rateByUsers = contentManager.getRateByUsers(content);
-    state.setRateByUsers(rateByUsers != null ? rateByUsers.intValue() : 0);
+    // final Double rateAvg = contentManager.getRateAvg(content);
+    // state.setRate(rateAvg != null ? rateAvg : 0D);
+    // final Long rateByUsers = contentManager.getRateByUsers(content);
+    // state.setRateByUsers(rateByUsers != null ? rateByUsers.intValue() : 0);
     return state;
   }
 

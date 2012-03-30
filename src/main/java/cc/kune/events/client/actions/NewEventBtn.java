@@ -17,24 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.rpc;
+package cc.kune.events.client.actions;
 
-import com.google.inject.Singleton;
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.events.client.actions.EventAddMenuItem.EventAddAction;
 
-/**
- * marker interface (should not contain any method!)
- * 
- * all the RPC objects should:
- * <ul>
- * <li>implement a RemoteService interface in the server side</li>
- * <li>convert from domain objects to dto objects</li>
- * <li>has userHash protected methods</li>
- * <li>contains little (or nothing) bussines logic (should delegate to other
- * services/managers)</li>
- * </ul>
- * 
- */
-@Singleton
-public interface RPC {
+import com.google.inject.Inject;
+
+public class NewEventBtn extends ButtonDescriptor {
+
+  @Inject
+  public NewEventBtn(final I18nTranslationService i18n, final EventAddAction action,
+      final NavResources res, final GlobalShortcutRegister shorcutReg) {
+    super(i18n.t("New event"), action);
+    withIcon(res.calendarAdd()).withToolTip(i18n.t("Create a New Event"));
+    action.setOpenAfterCreation(true);
+  }
 
 }

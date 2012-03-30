@@ -60,6 +60,7 @@ import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.utils.FilenameUtils;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
@@ -72,6 +73,8 @@ import cc.kune.domain.finders.ContainerFinder;
 import cc.kune.domain.finders.ContentFinder;
 import cc.kune.domain.finders.I18nLanguageFinder;
 import cc.kune.domain.finders.UserFinder;
+import cc.kune.events.server.utils.EventsCache;
+import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.wave.server.KuneWaveServerUtils;
 import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
@@ -84,6 +87,7 @@ import com.google.inject.Singleton;
 public class ContentManagerDefault extends DefaultManager<Content, Long> implements ContentManager {
   private final ContainerFinder containerFinder;
   private final ContentFinder contentFinder;
+  private final EventsCache eventsCache;
   private final FinderService finder;
   private final I18nTranslationService i18n;
   private final KuneWaveService kuneWaveManager;
@@ -101,7 +105,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
       final FinderService finder, final UserFinder userFinder, final I18nLanguageFinder languageFinder,
       final TagUserContentManager tagManager, final KuneWaveService kuneWaveManager,
       final ParticipantUtils participantUtils, final ServerToolRegistry tools,
-      final XMLActionReader xmlActionReader, final I18nTranslationService i18n) {
+      final XMLActionReader xmlActionReader, final I18nTranslationService i18n,
+      final EventsCache eventsCache) {
     super(provider, Content.class);
     this.contentFinder = contentFinder;
     this.containerFinder = containerFinder;
@@ -114,6 +119,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     this.tools = tools;
     this.xmlActionReader = xmlActionReader;
     this.i18n = i18n;
+    this.eventsCache = eventsCache;
   }
 
   @Override
@@ -174,6 +180,16 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
     final Content content = finder.getContent(contentId);
     return addParticipants(user, content, members.toArray(new String[members.size()]));
+  }
+
+  private void clearEventsCacheIfNecessary(final Container previousParent) {
+    if (previousParent.getToolName().equals(EventsToolConstants.NAME)) {
+      eventsCache.remove(previousParent);
+    }
+  }
+
+  private void clearEventsCacheIfNecessary(final StateToken token) {
+    clearEventsCacheIfNecessary(finder.getContainer(token.getFolder()));
   }
 
   @Override
@@ -304,6 +320,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     oldContainer.removeContent(content);
     newContainer.addContent(content);
     content.setContainer(newContainer);
+    clearEventsCacheIfNecessary(oldContainer);
     return persist(content);
   }
 
@@ -351,6 +368,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
           getContentAuthor(content));
     }
     setModifiedTime(content);
+    clearEventsCacheIfNecessary(content.getContainer());
     return content;
   }
 
@@ -413,6 +431,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public void setGadgetProperties(final User user, final Content content, final String gadgetName,
       final Map<String, String> properties) {
     final URL gadgetUrl = getGadgetUrl(gadgetName);
+    if (gadgetName.equals(EventsToolConstants.TYPE_MEETING_DEF_GADGETNAME)) {
+      eventsCache.remove(content.getContainer());
+    }
     kuneWaveManager.setGadgetProperty(KuneWaveServerUtils.getWaveRef(content),
         getContentAuthor(content), gadgetUrl, properties);
   }

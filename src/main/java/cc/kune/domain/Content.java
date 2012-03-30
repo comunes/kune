@@ -139,6 +139,8 @@ public class Content implements HasStateToken {
   @Version
   private Integer version;
 
+  // TODO add index and also to debian package and liquibase
+  // @Index(name = "waveId")
   private String waveId;
 
   public Content() {
@@ -269,7 +271,8 @@ public class Content implements HasStateToken {
         || typeId.equals(TasksToolConstants.TYPE_TASK)
         || typeId.equals(ListsToolConstants.TYPE_POST)
         || typeId.equals(WikiToolConstants.TYPE_WIKIPAGE)
-        || (typeId.equals(BlogsToolConstants.TYPE_POST) || typeId.equals(BartersToolConstants.TYPE_BARTER) || typeId.equals(EventsToolConstants.TYPE_MEETING));
+        || (typeId.equals(BlogsToolConstants.TYPE_POST)
+            || typeId.equals(BartersToolConstants.TYPE_BARTER) || typeId.equals(EventsToolConstants.TYPE_MEETING));
   }
 
   public void removeAuthor(final User user) {

@@ -66,8 +66,10 @@ public class WaveStatusIndicator {
             break;
           case DISCONNECTED:
             NotifyUser.showProgress(i18n.t("Connecting"));
+            break;
           case RECONNECTING:
-            putValue(Action.NAME, i18n.t("Offline"));
+            NotifyUser.showProgress(i18n.t("Offline"));
+            // putValue(Action.NAME, i18n.t("Offline"));
             putValue(AbstractAction.STYLES, "k-sitebar-wave-status, k-sitebar-wave-status-offline");
             setVisible(true);
             break;

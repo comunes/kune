@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,24 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.rpc;
 
+package cc.kune.core.server.manager.impl;
+
+import java.text.ParseException;
+
+import org.quartz.SchedulerException;
+
+import cc.kune.core.server.persist.ClearCacheDailyJob;
+
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-/**
- * marker interface (should not contain any method!)
- * 
- * all the RPC objects should:
- * <ul>
- * <li>implement a RemoteService interface in the server side</li>
- * <li>convert from domain objects to dto objects</li>
- * <li>has userHash protected methods</li>
- * <li>contains little (or nothing) bussines logic (should delegate to other
- * services/managers)</li>
- * </ul>
- * 
- */
 @Singleton
-public interface RPC {
+public class SocialNetworkCacheClearDailyJob extends ClearCacheDailyJob {
+
+  @Inject
+  public SocialNetworkCacheClearDailyJob(final SocialNetworkCache cache) throws ParseException, SchedulerException {
+    super(cache);
+  }
 
 }

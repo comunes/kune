@@ -1,18 +1,22 @@
-GCHARSET                         "UTF-8                        "; body {
+GCHARSET                          "UTF-8                         "; body
+  {
   background-color: transparent;
   color: black;
-  font-family: "Ubuntu Beta",UbuntuBeta,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,sans-serif;
+  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
+    "DejaVu Sans", Tahoma, sans-serif;
   font-size: small;
   margin: 5px;
   overflow: hidden;
 }
 
 * {
-  font-family: "Ubuntu Beta",UbuntuBeta,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,sans-serif;
+  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
+    "DejaVu Sans", Tahoma, sans-serif;
 }
 
 body.fontface {
-  font-family: "Ubuntu Beta",UbuntuBeta,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,sans-serif;
+  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
+    "DejaVu Sans", Tahoma, sans-serif;
 }
 
 div,span {
@@ -58,7 +62,7 @@ a:visited {
 }
 
 .gwt-Tree {
-
+  
 }
 
 .gwt-Tree .gwt-TreeItem {
@@ -85,7 +89,7 @@ a:visited {
 }
 
 .gwt-StackPanel .gwt-StackPanelItem-selected {
-
+  
 }
 
 .gwt-PushButton-up {
@@ -267,7 +271,7 @@ a:visited {
 }
 
 .gwt-SplitLayoutPanel {
-
+  
 }
 
 .gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger,.gwt-SplitLayoutPanel-HDragger
@@ -351,7 +355,7 @@ a:visited {
 }
 
 .x-btn button,button { /* font: 18px/27px 'Ubuntu', arial; */
-
+  
 }
 
 .x-panel-mc {
@@ -376,11 +380,11 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
 }
 
 div div.siteBar table.k-sitebar img.k-iconlabel-left {
-  margin: 0px !important;  
+  margin: 0px !important;
 }
 
 div div.siteBar table.k-sitebar div.k-iconlabel-left {
-  margin: 0px !important;  
+  margin: 0px !important;
 }
 
 .k-sitebar-wave-status {
@@ -394,7 +398,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 }
 
 .k-sitebar-wave-status {
-
+  
 }
 
 .k-sitebar-wave-status-online {
@@ -415,7 +419,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 }
 
 .k-sitebar { /* margin-top: -30px; */
-
+  
 }
 
 .k-link {
@@ -702,7 +706,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
   -moz-opacity: 0.68 !important;
   -khtml-opacity: 0.68 !important;
   opacity: 0.68 !important;*/
-
+  
 }
 
 .k-publicspace-panel {
@@ -792,7 +796,8 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 
 .x-fieldset-header-text,.x-form-group-label,.x-form-cb-label {
   font-size: 14px;
-  font-family: "Ubuntu Beta",UbuntuBeta,Ubuntu,"Bitstream Vera Sans","DejaVu Sans",Tahoma,sans-serif;
+  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
+    "DejaVu Sans", Tahoma, sans-serif;
 }
 
 .k-form-intro {
@@ -851,7 +856,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 }
 
 .k-sn-adminslabel {
-
+  
 }
 
 .k-sn-mainpanel .k-basic-thumb {
@@ -871,6 +876,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
   cursor: pointer;
   margin: 0;
   text-decoration: none;
+  background: url("images/hborder.png") repeat-x 0px -27px;
   background-color: #F2F2F2;
   color: #A05A2C;
   -webkit-border-radius: 5px;
@@ -883,10 +889,10 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
   width: 50px;
   min-width: 40px;
   height: 26px;
+  text-shadow: 1px 1px 1px #FFFFFF;
 }
 
-button.k-button 
-{
+button.k-button {
   padding: 0 2px;
 }
 
@@ -894,7 +900,6 @@ button.k-button
   {
   border: 1px orange solid;
   outline: 0 none;
-  /* background: #f0f0f0; */
 }
 
 .k-sn-mainpanel .x-btn button:hover span,.k-sn-mainpanel button:hover span,button.k-button:hover span
@@ -961,8 +966,8 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   color: gray !important;
   border-color: #CCCCCC !important;
   background: inherits !important;
-  kfilter: alpha(opacity =
-              50) !important;
+  kfilter: alpha(opacity = 
+               50) !important;
   -moz-opacity: 0.50 !important;
   -khtml-opacity: 0.50 !important;
   opacity: 0.50 !important;
@@ -976,12 +981,13 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 /* end buttons */
-.k-sn-collabslabel {
 
+.k-sn-collabslabel {
+  
 }
 
 .k-sn-pendingslabel {
-
+  
 }
 
 .k-sn-orphan-label {
@@ -999,15 +1005,15 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-sn-2nd-spanel {
-
+  
 }
 
 .k-sn-3rd-panel {
-
+  
 }
 
 .k-sn-adminsscroll,.k-sn-collabsscroll,.k-sn-pendingsscroll {
-
+  
 }
 
 .k-sn-adminsflow,.k-sn-collabsflow,.k-sn-pendingsflow {
@@ -1015,15 +1021,15 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-sn-adminsscroll {
-
+  
 }
 
 .k-sn-collabsscroll {
-
+  
 }
 
 .k-sn-pendingsscroll {
-
+  
 }
 
 .k-userconfirm-label {
@@ -1032,7 +1038,7 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-sn-deck {
-
+  
 }
 
 .k-sn-bottomPanel {
@@ -1183,7 +1189,7 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-tool-panel {
-
+  
 }
 
 .k-tool-item {
@@ -1193,19 +1199,19 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-tool-item-focus {
-
+  
 }
 
 .k-tool-item-nofocus {
-
+  
 }
 
 .k-tool-item-selected {
-
+  
 }
 
 .k-tool-item-notselected {
-
+  
 }
 
 .k-def-docbtn span {
@@ -1254,8 +1260,8 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =
-              90);
+  kfilter: alpha(opacity = 
+               90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1310,7 +1316,7 @@ table.k-folder-viewer {
 
 /* Decorated tabbar */
 .gwt-DecoratedTabBar {
-
+  
 }
 
 .gwt-DecoratedTabBar .gwt-TabBarFirst {
@@ -1318,7 +1324,7 @@ table.k-folder-viewer {
 }
 
 .gwt-DecoratedTabBar .gwt-TabBarRest {
-
+  
 }
 
 .gwt-DecoratedTabBar .gwt-TabBarItem {
@@ -1587,5 +1593,3 @@ div.jGrowl {
   top: 0 !important;
   width: auto !important;
 }
-
-

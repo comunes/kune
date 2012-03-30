@@ -81,15 +81,8 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
       final TutorialViewer tutorialViewer) {
     super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
         containerDropControllerProv, tutorialViewer);
-    final CalendarSettings settings = new CalendarSettings();
-    settings.setIntervalsPerHour(4);
-    settings.setPixelsPerInterval(10);
-    // With Single is very annoying
-    // settings.setTimeBlockClickNumber(Click.Single);
-    // settings.setOffsetHourLabels(true);
-    settings.setScrollToHour(8);
     calendar = new Calendar();
-    calendar.setSettings(settings);
+    calendar.setSettings(setCalendarSettings());
     widget = calendar;
     calendar.sinkEvents(Event.ONMOUSEDOWN | Event.ONDBLCLICK | Event.KEYEVENTS | Event.ONMOUSEOVER
         | Event.ONCLICK);
@@ -171,6 +164,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   @Override
   public void attach() {
+    calendar.setSettings(setCalendarSettings());
     super.attach();
     gsArmor.enableCenterScroll(false);
   }
@@ -244,6 +238,17 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   @Override
   public void resumeLayout() {
     calendar.resumeLayout();
+  }
+
+  private CalendarSettings setCalendarSettings() {
+    final CalendarSettings settings = new CalendarSettings();
+    settings.setIntervalsPerHour(4);
+    settings.setPixelsPerInterval(10);
+    // With Single is very annoying
+    // settings.setTimeBlockClickNumber(Click.Single);
+    // settings.setOffsetHourLabels(true);
+    settings.setScrollToHour(8);
+    return settings;
   }
 
   @Override

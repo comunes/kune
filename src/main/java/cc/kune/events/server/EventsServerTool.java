@@ -45,21 +45,24 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.events.server.utils.EventsCache;
 
 import com.google.inject.Inject;
 
 public class EventsServerTool extends AbstractServerTool implements ServerWaveTool {
 
   private static final String MEETING_GADGET = "http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml";
+  private final EventsCache eventsCache;
   private final URL gadgetUrl;
 
   @Inject
   public EventsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
-      final CreationService creationService) {
+      final CreationService creationService, final EventsCache eventsCache) {
     super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_MEETING), Arrays.asList(TYPE_ROOT),
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
         creationService, configurationManager, i18n, ServerToolTarget.forBoth);
+    this.eventsCache = eventsCache;
     gadgetUrl = UrlUtils.of(MEETING_GADGET);
   }
 
@@ -83,6 +86,7 @@ public class EventsServerTool extends AbstractServerTool implements ServerWaveTo
   public void onCreateContent(final Content content, final Container parent) {
     content.setStatus(ContentStatus.publishedOnline);
     content.setPublishedOn(new Date());
+    eventsCache.remove(parent);
   }
 
   @Override
