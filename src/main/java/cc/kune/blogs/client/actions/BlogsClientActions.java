@@ -42,6 +42,8 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.PurgeContainerBtn;
+import cc.kune.gspace.client.actions.PurgeContainerMenuItem;
 import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
@@ -81,6 +83,8 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelBlogMenuItem> delFolderMenuItem,
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
+      final Provider<PurgeContainerMenuItem> purgeFolderMenuItem,
+      final Provider<PurgeContainerBtn> purgeFolderBtn,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
@@ -116,6 +120,10 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
         contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeFolderBtn,
+        containersNoRoot);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
+        containersNoRoot);
     newMenusRegistry.register(TYPE_BLOG, blogNewMenu.get());
     newMenusRegistry.register(TYPE_POST,
         (MenuDescriptor) postNewMenu.get().withText(i18n.t("Add Gadget")));

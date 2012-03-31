@@ -37,6 +37,8 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.PurgeContainerBtn;
+import cc.kune.gspace.client.actions.PurgeContainerMenuItem;
 import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
@@ -76,9 +78,10 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<CopyContentMenuItem> copyContent, final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
-      final Provider<ExportCalendarMenuItem> export, final Provider<CalendarGoNextBtn> calNextBtn,
-      final CalendarOnOverMenu onOverMenu, final Provider<CalendarGoTodayBtn> goToday,
-      final Provider<RefreshContentMenuItem> refresh) {
+      final Provider<PurgeContainerMenuItem> purgeFolderMenuItem,
+      final Provider<PurgeContainerBtn> purgeFolderBtn, final Provider<ExportCalendarMenuItem> export,
+      final Provider<CalendarGoNextBtn> calNextBtn, final CalendarOnOverMenu onOverMenu,
+      final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
@@ -105,6 +108,10 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
         contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeFolderBtn,
+        containersNoRoot);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
+        containersNoRoot);
 
     eventOpenMenuItem.get();
     eventAddMenuItem.get();

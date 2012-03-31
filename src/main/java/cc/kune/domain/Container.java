@@ -158,6 +158,27 @@ public class Container implements HasId, HasStateToken {
     } else if (!id.equals(other.id)) {
       return false;
     }
+    if (name == null) {
+      if (other.name != null) {
+        return false;
+      }
+    } else if (!name.equals(other.name)) {
+      return false;
+    }
+    if (toolName == null) {
+      if (other.toolName != null) {
+        return false;
+      }
+    } else if (!toolName.equals(other.toolName)) {
+      return false;
+    }
+    if (typeId == null) {
+      if (other.typeId != null) {
+        return false;
+      }
+    } else if (!typeId.equals(other.typeId)) {
+      return false;
+    }
     return true;
   }
 
@@ -252,14 +273,6 @@ public class Container implements HasId, HasStateToken {
     return accessLists != null;
   }
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((id == null) ? 0 : id.hashCode());
-    return result;
-  }
-
   @Transient
   public boolean isLeaf() {
     return childs.size() == 0 && contents.size() == 0;
@@ -271,9 +284,9 @@ public class Container implements HasId, HasStateToken {
   }
 
   public void removeChild(final Container child) {
-    childs.size();
+    // Adding hash and equals to Container breaks move and delete
+    child.setParent(null);
     childs.remove(child);
-    // child.setParent(null);
   }
 
   public void removeContent(final Content content) {

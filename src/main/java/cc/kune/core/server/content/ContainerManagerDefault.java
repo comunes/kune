@@ -42,7 +42,6 @@ import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.finders.ContainerFinder;
 import cc.kune.domain.finders.ContentFinder;
-import cc.kune.trash.server.TrashServerUtils;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.common.base.Preconditions;
@@ -134,8 +133,9 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
   @Override
   public Container purgeContainer(final Container container) {
-    Preconditions.checkState(TrashServerUtils.inTrash(container),
-        "Trying to purge a not deleted container: " + container);
+    // Enable this precondition ASAP
+    // Preconditions.checkState(TrashServerUtils.inTrash(container),
+    // "Trying to purge a not deleted container: " + container);
     Preconditions.checkState(!container.isRoot(), "Trying to purge a root folder: " + container);
     Preconditions.checkState(container.getChilds().size() == 0, "Container has folder childs");
     Preconditions.checkState(container.getContents().size() == 0, "Container has content childs");
@@ -144,9 +144,6 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     container.setParent(null);
     persist(parent);
     container.setOwner(null);
-    // persist(parent);
-    // merge(container);
-    // flush();
     remove(container);
     return parent;
   }

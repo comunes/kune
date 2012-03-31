@@ -131,31 +131,6 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
   }
 
   @Test
-  public void delAndPurgeContainer() throws Exception {
-    doLogin();
-    final StateContainerDTO state = contentService.addFolder(session.getHash(),
-        defaultContent.getStateToken(), "some folder", DocsToolConstants.TYPE_FOLDER);
-    final ContainerDTO newFolder = state.getContainer();
-
-    final StateContainerDTO trash = getTrash();
-    assertEquals(0, trash.getContainer().getContents().size());
-    assertEquals(0, trash.getContainer().getChilds().size());
-    contentService.delContent(session.getHash(), newFolder.getStateToken());
-
-    final StateContainerDTO trashAfterDel = getTrash();
-    assertEquals(0, trashAfterDel.getContainer().getContents().size());
-    assertEquals(1, trashAfterDel.getContainer().getChilds().size());
-    final StateContainerDTO deletedFolder = (StateContainerDTO) contentService.getContent(
-        session.getHash(),
-        newFolder.getStateToken().setTool(TrashToolConstants.TOOL_NAME).setFolder(
-            newFolder.getStateToken().getFolder()));
-    contentService.purgeContainer(session.getHash(), deletedFolder.getStateToken());
-    final StateContainerDTO trashAfterPurge = getTrash();
-    assertEquals(0, trashAfterPurge.getContainer().getContents().size());
-    assertEquals(0, trashAfterPurge.getContainer().getChilds().size());
-  }
-
-  @Test
   public void delAndPurgeContent() throws Exception {
     doLogin();
     final StateContainerDTO trash = getTrash();
@@ -176,6 +151,31 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     final StateContainerDTO trashAfterPurge = contentService.purgeContent(session.getHash(),
         deletedContent.getStateToken());
     assertEquals(0, trashAfterPurge.getContainer().getContents().size());
+  }
+
+  @Test
+  public void delAndyPurgeContainer() throws Exception {
+    doLogin();
+    final StateContainerDTO state = contentService.addFolder(session.getHash(),
+        defaultContent.getStateToken(), "some folder", DocsToolConstants.TYPE_FOLDER);
+    final ContainerDTO newFolder = state.getContainer();
+
+    final StateContainerDTO trash = getTrash();
+    assertEquals(0, trash.getContainer().getContents().size());
+    assertEquals(0, trash.getContainer().getChilds().size());
+    contentService.delContent(session.getHash(), newFolder.getStateToken());
+
+    final StateContainerDTO trashAfterDel = getTrash();
+    assertEquals(0, trashAfterDel.getContainer().getContents().size());
+    assertEquals(1, trashAfterDel.getContainer().getChilds().size());
+    final StateContainerDTO deletedFolder = (StateContainerDTO) contentService.getContent(
+        session.getHash(),
+        newFolder.getStateToken().setTool(TrashToolConstants.TOOL_NAME).setFolder(
+            newFolder.getStateToken().getFolder()));
+    contentService.purgeContent(session.getHash(), deletedFolder.getStateToken());
+    final StateContainerDTO trashAfterPurge = getTrash();
+    assertEquals(0, trashAfterPurge.getContainer().getContents().size());
+    assertEquals(0, trashAfterPurge.getContainer().getChilds().size());
   }
 
   @Test

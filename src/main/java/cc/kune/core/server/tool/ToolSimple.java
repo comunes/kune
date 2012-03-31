@@ -24,6 +24,10 @@ public class ToolSimple {
   private final String name;
   private final String rootName;
 
+  public ToolSimple() {
+    this(null, null);
+  }
+
   public ToolSimple(final String name, final String rootName) {
     this.name = name;
     this.rootName = rootName;

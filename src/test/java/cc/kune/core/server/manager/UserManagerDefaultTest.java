@@ -87,13 +87,6 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertNotNull(result.getId());
   }
 
-  @Test(expected = InvalidStateException.class)
-  public void passwdLengthIncorrect() {
-    user = new User("test1", "test1 name", "test@example.com", "diggest".getBytes(), "salt".getBytes(),
-        english, gb, getTimeZone());
-    persist(user);
-  }
-
   /**
    * This was not working:
    * http://opensource.atlassian.com/projects/hibernate/browse/EJB-382

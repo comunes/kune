@@ -99,8 +99,8 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(1, parentFolder.getChilds().size());
     containerManager.moveContainer(folderToMove, rootFolder);
     assertEquals(rootFolder, folderToMove.getParent());
-    assertEquals(0, parentFolder.getChilds().size());
     assertEquals(2, rootFolder.getChilds().size());
+    assertEquals(0, parentFolder.getChilds().size());
     assertEquals(2, folderToMove.getAbsolutePath().size());
     assertEquals(rootFolder, folderToMove.getAbsolutePath().get(0));
     assertEquals(folderToMove, folderToMove.getAbsolutePath().get(1));

@@ -38,6 +38,8 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.PurgeContainerBtn;
+import cc.kune.gspace.client.actions.PurgeContainerMenuItem;
 import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
@@ -71,7 +73,9 @@ public class BartersClientActions extends AbstractFoldableToolActions {
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
-      final Provider<RefreshContentMenuItem> refresh, final Provider<CopyContentMenuItem> copyContent,
+      final Provider<PurgeContainerMenuItem> purgeFolderMenuItem,
+      final Provider<PurgeContainerBtn> purgeFolderBtn, final Provider<RefreshContentMenuItem> refresh,
+      final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
@@ -102,6 +106,10 @@ public class BartersClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
         contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeFolderBtn,
+        containersNoRoot);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
+        containersNoRoot);
   }
 
   @Override

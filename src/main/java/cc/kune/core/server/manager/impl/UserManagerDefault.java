@@ -103,6 +103,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final NotificationService notifyService;
   private final ParticipantUtils participantUtils;
   private final KuneBasicProperties properties;
+  private final SocialNetworkCache snCache;
   private final UserFinder userFinder;
   private final AccountStore waveAccountStore;
   private final CustomUserRegistrationServlet waveUserRegister;
@@ -117,7 +118,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final CustomUserRegistrationServlet waveUserRegister, final AccountStore waveAccountStore,
       final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils,
       final KuneBasicProperties properties, final GroupManager groupManager,
-      final NotificationService notifyService, final XmppRosterProvider xmppRoster) {
+      final NotificationService notifyService, final XmppRosterProvider xmppRoster,
+      final SocialNetworkCache snCache) {
     super(provider, User.class);
     this.userFinder = finder;
     this.languageManager = languageManager;
@@ -133,6 +135,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.groupManager = groupManager;
     this.notifyService = notifyService;
     this.xmppRoster = xmppRoster;
+    this.snCache = snCache;
   }
 
   /*
@@ -434,6 +437,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   @Override
   public void setSNetVisibility(final User user, final UserSNetVisibility visibility) {
     user.setSNetVisibility(visibility);
+    snCache.expire(user.getUserGroup());
     persist(user);
   }
 

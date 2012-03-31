@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.integration.content;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -51,7 +52,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
         getSiteDefaultContent().getStateToken());
     assertNotNull(response.getContentRights());
     assertTrue(response.getContentRights().isEditable());
-    assertTrue(response.getAccessLists().getAdmins().getList().size() == 1);
+    assertEquals(1, response.getAccessLists().getAdmins().getList().size());
   }
 
   @Before
@@ -68,15 +69,13 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     assertNotNull(content.getContainer().getId());
     assertNotNull(content.getToolName());
     assertNotNull(content.getDocumentId());
-    assertNotNull(content.getRateByUsers());
-    assertNotNull(content.getRate());
   }
 
   @Test
   public void defContentOfUserWithNoHomePage() throws Exception {
-    final String userHash = doLogin().getUserHash();
-    final StateAbstractDTO response = contentService.getContent(userHash, new StateToken());
-    assertTrue(response.getStateToken().equals(getSiteDefaultContent().getStateToken()));
+    doLogin();
+    final StateAbstractDTO response = contentService.getContent(session.getHash(), new StateToken());
+    assertEquals(response.getStateToken(), getSiteDefaultContent().getStateToken());
   }
 
   @Test

@@ -42,6 +42,8 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.PurgeContainerBtn;
+import cc.kune.gspace.client.actions.PurgeContainerMenuItem;
 import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
@@ -80,7 +82,9 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
       final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
-      final Provider<ChatAboutContentBtn> chatAbout, final Provider<CopyContentMenuItem> copyContent,
+      final Provider<PurgeContainerMenuItem> purgeFolderMenuItem,
+      final Provider<PurgeContainerBtn> purgeFolderBtn, final Provider<ChatAboutContentBtn> chatAbout,
+      final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final TasksFolderNewMenu taskFolderNewMenu, final TasksNewMenu taskNewMenu,
       final NewMenusForTypeIdsRegistry newMenusRegistry,
@@ -127,6 +131,10 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
         contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeFolderBtn,
+        containersNoRoot);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
+        containersNoRoot);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, taskFolderNewMenu.get());

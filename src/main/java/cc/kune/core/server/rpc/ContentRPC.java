@@ -454,22 +454,17 @@ public class ContentRPC implements ContentService, RPC {
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator)
   @KuneTransactional
-  public StateContainerDTO purgeContainer(final String userHash, final StateToken token) {
-    final User user = getCurrentUser();
-    final Long containerId = ContentUtils.parseId(token.getFolder());
-    final Container container = containerManager.purgeContainer(finderService.getContainer(containerId));
-    return mapState(stateService.create(user, container), user);
-  }
-
-  @Override
-  @Authenticated
-  @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Administrator)
-  @KuneTransactional
   public StateContainerDTO purgeContent(final String userHash, final StateToken token) {
     final User user = getCurrentUser();
-    final Long contentId = ContentUtils.parseId(token.getDocument());
-    final Container container = contentManager.purgeContent(finderService.getContent(contentId));
-    return mapState(stateService.create(user, container), user);
+    if (token.isComplete()) {
+      final Long contentId = ContentUtils.parseId(token.getDocument());
+      final Container container = contentManager.purgeContent(finderService.getContent(contentId));
+      return mapState(stateService.create(user, container), user);
+    } else {
+      final Long containerId = ContentUtils.parseId(token.getFolder());
+      final Container container = containerManager.purgeContainer(finderService.getContainer(containerId));
+      return mapState(stateService.create(user, container), user);
+    }
   }
 
   @Override

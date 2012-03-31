@@ -41,6 +41,8 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.PurgeContainerBtn;
+import cc.kune.gspace.client.actions.PurgeContainerMenuItem;
 import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
@@ -82,6 +84,8 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<RefreshContentMenuItem> refreshPost,
       final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
+      final Provider<PurgeContainerMenuItem> purgeFolderMenuItem,
+      final Provider<PurgeContainerBtn> purgeFolderBtn,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants, final ListsNewMenu listNewMenu,
       final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelListMenuItem> delFolderMenuItem,
@@ -125,6 +129,10 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
         contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeFolderBtn,
+        containersNoRoot);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
+        containersNoRoot);
     newMenusRegistry.register(TYPE_LIST, listNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, listNewMenu.get());
     newMenusRegistry.register(TYPE_POST,

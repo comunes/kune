@@ -39,4 +39,5 @@ public class ActionUtils {
         : ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
     return token;
   }
+
 }

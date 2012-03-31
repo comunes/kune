@@ -291,7 +291,9 @@
       <groupId>com.calclab.emite</groupId>
       <artifactId>emite</artifactId>
       <version>r1694</version>
+      <!-- Used in server side also
       <scope>provided</scope>
+      -->
     </dependency>
     <dependency>
       <groupId>com.calclab.emite</groupId>
@@ -711,7 +713,9 @@
       <groupId>com.bradrydzewski</groupId>
       <artifactId>gwt-cal</artifactId>
       <version>0.9.3-dndCreation</version>
+      <!-- Used in server side also
       <scope>provided</scope>
+       -->
     </dependency>
     <dependency>
       <groupId>org.mnode.ical4j</groupId>
