@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
-import sun.misc.SignalHandler;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.server.InitData;
@@ -79,12 +78,15 @@ public class SiteRPC implements RPC, SiteService {
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
     this.extMediaDescManager = extMediaDescManager;
-    sun.misc.Signal.handle(new sun.misc.Signal("HUP"), new SignalHandler() {
-      @Override
-      public void handle(final sun.misc.Signal sig) {
-        loadProperties(kuneProperties);
-      }
-    });
+    // Gives some warning in openjdk
+    // http://stackoverflow.com/questions/5023520/sending-signals-to-a-running-jvm
+    //
+    // sun.misc.Signal.handle(new sun.misc.Signal("HUP"), new SignalHandler() {
+    // @Override
+    // public void handle(final sun.misc.Signal sig) {
+    // loadProperties(kuneProperties);
+    // }
+    // });
     loadProperties(kuneProperties);
   }
 

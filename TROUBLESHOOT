@@ -139,6 +139,17 @@ and
 
 Verify that your system supports UTF8 (in debian systems check /etc/locale.gen and locale-gen)
 
+** Java compile errors: incompatible types 
+Sometimes you get errors like this, trying to compile:
+Authorizated.java:[50,47] incompatible types
+found   : cc.kune.core.shared.domain.AccessRol
+required: cc.kune.core.shared.domain.AccessRol
+seems that happens with some openjdk6 versions. Workaround to compile from eclipse or using sun-jdk or opnejdk7.
+More info:
+https://bugs.launchpad.net/ubuntu/+source/openjdk-6/+bug/611284
+update-java-alternatives -l
+try with:
+update-java-alternatives -s java-6-sun
 ** Emite troubleshooting
 
 See:

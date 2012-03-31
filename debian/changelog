@@ -1,3 +1,9 @@
+kune (0.1.0+b4) oneiric; urgency=low
+
+  * Improved trash funcionality, other minor changes
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 31 Mar 2012 19:42:30 +0200
+
 kune (0.1.0+b3) oneiric; urgency=low
 
   * Several changes (cache of SN and events, minor style changes, etc). See ChangeLog

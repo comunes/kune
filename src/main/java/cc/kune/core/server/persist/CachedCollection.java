@@ -36,7 +36,7 @@ import org.apache.commons.collections.map.LRUMap;
  * @param <V>
  *          the value type
  */
-public class CachedCollection<K, V> implements Map<K, V> {
+public class CachedCollection<K, V> {
 
   /** The cache. */
   // private final Map<K, V> cache;
@@ -49,65 +49,53 @@ public class CachedCollection<K, V> implements Map<K, V> {
    *          the size of the cache
    */
   public CachedCollection(final int size) {
-    cache = Collections.synchronizedMap(new LRUMap(size));   
+    cache = Collections.synchronizedMap(new LRUMap(size));
   }
 
-  @Override
   public void clear() {
     cache.clear();
   }
 
-  @Override
   public boolean containsKey(final Object key) {
     return cache.containsKey(key);
   }
 
-  @Override
   public boolean containsValue(final Object value) {
     return cache.containsKey(value);
   }
 
-  @Override
   public Set<java.util.Map.Entry<K, V>> entrySet() {
     return cache.entrySet();
   }
 
-  @Override
   public V get(final Object key) {
     return (V) cache.get(key);
   }
 
-  @Override
   public boolean isEmpty() {
     return cache.isEmpty();
   }
 
-  @Override
   public Set<K> keySet() {
     return cache.keySet();
   }
 
-  @Override
-  public Object put(final Object key, final Object value) {
-    return cache.put(key, value);
+  public V put(final K key, final V value) {
+    return (V) cache.put(key, value);
   }
 
-  @Override
   public void putAll(final Map<? extends K, ? extends V> m) {
     cache.putAll(m);
   }
 
-  @Override
   public V remove(final Object key) {
     return (V) cache.remove(key);
   }
 
-  @Override
   public int size() {
     return cache.size();
   }
 
-  @Override
   public Collection<V> values() {
     return cache.values();
   }

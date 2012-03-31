@@ -29,7 +29,6 @@ import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import sun.misc.SignalHandler;
 import cc.kune.core.server.error.ServerException;
 
 import com.google.inject.Inject;
@@ -46,13 +45,16 @@ public class KunePropertiesDefault implements KuneProperties {
     this.fileName = fileName;
     // http://stackoverflow.com/questions/40376/handle-signals-in-the-java-virtual-machine
     // Runtime.getRuntime().addShutdownHook() ??
-    sun.misc.Signal.handle(new sun.misc.Signal("HUP"), new SignalHandler() {
-      @Override
-      public void handle(final sun.misc.Signal sig) {
-        LOG.warn("Received SIGHUP signal. Will reload kune.properties");
-        loadConfiguration();
-      }
-    });
+    // Gives some warning in openjdk
+    // http://stackoverflow.com/questions/5023520/sending-signals-to-a-running-jvm
+    //
+    // sun.misc.Signal.handle(new sun.misc.Signal("HUP"), new SignalHandler() {
+    // @Override
+    // public void handle(final sun.misc.Signal sig) {
+    // LOG.warn("Received SIGHUP signal. Will reload kune.properties");
+    // loadConfiguration();
+    // }
+    // });
     loadConfiguration();
   }
 
