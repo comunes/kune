@@ -19,7 +19,7 @@
  */
 package cc.kune.chat.client;
 
-import static cc.kune.chat.shared.ChatToolConstants.NAME;
+import static cc.kune.chat.shared.ChatToolConstants.TOOL_NAME;
 import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOM;
 import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOT;
 import cc.kune.chat.client.resources.ChatResources;
@@ -45,7 +45,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
       final ChatResources res, final IconicResources icons) {
     // FIXME: change this in ChatConstants and in db via migration
     super(
-        NAME,
+        TOOL_NAME,
         i18n.t("chatrooms"),
         i18n.t(
             "A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from [%s] or other sites (compatible with gmail chat)",
@@ -58,7 +58,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

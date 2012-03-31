@@ -38,7 +38,9 @@ public final class FileConstants {
   public final static int LOGO_MIN_HEIGHT = 28;
   public final static int LOGO_MIN_WIDTH = 468;
   public static final String LOGODOWNLOADSERVLET = ASITE_PREFIX + "servlets/EntityLogoDownloadManager";
-  public final static String PERSON_NO_AVATAR_IMAGE = "others/unknown.jpg";
+  public static final String NO_RESULT_AVATAR_IMAGE = "others/unknown.jpg";
+  public final static String ONLY_USERS = "onlyusers";
+  public final static String PERSON_NO_AVATAR_IMAGE = "others/defuser.jpg";
   public final static String TOKEN = "token";
   public final static String TUTORIALS_PREFIX = "/tutorials/";
   public final static String TYPE_ID = "typeid";

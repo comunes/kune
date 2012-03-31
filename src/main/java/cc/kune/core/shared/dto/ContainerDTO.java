@@ -42,10 +42,20 @@ public class ContainerDTO implements IsSerializable {
     return absolutePath;
   }
 
+  /**
+   * Gets the child folders.
+   * 
+   * @return the childs
+   */
   public List<ContainerSimpleDTO> getChilds() {
     return childs;
   }
 
+  /**
+   * Gets the child contents.
+   * 
+   * @return the contents
+   */
   public List<ContentSimpleDTO> getContents() {
     return contents;
   }

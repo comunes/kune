@@ -19,7 +19,7 @@
  */
 package cc.kune.docs.client;
 
-import static cc.kune.docs.shared.DocsToolConstants.NAME;
+import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_ROOT;
@@ -45,7 +45,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
     super(
-        NAME,
+        TOOL_NAME,
         i18n.t(DocsToolConstants.ROOT_NAME),
         i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs can be static pages in your web page if you publish them"),
         icons.docs(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
@@ -65,7 +65,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

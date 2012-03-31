@@ -93,9 +93,9 @@ public class FolderViewerUtils {
         });
   }
 
-  private void addItem(final AbstractContentSimpleDTO content, final BasicMimeTypeDTO mimeType,
-      final ContentStatus status, final StateToken parentStateToken, final AccessRights rights,
-      final long modifiedOn, final boolean isContainer) {
+  private void addItem(final String tool, final AbstractContentSimpleDTO content,
+      final BasicMimeTypeDTO mimeType, final ContentStatus status, final StateToken parentStateToken,
+      final AccessRights rights, final long modifiedOn, final boolean isContainer) {
     final StateToken stateToken = content.getStateToken();
     final String typeId = content.getTypeId();
     final String name = content.getName();
@@ -104,18 +104,19 @@ public class FolderViewerUtils {
     final String tooltip = getTooltip(stateToken, mimeType,
         capabReg.isDragable(typeId) && rights.isAdministrable());
     final boolean thisTypeShouldShowDelete = capabReg.showDeleted(typeId)
-        || parentStateToken.getTool().equals(TrashToolConstants.NAME);
+        || parentStateToken.getTool().equals(TrashToolConstants.TOOL_NAME);
     final boolean showAllDeleted = session.getShowDeletedContent();
     if (status.equals(ContentStatus.inTheDustbin) && !(thisTypeShouldShowDelete || showAllDeleted)) {
       // Don't show
       // NotifyUser.info("Deleted, don't show: " + parentStateToken + "  " +
       // thisTypeShouldShowDelete);
     } else {
+      final GuiActionDescCollection currentActions = actionsRegistry.getCurrentActions(tool, content,
+          typeId, status, session.isLogged(), rights, ActionGroups.ITEM_MENU);
       final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
           genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,
           capabReg.isDragable(typeId) && rights.isAdministrable(), capabReg.isDropable(typeId)
-              && rights.isAdministrable(), actionsRegistry.getCurrentActions(content, typeId, status,
-              session.isLogged(), rights, ActionGroups.ITEM_MENU), isContainer);
+              && rights.isAdministrable(), currentActions, isContainer);
       getView().addItem(item, new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
@@ -148,16 +149,16 @@ public class FolderViewerUtils {
     } else {
       // Folders
       for (final ContainerSimpleDTO childFolder : container.getChilds()) {
-        addItem(childFolder, null, ContentStatus.publishedOnline,
-            childFolder.getStateToken().copy().setFolder(childFolder.getParentFolderId()),
-            containerRights, FolderViewerView.NO_DATE, true);
+        addItem(container.getAbsolutePath()[0].getStateToken().getTool(), childFolder, null,
+            ContentStatus.publishedOnline, childFolder.getParentToken(), containerRights,
+            FolderViewerView.NO_DATE, true);
       }
       // Other contents (docs, etc)
       for (final ContentSimpleDTO content : container.getContents()) {
         assert content != null;
-        addItem(content, content.getMimeType(), content.getStatus(),
-            content.getStateToken().copy().clearDocument(), content.getRights(),
-            content.getModifiedOn(), false);
+        addItem(container.getAbsolutePath()[0].getStateToken().getTool(), content,
+            content.getMimeType(), content.getStatus(), content.getStateToken().copy().clearDocument(),
+            content.getRights(), content.getModifiedOn(), false);
       }
     }
   }
@@ -202,11 +203,11 @@ public class FolderViewerUtils {
     final AccessRights rights = stateContainer.getContainerRights();
     // NotifyUser.info("Rights: " + rights, true);
     final GuiActionDescCollection topActions = actionsRegistry.getCurrentActions(
-        stateContainer.getGroup(), stateContainer.getTypeId(), session.isLogged(), rights,
-        ActionGroups.TOPBAR);
+        stateContainer.getToolName(), stateContainer.getGroup(), stateContainer.getTypeId(),
+        session.isLogged(), rights, ActionGroups.TOPBAR);
     final GuiActionDescCollection bottomActions = actionsRegistry.getCurrentActions(
-        stateContainer.getGroup(), stateContainer.getTypeId(), session.isLogged(), rights,
-        ActionGroups.BOTTOMBAR);
+        stateContainer.getToolName(), stateContainer.getGroup(), stateContainer.getTypeId(),
+        session.isLogged(), rights, ActionGroups.BOTTOMBAR);
     final ContainerDTO container = stateContainer.getContainer();
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(container, true);
     bottomActions.addAll(pathActions);

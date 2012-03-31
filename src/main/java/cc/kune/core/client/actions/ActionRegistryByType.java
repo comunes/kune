@@ -57,12 +57,13 @@ public class ActionRegistryByType {
     collection.add(descrip);
   }
 
-  public void addAction(final Provider<? extends GuiActionDescrip> action) {
-    addAction(GENERIC_GROUP_ACTION, action, GENERIC_TYPE_ID);
-  }
+  // public void addAction(final Provider<? extends GuiActionDescrip> action) {
+  // addAction(GENERIC_GROUP_ACTION, action, GENERIC_TYPE_ID);
+  // }
 
-  public void addAction(final String actionsGroupId, final GuiActionDescrip descrip, final String typeId) {
-    addAction(actionsGroupId, new Provider<GuiActionDescrip>() {
+  public void addAction(@Nonnull final String tool, final String actionsGroupId,
+      final GuiActionDescrip descrip, final String typeId) {
+    addAction(tool, actionsGroupId, new Provider<GuiActionDescrip>() {
       @Override
       public GuiActionDescrip get() {
         return descrip;
@@ -70,34 +71,35 @@ public class ActionRegistryByType {
     }, typeId);
   }
 
-  public void addAction(@Nonnull final String actionsGroupId,
+  public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final Provider<? extends GuiActionDescrip> action) {
-    addAction(actionsGroupId, action, GENERIC_TYPE_ID);
+    addAction(tool, actionsGroupId, action, GENERIC_TYPE_ID);
   }
 
-  public void addAction(@Nonnull final String actionsGroupId,
+  public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final @Nonnull Provider<? extends GuiActionDescrip> action, final ContentStatus status,
       @Nonnull final String... typeIds) {
     for (final String typeId : typeIds) {
-      addAction(actionsGroupId, action, IdGenerator.generate(typeId, status.toString()));
+      addAction(tool, actionsGroupId, action, IdGenerator.generate(typeId, status.toString()));
     }
   }
 
-  public void addAction(@Nonnull final String actionsGroupId,
+  public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final @Nonnull Provider<? extends GuiActionDescrip> action, @Nonnull final String... typeIds) {
     for (final String typeId : typeIds) {
-      final GuiActionDescProviderCollection actionColl = getActions(actionsGroupId, typeId);
+      final GuiActionDescProviderCollection actionColl = getActions(tool, actionsGroupId, typeId);
       actionColl.add(action);
-      actions.put(genKey(actionsGroupId, typeId), actionColl);
+      actions.put(genKey(tool, actionsGroupId, typeId), actionColl);
     }
   }
 
-  private String genKey(final String actionsGroupId, final String typeId) {
-    return actionsGroupId + KEY_SEPARATOR + typeId;
+  private String genKey(final String tool, final String actionsGroupId, final String typeId) {
+    return tool + KEY_SEPARATOR + actionsGroupId + KEY_SEPARATOR + typeId;
   }
 
-  private GuiActionDescProviderCollection getActions(final String actionsGroupId, final String typeId) {
-    final String key = genKey(actionsGroupId, typeId);
+  private GuiActionDescProviderCollection getActions(final String tool, final String actionsGroupId,
+      final String typeId) {
+    final String key = genKey(tool, actionsGroupId, typeId);
     GuiActionDescProviderCollection actionColl = actions.get(key);
     if (actionColl == null) {
       actionColl = new GuiActionDescProviderCollection();
@@ -106,20 +108,22 @@ public class ActionRegistryByType {
     return actionColl;
   }
 
-  public GuiActionDescCollection getCurrentActions(final Object targetItem, final boolean isLogged,
-      final AccessRights rights, @Nullable final String actionsGroup) {
-    return getCurrentActions(targetItem, GENERIC_TYPE_ID, isLogged, rights, actionsGroup);
+  public GuiActionDescCollection getCurrentActions(final String tool, final Object targetItem,
+      final boolean isLogged, final AccessRights rights, @Nullable final String actionsGroup) {
+    return getCurrentActions(tool, targetItem, GENERIC_TYPE_ID, isLogged, rights, actionsGroup);
   }
 
-  public GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
-      final boolean isLogged, final AccessRights rights) {
-    return getCurrentActions(targetItem, typeId, isLogged, rights, null);
+  public GuiActionDescCollection getCurrentActions(@Nonnull final String tool, final Object targetItem,
+      final String typeId, final boolean isLogged, final AccessRights rights) {
+    return getCurrentActions(tool, targetItem, typeId, isLogged, rights, null);
   }
 
-  public <T> GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
-      final boolean isLogged, final AccessRights rights, @Nullable final String actionsGroupId) {
+  public <T> GuiActionDescCollection getCurrentActions(final String tool, final Object targetItem,
+      final String typeId, final boolean isLogged, final AccessRights rights,
+      @Nullable final String actionsGroupId) {
     final GuiActionDescCollection collection = new GuiActionDescCollection();
-    for (final Provider<? extends GuiActionDescrip> descripProv : getActions(actionsGroupId, typeId)) {
+    for (final Provider<? extends GuiActionDescrip> descripProv : getActions(tool, actionsGroupId,
+        typeId)) {
       final GuiActionDescrip descrip = descripProv.get();
       final AbstractAction action = descrip.getAction();
       if (action instanceof RolAction) {
@@ -133,13 +137,13 @@ public class ActionRegistryByType {
     return collection;
   }
 
-  public <T> GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
-      final ContentStatus status, final boolean isLogged, final AccessRights rights,
-      @Nullable final String actionsGroupId) {
+  public <T> GuiActionDescCollection getCurrentActions(@Nonnull final String tool,
+      final Object targetItem, final String typeId, final ContentStatus status, final boolean isLogged,
+      final AccessRights rights, @Nullable final String actionsGroupId) {
     final GuiActionDescCollection collection = new GuiActionDescCollection();
-    collection.addAll(getCurrentActions(targetItem, typeId, isLogged, rights, actionsGroupId));
-    collection.addAll(getCurrentActions(targetItem, IdGenerator.generate(typeId, status.toString()),
-        isLogged, rights, actionsGroupId));
+    collection.addAll(getCurrentActions(tool, targetItem, typeId, isLogged, rights, actionsGroupId));
+    collection.addAll(getCurrentActions(tool, targetItem,
+        IdGenerator.generate(typeId, status.toString()), isLogged, rights, actionsGroupId));
     return collection;
   }
 

@@ -75,8 +75,7 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
-import cc.kune.events.server.utils.EventsCache;
-import cc.kune.trash.shared.TrashToolConstants;
+import cc.kune.trash.server.TrashServerUtils;
 
 import com.google.inject.Inject;
 
@@ -87,7 +86,6 @@ public class ContentRPC implements ContentService, RPC {
   private final ContainerManager containerManager;
   private final ContentManager contentManager;
   private final CreationService creationService;
-  private final EventsCache eventsCache;
   private final FinderService finderService;
   private final GroupManager groupManager;
   private final Mapper mapper;
@@ -103,8 +101,7 @@ public class ContentRPC implements ContentService, RPC {
       final StateService stateService, final CreationService creationService,
       final GroupManager groupManager, final ContentManager contentManager,
       final ContainerManager containerManager, final TagUserContentManager tagManager,
-      final Mapper mapper, final ChatManager chatManager, final KuneWaveManager waveManager,
-      final EventsCache eventsCache) {
+      final Mapper mapper, final ChatManager chatManager, final KuneWaveManager waveManager) {
     this.finderService = finderService;
     this.userSession = userSession;
     this.accessService = accessService;
@@ -118,7 +115,6 @@ public class ContentRPC implements ContentService, RPC {
     this.mapper = mapper;
     this.chatManager = chatManager;
     this.waveManager = waveManager;
-    this.eventsCache = eventsCache;
   }
 
   @Override
@@ -134,7 +130,7 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
-  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator, mustCheckMembership = false)
   @KuneTransactional
   public StateContentDTO addContent(final String userHash, final StateToken parentToken,
       final String title, final String typeId) throws DefaultException {
@@ -407,7 +403,10 @@ public class ContentRPC implements ContentService, RPC {
   public StateContainerDTO moveContent(final String userHash, final StateToken movedToken,
       final StateToken newContainerToken) throws DefaultException {
     final User user = getCurrentUser();
-    final boolean toTrash = newContainerToken.getTool().equals(TrashToolConstants.NAME);
+    final boolean toTrash = TrashServerUtils.isTrash(newContainerToken);
+
+    // FIXME: this not should be here ... should be in the managers
+
     // Search the container id (because sometimes we get only #group.tool
     // tokens)
     final Long newContainerId = newContainerToken.hasGroupToolAndFolder() ? ContentUtils.parseId(newContainerToken.getFolder())
@@ -449,6 +448,28 @@ public class ContentRPC implements ContentService, RPC {
     } catch (final NoResultException e) {
       throw new AccessViolationException();
     }
+  }
+
+  @Override
+  @Authenticated
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator)
+  @KuneTransactional
+  public StateContainerDTO purgeContainer(final String userHash, final StateToken token) {
+    final User user = getCurrentUser();
+    final Long containerId = ContentUtils.parseId(token.getFolder());
+    final Container container = containerManager.purgeContainer(finderService.getContainer(containerId));
+    return mapState(stateService.create(user, container), user);
+  }
+
+  @Override
+  @Authenticated
+  @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Administrator)
+  @KuneTransactional
+  public StateContainerDTO purgeContent(final String userHash, final StateToken token) {
+    final User user = getCurrentUser();
+    final Long contentId = ContentUtils.parseId(token.getDocument());
+    final Container container = contentManager.purgeContent(finderService.getContent(contentId));
+    return mapState(stateService.create(user, container), user);
   }
 
   @Override

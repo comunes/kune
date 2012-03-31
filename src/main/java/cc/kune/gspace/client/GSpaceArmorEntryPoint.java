@@ -19,7 +19,7 @@
  */
 package cc.kune.gspace.client;
 
-import cc.kune.gspace.client.armor.impl.GSpaceArmorImpl;
+import cc.kune.gspace.client.armor.GSpaceArmorDefault;
 import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -35,7 +35,7 @@ public class GSpaceArmorEntryPoint implements EntryPoint {
     resources.style().ensureInjected();
 
     final RootLayoutPanel rootPanel = RootLayoutPanel.get();
-    final GSpaceArmorImpl armor = new GSpaceArmorImpl(null);
+    final GSpaceArmorDefault armor = new GSpaceArmorDefault(null);
     final InlineLabel icons = new InlineLabel("Icons");
     final InlineLabel login = new InlineLabel("Login");
     final InlineLabel logo = new InlineLabel("Logo");

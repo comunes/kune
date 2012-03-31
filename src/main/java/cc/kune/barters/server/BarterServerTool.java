@@ -19,7 +19,7 @@
  */
 package cc.kune.barters.server;
 
-import static cc.kune.barters.shared.BartersToolConstants.NAME;
+import static cc.kune.barters.shared.BartersToolConstants.TOOL_NAME;
 import static cc.kune.barters.shared.BartersToolConstants.ROOT_NAME;
 import static cc.kune.barters.shared.BartersToolConstants.TYPE_BARTER;
 import static cc.kune.barters.shared.BartersToolConstants.TYPE_FOLDER;
@@ -57,7 +57,7 @@ public class BarterServerTool extends AbstractServerTool implements ServerWaveTo
   public BarterServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_BARTER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_BARTER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
         Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER), contentManager,
         containerManager, creationService, configurationManager, i18n, ServerToolTarget.forUsers);
     gadgetUrl = UrlUtils.of(BARTER_GADGET);

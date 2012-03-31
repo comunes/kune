@@ -19,7 +19,7 @@
  */
 package cc.kune.events.client;
 
-import static cc.kune.events.shared.EventsToolConstants.NAME;
+import static cc.kune.events.shared.EventsToolConstants.TOOL_NAME;
 import static cc.kune.events.shared.EventsToolConstants.ROOT_NAME;
 import static cc.kune.events.shared.EventsToolConstants.TYPE_MEETING;
 import static cc.kune.events.shared.EventsToolConstants.TYPE_ROOT;
@@ -41,7 +41,7 @@ public class EventsClientTool extends FoldableAbstractClientTool {
   public EventsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
-    super(NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
+    super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
         icons.events(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
     this.icons = icons;
 
@@ -60,7 +60,7 @@ public class EventsClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

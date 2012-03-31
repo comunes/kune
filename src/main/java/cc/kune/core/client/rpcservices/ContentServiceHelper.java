@@ -126,4 +126,35 @@ public class ContentServiceHelper {
           }
         });
   }
+
+  public void purgeContent(final StateToken token) {
+    ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
+        i18n.t("No"), null, null, new OnAcceptCallback() {
+          @Override
+          public void onSuccess() {
+            NotifyUser.showProgress();
+            contentService.get().purgeContent(session.getUserHash(), token,
+                new AsyncCallbackSimple<StateContainerDTO>() {
+                  @Override
+                  public void onFailure(final Throwable caught) {
+                    // Should we do something with
+                    // ContainerNotEmptyException?
+                    super.onFailure(caught);
+                    NotifyUser.hideProgress();
+                  }
+
+                  @Override
+                  public void onSuccess(final StateContainerDTO state) {
+                    final StateToken parentToken = state.getStateToken();
+                    if (session.getCurrentStateToken().equals(parentToken)) {
+                      stateManager.setRetrievedStateAndGo(state);
+                    } else {
+                      stateManager.gotoStateToken(parentToken, false);
+                    }
+                    NotifyUser.hideProgress();
+                  }
+                });
+          }
+        });
+  }
 }

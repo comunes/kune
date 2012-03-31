@@ -19,6 +19,7 @@
  */
 package cc.kune.wave.server;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -34,6 +35,7 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
+import com.google.wave.api.Participants;
 
 @Singleton
 public class ParticipantUtils {
@@ -47,6 +49,12 @@ public class ParticipantUtils {
       final KuneBasicProperties databaseProperties) throws InvalidParticipantAddress {
     this.domain = domain;
     superAdmin = ofImpl(databaseProperties.getAdminShortName());
+  }
+
+  public String[] arrayFrom(final Participants parts) {
+    final List<String> list = new ArrayList<String>();
+    // From the first in the list
+    return parts.toArray(new String[parts.size()]);
   }
 
   public String getAddressName(final String address) {

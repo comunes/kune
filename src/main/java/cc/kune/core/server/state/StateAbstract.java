@@ -23,6 +23,7 @@ import java.util.List;
 
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.domain.Container;
 import cc.kune.domain.Group;
 import cc.kune.domain.ParticipationData;
 import cc.kune.domain.SocialNetwork;
@@ -31,74 +32,92 @@ import cc.kune.domain.UserBuddiesData;
 
 public abstract class StateAbstract {
 
-    private List<String> enabledTools;
-    private Group group;
-    private StateToken stateToken;
-    private String title;
-    private SocialNetworkData socialNetworkData;
+  private List<String> enabledTools;
+  private Group group;
+  private Container rootContainer;
+  private SocialNetworkData socialNetworkData;
+  private StateToken stateToken;
+  private String title;
+  private String toolName;
 
-    public StateAbstract() {
-    }
+  public StateAbstract() {
+  }
 
-    public List<String> getEnabledTools() {
-        return enabledTools;
-    }
+  public List<String> getEnabledTools() {
+    return enabledTools;
+  }
 
-    public Group getGroup() {
-        return group;
-    }
+  public Group getGroup() {
+    return group;
+  }
 
-    public SocialNetwork getGroupMembers() {
-        return socialNetworkData.getGroupMembers();
-    }
+  public SocialNetwork getGroupMembers() {
+    return socialNetworkData.getGroupMembers();
+  }
 
-    public AccessRights getGroupRights() {
-        return socialNetworkData.getGroupRights();
-    }
+  public AccessRights getGroupRights() {
+    return socialNetworkData.getGroupRights();
+  }
 
-    public ParticipationData getParticipation() {
-        return socialNetworkData.getUserParticipation();
-    }
+  public ParticipationData getParticipation() {
+    return socialNetworkData.getUserParticipation();
+  }
 
-    public SocialNetworkData getSocialNetworkData() {
-        return socialNetworkData;
-    }
+  public Container getRootContainer() {
+    return rootContainer;
+  }
 
-    public StateToken getStateToken() {
-        return stateToken;
-    }
+  public SocialNetworkData getSocialNetworkData() {
+    return socialNetworkData;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public StateToken getStateToken() {
+    return stateToken;
+  }
 
-    public UserBuddiesData getUserBuddies() {
-        return socialNetworkData.getUserBuddies();
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setEnabledTools(List<String> enabledTools) {
-        this.enabledTools = enabledTools;
-    }
+  public String getToolName() {
+    return toolName;
+  }
 
-    public void setGroup(Group group) {
-        this.group = group;
-    }
+  public UserBuddiesData getUserBuddies() {
+    return socialNetworkData.getUserBuddies();
+  }
 
-    public void setSocialNetworkData(SocialNetworkData socialNetworkData) {
-        this.socialNetworkData = socialNetworkData;
-    }
+  public void setEnabledTools(final List<String> enabledTools) {
+    this.enabledTools = enabledTools;
+  }
 
-    public void setStateToken(StateToken stateToken) {
-        this.stateToken = stateToken;
-    }
+  public void setGroup(final Group group) {
+    this.group = group;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public void setRootContainer(final Container rootContainer) {
+    this.rootContainer = rootContainer;
+  }
 
-    @Override
-    public String toString() {
-        return "State[" + getStateToken() + "]";
-    }
+  public void setSocialNetworkData(final SocialNetworkData socialNetworkData) {
+    this.socialNetworkData = socialNetworkData;
+  }
+
+  public void setStateToken(final StateToken stateToken) {
+    this.stateToken = stateToken;
+  }
+
+  public void setTitle(final String title) {
+    this.title = title;
+  }
+
+  public void setToolName(final String toolName) {
+    this.toolName = toolName;
+  }
+
+  @Override
+  public String toString() {
+    return "State[" + getStateToken() + "]";
+  }
 
 }

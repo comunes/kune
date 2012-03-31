@@ -19,7 +19,7 @@
  */
 package cc.kune.trash.client;
 
-import static cc.kune.trash.shared.TrashToolConstants.NAME;
+import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
 import static cc.kune.trash.shared.TrashToolConstants.ROOT_NAME;
 import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -41,7 +41,7 @@ public class TrashClientTool extends FoldableAbstractClientTool {
   public TrashClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final CoreResources res,
       final NavResources navResources) {
-    super(NAME, i18n.t(ROOT_NAME), i18n.t("You can drop here contents to delete then"),
+    super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("You can drop here contents to delete then"),
         res.trashWhite(), AccessRolDTO.Editor, toolSelector, cntCapRegistry, i18n, navResources);
     this.res = res;
 
@@ -59,7 +59,7 @@ public class TrashClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

@@ -21,11 +21,11 @@ package cc.kune.events.shared;
 
 public final class EventsToolConstants {
 
-  public static final String NAME = "events";
+  public static final String TOOL_NAME = "events";
   public static final String ROOT_NAME = "events";
-  public static final String TYPE_MEETING = NAME + "." + "meeting";
+  public static final String TYPE_MEETING = TOOL_NAME + "." + "meeting";
   public static final String TYPE_MEETING_DEF_GADGETNAME = "massmob";
-  public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
 
   private EventsToolConstants() {
   }

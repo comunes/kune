@@ -199,11 +199,11 @@ public class ContentViewerPresenter extends
       }
     }
     final GuiActionDescCollection topActions = actionsRegistry.getCurrentActions(
-        stateContent.getGroup(), stateContent.getTypeId(), session.isLogged(), rights,
-        ActionGroups.TOPBAR);
+        stateContent.getToolName(), stateContent.getGroup(), stateContent.getTypeId(),
+        session.isLogged(), rights, ActionGroups.TOPBAR);
     final GuiActionDescCollection bottomActions = actionsRegistry.getCurrentActions(
-        stateContent.getGroup(), stateContent.getTypeId(), session.isLogged(), rights,
-        ActionGroups.BOTTOMBAR);
+        stateContent.getToolName(), stateContent.getGroup(), stateContent.getTypeId(),
+        session.isLogged(), rights, ActionGroups.BOTTOMBAR);
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContent.getContainer(),
         true);
     bottomActions.addAll(pathActions);

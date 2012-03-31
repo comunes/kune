@@ -19,7 +19,7 @@
  */
 package cc.kune.barters.client;
 
-import static cc.kune.barters.shared.BartersToolConstants.NAME;
+import static cc.kune.barters.shared.BartersToolConstants.TOOL_NAME;
 import static cc.kune.barters.shared.BartersToolConstants.TYPE_BARTER;
 import static cc.kune.barters.shared.BartersToolConstants.TYPE_FOLDER;
 import static cc.kune.barters.shared.BartersToolConstants.TYPE_ROOT;
@@ -43,7 +43,7 @@ public class BartersClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
     super(
-        NAME,
+        TOOL_NAME,
         i18n.t("barters"),
         i18n.t("A decentralized way to offer (or ask for) services and goods to your groups or to anyone. Bartering means the exchange of goods by the agreement of two people"),
         icons.barters(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
@@ -63,7 +63,7 @@ public class BartersClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

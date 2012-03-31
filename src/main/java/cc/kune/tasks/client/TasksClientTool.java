@@ -19,7 +19,7 @@
  */
 package cc.kune.tasks.client;
 
-import static cc.kune.tasks.shared.TasksToolConstants.NAME;
+import static cc.kune.tasks.shared.TasksToolConstants.TOOL_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.ROOT_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_FOLDER;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_ROOT;
@@ -45,7 +45,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
     super(
-        NAME,
+        TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
         icons.tasks(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
@@ -65,7 +65,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

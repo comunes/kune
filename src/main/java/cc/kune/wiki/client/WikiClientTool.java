@@ -19,7 +19,7 @@
  */
 package cc.kune.wiki.client;
 
-import static cc.kune.wiki.shared.WikiToolConstants.NAME;
+import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_FOLDER;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_ROOT;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_UPLOADEDFILE;
@@ -44,7 +44,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
     super(
-        NAME,
+        TOOL_NAME,
         i18n.t("wiki"),
         i18n.t(
             "Wiki-pages are Documents that can be edited by any visitor (in [%s]), instead of only by the group. This accelerates updating and construction",
@@ -65,7 +65,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

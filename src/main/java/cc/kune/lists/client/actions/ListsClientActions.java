@@ -19,6 +19,7 @@
  \*/
 package cc.kune.lists.client.actions;
 
+import static cc.kune.lists.shared.ListsToolConstants.TOOL_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_ROOT;
@@ -40,10 +41,13 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.PurgeContentBtn;
+import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import cc.kune.gspace.client.actions.TutorialContainerBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
+import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -77,46 +81,50 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<RefreshContentMenuItem> refreshPost,
+      final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants, final ListsNewMenu listNewMenu,
       final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelListMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContainer, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newPostIconBtn, noRoot);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newListBtn, TYPE_ROOT);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, listNewMenu, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, postNewMenu, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, subscribeBtn, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, refreshList, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, refreshPost, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, listOpenessMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newPostItem, containersNoRoot);
-    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newListMenuItem,
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContainer, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newPostIconBtn, noRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newListBtn, TYPE_ROOT);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, listNewMenu, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, postNewMenu, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, subscribeBtn, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refreshList, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refreshPost, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, listOpenessMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newPostItem, containersNoRoot);
+    // actionsRegistry.addAction(NAME, ActionGroups.TOOLBAR, newListMenuItem,
     // TYPE_ROOT);
-    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, tutorialBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, shareMenuContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, subscribersCount, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, copyContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, chatAbout, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, writeToParticipants, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, copyContent, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, writeToParticipants, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, subscribersCount, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAllMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, copyContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, writeToParticipants, contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
+        contents);
     newMenusRegistry.register(TYPE_LIST, listNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, listNewMenu.get());
     newMenusRegistry.register(TYPE_POST,

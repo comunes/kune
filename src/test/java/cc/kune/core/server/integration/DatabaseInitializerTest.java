@@ -19,7 +19,7 @@
  */
 package cc.kune.core.server.integration;
 
-import static cc.kune.docs.shared.DocsToolConstants.NAME;
+import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -94,7 +94,7 @@ public class DatabaseInitializerTest {
   @Test
   public void testToolConfiguration() {
     assertNotNull(defaultGroup);
-    final ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(NAME);
+    final ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(TOOL_NAME);
     assertNotNull(docToolConfig);
     assertTrue(docToolConfig.isEnabled());
     // final ToolConfiguration chatToolConfig =

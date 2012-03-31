@@ -21,11 +21,11 @@ package cc.kune.barters.shared;
 
 public final class BartersToolConstants {
 
-  public static final String NAME = "barters";
+  public static final String TOOL_NAME = "barters";
   public static final String ROOT_NAME = "barters";
-  public static final String TYPE_BARTER = NAME + "." + "barter";
-  public static final String TYPE_FOLDER = NAME + "." + "folder";
-  public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String TYPE_BARTER = TOOL_NAME + "." + "barter";
+  public static final String TYPE_FOLDER = TOOL_NAME + "." + "folder";
+  public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
 
   private BartersToolConstants() {
   }

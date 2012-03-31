@@ -98,11 +98,11 @@ public class XMLActionsParser {
   }
 
   private Provider<GuiActionDescrip> createMenuItem(final XMLGuiActionDescriptor descrip,
-      final String origTypeId, final AbstractAction action) {
+      final String tool, final String origTypeId, final AbstractAction action) {
     final String path = descrip.getPath();
     final MenuDescriptor menu = newMenusRegistry.get(origTypeId);
     assert menu != null;
-    final SubMenuDescriptor submenu = getSubMenu(menu, origTypeId, path);
+    final SubMenuDescriptor submenu = getSubMenu(menu, tool, origTypeId, path);
     final Provider<GuiActionDescrip> menuItemProvider = new Provider<GuiActionDescrip>() {
       @Override
       public GuiActionDescrip get() {
@@ -118,8 +118,8 @@ public class XMLActionsParser {
     return menuItemProvider;
   }
 
-  private SubMenuDescriptor getSubMenu(final MenuDescriptor menu, final String typeId,
-      final String parentS) {
+  private SubMenuDescriptor getSubMenu(final MenuDescriptor menu, final String tool,
+      final String typeId, final String parentS) {
     final String[] path = parentS.split(SEP);
     SubMenuDescriptor current = null;
     for (int i = 0; i < path.length; i++) {
@@ -132,7 +132,7 @@ public class XMLActionsParser {
         subMenuDescriptor = new SubMenuDescriptor(parent, false, i18n.t(name));
         // subMenuDescriptor.setVisible(false);
         submenus.put(subpathId, subMenuDescriptor);
-        actionRegistry.addAction(ActionGroups.TOPBAR, subMenuDescriptor, typeId);
+        actionRegistry.addAction(tool, ActionGroups.TOPBAR, subMenuDescriptor, typeId);
       }
       current = subMenuDescriptor;
     }
@@ -160,6 +160,7 @@ public class XMLActionsParser {
         assert extension != null;
         for (final XMLTypeId typeId : descrip.getTypeIds()) {
           final String origTypeId = typeId.getOrigTypeId();
+          final String tool = origTypeId.split("\\.")[0];
           final String contentIntro = descrip.getNewContentTextIntro();
           final String destTypeId = typeId.getDestTypeId();
           AbstractAction action;
@@ -175,8 +176,9 @@ public class XMLActionsParser {
                 extension.getExtName(), destTypeId, extension.getIconUrl(),
                 descrip.getNewContentTitle(), TextUtils.empty(contentIntro) ? "" : contentIntro);
           }
-          final Provider<GuiActionDescrip> menuItemProvider = createMenuItem(descrip, origTypeId, action);
-          actionRegistry.addAction(ActionGroups.TOPBAR, menuItemProvider, origTypeId);
+          final Provider<GuiActionDescrip> menuItemProvider = createMenuItem(descrip, tool, origTypeId,
+              action);
+          actionRegistry.addAction(tool, ActionGroups.TOPBAR, menuItemProvider, origTypeId);
         }
       }
     }

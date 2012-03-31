@@ -32,6 +32,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.CannotDeleteDefaultContentException;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
@@ -43,6 +44,7 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.docs.shared.DocsToolConstants;
+import cc.kune.trash.shared.TrashToolConstants;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
@@ -85,6 +87,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(1, (long) tagResult.getCount());
   }
 
+  @Ignore
   @Test
   public void contentRateAndRetrieve() throws Exception {
     contentService.rateContent(getHash(), defaultContent.getStateToken(), 4.5);
@@ -103,6 +106,13 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals("es", contentRetrieved.getLanguage().getCode());
   }
 
+  private StateContainerDTO createNewContent() {
+    final StateContainerDTO added = contentService.addContent(session.getHash(),
+        defaultContent.getStateToken(), "New Content Title", TYPE_DOCUMENT);
+    assertNotNull(added);
+    return added;
+  }
+
   @Ignore
   // FIXME: when State refactor do this test (with noLogin and without)
   public void defAdminDontShowAsParticipation() throws Exception {
@@ -113,13 +123,68 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(1, content.getParticipation().getGroupsIsAdmin().size());
   }
 
+  @Test(expected = CannotDeleteDefaultContentException.class)
+  public void defContentRemove() throws Exception {
+    doLogin();
+    defaultContent = getSiteDefaultContent();
+    contentService.delContent(session.getHash(), defaultContent.getStateToken());
+  }
+
+  @Test
+  public void delAndPurgeContainer() throws Exception {
+    doLogin();
+    final StateContainerDTO state = contentService.addFolder(session.getHash(),
+        defaultContent.getStateToken(), "some folder", DocsToolConstants.TYPE_FOLDER);
+    final ContainerDTO newFolder = state.getContainer();
+
+    final StateContainerDTO trash = getTrash();
+    assertEquals(0, trash.getContainer().getContents().size());
+    assertEquals(0, trash.getContainer().getChilds().size());
+    contentService.delContent(session.getHash(), newFolder.getStateToken());
+
+    final StateContainerDTO trashAfterDel = getTrash();
+    assertEquals(0, trashAfterDel.getContainer().getContents().size());
+    assertEquals(1, trashAfterDel.getContainer().getChilds().size());
+    final StateContainerDTO deletedFolder = (StateContainerDTO) contentService.getContent(
+        session.getHash(),
+        newFolder.getStateToken().setTool(TrashToolConstants.TOOL_NAME).setFolder(
+            newFolder.getStateToken().getFolder()));
+    contentService.purgeContainer(session.getHash(), deletedFolder.getStateToken());
+    final StateContainerDTO trashAfterPurge = getTrash();
+    assertEquals(0, trashAfterPurge.getContainer().getContents().size());
+    assertEquals(0, trashAfterPurge.getContainer().getChilds().size());
+  }
+
+  @Test
+  public void delAndPurgeContent() throws Exception {
+    doLogin();
+    final StateContainerDTO trash = getTrash();
+    final StateContainerDTO added = createNewContent();
+    final StateAbstractDTO retrievedContent = contentService.getContent(session.getHash(),
+        added.getStateToken());
+    assertNotNull(retrievedContent.getStateToken());
+    final StateContainerDTO deleledContainer = contentService.delContent(session.getHash(),
+        retrievedContent.getStateToken());
+    assertEquals(1, defaultContent.getContainer().getContents().size());
+    assertEquals(1, deleledContainer.getContainer().getContents().size());
+    final StateContentDTO deletedContent = (StateContentDTO) contentService.getContent(
+        session.getHash(),
+        retrievedContent.getStateToken().setTool(TrashToolConstants.TOOL_NAME).setFolder(
+            trash.getStateToken().getFolder()));
+    assertEquals(TrashToolConstants.TOOL_NAME, deletedContent.getToolName());
+    assertEquals(1, deletedContent.getContainer().getContents().size());
+    final StateContainerDTO trashAfterPurge = contentService.purgeContent(session.getHash(),
+        deletedContent.getStateToken());
+    assertEquals(0, trashAfterPurge.getContainer().getContents().size());
+  }
+
   @Test
   public void folderRename() throws Exception {
     doLogin();
     defaultContent = getSiteDefaultContent();
 
-    final String oldTitle = "some title";
     String newTitle = "folder new name";
+    final String oldTitle = "some title";
     final StateContainerDTO newState = contentService.addFolder(session.getHash(),
         defaultContent.getStateToken(), oldTitle, DocsToolConstants.TYPE_FOLDER);
 
@@ -179,6 +244,14 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(newTitle, folderAgain.getName());
   }
 
+  private StateContainerDTO getTrash() {
+    final StateAbstractDTO trash = contentService.getContent(
+        session.getHash(),
+        defaultContent.getStateToken().copy().clearDocument().clearFolder().setTool(
+            TrashToolConstants.TOOL_NAME));
+    return (StateContainerDTO) trash;
+  }
+
   @Before
   public void init() throws Exception {
     new IntegrationTestHelper(this);
@@ -209,9 +282,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     doLogin();
     defaultContent = getSiteDefaultContent();
 
-    final StateContainerDTO added = contentService.addContent(session.getHash(),
-        defaultContent.getStateToken(), "New Content Title", TYPE_DOCUMENT);
-    assertNotNull(added);
+    final StateContainerDTO added = createNewContent();
 
     final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(),
         added.getStateToken());

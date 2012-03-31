@@ -168,6 +168,10 @@ public class Content implements HasStateToken {
     }
   }
 
+  public void authorsClear() {
+    authors.clear();
+  }
+
   @Transient
   public AccessLists getAccessLists() {
     return hasAccessList() ? accessLists : getContainer().getAccessLists();

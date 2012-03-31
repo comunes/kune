@@ -28,6 +28,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.FileConstants;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -60,6 +61,10 @@ public class TutorialViewer extends Composite {
     initWidget(uiBinder.createAndBindUi(this));
   }
 
+  public HasClickHandlers getCloseBtn() {
+    return closeBtn;
+  }
+
   private String getTutorialLang() {
     if (langs == null) {
       langs = session.getInitData().getTutorialLanguages();
@@ -76,7 +81,7 @@ public class TutorialViewer extends Composite {
       final String he = (height - FOOTBAR) + "px";
       frame.setWidth("100%");
       frame.setHeight(he);
-      Log.info("Resizing to: " + height);
+      Log.debug("Resizing to: " + height);
     }
   }
 

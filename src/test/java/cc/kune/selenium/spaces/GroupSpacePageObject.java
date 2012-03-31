@@ -62,17 +62,17 @@ public class GroupSpacePageObject extends PageObject {
   public WebElement addNewBuddieTextBox;
   @FindBy(id = SeleniumConstants.GWTDEV + AddEntityToThisGroupAction.ADD_NEW_MEMBER_TEXTBOX)
   public WebElement addNewMemberTextBox;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + BlogsToolConstants.NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + BlogsToolConstants.TOOL_NAME)
   public WebElement blogTool;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + ChatToolConstants.NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + ChatToolConstants.TOOL_NAME)
   public WebElement chatTool;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + DocsToolConstants.NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + DocsToolConstants.TOOL_NAME)
   public WebElement docTool;
   @FindBy(xpath = "//div[@id='gwt-debug-k-cnt-title-id']/div/span")
   public WebElement entityTitle;
   @FindBy(xpath = "//div[@id='gwt-debug-k-cnt-title-id']/div/input")
   public WebElement entityTitleTextarea;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + EventsToolConstants.NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + EventsToolConstants.TOOL_NAME)
   public WebElement eventTool;
   @FindBy(xpath = "//td/img")
   public WebElement firstAvatarOfGroup;
@@ -98,7 +98,7 @@ public class GroupSpacePageObject extends PageObject {
   public WebElement groupOptionsTools;
   @FindBy(id = SeleniumConstants.GWTDEV + SubscribeToListBtn.ID)
   public WebElement listSubscribeBtn;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + ListsToolConstants.NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + ListsToolConstants.TOOL_NAME)
   public WebElement listTool;
   @FindBy(id = SeleniumConstants.GWTDEV + NewContainerBtn.BTN_ID)
   public WebElement newContainerBtn;
@@ -120,9 +120,9 @@ public class GroupSpacePageObject extends PageObject {
   public WebElement searchEntitiesOk;
   @FindBy(xpath = "//div[3]/div/button")
   public WebElement socialNetOptions;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + TasksToolConstants.NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + TasksToolConstants.TOOL_NAME)
   public WebElement taskTool;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + WikiToolConstants.NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + WikiToolConstants.TOOL_NAME)
   public WebElement wikiTool;
 
   public void openFirtsContent() {

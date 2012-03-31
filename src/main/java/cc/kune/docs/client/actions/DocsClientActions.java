@@ -19,6 +19,7 @@
  \*/
 package cc.kune.docs.client.actions;
 
+import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_ROOT;
@@ -41,10 +42,13 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.PurgeContentBtn;
+import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import cc.kune.gspace.client.actions.TutorialContainerBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
+import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -78,40 +82,44 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
+      final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu foldersNewMenu,
       final DocsNewMenu docsNewMenu) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newDocIconBtn, all);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newFolderBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, foldersNewMenu, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, docsNewMenu, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newDocMenuItem, containers);
-    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, shareMenuContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, tutorialBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newFolderMenuItem, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, chatAbout, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, copyContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, writeToParticipants, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, setAsHomePage, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, copyContent, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, writeToParticipants, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newDocIconBtn, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newFolderBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, foldersNewMenu, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, docsNewMenu, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newDocMenuItem, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newFolderMenuItem, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delContentMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, setAsHomePage, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAllMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, copyContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, writeToParticipants, contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
+        contents);
     newMenusRegistry.register(TYPE_FOLDER, foldersNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, foldersNewMenu.get());
     newMenusRegistry.register(TYPE_DOCUMENT,

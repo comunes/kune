@@ -21,11 +21,11 @@ package cc.kune.chat.shared;
 
 public final class ChatToolConstants {
 
-  public static final String NAME = "chats";
+  public static final String TOOL_NAME = "chats";
   public static final String ROOT_NAME = "chats";
-  public static final String TYPE_CHAT = NAME + "." + "chat";
-  public static final String TYPE_ROOM = NAME + "." + "room";
-  public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String TYPE_CHAT = TOOL_NAME + "." + "chat";
+  public static final String TYPE_ROOM = TOOL_NAME + "." + "room";
+  public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
 
   private ChatToolConstants() {
   }

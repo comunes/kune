@@ -110,12 +110,20 @@ public class MapperTest {
   }
 
   private Container createDefContainer(final Group group) {
+    return createDefContainer(group, 0);
+  }
+
+  private Container createDefContainer(final Group group, final int increment) {
     final Container container = new Container();
-    container.setId(1L);
+    container.setId(1L + increment);
     container.setToolName(TESTTOOL);
     container.setOwner(group);
     container.setName("folder");
     return container;
+  }
+
+  private Container createDefContainer(final int increment) {
+    return createDefContainer(createDeGroup(), increment);
   }
 
   private Content createDefContent() {
@@ -242,8 +250,8 @@ public class MapperTest {
     final Container container = createDefContainer();
     final StateToken expectedToken = new StateToken(TESTGROUPSHORTNAME, TESTTOOL, 1L);
     assertEquals(expectedToken, container.getStateToken());
-    container.addChild(createDefContainer());
-    container.addChild(createDefContainer());
+    container.addChild(createDefContainer(1));
+    container.addChild(createDefContainer(2));
     container.addContent(createDefContent());
     container.addContent(createDefContent());
     container.addContent(createDefContent());
@@ -256,6 +264,7 @@ public class MapperTest {
     assertEquals(3, dto.getChilds().size());
     assertEquals(3, dto.getContents().size());
     assertTrue(dto.getContents().get(0) instanceof ContentSimpleDTO);
+    assertNotNull(dto.getContents().get(0).getStateToken());
     assertTrue(dto.getChilds().get(0) instanceof ContainerSimpleDTO);
     assertEquals(new StateToken(TESTGROUPSHORTNAME, TESTTOOL),
         dto.getChilds().get(0).getStateToken().copy().clearFolder());

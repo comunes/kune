@@ -21,11 +21,11 @@ package cc.kune.tasks.shared;
 
 public final class TasksToolConstants {
 
-  public static final String NAME = "tasks";
+  public static final String TOOL_NAME = "tasks";
   public static final String ROOT_NAME = "tasks";
-  public static final String TYPE_FOLDER = NAME + "." + "folder";
-  public static final String TYPE_ROOT = NAME + "." + "root";
-  public static final String TYPE_TASK = NAME + "." + "task";
+  public static final String TYPE_FOLDER = TOOL_NAME + "." + "folder";
+  public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
+  public static final String TYPE_TASK = TOOL_NAME + "." + "task";
 
   private TasksToolConstants() {
   }

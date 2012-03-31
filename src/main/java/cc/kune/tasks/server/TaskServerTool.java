@@ -19,7 +19,7 @@
  */
 package cc.kune.tasks.server;
 
-import static cc.kune.tasks.shared.TasksToolConstants.NAME;
+import static cc.kune.tasks.shared.TasksToolConstants.TOOL_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.ROOT_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_FOLDER;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_ROOT;
@@ -50,7 +50,7 @@ public class TaskServerTool extends AbstractServerTool {
   public TaskServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_TASK), Arrays.asList(TYPE_FOLDER, TYPE_ROOT),
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_TASK), Arrays.asList(TYPE_FOLDER, TYPE_ROOT),
         Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER), contentManager,
         containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }

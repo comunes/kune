@@ -84,11 +84,7 @@ public class IntegrationTestHelper {
                   kuneDataSource.getTransactionInterceptor());
               install(kuneDataSource);
             }
-          },
-
-          // new MyDataSourceTwoPersistModule(),
-
-          new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
+          }, new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
           new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 2, 2),
           federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
           new EventsServerModule(), new TrashServerModule());

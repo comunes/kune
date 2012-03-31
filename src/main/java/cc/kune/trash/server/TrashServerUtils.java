@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,34 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.shared.dto;
+
+package cc.kune.trash.server;
 
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.trash.shared.TrashToolConstants;
 
-/**
- * A item can be both a container or a content
- * 
- */
-public class ContainerSimpleDTO extends AbstractContentSimpleDTO {
-  private String name;
-  private StateToken parentToken;
+public class TrashServerUtils {
 
-  @Override
-  public String getName() {
-    return name;
+  public static boolean inTrash(final Container container) {
+    return isTrash(container.getStateToken());
   }
 
-  public StateToken getParentToken() {
-    return parentToken;
+  public static boolean inTrash(final Content content) {
+    return inTrash(content.getContainer());
   }
 
-  @Override
-  public void setName(final String name) {
-    this.name = name;
-  }
-
-  public void setParentToken(final StateToken parentToken) {
-    this.parentToken = parentToken;
+  public static boolean isTrash(final StateToken token) {
+    return token.getTool().equals(TrashToolConstants.TOOL_NAME);
   }
 
 }

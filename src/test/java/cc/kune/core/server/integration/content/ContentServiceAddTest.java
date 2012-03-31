@@ -20,7 +20,7 @@
 package cc.kune.core.server.integration.content;
 
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
-import static cc.kune.wiki.shared.WikiToolConstants.NAME;
+import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -106,7 +106,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
     final ContainerDTO parentAgain = getSiteDefaultContent().getContainer();
     final ContainerSimpleDTO child = parentAgain.getChilds().get(0);
-    assertEquals(parent.getId(), child.getParentFolderId());
+    assertEquals(parent.getStateToken().getFolder(), child.getParentToken().getFolder());
 
     assertEquals(parent.getId(), parentAgain.getId());
     assertEquals(1, parentAgain.getChilds().size());
@@ -147,7 +147,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
   public void testAddWikiContent() throws Exception {
     doLogin();
 
-    final StateToken wikiToken = new StateToken(super.getDefSiteShortName(), NAME);
+    final StateToken wikiToken = new StateToken(super.getDefSiteShortName(), TOOL_NAME);
     final StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(session.getHash(),
         wikiToken);
 
@@ -158,7 +158,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     final ContainerDTO wikiContainer = added.getContainer();
     final List<ContentSimpleDTO> contents = wikiContainer.getContents();
     assertEquals(title, added.getTitle());
-    assertEquals(2, contents.size());
+    assertEquals(1, contents.size());
     doLogout();
 
     doLoginWithDummyUser();

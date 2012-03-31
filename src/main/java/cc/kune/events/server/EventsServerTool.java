@@ -19,7 +19,7 @@
  */
 package cc.kune.events.server;
 
-import static cc.kune.events.shared.EventsToolConstants.NAME;
+import static cc.kune.events.shared.EventsToolConstants.TOOL_NAME;
 import static cc.kune.events.shared.EventsToolConstants.ROOT_NAME;
 import static cc.kune.events.shared.EventsToolConstants.TYPE_MEETING;
 import static cc.kune.events.shared.EventsToolConstants.TYPE_ROOT;
@@ -59,7 +59,7 @@ public class EventsServerTool extends AbstractServerTool implements ServerWaveTo
   public EventsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final CreationService creationService, final EventsCache eventsCache) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_MEETING), Arrays.asList(TYPE_ROOT),
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_MEETING), Arrays.asList(TYPE_ROOT),
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
         creationService, configurationManager, i18n, ServerToolTarget.forBoth);
     this.eventsCache = eventsCache;

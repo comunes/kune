@@ -58,7 +58,8 @@ public class SharedFileDownloadUtils {
 
   public String getLogoImageUrl(final String groupName) {
     return prefix
-        + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName)).toString();
+        + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
+            new UrlParam(FileConstants.ONLY_USERS, false)).toString();
   }
 
   public String getPrefix() {
@@ -71,7 +72,8 @@ public class SharedFileDownloadUtils {
 
   public String getUserAvatar(final String username) {
     return prefix
-        + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, username)).toString();
+        + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, username),
+            new UrlParam(FileConstants.ONLY_USERS, true)).toString();
   }
 
   public String getUserAvatar(final UserSimpleDTO user) {

@@ -77,6 +77,10 @@ public interface ContentServiceAsync {
   void moveContent(String userHash, StateToken contentToken, StateToken newContainerToken,
       AsyncCallback<StateContainerDTO> asyncCallback);
 
+  void purgeContainer(String userHash, StateToken token, AsyncCallback<StateContainerDTO> callback);
+
+  void purgeContent(String userHash, StateToken token, AsyncCallback<StateContainerDTO> callback);
+
   void rateContent(String userHash, StateToken token, Double value,
       AsyncCallback<RateResult> asyncCallback);
 

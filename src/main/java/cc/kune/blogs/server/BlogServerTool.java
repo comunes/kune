@@ -19,7 +19,7 @@
  */
 package cc.kune.blogs.server;
 
-import static cc.kune.blogs.shared.BlogsToolConstants.NAME;
+import static cc.kune.blogs.shared.BlogsToolConstants.TOOL_NAME;
 import static cc.kune.blogs.shared.BlogsToolConstants.ROOT_NAME;
 import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_BLOG;
 import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_POST;
@@ -46,7 +46,7 @@ public class BlogServerTool extends AbstractServerTool {
   public BlogServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST, TYPE_UPLOADEDFILE),
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST, TYPE_UPLOADEDFILE),
         Arrays.asList(TYPE_BLOG), Arrays.asList(TYPE_BLOG), Arrays.asList(TYPE_ROOT), contentManager,
         containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }

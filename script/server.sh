@@ -36,7 +36,7 @@ WAVE_CONFIG=$KUNE_HOME/wave-server.properties
 # See src/main/resources/jaas.config in svn
 JAAS_CONFIG=$KUNE_HOME/jaas.config
 # See src/main/resources/log4j.properties in svn
-LOGJ4_CONFIG=$KUNE_HOME/log4j.properties
+LOGJ4_CONFIG=file://$KUNE_HOME/log4j.properties
 
 SUSPEND="n"
 DEBUG=""

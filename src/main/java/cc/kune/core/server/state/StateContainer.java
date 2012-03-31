@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.state;
 
-
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.AccessLists;
@@ -29,97 +28,79 @@ import cc.kune.domain.License;
 
 public class StateContainer extends StateAbstract {
 
-    private I18nLanguage language;
-    private String typeId;
-    private String toolName;
-    private Container container;
-    private Container rootContainer;
-    private AccessRights containerRights;
-    private License license;
-    private TagCloudResult tagCloudResult;
-    private AccessLists accessLists;
+  private AccessLists accessLists;
+  private Container container;
+  private AccessRights containerRights;
+  private I18nLanguage language;
+  private License license;
+  private TagCloudResult tagCloudResult;
+  private String typeId;
 
-    public StateContainer() {
-    }
+  public StateContainer() {
+  }
 
-    public AccessLists getAccessLists() {
-        return accessLists;
-    }
+  public AccessLists getAccessLists() {
+    return accessLists;
+  }
 
-    public Container getContainer() {
-        return container;
-    }
+  public Container getContainer() {
+    return container;
+  }
 
-    public AccessRights getContainerRights() {
-        return containerRights;
-    }
+  public AccessRights getContainerRights() {
+    return containerRights;
+  }
 
-    public I18nLanguage getLanguage() {
-        return language;
-    }
+  public I18nLanguage getLanguage() {
+    return language;
+  }
 
-    public License getLicense() {
-        return license;
-    }
+  public License getLicense() {
+    return license;
+  }
 
-    public Container getRootContainer() {
-        return rootContainer;
-    }
+  public TagCloudResult getTagCloudResult() {
+    return tagCloudResult;
+  }
 
-    public TagCloudResult getTagCloudResult() {
-        return tagCloudResult;
-    }
+  public String getTypeId() {
+    return typeId;
+  }
 
-    public String getToolName() {
-        return toolName;
-    }
+  public boolean isType(final String type) {
+    return getTypeId().equals(type);
+  }
 
-    public String getTypeId() {
-        return typeId;
-    }
+  public void setAccessLists(final AccessLists accessLists) {
+    this.accessLists = accessLists;
+  }
 
-    public boolean isType(String type) {
-        return getTypeId().equals(type);
-    }
+  public void setContainer(final Container container) {
+    this.container = container;
+  }
 
-    public void setAccessLists(AccessLists accessLists) {
-        this.accessLists = accessLists;
-    }
+  public void setContainerRights(final AccessRights containerRights) {
+    this.containerRights = containerRights;
+  }
 
-    public void setContainer(Container container) {
-        this.container = container;
-    }
+  public void setLanguage(final I18nLanguage language) {
+    this.language = language;
+  }
 
-    public void setContainerRights(AccessRights containerRights) {
-        this.containerRights = containerRights;
-    }
+  public void setLicense(final License license) {
+    this.license = license;
+  }
 
-    public void setLanguage(I18nLanguage language) {
-        this.language = language;
-    }
+  public void setTagCloudResult(final TagCloudResult tagCloudResult) {
+    this.tagCloudResult = tagCloudResult;
+  }
 
-    public void setLicense(License license) {
-        this.license = license;
-    }
+  public void setTypeId(final String typeId) {
+    this.typeId = typeId;
+  }
 
-    public void setRootContainer(Container rootContainer) {
-        this.rootContainer = rootContainer;
-    }
-
-    public void setTagCloudResult(TagCloudResult tagCloudResult) {
-        this.tagCloudResult = tagCloudResult;
-    }
-
-    public void setToolName(String toolName) {
-        this.toolName = toolName;
-    }
-
-    public void setTypeId(String typeId) {
-        this.typeId = typeId;
-    }
-
-    @Override
-    public String toString() {
-        return "State[" + getStateToken() + "/" + getTypeId() + "]";
-    }
+  @Override
+  public String toString() {
+    return "State[" + getStateToken() + "/" + getTypeId() + "]";
+  }
 }

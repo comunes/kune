@@ -1,3 +1,9 @@
+kune (0.1.0+b3) oneiric; urgency=low
+
+  * Several changes (cache of SN and events, minor style changes, etc). See ChangeLog
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 30 Mar 2012 20:18:19 +0200
+
 kune (0.1.0+b2) unstable; urgency=low
 
   * Perms in daemon. SIGHUP to reload. Other minor changes

@@ -19,7 +19,7 @@
  */
 package cc.kune.gallery.server;
 
-import static cc.kune.gallery.shared.GalleryToolConstants.NAME;
+import static cc.kune.gallery.shared.GalleryToolConstants.TOOL_NAME;
 import static cc.kune.gallery.shared.GalleryToolConstants.ROOT_NAME;
 import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_ALBUM;
 import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_ROOT;
@@ -46,7 +46,7 @@ public class GalleryServerTool extends AbstractServerTool {
   public GalleryServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_UPLOADEDFILE), Arrays.asList(TYPE_ROOT,
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_UPLOADEDFILE), Arrays.asList(TYPE_ROOT,
         TYPE_ALBUM), Arrays.asList(TYPE_ALBUM), Arrays.asList(TYPE_ROOT, TYPE_ALBUM), contentManager,
         containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }

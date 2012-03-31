@@ -19,7 +19,7 @@
  */
 package cc.kune.wiki.server;
 
-import static cc.kune.wiki.shared.WikiToolConstants.NAME;
+import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
 import static cc.kune.wiki.shared.WikiToolConstants.ROOT_NAME;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_FOLDER;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_ROOT;
@@ -52,7 +52,7 @@ public class WikiServerTool extends AbstractServerTool {
   public WikiServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE), Arrays.asList(
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE), Arrays.asList(
         TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
         contentManager, containerManager, creationService, configurationManager, i18n,
         ServerToolTarget.forBoth);

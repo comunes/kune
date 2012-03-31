@@ -19,6 +19,7 @@
  \*/
 package cc.kune.chat.client.actions;
 
+import static cc.kune.chat.shared.ChatToolConstants.TOOL_NAME;
 import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOM;
 import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOT;
 import cc.kune.core.client.actions.ActionRegistryByType;
@@ -51,14 +52,14 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<OpenRoomBtn> openRoomBtn, final Provider<TutorialContainerBtn> tutorialBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newRoomBtn, TYPE_ROOT);
-    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, tutorialBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, openRoomBtn, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openRoomMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openRoomArchiveMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newRoomBtn, TYPE_ROOT);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, openRoomBtn, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomArchiveMenuItem, containersNoRoot);
   }
 
   @Override

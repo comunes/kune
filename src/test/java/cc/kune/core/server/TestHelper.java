@@ -33,9 +33,18 @@ import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveServerImpl;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
+import cc.kune.barters.server.BarterServerModule;
+import cc.kune.chat.server.ChatServerModule;
 import cc.kune.core.server.integration.HttpServletRequestMocked;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
+import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
+import cc.kune.docs.server.DocumentServerModule;
+import cc.kune.events.server.EventsServerModule;
+import cc.kune.lists.server.ListsServerModule;
+import cc.kune.tasks.server.TaskServerModule;
+import cc.kune.trash.server.TrashServerModule;
 import cc.kune.wave.server.CustomSettingsBinder;
+import cc.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -55,18 +64,23 @@ public abstract class TestHelper {
           TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
       final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
+      final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
+          "kune.properties", TestConstants.PERSISTENCE_UNIT);
       final Injector childInjector = injector.createChildInjector(wavePersistModule, new ServerModule(
-          false, 1, 2, 2), new RobotApiModule(), federationModule, new DataSourceKunePersistModule(
-          "kune.properties", TestConstants.PERSISTENCE_UNIT), module, new Module() {
-        @Override
-        public void configure(final Binder binder) {
-          binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
-          binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
-          // binder.bind(KuneProperties.class).toInstance(new
-          // KunePropertiesDefault(propetiesFileName));
-          binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
-        }
-      });
+          false, 1, 2, 2), new RobotApiModule(), federationModule, new ListsServerModule(),
+          new DocumentServerModule(), new ChatServerModule(), federationModule,
+          new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
+          new EventsServerModule(), new TrashServerModule(), kuneDataSource,
+          new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()), module, new Module() {
+            @Override
+            public void configure(final Binder binder) {
+              binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
+              binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
+              // binder.bind(KuneProperties.class).toInstance(new
+              // KunePropertiesDefault(propetiesFileName));
+              binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+            }
+          });
       try {
         childInjector.getInstance(WaveServerImpl.class).initialize();
       } catch (final WaveServerException e) {

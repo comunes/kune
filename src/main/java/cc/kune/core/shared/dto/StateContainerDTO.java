@@ -31,9 +31,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
   private AccessRights containerRights;
   private I18nLanguageDTO language;
   private LicenseDTO license;
-  private ContainerDTO rootContainer;
   private TagCloudResult tagCloudResult;
-  private String toolName;
   private String typeId;
 
   public StateContainerDTO() {
@@ -43,6 +41,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
     return accessLists;
   }
 
+  @Override
   public ContainerDTO getContainer() {
     return container;
   }
@@ -59,16 +58,8 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
     return license;
   }
 
-  public ContainerDTO getRootContainer() {
-    return rootContainer;
-  }
-
   public TagCloudResult getTagCloudResult() {
     return tagCloudResult;
-  }
-
-  public String getToolName() {
-    return toolName;
   }
 
   @Override
@@ -100,16 +91,8 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
     this.license = license;
   }
 
-  public void setRootContainer(final ContainerDTO rootContainer) {
-    this.rootContainer = rootContainer;
-  }
-
   public void setTagCloudResult(final TagCloudResult tagCloudResult) {
     this.tagCloudResult = tagCloudResult;
-  }
-
-  public void setToolName(final String toolName) {
-    this.toolName = toolName;
   }
 
   @Override

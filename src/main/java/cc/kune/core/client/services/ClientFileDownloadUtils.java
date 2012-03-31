@@ -32,13 +32,11 @@ import com.google.inject.Inject;
 
 public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
-  private final ImageUtils imageUtils;
   private final Session session;
 
   @Inject
-  public ClientFileDownloadUtils(final Session session, final ImageUtils imageUtils) {
+  public ClientFileDownloadUtils(final Session session) {
     this.session = session;
-    this.imageUtils = imageUtils;
   }
 
   private String calculateUrl(final StateToken token, final boolean download, final boolean useHash) {
@@ -79,17 +77,6 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   public String getImageUrl(final StateToken token) {
     return calculateUrl(token, false, true);
-  }
-
-  public String getLogoAvatarHtml(final StateToken groupToken, final boolean groupHasLogo,
-      final boolean isPersonal, final int size, final int hvspace) {
-    if (groupHasLogo) {
-      return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
-          + "px; height: " + size + "px;' src='" + getLogoImageUrl(groupToken.getGroup()) + "'>";
-    } else {
-      return isPersonal ? imageUtils.getImageHtml(ImageDescriptor.personDef)
-          : imageUtils.getImageHtml(ImageDescriptor.groupDefIcon);
-    }
   }
 
   public String getUrl(final StateToken token) {

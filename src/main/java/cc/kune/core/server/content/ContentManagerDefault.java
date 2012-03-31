@@ -42,6 +42,7 @@ import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.xml.XMLWaveExtension;
+import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.MoveOnSameContainerException;
@@ -60,7 +61,6 @@ import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.utils.FilenameUtils;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
@@ -75,6 +75,7 @@ import cc.kune.domain.finders.I18nLanguageFinder;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.events.server.utils.EventsCache;
 import cc.kune.events.shared.EventsToolConstants;
+import cc.kune.trash.server.TrashServerUtils;
 import cc.kune.wave.server.KuneWaveServerUtils;
 import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
@@ -82,6 +83,7 @@ import cc.kune.wave.server.kspecific.KuneWaveService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.wave.api.Participants;
 
 @Singleton
 public class ContentManagerDefault extends DefaultManager<Content, Long> implements ContentManager {
@@ -183,13 +185,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   }
 
   private void clearEventsCacheIfNecessary(final Container previousParent) {
-    if (previousParent.getToolName().equals(EventsToolConstants.NAME)) {
+    if (previousParent.getToolName().equals(EventsToolConstants.TOOL_NAME)) {
       eventsCache.remove(previousParent);
     }
-  }
-
-  private void clearEventsCacheIfNecessary(final StateToken token) {
-    clearEventsCacheIfNecessary(finder.getContainer(token.getFolder()));
   }
 
   @Override
@@ -322,6 +320,30 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.setContainer(newContainer);
     clearEventsCacheIfNecessary(oldContainer);
     return persist(content);
+  }
+
+  /**
+   * Purge content (permanent delete)
+   * 
+   * @param content
+   *          the content to purge
+   */
+  @Override
+  public Container purgeContent(final Content content) {
+    if (!TrashServerUtils.inTrash(content)) {
+      throw new AccessViolationException("Trying to purge a not deleted content:" + content);
+    }
+    if (content.isWave()) {
+      final WaveRef waveRef = KuneWaveServerUtils.getWaveRef(content);
+      final String author = getContentAuthor(content);
+      final Participants participants = kuneWaveManager.getParticipants(waveRef, author);
+      kuneWaveManager.delParticipants(waveRef, author, participantUtils.arrayFrom(participants));
+    }
+    content.authorsClear();
+    final Container container = content.getContainer();
+    container.removeContent(content);
+    remove(content);
+    return container;
   }
 
   @Override

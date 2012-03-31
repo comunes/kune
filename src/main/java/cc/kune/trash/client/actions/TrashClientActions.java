@@ -19,6 +19,7 @@
  */
 package cc.kune.trash.client.actions;
 
+import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
 import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
 import cc.kune.chat.client.actions.GoParentChatBtn;
 import cc.kune.core.client.actions.ActionRegistryByType;
@@ -39,7 +40,6 @@ public class TrashClientActions extends AbstractFoldableToolActions {
   final String[] all = { TYPE_ROOT };
   final String[] containers = { TYPE_ROOT };
   final String[] containersNoRoot = {};
-  final String[] contents = {};
 
   @Inject
   public TrashClientActions(final I18nUITranslationService i18n, final Session session,
@@ -47,12 +47,8 @@ public class TrashClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshContentMenuItem> refresh, final Provider<GoParentChatBtn> folderGoUp,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, refresh, all);
-    // actionsRegistry.addAction(ActionGroups.TOOLBAR, folderGoUp,
-    // DocsToolConstants.TYPE_DOCUMENT);
-    // actionsRegistry.addAction(ActionGroups.ITEM_MENU, action,
-    // containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
   }
 
   @Override

@@ -30,7 +30,6 @@ import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 
@@ -58,9 +57,8 @@ public class CopyContentMenuItem extends MenuItemDescriptor {
     @Override
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.showProgress(i18n.t("Copying"));
+      final StateToken token = ActionUtils.getActionToken(event);
       final boolean inContent = session.getCurrentStateToken().hasAll();
-      final StateToken token = inContent ? session.getCurrentStateToken()
-          : ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
       final StateToken parentToken = inContent ? session.getContentState().getContainer().getStateToken()
           : session.getCurrentStateToken();
       contentService.copyContent(session.getUserHash(), parentToken, token,

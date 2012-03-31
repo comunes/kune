@@ -23,12 +23,12 @@ import cc.kune.core.shared.ToolConstants;
 
 public final class DocsToolConstants {
 
-  public static final String NAME = "docs";
+  public static final String TOOL_NAME = "docs";
   public static final String ROOT_NAME = "documents";
-  public static final String TYPE_DOCUMENT = NAME + "." + "doc";
-  public static final String TYPE_FOLDER = NAME + "." + "folder";
-  public static final String TYPE_ROOT = NAME + "." + "root";
-  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
+  public static final String TYPE_DOCUMENT = TOOL_NAME + "." + "doc";
+  public static final String TYPE_FOLDER = TOOL_NAME + "." + "folder";
+  public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
+  public static final String TYPE_UPLOADEDFILE = TOOL_NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
   private DocsToolConstants() {
   }

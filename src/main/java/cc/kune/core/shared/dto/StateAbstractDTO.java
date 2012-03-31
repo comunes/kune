@@ -27,75 +27,92 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public abstract class StateAbstractDTO implements IsSerializable {
+  private List<String> enabledTools;
+  private GroupDTO group;
+  private ContainerDTO rootContainer;
+  private SocialNetworkDataDTO socialNetworkData;
+  private StateToken stateToken;
+  private String title;
+  private String toolName;
 
-    private List<String> enabledTools;
-    private GroupDTO group;
-    private StateToken stateToken;
-    private String title;
-    private SocialNetworkDataDTO socialNetworkData;
+  public StateAbstractDTO() {
+  }
 
-    public StateAbstractDTO() {
-    }
+  public List<String> getEnabledTools() {
+    return enabledTools;
+  }
 
-    public List<String> getEnabledTools() {
-        return enabledTools;
-    }
+  public GroupDTO getGroup() {
+    return group;
+  }
 
-    public GroupDTO getGroup() {
-        return group;
-    }
+  public SocialNetworkDTO getGroupMembers() {
+    return socialNetworkData.getGroupMembers();
+  }
 
-    public SocialNetworkDTO getGroupMembers() {
-        return socialNetworkData.getGroupMembers();
-    }
+  public AccessRights getGroupRights() {
+    return socialNetworkData.getGroupRights();
+  }
 
-    public AccessRights getGroupRights() {
-        return socialNetworkData.getGroupRights();
-    }
+  public ParticipationDataDTO getParticipation() {
+    return socialNetworkData.getUserParticipation();
+  }
 
-    public ParticipationDataDTO getParticipation() {
-        return socialNetworkData.getUserParticipation();
-    }
+  public ContainerDTO getRootContainer() {
+    return rootContainer;
+  }
 
-    public SocialNetworkDataDTO getSocialNetworkData() {
-        return socialNetworkData;
-    }
+  public SocialNetworkDataDTO getSocialNetworkData() {
+    return socialNetworkData;
+  }
 
-    public StateToken getStateToken() {
-        return stateToken;
-    }
+  public StateToken getStateToken() {
+    return stateToken;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public UserBuddiesDataDTO getUserBuddies() {
-        return socialNetworkData.getUserBuddies();
-    }
+  public String getToolName() {
+    return toolName;
+  }
 
-    public void setEnabledTools(final List<String> enabledTools) {
-        this.enabledTools = enabledTools;
-    }
+  public UserBuddiesDataDTO getUserBuddies() {
+    return socialNetworkData.getUserBuddies();
+  }
 
-    public void setGroup(final GroupDTO group) {
-        this.group = group;
-    }
+  public void setEnabledTools(final List<String> enabledTools) {
+    this.enabledTools = enabledTools;
+  }
 
-    public void setSocialNetworkData(final SocialNetworkDataDTO socialNetworkData) {
-        this.socialNetworkData = socialNetworkData;
-    }
+  public void setGroup(final GroupDTO group) {
+    this.group = group;
+  }
 
-    public void setStateToken(final StateToken stateToken) {
-        this.stateToken = stateToken;
-    }
+  public void setRootContainer(final ContainerDTO rootContainer) {
+    this.rootContainer = rootContainer;
+  }
 
-    public void setTitle(final String title) {
-        this.title = title;
-    }
+  public void setSocialNetworkData(final SocialNetworkDataDTO socialNetworkData) {
+    this.socialNetworkData = socialNetworkData;
+  }
 
-    @Override
-    public String toString() {
-        return "StateDTO[" + getStateToken() + "]";
-    }
+  public void setStateToken(final StateToken stateToken) {
+    this.stateToken = stateToken;
+  }
+
+  public void setTitle(final String title) {
+    this.title = title;
+  }
+
+  public void setToolName(final String toolName) {
+    this.toolName = toolName;
+  }
+
+  @Override
+  public String toString() {
+    return "StateDTO[" + getStateToken() + "]";
+  }
 
 }

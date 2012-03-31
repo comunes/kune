@@ -19,7 +19,7 @@
  */
 package cc.kune.blogs.client;
 
-import static cc.kune.blogs.shared.BlogsToolConstants.NAME;
+import static cc.kune.blogs.shared.BlogsToolConstants.TOOL_NAME;
 import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_BLOG;
 import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_POST;
 import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_ROOT;
@@ -44,7 +44,7 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
     super(
-        NAME,
+        TOOL_NAME,
         i18n.t(BlogsToolConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
         icons.blogs(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
@@ -64,7 +64,7 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

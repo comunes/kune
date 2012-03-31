@@ -49,6 +49,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
   private final InputStream groupLogo;
   GroupManager groupManager;
   private final InputStream personLogo;
+  private final InputStream unknownLogo;
 
   @Inject
   public EntityLogoDownloadManager(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases,
@@ -58,6 +59,8 @@ public class EntityLogoDownloadManager extends HttpServlet {
         FileConstants.PERSON_NO_AVATAR_IMAGE);
     groupLogo = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
         FileConstants.GROUP_NO_AVATAR_IMAGE);
+    unknownLogo = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
+        FileConstants.NO_RESULT_AVATAR_IMAGE);
   }
 
   @Override
@@ -65,14 +68,19 @@ public class EntityLogoDownloadManager extends HttpServlet {
       throws ServletException, IOException {
 
     final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
-
+    final String onlyUserS = req.getParameter(FileConstants.ONLY_USERS);
+    final boolean onlyUsers = Boolean.parseBoolean(onlyUserS);
     Group group = Group.NO_GROUP;
     try {
       group = groupManager.findByShortName(stateToken.getGroup());
       if (group == Group.NO_GROUP) {
-        throw new NoResultException("Group not found trying to get the logo");
+        unknownResult(resp);
+        return;
       }
-
+      if (onlyUsers && !group.isPersonal()) {
+        unknownResult(resp);
+        return;
+      }
       if (!group.hasLogo()) {
         FileDownloadManagerUtils.returnFile((group.isPersonal() ? personLogo : groupLogo),
             resp.getOutputStream());
@@ -87,9 +95,12 @@ public class EntityLogoDownloadManager extends HttpServlet {
         resp.getOutputStream().write(logo);
       }
     } catch (final NoResultException e) {
-      FileDownloadManagerUtils.returnNotFound404(resp);
-      return;
+      unknownResult(resp);
     }
+  }
+
+  private void unknownResult(final HttpServletResponse resp) throws IOException {
+    FileDownloadManagerUtils.returnFile(unknownLogo, resp.getOutputStream());
   }
 
 }

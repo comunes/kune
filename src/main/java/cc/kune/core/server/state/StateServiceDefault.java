@@ -25,7 +25,6 @@ import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.server.access.AccessRightsService;
-import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.TagUserContentManager;
@@ -46,7 +45,6 @@ import com.google.wave.api.Wavelet;
 @Singleton
 public class StateServiceDefault implements StateService {
   public static final Log LOG = LogFactory.getLog(StateServiceDefault.class);
-  private final ContentManager contentManager;
   private final GroupManager groupManager;
   private final I18nTranslationService i18n;
   private final KuneWaveService kuneWaveManager;
@@ -56,12 +54,11 @@ public class StateServiceDefault implements StateService {
 
   @Inject
   public StateServiceDefault(final GroupManager groupManager,
-      final SocialNetworkManager socialNetworkManager, final ContentManager contentManager,
-      final TagUserContentManager tagManager, final AccessRightsService rightsService,
-      final I18nTranslationService i18n, final KuneWaveService kuneWaveManager) {
+      final SocialNetworkManager socialNetworkManager, final TagUserContentManager tagManager,
+      final AccessRightsService rightsService, final I18nTranslationService i18n,
+      final KuneWaveService kuneWaveManager) {
     this.groupManager = groupManager;
     this.socialNetworkManager = socialNetworkManager;
-    this.contentManager = contentManager;
     this.tagManager = tagManager;
     this.rightsService = rightsService;
     this.i18n = i18n;
@@ -80,7 +77,6 @@ public class StateServiceDefault implements StateService {
     state.setTypeId(container.getTypeId());
     state.setLanguage(container.getLanguage());
     state.setStateToken(container.getStateToken());
-    state.setRootContainer(calculateRootContainer(container));
     state.setLicense(container.getOwner().getDefaultLicense());
     state.setAccessLists(container.getAccessLists());
     final Group group = container.getOwner();
@@ -139,7 +135,7 @@ public class StateServiceDefault implements StateService {
       state.setTitle(revision.getTitle());
     }
     final Container container = content.getContainer();
-    state.setRootContainer(calculateRootContainer(container));
+
     final License license = content.getLicense();
     final Group group = container.getOwner();
     state.setLicense(license == null ? group.getDefaultLicense() : license);
@@ -173,7 +169,9 @@ public class StateServiceDefault implements StateService {
 
   private void setCommon(final StateContainer state, final User userLogged, final Group group,
       final Container container) {
-    state.setToolName(container.getToolName());
+    final Container root = calculateRootContainer(container);
+    state.setRootContainer(root);
+    state.setToolName(root.getToolName());
     state.setGroup(group);
     state.setContainer(container);
     state.setContainerRights(rightsService.get(userLogged, container.getAccessLists()));

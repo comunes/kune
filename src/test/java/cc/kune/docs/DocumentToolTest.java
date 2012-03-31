@@ -19,7 +19,7 @@
  */
 package cc.kune.docs;
 
-import static cc.kune.docs.shared.DocsToolConstants.NAME;
+import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_ROOT;
@@ -33,7 +33,7 @@ public class DocumentToolTest {
 
     @Test
     public void clientAndServerSync() {
-        assertEquals(NAME, DocsToolConstants.NAME);
+        assertEquals(TOOL_NAME, DocsToolConstants.TOOL_NAME);
         assertEquals(TYPE_ROOT, DocsToolConstants.TYPE_ROOT);
         assertEquals(TYPE_FOLDER, DocsToolConstants.TYPE_FOLDER);
         assertEquals(TYPE_DOCUMENT, DocsToolConstants.TYPE_DOCUMENT);

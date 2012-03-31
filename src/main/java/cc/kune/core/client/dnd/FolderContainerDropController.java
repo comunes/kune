@@ -104,7 +104,7 @@ public class FolderContainerDropController extends AbstractDropController {
         } else if (getTarget() instanceof ToolSelectorItemPanel) {
           destToken = new StateToken(session.getCurrentGroupShortName(),
               ((ToolSelectorItemPanel) getTarget()).getName());
-          if (!destToken.getTool().equals(TrashToolConstants.NAME)) {
+          if (!destToken.getTool().equals(TrashToolConstants.TOOL_NAME)) {
             // By now only move to trash
             notImplemented();
             return;

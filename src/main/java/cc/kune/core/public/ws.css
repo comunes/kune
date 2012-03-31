@@ -730,6 +730,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 .k-publicspace-description {
   font-size: 14px;
   display: table-cell;
+  padding-right: 20px;
 }
 
 .k-publicspace-actions {

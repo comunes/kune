@@ -19,7 +19,7 @@
  */
 package cc.kune.chat.server;
 
-import static cc.kune.chat.shared.ChatToolConstants.NAME;
+import static cc.kune.chat.shared.ChatToolConstants.TOOL_NAME;
 import static cc.kune.chat.shared.ChatToolConstants.ROOT_NAME;
 import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOM;
 import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOT;
@@ -49,7 +49,7 @@ public class ChatServerTool extends AbstractServerTool {
       final ContentManager contentManager, final ContainerManager containerManager,
       final ChatManagerDefault chatManager, final I18nTranslationService i18n,
       final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Collections.<String> emptyList(),
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Collections.<String> emptyList(),
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOM), Arrays.asList(TYPE_ROOT),
         contentManager, containerManager, creationService, configurationManager, i18n,
         ServerToolTarget.forGroups);

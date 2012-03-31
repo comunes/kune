@@ -89,7 +89,7 @@ public class ServerToolRegistry {
   public void register(final ServerTool tool) {
     final String name = tool.getName();
     final String rootName = tool.getRootName();
-    if (tool.getName().equals(TrashToolConstants.NAME)) {
+    if (tool.getName().equals(TrashToolConstants.TOOL_NAME)) {
       tools.put(name, tool);
       // Trash is a special tool but we don't register it fully
       return;

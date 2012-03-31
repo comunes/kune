@@ -42,8 +42,10 @@ import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.finders.ContainerFinder;
 import cc.kune.domain.finders.ContentFinder;
+import cc.kune.trash.server.TrashServerUtils;
 import cc.kune.trash.shared.TrashToolConstants;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -120,13 +122,33 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     }
     if (container.isRoot()) {
       // Cannot move root container
-      throw new AccessViolationException();
+      throw new AccessViolationException("Trying to delete a root folder: " + container);
     }
     final Container oldContainer = container.getParent();
     oldContainer.removeChild(container);
     newContainer.addChild(container);
     container.setParent(newContainer);
+    container.setToolName(newContainer.getToolName());
     return persist(container);
+  }
+
+  @Override
+  public Container purgeContainer(final Container container) {
+    Preconditions.checkState(TrashServerUtils.inTrash(container),
+        "Trying to purge a not deleted container: " + container);
+    Preconditions.checkState(!container.isRoot(), "Trying to purge a root folder: " + container);
+    Preconditions.checkState(container.getChilds().size() == 0, "Container has folder childs");
+    Preconditions.checkState(container.getContents().size() == 0, "Container has content childs");
+    final Container parent = container.getParent();
+    parent.removeChild(container);
+    container.setParent(null);
+    persist(parent);
+    container.setOwner(null);
+    // persist(parent);
+    // merge(container);
+    // flush();
+    remove(container);
+    return parent;
   }
 
   @Override

@@ -19,6 +19,7 @@
  \*/
 package cc.kune.tasks.client.actions;
 
+import static cc.kune.tasks.shared.TasksToolConstants.TOOL_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_FOLDER;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_ROOT;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_TASK;
@@ -41,10 +42,13 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
+import cc.kune.gspace.client.actions.PurgeContentBtn;
+import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import cc.kune.gspace.client.actions.TutorialContainerBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
+import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -75,6 +79,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
       final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
+      final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final TasksFolderNewMenu taskFolderNewMenu, final TasksNewMenu taskNewMenu,
@@ -82,42 +87,46 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage) {
     super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newTaskIconBtn, all);
-    // actionsRegistry.addAction(ActionGroups.TOOLBAR, taskFolderNewMenu,
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newTaskIconBtn, all);
+    // actionsRegistry.addAction(NAME, ActionGroups.TOOLBAR, taskFolderNewMenu,
     // containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, taskNewMenu, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, newFolderBtn, containers);
-    // actionsRegistry.addAction(ActionGroups.TOOLBAR, newTaskItem, containers);
-    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, contents);
-    actionsRegistry.addAction(ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, tutorialBtn, containers);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, shareMenuContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, participateBtn, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, chatAbout, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, copyContent, contents);
-    actionsRegistry.addAction(ActionGroups.TOPBAR, writeToParticipants, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsDoneMenuItem,
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, taskNewMenu, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newFolderBtn, containers);
+    // actionsRegistry.addAction(NAME, ActionGroups.TOOLBAR, newTaskItem,
+    // containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, marksAsDoneMenuItem,
         ContentStatus.publishedOnline, TYPE_TASK);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsDoneMenuItem,
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, marksAsDoneMenuItem,
         ContentStatus.editingInProgress, TYPE_TASK);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, marksAsNotDoneMenuItem,
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, marksAsNotDoneMenuItem,
         ContentStatus.inTheDustbin, TYPE_TASK);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, delContentMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAllMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, copyContent, contents);
-    actionsRegistry.addAction(ActionGroups.ITEM_MENU, writeToParticipants, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delContentMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAllMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, copyContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, writeToParticipants, contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
+        contents);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, taskFolderNewMenu.get());

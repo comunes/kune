@@ -22,11 +22,11 @@ package cc.kune.gallery.shared;
 import cc.kune.core.shared.ToolConstants;
 
 public final class GalleryToolConstants {
-  public static final String NAME = "gallery";
+  public static final String TOOL_NAME = "gallery";
   public static final String ROOT_NAME = "gallery";
-  public static final String TYPE_ALBUM = NAME + "." + "album";
-  public static final String TYPE_ROOT = NAME + "." + "root";
-  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
+  public static final String TYPE_ALBUM = TOOL_NAME + "." + "album";
+  public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
+  public static final String TYPE_UPLOADEDFILE = TOOL_NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
   private GalleryToolConstants() {
   }

@@ -19,7 +19,7 @@
  */
 package cc.kune.lists.server;
 
-import static cc.kune.lists.shared.ListsToolConstants.NAME;
+import static cc.kune.lists.shared.ListsToolConstants.TOOL_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.ROOT_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
@@ -59,7 +59,7 @@ public class ListsServerTool extends AbstractServerTool {
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final UserSessionManager userSessionManager, final KuneWaveService waveManager,
       final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST), Arrays.asList(TYPE_LIST),
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST), Arrays.asList(TYPE_LIST),
         Arrays.asList(TYPE_LIST), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
         creationService, configurationManager, i18n, ServerToolTarget.forGroups);
     this.userSessionManager = userSessionManager;

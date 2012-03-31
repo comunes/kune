@@ -151,7 +151,7 @@ class ThreadedWaveRenderer implements WaveRenderer {
     String avatar = "";
     if (address.contains(domain)) {
       avatar = new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
-          address.split("@")[0])).toString();
+          address.split("@")[0]), new UrlParam(FileConstants.ONLY_USERS, true)).toString();
     } else {
       avatar = FileConstants.PERSON_NO_AVATAR_IMAGE;
     }

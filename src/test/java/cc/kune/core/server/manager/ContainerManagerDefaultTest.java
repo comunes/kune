@@ -39,7 +39,7 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   @Before
   public void before() {
-    rootFolder = containerManager.createRootFolder(user.getUserGroup(), DocsToolConstants.NAME,
+    rootFolder = containerManager.createRootFolder(user.getUserGroup(), DocsToolConstants.TOOL_NAME,
         DocsToolConstants.ROOT_NAME, TYPE_FOLDER);
   }
 

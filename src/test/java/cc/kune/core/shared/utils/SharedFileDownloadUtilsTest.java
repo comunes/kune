@@ -55,13 +55,13 @@ public class SharedFileDownloadUtilsTest {
       assertTrue(
           util.getLogoAvatarHtml(GROUP, false, true, 50, 5),
           util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains(
-              "http://example.org/others/unknown.jpg"));
+              "http://example.org/others/defuser.jpg"));
       assertTrue(utilNoPrefix.getLogoAvatarHtml(GROUP, false, true, 50, 5),
-          util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains("/others/unknown.jpg"));
+          util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains("/others/defuser.jpg"));
       assertTrue(
           util.getLogoAvatarHtml(GROUP, true, false, 50, 5),
           util.getLogoAvatarHtml(GROUP, true, false, 50, 5).contains(
-              "'http://example.org/ws/servlets/EntityLogoDownloadManager?token=groupname"));
+              "'http://example.org/ws/servlets/EntityLogoDownloadManager?token=groupname&onlyusers=false"));
     }
 
     assertTrue(
@@ -73,12 +73,11 @@ public class SharedFileDownloadUtilsTest {
 
   @Test
   public void testUserAvatar() {
-    assertEquals("http://example.org" + FileConstants.LOGODOWNLOADSERVLET + "?token=groupname",
-        utilPrefix.getUserAvatar(GROUP));
-    assertEquals("http://example.org" + FileConstants.LOGODOWNLOADSERVLET + "?token=groupname",
-        utilPrefixWithSlash.getUserAvatar(GROUP));
-    assertEquals(FileConstants.LOGODOWNLOADSERVLET + "?token=groupname",
+    assertEquals("http://example.org" + FileConstants.LOGODOWNLOADSERVLET
+        + "?token=groupname&onlyusers=true", utilPrefix.getUserAvatar(GROUP));
+    assertEquals("http://example.org" + FileConstants.LOGODOWNLOADSERVLET
+        + "?token=groupname&onlyusers=true", utilPrefixWithSlash.getUserAvatar(GROUP));
+    assertEquals(FileConstants.LOGODOWNLOADSERVLET + "?token=groupname&onlyusers=true",
         utilNoPrefix.getUserAvatar(GROUP));
   }
-
 }

@@ -19,7 +19,7 @@
  */
 package cc.kune.lists.client;
 
-import static cc.kune.lists.shared.ListsToolConstants.NAME;
+import static cc.kune.lists.shared.ListsToolConstants.TOOL_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.ROOT_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
@@ -43,7 +43,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons) {
     super(
-        NAME,
+        TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("Lists behave like a mailing list or a forum. You can subscribe and discuss about specific topics"),
         icons.lists(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
@@ -63,7 +63,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
 
   @Override
   public String getName() {
-    return NAME;
+    return TOOL_NAME;
   }
 
   private void registerIcons() {

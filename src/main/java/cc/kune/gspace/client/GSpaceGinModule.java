@@ -26,13 +26,14 @@ import cc.kune.core.client.sn.AdminsGroupSNDropController;
 import cc.kune.core.client.sn.AllMembersGroupSNDropController;
 import cc.kune.core.client.sn.CollabsGroupSNDropController;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
+import cc.kune.gspace.client.actions.ActionUtils;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerOptionsShareSubMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.armor.GSpaceArmor;
-import cc.kune.gspace.client.armor.impl.GSpaceArmorImpl;
+import cc.kune.gspace.client.armor.GSpaceArmorDefault;
 import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorPanel;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter;
@@ -141,6 +142,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
+    requestStaticInjection(ActionUtils.class);
     s(PathToolbarUtils.class);
     s(FolderViewerUtils.class);
     s(ContentDropController.class);
@@ -151,8 +153,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
         EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
     bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class,
         TagsSummaryPanel.class, TagsSummaryPresenter.TagsSummaryProxy.class);
-    bind(GSpaceArmorImpl.class).in(Singleton.class);
-    bind(GSpaceArmor.class).to(GSpaceArmorImpl.class).in(Singleton.class);
+    bind(GSpaceArmorDefault.class).in(Singleton.class);
+    bind(GSpaceArmor.class).to(GSpaceArmorDefault.class).in(Singleton.class);
     bind(GSpaceParts.class).asEagerSingleton();
     bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
         ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);

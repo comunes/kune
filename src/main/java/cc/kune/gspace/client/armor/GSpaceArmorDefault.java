@@ -17,14 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.armor.impl;
+package cc.kune.gspace.client.armor;
 
 import org.cobogw.gwt.user.client.CSS;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.shared.utils.Pair;
-import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Overflow;
@@ -47,15 +46,15 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
+public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
-  interface WsArmorImplUiBinder extends UiBinder<Widget, GSpaceArmorImpl> {
+  interface GSpaceArmorDefaultUiBinder extends UiBinder<Widget, GSpaceArmorDefault> {
   }
   private static final int CENTER_NORTH_HEIGHT = 153;
   private static final int CENTER_SOUTH_HEIGHT = 36;
   private static final int EAST_WIDTH = 220;
 
-  private static WsArmorImplUiBinder uiBinder = GWT.create(WsArmorImplUiBinder.class);
+  private static GSpaceArmorDefaultUiBinder uiBinder = GWT.create(GSpaceArmorDefaultUiBinder.class);
 
   @UiField
   VerticalPanel centerNorth;
@@ -110,7 +109,7 @@ public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
   FlowPanel userSpace;
 
   @Inject
-  public GSpaceArmorImpl(final Provider<ActionFlowPanel> toolbarProv) {
+  public GSpaceArmorDefault(final Provider<ActionFlowPanel> toolbarProv) {
     initWidget(uiBinder.createAndBindUi(this));
     groupSpace.setWidgetMinSize(splitEast, 150);
     DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow",

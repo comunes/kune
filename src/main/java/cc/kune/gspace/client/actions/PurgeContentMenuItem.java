@@ -19,30 +19,19 @@
  */
 package cc.kune.gspace.client.actions;
 
-/**
- * A group of actions that must be grouped and showed in some perspective (on
- * edit, etc).
- */
-public final class ActionGroups {
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.gspace.client.actions.PurgeContentBtn.PurgeContentAction;
 
-  /**
-   * The Constant BOTTOMBAR identifies actions in the bottom bar, below the
-   * content.
-   */
-  public final static String BOTTOMBAR = "bottombar";
+import com.google.inject.Inject;
 
-  /**
-   * The Constant ITEM_MENU identifies actions in the menu of each item of a
-   * folder list.
-   */
-  public final static String ITEM_MENU = "menu-item";
+public class PurgeContentMenuItem extends MenuItemDescriptor {
 
-  /** The Constant TOPBAR identifies actions in the top bar, above the content. */
-  public final static String TOPBAR = "topbar";
-
-  /**
-   * Instantiates a new action groups.
-   */
-  private ActionGroups() {
+  @Inject
+  public PurgeContentMenuItem(final I18nTranslationService i18n, final PurgeContentAction action,
+      final CoreResources res) {
+    super(action);
   }
+
 }

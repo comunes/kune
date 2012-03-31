@@ -19,7 +19,7 @@
  */
 package cc.kune.trash.server;
 
-import static cc.kune.trash.shared.TrashToolConstants.NAME;
+import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
 import static cc.kune.trash.shared.TrashToolConstants.ROOT_NAME;
 import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
 
@@ -49,7 +49,7 @@ public class TrashServerTool extends AbstractServerTool {
   public TrashServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Collections.<String> emptyList(), Arrays.asList(TYPE_ROOT),
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Collections.<String> emptyList(), Arrays.asList(TYPE_ROOT),
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
         creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }

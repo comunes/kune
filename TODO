@@ -12,6 +12,10 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
+** setui/root/port 80
+   [ ] http://wiki.eclipse.org/Jetty/Howto/Port80#Configuring_Jetty.27s_SetUID_Feature
+   [ ] https://github.com/disconnect/apache-websocket
+   [ ] SSL + proxy normal
 ** tutorials
 *** via btn
 *** via hash (future) #tuto(token,slide)

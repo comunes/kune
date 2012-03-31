@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server;
 
+import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
 import static org.junit.Assert.assertEquals;
 
@@ -121,9 +122,11 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
     contentManager.persist(content);
     container = new Container();
     container.setTypeId(TYPE_FOLDER);
+    container.setToolName(TOOL_NAME);
     containerManager.persist(container);
     otherContainer = new Container();
     otherContainer.setTypeId(TYPE_FOLDER);
+    otherContainer.setToolName(TOOL_NAME);
     containerManager.persist(otherContainer);
   }
 }

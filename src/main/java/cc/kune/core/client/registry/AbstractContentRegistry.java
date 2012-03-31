@@ -22,30 +22,34 @@ package cc.kune.core.client.registry;
 import java.util.ArrayList;
 
 public abstract class AbstractContentRegistry {
-    private final ArrayList<String> registry;
+  private final ArrayList<String> registry;
 
-    public AbstractContentRegistry() {
-        registry = new ArrayList<String>();
-    }
+  public AbstractContentRegistry() {
+    registry = new ArrayList<String>();
+  }
 
-    public boolean contains(String typeId) {
-        return registry.contains(typeId);
-    }
+  public String[] asArray() {
+    return registry.toArray(new String[registry.size()]);
+  }
 
-    public void register(String... typeIds) {
-        for (String typeId : typeIds) {
-            registry.add(typeId);
-        }
-    }
+  public boolean contains(final String typeId) {
+    return registry.contains(typeId);
+  }
 
-    @Override
-    public String toString() {
-        return "registry: " + registry;
+  public void register(final String... typeIds) {
+    for (final String typeId : typeIds) {
+      registry.add(typeId);
     }
+  }
 
-    public void unregister(String... typeIds) {
-        for (String typeId : typeIds) {
-            registry.remove(typeId);
-        }
+  @Override
+  public String toString() {
+    return "registry: " + registry;
+  }
+
+  public void unregister(final String... typeIds) {
+    for (final String typeId : typeIds) {
+      registry.remove(typeId);
     }
+  }
 }

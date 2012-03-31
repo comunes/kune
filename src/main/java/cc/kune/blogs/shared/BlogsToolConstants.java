@@ -23,12 +23,12 @@ import cc.kune.core.shared.ToolConstants;
 
 public final class BlogsToolConstants {
 
-  public static final String NAME = "blogs";
+  public static final String TOOL_NAME = "blogs";
   public static final String ROOT_NAME = "blogs";
-  public static final String TYPE_BLOG = NAME + "." + "blog";
-  public static final String TYPE_POST = NAME + "." + "post";
-  public static final String TYPE_ROOT = NAME + "." + "root";
-  public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
+  public static final String TYPE_BLOG = TOOL_NAME + "." + "blog";
+  public static final String TYPE_POST = TOOL_NAME + "." + "post";
+  public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
+  public static final String TYPE_UPLOADEDFILE = TOOL_NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
   private BlogsToolConstants() {
   }

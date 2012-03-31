@@ -19,7 +19,7 @@
  */
 package cc.kune.docs.server;
 
-import static cc.kune.docs.shared.DocsToolConstants.NAME;
+import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.ROOT_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
@@ -49,7 +49,7 @@ public class DocumentServerTool extends AbstractServerTool {
   public DocumentServerTool(final ContentManager contentManager,
       final ContainerManager containerManager, final ToolConfigurationManager configurationManager,
       final I18nTranslationService i18n, final CreationService creationService) {
-    super(NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_DOCUMENT, TYPE_UPLOADEDFILE), Arrays.asList(
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_DOCUMENT, TYPE_UPLOADEDFILE), Arrays.asList(
         TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
         contentManager, containerManager, creationService, configurationManager, i18n,
         ServerToolTarget.forBoth);

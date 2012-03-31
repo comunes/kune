@@ -21,11 +21,11 @@ package cc.kune.lists.shared;
 
 public final class ListsToolConstants {
 
-  public static final String NAME = "lists";
+  public static final String TOOL_NAME = "lists";
   public static final String ROOT_NAME = "lists";
-  public static final String TYPE_LIST = NAME + "." + "list";
-  public static final String TYPE_POST = NAME + "." + "post";
-  public static final String TYPE_ROOT = NAME + "." + "root";
+  public static final String TYPE_LIST = TOOL_NAME + "." + "list";
+  public static final String TYPE_POST = TOOL_NAME + "." + "post";
+  public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
 
   private ListsToolConstants() {
   }

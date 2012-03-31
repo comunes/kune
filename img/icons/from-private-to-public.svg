@@ -25,7 +25,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.66041902"
+     inkscape:zoom="0.67942388"
      inkscape:cx="372.04724"
      inkscape:cy="526.18109"
      inkscape:document-units="px"
@@ -896,5 +896,56 @@
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
     </g>
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/webapp/others/unknown.png"
+       y="68.119125"
+       x="423.80432"
+       height="90"
+       width="90"
+       id="rect14554"
+       style="opacity:0.82999998;color:#000000;fill:#ffffff;fill-opacity:0.94901961;fill-rule:nonzero;stroke:none;stroke-width:1.40678155;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/webapp/others/unknown.png"
+       sodipodi:type="arc"
+       style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#666666;stroke-width:1.48864591000000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path14558"
+       sodipodi:cx="90"
+       sodipodi:cy="32.362183"
+       sodipodi:rx="20"
+       sodipodi:ry="10"
+       d="m 110,32.362183 a 20,10 0 1 1 -40,0 20,10 0 1 1 40,0 z"
+       transform="matrix(1.9,0,0,3.8,297.80431,-9.8571688)" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:#e6e6e6;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="453.29498"
+       y="138.63554"
+       id="text14573"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/webapp/others/unknown.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan14575"
+         x="453.29498"
+         y="138.63554"
+         style="font-size:72px;font-weight:bold;fill:#333333;stroke:none">?</tspan></text>
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/src/main/webapp/others/unknown.png"
+       transform="matrix(1.9,0,0,3.8,297.80431,-9.8571688)"
+       d="m 110,32.362183 a 20,10 0 1 1 -40,0 20,10 0 1 1 40,0 z"
+       sodipodi:ry="10"
+       sodipodi:rx="20"
+       sodipodi:cy="32.362183"
+       sodipodi:cx="90"
+       id="path14566"
+       style="color:#000000;fill:none;stroke:#999999;stroke-width:1.48864591;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc" />
   </g>
 </svg>

@@ -99,7 +99,7 @@ public class Container implements HasId, HasStateToken {
   private String name;
 
   @IndexedEmbedded(depth = 1, prefix = "owner_")
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   private Group owner;
 
   // Parent/Child pattern:
@@ -271,8 +271,9 @@ public class Container implements HasId, HasStateToken {
   }
 
   public void removeChild(final Container child) {
-    child.setParent(null);
+    childs.size();
     childs.remove(child);
+    // child.setParent(null);
   }
 
   public void removeContent(final Content content) {
