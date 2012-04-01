@@ -165,7 +165,7 @@
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider"/>
       <property name="hibernate.search.default.indexBase"
-        value="/var/lib/kune/lucene/kune_dev/indexes"/>
+        value="kune-data/lucene/kune_dev/indexes"/>
     </properties>
   </persistence-unit>
 
@@ -223,7 +223,7 @@
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider"/>
       <property name="hibernate.search.default.indexBase"
-        value="/var/lib/kune/lucene/kune_test/indexes"/>
+        value="kune-data/lucene/kune_test/indexes"/>
     </properties>
   </persistence-unit>
 
@@ -267,7 +267,7 @@
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider"/>
       <property name="hibernate.search.default.indexBase"
-        value="/var/lib/kune/lucene/kune_test/indexes"/>
+        value="kune-data/lucene/kune_test/indexes"/>
     </properties>
   </persistence-unit>
 

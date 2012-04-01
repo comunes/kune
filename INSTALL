@@ -85,6 +85,8 @@ NOTE: If you change the previous db passwords after this compiling, you have to 
 
 ===Configure directories===
 
+Note: This is not needed in development enviroments or when you use debian package
+
  sudo mkdir -p /usr/share/kune/
  sudo chown yourUser:yourUser /usr/share/kune/
 
@@ -97,8 +99,10 @@ Configurate hibernate/lucene indexes directories (these are GNU/Linux instructio
  # yourUser is the user you are using to develop/run the application
  sudo mkdir -p /var/lib/kune/lucene/kune_dev/indexes
  sudo mkdir -p /var/lib/kune/lucene/kune_test/indexes
+ sudo mkdir -p /var/lib/kune/lucene/kune_prod/indexes
  sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_dev/indexes
  sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_test/indexes
+ sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_prod/indexes
 
  But in general you can do it recursively with:
 

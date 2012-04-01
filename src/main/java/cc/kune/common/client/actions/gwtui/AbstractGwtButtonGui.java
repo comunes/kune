@@ -24,7 +24,6 @@ import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -41,7 +40,6 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   protected boolean enableTongle;
   private IconLabel iconLabel;
   private boolean isChild;
-  private Tooltip tooltip;
 
   public AbstractGwtButtonGui() {
     this(null, false);
