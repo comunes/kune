@@ -25,6 +25,7 @@ import static com.google.inject.matcher.Matchers.any;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.mockito.Mockito;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
@@ -76,8 +77,8 @@ public class IntegrationTestHelper {
             protected void configure() {
               bindScope(SessionScoped.class, Scopes.SINGLETON);
               bindScope(RequestScoped.class, Scopes.SINGLETON);
-
-              bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+              // Used by I18nRPC to detect user lang
+              bind(HttpServletRequest.class).toInstance(Mockito.mock(HttpServletRequest.class));
               bindInterceptor(annotatedWith(KuneTransactional.class), any(),
                   kuneDataSource.getTransactionInterceptor());
               bindInterceptor(any(), annotatedWith(KuneTransactional.class),

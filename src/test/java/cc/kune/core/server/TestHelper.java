@@ -22,6 +22,7 @@ package cc.kune.core.server;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.mockito.Mockito;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.authentication.AccountStoreHolder;
@@ -35,7 +36,6 @@ import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.chat.server.ChatServerModule;
-import cc.kune.core.server.integration.HttpServletRequestMocked;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
 import cc.kune.docs.server.DocumentServerModule;
@@ -68,9 +68,9 @@ public abstract class TestHelper {
           "kune.properties", TestConstants.PERSISTENCE_UNIT);
       final Injector childInjector = injector.createChildInjector(wavePersistModule, new ServerModule(
           false, 1, 2, 2), new RobotApiModule(), federationModule, new ListsServerModule(),
-          new DocumentServerModule(), new ChatServerModule(), federationModule,
-          new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
-          new EventsServerModule(), new TrashServerModule(), kuneDataSource,
+          new DocumentServerModule(), new ChatServerModule(), federationModule, new WikiServerModule(),
+          new TaskServerModule(), new BarterServerModule(), new EventsServerModule(),
+          new TrashServerModule(), kuneDataSource,
           new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()), module, new Module() {
             @Override
             public void configure(final Binder binder) {
@@ -78,7 +78,8 @@ public abstract class TestHelper {
               binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
               // binder.bind(KuneProperties.class).toInstance(new
               // KunePropertiesDefault(propetiesFileName));
-              binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+              // Used by I18nRPC to detect user lang
+              binder.bind(HttpServletRequest.class).toInstance(Mockito.mock(HttpServletRequest.class));
             }
           });
       try {

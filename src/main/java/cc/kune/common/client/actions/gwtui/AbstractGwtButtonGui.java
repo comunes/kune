@@ -19,13 +19,11 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
@@ -113,8 +111,9 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
 
   @Override
   public void setEnabled(final boolean enabled) {
-    Log.info("Set button" + descriptor.getValue(Action.NAME) + " enabled " + enabled
-        + " ----------------------------------");
+    // Log.info("Set button" + descriptor.getValue(Action.NAME) + " enabled " +
+    // enabled
+    // + " ----------------------------------");
     button.setEnabled(enabled);
     button.getElement().getStyle().setOpacity(enabled ? 1d : 0.6d);
   }
