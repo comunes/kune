@@ -43,11 +43,13 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatStates;
 import com.calclab.emite.xep.muc.client.Occupant;
 import com.calclab.emite.xep.muc.client.Room;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
 public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
 
   private final ChatClient chatClient;
+  private HandlerRegistration hadlerReg;
   protected final I18nTranslationService i18n;
   private boolean inviteMembers;
   protected final Session session;
@@ -92,7 +94,7 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
 
   private void inviteMembers(final Room room) {
     if (inviteMembers) {
-      room.addChatStateChangedHandler(true,
+      hadlerReg = room.addChatStateChangedHandler(true,
           new com.calclab.emite.core.client.events.StateChangedHandler() {
             @Override
             public void onStateChanged(final com.calclab.emite.core.client.events.StateChangedEvent event) {
@@ -114,6 +116,7 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
                   room.sendInvitationTo(memberNotPresent,
                       i18n.t("Join us in [%s] public room!", room.getURI().getNode()));
                 }
+                hadlerReg.removeHandler();
               }
             }
           });

@@ -28,6 +28,8 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
+import com.google.gwt.event.shared.HandlerRegistration;
+
 public interface StateManager {
 
   /**
@@ -59,9 +61,9 @@ public interface StateManager {
 
   void gotoStateToken(StateToken token, boolean useCache);
 
-  void onGroupChanged(boolean fireNow, GroupChangedEvent.GroupChangedHandler handler);
+  HandlerRegistration onGroupChanged(boolean fireNow, GroupChangedEvent.GroupChangedHandler handler);
 
-  void onSocialNetworkChanged(boolean fireNow,
+  HandlerRegistration onSocialNetworkChanged(boolean fireNow,
       SocialNetworkChangedEvent.SocialNetworkChangedHandler handler);
 
   /**
@@ -69,9 +71,9 @@ public interface StateManager {
    *          if true, fire handler with current state
    * @param handler
    */
-  void onStateChanged(boolean fireNow, StateChangedEvent.StateChangedHandler handler);
+  HandlerRegistration onStateChanged(boolean fireNow, StateChangedEvent.StateChangedHandler handler);
 
-  void onToolChanged(boolean fireNow, ToolChangedEvent.ToolChangedHandler handler);
+  HandlerRegistration onToolChanged(boolean fireNow, ToolChangedEvent.ToolChangedHandler handler);
 
   void redirectOrRestorePreviousToken(boolean fireChange);
 

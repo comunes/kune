@@ -180,6 +180,16 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     return result;
   }
 
+  @Override
+  public void onAttach() {
+    action.onAttach();
+  }
+
+  @Override
+  public void onDetach() {
+    action.onDettach();
+  }
+
   public void setAction(final AbstractAction action) {
     this.action = action;
   }

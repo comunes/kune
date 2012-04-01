@@ -465,8 +465,7 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
-      <scope>provided</scope>
+      <version>3.0-${wiab.version}</version>
     </dependency>
     <!-- testing dependencies -->
     <dependency>

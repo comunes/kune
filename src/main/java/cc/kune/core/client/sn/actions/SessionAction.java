@@ -25,20 +25,28 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
 public abstract class SessionAction extends AbstractExtendedAction {
+  private final HandlerRegistration hadlerReg;
   protected final Session session;
 
   @Inject
   public SessionAction(final Session session, final boolean authNeed) {
     this.session = session;
-    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+    hadlerReg = session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
         refreshStatus(authNeed, event.isLogged());
       }
     });
+  }
+
+  @Override
+  public void onDettach() {
+    super.onDettach();
+    hadlerReg.removeHandler();
   }
 
   public void refreshStatus(final boolean authNeed, final boolean isLogged) {

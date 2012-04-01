@@ -110,6 +110,12 @@ public abstract class AbstractAction extends ChangeableObject implements Action 
     return (Boolean) super.getValue(ENABLED);
   }
 
+  public void onAttach() {
+  }
+
+  public void onDettach() {
+  }
+
   @Override
   /**
    * Sets the value associated with the specified key and sends a

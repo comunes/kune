@@ -40,6 +40,7 @@ public class ContentServiceHelper {
 
   private final ContentCache cache;
   private final Provider<ContentServiceAsync> contentService;
+  private final AsyncCallbackSimple<StateContainerDTO> defCallback;
   private final EventBus eventBus;
   private final FolderViewerPresenter folderViewer;
   private final I18nTranslationService i18n;
@@ -57,6 +58,27 @@ public class ContentServiceHelper {
     this.eventBus = eventBus;
     this.contentService = contentService;
     this.stateManager = stateManager;
+    defCallback = new AsyncCallbackSimple<StateContainerDTO>() {
+      @Override
+      public void onFailure(final Throwable caught) {
+        // Should we do something with
+        // ContainerNotEmptyException?
+        super.onFailure(caught);
+        NotifyUser.hideProgress();
+      }
+
+      @Override
+      public void onSuccess(final StateContainerDTO state) {
+        final StateToken parentToken = state.getStateToken();
+        if (session.getCurrentStateToken().equals(parentToken)) {
+          stateManager.setRetrievedStateAndGo(state);
+        } else {
+          stateManager.gotoStateToken(parentToken, false);
+        }
+        NotifyUser.hideProgress();
+      }
+    };
+
   }
 
   public void addContainer(final String id, final String newName) {
@@ -102,27 +124,18 @@ public class ContentServiceHelper {
           @Override
           public void onSuccess() {
             NotifyUser.showProgress();
-            contentService.get().delContent(session.getUserHash(), token,
-                new AsyncCallbackSimple<StateContainerDTO>() {
-                  @Override
-                  public void onFailure(final Throwable caught) {
-                    // Should we do something with
-                    // ContainerNotEmptyException?
-                    super.onFailure(caught);
-                    NotifyUser.hideProgress();
-                  }
+            contentService.get().delContent(session.getUserHash(), token, defCallback);
+          }
+        });
+  }
 
-                  @Override
-                  public void onSuccess(final StateContainerDTO state) {
-                    final StateToken parentToken = state.getStateToken();
-                    if (session.getCurrentStateToken().equals(parentToken)) {
-                      stateManager.setRetrievedStateAndGo(state);
-                    } else {
-                      stateManager.gotoStateToken(parentToken, false);
-                    }
-                    NotifyUser.hideProgress();
-                  }
-                });
+  public void purgeAll(final StateToken token) {
+    ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
+        i18n.t("No"), null, null, new OnAcceptCallback() {
+          @Override
+          public void onSuccess() {
+            NotifyUser.showProgress();
+            contentService.get().purgeAll(session.getUserHash(), token, defCallback);
           }
         });
   }
@@ -133,27 +146,7 @@ public class ContentServiceHelper {
           @Override
           public void onSuccess() {
             NotifyUser.showProgress();
-            contentService.get().purgeContent(session.getUserHash(), token,
-                new AsyncCallbackSimple<StateContainerDTO>() {
-                  @Override
-                  public void onFailure(final Throwable caught) {
-                    // Should we do something with
-                    // ContainerNotEmptyException?
-                    super.onFailure(caught);
-                    NotifyUser.hideProgress();
-                  }
-
-                  @Override
-                  public void onSuccess(final StateContainerDTO state) {
-                    final StateToken parentToken = state.getStateToken();
-                    if (session.getCurrentStateToken().equals(parentToken)) {
-                      stateManager.setRetrievedStateAndGo(state);
-                    } else {
-                      stateManager.gotoStateToken(parentToken, false);
-                    }
-                    NotifyUser.hideProgress();
-                  }
-                });
+            contentService.get().purgeContent(session.getUserHash(), token, defCallback);
           }
         });
   }

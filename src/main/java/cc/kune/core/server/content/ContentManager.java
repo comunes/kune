@@ -70,6 +70,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
   Content moveContent(Content content, Container newContainer);
 
+  Container purgeAll(Container container);
+
   Container purgeContent(Content content);
 
   RateResult rateContent(User rater, Long contentId, Double value) throws DefaultException;

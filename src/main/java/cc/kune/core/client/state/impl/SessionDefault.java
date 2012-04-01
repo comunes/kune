@@ -50,6 +50,7 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -308,35 +309,41 @@ public class SessionDefault implements Session {
   }
 
   @Override
-  public void onAppStart(final boolean fireNow, final AppStartHandler handler) {
-    eventBus.addHandler(AppStartEvent.getType(), handler);
+  public HandlerRegistration onAppStart(final boolean fireNow, final AppStartHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(AppStartEvent.getType(), handler);
     if (fireNow && initData != null) {
       handler.onAppStart(new AppStartEvent(initData));
     }
+    return handlerReg;
   }
 
   @Override
-  public void onUserSignIn(final boolean fireNow, final UserSignInHandler handler) {
-    eventBus.addHandler(UserSignInEvent.getType(), handler);
+  public HandlerRegistration onUserSignIn(final boolean fireNow, final UserSignInHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(UserSignInEvent.getType(), handler);
     if (fireNow && isLogged() && currentUserInfo != null) {
       handler.onUserSignIn(new UserSignInEvent(currentUserInfo, null));
     }
+    return handlerReg;
   }
 
   @Override
-  public void onUserSignInOrSignOut(final boolean fireNow, final UserSignInOrSignOutHandler handler) {
-    eventBus.addHandler(UserSignInOrSignOutEvent.getType(), handler);
+  public HandlerRegistration onUserSignInOrSignOut(final boolean fireNow,
+      final UserSignInOrSignOutHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(UserSignInOrSignOutEvent.getType(),
+        handler);
     if (fireNow) {
       handler.onUserSignInOrSignOut(new UserSignInOrSignOutEvent(isLogged()));
     }
+    return handlerReg;
   }
 
   @Override
-  public void onUserSignOut(final boolean fireNow, final UserSignOutHandler handler) {
-    eventBus.addHandler(UserSignOutEvent.getType(), handler);
+  public HandlerRegistration onUserSignOut(final boolean fireNow, final UserSignOutHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(UserSignOutEvent.getType(), handler);
     if (fireNow && isNotLogged()) {
       handler.onUserSignOut(new UserSignOutEvent());
     }
+    return handlerReg;
   }
 
   @Override

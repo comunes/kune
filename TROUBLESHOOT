@@ -144,7 +144,7 @@ Sometimes you get errors like this, trying to compile:
 Authorizated.java:[50,47] incompatible types
 found   : cc.kune.core.shared.domain.AccessRol
 required: cc.kune.core.shared.domain.AccessRol
-seems that happens with some openjdk6 versions. Workaround to compile from eclipse or using sun-jdk or opnejdk7.
+seems that happens with some openjdk6 versions. Workaround to compile from eclipse or using sun-jdk or another jdk version.
 More info:
 https://bugs.launchpad.net/ubuntu/+source/openjdk-6/+bug/611284
 update-java-alternatives -l

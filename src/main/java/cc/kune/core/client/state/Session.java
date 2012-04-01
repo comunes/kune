@@ -59,6 +59,8 @@ import cc.kune.core.shared.dto.ToolSimpleDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
+import com.google.gwt.event.shared.HandlerRegistration;
+
 public interface Session {
 
   void check(AsyncCallbackSimple<Void> callback);
@@ -131,23 +133,24 @@ public interface Session {
 
   boolean isNotLogged();
 
-  void onAppStart(boolean fireNow, AppStartEvent.AppStartHandler handler);
+  HandlerRegistration onAppStart(boolean fireNow, AppStartEvent.AppStartHandler handler);
 
   /**
    * @param fireNow
    *          if @true the handler is fired after added if the user is loggedin
    * @param handler
    */
-  void onUserSignIn(boolean fireNow, UserSignInEvent.UserSignInHandler handler);
+  HandlerRegistration onUserSignIn(boolean fireNow, UserSignInEvent.UserSignInHandler handler);
 
-  void onUserSignInOrSignOut(boolean fireNow, UserSignInOrSignOutEvent.UserSignInOrSignOutHandler handler);
+  HandlerRegistration onUserSignInOrSignOut(boolean fireNow,
+      UserSignInOrSignOutEvent.UserSignInOrSignOutHandler handler);
 
   /**
    * @param fireNow
    *          if @true the handler is fired after added if the user is loggedin
    * @param handler
    */
-  void onUserSignOut(boolean fireNow, UserSignOutEvent.UserSignOutHandler handler);
+  HandlerRegistration onUserSignOut(boolean fireNow, UserSignOutEvent.UserSignOutHandler handler);
 
   void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
 

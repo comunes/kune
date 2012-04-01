@@ -201,6 +201,16 @@ public interface GuiActionDescrip {
   boolean mustBeAdded();
 
   /**
+   * Fired when the widget is attached
+   */
+  void onAttach();
+
+  /**
+   * Fired when the widget is detached
+   */
+  void onDetach();
+
+  /**
    * Put value.
    * 
    * @param key

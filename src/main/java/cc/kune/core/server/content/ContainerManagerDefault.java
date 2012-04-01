@@ -132,6 +132,17 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
   }
 
   @Override
+  public Container purgeAll(final Container container) {
+    Preconditions.checkState(container.isRoot(), "Trying to purge a non root folder: " + container);
+    Preconditions.checkState(container.getTypeId().equals(TrashToolConstants.TYPE_ROOT),
+        "Container is not a trash root folder");
+    for (final Container childContainer : container.getChilds()) {
+      purgeContainer(childContainer);
+    }
+    return container;
+  }
+
+  @Override
   public Container purgeContainer(final Container container) {
     // Enable this precondition ASAP
     // Preconditions.checkState(TrashServerUtils.inTrash(container),

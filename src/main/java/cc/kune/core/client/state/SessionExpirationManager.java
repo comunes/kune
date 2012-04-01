@@ -27,7 +27,9 @@ import cc.kune.core.client.events.UserMustBeLoggedEvent.UserMustBeLoggedHandler;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class SessionExpirationManager {
   @Inject
   public SessionExpirationManager(final EventBus eventBus, final Session session,

@@ -45,10 +45,12 @@ public class TrashClientActions extends AbstractFoldableToolActions {
   public TrashClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
       final Provider<RefreshContentMenuItem> refresh, final Provider<GoParentChatBtn> folderGoUp,
+      final Provider<EmptyTrashBinBtn> emptyTrashBin,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, emptyTrashBin, TYPE_ROOT);
   }
 
   @Override

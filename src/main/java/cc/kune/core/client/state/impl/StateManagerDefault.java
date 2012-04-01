@@ -66,6 +66,7 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -283,41 +284,46 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   }
 
   @Override
-  public void onGroupChanged(final boolean fireNow, final GroupChangedHandler handler) {
-    eventBus.addHandler(GroupChangedEvent.getType(), handler);
+  public HandlerRegistration onGroupChanged(final boolean fireNow, final GroupChangedHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(GroupChangedEvent.getType(), handler);
     final StateAbstractDTO currentState = session.getCurrentState();
     if (fireNow && currentState != null) {
       handler.onGroupChanged(new GroupChangedEvent(getPreviousGroup(),
           currentState.getStateToken().getGroup()));
     }
-
+    return handlerReg;
   }
 
   @Override
-  public void onSocialNetworkChanged(final boolean fireNow, final SocialNetworkChangedHandler handler) {
-    eventBus.addHandler(SocialNetworkChangedEvent.getType(), handler);
+  public HandlerRegistration onSocialNetworkChanged(final boolean fireNow,
+      final SocialNetworkChangedHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(SocialNetworkChangedEvent.getType(),
+        handler);
     final StateAbstractDTO currentState = session.getCurrentState();
     if (fireNow && currentState != null) {
       handler.onSocialNetworkChanged(new SocialNetworkChangedEvent(currentState));
     }
+    return handlerReg;
   }
 
   @Override
-  public void onStateChanged(final boolean fireNow, final StateChangedHandler handler) {
-    eventBus.addHandler(StateChangedEvent.getType(), handler);
+  public HandlerRegistration onStateChanged(final boolean fireNow, final StateChangedHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(StateChangedEvent.getType(), handler);
     final StateAbstractDTO currentState = session.getCurrentState();
     if (fireNow && currentState != null) {
       handler.onStateChanged(new StateChangedEvent(currentState));
     }
+    return handlerReg;
   }
 
   @Override
-  public void onToolChanged(final boolean fireNow, final ToolChangedHandler handler) {
-    eventBus.addHandler(ToolChangedEvent.getType(), handler);
+  public HandlerRegistration onToolChanged(final boolean fireNow, final ToolChangedHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(ToolChangedEvent.getType(), handler);
     final StateAbstractDTO currentState = session.getCurrentState();
     if (fireNow && currentState != null) {
       handler.onToolChanged(new ToolChangedEvent(previousGroupToken, currentState.getStateToken()));
     }
+    return handlerReg;
   }
 
   @Override

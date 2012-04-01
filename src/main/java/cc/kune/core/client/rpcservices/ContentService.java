@@ -77,6 +77,8 @@ public interface ContentService extends RemoteService {
   StateContainerDTO moveContent(String userHash, StateToken contentToken, StateToken newContainerToken)
       throws DefaultException;
 
+  StateContainerDTO purgeAll(String userHash, StateToken token);
+
   StateContainerDTO purgeContent(String userHash, StateToken token);
 
   RateResult rateContent(String userHash, StateToken token, Double value) throws DefaultException;

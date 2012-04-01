@@ -123,6 +123,18 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
         : descriptor.isChild() ? descriptor.getParent().getTarget() : ActionEvent.NO_TARGET;
   }
 
+  @Override
+  protected void onAttach() {
+    super.onAttach();
+    descriptor.onAttach();
+  }
+
+  @Override
+  protected void onDetach() {
+    super.onDetach();
+    descriptor.onDetach();
+  }
+
   private void setDropTarget(final DropTarget dropTarget) {
     if (dropTarget != null) {
       dropTarget.init(this);

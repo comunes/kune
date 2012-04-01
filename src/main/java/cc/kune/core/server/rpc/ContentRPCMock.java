@@ -132,6 +132,12 @@ public class ContentRPCMock implements ContentService, RPC {
   }
 
   @Override
+  public StateContainerDTO purgeAll(final String userHash, final StateToken token) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
   public StateContainerDTO purgeContent(final String userHash, final StateToken token) {
     // TODO Auto-generated method stub
     return null;

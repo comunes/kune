@@ -76,10 +76,12 @@ import cc.kune.domain.finders.UserFinder;
 import cc.kune.events.server.utils.EventsCache;
 import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.trash.server.TrashServerUtils;
+import cc.kune.trash.shared.TrashToolConstants;
 import cc.kune.wave.server.KuneWaveServerUtils;
 import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -320,6 +322,17 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.setContainer(newContainer);
     clearEventsCacheIfNecessary(oldContainer);
     return persist(content);
+  }
+
+  @Override
+  public Container purgeAll(final Container container) {
+    Preconditions.checkState(container.isRoot(), "Trying to purge a non root folder: " + container);
+    Preconditions.checkState(container.getTypeId().equals(TrashToolConstants.TYPE_ROOT),
+        "Container is not a trash root folder");
+    for (final Content content : container.getContents()) {
+      purgeContent(content);
+    }
+    return container;
   }
 
   /**

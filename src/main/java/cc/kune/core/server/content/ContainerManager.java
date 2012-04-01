@@ -41,6 +41,8 @@ public interface ContainerManager extends Manager<Container, Long> {
 
   Container moveContainer(Container container, Container newContainer);
 
+  Container purgeAll(Container container);
+
   Container purgeContainer(Container container);
 
   Container renameFolder(Group group, Container container, String newName) throws DefaultException;

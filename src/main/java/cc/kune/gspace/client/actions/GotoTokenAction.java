@@ -29,8 +29,11 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 public class GotoTokenAction extends AbstractExtendedAction {
+  private final HandlerRegistration renameHandler;
+  private final HandlerRegistration snHandler;
   private final StateManager stateManager;
   private final StateToken token;
 
@@ -43,26 +46,34 @@ public class GotoTokenAction extends AbstractExtendedAction {
     putValue(Action.NAME, name);
     putValue(Action.SMALL_ICON, icon);
     putValue(Action.TOOLTIP, tooltip);
-    stateManager.onSocialNetworkChanged(true, new SocialNetworkChangedHandler() {
+    snHandler = stateManager.onSocialNetworkChanged(true, new SocialNetworkChangedHandler() {
       @Override
       public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
         putValue(Action.STYLES, !token.equals(event.getState().getStateToken()) ? style : style
             + ", k-button-disabled");
       }
     });
-    eventBus.addHandler(RenameContentEvent.getType(), new RenameContentEvent.RenameContentHandler() {
-      @Override
-      public void onRenameEvent(final RenameContentEvent event) {
-        final StateToken eToken = event.getToken();
-        if (eToken.equals(token)) {
-          putValue(Action.NAME, event.getNewName());
-        }
-      }
-    });
+    renameHandler = eventBus.addHandler(RenameContentEvent.getType(),
+        new RenameContentEvent.RenameContentHandler() {
+          @Override
+          public void onRenameEvent(final RenameContentEvent event) {
+            final StateToken eToken = event.getToken();
+            if (eToken.equals(token)) {
+              putValue(Action.NAME, event.getNewName());
+            }
+          }
+        });
   }
 
   @Override
   public void actionPerformed(final ActionEvent event) {
     this.stateManager.gotoStateToken(token);
+  };
+
+  @Override
+  public void onDettach() {
+    super.onDettach();
+    snHandler.removeHandler();
+    renameHandler.removeHandler();
   }
 }

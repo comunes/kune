@@ -26,38 +26,46 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class AccessRightsClientManager {
-    private final EventBus eventBus;
-    private AccessRights previousRights;
-    private final Session session;
+  private final EventBus eventBus;
+  private AccessRights previousRights;
+  private final Session session;
 
-    @Inject
-    public AccessRightsClientManager(final EventBus eventBus, final StateManager stateManager, final Session session) {
-        this.eventBus = eventBus;
-        this.session = session;
-        this.previousRights = null;
-        stateManager.onStateChanged(true, new StateChangedHandler() {
-            @Override
-            public void onStateChanged(final StateChangedEvent event) {
-                final AccessRights rights = event.getState().getGroupRights();
-                // NotifyUser.info("prev rights " + previousRights +
-                // " new rights: " + rights);
-                if (!rights.equals(previousRights)) {
-                    AccessRightsChangedEvent.fire(eventBus, previousRights, rights);
-                    previousRights = rights;
-                }
-
-            }
-        });
-    }
-
-    public void onRightsChanged(final boolean fireNow, final AccessRightsChangedEvent.AccessRightsChangedHandler handler) {
-        eventBus.addHandler(AccessRightsChangedEvent.getType(), handler);
-        final StateAbstractDTO currentState = session.getCurrentState();
-        if (fireNow && currentState != null) {
-            handler.onAccessRightsChanged(new AccessRightsChangedEvent(previousRights, currentState.getGroupRights()));
+  @Inject
+  public AccessRightsClientManager(final EventBus eventBus, final StateManager stateManager,
+      final Session session) {
+    this.eventBus = eventBus;
+    this.session = session;
+    this.previousRights = null;
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        final AccessRights rights = event.getState().getGroupRights();
+        // NotifyUser.info("prev rights " + previousRights +
+        // " new rights: " + rights);
+        if (!rights.equals(previousRights)) {
+          AccessRightsChangedEvent.fire(eventBus, previousRights, rights);
+          previousRights = rights;
         }
+
+      }
+    });
+  }
+
+  public HandlerRegistration onRightsChanged(final boolean fireNow,
+      final AccessRightsChangedEvent.AccessRightsChangedHandler handler) {
+    final HandlerRegistration handlerReg = eventBus.addHandler(AccessRightsChangedEvent.getType(),
+        handler);
+    final StateAbstractDTO currentState = session.getCurrentState();
+    if (fireNow && currentState != null) {
+      handler.onAccessRightsChanged(new AccessRightsChangedEvent(previousRights,
+          currentState.getGroupRights()));
     }
+    return handlerReg;
+  }
 }
