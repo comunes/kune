@@ -79,7 +79,7 @@ See the DEVGUIDE for instructions of how to download the Kune code.
 
 Compile with maven:
  # (in the trunk directory)
- mvn compile -Dliquibase.should.run=false && mvn gwt:compile
+ mvn compile -Dliquibase.should.run=false && mvn gwt:compile -P development
 
 NOTE: If you change the previous db passwords after this compiling, you have to repeat the "mvn compile" because if not, probably you will use an old kune.properties. See TROUBLESHOOT for more details.
 
@@ -180,18 +180,22 @@ Open your browser and connect to http://localhost:8888/
 ==Production environment instructions==
 
 With
-  mvn assembly:assembly
+  mvn assembly:assembly -P production
 an executable target/kune-VERSION-jar-with-dependencies.jar is generated in target directory. That you can use to start kune:
 
 bin/server.sh -j kune.jar
 
-TODO: configure/select db via properties
+bin/server.sh -h # for more options
 
 ==Debian package generation==
+
 In trunk run:
-  mvn assembly:assembly
-and generate the debian package with
+  mvn assembly:assembly -P production 
+(production profile generates a lot of permutations for each language and browser, you can use -P development if is only for test) and generate the debian package with
   debuild -us -uc -b
+or 
+  debuild -b
+to sign the result package.
 
 ===Customization: Adapting Kune to your site===
 

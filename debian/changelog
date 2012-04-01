@@ -1,3 +1,9 @@
+kune (0.1.0+b5) oneiric; urgency=low
+
+  * Added some new languages and added some profiles to make development faster
+
+ --  <vjrj@arjuna>  Sun, 01 Apr 2012 15:45:26 +0200
+
 kune (0.1.0+b4) oneiric; urgency=low
 
   * Improved trash funcionality, other minor changes

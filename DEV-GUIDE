@@ -133,7 +133,7 @@ Only after making sure the previous steps have been finished, you can proceed to
 ===GWT's Hosted Mode===
 
 Before run hosted mode for the first time compile once with:
- mvn compile -Dliquibase.should.run=false && mvn gwt:compile
+ mvn compile -Dliquibase.should.run=false && mvn gwt:compile -P development
 and deploy with:
  script/deploy_gwt.sh 
 
