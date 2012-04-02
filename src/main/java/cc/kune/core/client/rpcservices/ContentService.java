@@ -91,7 +91,8 @@ public interface ContentService extends RemoteService {
   StateAbstractDTO renameContent(String userHash, StateToken token, String newName)
       throws DefaultException;
 
-  void save(String user, StateToken token, String content) throws DefaultException;
+  // void save(String user, StateToken token, String content) throws
+  // DefaultException;
 
   String sendFeedback(String userHash, String title, String body);
 

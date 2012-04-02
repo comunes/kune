@@ -1,3 +1,9 @@
+kune (0.1.0+b6) oneiric; urgency=low
+
+  * Several bug fixes (trash, access list,...)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 02 Apr 2012 06:31:29 +0200
+
 kune (0.1.0+b5) oneiric; urgency=low
 
   * Added some new languages and added some profiles to make development faster

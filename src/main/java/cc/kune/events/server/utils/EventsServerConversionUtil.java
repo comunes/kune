@@ -38,7 +38,6 @@ import net.fortuna.ical4j.model.property.Description;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Location;
-import net.fortuna.ical4j.model.property.Organizer;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.model.property.Uid;
 
@@ -122,7 +121,7 @@ public class EventsServerConversionUtil {
     // FIXME here v timezone!!!
 
     final String startS = properties.get(ICalConstants.DATE_TIME_START);
-    final DateTime start = new DateTime(startS);
+    final DateTime start = new DateTime(DateUtils.toDate(startS));
     final TimeZone timezone = start.getTimeZone();
     // start.setTimeZone(timezone);
     final String endS = properties.get(ICalConstants.DATE_TIME_END);
@@ -132,24 +131,28 @@ public class EventsServerConversionUtil {
     if (allDay != null && Boolean.parseBoolean(allDay)) {
       event = new VEvent();
       event.getProperties().add(new Summary(properties.get(ICalConstants.SUMMARY)));
-      final DtStart eventStart = new DtStart(new Date(startS));
+      final DtStart eventStart = new DtStart(new Date(DateUtils.toDate(startS).getTime()));
       eventStart.setTimeZone(timezone);
       event.getProperties().add(eventStart);
-      final DtEnd eventEnd = new DtEnd(new Date(endS));
+      final DtEnd eventEnd = new DtEnd(new Date(DateUtils.toDate(endS).getTime()));
       eventEnd.setTimeZone(timezone);
       event.getProperties().add(eventEnd);
       event.getProperties().getProperty(Property.DTSTART).getParameters().add(Value.DATE);
       event.getProperties().getProperty(Property.DTEND).getParameters().add(Value.DATE);
     } else {
-      event = new VEvent(start, new DateTime(endS), properties.get(ICalConstants.SUMMARY));
+      event = new VEvent(start, new DateTime(DateUtils.toDate(endS)),
+          properties.get(ICalConstants.SUMMARY));
       event.getProperties().getProperty(Property.DTSTART).getParameters().add(Value.DATE_TIME);
       event.getProperties().getProperty(Property.DTEND).getParameters().add(Value.DATE_TIME);
     }
     event.getProperties().add(new Description(properties.get(ICalConstants.DESCRIPTION)));
     event.getProperties().add(new Location(properties.get(ICalConstants.LOCATION)));
     event.getProperties().add(new Uid(properties.get(ICalConstants.UID)));
-    event.getProperties().add(new Organizer(properties.get(ICalConstants.ORGANIZER)));
+    // FIXME This give NPE Uat java.net.URI$Parser.parse(URI.java:3003)). Check
+    // doc:
+    // event.getProperties().add(new
+    // Organizer(properties.get(ICalConstants.ORGANIZER)));
+
     return event;
   }
-
 }

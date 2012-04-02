@@ -463,6 +463,7 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
+      <!-- http://stackoverflow.com/questions/1370414/how-to-add-the-servlet-api-to-my-pom-xml -->
       <version>2.5</version>
       <!-- <version>3.0-${wiab.version}</version> -->
       <scope>provided</scope>

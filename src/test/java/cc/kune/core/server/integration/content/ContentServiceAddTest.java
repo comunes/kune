@@ -162,7 +162,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     doLogout();
 
     doLoginWithDummyUser();
-    contentService.save(getHash(), added.getStateToken(), "some new test");
+    // contentService.save(getHash(), added.getStateToken(), "some new test");
     // assertEquals(cntRights, added.getContentRights());
     // assertEquals(ctxRights, added.getContainerRights());
     // assertEquals(groupRights, added.getGroupRights());

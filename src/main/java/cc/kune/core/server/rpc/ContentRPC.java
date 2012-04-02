@@ -554,17 +554,18 @@ public class ContentRPC implements ContentService, RPC {
     return containerManager.renameFolder(group, container, newName);
   }
 
-  @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
   @KuneTransactional
+  // Not used with wave
   public void save(final String userHash, final StateToken token, final String textContent)
       throws DefaultException {
-
-    final Long contentId = ContentUtils.parseId(token.getDocument());
-    final User user = getCurrentUser();
-    final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
-    contentManager.save(user, content, textContent);
+    return;
+    // final Long contentId = ContentUtils.parseId(token.getDocument());
+    // final User user = getCurrentUser();
+    // final Content content = accessService.accessToContent(contentId, user,
+    // AccessRol.Editor);
+    // contentManager.save(user, content, textContent);
   }
 
   @Override

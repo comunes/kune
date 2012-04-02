@@ -170,11 +170,6 @@ public class ContentRPCMock implements ContentService, RPC {
   }
 
   @Override
-  public void save(final String user, final StateToken token, final String content)
-      throws DefaultException {
-  }
-
-  @Override
   public String sendFeedback(final String userHash, final String title, final String body) {
     return "#fixme";
   }

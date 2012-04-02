@@ -93,7 +93,8 @@ public interface ContentServiceAsync {
   void renameContent(String userHash, StateToken token, String newName,
       AsyncCallback<StateAbstractDTO> asyncCallback);
 
-  void save(String user, StateToken token, String content, AsyncCallback<Void> asyncCallback);
+  // void save(String user, StateToken token, String content,
+  // AsyncCallback<Void> asyncCallback);
 
   void sendFeedback(String userHash, String title, String body, AsyncCallback<String> callback);
 

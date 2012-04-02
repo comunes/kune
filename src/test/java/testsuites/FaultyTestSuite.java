@@ -28,7 +28,17 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({})
-public class FaultyTestSuite {
+@SuiteClasses({
 
+// KuneWaveServiceDefaultTest.class, AuthenticatedMethodInterceptorTest.class,
+// AuthorizatedMethodInterceptorTest.class, FinderTest.class,
+// EntityLogoUploadManagerTest.class,
+// FileUploadManagerTest.class, InitDataTest.class, UserServiceTest.class,
+// GroupServiceTest.class,
+// SocialNetworkServiceTest.class, ContentServiceGetTest.class,
+// ContentServiceAddTest.class,
+// StatsServiceTest.class, RateFinderTest.class
+
+})
+public class FaultyTestSuite {
 }
