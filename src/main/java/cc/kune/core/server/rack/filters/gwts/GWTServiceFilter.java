@@ -26,8 +26,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,33 +36,36 @@ import cc.kune.core.server.rack.utils.RackHelper;
 import com.google.gwt.user.client.rpc.RemoteService;
 
 public class GWTServiceFilter extends AbstractInjectedFilter {
-    public static final Log LOG = LogFactory.getLog(GWTServiceFilter.class);
+  public static final Log LOG = LogFactory.getLog(GWTServiceFilter.class);
 
-    private final Class<? extends RemoteService> serviceClass;
-    private final DelegatedRemoteServlet servlet;
+  private final Class<? extends RemoteService> serviceClass;
+  private DelegatedRemoteServlet servlet;
 
-    public GWTServiceFilter(final Class<? extends RemoteService> serviceClass) {
-        this.serviceClass = serviceClass;
-        this.servlet = new DelegatedRemoteServlet();
-    }
+  public GWTServiceFilter(final Class<? extends RemoteService> serviceClass) {
+    this.serviceClass = serviceClass;
+  }
 
-    @Override
-    public void destroy() {
-    }
+  @Override
+  public void destroy() {
+  }
 
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-            throws IOException, ServletException {
-        LOG.info("--------------------------------------------------------------------------------");
-        LOG.debug("SERVICE: " + RackHelper.getURI(request) + " - " + serviceClass.getSimpleName());
-        final RemoteService service = getInstance(serviceClass);
-        servlet.setService(service);
-        servlet.doPost((HttpServletRequest) request, (HttpServletResponse) response);
-    }
+  @Override
+  public void doFilter(final ServletRequest request, final ServletResponse response,
+      final FilterChain chain) throws IOException, ServletException {
+    LOG.info("--------------------------------------------------------------------------------");
+    LOG.debug("SERVICE: " + RackHelper.getURI(request) + " - " + serviceClass.getSimpleName());
+    servlet.service(request, response);
+    // servlet.doPost((HttpServletRequest) request, (HttpServletResponse)
+    // response);
+  }
 
-    @Override
-    public void init(final FilterConfig filterConfig) throws ServletException {
-        super.init(filterConfig);
-        servlet.setServletContext(filterConfig.getServletContext());
-    }
+  @Override
+  public void init(final FilterConfig filterConfig) throws ServletException {
+    super.init(filterConfig);
+    final RemoteService service = getInstance(serviceClass);
+    this.servlet = new DelegatedRemoteServlet(service);
+    servlet.setService(service);
+    servlet.setServletContext(filterConfig.getServletContext());
+  }
 
 }

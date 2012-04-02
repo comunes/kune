@@ -89,7 +89,6 @@ do
 	    DAEMON="y"	    
 	    ;;
 	l)
-            # TODO: use/configure src/main/resources/log4j.properties
 	    LOG_LEVEL=$OPTARG
 	    ;;
 	d)
@@ -116,7 +115,7 @@ fi
 USER=`id -u -n`
 if [[ -n $DAEMON && USER -ne "root" ]]
 then 
-    echo "Error: Only root user can run kune as a deamon"
+    echo "Error: Only root user can run kune as a daemon"
     usage
     exit 1
 fi

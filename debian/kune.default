@@ -10,4 +10,13 @@
 START=no
 
 # Additional options that are passed to the Daemon.
-DAEMON_OPTS=""
+# Options:
+# -l LOGLEVEL : IGNORE|DEBUG|INFO|WARN
+# -x: -Xmx memory value
+# -m: -Xms memory value
+# Debug Options:
+# -d: debug
+# -u: Suspend the start (useful for debug the boot)
+# -p: port of debugger
+KUNE_DEFAULT_ARGS="-l INFO"
+

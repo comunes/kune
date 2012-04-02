@@ -19,46 +19,86 @@
  */
 package cc.kune.core.server.rack.filters.gwts;
 
+import java.lang.reflect.Method;
+import java.util.LinkedList;
+
 import javax.servlet.ServletContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.server.rpc.RPC;
 import com.google.gwt.user.server.rpc.RPCRequest;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.googlecode.gwtrpccommlayer.server.GwtRpcCommLayerServlet;
+import com.googlecode.gwtrpccommlayer.shared.GwtRpcCommLayerPojoRequest;
 
-public class DelegatedRemoteServlet extends RemoteServiceServlet {
-    private static final long serialVersionUID = -7646054921925214953L;
-    private transient RemoteService service;
-    private ServletContext servletContext;
+public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
+  public static final Log LOG = LogFactory.getLog(DelegatedRemoteServlet.class);
+  private static final long serialVersionUID = -7646054921925214953L;
+  private transient RemoteService service;
 
-    @Override
-    public ServletContext getServletContext() {
-        return servletContext;
+  private ServletContext servletContext;
+
+  public DelegatedRemoteServlet(final Object servlet) {
+    super(servlet);
+  }
+
+  @Override
+  protected void doUnexpectedFailure(final Throwable except) {
+    except.printStackTrace();
+    super.doUnexpectedFailure(except);
+  }
+
+  @Override
+  protected Method getMethod(final GwtRpcCommLayerPojoRequest stressTestRequest)
+      throws NoSuchMethodException, ClassNotFoundException {
+    final int count = 0;
+    final Class<?> paramClasses[] = new Class[stressTestRequest.getMethodParameters().size()];
+
+    final LinkedList<Class<?>> lstParameterClasses = new LinkedList<Class<?>>();
+    for (final String methodName : stressTestRequest.getParameterClassNames()) {
+      lstParameterClasses.add(Class.forName(methodName));
     }
 
-    @Override
-    public String processCall(final String payload) throws SerializationException {
-        try {
-            final RPCRequest rpcRequest = RPC.decodeRequest(payload, service.getClass());
-            return RPC.invokeAndEncodeResponse(service, rpcRequest.getMethod(), rpcRequest.getParameters());
-        } catch (IncompatibleRemoteServiceException ex) {
-            return RPC.encodeResponseForFailure(null, ex);
-        }
-    }
+    final Class[] arrParameterClasses = lstParameterClasses.toArray(new Class[0]);
+    return service.getClass().getMethod(stressTestRequest.getMethodName(), arrParameterClasses);
+  }
 
-    public void setService(final RemoteService service) {
-        this.service = service;
-    }
+  @Override
+  public ServletContext getServletContext() {
+    return servletContext;
+  }
 
-    public void setServletContext(final ServletContext servletContext) {
-        this.servletContext = servletContext;
-    }
+  @Override
+  public void log(final String message) {
+    super.log(message);
+    LOG.info(message);
+  }
 
-    @Override
-    protected void doUnexpectedFailure(final Throwable except) {
-        except.printStackTrace();
-        super.doUnexpectedFailure(except);
+  @Override
+  public void log(final String message, final Throwable t) {
+    super.log(message, t);
+    LOG.info(message, t);
+  }
+
+  @Override
+  public String processCall(final String payload) throws SerializationException {
+    try {
+      final RPCRequest rpcRequest = RPC.decodeRequest(payload, service.getClass());
+      return RPC.invokeAndEncodeResponse(service, rpcRequest.getMethod(), rpcRequest.getParameters());
+    } catch (final IncompatibleRemoteServiceException ex) {
+      return RPC.encodeResponseForFailure(null, ex);
     }
+  }
+
+  public void setService(final RemoteService service) {
+    this.service = service;
+  }
+
+  public void setServletContext(final ServletContext servletContext) {
+    this.servletContext = servletContext;
+  }
 }

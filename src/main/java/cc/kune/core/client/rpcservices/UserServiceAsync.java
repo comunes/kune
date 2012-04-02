@@ -37,6 +37,8 @@ public interface UserServiceAsync {
 
   void changePasswd(String userHash, String oldPassword, String newPassword, AsyncCallback<Void> callback);
 
+  void checkUserAndHash(String username, String userHash, AsyncCallback<Void> callback);
+
   void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<Void> asyncCallback);
 
   void getUserAvatarBaser64(String userHash, StateToken userToken, AsyncCallback<String> asyncCallback);

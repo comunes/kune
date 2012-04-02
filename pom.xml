@@ -78,17 +78,6 @@
       <url>http://gwt-maven-rewraps.googlecode.com/hg/</url>
     </repository>
     <!-- cc -->
-    <!-- <repository> -->
-    <!-- <id>dyndns-repo</id> -->
-    <!-- <url>http://maven.dyndns.org/2</url> -->
-    <!-- </repository> -->
-    <!-- seems that these are not working/neccesary now: -->
-    <!-- <repository> <id>google-maven-snapshot-repository</id> <name>Google 
-      Maven Snapshot Repository</name> <url>https://oss.sonatype.org/content/repositories/google-snapshots/ 
-      </url> <snapshots> <enabled>true</enabled> </snapshots> </repository> <repository> 
-      <id>gwtplatform.snapshot.repo</id> <name>Gwtplatform snapshot repository</name> 
-      <url>https://oss.sonatype.org/content/repositories/snapshots/ </url> <layout>default</layout> 
-      </repository> -->
     <repository>
       <id>openqa.org</id>
       <name>Openqa Release Repository</name>
@@ -253,9 +242,6 @@
       <scope>provided</scope>
       <version>r464</version>
     </dependency>
-    <!-- <dependency> <groupId>com.jhickman.web.gwt</groupId> <artifactId>gwt-customuibinder</artifactId> 
-      <version>0.1</version> </dependency> <dependency> <groupId>com.jhickman.web.gwt</groupId> 
-      <artifactId>gxt-uibinder</artifactId> <version>0.6</version> </dependency> -->
     <!-- cc -->
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
@@ -510,14 +496,7 @@
       <version>3.3.5</version>
       <!-- <scope>test</scope> -->
     </dependency>
-    <!-- If you want to start a selenium server, you will need the following 
-      dependency: -->
-    <!-- <dependency> -->
-    <!-- <groupId>org.seleniumhq.selenium</groupId> -->
-    <!-- <artifactId>selenium-server</artifactId> -->
-    <!-- <version>2.0a4</version> -->
-    <!-- </dependency> -->
-
+  
     <!-- public side -->
     <dependency>
       <groupId>org.jruby.rack</groupId>
@@ -729,101 +708,12 @@
       <classifier>2.1.0</classifier>
       <scope>provided</scope>
     </dependency>
-    <!-- openfire auth integration -->
-    <!-- <dependency> -->
-    <!-- <groupId>org.igniterealtime</groupId> -->
-    <!-- <artifactId>openfire</artifactId> -->
-    <!-- <version>3.7.0</version> -->
-    <!-- <scope>provided</scope> -->
-    <!-- <exclusions> -->
-    <!-- <exclusion> -->
-    <!-- <groupId>org.eclipse.jetty</groupId> -->
-    <!-- <artifactId>hibernate</artifactId> -->
-    <!-- </exclusion> -->
-    <!-- <exclusion> -->
-    <!-- <groupId>org.slf4j</groupId> -->
-    <!-- <artifactId>spi</artifactId> -->
-    <!-- </exclusion> -->
-    <!-- <exclusion> -->
-    <!-- <groupId>org.slf4j</groupId> -->
-    <!-- <artifactId>slf4j-api</artifactId> -->
-    <!-- </exclusion> -->
-    <!-- <exclusion> -->
-    <!-- <groupId>org.slf4j</groupId> -->
-    <!-- <artifactId>jcl-over-slf4j</artifactId> -->
-    <!-- </exclusion> -->
-    <!-- <exclusion> -->
-    <!-- <groupId>org.slf4j</groupId> -->
-    <!-- <artifactId>jcl-over-slf4j</artifactId> -->
-    <!-- </exclusion> -->
-    <!-- <exclusion> -->
-    <!-- <groupId>org.apache</groupId> -->
-    <!-- <artifactId>commons</artifactId> -->
-    <!-- </exclusion> -->
-    <!-- <exclusion> -->
-    <!-- <groupId>org.apache.commons</groupId> -->
-    <!-- <artifactId>logging</artifactId> -->
-    <!-- </exclusion> -->
-    <!-- </exclusions> -->
-    <!-- </dependency> -->
+    <dependency>
+      <groupId>com.googlecode</groupId>
+      <artifactId>gwtrpccommlayer</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+   </dependency>
   </dependencies>
-  <!-- <dependency> -->
-  <!-- <groupId>dom4j</groupId> -->
-  <!-- <artifactId>dom4j</artifactId> -->
-  <!-- <version>1.6.1</version> -->
-  <!-- <type>jar</type> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>com.google.code.guice</groupId> -->
-  <!-- <artifactId>guice-assistedinject</artifactId> -->
-  <!-- <version>2.0</version> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>jline<!/groupId> -->
-  <!-- <artifactId>jline</artifactId> -->
-  <!-- <version>0.9.94</version> -->
-  <!-- <type>jar</type> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>org.gnu.inet</groupId> -->
-  <!-- <artifactId>libidn</artifactId> -->
-  <!-- <version>1.15</version> -->
-  <!-- <type>jar</type> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>com.google.protobuf</groupId> -->
-  <!-- <artifactId>protobuf-java</artifactId> -->
-  <!-- <version>2.3.0</version> -->
-  <!-- <type>jar</type> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>xpp3</groupId> -->
-  <!-- <artifactId>xpp3</artifactId> -->
-  <!-- <version>1.1.4c</version> -->
-  <!-- <type>jar</type> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>xpp3</groupId> -->
-  <!-- <artifactId>xpp3_xpath</artifactId> -->
-  <!-- <version>1.1.4c</version> -->
-  <!-- <type>jar</type> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>aopalliance</groupId> -->
-  <!-- <artifactId>aopalliance</artifactId> -->
-  <!-- <version>1.0</version> -->
-  <!-- <type>jar</type> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>org.wave-protocol</groupId> -->
-  <!-- <artifactId>xmpp</artifactId> -->
-  <!-- <version>1.0.0</version> -->
-  <!-- </dependency> -->
-  <!-- <dependency> -->
-  <!-- <groupId>org.wave-protocol</groupId> -->
-  <!-- <artifactId>whack</artifactId> -->
-  <!-- <version>1.0.0</version> -->
-  <!-- </dependency> -->
   <distributionManagement>
     <repository>
       <id>kune.ourproject.org</id>
@@ -1177,7 +1067,8 @@
               </modules>
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
-              <localWorkers>1</localWorkers><!-- Using all workers can temporarily 
+              <localWorkers>2</localWorkers>
+              <!-- <localWorkers>1</localWorkers> Using all workers can temporarily 
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx1024m</extraJvmArgs>
             </configuration>
@@ -1266,7 +1157,6 @@
               </dependency>
             </dependencies>
           </plugin>
-
         </plugins>
       </build>
     </profile>

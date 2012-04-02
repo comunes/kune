@@ -25,7 +25,9 @@ import javax.servlet.http.HttpSession;
 import org.jivesoftware.smack.util.Base64;
 import org.json.JSONObject;
 import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.SessionManager;
+import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
@@ -61,7 +63,9 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.CustomWaveClientServlet;
+import cc.kune.wave.server.ParticipantUtils;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -69,7 +73,9 @@ import com.google.inject.name.Named;
 public class UserRPC implements RPC, UserService {
 
   private final ContentRPC contentRPC;
+
   private final Mapper mapper;
+  private final ParticipantUtils partUtils;
   private final ReservedWordsRegistry reserverdWords;
   private final UserFinder userFinder;
   private final UserInfoService userInfoService;
@@ -85,7 +91,8 @@ public class UserRPC implements RPC, UserService {
       final UserInfoService userInfoService, final Mapper mapper,
       final SessionManager waveSessionManager, final CustomWaveClientServlet waveClientServlet,
       final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
-      final UserSessionManager userSessionManager, final UserFinder userFinder) {
+      final UserSessionManager userSessionManager, final UserFinder userFinder,
+      final ParticipantUtils partUtils) {
     this.userManager = userManager;
     this.useSocketIO = useSocketIO;
     this.userInfoService = userInfoService;
@@ -96,6 +103,7 @@ public class UserRPC implements RPC, UserService {
     this.contentRPC = contentRPC;
     this.userSessionManager = userSessionManager;
     this.userFinder = userFinder;
+    this.partUtils = partUtils;
   }
 
   @Authenticated
@@ -127,6 +135,23 @@ public class UserRPC implements RPC, UserService {
   }
 
   @Override
+  @KuneTransactional
+  public void checkUserAndHash(final String username, final String passwdOrToken) {
+    final User user = userManager.login(username, passwdOrToken);
+    if (user != null) {
+      return;
+    }
+    final HttpSession session = waveSessionManager.getSessionFromToken(passwdOrToken);
+    Preconditions.checkState(session != null, "Session not found for this hash");
+    final AccountData loggedInAccount = waveSessionManager.getLoggedInAccount(session);
+    Preconditions.checkState(loggedInAccount != null, "Not account info for this session");
+    final ParticipantId participant = loggedInAccount.getId();
+    final String participantAddress = partUtils.getAddressName(participant.getAddress());
+    Preconditions.checkState(participantAddress.equals(username),
+        "Session account and hash does not match");
+  }
+
+  @Override
   @KuneTransactional(rollbackOn = DefaultException.class)
   public void createUser(final UserDTO userDTO, final boolean wantPersonalHomepage)
       throws DefaultException {
@@ -152,7 +177,7 @@ public class UserRPC implements RPC, UserService {
     } else {
       throw new DefaultException("Unexpected programatic exception (user has no logo)");
     }
-  }
+  };
 
   @Override
   @Authenticated(mandatory = true)
@@ -161,7 +186,7 @@ public class UserRPC implements RPC, UserService {
     final JSONObject sessionJson = waveClientServlet.getSessionJson(sessionFromToken);
     final JSONObject clientFlags = new JSONObject(); // waveClientServlet.getClientFlags();
     return new WaveClientParams(sessionJson.toString(), clientFlags.toString(), useSocketIO);
-  };
+  }
 
   private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
     final UserInfo userInfo = userInfoService.buildInfo(user, userSessionManager.getHash());
@@ -261,5 +286,4 @@ public class UserRPC implements RPC, UserService {
     final User user = userSessionManager.getUser();
     userManager.verifyPasswordHash(user.getId(), emailReceivedHash, SessionConstants._AN_HOUR);
   }
-
 }
