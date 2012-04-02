@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import cc.kune.core.shared.domain.AccessRol;
+import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
@@ -34,51 +35,53 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class AccessRightsServiceDefault implements AccessRightsService {
-    // TODO: check performance
+  // TODO: check performance
 
-    public AccessRights get(final Group userGroup, final AccessLists accessList) {
-        boolean isAdministrable = false;
-        boolean isEditable = false;
-        boolean isVisible = false;
+  private boolean canAccess(final Group searchedGroup, final AccessLists lists, final AccessRol rol) {
+    final GroupList list = lists.getList(rol);
+    return depthFirstSearch(new HashSet<Group>(), searchedGroup, list, rol);
+  }
 
-        // FIXME, future: admin users can admin, edit, view everything
-        // (not now while we are doing tests)
-        isVisible = isEditable = isAdministrable = canAccess(userGroup, accessList, AccessRol.Administrator);
-        if (!isEditable) {
-            isVisible = isEditable = canAccess(userGroup, accessList, AccessRol.Editor);
-        }
-        if (!isVisible) {
-            isVisible = accessList.getViewers().isEmpty() || canAccess(userGroup, accessList, AccessRol.Viewer);
-        }
+  /*
+   * http://en.wikipedia.org/wiki/Depth-first_search
+   */
+  private boolean depthFirstSearch(final HashSet<Group> visited, final Group searchedGroup,
+      final GroupList list, final AccessRol rol) {
+    if (list.includes(searchedGroup)) {
+      return true;
+    }
+    final ArrayList<Group> noVisitedYet = list.duplicate();
+    noVisitedYet.removeAll(visited);
+    for (final Group group : noVisitedYet) {
+      visited.add(group);
+      final SocialNetwork socialNetwork = group.getSocialNetwork();
+      final GroupList groupList = socialNetwork.getAccessLists().getList(rol);
+      return depthFirstSearch(visited, searchedGroup, groupList, rol);
+    }
+    return false;
+  }
 
-        return new AccessRights(isAdministrable, isEditable, isVisible);
+  public AccessRights get(final Group userGroup, final AccessLists accessList) {
+    boolean isAdministrable = false;
+    boolean isEditable = false;
+    boolean isVisible = false;
+
+    // FIXME, future: admin users can admin, edit, view everything
+    // (not now while we are doing tests)
+    isVisible = isEditable = isAdministrable = canAccess(userGroup, accessList, AccessRol.Administrator);
+    if (!isEditable) {
+      isVisible = isEditable = canAccess(userGroup, accessList, AccessRol.Editor);
+    }
+    if (!isVisible) {
+      isVisible = (accessList.getViewers().getMode().equals(GroupListMode.EVERYONE))
+          || canAccess(userGroup, accessList, AccessRol.Viewer);
     }
 
-    public AccessRights get(final User user, final AccessLists lists) {
-        return get(user.getUserGroup(), lists);
-    }
+    return new AccessRights(isAdministrable, isEditable, isVisible);
+  }
 
-    private boolean canAccess(final Group searchedGroup, final AccessLists lists, final AccessRol rol) {
-        final GroupList list = lists.getList(rol);
-        return depthFirstSearch(new HashSet<Group>(), searchedGroup, list, rol);
-    }
-
-    /*
-     * http://en.wikipedia.org/wiki/Depth-first_search
-     */
-    private boolean depthFirstSearch(final HashSet<Group> visited, final Group searchedGroup, final GroupList list,
-            final AccessRol rol) {
-        if (list.includes(searchedGroup)) {
-            return true;
-        }
-        final ArrayList<Group> noVisitedYet = list.duplicate();
-        noVisitedYet.removeAll(visited);
-        for (final Group group : noVisitedYet) {
-            visited.add(group);
-            final SocialNetwork socialNetwork = group.getSocialNetwork();
-            final GroupList groupList = socialNetwork.getAccessLists().getList(rol);
-            return depthFirstSearch(visited, searchedGroup, groupList, rol);
-        }
-        return false;
-    }
+  @Override
+  public AccessRights get(final User user, final AccessLists lists) {
+    return get(user.getUserGroup(), lists);
+  }
 }

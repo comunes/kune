@@ -140,7 +140,7 @@ public class UserServiceTest extends IntegrationTest {
 
   @Before
   public void init() {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
     lang = new I18nLanguageDTO();
     lang.setCode("en");
     simpleLang = new I18nLanguageSimpleDTO(lang.getCode(), lang.getEnglishName());

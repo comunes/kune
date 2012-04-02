@@ -19,8 +19,8 @@
  */
 package cc.kune.wave.server;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -52,9 +52,28 @@ public class ParticipantUtils {
   }
 
   public String[] arrayFrom(final Participants parts) {
-    final List<String> list = new ArrayList<String>();
-    // From the first in the list
     return parts.toArray(new String[parts.size()]);
+  }
+
+  /**
+   * Array of participants but with lastParticipant at the end
+   * 
+   * @param parts
+   *          the parts
+   * @param lastParticipant
+   *          the last participant
+   * @return the string[]
+   */
+  public String[] arrayFromOrdered(final Participants parts, final String lastParticipant) {
+    final LinkedList<String> list = new LinkedList<String>();
+    list.addAll(parts);
+    // we order the list, so we put lastParticipant at the end
+    if (list.contains(lastParticipant)) {
+      while (list.remove(lastParticipant)) {
+      }
+      list.add(lastParticipant);
+    }
+    return list.toArray(new String[list.size()]);
   }
 
   public String getAddressName(final String address) {

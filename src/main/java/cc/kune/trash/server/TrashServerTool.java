@@ -19,8 +19,8 @@
  */
 package cc.kune.trash.server;
 
-import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
 import static cc.kune.trash.shared.TrashToolConstants.ROOT_NAME;
+import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
 import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
 
 import java.util.Arrays;
@@ -76,7 +76,8 @@ public class TrashServerTool extends AbstractServerTool {
     wikiAcl.getAdmins().setMode(GroupListMode.NORMAL);
     wikiAcl.getAdmins().add(container.getOwner());
     wikiAcl.getEditors().setMode(GroupListMode.NORMAL);
-    wikiAcl.getViewers().setMode(GroupListMode.NORMAL);
+    wikiAcl.getEditors().add(container.getOwner());
+    wikiAcl.getViewers().setMode(GroupListMode.NOBODY);
     setAccessList(container, wikiAcl);
   }
 }

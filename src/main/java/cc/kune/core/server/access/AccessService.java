@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.access;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.domain.Container;
@@ -28,8 +27,12 @@ import cc.kune.domain.User;
 
 public interface AccessService {
 
-    Container accessToContainer(Long folderId, User user, AccessRol accessRol) throws DefaultException;
+  Container accessToContainer(Container container, User user, AccessRol accessRol);
 
-    Content accessToContent(Long contentId, User user, AccessRol accessRol) throws DefaultException;
+  Container accessToContainer(Long folderId, User user, AccessRol accessRol) throws DefaultException;
+
+  Content accessToContent(Content content, User user, AccessRol accessRol);
+
+  Content accessToContent(Long contentId, User user, AccessRol accessRol) throws DefaultException;
 
 }

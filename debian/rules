@@ -28,7 +28,7 @@ JAVA_HOME := /usr/lib/jvm/java-6-openjdk
 
 build/kune::
 
-#	mvn assembly:assembly -Dgwt.compiler.skip=$(NO_GWT)
+#	mvn assembly:assembly -Dgwt.compiler.skip=$(NO_GWT) -P production
 
 binary-indep: build install/kune
 binary-arch: binary-indep
@@ -48,20 +48,22 @@ install/kune::
 	cp $(RESOURCES)/jaas.config $(ETCDIR)
 	cp $(RESOURCES)/log4j.prod.properties $(ETCDIR)/log4j.properties
 	cp $(RESOURCES)/mail-notif-template.html $(ETCDIR)
+
+#	DB configuration, see:
+#	http://people.debian.org/~seanius/policy/examples/dbconfig-common/doc/dbconfig-common-using.html#bootstrap
+#	http://people.debian.org/~seanius/policy/dbconfig-common-using.html/
+#	/usr/share/doc/dbconfig-common/examples/
+
 	cp $(CURDIR)/src/main/resources/db/kune_initialize.sql $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
-#	cp $(CURDIR)/script/upgrade_0.6.0.sql $(DEST)/usr/share/dbconfig-common/data/confusa/upgrade/mysql/0.6.0.sql
+	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5/0.1.0+b5-init-data-countries.sql
+	cp $(CURDIR)/src/main/resources/db/init-data-languages.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5/0.1.0+b5-init-data-languages.sql
 
 # FIXME
 #	cp logrotate $(DEST)/etc/logrotate.d/
 
 # FIXME find another better way to do this (and remove rsync build dep)
-	rsync -aC $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
-	rsync -aC $(TARGETC)/ws/* $(KUNE)/webclient/ws
-
-#	dh_installdebconf
-#	dh_installdeb
-
-# FIXME utf8 in database
+	rsync -aC --delete $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
+	rsync -aC --delete $(TARGETC)/ws/* $(KUNE)/webclient/ws
 
 #get-orig-source:
 #        sh -e debian/orig-tar.sh

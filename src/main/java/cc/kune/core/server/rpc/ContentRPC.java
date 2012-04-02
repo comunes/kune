@@ -295,7 +295,10 @@ public class ContentRPC implements ContentService, RPC {
       defaultGroup = groupManager.getSiteDefaultGroup();
     }
     try {
-      final Content content = finderService.getContent(token, defaultGroup);
+      final Content content = finderService.getContentOrDefContent(token, defaultGroup);
+      // See AccessRol.Viewer in @Authorizated annotation of
+      // getContentorDefContentent
+
       return getContentOrDefContent(userHash, content.getStateToken(), user, content);
     } catch (final NoResultException e) {
       throw new ContentNotFoundException();
@@ -308,17 +311,19 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
-  @Authenticated(mandatory = false)
-  @Authorizated(accessRolRequired = AccessRol.Viewer)
   private StateAbstractDTO getContentOrDefContent(final String userHash, final StateToken stateToken,
       final User user, final Content content) {
     final Long id = content.getId();
+
     if (id != null) {
       // Content
+      accessService.accessToContent(content, user, AccessRol.Viewer);
       return mapState(stateService.create(user, content), user);
     } else {
       // Container
+      // Dirty hack in finderService to pass only a content object
       final Container container = content.getContainer();
+      accessService.accessToContainer(container, user, AccessRol.Viewer);
       return mapState(stateService.create(user, container), user);
     }
   }
@@ -450,6 +455,7 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
+  @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator)
   @KuneTransactional

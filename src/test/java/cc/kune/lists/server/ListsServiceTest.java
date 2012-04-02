@@ -56,7 +56,7 @@ public class ListsServiceTest extends IntegrationTest {
 
   @Before
   public void init() throws DefaultException, IOException {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
     final UserInfoDTO userInfoDTO = doLogin();
     userGroup = userInfoDTO.getUserGroup();
     final StateAbstractDTO rootList = contentService.getContent(getHash(), new StateToken(

@@ -55,7 +55,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
         images, ERROR_MSG, 102);
 
     signInForm = new SignInForm(i18n);
-    signInForm.setWidth(330);
+    signInForm.setWidth(DEF_SIGN_IN_FORM_SIZE);
     signInForm.add(createRegisterAndForgotPasswd());
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     signInForm.add(messageErrorBar);

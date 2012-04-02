@@ -37,7 +37,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class DefaultForm {
 
   public static final int BIG_FIELD_WIDTH = 280;
-  public static final int DEF_FIELD_LABEL_WITH = 75;
+  public static final int DEF_FIELD_LABEL_WITH = 85;
   public static final int DEF_FIELD_WIDTH = 200;
   public static final int DEF_MEDIUM_FIELD_WIDTH = 150;
   public static final int DEF_SMALL_FIELD_WIDTH = 100;

@@ -235,7 +235,7 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   @Before
   public void before() {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
   }
 
   private void createTestWave(final SimpleArgCallback<WaveRef> callback) {

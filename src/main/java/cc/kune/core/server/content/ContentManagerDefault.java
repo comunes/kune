@@ -346,11 +346,22 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     if (!TrashServerUtils.inTrash(content)) {
       throw new AccessViolationException("Trying to purge a not deleted content:" + content);
     }
+    final WaveRef waveRef = KuneWaveServerUtils.getWaveRef(content);
     if (content.isWave()) {
-      final WaveRef waveRef = KuneWaveServerUtils.getWaveRef(content);
       final String author = getContentAuthor(content);
-      final Participants participants = kuneWaveManager.getParticipants(waveRef, author);
-      kuneWaveManager.delParticipants(waveRef, author, participantUtils.arrayFrom(participants));
+      try {
+        final Participants participants = kuneWaveManager.getParticipants(waveRef, author);
+        if (participants.contains(author)) {
+          kuneWaveManager.delParticipants(waveRef, author,
+              participantUtils.arrayFromOrdered(participants, author));
+        } else {
+          // We cannot delete a wave we are not participating
+        }
+      } catch (final Exception e) {
+        LOG.error(String.format("Error accessing for deleting content %s and wave %s",
+            content.getStateToken(), waveRef.toString()), e);
+        // We delete the content anyway
+      }
     }
     content.authorsClear();
     final Container container = content.getContainer();

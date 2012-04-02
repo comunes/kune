@@ -98,13 +98,7 @@ public class PathToolbarUtils {
         iconsRegistry.getContentTypeIcon(container.getTypeId()), TextUtils.ellipsis(title, 15),
         i18n.t("Click to go here or drop contents here to move them"), container.getStateToken(), style,
         stateManager, eventBus);
-    final ButtonDescriptor btn = new ButtonDescriptor(action) {
-      @Override
-      public void onDetach() {
-        super.onDetach();
-        action.onDettach();
-      }
-    };
+    final ButtonDescriptor btn = new ButtonDescriptor(action);
 
     if (title.length() > 15) {
       btn.withToolTip(title);

@@ -29,7 +29,6 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
 /**
@@ -39,7 +38,6 @@ import com.google.inject.Inject;
  * 
  */
 public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
-  private final HandlerRegistration handlerReg;
   protected final Session session;
   protected final StateManager stateManager;
 
@@ -49,19 +47,13 @@ public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
       final boolean authNeed, final boolean visibleForNonMemb, final boolean visibleForMembers) {
     this.stateManager = stateManager;
     this.session = session;
-    handlerReg = rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
+    rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override
       public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
         refreshStatus(rolRequired, authNeed, session.isLogged(), visibleForMembers, visibleForNonMemb,
             event.getCurrentRights());
       }
     });
-  }
-
-  @Override
-  public void onDettach() {
-    super.onDettach();
-    handlerReg.removeHandler();
   }
 
   public void refreshStatus(final AccessRolDTO rolRequired, final boolean authNeed,

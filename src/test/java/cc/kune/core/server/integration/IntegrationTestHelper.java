@@ -101,9 +101,11 @@ public class IntegrationTestHelper {
     return null;
   }
 
-  public IntegrationTestHelper(final Object... tests) {
+  public IntegrationTestHelper(final boolean startPersistence, final Object... tests) {
     final Injector injector = createInjector();
-    injector.getInstance(KunePersistenceService.class).start();
+    if (startPersistence) {
+      injector.getInstance(KunePersistenceService.class).start();
+    }
     for (final Object test : tests) {
       injector.injectMembers(test);
     }

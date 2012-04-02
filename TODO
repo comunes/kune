@@ -12,6 +12,58 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
+** Permission tables
+
+|---------------------------+-------------+--------------|
+| Scopes                    | Group Space | Public Space |
+|---------------------------+-------------+--------------|
+| Admin                     | X           |              |
+| Edit                      | X           |              |
+| View                      | X           |              |
+| Published (ContentStatus) |             | X            |
+|---------------------------+-------------+--------------|
+
+|---------------+-----------------------------------------------------------|
+| GroupListMode |                                                           |
+|---------------+-----------------------------------------------------------|
+| NAME          | Description                                               |
+|---------------+-----------------------------------------------------------|
+| EVERYONE      | means that everybody is in the list                       |
+| NOBODY        | means that nobody is in the list (equals to a empty list) |
+| NORMAL        | a normal list of groups                                   |
+|---------------+-----------------------------------------------------------|
+
+AccessList samples (using GroupListMode)
+
+|---------------------------------------------------------+--------+---------------+----------+---------|
+| AccessList (A: Admins, E:Editors, V: Viewers            |        | Administrable | Editable | Visible |
+|---------------------------------------------------------+--------+---------------+----------+---------|
+| (A:EVERYONE, E: EVERYONE, V:EVERYONE, P:NO)             | Group1 | yes           | yes      | yes     |
+|                                                         | Group2 | yes           | yes      | yes     |
+|---------------------------------------------------------+--------+---------------+----------+---------|
+| (A:NORMAL(Group1), E: NORMAL, V:EVERYONE, P:NO)         | Group1 | yes           | yes      | yes     |
+|                                                         | Group2 | no            | no       | yes     |
+|---------------------------------------------------------+--------+---------------+----------+---------|
+| (A:NORMAL(Group1), E: NORMAL(Group2), V:EVERYONE, P:NO) | Group1 | yes           | yes      | yes     |
+|                                                         | Group2 | no            | yes      | yes     |
+|                                                         | Group3 | no            | no       | yes     |
+|---------------------------------------------------------+--------+---------------+----------+---------|
+| (A:NORMAL(Group1), E: NORMAL, V:NORMAL(Group2), P:NO)   | Group1 | yes           | yes      | yes     |
+|                                                         | Group2 | no            | no       | yes     |
+|                                                         | Group3 | no            | no       | no      |
+|---------------------------------------------------------+--------+---------------+----------+---------|
+
+Groups and subgroups
+
+|------------+--------+---------+---------+-----------|
+|            | Admins | Editors | Viewers | Published |
+|------------+--------+---------+---------+-----------|
+| New doc    |        |         |         |           |
+| New folder |        |         |         |           |
+|------------+--------+---------+---------+-----------|
+
+
+
 ** setui/root/port 80
    [ ] http://wiki.eclipse.org/Jetty/Howto/Port80#Configuring_Jetty.27s_SetUID_Feature
    [ ] https://github.com/disconnect/apache-websocket
@@ -20,24 +72,11 @@ TODO-list for kune -*- mode: org; -*-
 *** via btn
 *** via hash (future) #tuto(token,slide)
 *** via empty folder                                     
-** deploy automatize (update)
-*** copy jar
-*** copy via rsync gwt compilation (no delete to prevent code fail message)
-*** copy the jar and the compilation to other sites in the same lan
-*** update /etc/kune (if needed)
-*** migrate the database (if needed)
 ** users presence vi API (for better notifications)
 http://www.igniterealtime.org/projects/openfire/plugins/presence/readme.html
 http://127.0.0.1:9090/plugins/presence/status?jid=admin@localhost&type=xml
 http://community.igniterealtime.org/thread/29064
 http://www.igniterealtime.org/builds/wildfire/docs/3.3.0_alpha_1/documentation/javadoc/org/jivesoftware/wildfire/commands/admin/GetUsersPresence.html
-** group.inexistentTool nasty error
-** calendar support
-*** gwt-cal + http://ical4j.sourceforge.net/introduction.html
-*** add --> event --> rpc --> gadget + wave
-*** modification --> event ---> rpc gadget + wave
-*** delete ---> ?
-*** get --> list<waveref> ---> list<app>
 ** i18n usecase
 | logged | locale in URL  | i18n supported | useDB |
 | false  | false          | false          | true  |

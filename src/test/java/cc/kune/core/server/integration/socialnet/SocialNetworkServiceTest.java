@@ -36,40 +36,40 @@ import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import com.google.inject.Inject;
 
 public class SocialNetworkServiceTest extends IntegrationTest {
-    @Inject
-    UserSession session;
-    @Inject
-    SocialNetService socialNetworkService;
+  private StateToken groupToken;
+  @Inject
+  UserSession session;
 
-    private StateToken groupToken;
+  @Inject
+  SocialNetService socialNetworkService;
 
-    @Before
-    public void init() {
-        new IntegrationTestHelper(this);
-        groupToken = new StateToken(getDefSiteShortName());
-    }
+  @Before
+  public void init() {
+    new IntegrationTestHelper(true, this);
+    groupToken = new StateToken(getDefSiteShortName());
+  }
 
-    @Test
-    public void testGetGroupMembersNotLogged() throws Exception {
-        final SocialNetworkDataDTO sn = socialNetworkService.getSocialNetwork(null, groupToken);
-        assertNotNull(sn.getGroupMembers());
-    }
+  @Test
+  public void testGetGroupMembersNotLogged() throws Exception {
+    final SocialNetworkDataDTO sn = socialNetworkService.getSocialNetwork(null, groupToken);
+    assertNotNull(sn.getGroupMembers());
+  }
 
-    @Test
-    public void testGetParticipationNotLogged() throws Exception {
-        final SocialNetworkDataDTO sn = socialNetworkService.getSocialNetwork(null, groupToken);
-        assertNotNull(sn.getUserParticipation());
-    }
+  @Test
+  public void testGetParticipationNotLogged() throws Exception {
+    final SocialNetworkDataDTO sn = socialNetworkService.getSocialNetwork(null, groupToken);
+    assertNotNull(sn.getUserParticipation());
+  }
 
-    @Test(expected = UserMustBeLoggedException.class)
-    public void testRequestJoinNoLogged() throws Exception {
-        socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
-    }
+  @Test(expected = UserMustBeLoggedException.class)
+  public void testRequestJoinNoLogged() throws Exception {
+    socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
+  }
 
-    @Test(expected = AlreadyUserMemberException.class)
-    public void testRequestJoinPersonalGroup() throws Exception {
-        doLogin();
-        socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
-    }
+  @Test(expected = AlreadyUserMemberException.class)
+  public void testRequestJoinPersonalGroup() throws Exception {
+    doLogin();
+    socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
+  }
 
 }

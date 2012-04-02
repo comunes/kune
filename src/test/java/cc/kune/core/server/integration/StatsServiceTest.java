@@ -52,7 +52,7 @@ public class StatsServiceTest extends IntegrationTest {
   @Transactional
   @Before
   public void init() {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
   }
 
   @Test

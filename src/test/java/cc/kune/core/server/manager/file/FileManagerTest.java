@@ -29,55 +29,57 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.core.server.TestHelper;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.FileManager;
-import cc.kune.core.server.manager.file.FileUtils;
 
 import com.google.inject.Inject;
 
 public class FileManagerTest {
 
-    @Inject
-    FileManager fileManager;
-    private String tempDir;
+  @Inject
+  FileManager fileManager;
+  private String tempDir;
 
-    @Before
-    public void inject() throws IOException {
-        TestHelper.inject(this);
-        tempDir = File.createTempFile("temp", "txt").getParent();
-    }
+  @Before
+  public void inject() throws IOException {
+    new IntegrationTestHelper(false, this);
+    // TestHelper.inject(this);
+    tempDir = File.createTempFile("temp", "txt").getParent();
+  }
 
-    @Test
-    public void test3FileCreationWithSeq() throws IOException {
-        final File tempFile = File.createTempFile("some file name", ".txt");
-        final File newFile1 = fileManager.createFileWithSequentialName(tempDir, tempFile.getName());
-        final File newFile2 = fileManager.createFileWithSequentialName(tempDir, tempFile.getName());
-        final File newFile3 = fileManager.createFileWithSequentialName(tempDir, tempFile.getName());
-        assertEquals(tempDir + File.separator + seq(seq(seq(tempFile.getName()))), newFile3.getAbsolutePath());
-        newFile1.delete();
-        newFile2.delete();
-        newFile3.delete();
-    }
+  private String seq(final String file) {
+    return FileUtils.getNextSequentialFileName(file, true);
+  }
 
-    @Test
-    public void testDirCreation() throws IOException {
-        final String newTestDir = tempDir + File.separator + "test1" + File.separator + "test2" + File.separator;
-        assertTrue(fileManager.mkdir(newTestDir));
-        final File dir = new File(newTestDir);
-        assertTrue(dir.exists());
-        fileManager.rmdir(newTestDir);
-        assertFalse(dir.exists());
-    }
+  @Test
+  public void test3FileCreationWithSeq() throws IOException {
+    final File tempFile = File.createTempFile("some file name", ".txt");
+    final File newFile1 = fileManager.createFileWithSequentialName(tempDir, tempFile.getName());
+    final File newFile2 = fileManager.createFileWithSequentialName(tempDir, tempFile.getName());
+    final File newFile3 = fileManager.createFileWithSequentialName(tempDir, tempFile.getName());
+    assertEquals(tempDir + File.separator + seq(seq(seq(tempFile.getName()))),
+        newFile3.getAbsolutePath());
+    newFile1.delete();
+    newFile2.delete();
+    newFile3.delete();
+  }
 
-    @Test
-    public void testFileCreationWithSeq() throws IOException {
-        final File tempFile = File.createTempFile("some file name", ".txt");
-        final File newFile = fileManager.createFileWithSequentialName(tempDir, tempFile.getName());
-        assertEquals(tempDir + File.separator + seq(tempFile.getName()), newFile.getAbsolutePath());
-        newFile.delete();
-    }
+  @Test
+  public void testDirCreation() throws IOException {
+    final String newTestDir = tempDir + File.separator + "test1" + File.separator + "test2"
+        + File.separator;
+    assertTrue(fileManager.mkdir(newTestDir));
+    final File dir = new File(newTestDir);
+    assertTrue(dir.exists());
+    fileManager.rmdir(newTestDir);
+    assertFalse(dir.exists());
+  }
 
-    private String seq(final String file) {
-        return FileUtils.getNextSequentialFileName(file, true);
-    }
+  @Test
+  public void testFileCreationWithSeq() throws IOException {
+    final File tempFile = File.createTempFile("some file name", ".txt");
+    final File newFile = fileManager.createFileWithSequentialName(tempDir, tempFile.getName());
+    assertEquals(tempDir + File.separator + seq(tempFile.getName()), newFile.getAbsolutePath());
+    newFile.delete();
+  }
 }

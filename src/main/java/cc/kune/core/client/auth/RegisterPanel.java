@@ -49,7 +49,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
         i18n.t(CoreMessages.REGISTER_TITLE), REGISTER_BUTTON_ID,
         i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, images, ERRMSG, 4);
     registerForm = new RegisterForm(i18n, userFieldFactory);
-    registerForm.setWidth(330);
+    registerForm.setWidth(DEF_SIGN_IN_FORM_SIZE);
     registerForm.getFormPanel().setId(REGISTER_FORM);
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     registerForm.add(messageErrorBar);

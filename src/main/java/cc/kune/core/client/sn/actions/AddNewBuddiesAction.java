@@ -23,9 +23,9 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.contacts.SimpleContactManager;
+import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.EntitySearchPanel;
 import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
@@ -38,16 +38,16 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
   private final EntitySearchPanel searchPanel;
 
   @Inject
-  public AddNewBuddiesAction(final I18nTranslationService i18n, final CoreResources res,
-      final AddBuddieSearchPanel searchPanel, final SimpleContactManager contactsManager) {
+  public AddNewBuddiesAction(final CoreResources res, final AddBuddieSearchPanel searchPanel,
+      final SimpleContactManager contactsManager) {
     this.searchPanel = searchPanel;
-    putValue(Action.NAME, i18n.t("Add a new buddy"));
+    putValue(Action.NAME, I18n.t("Add a new buddy"));
     putValue(Action.SMALL_ICON, res.addGreen());
     searchPanel.init(true, ADD_NEW_BUDDIES_TEXTBOX, new OnEntitySelectedInSearch() {
       @Override
       public void onSeleted(final String shortName) {
-        NotifyUser.askConfirmation(i18n.t("Are you sure?"),
-            i18n.t("Do you want to add '[%s]' to your contacts?", shortName),
+        NotifyUser.askConfirmation(I18n.t("Are you sure?"),
+            I18n.t("Do you want to add '[%s]' to your contacts?", shortName),
             new SimpleResponseCallback() {
               @Override
               public void onCancel() {
@@ -56,7 +56,7 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
               @Override
               public void onSuccess() {
                 contactsManager.addNewBuddy(shortName);
-                NotifyUser.info("Added as buddy in your contacts. If your buddie adds you also, it will be visible in your network");
+                NotifyUser.info(I18n.t("Added as buddy in your contacts. If your buddie adds you also, it will be visible in your network"));
               }
             });
       }

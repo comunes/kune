@@ -60,7 +60,7 @@ public class InitDataTest extends IntegrationTest {
 
   @Before
   public void init() {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
   }
 
   @Test

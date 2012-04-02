@@ -400,6 +400,40 @@ com.google.wave.api.InvalidRequestException: Wavelet [WaveletName localhost/w+1v
     hybridAuthProvider.secondaryProvider.className = cc.kune.core.server.auth.openfire.KuneAuthProvider
 cp /tmp/model.jar apache-wave-model.jar
 cp /tmp/kune-0.1.0-SNAPSHOT-jar-openfire-customauth.jar kune-authprovider.jar
+* deploy automatize (update)
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2012-04-02 lun 00:33
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :END:
+** copy jar
+** copy via rsync gwt compilation (no delete to prevent code fail message)
+** copy the jar and the compilation to other sites in the same lan
+** update /etc/kune (if needed)
+** migrate the database (if needed)
+* group.inexistentTool nasty error
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2012-04-02 lun 01:25
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :END:
+* calendar support
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2012-04-02 lun 01:25
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :END:
+** gwt-cal + http://ical4j.sourceforge.net/introduction.html
+** add --> event --> rpc --> gadget + wave
+** modification --> event ---> rpc gadget + wave
+** delete ---> ?
+** get --> list<waveref> ---> list<app>
+
+
+
 
 
 

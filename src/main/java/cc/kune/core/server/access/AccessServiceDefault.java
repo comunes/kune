@@ -19,14 +19,14 @@
  */
 package cc.kune.core.server.access;
 
-
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.AccessRights;
-import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
@@ -35,47 +35,69 @@ import com.google.inject.Singleton;
 @Singleton
 public class AccessServiceDefault implements AccessService {
 
-    private final FinderService finder;
-    private final AccessRightsService accessRightsService;
+  private final AccessRightsService accessRightsService;
+  private final FinderService finder;
 
-    @Inject
-    public AccessServiceDefault(final FinderService finder, final AccessRightsService accessRightsService) {
-        this.finder = finder;
-        this.accessRightsService = accessRightsService;
-    }
+  @Inject
+  public AccessServiceDefault(final FinderService finder, final AccessRightsService accessRightsService) {
+    this.finder = finder;
+    this.accessRightsService = accessRightsService;
+  }
 
-    public Container accessToContainer(final Long folderId, final User user, final AccessRol accessRol)
-            throws DefaultException {
-        final Container container = finder.getFolder(folderId);
-        check(accessRightsService.get(user, container.getAccessLists()), accessRol);
-        return container;
-    }
+  @Override
+  public Container accessToContainer(final Container container, final User user,
+      final AccessRol accessRol) {
+    checkToolIsEnabled(container.getOwner(), container.getToolName());
+    check(accessRightsService.get(user, container.getAccessLists()), accessRol);
+    return container;
+  }
 
-    public Content accessToContent(final Long contentId, final User user, final AccessRol accessRol)
-            throws DefaultException {
-        final Content content = finder.getContent(contentId);
-        AccessLists accessLists = content.getAccessLists();
-        check(accessRightsService.get(user, accessLists), accessRol);
-        return content;
-    }
+  @Override
+  public Container accessToContainer(final Long folderId, final User user, final AccessRol accessRol)
+      throws DefaultException {
+    final Container container = finder.getFolder(folderId);
+    return accessToContainer(container, user, accessRol);
+  }
 
-    private void check(final AccessRights rights, final AccessRol accessRol) throws AccessViolationException {
-        if (!isValid(accessRol, rights)) {
-            throw new AccessViolationException();
-        }
-    }
+  @Override
+  public Content accessToContent(final Content content, final User user, final AccessRol accessRol) {
+    checkToolIsEnabled(content.getContainer().getOwner(), content.getContainer().getToolName());
+    check(accessRightsService.get(user, content.getAccessLists()), accessRol);
+    return content;
+  }
 
-    private boolean isValid(final AccessRol accessRol, final AccessRights rights) {
-        switch (accessRol) {
-        case Viewer:
-            return rights.isVisible();
-        case Editor:
-            return rights.isEditable();
-        case Administrator:
-            return rights.isAdministrable();
-        default:
-            return false;
-        }
+  @Override
+  public Content accessToContent(final Long contentId, final User user, final AccessRol accessRol)
+      throws DefaultException {
+    final Content content = finder.getContent(contentId);
+    return accessToContent(content, user, accessRol);
+  }
+
+  private void check(final AccessRights rights, final AccessRol accessRol)
+      throws AccessViolationException {
+    if (!isValid(accessRol, rights)) {
+      throw new AccessViolationException();
     }
+  }
+
+  private void checkToolIsEnabled(final Group group, final String toolName) {
+    final ToolConfiguration toolConf = group.getToolConfiguration(toolName);
+    if (toolConf == null || !toolConf.isEnabled()) {
+      throw new AccessViolationException();
+    }
+  }
+
+  private boolean isValid(final AccessRol accessRol, final AccessRights rights) {
+    switch (accessRol) {
+    case Viewer:
+      return rights.isVisible();
+    case Editor:
+      return rights.isEditable();
+    case Administrator:
+      return rights.isAdministrable();
+    default:
+      return false;
+    }
+  }
 
 }

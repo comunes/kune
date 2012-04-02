@@ -19,6 +19,7 @@
  */
 package cc.kune.core.shared.domain;
 
+
 public enum AccessRol {
-    Administrator, Editor, Viewer
+  Administrator, Editor, Viewer
 }

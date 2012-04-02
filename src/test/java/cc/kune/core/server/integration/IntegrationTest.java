@@ -23,6 +23,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
+import org.junit.After;
+
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.UserSessionManager;
@@ -55,8 +57,10 @@ public abstract class IntegrationTest {
     return userService.login("dummy", properties.getAdminPassword(), token).getUserHash();
   }
 
-  protected void doLogout() throws DefaultException {
+  @After
+  public void doLogout() throws DefaultException {
     userService.logout(getHash());
+    session.logout();
   }
 
   protected String getDefLicense() {

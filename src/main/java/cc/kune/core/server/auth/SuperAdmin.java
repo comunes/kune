@@ -22,8 +22,6 @@ package cc.kune.core.server.auth;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import cc.kune.core.shared.domain.AccessRol;
-
 import com.google.inject.BindingAnnotation;
 
 /**
@@ -35,6 +33,6 @@ import com.google.inject.BindingAnnotation;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SuperAdmin {
 
-  AccessRol rol() default AccessRol.Administrator;
+  cc.kune.core.shared.domain.AccessRol rol() default cc.kune.core.shared.domain.AccessRol.Administrator;
 
 }

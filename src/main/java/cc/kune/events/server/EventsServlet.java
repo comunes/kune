@@ -91,7 +91,7 @@ public class EventsServlet extends HttpServlet {
         final List<Map<String, String>> listOfProps = EventsServerConversionUtil.getAppointmentsUsingCache(cnt);
         for (final Map<String, String> props : listOfProps) {
           try {
-            final VEvent vEvent = EventsServerConversionUtil.toVEvent(EventsServerConversionUtil.toApp(props));
+            final VEvent vEvent = EventsServerConversionUtil.toVEvent(props);
             events.add(vEvent);
           } catch (final Exception e) {
             LOG.warn("Invalid appointments in " + token, e);

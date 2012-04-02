@@ -69,6 +69,24 @@ public class FinderServiceDefault implements FinderService {
     return null;
   }
 
+  private void checkFolderId(final Long folderId, final Container container) {
+    if (!container.getId().equals(folderId)) {
+      throw new ContentNotFoundException();
+    }
+  }
+
+  private void checkGroup(final String groupName, final Container container) {
+    if (!container.getOwner().getShortName().equals(groupName)) {
+      throw new ContentNotFoundException();
+    }
+  }
+
+  private void checkTool(final String toolName, final Container container) {
+    if (!container.getToolName().equals(toolName)) {
+      throw new ContentNotFoundException();
+    }
+  }
+
   private Content findByContentReference(final String groupName, final String toolName,
       final Long folderId, final Long contentId) throws ContentNotFoundException {
     final Content content = contentManager.find(contentId);
@@ -77,25 +95,25 @@ public class FinderServiceDefault implements FinderService {
     }
     final Container container = content.getContainer();
 
-    if (!container.getId().equals(folderId)) {
-      throw new ContentNotFoundException();
-    }
-    if (!container.getToolName().equals(toolName)) {
-      throw new ContentNotFoundException();
-    }
-    if (!container.getOwner().getShortName().equals(groupName)) {
-      throw new ContentNotFoundException();
-    }
+    checkFolderId(folderId, container);
+    checkTool(toolName, container);
+    checkGroup(groupName, container);
+
     return content;
   }
 
-  private Content findByFolderReference(final String groupName, final Long folderId) {
+  private Content findByFolderReference(final String groupName, final String toolName,
+      final Long folderId) {
     final Container container = containerManager.find(folderId);
     if (container == null) {
       throw new ContentNotFoundException();
-    } else {
-      return generateFolderFakeContent(container);
     }
+
+    checkFolderId(folderId, container);
+    checkTool(toolName, container);
+    checkGroup(groupName, container);
+
+    return generateFolderFakeContent(container);
   }
 
   @Override
@@ -153,17 +171,24 @@ public class FinderServiceDefault implements FinderService {
   }
 
   @Override
-  public Content getContent(final StateToken token, final Group defaultGroup) throws DefaultException {
+  public Content getContent(final String contentId) throws ContentNotFoundException {
+    return getContent(ContentUtils.parseId(contentId));
+  }
+
+  @Override
+  public Content getContentOrDefContent(final StateToken token, final Group defaultGroup)
+      throws DefaultException {
     final Long contentId = checkAndParse(token.getDocument());
     final Long folderId = checkAndParse(token.getFolder());
 
     final String group = token.getGroup();
+    final String tool = token.getTool();
     if (token.hasAll()) {
-      return findByContentReference(group, token.getTool(), folderId, contentId);
+      return findByContentReference(group, tool, folderId, contentId);
     } else if (token.hasGroupToolAndFolder()) {
-      return findByFolderReference(group, folderId);
+      return findByFolderReference(group, tool, folderId);
     } else if (token.hasGroupAndTool()) {
-      return findByRootOnGroup(group, token.getTool());
+      return findByRootOnGroup(group, tool);
     } else if (token.hasGroup()) {
       return findDefaultContentOfGroup(group);
     } else if (token.hasNothing()) {
@@ -171,11 +196,6 @@ public class FinderServiceDefault implements FinderService {
     } else {
       throw new ContentNotFoundException();
     }
-  }
-
-  @Override
-  public Content getContent(final String contentId) throws ContentNotFoundException {
-    return getContent(ContentUtils.parseId(contentId));
   }
 
   @Override

@@ -34,7 +34,7 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
   @Before
   public void init() throws Exception {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
     defaultContent = getSiteDefaultContent();
     doLogin();
   }

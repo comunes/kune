@@ -53,7 +53,7 @@ public class FinderTest {
     descriptor.setContainer(container);
     Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
-    finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
+    finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
   }
 
   @Test(expected = ContentNotFoundException.class)
@@ -64,7 +64,7 @@ public class FinderTest {
     descriptor.setContainer(container);
     Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
-    finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
+    finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
   }
 
   @Test(expected = ContentNotFoundException.class)
@@ -74,7 +74,7 @@ public class FinderTest {
     descriptor.setContainer(container);
     Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
-    finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
+    finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
   }
 
   @Before
@@ -93,7 +93,7 @@ public class FinderTest {
     group.setDefaultContent(descriptor);
     Mockito.when(groupManager.findByShortName("groupShortName")).thenReturn(group);
 
-    final Content content = finder.getContent(new StateToken("groupShortName", null, null, null), null);
+    final Content content = finder.getContentOrDefContent(new StateToken("groupShortName", null, null, null), null);
     assertSame(descriptor, content);
   }
 
@@ -107,14 +107,14 @@ public class FinderTest {
 
     Mockito.when(contentManager.find(2L)).thenReturn(descriptor);
 
-    final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", "2"),
+    final Content content = finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "1", "2"),
         null);
     assertSame(descriptor, content);
   }
 
   @Test(expected = ContentNotFoundException.class)
   public void testContainerExistsButContentNotFound() throws Exception {
-    finder.getContent(new StateToken("groupShortName", "toolName", "1", "999"), null);
+    finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "1", "999"), null);
   }
 
   @Test
@@ -123,7 +123,7 @@ public class FinderTest {
     final Content descriptor = TestDomainHelper.createDescriptor(1L, "title", "content");
     userGroup.setDefaultContent(descriptor);
 
-    final Content content = finder.getContent(new StateToken(), userGroup);
+    final Content content = finder.getContentOrDefContent(new StateToken(), userGroup);
     assertSame(descriptor, content);
   }
 
@@ -133,7 +133,7 @@ public class FinderTest {
     final Content descriptor = TestDomainHelper.createDescriptor(1L, "title", "content");
     userGroup.setDefaultContent(descriptor);
 
-    final Content content = finder.getContent(new StateToken(), userGroup);
+    final Content content = finder.getContentOrDefContent(new StateToken(), userGroup);
     assertSame(userGroup.getDefaultLicense(), content.getLicense());
   }
 
@@ -142,7 +142,7 @@ public class FinderTest {
     final Content content = new Content();
     final Group group = new Group();
     group.setDefaultContent(content);
-    final Content response = finder.getContent(new StateToken(), group);
+    final Content response = finder.getContentOrDefContent(new StateToken(), group);
     assertSame(content, response);
   }
 
@@ -151,7 +151,7 @@ public class FinderTest {
     final Container container = new Container();
     Mockito.when(containerManager.find(1L)).thenReturn(container);
 
-    final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", null),
+    final Content content = finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "1", null),
         null);
     assertNotNull(content);
     assertSame(container, content.getContainer());
@@ -165,7 +165,7 @@ public class FinderTest {
     Mockito.when(groupManager.findByShortName("groupShortName")).thenReturn(group);
 
     final StateToken token = new StateToken("groupShortName", "toolName", null, null);
-    final Content content = finder.getContent(token, null);
+    final Content content = finder.getContentOrDefContent(token, null);
     assertSame(container, content.getContainer());
   }
 
@@ -176,12 +176,12 @@ public class FinderTest {
     descriptor.setContainer(container);
     Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
-    finder.getContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);
+    finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);
   }
 
   @Test(expected = ContentNotFoundException.class)
   public void voyAJoder() throws Exception {
-    finder.getContent(new StateToken(null, "toolName", "1", "2"), null);
+    finder.getContentOrDefContent(new StateToken(null, "toolName", "1", "2"), null);
   }
 
 }

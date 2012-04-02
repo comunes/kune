@@ -24,6 +24,7 @@ import javax.persistence.EntityTransaction;
 
 import org.junit.Before;
 
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.persist.DataSourceKune;
 
 import com.google.inject.Inject;
@@ -78,8 +79,9 @@ public abstract class PersistenceTest {
   @Transactional
   @Before
   public void prepare() {
-    final Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit,
-        propetiesFileName);
+    final Injector injector = IntegrationTestHelper.createInjector();
+    // (new PlatformServerModule(), persistenceUnit,
+    // propetiesFileName);
     // final PersistService persistence =
     // injector.getInstance(PersistService.class);
     // To Debug insert breakpoint here

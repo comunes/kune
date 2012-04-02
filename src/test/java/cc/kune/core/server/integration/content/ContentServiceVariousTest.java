@@ -254,7 +254,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   @Before
   public void init() throws Exception {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
     doLogin();
     defaultContent = getSiteDefaultContent();
     groupShortName = defaultContent.getStateToken().getGroup();

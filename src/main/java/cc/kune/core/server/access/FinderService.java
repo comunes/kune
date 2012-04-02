@@ -38,7 +38,7 @@ public interface FinderService {
 
   Content getContent(Long contentId) throws DefaultException;
 
-  Content getContent(StateToken token, Group defaultGroup) throws DefaultException;
+  Content getContentOrDefContent(StateToken token, Group defaultGroup) throws DefaultException;
 
   Content getContent(String contentId) throws ContentNotFoundException;
 

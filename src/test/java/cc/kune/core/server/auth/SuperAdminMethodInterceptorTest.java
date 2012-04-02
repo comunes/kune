@@ -43,7 +43,7 @@ public class SuperAdminMethodInterceptorTest extends IntegrationTest {
   @Before
   public void before() {
     superAdminInterceptor = new SuperAdminMethodInterceptor();
-    new IntegrationTestHelper(this, superAdminInterceptor);
+    new IntegrationTestHelper(true, this, superAdminInterceptor);
     invocation = Mockito.mock(MethodInvocation.class);
     final AccessibleObject accessibleObject = Mockito.mock(AccessibleObject.class);
     Mockito.when(invocation.getMethod()).thenReturn(this.getClass().getMethods()[0]);

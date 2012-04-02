@@ -422,6 +422,10 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
   
 }
 
+div.gwt-TabLayoutPanelTabInner {
+  padding-top:3px;
+}
+
 .k-link {
   text-decoration: underline;
   color: green;

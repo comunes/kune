@@ -19,6 +19,8 @@
  */
 package cc.kune.events.server.utils;
 
+import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +38,7 @@ import net.fortuna.ical4j.model.property.Description;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Location;
+import net.fortuna.ical4j.model.property.Organizer;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.model.property.Uid;
 
@@ -46,10 +49,8 @@ import cc.kune.common.shared.res.ICalConstants;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.events.server.EventsServerTool;
-import cc.kune.events.shared.EventsSharedConversionUtil;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
-import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.google.inject.Inject;
 import com.google.wave.api.Gadget;
 
@@ -57,7 +58,7 @@ import com.google.wave.api.Gadget;
  * The Class EventsConversionUtil is used to convert Appointments to Gadgets
  * properties and viceversa
  */
-public class EventsServerConversionUtil extends EventsSharedConversionUtil {
+public class EventsServerConversionUtil {
 
   @Inject
   static EventsCache eventsCache;
@@ -109,46 +110,9 @@ public class EventsServerConversionUtil extends EventsSharedConversionUtil {
     return getAppointments(container);
   }
 
-  public static Appointment to(final VEvent event) {
-    // http://build.mnode.org/projects/ical4j/apidocs/
-    final Appointment app = new Appointment();
-    // FIXME: see spec
-    app.setDescription(event.getDescription().getValue());
-    app.setStart(new java.util.Date(event.getStartDate().getDate().getTime()));
-    app.setEnd(new java.util.Date(event.getEndDate().getDate().getTime()));
+  public static VEvent toVEvent(final Map<String, String> properties) throws URISyntaxException,
+      ParseException {
 
-    // FIXME: see spec
-    app.setLocation(event.getLocation().getValue());
-    final Uid uid = event.getUid();
-    if (uid != null) {
-      app.setId(uid.getValue());
-    }
-    app.setAllDay(!(event.getStartDate().getDate() instanceof DateTime));
-    app.setTitle(event.getSummary().getValue());
-    return app;
-  }
-
-  public static Appointment toApp(final Map<String, String> properties) throws Exception {
-    final Appointment app = EventsSharedConversionUtil.toApp(properties);
-    final String start = properties.get(ICalConstants.DATE_TIME_START);
-    if (start != null) {
-      app.setStart(DateUtils.toDate(start));
-    }
-    final String end = properties.get(ICalConstants.DATE_TIME_END);
-    if (end != null) {
-      app.setEnd(DateUtils.toDate(end));
-    }
-    return app;
-  }
-
-  public static Map<String, String> toMap(final Appointment app) {
-    final Map<String, String> properties = EventsSharedConversionUtil.toMap(app);
-    properties.put(ICalConstants.DATE_TIME_START, DateUtils.toString(app.getStart()));
-    properties.put(ICalConstants.DATE_TIME_END, DateUtils.toString(app.getEnd()));
-    return properties;
-  }
-
-  public static VEvent toVEvent(final Appointment app) {
     // http://build.mnode.org/projects/ical4j/apidocs/
 
     // final TimeZoneRegistry registry =
@@ -157,31 +121,34 @@ public class EventsServerConversionUtil extends EventsSharedConversionUtil {
     // final VTimeZone tz = timezone.getVTimeZone();
     // FIXME here v timezone!!!
 
-    final DateTime start = new DateTime(app.getStart().getTime());
+    final String startS = properties.get(ICalConstants.DATE_TIME_START);
+    final DateTime start = new DateTime(startS);
     final TimeZone timezone = start.getTimeZone();
     // start.setTimeZone(timezone);
-    final DateTime end = new DateTime(app.getEnd().getTime());
+    final String endS = properties.get(ICalConstants.DATE_TIME_END);
     // end.setTimeZone(timezone);
     VEvent event;
-    if (app.isAllDay()) {
+    final String allDay = properties.get(ICalConstants._ALL_DAY);
+    if (allDay != null && Boolean.parseBoolean(allDay)) {
       event = new VEvent();
-      event.getProperties().add(new Summary(app.getTitle()));
-      final DtStart eventStart = new DtStart(new Date(app.getStart().getTime()));
+      event.getProperties().add(new Summary(properties.get(ICalConstants.SUMMARY)));
+      final DtStart eventStart = new DtStart(new Date(startS));
       eventStart.setTimeZone(timezone);
       event.getProperties().add(eventStart);
-      final DtEnd eventEnd = new DtEnd(new Date(app.getEnd().getTime()));
+      final DtEnd eventEnd = new DtEnd(new Date(endS));
       eventEnd.setTimeZone(timezone);
       event.getProperties().add(eventEnd);
-      // event.getProperties().getProperty(Property.DTSTART).getParameters().add(Value.DATE);
-      // event.getProperties().getProperty(Property.DTEND).getParameters().add(Value.DATE);
+      event.getProperties().getProperty(Property.DTSTART).getParameters().add(Value.DATE);
+      event.getProperties().getProperty(Property.DTEND).getParameters().add(Value.DATE);
     } else {
-      event = new VEvent(start, end, app.getTitle());
+      event = new VEvent(start, new DateTime(endS), properties.get(ICalConstants.SUMMARY));
       event.getProperties().getProperty(Property.DTSTART).getParameters().add(Value.DATE_TIME);
       event.getProperties().getProperty(Property.DTEND).getParameters().add(Value.DATE_TIME);
     }
-    event.getProperties().add(new Description(app.getDescription()));
-    event.getProperties().add(new Location(app.getLocation()));
-    event.getProperties().add(new Uid(app.getId()));
+    event.getProperties().add(new Description(properties.get(ICalConstants.DESCRIPTION)));
+    event.getProperties().add(new Location(properties.get(ICalConstants.LOCATION)));
+    event.getProperties().add(new Uid(properties.get(ICalConstants.UID)));
+    event.getProperties().add(new Organizer(properties.get(ICalConstants.ORGANIZER)));
     return event;
   }
 

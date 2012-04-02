@@ -57,7 +57,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   @Before
   public void create() {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
   }
 
   @Test

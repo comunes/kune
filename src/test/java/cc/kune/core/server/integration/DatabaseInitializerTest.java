@@ -65,7 +65,7 @@ public class DatabaseInitializerTest {
   @KuneTransactional
   @Before
   public void init() {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
     defaultGroup = groupManager.getSiteDefaultGroup();
   }
 

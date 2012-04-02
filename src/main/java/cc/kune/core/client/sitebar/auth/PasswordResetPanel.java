@@ -71,13 +71,14 @@ public class PasswordResetPanel extends SignInAbstractPanel {
     this.stateManager = stateManager;
     final DefaultForm form = new DefaultForm();
     final Label desc = new Label(i18n.t("Enter your new password below."));
-    desc.setWidth("300px");
+    desc.setWidth("310px");
     newPasswdField = userFieldFactory.createUserPasswd(PASSWD_RESET_ID, i18n.t("New password"));
     newPasswdField.setTabIndex(1);
     confirmPasswdField = userFieldFactory.createUserPasswd(PASSWD_RESET_ID, i18n.t("Confirm"));
     confirmPasswdField.setTabIndex(1);
 
     messageErrorBar = new MessageToolbar(images, errorLabelId);
+    form.setWidth(DEF_SIGN_IN_FORM_SIZE);
     form.add(newPasswdField);
     form.add(confirmPasswdField);
     form.add(messageErrorBar);

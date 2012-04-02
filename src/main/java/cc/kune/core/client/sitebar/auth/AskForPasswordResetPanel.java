@@ -66,9 +66,10 @@ public class AskForPasswordResetPanel extends SignInAbstractPanel {
         CANCEL_BUTTON_ID, images, ERRMSG, 1);
     this.stateManager = stateManager;
     final DefaultForm form = new DefaultForm();
+    form.setWidth(DEF_SIGN_IN_FORM_SIZE);
     final Label desc = new Label(
         i18n.t("Please enter your email address. You will receive a link to create a new password via email."));
-    desc.setWidth("300px");
+    desc.setWidth("320px");
     resetEmail = userFieldFactory.createUserEmail(EMAIL_RESET_ID);
     resetEmail.setFieldLabel(i18n.t("email"));
     resetEmail.setTabIndex(1);

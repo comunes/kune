@@ -37,45 +37,46 @@ import com.google.inject.Inject;
 
 public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
-    private static final String TEST_FILE = "src/test/java/cc/kune/core/server/manager/file/orig.png";
-    @Inject
-    EntityLogoUploadManager manager;
+  private static final String TEST_FILE = "src/test/java/cc/kune/core/server/manager/file/orig.png";
+  @Inject
+  EntityLogoUploadManager manager;
 
-    @Before
-    public void create() {
-        new IntegrationTestHelper(this);
-    }
+  @Before
+  public void create() {
+    new IntegrationTestHelper(true, this);
+  }
 
-    @Test
-    public void testCreateLogo() throws Exception {
-        manager.createUploadedFile(super.getSiteDefaultContent().getStateToken(), "image/png", new File(TEST_FILE));
-        final StateContainerDTO defaultContent = super.getSiteDefaultContent();
-        assertTrue(defaultContent.getGroup().hasLogo());
-    }
+  @Test
+  public void testCreateLogo() throws Exception {
+    manager.createUploadedFile(super.getSiteDefaultContent().getStateToken(), "image/png", new File(
+        TEST_FILE));
+    final StateContainerDTO defaultContent = super.getSiteDefaultContent();
+    assertTrue(defaultContent.getGroup().hasLogo());
+  }
 
-    @Ignore
-    public void testErrorResponse() {
-        // JSONObject expected =
-        // JSONObject.fromObject("{\"success\":false,\"errors\":[{\"id\":\""
-        // + EntityLogoView.LOGO_FORM_FIELD + "\",\"msg\":\"Some message\"}]}");
-        // assertEquals(expected, manager.createJsonResponse(false,
-        // "Some message"));
-    }
+  @Ignore
+  public void testErrorResponse() {
+    // JSONObject expected =
+    // JSONObject.fromObject("{\"success\":false,\"errors\":[{\"id\":\""
+    // + EntityLogoView.LOGO_FORM_FIELD + "\",\"msg\":\"Some message\"}]}");
+    // assertEquals(expected, manager.createJsonResponse(false,
+    // "Some message"));
+  }
 
-    @Test(expected = SessionExpiredException.class)
-    public void testSessionExp() throws Exception {
-        manager.createUploadedFile("otherhash", null, null, null, null);
-    }
+  @Test(expected = SessionExpiredException.class)
+  public void testSessionExp() throws Exception {
+    manager.createUploadedFile("otherhash", null, null, null, null);
+  }
 
-    @Ignore
-    public void testSuccessResponse() {
-        // JSONObject expected =
-        // JSONObject.fromObject("{\"success\":true,\"errors\":[{}]}");
-        // assertEquals(expected, manager.createJsonResponse(true, null));
-    }
+  @Ignore
+  public void testSuccessResponse() {
+    // JSONObject expected =
+    // JSONObject.fromObject("{\"success\":true,\"errors\":[{}]}");
+    // assertEquals(expected, manager.createJsonResponse(true, null));
+  }
 
-    @Test(expected = UserMustBeLoggedException.class)
-    public void testUserMustBeAuth() throws Exception {
-        manager.createUploadedFile(null, null, null, null, null);
-    }
+  @Test(expected = UserMustBeLoggedException.class)
+  public void testUserMustBeAuth() throws Exception {
+    manager.createUploadedFile(null, null, null, null, null);
+  }
 }

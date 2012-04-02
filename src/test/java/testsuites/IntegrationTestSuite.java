@@ -27,18 +27,20 @@ import org.junit.runners.Suite.SuiteClasses;
  * Rescan with :
  * 
  * <pre>
- * find  src/test/java/org/ourproject/kune/platf/integration/ -name '*.java' -exec basename \{} .java \;| paste -s - - | sed 's/     /.class, /g'
+ * find  src/test/java/cc/kune/core/server/integration/  -name '*.java' -exec basename \{} .java \;| paste -s - - | sed 's/  /.class, /g'
  * </pre>
  * 
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-// UserServiceTest.class, SiteServiceTest.class, SocialNetworkServiceTest.class,
-// SocialNetworkMembersTest.class, DatabaseInitializationTest.class,
+// UserServiceTest.class, InitDataTest.class, GroupServiceTest.class,
+// StatsServiceTest.class, SocialNetworkMembersTest.class,
+// SocialNetworkServiceTest.class,
+// DatabaseInitializerTest.class, ContentServiceVariousTest.class,
+// ContentServiceSaveTest.class,
+// ContentServiceIntegrationTest.class, ContentServiceGetTest.class,
 // ContentServiceAddTest.class,
-// ContentCommentServiceTest.class, ContentServiceVariousTest.class,
-// ContentServiceGetTest.class,
-// ContentServiceSaveTest.class, GroupServiceTest.class
+// IntegrationTest.class
 })
 public class IntegrationTestSuite {
 }

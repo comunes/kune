@@ -37,7 +37,7 @@ import org.junit.Test;
 
 import cc.kune.core.server.InitData;
 import cc.kune.core.server.TestDomainHelper;
-import cc.kune.core.server.TestHelper;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.state.StateContent;
 import cc.kune.core.server.state.StateEventContainer;
@@ -179,7 +179,7 @@ public class MapperTest {
 
   @Before
   public void inject() {
-    TestHelper.inject(this);
+    new IntegrationTestHelper(false, this);
   }
 
   @Test

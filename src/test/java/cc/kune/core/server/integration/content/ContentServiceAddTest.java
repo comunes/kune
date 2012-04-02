@@ -48,7 +48,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
   @Before
   public void init() throws Exception {
-    new IntegrationTestHelper(this);
+    new IntegrationTestHelper(true, this);
   }
 
   @Test(expected = UserMustBeLoggedException.class)

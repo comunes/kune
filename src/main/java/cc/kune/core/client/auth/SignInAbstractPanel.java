@@ -35,7 +35,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public abstract class SignInAbstractPanel extends ViewImpl {
-
+  public static final int DEF_SIGN_IN_FORM_SIZE = 340;
   private final BasicTopDialog dialog;
   protected final String errorLabelId;
   protected final I18nTranslationService i18n;
