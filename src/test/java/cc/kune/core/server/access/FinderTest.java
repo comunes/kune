@@ -93,7 +93,8 @@ public class FinderTest {
     group.setDefaultContent(descriptor);
     Mockito.when(groupManager.findByShortName("groupShortName")).thenReturn(group);
 
-    final Content content = finder.getContentOrDefContent(new StateToken("groupShortName", null, null, null), null);
+    final Content content = finder.getContentOrDefContent(new StateToken("groupShortName", null, null,
+        null), null);
     assertSame(descriptor, content);
   }
 
@@ -107,8 +108,8 @@ public class FinderTest {
 
     Mockito.when(contentManager.find(2L)).thenReturn(descriptor);
 
-    final Content content = finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "1", "2"),
-        null);
+    final Content content = finder.getContentOrDefContent(new StateToken("groupShortName", "toolName",
+        "1", "2"), null);
     assertSame(descriptor, content);
   }
 
@@ -148,10 +149,18 @@ public class FinderTest {
 
   @Test
   public void testDocMissing() throws Exception {
-    final Container container = new Container();
+    final String groupname = "groupShortName";
+    final String tool = "toolName";
+    final String folder = "1";
+    final Group group = Mockito.mock(Group.class);
+    final Container container = Mockito.mock(Container.class);
     Mockito.when(containerManager.find(1L)).thenReturn(container);
-
-    final Content content = finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "1", null),
+    Mockito.when(container.getId()).thenReturn(1L);
+    Mockito.when(container.getToolName()).thenReturn(tool);
+    Mockito.when(container.getOwner()).thenReturn(group);
+    Mockito.when(group.getShortName()).thenReturn(groupname);
+    // Mockito.when(container.getToolName()).thenReturn(group);
+    final Content content = finder.getContentOrDefContent(new StateToken(groupname, tool, folder, null),
         null);
     assertNotNull(content);
     assertSame(container, content.getContainer());

@@ -59,8 +59,9 @@ public abstract class IntegrationTest {
 
   @After
   public void doLogout() throws DefaultException {
-    userService.logout(getHash());
-    session.logout();
+    if (session.isUserLoggedIn()) {
+      session.logout();
+    }
   }
 
   protected String getDefLicense() {

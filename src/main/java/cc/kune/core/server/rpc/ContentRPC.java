@@ -287,7 +287,8 @@ public class ContentRPC implements ContentService, RPC {
     final User user = getCurrentUser();
     if (isUserLoggedIn()) {
       defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
-      if (groupManager.findEnabledTools(defaultGroup.getId()).size() == 0) {
+      if (groupManager.findEnabledTools(defaultGroup.getId()).size() <= 1) {
+        // 1, because the trash
         // Groups with no homepage
         defaultGroup = groupManager.getSiteDefaultGroup();
       }

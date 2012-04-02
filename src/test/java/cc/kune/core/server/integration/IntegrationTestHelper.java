@@ -38,16 +38,19 @@ import cc.kune.barters.server.BarterServerModule;
 import cc.kune.chat.server.ChatServerModule;
 import cc.kune.core.server.PlatformServerModule;
 import cc.kune.core.server.TestConstants;
+import cc.kune.core.server.manager.impl.GroupServerUtils;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
 import cc.kune.core.server.persist.KunePersistenceService;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.events.server.EventsServerModule;
+import cc.kune.events.server.utils.EventsServerConversionUtil;
 import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.trash.server.TrashServerModule;
 import cc.kune.wave.server.CustomSettingsBinder;
+import cc.kune.wave.server.KuneWaveServerUtils;
 import cc.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.AbstractModule;
@@ -67,7 +70,7 @@ public class IntegrationTestHelper {
       final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
       final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
-          "kune.properties", TestConstants.PERSISTENCE_UNIT);
+          "kune-tests.properties", TestConstants.PERSISTENCE_UNIT);
       final Injector childInjector = injector.createChildInjector(
           wavePersistModule,
           kuneDataSource,
@@ -84,6 +87,9 @@ public class IntegrationTestHelper {
               bindInterceptor(any(), annotatedWith(KuneTransactional.class),
                   kuneDataSource.getTransactionInterceptor());
               install(kuneDataSource);
+              requestStaticInjection(KuneWaveServerUtils.class);
+              requestStaticInjection(EventsServerConversionUtil.class);
+              requestStaticInjection(GroupServerUtils.class);
             }
           }, new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
           new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 2, 2),
