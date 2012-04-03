@@ -19,10 +19,14 @@
  \*/
 package cc.kune.core.server.manager.file;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,21 +50,30 @@ public class EntityLogoDownloadManager extends HttpServlet {
   public static final Log LOG = LogFactory.getLog(EntityLogoDownloadManager.class);
 
   private static final long serialVersionUID = -1958945058088446881L;
-  private final InputStream groupLogo;
+  private final byte[] groupLogo;
   GroupManager groupManager;
-  private final InputStream personLogo;
-  private final InputStream unknownLogo;
+  private final String groupMime;
+  private final byte[] personLogo;
+  private final String personMime;
+  private final byte[] unknownLogo;
+  private final String unknownMime;
 
   @Inject
   public EntityLogoDownloadManager(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases,
-      final GroupManager groupManager) {
+      final GroupManager groupManager) throws IOException {
     this.groupManager = groupManager;
-    personLogo = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
-        FileConstants.PERSON_NO_AVATAR_IMAGE);
-    groupLogo = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
-        FileConstants.GROUP_NO_AVATAR_IMAGE);
-    unknownLogo = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
-        FileConstants.NO_RESULT_AVATAR_IMAGE);
+
+    final File personFile = getFile(resourceBases, FileConstants.PERSON_NO_AVATAR_IMAGE);
+    personMime = getMime(personFile);
+    personLogo = getBy(personFile);
+
+    final File groupFile = getFile(resourceBases, FileConstants.GROUP_NO_AVATAR_IMAGE);
+    groupMime = getMime(groupFile);
+    groupLogo = getBy(groupFile);
+
+    final File unknownFile = getFile(resourceBases, FileConstants.NO_RESULT_AVATAR_IMAGE);
+    unknownMime = getMime(unknownFile);
+    unknownLogo = getBy(unknownFile);
   }
 
   @Override
@@ -82,25 +95,46 @@ public class EntityLogoDownloadManager extends HttpServlet {
         return;
       }
       if (!group.hasLogo()) {
-        FileDownloadManagerUtils.returnFile((group.isPersonal() ? personLogo : groupLogo),
-            resp.getOutputStream());
+        if (group.isPersonal()) {
+          reply(resp, personLogo, personMime);
+        } else {
+          reply(resp, groupLogo, groupMime);
+        }
+
       } else {
         // Has logo
-        final byte[] logo = group.getLogo();
-
-        resp.setContentLength(logo.length);
-        resp.setContentType(group.getLogoMime().toString());
-        resp.setHeader("Content-Disposition", "attachment; filename=\"" + group.getShortName()
-            + "-logo\"");
-        resp.getOutputStream().write(logo);
+        reply(resp, group.getLogo(), group.getLogoMime().toString());
       }
     } catch (final NoResultException e) {
       unknownResult(resp);
     }
   }
 
+  private byte[] getBy(final File file) throws IOException {
+    final BufferedInputStream is = new BufferedInputStream(new FileInputStream(file));
+    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    org.apache.commons.io.IOUtils.copy(is, baos);
+    return baos.toByteArray();
+  }
+
+  private File getFile(final List<String> resourceBases, final String location) {
+    final File file = FileDownloadManagerUtils.searchFileInResourceBases(resourceBases, location);
+    return file;
+  }
+
+  private String getMime(final File file) {
+    return new MimetypesFileTypeMap().getContentType(file);
+  }
+
+  private void reply(final HttpServletResponse resp, final byte[] logo, final String mime)
+      throws IOException {
+    resp.setContentLength(logo.length);
+    resp.setContentType(mime);
+    resp.getOutputStream().write(logo);
+  }
+
   private void unknownResult(final HttpServletResponse resp) throws IOException {
-    FileDownloadManagerUtils.returnFile(unknownLogo, resp.getOutputStream());
+    reply(resp, unknownLogo, unknownMime);
   }
 
 }

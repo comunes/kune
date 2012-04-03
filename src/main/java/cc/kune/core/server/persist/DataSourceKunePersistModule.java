@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.persist;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import javax.persistence.EntityManager;
@@ -26,6 +28,7 @@ import javax.persistence.EntityManager;
 import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.Session;
 
 import cc.kune.core.server.properties.KuneProperties;
@@ -50,7 +53,6 @@ import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
 
 public class DataSourceKunePersistModule extends PrivateModule {
-  // FIXME Trying to make this PrivateModule so we can have two Persist sources
   // http://code.google.com/p/google-guice/wiki/GuicePersistMultiModules
 
   public static final Log LOG = LogFactory.getLog(DataSourceKunePersistModule.class);
@@ -58,6 +60,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
       CustomPersistFilter.class, DataSourceKune.class);
   private String kuneConfig;
   private KunePropertiesDefault kuneProperties;
+  private String log4Conf = null;
   private String settedJpaUnit = null;
   private KuneJpaLocalTxnInterceptor transactionInterceptor;
 
@@ -85,6 +88,10 @@ public class DataSourceKunePersistModule extends PrivateModule {
   public void configure() {
 
     bind(KuneProperties.class).toInstance(kuneProperties);
+
+    if (log4Conf == null) {
+      configureLog4j();
+    }
 
     // precedence method param > properties
     final String configuredJpaUnit = kuneProperties.get(KuneProperties.SITE_DB_PERSISTENCE_NAME);
@@ -158,6 +165,19 @@ public class DataSourceKunePersistModule extends PrivateModule {
     bind(GenericPersistenceInitializer.class).asEagerSingleton();
   }
 
+  private void configureLog4j() {
+    try {
+      final Properties properties = new Properties();
+      final InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(
+          "log4j.properties");
+      // "log4j.dev.properties");
+      properties.load(input);
+      PropertyConfigurator.configure(properties);
+    } catch (final IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public KuneProperties getKuneProperties() {
     return kuneProperties;
   }
@@ -170,5 +190,6 @@ public class DataSourceKunePersistModule extends PrivateModule {
     final SystemConfiguration sysConf = new SystemConfiguration();
     kuneConfig = settedProperties != null ? settedProperties : sysConf.getString("kune.server.config");
     kuneProperties = new KunePropertiesDefault(kuneConfig);
+    log4Conf = sysConf.getString("log4j.configuration");
   }
 }

@@ -120,12 +120,14 @@ public class FolderViewerUtils {
       getView().addItem(item, new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
+          event.stopPropagation();
           stateManager.gotoStateToken(stateToken);
         }
       }, new DoubleClickHandler() {
         @Override
         public void onDoubleClick(final DoubleClickEvent event) {
-          stateManager.gotoStateToken(stateToken);
+          event.stopPropagation();
+          // stateManager.gotoStateToken(stateToken);
         }
       });
     }

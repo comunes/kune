@@ -496,7 +496,7 @@
       <version>3.3.5</version>
       <!-- <scope>test</scope> -->
     </dependency>
-  
+
     <!-- public side -->
     <dependency>
       <groupId>org.jruby.rack</groupId>
@@ -712,7 +712,7 @@
       <groupId>com.googlecode</groupId>
       <artifactId>gwtrpccommlayer</artifactId>
       <version>0.0.1-SNAPSHOT</version>
-   </dependency>
+    </dependency>
   </dependencies>
   <distributionManagement>
     <repository>
@@ -1029,6 +1029,37 @@
           </archive>
         </configuration>
         <executions>
+                  <execution>
+            <id>common</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>common</classifier>
+              <includes>
+                <include>**/KuneCommon.gwt.xml**</include>
+                <include>**/kune/common/**</include>
+              </includes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>services</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>services</classifier>
+              <includes>
+                <include>**/rpcservices/UserService**</include>
+                <include>**/shared/domain/*</include>
+                <include>**/shared/domain/utils/*</include>
+                <include>**/shared/dto/*</include>
+                <include>**/client/errors/*</include>
+              </includes>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>
@@ -1041,6 +1072,49 @@
         <version>1.0-beta-2</version>
       </extension>
     </extensions>
+    <pluginManagement>
+      <plugins>
+        <!--This plugin's configuration is used to store Eclipse m2e settings 
+          only. It has no influence on the Maven build itself. -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId></groupId>
+                    <artifactId></artifactId>
+                    <versionRange></versionRange>
+                    <goals>
+                      <goal></goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-plugin</artifactId>
+                    <versionRange>1.7.0.0,1.7.0.0</versionRange>
+                    <goals>
+                      <goal>update</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
   <profiles>
     <profile>

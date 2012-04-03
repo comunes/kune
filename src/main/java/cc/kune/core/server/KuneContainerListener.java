@@ -23,13 +23,8 @@
  \*/
 package cc.kune.core.server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.apache.log4j.PropertyConfigurator;
 
 import cc.kune.core.server.persist.KunePersistenceService;
 import cc.kune.core.server.rack.ContainerListener;
@@ -48,18 +43,21 @@ public class KuneContainerListener implements ContainerListener {
     this.logger = logger;
   }
 
-  private void configureLog4j() {
-    try {
-      final Properties properties = new Properties();
-      final InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-          "log4j.properties");
-      // "log4j.dev.properties");
-      properties.load(input);
-      PropertyConfigurator.configure(properties);
-    } catch (final IOException e) {
-      e.printStackTrace();
-    }
-  }
+  //
+  // private void configureLog4j() {
+  // try {
+  // final Properties properties = new Properties();
+  // // FIXME this should be optional
+  // final InputStream input =
+  // Thread.currentThread().getContextClassLoader().getResourceAsStream(
+  // "log4j.properties");
+  // // "log4j.dev.properties");
+  // properties.load(input);
+  // PropertyConfigurator.configure(properties);
+  // } catch (final IOException e) {
+  // e.printStackTrace();
+  // }
+  // }
 
   public Logger getLogger() {
     return logger;
@@ -67,7 +65,7 @@ public class KuneContainerListener implements ContainerListener {
 
   @Override
   public void start() {
-    configureLog4j();
+    // configureLog4j();
     logger.log(Level.INFO, "Kune persistence starting");
     persistenceService.start();
     logger.log(Level.INFO, "Kune persistence started");

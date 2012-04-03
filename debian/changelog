@@ -1,6 +1,6 @@
 kune (0.1.0+b7) oneiric; urgency=low
 
-  * Improved openfire connection. Improved debian init
+  * Improved openfire connection, debian init andº wave offline render and cache.
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 02 Apr 2012 22:51:59 +0200
 

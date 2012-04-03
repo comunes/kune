@@ -56,13 +56,13 @@ public class WaveStatusIndicator {
         public void onNetworkStatus(final NetworkStatusEvent event) {
           switch (event.getStatus()) {
           case CONNECTED:
-          case RECONNECTED:
             session.check(new AsyncCallbackSimple<Void>() {
               @Override
               public void onSuccess(final Void result) {
                 goOnline();
               }
             });
+          case RECONNECTED:
             break;
           case DISCONNECTED:
             NotifyUser.showProgress(i18n.t("Connecting"));

@@ -37,6 +37,20 @@ public class FileDownloadManagerUtils {
 
   public static final Log LOG = LogFactory.getLog(FileDownloadManagerUtils.class);
 
+  public static InputStream getInputStreamInResourceBases(final List<String> resourceBases,
+      final String filename) {
+    InputStream in = null;
+    final File icon = searchFileInResourceBases(resourceBases, filename);
+    try {
+      if (icon != null) {
+        in = new BufferedInputStream(new FileInputStream(icon));
+      }
+    } catch (final FileNotFoundException e) {
+      LOG.error(String.format("Cannot read filename: %s in %s", filename, resourceBases.toString()));
+    }
+    return in;
+  }
+
   public static void returnFile(final InputStream in, final OutputStream out)
       throws FileNotFoundException, IOException {
     try {
@@ -74,25 +88,17 @@ public class FileDownloadManagerUtils {
     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
   }
 
-  public static InputStream searchFileInResourcBases(final List<String> resourceBases,
-      final String filename) {
-    InputStream in = null;
+  public static File searchFileInResourceBases(final List<String> resourceBases, final String filename) {
     File icon = null;
     for (final String path : resourceBases) {
-      final String pathAndfilename = path + (path.endsWith(File.separator) ? "" : File.separator) + filename;
+      final String pathAndfilename = path + (path.endsWith(File.separator) ? "" : File.separator)
+          + filename;
       final File file = new File(pathAndfilename);
       if (file.exists()) {
         icon = file;
         break;
       }
     }
-    try {
-      if (icon != null) {
-        in = new BufferedInputStream(new FileInputStream(icon));
-      }
-    } catch (final FileNotFoundException e) {
-      LOG.error(String.format("Cannot read filename: %s in %s", filename, resourceBases.toString()));
-    }
-    return in;
+    return icon;
   }
 }

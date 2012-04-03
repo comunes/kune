@@ -46,7 +46,7 @@ public class XMLActionReader {
   @Inject
   public XMLActionReader(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
     try {
-      final InputStream iStream = FileDownloadManagerUtils.searchFileInResourcBases(resourceBases,
+      final InputStream iStream = FileDownloadManagerUtils.getInputStreamInResourceBases(resourceBases,
           XMLActionsConstants.ACTIONS_XML_LOCATION_PATH_ABS);
       final StringWriter writer = new StringWriter();
       IOUtils.copy(iStream, writer, "UTF-8");

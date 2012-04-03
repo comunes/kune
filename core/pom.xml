@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cc.kune</groupId>
+  <artifactId>kune-core</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>kune-cli</module>
+  </modules>
+<!--   <repositories> -->
+<!--     <repository> -->
+<!--       <id>kune-maven</id> -->
+<!--       <url>http://kune.ourproject.org/mavenrepo/</url> -->
+<!--     </repository> -->
+<!--   </repositories> -->
+</project>

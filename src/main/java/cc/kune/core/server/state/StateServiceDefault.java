@@ -47,7 +47,8 @@ public class StateServiceDefault implements StateService {
   public static final Log LOG = LogFactory.getLog(StateServiceDefault.class);
   private final GroupManager groupManager;
   private final I18nTranslationService i18n;
-  private final KuneWaveService kuneWaveManager;
+  private final KuneWaveService kuneWaveService;
+  private final RenderedWavesCache renderedWaves;
   private final AccessRightsService rightsService;
   private final SocialNetworkManager socialNetworkManager;
   private final TagUserContentManager tagManager;
@@ -56,13 +57,14 @@ public class StateServiceDefault implements StateService {
   public StateServiceDefault(final GroupManager groupManager,
       final SocialNetworkManager socialNetworkManager, final TagUserContentManager tagManager,
       final AccessRightsService rightsService, final I18nTranslationService i18n,
-      final KuneWaveService kuneWaveManager) {
+      final KuneWaveService kuneWaveService, final RenderedWavesCache renderedWaves) {
     this.groupManager = groupManager;
     this.socialNetworkManager = socialNetworkManager;
     this.tagManager = tagManager;
     this.rightsService = rightsService;
     this.i18n = i18n;
-    this.kuneWaveManager = kuneWaveManager;
+    this.kuneWaveService = kuneWaveService;
+    this.renderedWaves = renderedWaves;
   }
 
   private Container calculateRootContainer(final Container container) {
@@ -109,10 +111,11 @@ public class StateServiceDefault implements StateService {
       state.setWaveRef(waveId);
       try {
         // FIXME if we remove the authors this fails...
-        final Wavelet wavelet = kuneWaveManager.fetchWave(
+        final Wavelet wavelet = kuneWaveService.fetchWave(
             JavaWaverefEncoder.decodeWaveRefFromPath(waveId), content.getAuthors().get(0).getShortName());
         // final String currentContent = wavelet.getRootBlip().getContent();
-        state.setContent(kuneWaveManager.render(wavelet));
+
+        state.setContent(renderedWaves.getOrRender(wavelet));
         // Well we "cache" the last modified time of waves in db (w'll find
         // another way to do it better in the future with db persitence of
         // waves)
@@ -120,7 +123,7 @@ public class StateServiceDefault implements StateService {
         // contentManager.setModifiedOn(content, wavelet.getLastModifiedTime());
         // contentManager.save(userLogged, content, currentContent);
         state.setTitle(wavelet.getTitle());
-        state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveManager.isParticipant(wavelet,
+        state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveService.isParticipant(wavelet,
             userLogged.getShortName()) : false);
       } catch (final Exception e) {
         LOG.error("Error accessing wave " + waveId, e);

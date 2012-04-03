@@ -103,6 +103,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     Tooltip.to(itemWidget, item.getTooltip());
     // FIXME make this under demand
     itemWidget.getRowClick().addClickHandler(clickHandler);
+    itemWidget.getRowDoubleClick().addDoubleClickHandler(doubleClickHandler);
     if (ContentStatus.inTheDustbin.equals(item.getContentStatus())) {
       itemWidget.getTitleWidget().addStyleName("k-line-through");
     }

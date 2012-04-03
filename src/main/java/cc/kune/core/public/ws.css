@@ -1,5 +1,5 @@
-GCHARSET                          "UTF-8                         "; body
-  {
+GCHARSET                           "UTF-8                          ";
+  body {
   background-color: transparent;
   color: black;
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
@@ -423,7 +423,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 }
 
 div.gwt-TabLayoutPanelTabInner {
-  padding-top:3px;
+  padding-top: 3px;
 }
 
 .k-link {
@@ -901,7 +901,6 @@ button.k-button {
   padding: 0 2px;
 }
 
-
 button.k-btn-go-up {
   margin-right: 5px;
 }
@@ -976,8 +975,8 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   color: gray !important;
   border-color: #CCCCCC !important;
   background: inherits !important;
-  kfilter: alpha(opacity = 
-               50) !important;
+  kfilter: alpha(opacity =  
+                50) !important;
   -moz-opacity: 0.50 !important;
   -khtml-opacity: 0.50 !important;
   opacity: 0.50 !important;
@@ -991,7 +990,6 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 /* end buttons */
-
 .k-sn-collabslabel {
   
 }
@@ -1270,8 +1268,8 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity = 
-               90);
+  kfilter: alpha(opacity =  
+                90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1605,8 +1603,14 @@ div.jGrowl {
 }
 
 /* Wave public (not logged) render (splash) */
-
-div.docEditorContainer div.docEditor div.thread { 
- padding: 0 10px !important;  
+div.docEditorContainer div.docEditor div.thread {
+  padding: 0 10px !important;
 }
 
+.author-count-root {
+  margin: -30px 0 0 -30px;
+}
+
+div.docEditorContainer div.thread div.time {
+  color: #A05A2C;
+}
