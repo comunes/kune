@@ -391,35 +391,39 @@ class ThreadedWaveRenderer implements WaveRenderer {
     final StringBuilder authorString = new StringBuilder();
     final int numberOfAuthors = authors.size();
     final int len = Math.min(3, numberOfAuthors);
-    for (int i = 0; i < len; i++) {
-      authorString.append("<div class='authorbar ");
-      if (i == 0) {
-        authorString.append("first");
-      }
-      authorString.append("'><div class=\"avatar\"><img src=\"");
-      final ParticipantProfile author = authors.get(i);
-      authorString.append(author.getImageUrl());
-      authorString.append("\" alt=\"");
-
-      final String name = author.getName();
-      authorString.append(name);
-      authorString.append("\"><span class=\"name\" title=\"");
-      authorString.append(name);
-      authorString.append("\">");
-      authorString.append(name);
-      authorString.append("</span></div></div>");
-    }
-
-    if (numberOfAuthors > 3) {
-      authorString.append("<div class=\"authorbar\">");
-      authorString.append("<div class=\"author-more\">+");
-      authorString.append(numberOfAuthors);
-      authorString.append(" others</div>");
-      authorString.append("</div>");
-
-      blip.put("authorCountClass", "author-count-many");
+    if (blipData.isRoot()) {
+      blip.put("authorCountClass", "author-count-root");
     } else {
-      blip.put("authorCountClass", "author-count-" + contributors.size());
+      for (int i = 0; i < len; i++) {
+        authorString.append("<div class='authorbar ");
+        if (i == 0) {
+          authorString.append("first");
+        }
+        authorString.append("'><div class=\"avatar\"><img src=\"");
+        final ParticipantProfile author = authors.get(i);
+        authorString.append(author.getImageUrl());
+        authorString.append("\" alt=\"");
+
+        final String name = author.getName();
+        authorString.append(name);
+        authorString.append("\"><span class=\"name\" title=\"");
+        authorString.append(name);
+        authorString.append("\">");
+        authorString.append(name);
+        authorString.append("</span></div></div>");
+      }
+
+      if (numberOfAuthors > 3) {
+        authorString.append("<div class=\"authorbar\">");
+        authorString.append("<div class=\"author-more\">+");
+        authorString.append(numberOfAuthors);
+        authorString.append(" others</div>");
+        authorString.append("</div>");
+
+        blip.put("authorCountClass", "author-count-many");
+      } else {
+        blip.put("authorCountClass", "author-count-" + contributors.size());
+      }
     }
 
     blip.put("authorString", authorString.toString());

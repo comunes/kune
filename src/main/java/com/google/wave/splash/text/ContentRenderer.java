@@ -22,6 +22,8 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.wave.client.editor.content.paragraph.DefaultParagraphHtmlRenderer;
 import org.waveprotocol.wave.client.editor.content.paragraph.Paragraph;
 import org.waveprotocol.wave.client.editor.content.paragraph.Paragraph.Alignment;
@@ -44,7 +46,6 @@ import com.google.wave.splash.web.template.WaveRenderer;
  * @author dhanji@gmail.com (Dhanji R. Prasanna)
  */
 public class ContentRenderer {
-
   /**
    * Represents a marker in content that is either the start or end of an
    * annotation or a single element.
@@ -97,6 +98,7 @@ public class ContentRenderer {
       return this.element != null;
     }
   }
+  public static final Log LOG = LogFactory.getLog(ContentRenderer.class);
 
   private final GadgetRenderer gadgetRenderer;
   private boolean identing;
@@ -149,6 +151,7 @@ public class ContentRenderer {
   private void renderElement(final Element element, final int index, final List<String> contributors,
       final StringBuilder builder) {
     final ElementType type = element.getType();
+
     switch (type) {
     case LINE:
       final String t = element.getProperty(Line.LINE_TYPE);
@@ -167,6 +170,8 @@ public class ContentRenderer {
         builder.append("</div> <!-- end h1/h2... header -->");
         inheader = false;
       }
+      // NOTE: if there exists problems with <br/> or newlines check the
+      // "TODO expensive and silly" comment below
 
       if (t != null && t.equals(Paragraph.LIST_TYPE)) {
         // type-0 to 2, margin 22px * i <li class="bullet-type-0"
@@ -199,6 +204,7 @@ public class ContentRenderer {
             fontWeight).append(";\">");
         inheader = true;
       }
+
       // TODO(anthonybaxter): need to handle <line t="li"> and <line t="li"
       // i="3">
       // TODO(anthonybaxter): also handle H1 &c
@@ -317,6 +323,7 @@ public class ContentRenderer {
     }
 
     // Replace empty paragraphs. (TODO expensive and silly)
-    return builder.append("</ul>").toString().replace("<p>\n</p>", "<p><br/></p>");
+    return builder.append("</ul>").toString().replaceAll("<p>\n</p>", "<p><br/></p>").replaceAll(
+        "<p>\n<div style=\"font-size", "<p><br/><div style=\"font-size");
   }
 }

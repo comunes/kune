@@ -46,6 +46,15 @@ public interface UserService extends RemoteService {
 
   void changePasswd(String userHash, String oldPassword, String newPassword) throws DefaultException;
 
+  /**
+   * Check user and hash (this is only used for external auth, like the openfire
+   * chat)
+   * 
+   * @param username
+   *          the username
+   * @param userHash
+   *          the user hash
+   */
   void checkUserAndHash(String username, String userHash);
 
   void createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;

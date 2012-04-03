@@ -134,6 +134,13 @@ public class UserRPC implements RPC, UserService {
     userManager.changePasswd(userId, oldPassword, newPassword, true);
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#checkUserAndHash(java.lang.
+   * String, java.lang.String)
+   */
   @Override
   @KuneTransactional
   public void checkUserAndHash(final String username, final String passwdOrToken) {

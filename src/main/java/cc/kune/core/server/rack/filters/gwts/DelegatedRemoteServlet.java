@@ -35,6 +35,11 @@ import com.google.gwt.user.server.rpc.RPCRequest;
 import com.googlecode.gwtrpccommlayer.server.GwtRpcCommLayerServlet;
 import com.googlecode.gwtrpccommlayer.shared.GwtRpcCommLayerPojoRequest;
 
+/**
+ * The Class DelegatedRemoteServlet extends GwtRpcCommLayerServlet so allow to
+ * call GWT RPC calls from other systems different than the browser. Check :
+ * http://googlewebtoolkit.blogspot.com.es/2010_07_01_archive.html
+ */
 public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
   public static final Log LOG = LogFactory.getLog(DelegatedRemoteServlet.class);
   private static final long serialVersionUID = -7646054921925214953L;
@@ -44,6 +49,18 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
 
   public DelegatedRemoteServlet(final Object servlet) {
     super(servlet);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.googlecode.gwtrpccommlayer.server.GwtRpcCommLayerServlet#
+   * allowGwtRpcPojoRequest()
+   */
+  @Override
+  protected boolean allowGwtRpcPojoRequest() {
+    // If we want to restrict the external rpc calls per method or classs
+    return super.allowGwtRpcPojoRequest();
   }
 
   @Override
@@ -64,6 +81,7 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
     }
 
     final Class[] arrParameterClasses = lstParameterClasses.toArray(new Class[0]);
+    // patched here for kune
     return service.getClass().getMethod(stressTestRequest.getMethodName(), arrParameterClasses);
   }
 

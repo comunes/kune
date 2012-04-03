@@ -1604,3 +1604,9 @@ div.jGrowl {
   width: auto !important;
 }
 
+/* Wave public (not logged) render (splash) */
+
+div.docEditorContainer div.docEditor div.thread { 
+ padding: 0 10px !important;  
+}
+
