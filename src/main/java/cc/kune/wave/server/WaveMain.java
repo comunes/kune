@@ -159,8 +159,8 @@ public class WaveMain {
     PersistenceModule persistenceModule = settingsInjector.getInstance(PersistenceModule.class);
     Injector injector =
         settingsInjector.createChildInjector(new ServerModule(enableFederation, listenerCount,
-            waveletLoadCount, deltaPersistCount),
-            new RobotApiModule(), federationModule, persistenceModule);
+            waveletLoadCount, deltaPersistCount), new RobotApiModule(), federationModule,
+	persistenceModule);
 
     ServerRpcProvider server = injector.getInstance(ServerRpcProvider.class);
     WaveBus waveBus = injector.getInstance(WaveBus.class);
@@ -211,6 +211,7 @@ public class WaveMain {
   }
 
   private static void initializeServlets(Injector injector, ServerRpcProvider server) {
+    server.addServlet("/gadget/gadgetlist", injector.getInstance(CustomGadgetProviderServlet.class));
     server.addServlet("/attachment/*", injector.getInstance(AttachmentServlet.class));
 
     server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));

@@ -1,25 +1,28 @@
 diff --git a/.classpath b/.classpath
-index dbfd956..1ab7f02 100644
+index d8def03..d80d62a 100644
 --- a/.classpath
 +++ b/.classpath
-@@ -37,7 +37,7 @@
- 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-io-8.0.1.v20110908.jar"/>
- 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-security-8.0.1.v20110908.jar"/>
- 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-server-8.0.1.v20110908.jar"/>
--	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-servlet-8.0.1.v20110908.jar"/>
-+	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-servlet-8.0.1.v20110908.jar" sourcepath="/home/vjrj/.m2/repository/org/eclipse/jetty/jetty-servlet/8.0.1.v20110908/jetty-servlet-8.0.1.v20110908-sources.jar"/>
- 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-servlets-8.0.1.v20110908.jar"/>
- 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-util-8.0.1.v20110908.jar"/>
- 	<classpathentry kind="lib" path="third_party/runtime/jetty/jetty-webapp-8.0.1.v20110908.jar"/>
-@@ -67,7 +67,7 @@
- 	<classpathentry kind="lib" path="third_party/test/hamcrest/hamcrest-all-1.2.jar"/>
- 	<classpathentry kind="lib" path="third_party/test/jmock/jmock-2.5.1.jar"/>
- 	<classpathentry kind="lib" path="third_party/test/jmock/jmock-junit3-2.5.1.jar"/>
--	<classpathentry kind="lib" path="third_party/test/junit/junit.jar"/>
-+	<classpathentry kind="lib" path="third_party/test/junit/junit.jar" sourcepath="/home/vjrj/.m2/repository/junit/junit/3.8.2/junit-3.8.2-sources.jar"/>
- 	<classpathentry kind="lib" path="third_party/test/junit/src.jar"/>
- 	<classpathentry kind="lib" path="third_party/test/mockito/mockito-all-1.8.2.jar"/>
- 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+@@ -5,7 +5,7 @@
+ 	<classpathentry kind="src" path="proto_src"/>
+ 	<classpathentry kind="src" path="gen/messages"/>
+ 	<classpathentry kind="src" path="gen/gxp"/>
+-	<classpathentry kind="lib" path="third_party/runtime/jetty/servlet-api-3.0.jar"/>
++	<classpathentry kind="lib" path="third_party/runtime/jetty/servlet-api-3.0.jar" sourcepath="/home/vjrj/.m2/repository/org/eclipse/jetty/orbit/javax.servlet/3.0.0.v201112011016/javax.servlet-3.0.0.v201112011016-sources.jar"/>
+ 	<classpathentry kind="lib" path="third_party/runtime/guava/guava-r09.jar"/>
+ 	<classpathentry kind="lib" path="third_party/codegen/antlr/antlr-3.2.jar"/>
+ 	<classpathentry kind="lib" path="third_party/codegen/gwt/gwt-dev.jar"/>
+@@ -75,8 +75,8 @@
+ 	<classpathentry kind="lib" path="third_party/codegen/socketio/socketio-gwt-0.1-SNAPSHOT.jar" sourcepath="third_party/codegen/socketio/socketio-gwt-0.1-SNAPSHOT-sources.jar"/>
+ 	<classpathentry kind="lib" path="third_party/runtime/socketio/socketio-jetty-0.1-SNAPSHOT.jar" sourcepath="third_party/runtime/socketio/socketio-jetty-0.1-SNAPSHOT-sources.jar"/>
+ 	<classpathentry kind="lib" path="third_party/runtime/commons-fileupload/commons-fileupload.jar" sourcepath="third_party/runtime/commons-fileupload/commons-fileupload-src.zip"/>
+-        <classpathentry kind="lib" path="third_party/runtime/google-api-client/google-api-client-1.5.0-beta.jar"/>
+-        <classpathentry kind="lib" path="third_party/runtime/google-api-client/google-http-client-1.5.0-beta.jar"/>
+-        <classpathentry kind="lib" path="third_party/runtime/google-api-client/google-oauth-client-1.5.0-beta.jar"/>
++	<classpathentry kind="lib" path="third_party/runtime/google-api-client/google-api-client-1.5.0-beta.jar"/>
++	<classpathentry kind="lib" path="third_party/runtime/google-api-client/google-http-client-1.5.0-beta.jar"/>
++	<classpathentry kind="lib" path="third_party/runtime/google-api-client/google-oauth-client-1.5.0-beta.jar"/>
+ 	<classpathentry kind="output" path="bin"/>
+ </classpath>
 diff --git a/.settings/org.eclipse.jdt.ui.prefs b/.settings/org.eclipse.jdt.ui.prefs
 index d34cf38..02223a6 100644
 --- a/.settings/org.eclipse.jdt.ui.prefs
@@ -88,10 +91,10 @@ index d34cf38..02223a6 100644
 +sp_cleanup.use_this_for_non_static_method_access=false
 +sp_cleanup.use_this_for_non_static_method_access_only_if_necessary=true
 diff --git a/src/org/waveprotocol/box/server/ServerMain.java b/src/org/waveprotocol/box/server/ServerMain.java
-index 7ce78fb..abc5a4e 100644
+index 13a2d55..3d375fc 100644
 --- a/src/org/waveprotocol/box/server/ServerMain.java
 +++ b/src/org/waveprotocol/box/server/ServerMain.java
-@@ -211,23 +211,23 @@ public class ServerMain {
+@@ -212,28 +212,28 @@ public class ServerMain {
    }
  
    private static void initializeServlets(Injector injector, ServerRpcProvider server) {
@@ -127,9 +130,15 @@ index 7ce78fb..abc5a4e 100644
 +    server.addServlet("/profile/*", injector.getInstance(FetchProfilesServlet.class));
 +    server.addServlet("/waveref/*", injector.getInstance(WaveRefServlet.class));
  
+     boolean enableImport = injector
+             .getInstance(Key.get(Boolean.class, Names.named(CoreSettings.ENABLE_IMPORT)));
+     if (enableImport)
+-      server.addServlet("/import", ImportServlet.class);
++      server.addServlet("/import", injector.getInstance(ImportServlet.class));
+ 
      String gadgetHostName =
          injector
-@@ -236,9 +236,9 @@ public class ServerMain {
+@@ -242,9 +242,9 @@ public class ServerMain {
          injector.getInstance(Key.get(Integer.class, Names.named(CoreSettings.GADGET_SERVER_PORT)));
      Map<String, String> initParams =
          Collections.singletonMap("HostHeader", gadgetHostName + ":" + port);
@@ -141,7 +150,7 @@ index 7ce78fb..abc5a4e 100644
    }
  
    private static void initializeRobots(Injector injector, WaveBus waveBus) {
-@@ -247,10 +247,10 @@ public class ServerMain {
+@@ -253,10 +253,10 @@ public class ServerMain {
    }
  
    private static void initializeRobotAgents(Injector injector, ServerRpcProvider server) {
@@ -512,6 +521,19 @@ index b136c88..9f1b2ab 100644
          group.addClickButton(), new ToolbarClickButton.Listener() {
            @Override
            public void onClicked() {
+diff --git a/src/org/waveprotocol/wave/client/StageThree.java b/src/org/waveprotocol/wave/client/StageThree.java
+index 5a8de4d..b748193 100644
+--- a/src/org/waveprotocol/wave/client/StageThree.java
++++ b/src/org/waveprotocol/wave/client/StageThree.java
+@@ -155,7 +155,7 @@ public interface StageThree {
+       String sessionId = stageTwo.getSessionId();
+ 
+       SelectionExtractor selectionExtractor = new SelectionExtractor(clock, address, sessionId);
+-      return EditSession.install(views, documents, selectionExtractor, focus, panel);
++      return EditSession.install(views, documents, selectionExtractor, focus, panel, getLocalDomain());
+     }
+ 
+     protected EditToolbar createEditToolbar() {
 diff --git a/src/org/waveprotocol/wave/client/doodad/link/Link.java b/src/org/waveprotocol/wave/client/doodad/link/Link.java
 index f5fb0e4..6b7899c 100644
 --- a/src/org/waveprotocol/wave/client/doodad/link/Link.java
@@ -549,81 +571,196 @@ index f5fb0e4..6b7899c 100644
        return rawLinkValue;
      }
  
+diff --git a/src/org/waveprotocol/wave/client/editor/Editors.java b/src/org/waveprotocol/wave/client/editor/Editors.java
+index fa306d1..2c75370 100644
+--- a/src/org/waveprotocol/wave/client/editor/Editors.java
++++ b/src/org/waveprotocol/wave/client/editor/Editors.java
+@@ -45,15 +45,19 @@ import org.waveprotocol.wave.model.util.CollectionUtils;
+  */
+ public final class Editors {
+ 
++  private static String localDomain;
++
+   private Editors() {
+   }
+ 
+   /**
+    * Creates an editor.
++   * @param localDomain 
+    *
+    * @return New Editor instance
+    */
+   public static Editor create() {
++    Editors.localDomain = "kk";
+     Element e = Document.get().createDivElement();
+     e.setClassName("editor");
+     return UserAgent.isMobileWebkit() ? // \u2620
+@@ -105,7 +109,7 @@ public final class Editors {
+     LineRendering.registerLines(ROOT_HANDLER_REGISTRY);
+ 
+     Caption.register(ROOT_HANDLER_REGISTRY);
+-    ChunkyElementHandler.register("br", ROOT_HANDLER_REGISTRY);
++    ChunkyElementHandler.register("br", ROOT_HANDLER_REGISTRY);    
+     AnnotationPaint.register(ROOT_HANDLER_REGISTRY);
+     ImgDoodad.register(ROOT_HANDLER_REGISTRY);
+ 
+diff --git a/src/org/waveprotocol/wave/client/editor/content/misc/AnnotationPaint.java b/src/org/waveprotocol/wave/client/editor/content/misc/AnnotationPaint.java
+index bb62b1a..6ad01a4 100644
+--- a/src/org/waveprotocol/wave/client/editor/content/misc/AnnotationPaint.java
++++ b/src/org/waveprotocol/wave/client/editor/content/misc/AnnotationPaint.java
+@@ -82,11 +82,21 @@ public class AnnotationPaint {
+   /** Full tag name including namespace for boundary nodes */
+   public static final String BOUNDARY_FULL_TAGNAME = "l:b";
+ 
++  private static AnnotationSpreadRenderer paintRenderer;
++
++  /**
++   * Init the localDomain (used to render local links properly)
++   * @param localDomain 
++   */
++  public static void init(String localDomain) {
++    paintRenderer.setLocalDomain(localDomain);
++  }
++  
+   /**
+-   * Registers subclass with ContentElement
++   * Registers subclass with ContentElement 
+    */
+   public static void register(ElementHandlerRegistry registry) {
+-    AnnotationSpreadRenderer paintRenderer = new AnnotationSpreadRenderer();
++    paintRenderer = new AnnotationSpreadRenderer();
+     registry.registerRenderingMutationHandler(SPREAD_FULL_TAGNAME, paintRenderer);
+     registry.registerNiceHtmlRenderer(SPREAD_FULL_TAGNAME, PasteFormatRenderers.SHALLOW_CLONE_RENDERER);
+ 
+diff --git a/src/org/waveprotocol/wave/client/editor/content/misc/AnnotationSpreadRenderer.java b/src/org/waveprotocol/wave/client/editor/content/misc/AnnotationSpreadRenderer.java
+index 5a88f48..f69de0d 100644
+--- a/src/org/waveprotocol/wave/client/editor/content/misc/AnnotationSpreadRenderer.java
++++ b/src/org/waveprotocol/wave/client/editor/content/misc/AnnotationSpreadRenderer.java
+@@ -22,6 +22,7 @@ import com.google.gwt.dom.client.Element;
+ import com.google.gwt.user.client.DOM;
+ import com.google.gwt.user.client.Event;
+ import com.google.gwt.user.client.EventListener;
++import com.google.gwt.user.client.Window;
+ 
+ import org.waveprotocol.wave.client.common.scrub.Scrub;
+ import org.waveprotocol.wave.client.common.util.DomHelper;
+@@ -33,9 +34,9 @@ import org.waveprotocol.wave.client.editor.content.ContentElement;
+ import org.waveprotocol.wave.client.editor.content.misc.AnnotationPaint.EventHandler;
+ import org.waveprotocol.wave.client.editor.content.misc.AnnotationPaint.MutationHandler;
+ import org.waveprotocol.wave.client.scheduler.Scheduler;
+-import org.waveprotocol.wave.client.scheduler.SchedulerInstance;
+ import org.waveprotocol.wave.client.scheduler.Scheduler.Priority;
+ import org.waveprotocol.wave.client.scheduler.Scheduler.Task;
++import org.waveprotocol.wave.client.scheduler.SchedulerInstance;
+ import org.waveprotocol.wave.model.util.ReadableStringMap.ProcV;
+ 
+ import java.util.HashSet;
+@@ -72,11 +73,13 @@ class AnnotationSpreadRenderer extends RenderingMutationHandler {
+     }
+   };
+ 
++  private String domain;
++
+   private static MutationHandler getMutationHandler(ContentElement element) {
+     String handlerId = element.getAttribute(AnnotationPaint.MUTATION_LISTENER_ATTR);
+     return handlerId == null ? null : AnnotationPaint.mutationHandlerRegistry.get(handlerId);
+   }
+-
++  
+   @Override
+   public void onActivationStart(ContentElement element) {
+     fanoutAttrs(element);
+@@ -108,9 +111,9 @@ class AnnotationSpreadRenderer extends RenderingMutationHandler {
+       if (newValue != null) {
+         String scrubbedValue = Scrub.scrub(newValue);
+         implNodelet.setAttribute("href", scrubbedValue);
+-        if (scrubbedValue.startsWith("#")) {
++        if (scrubbedValue.startsWith("#") || (domain != null && scrubbedValue.matches("^http([s]|)://" + domain + "/.*"))) {
+           implNodelet.removeAttribute("target");
+-        } else {
++        } else {                    
+           implNodelet.setAttribute("target", "_blank");
+         }
+       } else {
+@@ -217,4 +220,13 @@ class AnnotationSpreadRenderer extends RenderingMutationHandler {
+   public void onDescendantsMutated(ContentElement element) {
+     scheduleMutationNotification(element);
+   }
++
++  /**
++   * Sets the local domain (used to render local links properly) 
++   *
++   * @param localDomain the new local domain
++   */
++  public void setLocalDomain(String localDomain) {
++    domain = localDomain;
++  }
+ }
 diff --git a/src/org/waveprotocol/wave/client/gadget/renderer/GadgetWidget.java b/src/org/waveprotocol/wave/client/gadget/renderer/GadgetWidget.java
-index 7088f80..1e38273 100644
+index 1e38273..7088f80 100644
 --- a/src/org/waveprotocol/wave/client/gadget/renderer/GadgetWidget.java
 +++ b/src/org/waveprotocol/wave/client/gadget/renderer/GadgetWidget.java
-@@ -906,6 +906,7 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
+@@ -906,7 +906,6 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
      String url = cleanUrl(metadata.getIframeUrl(view));
      if (url.equals(iframeUrl) && ((token == null) || token.isEmpty())) {
        log("Received metadata matches the cached information.");
-+      constructGadgetSizeFromMetadata(metadata, view, url);
+-      constructGadgetSizeFromMetadata(metadata, view, url);
        return;
      }
      // NOTE(user): Technically we should not save iframe URLs for gadgets with security tokens,
-@@ -921,6 +922,10 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
+@@ -922,10 +921,6 @@ public class GadgetWidget extends ObservableSupplementedWave.ListenerImpl
      if ("".equals(ui.getTitleLabelText()) && metadata.hasTitle()) {
        ui.setTitleLabelText(metadata.getTitle());
      }
-+    constructGadgetSizeFromMetadata(metadata, view, url);
-+  }
-+
-+  private void constructGadgetSizeFromMetadata(GadgetMetadata metadata, String view, String url) {
+-    constructGadgetSizeFromMetadata(metadata, view, url);
+-  }
+-
+-  private void constructGadgetSizeFromMetadata(GadgetMetadata metadata, String view, String url) {
      int height =
          (int) (metadata.hasHeight() ? metadata.getHeight() : metadata.getPreferredHeight(view));
      int width =
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/impl/edit/EditSession.java b/src/org/waveprotocol/wave/client/wavepanel/impl/edit/EditSession.java
+index b4f141b..a8a5b90 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/impl/edit/EditSession.java
++++ b/src/org/waveprotocol/wave/client/wavepanel/impl/edit/EditSession.java
+@@ -30,6 +30,7 @@ import org.waveprotocol.wave.client.editor.Editor;
+ import org.waveprotocol.wave.client.editor.EditorSettings;
+ import org.waveprotocol.wave.client.editor.Editors;
+ import org.waveprotocol.wave.client.editor.content.ContentDocument;
++import org.waveprotocol.wave.client.editor.content.misc.AnnotationPaint;
+ import org.waveprotocol.wave.client.editor.keys.KeyBindingRegistry;
+ import org.waveprotocol.wave.client.util.ClientFlags;
+ import org.waveprotocol.wave.client.wave.DocumentRegistry;
+@@ -92,7 +93,7 @@ public final class EditSession
+ 
+   public static EditSession install(ModelAsViewProvider views,
+       DocumentRegistry<? extends InteractiveDocument> documents,
+-      SelectionExtractor selectionExtractor, FocusFramePresenter focus, WavePanelImpl panel) {
++      SelectionExtractor selectionExtractor, FocusFramePresenter focus, WavePanelImpl panel, String localDomain) {
+     EditSession edit = new EditSession(views, documents, panel.getGwtPanel(), selectionExtractor);
+     focus.addListener(edit);
+     if (panel.hasContents()) {
+@@ -103,6 +104,7 @@ public final class EditSession
+     // Warms up the editor code (e.g., internal statics) by creating and throwing
+     // away an editor, in order to reduce the latency of starting the first edit
+     // session.
++    AnnotationPaint.init(localDomain);
+     Editors.create();
+ 
+     return edit;
 diff --git a/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/EditToolbar.java b/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/EditToolbar.java
-index 73a6cfc..b8d4428 100644
+index 3a470e0..b8d4428 100644
 --- a/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/EditToolbar.java
 +++ b/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/EditToolbar.java
-@@ -56,9 +56,11 @@ import org.waveprotocol.wave.client.widget.toolbar.buttons.ToolbarClickButton;
- import org.waveprotocol.wave.client.widget.toolbar.buttons.ToolbarToggleButton;
- import org.waveprotocol.wave.media.model.AttachmentIdGenerator;
- import org.waveprotocol.wave.media.model.AttachmentIdGeneratorImpl;
-+import org.waveprotocol.wave.model.document.util.DocHelper;
- import org.waveprotocol.wave.model.document.util.FocusedRange;
- import org.waveprotocol.wave.model.document.util.LineContainers;
- import org.waveprotocol.wave.model.document.util.Point;
-+import org.waveprotocol.wave.model.document.util.Range;
- import org.waveprotocol.wave.model.document.util.XmlStringBuilder;
- import org.waveprotocol.wave.model.id.IdGenerator;
- import org.waveprotocol.wave.model.id.WaveId;
-@@ -425,18 +427,27 @@ public class EditToolbar {
-                   Window.alert("Select some text to create a link.");
-                   return;
-                 }
--                String rawLinkValue =
--                    Window.prompt("Enter link: URL or Wave ID.", WaveRefConstants.WAVE_URI_PREFIX);
--                // user hit "ESC" or "cancel"
--                if (rawLinkValue == null) {
--                  return;
--                }
-                 try {
--                  String linkAnnotationValue = Link.normalizeLink(rawLinkValue);
-+                  // We try to create a link with the current selection, if fails, we ask for a link
-+                  Range rg = range.asRange();
-+                  String text = DocHelper.getText(editor.getDocument(), rg.getStart(), rg.getEnd());
-+                  String linkAnnotationValue = Link.normalizeLink(text);
-                   EditorAnnotationUtil.setAnnotationOverSelection(editor, Link.KEY,
+@@ -436,7 +436,7 @@ public class EditToolbar {
                        linkAnnotationValue);
                  } catch (InvalidLinkException e) {
--                  Window.alert(e.getLocalizedMessage());
-+                  String rawLinkValue =
+                   String rawLinkValue =
+-                      Window.prompt("Enter link: URL or Wave ID.", WaveRefConstants.WAVE_URI_PREFIX);
 +                      Window.prompt("Enter link: URL or Wave ID.", "http://");
-+                  // user hit "ESC" or "cancel"
-+                  if (rawLinkValue == null) {
-+                    return;
-+                  }
-+                  try {
-+                    String linkAnnotationValue = Link.normalizeLink(rawLinkValue);
-+                    EditorAnnotationUtil.setAnnotationOverSelection(editor, Link.KEY,
-+                        linkAnnotationValue);
-+                  } catch (InvalidLinkException e2) {
-+                    Window.alert(e2.getLocalizedMessage());
-+                  }
-                 }
-               }
-             });
+                   // user hit "ESC" or "cancel"
+                   if (rawLinkValue == null) {
+                     return;
 diff --git a/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/gadget/GadgetInfoWidget.ui.xml b/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/gadget/GadgetInfoWidget.ui.xml
 index c8b7a81..5f41486 100644
 --- a/src/org/waveprotocol/wave/client/wavepanel/impl/toolbar/gadget/GadgetInfoWidget.ui.xml
@@ -679,6 +816,35 @@ index c8b7a81..5f41486 100644
    <w:ImplPanel ui:field="self" styleName="{style.self}">
      <div class="{style.img}">
        <img ui:field="image"/>
+diff --git a/src/org/waveprotocol/wave/client/wavepanel/render/FullDomRenderer.java b/src/org/waveprotocol/wave/client/wavepanel/render/FullDomRenderer.java
+index 7bf5d6e..4b5aa25 100644
+--- a/src/org/waveprotocol/wave/client/wavepanel/render/FullDomRenderer.java
++++ b/src/org/waveprotocol/wave/client/wavepanel/render/FullDomRenderer.java
+@@ -24,6 +24,7 @@ import org.waveprotocol.wave.client.state.ThreadReadStateMonitor;
+ import org.waveprotocol.wave.client.uibuilder.HtmlClosure;
+ import org.waveprotocol.wave.client.uibuilder.HtmlClosureCollection;
+ import org.waveprotocol.wave.client.uibuilder.UiBuilder;
++import org.waveprotocol.wave.client.wavepanel.view.IntrinsicBlipMetaView;
+ import org.waveprotocol.wave.client.wavepanel.view.ViewIdMapper;
+ import org.waveprotocol.wave.client.wavepanel.view.dom.full.AnchorViewBuilder;
+ import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipMetaViewBuilder;
+@@ -48,6 +49,7 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
+ 
+ import java.util.Collections;
+ import java.util.Comparator;
++import java.util.EnumSet;
+ import java.util.List;
+ 
+ /**
+@@ -220,6 +222,8 @@ public final class FullDomRenderer implements RenderingRules<UiBuilder> {
+     };
+ 
+     BlipMetaViewBuilder metaUi = BlipMetaViewBuilder.create(viewIdMapper.metaOf(blip), document);
++    if (blip.isRoot())
++      metaUi.disable(BlipMetaViewBuilder.DELETE_MENU_OPTIONS_SET);
+     blipPopulator.render(blip, metaUi);
+ 
+     return BlipViewBuilder.create(viewIdMapper.blipOf(blip), metaUi, threadsUi, convsUi);
 diff --git a/src/org/waveprotocol/wave/client/wavepanel/view/dom/BlipMenuItemDomImpl.java b/src/org/waveprotocol/wave/client/wavepanel/view/dom/BlipMenuItemDomImpl.java
 index 4b97489..1507f83 100644
 --- a/src/org/waveprotocol/wave/client/wavepanel/view/dom/BlipMenuItemDomImpl.java
@@ -760,21 +926,24 @@ index 57294ec..72b1a86 100644
  
  .contentContainer, .replies, .privateReplies{word-wrap: break-word;}
 diff --git a/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/BlipMetaViewBuilder.java b/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/BlipMetaViewBuilder.java
-index 9ec4aaf..6ccc1d1 100644
+index 9ec4aaf..aaac5be 100644
 --- a/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/BlipMetaViewBuilder.java
 +++ b/src/org/waveprotocol/wave/client/wavepanel/view/dom/full/BlipMetaViewBuilder.java
-@@ -81,16 +81,26 @@ public final class BlipMetaViewBuilder implements UiBuilder, IntrinsicBlipMetaVi
+@@ -81,16 +81,27 @@ public final class BlipMetaViewBuilder implements UiBuilder, IntrinsicBlipMetaVi
    private final static Map<MenuOption, SafeHtml> MENU_LABELS =
        new EnumMap<MenuOption, SafeHtml>(MenuOption.class);
  
+-  private final static StringMap<MenuOption> MENU_OPTIONS = CollectionUtils.createStringMap();
 +  private final static Map<MenuOption, SafeHtml> MENU_ICONS =
 +      new EnumMap<MenuOption, SafeHtml>(MenuOption.class);
-+
-   private final static StringMap<MenuOption> MENU_OPTIONS = CollectionUtils.createStringMap();
  
++  private final static StringMap<MenuOption> MENU_OPTIONS = CollectionUtils.createStringMap();
++  public final static Set<MenuOption> DELETE_MENU_OPTIONS_SET = EnumSet.of(IntrinsicBlipMetaView.MenuOption.DELETE);
++  
    public static final String OPTION_ID_ATTRIBUTE = "o";
    public static final String OPTION_SELECTED_ATTRIBUTE = "s";
- 
+-
++  
    static {
 +    BlipIconResources.Css css = BlipIconResources.Loader.res.css();
 +    MENU_ICONS.put(MenuOption.EDIT, EscapeUtils.fromSafeConstant(css.edit()));
@@ -790,7 +959,7 @@ index 9ec4aaf..6ccc1d1 100644
      MENU_LABELS.put(MenuOption.EDIT, EscapeUtils.fromSafeConstant("Edit"));
      MENU_LABELS.put(MenuOption.REPLY, EscapeUtils.fromSafeConstant("Reply"));
      MENU_LABELS.put(MenuOption.DELETE, EscapeUtils.fromSafeConstant("Delete"));
-@@ -245,6 +255,7 @@ public final class BlipMetaViewBuilder implements UiBuilder, IntrinsicBlipMetaVi
+@@ -245,6 +256,7 @@ public final class BlipMetaViewBuilder implements UiBuilder, IntrinsicBlipMetaVi
            out.append(EscapeUtils.fromSafeConstant("|"));
            String style = selected.contains(option) //
                ? css.menuOption() + css.menuOptionSelected() : css.menuOption();

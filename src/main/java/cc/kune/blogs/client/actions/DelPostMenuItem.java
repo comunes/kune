@@ -21,14 +21,14 @@ package cc.kune.blogs.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.gspace.client.actions.DelContentMenuItem;
+import cc.kune.gspace.client.actions.DelContentForEditorsMenuItem;
 
 import com.google.inject.Inject;
 
-public class DelPostMenuItem extends DelContentMenuItem {
+public class DelPostMenuItem extends DelContentForEditorsMenuItem {
 
     @Inject
-    public DelPostMenuItem(final I18nTranslationService i18n, final DelContentAction action, final CoreResources res) {
+    public DelPostMenuItem(final I18nTranslationService i18n, final DelContentForEditorsAction action, final CoreResources res) {
         super(i18n, action, res);
     }
 }

@@ -19,8 +19,8 @@
  */
 package cc.kune.lists.client;
 
-import static cc.kune.lists.shared.ListsToolConstants.TOOL_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.ROOT_NAME;
+import static cc.kune.lists.shared.ListsToolConstants.TOOL_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_ROOT;

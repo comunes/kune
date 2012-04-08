@@ -335,6 +335,9 @@ Check also trunk/HOWTO_ADD_A_NEW_TOOL to instructions of how to add a new tool i
 
 == Google Wave ==
 
+Wave Client Development Environment Set Up (if you want to work only in the Apache Wave part):
+http://www.waveprotocol.org/code/client-development-environment-set-up
+
 David Hearnden recommendations of Wave code development (read in an informal Wave conversation):
 
 "Being written in Java, we strongly recommend following the principles outlined in Effective Java. On top of that, patterns that aid testability (dependency injection, etc) are quite important. But beyond that, I don't know if there are any other patterns or practices that would be universal across the whole thing. The web client and the server run in very different environments, so the appropriate patterns change (e.g., the client-only code doesn't have to worry about thread safety, but should worry about excessive short-lived object creation)."

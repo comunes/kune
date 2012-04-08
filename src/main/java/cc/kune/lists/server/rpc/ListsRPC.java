@@ -56,7 +56,7 @@ public class ListsRPC implements ListsService, RPC {
   }
 
   private String composeListName(final StateToken parentToken, final String listname) {
-    // FIXME In the future use tabs here
+    // FIXME In the future use tags here
     return parentToken.getGroup() + "-" + listname;
   }
 
@@ -65,9 +65,9 @@ public class ListsRPC implements ListsService, RPC {
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.container)
   @KuneTransactional
   public StateContainerDTO createList(final String userHash, final StateToken parentToken,
-      final String listaName, final String description, final boolean isPublic) {
+      final String listName, final String description, final boolean isPublic) {
     final StateContainerDTO result = contentRPC.addFolder(userHash, parentToken,
-        composeListName(parentToken, listaName), ListsToolConstants.TYPE_LIST);
+        composeListName(parentToken, listName), ListsToolConstants.TYPE_LIST);
     // Not public list, don't permit subscriptions neither view posts
     return contentRPC.getState(setContainerAcl(result.getStateToken(), isPublic));
   }

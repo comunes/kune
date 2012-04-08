@@ -26,16 +26,24 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class FileDownloadManagerUtils {
 
   public static final Log LOG = LogFactory.getLog(FileDownloadManagerUtils.class);
+
+  public static String getInpuStreamAsString(final InputStream iStream) throws IOException {
+    final StringWriter writer = new StringWriter();
+    IOUtils.copy(iStream, writer, "UTF-8");
+    return writer.toString();
+  }
 
   public static InputStream getInputStreamInResourceBases(final List<String> resourceBases,
       final String filename) {

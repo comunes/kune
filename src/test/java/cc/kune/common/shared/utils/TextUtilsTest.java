@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,19 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.docs.client.actions;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
-import cc.kune.gspace.client.actions.DelContainerForEditorsMenuItem;
+package cc.kune.common.shared.utils;
 
-import com.google.inject.Inject;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class DelFolderMenuItem extends DelContainerForEditorsMenuItem {
+import org.junit.Test;
 
-    @Inject
-    public DelFolderMenuItem(final I18nTranslationService i18n, final DelContainerForEditorAction action, final CoreResources res) {
-        super(i18n, action, res);
-    }
+public class TextUtilsTest {
 
+  private static final String DOMAIN_REGEXP = "^http([s]|)://localhost/.*";
+
+  @Test
+  public void testUrlDomain() {
+    assertTrue("http://localhost/kk".matches(DOMAIN_REGEXP));
+    assertTrue("https://localhost/kk".matches(DOMAIN_REGEXP));
+    assertFalse("http://localhost:9898/kk".matches(DOMAIN_REGEXP));
+    assertFalse("http://localhost".matches(DOMAIN_REGEXP));
+    assertFalse("ftp://localhost/kk".matches(DOMAIN_REGEXP));
+  }
 }

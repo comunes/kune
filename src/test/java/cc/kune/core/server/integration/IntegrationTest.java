@@ -59,7 +59,7 @@ public abstract class IntegrationTest {
 
   @After
   public void doLogout() throws DefaultException {
-    if (session.isUserLoggedIn()) {
+    if (session != null && session.isUserLoggedIn()) {
       session.logout();
     }
   }

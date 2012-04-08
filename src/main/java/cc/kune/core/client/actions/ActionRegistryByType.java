@@ -41,7 +41,6 @@ import com.google.inject.Provider;
  * 
  */
 public class ActionRegistryByType {
-  private static final String GENERIC_GROUP_ACTION = "kgengroup";
   private static final String GENERIC_TYPE_ID = "kgentype";
   private static final String KEY_SEPARATOR = "-";
 
@@ -56,10 +55,6 @@ public class ActionRegistryByType {
     descrip.setTarget(targetItem);
     collection.add(descrip);
   }
-
-  // public void addAction(final Provider<? extends GuiActionDescrip> action) {
-  // addAction(GENERIC_GROUP_ACTION, action, GENERIC_TYPE_ID);
-  // }
 
   public void addAction(@Nonnull final String tool, final String actionsGroupId,
       final GuiActionDescrip descrip, final String typeId) {
@@ -127,6 +122,8 @@ public class ActionRegistryByType {
       final GuiActionDescrip descrip = descripProv.get();
       final AbstractAction action = descrip.getAction();
       if (action instanceof RolAction) {
+        // Log.debug("Must add action?: " + action + ", isLogged: " + isLogged +
+        // ", r: " + rights);
         if (mustAdd((RolAction) action, isLogged, rights)) {
           add(collection, descrip, targetItem);
         }

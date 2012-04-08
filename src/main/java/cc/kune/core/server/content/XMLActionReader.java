@@ -21,10 +21,8 @@ package cc.kune.core.server.content;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.box.server.CoreSettings;
@@ -48,9 +46,7 @@ public class XMLActionReader {
     try {
       final InputStream iStream = FileDownloadManagerUtils.getInputStreamInResourceBases(resourceBases,
           XMLActionsConstants.ACTIONS_XML_LOCATION_PATH_ABS);
-      final StringWriter writer = new StringWriter();
-      IOUtils.copy(iStream, writer, "UTF-8");
-      final String xml = writer.toString();
+      final String xml = FileDownloadManagerUtils.getInpuStreamAsString(iStream);
       actions = new XMLKuneClientActions(new ServicesTester(), xml);
     } catch (final IOException e) {
       LOG.error("Error reading extension actions", e);

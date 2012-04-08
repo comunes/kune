@@ -7,7 +7,8 @@
   <!-- <entry-point class='cc.kune.msgs.client.KuneMessagesSampleEntryPoint' 
     /> -->
   <!-- Specify the paths for translatable code -->
-  <source path="shared"/>
+  <source path="shared"
+    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
   <public path="public"/>

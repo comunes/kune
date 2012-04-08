@@ -74,20 +74,20 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     doLogin();
     createTestWave(new SimpleArgCallback<WaveRef>() {
       @Override
-      public void onCallback(final WaveRef waveletName) {
-        assertNotNull(waveletName);
-        manager.addParticipants(waveletName, getSiteAdminShortName(), NEW_PARTICIPANT);
+      public void onCallback(final WaveRef waveRef) {
+        assertNotNull(waveRef);
+        manager.addParticipants(waveRef, getSiteAdminShortName(), NEW_PARTICIPANT);
 
-        final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+        final Wavelet fetchWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         assertNotNull(fetchWavelet);
         assertEquals(2, fetchWavelet.getParticipants().size());
         assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
         assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
         // Del all
-        manager.delParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName());
+        manager.delParticipants(waveRef, getSiteAdminShortName(), getSiteAdminShortName());
         // This fails because we don't have a way to access to than wave now ...
         // @domain don't work neither
-        final Wavelet fetchedAfterDeleted = manager.fetchWave(waveletName, "");
+        final Wavelet fetchedAfterDeleted = manager.fetchWave(waveRef, "");
         assertNotNull(fetchedAfterDeleted);
       }
     });
@@ -98,21 +98,21 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     doLogin();
     createTestWave(new SimpleArgCallback<WaveRef>() {
       @Override
-      public void onCallback(final WaveRef waveletName) {
-        assertNotNull(waveletName);
-        manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+      public void onCallback(final WaveRef waveRef) {
+        assertNotNull(waveRef);
+        manager.addParticipants(waveRef, getSiteAdminShortName(), getSiteAdminShortName(),
             NEW_PARTICIPANT);
-        manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        manager.addParticipants(waveRef, getSiteAdminShortName(), getSiteAdminShortName(),
             NEW_PARTICIPANT, NEW_PARTICIPANT);
-        manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        manager.addParticipants(waveRef, getSiteAdminShortName(), getSiteAdminShortName(),
             NEW_PARTICIPANT, NEW_PARTICIPANT, NEW_PARTICIPANT);
-        final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+        final Wavelet fetchWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         assertNotNull(fetchWavelet);
         assertEquals(2, fetchWavelet.getParticipants().size());
         assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
         assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
         // Del main editor
-        manager.delParticipants(waveletName, getSiteAdminShortName(), NEW_PARTICIPANT, NEW_PARTICIPANT,
+        manager.delParticipants(waveRef, getSiteAdminShortName(), NEW_PARTICIPANT, NEW_PARTICIPANT,
             getSiteAdminShortName(), getSiteAdminShortName());
       }
     });
@@ -124,27 +124,27 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     final String whoDels = getSiteAdminShortName();
     createTestWave(new SimpleArgCallback<WaveRef>() {
       @Override
-      public void onCallback(final WaveRef waveletName) {
-        assertNotNull(waveletName);
-        manager.addParticipants(waveletName, getSiteAdminShortName(), whoDels, NEW_PARTICIPANT,
+      public void onCallback(final WaveRef waveRef) {
+        assertNotNull(waveRef);
+        manager.addParticipants(waveRef, getSiteAdminShortName(), whoDels, NEW_PARTICIPANT,
             NEW_PARTICIPANT2);
-        final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+        final Wavelet fetchWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         assertNotNull(fetchWavelet);
         assertEquals(3, fetchWavelet.getParticipants().size());
         assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
         assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT2));
         assertTrue(manager.isParticipant(fetchWavelet, getSiteAdminShortName()));
-        manager.delParticipants(waveletName, whoDels, NEW_PARTICIPANT, NEW_PARTICIPANT2);
-        final Wavelet fetchDelWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+        manager.delParticipants(waveRef, whoDels, NEW_PARTICIPANT, NEW_PARTICIPANT2);
+        final Wavelet fetchDelWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         assertNotNull(fetchDelWavelet);
         assertEquals(1, fetchDelWavelet.getParticipants().size());
         assertTrue(manager.isParticipant(fetchDelWavelet, getSiteAdminShortName()));
         assertFalse(manager.isParticipant(fetchDelWavelet, NEW_PARTICIPANT));
         assertFalse(manager.isParticipant(fetchDelWavelet, NEW_PARTICIPANT2));
-        manager.addParticipants(waveletName, getSiteAdminShortName(), getSiteAdminShortName(),
+        manager.addParticipants(waveRef, getSiteAdminShortName(), getSiteAdminShortName(),
             NEW_PARTICIPANT);
         // Del all (the last, the whoDels...)
-        manager.delParticipants(waveletName, whoDels, NEW_PARTICIPANT, getSiteAdminShortName());
+        manager.delParticipants(waveRef, whoDels, NEW_PARTICIPANT, getSiteAdminShortName());
       }
     });
   }
@@ -168,10 +168,10 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     final URL gadgetUrl = new URL(TEST_GADGET);
     createTestWave(new SimpleArgCallback<WaveRef>() {
       @Override
-      public void onCallback(final WaveRef waveletName) {
-        assertNotNull(waveletName);
-        manager.addGadget(waveletName, getSiteAdminShortName(), gadgetUrl);
-        final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+      public void onCallback(final WaveRef waveRef) {
+        assertNotNull(waveRef);
+        manager.addGadget(waveRef, getSiteAdminShortName(), gadgetUrl);
+        final Wavelet fetchWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         final Gadget gadget = getFirstGadget(fetchWavelet, TEST_GADGET);
         assertEquals(gadget.getUrl(), TEST_GADGET);
         assertEquals(2, gadget.getProperties().size());
@@ -185,8 +185,8 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
         }
         // Removing some property
         newProps.put(SOME_PROPERTY, null);
-        manager.setGadgetProperty(waveletName, getSiteAdminShortName(), gadgetUrl, newProps);
-        final Wavelet updatedWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+        manager.setGadgetProperty(waveRef, getSiteAdminShortName(), gadgetUrl, newProps);
+        final Wavelet updatedWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         final Gadget gadgetUpdated = getFirstGadget(updatedWavelet, TEST_GADGET);
         assertEquals(gadgetUpdated.getUrl(), TEST_GADGET);
         assertEquals(3, updatedWavelet.getRootBlip().getElements().size());
@@ -215,10 +215,10 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     doLogin();
     createTestWave(new SimpleArgCallback<WaveRef>() {
       @Override
-      public void onCallback(final WaveRef waveletName) {
-        assertNotNull(waveletName);
-        manager.addParticipants(waveletName, getSiteAdminShortName(), whoAdds, NEW_PARTICIPANT);
-        final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+      public void onCallback(final WaveRef waveRef) {
+        assertNotNull(waveRef);
+        manager.addParticipants(waveRef, getSiteAdminShortName(), whoAdds, NEW_PARTICIPANT);
+        final Wavelet fetchWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         assertNotNull(fetchWavelet);
         assertEquals(2, fetchWavelet.getParticipants().size());
         assertTrue(manager.isParticipant(fetchWavelet, NEW_PARTICIPANT));
@@ -247,9 +247,9 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     doLogin();
     manager.createWave(RICHTEXT_MESSAGE, new SimpleArgCallback<WaveRef>() {
       @Override
-      public void onCallback(final WaveRef waveletName) {
-        assertNotNull(waveletName);
-        final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+      public void onCallback(final WaveRef waveRef) {
+        assertNotNull(waveRef);
+        final Wavelet fetchWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         assertNotNull(fetchWavelet);
         assertTrue(fetchWavelet.getRootBlip().getAnnotations().size() > 0);
         assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
@@ -276,9 +276,9 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     doLogin();
     createTestWave(new SimpleArgCallback<WaveRef>() {
       @Override
-      public void onCallback(final WaveRef waveletName) {
-        assertNotNull(waveletName);
-        final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+      public void onCallback(final WaveRef waveRef) {
+        assertNotNull(waveRef);
+        final Wavelet fetchWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         assertNotNull(fetchWavelet);
         assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
         assertEquals(TITLE, fetchWavelet.getTitle());
@@ -319,10 +319,10 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
     doLogin();
     createTestWave(new SimpleArgCallback<WaveRef>() {
       @Override
-      public void onCallback(final WaveRef waveletName) {
-        assertNotNull(waveletName);
-        manager.setTitle(waveletName, TITLENEW, getSiteAdminShortName());
-        final Wavelet fetchWavelet = manager.fetchWave(waveletName, getSiteAdminShortName());
+      public void onCallback(final WaveRef waveRef) {
+        assertNotNull(waveRef);
+        manager.setTitle(waveRef, TITLENEW, getSiteAdminShortName());
+        final Wavelet fetchWavelet = manager.fetchWave(waveRef, getSiteAdminShortName());
         assertNotNull(fetchWavelet);
         assertTrue(fetchWavelet.getRootBlip().getContent().contains(MESSAGE));
         assertEquals(TITLENEW, fetchWavelet.getTitle());

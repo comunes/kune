@@ -22,8 +22,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
-    <wiab.version>0.3.14</wiab.version>
-    <jetty.version>8.0.1.v20110908</jetty.version>
+    <wiab.version>0.3.15</wiab.version>
+    <jetty.version>8.1.1.v20120215</jetty.version>
     <skipTests>true</skipTests>
   </properties>
   <repositories>
@@ -429,6 +429,12 @@
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
       <version>1.1</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>servlet-api</artifactId>
+          <groupId>javax.servlet</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>commons-fileupload</groupId>
@@ -446,14 +452,13 @@
       <artifactId>liquibase-plugin</artifactId>
       <version>1.8.1.0</version>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <!-- http://stackoverflow.com/questions/1370414/how-to-add-the-servlet-api-to-my-pom-xml -->
-      <version>2.5</version>
-      <!-- <version>3.0-${wiab.version}</version> -->
-      <scope>provided</scope>
-    </dependency>
+<!--     <dependency> -->
+<!--       <groupId>javax.servlet</groupId> -->
+<!--       <artifactId>servlet-api</artifactId> -->
+<!--       http://stackoverflow.com/questions/1370414/how-to-add-the-servlet-api-to-my-pom-xml -->
+<!--       <version>3.0-${wiab.version}</version> -->
+<!--       <scope>provided</scope> -->
+<!--     </dependency> -->
     <!-- testing dependencies -->
     <dependency>
       <groupId>org.jukito</groupId>
@@ -713,6 +718,12 @@
       <artifactId>gwtrpccommlayer</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
+  <!-- jetty -->
+  <!-- <dependency> -->
+  <!-- <groupId>org.eclipse.jetty</groupId> -->
+  <!-- <artifactId>jetty-continuation</artifactId> -->
+  <!-- <version>${jetty.version}</version> -->
+  <!-- </dependency> -->
   </dependencies>
   <distributionManagement>
     <repository>

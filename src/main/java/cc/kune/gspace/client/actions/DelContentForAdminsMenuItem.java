@@ -25,34 +25,33 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.inject.Inject;
 
-public class DelContainerMenuItem extends MenuItemDescriptor {
+public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
-  public static class DelContainerAction extends RolAction {
+  public static class DelContentForAdminsAction extends RolAction {
 
     private final ContentServiceHelper contentService;
 
     @Inject
-    public DelContainerAction(final ContentServiceHelper contentService) {
-      super(AccessRolDTO.Editor, true);
+    public DelContentForAdminsAction(final ContentServiceHelper contentService) {
+      super(AccessRolDTO.Administrator, true);
       this.contentService = contentService;
+
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      final StateToken token = ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
-      contentService.delContent(token);
+      contentService.delContent(((AbstractContentSimpleDTO) event.getTarget()).getStateToken());
     }
 
   }
 
-  public DelContainerMenuItem(final I18nTranslationService i18n, final DelContainerAction action,
-      final CoreResources res) {
+  public DelContentForAdminsMenuItem(final I18nTranslationService i18n,
+      final DelContentForAdminsAction action, final CoreResources res) {
     super(action);
     this.withText(i18n.t("Delete")).withIcon(res.cancel());
   }

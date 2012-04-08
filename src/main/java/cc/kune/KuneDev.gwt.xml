@@ -20,10 +20,10 @@
   <set-property-fallback name="locale" value="en"/>
   <set-property name="locale" value="en"/>
 
-  <!-- Hardcoded log level ====================================== -->
+  <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave -->
-  <!-- <set-property name="loglevel" value="none"/> -->
-  <set-property name="loglevel" value="debug"/>
+  <set-property name="loglevel" value="none"/>
+  <!-- <set-property name="loglevel" value="debug"/> -->
 
   <!-- Debugging ================================================ -->
   <!-- for add ensureDebugIds (debugId in UIBinder), remove/comment in production 

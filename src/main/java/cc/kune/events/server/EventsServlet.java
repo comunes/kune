@@ -109,7 +109,6 @@ public class EventsServlet extends HttpServlet {
       final OutputStream out = resp.getOutputStream();
       final CalendarOutputter outputter = new CalendarOutputter();
       outputter.output(calendar, out);
-
     } catch (final ContentNotFoundException e) {
       return404(resp);
       return;

@@ -21,9 +21,11 @@ package cc.kune.core.server.state;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
@@ -107,12 +109,13 @@ public class StateServiceDefault implements StateService {
     final char[] text = revision.getBody();
     final String textBody = text == null ? null : new String(text);
     if (content.isWave()) {
-      final String waveId = content.getWaveId();
-      state.setWaveRef(waveId);
+      final String waveRef = content.getWaveId();
+      state.setWaveRef(waveRef);
       try {
         // FIXME if we remove the authors this fails...
         final Wavelet wavelet = kuneWaveService.fetchWave(
-            JavaWaverefEncoder.decodeWaveRefFromPath(waveId), content.getAuthors().get(0).getShortName());
+            JavaWaverefEncoder.decodeWaveRefFromPath(waveRef),
+            content.getAuthors().get(0).getShortName());
         // final String currentContent = wavelet.getRootBlip().getContent();
 
         state.setContent(renderedWaves.getOrRender(wavelet));
@@ -126,12 +129,18 @@ public class StateServiceDefault implements StateService {
         state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveService.isParticipant(wavelet,
             userLogged.getShortName()) : false);
       } catch (final Exception e) {
-        LOG.error("Error accessing wave " + waveId, e);
+        LOG.error("Error accessing wave " + waveRef, e);
+        String waveUrl = null;
+        try {
+          waveUrl = TextUtils.generateHtmlLink(
+              JavaWaverefEncoder.encodeToUriPathSegment(JavaWaverefEncoder.decodeWaveRefFromPath(waveRef)),
+              waveRef, false);
+        } catch (final InvalidWaveRefException invalidEx) {
+        }
         state.setContent(i18n.t("Error accessing this document. "
             + "Please contact the administrators providing this reference ([%s]) "
-            + "and any other relevant info.", waveId));
+            + "and any other relevant info.", (waveUrl == null ? waveRef : waveUrl)));
         state.setTitle(revision.getTitle());
-        // throw new DefaultException("Error retriving Wave");
       }
     } else {
       state.setContent(textBody);

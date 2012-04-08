@@ -20,8 +20,8 @@
   <set-property-fallback name="locale" value="en"/>
   <set-property name="locale" value="en,es,fr,ca,it"/>
 
-  <!-- Hardcoded log level ====================================== -->
-  <!-- Turn off logging in wave -->
+  <!-- Webclient log level ====================================== -->
+  <!-- Turn off logging in wave, because it's really slow. -->
   <!-- <set-property name="loglevel" value="debug" /> -->
   <set-property name="loglevel" value="none"/>
   

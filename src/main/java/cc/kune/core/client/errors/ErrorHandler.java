@@ -154,6 +154,7 @@ public class ErrorHandler {
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t(TextUtils.IN_DEVELOPMENT)));
     } else {
       logException(caught, true);
+      // FIXME: Remore "with our servers"
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
           i18n.t("Oops! Something has gone wrong with our servers. Retry later, please.")));
       final String error = "Other kind of exception received in ErrorHandler (" + caught.getMessage()

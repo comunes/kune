@@ -45,9 +45,9 @@ public class UserSessionManager implements UsersOnline {
     this.manager = manager;
     this.userSessionProv = userSessionProv;
     final HashSessionManager hSessionManager = (HashSessionManager) jettySessionManager;
-    hSessionManager.setMaxInactiveInterval(-1);
+    // hSessionManager.setMaxInactiveInterval(-1);
     // this prevent saving the session??
-    hSessionManager.setUsingCookies(true);
+    // hSessionManager.setUsingCookies(true);
     hSessionManager.setSavePeriod(5);
     // For now the implementation of this can be very inaccurate (if we
     // login/logout several times with different clients) and not scalable

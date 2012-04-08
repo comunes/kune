@@ -19,8 +19,8 @@
  */
 package cc.kune.events.server;
 
-import static cc.kune.events.shared.EventsToolConstants.TOOL_NAME;
 import static cc.kune.events.shared.EventsToolConstants.ROOT_NAME;
+import static cc.kune.events.shared.EventsToolConstants.TOOL_NAME;
 import static cc.kune.events.shared.EventsToolConstants.TYPE_MEETING;
 import static cc.kune.events.shared.EventsToolConstants.TYPE_ROOT;
 
@@ -95,6 +95,7 @@ public class EventsServerTool extends AbstractServerTool implements ServerWaveTo
     meetsAcl.getAdmins().setMode(GroupListMode.NORMAL);
     meetsAcl.getAdmins().add(container.getOwner());
     meetsAcl.getEditors().setMode(GroupListMode.NORMAL);
+    meetsAcl.getEditors().add(container.getOwner());
     meetsAcl.getViewers().setMode(GroupListMode.EVERYONE);
     setAccessList(container, meetsAcl);
   }

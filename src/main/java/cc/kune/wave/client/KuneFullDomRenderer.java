@@ -233,6 +233,8 @@ public final class KuneFullDomRenderer implements RenderingRules<UiBuilder> {
     };
 
     BlipMetaViewBuilder metaUi = BlipMetaViewBuilder.create(viewIdMapper.metaOf(blip), document);
+    if (blip.isRoot())
+      metaUi.disable(BlipMetaViewBuilder.DELETE_MENU_OPTIONS_SET);
     blipPopulator.render(blip, metaUi);
 
     return BlipViewBuilder.create(viewIdMapper.blipOf(blip), metaUi, threadsUi, convsUi);
