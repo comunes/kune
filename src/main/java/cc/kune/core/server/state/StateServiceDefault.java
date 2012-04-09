@@ -133,7 +133,8 @@ public class StateServiceDefault implements StateService {
         String waveUrl = null;
         try {
           waveUrl = TextUtils.generateHtmlLink(
-              JavaWaverefEncoder.encodeToUriPathSegment(JavaWaverefEncoder.decodeWaveRefFromPath(waveRef)),
+              "#"
+                  + JavaWaverefEncoder.encodeToUriPathSegment(JavaWaverefEncoder.decodeWaveRefFromPath(waveRef)),
               waveRef, false);
         } catch (final InvalidWaveRefException invalidEx) {
         }

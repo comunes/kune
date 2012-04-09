@@ -51,34 +51,46 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
       final String userHash = arguments[0] == null || arguments[0].equals("null") ? null
           : (String) arguments[0];
 
-      LOG.info("Method: " + invocation.getMethod().getName());
+      final String method = invocation.getMethod().getName();
+      logLine(method, userHash, true);
+      LOG.info("Method: " + method);
       LOG.info("Userhash received: " + userHash);
-      LOG.info("--------------------------------------------------------------------------------");
 
       final Authenticated authAnnotation = invocation.getStaticPart().getAnnotation(Authenticated.class);
       final boolean mandatory = authAnnotation.mandatory();
 
       if (userHash == null && mandatory) {
+        LOG.info("Not logged in server and mandatory");
+        logLine(method, userHash, false);
         throw new UserMustBeLoggedException();
       } else if (userSessionManager.isUserNotLoggedIn() && mandatory) {
         LOG.info("Session expired (not logged in server and mandatory)");
+        logLine(method, userHash, false);
         throw new SessionExpiredException();
       } else if (userSessionManager.isUserNotLoggedIn() && userHash == null) {
         // Ok, do nothing
       } else if (userSessionManager.isUserNotLoggedIn() && userHash != null) {
         LOG.info("Session expired (not logged in server)");
+        logLine(method, userHash, false);
         throw new SessionExpiredException();
       } else if (!userSessionManager.getHash().equals(userHash)) {
         final String serverHash = userSessionManager.getHash();
         userSessionManager.logout();
         LOG.info("Session expired (userHash: " + userHash + " different from server hash: " + serverHash
             + ")");
+        logLine(method, userHash, false);
         throw new SessionExpiredException();
       }
       final Object result = invocation.proceed();
+      logLine(method, userHash, false);
       return result;
     } finally {
     }
+  }
+
+  private void logLine(final String method, final String userHash, final boolean start) {
+    LOG.info(new StringBuffer().append("----- ").append(start ? "Starting" : "Ending").append(
+        " method: ").append(method).append("- userhash: ").append(userHash).append(" -----"));
   }
 
 }

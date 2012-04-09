@@ -12,6 +12,22 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
+** Session expired
+12-04-09 00:14:29 GWTServiceFilter [INFO] --------------------------------------------------------------------------------
+2012-04-09 00:14:29 GWTServiceFilter [DEBUG] SERVICE: /ws/UserService - UserService
+2012-04-09 00:14:29 AuthenticatedMethodInterceptor [INFO] Method: onlyCheckSession
+2012-04-09 00:14:29 AuthenticatedMethodInterceptor [INFO] Userhash received: null
+--------------------------------
+2012-04-09 00:14:24 AuthenticatedMethodInterceptor [INFO] Session expired (not logged in server)
+2012-04-09 00:14:25 RackServletFilter [DEBUG] REQUEST: /ws/ContentService
+2012-04-09 00:14:25 LogFilter [DEBUG] REQUEST: /ws/ContentService
+2012-04-09 00:14:25 GWTServiceFilter [INFO] --------------------------------------------------------------------------------
+------------------
+2012-04-09 00:14:34 GWTServiceFilter [DEBUG] SERVICE: /ws/UserService - UserService
+2012-04-09 00:14:34 AuthenticatedMethodInterceptor [INFO] Method: onlyCheckSession
+2012-04-09 00:14:34 AuthenticatedMethodInterceptor [INFO] Userhash received: null
+2012-04-09 00:14:34 AuthenticatedMethodInterceptor [INFO] --------------------------------------------------------------------------------
+
 ** Permission tables
 
 |---------------------------+-------------+--------------|
@@ -61,7 +77,6 @@ Groups and subgroups
 | New doc    |        |         |         |           |
 | New folder |        |         |         |           |
 |------------+--------+---------+---------+-----------|
-
 
 ** setui/root/port 80
    [ ] http://wiki.eclipse.org/Jetty/Howto/Port80#Configuring_Jetty.27s_SetUID_Feature

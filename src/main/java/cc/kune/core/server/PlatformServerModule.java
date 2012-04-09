@@ -188,7 +188,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(EntityLogoUploadManager.class).in(Singleton.class);
     bind(EntityLogoDownloadManager.class).in(Singleton.class);
     bind(ParticipantUtils.class).in(Singleton.class);
-    bind(UsersOnline.class).to(UserSessionManager.class).in(Singleton.class);
+    bind(UsersOnline.class).to(UserSessionManager.class).asEagerSingleton();
     requestStaticInjection(AccessRightsUtils.class);
     bind(WaveEmailNotifier.class).in(Singleton.class);
     bind(PendingNotificationSender.class).in(Singleton.class);

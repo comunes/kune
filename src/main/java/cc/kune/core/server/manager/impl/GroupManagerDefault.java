@@ -284,6 +284,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     final SocialNetwork network = setSocialNetwork(group, publicVisibility, snVisibility);
     if (!group.getGroupType().equals(GroupType.ORPHANED_PROJECT)) {
       network.addAdmin(userGroup);
+      network.getAccessLists().getEditors().setMode(GroupListMode.NOBODY);
     }
   }
 
@@ -346,7 +347,6 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       final SocialNetworkVisibility snVisibility) {
     final SocialNetwork network = group.getSocialNetwork();
     final AccessLists lists = network.getAccessLists();
-    lists.getEditors().setMode(GroupListMode.NOBODY);
     lists.getViewers().setMode(publicVisibility);
     network.setVisibility(snVisibility);
     return network;

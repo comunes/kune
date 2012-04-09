@@ -22,6 +22,9 @@ package cc.kune.core.server;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.eclipse.jetty.server.SessionManager;
 import org.eclipse.jetty.server.session.HashSessionManager;
 
 import cc.kune.core.server.manager.UserManager;
@@ -32,8 +35,11 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+@LogThis
 @Singleton
 public class UserSessionManager implements UsersOnline {
+
+  public static final Log LOG = LogFactory.getLog(UserSessionManager.class);
 
   private final Set<String> logins;
   private final UserManager manager;
@@ -41,14 +47,17 @@ public class UserSessionManager implements UsersOnline {
 
   @Inject
   public UserSessionManager(final UserManager manager, final Provider<UserSession> userSessionProv,
-      final org.eclipse.jetty.server.SessionManager jettySessionManager) {
+      final SessionManager jettySessionManager, final UserSessionMonitor userSessionMonitor) {
     this.manager = manager;
     this.userSessionProv = userSessionProv;
     final HashSessionManager hSessionManager = (HashSessionManager) jettySessionManager;
-    // hSessionManager.setMaxInactiveInterval(-1);
+    hSessionManager.setMaxInactiveInterval(-1);
+    hSessionManager.setSavePeriod(5);
+    hSessionManager.addEventListener(userSessionMonitor);
+    LOG.debug(String.format("User sessions: %d", hSessionManager.getSessions()));
+    LOG.debug(String.format("User sessions total: %d", hSessionManager.getSessionsTotal()));
     // this prevent saving the session??
     // hSessionManager.setUsingCookies(true);
-    hSessionManager.setSavePeriod(5);
     // For now the implementation of this can be very inaccurate (if we
     // login/logout several times with different clients) and not scalable
     // (stored in a MAP). Possible fix, to use jabber status
@@ -100,7 +109,6 @@ public class UserSessionManager implements UsersOnline {
       logins.remove(getUserLoggedShortName());
     }
     getUserSession().setUserId(null);
-    getUserSession().setUserName(null);
     getUserSession().setHash(null);
   }
 
