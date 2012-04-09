@@ -48,19 +48,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8253692"
-     inkscape:cx="126.03787"
-     inkscape:cy="1271.6673"
+     inkscape:zoom="1.0263357"
+     inkscape:cx="298.74718"
+     inkscape:cy="1214.2666"
      inkscape:document-units="px"
-     inkscape:current-layer="g20936"
+     inkscape:current-layer="layer6"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
-     inkscape:window-width="1078"
-     inkscape:window-height="919"
+     inkscape:window-width="1280"
+     inkscape:window-height="776"
      inkscape:window-x="0"
      inkscape:window-y="24"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="1" />
   <defs
      id="defs4">
     <marker
@@ -1834,9 +1834,55 @@
        id="path3005"
        style="color:#000000;fill:none;stroke:#231f20;stroke-width:1.2205478;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        sodipodi:type="arc" />
+    <g
+       id="g16566">
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#231f20"
+         d="m 505.19825,162.77235 0,50.0359 50,0 0,-34.41493 -4.58984,-4.58866 c 0.91075,1.85972 1.41601,3.94051 1.41601,6.15076 0,3.30067 -1.11925,6.34197 -3.02734,8.73797 -0.005,5.02762 -0.0487,17.86648 -0.0487,17.86648 l -37.5,0 c 0,0 0,-33.50814 0,-37.63676 l 17.87109,0 c 2.3881,-1.88173 5.41475,-2.97775 8.69141,-2.97775 2.22654,0 4.33103,0.49292 6.20117,1.41565 l -4.58984,-4.58866 -34.42383,0 z"
+         id="path16505" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#231f20"
+         d="m 545.43262,183.26081 -5.34687,-5.35174 0,-5.72821 -6.28594,0 c 0,6.00689 0,7.04037 0,7.04037 0,0.94038 0.43281,1.75267 1.08594,2.33221 l 6.12812,6.12654 z"
+         id="path16507"
+         sodipodi:nodetypes="ccccsccc" />
+      <path
+         transform="matrix(5.1206514,0,0,5.1193287,442.04803,71.008174)"
+         d="m 21.480664,21.282667 a 2.7403326,2.7403326 0 1 1 -5.480665,0 2.7403326,2.7403326 0 1 1 5.480665,0 z"
+         sodipodi:ry="2.7403326"
+         sodipodi:rx="2.7403326"
+         sodipodi:cy="21.282667"
+         sodipodi:cx="18.740332"
+         id="path16509"
+         style="color:#000000;fill:none;stroke:#231f20;stroke-width:1.2205478;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <path
+       transform="matrix(1.9422895,0,0,1.9545274,470.35448,138.41877)"
+       d="m 34,30 a 8,8 0 1 1 -16,0 8,8 0 1 1 16,0 z"
+       sodipodi:ry="8"
+       sodipodi:rx="8"
+       sodipodi:cy="30"
+       sodipodi:cx="26"
+       id="path16591"
+       style="color:#000000;fill:#99bb00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.20000005;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path16593"
+       d="m 520.57662,190.80049 c 0,12.13607 0,12.50859 0,12.50859"
+       style="fill:none;stroke:#ffffff;stroke-width:6.23487616;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:6.235;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 514.36148,197.05478 c 12.06009,0 12.43026,0 12.43026,0"
+       id="path16595"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
   <g
-     style="display:none"
+     style="display:inline"
      inkscape:label="es"
      id="layer7"
      inkscape:groupmode="layer">
@@ -2108,138 +2154,6 @@
          y="184.92917"
          x="207.5244"
          sodipodi:role="line">explained</tspan></text>
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="g20936"
-     inkscape:label="en-working"
-     style="display:none">
-    <text
-       xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="207.26842"
-       y="166.0929"
-       id="text20938"
-       sodipodi:linespacing="125%"
-       transform="scale(0.99912117,1.0008796)"><tspan
-         sodipodi:role="line"
-         x="207.26842"
-         y="166.0929"
-         style="font-size:32px;font-weight:bold;fill:#aa4400"
-         id="tspan20940">blogs</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="149.85907"
-       y="-168.92439"
-       id="text20942"
-       sodipodi:linespacing="125%"
-       transform="translate(0,435.82679)"><tspan
-         y="-168.92439"
-         x="149.85907"
-         id="tspan20944"
-         sodipodi:role="line"
-         style="font-style:italic">click to continue</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text20946"
-       y="409.18921"
-       x="134.0341"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       xml:space="preserve"><tspan
-         id="tspan20948"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="409.18921"
-         x="134.0341"
-         sodipodi:role="line">Sorry, we are</tspan><tspan
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="424.18921"
-         x="134.0341"
-         sodipodi:role="line"
-         id="tspan20950">still designing </tspan><tspan
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="439.18921"
-         x="134.0341"
-         sodipodi:role="line"
-         id="tspan20952">this tutorial.</tspan><tspan
-         id="tspan20954"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="454.18921"
-         x="134.0341"
-         sodipodi:role="line">Meanwhile...</tspan><tspan
-         id="tspan20956"
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="469.18921"
-         x="134.0341"
-         sodipodi:role="line" /></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text20958"
-       y="650.30011"
-       x="181.83585"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       xml:space="preserve"><tspan
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="650.30011"
-         x="181.83585"
-         sodipodi:role="line"
-         id="tspan20960" /><tspan
-         style="font-size:12px;font-weight:normal;fill:#aa4400"
-         y="665.30011"
-         x="181.83585"
-         sodipodi:role="line"
-         id="tspan20962">...give us your <tspan
-   id="tspan20964"
-   style="font-weight:bold">feedback </tspan></tspan><tspan
-         id="tspan20966"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="680.30011"
-         x="181.83585"
-         sodipodi:role="line">and participate</tspan><tspan
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="695.30011"
-         x="181.83585"
-         sodipodi:role="line"
-         id="tspan20968">to improve this tool...</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="154.17371"
-       y="566.2572"
-       id="text20970"
-       sodipodi:linespacing="125%"><tspan
-         id="tspan20972"
-         sodipodi:role="line"
-         x="154.17371"
-         y="566.2572"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">...here you can create</tspan><tspan
-         id="tspan20974"
-         sodipodi:role="line"
-         x="154.17371"
-         y="581.2572"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">your new <tspan
-   style="font-weight:bold"
-   id="tspan20976">blogs</tspan> and</tspan><tspan
-         sodipodi:role="line"
-         x="154.17371"
-         y="596.2572"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan20978"><tspan
-   style="font-weight:bold"
-   id="tspan20980">posts</tspan>...</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="207.5244"
-       y="184.92917"
-       id="text20982"
-       sodipodi:linespacing="125%"
-       transform="scale(0.99912117,1.0008796)"><tspan
-         sodipodi:role="line"
-         x="207.5244"
-         y="184.92917"
-         style="font-size:16px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan20984">explained</tspan></text>
   </g>
   <g
      style="display:none"
