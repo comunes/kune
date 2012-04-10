@@ -25,7 +25,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5869046"
+     inkscape:zoom="1.6809434"
      inkscape:cx="243.10117"
      inkscape:cy="1308.5714"
      inkscape:document-units="px"
@@ -49,13 +49,13 @@
   </script>
   <script
      id="kunelang"
-     xlink:href="lang.js" />
+     xlink:href="/home/vjrj/proyectos/dev/kune/trunk/src/main/webapp/tutorials/lang.js" />
   <!-- End kune i18n part -->
   <!-- Start kune font part -->
   <xhtml:link
-     href="http://fonts.googleapis.com/css?family=Ubuntu"
+     type="text/css"
      rel="stylesheet"
-     type="text/css" />
+     href="http://fonts.googleapis.com/css?family=Ubuntu" />
   <style
      id="style26201">
     text { font-family: 'Ubuntu'; text-rendering: geometricPrecision; }
@@ -341,7 +341,6 @@
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
   </g>
   <g
-     sodipodi:insensitive="true"
      style="display:inline"
      inkscape:label="graphics"
      id="layer6"
@@ -541,7 +540,9 @@
          y="187.54723"
          x="195.88776"
          id="tspan3436"
-         sodipodi:role="line">Esto acelera su actualización</tspan><tspan
+         sodipodi:role="line">Esto <tspan
+   id="tspan3328"
+   style="font-weight:bold">acelera</tspan> su actualización</tspan><tspan
          y="202.54723"
          x="195.88776"
          sodipodi:role="line"
@@ -672,7 +673,9 @@
          sodipodi:role="line"
          id="tspan21610"
          x="195.88776"
-         y="187.54723">This feature speeds up the </tspan><tspan
+         y="187.54723">This feature <tspan
+   id="tspan3326"
+   style="font-weight:bold">speeds</tspan> up the </tspan><tspan
          id="tspan16059"
          sodipodi:role="line"
          x="195.88776"
@@ -689,20 +692,23 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        x="199.21805"
-       y="-9.6079397"
+       y="432.21884"
        id="text27455"
-       sodipodi:linespacing="125%"
-       transform="translate(0,435.82679)"><tspan
+       sodipodi:linespacing="125%"><tspan
          id="tspan27465"
-         y="-9.6079397"
+         y="432.21884"
          x="199.21805"
-         sodipodi:role="line">The Wiki pages are similar to the documents.</tspan><tspan
+         sodipodi:role="line">The Wiki pages are <tspan
+   style="font-weight:bold"
+   id="tspan5103">similar to the documents.</tspan></tspan><tspan
          id="tspan16055"
-         y="5.3920603"
+         y="447.21884"
          x="199.21805"
-         sodipodi:role="line">However, wikis can be edited by anyone</tspan><tspan
+         sodipodi:role="line">However, wikis <tspan
+   style="font-weight:bold"
+   id="tspan5101">can be edited by anyone</tspan></tspan><tspan
          id="tspan16057"
-         y="20.392059"
+         y="462.21884"
          x="199.21805"
          sodipodi:role="line">and not only by the group members</tspan></text>
   </g>
@@ -718,23 +724,23 @@
      ns1:version="11.11-07001323"
      id="sozi-style">#sozi-toc text{fill:#eff;font-family:Verdana,sans-serif;font-size:12pt}#sozi-toc text:hover{fill:#0cf;cursor:pointer}#sozi-toc text.sozi-toc-current{fill:#fa4}#sozi-toc-background{stroke:#222;stroke-opacity:.1;stroke-width:10;fill:#222;fill-opacity:.9}.sozi-toc-arrow{fill:#eff;fill-opacity:.75;stroke:none}.sozi-toc-arrow:hover{fill:#0cf}</style>
   <ns1:frame
-     ns1:transition-profile="linear"
-     ns1:timeout-enable="false"
-     ns1:timeout-ms="5000"
-     ns1:transition-zoom-percent="0"
-     ns1:title="intro"
-     ns1:clip="true"
-     ns1:hide="true"
-     ns1:transition-duration-ms="1000"
+     ns1:refid="rect4591"
      ns1:sequence="1"
-     ns1:refid="rect4591" />
+     ns1:transition-duration-ms="1000"
+     ns1:hide="true"
+     ns1:clip="true"
+     ns1:title="intro"
+     ns1:transition-zoom-percent="0"
+     ns1:timeout-ms="5000"
+     ns1:timeout-enable="false"
+     ns1:transition-profile="linear" />
   <ns1:frame
      ns1:refid="rect8725"
      ns1:sequence="2"
      ns1:transition-duration-ms="1000"
      ns1:hide="true"
      ns1:clip="true"
-     ns1:title="asdocs"
+     ns1:title="edited"
      ns1:transition-zoom-percent="0"
      ns1:timeout-ms="5000"
      ns1:timeout-enable="false"
@@ -744,12 +750,23 @@
      ns1:timeout-enable="false"
      ns1:timeout-ms="5000"
      ns1:transition-zoom-percent="0"
-     ns1:title="new"
+     ns1:title="speeds"
      ns1:clip="true"
      ns1:hide="true"
      ns1:transition-duration-ms="1000"
+     ns1:sequence="3"
+     ns1:refid="rect7368" />
+  <ns1:frame
+     ns1:refid="rect6444"
      ns1:sequence="4"
-     ns1:refid="rect6444" />
+     ns1:transition-duration-ms="1000"
+     ns1:hide="true"
+     ns1:clip="true"
+     ns1:title="new"
+     ns1:transition-zoom-percent="0"
+     ns1:timeout-ms="5000"
+     ns1:timeout-enable="false"
+     ns1:transition-profile="linear" />
   <ns1:frame
      ns1:transition-profile="linear"
      ns1:timeout-enable="false"
@@ -761,15 +778,4 @@
      ns1:transition-duration-ms="1000"
      ns1:sequence="5"
      ns1:refid="rect14204" />
-  <ns1:frame
-     ns1:transition-profile="linear"
-     ns1:timeout-enable="false"
-     ns1:timeout-ms="5000"
-     ns1:transition-zoom-percent="0"
-     ns1:title="fast"
-     ns1:clip="true"
-     ns1:hide="true"
-     ns1:transition-duration-ms="1000"
-     ns1:sequence="3"
-     ns1:refid="rect7368" />
 </svg>

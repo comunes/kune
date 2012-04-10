@@ -40,6 +40,7 @@ import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceCenter;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
 import cc.kune.wave.client.KuneStagesProvider;
 import cc.kune.wave.client.WaveClientClearEvent;
@@ -59,7 +60,6 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
-import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -129,8 +129,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   @Override
   public void attach() {
-    final ForIsWidget docContainer = gsArmor.getDocContainer();
+    final GSpaceCenter docContainer = gsArmor.getDocContainer();
     docContainer.add(widget);
+    docContainer.showWidget(widget);
   }
 
   @Override
@@ -143,7 +144,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     onlyViewPanel.setHTML("");
     gsArmor.getSubheaderToolbar().clear();
     gsArmor.getDocFooterToolbar().clear();
-    UiUtils.clear(gsArmor.getDocContainer());
+    gsArmor.getDocContainer().clear();
     UiUtils.clear(gsArmor.getDocHeader());
     waveClear();
   }

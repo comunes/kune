@@ -162,6 +162,7 @@ public class FolderViewerUtils {
             content.getMimeType(), content.getStatus(), content.getStateToken().copy().clearDocument(),
             content.getRights(), content.getModifiedOn(), false);
       }
+      getView().showFolder();
     }
   }
 

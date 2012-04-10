@@ -53,6 +53,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.logical.shared.OpenHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
@@ -61,6 +63,7 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -99,6 +102,12 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
       }
     });
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+    Window.addResizeHandler(new ResizeHandler() {
+      @Override
+      public void onResize(final ResizeEvent event) {
+        resizeCalendar();
+      }
+    });
   }
 
   @Override
@@ -134,7 +143,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   @Override
   public void addItem(final FolderItemDescriptor item, final ClickHandler clickHandler,
       final DoubleClickHandler doubleClickHandler) {
-    // TODO Auto-generated method stub
+    // Do nothing right now, calendar appointments has a different treatment
   }
 
   @Override
@@ -166,12 +175,13 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   public void attach() {
     calendar.setSettings(setCalendarSettings());
     super.attach();
-    gsArmor.enableCenterScroll(false);
   }
 
   @Override
   public void clearAppointments() {
-    calendar.clearAppointments();
+    if (calendar.getAppointments().size() > 0) {
+      calendar.clearAppointments();
+    }
   }
 
   @Override
@@ -235,6 +245,11 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     calendar.removeAppointment(appointment, fireEvents);
   }
 
+  protected void resizeCalendar() {
+    super.resizeHeight(calendar);
+    calendar.doLayout();
+  }
+
   @Override
   public void resumeLayout() {
     calendar.resumeLayout();
@@ -285,6 +300,13 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   }
 
   @Override
+  public void showFolder() {
+    super.showFolder();
+    gsArmor.enableCenterScroll(false);
+    resizeCalendar();
+  }
+
+  @Override
   public void suspendLayout() {
     calendar.suspendLayout();
   }
@@ -301,6 +323,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
       fmt = DateTimeFormat.getFormat("EEEE, MMMM dd, yyyy");
       break;
     case MONTH:
+    default:
       fmt = DateTimeFormat.getFormat("MMMM yyyy");
       break;
     }

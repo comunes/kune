@@ -20,7 +20,6 @@
 package cc.kune.gspace.client.armor;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
-import cc.kune.common.shared.utils.Pair;
 import cc.kune.gspace.client.maxmin.IsMaximizable;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
@@ -33,9 +32,9 @@ public interface GSpaceArmor extends IsMaximizable {
 
   void enableCenterScroll(boolean enable);
 
-  ForIsWidget getDocContainer();
+  GSpaceCenter getDocContainer();
 
-  Pair<Integer, Integer> getDocContainerSize();
+  int getDocContainerHeight();
 
   ForIsWidget getDocFooter();
 

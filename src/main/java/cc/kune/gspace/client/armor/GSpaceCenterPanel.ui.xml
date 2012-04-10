@@ -3,14 +3,11 @@
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:with field='res'
     type='cc.kune.gspace.client.armor.resources.GSpaceArmorResources'/>
-  <ui:style>    
+  <ui:style>  
   </ui:style>
   <g:ScrollPanel ui:field="centerScroll" styleName="{res.style.docEditor}">
-    <g:DeckPanel ui:field="deck" width="auto" height="auto">
-      <g:FlowPanel width="auto" height="auto"
-        styleName="{res.style.docEditorContainer}" ui:field="infoPanel"/>
-      <g:FlowPanel width="auto" height="auto"
-        styleName="{res.style.docEditorContainer}" ui:field="mainPanel"/>
+    <g:DeckPanel ui:field="deck" width="auto" height="auto"
+      styleName="{res.style.docEditorContainer}">
     </g:DeckPanel>
   </g:ScrollPanel>
 </ui:UiBinder> 

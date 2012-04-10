@@ -304,6 +304,7 @@ public class CalendarViewerPresenter extends
   @Override
   public void setContent(@Nonnull final HasContent state) {
     folderViewerUtils.setContent(getView(), state);
+    getView().showFolder();
     final StateEventContainerDTO eventState = (StateEventContainerDTO) state;
     updateMenuItems();
     getView().clearAppointments();

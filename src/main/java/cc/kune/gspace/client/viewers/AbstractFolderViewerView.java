@@ -54,5 +54,7 @@ public interface AbstractFolderViewerView extends View {
 
   void showEmptyMsg(String message);
 
+  void showFolder();
+
   void showTutorial(String tool);
 }

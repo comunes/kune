@@ -111,7 +111,9 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
   @Override
   public void setContainer(final StateContainerDTO state) {
     super.setContainer(state);
-    gsArmor.getDocContainer().add(new HTML("<b>Note:</b> This GUI is provisional<br/>"));
+    final HTML html = new HTML("<b>Note:</b> This GUI is provisional<br/>");
+    gsArmor.getDocContainer().add(html);
+    gsArmor.getDocContainer().showWidget(html);
   }
 
 }

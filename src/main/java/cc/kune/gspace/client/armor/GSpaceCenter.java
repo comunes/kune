@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.cnt;
 
-import cc.kune.common.client.actions.ui.IsActionExtensible;
+package cc.kune.gspace.client.armor;
 
-public interface ActionContentToolbar extends IsActionExtensible {
+import com.google.gwt.user.client.ui.InsertPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 
-    void attach();
+public interface GSpaceCenter extends InsertPanel.ForIsWidget {
+  void clear();
 
-    void detach();
-
+  void showWidget(IsWidget widget);
 }

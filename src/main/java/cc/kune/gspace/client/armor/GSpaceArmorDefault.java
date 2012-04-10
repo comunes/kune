@@ -23,10 +23,8 @@ import org.cobogw.gwt.user.client.CSS;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
-import cc.kune.common.shared.utils.Pair;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -37,7 +35,6 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
@@ -59,9 +56,7 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   @UiField
   VerticalPanel centerNorth;
   @UiField
-  ScrollPanel centerScroll;
-  @UiField
-  FlowPanel docContainer;
+  GSpaceCenterPanel centerPanel;
   @UiField
   DockLayoutPanel docContainerParent;
   @UiField
@@ -140,27 +135,17 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
   @Override
   public void enableCenterScroll(final boolean enable) {
-    // TODO use here Element.getStyle()...
-    if (enable) {
-      centerScroll.setAlwaysShowScrollBars(false);
-      DOM.setStyleAttribute(centerScroll.getElement(), "position", "absolute");
-      DOM.setStyleAttribute((Element) centerScroll.getElement().getFirstChildElement(), "position",
-          "relative");
-    } else {
-      centerScroll.getElement().getStyle().setOverflow(Overflow.HIDDEN);
-      DOM.setStyleAttribute(centerScroll.getElement(), "position", "");
-      DOM.setStyleAttribute((Element) centerScroll.getElement().getFirstChildElement(), "position", "");
-    }
+    centerPanel.enableCenterScroll(enable);
   }
 
   @Override
-  public ForIsWidget getDocContainer() {
-    return docContainer;
+  public GSpaceCenter getDocContainer() {
+    return centerPanel;
   }
 
   @Override
-  public Pair<Integer, Integer> getDocContainerSize() {
-    return Pair.create(centerScroll.getOffsetHeight(), centerScroll.getOffsetWidth());
+  public int getDocContainerHeight() {
+    return centerPanel.getHeight();
   }
 
   @Override
@@ -281,14 +266,6 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
   @Override
   public void setMaximized(final boolean maximized) {
-    // setMaximized(docFooter.getParent(), maximized);
-    // setMaximized(entityFooter.getParent(), maximized);
-    // setMaximized(entityHeader.getParent(), maximized);
-    // setMaximized(entityToolsContainer, maximized);
-    // splitCenter.setWidgetSize(centerScroll, getAbsoluteLeft())
-    // setMaximized(splitCenter.getWidget(0), maximized);
-    // setMaximized(splitCenter.getWidget(2), maximized);
-    // setMaximized(splitEast, maximized);
     groupSpace.setWidgetSize(splitEast, maximized ? 0 : EAST_WIDTH);
     splitCenter.setWidgetSize(centerNorth, maximized ? 7 : CENTER_NORTH_HEIGHT);
     splitCenter.setWidgetSize(entityFooter, maximized ? 7 : CENTER_SOUTH_HEIGHT);

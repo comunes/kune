@@ -28,13 +28,14 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.InsertPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Singleton;
 
 @Singleton
-public class GSpaceCenterPanel extends Composite {
+public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   interface GSpaceCenterPanelUiBinder extends UiBinder<Widget, GSpaceCenterPanel> {
   }
@@ -43,13 +44,24 @@ public class GSpaceCenterPanel extends Composite {
   ScrollPanel centerScroll;
   @UiField
   DeckPanel deck;
-  @UiField
-  FlowPanel infoPanel;
-  @UiField
-  FlowPanel mainPanel;
 
   public GSpaceCenterPanel() {
     initWidget(uiBinder.createAndBindUi(this));
+  }
+
+  @Override
+  public void add(final IsWidget w) {
+    deck.add(w);
+  }
+
+  @Override
+  public void add(final Widget w) {
+    deck.add(w);
+  }
+
+  @Override
+  public void clear() {
+    deck.clear();
   }
 
   public void enableCenterScroll(final boolean enable) {
@@ -66,4 +78,53 @@ public class GSpaceCenterPanel extends Composite {
       DOM.setStyleAttribute((Element) centerScroll.getElement().getFirstChildElement(), "position", "");
     }
   }
+
+  InsertPanel.ForIsWidget getDeck() {
+    return deck;
+  }
+
+  public int getHeight() {
+    return centerScroll.getOffsetHeight();
+  }
+
+  @Override
+  public Widget getWidget(final int index) {
+    return deck.getWidget(index);
+  }
+
+  @Override
+  public int getWidgetCount() {
+    return deck.getWidgetCount();
+  }
+
+  @Override
+  public int getWidgetIndex(final IsWidget child) {
+    return deck.getWidgetIndex(child);
+  }
+
+  @Override
+  public int getWidgetIndex(final Widget child) {
+    return deck.getWidgetIndex(child);
+  }
+
+  @Override
+  public void insert(final IsWidget w, final int beforeIndex) {
+    deck.insert(w, beforeIndex);
+  }
+
+  @Override
+  public void insert(final Widget w, final int beforeIndex) {
+    deck.insert(w, beforeIndex);
+  }
+
+  @Override
+  public boolean remove(final int index) {
+    return deck.remove(index);
+  }
+
+  @Override
+  public void showWidget(final IsWidget widget) {
+    deck.showWidget(deck.getWidgetIndex(widget));
+  }
+
 }

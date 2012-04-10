@@ -24,13 +24,13 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.common.shared.utils.Pair;
 import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.gspace.client.armor.GSpaceCenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -39,7 +39,6 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
-import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -92,16 +91,13 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
 
   @Override
   public void attach() {
-    final ForIsWidget docContainer = gsArmor.getDocContainer();
-    docContainer.add(widget);
-    gsArmor.enableCenterScroll(true);
   }
 
   @Override
   public void clear() {
     gsArmor.getSubheaderToolbar().clear();
     gsArmor.getDocFooterToolbar().clear();
-    UiUtils.clear(gsArmor.getDocContainer());
+    gsArmor.getDocContainer().clear();
     UiUtils.clear(gsArmor.getDocHeader());
   }
 
@@ -125,9 +121,12 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     contentTitle.highlightTitle();
   }
 
+  protected void resizeHeight(final Widget w) {
+    w.setHeight(String.valueOf(gsArmor.getDocContainerHeight()));
+  }
+
   private void resizeTutorialFrame() {
-    final Pair<Integer, Integer> size = gsArmor.getDocContainerSize();
-    tutorialViewer.setHeigth(size.getLeft());
+    tutorialViewer.setHeigth(gsArmor.getDocContainerHeight());
   }
 
   @Override
@@ -160,14 +159,28 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
 
   @Override
   public void showEmptyMsg(final String emptyMessage) {
+    gsArmor.enableCenterScroll(false);
     emptyLabel.setText(emptyMessage);
     gsArmor.getDocContainer().add(emptyPanel);
+    gsArmor.getDocContainer().showWidget(emptyPanel);
+  }
+
+  @Override
+  public void showFolder() {
+    gsArmor.enableCenterScroll(true);
+    final GSpaceCenter docContainer = gsArmor.getDocContainer();
+    docContainer.add(widget);
+    docContainer.showWidget(widget);
   }
 
   @Override
   public void showTutorial(final String tool) {
-    UiUtils.clear(gsArmor.getDocContainer());
+    gsArmor.enableCenterScroll(false);
+    final GSpaceCenter docContainer = gsArmor.getDocContainer();
+    // docContainer.clear();
+    final Widget tutorial = tutorialViewer.show(tool);
     resizeTutorialFrame();
-    gsArmor.getDocContainer().add(tutorialViewer.show(tool));
+    docContainer.add(tutorial);
+    docContainer.showWidget(tutorial);
   }
 }

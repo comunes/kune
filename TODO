@@ -28,6 +28,8 @@ TODO-list for kune -*- mode: org; -*-
 2012-04-09 00:14:34 AuthenticatedMethodInterceptor [INFO] Userhash received: null
 2012-04-09 00:14:34 AuthenticatedMethodInterceptor [INFO] --------------------------------------------------------------------------------
 
+** Central Deck
+
 ** Permission tables
 
 |---------------------------+-------------+--------------|
