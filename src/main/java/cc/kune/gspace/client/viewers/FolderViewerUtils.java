@@ -44,6 +44,7 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
+import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 import cc.kune.trash.shared.TrashToolConstants;
 
@@ -62,6 +63,7 @@ public class FolderViewerUtils {
   private final Provider<ClientFileDownloadUtils> downloadUtilsProvider;
   private final I18nTranslationService i18n;
   private final IconsRegistry iconsRegistry;
+  private OnTutorialClose onTutorialClose;
   private final PathToolbarUtils pathToolbarUtils;
   private final Session session;
   private final StateManager stateManager;
@@ -87,7 +89,7 @@ public class FolderViewerUtils {
           public void onShowHelpContainer(final ShowHelpContainerEvent event) {
             final AbstractFolderViewerView currentView = getView();
             if (currentView != null) {
-              currentView.showTutorial(event.getTool());
+              currentView.showTutorial(onTutorialClose);
             }
           }
         });
@@ -139,14 +141,15 @@ public class FolderViewerUtils {
       // No elements here, so, we show a empty message (or a tutorial)
       if (session.isLogged() && capabReg.getTutorialRegistry().hasTutorial(typeId)) {
         // If we have a tutorial, we show it.
-        getView().showTutorial(container.getStateToken().getTool());
+        getView().showTutorial(new OnTutorialClose() {
+          @Override
+          public void onClose() {
+            showEmptyMsg(typeId);
+          }
+        });
       } else {
         // If not, we show the empty message
-        // msg is already translated
-        final String msg = session.isLogged() ? capabReg.getEmptyMessagesRegistry().getContentTypeIcon(
-            typeId) : capabReg.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
-        final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : msg;
-        getView().showEmptyMsg(emptyMessage);
+        showEmptyMsg(typeId);
       }
     } else {
       // Folders
@@ -217,5 +220,17 @@ public class FolderViewerUtils {
     getView().setSubheaderActions(topActions);
     getView().setFooterActions(bottomActions);
     createChildItems(container, stateContainer.getContainerRights());
+  }
+
+  public void setTutorialCloseHandler(final OnTutorialClose onTutorialClose) {
+    this.onTutorialClose = onTutorialClose;
+  }
+
+  private void showEmptyMsg(final String typeId) {
+    // msg is already translated
+    final String msg = session.isLogged() ? capabReg.getEmptyMessagesRegistry().getContentTypeIcon(
+        typeId) : capabReg.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
+    final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : msg;
+    getView().showEmptyMsg(emptyMessage);
   }
 }

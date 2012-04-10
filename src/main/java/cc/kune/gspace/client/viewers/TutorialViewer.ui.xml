@@ -16,7 +16,7 @@
   </ui:style>
   <g:FlowPanel styleName="{style.flow}">
     <d:CloseDialogButton ui:field="closeBtn"
-      addStyleNames="k-dialog-close-btn-normal" visible="false"/>
+      addStyleNames="k-dialog-close-btn-normal" visible="true"/>
     <g:Frame styleName="{style.frame}" ui:field="frame"/>
   </g:FlowPanel>
 </ui:UiBinder>

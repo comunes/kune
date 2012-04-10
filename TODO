@@ -28,7 +28,26 @@ TODO-list for kune -*- mode: org; -*-
 2012-04-09 00:14:34 AuthenticatedMethodInterceptor [INFO] Userhash received: null
 2012-04-09 00:14:34 AuthenticatedMethodInterceptor [INFO] --------------------------------------------------------------------------------
 
-** Central Deck
+** Views and Subviews
+|----------+-----------------+------------------+--------------------------+----------|
+| View     | Subview         | Set              | Show                     | Hide     |
+|----------+-----------------+------------------+--------------------------+----------|
+| Folder   | Tutorial        | onToolChange     | onBtn / onEmpty & logged | closeBtn |
+|          | Empty           | onStateChange    | onEmpty                  | (1)      |
+|          | Folder list     | onStateChange    | onNotEmpty               | (1)      |
+|----------+-----------------+------------------+--------------------------+----------|
+| Content  | Tutorial        | onToolChange     | onBtn & logged           | closeBtn |
+|          | Not logged view | onStateChange    | onBtn                    | (1)      |
+|          | Def lang        | onStateChange    | onStateChange            | (1)      |
+|          | lang 1          | onBtn(LangClick) | onBtn                    | (1)      |
+|          | lang 2          | onBtn(LangClick) | onBtn                    | (1)      |
+|          | ...             |                  |                          |          |
+|----------+-----------------+------------------+--------------------------+----------|
+| Calendar | Tutorial        | onToolChange     | onBtn                    | closeBtn |
+|          | Calendar view   | onStateChange    | onBtn(calendar tool)     | (1)      |
+|----------+-----------------+------------------+--------------------------+----------|
+
+(1) when move to other #url
 
 ** Permission tables
 

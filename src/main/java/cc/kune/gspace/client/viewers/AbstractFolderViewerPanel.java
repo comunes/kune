@@ -32,6 +32,7 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceCenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
+import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
 
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
@@ -174,13 +175,12 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   }
 
   @Override
-  public void showTutorial(final String tool) {
+  public void showTutorial(final OnTutorialClose onTutorialClose) {
     gsArmor.enableCenterScroll(false);
     final GSpaceCenter docContainer = gsArmor.getDocContainer();
-    // docContainer.clear();
-    final Widget tutorial = tutorialViewer.show(tool);
     resizeTutorialFrame();
-    docContainer.add(tutorial);
-    docContainer.showWidget(tutorial);
+    docContainer.add(tutorialViewer);
+    docContainer.showWidget(tutorialViewer);
+    tutorialViewer.setTutorialCloseHandler(onTutorialClose);
   }
 }

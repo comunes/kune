@@ -23,12 +23,16 @@ import java.util.List;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.dialogs.CloseDialogButton;
+import cc.kune.core.client.events.ToolChangedEvent;
+import cc.kune.core.client.events.ToolChangedEvent.ToolChangedHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.FileConstants;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -40,6 +44,9 @@ import com.google.inject.Singleton;
 @Singleton
 public class TutorialViewer extends Composite {
 
+  public interface OnTutorialClose {
+    void onClose();
+  }
   interface TutorialViewerUiBinder extends UiBinder<Widget, TutorialViewer> {
   }
 
@@ -52,17 +59,29 @@ public class TutorialViewer extends Composite {
   public Frame frame;
   private final I18nUITranslationService i18n;
   private List<String> langs;
+  private OnTutorialClose onTutorialClose;
   private final Session session;
 
   @Inject
-  public TutorialViewer(final I18nUITranslationService i18n, final Session session) {
+  public TutorialViewer(final I18nUITranslationService i18n, final Session session,
+      final StateManager stateManager) {
     this.i18n = i18n;
     this.session = session;
     initWidget(uiBinder.createAndBindUi(this));
-  }
-
-  public HasClickHandlers getCloseBtn() {
-    return closeBtn;
+    stateManager.onToolChanged(true, new ToolChangedHandler() {
+      @Override
+      public void onToolChanged(final ToolChangedEvent event) {
+        setTool(event.getNewTool());
+      }
+    });
+    closeBtn.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        if (onTutorialClose != null) {
+          onTutorialClose.onClose();
+        }
+      }
+    });
   }
 
   private String getTutorialLang() {
@@ -85,10 +104,13 @@ public class TutorialViewer extends Composite {
     }
   }
 
-  public Widget show(final String tool) {
+  private void setTool(final String tool) {
     final String currentLang = getTutorialLang();
     frame.setUrl(FileConstants.TUTORIALS_PREFIX + tool + ".svg" + "#" + currentLang);
-    return this;
+  }
+
+  public void setTutorialCloseHandler(final OnTutorialClose onTutorialClose) {
+    this.onTutorialClose = onTutorialClose;
   }
 
 }

@@ -42,6 +42,7 @@ import cc.kune.events.shared.EventsClientConversionUtil;
 import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerView;
 import cc.kune.gspace.client.viewers.FolderViewerUtils;
+import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.bradrydzewski.gwt.calendar.client.AppointmentStyle;
@@ -304,6 +305,12 @@ public class CalendarViewerPresenter extends
   @Override
   public void setContent(@Nonnull final HasContent state) {
     folderViewerUtils.setContent(getView(), state);
+    folderViewerUtils.setTutorialCloseHandler(new OnTutorialClose() {
+      @Override
+      public void onClose() {
+        folderViewerUtils.setContent(getView(), state);
+      }
+    });
     getView().showFolder();
     final StateEventContainerDTO eventState = (StateEventContainerDTO) state;
     updateMenuItems();
