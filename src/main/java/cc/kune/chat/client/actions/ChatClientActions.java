@@ -31,7 +31,7 @@ import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
-import cc.kune.gspace.client.actions.TutorialContainerBtn;
+import cc.kune.gspace.client.actions.TutorialBtn;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -49,17 +49,18 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshContentMenuItem> refresh, final Provider<NewRoomBtn> newRoomBtn,
       final Provider<OpenRoomMenuItem> openRoomMenuItem, final Provider<GoParentChatBtn> folderGoUp,
       final Provider<OpenRoomArchiveMenuItem> openRoomArchiveMenuItem,
-      final Provider<OpenRoomBtn> openRoomBtn, final Provider<TutorialContainerBtn> tutorialBtn,
+      final Provider<OpenRoomBtn> openRoomBtn, final Provider<TutorialBtn> tutorialBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newRoomBtn, TYPE_ROOT);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, openRoomBtn, containersNoRoot);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomArchiveMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomArchiveMenuItem,
+        containersNoRoot);
   }
 
   @Override

@@ -22,7 +22,6 @@ package cc.kune.gspace.client.viewers;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -56,6 +55,4 @@ public interface AbstractFolderViewerView extends View {
   void showEmptyMsg(String message);
 
   void showFolder();
-
-  void showTutorial(OnTutorialClose onTutorialClose);
 }

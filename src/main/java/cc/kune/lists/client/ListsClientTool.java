@@ -67,7 +67,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerTutorial(TYPE_ROOT);
+    registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_LIST);
     registerContentTypeIcon(TYPE_ROOT, icons.lists());
     registerContentTypeIcon(TYPE_LIST, navResources.list());

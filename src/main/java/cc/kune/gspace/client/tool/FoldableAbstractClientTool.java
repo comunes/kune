@@ -126,8 +126,8 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     contentCapabilitiesRegistry.getTranslatable().register(typeIds);
   }
 
-  public void registerTutorial(final String contentTypeId) {
-    contentCapabilitiesRegistry.getTutorialRegistry().register(contentTypeId);
+  public void registerEmptyFolderTutorial(final String contentTypeId) {
+    contentCapabilitiesRegistry.getEmptyFolderTutorialRegistry().register(contentTypeId);
   }
 
   protected void registerUploadTypesAndMimes(final String typeUploadedfile) {

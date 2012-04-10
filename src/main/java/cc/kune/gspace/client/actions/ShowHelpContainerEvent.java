@@ -19,6 +19,9 @@
  */
 package cc.kune.gspace.client.actions;
 
+import cc.kune.gspace.client.viewers.TutorialViewer;
+import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
+
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -37,14 +40,21 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
   private static final Type<ShowHelpContainerHandler> TYPE = new Type<ShowHelpContainerHandler>();
 
   public static void fire(final HasHandlers source) {
-    source.fireEvent(new ShowHelpContainerEvent());
+    source.fireEvent(new ShowHelpContainerEvent(null));
+  }
+
+  public static void fire(final HasHandlers source, final TutorialViewer.OnTutorialClose onTutorialClose) {
+    source.fireEvent(new ShowHelpContainerEvent(onTutorialClose));
   }
 
   public static Type<ShowHelpContainerHandler> getType() {
     return TYPE;
   }
 
-  public ShowHelpContainerEvent() {
+  private final OnTutorialClose onTutorialClose;
+
+  public ShowHelpContainerEvent(final TutorialViewer.OnTutorialClose onTutorialClose) {
+    this.onTutorialClose = onTutorialClose;
   }
 
   @Override
@@ -60,6 +70,10 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
   @Override
   public Type<ShowHelpContainerHandler> getAssociatedType() {
     return TYPE;
+  }
+
+  public OnTutorialClose getOnTutorialClose() {
+    return onTutorialClose;
   }
 
   @Override

@@ -61,10 +61,9 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
       final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
       final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
-      final Provider<FolderContainerDropController> containerDropControllerProv,
-      final TutorialViewer tutorialViewer) {
+      final Provider<FolderContainerDropController> containerDropControllerProv) {
     super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
-        containerDropControllerProv, tutorialViewer);
+        containerDropControllerProv);
     widget = uiBinder.createAndBindUi(this);
   }
 

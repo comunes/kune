@@ -48,7 +48,7 @@ import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
-import cc.kune.gspace.client.actions.TutorialContainerBtn;
+import cc.kune.gspace.client.actions.TutorialBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
@@ -74,8 +74,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshContentMenuItem> refresh,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ContentViewerShareMenu> shareMenuContent,
-      final Provider<ParticipateInContentBtn> participateBtn,
-      final Provider<TutorialContainerBtn> tutorialBtn,
+      final Provider<ParticipateInContentBtn> participateBtn, final Provider<TutorialBtn> tutorialBtn,
       final Provider<DelTaskMenuItem> delContentMenuItem,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
@@ -102,7 +101,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     // containers);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);

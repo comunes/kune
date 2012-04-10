@@ -32,10 +32,7 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceCenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
-import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
 
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -54,35 +51,25 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   private final FlowPanel emptyPanel;
   protected final GSpaceArmor gsArmor;
   protected final I18nTranslationService i18n;
-  private final TutorialViewer tutorialViewer;
   protected Widget widget;
 
   public AbstractFolderViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
       final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
       final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
-      final Provider<FolderContainerDropController> containerDropControllerProv,
-      final TutorialViewer tutorialViewer) {
+      final Provider<FolderContainerDropController> containerDropControllerProv) {
     this.gsArmor = gsArmor;
     this.i18n = i18n;
     this.capabilitiesRegistry = capabilitiesRegistry;
     this.dragController = dragController;
     this.contentDropControllerProv = contentDropControllerProv;
     this.containerDropControllerProv = containerDropControllerProv;
-    this.tutorialViewer = tutorialViewer;
     emptyPanel = new FlowPanel();
     emptyLabel = new InlineLabel(i18n.t("This is empty."));
     emptyLabel.setStyleName("k-empty-msg");
     emptyPanel.setStyleName("k-empty-folder-panel");
     emptyPanel.add(emptyLabel);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
-    Window.addResizeHandler(new ResizeHandler() {
-      @Override
-      public void onResize(final ResizeEvent event) {
-        // iframe height 100% does not work, so we have to do this kind of hacks
-        resizeTutorialFrame();
-      }
-    });
   }
 
   @Override
@@ -124,10 +111,6 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
 
   protected void resizeHeight(final Widget w) {
     w.setHeight(String.valueOf(gsArmor.getDocContainerHeight()));
-  }
-
-  private void resizeTutorialFrame() {
-    tutorialViewer.setHeigth(gsArmor.getDocContainerHeight());
   }
 
   @Override
@@ -174,13 +157,4 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     docContainer.showWidget(widget);
   }
 
-  @Override
-  public void showTutorial(final OnTutorialClose onTutorialClose) {
-    gsArmor.enableCenterScroll(false);
-    final GSpaceCenter docContainer = gsArmor.getDocContainer();
-    resizeTutorialFrame();
-    docContainer.add(tutorialViewer);
-    docContainer.showWidget(tutorialViewer);
-    tutorialViewer.setOnTutorialCloseHandler(onTutorialClose);
-  }
 }

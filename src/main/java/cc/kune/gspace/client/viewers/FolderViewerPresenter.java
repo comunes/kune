@@ -29,7 +29,6 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.RenameListener;
 import cc.kune.gspace.client.tool.ContentViewer;
-import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -121,11 +120,5 @@ public class FolderViewerPresenter extends
   @Override
   public void setContent(@Nonnull final HasContent state) {
     folderViewerUtils.setContent(getView(), state);
-    folderViewerUtils.setTutorialCloseHandler(new OnTutorialClose() {
-      @Override
-      public void onClose() {
-        folderViewerUtils.setContent(getView(), state);
-      }
-    });
   }
 }

@@ -48,7 +48,7 @@ import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
-import cc.kune.gspace.client.actions.TutorialContainerBtn;
+import cc.kune.gspace.client.actions.TutorialBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
@@ -78,9 +78,8 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
       final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn,
-      final Provider<DelFolderMenuItem> delFolderMenuItem,
-      final Provider<TutorialContainerBtn> tutorialBtn, final Provider<ChatAboutContentBtn> chatAbout,
-      final Provider<RefreshContentMenuItem> refresh,
+      final Provider<DelFolderMenuItem> delFolderMenuItem, final Provider<TutorialBtn> tutorialBtn,
+      final Provider<ChatAboutContentBtn> chatAbout, final Provider<RefreshContentMenuItem> refresh,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
@@ -104,7 +103,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newFolderMenuItem, containers);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);

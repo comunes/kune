@@ -77,10 +77,9 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       final EventBus eventBus, final GuiProvider guiProvider, final CoreResources res,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
-      final Provider<FolderContainerDropController> containerDropControllerProv,
-      final TutorialViewer tutorialViewer) {
+      final Provider<FolderContainerDropController> containerDropControllerProv) {
     super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
-        containerDropControllerProv, tutorialViewer);
+        containerDropControllerProv);
     this.guiProvider = guiProvider;
     this.res = res;
     widget = uiBinder.createAndBindUi(this);

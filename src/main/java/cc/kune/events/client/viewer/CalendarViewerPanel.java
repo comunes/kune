@@ -35,7 +35,6 @@ import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.viewers.AbstractFolderViewerPanel;
 import cc.kune.gspace.client.viewers.ContentTitleWidget;
-import cc.kune.gspace.client.viewers.TutorialViewer;
 import cc.kune.gspace.client.viewers.items.FolderItemDescriptor;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
@@ -80,10 +79,9 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
       final I18nTranslationService i18n, final GuiProvider guiProvider, final CoreResources res,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
-      final Provider<FolderContainerDropController> containerDropControllerProv,
-      final TutorialViewer tutorialViewer) {
+      final Provider<FolderContainerDropController> containerDropControllerProv) {
     super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
-        containerDropControllerProv, tutorialViewer);
+        containerDropControllerProv);
     calendar = new Calendar();
     calendar.setSettings(setCalendarSettings());
     widget = calendar;

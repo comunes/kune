@@ -46,7 +46,7 @@ import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
-import cc.kune.gspace.client.actions.TutorialContainerBtn;
+import cc.kune.gspace.client.actions.TutorialBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
@@ -70,8 +70,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<DelWikiMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ContentViewerShareMenu> shareMenuContent,
-      final Provider<ParticipateInContentBtn> participateBtn,
-      final Provider<TutorialContainerBtn> tutorialBtn,
+      final Provider<ParticipateInContentBtn> participateBtn, final Provider<TutorialBtn> tutorialBtn,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
@@ -103,7 +102,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);

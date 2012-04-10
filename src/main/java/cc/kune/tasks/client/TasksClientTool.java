@@ -69,7 +69,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerTutorial(TYPE_ROOT);
+    registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
     registerContentTypeIcon(TYPE_ROOT, icons.tasks());
     registerContentTypeIcon(TYPE_FOLDER, navResources.taskfolder());

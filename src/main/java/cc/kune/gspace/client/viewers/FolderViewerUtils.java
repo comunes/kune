@@ -61,9 +61,9 @@ public class FolderViewerUtils {
   private final ActionRegistryByType actionsRegistry;
   private final ContentCapabilitiesRegistry capabReg;
   private final Provider<ClientFileDownloadUtils> downloadUtilsProvider;
+  private final EventBus eventBus;
   private final I18nTranslationService i18n;
   private final IconsRegistry iconsRegistry;
-  private OnTutorialClose onTutorialClose;
   private final PathToolbarUtils pathToolbarUtils;
   private final Session session;
   private final StateManager stateManager;
@@ -76,6 +76,7 @@ public class FolderViewerUtils {
       final ActionRegistryByType actionsRegistry, final StateManager stateManager,
       final PathToolbarUtils pathToolbarUtils) {
     this.capabReg = capabilitiesRegistry;
+    this.eventBus = eventBus;
     this.session = session;
     this.downloadUtilsProvider = downloadUtilsProvider;
     this.i18n = i18n;
@@ -83,16 +84,6 @@ public class FolderViewerUtils {
     this.stateManager = stateManager;
     this.iconsRegistry = capabilitiesRegistry.getIconsRegistry();
     this.pathToolbarUtils = pathToolbarUtils;
-    eventBus.addHandler(ShowHelpContainerEvent.getType(),
-        new ShowHelpContainerEvent.ShowHelpContainerHandler() {
-          @Override
-          public void onShowHelpContainer(final ShowHelpContainerEvent event) {
-            final AbstractFolderViewerView currentView = getView();
-            if (currentView != null) {
-              currentView.showTutorial(onTutorialClose);
-            }
-          }
-        });
   }
 
   private void addItem(final String tool, final AbstractContentSimpleDTO content,
@@ -139,9 +130,9 @@ public class FolderViewerUtils {
     if (container.getContents().size() + container.getChilds().size() == 0) {
       final String typeId = container.getTypeId();
       // No elements here, so, we show a empty message (or a tutorial)
-      if (session.isLogged() && capabReg.getTutorialRegistry().hasTutorial(typeId)) {
+      if (session.isLogged() && capabReg.getEmptyFolderTutorialRegistry().hasTutorial(typeId)) {
         // If we have a tutorial, we show it.
-        getView().showTutorial(new OnTutorialClose() {
+        ShowHelpContainerEvent.fire(eventBus, new OnTutorialClose() {
           @Override
           public void onClose() {
             showEmptyMsg(typeId);
@@ -220,10 +211,6 @@ public class FolderViewerUtils {
     getView().setSubheaderActions(topActions);
     getView().setFooterActions(bottomActions);
     createChildItems(container, stateContainer.getContainerRights());
-  }
-
-  public void setTutorialCloseHandler(final OnTutorialClose onTutorialClose) {
-    this.onTutorialClose = onTutorialClose;
   }
 
   private void showEmptyMsg(final String typeId) {

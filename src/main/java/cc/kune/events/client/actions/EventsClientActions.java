@@ -42,7 +42,7 @@ import cc.kune.gspace.client.actions.PurgeContainerMenuItem;
 import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
-import cc.kune.gspace.client.actions.TutorialContainerBtn;
+import cc.kune.gspace.client.actions.TutorialBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
@@ -75,7 +75,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<EventAddMenuItem> eventAddMenuItem,
       final Provider<EventOpenMenuItem> eventOpenMenuItem, final Provider<CalendarGoPrevBtn> calPrevBtn,
       final Provider<EventRemoveMenuItem> eventRemoveMenuItem,
-      final Provider<CopyContentMenuItem> copyContent, final Provider<TutorialContainerBtn> tutorialBtn,
+      final Provider<CopyContentMenuItem> copyContent, final Provider<TutorialBtn> tutorialBtn,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
       final Provider<PurgeContainerMenuItem> purgeFolderMenuItem,
@@ -100,7 +100,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
     // On over calendar menu

@@ -48,6 +48,7 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.sub.SubtitlesManager;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.UserOptions;
+import cc.kune.gspace.client.viewers.TutorialViewer;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -70,7 +71,8 @@ public class CoreParts {
       final Provider<VerifyEmailClientManager> verifyManager,
       final Provider<UserOptions> userOptionsDialog, final Provider<GroupOptions> groupOptionsDialog,
       final Provider<PasswordResetPanel> passReset, final Provider<AskForPasswordResetPanel> askForPass,
-      final GlobalShortcuts shortcuts, final I18nTranslationService i18n) {
+      final GlobalShortcuts shortcuts, final I18nTranslationService i18n,
+      final Provider<TutorialViewer> tutorialViewer) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -81,6 +83,7 @@ public class CoreParts {
         userOptions.get();
         anonUsers.get();
         spaceSelector.get();
+        tutorialViewer.get();
       }
     });
     tokenListener.put(SiteTokens.SIGN_IN, new HistoryTokenAuthNotNeededCallback() {

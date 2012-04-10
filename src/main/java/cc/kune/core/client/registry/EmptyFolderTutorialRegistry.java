@@ -22,10 +22,10 @@ package cc.kune.core.client.registry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TutorialRegistry {
+public class EmptyFolderTutorialRegistry {
   private final List<String> registry;
 
-  public TutorialRegistry() {
+  public EmptyFolderTutorialRegistry() {
     registry = new ArrayList<String>();
   }
 

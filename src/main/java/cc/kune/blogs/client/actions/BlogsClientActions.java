@@ -48,7 +48,7 @@ import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
-import cc.kune.gspace.client.actions.TutorialContainerBtn;
+import cc.kune.gspace.client.actions.TutorialBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
@@ -71,7 +71,7 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<NewPostIconBtn> newPostIconBtn, final Provider<NewBlogBtn> newBlogBtn,
       final Provider<OpenBlogMenuItem> openContentMenuItem,
       final Provider<DelPostMenuItem> delContentMenuItem,
-      final Provider<RefreshContentMenuItem> refresh, final Provider<TutorialContainerBtn> tutorialBtn,
+      final Provider<RefreshContentMenuItem> refresh, final Provider<TutorialBtn> tutorialBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ContentViewerShareMenu> shareMenuContent,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
@@ -102,7 +102,7 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);

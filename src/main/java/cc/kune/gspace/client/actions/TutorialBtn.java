@@ -24,32 +24,38 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
+import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class TutorialContainerBtn extends ButtonDescriptor {
+public class TutorialBtn extends ButtonDescriptor {
 
   @Singleton
-  public static class GoParentContainerAction extends RolAction {
+  public static class ShowTutorialAction extends RolAction {
 
     private final EventBus bus;
-    private final Session session;
+    private final StateManager stateManager;
 
     @Inject
-    public GoParentContainerAction(final EventBus eventBus, final Session session) {
+    public ShowTutorialAction(final EventBus eventBus, final StateManager stateManager) {
       super(AccessRolDTO.Editor, true);
       this.bus = eventBus;
-      this.session = session;
+      this.stateManager = stateManager;
     }
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      ShowHelpContainerEvent.fire(bus);
+      ShowHelpContainerEvent.fire(bus, new OnTutorialClose() {
+        @Override
+        public void onClose() {
+          stateManager.refreshCurrentState();
+        }
+      });
     }
 
   }
@@ -57,7 +63,7 @@ public class TutorialContainerBtn extends ButtonDescriptor {
   public static final String INFO_CONTAINER_ID = "k-container-info-id";
 
   @Inject
-  public TutorialContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
+  public TutorialBtn(final I18nTranslationService i18n, final ShowTutorialAction action,
       final CommonResources res) {
     super(action);
     this.withToolTip(i18n.t("New to this tool? Here there is some help")).withIcon(res.info()).withStyles(
