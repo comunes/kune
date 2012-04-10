@@ -49,7 +49,7 @@ public class TutorialContainerBtn extends ButtonDescriptor {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-      ShowHelpContainerEvent.fire(bus, session.getCurrentStateToken().getTool());
+      ShowHelpContainerEvent.fire(bus);
     }
 
   }

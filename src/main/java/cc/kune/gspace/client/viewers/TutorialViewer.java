@@ -109,7 +109,7 @@ public class TutorialViewer extends Composite {
     frame.setUrl(FileConstants.TUTORIALS_PREFIX + tool + ".svg" + "#" + currentLang);
   }
 
-  public void setTutorialCloseHandler(final OnTutorialClose onTutorialClose) {
+  public void setOnTutorialCloseHandler(final OnTutorialClose onTutorialClose) {
     this.onTutorialClose = onTutorialClose;
   }
 

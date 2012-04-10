@@ -41,6 +41,7 @@ public final class SiteTokens {
   public final static String SIGN_IN = "signin";
   public final static String SUBTITLES = "sub";
   public final static String TRANSLATE = "translate";
+  public static final String TUTORIAL = "tutorial";
   public final static String VERIFY_EMAIL = "verifyemail";
   public final static String WAVE_INBOX = "inbox";
 
@@ -51,6 +52,7 @@ public final class SiteTokens {
     reserverdWords.add(HOME);
     reserverdWords.add(NEW_GROUP);
     reserverdWords.add(PREVIEW);
+    reserverdWords.add(TUTORIAL);
     reserverdWords.add(REGISTER);
     reserverdWords.add(SIGN_IN);
     reserverdWords.add(TRANSLATE);

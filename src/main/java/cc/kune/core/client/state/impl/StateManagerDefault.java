@@ -62,6 +62,8 @@ import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
+import cc.kune.gspace.client.viewers.TutorialViewer;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -89,17 +91,20 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   private final Provider<SignIn> signIn;
   private final SiteTokenListeners siteTokens;
   private final TokenMatcher tokenMatcher;
+  private final Provider<TutorialViewer> tutorialViewer;
 
   @Inject
   public StateManagerDefault(final ContentCache contentProvider, final Session session,
       final HistoryWrapper history, final TokenMatcher tokenMatcher, final EventBus eventBus,
-      final SiteTokenListeners siteTokens, final Provider<SignIn> signIn) {
+      final SiteTokenListeners siteTokens, final Provider<SignIn> signIn,
+      final Provider<TutorialViewer> tutorialViewer) {
     this.tokenMatcher = tokenMatcher;
     this.eventBus = eventBus;
     this.contentCache = contentProvider;
     this.session = session;
     this.history = history;
     this.signIn = signIn;
+    this.tutorialViewer = tutorialViewer;
     this.previousGroupToken = null;
     this.previousHash = null;
     this.resumedHistoryToken = null;
@@ -362,6 +367,17 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             SpaceConfEvent.fire(eventBus, Space.groupSpace, sndToken);
             SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(sndToken));
             getContent(new StateToken(sndToken));
+            // Don't continue
+            return;
+          } else if (firstToken.equals(SiteTokens.TUTORIAL)) {
+            getContent(new StateToken(sndToken), true, new OnFinishGetContent() {
+              @Override
+              public void finish() {
+                ShowHelpContainerEvent.fire(eventBus);
+              }
+            });
+            // Don't continue
+            return;
           } else {
             final HistoryTokenCallback tokenWithRedirect = siteTokens.get(firstToken);
             if (tokenWithRedirect != null) {

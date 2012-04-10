@@ -29,7 +29,6 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescProviderCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.log.Log;
 import cc.kune.core.client.registry.IdGenerator;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.AccessRights;
@@ -123,7 +122,8 @@ public class ActionRegistryByType {
       final GuiActionDescrip descrip = descripProv.get();
       final AbstractAction action = descrip.getAction();
       if (action instanceof RolAction) {
-        Log.debug("Must add action?: " + action + ", isLogged: " + isLogged + ", r: " + rights);
+        // Log.debug("Must add action?: " + action + ", isLogged: " + isLogged +
+        // ", r: " + rights);
         if (mustAdd((RolAction) action, isLogged, rights)) {
           add(collection, descrip, targetItem);
         }

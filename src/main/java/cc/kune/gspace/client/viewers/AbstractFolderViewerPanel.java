@@ -181,6 +181,6 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     resizeTutorialFrame();
     docContainer.add(tutorialViewer);
     docContainer.showWidget(tutorialViewer);
-    tutorialViewer.setTutorialCloseHandler(onTutorialClose);
+    tutorialViewer.setOnTutorialCloseHandler(onTutorialClose);
   }
 }

@@ -212,7 +212,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
               new Timer() {
                 @Override
                 public void run() {
-                  ShowHelpContainerEvent.fire(getEventBus(), state.getStateToken().getTool());
+                  ShowHelpContainerEvent.fire(getEventBus());
                 }
               }.schedule(2000);
             }

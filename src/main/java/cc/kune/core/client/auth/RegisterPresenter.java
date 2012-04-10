@@ -204,8 +204,7 @@ public class RegisterPresenter extends
                   new Timer() {
                     @Override
                     public void run() {
-                      ShowHelpContainerEvent.fire(getEventBus(),
-                          session.getCurrentStateToken().getTool());
+                      ShowHelpContainerEvent.fire(getEventBus());
                     }
                   }.schedule(2000);
                 }

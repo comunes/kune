@@ -45,4 +45,8 @@ public class TokenUtils {
         compose(Base64Utils.toBase64(title.getBytes()), Base64Utils.toBase64(description.getBytes()),
             redirect));
   }
+
+  public static String tutorial(final String token) {
+    return addRedirect(SiteTokens.TUTORIAL, token);
+  }
 }

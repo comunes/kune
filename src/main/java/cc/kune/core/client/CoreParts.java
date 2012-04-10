@@ -107,6 +107,12 @@ public class CoreParts {
         register.get().doRegister();
       }
     });
+    tokenListener.put(SiteTokens.TUTORIAL, new HistoryTokenAuthNotNeededCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        // Do nothing (move SMD part here?)
+      }
+    });
     tokenListener.put(SiteTokens.NEW_GROUP,
         new HistoryTokenMustBeAuthCallback(i18n.t(CoreMessages.REGISTER_TO_CREATE_A_GROUP)) {
           @Override
@@ -185,7 +191,6 @@ public class CoreParts {
             }
           }
         });
-
       }
     });
     tokenListener.put(SiteTokens.RESET_PASSWD, new HistoryTokenAuthNotNeededCallback() {

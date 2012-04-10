@@ -36,18 +36,15 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
 
   private static final Type<ShowHelpContainerHandler> TYPE = new Type<ShowHelpContainerHandler>();
 
-  public static void fire(final HasHandlers source, final String tool) {
-    source.fireEvent(new ShowHelpContainerEvent(tool));
+  public static void fire(final HasHandlers source) {
+    source.fireEvent(new ShowHelpContainerEvent());
   }
 
   public static Type<ShowHelpContainerHandler> getType() {
     return TYPE;
   }
 
-  private final String tool;
-
-  public ShowHelpContainerEvent(final String tool) {
-    this.tool = tool;
+  public ShowHelpContainerEvent() {
   }
 
   @Override
@@ -63,10 +60,6 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
   @Override
   public Type<ShowHelpContainerHandler> getAssociatedType() {
     return TYPE;
-  }
-
-  public String getTool() {
-    return tool;
   }
 
   @Override
