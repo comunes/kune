@@ -34,9 +34,9 @@
      showborder="true"
      inkscape:showpageshadow="false"
      inkscape:window-width="1078"
-     inkscape:window-height="1867"
+     inkscape:window-height="919"
      inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-y="972"
      inkscape:window-maximized="0" />
   <!-- Start kune i18n part -->
   <script
@@ -48,8 +48,8 @@
     ];
   </script>
   <script
-     id="kunelang"
-     xlink:href="/home/vjrj/proyectos/dev/kune/trunk/src/main/webapp/tutorials/lang.js" />
+     xlink:href="lang.js"
+     id="kunelang" />
   <!-- End kune i18n part -->
   <!-- Start kune font part -->
   <xhtml:link
@@ -313,32 +313,34 @@
        width="424.69003"
        id="rect4591"
        style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
-    <path
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
-       d="m 80.33563,-53.393815 c 140.69114,0 281.38228,0 422.07342,0 0,43.35309 0,86.70617 0,130.05926 -140.69114,0 -281.38228,0 -422.07342,0 0,-43.35309 0,-86.70617 0,-130.05926 z"
-       id="rect8725"
-       inkscape:connector-curvature="0" />
     <rect
-       y="415.52319"
-       x="111.55447"
-       height="100.40426"
-       width="220.28499"
-       id="rect14204"
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635466;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+       style="opacity:0.5;fill:none;stroke:#ff00ff;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       id="rect10514"
+       width="423.00739"
+       height="133.60136"
+       x="81.427147"
+       y="-54.500874" />
     <rect
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635466;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
-       id="rect6444"
-       width="212.24748"
-       height="91.091072"
-       x="83.466354"
-       y="314.80923" />
+       y="131.49913"
+       x="65.427147"
+       height="131.91872"
+       width="343.92319"
+       id="rect10516"
+       style="opacity:0.5;fill:none;stroke:#ff00ff;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
     <rect
-       y="132.85208"
-       x="67.597923"
-       height="125.81336"
-       width="338.27298"
-       id="rect7368"
-       style="opacity:0.5;fill:none;stroke:#ff5555;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+       style="opacity:0.5;fill:none;stroke:#ff00ff;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       id="rect10518"
+       width="212.67705"
+       height="96.583221"
+       x="81.427147"
+       y="312.49915" />
+    <rect
+       y="414.49918"
+       x="113.42714"
+       height="101.63116"
+       width="221.09026"
+       id="rect10520"
+       style="opacity:0.5;fill:none;stroke:#ff00ff;stroke-width:0.66635472;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
   </g>
   <g
      style="display:inline"
@@ -735,12 +737,12 @@
      ns1:timeout-enable="false"
      ns1:transition-profile="linear" />
   <ns1:frame
-     ns1:refid="rect8725"
+     ns1:refid="rect10514"
      ns1:sequence="2"
      ns1:transition-duration-ms="1000"
      ns1:hide="true"
      ns1:clip="true"
-     ns1:title="edited"
+     ns1:title="asdocs"
      ns1:transition-zoom-percent="0"
      ns1:timeout-ms="5000"
      ns1:timeout-enable="false"
@@ -750,14 +752,14 @@
      ns1:timeout-enable="false"
      ns1:timeout-ms="5000"
      ns1:transition-zoom-percent="0"
-     ns1:title="speeds"
+     ns1:title="speeed"
      ns1:clip="true"
      ns1:hide="true"
      ns1:transition-duration-ms="1000"
      ns1:sequence="3"
-     ns1:refid="rect7368" />
+     ns1:refid="rect10516" />
   <ns1:frame
-     ns1:refid="rect6444"
+     ns1:refid="rect10518"
      ns1:sequence="4"
      ns1:transition-duration-ms="1000"
      ns1:hide="true"
@@ -777,5 +779,5 @@
      ns1:hide="true"
      ns1:transition-duration-ms="1000"
      ns1:sequence="5"
-     ns1:refid="rect14204" />
+     ns1:refid="rect10520" />
 </svg>
