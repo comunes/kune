@@ -39,15 +39,17 @@ import com.google.inject.BindingAnnotation;
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Authorizated {
+  // Why full package?
+  // http://code.google.com/p/projectlombok/issues/detail?id=121
 
-  AccessRol accessRolRequired() default AccessRol.Viewer;
+  AccessRol accessRolRequired() default cc.kune.core.shared.domain.AccessRol.Viewer;
 
   /**
    * If the action is over a "group", "tool", "container" or over the content.
    * 
    * @return
    */
-  ActionLevel actionLevel() default ActionLevel.content;
+  ActionLevel actionLevel() default cc.kune.core.server.auth.ActionLevel.content;
 
   boolean mustCheckMembership() default true;
 

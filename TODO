@@ -99,6 +99,14 @@ Groups and subgroups
 | New folder |        |         |         |           |
 |------------+--------+---------+---------+-----------|
 
+** mvn compile fails depending of java version while compiles in eclipse:
+http://stackoverflow.com/a/2858811
+http://jenkins.361315.n4.nabble.com/jenkins-maven-build-requires-specific-jdk-1-6-version-td3931835.html
+http://maven.40175.n5.nabble.com/Freaking-out-javac-works-maven-compiler-plugin-does-not-td126247.html
+https://bugs.eclipse.org/bugs/show_bug.cgi?id=340506
+https://bugs.eclipse.org/bugs/show_bug.cgi?id=333011
+http://stackoverflow.com/questions/5633424/is-it-a-eclipse-or-maven-compiler-plugin-bug-the-generics-class-cast-issue
+https://www.google.com/search?client=ubuntu&channel=fs&q=incompatible+types++maven+compile&ie=utf-8&oe=utf-8#hl=es&client=ubuntu&channel=fs&sclient=psy-ab&q=incompatible+types++maven+compile+eclipse&oq=incompatible+types++maven+compile+eclipse&aq=f&aqi=&aql=&gs_l=serp.3...1778611l1779979l0l1780183l8l5l0l0l0l0l232l232l2-1l1l0.frgbld.&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.,cf.osb&fp=e35c25ea2c4a1e38
 ** setui/root/port 80
    [ ] http://wiki.eclipse.org/Jetty/Howto/Port80#Configuring_Jetty.27s_SetUID_Feature
    [ ] https://github.com/disconnect/apache-websocket

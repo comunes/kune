@@ -724,6 +724,12 @@
   <!-- <artifactId>jetty-continuation</artifactId> -->
   <!-- <version>${jetty.version}</version> -->
   <!-- </dependency> -->
+  <dependency>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-release-plugin</artifactId>
+    <version>2.2.2</version>
+    <type>maven-plugin</type>
+  </dependency>
   </dependencies>
   <distributionManagement>
     <repository>
@@ -753,6 +759,7 @@
   </developers>
   <scm>
     <url>svn://scm.ourproject.org/svnroot/kune/trunk</url>
+    <connection>scm:svn:http://scm.ourproject.org/svnroot/kune/trunk</connection>
   </scm>
   <build>
     <plugins>

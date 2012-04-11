@@ -27,7 +27,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface REST {
-    String format() default RESTMethod.FORMAT_JSON;
+  // Why full package?
+  // http://code.google.com/p/projectlombok/issues/detail?id=121
+  String format() default cc.kune.core.server.rack.filters.rest.RESTMethod.FORMAT_JSON;
 
-    String[] params();
+  String[] params();
 }

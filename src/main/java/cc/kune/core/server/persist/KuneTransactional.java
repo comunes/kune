@@ -44,5 +44,5 @@ public @interface KuneTransactional {
    * A list of exceptions to rollback on, if thrown by the transactional method.
    * These exceptions are propagated correctly after a rollback.
    */
-  Class<? extends Exception>[] rollbackOn() default RuntimeException.class;
+  Class<? extends Exception>[] rollbackOn() default java.lang.RuntimeException.class;
 }
