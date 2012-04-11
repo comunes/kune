@@ -729,6 +729,13 @@
     <artifactId>maven-release-plugin</artifactId>
     <version>2.2.2</version>
     <type>maven-plugin</type>
+    <configuration>
+      <!--
+        During release:perform, enable the "release" profile
+       -->
+      <releaseProfiles>release</releaseProfiles>
+      <goals>assembly:assembly -P production</goals>
+    </configuration>
   </dependency>
   </dependencies>
   <distributionManagement>
