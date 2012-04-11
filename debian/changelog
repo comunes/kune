@@ -1,46 +1,47 @@
-kune (0.1.0+b10) oneiric; urgency=low
+kune (0.1.0+b10) unstable; urgency=low
 
-  * #tutorial hash, tutorial close, subviews (in the future for content translations)
+  * #tutorial hash, tutorial close, subviews (in the future for content
+    translations)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 10 Apr 2012 21:29:35 +0200
 
-kune (0.1.0+b9) oneiric; urgency=low
+kune (0.1.0+b9) unstable; urgency=low
 
   * Tutorials updated. WaveStatusIndicator fixed.
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 09 Apr 2012 23:19:19 +0200
 
-kune (0.1.0+b8) oneiric; urgency=low
+kune (0.1.0+b8) unstable; urgency=low
 
   * Perms in Events fixed. Wave updated. Lists deletion by admin.
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 08 Apr 2012 21:31:33 +0200
 
-kune (0.1.0+b7) oneiric; urgency=low
+kune (0.1.0+b7) unstable; urgency=low
 
   * Improved openfire connection, debian init and wave offline render and cache.
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 02 Apr 2012 22:51:59 +0200
 
-kune (0.1.0+b6) oneiric; urgency=low
+kune (0.1.0+b6) unstable; urgency=low
 
   * Several bug fixes (trash, access list,...)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 02 Apr 2012 06:31:29 +0200
 
-kune (0.1.0+b5) oneiric; urgency=low
+kune (0.1.0+b5) unstable; urgency=low
 
   * Added some new languages and added some profiles to make development faster
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 01 Apr 2012 15:45:26 +0200
 
-kune (0.1.0+b4) oneiric; urgency=low
+kune (0.1.0+b4) unstable; urgency=low
 
   * Improved trash funcionality, other minor changes
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 31 Mar 2012 19:42:30 +0200
 
-kune (0.1.0+b3) oneiric; urgency=low
+kune (0.1.0+b3) unstable; urgency=low
 
   * Several changes (cache of SN and events, minor style changes, etc). See ChangeLog
 

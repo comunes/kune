@@ -35,15 +35,15 @@ public class UserSessionMonitor implements HttpSessionListener {
   @Override
   public void sessionCreated(final HttpSessionEvent event) {
     LOG.debug(String.format("Session created (with max inactive: %d)",
-        event.getSession().getMaxInactiveInterval()), new Throwable());
+        event.getSession().getMaxInactiveInterval())); // , new Throwable());
     // event.getSession().getServletContext().getContextPath(),
   }
 
   @Override
   public void sessionDestroyed(final HttpSessionEvent event) {
     LOG.debug(String.format("Session destroyed (with max inactive: %d)",
-        event.getSession().getMaxInactiveInterval()), new Throwable());
-    // event.getSession().getServletContext().getContextPath(),
+        event.getSession().getMaxInactiveInterval())); // , new Throwable());
+
   }
 
 }

@@ -20,6 +20,7 @@
 package cc.kune.chat.client;
 
 import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.events.SndClickEvent;
 
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
@@ -47,10 +48,11 @@ public class KuneUnattendedPresenter {
           active = true;
           SndClickEvent.fire(eventBus);
           action.setBlink(true);
-
+          Log.info("BLINK true");
         } else if (unattendedChatsCount == 0 && active == true) {
           action.setBlink(false);
           active = false;
+          Log.info("BLINK false");
         }
       }
     });
