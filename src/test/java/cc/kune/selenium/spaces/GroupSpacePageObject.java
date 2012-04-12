@@ -19,6 +19,7 @@
  */
 package cc.kune.selenium.spaces;
 
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -35,6 +36,7 @@ import cc.kune.gspace.client.actions.GoParentContainerBtn;
 import cc.kune.gspace.client.actions.NewContainerBtn;
 import cc.kune.gspace.client.actions.NewContentBtn;
 import cc.kune.gspace.client.actions.NewMenuProvider;
+import cc.kune.gspace.client.actions.TutorialBtn;
 import cc.kune.gspace.client.options.GroupOptionsPanel;
 import cc.kune.gspace.client.options.GroupOptionsPresenter;
 import cc.kune.gspace.client.options.license.EntityOptDefLicensePanel;
@@ -43,6 +45,7 @@ import cc.kune.gspace.client.options.style.EntityOptStylePanel;
 import cc.kune.gspace.client.options.tools.EntityOptToolsPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
 import cc.kune.gspace.client.viewers.FolderViewerAsTablePanel;
+import cc.kune.gspace.client.viewers.TutorialViewer;
 import cc.kune.gspace.client.viewers.items.FolderItemWidget;
 import cc.kune.lists.client.actions.NewListAction;
 import cc.kune.lists.client.actions.NewListPostAction;
@@ -62,17 +65,21 @@ public class GroupSpacePageObject extends PageObject {
   public WebElement addNewBuddieTextBox;
   @FindBy(id = SeleniumConstants.GWTDEV + AddEntityToThisGroupAction.ADD_NEW_MEMBER_TEXTBOX)
   public WebElement addNewMemberTextBox;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + BlogsToolConstants.TOOL_NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX
+      + BlogsToolConstants.TOOL_NAME)
   public WebElement blogTool;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + ChatToolConstants.TOOL_NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX
+      + ChatToolConstants.TOOL_NAME)
   public WebElement chatTool;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + DocsToolConstants.TOOL_NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX
+      + DocsToolConstants.TOOL_NAME)
   public WebElement docTool;
   @FindBy(xpath = "//div[@id='gwt-debug-k-cnt-title-id']/div/span")
   public WebElement entityTitle;
   @FindBy(xpath = "//div[@id='gwt-debug-k-cnt-title-id']/div/input")
   public WebElement entityTitleTextarea;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + EventsToolConstants.TOOL_NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX
+      + EventsToolConstants.TOOL_NAME)
   public WebElement eventTool;
   @FindBy(xpath = "//td/img")
   public WebElement firstAvatarOfGroup;
@@ -98,7 +105,8 @@ public class GroupSpacePageObject extends PageObject {
   public WebElement groupOptionsTools;
   @FindBy(id = SeleniumConstants.GWTDEV + SubscribeToListBtn.ID)
   public WebElement listSubscribeBtn;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + ListsToolConstants.TOOL_NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX
+      + ListsToolConstants.TOOL_NAME)
   public WebElement listTool;
   @FindBy(id = SeleniumConstants.GWTDEV + NewContainerBtn.BTN_ID)
   public WebElement newContainerBtn;
@@ -118,15 +126,41 @@ public class GroupSpacePageObject extends PageObject {
   public WebElement openRoomBtn;
   @FindBy(id = SeleniumConstants.GWTDEV + EntitySearchPanel.OK_ID)
   public WebElement searchEntitiesOk;
+  @FindBy(id = SeleniumConstants.GWTDEV + TutorialBtn.INFO_CONTAINER_ID)
+  public WebElement showTutorialBtn;
   @FindBy(xpath = "//div[3]/div/button")
   public WebElement socialNetOptions;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + TasksToolConstants.TOOL_NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX
+      + TasksToolConstants.TOOL_NAME)
   public WebElement taskTool;
-  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX + WikiToolConstants.TOOL_NAME)
+  @FindBy(xpath = "//div[5]/div/div/div/div[2]/div/div")
+  public WebElement tutorialCloseBtn;
+  @FindBy(id = SeleniumConstants.GWTDEV + TutorialViewer.IFRAME_ID)
+  public WebElement tutorialFrame;
+  @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX
+      + WikiToolConstants.TOOL_NAME)
   public WebElement wikiTool;
 
   public void openFirtsContent() {
     SeleniumUtils.doubleClick(getWebDriver(), firstFolderItem);
+  }
+
+  public void showTutorial(final int... slidesSegs) {
+    showTutorialBtn.click();
+    final Point showLocation = showTutorialBtn.getLocation();
+    SeleniumUtils.showCursor(getWebDriver(), showLocation.getX() - 50, showLocation.getY() + 50);
+    for (int segs : slidesSegs) {
+      if (segs < 0) {
+        SeleniumUtils.doScreenshot(getWebDriver(), "tutorials");
+        segs = segs * -1;
+      }
+      sleep(segs * 1000);
+      SeleniumUtils.jsExec(getWebDriver()).executeScript(
+          "document.getElementById('" + SeleniumConstants.GWTDEV + TutorialViewer.IFRAME_ID
+              + "').contentWindow.sozi.player.moveToNext();");
+    }
+    getWebDriver().switchTo().defaultContent();
+    tutorialCloseBtn.click();
   }
 
 }

@@ -47,9 +47,10 @@ public class LoginRememberManagerImpl implements LoginRememberManager {
    */
   @Override
   public native void clickFormLogin() /*-{
-		$doc.getElementById("loginsubmit").click();
 		$doc.getElementById("login").submit();
   }-*/;
+
+  // $doc.getElementById("loginsubmit").click();
 
   @Override
   public String getNickOrEmail() {

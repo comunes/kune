@@ -23,6 +23,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import cc.kune.core.client.notify.confirm.UserConfirmPanel;
+import cc.kune.core.client.sitebar.MyGroupsMenu;
 import cc.kune.core.client.sitebar.SitebarNewGroupLink;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
@@ -39,6 +40,10 @@ public class SitePageObject extends PageObject {
   public WebElement groupSpaceBtn;
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.HOME_SPACE_ID)
   public WebElement homeSpaceBtn;
+  @FindBy(id = SeleniumConstants.GWTDEV + MyGroupsMenu.MENU_ID)
+  public WebElement myGroupMenu;
+  @FindBy(id = SeleniumConstants.GWTDEV + MyGroupsMenu.NEW_GROUP_MENUITEM_ID)
+  public WebElement myGroupMenuNewGroupItem;
   @FindBy(id = SeleniumConstants.GWTDEV + SitebarNewGroupLink.NEW_GROUP_BTN_ID)
   public WebElement newGroupBtn;
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.PUBLIC_SPACE_ID)

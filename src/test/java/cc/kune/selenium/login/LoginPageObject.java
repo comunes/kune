@@ -34,11 +34,11 @@ public class LoginPageObject extends AbstractLoginObject {
   private WebElement anonWelcome;
   @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.CREATE_ONE)
   protected WebElement createOneLink;
-  @FindBy(id = SignInForm.PASSWORD_FIELD_ID + SeleniumConstants.INPUT)
+  @FindBy(id = SignInForm.PASSWORD_FIELD_ID)
   private WebElement passwd;
   @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.SIGN_IN_BUTTON_ID)
   private WebElement signInButton;
-  @FindBy(id = SignInForm.USER_FIELD_ID + SeleniumConstants.INPUT)
+  @FindBy(id = SignInForm.USER_FIELD_ID)
   private WebElement user;
 
   public LoginPageObject() {

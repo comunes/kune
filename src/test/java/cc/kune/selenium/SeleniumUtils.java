@@ -87,7 +87,7 @@ public class SeleniumUtils {
     showCursor(webdriver);
   }
 
-  private static JavascriptExecutor jsExec(final WebDriver webdriver) {
+  public static JavascriptExecutor jsExec(final WebDriver webdriver) {
     return (JavascriptExecutor) webdriver;
   }
 

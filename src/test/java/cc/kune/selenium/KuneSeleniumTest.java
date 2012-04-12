@@ -44,7 +44,12 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
         t("Here you can create groups and collaborate within them"));
     // showMsg(t("Let's create a new group"));
     // sleep(<1000);
-    site.newGroupBtn.click();
+    if (site.newGroupBtn.isDisplayed()) {
+      site.newGroupBtn.click();
+    } else {
+      // Several groups already
+      // For now we use #newgroup in the future MyGroup constant
+    }
 
     newGroup.create(sufix, shortname, longname, description, tags, groupType);
 
@@ -69,6 +74,7 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
     showTitleSlide(t("Group space (collaboration space) III "),
         t("Let's see the different tools you have available"));
 
+    // docs
     showTooltip(groupSpace.firstFolderItem);
     sleep(1500);
     groupSpace.openFirtsContent();
@@ -86,26 +92,35 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
     groupSpace.newMenuBtn.click();
     sleep(2000);
     // FIXME move content?
+    groupSpace.showTutorial(3, 4, -5, 4, 4, 2, 5, 3, 6, 7, 6, 4, 4, 5, 5, 3, 3, 4, 6, 4, 3);
 
+    // blogs
     groupSpace.blogTool.click();
-    groupSpace.openFirtsContent();
-    sleep(2000);
-    groupSpace.newContentBtn.click();
-    sleep(1000);
-    groupSpace.goParentBtn.click();
+    showTooltip(groupSpace.blogTool);
+    sleep(3000);
+    groupSpace.showTutorial(3, 4, 3, 3, 6, 5, 5, 3, 3);
+    // groupSpace.openFirtsContent();
+    // sleep(2000);
+    // groupSpace.newContentBtn.click();
+    // sleep(1000);
+    // groupSpace.goParentBtn.click();
 
+    // chats
     groupSpace.chatTool.click();
     showTooltip(groupSpace.chatTool);
-    sleep(2000);
-    groupSpace.openFirtsContent();
-    sleep(2000);
-    groupSpace.openRoomBtn.click();
-    sleep(2000);
-    chat.chatIcon.click();
+    sleep(3000);
+    groupSpace.showTutorial(3, 6, 6, 4, 7, 3, 3);
+    // groupSpace.openFirtsContent();
+    // sleep(2000);
+    // groupSpace.openRoomBtn.click();
+    // sleep(2000);
+    // chat.chatIcon.click();
 
+    // lists
     groupSpace.listTool.click();
     showTooltip(groupSpace.listTool);
     sleep(2000);
+    groupSpace.showTutorial(3, 4, 5, 4, 5, 6, 5, 4, 5, 7, 3, 3);
     groupSpace.newContainerBtn.click();
     sleep(1000);
     groupSpace.newListText.sendKeys(t("News"));
@@ -115,44 +130,52 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
     groupSpace.listSubscribeBtn.click();
     sleep(2000);
     doScreenshot("newlist");
-
     groupSpace.newContentBtn.click();
     sleep(1000);
     groupSpace.newListPostText.sendKeys(t("Welcome to this list"));
     sleep(1000);
     groupSpace.newListPostCreateBtn.click();
-    sleep(1000);
+    sleep(3000);
     groupSpace.goParentBtn.click();
     // sleep(2000);
 
     site.userSpaceBtn.click();
     showMsg(t("All new contents are shown also in your Inbox"));
-    sleep(2000);
-    // userSpace.getFirstWave().click();
-    // sleep(1000);
+    sleep(3000);
+    userSpace.getFirstWave().click();
+    sleep(3000);
     site.groupSpaceBtn.click();
 
+    // events
     groupSpace.eventTool.click();
     showTooltip(groupSpace.eventTool);
     sleep(2000);
     doScreenshot("calendar");
+    groupSpace.showTutorial(3, 5, 6, 7, 3, 5, 3, 3, 3);
     // groupSpace.openFirtsContent();
     // sleep(2000);
 
+    // tasks
     groupSpace.taskTool.click();
     showTooltip(groupSpace.taskTool);
     sleep(2000);
-    groupSpace.openFirtsContent();
-    sleep(2000);
-    doScreenshot("tasks");
-    groupSpace.openFirtsContent();
-    sleep(2000);
+    groupSpace.showTutorial(3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 3);
+    // groupSpace.openFirtsContent();
+    // sleep(2000);
+    // doScreenshot("tasks");
+    // groupSpace.openFirtsContent();
+    // sleep(2000);
 
+    // wiki
     groupSpace.wikiTool.click();
     showTooltip(groupSpace.wikiTool);
     sleep(2000);
-    groupSpace.openFirtsContent();
-    sleep(3000);
+    groupSpace.showTutorial(3, 5, 3, 3, 3);
+    // groupSpace.openFirtsContent();
+    // sleep(3000);
+
+    // // barters
+    // groupSpace.showTutorial(3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3);
   }
 
   protected void login() {

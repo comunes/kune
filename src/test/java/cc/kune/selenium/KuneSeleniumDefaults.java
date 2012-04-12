@@ -109,6 +109,7 @@ public class KuneSeleniumDefaults {
   public void answerOnNextPrompt(final String answer) {
     final Alert alert = webdriver.switchTo().alert();
     alert.sendKeys(answer);
+    sleep(2000);
     alert.accept();
   }
 
@@ -120,6 +121,7 @@ public class KuneSeleniumDefaults {
   public void beforeSuite() {
     resize();
     home();
+    setPosition(100, 0);
     SeleniumUtils.initCursor(webdriver);
     SeleniumUtils.showCursor(webdriver);
     SeleniumUtils.showCursor(webdriver, login.getAnonMsg());
@@ -240,6 +242,10 @@ public class KuneSeleniumDefaults {
         }
       }
     }
+  }
+
+  public void setPosition(final int x, final int y) {
+    webdriver.manage().window().setPosition(new Point(x, y));
   }
 
   public void showCursor(final int x, final int y) {

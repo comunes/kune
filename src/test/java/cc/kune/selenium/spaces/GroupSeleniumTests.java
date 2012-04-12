@@ -21,15 +21,16 @@ package cc.kune.selenium.spaces;
 
 import org.testng.annotations.Test;
 
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.selenium.KuneSeleniumTest;
 import cc.kune.selenium.SeleniumConstants;
 import cc.kune.selenium.SeleniumUtils;
 
-public class NewGroupSeleniumTests extends KuneSeleniumTest {
+public class GroupSeleniumTests extends KuneSeleniumTest {
 
   @Test(dataProvider = "newGroups")
-  public void basicSignIn(final String shortname, final String longname, final String description,
+  public void newGroupTests(final String shortname, final String longname, final String description,
       final String tags, final GroupType groupType) {
     SeleniumUtils.fastSpeed(false);
     login.assertIsDisconnected();
@@ -39,10 +40,29 @@ public class NewGroupSeleniumTests extends KuneSeleniumTest {
 
     final String sufix = getTempString();
 
+    gotoToken(SiteTokens.NEW_GROUP);
+
     groupCreation(shortname, longname, description, tags, groupType, sufix);
 
     logout();
 
+    login.assertIsDisconnected();
+  }
+
+  @Test
+  public void testTutorial() {
+    SeleniumUtils.fastSpeed(false);
+    login.assertIsDisconnected();
+
+    login.signIn(SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_PASSWD);
+    login.assertIsConnectedAs(SeleniumConstants.USER_SHORNAME);
+
+    site.groupSpaceBtn.click();
+
+    groupSpace.docTool.click();
+    groupSpace.showTutorial(4, 5, 4, 4, 2, 5, 3, 6, 7, 6, 4, 4, 5, 5, 3, 3, 4, 6, 4, 3);
+
+    logout();
     login.assertIsDisconnected();
   }
 

@@ -59,7 +59,9 @@ public class TutorialViewer extends Composite {
   interface TutorialViewerUiBinder extends UiBinder<Widget, TutorialViewer> {
   }
 
+  public static final String CLOSE_BTN_ID = "k-tuto-view-close-btn";
   private static final int FOOTBAR = 12;
+  public static final String IFRAME_ID = "k-tuto-iframe";
   private static TutorialViewerUiBinder uiBinder = GWT.create(TutorialViewerUiBinder.class);
   @UiField
   CloseDialogButton closeBtn;
@@ -79,12 +81,14 @@ public class TutorialViewer extends Composite {
     this.session = session;
     this.gsArmor = gsArmor;
     initWidget(uiBinder.createAndBindUi(this));
+    frame.ensureDebugId(IFRAME_ID);
     stateManager.onToolChanged(true, new ToolChangedHandler() {
       @Override
       public void onToolChanged(final ToolChangedEvent event) {
         setTool(event.getNewTool());
       }
     });
+    closeBtn.ensureDebugId(CLOSE_BTN_ID);
     closeBtn.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {

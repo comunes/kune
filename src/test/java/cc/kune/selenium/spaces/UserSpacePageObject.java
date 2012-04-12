@@ -36,12 +36,6 @@ public class UserSpacePageObject extends PageObject {
   @FindBy(xpath = "//div[3]/div/div/div[2]/div/div/div[3]")
   private WebElement firstReplyTitlebar;
 
-  @FindBy(xpath = "//div[3]/div/div/span[2]")
-  private WebElement firstWave;
-
-  @FindBy(xpath = "//div[2]/div[2]/div[4]")
-  private WebElement newWave;
-
   @FindBy(xpath = "//div[10]/div/div/div/div[3]/div/div[2]")
   private WebElement replyRootBlip;
 
@@ -70,7 +64,7 @@ public class UserSpacePageObject extends PageObject {
   }
 
   public WebElement getFirstWave() {
-    return findElement(By.xpath("//div[3]/div[4]/div"));
+    return findElement(By.xpath("//div[3]/div/div/span"));
   }
 
   public WebElement getNewWave() {

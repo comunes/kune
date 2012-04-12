@@ -38,6 +38,7 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     final String shortName = t(shortNameUntrans);
     final String longName = t(longNameUntrans);
     final String email = t(emailUntrans);
+    final String buddy = "luther";
     SeleniumUtils.fastSpeed(false);
     // 15 chars, the limit, so we don't use shortName
     final String sufix = getTempString();
@@ -70,8 +71,16 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     userSpace.getFirstWave().click();
     sleep(2000);
     userSpace.getNewWave().click();
+
+    userSpace.getAddParcipant().click();
+    sleep(1000);
+    answerOnNextPrompt(buddy);
+    sleep(3000);
+
     showMsg(t("where you can compose personal messages..."));
+    sleep(1000);
     showMsg(t("but also create contents to publish later"));
+    sleep(1000);
     userSpace.rootBlipText().sendKeys(t("Congratulations for your report\n\n"));
     sleep(1000);
     userSpace.getCursive().click();
@@ -82,12 +91,9 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     userSpace.rootBlipText().sendKeys(t("Best\n\nJane"));
     sleep(3000);
     userSpace.getRootEdit().click();
-    userSpace.getAddParcipant().click();
-    sleep(1000);
-    answerOnNextPrompt("admin");
-    sleep(2000);
-    doScreenshot("inbox");
     sleep(3000);
+    doScreenshot("inbox");
+    sleep(2000);
 
     // group space
     showTitleSlide(t("Your personal public space"), t("here you can have your blog, etc"));
@@ -98,7 +104,7 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     sleep(1000);
     groupSpace.addBuddieBtn.click();
     groupSpace.addNewBuddieTextBox.click();
-    groupSpace.addNewBuddieTextBox.sendKeys("admin");
+    groupSpace.addNewBuddieTextBox.sendKeys(buddy);
     groupSpace.addNewBuddieTextBox.sendKeys(Keys.ARROW_DOWN);
     sleep(500);
     groupSpace.firstFromSuggestionBox.click();
@@ -116,7 +122,7 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     chat.show();
     sleep(2000);
 
-    final XmppURI jid = XmppURI.jid("luther" + "@" + SeleniumConf.SITE.getDomain());
+    final XmppURI jid = XmppURI.jid(buddy + "@" + SeleniumConf.SITE.getDomain());
     final String jids = jid.toString();
     // chat.getRosterItem("", jids).click();
 

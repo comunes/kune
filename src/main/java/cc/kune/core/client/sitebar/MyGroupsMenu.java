@@ -46,6 +46,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class MyGroupsMenu extends MenuDescriptor {
   public static final String MENU_ID = "k-sitebar-my-group";
+  public static final String NEW_GROUP_MENUITEM_ID = "k-sitebar-my-group-newmenuitem";
   private final Provider<ClientFileDownloadUtils> downloadProvider;
   private final GotoGroupAction gotoGroupAction;
   private final SitebarNewGroupAction newGroupAction;
@@ -108,7 +109,7 @@ public class MyGroupsMenu extends MenuDescriptor {
           addPartipationToMenu(group);
         }
         new MenuSeparatorDescriptor(MyGroupsMenu.this);
-        new MenuItemDescriptor(MyGroupsMenu.this, newGroupAction);
+        new MenuItemDescriptor(MyGroupsMenu.this, newGroupAction).withId(NEW_GROUP_MENUITEM_ID);
         siteOptions.refreshActions();
       } else {
         setVisible(false);
