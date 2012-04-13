@@ -133,7 +133,7 @@ public class GroupSpacePageObject extends PageObject {
   @FindBy(id = SeleniumConstants.GWTDEV + ToolSelectorItemPanel.TOOL_ID_PREFIX
       + TasksToolConstants.TOOL_NAME)
   public WebElement taskTool;
-  @FindBy(xpath = "//div[5]/div/div/div/div[2]/div/div")
+  @FindBy(id = SeleniumConstants.GWTDEV + TutorialViewer.CLOSE_BTN_ID)
   public WebElement tutorialCloseBtn;
   @FindBy(id = SeleniumConstants.GWTDEV + TutorialViewer.IFRAME_ID)
   public WebElement tutorialFrame;
@@ -160,6 +160,7 @@ public class GroupSpacePageObject extends PageObject {
               + "').contentWindow.sozi.player.moveToNext();");
     }
     getWebDriver().switchTo().defaultContent();
+    sleep(500);
     tutorialCloseBtn.click();
   }
 

@@ -92,7 +92,7 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
     groupSpace.newMenuBtn.click();
     sleep(2000);
     // FIXME move content?
-    groupSpace.showTutorial(3, 4, -5, 4, 4, 2, 5, 3, 6, 7, 6, 4, 4, 5, 5, 3, 3, 4, 6, 4, 3);
+    groupSpace.showTutorial(3, 4, 5, 4, 4, 2, -5, 3, 6, 7, 6, 4, 4, 5, 5, 3, 3, 4, 6, 4, 3);
 
     // blogs
     groupSpace.blogTool.click();

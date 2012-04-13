@@ -46,7 +46,7 @@ public class SeleniumUtils {
     final File scrFile = ((TakesScreenshot) webdriver).getScreenshotAs(OutputType.FILE);
     try {
       FileUtils.copyFile(scrFile, new File(SeleniumConstants.SCREENSHOTS_DIR + "kune-" + filename
-          + ".png"));
+          + "-sele.png"));
     } catch (final IOException e) {
       LOG.info("Cannot take the screen shot", e);
     }

@@ -106,9 +106,9 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     groupSpace.addNewBuddieTextBox.click();
     groupSpace.addNewBuddieTextBox.sendKeys(buddy);
     groupSpace.addNewBuddieTextBox.sendKeys(Keys.ARROW_DOWN);
+    doScreenshot("social-net");
     sleep(500);
     groupSpace.firstFromSuggestionBox.click();
-    doScreenshot("social-net");
     site.confirmationOk.click();
     sleep(500);
     groupSpace.searchEntitiesOk.click();
