@@ -3,7 +3,7 @@
   <groupId>cc.kune</groupId>
   <artifactId>kune</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.0</version>
+  <version>0.2.0-SNAPSHOT</version>
   <name>kune</name>
   <description>kune free/open/libre collaboration platform</description>
   <url>http://kune.ourproject.org</url>
@@ -757,8 +757,8 @@
     </developer>
   </developers>
   <scm>
-    <url>svn://scm.ourproject.org/svnroot/kune/tags/kune-0.1.0</url>
-    <connection>scm:svn:svn+ssh://vjrj_@scm.ourproject.org/svnroot/kune/tags/kune-0.1.0</connection>
+    <url>svn://scm.ourproject.org/svnroot/kune/trunk</url>
+    <connection>scm:svn:svn+ssh://vjrj_@scm.ourproject.org/svnroot/kune/trunk</connection>
   </scm>
   <build>
     <plugins>
