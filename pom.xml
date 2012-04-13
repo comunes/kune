@@ -716,7 +716,7 @@
     <dependency>
       <groupId>com.googlecode</groupId>
       <artifactId>gwtrpccommlayer</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
     </dependency>
     <!-- jetty -->
     <!-- <dependency> -->
