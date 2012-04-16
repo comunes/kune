@@ -1,3 +1,10 @@
+kune (0.2.0+b1) precise; urgency=low
+
+  * Kune version via scripts. User and group short-name forced to lowercase. 
+    Openfire optional in debian start-up
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 16 Apr 2012 20:10:07 +0200
+
 kune (0.1.0+b14) unstable; urgency=low
 
   * Fix wave multiple operations errors

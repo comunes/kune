@@ -12,25 +12,27 @@ include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 #include /usr/share/cdbs/1/class/maven.mk
 
 
-KUNE_VERSION:=$(shell $(CURDIR)/script/kune-version)
+#KUNE_VERSION:=$(shell $(CURDIR)/script/kune-version)
+KUNE_VERSION:=0.2.0-SNAPSHOT
 
 DEST := $(CURDIR)/debian/kune
 TARGET := $(CURDIR)/target
 RESOURCES := $(CURDIR)/src/main/resources
 WEBAPP := $(CURDIR)/src/main/webapp
-TARGETC := $(TARGET)/$(KUNE_VERSION)
+TARGETC := $(TARGET)/kune-$(KUNE_VERSION)
 
 KUNE := $(DEST)/usr/share/kune
 ETCDIR := $(DEST)/etc/kune
 LOGDIR := $(DEST)/var/log/kune
 VARDIR := $(DEST)/var/lib/kune
-
+TARGETJAR := $(TARGET)/kune-$(KUNE_VERSION)-complete.jar
 NO_GWT=true
 
 JAVA_HOME := /usr/lib/jvm/java-6-openjdk
 
 kune-version:
 	@echo $(KUNE_VERSION)
+	@echo $(TARGETJAR)
 
 build/kune::
 
@@ -47,7 +49,7 @@ clean/kune::
 install/kune::
 
 # FIXME make this via http://www.debian.org/doc/manuals/maint-guide/dother.en.html#conffiles
-	cp $(TARGET)/kune-$(KUNE_VERSION)-complete.jar $(KUNE)/lib/kune-complete.jar
+	cp $(TARGETJAR) $(KUNE)/lib/kune-complete.jar
 	cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
 	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
 	cp $(RESOURCES)/jaas.config $(ETCDIR)

@@ -21,6 +21,7 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAGroupCondition;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
 import com.google.inject.Inject;
@@ -29,8 +30,11 @@ public class AddAllMembersToContentMenuItem extends AddMembersToContentMenuItem 
 
   @Inject
   public AddAllMembersToContentMenuItem(final I18nTranslationService i18n,
-      final AddMembersToContentAction action, final ContentViewerShareMenu menu, final CoreResources res) {
-    super(i18n.t("Share with all group members"), SocialNetworkSubGroup.ALL_GROUP_MEMBERS, action, menu, res);
+      final IsCurrentStateAGroupCondition isAGroupCondition, final AddMembersToContentAction action,
+      final ContentViewerShareMenu menu, final CoreResources res) {
+    super(i18n.t("Share with all group members"), SocialNetworkSubGroup.ALL_GROUP_MEMBERS, action, menu,
+        res);
+    add(isAGroupCondition);
   }
 
 }
