@@ -90,11 +90,12 @@ public class UserFieldFactory {
     field.setAllowBlank(false);
     field.setMinLength(3);
     field.setMaxLength(15);
-    field.setRegex("^[a-z0-9]+$");
+    field.setRegex(TextUtils.SHORTNAME_UPPER_REGEXP);
     field.getMessages().setMinLengthText(minMaxText);
     field.getMessages().setMaxLengthText(minMaxText);
     field.getMessages().setRegexText(minMaxText);
     field.setValidationDelay(1000);
+    field.addStyleName("k-lower");
     return field;
   }
 

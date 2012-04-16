@@ -20,6 +20,7 @@
 package cc.kune.core.client.groups.newgroup;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.client.ui.DefaultFormUtils;
@@ -61,6 +62,25 @@ public class GroupFieldFactory {
     return radio;
   }
 
+  public TextField<String> createGroupShortName(final String fieldId) {
+    final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15);
+    final TextField<String> field = new TextField<String>();
+    field.setFieldLabel(i18n.t("Short name"));
+    field.setName(fieldId);
+    field.setId(fieldId);
+    field.setWidth(175);
+    field.setMinLength(3);
+    field.setMaxLength(15); /* Same in Group.java/shortName */
+    field.setAllowBlank(false);
+    field.setRegex(TextUtils.SHORTNAME_UPPER_REGEXP);
+    field.getMessages().setMinLengthText(minMaxText);
+    field.getMessages().setMaxLengthText(minMaxText);
+    field.getMessages().setRegexText(minMaxText);
+    field.addStyleName("k-lower");
+    field.setValidationDelay(1000);
+    return field;
+  }
+
   public TextField<String> createLongName(final String fieldId) {
     final TextField<String> field = new TextField<String>();
     field.setFieldLabel(i18n.t("Long name"));
@@ -89,24 +109,6 @@ public class GroupFieldFactory {
         i18n.t("A project is a kind of group in which the joining of new members is moderated by the project administrators."),
         radioId);
     return radio;
-  }
-
-  public TextField<String> createUserShortName(final String fieldId) {
-    final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15);
-    final TextField<String> field = new TextField<String>();
-    field.setFieldLabel(i18n.t("Short name"));
-    field.setName(fieldId);
-    field.setId(fieldId);
-    field.setWidth(175);
-    field.setMinLength(3);
-    field.setMaxLength(15); /* Same in Group.java/shortName */
-    field.setAllowBlank(false);
-    field.setRegex("^[a-z0-9]+$");
-    field.getMessages().setMinLengthText(minMaxText);
-    field.getMessages().setMaxLengthText(minMaxText);
-    field.getMessages().setRegexText(minMaxText);
-    field.setValidationDelay(1000);
-    return field;
   }
 
 }

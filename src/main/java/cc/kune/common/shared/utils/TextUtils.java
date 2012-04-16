@@ -39,8 +39,10 @@ public class TextUtils {
 
   public static final String NUM_REGEXP = "^[0-9]+$";
 
-  public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
+  public static final String SHORTNAME_REGEXP = "^[a-z0-9]+$";
 
+  public static final String SHORTNAME_UPPER_REGEXP = "^[a-zA-Z0-9]+$";
+  public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
   // Original regexp from http://snippets.dzone.com/posts/show/452
   public static final String URL_REGEXP = "((ftp|http|https|mailto):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?)";
 

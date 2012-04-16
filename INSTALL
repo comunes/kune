@@ -14,23 +14,6 @@ For production environment:
 
 ===MYSQL configuration===
 
-====Before db creation====
-
-You have to configure mysql to support UTF8 by editing your c:\Windows\my.ini or /etc/mysql/my.cnf (on Unix) file and adding something like:
-
-[mysqld]
-default-character-set=utf8
-default-collation=utf8_bin
-
-After this modification you have to restart the mysql database. In debian systems:
-
-/etc/init.d/mysql restart
-
-Optionalilly, you can also configure this per table (do it after the db creation) :
-
-ALTER DATABASE kune_dev CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
-ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
-
 ====Db creation====
 
 Make two databases in your mysql:
@@ -54,6 +37,11 @@ Now for the openfire xmpp server:
 CREATE DATABASE kune_openfire;
 GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
+
+ALTER DATABASE kune_dev CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
+ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
+ALTER DATABASE kune_prod CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
+ALTER DATABASE kune_openfire CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
 
 Although using this password ('db4kune') is useful for a quick and dirty getting started installation (useful for development), you should consider seriously changing it to something different, since you are in high risk! In this case you should change the password acordingly in this other locations:
 
@@ -196,6 +184,13 @@ In trunk run:
 or 
   debuild -b
 to sign the result package.
+
+==Releasing kune==
+
+mvn release:prepare
+mvn release:perform
+
+More info: http://maven.apache.org/plugins/maven-release-plugin/index.html
 
 ===Customization: Adapting Kune to your site===
 

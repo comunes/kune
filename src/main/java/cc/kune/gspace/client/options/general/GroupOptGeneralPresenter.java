@@ -82,7 +82,7 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
       final GroupDTO group = session.getCurrentState().getGroup();
       final String previousGroupName = group.getShortName();
       final StateToken token = group.getStateToken().copy();
-      group.setShortName(groupView.getShortName());
+      group.setShortName(groupView.getShortName().toLowerCase());
       group.setLongName(groupView.getLongName());
       group.setGroupType(groupView.getGroupType());
       groupService.get().updateGroup(session.getUserHash(), token, group,

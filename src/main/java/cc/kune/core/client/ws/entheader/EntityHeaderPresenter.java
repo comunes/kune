@@ -86,6 +86,7 @@ public class EntityHeaderPresenter extends
       public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
         final GroupDTO group = session.getCurrentState().getGroup();
         setGroupLogo(group, true);
+        setLogoText(group.getShortName());
       }
     });
   }

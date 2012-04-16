@@ -167,7 +167,7 @@ public class RegisterPresenter extends
 
       final boolean wantHomepage = true;
 
-      final UserDTO user = new UserDTO(getView().getShortName(), getView().getLongName(),
+      final UserDTO user = new UserDTO(getView().getShortName().toLowerCase(), getView().getLongName(),
           getView().getRegisterPassword(), getView().getEmail(), language, country, timezone, null,
           true, SubscriptionMode.manual, "blue");
       super.saveAutocompleteLoginData(getView().getShortName(), getView().getRegisterPassword());

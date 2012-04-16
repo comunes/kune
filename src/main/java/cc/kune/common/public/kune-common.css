@@ -767,3 +767,14 @@ div.k-iconlabel {
 }
 
 /* END Menu separators */
+
+/* upper and lower cases */
+
+.k-upper, .k-upper input {
+  text-transform: uppercase;
+}
+ 
+.k-lower, .k-lower input {
+  text-transform: lowercase;
+} 
+

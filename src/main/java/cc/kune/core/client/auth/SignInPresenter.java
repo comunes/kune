@@ -113,7 +113,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
   public void doSignIn(final String nickOrEmail, final String passwd, final boolean gotoHomePage,
       final AsyncCallback<Void> extCallback) {
     final UserDTO user = new UserDTO();
-    user.setShortName(nickOrEmail);
+    user.setShortName(nickOrEmail.toLowerCase());
     user.setPassword(passwd);
     saveAutocompleteLoginData(nickOrEmail, passwd);
     waveClientAuthenticator.doLogin(nickOrEmail, passwd, new AsyncCallback<Void>() {

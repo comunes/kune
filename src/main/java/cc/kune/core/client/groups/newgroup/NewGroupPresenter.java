@@ -169,7 +169,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
       getView().setMessage(i18n.t(CoreMessages.NAME_RESTRICTED), NotifyLevel.error);
     } else if (getView().isFormValid()) {
       getView().maskProcessing();
-      final String shortName = getView().getShortName();
+      final String shortName = getView().getShortName().toLowerCase();
       final String longName = getView().getLongName();
       final String publicDesc = getView().getPublicDesc();
       final LicenseDTO license = session.getDefLicense();

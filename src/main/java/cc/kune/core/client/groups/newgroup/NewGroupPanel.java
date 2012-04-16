@@ -128,7 +128,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     // intro.setStyleName("k-form-intro");
     // form.add(intro);
 
-    shortNameField = groupFieldFactory.createUserShortName(SHORTNAME_FIELD);
+    shortNameField = groupFieldFactory.createGroupShortName(SHORTNAME_FIELD);
     shortNameField.setTabIndex(1);
     form.add(shortNameField);
 

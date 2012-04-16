@@ -80,6 +80,7 @@ public class SignInForm extends DefaultForm {
     loginNickOrEmailField.setValidationDelay(3000);
     loginNickOrEmailField.setId(USER_FIELD_ID);
     loginNickOrEmailField.setTabIndex(100);
+    loginNickOrEmailField.addStyleName("k-lower");
     loginNickOrEmailField.render(RootPanel.get(LOGIN_ID).getElement());
     ComponentHelper.doAttach(loginNickOrEmailField);
     super.add(loginNickOrEmailField);
