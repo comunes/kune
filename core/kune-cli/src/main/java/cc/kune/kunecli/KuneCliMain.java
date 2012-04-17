@@ -60,7 +60,13 @@ public class KuneCliMain {
       MalformedURLException {
 
     initServices();
-
+    
+    // TODO: integrate jline or similar
+    // http://jline.sourceforge.net/index.html
+    
+    //http://sourceforge.net/projects/javacurses/
+      //http://massapi.com/class/jcurses/widgets/Button.java.html
+    
     Command showDateCommand = new Command("hello world [<name:string>]",
         "Says hello to the world and, may be, especially to some one.", new ICommandExecutor() {
           public void execute(ParseResult pr) {
@@ -132,6 +138,8 @@ public class KuneCliMain {
   }
 
   private static void initServices() throws MalformedURLException {
+    // http://code.google.com/p/gwtrpccommlayer/wiki/GettingStarted
+    // http://googlewebtoolkit.blogspot.com.es/2010/07/gwtrpccommlayer-extending-gwt-rpc-to-do.html
     Injector injector = Guice.createInjector(new Module());
 
     GwtRpcService service = injector.getInstance(GwtRpcService.class);
