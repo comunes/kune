@@ -5,13 +5,20 @@
   <artifactId>kune-core</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <properties>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <wiab.version>0.3.13</wiab.version>
+    <gwt.version>2.1.1</gwt.version>
+  </properties>
   <modules>
     <module>kune-cli</module>
   </modules>
-<!--   <repositories> -->
-<!--     <repository> -->
-<!--       <id>kune-maven</id> -->
-<!--       <url>http://kune.ourproject.org/mavenrepo/</url> -->
-<!--     </repository> -->
-<!--   </repositories> -->
+  <!-- <repositories> -->
+  <!-- <repository> -->
+  <!-- <id>kune-maven</id> -->
+  <!-- <url>http://kune.ourproject.org/mavenrepo/</url> -->
+  <!-- </repository> -->
+  <!-- </repositories> -->
 </project>

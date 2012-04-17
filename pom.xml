@@ -1070,6 +1070,7 @@
               <classifier>services</classifier>
               <includes>
                 <include>**/rpcservices/UserService**</include>
+                <include>**/rpcservices/SiteService**</include>
                 <include>**/shared/domain/*</include>
                 <include>**/shared/domain/utils/*</include>
                 <include>**/shared/dto/*</include>
