@@ -1,6 +1,7 @@
 /etc/kune/
 /usr/share/kune/
 /usr/share/kune/lib/
+/usr/share/kune/bin/
 /usr/share/kune/custom/
 /usr/share/kune/webapp/
 /usr/share/kune/templates/

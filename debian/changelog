@@ -1,4 +1,10 @@
-kune (0.2.0+b1) precise; urgency=low
+kune (0.2.0+b2) unstable; urgency=low
+
+  * Debian init script and server script logging via wrapper.
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 18 Apr 2012 22:49:55 +0200
+
+kune (0.2.0+b1) unstable; urgency=low
 
   * Kune version via scripts. User and group short-name forced to lowercase. 
     Openfire optional in debian start-up

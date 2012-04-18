@@ -15,6 +15,8 @@ NAME=kune
 USER=kune
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
+DAEMON=/usr/share/kune/bin/server.sh
+LOGFILE=/var/log/kune/kune.log
 
 # Exit if the package is not installed
 [ -x $DAEMON ] || exit 0
@@ -22,125 +24,14 @@ SCRIPTNAME=/etc/init.d/$NAME
 # Read configuration variable file if it is present
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 
+DAEMON_ARGS="$KUNE_DEFAULT_ARGS -j /usr/share/kune/lib/kune-complete.jar -a"
+
 # Load the VERBOSE setting and other rcS variables
 . /lib/init/vars.sh
 
 # Define LSB log_* functions.
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
 . /lib/lsb/init-functions
-
-usage() {
-    echo "Set KUNE_DEFAULT_ARGS in /etc/default/kune
-    KUNE_DEFAULT_ARGS=[-k <kune-config>] [-w <wave-config>] [-s <jaas config>] [Debug options] [other options]
-    Example: KUNE_DEFAULT_ARGS=-l IGNORE -d -p -u 20000
-
-Options:
--l LOGLEVEL : IGNORE|DEBUG|INFO|WARN
--x: -Xmx memory value
--m: -Xms memory value
-
-Debug Options:
--d: debug
--u: Suspend the start (useful for debug the boot)
--p: port of debugger
-"
-}
-
-init_kune_vars() {
-    if [ -z $KUNE_HOME ]
-    then
-	KUNE_HOME=/etc/kune
-    fi
-
-    # See src/main/resources/kune.properties in svn
-    KUNE_CONFIG=$KUNE_HOME/kune.properties 
-    # See src/main/resources/wave-server.properties in svn
-    WAVE_CONFIG=$KUNE_HOME/wave-server.properties
-    # See src/main/resources/jaas.config in svn
-    JAAS_CONFIG=$KUNE_HOME/jaas.config
-    # See src/main/resources/log4j.properties in svn
-    LOGJ4_CONFIG=file://$KUNE_HOME/log4j.properties
-
-    JAR=/usr/share/kune/lib/kune-complete.jar
-    LOGFILE=/var/log/kune/kune.log
-
-    # Attempt to locate JAVA_HOME, code borrowed from jabref package
-    if [ -z $JAVA_HOME ]
-    then
-        t=/usr/lib/jvm/java-1.6.0-openjdk && test -d $t && JAVA_HOME=$t
-        t=/usr/lib/jvm/java-6-sun && test -d $t && JAVA_HOME=$t
-	t=/usr/lib/jvm/java-1.7.0-openjdk && test -d $t && JAVA_HOME=$t
-    fi
-
-    PATH=$PATH:${JAVA_HOME}/bin
-    JAVA=${JAVA_HOME}/bin/java
-    DAEMON=$JAVA
-    
-    while getopts “hm:x:k:w:s:up:l:d” OPTION $KUNE_DEFAULT_ARGS
-    do
-	case $OPTION in
-	    h)
-		usage
-		exit 1
-		;;
-	    k)
-		KUNE_CONFIG=$OPTARG
-		;;
-	    w)
-		WAVE_CONFIG=$OPTARG
-		;;
-	    s)
-		JAAS_CONFIG=$OPTARG
-		;;
-	    x)
-		MX="-Xmx"$OPTARG
-		;;
-	    m)
-		MS="-Xms"$OPTARG
-		;;
-	    p)
-                # Debug port
-		PORT=$OPTARG
-		if ! [[ $PORT =~ ^[0-9]+$ ]] 
-		then
-		    usage
-		    exit 1
-		fi
-		DEBUG_PORT=",address=$PORT"
-		;;
-	    u)
-		SUSPEND="y"
-		;;
-	    l)
-		LOG_LEVEL=$OPTARG
-		;;
-	    d)
-		DEBUG="y"
-		;;
-	    ?)
-		usage
-		exit
-		;;
-	esac
-    done	
-
-    if [[ $LOG_LEVEL != "IGNORE" && $LOG_LEVEL != "DEBUG" && $LOG_LEVEL != "INFO" && $LOG_LEVEL != "WARN" ]]
-    then
-	usage
-	exit 1
-    fi
-
-    DAEMON_ARGS="$DEBUG_FLAGS \
-	    -Dorg.eclipse.jetty.util.log.$LOG_LEVEL=true \
-	    -Djava.security.auth.login.config=$JAAS_CONFIG \
-	    -Dlog4j.configuration=$LOGJ4_CONFIG \
-	    -Dkune.server.config=$KUNE_CONFIG \
-	    -Dwave.server.config=$WAVE_CONFIG \
-            $MS \
-	    $MX \
-	    -jar $JAR >> $LOGFILE 2>&1"
-
-}
 
 # check if param is true/yes/0
 is_true() {
@@ -157,24 +48,24 @@ is_true() {
 do_start()
 {
     if is_true "$START" ; then       
-	init_kune_vars
-	# FIXME This should go in limits.conf
-	ulimit -n 65000    
-        log_daemon_msg "Starting kune"
-	# Return
-	#   0 if daemon has been started
-	#   1 if daemon was already running
-	#   2 if daemon could not be started
-	start-stop-daemon --start -b -m --quiet --pidfile $PIDFILE -d /usr/share/kune/ -c $USER:$USER --exec $DAEMON --test > /dev/null \
-	    || return 1
-	start-stop-daemon --start -b -m --quiet --pidfile $PIDFILE -d /usr/share/kune/ -c $USER:$USER --exec $DAEMON -- \
-	    $DAEMON_ARGS \
-	    || return 2
-	# Add code here, if necessary, that waits for the process to be ready
-	# to handle requests from services started subsequently which depend
-	# on this one.  As a last resort, sleep for some time.
+        # FIXME This should go in limits.conf
+        ulimit -n 65000    
+        log_daemon_msg "Starting" "$NAME"
+        # Return
+        #   0 if daemon has been started
+        #   1 if daemon was already running
+        #   2 if daemon could not be started
+        start-stop-daemon --start -b -m --quiet --pidfile $PIDFILE -d /usr/share/kune/ -c $USER:$USER --exec $DAEMON --test > /dev/null \
+            || return 1
+        # http://serverfault.com/questions/162602/stdout-stderr-redirects-in-start-stop-daemon
+        start-stop-daemon --start -b -m --quiet --pidfile $PIDFILE -d /usr/share/kune/ -c $USER:$USER --exec $DAEMON -- \
+            $DAEMON_ARGS >> $LOGFILE 2>> $LOGFILE \
+            || return 2
+        # Add code here, if necessary, that waits for the process to be ready
+        # to handle requests from services started subsequently which depend
+        # on this one.  As a last resort, sleep for some time.
     else
-        log_daemon_msg "Skipping start of kune (see /etc/default/kune)"
+        log_daemon_msg "Skipping start of kune (see /etc/default/kune)" ""
     fi
 }
 
@@ -188,8 +79,8 @@ do_stop()
     #   1 if daemon was already stopped
     #   2 if daemon could not be stopped
     #   other if a failure occurred
-    log_daemon_msg "Stopping kune"
-    start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $PIDFILE --name $NAME
+    log_daemon_msg "Stopping" "$NAME"
+    start-stop-daemon --stop --quiet --retry=TERM/15/KILL/5 --pidfile $PIDFILE --name $NAME >> $LOGFILE 2>> $LOGFILE
     RETVAL="$?"
     [ "$RETVAL" = 2 ] && return 2
     # Wait for children to finish too if this is a daemon that forks
@@ -198,7 +89,7 @@ do_stop()
     # that waits for the process to drop all resources that could be
     # needed by services started subsequently.  A last resort is to
     # sleep for some time.
-    start-stop-daemon --stop --quiet --oknodo --retry=0/30/KILL/5 --pidfile $PIDFILE
+    start-stop-daemon --stop --quiet --oknodo --retry=0/15/KILL/5 --pidfile $PIDFILE >> $LOGFILE 2>> $LOGFILE
     [ "$?" = 2 ] && return 2
     # Many daemons don't delete their pidfiles when they exit.
     rm -f $PIDFILE
@@ -214,67 +105,69 @@ do_reload() {
     # restarting (for example, when it is sent a SIGHUP),
     # then implement that here.
     #
-    log_daemon_msg "Reloading kune"
+    log_daemon_msg "Reloading" "$NAME"
     # Seems that dont works if the user/group is not the same:
     # http://stackoverflow.com/questions/4147288/how-to-trap-a-signal-in-a-java-application-initialized-using-a-bash-script
-    start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE --user $USER --group $USER --name $NAME
+    start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE --user $USER --group $USER --name $NAME >> $LOGFILE 2>> $LOGFILE
     return 0
 }
 
 case "$1" in
     start)
-	[ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC " "$NAME"
-	do_start
-	case "$?" in
-	    0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-	    2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-	esac
-	;;
+    [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
+    do_start
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
     stop)
-	[ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
-	do_stop
-	case "$?" in
-	    0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-	    2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-	esac
-	;;
+    [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+    do_stop
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
     status)
-	status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
-	;;
+    status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
+    ;;
     reload|force-reload)
-	#
-	# If do_reload() is not implemented then leave this commented out
-	# and leave 'force-reload' as an alias for 'restart'.
-	#
-	do_reload
-	log_end_msg $?
-	;;
+    #
+    # If do_reload() is not implemented then leave this commented out
+    # and leave 'force-reload' as an alias for 'restart'.
+    #
+    do_reload
+    log_end_msg $?
+    ;;
     restart|force-reload)
-	#
-	# If the "reload" option is implemented then remove the
-	# 'force-reload' alias
-	#
-	log_daemon_msg "Restarting $DESC" "$NAME"
-	do_stop
-	case "$?" in
-	    0|1)
-		do_start
-		case "$?" in
-		    0) log_end_msg 0 ;;
-		    1) log_end_msg 1 ;; # Old process is still running
-		    *) log_end_msg 1 ;; # Failed to start
-		esac
-		;;
-	    *)
-	  	# Failed to stop
-		log_end_msg 1
-		;;
-	esac
-	;;
+    #
+    # If the "reload" option is implemented then remove the
+    # 'force-reload' alias
+    #
+    log_daemon_msg "Restarting $DESC" "$NAME"
+    do_stop
+    case "$?" in
+        0|1)
+        do_start
+        case "$?" in
+            0) log_end_msg 0 ;;
+            1) log_end_msg 1 ;; # Old process is still running
+            *) log_end_msg 1 ;; # Failed to start
+        esac
+        ;;
+        *)
+                # Failed to stop
+        log_end_msg 1
+        ;;
+    esac
+    ;;
     *)
-	echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
-	exit 3
-	;;
+    echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
+    exit 3
+    ;;
 esac
+
+# Preserve this:
 
 :

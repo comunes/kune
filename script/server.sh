@@ -26,7 +26,7 @@ Debug Options:
 
 if [ -z $KUNE_HOME ]
 then
-  KUNE_HOME=/etc/kune
+    KUNE_HOME=/etc/kune
 fi
 
 # See src/main/resources/kune.properties in svn
@@ -50,58 +50,58 @@ MS=""
 while getopts “hm:x:j:k:w:s:up:l:da” OPTION
 do
     case $OPTION in
-	h)
+        h)
             usage
             exit 1
             ;;
-	j)
-	    JAR=$OPTARG
-	    ;;
-	k)
-	    KUNE_CONFIG=$OPTARG
-	    ;;
-	w)
-	    WAVE_CONFIG=$OPTARG
-	    ;;
-	s)
+        j)
+            JAR=$OPTARG
+            ;;
+        k)
+            KUNE_CONFIG=$OPTARG
+            ;;
+        w)
+            WAVE_CONFIG=$OPTARG
+            ;;
+        s)
             JAAS_CONFIG=$OPTARG
             ;;
-	x)
+        x)
             MX="-Xmx"$OPTARG
             ;;
-	m)
+        m)
             MS="-Xms"$OPTARG
             ;;
-	p)
-	    # Debug port
-	    PORT=$OPTARG
-	    if ! [[ $PORT =~ ^[0-9]+$ ]] 
-	    then
-		usage
-		exit 1
-	    fi
-	    DEBUG_PORT=",address=$PORT"
-	    ;;
-	u)
-	    SUSPEND="y"
-	    ;;
+        p)
+            # Debug port
+            PORT=$OPTARG
+            if ! [[ $PORT =~ ^[0-9]+$ ]] 
+            then
+                usage
+                exit 1
+            fi
+            DEBUG_PORT=",address=$PORT"
+            ;;
+        u)
+            SUSPEND="y"
+            ;;
         a)
-	    DAEMON="y"	    
-	    ;;
-	l)
-	    LOG_LEVEL=$OPTARG
-	    ;;
-	d)
-	    DEBUG="y"
-	    ;;
-	?)
+            DAEMON="y"      
+            ;;
+        l)
+            LOG_LEVEL=$OPTARG
+            ;;
+        d)
+            DEBUG="y"
+            ;;
+        ?)
             usage
             exit
             ;;
     esac
-done	
+done    
 
-if [[ $LOG_LEVEL -ne "IGNORE" || $LOG_LEVEL -ne "DEBUG" || $LOG_LEVEL -ne "INFO" || $LOG_LEVEL -ne "WARN" ]]
+if [[ $LOG_LEVEL != "IGNORE" && $LOG_LEVEL != "DEBUG" && $LOG_LEVEL != "INFO" && $LOG_LEVEL != "WARN" ]]
 then
     usage
     exit 1
@@ -128,18 +128,17 @@ else
     if [[ -n $DAEMON ]]
     then
     # FIXME Not sure if this is neccesary (if already configured in "/etc/security/limits.conf"
-	ulimit -n 65000
+        ulimit -n 65000
     # http://stackoverflow.com/questions/534648/how-to-daemonize-a-java-program
-	nohup java $DEBUG_FLAGS \
-	    -Dorg.eclipse.jetty.util.log.$LOG_LEVEL=true \
-	    -Djava.security.auth.login.config=$JAAS_CONFIG \
-	    -Dlog4j.configuration=$LOGJ4_CONFIG \
-	    -Dkune.server.config=$KUNE_CONFIG \
-	    -Dwave.server.config=$WAVE_CONFIG \
+        exec java $DEBUG_FLAGS \
+            -Dorg.eclipse.jetty.util.log.$LOG_LEVEL=true \
+            -Djava.security.auth.login.config=$JAAS_CONFIG \
+            -Dlog4j.configuration=$LOGJ4_CONFIG \
+            -Dkune.server.config=$KUNE_CONFIG \
+            -Dwave.server.config=$WAVE_CONFIG \
             $MS \
 	    $MX \
-	    -jar $JAR </dev/null >> $LOGFILE 2>&1 &
-	echo $! > $PIDFILE
+	    -jar $JAR >> $LOGFILE 2>> $LOGFILE
     else
 	exec java $DEBUG_FLAGS \
 	    -Dorg.eclipse.jetty.util.log.$LOG_LEVEL=true \
@@ -149,6 +148,6 @@ else
 	    -Dwave.server.config=$WAVE_CONFIG \
             $MS \
 	    $MX \
-	    -jar $JAR
+	    -jar $JAR >> $LOGFILE 2>> $LOGFILE
     fi
 fi

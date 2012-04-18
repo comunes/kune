@@ -49,6 +49,7 @@ clean/kune::
 install/kune::
 
 # FIXME make this via http://www.debian.org/doc/manuals/maint-guide/dother.en.html#conffiles
+	cp $(CURDIR)/script/server.sh $(KUNE)/bin/
 	cp $(TARGETJAR) $(KUNE)/lib/kune-complete.jar
 	cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
 	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
