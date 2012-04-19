@@ -29,7 +29,6 @@ window.waveOptions_ = {};
  * Application entry point.
  */
 $(document).ready(function() {
-  /*
   var path = window.location.pathname;
 
   // adjust the height of the content frame to fill the iframe height
@@ -96,13 +95,14 @@ $(document).ready(function() {
 
   var rpc = window.wave.Rpc.getInstance();
 
-   */
-  initGadgetSystem();
-//  rpc.rpcOpenWave();
+  // kune patch: No getting the wave async or init gadget
+  //  
+  //initGadgetSystem();
+  //rpc.rpcOpenWave();
 
   //setInterval(function() {
     // This is needed to specify the scope of the function.
- //   window.wave.Rpc.getInstance().rpcAsyncUpdate();
- //}, RPC_UPDATE_INTERVAL_MS);
+    //window.wave.Rpc.getInstance().rpcAsyncUpdate();
+  //}, RPC_UPDATE_INTERVAL_MS);
 });
 

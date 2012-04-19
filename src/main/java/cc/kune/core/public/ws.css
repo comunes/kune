@@ -1,4 +1,4 @@
-GCHARSET                           "UTF-8                          ";
+GCHARSET                            "UTF-8                           ";
   body {
   background-color: transparent;
   color: black;
@@ -975,8 +975,8 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   color: gray !important;
   border-color: #CCCCCC !important;
   background: inherits !important;
-  kfilter: alpha(opacity =  
-                50) !important;
+  kfilter: alpha(opacity =   
+                 50) !important;
   -moz-opacity: 0.50 !important;
   -khtml-opacity: 0.50 !important;
   opacity: 0.50 !important;
@@ -1268,8 +1268,8 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =  
-                90);
+  kfilter: alpha(opacity =   
+                 90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1612,5 +1612,12 @@ div.docEditorContainer div.docEditor div.thread {
 }
 
 div.docEditorContainer div.thread div.time {
+  color: #A05A2C;
+}
+
+.k-gadget-signin {
+  border: #CCC dashed 1px;
+  padding: 10px;
+  font-style: italic;
   color: #A05A2C;
 }

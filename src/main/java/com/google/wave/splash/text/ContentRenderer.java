@@ -35,7 +35,6 @@ import com.google.wave.api.Annotations;
 import com.google.wave.api.Attachment;
 import com.google.wave.api.Element;
 import com.google.wave.api.ElementType;
-import com.google.wave.api.Gadget;
 import com.google.wave.api.Line;
 import com.google.wave.splash.web.template.WaveRenderer;
 
@@ -242,11 +241,12 @@ public class ContentRenderer {
       }
       break;
     case GADGET:
-      gadgetRenderer.render((Gadget) element, contributors, builder);
+      // kune patch: disabled because breaks the inline replies
+      builder.append("<div class=\"k-gadget-signin\">Sign-in and participate to see this content.</div>");
+      // gadgetRenderer.render((Gadget) element, contributors, builder);
       break;
     case INLINE_BLIP:
       waveRenderer.renderInlineReply(element, index, builder);
-
       break;
     default:
       // Ignore all others.
