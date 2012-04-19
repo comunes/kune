@@ -132,6 +132,10 @@ public class AbstractSNPanel extends ViewImpl {
     actions.clear();
   }
 
+  protected String countAsString(final int count) {
+    return count > 0 ? new StringBuffer("(").append(count).append(")").toString() : "";
+  }
+
   public BasicDragableThumb createThumb(final String text, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menuitems, final StateToken token,
       final boolean dragable) {

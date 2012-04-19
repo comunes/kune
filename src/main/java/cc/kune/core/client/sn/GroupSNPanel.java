@@ -97,7 +97,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   @Override
   public void setAdminsCount(final int count) {
     armor.getEntityToolsNorth();
-    firstCategoryCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    firstCategoryCount.setText(countAsString(count));
   }
 
   @Override
@@ -107,7 +107,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   @Override
   public void setCollabsCount(final int count) {
-    sndCategoryCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    sndCategoryCount.setText(countAsString(count));
   }
 
   @Override
@@ -117,7 +117,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   @Override
   public void setPendingsCount(final int count) {
-    trdCategoryCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    trdCategoryCount.setText(countAsString(count));
   }
 
   @Override

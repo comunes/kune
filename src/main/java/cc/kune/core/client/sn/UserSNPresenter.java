@@ -177,6 +177,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
   private int setBuddiesState(final StateAbstractDTO state) {
     final UserBuddiesDataDTO userBuddiesData = state.getUserBuddies();
     final List<UserSimpleDTO> buddies = userBuddiesData.getBuddies();
+    // setBuddiesState
     for (final UserSimpleDTO user : buddies) {
       final String avatarUrl = downloadProvider.get().getUserAvatar(user);
       getView().addBuddie(user, avatarUrl, user.getCompoundName(), "",
@@ -185,6 +186,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     }
     final boolean hasLocalBuddies = buddies.size() > 0;
     final int numExtBuddies = userBuddiesData.getOtherExtBuddies();
+    final int buddieNumber = buddies.size() + numExtBuddies;
     if (numExtBuddies > 0) {
       if (hasLocalBuddies) {
         // i18n: plural
@@ -202,7 +204,8 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
         getView().setNoBuddies();
       }
     }
-    return buddies.size() + numExtBuddies;
+    getView().setBuddiesCount(buddieNumber);
+    return buddieNumber;
   }
 
   private int setParticipationState(final StateAbstractDTO state) {
@@ -222,7 +225,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
           state.getGroupRights().isAdministrable());
     }
     final int totalGroups = numAdmins + numCollaborators;
-    // getView().setParticipationCount(totalGroups);
+    getView().setParticipationCount(totalGroups);
     getView().setParticipationVisible(totalGroups > 0, areMany(totalGroups));
     return totalGroups;
   }

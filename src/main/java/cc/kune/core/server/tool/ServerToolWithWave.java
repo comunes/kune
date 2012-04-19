@@ -19,10 +19,19 @@
  */
 package cc.kune.core.server.tool;
 
-import java.net.URL;
+import cc.kune.domain.Container;
 
-public interface ServerWaveTool extends ServerTool {
+public interface ServerToolWithWave extends ServerTool {
 
-  URL getGadgetUrl();
+  /**
+   * Gets the new content additional participants. Use this if you want to add
+   * some wave participant in each new content
+   * 
+   * @param containerParent
+   *          the container parent of the new content
+   * 
+   * @return the new content additional parts
+   */
+  String[] getNewContentAdditionalParts(Container containerParent);
 
 }

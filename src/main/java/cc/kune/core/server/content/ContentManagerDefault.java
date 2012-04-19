@@ -213,7 +213,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   protected Content createContent(final String title, final String body, final WaveRef waveIdToCopy,
       final User author, final Container container, final String typeId, final URL gadgetUrl,
-      final Map<String, String> gadgetProperties) {
+      final Map<String, String> gadgetProperties, final String... otherParticipants) {
     FilenameUtils.checkBasicFilename(title);
     final String newtitle = findInexistentTitle(container, title);
     final Content newContent = new Content();
@@ -228,7 +228,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     if (newContent.isWave()) {
       final String authorName = author.getShortName();
       final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body, waveIdToCopy,
-          KuneWaveService.DO_NOTHING_CBACK, gadgetUrl, gadgetProperties, participantUtils.of(authorName));
+          KuneWaveService.DO_NOTHING_CBACK, gadgetUrl, gadgetProperties,
+          participantUtils.of(authorName, otherParticipants));
       newContent.setWaveId(JavaWaverefEncoder.encodeToUriPathSegment(waveRef));
       newContent.setModifiedOn((new Date()).getTime());
     }

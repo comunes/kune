@@ -19,8 +19,8 @@
  */
 package cc.kune.lists.server;
 
-import static cc.kune.lists.shared.ListsToolConstants.TOOL_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.ROOT_NAME;
+import static cc.kune.lists.shared.ListsToolConstants.TOOL_NAME;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
 import static cc.kune.lists.shared.ListsToolConstants.TYPE_ROOT;
@@ -32,7 +32,7 @@ import java.util.Date;
 import java.util.Set;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.server.AbstractServerTool;
+import cc.kune.core.server.AbstractWaveBasedServerTool;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
@@ -44,26 +44,37 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveServerUtils;
-import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
 
-public class ListsServerTool extends AbstractServerTool {
+public class ListsServerTool extends AbstractWaveBasedServerTool {
 
   private final UserSessionManager userSessionManager;
-  private final KuneWaveService waveManager;
 
   @Inject
   public ListsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
-      final UserSessionManager userSessionManager, final KuneWaveService waveManager,
-      final CreationService creationService) {
+      final UserSessionManager userSessionManager, final CreationService creationService) {
     super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_POST), Arrays.asList(TYPE_LIST),
         Arrays.asList(TYPE_LIST), Arrays.asList(TYPE_ROOT), contentManager, containerManager,
         creationService, configurationManager, i18n, ServerToolTarget.forGroups);
     this.userSessionManager = userSessionManager;
-    this.waveManager = waveManager;
+  }
+
+  @Override
+  public String[] getNewContentAdditionalParts(final Container parent) {
+    final Set<Group> admins = parent.getAccessLists().getAdmins().getList();
+    final Set<Group> editors = parent.getAccessLists().getEditors().getList();
+    final ArrayList<String> members = new ArrayList<String>();
+    for (final Group admin : admins) {
+      members.add(admin.getShortName());
+    }
+    for (final Group editor : editors) {
+      members.add(editor.getShortName());
+    }
+    members.add(getUserGroup().getShortName());
+    Collections.sort(members);
+    return members.toArray(new String[members.size()]);
   }
 
   private Group getUserGroup() {
@@ -78,22 +89,9 @@ public class ListsServerTool extends AbstractServerTool {
 
   @Override
   public void onCreateContent(final Content content, final Container parent) {
+    // TODO Fix closed list??
     content.setStatus(ContentStatus.publishedOnline);
     content.setPublishedOn(new Date());
-    final Set<Group> admins = parent.getAccessLists().getAdmins().getList();
-    final Set<Group> editors = parent.getAccessLists().getEditors().getList();
-    final ArrayList<String> members = new ArrayList<String>();
-    for (final Group admin : admins) {
-      members.add(admin.getShortName());
-    }
-    for (final Group editor : editors) {
-      members.add(editor.getShortName());
-    }
-    members.add(getUserGroup().getShortName());
-    Collections.sort(members);
-    waveManager.addParticipants(KuneWaveServerUtils.getWaveRef(content),
-        content.getAuthors().get(0).getShortName(), getUserGroup().getShortName(),
-        members.toArray(new String[members.size()]));
   }
 
 }

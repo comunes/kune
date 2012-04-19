@@ -19,8 +19,8 @@
  */
 package cc.kune.docs.server;
 
-import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.ROOT_NAME;
+import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_ROOT;
@@ -29,7 +29,7 @@ import static cc.kune.docs.shared.DocsToolConstants.TYPE_UPLOADEDFILE;
 import java.util.Arrays;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.server.AbstractServerTool;
+import cc.kune.core.server.AbstractWaveBasedServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
@@ -43,15 +43,15 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class DocumentServerTool extends AbstractServerTool {
+public class DocumentServerTool extends AbstractWaveBasedServerTool {
 
   @Inject
   public DocumentServerTool(final ContentManager contentManager,
       final ContainerManager containerManager, final ToolConfigurationManager configurationManager,
       final I18nTranslationService i18n, final CreationService creationService) {
-    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_DOCUMENT, TYPE_UPLOADEDFILE), Arrays.asList(
-        TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
-        contentManager, containerManager, creationService, configurationManager, i18n,
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_DOCUMENT, TYPE_UPLOADEDFILE),
+        Arrays.asList(TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT,
+            TYPE_FOLDER), contentManager, containerManager, creationService, configurationManager, i18n,
         ServerToolTarget.forBoth);
   }
 

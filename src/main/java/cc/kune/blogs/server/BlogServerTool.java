@@ -19,8 +19,8 @@
  */
 package cc.kune.blogs.server;
 
-import static cc.kune.blogs.shared.BlogsToolConstants.TOOL_NAME;
 import static cc.kune.blogs.shared.BlogsToolConstants.ROOT_NAME;
+import static cc.kune.blogs.shared.BlogsToolConstants.TOOL_NAME;
 import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_BLOG;
 import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_POST;
 import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_ROOT;
@@ -29,7 +29,7 @@ import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_UPLOADEDFILE;
 import java.util.Arrays;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.server.AbstractServerTool;
+import cc.kune.core.server.AbstractWaveBasedServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
@@ -40,7 +40,7 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class BlogServerTool extends AbstractServerTool {
+public class BlogServerTool extends AbstractWaveBasedServerTool {
 
   @Inject
   public BlogServerTool(final ContentManager contentManager, final ContainerManager containerManager,

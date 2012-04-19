@@ -19,8 +19,8 @@
  */
 package cc.kune.gallery.server;
 
-import static cc.kune.gallery.shared.GalleryToolConstants.TOOL_NAME;
 import static cc.kune.gallery.shared.GalleryToolConstants.ROOT_NAME;
+import static cc.kune.gallery.shared.GalleryToolConstants.TOOL_NAME;
 import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_ALBUM;
 import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_ROOT;
 import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_UPLOADEDFILE;
@@ -28,7 +28,7 @@ import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_UPLOADEDFILE;
 import java.util.Arrays;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.server.AbstractServerTool;
+import cc.kune.core.server.AbstractWaveBasedServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
@@ -40,7 +40,7 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class GalleryServerTool extends AbstractServerTool {
+public class GalleryServerTool extends AbstractWaveBasedServerTool {
 
   @Inject
   public GalleryServerTool(final ContentManager contentManager, final ContainerManager containerManager,

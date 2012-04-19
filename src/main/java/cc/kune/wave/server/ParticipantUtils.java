@@ -129,8 +129,24 @@ public class ParticipantUtils {
     return array;
   }
 
+  public ParticipantId[] of(final String... list) {
+    return listFrom(list);
+  }
+
   public ParticipantId of(final String username) {
     return ofImpl(username);
+  }
+
+  public ParticipantId[] of(final String author, final String[] list) {
+    if (list == null) {
+      return listFrom(author);
+    }
+    final ParticipantId[] array = new ParticipantId[list.length + 1];
+    array[0] = of(author);
+    for (int i = 0; i < list.length; i++) {
+      array[i + 1] = of(list[i]);
+    }
+    return array;
   }
 
   private ParticipantId ofImpl(final String username) {
@@ -144,4 +160,5 @@ public class ParticipantUtils {
       throw new DefaultException("Error getting Wave participant Id");
     }
   }
+
 }

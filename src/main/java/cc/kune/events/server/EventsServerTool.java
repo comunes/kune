@@ -30,13 +30,13 @@ import java.util.Collections;
 import java.util.Date;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.server.AbstractServerTool;
+import cc.kune.core.server.AbstractWaveBasedServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
-import cc.kune.core.server.tool.ServerWaveTool;
+import cc.kune.core.server.tool.ServerToolWithWaveGadget;
 import cc.kune.core.server.utils.UrlUtils;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.GroupListMode;
@@ -49,7 +49,7 @@ import cc.kune.events.server.utils.EventsCache;
 
 import com.google.inject.Inject;
 
-public class EventsServerTool extends AbstractServerTool implements ServerWaveTool {
+public class EventsServerTool extends AbstractWaveBasedServerTool implements ServerToolWithWaveGadget {
 
   private static final String MEETING_GADGET = "http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml";
   private final EventsCache eventsCache;

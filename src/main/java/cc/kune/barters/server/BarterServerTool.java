@@ -30,13 +30,13 @@ import java.util.Arrays;
 import java.util.Date;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.server.AbstractServerTool;
+import cc.kune.core.server.AbstractWaveBasedServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerToolTarget;
-import cc.kune.core.server.tool.ServerWaveTool;
+import cc.kune.core.server.tool.ServerToolWithWaveGadget;
 import cc.kune.core.server.utils.UrlUtils;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.GroupListMode;
@@ -48,7 +48,7 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class BarterServerTool extends AbstractServerTool implements ServerWaveTool {
+public class BarterServerTool extends AbstractWaveBasedServerTool implements ServerToolWithWaveGadget {
 
   private static final String BARTER_GADGET = "http://troco.ourproject.org/gadget/org.ourproject.troco.client.TrocoWaveGadget.gadget.xml";
   private final URL gadgetUrl;

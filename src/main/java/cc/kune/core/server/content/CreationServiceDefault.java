@@ -21,10 +21,14 @@ package cc.kune.core.server.content;
 
 import java.net.URL;
 import java.util.Collections;
+import java.util.Map;
+
+import org.apache.commons.lang.ArrayUtils;
 
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
-import cc.kune.core.server.tool.ServerWaveTool;
+import cc.kune.core.server.tool.ServerToolWithWave;
+import cc.kune.core.server.tool.ServerToolWithWaveGadget;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -38,6 +42,8 @@ import com.google.inject.Singleton;
 @Singleton
 public class CreationServiceDefault implements CreationService {
 
+  private static final String[] NO_MORE_PARTICIPANTS = ArrayUtils.EMPTY_STRING_ARRAY;
+  private static final Map<String, String> NO_PROPERTIES = Collections.<String, String> emptyMap();
   private final ContainerManager containerManager;
   private final ContentManagerDefault contentManager;
   private final ServerToolRegistry tools;
@@ -63,10 +69,12 @@ public class CreationServiceDefault implements CreationService {
       final Container container, final String typeId) {
     final ServerTool tool = tools.get(container.getToolName());
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeId);
-    final URL gagdetUrl = tool instanceof ServerWaveTool ? ((ServerWaveTool) tool).getGadgetUrl()
+    final URL gagdetUrl = tool instanceof ServerToolWithWaveGadget ? ((ServerToolWithWaveGadget) tool).getGadgetUrl()
         : KuneWaveService.WITHOUT_GADGET;
+    final String[] otherParticipants = tool instanceof ServerToolWithWave ? ((ServerToolWithWave) tool).getNewContentAdditionalParts(container)
+        : NO_MORE_PARTICIPANTS;
     final Content content = contentManager.createContent(title, body, KuneWaveService.NO_WAVE_TO_COPY,
-        user, container, typeId, gagdetUrl, Collections.<String, String> emptyMap());
+        user, container, typeId, gagdetUrl, NO_PROPERTIES, otherParticipants);
     tool.onCreateContent(content, container);
     return content;
   }

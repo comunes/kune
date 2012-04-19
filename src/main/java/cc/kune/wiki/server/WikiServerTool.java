@@ -19,8 +19,8 @@
  */
 package cc.kune.wiki.server;
 
-import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
 import static cc.kune.wiki.shared.WikiToolConstants.ROOT_NAME;
+import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_FOLDER;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_ROOT;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_UPLOADEDFILE;
@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.server.AbstractServerTool;
+import cc.kune.core.server.AbstractWaveBasedServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
@@ -43,19 +43,29 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.Inject;
 
-public class WikiServerTool extends AbstractServerTool {
+public class WikiServerTool extends AbstractWaveBasedServerTool {
+
+  private final String[] publicArray;
 
   @Inject
   public WikiServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
-      final CreationService creationService) {
-    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE), Arrays.asList(
-        TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER),
-        contentManager, containerManager, creationService, configurationManager, i18n,
+      final CreationService creationService, final ParticipantUtils participantUtils) {
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE),
+        Arrays.asList(TYPE_ROOT, TYPE_FOLDER), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT,
+            TYPE_FOLDER), contentManager, containerManager, creationService, configurationManager, i18n,
         ServerToolTarget.forBoth);
+    publicArray = new String[1];
+    publicArray[0] = participantUtils.getPublicParticipantId().toString();
+  }
+
+  @Override
+  public String[] getNewContentAdditionalParts(final Container containerParent) {
+    return publicArray;
   }
 
   @Override

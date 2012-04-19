@@ -26,14 +26,21 @@ import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
+import org.waveprotocol.wave.model.wave.ParticipantId;
+
+import cc.kune.wave.server.ParticipantUtils;
 
 public class WikiServerToolTest { // extends PersistenceTest {
 
   private WikiServerTool serverTool;
 
   @Before
-  public void before() {
-    serverTool = new WikiServerTool(null, null, null, null, null);
+  public void before() throws InvalidParticipantAddress {
+    final ParticipantUtils partUtils = Mockito.mock(ParticipantUtils.class);
+    Mockito.when(partUtils.getPublicParticipantId()).thenReturn(new ParticipantId("example.org"));
+    serverTool = new WikiServerTool(null, null, null, null, null, partUtils);
   }
 
   @Test

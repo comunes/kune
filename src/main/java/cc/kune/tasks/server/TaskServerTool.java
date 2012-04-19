@@ -19,8 +19,8 @@
  */
 package cc.kune.tasks.server;
 
-import static cc.kune.tasks.shared.TasksToolConstants.TOOL_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.ROOT_NAME;
+import static cc.kune.tasks.shared.TasksToolConstants.TOOL_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_FOLDER;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_ROOT;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_TASK;
@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.server.AbstractServerTool;
+import cc.kune.core.server.AbstractWaveBasedServerTool;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.content.CreationService;
@@ -44,14 +44,14 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class TaskServerTool extends AbstractServerTool {
+public class TaskServerTool extends AbstractWaveBasedServerTool {
 
   @Inject
   public TaskServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
       final CreationService creationService) {
-    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_TASK), Arrays.asList(TYPE_FOLDER, TYPE_ROOT),
-        Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER), contentManager,
+    super(TOOL_NAME, ROOT_NAME, TYPE_ROOT, Arrays.asList(TYPE_TASK), Arrays.asList(TYPE_FOLDER,
+        TYPE_ROOT), Arrays.asList(TYPE_FOLDER), Arrays.asList(TYPE_ROOT, TYPE_FOLDER), contentManager,
         containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }
 

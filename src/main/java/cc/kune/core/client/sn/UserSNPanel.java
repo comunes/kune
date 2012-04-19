@@ -100,7 +100,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   @Override
   public void setBuddiesCount(final int count) {
-    firstCategoryCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    firstCategoryCount.setText(countAsString(count));
     firstCategoryLabel.setText(i18n.t("Buddies"));
   }
 
@@ -118,7 +118,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   @Override
   public void setParticipationCount(final int count) {
-    sndCategoryCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    sndCategoryCount.setText(countAsString(count));
   }
 
   @Override
