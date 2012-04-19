@@ -43,8 +43,10 @@ import java.util.Map;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.shared.SearcherConstants;
+import cc.kune.core.shared.dto.GroupType;
 
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
@@ -883,7 +885,12 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
             final String longName = jsonOpt.get(OptionResultSet.DISPLAY_NAME).isString().stringValue();
             final String shortName = jsonOpt.get(OptionResultSet.VALUE).isString().stringValue();
-            option.setName(!longName.equals(shortName) ? longName + " (" + shortName + ")" : shortName);
+            final JSONValue groupTypeJsonValue = jsonOpt.get("groupType");
+            final String prefix = groupTypeJsonValue.isString() == null ? ""
+                : GroupType.PERSONAL.name().equals(groupTypeJsonValue.isString().stringValue()) ? I18n.t("User: ")
+                    : I18n.t("Group: ");
+            option.setName(prefix
+                + (!longName.equals(shortName) ? longName + " (" + shortName + ")" : shortName));
             option.setValue(jsonOpt.get(OptionResultSet.VALUE).isString().stringValue());
             options.addOption(option);
           }

@@ -19,37 +19,38 @@
  */
 package cc.kune.core.server.rest;
 
-
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.rack.filters.rest.REST;
 import cc.kune.core.shared.SearcherConstants;
-import cc.kune.core.shared.dto.LinkDTO;
+import cc.kune.core.shared.dto.GroupResultDTO;
 import cc.kune.core.shared.dto.SearchResultDTO;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 
 public class GroupJSONService {
-    private final GroupManager manager;
-    private final Mapper mapper;
+  private final GroupManager manager;
+  private final Mapper mapper;
 
-    @Inject
-    public GroupJSONService(final GroupManager manager, final Mapper mapper) {
-        this.manager = manager;
-        this.mapper = mapper;
-    }
+  @Inject
+  public GroupJSONService(final GroupManager manager, final Mapper mapper) {
+    this.manager = manager;
+    this.mapper = mapper;
+  }
 
-    @REST(params = { SearcherConstants.QUERY_PARAM })
-    public SearchResultDTO<LinkDTO> search(final String search) {
-        return search(search, null, null);
-    }
+  @REST(params = { SearcherConstants.QUERY_PARAM })
+  public SearchResultDTO<GroupResultDTO> search(final String search) {
+    return search(search, null, null);
+  }
 
-    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM })
-    public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults) {
-        SearchResult<Group> results = manager.search(search, firstResult, maxResults);
-        return mapper.mapSearchResult(results, LinkDTO.class);
-    }
+  @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM,
+      SearcherConstants.LIMIT_PARAM })
+  public SearchResultDTO<GroupResultDTO> search(final String search, final Integer firstResult,
+      final Integer maxResults) {
+    final SearchResult<Group> results = manager.search(search, firstResult, maxResults);
+    return mapper.mapSearchResult(results, GroupResultDTO.class);
+  }
 
 }

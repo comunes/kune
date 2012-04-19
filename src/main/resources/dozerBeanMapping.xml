@@ -231,6 +231,14 @@
       <b>name</b>
     </field>
   </mapping>
+    <mapping>
+    <class-a>cc.kune.core.shared.dto.GroupResultDTO</class-a>
+    <class-b>cc.kune.domain.User</class-b>
+    <field>
+      <a>longName</a>
+      <b>name</b>
+    </field>
+  </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.AccessRolDTO </class-a>
     <class-b> cc.kune.core.shared.domain.AccessRol </class-b>
