@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -330,8 +331,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     Preconditions.checkState(container.isRoot(), "Trying to purge a non root folder: " + container);
     Preconditions.checkState(container.getTypeId().equals(TrashToolConstants.TYPE_ROOT),
         "Container is not a trash root folder");
-    for (final Content content : container.getContents()) {
-      purgeContent(content);
+    final Iterator<Content> iterator = container.getContents().iterator();
+    while (iterator.hasNext()) {
+      purgeContent(iterator.next());
     }
     return container;
   }

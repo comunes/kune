@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.content;
 
+import java.util.Iterator;
+
 import javax.persistence.EntityManager;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -136,8 +138,9 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     Preconditions.checkState(container.isRoot(), "Trying to purge a non root folder: " + container);
     Preconditions.checkState(container.getTypeId().equals(TrashToolConstants.TYPE_ROOT),
         "Container is not a trash root folder");
-    for (final Container childContainer : container.getChilds()) {
-      purgeContainer(childContainer);
+    final Iterator<Container> iterator = container.getChilds().iterator();
+    while (iterator.hasNext()) {
+      purgeContainer(iterator.next());
     }
     return container;
   }
