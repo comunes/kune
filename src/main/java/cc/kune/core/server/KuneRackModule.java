@@ -50,7 +50,6 @@ import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
 import cc.kune.core.server.rack.filters.ForwardFilter;
 import cc.kune.core.server.rack.filters.ListenerFilter;
-import cc.kune.core.server.rack.filters.LogFilter;
 import cc.kune.core.server.rack.filters.RedirectFilter;
 import cc.kune.core.server.rack.filters.rest.RESTServicesModule;
 import cc.kune.core.server.rest.ContentJSONService;
@@ -146,7 +145,7 @@ public class KuneRackModule implements RackModule {
     builder.exclude("/static/.*");
     builder.exclude("/webclient/.*");
 
-    builder.at(".*").install(new LogFilter());
+    // builder.at(".*").install(new LogFilter());
     builder.at(".*").install(new GuiceFilter());
 
     // NOTE: Commented this while testing Wave

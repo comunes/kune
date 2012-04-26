@@ -36,8 +36,7 @@ case "$1" in
 	chown -R kune:kune /etc/kune
 	chown -R kune:kune /usr/share/kune
 	chown -R kune:kune /var/log/kune/
-	chown -R kune:kune /var/lib/kune/uploads
-	chown -R kune:kune /var/lib/kune/lucene/
+	chown -R kune:kune /var/lib/kune
 
 	chmod -R 0755 /etc/kune
 	chmod -R 0755 /usr/share/kune

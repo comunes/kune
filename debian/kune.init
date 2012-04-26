@@ -10,8 +10,8 @@
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="kune server"
-NAME=kune             
+DESC="collaborative social network"
+NAME="kune"
 USER=kune
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
@@ -50,11 +50,12 @@ do_start()
     if is_true "$START" ; then       
         # FIXME This should go in limits.conf
         ulimit -n 65000    
-        log_daemon_msg "Starting" "$NAME"
         # Return
         #   0 if daemon has been started
         #   1 if daemon was already running
         #   2 if daemon could not be started
+        touch $LOGFILE
+        chown $USER:$USER $LOGFILE
         start-stop-daemon --start -b -m --quiet --pidfile $PIDFILE -d /usr/share/kune/ -c $USER:$USER --exec $DAEMON --test > /dev/null \
             || return 1
         # http://serverfault.com/questions/162602/stdout-stderr-redirects-in-start-stop-daemon
@@ -66,6 +67,7 @@ do_start()
         # on this one.  As a last resort, sleep for some time.
     else
         log_daemon_msg "Skipping start of kune (see /etc/default/kune)" ""
+	return 0
     fi
 }
 
@@ -79,7 +81,6 @@ do_stop()
     #   1 if daemon was already stopped
     #   2 if daemon could not be stopped
     #   other if a failure occurred
-    log_daemon_msg "Stopping" "$NAME"
     start-stop-daemon --stop --quiet --retry=TERM/15/KILL/5 --pidfile $PIDFILE --name $NAME >> $LOGFILE 2>> $LOGFILE
     RETVAL="$?"
     [ "$RETVAL" = 2 ] && return 2
@@ -105,7 +106,7 @@ do_reload() {
     # restarting (for example, when it is sent a SIGHUP),
     # then implement that here.
     #
-    log_daemon_msg "Reloading" "$NAME"
+    log_daemon_msg "Reloading $DESC" "$NAME"
     # Seems that dont works if the user/group is not the same:
     # http://stackoverflow.com/questions/4147288/how-to-trap-a-signal-in-a-java-application-initialized-using-a-bash-script
     start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE --user $USER --group $USER --name $NAME >> $LOGFILE 2>> $LOGFILE
@@ -114,19 +115,19 @@ do_reload() {
 
 case "$1" in
     start)
-    [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
+    log_daemon_msg "Starting $DESC" "$NAME"
     do_start
     case "$?" in
-        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+        0|1) log_end_msg 0 ;;
+        2) log_end_msg 1 ;;
     esac
     ;;
     stop)
-    [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+    log_daemon_msg "Stopping $DESC" "$NAME"
     do_stop
     case "$?" in
-        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+        0|1) log_end_msg 0 ;;
+        2) log_end_msg 1 ;;
     esac
     ;;
     status)

@@ -33,8 +33,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.box.server.CoreSettings;
 
 import cc.kune.core.server.manager.GroupManager;
@@ -46,8 +44,6 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 public class EntityLogoDownloadManager extends HttpServlet {
-
-  public static final Log LOG = LogFactory.getLog(EntityLogoDownloadManager.class);
 
   private static final long serialVersionUID = -1958945058088446881L;
   private final byte[] groupLogo;

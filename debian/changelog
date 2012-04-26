@@ -1,6 +1,12 @@
+kune (0.2.0+b3) unstable; urgency=low
+
+  * Init loging fixed. Other minor changes
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 25 Apr 2012 20:02:45 +0200
+
 kune (0.2.0+b2) unstable; urgency=low
 
-  * Debian init script and server script logging via wrapper.
+  * Debian init script and server script loging via wrapper.
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 18 Apr 2012 22:49:55 +0200
 
