@@ -59,7 +59,7 @@ import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
 import org.waveprotocol.box.server.rpc.UserRegistrationServlet;
 import org.waveprotocol.box.server.rpc.WaveRefServlet;
-import org.waveprotocol.box.server.waveserver.ImportServlet;
+import org.waveprotocol.box.server.waveserver.CustomImportServlet;
 import org.waveprotocol.box.server.waveserver.WaveBus;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
@@ -233,7 +233,7 @@ public class WaveMain {
     boolean enableImport = injector
             .getInstance(Key.get(Boolean.class, Names.named(CoreSettings.ENABLE_IMPORT)));
     if (enableImport)
-      server.addServlet("/import", injector.getInstance(ImportServlet.class));
+      server.addServlet("/import", injector.getInstance(CustomImportServlet.class));
 
     String gadgetHostName =
         injector

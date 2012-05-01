@@ -187,7 +187,6 @@ public class KuneRackModule implements RackModule {
         if (!kuneProperties.getBoolean(KuneProperties.SITE_OPENFIRE_IGNORE)) {
           filter("/*").through(DataSourceOpenfirePersistModule.MY_DATA_SOURCE_TWO_FILTER_KEY);
         }
-
         super.configureServlets();
       }
     });

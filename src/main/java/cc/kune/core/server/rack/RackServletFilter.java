@@ -35,8 +35,10 @@ import javax.servlet.ServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
+import org.waveprotocol.box.server.waveserver.CustomImportServlet;
 
 import cc.kune.core.server.error.ServerException;
+import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.rack.utils.RackHelper;
@@ -173,6 +175,8 @@ public class RackServletFilter implements Filter {
     excludes = rack.getExcludes();
     initFilters(filterConfig);
     LOG.debug("INITIALIZATION DONE!");
+    kuneChildInjector.getInstance(CustomImportServlet.class).init(
+        kuneChildInjector.getInstance(KuneProperties.class));
 
     // Uncomment to generate the graph
     // graph("docs/wave-guice-graph.dot", injector);

@@ -94,29 +94,19 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
     // FIXME move content?
     groupSpace.showTutorial(3, 4, 5, 4, 4, 2, -5, 3, 6, 7, 6, 4, 4, 5, 5, 3, 3, 4, 6, 4, 3);
 
-    // blogs
-    groupSpace.blogTool.click();
-    showTooltip(groupSpace.blogTool);
-    sleep(3000);
-    groupSpace.showTutorial(3, 4, 3, 3, 6, 5, 5, 3, 3);
-    // groupSpace.openFirtsContent();
-    // sleep(2000);
-    // groupSpace.newContentBtn.click();
-    // sleep(1000);
-    // groupSpace.goParentBtn.click();
-
-    // chats
-    groupSpace.chatTool.click();
-    showTooltip(groupSpace.chatTool);
-    sleep(3000);
-    groupSpace.showTutorial(3, 6, 6, 4, 7, 3, 3);
-    // groupSpace.openFirtsContent();
-    // sleep(2000);
-    // groupSpace.openRoomBtn.click();
-    // sleep(2000);
-    // chat.chatIcon.click();
-
-    // lists
+    // // blogs
+    // groupSpace.blogTool.click();
+    // showTooltip(groupSpace.blogTool);
+    // sleep(3000);
+    // groupSpace.showTutorial(3, 4, 3, 3, 6, 5, 5, 3, 3);
+    //
+    // // chats
+    // groupSpace.chatTool.click();
+    // showTooltip(groupSpace.chatTool);
+    // sleep(3000);
+    // groupSpace.showTutorial(3, 6, 6, 4, 7, 3, 3);
+   
+   	// lists
     groupSpace.listTool.click();
     showTooltip(groupSpace.listTool);
     sleep(2000);
@@ -152,27 +142,18 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
     sleep(2000);
     doScreenshot("calendar");
     groupSpace.showTutorial(3, 5, 6, 7, 3, 5, 3, 3, 3);
-    // groupSpace.openFirtsContent();
-    // sleep(2000);
 
-    // tasks
-    groupSpace.taskTool.click();
-    showTooltip(groupSpace.taskTool);
-    sleep(2000);
-    groupSpace.showTutorial(3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 3);
-    // groupSpace.openFirtsContent();
+    // // tasks
+    // groupSpace.taskTool.click();
+    // showTooltip(groupSpace.taskTool);
     // sleep(2000);
-    // doScreenshot("tasks");
-    // groupSpace.openFirtsContent();
+    // groupSpace.showTutorial(3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 3);
+    //
+    // // wiki
+    // groupSpace.wikiTool.click();
+    // showTooltip(groupSpace.wikiTool);
     // sleep(2000);
-
-    // wiki
-    groupSpace.wikiTool.click();
-    showTooltip(groupSpace.wikiTool);
-    sleep(2000);
-    groupSpace.showTutorial(3, 5, 3, 3, 3);
-    // groupSpace.openFirtsContent();
-    // sleep(3000);
+    // groupSpace.showTutorial(3, 5, 3, 3, 3);
 
     // // barters
     // groupSpace.showTutorial(3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3);

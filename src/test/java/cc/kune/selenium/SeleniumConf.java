@@ -30,8 +30,8 @@ public final class SeleniumConf {
   }
 
   public enum Site {
-    demo("kune.beta.iepala.es"), eurosur("beta.eurosur.org"), kunecc("kune.cc"), localhost(
-        "localhost:8888", "&log_level=INFO&gwt.codesvr=127.0.0.1:9997");
+    demo("kune.beta.iepala.es"), kunecc("kune.cc"), localhost("localhost:8888",
+        "&log_level=INFO&gwt.codesvr=127.0.0.1:9997"), socialglobal("social.gloobal.net");
 
     private String domain;
     private String params;
@@ -56,8 +56,8 @@ public final class SeleniumConf {
 
   public static final Driver DRIVER = Driver.firefox;
   /* Configure this for use other lang, site, or driver */
-  public static final Lang LANG = Lang.en;
-  public static final Site SITE = Site.demo;
+  public static final Lang LANG = Lang.es;
+  public static final Site SITE = Site.socialglobal;
   public static final int TIMEOUT = 25;
 
   SeleniumConf() {

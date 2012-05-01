@@ -1,3 +1,10 @@
+kune (0.2.0+b4) unstable; urgency=low
+
+  * Added some kune.wave.import.usernamespairs param
+  * Fixed status init function
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 30 Apr 2012 22:19:50 +0200
+
 kune (0.2.0+b3) unstable; urgency=low
 
   * Init loging fixed. Other minor changes
