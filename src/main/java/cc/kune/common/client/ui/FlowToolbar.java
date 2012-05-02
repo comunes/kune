@@ -29,129 +29,129 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidget {
 
-    private final FlowPanel childPanel;
+  private final FlowPanel childPanel;
 
-    public FlowToolbar() {
-        super();
-        childPanel = new FlowPanel();
-        initWidget(childPanel);
-    }
+  public FlowToolbar() {
+    super();
+    childPanel = new FlowPanel();
+    initWidget(childPanel);
+  }
 
-    @Override
-    public void add(final Widget widget) {
-        childPanel.add(widget);
-    }
+  @Override
+  public void add(final Widget widget) {
+    childPanel.add(widget);
+  }
 
-    @Override
-    public void add(final Widget widget, final VerticalAlignmentConstant valign) {
-        childPanel.add(widget);
-    }
+  @Override
+  public void add(final Widget widget, final VerticalAlignmentConstant valign) {
+    childPanel.add(widget);
+  }
 
-    @Override
-    public Widget addFill() {
-        final Label emptyLabel = new Label("");
-        emptyLabel.addStyleName("oc-floatright");
-        // emptyLabel.setWidth("100%");
-        this.add(emptyLabel);
-        return emptyLabel;
-    }
+  @Override
+  public Widget addFill() {
+    final Label emptyLabel = new Label("");
+    emptyLabel.addStyleName("oc-floatright");
+    // emptyLabel.setWidth("100%");
+    this.add(emptyLabel);
+    return emptyLabel;
+  }
 
-    @Override
-    public Widget addSeparator() {
-        final Label emptyLabel = new Label("");
-        emptyLabel.setStyleName("k-tb-sep");
-        emptyLabel.addStyleName("oc-tb-sep");
-        emptyLabel.addStyleName("oc-floatleft");
-        this.add(emptyLabel);
-        return emptyLabel;
-    }
+  @Override
+  public Widget addSeparator() {
+    final Label emptyLabel = new Label("");
+    emptyLabel.setStyleName("k-tb-sep");
+    emptyLabel.addStyleName("oc-tb-sep");
+    emptyLabel.addStyleName("oc-floatleft");
+    this.add(emptyLabel);
+    return emptyLabel;
+  }
 
-    @Override
-    public Widget addSpacer() {
-        final Label emptyLabel = new Label("");
-        emptyLabel.setStyleName("oc-tb-spacer");
-        emptyLabel.addStyleName("oc-floatleft");
-        this.add(emptyLabel);
-        return emptyLabel;
-    }
+  @Override
+  public Widget addSpacer() {
+    final Label emptyLabel = new Label("");
+    emptyLabel.setStyleName("oc-tb-spacer");
+    emptyLabel.addStyleName("oc-floatleft");
+    this.add(emptyLabel);
+    return emptyLabel;
+  }
 
-    public void clear() {
-        childPanel.clear();
-    }
+  public void clear() {
+    childPanel.clear();
+  }
 
-    @Override
-    public Widget getWidget(final int index) {
-        return childPanel.getWidget(index);
-    }
+  @Override
+  public Widget getWidget(final int index) {
+    return childPanel.getWidget(index);
+  }
 
-    @Override
-    public int getWidgetCount() {
-        return childPanel.getWidgetCount();
-    }
+  @Override
+  public int getWidgetCount() {
+    return childPanel.getWidgetCount();
+  }
 
-    @Override
-    public int getWidgetIndex(final IsWidget child) {
-        return childPanel.getWidgetIndex(child);
-    }
+  @Override
+  public int getWidgetIndex(final IsWidget child) {
+    return childPanel.getWidgetIndex(child);
+  }
 
-    @Override
-    public int getWidgetIndex(final Widget child) {
-        return childPanel.getWidgetIndex(child);
-    }
+  @Override
+  public int getWidgetIndex(final Widget child) {
+    return childPanel.getWidgetIndex(child);
+  }
 
-    @Override
-    public void insert(final Widget widget, final int position) {
-        childPanel.insert(widget, position);
-    }
+  @Override
+  public void insert(final Widget widget, final int position) {
+    childPanel.insert(widget, position);
+  }
 
-    @Override
-    public boolean remove(final int index) {
-        return childPanel.remove(index);
-    }
+  @Override
+  public boolean remove(final int index) {
+    return childPanel.remove(index);
+  }
 
-    @Override
-    public boolean remove(final Widget widget) {
-        return childPanel.remove(widget);
-    }
+  @Override
+  public boolean remove(final Widget widget) {
+    return childPanel.remove(widget);
+  }
 
-    @Override
-    public void removeAll() {
-        childPanel.clear();
-    }
+  @Override
+  public void removeAll() {
+    childPanel.clear();
+  }
 
-    private void setBasicStyle() {
-        setStyleName("x-toolbar-FIXME");
-        addStyleName("x-panel-FIXME");
-    }
+  private void setBasicStyle() {
+    setStyleName("x-toolbar-FIXME");
+    addStyleName("x-panel-FIXME");
+  }
 
-    /**
-     * Set the blank style
-     */
-    @Override
-    public void setBlankStyle() {
-        setBasicStyle();
-        addStyleName("oc-blank-toolbar");
-    }
+  /**
+   * Set the blank style
+   */
+  @Override
+  public void setBlankStyle() {
+    setBasicStyle();
+    addStyleName("oc-blank-toolbar");
+  }
 
-    @Override
-    public void setHeight(final String height) {
-        childPanel.setHeight(height);
-    }
+  @Override
+  public void setHeight(final String height) {
+    childPanel.setHeight(height);
+  }
 
-    /**
-     * Set the normal grey style
-     */
-    @Override
-    public void setNormalStyle() {
-        setBasicStyle();
-        addStyleName("oc-tb-bottom-line");
-    }
+  /**
+   * Set the normal grey style
+   */
+  @Override
+  public void setNormalStyle() {
+    setBasicStyle();
+    addStyleName("oc-tb-bottom-line");
+  }
 
-    /**
-     * Set the transparent style
-     */
-    public void setTranspStyle() {
-        setBasicStyle();
-        addStyleName("oc-transp");
-    }
+  /**
+   * Set the transparent style
+   */
+  public void setTranspStyle() {
+    setBasicStyle();
+    addStyleName("oc-transp");
+  }
 }

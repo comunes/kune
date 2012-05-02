@@ -21,6 +21,7 @@ package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.dnd.FolderContainerDropController;
@@ -76,14 +77,18 @@ public class PathToolbarUtils {
       // for (int i = pathLength - 1; i >= 0; i--) {
       for (int i = 0; i < pathLength; i++) {
         final ButtonDescriptor btn = createPathButton(path[i], pathLength, i);
+        final boolean isNotTheLast = i != pathLength - 1;
         if (withDrop) {
-          if (i != pathLength - 1) {
+          if (isNotTheLast) {
             final FolderContainerDropController dropTarget = dropController.get();
             dropTarget.setTarget(path[i].getStateToken());
             btn.setDropTarget(dropTarget);
           }
         }
         actions.add(btn);
+        if (isNotTheLast) {
+          actions.add(new LabelDescriptor().withStyles("k-button-arrow"));
+        }
       }
     }
     return actions;

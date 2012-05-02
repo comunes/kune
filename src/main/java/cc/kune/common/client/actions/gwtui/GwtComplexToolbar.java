@@ -29,80 +29,80 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class GwtComplexToolbar extends Composite implements IsWidget {
 
-    private enum FlowDir {
-        left, right
-    }
-    private FlowDir currentFlow;
-    private final FlowToolbar toolbar;
+  private enum FlowDir {
+    left, right
+  }
+  private FlowDir currentFlow;
+  private final FlowToolbar toolbar;
 
-    public GwtComplexToolbar() {
-        toolbar = new FlowToolbar();
-        currentFlow = FlowDir.left;
-        initWidget(toolbar);
-    }
+  public GwtComplexToolbar() {
+    toolbar = new FlowToolbar();
+    currentFlow = FlowDir.left;
+    initWidget(toolbar);
+  }
 
-    protected void add(final AbstractGuiItem item) {
-        item.addStyleName(getFlow());
-        toolbar.add(item);
-    }
+  protected void add(final AbstractGuiItem item) {
+    item.addStyleName(getFlow());
+    toolbar.add(item);
+  }
 
-    public void add(final UIObject uiObject) {
-        uiObject.addStyleName(getFlow());
-        toolbar.add((Widget) uiObject);
-    }
+  public void add(final UIObject uiObject) {
+    uiObject.addStyleName(getFlow());
+    toolbar.add((Widget) uiObject);
+  }
 
-    public Widget addFill() {
-        currentFlow = FlowDir.right;
-        return toolbar.addFill();
-    }
+  public Widget addFill() {
+    currentFlow = FlowDir.right;
+    return toolbar.addFill();
+  }
 
-    public Widget addSeparator() {
-        return toolbar.addSeparator();
-    }
+  public Widget addSeparator() {
+    return toolbar.addSeparator();
+  }
 
-    public Widget addSpacer() {
-        return toolbar.addSpacer();
-    }
+  public Widget addSpacer() {
+    return toolbar.addSpacer();
+  }
 
-    private String getFlow() {
-        switch (currentFlow) {
-        case left:
-            return "oc-floatleft";
-        case right:
-        default:
-            return "oc-floatright";
-        }
+  private String getFlow() {
+    switch (currentFlow) {
+    case left:
+      return "oc-floatleft";
+    case right:
+    default:
+      return "oc-floatright";
     }
+  }
 
-    protected void insert(final AbstractGuiItem item, final int position) {
-        item.addStyleName(getFlow());
-        toolbar.insert(item, position);
-    }
+  protected void insert(final AbstractGuiItem item, final int position) {
+    item.addStyleName(getFlow());
+    toolbar.insert(item, position);
+  }
 
-    public void insert(final UIObject uiObject, final int position) {
-        uiObject.addStyleName(getFlow());
-        toolbar.insert((Widget) uiObject, position);
-    }
+  public void insert(final UIObject uiObject, final int position) {
+    uiObject.addStyleName(getFlow());
+    toolbar.insert((Widget) uiObject, position);
+  }
 
-    /**
-     * Set the blank style
-     */
-    public void setCleanStyle() {
-        toolbar.setBlankStyle();
-    }
+  /**
+   * Set the blank style
+   */
+  public void setCleanStyle() {
+    toolbar.setBlankStyle();
+  }
 
-    /**
-     * Set the normal grey style
-     */
-    public void setNormalStyle() {
-        toolbar.setNormalStyle();
-    }
+  /**
+   * Set the normal grey style
+   */
+  public void setNormalStyle() {
+    toolbar.setNormalStyle();
+  }
 
-    /**
-     * Set the blank style
-     */
-    public void setTranspStyle() {
-        toolbar.setTranspStyle();
-    }
+  /**
+   * Set the blank style
+   */
+  public void setTranspStyle() {
+    toolbar.setTranspStyle();
+  }
 
 }

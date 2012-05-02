@@ -1,5 +1,5 @@
-GCHARSET                            "UTF-8                           ";
-  body {
+GCHARSET                               "UTF-8                           
+    "; body {
   background-color: transparent;
   color: black;
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
@@ -932,6 +932,28 @@ button.k-btn-go-up {
   margin-right: 0px !important;
 }
 
+/* Derived from: from http://jonrohan.me/guide/css/creating-triangles-in-css/ */
+.k-button-arrow {
+  border-color: transparent transparent transparent #DDDDDD;
+  border-style: solid;
+  border-width: 5px;
+  bottom: -7px;
+  float: left;
+  height: 0;
+  left: -1px;
+  margin-right: -10px;
+  position: relative;
+  width: 0;
+}
+
+/* IE6 */
+.k-button-arrow {
+  _border-top-color: pink;
+  _border-bottom-color: pink;
+  _border-right-color: pink;
+  _filter: literal("chroma(color=pink)");
+}
+
 .k-button-right {
   border-left: 1px solid #CCCCCC !important;
   -webkit-border-top-left-radius: 0px !important;
@@ -975,8 +997,8 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   color: gray !important;
   border-color: #CCCCCC !important;
   background: inherits !important;
-  kfilter: alpha(opacity =   
-                 50) !important;
+  kfilter: alpha(opacity =       
+                     50) !important;
   -moz-opacity: 0.50 !important;
   -khtml-opacity: 0.50 !important;
   opacity: 0.50 !important;
@@ -1268,8 +1290,8 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =   
-                 90);
+  kfilter: alpha(opacity =       
+                     90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
