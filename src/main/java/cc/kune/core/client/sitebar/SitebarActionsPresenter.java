@@ -27,8 +27,6 @@ import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -160,7 +158,6 @@ public class SitebarActionsPresenter extends
     signInLink.get();
     myGroupsMenu.get();
     newGroupLink.get();
-    new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
     createGotoKune();
     MenuItemDescriptor.build(MORE_MENU, bugsAction);
     MenuItemDescriptor.build(MORE_MENU, errorAction);

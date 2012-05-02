@@ -22,6 +22,8 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.MyGroupsChangedEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
@@ -66,6 +68,8 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
     this.session = session;
     withId(NEW_GROUP_BTN_ID).withStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
     withParent(SitebarActions.RIGHT_TOOLBAR);
+    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
+        SitebarActions.RIGHT_TOOLBAR);
     eventBus.addHandler(MyGroupsChangedEvent.getType(),
         new MyGroupsChangedEvent.MyGroupsChangedHandler() {
           @Override
@@ -78,6 +82,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
         final boolean notLogged = !event.isLogged();
         recalculate(notLogged);
+        separator.setVisible(notLogged);
       }
     });
 

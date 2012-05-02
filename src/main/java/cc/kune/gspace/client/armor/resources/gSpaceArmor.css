@@ -10,6 +10,7 @@
 }
 
 .k-spaces {
+  
 }
 
 .k-group-space {
@@ -20,7 +21,7 @@
 }
 
 .k-space {
-
+  
 }
 
 .floatRight {
@@ -34,7 +35,12 @@
 }
 
 .entityCentralContainer {
-
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .entityHeader {
@@ -123,7 +129,7 @@
 }
 
 .docEditorMargin {
-
+  
 }
 
 .docEditor {
@@ -187,10 +193,11 @@
 }
 
 .entityToolsNorth {
-
+  
 }
 
 .entityToolsNorth span {
+  
 }
 
 .entityToolsCenter {
@@ -224,9 +231,7 @@
   border-width: 7px;
   height: 0;
   width: 0;
-  position: relative;  
-  bottom: 1px;
-  left: 36px;
+  margin-left: 13px;
 }
 
 .k-tool-item-selected-arrow {

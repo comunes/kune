@@ -30,6 +30,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
+import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
@@ -282,9 +283,7 @@ public class ChatClientDefault implements ChatClient {
       dialog.setScrollMode(Scroll.NONE);
       dialog.setHideOnButtonClick(true);
       dialog.setCollapsible(true);
-      // final Widget btn = (Widget)
-      // chatIcon.getValue(ParentWidget.PARENT_UI);
-      dialog.setPosition(118, 1);
+      dialog.setPosition(0, 0);
       dialog.setIcon(AbstractImagePrototype.create(chatResources.chat()));
       // dialog.getItem(0).getFocusSupport().setIgnore(true);
       initEmite();
@@ -463,7 +462,6 @@ public class ChatClientDefault implements ChatClient {
   }
 
   private void setSize(final Widget widget, final HtmlConfig htmlConfig) {
-
     if (htmlConfig.width != null) {
       widget.setWidth("98%");
       dialog.setWidth(htmlConfig.width);
@@ -483,6 +481,10 @@ public class ChatClientDefault implements ChatClient {
     Log.info("Show dialog: " + show);
     if (session.isLogged()) {
       createDialogIfNeeded();
+      if (dialog.getAbsoluteTop() == 0 && dialog.getAbsoluteLeft() == 0) {
+        dialog.setPosition(((Widget) chatIcon.getValue(ParentWidget.PARENT_UI)).getAbsoluteLeft() + 20,
+            20);
+      }
       if (show) {
         dialog.show();
         dialog.setZIndex(0);

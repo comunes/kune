@@ -169,6 +169,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
           getDefSNVisibility(isClosed));
       final String title = i18n.t("About [%s]", group.getLongName());
       initGroup(user, group, serverToolRegistry.getToolsRegisEnabledForGroups(), title, publicDescrip);
+      snCache.expire(user.getUserGroup());
       return group;
     } else {
       throw new UserMustBeLoggedException();

@@ -104,7 +104,10 @@
 }
 
 .entityCentralContainer {
-  border-left: 2px solid bc1;
+  border-top: 1px solid bc1;
+  border-right: 1px solid bc2;
+  border-bottom: 1px solid bc2;
+  border-left: 2px solid bc2;
 }
 
 .entityHeader {
@@ -134,6 +137,7 @@
 
 .docSubheader {
   background-color: bc8;
+  border-top: 1px solid #FFF;
 }
 
 .docSubheader span {
