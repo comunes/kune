@@ -1004,6 +1004,14 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   opacity: 0.50 !important;
 }
 
+button.k-button-right, button.k-button-right, button.k-button-alone {
+  kfilter: alpha(opacity =       
+                     100) !important;
+  -moz-opacity: 1 !important;
+  -khtml-opacity: 1 !important;
+  opacity: 1 !important;
+}
+
 button.k-optionsborder img.k-iconlabel-left {
   border: 1px solid #ACACAC;
   -webkit-border-radius: 3px;

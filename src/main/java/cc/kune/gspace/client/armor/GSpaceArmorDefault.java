@@ -38,7 +38,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -54,7 +53,7 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   private static GSpaceArmorDefaultUiBinder uiBinder = GWT.create(GSpaceArmorDefaultUiBinder.class);
 
   @UiField
-  VerticalPanel centerNorth;
+  FlowPanel centerNorth;
   @UiField
   GSpaceCenterPanel centerPanel;
   @UiField

@@ -29,7 +29,7 @@ body {
   background-color: #ffffff;
   color: #000000;
   line-height: 1.4;
-  font-family: Helvetica, Arial, sans-serif;
+  /* font-family: Helvetica, Arial, sans-serif; */
   font-size: 12px;
 }
 
@@ -52,7 +52,7 @@ img {
 
 input, select, table, textarea {
   font-size: 100%;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 /* MAIN --------------------------------------------------------------------- */

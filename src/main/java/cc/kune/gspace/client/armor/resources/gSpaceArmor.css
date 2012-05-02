@@ -69,8 +69,8 @@
 
 .docHeaderArrow {
   position: relative;
-  z-index: 10;
-  top: -25px;
+  z-index: 1000;
+  top: -20px;
   left: 10px;
 }
 
@@ -79,7 +79,7 @@
   font-weight: bold;
   margin-left: 15px;
   font: 'UbuntuBold', Arial;
-  line-height: 36px;
+  line-height: 32px;
 }
 
 .docHeader input {
@@ -89,14 +89,14 @@
 
 .docHeader img {
   float: left;
-  margin: 10px -10px 0 10px;
+  margin: 8px -10px 0 10px;
 }
 
 .docSubheader {
   overflow: hidden;
   border-collapse: separate;
-  margin: -14px 0 0;
-  padding: 10px 0 0;
+  margin: -5px 0 0;
+  padding: 5px 0 0;
 }
 
 .docSubheader button.k-fr {
@@ -224,8 +224,8 @@
   border-width: 7px;
   height: 0;
   width: 0;
-  position: relative;
-  bottom: 0px;
+  position: relative;  
+  bottom: 1px;
   left: 36px;
 }
 

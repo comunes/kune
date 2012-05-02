@@ -42,22 +42,18 @@
               <g:center size="1.0">
                 <g:DockLayoutPanel unit="PX" ui:field="splitCenter"
                   styleName="{res.style.entityCentralContainer}">
-                  <g:north size="153">
-                    <g:VerticalPanel width="100%"
-                      ui:field="centerNorth" height="153px">
+                  <g:north size="135">
+                    <g:FlowPanel width="100%" ui:field="centerNorth"
+                      height="135px">
                       <g:FlowPanel height="70px" width="100%"
                         styleName="{res.style.entityHeader}" ui:field="entityHeader">
                         <!--<g:RichTextArea width="100%" height="70px" /> -->
                       </g:FlowPanel>
-                      <g:FlowPanel width="100%" height="38px"
-                        styleName="{res.style.docHeader}" ui:field="docHeader">
-                      </g:FlowPanel>
-                      <g:HTMLPanel ui:field="arrow"
-                        styleName="{res.style.docSubheaderArrow}"/>
-                      <g:FlowPanel width="100%" height="45px"
-                        styleName="{res.style.docSubheader}" ui:field="docSubheader">
-                      </g:FlowPanel>
-                    </g:VerticalPanel>
+                      <g:FlowPanel width="100%" height="30px"
+                        styleName="{res.style.docSubheader}" ui:field="docSubheader"/>
+                      <g:FlowPanel width="100%" height="35px"
+                        styleName="{res.style.docHeader}" ui:field="docHeader"/>
+                    </g:FlowPanel>
                   </g:north>
                   <g:center>
                     <g:DockLayoutPanel unit="PX"
@@ -68,6 +64,10 @@
                       <g:east size="10">
                         <g:SimplePanel/>
                       </g:east>
+                      <g:north size="10">
+                        <g:HTMLPanel ui:field="arrow"
+                          styleName="{res.style.docSubheaderArrow}"/>
+                      </g:north>
                       <g:center>
                         <kg:GSpaceCenterPanel
                           ui:field="centerPanel"/>
