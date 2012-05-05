@@ -66,6 +66,8 @@ public class UserSessionManager implements UsersOnline {
     //
     // Best way maybe it's accessing openfire db:
     // http://www.mastertheboss.com/jboss-howto/45-jboss-persistence/110-jboss-persistencexml-multiple-database.html
+
+    // FIXME add sessions from restored ?
     logins = new HashSet<String>();
   }
 

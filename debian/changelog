@@ -1,3 +1,9 @@
+kune (0.2.0+b5) unstable; urgency=low
+
+  * Some UI improvements (header and sitebar reorganization, etc)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 03 May 2012 01:30:52 +0200
+
 kune (0.2.0+b4) unstable; urgency=low
 
   * Added some kune.wave.import.usernamespairs param

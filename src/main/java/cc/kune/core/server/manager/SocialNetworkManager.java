@@ -19,8 +19,6 @@
  */
 package cc.kune.core.server.manager;
 
-
-
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
@@ -32,30 +30,33 @@ import cc.kune.domain.User;
 
 public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
-    void acceptJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
+  void acceptJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
 
-    void addGroupToAdmins(User userLogged, Group group, Group inGroup) throws DefaultException;
+  void addAsBuddie(User userLogged, User toUser);
 
-    void addGroupToCollabs(User userLogged, Group group, Group inGroup) throws DefaultException;
+  void addGroupToAdmins(User userLogged, Group group, Group inGroup) throws DefaultException;
 
-    void addGroupToViewers(User userLogged, Group group, Group inGroup) throws DefaultException;
+  void addGroupToCollabs(User userLogged, Group group, Group inGroup) throws DefaultException;
 
-    void deleteMember(User userLogged, Group group, Group inGroup) throws DefaultException, AccessViolationException;
+  void addGroupToViewers(User userLogged, Group group, Group inGroup) throws DefaultException;
 
-    void denyJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
+  void deleteMember(User userLogged, Group group, Group inGroup) throws DefaultException,
+      AccessViolationException;
 
-    ParticipationData findParticipation(User user, Group group) throws DefaultException;
+  void denyJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
 
-    SocialNetwork get(User userLogged, Group group) throws DefaultException;
+  ParticipationData findParticipation(User user, Group group) throws DefaultException;
 
-    SocialNetworkData getSocialNetworkData(User userLogged, Group group);
+  SocialNetwork get(User userLogged, Group group) throws DefaultException;
 
-    SocialNetworkRequestResult requestToJoin(User user, Group inGroup) throws DefaultException;
+  SocialNetworkData getSocialNetworkData(User userLogged, Group group);
 
-    void setAdminAsCollab(User userLogged, Group group, Group inGroup) throws DefaultException;
+  SocialNetworkRequestResult requestToJoin(User user, Group inGroup) throws DefaultException;
 
-    void setCollabAsAdmin(User userLogged, Group group, Group inGroup) throws DefaultException;
+  void setAdminAsCollab(User userLogged, Group group, Group inGroup) throws DefaultException;
 
-    void unJoinGroup(Group groupToUnJoin, Group inGroup) throws DefaultException;
+  void setCollabAsAdmin(User userLogged, Group group, Group inGroup) throws DefaultException;
+
+  void unJoinGroup(Group groupToUnJoin, Group inGroup) throws DefaultException;
 
 }

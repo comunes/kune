@@ -103,9 +103,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
   @Authenticated
   @KuneTransactional
   public void addAsBuddie(final String hash, final String userName) throws DefaultException {
-    final User userLogged = userSessionManager.getUser();
-    final User toUser = userFinder.findByShortName(userName);
-    notifyService.notifyUserToUser(userLogged, toUser, "Added as buddie", "He/she added you as buddie");
+    socialNetworkManager.addAsBuddie(userSessionManager.getUser(), userFinder.findByShortName(userName));
   }
 
   @Override

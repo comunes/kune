@@ -37,6 +37,7 @@ import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
@@ -64,18 +65,21 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
   private final AccessRightsService accessRightsService;
   private final GroupFinder finder;
+  private final NotificationService notifyService;
   private final SocialNetworkCache snCache;
   private final UserManager userManager;
 
   @Inject
   public SocialNetworkManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final GroupFinder finder, final AccessRightsService accessRightsService,
-      final UserManager userManager, final SocialNetworkCache snCache) {
+      final UserManager userManager, final SocialNetworkCache snCache,
+      final NotificationService notifyService) {
     super(provider, SocialNetwork.class);
     this.finder = finder;
     this.accessRightsService = accessRightsService;
     this.userManager = userManager;
     this.snCache = snCache;
+    this.notifyService = notifyService;
   }
 
   @Override
@@ -97,6 +101,13 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     final SocialNetwork sn = group.getSocialNetwork();
     sn.addAdmin(newAdmin.getUserGroup());
     snCache.expire(group);
+  }
+
+  @Override
+  public void addAsBuddie(final User userLogged, final User toUser) {
+    notifyService.notifyUserToUser(userLogged, toUser, "Added as buddie", "He/she added you as buddie");
+    snCache.expire(userLogged.getUserGroup());
+    snCache.expire(toUser.getUserGroup());
   }
 
   @Override
