@@ -40,6 +40,8 @@ import cc.kune.core.server.manager.SearchResult;
 import com.google.inject.Provider;
 
 public abstract class DefaultManager<T, K> {
+  // FIXME: revise this
+  private static final int BATCH_SIZE = 50;
   protected final static Version LUCENE_VERSION = Version.LUCENE_35;
   private final Class<T> entityClass;
   protected final Log log;
@@ -92,19 +94,38 @@ public abstract class DefaultManager<T, K> {
     return persist(entity, entityClass);
   }
 
-  @SuppressWarnings("unchecked")
   public void reIndex() {
-    // Inject this?
-    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
-    fullTextEm.purgeAll(entityClass);
-    fullTextEm.getTransaction().commit();
-    fullTextEm.getTransaction().begin();
-    final List<T> entities = fullTextEm.createQuery(
-        "SELECT e FROM " + entityClass.getSimpleName() + " AS e").getResultList();
-    for (final T e : entities) {
-      fullTextEm.index(e);
+    // http://docs.jboss.org/hibernate/search/4.1/reference/en-US/html_single/#search-batchindex
+    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager().getEntityManagerFactory().createEntityManager());
+    try {
+      fullTextEm.createIndexer().startAndWait();
+    } catch (final InterruptedException e) {
+      throw new ServerManagerException("Error reindexing", e);
     }
-    fullTextEm.getSearchFactory().optimize(entityClass);
+
+    // final Session fullTextSession = (org.hibernate.Session)
+    // fullTextEm.getDelegate();
+    // fullTextSession.setFlushMode(FlushMode.AUTO);
+    // fullTextSession.setCacheMode(CacheMode.IGNORE);
+    // // final Transaction transaction = fullTextSession.beginTransaction();
+    // // Scrollable results will avoid loading too many objects in memory
+    // final ScrollableResults results =
+    // fullTextSession.createCriteria(entityClass).setFetchSize(
+    // BATCH_SIZE).scroll(ScrollMode.FORWARD_ONLY);
+    // int index = 0;
+    // while (results.next()) {
+    // index++;
+    //
+    // fullTextEm.index(results.get(0)); // index each element
+    // if (index % BATCH_SIZE == 0) {
+    // // fullTextSession.flushToIndexes(); //apply changes to indexes
+    // fullTextSession.flush(); // apply changes to indexes
+    // fullTextSession.clear(); // free memory since the queue is processed
+    // }
+    // }
+    // http://stackoverflow.com/questions/10248598/clearing-locks-between-junit-tests-in-hibernate-search-4-1
+    // transaction.commit();
+    fullTextEm.close();
   }
 
   public void remove(final T entity) {
@@ -117,13 +138,15 @@ public abstract class DefaultManager<T, K> {
 
   @SuppressWarnings("unchecked")
   public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
-    final FullTextQuery emQuery = Search.getFullTextEntityManager(getEntityManager()).createFullTextQuery(
-        query, entityClass);
+    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager().getEntityManagerFactory().createEntityManager());
+    final FullTextQuery emQuery = fullTextEm.createFullTextQuery(query, entityClass);
     if (firstResult != null && maxResults != null) {
       emQuery.setFirstResult(firstResult);
       emQuery.setMaxResults(maxResults);
     }
-    return new SearchResult<T>(emQuery.getResultSize(), emQuery.getResultList());
+    final SearchResult<T> searchResult = new SearchResult<T>(emQuery.getResultSize(),
+        emQuery.getResultList());
+    return searchResult;
   }
 
   public SearchResult<T> search(final String query, final String[] fields,

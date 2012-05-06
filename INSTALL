@@ -136,7 +136,11 @@ Not verified: in Windows you need to do something similar (copy the jmagick .dll
 
 ===Initialize the kune database===
 
-mysql -p -u kune < src/main/resources/db/kune_initialize.sql 
+Choose the one you will use (the first for development or the last for production):
+
+mysql -p -u kune kune_test < src/main/resources/db/kune_initialize.sql 
+mysql -p -u kune kune_dev < src/main/resources/db/kune_initialize.sql 
+mysql -p -u kune kune_prod < src/main/resources/db/kune_initialize.sql 
 
 (Windows users can use Mysql Browser to execute this SQL: File > Open Script > Select "script\kune_initialize.sql" > Execute).
 

@@ -32,6 +32,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -106,6 +107,7 @@ public class Group implements HasId {
   @OneToOne(cascade = CascadeType.ALL)
   private SocialNetwork socialNetwork;
 
+  @MapKeyColumn(name = "mapkey")
   @OneToMany
   private final Map<String, ToolConfiguration> toolsConfig;
 

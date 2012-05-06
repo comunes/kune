@@ -110,6 +110,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   @Test
   public void userSearch() throws Exception, ParseException {
+    closeTransaction();
     userManager.reIndex();
     final SearchResult<User> result = userManager.search(USER_SHORT_NAME);
     assertEquals(1, result.getSize());

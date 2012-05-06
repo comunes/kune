@@ -66,6 +66,8 @@
         value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
         value="/var/lib/kune/lucene/kune_dev/indexes"/>
+      <property name="hibernate.search.default.exclusive_index_use"
+        value="false"/>
     </properties>
   </persistence-unit>
 
@@ -166,6 +168,8 @@
         value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
         value="kune-data/lucene/kune_dev/indexes"/>
+      <property name="hibernate.search.default.exclusive_index_use"
+        value="false"/>
     </properties>
   </persistence-unit>
 
@@ -211,7 +215,6 @@
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.password" value="db4kune"/>
       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-      <!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
       <property name="hibernate.connection.provider_class"
         value="org.hibernate.connection.C3P0ConnectionProvider"/>
       <property name="hibernate.c3p0.min_size" value="5"/>
@@ -224,6 +227,8 @@
         value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
         value="kune-data/lucene/kune_test/indexes"/>
+      <property name="hibernate.search.default.exclusive_index_use"
+        value="false"/>
     </properties>
   </persistence-unit>
 
@@ -258,16 +263,19 @@
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="false"/>
+      <!-- Workaround for errors "Table FOO not found." https://hibernate.onjira.com/browse/HHH-7002 -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>   
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
       <property name="hibernate.connection.username" value="sa"/>
       <property name="hibernate.connection.password" value=""/>
       <property name="hibernate.connection.url" value="jdbc:h2:mem:testdb"/>
       <property name="hibernate.search.default.directory_provider"
-        value="filesystem"/> <!--  change to "ram" later -->
-      <property name="hibernate.search.default.indexBase"
-        value="kune-data/lucene/kune_test/indexes"/>
+        value="ram"/>
+      <!-- <property name="hibernate.search.default.indexBase" -->
+      <!-- value="kune-data/lucene/kune_test/indexes"/> -->
+      <property name="hibernate.search.default.exclusive_index_use"
+        value="false"/>
     </properties>
   </persistence-unit>
 

@@ -29,6 +29,7 @@ import javax.persistence.PersistenceException;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.Query;
 import org.hibernate.exception.ConstraintViolationException;
 
@@ -306,7 +307,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         "longName", "shortName", "publicDesc" }, new StandardAnalyzer(LUCENE_VERSION));
     Query query;
     try {
-      query = parser.parse(search + SearcherConstants.WILDCARD);
+      query = parser.parse(QueryParser.escape(search) + SearcherConstants.WILDCARD);
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search");
     }

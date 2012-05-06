@@ -37,6 +37,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -109,7 +110,7 @@ public class User implements HasId {
   @Basic
   private Long lastLogin;
 
-  @Field(index = Index.YES, store = Store.NO)
+  @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
   @Column(nullable = false, unique = true)
   @Length(min = 3, max = 50)
   private String name;
@@ -119,7 +120,7 @@ public class User implements HasId {
   @Column(nullable = false)
   private byte[] salt;
 
-  @Field(index = Index.YES, store = Store.NO)
+  @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
   @Column(unique = true)
   // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
   @Length(min = 3, max = 15)

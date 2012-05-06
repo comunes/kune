@@ -36,6 +36,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.Query;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
@@ -449,7 +450,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     final MultiFieldQueryParser parser = createMultiFieldParser();
     Query query;
     try {
-      query = parser.parse(search);
+      query = parser.parse(QueryParser.escape(search));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search");
     }

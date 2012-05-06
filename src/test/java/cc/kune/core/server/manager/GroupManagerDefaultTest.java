@@ -73,6 +73,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
         GroupType.PROJECT);
     groupManager.createGroup(group, user, PUBLIC_DESCRIP);
+    closeTransaction();
     groupManager.reIndex();
     final SearchResult<Group> result = groupManager.search("ysei");
     assertEquals(1, result.getSize());
@@ -180,6 +181,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     for (int i = 1; i < 10; i++) {
       createTestGroup(i);
     }
+    closeTransaction();
     groupManager.reIndex();
     final SearchResult<Group> result = groupManager.search("Yellow", 0, 5);
     assertEquals(9, result.getSize());

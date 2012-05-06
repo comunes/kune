@@ -315,25 +315,13 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>4.1.1.Final</version>
+      <version>4.1.2.Final</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>4.1.0.Final</version>
+      <version>4.2.0.Final</version>
     </dependency>
-    <!-- <dependency> -->
-    <!-- <groupId>org.hibernate</groupId> -->
-    <!-- <artifactId>hibernate-annotations</artifactId> -->
-    <!-- <version>3.5.6-Final</version> -->
-    <!-- </dependency> -->
-    <!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-commons-annotations</artifactId> 
-      <version>3.3.0.ga</version> -->
-    <!-- http://stackoverflow.com/questions/882338/hibernate-preinsertevent-getsource-nosuchmethoderror -->
-    <!-- <exclusions> <exclusion> <groupId>org.hibernate</groupId> <artifactId>hibernate</artifactId> 
-      </exclusion> </exclusions> </dependency> -->
-    <!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> -->
-    <!-- <version>4.1.1.Final</version> </dependency> -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-search</artifactId>
@@ -342,7 +330,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>4.1.1.Final</version>
+      <version>4.1.2.Final</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -352,7 +340,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-c3p0</artifactId>
-      <version>4.1.1.Final</version>
+      <version>4.1.2.Final</version>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>

@@ -30,41 +30,41 @@ import javax.persistence.Table;
 @Table(name = "tool_configurations")
 public class ToolConfiguration {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-    private boolean enabled;
+  private boolean enabled;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    private Container root;
+  @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+  private Container root;
 
-    public ToolConfiguration() {
-        enabled = true;
-    }
+  public ToolConfiguration() {
+    enabled = true;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Container getRoot() {
-        return root;
-    }
+  public Container getRoot() {
+    return root;
+  }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+  public boolean isEnabled() {
+    return enabled;
+  }
 
-    public void setEnabled(final boolean enabled) {
-        this.enabled = enabled;
-    }
+  public void setEnabled(final boolean enabled) {
+    this.enabled = enabled;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public Container setRoot(final Container root) {
-        this.root = root;
-        return root;
-    }
+  public Container setRoot(final Container root) {
+    this.root = root;
+    return root;
+  }
 
 }

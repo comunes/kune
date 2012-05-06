@@ -35,6 +35,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.Query;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
@@ -427,7 +428,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         "name", "shortName" }, new StandardAnalyzer(LUCENE_VERSION));
     Query query;
     try {
-      query = parser.parse(search);
+      query = parser.parse(QueryParser.escape(search));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search", e);
     }

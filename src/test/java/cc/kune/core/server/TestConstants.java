@@ -24,6 +24,7 @@ public final class TestConstants {
   // test: use memory
   // test_db: use mysql
   // public static final String PERSISTENCE_UNIT = "test_db";
+  // FIXME: for some reason with test_db now the database is not initialized
   public static final String PERSISTENCE_UNIT = "test";
   public static final String WAVE_TEST_PROPFILE = "wave-server-testing.properties";
 

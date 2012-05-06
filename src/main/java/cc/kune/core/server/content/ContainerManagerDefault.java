@@ -26,6 +26,7 @@ import javax.persistence.EntityManager;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.Query;
 
 import cc.kune.core.client.errors.AccessViolationException;
@@ -190,7 +191,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         new String[] { "name" }, new StandardAnalyzer(LUCENE_VERSION));
     Query query;
     try {
-      query = parser.parse(search);
+      query = parser.parse(QueryParser.escape(search));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search");
     }
