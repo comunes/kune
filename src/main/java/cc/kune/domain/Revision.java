@@ -51,7 +51,7 @@ public class Revision {
   // http://www.hibernate.org/112.html
   @Lob
   @Column(length = 2147483647)
-  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   @FieldBridge(impl = DataFieldBridge.class)
   char[] body;
 
@@ -74,7 +74,7 @@ public class Revision {
   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Revision previous;
 
-  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   String title;
 
   @Version

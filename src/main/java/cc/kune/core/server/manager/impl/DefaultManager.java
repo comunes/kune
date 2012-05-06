@@ -30,6 +30,7 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.util.Version;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
@@ -39,6 +40,7 @@ import cc.kune.core.server.manager.SearchResult;
 import com.google.inject.Provider;
 
 public abstract class DefaultManager<T, K> {
+  protected final static Version LUCENE_VERSION = Version.LUCENE_35;
   private final Class<T> entityClass;
   protected final Log log;
   private final Provider<EntityManager> provider;
@@ -128,7 +130,8 @@ public abstract class DefaultManager<T, K> {
       final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults) {
     Query queryQ;
     try {
-      queryQ = MultiFieldQueryParser.parse(query, fields, flags, new StandardAnalyzer());
+      queryQ = MultiFieldQueryParser.parse(LUCENE_VERSION, query, fields, flags, new StandardAnalyzer(
+          LUCENE_VERSION));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search", e);
     }
@@ -139,7 +142,8 @@ public abstract class DefaultManager<T, K> {
       final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults) {
     Query query;
     try {
-      query = MultiFieldQueryParser.parse(queries, fields, flags, new StandardAnalyzer());
+      query = MultiFieldQueryParser.parse(LUCENE_VERSION, queries, fields, flags, new StandardAnalyzer(
+          LUCENE_VERSION));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search", e);
     }
@@ -150,7 +154,8 @@ public abstract class DefaultManager<T, K> {
       final Integer firstResult, final Integer maxResults) {
     Query query;
     try {
-      query = MultiFieldQueryParser.parse(queries, fields, new StandardAnalyzer());
+      query = MultiFieldQueryParser.parse(LUCENE_VERSION, queries, fields, new StandardAnalyzer(
+          LUCENE_VERSION));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search", e);
     }

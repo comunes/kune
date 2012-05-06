@@ -28,76 +28,78 @@ import org.hibernate.search.annotations.Store;
 @Embeddable
 public class BasicMimeType {
 
-    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
-    private String mimetype;
-    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
-    private String mimesubtype;
+  @Field(index = Index.YES, store = Store.NO)
+  private String mimesubtype;
+  @Field(index = Index.YES, store = Store.NO)
+  private String mimetype;
 
-    public BasicMimeType() {
-        this(null, null);
-    }
+  public BasicMimeType() {
+    this(null, null);
+  }
 
-    public BasicMimeType(final String mimetype) {
-        if (mimetype != null) {
-            final String[] split = mimetype.split("/", 2);
-            this.mimetype = split[0];
-            if (split.length > 1 && split[1].length() > 0) {
-                this.mimesubtype = split[1];
-            }
-        }
+  public BasicMimeType(final String mimetype) {
+    if (mimetype != null) {
+      final String[] split = mimetype.split("/", 2);
+      this.mimetype = split[0];
+      if (split.length > 1 && split[1].length() > 0) {
+        this.mimesubtype = split[1];
+      }
     }
+  }
 
-    public BasicMimeType(final String type, final String subtype) {
-        this.mimetype = type;
-        this.mimesubtype = subtype;
-    }
+  public BasicMimeType(final String type, final String subtype) {
+    this.mimetype = type;
+    this.mimesubtype = subtype;
+  }
 
-    public String getSubtype() {
-        return mimesubtype;
-    }
+  public String getSubtype() {
+    return mimesubtype;
+  }
 
-    public String getType() {
-        return mimetype;
-    }
+  public String getType() {
+    return mimetype;
+  }
 
-    /**
-     * Duplicate code in BMTDTO
-     * 
-     * @return
-     */
-    public boolean isImage() {
-        return mimetype != null && mimetype.equals("image");
-    }
+  /**
+   * Duplicate code in BMTDTO
+   * 
+   * @return
+   */
+  public boolean isImage() {
+    return mimetype != null && mimetype.equals("image");
+  }
 
-    /**
-     * Duplicate code in BMTDTO
-     * 
-     * @return
-     */
-    public boolean isPdf() {
-        return mimetype != null && mimesubtype != null && mimetype.equals("application") && mimesubtype.equals("pdf");
-    }
+  /**
+   * Duplicate code in BMTDTO
+   * 
+   * @return
+   */
+  public boolean isPdf() {
+    return mimetype != null && mimesubtype != null && mimetype.equals("application")
+        && mimesubtype.equals("pdf");
+  }
 
-    /**
-     * Duplicate code in BMTDTO
-     * 
-     * @return
-     */
-    public boolean isText() {
-        return mimetype != null && mimesubtype != null && mimetype.equals("text") && mimesubtype.equals("plain");
-    }
+  /**
+   * Duplicate code in BMTDTO
+   * 
+   * @return
+   */
+  public boolean isText() {
+    return mimetype != null && mimesubtype != null && mimetype.equals("text")
+        && mimesubtype.equals("plain");
+  }
 
-    public void setSubtype(final String subtype) {
-        this.mimesubtype = subtype;
-    }
+  public void setSubtype(final String subtype) {
+    this.mimesubtype = subtype;
+  }
 
-    public void setType(final String type) {
-        this.mimetype = type;
-    }
+  public void setType(final String type) {
+    this.mimetype = type;
+  }
 
-    @Override
-    public String toString() {
-        return mimesubtype == null ? mimetype : mimetype + "/" + mimesubtype;
-    }
+  @Override
+  public String toString() {
+    return mimesubtype == null ? mimetype : mimetype + "/" + mimesubtype;
+  }
 
 }

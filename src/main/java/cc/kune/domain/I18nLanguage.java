@@ -23,14 +23,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
-import org.hibernate.validator.Length;
-import org.hibernate.validator.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import cc.kune.domain.utils.HasId;
 
@@ -45,7 +45,7 @@ import cc.kune.domain.utils.HasId;
 @Table(name = "globalize_languages")
 public class I18nLanguage implements HasId {
 
-  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   @Column(name = "code", unique = true)
   private String code;
 
@@ -58,7 +58,7 @@ public class I18nLanguage implements HasId {
   @Column(name = "direction")
   private String direction;
 
-  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   @Column(name = "english_name")
   private String englishName;
 
@@ -86,7 +86,7 @@ public class I18nLanguage implements HasId {
   @Column(name = "macro_language")
   private Boolean macroLanguage;
 
-  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   @Column(name = "native_name")
   private String nativeName;
 
@@ -96,7 +96,7 @@ public class I18nLanguage implements HasId {
   @Column(name = "native_name_modifier")
   private String nativeNameModifier;
 
-  @Pattern(regex = "^[c=\\d?:%!<>&|() ]+$")
+  @Pattern(regexp = "^[c=\\d?:%!<>&|() ]+$")
   @Column(name = "pluralization")
   @Length(max = 200)
   private String pluralization;

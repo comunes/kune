@@ -26,11 +26,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
-import org.hibernate.validator.NotNull;
 
 import cc.kune.domain.utils.HasId;
 
@@ -39,75 +39,75 @@ import cc.kune.domain.utils.HasId;
 @Table(name = "tag_user_content")
 public class TagUserContent implements HasId {
 
-    @IndexedEmbedded
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Content content;
+  @IndexedEmbedded
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Content content;
 
-    @Basic(optional = false)
-    private final Long createdOn;
+  @Basic(optional = false)
+  private final Long createdOn;
 
-    @Id
-    @GeneratedValue
-    @DocumentId
-    private Long id;
+  @Id
+  @GeneratedValue
+  @DocumentId
+  private Long id;
 
-    @IndexedEmbedded
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Tag tag;
+  @IndexedEmbedded
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Tag tag;
 
-    @IndexedEmbedded
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+  @IndexedEmbedded
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+  private User user;
 
-    public TagUserContent() {
-        this(null, null, null);
-    }
+  public TagUserContent() {
+    this(null, null, null);
+  }
 
-    public TagUserContent(final Tag tag, final User user, final Content content) {
-        this.tag = tag;
-        this.user = user;
-        this.content = content;
-        this.createdOn = System.currentTimeMillis();
-    }
+  public TagUserContent(final Tag tag, final User user, final Content content) {
+    this.tag = tag;
+    this.user = user;
+    this.content = content;
+    this.createdOn = System.currentTimeMillis();
+  }
 
-    public Content getContent() {
-        return content;
-    }
+  public Content getContent() {
+    return content;
+  }
 
-    public Long getCreatedOn() {
-        return createdOn;
-    }
+  public Long getCreatedOn() {
+    return createdOn;
+  }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+  @Override
+  public Long getId() {
+    return id;
+  }
 
-    public Tag getTag() {
-        return tag;
-    }
+  public Tag getTag() {
+    return tag;
+  }
 
-    public User getUser() {
-        return user;
-    }
+  public User getUser() {
+    return user;
+  }
 
-    public void setContent(final Content content) {
-        this.content = content;
-    }
+  public void setContent(final Content content) {
+    this.content = content;
+  }
 
-    @Override
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  @Override
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setTag(final Tag tag) {
-        this.tag = tag;
-    }
+  public void setTag(final Tag tag) {
+    this.tag = tag;
+  }
 
-    public void setUser(final User user) {
-        this.user = user;
-    }
+  public void setUser(final User user) {
+    this.user = user;
+  }
 }

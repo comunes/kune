@@ -186,8 +186,8 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
   @Override
   public SearchResult<Container> search(final String search, final Integer firstResult,
       final Integer maxResults) {
-    final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name" },
-        new StandardAnalyzer());
+    final MultiFieldQueryParser parser = new MultiFieldQueryParser(LUCENE_VERSION,
+        new String[] { "name" }, new StandardAnalyzer(LUCENE_VERSION));
     Query query;
     try {
       query = parser.parse(search);

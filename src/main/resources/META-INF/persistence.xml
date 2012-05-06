@@ -63,7 +63,7 @@
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.search.default.directory_provider"
-        value="org.hibernate.search.store.FSDirectoryProvider"/>
+        value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
         value="/var/lib/kune/lucene/kune_dev/indexes"/>
     </properties>
@@ -163,7 +163,7 @@
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.search.default.directory_provider"
-        value="org.hibernate.search.store.FSDirectoryProvider"/>
+        value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
         value="kune-data/lucene/kune_dev/indexes"/>
     </properties>
@@ -221,7 +221,7 @@
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.search.default.directory_provider"
-        value="org.hibernate.search.store.FSDirectoryProvider"/>
+        value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
         value="kune-data/lucene/kune_test/indexes"/>
     </properties>
@@ -259,13 +259,13 @@
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="false"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>   
       <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
       <property name="hibernate.connection.username" value="sa"/>
       <property name="hibernate.connection.password" value=""/>
       <property name="hibernate.connection.url" value="jdbc:h2:mem:testdb"/>
       <property name="hibernate.search.default.directory_provider"
-        value="org.hibernate.search.store.FSDirectoryProvider"/>
+        value="filesystem"/> <!--  change to "ram" later -->
       <property name="hibernate.search.default.indexBase"
         value="kune-data/lucene/kune_test/indexes"/>
     </properties>

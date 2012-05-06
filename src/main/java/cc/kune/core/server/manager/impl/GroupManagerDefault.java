@@ -302,8 +302,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   @Override
   public SearchResult<Group> search(final String search, final Integer firstResult,
       final Integer maxResults) {
-    final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "longName",
-        "shortName", "publicDesc" }, new StandardAnalyzer());
+    final MultiFieldQueryParser parser = new MultiFieldQueryParser(LUCENE_VERSION, new String[] {
+        "longName", "shortName", "publicDesc" }, new StandardAnalyzer(LUCENE_VERSION));
     Query query;
     try {
       query = parser.parse(search + SearcherConstants.WILDCARD);

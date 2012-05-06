@@ -65,6 +65,7 @@ public class IntegrationTestHelper {
   public static Injector createInjector() {
     Injector injector;
     try {
+      System.setProperty("java.security.auth.login.config", "src/main/resources/jaas.config");
       injector = Guice.createInjector(CustomSettingsBinder.bindSettings(
           TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
       final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);

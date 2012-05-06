@@ -34,16 +34,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
-import org.hibernate.validator.Email;
-import org.hibernate.validator.Length;
-import org.hibernate.validator.NotNull;
-import org.hibernate.validator.Pattern;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -109,7 +109,7 @@ public class User implements HasId {
   @Basic
   private Long lastLogin;
 
-  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   @Column(nullable = false, unique = true)
   @Length(min = 3, max = 50)
   private String name;
@@ -119,11 +119,11 @@ public class User implements HasId {
   @Column(nullable = false)
   private byte[] salt;
 
-  @Field(index = Index.UN_TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   @Column(unique = true)
   // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
   @Length(min = 3, max = 15)
-  @Pattern(regex = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+  @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
   private String shortName;
 
   @Enumerated(EnumType.STRING)

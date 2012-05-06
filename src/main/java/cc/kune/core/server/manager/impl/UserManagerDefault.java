@@ -423,8 +423,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   @Override
   public SearchResult<User> search(final String search, final Integer firstResult,
       final Integer maxResults) {
-    final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name", "shortName" },
-        new StandardAnalyzer());
+    final MultiFieldQueryParser parser = new MultiFieldQueryParser(LUCENE_VERSION, new String[] {
+        "name", "shortName" }, new StandardAnalyzer(LUCENE_VERSION));
     Query query;
     try {
       query = parser.parse(search);

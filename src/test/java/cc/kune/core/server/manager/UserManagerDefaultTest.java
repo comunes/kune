@@ -26,9 +26,9 @@ import static org.junit.Assert.assertNull;
 import java.util.TimeZone;
 
 import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
 
 import org.apache.lucene.queryParser.ParseException;
-import org.hibernate.validator.InvalidStateException;
 import org.junit.Test;
 
 import cc.kune.core.client.errors.GroupShortNameInUseException;
@@ -58,7 +58,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     persist(user);
   }
 
-  @Test(expected = InvalidStateException.class)
+  @Test(expected = ConstraintViolationException.class)
   public void emailIncorrect() {
     user = new User("test1", "test1 name", "falseEmail@", "somediggest".getBytes(),
         "some salt".getBytes(), english, gb, getTimeZone());
@@ -101,7 +101,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     persist(user2);
   }
 
-  @Test(expected = InvalidStateException.class)
+  @Test(expected = ConstraintViolationException.class)
   public void userNameLengthIncorrect() {
     user = new User("test1", "te", "test@example.com", "diggest".getBytes(), "salt".getBytes(), english,
         gb, getTimeZone());
@@ -117,7 +117,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
-  @Test(expected = InvalidStateException.class)
+  @Test(expected = ConstraintViolationException.class)
   public void userShortNameIncorrect() {
     user = new User("test1A", "test1 name", "test@example.com", "diggest".getBytes(), "salt".getBytes(),
         english, gb, getTimeZone());

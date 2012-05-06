@@ -36,14 +36,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
-import org.hibernate.validator.Length;
-import org.hibernate.validator.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -92,15 +92,15 @@ public class Group implements HasId {
   @Embedded
   private BasicMimeType logoMime;
 
-  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   @Column(nullable = false, unique = true)
   @Length(min = 3, max = 50, message = "The longName must be between 3 and 50 characters of length")
   private String longName;
 
-  @Field(index = Index.UN_TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   @Column(unique = true)
   @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
-  @Pattern(regex = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+  @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
   private String shortName;
 
   @OneToOne(cascade = CascadeType.ALL)

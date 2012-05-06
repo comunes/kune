@@ -39,52 +39,52 @@ import cc.kune.domain.utils.HasId;
 @Table(name = "tags")
 public class Tag implements HasId {
 
-    @Basic(optional = false)
-    private final Long createdOn;
+  @Basic(optional = false)
+  private final Long createdOn;
 
-    @Id
-    @GeneratedValue
-    @DocumentId
-    private Long id;
+  @Id
+  @GeneratedValue
+  @DocumentId
+  private Long id;
 
-    @Field(index = Index.TOKENIZED, store = Store.NO)
-    @Column(unique = true)
-    private String name;
+  @Field(index = Index.YES, store = Store.NO)
+  @Column(unique = true)
+  private String name;
 
-    public Tag() {
-        this(null);
-    }
+  public Tag() {
+    this(null);
+  }
 
-    public Tag(final String name) {
-        this.name = name;
-        this.createdOn = System.currentTimeMillis();
-    }
+  public Tag(final String name) {
+    this.name = name;
+    this.createdOn = System.currentTimeMillis();
+  }
 
-    public Long getCreatedOn() {
-        return createdOn;
-    }
+  public Long getCreatedOn() {
+    return createdOn;
+  }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+  @Override
+  public Long getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  @Override
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setName(final String name) {
-        this.name = name;
-    }
+  public void setName(final String name) {
+    this.name = name;
+  }
 
-    @Override
-    public String toString() {
-        return "Tag[" + getName() + "]";
-    }
+  @Override
+  public String toString() {
+    return "Tag[" + getName() + "]";
+  }
 
 }

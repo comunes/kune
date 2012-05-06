@@ -95,7 +95,7 @@ public class Container implements HasId, HasStateToken {
   private I18nLanguage language;
 
   @Column
-  @Field(index = Index.TOKENIZED, store = Store.NO)
+  @Field(index = Index.YES, store = Store.NO)
   private String name;
 
   @IndexedEmbedded(depth = 1, prefix = "owner_")

@@ -24,8 +24,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.TimeZone;
 
+import javax.validation.ConstraintViolationException;
+
 import org.apache.lucene.queryParser.ParseException;
-import org.hibernate.validator.InvalidStateException;
 import org.junit.Test;
 
 import cc.kune.core.client.errors.EmailAddressInUseException;
@@ -167,7 +168,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
-  @Test(expected = InvalidStateException.class)
+  @Test(expected = ConstraintViolationException.class)
   public void createUserWithVeryShortName() throws Exception {
     userManager.createUser("us", "the user name 2", "email2@example.com", "userPassword", "en", "GB",
         TimeZone.getDefault().getID(), true);

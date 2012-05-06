@@ -27,76 +27,76 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.validator.Range;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "rates", uniqueConstraints = { @UniqueConstraint(columnNames = { "content_id", "rater_id" }) })
 public class Rate {
-    @ManyToOne
-    Content content;
+  @ManyToOne
+  Content content;
 
-    @Basic(optional = false)
-    private final Long createdOn;
+  @Basic(optional = false)
+  private final Long createdOn;
 
-    @Id
-    @GeneratedValue
-    Long id;
+  @Id
+  @GeneratedValue
+  Long id;
 
-    @ManyToOne
-    User rater;
+  @ManyToOne
+  User rater;
 
-    @Range(min = 0, max = 5)
-    Double value;
+  @Range(min = 0, max = 5)
+  Double value;
 
-    public Rate() {
-        this(null, null, null);
-    }
+  public Rate() {
+    this(null, null, null);
+  }
 
-    public Rate(final User rater, final Content content, final Double value) {
-        this.rater = rater;
-        this.content = content;
-        this.value = value;
-        this.createdOn = System.currentTimeMillis();
-    }
+  public Rate(final User rater, final Content content, final Double value) {
+    this.rater = rater;
+    this.content = content;
+    this.value = value;
+    this.createdOn = System.currentTimeMillis();
+  }
 
-    public Content getContent() {
-        return content;
-    }
+  public Content getContent() {
+    return content;
+  }
 
-    public Long getCreatedOn() {
-        return createdOn;
-    }
+  public Long getCreatedOn() {
+    return createdOn;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public User getRater() {
-        return rater;
-    }
+  public User getRater() {
+    return rater;
+  }
 
-    public Double getValue() {
-        return value;
-    }
+  public Double getValue() {
+    return value;
+  }
 
-    public void setContent(final Content content) {
-        this.content = content;
-    }
+  public void setContent(final Content content) {
+    this.content = content;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setRater(final User rater) {
-        this.rater = rater;
-    }
+  public void setRater(final User rater) {
+    this.rater = rater;
+  }
 
-    public void setValue(final Double value) {
-        this.value = value;
-    }
+  public void setValue(final Double value) {
+    this.value = value;
+  }
 
-    @Override
-    public String toString() {
-        return "Rate[" + getRater() + " to " + content.getStateTokenEncoded() + "rated: " + getValue() + "]";
-    }
+  @Override
+  public String toString() {
+    return "Rate[" + getRater() + " to " + content.getStateTokenEncoded() + "rated: " + getValue() + "]";
+  }
 }

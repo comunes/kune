@@ -253,8 +253,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   }
 
   private MultiFieldQueryParser createMultiFieldParser() {
-    final MultiFieldQueryParser parser = new MultiFieldQueryParser(DEF_GLOBAL_SEARCH_FIELDS,
-        new StandardAnalyzer());
+    final MultiFieldQueryParser parser = new MultiFieldQueryParser(LUCENE_VERSION,
+        DEF_GLOBAL_SEARCH_FIELDS, new StandardAnalyzer(LUCENE_VERSION));
     return parser;
   }
 
