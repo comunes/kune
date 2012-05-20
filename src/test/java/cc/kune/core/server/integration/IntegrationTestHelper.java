@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.configuration.ConfigurationException;
 import org.mockito.Mockito;
 import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
 import org.waveprotocol.box.server.robots.RobotApiModule;
@@ -56,6 +57,7 @@ import cc.kune.wiki.server.WikiServerModule;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Scopes;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
@@ -72,8 +74,10 @@ public class IntegrationTestHelper {
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
       final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
           "kune-tests.properties", TestConstants.PERSISTENCE_UNIT);
+      Module searchModule = injector.getInstance(SearchModule.class);
       final Injector childInjector = injector.createChildInjector(
           wavePersistModule,
+          searchModule,
           kuneDataSource,
           new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()),
           new AbstractModule() {
