@@ -19,6 +19,7 @@
  */
 package cc.kune.domain;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -83,7 +84,8 @@ public class I18nLanguage implements HasId {
   @Column(name = "iso_639_3", length = 3, unique = true)
   private String iso6393;
 
-  @Column(name = "macro_language")
+  @Basic
+  @Column(name = "macro_language", columnDefinition = "BIT", length = 1)
   private Boolean macroLanguage;
 
   @Field(index = Index.YES, store = Store.NO)

@@ -19,6 +19,7 @@
  */
 package cc.kune.domain;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,11 +39,19 @@ public class License implements HasId {
 
     @Column(nullable = false)
     private String imageUrl;
-
+    
+    @Basic
+    @Column(columnDefinition = "BIT", length = 1)
     private boolean isCC;
-
+    
+    @Basic
+    @Column(columnDefinition = "BIT", length = 1)
     private boolean isCopyleft;
+    
+    @Basic
+    @Column(columnDefinition = "BIT", length = 1)
     private boolean isDeprecated;
+    
     @Column(unique = true)
     private String longName;
     private String rdf;

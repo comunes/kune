@@ -170,14 +170,16 @@ public class I18nUITranslationService extends I18nTranslationService {
    *          String value of the new locale to go to.
    */
   private void changeLanguageInUrl(final String newLocale) {
-    final String hash = WindowUtils.getLocation().getHash();
-    final String query = WindowUtils.getLocation().getQueryString();
+    Location location = WindowUtils.getLocation();
+    final String hash = location.getHash();
+    final String query = location.getQueryString();
+    final String protocol = location.getProtocol();
     final String newUrl = I18nUrlUtils.changeLang(query + (TextUtils.notEmpty(hash) ? hash : ""),
         newLocale);
     Log.info("Locale current query: " + query);
     Log.info("Locale current hash: " + hash);
     Log.info("Locale new Url: " + newUrl);
-    changeHref("http://" + WindowUtils.getLocation().getHost() + newUrl);
+    changeHref(protocol + "//" + location.getHost() + newUrl);
   }
 
   public void changeToLanguageIfNecessary(final String wantedLang, final String wantedLangEnglishName,

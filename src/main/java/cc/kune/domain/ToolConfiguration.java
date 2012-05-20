@@ -19,7 +19,9 @@
  */
 package cc.kune.domain;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -30,6 +32,8 @@ import javax.persistence.Table;
 @Table(name = "tool_configurations")
 public class ToolConfiguration {
 
+  @Basic
+  @Column(columnDefinition = "BIT", length = 1)
   private boolean enabled;
   @Id
   @GeneratedValue

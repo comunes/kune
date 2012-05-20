@@ -95,7 +95,9 @@ public class User implements HasId {
 
   @Enumerated(EnumType.STRING)
   private EmailNotificationFrequency emailNotifFreq;
-
+ 
+  @Basic
+  @Column(columnDefinition = "BIT", length = 1)
   private Boolean emailVerified;
 
   @Id
