@@ -23,6 +23,7 @@ import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
 import org.waveprotocol.box.webclient.search.WaveStore;
+import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.model.id.IdGenerator;
@@ -60,6 +61,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -99,6 +101,8 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private final WaveStore waveStore = new SimpleWaveStore();
 
   private final Widget widget;
+
+  private FramedPanel dummyWaveFrame;
 
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
@@ -172,6 +176,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       final WaveClientView webClient = waveClientProv.get();
       loading = webClient.getLoading();
       waveHolder = webClient.getWaveHolder();
+      dummyWaveFrame = new FramedPanel();
       dropController.init(waveHolder);
       channel = webClient.getChannel();
       profiles = webClient.getProfiles();
@@ -223,7 +228,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       // UIObject.setVisible(waveFrame.getElement(), true);
       waveHolder.getElement().appendChild(loading);
       final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-      final KuneStagesProvider wave = new KuneStagesProvider(holder, waveHolder, waveRef, channel,
+      final KuneStagesProvider wave = new KuneStagesProvider(holder, (com.google.gwt.dom.client.Element) new Label().getElement(), waveHolder, dummyWaveFrame, waveRef, channel,
           idGenerator, profiles, waveStore, isNewWave,
           org.waveprotocol.box.webclient.client.Session.get().getDomain(), true, i18n);
       this.wave = wave;

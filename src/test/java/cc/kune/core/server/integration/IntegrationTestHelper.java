@@ -93,7 +93,7 @@ public class IntegrationTestHelper {
               requestStaticInjection(GroupServerUtils.class);
             }
           }, new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
-          new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 2, 2),
+          new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 1, 1, 1, 1),
           federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
           new EventsServerModule(), new TrashServerModule());
       try {

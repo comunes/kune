@@ -54,17 +54,20 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
   private final AccountStore accountStore;
   private final String domain;
   private final boolean registrationDisabled;
+  private final String analyticsAccount;
 
   private final Log LOG = Log.get(CustomUserRegistrationServlet.class);
 
   @Inject
   public CustomUserRegistrationServlet(AccountStore accountStore,
       @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain,
-      @Named(CoreSettings.DISABLE_REGISTRATION) boolean registrationDisabled) {
+      @Named(CoreSettings.DISABLE_REGISTRATION) boolean registrationDisabled,
+      @Named(CoreSettings.ANALYTICS_ACCOUNT) String analyticsAccount) {
     this.accountStore = accountStore;
     this.domain = domain;
   //  this.welcomeBot = welcomeBot;
     this.registrationDisabled = registrationDisabled;
+    this.analyticsAccount = analyticsAccount;
   }
 
   @Override
@@ -75,6 +78,7 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     req.setCharacterEncoding("UTF-8");
+
     String message = null;
     String responseType;
     String password = req.getParameter(HttpRequestBasedCallbackHandler.PASSWORD_FIELD);
@@ -149,11 +153,11 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
       LOG.severe("Failed to create new account for " + id, e);
       return "An unexpected error occured while trying to create the account";
     }
-//    try {
+    // try {
     //  welcomeBot.greet(account.getId());
-//    } catch (IOException e) {
-//      LOG.warning("Failed to create a welcome wavelet for " + id, e);
-//    }
+    // } catch (IOException e) {
+      // LOG.warning("Failed to create a welcome wavelet for " + id, e);
+    // }
     return null;
   }
 
@@ -162,6 +166,6 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
     dest.setCharacterEncoding("UTF-8");
     dest.setContentType("text/html;charset=utf-8");
     UserRegistrationPage.write(dest.getWriter(), new GxpContext(locale), domain, message,
-        responseType, registrationDisabled);
+        responseType, registrationDisabled, analyticsAccount);
   }
 }

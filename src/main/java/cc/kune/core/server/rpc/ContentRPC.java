@@ -130,7 +130,7 @@ public class ContentRPC implements ContentService, RPC {
 
   @Override
   @Authenticated
-  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator, mustCheckMembership = false)
+  @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
   @KuneTransactional
   public StateContentDTO addContent(final String userHash, final StateToken parentToken,
       final String title, final String typeId) throws DefaultException {

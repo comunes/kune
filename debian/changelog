@@ -1,3 +1,10 @@
+kune (0.2.0+b6) unstable; urgency=low
+
+  * Wave code updated (changes: search via lucene, ctrl-k for links, etc)
+  * Hibernate updated (and also lucene)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 20 May 2012 22:55:28 +0200
+
 kune (0.2.0+b5) unstable; urgency=low
 
   * Some UI improvements (header and sitebar reorganization, etc)

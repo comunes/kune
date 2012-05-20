@@ -1,3 +1,4 @@
+// @formatter:off
 /**
  * Copyright 2010 Google Inc.
  *
@@ -18,9 +19,12 @@
 package cc.kune.wave.client;
 
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
+import org.waveprotocol.box.webclient.client.SavedStateIndicator;
 import org.waveprotocol.box.webclient.client.StageTwoProvider;
+import org.waveprotocol.box.webclient.client.WindowTitleHandler;
 import org.waveprotocol.box.webclient.search.WaveContext;
 import org.waveprotocol.box.webclient.search.WaveStore;
+import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.client.StageOne;
 import org.waveprotocol.wave.client.StageThree;
 import org.waveprotocol.wave.client.StageTwo;
@@ -69,61 +73,50 @@ public class KuneStagesProvider extends Stages {
 
   private final static AsyncHolder<Object> HALT = new AsyncHolder<Object>() {
     @Override
-    public void call(final Accessor<Object> accessor) {
+    public void call(Accessor<Object> accessor) {
       // Never ready, so never notify the accessor.
     }
   };
-
-  /**
-   * Finds the blip that should receive the focus and selects it.
-   */
-  private static void selectAndFocusOnBlip(final Reader reader, final ModelAsViewProvider views,
-      final ConversationView wave, final FocusFramePresenter focusFrame, final WaveRef waveRef) {
-    final FocusBlipSelector blipSelector = FocusBlipSelector.create(wave, views, reader,
-        new ViewTraverser());
-    final BlipView blipUi = blipSelector.selectBlipByWaveRef(waveRef);
-    // Focus on the selected blip.
-    if (blipUi != null) {
-      focusFrame.focus(blipUi);
-    }
-  }
+  
+  private final Element wavePanelElement;
+  private final Element unsavedIndicatorElement;
+  private final FramedPanel waveFrame;
+  private final LogicalPanel rootPanel;
+  private final WaveRef waveRef;
   private final RemoteViewServiceMultiplexer channel;
-  private boolean closed;
-  private final I18nTranslationService i18n;
   private final IdGenerator idGenerator;
+  private final ProfileManager profiles;
+  private final WaveStore waveStore;
   private final boolean isNewWave;
   private final String localDomain;
-  private StageOne one;
-  private final ProfileManager profiles;
-  private final LogicalPanel rootPanel;
-  private final boolean showParticipantsPanel;
 
-  private StageThree three;
+  private boolean closed;
+  private StageOne one;
   private StageTwo two;
+  private StageThree three;
   private WaveContext wave;
-  private final Element wavePanelElement;
-  private final WaveRef waveRef;
-  private final WaveStore waveStore;
+  private final boolean showParticipantsPanel;
+  private final I18nTranslationService i18n;
 
   /**
-   * @param wavePanelElement
-   *          The dom element to become the wave panel
-   * @param rootPanel
-   *          A panel that this an ancestor of wavePanelElement. This is used
-   *          for adopting to the GWT widget tree.
-   * @param waveRef
-   *          the id of the wave to open. If null, it means, create a new wave.
-   * @param channel
-   *          communication channel.
-   * @param isNewWave
-   *          true if the wave is a new client-created wave
+   * @param wavePanelElement the DOM element to become the wave panel.
+   * @param unsavedIndicatorElement the element that displays the wave saved state.
+   * @param rootPanel a panel that this an ancestor of wavePanelElement. This is
+   *        used for adopting to the GWT widget tree.
+   * @param waveFrame the wave frame.
+   * @param waveRef the id of the wave to open. If null, it means, create a new
+   *        wave.
+   * @param channel the communication channel.
+   * @param isNewWave true if the wave is a new client-created wave
    * @param idGenerator
    */
-  public KuneStagesProvider(final Element wavePanelElement, final LogicalPanel rootPanel,
-      final WaveRef waveRef, final RemoteViewServiceMultiplexer channel, final IdGenerator idGenerator,
-      final ProfileManager profiles, final WaveStore store, final boolean isNewWave,
-      final String localDomain, final boolean showParticipantsPanel, final I18nTranslationService i18n) {
+  public KuneStagesProvider(Element wavePanelElement, Element unsavedIndicatorElement,
+      LogicalPanel rootPanel, FramedPanel waveFrame, WaveRef waveRef, RemoteViewServiceMultiplexer channel,
+      IdGenerator idGenerator, ProfileManager profiles, WaveStore store, boolean isNewWave,
+      String localDomain, boolean showParticipantsPanel, I18nTranslationService i18n) {
     this.wavePanelElement = wavePanelElement;
+    this.unsavedIndicatorElement = unsavedIndicatorElement;
+    this.waveFrame = waveFrame;
     this.rootPanel = rootPanel;
     this.waveRef = waveRef;
     this.channel = channel;
@@ -137,20 +130,45 @@ public class KuneStagesProvider extends Stages {
   }
 
   @Override
-  protected AsyncHolder<StageOne> createStageOneLoader(final StageZero zero) {
-    return haltIfClosed(new StageOne.DefaultProvider(zero) {
-      @Override
-      protected LogicalPanel createWaveContainer() {
-        return rootPanel;
-      }
+  protected AsyncHolder<StageZero> createStageZeroLoader() {
+    return haltIfClosed(super.createStageZeroLoader());
+  }
 
+  @Override
+  protected AsyncHolder<StageOne> createStageOneLoader(StageZero zero) {
+    return haltIfClosed(new StageOne.DefaultProvider(zero) {
       @Override
       protected Element createWaveHolder() {
         return wavePanelElement;
       }
+
+      @Override
+      protected LogicalPanel createWaveContainer() {
+        return rootPanel;
+      }
     });
   }
 
+  @Override
+  protected AsyncHolder<StageTwo> createStageTwoLoader(StageOne one) {
+    return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave, 
+       idGenerator, profiles, new SavedStateIndicator(unsavedIndicatorElement)) {
+      // Kune patch
+      @Override
+      protected DomRenderer createRenderer() {
+        return KuneFullDomWaveRendererImpl.create(getConversations(), getProfileManager(),
+            getBlipDetailer(), getViewIdMapper(), getBlipQueue(), getThreadReadStateMonitor(),
+            createViewFactories(), showParticipantsPanel);
+        
+        // Warning: this run into issue #73
+        // @Override
+        // protected void installFeatures() {
+        // WavePanelResourceLoader.loadCss();
+        // // KuneWavePanelResourceLoader.loadCss();
+        // }
+
+      }});}
+  
   @Override
   protected AsyncHolder<StageThree> createStageThreeLoader(final StageTwo two) {
     return haltIfClosed(new StageThree.DefaultProvider(this.two = two) {
@@ -159,7 +177,7 @@ public class KuneStagesProvider extends Stages {
         // Prepend an init wave flow onto the stage continuation.
         super.create(new Accessor<StageThree>() {
           @Override
-          public void use(final StageThree x) {
+          public void use(StageThree x) {
             onStageThreeLoaded(x, whenReady);
           }
         });
@@ -172,6 +190,7 @@ public class KuneStagesProvider extends Stages {
 
       @Override
       protected void install() {
+        // FIXME kune revise this
         EditorStaticDeps.setPopupProvider(PopupFactory.getProvider());
         EditorStaticDeps.setPopupChromeProvider(PopupChromeFactory.getProvider());
 
@@ -194,33 +213,54 @@ public class KuneStagesProvider extends Stages {
         KeepFocusInView.install(edit, panel);
         stageTwo.getDiffController().upgrade(edit);
       }
+      
     });
   }
 
-  @Override
-  protected AsyncHolder<StageTwo> createStageTwoLoader(final StageOne one) {
-    return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave, idGenerator,
-        profiles) {
-      // Kune patch
-      @Override
-      protected DomRenderer createRenderer() {
-        return KuneFullDomWaveRendererImpl.create(getConversations(), getProfileManager(),
-            getBlipDetailer(), getViewIdMapper(), getBlipQueue(), getThreadReadStateMonitor(),
-            createViewFactories(), showParticipantsPanel);
-      }
+  private void onStageThreeLoaded(StageThree x, Accessor<StageThree> whenReady) {
+    if (closed) {
+      // Stop the loading process.
+      return;
+    }
+    three = x;
+    if (isNewWave) {
+      initNewWave(x);
+    } else {
+      handleExistingWave(x);
+    }
+    wave = new WaveContext(
+				two.getWave(), two.getConversations(), two.getSupplement(), two.getReadMonitor());
+    waveStore.add(wave);
+    install();
+    whenReady.use(x);
+  }
+  
+  private void initNewWave(StageThree three) {
+    // Do the new-wave flow.
+    ModelAsViewProvider views = two.getModelAsViewProvider();
+    BlipQueueRenderer blipQueue = two.getBlipQueue();
+    ConversationView wave = two.getConversations();
 
-      // Warning: this run into issue #73
-      // @Override
-      // protected void installFeatures() {
-      // WavePanelResourceLoader.loadCss();
-      // // KuneWavePanelResourceLoader.loadCss();
-      // }
-    });
+    // Force rendering to finish.
+    blipQueue.flush();
+    BlipView blipUi = views.getBlipView(wave.getRoot().getRootThread().getFirstBlip());
+    three.getEditActions().startEditing(blipUi);
   }
 
-  @Override
-  protected AsyncHolder<StageZero> createStageZeroLoader() {
-    return haltIfClosed(super.createStageZeroLoader());
+  private void handleExistingWave(StageThree three) {
+  if (waveRef.hasDocumentId()) {
+    BlipQueueRenderer blipQueue = two.getBlipQueue();
+    blipQueue.flush();
+    selectAndFocusOnBlip(two.getReader(), two.getModelAsViewProvider(), two.getConversations(),
+        one.getFocusFrame(), waveRef);
+  }
+  }
+
+  /**
+ * A hook to install features that are not dependent an a certain stage.
+ */
+  protected void install() {
+  WindowTitleHandler.install(waveStore, waveFrame);
   }
 
   public void destroy() {
@@ -254,52 +294,26 @@ public class KuneStagesProvider extends Stages {
     }
     closed = true;
   }
+  /**
+   * Finds the blip that should receive the focus and selects it.
+   */
+  private static void selectAndFocusOnBlip(Reader reader, ModelAsViewProvider views,
+      ConversationView wave, FocusFramePresenter focusFrame, WaveRef waveRef) {
+    FocusBlipSelector blipSelector =
+        FocusBlipSelector.create(wave, views, reader, new ViewTraverser());
+    BlipView blipUi = blipSelector.selectBlipByWaveRef(waveRef);
+    // Focus on the selected blip.
+    if (blipUi != null) {
+      focusFrame.focus(blipUi);
+    }
+  }
 
   /**
    * @return a halting provider if this stage is closed. Otherwise, returns the
    *         given provider.
    */
-  @SuppressWarnings("unchecked")
-  // HALT is safe as a holder for any type
-  private <T> AsyncHolder<T> haltIfClosed(final AsyncHolder<T> provider) {
+  @SuppressWarnings("unchecked") // HALT is safe as a holder for any type
+  private <T> AsyncHolder<T> haltIfClosed(AsyncHolder<T> provider) {
     return closed ? (AsyncHolder<T>) HALT : provider;
-  }
-
-  private void handleExistingWave(final StageThree three) {
-    if (waveRef.hasDocumentId()) {
-      final BlipQueueRenderer blipQueue = two.getBlipQueue();
-      blipQueue.flush();
-      selectAndFocusOnBlip(two.getReader(), two.getModelAsViewProvider(), two.getConversations(),
-          one.getFocusFrame(), waveRef);
-    }
-  }
-
-  private void initNewWave(final StageThree three) {
-    // Do the new-wave flow.
-    final ModelAsViewProvider views = two.getModelAsViewProvider();
-    final BlipQueueRenderer blipQueue = two.getBlipQueue();
-    final ConversationView wave = two.getConversations();
-
-    // Force rendering to finish.
-    blipQueue.flush();
-    final BlipView blipUi = views.getBlipView(wave.getRoot().getRootThread().getFirstBlip());
-    three.getEditActions().startEditing(blipUi);
-  }
-
-  private void onStageThreeLoaded(final StageThree x, final Accessor<StageThree> whenReady) {
-    if (closed) {
-      // Stop the loading process.
-      return;
-    }
-    three = x;
-    if (isNewWave) {
-      initNewWave(x);
-    } else {
-      handleExistingWave(x);
-    }
-    wave = new WaveContext(two.getWave(), two.getConversations(), two.getSupplement(),
-        two.getReadMonitor());
-    waveStore.add(wave);
-    whenReady.use(x);
   }
 }

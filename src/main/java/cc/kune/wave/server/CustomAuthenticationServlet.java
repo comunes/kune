@@ -1,20 +1,18 @@
-/*
+// @formatter:off
+/**
+ * Copyright 2010 Google Inc.
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
- * This file is part of kune.
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
+ *  http://www.apache.org/licenses/LICENSE-2.0
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  *
  */
 package cc.kune.wave.server;
@@ -58,6 +56,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.gxp.base.GxpContext;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
@@ -66,47 +65,64 @@ import com.google.inject.name.Named;
  * 
  * @author josephg@gmail.com (Joseph Gentle)
  */
+@SuppressWarnings("serial")
+@Singleton
+// FIXME: Use AuthtenticationServlet (patched with public login)
 public class CustomAuthenticationServlet extends HttpServlet {
     private static final String DEFAULT_REDIRECT_URL = "/";
-    private static final Log LOG = Log.get(CustomAuthenticationServlet.class);
-    public static final String RESPONSE_STATUS_FAILED = "FAILED";
     public static final String RESPONSE_STATUS_NONE = "NONE";
-
+    public static final String RESPONSE_STATUS_FAILED = "FAILED";
     public static final String RESPONSE_STATUS_SUCCESS = "SUCCESS";
 
+    private static final Log LOG = Log.get(CustomAuthenticationServlet.class);
+
     private final Configuration configuration;
-    private final String domain;
     private final SessionManager sessionManager;
+    private final String domain;
+  private final String analyticsAccount;
 
     @Inject
-    public CustomAuthenticationServlet(final Configuration configuration, final SessionManager sessionManager,
-            @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
+    public CustomAuthenticationServlet(Configuration configuration, SessionManager sessionManager,
+            @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain,
+      @Named(CoreSettings.ANALYTICS_ACCOUNT) String analyticsAccount) {
         Preconditions.checkNotNull(configuration, "Configuration is null");
         Preconditions.checkNotNull(sessionManager, "Session manager is null");
         this.configuration = configuration;
         this.sessionManager = sessionManager;
         this.domain = domain.toLowerCase();
+    this.analyticsAccount = analyticsAccount;
     }
 
-    /**
-     * On GET, present a login form if the user isn't authenticated.
-     */
-    @Override
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        // If the user is already logged in, we'll try to redirect them
-        // immediately.
-        resp.setCharacterEncoding("UTF-8");
-        req.setCharacterEncoding("UTF-8");
-        final HttpSession session = req.getSession(false);
-        final ParticipantId user = sessionManager.getLoggedInUser(session);
+    @SuppressWarnings("unchecked")
+    public LoginContext login(BufferedReader body) throws IOException, LoginException {
+        try {
+            Subject subject = new Subject();
 
-        if (user != null) {
-            redirectLoggedInUser(req, resp);
-        } else {
-            resp.setStatus(HttpServletResponse.SC_OK);
-            resp.setContentType("text/html;charset=utf-8");
-            AuthenticationPage.write(resp.getWriter(), new GxpContext(req.getLocale()), domain, "",
-                    RESPONSE_STATUS_NONE);
+            String parametersLine = body.readLine();
+            // Throws UnsupportedEncodingException.
+            byte[] utf8Bytes = parametersLine.getBytes("UTF-8");
+
+            CharsetDecoder utf8Decoder = Charset.forName("UTF-8").newDecoder();
+            utf8Decoder.onMalformedInput(CodingErrorAction.IGNORE);
+            utf8Decoder.onUnmappableCharacter(CodingErrorAction.IGNORE);
+
+            // Throws CharacterCodingException.
+            CharBuffer parsed = utf8Decoder.decode(ByteBuffer.wrap(utf8Bytes));
+            parametersLine = parsed.toString();
+
+            MultiMap<String> parameters = new UrlEncoded(parametersLine);
+            CallbackHandler callbackHandler = new HttpRequestBasedCallbackHandler(parameters);
+
+            LoginContext context = new LoginContext("Wave", subject, callbackHandler, configuration);
+
+            // If authentication fails, login() will throw a LoginException.
+            context.login();
+            return context;
+        } catch (CharacterCodingException cce) {
+      throw new LoginException("Character coding exception (not utf-8): "
+          + cce.getLocalizedMessage());
+    } catch (UnsupportedEncodingException uee) {
+            throw new LoginException("ad character encoding specification: " + uee.getLocalizedMessage());
         }
     }
 
@@ -114,46 +130,46 @@ public class CustomAuthenticationServlet extends HttpServlet {
      * The POST request should have all the fields required for authentication.
      */
     @Override
-    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
         LoginContext context;
         try {
             context = login(req.getReader());
-        } catch (final LoginException e) {
-            final String message = "The username or password you entered is incorrect.";
-            final String responseType = RESPONSE_STATUS_FAILED;
+        } catch (LoginException e) {
+            String message = "The username or password you entered is incorrect.";
+            String responseType = RESPONSE_STATUS_FAILED;
             LOG.info("User authentication failed: " + e.getLocalizedMessage());
             resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            AuthenticationPage.write(resp.getWriter(), new GxpContext(req.getLocale()), domain, message, responseType);
+            AuthenticationPage.write(resp.getWriter(), new GxpContext(req.getLocale()), domain, message, 
+          analyticsAccount, responseType);
             return;
         }
 
-        final Subject subject = context.getSubject();
+        Subject subject = context.getSubject();
 
         ParticipantId loggedInAddress;
         try {
             loggedInAddress = getLoggedInUser(subject);
-        } catch (final InvalidParticipantAddress e1) {
-            throw new IllegalStateException("The user provided valid authentication information, but the username"
+        } catch (InvalidParticipantAddress e1) {
+            throw new IllegalStateException(
+         "The user provided valid authentication information, but the username"
                     + " isn't a valid user address.");
         }
 
         if (loggedInAddress == null) {
             try {
                 context.logout();
-            } catch (final LoginException e) {
-                // Logout failed. Absorb the error, since we're about to throw
-                // an
+            } catch (LoginException e) {
+                // Logout failed. Absorb the error, since we're about to throw an
                 // illegal state exception anyway.
             }
-            throw new IllegalStateException("The user provided valid authentication information, but we don't "
+            throw new IllegalStateException(
+                 "The user provided valid authentication information, but we don't "
                     + "know how to map their identity to a wave user address.");
         }
 
-        final HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession(true);
         sessionManager.setLoggedInUser(session, loggedInAddress);
-        // The context needs to be notified when the user logs out.
-        session.setAttribute("context", context);
         LOG.info("Authenticated user " + loggedInAddress);
 
         redirectLoggedInUser(req, resp);
@@ -166,17 +182,14 @@ public class CustomAuthenticationServlet extends HttpServlet {
      * authentication types are added, this method will need to be updated to
      * support their principal types.
      * 
-     * @throws InvalidParticipantAddress
-     *             The subject's address is invalid
+   * @throws InvalidParticipantAddress The subject's address is invalid
      */
-    private ParticipantId getLoggedInUser(final Subject subject) throws InvalidParticipantAddress {
+    private ParticipantId getLoggedInUser(Subject subject) throws InvalidParticipantAddress {
         String address = null;
 
-        for (final Principal p : subject.getPrincipals()) {
-            // TODO(josephg): When we support other authentication types (LDAP,
-            // etc),
-            // this method will need to read the address portion out of the
-            // other principal types.
+        for (Principal p : subject.getPrincipals()) {
+            // TODO(josephg): When we support other authentication types (LDAP, etc),
+            // this method will need to read the address portion out of the other principal types.
             if (p instanceof ParticipantPrincipal) {
                 address = ((ParticipantPrincipal) p).getName();
                 break;
@@ -186,35 +199,24 @@ public class CustomAuthenticationServlet extends HttpServlet {
         return address == null ? null : ParticipantId.of(address);
     }
 
-    @SuppressWarnings("unchecked")
-    public LoginContext login(final BufferedReader body) throws IOException, LoginException {
-        try {
-            final Subject subject = new Subject();
+    /**
+     * On GET, present a login form if the user isn't authenticated.
+     */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        // If the user is already logged in, we'll try to redirect them immediately.
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        HttpSession session = req.getSession(false);
+        ParticipantId user = sessionManager.getLoggedInUser(session);
 
-            String parametersLine = body.readLine();
-            // Throws UnsupportedEncodingException.
-            final byte[] utf8Bytes = parametersLine.getBytes("UTF-8");
-
-            final CharsetDecoder utf8Decoder = Charset.forName("UTF-8").newDecoder();
-            utf8Decoder.onMalformedInput(CodingErrorAction.IGNORE);
-            utf8Decoder.onUnmappableCharacter(CodingErrorAction.IGNORE);
-
-            // Throws CharacterCodingException.
-            final CharBuffer parsed = utf8Decoder.decode(ByteBuffer.wrap(utf8Bytes));
-            parametersLine = parsed.toString();
-
-            final MultiMap<String> parameters = new UrlEncoded(parametersLine);
-            final CallbackHandler callbackHandler = new HttpRequestBasedCallbackHandler(parameters);
-
-            final LoginContext context = new LoginContext("Wave", subject, callbackHandler, configuration);
-
-            // If authentication fails, login() will throw a LoginException.
-            context.login();
-            return context;
-        } catch (final CharacterCodingException cce) {
-            throw new LoginException("Character coding exception (not utf-8): " + cce.getLocalizedMessage());
-        } catch (final UnsupportedEncodingException uee) {
-            throw new LoginException("ad character encoding specification: " + uee.getLocalizedMessage());
+        if (user != null) {
+            redirectLoggedInUser(req, resp);
+        } else {
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setContentType("text/html;charset=utf-8");
+            AuthenticationPage.write(resp.getWriter(), new GxpContext(req.getLocale()), domain, "",
+          RESPONSE_STATUS_NONE, analyticsAccount);
         }
     }
 
@@ -226,30 +228,29 @@ public class CustomAuthenticationServlet extends HttpServlet {
      * 
      * @throws IOException
      */
-    private void redirectLoggedInUser(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+  private void redirectLoggedInUser(HttpServletRequest req, HttpServletResponse resp)
+      throws IOException {
         Preconditions.checkState(sessionManager.getLoggedInUser(req.getSession(false)) != null,
                 "The user is not logged in");
-        final String query = req.getQueryString();
+        String query = req.getQueryString();
 
-        // Not using req.getParameter() for this because calling that method
-        // might parse the password
-        // sitting in POST data into a String, where it could be read by another
-        // process after the
+        // Not using req.getParameter() for this because calling that method might parse the password
+        // sitting in POST data into a String, where it could be read by another process after the
         // string is garbage collected.
         if (query == null || !query.startsWith("r=")) {
             resp.sendRedirect(DEFAULT_REDIRECT_URL);
             return;
         }
 
-        final String encoded_url = query.substring("r=".length());
-        final String path = URLDecoder.decode(encoded_url, "UTF-8");
+        String encoded_url = query.substring("r=".length());
+        String path = URLDecoder.decode(encoded_url, "UTF-8");
 
         // The URL must not be an absolute URL to prevent people using this as a
         // generic redirection service.
         URI uri;
         try {
             uri = new URI(path);
-        } catch (final URISyntaxException e) {
+        } catch (URISyntaxException e) {
             // The redirect URL is invalid.
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;

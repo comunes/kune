@@ -33,6 +33,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.eclipse.jetty.servlets.ProxyServlet;
 import org.waveprotocol.box.common.comms.WaveClientRpc.ProtocolWaveClientRpc;
 import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.authentication.AccountStoreHolder;
 import org.waveprotocol.box.server.authentication.SessionManager;
@@ -54,15 +55,20 @@ import org.waveprotocol.box.server.rpc.AttachmentServlet;
 import org.waveprotocol.box.server.rpc.AuthenticationServlet;
 import org.waveprotocol.box.server.rpc.FetchProfilesServlet;
 import org.waveprotocol.box.server.rpc.FetchServlet;
+import org.waveprotocol.box.server.rpc.NotificationServlet;
 import org.waveprotocol.box.server.rpc.SearchServlet;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
 import org.waveprotocol.box.server.rpc.UserRegistrationServlet;
 import org.waveprotocol.box.server.rpc.WaveRefServlet;
 import org.waveprotocol.box.server.waveserver.CustomImportServlet;
+import org.waveprotocol.box.server.waveserver.PerUserWaveViewBus;
+import org.waveprotocol.box.server.waveserver.PerUserWaveViewDistpatcher;
 import org.waveprotocol.box.server.waveserver.WaveBus;
+import org.waveprotocol.box.server.waveserver.WaveIndexer;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
+import org.waveprotocol.box.server.waveserver.WaveletStateException;
 import org.waveprotocol.wave.crypto.CertPathStore;
 import org.waveprotocol.wave.federation.FederationSettings;
 import org.waveprotocol.wave.federation.FederationTransport;
@@ -147,6 +153,10 @@ public class WaveMain {
         Names.named(CoreSettings.WAVELET_LOAD_EXECUTOR_THREAD_COUNT)));
     int deltaPersistCount = settingsInjector.getInstance(Key.get(Integer.class,
         Names.named(CoreSettings.DELTA_PERSIST_EXECUTOR_THREAD_COUNT)));
+    int storageContinuationCount = settingsInjector.getInstance(Key.get(Integer.class,
+        Names.named(CoreSettings.STORAGE_CONTINUATION_EXECUTOR_THREAD_COUNT)));
+    int lookupCount = settingsInjector.getInstance(Key.get(Integer.class,
+        Names.named(CoreSettings.LOOKUP_EXECUTOR_THREAD_COUNT)));
 
     if (enableFederation) {
       Module federationSettings =
@@ -157,10 +167,11 @@ public class WaveMain {
 
     Module federationModule = buildFederationModule(settingsInjector, enableFederation);
     PersistenceModule persistenceModule = settingsInjector.getInstance(PersistenceModule.class);
+    Module searchModule = settingsInjector.getInstance(SearchModule.class);
     Injector injector =
         settingsInjector.createChildInjector(new ServerModule(enableFederation, listenerCount,
-            waveletLoadCount, deltaPersistCount), new RobotApiModule(), federationModule,
-	persistenceModule);
+            waveletLoadCount, deltaPersistCount, storageContinuationCount, lookupCount),
+               new RobotApiModule(), federationModule, persistenceModule, searchModule); 
 
     ServerRpcProvider server = injector.getInstance(ServerRpcProvider.class);
     WaveBus waveBus = injector.getInstance(WaveBus.class);
@@ -177,6 +188,7 @@ public class WaveMain {
     initializeRobots(injector, waveBus);
     initializeFrontend(injector, server, waveBus);
     initializeFederation(injector);
+    initializeSearch(injector, waveBus);
 
     LOG.info("Starting server");
     server.startWebSocketServer(injector);
@@ -217,9 +229,9 @@ public class WaveMain {
     server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));
     server.addServlet("/auth/signout", injector.getInstance(SignOutServlet.class));
     server.addServlet("/auth/register", injector.getInstance(UserRegistrationServlet.class));
-
     server.addServlet("/fetch/*", injector.getInstance(FetchServlet.class));
     server.addServlet("/search/*", injector.getInstance(SearchServlet.class));
+    server.addServlet("/notification/*", injector.getInstance(NotificationServlet.class));
 
     server.addServlet("/robot/dataapi", injector.getInstance(DataApiServlet.class));
     server.addServlet(DataApiOAuthServlet.DATA_API_OAUTH_PATH + "/*", injector.getInstance(DataApiOAuthServlet.class));
@@ -275,5 +287,17 @@ public class WaveMain {
   private static void initializeFederation(Injector injector) {
     FederationTransport federationManager = injector.getInstance(FederationTransport.class);
     federationManager.startFederation();
+  }
+
+  private static void initializeSearch(Injector injector, WaveBus waveBus)
+      throws WaveletStateException, WaveServerException {
+    PerUserWaveViewDistpatcher waveViewDistpatcher =
+        injector.getInstance(PerUserWaveViewDistpatcher.class);
+    PerUserWaveViewBus.Listener listener = injector.getInstance(PerUserWaveViewBus.Listener.class);
+    waveViewDistpatcher.addListener(listener);
+    waveBus.subscribe(waveViewDistpatcher);
+
+    WaveIndexer waveIndexer = injector.getInstance(WaveIndexer.class);
+    waveIndexer.remakeIndex();
   }
 }
