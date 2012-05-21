@@ -55,7 +55,7 @@
   <xhtml:link
      type="text/css"
      rel="stylesheet"
-     href="http://fonts.googleapis.com/css?family=Ubuntu" />
+     href="https://fonts.googleapis.com/css?family=Ubuntu" />
   <style
      id="style26201">
     text { font-family: 'Ubuntu'; text-rendering: geometricPrecision; }

@@ -169,12 +169,14 @@ public class XMLActionsParser {
             // container)
             action = new AddGadgetAction(contentService, session, i18n,
                 descrip.getRol().getRolRequired(), descrip.getRol().isAuthNeed(),
-                extension.getExtName(), descrip.getDescName(), extension.getIconUrl());
+                extension.getExtName(), descrip.getDescName(), proxy(extension.getIconUrl(),
+                    extension.getGadgetUrl()));
           } else {
             action = new NewGadgetAction(contentService, contentViewer, stateManager, session, i18n,
                 descrip.getRol().getRolRequired(), descrip.getRol().isAuthNeed(),
-                extension.getExtName(), destTypeId, extension.getIconUrl(),
-                descrip.getNewContentTitle(), TextUtils.empty(contentIntro) ? "" : contentIntro);
+                extension.getExtName(), destTypeId, proxy(extension.getIconUrl(),
+                    extension.getGadgetUrl()), descrip.getNewContentTitle(),
+                TextUtils.empty(contentIntro) ? "" : contentIntro);
           }
           final Provider<GuiActionDescrip> menuItemProvider = createMenuItem(descrip, tool, origTypeId,
               action);
@@ -182,5 +184,12 @@ public class XMLActionsParser {
         }
       }
     }
+  }
+
+  private String proxy(String iconUrl, String gadgetUrl) {
+    // FIXME: create a proxy servlet for that
+    // More info: http://edwardstx.net/2010/06/http-proxy-servlet/
+    return "https://www-ig-opensocial.googleusercontent.com/gadgets/proxy?refresh=86400&url="
+        + iconUrl + "&container=ig&gadget=" + gadgetUrl;
   }
 }

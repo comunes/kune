@@ -1,3 +1,9 @@
+kune (0.2.0+b7) unstable; urgency=low
+
+  * Fix some SSL issues
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 21 May 2012 01:31:41 +0200
+
 kune (0.2.0+b6) unstable; urgency=low
 
   * Wave code updated (changes: search via lucene, ctrl-k for links, etc)
