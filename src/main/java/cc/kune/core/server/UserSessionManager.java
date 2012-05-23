@@ -107,16 +107,12 @@ public class UserSessionManager implements UsersOnline {
   }
 
   public void logout() {
-    if (isUserLoggedIn()) {
-      logins.remove(getUserLoggedShortName());
-    }
+    logins.remove(getUserLoggedShortName());
     getUserSession().setUserId(null);
     getUserSession().setHash(null);
   }
 
   public void updateLoggedUser() {
-    if (isUserLoggedIn()) {
-      logins.add(getUserLoggedShortName());
-    }
+    logins.add(getUserLoggedShortName());
   }
 }
