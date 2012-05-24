@@ -22,11 +22,13 @@ package cc.kune.core.client;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.AnonUsersManager;
+import cc.kune.core.client.auth.EmailNotVerifiedReminder;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.groups.newgroup.NewGroup;
+import cc.kune.core.client.init.WebSocketChecker;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
@@ -72,7 +74,8 @@ public class CoreParts {
       final Provider<UserOptions> userOptionsDialog, final Provider<GroupOptions> groupOptionsDialog,
       final Provider<PasswordResetPanel> passReset, final Provider<AskForPasswordResetPanel> askForPass,
       final GlobalShortcuts shortcuts, final I18nTranslationService i18n,
-      final Provider<TutorialViewer> tutorialViewer) {
+      final Provider<TutorialViewer> tutorialViewer, final Provider<WebSocketChecker> websocketChecker,
+      final Provider<EmailNotVerifiedReminder> emailNotVerifiedReminder) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -84,6 +87,8 @@ public class CoreParts {
         anonUsers.get();
         spaceSelector.get();
         tutorialViewer.get();
+        emailNotVerifiedReminder.get();
+        websocketChecker.get();
       }
     });
     tokenListener.put(SiteTokens.SIGN_IN, new HistoryTokenAuthNotNeededCallback() {

@@ -147,18 +147,6 @@ public class I18nUITranslationService extends I18nTranslationService {
   }
 
   /**
-   * https://developer.mozilla.org/en/DOM/window.location
-   * 
-   * "If you need to change pathname but keep the hash as is, use the replace() method instead, which should work consistently across browsers."
-   * 
-   * @param newUrl
-   */
-  private native void changeHref(String newUrl) /*-{
-		// $wnd.location.href = newUrl;
-		$wnd.location.replace(newUrl);
-  }-*/;
-
-  /**
    * See in:
    * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread
    * /5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
@@ -170,7 +158,7 @@ public class I18nUITranslationService extends I18nTranslationService {
    *          String value of the new locale to go to.
    */
   private void changeLanguageInUrl(final String newLocale) {
-    Location location = WindowUtils.getLocation();
+    final Location location = WindowUtils.getLocation();
     final String hash = location.getHash();
     final String query = location.getQueryString();
     final String protocol = location.getProtocol();
@@ -179,7 +167,7 @@ public class I18nUITranslationService extends I18nTranslationService {
     Log.info("Locale current query: " + query);
     Log.info("Locale current hash: " + hash);
     Log.info("Locale new Url: " + newUrl);
-    changeHref(protocol + "//" + location.getHost() + newUrl);
+    WindowUtils.changeHrefKeepHash(protocol + "//" + location.getHost() + newUrl);
   }
 
   public void changeToLanguageIfNecessary(final String wantedLang, final String wantedLangEnglishName,

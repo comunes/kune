@@ -15,8 +15,32 @@
  */
 package cc.kune.common.client.utils;
 
-
 public class WindowUtils {
+
+  /**
+   * https://developer.mozilla.org/en/DOM/window.location
+   * 
+   * @param newUrl
+   */
+  public static native void changeHref(String newUrl) /*-{
+		$wnd.location.href = newUrl;
+  }-*/;
+
+  /**
+   * https://developer.mozilla.org/en/DOM/window.location
+   * 
+   * "If you need to change pathname but keep the hash as is, use the replace() method instead, which should work consistently across browsers."
+   * 
+   * @param newUrl
+   */
+  public static native void changeHrefKeepHash(String newUrl) /*-{
+		// $wnd.location.href = newUrl;
+		$wnd.location.replace(newUrl);
+  }-*/;
+
+  public static native boolean dontHasWebSocket() /*-{
+		return !window.WebSocket
+  }-*/;
 
   private static native String getHash() /*-{
 		return $wnd.location.hash;

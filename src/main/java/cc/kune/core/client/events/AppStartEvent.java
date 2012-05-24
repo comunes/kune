@@ -23,7 +23,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
-import com.gwtplatform.mvp.client.HasEventBus;
 
 public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> { 
 
@@ -37,7 +36,7 @@ public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
 
   private static final Type<AppStartHandler> TYPE = new Type<AppStartHandler>();
 
-  public static void fire(HasEventBus source, cc.kune.core.shared.dto.InitDataDTO initData) {
+  public static void fire(HasHandlers source, cc.kune.core.shared.dto.InitDataDTO initData) {
     source.fireEvent(new AppStartEvent(initData));
   }
 

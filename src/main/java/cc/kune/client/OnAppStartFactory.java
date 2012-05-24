@@ -38,7 +38,6 @@ public class OnAppStartFactory {
       @Override
       public void onAppStart(final AppStartEvent event) {
         newGroup.get();
-        //
       }
     });
   }

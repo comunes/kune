@@ -25,7 +25,12 @@ Be sure to do mvn compile (that copy them to the target directory)
 ** Mysql
 *** Mysql: Caused by: java.sql.SQLException: Access denied for user 'kune'@'localhost' (using password: YES)
 
-Check that the password you have use in the database creation it's the same like the kune.properties. If it's wrong maybe you have to remove the mysql user (DROP USER) and repeat the GRANT sentences of the INSTALL.
+Check that the password you have use in the database creation it's the same like the kune.properties. If it's wrong maybe you have to remove the mysql user (DROP USER) and repeat the GRANT sentences of the INSTALL, for instance:
+
+DROP USER kune@localhost;
+GRANT ALL PRIVILEGES ON kune_prod.* TO kune@localhost IDENTIFIED BY 'db4kune';
+GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
+FLUSH PRIVILEGES;
 
 Also, be sure you do a "mvn compile" if you are running kune from the source and you change the kune.properties file to not use the old one.
 

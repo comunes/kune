@@ -23,7 +23,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
-import com.gwtplatform.mvp.client.HasEventBus;
 
 public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandler> {
 
@@ -37,7 +36,7 @@ public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandl
 
   private static final Type<UserSignOutHandler> TYPE = new Type<UserSignOutHandler>();
 
-  public static void fire(final HasEventBus source) {
+  public static void fire(final HasHandlers source) {
     source.fireEvent(new UserSignOutEvent());
   }
 

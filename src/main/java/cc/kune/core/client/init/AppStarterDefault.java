@@ -26,6 +26,8 @@ import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
+import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.CoreConstants;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStopEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
@@ -114,8 +116,9 @@ public class AppStarterDefault implements AppStarter {
             NotifyUser.askConfirmation(
                 res.important32(),
                 "Your browser is currently unsupported",
-                "Please, use a free/libre modern navigator like <a class='k-link' href='https://www.mozilla.com/en-US/firefox/fx/'>Mozilla Firefox</a> instead. Continue anyway?",
-                new SimpleResponseCallback() {
+                "Please, use a free/libre modern navigator like "
+                    + TextUtils.generateHtmlLink(CoreConstants.MOZILLA_FF_LINK, "Mozilla Firefox")
+                    + " instead. Continue anyway?", new SimpleResponseCallback() {
                   @Override
                   public void onCancel() {
                   }
