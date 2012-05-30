@@ -27,9 +27,22 @@ import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 
+/**
+ * The Class SessionAction is used to create actions that depends of current
+ * session auth status
+ */
 public abstract class SessionAction extends AbstractExtendedAction {
+
   protected final Session session;
 
+  /**
+   * Instantiates a new session action.
+   * 
+   * @param session
+   *          the kune session
+   * @param authNeed
+   *          if user authentication is needed
+   */
   @Inject
   public SessionAction(final Session session, final boolean authNeed) {
     this.session = session;
@@ -42,6 +55,14 @@ public abstract class SessionAction extends AbstractExtendedAction {
     });
   }
 
+  /**
+   * Refresh status.
+   * 
+   * @param authNeed
+   *          the auth need
+   * @param isLogged
+   *          the is logged
+   */
   public void refreshStatus(final boolean authNeed, final boolean isLogged) {
     boolean visible = false;
     final boolean noLogged = !isLogged;
@@ -54,6 +75,12 @@ public abstract class SessionAction extends AbstractExtendedAction {
     setVisible(visible);
   }
 
+  /**
+   * Sets the visible.
+   * 
+   * @param visible
+   *          the new visible
+   */
   public void setVisible(final boolean visible) {
     setEnabled(visible);
     putValue(GuiActionDescrip.VISIBLE, visible);

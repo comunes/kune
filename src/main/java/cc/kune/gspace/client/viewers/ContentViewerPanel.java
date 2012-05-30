@@ -48,6 +48,7 @@ import cc.kune.wave.client.WaveClientClearEvent;
 import cc.kune.wave.client.WaveClientProvider;
 import cc.kune.wave.client.WaveClientUtils;
 import cc.kune.wave.client.WaveClientView;
+import cc.kune.wave.client.WaveUnsavedIndicator;
 import cc.kune.wave.client.WebClientMock;
 
 import com.google.gwt.core.client.GWT;
@@ -80,12 +81,14 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @UiField
   DeckPanel deck;
   private final ContentDropController dropController;
+  private FramedPanel dummyWaveFrame;
   private final GSpaceArmor gsArmor;
   private final I18nTranslationService i18n;
   private IdGenerator idGenerator;
   private Element loading;
   @UiField
   InlineHTML onlyViewPanel;
+
   private ProfileManager profiles;
 
   private final StateManager stateManager;
@@ -94,27 +97,28 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private KuneStagesProvider wave;
 
   private final WaveClientProvider waveClientProv;
-
   private ImplPanel waveHolder;
   @UiField
   ImplPanel waveHolderParent;
+
   private final WaveStore waveStore = new SimpleWaveStore();
 
-  private final Widget widget;
+  private final WaveUnsavedIndicator waveUnsavedIndicator;
 
-  private FramedPanel dummyWaveFrame;
+  private final Widget widget;
 
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
       final EventBus eventBus, final StateManager stateManager,
-      final ContentDropController dropController) {
+      final ContentDropController dropController, final WaveUnsavedIndicator waveUnsavedIndicator) {
     this.gsArmor = wsArmor;
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
     this.i18n = i18n;
     this.stateManager = stateManager;
     this.dropController = dropController;
+    this.waveUnsavedIndicator = waveUnsavedIndicator;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
     eventBus.addHandler(WaveClientClearEvent.getType(),
@@ -228,9 +232,10 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       // UIObject.setVisible(waveFrame.getElement(), true);
       waveHolder.getElement().appendChild(loading);
       final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-      final KuneStagesProvider wave = new KuneStagesProvider(holder, (com.google.gwt.dom.client.Element) new Label().getElement(), waveHolder, dummyWaveFrame, waveRef, channel,
-          idGenerator, profiles, waveStore, isNewWave,
-          org.waveprotocol.box.webclient.client.Session.get().getDomain(), true, i18n);
+      final KuneStagesProvider wave = new KuneStagesProvider(holder, new Label().getElement(),
+          waveHolder, dummyWaveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
+          org.waveprotocol.box.webclient.client.Session.get().getDomain(), true, i18n,
+          waveUnsavedIndicator);
       this.wave = wave;
       wave.load(new Command() {
         @Override
