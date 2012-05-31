@@ -22,6 +22,7 @@ package cc.kune.core.client.ws.entheader;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.resources.CoreResources;
@@ -92,11 +93,11 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
     Image logo;
     if (clipped) {
-      logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_DEF_WIDTH, FileConstants.LOGO_DEF_HEIGHT);
+      logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_DEF_WIDTH, FileConstants.LOGO_DEF_SIZE);
     } else {
       logo = new Image(imageUrl);
       logo.setWidth(String.valueOf(FileConstants.LOGO_DEF_WIDTH));
-      logo.setHeight(String.valueOf(FileConstants.LOGO_DEF_HEIGHT));
+      logo.setHeight(String.valueOf(FileConstants.LOGO_DEF_SIZE));
     }
     mainPanel.add(logo);
   }
@@ -108,8 +109,9 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   @Override
   public void setLogoImage(final GroupDTO group, final boolean noCache) {
-    entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getShortName())
-        + (noCache ? UrlParam.noCacheStringSuffix() : ""));
+    String url = downloadProvider.get().getLogoImageUrl(group.getShortName())
+        + (noCache ? UrlParam.noCacheStringSuffix() : "");
+    entityTextLogo.setLogoImage(url);
   }
 
   @Override

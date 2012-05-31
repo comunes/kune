@@ -51,6 +51,7 @@ public class EntityTextLogo extends VerticalPanel {
     final HorizontalPanel generalHP = new HorizontalPanel();
     final VerticalPanel logoTextVP = new VerticalPanel();
     logoImage = new Image();
+    logoImage.setSize(FileConstants.LOGO_DEF_SIZE + "px", FileConstants.LOGO_DEF_SIZE + "px");
     logoLabel = new Label();
     avatarDecorator.setWidget(logoImage);
     final Label expandCell = new Label("");

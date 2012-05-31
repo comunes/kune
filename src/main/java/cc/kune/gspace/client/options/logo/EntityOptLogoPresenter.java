@@ -23,10 +23,12 @@ import gwtupload.client.IUploadStatus.Status;
 import gwtupload.client.IUploader;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.options.EntityOptions;
 
@@ -70,6 +72,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
       @Override
       public void onFinish(final IUploader uploader) {
         onSubmitComplete(uploader);
+        view.reset();
       }
     });
   }
@@ -78,9 +81,10 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
     final String response = uploader.getServerInfo().message;
     if (uploader.getStatus() == Status.SUCCESS) {
       if (response != null) {
-        NotifyUser.info(response);
+        Log.info("Response uploading logo: " + response);
       }
-      CurrentEntityChangedEvent.fire(eventBus);
+      final GroupDTO currentGroup = session.getCurrentState().getGroup();
+      CurrentEntityChangedEvent.fire(eventBus, currentGroup.getShortName(), currentGroup.getLongName());
     } else {
       onSubmitFailed(response);
     }

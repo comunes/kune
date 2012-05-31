@@ -30,15 +30,14 @@ import com.google.gwt.user.client.ui.HasText;
 
 public class EntityOptUploadButton extends Composite implements HasClickHandlers {
   private final Button btn;
-  DecoratorPanel widget = new DecoratorPanel();
 
   public EntityOptUploadButton(final String text) {
-    final DecoratorPanel widget = new DecoratorPanel();
+    final DecoratorPanel decorator = new DecoratorPanel();
     btn = new Button(text);
     btn.addStyleName("k-button");
-    initWidget(widget);
-    widget.setWidget(btn);
-    widget.setHeight("50px");
+    initWidget(decorator);
+    decorator.setWidget(btn);
+    decorator.setHeight("50px");
   }
 
   @Override
@@ -46,7 +45,7 @@ public class EntityOptUploadButton extends Composite implements HasClickHandlers
     return addDomHandler(handler, ClickEvent.getType());
   }
 
-  public HasText getBtn() {
+  public HasText hasText() {
     return btn;
   }
 }

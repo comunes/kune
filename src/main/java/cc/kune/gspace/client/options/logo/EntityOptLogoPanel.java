@@ -23,6 +23,7 @@ import gwtupload.client.IUploader.OnCancelUploaderHandler;
 import gwtupload.client.IUploader.OnChangeUploaderHandler;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -55,6 +56,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, i18n.t("Choose"));
 
     initWidget(uploader);
+    // Better autoadjust
     // setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
 
@@ -92,6 +94,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     return tabTitle;
   }
 
+  @Override
   public void reset() {
     uploader.reset();
   }
@@ -100,7 +103,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
   public void setNormalGroupsLabels() {
     uploader.setLabelText(i18n.t("Select an image from your computer as the logo for this group. "
         + "For best results use a [%d]x[%d] pixel image. Bigger images will be automatically resized.",
-        FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT));
+        FileConstants.LOGO_DEF_SIZE, FileConstants.LOGO_DEF_SIZE));
     TabTitleGenerator.setText(tabTitle, CoreMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE,
         MAX_TABTITLE_LENGTH, i18n.getDirection());
   }
@@ -109,7 +112,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
   public void setPersonalGroupsLabels() {
     uploader.setLabelText(i18n.t("Select an image from your computer as your avatar. "
         + "For best results use a [%d]x[%d] pixel image. Bigger images will be automatically resized.",
-        FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT));
+        FileConstants.LOGO_DEF_SIZE, FileConstants.LOGO_DEF_SIZE));
     TabTitleGenerator.setText(tabTitle, CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE,
         MAX_TABTITLE_LENGTH, i18n.getDirection());
   }
@@ -117,6 +120,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
   @Override
   public void setUploadParams(final String userHash, final String token) {
     uploader.setUploadParams(userHash, token);
+    Log.info("Uploader params: " + userHash + ", " + token);
   }
 
 }

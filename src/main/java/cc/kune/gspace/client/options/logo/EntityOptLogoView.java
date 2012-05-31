@@ -38,6 +38,8 @@ public interface EntityOptLogoView extends EntityOptionsTabView {
 
   OnAcceptCallback getOnSubmit();
 
+  void reset();
+
   void setNormalGroupsLabels();
 
   void setPersonalGroupsLabels();

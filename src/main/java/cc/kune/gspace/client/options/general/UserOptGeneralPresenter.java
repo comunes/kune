@@ -129,7 +129,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
             public void onSuccess(final StateAbstractDTO result) {
               NotifyUser.hideProgress();
               stateManager.setRetrievedStateAndGo(result);
-              sendChangeEntityEvent();
+              sendChangeEntityEvent(currentUser.getShortName(), longName);
               if (askChangeLanguage) {
                 i18n.changeToLanguageIfNecessary(lang.getCode(), i18n.t(lang.getEnglishName()), true,
                     new I18nLanguageChangeNeeded() {

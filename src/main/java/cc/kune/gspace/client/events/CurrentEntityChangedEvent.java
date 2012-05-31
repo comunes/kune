@@ -35,16 +35,20 @@ public class CurrentEntityChangedEvent extends GwtEvent<CurrentEntityChangedEven
   }
 
   private static final Type<CurrentEntityChangedHandler> TYPE = new Type<CurrentEntityChangedHandler>();
+  private final String shortName;
+  private final String longName;
 
-  public static void fire(final HasHandlers source) {
-    source.fireEvent(new CurrentEntityChangedEvent());
+  public static void fire(final HasHandlers source, String shortName, String longName) {
+    source.fireEvent(new CurrentEntityChangedEvent(shortName, longName));
   }
 
   public static Type<CurrentEntityChangedHandler> getType() {
     return TYPE;
   }
 
-  public CurrentEntityChangedEvent() {
+  public CurrentEntityChangedEvent(String shortName, String longName) {
+    this.shortName = shortName;
+    this.longName = longName;
   }
 
   @Override
@@ -67,8 +71,17 @@ public class CurrentEntityChangedEvent extends GwtEvent<CurrentEntityChangedEven
     return super.hashCode();
   }
 
+
   @Override
   public String toString() {
-    return "CurrentLogoChangedEvent[" + "]";
+    return "CurrentEntityChangedEvent [shortName=" + shortName + ", longName=" + longName + "]";
+  }
+
+  public String getLongName() {
+    return longName;
+  }
+
+  public String getShortName() {
+    return shortName;
   }
 }

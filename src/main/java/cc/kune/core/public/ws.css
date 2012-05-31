@@ -1,5 +1,5 @@
-GCHARSET                               "UTF-8                           
-    "; body {
+GCHARSET                                "UTF-8
+     "; body {
   background-color: transparent;
   color: black;
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
@@ -62,7 +62,7 @@ a:visited {
 }
 
 .gwt-Tree {
-  
+
 }
 
 .gwt-Tree .gwt-TreeItem {
@@ -89,7 +89,7 @@ a:visited {
 }
 
 .gwt-StackPanel .gwt-StackPanelItem-selected {
-  
+
 }
 
 .gwt-PushButton-up {
@@ -271,7 +271,7 @@ a:visited {
 }
 
 .gwt-SplitLayoutPanel {
-  
+
 }
 
 .gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger,.gwt-SplitLayoutPanel-HDragger
@@ -354,7 +354,7 @@ a:visited {
 }
 
 .x-btn button,button { /* font: 18px/27px 'Ubuntu', arial; */
-  
+
 }
 
 .x-panel-mc {
@@ -397,7 +397,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 }
 
 .k-sitebar-wave-status {
-  
+
 }
 
 .k-sitebar-wave-status-online {
@@ -418,7 +418,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 }
 
 .k-sitebar { /* margin-top: -30px; */
-  
+
 }
 
 div.gwt-TabLayoutPanelTabInner {
@@ -709,7 +709,7 @@ div.gwt-TabLayoutPanelTabInner {
   -moz-opacity: 0.68 !important;
   -khtml-opacity: 0.68 !important;
   opacity: 0.68 !important;*/
-  
+
 }
 
 .k-publicspace-panel {
@@ -860,7 +860,7 @@ div.gwt-TabLayoutPanelTabInner {
 }
 
 .k-sn-adminslabel {
-  
+
 }
 
 .k-sn-mainpanel .k-basic-thumb {
@@ -878,6 +878,7 @@ div.gwt-TabLayoutPanelTabInner {
   font: 14px 'Ubuntu', arial;
   border: 1px solid #ACACAC;
   cursor: pointer;
+  cursor: hand;
   margin: 0;
   text-decoration: none;
   background: url("images/hborder.png") repeat-x 0px -27px;
@@ -894,6 +895,14 @@ div.gwt-TabLayoutPanelTabInner {
   min-width: 40px;
   height: 26px;
   text-shadow: 1px 1px 1px #FFFFFF;
+}
+
+div.DecoratedFileUpload div.wrapper {
+  top: 10px !important;
+}
+input.gwt-FileUpload {
+  cursor: pointer;
+  cursor: hand;
 }
 
 button.k-button {
@@ -996,16 +1005,16 @@ button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,in
   color: gray !important;
   border-color: #CCCCCC !important;
   background: inherits !important;
-  kfilter: alpha(opacity =       
-                     50) !important;
+  kfilter: alpha(opacity =
+                      50) !important;
   -moz-opacity: 0.50 !important;
   -khtml-opacity: 0.50 !important;
   opacity: 0.50 !important;
 }
 
-button.k-button-right, button.k-button-right, button.k-button-alone {
-  kfilter: alpha(opacity =       
-                     100) !important;
+button.k-button-right,button.k-button-right,button.k-button-alone {
+  kfilter: alpha(opacity =
+                      100) !important;
   -moz-opacity: 1 !important;
   -khtml-opacity: 1 !important;
   opacity: 1 !important;
@@ -1020,11 +1029,11 @@ button.k-optionsborder img.k-iconlabel-left {
 
 /* end buttons */
 .k-sn-collabslabel {
-  
+
 }
 
 .k-sn-pendingslabel {
-  
+
 }
 
 .k-sn-orphan-label {
@@ -1042,15 +1051,15 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-sn-2nd-spanel {
-  
+
 }
 
 .k-sn-3rd-panel {
-  
+
 }
 
 .k-sn-adminsscroll,.k-sn-collabsscroll,.k-sn-pendingsscroll {
-  
+
 }
 
 .k-sn-adminsflow,.k-sn-collabsflow,.k-sn-pendingsflow {
@@ -1058,15 +1067,15 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-sn-adminsscroll {
-  
+
 }
 
 .k-sn-collabsscroll {
-  
+
 }
 
 .k-sn-pendingsscroll {
-  
+
 }
 
 .k-userconfirm-label {
@@ -1075,7 +1084,7 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-sn-deck {
-  
+
 }
 
 .k-sn-bottomPanel {
@@ -1226,7 +1235,7 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-tool-panel {
-  
+
 }
 
 .k-tool-item {
@@ -1236,19 +1245,19 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .k-tool-item-focus {
-  
+
 }
 
 .k-tool-item-nofocus {
-  
+
 }
 
 .k-tool-item-selected {
-  
+
 }
 
 .k-tool-item-notselected {
-  
+
 }
 
 .k-def-docbtn span {
@@ -1297,8 +1306,8 @@ table.k-folder-viewer {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  kfilter: alpha(opacity =       
-                     90);
+  kfilter: alpha(opacity =
+                      90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1353,7 +1362,7 @@ table.k-folder-viewer {
 
 /* Decorated tabbar */
 .gwt-DecoratedTabBar {
-  
+
 }
 
 .gwt-DecoratedTabBar .gwt-TabBarFirst {
@@ -1361,7 +1370,7 @@ table.k-folder-viewer {
 }
 
 .gwt-DecoratedTabBar .gwt-TabBarRest {
-  
+
 }
 
 .gwt-DecoratedTabBar .gwt-TabBarItem {

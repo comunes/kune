@@ -71,8 +71,8 @@ public abstract class EntityOptGeneralPresenter {
     entityOptions.hideMessages();
   }
 
-  protected void sendChangeEntityEvent() {
-    CurrentEntityChangedEvent.fire(eventBus);
+  protected void sendChangeEntityEvent(String shortName, String longName) {
+    CurrentEntityChangedEvent.fire(eventBus, shortName, longName);
   }
 
   protected abstract void setState();

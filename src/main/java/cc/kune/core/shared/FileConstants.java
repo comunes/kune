@@ -33,10 +33,10 @@ public final class FileConstants {
 
   public final static String HASH = "hash";
   public final static String IMGSIZE = "imgsize";
-  public final static int LOGO_DEF_HEIGHT = 60;
+  public final static int LOGO_DEF_SIZE = 60;
+  public final static int LOGO_DEF_MAX_SIZE = 120;
+  @Deprecated
   public final static int LOGO_DEF_WIDTH = 468;
-  public final static int LOGO_MIN_HEIGHT = 28;
-  public final static int LOGO_MIN_WIDTH = 468;
   public static final String LOGODOWNLOADSERVLET = ASITE_PREFIX + "servlets/EntityLogoDownloadManager";
   public static final String NO_RESULT_AVATAR_IMAGE = "others/unknown.jpg";
   public final static String ONLY_USERS = "onlyusers";

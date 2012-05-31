@@ -46,17 +46,15 @@ public class EntityUploaderForm extends Composite {
     btn = new EntityOptUploadButton(btnText);
     uploader = new MultiUploader(FileInputType.CUSTOM.with(btn, true));
     uploader.setServletPath(servlet);
-    uploader.setMaximumFiles(1);
-    uploader.setValidExtensions("png", "jpg", "gif", "jpeg", "bmp");
     dialogInfoLabel = new Label();
     dialogInfoLabel.setWordWrap(true);
     dialogInfoLabel.addStyleName("kune-Margin-20-tb");
     userhashField = new Hidden(FileConstants.HASH, FileConstants.HASH);
     tokenField = new Hidden(FileConstants.TOKEN, FileConstants.TOKEN);
     final FlowPanel holder = new FlowPanel();
-    uploader.add(userhashField);
-    uploader.add(tokenField);
+    initUploader();
     holder.add(dialogInfoLabel);
+    initUploader();
     holder.add(uploader);
     initWidget(holder);
   }
@@ -78,11 +76,20 @@ public class EntityUploaderForm extends Composite {
   }
 
   public HasText getBtn() {
-    return btn.getBtn();
+    return btn.hasText();
+  }
+
+  private void initUploader() {
+    uploader.add(userhashField);
+    uploader.add(tokenField);
+    // This not allow to change the logo several times:
+    // uploader.setMaximumFiles(1);
+    uploader.setValidExtensions("png", "jpg", "gif", "jpeg", "bmp");
   }
 
   public void reset() {
     uploader.reset();
+    initUploader();
   }
 
   public void setLabelText(final String text) {

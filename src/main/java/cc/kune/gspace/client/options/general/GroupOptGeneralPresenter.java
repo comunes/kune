@@ -82,8 +82,10 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
       final GroupDTO group = session.getCurrentState().getGroup();
       final String previousGroupName = group.getShortName();
       final StateToken token = group.getStateToken().copy();
-      group.setShortName(groupView.getShortName().toLowerCase());
-      group.setLongName(groupView.getLongName());
+      final String newShortName = groupView.getShortName().toLowerCase();
+      final String newLongName = groupView.getLongName();
+      group.setShortName(newShortName);
+      group.setLongName(newLongName);
       group.setGroupType(groupView.getGroupType());
       groupService.get().updateGroup(session.getUserHash(), token, group,
           new AsyncCallbackSimple<StateAbstractDTO>() {
@@ -93,7 +95,7 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
               stateManager.removeCacheOfGroup(previousGroupName);
               stateManager.setRetrievedStateAndGo(result);
               setState();
-              sendChangeEntityEvent();
+              sendChangeEntityEvent(newShortName, newLongName);
             }
           });
     }

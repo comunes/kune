@@ -74,7 +74,7 @@ public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
     final File tmpDestFile = File.createTempFile("logoDest", "");
 
     final boolean result = ImageUtilsDefault.scaleImageToMax(origFile.getAbsolutePath(),
-        tmpDestFile.getAbsolutePath(), FileConstants.LOGO_DEF_HEIGHT);
+        tmpDestFile.getAbsolutePath(), FileConstants.LOGO_DEF_MAX_SIZE);
 
     if (result) {
       group.setLogo(FileUtils.getBytesFromFile(tmpDestFile));
