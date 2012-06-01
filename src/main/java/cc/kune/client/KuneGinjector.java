@@ -71,8 +71,8 @@ import cc.kune.tasks.client.TasksGinModule;
 import cc.kune.tasks.client.TasksGinjector;
 import cc.kune.trash.client.TrashGinModule;
 import cc.kune.trash.client.TrashGinjector;
-import cc.kune.wave.client.WaveGinModule;
-import cc.kune.wave.client.WaveParts;
+import cc.kune.wave.client.kspecific.WaveGinModule;
+import cc.kune.wave.client.kspecific.WaveParts;
 import cc.kune.wiki.client.WikiGinModule;
 import cc.kune.wiki.client.WikiGinjector;
 

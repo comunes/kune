@@ -51,7 +51,7 @@ import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.trash.server.TrashServerModule;
 import cc.kune.wave.server.CustomSettingsBinder;
-import cc.kune.wave.server.KuneWaveServerUtils;
+import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
 import cc.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.AbstractModule;

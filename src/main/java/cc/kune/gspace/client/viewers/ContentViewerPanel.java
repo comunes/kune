@@ -43,13 +43,13 @@ import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceCenter;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
-import cc.kune.wave.client.KuneStagesProvider;
-import cc.kune.wave.client.WaveClientClearEvent;
-import cc.kune.wave.client.WaveClientProvider;
-import cc.kune.wave.client.WaveClientUtils;
-import cc.kune.wave.client.WaveClientView;
-import cc.kune.wave.client.WaveUnsavedIndicator;
-import cc.kune.wave.client.WebClientMock;
+import cc.kune.wave.client.CustomStagesProvider;
+import cc.kune.wave.client.CustomSavedStateIndicator;
+import cc.kune.wave.client.kspecific.WaveClientClearEvent;
+import cc.kune.wave.client.kspecific.WaveClientProvider;
+import cc.kune.wave.client.kspecific.WaveClientUtils;
+import cc.kune.wave.client.kspecific.WaveClientView;
+import cc.kune.wave.client.kspecific.WebClientMock;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
@@ -94,7 +94,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private final StateManager stateManager;
 
   /** The wave panel, if a wave is open. */
-  private KuneStagesProvider wave;
+  private CustomStagesProvider wave;
 
   private final WaveClientProvider waveClientProv;
   private ImplPanel waveHolder;
@@ -103,7 +103,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private final WaveStore waveStore = new SimpleWaveStore();
 
-  private final WaveUnsavedIndicator waveUnsavedIndicator;
+  private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   private final Widget widget;
 
@@ -111,7 +111,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
       final EventBus eventBus, final StateManager stateManager,
-      final ContentDropController dropController, final WaveUnsavedIndicator waveUnsavedIndicator) {
+      final ContentDropController dropController, final CustomSavedStateIndicator waveUnsavedIndicator) {
     this.gsArmor = wsArmor;
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
@@ -232,9 +232,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       // UIObject.setVisible(waveFrame.getElement(), true);
       waveHolder.getElement().appendChild(loading);
       final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-      final KuneStagesProvider wave = new KuneStagesProvider(holder, new Label().getElement(),
+      final CustomStagesProvider wave = new CustomStagesProvider(holder, new Label().getElement(),
           waveHolder, dummyWaveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
-          org.waveprotocol.box.webclient.client.Session.get().getDomain(), true, i18n,
+          org.waveprotocol.box.webclient.client.Session.get().getDomain(),
           waveUnsavedIndicator);
       this.wave = wave;
       wave.load(new Command() {

@@ -17,12 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.client;
+package cc.kune.wave.client.kspecific;
 
 import cc.kune.core.client.ExtendedGinModule;
-import cc.kune.wave.client.inboxcount.InboxCountPanel;
-import cc.kune.wave.client.inboxcount.InboxCountPresenter;
-import cc.kune.wave.client.inboxcount.InboxCountPresenter.InboxCountView;
+import cc.kune.wave.client.KuneWaveProfileManager;
+import cc.kune.wave.client.WebClient;
+import cc.kune.wave.client.kspecific.inboxcount.InboxCountPanel;
+import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
+import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView;
 
 public class WaveGinModule extends ExtendedGinModule {
   /*

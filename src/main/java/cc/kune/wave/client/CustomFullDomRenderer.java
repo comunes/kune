@@ -58,7 +58,7 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
  * Renders conversational objects with UiBuilders.
  *
  */
-public final class KuneFullDomRenderer implements RenderingRules<UiBuilder> {
+public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
 
   public interface DocRefRenderer {
     UiBuilder render(ConversationBlip blip,
@@ -92,7 +92,7 @@ public final class KuneFullDomRenderer implements RenderingRules<UiBuilder> {
   private final ThreadReadStateMonitor readMonitor;
   private final boolean showParticipantsPanel;
 
-  public KuneFullDomRenderer(ShallowBlipRenderer blipPopulator, DocRefRenderer docRenderer,
+  public CustomFullDomRenderer(ShallowBlipRenderer blipPopulator, DocRefRenderer docRenderer,
       ProfileManager profileManager, ViewIdMapper viewIdMapper, ViewFactory viewFactory,
       ThreadReadStateMonitor readMonitor, boolean showParticipantsPanel) {
     this.blipPopulator = blipPopulator;
@@ -150,7 +150,7 @@ public final class KuneFullDomRenderer implements RenderingRules<UiBuilder> {
     Profile profile = profileManager.getProfile(participant);
     String id = viewIdMapper.participantOf(conversation, participant);
     // Use ParticipantAvatarViewBuilder for avatars.
-    // Kune patch
+
     // final ParticipantNameViewBuilder participantUi = ParticipantNameViewBuilder.create(id);
     ParticipantAvatarViewBuilder participantUi = ParticipantAvatarViewBuilder.create(id);
     participantUi.setAvatar(profile.getImageUrl());

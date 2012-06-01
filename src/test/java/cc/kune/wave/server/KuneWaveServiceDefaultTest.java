@@ -44,6 +44,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.wave.server.kspecific.KuneWaveService;
+import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 import com.google.inject.Inject;
 import com.google.wave.api.Element;

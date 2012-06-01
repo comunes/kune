@@ -17,29 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.client;
+package cc.kune.wave.client.kspecific;
 
-import cc.kune.core.client.events.AppStartEvent;
-import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.state.Session;
-import cc.kune.wave.client.inboxcount.InboxCountPresenter;
+import cc.kune.wave.client.WebClient;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class WaveParts {
+public class WaveClientProvider implements Provider<WaveClientView> {
+
+  private final Provider<? extends WaveClientView> webClientProv;
 
   @Inject
-  public WaveParts(final Session session, final Provider<WaveClientManager> waveClientManager,
-      final Provider<WaveStatusIndicator> waveOnlineStatus,
-      final Provider<InboxCountPresenter> inboxCount) {
-    session.onAppStart(true, new AppStartHandler() {
-      @Override
-      public void onAppStart(final AppStartEvent event) {
-        waveClientManager.get();
-        waveOnlineStatus.get();
-        inboxCount.get();
-      }
-    });
+  public WaveClientProvider(final Provider<WebClient> webClient,
+      final Provider<WebClientMock> webClientMock) {
+    webClientProv = webClient;
+    // If you want not to load the Webclient Mock
+    // webClientProv = webClientMock;
   }
+
+  @Override
+  public WaveClientView get() {
+    return webClientProv.get();
+  }
+
 }

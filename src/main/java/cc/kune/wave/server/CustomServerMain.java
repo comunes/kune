@@ -92,14 +92,14 @@ import com.google.inject.name.Names;
 /**
  * Wave Server entrypoint.
  */
-public class WaveMain {
+public class CustomServerMain {
 
   /**
    * This is the name of the system property used to find the server config file.
    */
   private static final String PROPERTIES_FILE_KEY = "wave.server.config";
 
-  private static final Log LOG = Log.get(WaveMain.class);
+  private static final Log LOG = Log.get(CustomServerMain.class);
 
   @SuppressWarnings("serial")
   @Singleton

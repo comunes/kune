@@ -52,7 +52,6 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import cc.kune.common.shared.utils.SimpleArgCallback;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;

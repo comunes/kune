@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.server;
+package cc.kune.wave.server.kspecific;
 
 import java.util.Iterator;
 import java.util.LinkedList;

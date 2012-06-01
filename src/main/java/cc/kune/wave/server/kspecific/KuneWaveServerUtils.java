@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.server;
+package cc.kune.wave.server.kspecific;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -33,7 +33,6 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.domain.Content;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
-import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

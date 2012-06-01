@@ -79,9 +79,9 @@ import cc.kune.events.server.utils.EventsCache;
 import cc.kune.events.shared.EventsToolConstants;
 import cc.kune.trash.server.TrashServerUtils;
 import cc.kune.trash.shared.TrashToolConstants;
-import cc.kune.wave.server.KuneWaveServerUtils;
-import cc.kune.wave.server.ParticipantUtils;
+import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
+import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;

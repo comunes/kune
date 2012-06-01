@@ -2,7 +2,7 @@ package cc.kune.gspace.client.maxmin;
 
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.maxmin.MaxMinWorkspacePresenter.MaxMinWorkspaceView;
-import cc.kune.wave.client.WaveClientProvider;
+import cc.kune.wave.client.kspecific.WaveClientProvider;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;

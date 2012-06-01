@@ -76,7 +76,10 @@ import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenMatcher;
-import cc.kune.wave.client.inboxcount.InboxCountPresenter;
+import cc.kune.wave.client.kspecific.WaveClientClearEvent;
+import cc.kune.wave.client.kspecific.WaveClientUtils;
+import cc.kune.wave.client.kspecific.WaveClientView;
+import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -257,14 +260,14 @@ public class WebClient extends  Composite implements WaveClientView {
   private final UniversalPopup turbulencePopup = createTurbulencePopup();
 
   /** The wave panel, if a wave is open. */
-  private KuneStagesProvider wave;
+  private CustomStagesProvider wave;
 
   @UiField
   FramedPanel waveFrame;
   ImplPanel waveHolder;
   private final WaveStore waveStore = new SimpleWaveStore();
 
-  private final WaveUnsavedIndicator waveUnsavedIndicator;
+  private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
@@ -275,7 +278,7 @@ public class WebClient extends  Composite implements WaveClientView {
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session session, final I18nTranslationService i18n, final WaveUnsavedIndicator waveUnsavedIndicator) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session session, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
@@ -386,8 +389,8 @@ public class WebClient extends  Composite implements WaveClientView {
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl(String moduleBase) /*-{
-		return ((window.location.protocol == "https:") ? "wss" : "ws")
-				+ /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+    return ((window.location.protocol == "https:") ? "wss" : "ws")
+        + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
   }-*/;
 
   @Override
@@ -437,8 +440,8 @@ public class WebClient extends  Composite implements WaveClientView {
     UIObject.setVisible(waveFrame.getElement(), true);
     waveHolder.getElement().appendChild(loading);
     final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-    final KuneStagesProvider wave = new KuneStagesProvider(
-        holder, new Label().getElement(), waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), true, i18n, waveUnsavedIndicator);
+    final CustomStagesProvider wave = new CustomStagesProvider(
+        holder, new Label().getElement(), waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), waveUnsavedIndicator);
     this.wave = wave;
     wave.load(new Command() {
       @Override
@@ -467,10 +470,10 @@ public class WebClient extends  Composite implements WaveClientView {
     SpaceConfEvent.fire(eventBus, Space.userSpace, tokenFromWaveref);
     History.newItem(tokenFromWaveref, false);
   }
-  
+
   @Override
   public void setMaximized(final boolean maximized) {
-    splitPanel.setWidgetSize(searchPanel, maximized ? 0 : 400);    
+    splitPanel.setWidgetSize(searchPanel, maximized ? 0 : 400);
   }
 
   private void setupConnectionIndicator() {
@@ -507,7 +510,7 @@ public class WebClient extends  Composite implements WaveClientView {
       }
     });
   }
-  
+
   private void setupSearchPanel() {
     // On wave action fire an event.
     final SearchPresenter.WaveActionHandler actionHandler =
@@ -526,7 +529,7 @@ public class WebClient extends  Composite implements WaveClientView {
     search.addListener(inboxCount.getSearchListener());
     SearchPresenter.create(search, searchPanel, actionHandler, profiles);
   }
-  
+
   private void setupUi() {
     // Set up UI
     final DockLayoutPanel self = BINDER.createAndBindUi(this);
@@ -541,13 +544,13 @@ public class WebClient extends  Composite implements WaveClientView {
     // cleared.
     self.getElement().getStyle().clearPosition();
     splitPanel.setWidgetMinSize(searchPanel, 300);
-  
+
     if (LogLevel.showDebug()) {
       logPanel.enable();
     } else {
       logPanel.removeFromParent();
     }
-  
+
     setupSearchPanel();
     setupWavePanel();
   }
@@ -565,6 +568,6 @@ public class WebClient extends  Composite implements WaveClientView {
     });
   }
   private native boolean useSocketIO() /*-{
-		return !window.WebSocket
+    return !window.WebSocket
   }-*/;
 }

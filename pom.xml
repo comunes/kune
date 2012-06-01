@@ -22,7 +22,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
-    <wiab.version>0.3.16</wiab.version>
+    <wiab.version>0.3.17</wiab.version>
     <jetty.version>8.1.1.v20120215</jetty.version>
     <skipTests>true</skipTests>
   </properties>
@@ -757,7 +757,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>cc.kune.wave.server.WaveMain</mainClass>
+          <mainClass>cc.kune.wave.server.CustomServerMain</mainClass>
           <commandlineArgs>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8001
           </commandlineArgs>
           <systemProperties>
@@ -873,7 +873,7 @@
           </descriptors>
           <archive>
             <manifest>
-              <mainClass>cc.kune.wave.server.WaveMain</mainClass>
+              <mainClass>cc.kune.wave.server.CustomServerMain</mainClass>
             </manifest>
           </archive>
           <!-- <descriptorRefs> -->
@@ -1012,7 +1012,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>cc.kune.wave.server.WaveMain</mainClass>
+              <mainClass>cc.kune.wave.server.CustomServerMain</mainClass>
               <!-- <classpathPrefix>~/.m2/repository/</classpathPrefix> -->
               <!-- <classpathLayoutType>repository</classpathLayoutType> -->
               <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType' 

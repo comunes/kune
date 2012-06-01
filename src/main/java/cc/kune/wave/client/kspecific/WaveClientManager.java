@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.client;
+package cc.kune.wave.client.kspecific;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.events.UserSignInEvent;
@@ -31,7 +31,8 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.shared.dto.WaveClientParams;
 import cc.kune.gspace.client.armor.GSpaceArmor;
-import cc.kune.wave.client.inboxcount.InboxCountPresenter;
+import cc.kune.wave.client.KuneWaveProfileManager;
+import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsonUtils;
@@ -56,7 +57,6 @@ public class WaveClientManager {
             new AsyncCallbackSimple<WaveClientParams>() {
               @Override
               public void onSuccess(final WaveClientParams result) {
-                setUseSocketIO(result.useSocketIO());
                 setSessionJSON(JsonUtils.safeEval(result.getSessionJSON()));
                 setClientFlags(JsonUtils.safeEval(result.getClientFlags()));
                 Log.info("Wave client session: " + result.getSessionJSON());
@@ -88,7 +88,6 @@ public class WaveClientManager {
           webClient.asWidget().setVisible(false);
           webClient.logout();
         }
-        setUseSocketIO(false);
         setSessionJSON(JsonUtils.safeEval("{}"));
         setClientFlags(JsonUtils.safeEval("{}"));
       }
@@ -107,7 +106,4 @@ public class WaveClientManager {
                                                               $wnd.__session = object;
                                                               }-*/;
 
-  private native void setUseSocketIO(boolean use) /*-{
-                                                  $wnd.__useSocketIO = use;
-                                                  }-*/;
 }

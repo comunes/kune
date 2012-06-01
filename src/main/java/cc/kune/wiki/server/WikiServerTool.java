@@ -43,7 +43,7 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
-import cc.kune.wave.server.ParticipantUtils;
+import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 import com.google.inject.Inject;
 

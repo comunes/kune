@@ -55,8 +55,6 @@ import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.rack.ContainerListener;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
-import cc.kune.wave.server.KuneWaveServerUtils;
-import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

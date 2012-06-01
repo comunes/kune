@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.client.inboxcount;
+package cc.kune.wave.client.kspecific.inboxcount;
 
 import java.util.HashMap;
 import java.util.Map;

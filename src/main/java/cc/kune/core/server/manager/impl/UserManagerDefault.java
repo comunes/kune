@@ -84,8 +84,8 @@ import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.CustomUserRegistrationServlet;
-import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
+import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

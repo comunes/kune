@@ -24,7 +24,7 @@ import java.util.Collection;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveServerUtils;
+import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
 
 /**
  * The Class WaveDestinationProvider. A WaveRef is used to get the participants

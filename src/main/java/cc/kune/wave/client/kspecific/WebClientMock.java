@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.client;
+package cc.kune.wave.client.kspecific;
 
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
@@ -25,6 +25,7 @@ import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
+
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Composite;

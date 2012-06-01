@@ -112,9 +112,9 @@ import cc.kune.core.server.xmpp.XmppManagerDefault;
 import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.rpc.ListsRPC;
-import cc.kune.wave.server.ParticipantUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 import cc.kune.wave.server.kspecific.KuneWaveServiceDefault;
+import cc.kune.wave.server.kspecific.ParticipantUtils;
 import cc.kune.wave.server.kspecific.WaveEmailNotifier;
 
 import com.google.inject.Singleton;

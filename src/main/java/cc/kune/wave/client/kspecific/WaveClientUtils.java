@@ -17,18 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.client;
+package cc.kune.wave.client.kspecific;
 
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.wave.client.CustomStagesProvider;
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
 public class WaveClientUtils {
-  public static void addListener(final StateManager stateManager, final KuneStagesProvider wave,
+  public static void addListener(final StateManager stateManager, final CustomStagesProvider wave,
       final ImplPanel waveHolder, final HasWidgets parent) {
     stateManager.addBeforeStateChangeListener(new BeforeActionListener() {
       @Override
@@ -41,7 +42,7 @@ public class WaveClientUtils {
     });
   }
 
-  public static void clear(KuneStagesProvider wave, final ImplPanel waveHolder, final HasWidgets parent) {
+  public static void clear(CustomStagesProvider wave, final ImplPanel waveHolder, final HasWidgets parent) {
     if (wave != null) {
       try {
         wave.destroy();

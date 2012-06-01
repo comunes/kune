@@ -28,22 +28,23 @@ import com.google.gwt.dom.client.StyleInjector;
  * wave panel.
  *
  */
-public final class KuneWavePanelResourceLoader {
+public final class CustomWavePanelResourceLoader {
 
-  private final static BlipViewBuilder.Resources blip = GWT.create(BlipViewBuilder.Resources.class);
+  private final static BlipViewBuilder.Resources blip = 
+       GWT.create(BlipViewBuilder.Resources.class);
   private final static CollapsibleBuilder.Resources collapsible =
       GWT.create(CollapsibleBuilder.Resources.class);
+  private final static RootThreadViewBuilder.Resources rootThread =
+      GWT.create(RootThreadViewBuilder.Resources.class);
+  private final static ReplyBoxViewBuilder.Resources replyBox =
+      GWT.create(ReplyBoxViewBuilder.Resources.class);
+  private final static ContinuationIndicatorViewBuilder.Resources inlineContinuation =
+    GWT.create(ContinuationIndicatorViewBuilder.Resources.class);
   // Kune patch (but not used yet)
   private final static KuneWaveResources.Conversation conversation =
       GWT.create(KuneWaveResources.Conversation.class);
-  private final static ContinuationIndicatorViewBuilder.Resources inlineContinuation =
-    GWT.create(ContinuationIndicatorViewBuilder.Resources.class);
   private final static ParticipantsViewBuilder.Resources participants =
     GWT.create(ParticipantsViewBuilder.Resources.class);
-  private final static ReplyBoxViewBuilder.Resources replyBox =
-      GWT.create(ReplyBoxViewBuilder.Resources.class);
-  private final static RootThreadViewBuilder.Resources rootThread =
-      GWT.create(RootThreadViewBuilder.Resources.class);
 
   static {
     // Inject all CSS synchronously. CSS must be injected synchronously, so that
@@ -52,7 +53,7 @@ public final class KuneWavePanelResourceLoader {
     // asynchronous). CSS is injected together in one bundle to minimize layout
     // invalidation, and to leave open the possibility of merging stylesheets
     // together for efficiency.
-    final boolean isSynchronous = true;
+    boolean isSynchronous = true;
     StyleInjector.inject(blip.css().getText(), isSynchronous);
     StyleInjector.inject(collapsible.css().getText(), isSynchronous);
     StyleInjector.inject(rootThread.css().getText(), isSynchronous);
@@ -62,12 +63,23 @@ public final class KuneWavePanelResourceLoader {
     StyleInjector.inject(participants.css().getText(), isSynchronous);
   }
 
+  private CustomWavePanelResourceLoader() {
+  }
+
   public static BlipViewBuilder.Resources getBlip() {
     return blip;
   }
 
   public static CollapsibleBuilder.Resources getCollapsible() {
     return collapsible;
+  }
+
+  public static RootThreadViewBuilder.Resources getRootThread() {
+    return rootThread;
+  }
+
+  public static ReplyBoxViewBuilder.Resources getReplyBox() {
+    return replyBox;
   }
 
   public static ContinuationIndicatorViewBuilder.Resources getContinuationIndicator() {
@@ -82,14 +94,6 @@ public final class KuneWavePanelResourceLoader {
     return participants;
   }
 
-  public static ReplyBoxViewBuilder.Resources getReplyBox() {
-    return replyBox;
-  }
-
-  public static RootThreadViewBuilder.Resources getRootThread() {
-    return rootThread;
-  }
-
   /**
    * Loads all the CSS required by the wave panel.
    */
@@ -99,6 +103,4 @@ public final class KuneWavePanelResourceLoader {
     EditorImpl.init();
   }
 
-  private KuneWavePanelResourceLoader() {
-  }
 }

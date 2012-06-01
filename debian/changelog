@@ -1,3 +1,11 @@
+kune (0.2.0+b8) unstable; urgency=low
+
+  * Updated wave code with some fix (long paste, avatar flickering, etc). 
+  * Saving status while editing
+  * Avatars update fix (better resolution, you can change it many times,etc)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 01 Jun 2012 03:01:21 +0200
+
 kune (0.2.0+b7) unstable; urgency=low
 
   * Fix some SSL issues

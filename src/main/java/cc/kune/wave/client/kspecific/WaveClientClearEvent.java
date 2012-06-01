@@ -17,15 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.client;
+package cc.kune.wave.client.kspecific;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-
 import com.google.gwt.event.shared.HasHandlers;
 
-public class WaveClientClearEvent extends GwtEvent<WaveClientClearEvent.WaveClientClearHandler> { 
+public class WaveClientClearEvent extends GwtEvent<WaveClientClearEvent.WaveClientClearHandler> {
 
   public interface HasWaveClientClearHandlers extends HasHandlers {
     HandlerRegistration addWaveClientClearHandler(WaveClientClearHandler handler);
@@ -37,7 +36,7 @@ public class WaveClientClearEvent extends GwtEvent<WaveClientClearEvent.WaveClie
 
   private static final Type<WaveClientClearHandler> TYPE = new Type<WaveClientClearHandler>();
 
-  public static void fire(HasHandlers source) {
+  public static void fire(final HasHandlers source) {
     source.fireEvent(new WaveClientClearEvent());
   }
 
@@ -45,23 +44,22 @@ public class WaveClientClearEvent extends GwtEvent<WaveClientClearEvent.WaveClie
     return TYPE;
   }
 
-
   public WaveClientClearEvent() {
+  }
+
+  @Override
+  protected void dispatch(final WaveClientClearHandler handler) {
+    handler.onWaveClientClear(this);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    return super.equals(obj);
   }
 
   @Override
   public Type<WaveClientClearHandler> getAssociatedType() {
     return TYPE;
-  }
-
-  @Override
-  protected void dispatch(WaveClientClearHandler handler) {
-    handler.onWaveClientClear(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
   }
 
   @Override
@@ -71,7 +69,6 @@ public class WaveClientClearEvent extends GwtEvent<WaveClientClearEvent.WaveClie
 
   @Override
   public String toString() {
-    return "WaveClientClearEvent["
-    + "]";
+    return "WaveClientClearEvent[" + "]";
   }
 }

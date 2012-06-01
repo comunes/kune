@@ -30,7 +30,7 @@ import org.mockito.Mockito;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
-import cc.kune.wave.server.ParticipantUtils;
+import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 public class WikiServerToolTest { // extends PersistenceTest {
 

@@ -69,9 +69,13 @@ public class GiveUsFeedbackAction extends AbstractExtendedAction {
 
             @Override
             public void onSuccess() {
-              contentService.get().sendFeedback(session.getUserHash(),
+              contentService.get().sendFeedback(
+                  session.getUserHash(),
                   i18n.t("Feedback of [%s]", session.getCurrentUser().getShortName()),
-                  i18n.t("Edit and write here your feedback."), new AsyncCallbackSimple<String>() {
+                  i18n.t("Please, edit and write here your feedback about this tool. "
+                      + "We find your comments very useful, especially "
+                      + "if you mention the things you would like to see, "
+                      + "your personal/group needs, etc."), new AsyncCallbackSimple<String>() {
                     @Override
                     public void onSuccess(final String url) {
                       stateManager.gotoHistoryToken(url);

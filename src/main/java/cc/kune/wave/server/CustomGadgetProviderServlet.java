@@ -68,14 +68,14 @@ public class CustomGadgetProviderServlet extends HttpServlet {
   }
 
   @Override
-  protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
     final String jsonString = jsonCache.get("");
     if (jsonString.equals("")) {
       response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
           "Error loading json data from file");
     } else {
-      final PrintWriter out = response.getWriter();
+      PrintWriter out = response.getWriter();
       out.print(jsonCache.get(""));
       out.flush();
     }
