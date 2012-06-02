@@ -25,13 +25,14 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.client.resources.CommonResources;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.CoreConstants;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStopEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.CoreConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
 
 import com.google.gwt.core.client.Scheduler;
@@ -121,6 +122,7 @@ public class AppStarterDefault implements AppStarter {
                     + " instead. Continue anyway?", new SimpleResponseCallback() {
                   @Override
                   public void onCancel() {
+                    WindowUtils.changeHref(CoreConstants.MOZILLA_FF_LINK);
                   }
 
                   @Override

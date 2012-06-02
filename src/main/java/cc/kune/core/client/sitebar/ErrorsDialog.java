@@ -32,9 +32,9 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
@@ -48,7 +48,7 @@ public class ErrorsDialog {
 
   private final BasicTopDialog dialog;
   @UiField
-  VerticalPanel panel;
+  FlowPanel panel;
   @UiField
   ScrollPanel scroll;
 
@@ -56,28 +56,31 @@ public class ErrorsDialog {
   public ErrorsDialog(final I18nTranslationService i18n, final EventBus eventBus) {
     dialog = new BasicTopDialog.Builder(ERROR_LOGGER_ID, true, true, i18n.getDirection()).title(
         i18n.t("Errors info")).autoscroll(true).firstButtonTitle(i18n.t("Ok")).firstButtonId(
-        ERROR_LOGGER_BUTTON_ID).tabIndexStart(1).width("400px").height("400px").build();
+        ERROR_LOGGER_BUTTON_ID).tabIndexStart(1).width("400px").height("350px").build();
     dialog.getTitleText().setText(i18n.t("Info about errors"), i18n.getDirection());
     final InlineLabel subTitle = new InlineLabel(
         i18n.t("Please copy/paste this info to report problems"));
     dialog.getInnerPanel().add(subTitle);
     dialog.getInnerPanel().add(BINDER.createAndBindUi(this));
-    scroll.setHeight("400px");
-    scroll.setAlwaysShowScrollBars(true);
+    scroll.setHeight("350px");
+    // scroll.setAlwaysShowScrollBars(true);
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
         dialog.hide();
       }
     });
+
     eventBus.addHandler(UserNotifyEvent.getType(), new UserNotifyEvent.UserNotifyHandler() {
       @Override
       public void onUserNotify(final UserNotifyEvent event) {
         final NotifyLevel level = event.getLevel();
         final IconLabel iconMessage = new IconLabel();
-        iconMessage.setLeftIconResource(UserMessageImagesUtil.getIcon(level));
+        iconMessage.setRightIconResource(UserMessageImagesUtil.getIcon(level));
         iconMessage.setText(event.getMessage(), i18n.getDirection());
         iconMessage.setWordWrap(true);
+        iconMessage.addTextStyleName("k-errordiag-text-msg");
+        iconMessage.addStyleName("k-errordiag-msg");
         panel.insert(iconMessage, 0);
       }
     });

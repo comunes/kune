@@ -114,7 +114,9 @@ public class NotifyUser {
   }
 
   public static void logError(final String message) {
-    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.log, message));
+    if (eventBus != null) {
+      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.log, message));
+    }
   }
 
   private static void sendEventImpl(final String title, final String message, final String id,

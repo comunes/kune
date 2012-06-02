@@ -19,9 +19,6 @@
 package cc.kune.wave.client;
 
 
-
-
-
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -105,123 +102,25 @@ import com.google.inject.Singleton;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 @Singleton
-public class WebClient extends  Composite implements WaveClientView {
+public class WebClient extends Composite implements WaveClientView {
   interface Binder extends UiBinder<DockLayoutPanel, WebClient> {
-  }
-
-  /**
-   * An exception handler that reports exceptions using a <em>shiny banner</em>
-   * (an alert placed on the top of the screen). Once the stack trace is
-   * prepared, it is revealed in the banner via a link.
-   */
-  public static class ErrorHandler implements UncaughtExceptionHandler {
-    public static void getStackTraceAsync(final Throwable t, final Accessor<SafeHtml> whenReady) {
-      // TODO: Request stack-trace de-obfuscation. For now, just use the
-      // javascript stack trace.
-      //
-      // Use minimal services here, in order to avoid the chance that reporting
-      // the error produces more errors. In particular, do not use WIAB's
-      // scheduler to run this command.
-      // Also, this code could potentially be put behind a runAsync boundary, to
-      // save whatever dependencies it uses from the initial download.
-      new Timer() {
-        @Override
-        public void run() {
-          final SafeHtmlBuilder stack = new SafeHtmlBuilder();
-
-          Throwable error = t;
-          while (error != null) {
-            final String token = String.valueOf((new Date()).getTime());
-            stack.appendHtmlConstant("Token:  " + token + "<br> ");
-            stack.appendEscaped(String.valueOf(error.getMessage())).appendHtmlConstant("<br>");
-            for (final StackTraceElement elt : error.getStackTrace()) {
-              stack.appendHtmlConstant("  ")
-                  .appendEscaped(maybe(elt.getClassName(), "??")).appendHtmlConstant(".") //
-                  .appendEscaped(maybe(elt.getMethodName(), "??")).appendHtmlConstant(" (") //
-                  .appendEscaped(maybe(elt.getFileName(), "??")).appendHtmlConstant(":") //
-                  .appendEscaped(maybe(elt.getLineNumber(), "??")).appendHtmlConstant(")") //
-                  .appendHtmlConstant("<br>");
-            }
-            error = error.getCause();
-            if (error != null) {
-              stack.appendHtmlConstant("Caused by: ");
-            }
-          }
-
-          whenReady.use(stack.toSafeHtml());
-        }
-      }.schedule(1);
-    }
-
-    public static void install() {
-    GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
-    }
-
-    private static String maybe(final int value, final String otherwise) {
-      return value != -1 ? String.valueOf(value) : otherwise;
-    }
-
-    private static String maybe(final String value, final String otherwise) {
-      return value != null ? value : otherwise;
-    }
-
-    /**
-     * Indicates whether an error has already been reported (at most one error
-     * is ever reported by this handler).
-     */
-    private boolean hasFired;
-
-    /** Next handler in the handler chain. */
-    private final UncaughtExceptionHandler next;
-
-    private ErrorHandler(final UncaughtExceptionHandler next) {
-      this.next = next;
-    }
-
-    @Override
-    public void onUncaughtException(final Throwable e) {
-      if (!hasFired) {
-        hasFired = true;
-      //  final ErrorIndicatorPresenter error =
-        //    ErrorIndicatorPresenter.create(RootPanel.get("banner"));
-        getStackTraceAsync(e, new Accessor<SafeHtml>() {
-          @Override
-          public void use(final SafeHtml stack) {
-          //  error.addDetail(stack, null);
-            // REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
-            final String message = stack.asString().replace("<br>", "\n");
-            REMOTE_LOG.severe(message);
-            NotifyUser.logError(message);
-            NotifyUser.showProgress("Error");
-            new Timer() {
-              @Override
-              public void run() {
-                NotifyUser.hideProgress();
-              }}.schedule(5000);
-          }
-        });
-      }
-
-      if (next != null) {
-        next.onUncaughtException(e);
-      }
-    }
   }
 
   interface Style extends CssResource {
   }
 
   private static final Binder BINDER = GWT.create(Binder.class);
-  static Log LOG = Log.get(WebClient.class);
 
+  static Log LOG = Log.get(WebClient.class);
   // Use of GWT logging is only intended for sending exception reports to the
   // server, nothing else in the client should use java.util.logging.
   // Please also see WebClientDemo.gwt.xml.
   private static final Logger REMOTE_LOG = Logger.getLogger("REMOTE_LOG");
+
   /** Creates a popup that warns about network disconnects. */
   private static UniversalPopup createTurbulencePopup() {
-    final PopupChrome chrome = PopupChromeFactory.createPopupChrome();
-    final UniversalPopup popup =
+    PopupChrome chrome = PopupChromeFactory.createPopupChrome();
+    UniversalPopup popup =
         PopupFactory.createPopup(null, new CenterPopupPositioner(), chrome, true);
     popup.add(new HTML("<div style='color: red; padding: 5px; text-align: center;'>"
         + "<b>A turbulence detected!<br></br>"
@@ -229,27 +128,8 @@ public class WebClient extends  Composite implements WaveClientView {
     return popup;
   }
 
-  private RemoteViewServiceMultiplexer channel;
-
-  private final EventBus eventBus;
-
-  private final I18nTranslationService i18n;
-
-  private IdGenerator idGenerator;
-
-  private final InboxCountPresenter inboxCount;
-  private final Element loading = new LoadingIndicator().getElement();
-
-  private ParticipantId loggedInUser;
-
-  @UiField
-  DebugMessagePanel logPanel;
-
   private final ProfileManager profiles;
-
-  @UiField(provided = true)
-  final SearchPanelWidget searchPanel;
-
+  private final UniversalPopup turbulencePopup = createTurbulencePopup();
 
   @UiField
   SplitLayoutPanel splitPanel;
@@ -257,22 +137,43 @@ public class WebClient extends  Composite implements WaveClientView {
   @UiField
   Style style;
 
-  private final UniversalPopup turbulencePopup = createTurbulencePopup();
+  @UiField
+  FramedPanel waveFrame;
+
+  //FIXME UiField???
+  ImplPanel waveHolder;
+  private final Element loading = new LoadingIndicator().getElement();
+
+  @UiField(provided = true)
+  final SearchPanelWidget searchPanel;
+
+  @UiField
+  DebugMessagePanel logPanel;
 
   /** The wave panel, if a wave is open. */
   private CustomStagesProvider wave;
 
-  @UiField
-  FramedPanel waveFrame;
-  ImplPanel waveHolder;
   private final WaveStore waveStore = new SimpleWaveStore();
-
-  private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
    */
   private WaveWebSocketClient websocket;
+
+  private ParticipantId loggedInUser;
+
+  private IdGenerator idGenerator;
+
+  private RemoteViewServiceMultiplexer channel;
+
+  private final CustomSavedStateIndicator waveUnsavedIndicator;
+
+  private final EventBus eventBus;
+
+  private final I18nTranslationService i18n;
+
+  private final InboxCountPresenter inboxCount;
+
 
   /**
    * This is the entry point method.
@@ -304,7 +205,7 @@ public class WebClient extends  Composite implements WaveClientView {
         new WaveCreationEventHandler() {
 
           @Override
-          public void onCreateRequest(final WaveCreationEvent event) {
+          public void onCreateRequest(WaveCreationEvent event) {
             LOG.info("WaveCreationEvent received");
             if (channel == null) {
               throw new DefaultException("Spaghetti attack.  Create occured before login");
@@ -429,7 +330,7 @@ public class WebClient extends  Composite implements WaveClientView {
    * @param waveRef wave id to open
    * @param isNewWave whether the wave is being created by this client session.
    */
-  private void openWave(final WaveRef waveRef, final boolean isNewWave) {
+  private void openWave(WaveRef waveRef, boolean isNewWave) {
     LOG.info("WebClient.openWave()");
 
     WaveClientClearEvent.fire(eventBus);
@@ -439,9 +340,9 @@ public class WebClient extends  Composite implements WaveClientView {
     // Release the display:none.
     UIObject.setVisible(waveFrame.getElement(), true);
     waveHolder.getElement().appendChild(loading);
-    final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-    final CustomStagesProvider wave = new CustomStagesProvider(
-        holder, new Label().getElement(), waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), waveUnsavedIndicator);
+    Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
+    CustomStagesProvider wave = new CustomStagesProvider(
+        holder, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), waveUnsavedIndicator);
     this.wave = wave;
     wave.load(new Command() {
       @Override
@@ -570,4 +471,102 @@ public class WebClient extends  Composite implements WaveClientView {
   private native boolean useSocketIO() /*-{
     return !window.WebSocket
   }-*/;
+
+  /**
+   * An exception handler that reports exceptions using a <em>shiny banner</em>
+   * (an alert placed on the top of the screen). Once the stack trace is
+   * prepared, it is revealed in the banner via a link.
+   */
+  public static class ErrorHandler implements UncaughtExceptionHandler {
+    /** Next handler in the handler chain. */
+    private final UncaughtExceptionHandler next;
+
+    /**
+     * Indicates whether an error has already been reported (at most one error
+     * is ever reported by this handler).
+     */
+    private boolean hasFired;
+
+    private ErrorHandler(UncaughtExceptionHandler next) {
+      this.next = next;
+    }
+
+    public static void install() {
+    GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
+    }
+
+    @Override
+    public void onUncaughtException(Throwable e) {
+      if (!hasFired) {
+        hasFired = true;
+      //  final ErrorIndicatorPresenter error =
+        //    ErrorIndicatorPresenter.create(RootPanel.get("banner"));
+        getStackTraceAsync(e, new Accessor<SafeHtml>() {
+          @Override
+          public void use(SafeHtml stack) {
+          //  error.addDetail(stack, null);
+            // REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
+            String message = stack.asString().replace("<br>", "\n");
+            REMOTE_LOG.severe(message);
+            NotifyUser.logError(message);
+            NotifyUser.showProgress("Error");
+            new Timer() {
+              @Override
+              public void run() {
+                NotifyUser.hideProgress();
+              }}.schedule(5000);
+          }
+        });
+      }
+      if (next != null) {
+        next.onUncaughtException(e);
+      }
+    }
+
+    public static void getStackTraceAsync(final Throwable t, final Accessor<SafeHtml> whenReady) {
+      // TODO: Request stack-trace de-obfuscation. For now, just use the
+      // javascript stack trace.
+      //
+      // Use minimal services here, in order to avoid the chance that reporting
+      // the error produces more errors. In particular, do not use WIAB's
+      // scheduler to run this command.
+      // Also, this code could potentially be put behind a runAsync boundary, to
+      // save whatever dependencies it uses from the initial download.
+      new Timer() {
+        @Override
+        public void run() {
+          SafeHtmlBuilder stack = new SafeHtmlBuilder();
+
+          Throwable error = t;
+          while (error != null) {
+            String token = String.valueOf((new Date()).getTime());
+            stack.appendHtmlConstant("Token:  " + token + "<br> ");
+            stack.appendEscaped(String.valueOf(error.getMessage())).appendHtmlConstant("<br>");
+            for (StackTraceElement elt : error.getStackTrace()) {
+              stack.appendHtmlConstant("  ")
+                  .appendEscaped(maybe(elt.getClassName(), "??")).appendHtmlConstant(".") //
+                  .appendEscaped(maybe(elt.getMethodName(), "??")).appendHtmlConstant(" (") //
+                  .appendEscaped(maybe(elt.getFileName(), "??")).appendHtmlConstant(":") //
+                  .appendEscaped(maybe(elt.getLineNumber(), "??")).appendHtmlConstant(")") //
+                  .appendHtmlConstant("<br>");
+            }
+            error = error.getCause();
+            if (error != null) {
+              stack.appendHtmlConstant("Caused by: ");
+            }
+          }
+
+          whenReady.use(stack.toSafeHtml());
+        }
+      }.schedule(1);
+    }
+
+    private static String maybe(String value, String otherwise) {
+      return value != null ? value : otherwise;
+    }
+
+    private static String maybe(int value, String otherwise) {
+      return value != -1 ? String.valueOf(value) : otherwise;
+    }
+  }
 }

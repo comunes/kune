@@ -1,3 +1,11 @@
+kune (0.2.0+b9) unstable; urgency=low
+
+  * Improved logging system (issue #36)
+  * Fixed some issues in WebSocketChecker and ErrorDialog
+  * Wave code minor refactorization
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 02 Jun 2012 21:52:47 +0200
+
 kune (0.2.0+b8) unstable; urgency=low
 
   * Updated wave code with some fix (long paste, avatar flickering, etc). 

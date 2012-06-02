@@ -19,40 +19,57 @@
  */
 package cc.kune.common.client.log;
 
-import com.google.gwt.core.client.GWT;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import cc.kune.common.client.notify.NotifyUser;
 
 public class Log {
 
-    public static void debug(final String message) {
-        GWT.log(prefix(message));
-    }
+  private static Logger logger = Logger.getLogger("KuneLog");
 
-    public static void debug(final String message, final Throwable caught) {
-        GWT.log(prefix(message), caught);
-    }
+  public static void debug(final String message) {
+    log(Level.FINEST, message);
+  }
 
-    public static void error(final String message) {
-        debug(message);
-    }
+  private static void log(Level level, final String message) {
+    logger.log(level, message);
+  }
 
-    public static void error(final String message, final Throwable caught) {
-        debug(message, caught);
-    }
+  private static void log(Level level, final String message, final Throwable caught) {
+    logger.log(level, message, caught);
+  }
 
-    public static void info(final String message) {
-        debug(message);
-    }
+  public static void debug(final String message, final Throwable caught) {
+    log(Level.FINEST, message, caught);
+  }
 
-    public static void info(final String message, final Throwable caught) {
-        debug(message, caught);
-    }
+  public static void error(final String message) {
+    log(Level.SEVERE, message);
+    NotifyUser.logError(message);
+  }
 
-    private static String prefix(final String message) {
-        return new StringBuffer().append("[kune] ").append(message).toString();
-    }
+  public static void error(final String message, final Throwable caught) {
+    log(Level.SEVERE, message, caught);
+    NotifyUser.logError(message);
+  }
 
-    public static void warn(final String message) {
-        debug(message);
-    }
+  public static void info(final String message) {
+    log(Level.INFO, message);
+  }
+
+  public static void info(final String message, final Throwable caught) {
+    log(Level.INFO, message, caught);
+  }
+
+  public static void warn(final String message, final Throwable caught) {
+    log(Level.WARNING, message, caught);
+    NotifyUser.logError(message);
+  }
+
+  public static void warn(final String message) {
+    log(Level.WARNING, message);
+    NotifyUser.logError(message);
+  }
 
 }

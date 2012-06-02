@@ -150,10 +150,10 @@ public class I18nUITranslationService extends I18nTranslationService {
    * See in:
    * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread
    * /5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
-   * 
+   *
    * JSNI method to change the locale of the application - it effectively parses
    * the existing URL and creates a new one for the chosen locale.
-   * 
+   *
    * @param newLocale
    *          String value of the new locale to go to.
    */
@@ -176,7 +176,7 @@ public class I18nUITranslationService extends I18nTranslationService {
   }
 
   /**
-   * 
+   *
    * @param wantedLanguage
    *          to check and to change to
    * @return true if we should reload the client with the new language
@@ -261,9 +261,9 @@ public class I18nUITranslationService extends I18nTranslationService {
   private String getTransFromBD(final String text, final String noteForTranslators,
       final String encodeText) {
     if (lexicon == null) {
-      Log.warn("i18n not initialized: " + text);
+      Log.info("i18n not initialized: " + text);
       earlyTexts.add(Pair.create(text, noteForTranslators));
-      Log.warn("i18n pending translations: " + earlyTexts.size());
+      Log.info("i18n pending translations: " + earlyTexts.size());
       return text;
     }
     String translation = lexicon.get(encodeText);
@@ -335,10 +335,10 @@ public class I18nUITranslationService extends I18nTranslationService {
    * In production, this method uses a hashmap. In development, if the text is
    * not in the hashmap, it makes a server petition (that stores the text
    * pending for translation in db).
-   * 
+   *
    * Warning: text is escaped as html before insert in the db. Don't use html
    * here (o user this method with params).
-   * 
+   *
    * @param text
    * @return text translated in the current language
    */

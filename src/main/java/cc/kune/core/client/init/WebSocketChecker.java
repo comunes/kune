@@ -25,11 +25,11 @@ import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.CoreConstants;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.CoreConstants;
 
 import com.google.inject.Inject;
 
@@ -38,7 +38,9 @@ public class WebSocketChecker {
   /**
    * This class check if the browser supports websockets and give some advices
    * to the user.
-   * 
+   *
+   * This can be tested in firefox setting network.websocket.enabled;false in about:config
+   *
    * @param session
    *          the session
    * @param res
@@ -60,7 +62,7 @@ public class WebSocketChecker {
                   mozLink), new SimpleResponseCallback() {
                 @Override
                 public void onCancel() {
-                  WindowUtils.changeHref(mozLink);
+                  WindowUtils.changeHref(CoreConstants.MOZILLA_FF_LINK);
                 }
 
                 @Override

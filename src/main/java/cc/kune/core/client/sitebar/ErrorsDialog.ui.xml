@@ -8,7 +8,6 @@
     }
   </ui:style>
   <g:ScrollPanel ui:field="scroll">
-    <g:VerticalPanel styleName="{style.panel}" ui:field="panel">
-    </g:VerticalPanel>
+    <g:FlowPanel styleName="{style.panel}" ui:field="panel" />
   </g:ScrollPanel>
 </ui:UiBinder>

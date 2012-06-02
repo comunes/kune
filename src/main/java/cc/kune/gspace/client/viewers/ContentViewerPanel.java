@@ -232,7 +232,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
       // UIObject.setVisible(waveFrame.getElement(), true);
       waveHolder.getElement().appendChild(loading);
       final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-      final CustomStagesProvider wave = new CustomStagesProvider(holder, new Label().getElement(),
+      final CustomStagesProvider wave = new CustomStagesProvider(holder,
           waveHolder, dummyWaveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
           org.waveprotocol.box.webclient.client.Session.get().getDomain(),
           waveUnsavedIndicator);

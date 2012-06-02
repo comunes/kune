@@ -107,7 +107,7 @@ public class CustomStagesProvider extends Stages {
    * @param isNewWave true if the wave is a new client-created wave
    * @param idGenerator
    */
-  public CustomStagesProvider(Element wavePanelElement, Element unsavedIndicatorElement,
+  public CustomStagesProvider(Element wavePanelElement,
       LogicalPanel rootPanel, FramedPanel waveFrame, WaveRef waveRef, RemoteViewServiceMultiplexer channel,
       IdGenerator idGenerator, ProfileManager profiles, WaveStore store, boolean isNewWave,
       String localDomain, CustomSavedStateIndicator waveUnsavedIndicator) {
@@ -252,7 +252,7 @@ public class CustomStagesProvider extends Stages {
       try {
         three.getEditActions().stopEditing();
       } catch (final Exception e) {
-        Log.info("Some exception stoping editing", e);
+        Log.warn("Some exception stoping editing", e);
       }
       three = null;
     }
@@ -260,7 +260,7 @@ public class CustomStagesProvider extends Stages {
       try {
         two.getConnector().close();
       } catch (final Exception e) {
-        Log.info("Some exception closing connector", e);
+        Log.warn("Some exception closing connector", e);
       }
       two = null;
     }
@@ -268,7 +268,7 @@ public class CustomStagesProvider extends Stages {
       try {
         one.getWavePanel().destroy();
       } catch (final Exception e) {
-        Log.info("Some exception destroying panel", e);
+        Log.warn("Some exception destroying panel", e);
       }
       one = null;
     }
