@@ -19,15 +19,22 @@
  */
 package cc.kune.client;
 
+
+
+import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
+import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
+
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.wave.client.WebClient.ErrorHandler;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.user.client.Timer;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
 /**
@@ -39,7 +46,7 @@ public class KuneEntryPoint implements EntryPoint {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
    */
   @Override
@@ -48,7 +55,20 @@ public class KuneEntryPoint implements EntryPoint {
       @Override
       public void onUncaughtException(final Throwable e) {
         Log.error("Error in 'onModuleLoad()' method", e);
-        e.printStackTrace();
+        ErrorHandler.getStackTraceAsync(e, new Accessor<SafeHtml>() {
+          @Override
+          public void use(SafeHtml stack) {
+            String message = stack.asString().replace("<br>", "\n");
+            NotifyUser.logError(message);
+            NotifyUser.showProgress("Error");
+            new Timer() {
+              @Override
+              public void run() {
+                NotifyUser.hideProgress();
+              }}.schedule(5000);
+          }
+        });
+        // e.printStackTrace();
       }
     });
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
