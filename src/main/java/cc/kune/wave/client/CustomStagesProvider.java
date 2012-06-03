@@ -171,7 +171,7 @@ public class CustomStagesProvider extends Stages {
 
       @Override
       protected void install() {
-        // FIXME kune revise this
+        // FIXME kune revise this (in StageThree)
         EditorStaticDeps.setPopupProvider(PopupFactory.getProvider());
         EditorStaticDeps.setPopupChromeProvider(PopupChromeFactory.getProvider());
 
@@ -199,6 +199,7 @@ public class CustomStagesProvider extends Stages {
   }
 
   private void onStageThreeLoaded(StageThree x, Accessor<StageThree> whenReady) {
+    Log.info("On stage three loaded");
     if (closed) {
       // Stop the loading process.
       return;
@@ -217,6 +218,7 @@ public class CustomStagesProvider extends Stages {
   }
 
   private void initNewWave(StageThree three) {
+    Log.info("Init new wave");
     // Do the new-wave flow.
     ModelAsViewProvider views = two.getModelAsViewProvider();
     BlipQueueRenderer blipQueue = two.getBlipQueue();
@@ -229,6 +231,7 @@ public class CustomStagesProvider extends Stages {
   }
 
   private void handleExistingWave(StageThree three) {
+  Log.info("Handle existing wave");
   if (waveRef.hasDocumentId()) {
     BlipQueueRenderer blipQueue = two.getBlipQueue();
     blipQueue.flush();
@@ -241,9 +244,10 @@ public class CustomStagesProvider extends Stages {
  * A hook to install features that are not dependent an a certain stage.
  */
   protected void install() {
-  WindowTitleHandler.install(waveStore, waveFrame);
+  // WindowTitleHandler.install(waveStore, waveFrame);
   }
   public void destroy() {
+    Log.info("Destroy wave");
     if (wave != null) {
       waveStore.remove(wave);
       wave = null;
@@ -295,6 +299,7 @@ public class CustomStagesProvider extends Stages {
    */
   @SuppressWarnings("unchecked") // HALT is safe as a holder for any type
   private <T> AsyncHolder<T> haltIfClosed(AsyncHolder<T> provider) {
+    Log.info("Halt if closed?: " + closed + "provider");
     return closed ? (AsyncHolder<T>) HALT : provider;
   }
 }
