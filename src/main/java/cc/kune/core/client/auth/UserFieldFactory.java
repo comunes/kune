@@ -23,6 +23,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.DefaultForm;
+import cc.kune.core.shared.CoreConstants;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.inject.Inject;
@@ -59,7 +60,8 @@ public class UserFieldFactory {
     longNameRegField.setWidth(DefaultForm.DEF_FIELD_WIDTH);
     longNameRegField.setAllowBlank(false);
     longNameRegField.setMinLength(3);
-    longNameRegField.setMaxLength(50);
+    longNameRegField.setMaxLength(CoreConstants.MAX_LONG_NAME_SIZE);  /* Same in User.java/longName */
+
     longNameRegField.setId(fieldId);
     return longNameRegField;
   }
@@ -81,7 +83,7 @@ public class UserFieldFactory {
   }
 
   public TextField<String> createUserShortName(final String fieldId) {
-    final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15);
+    final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_30);
     final TextField<String> field = new TextField<String>();
     field.setFieldLabel(i18n.t("Username"));
     field.setName(fieldId);
@@ -89,7 +91,7 @@ public class UserFieldFactory {
     field.setWidth(DefaultForm.DEF_SMALL_FIELD_WIDTH);
     field.setAllowBlank(false);
     field.setMinLength(3);
-    field.setMaxLength(15);
+    field.setMaxLength(CoreConstants.MAX_SHORT_NAME_SIZE); /* Same in User.java/name */
     field.setRegex(TextUtils.SHORTNAME_UPPER_REGEXP);
     field.getMessages().setMinLengthText(minMaxText);
     field.getMessages().setMaxLengthText(minMaxText);

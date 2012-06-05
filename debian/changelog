@@ -1,3 +1,9 @@
+kune (0.2.0+b11) unstable; urgency=low
+
+  * Users and groups names bigger
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 05 Jun 2012 15:16:33 +0200
+
 kune (0.2.0+b10) unstable; urgency=low
 
   * Added Russian and German

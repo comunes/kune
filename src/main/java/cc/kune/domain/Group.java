@@ -46,6 +46,7 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.constraints.Length;
 
+import cc.kune.core.shared.CoreConstants;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupType;
@@ -95,13 +96,16 @@ public class Group implements HasId {
 
   @Field(index = Index.YES, store = Store.NO)
   @Column(nullable = false, unique = true)
-  @Length(min = 3, max = 50, message = "The longName must be between 3 and 50 characters of length")
+  @Length(min = 3, max = CoreConstants.MAX_LONG_NAME_SIZE, message = "The longName must be between 3 and "
+      + CoreConstants.MAX_LONG_NAME_SIZE + " characters of length")
   private String longName;
 
   @Field(index = Index.YES, store = Store.NO)
   @Column(unique = true)
-  @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
-  @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+  @Length(min = 3, max = CoreConstants.MAX_SHORT_NAME_SIZE, message = "The shortname must be between 3 and 15 characters of length")
+  @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and "
+      + CoreConstants.MAX_SHORT_NAME_SIZE
+      + " lowercase characters. It can only contain Western characters, numbers, and dashes")
   private String shortName;
 
   @OneToOne(cascade = CascadeType.ALL)

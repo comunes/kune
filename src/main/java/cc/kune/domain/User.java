@@ -46,6 +46,7 @@ import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
+import cc.kune.core.shared.CoreConstants;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.EmailNotificationFrequency;
@@ -95,7 +96,7 @@ public class User implements HasId {
 
   @Enumerated(EnumType.STRING)
   private EmailNotificationFrequency emailNotifFreq;
- 
+
   @Basic
   @Column(columnDefinition = "BIT", length = 1)
   private Boolean emailVerified;
@@ -114,7 +115,7 @@ public class User implements HasId {
 
   @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
   @Column(nullable = false, unique = true)
-  @Length(min = 3, max = 50)
+  @Length(min = 3, max = CoreConstants.MAX_LONG_NAME_SIZE)
   private String name;
 
   @Basic
@@ -125,8 +126,10 @@ public class User implements HasId {
   @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
   @Column(unique = true)
   // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
-  @Length(min = 3, max = 15)
-  @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+  @Length(min = 3, max = CoreConstants.MAX_SHORT_NAME_SIZE)
+  @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and "
+      + CoreConstants.MAX_SHORT_NAME_SIZE
+      + " lowercase characters. It can only contain Western characters, numbers, and dashes")
   private String shortName;
 
   @Enumerated(EnumType.STRING)

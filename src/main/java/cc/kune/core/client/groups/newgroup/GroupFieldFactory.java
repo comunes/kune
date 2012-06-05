@@ -24,6 +24,7 @@ import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.client.ui.DefaultFormUtils;
+import cc.kune.core.shared.CoreConstants;
 
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.Radio;
@@ -63,14 +64,14 @@ public class GroupFieldFactory {
   }
 
   public TextField<String> createGroupShortName(final String fieldId) {
-    final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15);
+    final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_30);
     final TextField<String> field = new TextField<String>();
     field.setFieldLabel(i18n.t("Short name"));
     field.setName(fieldId);
     field.setId(fieldId);
     field.setWidth(175);
     field.setMinLength(3);
-    field.setMaxLength(15); /* Same in Group.java/shortName */
+    field.setMaxLength(CoreConstants.MAX_SHORT_NAME_SIZE); /* Same in Group.java/shortName */
     field.setAllowBlank(false);
     field.setRegex(TextUtils.SHORTNAME_UPPER_REGEXP);
     field.getMessages().setMinLengthText(minMaxText);
@@ -89,7 +90,7 @@ public class GroupFieldFactory {
     field.setWidth(DefaultForm.BIG_FIELD_WIDTH);
     field.setAllowBlank(false);
     field.setMinLength(3);
-    field.setMaxLength(50); /* Same in Group.java/longName */
+    field.setMaxLength(CoreConstants.MAX_LONG_NAME_SIZE); /* Same in Group.java/longName */
     field.setValidationDelay(1000);
     return field;
   }
