@@ -66,7 +66,7 @@ import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
-import cc.kune.core.client.notify.spiner.SpinerViewImpl;
+import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
@@ -168,7 +168,7 @@ public class CoreGinModule extends ExtendedGinModule {
     // Presenters
     bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
         CorePresenter.CoreProxy.class);
-    bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerViewImpl.class,
+    bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerPanel.class,
         SpinerPresenter.SpinerProxy.class);
     bindPresenter(UserNotifierPresenter.class, UserNotifierPresenter.UserNotifierView.class,
         UserNotifierViewImpl.class, UserNotifierProxy.class);

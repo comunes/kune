@@ -77,8 +77,6 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     label.addStyleName("k-space-nowrap");
     label.setStylePrimaryName("k-iconlabel");
     setTextStyle(text);
-    //iconLeft.setVisible(false);
-  //  iconRight.setVisible(false);
   }
 
   @Override
@@ -88,11 +86,6 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   public void addRightIconStyle(final String style) {
     iconRight.addStyleName(style);
-  }
-
-  @Override
-  public void addStyleName(final String style) {
-    flow.addStyleName(style);
   }
 
   public void addTextStyleName(final String style) {
