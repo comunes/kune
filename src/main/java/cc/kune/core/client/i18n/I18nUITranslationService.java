@@ -39,6 +39,7 @@ import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 
 import com.google.gwt.core.client.Scheduler;
@@ -73,8 +74,7 @@ public class I18nUITranslationService extends I18nTranslationService {
     this.session = session;
     this.i18nService = i18nService;
     this.kuneConstants = kuneConstants;
-    final Location loc = WindowUtils.getLocation();
-    final String locale = loc.getParameter("locale");
+    final String locale = WindowUtils.getParameter(SiteParameters.LOCALE);
     final LocaleInfo currentLocale = LocaleInfo.getCurrentLocale();
     Log.info("Workspace starting with language: " + currentLocale.getLocaleName() + ", isRTL: "
         + LocaleInfo.getCurrentLocale().isRTL() + ", translated langs: "

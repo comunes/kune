@@ -61,11 +61,12 @@ install/kune::
 #	http://people.debian.org/~seanius/policy/examples/dbconfig-common/doc/dbconfig-common-using.html#bootstrap
 #	http://people.debian.org/~seanius/policy/dbconfig-common-using.html/
 #	/usr/share/doc/dbconfig-common/examples/
+# Debuggin: http://people.debian.org/~seanius/policy/dbconfig-common-using.html/ch-develguide.html#s-debugging
 
-	cp $(CURDIR)/src/main/resources/db/kune_initialize.sql $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
-	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5/0.1.0+b5-init-data-countries.sql
-	cp $(CURDIR)/src/main/resources/db/init-data-languages.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5/0.1.0+b5-init-data-languages.sql
-	cp $(CURDIR)/src/main/resources/db/update-0016-names-width.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b11/0.2.0+b11-init-data-languages.sql
+	cat $(CURDIR)/src/main/resources/db/kune_initialize.sql $(CURDIR)/src/main/resources/db/init-data-countries.sql $(CURDIR)/src/main/resources/db/init-data-languages.sql $(CURDIR)/src/main/resources/db/update-0020-names-width.sql > $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
+	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5
+	cp $(CURDIR)/src/main/resources/db/init-data-languages.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b6
+	cp $(CURDIR)/src/main/resources/db/update-0020-names-width.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b12
 
 # FIXME
 #	cp logrotate $(DEST)/etc/logrotate.d/

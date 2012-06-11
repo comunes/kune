@@ -350,13 +350,13 @@ public class WebClient extends Composite implements WaveClientView {
         loading.removeFromParent();
       }
     });
-    final String encodedToken = History.getToken();
+    String encodedToken = History.getToken();
     // Kune patch
     if (encodedToken != null && !encodedToken.isEmpty() && !encodedToken.equals(SiteTokens.WAVE_INBOX)) {
       WaveRef fromWaveRef;
       try {
         fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);
-      } catch (final InvalidWaveRefException e) {
+      } catch (InvalidWaveRefException e) {
         LOG.info("History token contains invalid path: " + encodedToken);
         return;
       }
@@ -507,9 +507,9 @@ public class WebClient extends Composite implements WaveClientView {
           //  error.addDetail(stack, null);
             // REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
             String message = stack.asString().replace("<br>", "\n");
-            REMOTE_LOG.severe(message);
             NotifyUser.logError(message);
             NotifyUser.showProgress("Error");
+            REMOTE_LOG.severe(message);
             new Timer() {
               @Override
               public void run() {

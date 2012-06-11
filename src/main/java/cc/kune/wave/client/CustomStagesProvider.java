@@ -299,7 +299,7 @@ public class CustomStagesProvider extends Stages {
    */
   @SuppressWarnings("unchecked") // HALT is safe as a holder for any type
   private <T> AsyncHolder<T> haltIfClosed(AsyncHolder<T> provider) {
-    Log.info("Halt if closed?: " + closed + "provider");
+    Log.info("Halt if closed?: " + closed + " provider: " + provider);
     return closed ? (AsyncHolder<T>) HALT : provider;
   }
 }

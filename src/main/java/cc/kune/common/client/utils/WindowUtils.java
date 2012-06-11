@@ -19,43 +19,43 @@ public class WindowUtils {
 
   /**
    * https://developer.mozilla.org/en/DOM/window.location
-   * 
+   *
    * @param newUrl
    */
   public static native void changeHref(String newUrl) /*-{
-		$wnd.location.href = newUrl;
+    $wnd.location.href = newUrl;
   }-*/;
 
   /**
    * https://developer.mozilla.org/en/DOM/window.location
-   * 
+   *
    * "If you need to change pathname but keep the hash as is, use the replace() method instead, which should work consistently across browsers."
-   * 
+   *
    * @param newUrl
    */
   public static native void changeHrefKeepHash(String newUrl) /*-{
-		// $wnd.location.href = newUrl;
-		$wnd.location.replace(newUrl);
+    // $wnd.location.href = newUrl;
+    $wnd.location.replace(newUrl);
   }-*/;
 
   public static native boolean dontHasWebSocket() /*-{
-		return !window.WebSocket
+    return !window.WebSocket
   }-*/;
 
   private static native String getHash() /*-{
-		return $wnd.location.hash;
+    return $wnd.location.hash;
   }-*/;
 
   private static native String getHost() /*-{
-		return $wnd.location.host;
+    return $wnd.location.host;
   }-*/;
 
   private static native String getHostName() /*-{
-		return $wnd.location.hostname;
+    return $wnd.location.hostname;
   }-*/;
 
   private static native String getHref() /*-{
-		return $wnd.location.href;
+    return $wnd.location.href;
   }-*/;
 
   public static Location getLocation() {
@@ -72,19 +72,23 @@ public class WindowUtils {
   }
 
   private static native String getPath() /*-{
-		return $wnd.location.pathname;
+    return $wnd.location.pathname;
   }-*/;
 
   private static native String getPort() /*-{
-		return $wnd.location.port;
+    return $wnd.location.port;
   }-*/;
 
   private static native String getProtocol() /*-{
-		return $wnd.location.protocol;
+    return $wnd.location.protocol;
   }-*/;
 
   private static native String getQueryString() /*-{
-		return $wnd.location.search;
+    return $wnd.location.search;
   }-*/;
+
+  public static String getParameter(String param) {
+    return getLocation().getParameter(param);
+  }
 
 }

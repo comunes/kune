@@ -36,6 +36,7 @@ public class WaveClientUtils {
       public boolean beforeAction() {
         // This fix lot of problems when you are editing and move to other
         // location (without stop editing)
+        Log.info("Before change history, clear wave");
         clear(wave, waveHolder, parent);
         return true;
       }

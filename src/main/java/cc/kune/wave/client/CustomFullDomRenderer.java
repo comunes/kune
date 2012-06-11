@@ -38,6 +38,7 @@ import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipViewBuilder;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.ContinuationIndicatorViewBuilder;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.InlineThreadViewBuilder;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.ParticipantAvatarViewBuilder;
+import org.waveprotocol.wave.client.wavepanel.view.dom.full.ParticipantNameViewBuilder;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.ParticipantsViewBuilder;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.ReplyBoxViewBuilder;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.RootThreadViewBuilder;
@@ -52,6 +53,9 @@ import org.waveprotocol.wave.model.util.IdentityMap.ProcV;
 import org.waveprotocol.wave.model.util.IdentityMap.Reduce;
 import org.waveprotocol.wave.model.util.StringMap;
 import org.waveprotocol.wave.model.wave.ParticipantId;
+
+import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.core.client.state.SiteParameters;
 
 
 /**
@@ -151,11 +155,17 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     String id = viewIdMapper.participantOf(conversation, participant);
     // Use ParticipantAvatarViewBuilder for avatars.
 
-    // final ParticipantNameViewBuilder participantUi = ParticipantNameViewBuilder.create(id);
-    ParticipantAvatarViewBuilder participantUi = ParticipantAvatarViewBuilder.create(id);
-    participantUi.setAvatar(profile.getImageUrl());
-    participantUi.setName(profile.getFullName());
-    return participantUi;
+    if (WindowUtils.getParameter(SiteParameters.WAVE_AVATARS_DISABLED) != null) {
+      ParticipantNameViewBuilder participantUi = ParticipantNameViewBuilder.create(id);
+      participantUi.setAvatar(profile.getImageUrl());
+      participantUi.setName(profile.getFullName());
+      return participantUi;
+    } else {
+      ParticipantAvatarViewBuilder participantUi = ParticipantAvatarViewBuilder.create(id);
+      participantUi.setAvatar(profile.getImageUrl());
+      participantUi.setName(profile.getFullName());
+      return participantUi;
+    }
   }
 
   @Override
