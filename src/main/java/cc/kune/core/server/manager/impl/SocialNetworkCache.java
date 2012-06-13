@@ -31,7 +31,9 @@ import org.apache.commons.logging.LogFactory;
 import cc.kune.common.shared.utils.Pair;
 import cc.kune.core.server.LogThis;
 import cc.kune.core.server.persist.CachedCollection;
+import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
+import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.SocialNetworkData;
 import cc.kune.domain.User;
 
@@ -59,17 +61,31 @@ public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, Soci
 
   /**
    * Adds a group which SN is modified, so we should not use the cache for that.
-   * 
+   *
    * @param group
    *          the group
    */
   public void expire(final Group group) {
+    SocialNetwork sn = group.getSocialNetwork();
+    AccessLists acl = sn.getAccessLists();
+    for (Group admins: acl.getAdmins().getList()) {
+      expiredGroups.add(admins);
+    }
+    for (Group editors: acl.getEditors().getList()) {
+      expiredGroups.add(editors);
+    }
+    for (Group viewers: acl.getViewers().getList()) {
+      expiredGroups.add(viewers);
+    }
+    for (Group pending: sn.getPendingCollaborators().getList()) {
+      expiredGroups.add(pending);
+    }
     expiredGroups.add(group);
   }
 
   /**
    * Gets the SN of some user/group from the cache if available
-   * 
+   *
    * @param user
    *          the user
    * @param group
