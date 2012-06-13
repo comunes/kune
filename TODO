@@ -4,7 +4,7 @@ TODO-list for kune -*- mode: org; -*-
 #+SEQ_TODO: TODO danigb samer vjrj FEEDBACK VERIFY | FIXED CANCELED WONTFIX
 
 * Intro
-  In this file we normally write things TODO but also some notes, brainstorming, ideas, debug outputs, etc. Is fast a complement of our issues system: http://kune.ourproject.org/issues/
+  In this file we normally write things TODO but also some notes, brainstorming, ideas, debug outputs, etc. Is fast a complement of our issues system: http://redmine.ourproject.org/projects/kune/issues
    We use org-mode in emacs to easy manage this file
 
 ** Symbols
