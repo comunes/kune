@@ -19,6 +19,7 @@
  \*/
 package cc.kune.gspace.client.tool.selector;
 
+import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
@@ -52,18 +53,20 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
   private final String tooltip;
   private ToolSelectorItemView view;
   private final AccessRolDTO visibleFoRol;
+  private final HistoryWrapper history;
 
   public ToolSelectorItemPresenter(final String shortName, final String longName, final String tooltip,
-      final AccessRolDTO visibleForRol, final ToolSelector toolSelector) {
+      final AccessRolDTO visibleForRol, final ToolSelector toolSelector, HistoryWrapper history) {
     this.shortName = shortName;
     this.longName = longName;
     this.tooltip = tooltip;
     this.visibleFoRol = visibleForRol;
     this.toolSelector = toolSelector;
+    this.history = history;
   }
 
   @Override
-  public String getShortName() {
+  public String getToolShortName() {
     return shortName;
   }
 
@@ -83,7 +86,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     view.getFocus().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        History.newItem(token.toString());
+        history.newItem(token);
       }
     });
     view.getLabel().setText(longName);
@@ -92,7 +95,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   @Override
   public void setGroupShortName(final String groupShortName) {
-    token = new StateToken(groupShortName, getShortName(), null, null);
+    token = new StateToken(groupShortName, getToolShortName(), null, null);
   }
 
   @Override

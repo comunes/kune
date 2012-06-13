@@ -30,6 +30,11 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 
+/**
+ * Some methods of the StateManager should we rewritten (because its origin is
+ * previous to Apache Wave and now is very confusing), but this take control of
+ * the #history changes, get the content from the server (or from cache), etc
+ */
 public interface StateManager {
 
   /**
@@ -41,7 +46,7 @@ public interface StateManager {
 
   /**
    * This permits to add custom #framents to urls and its associated actions
-   * 
+   *
    * @param token
    *          the url #fragment
    * @param historyTokenCallback
@@ -91,7 +96,7 @@ public interface StateManager {
 
   /**
    * Restore previous token
-   * 
+   *
    * @param fireChange
    *          if only change the browser #token or also fire the event
    */

@@ -92,7 +92,6 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
@@ -174,6 +173,8 @@ public class WebClient extends Composite implements WaveClientView {
 
   private final InboxCountPresenter inboxCount;
 
+  private final TokenMatcher tokenMatcher;
+
 
   /**
    * This is the entry point method.
@@ -183,6 +184,7 @@ public class WebClient extends Composite implements WaveClientView {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
+    this.tokenMatcher = tokenMatcher;
     this.i18n = i18n;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
@@ -352,7 +354,7 @@ public class WebClient extends Composite implements WaveClientView {
     });
     String encodedToken = History.getToken();
     // Kune patch
-    if (encodedToken != null && !encodedToken.isEmpty() && !encodedToken.equals(SiteTokens.WAVE_INBOX)) {
+    if (encodedToken != null && !encodedToken.isEmpty() && !tokenMatcher.isInboxToken(encodedToken)) {
       WaveRef fromWaveRef;
       try {
         fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);

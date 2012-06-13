@@ -63,7 +63,6 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
-import cc.kune.gspace.client.viewers.TutorialViewer;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -72,6 +71,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+
+/**
+ * The Class StateManagerDefault
+ */
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
   public interface OnFinishGetContent {
     void finish();
@@ -91,25 +94,22 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   private final Provider<SignIn> signIn;
   private final SiteTokenListeners siteTokens;
   private final TokenMatcher tokenMatcher;
-  private final Provider<TutorialViewer> tutorialViewer;
 
   @Inject
   public StateManagerDefault(final ContentCache contentProvider, final Session session,
       final HistoryWrapper history, final TokenMatcher tokenMatcher, final EventBus eventBus,
-      final SiteTokenListeners siteTokens, final Provider<SignIn> signIn,
-      final Provider<TutorialViewer> tutorialViewer) {
+      final SiteTokenListeners siteTokens, final Provider<SignIn> signIn) {
     this.tokenMatcher = tokenMatcher;
     this.eventBus = eventBus;
     this.contentCache = contentProvider;
     this.session = session;
     this.history = history;
     this.signIn = signIn;
-    this.tutorialViewer = tutorialViewer;
     this.previousGroupToken = null;
     this.previousHash = null;
     this.resumedHistoryToken = null;
-    tokenMatcher.init(GwtWaverefEncoder.INSTANCE);
     this.siteTokens = siteTokens;
+    tokenMatcher.init(GwtWaverefEncoder.INSTANCE);
     beforeStateChangeCollection = new BeforeActionCollection();
     session.onAppStart(true, new AppStartHandler() {
       @Override
@@ -334,13 +334,20 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   @Override
   public void onValueChange(final ValueChangeEvent<String> event) {
     Log.info("History event value changed: " + event.getValue());
-    processHistoryToken(event.getValue());
+    // First of all check that we are generating this #!fragment urls, later
+    history.checkHashbang();
+    processHistoryToken(HistoryUtils.undoHashbang(event.getValue()));
   }
 
   private void processCurrentHistoryToken() {
     processHistoryToken(history.getToken());
   }
 
+  /**
+   * Process #history token changes (this method should be rewritten)
+   *
+   * @param newToken the new token
+   */
   void processHistoryToken(final String newToken) {
     // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
     if (beforeStateChangeCollection.checkBeforeAction()) {

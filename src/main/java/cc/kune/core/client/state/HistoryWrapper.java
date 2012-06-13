@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,12 +19,49 @@
  */
 package cc.kune.core.client.state;
 
+import cc.kune.core.shared.domain.utils.StateToken;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface HistoryWrapper controls the url #hash of the browser.
+ *
+ * More info: http://en.wikipedia.org/wiki/Fragment_identifier
+ *
+ */
 public interface HistoryWrapper {
 
-    String getToken();
+  /**
+   * Gets the current #token fragment of the current browser url.
+   *
+   * @return the token
+   */
+  String getToken();
 
-    void newItem(final String historyToken);
+  /**
+   * Goes to this new #token fragment in the browser.
+   *
+   * @param historyToken the history token
+   */
+  void newItem(final String historyToken);
 
-    void newItem(String historyToken, boolean issueEvent);
+  /**
+   * Goes to this new #fragment and fire and event.
+   *
+   * @param historyToken the new history token fragment
+   * @param issueEvent should it fire an event?
+   */
+  void newItem(String historyToken, boolean issueEvent);
+
+  /**
+   * Check if the current #fragment token has #!hashbang and if not add it.
+   */
+  void checkHashbang();
+
+  /**
+   * Goes to this new #group.tool.id.id token
+   *
+   * @param historyToken the new history token fragment
+   */
+  void newItem(StateToken token);
 
 }

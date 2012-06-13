@@ -23,6 +23,7 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaverefEncoder;
 
 import cc.kune.common.shared.utils.Pair;
+import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 
@@ -38,7 +39,8 @@ public class TokenMatcher {
     this.reservedWordsRegistry = reservedWordsRegistry;
   }
 
-  public Pair<String, String> getRedirect(final String token) {
+  public Pair<String, String> getRedirect(final String htoken) {
+    final String token = HistoryUtils.undoHashbang(htoken);
     final String[] splited = splitRedirect(token);
     if (hasRedirect(token, splited)) {
       return Pair.create(splited[0], splited[1].replaceAll("\\)$", ""));
@@ -46,7 +48,8 @@ public class TokenMatcher {
     return null;
   }
 
-  public boolean hasRedirect(final String token) {
+  public boolean hasRedirect(final String htoken) {
+    final String token = HistoryUtils.undoHashbang(htoken);
     final String[] splited = splitRedirect(token);
     if (hasRedirect(token, splited)) {
       return true;
@@ -54,7 +57,8 @@ public class TokenMatcher {
     return false;
   }
 
-  private boolean hasRedirect(final String token, final String[] splited) {
+  private boolean hasRedirect(final String htoken, final String[] splited) {
+    final String token = HistoryUtils.undoHashbang(htoken);
     return token.endsWith(")") && splited.length == 2;
   }
 
@@ -63,16 +67,24 @@ public class TokenMatcher {
     this.encoder = encoder;
   }
 
-  public boolean isGroupToken(final String token) {
+  public boolean isGroupToken(final String htoken) {
+    final String token = HistoryUtils.undoHashbang(htoken);
     return token != null && !isWaveToken(token) && !hasRedirect(token)
         && !reservedWordsRegistry.contains(token) && !new StateToken(token).hasNothing();
   }
 
-  public boolean isHomeToken(final String currentToken) {
-    return SiteTokens.HOME.equals(currentToken);
+  public boolean isInboxToken(final String htoken) {
+    final String token = HistoryUtils.undoHashbang(htoken);
+    return SiteTokens.WAVE_INBOX.equals(token);
   }
 
-  public boolean isWaveToken(final String token) {
+  public boolean isHomeToken(final String htoken) {
+    final String token = HistoryUtils.undoHashbang(htoken);
+    return SiteTokens.HOME.equals(token);
+  }
+
+  public boolean isWaveToken(final String htoken) {
+    final String token = HistoryUtils.undoHashbang(htoken);
     assert encoder != null;
     try {
       return token == null ? false : encoder.decodeWaveRefFromPath(token) != null;
@@ -81,7 +93,8 @@ public class TokenMatcher {
     }
   }
 
-  private String[] splitRedirect(final String token) {
+  private String[] splitRedirect(final String htoken) {
+    final String token = HistoryUtils.undoHashbang(htoken);
     return token.split("\\(", 2);
   }
 

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,24 +20,69 @@
 package cc.kune.core.client.state.impl;
 
 import cc.kune.core.client.state.HistoryWrapper;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.user.client.History;
 
+/**
+ * The Class HistoryWrapperDefault.
+ */
 public class HistoryWrapperDefault implements HistoryWrapper {
 
-    @Override
-    public String getToken() {
-        return History.getToken();
-    }
+  /*
+   * (non-Javadoc)
+   *
+   * @see cc.kune.core.client.state.HistoryWrapper#getToken()
+   */
+  @Override
+  public String getToken() {
+    return HistoryUtils.undoHashbang(History.getToken());
+  }
 
-    @Override
-    public void newItem(final String historyToken) {
-        History.newItem(historyToken);
-    }
+  /*
+   * (non-Javadoc)
+   *
+   * @see cc.kune.core.client.state.HistoryWrapper#newItem(java.lang.String)
+   */
+  @Override
+  public void newItem(final String historyToken) {
+    History.newItem(HistoryUtils.hashbang(historyToken));
+  }
 
-    @Override
-    public void newItem(final String historyToken, final boolean issueEvent) {
-        History.newItem(historyToken, issueEvent);
+  /*
+   * (non-Javadoc)
+   *
+   * @see cc.kune.core.client.state.HistoryWrapper#newItem(java.lang.String,
+   * boolean)
+   */
+  @Override
+  public void newItem(final String historyToken, final boolean issueEvent) {
+    History.newItem(HistoryUtils.hashbang(historyToken), issueEvent);
+  }
+
+  /*
+   * (non-Javadoc)
+   *
+   * @see cc.kune.core.client.state.HistoryWrapper#checkHashbang()
+   */
+  @Override
+  public void checkHashbang() {
+    String currentToken = History.getToken();
+    if (!currentToken.startsWith("!")) {
+      History.newItem(HistoryUtils.hashbang(currentToken), false);
     }
+  }
+
+  /*
+   * (non-Javadoc)
+   *
+   * @see
+   * cc.kune.core.client.state.HistoryWrapper#newItem(cc.kune.core.shared.domain
+   * .utils.StateToken)
+   */
+  @Override
+  public void newItem(StateToken token) {
+    newItem(token.toString());
+  }
 
 }

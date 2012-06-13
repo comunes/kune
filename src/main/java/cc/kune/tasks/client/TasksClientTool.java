@@ -19,8 +19,8 @@
  */
 package cc.kune.tasks.client;
 
-import static cc.kune.tasks.shared.TasksToolConstants.TOOL_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.ROOT_NAME;
+import static cc.kune.tasks.shared.TasksToolConstants.TOOL_NAME;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_FOLDER;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_ROOT;
 import static cc.kune.tasks.shared.TasksToolConstants.TYPE_TASK;
@@ -28,6 +28,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -43,12 +44,12 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final IconicResources icons) {
+      final IconicResources icons, HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
-        icons.tasks(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources);
+        icons.tasks(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
     this.icons = icons;
 
     // registerAclEditableTypes();

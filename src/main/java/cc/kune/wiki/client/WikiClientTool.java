@@ -28,6 +28,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -42,14 +43,14 @@ public class WikiClientTool extends FoldableAbstractClientTool {
   @Inject
   public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final IconicResources icons) {
+      final IconicResources icons, HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t("wiki"),
         i18n.t(
             "Wiki-pages are Documents that can be edited by any visitor (in [%s]), instead of only by the group. This accelerates updating and construction",
             i18n.getSiteCommonName()), icons.wikis(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry,
-        i18n, navResources);
+        i18n, navResources, history);
     this.icons = icons;
 
     registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
