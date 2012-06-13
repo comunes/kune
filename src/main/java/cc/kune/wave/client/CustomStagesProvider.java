@@ -146,7 +146,7 @@ public class CustomStagesProvider extends Stages {
 
   @Override
   protected AsyncHolder<StageTwo> createStageTwoLoader(final StageOne one) {
-    return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave,
+    return haltIfClosed(new CustomStageTwoProvider(this.one = one, waveRef, channel, isNewWave,
       idGenerator, profiles, waveUnsavedIndicator));};
 
   @Override

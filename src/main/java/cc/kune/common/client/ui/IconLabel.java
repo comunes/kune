@@ -23,6 +23,7 @@ import java.util.Iterator;
 
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.i18n.I18n;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -77,6 +78,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     label.addStyleName("k-space-nowrap");
     label.setStylePrimaryName("k-iconlabel");
     setTextStyle(text);
+    setStyleFromDirection(Direction.LTR);
   }
 
   @Override
@@ -128,7 +130,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   }
 
   private void setIconRTL(final Widget widget, final Direction direction) {
-    widget.addStyleName(direction.equals(Direction.LTR) ? "k-fl" : "k-fr");
+    widget.addStyleName(getFloatFromDirection(direction));
+  }
+
+  private String getFloatFromDirection(final Direction direction) {
+    return direction.equals(Direction.LTR) ? "k-fl" : "k-fr";
   }
 
   public void setId(final String id) {
@@ -156,6 +162,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.addStyleName("k-tcell");
     // setting floats again, because with setResource we lost them
     setIconRTL(iconLeft, getTextDirection());
+    setIconRTL(iconRight, getTextDirection());
     iconLeft.setVisible(true);
   }
 
@@ -183,6 +190,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconRight.addStyleName("k-iconlabel-right");
     iconRight.addStyleName("k-tcell");
     // setting floats again, because with setResource we lost them
+    setIconRTL(iconLeft, getTextDirection());
     setIconRTL(iconRight, getTextDirection());
     iconRight.setVisible(true);
   }
@@ -204,12 +212,18 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   public void setText(final String text) {
     label.setText(text, Direction.LTR);
     setTextStyle(text);
+    setStyleFromDirection(Direction.LTR);
+  }
+
+  private void setStyleFromDirection(Direction direction) {
+    setStyleName(getFloatFromDirection(direction));
   }
 
   @Override
   public void setText(final String text, final Direction dir) {
     label.setText(text, dir);
     setTextStyle(text);
+    setStyleFromDirection(Direction.LTR);
   }
 
   private void setTextStyle(final String text) {
