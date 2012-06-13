@@ -112,7 +112,6 @@ Also from the Marketplace:
 * The GWT Designer GUI Builder plugin (a great helper to work with GWT UiBinder)
 * The PMD Eclipse plugin
 * The FindBugs plugin
-* The Mylyn Trac Connector (to integrate our trac issues system: http://kune.ourproject.org/issues/)
 
 Also maybe it's interesting some other plugins like:
 
@@ -323,9 +322,10 @@ http://pmd.sourceforge.net/eclipse/
 More than the eclipse code preferences we try to:
 * Use spaces instead of tabs (for instance in xml, we try to use 2 spaces of identation)
 
-==Use of mylyn in eclipse==
+==Use of Mylyn in eclipse==
 
-We recommend to use mylyn to track the Kune issues. Use the trac mylyn connector for http://kune.ourproject.org/issues/.
+We recommend to use Mylyn to track the Kune issues. Use the redmine mylyn connector from the Redmine-Mylyn update site : http://redmin-mylyncon.sourceforge.net/update-site/N/
+for our redmine http://redmine.ourproject.org/.
 
 ==Code samples==
 
