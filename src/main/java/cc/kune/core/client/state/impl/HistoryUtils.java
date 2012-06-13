@@ -46,7 +46,7 @@ public class HistoryUtils {
    * @return the #!fragment history token without !
    */
   public static String undoHashbang(String historyToken) {
-    return historyToken.startsWith(PREFIX) ? historyToken.substring(1) : historyToken;
+    return historyToken != null && historyToken.startsWith(PREFIX) ? historyToken.substring(1) : historyToken;
   }
 
 }
