@@ -253,7 +253,7 @@ public class WebClient extends Composite implements WaveClientView {
 }
 
   private void createWebSocket() {
-    websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL()));
+    websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl());
     websocket.connect();
   }
 
@@ -291,10 +291,7 @@ public class WebClient extends Composite implements WaveClientView {
    * Returns <code>ws(s)://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
-  private native String getWebSocketBaseUrl(String moduleBase) /*-{
-    return ((window.location.protocol == "https:") ? "wss" : "ws")
-        + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
-  }-*/;
+  private native String getWebSocketBaseUrl() /*-{return ((window.location.protocol == "https:") ? "wss" : "ws") + "://" +  $wnd.__websocket_address + "/";}-*/;
 
   @Override
   public void login() {

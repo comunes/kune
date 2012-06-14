@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 
 import org.jivesoftware.smack.util.Base64;
 import org.json.JSONObject;
+import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.SessionManager;
 import org.waveprotocol.box.server.rpc.WaveClientServlet;
@@ -67,6 +68,7 @@ import cc.kune.wave.server.kspecific.ParticipantUtils;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 public class UserRPC implements RPC, UserService {
 
@@ -82,13 +84,16 @@ public class UserRPC implements RPC, UserService {
   private final WaveClientServlet waveClientServlet;
   private final SessionManager waveSessionManager;
 
+  private final String websocketAddress;
+
   @Inject
   public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
       final UserInfoService userInfoService, final Mapper mapper,
       final SessionManager waveSessionManager, final WaveClientServlet waveClientServlet,
       final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
       final UserSessionManager userSessionManager, final UserFinder userFinder,
-      final ParticipantUtils partUtils) {
+      final ParticipantUtils partUtils,
+      @Named(CoreSettings.HTTP_WEBSOCKET_PUBLIC_ADDRESS) String websocketAddress) {
     this.userManager = userManager;
     this.userInfoService = userInfoService;
     this.mapper = mapper;
@@ -99,6 +104,7 @@ public class UserRPC implements RPC, UserService {
     this.userSessionManager = userSessionManager;
     this.userFinder = userFinder;
     this.partUtils = partUtils;
+    this.websocketAddress = websocketAddress;
   }
 
   @Authenticated
@@ -187,7 +193,7 @@ public class UserRPC implements RPC, UserService {
     final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
     final JSONObject sessionJson = waveClientServlet.getSessionJson(sessionFromToken);
     final JSONObject clientFlags = new JSONObject(); // waveClientServlet.getClientFlags();
-    return new WaveClientParams(sessionJson.toString(), clientFlags.toString());
+    return new WaveClientParams(sessionJson.toString(), clientFlags.toString(), websocketAddress);
   }
 
   private UserInfoDTO loadUserInfo(final User user) throws DefaultException {

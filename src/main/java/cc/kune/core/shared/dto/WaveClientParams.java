@@ -24,13 +24,15 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class WaveClientParams implements IsSerializable {
     private String clientFlags;
     private String sessionJSON;
+    private String websocketAddress;
 
     public WaveClientParams() {
     }
 
-    public WaveClientParams(final String sessionJSON, final String clientFlags) {
+    public WaveClientParams(final String sessionJSON, final String clientFlags, String websocketAddress) {
         this.sessionJSON = sessionJSON;
         this.clientFlags = clientFlags;
+        this.websocketAddress = websocketAddress;
     }
 
     public String getClientFlags() {
@@ -47,6 +49,14 @@ public class WaveClientParams implements IsSerializable {
 
     public void setSessionJSON(final String sessionJSON) {
         this.sessionJSON = sessionJSON;
+    }
+
+    public String getWebsocketAddress() {
+      return websocketAddress;
+    }
+
+    public void setWebsocketAddress(String websocketAddress) {
+      this.websocketAddress = websocketAddress;
     }
 
 }
