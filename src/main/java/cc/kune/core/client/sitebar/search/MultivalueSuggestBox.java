@@ -77,7 +77,7 @@ import com.google.gwt.user.client.ui.TextBoxBase;
 /**
  * A SuggestBox that uses REST and allows for multiple values, autocomplete and
  * browsing
- * 
+ *
  * @author Bess Siegal <bsiegal@novell.com>
  */
 public class MultivalueSuggestBox extends Composite implements SelectionHandler<Suggestion>, Focusable,
@@ -155,7 +155,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Constructor. Must pass in the total size.
-     * 
+     *
      * @param totalSize
      *          the total size of the template
      */
@@ -165,7 +165,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Add an option
-     * 
+     *
      * @param option
      *          - the Option to add
      */
@@ -209,7 +209,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Constructor for navigation options
-     * 
+     *
      * @param nav
      *          - next or previous value
      * @param currentTextValue
@@ -227,7 +227,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Constructor for regular options
-     * 
+     *
      * @param displ
      *          - the name of the option
      * @param val
@@ -261,7 +261,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     /**
      * Get the name of the option. (when not multivalued, this will be the same
      * as getReplacementString)
-     * 
+     *
      * @return name
      */
     public String getName() {
@@ -275,7 +275,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Get the value of the option
-     * 
+     *
      * @return value
      */
     public String getValue() {
@@ -463,7 +463,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Returns a String without the last delimiter
-   * 
+   *
    * @param str
    *          - String to trim
    * @param delim
@@ -507,9 +507,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Constructor.
-   * 
+   *
    * @param i18n
-   * 
+   *
    * @param the
    *          URL for the REST endpoint. This URL should accept the parameters q
    *          (for query), indexFrom and indexTo
@@ -728,7 +728,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   /**
    * Get the value(s) as a String. If allowing multivalues, separated by the
    * VALUE_DELIM
-   * 
+   *
    * @return value(s) as a String
    */
   public String getValue() {
@@ -773,7 +773,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Get the value map
-   * 
+   *
    * @return value map
    */
   public Map<String, String> getValueMap() {
@@ -834,7 +834,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   /**
    * Retrieve Options (name-value pairs) that are suggested from the REST
    * endpoint
-   * 
+   *
    * @param query
    *          - the String search term
    * @param from
@@ -887,8 +887,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
             final String shortName = jsonOpt.get(OptionResultSet.VALUE).isString().stringValue();
             final JSONValue groupTypeJsonValue = jsonOpt.get("groupType");
             final String prefix = groupTypeJsonValue.isString() == null ? ""
-                : GroupType.PERSONAL.name().equals(groupTypeJsonValue.isString().stringValue()) ? I18n.t("User: ")
-                    : I18n.t("Group: ");
+                : GroupType.PERSONAL.name().equals(groupTypeJsonValue.isString().stringValue()) ? I18n.t("User")
+                    + ": "
+                    : I18n.t("Group") + ": ";
             option.setName(prefix
                 + (!longName.equals(shortName) ? longName + " (" + shortName + ")" : shortName));
             option.setValue(jsonOpt.get(OptionResultSet.VALUE).isString().stringValue());
@@ -928,7 +929,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Convenience method to set the status and tooltip of the FormFeedback
-   * 
+   *
    * @param status
    *          - a FormFeedback status
    * @param tooltip
