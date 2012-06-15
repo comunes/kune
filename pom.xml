@@ -23,7 +23,7 @@
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
     <wiab.version>0.3.18</wiab.version>
-    <jetty.version>8.1.1.v20120215</jetty.version>
+    <jetty.version>8.1.4.v20120524</jetty.version>
     <skipTests>true</skipTests>
   </properties>
   <repositories>
