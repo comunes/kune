@@ -97,7 +97,7 @@ public class ToolSelectorPresenter extends
 
   @Override
   public void addTool(final ToolSelectorItem item) {
-    final String name = item.getShortName();
+    final String name = item.getToolShortName();
     if (name == null) {
       throw new UIException("You cannot add a tool without a name");
     }

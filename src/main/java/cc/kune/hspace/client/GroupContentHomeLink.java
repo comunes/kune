@@ -19,6 +19,8 @@
  */
 package cc.kune.hspace.client;
 
+import cc.kune.core.client.state.impl.HistoryUtils;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -54,7 +56,7 @@ public class GroupContentHomeLink extends Composite {
       }
     });
     link.setText(text);
-    link.setTargetHistoryToken(historyToken);
+    link.setTargetHistoryToken(HistoryUtils.PREFIX + historyToken);
   }
 
 }

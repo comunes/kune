@@ -22,20 +22,27 @@ import org.waveprotocol.wave.client.scheduler.SchedulerInstance;
 import org.waveprotocol.wave.client.scheduler.TimerService;
 import org.waveprotocol.wave.concurrencycontrol.common.UnsavedDataListener;
 
-import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.i18n.I18n;
+import cc.kune.core.client.sn.actions.SessionAction;
+import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class CustomSavedStateIndicator implements UnsavedDataListener {
+public class CustomSavedStateIndicator implements UnsavedDataListener, Provider<GuiActionDescrip> {
 
   private enum SavedState {
     SAVED, UNSAVED;
   }
 
   private static final int UPDATE_DELAY_MS = 300;
+  private static final int UPDATE_UNSAVED_DELAY_MS = 10;
 
   private final Scheduler.Task updateTask = new Scheduler.Task() {
     @Override
@@ -45,20 +52,39 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
   };
 
 
+  public static class WaveSaveAction extends SessionAction {
+
+    @Inject
+    public WaveSaveAction(final Session session, final I18nTranslationService i18n) {
+      super(session, true);
+    }
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      // Do nothing
+    }
+
+  }
+
+
+
   private final TimerService scheduler;
 
   private SavedState visibleSavedState = SavedState.SAVED;
   private SavedState currentSavedState = null;
+  private IconLabelDescriptor status;
 
   /**
    * Simple saved state indicator.
-   * 
+   *
    * @author danilatos@google.com (Daniel Danilatos)
    * @author yurize@apache.org (Yuri Zelikov)
    */
   @Inject
-  public CustomSavedStateIndicator() {
+  public CustomSavedStateIndicator(WaveSaveAction action){
     this.scheduler = SchedulerInstance.getLowPriorityTimer();
+    status = new IconLabelDescriptor(action);
+    status.withStyles("k-unsave-status, k-fr");
   }
 
   public void saved() {
@@ -76,6 +102,7 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
         scheduler.scheduleDelayed(updateTask, UPDATE_DELAY_MS);
         break;
       case UNSAVED:
+        scheduler.scheduleDelayed(updateTask, UPDATE_UNSAVED_DELAY_MS);
         updateDisplay();
         break;
       default:
@@ -94,10 +121,10 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     visibleSavedState = currentSavedState;
     switch (visibleSavedState) {
     case SAVED:
-      NotifyUser.hideProgress();
+      status.withText("");
       break;
     case UNSAVED:
-      NotifyUser.showProgress(I18n.t("Saving"));
+      status.withText(I18n.t("Saving"));
       break;
     default:
       throw new AssertionError("unknown " + currentSavedState);
@@ -122,5 +149,10 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     } else {
       unsaved();
     }
+  }
+
+  @Override
+  public GuiActionDescrip get() {
+    return status;
   }
 }

@@ -5,8 +5,6 @@ pmd-eclipse.log
 .pmd
 www-test
 screenlog.0
-client
-public
 target
 target-local
 Main-compile
@@ -52,3 +50,4 @@ test-output
 _sessions
 chromedriver.log
 kune-screencast*
+kune-cc-data

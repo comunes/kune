@@ -92,7 +92,6 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
@@ -174,6 +173,8 @@ public class WebClient extends Composite implements WaveClientView {
 
   private final InboxCountPresenter inboxCount;
 
+  private final TokenMatcher tokenMatcher;
+
 
   /**
    * This is the entry point method.
@@ -183,6 +184,7 @@ public class WebClient extends Composite implements WaveClientView {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
+    this.tokenMatcher = tokenMatcher;
     this.i18n = i18n;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
@@ -251,7 +253,7 @@ public class WebClient extends Composite implements WaveClientView {
 }
 
   private void createWebSocket() {
-    websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL()));
+    websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl());
     websocket.connect();
   }
 
@@ -289,10 +291,7 @@ public class WebClient extends Composite implements WaveClientView {
    * Returns <code>ws(s)://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
-  private native String getWebSocketBaseUrl(String moduleBase) /*-{
-    return ((window.location.protocol == "https:") ? "wss" : "ws")
-        + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
-  }-*/;
+  private native String getWebSocketBaseUrl() /*-{return ((window.location.protocol == "https:") ? "wss" : "ws") + "://" +  $wnd.__websocket_address + "/";}-*/;
 
   @Override
   public void login() {
@@ -350,13 +349,13 @@ public class WebClient extends Composite implements WaveClientView {
         loading.removeFromParent();
       }
     });
-    final String encodedToken = History.getToken();
+    String encodedToken = History.getToken();
     // Kune patch
-    if (encodedToken != null && !encodedToken.isEmpty() && !encodedToken.equals(SiteTokens.WAVE_INBOX)) {
+    if (encodedToken != null && !encodedToken.isEmpty() && !tokenMatcher.isInboxToken(encodedToken)) {
       WaveRef fromWaveRef;
       try {
         fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);
-      } catch (final InvalidWaveRefException e) {
+      } catch (InvalidWaveRefException e) {
         LOG.info("History token contains invalid path: " + encodedToken);
         return;
       }
@@ -507,9 +506,9 @@ public class WebClient extends Composite implements WaveClientView {
           //  error.addDetail(stack, null);
             // REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
             String message = stack.asString().replace("<br>", "\n");
-            REMOTE_LOG.severe(message);
             NotifyUser.logError(message);
             NotifyUser.showProgress("Error");
+            REMOTE_LOG.severe(message);
             new Timer() {
               @Override
               public void run() {

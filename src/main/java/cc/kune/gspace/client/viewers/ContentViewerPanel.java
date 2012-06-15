@@ -34,17 +34,20 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceCenter;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView;
-import cc.kune.wave.client.CustomStagesProvider;
 import cc.kune.wave.client.CustomSavedStateIndicator;
+import cc.kune.wave.client.CustomStagesProvider;
 import cc.kune.wave.client.kspecific.WaveClientClearEvent;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
@@ -62,7 +65,6 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -83,7 +85,6 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private final ContentDropController dropController;
   private FramedPanel dummyWaveFrame;
   private final GSpaceArmor gsArmor;
-  private final I18nTranslationService i18n;
   private IdGenerator idGenerator;
   private Element loading;
   @UiField
@@ -107,6 +108,8 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private final Widget widget;
 
+  private boolean onlyWebClient;
+
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
@@ -115,7 +118,6 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     this.gsArmor = wsArmor;
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
-    this.i18n = i18n;
     this.stateManager = stateManager;
     this.dropController = dropController;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
@@ -128,6 +130,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
             waveClear();
           }
         });
+    onlyWebClient = WindowUtils.getParameter(SiteParameters.ONLY_WEBCLIENT) != null;
   }
 
   @Override
@@ -177,6 +180,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private void initWaveClientIfNeeded() {
     if (channel == null) {
+      Log.info("Channel is null so, will create wave in ContentViewerPanel");
       final WaveClientView webClient = waveClientProv.get();
       loading = webClient.getLoading();
       waveHolder = webClient.getWaveHolder();
@@ -216,33 +220,36 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   }
 
   private void setEditableWaveContent(final String waveRefS, final boolean isNewWave) {
-    final WaveRef waveRef = getWaveRef(waveRefS);
-
-    initWaveClientIfNeeded();
-    waveClientProv.get().clear();
-    waveClear();
-
-    waveHolderParent.add(waveHolder);
-
-    if (waveClientProv.get() instanceof WebClientMock) {
-      // do nothing;
+    if (onlyWebClient) {
+      return;
     } else {
-      // real wave client
-      // Release the display:none.
-      // UIObject.setVisible(waveFrame.getElement(), true);
-      waveHolder.getElement().appendChild(loading);
-      final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-      final CustomStagesProvider wave = new CustomStagesProvider(holder,
-          waveHolder, dummyWaveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
-          org.waveprotocol.box.webclient.client.Session.get().getDomain(),
-          waveUnsavedIndicator);
-      this.wave = wave;
-      wave.load(new Command() {
-        @Override
-        public void execute() {
-          loading.removeFromParent();
-        }
-      });
+      final WaveRef waveRef = getWaveRef(waveRefS);
+
+      initWaveClientIfNeeded();
+      waveClientProv.get().clear();
+      waveClear();
+
+      waveHolderParent.add(waveHolder);
+
+      if (waveClientProv.get() instanceof WebClientMock) {
+        // do nothing;
+      } else {
+        // real wave client
+        // Release the display:none.
+        // UIObject.setVisible(waveFrame.getElement(), true);
+        waveHolder.getElement().appendChild(loading);
+        final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
+        final CustomStagesProvider wave = new CustomStagesProvider(holder, waveHolder, dummyWaveFrame,
+            waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
+            org.waveprotocol.box.webclient.client.Session.get().getDomain(), waveUnsavedIndicator);
+        this.wave = wave;
+        wave.load(new Command() {
+          @Override
+          public void execute() {
+            loading.removeFromParent();
+          }
+        });
+      }
     }
   }
 
@@ -279,7 +286,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   }
 
   private void waveClear() {
+    if (!onlyWebClient) {
     WaveClientUtils.clear(wave, waveHolder, waveHolderParent);
+    }
   }
 
 }

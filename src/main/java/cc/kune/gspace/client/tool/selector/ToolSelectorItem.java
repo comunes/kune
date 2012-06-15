@@ -27,7 +27,7 @@ public interface ToolSelectorItem {
 
   AccessRolDTO getVisibleForRol();
 
-  String getShortName();
+  String getToolShortName();
 
   ToolSelectorItemView getView();
 

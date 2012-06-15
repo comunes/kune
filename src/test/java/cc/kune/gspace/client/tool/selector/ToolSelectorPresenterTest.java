@@ -65,7 +65,7 @@ public class ToolSelectorPresenterTest {
   public void addTwoToolsWithSameNameMustGiveException() {
     setToolNames();
     final ToolSelectorItem toolSelectorItemCopy = Mockito.mock(ToolSelectorItem.class);
-    Mockito.when(toolSelectorItemCopy.getShortName()).thenReturn(TOOL1_NAME);
+    Mockito.when(toolSelectorItemCopy.getToolShortName()).thenReturn(TOOL1_NAME);
     toolSelector.addTool(toolSelectorItem1);
     toolSelector.addTool(toolSelectorItemCopy);
   }
@@ -123,8 +123,8 @@ public class ToolSelectorPresenterTest {
   }
 
   public void setToolNames() {
-    Mockito.when(toolSelectorItem1.getShortName()).thenReturn(TOOL1_NAME);
-    Mockito.when(toolSelectorItem2.getShortName()).thenReturn(TOOL2_NAME);
+    Mockito.when(toolSelectorItem1.getToolShortName()).thenReturn(TOOL1_NAME);
+    Mockito.when(toolSelectorItem2.getToolShortName()).thenReturn(TOOL2_NAME);
   }
 
 }

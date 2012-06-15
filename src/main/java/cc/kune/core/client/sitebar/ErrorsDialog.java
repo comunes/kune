@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client.sitebar;
 
+import java.util.Date;
+
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.client.ui.IconLabel;
@@ -77,7 +79,7 @@ public class ErrorsDialog {
         final NotifyLevel level = event.getLevel();
         final IconLabel iconMessage = new IconLabel();
         iconMessage.setRightIconResource(UserMessageImagesUtil.getIcon(level));
-        iconMessage.setText(event.getMessage(), i18n.getDirection());
+        iconMessage.setText(new Date() + " - " + event.getMessage(), i18n.getDirection());
         iconMessage.setWordWrap(true);
         iconMessage.addTextStyleName("k-errordiag-text-msg");
         iconMessage.addStyleName("k-errordiag-msg");

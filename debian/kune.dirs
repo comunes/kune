@@ -11,4 +11,4 @@
 /var/lib/kune/uploads/
 /var/lib/kune/lucene/kune_prod/indexes/
 /usr/share/dbconfig-common/data/kune/install/
-/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5/
+/usr/share/dbconfig-common/data/kune/upgrade/mysql/

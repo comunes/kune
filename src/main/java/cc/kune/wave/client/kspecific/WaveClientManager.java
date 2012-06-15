@@ -59,6 +59,7 @@ public class WaveClientManager {
               public void onSuccess(final WaveClientParams result) {
                 setSessionJSON(JsonUtils.safeEval(result.getSessionJSON()));
                 setClientFlags(JsonUtils.safeEval(result.getClientFlags()));
+                setWebsocketAddress(result.getWebsocketAddress());
                 Log.info("Wave client session: " + result.getSessionJSON());
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                   @Override
@@ -99,11 +100,15 @@ public class WaveClientManager {
   }
 
   private native void setClientFlags(JavaScriptObject object) /*-{
-                                                              $wnd.__client_flags = object;
-                                                              }-*/;
+    $wnd.__client_flags = object;
+  }-*/;
 
   private native void setSessionJSON(JavaScriptObject object) /*-{
-                                                              $wnd.__session = object;
-                                                              }-*/;
+    $wnd.__session = object;
+  }-*/;
+
+  private native void setWebsocketAddress(String object) /*-{
+    $wnd.__websocket_address = object;
+  }-*/;
 
 }

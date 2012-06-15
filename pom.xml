@@ -22,7 +22,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
-    <wiab.version>0.3.17</wiab.version>
+    <wiab.version>0.3.18</wiab.version>
     <jetty.version>8.1.1.v20120215</jetty.version>
     <skipTests>true</skipTests>
   </properties>
@@ -1129,8 +1129,8 @@
             <version>${gwtmaven.version}</version>
             <configuration>
               <logLevel>INFO</logLevel>
-              <!-- <style>OBF</style> -->
-              <style>PRETTY</style>
+              <style>OBF</style>
+              <!-- <style>PRETTY</style> -->
               <noServer>true</noServer>
               <gwtVersion>${gwt.version}</gwtVersion>
               <runTarget>/ws.html?log_level=DEBUG</runTarget>

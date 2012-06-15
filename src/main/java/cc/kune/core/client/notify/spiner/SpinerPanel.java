@@ -35,12 +35,12 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.PopupViewWithUiHandlers;
 import com.gwtplatform.mvp.client.UiHandlers;
 
-public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implements SpinerView {
+public class SpinerPanel extends PopupViewWithUiHandlers<UiHandlers> implements SpinerView {
 
-  interface SpinerViewImplUiBinder extends UiBinder<Widget, SpinerViewImpl> {
+  interface SpinerPanelUiBinder extends UiBinder<Widget, SpinerPanel> {
   }
 
-  private static SpinerViewImplUiBinder uiBinder = GWT.create(SpinerViewImplUiBinder.class);
+  private static SpinerPanelUiBinder uiBinder = GWT.create(SpinerPanelUiBinder.class);
 
   @UiField
   Image img;
@@ -54,12 +54,11 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
   Widget widget;
 
   @Inject
-  public SpinerViewImpl(final EventBus eventBus) {
+  public SpinerPanel(final EventBus eventBus) {
     super(eventBus);
     widget = uiBinder.createAndBindUi(this);
     popup = new PopupPanel(false, false);
     popup.add(widget);
-    // popup.setPopupPosition(190, 0);
     popup.setStyleName("k-spiner-popup");
     show("");
   }
@@ -93,7 +92,6 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
       label.setText(message);
     }
     setCenterPositionAndShow();
-    // popup.show();
   }
 
 }
