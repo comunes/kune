@@ -1,3 +1,9 @@
+kune (0.2.0+b14) unstable; urgency=low
+
+  * Update of jetty to 8.1.4 (now for real)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 15 Jun 2012 16:51:23 +0200
+
 kune (0.2.0+b13) unstable; urgency=low
 
   * Make kune googleable using hash bangs #! instead of # in hashs
