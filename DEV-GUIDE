@@ -28,22 +28,16 @@ the previous page has also other more general information (texts and references)
 
 ===Get the code: How to checkout the Kune code===
 
-Our code is in the svn of ourproject: 
-http://ourproject.org/scm/?group_id=407
+Our code is in the gitorious:
+https://gitorious.org/kune
 
-====Anonymous Subversion Access====
+====Anonymous GIT Access====
 
-This project's SVN repository can be checked out through anonymous access with the following command(s).
+This project's GIT repository can be checked out through anonymous access with the following command(s).
 
- svn checkout svn://scm.ourproject.org/svnroot/kune/trunk
+ git clone git@gitorious.org:kune/trunk.git
 
-====Developer Subversion Access via SSH====
-
-Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute colaborator with the proper values. Enter your ourproject web password when prompted.
-
- svn checkout svn+ssh://colaborator@scm.ourproject.org/svnroot/kune/trunk
-
-The Eclipse IDE has several plugins for SVN (subversive, and subclipse) and it's hightly recomended to use it, because the get rid of file/package renaming and other refactorization.
+The Eclipse IDE has some plugin for GIT and it's hightly recomended to use it, because the get rid of file/package renaming and other refactorization.
 
 ===Next step: install Eclipse===
 
@@ -384,6 +378,8 @@ Periodically update the Changelog using svn2cl:
 
 then, put good descriptions on your changes in svn commit comments.
 
+FIXME: Change this to something similar for git
+
 ==License==
 
 Attach the following notices to each source of the program at the begining:
@@ -434,7 +430,7 @@ In Java, something like this (you can put your name instead of "Kune team" if yo
 
 We use mainly two lists:
 * [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-devel kune-devel] for all development related topics
-* [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-commits kune-commits] where the svn sends the commit logs and summaries
+* [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-commits kune-commits] where the repository sends the commit logs and summaries
 
 It's recommended to be subscribed to both if you want to participate in the development.
 
