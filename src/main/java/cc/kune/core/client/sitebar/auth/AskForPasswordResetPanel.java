@@ -84,7 +84,7 @@ public class AskForPasswordResetPanel extends SignInAbstractPanel {
             @Override
             public void onFailure(final Throwable caught) {
               if (caught instanceof EmailNotFoundException) {
-                AskForPasswordResetPanel.this.setErrorMessage(i18n.t("Invalid email"), NotifyLevel.error);
+                AskForPasswordResetPanel.this.setErrorMessage(i18n.t("There is no registered user with that e-mail address"), NotifyLevel.error);
               } else {
                 AskForPasswordResetPanel.this.setErrorMessage(
                     i18n.t("Other error trying to reset your password"), NotifyLevel.error);
