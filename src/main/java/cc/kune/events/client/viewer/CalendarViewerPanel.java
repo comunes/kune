@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cc.kune.common.client.actions.ui.GuiProvider;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.dnd.FolderContainerDropController;
@@ -44,6 +45,7 @@ import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 import com.bradrydzewski.gwt.calendar.client.event.CreateHandler;
 import com.bradrydzewski.gwt.calendar.client.event.DateRequestHandler;
 import com.bradrydzewski.gwt.calendar.client.event.DeleteHandler;
+import com.bradrydzewski.gwt.calendar.client.event.MouseOverEvent;
 import com.bradrydzewski.gwt.calendar.client.event.MouseOverHandler;
 import com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler;
 import com.bradrydzewski.gwt.calendar.client.event.UpdateHandler;
@@ -59,11 +61,14 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -73,6 +78,8 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   private int clientX;
   private int clientY;
   private ContentTitleWidget contentTitle;
+  private PopupPanel tooltipPanel;
+  private Tooltip tooltip;
 
   @Inject
   public CalendarViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
@@ -106,6 +113,28 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
         resizeCalendar();
       }
     });
+    tooltipPanel = new PopupPanel();
+    tooltip = Tooltip.to(tooltipPanel, "FIXME");
+    addMouseOverHandler(new MouseOverHandler<Appointment>() {
+      @Override
+      public void onMouseOver(final MouseOverEvent<Appointment> event) {
+        Element element = (Element) event.getElement();
+        tooltipPanel.setPopupPosition(DOM.getAbsoluteLeft(element), DOM.getAbsoluteTop(element)
+            + element.getOffsetHeight());
+        tooltipPanel.show();
+        if (tooltip.isShowing()) {
+          tooltipPanel.hide();
+          tooltip.hide();
+        } else {
+          tooltip.showTemporally();
+        }
+        // NotifyUser.info("On mouse");
+      }
+    });
+  }
+
+  public void setOnMouseOverTooltipText(String text) {
+    tooltip.setText(text);
   }
 
   @Override

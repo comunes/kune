@@ -120,6 +120,8 @@ public class CalendarViewerPresenter extends
     void setView(CalendarViews view, int days);
 
     void updateTitle(CalendarViews currentCalView);
+
+    void setOnMouseOverTooltipText(String text);
   }
 
   private static final CalendarViews DEF_VIEW = CalendarViews.DAY;
@@ -155,6 +157,7 @@ public class CalendarViewerPresenter extends
   }
 
   private void addListeners() {
+    getView().setOnMouseOverTooltipText(i18n.t("Double click to open. Also you can resize or drag&drop this event"));
     getView().addDeleteHandler(new DeleteHandler<Appointment>() {
       @Override
       public void onDelete(final DeleteEvent<Appointment> event) {
@@ -175,9 +178,10 @@ public class CalendarViewerPresenter extends
     getView().addMouseOverHandler(new MouseOverHandler<Appointment>() {
       @Override
       public void onMouseOver(final MouseOverEvent<Appointment> event) {
-        // NotifyUser.info("on mouse over");
+        //NotifyUser.info("on mouse over " +
       }
     });
+
     getView().addUpdateHandler(new UpdateHandler<Appointment>() {
       @Override
       public void onUpdate(final UpdateEvent<Appointment> event) {
@@ -217,7 +221,6 @@ public class CalendarViewerPresenter extends
       public void onSelection(final SelectionEvent<Appointment> event) {
         appToEdit = event.getSelectedItem();
         onOverDate = event.getSelectedItem().getStart();
-        // NotifyUser.info("on selection");
 
         // This is not very usable:
         // updateMenuItems();
