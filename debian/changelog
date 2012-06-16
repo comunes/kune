@@ -1,3 +1,12 @@
+kune (0.2.0+b15) unstable; urgency=low
+
+  * Improvement in agenda interaction
+  * More logs in websocket
+  * Wave edit disable other buttons
+  * Caching headers on avatar servlet
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 16 Jun 2012 15:40:35 +0200
+
 kune (0.2.0+b14) unstable; urgency=low
 
   * Update of jetty to 8.1.4 (now for real)

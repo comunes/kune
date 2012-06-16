@@ -131,7 +131,7 @@ else
         ulimit -n 65000
     # http://stackoverflow.com/questions/534648/how-to-daemonize-a-java-program
         exec java $DEBUG_FLAGS \
-            -Dorg.eclipse.jetty.util.log.$LOG_LEVEL=true \
+            -Dorg.eclipse.jetty.LEVEL=$LOG_LEVEL \
             -Djava.security.auth.login.config=$JAAS_CONFIG \
             -Dlog4j.configuration=$LOGJ4_CONFIG \
             -Dkune.server.config=$KUNE_CONFIG \
@@ -141,7 +141,7 @@ else
 	    -jar $JAR >> $LOGFILE 2>> $LOGFILE
     else
 	exec java $DEBUG_FLAGS \
-	    -Dorg.eclipse.jetty.util.log.$LOG_LEVEL=true \
+      -Dorg.eclipse.jetty.LEVEL=$LOG_LEVEL \
 	    -Djava.security.auth.login.config=$JAAS_CONFIG \
 	    -Dlog4j.configuration=$LOGJ4_CONFIG \
 	    -Dkune.server.config=$KUNE_CONFIG \

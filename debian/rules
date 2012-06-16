@@ -53,6 +53,7 @@ install/kune::
 	cp $(TARGETJAR) $(KUNE)/lib/kune-complete.jar
 	cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
 	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
+	cp $(RESOURCES)/logging.properties.sample $(ETCDIR)
 	cp $(RESOURCES)/jaas.config $(ETCDIR)
 	cp $(RESOURCES)/log4j.prod.properties $(ETCDIR)/log4j.properties
 	cp $(RESOURCES)/mail-notif-template.html $(ETCDIR)
