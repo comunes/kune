@@ -36,7 +36,7 @@ import com.google.inject.Inject;
 public class WebSocketChecker {
 
   /**
-   * This class check if the browser supports websockets and give some advices
+   * This class checks if the browser supports websockets and give some advices
    * to the user.
    *
    * This can be tested in firefox setting network.websocket.enabled;false in about:config
@@ -58,7 +58,7 @@ public class WebSocketChecker {
               res.important32(),
               I18n.t("Your browser is currently unsupported"),
               I18n.t(
-                  "Please, use a free/libre modern and updated navigator like [%s] instead. Some functionality like concurrent edition will now work properly. Continue anyway?",
+                  "Your browser version is not properly supported. Please, use a free/libre modern and updated browser like the last version of [%s] instead. Some functionalities such as concurrent edition will then work properly. Continue anyway?",
                   mozLink), new SimpleResponseCallback() {
                 @Override
                 public void onCancel() {
