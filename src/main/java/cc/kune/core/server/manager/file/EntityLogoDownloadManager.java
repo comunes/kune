@@ -24,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -33,6 +34,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.util.DateUtil;
 import org.waveprotocol.box.server.CoreSettings;
 
 import cc.kune.core.server.manager.GroupManager;
@@ -127,6 +129,11 @@ public class EntityLogoDownloadManager extends HttpServlet {
     resp.setContentLength(logo.length);
     resp.setContentType(mime);
     resp.getOutputStream().write(logo);
+
+    Calendar in = Calendar.getInstance();
+    in.add(Calendar.DATE, 1);
+    resp.setDateHeader("Expires", in.getTimeInMillis());
+    // resp.setHeader("Expires", DateUtil.formatDate(in.getTime()));
   }
 
   private void unknownResult(final HttpServletResponse resp) throws IOException {
