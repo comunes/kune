@@ -5,7 +5,7 @@ kune (0.2.0+b15) unstable; urgency=low
   * Wave edit disable other buttons
   * Caching headers on avatar servlet
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 16 Jun 2012 15:40:35 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 16 Jun 2012 15:52:44 +0200
 
 kune (0.2.0+b14) unstable; urgency=low
 

@@ -46,9 +46,9 @@ ALTER DATABASE kune_openfire CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLA
 Although using this password ('db4kune') is useful for a quick and dirty getting started installation (useful for development), you should consider seriously changing it to something different, since you are in high risk! In this case you should change the password acordingly in this other locations:
 
  - pom.xml
- - script/liquibase-migrate.sh
- - script/liquibase-rollback.sh
- - script/i18n-db2gwt.sh
+ - bin/liquibase-migrate.sh
+ - bin/liquibase-rollback.sh
+ - bin/i18n-db2gwt.sh
  - src/main/resources/db/liquibase.properties
  - src/main/resources/META-INF/persistence.xml
  - src/main/webapp/WEB-INF/publicspace/config/database.yml
@@ -142,11 +142,11 @@ mysql -p -u kune kune_test < src/main/resources/db/kune_initialize.sql
 mysql -p -u kune kune_dev < src/main/resources/db/kune_initialize.sql 
 mysql -p -u kune kune_prod < src/main/resources/db/kune_initialize.sql 
 
-(Windows users can use Mysql Browser to execute this SQL: File > Open Script > Select "script\kune_initialize.sql" > Execute).
+(Windows users can use Mysql Browser to execute this SQL: File > Open Script > Select "bin\kune_initialize.sql" > Execute).
 
 And if all goes ok, migrate the database:
 
-script/liquibase-migrate.sh
+bin/liquibase-migrate.sh
 
 Windows developer users should do this by hand or adapt this (simple) script to Windows or simple:
 mvn compile -Dliquibase.should.run=true (or mvn compile)

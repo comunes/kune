@@ -70,7 +70,7 @@ trying to run kune and creating the DB. So better remove the first account of wa
 
 Migration Failed: Validation Failed:1 change sets failed MD5Sum Check     src/main/resources/db/liquibase_changelog.xml :: 18 :: vjrj :: (MD5Sum: bde0aa519108e1e3d1f29bb2483bc9)
 
-Don't try to update the liquibase changelogs you have already use. Better create new ones to delete, update, and so on. If you are developing and want to clear the checksums, you can use the command "clearCheckSums". See script/liquibase-* and http://www.liquibase.org/manual/command_line
+Don't try to update the liquibase changelogs you have already use. Better create new ones to delete, update, and so on. If you are developing and want to clear the checksums, you can use the command "clearCheckSums". See bin/liquibase-* and http://www.liquibase.org/manual/command_line
 
 ** Lucene
 
@@ -165,9 +165,9 @@ http://code.google.com/p/emite/wiki/Troubleshooting
 *** Server debug
 
 You can debug the server running from eclipse as external tool:
-   'script/kune server via mvn with debug.launch'
+   'bin/kune server via mvn with debug.launch'
 and after this the debug launch:
-   'script/kune server debug.launch'
+   'bin/kune server debug.launch'
 that connects the debugger to the port 8001 of the running server.
 
 Related: debug with jetty in eclipse:
@@ -179,7 +179,7 @@ See also log4j.properties in src/main/resources/
 
 *** Client debug
 
-You can debug the client with the eclipse launch configuration 'script/kune client -no-server.launch'.
+You can debug the client with the eclipse launch configuration 'bin/kune client -no-server.launch'.
 
 *** Firebug and client log levels
 

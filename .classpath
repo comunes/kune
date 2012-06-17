@@ -10,25 +10,25 @@
   <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar" sourcepath="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
   <classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/api/0.3.19/api-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/api-src/0.3.19/api-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/api/0.3.20/api-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/api-src/0.3.20/api-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/avalon-framework/avalon-framework/4.1.3/avalon-framework-4.1.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/avro/avro/1.5.1/avro-1.5.1.jar" sourcepath="M2_REPO/org/apache/avro/avro/1.5.1/avro-1.5.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar" sourcepath="M2_REPO/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/box/0.3.19/box-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/box-src/0.3.19/box-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/box/0.3.20/box-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/box-src/0.3.20/box-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar"/>
   <classpathentry kind="var" path="M2_REPO/c3p0/c3p0/0.9.1/c3p0-0.9.1.jar" sourcepath="M2_REPO/c3p0/c3p0/0.9.1/c3p0-0.9.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3.jar" sourcepath="M2_REPO/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/classworlds/classworlds/1.1/classworlds-1.1.jar" sourcepath="M2_REPO/classworlds/classworlds/1.1/classworlds-1.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client/0.3.19/client-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-common/0.3.19/client-common-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-common-src/0.3.19/client-common-src-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-scheduler/0.3.19/client-scheduler-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-scheduler-src/0.3.19/client-scheduler-src-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-src/0.3.19/client-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client/0.3.20/client-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-common/0.3.20/client-common-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-common-src/0.3.20/client-common-src-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-scheduler/0.3.20/client-scheduler-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-scheduler-src/0.3.20/client-scheduler-src-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/client-src/0.3.20/client-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/cobogw/gwt/cobogw/1.3.1/cobogw-1.3.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/common-src/0.3.19/common-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/common-src/0.3.20/common-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar" sourcepath="M2_REPO/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-cli/commons-cli/1.2/commons-cli-1.2.jar" sourcepath="M2_REPO/commons-cli/commons-cli/1.2/commons-cli-1.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" sourcepath="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar"/>
@@ -38,10 +38,10 @@
   <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/1.3.1/commons-io-1.3.1.jar" sourcepath="M2_REPO/commons-io/commons-io/1.3.1/commons-io-1.3.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.5/commons-lang-2.5.jar" sourcepath="M2_REPO/commons-lang/commons-lang/2.5/commons-lang-2.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/communication-src/0.3.19/communication-src-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/concurrencycontrol-src/0.3.19/concurrencycontrol-src-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/crypto/0.3.19/crypto-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/crypto-src/0.3.19/crypto-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/communication-src/0.3.20/communication-src-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/concurrencycontrol-src/0.3.20/concurrencycontrol-src-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/crypto/0.3.20/crypto-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/crypto-src/0.3.20/crypto-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.5/cssparser-0.9.5.jar" sourcepath="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.5/cssparser-0.9.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.jar"/>
   <classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
@@ -70,7 +70,7 @@
   <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/log/gwt-log/gwt-log/3.0.1/gwt-log-3.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-servlet/2.1.1/gwt-servlet-2.1.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-servlet/2.1.1/gwt-servlet-2.1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/2.1.1/gwt-user-2.1.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-user/2.1.1/gwt-user-2.1.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/gwt-util-src/0.3.19/gwt-util-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/gwt-util-src/0.3.20/gwt-util-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/voices/gwt-voices/gwt-voices/2.0.0/gwt-voices-2.0.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-clients-common/0.5/gwtp-clients-common-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-clients-common/0.5/gwtp-clients-common-0.5-sources.jar"/>
@@ -180,11 +180,11 @@
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-provider-tfs/1.6/maven-scm-provider-tfs-1.6.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-provider-tfs/1.6/maven-scm-provider-tfs-1.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-provider-vss/1.6/maven-scm-provider-vss-1.6.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-provider-vss/1.6/maven-scm-provider-vss-1.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9.jar" sourcepath="M2_REPO/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/media-src/0.3.19/media-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/media-src/0.3.20/media-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/mks/api/mksapi-jar/4.10.9049/mksapi-jar-4.10.9049.jar" sourcepath="M2_REPO/com/mks/api/mksapi-jar/4.10.9049/mksapi-jar-4.10.9049-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.8.5/mockito-core-1.8.5.jar" sourcepath="M2_REPO/org/mockito/mockito-core/1.8.5/mockito-core-1.8.5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/model/0.3.19/model-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/model-src/0.3.19/model-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/model/0.3.20/model-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/model-src/0.3.20/model-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mvel/mvel2/2.0.16/mvel2-2.0.16.jar" sourcepath="M2_REPO/org/mvel/mvel2/2.0.16/mvel2-2.0.16-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.13/mysql-connector-java-5.1.13.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.15/nekohtml-1.9.15.jar" sourcepath="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.15/nekohtml-1.9.15-sources.jar"/>
@@ -196,7 +196,7 @@
   <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar" sourcepath="M2_REPO/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-utils/1.5.6/plexus-utils-1.5.6.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-utils/1.5.6/plexus-utils-1.5.6-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/proto-msg/0.3.19/proto-msg-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/proto-msg/0.3.20/proto-msg-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/quartz-scheduler/quartz/2.1.0/quartz-2.1.0.jar" sourcepath="M2_REPO/org/quartz-scheduler/quartz/2.1.0/quartz-2.1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/regexp/regexp/1.3/regexp-1.3.jar" sourcepath="M2_REPO/regexp/regexp/1.3/regexp-1.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/w3c/css/sac/1.3/sac-1.3.jar" sourcepath="M2_REPO/org/w3c/css/sac/1.3/sac-1.3-sources.jar"/>
@@ -228,8 +228,8 @@
   <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/testng/testng/6.2.1/testng-6.2.1.jar" sourcepath="M2_REPO/org/testng/testng/6.2.1/testng-6.2.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/tigase/tigase-xmltools/3.3.5/tigase-xmltools-3.3.5.jar" sourcepath="M2_REPO/tigase/tigase-xmltools/3.3.5/tigase-xmltools-3.3.5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/util/0.3.19/util-0.3.19.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/util-src/0.3.19/util-src-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/util/0.3.20/util-0.3.20.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/util-src/0.3.20/util-src-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-file/1.0-beta-2/wagon-file-1.0-beta-2.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-file/1.0-beta-2/wagon-file-1.0-beta-2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-http-lightweight/1.0-beta-2/wagon-http-lightweight-1.0-beta-2.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-http-lightweight/1.0-beta-2/wagon-http-lightweight-1.0-beta-2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-http-shared/1.0-beta-2/wagon-http-shared-1.0-beta-2.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-http-shared/1.0-beta-2/wagon-http-shared-1.0-beta-2-sources.jar"/>
@@ -238,7 +238,7 @@
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-ssh-common/1.0-beta-2/wagon-ssh-common-1.0-beta-2.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-ssh-common/1.0-beta-2/wagon-ssh-common-1.0-beta-2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-ssh-external/1.0-beta-2/wagon-ssh-external-1.0-beta-2.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-ssh-external/1.0-beta-2/wagon-ssh-external-1.0-beta-2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-webdav/1.0-beta-2/wagon-webdav-1.0-beta-2.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-webdav/1.0-beta-2/wagon-webdav-1.0-beta-2-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/waveinabox-server-0.3/0.3.19/waveinabox-server-0.3-0.3.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/waveprotocol/waveinabox-server-0.3/0.3.20/waveinabox-server-0.3-0.3.20.jar"/>
   <classpathentry kind="var" path="M2_REPO/xalan/xalan/2.7.1/xalan-2.7.1.jar" sourcepath="M2_REPO/xalan/xalan/2.7.1/xalan-2.7.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar" sourcepath="M2_REPO/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04-sources.jar"/>

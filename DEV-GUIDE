@@ -71,7 +71,7 @@ After that, you can import the project in eclipse (File > Import > Existing Proj
 
 Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/youruser/.m2/repository).
 
-(*) Note: We actually use script/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line.
+(*) Note: We actually use bin/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line.
 
 ====Configure Google GWT Plugin====
 
@@ -128,22 +128,22 @@ Only after making sure the previous steps have been finished, you can proceed to
 Before run hosted mode for the first time compile once with:
  mvn compile -Dliquibase.should.run=false && mvn gwt:compile -P development
 and deploy with:
- script/deploy_gwt.sh 
+ bin/deploy_gwt.sh 
 
 Kune runs a specific jetty server (not necessary the one used by GWT), so we run the server and the client separately.
 
 For now It's better not to use the "internal server" of GWT hosted mode because we need to control the version of the (jetty) server that we use for compatibilities reasons. This is why we run separately the client (hosted mode) and the server. 
 
-In /script directory exist two (mainly) launch configurations:
+In bin directory exist two (mainly) launch configurations:
 - kune server via mvn.launch
 - kune client  -no-server.launch
-these configurations are eclipse run configurations that are normally imported by eclipse when you import the project (in GNU/Linux at least). See the Run and the Run External icon and menu options in the Eclipse toolbar to find these launchs. If is not there, try to import it (in Eclipse: File > Import > Launch Configurations > select the launchs from script directory). Also try to fix the path for the mvn command (especially Windows users). Other option is to create a new one launch to run a external "mvn exec:java" because the previous launch were created in GNU/Linux systems.
+these configurations are eclipse run configurations that are normally imported by eclipse when you import the project (in GNU/Linux at least). See the Run and the Run External icon and menu options in the Eclipse toolbar to find these launchs. If is not there, try to import it (in Eclipse: File > Import > Launch Configurations > select the launchs from bin directory). Also try to fix the path for the mvn command (especially Windows users). Other option is to create a new one launch to run a external "mvn exec:java" because the previous launch were created in GNU/Linux systems.
 
 Run it! Launch the first (it's equivalent to mvn exec:java) to start the kune server. After that, launch the second to start kune in hosted mode and connect to the previous server, so you can make code modifications, and refresh the browser to see the changes.
 
 ==== Optionally ==== 
 
-You can run the server via script/server.sh (also you can run server in debug mode, see TROUBLESHOOT or -h for help). This is quite useful to put breakpoints in the server code.
+You can run the server via bin/server.sh (also you can run server in debug mode, see TROUBLESHOOT or -h for help). This is quite useful to put breakpoints in the server code.
 
 FIXME: this part is outdated
 
@@ -194,7 +194,7 @@ GWT is the key of our Kune workspace UI. As the GWT team says: «GWT's mission i
 
 All the HTML/JavaScript code of the client workspace is generated from the Java code using GWT. We use some minimal html/css (see kune.css, doc.css, workspace.css, Kune.html) plus the generated js (compiling the java code with GWT).
 
-All the workspace css are concatenated and compressed using csstidy (see script/css-compact-and-tidy.css if you want to know how).
+All the workspace css are concatenated and compressed using csstidy (see bin/css-compact-and-tidy.css if you want to know how).
 
 ==Notable dependencies==
 
@@ -251,7 +251,7 @@ We use [https://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinder.h
 
 (This part in now not used, probably we should go back when we return to develop the public part)
 
-We use Rails via [http://kenai.com/projects/jruby-rack/pages/Home JRuby-Rack]. Ruby on Rails + Plugins + Gems are installed in trunk/src/main/webapp/WEB-INF/. Jetty uses these gems when running, but if you run ruby directly with script/server, take into account that you are using your installed local gems.
+We use Rails via [http://kenai.com/projects/jruby-rack/pages/Home JRuby-Rack]. Ruby on Rails + Plugins + Gems are installed in trunk/src/main/webapp/WEB-INF/. Jetty uses these gems when running, but if you run ruby directly with bin/server.sh, take into account that you are using your installed local gems.
 
 To install gems inside this directory:
  sudo gem install <name of the gem> -i src/main/webapp/WEB-INF/gems --no-rdoc --no-ri
@@ -281,7 +281,7 @@ http://developer.apple.com/documentation/UserExperience/Conceptual/AppleHIGuidel
 
 ===Designs patterns===
 
-* MVC: We use a lot the [http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC pattern] in our GWT code. See our HelloWorldModule class for a simple sample. We used to auto generate some MVC classes with the script script/generateBasicUIElements.sh:
+* MVC: We use a lot the [http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC pattern] in our GWT code. See our HelloWorldModule class for a simple sample. We used to auto generate some MVC classes with the script bin/generateBasicUIElements.sh:
  bin/generateBasicUIElements.sh <packageDirDest> <ClassName>
 for instance:
  bin/generateBasicUIElements.sh src/main/java/org/ourproject/kune/workspace/client/options/ GroupOptions

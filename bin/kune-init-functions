@@ -1,0 +1,2 @@
+#!/bin/bash
+KUNE_VERSION=`bin/kune-version`

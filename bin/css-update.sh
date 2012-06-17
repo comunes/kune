@@ -2,14 +2,14 @@
 APPPUB=src/main/java/org/ourproject/kune/app/public
 #WEBAPP=src/main/webapp/gwt/ws
 
-## > $PWD/script/css-compact-and-tidy.sh
+## > $PWD/bin/css-compact-and-tidy.sh
 
 #rsync -aC $APPPUB/ws.html $WEBAPP/ws.html
 #rsync -aC $APPPUB/js/ $WEBAPP/js
 #rsync -aC $APPPUB/css/ $WEBAPP/css
 #rsync -aC $APPPUB/images/ $WEBAPP/images
 
-. script/kune-init-functions
+. bin/kune-init-functions
 
 cp src/main/java/cc/kune/chat/public/kune-chat.css target/kune-$KUNE_VERSION/ws/
 cp src/main/java/cc/kune/chat/public/kune-hablar.css target/kune-$KUNE_VERSION/ws/
