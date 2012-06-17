@@ -321,6 +321,7 @@ More than the eclipse code preferences we try to:
 We recommend to use Mylyn to track the Kune issues. Use the redmine mylyn connector from the Redmine-Mylyn update site : http://redmin-mylyncon.sourceforge.net/update-site/N/
 for our redmine http://redmine.ourproject.org/. More info:
 http://www.redmine.org/projects/redmine/wiki/HowTo_Mylyn
+and also EGit for Mylyn plugin http://www.javaforge.com/project/EGIT
 
 ==Code samples==
 
