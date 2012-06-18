@@ -71,8 +71,8 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
-import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenMatcher;
+import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.wave.client.kspecific.WaveClientClearEvent;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
 import cc.kune.wave.client.kspecific.WaveClientView;
@@ -349,7 +349,7 @@ public class WebClient extends Composite implements WaveClientView {
         loading.removeFromParent();
       }
     });
-    String encodedToken = History.getToken();
+    String encodedToken = HistoryUtils.undoHashbang(History.getToken());
     // Kune patch
     if (encodedToken != null && !encodedToken.isEmpty() && !tokenMatcher.isInboxToken(encodedToken)) {
       WaveRef fromWaveRef;
@@ -366,7 +366,7 @@ public class WebClient extends Composite implements WaveClientView {
         return;
       }
     }
-    final String tokenFromWaveref = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
+    final String tokenFromWaveref = HistoryUtils.hashbang(GwtWaverefEncoder.encodeToUriPathSegment(waveRef));
     SpaceConfEvent.fire(eventBus, Space.userSpace, tokenFromWaveref);
     History.newItem(tokenFromWaveref, false);
   }
