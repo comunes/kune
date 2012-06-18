@@ -23,7 +23,6 @@ import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.EditEvent;
@@ -44,10 +43,8 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.RenameListener;
 import cc.kune.gspace.client.tool.ContentViewer;
-import cc.kune.wave.client.CustomSavedStateIndicator;
 import cc.kune.wave.client.kspecific.WaveClientManager;
 
-import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
@@ -99,19 +96,17 @@ public class ContentViewerPresenter extends
   private final PathToolbarUtils pathToolbarUtils;
   private final Provider<RenameAction> renameAction;
   private final Session session;
-  private final CustomSavedStateIndicator saveIndicator;
 
   @Inject
   public ContentViewerPresenter(final EventBus eventBus, final ContentViewerView view,
       final StateManager stateManager, final ContentViewerProxy proxy, final Session session,
       final ActionRegistryByType actionsRegistry, final Provider<RenameAction> renameAction,
-      final PathToolbarUtils pathToolbarUtils, final WaveClientManager wavClientManager, CustomSavedStateIndicator saveIndicator) {
+      final PathToolbarUtils pathToolbarUtils, final WaveClientManager wavClientManager) {
     super(eventBus, view, proxy);
     this.session = session;
     this.actionsRegistry = actionsRegistry;
     this.renameAction = renameAction;
     this.pathToolbarUtils = pathToolbarUtils;
-    this.saveIndicator = saveIndicator;
     session.onUserSignOut(true, new UserSignOutHandler() {
       @Override
       public void onUserSignOut(final UserSignOutEvent event) {
@@ -212,7 +207,6 @@ public class ContentViewerPresenter extends
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContent.getContainer(),
         true);
     bottomActions.addAll(pathActions);
-    bottomActions.add(saveIndicator.get());
     getView().setSubheaderActions(topActions);
     getView().setFooterActions(bottomActions);
   }

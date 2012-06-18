@@ -1,8 +1,13 @@
+kune (0.2.0+16) unstable; urgency=low
+
+  * More logs in websocket
+  * Wave edit disable other buttons
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 17 Jun 2012 20:45:36 +0200
+
 kune (0.2.0+b15) unstable; urgency=low
 
   * Improvement in agenda interaction
-  * More logs in websocket
-  * Wave edit disable other buttons
   * Caching headers on avatar servlet
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 16 Jun 2012 15:52:44 +0200
