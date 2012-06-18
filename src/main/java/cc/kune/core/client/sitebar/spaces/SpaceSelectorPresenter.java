@@ -37,7 +37,7 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.gspace.client.armor.GSpaceArmor;
-import cc.kune.gspace.client.style.GSpaceBackManager;
+import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -106,7 +106,7 @@ public class SpaceSelectorPresenter extends
   }
 
   private final GSpaceArmor armor;
-  private final GSpaceBackManager backManager;
+  private final GSpaceBackgroundManager backManager;
   private Space currentSpace;
   private String groupToken;
   private String homeToken;
@@ -121,7 +121,7 @@ public class SpaceSelectorPresenter extends
   @Inject
   public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
       final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
-      final Session session, final Provider<SignIn> signIn, final GSpaceBackManager backManager,
+      final Session session, final Provider<SignIn> signIn, final GSpaceBackgroundManager backManager,
       final I18nTranslationService i18n, final MaskWidgetView mask,
       final GlobalShortcutRegister shortcutRegister) {
     super(eventBus, view, proxy);
@@ -232,7 +232,7 @@ public class SpaceSelectorPresenter extends
   private void onGroupSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, groupToken);
     armor.selectGroupSpace();
-    backManager.restoreBackImage();
+    backManager.restoreBackgroundImage();
     setDown(Space.groupSpace);
     currentSpace = Space.groupSpace;
   }
@@ -245,7 +245,7 @@ public class SpaceSelectorPresenter extends
   private void onHomeSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, homeToken);
     armor.selectHomeSpace();
-    backManager.clearBackImage();
+    backManager.clearBackgroundImage();
     setDown(Space.homeSpace);
     currentSpace = Space.homeSpace;
     getView().setWindowTitle(i18n.t("Home"));
@@ -259,7 +259,7 @@ public class SpaceSelectorPresenter extends
   private void onPublicSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, inboxToken);
     armor.selectPublicSpace();
-    backManager.restoreBackImage();
+    backManager.restoreBackgroundImage();
     setDown(Space.publicSpace);
     currentSpace = Space.publicSpace;
   }
@@ -328,7 +328,7 @@ public class SpaceSelectorPresenter extends
     if (session.isLogged()) {
       restoreToken(shouldRestoreToken, inboxToken);
       armor.selectUserSpace();
-      backManager.clearBackImage();
+      backManager.clearBackgroundImage();
       setDown(Space.userSpace);
       currentSpace = Space.userSpace;
       getView().setWindowTitle(i18n.t("Inbox"));

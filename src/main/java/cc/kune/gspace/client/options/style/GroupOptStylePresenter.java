@@ -25,7 +25,7 @@ import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.options.GroupOptions;
-import cc.kune.gspace.client.style.GSpaceBackManager;
+import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;
 
 import com.google.gwt.event.shared.EventBus;
@@ -38,7 +38,7 @@ public class GroupOptStylePresenter extends EntityOptStylePresenter implements
   @Inject
   public GroupOptStylePresenter(final EventBus eventBus, final Session session,
       final StateManager stateManager, final GroupOptions entityOptions,
-      final Provider<GroupServiceAsync> groupService, final GSpaceBackManager backManager,
+      final Provider<GroupServiceAsync> groupService, final GSpaceBackgroundManager backManager,
       final GroupOptStyleView view, final GSpaceThemeSelectorPresenter styleSelector,
       final I18nTranslationService i18n, final ClientFileDownloadUtils fileDownUtils) {
     super(eventBus, session, stateManager, entityOptions, groupService, backManager, styleSelector,

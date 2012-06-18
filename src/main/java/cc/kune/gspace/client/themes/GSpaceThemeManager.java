@@ -37,7 +37,7 @@ import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
-import cc.kune.gspace.client.style.GSpaceBackManager;
+import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 
 import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.event.shared.EventBus;
@@ -53,12 +53,12 @@ public class GSpaceThemeManager {
   private final GSpaceArmorResources res;
   private final Session session;
   protected HashMap<String, GSpaceTheme> themes;
-  private final GSpaceBackManager wsBackManager;
+  private final GSpaceBackgroundManager wsBackManager;
 
   @Inject
   public GSpaceThemeManager(final Session session,
       final Provider<GroupServiceAsync> groupServiceProvider, final StateManager stateManager,
-      final GSpaceBackManager wsBackManager, final EventBus eventBus, final GSpaceArmorResources res) {
+      final GSpaceBackgroundManager wsBackManager, final EventBus eventBus, final GSpaceArmorResources res) {
     this.session = session;
     this.groupServiceProvider = groupServiceProvider;
     this.wsBackManager = wsBackManager;
@@ -82,7 +82,6 @@ public class GSpaceThemeManager {
   private void changeCss(final GSpaceArmorResources res, final String themeName) {
     final GSpaceTheme theme = themes.get(themeName);
     CurrentEntityTheme.setColors(themes.get(themeName).getColors(), theme.getBackColors());
-    // StyleInjector.injectAtEnd(res.style().getText());
     if (cssAdded != null) {
       cssAdded.removeFromParent();
     }
@@ -120,9 +119,9 @@ public class GSpaceThemeManager {
     final GroupDTO group = state.getGroup();
     final String groupBackImage = group.getBackgroundImage();
     if (groupBackImage == null) {
-      wsBackManager.clearBackImage();
+      wsBackManager.clearBackgroundImage();
     } else {
-      wsBackManager.setBackImage(state.getGroup().getStateToken());
+      wsBackManager.setBackgroundImage();
     }
   }
 

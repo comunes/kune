@@ -67,12 +67,6 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
     super.reset();
   }
 
-  private void doLayoutIfNeeded() {
-    if (super.getFormPanel().isRendered()) {
-      super.getFormPanel().layout();
-    }
-  }
-
   @Override
   public IsWidget getTabTitle() {
     return tabTitle;

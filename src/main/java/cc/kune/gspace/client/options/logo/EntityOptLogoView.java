@@ -19,22 +19,11 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
-import gwtupload.client.IUploader;
-import gwtupload.client.IUploader.OnCancelUploaderHandler;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.gspace.client.options.EntityOptionsTabView;
+import cc.kune.gspace.client.options.EntityOptionsUploaderView;
 
-import com.google.gwt.event.shared.HandlerRegistration;
-
-public interface EntityOptLogoView extends EntityOptionsTabView {
-
-  HandlerRegistration addOnCancelUploadHandler(OnCancelUploaderHandler handler);
-
-  HandlerRegistration addOnChangeUploadHandler(IUploader.OnChangeUploaderHandler handler);
-
-  HandlerRegistration addOnFinishUploadHandler(IUploader.OnFinishUploaderHandler handler);
-
-  HandlerRegistration addOnStartUploadHandler(IUploader.OnStartUploaderHandler handler);
+public interface EntityOptLogoView extends EntityOptionsTabView, EntityOptionsUploaderView {
 
   OnAcceptCallback getOnSubmit();
 

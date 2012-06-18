@@ -59,15 +59,15 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
     DOM.setElementAttribute(RootPanel.get("__download").getElement(), "src", url);
   }
 
-  public String getBackgroundImageUrl(final StateToken token) {
+  public String getBackgroundImageUrl(final StateToken token, boolean noCache) {
     return new Url(FileConstants.BACKDOWNLOADSERVLET,
-        new UrlParam(FileConstants.TOKEN, token.toString())).toString();
+        new UrlParam(FileConstants.TOKEN, token.toString())).toString() + getCacheSuffix(noCache);
   }
 
   public String getBackgroundResizedUrl(final StateToken token, final ImageSize imageSize) {
     return new Url(FileConstants.BACKDOWNLOADSERVLET,
         new UrlParam(FileConstants.TOKEN, token.toString()), new UrlParam(FileConstants.IMGSIZE,
-            imageSize.toString())).toString();
+            imageSize.toString())).toString() + getCacheSuffix(true);
   }
 
   public String getImageResizedUrl(final StateToken token, final ImageSize imageSize) {

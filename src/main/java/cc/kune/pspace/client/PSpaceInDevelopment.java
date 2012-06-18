@@ -28,6 +28,7 @@ import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
@@ -81,6 +82,7 @@ public class PSpaceInDevelopment extends Composite {
     this.images = images;
     this.downloadProvider = downloadProvider;
     initWidget(uiBinder.createAndBindUi(this));
+    entityLogo.setSize(FileConstants.LOGO_DEF_SIZE + "px", FileConstants.LOGO_DEF_SIZE + "px");
     stateManager.onGroupChanged(true, new GroupChangedHandler() {
       @Override
       public void onGroupChanged(final GroupChangedEvent event) {

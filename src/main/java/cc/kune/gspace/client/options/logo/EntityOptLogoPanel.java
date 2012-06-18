@@ -120,7 +120,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
   @Override
   public void setUploadParams(final String userHash, final String token) {
     uploader.setUploadParams(userHash, token);
-    Log.info("Uploader params: " + userHash + ", " + token);
+    Log.info("Logo uploader params: " + userHash + ", " + token);
   }
 
 }

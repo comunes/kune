@@ -19,13 +19,13 @@
  */
 package cc.kune.gspace.client.style;
 
-import cc.kune.core.shared.domain.utils.StateToken;
+public interface GSpaceBackgroundManager {
 
-public interface GSpaceBackManager {
+  void clearBackgroundImage();
 
-  void clearBackImage();
+  void restoreBackgroundImage();
 
-  void restoreBackImage();
+  void setBackgroundImage();
 
-  void setBackImage(StateToken token);
+  void setNoCache(boolean noCache);
 }

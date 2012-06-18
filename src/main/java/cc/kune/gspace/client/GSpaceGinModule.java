@@ -110,8 +110,8 @@ import cc.kune.gspace.client.options.tools.UserOptTools;
 import cc.kune.gspace.client.options.tools.UserOptToolsPanel;
 import cc.kune.gspace.client.options.tools.UserOptToolsPresenter;
 import cc.kune.gspace.client.options.tools.UserOptToolsView;
-import cc.kune.gspace.client.style.GSpaceBackManager;
-import cc.kune.gspace.client.style.GSpaceBackManagerImpl;
+import cc.kune.gspace.client.style.GSpaceBackgroundManager;
+import cc.kune.gspace.client.style.GSpaceBackgroundManagerImpl;
 import cc.kune.gspace.client.tags.TagsSummaryPanel;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
@@ -208,7 +208,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(UserOptTools.class, UserOptToolsPresenter.class);
     s(UserOptToolsView.class, UserOptToolsPanel.class);
 
-    s(GSpaceBackManager.class, GSpaceBackManagerImpl.class);
+    s(GSpaceBackgroundManager.class, GSpaceBackgroundManagerImpl.class);
     s(GSpaceThemeSelectorPresenter.class);
     s(GSpaceThemeSelectorPanel.class);
 

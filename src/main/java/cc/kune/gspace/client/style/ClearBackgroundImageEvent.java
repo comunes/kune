@@ -25,37 +25,37 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import com.google.gwt.event.shared.HasHandlers;
 
-public class ClearBackImageEvent extends GwtEvent<ClearBackImageEvent.ClearBackImageHandler> { 
+public class ClearBackgroundImageEvent extends GwtEvent<ClearBackgroundImageEvent.ClearBackgroundImageHandler> {
 
-  public interface HasClearBackImageHandlers extends HasHandlers {
-    HandlerRegistration addClearBackImageHandler(ClearBackImageHandler handler);
+  public interface HasClearBackgroundImageHandlers extends HasHandlers {
+    HandlerRegistration addClearBackImageHandler(ClearBackgroundImageHandler handler);
   }
 
-  public interface ClearBackImageHandler extends EventHandler {
-    public void onClearBackImage(ClearBackImageEvent event);
+  public interface ClearBackgroundImageHandler extends EventHandler {
+    public void onClearBackImage(ClearBackgroundImageEvent event);
   }
 
-  private static final Type<ClearBackImageHandler> TYPE = new Type<ClearBackImageHandler>();
+  private static final Type<ClearBackgroundImageHandler> TYPE = new Type<ClearBackgroundImageHandler>();
 
   public static void fire(HasHandlers source) {
-    source.fireEvent(new ClearBackImageEvent());
+    source.fireEvent(new ClearBackgroundImageEvent());
   }
 
-  public static Type<ClearBackImageHandler> getType() {
+  public static Type<ClearBackgroundImageHandler> getType() {
     return TYPE;
   }
 
 
-  public ClearBackImageEvent() {
+  public ClearBackgroundImageEvent() {
   }
 
   @Override
-  public Type<ClearBackImageHandler> getAssociatedType() {
+  public Type<ClearBackgroundImageHandler> getAssociatedType() {
     return TYPE;
   }
 
   @Override
-  protected void dispatch(ClearBackImageHandler handler) {
+  protected void dispatch(ClearBackgroundImageHandler handler) {
     handler.onClearBackImage(this);
   }
 
@@ -71,7 +71,6 @@ public class ClearBackImageEvent extends GwtEvent<ClearBackImageEvent.ClearBackI
 
   @Override
   public String toString() {
-    return "ClearBackImageEvent["
-    + "]";
+    return "ClearBackgroundImageEvent[]";
   }
 }

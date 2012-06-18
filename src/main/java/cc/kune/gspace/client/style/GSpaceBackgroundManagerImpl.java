@@ -19,47 +19,56 @@
  */
 package cc.kune.gspace.client.style;
 
-import javax.annotation.Nonnull;
-
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.inject.Inject;
 
-public class GSpaceBackManagerImpl implements GSpaceBackManager {
+public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
 
-  private static final StateToken NO_TOKEN = new StateToken("none.none.0.0");
   private final ClientFileDownloadUtils downloadUtils;
   private final GSpaceArmor gSpaceArmor;
-  private StateToken lastToken;
+  private boolean noCache;
+  private final Session session;
 
   @Inject
-  public GSpaceBackManagerImpl(final ClientFileDownloadUtils downloadUtils, final GSpaceArmor gSpaceArmor) {
+  public GSpaceBackgroundManagerImpl(final ClientFileDownloadUtils downloadUtils,
+      final GSpaceArmor gSpaceArmor, final Session session) {
     this.downloadUtils = downloadUtils;
     this.gSpaceArmor = gSpaceArmor;
-    lastToken = NO_TOKEN;
+    this.session = session;
+    noCache = false;
   }
 
   @Override
-  public void clearBackImage() {
+  public void clearBackgroundImage() {
     gSpaceArmor.clearBackImage();
   }
 
   @Override
-  public void restoreBackImage() {
-    if (!lastToken.equals(NO_TOKEN)) {
-      gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(lastToken));
+  public void restoreBackgroundImage() {
+    final StateToken token = session.getCurrentStateToken();
+    if (token != null) {
+      gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(token, noCache));
+    } else {
+      Log.info("Not restoring group background");
     }
   }
 
   @Override
-  public void setBackImage(final @Nonnull StateToken token) {
-    final StateToken tokenNoGroup = token.clearDocument().clearDocument();
-    if (!tokenNoGroup.equals(lastToken)) {
-      gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(tokenNoGroup));
-      lastToken = tokenNoGroup.copy();
+  public void setBackgroundImage() {
+    final StateToken token = session.getCurrentStateToken();
+    if (token != null) {
+      Log.info("Set background for " + token + " noCache " + noCache);
+      gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(token, noCache));
     }
+  }
 
+  @Override
+  public void setNoCache(final boolean noCache) {
+    this.noCache = noCache;
   }
 }

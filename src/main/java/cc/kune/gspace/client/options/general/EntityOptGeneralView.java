@@ -36,4 +36,6 @@ public interface EntityOptGeneralView extends EntityOptionsTabView {
   void setChangeHandler(ChangeHandler changeHandler);
 
   void unmask();
+
+  void reset();
 }

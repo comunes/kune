@@ -25,38 +25,38 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import com.google.gwt.event.shared.HasHandlers;
 
-public class SetBackImageEvent extends GwtEvent<SetBackImageEvent.SetBackImageHandler> { 
+public class SetBackgroundImageEvent extends GwtEvent<SetBackgroundImageEvent.SetBackgroundImageHandler> { 
 
-  public interface HasSetBackImageHandlers extends HasHandlers {
-    HandlerRegistration addSetBackImageHandler(SetBackImageHandler handler);
+  public interface HasSetBackgroundImageHandlers extends HasHandlers {
+    HandlerRegistration addSetBackImageHandler(SetBackgroundImageHandler handler);
   }
 
-  public interface SetBackImageHandler extends EventHandler {
-    public void onSetBackImage(SetBackImageEvent event);
+  public interface SetBackgroundImageHandler extends EventHandler {
+    public void onSetBackImage(SetBackgroundImageEvent event);
   }
 
-  private static final Type<SetBackImageHandler> TYPE = new Type<SetBackImageHandler>();
+  private static final Type<SetBackgroundImageHandler> TYPE = new Type<SetBackgroundImageHandler>();
 
   public static void fire(HasHandlers source, cc.kune.core.shared.domain.utils.StateToken token) {
-    source.fireEvent(new SetBackImageEvent(token));
+    source.fireEvent(new SetBackgroundImageEvent(token));
   }
 
-  public static Type<SetBackImageHandler> getType() {
+  public static Type<SetBackgroundImageHandler> getType() {
     return TYPE;
   }
 
   cc.kune.core.shared.domain.utils.StateToken token;
 
-  public SetBackImageEvent(cc.kune.core.shared.domain.utils.StateToken token) {
+  public SetBackgroundImageEvent(cc.kune.core.shared.domain.utils.StateToken token) {
     this.token = token;
   }
 
-  protected SetBackImageEvent() {
+  protected SetBackgroundImageEvent() {
     // Possibly for serialization.
   }
 
   @Override
-  public Type<SetBackImageHandler> getAssociatedType() {
+  public Type<SetBackgroundImageHandler> getAssociatedType() {
     return TYPE;
   }
 
@@ -65,7 +65,7 @@ public class SetBackImageEvent extends GwtEvent<SetBackImageEvent.SetBackImageHa
   }
 
   @Override
-  protected void dispatch(SetBackImageHandler handler) {
+  protected void dispatch(SetBackgroundImageHandler handler) {
     handler.onSetBackImage(this);
   }
 
@@ -77,7 +77,7 @@ public class SetBackImageEvent extends GwtEvent<SetBackImageEvent.SetBackImageHa
         return false;
     if (getClass() != obj.getClass())
         return false;
-    SetBackImageEvent other = (SetBackImageEvent) obj;
+    SetBackgroundImageEvent other = (SetBackgroundImageEvent) obj;
     if (token == null) {
       if (other.token != null)
         return false;

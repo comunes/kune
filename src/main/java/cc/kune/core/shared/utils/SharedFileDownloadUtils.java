@@ -57,9 +57,18 @@ public class SharedFileDownloadUtils {
   }
 
   public String getLogoImageUrl(final String groupName) {
+    return getLogoImageUrl(groupName, false);
+  }
+
+  public String getLogoImageUrl(final String groupName, final boolean noCache) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
-            new UrlParam(FileConstants.ONLY_USERS, false)).toString();
+            new UrlParam(FileConstants.ONLY_USERS, false)).toString()
+             + getCacheSuffix(noCache);
+  }
+
+  public String getCacheSuffix(final boolean noCache) {
+    return noCache ? UrlParam.noCacheStringSuffix() : "";
   }
 
   public String getPrefix() {

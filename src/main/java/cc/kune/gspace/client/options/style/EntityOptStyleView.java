@@ -19,22 +19,12 @@
  */
 package cc.kune.gspace.client.options.style;
 
-import gwtupload.client.IUploader;
-import gwtupload.client.IUploader.OnCancelUploaderHandler;
 import cc.kune.gspace.client.options.EntityOptionsTabView;
+import cc.kune.gspace.client.options.EntityOptionsUploaderView;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.shared.HandlerRegistration;
 
-public interface EntityOptStyleView extends EntityOptionsTabView {
-
-  HandlerRegistration addOnCancelUploadHandler(OnCancelUploaderHandler handler);
-
-  HandlerRegistration addOnChangeUploadHandler(IUploader.OnChangeUploaderHandler handler);
-
-  HandlerRegistration addOnFinishUploadHandler(IUploader.OnFinishUploaderHandler handler);
-
-  HandlerRegistration addOnStartUploadHandler(IUploader.OnStartUploaderHandler handler);
+public interface EntityOptStyleView extends EntityOptionsTabView, EntityOptionsUploaderView {
 
   public void clearBackImage();
 

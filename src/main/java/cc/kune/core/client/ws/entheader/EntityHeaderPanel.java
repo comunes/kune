@@ -22,9 +22,7 @@ package cc.kune.core.client.ws.entheader;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
@@ -110,7 +108,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   @Override
   public void setLogoImage(final GroupDTO group, final boolean noCache) {
     String url = downloadProvider.get().getLogoImageUrl(group.getShortName())
-        + (noCache ? UrlParam.noCacheStringSuffix() : "");
+       ;
     entityTextLogo.setLogoImage(url);
   }
 

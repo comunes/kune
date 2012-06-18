@@ -62,6 +62,7 @@ public abstract class EntityOptGeneralPresenter {
       @Override
       public void onChange(final ChangeEvent event) {
         updateInServer();
+        view.reset();
       }
     });
   }

@@ -128,7 +128,8 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
   @Override
   public void clearBackImage() {
-    final String bodyProp = "#FFFFFF";
+    // final String bodyProp = "#FFFFFF";
+    final String bodyProp = "#FFFFFF url('images/clear.gif') fixed top left";
     DOM.setStyleAttribute(groupSpaceWrapper.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 
@@ -259,7 +260,7 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
   @Override
   public void setBackImage(final String url) {
-    final String bodyProp = "#FFFFFF url('" + url + "') fixed top left";
+    final String bodyProp = "#FFFFFF url('" + url + "') repeat fixed top left";
     DOM.setStyleAttribute(groupSpaceWrapper.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 

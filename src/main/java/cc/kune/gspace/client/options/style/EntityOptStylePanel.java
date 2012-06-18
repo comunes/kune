@@ -23,6 +23,7 @@ import gwtupload.client.IUploader.OnCancelUploaderHandler;
 import gwtupload.client.IUploader.OnChangeUploaderHandler;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -81,7 +82,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     chooseImage = i18n.t("Choose");
     changeImage = i18n.t("Change");
     uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, chooseImage);
-    uploader.addStyleName("k-fl");
+    uploader.addStyleName("k-clean");
     backImage = new Image();
     backImage.addStyleName("kune-Margin-Medium-trbl");
     clearBtn = new Button(i18n.t("Clear"));
@@ -178,5 +179,6 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   @Override
   public void setUploadParams(final String userHash, final String token) {
     uploader.setUploadParams(userHash, token);
+    Log.info("Background uploader params: " + userHash + ", " + token);
   }
 }
