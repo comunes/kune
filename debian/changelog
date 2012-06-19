@@ -1,11 +1,11 @@
-kune (0.2.0+17) unstable; urgency=low
+kune (0.2.0+b17) unstable; urgency=low
 
   * Changed group background issues
   * Wave edition hightlighting
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 18 Jun 2012 19:53:33 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 18 Jun 2012 20:52:38 +0200
 
-kune (0.2.0+16) unstable; urgency=low
+kune (0.2.0+b16) unstable; urgency=low
 
   * More logs in websocket
   * Wave edit disable other buttons

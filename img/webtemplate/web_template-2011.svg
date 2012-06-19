@@ -14,7 +14,7 @@
    height="768"
    id="svg3182"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="web_template-2011.svg"
    inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
    inkscape:export-xdpi="90"
@@ -79,13 +79,13 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1201172"
-     inkscape:cx="-265.55632"
-     inkscape:cy="384"
+     inkscape:cx="63.941461"
+     inkscape:cy="169.73671"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="776"
+     inkscape:window-width="1080"
+     inkscape:window-height="1896"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -4109,7 +4109,31 @@
            width="725.66296"
            id="rect8084"
            style="fill:#0000ff" /></flowRegion><flowPara
-         id="flowPara8090">More info</flowPara></flowRoot>  </g>
+         id="flowPara8090">More info</flowPara></flowRoot>    <rect
+       style="opacity:0.59999999999999998;color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:#999999;stroke-width:0.99999994000000003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6217"
+       width="65.171745"
+       height="22.319107"
+       x="281.42633"
+       y="749.25195"
+       rx="4.8839436"
+       ry="4.8839445" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       sodipodi:linespacing="125%"
+       id="text4717-1"
+       y="762"
+       x="289.12805"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"><tspan
+         y="762"
+         x="289.12805"
+         id="tspan4719-0"
+         sodipodi:role="line"
+         style="font-size:14px;font-weight:normal;fill:#808080;-inkscape-font-specification:Ubuntu;fill-opacity:1">Saving...</tspan></text>
+  </g>
   <g
      inkscape:groupmode="layer"
      id="layer7"

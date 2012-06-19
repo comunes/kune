@@ -12,7 +12,7 @@ include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 #include /usr/share/cdbs/1/class/maven.mk
 
 
-#KUNE_VERSION:=$(shell $(CURDIR)/script/kune-version)
+#KUNE_VERSION:=$(shell $(CURDIR)/bin/kune-version)
 KUNE_VERSION:=0.2.0-SNAPSHOT
 
 DEST := $(CURDIR)/debian/kune
@@ -49,7 +49,7 @@ clean/kune::
 install/kune::
 
 # FIXME make this via http://www.debian.org/doc/manuals/maint-guide/dother.en.html#conffiles
-	cp $(CURDIR)/script/server.sh $(KUNE)/bin/
+	cp $(CURDIR)/bin/server.sh $(KUNE)/bin/
 	cp $(TARGETJAR) $(KUNE)/lib/kune-complete.jar
 	cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
 	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
