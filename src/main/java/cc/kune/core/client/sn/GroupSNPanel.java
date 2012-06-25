@@ -50,11 +50,11 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
     firstCategoryLabel.setText(i18n.t("Administrators"));
     setTooltip(firstCategoryLabel, i18n.t("Users who can administrate this group"));
     sndCategoryLabel.setText(i18n.t("Collaborators"));
-    setTooltip(sndCategoryLabel, i18n.t("Others who collaborate with this group"));
+    setTooltip(sndCategoryLabel, i18n.t("Other users that collaborate within this group"));
     trdCategoryLabel.setText(i18n.t("Pending"));
     setTooltip(trdCategoryLabel,
         i18n.t("Users pending to be accepted in this group by the administrators"));
-    sndDeckLabel.setText(i18n.t("This is an orphaned project, if you are interested in contributing please request to join"));
+    sndDeckLabel.setText(i18n.t("This is an orphan project, if you are interested in contributing, please request to join"));
     firstDeckLabel.setText(i18n.t("The members of this group are not public"));
     bottomActionsToolbar = new ActionFlowPanel(guiProvider, i18n);
     bottomPanel.add(bottomActionsToolbar);
