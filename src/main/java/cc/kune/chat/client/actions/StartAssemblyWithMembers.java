@@ -32,7 +32,7 @@ public class StartAssemblyWithMembers extends MenuItemDescriptor {
       final I18nTranslationService i18n, final GroupSNOptionsMenu optionsMenu) {
     super(action);
     action.setInviteMembers(true);
-    withText(i18n.t("Start a public assembly with members")).withToolTip(
+    withText(i18n.t("Start a public assembly with the group members")).withToolTip(
         i18n.t("Enter to this group public chat room and invite members"));
     setParent(optionsMenu);
     setPosition(0);

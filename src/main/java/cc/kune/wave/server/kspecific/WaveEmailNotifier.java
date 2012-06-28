@@ -173,7 +173,7 @@ public class WaveEmailNotifier implements ContainerListener {
                   final String title = getTitle(wavelet, by);
                   LOG.info(String.format("'%s' removed from wave '%s' to '%s'", by, title, to));
                   return createPendingNotif(to,
-                      FormatedString.build("You have been removed from message"),
+                      FormatedString.build("You have been removed from a message"),
                       removeWaveTemplate(by.toString(), title));
                 }
               });
@@ -191,7 +191,7 @@ public class WaveEmailNotifier implements ContainerListener {
                     final String url = KuneWaveServerUtils.getUrl(waveref);
                     LOG.info(String.format("'%s' update wave '%s'", by, title));
                     return new PendingNotification(NotificationType.email,
-                        FormatedString.build("You have an updated message"), updatedWaveTemplate(
+                        FormatedString.build("You have an update message"), updatedWaveTemplate(
                             by.toString(), title, url), true, false, new WaveDestinationProvider(
                             waveref, by.toString()));
                   }
