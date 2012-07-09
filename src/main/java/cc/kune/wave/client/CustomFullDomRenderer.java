@@ -247,7 +247,7 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
       metaUi.disable(BlipMetaViewBuilder.DELETE_MENU_OPTIONS_SET);
     blipPopulator.render(blip, metaUi);
 
-    return BlipViewBuilder.create(viewIdMapper.blipOf(blip), metaUi, threadsUi, convsUi);
+    return BlipViewBuilder.create(viewIdMapper.blipOf(blip), metaUi, threadsUi, convsUi, blip.isRoot());
   }
 
   /**
