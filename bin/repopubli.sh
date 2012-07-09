@@ -47,5 +47,5 @@ mvn deploy:deploy-file -DgroupId=$GROUP \
 	-Dversion=$VER \
 	-Dpackaging=$PACKAGING \
 	-Dfile=$JAR \
-	-Durl=scpexe://ourproject.org/home/groups/kune/htdocs/mavenrepo/ \
+	-Durl=scpexe://shell.ourproject.org/home/groups/kune/htdocs/mavenrepo/ \
 	-DrepositoryId=kune.ourproject.org

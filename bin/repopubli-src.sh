@@ -21,4 +21,4 @@ then
   EXTRA=$USER@
 fi
 
-mvn deploy:deploy-file -DgroupId=$2 -DartifactId=$3 -Dversion=$4 -Dclassifier=sources -Dpackaging=jar -Dfile=$1 -Durl=scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/ -DrepositoryId=kune.ourproject.org
+mvn deploy:deploy-file -DgroupId=$2 -DartifactId=$3 -Dversion=$4 -Dclassifier=sources -Dpackaging=jar -Dfile=$1 -Durl=scpexe://shell.ourproject.org/home/groups/kune/htdocs/mavenrepo/ -DrepositoryId=kune.ourproject.org
