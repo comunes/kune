@@ -62,12 +62,21 @@ public class TokenMatcherTest {
   @Test
   public void dontMatchRedirect() {
     dontMatchWaveToken(SIGNIN_TOKEN_WITH_REDIRECT);
+    dontMatchWaveToken("!" + SIGNIN_TOKEN_WITH_REDIRECT);
     dontMatchGroupToken(SIGNIN_TOKEN_WITH_REDIRECT);
+    dontMatchGroupToken("!" + SIGNIN_TOKEN_WITH_REDIRECT);
     assertFalse(tokenMatcher.hasRedirect(SIGNIN_TOKEN));
+    assertFalse(tokenMatcher.hasRedirect("!" + SIGNIN_TOKEN));
   }
 
   private void dontMatchWaveToken(final String token) {
     assertFalse("Expected '" + token + "' dont match isWaveToken", tokenMatcher.isWaveToken(token));
+  }
+
+  @Test
+  public void testInbox() {
+    assertTrue(tokenMatcher.isInboxToken(SiteTokens.WAVE_INBOX));
+    assertTrue(tokenMatcher.isInboxToken("!"+ SiteTokens.WAVE_INBOX));
   }
 
   private void matchGroupToken(final String token) {
@@ -81,28 +90,36 @@ public class TokenMatcherTest {
   @Test
   public void matchWaveToken2() {
     matchWaveToken(WAVE_TOKEN_SAMPLE2);
+    matchWaveToken("!" + WAVE_TOKEN_SAMPLE2);
     dontMatchGroupToken(WAVE_TOKEN_SAMPLE2);
+    dontMatchGroupToken("!" + WAVE_TOKEN_SAMPLE2);
   }
 
   @Test
   public void matchWaveToken3() {
     matchWaveToken(WAVE_TOKEN_SAMPLE3);
+    matchWaveToken("!" + WAVE_TOKEN_SAMPLE3);
     dontMatchGroupToken(WAVE_TOKEN_SAMPLE3);
+    dontMatchGroupToken("!" + WAVE_TOKEN_SAMPLE3);
   }
 
   @Test
   public void shouldDontMatchNull() {
     dontMatchWaveToken(null);
     dontMatchWaveToken("");
+    dontMatchWaveToken("!");
     dontMatchGroupToken(null);
     dontMatchGroupToken("");
+    dontMatchGroupToken("!");
   }
 
   @Test
   public void shouldExtractRedirect() {
     assertTrue(tokenMatcher.hasRedirect(SIGNIN_TOKEN_WITH_REDIRECT));
     assertEquals(SIGNIN_TOKEN, tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getLeft());
+    assertEquals(SIGNIN_TOKEN, tokenMatcher.getRedirect("!" + SIGNIN_TOKEN_WITH_REDIRECT).getLeft());
     assertEquals(REDIRECT_LINK, tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getRight());
+    assertEquals(REDIRECT_LINK, tokenMatcher.getRedirect("!" + SIGNIN_TOKEN_WITH_REDIRECT).getRight());
   }
 
   @Test
@@ -119,7 +136,9 @@ public class TokenMatcherTest {
   @Test
   public void shoulMatchCompleteToken() {
     matchGroupToken(GROUP_TOKEN);
+    matchGroupToken("!" + GROUP_TOKEN);
     dontMatchWaveToken(GROUP_TOKEN);
+    dontMatchWaveToken("!" + GROUP_TOKEN);
   }
 
   @Test

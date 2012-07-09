@@ -35,7 +35,7 @@ public class HistoryUtils {
    * @return the #!history token fragment with ! added
    */
   public static String hashbang(String historyToken) {
-    return historyToken.startsWith(PREFIX) ? historyToken : PREFIX + historyToken;
+    return historyToken == null || historyToken.startsWith(PREFIX) ? historyToken : PREFIX + historyToken;
   }
 
   /**
