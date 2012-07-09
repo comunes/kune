@@ -1,34 +1,34 @@
 =Kune developer's guide=
 
-''This is the trunk/DEV-GUIDE file (must have the same content that this [http://kune.ourproject.org/wiki/index.php?title=Kune_developer's_guide wiki page])''. 
+''This is the kune/DEV-GUIDE file (must have the same content that this [http://kune.ourproject.org/wiki/index.php?title=Kune_developer's_guide wiki page])''. 
 
-'''Note:''' Please edit trunk/DEV-GUIDE instead of this wiki page.
+'''Note:''' Please edit kune/DEV-GUIDE instead of this wiki page.
 
 ==Development Environment==
 
 ===Preliminars===
 
-This guide will help you to develop in Kune. It deals with the prerrequisites of Kune and the setup of its environment. You should follow each step carefully. Make sure you deal with the following initial steps and only afterwards proceed to the details of the installation of Kune. As mentioned in the subsection "1.7:Install Kune" of this guide, you will need by then the document INSTALL (found in kune/trunk/INSTALL ), where you will find the details of the installation.
+This guide will help you to develop in Kune. It deals with the prerrequisites of Kune and the setup of its environment. You should follow each step carefully. Make sure you deal with the following initial steps and only afterwards proceed to the details of the installation of Kune. As mentioned in the subsection "1.7:Install Kune" of this guide, you will need by then the document INSTALL (found in kune/INSTALL ), where you will find the details of the installation.
 
 ===Initial steps===
 
 Install some basic tools (if you don't have them). In Ubuntu, Debian and derivatives:
 
- sudo apt-get install subversion maven2 mercurial 
+ sudo apt-get install git maven2 mercurial 
 
 and Java 6:
 
  sudo apt-get install openjdk-6-jdk 
 
-Note: we use subversion for our code, maven for its dependencies, and Wave In a Box (WIAB) uses mercurial. Also you will need a modern browser like firefox or chromium, and some extensions to live happier:
+Note: we use Git for our code, Maven for its dependencies, and Wave In a Box (WIAB) uses Mercurial. Besides, you will need a modern browser such as Firefox or Chromium, and some extensions to live happier:
 
 http://ourproject.org/moin/Contributors#Recommended_Firefox_Extensions
 
-the previous page has also other more general information (texts and references) of interest for contributors.
+The previous link has also other more general information (texts and references) of interest for contributors.
 
 ===Get the code: How to checkout the Kune code===
 
-Our code is in the gitorious:
+Our code is in this Gitorious:
 https://gitorious.org/kune
 
 ====Anonymous GIT Access====
@@ -37,7 +37,7 @@ This project's GIT repository can be checked out through anonymous access with t
 
  git clone git@gitorious.org:kune/trunk.git
 
-The Eclipse IDE has some plugin for GIT and it's hightly recomended to use it, because the get rid of file/package renaming and other refactorization.
+The Eclipse IDE has some plugins for GIT and it's hightly recomended to use one, because it would get rid of file/package renaming and other refactorizations.
 
 ===Next step: install Eclipse===
 
@@ -45,14 +45,16 @@ http://www.eclipse.org/downloads/
 
 Ensure Eclipse is configured to use Java 1.6.
 
-Of course, you can use other IDEs (and please help us to improve this doc in this case).
+The instructions below will give for granted you use Eclipse. Of course, you can use any other IDEs (in such case, please help us to improve this documentation). 
 
 ====Some mandatory plugins for Eclipse====
 
-From the Eclipse Marketplace (Help > Eclipse Marketplace) install:
+From the Eclipse Marketplace (Help > Eclipse Marketplace (*)) install:
 
-* Google Plugin for Eclipse https://code.google.com/intl/en/eclipse/docs/getting_started.html
-* Subversive or Subclipse
+* Google Plugin for Eclipse https://code.google.com/intl/en/eclipse/docs/getting_started.html (if available, install also the GWT Designer from the Google repository)
+* EGit plugin (Git for Eclipse)
+
+(*): If the Marketplace does not appear in that menu, download the plugin "Marketplace Client" from the Install New Software > Your version repository > "General Purpose Tools" > Marketplace Client. Install and restart, and you will see Help > Eclipse Marketplace.
 
 ====Optional maven-eclipse integration ====
 
@@ -61,27 +63,29 @@ http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN
 
 ===Eclipse configuration===
 
-Check out if Kune's code includes Eclipse project definition files (i.e. '.project' & '.classpath') in the trunk directory. If these files do not exist, run (again in the trunk directory):
+Check out if Kune's code includes Eclipse project definition files (i.e. '.project' & '.classpath') in the kune directory. 
+(WARNING: if you imported manually the Kune source code into Eclipse, they were then created... but still you should run the following command.)
+If these files do not exist, then you need to run (again from the kune directory):
 
- mvn eclipse:eclipse (*) 
+ mvn eclipse:eclipse (IMPORTANT: (*)) 
 
-generates .project and download necessary code jars (this download process is long, so, take a rest). 
+This generates .project and download necessary code jars (this download process is long, so take a rest). 
 
-After that, you can import the project in eclipse (File > Import > Existing Projects into Workspace). 
+After that, you can import the project in Eclipse (File > Import > Existing Projects into Workspace). 
 
-Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/youruser/.m2/repository).
+Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/youruser/.m2/repository). (WARNING: It might exist already with an incorrect path. In that case, instead of "New" use "Edit").
 
-(*) Note: We actually use bin/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line.
+(*) Note: We actually use bin/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line. In order to execute the script, run ./bin/mvn-eclipse.sh   from the kune directory.
 
 ====Configure Google GWT Plugin====
 
-For now we are using GWT 2.1.1 (not necessary match the one from the eclipse GWT plugin) so probably you have to download the SDK from:
+For now we are using GWT 2.1.1 (it usually will not match with the one from the eclipse GWT plugin) so probably you have to download that version of the SDK from:
 http://code.google.com/p/google-web-toolkit/downloads/list
-unzip, and add that SDK in Eclipse (Windows > Preferences > Google > Web Toolkit > Add). 
+unzip (to any place you find appropriate), and add that SDK in Eclipse (Windows > Preferences > Google > Web Toolkit > Add). 
 
-Don't use other upper GWT SDK versions because our code (and dependencies) are not compatible with upper versions and we should do a coordinated migration.
+WARNING: Do not use any other higher GWT SDK versions (such as 2.4.0) because our code (and dependencies) are not compatible with higher versions and we should do a coordinated migration.
 
-After that, right click Kune project in the PackageExplorer > Google > WebApplication > WAR directory: set to src/main/webapp and Uncheck the "Launch and deploy from this directory".
+After that, right click Kune project in the "Package Explorer" > Google > WebApplication > WAR directory: set to src/main/webapp (after checking "This project has a WAR directory") and uncheck the "Launch and deploy from this directory".
 
 Also in Kune project properties > Google > Web Toolkit > Check that you are using the 2.1.1 SDK. 
 
@@ -93,35 +97,39 @@ some times GWT plugin is not available for newers FF, so you have to search in t
 
 ====UTF 8====
 
-The charset used in Kune is UTF8. In Eclipse, check the text-file enconding in Package Explorer > Preferences > Resource > Text file encoding.
+The charset used in Kune is UTF8. In Eclipse, check the text-file enconding in Package Explorer > Properties of Kune project > Resource > Text file encoding.
 
-You can change this globally in General > Workspace.
+You can change this globally in Eclipse Preferences > General > Workspace.
 
-Note: Please don't send patchs in other charsets.
+Note: Please don't send patches in other charsets.
 
-====Some other recomended & suggested plugins for Eclipse==== 
+====Other recommended & suggested plugins for Eclipse==== 
 
-Also from the Marketplace:
+From the Eclipse Marketplace:
+* The FindBugs plugin (looks for bug patterns)
 
-* The GWT Designer GUI Builder plugin (a great helper to work with GWT UiBinder)
-* The PMD Eclipse plugin
-* The FindBugs plugin
+From the Google repository (as you installed the "Google Plugin for Eclipse" before):
+* The GWT Designer GUI Builder plugin (a great helper to work with GWT UiBinder) 
 
-Also maybe it's interesting some other plugins like:
+From the repository http://pmd.sourceforge.net/eclipse
+* The PMD Eclipse plugin (scans the code looking for potential problems). 
 
+Also maybe some other plugins are interesting such as:
 * Quick Junit
 * JUnitHelper
 * AnyEditTools (to remove tabs and so on)
 * MercurialEclipse (if you wanna play with the WIAB code)
 
-====Other eclipse info====
+====Other Eclipse info====
 
-Useful info about GWT and Eclipse (interesting if you have problems with number of files open or with the memory use):
+Useful info about GWT and Eclipse (interesting if you have problems with number of open files or with the memory use):
 http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
 
 ===Install Kune===
 
-Only after making sure the previous steps have been finished, you can proceed to the installation of the rest of Kune. For doing so, you need to follow the instructions of the document INSTALL, available in kune/trunk/INSTALL. Afterwards you will be able to run Kune for the first time.
+Only after making sure the previous steps have been finished, you can proceed to the installation of the rest of Kune. For doing so, you need to follow the instructions of the document INSTALL, available in kune/INSTALL. Afterwards you will be able to run Kune for the first time.
+
+WARNING: The above paragraph means that the installation instructions are NOT in this document. Please, check out the referenced INSTALL document for the installing instructions, and come back here when those are finished.
 
 ===GWT's Hosted Mode===
 
@@ -198,7 +206,7 @@ All the workspace css are concatenated and compressed using csstidy (see bin/css
 
 ==Notable dependencies==
 
-Here some notable dependencies of Kune. For a more detailed list of dependences see trunk/pom.xml file.
+Here some notable dependencies of Kune. For a more detailed list of dependences see kune/pom.xml file.
 
 ===Server side===
 
