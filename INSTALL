@@ -4,7 +4,7 @@
 
 ===Prerrequisites===
 
-* Install java-jdk (>=6), maven2, mysql (> 5.0) and eclipse (well, this depends on what IDE do you use for development). In debian and derivatives:
+* Install java-jdk (>=6), maven2, mysql (> 5.0) and eclipse (well, this depends on what IDE do you use for development). In Debian and derivatives (such as Ubuntu):
 
 For development environment:
  sudo apt-get install subversion maven2 mercurial openjdk-6-jdk mysql-server libjmagick6-jni
@@ -16,7 +16,7 @@ For production environment:
 
 ====Db creation====
 
-Make two databases in your mysql:
+For development, make two databases in your mysql:
 
 CREATE DATABASE kune_dev;
 GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'db4kune';
@@ -26,24 +26,26 @@ CREATE DATABASE kune_test;
 GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
 
-or for production:
+For production, just create one database (a note on the password later on):
 
 CREATE DATABASE kune_prod;
 GRANT ALL PRIVILEGES ON kune_prod.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
 
-Now for the openfire xmpp server:
+Now for the Openfire XMPP server:
 
 CREATE DATABASE kune_openfire;
 GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
+
+For all the databases created:
 
 ALTER DATABASE kune_dev CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
 ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
 ALTER DATABASE kune_prod CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
 ALTER DATABASE kune_openfire CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
 
-Although using this password ('db4kune') is useful for a quick and dirty getting started installation (useful for development), you should consider seriously changing it to something different, since you are in high risk! In this case you should change the password acordingly in this other locations:
+WARNING: Although using this password ('db4kune') is useful for a quick and dirty getting started installation (useful for development), you should seriously consider changing it to something different, since you are in high risk! Keeping the default password (which is obviously public) is strongly discouraged, especially for production sites. In the case you change it, you should also change the password acordingly in this other locations:
 
  - pom.xml
  - bin/liquibase-migrate.sh
@@ -53,27 +55,27 @@ Although using this password ('db4kune') is useful for a quick and dirty getting
  - src/main/resources/META-INF/persistence.xml
  - src/main/webapp/WEB-INF/publicspace/config/database.yml
 
-also if you want to select the database used (by default kune_dev) you have to configure it in kune.properties.
+On the other hand, if you want to select the database used (by default "kune_dev") you have to configure it in kune.properties.
 
 ===Configure your domain===
 
-Be sure that the domain you want to use with kune resolv correctly:
+Be sure that the domain you want to use with Kune resolves correctly:
    dig example.org
 For development we recommend to use some local domain like localhost, but better with zone like local.net (add to you /etc/hosts if it's not yet there). If you want to use another different domain from localhost, you have to update src/main/resources/kune.properties and src/main/resources/wave-server* and ws.html
 
 ===Source code (if you are installing Kune for development)===
 
-See the DEVGUIDE for instructions of how to download the Kune code.
+See the DEVGUIDE for instructions on how to download the Kune code.
 
 Compile with maven:
- # (in the trunk directory)
+ # (in the kune directory)
  mvn compile -Dliquibase.should.run=false && mvn gwt:compile -P development
 
 NOTE: If you change the previous db passwords after this compiling, you have to repeat the "mvn compile" because if not, probably you will use an old kune.properties. See TROUBLESHOOT for more details.
 
 ===Configure directories===
 
-Note: This is not needed in development enviroments or when you use debian package
+Note: This is not needed in development enviroments or when you use a Debian package (.deb)
 
  sudo mkdir -p /usr/share/kune/
  sudo chown yourUser:yourUser /usr/share/kune/
@@ -98,13 +100,13 @@ Configurate hibernate/lucene indexes directories (these are GNU/Linux instructio
 
 ====Aditional info for W$ users====
 
-Not verified:  In case you are using windows as dev platform you only have to create a couple of folders anywhere you like and then specify them in persistence.xml, as follows:
+Not verified:  In case you are using Windows as dev platform you just need to create a couple of folders anywhere you like and then specify them in persistence.xml, as follows:
  <property name="hibernate.search.default.indexBase" value="C:\kune\kune-index"/>
-do the same with every persistence unit defined inside.
+Do the same with every persistence unit defined inside.
 
-===Run openfire jabber server===
+===Run Openfire Jabber server===
 
-Install and run a openfire jabber server (see Appendix A for proper configuration of openfire).
+Install and run a Openfire Jabber server (see Appendix A for proper configuration of Openfire).
 
 ===Configure your SMTP server===
 
