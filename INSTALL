@@ -221,47 +221,62 @@ Also you can make diferent tutorials (see src/main/webapp/tutorials)
 
 ==Appendix A: Configuration of Openfire xmpp server==
 
-If you want to INSTALL kune without openfire dependency (useful for development or testing), you can skip this part (configure kune.openfire.ignore in kune.properties accordingly).
+Note: If you want to INSTALL Kune without the Openfire dependency (which is useful for development or testing), you can skip this part (you should configure kune.openfire.ignore in kune.properties accordingly). In this case, there won't be XMPP server.
 
-Install openfire in your system: http://www.igniterealtime.org/downloads/index.jsp
+To install openfire in your system, download the appropriate version from: 
+http://www.igniterealtime.org/downloads/index.jsp
 
-In debian and derivatives, to install the .deb its highly recomended.
+In Debian and derivatives (Ubuntu, etc), it's highly recommended to install the .deb.
 
-Currently only openfire xmpp server is supported (due to openfire can use our users database). Ejabberd support in progress.
+Nowadays, only Openfire xmpp server is supported (in order to openfire to be able to use our users database). Ejabberd support in progress.
 
-Works in most of the openfire server versions after 3.5.1.
-See emite (our xmpp software) Server Compatibility: https://code.google.com/p/emite/wiki/ServerAndClientsCompatibility
+It works in most of the Openfire server versions after 3.5.1. See Emite (our xmpp software) Server Compatibility: https://code.google.com/p/emite/wiki/ServerAndClientsCompatibility
 
-If your openfire don't start, chech the JAVA_HOME in /etc/init.d/openfire whe usually add this line there:
+You can start openfire with 
+./etc/init.d/openfire start
+
+If your openfire doesn't start, you should do a small fix. Search for the definition of the JAVA_HOME in the file:
+/etc/init.d/openfire 
+Probably you will need to add this line there (next to the similar ones):
   t=/usr/lib/jvm/java-6-openjdk && test -d $t && JAVA_HOME=$t
 
-Connect to openfire administration: http://localhost:9090/
+And afterwards try to start it again.
 
-If you dont want to change the settings and use kune only for developing, use "localhost" as domain name. (Change kune.chat.domain in <trunk>/src/main/resources/kune.properties if you want to use other values).
+If it started successfully, you can connect to openfire administration to follow the next steps: 
+http://localhost:9090/
+
+If you don't want to change the settings and use Kune just for development, use "localhost" as domain name. (Change kune.chat.domain in <trunk>/src/main/resources/kune.properties if you want to use other values).
 
 Select "Standard Database Connection"
 
-Select "MySQL" drivers. And configure the mysql connection. This is an example:
+Select "MySQL" drivers. Afterwards, you should configure the mysql connection. Following the database created previously in this INSTALL, you should fill it like this:
     Database Driver Presets:        MySQL
-    JDBC Driver Class:              com.myrootsql.jdbc.Driver
+    JDBC Driver Class:              com.mysql.jdbc.Driver
     Database URL:                   jdbc:mysql://localhost:3306/kune_openfire
     Username:                       kune
     Password:                       db4kune
 
-(Recall the security concerns about the default database password!)
+Note: (Recall the security concerns about the default database password!)
+Note: This is just the default configuration, which can be modified freely. 
+Note: The JDBC Driver Class is usually left by default. Your default might be the one above or instead "com.myrootsql.jdbc.Driver". 
+
 
 Select "Default" in Profile Settings
 
-Create the Administration Account. Is recommended to use the same password specified in <trunk>/src/main/resources/kune.properties
+Create the Administration Account. Is recommended to use the same password specified in <kune>/src/main/resources/kune.properties Specifically, the one of "kune.admin.password".
+
+Afterwards, you should log-in using the user admin and the password just used.
 
 Configure the 'Group chat service' (in Group Chat > Group Chat Settings tab) with "rooms" additionally or instead of "conference" (or change kune.chat.roomHost in <trunk>/src/main/resources/kune.properties)
 
-In Server > Server Settings > HTTP Binding, enable "HTTP Bind Settings" and set the port to 5280. Check that port is not used by other service in your machine (we use 5280 as default, but if you want to use other change it your web.xml accordly)
+In Server > Server Settings > HTTP Binding, enable "HTTP Bind Settings" and set the port to 5280. Check that port is not used by another service in your machine (we use 5280 as default, but if you want to use another port, change your web.xml accordly)
 
 Because users are managed from the database of kune, we recommend to set:
 In Server > Server Settings > Registration & Login > Inband Account Registration > Disabled
 In Server > Server Settings > Registration & Login > Change Password > Disabled
 so this will not conflict with kune users management.
+
+Note: Remember to click "Save Settings" after each change in Openfire web administration.
 
 ===Openfire auth via Kune===
 
