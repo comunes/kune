@@ -71,7 +71,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Instantiates a new builder.
-     * 
+     *
      * @param dialogId
      *          the dialog id (used for debuggin)
      * @param promptText
@@ -95,7 +95,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Allow blank.
-     * 
+     *
      * @param allowBlank
      *          the allow blank
      * @return the builder
@@ -107,7 +107,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder#build()
      */
     @Override
@@ -118,7 +118,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Field width.
-     * 
+     *
      * @param fieldWidth
      *          the field width
      * @return the builder
@@ -130,7 +130,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Max length.
-     * 
+     *
      * @param maxLength
      *          the max length
      * @return the builder
@@ -142,7 +142,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Max length text.
-     * 
+     *
      * @param maxLengthText
      *          the max length text
      * @return the builder
@@ -154,7 +154,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Min length.
-     * 
+     *
      * @param minLength
      *          the min length
      * @return the builder
@@ -166,7 +166,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Min length text.
-     * 
+     *
      * @param minLengthText
      *          the min length text
      * @return the builder
@@ -178,7 +178,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Regex.
-     * 
+     *
      * @param regex
      *          the regex
      * @return the builder
@@ -190,7 +190,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Regex text.
-     * 
+     *
      * @param regexText
      *          the regex text
      * @return the builder
@@ -202,7 +202,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Textbox id.
-     * 
+     *
      * @param textboxId
      *          the textbox id
      * @return the builder
@@ -214,7 +214,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder#width(int)
      */
     @Override
@@ -237,7 +237,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Instantiates a new prompt top dialog.
-   * 
+   *
    * @param builder
    *          the builder
    */
@@ -248,6 +248,7 @@ public class PromptTopDialog extends BasicTopDialog {
     textField.getMessages().setRegexText(builder.regexText);
     textField.getMessages().setMinLengthText(builder.minLengthText);
     textField.getMessages().setMaxLengthText(builder.maxLengthText);
+    textField.setTabIndex(1);
     textField.setId(builder.textboxId);
     if (builder.width != 0) {
       textField.setWidth(builder.width);
@@ -287,7 +288,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Gets the text field value.
-   * 
+   *
    * @return the text field value
    */
   public String getTextFieldValue() {
@@ -296,7 +297,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Checks if is valid.
-   * 
+   *
    * @return true, if is valid
    */
   public boolean isValid() {
@@ -305,12 +306,26 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Sets the text field value.
-   * 
+   *
    * @param text
    *          the new text field value
    */
   public void setTextFieldValue(final String text) {
-    textField.setValue(text);
+    textField.setRawValue(text);
+  }
+
+  /**
+   * Sets the text field focus.
+   *
+   * @param text
+   *          the new text field value
+   */
+  public void setTextFieldFocus() {
+    textField.focus();
+  }
+
+  public void setTextFieldSelectOnFocus(boolean selectOnFocus) {
+    textField.setSelectOnFocus(selectOnFocus);
   }
 
 }

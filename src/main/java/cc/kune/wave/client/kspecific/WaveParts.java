@@ -19,6 +19,8 @@
  */
 package cc.kune.wave.client.kspecific;
 
+import org.waveprotocol.wave.client.common.util.WindowUtil;
+
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
@@ -39,6 +41,7 @@ public class WaveParts {
         waveClientManager.get();
         waveOnlineStatus.get();
         inboxCount.get();
+        WindowUtil.instance = new WindowKuneWrapper();
       }
     });
   }

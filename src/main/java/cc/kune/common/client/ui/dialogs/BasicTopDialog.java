@@ -154,7 +154,6 @@ public class BasicTopDialog extends BasicDialog {
     popup.add(this);
     popup.ensureDebugId(builder.dialogId);
     closeBtn.ensureDebugId(builder.dialogId + CLOSE_ID);
-    super.getTitleText().setText(builder.title, builder.direction);
     if (TextUtils.notEmpty(builder.icon)) {
       super.setTitleIcon(builder.icon);
     }
@@ -175,6 +174,10 @@ public class BasicTopDialog extends BasicDialog {
         setSizes(event.getWidth(), event.getHeight());
       }
     });
+  }
+
+  public void setText(String text, Direction direction) {
+    super.getTitleText().setText(text, direction);
   }
 
   private String calculatePercent(final int currentSize, final String percent) {

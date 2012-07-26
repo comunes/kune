@@ -143,10 +143,10 @@
 
 .k-dialog-title div {
   color: #552200;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   line-height: 0.7;
-  padding: 0 0 6px 5px;
+  padding: 0 0 6px 0px;
 }
 
 .k-dialog-innerp {

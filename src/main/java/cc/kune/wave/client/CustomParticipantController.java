@@ -22,6 +22,8 @@ import javax.annotation.Nullable;
 import org.waveprotocol.wave.client.account.Profile;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.EscapeUtils;
+import org.waveprotocol.wave.client.common.util.WindowPromptCallback;
+import org.waveprotocol.wave.client.common.util.WindowUtil;
 import org.waveprotocol.wave.client.wavepanel.WavePanel;
 import org.waveprotocol.wave.client.wavepanel.event.EventHandlerRegistry;
 import org.waveprotocol.wave.client.wavepanel.event.WaveClickHandler;
@@ -45,7 +47,6 @@ import cc.kune.core.client.i18n.I18n;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 
 /**
  * Installs the add/remove participant controls.
@@ -137,26 +138,30 @@ public final class CustomParticipantController {
   /**
    * Shows an add-participant popup.
    */
-  private void handleAddButtonClicked(Element context) {
-    String addressString = Window.prompt("Add a participant(s) (separate with comma ','): ", "");
-    if (addressString == null) {
-      return;
-    }
+  private void handleAddButtonClicked(final Element context) {
+    WindowUtil.prompt("Add a participant(s) (separate with comma ','): ", "", new WindowPromptCallback() {
+      @Override
+      public void onReturn(String addressString) {
+        if (addressString == null) {
+          return;
+        }
 
-    ParticipantId[] participants;
+        ParticipantId[] participants;
 
-    try {
-      participants = buildParticipantList(localDomain, addressString);
-    } catch (InvalidParticipantAddress e) {
-      NotifyUser.error(I18n.t("Invalid address: [%s]", addressString));
-      return;
-    }
+        try {
+          participants = buildParticipantList(localDomain, addressString);
+        } catch (InvalidParticipantAddress e) {
+          NotifyUser.error(I18n.t("Invalid address: [%s]", addressString));
+          return;
+        }
 
-    ParticipantsView participantsUi = views.fromAddButton(context);
-    Conversation conversation = models.getParticipants(participantsUi);
-    for (ParticipantId participant : participants) {
-      conversation.addParticipant(participant);
-    }
+        ParticipantsView participantsUi = views.fromAddButton(context);
+        Conversation conversation = models.getParticipants(participantsUi);
+        for (ParticipantId participant : participants) {
+          conversation.addParticipant(participant);
+        }
+      }
+    });
   }
 
   /**

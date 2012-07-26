@@ -64,6 +64,8 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
     dialog.setSecondBtnText(cancelBtnMsg);
     dialog.setSecondBtnTitle(ask.getCancelBtnTooltip());
     dialog.getTitleText().setText(ask.getTitle());
+    dialog.setFirstBtnTabIndex(1);
+    dialog.setSecondBtnTabIndex(2);
     askLabel.setHTML(ask.getMessage());
     dialog.showCentered();
     resetHandlers();
@@ -82,6 +84,7 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
       }
     });
     dialog.showCentered();
+    dialog.setFirstBtnFocus();
     final ImageResource icon = ask.getIcon();
     if (icon != null) {
       dialog.setTitleIcon(icon);

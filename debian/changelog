@@ -1,3 +1,18 @@
+kune (0.2.0+b19) unstable; urgency=low
+
+  * Fix #329: Window wrapper
+  * Fix for #323 - WAVE-360 - Waves disappears from inbox when removing a user.
+  * Alert focus on "ok" button
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 26 Jul 2012 12:33:39 +0200
+
+kune (0.2.0+b18) unstable; urgency=low
+
+  * Wave code updated (better usability and styles in editor)
+  * Fix NPE in token hashbag
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 09 Jul 2012 18:18:44 +0200
+
 kune (0.2.0+b17) unstable; urgency=low
 
   * Changed group background issues

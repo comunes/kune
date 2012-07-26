@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.i18n;
 
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -27,6 +28,10 @@ public class I18n {
 
   @Inject
   private static I18nUITranslationService i18n;
+
+  public static Direction getDirection()  {
+    return i18n.getDirection();
+  }
 
   public static boolean isRTL() {
     return i18n.isRTL();
