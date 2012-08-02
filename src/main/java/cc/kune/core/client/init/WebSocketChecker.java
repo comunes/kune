@@ -39,7 +39,8 @@ public class WebSocketChecker {
    * This class checks if the browser supports websockets and give some advices
    * to the user.
    *
-   * This can be tested in firefox setting network.websocket.enabled;false in about:config
+   * This can be tested in firefox setting network.websocket.enabled;false in
+   * about:config
    *
    * @param session
    *          the session
@@ -58,8 +59,11 @@ public class WebSocketChecker {
               res.important32(),
               I18n.t("Your browser is currently unsupported"),
               I18n.t(
-                  "Your browser version is not properly supported. Please, use a free/libre modern and updated browser like the last version of [%s] instead. Some functionalities such as concurrent edition will then work properly. Continue anyway?",
-                  mozLink), new SimpleResponseCallback() {
+                  "Your browser version is not properly supported. Please, use a free/libre modern and updated browser like the last version of [%s] instead.",
+                  mozLink)
+                  + " "
+                  + I18n.t("Some functionalities such as concurrent edition will then work properly. Continue anyway?"),
+              new SimpleResponseCallback() {
                 @Override
                 public void onCancel() {
                   WindowUtils.changeHref(CoreConstants.MOZILLA_FF_LINK);
