@@ -74,7 +74,7 @@ Don't try to update the liquibase changelogs you have already use. Better create
 
 ** Lucene
 
-*** Indexes problems during upgrades
+*** Kune indexes problems during upgrades
 
 If you get errors like:
 
@@ -87,6 +87,25 @@ Caused by: org.apache.lucene.index.CorruptIndexException: Unknown format version
 The indexes in /var/lib/kune/lucene/kune*/indexes/ are not compatible. For the moment the only workaround we now it's to delete the indexes.
 
 Sometimes the tests also fails without any error (use the same workaround).
+
+
+*** Wave indexes problems
+
+**** Recreation
+
+Sometimes you have to recreate all the waves index stoping kune removing /var/lib/kune/_wave_indexes.
+
+
+**** Wave index locked
+
+If with kune stopped you see some write.lock in /var/lib/kune/_wave_indexes you should delete it before start kune.
+
+# ls -rlta /var/lib/kune/_wave_indexes
+total 8
+-rw-r--r--  1 root root    0 jul 26 14:15 write.lock
+drwxr-xr-x  2 root root 4096 jul 26 14:15 .
+drwxr-xr-x 13 kune kune 4096 jul 26 14:19 ..
+kunedemo:/usr/share/kune/custom# rm /var/lib/kune/_wave_indexes/write.lock
 
 ** JUnit
 
