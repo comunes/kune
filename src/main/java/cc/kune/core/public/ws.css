@@ -1672,18 +1672,15 @@ div.docEditorContainer div.thread div.time {
 }
 
 /* Unsave status */
-.k-unsave-status {
-  color: #808080;
-  margin-top: 3px;
-}
 
 .k-unsave-popup {
-  color: #808080;
+  color: #4d4d4d;
   background-color: #CCC;
   border: 1px solid #999;
   -moz-border-radius-topleft: 3px;
   border-top-left-radius: 3px;
   -webkit-border-top-left-radius: 3px;
-  padding: 0px 5px;
-  line-height: 13px;
+  padding: 0px 35px;
+  line-height: 11px;
+  font-size: 14px;
 }
