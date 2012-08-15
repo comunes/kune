@@ -1,3 +1,10 @@
+kune (0.2.0+b20) unstable; urgency=low
+
+  * Wave updated with many fixes (WAVE-312, WAVE-363, 1970-ignore
+    gadget with 100%, done button
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 13 Aug 2012 15:48:37 +0200
+
 kune (0.2.0+b19) unstable; urgency=low
 
   * Fix #329: Window wrapper
