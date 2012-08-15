@@ -1,0 +1,8 @@
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/kune" ]; then
+	if [ ! -e "/etc/init/kune.conf" ]; then
+		update-rc.d kune defaults >/dev/null
+	fi
+	invoke-rc.d kune start || exit $?
+fi
+# End automatically added section
