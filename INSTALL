@@ -12,6 +12,9 @@ For development environment:
 For production environment:
  sudo apt-get install openjdk-6-jdk mysql-server libjmagick6-jni
 
+NOTE: If you want the Jabber/XMPP chat service in your installation, you will need OpenFire, as described later on.
+NOTE: If you want to send automatic email notifications, you will need to set up a SMTP server, and test it as described later on.
+
 ===MYSQL configuration===
 
 ====Db creation====
