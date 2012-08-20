@@ -159,12 +159,13 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
-  <changeSet id="24" author="vjrj">
+<!-- <changeSet id="24" author="vjrj">
     <comment>User password removed, only diggest/salt</comment>
     <sqlFile path="src/main/resources/db/update-0019-userpass.sql"
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+ -->
   <changeSet id="25" author="vjrj">
     <comment>Groups and Users shortName/longName bigger</comment>
     <sqlFile path="src/main/resources/db/update-0020-names-width.sql"
