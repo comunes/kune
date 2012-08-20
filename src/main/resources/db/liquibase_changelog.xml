@@ -6,7 +6,7 @@
   <preConditions>
     <!--  only execute this if the database exists (see DtabaInitializer.java -->
     <sqlCheck expectedResult="1">
-      SELECT count(*) > 0 FROM groups;
+      SELECT count(*) >= 0 FROM groups;
     </sqlCheck>
   </preConditions>
 
