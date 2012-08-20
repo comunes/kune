@@ -146,12 +146,22 @@ public class SitebarActionsPresenter extends
       }
     };
 
+    final AbstractExtendedAction faqAction = new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        KuneWindowUtils.open("http://kune.ourproject.org/faq/");
+      }
+    };
+
+
     wavePowered.putValue(Action.NAME, i18n.t("Apache Wave powered"));
     wavePowered.putValue(Action.SMALL_ICON, res.waveIcon());
     aboutAction.putValue(Action.NAME, i18n.t("About kune"));
     aboutAction.putValue(Action.SMALL_ICON, commonRes.info());
     errorAction.putValue(Action.NAME, i18n.t("Errors info"));
     errorAction.putValue(Action.SMALL_ICON, commonRes.important());
+    faqAction.putValue(Action.NAME, i18n.t("Kune FAQ"));
+    faqAction.putValue(Action.SMALL_ICON, res.kuneIcon16());
     // aboutAction.setShortcut(shortcut);
     // shortcutReg.put(shortcut, aboutAction);
 
@@ -159,6 +169,7 @@ public class SitebarActionsPresenter extends
     myGroupsMenu.get();
     newGroupLink.get();
     createGotoKune();
+    MenuItemDescriptor.build(MORE_MENU, faqAction);
     MenuItemDescriptor.build(MORE_MENU, bugsAction);
     MenuItemDescriptor.build(MORE_MENU, errorAction);
     MenuItemDescriptor.build(MORE_MENU, aboutAction);
