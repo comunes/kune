@@ -38,7 +38,7 @@ import com.google.inject.Inject;
 
 public class DocsClientTool extends FoldableAbstractClientTool {
 
-  private static final String EMPTY_CREATE_SOME = "This folder is empty. You can create a document or folder here.";
+  private static final String EMPTY_CREATE_SOME = "This folder is empty. You can create some document or folder here.";
   private final IconicResources icons;
 
   @Inject
@@ -48,7 +48,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     super(
         TOOL_NAME,
         i18n.t(DocsToolConstants.ROOT_NAME),
-        i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs could be static pages in your public web page in case you publish them."),
+        i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs can be static pages in your web page if you publish them"),
         icons.docs(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
     this.icons = icons;
 
