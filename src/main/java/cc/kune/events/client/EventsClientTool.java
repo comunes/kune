@@ -67,7 +67,7 @@ public class EventsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerContentTypeIcon(TYPE_ROOT, icons.events());
     registerContentTypeIcon(TYPE_MEETING, icons.events());
-    registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any meeting, create one"));
+    registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any meeting, you can create one"));
     registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t("There isn't any meeting"));
   }
 

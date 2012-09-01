@@ -38,7 +38,7 @@ import com.google.inject.Inject;
 
 public class TasksClientTool extends FoldableAbstractClientTool {
 
-  private static final String NO_TASK = "There isn't any task";
+  private static final String NO_TASK = "There are no tasks";
   private final IconicResources icons;
 
   @Inject
@@ -48,7 +48,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
     super(
         TOOL_NAME,
         i18n.t(ROOT_NAME),
-        i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
+        i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, or add others to a task, comment them, add additional info, etc"),
         icons.tasks(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
     this.icons = icons;
 

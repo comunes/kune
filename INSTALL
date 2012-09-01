@@ -12,6 +12,9 @@ For development environment:
 For production environment:
  sudo apt-get install openjdk-6-jdk mysql-server libjmagick6-jni
 
+NOTE: If you want the Jabber/XMPP chat service in your installation, you will need OpenFire, as described later on.
+NOTE: If you want to send automatic email notifications, you will need to set up a SMTP server, and test it as described later on.
+
 ===MYSQL configuration===
 
 ====Db creation====
@@ -114,11 +117,10 @@ See Appendix C for more info.
 
 ===Wave in a Box===
 
-Follow "Federation configuration" from:
+If you want to use Kune in production and federate with other Wave capable servers, follow "Federation configuration" from:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/code/installation
 and:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/federation/openfire-installation
-if you want to use Kune in production and federate with other Wave capable servers.
 
 ===Increase open file limits in system===
 
@@ -127,10 +129,13 @@ http://posidev.com/blog/2009/06/04/set-ulimit-parameters-on-ubuntu/
 
 ===Install jmagick===
 
-Install jmagick-jni. In debian: apt-get install libjmagick6-jni (version 6.2.6-0) also you need or:
+Install jmagick-jni. In debian: 
+ apt-get install libjmagick6-jni (version 6.2.6-0) 
+Besides, you need either:
  sudo ln -s /usr/lib/jni/libJMagick.so /usr/lib/libJMagick.so
-or
- set LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jni in your test and in your webserver.
+or:
+	set LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jni 
+in your test and in your webserver.
 
 ====Aditional info for W$ users====
 
@@ -138,7 +143,7 @@ Not verified: in Windows you need to do something similar (copy the jmagick .dll
 
 ===Initialize the kune database===
 
-Choose the one you will use (the first for development or the last for production):
+Choose the one you will use. Run the second line (kune_dev) for development, or the last line (kune_prod) for production:
 
 mysql -p -u kune kune_test < src/main/resources/db/kune_initialize.sql 
 mysql -p -u kune kune_dev < src/main/resources/db/kune_initialize.sql 
@@ -146,18 +151,20 @@ mysql -p -u kune kune_prod < src/main/resources/db/kune_initialize.sql
 
 (Windows users can use Mysql Browser to execute this SQL: File > Open Script > Select "bin\kune_initialize.sql" > Execute).
 
-And if all goes ok, migrate the database:
+And if everything goes ok, migrate the database:
 
 bin/liquibase-migrate.sh
 
-Windows developer users should do this by hand or adapt this (simple) script to Windows or simple:
+This last script might be needed to be adapted, as it is prepared for the "kune_dev" table (which might not be the one selected). Besides, the JAR versions might need to be corrected. In the worst case if the script does not work, try to jump to the next step.
+
+Note: Windows developer users should do this by hand or adapt this (simple) script to Windows or simple:
 mvn compile -Dliquibase.should.run=true (or mvn compile)
 
 ===Run the server===
 
 Run the server for the first time and initialize the db:
 
-I you are installing kune for development:
+If you are installing kune for development:
 
  bin/server.sh # or mvn exec:java
 
@@ -167,29 +174,41 @@ or for production
 
 ===Connecting to the server===
 
-Open your browser and connect to http://localhost:8888/
+Open your browser and connect to Kune. 
 
-(or any other port you configured in wave-server.properties)
+If you are installing kune for development:
+http://localhost:8888/?locale=en
+
+or for production:
+http://localhost:8888
+
+Note: If you configured a different port in wave-server.properties, replace 8888 for the appropriate port
+Note: Kune for development will not work in languages other than English (locale=en). Trying other languages (locale=fr, locale=es, etc) in development mode might result in loops.
 
 ==Production environment instructions==
 
 With
   mvn assembly:assembly -P production
-an executable target/kune-VERSION-jar-with-dependencies.jar is generated in target directory. That you can use to start kune:
+an executable target/kune-VERSION-jar-with-dependencies.jar is generated in target directory. 
+
+You can use such in order to start kune:
 
 bin/server.sh -j kune.jar
 
-bin/server.sh -h # for more options
+For more options:
+bin/server.sh -h 
 
 ==Debian package generation==
 
 In trunk run:
   mvn assembly:assembly -P production 
-(production profile generates a lot of permutations for each language and browser, you can use -P development if is only for test) and generate the debian package with
+Note: Production profile generates a lot of permutations for each language and browser. You can use << mvn assembly:assembly -P development >> if it is only for testing.
+
+Then, generate the Debian package with
   debuild -us -uc -b
 or 
   debuild -b
-to sign the result package.
+to sign the resulting package.
 
 ==Releasing kune==
 
@@ -200,7 +219,7 @@ More info: http://maven.apache.org/plugins/maven-release-plugin/index.html
 
 ===Customization: Adapting Kune to your site===
 
-Copy and adapt as much as possible to your needs these files:
+Copy and adapt to your needs, as much as possible, these files:
 
 - src/main/resources/kune.properties
 - src/main/resources/wave-server.properties
@@ -209,15 +228,15 @@ Copy and adapt as much as possible to your needs these files:
 - src/main/webapp/others/kune-client-actions.xml (extensions definitions)
 - src/main/webapp/ in general
 
-The best way to configure kune is to copy that files (for instance in /etc/kune/), to create a custom directory for ws.html and other of your custom html stuff (for instance in /usr/share/kune/), and configure that directory to resources_base in wave-server.properties, for instance:
+The best way to configure kune is to copy those files (for instance in /etc/kune/ ), to create a custom directory for ws.html and others of your custom html stuff (for instance in /usr/share/kune/ ), and configure that directory to resources_base in wave-server.properties. For instance:
 
 resource_bases = /usr/share/kune,target/kune-0.1.0-SNAPSHOT/
 
-The ws.html file is the home that you get at start-up and have some configurations also. You can change the html inside to your needs but follow the commentaries and try not to remove important parts that make kune to start. Also to change the main logo, favicon, etc.
+The ws.html file is the home that you get at start-up and where you have also some configurations. You can adapt the html inside to your needs but follow the comments and try not to remove important parts (that allow kune to start). Besides, you can change the main logo, favicon, etc.
 
-Note: Remember that if you are running kune using the source code (via mvn) and you change this src files in some point, you have to make 'mvn compile' so are copied to the target directoy. This is not applicable when you run kune via jar.
+Note: Remember that if you are running kune using the source code (via mvn) and you change these src files at some point, you have to make 'mvn compile' so they are copied to the target directoy. This is not applicable when you run kune via jar.
 
-Also you can make diferent tutorials (see src/main/webapp/tutorials)
+Besides, you can build diferent tutorials than the default ones (see src/main/webapp/tutorials)
 
 ==Appendix A: Configuration of Openfire xmpp server==
 
@@ -228,7 +247,7 @@ http://www.igniterealtime.org/downloads/index.jsp
 
 In Debian and derivatives (Ubuntu, etc), it's highly recommended to install the .deb.
 
-Nowadays, only Openfire xmpp server is supported (in order to openfire to be able to use our users database). Ejabberd support in progress.
+Nowadays, only Openfire xmpp server is supported (in order for Openfire to be able to use our users database). Ejabberd support is in progress.
 
 It works in most of the Openfire server versions after 3.5.1. See Emite (our xmpp software) Server Compatibility: https://code.google.com/p/emite/wiki/ServerAndClientsCompatibility
 
@@ -242,7 +261,7 @@ Probably you will need to add this line there (next to the similar ones):
 
 And afterwards try to start it again.
 
-If it started successfully, you can connect to openfire administration to follow the next steps: 
+If it started successfully, you can connect to openfire administration to follow the next steps (using default port 9090): 
 http://localhost:9090/
 
 If you don't want to change the settings and use Kune just for development, use "localhost" as domain name. (Change kune.chat.domain in <trunk>/src/main/resources/kune.properties if you want to use other values).
@@ -256,14 +275,14 @@ Select "MySQL" drivers. Afterwards, you should configure the mysql connection. F
     Username:                       kune
     Password:                       db4kune
 
-Note: (Recall the security concerns about the default database password!)
+Note: Recall the security concerns about the default database password!
 Note: This is just the default configuration, which can be modified freely. 
 Note: The JDBC Driver Class is usually left by default. Your default might be the one above or instead "com.myrootsql.jdbc.Driver". 
 
 
 Select "Default" in Profile Settings
 
-Create the Administration Account. Is recommended to use the same password specified in <kune>/src/main/resources/kune.properties Specifically, the one of "kune.admin.password".
+Create the Administration Account. It is recommended to use the same password specified in <kune>/src/main/resources/kune.properties Specifically, the one of "kune.admin.password".
 
 Afterwards, you should log-in using the user admin and the password just used.
 
@@ -280,7 +299,9 @@ Note: Remember to click "Save Settings" after each change in Openfire web admini
 
 ===Openfire auth via Kune===
 
-Download from http://kune.cc/downloads/openfireauth kune-openfireauth-VERSION.jar and copy to /usr/share/openfire/lib as root. Set the correct owner:
+Download from http://kune.cc/downloads/openfireauth kune-openfireauth-VERSION.jar and copy to /usr/share/openfire/lib as root. 
+
+Set the correct owner:
 
 sudo chown openfire:openfire /usr/share/openfire/lib/kune-openfireauth-VERSION.jar
 sudo ln -s /etc/kune/wave-server.properties /usr/share/openfire/lib/wave-server.properties
@@ -301,7 +322,7 @@ INSERT INTO `ofProperty` VALUES('hybridAuthProvider.secondaryProvider.className'
 
 Alternatively you can do this via 'Server > Server Manager > System Properties'.
 
-This is used to set the database of users of openfire to kune users database table. When you do that you have to follow the next step (or you will get authentication problems).
+This is used to set the database of users of openfire to kune users database table. When you do that you have to follow the next steps (or you will get authentication problems).
 
 Also in 'Server > Server Manager > System Properties' set (verify that the mysql connection user and password is the same as the password you choose to configure your database):
 
@@ -317,10 +338,10 @@ jdbcUserProvider.userCountSQL = SELECT COUNT(*) FROM kune_dev.kusers
 jdbcUserProvider.usernameField = shortName
 admin.authorizedJIDs = admin@PUT_HERE_YOUR_DOMAIN
 
-Or, alternatively (if is more easy for you), add these lines to conf/openfire.xml
-* In debian (with a .deb installation) you can to edit the configuration in /etc/openfire directory.
+Or, alternatively (if it is easier for you), add these lines to conf/openfire.xml
+* In debian (with a .deb installation) you can edit the configuration in /etc/openfire directory.
 * In Mac: /usr/local/openfire/conf
-(Again check that the user/passwd of the db is the same here and in kune.properties the ones configured before):
+(Again check that the user/passwd of the db is the same one here and in kune.properties, the ones configured before):
 
 <pre>
 <jive>
@@ -354,37 +375,38 @@ Instead of:
   <jdbcUserProvider/>
   <admin/>
 
-(Be sure that the user and the password matches if you changed de default password 'db4kune', also the database name if you use another different like production one).
+(Make sure that the user and the password matches if you changed the default password 'db4kune'. Check also the database name if you use a different one than the production one).
 
-When you add this to the configuration and you restart, openfire will import (and remove) this part of the configuration to its database so you will see it in 'Server > Server Manager > System Properties'.
+When you add this to the configuration and you restart, openfire will import (and remove) this part of the configuration from its database so you will see it in 'Server > Server Manager > System Properties'.
 
-Troubleshooting: If you cannot login to openfire after the kune installation, or the chat client don't login correctly you can check if the previous values are correct looking in the table ofProperty of openfire database. Using mysql command line, or MySql Browser you can fix there also the System Properties.
+Troubleshooting: If you cannot login to openfire after the kune installation, or the chat client don't login correctly you can check if the previous values are correct looking in the table ofProperty of openfire database. Using mysql command line, or MySql Browser you can also fix there the System Properties.
 
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
 
-Also you'll most likely want to change which usernames are authorized to login to the admin console adding then to <authorizedUsernames>.
+Besides, you'll most likely want to change which usernames are authorized to login to the admin console adding them to <authorizedUsernames>.
 
-Restart openfire: /etc/init.d/openfire restart
+Restart openfire: 
+/etc/init.d/openfire restart
 after that the previous values will be incorpored to Server > Server Manager > System Properties
 
-After the section 'Run the server for the first time' you'll be able to use the password of the admin user of the kune instalation (specified in kune.properties), or other admin new users you want to register using kune and configure in the authorizedUsernames attribute.
+After the section 'Run the server for the first time' you'll be able to use the password of the admin user of the kune instalation (specified in kune.properties), or other admin new users you want to register using kune and that were configure in the authorizedUsernames attribute.
 
 ===Configure your DNS for your XMPP service correctly===
 
-You have to configure your DNS domain adding SRV records for your XMPP services if you wanna use kune in production (not necessary for development). This permit that your XMPP server comunicates with other similar servers correctly. You should follow:
+You have to configure your DNS domain adding SRV records for your XMPP services if you want to use kune in production (this is not necessary for development). This allows your XMPP server to communicate with other similar servers correctly. You should follow:
 http://jabberd.org/1.4/doc/adminguide#dnssrv
 and:
 http://www.google.com/support/a/bin/answer.py?answer=34143
 
 ==Appendix B: Apache configuration sample==
 
-WARNING: This should not work with current wave's websocket. Consider use nginx (that support websocket better) instead.
+WARNING: This will not work with current Wave's websocket. Consider using nginx (that has a better support for websockets) instead.
 http://serverfault.com/questions/290121/configuring-apache2-to-proxy-websocket
 
 You can configure your Apache with this kind of virtual host
 
-Enable this modules:
+Enable these modules:
 a2enmod expires
 a2enmod proxy
 a2enmod proxy_connect
@@ -418,13 +440,13 @@ a2enmod proxy_http
 
 ==Appendix C: Configure your SMTP mail server==
 
-You should configure a SMTP server for use by Kune in production sites. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance test something like:
+You should configure a SMTP server in order to be used by Kune in production sites. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance, you can test something such as:
 
  echo "Bests," | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar
 
 http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#ProtocolSMTP
 http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#JavaMailSending
 
-And:
+For more specific configuration parameters that you might need with your SMTP server, you can check:
 http://javamail.kenai.com/nonav/javadocs/com/sun/mail/smtp/package-summary.html
-for more specific configuration parameters that maybe you need with your smtp server.
+
