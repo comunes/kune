@@ -89,12 +89,15 @@ The indexes in /var/lib/kune/lucene/kune*/indexes/ are not compatible. For the m
 Sometimes the tests also fails without any error (use the same workaround).
 
 
-*** Wave indexes problems
+*** Wave indexes problems and waves corruption problems
 
 **** Recreation
 
-Sometimes you have to recreate all the waves index stoping kune removing /var/lib/kune/_wave_indexes.
+Sometimes you have to recreate all the waves index stoping kune removing /var/lib/kune/_wave_indexes and starting again. This process is long depending on the number of waves, so take a rest util kune starts.
 
+**** Yes, but kune doesn't start after a while
+
+If the previous process takes too much time, look for the kune process and see with "lsof <pid>" if it's hanged in some specific wave (so, if a directory/files opened are always the same). Some times can happen if exists some corrupted wave that prevends kune to start. In this case, a dirty workaround is to see the wave directory is always open with lsof, to stop kune, move that directory (aka wave) in another location and try to start again whitout it.
 
 **** Wave index locked
 
