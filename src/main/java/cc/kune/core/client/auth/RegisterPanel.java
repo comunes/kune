@@ -114,7 +114,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
   @Override
   public void show() {
     super.show();
-    KuneUiUtils.focusOnField(registerForm.getShortNameField());
+    KuneUiUtils.focusOnField(registerForm.getLongNameField());
   }
 
   @Override

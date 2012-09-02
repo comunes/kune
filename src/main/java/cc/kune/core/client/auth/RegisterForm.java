@@ -48,13 +48,13 @@ public class RegisterForm extends DefaultForm {
   public RegisterForm(final I18nTranslationService i18n, final UserFieldFactory userFieldFactory) {
     super.addStyleName("kune-Margin-Large-l");
 
-    shortNameRegField = userFieldFactory.createUserShortName(NICK_FIELD);
-    shortNameRegField.setTabIndex(1);
-    add(shortNameRegField);
-
     longNameRegField = userFieldFactory.createUserLongName(LONGNAME_FIELD);
-    longNameRegField.setTabIndex(2);
+    longNameRegField.setTabIndex(1);
     add(longNameRegField);
+    
+    shortNameRegField = userFieldFactory.createUserShortName(NICK_FIELD);
+    shortNameRegField.setTabIndex(2);
+    add(shortNameRegField);   
 
     passwdRegField = userFieldFactory.createUserPasswd(PASSWORD_FIELD, i18n.t("Password"));
     passwdRegField.setTabIndex(3);
@@ -83,6 +83,10 @@ public class RegisterForm extends DefaultForm {
 
   public Field<String> getShortNameField() {
     return shortNameRegField;
+  }
+
+  public Field<String> getLongNameField() {
+    return longNameRegField;
   }
 
   public void setEmailFailed(final String msg) {
