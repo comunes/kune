@@ -128,13 +128,13 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     // intro.setStyleName("k-form-intro");
     // form.add(intro);
 
-    shortNameField = groupFieldFactory.createGroupShortName(SHORTNAME_FIELD);
-    shortNameField.setTabIndex(1);
-    form.add(shortNameField);
-
     longNameField = groupFieldFactory.createLongName(LONGNAME_FIELD);
-    longNameField.setTabIndex(2);
+    longNameField.setTabIndex(1);
     form.add(longNameField);
+    
+    shortNameField = groupFieldFactory.createGroupShortName(SHORTNAME_FIELD);
+    shortNameField.setTabIndex(2);
+    form.add(shortNameField);
 
     publicDescField = new TextArea();
     publicDescField.setTabIndex(3);
@@ -193,6 +193,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   @Override
   public void focusOnShortName() {
     shortNameField.focus();
+  }
+  
+  @Override
+  public void focusOnLongName() {
+    longNameField.focus();
   }
 
   @Override
