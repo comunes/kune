@@ -95,7 +95,7 @@ public class SitebarActionsPresenter extends
         KuneWindowUtils.open("http://kune.ourproject.org/");
       }
     });
-    gotoKuneDevSite.putValue(Action.NAME, i18n.t("kune development site"));
+    gotoKuneDevSite.putValue(Action.NAME, i18n.t("Kune development site"));
     gotoKuneDevSite.putValue(Action.SMALL_ICON, res.kuneIcon16());
     return gotoKuneDevSite;
   }
@@ -156,7 +156,7 @@ public class SitebarActionsPresenter extends
 
     wavePowered.putValue(Action.NAME, i18n.t("Apache Wave powered"));
     wavePowered.putValue(Action.SMALL_ICON, res.waveIcon());
-    aboutAction.putValue(Action.NAME, i18n.t("About kune"));
+    aboutAction.putValue(Action.NAME, i18n.t("About Kune"));
     aboutAction.putValue(Action.SMALL_ICON, commonRes.info());
     errorAction.putValue(Action.NAME, i18n.t("Errors info"));
     errorAction.putValue(Action.SMALL_ICON, commonRes.important());
