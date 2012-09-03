@@ -68,7 +68,7 @@ public class KuneCliMain {
       //http://massapi.com/class/jcurses/widgets/Button.java.html
     
     Command showDateCommand = new Command("hello world [<name:string>]",
-        "Says hello to the world and, may be, especially to some one.", new ICommandExecutor() {
+        "Says hello to the world and, maybe, especially to someone.", new ICommandExecutor() {
           public void execute(ParseResult pr) {
             System.out.print("Hello world!");
             String p0 = pr.getParameterValue(0).toString();
