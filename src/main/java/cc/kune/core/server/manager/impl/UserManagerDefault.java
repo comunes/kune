@@ -403,8 +403,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
                 i18n.tWithNT(
                     lang,
                     "This is the chat window. "
-                        + "Here you can communicate with other users of [%s] but also with other users with compatible accounts (like gmail accounts). "
-                        + "Just add some buddy and start to chat.", "",
+                        + "Here you can communicate with other users of [%s] but also with other users with compatible accounts (such as Gmail accounts). "
+                        + "Just add a buddy and start chatting.", "",
                     i18n.tWithNT(lang, properties.getSiteCommonName(), "")));
           }
         }, 5000);
