@@ -1,3 +1,10 @@
+kune (0.2.0+b21) unstable; urgency=low
+
+  * WAVE-367: fixed the number of search queries.
+  * Updated languages. Added Romanian and Turkish.
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 07 Sep 2012 23:24:28 +0200
+
 kune (0.2.0+b20) unstable; urgency=low
 
   * Wave updated with many fixes (WAVE-312, WAVE-363, 1970-ignore
