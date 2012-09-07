@@ -63,7 +63,7 @@ public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
     sleep(2000);
 
     // user space
-    showTitleSlide(t("User space (your Inbox)"), t("contents in which you participate"));
+    showTitleSlide(t("Your Inbox"), t("contents in which you participate"));
     sleep(1000);
     showTooltip(site.userSpaceBtn);
     site.userSpaceBtn.click();
