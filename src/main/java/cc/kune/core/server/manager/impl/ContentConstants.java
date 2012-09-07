@@ -50,7 +50,7 @@ public final class ContentConstants {
             + "      <li><span style=\"text-decoration: underline;\">the Home Space</span>:"
             + "        your welcome page, with news and contents related to your"
             + "        groups, and where you can see your friends and others activity.</li>"
-            + "      <li><span style=\"text-decoration: underline;\">the User Space</span>:"
+            + "      <li><span style=\"text-decoration: underline;\">the Inbox</span>:"
             + "        the same way that your email Inbox shows a list of emails (old"
             + "        and new), this space shows a list of all your documents and"
             + "        contents in which you participate, highlighting the old ones"

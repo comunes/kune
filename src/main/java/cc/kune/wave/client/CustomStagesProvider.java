@@ -256,7 +256,7 @@ public class CustomStagesProvider extends Stages {
       try {
         three.getEditActions().stopEditing();
       } catch (final Exception e) {
-        Log.warn("Some exception stoping editing", e);
+        Log.warn("A exception stopping editing", e);
       }
       three = null;
     }
@@ -264,7 +264,7 @@ public class CustomStagesProvider extends Stages {
       try {
         two.getConnector().close();
       } catch (final Exception e) {
-        Log.warn("Some exception closing connector", e);
+        Log.warn("A exception closing connector", e);
       }
       two = null;
     }
@@ -272,7 +272,7 @@ public class CustomStagesProvider extends Stages {
       try {
         one.getWavePanel().destroy();
       } catch (final Exception e) {
-        Log.warn("Some exception destroying panel", e);
+        Log.warn("A exception destroying panel", e);
       }
       one = null;
     }

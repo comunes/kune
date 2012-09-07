@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--                                                                        -->
-<!-- Copyright 2007 Google Inc.                                             -->
+<!-- Copyright 2008 Google Inc.                                             -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
 <!-- may not use this file except in compliance with the License. You may   -->
 <!-- may obtain a copy of the License at                                    -->
@@ -16,8 +16,10 @@
 <!-- The module root element -->
 <!ELEMENT module (inherits | source | public | super-source | entry-point | 
   stylesheet | script | servlet | replace-with | generate-with |
-  define-property | extend-property | set-property | property-provider |
-  define-linker | add-linker)*>
+  define-property | extend-property | set-property |
+  clear-configuration-property | define-configuration-property |
+  extend-configuration-property | set-configuration-property |
+  property-provider | define-linker | add-linker | set-property-fallback)*>
 <!ATTLIST module
 	rename-to CDATA #IMPLIED
 >
@@ -89,14 +91,14 @@
 <!ELEMENT add-linker EMPTY>
 <!-- A comma-separated list of linker names -->
 <!ATTLIST add-linker
-  name CDATA #REQUIRED
+	name CDATA #REQUIRED
 >
 
 <!-- Defines a Linker type to package compiler output -->
 <!ELEMENT define-linker EMPTY>
 <!ATTLIST define-linker
-  class CDATA #REQUIRED
-  name CDATA #REQUIRED
+	class CDATA #REQUIRED
+	name CDATA #REQUIRED
 >
 
 <!--                 ^^^ Commonly-used elements ^^^                -->
@@ -108,9 +110,21 @@
 	name CDATA #REQUIRED
 	values CDATA #REQUIRED
 >
+<!-- Define a configuration property -->
+<!ELEMENT define-configuration-property EMPTY>
+<!ATTLIST define-configuration-property
+	name CDATA #REQUIRED
+	is-multi-valued CDATA #REQUIRED
+>
 <!-- Set the value of a previously-defined property -->
 <!ELEMENT set-property EMPTY>
 <!ATTLIST set-property
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+<!-- Set the value of a configuration property -->
+<!ELEMENT set-configuration-property EMPTY>
+<!ATTLIST set-configuration-property
 	name CDATA #REQUIRED
 	value CDATA #REQUIRED
 >
@@ -119,6 +133,28 @@
 <!ATTLIST extend-property
 	name CDATA #REQUIRED
 	values CDATA #REQUIRED
+>
+<!-- Collapse property values to produce soft permutations -->
+<!ELEMENT collapse-property EMPTY>
+<!ATTLIST collapse-property
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+<!-- Collapse all deferred-binding properties to produce a single permutation -->
+<!ELEMENT collapse-all-properties EMPTY>
+<!ATTLIST collapse-all-properties
+	value (true | false) "true"
+>
+<!-- Add additional allowable values to a configuration property -->
+<!ELEMENT extend-configuration-property EMPTY>
+<!ATTLIST extend-configuration-property
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+<!-- Remove all allowable values from a configuration property -->
+<!ELEMENT clear-configuration-property EMPTY>
+<!ATTLIST clear-configuration-property
+	name CDATA #REQUIRED
 >
 <!-- Define a JavaScript fragment that will return the value for the named property at runtime -->
 <!ELEMENT property-provider (#PCDATA)>
@@ -140,6 +176,12 @@
 <!-- Deferred binding predicate that is true when a named property has a given value-->
 <!ELEMENT when-property-is EMPTY>
 <!ATTLIST when-property-is
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+<!-- Defines a fallback for the set-property element -->
+<!ELEMENT set-property-fallback EMPTY>
+<!ATTLIST set-property-fallback
 	name CDATA #REQUIRED
 	value CDATA #REQUIRED
 >

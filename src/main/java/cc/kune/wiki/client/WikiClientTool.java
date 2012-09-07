@@ -37,7 +37,7 @@ import com.google.inject.Inject;
 
 public class WikiClientTool extends FoldableAbstractClientTool {
 
-  private static final String EMPTY_FOLDER = "This folder is empty, create some wikipage or folder";
+  private static final String EMPTY_FOLDER = "This folder is empty, you can create a wikipage or folder here";
   private final IconicResources icons;
 
   @Inject

@@ -173,7 +173,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     // first
     if (startingUp()) {
       // Starting with some token like "signin": load defContent first
-      Log.debug("Starting up with some token like #signin or #token(param): load defContent first");
+      Log.debug("Starting up with a token like #signin or #token(param): load defContent first");
       getContent(new StateToken(SiteTokens.GROUP_HOME), false, new OnFinishGetContent() {
         @Override
         public void finish() {

@@ -155,7 +155,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     final Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
     socialNetworkManager.deleteMember(userLogged, groupToDelete, group);
     notifyService.notifyGroupMembers(groupToDelete, group, "Removed as collaborator",
-        "You have been remove as collaborator of this group");
+        "You have been removed as collaborator of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -219,7 +219,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     final Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
     socialNetworkManager.setAdminAsCollab(userLogged, groupToSetCollab, group);
     notifyService.notifyGroupMembers(groupToSetCollab, group, "Membership changed",
-        "Your membership to this group have changed. You are now a collaborator of this group");
+        "Your membership to this group has changed. You are now a collaborator of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -235,7 +235,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     final Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
     socialNetworkManager.setCollabAsAdmin(userLogged, groupToSetAdmin, group);
     notifyService.notifyGroupMembers(groupToSetAdmin, group, "Membership changed",
-        "Your membership to this group have changed. You are now an admin of this group");
+        "Your membership to this group has changed. You are now an administrator of this group");
     return generateResponse(userLogged, group);
   }
 
@@ -247,7 +247,7 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     final Group group = groupManager.findByShortName(groupToken.getGroup());
     checkIsNotPersonalGroup(group);
     socialNetworkManager.unJoinGroup(userLogged.getUserGroup(), group);
-    notifyService.notifyGroupAdmins(group, userLogged.getUserGroup(), "Some member left this group",
-        "Some member have left this group");
+    notifyService.notifyGroupAdmins(group, userLogged.getUserGroup(), "A member left this group",
+        "A member has left this group");
   }
 }
