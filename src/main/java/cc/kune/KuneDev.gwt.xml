@@ -6,9 +6,9 @@
 
   <inherits name="cc.kune.Kune"/>
 
-  <!-- Uncomment if you are enabling server side deobfuscation of StackTraces 
-    <set-property name="compiler.emulatedStack" value="true" /> <set-configuration-property 
-    name="compiler.emulatedStack.recordLineNumbers" value="true" /> <set-configuration-property 
+  <!-- Uncomment if you are enabling server side deobfuscation of StackTraces
+    <set-property name="compiler.emulatedStack" value="true" /> <set-configuration-property
+    name="compiler.emulatedStack.recordLineNumbers" value="true" /> <set-configuration-property
     name="compiler.emulatedStack.recordFileNames" value="true" /> -->
   <!-- NOTE: this only compiles for chromium/safari ============= -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
@@ -18,9 +18,9 @@
 
   <!-- I18n ===================================================== -->
   <!-- http://bit.ly/uCiBDm -->
-  <extend-property name="locale" values="en"/>
+  <extend-property name="locale" values="en,ar"/>
   <set-property-fallback name="locale" value="en"/>
-  <set-property name="locale" value="en"/>
+  <set-property name="locale" value="en,ar"/>
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave -->
@@ -28,7 +28,7 @@
   <!-- <set-property name="loglevel" value="debug"/> -->
 
   <!-- Debugging ================================================ -->
-  <!-- for add ensureDebugIds (debugId in UIBinder), remove/comment in production 
+  <!-- for add ensureDebugIds (debugId in UIBinder), remove/comment in production
     see UIObject.ensureDebugId()) -->
   <inherits name="com.google.gwt.user.Debug"/>
   <!-- For make CSS obfuscation more pretty -->

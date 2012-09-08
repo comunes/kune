@@ -21,6 +21,7 @@ package cc.kune.common.client.resources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.user.client.ui.MenuBar.Resources;
 
 public interface SubMenuResources extends Resources {
@@ -28,5 +29,6 @@ public interface SubMenuResources extends Resources {
 
     @Override
     @Source("arrow-right-white.gif")
+    @ImageOptions(flipRtl = true)
     ImageResource menuBarSubMenuIcon();
 }

@@ -1,11 +1,10 @@
 /* CSS for RTL langs (Arabic, etc) */
-
 .docHeader {
   text-align: right;
 }
 
 .docHeader span {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
 .k-tool-panel {
@@ -16,3 +15,74 @@
   text-align: right;
 }
 
+.k-sn-adminslabel,.k-sn-collabslabel,.k-sn-pendingslabel {
+  text-align: right;
+  float: right;
+}
+
+.k-sn-adminsCountlabel,.k-sn-collabsCountlabel,.k-sn-pendingsCountlabel
+  {
+  text-align: right;
+  float: right;
+}
+
+.k-floatleft,.k-fl {
+  float: right;
+}
+
+.k-floatright,.k-fr {
+  float: left;
+}
+
+.k-iconlabel-left {
+  float: right;
+}
+
+.k-iconlabel-right {
+  float: right;
+}
+
+#k-home-header {
+  display: table-row;
+  float: left;
+}
+
+#k-home-footer {
+  text-align: left;
+}
+
+#k-home-logo {
+  margin: 50px -40px 22px;
+}
+
+#k-home-left {
+  float: right;
+  margin-right: -30px;
+}
+
+#k-home-right,#k-home-summary-right {
+  text-align: left;
+}
+
+.k-home-group-cnt-icon {
+  float: right;
+}
+
+.k-home-group-cnt-link {
+  float: right;
+}
+
+li#k-home-home-icon {
+  background-image: none;
+  list-style: none url(/ws/images/kune-intro-user.png);
+}
+
+li#k-home-group-icon {
+  background-image: none;
+  list-style: none url(/ws/images/kune-intro-group.png);
+}
+
+li#k-home-world-icon {
+  background-image: none;
+  list-style: none url(/ws/images/kune-intro-world.png);
+}

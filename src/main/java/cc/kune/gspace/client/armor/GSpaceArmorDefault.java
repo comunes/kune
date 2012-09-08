@@ -25,11 +25,12 @@ import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Position;
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -48,7 +49,7 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   }
   private static final int CENTER_NORTH_HEIGHT = 153;
   private static final int CENTER_SOUTH_HEIGHT = 36;
-  private static final int EAST_WIDTH = 220;
+  private static final int TOOLS_WIDTH = 220;
 
   private static GSpaceArmorDefaultUiBinder uiBinder = GWT.create(GSpaceArmorDefaultUiBinder.class);
 
@@ -94,7 +95,7 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   @UiField
   DockLayoutPanel splitCenter;
   @UiField
-  DockLayoutPanel splitEast;
+  DockLayoutPanel entityToolsMainPanel;
   private final ActionFlowPanel subheaderToolbar;
   @UiField
   TabLayoutPanel tabs;
@@ -105,11 +106,6 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   @Inject
   public GSpaceArmorDefault(final Provider<ActionFlowPanel> toolbarProv) {
     initWidget(uiBinder.createAndBindUi(this));
-    groupSpace.setWidgetMinSize(splitEast, 150);
-    DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow",
-        "visible");
-    DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsContainer),
-        "overflow", "visible");
     docFooterToolbar = toolbarProv.get();
     headerToolbar = toolbarProv.get();
     subheaderToolbar = toolbarProv.get();
@@ -266,11 +262,12 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
   @Override
   public void setMaximized(final boolean maximized) {
-    groupSpace.setWidgetSize(splitEast, maximized ? 0 : EAST_WIDTH);
+    groupSpace.setWidgetSize(entityToolsMainPanel, maximized ? 0 : TOOLS_WIDTH);
     splitCenter.setWidgetSize(centerNorth, maximized ? 7 : CENTER_NORTH_HEIGHT);
     splitCenter.setWidgetSize(entityFooter, maximized ? 7 : CENTER_SOUTH_HEIGHT);
   }
 
+  @SuppressWarnings("unused")
   private void setMaximized(final Widget widget, final boolean maximized) {
     widget.setVisible(!maximized);
     if (maximized) {
@@ -287,5 +284,23 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
       // }
       // });
     }
+  }
+
+  @Override
+  public void setRTL(Direction direction) {
+    groupSpace.remove(splitCenter);
+    if (direction.equals(Direction.RTL)) {
+      groupSpace.addEast(entityToolsMainPanel, TOOLS_WIDTH);
+    } else {
+      groupSpace.addWest(entityToolsMainPanel, TOOLS_WIDTH);
+    }
+    // Add to the center
+    groupSpace.add(splitCenter);
+
+    groupSpace.setWidgetMinSize(entityToolsMainPanel, 25);
+
+    // Fix tools Arrows visibility:
+    groupSpace.getWidgetContainerElement(entityToolsMainPanel).getStyle().setOverflow(Overflow.VISIBLE);
+    entityToolsMainPanel.getWidgetContainerElement(entityToolsContainer).getStyle().setOverflow(Overflow.VISIBLE);
   }
 }

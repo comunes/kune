@@ -21,6 +21,7 @@ package cc.kune.gspace.client;
 
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.core.client.state.HistoryTokenMustBeAuthCallback;
@@ -28,6 +29,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.i18n.I18nToTranslateGridPanel;
 import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorTabsCollection;
@@ -49,7 +51,7 @@ import com.google.inject.Provider;
 public class GSpaceParts {
 
   @Inject
-  public GSpaceParts(final Session session, final GSpaceThemeManager themeManager,
+  public GSpaceParts(final Session session, final GSpaceThemeManager themeManager, final GSpaceArmor armor,
       final Provider<EntityLicensePresenter> licenseFooter,
       final Provider<TagsSummaryPresenter> tagsPresenter, final Provider<ToolSelector> toolSelector,
       final Provider<NoHomePageViewer> noHome, final Provider<ContentViewerPresenter> docsViewer,
@@ -64,6 +66,7 @@ public class GSpaceParts {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
+        armor.setRTL(I18n.getDirection());
         licenseFooter.get();
         tagsPresenter.get();
         toolSelector.get();

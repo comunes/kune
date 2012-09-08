@@ -39,7 +39,7 @@
             styleName="k-group-space">
             <g:SplitLayoutPanel width="100%" height="100%"
               styleName="k-space" ui:field="groupSpace">
-              <g:center size="1.0">
+              <g:east size="1.0">
                 <g:DockLayoutPanel unit="PX" ui:field="splitCenter"
                   styleName="{res.style.entityCentralContainer}">
                   <g:north size="135">
@@ -88,11 +88,11 @@
                     </g:FlowPanel>
                   </g:south>
                 </g:DockLayoutPanel>
-              </g:center>
+              </g:east>
               <!-- east to RTL (plus css changes in corners and menus) -->
               <g:west size="202.0">
                 <g:DockLayoutPanel unit="PX"
-                  styleName="{res.style.entityTools}" ui:field="splitEast">
+                  styleName="{res.style.entityTools}" ui:field="entityToolsMainPanel">
                   <g:center>
                     <g:FlowPanel ui:field="entityToolsContainer">
                       <g:FlowPanel width="100%" ui:field="entityToolsNorth"
