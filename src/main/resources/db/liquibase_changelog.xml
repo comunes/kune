@@ -172,7 +172,7 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
-  <changeSet id="25" author="vjrj">
+  <changeSet id="26" author="vjrj">
     <comment>Groups logo last modified timer</comment>
     <sqlFile path="src/main/resources/db/update-0021-avatarLastModifiedTime.sql"
       encoding="utf8" stripComments="1" />
