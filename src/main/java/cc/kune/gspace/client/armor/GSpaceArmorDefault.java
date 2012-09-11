@@ -125,7 +125,8 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   @Override
   public void clearBackImage() {
     // final String bodyProp = "#FFFFFF";
-    final String bodyProp = "#FFFFFF url('images/clear.gif') fixed top left";
+    final String bodyProp = "#FFFFFF url('" + GWT.getModuleBaseURL()
+        + "images/clear.gif') fixed top left";
     DOM.setStyleAttribute(groupSpaceWrapper.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 
@@ -301,6 +302,7 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
     // Fix tools Arrows visibility:
     groupSpace.getWidgetContainerElement(entityToolsMainPanel).getStyle().setOverflow(Overflow.VISIBLE);
-    entityToolsMainPanel.getWidgetContainerElement(entityToolsContainer).getStyle().setOverflow(Overflow.VISIBLE);
+    entityToolsMainPanel.getWidgetContainerElement(entityToolsContainer).getStyle().setOverflow(
+        Overflow.VISIBLE);
   }
 }
