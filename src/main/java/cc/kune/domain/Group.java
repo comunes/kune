@@ -91,6 +91,9 @@ public class Group implements HasId {
   @Lob
   private byte[] logo;
 
+  @Basic
+  private Long logoLastModifiedTime;
+
   @Embedded
   private BasicMimeType logoMime;
 
@@ -287,6 +290,13 @@ public class Group implements HasId {
     this.groupType = groupType;
   }
 
+  public Long getLogoLastModifiedTime() {
+    if (logoLastModifiedTime == null) {
+      return System.currentTimeMillis();
+    }
+    return logoLastModifiedTime;
+  }
+
   @Override
   public void setId(final Long id) {
     this.id = id;
@@ -294,6 +304,7 @@ public class Group implements HasId {
 
   public void setLogo(final byte[] logo) {
     this.logo = logo;
+    this.logoLastModifiedTime = System.currentTimeMillis();
   }
 
   public void setLogoMime(final BasicMimeType logoMime) {
