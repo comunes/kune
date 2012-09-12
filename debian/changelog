@@ -1,9 +1,22 @@
+kune (0.2.0+b23) unstable; urgency=low
+
+  * Improved cache of avatars (#297)
+  * Some minor chantes (a 404 error)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 12 Sep 2012 00:48:00 +0200
+
+kune (0.2.0+b22) unstable; urgency=low
+
+  * Serveral works for #156 arabic support
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 08 Sep 2012 05:05:02 +0200
+
 kune (0.2.0+b21) unstable; urgency=low
 
   * WAVE-367: fixed the number of search queries.
   * Updated languages. Added Romanian and Turkish.
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 07 Sep 2012 23:24:28 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 08 Sep 2012 05:04:46 +0200
 
 kune (0.2.0+b20) unstable; urgency=low
 
