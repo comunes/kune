@@ -28,6 +28,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 
@@ -40,6 +42,7 @@ import cc.kune.domain.utils.HasId;
 @Entity
 @Indexed
 @Table(name = "globalize_translations")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class I18nTranslation implements HasId {
 
   public static final String DEF_NAMESPACE = "kune_core";
@@ -150,9 +153,9 @@ public class I18nTranslation implements HasId {
   }
 
   /**
-   * 
+   *
    * The id of what we are translating
-   * 
+   *
    * @return the parent id
    */
   public I18nTranslation getParent() {

@@ -26,10 +26,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import cc.kune.domain.utils.HasId;
 
 @Entity
 @Table(name = "licenses")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class License implements HasId {
     private String description;
 
@@ -39,19 +43,19 @@ public class License implements HasId {
 
     @Column(nullable = false)
     private String imageUrl;
-    
+
     @Basic
     @Column(columnDefinition = "BIT", length = 1)
     private boolean isCC;
-    
+
     @Basic
     @Column(columnDefinition = "BIT", length = 1)
     private boolean isCopyleft;
-    
+
     @Basic
     @Column(columnDefinition = "BIT", length = 1)
     private boolean isDeprecated;
-    
+
     @Column(unique = true)
     private String longName;
     private String rdf;

@@ -34,6 +34,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -47,6 +49,7 @@ import cc.kune.domain.utils.DataFieldBridge;
 @Entity
 @Table(name = "revisions")
 @Indexed
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Revision {
   // http://www.hibernate.org/112.html
   @Lob
