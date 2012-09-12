@@ -138,6 +138,7 @@ public class Group implements HasId {
     this.groupType = type;
     this.admissionType = AdmissionType.Moderated;
     this.createdOn = System.currentTimeMillis();
+    this.logoLastModifiedTime = System.currentTimeMillis();
   }
 
   @Override
