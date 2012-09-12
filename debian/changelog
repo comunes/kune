@@ -1,3 +1,10 @@
+kune (0.2.0+b24) unstable; urgency=low
+
+  * Added hibernate-ehcache
+  * Fix minor bug in Group.java (logoLasttime = null)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 12 Sep 2012 17:15:53 +0200
+
 kune (0.2.0+b23) unstable; urgency=low
 
   * Improved cache of avatars (#297)
