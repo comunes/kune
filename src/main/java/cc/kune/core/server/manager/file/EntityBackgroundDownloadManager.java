@@ -66,6 +66,7 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
   GroupManager groupManager;
   @Inject
   KuneProperties kuneProperties;
+  private long lastModified = 0l;
 
   String buildResponse(final StateToken statetoken, final String filename, final String mimeType,
       final ImageSize imgsize, final HttpServletResponse resp) throws FileNotFoundException, IOException {
@@ -84,6 +85,7 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
     }
 
     final File file = new File(absFilename);
+    lastModified = file.lastModified();
 
     resp.setContentLength((int) file.length());
 
@@ -100,8 +102,10 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
 
   @Override
   protected long getLastModified(HttpServletRequest req) {
-    // TODO implement this via the abfFilename time
-    return super.getLastModified(req);
+    // http://oreilly.com/catalog/jservlet/chapter/ch03.html#14260
+    // (...)to play it safe, getLastModified() should always round down to the
+    // nearest thousand milliseconds.
+    return lastModified / 1000 * 1000;
   }
 
   @Override

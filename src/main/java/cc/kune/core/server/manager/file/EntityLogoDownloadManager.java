@@ -24,7 +24,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -80,7 +79,6 @@ public class EntityLogoDownloadManager extends HttpServlet {
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
       throws ServletException, IOException {
-
     currentLastModified = defaultLastModified;
     final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
     final String onlyUserS = req.getParameter(FileConstants.ONLY_USERS);
