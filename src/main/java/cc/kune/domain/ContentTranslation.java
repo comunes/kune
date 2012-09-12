@@ -26,11 +26,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import cc.kune.domain.utils.HasId;
 
 
 @Entity
 @Table(name = "content_translations")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ContentTranslation implements HasId {
 
     @Id

@@ -9,7 +9,7 @@
   <persistence-unit name="production" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <!-- JPA entities must be registered here -->
-    <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g' 
+    <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g'
       | sed 's/^/<class>cc.kune.domain./g' -->
     <class>cc.kune.domain.AccessLists</class>
     <class>cc.kune.domain.BasicMimeType</class>
@@ -49,7 +49,7 @@
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.password" value="db4kune"/>
 
-      <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production 
+      <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production
         (NO!, use liquibase, for instance) -->
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
@@ -68,6 +68,10 @@
         value="/var/lib/kune/lucene/kune_dev/indexes"/>
       <property name="hibernate.search.default.exclusive_index_use"
         value="false"/>
+      <property name="hibernate.cache.use_second_level_cache"
+        value="true"/>
+      <property name="hibernate.cache.region.factory_class"
+        value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
     </properties>
   </persistence-unit>
 
@@ -104,6 +108,10 @@
       <property name="hibernate.c3p0.max_statements" value="0"/>
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
+      <property name="hibernate.cache.use_second_level_cache"
+        value="true"/>
+      <property name="hibernate.cache.region.factory_class"
+        value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
     </properties>
   </persistence-unit>
 
@@ -113,7 +121,7 @@
     transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <!-- JPA entities must be registered here -->
-    <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g' 
+    <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g'
       | sed 's/^/<class>cc.kune.domain./g' -->
     <class>cc.kune.domain.AccessLists</class>
     <class>cc.kune.domain.BasicMimeType</class>
@@ -151,7 +159,7 @@
       <property name="hibernate.connection.username" value="kune"/>
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.password" value="db4kune"/>
-      <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production 
+      <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production
         (NO!, use liquibase, for instance) -->
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
       <property name="hibernate.hbm2ddl.auto" value="update"/>
@@ -170,6 +178,10 @@
         value="kune-data/lucene/kune_dev/indexes"/>
       <property name="hibernate.search.default.exclusive_index_use"
         value="false"/>
+      <property name="hibernate.cache.use_second_level_cache"
+        value="true"/>
+      <property name="hibernate.cache.region.factory_class"
+        value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
     </properties>
   </persistence-unit>
 
@@ -229,6 +241,10 @@
         value="kune-data/lucene/kune_test/indexes"/>
       <property name="hibernate.search.default.exclusive_index_use"
         value="false"/>
+      <property name="hibernate.cache.use_second_level_cache"
+        value="true"/>
+      <property name="hibernate.cache.region.factory_class"
+        value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
     </properties>
   </persistence-unit>
 
@@ -276,6 +292,10 @@
       <!-- value="kune-data/lucene/kune_test/indexes"/> -->
       <property name="hibernate.search.default.exclusive_index_use"
         value="false"/>
+      <property name="hibernate.cache.use_second_level_cache"
+        value="true"/>
+      <property name="hibernate.cache.region.factory_class"
+        value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
     </properties>
   </persistence-unit>
 

@@ -40,6 +40,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
@@ -59,6 +61,7 @@ import cc.kune.domain.utils.HasStateToken;
 @Entity
 @Indexed
 @Table(name = "containers")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Container implements HasId, HasStateToken {
 
   @OneToOne(cascade = CascadeType.ALL)
@@ -68,6 +71,7 @@ public class Container implements HasId, HasStateToken {
   @Fetch(FetchMode.JOIN)
   @OrderBy("createdOn DESC")
   @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
   private Set<Container> childs;
 
   @OneToMany(cascade = CascadeType.ALL)
@@ -78,6 +82,7 @@ public class Container implements HasId, HasStateToken {
   @ContainedIn
   @OrderBy("createdOn DESC")
   @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
   private Set<Content> contents;
 
   @Basic(optional = false)

@@ -36,6 +36,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -44,6 +46,7 @@ import cc.kune.core.shared.domain.GroupListMode;
 @Entity
 @Table(name = "group_list")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GroupList {
   @Id
   @GeneratedValue
@@ -52,6 +55,7 @@ public class GroupList {
   @Fetch(FetchMode.JOIN)
   @OrderBy("shortName ASC")
   @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+  @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
   Set<Group> list;
 
   @Enumerated(EnumType.STRING)

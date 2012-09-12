@@ -27,10 +27,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "rates", uniqueConstraints = { @UniqueConstraint(columnNames = { "content_id", "rater_id" }) })
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Rate {
   @ManyToOne
   Content content;

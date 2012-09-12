@@ -47,6 +47,7 @@
   <classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-10/doxia-sink-api-1.0-alpha-10.jar" sourcepath="M2_REPO/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-10/doxia-sink-api-1.0-alpha-10-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/dozer/dozer/4.0/dozer-4.0.jar" sourcepath="M2_REPO/net/sf/dozer/dozer/4.0/dozer-4.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sf/ehcache/ehcache-core/2.4.3/ehcache-core-2.4.3.jar" sourcepath="M2_REPO/net/sf/ehcache/ehcache-core/2.4.3/ehcache-core-2.4.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/calclab/emite/emite/r1694/emite-r1694.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/calclab/emite/emite-proxy/0.1/emite-proxy-0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/ezmorph/ezmorph/1.0.3/ezmorph-1.0.3.jar" sourcepath="M2_REPO/net/sf/ezmorph/ezmorph/1.0.3/ezmorph-1.0.3-sources.jar"/>
@@ -90,6 +91,7 @@
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-c3p0/4.1.2.Final/hibernate-c3p0-4.1.2.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-c3p0/4.1.2.Final/hibernate-c3p0-4.1.2.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.1.Final/hibernate-commons-annotations-4.0.1.Final.jar" sourcepath="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.1.Final/hibernate-commons-annotations-4.0.1.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-core/4.1.2.Final/hibernate-core-4.1.2.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-core/4.1.2.Final/hibernate-core-4.1.2.Final-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-ehcache/4.1.2.Final/hibernate-ehcache-4.1.2.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-ehcache/4.1.2.Final/hibernate-ehcache-4.1.2.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-entitymanager/4.1.2.Final/hibernate-entitymanager-4.1.2.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-entitymanager/4.1.2.Final/hibernate-entitymanager-4.1.2.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar" sourcepath="M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-search/4.1.0.Final/hibernate-search-4.1.0.Final.jar"/>
