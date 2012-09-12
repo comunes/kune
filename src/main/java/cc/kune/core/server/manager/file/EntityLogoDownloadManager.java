@@ -24,7 +24,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -141,13 +140,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
       throws IOException {
     resp.setContentLength(logo.length);
     resp.setContentType(mime);
-
-    Date now = new Date();
-    long age = 86400L;
-    resp.setDateHeader("Date", now.getTime());
-    resp.setDateHeader("Expires", now.getTime() +  1000L * age);
-    resp.setHeader("Cache-Control", "public, s-maxage=" + age);
-
+    CacheUtils.setCache1Day(resp);
     resp.getOutputStream().write(logo);
   }
 

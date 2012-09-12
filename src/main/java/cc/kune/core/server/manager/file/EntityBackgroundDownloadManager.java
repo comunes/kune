@@ -45,7 +45,7 @@ import com.google.inject.Inject;
 /**
  * Some snippets from:
  * http://www.onjava.com/pub/a/onjava/excerpt/jebp_3/index1.html?page=1
- * 
+ *
  */
 
 public class EntityBackgroundDownloadManager extends HttpServlet {
@@ -94,7 +94,14 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
 
     resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + filename
         + RESP_HEADER_END);
+    CacheUtils.setCache1Day(resp);
     return absFilename;
+  }
+
+  @Override
+  protected long getLastModified(HttpServletRequest req) {
+    // TODO implement this via the abfFilename time
+    return super.getLastModified(req);
   }
 
   @Override
