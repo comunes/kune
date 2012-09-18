@@ -292,6 +292,6 @@ public class UserRPC implements RPC, UserService {
   public void verifyPasswordHash(final String userHash, final String emailReceivedHash)
       throws EmailHashInvalidException, EmailHashExpiredException {
     final User user = userSessionManager.getUser();
-    userManager.verifyPasswordHash(user.getId(), emailReceivedHash, SessionConstants._AN_HOUR);
+    userManager.verifyPasswordHash(user.getId(), emailReceivedHash, SessionConstants._5_HOURS);
   }
 }
