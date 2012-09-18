@@ -32,13 +32,14 @@
     <class>cc.kune.domain.TagUserContent</class>
     <class>cc.kune.domain.ToolConfiguration</class>
     <class>cc.kune.domain.User</class>
+    <class>cc.kune.domain.UserSignInLog</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 
       <!-- Configured and overrided by kune.properties -->
@@ -88,7 +89,7 @@
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 
       <!-- Configured and overrided by kune.properties -->
@@ -144,13 +145,14 @@
     <class>cc.kune.domain.TagUserContent</class>
     <class>cc.kune.domain.ToolConfiguration</class>
     <class>cc.kune.domain.User</class>
+    <class>cc.kune.domain.UserSignInLog</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.url"
@@ -211,13 +213,14 @@
     <class>cc.kune.domain.TagUserContent</class>
     <class>cc.kune.domain.ToolConfiguration</class>
     <class>cc.kune.domain.User</class>
+    <class>cc.kune.domain.UserSignInLog</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="false"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.url"
@@ -274,6 +277,7 @@
     <class>cc.kune.domain.TagUserContent</class>
     <class>cc.kune.domain.ToolConfiguration</class>
     <class>cc.kune.domain.User</class>
+    <class>cc.kune.domain.UserSignInLog</class>
     <properties>
       <!-- In order to debug sql enable this -->
       <property name="hibernate.show_sql" value="false"/>

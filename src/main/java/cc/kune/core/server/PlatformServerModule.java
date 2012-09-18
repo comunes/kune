@@ -67,6 +67,7 @@ import cc.kune.core.server.manager.TagManager;
 import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.manager.UserSignInLogManager;
 import cc.kune.core.server.manager.file.EntityLogoDownloadManager;
 import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.server.manager.file.FileDownloadManager;
@@ -85,6 +86,7 @@ import cc.kune.core.server.manager.impl.TagManagerDefault;
 import cc.kune.core.server.manager.impl.TagUserContentManagerDefault;
 import cc.kune.core.server.manager.impl.ToolConfigurationManagerDefault;
 import cc.kune.core.server.manager.impl.UserManagerDefault;
+import cc.kune.core.server.manager.impl.UserSignInLogManagerDefault;
 import cc.kune.core.server.mapper.DozerMapper;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.notifier.NotificationSender;
@@ -121,9 +123,6 @@ import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 
 public class PlatformServerModule extends AbstractExtendedModule {
-  private void bindFinders() {
-    // ?? bind(SocialNetwork.class);
-  }
 
   private void bindManagers() {
     bind(UserManager.class).to(UserManagerDefault.class);
@@ -144,6 +143,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(FileManager.class).to(FileManagerDefault.class);
     bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
     bind(KuneWaveManager.class).to(KuneWaveManagerDefault.class);
+    bind(UserSignInLogManager.class).to(UserSignInLogManagerDefault.class);
   }
 
   private void bindRPC() {
@@ -176,11 +176,9 @@ public class PlatformServerModule extends AbstractExtendedModule {
     // install(PersistService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
     bind(KunePersistenceService.class);
 
-    bindFinders();
     bindManagers();
     bindRPC();
     bindServices();
-    // bind(KuneProperties.class).to(KunePropertiesDefault.class);
     bind(Mapper.class).to(DozerMapper.class);
     bind(ServerToolRegistry.class).in(Singleton.class);
     bind(FileUploadManager.class).in(Singleton.class);

@@ -20,7 +20,9 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -31,11 +33,15 @@ public class ContentViewerOptionsMenu extends MenuDescriptor {
   private static final String ID = "k-cnt-viewer-opt-menu";
 
   @Inject
-  public ContentViewerOptionsMenu(final CoreResources res) {
+  public ContentViewerOptionsMenu(final CoreResources res, Session session) {
     super();
-    this.withIcon(res.arrowdownsitebar()).withStyles(
-        "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor").withId(ID);
-
+    this.withIcon(res.arrowdownsitebar()).withId(ID);
+    if (session.isNewbie()) {
+      this.withText(I18n.t("More"));
+      this.withStyles(ActionStyles.MENU_BTN_STYLE_RIGHT);
+    } else {
+      this.withStyles(ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT);
+    }
   }
 
 }

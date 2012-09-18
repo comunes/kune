@@ -45,6 +45,7 @@ import cc.kune.domain.finders.RateFinder;
 import cc.kune.domain.finders.TagFinder;
 import cc.kune.domain.finders.TagUserContentFinder;
 import cc.kune.domain.finders.UserFinder;
+import cc.kune.domain.finders.UserSignInLogFinder;
 
 import com.google.inject.Key;
 import com.google.inject.PrivateModule;
@@ -73,7 +74,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Instantiates this module only during tests
-   * 
+   *
    * @param settedProperties
    *          the setted properties
    * @param settedJpaUnit
@@ -132,6 +133,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
     jpm.addFinder(TagFinder.class);
     jpm.addFinder(TagUserContentFinder.class);
     jpm.addFinder(UserFinder.class);
+    jpm.addFinder(UserSignInLogFinder.class);
     install(jpm);
 
     bind(Session.class).annotatedWith(DataSourceKune.class).toProvider(
@@ -160,6 +162,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
     expose(TagFinder.class);
     expose(TagUserContentFinder.class);
     expose(UserFinder.class);
+    expose(UserSignInLogFinder.class);
     expose(MY_DATA_SOURCE_ONE_FILTER_KEY);
 
     bind(GenericPersistenceInitializer.class).asEagerSingleton();

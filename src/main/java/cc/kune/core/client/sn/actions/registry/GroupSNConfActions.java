@@ -42,30 +42,30 @@ import cc.kune.core.client.sn.actions.WriteToAdmins;
 import cc.kune.core.client.sn.actions.WriteToMembers;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.gspace.client.actions.ActionStyles;
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * 
+ *
  * You must call {@link GroupSNPresenter#refreshActions()} when adding some
  * action externally with
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
- * 
+ *
  */
 @SuppressWarnings("serial")
 public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
-  public static final String OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-optionsborder, k-nobackcolor, k-no-backimage, k-btn-min";
-
   @Inject
-  public GroupSNConfActions(final SessionConstants session, final StateManager stateManager,
+  public GroupSNConfActions(final Session session, final StateManager stateManager,
       final I18nTranslationService i18n, final Provider<MembersVisibilityMenuItem> membersVisibility,
       final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
       final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
@@ -73,8 +73,12 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction,
       final AddEntityToThisGroupAction addEntityToThisGroupAction, final GroupSNOptionsMenu optionsMenu,
       final GroupSNModerationSubMenu moderationSubMenu, final GroupSNVisibilitySubMenu visibilitySubMenu) {
-    optionsMenu.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
-        OPTIONS_STYLES);
+    boolean isNewbie = session.isNewbie();
+    ImageResource icon = isNewbie? res.prefGrey():  res.arrowdownsitebar();
+    String menuText = isNewbie? i18n.t("Options"): "";
+    String menuTooltip = isNewbie? "" : i18n.t("Options");
+    String menuStyle = isNewbie? ActionStyles.SN_OPTIONS_STYLES_NEWBIE : ActionStyles.SN_OPTIONS_STYLES;
+    optionsMenu.withText(menuText).withToolTip(menuTooltip).withIcon(icon).withStyles(menuStyle);
     final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
         SocialNetworkVisibility.anyone);
     final MenuRadioItemDescriptor onlyMembersItem = membersVisibility.get().withVisibility(
@@ -150,11 +154,11 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
   }
 
   /**
-   * 
+   *
    * You must call {@link GroupSNPresenter#refreshActions()} when adding some
    * action externally with
    * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
-   * 
+   *
    */
   @Override
   public boolean add(final GuiActionDescrip action) {

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,37 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server;
 
-import java.io.Serializable;
+package cc.kune.core.server.manager;
 
-import com.google.inject.servlet.SessionScoped;
+import cc.kune.domain.User;
 
-@SessionScoped
-public class UserSession implements Serializable {
+public interface UserSignInLogManager {
 
-  private static final long serialVersionUID = 4665523798343705868L;
-
-  private String userHash;
-  private Long userId;
-
-  public UserSession() {
-  }
-
-  public String getHash() {
-    return userHash;
-  }
-
-  public Long getUserId() {
-    return userId;
-  }
-
-  public void setHash(final String hash) {
-    this.userHash = hash;
-  }
-
-  public void setUserId(final Long userId) {
-    this.userId = userId;
-  }
+  /**
+   * Log a new user session signin
+   *
+   * @param user
+   *          the user
+   * @param ipAddress
+   *          the ip address of the client
+   * @param userAgent
+   *          the user agent of the client
+   * @param hash
+   *          the session hash
+   */
+  void log(User user, String ipAddress, String userAgent, String hash);
 
 }

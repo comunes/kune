@@ -37,6 +37,7 @@ public class UserInfo {
   private User user;
   private Group userGroup;
   private String userHash;
+  private Long signInCount;
 
   public String getChatName() {
     return chatName;
@@ -124,6 +125,14 @@ public class UserInfo {
 
   public void setUserHash(final String userHash) {
     this.userHash = userHash;
+  }
+
+  public Long getSignInCount() {
+    return signInCount;
+  }
+
+  public void setSignInCount(Long signInCount) {
+    this.signInCount = signInCount;
   }
 
 }

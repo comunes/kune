@@ -17,14 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.actions;
+package cc.kune.domain.finders;
 
-public class ActionStyles {
+import java.util.ArrayList;
+import java.util.List;
 
-  // FIXME add here more styles and use then
-  public static final String MENU_BTN_STYLE_LEFT = "k-button, k-btn, k-5corners, k-def-docbtn, k-fl";
-  public static final String MENU_BTN_STYLE_RIGHT = "k-button, k-btn, k-5corners, k-def-docbtn, k-fr";
-  public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT =  "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
-  public static final String SN_OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor, k-btn-min";
-  public static final String SN_OPTIONS_STYLES_NEWBIE = MENU_BTN_STYLE_LEFT + ", k-sn-options-newbie-btn";
+import cc.kune.domain.User;
+import cc.kune.domain.UserSignInLog;
+
+import com.google.inject.name.Named;
+import com.google.inject.persist.finder.Finder;
+
+public interface UserSignInLogFinder {
+
+  @Finder(query = "SELECT count(*) FROM UserSignInLog u")
+  public Long count();
+
+  @Finder(query = "select count (*) from UserSignInLog where user = :user")
+  public Long countByUser(@Named("user") final User user);
+
+  @Finder(query = "from UserSignInLog", returnAs = ArrayList.class)
+  public List<UserSignInLog> getAll();
 }

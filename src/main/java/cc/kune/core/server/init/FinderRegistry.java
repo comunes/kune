@@ -31,6 +31,7 @@ import cc.kune.domain.finders.RateFinder;
 import cc.kune.domain.finders.TagFinder;
 import cc.kune.domain.finders.TagUserContentFinder;
 import cc.kune.domain.finders.UserFinder;
+import cc.kune.domain.finders.UserSignInLogFinder;
 
 import com.google.inject.Module;
 import com.google.inject.persist.jpa.JpaPersistModule;
@@ -50,6 +51,7 @@ public class FinderRegistry {
         jpaPersistModule.addFinder(TagFinder.class);
         jpaPersistModule.addFinder(TagUserContentFinder.class);
         jpaPersistModule.addFinder(UserFinder.class);
+        jpaPersistModule.addFinder(UserSignInLogFinder.class);
         return jpaPersistModule;
     }
 

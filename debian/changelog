@@ -1,3 +1,9 @@
+kune (0.2.0+b25) unstable; urgency=low
+
+  * Fix for #346: Some buttons for newbies should be more intuitive
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 18 Sep 2012 19:55:38 +0200
+
 kune (0.2.0+b24) unstable; urgency=low
 
   * Added hibernate-ehcache
