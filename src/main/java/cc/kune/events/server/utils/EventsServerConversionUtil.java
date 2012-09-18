@@ -41,6 +41,8 @@ import net.fortuna.ical4j.model.property.Location;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.model.property.Uid;
 
+import com.google.common.base.Preconditions;
+
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
@@ -77,9 +79,12 @@ public class EventsServerConversionUtil {
       final String waveId = content.getWaveId();
       try {
         final String shortName = content.getAuthors().get(0).getShortName();
+        Preconditions.checkNotNull(shortName, "Event author empty!");
         final Gadget gadget = kuneWaveService.getGadget(
             JavaWaverefEncoder.decodeWaveRefFromPath(waveId), shortName, eventTool.getGadgetUrl());
+        Preconditions.checkNotNull(gadget, "Gadget not found");
         final Map<String, String> gadgetProps = gadget.getProperties();
+        Preconditions.checkNotNull(gadgetProps, "GadgetProps empty");
         final HashMap<String, String> map = new HashMap<String, String>();
         for (final String var : ICalConstants.ZTOTAL_LIST) {
           final String value = gadgetProps.get(var);
