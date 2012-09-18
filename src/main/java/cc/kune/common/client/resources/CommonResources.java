@@ -54,6 +54,9 @@ public interface CommonResources extends ClientBundle {
   @Source("clear.png")
   ImageResource clear();
 
+  @Source("clear16.png")
+  ImageResource clear16();
+
   @Source("icons/edit-black.png")
   ImageResource editBlack();
 

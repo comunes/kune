@@ -41,6 +41,7 @@ import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
+import cc.kune.gspace.client.actions.MoveContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentBtn;
 import cc.kune.gspace.client.actions.PurgeContentMenuItem;
@@ -82,6 +83,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final NewMenusForTypeIdsRegistry newMenusRegistry, final WikiFolderNewMenu folderNewMenu,
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
+      final Provider<MoveContentMenuItem> moveContentMenuItem,
       final WikiPageNewMenu wikipageNewMenu) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
@@ -109,6 +111,8 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem, containersNoRoot);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delContentMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, setAsHomePage, contents);
@@ -121,6 +125,14 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
         contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
+        contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
+        containersNoRoot);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
+        contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
+        containersNoRoot);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());

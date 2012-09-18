@@ -22,9 +22,9 @@ package cc.kune.gspace.client.actions;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -75,9 +75,10 @@ public class CopyContentMenuItem extends MenuItemDescriptor {
 
   @Inject
   public CopyContentMenuItem(final I18nTranslationService i18n, final CopyContentAction action,
-      final ContentViewerOptionsMenu optionsMenu, final NavResources res) {
+      final ContentViewerOptionsMenu optionsMenu, final CommonResources res) {
     super(action);
     this.withParent(optionsMenu, false);
+    this.withIcon(res.clear16());
     this.withText(i18n.t("Copy this to a new message"));
   }
 }
