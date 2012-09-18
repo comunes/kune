@@ -1,8 +1,10 @@
 kune (0.2.0+b25) unstable; urgency=low
 
   * Fix for #346: Some buttons for newbies should be more intuitive
+  * Fix for #347: move and drag&drop
+  * Refactorization of #343
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 18 Sep 2012 19:55:38 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 19 Sep 2012 00:46:52 +0200
 
 kune (0.2.0+b24) unstable; urgency=low
 

@@ -395,4 +395,9 @@ public class SessionDefault implements Session {
     return currentUserInfo != null ? currentUserInfo.getSignInCount() <= SessionConstants.MIN_SIGN_IN_FOR_NEWBIES
         : true;
   }
+
+  @Override
+  public void refreshCurrentUserInfo(UserInfoDTO currentUserInfo) {
+    this.currentUserInfo = currentUserInfo;
+  }
 }

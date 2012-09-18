@@ -178,4 +178,11 @@ public interface Session {
    */
   boolean userIsJoiningGroups();
 
+  /**
+   * Refresh current user info (without fire sign in events)
+   *
+   * @param userInfo the user info
+   */
+  void refreshCurrentUserInfo(UserInfoDTO userInfo);
+
 }

@@ -31,6 +31,8 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.SitebarNewGroupLink.SitebarNewGroupAction;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
@@ -52,16 +54,21 @@ public class MyGroupsMenu extends MenuDescriptor {
   private final SitebarNewGroupAction newGroupAction;
   private final Session session;
   private final SitebarActions siteOptions;
+  private final UserServiceAsync userService;
+  private final SitebarNewGroupLink sitebarNewGroupLink;
 
   @Inject
   public MyGroupsMenu(final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources res,
       final Session session, final GotoGroupAction gotoGroupAction,
       final SitebarNewGroupAction newGroupAction, final SitebarActions siteOptions,
-      final GlobalShortcutRegister global, final MenuShowAction menuShowAction, final EventBus eventBus) {
+      final GlobalShortcutRegister global, final MenuShowAction menuShowAction, final EventBus eventBus,
+      UserServiceAsync userService, SitebarNewGroupLink sitebarNewGroupLink) {
     super(menuShowAction);
     this.session = session;
     this.newGroupAction = newGroupAction;
     this.siteOptions = siteOptions;
+    this.userService = userService;
+    this.sitebarNewGroupLink = sitebarNewGroupLink;
     menuShowAction.setMenu(this);
     setId(MENU_ID);
     setParent(SitebarActions.LEFT_TOOLBAR);
@@ -99,23 +106,32 @@ public class MyGroupsMenu extends MenuDescriptor {
 
   private void regenerateMenu(final boolean isLogged) {
     if (isLogged) {
-      if (session.userIsJoiningGroups()) {
-        MyGroupsMenu.this.clear();
-        setVisible(true);
-        final UserInfoDTO userInfoDTO = session.getCurrentUserInfo();
-        for (final GroupDTO group : userInfoDTO.getGroupsIsAdmin()) {
-          addPartipationToMenu(group);
+      // We request again the data about this user
+      userService.reloadUserInfo(session.getUserHash(), new AsyncCallbackSimple<UserInfoDTO>() {
+        @Override
+        public void onSuccess(UserInfoDTO userInfo) {
+          session.refreshCurrentUserInfo(userInfo);
+          sitebarNewGroupLink.recalculate(!isLogged);
+          if (session.userIsJoiningGroups()) {
+            MyGroupsMenu.this.clear();
+            setVisible(true);
+            final UserInfoDTO userInfoDTO = session.getCurrentUserInfo();
+            for (final GroupDTO group : userInfoDTO.getGroupsIsAdmin()) {
+              addPartipationToMenu(group);
+            }
+            for (final GroupDTO group : userInfoDTO.getGroupsIsCollab()) {
+              addPartipationToMenu(group);
+            }
+            new MenuSeparatorDescriptor(MyGroupsMenu.this);
+            new MenuItemDescriptor(MyGroupsMenu.this, newGroupAction).withId(NEW_GROUP_MENUITEM_ID);
+            siteOptions.refreshActions();
+          } else {
+            setVisible(false);
+          }
         }
-        for (final GroupDTO group : userInfoDTO.getGroupsIsCollab()) {
-          addPartipationToMenu(group);
-        }
-        new MenuSeparatorDescriptor(MyGroupsMenu.this);
-        new MenuItemDescriptor(MyGroupsMenu.this, newGroupAction).withId(NEW_GROUP_MENUITEM_ID);
-        siteOptions.refreshActions();
-      } else {
-        setVisible(false);
-      }
+      });
     } else {
+      sitebarNewGroupLink.recalculate(!isLogged);
       setVisible(false);
     }
   }

@@ -202,8 +202,6 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
           stateManager.setRetrievedStateAndGo(state);
           getView().hide();
           getView().unMask();
-          // Add the new group to your info
-          session.getCurrentUserInfo().getGroupsIsAdmin().add(state.getGroup());
           MyGroupsChangedEvent.fire(getEventBus());
           Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override

@@ -94,10 +94,6 @@ public class SocialNetServiceHelper {
                     NotifyUser.hideProgress();
                     NotifyUser.info(i18n.t("Removed as member"));
                     stateManager.refreshCurrentStateWithoutCache();
-                    session.getCurrentUserInfo().getGroupsIsAdmin().remove(
-                        session.getCurrentState().getGroup());
-                    session.getCurrentUserInfo().getGroupsIsCollab().remove(
-                        session.getCurrentState().getGroup());
                     MyGroupsChangedEvent.fire(eventbus);
                   }
                 });
