@@ -6,7 +6,8 @@
 
   <!-- PRODUCTION ========================================================================= -->
 
-  <persistence-unit name="production" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="production"
+    transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <!-- JPA entities must be registered here -->
     <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g'
@@ -41,7 +42,6 @@
       <property name="use_sql_comments" value="true"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.url"
         value="jdbc:mysql://localhost/kune_prod?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
@@ -49,7 +49,6 @@
       <property name="hibernate.connection.username" value="kune"/>
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.password" value="db4kune"/>
-
       <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production
         (NO!, use liquibase, for instance) -->
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
