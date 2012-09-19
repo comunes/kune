@@ -197,6 +197,19 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
   }
 
   @Override
+  public Set<Group> findParticipationAggregated(final User userLogged, final Group group)
+      throws AccessViolationException {
+    get(userLogged, group); // check access
+    final Long groupId = group.getId();
+    final Set<Group> groups = finder.findParticipatingInGroups(groupId);
+    // Don't show self user group
+    if (group.isPersonal()) {
+      groups.remove(group);
+    }
+    return groups;
+  }
+
+  @Override
   public ParticipationData findParticipation(final User userLogged, final Group group)
       throws AccessViolationException {
     get(userLogged, group); // check access

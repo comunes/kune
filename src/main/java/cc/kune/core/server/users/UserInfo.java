@@ -32,6 +32,7 @@ public class UserInfo {
   private List<String> enabledTools;
   private Set<Group> groupsIsAdmin;
   private Set<Group> groupsIsCollab;
+  private Set<Group> groupsIsParticipating;
   private String homePage;
   private boolean showDeletedContent;
   private User user;
@@ -133,6 +134,14 @@ public class UserInfo {
 
   public void setSignInCount(Long signInCount) {
     this.signInCount = signInCount;
+  }
+
+  public Set<Group> getGroupsIsParticipating() {
+    return groupsIsParticipating;
+  }
+
+  public void setGroupsIsParticipating(Set<Group> groupsIsParticipating) {
+    this.groupsIsParticipating = groupsIsParticipating;
   }
 
 }

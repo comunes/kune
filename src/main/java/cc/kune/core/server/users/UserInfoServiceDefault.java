@@ -59,6 +59,7 @@ public class UserInfoServiceDefault implements UserInfoService {
 
       final Group userGroup = user.getUserGroup();
 
+      userInfo.setGroupsIsParticipating(socialNetworkManager.findParticipationAggregated(user, userGroup));
       final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
       userInfo.setGroupsIsAdmin(participation.getGroupsIsAdmin());
       userInfo.setGroupsIsCollab(participation.getGroupsIsCollab());
