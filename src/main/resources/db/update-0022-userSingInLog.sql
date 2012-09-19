@@ -1,5 +1,6 @@
+DROP TABLE `user_signin_log`;
 CREATE TABLE `user_signin_log` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `hash` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `ipAddress` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `signInDate` bigint(20) NOT NULL,

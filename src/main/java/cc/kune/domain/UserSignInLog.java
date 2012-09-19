@@ -38,6 +38,8 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
+import cc.kune.domain.utils.HasId;
+
 /**
  * The Class UserSignInLog records the user signins for stats purposes
  */
@@ -45,7 +47,7 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 @Indexed
 @Table(name = "user_signin_log")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class UserSignInLog {
+public class UserSignInLog implements HasId {
 
   /**
    * Instantiates a new user sign in log.

@@ -52,7 +52,8 @@ public class UserSignInLogManagerDefault extends DefaultManager<UserSignInLog, L
    * @see cc.kune.core.server.manager.UserSignInLogManager#log(cc.kune.domain.User, java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
    */
   public void log(User user, String ipAddress, String userAgent, String hash) {
-    super.persist(new UserSignInLog(user, ipAddress, userAgent, hash));
+    UserSignInLog logRegister = new UserSignInLog(user, ipAddress, userAgent, hash);
+    persist(logRegister);
   }
 
 }
