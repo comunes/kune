@@ -23,11 +23,7 @@ import java.util.Iterator;
 
 import javax.persistence.EntityManager;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.queryParser.MultiFieldQueryParser;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
-import org.apache.lucene.search.Query;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
@@ -36,7 +32,6 @@ import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.manager.impl.DefaultManager;
-import cc.kune.core.server.manager.impl.ServerManagerException;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.utils.FilenameUtils;
 import cc.kune.domain.AccessLists;
@@ -187,15 +182,9 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
   @Override
   public SearchResult<Container> search(final String search, final Integer firstResult,
       final Integer maxResults) {
-    final MultiFieldQueryParser parser = new MultiFieldQueryParser(LUCENE_VERSION,
-        new String[] { "name" }, new StandardAnalyzer(LUCENE_VERSION));
-    Query query;
-    try {
-      query = parser.parse(QueryParser.escape(search));
-    } catch (final ParseException e) {
-      throw new ServerManagerException("Error parsing search");
-    }
-    return super.search(query, firstResult, maxResults);
+    final String escapedQuery = QueryParser.escape(search);
+    return super.search(new String[] { escapedQuery, escapedQuery },
+        new String[] { "name" }, firstResult, maxResults);
   }
 
   @Override

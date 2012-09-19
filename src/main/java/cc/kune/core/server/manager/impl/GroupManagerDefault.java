@@ -26,11 +26,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.queryParser.MultiFieldQueryParser;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
-import org.apache.lucene.search.Query;
 import org.hibernate.exception.ConstraintViolationException;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -303,15 +299,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   @Override
   public SearchResult<Group> search(final String search, final Integer firstResult,
       final Integer maxResults) {
-    final MultiFieldQueryParser parser = new MultiFieldQueryParser(LUCENE_VERSION, new String[] {
-        "longName", "shortName", "publicDesc" }, new StandardAnalyzer(LUCENE_VERSION));
-    Query query;
-    try {
-      query = parser.parse(QueryParser.escape(search) + SearcherConstants.WILDCARD);
-    } catch (final ParseException e) {
-      throw new ServerManagerException("Error parsing search");
-    }
-    return super.search(query, firstResult, maxResults);
+    final String escapedQuery = QueryParser.escape(search) + SearcherConstants.WILDCARD;
+    return super.search(new String[] { escapedQuery, escapedQuery, escapedQuery }, new String[] {
+        "longName", "shortName", "publicDesc" }, firstResult, maxResults);
   }
 
   private void setAdmissionType(final Group group) {

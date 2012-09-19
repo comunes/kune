@@ -36,10 +36,6 @@ import cc.kune.domain.User;
 
 public interface ContentManager extends Manager<Content, Long> {
 
-  String[] DEF_GLOBAL_SEARCH_FIELDS = new String[] { "authors.name", "authors.shortName",
-      "container.name", "language.code", "language.englishName", "language.nativeName",
-      "lastRevision.body", "lastRevision.title" };
-
   String[] DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME = new String[] { "authors.name", "authors.shortName",
       "container.name", "language.code", "language.englishName", "language.nativeName",
       "lastRevision.body", "lastRevision.title", "mimeType.mimetype" };

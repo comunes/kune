@@ -3,8 +3,9 @@ kune (0.2.0+b25) unstable; urgency=low
   * Fix for #346: Some buttons for newbies should be more intuitive
   * Fix for #347: move and drag&drop
   * Refactorization of #343
+  * Shortname and longname indexed. Fixes #252
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 19 Sep 2012 00:46:52 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 19 Sep 2012 02:06:45 +0200
 
 kune (0.2.0+b24) unstable; urgency=low
 
