@@ -111,6 +111,10 @@ public class DataSourceKunePersistModule extends PrivateModule {
       dbProperties.setProperty("hibernate.connection.url", dbUrl);
       dbProperties.setProperty("hibernate.connection.username", dbUser);
       dbProperties.setProperty("hibernate.connection.password", dbPass);
+      if (kuneProperties.has(KuneProperties.SITE_DB_SCHEMA)) {
+        final String dbSchema = kuneProperties.get(KuneProperties.SITE_DB_SCHEMA);
+        dbProperties.setProperty("hibernate.hbm2ddl.auto", dbSchema);
+      }
       jpm.properties(dbProperties);
       LOG.info(String.format("Using user '%s' and connection '%s'", dbUser, dbUrl));
       // LOG.debug(String.format("dbpass '%s'", dbPass));
