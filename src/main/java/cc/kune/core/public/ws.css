@@ -1345,6 +1345,14 @@ table.k-folder-viewer {
   border-radius: 3px;
 }
 
+.k-sitebarsearch-deftext {
+  margin: 1px 6px 0 3px;
+  padding-left: 1px;
+  color: #999;
+  position: relative;
+  z-index: -1px;
+}
+
 .k-sitebarsearch-img {
   cursor: pointer;
   background: none;

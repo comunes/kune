@@ -26,10 +26,13 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
+import com.google.gwt.event.dom.client.HasAllKeyHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBoxBase;
@@ -47,6 +50,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
   private final PushButton searchButton;
   private final TextBoxBase searchTextBox;
   private final SuggestBox suggestBox;
+  private Label defSearchLabel;
 
   @Inject
   public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img, final SessionConstants session,
@@ -67,8 +71,14 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
     searchTextBox.addStyleName("k-fr");
     searchButton.addStyleName("k-sitebarsearch-img");
     searchButton.addStyleName("k-fr");
+    defSearchLabel = new Label(i18n.t("Search"));
+    defSearchLabel.addStyleName("k-fr");
+    defSearchLabel.addStyleName("k-sitebarsearch-deftext");
+
     gs.getSitebar().add(multivalueSBox);
     gs.getSitebar().add(searchButton);
+    gs.getSitebar().add(defSearchLabel);
+    defSearchLabel.getElement().getStyle().setLeft(defSearchLabel.getOffsetWidth() + 27, Unit.PX);
     setTextSearchSmallImpl();
   }
 
@@ -77,9 +87,17 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
     return null;
   }
 
+  public HasClickHandlers getDefLabelFocus() {
+    return defSearchLabel;
+  }
+
   @Override
   public void clearSearchText() {
     searchTextBox.setValue("");
+  }
+
+  public HasAllKeyHandlers getKeyHandler() {
+    return suggestBox;
   }
 
   @Override
@@ -124,5 +142,10 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   private void setTextSearchSmallImpl() {
     searchTextBox.setPixelSize(SEARCH_TEXT_WIDTH_SMALL, SEARCH_TEXT_HEIGHT);
+  }
+
+  @Override
+  public void setDefTextVisible(boolean visible) {
+   defSearchLabel.setVisible(visible);
   }
 }

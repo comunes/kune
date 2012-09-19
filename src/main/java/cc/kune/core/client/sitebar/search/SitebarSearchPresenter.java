@@ -19,8 +19,11 @@
  \*/
 package cc.kune.core.client.sitebar.search;
 
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -28,8 +31,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
+import com.google.gwt.event.dom.client.HasAllKeyHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
@@ -40,6 +48,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class SitebarSearchPresenter extends
     Presenter<SitebarSearchPresenter.SitebarSearchView, SitebarSearchPresenter.SitebarSearchProxy> {
+
+  private Timer setsmall;
 
   @ProxyCodeSplit
   public interface SitebarSearchProxy extends Proxy<SitebarSearchPresenter> {
@@ -64,25 +74,27 @@ public class SitebarSearchPresenter extends
     void setTextSearchBig();
 
     void setTextSearchSmall();
-  }
 
-  private final String defaultSearchText;
+    void setDefTextVisible(boolean visible);
+
+    HasAllKeyHandlers getKeyHandler();
+
+    HasClickHandlers getDefLabelFocus();
+  }
 
   @Inject
   public SitebarSearchPresenter(final EventBus eventBus, final SitebarSearchView view,
       final SitebarSearchProxy proxy, final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
-    defaultSearchText = i18n.t("Search");
-    setDefText();
     getView().setTextSearchSmall();
+    setsmall = new Timer() {
+      @Override
+      public void run() {
+        getView().setTextSearchSmall();
+      }};
   }
 
   private void doSearch() {
-    doSearch(getView().getTextBox().getText());
-  }
-
-  public void doSearch(final String termToSearch) {
-    getView().setTextSearchSmall();
   }
 
   public void focus() {
@@ -95,7 +107,14 @@ public class SitebarSearchPresenter extends
     getView().getFocus().addBlurHandler(new BlurHandler() {
       @Override
       public void onBlur(final BlurEvent event) {
-        onSearchLostFocus(getView().getTextBox().getText());
+        onSearchBlur(getView().getTextBox().getText());
+      }
+    });
+    getView().getDefLabelFocus().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        onSearchFocus();
+        focus();
       }
     });
     getView().getFocus().addFocusHandler(new FocusHandler() {
@@ -109,34 +128,33 @@ public class SitebarSearchPresenter extends
       public void onClick(final ClickEvent event) {
         doSearch();
       }
-
     });
-    // getView().getKeyUp().addKeyUpHandler(new KeyUpHandler() {
-    // @Override
-    // public void onKeyUp(final KeyUpEvent event) {
-    // if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-    // if (getView().getTextBox().getText().length() > 0) {
-    // NotifyUser.showProgressProcessing();
-    // doSearch();
-    // }
-    // }
-    // }
-    // });
+    getView().getKeyHandler().addKeyUpHandler(new KeyUpHandler() {
+      @Override
+      public void onKeyUp(final KeyUpEvent event) {
+        if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+          if (getView().getTextBox().getText().length() > 0) {
+            NotifyUser.showProgressSearching();
+            doSearch();
+          }
+        }
+      }
+    });
   }
 
   public void onSearchFocus() {
-    if (getView().getTextBox().getText().equals(defaultSearchText)) {
-      getView().setTextSearchBig();
-      getView().selectSearchText();
-    }
+    getView().setTextSearchBig();
+    getView().setDefTextVisible(false);
   }
 
-  public void onSearchLostFocus(final String search) {
-    if (search.length() == 0 || search.equals(defaultSearchText)) {
-      getView().setTextSearchSmall();
-    }
+  public void onSearchBlur(final String search) {
     if (search.length() == 0) {
-      setDefText();
+      getView().setTextSearchSmall();
+      getView().setDefTextVisible(true);
+    } else {
+      getView().setDefTextVisible(false);
+      setsmall.cancel();
+      setsmall.schedule(3000);
     }
   }
 
@@ -145,7 +163,4 @@ public class SitebarSearchPresenter extends
     RevealRootContentEvent.fire(this, this);
   }
 
-  private void setDefText() {
-    getView().setTextSearch(defaultSearchText);
-  }
 }
