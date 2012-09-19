@@ -35,7 +35,7 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.SitebarNewGroupLink.SitebarNewGroupAction;
-import cc.kune.core.client.sn.actions.GotoGroupAction;
+import cc.kune.core.client.sn.actions.GotoGroupLastVisitedContentAction;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
@@ -50,21 +50,22 @@ public class MyGroupsMenu extends MenuDescriptor {
   public static final String MENU_ID = "k-sitebar-my-group";
   public static final String NEW_GROUP_MENUITEM_ID = "k-sitebar-my-group-newmenuitem";
   private final Provider<ClientFileDownloadUtils> downloadProvider;
-  private final GotoGroupAction gotoGroupAction;
   private final SitebarNewGroupAction newGroupAction;
   private final Session session;
   private final SitebarActions siteOptions;
   private final UserServiceAsync userService;
   private final SitebarNewGroupLink sitebarNewGroupLink;
+  private final Provider<GotoGroupLastVisitedContentAction> gotoGroupProvider;
 
   @Inject
   public MyGroupsMenu(final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources res,
-      final Session session, final GotoGroupAction gotoGroupAction,
+      final Session session, final Provider<GotoGroupLastVisitedContentAction> gotoGroupProvider,
       final SitebarNewGroupAction newGroupAction, final SitebarActions siteOptions,
       final GlobalShortcutRegister global, final MenuShowAction menuShowAction, final EventBus eventBus,
       UserServiceAsync userService, SitebarNewGroupLink sitebarNewGroupLink) {
     super(menuShowAction);
     this.session = session;
+    this.gotoGroupProvider = gotoGroupProvider;
     this.newGroupAction = newGroupAction;
     this.siteOptions = siteOptions;
     this.userService = userService;
@@ -75,7 +76,6 @@ public class MyGroupsMenu extends MenuDescriptor {
     setPosition(0);
     setStyles("k-no-backimage, k-btn-sitebar");
     this.downloadProvider = downloadProvider;
-    this.gotoGroupAction = gotoGroupAction;
     withText(I18n.t("Your groups"));
     withToolTip(I18n.t("See your groups or create a new one"));
     withIcon(res.arrowdownsitebar());
@@ -98,8 +98,9 @@ public class MyGroupsMenu extends MenuDescriptor {
   }
 
   private void addPartipationToMenu(final GroupDTO group) {
-    final MenuItemDescriptor participant = new MenuItemDescriptor(gotoGroupAction);
-    participant.setTarget(group);
+    GotoGroupLastVisitedContentAction action = gotoGroupProvider.get();
+    action.setGroup(group);
+    final MenuItemDescriptor participant = new MenuItemDescriptor(action);
     participant.withText(TextUtils.ellipsis(group.getLongName(), 26)).withIcon(
         new Url(downloadProvider.get().getGroupLogo(group))).setParent(this, true);
   }
