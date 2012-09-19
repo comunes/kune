@@ -44,9 +44,9 @@ WARNING: Multiple Servlet injectors detected. This is a warning indicating that 
 
 A check list:
 - these files should be the same:
-  diff src/main/resources/kune.properties target/kune-0.1.0-SNAPSHOT/WEB-INF/classes/kune.properties
+  diff src/main/resources/kune.properties target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/kune.properties
   and:
-  diff src/main/resources/META-INF/persistence.xml target/kune-0.1.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml
+  diff src/main/resources/META-INF/persistence.xml target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml
   if not "mvn compile -Dliquibase.should.run=false"
 also check the persistence unit that you are using and find that name in persistence.xml (we are using development, but can be other). The db user/password configured in kune.properties for that name should be the same to that one you used in the GRANT sentence of mysql database creation.
 
@@ -197,7 +197,7 @@ http://docs.codehaus.org/display/JETTY/Debugging+with+the+Maven+Jetty+Plugin+ins
 
 Also for different logging levels you can play with -Dorg.eclipse.jetty.util.log.DEBUG=true (or similars)
 
-See also log4j.properties in src/main/resources/
+See also log4j.properties in src/main/resources/ if you increase the level to DEBUG, you will get tons of logs.
 
 *** Client debug
 
