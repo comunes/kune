@@ -1,3 +1,12 @@
+kune (0.2.0+b26) unstable; urgency=low
+
+  * Allow to update the db schema by hibernate by a configuration 
+    property (fix #350)
+  * Autoincrease in signInLogs
+  * logs to WARN instead of ERROR
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 19 Sep 2012 22:06:05 +0200
+
 kune (0.2.0+b25) unstable; urgency=low
 
   * Fix for #346: Some buttons for newbies should be more intuitive
