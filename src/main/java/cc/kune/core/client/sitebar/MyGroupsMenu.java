@@ -50,19 +50,19 @@ public class MyGroupsMenu extends MenuDescriptor {
   public static final String MENU_ID = "k-sitebar-my-group";
   public static final String NEW_GROUP_MENUITEM_ID = "k-sitebar-my-group-newmenuitem";
   private final Provider<ClientFileDownloadUtils> downloadProvider;
+  private final Provider<GotoGroupLastVisitedContentAction> gotoGroupProvider;
   private final SitebarNewGroupAction newGroupAction;
   private final Session session;
+  private final SitebarNewGroupLink sitebarNewGroupLink;
   private final SitebarActions siteOptions;
   private final UserServiceAsync userService;
-  private final SitebarNewGroupLink sitebarNewGroupLink;
-  private final Provider<GotoGroupLastVisitedContentAction> gotoGroupProvider;
 
   @Inject
   public MyGroupsMenu(final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources res,
       final Session session, final Provider<GotoGroupLastVisitedContentAction> gotoGroupProvider,
       final SitebarNewGroupAction newGroupAction, final SitebarActions siteOptions,
       final GlobalShortcutRegister global, final MenuShowAction menuShowAction, final EventBus eventBus,
-      UserServiceAsync userService, SitebarNewGroupLink sitebarNewGroupLink) {
+      final UserServiceAsync userService, final SitebarNewGroupLink sitebarNewGroupLink) {
     super(menuShowAction);
     this.session = session;
     this.gotoGroupProvider = gotoGroupProvider;
@@ -98,7 +98,7 @@ public class MyGroupsMenu extends MenuDescriptor {
   }
 
   private void addPartipationToMenu(final GroupDTO group) {
-    GotoGroupLastVisitedContentAction action = gotoGroupProvider.get();
+    final GotoGroupLastVisitedContentAction action = gotoGroupProvider.get();
     action.setGroup(group);
     final MenuItemDescriptor participant = new MenuItemDescriptor(action);
     participant.withText(TextUtils.ellipsis(group.getLongName(), 26)).withIcon(
@@ -110,17 +110,14 @@ public class MyGroupsMenu extends MenuDescriptor {
       // We request again the data about this user
       userService.reloadUserInfo(session.getUserHash(), new AsyncCallbackSimple<UserInfoDTO>() {
         @Override
-        public void onSuccess(UserInfoDTO userInfo) {
+        public void onSuccess(final UserInfoDTO userInfo) {
           session.refreshCurrentUserInfo(userInfo);
           sitebarNewGroupLink.recalculate(!isLogged);
           if (session.userIsJoiningGroups()) {
             MyGroupsMenu.this.clear();
             setVisible(true);
             final UserInfoDTO userInfoDTO = session.getCurrentUserInfo();
-            for (final GroupDTO group : userInfoDTO.getGroupsIsAdmin()) {
-              addPartipationToMenu(group);
-            }
-            for (final GroupDTO group : userInfoDTO.getGroupsIsCollab()) {
+            for (final GroupDTO group : userInfoDTO.getGroupsIsParticipating()) {
               addPartipationToMenu(group);
             }
             new MenuSeparatorDescriptor(MyGroupsMenu.this);

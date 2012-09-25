@@ -29,12 +29,13 @@ public class UserInfoDTO implements IsSerializable {
   private List<String> enabledTools;
   private Set<GroupDTO> groupsIsAdmin;
   private Set<GroupDTO> groupsIsCollab;
+  private List<GroupDTO> groupsIsParticipating;
   private String homePage;
   private boolean showDeletedContent;
+  private Long signInCount;
   private UserSimpleDTO user;
   private GroupDTO userGroup;
   private String userHash;
-  private Long signInCount;
 
   public String getChatName() {
     return chatName;
@@ -56,6 +57,10 @@ public class UserInfoDTO implements IsSerializable {
     return groupsIsCollab;
   }
 
+  public List<GroupDTO> getGroupsIsParticipating() {
+    return groupsIsParticipating;
+  }
+
   public String getHomePage() {
     return homePage;
   }
@@ -74,6 +79,10 @@ public class UserInfoDTO implements IsSerializable {
 
   public boolean getShowDeletedContent() {
     return showDeletedContent;
+  }
+
+  public Long getSignInCount() {
+    return signInCount;
   }
 
   public UserSimpleDTO getUser() {
@@ -104,12 +113,20 @@ public class UserInfoDTO implements IsSerializable {
     this.groupsIsCollab = groupsIsCollab;
   }
 
+  public void setGroupsIsParticipating(final List<GroupDTO> groupsIsParticipating) {
+    this.groupsIsParticipating = groupsIsParticipating;
+  }
+
   public void setHomePage(final String homePage) {
     this.homePage = homePage;
   }
 
   public void setShowDeletedContent(final boolean showDeletedContent) {
     this.showDeletedContent = showDeletedContent;
+  }
+
+  public void setSignInCount(final Long signInCount) {
+    this.signInCount = signInCount;
   }
 
   public void setUser(final UserSimpleDTO user) {
@@ -122,14 +139,6 @@ public class UserInfoDTO implements IsSerializable {
 
   public void setUserHash(final String userHash) {
     this.userHash = userHash;
-  }
-
-  public Long getSignInCount() {
-    return signInCount;
-  }
-
-  public void setSignInCount(Long signInCount) {
-    this.signInCount = signInCount;
   }
 
 }

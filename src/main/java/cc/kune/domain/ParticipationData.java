@@ -21,7 +21,6 @@ package cc.kune.domain;
 
 import java.util.Set;
 
-
 public class ParticipationData {
   private Set<Group> groupsIsAdmin;
   private Set<Group> groupsIsCollab;

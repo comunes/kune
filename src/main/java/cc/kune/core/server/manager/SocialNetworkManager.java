@@ -19,7 +19,7 @@
  */
 package cc.kune.core.server.manager;
 
-import java.util.Set;
+import java.util.List;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
@@ -49,6 +49,8 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
   ParticipationData findParticipation(User user, Group group) throws DefaultException;
 
+  List<Group> findParticipationAggregated(User userLogged, Group group) throws AccessViolationException;
+
   SocialNetwork get(User userLogged, Group group) throws DefaultException;
 
   SocialNetworkData getSocialNetworkData(User userLogged, Group group);
@@ -60,7 +62,5 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
   void setCollabAsAdmin(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   void unJoinGroup(Group groupToUnJoin, Group inGroup) throws DefaultException;
-
-  Set<Group> findParticipationAggregated(User userLogged, Group group) throws AccessViolationException;
 
 }

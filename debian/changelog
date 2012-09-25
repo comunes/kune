@@ -1,3 +1,9 @@
+kune (0.2.0+b26ubuntu1) precise; urgency=low
+
+  * My groups ordered (fix #344) and empty bug (fix #351)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 25 Sep 2012 10:24:40 +0200
+
 kune (0.2.0+b26) unstable; urgency=low
 
   * Allow to update the db schema by hibernate by a configuration 
