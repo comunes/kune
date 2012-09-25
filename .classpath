@@ -85,7 +85,7 @@
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtrpccommlayer/0.0.1/gwtrpccommlayer-0.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat.jar" sourcepath="M2_REPO/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/extjs/gxt/2.2.1/gxt-2.2.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.0.20070617/h2-1.0.20070617.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.3.168/h2-1.3.168.jar" sourcepath="M2_REPO/com/h2database/h2/1.3.168/h2-1.3.168-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/calclab/emite/hablar/r1697/hablar-r1697.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-c3p0/4.1.2.Final/hibernate-c3p0-4.1.2.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-c3p0/4.1.2.Final/hibernate-c3p0-4.1.2.Final-sources.jar"/>

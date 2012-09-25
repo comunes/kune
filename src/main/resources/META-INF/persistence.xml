@@ -6,8 +6,7 @@
 
   <!-- PRODUCTION ========================================================================= -->
 
-  <persistence-unit name="production"
-    transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="production" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <!-- JPA entities must be registered here -->
     <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g'
@@ -40,7 +39,8 @@
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      <property name="hibernate.dialect"
+        value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.url"
@@ -55,12 +55,14 @@
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
       <!-- https://www.hibernate.org/214.html -->
       <property name="hibernate.connection.provider_class"
-        value="org.hibernate.connection.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.min_size" value="5"/>
-      <property name="hibernate.c3p0.max_size" value="50"/>
+        value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
+      <property name="hibernate.c3p0.acquire_increment" value="1"/>
+      <property name="hibernate.c3p0.min_size" value="10"/>
+      <property name="hibernate.c3p0.max_size" value="100"/>
       <property name="hibernate.c3p0.timeout" value="100"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
-      <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+      <property name="hibernate.c3p0.idle_test_period" value="300"/>
+      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.search.default.directory_provider"
         value="filesystem"/>
@@ -88,7 +90,8 @@
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      <property name="hibernate.dialect"
+        value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 
       <!-- Configured and overrided by kune.properties -->
@@ -101,12 +104,14 @@
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
       <!-- https://www.hibernate.org/214.html -->
       <property name="hibernate.connection.provider_class"
-        value="org.hibernate.connection.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.min_size" value="5"/>
-      <property name="hibernate.c3p0.max_size" value="50"/>
+        value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
+      <property name="hibernate.c3p0.acquire_increment" value="1"/>
+      <property name="hibernate.c3p0.min_size" value="10"/>
+      <property name="hibernate.c3p0.max_size" value="100"/>
       <property name="hibernate.c3p0.timeout" value="100"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
-      <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+      <property name="hibernate.c3p0.idle_test_period" value="300"/>
+      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.cache.use_second_level_cache"
         value="true"/>
@@ -151,7 +156,8 @@
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      <property name="hibernate.dialect"
+        value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.url"
@@ -166,12 +172,14 @@
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <!-- https://www.hibernate.org/214.html -->
       <property name="hibernate.connection.provider_class"
-        value="org.hibernate.connection.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.min_size" value="5"/>
-      <property name="hibernate.c3p0.max_size" value="50"/>
+        value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
+      <property name="hibernate.c3p0.acquire_increment" value="1"/>
+      <property name="hibernate.c3p0.min_size" value="10"/>
+      <property name="hibernate.c3p0.max_size" value="100"/>
       <property name="hibernate.c3p0.timeout" value="100"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
-      <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+      <property name="hibernate.c3p0.idle_test_period" value="300"/>
+      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.search.default.directory_provider"
         value="filesystem"/>
@@ -219,7 +227,8 @@
       <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="false"/>
       <property name="use_sql_comments" value="false"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      <property name="hibernate.dialect"
+        value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
       <!-- Configured and overrided by kune.properties -->
       <property name="hibernate.connection.url"
@@ -230,12 +239,14 @@
       <property name="hibernate.connection.password" value="db4kune"/>
       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.connection.provider_class"
-        value="org.hibernate.connection.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.min_size" value="5"/>
-      <property name="hibernate.c3p0.max_size" value="50"/>
+        value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
+      <property name="hibernate.c3p0.acquire_increment" value="1"/>
+      <property name="hibernate.c3p0.min_size" value="10"/>
+      <property name="hibernate.c3p0.max_size" value="100"/>
       <property name="hibernate.c3p0.timeout" value="100"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
-      <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+      <property name="hibernate.c3p0.idle_test_period" value="300"/>
+      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.search.default.directory_provider"
         value="filesystem"/>
@@ -288,7 +299,8 @@
       <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
       <property name="hibernate.connection.username" value="sa"/>
       <property name="hibernate.connection.password" value=""/>
-      <property name="hibernate.connection.url" value="jdbc:h2:mem:testdb"/>
+      <!-- Added MVCC=true http://stackoverflow.com/questions/4162557/timeout-error-trying-to-lock-table-in-h2 -->
+      <property name="hibernate.connection.url" value="jdbc:h2:mem:testdb;MVCC=true"/>
       <property name="hibernate.search.default.directory_provider"
         value="ram"/>
       <!-- <property name="hibernate.search.default.indexBase" -->

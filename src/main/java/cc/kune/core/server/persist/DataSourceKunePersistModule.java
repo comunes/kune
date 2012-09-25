@@ -74,7 +74,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Instantiates this module only during tests
-   *
+   * 
    * @param settedProperties
    *          the setted properties
    * @param settedJpaUnit
@@ -111,13 +111,33 @@ public class DataSourceKunePersistModule extends PrivateModule {
       dbProperties.setProperty("hibernate.connection.url", dbUrl);
       dbProperties.setProperty("hibernate.connection.username", dbUser);
       dbProperties.setProperty("hibernate.connection.password", dbPass);
-      if (kuneProperties.has(KuneProperties.SITE_DB_SCHEMA)) {
-        final String dbSchema = kuneProperties.get(KuneProperties.SITE_DB_SCHEMA);
-        dbProperties.setProperty("hibernate.hbm2ddl.auto", dbSchema);
-      }
+
+      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_SCHEMA, "hibernate.hbm2ddl.auto");
+      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_ACQUIRE_INCREMENT,
+          "hibernate.c3p0.acquire_increment");
+      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_AUTOCOMMITONCLOSE,
+          "hibernate.c3p0.autoCommitOnClose");
+      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_MAX_SIZE, "hibernate.c3p0.max_size");
+      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_MAX_STATEMENTS,
+          "hibernate.c3p0.max_statements");
+      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_MIN_SIZE, "hibernate.c3p0.min_size");
+      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_TEST_PERIOD,
+          "hibernate.c3p0.idle_test_period");
+      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_TIMEOUT, "hibernate.c3p0.timeout");
+
       jpm.properties(dbProperties);
       LOG.info(String.format("Using user '%s' and connection '%s'", dbUser, dbUrl));
       // LOG.debug(String.format("dbpass '%s'", dbPass));
+
+      // <property name="hibernate.connection.provider_class"
+      // value="org.hibernate.connection.C3P0ConnectionProvider"/>
+      // <property name="hibernate.c3p0.min_size" value="5"/>
+      // <property name="hibernate.c3p0.max_size" value="50"/>
+      // <property name="hibernate.c3p0.timeout" value="100"/>
+      // <property name="hibernate.c3p0.max_statements" value="0"/>
+      // <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+      // <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
+
     }
 
     // http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html
@@ -198,5 +218,14 @@ public class DataSourceKunePersistModule extends PrivateModule {
     kuneConfig = settedProperties != null ? settedProperties : sysConf.getString("kune.server.config");
     kuneProperties = new KunePropertiesDefault(kuneConfig);
     log4Conf = sysConf.getString("log4j.configuration");
+  }
+
+  private void setPropertyIfExists(final Properties dbProperties, final String kuneProperty,
+      final String persistenceProperty) {
+    if (kuneProperties.has(kuneProperty)) {
+      final String value = kuneProperties.get(KuneProperties.SITE_DB_SCHEMA);
+      LOG.info(String.format("Setting property '%s' to '%s'", persistenceProperty, value));
+      dbProperties.setProperty(persistenceProperty, value);
+    }
   }
 }
