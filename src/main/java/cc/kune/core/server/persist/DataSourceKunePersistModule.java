@@ -47,6 +47,7 @@ import cc.kune.domain.finders.TagFinder;
 import cc.kune.domain.finders.TagUserContentFinder;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.domain.finders.UserSignInLogFinder;
+import cc.kune.domain.finders.WaveEntityFinder;
 
 import com.google.inject.Key;
 import com.google.inject.PrivateModule;
@@ -160,6 +161,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
     jpm.addFinder(UserFinder.class);
     jpm.addFinder(UserSignInLogFinder.class);
     jpm.addFinder(InvitationFinder.class);
+	jpm.addFinder(WaveEntityFinder.class);
     install(jpm);
 
     bind(Session.class).annotatedWith(DataSourceKune.class).toProvider(
@@ -189,7 +191,8 @@ public class DataSourceKunePersistModule extends PrivateModule {
     expose(TagUserContentFinder.class);
     expose(UserFinder.class);
     expose(UserSignInLogFinder.class);
-    expose(InvitationFinder.class);
+    expose(WaveEntityFinder.class);
+	expose(InvitationFinder.class);
     expose(MY_DATA_SOURCE_ONE_FILTER_KEY);
 
     bind(GenericPersistenceInitializer.class).asEagerSingleton();

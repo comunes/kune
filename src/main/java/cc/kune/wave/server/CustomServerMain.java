@@ -33,7 +33,6 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.eclipse.jetty.servlets.ProxyServlet;
 import org.waveprotocol.box.common.comms.WaveClientRpc.ProtocolWaveClientRpc;
 import org.waveprotocol.box.server.CoreSettings;
-import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.authentication.AccountStoreHolder;
 import org.waveprotocol.box.server.authentication.SessionManager;
@@ -79,6 +78,11 @@ import org.waveprotocol.wave.model.version.HashedVersionFactory;
 import org.waveprotocol.wave.model.wave.ParticipantIdUtil;
 import org.waveprotocol.wave.util.logging.Log;
 import org.waveprotocol.wave.util.settings.SettingsBinder;
+
+import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.manager.WaveEntityManager;
+import cc.kune.wave.server.search.CustomPerUserWaveViewHandlerImpl;
+import cc.kune.wave.server.search.CustomSearchModule;
 
 import com.google.gwt.logging.server.RemoteLoggingServiceImpl;
 import com.google.inject.Guice;
@@ -168,7 +172,7 @@ public class CustomServerMain {
 
     Module federationModule = buildFederationModule(settingsInjector, enableFederation);
     PersistenceModule persistenceModule = settingsInjector.getInstance(PersistenceModule.class);
-    Module searchModule = settingsInjector.getInstance(SearchModule.class);
+    Module searchModule = settingsInjector.getInstance(CustomSearchModule.class);
     Injector injector =
         settingsInjector.createChildInjector(new ServerModule(enableFederation, listenerCount,
             waveletLoadCount, deltaPersistCount, storageContinuationCount, lookupCount),
@@ -193,6 +197,7 @@ public class CustomServerMain {
 
     LOG.info("Starting server");
     server.startWebSocketServer(injector);
+    reindex(injector);
   }
 
   private static Module buildFederationModule(Injector settingsInjector, boolean enableFederation)
@@ -302,7 +307,9 @@ public class CustomServerMain {
     PerUserWaveViewBus.Listener listener = injector.getInstance(PerUserWaveViewBus.Listener.class);
     waveViewDistpatcher.addListener(listener);
     waveBus.subscribe(waveViewDistpatcher);
+  }
 
+  private static void reindex(Injector injector) throws WaveletStateException, WaveServerException {
     WaveIndexer waveIndexer = injector.getInstance(WaveIndexer.class);
     waveIndexer.remakeIndex();
   }

@@ -34,6 +34,7 @@
     <class>cc.kune.domain.ToolConfiguration</class>
     <class>cc.kune.domain.User</class>
     <class>cc.kune.domain.UserSignInLog</class>
+    <class>cc.kune.domain.WaveEntity</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
@@ -159,6 +160,7 @@
     <class>cc.kune.domain.ToolConfiguration</class>
     <class>cc.kune.domain.User</class>
     <class>cc.kune.domain.UserSignInLog</class>
+    <class>cc.kune.domain.WaveEntity</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
@@ -238,6 +240,7 @@
     <class>cc.kune.domain.ToolConfiguration</class>
     <class>cc.kune.domain.User</class>
     <class>cc.kune.domain.UserSignInLog</class>
+    <class>cc.kune.domain.WaveEntity</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
@@ -310,6 +313,7 @@
     <class>cc.kune.domain.ToolConfiguration</class>
     <class>cc.kune.domain.User</class>
     <class>cc.kune.domain.UserSignInLog</class>
+    <class>cc.kune.domain.WaveEntity</class>
     <properties>
       <!-- In order to debug sql enable this -->
       <property name="hibernate.show_sql" value="false"/>

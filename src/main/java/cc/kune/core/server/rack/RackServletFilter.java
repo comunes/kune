@@ -39,14 +39,17 @@ import org.waveprotocol.box.server.waveserver.CustomImportServlet;
 
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.mbean.MBeanRegister;
+import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.rack.utils.RackHelper;
 import cc.kune.core.server.scheduler.CustomJobFactory;
 import cc.kune.core.server.searcheable.SearchEngineServletFilter;
+import cc.kune.wave.server.kspecific.ParticipantUtils;
+import cc.kune.wave.server.search.CustomPerUserWaveViewHandlerImpl;
 
-import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -85,6 +88,7 @@ public class RackServletFilter implements Filter {
             filter.doFilter(request, response, this);
         }
     }
+  }
 
     public static final String INJECTOR_ATTRIBUTE = Injector.class.getName() + "Child";
     public static final String INJECTOR_PARENT_ATTRIBUTE = ServerRpcProvider.INJECTOR_ATTRIBUTE;
@@ -102,6 +106,7 @@ public class RackServletFilter implements Filter {
             dock.getFilter().destroy();
         }
     }
+  }
 
     @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
@@ -119,6 +124,10 @@ public class RackServletFilter implements Filter {
         final FilterChain newChain = new DockChain(docks.iterator());
         newChain.doFilter(request, response);
     }
+    LOG.debug("REQUEST: " + relative);
+    final FilterChain newChain = new DockChain(docks.iterator());
+    newChain.doFilter(request, response);
+  }
 
     @Override
     protected void finalize() throws Throwable {
@@ -136,6 +145,7 @@ public class RackServletFilter implements Filter {
             throw new ServerException("couldn't instantiate the rack module", e);
         }
     }
+  }
 
     private String getModuleName(final FilterConfig filterConfig) {
         final String moduleName = filterConfig.getInitParameter(MODULE_PARAMETER);
@@ -144,6 +154,8 @@ public class RackServletFilter implements Filter {
         }
         return moduleName;
     }
+    return moduleName;
+  }
 
     @SuppressWarnings("unused")
     private void graph(final String filename, final Injector kuneInjector) {
@@ -158,6 +170,7 @@ public class RackServletFilter implements Filter {
             LOG.debug("Exception creation guice graph", e);
         }
     }
+  }
 
     @Override
     public void init(final FilterConfig filterConfig) throws ServletException {
@@ -192,10 +205,17 @@ public class RackServletFilter implements Filter {
         // Register some mbeans objects
         kuneChildInjector.getInstance(MBeanRegister.class);
 
+		// Search init
+    	final CustomPerUserWaveViewHandlerImpl searcher = kuneChildInjector.getInstance(CustomPerUserWaveViewHandlerImpl.class);
+	    searcher.init(kuneChildInjector.getInstance(UserManager.class),
+        kuneChildInjector.getInstance(WaveEntityManager.class),
+        kuneChildInjector.getInstance(ParticipantUtils.class));
+
         // Uncomment to generate the graph
         // graph("docs/wave-guice-graph.dot", injector);
         // graph("docs/kune-guice-graph.dot", kuneChildInjector);
     }
+  }
 
     private void initFilters(final FilterConfig filterConfig) throws ServletException {
         for (final Dock dock : docks) {
@@ -220,6 +240,7 @@ public class RackServletFilter implements Filter {
             listener.start();
         }
     }
+  }
 
     private void stopContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
             final Injector injector) {
@@ -229,5 +250,6 @@ public class RackServletFilter implements Filter {
             listener.stop();
         }
     }
+  }
 
 }

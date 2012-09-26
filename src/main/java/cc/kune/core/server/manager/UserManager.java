@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.manager;
 
+import java.util.Set;
+
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.DefaultException;
@@ -32,11 +34,23 @@ import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
+import cc.kune.domain.WaveEntity;
 
 /**
  * The Interface UserManager.
  */
 public interface UserManager {
+
+  /**
+   * Add the wave to the list of waves this user is participant (this only
+   * update the index, don't modify the wave)
+   * 
+   * @param user
+   *          the user
+   * @param wave
+   *          the wave to add as participant
+   */
+  void addWave(User user, WaveEntity wave);
 
   /**
    * Ask for email confirmation.
@@ -147,6 +161,15 @@ public interface UserManager {
   UserBuddiesData getUserBuddies(String shortName);
 
   /**
+   * Gets the waves this user is participating in
+   * 
+   * @param user
+   *          the user
+   * @return the waves
+   */
+  Set<WaveEntity> getWaves(User user);
+
+  /**
    * Login.
    * 
    * @param nickOrEmail
@@ -161,6 +184,17 @@ public interface UserManager {
    * Re index.
    */
   void reIndex();
+
+  /**
+   * Remove the wave from the list of waves this user is participant (this only
+   * update the index, don't modify the wave)
+   * 
+   * @param user
+   *          the user
+   * @param wave
+   *          the wave to remove as participant
+   */
+  void removeWave(User user, WaveEntity wave);
 
   /**
    * Search.

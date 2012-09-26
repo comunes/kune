@@ -19,6 +19,8 @@
  */
 package cc.kune.domain;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TimeZone;
 
 import javax.persistence.Basic;
@@ -27,9 +29,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -145,6 +149,15 @@ public class User implements HasId {
   @OneToOne(cascade = CascadeType.ALL)
   private Group userGroup;
 
+  // @IndexedEmbedded
+  // @LazyCollection(LazyCollectionOption.FALSE)
+  // @Fetch(FetchMode.JOIN)
+  // @ContainedIn
+  // @OrderBy("lastModifiedTime DESC")
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+  private Set<WaveEntity> waves;
+
   public User() {
     this(null, null, null, null, null, null, null, null);
   }
@@ -167,6 +180,7 @@ public class User implements HasId {
     emailNotifFreq = DEF_EMAIL_FREQ;
     // this.properties = properties;
     emailVerified = false;
+    this.waves = new HashSet<WaveEntity>();
   }
 
   // @OneToOne
@@ -181,6 +195,13 @@ public class User implements HasId {
   // this(shortName, longName, email, passwd, language, country, timezone,
   // null);
   // }
+
+  public void addWave(final WaveEntity wave) {
+    // FIXME: something related with lazy initialization (workaround using
+    // size())
+    waves.size();
+    waves.add(wave);
+  }
 
   @Override
   public boolean equals(final Object obj) {
@@ -212,13 +233,13 @@ public class User implements HasId {
     return createdOn;
   }
 
-  public byte[] getDiggest() {
-    return diggest;
-  }
-
   // public CustomProperties getCustomProperties() {
   // return customProperties;
   // }
+
+  public byte[] getDiggest() {
+    return diggest;
+  }
 
   public String getEmail() {
     return email;
@@ -244,14 +265,14 @@ public class User implements HasId {
     return hasLogo();
   }
 
+  // public Properties getProperties() {
+  // return properties;
+  // }
+
   @Override
   public Long getId() {
     return id;
   }
-
-  // public Properties getProperties() {
-  // return properties;
-  // }
 
   public I18nLanguage getLanguage() {
     return language;
@@ -290,6 +311,10 @@ public class User implements HasId {
     return userGroup;
   }
 
+  public Set<WaveEntity> getWaves() {
+    return waves;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -305,6 +330,11 @@ public class User implements HasId {
 
   public boolean isEmailVerified() {
     return emailVerified == null ? false : emailVerified;
+  }
+
+  public void removeWave(final WaveEntity wave) {
+    waves.size();
+    waves.remove(wave);
   }
 
   public void setCountry(final I18nCountry country) {
@@ -372,8 +402,13 @@ public class User implements HasId {
     this.userGroup = userGroup;
   }
 
+  public void setWaves(final HashSet<WaveEntity> waves) {
+    this.waves = waves;
+  }
+
   @Override
   public String toString() {
     return "User[" + shortName + "]";
   }
+
 }
