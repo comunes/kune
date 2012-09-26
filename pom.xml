@@ -783,6 +783,10 @@
               <value>src/main/resources/wave-server.properties</value>
             </systemProperty>
             <systemProperty>
+              <key>log4j.configuration</key>
+              <value>file://${basedir}/src/main/resources/log4j.dev.properties</value>
+            </systemProperty>
+            <systemProperty>
               <key>org.eclipse.jetty.util.resource.FileResource.checkAliases
               </key>
               <value>False</value>
