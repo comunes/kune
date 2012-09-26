@@ -74,6 +74,7 @@ import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.manager.UserSignInLogManager;
+import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.manager.file.EntityLogoDownloadManager;
 import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.server.manager.file.FileDownloadManager;
@@ -95,6 +96,7 @@ import cc.kune.core.server.manager.impl.TagUserContentManagerDefault;
 import cc.kune.core.server.manager.impl.ToolConfigurationManagerDefault;
 import cc.kune.core.server.manager.impl.UserManagerDefault;
 import cc.kune.core.server.manager.impl.UserSignInLogManagerDefault;
+import cc.kune.core.server.manager.impl.WaveEntityManagerDefault;
 import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.mapper.KuneMapperDefault;
 import cc.kune.core.server.notifier.NotificationSender;
@@ -166,6 +168,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(KuneWaveManager.class).to(KuneWaveManagerDefault.class);
     bind(UserSignInLogManager.class).to(UserSignInLogManagerDefault.class);
     bind(InvitationManager.class).to(InvitationManagerDefault.class);
+	bind(WaveEntityManager.class).to(WaveEntityManagerDefault.class);
   }
 
   /**

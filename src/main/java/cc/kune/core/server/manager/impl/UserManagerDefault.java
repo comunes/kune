@@ -25,6 +25,7 @@ package cc.kune.core.server.manager.impl;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -89,6 +90,7 @@ import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
+import cc.kune.domain.WaveEntity;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 import cc.kune.wave.server.kspecific.ParticipantUtils;
@@ -208,6 +210,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.xmppRosterPresence = xmppRosterPresence;
     this.snCache = snCache;
     this.domain = domain;
+  }
+
+  @Override
+  public void addWave(final User user, final WaveEntity wave) {
+    user.addWave(wave);
+    persist(user);
   }
 
   /*
@@ -558,6 +566,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
    * @see cc.kune.core.server.manager.UserManager#login(java.lang.String, java.lang.String)
    */
   @Override
+  public Set<WaveEntity> getWaves(final User user) {
+    return user.getWaves();
+  }
+
+  @Override
   public User login(final String nickOrEmail, final String passwd) {
     User user;
     try {
@@ -599,6 +612,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   /* (non-Javadoc)
    * @see cc.kune.core.server.manager.UserManager#search(java.lang.String)
    */
+  @Override
+  public void removeWave(final User user, final WaveEntity wave) {
+    user.removeWave(wave);
+    persist(user);
+  }
+
   @Override
   public SearchResult<User> search(final String search) {
     return this.search(search, null, null);
@@ -691,4 +710,5 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       throw new EmailHashInvalidException();
     }
   }
+
 }
