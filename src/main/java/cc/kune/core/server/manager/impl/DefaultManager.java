@@ -56,11 +56,11 @@ public abstract class DefaultManager<T, K> {
   /**
    * use carefully!!!
    */
-  protected <X> X find(final Class<X> entityClass, final Long primaryKey) {
+  protected <X> X find(final Class<X> entityClass, final K primaryKey) {
     return getEntityManager().find(entityClass, primaryKey);
   }
 
-  public T find(final Long primaryKey) {
+  public T find(final K primaryKey) {
     return getEntityManager().find(entityClass, primaryKey);
   }
 
