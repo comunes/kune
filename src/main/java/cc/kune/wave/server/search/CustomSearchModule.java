@@ -17,32 +17,42 @@
 
 package cc.kune.wave.server.search;
 
-import org.waveprotocol.box.server.persistence.lucene.FSIndexDirectory;
-import org.waveprotocol.box.server.persistence.lucene.IndexDirectory;
+import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewBus;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewHandler;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewProvider;
-import org.waveprotocol.box.server.waveserver.SearchProvider;
-import org.waveprotocol.box.server.waveserver.SimpleSearchProviderImpl;
 import org.waveprotocol.box.server.waveserver.WaveIndexer;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
-public class CustomSearchModule extends AbstractModule {
+public class CustomSearchModule extends SearchModule {
 
-  public CustomSearchModule() {
+  private final String searchType;
+
+  @Inject
+  public CustomSearchModule(@Named(CoreSettings.SEARCH_TYPE) final String searchType,
+      @Named(CoreSettings.INDEX_DIRECTORY) final String indexDirectory) {
+    super(searchType, indexDirectory);
+    this.searchType = searchType;
   }
 
   @Override
   public void configure() {
-    // FIXME extends SearchModule
-    bind(SearchProvider.class).to(SimpleSearchProviderImpl.class).in(Singleton.class);
-    bind(PerUserWaveViewProvider.class).to(CustomPerUserWaveViewHandlerImpl.class).in(Singleton.class);
-    bind(PerUserWaveViewBus.Listener.class).to(CustomPerUserWaveViewHandlerImpl.class).in(
-        Singleton.class);
-    bind(PerUserWaveViewHandler.class).to(CustomPerUserWaveViewHandlerImpl.class).in(Singleton.class);
-    bind(IndexDirectory.class).to(FSIndexDirectory.class);
-    bind(WaveIndexer.class).to(CustomWaveIndexerImpl.class);
+    try {
+      // TODO: patch Wave to don't throw RuntimeException
+      super.configure();
+    } catch (final RuntimeException e) {
+      if ("db".equals(searchType)) {
+        bind(PerUserWaveViewProvider.class).to(CustomPerUserWaveViewHandlerImpl.class).in(
+            Singleton.class);
+        bind(PerUserWaveViewBus.Listener.class).to(CustomPerUserWaveViewHandlerImpl.class).in(
+            Singleton.class);
+        bind(PerUserWaveViewHandler.class).to(CustomPerUserWaveViewHandlerImpl.class).in(Singleton.class);
+        bind(WaveIndexer.class).to(CustomWaveIndexerImpl.class);
+      }
+    }
   }
 }
