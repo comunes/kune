@@ -23,6 +23,8 @@ import javax.persistence.EntityTransaction;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.server.persist.KuneTransactional;
 
@@ -37,6 +39,8 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
   @KuneTransactional
   private static class Internal {
   }
+
+  public static final Log LOG = LogFactory.getLog(KuneJpaLocalTxnInterceptor.class);
 
   // Tracks if the unit of work was begun implicitly by this transaction.
   private final ThreadLocal<Boolean> didWeStartWork = new ThreadLocal<Boolean>();
@@ -54,6 +58,7 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
     if (!emProvider.isWorking()) {
       emProvider.begin();
       didWeStartWork.set(true);
+      LOG.debug("Starting transaction");
     }
 
     final KuneTransactional transactional = readTransactionMetadata(methodInvocation);
@@ -62,6 +67,7 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
     // Allow 'joining' of transactions if there is an enclosing
     // @KuneTransactional method.
     if (em.getTransaction().isActive()) {
+      LOG.debug("Joining a previous transaction");
       return methodInvocation.proceed();
     }
 
@@ -74,6 +80,7 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
 
     } catch (final Exception e) {
       // commit transaction only if rollback didnt occur
+      LOG.debug("Exception in transaction", e);
       if (rollbackIfNecessary(transactional, e, txn)) {
         txn.commit();
       }
@@ -93,8 +100,10 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
     // as it
     // interferes with the advised method's throwing semantics)
     try {
+      LOG.debug("Trying to commit transaction");
       txn.commit();
     } finally {
+      LOG.debug("Transaction commited");
       // close the em if necessary
       if (null != didWeStartWork.get()) {
         didWeStartWork.remove();

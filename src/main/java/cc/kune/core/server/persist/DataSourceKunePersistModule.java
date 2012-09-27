@@ -172,6 +172,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
     transactionInterceptor = new KuneJpaLocalTxnInterceptor();
     requestInjection(transactionInterceptor);
+    // bind(KuneJpaLocalTxnInterceptor.class).toInstance(transactionInterceptor);
 
     bind(MY_DATA_SOURCE_ONE_FILTER_KEY).to(CustomPersistFilter.class);
 
@@ -194,6 +195,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
     expose(WaveEntityFinder.class);
 	expose(InvitationFinder.class);
     expose(MY_DATA_SOURCE_ONE_FILTER_KEY);
+    // expose(KuneJpaLocalTxnInterceptor.class);
 
     bind(GenericPersistenceInitializer.class).asEagerSingleton();
   }
