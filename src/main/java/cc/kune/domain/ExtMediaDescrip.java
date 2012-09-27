@@ -38,7 +38,7 @@ public class ExtMediaDescrip implements HasId {
 
   @Column(nullable = false)
   private String detectRegex;
-  @Column(nullable = false)
+  @Column(nullable = false, columnDefinition = "LONGTEXT")
   @Length(max = 1000)
   private String embedTemplate;
   private int height;
