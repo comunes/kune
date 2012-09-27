@@ -32,18 +32,18 @@ import com.google.inject.Inject;
 
 public class GotoGroupLastVisitedContentAction extends AbstractExtendedAction {
 
-  private final StateManager stateManager;
   public GroupDTO group;
   protected StateToken lastVisited;
   private final Session session;
+  private final StateManager stateManager;
 
   @Inject
-  public GotoGroupLastVisitedContentAction(final StateManager stateManager, Session session) {
+  public GotoGroupLastVisitedContentAction(final StateManager stateManager, final Session session) {
     this.stateManager = stateManager;
     this.session = session;
     stateManager.onStateChanged(false, new StateChangedHandler() {
       @Override
-      public void onStateChanged(StateChangedEvent event) {
+      public void onStateChanged(final StateChangedEvent event) {
         if (event.getState().getGroup().equals(group)) {
           lastVisited = event.getState().getStateToken();
         }
@@ -51,16 +51,17 @@ public class GotoGroupLastVisitedContentAction extends AbstractExtendedAction {
     });
   }
 
-  public void setGroup(GroupDTO group) {
-    this.group = group;
-    StateToken currentToken = session.getCurrentStateToken();
-    StateToken groupToken = group.getStateToken();
-    lastVisited = groupToken.getGroup().equals(currentToken.getGroup()) ? currentToken : groupToken;
-  }
-
   @Override
   public void actionPerformed(final ActionEvent event) {
     stateManager.gotoStateToken(lastVisited);
+  }
+
+  public void setGroup(final GroupDTO group) {
+    this.group = group;
+    final StateToken currentToken = session.getCurrentStateToken();
+    final StateToken groupToken = group.getStateToken();
+    lastVisited = currentToken == null ? groupToken : groupToken.getGroup().equals(
+        currentToken.getGroup()) ? currentToken : groupToken;
   }
 
 }

@@ -3,8 +3,9 @@ kune (0.2.0+b27) unstable; urgency=low
   * My groups ordered (fix #344) and empty bug (fix #351)
   * Database connection pool configurable (fix #354)
   * Fix NPE in EntityBackgroundDownloadManager (fix #357)
+  * NPE in GotoGroupLastVisitedContentAction.setGroup (fix #358)
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 27 Sep 2012 13:46:13 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 27 Sep 2012 13:52:42 +0200
 
 kune (0.2.0+b26) unstable; urgency=low
 
