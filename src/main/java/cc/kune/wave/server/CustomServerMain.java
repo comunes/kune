@@ -79,9 +79,6 @@ import org.waveprotocol.wave.model.wave.ParticipantIdUtil;
 import org.waveprotocol.wave.util.logging.Log;
 import org.waveprotocol.wave.util.settings.SettingsBinder;
 
-import cc.kune.core.server.manager.UserManager;
-import cc.kune.core.server.manager.WaveEntityManager;
-import cc.kune.wave.server.search.CustomPerUserWaveViewHandlerImpl;
 import cc.kune.wave.server.search.CustomSearchModule;
 
 import com.google.gwt.logging.server.RemoteLoggingServiceImpl;

@@ -24,13 +24,18 @@ import java.util.List;
 
 import cc.kune.domain.WaveEntity;
 
+import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
 public interface WaveEntityFinder {
 
-  @Finder(query = "SELECT count(*) FROM WaveEntity2 w")
+  @Finder(query = "SELECT count(*) FROM WaveEntity w")
   public Long count();
 
-  @Finder(query = "from WaveEntity2 w", returnAs = ArrayList.class)
+  @Finder(query = "FROM WaveEntity w WHERE domain = :domain AND waveId = :waveId AND waveletId = :waveletId")
+  public WaveEntity find(@Named("domain") final String domain, @Named("waveId") final String waveId,
+      @Named("waveletId") final String waveletId);
+
+  @Finder(query = "FROM WaveEntity w", returnAs = ArrayList.class)
   public List<WaveEntity> getAll();
 }

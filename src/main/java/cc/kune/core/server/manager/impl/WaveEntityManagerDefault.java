@@ -24,41 +24,41 @@ import javax.persistence.EntityManager;
 
 import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.persist.DataSourceKune;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.domain.WaveEntity;
 import cc.kune.domain.WaveRefKey;
 import cc.kune.domain.finders.WaveEntityFinder;
 
-import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
+// @LogThis
 public class WaveEntityManagerDefault extends DefaultManager<WaveEntity, WaveRefKey> implements
     WaveEntityManager {
 
   private final WaveEntityFinder finder;
-  private final Provider<EntityManager> provider2;
 
   @Inject
   public WaveEntityManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final WaveEntityFinder finder) {
     super(provider, WaveEntity.class);
-    provider2 = provider;
     this.finder = finder;
   }
 
   @Override
+  @KuneTransactional
   public WaveEntity add(final String domain, final String waveId, final String waveletId,
-
-  final Long lastModifiedTime) {
-    provider2.get().getTransaction().begin();
+      final Long lastModifiedTime) {
     final WaveEntity wave = new WaveEntity(domain, waveId, waveletId, lastModifiedTime);
     persist(wave, WaveEntity.class);
-    provider2.get().getTransaction().commit();
-    Preconditions.checkState(finder.count() > 0);
-
     return wave;
+  }
+
+  @Override
+  public WaveEntity find(final String domain, final String waveId, final String waveletId) {
+    return finder.find(domain, waveId, waveletId);
   }
 
 }

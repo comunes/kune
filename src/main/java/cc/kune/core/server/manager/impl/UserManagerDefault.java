@@ -74,6 +74,7 @@ import cc.kune.core.server.mbean.MBeanRegistry;
 import cc.kune.core.server.notifier.Addressee;
 import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.DataSourceKune;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.xmpp.RosterItem;
@@ -212,6 +213,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.domain = domain;
   }
 
+  @KuneTransactional
   @Override
   public void addWave(final User user, final WaveEntity wave) {
     user.addWave(wave);
@@ -609,15 +611,16 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.UserManager#search(java.lang.String)
-   */
+  @KuneTransactional
   @Override
   public void removeWave(final User user, final WaveEntity wave) {
     user.removeWave(wave);
     persist(user);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.UserManager#search(java.lang.String)
+   */
   @Override
   public SearchResult<User> search(final String search) {
     return this.search(search, null, null);

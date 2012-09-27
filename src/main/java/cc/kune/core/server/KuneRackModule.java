@@ -126,6 +126,8 @@ public class KuneRackModule implements RackModule {
     configModule = new AbstractModule() {
       @Override
       public void configure() {
+        // Warning: parent instances (like Wave classes) are not intercepted.
+        // See: http://code.google.com/p/google-guice/issues/detail?id=461
         bindInterceptor(Matchers.annotatedWith(LogThis.class), new NotInObject(),
             new LoggerMethodInterceptor());
         // if (sessionScope != null) {
@@ -248,6 +250,8 @@ public class KuneRackModule implements RackModule {
             kuneProperties);
         install(openfireDataSource);
         final KuneJpaLocalTxnInterceptor kuneJpaTxnInterceptor = kuneDataSource.getTransactionInterceptor();
+        // Warning: parent instances (like Wave classes) are not intercepted
+        // See: http://code.google.com/p/google-guice/issues/detail?id=461
         bindInterceptor(annotatedWith(KuneTransactional.class), any(), kuneJpaTxnInterceptor);
         bindInterceptor(any(), annotatedWith(KuneTransactional.class), kuneJpaTxnInterceptor);
         filter("/*").through(DataSourceKunePersistModule.MY_DATA_SOURCE_ONE_FILTER_KEY);

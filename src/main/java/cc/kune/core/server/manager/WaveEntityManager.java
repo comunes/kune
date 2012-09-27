@@ -26,5 +26,6 @@ import cc.kune.domain.WaveRefKey;
 public interface WaveEntityManager extends Manager<WaveEntity, WaveRefKey> {
 
   WaveEntity add(String domain, String waveId, String waveletId, Long lastModifiedTime);
-  // WaveParticipants find(String waveId, String waveletId);
+
+  WaveEntity find(String domain, String waveId, String waveletId);
 }

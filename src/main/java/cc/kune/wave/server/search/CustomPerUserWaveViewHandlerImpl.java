@@ -42,7 +42,6 @@ import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.domain.User;
 import cc.kune.domain.WaveEntity;
-import cc.kune.domain.WaveRefKey;
 import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 import com.google.common.base.Preconditions;
@@ -74,7 +73,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   @KuneTransactional
   private void addWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
     Preconditions.checkNotNull(waveEntity);
-    LOG.info("Added wave to user " + participantId.getAddress());
+    LOG.debug("Added wave to user " + participantId.getAddress());
     try {
       final User user = userManager.findByShortname(getShortname(participantId.getAddress()));
       if (user != null) {
@@ -102,12 +101,10 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     final String waveId = waveletData.getWaveId().serialise();
     final String waveletId = waveletData.getWaveletId().serialise();
     final String domain = waveletData.getWaveId().getDomain();
-
-    waveEntity = waveEntityManager.find(WaveRefKey.of(domain, waveId, waveletId));
-    if (waveEntity == null) {
+    try {
+      waveEntity = waveEntityManager.find(domain, waveId, waveletId);
+    } catch (final javax.persistence.NoResultException e) {
       waveEntity = waveEntityManager.add(domain, waveId, waveletId, waveletData.getLastModifiedTime());
-      waveEntityManager.merge(waveEntity);
-
     }
     Preconditions.checkNotNull(waveEntity);
     return waveEntity;
@@ -179,23 +176,22 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   @Override
   public ListenableFuture<Void> onWaveInit(final WaveletName waveletName) {
     Preconditions.checkNotNull(waveletName);
+    LOG.debug("On wave init of wave " + waveletName.toString());
+    ReadableWaveletData waveletData;
+    try {
+      waveletData = waveletProvider.getReadableWaveletData(waveletName);
+      final WaveEntity waveEntity = getWaveEntity(waveletData);
+      Preconditions.checkNotNull(waveEntity);
+      for (final ParticipantId participantId : waveletData.getParticipants()) {
+        addWaveToUser(waveEntity, participantId);
+      }
+    } catch (final WaveServerException e) {
+      LOG.error("Failed to initialize index for " + waveletName, e);
+    }
     @SuppressWarnings("deprecation")
     final ListenableFutureTask<Void> task = new ListenableFutureTask<Void>(new Callable<Void>() {
       @Override
       public Void call() throws Exception {
-        LOG.info("On wave init of wave " + waveletName.toString());
-        ReadableWaveletData waveletData;
-        try {
-          waveletData = waveletProvider.getReadableWaveletData(waveletName);
-          final WaveEntity waveEntity = getWaveEntity(waveletData);
-          Preconditions.checkNotNull(waveEntity);
-          for (final ParticipantId participantId : waveletData.getParticipants()) {
-            addWaveToUser(waveEntity, participantId);
-          }
-        } catch (final WaveServerException e) {
-          LOG.error("Failed to initialize index for " + waveletName, e);
-          throw e;
-        }
         return null;
       }
     });
@@ -206,7 +202,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   @KuneTransactional
   private void removeWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
     Preconditions.checkNotNull(waveEntity);
-    LOG.info("Remove wave to user " + participantId.getAddress());
+    LOG.debug("Remove wave to user " + participantId.getAddress());
     try {
       final User user = userManager.findByShortname(getShortname(participantId.getAddress()));
       if (user != null) {
@@ -220,9 +216,9 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   }
 
   @Override
-  // @KuneTransactional
+  @KuneTransactional
   public Multimap<WaveId, WaveletId> retrievePerUserWaveView(final ParticipantId participantId) {
-    LOG.info("Retrive waves view of user " + participantId.getAddress());
+    LOG.debug("Retrive waves view of user " + participantId.getAddress());
     final Multimap<WaveId, WaveletId> userWavesViewMap = HashMultimap.create();
     try {
       final User user = userManager.findByShortname(getShortname(participantId.getAddress()));
