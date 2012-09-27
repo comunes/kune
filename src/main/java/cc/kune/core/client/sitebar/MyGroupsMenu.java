@@ -70,12 +70,12 @@ public class MyGroupsMenu extends MenuDescriptor {
     this.siteOptions = siteOptions;
     this.userService = userService;
     this.sitebarNewGroupLink = sitebarNewGroupLink;
+    this.downloadProvider = downloadProvider;
     menuShowAction.setMenu(this);
     setId(MENU_ID);
     setParent(SitebarActions.LEFT_TOOLBAR);
     setPosition(0);
     setStyles("k-no-backimage, k-btn-sitebar");
-    this.downloadProvider = downloadProvider;
     withText(I18n.t("Your groups"));
     withToolTip(I18n.t("See your groups or create a new one"));
     withIcon(res.arrowdownsitebar());

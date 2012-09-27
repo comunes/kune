@@ -30,7 +30,7 @@ public class CalendarGoPrevBtn extends ButtonDescriptor {
   @Inject
   public CalendarGoPrevBtn(final CalendarGoPrevAction action, final I18nTranslationService i18n) {
     super("«", action);
-    this.withToolTip(i18n.t("Previous")).withStyles(ToolbarStyles.CSSBTNL);
+    this.withToolTip(i18n.t("Previous")).withStyles(ToolbarStyles.CSS_BTN_LEFT);
   }
 
 }

@@ -44,7 +44,9 @@ public class GotoTokenAction extends AbstractExtendedAction {
     this.token = token;
     this.stateManager = stateManager;
     putValue(Action.NAME, name);
-    putValue(Action.SMALL_ICON, icon);
+    if (icon != null) {
+      putValue(Action.SMALL_ICON, icon);
+    }
     putValue(Action.TOOLTIP, tooltip);
     snHandler = stateManager.onSocialNetworkChanged(true, new SocialNetworkChangedHandler() {
       @Override

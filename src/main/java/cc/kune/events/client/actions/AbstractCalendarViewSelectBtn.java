@@ -31,7 +31,7 @@ public class AbstractCalendarViewSelectBtn extends ButtonDescriptor {
     super(text, action);
     action.setDays(days);
     action.setView(view);
-    this.withStyles(ToolbarStyles.CSSBTNC);
+    this.withStyles(ToolbarStyles.CSS_BTN_CENTER);
   }
 
 }
