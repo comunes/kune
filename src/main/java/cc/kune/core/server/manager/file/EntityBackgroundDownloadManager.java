@@ -45,7 +45,7 @@ import com.google.inject.Inject;
 /**
  * Some snippets from:
  * http://www.onjava.com/pub/a/onjava/excerpt/jebp_3/index1.html?page=1
- *
+ * 
  */
 
 public class EntityBackgroundDownloadManager extends HttpServlet {
@@ -89,23 +89,16 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
 
     resp.setContentLength((int) file.length());
 
-    final String contentType = mimeType.toString();
-
-    resp.setContentType(contentType);
-    LOG.info("Content type returned: " + contentType);
+    if (mimeType != null) {
+      final String contentType = mimeType.toString();
+      resp.setContentType(contentType);
+      LOG.info("Content type returned: " + contentType);
+    }
 
     resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + filename
         + RESP_HEADER_END);
     CacheUtils.setCache1Day(resp);
     return absFilename;
-  }
-
-  @Override
-  protected long getLastModified(HttpServletRequest req) {
-    // http://oreilly.com/catalog/jservlet/chapter/ch03.html#14260
-    // (...)to play it safe, getLastModified() should always round down to the
-    // nearest thousand milliseconds.
-    return lastModified / 1000 * 1000;
   }
 
   @Override
@@ -127,5 +120,13 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
       FileDownloadManagerUtils.returnNotFound404(resp);
       return;
     }
+  }
+
+  @Override
+  protected long getLastModified(final HttpServletRequest req) {
+    // http://oreilly.com/catalog/jservlet/chapter/ch03.html#14260
+    // (...)to play it safe, getLastModified() should always round down to the
+    // nearest thousand milliseconds.
+    return lastModified / 1000 * 1000;
   }
 }
