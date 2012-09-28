@@ -119,6 +119,13 @@ public class ContentRPCMock implements ContentService, RPC {
   }
 
   @Override
+  public StateContentDTO getContentByWaveRef(final String userHash, final String waveRef)
+      throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
   public TagCloudResult getSummaryTags(final String userHash, final StateToken groupToken)
       throws DefaultException {
     // TODO Auto-generated method stub

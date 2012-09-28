@@ -207,7 +207,7 @@ public class FolderViewerUtils {
         session.isLogged(), rights, ActionGroups.BOTTOMBAR);
     final ContainerDTO container = stateContainer.getContainer();
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContainer.getGroup(),
-        container, true);
+        container, true, false);
     bottomActions.addAll(pathActions);
     getView().setSubheaderActions(topActions);
     getView().setFooterActions(bottomActions);

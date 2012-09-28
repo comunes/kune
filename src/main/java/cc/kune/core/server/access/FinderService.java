@@ -36,11 +36,13 @@ public interface FinderService {
 
   Container getContainer(String folderId);
 
+  Content getContainerByWaveRef(String waveRef);
+
   Content getContent(Long contentId) throws DefaultException;
 
-  Content getContentOrDefContent(StateToken token, Group defaultGroup) throws DefaultException;
-
   Content getContent(String contentId) throws ContentNotFoundException;
+
+  Content getContentOrDefContent(StateToken token, Group defaultGroup) throws DefaultException;
 
   Container getFolder(Long folderId) throws DefaultException;
 

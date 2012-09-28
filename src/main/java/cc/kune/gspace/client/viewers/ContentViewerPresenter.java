@@ -205,7 +205,7 @@ public class ContentViewerPresenter extends
         stateContent.getToolName(), stateContent.getGroup(), stateContent.getTypeId(),
         session.isLogged(), rights, ActionGroups.BOTTOMBAR);
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContent.getGroup(),
-        stateContent.getContainer(), true);
+        stateContent.getContainer(), true, false);
     bottomActions.addAll(pathActions);
     getView().setSubheaderActions(topActions);
     getView().setFooterActions(bottomActions);

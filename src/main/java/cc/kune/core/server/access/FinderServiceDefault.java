@@ -38,6 +38,7 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.Rate;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.ContentFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -45,17 +46,20 @@ import com.google.inject.Singleton;
 @Singleton
 public class FinderServiceDefault implements FinderService {
   private final ContainerManager containerManager;
+  private final ContentFinder contentFinder;
   private final ContentManager contentManager;
   private final GroupManager groupManager;
   private final RateManager rateManager;
 
   @Inject
   public FinderServiceDefault(final GroupManager groupManager, final ContainerManager containerManager,
-      final ContentManager contentManager, final RateManager rateManager) {
+      final ContentManager contentManager, final RateManager rateManager,
+      final ContentFinder contentFinder) {
     this.groupManager = groupManager;
     this.containerManager = containerManager;
     this.contentManager = contentManager;
     this.rateManager = rateManager;
+    this.contentFinder = contentFinder;
   }
 
   public Long checkAndParse(final String s) throws ContentNotFoundException {
@@ -159,6 +163,11 @@ public class FinderServiceDefault implements FinderService {
   @Override
   public Container getContainer(final String folderId) throws DefaultException {
     return getContainer(ContentUtils.parseId(folderId));
+  }
+
+  @Override
+  public Content getContainerByWaveRef(final String waveRef) {
+    return contentFinder.findByWaveId(waveRef);
   }
 
   @Override

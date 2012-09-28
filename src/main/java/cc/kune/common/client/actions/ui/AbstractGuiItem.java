@@ -178,7 +178,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   public abstract void setIconUrl(String url);
 
-  private void setStyles(final String styles) {
+  protected void setStyles(final String styles) {
     if (styles != null) {
       clearStyles();
       for (final String style : TextUtils.splitTags(styles)) {

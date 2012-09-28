@@ -37,10 +37,12 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.ToolConfiguration;
+import cc.kune.domain.finders.ContentFinder;
 
 public class FinderTest {
 
   private ContainerManager containerManager;
+  private ContentFinder contentFinder;
   private ContentManager contentManager;
   private FinderServiceDefault finder;
   private GroupManager groupManager;
@@ -83,7 +85,9 @@ public class FinderTest {
     this.containerManager = Mockito.mock(ContainerManager.class);
     this.contentManager = Mockito.mock(ContentManager.class);
     this.rateManager = Mockito.mock(RateManager.class);
-    this.finder = new FinderServiceDefault(groupManager, containerManager, contentManager, rateManager);
+    this.contentFinder = Mockito.mock(ContentFinder.class);
+    this.finder = new FinderServiceDefault(groupManager, containerManager, contentManager, rateManager,
+        contentFinder);
   }
 
   @Test

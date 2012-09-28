@@ -312,6 +312,24 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
+  @Override
+  @Authenticated
+  @KuneTransactional
+  public StateAbstractDTO getContentByWaveRef(final String userHash, final String waveRef) {
+    final User user = getCurrentUser();
+    try {
+      // FIXME get this from a wave constant
+      String root = "/~/conv+root";
+      final Content content = finderService.getContainerByWaveRef(waveRef.endsWith("/~/conv+root") ? waveRef:
+        waveRef + root);
+      accessService.accessToContent(content, user, AccessRol.Viewer);
+      return mapState(stateService.create(user, content), user);
+    } catch (javax.persistence.NoResultException e) {
+      return new StateNoContentDTO();
+    }
+
+  }
+
   private StateAbstractDTO getContentOrDefContent(final String userHash, final StateToken stateToken,
       final User user, final Content content) {
     final Long id = content.getId();

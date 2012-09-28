@@ -65,14 +65,23 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
+import cc.kune.common.client.actions.ui.ActionFlowPanel;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
+import cc.kune.core.shared.dto.ContainerSimpleDTO;
+import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.gspace.client.viewers.PathToolbarUtils;
 import cc.kune.wave.client.kspecific.WaveClientClearEvent;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
 import cc.kune.wave.client.kspecific.WaveClientView;
@@ -82,6 +91,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -92,6 +102,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
@@ -130,7 +141,7 @@ public class WebClient extends Composite implements WaveClientView {
   private final ProfileManager profiles;
   private final UniversalPopup turbulencePopup = createTurbulencePopup();
 
-  @UiField
+  @UiField(provided=true)
   SplitLayoutPanel splitPanel;
 
   @UiField
@@ -148,6 +159,12 @@ public class WebClient extends Composite implements WaveClientView {
 
   @UiField
   DebugMessagePanel logPanel;
+
+  @UiField
+  SimplePanel bottomBar;
+
+  @UiField
+  DockLayoutPanel rightPanel;
 
   /** The wave panel, if a wave is open. */
   private CustomStagesProvider wave;
@@ -175,18 +192,30 @@ public class WebClient extends Composite implements WaveClientView {
 
   private final TokenMatcher tokenMatcher;
 
+  private final ContentServiceAsync contentService;
+
+  private final cc.kune.core.client.state.Session kuneSession;
+
+  private final PathToolbarUtils pathToolbaUtils;
+
+  private final ActionFlowPanel bottomToolbar;
+
 
   /**
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session session, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator, ContentServiceAsync contentService, PathToolbarUtils pathToolbaUtils, ActionFlowPanel bottomToolbar) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
     this.tokenMatcher = tokenMatcher;
+    this.kuneSession = kuneSession;
     this.i18n = i18n;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
+    this.contentService = contentService;
+    this.pathToolbaUtils = pathToolbaUtils;
+    this.bottomToolbar = bottomToolbar;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
     ErrorHandler.install();
     eventBus.addHandler(StackErrorEvent.getType(), new StackErrorEvent.StackErrorHandler() {
@@ -227,7 +256,7 @@ public class WebClient extends Composite implements WaveClientView {
         String waveToken = currentToken;
         // FIXME what about preview?
         if (tokenMatcher.isGroupToken(currentToken) || tokenMatcher.isHomeToken(currentToken)) {
-          waveToken = session.getContentState().getWaveRef();
+          waveToken = kuneSession.getContentState().getWaveRef();
           LOG.info("Kune URL: " + currentToken + " = " + waveToken);
         }
         return waveToken;
@@ -334,6 +363,7 @@ public class WebClient extends Composite implements WaveClientView {
 
     WaveClientClearEvent.fire(eventBus);
     clear();
+    clearBottomToolbarActions();
     waveFrame.add(waveHolder);
 
     // Release the display:none.
@@ -349,6 +379,11 @@ public class WebClient extends Composite implements WaveClientView {
         loading.removeFromParent();
       }
     });
+
+    String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
+
+    setBottomToolbar(waveUri);
+
     String encodedToken = HistoryUtils.undoHashbang(History.getToken());
     // Kune patch
     if (encodedToken != null && !encodedToken.isEmpty() && !tokenMatcher.isInboxToken(encodedToken)) {
@@ -366,9 +401,37 @@ public class WebClient extends Composite implements WaveClientView {
         return;
       }
     }
-    final String tokenFromWaveref = HistoryUtils.hashbang(GwtWaverefEncoder.encodeToUriPathSegment(waveRef));
+    final String tokenFromWaveref = HistoryUtils.hashbang(waveUri);
     SpaceConfEvent.fire(eventBus, Space.userSpace, tokenFromWaveref);
     History.newItem(tokenFromWaveref, false);
+  }
+
+  private void setBottomToolbar(String waveUri) {
+    contentService.getContentByWaveRef(kuneSession.getUserHash(), waveUri, new AsyncCallbackSimple<StateAbstractDTO>() {
+      @Override
+      public void onSuccess(StateAbstractDTO result) {
+        if (result instanceof StateContentDTO) {
+          StateContentDTO state = (StateContentDTO) result;
+          ContainerSimpleDTO doc = new ContainerSimpleDTO(state.getTitle(), state.getContainer().getStateToken(), state.getStateToken(), state.getTypeId());
+          GuiActionDescCollection actions = pathToolbaUtils.createPath(state.getGroup(), state.getContainer(), false, true, doc);
+          bottomToolbar.addAll(actions);
+          rightPanel.setWidgetSize(bottomBar, 26);
+          bottomBar.getParent().getElement().getStyle().setBottom(12d, Unit.PX);
+        }
+        else {
+          hideBottomToolbar();
+        }
+      }
+    });
+  }
+
+  private void clearBottomToolbarActions() {
+    bottomToolbar.clear();
+  }
+
+  private void hideBottomToolbar() {
+    rightPanel.setWidgetSize(bottomBar, 0);
+    bottomBar.getParent().getElement().getStyle().setBottom(0d, Unit.PX);
   }
 
   @Override
@@ -432,6 +495,7 @@ public class WebClient extends Composite implements WaveClientView {
 
   private void setupUi() {
     // Set up UI
+    splitPanel = new SplitLayoutPanel(1);
     final DockLayoutPanel self = BINDER.createAndBindUi(this);
     // kune-patch
     // RootPanel.get("app").add(self);
@@ -453,6 +517,7 @@ public class WebClient extends Composite implements WaveClientView {
 
     setupSearchPanel();
     setupWavePanel();
+    bottomBar.add(bottomToolbar);
   }
 
   private void setupWavePanel() {

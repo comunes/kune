@@ -47,6 +47,9 @@ public interface ContentFinder {
       @Named(TITLE) final String title, @Named(MIMETYPE) final String mimetype,
       @Named("mimetype2") final String mimetype2);
 
+  @Finder(query = "FROM Content c WHERE waveId = :waveId")
+  public Content findByWaveId(@Named("waveId") final String waveId);
+
   @Finder(query = "SELECT count(*) from Container ctx, Content ctn where ctn.container.id = ctx.id and ctx = :container and ctn.lastRevision.title LIKE :title")
   public Long findIfExistsTitle(@Named("container") final Container container,
       @Named(TITLE) final String title);

@@ -39,11 +39,12 @@ public class GotoTokenAction extends AbstractExtendedAction {
 
   public GotoTokenAction(final Object icon, final String name, final String tooltip,
       final StateToken token, final String style, final StateManager stateManager,
-      final EventBus eventBus) {
+      final EventBus eventBus, final boolean disableCurrent) {
     super();
     this.token = token;
     this.stateManager = stateManager;
     putValue(Action.NAME, name);
+    putValue(Action.STYLES, style);
     if (icon != null) {
       putValue(Action.SMALL_ICON, icon);
     }
@@ -51,8 +52,8 @@ public class GotoTokenAction extends AbstractExtendedAction {
     snHandler = stateManager.onSocialNetworkChanged(true, new SocialNetworkChangedHandler() {
       @Override
       public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
-        putValue(Action.STYLES, !token.equals(event.getState().getStateToken()) ? style : style
-            + ", k-button-disabled");
+        boolean weAreInThisState = !token.equals(event.getState().getStateToken());
+        putValue(Action.STYLES, disableCurrent? (weAreInThisState ? style : style + ", k-button-disabled") : style);
       }
     });
     renameHandler = eventBus.addHandler(RenameContentEvent.getType(),
