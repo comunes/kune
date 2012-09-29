@@ -188,24 +188,24 @@ If you have memory problems running the hosted mode, increase it in VM arguments
 
 ==Some relevant docs for Kune development==
 
-See these files in the "kune" directory (some of them might be moved):
+See these files in the "kune" directory:
 
-* kune/img/kune-arch.png          # architecture diagram (outdated)
 * kune/INSTALL
 * kune/TROUBLESHOOT
-* kune/HOWTO_ADD_A_NEW_TOOL       # outdated
-
-If you are interested in the db schema:
-* kune/img/kune-hibernate-diagram-oct-08.png  # outdated, might be moved
-but it is easier to look into the Java classes of package cc.kune.domain, because this schema is probably outdated
-
 * http://kune.ourproject.org/faq/
 * http://kune.ourproject.org/blog/ 
 * http://kune.ourproject.org/screencasts/
-# Old diagrams but with a good summary (outdated, might be moved):
-* kune/img/kune-diagram-part1-0.1.png 
-* kune/img/kune-diagram-part2-0.1.png 
-* kune/img/kune-diagram-part3-0.1.png 
+
+There are also some interesting diagrams, that although they are outdated, they provide a general overview:
+
+* kune/artwork/old/kune-arch.png          # architecture diagram (outdated)
+* kune/artwork/old/kune-hibernate-diagram-oct-08.png  # db schema (outdated)
+* kune/artwork/old/kune-diagram-part1-0.1.png # (outdated)
+* kune/artwork/old/kune-diagram-part2-0.1.png # (outdated)
+* kune/artwork/old/kune-diagram-part3-0.1.png # (outdated)
+
+NOTE: For an updated db schema, look into the Java classes of package cc.kune.domain.
+NOTE: You will need to clone the repository https://gitorious.org/kune/artwork inside kune repository
 
 ==Languages and frameworks used in Kune development==
 
