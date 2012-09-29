@@ -336,6 +336,7 @@ public class MapperTest {
     final SocialNetwork sn = new SocialNetwork();
     sn.addAdmin(group);
     final ParticipationData part = new ParticipationData();
+
     part.setGroupsIsAdmin(sn.getAccessLists().getAdmins().getList());
     final UserBuddiesData budData = new UserBuddiesData();
     final ArrayList<User> buddies = new ArrayList<User>();

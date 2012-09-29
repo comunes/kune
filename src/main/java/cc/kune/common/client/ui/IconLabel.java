@@ -160,10 +160,14 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.setResource(res);
     iconLeft.addStyleName("k-iconlabel-left");
     iconLeft.addStyleName("k-tcell");
+    setFloats();
+    iconLeft.setVisible(true);
+  }
+
+  private void setFloats() {
     // setting floats again, because with setResource we lost them
     setIconRTL(iconLeft, getTextDirection());
     setIconRTL(iconRight, getTextDirection());
-    iconLeft.setVisible(true);
   }
 
   public void setLeftIconUrl(final String url) {
@@ -171,6 +175,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.setSize(DEF, DEF);
     iconLeft.addStyleName("k-iconlabel-left");
     iconLeft.addStyleName("k-tcell");
+    setFloats();
     iconLeft.setVisible(true);
   }
 
@@ -178,6 +183,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     commonStyle(iconRight, imgCss);
     iconRight.addStyleName("k-iconlabel-right");
     iconRight.addStyleName("k-tcell");
+    setFloats();
     iconRight.setVisible(true);
   }
 
@@ -189,9 +195,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconRight.setResource(res);
     iconRight.addStyleName("k-iconlabel-right");
     iconRight.addStyleName("k-tcell");
-    // setting floats again, because with setResource we lost them
-    setIconRTL(iconLeft, getTextDirection());
-    setIconRTL(iconRight, getTextDirection());
+    setFloats();
     iconRight.setVisible(true);
   }
 
@@ -200,6 +204,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconRight.setSize(DEF, DEF);
     iconRight.addStyleName("k-iconlabel-right");
     iconRight.addStyleName("k-tcell");
+    setFloats();
     iconRight.setVisible(true);
   }
 

@@ -45,6 +45,7 @@ import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.manager.UserSignInLogManager;
 import cc.kune.core.server.manager.impl.EmailConfirmationType;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.persist.KuneTransactional;
@@ -62,6 +63,7 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.domain.UserSignInLog;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.kspecific.ParticipantUtils;
 
@@ -73,7 +75,6 @@ import com.google.inject.name.Named;
 public class UserRPC implements RPC, UserService {
 
   private final ContentRPC contentRPC;
-
   private final Mapper mapper;
   private final ParticipantUtils partUtils;
   private final ReservedWordsRegistry reserverdWords;
@@ -83,8 +84,8 @@ public class UserRPC implements RPC, UserService {
   private final UserSessionManager userSessionManager;
   private final WaveClientServlet waveClientServlet;
   private final SessionManager waveSessionManager;
-
   private final String websocketAddress;
+  private final UserSignInLogManager userSignInLogManager;
 
   @Inject
   public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
@@ -92,7 +93,7 @@ public class UserRPC implements RPC, UserService {
       final SessionManager waveSessionManager, final WaveClientServlet waveClientServlet,
       final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
       final UserSessionManager userSessionManager, final UserFinder userFinder,
-      final ParticipantUtils partUtils,
+      final ParticipantUtils partUtils, UserSignInLogManager userSignInLogManager,
       @Named(CoreSettings.HTTP_WEBSOCKET_PUBLIC_ADDRESS) String websocketAddress) {
     this.userManager = userManager;
     this.userInfoService = userInfoService;
@@ -104,6 +105,7 @@ public class UserRPC implements RPC, UserService {
     this.userSessionManager = userSessionManager;
     this.userFinder = userFinder;
     this.partUtils = partUtils;
+    this.userSignInLogManager = userSignInLogManager;
     this.websocketAddress = websocketAddress;
   }
 
@@ -215,6 +217,7 @@ public class UserRPC implements RPC, UserService {
   private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
     if (user != null) {
       userSessionManager.login(user.getId(), waveToken);
+      userSignInLogManager.log(user, null, null, waveToken);
       return loadUserInfo(user);
     } else {
       throw new UserAuthException();
@@ -292,6 +295,6 @@ public class UserRPC implements RPC, UserService {
   public void verifyPasswordHash(final String userHash, final String emailReceivedHash)
       throws EmailHashInvalidException, EmailHashExpiredException {
     final User user = userSessionManager.getUser();
-    userManager.verifyPasswordHash(user.getId(), emailReceivedHash, SessionConstants._AN_HOUR);
+    userManager.verifyPasswordHash(user.getId(), emailReceivedHash, SessionConstants._5_HOURS);
   }
 }

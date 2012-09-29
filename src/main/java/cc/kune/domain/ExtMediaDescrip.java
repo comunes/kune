@@ -25,17 +25,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Length;
 
 import cc.kune.domain.utils.HasId;
 
 @Entity
 @Table(name = "ext_media_descriptors")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ExtMediaDescrip implements HasId {
 
   @Column(nullable = false)
   private String detectRegex;
-  @Column(nullable = false)
+  @Column(nullable = false, columnDefinition = "LONGTEXT")
   @Length(max = 1000)
   private String embedTemplate;
   private int height;

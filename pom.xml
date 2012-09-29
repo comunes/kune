@@ -22,7 +22,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
-    <wiab.version>0.3.30</wiab.version>
+    <wiab.version>0.3.32</wiab.version>
     <jetty.version>8.1.4.v20120524</jetty.version>
     <skipTests>true</skipTests>
   </properties>
@@ -174,7 +174,7 @@
       <!-- <version>2.1-SNAPSHOT-r1160</version> -->
       <version>3.0</version>
     </dependency>
-    <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId> 
+    <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId>
       <version>gin-1.1-SNAPSHOT</version> </dependency> -->
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
@@ -342,6 +342,12 @@
       <artifactId>hibernate-c3p0</artifactId>
       <version>4.1.2.Final</version>
     </dependency>
+    <!-- http://www.javacraft.org/2012/03/migrate-to-hibernate-4-ehcache.html -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-ehcache</artifactId>
+      <version>4.1.2.Final</version>
+    </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
@@ -450,7 +456,7 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-      <version>1.0.20070617</version>
+      <version>1.3.168</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -689,7 +695,7 @@
       <groupId>com.googlecode.gwtquery</groupId>
       <artifactId>gwtquery</artifactId>
       <version>1.1.0</version>
-      <!-- If you are using old versions of gwt, uncomment the appropriate 
+      <!-- If you are using old versions of gwt, uncomment the appropriate
         line -->
       <classifier>2.1.0</classifier>
       <scope>provided</scope>
@@ -767,14 +773,18 @@
             </systemProperty>
             <!-- <systemProperty> -->
             <!-- <key>kune.db.persistence.name</key> -->
-            <!-- Persistence name, choose between: production, development, 
-              test_db (testing environment using mysql db), test (testing environment using 
+            <!-- Persistence name, choose between: production, development,
+              test_db (testing environment using mysql db), test (testing environment using
               h2 db). See persistence.xml -->
             <!-- <value>development</value> -->
             <!-- </systemProperty> -->
             <systemProperty>
               <key>wave.server.config</key>
               <value>src/main/resources/wave-server.properties</value>
+            </systemProperty>
+            <systemProperty>
+              <key>log4j.configuration</key>
+              <value>file://${basedir}/src/main/resources/log4j.dev.properties</value>
             </systemProperty>
             <systemProperty>
               <key>org.eclipse.jetty.util.resource.FileResource.checkAliases
@@ -811,7 +821,7 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
-          <!-- Uncomment and run mvn with -X -e if we have same compile problems 
+          <!-- Uncomment and run mvn with -X -e if we have same compile problems
             <compilerArgument>-verbose</compilerArgument> <fork>true</fork> <verbose>true</verbose> -->
         </configuration>
       </plugin>
@@ -847,7 +857,7 @@
             <name>junit</name>
             <value>true</value>
           </property>
-          <!-- Skip the normal tests, we'll run them in the integration-test 
+          <!-- Skip the normal tests, we'll run them in the integration-test
             phase -->
           <skipTests>${skipTests}</skipTests>
         </configuration>
@@ -972,11 +982,11 @@
       <!-- gwtp & GenEvent need this plugin -->
       <!-- maybe test: http://mojo.codehaus.org/apt-maven-plugin/index.html -->
       <!-- instead of this: https://code.google.com/p/maven-annotation-plugin/ -->
-      <!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId> 
-        <version>1.3.7</version> <executions> <execution> <id>process</id> <goals> 
-        <goal>process</goal> </goals> <phase>generate-sources</phase> </execution> 
-        </executions> </plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>apt-maven-plugin</artifactId> 
-        <version>1.0-alpha-4</version> <executions> <execution> <goals> <goal>process</goal> 
+      <!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId>
+        <version>1.3.7</version> <executions> <execution> <id>process</id> <goals>
+        <goal>process</goal> </goals> <phase>generate-sources</phase> </execution>
+        </executions> </plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>apt-maven-plugin</artifactId>
+        <version>1.0-alpha-4</version> <executions> <execution> <goals> <goal>process</goal>
         <goal>test-process</goal> </goals> </execution> </executions> </plugin> -->
       <!-- BETTER user: http://code.google.com/p/acris/wiki/AnnotationProcessing -->
       <plugin>
@@ -996,7 +1006,7 @@
               <password>db4kune</password>
               <verbose>true</verbose>
             </configuration>
-            <!-- <configuration> <verbose>true</verbose> <propertiesFile> 
+            <!-- <configuration> <verbose>true</verbose> <propertiesFile>
               src/main/resources/db/liquibase.properties </propertiesFile> </configuration> -->
             <goals>
               <goal>update</goal>
@@ -1015,7 +1025,7 @@
               <mainClass>cc.kune.wave.server.CustomServerMain</mainClass>
               <!-- <classpathPrefix>~/.m2/repository/</classpathPrefix> -->
               <!-- <classpathLayoutType>repository</classpathLayoutType> -->
-              <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType' 
+              <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType'
                 instead. -->
               <classpathMavenRepositoryLayout>true
               </classpathMavenRepositoryLayout>
@@ -1074,7 +1084,7 @@
     </extensions>
     <pluginManagement>
       <plugins>
-        <!--This plugin's configuration is used to store Eclipse m2e settings 
+        <!--This plugin's configuration is used to store Eclipse m2e settings
           only. It has no influence on the Maven build itself. -->
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
@@ -1121,7 +1131,7 @@
       <id>production</id>
       <build>
         <plugins>
-          <!-- Warning if you modify this part take in to account that exist 
+          <!-- Warning if you modify this part take in to account that exist
             to profiles: development and production -->
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -1142,7 +1152,7 @@
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
               <localWorkers>2</localWorkers>
-              <!-- <localWorkers>1</localWorkers> Using all workers can temporarily 
+              <!-- <localWorkers>1</localWorkers> Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx1024m</extraJvmArgs>
             </configuration>
@@ -1180,7 +1190,7 @@
       <id>development</id>
       <build>
         <plugins>
-          <!-- Warning if you modify this part take in to account that exist 
+          <!-- Warning if you modify this part take in to account that exist
             to profiles: development and production -->
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -1200,7 +1210,7 @@
               </modules>
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
-              <localWorkers>1</localWorkers><!-- Using all workers can temporarily 
+              <localWorkers>1</localWorkers><!-- Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx1024m</extraJvmArgs>
             </configuration>

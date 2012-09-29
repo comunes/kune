@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.manager.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -209,6 +210,19 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     // adminInGroups.remove(userLogged.getUserGroup());
     final Set<Group> collabInGroups = finder.findCollabInGroups(groupId);
     return new ParticipationData(adminInGroups, collabInGroups);
+  }
+
+  @Override
+  public List<Group> findParticipationAggregated(final User userLogged, final Group group)
+      throws AccessViolationException {
+    get(userLogged, group); // check access
+    final Long groupId = group.getId();
+    final List<Group> groups = finder.findParticipatingInGroups(groupId);
+    // Don't show self user group
+    if (group.isPersonal()) {
+      groups.remove(group);
+    }
+    return groups;
   }
 
   @Override

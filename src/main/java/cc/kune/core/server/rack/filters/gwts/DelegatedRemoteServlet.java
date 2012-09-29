@@ -98,8 +98,8 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
 
   @Override
   public void log(final String message, final Throwable t) {
-    super.log(message, t);
     LOG.info(message, t);
+    super.log(message, t);
   }
 
   @Override

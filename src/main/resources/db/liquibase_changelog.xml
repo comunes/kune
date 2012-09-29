@@ -172,4 +172,16 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+  <changeSet id="26" author="vjrj">
+    <comment>Groups logo last modified timer</comment>
+    <sqlFile path="src/main/resources/db/update-0021-avatarLastModifiedTime.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
+  <changeSet id="27" author="vjrj">
+    <comment>User sign in stats</comment>
+    <sqlFile path="src/main/resources/db/update-0022-userSingInLog.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
 </databaseChangeLog>

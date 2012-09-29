@@ -21,6 +21,7 @@ package cc.kune.core.shared.utils;
 
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
+import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
@@ -76,7 +77,7 @@ public class SharedFileDownloadUtils {
   }
 
   public String getUrl(final String hash) {
-    return getPrefix() + "#" + hash;
+    return getPrefix() + "#" + HistoryUtils.hashbang(hash);
   }
 
   public String getUserAvatar(final String username) {

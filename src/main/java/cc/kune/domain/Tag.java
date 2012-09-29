@@ -26,6 +26,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -37,6 +39,7 @@ import cc.kune.domain.utils.HasId;
 @Entity
 @Indexed
 @Table(name = "tags")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Tag implements HasId {
 
   @Basic(optional = false)

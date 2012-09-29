@@ -30,7 +30,7 @@ public class CalendarGoTodayBtn extends ButtonDescriptor {
   @Inject
   public CalendarGoTodayBtn(final CalendarGoTodayAction action, final I18nTranslationService i18n) {
     super(i18n.t("Today"), action);
-    this.withToolTip(i18n.t("Go To Today")).withStyles(ToolbarStyles.CSSBTN);
+    this.withToolTip(i18n.t("Go To Today")).withStyles(ToolbarStyles.CSS_BTN_ALONE);
   }
 
 }

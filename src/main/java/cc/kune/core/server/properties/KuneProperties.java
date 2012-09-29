@@ -46,8 +46,16 @@ public interface KuneProperties {
   String SITE_ADMIN_PASSWD = "kune.admin.password";
   String SITE_ADMIN_SHORTNAME = "kune.admin.shortName";
   String SITE_COMMON_NAME = "kune.default.site.commonname";
+  String SITE_DB_C3P0_ACQUIRE_INCREMENT = "kune.db.c3p0.acquire_increment";
+  String SITE_DB_C3P0_AUTOCOMMITONCLOSE = "kune.db.c3p0.autoCommitOnClose";
+  String SITE_DB_C3P0_MAX_SIZE = "kune.db.c3p0.max_size";
+  String SITE_DB_C3P0_MAX_STATEMENTS = "kune.db.c3p0.max_statements";
+  String SITE_DB_C3P0_MIN_SIZE = "kune.db.c3p0.min_size";
+  String SITE_DB_C3P0_TEST_PERIOD = "kune.db.c3p0.idle_test_period";
+  String SITE_DB_C3P0_TIMEOUT = "kune.db.c3p0.timeout";
   String SITE_DB_PASSWORD = "kune.db.password";
   String SITE_DB_PERSISTENCE_NAME = "kune.db.persistence.name";
+  String SITE_DB_SCHEMA = "kune.db.schema";
   String SITE_DB_URL = "kune.db.url";
   String SITE_DB_USER = "kune.db.user";
   String SITE_DEF_LICENSE = "kune.default.license";
@@ -92,4 +100,6 @@ public interface KuneProperties {
   List<String> getList(String key);
 
   Long getLong(String key);
+
+  boolean has(String key);
 }

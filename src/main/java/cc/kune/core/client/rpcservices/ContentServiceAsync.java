@@ -72,6 +72,8 @@ public interface ContentServiceAsync {
 
   void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
+  void getContentByWaveRef(String userHash, String waveRef, AsyncCallback<StateAbstractDTO> callback);
+
   void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<TagCloudResult> asyncCallback);
 
   void moveContent(String userHash, StateToken contentToken, StateToken newContainerToken,
@@ -90,11 +92,11 @@ public interface ContentServiceAsync {
   void renameContainer(String userHash, StateToken token, String newName,
       AsyncCallback<StateAbstractDTO> asyncCallback);
 
-  void renameContent(String userHash, StateToken token, String newName,
-      AsyncCallback<StateAbstractDTO> asyncCallback);
-
   // void save(String user, StateToken token, String content,
   // AsyncCallback<Void> asyncCallback);
+
+  void renameContent(String userHash, StateToken token, String newName,
+      AsyncCallback<StateAbstractDTO> asyncCallback);
 
   void sendFeedback(String userHash, String title, String body, AsyncCallback<String> callback);
 

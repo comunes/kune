@@ -32,8 +32,10 @@ public class UserInfo {
   private List<String> enabledTools;
   private Set<Group> groupsIsAdmin;
   private Set<Group> groupsIsCollab;
+  private List<Group> groupsIsParticipating;
   private String homePage;
   private boolean showDeletedContent;
+  private Long signInCount;
   private User user;
   private Group userGroup;
   private String userHash;
@@ -58,6 +60,10 @@ public class UserInfo {
     return groupsIsCollab;
   }
 
+  public List<Group> getGroupsIsParticipating() {
+    return groupsIsParticipating;
+  }
+
   public String getHomePage() {
     return homePage;
   }
@@ -76,6 +82,10 @@ public class UserInfo {
 
   public boolean getShowDeletedContent() {
     return showDeletedContent;
+  }
+
+  public Long getSignInCount() {
+    return signInCount;
   }
 
   public User getUser() {
@@ -106,12 +116,20 @@ public class UserInfo {
     this.groupsIsCollab = groupsIsCollab;
   }
 
+  public void setGroupsIsParticipating(final List<Group> groupsIsParticipating) {
+    this.groupsIsParticipating = groupsIsParticipating;
+  }
+
   public void setHomePage(final String homePage) {
     this.homePage = homePage;
   }
 
   public void setShowDeletedContent(final boolean showDeletedContent) {
     this.showDeletedContent = showDeletedContent;
+  }
+
+  public void setSignInCount(final Long signInCount) {
+    this.signInCount = signInCount;
   }
 
   public void setUser(final User user) {

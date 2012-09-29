@@ -84,8 +84,6 @@ public class JoinGroupAction extends SNRolAction {
                       switch ((result)) {
                       case accepted:
                         NotifyUser.info(i18n.t("You are now member of this group"));
-                        session.getCurrentUserInfo().getGroupsIsCollab().add(
-                            session.getCurrentState().getGroup());
                         MyGroupsChangedEvent.fire(eventBus);
                         stateManager.refreshCurrentStateWithoutCache();
                         break;

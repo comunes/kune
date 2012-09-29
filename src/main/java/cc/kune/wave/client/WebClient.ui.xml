@@ -63,18 +63,29 @@
   </ui:style>
   <g:DockLayoutPanel unit="PX" styleName="{style.root}">
     <g:center>
-      <g:SplitLayoutPanel ui:field="splitPanel" stylePrimaryName="{style.splitPanel}">
+      <g:SplitLayoutPanel ui:field="splitPanel"
+        stylePrimaryName="{style.splitPanel}">
         <g:south size="200">
-          <d:DebugMessagePanel ui:field="logPanel" addStyleNames="{style.debugPanel}" />
+          <d:DebugMessagePanel ui:field="logPanel"
+            addStyleNames="{style.debugPanel}"/>
         </g:south>
-        <g:west size="400">
-          <s:SearchPanelWidget ui:field="searchPanel" addStyleNames="{style.searchPanel}"/>
+        <g:west size="400" >
+          <s:SearchPanelWidget ui:field="searchPanel"
+            addStyleNames="{style.searchPanel}"/>
         </g:west>
         <g:center>
-          <f:FramedPanel ui:field="waveFrame" addStyleNames="{style.wavePanel}">
-      <!--        <w:ImplPanel ui:field="waveHolder"
-              addStyleNames="{style.waveHolder}" /> -->
-          </f:FramedPanel>
+          <g:DockLayoutPanel ui:field="rightPanel"
+            addStyleNames="{style.wavePanel}">
+            <g:center>
+              <f:FramedPanel ui:field="waveFrame">
+                <!-- <w:ImplPanel ui:field="waveHolder" addStyleNames="{style.waveHolder}"
+                  /> -->
+              </f:FramedPanel>
+            </g:center>
+            <g:south size="0">
+              <g:SimplePanel ui:field="bottomBar"/>
+            </g:south>
+          </g:DockLayoutPanel>
         </g:center>
       </g:SplitLayoutPanel>
     </g:center>

@@ -40,7 +40,7 @@ public class DefaultRESTMethodFinder implements RESTMethodFinder {
         Method[] serviceMethods = serviceDefinition.getMethods();
         LOG.debug("SERVICE METHODS: " + Arrays.toString(serviceMethods));
         for (Method method : serviceMethods) {
-            LOG.debug("CHEKING: " + method.toString());
+            LOG.debug("CHECKING: " + method.toString());
             if (method.getName().equals(methodName)) {
                 REST methodAnnotation = method.getAnnotation(REST.class);
                 if (checkParams(methodAnnotation, parameters)) {

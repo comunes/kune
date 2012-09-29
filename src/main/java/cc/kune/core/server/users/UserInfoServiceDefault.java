@@ -26,6 +26,7 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.ParticipationData;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.UserSignInLogFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -35,11 +36,13 @@ public class UserInfoServiceDefault implements UserInfoService {
 
   private final GroupManager groupManager;
   private final SocialNetworkManager socialNetworkManager;
+  private final UserSignInLogFinder userSignInLogFinder;
 
   @Inject
-  public UserInfoServiceDefault(final SocialNetworkManager socialNetwork, final GroupManager groupManager) {
+  public UserInfoServiceDefault(final SocialNetworkManager socialNetwork, final GroupManager groupManager, UserSignInLogFinder userSignInLogFinder) {
     this.socialNetworkManager = socialNetwork;
     this.groupManager = groupManager;
+    this.userSignInLogFinder = userSignInLogFinder;
   }
 
   @Override
@@ -56,10 +59,12 @@ public class UserInfoServiceDefault implements UserInfoService {
 
       final Group userGroup = user.getUserGroup();
 
+      userInfo.setGroupsIsParticipating(socialNetworkManager.findParticipationAggregated(user, userGroup));
       final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
       userInfo.setGroupsIsAdmin(participation.getGroupsIsAdmin());
       userInfo.setGroupsIsCollab(participation.getGroupsIsCollab());
       userInfo.setEnabledTools(groupManager.findEnabledTools(userGroup.getId()));
+      userInfo.setSignInCount(userSignInLogFinder.countByUser(user));
       final Content defaultContent = userGroup.getDefaultContent();
       userInfo.setUserGroup(userGroup);
       if (defaultContent != null) {

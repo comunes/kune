@@ -445,6 +445,9 @@ From experience we have found that Tomcat often runs well with an -Xmx between 4
 
 To determine how much memory you can spare for Java, try this: stop your Java process; run free -m; subtract the 'used' value from the "-/+ cache" row from the total memory allocated to your server and then subtract another 'just in case' margin of about 10% of your total server memory.  The number you come up with is a rough indicator of the largest -Xmx setting you can use on your server.
 * MID-TERM
+** apt repo signed for kune packages
+https://www.google.es/search?client=ubuntu&channel=fs&q=repository+own+debian+gpg&ie=utf-8&oe=utf-8&redir_esc=&ei=rMxPUKPtJJSFhQeCq4DwAQ
+http://wiki.debian.org/SettingUpSignedAptRepositoryWithReprepro
 ** hotdeploy hot swapping:
 http://ssw.jku.at/dcevm/
 https://community.jboss.org/wiki/CurrentStateOfHotDeploymentInJava?_sscc=t

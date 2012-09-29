@@ -24,7 +24,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -34,7 +33,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.httpclient.util.DateUtil;
 import org.waveprotocol.box.server.CoreSettings;
 
 import cc.kune.core.server.manager.GroupManager;
@@ -55,6 +53,8 @@ public class EntityLogoDownloadManager extends HttpServlet {
   private final String personMime;
   private final byte[] unknownLogo;
   private final String unknownMime;
+  final private long defaultLastModified;
+  private long currentLastModified;
 
   @Inject
   public EntityLogoDownloadManager(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases,
@@ -72,12 +72,14 @@ public class EntityLogoDownloadManager extends HttpServlet {
     final File unknownFile = getFile(resourceBases, FileConstants.NO_RESULT_AVATAR_IMAGE);
     unknownMime = getMime(unknownFile);
     unknownLogo = getBy(unknownFile);
+
+    defaultLastModified = 0l;
   }
 
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
       throws ServletException, IOException {
-
+    currentLastModified = defaultLastModified;
     final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
     final String onlyUserS = req.getParameter(FileConstants.ONLY_USERS);
     final boolean onlyUsers = Boolean.parseBoolean(onlyUserS);
@@ -98,14 +100,22 @@ public class EntityLogoDownloadManager extends HttpServlet {
         } else {
           reply(resp, groupLogo, groupMime);
         }
-
       } else {
         // Has logo
+        currentLastModified = group.getLogoLastModifiedTime();
         reply(resp, group.getLogo(), group.getLogoMime().toString());
       }
     } catch (final NoResultException e) {
       unknownResult(resp);
     }
+  }
+
+  @Override
+  protected long getLastModified(HttpServletRequest req) {
+    // http://oreilly.com/catalog/jservlet/chapter/ch03.html#14260
+    // (...)to play it safe, getLastModified() should always round down to the
+    // nearest thousand milliseconds.
+    return currentLastModified / 1000 * 1000;
   }
 
   private byte[] getBy(final File file) throws IOException {
@@ -128,12 +138,8 @@ public class EntityLogoDownloadManager extends HttpServlet {
       throws IOException {
     resp.setContentLength(logo.length);
     resp.setContentType(mime);
+    CacheUtils.setCache1Day(resp);
     resp.getOutputStream().write(logo);
-
-    Calendar in = Calendar.getInstance();
-    in.add(Calendar.DATE, 1);
-    resp.setDateHeader("Expires", in.getTimeInMillis());
-    // resp.setHeader("Expires", DateUtil.formatDate(in.getTime()));
   }
 
   private void unknownResult(final HttpServletResponse resp) throws IOException {

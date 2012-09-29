@@ -72,6 +72,8 @@ public interface ContentService extends RemoteService {
 
   StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 
+  StateAbstractDTO getContentByWaveRef(String userHash, String waveRef) throws DefaultException;
+
   TagCloudResult getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
 
   StateContainerDTO moveContent(String userHash, StateToken contentToken, StateToken newContainerToken)
@@ -88,11 +90,11 @@ public interface ContentService extends RemoteService {
   StateAbstractDTO renameContainer(String userHash, StateToken token, String newName)
       throws DefaultException;
 
-  StateAbstractDTO renameContent(String userHash, StateToken token, String newName)
-      throws DefaultException;
-
   // void save(String user, StateToken token, String content) throws
   // DefaultException;
+
+  StateAbstractDTO renameContent(String userHash, StateToken token, String newName)
+      throws DefaultException;
 
   String sendFeedback(String userHash, String title, String body);
 
@@ -117,5 +119,5 @@ public interface ContentService extends RemoteService {
   String writeTo(String userHash, StateToken token, boolean onlyToAdmins, String title, String message)
       throws DefaultException;
 
-  String writeToParticipants(String userHash, StateToken token) throws DefaultException;
+  String writeToParticipants(String userHash, StateToken token) throws DefaultException;;
 }

@@ -76,13 +76,13 @@ import com.google.inject.persist.UnitOfWork;
 
 @Singleton
 public class CustomPersistFilter implements Filter {
-  private final PersistService persistService;
-  private final UnitOfWork unitOfWork;
+  // private final PersistService persistService;
+  // private final UnitOfWork unitOfWork;
 
   @Inject
   public CustomPersistFilter(final UnitOfWork unitOfWork, final PersistService persistService) {
-    this.unitOfWork = unitOfWork;
-    this.persistService = persistService;
+    // this.unitOfWork = unitOfWork;
+    // this.persistService = persistService;
   }
 
   @Override
@@ -92,15 +92,16 @@ public class CustomPersistFilter implements Filter {
   }
 
   @Override
+  @KuneTransactional
   public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
       final FilterChain filterChain) throws IOException, ServletException {
-
-    unitOfWork.begin();
-    try {
-      filterChain.doFilter(servletRequest, servletResponse);
-    } finally {
-      unitOfWork.end();
-    }
+    // Commented in kune (using @KuneTransactional)
+    // unitOfWork.begin();
+    // try {
+    filterChain.doFilter(servletRequest, servletResponse);
+    // } finally {
+    // unitOfWork.end();
+    // }
   }
 
   @Override

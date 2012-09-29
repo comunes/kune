@@ -46,6 +46,8 @@ import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.search.annotations.DocumentId;
@@ -67,6 +69,7 @@ import cc.kune.wiki.shared.WikiToolConstants;
 @Table(name = "contents")
 @Indexed
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Content implements HasStateToken {
 
   public static final String GROUP = "group";

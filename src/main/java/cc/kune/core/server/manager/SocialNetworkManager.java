@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.manager;
 
+import java.util.List;
+
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
@@ -46,6 +48,8 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
   void denyJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   ParticipationData findParticipation(User user, Group group) throws DefaultException;
+
+  List<Group> findParticipationAggregated(User userLogged, Group group) throws AccessViolationException;
 
   SocialNetwork get(User userLogged, Group group) throws DefaultException;
 

@@ -66,6 +66,7 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
   GroupManager groupManager;
   @Inject
   KuneProperties kuneProperties;
+  private long lastModified = 0l;
 
   String buildResponse(final StateToken statetoken, final String filename, final String mimeType,
       final ImageSize imgsize, final HttpServletResponse resp) throws FileNotFoundException, IOException {
@@ -84,16 +85,19 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
     }
 
     final File file = new File(absFilename);
+    lastModified = file.lastModified();
 
     resp.setContentLength((int) file.length());
 
-    final String contentType = mimeType.toString();
-
-    resp.setContentType(contentType);
-    LOG.info("Content type returned: " + contentType);
+    if (mimeType != null) {
+      final String contentType = mimeType.toString();
+      resp.setContentType(contentType);
+      LOG.info("Content type returned: " + contentType);
+    }
 
     resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + filename
         + RESP_HEADER_END);
+    CacheUtils.setCache1Day(resp);
     return absFilename;
   }
 
@@ -116,5 +120,13 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
       FileDownloadManagerUtils.returnNotFound404(resp);
       return;
     }
+  }
+
+  @Override
+  protected long getLastModified(final HttpServletRequest req) {
+    // http://oreilly.com/catalog/jservlet/chapter/ch03.html#14260
+    // (...)to play it safe, getLastModified() should always round down to the
+    // nearest thousand milliseconds.
+    return lastModified / 1000 * 1000;
   }
 }

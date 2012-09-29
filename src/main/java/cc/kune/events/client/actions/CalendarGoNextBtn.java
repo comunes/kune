@@ -30,7 +30,7 @@ public class CalendarGoNextBtn extends ButtonDescriptor {
   @Inject
   public CalendarGoNextBtn(final CalendarGoNextAction action, final I18nTranslationService i18n) {
     super("»", action);
-    this.withToolTip(i18n.t("Next")).withStyles(ToolbarStyles.CSSBTNR);
+    this.withToolTip(i18n.t("Next")).withStyles(ToolbarStyles.CSS_BTN_RIGTH);
   }
 
 }

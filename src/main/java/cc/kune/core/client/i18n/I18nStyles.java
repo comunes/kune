@@ -24,26 +24,25 @@ import com.google.gwt.dom.client.HeadElement;
 import com.google.gwt.dom.client.LinkElement;
 
 /**
- * 
+ *
  * Some code from the StyleSheetLoader.java GWT's showcase
- * 
+ *
  */
 public class I18nStyles {
 
   /**
    * Convenience method for getting the document's head element.
-   * 
-   * 
+   *
    * @return the document's head element
    */
   private static native HeadElement getHeadElement()
   /*-{
-		return $doc.getElementsByTagName("head")[0];
+    return $doc.getElementsByTagName("head")[0];
   }-*/;
 
   /**
    * Load a style sheet onto the page.
-   * 
+   *
    * @param href
    *          the url of the style sheet
    */
@@ -56,6 +55,7 @@ public class I18nStyles {
   }
 
   public static void setRTL(final boolean isRTL) {
+    // FIXME: This is added at the beginning (by getHeadElement) so ws.css overwrite this
     if (isRTL) {
       loadStyleSheet("ws/kune-common-rtl.css");
       loadStyleSheet("ws/ws-rtl.css");

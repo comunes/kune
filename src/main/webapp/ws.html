@@ -7,7 +7,7 @@
 <meta name="gwt:property" content="locale=es" />
 -->
 <script type="text/javascript" language="javascript"
-		src="ws/ws.nocache.js"></script>
+    src="ws/ws.nocache.js"></script>
 <!--
 We will use this string for mention this site in messages like: "Thanks for joining this site"
 Your can use another string and the message will looks like "Thanks for joining example.org"
@@ -35,48 +35,48 @@ Your can use another string and the message will looks like "Thanks for joining 
 <link rel="shortcut icon" href="ws/favicon.ico" />
 <!-- FIXME: make something local -->
 <script type="text/javascript">
-	WebFontConfig = {
-		google : {
-			families : [ 'Ubuntu' ]
-		}
-	};
-	(function() {
-		var wf = document.createElement('script');
-		wf.src = ('https:' == document.location.protocol ? 'https' : 'http')
-				+ '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-		wf.type = 'text/javascript';
-		wf.async = 'true';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(wf, s);
-	})();
+  WebFontConfig = {
+    google : {
+      families : [ 'Ubuntu' ]
+    }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http')
+        + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
 </script>
 <link
-		href='https://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic'
-		rel='stylesheet' type='text/css'>
+    href='https://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic'
+    rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="css/reset.css">
 <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
 <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-gray.css">
 <link type="text/css" rel="stylesheet"
-		href="ws/gxt-custom/css/gxt-op-common.css">
+    href="ws/gxt-custom/css/gxt-op-common.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-hablar.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-chat.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-common.css">
 <link type="text/css" rel="stylesheet"
-		href="ws/fontface/ubuntufontface.css">
+    href="ws/fontface/ubuntufontface.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-message.css">
 <link type="text/css" rel="stylesheet"
-		href="others/splash/style/permalink.css">
+    href="others/splash/style/permalink.css">
 <link type="text/css" rel="stylesheet"
-		href="others/splash/style/stuff.css">
+    href="others/splash/style/stuff.css">
 <link type="text/css" rel="stylesheet"
-		href="others/splash/style/main.css">
+    href="others/splash/style/main.css">
 <link type="text/css" rel="stylesheet" href="ws/ws.css">
 <script type="text/javascript" src="others/splash/js/wave-rpc.js"></script>
 <script type="text/javascript" src="others/splash/js/gadget.js"></script>
 <script type="text/javascript" src="others/splash/js/rpc.js"></script>
 <script type="text/javascript" src="others/splash/js/common_client.js"></script>
 <script type="text/javascript"
-		src="others/splash/js/permalink_client.js"></script>
+    src="others/splash/js/permalink_client.js"></script>
 <!-- Moved this to local wave-rpc.js <script type="text/javascript" -->
 <!-- 		src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script> -->
 
@@ -249,7 +249,7 @@ div#k-home-toolbar table tbody tr td button.gwt-Button {
 }
 
 #k-home-global-stats {
-  
+
 }
 
 .k-home-title {
@@ -279,7 +279,7 @@ div#k-home-toolbar table tbody tr td button.gwt-Button {
 }
 
 .k-home-group-inbox-link {
-  
+
 }
 
 .k-home-group-inbox-link a {
@@ -303,125 +303,135 @@ div#k-home-toolbar table tbody tr td button.gwt-Button {
 .banner {
   margin: 30px;
 }
+
+li#k-home-home-icon {
+  background-image: url(ws/images/kune-intro-user.png);
+}
+
+li#k-home-group-icon {
+  background-image: url(ws/images/kune-intro-group.png);
+}
+
+li#k-home-world-icon {
+  background-image: url(ws/images/kune-intro-world.png);
+}
+
 </style>
 <!--[if IE 6]>
     <link type="text/css" rel="stylesheet" href="ie6.css">
 <![endif]-->
 </head>
 <body>
-		<!-- // This is only used for selenium tests (comment/remove in production) -->
-		<div id="kcursor"
-				style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
-				<img src="/others/cursor-orange.png">
-		</div>
-		<script src="others/js/fake-selenium-pointer.js"></script>
-		<!-- // End : This is only used for selenium tests (comment/remove in production) -->
+    <!-- // This is only used for selenium tests (comment/remove in production) -->
+    <div id="kcursor"
+        style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
+        <img src="/others/cursor-orange.png">
+    </div>
+    <script src="others/js/fake-selenium-pointer.js"></script>
+    <!-- // End : This is only used for selenium tests (comment/remove in production) -->
 
-		<!-- Banner for wave errors -->
-		<div class="banner" id="banner"></div>
-		<!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
-		<!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
-		<form id="loginrender" action="javascript:;" style="display: none;">
-				<input type="text" id="usernamerender" name="usernamerender"
-						value="" /> <input type="password" id="passwordrender"
-						name="passwordrender" value="" />
-		</form>
-		<!-- Remember user/pass (this part is used to send the values to the browser) -->
-		<form id="login" action="javascript:;" style="display: none;">
-				<input type="text" id="username" name="username" value="" /> <input
-						type="password" id="password" name="password" value="" />
-		</form>
-		<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-		<noscript>
-				<div
-						style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-						Your web browser must have JavaScript enabled in order for this
-						application to display correctly.</div>
-		</noscript>
-		<iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
-		<iframe src="" id="__download" style="width: 0; height: 0; border: 0"></iframe>
-		<div id="kuneinitialcurtain"></div>
-		<div id="kuneloading">
-				<div class="kuneloading-indicator">
-						<img src="ws/images/kune-anim-g.gif" width="35" height="35"
-								alt="kune-loading"
-								style="margin-right: 3px; float: left; vertical-align: top;" />kune&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-						<span id="kuneloading-msg">Starting...</span>
-				</div>
-		</div>
-		<div id="k-home-prewrap">
-				<div id="k-home-wrapper">
-						<!-- This id is required for kune (you can create a different .html but preserve this id) -->
-						<div id="k-home-table">
-								<div id="k-home-header"></div>
-								<!-- div home-header -->
-								<div id="k-home-intro">
-										<div id="k-home-summary-left">
-												<div id="k-home-logo">
-														<img src="ws/logo-big-home.png" alt="" />
-												</div>
-												<div id="k-home-summary">
-														<ul>
-																<li
-																		style="background-image: url(ws/images/kune-intro-user.png);">
-																		<a href="#inbox">Comunicate with others</a>
-																</li>
-																<li
-																		style="background-image: url(ws/images/kune-intro-group.png);">
-																		<!-- Put here your site default group name --> <a
-																		href="#site">Work in collaboration</a>
-																</li>
-																<li
-																		style="background-image: url(ws/images/kune-intro-world.png);">
-																		<a href="#preview()">And share with the world</a>
-																</li>
-														</ul>
-												</div>
-												<!-- k-home-summary -->
-										</div>
-										<!-- k-home-summary-left -->
-										<div id="k-home-summary-right">
-												<div id="k-home-ini">
-														Welcome! This site is a <a href="http://kune.ourproject.org/" 
+    <!-- Banner for wave errors -->
+    <div class="banner" id="banner"></div>
+    <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
+    <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
+    <form id="loginrender" action="javascript:;" style="display: none;">
+        <input type="text" id="usernamerender" name="usernamerender"
+            value="" /> <input type="password" id="passwordrender"
+            name="passwordrender" value="" />
+    </form>
+    <!-- Remember user/pass (this part is used to send the values to the browser) -->
+    <form id="login" action="javascript:;" style="display: none;">
+        <input type="text" id="username" name="username" value="" /> <input
+            type="password" id="password" name="password" value="" />
+    </form>
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+        <div
+            style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+            Your web browser must have JavaScript enabled in order for this
+            application to display correctly.</div>
+    </noscript>
+    <iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
+    <iframe src="" id="__download" style="width: 0; height: 0; border: 0"></iframe>
+    <div id="kuneinitialcurtain"></div>
+    <div id="kuneloading">
+        <div class="kuneloading-indicator">
+            <img src="ws/images/kune-anim-g.gif" width="35" height="35"
+                alt="kune-loading"
+                style="margin-right: 3px; float: left; vertical-align: top;" />kune&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <span id="kuneloading-msg">Starting...</span>
+        </div>
+    </div>
+    <div id="k-home-prewrap">
+        <div id="k-home-wrapper">
+            <!-- This id is required for kune (you can create a different .html but preserve this id) -->
+            <div id="k-home-table">
+                <div id="k-home-header"></div>
+                <!-- div home-header -->
+                <div id="k-home-intro">
+                    <div id="k-home-summary-left">
+                        <div id="k-home-logo">
+                            <img src="ws/logo-big-home.png" alt="" />
+                        </div>
+                        <div id="k-home-summary">
+                            <ul>
+                                <li id="k-home-home-icon">
+                                    <a href="#inbox">Comunicate with others</a>
+                                </li>
+                                <li id="k-home-group-icon">
+                                    <!-- Put here your site default group name --> <a
+                                    href="#site">Work in collaboration</a>
+                                </li>
+                                <li id="k-home-world-icon">
+                                    <a href="#preview()">And share with the world</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- k-home-summary -->
+                    </div>
+                    <!-- k-home-summary-left -->
+                    <div id="k-home-summary-right">
+                        <div id="k-home-ini">
+                            Welcome! This site is a <a href="http://kune.ourproject.org/"
                             target="_blank">Kune</a> node. Kune, which means
-														"together" in esperanto, is a network of interconnected
-														sites like this one, where you can <strong>communicate,
-																share, collaborate with others and create your web
-																spaces easily</strong>. <a href="#signin">Join!</a>
-												</div>
-												<!--  div k-home-ini -->
-												<div id="k-home-toolbar">
-														<!-- This id is optional for kune (you can create a different .html but preserve this id if you want the home signin/newgroup home buttons) -->
-												</div>
-												<!--  div k-home-toolbar -->
-										</div>
-										<!-- k-home-summary-right -->
-								</div>
-								<!-- div home-intro -->
-								<div id="k-home-body">
-										<div id="k-home-left">
-												<div id="k-home-group-stats" style="display: none;">
-														<!-- This id is optional for kune (you can create a different .html and preserve this id if you want this stats) -->
-												</div>
-												<!-- div home-group-stats -->
-										</div>
-										<!-- div k-home-left -->
-										<div id="k-home-right">
-												<div id="k-home-global-stats" style="display: none;">
-														<!-- This id is optional for kune (you can create a different .html but preserve this id if you want this stats) -->
-												</div>
-										</div>
-										<!-- div k-home-right -->
-								</div>
-								<!-- div k-home-body -->
-								<!--                 <div id="k-home-footer" style="display: none;"> -->
-								<!--                 </div> -->
-								<!-- div k-home-footer -->
-						</div>
-						<!-- div home-table -->
-				</div>
-				<!-- home-wrapper -->
-		</div>
-		<!-- home-prewrap -->
+                            "together" in esperanto, is a network of interconnected
+                            sites like this one, where you can <strong>communicate,
+                                share, collaborate with others and create your web
+                                spaces easily</strong>. <a href="#signin">Join!</a>
+                        </div>
+                        <!--  div k-home-ini -->
+                        <div id="k-home-toolbar">
+                            <!-- This id is optional for kune (you can create a different .html but preserve this id if you want the home signin/newgroup home buttons) -->
+                        </div>
+                        <!--  div k-home-toolbar -->
+                    </div>
+                    <!-- k-home-summary-right -->
+                </div>
+                <!-- div home-intro -->
+                <div id="k-home-body">
+                    <div id="k-home-left">
+                        <div id="k-home-group-stats" style="display: none;">
+                            <!-- This id is optional for kune (you can create a different .html and preserve this id if you want this stats) -->
+                        </div>
+                        <!-- div home-group-stats -->
+                    </div>
+                    <!-- div k-home-left -->
+                    <div id="k-home-right">
+                        <div id="k-home-global-stats" style="display: none;">
+                            <!-- This id is optional for kune (you can create a different .html but preserve this id if you want this stats) -->
+                        </div>
+                    </div>
+                    <!-- div k-home-right -->
+                </div>
+                <!-- div k-home-body -->
+                <!--                 <div id="k-home-footer" style="display: none;"> -->
+                <!--                 </div> -->
+                <!-- div k-home-footer -->
+            </div>
+            <!-- div home-table -->
+        </div>
+        <!-- home-wrapper -->
+    </div>
+    <!-- home-prewrap -->
 </body>
 </html>

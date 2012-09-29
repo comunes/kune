@@ -20,8 +20,23 @@
 package cc.kune.gspace.client.viewers;
 
 public class ToolbarStyles {
-  public static final String CSSBTN = "k-button,  k-button-alone, k-fl";
-  public static final String CSSBTNC = "k-button, k-button-center, k-fl";
-  public static final String CSSBTNL = "k-button, k-button-left, k-fl";
-  public static final String CSSBTNR = "k-button, k-button-right, k-fl";
+  public static final String CSS_BTN_ALONE = "k-button,  k-button-alone, k-fl";
+  public static final String CSS_BTN_CENTER = "k-button, k-button-center, k-fl";
+  public static final String CSS_BTN_LEFT = "k-button, k-button-left, k-fl";
+  public static final String CSS_BTN_RIGTH = "k-button, k-button-right, k-fl";
+
+  public static String calculateStyle(final int pos, final int length) {
+    //GWT.log("PATH pos: " + pos + " length: " + length);
+    if (length == 1) {
+      return ToolbarStyles.CSS_BTN_ALONE;
+    }
+    if (pos == 0) {
+      return ToolbarStyles.CSS_BTN_LEFT;
+    }
+    if (pos == length - 1) {
+      return ToolbarStyles.CSS_BTN_RIGTH;
+    }
+    return ToolbarStyles.CSS_BTN_CENTER;
+  }
+
 }

@@ -23,11 +23,21 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 /**
  * A item can be both a container or a content
- * 
+ *
  */
 public class ContainerSimpleDTO extends AbstractContentSimpleDTO {
   private String name;
   private StateToken parentToken;
+
+  public ContainerSimpleDTO() {
+  }
+
+  public ContainerSimpleDTO(String name, StateToken parentToken, StateToken token, String typeId) {
+    this.name = name;
+    this.parentToken = parentToken;
+    setStateToken(token);
+    setTypeId(typeId);
+  }
 
   @Override
   public String getName() {

@@ -46,7 +46,7 @@ public interface GroupFinder {
   public Long countGroups(@Named("notgrouptype") final GroupType excludedGroupType);
 
   @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id "
-      + "FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid)", returnAs = HashSet.class)
+      + "FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid) ORDER BY g.shortName ASC", returnAs = HashSet.class)
   public Set<Group> findAdminInGroups(@Named("groupid") final Long groupId);
 
   @Finder(query = "FROM Group g WHERE g.longName = :longName")
@@ -56,14 +56,21 @@ public interface GroupFinder {
   public Group findByShortName(@Named("shortName") final String shortName);
 
   @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM "
-      + "g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid)", returnAs = HashSet.class)
+      + "g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid) ORDER BY g.shortName ASC", returnAs = HashSet.class)
   public Set<Group> findCollabInGroups(@Named("groupid") final Long groupId);
 
   @Finder(query = "SELECT t.root.toolName FROM ToolConfiguration t "
       + "WHERE t.enabled=true AND t.root.owner.id = :groupid", returnAs = ArrayList.class)
   public List<String> findEnabledTools(@Named("groupid") final Long groupId);
 
-  @Finder(query = "FROM Group", returnAs = ArrayList.class)
+  @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM "
+      + "g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid ORDER BY g.longName ASC)"
+      + "OR g.id IN (SELECT g.id "
+      + "FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid ORDER BY g.longName ASC)"
+      + "ORDER BY g.longName ASC", returnAs = ArrayList.class)
+  public List<Group> findParticipatingInGroups(@Named("groupid") final Long groupId);
+
+  @Finder(query = "FROM Group g ORDER BY g.shortName ASC", returnAs = ArrayList.class)
   public List<Group> getAll();
 
   @Finder(query = "FROM Group g "

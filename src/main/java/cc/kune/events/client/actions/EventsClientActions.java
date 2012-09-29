@@ -36,6 +36,7 @@ import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
+import cc.kune.gspace.client.actions.MoveContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
 import cc.kune.gspace.client.actions.PurgeContainerBtn;
 import cc.kune.gspace.client.actions.PurgeContainerMenuItem;
@@ -79,6 +80,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
       final Provider<PurgeContainerMenuItem> purgeFolderMenuItem,
+      final Provider<MoveContentMenuItem> moveContentMenuItem,
       final Provider<PurgeContainerBtn> purgeFolderBtn, final Provider<ExportCalendarMenuItem> export,
       final Provider<CalendarGoNextBtn> calNextBtn, final CalendarOnOverMenu onOverMenu,
       final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh) {
@@ -112,7 +114,10 @@ public class EventsClientActions extends AbstractFoldableToolActions {
         containersNoRoot);
     actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
         containersNoRoot);
-
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
+        contents);
+    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
+        containersNoRoot);
     eventOpenMenuItem.get();
     eventAddMenuItem.get();
     eventRemoveMenuItem.get();

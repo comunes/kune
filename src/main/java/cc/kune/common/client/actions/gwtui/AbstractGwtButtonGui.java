@@ -19,6 +19,7 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
@@ -73,9 +74,15 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     } else {
       button = new Button();
     }
-    button.addStyleName("k-button");
-    button.addStyleName("k-btn");
-    button.addStyleName("k-5corners");
+    String value = (String) descriptor.getValue(Action.STYLES);
+    if (value == null) {
+      // Default btn styles
+      button.addStyleName("k-button");
+      button.addStyleName("k-btn");
+      button.addStyleName("k-5corners");
+    } else {
+      setStyles(value);
+    }
     layout();
     // button.setEnableToggle(enableTongle);
     final String id = descriptor.getId();

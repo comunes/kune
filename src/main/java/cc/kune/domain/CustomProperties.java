@@ -27,10 +27,14 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import cc.kune.domain.utils.HasId;
 
 @Entity
 @Table(name = "customproperties")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CustomProperties implements HasId {
 
     @Id

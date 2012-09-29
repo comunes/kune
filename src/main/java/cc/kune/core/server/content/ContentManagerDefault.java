@@ -33,11 +33,7 @@ import javax.persistence.EntityManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.queryParser.MultiFieldQueryParser;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
-import org.apache.lucene.search.Query;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
@@ -56,7 +52,6 @@ import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.manager.impl.DefaultManager;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
-import cc.kune.core.server.manager.impl.ServerManagerException;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
@@ -158,7 +153,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   /**
    * Adds the participant to a wave
-   * 
+   *
    * @param user
    *          the user
    * @param content
@@ -253,12 +248,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return content;
   }
 
-  private MultiFieldQueryParser createMultiFieldParser() {
-    final MultiFieldQueryParser parser = new MultiFieldQueryParser(LUCENE_VERSION,
-        DEF_GLOBAL_SEARCH_FIELDS, new StandardAnalyzer(LUCENE_VERSION));
-    return parser;
-  }
-
   @Override
   public boolean findIfExistsTitle(final Container container, final String title) {
     return (contentFinder.findIfExistsTitle(container, title) > 0)
@@ -341,7 +330,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   /**
    * Purge content (permanent delete)
-   * 
+   *
    * @param content
    *          the content to purge
    */
@@ -447,14 +436,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   @Override
   public SearchResult<Content> search(final String search, final Integer firstResult,
       final Integer maxResults) {
-    final MultiFieldQueryParser parser = createMultiFieldParser();
-    Query query;
-    try {
-      query = parser.parse(QueryParser.escape(search));
-    } catch (final ParseException e) {
-      throw new ServerManagerException("Error parsing search");
-    }
-    return super.search(query, firstResult, maxResults);
+    final String escapedQuery = QueryParser.escape(search);
+    return super.search(new String[] { escapedQuery, escapedQuery, escapedQuery, escapedQuery,
+        escapedQuery, escapedQuery, escapedQuery, escapedQuery }, new String[] { "authors.name",
+        "authors.shortName", "container.name", "language.code", "language.englishName",
+        "language.nativeName", "lastRevision.body", "lastRevision.title" }, firstResult, maxResults);
   }
 
   @Override

@@ -28,6 +28,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
@@ -37,6 +39,7 @@ import cc.kune.domain.utils.HasId;
 @Entity
 @Indexed
 @Table(name = "tag_user_content")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TagUserContent implements HasId {
 
   @IndexedEmbedded

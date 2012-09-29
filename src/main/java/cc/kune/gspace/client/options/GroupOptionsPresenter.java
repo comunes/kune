@@ -88,7 +88,9 @@ public class GroupOptionsPresenter extends
         show();
       }
     };
-    // groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
+    if (session.isNewbie()) {
+      groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
+    }
     groupPrefsAction.putValue(Action.SMALL_ICON, img.prefGrey());
     prefsItem = new ButtonDescriptor(groupPrefsAction);
     prefsItem.withStyles("k-ent-header-btn, k-btn-min");

@@ -222,16 +222,20 @@ More info: http://maven.apache.org/plugins/maven-release-plugin/index.html
 
 Copy and adapt to your needs, as much as possible, these files:
 
-- src/main/resources/kune.properties
-- src/main/resources/wave-server.properties
-- src/main/resources/log4j.properties
-- src/main/webapp/ws.html 
+- src/main/resources/kune.properties or /etc/kune/kune.properties (in debian package)
+- src/main/resources/wave-server.properties or /etc/kune/wave-server.properties (idem)
+- src/main/resources/log4j.properties or /etc/kune/log4j.properties
+- src/main/webapp/ws.html
 - src/main/webapp/others/kune-client-actions.xml (extensions definitions)
-- src/main/webapp/ in general
+- src/main/webapp/ in general (/usr/share/kune/webapp in debian package)
 
-The best way to configure kune is to copy those files (for instance in /etc/kune/ ), to create a custom directory for ws.html and others of your custom html stuff (for instance in /usr/share/kune/ ), and configure that directory to resources_base in wave-server.properties. For instance:
+The best way to configure kune is to copy those files (for instance in /etc/kune/ ), to create a custom directory for ws.html and others of your custom html stuff (for instance in /usr/share/kune/custom ), and configure that directory to resources_base in wave-server.properties. For instance:
 
-resource_bases = /usr/share/kune,target/kune-0.1.0-SNAPSHOT/
+resource_bases = /usr/share/kune/custom,/usr/share/kune,target/kune-0.1.0-SNAPSHOT/
+or in a debian installation
+resource_bases = /usr/share/kune/custom/,/usr/share/kune/webapp/,/usr/share/kune/webclient/
+
+the ws.html (or other file) in custom directoy will have preference to the webapp default one (installed by the debian package). So you can have your logos, tutorials, etc, there.
 
 The ws.html file is the home that you get at start-up and where you have also some configurations. You can adapt the html inside to your needs but follow the comments and try not to remove important parts (that allow kune to start). Besides, you can change the main logo, favicon, etc.
 
@@ -443,7 +447,7 @@ a2enmod proxy_http
 
 You should configure a SMTP server in order to be used by Kune in production sites. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance, you can test something such as:
 
- echo "Bests," | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar
+ echo "Test..." | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar
 
 http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#ProtocolSMTP
 http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#JavaMailSending

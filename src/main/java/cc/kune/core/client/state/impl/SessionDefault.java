@@ -35,6 +35,7 @@ import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nCountryDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
@@ -387,5 +388,16 @@ public class SessionDefault implements Session {
   @Override
   public boolean userIsJoiningGroups() {
     return currentUserInfo.getGroupsIsAdmin().size() + currentUserInfo.getGroupsIsCollab().size() > 0;
+  }
+
+  @Override
+  public boolean isNewbie() {
+    return currentUserInfo != null ? currentUserInfo.getSignInCount() <= SessionConstants.MIN_SIGN_IN_FOR_NEWBIES
+        : true;
+  }
+
+  @Override
+  public void refreshCurrentUserInfo(UserInfoDTO currentUserInfo) {
+    this.currentUserInfo = currentUserInfo;
   }
 }

@@ -165,10 +165,24 @@ public interface Session {
   void signOut();
 
   /**
+   * Checks if the user is newbie.
+   *
+   * @return true, if is the user is a newbie
+   */
+  boolean isNewbie();
+
+  /**
    * User is joining to some groups (as admin or collaborator).
-   * 
+   *
    * @return true, if successful
    */
   boolean userIsJoiningGroups();
+
+  /**
+   * Refresh current user info (without fire sign in events)
+   *
+   * @param userInfo the user info
+   */
+  void refreshCurrentUserInfo(UserInfoDTO userInfo);
 
 }

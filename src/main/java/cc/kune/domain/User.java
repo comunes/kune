@@ -37,6 +37,8 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -55,6 +57,7 @@ import cc.kune.domain.utils.HasId;
 @Entity
 @Indexed
 @Table(name = "kusers")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User implements HasId {
 
   private static final EmailNotificationFrequency DEF_EMAIL_FREQ = EmailNotificationFrequency.immediately;

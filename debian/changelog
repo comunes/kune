@@ -1,3 +1,68 @@
+kune (0.2.0+b28) unstable; urgency=low
+
+  * Added BreadCrumbs to GroupSpace in Inbox (fix #359)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 28 Sep 2012 11:37:56 +0200
+
+kune (0.2.0+b27) unstable; urgency=low
+
+  * My groups ordered (fix #344) and empty bug (fix #351)
+  * Database connection pool configurable (fix #354)
+  * Fix NPE in EntityBackgroundDownloadManager (fix #357)
+  * NPE in GotoGroupLastVisitedContentAction.setGroup (fix #358)
+  * NPE in GenericServlet (partial #356)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 27 Sep 2012 14:06:49 +0200
+
+kune (0.2.0+b26) unstable; urgency=low
+
+  * Allow to update the db schema by hibernate by a configuration 
+    property (fix #350)
+  * Autoincrease in signInLogs
+  * logs to WARN instead of ERROR
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 19 Sep 2012 22:06:05 +0200
+
+kune (0.2.0+b25) unstable; urgency=low
+
+  * Fix for #346: Some buttons for newbies should be more intuitive
+  * Fix for #347: move and drag&drop
+  * Refactorization of #343
+  * Shortname and longname indexed. Fixes #252
+  * Fix #348: Site search default text is annoying and buggy
+  * Fix #344: Alphabetical order in group list
+  * Fix #349: My groups menu should go to last visited content
+  * Wave code updated, fix for paste in FF15
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 19 Sep 2012 13:44:24 +0200
+
+kune (0.2.0+b24) unstable; urgency=low
+
+  * Added hibernate-ehcache
+  * Fix minor bug in Group.java (logoLasttime = null)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 12 Sep 2012 17:15:53 +0200
+
+kune (0.2.0+b23) unstable; urgency=low
+
+  * Improved cache of avatars (#297)
+  * Some minor chantes (a 404 error)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 12 Sep 2012 00:48:00 +0200
+
+kune (0.2.0+b22) unstable; urgency=low
+
+  * Serveral works for #156 arabic support
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 08 Sep 2012 05:05:02 +0200
+
+kune (0.2.0+b21) unstable; urgency=low
+
+  * WAVE-367: fixed the number of search queries.
+  * Updated languages. Added Romanian and Turkish.
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 08 Sep 2012 05:04:46 +0200
+
 kune (0.2.0+b20) unstable; urgency=low
 
   * Wave updated with many fixes (WAVE-312, WAVE-363, 1970-ignore

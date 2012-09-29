@@ -28,10 +28,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 
 @Entity
 @Table(name = "social_networks")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SocialNetwork {
     public static final SocialNetwork EMPTY = new SocialNetwork(SocialNetworkVisibility.onlyadmins);
 
