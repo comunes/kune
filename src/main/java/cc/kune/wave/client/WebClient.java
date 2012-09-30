@@ -495,7 +495,7 @@ public class WebClient extends Composite implements WaveClientView {
 
   private void setupUi() {
     // Set up UI
-    splitPanel = new SplitLayoutPanel(1);
+    splitPanel = new SplitLayoutPanel(2);
     final DockLayoutPanel self = BINDER.createAndBindUi(this);
     // kune-patch
     // RootPanel.get("app").add(self);
