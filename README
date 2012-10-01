@@ -1,12 +1,16 @@
 = README of KUNE =
 
-See the INSTALL file for instructions of how to run Kune. Please follow closely.
+Kune is a free/open source federated collaborative social network, focused on collaboration rather than just in communication. That is, it focuses on online real-time collaborative editing (based on Apache Wave), decentralized social networking and web publishing, while focusing on workgroups rather than just in individuals. It aims to allow the creation of online spaces of collaborative work, where organizations and individuals can build projects online, coordinate common agendas, set up virtual meetings, publish in the web, and join organizations with similar interests. Kune is 100% free/libre software (AGPLv3), built with free/libre tools. 
 
-See the DEV-GUIDE for developers information and guidelines.
+See http://kune.cc if you want to try Kune or directly use it for collaboration.
 
-See the TROUBLESHOOT file in you have problems with the installation or the development.
+See the INSTALL file for instructions on how to install and run Kune in your own server. Please follow closely.
 
-See the CREDITS COPYRIGHT for legal info and author/contributors.
+See the DEV-GUIDE file for developer information and guidelines.
 
-and for BUGS for inform about problems/feedback etc.
+See the TROUBLESHOOT file if you have problems with the installation or the development.
+
+See the COPYRIGHT and CREDITS files for legal info and author/contributors.
+
+See the BUGS file for information about current problems and reporting feedback.
 
