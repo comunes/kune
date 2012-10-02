@@ -78,7 +78,7 @@ NOTE: If you change the previous db passwords after this compiling, you have to 
 
 ===Configure directories===
 
-Note: This is not needed in development enviroments or when you use a Debian package (.deb)
+NOTE: This is not needed in development enviroments or when you use a Debian package (.deb)
 
  sudo mkdir -p /usr/share/kune/
  sudo chown yourUser:yourUser /usr/share/kune/
@@ -157,7 +157,7 @@ bin/liquibase-migrate.sh
 
 This last script might be needed to be adapted, as it is prepared for the "kune_dev" table (which might not be the one selected). Besides, the JAR versions might need to be corrected. In the worst case if the script does not work, try to jump to the next step.
 
-Note: Windows developer users should do this by hand or adapt this (simple) script to Windows or simple:
+NOTE: Windows developer users should do this by hand or adapt this (simple) script to Windows or simple:
 mvn compile -Dliquibase.should.run=true (or mvn compile)
 
 ===Run the server===
@@ -182,8 +182,9 @@ http://localhost:8888/?locale=en
 or for production:
 http://localhost:8888
 
-Note: If you configured a different port in wave-server.properties, replace 8888 for the appropriate port
-Note: Kune for development will not work in languages other than English (locale=en). Trying other languages (locale=fr, locale=es, etc) in development mode might result in loops.
+NOTE: If you configured a different port in wave-server.properties, replace 8888 for the appropriate port
+NOTE: Kune for development will not work in languages other than English (locale=en). Trying other languages (locale=fr, locale=es, etc) in development mode might result in loops. This is done in purpose for accelerating compilation (without loading dozens of languages).
+NOTE: If you were following the DEV-GUIDE, remember to come back to it in order to finish the steps to develop Kune.
 
 ==Production environment instructions==
 
@@ -202,7 +203,7 @@ bin/server.sh -h
 
 In trunk run:
   mvn assembly:assembly -P production 
-Note: Production profile generates a lot of permutations for each language and browser. You can use << mvn assembly:assembly -P development >> if it is only for testing.
+NOTE: Production profile generates a lot of permutations for each language and browser. You can use << mvn assembly:assembly -P development >> if it is only for testing.
 
 Then, generate the Debian package with
   debuild -us -uc -b
@@ -238,13 +239,13 @@ the ws.html (or other file) in custom directoy will have preference to the webap
 
 The ws.html file is the home that you get at start-up and where you have also some configurations. You can adapt the html inside to your needs but follow the comments and try not to remove important parts (that allow kune to start). Besides, you can change the main logo, favicon, etc.
 
-Note: Remember that if you are running kune using the source code (via mvn) and you change these src files at some point, you have to make 'mvn compile' so they are copied to the target directoy. This is not applicable when you run kune via jar.
+NOTE: Remember that if you are running kune using the source code (via mvn) and you change these src files at some point, you have to make 'mvn compile' so they are copied to the target directoy. This is not applicable when you run kune via jar.
 
 Besides, you can build diferent tutorials than the default ones (see src/main/webapp/tutorials)
 
 ==Appendix A: Configuration of Openfire xmpp server==
 
-Note: If you want to INSTALL Kune without the Openfire dependency (which is useful for development or testing), you can skip this part (you should configure kune.openfire.ignore in kune.properties accordingly). In this case, there won't be XMPP server.
+NOTE: If you want to INSTALL Kune without the Openfire dependency (which is useful for development or testing), you can skip this part (you should configure kune.openfire.ignore in kune.properties accordingly). In this case, there won't be XMPP server.
 
 To install openfire in your system, download the appropriate version from: 
 http://www.igniterealtime.org/downloads/index.jsp
@@ -279,9 +280,9 @@ Select "MySQL" drivers. Afterwards, you should configure the mysql connection. F
     Username:                       kune
     Password:                       db4kune
 
-Note: Recall the security concerns about the default database password!
-Note: This is just the default configuration, which can be modified freely. 
-Note: The JDBC Driver Class is usually left by default. Your default might be the one above or instead "com.myrootsql.jdbc.Driver". 
+NOTE: Recall the security concerns about the default database password!
+NOTE: This is just the default configuration, which can be modified freely. 
+NOTE: The JDBC Driver Class is usually left by default. Your default might be the one above or instead "com.myrootsql.jdbc.Driver". 
 
 
 Select "Default" in Profile Settings
@@ -299,7 +300,7 @@ In Server > Server Settings > Registration & Login > Inband Account Registration
 In Server > Server Settings > Registration & Login > Change Password > Disabled
 so this will not conflict with kune users management.
 
-Note: Remember to click "Save Settings" after each change in Openfire web administration.
+NOTE: Remember to click "Save Settings" after each change in Openfire web administration.
 
 ===Openfire auth via Kune===
 

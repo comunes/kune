@@ -52,7 +52,7 @@ public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements Group
   @Inject
   public GroupOptGeneralPanel(final I18nTranslationService i18n, final CoreResources res,
       final MaskWidget maskWidget, final GroupFieldFactory groupFieldFactory) {
-    super(maskWidget, res.emblemSystem(), i18n.t("General"), i18n.t("Change this values:"));
+    super(maskWidget, res.emblemSystem(), i18n.t("General"), i18n.t("You can change these values:"));
     shortName = groupFieldFactory.createGroupShortName(SHORT_NAME_FIELD);
     longName = groupFieldFactory.createLongName(LONG_NAME_FIELD);
     add(shortName);
