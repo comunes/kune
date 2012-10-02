@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,9 @@
  */
 package cc.kune.core.client;
 
+import cc.kune.client.KuneLinkInterceptor;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.EmailNotVerifiedReminder;
 import cc.kune.core.client.auth.Register;
@@ -78,7 +80,9 @@ public class CoreParts {
       final GlobalShortcuts shortcuts, final I18nUITranslationService i18n,
       final Provider<TutorialViewer> tutorialViewer, final Provider<WebSocketChecker> websocketChecker,
       final Provider<EmailNotVerifiedReminder> emailNotVerifiedReminder,
-      final Provider<SiteInvitationBtn> siteInvitation, final InvitationClientManager invitationManager) {
+      final Provider<SiteInvitationBtn> siteInvitation, final InvitationClientManager invitationManager,
+		final Provider<KuneLinkInterceptor> linkInterceptor
+) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -93,6 +97,7 @@ public class CoreParts {
         emailNotVerifiedReminder.get();
         websocketChecker.get();
         siteInvitation.get();
+		linkInterceptor.get();
       }
     });
     tokenListener.put(SiteTokens.SIGN_IN, new HistoryTokenAuthNotNeededCallback() {

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client;
 
+import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
+import cc.kune.client.KuneLinkInterceptor;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusInstance;
@@ -59,14 +61,18 @@ import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.groups.newgroup.NewGroupPanel;
 import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
 import cc.kune.core.client.groups.newgroup.NewGroupView;
+import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.init.AppStarterDefault;
 import cc.kune.core.client.init.PrefetchUtilities;
 import cc.kune.core.client.notify.confirm.UserConfirmPanel;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
-import cc.kune.core.client.notify.spiner.SpinerPanel;
+import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
+import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
+import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
+import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -120,6 +126,8 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+import cc.kune.msgs.client.UserMessagesPanel;
+import cc.kune.msgs.client.UserMessagesPresenter;
 
 import com.calclab.emite.core.client.services.Services;
 import com.calclab.emite.core.client.services.gwt.GWTServices;
@@ -135,7 +143,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -157,6 +165,7 @@ public class CoreGinModule extends ExtendedGinModule {
     bind(GlobalShortcuts.class).in(Singleton.class);
 
     s(AnonUsersManager.class);
+    s(KuneLinkInterceptor.class);
 
     // DnD
     s(KuneDragController.class);
