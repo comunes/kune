@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
-@LogThis
+// @LogThis
 @Singleton
 public class UserSessionManager implements UsersOnline {
 
