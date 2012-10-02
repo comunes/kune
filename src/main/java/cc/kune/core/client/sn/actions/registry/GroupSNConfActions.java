@@ -55,11 +55,11 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- *
+ * 
  * You must call {@link GroupSNPresenter#refreshActions()} when adding some
  * action externally with
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class GroupSNConfActions extends AbstractSNActionsRegistry {
@@ -73,11 +73,12 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction,
       final AddEntityToThisGroupAction addEntityToThisGroupAction, final GroupSNOptionsMenu optionsMenu,
       final GroupSNModerationSubMenu moderationSubMenu, final GroupSNVisibilitySubMenu visibilitySubMenu) {
-    boolean isNewbie = session.isNewbie();
-    ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
-    String menuText = isNewbie ? i18n.t("Options") : "";
-    String menuTooltip = isNewbie ? "" : i18n.t("Options");
-    String menuStyle = isNewbie ? ActionStyles.SN_OPTIONS_STYLES_NEWBIE : ActionStyles.SN_OPTIONS_STYLES;
+    final boolean isNewbie = session.isNewbie();
+    final ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
+    final String menuText = isNewbie ? i18n.t("Options") : "";
+    final String menuTooltip = isNewbie ? "" : i18n.t("Options");
+    final String menuStyle = isNewbie ? ActionStyles.SN_OPTIONS_STYLES_NEWBIE
+        : ActionStyles.SN_OPTIONS_STYLES;
     optionsMenu.withText(menuText).withToolTip(menuTooltip).withIcon(icon).withStyles(menuStyle);
     final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
         SocialNetworkVisibility.anyone);
@@ -92,8 +93,8 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     final MenuRadioItemDescriptor openItem = membersModeration.get().withModeration(AdmissionType.Open);
 
     addImpl(optionsMenu);
-    new MenuSeparatorDescriptor(optionsMenu);
-    new MenuTitleItemDescriptor(i18n.t("Options")).withParent(optionsMenu);
+    final MenuSeparatorDescriptor sep = new MenuSeparatorDescriptor(optionsMenu);
+    final GuiActionDescrip memberOptions = new MenuTitleItemDescriptor(i18n.t("Member options")).withParent(optionsMenu);
     new MenuItemDescriptor(addEntityToThisGroupAction).withParent(optionsMenu).setPosition(0);
     new MenuItemDescriptor(unJoinGroupAction).withParent(optionsMenu).setPosition(1);
     // new MenuSeparatorDescriptor(optionsMenu).setPosition(2);
@@ -107,21 +108,31 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     closedItem.withParent(moderationSubMenu).withText(i18n.t("closed for new members"));
 
     final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
-    final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);
+    // Disabled, so we have more space
+    // final ButtonDescriptor unJoinBtn = new
+    // ButtonDescriptor(unJoinGroupAction);
     // final ButtonDescriptor addMemberBtn = new
     // ButtonDescriptor(addEntityToThisGroupAction);
     // unJoinBtn.add(isLoggedCondition);
     addImpl(joinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
-    addImpl(unJoinBtn); //
+    // addImpl(unJoinBtn); //
     // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
     // addImpl(addMemberBtn);
 
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {
-        final boolean administrable = event.getState().getGroupRights().isAdministrable();
-        optionsMenu.setVisible(administrable);
-        optionsMenu.setEnabled(administrable);
+        final boolean isAdmin = event.getState().getGroupRights().isAdministrable();
+        // sep.setVisible(isAdmin);
+        memberOptions.setEnabled(isAdmin);
+        // setVisible(false) shows the arrow...
+        // moderationSubMenu.setVisible(isAdmin);
+        moderationSubMenu.setEnabled(isAdmin);
+        // visibilitySubMenu.setVisible(isAdmin);
+        visibilitySubMenu.setEnabled(isAdmin);
+        final boolean isEditor = event.getState().getGroupRights().isEditable();
+        optionsMenu.setVisible(isEditor);
+        optionsMenu.setEnabled(isEditor);
         final StateAbstractDTO state = event.getState();
         final GroupDTO currentGroup = state.getGroup();
         if (currentGroup.isNotPersonal()) {
@@ -153,11 +164,11 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
   }
 
   /**
-   *
+   * 
    * You must call {@link GroupSNPresenter#refreshActions()} when adding some
    * action externally with
    * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
-   *
+   * 
    */
   @Override
   public boolean add(final GuiActionDescrip action) {
