@@ -74,10 +74,10 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final AddEntityToThisGroupAction addEntityToThisGroupAction, final GroupSNOptionsMenu optionsMenu,
       final GroupSNModerationSubMenu moderationSubMenu, final GroupSNVisibilitySubMenu visibilitySubMenu) {
     boolean isNewbie = session.isNewbie();
-    ImageResource icon = isNewbie? res.prefGrey():  res.arrowdownsitebar();
-    String menuText = isNewbie? i18n.t("Options"): "";
-    String menuTooltip = isNewbie? "" : i18n.t("Options");
-    String menuStyle = isNewbie? ActionStyles.SN_OPTIONS_STYLES_NEWBIE : ActionStyles.SN_OPTIONS_STYLES;
+    ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
+    String menuText = isNewbie ? i18n.t("Options") : "";
+    String menuTooltip = isNewbie ? "" : i18n.t("Options");
+    String menuStyle = isNewbie ? ActionStyles.SN_OPTIONS_STYLES_NEWBIE : ActionStyles.SN_OPTIONS_STYLES;
     optionsMenu.withText(menuText).withToolTip(menuTooltip).withIcon(icon).withStyles(menuStyle);
     final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
         SocialNetworkVisibility.anyone);
@@ -107,13 +107,12 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     closedItem.withParent(moderationSubMenu).withText(i18n.t("closed for new members"));
 
     final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
-    // final ButtonDescriptor unJoinBtn = new
-    // ButtonDescriptor(unJoinGroupAction);
+    final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);
     // final ButtonDescriptor addMemberBtn = new
     // ButtonDescriptor(addEntityToThisGroupAction);
     // unJoinBtn.add(isLoggedCondition);
     addImpl(joinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
-    // addImpl(unJoinBtn); //
+    addImpl(unJoinBtn); //
     // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
     // addImpl(addMemberBtn);
 
