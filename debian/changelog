@@ -1,3 +1,13 @@
+kune (0.2.0+b29) unstable; urgency=low
+
+  * Updated wave code with some fixes and improvements (sync deadlock, websocket
+    presented, etc)
+  * Updated translations and added Hungarian
+  * Minor fix in C3P0 preferences
+  * Minor fix in i18n translations
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 02 Oct 2012 13:24:21 +0200
+
 kune (0.2.0+b28) unstable; urgency=low
 
   * Added BreadCrumbs to GroupSpace in Inbox (fix #359)
