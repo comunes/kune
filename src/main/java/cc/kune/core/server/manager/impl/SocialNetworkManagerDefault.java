@@ -92,6 +92,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (pendingCollabs.contains(group)) {
       sn.addCollaborator(group);
       sn.removePendingCollaborator(group);
+      snCache.expire(group);
       snCache.expire(inGroup);
     } else {
       throw new DefaultException("User is not a pending collaborator");
@@ -122,6 +123,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (sn.isPendingCollab(group)) {
       sn.removePendingCollaborator(group);
     }
+    snCache.expire(group);
     snCache.expire(inGroup);
   }
 
@@ -136,6 +138,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (sn.isPendingCollab(group)) {
       sn.removePendingCollaborator(group);
     }
+    snCache.expire(group);
     snCache.expire(inGroup);
   }
 
@@ -150,6 +153,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (sn.isPendingCollab(group)) {
       sn.removePendingCollaborator(group);
     }
+    snCache.expire(group);
     snCache.expire(inGroup);
   }
 
@@ -180,6 +184,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     checkUserLoggedIsAdmin(userLogged, sn);
     unJoinGroup(group, inGroup);
+    snCache.expire(group);
     snCache.expire(inGroup);
   }
 
@@ -194,6 +199,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     } else {
       throw new DefaultException("Person/Group is not a pending collaborator");
     }
+    snCache.expire(group);
     snCache.expire(inGroup);
   }
 
@@ -343,6 +349,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       } else {
         sn.addCollaborator(userGroup);
       }
+      snCache.expire(userLogged.getUserGroup());
       snCache.expire(inGroup);
       return SocialNetworkRequestResult.accepted;
     } else if (isClosed(admissionType)) {
@@ -363,6 +370,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       }
       sn.removeAdmin(group);
       sn.addCollaborator(group);
+      snCache.expire(group);
       snCache.expire(inGroup);
     } else {
       throw new InvalidSNOperationException("Person/Group is not an admin");
@@ -375,6 +383,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     final SocialNetwork sn = inGroup.getSocialNetwork();
     checkUserLoggedIsAdmin(userLogged, sn);
     if (sn.isCollab(group)) {
+      snCache.expire(group);
       snCache.expire(inGroup);
       sn.removeCollaborator(group);
       sn.addAdmin(group);
@@ -400,19 +409,18 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         if (sn.getAccessLists().getEditors().getList().size() > 0) {
           throw new LastAdminInGroupException();
         } else {
-          snCache.expire(inGroup);
           inGroup.setGroupType(GroupType.ORPHANED_PROJECT);
           inGroup.setAdmissionType(AdmissionType.Open);
         }
       }
-      snCache.expire(inGroup);
       sn.removeAdmin(groupToUnJoin);
     } else if (sn.isCollab(groupToUnJoin)) {
-      snCache.expire(inGroup);
       sn.removeCollaborator(groupToUnJoin);
     } else {
       throw new DefaultException("Person/Group is not a collaborator");
     }
+    snCache.expire(groupToUnJoin);
+    snCache.expire(inGroup);
   }
 
 }
