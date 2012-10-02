@@ -24,7 +24,11 @@ import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.UIException;
 
+import com.google.gwt.user.client.ui.MenuItemSeparator;
+
 public class GwtMenuSeparatorGui extends AbstractGuiItem {
+
+  private MenuItemSeparator separator;
 
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -34,12 +38,13 @@ public class GwtMenuSeparatorGui extends AbstractGuiItem {
       throw new UIException("To add a menu separator you need to add the menu before. Item: "
           + descriptor);
     }
-    menu.addSeparator();
+    separator = menu.addSeparator();
     return menu;
   }
 
   @Override
   protected void setEnabled(final boolean enabled) {
+    separator.setVisible(enabled);
   }
 
   @Override
@@ -56,6 +61,11 @@ public class GwtMenuSeparatorGui extends AbstractGuiItem {
 
   @Override
   protected void setText(final String text) {
+  }
+
+  @Override
+  public void setVisible(final boolean visible) {
+    separator.setVisible(visible);
   }
 
   @Override

@@ -333,6 +333,11 @@
   padding: 4px 4px 3px !important;
 }
 
+
+.gwt-MenuItem-disabled div, .k-menuimtem-title-disabled div {
+  color: grey;
+}
+
 .oc-noselect {
   -moz-user-select: none;
   -khtml-user-select: none;

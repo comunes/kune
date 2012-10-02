@@ -65,7 +65,7 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
 
   @Override
   public void setEnabled(final boolean enabled) {
-    item.setVisible(enabled);
+    item.setEnabled(enabled);
   }
 
   @Override

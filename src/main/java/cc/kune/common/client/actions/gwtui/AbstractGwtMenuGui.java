@@ -34,6 +34,7 @@ import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.MenuItemSeparator;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PopupPanel.PositionCallback;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -56,8 +57,8 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     menu.addItem((MenuItem) item);
   }
 
-  public void addSeparator() {
-    menu.addSeparator();
+  public MenuItemSeparator addSeparator() {
+    return menu.addSeparator();
   }
 
   @Override

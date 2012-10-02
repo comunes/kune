@@ -175,7 +175,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
   @Override
   protected void setEnabled(final boolean enabled) {
     item.setEnabled(enabled);
-    setVisible(enabled);
+    // setVisible(enabled);
   }
 
   @Override
