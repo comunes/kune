@@ -22,41 +22,41 @@ package cc.kune.core.server.manager;
 import java.util.List;
 
 public class SearchResult<T> {
-    List<T> list;
-    int size;
+  List<T> list;
+  int size;
 
-    public SearchResult() {
-        this(0, null);
-    }
+  public SearchResult() {
+    this(0, null);
+  }
 
-    public SearchResult(final int count, final List<T> list) {
-        this.list = list;
-        this.size = count;
-    }
+  public SearchResult(final int count, final List<T> list) {
+    this.list = list;
+    this.size = count;
+  }
 
-    public List<T> getList() {
-        return list;
-    }
+  public List<T> getList() {
+    return list;
+  }
 
-    /**
-     * Gets the size of total results (may differ from list size).
-     * 
-     * @return the size
-     */
-    public int getSize() {
-        return size;
-    }
+  /**
+   * Gets the size of total results (may differ from list size).
+   * 
+   * @return the size
+   */
+  public int getSize() {
+    return size;
+  }
 
-    public void setList(final List<T> list) {
-        this.list = list;
-    }
+  public void setList(final List<T> list) {
+    this.list = list;
+  }
 
-    public void setSize(final int size) {
-        this.size = size;
-    }
+  public void setSize(final int size) {
+    this.size = size;
+  }
 
-    @Override
-    public String toString() {
-        return "SearchResult[(" + getSize() + "): " + list + "]";
-    }
+  @Override
+  public String toString() {
+    return "SearchResult[(" + getSize() + "): " + list + "]";
+  }
 }

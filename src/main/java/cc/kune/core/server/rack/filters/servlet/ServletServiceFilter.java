@@ -35,28 +35,28 @@ import cc.kune.core.server.rack.filters.AbstractInjectedFilter;
 import cc.kune.core.server.rack.utils.RackHelper;
 
 public class ServletServiceFilter extends AbstractInjectedFilter {
-    Log log = LogFactory.getLog(ServletServiceFilter.class);
-    private final Class<? extends HttpServlet> servletClass;
+  Log log = LogFactory.getLog(ServletServiceFilter.class);
+  private final Class<? extends HttpServlet> servletClass;
 
-    public ServletServiceFilter(final Class<? extends HttpServlet> servletClass) {
-        this.servletClass = servletClass;
-    }
+  public ServletServiceFilter(final Class<? extends HttpServlet> servletClass) {
+    this.servletClass = servletClass;
+  }
 
-    @Override
-    public void destroy() {
-    }
+  @Override
+  public void destroy() {
+  }
 
-    @Override
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-            throws IOException, ServletException {
-        log.debug("SERVICE: " + RackHelper.getURI(request) + " - " + servletClass.getSimpleName());
-        final HttpServlet servlet = getInstance(servletClass);
-        servlet.service(request, response);
-    }
+  @Override
+  public void doFilter(final ServletRequest request, final ServletResponse response,
+      final FilterChain chain) throws IOException, ServletException {
+    log.debug("SERVICE: " + RackHelper.getURI(request) + " - " + servletClass.getSimpleName());
+    final HttpServlet servlet = getInstance(servletClass);
+    servlet.service(request, response);
+  }
 
-    @Override
-    public void init(final FilterConfig filterConfig) throws ServletException {
-        super.init(filterConfig);
-    }
+  @Override
+  public void init(final FilterConfig filterConfig) throws ServletException {
+    super.init(filterConfig);
+  }
 
 }

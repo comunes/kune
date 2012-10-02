@@ -27,12 +27,12 @@ import cc.kune.domain.User;
 
 public interface TagUserContentManager extends Manager<TagUserContent, Long> {
 
-    TagCloudResult getTagCloudResultByGroup(Group group);
+  TagCloudResult getTagCloudResultByGroup(Group group);
 
-    String getTagsAsString(User user, Content content);
+  String getTagsAsString(User user, Content content);
 
-    void remove(User user, Content content);
+  void remove(User user, Content content);
 
-    void setTags(User user, Content content, String tags);
+  void setTags(User user, Content content, String tags);
 
 }

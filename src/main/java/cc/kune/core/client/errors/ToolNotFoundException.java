@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class ToolNotFoundException extends DefaultException {
-    private static final long serialVersionUID = 472511647264356558L;
+  private static final long serialVersionUID = 472511647264356558L;
 }

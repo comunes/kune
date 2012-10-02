@@ -24,9 +24,9 @@ package cc.kune.common.client.actions;
  */
 public class NoAction extends AbstractExtendedAction {
 
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-        // Do nothing
-    }
+  @Override
+  public void actionPerformed(final ActionEvent event) {
+    // Do nothing
+  }
 
 }

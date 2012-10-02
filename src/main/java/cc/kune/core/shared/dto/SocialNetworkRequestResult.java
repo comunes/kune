@@ -22,5 +22,5 @@ package cc.kune.core.shared.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum SocialNetworkRequestResult implements IsSerializable {
-    accepted, denied, moderated
+  accepted, denied, moderated
 }

@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class NameInUseException extends DefaultException {
-    private static final long serialVersionUID = 4890594846432830537L;
+  private static final long serialVersionUID = 4890594846432830537L;
 }

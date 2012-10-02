@@ -19,7 +19,6 @@
  */
 package cc.kune.core.shared.dto;
 
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserDTO implements IsSerializable {

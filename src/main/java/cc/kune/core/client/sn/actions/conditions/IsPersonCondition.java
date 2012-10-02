@@ -30,17 +30,17 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsPersonCondition implements GuiAddCondition {
 
-    @Inject
-    public IsPersonCondition() {
-    }
+  @Inject
+  public IsPersonCondition() {
+  }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
 
-        final Object target = descr.getTarget();
-        if (target instanceof UserSimpleDTO) {
-            return true;
-        }
-        return (((GroupDTO) target).isPersonal());
+    final Object target = descr.getTarget();
+    if (target instanceof UserSimpleDTO) {
+      return true;
     }
+    return (((GroupDTO) target).isPersonal());
+  }
 }

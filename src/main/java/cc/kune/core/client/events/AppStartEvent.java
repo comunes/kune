@@ -24,7 +24,7 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> { 
+public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
 
   public interface HasAppStartHandlers extends HasHandlers {
     HandlerRegistration addAppStartHandler(AppStartHandler handler);
@@ -67,10 +67,8 @@ public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
   @Override
   public boolean equals(Object other) {
     if (other != null && other.getClass().equals(this.getClass())) {
-          AppStartEvent o = (AppStartEvent) other;
-      return true
-          && ((o.initData == null && this.initData == null) || (o.initData != null && o.initData.equals(this.initData)))
-        ;
+      AppStartEvent o = (AppStartEvent) other;
+      return true && ((o.initData == null && this.initData == null) || (o.initData != null && o.initData.equals(this.initData)));
     }
     return false;
   }
@@ -85,9 +83,7 @@ public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
 
   @Override
   public String toString() {
-    return "AppStartEvent["
-                 + initData
-    + "]";
+    return "AppStartEvent[" + initData + "]";
   }
 
 }

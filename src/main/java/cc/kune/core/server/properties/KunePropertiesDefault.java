@@ -68,7 +68,7 @@ public class KunePropertiesDefault implements KuneProperties {
 
   @Override
   public boolean has(final String key) {
-    return config.getString(key) != null ;
+    return config.getString(key) != null;
   }
 
   @Override

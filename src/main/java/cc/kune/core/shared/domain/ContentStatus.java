@@ -22,5 +22,5 @@ package cc.kune.core.shared.domain;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum ContentStatus implements IsSerializable {
-    editingInProgress, submittedForEvaluation, publishedOnline, rejected, inTheDustbin
+  editingInProgress, submittedForEvaluation, publishedOnline, rejected, inTheDustbin
 }

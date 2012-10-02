@@ -83,8 +83,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final NewMenusForTypeIdsRegistry newMenusRegistry, final WikiFolderNewMenu folderNewMenu,
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
-      final Provider<MoveContentMenuItem> moveContentMenuItem,
-      final WikiPageNewMenu wikipageNewMenu) {
+      final Provider<MoveContentMenuItem> moveContentMenuItem, final WikiPageNewMenu wikipageNewMenu) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);

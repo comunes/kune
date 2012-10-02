@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import com.google.gwt.event.shared.HasHandlers;
 
-public class SetBackgroundImageEvent extends GwtEvent<SetBackgroundImageEvent.SetBackgroundImageHandler> { 
+public class SetBackgroundImageEvent extends GwtEvent<SetBackgroundImageEvent.SetBackgroundImageHandler> {
 
   public interface HasSetBackgroundImageHandlers extends HasHandlers {
     HandlerRegistration addSetBackImageHandler(SetBackgroundImageHandler handler);
@@ -72,11 +72,11 @@ public class SetBackgroundImageEvent extends GwtEvent<SetBackgroundImageEvent.Se
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
-        return true;
+      return true;
     if (obj == null)
-        return false;
+      return false;
     if (getClass() != obj.getClass())
-        return false;
+      return false;
     SetBackgroundImageEvent other = (SetBackgroundImageEvent) obj;
     if (token == null) {
       if (other.token != null)
@@ -95,8 +95,6 @@ public class SetBackgroundImageEvent extends GwtEvent<SetBackgroundImageEvent.Se
 
   @Override
   public String toString() {
-    return "SetBackImageEvent["
-                 + token
-    + "]";
+    return "SetBackImageEvent[" + token + "]";
   }
 }

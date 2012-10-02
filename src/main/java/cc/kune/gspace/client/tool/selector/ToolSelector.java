@@ -21,6 +21,6 @@ package cc.kune.gspace.client.tool.selector;
 
 public interface ToolSelector {
 
-    void addTool(ToolSelectorItem item);
+  void addTool(ToolSelectorItem item);
 
 }

@@ -19,16 +19,15 @@
  */
 package cc.kune.common.client.events;
 
-
 import cc.kune.common.client.log.Log;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.SimpleEventBus;
 
 public class EventBusWithLogging extends SimpleEventBus {
-    @Override
-    public void fireEvent(final GwtEvent<?> event) {
-        Log.debug(event.toDebugString() + " " + event.toString());
-        super.fireEvent(event);
-    }
+  @Override
+  public void fireEvent(final GwtEvent<?> event) {
+    Log.debug(event.toDebugString() + " " + event.toString());
+    super.fireEvent(event);
+  }
 }

@@ -35,24 +35,24 @@ import com.gwtplatform.mvp.client.ViewImpl;
  */
 public class CoreViewImpl extends ViewImpl implements CorePresenter.CoreView {
 
-    private final GSpaceArmorDefault armor;
+  private final GSpaceArmorDefault armor;
 
-    /**
-     * Instantiates a new core view.
-     * 
-     * @param armor
-     *            the body
-     */
-    @Inject
-    public CoreViewImpl(final GSpaceArmorDefault armor, final StateManagerDefault stateManager) {
-        this.armor = armor;
-        GWT.<CoreResources> create(CoreResources.class).css().ensureInjected();
-        GWT.<GSpaceArmorResources> create(GSpaceArmorResources.class).style().ensureInjected();
-        History.addValueChangeHandler(stateManager);
-    }
+  /**
+   * Instantiates a new core view.
+   * 
+   * @param armor
+   *          the body
+   */
+  @Inject
+  public CoreViewImpl(final GSpaceArmorDefault armor, final StateManagerDefault stateManager) {
+    this.armor = armor;
+    GWT.<CoreResources> create(CoreResources.class).css().ensureInjected();
+    GWT.<GSpaceArmorResources> create(GSpaceArmorResources.class).style().ensureInjected();
+    History.addValueChangeHandler(stateManager);
+  }
 
-    @Override
-    public Widget asWidget() {
-        return armor;
-    }
+  @Override
+  public Widget asWidget() {
+    return armor;
+  }
 }

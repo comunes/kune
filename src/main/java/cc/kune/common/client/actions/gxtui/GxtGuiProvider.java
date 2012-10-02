@@ -39,26 +39,27 @@ import com.google.inject.Provider;
 
 public class GxtGuiProvider {
 
-    @Inject
-    public GxtGuiProvider(final GuiProvider guiProvider, final Provider<GxtSubMenuGui> gxtSubMenuGui,
-            final Provider<GxtMenuGui> gxtMenuGui, final Provider<GxtMenuItemGui> gxtMenuItemGui,
-            final Provider<GxtMenuSeparatorGui> gxtMenuSeparatorGui, final Provider<GxtPushButtonGui> gxtPushButtonGui,
-            final Provider<GxtButtonGui> gxtButtonGui, final Provider<GwtIconLabelGui> gwtIconLabelGui,
-            final Provider<GxtToolbarGui> gxtToolbarGui, final Provider<GxtToolbarSeparatorGui> gxtToolbarSeparatorGui,
-            final Provider<GxtMenuTitleItemGui> gxtMenuTitleItemGui) {
+  @Inject
+  public GxtGuiProvider(final GuiProvider guiProvider, final Provider<GxtSubMenuGui> gxtSubMenuGui,
+      final Provider<GxtMenuGui> gxtMenuGui, final Provider<GxtMenuItemGui> gxtMenuItemGui,
+      final Provider<GxtMenuSeparatorGui> gxtMenuSeparatorGui,
+      final Provider<GxtPushButtonGui> gxtPushButtonGui, final Provider<GxtButtonGui> gxtButtonGui,
+      final Provider<GwtIconLabelGui> gwtIconLabelGui, final Provider<GxtToolbarGui> gxtToolbarGui,
+      final Provider<GxtToolbarSeparatorGui> gxtToolbarSeparatorGui,
+      final Provider<GxtMenuTitleItemGui> gxtMenuTitleItemGui) {
 
-        guiProvider.register(SubMenuDescriptor.class, gxtSubMenuGui);
-        guiProvider.register(MenuDescriptor.class, gxtMenuGui);
-        guiProvider.register(MenuRadioItemDescriptor.class, gxtMenuItemGui);
-        guiProvider.register(MenuCheckItemDescriptor.class, gxtMenuItemGui);
-        guiProvider.register(MenuTitleItemDescriptor.class, gxtMenuTitleItemGui);
-        guiProvider.register(MenuItemDescriptor.class, gxtMenuItemGui);
-        guiProvider.register(MenuSeparatorDescriptor.class, gxtMenuSeparatorGui);
-        guiProvider.register(PushButtonDescriptor.class, gxtPushButtonGui);
-        guiProvider.register(ButtonDescriptor.class, gxtButtonGui);
-        guiProvider.register(IconLabelDescriptor.class, gwtIconLabelGui);
-        guiProvider.register(ToolbarDescriptor.class, gxtToolbarGui);
-        guiProvider.register(ToolbarSeparatorDescriptor.class, gxtToolbarSeparatorGui);
+    guiProvider.register(SubMenuDescriptor.class, gxtSubMenuGui);
+    guiProvider.register(MenuDescriptor.class, gxtMenuGui);
+    guiProvider.register(MenuRadioItemDescriptor.class, gxtMenuItemGui);
+    guiProvider.register(MenuCheckItemDescriptor.class, gxtMenuItemGui);
+    guiProvider.register(MenuTitleItemDescriptor.class, gxtMenuTitleItemGui);
+    guiProvider.register(MenuItemDescriptor.class, gxtMenuItemGui);
+    guiProvider.register(MenuSeparatorDescriptor.class, gxtMenuSeparatorGui);
+    guiProvider.register(PushButtonDescriptor.class, gxtPushButtonGui);
+    guiProvider.register(ButtonDescriptor.class, gxtButtonGui);
+    guiProvider.register(IconLabelDescriptor.class, gwtIconLabelGui);
+    guiProvider.register(ToolbarDescriptor.class, gxtToolbarGui);
+    guiProvider.register(ToolbarSeparatorDescriptor.class, gxtToolbarSeparatorGui);
 
-    }
+  }
 }

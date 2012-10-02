@@ -91,7 +91,8 @@ public class SitebarSearchPresenter extends
       @Override
       public void run() {
         getView().setTextSearchSmall();
-      }};
+      }
+    };
   }
 
   private void doSearch() {

@@ -32,7 +32,8 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
- * The Class UserSignInLogManagerDefault manages the table of user signin records
+ * The Class UserSignInLogManagerDefault manages the table of user signin
+ * records
  */
 @Singleton
 public class UserSignInLogManagerDefault extends DefaultManager<UserSignInLog, Long> implements
@@ -40,16 +41,21 @@ public class UserSignInLogManagerDefault extends DefaultManager<UserSignInLog, L
 
   /**
    * Instantiates a new user sign in log manager default.
-   *
-   * @param provider the provider
+   * 
+   * @param provider
+   *          the provider
    */
   @Inject
   public UserSignInLogManagerDefault(@DataSourceKune Provider<EntityManager> provider) {
     super(provider, UserSignInLog.class);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.UserSignInLogManager#log(cc.kune.domain.User, java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.UserSignInLogManager#log(cc.kune.domain.User,
+   * java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
    */
   public void log(User user, String ipAddress, String userAgent, String hash) {
     UserSignInLog logRegister = new UserSignInLog(user, ipAddress, userAgent, hash);

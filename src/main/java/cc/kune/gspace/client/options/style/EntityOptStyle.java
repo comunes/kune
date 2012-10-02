@@ -19,6 +19,5 @@
  */
 package cc.kune.gspace.client.options.style;
 
-
 public interface EntityOptStyle {
 }

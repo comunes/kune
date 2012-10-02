@@ -23,7 +23,7 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 
 public class TaskServerModule implements Module {
-    public void configure(final Binder binder) {
-        binder.bind(TaskServerTool.class).asEagerSingleton();
-    }
+  public void configure(final Binder binder) {
+    binder.bind(TaskServerTool.class).asEagerSingleton();
+  }
 }

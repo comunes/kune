@@ -25,7 +25,8 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import com.google.gwt.event.shared.HasHandlers;
 
-public class ClearBackgroundImageEvent extends GwtEvent<ClearBackgroundImageEvent.ClearBackgroundImageHandler> {
+public class ClearBackgroundImageEvent extends
+    GwtEvent<ClearBackgroundImageEvent.ClearBackgroundImageHandler> {
 
   public interface HasClearBackgroundImageHandlers extends HasHandlers {
     HandlerRegistration addClearBackImageHandler(ClearBackgroundImageHandler handler);
@@ -44,7 +45,6 @@ public class ClearBackgroundImageEvent extends GwtEvent<ClearBackgroundImageEven
   public static Type<ClearBackgroundImageHandler> getType() {
     return TYPE;
   }
-
 
   public ClearBackgroundImageEvent() {
   }

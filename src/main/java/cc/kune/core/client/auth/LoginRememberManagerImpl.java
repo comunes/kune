@@ -36,8 +36,8 @@ public class LoginRememberManagerImpl implements LoginRememberManager {
   private static final String VALUE = "value";
 
   public static native String getElementValue(String domId) /*-{
-		return $doc.getElementById(domId).value;
-  }-*/;
+                                                            return $doc.getElementById(domId).value;
+                                                            }-*/;
 
   /**
    * login.submit() only works in FF // $doc.getElementById("login").submit();
@@ -47,8 +47,8 @@ public class LoginRememberManagerImpl implements LoginRememberManager {
    */
   @Override
   public native void clickFormLogin() /*-{
-		$doc.getElementById("login").submit();
-  }-*/;
+                                      $doc.getElementById("login").submit();
+                                      }-*/;
 
   // $doc.getElementById("loginsubmit").click();
 

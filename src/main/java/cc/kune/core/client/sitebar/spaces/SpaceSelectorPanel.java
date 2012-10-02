@@ -66,8 +66,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
     final String siteCommonName = i18n.getSiteCommonName();
     homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in [%s]", siteCommonName)
         + " (Alt+H)");
-    userSpaceTooltip = Tooltip.to(
-        userButton,
+    userSpaceTooltip = Tooltip.to(userButton,
         i18n.t("Inbox: it shows a list of all documents and contents " + "in which you participate")
             + " (Alt+I)");
     groupSpaceTooltip = Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "

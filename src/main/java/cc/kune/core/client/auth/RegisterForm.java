@@ -51,10 +51,10 @@ public class RegisterForm extends DefaultForm {
     longNameRegField = userFieldFactory.createUserLongName(LONGNAME_FIELD);
     longNameRegField.setTabIndex(1);
     add(longNameRegField);
-    
+
     shortNameRegField = userFieldFactory.createUserShortName(NICK_FIELD);
     shortNameRegField.setTabIndex(2);
-    add(shortNameRegField);   
+    add(shortNameRegField);
 
     passwdRegField = userFieldFactory.createUserPasswd(PASSWORD_FIELD, i18n.t("Password"));
     passwdRegField.setTabIndex(3);

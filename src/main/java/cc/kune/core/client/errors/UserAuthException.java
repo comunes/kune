@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class UserAuthException extends DefaultException {
-    private static final long serialVersionUID = -8383513776573054971L;
+  private static final long serialVersionUID = -8383513776573054971L;
 }

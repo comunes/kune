@@ -38,10 +38,10 @@ public class WebSocketChecker {
   /**
    * This class checks if the browser supports websockets and give some advices
    * to the user.
-   *
+   * 
    * This can be tested in firefox setting network.websocket.enabled;false in
    * about:config
-   *
+   * 
    * @param session
    *          the session
    * @param res

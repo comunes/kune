@@ -22,50 +22,50 @@ package cc.kune.common.client.utils;
 import com.google.gwt.user.client.Timer;
 
 public class TimerWrapper {
-    public interface Executer {
-        /**
-         * Invokes the execute.
-         */
-        void execute();
-    }
+  public interface Executer {
+    /**
+     * Invokes the execute.
+     */
+    void execute();
+  }
 
-    private boolean isScheduled;
-    private Timer timer;
+  private boolean isScheduled;
+  private Timer timer;
 
-    public TimerWrapper() {
+  public TimerWrapper() {
+    isScheduled = false;
+  }
+
+  public void cancel() {
+    isScheduled = false;
+    timer.cancel();
+  }
+
+  public void configure(final Executer onTime) {
+    timer = new Timer() {
+      @Override
+      public void run() {
         isScheduled = false;
-    }
+        onTime.execute();
+      }
+    };
+  }
 
-    public void cancel() {
-        isScheduled = false;
-        timer.cancel();
-    }
+  public boolean isScheduled() {
+    return isScheduled;
+  }
 
-    public void configure(final Executer onTime) {
-        timer = new Timer() {
-            @Override
-            public void run() {
-                isScheduled = false;
-                onTime.execute();
-            }
-        };
-    }
+  public void run() {
+    timer.run();
+  }
 
-    public boolean isScheduled() {
-        return isScheduled;
-    }
+  public void schedule(final int delayMillis) {
+    isScheduled = true;
+    timer.schedule(delayMillis);
+  }
 
-    public void run() {
-        timer.run();
-    }
-
-    public void schedule(final int delayMillis) {
-        isScheduled = true;
-        timer.schedule(delayMillis);
-    }
-
-    public void scheduleRepeating(final int delayMillis) {
-        isScheduled = true;
-        timer.scheduleRepeating(delayMillis);
-    }
+  public void scheduleRepeating(final int delayMillis) {
+    isScheduled = true;
+    timer.scheduleRepeating(delayMillis);
+  }
 }

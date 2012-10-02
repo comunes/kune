@@ -29,12 +29,12 @@ import com.google.inject.Inject;
 
 public class TagUserContentFinderTest extends PersistencePreLoadedDataTest {
 
-    @Inject
-    TagUserContentFinder tag;
+  @Inject
+  TagUserContentFinder tag;
 
-    @Test(expected = NoResultException.class)
-    public void testNoTags() {
-        tag.getTagsGroups(groupManager.getSiteDefaultGroup());
-    }
+  @Test(expected = NoResultException.class)
+  public void testNoTags() {
+    tag.getTagsGroups(groupManager.getSiteDefaultGroup());
+  }
 
 }

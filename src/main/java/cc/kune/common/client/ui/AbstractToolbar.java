@@ -24,30 +24,30 @@ import com.google.gwt.user.client.ui.Widget;
 
 public interface AbstractToolbar {
 
-    void add(final Widget widget);
+  void add(final Widget widget);
 
-    void add(final Widget widget, VerticalAlignmentConstant valign);
+  void add(final Widget widget, VerticalAlignmentConstant valign);
 
-    Widget addFill();
+  Widget addFill();
 
-    Widget addSeparator();
+  Widget addSeparator();
 
-    Widget addSpacer();
+  Widget addSpacer();
 
-    int getOffsetHeight();
+  int getOffsetHeight();
 
-    void insert(final Widget widget, int position);
+  void insert(final Widget widget, int position);
 
-    boolean isAttached();
+  boolean isAttached();
 
-    boolean remove(final Widget widget);
+  boolean remove(final Widget widget);
 
-    void removeAll();
+  void removeAll();
 
-    void setBlankStyle();
+  void setBlankStyle();
 
-    void setHeight(String height);
+  void setHeight(String height);
 
-    void setNormalStyle();
+  void setNormalStyle();
 
 }

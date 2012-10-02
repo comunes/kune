@@ -37,6 +37,7 @@ public class BartersParts {
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
     viewerSelector.register(contentViewer, true, BartersToolConstants.TYPE_BARTER);
-    viewerSelector.register(folderViewer, true, BartersToolConstants.TYPE_ROOT, BartersToolConstants.TYPE_FOLDER);
+    viewerSelector.register(folderViewer, true, BartersToolConstants.TYPE_ROOT,
+        BartersToolConstants.TYPE_FOLDER);
   }
 }

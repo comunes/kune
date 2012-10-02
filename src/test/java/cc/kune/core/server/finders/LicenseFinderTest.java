@@ -36,68 +36,68 @@ import cc.kune.domain.finders.LicenseFinder;
 import com.google.inject.Inject;
 
 public class LicenseFinderTest extends PersistenceTest {
-    @Inject
-    LicenseFinder finder;
-    private License license1;
-    private License license2;
-    private License licenseDef;
-    @Inject
-    KuneBasicProperties properties;
+  @Inject
+  LicenseFinder finder;
+  private License license1;
+  private License license2;
+  private License licenseDef;
+  @Inject
+  KuneBasicProperties properties;
 
-    @Before
-    public void addData() {
-        openTransaction();
-        licenseDef = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "",
-                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-        persist(licenseDef);
-        license1 = new License("by-nc-nd-v3.0", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
-                "http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", "");
-        persist(license1);
-        license2 = new License("gfdl-v1.3", "GNU Free Documentation License", "",
-                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", "");
-        persist(license2);
-    }
+  @Before
+  public void addData() {
+    openTransaction();
+    licenseDef = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "",
+        "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
+    persist(licenseDef);
+    license1 = new License("by-nc-nd-v3.0", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
+        "http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", "");
+    persist(license1);
+    license2 = new License("gfdl-v1.3", "GNU Free Documentation License", "",
+        "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", "");
+    persist(license2);
+  }
 
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
+  @After
+  public void close() {
+    if (getTransaction().isActive()) {
+      getTransaction().rollback();
     }
+  }
 
-    @Test
-    public void findAll() {
-        final List<License> all = finder.getAll();
-        assertEquals(3, all.size());
-    }
+  @Test
+  public void findAll() {
+    final List<License> all = finder.getAll();
+    assertEquals(3, all.size());
+  }
 
-    @Test
-    public void findById() {
-        final License lic = finder.findByShortName(license1.getShortName());
-        assertNotNull(lic);
-        assertEquals(license1.getShortName(), lic.getShortName());
-        assertEquals(license1.getLongName(), lic.getLongName());
-    }
+  @Test
+  public void findById() {
+    final License lic = finder.findByShortName(license1.getShortName());
+    assertNotNull(lic);
+    assertEquals(license1.getShortName(), lic.getShortName());
+    assertEquals(license1.getLongName(), lic.getLongName());
+  }
 
-    @Test
-    public void findCC() {
-        final List<License> cc = finder.getCC();
-        assertEquals(2, cc.size());
-    }
+  @Test
+  public void findCC() {
+    final List<License> cc = finder.getCC();
+    assertEquals(2, cc.size());
+  }
 
-    @Test
-    public void findDefaultLicense() {
-        final String licenseDefId = properties.getDefaultLicense();
-        final License lic = finder.findByShortName(licenseDefId);
-        assertNotNull(lic);
-        assertEquals(licenseDef.getShortName(), lic.getShortName());
-        assertEquals(licenseDef.getLongName(), lic.getLongName());
-    }
+  @Test
+  public void findDefaultLicense() {
+    final String licenseDefId = properties.getDefaultLicense();
+    final License lic = finder.findByShortName(licenseDefId);
+    assertNotNull(lic);
+    assertEquals(licenseDef.getShortName(), lic.getShortName());
+    assertEquals(licenseDef.getLongName(), lic.getLongName());
+  }
 
-    @Test
-    public void findNotCC() {
-        final List<License> notCc = finder.getNotCC();
-        assertEquals(1, notCc.size());
-    }
+  @Test
+  public void findNotCC() {
+    final List<License> notCc = finder.getNotCC();
+    assertEquals(1, notCc.size());
+  }
 
 }

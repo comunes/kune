@@ -287,7 +287,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private void waveClear() {
     if (!onlyWebClient) {
-    WaveClientUtils.clear(wave, waveHolder, waveHolderParent);
+      WaveClientUtils.clear(wave, waveHolder, waveHolderParent);
     }
   }
 

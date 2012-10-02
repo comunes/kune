@@ -23,7 +23,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 /**
  * A item can be both a container or a content
- *
+ * 
  */
 public class ContainerSimpleDTO extends AbstractContentSimpleDTO {
   private String name;

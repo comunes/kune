@@ -38,21 +38,21 @@ import com.google.inject.persist.jpa.JpaPersistModule;
 
 public class FinderRegistry {
 
-    public static Module init(final JpaPersistModule jpaPersistModule) {
-        jpaPersistModule.addFinder(ContainerFinder.class);
-        jpaPersistModule.addFinder(ContentFinder.class);
-        jpaPersistModule.addFinder(ExtMediaDescripFinder.class);
-        jpaPersistModule.addFinder(GroupFinder.class);
-        jpaPersistModule.addFinder(I18nCountryFinder.class);
-        jpaPersistModule.addFinder(I18nLanguageFinder.class);
-        jpaPersistModule.addFinder(I18nTranslationFinder.class);
-        jpaPersistModule.addFinder(LicenseFinder.class);
-        jpaPersistModule.addFinder(RateFinder.class);
-        jpaPersistModule.addFinder(TagFinder.class);
-        jpaPersistModule.addFinder(TagUserContentFinder.class);
-        jpaPersistModule.addFinder(UserFinder.class);
-        jpaPersistModule.addFinder(UserSignInLogFinder.class);
-        return jpaPersistModule;
-    }
+  public static Module init(final JpaPersistModule jpaPersistModule) {
+    jpaPersistModule.addFinder(ContainerFinder.class);
+    jpaPersistModule.addFinder(ContentFinder.class);
+    jpaPersistModule.addFinder(ExtMediaDescripFinder.class);
+    jpaPersistModule.addFinder(GroupFinder.class);
+    jpaPersistModule.addFinder(I18nCountryFinder.class);
+    jpaPersistModule.addFinder(I18nLanguageFinder.class);
+    jpaPersistModule.addFinder(I18nTranslationFinder.class);
+    jpaPersistModule.addFinder(LicenseFinder.class);
+    jpaPersistModule.addFinder(RateFinder.class);
+    jpaPersistModule.addFinder(TagFinder.class);
+    jpaPersistModule.addFinder(TagUserContentFinder.class);
+    jpaPersistModule.addFinder(UserFinder.class);
+    jpaPersistModule.addFinder(UserSignInLogFinder.class);
+    return jpaPersistModule;
+  }
 
 }

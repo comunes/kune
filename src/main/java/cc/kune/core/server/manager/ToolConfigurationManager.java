@@ -22,5 +22,5 @@ package cc.kune.core.server.manager;
 import cc.kune.domain.ToolConfiguration;
 
 public interface ToolConfigurationManager extends Manager<ToolConfiguration, Long> {
-    ToolConfiguration persist(ToolConfiguration config);
+  ToolConfiguration persist(ToolConfiguration config);
 }

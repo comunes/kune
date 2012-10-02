@@ -37,7 +37,8 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   private static final Type<GSpaceThemeChangeHandler> TYPE = new Type<GSpaceThemeChangeHandler>();
 
-  public static void fire(HasHandlers source, cc.kune.core.shared.dto.GSpaceTheme oldTheme, cc.kune.core.shared.dto.GSpaceTheme newTheme) {
+  public static void fire(HasHandlers source, cc.kune.core.shared.dto.GSpaceTheme oldTheme,
+      cc.kune.core.shared.dto.GSpaceTheme newTheme) {
     source.fireEvent(new GSpaceThemeChangeEvent(oldTheme, newTheme));
   }
 
@@ -48,7 +49,8 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
   cc.kune.core.shared.dto.GSpaceTheme oldTheme;
   cc.kune.core.shared.dto.GSpaceTheme newTheme;
 
-  public GSpaceThemeChangeEvent(cc.kune.core.shared.dto.GSpaceTheme oldTheme, cc.kune.core.shared.dto.GSpaceTheme newTheme) {
+  public GSpaceThemeChangeEvent(cc.kune.core.shared.dto.GSpaceTheme oldTheme,
+      cc.kune.core.shared.dto.GSpaceTheme newTheme) {
     this.oldTheme = oldTheme;
     this.newTheme = newTheme;
   }
@@ -78,11 +80,11 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
-        return true;
+      return true;
     if (obj == null)
-        return false;
+      return false;
     if (getClass() != obj.getClass())
-        return false;
+      return false;
     GSpaceThemeChangeEvent other = (GSpaceThemeChangeEvent) obj;
     if (oldTheme == null) {
       if (other.oldTheme != null)
@@ -107,10 +109,6 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   @Override
   public String toString() {
-    return "GsThemeChangeEvent["
-                 + oldTheme
-                 + ","
-                 + newTheme
-    + "]";
+    return "GsThemeChangeEvent[" + oldTheme + "," + newTheme + "]";
   }
 }

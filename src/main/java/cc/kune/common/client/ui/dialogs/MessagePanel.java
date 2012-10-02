@@ -37,47 +37,47 @@ import com.google.inject.Inject;
 
 public class MessagePanel extends Composite implements MessagePanelView {
 
-    interface MessagePanelUiBinder extends UiBinder<Widget, MessagePanel> {
-    }
-    private static MessagePanelUiBinder uiBinder = GWT.create(MessagePanelUiBinder.class);
-    @UiField
-    Label description;
-    @UiField
-    FlowPanel flowPanel;
-    @UiField
-    Image icon;
-    private final NotifyLevelImages images;
-    @UiField
-    DockLayoutPanel mainPanel;
-    @UiField
-    Label title;
+  interface MessagePanelUiBinder extends UiBinder<Widget, MessagePanel> {
+  }
+  private static MessagePanelUiBinder uiBinder = GWT.create(MessagePanelUiBinder.class);
+  @UiField
+  Label description;
+  @UiField
+  FlowPanel flowPanel;
+  @UiField
+  Image icon;
+  private final NotifyLevelImages images;
+  @UiField
+  DockLayoutPanel mainPanel;
+  @UiField
+  Label title;
 
-    @Inject
-    public MessagePanel(final NotifyLevelImages images, final String errorLabelId) {
-        this.images = images;
-        initWidget(uiBinder.createAndBindUi(this));
-        description.ensureDebugId(errorLabelId);
-    }
+  @Inject
+  public MessagePanel(final NotifyLevelImages images, final String errorLabelId) {
+    this.images = images;
+    initWidget(uiBinder.createAndBindUi(this));
+    description.ensureDebugId(errorLabelId);
+  }
 
-    @Override
-    public IsWidget getPanel() {
-        return this;
-    }
+  @Override
+  public IsWidget getPanel() {
+    return this;
+  }
 
-    @Override
-    public void hideErrorMessage() {
-        icon.setVisible(false);
-        title.setText("");
-        description.setText("");
-        this.setVisible(false);
-    }
+  @Override
+  public void hideErrorMessage() {
+    icon.setVisible(false);
+    title.setText("");
+    description.setText("");
+    this.setVisible(false);
+  }
 
-    @Override
-    public void setErrorMessage(final String message, final NotifyLevel level) {
-        description.setText(message);
-        final ImageResource resource = images.getImage(level);
-        icon.setResource(resource);
-        icon.setVisible(true);
-        this.setVisible(true);
-    }
+  @Override
+  public void setErrorMessage(final String message, final NotifyLevel level) {
+    description.setText(message);
+    final ImageResource resource = images.getImage(level);
+    icon.setResource(resource);
+    icon.setVisible(true);
+    this.setVisible(true);
+  }
 }

@@ -58,7 +58,8 @@ public class ContentCapabilitiesRegistry {
       final VersionableRegistry versionable, final EmptyMessagesRegistry emptyMessagesRegistry,
       final EmptyMessagesRegistry emptyMessagesRegistryNotLogged,
       final XmppComentableRegistry xmppComentable, final XmppNotifyCapableRegistry xmppNotifyCapable,
-      final ShowDeletedRegistry showDeleted, final EmptyFolderTutorialRegistry emptyFolderTutorialRegistry) {
+      final ShowDeletedRegistry showDeleted,
+      final EmptyFolderTutorialRegistry emptyFolderTutorialRegistry) {
     this.authorable = authorableRegistry;
     this.newMenus = newMenus;
     this.aclEditable = aclEditableRegistry;

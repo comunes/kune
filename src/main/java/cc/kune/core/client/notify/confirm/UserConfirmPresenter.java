@@ -33,27 +33,28 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 public class UserConfirmPresenter extends Presenter<UserConfirmView, UserConfirmProxy> {
-    @ProxyCodeSplit
-    public interface UserConfirmProxy extends Proxy<UserConfirmPresenter> {
-    }
+  @ProxyCodeSplit
+  public interface UserConfirmProxy extends Proxy<UserConfirmPresenter> {
+  }
 
-    public interface UserConfirmView extends View {
-        public void confirmAsk(ConfirmAskEvent ask);
-    }
+  public interface UserConfirmView extends View {
+    public void confirmAsk(ConfirmAskEvent ask);
+  }
 
-    @Inject
-    public UserConfirmPresenter(final EventBus eventBus, final UserConfirmView view, final UserConfirmProxy proxy) {
-        super(eventBus, view, proxy);
-    }
+  @Inject
+  public UserConfirmPresenter(final EventBus eventBus, final UserConfirmView view,
+      final UserConfirmProxy proxy) {
+    super(eventBus, view, proxy);
+  }
 
-    @ProxyEvent
-    public void onConfirmAsk(final ConfirmAskEvent event) {
-        getView().confirmAsk(event);
-    }
+  @ProxyEvent
+  public void onConfirmAsk(final ConfirmAskEvent event) {
+    getView().confirmAsk(event);
+  }
 
-    @Override
-    protected void revealInParent() {
-        RootPanel.get().add(getWidget());
-    }
+  @Override
+  protected void revealInParent() {
+    RootPanel.get().add(getWidget());
+  }
 
 }

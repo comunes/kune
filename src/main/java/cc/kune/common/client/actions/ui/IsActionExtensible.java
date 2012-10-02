@@ -24,30 +24,30 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 public interface IsActionExtensible {
 
-    /**
-     * Adds a action description
-     * 
-     * @param action
-     *            the action
-     */
-    void add(GuiActionDescrip action);
+  /**
+   * Adds a action description
+   * 
+   * @param action
+   *          the action
+   */
+  void add(GuiActionDescrip action);
 
-    /**
-     * Adds some action descriptions
-     * 
-     * @param action
-     *            the action
-     */
-    void add(GuiActionDescrip... actions);
+  /**
+   * Adds some action descriptions
+   * 
+   * @param action
+   *          the action
+   */
+  void add(GuiActionDescrip... actions);
 
-    /**
-     * Adds some action descriptions
-     * 
-     * @param actions
-     *            the actions
-     */
-    void addAll(GuiActionDescCollection actions);
+  /**
+   * Adds some action descriptions
+   * 
+   * @param actions
+   *          the actions
+   */
+  void addAll(GuiActionDescCollection actions);
 
-    void clear();
+  void clear();
 
 }

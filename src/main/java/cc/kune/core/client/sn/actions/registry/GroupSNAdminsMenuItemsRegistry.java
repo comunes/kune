@@ -45,15 +45,15 @@ import com.google.inject.Provider;
 public class GroupSNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
   @Inject
-  public GroupSNAdminsMenuItemsRegistry(final SessionConstants session, final I18nTranslationService i18n,
-      final IsLoggedCondition isLogged, final IsCurrentStateAdministrableCondition isAdministrable,
-      final IsPersonCondition isPerson, final IsGroupCondition isGroup,
-      final IsBuddieCondition isBuddie, final IsMeCondition isMe, final IsNotMeCondition isNotMe,
-      final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
-      final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
-      final DenyJoinGroupAction denyJoinGroupAction, final GotoGroupAction gotoGroupAction,
-      final GotoMemberAction gotoMemberAction, final GotoYourHomePageAction gotoYourHomePageAction,
-      final WriteToAction writeToAction) {
+  public GroupSNAdminsMenuItemsRegistry(final SessionConstants session,
+      final I18nTranslationService i18n, final IsLoggedCondition isLogged,
+      final IsCurrentStateAdministrableCondition isAdministrable, final IsPersonCondition isPerson,
+      final IsGroupCondition isGroup, final IsBuddieCondition isBuddie, final IsMeCondition isMe,
+      final IsNotMeCondition isNotMe, final ChangeToCollabAction changeToCollabAction,
+      final ChangeToAdminAction changeToAdminAction, final RemoveMemberAction removeMemberAction,
+      final AcceptJoinGroupAction acceptJoinGroupAction, final DenyJoinGroupAction denyJoinGroupAction,
+      final GotoGroupAction gotoGroupAction, final GotoMemberAction gotoMemberAction,
+      final GotoYourHomePageAction gotoYourHomePageAction, final WriteToAction writeToAction) {
     add(new Provider<MenuItemDescriptor>() {
       @Override
       public MenuItemDescriptor get() {

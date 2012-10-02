@@ -37,115 +37,116 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 @Table(name = "social_networks")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SocialNetwork {
-    public static final SocialNetwork EMPTY = new SocialNetwork(SocialNetworkVisibility.onlyadmins);
+  public static final SocialNetwork EMPTY = new SocialNetwork(SocialNetworkVisibility.onlyadmins);
 
-    @OneToOne(cascade = CascadeType.ALL)
-    AccessLists accessLists;
+  @OneToOne(cascade = CascadeType.ALL)
+  AccessLists accessLists;
 
-    @Id
-    @GeneratedValue
-    Long id;
+  @Id
+  @GeneratedValue
+  Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    GroupList pendingCollaborators;
+  @OneToOne(cascade = CascadeType.ALL)
+  GroupList pendingCollaborators;
 
-    @Enumerated(EnumType.STRING)
-    SocialNetworkVisibility visibility;
+  @Enumerated(EnumType.STRING)
+  SocialNetworkVisibility visibility;
 
-    public SocialNetwork() {
-        accessLists = new AccessLists();
-        pendingCollaborators = new GroupList();
-        visibility = SocialNetworkVisibility.anyone;
-    }
+  public SocialNetwork() {
+    accessLists = new AccessLists();
+    pendingCollaborators = new GroupList();
+    visibility = SocialNetworkVisibility.anyone;
+  }
 
-    public SocialNetwork(final SocialNetworkVisibility visibility) {
-        accessLists = new AccessLists();
-        pendingCollaborators = new GroupList();
-        this.visibility = visibility;
-    }
+  public SocialNetwork(final SocialNetworkVisibility visibility) {
+    accessLists = new AccessLists();
+    pendingCollaborators = new GroupList();
+    this.visibility = visibility;
+  }
 
-    public void addAdmin(final Group group) {
-        accessLists.addAdmin(group);
-    }
+  public void addAdmin(final Group group) {
+    accessLists.addAdmin(group);
+  }
 
-    public void addCollaborator(final Group group) {
-        accessLists.addEditor(group);
-    }
+  public void addCollaborator(final Group group) {
+    accessLists.addEditor(group);
+  }
 
-    public void addPendingCollaborator(final Group group) {
-        pendingCollaborators.add(group);
-    }
+  public void addPendingCollaborator(final Group group) {
+    pendingCollaborators.add(group);
+  }
 
-    public void addViewer(final Group group) {
-        accessLists.addViewer(group);
-    }
+  public void addViewer(final Group group) {
+    accessLists.addViewer(group);
+  }
 
-    public AccessLists getAccessLists() {
-        return accessLists;
-    }
+  public AccessLists getAccessLists() {
+    return accessLists;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public GroupList getPendingCollaborators() {
-        return pendingCollaborators;
-    }
+  public GroupList getPendingCollaborators() {
+    return pendingCollaborators;
+  }
 
-    public SocialNetworkVisibility getVisibility() {
-        return visibility;
-    }
+  public SocialNetworkVisibility getVisibility() {
+    return visibility;
+  }
 
-    public boolean isAdmin(final Group group) {
-        return accessLists.getAdmins().includes(group);
-    }
+  public boolean isAdmin(final Group group) {
+    return accessLists.getAdmins().includes(group);
+  }
 
-    public boolean isCollab(final Group group) {
-        return accessLists.getEditors().includes(group);
-    }
+  public boolean isCollab(final Group group) {
+    return accessLists.getEditors().includes(group);
+  }
 
-    public boolean isPendingCollab(final Group group) {
-        return pendingCollaborators.getList().contains(group);
-    }
+  public boolean isPendingCollab(final Group group) {
+    return pendingCollaborators.getList().contains(group);
+  }
 
-    public boolean isViewer(final Group group) {
-        return accessLists.getViewers().includes(group);
-    }
+  public boolean isViewer(final Group group) {
+    return accessLists.getViewers().includes(group);
+  }
 
-    public void removeAdmin(final Group group) {
-        accessLists.removeAdmin(group);
-    }
+  public void removeAdmin(final Group group) {
+    accessLists.removeAdmin(group);
+  }
 
-    public void removeCollaborator(final Group group) {
-        accessLists.removeEditor(group);
-    }
+  public void removeCollaborator(final Group group) {
+    accessLists.removeEditor(group);
+  }
 
-    public void removePendingCollaborator(final Group group) {
-        pendingCollaborators.getList().remove(group);
-    }
+  public void removePendingCollaborator(final Group group) {
+    pendingCollaborators.getList().remove(group);
+  }
 
-    public void removeViewer(final Group group) {
-        accessLists.removeViewer(group);
-    }
+  public void removeViewer(final Group group) {
+    accessLists.removeViewer(group);
+  }
 
-    public void setAccessLists(final AccessLists accessList) {
-        this.accessLists = accessList;
-    }
+  public void setAccessLists(final AccessLists accessList) {
+    this.accessLists = accessList;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setPendingCollaborators(final GroupList pendingCollaborators) {
-        this.pendingCollaborators = pendingCollaborators;
-    }
+  public void setPendingCollaborators(final GroupList pendingCollaborators) {
+    this.pendingCollaborators = pendingCollaborators;
+  }
 
-    public void setVisibility(final SocialNetworkVisibility visibility) {
-        this.visibility = visibility;
-    }
+  public void setVisibility(final SocialNetworkVisibility visibility) {
+    this.visibility = visibility;
+  }
 
-    @Override
-    public String toString() {
-        return "SocialNetwork[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators + "]";
-    }
+  @Override
+  public String toString() {
+    return "SocialNetwork[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators
+        + "]";
+  }
 }

@@ -33,38 +33,39 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class UserSNVisibilityAction extends AbstractExtendedAction {
-    private final I18nTranslationService i18n;
-    private final Session session;
-    private final StateManager stateManager;
-    private final Provider<UserServiceAsync> userServiceAsync;
-    private UserSNetVisibility visibility;
+  private final I18nTranslationService i18n;
+  private final Session session;
+  private final StateManager stateManager;
+  private final Provider<UserServiceAsync> userServiceAsync;
+  private UserSNetVisibility visibility;
 
-    @Inject
-    public UserSNVisibilityAction(final Session session, final StateManager stateManager,
-            final I18nTranslationService i18n, final Provider<UserServiceAsync> userServiceProvider) {
-        this.session = session;
-        this.stateManager = stateManager;
-        this.i18n = i18n;
-        this.userServiceAsync = userServiceProvider;
-    }
+  @Inject
+  public UserSNVisibilityAction(final Session session, final StateManager stateManager,
+      final I18nTranslationService i18n, final Provider<UserServiceAsync> userServiceProvider) {
+    this.session = session;
+    this.stateManager = stateManager;
+    this.i18n = i18n;
+    this.userServiceAsync = userServiceProvider;
+  }
 
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-        userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
-                session.getCurrentState().getGroup().getStateToken(), visibility, new AsyncCallbackSimple<Void>() {
-                    @Override
-                    public void onSuccess(final Void result) {
-                        // NotifyUser.info(i18n.t("Visibility of your network changed to "
-                        // + visibility.toString()));
-                        NotifyUser.info(i18n.t("Visibility of your network changed"));
-                        stateManager.refreshCurrentStateWithoutCache();
-                    }
-                });
+  @Override
+  public void actionPerformed(final ActionEvent event) {
+    userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
+        session.getCurrentState().getGroup().getStateToken(), visibility,
+        new AsyncCallbackSimple<Void>() {
+          @Override
+          public void onSuccess(final Void result) {
+            // NotifyUser.info(i18n.t("Visibility of your network changed to "
+            // + visibility.toString()));
+            NotifyUser.info(i18n.t("Visibility of your network changed"));
+            stateManager.refreshCurrentStateWithoutCache();
+          }
+        });
 
-    }
+  }
 
-    public void setVisibility(final UserSNetVisibility visibility) {
-        this.visibility = visibility;
-    }
+  public void setVisibility(final UserSNetVisibility visibility) {
+    this.visibility = visibility;
+  }
 
 }

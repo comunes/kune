@@ -19,16 +19,15 @@
  */
 package cc.kune.core.server.state;
 
-
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.User;
 
 public interface StateService {
 
-    StateContainer create(User userLogged, Container container);
+  StateContainer create(User userLogged, Container container);
 
-    StateContent create(User userLogged, Content content);
+  StateContent create(User userLogged, Content content);
 
-    StateNoContent createNoHome(User user, String groupShortName);
+  StateNoContent createNoHome(User user, String groupShortName);
 }

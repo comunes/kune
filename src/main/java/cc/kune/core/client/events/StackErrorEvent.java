@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import com.google.gwt.event.shared.HasHandlers;
 
-public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler> { 
+public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler> {
 
   public interface HasStackErrorHandlers extends HasHandlers {
     HandlerRegistration addStackErrorHandler(StackErrorHandler handler);
@@ -72,11 +72,11 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
-        return true;
+      return true;
     if (obj == null)
-        return false;
+      return false;
     if (getClass() != obj.getClass())
-        return false;
+      return false;
     StackErrorEvent other = (StackErrorEvent) obj;
     if (exception == null) {
       if (other.exception != null)
@@ -95,8 +95,6 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   @Override
   public String toString() {
-    return "StackErrorEvent["
-                 + exception
-    + "]";
+    return "StackErrorEvent[" + exception + "]";
   }
 }

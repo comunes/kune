@@ -23,33 +23,34 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class SocialNetworkDTO implements IsSerializable {
 
-    AccessListsDTO accessLists;
+  AccessListsDTO accessLists;
 
-    GroupListDTO pendingCollaborators;
+  GroupListDTO pendingCollaborators;
 
-    public SocialNetworkDTO() {
-        accessLists = new AccessListsDTO();
-        pendingCollaborators = new GroupListDTO();
-    }
+  public SocialNetworkDTO() {
+    accessLists = new AccessListsDTO();
+    pendingCollaborators = new GroupListDTO();
+  }
 
-    public AccessListsDTO getAccessLists() {
-        return accessLists;
-    }
+  public AccessListsDTO getAccessLists() {
+    return accessLists;
+  }
 
-    public GroupListDTO getPendingCollaborators() {
-        return pendingCollaborators;
-    }
+  public GroupListDTO getPendingCollaborators() {
+    return pendingCollaborators;
+  }
 
-    public void setAccessLists(final AccessListsDTO accessLists) {
-        this.accessLists = accessLists;
-    }
+  public void setAccessLists(final AccessListsDTO accessLists) {
+    this.accessLists = accessLists;
+  }
 
-    public void setPendingCollaborators(final GroupListDTO pendingCollaborators) {
-        this.pendingCollaborators = pendingCollaborators;
-    }
+  public void setPendingCollaborators(final GroupListDTO pendingCollaborators) {
+    this.pendingCollaborators = pendingCollaborators;
+  }
 
-    public String toString() {
-        return "SocialNetworkDTO[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators + "]";
-    }
+  public String toString() {
+    return "SocialNetworkDTO[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators
+        + "]";
+  }
 
 }

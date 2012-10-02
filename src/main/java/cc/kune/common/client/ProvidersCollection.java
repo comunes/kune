@@ -26,12 +26,12 @@ import com.google.inject.Provider;
 @SuppressWarnings("serial")
 public class ProvidersCollection extends ArrayList<Provider<?>> {
 
-    public ProvidersCollection() {
-    }
+  public ProvidersCollection() {
+  }
 
-    public void createAll() {
-        for (final Provider<?> p : this) {
-            p.get();
-        }
+  public void createAll() {
+    for (final Provider<?> p : this) {
+      p.get();
     }
+  }
 }

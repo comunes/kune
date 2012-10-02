@@ -37,6 +37,7 @@ public class ListsParts {
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
     viewerSelector.register(contentViewer, true, ListsToolConstants.TYPE_POST);
-    viewerSelector.register(folderViewer, true, ListsToolConstants.TYPE_ROOT, ListsToolConstants.TYPE_LIST);
+    viewerSelector.register(folderViewer, true, ListsToolConstants.TYPE_ROOT,
+        ListsToolConstants.TYPE_LIST);
   }
 }

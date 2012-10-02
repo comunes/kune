@@ -20,5 +20,5 @@
 package cc.kune.core.client.services;
 
 public enum ImageSize {
-    sized, thumb, ico
+  sized, thumb, ico
 }

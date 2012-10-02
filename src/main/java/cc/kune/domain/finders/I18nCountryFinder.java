@@ -29,10 +29,10 @@ import com.google.inject.persist.finder.Finder;
 
 public interface I18nCountryFinder {
 
-    @Finder(query = "FROM I18nCountry WHERE code = :country")
-    public I18nCountry findByCode(@Named("country") final String country);
+  @Finder(query = "FROM I18nCountry WHERE code = :country")
+  public I18nCountry findByCode(@Named("country") final String country);
 
-    @Finder(query = "FROM I18nCountry ORDER BY english_name", returnAs = ArrayList.class)
-    public List<I18nCountry> getAll();
+  @Finder(query = "FROM I18nCountry ORDER BY english_name", returnAs = ArrayList.class)
+  public List<I18nCountry> getAll();
 
 }

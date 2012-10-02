@@ -31,11 +31,11 @@ import cc.kune.docs.shared.DocsToolConstants;
 
 public class DocumentToolTest {
 
-    @Test
-    public void clientAndServerSync() {
-        assertEquals(TOOL_NAME, DocsToolConstants.TOOL_NAME);
-        assertEquals(TYPE_ROOT, DocsToolConstants.TYPE_ROOT);
-        assertEquals(TYPE_FOLDER, DocsToolConstants.TYPE_FOLDER);
-        assertEquals(TYPE_DOCUMENT, DocsToolConstants.TYPE_DOCUMENT);
-    }
+  @Test
+  public void clientAndServerSync() {
+    assertEquals(TOOL_NAME, DocsToolConstants.TOOL_NAME);
+    assertEquals(TYPE_ROOT, DocsToolConstants.TYPE_ROOT);
+    assertEquals(TYPE_FOLDER, DocsToolConstants.TYPE_FOLDER);
+    assertEquals(TYPE_DOCUMENT, DocsToolConstants.TYPE_DOCUMENT);
+  }
 }

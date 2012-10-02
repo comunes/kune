@@ -23,6 +23,6 @@ import cc.kune.domain.Tag;
 
 public interface TagManager extends Manager<Tag, Long> {
 
-    Tag findByTagName(String tag);
+  Tag findByTagName(String tag);
 
 }

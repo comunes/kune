@@ -23,7 +23,7 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 
 public class BarterServerModule implements Module {
-    public void configure(final Binder binder) {
-        binder.bind(BarterServerTool.class).asEagerSingleton();
-    }
+  public void configure(final Binder binder) {
+    binder.bind(BarterServerTool.class).asEagerSingleton();
+  }
 }

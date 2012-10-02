@@ -26,19 +26,19 @@ import net.sf.json.util.CycleDetectionStrategy;
 import cc.kune.core.server.error.ServerException;
 
 public class JSONLibRESTSerializer implements RESTSerializer {
-    private final JsonConfig config;
+  private final JsonConfig config;
 
-    public JSONLibRESTSerializer() {
-        config = new JsonConfig();
-        config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-    }
+  public JSONLibRESTSerializer() {
+    config = new JsonConfig();
+    config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+  }
 
-    public String serialize(final Object target, final String format) {
-        if (format.equals(RESTMethod.FORMAT_JSON)) {
-            return JSONSerializer.toJSON(target, config).toString();
-        } else {
-            throw new ServerException("format not implemented!");
-        }
+  public String serialize(final Object target, final String format) {
+    if (format.equals(RESTMethod.FORMAT_JSON)) {
+      return JSONSerializer.toJSON(target, config).toString();
+    } else {
+      throw new ServerException("format not implemented!");
     }
+  }
 
 }

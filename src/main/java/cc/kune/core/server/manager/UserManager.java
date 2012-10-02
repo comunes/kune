@@ -39,7 +39,7 @@ public interface UserManager {
 
   /**
    * Ask for email confirmation.
-   *
+   * 
    * @param user
    *          the user
    * @param type
@@ -51,7 +51,7 @@ public interface UserManager {
 
   /**
    * Change passwd.
-   *
+   * 
    * @param userId
    *          the user id to change the passwd
    * @param oldPassword
@@ -67,7 +67,7 @@ public interface UserManager {
 
   /**
    * Clear password hash (after been used)
-   *
+   * 
    * @param user
    *          the user
    */
@@ -75,7 +75,7 @@ public interface UserManager {
 
   /**
    * CreateUser new method with language country and timezone params.
-   *
+   * 
    * @param shortName
    *          the short name
    * @param longName
@@ -101,7 +101,7 @@ public interface UserManager {
 
   /**
    * Creates the wave account.
-   *
+   * 
    * @param shortName
    *          the short name
    * @param passwdDigest
@@ -111,7 +111,7 @@ public interface UserManager {
 
   /**
    * IMPORTANT: if userId == null, it returns User.UNKNOWN_USER
-   *
+   * 
    * @param userId
    *          the user id
    * @return the user
@@ -120,7 +120,7 @@ public interface UserManager {
 
   /**
    * Find by shortname.
-   *
+   * 
    * @param shortName
    *          the short name
    * @return the user
@@ -129,7 +129,7 @@ public interface UserManager {
 
   /**
    * Gets the user buddies.
-   *
+   * 
    * @param shortName
    *          the short name
    * @return the user buddies
@@ -138,7 +138,7 @@ public interface UserManager {
 
   /**
    * Login.
-   *
+   * 
    * @param nickOrEmail
    *          the nick or email
    * @param passwd
@@ -154,7 +154,7 @@ public interface UserManager {
 
   /**
    * Search.
-   *
+   * 
    * @param search
    *          the search
    * @return the search result
@@ -163,7 +163,7 @@ public interface UserManager {
 
   /**
    * Search.
-   *
+   * 
    * @param search
    *          the search
    * @param firstResult
@@ -176,7 +176,7 @@ public interface UserManager {
 
   /**
    * Sets the s net visibility.
-   *
+   * 
    * @param user
    *          the user
    * @param visibility
@@ -186,7 +186,7 @@ public interface UserManager {
 
   /**
    * Update.
-   *
+   * 
    * @param userId
    *          the userId to change
    * @param user
@@ -199,7 +199,7 @@ public interface UserManager {
 
   /**
    * Verify password hash of a user.
-   *
+   * 
    * @param userId
    *          the user id
    * @param emailReceivedHash

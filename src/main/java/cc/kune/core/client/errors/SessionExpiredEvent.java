@@ -24,7 +24,7 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExpiredHandler> { 
+public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExpiredHandler> {
 
   public interface HasSessionExpiredHandlers extends HasHandlers {
     HandlerRegistration addSessionExpiredHandler(SessionExpiredHandler handler);
@@ -43,7 +43,6 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
   public static Type<SessionExpiredHandler> getType() {
     return TYPE;
   }
-
 
   public SessionExpiredEvent() {
   }
@@ -70,7 +69,6 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   @Override
   public String toString() {
-    return "SessionExpiredEvent["
-    + "]";
+    return "SessionExpiredEvent[" + "]";
   }
 }

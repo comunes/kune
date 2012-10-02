@@ -33,32 +33,33 @@ import com.google.inject.Provider;
 
 public class MembersModerationAction extends AbstractExtendedAction {
 
-    private AdmissionType admissionType;
-    private final Provider<GroupServiceAsync> groupServiceProvider;
-    private final I18nTranslationService i18n;
-    private final Session session;
+  private AdmissionType admissionType;
+  private final Provider<GroupServiceAsync> groupServiceProvider;
+  private final I18nTranslationService i18n;
+  private final Session session;
 
-    @Inject
-    public MembersModerationAction(final Session session, final I18nTranslationService i18n,
-            final Provider<GroupServiceAsync> groupServiceProvider) {
-        this.session = session;
-        this.i18n = i18n;
-        this.groupServiceProvider = groupServiceProvider;
-    }
+  @Inject
+  public MembersModerationAction(final Session session, final I18nTranslationService i18n,
+      final Provider<GroupServiceAsync> groupServiceProvider) {
+    this.session = session;
+    this.i18n = i18n;
+    this.groupServiceProvider = groupServiceProvider;
+  }
 
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-        groupServiceProvider.get().setGroupNewMembersJoiningPolicy(session.getUserHash(),
-                session.getCurrentState().getGroup().getStateToken(), admissionType, new AsyncCallbackSimple<Void>() {
-                    @Override
-                    public void onSuccess(final Void result) {
-                        NotifyUser.info(i18n.t("Members joining policy changed"));
-                    }
-                });
-    }
+  @Override
+  public void actionPerformed(final ActionEvent event) {
+    groupServiceProvider.get().setGroupNewMembersJoiningPolicy(session.getUserHash(),
+        session.getCurrentState().getGroup().getStateToken(), admissionType,
+        new AsyncCallbackSimple<Void>() {
+          @Override
+          public void onSuccess(final Void result) {
+            NotifyUser.info(i18n.t("Members joining policy changed"));
+          }
+        });
+  }
 
-    public void setAdmissionType(final AdmissionType admissionType) {
-        this.admissionType = admissionType;
-    }
+  public void setAdmissionType(final AdmissionType admissionType) {
+    this.admissionType = admissionType;
+  }
 
 }

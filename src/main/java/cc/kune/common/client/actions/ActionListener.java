@@ -47,11 +47,11 @@ package cc.kune.common.client.actions;
  * @status updated to 1.4
  */
 public interface ActionListener extends EventListener {
-    /**
-     * This method is invoked when an action occurs.
-     * 
-     * @param event
-     *            the <code>ActionEvent</code> that occurred
-     */
-    void actionPerformed(ActionEvent event);
+  /**
+   * This method is invoked when an action occurs.
+   * 
+   * @param event
+   *          the <code>ActionEvent</code> that occurred
+   */
+  void actionPerformed(ActionEvent event);
 }

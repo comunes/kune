@@ -19,6 +19,5 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
-
 public class GwtMenuTitleItemGui extends AbstractGwtMenuItemGui {
 }

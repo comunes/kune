@@ -9,22 +9,23 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class HelloWorldPresenter extends
-        Presenter<HelloWorldPresenter.HelloWorldView, HelloWorldPresenter.HelloWorldProxy> {
+    Presenter<HelloWorldPresenter.HelloWorldView, HelloWorldPresenter.HelloWorldProxy> {
 
-    @ProxyCodeSplit
-    public interface HelloWorldProxy extends Proxy<HelloWorldPresenter> {
-    }
+  @ProxyCodeSplit
+  public interface HelloWorldProxy extends Proxy<HelloWorldPresenter> {
+  }
 
-    public interface HelloWorldView extends View {
-    }
+  public interface HelloWorldView extends View {
+  }
 
-    @Inject
-    public HelloWorldPresenter(final EventBus eventBus, final HelloWorldView view, final HelloWorldProxy proxy) {
-        super(eventBus, view, proxy);
-    }
+  @Inject
+  public HelloWorldPresenter(final EventBus eventBus, final HelloWorldView view,
+      final HelloWorldProxy proxy) {
+    super(eventBus, view, proxy);
+  }
 
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
+  @Override
+  protected void revealInParent() {
+    RevealRootContentEvent.fire(this, this);
+  }
 }

@@ -32,8 +32,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class UserOptStylePresenter extends EntityOptStylePresenter implements
-    UserOptStyle {
+public class UserOptStylePresenter extends EntityOptStylePresenter implements UserOptStyle {
 
   // private final WsThemeSelector themeSelector;
 

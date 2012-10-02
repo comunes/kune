@@ -24,9 +24,9 @@ import cc.kune.common.shared.utils.SimpleResponseCallback;
 
 public abstract class OnAcceptCallback implements SimpleResponseCallback {
 
-    @Override
-    public void onCancel() {
-        // Do nothing
-        Log.debug("On cancel callback, do nothing");
-    }
+  @Override
+  public void onCancel() {
+    // Do nothing
+    Log.debug("On cancel callback, do nothing");
+  }
 }

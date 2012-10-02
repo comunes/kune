@@ -27,9 +27,10 @@ import com.google.inject.Inject;
 
 public class OpenFolderMenuItem extends OpenContentMenuItem {
 
-    @Inject
-    public OpenFolderMenuItem(final I18nTranslationService i18n, final OpenContentAction action, final NavResources res) {
-        super(i18n, action, res);
-    }
+  @Inject
+  public OpenFolderMenuItem(final I18nTranslationService i18n, final OpenContentAction action,
+      final NavResources res) {
+    super(i18n, action, res);
+  }
 
 }

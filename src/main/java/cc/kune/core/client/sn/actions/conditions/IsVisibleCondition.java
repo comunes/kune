@@ -32,21 +32,21 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsVisibleCondition implements GuiAddCondition {
 
-    private final Session session;
+  private final Session session;
 
-    @Inject
-    public IsVisibleCondition(final Session session) {
-        this.session = session;
-    }
+  @Inject
+  public IsVisibleCondition(final Session session) {
+    this.session = session;
+  }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
-        final StateAbstractDTO currentState = session.getCurrentState();
-        if (currentState instanceof StateContentDTO) {
-            return ((StateContentDTO) currentState).getGroupRights().isVisible();
-        } else {
-            // session.getContainerState() instanceof StateContentDTO)
-            return ((StateContainerDTO) currentState).getGroupRights().isVisible();
-        }
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    final StateAbstractDTO currentState = session.getCurrentState();
+    if (currentState instanceof StateContentDTO) {
+      return ((StateContentDTO) currentState).getGroupRights().isVisible();
+    } else {
+      // session.getContainerState() instanceof StateContentDTO)
+      return ((StateContainerDTO) currentState).getGroupRights().isVisible();
     }
+  }
 }

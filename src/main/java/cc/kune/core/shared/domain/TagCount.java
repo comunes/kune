@@ -22,37 +22,37 @@ package cc.kune.core.shared.domain;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class TagCount implements IsSerializable {
-    private String name;
-    // FIXME: try to use Integer
-    private Long count;
+  private String name;
+  // FIXME: try to use Integer
+  private Long count;
 
-    public TagCount() {
-        this(null, null);
-    }
+  public TagCount() {
+    this(null, null);
+  }
 
-    public TagCount(final String name) {
-        this(name, null);
-    }
+  public TagCount(final String name) {
+    this(name, null);
+  }
 
-    public TagCount(final String name, final Long count) {
-        this.name = name;
-        this.count = count;
-    }
+  public TagCount(final String name, final Long count) {
+    this.name = name;
+    this.count = count;
+  }
 
-    public Long getCount() {
-        return count;
-    }
+  public Long getCount() {
+    return count;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setCount(final Long count) {
-        this.count = count;
-    }
+  public void setCount(final Long count) {
+    this.count = count;
+  }
 
-    public void setName(final String name) {
-        this.name = name;
-    }
+  public void setName(final String name) {
+    this.name = name;
+  }
 
 }

@@ -30,23 +30,23 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
 public class RedirectFilter implements Filter {
-    private final String redirect;
+  private final String redirect;
 
-    public RedirectFilter(String redirect) {
-        this.redirect = redirect;
-    }
+  public RedirectFilter(String redirect) {
+    this.redirect = redirect;
+  }
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-            ServletException {
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
 
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        httpResponse.sendRedirect(redirect);
-    }
+    HttpServletResponse httpResponse = (HttpServletResponse) response;
+    httpResponse.sendRedirect(redirect);
+  }
 
-    public void init(FilterConfig filterConfig) throws ServletException {
-    }
+  public void init(FilterConfig filterConfig) throws ServletException {
+  }
 
-    public void destroy() {
-    }
+  public void destroy() {
+  }
 
 }

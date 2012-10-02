@@ -21,32 +21,32 @@ package cc.kune.core.shared.dto;
 
 public class RoomDTO {
 
-    private String name;
+  private String name;
 
-    private String subject;
+  private String subject;
 
-    public RoomDTO() {
-    }
+  public RoomDTO() {
+  }
 
-    public RoomDTO(final String name) {
-        this();
-        this.name = name;
-    }
+  public RoomDTO(final String name) {
+    this();
+    this.name = name;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(final String name) {
-        this.name = name;
-    }
+  public void setName(final String name) {
+    this.name = name;
+  }
 
-    public String getSubject() {
-        return subject;
-    }
+  public String getSubject() {
+    return subject;
+  }
 
-    public void setSubject(final String subject) {
-        this.subject = subject;
-    }
+  public void setSubject(final String subject) {
+    this.subject = subject;
+  }
 
 }

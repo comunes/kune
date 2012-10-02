@@ -26,12 +26,12 @@ import cc.kune.common.client.actions.AbstractAction;
  */
 public class NoParentGuiActionDescriptor extends AbstractGuiActionDescrip {
 
-    public NoParentGuiActionDescriptor() {
-        super(AbstractAction.NO_ACTION);
-    }
+  public NoParentGuiActionDescriptor() {
+    super(AbstractAction.NO_ACTION);
+  }
 
-    @Override
-    public Class<?> getType() {
-        return NoParentGuiActionDescriptor.class;
-    }
+  @Override
+  public Class<?> getType() {
+    return NoParentGuiActionDescriptor.class;
+  }
 }

@@ -32,16 +32,18 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public abstract class SNRolAction extends RolActionAutoUpdated {
-    protected final I18nTranslationService i18n;
-    protected final Provider<SocialNetServiceAsync> snServiceProvider;
+  protected final I18nTranslationService i18n;
+  protected final Provider<SocialNetServiceAsync> snServiceProvider;
 
-    @Inject
-    public SNRolAction(final StateManager stateManager, final Session session, final I18nTranslationService i18n,
-            final CoreResources res, final Provider<SocialNetServiceAsync> snServiceProvider,
-            final AccessRightsClientManager rightsManager, final AccessRolDTO rolRequired, final boolean authNeed,
-            final boolean visibleForNonMemb, final boolean visibleForMembers) {
-        super(stateManager, session, rightsManager, rolRequired, authNeed, visibleForNonMemb, visibleForMembers);
-        this.i18n = i18n;
-        this.snServiceProvider = snServiceProvider;
-    }
+  @Inject
+  public SNRolAction(final StateManager stateManager, final Session session,
+      final I18nTranslationService i18n, final CoreResources res,
+      final Provider<SocialNetServiceAsync> snServiceProvider,
+      final AccessRightsClientManager rightsManager, final AccessRolDTO rolRequired,
+      final boolean authNeed, final boolean visibleForNonMemb, final boolean visibleForMembers) {
+    super(stateManager, session, rightsManager, rolRequired, authNeed, visibleForNonMemb,
+        visibleForMembers);
+    this.i18n = i18n;
+    this.snServiceProvider = snServiceProvider;
+  }
 }

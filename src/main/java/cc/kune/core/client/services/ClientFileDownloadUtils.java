@@ -67,7 +67,8 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
   public String getBackgroundResizedUrl(final StateToken token, final ImageSize imageSize) {
     return new Url(FileConstants.BACKDOWNLOADSERVLET,
         new UrlParam(FileConstants.TOKEN, token.toString()), new UrlParam(FileConstants.IMGSIZE,
-            imageSize.toString())).toString() + getCacheSuffix(true);
+            imageSize.toString())).toString()
+        + getCacheSuffix(true);
   }
 
   public String getImageResizedUrl(final StateToken token, final ImageSize imageSize) {

@@ -37,6 +37,7 @@ public class TasksParts {
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
     viewerSelector.register(contentViewer, true, TasksToolConstants.TYPE_TASK);
-    viewerSelector.register(folderViewer, true, TasksToolConstants.TYPE_ROOT, TasksToolConstants.TYPE_FOLDER);
+    viewerSelector.register(folderViewer, true, TasksToolConstants.TYPE_ROOT,
+        TasksToolConstants.TYPE_FOLDER);
   }
 }

@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class UserNotFoundException extends DefaultException {
-    private static final long serialVersionUID = 6207713694613166661L;
+  private static final long serialVersionUID = 6207713694613166661L;
 }

@@ -50,25 +50,25 @@ package cc.kune.common.client.actions;
  * @status updated to 1.4
  */
 public abstract class EventListenerProxy implements EventListener {
-    /** The listener that this proxy wraps. */
-    private final EventListener listener;
+  /** The listener that this proxy wraps. */
+  private final EventListener listener;
 
-    /**
-     * Construct a proxy event listener, given an existing one to augment.
-     * 
-     * @param listener
-     *            the listener to wrap
-     */
-    public EventListenerProxy(final EventListener listener) {
-        this.listener = listener;
-    }
+  /**
+   * Construct a proxy event listener, given an existing one to augment.
+   * 
+   * @param listener
+   *          the listener to wrap
+   */
+  public EventListenerProxy(final EventListener listener) {
+    this.listener = listener;
+  }
 
-    /**
-     * Return the wrapped event listener.
-     * 
-     * @return the listener associated with this proxy
-     */
-    public EventListener getListener() {
-        return listener;
-    }
+  /**
+   * Return the wrapped event listener.
+   * 
+   * @return the listener associated with this proxy
+   */
+  public EventListener getListener() {
+    return listener;
+  }
 } // class EventListenerProxy

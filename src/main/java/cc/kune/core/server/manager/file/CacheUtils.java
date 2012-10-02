@@ -25,16 +25,19 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * The Class CacheUtils is used to set the cache headers in some servlets (avatars, etc)
- *
+ * The Class CacheUtils is used to set the cache headers in some servlets
+ * (avatars, etc)
+ * 
  */
 public class CacheUtils {
 
   /**
    * Sets the cache.
-   *
-   * @param resp the resp
-   * @param age the age in seconds
+   * 
+   * @param resp
+   *          the resp
+   * @param age
+   *          the age in seconds
    */
   public static void setCache(final HttpServletResponse resp, final long age) {
     Date now = new Date();
@@ -45,7 +48,7 @@ public class CacheUtils {
 
   /**
    * Sets the cache to 1 day.
-   *
+   * 
    * @param resp
    */
   public static void setCache1Day(final HttpServletResponse resp) {

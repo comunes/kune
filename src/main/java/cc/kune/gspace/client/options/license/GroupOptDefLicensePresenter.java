@@ -36,8 +36,8 @@ public class GroupOptDefLicensePresenter extends EntityOptDefLicensePresenter im
     GroupOptDefLicense {
 
   @Inject
-  public GroupOptDefLicensePresenter(final GroupOptions entityOptions,
-      final StateManager stateManager, final Session session, final GroupOptDefLicenseView view,
+  public GroupOptDefLicensePresenter(final GroupOptions entityOptions, final StateManager stateManager,
+      final Session session, final GroupOptDefLicenseView view,
       final Provider<LicenseWizard> licenseWizard, final Provider<LicenseChangeAction> licChangeAction) {
     super(entityOptions, session, licenseWizard, licChangeAction);
     init(view);

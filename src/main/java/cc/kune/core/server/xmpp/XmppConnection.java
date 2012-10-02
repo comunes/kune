@@ -22,20 +22,20 @@ package cc.kune.core.server.xmpp;
 import org.jivesoftware.smack.XMPPConnection;
 
 public class XmppConnection implements ChatConnection {
-    private final XMPPConnection conn;
-    private final String userName;
+  private final XMPPConnection conn;
+  private final String userName;
 
-    public XmppConnection(final String userName, final XMPPConnection conn) {
-        this.userName = userName;
-        this.conn = conn;
-    }
+  public XmppConnection(final String userName, final XMPPConnection conn) {
+    this.userName = userName;
+    this.conn = conn;
+  }
 
-    public XMPPConnection getConn() {
-        return conn;
-    }
+  public XMPPConnection getConn() {
+    return conn;
+  }
 
-    public String getUserName() {
-        return userName;
-    }
+  public String getUserName() {
+    return userName;
+  }
 
 }

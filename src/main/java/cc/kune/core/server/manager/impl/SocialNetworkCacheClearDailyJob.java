@@ -33,7 +33,8 @@ import com.google.inject.Singleton;
 public class SocialNetworkCacheClearDailyJob extends ClearCacheDailyJob {
 
   @Inject
-  public SocialNetworkCacheClearDailyJob(final SocialNetworkCache cache) throws ParseException, SchedulerException {
+  public SocialNetworkCacheClearDailyJob(final SocialNetworkCache cache) throws ParseException,
+      SchedulerException {
     super(cache);
   }
 

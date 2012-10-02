@@ -25,37 +25,37 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ParticipationDataDTO implements IsSerializable {
 
-    private List<GroupDTO> groupsIsAdmin;
-    private List<GroupDTO> groupsIsCollab;
+  private List<GroupDTO> groupsIsAdmin;
+  private List<GroupDTO> groupsIsCollab;
 
-    public ParticipationDataDTO() {
-        this(null, null);
-    }
+  public ParticipationDataDTO() {
+    this(null, null);
+  }
 
-    public ParticipationDataDTO(final List<GroupDTO> groupsIsAdmin, final List<GroupDTO> groupsIsCollab) {
-        this.groupsIsAdmin = groupsIsAdmin;
-        this.groupsIsCollab = groupsIsCollab;
-    }
+  public ParticipationDataDTO(final List<GroupDTO> groupsIsAdmin, final List<GroupDTO> groupsIsCollab) {
+    this.groupsIsAdmin = groupsIsAdmin;
+    this.groupsIsCollab = groupsIsCollab;
+  }
 
-    public List<GroupDTO> getGroupsIsAdmin() {
-        return groupsIsAdmin;
-    }
+  public List<GroupDTO> getGroupsIsAdmin() {
+    return groupsIsAdmin;
+  }
 
-    public List<GroupDTO> getGroupsIsCollab() {
-        return groupsIsCollab;
-    }
+  public List<GroupDTO> getGroupsIsCollab() {
+    return groupsIsCollab;
+  }
 
-    public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {
-        this.groupsIsAdmin = groupsIsAdmin;
-    }
+  public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {
+    this.groupsIsAdmin = groupsIsAdmin;
+  }
 
-    public void setGroupsIsCollab(final List<GroupDTO> groupsIsCollab) {
-        this.groupsIsCollab = groupsIsCollab;
-    }
+  public void setGroupsIsCollab(final List<GroupDTO> groupsIsCollab) {
+    this.groupsIsCollab = groupsIsCollab;
+  }
 
-    @Override
-    public String toString() {
-        return "ParticipationDataDTO[admin in: " + groupsIsAdmin.toString() + ", collab in: "
-                + groupsIsCollab.toString() + "]";
-    }
+  @Override
+  public String toString() {
+    return "ParticipationDataDTO[admin in: " + groupsIsAdmin.toString() + ", collab in: "
+        + groupsIsCollab.toString() + "]";
+  }
 }

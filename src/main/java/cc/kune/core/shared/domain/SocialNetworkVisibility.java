@@ -22,5 +22,5 @@ package cc.kune.core.shared.domain;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum SocialNetworkVisibility implements IsSerializable {
-    anyone, onlymembers, onlyadmins
+  anyone, onlymembers, onlyadmins
 }

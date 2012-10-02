@@ -23,9 +23,9 @@ import cc.kune.core.shared.dto.HasContent;
 
 public interface ContentViewer {
 
-    void attach();
+  void attach();
 
-    void detach();
+  void detach();
 
-    void setContent(HasContent state);
+  void setContent(HasContent state);
 }

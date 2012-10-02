@@ -31,11 +31,11 @@ import com.google.inject.Singleton;
 
 public class SampleGinModule extends AbstractGinModule {
 
-    @Override
-    protected void configure() {
-        bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
-        bind(GxtGuiProvider.class).in(Singleton.class);
-        bind(GwtGuiProvider.class).in(Singleton.class);
-        bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
-    }
+  @Override
+  protected void configure() {
+    bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
+    bind(GxtGuiProvider.class).in(Singleton.class);
+    bind(GwtGuiProvider.class).in(Singleton.class);
+    bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
+  }
 }

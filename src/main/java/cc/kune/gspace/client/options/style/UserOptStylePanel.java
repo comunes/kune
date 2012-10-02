@@ -25,8 +25,7 @@ import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
 import com.google.inject.Inject;
 
-public class UserOptStylePanel extends EntityOptStylePanel implements
-    UserOptStyleView {
+public class UserOptStylePanel extends EntityOptStylePanel implements UserOptStyleView {
 
   @Inject
   public UserOptStylePanel(final I18nTranslationService i18n, final CoreResources res,

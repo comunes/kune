@@ -19,18 +19,17 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
-
 public class GwtCheckItem extends GwtBaseMenuItem {
 
-    public void setChecked(final boolean newValue) {
-        // throw new NotImplementedException();
-    }
+  public void setChecked(final boolean newValue) {
+    // throw new NotImplementedException();
+  }
 
-    /*
-     * Checkbox group
-     */
-    public void setGroup(final String group) {
-        // throw new NotImplementedException();
-    }
+  /*
+   * Checkbox group
+   */
+  public void setGroup(final String group) {
+    // throw new NotImplementedException();
+  }
 
 }

@@ -320,8 +320,8 @@ public class ContentRPC implements ContentService, RPC {
     try {
       // FIXME get this from a wave constant
       String root = "/~/conv+root";
-      final Content content = finderService.getContainerByWaveRef(waveRef.endsWith("/~/conv+root") ? waveRef:
-        waveRef + root);
+      final Content content = finderService.getContainerByWaveRef(waveRef.endsWith("/~/conv+root") ? waveRef
+          : waveRef + root);
       accessService.accessToContent(content, user, AccessRol.Viewer);
       return mapState(stateService.create(user, content), user);
     } catch (javax.persistence.NoResultException e) {

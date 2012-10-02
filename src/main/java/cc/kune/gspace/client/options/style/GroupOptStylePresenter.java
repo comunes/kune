@@ -32,8 +32,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class GroupOptStylePresenter extends EntityOptStylePresenter implements
-    GroupOptStyle {
+public class GroupOptStylePresenter extends EntityOptStylePresenter implements GroupOptStyle {
 
   @Inject
   public GroupOptStylePresenter(final EventBus eventBus, final Session session,

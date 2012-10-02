@@ -30,16 +30,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsGroupCondition implements GuiAddCondition {
 
-    @Inject
-    public IsGroupCondition() {
-    }
+  @Inject
+  public IsGroupCondition() {
+  }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
-        final Object target = descr.getTarget();
-        if (target instanceof UserSimpleDTO) {
-            return false;
-        }
-        return (!((GroupDTO) target).isPersonal());
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    final Object target = descr.getTarget();
+    if (target instanceof UserSimpleDTO) {
+      return false;
     }
+    return (!((GroupDTO) target).isPersonal());
+  }
 }

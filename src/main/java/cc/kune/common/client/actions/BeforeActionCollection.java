@@ -26,20 +26,20 @@ import java.util.ArrayList;
  */
 public class BeforeActionCollection extends ArrayList<BeforeActionListener> {
 
-    private static final long serialVersionUID = -1508664709628420137L;
+  private static final long serialVersionUID = -1508664709628420137L;
 
-    /**
-     * Check before action listeners.
-     * 
-     * @return true, if all listener returns true
-     */
-    public boolean checkBeforeAction() {
-        for (BeforeActionListener listener : this) {
-            if (!listener.beforeAction()) {
-                return false;
-            }
-        }
-        return true;
+  /**
+   * Check before action listeners.
+   * 
+   * @return true, if all listener returns true
+   */
+  public boolean checkBeforeAction() {
+    for (BeforeActionListener listener : this) {
+      if (!listener.beforeAction()) {
+        return false;
+      }
     }
+    return true;
+  }
 
 }

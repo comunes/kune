@@ -139,7 +139,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.rpcservices.UserService#checkUserAndHash(java.lang.
    * String, java.lang.String)

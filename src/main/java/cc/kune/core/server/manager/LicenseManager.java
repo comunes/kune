@@ -26,18 +26,18 @@ import cc.kune.domain.finders.LicenseFinder;
 
 public interface LicenseManager {
 
-    License findByShortName(String licenseDef);
+  License findByShortName(String licenseDef);
 
-    List<License> getAll();
+  List<License> getAll();
 
-    List<License> getCC();
+  List<License> getCC();
 
-    License getDefLicense();
+  License getDefLicense();
 
-    List<License> getNotCC();
+  List<License> getNotCC();
 
-    License persist(final License license);
+  License persist(final License license);
 
-    void setLicenseFinder(final LicenseFinder licenseFinder);
+  void setLicenseFinder(final LicenseFinder licenseFinder);
 
 }

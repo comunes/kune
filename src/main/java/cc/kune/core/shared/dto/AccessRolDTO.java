@@ -20,5 +20,5 @@
 package cc.kune.core.shared.dto;
 
 public enum AccessRolDTO {
-    Administrator, Editor, Viewer
+  Administrator, Editor, Viewer
 }

@@ -29,10 +29,10 @@ import com.google.inject.persist.finder.Finder;
 
 public interface I18nLanguageFinder {
 
-    @Finder(query = "FROM I18nLanguage l WHERE code = :language")
-    public I18nLanguage findByCode(@Named("language") final String language);
+  @Finder(query = "FROM I18nLanguage l WHERE code = :language")
+  public I18nLanguage findByCode(@Named("language") final String language);
 
-    @Finder(query = "FROM I18nLanguage ORDER BY englishName", returnAs = ArrayList.class)
-    public List<I18nLanguage> getAll();
+  @Finder(query = "FROM I18nLanguage ORDER BY englishName", returnAs = ArrayList.class)
+  public List<I18nLanguage> getAll();
 
 }

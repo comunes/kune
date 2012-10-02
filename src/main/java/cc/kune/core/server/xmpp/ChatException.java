@@ -23,13 +23,13 @@ import org.jivesoftware.smack.XMPPException;
 
 public class ChatException extends RuntimeException {
 
-    private static final long serialVersionUID = 3777046831841032482L;
+  private static final long serialVersionUID = 3777046831841032482L;
 
-    public ChatException() {
-        super("");
-    }
+  public ChatException() {
+    super("");
+  }
 
-    public ChatException(final XMPPException cause) {
-        super(cause);
-    }
+  public ChatException(final XMPPException cause) {
+    super(cause);
+  }
 }

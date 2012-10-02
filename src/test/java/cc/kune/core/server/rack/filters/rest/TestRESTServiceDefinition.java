@@ -29,35 +29,37 @@ import cc.kune.core.server.rack.filters.rest.RESTServiceDefinition;
 
 public class TestRESTServiceDefinition {
 
-    private RESTServiceDefinition definition;
+  private RESTServiceDefinition definition;
 
-    @Before
-    public void createDefinition() {
-        this.definition = new RESTServiceDefinition(SimpleRESTService.class);
+  @Before
+  public void createDefinition() {
+    this.definition = new RESTServiceDefinition(SimpleRESTService.class);
+  }
+
+  @Test
+  public void testMethodOrder() {
+    assertEquals("three", definition.getMethods()[0].getName());
+    assertEquals("two", definition.getMethods()[1].getName());
+    assertEquals("one", definition.getMethods()[2].getName());
+  }
+
+  @Test
+  public void testMethodCount() {
+    assertEquals(3, definition.getMethods().length);
+  }
+
+  public static class SimpleRESTService {
+    @REST(params = { "one", "two" })
+    public void two(final String one, final String two) {
     }
 
-    @Test
-    public void testMethodOrder() {
-        assertEquals("three", definition.getMethods()[0].getName());
-        assertEquals("two", definition.getMethods()[1].getName());
-        assertEquals("one", definition.getMethods()[2].getName());
+    @REST(params = { "one", "two", "three" })
+    public void three(final String one, final String two, final String three) {
     }
 
-    @Test
-    public void testMethodCount() {
-        assertEquals(3, definition.getMethods().length);
+    @REST(params = { "one" })
+    public void one(final String one) {
     }
 
-    public static class SimpleRESTService {
-        @REST(params = { "one", "two" })
-        public void two(final String one, final String two) {}
-
-        @REST(params = { "one", "two", "three" })
-        public void three(final String one, final String two, final String three) {}
-
-        @REST(params = { "one" })
-        public void one(final String one) {
-        }
-
-    }
+  }
 }

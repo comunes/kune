@@ -20,13 +20,13 @@
 package cc.kune.common.shared.utils;
 
 public interface SimpleResponseCallback {
-    /**
-     * Notifies this callback of an accept response.
-     */
-    void onSuccess();
+  /**
+   * Notifies this callback of an accept response.
+   */
+  void onSuccess();
 
-    /**
-     * Notifies this callback of a cancel.
-     */
-    void onCancel();
+  /**
+   * Notifies this callback of a cancel.
+   */
+  void onCancel();
 }

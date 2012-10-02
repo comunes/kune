@@ -35,8 +35,7 @@ import cc.kune.gspace.client.options.UserOptions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class UserOptToolsPresenter extends EntityOptToolsPresenter implements
-    UserOptTools {
+public class UserOptToolsPresenter extends EntityOptToolsPresenter implements UserOptTools {
 
   @Inject
   public UserOptToolsPresenter(final Session session, final StateManager stateManager,

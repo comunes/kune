@@ -22,42 +22,42 @@ package cc.kune.core.shared.domain;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class RateResult implements IsSerializable {
-    private Double rate;
-    private Integer rateByUsers;
-    private Double currentUserRate;
+  private Double rate;
+  private Integer rateByUsers;
+  private Double currentUserRate;
 
-    public RateResult() {
-        this(null, null, null);
-    }
+  public RateResult() {
+    this(null, null, null);
+  }
 
-    public RateResult(final Double rate, final Integer rateByUsers, final Double currentUserRate) {
-        this.rate = rate;
-        this.rateByUsers = rateByUsers;
-        this.currentUserRate = currentUserRate;
-    }
+  public RateResult(final Double rate, final Integer rateByUsers, final Double currentUserRate) {
+    this.rate = rate;
+    this.rateByUsers = rateByUsers;
+    this.currentUserRate = currentUserRate;
+  }
 
-    public Double getCurrentUserRate() {
-        return currentUserRate;
-    }
+  public Double getCurrentUserRate() {
+    return currentUserRate;
+  }
 
-    public Double getRate() {
-        return rate;
-    }
+  public Double getRate() {
+    return rate;
+  }
 
-    public Integer getRateByUsers() {
-        return rateByUsers;
-    }
+  public Integer getRateByUsers() {
+    return rateByUsers;
+  }
 
-    public void setCurrentUserRate(final Double currentUserRate) {
-        this.currentUserRate = currentUserRate;
-    }
+  public void setCurrentUserRate(final Double currentUserRate) {
+    this.currentUserRate = currentUserRate;
+  }
 
-    public void setRate(final Double rate) {
-        this.rate = rate;
-    }
+  public void setRate(final Double rate) {
+    this.rate = rate;
+  }
 
-    public void setRateByUsers(final Integer rateByUsers) {
-        this.rateByUsers = rateByUsers;
-    }
+  public void setRateByUsers(final Integer rateByUsers) {
+    this.rateByUsers = rateByUsers;
+  }
 
 }

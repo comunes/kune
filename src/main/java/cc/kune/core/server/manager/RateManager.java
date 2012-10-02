@@ -19,17 +19,16 @@
  */
 package cc.kune.core.server.manager;
 
-
 import cc.kune.domain.Content;
 import cc.kune.domain.Rate;
 import cc.kune.domain.User;
 
 public interface RateManager extends Manager<Rate, Long> {
 
-    Rate find(User user, Content content);
+  Rate find(User user, Content content);
 
-    Double getRateAvg(Content content);
+  Double getRateAvg(Content content);
 
-    Long getRateByUsers(Content content);
+  Long getRateByUsers(Content content);
 
 }

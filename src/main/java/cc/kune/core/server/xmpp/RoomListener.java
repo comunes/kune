@@ -21,6 +21,6 @@ package cc.kune.core.server.xmpp;
 
 public interface RoomListener {
 
-    void onMessage(String from, String to, String body);
+  void onMessage(String from, String to, String body);
 
 }

@@ -37,44 +37,44 @@ import cc.kune.domain.utils.HasId;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CustomProperties implements HasId {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    @Lob
-    private HashMap<Class<?>, Object> data;
+  @Lob
+  private HashMap<Class<?>, Object> data;
 
-    public CustomProperties() {
-        data = new HashMap<Class<?>, Object>();
-    }
+  public CustomProperties() {
+    data = new HashMap<Class<?>, Object>();
+  }
 
-    public HashMap<Class<?>, Object> getData() {
-        return data;
-    }
+  public HashMap<Class<?>, Object> getData() {
+    return data;
+  }
 
-    @SuppressWarnings("unchecked")
-    public <T> T getData(final Class<T> type) {
-        return (T) data.get(type);
-    }
+  @SuppressWarnings("unchecked")
+  public <T> T getData(final Class<T> type) {
+    return (T) data.get(type);
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public <T> boolean hasPropertie(final Class<T> type) {
-        return data.containsKey(type);
-    }
+  public <T> boolean hasPropertie(final Class<T> type) {
+    return data.containsKey(type);
+  }
 
-    @SuppressWarnings("unchecked")
-    public <T> T setData(final Class<T> type, final T value) {
-        return (T) data.put(type, value);
-    }
+  @SuppressWarnings("unchecked")
+  public <T> T setData(final Class<T> type, final T value) {
+    return (T) data.put(type, value);
+  }
 
-    public void setData(final HashMap<Class<?>, Object> data) {
-        this.data = data;
-    }
+  public void setData(final HashMap<Class<?>, Object> data) {
+    this.data = data;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 }

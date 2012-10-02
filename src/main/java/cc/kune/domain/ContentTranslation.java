@@ -31,43 +31,42 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import cc.kune.domain.utils.HasId;
 
-
 @Entity
 @Table(name = "content_translations")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ContentTranslation implements HasId {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private I18nLanguage language;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private I18nLanguage language;
 
-    private Long contentId;
+  private Long contentId;
 
-    public Long getContentId() {
-        return contentId;
-    }
+  public Long getContentId() {
+    return contentId;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public I18nLanguage getLanguage() {
-        return language;
-    }
+  public I18nLanguage getLanguage() {
+    return language;
+  }
 
-    public void setContentId(final Long contentId) {
-        this.contentId = contentId;
-    }
+  public void setContentId(final Long contentId) {
+    this.contentId = contentId;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
+  public void setLanguage(final I18nLanguage language) {
+    this.language = language;
+  }
 
 }

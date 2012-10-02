@@ -153,7 +153,6 @@ public class SitebarActionsPresenter extends
       }
     };
 
-
     wavePowered.putValue(Action.NAME, i18n.t("Apache Wave powered"));
     wavePowered.putValue(Action.SMALL_ICON, res.waveIcon());
     aboutAction.putValue(Action.NAME, i18n.t("About Kune"));

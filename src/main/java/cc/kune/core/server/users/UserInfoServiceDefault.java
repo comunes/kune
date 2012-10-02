@@ -39,7 +39,8 @@ public class UserInfoServiceDefault implements UserInfoService {
   private final UserSignInLogFinder userSignInLogFinder;
 
   @Inject
-  public UserInfoServiceDefault(final SocialNetworkManager socialNetwork, final GroupManager groupManager, UserSignInLogFinder userSignInLogFinder) {
+  public UserInfoServiceDefault(final SocialNetworkManager socialNetwork,
+      final GroupManager groupManager, UserSignInLogFinder userSignInLogFinder) {
     this.socialNetworkManager = socialNetwork;
     this.groupManager = groupManager;
     this.userSignInLogFinder = userSignInLogFinder;

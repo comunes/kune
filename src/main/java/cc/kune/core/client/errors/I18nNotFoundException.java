@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class I18nNotFoundException extends DefaultException {
-    private static final long serialVersionUID = -2400899465805236215L;
+  private static final long serialVersionUID = -2400899465805236215L;
 }

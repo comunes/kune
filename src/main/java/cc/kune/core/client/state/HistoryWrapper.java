@@ -24,31 +24,34 @@ import cc.kune.core.shared.domain.utils.StateToken;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface HistoryWrapper controls the url #hash of the browser.
- *
+ * 
  * More info: http://en.wikipedia.org/wiki/Fragment_identifier
- *
+ * 
  */
 public interface HistoryWrapper {
 
   /**
    * Gets the current #token fragment of the current browser url.
-   *
+   * 
    * @return the token
    */
   String getToken();
 
   /**
    * Goes to this new #token fragment in the browser.
-   *
-   * @param historyToken the history token
+   * 
+   * @param historyToken
+   *          the history token
    */
   void newItem(final String historyToken);
 
   /**
    * Goes to this new #fragment and fire and event.
-   *
-   * @param historyToken the new history token fragment
-   * @param issueEvent should it fire an event?
+   * 
+   * @param historyToken
+   *          the new history token fragment
+   * @param issueEvent
+   *          should it fire an event?
    */
   void newItem(String historyToken, boolean issueEvent);
 
@@ -59,8 +62,9 @@ public interface HistoryWrapper {
 
   /**
    * Goes to this new #group.tool.id.id token
-   *
-   * @param historyToken the new history token fragment
+   * 
+   * @param historyToken
+   *          the new history token fragment
    */
   void newItem(StateToken token);
 

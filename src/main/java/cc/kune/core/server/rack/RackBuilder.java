@@ -22,7 +22,6 @@ package cc.kune.core.server.rack;
 import javax.servlet.Filter;
 import javax.servlet.http.HttpServlet;
 
-
 import cc.kune.core.server.rack.dock.RegexDock;
 import cc.kune.core.server.rack.dock.RegexMatcher;
 import cc.kune.core.server.rack.filters.gwts.GWTServiceFilter;
@@ -34,88 +33,89 @@ import com.google.inject.Module;
 
 public class RackBuilder {
 
-    public static class RackDockBuilder {
-        private final String regex;
-        private final Rack rack;
-
-        public RackDockBuilder(final Rack rack, final String regex) {
-            this.rack = rack;
-            this.regex = regex;
-        }
-
-        public RackDockBuilder install(final Filter... filters) {
-            for (final Filter filter : filters) {
-                final RegexDock dock = new RegexDock(regex);
-                dock.setFilter(filter);
-                rack.add(dock);
-            }
-            return this;
-        }
-
-    }
-
+  public static class RackDockBuilder {
+    private final String regex;
     private final Rack rack;
 
-    public RackBuilder() {
-        this.rack = new Rack();
+    public RackDockBuilder(final Rack rack, final String regex) {
+      this.rack = rack;
+      this.regex = regex;
     }
 
-    public RackBuilder add(final Class<? extends ContainerListener> listener) {
-        rack.add(listener);
-        return this;
+    public RackDockBuilder install(final Filter... filters) {
+      for (final Filter filter : filters) {
+        final RegexDock dock = new RegexDock(regex);
+        dock.setFilter(filter);
+        rack.add(dock);
+      }
+      return this;
     }
 
-    public RackDockBuilder at(final String regex) {
-        return new RackDockBuilder(rack, regex);
+  }
+
+  private final Rack rack;
+
+  public RackBuilder() {
+    this.rack = new Rack();
+  }
+
+  public RackBuilder add(final Class<? extends ContainerListener> listener) {
+    rack.add(listener);
+    return this;
+  }
+
+  public RackDockBuilder at(final String regex) {
+    return new RackDockBuilder(rack, regex);
+  }
+
+  public RackBuilder exclude(final String... excludes) {
+    for (final String exclude : excludes) {
+      rack.addExclusion(new RegexMatcher(exclude));
+    }
+    return this;
+  }
+
+  public Rack getRack() {
+    return rack;
+  }
+
+  public RackBuilder installGWTServices(final String root,
+      final Class<? extends RemoteService>... serviceClasses) {
+
+    for (final Class<? extends RemoteService> serviceClass : serviceClasses) {
+      final String simpleName = serviceClass.getSimpleName();
+      final RegexDock dock = new RegexDock(root + simpleName + "$");
+      dock.setFilter(new GWTServiceFilter(serviceClass));
+      rack.add(dock);
     }
 
-    public RackBuilder exclude(final String... excludes) {
-        for (final String exclude : excludes) {
-            rack.addExclusion(new RegexMatcher(exclude));
-        }
-        return this;
+    return this;
+  }
+
+  public void installRESTServices(final String root, final Class<?>... serviceClasses) {
+    for (final Class<?> serviceClass : serviceClasses) {
+      final String simpleName = serviceClass.getSimpleName();
+      final String pattern = root + simpleName + "/(.*)$";
+      final RegexDock dock = new RegexDock(pattern);
+      dock.setFilter(new RESTServiceFilter(pattern, serviceClass));
+      rack.add(dock);
+    }
+  }
+
+  public void installServlet(final String root, final Class<? extends HttpServlet>... servletClasses) {
+    for (final Class<? extends HttpServlet> servletClass : servletClasses) {
+      final String simpleName = servletClass.getSimpleName();
+      final RegexDock dock = new RegexDock(root + simpleName + "$");
+      dock.setFilter(new ServletServiceFilter(servletClass));
+      rack.add(dock);
     }
 
-    public Rack getRack() {
-        return rack;
+  }
+
+  public RackBuilder use(final Module... list) {
+    for (final Module m : list) {
+      rack.add(m);
     }
-
-    public RackBuilder installGWTServices(final String root, final Class<? extends RemoteService>... serviceClasses) {
-
-        for (final Class<? extends RemoteService> serviceClass : serviceClasses) {
-            final String simpleName = serviceClass.getSimpleName();
-            final RegexDock dock = new RegexDock(root + simpleName + "$");
-            dock.setFilter(new GWTServiceFilter(serviceClass));
-            rack.add(dock);
-        }
-
-        return this;
-    }
-
-    public void installRESTServices(final String root, final Class<?>... serviceClasses) {
-        for (final Class<?> serviceClass : serviceClasses) {
-            final String simpleName = serviceClass.getSimpleName();
-            final String pattern = root + simpleName + "/(.*)$";
-            final RegexDock dock = new RegexDock(pattern);
-            dock.setFilter(new RESTServiceFilter(pattern, serviceClass));
-            rack.add(dock);
-        }
-    }
-
-    public void installServlet(final String root, final Class<? extends HttpServlet>... servletClasses) {
-        for (final Class<? extends HttpServlet> servletClass : servletClasses) {
-            final String simpleName = servletClass.getSimpleName();
-            final RegexDock dock = new RegexDock(root + simpleName + "$");
-            dock.setFilter(new ServletServiceFilter(servletClass));
-            rack.add(dock);
-        }
-
-    }
-
-    public RackBuilder use(final Module... list) {
-        for (final Module m : list) {
-            rack.add(m);
-        }
-        return this;
-    }
+    return this;
+  }
 }

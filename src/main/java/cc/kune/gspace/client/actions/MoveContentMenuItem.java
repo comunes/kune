@@ -28,9 +28,8 @@ import com.google.inject.Inject;
 public class MoveContentMenuItem extends MenuItemDescriptor {
 
   @Inject
-  public MoveContentMenuItem(final I18nTranslationService i18n,
-      final MoveContentSimpleAction action, final ContentViewerOptionsMenu optionsMenu,
-      final CommonResources res) {
+  public MoveContentMenuItem(final I18nTranslationService i18n, final MoveContentSimpleAction action,
+      final ContentViewerOptionsMenu optionsMenu, final CommonResources res) {
     super(action);
     this.withText(i18n.t("Move")).withParent(optionsMenu, false).withIcon(res.clear16());
   }

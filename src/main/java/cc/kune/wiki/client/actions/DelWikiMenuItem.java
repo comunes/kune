@@ -27,8 +27,9 @@ import com.google.inject.Inject;
 
 public class DelWikiMenuItem extends DelContentForEditorsMenuItem {
 
-    @Inject
-    public DelWikiMenuItem(final I18nTranslationService i18n, final DelContentForEditorsAction action, final CoreResources res) {
-        super(i18n, action, res);
-    }
+  @Inject
+  public DelWikiMenuItem(final I18nTranslationService i18n, final DelContentForEditorsAction action,
+      final CoreResources res) {
+    super(i18n, action, res);
+  }
 }

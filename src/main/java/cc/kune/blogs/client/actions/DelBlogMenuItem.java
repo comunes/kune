@@ -27,9 +27,10 @@ import com.google.inject.Inject;
 
 public class DelBlogMenuItem extends DelContainerForEditorsMenuItem {
 
-    @Inject
-    public DelBlogMenuItem(final I18nTranslationService i18n, final DelContainerForEditorAction action, final CoreResources res) {
-        super(i18n, action, res);
-    }
+  @Inject
+  public DelBlogMenuItem(final I18nTranslationService i18n, final DelContainerForEditorAction action,
+      final CoreResources res) {
+    super(i18n, action, res);
+  }
 
 }

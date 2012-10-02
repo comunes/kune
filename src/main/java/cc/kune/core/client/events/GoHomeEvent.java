@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import com.google.gwt.event.shared.HasHandlers;
 
-public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> { 
+public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
 
   public interface HasGoHomeHandlers extends HasHandlers {
     HandlerRegistration addGoHomeHandler(GoHomeHandler handler);
@@ -44,7 +44,6 @@ public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
   public static Type<GoHomeHandler> getType() {
     return TYPE;
   }
-
 
   public GoHomeEvent() {
   }
@@ -71,7 +70,6 @@ public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
 
   @Override
   public String toString() {
-    return "GoHomeEvent["
-    + "]";
+    return "GoHomeEvent[" + "]";
   }
 }

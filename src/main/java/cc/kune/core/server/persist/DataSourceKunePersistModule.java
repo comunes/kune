@@ -74,7 +74,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Instantiates this module only during tests
-   *
+   * 
    * @param settedProperties
    *          the setted properties
    * @param settedJpaUnit

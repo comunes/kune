@@ -25,23 +25,23 @@ import com.google.gwt.resources.client.ImageResource;
 
 public interface UserMessageImages extends ClientBundle {
 
-    public static final UserMessageImages INST = GWT.create(UserMessageImages.class);
+  public static final UserMessageImages INST = GWT.create(UserMessageImages.class);
 
-    ImageResource error();
+  ImageResource error();
 
-    ImageResource info();
+  ImageResource info();
 
-    ImageResource warning();
+  ImageResource warning();
 
-    ImageResource important();
+  ImageResource important();
 
-    ImageResource severe();
+  ImageResource severe();
 
-    ImageResource remove();
+  ImageResource remove();
 
-    @Source("remove-grey.png")
-    ImageResource removeGrey();
+  @Source("remove-grey.png")
+  ImageResource removeGrey();
 
-    @Source("remove-over.png")
-    ImageResource removeOver();
+  @Source("remove-over.png")
+  ImageResource removeOver();
 }

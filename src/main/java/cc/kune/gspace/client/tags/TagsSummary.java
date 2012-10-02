@@ -23,6 +23,6 @@ import cc.kune.core.shared.domain.TagCloudResult;
 
 public interface TagsSummary {
 
-    void setGroupTags(TagCloudResult tagCloud);
+  void setGroupTags(TagCloudResult tagCloud);
 
 }

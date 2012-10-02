@@ -51,8 +51,8 @@ import com.google.inject.Provider;
 public class GSpaceParts {
 
   @Inject
-  public GSpaceParts(final Session session, final GSpaceThemeManager themeManager, final GSpaceArmor armor,
-      final Provider<EntityLicensePresenter> licenseFooter,
+  public GSpaceParts(final Session session, final GSpaceThemeManager themeManager,
+      final GSpaceArmor armor, final Provider<EntityLicensePresenter> licenseFooter,
       final Provider<TagsSummaryPresenter> tagsPresenter, final Provider<ToolSelector> toolSelector,
       final Provider<NoHomePageViewer> noHome, final Provider<ContentViewerPresenter> docsViewer,
       final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,

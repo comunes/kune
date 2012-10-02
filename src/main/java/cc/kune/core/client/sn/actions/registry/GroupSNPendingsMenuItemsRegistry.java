@@ -37,45 +37,46 @@ import com.google.inject.Provider;
 
 public class GroupSNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
-    @Inject
-    public GroupSNPendingsMenuItemsRegistry(final SessionConstants session, final IsCurrentStateAdministrableCondition isAdministrableCondition,
-            final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
-            final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
-            final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
-            final DenyJoinGroupAction denyJoinGroupAction, final GotoGroupAction gotoGroupAction,
-            final GotoPersonAction gotoPersonAction) {
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(acceptJoinGroupAction);
-                item.add(isAdministrableCondition);
-                return item;
-            }
-        });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(denyJoinGroupAction);
-                item.add(isAdministrableCondition);
-                return item;
-            }
-        });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(gotoPersonAction);
-                item.add(isPersonCondition);
-                return item;
-            }
-        });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(gotoGroupAction);
-                item.add(isGroupCondition);
-                return item;
-            }
-        });
-    }
+  @Inject
+  public GroupSNPendingsMenuItemsRegistry(final SessionConstants session,
+      final IsCurrentStateAdministrableCondition isAdministrableCondition,
+      final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
+      final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
+      final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
+      final DenyJoinGroupAction denyJoinGroupAction, final GotoGroupAction gotoGroupAction,
+      final GotoPersonAction gotoPersonAction) {
+    add(new Provider<MenuItemDescriptor>() {
+      @Override
+      public MenuItemDescriptor get() {
+        final MenuItemDescriptor item = new MenuItemDescriptor(acceptJoinGroupAction);
+        item.add(isAdministrableCondition);
+        return item;
+      }
+    });
+    add(new Provider<MenuItemDescriptor>() {
+      @Override
+      public MenuItemDescriptor get() {
+        final MenuItemDescriptor item = new MenuItemDescriptor(denyJoinGroupAction);
+        item.add(isAdministrableCondition);
+        return item;
+      }
+    });
+    add(new Provider<MenuItemDescriptor>() {
+      @Override
+      public MenuItemDescriptor get() {
+        final MenuItemDescriptor item = new MenuItemDescriptor(gotoPersonAction);
+        item.add(isPersonCondition);
+        return item;
+      }
+    });
+    add(new Provider<MenuItemDescriptor>() {
+      @Override
+      public MenuItemDescriptor get() {
+        final MenuItemDescriptor item = new MenuItemDescriptor(gotoGroupAction);
+        item.add(isGroupCondition);
+        return item;
+      }
+    });
+  }
 
 }

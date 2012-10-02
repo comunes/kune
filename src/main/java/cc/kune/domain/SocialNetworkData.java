@@ -24,110 +24,111 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
 
 public class SocialNetworkData {
-    private SocialNetworkVisibility socialNetworkVisibility;
-    private SocialNetwork groupMembers;
-    private ParticipationData userParticipation;
-    private UserSNetVisibility userBuddiesVisibility;
-    private UserBuddiesData userBuddies;
-    private AccessRights groupRights;
-    private boolean isBuddiesVisible;
-    private boolean isMembersVisible;
+  private SocialNetworkVisibility socialNetworkVisibility;
+  private SocialNetwork groupMembers;
+  private ParticipationData userParticipation;
+  private UserSNetVisibility userBuddiesVisibility;
+  private UserBuddiesData userBuddies;
+  private AccessRights groupRights;
+  private boolean isBuddiesVisible;
+  private boolean isMembersVisible;
 
-    public SocialNetworkData() {
-        this(null, null, null, null, null, null, false, false);
-    }
+  public SocialNetworkData() {
+    this(null, null, null, null, null, null, false, false);
+  }
 
-    public SocialNetworkData(SocialNetworkVisibility socialNetworkVisibility, SocialNetwork groupMembers,
-            ParticipationData userParticipation, UserSNetVisibility userBuddiesVisibility,
-            UserBuddiesData userBuddies, AccessRights groupRights, boolean isBuddiesVisible, boolean isMembersVisible) {
-        this.socialNetworkVisibility = socialNetworkVisibility;
-        this.groupMembers = groupMembers;
-        this.userParticipation = userParticipation;
-        this.userBuddiesVisibility = userBuddiesVisibility;
-        this.userBuddies = userBuddies;
-        this.groupRights = groupRights;
-        this.isBuddiesVisible = isBuddiesVisible;
-        this.isMembersVisible = isMembersVisible;
-    }
+  public SocialNetworkData(SocialNetworkVisibility socialNetworkVisibility, SocialNetwork groupMembers,
+      ParticipationData userParticipation, UserSNetVisibility userBuddiesVisibility,
+      UserBuddiesData userBuddies, AccessRights groupRights, boolean isBuddiesVisible,
+      boolean isMembersVisible) {
+    this.socialNetworkVisibility = socialNetworkVisibility;
+    this.groupMembers = groupMembers;
+    this.userParticipation = userParticipation;
+    this.userBuddiesVisibility = userBuddiesVisibility;
+    this.userBuddies = userBuddies;
+    this.groupRights = groupRights;
+    this.isBuddiesVisible = isBuddiesVisible;
+    this.isMembersVisible = isMembersVisible;
+  }
 
-    public SocialNetwork getGroupMembers() {
-        return groupMembers;
-    }
+  public SocialNetwork getGroupMembers() {
+    return groupMembers;
+  }
 
-    public AccessRights getGroupRights() {
-        return groupRights;
-    }
+  public AccessRights getGroupRights() {
+    return groupRights;
+  }
 
-    public boolean getIsBuddiesVisible() {
-        return isBuddiesVisible;
-    }
+  public boolean getIsBuddiesVisible() {
+    return isBuddiesVisible;
+  }
 
-    public boolean getIsMembersVisible() {
-        return isMembersVisible;
-    }
+  public boolean getIsMembersVisible() {
+    return isMembersVisible;
+  }
 
-    public SocialNetworkVisibility getSocialNetworkVisibility() {
-        return socialNetworkVisibility;
-    }
+  public SocialNetworkVisibility getSocialNetworkVisibility() {
+    return socialNetworkVisibility;
+  }
 
-    public UserBuddiesData getUserBuddies() {
-        return userBuddies;
-    }
+  public UserBuddiesData getUserBuddies() {
+    return userBuddies;
+  }
 
-    public UserSNetVisibility getUserBuddiesVisibility() {
-        return userBuddiesVisibility;
-    }
+  public UserSNetVisibility getUserBuddiesVisibility() {
+    return userBuddiesVisibility;
+  }
 
-    public ParticipationData getUserParticipation() {
-        return userParticipation;
-    }
+  public ParticipationData getUserParticipation() {
+    return userParticipation;
+  }
 
-    public boolean isBuddiesVisible() {
-        return isBuddiesVisible;
-    }
+  public boolean isBuddiesVisible() {
+    return isBuddiesVisible;
+  }
 
-    public boolean isMembersVisible() {
-        return isMembersVisible;
-    }
+  public boolean isMembersVisible() {
+    return isMembersVisible;
+  }
 
-    public void setBuddiesVisible(boolean isBuddiesVisible) {
-        this.isBuddiesVisible = isBuddiesVisible;
-    }
+  public void setBuddiesVisible(boolean isBuddiesVisible) {
+    this.isBuddiesVisible = isBuddiesVisible;
+  }
 
-    public void setGroupMembers(SocialNetwork groupMembers) {
-        this.groupMembers = groupMembers;
-    }
+  public void setGroupMembers(SocialNetwork groupMembers) {
+    this.groupMembers = groupMembers;
+  }
 
-    public void setGroupRights(AccessRights groupRights) {
-        this.groupRights = groupRights;
-    }
+  public void setGroupRights(AccessRights groupRights) {
+    this.groupRights = groupRights;
+  }
 
-    public void setIsBuddiesVisible(boolean isBuddiesVisible) {
-        setBuddiesVisible(isBuddiesVisible);
-    }
+  public void setIsBuddiesVisible(boolean isBuddiesVisible) {
+    setBuddiesVisible(isBuddiesVisible);
+  }
 
-    public void setIsMembersVisible(boolean isMembersVisible) {
-        setMembersVisible(isMembersVisible);
-    }
+  public void setIsMembersVisible(boolean isMembersVisible) {
+    setMembersVisible(isMembersVisible);
+  }
 
-    public void setMembersVisible(boolean isMembersVisible) {
-        this.isMembersVisible = isMembersVisible;
-    }
+  public void setMembersVisible(boolean isMembersVisible) {
+    this.isMembersVisible = isMembersVisible;
+  }
 
-    public void setSocialNetworkVisibility(SocialNetworkVisibility socialNetworkVisibility) {
-        this.socialNetworkVisibility = socialNetworkVisibility;
-    }
+  public void setSocialNetworkVisibility(SocialNetworkVisibility socialNetworkVisibility) {
+    this.socialNetworkVisibility = socialNetworkVisibility;
+  }
 
-    public void setUserBuddies(UserBuddiesData userBuddies) {
-        this.userBuddies = userBuddies;
-    }
+  public void setUserBuddies(UserBuddiesData userBuddies) {
+    this.userBuddies = userBuddies;
+  }
 
-    public void setUserBuddiesVisibility(UserSNetVisibility userBuddiesVisibility) {
-        this.userBuddiesVisibility = userBuddiesVisibility;
-    }
+  public void setUserBuddiesVisibility(UserSNetVisibility userBuddiesVisibility) {
+    this.userBuddiesVisibility = userBuddiesVisibility;
+  }
 
-    public void setUserParticipation(ParticipationData userParticipation) {
-        this.userParticipation = userParticipation;
-    }
+  public void setUserParticipation(ParticipationData userParticipation) {
+    this.userParticipation = userParticipation;
+  }
 
 }

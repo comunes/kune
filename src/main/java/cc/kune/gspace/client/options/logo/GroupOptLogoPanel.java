@@ -27,12 +27,13 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
 public class GroupOptLogoPanel extends EntityOptLogoPanel implements GroupOptLogoView {
-    public static final String BUTTON_ID = "k-golp-sendb";
-    public static final String PANEL_ID = "k-golp-pan";
+  public static final String BUTTON_ID = "k-golp-sendb";
+  public static final String PANEL_ID = "k-golp-pan";
 
-    @Inject
-    public GroupOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n, final NavResources res) {
-        super(eventBus, i18n, PANEL_ID, BUTTON_ID, FileConstants.GROUP_LOGO_FIELD, res);
-    }
+  @Inject
+  public GroupOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,
+      final NavResources res) {
+    super(eventBus, i18n, PANEL_ID, BUTTON_ID, FileConstants.GROUP_LOGO_FIELD, res);
+  }
 
 }

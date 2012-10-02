@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class UserMustBeLoggedException extends DefaultException {
-    private static final long serialVersionUID = -5091069990899662849L;
+  private static final long serialVersionUID = -5091069990899662849L;
 }

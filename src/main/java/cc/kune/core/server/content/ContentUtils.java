@@ -23,16 +23,16 @@ import cc.kune.core.client.errors.ContentNotFoundException;
 
 public final class ContentUtils {
 
-    // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 14:05
-    public static Long parseId(final String id) throws ContentNotFoundException {
-        try {
-            return Long.valueOf(id);
-        } catch (final NumberFormatException e) {
-            // @PMD:REVIEWED:PreserveStackTrace: by vjrj on 21/05/09 14:05
-            throw new ContentNotFoundException();
-        }
+  // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 14:05
+  public static Long parseId(final String id) throws ContentNotFoundException {
+    try {
+      return Long.valueOf(id);
+    } catch (final NumberFormatException e) {
+      // @PMD:REVIEWED:PreserveStackTrace: by vjrj on 21/05/09 14:05
+      throw new ContentNotFoundException();
     }
+  }
 
-    private ContentUtils() {
-    }
+  private ContentUtils() {
+  }
 }

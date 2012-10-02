@@ -34,20 +34,21 @@ import com.google.inject.persist.finder.Finder;
 
 public interface TagUserContentFinder {
 
-    @Finder(query = "FROM TagUserContent t WHERE t.user = :user AND t.content = :content", returnAs = ArrayList.class)
-    public List<TagUserContent> find(@Named("user") final User user, @Named("content") final Content content);
+  @Finder(query = "FROM TagUserContent t WHERE t.user = :user AND t.content = :content", returnAs = ArrayList.class)
+  public List<TagUserContent> find(@Named("user") final User user,
+      @Named("content") final Content content);
 
-    @Finder(query = "SELECT t.tag FROM TagUserContent t WHERE t.user = :user AND t.content = :content", returnAs = ArrayList.class)
-    public List<Tag> findTags(@Named("user") final User user, @Named("content") final Content content);
+  @Finder(query = "SELECT t.tag FROM TagUserContent t WHERE t.user = :user AND t.content = :content", returnAs = ArrayList.class)
+  public List<Tag> findTags(@Named("user") final User user, @Named("content") final Content content);
 
-    @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) ASC LIMIT 0,1")
-    public Long getMaxGrouped(@Named("group") final Group group);
+  @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) ASC LIMIT 0,1")
+  public Long getMaxGrouped(@Named("group") final Group group);
 
-    @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) DESC LIMIT 0,1")
-    public Long getMinGrouped(@Named("group") final Group group);
+  @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) DESC LIMIT 0,1")
+  public Long getMinGrouped(@Named("group") final Group group);
 
-    @Finder(query = "SELECT NEW cc.kune.core.shared.domain.TagCount(t.name, COUNT(tuc.content.id)) "
-            + "FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group "
-            + "GROUP BY t.name ORDER BY t.name", returnAs = ArrayList.class)
-    public List<TagCount> getTagsGroups(@Named("group") final Group group);
+  @Finder(query = "SELECT NEW cc.kune.core.shared.domain.TagCount(t.name, COUNT(tuc.content.id)) "
+      + "FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group "
+      + "GROUP BY t.name ORDER BY t.name", returnAs = ArrayList.class)
+  public List<TagCount> getTagsGroups(@Named("group") final Group group);
 }

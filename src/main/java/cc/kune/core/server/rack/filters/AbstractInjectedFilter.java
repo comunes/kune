@@ -24,7 +24,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-
 import cc.kune.core.server.rack.RackServletFilter;
 
 import com.google.inject.Injector;

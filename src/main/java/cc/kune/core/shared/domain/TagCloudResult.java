@@ -25,46 +25,47 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class TagCloudResult implements IsSerializable {
-    private List<TagCount> tagCountList;
-    private int maxValue;
-    private int minValue;
+  private List<TagCount> tagCountList;
+  private int maxValue;
+  private int minValue;
 
-    public TagCloudResult() {
-        this(new ArrayList<TagCount>(), 0, 0);
-    }
+  public TagCloudResult() {
+    this(new ArrayList<TagCount>(), 0, 0);
+  }
 
-    public TagCloudResult(final List<TagCount> tagCountList, final int maxValue, final int minValue) {
-        this.tagCountList = tagCountList;
-        this.maxValue = maxValue;
-        this.minValue = minValue;
-    }
+  public TagCloudResult(final List<TagCount> tagCountList, final int maxValue, final int minValue) {
+    this.tagCountList = tagCountList;
+    this.maxValue = maxValue;
+    this.minValue = minValue;
+  }
 
-    public int getMaxValue() {
-        return maxValue;
-    }
+  public int getMaxValue() {
+    return maxValue;
+  }
 
-    public int getMinValue() {
-        return minValue;
-    }
+  public int getMinValue() {
+    return minValue;
+  }
 
-    public List<TagCount> getTagCountList() {
-        return tagCountList;
-    }
+  public List<TagCount> getTagCountList() {
+    return tagCountList;
+  }
 
-    public void setMaxValue(final int maxValue) {
-        this.maxValue = maxValue;
-    }
+  public void setMaxValue(final int maxValue) {
+    this.maxValue = maxValue;
+  }
 
-    public void setMinValue(final int minValue) {
-        this.minValue = minValue;
-    }
+  public void setMinValue(final int minValue) {
+    this.minValue = minValue;
+  }
 
-    public void setTagCountList(final List<TagCount> tagCountList) {
-        this.tagCountList = tagCountList;
-    }
+  public void setTagCountList(final List<TagCount> tagCountList) {
+    this.tagCountList = tagCountList;
+  }
 
-    @Override
-    public String toString() {
-        return "TagCloudResult[list:" + tagCountList + "; maxValue: " + maxValue + "; minValue: " + minValue + "]";
-    }
+  @Override
+  public String toString() {
+    return "TagCloudResult[list:" + tagCountList + "; maxValue: " + maxValue + "; minValue: " + minValue
+        + "]";
+  }
 }

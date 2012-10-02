@@ -45,8 +45,8 @@ public class AddEntityToThisGroupAction extends SNRolAction {
   @Inject
   public AddEntityToThisGroupAction(final StateManager stateManager, final Session session,
       final I18nTranslationService i18n, final CoreResources res,
-      final Provider<SocialNetServiceAsync> snServiceProvider,
-      final AddMemberSearchPanel searchPanel, final AccessRightsClientManager rightsClientManager) {
+      final Provider<SocialNetServiceAsync> snServiceProvider, final AddMemberSearchPanel searchPanel,
+      final AccessRightsClientManager rightsClientManager) {
     super(stateManager, session, i18n, res, snServiceProvider, rightsClientManager,
         AccessRolDTO.Administrator, true, false, true);
     this.searchPanel = searchPanel;

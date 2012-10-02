@@ -24,74 +24,74 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class LinkDTO implements IsSerializable {
-    private String shortName;
-    private String longName;
-    private String iconUrl;
-    private String link;
-    private Double rate;
-    private List<TagDTO> tags;
+  private String shortName;
+  private String longName;
+  private String iconUrl;
+  private String link;
+  private Double rate;
+  private List<TagDTO> tags;
 
-    public LinkDTO() {
-        this(null, null, null, null);
-    }
+  public LinkDTO() {
+    this(null, null, null, null);
+  }
 
-    public LinkDTO(final String shortName, final String longName, final String iconUrl, final String link) {
-        this.shortName = shortName;
-        this.longName = longName;
-        this.iconUrl = iconUrl;
-        this.link = link;
-    }
+  public LinkDTO(final String shortName, final String longName, final String iconUrl, final String link) {
+    this.shortName = shortName;
+    this.longName = longName;
+    this.iconUrl = iconUrl;
+    this.link = link;
+  }
 
-    public String getIconUrl() {
-        return iconUrl;
-    }
+  public String getIconUrl() {
+    return iconUrl;
+  }
 
-    public String getLink() {
-        return link;
-    }
+  public String getLink() {
+    return link;
+  }
 
-    public String getLongName() {
-        return longName;
-    }
+  public String getLongName() {
+    return longName;
+  }
 
-    public Double getRate() {
-        return rate;
-    }
+  public Double getRate() {
+    return rate;
+  }
 
-    public String getShortName() {
-        return shortName;
-    }
+  public String getShortName() {
+    return shortName;
+  }
 
-    public List<TagDTO> getTags() {
-        return tags;
-    }
+  public List<TagDTO> getTags() {
+    return tags;
+  }
 
-    public void setIconUrl(final String iconUrl) {
-        this.iconUrl = iconUrl;
-    }
+  public void setIconUrl(final String iconUrl) {
+    this.iconUrl = iconUrl;
+  }
 
-    public void setLink(final String link) {
-        this.link = link;
-    }
+  public void setLink(final String link) {
+    this.link = link;
+  }
 
-    public void setLongName(final String longName) {
-        this.longName = longName;
-    }
+  public void setLongName(final String longName) {
+    this.longName = longName;
+  }
 
-    public void setRate(final Double rate) {
-        this.rate = rate;
-    }
+  public void setRate(final Double rate) {
+    this.rate = rate;
+  }
 
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
+  public void setShortName(final String shortName) {
+    this.shortName = shortName;
+  }
 
-    public void setTags(final List<TagDTO> tags) {
-        this.tags = tags;
-    }
+  public void setTags(final List<TagDTO> tags) {
+    this.tags = tags;
+  }
 
-    @Override
-    public String toString() {
-        return "LinkDTO[" + getLink() + ": " + getLongName() + "]";
-    }
+  @Override
+  public String toString() {
+    return "LinkDTO[" + getLink() + ": " + getLongName() + "]";
+  }
 }

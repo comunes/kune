@@ -25,10 +25,10 @@ import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.user.client.ui.MenuBar.Resources;
 
 public interface SubMenuResources extends Resources {
-    public static final SubMenuResources INSTANCE = GWT.create(SubMenuResources.class);
+  public static final SubMenuResources INSTANCE = GWT.create(SubMenuResources.class);
 
-    @Override
-    @Source("arrow-right-white.gif")
-    @ImageOptions(flipRtl = true)
-    ImageResource menuBarSubMenuIcon();
+  @Override
+  @Source("arrow-right-white.gif")
+  @ImageOptions(flipRtl = true)
+  ImageResource menuBarSubMenuIcon();
 }

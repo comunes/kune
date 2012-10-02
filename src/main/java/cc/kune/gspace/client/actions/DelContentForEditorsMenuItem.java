@@ -50,8 +50,8 @@ public class DelContentForEditorsMenuItem extends MenuItemDescriptor {
 
   }
 
-  public DelContentForEditorsMenuItem(final I18nTranslationService i18n, final DelContentForEditorsAction action,
-      final CoreResources res) {
+  public DelContentForEditorsMenuItem(final I18nTranslationService i18n,
+      final DelContentForEditorsAction action, final CoreResources res) {
     super(action);
     this.withText(i18n.t("Delete")).withIcon(res.cancel());
   }

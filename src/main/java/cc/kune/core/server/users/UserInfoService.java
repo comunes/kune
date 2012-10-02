@@ -19,12 +19,11 @@
  */
 package cc.kune.core.server.users;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.domain.User;
 
 public interface UserInfoService {
 
-    UserInfo buildInfo(User user, String userHash) throws DefaultException;
+  UserInfo buildInfo(User user, String userHash) throws DefaultException;
 
 }

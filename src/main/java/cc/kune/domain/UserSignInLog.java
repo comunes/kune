@@ -51,13 +51,17 @@ public class UserSignInLog implements HasId {
 
   /**
    * Instantiates a new user sign in log.
-   *
-   * @param user the user
-   * @param ipAddress the ip address of the client
-   * @param userAgent the user agent of the client
-   * @param hash the session hash
+   * 
+   * @param user
+   *          the user
+   * @param ipAddress
+   *          the ip address of the client
+   * @param userAgent
+   *          the user agent of the client
+   * @param hash
+   *          the session hash
    */
-  public UserSignInLog(User user, String ipAddress,String userAgent, String hash) {
+  public UserSignInLog(User user, String ipAddress, String userAgent, String hash) {
     this.user = user;
     this.ipAddress = ipAddress;
     long now = System.currentTimeMillis();
@@ -68,7 +72,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the user.
-   *
+   * 
    * @return the user
    */
   public User getUser() {
@@ -77,7 +81,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the ip address.
-   *
+   * 
    * @return the ip address
    */
   public String getIpAddress() {
@@ -86,7 +90,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the sign in date.
-   *
+   * 
    * @return the sign in date
    */
   public Long getSignInDate() {
@@ -95,7 +99,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the user agent.
-   *
+   * 
    * @return the user agent
    */
   public String getUserAgent() {
@@ -104,7 +108,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the hash.
-   *
+   * 
    * @return the hash
    */
   public String getHash() {
@@ -113,7 +117,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -122,8 +126,9 @@ public class UserSignInLog implements HasId {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(Long id) {
     this.id = id;

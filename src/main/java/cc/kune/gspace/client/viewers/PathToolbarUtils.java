@@ -71,8 +71,8 @@ public class PathToolbarUtils {
     // btn.withIcon(iconsRegistry.getContentTypeIcon(WikiToolConstants.TYPE_FOLDER));
 
     // FIXME: with Group Icon + Name we get some css issue
-    //if (minimal)
-      btn.withIcon(new Url(downloadProvider.get().getGroupLogo(group)));
+    // if (minimal)
+    btn.withIcon(new Url(downloadProvider.get().getGroupLogo(group)));
     return btn;
   }
 

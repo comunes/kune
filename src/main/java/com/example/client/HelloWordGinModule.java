@@ -11,19 +11,19 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
  */
 public class HelloWordGinModule extends AbstractPresenterModule {
 
-    /*
-     * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
-     * in the injector. See the GWTPlatform doc
-     */
-    public interface HelloWordGinjector extends Ginjector {
-        AsyncProvider<HelloWorldPresenter> getHelloWorldPresenter();
-    }
+  /*
+   * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
+   * in the injector. See the GWTPlatform doc
+   */
+  public interface HelloWordGinjector extends Ginjector {
+    AsyncProvider<HelloWorldPresenter> getHelloWorldPresenter();
+  }
 
-    @Override
-    protected void configure() {
-        bindPresenter(HelloWorldPresenter.class, HelloWorldPresenter.HelloWorldView.class, HelloWorldPanel.class,
-                HelloWorldPresenter.HelloWorldProxy.class);
-        bind(HelloWorldActions.class).in(Singleton.class);
-    }
+  @Override
+  protected void configure() {
+    bindPresenter(HelloWorldPresenter.class, HelloWorldPresenter.HelloWorldView.class,
+        HelloWorldPanel.class, HelloWorldPresenter.HelloWorldProxy.class);
+    bind(HelloWorldActions.class).in(Singleton.class);
+  }
 
 }

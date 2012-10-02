@@ -27,8 +27,9 @@ import com.google.inject.Inject;
 
 public class DelTaskMenuItem extends DelContentForEditorsMenuItem {
 
-    @Inject
-    public DelTaskMenuItem(final I18nTranslationService i18n, final DelContentForEditorsAction action, final CoreResources res) {
-        super(i18n, action, res);
-    }
+  @Inject
+  public DelTaskMenuItem(final I18nTranslationService i18n, final DelContentForEditorsAction action,
+      final CoreResources res) {
+    super(i18n, action, res);
+  }
 }

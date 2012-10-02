@@ -20,5 +20,5 @@
 package cc.kune.core.server.xmpp;
 
 public interface Room {
-    void setListener(RoomListener listener);
+  void setListener(RoomListener listener);
 }

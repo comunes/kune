@@ -131,7 +131,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     longNameField = groupFieldFactory.createLongName(LONGNAME_FIELD);
     longNameField.setTabIndex(1);
     form.add(longNameField);
-    
+
     shortNameField = groupFieldFactory.createGroupShortName(SHORTNAME_FIELD);
     shortNameField.setTabIndex(2);
     form.add(shortNameField);
@@ -194,7 +194,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   public void focusOnShortName() {
     shortNameField.focus();
   }
-  
+
   @Override
   public void focusOnLongName() {
     longNameField.focus();

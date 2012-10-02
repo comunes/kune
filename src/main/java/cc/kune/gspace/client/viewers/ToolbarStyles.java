@@ -26,7 +26,7 @@ public class ToolbarStyles {
   public static final String CSS_BTN_RIGTH = "k-button, k-button-right, k-fl";
 
   public static String calculateStyle(final int pos, final int length) {
-    //GWT.log("PATH pos: " + pos + " length: " + length);
+    // GWT.log("PATH pos: " + pos + " length: " + length);
     if (length == 1) {
       return ToolbarStyles.CSS_BTN_ALONE;
     }

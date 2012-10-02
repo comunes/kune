@@ -38,47 +38,48 @@ import cc.kune.core.server.rack.utils.RackHelper;
 import com.google.inject.Inject;
 
 public class RESTServiceFilter extends AbstractInjectedFilter {
-    private static final Log LOG = LogFactory.getLog(RESTServiceFilter.class);
+  private static final Log LOG = LogFactory.getLog(RESTServiceFilter.class);
 
-    private final Pattern pattern;
-    private final Class<?> serviceClass;
+  private final Pattern pattern;
+  private final Class<?> serviceClass;
 
-    @Inject
-    private TransactionalServiceExecutor transactionalFilter;
+  @Inject
+  private TransactionalServiceExecutor transactionalFilter;
 
-    public RESTServiceFilter(final String pattern, final Class<?> serviceClass) {
-        this.serviceClass = serviceClass;
-        this.pattern = Pattern.compile(pattern);
+  public RESTServiceFilter(final String pattern, final Class<?> serviceClass) {
+    this.serviceClass = serviceClass;
+    this.pattern = Pattern.compile(pattern);
+  }
+
+  @Override
+  public void destroy() {
+  }
+
+  public void doFilter(final ServletRequest request, final ServletResponse response,
+      final FilterChain chain) throws IOException, ServletException {
+
+    String methodName = getMethodName(request);
+    ParametersAdapter parameters = new ParametersAdapter(request);
+    LOG.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
+
+    response.setCharacterEncoding("utf-8");
+    response.setContentType("text/json");
+    Object output = transactionalFilter.doService(serviceClass, methodName, parameters,
+        getInstance(serviceClass));
+    if (output != null) {
+      PrintWriter writer = response.getWriter();
+      writer.print(output);
+      writer.flush();
+    } else {
+      chain.doFilter(request, response);
     }
+  }
 
-    @Override
-    public void destroy() {
-    }
-
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-            throws IOException, ServletException {
-
-        String methodName = getMethodName(request);
-        ParametersAdapter parameters = new ParametersAdapter(request);
-        LOG.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
-
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/json");
-        Object output = transactionalFilter.doService(serviceClass, methodName, parameters, getInstance(serviceClass));
-        if (output != null) {
-            PrintWriter writer = response.getWriter();
-            writer.print(output);
-            writer.flush();
-        } else {
-            chain.doFilter(request, response);
-        }
-    }
-
-    private String getMethodName(final ServletRequest request) {
-        String relativeURL = RackHelper.getRelativeURL(request);
-        Matcher matcher = pattern.matcher(relativeURL);
-        matcher.find();
-        String methodName = matcher.group(1);
-        return methodName;
-    }
+  private String getMethodName(final ServletRequest request) {
+    String relativeURL = RackHelper.getRelativeURL(request);
+    Matcher matcher = pattern.matcher(relativeURL);
+    matcher.find();
+    String methodName = matcher.group(1);
+    return methodName;
+  }
 }

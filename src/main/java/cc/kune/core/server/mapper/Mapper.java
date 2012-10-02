@@ -21,16 +21,15 @@ package cc.kune.core.server.mapper;
 
 import java.util.List;
 
-
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.shared.dto.SearchResultDTO;
 
 public interface Mapper {
 
-    <T> T map(Object source, Class<T> type);
+  <T> T map(Object source, Class<T> type);
 
-    <T> List<T> mapList(List<?> list, Class<T> type);
+  <T> List<T> mapList(List<?> list, Class<T> type);
 
-    <K, T> SearchResultDTO<T> mapSearchResult(SearchResult<K> result, Class<T> type);
+  <K, T> SearchResultDTO<T> mapSearchResult(SearchResult<K> result, Class<T> type);
 
 }

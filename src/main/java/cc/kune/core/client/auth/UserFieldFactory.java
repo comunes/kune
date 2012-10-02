@@ -60,7 +60,12 @@ public class UserFieldFactory {
     longNameRegField.setWidth(DefaultForm.DEF_FIELD_WIDTH);
     longNameRegField.setAllowBlank(false);
     longNameRegField.setMinLength(3);
-    longNameRegField.setMaxLength(CoreConstants.MAX_LONG_NAME_SIZE);  /* Same in User.java/longName */
+    longNameRegField.setMaxLength(CoreConstants.MAX_LONG_NAME_SIZE); /*
+                                                                      * Same in
+                                                                      * User
+                                                                      * .java
+                                                                      * /longName
+                                                                      */
 
     longNameRegField.setId(fieldId);
     return longNameRegField;
@@ -91,7 +96,10 @@ public class UserFieldFactory {
     field.setWidth(DefaultForm.DEF_SMALL_FIELD_WIDTH);
     field.setAllowBlank(false);
     field.setMinLength(3);
-    field.setMaxLength(CoreConstants.MAX_SHORT_NAME_SIZE); /* Same in User.java/name */
+    field.setMaxLength(CoreConstants.MAX_SHORT_NAME_SIZE); /*
+                                                            * Same in
+                                                            * User.java/name
+                                                            */
     field.setRegex(TextUtils.SHORTNAME_UPPER_REGEXP);
     field.getMessages().setMinLengthText(minMaxText);
     field.getMessages().setMaxLengthText(minMaxText);

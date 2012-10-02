@@ -20,9 +20,9 @@
 package cc.kune.core.client.errors;
 
 public class UnknownPropertyException extends DefaultException {
-    private static final long serialVersionUID = -5921396887476497824L;
+  private static final long serialVersionUID = -5921396887476497824L;
 
-    public UnknownPropertyException(final String message) {
-        super(message);
-    }
+  public UnknownPropertyException(final String message) {
+    super(message);
+  }
 }

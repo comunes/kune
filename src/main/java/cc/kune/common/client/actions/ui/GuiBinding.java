@@ -23,8 +23,8 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 public interface GuiBinding {
 
-    AbstractGuiItem create(GuiActionDescrip descriptor);
+  AbstractGuiItem create(GuiActionDescrip descriptor);
 
-    boolean shouldBeAdded();
+  boolean shouldBeAdded();
 
 }

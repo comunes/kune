@@ -34,31 +34,31 @@ import cc.kune.domain.finders.LicenseFinder;
 import com.google.inject.Inject;
 
 public class LicenseManagerDefaultTest extends PersistenceTest {
-    private License license;
-    @Inject
-    LicenseFinder licenseFinder;
-    @Inject
-    LicenseManager licenseManager;
+  private License license;
+  @Inject
+  LicenseFinder licenseFinder;
+  @Inject
+  LicenseManager licenseManager;
 
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
+  @After
+  public void close() {
+    if (getTransaction().isActive()) {
+      getTransaction().rollback();
     }
+  }
 
-    @Before
-    public void insertData() {
-        openTransaction();
-        assertEquals(0, licenseFinder.getAll().size());
-        license = new License("by", "Creative Commons Attribution", "", "http://creativecommons.org/licenses/by/3.0/",
-                true, false, false, "", "");
-        licenseManager.persist(license);
-    }
+  @Before
+  public void insertData() {
+    openTransaction();
+    assertEquals(0, licenseFinder.getAll().size());
+    license = new License("by", "Creative Commons Attribution", "",
+        "http://creativecommons.org/licenses/by/3.0/", true, false, false, "", "");
+    licenseManager.persist(license);
+  }
 
-    @Test
-    public void testLicenseCreation() {
-        assertNotNull(license.getId());
-        assertEquals(1, licenseFinder.getAll().size());
-    }
+  @Test
+  public void testLicenseCreation() {
+    assertNotNull(license.getId());
+    assertEquals(1, licenseFinder.getAll().size());
+  }
 }

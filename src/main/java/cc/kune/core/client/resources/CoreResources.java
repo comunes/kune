@@ -542,6 +542,4 @@ public interface CoreResources extends CommonResources {
   @Source("icons/add-participant.png")
   ImageResource addParticipant();
 
-
-
 }

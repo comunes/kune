@@ -20,10 +20,10 @@
 package cc.kune.common.client.utils;
 
 public final class Convert {
-    public static int toInt(final String value) {
-        return Integer.valueOf(value);
-    }
+  public static int toInt(final String value) {
+    return Integer.valueOf(value);
+  }
 
-    private Convert() {
-    };
+  private Convert() {
+  };
 }

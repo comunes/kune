@@ -138,11 +138,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.manager.UserManager#askForEmailConfirmation(cc.kune
    * .domain.User, cc.kune.core.server.manager.impl.EmailConfirmationType)
-   *
+   * 
    * More info: http://en.wikipedia.org/wiki/Self-service_password_reset
    * http://en.wikipedia.org/wiki/Password_notification_e-mail
    * http://stackoverflow

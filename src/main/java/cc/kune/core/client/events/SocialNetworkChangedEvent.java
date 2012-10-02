@@ -24,7 +24,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class SocialNetworkChangedEvent extends GwtEvent<SocialNetworkChangedEvent.SocialNetworkChangedHandler> { 
+public class SocialNetworkChangedEvent extends
+    GwtEvent<SocialNetworkChangedEvent.SocialNetworkChangedHandler> {
 
   public interface HasSocialNetworkChangedHandlers extends HasHandlers {
     HandlerRegistration addSocialNetworkChangedHandler(SocialNetworkChangedHandler handler);
@@ -71,11 +72,11 @@ public class SocialNetworkChangedEvent extends GwtEvent<SocialNetworkChangedEven
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
-        return true;
+      return true;
     if (obj == null)
-        return false;
+      return false;
     if (getClass() != obj.getClass())
-        return false;
+      return false;
     SocialNetworkChangedEvent other = (SocialNetworkChangedEvent) obj;
     if (state == null) {
       if (other.state != null)
@@ -94,8 +95,6 @@ public class SocialNetworkChangedEvent extends GwtEvent<SocialNetworkChangedEven
 
   @Override
   public String toString() {
-    return "SocialNetworkChangedEvent["
-                 + state
-    + "]";
+    return "SocialNetworkChangedEvent[" + state + "]";
   }
 }

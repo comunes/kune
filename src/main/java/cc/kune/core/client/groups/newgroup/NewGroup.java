@@ -19,9 +19,8 @@
  */
 package cc.kune.core.client.groups.newgroup;
 
-
 public interface NewGroup {
 
-    void doNewGroup();
+  void doNewGroup();
 
 }

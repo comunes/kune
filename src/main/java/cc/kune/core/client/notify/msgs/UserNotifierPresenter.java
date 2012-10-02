@@ -34,29 +34,30 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 public class UserNotifierPresenter extends Presenter<UserNotifierView, UserNotifierProxy> {
-    @ProxyCodeSplit
-    public interface UserNotifierProxy extends Proxy<UserNotifierPresenter> {
-    }
+  @ProxyCodeSplit
+  public interface UserNotifierProxy extends Proxy<UserNotifierPresenter> {
+  }
 
-    public interface UserNotifierView extends PopupView {
-        public void notify(UserNotifyEvent event);
-    }
+  public interface UserNotifierView extends PopupView {
+    public void notify(UserNotifyEvent event);
+  }
 
-    @Inject
-    public UserNotifierPresenter(final EventBus eventBus, final UserNotifierView view, final UserNotifierProxy proxy) {
-        super(eventBus, view, proxy);
-    }
+  @Inject
+  public UserNotifierPresenter(final EventBus eventBus, final UserNotifierView view,
+      final UserNotifierProxy proxy) {
+    super(eventBus, view, proxy);
+  }
 
-    @ProxyEvent
-    public void onUserNotify(final UserNotifyEvent event) {
-        if (event.getLevel() != NotifyLevel.log) {
-            getView().notify(event);
-        }
+  @ProxyEvent
+  public void onUserNotify(final UserNotifyEvent event) {
+    if (event.getLevel() != NotifyLevel.log) {
+      getView().notify(event);
     }
+  }
 
-    @Override
-    protected void revealInParent() {
-        RevealRootPopupContentEvent.fire(this, this);
-    }
+  @Override
+  protected void revealInParent() {
+    RevealRootPopupContentEvent.fire(this, this);
+  }
 
 }

@@ -27,10 +27,10 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class StartChatWithThisPersonAction extends StartChatWithMemberAction {
-    @Inject
-    public StartChatWithThisPersonAction(final I18nTranslationService i18n, final CoreResources res,
-            final Provider<ChatClient> chatClient) {
-        super(i18n, res, chatClient);
-        putValue(NAME, i18n.t("Chat with this person"));
-    }
+  @Inject
+  public StartChatWithThisPersonAction(final I18nTranslationService i18n, final CoreResources res,
+      final Provider<ChatClient> chatClient) {
+    super(i18n, res, chatClient);
+    putValue(NAME, i18n.t("Chat with this person"));
+  }
 }

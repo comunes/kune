@@ -29,11 +29,11 @@ import com.google.gwt.inject.client.Ginjector;
 
 @GinModules(SampleGinModule.class)
 public interface SampleGinjector extends Ginjector {
-    GlobalShortcutRegister getGlobalShortcutRegister();
+  GlobalShortcutRegister getGlobalShortcutRegister();
 
-    GuiProvider getGuiProvider();
+  GuiProvider getGuiProvider();
 
-    GwtGuiProvider getGwtGuiProvider();
+  GwtGuiProvider getGwtGuiProvider();
 
-    GxtGuiProvider getGxtGuiProvider();
+  GxtGuiProvider getGxtGuiProvider();
 }

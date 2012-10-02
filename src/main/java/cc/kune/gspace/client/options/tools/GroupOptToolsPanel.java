@@ -25,8 +25,7 @@ import cc.kune.core.client.resources.CoreResources;
 
 import com.google.inject.Inject;
 
-public class GroupOptToolsPanel extends EntityOptToolsPanel implements
-    GroupOptToolsView {
+public class GroupOptToolsPanel extends EntityOptToolsPanel implements GroupOptToolsView {
 
   @Inject
   public GroupOptToolsPanel(final I18nTranslationService i18n, final CoreResources res,

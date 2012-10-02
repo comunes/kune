@@ -21,7 +21,7 @@ package cc.kune.core.client.state;
 
 /**
  * Some common url params like {@link ?locale}
- *
+ * 
  */
 public final class SiteParameters {
 

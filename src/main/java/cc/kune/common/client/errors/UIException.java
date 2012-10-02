@@ -23,21 +23,21 @@ import cc.kune.common.client.log.Log;
 
 public class UIException extends RuntimeException {
 
-    private static final long serialVersionUID = -1327164226202923181L;
+  private static final long serialVersionUID = -1327164226202923181L;
 
-    public UIException(final String text) {
-        super(text);
-        Log.error(text);
-    }
+  public UIException(final String text) {
+    super(text);
+    Log.error(text);
+  }
 
-    public UIException(final String text, final Throwable cause) {
-        super(text, cause);
-        Log.error(text, cause);
-    }
+  public UIException(final String text, final Throwable cause) {
+    super(text, cause);
+    Log.error(text, cause);
+  }
 
-    public UIException(final Throwable cause) {
-        super(cause);
-        Log.error("UIException", cause);
-    }
+  public UIException(final Throwable cause) {
+    super(cause);
+    Log.error("UIException", cause);
+  }
 
 }

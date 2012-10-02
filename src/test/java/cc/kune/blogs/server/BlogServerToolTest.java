@@ -19,10 +19,7 @@
  */
 package cc.kune.blogs.server;
 
-import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_BLOG;
-import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_POST;
-import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_ROOT;
-import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.blogs.shared.BlogsToolConstants.*;
 
 import org.junit.Before;
 import org.junit.Test;

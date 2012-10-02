@@ -23,37 +23,38 @@ import cc.kune.common.client.actions.AbstractAction;
 
 public class MenuRadioItemDescriptor extends MenuCheckItemDescriptor {
 
-    public static final String CHECKED_ITEM = "-checkeditem";
-    private final String group;
+  public static final String CHECKED_ITEM = "-checkeditem";
+  private final String group;
 
-    public MenuRadioItemDescriptor(final MenuDescriptor parent, final AbstractAction action, final String group) {
-        super(parent, action);
-        this.group = group;
-    }
+  public MenuRadioItemDescriptor(final MenuDescriptor parent, final AbstractAction action,
+      final String group) {
+    super(parent, action);
+    this.group = group;
+  }
 
-    public String getGroup() {
-        return group;
-    }
+  public String getGroup() {
+    return group;
+  }
 
-    @Override
-    public Class<?> getType() {
-        return MenuRadioItemDescriptor.class;
-    }
+  @Override
+  public Class<?> getType() {
+    return MenuRadioItemDescriptor.class;
+  }
 
-    private String previousCheckedItemId() {
-        return group + CHECKED_ITEM;
-    }
+  private String previousCheckedItemId() {
+    return group + CHECKED_ITEM;
+  }
 
-    @Override
-    public void setChecked(final boolean checked) {
-        if (checked) {
-            final MenuRadioItemDescriptor previous = (MenuRadioItemDescriptor) parent.getValue(previousCheckedItemId());
-            if (previous != null) {
-                previous.setChecked(false);
-            }
-            parent.putValue(previousCheckedItemId(), this);
-        }
-        super.setChecked(checked);
+  @Override
+  public void setChecked(final boolean checked) {
+    if (checked) {
+      final MenuRadioItemDescriptor previous = (MenuRadioItemDescriptor) parent.getValue(previousCheckedItemId());
+      if (previous != null) {
+        previous.setChecked(false);
+      }
+      parent.putValue(previousCheckedItemId(), this);
     }
+    super.setChecked(checked);
+  }
 
 }

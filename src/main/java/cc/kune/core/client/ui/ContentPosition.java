@@ -30,50 +30,52 @@ import com.google.inject.Inject;
 
 public class ContentPosition {
 
-    public static final String CENTER = "center";
-    public static final String LEFT = "left";
-    public static final String RIGHT = "right";
-    private static I18nTranslationService i18n;
-    private static Object[][] positionObjs;
-    protected static final String[][] POSITIONS = { new String[] { LEFT }, new String[] { CENTER }, new String[] { RIGHT } };
+  public static final String CENTER = "center";
+  public static final String LEFT = "left";
+  public static final String RIGHT = "right";
+  private static I18nTranslationService i18n;
+  private static Object[][] positionObjs;
+  protected static final String[][] POSITIONS = { new String[] { LEFT }, new String[] { CENTER },
+      new String[] { RIGHT } };
 
-    public synchronized static Object[][] getPositions() {
-        if (positionObjs == null) {
-            final String[][] values = POSITIONS;
-            positionObjs = new Object[values.length][1];
-            int i = 0;
-            for (final String[] position : values) {
-                final Object[] obj = new Object[] { position[0], i18n.t(position[0]) };
-                positionObjs[i++] = obj;
-            }
-        }
-        return positionObjs;
+  public synchronized static Object[][] getPositions() {
+    if (positionObjs == null) {
+      final String[][] values = POSITIONS;
+      positionObjs = new Object[values.length][1];
+      int i = 0;
+      for (final String[] position : values) {
+        final Object[] obj = new Object[] { position[0], i18n.t(position[0]) };
+        positionObjs[i++] = obj;
+      }
     }
+    return positionObjs;
+  }
 
-    public static String setCenterPosition(final String elementCode) {
-        return setPosition(elementCode, false, CENTER);
-    }
+  public static String setCenterPosition(final String elementCode) {
+    return setPosition(elementCode, false, CENTER);
+  }
 
-    public static Element setPosition(final Element element, final boolean wraptext, final String position) {
-        if (!wraptext || position.equals(ContentPosition.CENTER)) {
-            final com.google.gwt.user.client.Element divEl = DOM.createDiv();
-            CSS.setProperty(divEl, CSS.A.TEXT_ALIGN, position);
-            divEl.setInnerHTML(element.getString());
-            return divEl;
-        } else {
-            CSS.setProperty(element, CSS.A.FLOAT, position);
-            return element;
-        }
+  public static Element setPosition(final Element element, final boolean wraptext, final String position) {
+    if (!wraptext || position.equals(ContentPosition.CENTER)) {
+      final com.google.gwt.user.client.Element divEl = DOM.createDiv();
+      CSS.setProperty(divEl, CSS.A.TEXT_ALIGN, position);
+      divEl.setInnerHTML(element.getString());
+      return divEl;
+    } else {
+      CSS.setProperty(element, CSS.A.FLOAT, position);
+      return element;
     }
+  }
 
-    public static String setPosition(final String elementCode, final boolean wraptext, final String position) {
-        final HTML html = new HTML(elementCode);
-        html.removeStyleName("gwt-HTML");
-        return setPosition(html.getElement(), wraptext, position).getString();
-    }
+  public static String setPosition(final String elementCode, final boolean wraptext,
+      final String position) {
+    final HTML html = new HTML(elementCode);
+    html.removeStyleName("gwt-HTML");
+    return setPosition(html.getElement(), wraptext, position).getString();
+  }
 
-    @Inject
-    public ContentPosition(final I18nTranslationService i18n) {
-        ContentPosition.i18n = i18n;
-    }
+  @Inject
+  public ContentPosition(final I18nTranslationService i18n) {
+    ContentPosition.i18n = i18n;
+  }
 }

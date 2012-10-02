@@ -153,9 +153,9 @@ public class I18nTranslation implements HasId {
   }
 
   /**
-   *
+   * 
    * The id of what we are translating
-   *
+   * 
    * @return the parent id
    */
   public I18nTranslation getParent() {

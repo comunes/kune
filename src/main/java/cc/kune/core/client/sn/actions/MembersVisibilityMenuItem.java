@@ -27,16 +27,16 @@ import com.google.inject.Inject;
 
 public class MembersVisibilityMenuItem extends MenuRadioItemDescriptor {
 
-    private static final String GROUP_MEMBERS_VISIBILITY = "k-sn-gmembers-vis";
+  private static final String GROUP_MEMBERS_VISIBILITY = "k-sn-gmembers-vis";
 
-    @Inject
-    public MembersVisibilityMenuItem(final MenuDescriptor parent, final MembersVisibilityAction action) {
-        super(parent, action, GROUP_MEMBERS_VISIBILITY);
-    }
+  @Inject
+  public MembersVisibilityMenuItem(final MenuDescriptor parent, final MembersVisibilityAction action) {
+    super(parent, action, GROUP_MEMBERS_VISIBILITY);
+  }
 
-    public MenuRadioItemDescriptor withVisibility(final SocialNetworkVisibility visibility) {
-        ((MembersVisibilityAction) getAction()).setVisibility(visibility);
-        return this;
-    }
+  public MenuRadioItemDescriptor withVisibility(final SocialNetworkVisibility visibility) {
+    ((MembersVisibilityAction) getAction()).setVisibility(visibility);
+    return this;
+  }
 
 }

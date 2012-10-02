@@ -397,7 +397,8 @@ public class ChatClientDefault implements ChatClient {
         RoomSubject.requestSubjectChange(room, subject);
       }
     } else {
-      NotifyUser.error(i18n.t("Error"), i18n.t("In order to join a chatroom you need to be 'online'"), true);
+      NotifyUser.error(i18n.t("Error"), i18n.t("In order to join a chatroom you need to be 'online'"),
+          true);
     }
     return room;
   }

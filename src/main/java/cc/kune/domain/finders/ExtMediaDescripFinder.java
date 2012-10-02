@@ -28,6 +28,6 @@ import com.google.inject.persist.finder.Finder;
 
 public interface ExtMediaDescripFinder {
 
-    @Finder(query = "from ExtMediaDescrip", returnAs = ArrayList.class)
-    public List<ExtMediaDescrip> getAll();
+  @Finder(query = "from ExtMediaDescrip", returnAs = ArrayList.class)
+  public List<ExtMediaDescrip> getAll();
 }

@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class SessionExpiredException extends DefaultException {
-    private static final long serialVersionUID = -1603881986661302041L;
+  private static final long serialVersionUID = -1603881986661302041L;
 }

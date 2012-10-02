@@ -22,23 +22,23 @@ package cc.kune.core.server;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import cc.kune.core.server.rack.filters.ApplicationListener;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 class KuneApplicationListener implements ApplicationListener {
-    final Provider<UserSession> userSessionProvider;
+  final Provider<UserSession> userSessionProvider;
 
-    @Inject
-    public KuneApplicationListener(final Provider<UserSession> userSessionProvider) {
-        this.userSessionProvider = userSessionProvider;
-    }
+  @Inject
+  public KuneApplicationListener(final Provider<UserSession> userSessionProvider) {
+    this.userSessionProvider = userSessionProvider;
+  }
 
-    public void doAfter(final HttpServletRequest request, final HttpServletResponse httpServletResponse) {
-    }
+  public void doAfter(final HttpServletRequest request, final HttpServletResponse httpServletResponse) {
+  }
 
-    public void doBefore(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse) {
-    }
+  public void doBefore(final HttpServletRequest httpServletRequest,
+      final HttpServletResponse httpServletResponse) {
+  }
 }

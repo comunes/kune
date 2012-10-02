@@ -27,11 +27,11 @@ import com.google.inject.Inject;
 
 public class GotoYourHomePageAction extends GotoGroupAction {
 
-    @Inject
-    public GotoYourHomePageAction(final StateManager stateManager, final I18nTranslationService i18n,
-            final CoreResources res) {
-        super(stateManager, i18n, res);
-        putValue(NAME, i18n.t("Visit your homepage"));
-    }
+  @Inject
+  public GotoYourHomePageAction(final StateManager stateManager, final I18nTranslationService i18n,
+      final CoreResources res) {
+    super(stateManager, i18n, res);
+    putValue(NAME, i18n.t("Visit your homepage"));
+  }
 
 }

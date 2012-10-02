@@ -33,42 +33,42 @@ import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
 public abstract class AbstractSocialNetworkManagerTest extends PersistenceTest {
-    @Inject
-    protected User admin;
-    protected DomainContext ctx;
-    protected Group group;
-    protected Group orphanedGroup;
-    protected User otherUser;
-    protected User user;
-    protected Group userGroup;
+  @Inject
+  protected User admin;
+  protected DomainContext ctx;
+  protected Group group;
+  protected Group orphanedGroup;
+  protected User otherUser;
+  protected User user;
+  protected Group userGroup;
 
-    private void assertSocialNetworkIsEmpty() {
-        assertEquals(group.getSocialNetwork().getAccessLists().getAdmins().getList().size(), 0);
-        assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 0);
-        assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
-    }
+  private void assertSocialNetworkIsEmpty() {
+    assertEquals(group.getSocialNetwork().getAccessLists().getAdmins().getList().size(), 0);
+    assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 0);
+    assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
+  }
 
-    @Transactional
-    @Before
-    public void init() {
-        openTransaction();
-        ctx = new DomainContext();
-        ctx.createUsers("user1");
-        ctx.createUsers("admin");
-        ctx.createUsers("otheruser");
-        ctx.createGroups("group1");
-        ctx.createOrphanGroup("grouporph");
-        user = ctx.getUser("user1");
-        group = ctx.getGroup("group1");
-        orphanedGroup = ctx.getGroup("grouporph");
-        userGroup = user.getUserGroup();
-        admin = ctx.getUser("admin");
-        otherUser = ctx.getUser("otheruser");
-        assertSocialNetworkIsEmpty();
-    }
+  @Transactional
+  @Before
+  public void init() {
+    openTransaction();
+    ctx = new DomainContext();
+    ctx.createUsers("user1");
+    ctx.createUsers("admin");
+    ctx.createUsers("otheruser");
+    ctx.createGroups("group1");
+    ctx.createOrphanGroup("grouporph");
+    user = ctx.getUser("user1");
+    group = ctx.getGroup("group1");
+    orphanedGroup = ctx.getGroup("grouporph");
+    userGroup = user.getUserGroup();
+    admin = ctx.getUser("admin");
+    otherUser = ctx.getUser("otheruser");
+    assertSocialNetworkIsEmpty();
+  }
 
-    @After
-    public void rollback() {
-        rollbackTransaction();
-    }
+  @After
+  public void rollback() {
+    rollbackTransaction();
+  }
 }

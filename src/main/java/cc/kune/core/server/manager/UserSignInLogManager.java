@@ -26,7 +26,7 @@ public interface UserSignInLogManager {
 
   /**
    * Log a new user session signin
-   *
+   * 
    * @param user
    *          the user
    * @param ipAddress

@@ -21,10 +21,10 @@ package cc.kune.core.shared.dto;
 
 public interface HasContent {
 
-    ContainerDTO getContainer();
+  ContainerDTO getContainer();
 
-    String getTypeId();
+  String getTypeId();
 
-    void setTypeId(String typeId);
+  void setTypeId(String typeId);
 
 }

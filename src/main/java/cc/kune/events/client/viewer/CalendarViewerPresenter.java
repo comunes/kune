@@ -157,7 +157,8 @@ public class CalendarViewerPresenter extends
   }
 
   private void addListeners() {
-    getView().setOnMouseOverTooltipText(i18n.t("Double click to open. Also you can resize or drag&drop this event"));
+    getView().setOnMouseOverTooltipText(
+        i18n.t("Double click to open. Also you can resize or drag&drop this event"));
     getView().addDeleteHandler(new DeleteHandler<Appointment>() {
       @Override
       public void onDelete(final DeleteEvent<Appointment> event) {
@@ -178,7 +179,7 @@ public class CalendarViewerPresenter extends
     getView().addMouseOverHandler(new MouseOverHandler<Appointment>() {
       @Override
       public void onMouseOver(final MouseOverEvent<Appointment> event) {
-        //NotifyUser.info("on mouse over " +
+        // NotifyUser.info("on mouse over " +
       }
     });
 

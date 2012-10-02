@@ -25,8 +25,8 @@ import cc.kune.domain.I18nCountry;
 
 public interface I18nCountryManager extends Manager<I18nCountry, Long> {
 
-    List<I18nCountry> getAll();
+  List<I18nCountry> getAll();
 
-    I18nCountry findByCode(String country);
+  I18nCountry findByCode(String country);
 
 }

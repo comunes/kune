@@ -76,7 +76,7 @@ public class TokenMatcherTest {
   @Test
   public void testInbox() {
     assertTrue(tokenMatcher.isInboxToken(SiteTokens.WAVE_INBOX));
-    assertTrue(tokenMatcher.isInboxToken("!"+ SiteTokens.WAVE_INBOX));
+    assertTrue(tokenMatcher.isInboxToken("!" + SiteTokens.WAVE_INBOX));
   }
 
   private void matchGroupToken(final String token) {

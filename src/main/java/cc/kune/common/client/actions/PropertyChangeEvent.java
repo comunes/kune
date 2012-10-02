@@ -58,128 +58,129 @@ package cc.kune.common.client.actions;
  */
 public class PropertyChangeEvent {
 
-    /**
-     * The name of the property that changed, may be null. Package visible for
-     * use by PropertyChangeSupport.
-     * 
-     * @serial the changed property name
-     */
-    final String propertyName;
+  /**
+   * The name of the property that changed, may be null. Package visible for use
+   * by PropertyChangeSupport.
+   * 
+   * @serial the changed property name
+   */
+  final String propertyName;
 
-    /**
-     * The new value of the property, may be null. Package visible for use by
-     * PropertyChangeSupport.
-     * 
-     * @serial the new property value
-     */
-    final Object newValue;
+  /**
+   * The new value of the property, may be null. Package visible for use by
+   * PropertyChangeSupport.
+   * 
+   * @serial the new property value
+   */
+  final Object newValue;
 
-    /**
-     * The old value of the property, may be null. Package visible for use by
-     * PropertyChangeSupport.
-     * 
-     * @serial the old property value
-     */
-    final Object oldValue;
+  /**
+   * The old value of the property, may be null. Package visible for use by
+   * PropertyChangeSupport.
+   * 
+   * @serial the old property value
+   */
+  final Object oldValue;
 
-    /**
-     * The propagation ID, reserved for future use. May be null.
-     * 
-     * @see #getPropagationId()
-     * @serial the Propagation ID
-     */
-    private Object propagationId;
+  /**
+   * The propagation ID, reserved for future use. May be null.
+   * 
+   * @see #getPropagationId()
+   * @serial the Propagation ID
+   */
+  private Object propagationId;
 
-    private final Object source;
+  private final Object source;
 
-    /**
-     * Create a new PropertyChangeEvent. Remember that if you received a
-     * PropertyChangeEvent and are sending a new one, you should also set the
-     * propagation ID from the old PropertyChangeEvent.
-     * 
-     * @param source
-     *            the Bean containing the property
-     * @param propertyName
-     *            the property's name
-     * @param oldVal
-     *            the old value of the property
-     * @param newVal
-     *            the new value of the property
-     * @throws IllegalArgumentException
-     *             if source is null
-     */
-    public PropertyChangeEvent(final Object source, final String propertyName, final Object oldVal, final Object newVal) {
-        this.source = source;
-        this.propertyName = propertyName;
-        this.oldValue = oldVal;
-        this.newValue = newVal;
-    }
+  /**
+   * Create a new PropertyChangeEvent. Remember that if you received a
+   * PropertyChangeEvent and are sending a new one, you should also set the
+   * propagation ID from the old PropertyChangeEvent.
+   * 
+   * @param source
+   *          the Bean containing the property
+   * @param propertyName
+   *          the property's name
+   * @param oldVal
+   *          the old value of the property
+   * @param newVal
+   *          the new value of the property
+   * @throws IllegalArgumentException
+   *           if source is null
+   */
+  public PropertyChangeEvent(final Object source, final String propertyName, final Object oldVal,
+      final Object newVal) {
+    this.source = source;
+    this.propertyName = propertyName;
+    this.oldValue = oldVal;
+    this.newValue = newVal;
+  }
 
-    /**
-     * Get the property's new value. May be null if multiple properties changed.
-     * 
-     * @return the property's new value
-     */
-    public Object getNewValue() {
-        return newValue;
-    }
+  /**
+   * Get the property's new value. May be null if multiple properties changed.
+   * 
+   * @return the property's new value
+   */
+  public Object getNewValue() {
+    return newValue;
+  }
 
-    /**
-     * Get the property's old value. May be null if multiple properties changed.
-     * 
-     * @return the property's old value
-     */
-    public Object getOldValue() {
-        return oldValue;
-    }
+  /**
+   * Get the property's old value. May be null if multiple properties changed.
+   * 
+   * @return the property's old value
+   */
+  public Object getOldValue() {
+    return oldValue;
+  }
 
-    /**
-     * Get the propagation ID. Right now, it is not used for anything.
-     * 
-     * @return the propagation ID
-     * @see #setPropagationId(Object)
-     */
-    public Object getPropagationId() {
-        return propagationId;
-    }
+  /**
+   * Get the propagation ID. Right now, it is not used for anything.
+   * 
+   * @return the propagation ID
+   * @see #setPropagationId(Object)
+   */
+  public Object getPropagationId() {
+    return propagationId;
+  }
 
-    /**
-     * Get the property name. May be null if multiple properties changed.
-     * 
-     * @return the property name
-     */
-    public String getPropertyName() {
-        return propertyName;
-    }
+  /**
+   * Get the property name. May be null if multiple properties changed.
+   * 
+   * @return the property name
+   */
+  public String getPropertyName() {
+    return propertyName;
+  }
 
-    public Object getSource() {
-        return source;
-    }
+  public Object getSource() {
+    return source;
+  }
 
-    /**
-     * Set the propagation ID. This is a way for the event to be passed from
-     * hand to hand and retain a little extra state. Right now it is unused, but
-     * it should be propagated anyway so that future versions of JavaBeans can
-     * use it, for God knows what.
-     * 
-     * @param propagationId
-     *            the propagation ID
-     * @see #getPropagationId()
-     */
-    public void setPropagationId(final Object propagationId) {
-        this.propagationId = propagationId;
-    }
+  /**
+   * Set the propagation ID. This is a way for the event to be passed from hand
+   * to hand and retain a little extra state. Right now it is unused, but it
+   * should be propagated anyway so that future versions of JavaBeans can use
+   * it, for God knows what.
+   * 
+   * @param propagationId
+   *          the propagation ID
+   * @see #getPropagationId()
+   */
+  public void setPropagationId(final Object propagationId) {
+    this.propagationId = propagationId;
+  }
 
-    /**
-     * Utility method to rollback a change.
-     * 
-     * @param event
-     *            the event to rollback
-     * @return a new event with old and new swapped
-     */
-    PropertyChangeEvent rollback() {
-        PropertyChangeEvent result = new PropertyChangeEvent(source, propertyName, newValue, oldValue);
-        result.propagationId = propagationId;
-        return result;
-    }
+  /**
+   * Utility method to rollback a change.
+   * 
+   * @param event
+   *          the event to rollback
+   * @return a new event with old and new swapped
+   */
+  PropertyChangeEvent rollback() {
+    PropertyChangeEvent result = new PropertyChangeEvent(source, propertyName, newValue, oldValue);
+    result.propagationId = propagationId;
+    return result;
+  }
 } // class PropertyChangeEvent

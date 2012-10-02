@@ -19,7 +19,6 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
-
 public class GwtButtonGui extends AbstractGwtButtonGui {
 
 }

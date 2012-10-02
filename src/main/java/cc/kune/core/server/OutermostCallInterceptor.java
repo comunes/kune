@@ -32,47 +32,46 @@ import com.google.inject.Injector;
  */
 
 public final class OutermostCallInterceptor implements MethodInterceptor {
-    /**
-     * Decorates a MethodInterceptor so that only the outermost invocation using
-     * that interceptor will be intercepted and nested invocations willbe
-     * ignored.
-     */
-    public static MethodInterceptor outermostCall(final MethodInterceptor interceptor) {
-        return new OutermostCallInterceptor(interceptor);
+  /**
+   * Decorates a MethodInterceptor so that only the outermost invocation using
+   * that interceptor will be intercepted and nested invocations willbe ignored.
+   */
+  public static MethodInterceptor outermostCall(final MethodInterceptor interceptor) {
+    return new OutermostCallInterceptor(interceptor);
+  }
+
+  private final MethodInterceptor interceptor;
+
+  @SuppressWarnings("rawtypes")
+  private final ThreadLocal count = new ThreadLocal() {
+    @Override
+    protected Integer initialValue() {
+      return 0;
     }
+  };
 
-    private final MethodInterceptor interceptor;
+  private OutermostCallInterceptor(final MethodInterceptor interceptor) {
+    this.interceptor = interceptor;
+  }
 
-    @SuppressWarnings("rawtypes")
-    private final ThreadLocal count = new ThreadLocal() {
-        @Override
-        protected Integer initialValue() {
-            return 0;
-        }
-    };
-
-    private OutermostCallInterceptor(final MethodInterceptor interceptor) {
-        this.interceptor = interceptor;
+  @SuppressWarnings("unchecked")
+  public Object invoke(final MethodInvocation invocation) throws Throwable {
+    final int savedCount = (Integer) count.get();
+    count.set(savedCount + 1);
+    try {
+      if ((Integer) count.get() > 1) {
+        return invocation.proceed();
+      } else {
+        return interceptor.invoke(invocation);
+      }
+    } finally {
+      count.set(savedCount);
     }
+  }
 
-    @SuppressWarnings("unchecked")
-    public Object invoke(final MethodInvocation invocation) throws Throwable {
-        final int savedCount = (Integer) count.get();
-        count.set(savedCount + 1);
-        try {
-            if ((Integer) count.get() > 1) {
-                return invocation.proceed();
-            } else {
-                return interceptor.invoke(invocation);
-            }
-        } finally {
-            count.set(savedCount);
-        }
-    }
-
-    /** Ensure underlying interceptor is injected. */
-    @Inject
-    void injectInterceptor(final Injector injector) {
-        injector.injectMembers(interceptor);
-    }
+  /** Ensure underlying interceptor is injected. */
+  @Inject
+  void injectInterceptor(final Injector injector) {
+    injector.injectMembers(interceptor);
+  }
 }

@@ -26,12 +26,12 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 
 public interface EntityOptDefLicenseView extends EntityOptionsTabView {
 
-    HasClickHandlers getChange();
+  HasClickHandlers getChange();
 
-    HasClickHandlers getLicenseImage();
+  HasClickHandlers getLicenseImage();
 
-    void openWindow(String url);
+  void openWindow(String url);
 
-    void setLicense(LicenseDTO defaultLicense);
+  void setLicense(LicenseDTO defaultLicense);
 
 }

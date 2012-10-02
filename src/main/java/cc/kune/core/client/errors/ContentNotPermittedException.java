@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class ContentNotPermittedException extends DefaultException {
-    private static final long serialVersionUID = 4771568826852748873L;
+  private static final long serialVersionUID = 4771568826852748873L;
 }

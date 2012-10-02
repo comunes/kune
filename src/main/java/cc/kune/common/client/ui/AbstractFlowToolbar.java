@@ -26,72 +26,72 @@ import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractFlowToolbar extends FlowPanel implements AbstractToolbar, HasWidgets {
 
-    public AbstractFlowToolbar() {
-        super();
-    }
+  public AbstractFlowToolbar() {
+    super();
+  }
 
-    @Override
-    public Widget addFill() {
-        final Label emptyLabel = new Label("");
-        emptyLabel.addStyleName("oc-floatright");
-        // emptyLabel.setWidth("100%");
-        add(emptyLabel);
-        return emptyLabel;
-    }
+  @Override
+  public Widget addFill() {
+    final Label emptyLabel = new Label("");
+    emptyLabel.addStyleName("oc-floatright");
+    // emptyLabel.setWidth("100%");
+    add(emptyLabel);
+    return emptyLabel;
+  }
 
-    @Override
-    public Widget addSeparator() {
-        final Label emptyLabel = new Label("");
-        emptyLabel.setStyleName("ytb-sep-FIXMEEE");
-        emptyLabel.addStyleName("oc-tb-sep");
-        emptyLabel.addStyleName("oc-floatleft");
-        add(emptyLabel);
-        return emptyLabel;
-    }
+  @Override
+  public Widget addSeparator() {
+    final Label emptyLabel = new Label("");
+    emptyLabel.setStyleName("ytb-sep-FIXMEEE");
+    emptyLabel.addStyleName("oc-tb-sep");
+    emptyLabel.addStyleName("oc-floatleft");
+    add(emptyLabel);
+    return emptyLabel;
+  }
 
-    @Override
-    public Widget addSpacer() {
-        final Label emptyLabel = new Label("");
-        emptyLabel.setStyleName("oc-tb-spacer");
-        emptyLabel.addStyleName("oc-floatleft");
-        add(emptyLabel);
-        return emptyLabel;
-    }
+  @Override
+  public Widget addSpacer() {
+    final Label emptyLabel = new Label("");
+    emptyLabel.setStyleName("oc-tb-spacer");
+    emptyLabel.addStyleName("oc-floatleft");
+    add(emptyLabel);
+    return emptyLabel;
+  }
 
-    @Override
-    public void removeAll() {
-        clear();
-    }
+  @Override
+  public void removeAll() {
+    clear();
+  }
 
-    private void setBasicStyle() {
-        setStyleName("x-toolbar-FIXME");
-        addStyleName("x-panel-FIXME");
-    }
+  private void setBasicStyle() {
+    setStyleName("x-toolbar-FIXME");
+    addStyleName("x-panel-FIXME");
+  }
 
-    /**
-     * Set the blank style
-     */
-    @Override
-    public void setBlankStyle() {
-        setBasicStyle();
-        addStyleName("oc-blank-toolbar");
-    }
+  /**
+   * Set the blank style
+   */
+  @Override
+  public void setBlankStyle() {
+    setBasicStyle();
+    addStyleName("oc-blank-toolbar");
+  }
 
-    /**
-     * Set the normal grey style
-     */
-    @Override
-    public void setNormalStyle() {
-        setBasicStyle();
-        addStyleName("oc-tb-bottom-line");
-    }
+  /**
+   * Set the normal grey style
+   */
+  @Override
+  public void setNormalStyle() {
+    setBasicStyle();
+    addStyleName("oc-tb-bottom-line");
+  }
 
-    /**
-     * Set the transparent style
-     */
-    public void setTranspStyle() {
-        setBasicStyle();
-        addStyleName("oc-transp");
-    }
+  /**
+   * Set the transparent style
+   */
+  public void setTranspStyle() {
+    setBasicStyle();
+    addStyleName("oc-transp");
+  }
 
 }

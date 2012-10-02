@@ -53,7 +53,8 @@ public class GotoTokenAction extends AbstractExtendedAction {
       @Override
       public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
         boolean weAreInThisState = !token.equals(event.getState().getStateToken());
-        putValue(Action.STYLES, disableCurrent? (weAreInThisState ? style : style + ", k-button-disabled") : style);
+        putValue(Action.STYLES, disableCurrent ? (weAreInThisState ? style : style
+            + ", k-button-disabled") : style);
       }
     });
     renameHandler = eventBus.addHandler(RenameContentEvent.getType(),

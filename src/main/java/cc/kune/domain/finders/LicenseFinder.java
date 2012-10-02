@@ -29,15 +29,15 @@ import com.google.inject.persist.finder.Finder;
 
 public interface LicenseFinder {
 
-    @Finder(query = "from License l where l.shortName = :shortName")
-    public License findByShortName(@Named("shortName") final String shortName);
+  @Finder(query = "from License l where l.shortName = :shortName")
+  public License findByShortName(@Named("shortName") final String shortName);
 
-    @Finder(query = "from License", returnAs = ArrayList.class)
-    public List<License> getAll();
+  @Finder(query = "from License", returnAs = ArrayList.class)
+  public List<License> getAll();
 
-    @Finder(query = "from License where isCC = true", returnAs = ArrayList.class)
-    public List<License> getCC();
+  @Finder(query = "from License where isCC = true", returnAs = ArrayList.class)
+  public List<License> getCC();
 
-    @Finder(query = "from License where isCC = false", returnAs = ArrayList.class)
-    public List<License> getNotCC();
+  @Finder(query = "from License where isCC = false", returnAs = ArrayList.class)
+  public List<License> getNotCC();
 }

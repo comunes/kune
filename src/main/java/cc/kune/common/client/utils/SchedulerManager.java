@@ -27,13 +27,13 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
  * {@link #Scheduler} (used for testing classes without GWT dependencies).
  */
 public class SchedulerManager {
-    /**
-     * Adds the command.
-     * 
-     * @param command
-     *            the listener
-     */
-    public void addCommand(final ScheduledCommand command) {
-        Scheduler.get().scheduleDeferred(command);
-    }
+  /**
+   * Adds the command.
+   * 
+   * @param command
+   *          the listener
+   */
+  public void addCommand(final ScheduledCommand command) {
+    Scheduler.get().scheduleDeferred(command);
+  }
 }

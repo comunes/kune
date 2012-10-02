@@ -189,7 +189,7 @@ public class XMLActionsParser {
   private String proxy(String iconUrl, String gadgetUrl) {
     // FIXME: create a proxy servlet for that
     // More info: http://edwardstx.net/2010/06/http-proxy-servlet/
-    return "https://www-ig-opensocial.googleusercontent.com/gadgets/proxy?refresh=86400&url="
-        + iconUrl + "&container=ig&gadget=" + gadgetUrl;
+    return "https://www-ig-opensocial.googleusercontent.com/gadgets/proxy?refresh=86400&url=" + iconUrl
+        + "&container=ig&gadget=" + gadgetUrl;
   }
 }

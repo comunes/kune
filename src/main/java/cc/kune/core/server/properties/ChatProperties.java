@@ -27,30 +27,30 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ChatProperties {
-    private final KuneProperties properties;
+  private final KuneProperties properties;
 
-    @Inject
-    public ChatProperties(final KuneProperties properties) {
-        this.properties = properties;
-    }
+  @Inject
+  public ChatProperties(final KuneProperties properties) {
+    this.properties = properties;
+  }
 
-    public String getAdminJID() {
-        return properties.get(KuneProperties.SITE_ADMIN_SHORTNAME);
-    }
+  public String getAdminJID() {
+    return properties.get(KuneProperties.SITE_ADMIN_SHORTNAME);
+  }
 
-    public String getAdminPasswd() {
-        return properties.get(KuneProperties.SITE_ADMIN_PASSWD);
-    }
+  public String getAdminPasswd() {
+    return properties.get(KuneProperties.SITE_ADMIN_PASSWD);
+  }
 
-    public String getDomain() {
-        return properties.get(KuneProperties.CHAT_DOMAIN);
-    }
+  public String getDomain() {
+    return properties.get(KuneProperties.CHAT_DOMAIN);
+  }
 
-    public String getHttpBase() {
-        return properties.get(KuneProperties.CHAT_HTTP_BASE);
-    }
+  public String getHttpBase() {
+    return properties.get(KuneProperties.CHAT_HTTP_BASE);
+  }
 
-    public String getRoomHost() {
-        return properties.get(KuneProperties.CHAT_ROOM_HOST);
-    }
+  public String getRoomHost() {
+    return properties.get(KuneProperties.CHAT_ROOM_HOST);
+  }
 }

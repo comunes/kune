@@ -26,7 +26,7 @@ import com.google.inject.persist.finder.Finder;
 
 public interface TagFinder {
 
-    @Finder(query = "FROM Tag g WHERE g.name = :name")
-    public Tag findByTagName(@Named("name") final String tag);
+  @Finder(query = "FROM Tag g WHERE g.name = :name")
+  public Tag findByTagName(@Named("name") final String tag);
 
 }

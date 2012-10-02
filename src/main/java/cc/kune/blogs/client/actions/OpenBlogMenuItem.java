@@ -27,9 +27,10 @@ import com.google.inject.Inject;
 
 public class OpenBlogMenuItem extends OpenContentMenuItem {
 
-    @Inject
-    public OpenBlogMenuItem(final I18nTranslationService i18n, final OpenContentAction action, final NavResources res) {
-        super(i18n, action, res);
-    }
+  @Inject
+  public OpenBlogMenuItem(final I18nTranslationService i18n, final OpenContentAction action,
+      final NavResources res) {
+    super(i18n, action, res);
+  }
 
 }

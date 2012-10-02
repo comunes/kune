@@ -24,7 +24,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class AccessRightsChangedEvent extends GwtEvent<AccessRightsChangedEvent.AccessRightsChangedHandler> { 
+public class AccessRightsChangedEvent extends
+    GwtEvent<AccessRightsChangedEvent.AccessRightsChangedHandler> {
 
   public interface HasAccessRightsChangedHandlers extends HasHandlers {
     HandlerRegistration addAccessRightsChangedHandler(AccessRightsChangedHandler handler);
@@ -36,7 +37,9 @@ public class AccessRightsChangedEvent extends GwtEvent<AccessRightsChangedEvent.
 
   private static final Type<AccessRightsChangedHandler> TYPE = new Type<AccessRightsChangedHandler>();
 
-  public static void fire(HasHandlers source, cc.kune.core.shared.domain.utils.AccessRights previousRights, cc.kune.core.shared.domain.utils.AccessRights currentRights) {
+  public static void fire(HasHandlers source,
+      cc.kune.core.shared.domain.utils.AccessRights previousRights,
+      cc.kune.core.shared.domain.utils.AccessRights currentRights) {
     source.fireEvent(new AccessRightsChangedEvent(previousRights, currentRights));
   }
 
@@ -47,7 +50,8 @@ public class AccessRightsChangedEvent extends GwtEvent<AccessRightsChangedEvent.
   cc.kune.core.shared.domain.utils.AccessRights previousRights;
   cc.kune.core.shared.domain.utils.AccessRights currentRights;
 
-  public AccessRightsChangedEvent(cc.kune.core.shared.domain.utils.AccessRights previousRights, cc.kune.core.shared.domain.utils.AccessRights currentRights) {
+  public AccessRightsChangedEvent(cc.kune.core.shared.domain.utils.AccessRights previousRights,
+      cc.kune.core.shared.domain.utils.AccessRights currentRights) {
     this.previousRights = previousRights;
     this.currentRights = currentRights;
   }
@@ -77,11 +81,11 @@ public class AccessRightsChangedEvent extends GwtEvent<AccessRightsChangedEvent.
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
-        return true;
+      return true;
     if (obj == null)
-        return false;
+      return false;
     if (getClass() != obj.getClass())
-        return false;
+      return false;
     AccessRightsChangedEvent other = (AccessRightsChangedEvent) obj;
     if (previousRights == null) {
       if (other.previousRights != null)
@@ -106,10 +110,6 @@ public class AccessRightsChangedEvent extends GwtEvent<AccessRightsChangedEvent.
 
   @Override
   public String toString() {
-    return "AccessRightsChangedEvent["
-                 + previousRights
-                 + ","
-                 + currentRights
-    + "]";
+    return "AccessRightsChangedEvent[" + previousRights + "," + currentRights + "]";
   }
 }

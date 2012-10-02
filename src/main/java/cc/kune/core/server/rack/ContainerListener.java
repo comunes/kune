@@ -20,7 +20,7 @@
 package cc.kune.core.server.rack;
 
 public interface ContainerListener {
-    void start();
+  void start();
 
-    void stop();
+  void stop();
 }

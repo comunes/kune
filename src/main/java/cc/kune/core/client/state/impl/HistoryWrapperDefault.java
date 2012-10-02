@@ -31,7 +31,7 @@ public class HistoryWrapperDefault implements HistoryWrapper {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.client.state.HistoryWrapper#getToken()
    */
   @Override
@@ -41,7 +41,7 @@ public class HistoryWrapperDefault implements HistoryWrapper {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.client.state.HistoryWrapper#newItem(java.lang.String)
    */
   @Override
@@ -51,7 +51,7 @@ public class HistoryWrapperDefault implements HistoryWrapper {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.client.state.HistoryWrapper#newItem(java.lang.String,
    * boolean)
    */
@@ -62,7 +62,7 @@ public class HistoryWrapperDefault implements HistoryWrapper {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.client.state.HistoryWrapper#checkHashbang()
    */
   @Override
@@ -75,7 +75,7 @@ public class HistoryWrapperDefault implements HistoryWrapper {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.state.HistoryWrapper#newItem(cc.kune.core.shared.domain
    * .utils.StateToken)

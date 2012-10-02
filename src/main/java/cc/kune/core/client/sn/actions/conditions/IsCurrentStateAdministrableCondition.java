@@ -32,21 +32,21 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsCurrentStateAdministrableCondition implements GuiAddCondition {
 
-    private final Session session;
+  private final Session session;
 
-    @Inject
-    public IsCurrentStateAdministrableCondition(final Session session) {
-        this.session = session;
-    }
+  @Inject
+  public IsCurrentStateAdministrableCondition(final Session session) {
+    this.session = session;
+  }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
-        final StateAbstractDTO currentState = session.getCurrentState();
-        if (currentState instanceof StateContentDTO) {
-            return ((StateContentDTO) currentState).getGroupRights().isAdministrable();
-        } else {
-            // session.getContainerState() instanceof StateContentDTO)
-            return ((StateContainerDTO) currentState).getGroupRights().isAdministrable();
-        }
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    final StateAbstractDTO currentState = session.getCurrentState();
+    if (currentState instanceof StateContentDTO) {
+      return ((StateContentDTO) currentState).getGroupRights().isAdministrable();
+    } else {
+      // session.getContainerState() instanceof StateContentDTO)
+      return ((StateContainerDTO) currentState).getGroupRights().isAdministrable();
     }
+  }
 }

@@ -29,15 +29,15 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsCurrentStateAPersonCondition implements GuiAddCondition {
 
-    private final Session session;
+  private final Session session;
 
-    @Inject
-    public IsCurrentStateAPersonCondition(final Session session) {
-        this.session = session;
-    }
+  @Inject
+  public IsCurrentStateAPersonCondition(final Session session) {
+    this.session = session;
+  }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
-        return session.isCurrentStateAPerson();
-    }
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    return session.isCurrentStateAPerson();
+  }
 }

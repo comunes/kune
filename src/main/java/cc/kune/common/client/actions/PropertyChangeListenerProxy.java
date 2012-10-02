@@ -48,52 +48,52 @@ package cc.kune.common.client.actions;
  * @status udpated to 1.4
  */
 public class PropertyChangeListenerProxy extends EventListenerProxy implements PropertyChangeListener {
-    /**
-     * The name of the property to listen for. Package visible for use by
-     * PropertyChangeSupport.
-     */
-    final String propertyName;
+  /**
+   * The name of the property to listen for. Package visible for use by
+   * PropertyChangeSupport.
+   */
+  final String propertyName;
 
-    /**
-     * Create a new proxy which filters property change events and only passes
-     * changes to the named property on to the delegate. A null propertyName or
-     * listener does not fail now, but may cause a NullPointerException down the
-     * road.
-     * 
-     * @param propertyName
-     *            the property's name to filter on
-     * @param listener
-     *            the delegate listener
-     */
-    public PropertyChangeListenerProxy(final String propertyName, final PropertyChangeListener listener) {
-        super(listener);
-        this.propertyName = propertyName;
-    }
+  /**
+   * Create a new proxy which filters property change events and only passes
+   * changes to the named property on to the delegate. A null propertyName or
+   * listener does not fail now, but may cause a NullPointerException down the
+   * road.
+   * 
+   * @param propertyName
+   *          the property's name to filter on
+   * @param listener
+   *          the delegate listener
+   */
+  public PropertyChangeListenerProxy(final String propertyName, final PropertyChangeListener listener) {
+    super(listener);
+    this.propertyName = propertyName;
+  }
 
-    /**
-     * Gets the name of the property this proxy is filtering on.
-     * 
-     * @return the property name
-     */
-    public String getPropertyName() {
-        return propertyName;
-    }
+  /**
+   * Gets the name of the property this proxy is filtering on.
+   * 
+   * @return the property name
+   */
+  public String getPropertyName() {
+    return propertyName;
+  }
 
-    /**
-     * Forwards the event on to the delegate if the property name matches.
-     * 
-     * @param event
-     *            the event to pass on, if it meets the filter
-     * @throws NullPointerException
-     *             if the delegate this was created with is null
-     */
-    public void propertyChange(final PropertyChangeEvent event) {
-        // Note: Sun does not filter, under the assumption that since
-        // PropertyChangeSupport unwraps proxys, this method should never be
-        // called by normal use of listeners.
-        String name = event == null ? null : event.getPropertyName();
-        if (name == null ? propertyName == null : name.equals(propertyName)) {
-            ((PropertyChangeListener) getListener()).propertyChange(event);
-        }
+  /**
+   * Forwards the event on to the delegate if the property name matches.
+   * 
+   * @param event
+   *          the event to pass on, if it meets the filter
+   * @throws NullPointerException
+   *           if the delegate this was created with is null
+   */
+  public void propertyChange(final PropertyChangeEvent event) {
+    // Note: Sun does not filter, under the assumption that since
+    // PropertyChangeSupport unwraps proxys, this method should never be
+    // called by normal use of listeners.
+    String name = event == null ? null : event.getPropertyName();
+    if (name == null ? propertyName == null : name.equals(propertyName)) {
+      ((PropertyChangeListener) getListener()).propertyChange(event);
     }
+  }
 } // class PropertyChangeListenerProxy

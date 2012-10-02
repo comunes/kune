@@ -37,6 +37,7 @@ public class BlogsParts {
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
     viewerSelector.register(contentViewer, true, BlogsToolConstants.TYPE_POST);
-    viewerSelector.register(folderViewer, true, BlogsToolConstants.TYPE_ROOT, BlogsToolConstants.TYPE_BLOG);
+    viewerSelector.register(folderViewer, true, BlogsToolConstants.TYPE_ROOT,
+        BlogsToolConstants.TYPE_BLOG);
   }
 }

@@ -30,16 +30,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsNotParticipantOfCurrentStateCondition implements GuiAddCondition {
 
-    private final Session session;
+  private final Session session;
 
-    @Inject
-    public IsNotParticipantOfCurrentStateCondition(final Session session) {
-        this.session = session;
-    }
+  @Inject
+  public IsNotParticipantOfCurrentStateCondition(final Session session) {
+    this.session = session;
+  }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
-        final StateContentDTO currentState = session.getContentState();
-        return !currentState.isParticipant();
-    }
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    final StateContentDTO currentState = session.getContentState();
+    return !currentState.isParticipant();
+  }
 }

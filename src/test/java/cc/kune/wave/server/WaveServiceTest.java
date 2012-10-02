@@ -23,9 +23,9 @@ import org.junit.Test;
 
 public class WaveServiceTest {
 
-    @Test
-    public void createWave() {
-        // WaveService.
-    }
+  @Test
+  public void createWave() {
+    // WaveService.
+  }
 
 }

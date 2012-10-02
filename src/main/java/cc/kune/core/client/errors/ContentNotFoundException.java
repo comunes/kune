@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class ContentNotFoundException extends DefaultException {
-    private static final long serialVersionUID = -4641212341448422627L;
+  private static final long serialVersionUID = -4641212341448422627L;
 }

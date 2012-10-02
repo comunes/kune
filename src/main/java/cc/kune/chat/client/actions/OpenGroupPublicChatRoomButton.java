@@ -29,21 +29,21 @@ import com.google.inject.Inject;
 
 public class OpenGroupPublicChatRoomButton {
 
-    @Inject
-    public OpenGroupPublicChatRoomButton(final OpenGroupPublicChatRoomAction openRoomAction,
-            final EntityHeader entityHeader) {
-        final ButtonDescriptor button = new ButtonDescriptor(openRoomAction);
-        openRoomAction.setInviteMembers(false);
-        button.setVisible(false);
-        button.setStyles("k-chat-add-as-buddie");
-        openRoomAction.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(final PropertyChangeEvent event) {
-                if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
-                    button.setVisible((Boolean) event.getNewValue());
-                }
-            }
-        });
-        entityHeader.addAction(button);
-    }
+  @Inject
+  public OpenGroupPublicChatRoomButton(final OpenGroupPublicChatRoomAction openRoomAction,
+      final EntityHeader entityHeader) {
+    final ButtonDescriptor button = new ButtonDescriptor(openRoomAction);
+    openRoomAction.setInviteMembers(false);
+    button.setVisible(false);
+    button.setStyles("k-chat-add-as-buddie");
+    openRoomAction.addPropertyChangeListener(new PropertyChangeListener() {
+      @Override
+      public void propertyChange(final PropertyChangeEvent event) {
+        if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
+          button.setVisible((Boolean) event.getNewValue());
+        }
+      }
+    });
+    entityHeader.addAction(button);
+  }
 }

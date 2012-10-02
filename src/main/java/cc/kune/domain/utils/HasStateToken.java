@@ -23,6 +23,6 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 public interface HasStateToken {
 
-    StateToken getStateToken();
+  StateToken getStateToken();
 
 }

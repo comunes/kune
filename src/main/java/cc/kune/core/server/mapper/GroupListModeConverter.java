@@ -27,37 +27,37 @@ import net.sf.dozer.util.mapping.converters.CustomConverter;
 import cc.kune.core.shared.domain.GroupListMode;
 
 public class GroupListModeConverter implements CustomConverter {
-    private final HashMap<String, GroupListMode> stringToEnum;
-    private final HashMap<GroupListMode, String> enumToString;
+  private final HashMap<String, GroupListMode> stringToEnum;
+  private final HashMap<GroupListMode, String> enumToString;
 
-    public GroupListModeConverter() {
-        this.stringToEnum = new HashMap<String, GroupListMode>();
-        this.enumToString = new HashMap<GroupListMode, String>();
-        add(GroupListMode.NORMAL);
-        add(GroupListMode.EVERYONE);
-        add(GroupListMode.NOBODY);
+  public GroupListModeConverter() {
+    this.stringToEnum = new HashMap<String, GroupListMode>();
+    this.enumToString = new HashMap<GroupListMode, String>();
+    add(GroupListMode.NORMAL);
+    add(GroupListMode.EVERYONE);
+    add(GroupListMode.NOBODY);
+  }
+
+  @SuppressWarnings("rawtypes")
+  public Object convert(final Object destination, final Object source, final Class destinationClass,
+      final Class sourceClass) {
+    if (source == null) {
+      return null;
+    } else if (sourceClass.equals(String.class) && destinationClass.equals(GroupListMode.class)) {
+      return stringToEnum.get(source);
+    } else if (sourceClass.equals(GroupListMode.class) && destinationClass.equals(String.class)) {
+      return enumToString.get(source);
+    } else {
+      final String msg = MessageFormat.format("couldn't map {0} ({1}) to {2} ({3})", source,
+          sourceClass, destination, destinationClass);
+      throw new MappingException(msg);
     }
 
-    @SuppressWarnings("rawtypes")
-    public Object convert(final Object destination, final Object source, final Class destinationClass,
-            final Class sourceClass) {
-        if (source == null) {
-            return null;
-        } else if (sourceClass.equals(String.class) && destinationClass.equals(GroupListMode.class)) {
-            return stringToEnum.get(source);
-        } else if (sourceClass.equals(GroupListMode.class) && destinationClass.equals(String.class)) {
-            return enumToString.get(source);
-        } else {
-            final String msg = MessageFormat.format("couldn't map {0} ({1}) to {2} ({3})", source, sourceClass,
-                    destination, destinationClass);
-            throw new MappingException(msg);
-        }
+  }
 
-    }
-
-    private void add(final GroupListMode mode) {
-        enumToString.put(mode, mode.toString());
-        stringToEnum.put(mode.toString(), mode);
-    }
+  private void add(final GroupListMode mode) {
+    enumToString.put(mode, mode.toString());
+    stringToEnum.put(mode.toString(), mode);
+  }
 
 }

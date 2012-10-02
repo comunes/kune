@@ -19,7 +19,6 @@
  \*/
 package cc.kune.core.server.state;
 
-
 /**
  * Used for contents not found or users without homepage
  */

@@ -43,11 +43,11 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- *
+ * 
  * You must call {@link UserSNPresenter#refreshActions()} when adding some
  * action externally with
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class UserSNConfActions extends AbstractSNActionsRegistry {
@@ -62,10 +62,10 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
       final CoreResources res, final IsGroupCondition isGroupCondition,
       final AddNewBuddiesAction addNewBuddiesAction) {
     boolean isNewbie = session.isNewbie();
-    ImageResource icon = isNewbie? res.prefGrey():  res.arrowdownsitebar();
-    String menuText = isNewbie? i18n.t("Options"): "";
-    String menuTooltip = isNewbie? "" : i18n.t("Options");
-    String menuStyle = isNewbie? ActionStyles.SN_OPTIONS_STYLES_NEWBIE : ActionStyles.SN_OPTIONS_STYLES;
+    ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
+    String menuText = isNewbie ? i18n.t("Options") : "";
+    String menuTooltip = isNewbie ? "" : i18n.t("Options");
+    String menuStyle = isNewbie ? ActionStyles.SN_OPTIONS_STYLES_NEWBIE : ActionStyles.SN_OPTIONS_STYLES;
     OPTIONS_MENU.withText(menuText).withToolTip(menuTooltip).withIcon(icon).withStyles(menuStyle);
     final MenuRadioItemDescriptor anyoneItem = userBuddiesVisibility.get().withVisibility(
         UserSNetVisibility.anyone);
@@ -115,11 +115,11 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
   }
 
   /**
-   *
+   * 
    * You must call {@link UserSNPresenter#refreshActions()} when adding some
    * action externally with
    * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
-   *
+   * 
    */
   @Override
   public boolean add(final GuiActionDescrip action) {

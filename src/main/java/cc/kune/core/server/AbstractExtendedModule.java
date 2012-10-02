@@ -48,65 +48,65 @@ import com.google.inject.matcher.Matcher;
 
 public abstract class AbstractExtendedModule extends AbstractModule {
 
-    /**
-     * Hack to ensure unique Keys for binding different instances of
-     * ExtendedModule. The prefix is chosen to reduce the chances of a conflict
-     * with some other use of
-     * 
-     * @Named. A better solution would be to invent an Annotation for just this
-     *         purpose.
-     */
-    private static Annotation getUniqueAnnotation() {
-        return named("ExtendedModule-" + COUNT.incrementAndGet());
-    }
+  /**
+   * Hack to ensure unique Keys for binding different instances of
+   * ExtendedModule. The prefix is chosen to reduce the chances of a conflict
+   * with some other use of
+   * 
+   * @Named. A better solution would be to invent an Annotation for just this
+   *         purpose.
+   */
+  private static Annotation getUniqueAnnotation() {
+    return named("ExtendedModule-" + COUNT.incrementAndGet());
+  }
 
-    private final Set<Object> toBeInjected = new HashSet<Object>();
+  private final Set<Object> toBeInjected = new HashSet<Object>();
 
-    private boolean selfInjected = false;
+  private boolean selfInjected = false;
 
-    private static final AtomicInteger COUNT = new AtomicInteger();
+  private static final AtomicInteger COUNT = new AtomicInteger();
 
-    /**
-     * Overridden version of bindInterceptor that, in addition to the standard
-     * behavior, arranges for field and method injection of each
-     * MethodInterceptor in {@code interceptors}.
-     */
-    @Override
-    public void bindInterceptor(final Matcher<? super Class<?>> classMatcher,
-            final Matcher<? super Method> methodMatcher, final MethodInterceptor... interceptors) {
-        registerForInjection(interceptors);
-        super.bindInterceptor(classMatcher, methodMatcher, interceptors);
-    }
+  /**
+   * Overridden version of bindInterceptor that, in addition to the standard
+   * behavior, arranges for field and method injection of each MethodInterceptor
+   * in {@code interceptors}.
+   */
+  @Override
+  public void bindInterceptor(final Matcher<? super Class<?>> classMatcher,
+      final Matcher<? super Method> methodMatcher, final MethodInterceptor... interceptors) {
+    registerForInjection(interceptors);
+    super.bindInterceptor(classMatcher, methodMatcher, interceptors);
+  }
 
-    /**
-     * Arranges for this module and each of the given objects (if any) to be
-     * field and method injected when the Injector is created. It is safe to
-     * call this method more than once, and it is safe to call it more than once
-     * on the same object(s).
-     */
-    protected <T> void registerForInjection(final T... objects) {
-        ensureSelfInjection();
-        if (objects != null) {
-            for (T object : objects) {
-                if (object != null) {
-                    toBeInjected.add(object);
-                }
-            }
+  /**
+   * Arranges for this module and each of the given objects (if any) to be field
+   * and method injected when the Injector is created. It is safe to call this
+   * method more than once, and it is safe to call it more than once on the same
+   * object(s).
+   */
+  protected <T> void registerForInjection(final T... objects) {
+    ensureSelfInjection();
+    if (objects != null) {
+      for (T object : objects) {
+        if (object != null) {
+          toBeInjected.add(object);
         }
+      }
     }
+  }
 
-    private void ensureSelfInjection() {
-        if (!selfInjected) {
-            bind(AbstractExtendedModule.class).annotatedWith(getUniqueAnnotation()).toInstance(this);
-            selfInjected = true;
-        }
+  private void ensureSelfInjection() {
+    if (!selfInjected) {
+      bind(AbstractExtendedModule.class).annotatedWith(getUniqueAnnotation()).toInstance(this);
+      selfInjected = true;
     }
+  }
 
-    @SuppressWarnings("unused")
-    @Inject
-    private void injectRegisteredObjects(final Injector injector) {
-        for (Object injectee : toBeInjected) {
-            injector.injectMembers(injectee);
-        }
+  @SuppressWarnings("unused")
+  @Inject
+  private void injectRegisteredObjects(final Injector injector) {
+    for (Object injectee : toBeInjected) {
+      injector.injectMembers(injectee);
     }
+  }
 }

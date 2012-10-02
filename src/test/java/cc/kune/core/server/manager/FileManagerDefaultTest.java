@@ -28,12 +28,12 @@ import com.google.inject.Inject;
 
 public class FileManagerDefaultTest extends PersistenceTest {
 
-    @Inject
-    FileManager fileManager;
+  @Inject
+  FileManager fileManager;
 
-    @Before
-    public void start() {
+  @Before
+  public void start() {
 
-    }
+  }
 
 }

@@ -29,44 +29,44 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 
 public class MessageToolbar extends Composite {
-    private final Image errorIcon;
-    private final Label errorLabel;
-    private final NotifyLevelImages images;
-    private final FlowPanel toolbar;
+  private final Image errorIcon;
+  private final Label errorLabel;
+  private final NotifyLevelImages images;
+  private final FlowPanel toolbar;
 
-    public MessageToolbar(final NotifyLevelImages images, final String errorLabelId) {
-        this.images = images;
-        toolbar = new FlowPanel();
-        errorLabel = new Label("");
-        errorLabel.setWordWrap(true);
-        errorLabel.ensureDebugId(errorLabelId);
-        errorIcon = new Image();
-        errorIcon.setResource(images.getImage(NotifyLevel.error));
+  public MessageToolbar(final NotifyLevelImages images, final String errorLabelId) {
+    this.images = images;
+    toolbar = new FlowPanel();
+    errorLabel = new Label("");
+    errorLabel.setWordWrap(true);
+    errorLabel.ensureDebugId(errorLabelId);
+    errorIcon = new Image();
+    errorIcon.setResource(images.getImage(NotifyLevel.error));
 
-        toolbar.add(errorIcon);
-        toolbar.setStyleName("k-error-tb");
+    toolbar.add(errorIcon);
+    toolbar.setStyleName("k-error-tb");
 
-        toolbar.add(errorLabel);
-        errorIcon.setVisible(false);
-        toolbar.setVisible(false);
-        initWidget(toolbar);
-    }
+    toolbar.add(errorLabel);
+    errorIcon.setVisible(false);
+    toolbar.setVisible(false);
+    initWidget(toolbar);
+  }
 
-    public FlowPanel getToolbar() {
-        return toolbar;
-    }
+  public FlowPanel getToolbar() {
+    return toolbar;
+  }
 
-    public void hideErrorMessage() {
-        errorIcon.setVisible(false);
-        errorLabel.setText("");
-        toolbar.setVisible(false);
-    }
+  public void hideErrorMessage() {
+    errorIcon.setVisible(false);
+    errorLabel.setText("");
+    toolbar.setVisible(false);
+  }
 
-    public void setErrorMessage(final String message, final NotifyLevel level) {
-        errorLabel.setText(message);
-        final ImageResource icon = images.getImage(level);
-        errorIcon.setResource(icon);
-        errorIcon.setVisible(true);
-        toolbar.setVisible(true);
-    }
+  public void setErrorMessage(final String message, final NotifyLevel level) {
+    errorLabel.setText(message);
+    final ImageResource icon = images.getImage(level);
+    errorIcon.setResource(icon);
+    errorIcon.setVisible(true);
+    toolbar.setVisible(true);
+  }
 }

@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class NoDefaultContentException extends DefaultException {
-    private static final long serialVersionUID = 7443824340580555859L;
+  private static final long serialVersionUID = 7443824340580555859L;
 }

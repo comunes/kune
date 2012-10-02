@@ -24,7 +24,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class CurrentEntityChangedEvent extends GwtEvent<CurrentEntityChangedEvent.CurrentEntityChangedHandler> {
+public class CurrentEntityChangedEvent extends
+    GwtEvent<CurrentEntityChangedEvent.CurrentEntityChangedHandler> {
 
   public interface CurrentEntityChangedHandler extends EventHandler {
     public void onCurrentLogoChanged(CurrentEntityChangedEvent event);
@@ -70,7 +71,6 @@ public class CurrentEntityChangedEvent extends GwtEvent<CurrentEntityChangedEven
   public int hashCode() {
     return super.hashCode();
   }
-
 
   @Override
   public String toString() {

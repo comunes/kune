@@ -25,6 +25,6 @@ import cc.kune.domain.User;
 
 public interface AccessRightsService {
 
-    AccessRights get(User user, AccessLists lists);
+  AccessRights get(User user, AccessLists lists);
 
 }

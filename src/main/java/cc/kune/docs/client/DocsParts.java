@@ -37,6 +37,7 @@ public class DocsParts {
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
     viewerSelector.register(contentViewer, true, DocsToolConstants.TYPE_DOCUMENT);
-    viewerSelector.register(folderViewer, true, DocsToolConstants.TYPE_ROOT, DocsToolConstants.TYPE_FOLDER);
+    viewerSelector.register(folderViewer, true, DocsToolConstants.TYPE_ROOT,
+        DocsToolConstants.TYPE_FOLDER);
   }
 }

@@ -34,31 +34,31 @@ import cc.kune.domain.finders.TagFinder;
 import com.google.inject.Inject;
 
 public class TagManagerTest extends PersistenceTest {
-    @Inject
-    ContentManager contentManager;
-    private Tag tag;
-    @Inject
-    TagFinder tagFinder;
-    @Inject
-    TagManager tagManager;
+  @Inject
+  ContentManager contentManager;
+  private Tag tag;
+  @Inject
+  TagFinder tagFinder;
+  @Inject
+  TagManager tagManager;
 
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
+  @After
+  public void close() {
+    if (getTransaction().isActive()) {
+      getTransaction().rollback();
     }
+  }
 
-    @Before
-    public void insertData() {
-        openTransaction();
-        tag = new Tag("foo1");
-        tagManager.persist(tag);
-    }
+  @Before
+  public void insertData() {
+    openTransaction();
+    tag = new Tag("foo1");
+    tagManager.persist(tag);
+  }
 
-    @Test
-    public void testTagCreation() {
-        assertNotNull(tag.getId());
-        assertNotNull(tagFinder.findByTagName("foo1"));
-    }
+  @Test
+  public void testTagCreation() {
+    assertNotNull(tag.getId());
+    assertNotNull(tagFinder.findByTagName("foo1"));
+  }
 }

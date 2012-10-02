@@ -153,7 +153,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   /**
    * Adds the participant to a wave
-   *
+   * 
    * @param user
    *          the user
    * @param content
@@ -330,7 +330,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   /**
    * Purge content (permanent delete)
-   *
+   * 
    * @param content
    *          the content to purge
    */

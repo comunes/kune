@@ -25,15 +25,15 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
 
-    private static ErrorHandler errorHandler;
+  private static ErrorHandler errorHandler;
 
-    @Override
-    public void onFailure(final Throwable caught) {
-        errorHandler.process(caught);
-    }
+  @Override
+  public void onFailure(final Throwable caught) {
+    errorHandler.process(caught);
+  }
 
-    public static void init(ErrorHandler kuneErrorHandler) {
-        errorHandler = kuneErrorHandler;
-    }
+  public static void init(ErrorHandler kuneErrorHandler) {
+    errorHandler = kuneErrorHandler;
+  }
 
 }

@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class GroupShortNameInUseException extends DefaultException {
-    private static final long serialVersionUID = -4746775725822225687L;
+  private static final long serialVersionUID = -4746775725822225687L;
 }

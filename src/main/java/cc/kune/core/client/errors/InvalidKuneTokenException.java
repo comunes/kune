@@ -21,13 +21,13 @@ package cc.kune.core.client.errors;
 
 public class InvalidKuneTokenException extends DefaultException {
 
-    private static final long serialVersionUID = -4511846108911183386L;
+  private static final long serialVersionUID = -4511846108911183386L;
 
-    public InvalidKuneTokenException(String message) {
-        super(message);
-    }
+  public InvalidKuneTokenException(String message) {
+    super(message);
+  }
 
-    public InvalidKuneTokenException() {
-        super();
-    }
+  public InvalidKuneTokenException() {
+    super();
+  }
 }

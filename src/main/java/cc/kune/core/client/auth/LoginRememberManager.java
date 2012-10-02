@@ -21,14 +21,14 @@ package cc.kune.core.client.auth;
 
 public interface LoginRememberManager {
 
-    void clickFormLogin();
+  void clickFormLogin();
 
-    String getNickOrEmail();
+  String getNickOrEmail();
 
-    String getPassword();
+  String getPassword();
 
-    void setNickOrEmail(String username);
+  void setNickOrEmail(String username);
 
-    void setPassword(String password);
+  void setPassword(String password);
 
 }

@@ -48,11 +48,11 @@ package cc.kune.common.client.actions;
  * @status updated to 1.4
  */
 public interface PropertyChangeListener extends EventListener {
-    /**
-     * Fired after a Bean's property has changed.
-     * 
-     * @param e
-     *            the change (containing the old and new values)
-     */
-    void propertyChange(PropertyChangeEvent e);
+  /**
+   * Fired after a Bean's property has changed.
+   * 
+   * @param e
+   *          the change (containing the old and new values)
+   */
+  void propertyChange(PropertyChangeEvent e);
 } // interface PropertyChangeListener

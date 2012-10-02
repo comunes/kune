@@ -33,7 +33,7 @@ public interface NewGroupView extends View {
   void focusOnShortName();
 
   void focusOnLongName();
-  
+
   HasCloseHandlers<PopupPanel> getClose();
 
   HasClickHandlers getFirstBtn();

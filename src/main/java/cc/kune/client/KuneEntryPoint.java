@@ -19,8 +19,6 @@
  */
 package cc.kune.client;
 
-
-
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 
@@ -46,7 +44,7 @@ public class KuneEntryPoint implements EntryPoint {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
    */
   @Override
@@ -65,7 +63,8 @@ public class KuneEntryPoint implements EntryPoint {
               @Override
               public void run() {
                 NotifyUser.hideProgress();
-              }}.schedule(5000);
+              }
+            }.schedule(5000);
           }
         });
         // e.printStackTrace();

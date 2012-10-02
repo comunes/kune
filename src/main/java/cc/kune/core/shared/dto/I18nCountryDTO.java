@@ -23,32 +23,32 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class I18nCountryDTO implements IsSerializable {
 
-    private String code;
-    private String englishName;
-    private String dateFormat;
+  private String code;
+  private String englishName;
+  private String dateFormat;
 
-    public String getCode() {
-        return code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public String getDateFormat() {
-        return dateFormat;
-    }
+  public String getDateFormat() {
+    return dateFormat;
+  }
 
-    public String getEnglishName() {
-        return englishName;
-    }
+  public String getEnglishName() {
+    return englishName;
+  }
 
-    public void setCode(final String code) {
-        this.code = code;
-    }
+  public void setCode(final String code) {
+    this.code = code;
+  }
 
-    public void setDateFormat(final String dateFormat) {
-        this.dateFormat = dateFormat;
-    }
+  public void setDateFormat(final String dateFormat) {
+    this.dateFormat = dateFormat;
+  }
 
-    public void setEnglishName(final String englishName) {
-        this.englishName = englishName;
-    }
+  public void setEnglishName(final String englishName) {
+    this.englishName = englishName;
+  }
 
 }

@@ -24,7 +24,7 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHandler> { 
+public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHandler> {
 
   public interface HasGroupChangedHandlers extends HasHandlers {
     HandlerRegistration addGroupChangedHandler(GroupChangedHandler handler);
@@ -77,11 +77,11 @@ public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHa
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
-        return true;
+      return true;
     if (obj == null)
-        return false;
+      return false;
     if (getClass() != obj.getClass())
-        return false;
+      return false;
     GroupChangedEvent other = (GroupChangedEvent) obj;
     if (previousGroup == null) {
       if (other.previousGroup != null)
@@ -106,10 +106,6 @@ public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHa
 
   @Override
   public String toString() {
-    return "GroupChangedEvent["
-                 + previousGroup
-                 + ","
-                 + newGroup
-    + "]";
+    return "GroupChangedEvent[" + previousGroup + "," + newGroup + "]";
   }
 }

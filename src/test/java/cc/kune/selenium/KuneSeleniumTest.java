@@ -105,8 +105,8 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
     // showTooltip(groupSpace.chatTool);
     // sleep(3000);
     // groupSpace.showTutorial(3, 6, 6, 4, 7, 3, 3);
-   
-   	// lists
+
+    // lists
     groupSpace.listTool.click();
     showTooltip(groupSpace.listTool);
     sleep(2000);

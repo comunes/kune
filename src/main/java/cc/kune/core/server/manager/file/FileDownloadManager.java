@@ -55,94 +55,96 @@ import com.google.inject.Inject;
  */
 public class FileDownloadManager extends HttpServlet {
 
-    private static final long serialVersionUID = -1160659289588014049L;
+  private static final long serialVersionUID = -1160659289588014049L;
 
-    static final String RESP_HEADER_ATTACHMENT_FILENAME = "attachment; filename=\"";
-    static final String RESP_HEADER_CONTEND_DISP = "Content-Disposition";
-    static final String RESP_HEADER_END = "\"";
+  static final String RESP_HEADER_ATTACHMENT_FILENAME = "attachment; filename=\"";
+  static final String RESP_HEADER_CONTEND_DISP = "Content-Disposition";
+  static final String RESP_HEADER_END = "\"";
 
-    static final String APPLICATION_X_DOWNLOAD = "application/x-download";
+  static final String APPLICATION_X_DOWNLOAD = "application/x-download";
 
-    public static final Log LOG = LogFactory.getLog(FileDownloadManager.class);
+  public static final Log LOG = LogFactory.getLog(FileDownloadManager.class);
 
-    @Inject
-    ContentManager contentManager;
-    @Inject
-    KuneProperties kuneProperties;
-    @Inject
-    FileUtils fileUtils;
+  @Inject
+  ContentManager contentManager;
+  @Inject
+  KuneProperties kuneProperties;
+  @Inject
+  FileUtils fileUtils;
 
-    @Override
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-            IOException {
+  @Override
+  protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+      throws ServletException, IOException {
 
-        final String userHash = req.getParameter(FileConstants.HASH);
-        final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
-        final String downloadS = req.getParameter(FileConstants.DOWNLOAD);
-        final String imageSizeS = req.getParameter(FileConstants.IMGSIZE);
+    final String userHash = req.getParameter(FileConstants.HASH);
+    final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
+    final String downloadS = req.getParameter(FileConstants.DOWNLOAD);
+    final String imageSizeS = req.getParameter(FileConstants.IMGSIZE);
 
-        try {
-            final Content cnt = getContentForDownload(userHash, stateToken);
-            final String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
-            final OutputStream out = resp.getOutputStream();
-            FileDownloadManagerUtils.returnFile(absFilename, out);
-        } catch (final ContentNotFoundException e) {
-            FileDownloadManagerUtils.returnNotFound404(resp);
-            return;
-        }
+    try {
+      final Content cnt = getContentForDownload(userHash, stateToken);
+      final String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
+      final OutputStream out = resp.getOutputStream();
+      FileDownloadManagerUtils.returnFile(absFilename, out);
+    } catch (final ContentNotFoundException e) {
+      FileDownloadManagerUtils.returnNotFound404(resp);
+      return;
+    }
+  }
+
+  String buildResponse(final Content cnt, final StateToken stateToken, final String downloadS,
+      final String imageSizeS, final HttpServletResponse resp, final FileUtils fileUtils)
+      throws FileNotFoundException, IOException {
+    final ImageSize imgsize = imageSizeS == null ? null : ImageSize.valueOf(imageSizeS);
+    final boolean download = downloadS != null && downloadS.equals("true") ? true : false;
+    final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION)
+        + FileUtils.toDir(stateToken);
+    String filename = cnt.getFilename();
+    final String title = cnt.getTitle();
+    String extension = FileUtils.getFileNameExtension(filename, true);
+    BasicMimeType mimeType = cnt.getMimeType();
+
+    final boolean isPdfAndNotDownload = mimeType != null && mimeType.isPdf() && !download;
+    if (mimeType != null && (mimeType.isImage() || isPdfAndNotDownload)) {
+      final String imgsizePrefix = imgsize == null ? "" : "." + imgsize;
+      final String filenameWithoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
+      final String filenameResized = filenameWithoutExtension + imgsizePrefix
+          + (isPdfAndNotDownload ? ".png" : extension);
+      if (fileUtils.exist(absDir + filenameResized)) {
+        filename = filenameResized;
+      }
     }
 
-    String buildResponse(final Content cnt, final StateToken stateToken, final String downloadS,
-            final String imageSizeS, final HttpServletResponse resp, final FileUtils fileUtils)
-            throws FileNotFoundException, IOException {
-        final ImageSize imgsize = imageSizeS == null ? null : ImageSize.valueOf(imageSizeS);
-        final boolean download = downloadS != null && downloadS.equals("true") ? true : false;
-        final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + FileUtils.toDir(stateToken);
-        String filename = cnt.getFilename();
-        final String title = cnt.getTitle();
-        String extension = FileUtils.getFileNameExtension(filename, true);
-        BasicMimeType mimeType = cnt.getMimeType();
-
-        final boolean isPdfAndNotDownload = mimeType != null && mimeType.isPdf() && !download;
-        if (mimeType != null && (mimeType.isImage() || isPdfAndNotDownload)) {
-            final String imgsizePrefix = imgsize == null ? "" : "." + imgsize;
-            final String filenameWithoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
-            final String filenameResized = filenameWithoutExtension + imgsizePrefix
-                    + (isPdfAndNotDownload ? ".png" : extension);
-            if (fileUtils.exist(absDir + filenameResized)) {
-                filename = filenameResized;
-            }
-        }
-
-        // We will send the pdf thumb not the real pdf
-        if (isPdfAndNotDownload) {
-            extension = ".png";
-            mimeType = new BasicMimeType("image", "png");
-        }
-
-        final String absFilename = absDir + filename;
-
-        final File file = new File(absFilename);
-
-        resp.setContentLength((int) file.length());
-
-        String contentType;
-        if (mimeType == null || download) {
-            contentType = APPLICATION_X_DOWNLOAD;
-        } else {
-            contentType = mimeType.toString();
-        }
-        resp.setContentType(contentType);
-        LOG.info("Content type returned: " + contentType);
-
-        resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + title + extension + RESP_HEADER_END);
-        return absFilename;
+    // We will send the pdf thumb not the real pdf
+    if (isPdfAndNotDownload) {
+      extension = ".png";
+      mimeType = new BasicMimeType("image", "png");
     }
 
-    @Authenticated(mandatory = false)
-    @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.content)
-    private Content getContentForDownload(final String userHash, final StateToken stateToken)
-            throws ContentNotFoundException {
-        return contentManager.find(ContentUtils.parseId(stateToken.getDocument()));
+    final String absFilename = absDir + filename;
+
+    final File file = new File(absFilename);
+
+    resp.setContentLength((int) file.length());
+
+    String contentType;
+    if (mimeType == null || download) {
+      contentType = APPLICATION_X_DOWNLOAD;
+    } else {
+      contentType = mimeType.toString();
     }
+    resp.setContentType(contentType);
+    LOG.info("Content type returned: " + contentType);
+
+    resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + title + extension
+        + RESP_HEADER_END);
+    return absFilename;
+  }
+
+  @Authenticated(mandatory = false)
+  @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.content)
+  private Content getContentForDownload(final String userHash, final StateToken stateToken)
+      throws ContentNotFoundException {
+    return contentManager.find(ContentUtils.parseId(stateToken.getDocument()));
+  }
 }

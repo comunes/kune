@@ -107,20 +107,22 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
         setState();
       }
     });
-    eventBus.addHandler(SetBackgroundImageEvent.getType(), new SetBackgroundImageEvent.SetBackgroundImageHandler() {
-      @Override
-      public void onSetBackImage(final SetBackgroundImageEvent event) {
-        backManager.setNoCache(true);
-        backManager.setBackgroundImage();
-        setBackImage(event.getToken());
-      }
-    });
-    eventBus.addHandler(ClearBackgroundImageEvent.getType(), new ClearBackgroundImageEvent.ClearBackgroundImageHandler() {
-      @Override
-      public void onClearBackImage(final ClearBackgroundImageEvent event) {
-        view.clearBackImage();
-      }
-    });
+    eventBus.addHandler(SetBackgroundImageEvent.getType(),
+        new SetBackgroundImageEvent.SetBackgroundImageHandler() {
+          @Override
+          public void onSetBackImage(final SetBackgroundImageEvent event) {
+            backManager.setNoCache(true);
+            backManager.setBackgroundImage();
+            setBackImage(event.getToken());
+          }
+        });
+    eventBus.addHandler(ClearBackgroundImageEvent.getType(),
+        new ClearBackgroundImageEvent.ClearBackgroundImageHandler() {
+          @Override
+          public void onClearBackImage(final ClearBackgroundImageEvent event) {
+            view.clearBackImage();
+          }
+        });
     view.addOnStartUploadHandler(new OnStartUploaderHandler() {
       @Override
       public void onStart(final IUploader uploader) {

@@ -25,7 +25,7 @@ import javax.servlet.Filter;
  * A filter with a matcher ... se RegexDock for a uri regex implementation
  */
 public interface Dock extends RequestMatcher {
-    Filter getFilter();
+  Filter getFilter();
 
-    void setFilter(Filter filter);
+  void setFilter(Filter filter);
 }

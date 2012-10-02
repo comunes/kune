@@ -20,5 +20,5 @@
 package cc.kune.common.client.actions;
 
 public enum ActionToolbarButtonSeparator {
-    spacer, separator, fill
+  spacer, separator, fill
 }

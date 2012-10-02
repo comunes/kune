@@ -53,8 +53,9 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
   private Label defSearchLabel;
 
   @Inject
-  public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img, final SessionConstants session,
-      final StateManager stateManager, final I18nUITranslationService i18n) {
+  public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img,
+      final SessionConstants session, final StateManager stateManager,
+      final I18nUITranslationService i18n) {
     searchButton = new PushButton(new Image(img.kuneSearchIco()), new Image(img.kuneSearchIcoPush()));
     searchButton.ensureDebugId(SITE_SEARCH_BUTTON);
     final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, false, true,
@@ -146,6 +147,6 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   @Override
   public void setDefTextVisible(boolean visible) {
-   defSearchLabel.setVisible(visible);
+    defSearchLabel.setVisible(visible);
   }
 }

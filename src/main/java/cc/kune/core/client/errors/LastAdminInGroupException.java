@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class LastAdminInGroupException extends DefaultException {
-    private static final long serialVersionUID = -8727443733339361388L;
+  private static final long serialVersionUID = -8727443733339361388L;
 }

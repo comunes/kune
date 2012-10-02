@@ -29,15 +29,15 @@ import com.google.inject.Singleton;
 @Singleton
 public class IsCurrentStateAGroupCondition implements GuiAddCondition {
 
-    private final Session session;
+  private final Session session;
 
-    @Inject
-    public IsCurrentStateAGroupCondition(final Session session) {
-        this.session = session;
-    }
+  @Inject
+  public IsCurrentStateAGroupCondition(final Session session) {
+    this.session = session;
+  }
 
-    @Override
-    public boolean mustBeAdded(final GuiActionDescrip descr) {
-        return session.isCurrentStateAGroup();
-    }
+  @Override
+  public boolean mustBeAdded(final GuiActionDescrip descr) {
+    return session.isCurrentStateAGroup();
+  }
 }

@@ -27,10 +27,10 @@ import cc.kune.core.server.properties.KunePropertiesDefault;
 
 public class KunePropertiesTest {
 
-    @Test
-    public void testLoading() {
-        KunePropertiesDefault properties = new KunePropertiesDefault("test.file.properties");
-        assertEquals("value", properties.get("key"));
-    }
+  @Test
+  public void testLoading() {
+    KunePropertiesDefault properties = new KunePropertiesDefault("test.file.properties");
+    assertEquals("value", properties.get("key"));
+  }
 
 }

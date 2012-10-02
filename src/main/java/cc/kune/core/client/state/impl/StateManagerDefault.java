@@ -71,7 +71,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-
 /**
  * The Class StateManagerDefault
  */
@@ -345,8 +344,9 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /**
    * Process #history token changes (this method should be rewritten)
-   *
-   * @param newToken the new token
+   * 
+   * @param newToken
+   *          the new token
    */
   void processHistoryToken(final String newToken) {
     // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory

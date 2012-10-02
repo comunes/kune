@@ -26,9 +26,9 @@ import com.google.inject.Inject;
 
 public class GroupOptDefLicensePanel extends EntityOptDefLicensePanel implements GroupOptDefLicenseView {
 
-    @Inject
-    public GroupOptDefLicensePanel(final I18nTranslationService i18n, final CoreResources res) {
-        super(i18n, res);
-    }
+  @Inject
+  public GroupOptDefLicensePanel(final I18nTranslationService i18n, final CoreResources res) {
+    super(i18n, res);
+  }
 
 }

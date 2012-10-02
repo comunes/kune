@@ -35,43 +35,43 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, SpinerPresenter.SpinerProxy> {
 
-    @ProxyCodeSplit
-    public interface SpinerProxy extends Proxy<SpinerPresenter> {
-    }
+  @ProxyCodeSplit
+  public interface SpinerProxy extends Proxy<SpinerPresenter> {
+  }
 
-    public interface SpinerView extends PopupView {
-        void fade();
+  public interface SpinerView extends PopupView {
+    void fade();
 
-        void show(String message);
-    }
+    void show(String message);
+  }
 
-    private final I18nTranslationService i18n;
+  private final I18nTranslationService i18n;
 
-    @Inject
-    public SpinerPresenter(final EventBus eventBus, final SpinerView view, final SpinerProxy proxy,
-            final I18nTranslationService i18n) {
-        super(eventBus, view, proxy);
-        this.i18n = i18n;
-        getView().show("");
-    }
+  @Inject
+  public SpinerPresenter(final EventBus eventBus, final SpinerView view, final SpinerProxy proxy,
+      final I18nTranslationService i18n) {
+    super(eventBus, view, proxy);
+    this.i18n = i18n;
+    getView().show("");
+  }
 
-    @ProxyEvent
-    public void onI18nReady(final I18nReadyEvent event) {
-        getView().show(i18n.t("Loading"));
-    }
+  @ProxyEvent
+  public void onI18nReady(final I18nReadyEvent event) {
+    getView().show(i18n.t("Loading"));
+  }
 
-    @ProxyEvent
-    public void onProgressHide(final ProgressHideEvent event) {
-        getView().fade();
-    }
+  @ProxyEvent
+  public void onProgressHide(final ProgressHideEvent event) {
+    getView().fade();
+  }
 
-    @ProxyEvent
-    public void onProgressShow(final ProgressShowEvent event) {
-        getView().show(event.getMessage());
-    }
+  @ProxyEvent
+  public void onProgressShow(final ProgressShowEvent event) {
+    getView().show(event.getMessage());
+  }
 
-    @Override
-    protected void revealInParent() {
-        RevealRootPopupContentEvent.fire(this, this);
-    }
+  @Override
+  protected void revealInParent() {
+    RevealRootPopupContentEvent.fire(this, this);
+  }
 }

@@ -20,5 +20,5 @@
 package cc.kune.core.server.rack;
 
 public interface RackModule {
-    void configure(RackBuilder builder);
+  void configure(RackBuilder builder);
 }

@@ -26,12 +26,10 @@ public class Base64Utils {
    * represent them. Note that this is not identical to the set of characters
    * used by MIME-Base64.
    */
-  private static final char[] base64Chars = new char[] {
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-      'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b',
-      'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-      'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3',
-      '4', '5', '6', '7', '8', '9', '$', '_'};
+  private static final char[] base64Chars = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+      'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b',
+      'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+      'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '$', '_' };
 
   /**
    * An array mapping legal base 64 characters [a-zA-Z0-9$_] to their associated
@@ -53,8 +51,9 @@ public class Base64Utils {
 
   /**
    * Decode a base64 string into a byte array.
-   *
-   * @param data the encoded data.
+   * 
+   * @param data
+   *          the encoded data.
    * @return a byte array.
    * @see #fromBase64(String)
    */
@@ -127,8 +126,9 @@ public class Base64Utils {
    * with zeros. Each 24-bit chunk is encoded as 4 characters from the sequence
    * [A-Za-z0-9$_]. If one of the source positions consists entirely of padding
    * zeros, an '=' character is used instead.
-   *
-   * @param data a byte array, which may be null or empty
+   * 
+   * @param data
+   *          a byte array, which may be null or empty
    * @return a String
    */
   public static String toBase64(byte[] data) {
@@ -171,7 +171,7 @@ public class Base64Utils {
 
   /**
    * Return a string containing a base-64 encoded version of the given long
-   * value.  Leading groups of all zero bits are omitted.
+   * value. Leading groups of all zero bits are omitted.
    */
   public static String toBase64(long value) {
     // Convert to ints early to avoid need for long ops
@@ -195,8 +195,7 @@ public class Base64Utils {
     return sb.toString();
   }
 
-  private static boolean base64Append(StringBuilder sb, int digit,
-      boolean haveNonZero) {
+  private static boolean base64Append(StringBuilder sb, int digit, boolean haveNonZero) {
     if (digit > 0) {
       haveNonZero = true;
     }

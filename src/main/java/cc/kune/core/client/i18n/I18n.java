@@ -29,7 +29,7 @@ public class I18n {
   @Inject
   private static I18nUITranslationService i18n;
 
-  public static Direction getDirection()  {
+  public static Direction getDirection() {
     return i18n.getDirection();
   }
 

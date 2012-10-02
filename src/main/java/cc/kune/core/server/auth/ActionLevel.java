@@ -20,5 +20,5 @@
 package cc.kune.core.server.auth;
 
 public enum ActionLevel {
-    group, tool, container, content
+  group, tool, container, content
 }

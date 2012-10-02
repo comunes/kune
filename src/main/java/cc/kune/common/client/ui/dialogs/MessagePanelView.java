@@ -25,10 +25,10 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 public interface MessagePanelView {
 
-    IsWidget getPanel();
+  IsWidget getPanel();
 
-    void hideErrorMessage();
+  void hideErrorMessage();
 
-    void setErrorMessage(String message, NotifyLevel level);
+  void setErrorMessage(String message, NotifyLevel level);
 
 }

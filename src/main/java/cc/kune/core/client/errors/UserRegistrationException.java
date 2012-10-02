@@ -20,13 +20,13 @@
 package cc.kune.core.client.errors;
 
 public class UserRegistrationException extends DefaultException {
-    private static final long serialVersionUID = -4530874249465164135L;
+  private static final long serialVersionUID = -4530874249465164135L;
 
-    public UserRegistrationException() {
-        super();
-    }
+  public UserRegistrationException() {
+    super();
+  }
 
-    public UserRegistrationException(final String msg) {
-        super(msg);
-    }
+  public UserRegistrationException(final String msg) {
+    super(msg);
+  }
 }

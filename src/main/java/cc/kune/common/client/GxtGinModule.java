@@ -33,17 +33,17 @@ import com.google.gwt.inject.client.AbstractGinModule;
 
 public class GxtGinModule extends AbstractGinModule {
 
-    @Override
-    protected void configure() {
-        bind(GxtSubMenuGui.class);
-        bind(GxtMenuGui.class);
-        bind(GxtMenuItemGui.class);
-        bind(GxtMenuSeparatorGui.class);
-        bind(GxtPushButtonGui.class);
-        bind(GxtButtonGui.class);
-        bind(GwtIconLabelGui.class);
-        bind(GxtToolbarGui.class);
-        bind(GxtToolbarSeparatorGui.class);
-    }
+  @Override
+  protected void configure() {
+    bind(GxtSubMenuGui.class);
+    bind(GxtMenuGui.class);
+    bind(GxtMenuItemGui.class);
+    bind(GxtMenuSeparatorGui.class);
+    bind(GxtPushButtonGui.class);
+    bind(GxtButtonGui.class);
+    bind(GwtIconLabelGui.class);
+    bind(GxtToolbarGui.class);
+    bind(GxtToolbarSeparatorGui.class);
+  }
 
 }

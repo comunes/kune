@@ -15,43 +15,43 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class HelloWorldPanel extends ViewImpl implements HasText, HelloWorldView {
 
-    interface HelloWorldPanelUiBinder extends UiBinder<Widget, HelloWorldPanel> {
-    }
+  interface HelloWorldPanelUiBinder extends UiBinder<Widget, HelloWorldPanel> {
+  }
 
-    private static HelloWorldPanelUiBinder uiBinder = GWT.create(HelloWorldPanelUiBinder.class);
+  private static HelloWorldPanelUiBinder uiBinder = GWT.create(HelloWorldPanelUiBinder.class);
 
-    @UiField
-    Button button;
+  @UiField
+  Button button;
 
-    private final Widget widget;
+  private final Widget widget;
 
-    public HelloWorldPanel() {
-        widget = uiBinder.createAndBindUi(this);
-    }
+  public HelloWorldPanel() {
+    widget = uiBinder.createAndBindUi(this);
+  }
 
-    public HelloWorldPanel(final String firstName) {
-        widget = uiBinder.createAndBindUi(this);
-        button.setText(firstName);
-    }
+  public HelloWorldPanel(final String firstName) {
+    widget = uiBinder.createAndBindUi(this);
+    button.setText(firstName);
+  }
 
-    @Override
-    public Widget asWidget() {
-        return widget;
-    }
+  @Override
+  public Widget asWidget() {
+    return widget;
+  }
 
-    @Override
-    public String getText() {
-        return button.getText();
-    }
+  @Override
+  public String getText() {
+    return button.getText();
+  }
 
-    @UiHandler("button")
-    void onClick(final ClickEvent e) {
-        NotifyUser.info("Hello world!");
-    }
+  @UiHandler("button")
+  void onClick(final ClickEvent e) {
+    NotifyUser.info("Hello world!");
+  }
 
-    @Override
-    public void setText(final String text) {
-        button.setText(text);
-    }
+  @Override
+  public void setText(final String text) {
+    button.setText(text);
+  }
 
 }

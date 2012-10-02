@@ -71,7 +71,11 @@ public class GroupFieldFactory {
     field.setId(fieldId);
     field.setWidth(175);
     field.setMinLength(3);
-    field.setMaxLength(CoreConstants.MAX_SHORT_NAME_SIZE); /* Same in Group.java/shortName */
+    field.setMaxLength(CoreConstants.MAX_SHORT_NAME_SIZE); /*
+                                                            * Same in
+                                                            * Group.java/
+                                                            * shortName
+                                                            */
     field.setAllowBlank(false);
     field.setRegex(TextUtils.SHORTNAME_UPPER_REGEXP);
     field.getMessages().setMinLengthText(minMaxText);
@@ -90,7 +94,10 @@ public class GroupFieldFactory {
     field.setWidth(DefaultForm.BIG_FIELD_WIDTH);
     field.setAllowBlank(false);
     field.setMinLength(3);
-    field.setMaxLength(CoreConstants.MAX_LONG_NAME_SIZE); /* Same in Group.java/longName */
+    field.setMaxLength(CoreConstants.MAX_LONG_NAME_SIZE); /*
+                                                           * Same in
+                                                           * Group.java/longName
+                                                           */
     field.setValidationDelay(1000);
     return field;
   }

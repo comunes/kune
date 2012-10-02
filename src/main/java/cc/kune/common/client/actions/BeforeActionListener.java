@@ -21,11 +21,11 @@ package cc.kune.common.client.actions;
 
 public interface BeforeActionListener {
 
-    /**
-     * Return false to cancel the action
-     * 
-     * @return
-     */
-    boolean beforeAction();
+  /**
+   * Return false to cancel the action
+   * 
+   * @return
+   */
+  boolean beforeAction();
 
 }

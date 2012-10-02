@@ -45,8 +45,8 @@ import com.google.inject.Provider;
 public class GroupSNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
   @Inject
-  public GroupSNCollabsMenuItemsRegistry(final SessionConstants session, final I18nTranslationService i18n,
-      final IsLoggedCondition isLogged,
+  public GroupSNCollabsMenuItemsRegistry(final SessionConstants session,
+      final I18nTranslationService i18n, final IsLoggedCondition isLogged,
       final IsCurrentStateAdministrableCondition isAdministrableCondition,
       final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
       final IsBuddieCondition isBuddie, final IsMeCondition isMe, final IsNotMeCondition isNotMe,

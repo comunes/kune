@@ -26,56 +26,56 @@ import com.google.gwt.event.shared.HasHandlers;
 
 public class I18nReadyEvent extends GwtEvent<I18nReadyEvent.I18nReadyHandler> {
 
-    public interface HasI18nReadyHandlers extends HasHandlers {
-        HandlerRegistration addI18nReadyHandler(I18nReadyHandler handler);
-    }
+  public interface HasI18nReadyHandlers extends HasHandlers {
+    HandlerRegistration addI18nReadyHandler(I18nReadyHandler handler);
+  }
 
-    public interface I18nReadyHandler extends EventHandler {
-        public void onI18nReady(I18nReadyEvent event);
-    }
+  public interface I18nReadyHandler extends EventHandler {
+    public void onI18nReady(I18nReadyEvent event);
+  }
 
-    private static final Type<I18nReadyHandler> TYPE = new Type<I18nReadyHandler>();
+  private static final Type<I18nReadyHandler> TYPE = new Type<I18nReadyHandler>();
 
-    public static void fire(final HasHandlers source) {
-        source.fireEvent(new I18nReadyEvent());
-    }
+  public static void fire(final HasHandlers source) {
+    source.fireEvent(new I18nReadyEvent());
+  }
 
-    public static Type<I18nReadyHandler> getType() {
-        return TYPE;
-    }
+  public static Type<I18nReadyHandler> getType() {
+    return TYPE;
+  }
 
-    public I18nReadyEvent() {
-    }
+  public I18nReadyEvent() {
+  }
 
-    @Override
-    protected void dispatch(final I18nReadyHandler handler) {
-        handler.onI18nReady(this);
-    }
+  @Override
+  protected void dispatch(final I18nReadyHandler handler) {
+    handler.onI18nReady(this);
+  }
 
-    @Override
-    public boolean equals(final Object other) {
-        if (other != null && other.getClass().equals(this.getClass())) {
-            final I18nReadyEvent o = (I18nReadyEvent) other;
-            return true;
-        }
-        return false;
+  @Override
+  public boolean equals(final Object other) {
+    if (other != null && other.getClass().equals(this.getClass())) {
+      final I18nReadyEvent o = (I18nReadyEvent) other;
+      return true;
     }
+    return false;
+  }
 
-    @Override
-    public Type<I18nReadyHandler> getAssociatedType() {
-        return TYPE;
-    }
+  @Override
+  public Type<I18nReadyHandler> getAssociatedType() {
+    return TYPE;
+  }
 
-    @Override
-    public int hashCode() {
-        int hashCode = 23;
-        hashCode = (hashCode * 37) + getClass().hashCode();
-        return hashCode;
-    }
+  @Override
+  public int hashCode() {
+    int hashCode = 23;
+    hashCode = (hashCode * 37) + getClass().hashCode();
+    return hashCode;
+  }
 
-    @Override
-    public String toString() {
-        return "I18nReadyEvent[" + "]";
-    }
+  @Override
+  public String toString() {
+    return "I18nReadyEvent[" + "]";
+  }
 
 }

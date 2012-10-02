@@ -61,23 +61,23 @@ public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, Soci
 
   /**
    * Adds a group which SN is modified, so we should not use the cache for that.
-   *
+   * 
    * @param group
    *          the group
    */
   public void expire(final Group group) {
     SocialNetwork sn = group.getSocialNetwork();
     AccessLists acl = sn.getAccessLists();
-    for (Group admins: acl.getAdmins().getList()) {
+    for (Group admins : acl.getAdmins().getList()) {
       expiredGroups.add(admins);
     }
-    for (Group editors: acl.getEditors().getList()) {
+    for (Group editors : acl.getEditors().getList()) {
       expiredGroups.add(editors);
     }
-    for (Group viewers: acl.getViewers().getList()) {
+    for (Group viewers : acl.getViewers().getList()) {
       expiredGroups.add(viewers);
     }
-    for (Group pending: sn.getPendingCollaborators().getList()) {
+    for (Group pending : sn.getPendingCollaborators().getList()) {
       expiredGroups.add(pending);
     }
     expiredGroups.add(group);
@@ -85,7 +85,7 @@ public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, Soci
 
   /**
    * Gets the SN of some user/group from the cache if available
-   *
+   * 
    * @param user
    *          the user
    * @param group

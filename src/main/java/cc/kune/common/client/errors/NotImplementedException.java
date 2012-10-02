@@ -23,26 +23,26 @@ import cc.kune.common.client.log.Log;
 
 public class NotImplementedException extends RuntimeException {
 
-    private static final long serialVersionUID = -1327164226202923181L;
+  private static final long serialVersionUID = -1327164226202923181L;
 
-    public NotImplementedException() {
-        super();
-        Log.error("NotImplementedException");
-    }
+  public NotImplementedException() {
+    super();
+    Log.error("NotImplementedException");
+  }
 
-    public NotImplementedException(final String text) {
-        super(text);
-        Log.error(text);
-    }
+  public NotImplementedException(final String text) {
+    super(text);
+    Log.error(text);
+  }
 
-    public NotImplementedException(final String text, final Throwable cause) {
-        super(text, cause);
-        Log.error(text, cause);
-    }
+  public NotImplementedException(final String text, final Throwable cause) {
+    super(text, cause);
+    Log.error(text, cause);
+  }
 
-    public NotImplementedException(final Throwable cause) {
-        super(cause);
-        Log.error("NotImplementedException", cause);
-    }
+  public NotImplementedException(final Throwable cause) {
+    super(cause);
+    Log.error("NotImplementedException", cause);
+  }
 
 }

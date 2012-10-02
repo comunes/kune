@@ -19,9 +19,8 @@
  */
 package cc.kune.core.client.init;
 
-
 public interface AppStarter {
 
-    void start();
+  void start();
 
 }

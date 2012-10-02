@@ -22,14 +22,14 @@ package cc.kune.core.server.rack.dock;
 import javax.servlet.Filter;
 
 public abstract class AbstractDock implements Dock {
-    private Filter filter;
+  private Filter filter;
 
-    public Filter getFilter() {
-        return filter;
-    }
+  public Filter getFilter() {
+    return filter;
+  }
 
-    public void setFilter(Filter filter) {
-        this.filter = filter;
-    }
+  public void setFilter(Filter filter) {
+    this.filter = filter;
+  }
 
 }

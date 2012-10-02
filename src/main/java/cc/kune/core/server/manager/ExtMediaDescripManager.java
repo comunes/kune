@@ -24,5 +24,5 @@ import java.util.List;
 import cc.kune.domain.ExtMediaDescrip;
 
 public interface ExtMediaDescripManager extends Manager<ExtMediaDescrip, Long> {
-    List<ExtMediaDescrip> getAll();
+  List<ExtMediaDescrip> getAll();
 }

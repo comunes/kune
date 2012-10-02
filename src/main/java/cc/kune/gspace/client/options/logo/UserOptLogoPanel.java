@@ -27,12 +27,13 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
 public class UserOptLogoPanel extends EntityOptLogoPanel implements UserOptLogoView {
-    public static final String BUTTON_ID = "k-uolp-sendb";
-    public static final String PANEL_ID = "k-uolp-pan";
+  public static final String BUTTON_ID = "k-uolp-sendb";
+  public static final String PANEL_ID = "k-uolp-pan";
 
-    @Inject
-    public UserOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n, final NavResources res) {
-        super(eventBus, i18n, PANEL_ID, BUTTON_ID, FileConstants.USER_LOGO_FIELD, res);
-    }
+  @Inject
+  public UserOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,
+      final NavResources res) {
+    super(eventBus, i18n, PANEL_ID, BUTTON_ID, FileConstants.USER_LOGO_FIELD, res);
+  }
 
 }

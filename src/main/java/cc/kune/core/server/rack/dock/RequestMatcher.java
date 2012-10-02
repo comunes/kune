@@ -20,5 +20,5 @@
 package cc.kune.core.server.rack.dock;
 
 public interface RequestMatcher {
-    boolean matches(String url);
+  boolean matches(String url);
 }

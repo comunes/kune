@@ -46,7 +46,7 @@ public interface StateManager {
 
   /**
    * This permits to add custom #framents to urls and its associated actions
-   *
+   * 
    * @param token
    *          the url #fragment
    * @param historyTokenCallback
@@ -96,7 +96,7 @@ public interface StateManager {
 
   /**
    * Restore previous token
-   *
+   * 
    * @param fireChange
    *          if only change the browser #token or also fire the event
    */

@@ -29,24 +29,26 @@ public class HistoryUtils {
   /**
    * Hashbang makes #!hash googleables
    * https://developers.google.com/webmasters/ajax-crawling/docs/getting-started
-   *
+   * 
    * @param historyToken
    *          the #history token fragment
    * @return the #!history token fragment with ! added
    */
   public static String hashbang(String historyToken) {
-    return historyToken == null || historyToken.startsWith(PREFIX) ? historyToken : PREFIX + historyToken;
+    return historyToken == null || historyToken.startsWith(PREFIX) ? historyToken : PREFIX
+        + historyToken;
   }
 
   /**
    * Undo hashbang (removes ! from a #!hash).
-   *
+   * 
    * @param historyToken
    *          the history token
    * @return the #!fragment history token without !
    */
   public static String undoHashbang(String historyToken) {
-    return historyToken != null && historyToken.startsWith(PREFIX) ? historyToken.substring(1) : historyToken;
+    return historyToken != null && historyToken.startsWith(PREFIX) ? historyToken.substring(1)
+        : historyToken;
   }
 
 }

@@ -28,13 +28,13 @@ import com.google.inject.persist.finder.Finder;
 
 public interface RateFinder {
 
-    @Finder(query = "SELECT AVG(r.value) FROM Rate r WHERE r.content = :content")
-    public Double calculateRate(@Named("content") final Content content);
+  @Finder(query = "SELECT AVG(r.value) FROM Rate r WHERE r.content = :content")
+  public Double calculateRate(@Named("content") final Content content);
 
-    @Finder(query = "SELECT count(*) FROM Rate r WHERE r.content = :content")
-    public Long calculateRateNumberOfUsers(@Named("content") final Content content);
+  @Finder(query = "SELECT count(*) FROM Rate r WHERE r.content = :content")
+  public Long calculateRateNumberOfUsers(@Named("content") final Content content);
 
-    @Finder(query = "SELECT r FROM Rate r WHERE r.rater = :user AND r.content = :content")
-    public Rate find(@Named("user") final User user, @Named("content") final Content content);
+  @Finder(query = "SELECT r FROM Rate r WHERE r.rater = :user AND r.content = :content")
+  public Rate find(@Named("user") final User user, @Named("content") final Content content);
 
 }

@@ -60,176 +60,176 @@ import java.util.Set;
  */
 public class InputMap {
 
-    /**
-     * Storage for the KeyStroke --> Object mappings.
-     */
-    private Map<KeyStroke, AbstractAction> inputMap;
+  /**
+   * Storage for the KeyStroke --> Object mappings.
+   */
+  private Map<KeyStroke, AbstractAction> inputMap;
 
-    /**
-     * An optional parent map.
-     */
-    private InputMap parent;
+  /**
+   * An optional parent map.
+   */
+  private InputMap parent;
 
-    /**
-     * Creates a new <code>InputMap</code> instance. This default instance
-     * contains no mappings and has no parent.
-     */
-    public InputMap() {
-        // nothing to do
+  /**
+   * Creates a new <code>InputMap</code> instance. This default instance
+   * contains no mappings and has no parent.
+   */
+  public InputMap() {
+    // nothing to do
+  }
+
+  /**
+   * Returns all keys of entries in this <code>InputMap</code> and all its
+   * parents.
+   * 
+   * @return An array of keys (may be <code>null</code> or have zero length).
+   */
+  public KeyStroke[] allKeys() {
+    final Set<KeyStroke> set = new HashSet<KeyStroke>();
+
+    if (parent != null) {
+      final KeyStroke[] parentKeys = parent.allKeys();
+      if (parentKeys != null) {
+        set.addAll(Arrays.asList(parentKeys));
+      }
+    }
+    if (inputMap != null) {
+      set.addAll(inputMap.keySet());
+    }
+    if (set.isEmpty()) {
+      return null;
+    }
+    final KeyStroke[] array = new KeyStroke[set.size()];
+    return set.toArray(array);
+  }
+
+  /**
+   * Clears the entries from this <code>InputMap</code>. The parent map, if
+   * there is one, is not cleared.
+   */
+  public void clear() {
+    if (inputMap != null) {
+      inputMap.clear();
+    }
+  }
+
+  /**
+   * Returns the binding for the specified keystroke, if there is one.
+   * 
+   * @param keystroke
+   *          the key of the entry (<code>null</code> is ignored).
+   * 
+   * @return The binding associated with the specified keystroke (or
+   *         <code>null</code>).
+   */
+  public AbstractAction get(final KeyStroke keystroke) {
+    AbstractAction result = null;
+    if (inputMap != null) {
+      result = inputMap.get(keystroke);
     }
 
-    /**
-     * Returns all keys of entries in this <code>InputMap</code> and all its
-     * parents.
-     * 
-     * @return An array of keys (may be <code>null</code> or have zero length).
-     */
-    public KeyStroke[] allKeys() {
-        final Set<KeyStroke> set = new HashSet<KeyStroke>();
-
-        if (parent != null) {
-            final KeyStroke[] parentKeys = parent.allKeys();
-            if (parentKeys != null) {
-                set.addAll(Arrays.asList(parentKeys));
-            }
-        }
-        if (inputMap != null) {
-            set.addAll(inputMap.keySet());
-        }
-        if (set.isEmpty()) {
-            return null;
-        }
-        final KeyStroke[] array = new KeyStroke[set.size()];
-        return set.toArray(array);
+    if (result == null && parent != null) {
+      result = parent.get(keystroke);
     }
+    return result;
+  }
 
-    /**
-     * Clears the entries from this <code>InputMap</code>. The parent map, if
-     * there is one, is not cleared.
-     */
-    public void clear() {
-        if (inputMap != null) {
-            inputMap.clear();
-        }
+  /**
+   * Returns the parent of this <code>InputMap</code>. The default value is
+   * <code>null</code>.
+   * 
+   * @return The parent map (possibly <code>null</code>).
+   * 
+   * @see #setParent(InputMap)
+   */
+  public InputMap getParent() {
+    return parent;
+  }
+
+  /**
+   * Returns all keys of entries in this <code>InputMap</code>. This does not
+   * include keys defined in the parent, if there is one (use the
+   * {@link #allKeys()} method for that case). <br>
+   * <br>
+   * Following the behaviour of the reference implementation, this method will
+   * return <code>null</code> when no entries have been added to the map, and a
+   * zero length array if entries have been added but subsequently removed (or
+   * cleared) from the map.
+   * 
+   * @return An array of keys (may be <code>null</code> or have zero length).
+   */
+  // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:33
+  public KeyStroke[] keys() {
+    if (inputMap != null) {
+      final KeyStroke[] array = new KeyStroke[size()];
+      return inputMap.keySet().toArray(array);
     }
+    return null;
+  }
 
-    /**
-     * Returns the binding for the specified keystroke, if there is one.
-     * 
-     * @param keystroke
-     *            the key of the entry (<code>null</code> is ignored).
-     * 
-     * @return The binding associated with the specified keystroke (or
-     *         <code>null</code>).
-     */
-    public AbstractAction get(final KeyStroke keystroke) {
-        AbstractAction result = null;
-        if (inputMap != null) {
-            result = inputMap.get(keystroke);
-        }
-
-        if (result == null && parent != null) {
-            result = parent.get(keystroke);
-        }
-        return result;
+  /**
+   * Puts a new entry into the <code>InputMap</code>. If
+   * <code>actionMapKey</code> is <code>null</code> any existing entry will be
+   * removed.
+   * 
+   * @param keystroke
+   *          the keystroke for the entry (<code>null</code> is ignored).
+   * @param actionMapKey
+   *          the action (<code>null</code> permitted).
+   */
+  public void put(final KeyStroke keystroke, final AbstractAction actionMapKey) {
+    if (keystroke == null) {
+      return;
     }
-
-    /**
-     * Returns the parent of this <code>InputMap</code>. The default value is
-     * <code>null</code>.
-     * 
-     * @return The parent map (possibly <code>null</code>).
-     * 
-     * @see #setParent(InputMap)
-     */
-    public InputMap getParent() {
-        return parent;
+    if (inputMap == null) {
+      inputMap = new HashMap<KeyStroke, AbstractAction>();
     }
-
-    /**
-     * Returns all keys of entries in this <code>InputMap</code>. This does not
-     * include keys defined in the parent, if there is one (use the
-     * {@link #allKeys()} method for that case). <br>
-     * <br>
-     * Following the behaviour of the reference implementation, this method will
-     * return <code>null</code> when no entries have been added to the map, and
-     * a zero length array if entries have been added but subsequently removed
-     * (or cleared) from the map.
-     * 
-     * @return An array of keys (may be <code>null</code> or have zero length).
-     */
-    // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:33
-    public KeyStroke[] keys() {
-        if (inputMap != null) {
-            final KeyStroke[] array = new KeyStroke[size()];
-            return inputMap.keySet().toArray(array);
-        }
-        return null;
+    if (actionMapKey == null) {
+      inputMap.remove(keystroke);
+    } else {
+      inputMap.put(keystroke, actionMapKey);
     }
+  }
 
-    /**
-     * Puts a new entry into the <code>InputMap</code>. If
-     * <code>actionMapKey</code> is <code>null</code> any existing entry will be
-     * removed.
-     * 
-     * @param keystroke
-     *            the keystroke for the entry (<code>null</code> is ignored).
-     * @param actionMapKey
-     *            the action (<code>null</code> permitted).
-     */
-    public void put(final KeyStroke keystroke, final AbstractAction actionMapKey) {
-        if (keystroke == null) {
-            return;
-        }
-        if (inputMap == null) {
-            inputMap = new HashMap<KeyStroke, AbstractAction>();
-        }
-        if (actionMapKey == null) {
-            inputMap.remove(keystroke);
-        } else {
-            inputMap.put(keystroke, actionMapKey);
-        }
+  /**
+   * Removes an entry from this <code>InputMap</code>. Note that this will not
+   * remove any entry from the parent map, if there is one.
+   * 
+   * @param keystroke
+   *          the key of the entry to remove (<code>null</code> is ignored).
+   */
+  public void remove(final KeyStroke keystroke) {
+    if (inputMap != null) {
+      inputMap.remove(keystroke);
     }
+  }
 
-    /**
-     * Removes an entry from this <code>InputMap</code>. Note that this will not
-     * remove any entry from the parent map, if there is one.
-     * 
-     * @param keystroke
-     *            the key of the entry to remove (<code>null</code> is ignored).
-     */
-    public void remove(final KeyStroke keystroke) {
-        if (inputMap != null) {
-            inputMap.remove(keystroke);
-        }
-    }
+  /**
+   * Sets a parent for this <code>InputMap</code>. If a parent is specified, the
+   * {@link #get(KeyStroke)} method will look in the parent if it cannot find an
+   * entry in this map.
+   * 
+   * @param parentMap
+   *          the new parent (<code>null</code> permitted).
+   * 
+   * @see #getParent()
+   */
+  public void setParent(final InputMap parentMap) {
+    parent = parentMap;
+  }
 
-    /**
-     * Sets a parent for this <code>InputMap</code>. If a parent is specified,
-     * the {@link #get(KeyStroke)} method will look in the parent if it cannot
-     * find an entry in this map.
-     * 
-     * @param parentMap
-     *            the new parent (<code>null</code> permitted).
-     * 
-     * @see #getParent()
-     */
-    public void setParent(final InputMap parentMap) {
-        parent = parentMap;
+  /**
+   * Returns the number of entries in this <code>InputMap</code>. This count
+   * does not include any entries from the parent map, if there is one.
+   * 
+   * @return The number of entries.
+   */
+  public int size() {
+    int result = 0;
+    if (inputMap != null) {
+      result = inputMap.size();
     }
-
-    /**
-     * Returns the number of entries in this <code>InputMap</code>. This count
-     * does not include any entries from the parent map, if there is one.
-     * 
-     * @return The number of entries.
-     */
-    public int size() {
-        int result = 0;
-        if (inputMap != null) {
-            result = inputMap.size();
-        }
-        return result;
-    }
+    return result;
+  }
 
 }

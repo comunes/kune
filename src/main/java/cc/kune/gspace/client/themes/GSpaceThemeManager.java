@@ -58,7 +58,8 @@ public class GSpaceThemeManager {
   @Inject
   public GSpaceThemeManager(final Session session,
       final Provider<GroupServiceAsync> groupServiceProvider, final StateManager stateManager,
-      final GSpaceBackgroundManager wsBackManager, final EventBus eventBus, final GSpaceArmorResources res) {
+      final GSpaceBackgroundManager wsBackManager, final EventBus eventBus,
+      final GSpaceArmorResources res) {
     this.session = session;
     this.groupServiceProvider = groupServiceProvider;
     this.wsBackManager = wsBackManager;

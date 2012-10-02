@@ -121,9 +121,9 @@ public class EventAddMenuItem extends MenuItemDescriptor {
         appt.setStyle(AppointmentStyle.ORANGE);
 
         contService.get().addNewContentWithGadgetAndState(session.getUserHash(),
-            session.getContainerState().getStateToken(), EventsToolConstants.TYPE_MEETING_DEF_GADGETNAME,
-            EventsToolConstants.TYPE_MEETING, title, "", EventsClientConversionUtil.toMap(appt),
-            new AsyncCallbackSimple<StateContentDTO>() {
+            session.getContainerState().getStateToken(),
+            EventsToolConstants.TYPE_MEETING_DEF_GADGETNAME, EventsToolConstants.TYPE_MEETING, title,
+            "", EventsClientConversionUtil.toMap(appt), new AsyncCallbackSimple<StateContentDTO>() {
               @Override
               public void onFailure(final Throwable caught) {
                 super.onFailure(caught);

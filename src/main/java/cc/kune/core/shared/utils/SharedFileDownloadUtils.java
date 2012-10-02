@@ -64,8 +64,7 @@ public class SharedFileDownloadUtils {
   public String getLogoImageUrl(final String groupName, final boolean noCache) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
-            new UrlParam(FileConstants.ONLY_USERS, false)).toString()
-             + getCacheSuffix(noCache);
+            new UrlParam(FileConstants.ONLY_USERS, false)).toString() + getCacheSuffix(noCache);
   }
 
   public String getCacheSuffix(final boolean noCache) {

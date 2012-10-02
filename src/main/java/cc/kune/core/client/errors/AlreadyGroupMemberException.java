@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class AlreadyGroupMemberException extends DefaultException {
-    private static final long serialVersionUID = 6663958867752546481L;
+  private static final long serialVersionUID = 6663958867752546481L;
 }

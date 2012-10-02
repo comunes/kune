@@ -37,6 +37,7 @@ public class WikiParts {
       final ContentViewerPresenter contentViewer, final FolderViewerPresenter folderViewer) {
     clientTool.get();
     viewerSelector.register(contentViewer, true, WikiToolConstants.TYPE_WIKIPAGE);
-    viewerSelector.register(folderViewer, true, WikiToolConstants.TYPE_ROOT, WikiToolConstants.TYPE_FOLDER);
+    viewerSelector.register(folderViewer, true, WikiToolConstants.TYPE_ROOT,
+        WikiToolConstants.TYPE_FOLDER);
   }
 }

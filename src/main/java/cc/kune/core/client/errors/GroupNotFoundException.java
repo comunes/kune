@@ -20,5 +20,5 @@
 package cc.kune.core.client.errors;
 
 public class GroupNotFoundException extends DefaultException {
-    private static final long serialVersionUID = 2358855015943550817L;
+  private static final long serialVersionUID = 2358855015943550817L;
 }

@@ -37,82 +37,82 @@ import cc.kune.domain.finders.TagUserContentFinder;
 import com.google.inject.Inject;
 
 public class TagUserContentTest extends PersistencePreLoadedDataTest {
-    private static final String DUMMY_TAG = "dummy";
-    @Inject
-    TagUserContentFinder finder;
-    @Inject
-    TagUserContentManagerDefault manager;
+  private static final String DUMMY_TAG = "dummy";
+  @Inject
+  TagUserContentFinder finder;
+  @Inject
+  TagUserContentManagerDefault manager;
 
-    private Tag tag;
-    @Inject
-    TagManager tagManager;
+  private Tag tag;
+  @Inject
+  TagManager tagManager;
 
-    @Before
-    public void before() {
-        tag = new Tag(DUMMY_TAG);
-        tagManager.persist(tag);
-    }
+  @Before
+  public void before() {
+    tag = new Tag(DUMMY_TAG);
+    tagManager.persist(tag);
+  }
 
-    private void createSomeTagUserContent() {
-        List<Tag> tags = manager.find(user, content);
-        assertEquals(0, tags.size());
-        createTagUserContent();
-        tags = manager.find(user, content);
-        assertEquals(1, tags.size());
-    }
+  private void createSomeTagUserContent() {
+    List<Tag> tags = manager.find(user, content);
+    assertEquals(0, tags.size());
+    createTagUserContent();
+    tags = manager.find(user, content);
+    assertEquals(1, tags.size());
+  }
 
-    private TagUserContent createTagUserContent() {
-        final TagUserContent tagUC = new TagUserContent(tag, user, content);
-        manager.persist(tagUC);
-        return tagUC;
-    }
+  private TagUserContent createTagUserContent() {
+    final TagUserContent tagUC = new TagUserContent(tag, user, content);
+    manager.persist(tagUC);
+    return tagUC;
+  }
 
-    @Test
-    public void getTagsAsString() {
-        manager.setTags(user, content, DUMMY_TAG);
-        final String tagS = manager.getTagsAsString(user, content);
-        assertEquals(DUMMY_TAG, tagS);
-    }
+  @Test
+  public void getTagsAsString() {
+    manager.setTags(user, content, DUMMY_TAG);
+    final String tagS = manager.getTagsAsString(user, content);
+    assertEquals(DUMMY_TAG, tagS);
+  }
 
-    @Test
-    public void getTagsGrouped() {
-        finder.getTagsGroups(user.getUserGroup());
-    }
+  @Test
+  public void getTagsGrouped() {
+    finder.getTagsGroups(user.getUserGroup());
+  }
 
-    @Test
-    public void insertSomeUserContent() {
-        createSomeTagUserContent();
-    }
+  @Test
+  public void insertSomeUserContent() {
+    createSomeTagUserContent();
+  }
 
-    @Test
-    public void removeSomeUserContent() {
-        createSomeTagUserContent();
-        manager.remove(user, content);
-        final List<Tag> tags = manager.find(user, content);
-        assertEquals(0, tags.size());
-    }
+  @Test
+  public void removeSomeUserContent() {
+    createSomeTagUserContent();
+    manager.remove(user, content);
+    final List<Tag> tags = manager.find(user, content);
+    assertEquals(0, tags.size());
+  }
 
-    @Test
-    public void setTags() {
-        List<Tag> tags = manager.find(user, content);
-        assertEquals(0, tags.size());
-        manager.setTags(user, content, DUMMY_TAG + " " + DUMMY_TAG);
-        tags = manager.find(user, content);
-        assertEquals(1, tags.size());
-    }
+  @Test
+  public void setTags() {
+    List<Tag> tags = manager.find(user, content);
+    assertEquals(0, tags.size());
+    manager.setTags(user, content, DUMMY_TAG + " " + DUMMY_TAG);
+    tags = manager.find(user, content);
+    assertEquals(1, tags.size());
+  }
 
-    @Test
-    public void setTagsRemoveBefore() {
-        manager.setTags(user, content, "foo");
-        manager.setTags(user, content, DUMMY_TAG);
-        final List<Tag> tags = manager.find(user, content);
-        assertEquals(1, tags.size());
-        assertEquals(DUMMY_TAG, tags.get(0).getName());
-    }
+  @Test
+  public void setTagsRemoveBefore() {
+    manager.setTags(user, content, "foo");
+    manager.setTags(user, content, DUMMY_TAG);
+    final List<Tag> tags = manager.find(user, content);
+    assertEquals(1, tags.size());
+    assertEquals(DUMMY_TAG, tags.get(0).getName());
+  }
 
-    @Test
-    public void testInsertData() {
-        final TagUserContent tagUC = createTagUserContent();
-        assertNotNull(tagUC.getId());
-    }
+  @Test
+  public void testInsertData() {
+    final TagUserContent tagUC = createTagUserContent();
+    assertNotNull(tagUC.getId());
+  }
 }

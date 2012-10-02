@@ -21,14 +21,14 @@ package cc.kune.common.client.ui.dialogs.wizard;
 
 public interface WizardListener {
 
-    void onBack();
+  void onBack();
 
-    void onNext();
+  void onNext();
 
-    void onFinish();
+  void onFinish();
 
-    void onCancel();
+  void onCancel();
 
-    void onClose();
+  void onClose();
 
 }

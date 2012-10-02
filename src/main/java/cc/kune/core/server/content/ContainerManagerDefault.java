@@ -183,8 +183,8 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
   public SearchResult<Container> search(final String search, final Integer firstResult,
       final Integer maxResults) {
     final String escapedQuery = QueryParser.escape(search);
-    return super.search(new String[] { escapedQuery, escapedQuery },
-        new String[] { "name" }, firstResult, maxResults);
+    return super.search(new String[] { escapedQuery, escapedQuery }, new String[] { "name" },
+        firstResult, maxResults);
   }
 
   @Override
