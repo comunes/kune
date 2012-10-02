@@ -93,7 +93,8 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     final MenuRadioItemDescriptor openItem = membersModeration.get().withModeration(AdmissionType.Open);
 
     addImpl(optionsMenu);
-    final MenuSeparatorDescriptor sep = new MenuSeparatorDescriptor(optionsMenu);
+    // final MenuSeparatorDescriptor sep =
+    new MenuSeparatorDescriptor(optionsMenu);
     final GuiActionDescrip memberOptions = new MenuTitleItemDescriptor(i18n.t("Member options")).withParent(optionsMenu);
     new MenuItemDescriptor(addEntityToThisGroupAction).withParent(optionsMenu).setPosition(0);
     new MenuItemDescriptor(unJoinGroupAction).withParent(optionsMenu).setPosition(1);

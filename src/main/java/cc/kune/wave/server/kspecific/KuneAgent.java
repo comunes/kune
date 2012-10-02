@@ -22,7 +22,6 @@ package cc.kune.wave.server.kspecific;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 
@@ -45,7 +44,8 @@ import com.google.wave.api.Wavelet;
 @Singleton
 public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService {
 
-  private static final Logger LOG = Logger.getLogger(KuneAgent.class.getName());
+  // private static final Logger LOG =
+  // Logger.getLogger(KuneAgent.class.getName());
 
   private static final String NO_TITLE = "";
   public static final String ROBOT_URI = AGENT_PREFIX_URI + "/kune-agent";
@@ -110,7 +110,7 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     for (final ParticipantId part : participantsArray) {
       parts.add(part.getAddress());
     }
-    final Wavelet wave = newWave(getWaveDomain(), parts);
+    // final Wavelet wave = newWave(getWaveDomain(), parts);
     return null;
   }
 

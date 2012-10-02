@@ -20,7 +20,6 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.core.client.events.StackErrorEvent;
-import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.http.client.Request;
@@ -36,11 +35,9 @@ import com.google.inject.Inject;
 public class WaveClientSimpleAuthenticator {
 
   private final EventBus eventBus;
-  private final GSpaceArmor wsArmor;
 
   @Inject
-  public WaveClientSimpleAuthenticator(final GSpaceArmor wsArmor, final EventBus eventBus) {
-    this.wsArmor = wsArmor;
+  public WaveClientSimpleAuthenticator(final EventBus eventBus) {
     this.eventBus = eventBus;
   }
 

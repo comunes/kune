@@ -55,7 +55,6 @@ public class I18nReadyEvent extends GwtEvent<I18nReadyEvent.I18nReadyHandler> {
   @Override
   public boolean equals(final Object other) {
     if (other != null && other.getClass().equals(this.getClass())) {
-      final I18nReadyEvent o = (I18nReadyEvent) other;
       return true;
     }
     return false;

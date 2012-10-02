@@ -28,6 +28,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.SchedulerException;
 
+@SuppressWarnings("rawtypes")
 public abstract class ClearCacheDailyJob implements Job {
 
   public static final Log LOG = LogFactory.getLog(ClearCacheDailyJob.class);

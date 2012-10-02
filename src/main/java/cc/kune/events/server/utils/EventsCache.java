@@ -72,6 +72,7 @@ public class EventsCache extends CachedCollection<Container, List<Map<String, St
    * 
    * @see java.util.Map#put(java.lang.Object, java.lang.Object)
    */
+  @SuppressWarnings("unchecked")
   @Override
   public List<Map<String, String>> put(final Container container, final List<Map<String, String>> value) {
     final Object put = super.put(container, value);

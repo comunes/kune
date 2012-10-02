@@ -39,8 +39,6 @@ import com.google.inject.Inject;
 
 public class ChatServerTool extends AbstractServerTool {
 
-  private final ChatManagerDefault chatManager;
-
   @Inject
   public ChatServerTool(final ToolConfigurationManager configurationManager,
       final ContentManager contentManager, final ContainerManager containerManager,
@@ -50,7 +48,6 @@ public class ChatServerTool extends AbstractServerTool {
         Collections.<String> emptyList(), Arrays.asList(TYPE_ROOM), Arrays.asList(TYPE_ROOT),
         contentManager, containerManager, creationService, configurationManager, i18n,
         ServerToolTarget.forGroups);
-    this.chatManager = chatManager;
   }
 
   @Override

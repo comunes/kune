@@ -36,6 +36,7 @@ import org.apache.commons.collections.map.LRUMap;
  * @param <V>
  *          the value type
  */
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class CachedCollection<K, V> {
 
   /** The cache. */

@@ -29,15 +29,12 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolActionAutoUpdated;
-import cc.kune.core.client.events.StateChangedEvent;
-import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.SocialNetworkDTO;
-import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatStates;
@@ -54,7 +51,6 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
   private boolean inviteMembers;
   protected final Session session;
 
-  @SuppressWarnings("deprecation")
   @Inject
   public OpenGroupPublicChatRoomAction(final Session session,
       final AccessRightsClientManager accessRightsClientManager, final ChatClient chatClient,
@@ -64,12 +60,6 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
     this.session = session;
     this.chatClient = chatClient;
     this.i18n = i18n;
-    stateManager.onStateChanged(true, new StateChangedHandler() {
-      @Override
-      public void onStateChanged(final StateChangedEvent event) {
-        // setState(session.getCurrentState());
-      }
-    });
     putValue(Action.NAME, i18n.t("Group's public chat room"));
     putValue(Action.TOOLTIP, i18n.t("Enter to this group public chat room"));
     putValue(Action.SMALL_ICON, res.groupChat());
@@ -86,10 +76,6 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
 
   private void addGroup(final List<XmppURI> membersUris, final GroupDTO member) {
     membersUris.add(chatClient.uriFrom(member.getShortName()));
-  }
-
-  private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {
-    return state.getGroup().isPersonal();
   }
 
   private void inviteMembers(final Room room) {
@@ -129,16 +115,5 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
 
   private void setInviteMembersImpl(final boolean inviteMembers) {
     this.inviteMembers = inviteMembers;
-  }
-
-  private void setState(final StateAbstractDTO state) {
-    final boolean imLogged = session.isLogged();
-    if (imLogged && !currentGroupsIsAsPerson(state)) {
-      setEnabled(false);
-      setEnabled(true);
-    } else {
-      setEnabled(true);
-      setEnabled(false);
-    }
   }
 }

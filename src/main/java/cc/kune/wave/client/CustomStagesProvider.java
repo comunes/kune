@@ -19,8 +19,6 @@
 package cc.kune.wave.client;
 
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
-import org.waveprotocol.box.webclient.client.StageTwoProvider;
-import org.waveprotocol.box.webclient.client.WindowTitleHandler;
 import org.waveprotocol.box.webclient.search.WaveContext;
 import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
@@ -58,7 +56,6 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.dom.client.Element;
 
@@ -77,6 +74,7 @@ public class CustomStagesProvider extends Stages {
   };
 
   private final Element wavePanelElement;
+  @SuppressWarnings("unused")
   private final FramedPanel waveFrame;
   private final LogicalPanel rootPanel;
   private final WaveRef waveRef;

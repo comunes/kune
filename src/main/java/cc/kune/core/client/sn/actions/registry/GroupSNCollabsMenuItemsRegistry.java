@@ -44,6 +44,8 @@ import com.google.inject.Provider;
 
 public class GroupSNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
+  private static final long serialVersionUID = 1L;
+
   @Inject
   public GroupSNCollabsMenuItemsRegistry(final SessionConstants session,
       final I18nTranslationService i18n, final IsLoggedCondition isLogged,

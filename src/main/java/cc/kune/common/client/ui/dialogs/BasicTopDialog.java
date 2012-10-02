@@ -45,6 +45,7 @@ public class BasicTopDialog extends BasicDialog {
 
   public static class Builder {
     private final boolean autohide;
+    @SuppressWarnings("unused")
     private boolean autoscroll = false;
     private boolean closeBtn = true;
     private final String dialogId;
@@ -175,10 +176,6 @@ public class BasicTopDialog extends BasicDialog {
     });
   }
 
-  public void setText(String text, Direction direction) {
-    super.getTitleText().setText(text, direction);
-  }
-
   private String calculatePercent(final int currentSize, final String percent) {
     return String.valueOf(currentSize * Integer.valueOf(percent.replace("%", "")) / 100) + "px";
   }
@@ -277,6 +274,10 @@ public class BasicTopDialog extends BasicDialog {
     if (newHeight != null) {
       super.setInnerHeight(newHeight);
     }
+  }
+
+  public void setText(final String text, final Direction direction) {
+    super.getTitleText().setText(text, direction);
   }
 
   @Override

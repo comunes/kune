@@ -37,6 +37,8 @@ import com.google.inject.Provider;
 
 public class GroupSNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
+  private static final long serialVersionUID = 1L;
+
   @Inject
   public GroupSNPendingsMenuItemsRegistry(final SessionConstants session,
       final IsCurrentStateAdministrableCondition isAdministrableCondition,

@@ -142,7 +142,6 @@ public class ChatClientDefault implements ChatClient {
   private final XmppRoster roster;
   private final Session session;
   private final GlobalShortcutRegister shorcutRegister;
-  private final SitebarActions siteActions;
   private final SubscriptionManager subscriptionManager;
 
   private final XmppSession xmppSession;
@@ -158,7 +157,6 @@ public class ChatClientDefault implements ChatClient {
     this.downUtils = downUtils;
     this.chatInstances = chatInstances;
     action = new ChatClientAction(chatResources);
-    this.siteActions = siteActions;
     this.session = session;
     this.shorcutRegister = shorcutRegister;
     this.chatOptions = chatOptions;

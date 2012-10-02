@@ -55,7 +55,6 @@ public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHa
   @Override
   public boolean equals(final Object other) {
     if (other != null && other.getClass().equals(this.getClass())) {
-      final ProgressHideEvent o = (ProgressHideEvent) other;
       return true;
     }
     return false;

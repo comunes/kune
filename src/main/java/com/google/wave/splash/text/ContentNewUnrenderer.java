@@ -16,8 +16,6 @@
  */
 package com.google.wave.splash.text;
 
-import java.util.logging.Logger;
-
 import org.waveprotocol.wave.model.document.indexed.IndexedDocument;
 import org.waveprotocol.wave.model.document.operation.Nindo;
 import org.waveprotocol.wave.model.document.raw.RawDocumentProviderImpl;
@@ -39,7 +37,8 @@ import cc.kune.core.client.errors.DefaultException;
 
 public class ContentNewUnrenderer {
 
-  private static final Logger LOG = Logger.getLogger(ContentNewUnrenderer.class.getName());
+  // private static final Logger LOG =
+  // Logger.getLogger(ContentNewUnrenderer.class.getName());
 
   private static Pair<Nindo, IndexedDocument<Node, Element, Text>> applyTokensToEmptyDoc(
       final RichTextTokenizer tokens) {
@@ -52,6 +51,7 @@ public class ContentNewUnrenderer {
     final Nindo.Builder builder = new Nindo.Builder();
     builder.skip(1);
     // builder.skip(3);
+    @SuppressWarnings("unused")
     final ReadableStringSet mutations = new RichTextMutationBuilder().applyMutations(tokens, builder,
         doc, insertAt.getContainer());
 

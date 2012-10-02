@@ -69,6 +69,7 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
     super.doUnexpectedFailure(except);
   }
 
+  @SuppressWarnings({ "unused", "rawtypes" })
   @Override
   protected Method getMethod(final GwtRpcCommLayerPojoRequest stressTestRequest)
       throws NoSuchMethodException, ClassNotFoundException {

@@ -21,12 +21,9 @@ package cc.kune.common.shared.utils;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang.WordUtils;
-
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.errors.UIException;
 
-import com.google.gwt.safehtml.shared.SimpleHtmlSanitizer;
 import com.google.gwt.safehtml.shared.UriUtils;
 
 public class TextUtils {
@@ -47,7 +44,7 @@ public class TextUtils {
   public static final String URL_REGEXP = "((ftp|http|https|mailto):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?)";
 
   /**
-   * @see WordUtils#abbreviate
+   * see WordUtils#abbreviate
    */
   public static String abbreviate(final String str, int lower, int upper, final String appendToEnd) {
     // initial parameter checks
@@ -100,7 +97,8 @@ public class TextUtils {
   }
 
   /**
-   * @see WordUtils#capitalize(String, char[])
+   * see WordUtils#capitalize(String, char[])
+   * 
    * @return
    */
   public static String capitalize(final String str, final char[] delimiters) {
@@ -129,7 +127,7 @@ public class TextUtils {
   }
 
   /**
-   * @see WordUtils#capitalizeFully(String)
+   * see WordUtils#capitalizeFully(String)
    */
   public static String capitalizeFully(String str, final char[] delimiters) {
     final int delimLen = (delimiters == null ? -1 : delimiters.length);
@@ -156,7 +154,7 @@ public class TextUtils {
   /**
    * This method escape only some dangerous html chars
    * 
-   * Try to use {@link SimpleHtmlSanitizer} better
+   * Try to use SimpleHtmlSanitizer better
    * 
    */
   public static String escapeHtmlLight(final String source) {

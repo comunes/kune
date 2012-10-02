@@ -29,7 +29,6 @@ import cc.kune.domain.User;
  */
 public interface DestinationProvider {
 
-  @Override
   boolean equals(final Object obj);
 
   /**
@@ -39,7 +38,6 @@ public interface DestinationProvider {
    */
   Collection<User> getDest();
 
-  @Override
   int hashCode();
 
 }
