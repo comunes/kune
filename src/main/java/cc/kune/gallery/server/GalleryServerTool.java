@@ -19,11 +19,7 @@
  */
 package cc.kune.gallery.server;
 
-import static cc.kune.gallery.shared.GalleryToolConstants.ROOT_NAME;
-import static cc.kune.gallery.shared.GalleryToolConstants.TOOL_NAME;
-import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_ALBUM;
-import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_ROOT;
-import static cc.kune.gallery.shared.GalleryToolConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.gallery.shared.GalleryToolConstants.*;
 
 import java.util.Arrays;
 

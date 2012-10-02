@@ -19,10 +19,7 @@
  */
 package cc.kune.events.server;
 
-import static cc.kune.events.shared.EventsToolConstants.ROOT_NAME;
-import static cc.kune.events.shared.EventsToolConstants.TOOL_NAME;
-import static cc.kune.events.shared.EventsToolConstants.TYPE_MEETING;
-import static cc.kune.events.shared.EventsToolConstants.TYPE_ROOT;
+import static cc.kune.events.shared.EventsToolConstants.*;
 
 import java.net.URL;
 import java.util.Arrays;

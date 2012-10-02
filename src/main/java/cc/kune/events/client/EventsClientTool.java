@@ -19,10 +19,7 @@
  */
 package cc.kune.events.client;
 
-import static cc.kune.events.shared.EventsToolConstants.ROOT_NAME;
-import static cc.kune.events.shared.EventsToolConstants.TOOL_NAME;
-import static cc.kune.events.shared.EventsToolConstants.TYPE_MEETING;
-import static cc.kune.events.shared.EventsToolConstants.TYPE_ROOT;
+import static cc.kune.events.shared.EventsToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;

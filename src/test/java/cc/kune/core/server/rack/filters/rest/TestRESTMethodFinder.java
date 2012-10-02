@@ -19,21 +19,12 @@
  */
 package cc.kune.core.server.rack.filters.rest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import cc.kune.core.server.rack.filters.rest.DefaultRESTMethodFinder;
-import cc.kune.core.server.rack.filters.rest.Parameters;
-import cc.kune.core.server.rack.filters.rest.REST;
-import cc.kune.core.server.rack.filters.rest.RESTMethod;
-import cc.kune.core.server.rack.filters.rest.RESTMethodFinder;
 
 public class TestRESTMethodFinder {
   private RESTMethodFinder finder;

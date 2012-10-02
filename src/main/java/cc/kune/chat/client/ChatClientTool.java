@@ -19,9 +19,7 @@
  */
 package cc.kune.chat.client;
 
-import static cc.kune.chat.shared.ChatToolConstants.TOOL_NAME;
-import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOM;
-import static cc.kune.chat.shared.ChatToolConstants.TYPE_ROOT;
+import static cc.kune.chat.shared.ChatToolConstants.*;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;

@@ -63,7 +63,6 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
-import cc.kune.domain.UserSignInLog;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.kspecific.ParticipantUtils;
 

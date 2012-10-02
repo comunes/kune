@@ -19,8 +19,7 @@
  */
 package cc.kune.wave.server;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.waveprotocol.wave.model.document.util.XmlStringBuilder;

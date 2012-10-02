@@ -19,11 +19,7 @@
  */
 package cc.kune.wiki.client;
 
-import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_FOLDER;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_ROOT;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_UPLOADEDFILE;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
+import static cc.kune.wiki.shared.WikiToolConstants.*;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;

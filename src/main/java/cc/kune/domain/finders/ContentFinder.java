@@ -19,9 +19,7 @@
  */
 package cc.kune.domain.finders;
 
-import static cc.kune.domain.Content.GROUP;
-import static cc.kune.domain.Content.MIMETYPE;
-import static cc.kune.domain.Content.TITLE;
+import static cc.kune.domain.Content.*;
 
 import java.util.ArrayList;
 import java.util.List;

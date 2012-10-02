@@ -19,9 +19,7 @@
  */
 package cc.kune.lists.server;
 
-import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
-import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
-import static cc.kune.lists.shared.ListsToolConstants.TYPE_ROOT;
+import static cc.kune.lists.shared.ListsToolConstants.*;
 
 import org.junit.Before;
 import org.junit.Test;

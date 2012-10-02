@@ -19,8 +19,7 @@
  */
 package cc.kune.trash.client.actions;
 
-import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
-import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
+import static cc.kune.trash.shared.TrashToolConstants.*;
 import cc.kune.chat.client.actions.GoParentChatBtn;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;

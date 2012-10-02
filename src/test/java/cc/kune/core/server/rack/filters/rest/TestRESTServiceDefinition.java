@@ -24,9 +24,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.core.server.rack.filters.rest.REST;
-import cc.kune.core.server.rack.filters.rest.RESTServiceDefinition;
-
 public class TestRESTServiceDefinition {
 
   private RESTServiceDefinition definition;

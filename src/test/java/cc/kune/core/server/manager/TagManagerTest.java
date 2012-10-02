@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import cc.kune.core.server.PersistenceTest;
 import cc.kune.core.server.content.ContentManager;
-import cc.kune.core.server.manager.TagManager;
 import cc.kune.domain.Tag;
 import cc.kune.domain.finders.TagFinder;
 

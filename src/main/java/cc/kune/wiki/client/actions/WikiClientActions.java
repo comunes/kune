@@ -19,11 +19,7 @@
  \*/
 package cc.kune.wiki.client.actions;
 
-import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_FOLDER;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_ROOT;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_UPLOADEDFILE;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
+import static cc.kune.wiki.shared.WikiToolConstants.*;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;

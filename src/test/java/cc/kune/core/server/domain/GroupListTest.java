@@ -19,8 +19,7 @@
  */
 package cc.kune.core.server.domain;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +29,8 @@ import cc.kune.domain.Group;
 import cc.kune.domain.GroupList;
 
 public class GroupListTest {
-  private GroupList list;
   private Group includedGroup;
+  private GroupList list;
 
   @Before
   public void createList() {
@@ -41,11 +40,11 @@ public class GroupListTest {
   }
 
   @Test
-  public void testModeNormal() {
-    list.setMode(GroupListMode.NORMAL);
+  public void testModeEverybody() {
+    list.setMode(GroupListMode.EVERYONE);
     assertTrue(list.includes(includedGroup));
-    assertFalse(list.includes(new Group("other", "group")));
-    assertFalse(list.includes(Group.NO_GROUP));
+    assertTrue(list.includes(new Group("other", "group")));
+    assertTrue(list.includes(Group.NO_GROUP));
   }
 
   @Test
@@ -57,11 +56,11 @@ public class GroupListTest {
   }
 
   @Test
-  public void testModeEverybody() {
-    list.setMode(GroupListMode.EVERYONE);
+  public void testModeNormal() {
+    list.setMode(GroupListMode.NORMAL);
     assertTrue(list.includes(includedGroup));
-    assertTrue(list.includes(new Group("other", "group")));
-    assertTrue(list.includes(Group.NO_GROUP));
+    assertFalse(list.includes(new Group("other", "group")));
+    assertFalse(list.includes(Group.NO_GROUP));
   }
 
 }

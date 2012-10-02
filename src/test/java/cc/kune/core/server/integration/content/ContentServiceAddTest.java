@@ -20,10 +20,8 @@
 package cc.kune.core.server.integration.content;
 
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
-import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
-import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static cc.kune.wiki.shared.WikiToolConstants.*;
+import static org.junit.Assert.*;
 
 import java.util.List;
 

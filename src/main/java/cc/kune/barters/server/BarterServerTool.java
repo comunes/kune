@@ -19,11 +19,7 @@
  */
 package cc.kune.barters.server;
 
-import static cc.kune.barters.shared.BartersToolConstants.ROOT_NAME;
-import static cc.kune.barters.shared.BartersToolConstants.TOOL_NAME;
-import static cc.kune.barters.shared.BartersToolConstants.TYPE_BARTER;
-import static cc.kune.barters.shared.BartersToolConstants.TYPE_FOLDER;
-import static cc.kune.barters.shared.BartersToolConstants.TYPE_ROOT;
+import static cc.kune.barters.shared.BartersToolConstants.*;
 
 import java.net.URL;
 import java.util.Arrays;

@@ -19,11 +19,7 @@
  \*/
 package cc.kune.docs.client.actions;
 
-import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_ROOT;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.docs.shared.DocsToolConstants.*;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;

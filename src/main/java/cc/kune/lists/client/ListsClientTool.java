@@ -19,11 +19,7 @@
  */
 package cc.kune.lists.client;
 
-import static cc.kune.lists.shared.ListsToolConstants.ROOT_NAME;
-import static cc.kune.lists.shared.ListsToolConstants.TOOL_NAME;
-import static cc.kune.lists.shared.ListsToolConstants.TYPE_LIST;
-import static cc.kune.lists.shared.ListsToolConstants.TYPE_POST;
-import static cc.kune.lists.shared.ListsToolConstants.TYPE_ROOT;
+import static cc.kune.lists.shared.ListsToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;

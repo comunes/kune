@@ -19,8 +19,7 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
-import static com.google.gwt.query.client.GQuery.$;
-import static com.google.gwt.query.client.GQuery.Effects;
+import static com.google.gwt.query.client.GQuery.*;
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.shortcuts.OnEscapePressedEvent;
 import cc.kune.common.client.shortcuts.OnEscapePressedEvent.OnEscapePressedHandler;

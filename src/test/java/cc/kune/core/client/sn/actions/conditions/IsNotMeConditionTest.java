@@ -19,8 +19,7 @@
  */
 package cc.kune.core.client.sn.actions.conditions;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import org.jukito.JukitoRunner;

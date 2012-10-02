@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client.state;
 
-import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.inject.Inject;

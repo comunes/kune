@@ -23,8 +23,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import cc.kune.core.server.manager.file.FileUtils;
-
 public class FileUtilsTest {
 
   private static final String SIMPLE_FILE_NAME = "simple file name";

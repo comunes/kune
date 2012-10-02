@@ -19,11 +19,8 @@
  */
 package cc.kune.core.server.integration;
 
-import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static cc.kune.docs.shared.DocsToolConstants.*;
+import static org.junit.Assert.*;
 
 import java.util.List;
 

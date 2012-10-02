@@ -19,16 +19,13 @@
  */
 package cc.kune.core.server.manager.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.AlreadyGroupMemberException;
 import cc.kune.core.client.errors.LastAdminInGroupException;
-import cc.kune.core.server.manager.impl.SocialNetworkManagerDefault;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.dto.GroupType;

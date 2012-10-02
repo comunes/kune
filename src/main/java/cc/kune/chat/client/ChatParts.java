@@ -19,8 +19,8 @@
  */
 package cc.kune.chat.client;
 
-import cc.kune.chat.client.actions.AddAsBuddyAction;
 import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
+import cc.kune.chat.client.actions.AddAsBuddyAction;
 import cc.kune.chat.client.actions.ChatClientActions;
 import cc.kune.chat.client.actions.ChatSitebarActions;
 import cc.kune.chat.client.actions.OpenGroupPublicChatRoomAction;

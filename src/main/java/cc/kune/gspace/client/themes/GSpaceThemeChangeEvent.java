@@ -22,7 +22,6 @@ package cc.kune.gspace.client.themes;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-
 import com.google.gwt.event.shared.HasHandlers;
 
 public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpaceThemeChangeHandler> {

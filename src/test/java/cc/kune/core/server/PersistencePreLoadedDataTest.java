@@ -19,8 +19,7 @@
  */
 package cc.kune.core.server;
 
-import static cc.kune.docs.shared.DocsToolConstants.TOOL_NAME;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsToolConstants.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.TimeZone;

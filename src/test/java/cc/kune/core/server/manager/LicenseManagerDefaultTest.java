@@ -19,15 +19,13 @@
  */
 package cc.kune.core.server.manager;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.server.PersistenceTest;
-import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.domain.License;
 import cc.kune.domain.finders.LicenseFinder;
 

@@ -19,8 +19,7 @@
  */
 package cc.kune.core.server;
 
-import static com.google.inject.matcher.Matchers.annotatedWith;
-import static com.google.inject.matcher.Matchers.any;
+import static com.google.inject.matcher.Matchers.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

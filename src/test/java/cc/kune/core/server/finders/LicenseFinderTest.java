@@ -19,8 +19,7 @@
  */
 package cc.kune.core.server.finders;
 
-import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 

@@ -19,11 +19,7 @@
  */
 package cc.kune.blogs.client;
 
-import static cc.kune.blogs.shared.BlogsToolConstants.TOOL_NAME;
-import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_BLOG;
-import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_POST;
-import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_ROOT;
-import static cc.kune.blogs.shared.BlogsToolConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.blogs.shared.BlogsToolConstants.*;
 import cc.kune.blogs.shared.BlogsToolConstants;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;

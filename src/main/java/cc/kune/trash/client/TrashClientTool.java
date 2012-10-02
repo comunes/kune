@@ -19,9 +19,7 @@
  */
 package cc.kune.trash.client;
 
-import static cc.kune.trash.shared.TrashToolConstants.ROOT_NAME;
-import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
-import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
+import static cc.kune.trash.shared.TrashToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;

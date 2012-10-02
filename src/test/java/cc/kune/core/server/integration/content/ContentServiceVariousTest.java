@@ -20,10 +20,7 @@
 package cc.kune.core.server.integration.content;
 
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 

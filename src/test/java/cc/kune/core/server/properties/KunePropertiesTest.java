@@ -23,8 +23,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import cc.kune.core.server.properties.KunePropertiesDefault;
-
 public class KunePropertiesTest {
 
   @Test

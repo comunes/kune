@@ -19,9 +19,7 @@
  */
 package cc.kune.trash.server;
 
-import static cc.kune.trash.shared.TrashToolConstants.ROOT_NAME;
-import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
-import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
+import static cc.kune.trash.shared.TrashToolConstants.*;
 
 import java.util.Arrays;
 import java.util.Collections;

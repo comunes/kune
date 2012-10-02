@@ -20,8 +20,7 @@
 package cc.kune.core.server.manager;
 
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;

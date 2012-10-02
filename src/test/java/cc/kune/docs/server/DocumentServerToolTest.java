@@ -19,10 +19,7 @@
  */
 package cc.kune.docs.server;
 
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_FOLDER;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_ROOT;
-import static cc.kune.docs.shared.DocsToolConstants.TYPE_UPLOADEDFILE;
+import static cc.kune.docs.shared.DocsToolConstants.*;
 
 import org.junit.Before;
 import org.junit.Test;

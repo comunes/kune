@@ -23,7 +23,6 @@ import java.util.Iterator;
 
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.i18n.I18n;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;

@@ -22,7 +22,6 @@ package cc.kune.core.server.manager;
 import org.junit.Before;
 
 import cc.kune.core.server.PersistenceTest;
-import cc.kune.core.server.manager.FileManager;
 
 import com.google.inject.Inject;
 

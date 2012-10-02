@@ -41,8 +41,6 @@ import net.fortuna.ical4j.model.property.Location;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.model.property.Uid;
 
-import com.google.common.base.Preconditions;
-
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
@@ -52,6 +50,7 @@ import cc.kune.domain.Content;
 import cc.kune.events.server.EventsServerTool;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.wave.api.Gadget;
 

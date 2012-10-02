@@ -19,8 +19,7 @@
  */
 package cc.kune.core.server.integration;
 
-import static com.google.inject.matcher.Matchers.annotatedWith;
-import static com.google.inject.matcher.Matchers.any;
+import static com.google.inject.matcher.Matchers.*;
 
 import javax.servlet.http.HttpServletRequest;
 
