@@ -7,1152 +7,613 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
  */
 public interface KuneConstants extends ConstantsWithLookup {
   String writeToYourBuddy();
-
   String chatWithThisGroupMember();
-
   String chatWithYourBuddy();
-
   String addAsABuddy();
-
   String chat();
-
   String oopsSomethingHasGoneWrongWithOurServersRetryLaterPlease();
-
   String loading();
-
   String join();
-
   String requestToJoinInThisGroup();
-
   String writeToTheMembersOfThisGroup();
-
   String writeToTheAdministratorsOfThisGroup();
-
   String leaveThisGroup();
-
   String usersWhoCanViewThisMemberList();
-
   String options();
-
   String newMembersPolicy();
-
   String anyone();
-
   String onlyMembers();
-
   String moderateRequestToJoin();
-
   String addANewBuddy();
-
   String closedForNewMembers();
-
   String autoAcceptRequestToJoin();
-
   String onlyAdministrators();
-
   String onlyYourBuddies();
-
   String usersWhoCanViewYourNetwork();
-
   String onlyYou();
-
   String groupMembers();
-
   String usersAndGroupsCollaboratingInThisGroup();
-
   String administrators();
-
   String usersWhoCanAdministrateThisGroup();
-
   String collaborators();
-
   String othersWhoCollaborateWithThisGroup();
-
   String thisIsAnOrphanedProjectIfYouAreInterestedInContributingPleaseRequestToJoin();
-
   String pending();
-
   String theMembersOfThisGroupAreNotPublic();
-
   String usersPendingToBeAcceptedInThisGroupByTheAdministrators();
-
   String changeToCollaborator();
-
   String changeToAdministrator();
-
   String removeThisMember();
-
   String visitThisGroupSHomepage();
-
   String visitThisMemberSHomepage();
-
   String acceptThisMember();
-
   String rejectAsMember();
-
   String visitYourHomepage();
-
   String visitHisHerHomepage();
-
   String hisHerNetwork();
-
   String thisUserSGroupsAndBuddies();
-
   String buddies();
-
   String thisUserSBuddies();
-
   String joinsIn();
-
   String groupsWhichThisUserJoined();
-
   String yourGroups();
-
   String yourHomepage();
-
   String thisSite();
-
   String yourHomePageInParam();
-
   String userSpaceItShowsAListOfAllDocumentsAndContentsInWhichYouParticipate();
-
   String groupAndPersonalSpaceWhereYouCanCreateAndPublishContentsForYourPersonalOrGroupWebSpaces();
-
   String publicSpaceWhereYouCanSeeAPreviewOfHowYourPersonalOrGroupSpaceLooksLikeOnTheWeb();
-
   String latestPublications();
-
   String stats();
-
   String registeredUsers();
-
   String hostedGroups();
-
   String latestCreatedGroups();
-
   String latestActivityInYourGroups();
-
   String tags();
-
   String keywordsOrTermsAssociatedWithThisGroup();
-
   String typeSomethingToSearchForUsersAndGroupsInParam();
-
   String search();
-
   String close();
-
   String groupOptions();
-
   String setYourGroupPreferencesHere();
-
   String userOptions();
-
   String helpWithTheTranslation();
-
   String yourPreferences();
-
   String giveUsFeedback();
-
   String writeUsWithSomeFeedbackForHelpUsToImproveTheseServices();
-
   String showHideTheChatWindow();
-
   String setYourChatStatus();
-
   String available();
-
   String availableForChat();
-
   String away();
-
   String busy();
-
   String signOutOfChat();
-
   String groupSPublicChatRoom();
-
   String enterToThisGroupPublicChatRoom();
-
   String startAPublicAssemblyWithMembers();
-
   String enterToThisGroupPublicChatRoomAndInviteMembers();
-
   String reportKuneIssuesProblems();
-
   String apacheWavePowered();
-
   String aboutKune();
-
   String errorsInfo();
-
   String signInToCollaborate();
-
   String pleaseSignInOrRegisterToGetFullAccessToParamToolsAndContents();
-
   String signOut();
-
   String createNewGroup();
-
   String createANewGroupForYourInitiativeOrOrganizationNgoCollectiveAcademicGroup();
-
   String chatWithThisPerson();
-
   String kuneDevelopmentSite();
-
   String andNExternalUser();
-
   String thisIsOnlyAPreviewOfHowThisPageWouldLookLikeToTheGeneralPublicOnTheInternet();
-
   String preview();
-
   String paramUnderLicenseParam();
-
   String clickToRename();
-
   String createANewDocumentIfYouChooseToPublishItThisDocumentWillAppearAsANewPageInThePublicWeb();
-
   String reloadCurrentPage();
-
   String newDocument();
-
   String goUpOpenTheContainerFolder();
-
   String edit();
-
   String chatAbout();
-
   String chatAndCommentOnThis();
-
   String nConversationsUnread();
-
   String memberAccepted();
-
   String general();
-
   String changeThisValues();
-
   String theNameMustBeBetween3And15LowercaseWesternCharactersAndOrNumbers();
-
   String shortName();
-
   String longName();
-
   String tools();
-
   String hereYouCanSelectTheToolsUsed();
-
   String thisToolCannotBeDisabledAsLongAsItsWhereTheGroupsHomePageIsLocatedChangeTheDefaultHomePageToAnotherT();
-
   String choose();
-
   String changeThisWorkspaceTheme();
-
   String selectAnImageFromYourComputerAsTheLogoForThisGroupForBestResultsUseANxnPixelImageBiggerImagesWillBeA();
-
   String style();
-
   String currentBackgroundImage();
-
   String youCanAlsoUploadABackground();
-
   String change();
-
   String clear();
-
   String removeCurrentBackgroundImage();
-
   String selectAndConfigureThePublicSpaceThemeOfThisGroup();
-
   String clickToSelectAndConfigureThisTheme();
-
   String redblackAThemeName();
-
   String purpleAThemeName();
-
   String greenAThemeName();
-
   String highcontrastAThemeName();
-
   String blackwhiteAThemeName();
-
   String eurosurAThemeName();
-
   String campAThemeName();
-
   String defaultAThemeName();
-
   String blueAThemeName();
-
   String redAThemeName();
-
   String greyAThemeName();
-
   String saharaAThemeName();
-
   String pinkAThemeName();
-
   String transparentAThemeName();
-
   String whiteblackAThemeName();
-
   String license();
-
   String thisIsTheDefaultLicenseForAllTheContentsOfThisGroupAlthoughYouCanChooseADifferentLicenseForSpecificC();
-
   String enterLanguage();
-
-  String searching();
-
   String yourLanguage();
-
   String name();
-
   String security();
-
   String changeYourPassword();
-
   String currentPassword();
-
   String thePasswordMustBeBetween6And40Characters();
-
   String newPassword();
-
   String newPasswordRepeatIt();
-
   String changeIt();
-
   String youCannotDisableThisToolBecauseItSWhereYourHomePageIsLocatedToDoThatYouHaveToSelectOtherContentAsThe();
-
   String selectAnImageFromYourComputerAsYourAvatarForBestResultsUseANxnPixelImageBiggerImagesWillBeAutomatica();
-
   String passwordChangedSuccessfully();
-
   String newGadget();
-
   String voting();
-
   String media();
-
   String calendar();
-
   String others();
-
   String thisDemoOfKune();
-
   String paramBio();
-
   String thisUserHasNotWrittenItsBiographyYet();
-
   String longTermTasks();
-
   String midTermTasks();
-
   String shortTermUrgentTasks();
-
   String aLongTermTaskSample();
-
   String thisIsOnlyATaskSampleYouCanEditItRenameIt();
-
   String aMidTermTaskSample();
-
   String aShortTermTaskSample();
-
   String wikiPageSample();
-
   String thisIsOnlyAWikiPageSampleYouCanEditOrRenameItButAlsoAnyOtherUser();
-
   String blogSample();
-
   String aPostSample();
-
   String thisIsOnlyAPostSampleYouCanEditItRenameThePostAndThisBlog();
-
   String welcome();
-
   String thisUserHasNoBuddiesYet();
-
   String newTask();
-
   String createANewTask();
-
   String doubleClickToOpen();
-
   String createANewFolder();
-
   String newTaskFolder();
-
   String open();
-
   String delete();
-
   String actions();
-
   String connecting();
-
   String offline();
-
   String newList();
-
   String reloadThis();
-
   String createANewList();
-
   String yes();
-
-  String confirmPlease();
-
   String thisWillOpenASpecificChatroomToChatAboutThisPageOrDocumentItSUsefulToChatWithOthersAboutSomethingWhi();
-
   String no();
-
   String chatAboutParam();
-
   String barterSample();
-
   String thisIsOnlyABarterSampleYouCanInviteOtherParticipantsToThisBarterButAlsoPublishToTheGeneralPublicAllo();
 
   String newFolder();
-
   String createANewBarterHere();
-
   String newWikipage();
-
   String createANewFolderAFolderWillBeASectionInThePublicWeb();
-
   String createANewWikipageHereIfYouChooseToPublishItThisDocumentWillAppearAsANewPageInThePublicWeb();
-
   String selectAsTheHomepage();
-
   String registerANewGroup();
-
   String register();
-
   String cancel();
-
   String publicDescription();
-
   String groupTags();
-
   String typeSomeKeywordThatDefineYourGroup();
-
   String groupType();
-
   String project();
-
   String organization();
-
   String aProjectIsAKindOfGroupInWhichTheJoiningOfNewMembersIsModeratedByTheProjectAdministrators();
-
   String anOrganizationWorksTheSameWayAsAProjectExceptThatItMustBeALegalEntity();
-
   String closed();
-
   String aClosedGroupIsAPrivateProjectWhichContentsAreOnlyAccessibleToItsMembersByDefault();
-
   String community();
-
   String aCommunityIsAGroupOfUsersWithSharedInterestsForInstanceTheEnvironmentalCommunityOrTheLgbtCommunityIt();
-
   String paramCreatedNewContentCreatedForInstance();
-
   String notPublishedYet();
-
   String thisIsOnlyAPreviewOfHowThisWebpageWouldLookLikeToTheGeneralPublicOnTheInternet();
-
   String createANewDocumentHereIfYouChooseToPublishItThisDocumentWillAppearAsANewPageInThePublicWeb();
-
   String newPoll();
-
   String newYesNoMaybeVoting();
-
   String newAdvancedPoll();
-
   String newMeeting();
-
   String newYesNoMiniVoting();
-
   String newMeetCoordination();
-
   String newMap();
-
   String newImageAndLetsAnnotate();
-
   String newYoutubeVideo();
-
   String newAlbum();
-
   String newTwitterSearch();
-
   String newMindmap();
-
   String newBarter();
-
   String newImagePainter();
-
   String signIn();
-
   String password();
-
   String donTHaveAnAccount();
-
   String username();
-
   String email();
-
   String createOne();
-
   String thisIsNotAValidEmail();
-
   String newBlog();
-
   String createANewBlog();
-
   String newPost();
-
   String createANewBlogPost();
-
   String thisBlogHasnTAnyPostCreateOne();
-
   String renaming();
-
   String doYouWantToWriteUsWithSomePositiveOrNegativeFeedbackThisCanHelpUsToImproveTheseServices();
-
   String doYouWantToJoinThisGroup();
-
   String youAreNowMemberOfThisGroup();
-
   String newRoom();
-
   String createANewChatRoom();
-
   String enterToThisRoom();
-
   String openTheConversationsArchiveOfThisRoom();
-
   String openArchive();
-
   String aboutKuneTitleOfDialog();
-
   String ok();
-
   String processing();
-
   String aboutParam();
-
   String meetingSample();
-
   String thisIsOnlyAMeetSampleYouCanInviteOtherParticipantsToThisMeetingButAlsoPublishToTheGeneralPublicAllow();
-
   String markAsDone();
-
   String createANewPost();
-
   String makeThisListNotPublic();
-
   String subscribeToThisList();
-
   String subscribe();
-
   String nSubscribedNPosts();
-
   String confirmNewBuddy();
-
   String paramHadAddedYouAsABuddyDoYouWantToAddHimHerAlso();
 
   String nRecentConversationsUnread();
-
   String writeUsWithSomeFeedbackForHelpUsToImproveTheServicesOnParam();
-
   String oneRecentConversationUnread();
-
   String pleaseConfirm();
-
   String startACollaborativeDocumentForTheMeetingMinutes();
-
   String meetingMinutesOfParamOnParam();
-
   String youCanCollaborativelyEditThisDocumentWithTheMeetingMinutes();
-
   String createANewMeetingHere();
-
   String thereIsnTAnyListCreateOne();
-
   String create();
-
   String areYouSure();
-
   String welcomeToTheParamPublicChatRoom();
-
   String doYouWantToWriteUsWithSomePositiveOrNegativeFeedbackAboutParamThisCanHelpUsToImproveTheseServices();
-
   String feedbackOfParam();
-
   String editAndWriteHereYourFeedback();
-
   String copyTheTextToTranslate();
-
   String translateThis();
-
   String notes();
-
   String tip();
-
   String clickAltpageupOrAltpagedownToMoveUpDownInTheListWhileTranslatingAndAltVToCopyTheOriginalTextTheTrans();
-
   String notTranslated();
-
   String recommendations();
-
   String translated();
-
   String helpToTranslateKune();
-
   String to();
-
   String toParamForExampleToSpanish();
-
   String saving();
-
   String successUploading();
-
   String thereIsnTAnyTaskCreateOne();
-
   String searchTheUserYouWantToAddAndInHisHerHomepageClickAddAsABuddy();
-
   String doYouWantToWriteAMessageToTheMembersOfThisGroup();
-
   String post();
-
   String thisIsEmpty();
-
   String documents();
-
   String thisFolderIsEmpty();
-
   String barters();
-
   String blogs();
 
   String thereIsnTAnyBlogCreateOne();
-
   String infoAboutErrors();
-
   String chatrooms();
-
   String events();
-
   String pleaseCopyPasteThisInfoToReportProblems();
-
   String seeTheArchiveOfOldConversationsInDevelopment();
-
   String thereIsNothingPostedYetPostSomething();
-
   String lists();
-
   String thisWikiIsEmpty();
-
   String thereIsnTAnyMeeting();
-
   String wiki();
-
   String tasks();
-
   String rightNowThePublicWebSpaceOfThisGroupItSUnderConstruction();
-
   String paramTheDevelopment();
-
   String pleaseSupport();
-
   String inDevelopment();
-
   String chats();
-
   String theNameMustContainOnlyCharactersNumbersAndDashes();
-
   String chatroomCreated();
-
   String doYouWantToWriteAMessageToYourBuddy();
-
   String error();
-
   String toJoinAChatroomYouNeedToBeOnline();
-
   String licenseWizard();
-
   String backUsedInButton();
-
   String nextUsedInButton();
-
   String select();
-
   String finishUsedInButton();
-
   String selectTheLicenseYouPreferUsingForSharingYourGroupContentsWithOtherPeople();
-
   String useACopyleftLicenseRecommended();
-
   String useAnotherKindOfLicenseAdvanced();
-
   String copyleft();
-
   String weRecommendParamLicensesSpeciallyForPracticalWorks();
-
   String whyDoWeNeedALicense();
-
   String youCanChangeThisLicenseLater();
-
   String selectTheLicenseType();
-
   String commonLicensesForCulturalWorks();
-
   String otherKindOfLicenses();
-
   String selectACreativeCommonsLicenseRecommendedForCulturalWorks();
-
   String useTheGnuLicensesRecommendedForFreeSoftwareWorksAndOtherKindOfLicenses();
-
   String withACreativeCommonsLicenseYouKeepYourCopyrightButAllowPeopleToCopyAndDistributeYourWorkProvidedThey();
-
   String allowAnyUsesOfYourWorkIncludingCommercial();
-
   String allowModificationsOfYourWork();
-
   String theLicensorPermitsOthersToCopyDistributeDisplayAndPerformTheWorkIncludingForCommercialPurposes();
-
   String theLicensorPermitsOthersToCopyDistributeDisplayAndPerformTheWorkForNonCommercialPurposesOnly();
-
   String theLicensorPermitsOthersToCopyDistributeDisplayAndPerformTheWorkAsWellAsToMakeDerivativeWorksBasedOn();
-
   String yesAsLongAsOtherShareAlike();
-
   String theLicensorPermitsOthersToDistributeDerivativeWorksOnlyUnderTheSameLicenseOrOneCompatibleWithTheOneT();
-
   String theLicensorPermitsOthersToCopyDistributeDisplayAndPerformOnlyUnalteredCopiesOfTheWork8212NotDerivati();
-
   String thisIsACopyleftLicense();
-
   String thisIsNotACopyleftLicense();
-
   String thisIsAppropriateForFreeCulturalWorks();
-
   String thisIsNotAppropriateForFreeCulturalWorks();
-
   String reasonsNotToUseANonCommercialLicense();
-
   String selectOtherKindOfLicenses();
-
   String selectLicense();
-
   String membershipRequestedWaitingForAdminsDecision();
-
   String memberTypeChanged();
-
   String memberRemoved();
-
   String contentNotFound();
-
   String onlyToAuthorizedTranslators();
-
   String visibilityOfYourNetworkChanged();
-
   String areYouSureYouWantThisItWillBeDeletedWithAllItsContents();
-
   String thisNameIsAlreadyInUsePleaseTryWithADifferentName();
-
   String doYouWantToWriteAMessageToTheAdministratorsOfThisGroup();
-
   String listCreated();
-
   String thisListIsNowRestrictedToThePublic();
-
   String makeThisListPublic();
-
   String membersVisibilityChanged();
-
   String membersJoiningPolicyChanged();
-
   String moving();
-
   String aContentWithTheSameNameAlreadyExistPleaseRenameIt();
-
   String removedAsMember();
-
   String addGadget();
-
   String theSocialNetworkOfThisUserIsNotPublic();
-
   String newDoc();
-
   String clickToGoHereOrDropContentsHereToMoveThem();
-
   String thisUserIsAlreadyAGroupMember();
-
   String markAsNotDone();
-
   String more();
-
   String youDidNotSignInSoYouCanJustSeeSomePublicContentsInParamButNotEditOrCollaborateWithOthersPleaseParamO();
-
   String onlyForAuthorizedTranslators();
-
   String hereYouCanCreateOrUploadYourPersonalGroupOrPublicDocumentsTheseDocumentsCanBeEditedAndCommentedColla();
-
   String blogsAreAChronologicalListOfPostsOrderedByDateAboutASpecificTopicEachPostCanBeCommentedByTheVisitors();
-
   String aDecentralizedWayToOfferOrAskForServicesAndGoodsToYourGroupsOrToAnyoneBarteringMeansTheExchangeOfGoo();
-
   String listsBehaveLikeAMailingListOrAForumYouCanSubscribeAndDiscussAboutSpecificTopics();
-
   String aCollaborativeToDoListForTheGroupAnyGroupMemberCanParticipateInAnyProposedTaskAddOthersToATaskCommen();
-
   String aCalendarToScheduleActivitiesAndEvents();
-
   String aRoomWhereYouCanHaveAGroupChatWithManyUsersAtOnceRoomsCanBePublicOrPrivateUsersCanBeFromParamOrOther();
-
   String wikiPagesAreDocumentsThatCanBeEditedByAnyVisitorInParamInsteadOfOnlyByTheGroupThisAcceleratesUpdatin();
-
   String errorSettingTheLogo();
-
   String signInOrCreateAnAccountToAccessToYourInbox();
-
   String sorryThisGadgetHasProblemsWithItsnHeightWeHopeThisWillBeFixedSoonn();
-
   String addNewMember();
-
   String typeTheNameOfTheUserAndSelectHimHer();
-
   String typeSomethingToSearchForUsersInParam();
-
   String doubleClickToOpenDragAndDropToMoveThisToAnotherPlace();
-
   String theUsernamePasswordIsIncorrect();
-
   String subscribed();
-
   String unsubscribe();
-
   String unsubscribeToThisList();
-
   String unsubscribed();
-
   String doYouWantToAddParamToYourContacts();
-
   String youAreTryingToMoveThisToTheSameLocation();
-
   String postCreatedEditIt();
-
   String pleaseSignInOrRegisterToCreateAGroup();
-
   String signInOrCreateAnAccountToParticipateInThisGroup();
-
   String thisNameInAlreadyInUsePleaseTryWithADifferentName();
-
   String nowadaysTheGadgetsMapsPollsEtcAreExperimentalInSomeBrowsersYouMightExperienceProblemsWithCertainGadg();
-
   String errorConfiguringTheTool();
-
   String youDoNotHaveRightsToPerformThatAction();
-
   String signInOrRegisterToHelpWithTheTranslation();
-
   String thisNameAlreadyExistsItIsUsedWhenAFileOrAFolderWithTheSameNameAlreadyExists();
-
   String doYouWantToAddParamAsAMemberOfParam();
-
   String memberAddedAsCollaborator();
-
   String thisEmailAddressIsBeingUsedByAnotherUserPleaseTryWithAnotherOne();
-
   String youCannotWriteToNonBuddies();
-
   String nameOfTheNewChatroom();
-
   String nameOfTheNewList();
-
   String titleOfTheNewPost();
-
   String serverErrorSavingTheTranslation();
-
   String thisBlogHasnTAnyPost();
-
   String thereIsnTAnyBlog();
-
   String thisFolderIsEmptyYouCanCreateSomeDocumentOrFolderHere();
-
   String thereIsnTAnyBarterYouCanCreateSomeHere();
-
   String thereIsNothingPostedYet();
-
   String homePageOfParam();
-
   String thereIsnTAnyList();
-
   String thereIsnTAnyMeetingCreateOne();
-
   String thisFolderIsEmptyCreateSomeWikipageOrFolder();
-
   String thanksForJoiningParamNowYouCanActivelyParticipateInParamYouCanAlsoUseYourPersonalSpaceToPublishConte();
-
   String toHelpWithTheTranslationOfThisSoftwarePleaseContactBeforeWithThisSiteAdministrators();
-
   String doYouWantToCollaborativelyEditYourMeetingMinutesInANewDocument();
-
   String signInOrCreateAnAccountToGiveUsFeedback();
-
   String paramCreatedSuccesfully();
-
   String youCanCollaborativelyEditTheMeetingMinutesShownInThisDocument();
-
   String doYouWantToReloadThisPageToUseParamLanguage();
-
   String participate();
-
   String noResults();
-
   String newMeetPlaner();
-
   String home();
-
   String youCanResizeTheAboveTextarea();
-
   String inbox();
-
   String today();
-
   String goToToday();
-
   String previous();
-
   String month();
-
   String next();
-
   String userParamSaysParam();
-
   String signInOrCreateAnAccountToAccessToThisRoom();
-
   String editTheAppointment();
-
   String addAnAppointment();
-
   String removeThisAppointment();
-
   String emailNotifications();
-
   String esteBlogNoTieneNingnPostCreaUno();
-
   String noHayListasCrearUna();
-
   String noSeHaPublicadoNadaTodavaPublicaAlgo();
-
   String descriptionOfTheAppointment();
-
   String add();
-
   String pleaseSignInAgain();
-
   String lostYourPassword();
-
   String howOftenDoYouWantToReceiveEmailNotifications();
-
   String youWillReceiveAnEmailWithAnyNewMessagesInYourInboxAtParamAlmostImmediately();
-
   String almostImmediately();
-
   String youWillReceiveAnEmailWithAnyNewMessagesInYourInboxAtParamAtMostHourly();
-
   String atMostHourly();
-
   String atMostDaily();
-
   String iDonTNeedEmailNotifications();
-
   String youWillReceiveAnEmailWithAnyNewMessagesInYourInboxAtParamAtMostDaily();
-
   String youWillNoReceiveAnEmailWithAnyNewMessagesInYourInboxAtParam();
-
   String yourEmailIsNotVerifiedSoYouWillNotReceiveEmailNotifications();
-
   String resendVerificationEmail();
-
   String otherErrorTryingToVerifyYourPassword();
-
   String emailConfirmationCodeExpired();
-
   String resetYourPassword();
-
   String pleaseEnterYourEmailAddressYouWillReceiveALinkToCreateANewPasswordViaEmail();
-
   String newImage();
-
   String editThisToInsertResizeAndAnnotatenAnynImageFromTheWebTheImageCanBeAnnotatedDoubleClicknOnnItByAnyPar();
-
   String yourPasswordHasBeenResetSignIn();
-
   String enterYourNewPasswordBelow();
-
   String confirm();
-
+  String confirmPlease();
   String errorRenaming();
-
+  String searching();
   String thereIsnTAnyBarter();
-
   String invalidAddressParam();
-
   String errorCreatingGroup();
-
   String memberRejected();
-
   String invalidEmail();
-
   String onlyMembersCanUpdateEvents();
-
   String backgroupChanged();
-
   String checkYourEmailForTheConfirmationLink();
-
   String openTheAppointment();
-
   String eventsInParam();
-
   String participateInTheEditionOfThisPage();
-
   String signInOrCreateAnAccountToSusbscribeToThisList();
-
   String joinUsInParamPublicRoom();
-
   String thereIsnTAnyTask();
-
   String shareWithAdmins();
-
   String shareWithAllGroupMembers();
-
   String shareWithCollaborators();
-
   String newToThisToolHereThereIsSomeHelp();
-
   String nDay();
-
   String nDays();
-
   String invalidOperation();
-
   String backgroundChanged();
-
   String exportThisCalendar();
-
   String createANewMeeting();
-
   String english();
-
   String shareThisWithGroupMembersEtc();
-
   String allowAnyPersonToEditThis();
-
   String share();
-
   String seemsThatTheListOfPartipantsWereAddedPartiallyPleaseRetry();
-
   String esperanto();
-
   String sendedCheckYourEmailForTheVerificationLink();
-
   String newMessageWithEveryoneHere();
-
   String copyThisToANewMessage();
-
   String spanish();
-
   String errorDuringRegistrationAccountAlreadyExists();
-
   String clickToOpen();
-
   String clickToOpenDragAndDropToMoveThisToAnotherPlace();
-
   String theTrashIsEmpty();
-
   String trash();
-
   String invalidConfirmationCode();
-
   String errorAccessingThisDocumentPleaseContactTheAdministratorsProvidingThisReferenceParamAndAnyOtherReleva();
-
   String allTheseMembersAreAlreadyPartipating();
-
   String sharedWithMembers();
-
   String youCanDropHereContentsToDeleteThen();
-
   String seeYourGroupsOrCreateANewOne();
-
   String andNExternalUsers();
-
   String russian();
-
   String sharedWithGeneralPublicNowAnyoneCanParticipate();
-
   String thisIsNotEmpty();
-
   String thisIsTheDefaultContentOfTheGroupYouCannotDeleteItPleaseSelectOtherContentAsDefaultGroupContentBefor();
-
   String minimizeTheWorkspace();
-
   String maximizeTheWorkspace();
-
   String altTheAltKeyboardKey();
-
   String signInToVerifyYourEmail();
-
   String ctrlTheCtrlKeyboardKey();
-
   String newEvent();
-
   String createANewEvent();
-
   String addedAsBuddyInYourContactsIfYourBuddieAddsYouAlsoItWillBeVisibleInYourNetwork();
-
   String german();
-
   String emptyTrashBin();
-
   String deletePermanently();
-
   String french();
-
   String thisEmailIsAlreadyUsedInParamPleaseChooseAnother();
-
   String writing();
-
   String messageCreatedJustEditIt();
-
   String warning();
-
   String sorryYouAreTheLastAdminOfThisGroupLookForSomeoneToSubstituteYouAppropriatelyAsAdminBeforeLeavingThis();
-
   String user();
-
   String toStartAChatYouNeedToBeOnline();
-
   String catalan();
-
   String calendarExporting();
-
   String openOrUseThisAddressInYourPreferedCalendarProgramForInstanceInYourMobileParam();
-
   String copying();
-
   String copyOfParam();
-
   String pleaseEditAndWriteHereYourFeedbackAboutThisToolWeFindYourCommentsVeryUsefulEspeciallyIfYouMentionThe();
-
   String verifyYourEmail();
-
   String yourEmailIsNotVerifiedParamFunctionalityWillWorkBetterIfYouParam();
-
   String yourBrowserIsOutdatedWithTheServerSoftwarePleaseReloadThisPage();
-
   String pleaseUseAFreeLibreModernAndUpdatedNavigatorLikeParamInsteadSomeFunctionalityLikeConcurrentEditionWi();
-
   String yourBrowserIsCurrentlyUnsupported();
+  String groupNotFound();
+  String theNameMustBeBetween3And30LowercaseWesternCharactersAndOrNumbers();
+  String arabic();
+  String doubleClickToOpenAlsoYouCanResizeOrDragAmpDropThisEvent();
+  String collaboratesIn();
+  String yourBrowserVersionIsNotProperlySupportedPleaseUseAFreeLibreModernAndUpdatedBrowserLikeTheLastVersion();
+  String group();
+  String thisIsAnOrphanProjectIfYouAreInterestedInContributingPleaseRequestToJoin();
+  String otherUsersThatCollaborateWithinThisGroup();
+  String startAPublicAssemblyWithTheGroupMembers();
+  String thisBlogDoesnTHaveAnyPosts();
+  String thisBlogDoesnTHaveAnyPostsCreateOne();
+  String thereIsnTAnyBarterYouCanCreateSomeOfThemHere();
+  String enterLinkUrl();
+  String selectSomeTextToCreateALink();
+  String addAParticipantSSeparateWithComma();
+  String pleaseConfirmTheDeletionOfThisMessage();
+  String hungarian();
+  String typeSomeKeywordsThatDefineYourGroup();
+  String inboxItShowsAListOfAllDocumentsAndContentsInWhichYouParticipate();
+  String thereIsnTAnyListYouCanCreateOne();
+  String thereIsnTAnyBlogYouCanCreateOne();
+  String thisBlogDoesnTHaveAnyPostsYouCanCreateOne();
+  String thisFolderIsEmptyYouCanCreateAWikipageOrFolderHere();
+  String thereIsnTAnyMeetingYouCanCreateOne();
+  String thisFolderIsEmptyYouCanCreateADocumentOrFolderHere();
+  String listsBehaveSimilarlyToAMailingListOrAForumButMinimizingEmailsYouCanSubscribeAndDiscussAboutSpecificT();
+  String kuneFaq();
+  String move();
+  String selectedAsTheHomepage();
+  String demoOfKune();
+  String germanTranslatorsGroup();
 }

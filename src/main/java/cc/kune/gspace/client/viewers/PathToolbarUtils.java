@@ -63,7 +63,7 @@ public class PathToolbarUtils {
 
   private ButtonDescriptor createGroupButton(final GroupDTO group, boolean showGroupName, boolean minimal) {
     final String style = ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " + ActionStyles.BTN_SMALL : "");
-    final String tooltip = i18n.t(group.getLongName());
+    final String tooltip = group.getLongName();
     final GotoTokenAction action = new GotoTokenAction(null,
         showGroupName ? group.getShortName() : null, tooltip, group.getStateToken(), style,
         stateManager, eventBus, false);

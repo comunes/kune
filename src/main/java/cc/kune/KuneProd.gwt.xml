@@ -20,7 +20,7 @@
   <!-- http://bit.ly/uCiBDm -->
   <extend-property name="locale" values="en,es,fr,ca,it,de,ru,ar,tr,ro"/>
   <set-property-fallback name="locale" value="en"/>
-  <set-property name="locale" value="en,es,fr,ca,it,de,ru,ar,tr,ro"/>
+  <set-property name="locale" value="en,es,fr,ca,it,de,ru,ar,tr,ro,hu"/>
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave, because it's really slow. -->
@@ -32,7 +32,6 @@
     see UIObject.ensureDebugId()) -->
   <!-- For now this is useful for create screencasts and selenium tests -->
   <inherits name="com.google.gwt.user.Debug"/>
-
 
 </module>
 
