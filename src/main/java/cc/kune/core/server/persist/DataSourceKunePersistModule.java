@@ -74,7 +74,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Instantiates this module only during tests
-   * 
+   *
    * @param settedProperties
    *          the setted properties
    * @param settedJpaUnit
@@ -223,7 +223,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
   private void setPropertyIfExists(final Properties dbProperties, final String kuneProperty,
       final String persistenceProperty) {
     if (kuneProperties.has(kuneProperty)) {
-      final String value = kuneProperties.get(KuneProperties.SITE_DB_SCHEMA);
+      final String value = kuneProperties.get(kuneProperty);
       LOG.info(String.format("Setting property '%s' to '%s'", persistenceProperty, value));
       dbProperties.setProperty(persistenceProperty, value);
     }
