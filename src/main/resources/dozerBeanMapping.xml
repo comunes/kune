@@ -215,6 +215,10 @@
       <b>hasLogo</b>
     </field>
     <field>
+      <a>emailNotifFreq</a>
+      <b>emailNotifFreq</b>
+    </field>
+    <field>
       <a get-method="getStateToken">stateToken</a>
       <b>stateToken</b>
     </field>
@@ -231,7 +235,7 @@
       <b>name</b>
     </field>
   </mapping>
-    <mapping>
+  <mapping>
     <class-a>cc.kune.core.shared.dto.GroupResultDTO</class-a>
     <class-b>cc.kune.domain.User</class-b>
     <field>

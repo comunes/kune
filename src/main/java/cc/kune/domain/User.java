@@ -299,7 +299,7 @@ public class User implements HasId {
 
   @Transient
   public boolean hasLogo() {
-    return getUserGroup().hasLogo();
+    return userGroup.hasLogo();
   }
 
   public boolean isEmailVerified() {

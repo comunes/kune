@@ -46,6 +46,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
@@ -55,6 +56,7 @@ import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateEventContainerDTO;
+import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
@@ -377,5 +379,18 @@ public class MapperTest {
     final LinkDTO dto = mapper.map(user, LinkDTO.class);
     assertEquals("shortName", dto.getShortName());
     assertEquals("longName", dto.getLongName());
+  }
+
+  @Test
+  public void testUserToUserSimple() {
+    final User user = new User("shortName", "longName", "", "".getBytes(), "".getBytes(), null, null,
+        null);
+    final Group group = new Group("test", "this is a test");
+    user.setUserGroup(group);
+    user.setEmailNotifFreq(EmailNotificationFrequency.daily);
+    final UserSimpleDTO dto = mapper.map(user, UserSimpleDTO.class);
+    assertEquals("shortName", dto.getShortName());
+    assertEquals("longName", dto.getName());
+    assertEquals(EmailNotificationFrequency.daily, dto.getEmailNotifFreq());
   }
 }

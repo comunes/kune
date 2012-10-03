@@ -25,5 +25,9 @@ public enum EmailNotificationFrequency implements IsSerializable {
   daily, // at most daily, (not used yet)
   hourly, // at most hourly (not used yet)
   immediately, // almost immediately (currently used)
-  no // I don't need email notifications (currently used)
+  no; // I don't need email notifications (currently used)
+
+  // private EmailNotificationFrequency() {
+  // }
+
 }
