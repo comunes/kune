@@ -62,7 +62,7 @@
       <property name="hibernate.c3p0.timeout" value="100"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
       <property name="hibernate.c3p0.idle_test_period" value="300"/>
-      <property name="hibernate.c3p0.autoCommitOnClose" value="true"/>
+      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.search.default.directory_provider"
         value="filesystem"/>
@@ -179,7 +179,7 @@
       <property name="hibernate.c3p0.timeout" value="100"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
       <property name="hibernate.c3p0.idle_test_period" value="300"/>
-      <property name="hibernate.c3p0.autoCommitOnClose" value="true"/>
+      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
       <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
       <property name="hibernate.c3p0.unreturnedConnectionTimeout"
         value="120"/>
