@@ -36,11 +36,13 @@ import com.google.inject.PrivateModule;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.jpa.JpaPersistModule;
+import com.google.inject.persist.jpa.OpenfireJpaLocalTxnInterceptor;
 
 public class DataSourceOpenfirePersistModule extends PrivateModule {
   public static final Key<CustomPersistFilter> MY_DATA_SOURCE_TWO_FILTER_KEY = Key.get(
       CustomPersistFilter.class, DataSourceOpenfire.class);
   private final KuneProperties kuneProperties;
+  private OpenfireJpaLocalTxnInterceptor transactionInterceptor;
 
   public DataSourceOpenfirePersistModule(final KuneProperties kuneProperties) {
     this.kuneProperties = kuneProperties;
@@ -79,10 +81,18 @@ public class DataSourceOpenfirePersistModule extends PrivateModule {
       bind(EntityManager.class).annotatedWith(DataSourceOpenfire.class).toProvider(entityManagerProvider);
       expose(EntityManager.class).annotatedWith(DataSourceOpenfire.class);
 
+      transactionInterceptor = new OpenfireJpaLocalTxnInterceptor();
+      requestInjection(transactionInterceptor);
+
       bind(MY_DATA_SOURCE_TWO_FILTER_KEY).to(CustomPersistFilter.class);
       expose(MY_DATA_SOURCE_TWO_FILTER_KEY);
 
       bind(GenericPersistenceInitializer.class).asEagerSingleton();
     }
   }
+
+  public OpenfireJpaLocalTxnInterceptor getTransactionInterceptor() {
+    return transactionInterceptor;
+  }
+
 }

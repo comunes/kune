@@ -44,6 +44,7 @@ import cc.kune.core.server.manager.impl.GroupServerUtils;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
 import cc.kune.core.server.persist.KuneTransactional;
+import cc.kune.core.server.persist.OpenfireTransactional;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
@@ -74,6 +75,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Module;
 import com.google.inject.Scope;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
+import com.google.inject.persist.jpa.OpenfireJpaLocalTxnInterceptor;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.ServletModule;
 import com.google.inject.servlet.SessionScoped;
@@ -176,11 +179,15 @@ public class KuneRackModule implements RackModule {
         final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule();
         install(kuneDataSource);
         final KuneProperties kuneProperties = kuneDataSource.getKuneProperties();
-        install(new DataSourceOpenfirePersistModule(kuneProperties));
-        bindInterceptor(annotatedWith(KuneTransactional.class), any(),
-            kuneDataSource.getTransactionInterceptor());
-        bindInterceptor(any(), annotatedWith(KuneTransactional.class),
-            kuneDataSource.getTransactionInterceptor());
+        final DataSourceOpenfirePersistModule openfireDataSource = new DataSourceOpenfirePersistModule(
+            kuneProperties);
+        install(openfireDataSource);
+        final KuneJpaLocalTxnInterceptor kuneJpaTxnInterceptor = kuneDataSource.getTransactionInterceptor();
+        final OpenfireJpaLocalTxnInterceptor openfireJpaTxnInterceptor = openfireDataSource.getTransactionInterceptor();
+        bindInterceptor(annotatedWith(KuneTransactional.class), any(), kuneJpaTxnInterceptor);
+        bindInterceptor(any(), annotatedWith(KuneTransactional.class), kuneJpaTxnInterceptor);
+        bindInterceptor(annotatedWith(OpenfireTransactional.class), any(), openfireJpaTxnInterceptor);
+        bindInterceptor(any(), annotatedWith(OpenfireTransactional.class), openfireJpaTxnInterceptor);
         filter("/*").through(DataSourceKunePersistModule.MY_DATA_SOURCE_ONE_FILTER_KEY);
 
         if (!kuneProperties.getBoolean(KuneProperties.SITE_OPENFIRE_IGNORE)) {

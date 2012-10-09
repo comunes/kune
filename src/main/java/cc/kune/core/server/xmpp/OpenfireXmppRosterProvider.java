@@ -25,6 +25,7 @@ import javax.persistence.EntityManager;
 
 import cc.kune.core.server.manager.impl.DefaultManager;
 import cc.kune.core.server.persist.DataSourceOpenfire;
+import cc.kune.core.server.persist.OpenfireTransactional;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -43,11 +44,13 @@ public class OpenfireXmppRosterProvider extends DefaultManager<RosterItem, Long>
   }
 
   @Override
+  @OpenfireTransactional
   public Long count() {
     return finder.count();
   }
 
   @Override
+  @OpenfireTransactional
   public Collection<RosterItem> getRoster(final String user) {
     return finder.get(user);
   }
