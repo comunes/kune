@@ -183,6 +183,8 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     case immediately:
       immediateRadio.setValue(true);
       break;
+    default:
+      throw new RuntimeException("Unexpected email frequency");
     }
   }
 

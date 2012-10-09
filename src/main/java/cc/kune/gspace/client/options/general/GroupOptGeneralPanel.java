@@ -103,6 +103,26 @@ public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements Group
   }
 
   @Override
+  public void setGroupType(final GroupType groupType) {
+    switch (groupType) {
+    case PROJECT:
+      projectRadio.setValue(true);
+      break;
+    case ORGANIZATION:
+      orgRadio.setValue(true);
+      break;
+    case CLOSED:
+      closedRadio.setValue(true);
+      break;
+    case COMMUNITY:
+      communityRadio.setValue(true);
+      break;
+    default:
+      throw new RuntimeException("Unexpected grouptype");
+    }
+  }
+
+  @Override
   public void setLongName(final String longName) {
     this.longName.setValue(longName);
   }

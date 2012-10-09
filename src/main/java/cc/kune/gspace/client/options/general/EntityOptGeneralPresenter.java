@@ -62,7 +62,7 @@ public abstract class EntityOptGeneralPresenter {
       @Override
       public void onChange(final ChangeEvent event) {
         updateInServer();
-        view.reset();
+        entityOptions.hideMessages();
       }
     });
   }
@@ -72,7 +72,7 @@ public abstract class EntityOptGeneralPresenter {
     entityOptions.hideMessages();
   }
 
-  protected void sendChangeEntityEvent(String shortName, String longName) {
+  protected void sendChangeEntityEvent(final String shortName, final String longName) {
     CurrentEntityChangedEvent.fire(eventBus, shortName, longName);
   }
 

@@ -29,6 +29,8 @@ public interface GroupOptGeneralView extends EntityOptGeneralView {
 
   String getShortName();
 
+  void setGroupType(GroupType groupType);
+
   void setLongName(String longName);
 
   void setShortName(String shortName);

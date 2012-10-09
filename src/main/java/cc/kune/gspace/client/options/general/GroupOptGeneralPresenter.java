@@ -73,6 +73,7 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
     groupView.setShortNameEnabled(!session.getInitData().getSiteShortName().equals(group.getShortName()));
     groupView.setShortName(group.getShortName());
     groupView.setLongName(group.getLongName());
+    groupView.setGroupType(group.getGroupType());
   }
 
   @Override
