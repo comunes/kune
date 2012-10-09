@@ -1,3 +1,10 @@
+kune (0.2.0+b30) unstable; urgency=low
+
+  * Trying to fix db connection pool leaks (#370)
+  * Fix for #352: Change of group type
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 09 Oct 2012 15:03:35 +0200
+
 kune (0.2.0+b29) unstable; urgency=low
 
   * Updated wave code with some fixes and improvements (sync deadlock, websocket
