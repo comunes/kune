@@ -37,6 +37,7 @@ import cc.kune.core.client.errors.EmailHashExpiredException;
 import cc.kune.core.client.errors.EmailHashInvalidException;
 import cc.kune.core.client.errors.EmailNotFoundException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
+import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.UserSession;
@@ -81,10 +82,10 @@ public class UserRPC implements RPC, UserService {
   private final UserInfoService userInfoService;
   private final UserManager userManager;
   private final UserSessionManager userSessionManager;
+  private final UserSignInLogManager userSignInLogManager;
   private final WaveClientServlet waveClientServlet;
   private final SessionManager waveSessionManager;
   private final String websocketAddress;
-  private final UserSignInLogManager userSignInLogManager;
 
   @Inject
   public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
@@ -92,8 +93,8 @@ public class UserRPC implements RPC, UserService {
       final SessionManager waveSessionManager, final WaveClientServlet waveClientServlet,
       final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
       final UserSessionManager userSessionManager, final UserFinder userFinder,
-      final ParticipantUtils partUtils, UserSignInLogManager userSignInLogManager,
-      @Named(CoreSettings.HTTP_WEBSOCKET_PUBLIC_ADDRESS) String websocketAddress) {
+      final ParticipantUtils partUtils, final UserSignInLogManager userSignInLogManager,
+      @Named(CoreSettings.HTTP_WEBSOCKET_PUBLIC_ADDRESS) final String websocketAddress) {
     this.userManager = userManager;
     this.userInfoService = userInfoService;
     this.mapper = mapper;
@@ -151,13 +152,22 @@ public class UserRPC implements RPC, UserService {
       return;
     }
     final HttpSession session = waveSessionManager.getSessionFromToken(passwdOrToken);
+    if (session == null) {
+      throw new SessionExpiredException();
+    }
     Preconditions.checkState(session != null, "Session not found for this hash");
     final AccountData loggedInAccount = waveSessionManager.getLoggedInAccount(session);
+    if (loggedInAccount == null) {
+      throw new SessionExpiredException();
+    }
     Preconditions.checkState(loggedInAccount != null, "Not account info for this session");
     final ParticipantId participant = loggedInAccount.getId();
     final String participantAddress = partUtils.getAddressName(participant.getAddress());
-    Preconditions.checkState(participantAddress.equals(username),
-        "Session account and hash does not match");
+    final boolean sameUser = participantAddress.equals(username);
+    Preconditions.checkState(sameUser, "Session account and hash does not match");
+    if (!sameUser) {
+      throw new SessionExpiredException();
+    }
   }
 
   @Override

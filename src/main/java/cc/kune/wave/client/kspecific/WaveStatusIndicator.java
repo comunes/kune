@@ -56,7 +56,7 @@ public class WaveStatusIndicator {
         public void onNetworkStatus(final NetworkStatusEvent event) {
           switch (event.getStatus()) {
           case CONNECTED:
-           goOnline();
+            goOnline();
             break;
           case RECONNECTED:
             session.check(new AsyncCallbackSimple<Void>() {
@@ -67,7 +67,11 @@ public class WaveStatusIndicator {
             });
             break;
           case DISCONNECTED:
-            NotifyUser.showProgress(i18n.t("Connecting"));
+            if (session.isLogged()) {
+              // FIXME: this is because we don't have way to logout in wave,
+              // websocket, etc
+              NotifyUser.showProgress(i18n.t("Connecting"));
+            }
             break;
           case RECONNECTING:
             NotifyUser.showProgress(i18n.t("Offline"));

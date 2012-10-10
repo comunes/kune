@@ -2,8 +2,10 @@ kune (0.2.0+b31) unstable; urgency=low
 
   * Added more transactions (#370 continuation)
   * CREDITS updated
+  * Fix #356, NPE in GenericServlet
+  * More session exceptions where checking wave session vs kune
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 10 Oct 2012 20:30:16 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 11 Oct 2012 00:48:29 +0200
 
 kune (0.2.0+b30) unstable; urgency=low
 
