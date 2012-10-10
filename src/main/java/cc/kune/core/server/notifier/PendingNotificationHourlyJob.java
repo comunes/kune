@@ -28,6 +28,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.SchedulerException;
 
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.wave.server.kspecific.WaveEmailNotifier;
 
 import com.google.inject.Inject;
@@ -44,6 +45,7 @@ public class PendingNotificationHourlyJob implements Job {
   }
 
   @Override
+  @KuneTransactional
   public void execute(final JobExecutionContext context) throws JobExecutionException {
     LOG.info(String.format("Hourly notifications cron job start, %s", pendingManager));
     pendingManager.sendHourlyNotifications();

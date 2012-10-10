@@ -28,6 +28,8 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.SchedulerException;
 
+import cc.kune.core.server.persist.KuneTransactional;
+
 import com.google.inject.Inject;
 
 public class PendingNotificationDailyJob implements Job {
@@ -43,6 +45,7 @@ public class PendingNotificationDailyJob implements Job {
   }
 
   @Override
+  @KuneTransactional
   public void execute(final JobExecutionContext context) throws JobExecutionException {
     LOG.info(String.format("Daily notifications cron job start, %s", pendingManager));
     pendingManager.sendDailyNotifications();
