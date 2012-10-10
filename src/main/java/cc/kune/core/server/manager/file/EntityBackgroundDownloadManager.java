@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -111,14 +112,18 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
 
     try {
       final Group group = groupManager.findByShortName(stateToken.getGroup());
-
+      if (!group.hasBackground()) {
+        FileDownloadManagerUtils.returnNotFound404(resp);
+        return;
+      }
       final String absFilename = buildResponse(stateToken, group.getBackgroundImage(),
           group.getBackgroundMime(), imgsize, resp);
       final OutputStream out = resp.getOutputStream();
       FileDownloadManagerUtils.returnFile(absFilename, out);
     } catch (final ContentNotFoundException e) {
       FileDownloadManagerUtils.returnNotFound404(resp);
-      return;
+    } catch (final NoResultException e2) {
+      FileDownloadManagerUtils.returnNotFound404(resp);
     }
   }
 

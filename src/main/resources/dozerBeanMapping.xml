@@ -42,6 +42,10 @@
       <a>hasLogo</a>
       <b>hasLogo</b>
     </field>
+        <field type="one-way">
+      <a>hasBackground</a>
+      <b>hasBackground</b>
+    </field>
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.GroupListDTO </class-a>

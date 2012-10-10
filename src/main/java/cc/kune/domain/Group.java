@@ -203,6 +203,10 @@ public class Group implements HasId {
     return groupType;
   }
 
+  public boolean getHasBackground() {
+    return hasBackground();
+  }
+
   public boolean getHasLogo() {
     return hasLogo();
   }
@@ -214,6 +218,13 @@ public class Group implements HasId {
 
   public byte[] getLogo() {
     return logo;
+  }
+
+  public Long getLogoLastModifiedTime() {
+    if (logoLastModifiedTime == null) {
+      return System.currentTimeMillis();
+    }
+    return logoLastModifiedTime;
   }
 
   public BasicMimeType getLogoMime() {
@@ -251,6 +262,11 @@ public class Group implements HasId {
 
   public String getWorkspaceTheme() {
     return workspaceTheme;
+  }
+
+  @Transient
+  public boolean hasBackground() {
+    return backgroundImage != null;
   }
 
   @Override
@@ -292,13 +308,6 @@ public class Group implements HasId {
 
   public void setGroupType(final GroupType groupType) {
     this.groupType = groupType;
-  }
-
-  public Long getLogoLastModifiedTime() {
-    if (logoLastModifiedTime == null) {
-      return System.currentTimeMillis();
-    }
-    return logoLastModifiedTime;
   }
 
   @Override

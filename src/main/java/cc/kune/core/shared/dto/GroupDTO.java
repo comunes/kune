@@ -33,6 +33,7 @@ public class GroupDTO implements IsSerializable {
   private ContentSimpleDTO defaultContent;
   private LicenseDTO defaultLicense;
   private GroupType groupType;
+  private boolean hasBackground;
   private boolean hasLogo;
   private Long id;
   private String longName;
@@ -103,6 +104,10 @@ public class GroupDTO implements IsSerializable {
     return groupType;
   }
 
+  public boolean getHasBackground() {
+    return hasBackground;
+  }
+
   public boolean getHasLogo() {
     return hasLogo;
   }
@@ -128,6 +133,10 @@ public class GroupDTO implements IsSerializable {
 
   public String getWorkspaceTheme() {
     return workspaceTheme;
+  }
+
+  public boolean hasBackground() {
+    return getHasBackground();
   }
 
   @Override
@@ -172,6 +181,10 @@ public class GroupDTO implements IsSerializable {
 
   public void setGroupType(final GroupType groupType) {
     this.groupType = groupType;
+  }
+
+  public void setHasBackground(final boolean hasBackground) {
+    this.hasBackground = hasBackground;
   }
 
   public void setHasLogo(final boolean hasLogo) {

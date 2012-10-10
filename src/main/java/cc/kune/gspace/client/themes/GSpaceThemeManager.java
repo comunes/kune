@@ -118,11 +118,10 @@ public class GSpaceThemeManager {
   private void setState(final StateAbstractDTO state) {
     setTheme(themes.get(state.getGroup().getWorkspaceTheme()));
     final GroupDTO group = state.getGroup();
-    final String groupBackImage = group.getBackgroundImage();
-    if (groupBackImage == null) {
-      wsBackManager.clearBackgroundImage();
-    } else {
+    if (group.hasBackground()) {
       wsBackManager.setBackgroundImage();
+    } else {
+      wsBackManager.clearBackgroundImage();
     }
   }
 
