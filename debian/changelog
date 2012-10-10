@@ -1,3 +1,10 @@
+kune (0.2.0+b31) unstable; urgency=low
+
+  * Added more transactions (#370 continuation)
+  * CREDITS updated
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 10 Oct 2012 20:30:16 +0200
+
 kune (0.2.0+b30) unstable; urgency=low
 
   * Trying to fix db connection pool leaks (#370)
