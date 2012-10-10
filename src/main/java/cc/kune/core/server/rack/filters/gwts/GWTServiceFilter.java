@@ -64,7 +64,7 @@ public class GWTServiceFilter extends AbstractInjectedFilter {
     super.init(filterConfig);
     final RemoteService service = getInstance(serviceClass);
     this.servlet = new DelegatedRemoteServlet(service);
-    servlet.setService(service);
+    servlet.setService(service, serviceClass.getSimpleName());
     servlet.setServletContext(filterConfig.getServletContext());
   }
 

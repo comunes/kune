@@ -45,6 +45,7 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
   private static final long serialVersionUID = -7646054921925214953L;
   private transient RemoteService service;
 
+  private String serviceName;
   private ServletContext servletContext;
 
   public DelegatedRemoteServlet(final Object servlet) {
@@ -92,6 +93,11 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
   }
 
   @Override
+  public String getServletName() {
+    return serviceName;
+  }
+
+  @Override
   public void log(final String message) {
     super.log(message);
     LOG.info(message);
@@ -113,8 +119,9 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
     }
   }
 
-  public void setService(final RemoteService service) {
+  public void setService(final RemoteService service, final String serviceName) {
     this.service = service;
+    this.serviceName = serviceName;
   }
 
   public void setServletContext(final ServletContext servletContext) {
