@@ -42,6 +42,7 @@ import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.persist.DataSourceKune;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.tool.ServerTool;
@@ -145,6 +146,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   @Override
+  @KuneTransactional
   public int count() {
     return super.size();
   }
