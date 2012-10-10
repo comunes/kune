@@ -25,6 +25,7 @@ import java.util.List;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.errors.ToolIsDefaultException;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -131,9 +132,13 @@ public abstract class EntityOptToolsPresenter {
         new AsyncCallback<Void>() {
           @Override
           public void onFailure(final Throwable caught) {
+            if (caught instanceof ToolIsDefaultException) {
+              NotifyUser.error(getDefContentTooltip());
+            } else {
+              entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), NotifyLevel.error);
+              NotifyUser.error(i18n.t("Error configuring the tool"));
+            }
             view.setChecked(toolName, !checked);
-            entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), NotifyLevel.error);
-            NotifyUser.error(i18n.t("Error configuring the tool"));
             // view.unmask();
           }
 

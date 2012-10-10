@@ -21,6 +21,7 @@ package cc.kune.core.server.rpc;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.ToolIsDefaultException;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.ActionLevel;
@@ -149,7 +150,7 @@ public class GroupRPC implements RPC, GroupService {
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
   @KuneTransactional
   public void setToolEnabled(final String userHash, final StateToken groupToken, final String toolName,
-      final boolean enabled) {
+      final boolean enabled) throws ToolIsDefaultException {
     groupManager.setToolEnabled(getUserLogged(), groupToken.getGroup(), toolName, enabled);
   }
 

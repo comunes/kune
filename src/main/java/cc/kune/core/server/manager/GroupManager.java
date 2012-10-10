@@ -25,6 +25,7 @@ import java.util.Set;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
+import cc.kune.core.client.errors.ToolIsDefaultException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.domain.Content;
@@ -87,7 +88,8 @@ public interface GroupManager extends Manager<Group, Long> {
 
   void setGroupBackgroundImage(Group group, String backgroundFileName, String mime);
 
-  void setToolEnabled(User userLogged, String groupShortName, String toolName, boolean enabled);
+  void setToolEnabled(User userLogged, String groupShortName, String toolName, boolean enabled)
+      throws ToolIsDefaultException;
 
   /**
    * @param groupId

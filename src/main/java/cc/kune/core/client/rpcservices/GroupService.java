@@ -20,6 +20,7 @@
 package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.ToolIsDefaultException;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -50,7 +51,8 @@ public interface GroupService extends RemoteService {
   void setSocialNetworkVisibility(String userHash, StateToken groupToken,
       SocialNetworkVisibility visibility);
 
-  void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled);
+  void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled)
+      throws ToolIsDefaultException;
 
   StateAbstractDTO updateGroup(String userHash, StateToken token, GroupDTO groupDTO)
       throws DefaultException;

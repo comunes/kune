@@ -35,6 +35,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
+import cc.kune.core.client.errors.ToolIsDefaultException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.manager.FileManager;
 import cc.kune.core.server.manager.GroupManager;
@@ -348,8 +349,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   @Override
   public void setToolEnabled(final User userLogged, final String groupShortName, final String tool,
-      final boolean enabled) {
+      final boolean enabled) throws ToolIsDefaultException {
     final Group group = findByShortName(groupShortName);
+    if (group.getDefaultContent().getStateToken().getTool().equals(tool) && !enabled) {
+      throw new ToolIsDefaultException();
+    }
     ToolConfiguration toolConfiguration = group.getToolConfiguration(tool);
     if (toolConfiguration == null) {
       toolConfiguration = serverToolRegistry.get(tool).initGroup(userLogged, group).getToolConfiguration(
