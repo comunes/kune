@@ -4,8 +4,9 @@ kune (0.2.0+b31) unstable; urgency=low
   * CREDITS updated
   * Fix #356, NPE in GenericServlet
   * More session exceptions where checking wave session vs kune
+  * CLOSED - task #353: Removing tool "Documents" blocks access to group
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 11 Oct 2012 00:48:29 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 11 Oct 2012 01:55:52 +0200
 
 kune (0.2.0+b30) unstable; urgency=low
 
