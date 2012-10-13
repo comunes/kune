@@ -21,6 +21,7 @@ package cc.kune.common.client.ui;
 
 import java.util.Iterator;
 
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.utils.TextUtils;
 
@@ -66,6 +67,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   public IconLabel(final ImageResource imgRes, final String text) {
     this(text);
+    iconRight.setResource(CommonResources.INSTANCE.clear());
+    iconLeft.setResource(CommonResources.INSTANCE.clear());
     if (imgRes != null) {
       setLeftIconResourceImpl(imgRes);
     }
@@ -99,9 +102,14 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   }
 
   private void commonStyle(final Image icon, final String imgCss) {
-    icon.setUrl(GWT.getModuleBaseURL() + "images/clear.gif");
+    icon.setResource(CommonResources.INSTANCE.clear());
+    // icon.setUrl(GWT.getModuleBaseURL() + "images/clear.gif");
     icon.setStyleName(imgCss);
     icon.addStyleName("oc-ico-pad");
+  }
+
+  private String getFloatFromDirection(final Direction direction) {
+    return direction.equals(Direction.LTR) ? "k-fl" : "k-fr";
   }
 
   public HasClickHandlers getFocus() {
@@ -128,12 +136,14 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     return flow.remove(w);
   }
 
-  private void setIconRTL(final Widget widget, final Direction direction) {
-    widget.addStyleName(getFloatFromDirection(direction));
+  private void setFloats() {
+    // setting floats again, because with setResource we lost them
+    setIconRTL(iconLeft, getTextDirection());
+    setIconRTL(iconRight, getTextDirection());
   }
 
-  private String getFloatFromDirection(final Direction direction) {
-    return direction.equals(Direction.LTR) ? "k-fl" : "k-fr";
+  private void setIconRTL(final Widget widget, final Direction direction) {
+    widget.addStyleName(getFloatFromDirection(direction));
   }
 
   public void setId(final String id) {
@@ -161,12 +171,6 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.addStyleName("k-tcell");
     setFloats();
     iconLeft.setVisible(true);
-  }
-
-  private void setFloats() {
-    // setting floats again, because with setResource we lost them
-    setIconRTL(iconLeft, getTextDirection());
-    setIconRTL(iconRight, getTextDirection());
   }
 
   public void setLeftIconUrl(final String url) {
@@ -207,6 +211,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconRight.setVisible(true);
   }
 
+  private void setStyleFromDirection(final Direction direction) {
+    setStyleName(getFloatFromDirection(direction));
+  }
+
   @Override
   public void setStyleName(final String style) {
     flow.setStyleName(style);
@@ -217,10 +225,6 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     label.setText(text, Direction.LTR);
     setTextStyle(text);
     setStyleFromDirection(Direction.LTR);
-  }
-
-  private void setStyleFromDirection(Direction direction) {
-    setStyleName(getFloatFromDirection(direction));
   }
 
   @Override

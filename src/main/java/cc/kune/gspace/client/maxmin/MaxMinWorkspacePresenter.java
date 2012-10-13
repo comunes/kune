@@ -7,7 +7,7 @@ import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
-import cc.kune.core.client.i18n.I18n;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.SitebarActions;
 

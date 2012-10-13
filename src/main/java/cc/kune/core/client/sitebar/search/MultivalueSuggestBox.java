@@ -43,7 +43,7 @@ import java.util.Map;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.core.client.i18n.I18n;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.dto.GroupType;

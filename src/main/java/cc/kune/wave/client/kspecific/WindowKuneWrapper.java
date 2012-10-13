@@ -28,8 +28,8 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.OnEnter;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
-import cc.kune.core.client.i18n.I18n;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -42,23 +42,24 @@ public class WindowKuneWrapper implements WindowWrapper {
   /** The Constant WINDOW_PROMPT_ID. */
   public static final String WINDOW_PROMPT_ID = "k-window-prompt-id";
 
-  private PromptTopDialog diag;
-
   private WindowPromptCallback callback;
+
+  private PromptTopDialog diag;
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * org.waveprotocol.box.webclient.client.WindowWrapper#alert(java.lang.String)
    */
-  public void alert(String message) {
+  @Override
+  public void alert(final String message) {
     NotifyUser.showAlertMessage(I18n.t("Warning"), I18n.t(message));
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * org.waveprotocol.wave.client.common.util.WindowWrapper#confirm(java.lang
    * .String, org.waveprotocol.wave.client.common.util.WindowConfirmCallback)
@@ -67,20 +68,31 @@ public class WindowKuneWrapper implements WindowWrapper {
   public void confirm(final String msg, final WindowConfirmCallback callback) {
     NotifyUser.askConfirmation(I18n.t("Confirm"), I18n.t(msg), new SimpleResponseCallback() {
       @Override
-      public void onSuccess() {
-        callback.onOk();
+      public void onCancel() {
+        callback.onCancel();
       }
 
       @Override
-      public void onCancel() {
-        callback.onCancel();
+      public void onSuccess() {
+        callback.onOk();
       }
     });
   }
 
+  /**
+   * Do action.
+   * 
+   * @param callback
+   *          the callback
+   */
+  protected void doPromptAction() {
+    callback.onReturn(diag.getTextFieldValue());
+    diag.hide();
+  }
+
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * org.waveprotocol.wave.client.common.util.WindowWrapper#prompt(java.lang
    * .String, java.lang.String,
@@ -90,7 +102,7 @@ public class WindowKuneWrapper implements WindowWrapper {
   public void prompt(final String msg, final String value, final WindowPromptCallback callback) {
     this.callback = callback;
     if (diag == null) {
-      Builder builder = new PromptTopDialog.Builder(WINDOW_PROMPT_ID, I18n.t(msg), false, true,
+      final Builder builder = new PromptTopDialog.Builder(WINDOW_PROMPT_ID, I18n.t(msg), false, true,
           I18n.getDirection(), new OnEnter() {
             @Override
             public void onEnter() {
@@ -103,13 +115,13 @@ public class WindowKuneWrapper implements WindowWrapper {
       diag = builder.build();
       diag.getFirstBtn().addClickHandler(new ClickHandler() {
         @Override
-        public void onClick(ClickEvent event) {
+        public void onClick(final ClickEvent event) {
           doPromptAction();
         }
       });
       diag.getSecondBtn().addClickHandler(new ClickHandler() {
         @Override
-        public void onClick(ClickEvent event) {
+        public void onClick(final ClickEvent event) {
           diag.hide();
         }
       });
@@ -122,17 +134,6 @@ public class WindowKuneWrapper implements WindowWrapper {
     diag.showCentered();
     diag.setTextFieldValue(value);
     diag.setTextFieldFocus();
-  }
-
-  /**
-   * Do action.
-   *
-   * @param callback
-   *          the callback
-   */
-  protected void doPromptAction() {
-    callback.onReturn(diag.getTextFieldValue());
-    diag.hide();
   }
 
 }

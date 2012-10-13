@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.i18n;
+package cc.kune.common.shared.i18n;
 
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.inject.Inject;
@@ -27,7 +27,7 @@ import com.google.inject.Singleton;
 public class I18n {
 
   @Inject
-  private static I18nUITranslationService i18n;
+  private static I18nTranslationService i18n;
 
   public static Direction getDirection() {
     return i18n.getDirection();

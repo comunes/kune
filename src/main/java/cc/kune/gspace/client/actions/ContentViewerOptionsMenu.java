@@ -20,7 +20,7 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.core.client.i18n.I18n;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 
@@ -33,7 +33,7 @@ public class ContentViewerOptionsMenu extends MenuDescriptor {
   private static final String ID = "k-cnt-viewer-opt-menu";
 
   @Inject
-  public ContentViewerOptionsMenu(final CoreResources res, Session session) {
+  public ContentViewerOptionsMenu(final CoreResources res, final Session session) {
     super();
     this.withIcon(res.arrowdownsitebar()).withId(ID);
     if (session.isNewbie()) {

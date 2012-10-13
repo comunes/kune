@@ -750,6 +750,25 @@
     <connection>scm:svn:svn+ssh://vjrj_@scm.ourproject.org/svnroot/kune/trunk</connection>
   </scm>
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources/icons</directory>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.java</include>
+          <include>**/*.gwt.xml</include>
+          <include>**/*.ui.xml</include>
+          <include>**/*png</include>
+          <include>**/*gif</include>
+          <include>**/*jpeg</include>
+        </includes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -1059,8 +1078,12 @@
             <configuration>
               <classifier>common</classifier>
               <includes>
-                <include>**/KuneCommon.gwt.xml**</include>
+                <include>**/KuneCommon.gwt.xml</include>
+                <include>**/common/*.ui.xml</include>
                 <include>**/kune/common/**</include>
+                <include>**/kune/common/*png</include>
+                <include>**/kune/common/*gif</include>
+                <include>**/icons/*png</include>
               </includes>
             </configuration>
           </execution>

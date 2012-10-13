@@ -21,9 +21,9 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.shared.dto.AccessRolDTO;

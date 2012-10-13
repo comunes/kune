@@ -23,11 +23,11 @@ package cc.kune.core.client.init;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.CoreConstants;
 

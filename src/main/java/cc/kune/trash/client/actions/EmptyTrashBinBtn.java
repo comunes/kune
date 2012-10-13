@@ -21,10 +21,10 @@ package cc.kune.trash.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
-import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.state.Session;

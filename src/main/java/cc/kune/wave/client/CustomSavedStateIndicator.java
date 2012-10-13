@@ -22,7 +22,7 @@ import org.waveprotocol.wave.client.scheduler.SchedulerInstance;
 import org.waveprotocol.wave.client.scheduler.TimerService;
 import org.waveprotocol.wave.concurrencycontrol.common.UnsavedDataListener;
 
-import cc.kune.core.client.i18n.I18n;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.wave.client.kspecific.WaveUnsaveNotificator;
 
 import com.google.inject.Singleton;
@@ -37,18 +37,18 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
   private static final int UPDATE_DELAY_MS = 300;
   private static final int UPDATE_UNSAVED_DELAY_MS = 10;
 
+  private SavedState currentSavedState = null;
+
+  private final WaveUnsaveNotificator notifier;
+
+  private final TimerService scheduler;
   private final Scheduler.Task updateTask = new Scheduler.Task() {
     @Override
     public void execute() {
       updateDisplay();
     }
   };
-
-  private final TimerService scheduler;
-
   private SavedState visibleSavedState = SavedState.SAVED;
-  private SavedState currentSavedState = null;
-  private WaveUnsaveNotificator notifier;
 
   /**
    * Simple saved state indicator.
@@ -59,14 +59,6 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
   public CustomSavedStateIndicator(){
     this.scheduler = SchedulerInstance.getLowPriorityTimer();
     notifier = new WaveUnsaveNotificator();
-  }
-
-  public void saved() {
-    maybeUpdateDisplay();
-  }
-
-  public void unsaved() {
-    maybeUpdateDisplay();
   }
 
   private void maybeUpdateDisplay() {
@@ -91,6 +83,34 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     return visibleSavedState != currentSavedState;
   }
 
+  @Override
+  public void onClose(final boolean everythingCommitted) {
+    if (everythingCommitted) {
+      saved();
+    } else {
+      unsaved();
+    }
+  }
+
+  @Override
+  public void onUpdate(final UnsavedDataInfo unsavedDataInfo) {
+    if (unsavedDataInfo.estimateUnacknowledgedSize() != 0) {
+      currentSavedState = SavedState.UNSAVED;
+      unsaved();
+    } else {
+      currentSavedState = SavedState.SAVED;
+      saved();
+    }
+  }
+
+  public void saved() {
+    maybeUpdateDisplay();
+  }
+
+  public void unsaved() {
+    maybeUpdateDisplay();
+  }
+
   private void updateDisplay() {
     visibleSavedState = currentSavedState;
     switch (visibleSavedState) {
@@ -102,26 +122,6 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
       break;
     default:
       throw new AssertionError("unknown " + currentSavedState);
-    }
-  }
-
-  @Override
-  public void onUpdate(UnsavedDataInfo unsavedDataInfo) {
-    if (unsavedDataInfo.estimateUnacknowledgedSize() != 0) {
-      currentSavedState = SavedState.UNSAVED;
-      unsaved();
-    } else {
-      currentSavedState = SavedState.SAVED;
-      saved();
-    }
-  }
-
-  @Override
-  public void onClose(boolean everythingCommitted) {
-    if (everythingCommitted) {
-      saved();
-    } else {
-      unsaved();
     }
   }
 }

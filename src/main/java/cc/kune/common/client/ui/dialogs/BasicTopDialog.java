@@ -26,8 +26,8 @@ import cc.kune.common.client.shortcuts.OnEscapePressedEvent.OnEscapePressedHandl
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.Animations;
 import cc.kune.common.client.ui.PopupTopPanel;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.i18n.I18n;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

@@ -23,10 +23,10 @@ package cc.kune.core.client.auth;
 import java.util.Date;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.i18n.I18n;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;

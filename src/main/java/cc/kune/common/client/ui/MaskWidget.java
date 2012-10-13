@@ -19,8 +19,6 @@
  */
 package cc.kune.common.client.ui;
 
-import javax.annotation.Nonnull;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -60,13 +58,11 @@ public class MaskWidget extends PopupPanel implements MaskWidgetView {
   }
 
   @Override
-  @Nonnull
   public void mask(final IsWidget widget) {
     mask(widget, "");
   }
 
   @Override
-  @Nonnull
   public void mask(final IsWidget widget, final String message) {
     label.setText(message);
     setPopupPositionAndShow(new PositionCallback() {

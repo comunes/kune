@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cc.kune.common.client.shortcuts.Keyboard;
-import cc.kune.core.client.i18n.I18n;
+import cc.kune.common.shared.i18n.I18n;
 
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
