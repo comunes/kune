@@ -21,7 +21,6 @@ package cc.kune.common.client.ui;
 
 import java.util.Iterator;
 
-import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.utils.TextUtils;
 
@@ -67,8 +66,6 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   public IconLabel(final ImageResource imgRes, final String text) {
     this(text);
-    iconRight.setResource(CommonResources.INSTANCE.clear());
-    iconLeft.setResource(CommonResources.INSTANCE.clear());
     if (imgRes != null) {
       setLeftIconResourceImpl(imgRes);
     }
@@ -102,8 +99,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   }
 
   private void commonStyle(final Image icon, final String imgCss) {
-    icon.setResource(CommonResources.INSTANCE.clear());
-    // icon.setUrl(GWT.getModuleBaseURL() + "images/clear.gif");
+    icon.setUrl(GWT.getModuleBaseURL() + "/images/clear.gif");
     icon.setStyleName(imgCss);
     icon.addStyleName("oc-ico-pad");
   }

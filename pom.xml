@@ -766,6 +766,7 @@
           <include>**/*png</include>
           <include>**/*gif</include>
           <include>**/*jpeg</include>
+          <include>**/*css</include>
         </includes>
       </resource>
     </resources>
@@ -1084,6 +1085,7 @@
                 <include>**/kune/common/*png</include>
                 <include>**/kune/common/*gif</include>
                 <include>**/icons/*png</include>
+                <include>**/common/public/**</include>
               </includes>
             </configuration>
           </execution>
