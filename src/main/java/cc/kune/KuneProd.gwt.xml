@@ -18,9 +18,9 @@
 
   <!-- I18n ===================================================== -->
   <!-- http://bit.ly/uCiBDm -->
-  <extend-property name="locale" values="en,es,fr,ca,it,de,ru,ar,tr,ro,hu"/>
+  <extend-property name="locale" values="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl"/>
   <set-property-fallback name="locale" value="en"/>
-  <set-property name="locale" value="en,es,fr,ca,it,de,ru,ar,tr,ro,hu"/>
+  <set-property name="locale" value="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl"/>
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave, because it's really slow. -->
