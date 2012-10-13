@@ -78,7 +78,7 @@ public class NewRoomBtn extends ButtonDescriptor {
       builder.width("200px").height("50px").firstButtonTitle(i18n.t("Create")).sndButtonTitle(
           i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID);
       builder.regex(TextUtils.UNIX_NAME).regexText(
-          i18n.t("The name must contain only characters, numbers and dashes")).textboxId(TEXTBOX_ID);
+          i18n.t("The name must contain only lowercase characters, numbers and dashes")).textboxId(TEXTBOX_ID);
       builder.minLength(3).maxLength(15).allowBlank(false).minLengthText(
           CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS).maxLengthText(
           CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS);
