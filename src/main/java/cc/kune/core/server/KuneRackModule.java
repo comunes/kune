@@ -183,14 +183,13 @@ public class KuneRackModule implements RackModule {
             kuneProperties);
         install(openfireDataSource);
         final KuneJpaLocalTxnInterceptor kuneJpaTxnInterceptor = kuneDataSource.getTransactionInterceptor();
-        final OpenfireJpaLocalTxnInterceptor openfireJpaTxnInterceptor = openfireDataSource.getTransactionInterceptor();
         bindInterceptor(annotatedWith(KuneTransactional.class), any(), kuneJpaTxnInterceptor);
         bindInterceptor(any(), annotatedWith(KuneTransactional.class), kuneJpaTxnInterceptor);
-        bindInterceptor(annotatedWith(OpenfireTransactional.class), any(), openfireJpaTxnInterceptor);
-        bindInterceptor(any(), annotatedWith(OpenfireTransactional.class), openfireJpaTxnInterceptor);
         filter("/*").through(DataSourceKunePersistModule.MY_DATA_SOURCE_ONE_FILTER_KEY);
-
         if (!kuneProperties.getBoolean(KuneProperties.SITE_OPENFIRE_IGNORE)) {
+          final OpenfireJpaLocalTxnInterceptor openfireJpaTxnInterceptor = openfireDataSource.getTransactionInterceptor();
+          bindInterceptor(annotatedWith(OpenfireTransactional.class), any(), openfireJpaTxnInterceptor);
+          bindInterceptor(any(), annotatedWith(OpenfireTransactional.class), openfireJpaTxnInterceptor);
           filter("/*").through(DataSourceOpenfirePersistModule.MY_DATA_SOURCE_TWO_FILTER_KEY);
         }
         super.configureServlets();
