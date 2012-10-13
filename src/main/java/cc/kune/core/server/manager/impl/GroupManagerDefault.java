@@ -205,7 +205,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     initSocialNetwork(userGroup, userGroup, GroupListMode.EVERYONE, SocialNetworkVisibility.anyone);
 
     final String title = i18n.t("[%s] Bio", user.getName());
-    final String body = i18n.t("This user has not written its biography yet");
+    final String body = i18n.t("This user has not written its biography yet. Please, edit this document and write here whatever public description of yourself you want others to see.");
     try {
       initGroup(user, userGroup,
           wantPersonalHomepage ? serverToolRegistry.getToolsRegisEnabledForUsers()
