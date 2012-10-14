@@ -21,7 +21,7 @@ package cc.kune.wiki.client.actions;
 
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentBtn;
 import cc.kune.wiki.shared.WikiToolConstants;
@@ -32,11 +32,11 @@ public class NewWikiIconBtn extends NewContentBtn {
 
   @Inject
   public NewWikiIconBtn(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg) {
+      final IconicResources res, final GlobalShortcutRegister shorcutReg) {
     super(
         i18n,
         action,
-        res.wikipageAdd(),
+        res.wikisAdd(),
         shorcutReg,
         i18n.t("New wikipage"),
         i18n.t("Create a New Wikipage here. "

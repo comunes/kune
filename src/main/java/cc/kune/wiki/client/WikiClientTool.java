@@ -45,8 +45,8 @@ public class WikiClientTool extends FoldableAbstractClientTool {
         i18n.t("wiki"),
         i18n.t(
             "Wiki-pages are Documents that can be edited by any visitor (in [%s]), instead of only by the group. This accelerates updating and construction",
-            i18n.getSiteCommonName()), icons.wikisWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry,
-        i18n, navResources, history);
+            i18n.getSiteCommonName()), icons.wikisWhite(), AccessRolDTO.Viewer, toolSelector,
+        cntCapRegistry, i18n, navResources, history);
     this.icons = icons;
 
     registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
@@ -68,12 +68,12 @@ public class WikiClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
-    registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIcon(TYPE_FOLDER, icons.folderGrey());
     registerContentTypeIcon(TYPE_ROOT, icons.wikisGrey());
-    registerContentTypeIcon(TYPE_WIKIPAGE, navResources.wikipage());
-    registerContentTypeIconLight(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIcon(TYPE_WIKIPAGE, icons.wikisGrey());
+    registerContentTypeIconLight(TYPE_FOLDER, icons.folderWhite());
     registerContentTypeIconLight(TYPE_ROOT, icons.wikisWhite());
-    registerContentTypeIconLight(TYPE_WIKIPAGE, navResources.wikipage());
+    registerContentTypeIconLight(TYPE_WIKIPAGE, icons.wikisWhite());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessages(TYPE_FOLDER, i18n.t(EMPTY_FOLDER));
     registerEmptyMessages(TYPE_ROOT, i18n.t(EMPTY_FOLDER));

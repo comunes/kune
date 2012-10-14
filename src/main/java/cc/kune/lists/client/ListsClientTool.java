@@ -43,7 +43,8 @@ public class ListsClientTool extends FoldableAbstractClientTool {
         TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("Lists behave similarly to a mailing list or a forum (but minimizing emails). You can subscribe and discuss about specific topics"),
-        icons.listsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
+        icons.listsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources,
+        history);
     this.icons = icons;
 
     // registerAclEditableTypes();
@@ -66,11 +67,11 @@ public class ListsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_LIST);
-    registerContentTypeIcon(TYPE_ROOT, icons.listsWhite());
-    registerContentTypeIcon(TYPE_LIST, navResources.list());
+    registerContentTypeIcon(TYPE_ROOT, icons.listsGrey());
+    registerContentTypeIcon(TYPE_LIST, icons.listsGrey());
     registerContentTypeIcon(TYPE_POST, navResources.email());
     registerContentTypeIconLight(TYPE_ROOT, icons.listsWhite());
-    registerContentTypeIconLight(TYPE_LIST, navResources.list());
+    registerContentTypeIconLight(TYPE_LIST, icons.listsWhite());
     registerContentTypeIconLight(TYPE_POST, navResources.email());
     final String noWave = i18n.t("There is nothing posted yet. Post something");
     final String noList = i18n.t("There isn't any list, you can create one");

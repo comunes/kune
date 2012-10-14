@@ -20,7 +20,7 @@
 package cc.kune.wiki.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.NewContainerMenuItem;
 import cc.kune.wiki.shared.WikiToolConstants;
 
@@ -30,8 +30,8 @@ public class NewFolderMenuItem extends NewContainerMenuItem {
 
   @Inject
   public NewFolderMenuItem(final I18nTranslationService i18n, final NewContainerAction action,
-      final NavResources res, final WikiFolderNewMenu wikiFolderNewMenu) {
-    super(i18n, action, res.wikiAdd(), i18n.t("New folder"),
+      final IconicResources res, final WikiFolderNewMenu wikiFolderNewMenu) {
+    super(i18n, action, res.folderAdd(), i18n.t("New folder"),
         i18n.t("Create a new folder. A folder will be a 'section' in the public web"),
         i18n.t("New folder"), WikiToolConstants.TYPE_FOLDER, wikiFolderNewMenu.get());
   }

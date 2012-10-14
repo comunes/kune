@@ -21,7 +21,7 @@ package cc.kune.docs.client.actions;
 
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentBtn;
@@ -32,8 +32,8 @@ public class NewDocIconBtn extends NewContentBtn {
 
   @Inject
   public NewDocIconBtn(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.pageAdd(), shorcutReg, i18n.t("New doc"), i18n.t("Create a New Document. "
+      final IconicResources res, final GlobalShortcutRegister shorcutReg) {
+    super(i18n, action, res.docsAdd(), shorcutReg, i18n.t("New doc"), i18n.t("Create a New Document. "
         + "If you choose to publish it, this document will appear as a new 'Page' in the public web"),
         i18n.t("New document"), DocsToolConstants.TYPE_DOCUMENT);
     withStyles("k-btn-min, k-fl");

@@ -21,7 +21,7 @@ package cc.kune.lists.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
@@ -29,10 +29,10 @@ public class NewListMenuItem extends MenuItemDescriptor {
 
   @Inject
   public NewListMenuItem(final I18nTranslationService i18n, final NewListAction action,
-      final NavResources res, final ListsNewMenu newMenu) {
+      final IconicResources res, final ListsNewMenu newMenu) {
     super(action);
     setParent(newMenu.get(), false);
-    withText(i18n.t("New list")).withToolTip(i18n.t("Create a new list")).withIcon(res.listadd()).withStyles(
+    withText(i18n.t("New list")).withToolTip(i18n.t("Create a new list")).withIcon(res.listsAdd()).withStyles(
         "k-def-docbtn, k-fl");
 
   }

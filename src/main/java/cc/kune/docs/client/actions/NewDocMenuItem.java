@@ -21,7 +21,7 @@ package cc.kune.docs.client.actions;
 
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentMenuItem;
@@ -32,12 +32,12 @@ public class NewDocMenuItem extends NewContentMenuItem {
 
   @Inject
   public NewDocMenuItem(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg,
+      final IconicResources res, final GlobalShortcutRegister shorcutReg,
       final DocsFolderNewMenu docsFolderNewMenu) {
     super(
         i18n,
         action,
-        res.pageAdd(),
+        res.docsAdd(),
         shorcutReg,
         i18n.t("New document"),
         i18n.t("Create a New Document here. "

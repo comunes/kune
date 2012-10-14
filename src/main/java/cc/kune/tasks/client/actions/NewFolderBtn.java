@@ -20,7 +20,7 @@
 package cc.kune.tasks.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.NewContainerBtn;
 import cc.kune.tasks.shared.TasksToolConstants;
 
@@ -30,8 +30,8 @@ public class NewFolderBtn extends NewContainerBtn {
 
   @Inject
   public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
-      final NavResources res) {
-    super(i18n, action, res.taskfolderadd(), i18n.t("New task folder"), i18n.t("Create a new folder"),
+      final IconicResources res) {
+    super(i18n, action, res.folderAdd(), i18n.t("New task folder"), i18n.t("Create a new folder"),
         i18n.t("New task folder"), TasksToolConstants.TYPE_FOLDER);
   }
 

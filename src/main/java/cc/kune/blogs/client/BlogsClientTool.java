@@ -44,7 +44,8 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
         TOOL_NAME,
         i18n.t(BlogsToolConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
-        icons.blogsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
+        icons.blogsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources,
+        history);
     this.icons = icons;
 
     // registerAclEditableTypes();
@@ -68,10 +69,10 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_BLOG);
     registerContentTypeIcon(TYPE_ROOT, icons.blogsGrey());
-    registerContentTypeIcon(TYPE_BLOG, navResources.blog());
+    registerContentTypeIcon(TYPE_BLOG, icons.blogsGrey());
     registerContentTypeIcon(TYPE_POST, navResources.post());
     registerContentTypeIconLight(TYPE_ROOT, icons.blogsWhite());
-    registerContentTypeIconLight(TYPE_BLOG, navResources.blog());
+    registerContentTypeIconLight(TYPE_BLOG, icons.blogsWhite());
     registerContentTypeIconLight(TYPE_POST, navResources.post());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any blog, you can create one"));

@@ -21,7 +21,7 @@ package cc.kune.lists.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.NewContainerBtn;
 
 import com.google.inject.Inject;
@@ -30,9 +30,10 @@ public class NewListBtn extends ButtonDescriptor {
   // Why not to use NewContainerBtn?
 
   @Inject
-  public NewListBtn(final I18nTranslationService i18n, final NewListAction action, final NavResources res) {
+  public NewListBtn(final I18nTranslationService i18n, final NewListAction action,
+      final IconicResources res) {
     super(action);
-    withText(i18n.t("New list")).withToolTip(i18n.t("Create a new list")).withIcon(res.listadd()).withStyles(
+    withText(i18n.t("New list")).withToolTip(i18n.t("Create a new list")).withIcon(res.listsAdd()).withStyles(
         "k-def-docbtn, k-fl").withId(NewContainerBtn.BTN_ID);
   }
 

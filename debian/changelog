@@ -6,8 +6,9 @@ kune (0.2.0+b31) unstable; urgency=low
   * More session exceptions where checking wave session vs kune
   * CLOSED - task #353: Removing tool "Documents" blocks access to group
   * Updated languages, added Polish
+  * Iconic widely used
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 13 Oct 2012 11:40:51 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 14 Oct 2012 17:09:40 +0200
 
 kune (0.2.0+b30) unstable; urgency=low
 

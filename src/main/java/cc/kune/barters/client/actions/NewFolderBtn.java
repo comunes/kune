@@ -21,7 +21,7 @@ package cc.kune.barters.client.actions;
 
 import cc.kune.barters.shared.BartersToolConstants;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.NewContainerBtn;
 
 import com.google.inject.Inject;
@@ -30,7 +30,7 @@ public class NewFolderBtn extends NewContainerBtn {
 
   @Inject
   public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
-      final NavResources res) {
+      final IconicResources res) {
     super(i18n, action, res.folderAdd(), i18n.t("New folder"), i18n.t("Create a new folder"),
         i18n.t("New folder"), BartersToolConstants.TYPE_FOLDER);
   }

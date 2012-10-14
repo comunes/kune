@@ -22,7 +22,7 @@ package cc.kune.events.client.actions;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.events.client.actions.EventAddMenuItem.EventAddAction;
 
 import com.google.inject.Inject;
@@ -31,9 +31,9 @@ public class NewEventBtn extends ButtonDescriptor {
 
   @Inject
   public NewEventBtn(final I18nTranslationService i18n, final EventAddAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg) {
+      final IconicResources res, final GlobalShortcutRegister shorcutReg) {
     super(i18n.t("New event"), action);
-    withIcon(res.calendarAdd()).withToolTip(i18n.t("Create a New Event"));
+    withIcon(res.eventsAdd()).withToolTip(i18n.t("Create a New Event"));
     action.setOpenAfterCreation(true);
   }
 

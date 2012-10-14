@@ -48,8 +48,8 @@ public class ChatClientTool extends FoldableAbstractClientTool {
         i18n.t("chatrooms"),
         i18n.t(
             "A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from [%s] or other sites (compatible with Gmail chat)",
-            i18n.getSiteCommonName()), icons.chatsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry,
-        i18n, navResources, history);
+            i18n.getSiteCommonName()), icons.chatsWhite(), AccessRolDTO.Viewer, toolSelector,
+        cntCapRegistry, i18n, navResources, history);
     this.res = res;
     this.icons = icons;
     registerIcons();
@@ -66,7 +66,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
     registerContentTypeIcon(TYPE_ROOT, icons.chatsGrey());
     registerContentTypeIcon(TYPE_ROOM, icons.chatsGrey());
     registerContentTypeIconLight(TYPE_ROOT, icons.chatsWhite());
-    registerContentTypeIconLight(TYPE_ROOM, res.groupChat());
+    registerContentTypeIconLight(TYPE_ROOM, icons.chatsWhite());
     final String emptyMsg = i18n.tWithNT("See the archive of old conversations"
         + TextUtils.IN_DEVELOPMENT_P, "with Brackets");
     registerEmptyMessages(TYPE_ROOM, emptyMsg);

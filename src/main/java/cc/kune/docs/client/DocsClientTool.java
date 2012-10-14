@@ -69,10 +69,10 @@ public class DocsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
-    registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIcon(TYPE_FOLDER, icons.folderGrey());
     registerContentTypeIcon(TYPE_ROOT, icons.docsGrey());
     registerContentTypeIcon(TYPE_DOCUMENT, icons.docsGrey());
-    registerContentTypeIconLight(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIconLight(TYPE_FOLDER, icons.folderWhite());
     registerContentTypeIconLight(TYPE_ROOT, icons.docsWhite());
     registerContentTypeIconLight(TYPE_DOCUMENT, icons.docsWhite());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);

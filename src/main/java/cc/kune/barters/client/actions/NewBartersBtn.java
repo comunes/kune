@@ -22,7 +22,7 @@ package cc.kune.barters.client.actions;
 import cc.kune.barters.shared.BartersToolConstants;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentBtn;
 
@@ -32,8 +32,8 @@ public class NewBartersBtn extends NewContentBtn {
 
   @Inject
   public NewBartersBtn(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.barterAdd(), shorcutReg, i18n.t("New barter"),
+      final IconicResources res, final GlobalShortcutRegister shorcutReg) {
+    super(i18n, action, res.bartersAdd(), shorcutReg, i18n.t("New barter"),
         i18n.t("Create a new barter here"), i18n.t("New barter"), BartersToolConstants.TYPE_BARTER);
   }
 
