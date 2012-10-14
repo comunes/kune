@@ -69,7 +69,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     emptyLabel.setStyleName("k-empty-msg");
     emptyPanel.setStyleName("k-empty-folder-panel");
     emptyPanel.add(emptyLabel);
-    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistryLight());
   }
 
   @Override

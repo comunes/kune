@@ -40,12 +40,13 @@ public class DocsClientTool extends FoldableAbstractClientTool {
   @Inject
   public DocsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final IconicResources icons, HistoryWrapper history) {
+      final IconicResources icons, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(DocsToolConstants.ROOT_NAME),
         i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs could be static pages in your public web page in case you publish them"),
-        icons.docs(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
+        icons.docsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources,
+        history);
     this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -69,8 +70,11 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
-    registerContentTypeIcon(TYPE_ROOT, icons.docs());
-    registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
+    registerContentTypeIcon(TYPE_ROOT, icons.docsGrey());
+    registerContentTypeIcon(TYPE_DOCUMENT, icons.docsGrey());
+    registerContentTypeIconLight(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIconLight(TYPE_ROOT, icons.docsWhite());
+    registerContentTypeIconLight(TYPE_DOCUMENT, icons.docsWhite());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessagesNotLogged(TYPE_FOLDER, i18n.t(EMPTY));
     registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t(EMPTY));

@@ -38,6 +38,9 @@ public interface CoreResources extends CommonResources {
   @Source("add-green.png")
   ImageResource addGreen();
 
+  @Source("icons/add-participant.png")
+  ImageResource addParticipant();
+
   @Source("anybody.png")
   ImageResource anybody();
 
@@ -308,9 +311,11 @@ public interface CoreResources extends CommonResources {
   @Source("chat-dot-offline-small.png")
   ImageResource chatDotOfflineSmall();
 
+  @Override
   @Source("checked.png")
   ImageResource checked();
 
+  @Override
   @Source("clear.png")
   ImageResource clear();
 
@@ -344,9 +349,6 @@ public interface CoreResources extends CommonResources {
   @Source("emblem-system.png")
   ImageResource emblemSystem();
 
-  @Source("emite-room.png")
-  ImageResource emiteRoom();
-
   @Source("everybody.png")
   ImageResource everybody();
 
@@ -374,6 +376,7 @@ public interface CoreResources extends CommonResources {
   @Source("info-light.png")
   ImageResource infoLight();
 
+  @Override
   @Source("kune-close.png")
   ImageResource kuneClose();
 
@@ -452,6 +455,7 @@ public interface CoreResources extends CommonResources {
   @Source("radiochecked.png")
   ImageResource radiochecked();
 
+  @Override
   @Source("radiounchecked.png")
   ImageResource radioUnChecked();
 
@@ -530,6 +534,7 @@ public interface CoreResources extends CommonResources {
   @Source("triangle.gif")
   ImageResource triangle();
 
+  @Override
   @Source("unchecked.png")
   ImageResource unChecked();
 
@@ -538,8 +543,5 @@ public interface CoreResources extends CommonResources {
 
   @Source("wave-icon.png")
   ImageResource waveIcon();
-
-  @Source("icons/add-participant.png")
-  ImageResource addParticipant();
 
 }

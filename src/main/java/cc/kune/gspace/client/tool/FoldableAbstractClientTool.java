@@ -41,7 +41,7 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
   public FoldableAbstractClientTool(final String shortName, final String longName, final String tooltip,
       final ImageResource icon, final AccessRolDTO visibleForRol, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry contentCapabilitiesRegistry, final I18nTranslationService i18n,
-      final NavResources navResources, HistoryWrapper history) {
+      final NavResources navResources, final HistoryWrapper history) {
     super(shortName, longName, tooltip, icon, visibleForRol, toolSelector, history);
     this.contentCapabilitiesRegistry = contentCapabilitiesRegistry;
     this.i18n = i18n;
@@ -75,6 +75,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(contentTypeId, icon);
   }
 
+  public void registerContentTypeIconLight(final String contentTypeId, final Object icon) {
+    contentCapabilitiesRegistry.getIconsRegistryLight().registerContentTypeIcon(contentTypeId, icon);
+  }
+
   protected void registerDragableTypes(final String... typeIds) {
     contentCapabilitiesRegistry.getDragable().register(typeIds);
   }
@@ -85,6 +89,10 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
   protected void registerEmailSubscribeAbleTypes(final String... typeIds) {
     contentCapabilitiesRegistry.getEmailSubscribeAble().register(typeIds);
+  }
+
+  public void registerEmptyFolderTutorial(final String contentTypeId) {
+    contentCapabilitiesRegistry.getEmptyFolderTutorialRegistry().register(contentTypeId);
   }
 
   public void registerEmptyMessages(final String contentTypeId, final String message) {
@@ -125,10 +133,6 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
   protected void registerTranslatableTypes(final String... typeIds) {
     contentCapabilitiesRegistry.getTranslatable().register(typeIds);
-  }
-
-  public void registerEmptyFolderTutorial(final String contentTypeId) {
-    contentCapabilitiesRegistry.getEmptyFolderTutorialRegistry().register(contentTypeId);
   }
 
   protected void registerUploadTypesAndMimes(final String typeUploadedfile) {

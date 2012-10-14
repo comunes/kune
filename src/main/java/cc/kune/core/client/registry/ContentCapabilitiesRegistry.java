@@ -20,6 +20,7 @@
 package cc.kune.core.client.registry;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class ContentCapabilitiesRegistry {
 
@@ -30,9 +31,11 @@ public class ContentCapabilitiesRegistry {
   private final DragableRegistry dragable;
   private final DropableRegistry dropable;
   private final EmailSubscribeAbleRegistry emailSubscribeAble;
+  private final EmptyFolderTutorialRegistry emptyFolderTutorialRegistry;
   private final EmptyMessagesRegistry emptyMessagesRegistry;
   private final EmptyMessagesRegistry emptyMessagesRegistryNotLogged;
   private final IconsRegistry iconsRegistry;
+  private final IconsRegistry iconsRegistryLight;
   private final LicensableRegistry licensable;
   private final NewMenusForTypeIdsRegistry newMenus;
   private final PublishModerableRegistry publishModerable;
@@ -41,7 +44,6 @@ public class ContentCapabilitiesRegistry {
   private final ShowDeletedRegistry showDeleted;
   private final TageableRegistry tageable;
   private final TranslatableRegistry translatable;
-  private final EmptyFolderTutorialRegistry emptyFolderTutorialRegistry;
   private final VersionableRegistry versionable;
   private final XmppComentableRegistry xmppComentable;
   private final XmppNotifyCapableRegistry xmppNotifyCapable;
@@ -49,7 +51,7 @@ public class ContentCapabilitiesRegistry {
   @Inject
   public ContentCapabilitiesRegistry(final AuthorableRegistry authorableRegistry,
       final NewMenusForTypeIdsRegistry newMenus, final AclEditableRegistry aclEditableRegistry,
-      final IconsRegistry iconsRegistry, final CanBeHomepageRegistry canBeHomepage,
+      final Provider<IconsRegistry> iconsRegistry, final CanBeHomepageRegistry canBeHomepage,
       final ComentableRegistry comentable, final DragableRegistry dragable,
       final DropableRegistry dropable, final EmailSubscribeAbleRegistry emailSubscribeAble,
       final LicensableRegistry licensable, final PublishModerableRegistry publishModerable,
@@ -63,7 +65,8 @@ public class ContentCapabilitiesRegistry {
     this.authorable = authorableRegistry;
     this.newMenus = newMenus;
     this.aclEditable = aclEditableRegistry;
-    this.iconsRegistry = iconsRegistry;
+    this.iconsRegistry = iconsRegistry.get();
+    this.iconsRegistryLight = iconsRegistry.get();
     this.canBeHomepage = canBeHomepage;
     this.comentable = comentable;
     this.dragable = dragable;
@@ -116,6 +119,10 @@ public class ContentCapabilitiesRegistry {
     return emailSubscribeAble;
   }
 
+  public EmptyFolderTutorialRegistry getEmptyFolderTutorialRegistry() {
+    return emptyFolderTutorialRegistry;
+  }
+
   public EmptyMessagesRegistry getEmptyMessagesRegistry() {
     return emptyMessagesRegistry;
   }
@@ -126,6 +133,10 @@ public class ContentCapabilitiesRegistry {
 
   public IconsRegistry getIconsRegistry() {
     return iconsRegistry;
+  }
+
+  public IconsRegistry getIconsRegistryLight() {
+    return iconsRegistryLight;
   }
 
   public LicensableRegistry getLicensable() {
@@ -158,10 +169,6 @@ public class ContentCapabilitiesRegistry {
 
   public TranslatableRegistry getTranslatable() {
     return translatable;
-  }
-
-  public EmptyFolderTutorialRegistry getEmptyFolderTutorialRegistry() {
-    return emptyFolderTutorialRegistry;
   }
 
   public VersionableRegistry getVersionable() {

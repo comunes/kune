@@ -40,12 +40,12 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final IconicResources icons, HistoryWrapper history) {
+      final IconicResources icons, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
-        icons.tasks(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
+        icons.tasksWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
     this.icons = icons;
 
     // registerAclEditableTypes();
@@ -68,9 +68,12 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
-    registerContentTypeIcon(TYPE_ROOT, icons.tasks());
+    registerContentTypeIcon(TYPE_ROOT, icons.tasksGrey());
     registerContentTypeIcon(TYPE_FOLDER, navResources.taskfolder());
     registerContentTypeIcon(TYPE_TASK, navResources.task());
+    registerContentTypeIconLight(TYPE_ROOT, icons.tasksWhite());
+    registerContentTypeIconLight(TYPE_FOLDER, navResources.taskfolder());
+    registerContentTypeIconLight(TYPE_TASK, navResources.task());
     registerContentTypeIcon(TYPE_TASK, ContentStatus.inTheDustbin, navResources.taskdone());
     final String noTaskLogged = i18n.t(NO_TASK + ", create one");
     final String noTaskNotLogged = i18n.t(NO_TASK);

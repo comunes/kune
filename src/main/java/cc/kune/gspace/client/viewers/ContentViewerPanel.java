@@ -90,15 +90,17 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   @UiField
   InlineHTML onlyViewPanel;
 
+  private final boolean onlyWebClient;
+
   private ProfileManager profiles;
 
   private final StateManager stateManager;
 
   /** The wave panel, if a wave is open. */
   private CustomStagesProvider wave;
-
   private final WaveClientProvider waveClientProv;
   private ImplPanel waveHolder;
+
   @UiField
   ImplPanel waveHolderParent;
 
@@ -107,8 +109,6 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
   private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   private final Widget widget;
-
-  private boolean onlyWebClient;
 
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
@@ -122,7 +122,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     this.dropController = dropController;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     widget = uiBinder.createAndBindUi(this);
-    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistryLight());
     eventBus.addHandler(WaveClientClearEvent.getType(),
         new WaveClientClearEvent.WaveClientClearHandler() {
           @Override

@@ -78,8 +78,8 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   private int clientX;
   private int clientY;
   private ContentTitleWidget contentTitle;
-  private PopupPanel tooltipPanel;
   private Tooltip tooltip;
+  private PopupPanel tooltipPanel;
 
   @Inject
   public CalendarViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
@@ -106,7 +106,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
         }
       }
     });
-    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistryLight());
     Window.addResizeHandler(new ResizeHandler() {
       @Override
       public void onResize(final ResizeEvent event) {
@@ -118,7 +118,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     addMouseOverHandler(new MouseOverHandler<Appointment>() {
       @Override
       public void onMouseOver(final MouseOverEvent<Appointment> event) {
-        Element element = (Element) event.getElement();
+        final Element element = (Element) event.getElement();
         tooltipPanel.setPopupPosition(DOM.getAbsoluteLeft(element), DOM.getAbsoluteTop(element)
             + element.getOffsetHeight());
         tooltipPanel.show();
@@ -131,10 +131,6 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
         // NotifyUser.info("On mouse");
       }
     });
-  }
-
-  public void setOnMouseOverTooltipText(String text) {
-    tooltip.setText(text);
   }
 
   @Override
@@ -296,6 +292,11 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
   @Override
   public void setDate(final Date date) {
     calendar.setDate(date);
+  }
+
+  @Override
+  public void setOnMouseOverTooltipText(final String text) {
+    tooltip.setText(text);
   }
 
   @Override

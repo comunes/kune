@@ -39,12 +39,12 @@ public class BartersClientTool extends FoldableAbstractClientTool {
   @Inject
   public BartersClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final IconicResources icons, HistoryWrapper history) {
+      final IconicResources icons, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t("barters"),
         i18n.t("A decentralized way to offer (or ask for) services and goods to your groups or to anyone. Bartering means the exchange of goods by the agreement of two people"),
-        icons.barters(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
+        icons.bartersWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
     this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -68,8 +68,11 @@ public class BartersClientTool extends FoldableAbstractClientTool {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
     registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
-    registerContentTypeIcon(TYPE_ROOT, icons.barters());
+    registerContentTypeIcon(TYPE_ROOT, icons.bartersGrey());
     registerContentTypeIcon(TYPE_BARTER, navResources.barter());
+    registerContentTypeIconLight(TYPE_FOLDER, navResources.folder());
+    registerContentTypeIconLight(TYPE_ROOT, icons.bartersWhite());
+    registerContentTypeIconLight(TYPE_BARTER, navResources.barter());
     registerEmptyMessages(TYPE_FOLDER,
         i18n.t(THERE_ISN_T_ANY_BARTER + "You can create some of them here"));
     registerEmptyMessages(TYPE_ROOT, i18n.t(THERE_ISN_T_ANY_BARTER));

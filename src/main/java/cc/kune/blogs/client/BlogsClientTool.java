@@ -39,12 +39,12 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
   @Inject
   public BlogsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final IconicResources icons, HistoryWrapper history) {
+      final IconicResources icons, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(BlogsToolConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
-        icons.blogs(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
+        icons.blogsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
     this.icons = icons;
 
     // registerAclEditableTypes();
@@ -67,9 +67,12 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_BLOG);
-    registerContentTypeIcon(TYPE_ROOT, icons.blogs());
+    registerContentTypeIcon(TYPE_ROOT, icons.blogsGrey());
     registerContentTypeIcon(TYPE_BLOG, navResources.blog());
     registerContentTypeIcon(TYPE_POST, navResources.post());
+    registerContentTypeIconLight(TYPE_ROOT, icons.blogsWhite());
+    registerContentTypeIconLight(TYPE_BLOG, navResources.blog());
+    registerContentTypeIconLight(TYPE_POST, navResources.post());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any blog, you can create one"));
     registerEmptyMessages(TYPE_BLOG, i18n.t("This blog doesn't have any posts, you can create one"));

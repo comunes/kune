@@ -40,7 +40,7 @@ public class NoHomePageViewer implements ContentViewer {
       final ContentCapabilitiesRegistry capabilitiesRegistry) {
     this.gsArmor = gsArmor;
     this.i18n = i18n;
-    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistryLight());
   }
 
   @Override

@@ -20,13 +20,13 @@
 package cc.kune.chat.client.actions;
 
 import cc.kune.chat.client.ChatClient;
+import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -78,10 +78,10 @@ public class ChatAboutContentBtn extends MenuItemDescriptor {
   public static final String ID = "k-chatabout-btn";
 
   @Inject
-  public ChatAboutContentBtn(final ChatAboutContentAction action, final CoreResources res,
+  public ChatAboutContentBtn(final ChatAboutContentAction action, final ChatResources res,
       final ContentViewerOptionsMenu optionsMenu, final I18nTranslationService i18n) {
     super(action);
-    this.withIcon(res.emiteRoom()).withToolTip(i18n.t("Chat and comment on this")).withText(
+    this.withIcon(res.chat()).withToolTip(i18n.t("Chat and comment on this")).withText(
         i18n.t("Chat about")).withStyles("k-def-docbtn, k-fl").withId(ID).withParent(optionsMenu, false);
   }
 }

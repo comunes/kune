@@ -302,14 +302,12 @@
 }
 
 .oc-menu .gwt-MenuBar-vertical,.gwt-MenuBar-vertical {
-  background-color: #704f4f;
-  border: 2px solid #552200;
+  background-color: #ffe6d5;
+  border: 1px solid #552200;
+  border-top: 2px solid #552200;
   padding: 3px;
   font: 16px 'Ubuntu', arial;
-  color: white;
-  -webkit-border-top-right-radius: 5px;
-  -moz-border-radius-topright: 5px;
-  border-top-right-radius: 5px;
+  color: #333333;
   -webkit-border-bottom-right-radius: 5px;
   -moz-border-radius-bottomright: 5px;
   border-bottom-right-radius: 5px;
@@ -333,7 +331,6 @@
   padding: 4px 4px 3px !important;
 }
 
-
 .gwt-MenuItem-disabled div, .k-menuimtem-title-disabled div {
   color: grey;
 }
@@ -348,7 +345,14 @@
   -moz-user-select: none;
   -khtml-user-select: none;
   /* background-color: #c87137; */
-  color: white;
+  color: #333333;
+}
+
+.k-menuimtem-title {
+  color: #333333;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 2px 3px 2px 0;
 }
 
 .oc-button {
@@ -513,13 +517,6 @@ img.k-iconlabel-left {
 
 div.k-iconlabel {
   margin-top: -2px;
-}
-
-.k-menuimtem-title {
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 2px 3px 2px 0;
 }
 
 .k-tb-sep {

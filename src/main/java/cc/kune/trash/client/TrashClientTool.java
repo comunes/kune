@@ -22,7 +22,7 @@ package cc.kune.trash.client;
 import static cc.kune.trash.shared.TrashToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -34,12 +34,12 @@ import com.google.inject.Inject;
 public class TrashClientTool extends FoldableAbstractClientTool {
 
   private static final String EMPTY = "The trash is empty";
-  private final CoreResources res;
+  private final IconicResources res;
 
   @Inject
   public TrashClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final CoreResources res,
-      final NavResources navResources, HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources res,
+      final NavResources navResources, final HistoryWrapper history) {
     super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("You can drop here contents to delete then"),
         res.trashWhite(), AccessRolDTO.Editor, toolSelector, cntCapRegistry, i18n, navResources, history);
     this.res = res;
@@ -62,7 +62,8 @@ public class TrashClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOT, res.trashBlack());
+    registerContentTypeIcon(TYPE_ROOT, res.trashGrey());
+    registerContentTypeIconLight(TYPE_ROOT, res.trashWhite());
     final String trashEmpty = i18n.t(EMPTY);
     registerEmptyMessages(TYPE_ROOT, trashEmpty);
     registerEmptyMessagesNotLogged(TYPE_ROOT, trashEmpty);

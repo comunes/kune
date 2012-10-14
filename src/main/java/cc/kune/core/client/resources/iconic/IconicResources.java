@@ -25,26 +25,56 @@ import com.google.gwt.resources.client.ImageResource;
 public interface IconicResources extends ClientBundle {
 
   @Source("barters.png")
-  ImageResource barters();
+  ImageResource bartersWhite();
+
+  @Source("barters-g.png")
+  ImageResource bartersGrey();
 
   @Source("blogs.png")
-  ImageResource blogs();
+  ImageResource blogsWhite();
+
+  @Source("blogs-g.png")
+  ImageResource blogsGrey();
 
   @Source("chats.png")
-  ImageResource chats();
+  ImageResource chatsWhite();
+
+  @Source("chats-g.png")
+  ImageResource chatsGrey();
 
   @Source("docs.png")
-  ImageResource docs();
+  ImageResource docsWhite();
+
+  @Source("docs-g.png")
+  ImageResource docsGrey();
 
   @Source("events.png")
-  ImageResource events();
+  ImageResource eventsWhite();
+
+  @Source("events-g.png")
+  ImageResource eventsGrey();
 
   @Source("lists.png")
-  ImageResource lists();
+  ImageResource listsWhite();
+
+  @Source("lists-g.png")
+  ImageResource listsGrey();
 
   @Source("tasks.png")
-  ImageResource tasks();
+  ImageResource tasksWhite();
+
+  @Source("tasks-g.png")
+  ImageResource tasksGrey();
+
+  @Source("trash.png")
+  ImageResource trashWhite();
+
+  @Source("trash-g.png")
+  ImageResource trashGrey();
 
   @Source("wikis.png")
-  ImageResource wikis();
+  ImageResource wikisWhite();
+
+  @Source("wikis-g.png")
+  ImageResource wikisGrey();
 }

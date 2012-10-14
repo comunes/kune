@@ -41,14 +41,14 @@ public class ChatClientTool extends FoldableAbstractClientTool {
   @Inject
   public ChatClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final ChatResources res, final IconicResources icons, HistoryWrapper history) {
+      final ChatResources res, final IconicResources icons, final HistoryWrapper history) {
     // FIXME: change this in ChatConstants and in db via migration
     super(
         TOOL_NAME,
         i18n.t("chatrooms"),
         i18n.t(
             "A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from [%s] or other sites (compatible with Gmail chat)",
-            i18n.getSiteCommonName()), icons.chats(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry,
+            i18n.getSiteCommonName()), icons.chatsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry,
         i18n, navResources, history);
     this.res = res;
     this.icons = icons;
@@ -63,8 +63,10 @@ public class ChatClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_ROOM);
-    registerContentTypeIcon(TYPE_ROOT, icons.chats());
-    registerContentTypeIcon(TYPE_ROOM, res.groupChat());
+    registerContentTypeIcon(TYPE_ROOT, icons.chatsGrey());
+    registerContentTypeIcon(TYPE_ROOM, icons.chatsGrey());
+    registerContentTypeIconLight(TYPE_ROOT, icons.chatsWhite());
+    registerContentTypeIconLight(TYPE_ROOM, res.groupChat());
     final String emptyMsg = i18n.tWithNT("See the archive of old conversations"
         + TextUtils.IN_DEVELOPMENT_P, "with Brackets");
     registerEmptyMessages(TYPE_ROOM, emptyMsg);
