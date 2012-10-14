@@ -1206,12 +1206,12 @@
               <localWorkers>2</localWorkers>
               <!-- <localWorkers>1</localWorkers> Using all workers can temporarily
                 hang the mouse and isn't much faster -->
-              <extraJvmArgs>-Xmx1024m</extraJvmArgs>
+              <extraJvmArgs>-Xmx2048m</extraJvmArgs>
             </configuration>
             <executions>
               <execution>
                 <configuration>
-                  <extraJvmArgs>-Xmx1024M</extraJvmArgs>
+                  <extraJvmArgs>-Xmx2048M</extraJvmArgs>
                 </configuration>
                 <id>gwtcompile</id>
                 <phase>prepare-package</phase>
