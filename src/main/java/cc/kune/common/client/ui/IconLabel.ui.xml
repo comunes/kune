@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
   <ui:style>
     .label {
       text-decoration: none;
@@ -26,11 +27,12 @@
       outline: 0 none;
       display: table;
     }
+
   </ui:style>
   <g:FocusPanel styleName="{style.self}" ui:field="self">
     <g:FlowPanel styleName="{style.flow}" ui:field="flow">
-      <g:Image ui:field="iconLeft" url="" altText="" styleName="{style.tcell}" />
-      <g:Image ui:field="iconRight" url="" altText="" styleName="{style.tcell}" />
+      <g:Image ui:field="iconLeft" styleName="{style.tcell}" />
+      <g:Image ui:field="iconRight" styleName="{style.tcell}" />
       <g:Label ui:field="label" addStyleNames="{style.label} {style.tcell}" />
     </g:FlowPanel>
   </g:FocusPanel>

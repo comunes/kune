@@ -73,6 +73,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   public IconLabel(final String text) {
     initWidget(uiBinder.createAndBindUi(this));
+    setIconClear(iconLeft);
+    setIconClear(iconRight);
+    setIconFloats();
+    iconRight.setUrl(GWT.getModuleBaseURL() + "clear.cache.gif");
     label.setText(text);
     label.addStyleName("k-space-nowrap");
     label.setStylePrimaryName("k-iconlabel");
@@ -99,7 +103,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   }
 
   private void commonStyle(final Image icon, final String imgCss) {
-    icon.setUrl(GWT.getModuleBaseURL() + "/images/clear.gif");
+    setIconClear(icon);
     icon.setStyleName(imgCss);
     icon.addStyleName("oc-ico-pad");
   }
@@ -132,7 +136,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     return flow.remove(w);
   }
 
-  private void setFloats() {
+  private void setIconClear(final Image icon) {
+    icon.setUrl(GWT.getModuleBaseURL() + "clear.cache.gif");
+  }
+
+  private void setIconFloats() {
     // setting floats again, because with setResource we lost them
     setIconRTL(iconLeft, getTextDirection());
     setIconRTL(iconRight, getTextDirection());
@@ -165,7 +173,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.setResource(res);
     iconLeft.addStyleName("k-iconlabel-left");
     iconLeft.addStyleName("k-tcell");
-    setFloats();
+    setIconFloats();
     iconLeft.setVisible(true);
   }
 
@@ -174,7 +182,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconLeft.setSize(DEF, DEF);
     iconLeft.addStyleName("k-iconlabel-left");
     iconLeft.addStyleName("k-tcell");
-    setFloats();
+    setIconFloats();
     iconLeft.setVisible(true);
   }
 
@@ -182,7 +190,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     commonStyle(iconRight, imgCss);
     iconRight.addStyleName("k-iconlabel-right");
     iconRight.addStyleName("k-tcell");
-    setFloats();
+    setIconFloats();
     iconRight.setVisible(true);
   }
 
@@ -194,7 +202,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconRight.setResource(res);
     iconRight.addStyleName("k-iconlabel-right");
     iconRight.addStyleName("k-tcell");
-    setFloats();
+    setIconFloats();
     iconRight.setVisible(true);
   }
 
@@ -203,7 +211,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     iconRight.setSize(DEF, DEF);
     iconRight.addStyleName("k-iconlabel-right");
     iconRight.addStyleName("k-tcell");
-    setFloats();
+    setIconFloats();
     iconRight.setVisible(true);
   }
 
