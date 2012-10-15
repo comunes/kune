@@ -542,8 +542,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String newAlbum();
 
-  String newBarter();
-
   String newBlog();
 
   String newDoc();
@@ -1045,8 +1043,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String to();
 
   String today();
-
-  String toHelpWithTheTranslationOfThisSoftwarePleaseContactBeforeWithThisSiteAdministrators();
 
   String toJoinAChatroomYouNeedToBeOnline();
 
