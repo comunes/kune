@@ -2,8 +2,9 @@ kune (0.2.0+b32) precise; urgency=low
 
   * Translations updated
   * Chat icons updated 
+  * Some fixes in database initialization
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 16 Oct 2012 11:14:33 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 16 Oct 2012 13:52:22 +0200
 
 kune (0.2.0+b31) unstable; urgency=low
 
