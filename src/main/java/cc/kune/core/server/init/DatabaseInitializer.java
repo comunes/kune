@@ -112,8 +112,10 @@ public class DatabaseInitializer {
     contentManager.setStatus(defaultContent.getId(), ContentStatus.publishedOnline);
     contentManager.save(defaultContent);
 
-    userManager.reIndex();
-    groupManager.reIndex();
+    // This is not necessary with ehcache (I think). Even worst, the
+    // initialization hangs
+    // userManager.reIndex();
+    // groupManager.reIndex();
   }
 
   private void createLicenses() {
