@@ -28,7 +28,7 @@ import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreMessages;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.gspace.client.options.EntityOptionsView;
@@ -49,10 +49,10 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
   private final EntityUploaderForm uploader;
 
   public EntityOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,
-      final String panelId, final String buttonId, final String inputId, final NavResources res) {
+      final String panelId, final String buttonId, final String inputId, final IconicResources res) {
     super();
     this.i18n = i18n;
-    tabTitle = TabTitleGenerator.generate(res.picture(), "", TAB_ID);
+    tabTitle = TabTitleGenerator.generate(res.pictureWhite(), "", TAB_ID);
     uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, i18n.t("Choose"));
 
     initWidget(uploader);

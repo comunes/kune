@@ -20,7 +20,7 @@
 package cc.kune.gspace.client.options.style;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
 import com.google.inject.Inject;
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 public class GroupOptStylePanel extends EntityOptStylePanel implements GroupOptStyleView {
 
   @Inject
-  public GroupOptStylePanel(final I18nTranslationService i18n, final CoreResources res,
+  public GroupOptStylePanel(final I18nTranslationService i18n, final IconicResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
     super(i18n, res, styleSelector);
   }

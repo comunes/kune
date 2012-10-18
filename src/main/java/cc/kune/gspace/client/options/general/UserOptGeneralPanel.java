@@ -64,7 +64,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   public UserOptGeneralPanel(final I18nUITranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget, final LanguageSelectorPanel langSelector,
       final UserFieldFactory userFieldFactory) {
-    super(maskWidget, res.equalizer(), i18n.t("General"), i18n.t("You can change these values:"));
+    super(maskWidget, res.equalizerWhite(), i18n.t("General"), i18n.t("You can change these values:"));
     this.langSelector = langSelector;
     longName = userFieldFactory.createUserLongName(LONG_NAME_FIELD);
     add(longName);

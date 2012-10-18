@@ -28,6 +28,7 @@ import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 
 public class GwtIconLabelGui extends AbstractGuiItem {
@@ -76,6 +77,11 @@ public class GwtIconLabelGui extends AbstractGuiItem {
   @Override
   public void setIconBackground(final String color) {
     iconLabel.setLeftIconBackground(color);
+  }
+
+  @Override
+  public void setIconResource(final ImageResource icon) {
+    iconLabel.setLeftIconResource(icon);
   }
 
   @Override

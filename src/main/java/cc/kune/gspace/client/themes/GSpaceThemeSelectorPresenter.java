@@ -30,7 +30,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -68,14 +68,13 @@ public class GSpaceThemeSelectorPresenter {
   private final HashMap<String, MenuRadioItemDescriptor> itemMap;
   private final GSpaceThemeManager manager;
   private MenuDescriptor menu;
-  private final CoreResources res;
+  private final IconicResources res;
   private final Session session;
-
   private ActionExtensibleView view;
 
   @Inject
   public GSpaceThemeSelectorPresenter(final Session session, final I18nTranslationService i18n,
-      final CoreResources res, final EventBus eventBus, final GSpaceThemeManager manager,
+      final IconicResources res, final EventBus eventBus, final GSpaceThemeManager manager,
       final GSpaceThemeSelectorPanel view) {
     this.session = session;
     this.i18n = i18n;
@@ -114,7 +113,7 @@ public class GSpaceThemeSelectorPresenter {
   private void createMenu() {
     menu = new MenuDescriptor("");
     menu.putValue(Action.STYLES, "k-button");
-    menu.putValue(Action.SMALL_ICON, res.themeChoose());
+    menu.putValue(Action.SMALL_ICON, res.styleGrey());
   }
 
   private void createTheme(final GSpaceTheme theme) {

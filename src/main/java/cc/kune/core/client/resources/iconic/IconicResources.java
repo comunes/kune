@@ -63,6 +63,12 @@ public interface IconicResources extends ClientBundle {
   @Source("chats.png")
   ImageResource chatsWhite();
 
+  @Source("copyleft-g.png")
+  ImageResource copyleftGrey();
+
+  @Source("copyleft.png")
+  ImageResource copyleftWhite();
+
   @Source("del.png")
   ImageResource del();
 
@@ -87,8 +93,11 @@ public interface IconicResources extends ClientBundle {
   @Source("edit-g.png")
   ImageResource editGrey();
 
+  @Source("equalizer-g.png")
+  ImageResource equalizerGrey();
+
   @Source("equalizer.png")
-  ImageResource equalizer();
+  ImageResource equalizerWhite();
 
   @Source("event-add.png")
   ImageResource eventAdd();
@@ -144,8 +153,11 @@ public interface IconicResources extends ClientBundle {
   @Source("lists.png")
   ImageResource listsWhite();
 
+  @Source("lock-g.png")
+  ImageResource lockGrey();
+
   @Source("lock.png")
-  ImageResource lock();
+  ImageResource lockWhite();
 
   @Source("maximize.png")
   ImageResource maximize();
@@ -159,6 +171,21 @@ public interface IconicResources extends ClientBundle {
   @Source("move.png")
   ImageResource move();
 
+  @Source("no-copyleft-g.png")
+  ImageResource noCopyleftGrey();
+
+  @Source("no-copyleft.png")
+  ImageResource noCopyleftWhite();
+
+  @Source("picture-add.png")
+  ImageResource pictureAdd();
+
+  @Source("picture-g.png")
+  ImageResource pictureGrey();
+
+  @Source("picture.png")
+  ImageResource pictureWhite();
+
   @Source("prefs.png")
   ImageResource prefs();
 
@@ -170,6 +197,12 @@ public interface IconicResources extends ClientBundle {
 
   @Source("right-arrow.png")
   ImageResource rightArrow();
+
+  @Source("style-g.png")
+  ImageResource styleGrey();
+
+  @Source("style.png")
+  ImageResource styleWhite();
 
   @Source("task-done.png")
   ImageResource taskDone();

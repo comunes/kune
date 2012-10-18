@@ -161,7 +161,6 @@ public class ChatClientDefault implements ChatClient {
     this.shorcutRegister = shorcutRegister;
     this.chatOptions = chatOptions;
     this.chatResources = chatResources;
-    chatResources.css().ensureInjected();
     this.xmppSession = chatInstances.xmppSession;
     this.roster = chatInstances.roster;
     this.chatManager = chatInstances.chatManager;

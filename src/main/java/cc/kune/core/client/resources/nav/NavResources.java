@@ -88,7 +88,7 @@ public interface NavResources extends ClientBundle {
   ImageResource pageZip();
 
   @Source("picture.png")
-  ImageResource picture();
+  ImageResource pictureNotUsed();
 
   @Source("post.png")
   ImageResource post();

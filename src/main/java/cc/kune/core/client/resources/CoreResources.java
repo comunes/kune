@@ -183,9 +183,6 @@ public interface CoreResources extends CommonResources {
   @Source("copy.png")
   ImageResource copy();
 
-  @Source("copyleft.png")
-  ImageResource copyleft();
-
   @Source("cross.png")
   ImageResource cross();
 
@@ -247,20 +244,11 @@ public interface CoreResources extends CommonResources {
   @Source("nobody.png")
   ImageResource nobody();
 
-  @Source("no-copyleft.png")
-  ImageResource noCopyleft();
-
   @Source("nt.png")
   ImageResource nt();
 
   @Source("opentriangle.gif")
   ImageResource opentriangle();
-
-  @Source("person2-60.png")
-  ImageResource person260();
-
-  @Source("person-def.png")
-  ImageResource personDef();
 
   @Source("question32.png")
   ImageResource question32();
@@ -336,7 +324,7 @@ public interface CoreResources extends CommonResources {
   ImageResource step5();
 
   @Source("theme-choose.png")
-  ImageResource themeChoose();
+  ImageResource themeChooseNotUsed();
 
   @Source("triangle.gif")
   ImageResource triangle();

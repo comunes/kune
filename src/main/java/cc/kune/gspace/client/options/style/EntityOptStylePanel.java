@@ -27,7 +27,7 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.gspace.client.options.EntityOptionsView;
 import cc.kune.gspace.client.options.logo.EntityUploaderForm;
@@ -48,7 +48,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
       + "servlets/EntityBackgroundUploadManager";
   public static final String TAB_ID = "k-eodlp-style-id";
-  private final Label backgroundLabel;
+  private final IconLabel backgroundLabel;
   private final Image backImage;
   private final String changeImage;
   private final String chooseImage;
@@ -59,11 +59,10 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   private final IconLabel tabTitle;
   private final EntityUploaderForm uploader;
 
-  public EntityOptStylePanel(final I18nTranslationService i18n, final CoreResources res,
+  public EntityOptStylePanel(final I18nTranslationService i18n, final IconicResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
     this.i18n = i18n;
-    tabTitle = TabTitleGenerator.generate(res.themeChoose(), i18n.t("Style"), MAX_TABTITLE_LENGTH,
-        TAB_ID);
+    tabTitle = TabTitleGenerator.generate(res.styleWhite(), i18n.t("Style"), MAX_TABTITLE_LENGTH, TAB_ID);
     // super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     super.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
 
@@ -77,7 +76,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     flow.add(styleSelector);
     hasBackLabel = i18n.t("Current background image: ");
     noHasBacklabel = i18n.t("You can also upload a background:");
-    backgroundLabel = new Label(hasBackLabel);
+    backgroundLabel = new IconLabel(res.pictureGrey(), hasBackLabel);
     backgroundLabel.addStyleName("k-clear");
     chooseImage = i18n.t("Choose");
     changeImage = i18n.t("Change");

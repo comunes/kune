@@ -42,7 +42,7 @@ public class UserOptPassPanel extends EntityOptGeneralPanel implements UserOptPa
   @Inject
   public UserOptPassPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget, final UserFieldFactory userFieldFactory) {
-    super(maskWidget, res.lock(), i18n.t("Security"), i18n.t("Change your password:"));
+    super(maskWidget, res.lockWhite(), i18n.t("Security"), i18n.t("Change your password:"));
     currentPasswd = userFieldFactory.createUserPasswd(CURRENT_PASSWD_FIELD, i18n.t("Current password"));
     newPasswd = userFieldFactory.createUserPasswd(NEW_PASSWD_FIELD, i18n.t("New password"));
     newPasswdRepeated = userFieldFactory.createUserPasswd(NEW_PASSWD_REPEATED_FIELD,

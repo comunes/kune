@@ -20,7 +20,7 @@
 package cc.kune.gspace.client.options.logo;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.shared.FileConstants;
 
 import com.google.gwt.event.shared.EventBus;
@@ -32,7 +32,7 @@ public class GroupOptLogoPanel extends EntityOptLogoPanel implements GroupOptLog
 
   @Inject
   public GroupOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,
-      final NavResources res) {
+      final IconicResources res) {
     super(eventBus, i18n, PANEL_ID, BUTTON_ID, FileConstants.GROUP_LOGO_FIELD, res);
   }
 

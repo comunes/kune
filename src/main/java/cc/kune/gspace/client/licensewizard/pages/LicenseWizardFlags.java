@@ -23,7 +23,7 @@ import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -36,12 +36,11 @@ public class LicenseWizardFlags extends FlowPanel {
   private final IconLabel nonCopyleft;
   private final IconLabel nonCulturalWorks;
 
-  public LicenseWizardFlags(final CoreResources images, final CommonResources commonRes,
+  public LicenseWizardFlags(final IconicResources images, final CommonResources commonRes,
       final I18nTranslationService i18n) {
-    copyleft = new IconLabel(images.copyleft(), i18n.t("This is a copyleft license."));
-    nonCopyleft = new IconLabel(images.noCopyleft(), i18n.t("This is not a copyleft license."));
-    culturalWorks = new IconLabel(commonRes.info(),
-        i18n.t("This is appropriate for free cultural works."));
+    copyleft = new IconLabel(images.copyleftGrey(), i18n.t("This is a copyleft license."));
+    nonCopyleft = new IconLabel(images.noCopyleftGrey(), i18n.t("This is not a copyleft license."));
+    culturalWorks = new IconLabel(images.info(), i18n.t("This is appropriate for free cultural works."));
     nonCulturalWorks = new IconLabel(commonRes.alert(),
         i18n.t("This is not appropriate for free cultural works."));
     nonCommercialReasons = new IconLabel(commonRes.alert(),

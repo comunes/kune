@@ -43,7 +43,8 @@ public class CSSUtils {
     link.setHref(cssUrl);
     link.setMedia("screen");
     link.setTitle("dynamicLoadedSheet");
-    head.appendChild(link);
+    // head.appendChild(link);
+    head.insertAfter(head.getLastChild(), link);
     // you can use removeFromParent
     return link;
   }

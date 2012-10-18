@@ -23,7 +23,7 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.gspace.client.options.EntityOptionsView;
@@ -44,8 +44,9 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
   private final Image licenseImage;
   private final IconLabel tabTitle;
 
-  public EntityOptDefLicensePanel(final I18nTranslationService i18n, final CoreResources res) {
-    tabTitle = TabTitleGenerator.generate(res.copyleft(), i18n.t("License"), MAX_TABTITLE_LENGTH, TAB_ID);
+  public EntityOptDefLicensePanel(final I18nTranslationService i18n, final IconicResources res) {
+    tabTitle = TabTitleGenerator.generate(res.copyleftWhite(), i18n.t("License"), MAX_TABTITLE_LENGTH,
+        TAB_ID);
     final FlowPanel flow = new FlowPanel();
     final Label intro = new Label();
     intro.setWordWrap(true);

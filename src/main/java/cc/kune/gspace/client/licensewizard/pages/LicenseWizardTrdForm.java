@@ -23,7 +23,7 @@ import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleCallback;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.DefaultForm;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
@@ -57,7 +57,7 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
   private Radio permitModSaRadio;
 
   @Inject
-  public LicenseWizardTrdForm(final I18nTranslationService i18n, final CoreResources res,
+  public LicenseWizardTrdForm(final I18nTranslationService i18n, final IconicResources res,
       final CommonResources commonRes) {
     super.setFrame(true);
     super.setPadding(10);

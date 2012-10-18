@@ -20,14 +20,14 @@
 package cc.kune.gspace.client.options.license;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
 public class UserOptDefLicensePanel extends EntityOptDefLicensePanel implements UserOptDefLicenseView {
 
   @Inject
-  public UserOptDefLicensePanel(final I18nTranslationService i18n, final CoreResources res) {
+  public UserOptDefLicensePanel(final I18nTranslationService i18n, final IconicResources res) {
     super(i18n, res);
   }
 
