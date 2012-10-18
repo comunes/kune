@@ -1,8 +1,9 @@
 kune (0.2.0+b33) unstable; urgency=low
 
   * Old icons cleanup
+  * Added Basque and Galician language
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 18 Oct 2012 16:04:11 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 18 Oct 2012 21:52:39 +0200
 
 kune (0.2.0+b32) unstable; urgency=low
 
