@@ -4,8 +4,11 @@ kune (0.2.0+b32) precise; urgency=low
   * Chat icons updated 
   * Some fixes in database initialization
   * Add new icons based in iconic. Fix for #379
+  * Wave code updated
+  * Detect websocket under proxy (fix #371, #309)
+  * Alt-Shift-5 shortcut for strikethrough
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 18 Oct 2012 02:10:19 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 18 Oct 2012 11:14:13 +0200
 
 kune (0.2.0+b31) unstable; urgency=low
 
