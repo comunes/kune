@@ -22,7 +22,7 @@ package cc.kune.lists.client.actions;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
@@ -30,9 +30,9 @@ public class NewListPostIconMenuItem extends MenuItemDescriptor {
 
   @Inject
   public NewListPostIconMenuItem(final I18nTranslationService i18n, final NewListPostAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg, final ListsNewMenu menu) {
+      final IconicResources res, final GlobalShortcutRegister shorcutReg, final ListsNewMenu menu) {
     super(menu.get(), false, action);
-    this.withText(i18n.t("New post")).withToolTip(i18n.t("Create a new post")).withIcon(res.newemail()).withStyles(
-        "k-def-docbtn, k-fr");
+    this.withText(i18n.t("New post")).withToolTip(i18n.t("Create a new post")).withIcon(
+        res.listsPostAdd()).withStyles("k-def-docbtn, k-fr");
   }
 }

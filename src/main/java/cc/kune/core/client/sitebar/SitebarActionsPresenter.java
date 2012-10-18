@@ -32,6 +32,7 @@ import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -65,6 +66,7 @@ public class SitebarActionsPresenter extends
   public static final String SITE_OPTIONS_MENU = "kune-sop-om";
   private final CommonResources commonRes;
   private final I18nTranslationService i18n;
+  private final IconicResources icons;
   private final Provider<MyGroupsMenu> myGroupsMenu;
   private final Provider<SitebarNewGroupLink> newGroupLink;
   private final CoreResources res;
@@ -76,12 +78,14 @@ public class SitebarActionsPresenter extends
       final SitebarActionsProxy proxy, final I18nTranslationService i18n,
       final Provider<SitebarNewGroupLink> newGroupLink, final Provider<SitebarSignOutLink> signOutLink,
       final Provider<SitebarSignInLink> signInLink, final CoreResources res,
-      final CommonResources commonRes, final Provider<MyGroupsMenu> myGroupsMenu) {
+      final IconicResources icons, final CommonResources commonRes,
+      final Provider<MyGroupsMenu> myGroupsMenu) {
     super(eventBus, view, proxy);
     this.i18n = i18n;
     this.newGroupLink = newGroupLink;
     this.signOutLink = signOutLink;
     this.signInLink = signInLink;
+    this.icons = icons;
     this.myGroupsMenu = myGroupsMenu;
     this.res = res;
     this.commonRes = commonRes;
@@ -156,7 +160,7 @@ public class SitebarActionsPresenter extends
     wavePowered.putValue(Action.NAME, i18n.t("Apache Wave powered"));
     wavePowered.putValue(Action.SMALL_ICON, res.waveIcon());
     aboutAction.putValue(Action.NAME, i18n.t("About Kune"));
-    aboutAction.putValue(Action.SMALL_ICON, commonRes.info());
+    aboutAction.putValue(Action.SMALL_ICON, icons.info());
     errorAction.putValue(Action.NAME, i18n.t("Errors info"));
     errorAction.putValue(Action.SMALL_ICON, commonRes.important());
     faqAction.putValue(Action.NAME, i18n.t("Kune FAQ"));

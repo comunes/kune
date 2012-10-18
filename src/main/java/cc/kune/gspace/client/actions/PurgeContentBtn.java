@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
@@ -36,10 +36,10 @@ public class PurgeContentBtn extends ButtonDescriptor {
     private final ContentServiceHelper contentService;
 
     @Inject
-    public PurgeContentAction(final ContentServiceHelper contentService, final CoreResources res) {
+    public PurgeContentAction(final ContentServiceHelper contentService, final IconicResources res) {
       super(AccessRolDTO.Administrator, true);
       this.contentService = contentService;
-      this.withText(I18n.t("Delete permanently")).withIcon(res.cancel());
+      this.withText(I18n.t("Delete permanently")).withIcon(res.trashGrey());
     }
 
     @Override

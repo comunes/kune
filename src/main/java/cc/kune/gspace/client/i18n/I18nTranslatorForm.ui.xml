@@ -4,7 +4,7 @@
   ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
   ui:generateLocales='default'>
 
-  <ui:with field='res' type='cc.kune.core.client.resources.CoreResources'/>
+  <ui:with field='res' type='cc.kune.core.client.resources.iconic.IconicResources'/>
 
   <ui:style>
     .titles {
@@ -83,7 +83,7 @@
       <g:FlowPanel styleName="k-button"
         addStyleNames="{style.cell} {style.copyicon} k-button k-btn k-5corners">
         <g:PushButton ui:field='copyIcon' enabled='true'>
-          <g:upFace image='{res.arrowUndo}'/>
+          <g:upFace image='{res.undo}'/>
           <g:upHoveringFace/>
           <g:downFace/>
           <g:downHoveringFace/>

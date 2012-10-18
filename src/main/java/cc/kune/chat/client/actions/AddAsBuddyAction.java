@@ -26,7 +26,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreMessages;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -44,14 +44,14 @@ public class AddAsBuddyAction extends AbstractExtendedAction {
 
   @Inject
   public AddAsBuddyAction(final ChatClient chatEngine, final ChatInstances chatInstances,
-      final StateManager stateManager, final I18nTranslationService i18n, final CoreResources img,
+      final StateManager stateManager, final I18nTranslationService i18n, final IconicResources img,
       final Provider<SocialNetServiceAsync> snService, final Session session) {
     super();
     this.chatEngine = chatEngine;
     this.snService = snService;
     this.session = session;
     putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDY));
-    putValue(Action.SMALL_ICON, img.addGreen());
+    putValue(Action.SMALL_ICON, img.add());
   }
 
   @Override

@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
@@ -44,7 +44,7 @@ public class AddEntityToThisGroupAction extends SNRolAction {
 
   @Inject
   public AddEntityToThisGroupAction(final StateManager stateManager, final Session session,
-      final I18nTranslationService i18n, final CoreResources res,
+      final I18nTranslationService i18n, final IconicResources res,
       final Provider<SocialNetServiceAsync> snServiceProvider, final AddMemberSearchPanel searchPanel,
       final AccessRightsClientManager rightsClientManager) {
     super(stateManager, session, i18n, res, snServiceProvider, rightsClientManager,

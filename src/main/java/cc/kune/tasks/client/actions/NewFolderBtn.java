@@ -31,7 +31,7 @@ public class NewFolderBtn extends NewContainerBtn {
   @Inject
   public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
       final IconicResources res) {
-    super(i18n, action, res.folderAdd(), i18n.t("New task folder"), i18n.t("Create a new folder"),
+    super(i18n, action, res.tasksFolderAdd(), i18n.t("New task folder"), i18n.t("Create a new folder"),
         i18n.t("New task folder"), TasksToolConstants.TYPE_FOLDER);
   }
 

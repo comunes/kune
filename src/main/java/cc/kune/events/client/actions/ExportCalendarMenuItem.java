@@ -27,7 +27,7 @@ import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -67,9 +67,9 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
 
   @Inject
   public ExportCalendarMenuItem(final I18nTranslationService i18n, final ExportCalendarAction action,
-      final ContentViewerOptionsMenu optionsMenu, final NavResources res) {
+      final ContentViewerOptionsMenu optionsMenu, final IconicResources res) {
     super(action);
-    this.withText(i18n.t("Export this calendar")).withIcon(res.calendar()).withParent(optionsMenu, false);
+    this.withText(i18n.t("Export this calendar")).withIcon(res.mobile()).withParent(optionsMenu, false);
   }
 
 }

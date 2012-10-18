@@ -22,7 +22,7 @@ package cc.kune.blogs.client.actions;
 import cc.kune.blogs.shared.BlogsToolConstants;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.NewContentAction;
 import cc.kune.gspace.client.actions.NewContentMenuItem;
 
@@ -32,9 +32,10 @@ public class NewPostMenuItem extends NewContentMenuItem {
 
   @Inject
   public NewPostMenuItem(final I18nTranslationService i18n, final NewContentAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg, final BlogsNewMenu blogsNewMenu) {
-    super(i18n, action, res.blogAdd(), shorcutReg, i18n.t("New post"), i18n.t("Create a new blog post"),
-        i18n.t("New post"), BlogsToolConstants.TYPE_POST, blogsNewMenu.get());
+      final IconicResources res, final GlobalShortcutRegister shorcutReg, final BlogsNewMenu blogsNewMenu) {
+    super(i18n, action, res.blogPostAdd(), shorcutReg, i18n.t("New post"),
+        i18n.t("Create a new blog post"), i18n.t("New post"), BlogsToolConstants.TYPE_POST,
+        blogsNewMenu.get());
   }
 
 }

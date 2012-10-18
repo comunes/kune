@@ -21,7 +21,7 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
@@ -33,10 +33,10 @@ public class ContentViewerOptionsShareSubMenu extends SubMenuDescriptor {
   public static final String ID = "k-cnt-viewer-share-opt-submenu";
 
   @Inject
-  public ContentViewerOptionsShareSubMenu(final I18nTranslationService i18n, final CoreResources res,
+  public ContentViewerOptionsShareSubMenu(final I18nTranslationService i18n, final IconicResources res,
       final ContentViewerOptionsMenu parent) {
     super();
-    this.withText(i18n.t("Share")).withIcon(res.addGreen()).withId(ID).withParent(parent, false);
+    this.withText(i18n.t("Share")).withIcon(res.add()).withId(ID).withParent(parent, false);
   }
 
 }

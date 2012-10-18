@@ -20,7 +20,7 @@
 package cc.kune.wiki.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.gspace.client.actions.GoParentContainerBtn;
 import cc.kune.wiki.shared.WikiToolConstants;
@@ -31,7 +31,7 @@ public class GoParentFolderBtn extends GoParentContainerBtn {
 
   @Inject
   public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
-      final CoreResources res, final Session session) {
+      final IconicResources res, final Session session) {
     super(i18n, action, res, session, WikiToolConstants.TYPE_ROOT);
   }
 

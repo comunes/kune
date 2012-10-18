@@ -27,7 +27,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.MyGroupsChangedEvent;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
@@ -49,7 +49,7 @@ public class JoinGroupAction extends SNRolAction {
 
   @Inject
   public JoinGroupAction(final StateManager stateManager, final Session session,
-      final I18nTranslationService i18n, final CoreResources res, final EventBus eventBus,
+      final I18nTranslationService i18n, final IconicResources res, final EventBus eventBus,
       final Provider<SocialNetServiceAsync> snServiceProvider, final Provider<SignIn> signIn,
       final AccessRightsClientManager rightsClientManager) {
     super(stateManager, session, i18n, res, snServiceProvider, rightsClientManager, AccessRolDTO.Viewer,
@@ -58,7 +58,7 @@ public class JoinGroupAction extends SNRolAction {
     this.signIn = signIn;
     putValue(NAME, i18n.t("Join"));
     putValue(TOOLTIP, i18n.t("Request to Join in this group"));
-    putValue(Action.SMALL_ICON, res.addGreen());
+    putValue(Action.SMALL_ICON, res.add());
     putValue(Action.STYLES, "k-sn-join");
   }
 

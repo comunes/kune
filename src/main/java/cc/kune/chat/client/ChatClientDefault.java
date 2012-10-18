@@ -117,7 +117,7 @@ public class ChatClientDefault implements ChatClient {
     }
 
     public void setBlink(final boolean blink) {
-      final ImageResource icon = blink ? res.chatBlink() : res.chat();
+      final ImageResource icon = blink ? res.chatBlink() : res.chatNoBlink();
       putValue(Action.SMALL_ICON, icon);
       dialog.setIcon(AbstractImagePrototype.create(icon));
     }
@@ -252,7 +252,7 @@ public class ChatClientDefault implements ChatClient {
       chatIcon.setId(CHAT_CLIENT_ICON_ID);
       chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
       chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
-      chatIcon.putValue(Action.SMALL_ICON, chatResources.chat());
+      chatIcon.putValue(Action.SMALL_ICON, chatResources.chatNoBlink());
       chatIcon.putValue(Action.TOOLTIP, i18n.t("Show/hide the chat window"));
       final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
       shorcutRegister.put(shortcut, action);
@@ -282,7 +282,7 @@ public class ChatClientDefault implements ChatClient {
       dialog.setHideOnButtonClick(true);
       dialog.setCollapsible(true);
       dialog.setPosition(0, 0);
-      dialog.setIcon(AbstractImagePrototype.create(chatResources.chat()));
+      dialog.setIcon(AbstractImagePrototype.create(chatResources.chatNoBlink()));
       // dialog.getItem(0).getFocusSupport().setIgnore(true);
       initEmite();
     }

@@ -45,7 +45,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
         TOOL_NAME,
         i18n.t(DocsToolConstants.ROOT_NAME),
         i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs could be static pages in your public web page in case you publish them"),
-        icons.docsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources,
+        icons.docsRootWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources,
         history);
     this.icons = icons;
 
@@ -69,11 +69,11 @@ public class DocsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
+    registerContentTypeIcon(TYPE_ROOT, icons.docsRootGrey());
     registerContentTypeIcon(TYPE_FOLDER, icons.folderGrey());
-    registerContentTypeIcon(TYPE_ROOT, icons.docsGrey());
     registerContentTypeIcon(TYPE_DOCUMENT, icons.docsGrey());
+    registerContentTypeIconLight(TYPE_ROOT, icons.docsRootWhite());
     registerContentTypeIconLight(TYPE_FOLDER, icons.folderWhite());
-    registerContentTypeIconLight(TYPE_ROOT, icons.docsWhite());
     registerContentTypeIconLight(TYPE_DOCUMENT, icons.docsWhite());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessagesNotLogged(TYPE_FOLDER, i18n.t(EMPTY));

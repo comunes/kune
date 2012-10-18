@@ -22,7 +22,7 @@ package cc.kune.events.client.actions;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -41,13 +41,13 @@ public class EventOpenMenuItem extends MenuItemDescriptor {
     private final StateManager stateManager;
 
     @Inject
-    public EventEditAction(final NavResources res, final I18nTranslationService i18n,
+    public EventEditAction(final IconicResources res, final I18nTranslationService i18n,
         final Provider<CalendarViewer> calendar, final EventBus eventBus,
         final StateManager stateManager, final Session session, final AccessRightsClientManager rightsMan) {
       super(eventBus, session, calendar, AccessRolDTO.Viewer, false, true);
       this.calendar = calendar;
       this.stateManager = stateManager;
-      withText(i18n.t("Open the appointment")).withIcon(res.go());
+      withText(i18n.t("Open the appointment")).withIcon(res.rightArrow());
     }
 
     @Override

@@ -21,7 +21,7 @@ package cc.kune.lists.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.RefreshCurrentStateAction;
 
 import com.google.inject.Inject;
@@ -30,7 +30,7 @@ public class RefreshListMenuItem extends MenuItemDescriptor {
 
   @Inject
   public RefreshListMenuItem(final I18nTranslationService i18n, final RefreshCurrentStateAction action,
-      final OptionsListMenu optionsMenu, final NavResources res) {
+      final OptionsListMenu optionsMenu, final IconicResources res) {
     super(action);
     this.withText(i18n.t("Reload this")).withIcon(res.refresh()).withParent(optionsMenu, false);
   }

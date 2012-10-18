@@ -22,7 +22,7 @@ package cc.kune.gspace.client.options.general;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.UserFieldFactory;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -40,7 +40,7 @@ public class UserOptPassPanel extends EntityOptGeneralPanel implements UserOptPa
   private final TextField<String> newPasswdRepeated;
 
   @Inject
-  public UserOptPassPanel(final I18nTranslationService i18n, final CoreResources res,
+  public UserOptPassPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget, final UserFieldFactory userFieldFactory) {
     super(maskWidget, res.lock(), i18n.t("Security"), i18n.t("Change your password:"));
     currentPasswd = userFieldFactory.createUserPasswd(CURRENT_PASSWD_FIELD, i18n.t("Current password"));

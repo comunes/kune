@@ -27,7 +27,7 @@ import cc.kune.common.client.ui.dialogs.PromptTopDialog;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
 import cc.kune.common.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -60,7 +60,7 @@ public class EventAddMenuItem extends MenuItemDescriptor {
     private final StateManager stateManager;
 
     @Inject
-    public EventAddAction(final NavResources res, final I18nTranslationService i18n,
+    public EventAddAction(final IconicResources res, final I18nTranslationService i18n,
         final Provider<CalendarViewer> calendar, final Provider<ContentServiceAsync> contService,
         final Session session, final StateManager stateManager, final EventBus eventBus) {
       super(eventBus, session, calendar, AccessRolDTO.Editor, true, false);
@@ -69,7 +69,7 @@ public class EventAddMenuItem extends MenuItemDescriptor {
       this.contService = contService;
       this.session = session;
       this.stateManager = stateManager;
-      withText(i18n.t("Add an appointment")).withIcon(res.calendarAdd());
+      withText(i18n.t("Add an appointment")).withIcon(res.eventAdd());
     }
 
     @Override

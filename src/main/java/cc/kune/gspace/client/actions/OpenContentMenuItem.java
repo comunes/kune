@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 
@@ -48,9 +48,9 @@ public class OpenContentMenuItem extends MenuItemDescriptor {
   }
 
   public OpenContentMenuItem(final I18nTranslationService i18n, final OpenContentAction action,
-      final NavResources res) {
+      final IconicResources res) {
     super(action);
-    this.withText(i18n.t("Open")).withIcon(res.go());
+    this.withText(i18n.t("Open")).withIcon(res.rightArrow());
   }
 
 }

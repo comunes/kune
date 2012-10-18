@@ -69,10 +69,10 @@ public class ListsClientTool extends FoldableAbstractClientTool {
     // registerTutorial(TYPE_LIST);
     registerContentTypeIcon(TYPE_ROOT, icons.listsGrey());
     registerContentTypeIcon(TYPE_LIST, icons.listsGrey());
-    registerContentTypeIcon(TYPE_POST, navResources.email());
+    registerContentTypeIcon(TYPE_POST, icons.listsPostGrey());
     registerContentTypeIconLight(TYPE_ROOT, icons.listsWhite());
     registerContentTypeIconLight(TYPE_LIST, icons.listsWhite());
-    registerContentTypeIconLight(TYPE_POST, navResources.email());
+    registerContentTypeIconLight(TYPE_POST, icons.listsPostWhite());
     final String noWave = i18n.t("There is nothing posted yet. Post something");
     final String noList = i18n.t("There isn't any list, you can create one");
     final String noWaveNotLogged = i18n.t("There is nothing posted yet");

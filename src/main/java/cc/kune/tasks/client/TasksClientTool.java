@@ -70,12 +70,12 @@ public class TasksClientTool extends FoldableAbstractClientTool {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
     registerContentTypeIcon(TYPE_ROOT, icons.tasksGrey());
-    registerContentTypeIcon(TYPE_FOLDER, icons.folderGrey());
-    registerContentTypeIcon(TYPE_TASK, icons.tasksGrey());
+    registerContentTypeIcon(TYPE_FOLDER, icons.tasksFolderGrey());
+    registerContentTypeIcon(TYPE_TASK, icons.tasksNew());
     registerContentTypeIconLight(TYPE_ROOT, icons.tasksWhite());
-    registerContentTypeIconLight(TYPE_FOLDER, icons.folderWhite());
+    registerContentTypeIconLight(TYPE_FOLDER, icons.tasksFolderWhite());
     registerContentTypeIconLight(TYPE_TASK, icons.tasksWhite());
-    registerContentTypeIcon(TYPE_TASK, ContentStatus.inTheDustbin, navResources.taskdone());
+    registerContentTypeIcon(TYPE_TASK, ContentStatus.inTheDustbin, icons.taskDone());
     final String noTaskLogged = i18n.t(NO_TASK + ", create one");
     final String noTaskNotLogged = i18n.t(NO_TASK);
     registerEmptyMessages(TYPE_ROOT, noTaskLogged);

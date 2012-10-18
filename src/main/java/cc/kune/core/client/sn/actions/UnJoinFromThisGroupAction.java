@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -42,7 +42,7 @@ public class UnJoinFromThisGroupAction extends RolAction {
   private final Provider<SocialNetServiceHelper> snServiceProvider;
 
   @Inject
-  public UnJoinFromThisGroupAction(final I18nTranslationService i18n, final CoreResources res,
+  public UnJoinFromThisGroupAction(final I18nTranslationService i18n, final IconicResources res,
       final Provider<SocialNetServiceHelper> snServiceProvider,
       final AccessRightsClientManager rightsClientManager) {
     super(AccessRolDTO.Editor, true);

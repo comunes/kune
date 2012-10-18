@@ -70,10 +70,10 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
     // registerTutorial(TYPE_BLOG);
     registerContentTypeIcon(TYPE_ROOT, icons.blogsGrey());
     registerContentTypeIcon(TYPE_BLOG, icons.blogsGrey());
-    registerContentTypeIcon(TYPE_POST, navResources.post());
+    registerContentTypeIcon(TYPE_POST, icons.blogPostsGrey());
     registerContentTypeIconLight(TYPE_ROOT, icons.blogsWhite());
     registerContentTypeIconLight(TYPE_BLOG, icons.blogsWhite());
-    registerContentTypeIconLight(TYPE_POST, navResources.post());
+    registerContentTypeIconLight(TYPE_POST, icons.blogPostsWhite());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any blog, you can create one"));
     registerEmptyMessages(TYPE_BLOG, i18n.t("This blog doesn't have any posts, you can create one"));

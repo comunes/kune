@@ -19,9 +19,9 @@
  */
 package cc.kune.chat.client.actions;
 
+import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
 
 import com.google.inject.Inject;
 
@@ -29,8 +29,8 @@ public class OpenRoomMenuItem extends MenuItemDescriptor {
 
   @Inject
   public OpenRoomMenuItem(final I18nTranslationService i18n, final OpenChatAction action,
-      final NavResources res) {
+      final ChatResources res) {
     super(action);
-    this.withText(i18n.t("Enter to this room")).withIcon(res.room());
+    this.withText(i18n.t("Enter to this room")).withIcon(res.groupChat());
   }
 }

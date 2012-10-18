@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -72,9 +72,9 @@ public class SetAsHomePageMenuItem extends MenuItemDescriptor {
 
   @Inject
   public SetAsHomePageMenuItem(final I18nTranslationService i18n, final SetAsHomePageAction action,
-      final CoreResources res) {
+      final IconicResources res) {
     super(action);
-    this.withIcon(res.groupHome()).withText(i18n.t("Select as the homepage"));
+    this.withIcon(res.home()).withText(i18n.t("Select as the homepage"));
   }
 
 }

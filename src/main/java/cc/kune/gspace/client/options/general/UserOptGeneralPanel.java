@@ -22,7 +22,7 @@ package cc.kune.gspace.client.options.general;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.DefaultFormUtils;
 import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
@@ -61,10 +61,10 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   private final Button resendEmailVerifBtn;
 
   @Inject
-  public UserOptGeneralPanel(final I18nUITranslationService i18n, final CoreResources res,
+  public UserOptGeneralPanel(final I18nUITranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget, final LanguageSelectorPanel langSelector,
       final UserFieldFactory userFieldFactory) {
-    super(maskWidget, res.emblemSystem(), i18n.t("General"), i18n.t("You can change these values:"));
+    super(maskWidget, res.equalizer(), i18n.t("General"), i18n.t("You can change these values:"));
     this.langSelector = langSelector;
     longName = userFieldFactory.createUserLongName(LONG_NAME_FIELD);
     add(longName);

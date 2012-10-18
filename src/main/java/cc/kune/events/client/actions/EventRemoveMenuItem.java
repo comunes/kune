@@ -22,7 +22,7 @@ package cc.kune.events.client.actions;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
@@ -42,13 +42,13 @@ public class EventRemoveMenuItem extends MenuItemDescriptor {
     private final ContentServiceHelper contentService;
 
     @Inject
-    public EventEditAction(final CoreResources res, final Provider<CalendarViewer> calendar,
+    public EventEditAction(final IconicResources res, final Provider<CalendarViewer> calendar,
         final EventBus eventBus, final Session session, final I18nTranslationService i18n,
         final AccessRightsClientManager rightsMan, final ContentServiceHelper contentService) {
       super(eventBus, session, calendar, AccessRolDTO.Administrator, true, true);
       this.calendar = calendar;
       this.contentService = contentService;
-      withText(i18n.t("Remove this appointment")).withIcon(res.cancel());
+      withText(i18n.t("Remove this appointment")).withIcon(res.trashGrey());
     }
 
     @Override

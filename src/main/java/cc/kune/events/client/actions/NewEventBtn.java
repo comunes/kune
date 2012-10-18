@@ -33,7 +33,7 @@ public class NewEventBtn extends ButtonDescriptor {
   public NewEventBtn(final I18nTranslationService i18n, final EventAddAction action,
       final IconicResources res, final GlobalShortcutRegister shorcutReg) {
     super(i18n.t("New event"), action);
-    withIcon(res.eventsAdd()).withToolTip(i18n.t("Create a New Event"));
+    withIcon(res.eventAdd()).withToolTip(i18n.t("Create a New Event"));
     action.setOpenAfterCreation(true);
   }
 

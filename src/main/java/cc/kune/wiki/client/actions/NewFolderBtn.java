@@ -31,7 +31,7 @@ public class NewFolderBtn extends NewContainerBtn {
   @Inject
   public NewFolderBtn(final I18nTranslationService i18n, final NewContainerAction action,
       final IconicResources res) {
-    super(i18n, action, res.folderAdd(), i18n.t("New folder"),
+    super(i18n, action, res.wikisFolderAdd(), i18n.t("New folder"),
         i18n.t("Create a new folder. A folder will be a 'section' in the public web"),
         i18n.t("New folder"), WikiToolConstants.TYPE_FOLDER);
   }

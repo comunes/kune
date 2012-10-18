@@ -21,7 +21,7 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
@@ -30,7 +30,7 @@ public class RefreshContentMenuItem extends MenuItemDescriptor {
   @Inject
   public RefreshContentMenuItem(final I18nTranslationService i18n,
       final RefreshCurrentStateAction action, final ContentViewerOptionsMenu optionsMenu,
-      final NavResources res) {
+      final IconicResources res) {
     super(action);
     this.withText(i18n.t("Reload current page")).withIcon(res.refresh()).withParent(optionsMenu, false);
   }

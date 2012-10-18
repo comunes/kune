@@ -21,7 +21,7 @@ package cc.kune.lists.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
@@ -32,7 +32,7 @@ public class SubscribeToListBtn extends ButtonDescriptor {
 
   @Inject
   public SubscribeToListBtn(final I18nTranslationService i18n, final SubscriteToListAction action,
-      final Session session, final CoreResources res) {
+      final Session session, final IconicResources res) {
     super(action);
     final Boolean areYouMember = session.isLogged()
         && session.getContainerState().getAccessLists().getEditors().getList().contains(
@@ -45,7 +45,7 @@ public class SubscribeToListBtn extends ButtonDescriptor {
       withToolTip(i18n.t("Subscribe to this list"));
     } else {
       withText(i18n.t("Unsubscribe"));
-      withIcon(res.remove());
+      withIcon(res.del());
       withToolTip(i18n.t("Unsubscribe to this list"));
     }
     withId(ID);

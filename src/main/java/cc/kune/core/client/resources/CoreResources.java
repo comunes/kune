@@ -32,12 +32,6 @@ public interface CoreResources extends CommonResources {
   @Source("accept.png")
   ImageResource accept();
 
-  @Source("add.png")
-  ImageResource add();
-
-  @Source("add-green.png")
-  ImageResource addGreen();
-
   @Source("icons/add-participant.png")
   ImageResource addParticipant();
 
@@ -50,9 +44,6 @@ public interface CoreResources extends CommonResources {
   @Source("arrow-down-black.gif")
   ImageResource arrowDownBlack();
 
-  @Source("arrow-down-green.png")
-  ImageResource arrowDownGreen();
-
   @Source("arrowdownsitebar.gif")
   ImageResource arrowdownsitebar();
 
@@ -62,29 +53,11 @@ public interface CoreResources extends CommonResources {
   @Source("arrow-down-white.gif")
   ImageResource arrowDownWhite();
 
-  @Source("arrow_in.png")
-  ImageResource arrowIn();
-
-  @Source("arrow-left-green.png")
-  ImageResource arrowLeftGreen();
-
-  @Source("arrow_out.png")
-  ImageResource arrowOut();
-
   @Source("arrow-right-black.gif")
   ImageResource arrowRightBlack();
 
-  @Source("arrow-right-green.png")
-  ImageResource arrowRightGreen();
-
   @Source("arrow-right-white.gif")
   ImageResource arrowRightWhite();
-
-  @Source("arrow-undo.png")
-  ImageResource arrowUndo();
-
-  @Source("arrow-up-green.png")
-  ImageResource arrowUpGreen();
 
   @Source("browser-32.png")
   ImageResource browser32();
@@ -128,114 +101,6 @@ public interface CoreResources extends CommonResources {
   @Source("bullet_yellow.png")
   ImageResource bulletYellow();
 
-  @Source("button15cblue.png")
-  ImageResource button15cblue();
-
-  @Source("button15cdark.png")
-  ImageResource button15cdark();
-
-  @Source("button15clight.png")
-  ImageResource button15clight();
-
-  @Source("button15cxlight.png")
-  ImageResource button15cxlight();
-
-  @Source("button15lblue.png")
-  ImageResource button15lblue();
-
-  @Source("button15ldark.png")
-  ImageResource button15ldark();
-
-  @Source("button15llight.png")
-  ImageResource button15llight();
-
-  @Source("button15lxlight.png")
-  ImageResource button15lxlight();
-
-  @Source("button15rblue.png")
-  ImageResource button15rblue();
-
-  @Source("button15rdark.png")
-  ImageResource button15rdark();
-
-  @Source("button15rlight.png")
-  ImageResource button15rlight();
-
-  @Source("button15rxlight.png")
-  ImageResource button15rxlight();
-
-  @Source("button17cblue.png")
-  ImageResource button17cblue();
-
-  @Source("button17cdark.png")
-  ImageResource button17cdark();
-
-  @Source("button17clight.png")
-  ImageResource button17clight();
-
-  @Source("button17cxlight.png")
-  ImageResource button17cxlight();
-
-  @Source("button17lblue.png")
-  ImageResource button17lblue();
-
-  @Source("button17ldark.png")
-  ImageResource button17ldark();
-
-  @Source("button17llight.png")
-  ImageResource button17llight();
-
-  @Source("button17lxlight.png")
-  ImageResource button17lxlight();
-
-  @Source("button17rblue.png")
-  ImageResource button17rblue();
-
-  @Source("button17rdark.png")
-  ImageResource button17rdark();
-
-  @Source("button17rlight.png")
-  ImageResource button17rlight();
-
-  @Source("button17rxlight.png")
-  ImageResource button17rxlight();
-
-  @Source("button20cblue.png")
-  ImageResource button20cblue();
-
-  @Source("button20cdark.png")
-  ImageResource button20cdark();
-
-  @Source("button20clight.png")
-  ImageResource button20clight();
-
-  @Source("button20cxlight.png")
-  ImageResource button20cxlight();
-
-  @Source("button20lblue.png")
-  ImageResource button20lblue();
-
-  @Source("button20ldark.png")
-  ImageResource button20ldark();
-
-  @Source("button20llight.png")
-  ImageResource button20llight();
-
-  @Source("button20lxlight.png")
-  ImageResource button20lxlight();
-
-  @Source("button20rblue.png")
-  ImageResource button20rblue();
-
-  @Source("button20rdark.png")
-  ImageResource button20rdark();
-
-  @Source("button20rlight.png")
-  ImageResource button20rlight();
-
-  @Source("button20rxlight.png")
-  ImageResource button20rxlight();
-
   @Source("button-arrow-down.png")
   ImageResource buttonArrowDown();
 
@@ -266,11 +131,11 @@ public interface CoreResources extends CommonResources {
   @Source("bysa80x15.png")
   ImageResource bysa80x15();
 
-  @Source("cancel.png")
-  ImageResource cancel();
-
   @Source("cancel-32.png")
   ImageResource cancel32();
+
+  @Source("cancel.png")
+  ImageResource cancelNotUsed();
 
   @Source("charfontname.png")
   ImageResource charfontname();
@@ -312,15 +177,8 @@ public interface CoreResources extends CommonResources {
   ImageResource chatDotOfflineSmall();
 
   @Override
-  @Source("checked.png")
-  ImageResource checked();
-
-  @Override
   @Source("clear.png")
   ImageResource clear();
-
-  @Source("content_edit.png")
-  ImageResource contentEdit();
 
   @Source("copy.png")
   ImageResource copy();
@@ -337,23 +195,11 @@ public interface CoreResources extends CommonResources {
   @Source("core.css")
   Style css();
 
-  @Source("del.png")
-  ImageResource del();
-
-  @Source("del-green.png")
-  ImageResource delGreen();
-
   @Source("emblem-important.png")
   ImageResource emblemImportant();
 
-  @Source("emblem-system.png")
-  ImageResource emblemSystem();
-
   @Source("everybody.png")
   ImageResource everybody();
-
-  @Source("folder-go-up.gif")
-  ImageResource folderGoUp();
 
   @Source("folderpathmenu.gif")
   ImageResource folderpathmenu();
@@ -361,17 +207,8 @@ public interface CoreResources extends CommonResources {
   @Source("fontheight.png")
   ImageResource fontheight();
 
-  @Source("fullscreen.png")
-  ImageResource fullscreen();
-
   @Source("gnu-fdl.gif")
   ImageResource gnuFdl();
-
-  @Source("group-def-icon.png")
-  ImageResource groupDefIcon();
-
-  @Source("group-home.png")
-  ImageResource groupHome();
 
   @Source("info-light.png")
   ImageResource infoLight();
@@ -379,12 +216,6 @@ public interface CoreResources extends CommonResources {
   @Override
   @Source("kune-close.png")
   ImageResource kuneClose();
-
-  @Source("kune-external-window.png")
-  ImageResource kuneExternalWindow();
-
-  @Source("kune-help-translation-icon.png")
-  ImageResource kuneHelpTranslationIcon();
 
   @Source("kuneicon16.gif")
   ImageResource kuneicon16();
@@ -394,9 +225,6 @@ public interface CoreResources extends CommonResources {
 
   @Source("kune-logo-16px.png")
   ImageResource kuneLogo16px();
-
-  @Source("kune-preferences.png")
-  ImageResource kunePreferences();
 
   @Source("kune-search-ico.png")
   ImageResource kuneSearchIco();
@@ -416,18 +244,6 @@ public interface CoreResources extends CommonResources {
   @Source("loading-spiner.gif")
   ImageResource loadingSpiner();
 
-  @Source("lock.png")
-  ImageResource lock();
-
-  @Source("arrow_out.png")
-  ImageResource maximize();
-
-  @Source("arrow_in.png")
-  ImageResource minimize();
-
-  @Source("new-chat.gif")
-  ImageResource newChat();
-
   @Source("nobody.png")
   ImageResource nobody();
 
@@ -446,9 +262,6 @@ public interface CoreResources extends CommonResources {
   @Source("person-def.png")
   ImageResource personDef();
 
-  @Source("prefs.png")
-  ImageResource prefs();
-
   @Source("question32.png")
   ImageResource question32();
 
@@ -459,17 +272,11 @@ public interface CoreResources extends CommonResources {
   @Source("radiounchecked.png")
   ImageResource radioUnChecked();
 
-  @Source("remove.png")
-  ImageResource remove();
-
   @Source("rss-icon.png")
   ImageResource rssIcon();
 
   @Source("search-ico.png")
   ImageResource searchIco();
-
-  @Source("spin-kune-thund-green.gif")
-  ImageResource spinKuneThundGreen();
 
   @Source("splitter-vert-bar.gif")
   ImageResource splitterVertBar();
@@ -533,10 +340,6 @@ public interface CoreResources extends CommonResources {
 
   @Source("triangle.gif")
   ImageResource triangle();
-
-  @Override
-  @Source("unchecked.png")
-  ImageResource unChecked();
 
   @Source("unknown-60.png")
   ImageResource unknown60();

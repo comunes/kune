@@ -24,6 +24,9 @@ import com.google.gwt.resources.client.ImageResource;
 
 public interface IconicResources extends ClientBundle {
 
+  @Source("add.png")
+  ImageResource add();
+
   @Source("barters-add.png")
   ImageResource bartersAdd();
 
@@ -32,6 +35,15 @@ public interface IconicResources extends ClientBundle {
 
   @Source("barters.png")
   ImageResource bartersWhite();
+
+  @Source("blog-posts-add.png")
+  ImageResource blogPostAdd();
+
+  @Source("blog-posts-g.png")
+  ImageResource blogPostsGrey();
+
+  @Source("blog-posts.png")
+  ImageResource blogPostsWhite();
 
   @Source("blogs-add.png")
   ImageResource blogsAdd();
@@ -51,23 +63,47 @@ public interface IconicResources extends ClientBundle {
   @Source("chats.png")
   ImageResource chatsWhite();
 
+  @Source("del.png")
+  ImageResource del();
+
   @Source("docs-add.png")
   ImageResource docsAdd();
 
   @Source("docs-g.png")
   ImageResource docsGrey();
 
+  @Source("docs-root-g.png")
+  ImageResource docsRootGrey();
+
+  @Source("docs-root.png")
+  ImageResource docsRootWhite();
+
   @Source("docs.png")
   ImageResource docsWhite();
 
-  @Source("events-add.png")
-  ImageResource eventsAdd();
+  @Source("down-arrow.png")
+  ImageResource downArrow();
+
+  @Source("edit-g.png")
+  ImageResource editGrey();
+
+  @Source("equalizer.png")
+  ImageResource equalizer();
+
+  @Source("event-add.png")
+  ImageResource eventAdd();
+
+  @Source("event-g.png")
+  ImageResource eventGrey();
 
   @Source("events-g.png")
   ImageResource eventsGrey();
 
   @Source("events.png")
   ImageResource eventsWhite();
+
+  @Source("event.png")
+  ImageResource eventWhite();
 
   @Source("folder-add.png")
   ImageResource folderAdd();
@@ -78,23 +114,89 @@ public interface IconicResources extends ClientBundle {
   @Source("folder.png")
   ImageResource folderWhite();
 
+  @Source("forbiden.png")
+  ImageResource forbiden();
+
+  @Source("home.png")
+  ImageResource home();
+
+  @Source("info.png")
+  ImageResource info();
+
+  @Source("left-arrow.png")
+  ImageResource leftArrow();
+
   @Source("lists-add.png")
   ImageResource listsAdd();
 
   @Source("lists-g.png")
   ImageResource listsGrey();
 
+  @Source("lists-post-add.png")
+  ImageResource listsPostAdd();
+
+  @Source("lists-post-g.png")
+  ImageResource listsPostGrey();
+
+  @Source("lists-post.png")
+  ImageResource listsPostWhite();
+
   @Source("lists.png")
   ImageResource listsWhite();
+
+  @Source("lock.png")
+  ImageResource lock();
+
+  @Source("maximize.png")
+  ImageResource maximize();
+
+  @Source("minimize.png")
+  ImageResource minimize();
+
+  @Source("mobile.png")
+  ImageResource mobile();
+
+  @Source("move.png")
+  ImageResource move();
+
+  @Source("prefs.png")
+  ImageResource prefs();
+
+  @Source("refresh.png")
+  ImageResource refreh();
+
+  @Source("refresh.png")
+  ImageResource refresh();
+
+  @Source("right-arrow.png")
+  ImageResource rightArrow();
+
+  @Source("task-done.png")
+  ImageResource taskDone();
 
   @Source("tasks-add.png")
   ImageResource tasksAdd();
 
+  @Source("tasks-folder-add.png")
+  ImageResource tasksFolderAdd();
+
+  @Source("tasks-folder-g.png")
+  ImageResource tasksFolderGrey();
+
+  @Source("tasks-folder.png")
+  ImageResource tasksFolderWhite();
+
   @Source("tasks-g.png")
   ImageResource tasksGrey();
 
+  @Source("task-new.png")
+  ImageResource tasksNew();
+
   @Source("tasks.png")
   ImageResource tasksWhite();
+
+  @Source("tools.png")
+  ImageResource tools();
 
   @Source("trash-g.png")
   ImageResource trashGrey();
@@ -102,12 +204,33 @@ public interface IconicResources extends ClientBundle {
   @Source("trash.png")
   ImageResource trashWhite();
 
+  @Source("undo.png")
+  ImageResource undo();
+
+  @Source("up-arrow.png")
+  ImageResource upArrow();
+
   @Source("wikis-add.png")
   ImageResource wikisAdd();
+
+  @Source("wikis-folder-add.png")
+  ImageResource wikisFolderAdd();
+
+  @Source("wikis-folder-g.png")
+  ImageResource wikisFolderGrey();
+
+  @Source("wikis-folder.png")
+  ImageResource wikisFolderWhite();
 
   @Source("wikis-g.png")
   ImageResource wikisGrey();
 
   @Source("wikis.png")
   ImageResource wikisWhite();
+
+  @Source("world.png")
+  ImageResource world();
+
+  @Source("write.png")
+  ImageResource write();
 }

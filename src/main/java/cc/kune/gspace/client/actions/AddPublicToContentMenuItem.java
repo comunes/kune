@@ -20,7 +20,7 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
 import com.google.inject.Inject;
@@ -29,8 +29,9 @@ public class AddPublicToContentMenuItem extends AddMembersToContentMenuItem {
 
   @Inject
   public AddPublicToContentMenuItem(final I18nTranslationService i18n,
-      final AddMembersToContentAction action, final ContentViewerShareMenu menu, final CoreResources res) {
+      final AddMembersToContentAction action, final ContentViewerShareMenu menu,
+      final IconicResources res) {
     super(i18n.t("Allow any person to edit this"), SocialNetworkSubGroup.PUBLIC, action, menu, res);
-    this.withIcon(res.world16());
+    this.withIcon(res.world());
   }
 }

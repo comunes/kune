@@ -25,7 +25,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -46,13 +46,13 @@ public class WriteToAction extends AbstractExtendedAction {
   @Inject
   public WriteToAction(final Provider<ContentServiceAsync> contentService,
       final I18nTranslationService i18n, final Session session, final StateManager stateManager,
-      final NavResources res) {
+      final IconicResources res) {
     this.contentService = contentService;
     this.i18n = i18n;
     this.session = session;
     this.stateManager = stateManager;
     onlyToAdmins = false;
-    putValue(AbstractAction.SMALL_ICON, res.pageText());
+    putValue(AbstractAction.SMALL_ICON, res.write());
   }
 
   @Override

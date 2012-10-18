@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -33,11 +33,11 @@ public class ChangeToAdminAction extends AbstractExtendedAction {
   private final SocialNetServiceHelper snClientUtils;
 
   @Inject
-  public ChangeToAdminAction(final I18nTranslationService i18n, final CoreResources res,
+  public ChangeToAdminAction(final I18nTranslationService i18n, final IconicResources res,
       final SocialNetServiceHelper snClientUtils) {
     this.snClientUtils = snClientUtils;
     putValue(NAME, i18n.t("Change to administrator"));
-    putValue(Action.SMALL_ICON, res.arrowUpGreen());
+    putValue(Action.SMALL_ICON, res.upArrow());
   }
 
   @Override

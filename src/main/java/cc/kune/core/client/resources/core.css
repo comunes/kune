@@ -9,10 +9,6 @@
   margin-top: 2px;
 }
 
-/* @sprite div .k-icon-info { */
-/*   gwt-image: "info"; */
-/* } */
-
 @sprite div .k-icon-language {
   gwt-image: "language";
 }
@@ -25,22 +21,3 @@
   gwt-image: "bug";
 }
 
-@sprite div .k-icon-prefs {
-  gwt-image: "prefs";
-}
-
-@sprite div .k-icon-groupHome {
-  gwt-image: "groupHome";
-}
-
-@sprite div .k-icon-addGreen {
-  gwt-image: "addGreen";
-}
-
-@sprite div .k-icon-maximize {
-  gwt-image: "maximize";
-}
-
-@sprite div .k-icon-minimize {
-  gwt-image: "minimize";
-}

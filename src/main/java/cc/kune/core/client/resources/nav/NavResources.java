@@ -30,18 +30,6 @@ public interface NavResources extends ClientBundle {
   @Source("barter_add.png")
   ImageResource barterAdd();
 
-  @Source("blog.png")
-  ImageResource blog();
-
-  @Source("blog_add.png")
-  ImageResource blogAdd();
-
-  @Source("calendar.png")
-  ImageResource calendar();
-
-  @Source("calendar_add.png")
-  ImageResource calendarAdd();
-
   @Source("download.png")
   ImageResource download();
 
@@ -62,9 +50,6 @@ public interface NavResources extends ClientBundle {
 
   @Source("gallery_add.png")
   ImageResource galleryAdd();
-
-  @Source("go.png")
-  ImageResource go();
 
   @Source("list.png")
   ImageResource list();
@@ -94,7 +79,7 @@ public interface NavResources extends ClientBundle {
   ImageResource pagePps();
 
   @Source("page_text.png")
-  ImageResource pageText();
+  ImageResource pageTextWrite();
 
   @Source("page_word.png")
   ImageResource pageWord();
@@ -110,30 +95,6 @@ public interface NavResources extends ClientBundle {
 
   @Source("post_add.png")
   ImageResource postAdd();
-
-  @Source("refresh.png")
-  ImageResource refresh();
-
-  @Source("room.png")
-  ImageResource room();
-
-  @Source("room_add.png")
-  ImageResource roomAdd();
-
-  @Source("task.png")
-  ImageResource task();
-
-  @Source("taskadd.png")
-  ImageResource taskadd();
-
-  @Source("taskdone.png")
-  ImageResource taskdone();
-
-  @Source("taskfolder.png")
-  ImageResource taskfolder();
-
-  @Source("taskfolderadd.png")
-  ImageResource taskfolderadd();
 
   @Source("upload.png")
   ImageResource upload();

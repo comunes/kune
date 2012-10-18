@@ -20,7 +20,7 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAGroupCondition;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
@@ -31,7 +31,7 @@ public class AddAdminMembersToContentMenuItem extends AddMembersToContentMenuIte
   @Inject
   public AddAdminMembersToContentMenuItem(final I18nTranslationService i18n,
       final AddMembersToContentAction action, final IsCurrentStateAGroupCondition isAGroupCondition,
-      final ContentViewerShareMenu menu, final CoreResources res) {
+      final ContentViewerShareMenu menu, final IconicResources res) {
     super(i18n.t("Share with admins"), SocialNetworkSubGroup.ADMINS, action, menu, res);
     add(isAGroupCondition);
 

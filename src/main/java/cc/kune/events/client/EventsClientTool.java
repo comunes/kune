@@ -40,7 +40,8 @@ public class EventsClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
       final IconicResources icons, final HistoryWrapper history) {
     super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
-        icons.eventsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources, history);
+        icons.eventsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources,
+        history);
     this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -63,9 +64,9 @@ public class EventsClientTool extends FoldableAbstractClientTool {
 
   private void registerIcons() {
     registerContentTypeIcon(TYPE_ROOT, icons.eventsGrey());
-    registerContentTypeIcon(TYPE_MEETING, icons.eventsGrey());
+    registerContentTypeIcon(TYPE_MEETING, icons.eventGrey());
     registerContentTypeIconLight(TYPE_ROOT, icons.eventsWhite());
-    registerContentTypeIconLight(TYPE_MEETING, icons.eventsWhite());
+    registerContentTypeIconLight(TYPE_MEETING, icons.eventWhite());
     registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any meeting, you can create one"));
     registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t("There isn't any meeting"));
   }

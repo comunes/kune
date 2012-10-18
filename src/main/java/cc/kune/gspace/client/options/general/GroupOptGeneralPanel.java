@@ -22,7 +22,7 @@ package cc.kune.gspace.client.options.general;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.DefaultFormUtils;
 import cc.kune.core.shared.dto.GroupType;
 
@@ -50,9 +50,9 @@ public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements Group
   private final TextField<String> shortName;
 
   @Inject
-  public GroupOptGeneralPanel(final I18nTranslationService i18n, final CoreResources res,
+  public GroupOptGeneralPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget, final GroupFieldFactory groupFieldFactory) {
-    super(maskWidget, res.emblemSystem(), i18n.t("General"), i18n.t("You can change these values:"));
+    super(maskWidget, res.equalizer(), i18n.t("General"), i18n.t("You can change these values:"));
     shortName = groupFieldFactory.createGroupShortName(SHORT_NAME_FIELD);
     longName = groupFieldFactory.createLongName(LONG_NAME_FIELD);
     add(shortName);

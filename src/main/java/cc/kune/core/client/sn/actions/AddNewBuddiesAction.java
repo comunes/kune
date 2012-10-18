@@ -26,7 +26,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.contacts.SimpleContactManager;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.sitebar.search.EntitySearchPanel;
 import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
 
@@ -38,11 +38,11 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
   private final EntitySearchPanel searchPanel;
 
   @Inject
-  public AddNewBuddiesAction(final CoreResources res, final AddBuddieSearchPanel searchPanel,
+  public AddNewBuddiesAction(final IconicResources res, final AddBuddieSearchPanel searchPanel,
       final SimpleContactManager contactsManager) {
     this.searchPanel = searchPanel;
     putValue(Action.NAME, I18n.t("Add a new buddy"));
-    putValue(Action.SMALL_ICON, res.addGreen());
+    putValue(Action.SMALL_ICON, res.add());
     searchPanel.init(true, ADD_NEW_BUDDIES_TEXTBOX, new OnEntitySelectedInSearch() {
       @Override
       public void onSeleted(final String shortName) {

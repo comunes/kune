@@ -20,7 +20,7 @@
 package cc.kune.chat.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.OpenContentMenuItem;
 
 import com.google.inject.Inject;
@@ -29,7 +29,7 @@ public class OpenRoomArchiveMenuItem extends OpenContentMenuItem {
 
   @Inject
   public OpenRoomArchiveMenuItem(final I18nTranslationService i18n, final OpenContentAction action,
-      final NavResources res) {
+      final IconicResources res) {
     super(i18n, action, res);
     this.withText(i18n.t("Open archive")).withToolTip(
         i18n.t("Open the conversations archive of this room"));

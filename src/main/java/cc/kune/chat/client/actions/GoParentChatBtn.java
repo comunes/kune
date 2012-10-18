@@ -21,7 +21,7 @@ package cc.kune.chat.client.actions;
 
 import cc.kune.chat.shared.ChatToolConstants;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.gspace.client.actions.GoParentContainerBtn;
 
@@ -31,7 +31,7 @@ public class GoParentChatBtn extends GoParentContainerBtn {
 
   @Inject
   public GoParentChatBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
-      final CoreResources res, final Session session) {
+      final IconicResources res, final Session session) {
     super(i18n, action, res, session, ChatToolConstants.TYPE_ROOT);
   }
 

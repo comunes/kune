@@ -20,12 +20,12 @@
 package cc.kune.chat.client.actions;
 
 import cc.kune.chat.client.ChatClient;
+import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
@@ -37,12 +37,12 @@ public class StartChatWithMemberAction extends AbstractExtendedAction {
   private final I18nTranslationService i18n;
 
   @Inject
-  public StartChatWithMemberAction(final I18nTranslationService i18n, final CoreResources res,
+  public StartChatWithMemberAction(final I18nTranslationService i18n, final ChatResources res,
       final Provider<ChatClient> chatClient) {
     this.i18n = i18n;
     this.chatClient = chatClient;
     putValue(NAME, i18n.t("Chat with this group member"));
-    putValue(Action.SMALL_ICON, res.newChat());
+    putValue(Action.SMALL_ICON, res.chat());
   }
 
   @Override

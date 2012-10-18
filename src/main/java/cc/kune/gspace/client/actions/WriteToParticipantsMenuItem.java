@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -75,10 +75,10 @@ public class WriteToParticipantsMenuItem extends MenuItemDescriptor {
 
   @Inject
   public WriteToParticipantsMenuItem(final I18nTranslationService i18n,
-      final WriteToParticipantsAction action, final NavResources res,
+      final WriteToParticipantsAction action, final IconicResources res,
       final ContentViewerOptionsMenu optionsMenu) {
     super(action);
-    this.withText(i18n.t("New message with everyone here")).withIcon(res.pageText()).withParent(
+    this.withText(i18n.t("New message with everyone here")).withIcon(res.write()).withParent(
         optionsMenu, false);
   }
 

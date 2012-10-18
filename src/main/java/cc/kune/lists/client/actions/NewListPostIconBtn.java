@@ -22,7 +22,7 @@ package cc.kune.lists.client.actions;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.NewContentBtn;
 
 import com.google.inject.Inject;
@@ -32,10 +32,10 @@ public class NewListPostIconBtn extends ButtonDescriptor {
 
   @Inject
   public NewListPostIconBtn(final I18nTranslationService i18n, final NewListPostAction action,
-      final NavResources res, final GlobalShortcutRegister shorcutReg) {
+      final IconicResources res, final GlobalShortcutRegister shorcutReg) {
     super(action);
-    this.withText(i18n.t("New post")).withToolTip(i18n.t("Create a new post")).withIcon(res.newemail()).withStyles(
-        "k-def-docbtn, k-fl").withId(NewContentBtn.BTN_ID);
+    this.withText(i18n.t("New post")).withToolTip(i18n.t("Create a new post")).withIcon(
+        res.listsPostAdd()).withStyles("k-def-docbtn, k-fl").withId(NewContentBtn.BTN_ID);
   }
 
 }

@@ -20,16 +20,17 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
 public class AddMembersToContentMenuItem extends MenuItemDescriptor {
 
   public AddMembersToContentMenuItem(final String text, final SocialNetworkSubGroup subGroup,
-      final AddMembersToContentAction action, final ContentViewerShareMenu menu, final CoreResources res) {
+      final AddMembersToContentAction action, final ContentViewerShareMenu menu,
+      final IconicResources res) {
     super(action);
     action.setSubGroup(subGroup);
-    this.withText(text).withIcon(res.addParticipant()).withParent(menu, false);
+    this.withText(text).withIcon(res.add()).withParent(menu, false);
   }
 
 }

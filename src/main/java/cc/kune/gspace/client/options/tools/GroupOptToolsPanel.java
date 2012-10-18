@@ -21,14 +21,14 @@ package cc.kune.gspace.client.options.tools;
 
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
 public class GroupOptToolsPanel extends EntityOptToolsPanel implements GroupOptToolsView {
 
   @Inject
-  public GroupOptToolsPanel(final I18nTranslationService i18n, final CoreResources res,
+  public GroupOptToolsPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget) {
     super(i18n, res, maskWidget);
   }

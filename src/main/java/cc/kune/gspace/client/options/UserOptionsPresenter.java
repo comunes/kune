@@ -28,7 +28,7 @@ import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -52,7 +52,7 @@ public class UserOptionsPresenter extends
   }
 
   private final I18nTranslationService i18n;
-  private final CoreResources res;
+  private final IconicResources res;
   private final Session session;
   private final StateManager stateManager;
   private final SiteUserOptions userOptions;
@@ -60,7 +60,7 @@ public class UserOptionsPresenter extends
   @Inject
   public UserOptionsPresenter(final EventBus eventBus, final UserOptionsProxy proxy,
       final Session session, final StateManager stateManager, final I18nTranslationService i18n,
-      final CoreResources res, final SiteUserOptions userOptions, final UserOptionsView view) {
+      final IconicResources res, final SiteUserOptions userOptions, final UserOptionsView view) {
     super(eventBus, view, proxy);
     this.session = session;
     this.stateManager = stateManager;

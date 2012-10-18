@@ -20,7 +20,7 @@
 package cc.kune.tasks.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.nav.NavResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.gspace.client.actions.SetContentStatusAsAdminMenuItem;
 
@@ -30,8 +30,8 @@ public class MarkAsNotDoneTaskMenuItem extends SetContentStatusAsAdminMenuItem {
 
   @Inject
   public MarkAsNotDoneTaskMenuItem(final I18nTranslationService i18n,
-      final SetContentStatusAsAdminAction action, final NavResources res) {
+      final SetContentStatusAsAdminAction action, final IconicResources res) {
     super(action, ContentStatus.publishedOnline, false);
-    withText(i18n.t("Mark as not done")).withIcon(res.task());
+    withText(i18n.t("Mark as not done")).withIcon(res.tasksNew());
   }
 }

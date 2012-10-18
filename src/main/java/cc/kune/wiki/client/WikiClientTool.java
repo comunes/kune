@@ -68,11 +68,11 @@ public class WikiClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
-    registerContentTypeIcon(TYPE_FOLDER, icons.folderGrey());
     registerContentTypeIcon(TYPE_ROOT, icons.wikisGrey());
+    registerContentTypeIcon(TYPE_FOLDER, icons.wikisFolderGrey());
     registerContentTypeIcon(TYPE_WIKIPAGE, icons.wikisGrey());
-    registerContentTypeIconLight(TYPE_FOLDER, icons.folderWhite());
     registerContentTypeIconLight(TYPE_ROOT, icons.wikisWhite());
+    registerContentTypeIconLight(TYPE_FOLDER, icons.wikisFolderWhite());
     registerContentTypeIconLight(TYPE_WIKIPAGE, icons.wikisWhite());
     registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     registerEmptyMessages(TYPE_FOLDER, i18n.t(EMPTY_FOLDER));

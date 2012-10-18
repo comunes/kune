@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateEditableCondition;
@@ -74,10 +74,10 @@ public class ParticipateInContentBtn extends ButtonDescriptor {
   public ParticipateInContentBtn(final I18nTranslationService i18n,
       final ParticipateInContentAction action, final IsLoggedCondition isLogged,
       final IsCurrentStateEditableCondition isEditable,
-      final IsNotParticipantOfCurrentStateCondition isNotParticipant, final CoreResources res) {
+      final IsNotParticipantOfCurrentStateCondition isNotParticipant, final IconicResources res) {
     super(action);
     this.withText(i18n.t("Participate")).withToolTip(i18n.t("Participate in the edition of this page")).withIcon(
-        res.contentEdit()).withStyles("k-def-docbtn, k-fl");
+        res.editGrey()).withStyles("k-def-docbtn, k-fl");
     super.add(isLogged);
     super.add(isEditable);
     super.add(isNotParticipant);

@@ -8,7 +8,7 @@ import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.sitebar.SitebarActions;
 
 import com.google.gwt.event.shared.EventBus;
@@ -61,7 +61,7 @@ implements MaxMinWorkspace {
 
   public static final String MIN_ICON = "mmwp-min_bt";
 
-  private final CoreResources images;
+  private final IconicResources images;
 
   private MenuItemDescriptor maximizeButton;
 
@@ -74,7 +74,7 @@ implements MaxMinWorkspace {
   @Inject
   public MaxMinWorkspacePresenter(final EventBus eventBus, final MaxMinWorkspaceView view,
       final MaxMinWorkspaceProxy proxy, final GlobalShortcutRegister shortcutReg,
-      final CoreResources images) {
+      final IconicResources images) {
     super(eventBus, view, proxy);
     this.shortcutReg = shortcutReg;
     this.images = images;

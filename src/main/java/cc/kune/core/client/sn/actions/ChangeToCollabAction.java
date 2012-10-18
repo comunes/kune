@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -33,11 +33,11 @@ public class ChangeToCollabAction extends AbstractExtendedAction {
   private final SocialNetServiceHelper sNClientUtils;
 
   @Inject
-  public ChangeToCollabAction(final I18nTranslationService i18n, final CoreResources res,
+  public ChangeToCollabAction(final I18nTranslationService i18n, final IconicResources res,
       final SocialNetServiceHelper sNClientUtils) {
     this.sNClientUtils = sNClientUtils;
     putValue(NAME, i18n.t("Change to collaborator"));
-    putValue(Action.SMALL_ICON, res.arrowDownGreen());
+    putValue(Action.SMALL_ICON, res.downArrow());
   }
 
   @Override

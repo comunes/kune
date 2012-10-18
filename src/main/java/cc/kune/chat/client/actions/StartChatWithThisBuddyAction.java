@@ -20,15 +20,15 @@
 package cc.kune.chat.client.actions;
 
 import cc.kune.chat.client.ChatClient;
+import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class StartChatWithThisBuddyAction extends StartChatWithMemberAction {
   @Inject
-  public StartChatWithThisBuddyAction(final I18nTranslationService i18n, final CoreResources res,
+  public StartChatWithThisBuddyAction(final I18nTranslationService i18n, final ChatResources res,
       final Provider<ChatClient> chatClient) {
     super(i18n, res, chatClient);
     putValue(NAME, i18n.t("Chat with your buddy"));

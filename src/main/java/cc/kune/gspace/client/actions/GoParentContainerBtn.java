@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -68,9 +68,9 @@ public class GoParentContainerBtn extends ButtonDescriptor {
   public static final String GO_PARENT_ID = "k-goparent-btn-id";
 
   public GoParentContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
-      final CoreResources res, final Session session, final String typeRoot) {
+      final IconicResources res, final Session session, final String typeRoot) {
     super(action);
-    this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.folderGoUp()).withStyles(
+    this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.leftArrow()).withStyles(
         "k-btn-min, k-fl, k-btn-go-up");
     this.withId(GO_PARENT_ID);
     final StateAbstractDTO state = session.getCurrentState();

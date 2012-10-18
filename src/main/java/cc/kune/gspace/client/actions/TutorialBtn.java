@@ -21,9 +21,9 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
-import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
@@ -64,7 +64,7 @@ public class TutorialBtn extends ButtonDescriptor {
 
   @Inject
   public TutorialBtn(final I18nTranslationService i18n, final ShowTutorialAction action,
-      final CommonResources res) {
+      final IconicResources res) {
     super(action);
     this.withToolTip(i18n.t("New to this tool? Here there is some help")).withIcon(res.info()).withStyles(
         "k-btn-min, k-fr");

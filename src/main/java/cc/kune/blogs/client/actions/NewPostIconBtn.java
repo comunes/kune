@@ -33,7 +33,7 @@ public class NewPostIconBtn extends NewContentBtn {
   @Inject
   public NewPostIconBtn(final I18nTranslationService i18n, final NewContentAction action,
       final IconicResources res, final GlobalShortcutRegister shorcutReg) {
-    super(i18n, action, res.blogsAdd(), shorcutReg, i18n.t("New post"),
+    super(i18n, action, res.blogPostAdd(), shorcutReg, i18n.t("New post"),
         i18n.t("Create a new blog post"), i18n.t("New post"), BlogsToolConstants.TYPE_POST);
     withStyles("k-btn-min, k-fl");
   }

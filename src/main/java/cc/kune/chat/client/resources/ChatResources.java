@@ -39,7 +39,7 @@ public interface ChatResources extends ClientBundle {
   @Source("cancel.png")
   ImageResource cancel();
 
-  @Source("e-icon.png")
+  @Source("chat.png")
   ImageResource chat();
 
   @Source("e-icon-a.gif")
@@ -48,11 +48,8 @@ public interface ChatResources extends ClientBundle {
   @Source("chat-new-message-small.png")
   ImageResource chatNewMessageSmall();
 
-  @Source("chat.png")
-  ImageResource chatNormal();
-
-  @Source("chat-small.png")
-  ImageResource chatSmall();
+  @Source("e-icon.png")
+  ImageResource chatNoBlink();
 
   @Source("chat-icons.css")
   ChatIconCssResource css();

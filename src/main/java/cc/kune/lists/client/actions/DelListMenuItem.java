@@ -20,7 +20,7 @@
 package cc.kune.lists.client.actions;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.gspace.client.actions.DelContainerForAdminsMenuItem;
 
 import com.google.inject.Inject;
@@ -29,7 +29,7 @@ public class DelListMenuItem extends DelContainerForAdminsMenuItem {
 
   @Inject
   public DelListMenuItem(final I18nTranslationService i18n, final DelContainerForAdminsAction action,
-      final CoreResources res) {
+      final IconicResources res) {
     super(i18n, action, res);
   }
 

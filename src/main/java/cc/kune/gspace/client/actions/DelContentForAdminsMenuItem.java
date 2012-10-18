@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -51,9 +51,9 @@ public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
   }
 
   public DelContentForAdminsMenuItem(final I18nTranslationService i18n,
-      final DelContentForAdminsAction action, final CoreResources res) {
+      final DelContentForAdminsAction action, final IconicResources res) {
     super(action);
-    this.withText(i18n.t("Delete")).withIcon(res.cancel());
+    this.withText(i18n.t("Delete")).withIcon(res.trashGrey());
   }
 
 }

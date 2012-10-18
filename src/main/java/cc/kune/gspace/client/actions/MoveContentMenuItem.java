@@ -20,8 +20,8 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
@@ -29,9 +29,9 @@ public class MoveContentMenuItem extends MenuItemDescriptor {
 
   @Inject
   public MoveContentMenuItem(final I18nTranslationService i18n, final MoveContentSimpleAction action,
-      final ContentViewerOptionsMenu optionsMenu, final CommonResources res) {
+      final ContentViewerOptionsMenu optionsMenu, final IconicResources res) {
     super(action);
-    this.withText(i18n.t("Move")).withParent(optionsMenu, false).withIcon(res.clear16());
+    this.withText(i18n.t("Move")).withParent(optionsMenu, false).withIcon(res.move());
   }
 
 }
