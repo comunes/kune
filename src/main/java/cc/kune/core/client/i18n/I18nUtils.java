@@ -43,6 +43,7 @@ public class I18nUtils {
     if (result.isEmpty()) {
       return "";
     }
+    result = result.replaceFirst("^([0-9])", "_$1");
     try {
       return TextUtils.abbreviate(
           new StringBuffer(result.length()).append(Character.toLowerCase(result.charAt(0))).append(

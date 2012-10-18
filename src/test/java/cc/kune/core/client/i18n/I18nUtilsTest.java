@@ -28,8 +28,8 @@ public class I18nUtilsTest {
   @Test
   public void basicLongMessage() {
     assertEquals(
-        "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789",
-        I18nUtils.convertMethodName("0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 "));
+        "_012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678",
+        I18nUtils.convertMethodName("0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 012345678 "));
   }
 
   @Test
@@ -54,6 +54,11 @@ public class I18nUtilsTest {
   }
 
   @Test
+  public void testNumbers() {
+    assertEquals("_2day3", I18nUtils.convertMethodName("2day3"));
+  }
+
+  @Test
   public void testParams() {
     assertEquals("nOfParamItems", I18nUtils.convertMethodName("[%d] of [%s] items"));
     assertEquals("nOfNItems", I18nUtils.convertMethodName("[%d] of [%d] items"));
@@ -63,4 +68,5 @@ public class I18nUtilsTest {
   public void testParent() {
     assertEquals("ofItems", I18nUtils.convertMethodName("() of [] {} items"));
   }
+
 }
