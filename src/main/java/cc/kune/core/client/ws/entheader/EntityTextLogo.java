@@ -51,7 +51,7 @@ public class EntityTextLogo extends VerticalPanel {
     final HorizontalPanel generalHP = new HorizontalPanel();
     final VerticalPanel logoTextVP = new VerticalPanel();
     logoImage = new Image();
-    logoImage.setSize(FileConstants.LOGO_DEF_SIZE + "px", FileConstants.LOGO_DEF_SIZE + "px");
+    setSize();
     logoLabel = new Label();
     avatarDecorator.setWidget(logoImage);
     final Label expandCell = new Label("");
@@ -102,6 +102,7 @@ public class EntityTextLogo extends VerticalPanel {
     logoImage.setUrl(FileConstants.ASITE_PREFIX + "images/clear.gif");
     Image.prefetch(url);
     logoImage.setUrl(url);
+    setSize();
   }
 
   public void setLogoText(final String text) {
@@ -127,6 +128,10 @@ public class EntityTextLogo extends VerticalPanel {
 
   public void setOnlineStatusVisible(final boolean visible) {
     avatarDecorator.setDecoratorVisible(visible);
+  }
+
+  private void setSize() {
+    logoImage.setSize(FileConstants.LOGO_DEF_SIZE + "px", FileConstants.LOGO_DEF_SIZE + "px");
   }
 
   public void setSmallFont() {
