@@ -23,7 +23,6 @@ import static cc.kune.trash.shared.TrashToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -39,9 +38,9 @@ public class TrashClientTool extends FoldableAbstractClientTool {
   @Inject
   public TrashClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources res,
-      final NavResources navResources, final HistoryWrapper history) {
+      final HistoryWrapper history) {
     super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("You can drop here contents to delete then"),
-        res.trashWhite(), AccessRolDTO.Editor, toolSelector, cntCapRegistry, i18n, navResources, history);
+        res.trashWhite(), AccessRolDTO.Editor, toolSelector, cntCapRegistry, i18n, history);
     this.res = res;
 
     // registerAclEditableTypes();

@@ -23,7 +23,6 @@ import static cc.kune.events.shared.EventsToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -37,11 +36,10 @@ public class EventsClientTool extends FoldableAbstractClientTool {
 
   @Inject
   public EventsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final IconicResources icons, final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
+      final HistoryWrapper history) {
     super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
-        icons.eventsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources,
-        history);
+        icons.eventsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
     this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);

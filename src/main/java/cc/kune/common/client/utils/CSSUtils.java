@@ -27,6 +27,7 @@ import com.google.gwt.dom.client.StyleInjector;
 
 public class CSSUtils {
 
+  @SuppressWarnings("deprecation")
   public static StyleElement addCss(final String cssContents) {
     // final StyleElement style = Document.get().createStyleElement();
     // style.setPropertyString("language", "text/css");
@@ -43,7 +44,6 @@ public class CSSUtils {
     link.setHref(cssUrl);
     link.setMedia("screen");
     link.setTitle("dynamicLoadedSheet");
-    // head.appendChild(link);
     head.insertAfter(head.getLastChild(), link);
     // you can use removeFromParent
     return link;

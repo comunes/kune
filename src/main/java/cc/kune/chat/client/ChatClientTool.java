@@ -20,12 +20,10 @@
 package cc.kune.chat.client;
 
 import static cc.kune.chat.shared.ChatToolConstants.*;
-import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -36,12 +34,11 @@ import com.google.inject.Inject;
 public class ChatClientTool extends FoldableAbstractClientTool {
 
   private final IconicResources icons;
-  private final ChatResources res;
 
   @Inject
   public ChatClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final ChatResources res, final IconicResources icons, final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
+      final HistoryWrapper history) {
     // FIXME: change this in ChatConstants and in db via migration
     super(
         TOOL_NAME,
@@ -49,8 +46,8 @@ public class ChatClientTool extends FoldableAbstractClientTool {
         i18n.t(
             "A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from [%s] or other sites (compatible with Gmail chat)",
             i18n.getSiteCommonName()), icons.chatsWhite(), AccessRolDTO.Viewer, toolSelector,
-        cntCapRegistry, i18n, navResources, history);
-    this.res = res;
+        cntCapRegistry, i18n, history);
+
     this.icons = icons;
     registerIcons();
   }

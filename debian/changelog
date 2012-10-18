@@ -1,4 +1,10 @@
-kune (0.2.0+b32) precise; urgency=low
+kune (0.2.0+b33) unstable; urgency=low
+
+  * Old icons cleanup
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 18 Oct 2012 16:04:11 +0200
+
+kune (0.2.0+b32) unstable; urgency=low
 
   * Translations updated
   * Chat icons updated 

@@ -23,7 +23,6 @@ import static cc.kune.tasks.shared.TasksToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -39,14 +38,13 @@ public class TasksClientTool extends FoldableAbstractClientTool {
 
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources,
-      final IconicResources icons, final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
+      final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
-        icons.tasksWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, navResources,
-        history);
+        icons.tasksWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
     this.icons = icons;
 
     // registerAclEditableTypes();
