@@ -38,7 +38,7 @@ public class GiveUsFeedbackBtn extends ButtonDescriptor {
     withText(i18n.t("Give us feedback!"));
     withToolTip(i18n.t("Write us with some feedback for help us to improve the services on [%s]",
         i18n.getSiteCommonName()));
-    withStyles("k-noborder, k-nobackcolor, k-no-backimage, k-fl");
+    withStyles("k-noborder, k-nobackcolor, k-no-backimage, k-fl, k-feedback-btn");
     withId(ID);
     armor.getEntityFooterToolbar().add(this);
   }

@@ -121,6 +121,10 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
   height: 17px !important;
 }
 
+.k-btn-sitebar div {
+    padding: 0px 2px !important;
+}
+
 div div.siteBar table.k-sitebar img.k-iconlabel-left {
   margin: 0px !important;
 }
@@ -1297,4 +1301,8 @@ div.docEditorContainer div.thread div.time {
   padding: 0px 35px;
   line-height: 11px;
   font-size: 14px;
+}
+
+.k-feedback-btn div {
+    margin: 5px;
 }
