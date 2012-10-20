@@ -47,6 +47,9 @@ public interface CoreResources extends CommonResources {
   @Source("arrowdownsitebar.gif")
   ImageResource arrowdownsitebar();
 
+  @Source("arrowdownsitebar-small.gif")
+  ImageResource arrowdownsitebarSmall();
+
   @Source("arrowdownsquarewhite.gif")
   ImageResource arrowdownsquarewhite();
 

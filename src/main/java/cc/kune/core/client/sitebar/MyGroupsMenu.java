@@ -78,7 +78,7 @@ public class MyGroupsMenu extends MenuDescriptor {
     setStyles("k-no-backimage, k-btn-sitebar");
     withText(I18n.t("Your groups"));
     withToolTip(I18n.t("See your groups or create a new one"));
-    withIcon(res.arrowdownsitebar());
+    withIcon(res.arrowdownsitebarSmall());
     withShortcut("Alt+M", global);
     eventBus.addHandler(MyGroupsChangedEvent.getType(),
         new MyGroupsChangedEvent.MyGroupsChangedHandler() {

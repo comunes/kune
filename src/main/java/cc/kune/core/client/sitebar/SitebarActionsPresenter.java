@@ -115,7 +115,7 @@ public class SitebarActionsPresenter extends
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
     MORE_MENU.withText(i18n.t("More"));
-    MORE_MENU.withIcon(res.arrowdownsitebar());
+    MORE_MENU.withIcon(res.arrowdownsitebarSmall());
     MORE_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     // OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION,
     // AbstractGxtMenuGui.MenuPosition.bl);
