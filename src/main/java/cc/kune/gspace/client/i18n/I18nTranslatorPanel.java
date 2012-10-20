@@ -22,7 +22,7 @@ package cc.kune.gspace.client.i18n;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleCallback;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView;
@@ -46,11 +46,11 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
       final I18nTranslatorTabsCollection transGroup,
       final LanguageSelectorWithoutEnglishPanel lanSelectorPanel,
       final I18nToTranslateGridPanel toTranslateGrid, final I18nTranslatedGridPanel translatedGrid,
-      final I18nTranslateRecomendPanel transRecommend, final CoreResources res) {
+      final I18nTranslateRecomendPanel transRecommend, final IconicResources res) {
     // Warning: Modal = true == you cannot select languages with mouse
     super(TRANSLATOR_PANEL_ID, "", false, false, images, TRANSLATOR_ERROR_ID, i18n.t("Close"), null,
         null, null, transGroup, i18n.getDirection());
-    setIcon(res.language());
+    setIcon(res.world());
     this.lanSelectorPanel = lanSelectorPanel;
     this.toTranslateGrid = toTranslateGrid;
     this.translatedGrid = translatedGrid;

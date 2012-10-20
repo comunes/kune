@@ -25,7 +25,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolActionAutoUpdated;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
@@ -45,13 +45,13 @@ public class SiteOptionsI18nTranslatorAction extends RolActionAutoUpdated {
   @Inject
   public SiteOptionsI18nTranslatorAction(final StateManager stateManager, final Session session,
       final AccessRightsClientManager rightsManager, final I18nTranslationService i18n,
-      final CoreResources img, final Provider<I18nTranslator> translatorProv,
+      final IconicResources img, final Provider<I18nTranslator> translatorProv,
       final SitebarActionsPresenter siteOptions) {
     super(stateManager, session, rightsManager, AccessRolDTO.Viewer, true, true, true);
     this.i18n = i18n;
     this.translatorProv = translatorProv;
     putValue(Action.NAME, i18n.t("Help with the translation"));
-    putValue(Action.SMALL_ICON, img.language());
+    putValue(Action.SMALL_ICON, img.world());
     MenuItemDescriptor.build(siteOptions.getOptionsMenu(), this);
   }
 

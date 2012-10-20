@@ -27,6 +27,9 @@ public interface IconicResources extends ClientBundle {
   @Source("add.png")
   ImageResource add();
 
+  @Source("alert.png")
+  ImageResource alert();
+
   @Source("barters-add.png")
   ImageResource bartersAdd();
 
@@ -132,6 +135,9 @@ public interface IconicResources extends ClientBundle {
   @Source("info.png")
   ImageResource info();
 
+  @Source("kune.png")
+  ImageResource kune();
+
   @Source("left-arrow.png")
   ImageResource leftArrow();
 
@@ -229,7 +235,10 @@ public interface IconicResources extends ClientBundle {
   ImageResource tasksWhite();
 
   @Source("tools.png")
-  ImageResource tools();
+  ImageResource toolsWhite();
+
+  @Source("tools-g.png")
+  ImageResource toolsGrey();
 
   @Source("trash-g.png")
   ImageResource trashGrey();

@@ -51,7 +51,7 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
   public EntityOptToolsPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget) {
     this.maskWidget = maskWidget;
-    tabTitle = TabTitleGenerator.generate(res.tools(), i18n.t("Tools"), MAX_TABTITLE_LENGTH, TAB_ID);
+    tabTitle = TabTitleGenerator.generate(res.toolsWhite(), i18n.t("Tools"), MAX_TABTITLE_LENGTH, TAB_ID);
     this.i18n = i18n;
     // super.setHeight(EntityOptionsView.HEIGHT);
     super.setWidth(EntityOptionsView.WIDTH);

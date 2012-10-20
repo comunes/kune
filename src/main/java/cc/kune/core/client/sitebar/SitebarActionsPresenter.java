@@ -27,7 +27,6 @@ import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
-import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.AppStartEvent;
@@ -64,7 +63,6 @@ public class SitebarActionsPresenter extends
   }
 
   public static final String SITE_OPTIONS_MENU = "kune-sop-om";
-  private final CommonResources commonRes;
   private final I18nTranslationService i18n;
   private final IconicResources icons;
   private final Provider<MyGroupsMenu> myGroupsMenu;
@@ -78,8 +76,7 @@ public class SitebarActionsPresenter extends
       final SitebarActionsProxy proxy, final I18nTranslationService i18n,
       final Provider<SitebarNewGroupLink> newGroupLink, final Provider<SitebarSignOutLink> signOutLink,
       final Provider<SitebarSignInLink> signInLink, final CoreResources res,
-      final IconicResources icons, final CommonResources commonRes,
-      final Provider<MyGroupsMenu> myGroupsMenu) {
+      final IconicResources icons, final Provider<MyGroupsMenu> myGroupsMenu) {
     super(eventBus, view, proxy);
     this.i18n = i18n;
     this.newGroupLink = newGroupLink;
@@ -88,7 +85,6 @@ public class SitebarActionsPresenter extends
     this.icons = icons;
     this.myGroupsMenu = myGroupsMenu;
     this.res = res;
-    this.commonRes = commonRes;
     init();
   }
 
@@ -100,7 +96,7 @@ public class SitebarActionsPresenter extends
       }
     });
     gotoKuneDevSite.putValue(Action.NAME, i18n.t("Kune development site"));
-    gotoKuneDevSite.putValue(Action.SMALL_ICON, res.kuneIcon16());
+    gotoKuneDevSite.putValue(Action.SMALL_ICON, icons.kune());
     return gotoKuneDevSite;
   }
 
@@ -127,7 +123,7 @@ public class SitebarActionsPresenter extends
       }
     };
     bugsAction.putValue(Action.NAME, i18n.t("Report Kune issues/problems"));
-    bugsAction.putValue(Action.SMALL_ICON, res.bug());
+    bugsAction.putValue(Action.SMALL_ICON, icons.toolsGrey());
 
     final AbstractExtendedAction errorAction = new AbstractExtendedAction() {
       @Override
@@ -162,9 +158,9 @@ public class SitebarActionsPresenter extends
     aboutAction.putValue(Action.NAME, i18n.t("About Kune"));
     aboutAction.putValue(Action.SMALL_ICON, icons.info());
     errorAction.putValue(Action.NAME, i18n.t("Errors info"));
-    errorAction.putValue(Action.SMALL_ICON, commonRes.important());
+    errorAction.putValue(Action.SMALL_ICON, icons.alert());
     faqAction.putValue(Action.NAME, i18n.t("Kune FAQ"));
-    faqAction.putValue(Action.SMALL_ICON, res.kuneIcon16());
+    faqAction.putValue(Action.SMALL_ICON, icons.kune());
     // aboutAction.setShortcut(shortcut);
     // shortcutReg.put(shortcut, aboutAction);
 
