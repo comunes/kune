@@ -14,10 +14,11 @@
   div#k-home-toolbar table tbody tr td button.gwt-Button {
     padding: 1px 3px;
   }
-  button.gwt-Button div.k-iconlabel, button.k-button div.k-iconlabel {
+  button.gwt-Button div.k-iconlabel,button.k-button div.k-iconlabel {
     padding-top: 4px;
   }
-  button.gwt-Button div.k-fl img.k-iconlabel-left, button.k-button div.k-fl img.k-iconlabel-left {
+  button.gwt-Button div.k-fl img.k-iconlabel-right,button.k-button div.k-fl img.k-iconlabel-right,button.gwt-Button div.k-fl img.k-iconlabel-left,button.k-button div.k-fl img.k-iconlabel-left
+    {
     margin: 2px 0 0 0;
   }
 }
@@ -29,11 +30,12 @@
     height: auto;
     line-height: 21px;
   }
-  button.gwt-Button div.k-iconlabel, button.k-button div.k-iconlabel {
+  button.gwt-Button div.k-iconlabel,button.k-button div.k-iconlabel {
     padding-top: 1px;
     height: 22px;
   }
-  button.gwt-Button div.k-fl img.k-iconlabel-left, button.k-button div.k-fl img.k-iconlabel-left {
+  button.gwt-Button div.k-fl img.k-iconlabel-right,button.k-button div.k-fl img.k-iconlabel-right,button.gwt-Button div.k-fl img.k-iconlabel-left,button.k-button div.k-fl img.k-iconlabel-left
+    {
     margin: 2px 0 0 0;
   }
 }
