@@ -117,7 +117,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
   white-space: nowrap;
   background: none;
   border: 0px;
-  padding: 0 3px 0 0 !important;
+  /* padding: 0 3px 0 0 !important;*/
   height: 17px !important;
 }
 
@@ -166,6 +166,10 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 
 div.gwt-TabLayoutPanelTabInner {
   padding-top: 3px;
+}
+
+div.gwt-TabLayoutPanelTabInner img  {
+  margin: 0 !important;
 }
 
 .k-link {
