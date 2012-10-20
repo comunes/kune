@@ -102,7 +102,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
     LOGGED_USER_MENU.setParent(SitebarActions.RIGHT_TOOLBAR);
     LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar");
-    LOGGED_USER_MENU.setRightIcon(res.arrowdownsitebar());
+    LOGGED_USER_MENU.withIcon(res.arrowdownsitebar());
     separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
 
     final AbstractExtendedAction userHomeAction = new AbstractExtendedAction() {

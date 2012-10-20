@@ -63,7 +63,7 @@ public class ChatSitebarActions {
         @Override
         public void onStateChanged(final StateChangedEvent event) {
           if (!session.isReady()) {
-            SiteUserOptionsPresenter.LOGGED_USER_MENU.putValue(AbstractAction.SMALL_ICON, icon);
+            SiteUserOptionsPresenter.LOGGED_USER_MENU.setRightIcon(icon);
           }
         }
       });
@@ -101,7 +101,7 @@ public class ChatSitebarActions {
       if (thisPresence.getShow().equals(currentPresence.getShow())
           && ((currentPresence.getStatus() == null) || currentPresence.getStatus().equals(
               thisPresence.getStatus()))) {
-        SiteUserOptionsPresenter.LOGGED_USER_MENU.putValue(AbstractAction.SMALL_ICON, icon);
+        SiteUserOptionsPresenter.LOGGED_USER_MENU.setRightIcon(icon);
       }
     }
   }
