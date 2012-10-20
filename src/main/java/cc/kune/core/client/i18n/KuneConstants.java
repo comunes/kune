@@ -428,6 +428,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String iDonTNeedEmailNotifications();
 
+  String ifYouWantToMoveSomethingJustDragAndDropItToItsDestination();
+
   String inbox();
 
   String inboxItShowsAListOfAllDocumentsAndContentsInWhichYouParticipate();
