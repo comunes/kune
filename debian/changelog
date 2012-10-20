@@ -2,6 +2,7 @@ kune (0.2.0+b33) unstable; urgency=low
 
   * Old icons cleanup
   * Added Basque and Galician language
+  * Css fix for buttons in chrome (fix #388)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 18 Oct 2012 21:52:39 +0200
 

@@ -25,7 +25,7 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 
 public interface CoreResources extends CommonResources {
-  public interface Style extends CssResource {
+  public interface CoreStyle extends CssResource {
     String loadingSpiner();
   }
 
@@ -183,14 +183,14 @@ public interface CoreResources extends CommonResources {
   @Source("copy.png")
   ImageResource copy();
 
+  @Source("core.css")
+  CoreStyle coreCss();
+
   @Source("cross.png")
   ImageResource cross();
 
   @Source("cross-dark.png")
   ImageResource crossDark();
-
-  @Source("core.css")
-  Style css();
 
   @Source("emblem-important.png")
   ImageResource emblemImportant();

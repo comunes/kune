@@ -21,9 +21,14 @@ package cc.kune.common.client.resources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 
 public interface CommonResources extends ClientBundle {
+
+  public interface CommonStyle extends CssResource {
+
+  }
 
   public static final CommonResources INSTANCE = GWT.create(CommonResources.class);
 
@@ -56,6 +61,9 @@ public interface CommonResources extends ClientBundle {
 
   @Source("clear16.png")
   ImageResource clear16();
+
+  @Source("common-resources.css")
+  CommonStyle commonStyle();
 
   @Source("icons/edit-black.png")
   ImageResource editBlack();
@@ -129,15 +137,15 @@ public interface CommonResources extends ClientBundle {
   @Source("cross.png")
   ImageResource redCross();
 
-  @Source("unchecked.png")
-  ImageResource unChecked();
-
-  @Source("icons/world-16.png")
-  ImageResource world16();
-
   @Source("icons/trash-black.png")
   ImageResource trashBlack();
 
   @Source("icons/trash-white.png")
   ImageResource trashWhite();
+
+  @Source("unchecked.png")
+  ImageResource unChecked();
+
+  @Source("icons/world-16.png")
+  ImageResource world16();
 }

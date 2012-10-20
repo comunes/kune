@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+@external k-*,gwt-*,.gwt*;
+@if user.agent safari { /* webkit: chrome, safari, etc */
+  button.gwt-Button,.k-btn-sitebar,.k-btn-sitebar button,.k-sitebar button,.k-btn-sitebar div,.k-btn-sitebar button div,.k-sitebar button div
+    {
+    padding: 1px 5px;
+    height: auto;
+    min-height: 25px;
+  }
+  button.k-button-center,button.k-button-right,button.k-button-left {
+    padding: 1px 6px;
+  }
+  div#k-home-toolbar table tbody tr td button.gwt-Button {
+    padding: 1px 3px;
+  }
+  button.gwt-Button div.k-iconlabel, button.k-button div.k-iconlabel {
+    padding-top: 4px;
+  }
+  button.gwt-Button div.k-fl img.k-iconlabel-left, button.k-button div.k-fl img.k-iconlabel-left {
+    margin: 2px 0 0 0;
+  }
+}
+
+@else { /* firefox, etc */
+  button.gwt-Button,button.k-button {
+    padding: 0px 2px;
+    min-height: 0px;
+    height: auto;
+    line-height: 21px;
+  }
+  button.gwt-Button div.k-iconlabel, button.k-button div.k-iconlabel {
+    padding-top: 1px;
+    height: 22px;
+  }
+  button.gwt-Button div.k-fl img.k-iconlabel-left, button.k-button div.k-fl img.k-iconlabel-left {
+    margin: 2px 0 0 0;
+  }
+}

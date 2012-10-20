@@ -34,6 +34,7 @@ public class DefaultGuiProvider implements GuiProvider {
 
   @Override
   public <T> GuiBinding get(final Class<T> classType) {
+    // If this return a NPE is because any GuiProvider has register bindings
     return (GuiBinding) map.get(classType).get();
   }
 

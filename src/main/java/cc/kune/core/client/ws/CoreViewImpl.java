@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.ws;
 
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.impl.StateManagerDefault;
 import cc.kune.gspace.client.armor.GSpaceArmorDefault;
@@ -46,7 +47,8 @@ public class CoreViewImpl extends ViewImpl implements CorePresenter.CoreView {
   @Inject
   public CoreViewImpl(final GSpaceArmorDefault armor, final StateManagerDefault stateManager) {
     this.armor = armor;
-    GWT.<CoreResources> create(CoreResources.class).css().ensureInjected();
+    CommonResources.INSTANCE.commonStyle().ensureInjected();
+    GWT.<CoreResources> create(CoreResources.class).coreCss().ensureInjected();
     GWT.<GSpaceArmorResources> create(GSpaceArmorResources.class).style().ensureInjected();
     History.addValueChangeHandler(stateManager);
   }

@@ -15,6 +15,7 @@ cp src/main/java/cc/kune/chat/public/kune-chat.css target/kune-$KUNE_VERSION/ws/
 cp src/main/java/cc/kune/chat/public/kune-hablar.css target/kune-$KUNE_VERSION/ws/
 cp src/main/java/cc/kune/msgs/public/kune-message.css target/kune-$KUNE_VERSION/ws/
 cp src/main/java/cc/kune/common/public/kune-common.css target/kune-$KUNE_VERSION/ws/
+cp src/main/java/cc/kune/common/public/kune-custom-common.css target/kune-$KUNE_VERSION/ws/
 cp src/main/java/cc/kune/core/public/ws.css target/kune-$KUNE_VERSION/ws/
 cp src/main/java/cc/kune/core/public/ws-rtl.css target/kune-$KUNE_VERSION/ws/
 #cp src/main/java/cc/kune/core/public/ws.html target/kune-$KUNE_VERSION/
