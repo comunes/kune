@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -44,14 +44,14 @@ public class AcceptJoinGroupAction extends AbstractExtendedAction {
 
   @Inject
   public AcceptJoinGroupAction(final StateManager stateManager, final Session session,
-      final I18nTranslationService i18n, final CoreResources res,
+      final I18nTranslationService i18n, final IconicResources res,
       final Provider<SocialNetServiceAsync> snServiceProvider) {
     this.stateManager = stateManager;
     this.session = session;
     this.i18n = i18n;
     this.snServiceProvider = snServiceProvider;
     putValue(NAME, i18n.t("Accept this member"));
-    putValue(Action.SMALL_ICON, res.accept());
+    putValue(Action.SMALL_ICON, res.add());
   }
 
   @Override

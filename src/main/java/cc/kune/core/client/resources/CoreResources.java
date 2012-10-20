@@ -30,7 +30,7 @@ public interface CoreResources extends CommonResources {
   }
 
   @Source("accept.png")
-  ImageResource accept();
+  ImageResource acceptNotUsed();
 
   @Source("icons/add-participant.png")
   ImageResource addParticipant();
