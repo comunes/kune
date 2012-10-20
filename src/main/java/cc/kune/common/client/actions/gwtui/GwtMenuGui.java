@@ -19,6 +19,8 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
+import cc.kune.common.client.actions.PropertyChangeEvent;
+import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
@@ -84,6 +86,16 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
     super.create(descriptor);
     configureItemFromProperties();
+    descriptor.addPropertyChangeListener(new PropertyChangeListener() {
+      @Override
+      public void propertyChange(final PropertyChangeEvent event) {
+        final Object newValue = event.getNewValue();
+        if (event.getPropertyName().equals(MenuDescriptor.MENU_RIGHTICON)) {
+          setIconRightResource((ImageResource) newValue);
+        }
+      }
+    });
+
     return this;
   }
 
@@ -110,6 +122,13 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   public void setIconResource(final ImageResource resource) {
     if (notStandAlone) {
       iconLabel.setLeftIconResource(resource);
+      layout();
+    }
+  }
+
+  public void setIconRightResource(final ImageResource resource) {
+    if (notStandAlone) {
+      iconLabel.setRightIconResource(resource);
       layout();
     }
   }

@@ -31,7 +31,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
   public static final String MENU_HIDE = "hidemenu";
   public static final String MENU_ONHIDE = "menuonhide";
   public static final String MENU_ONSHOW = "menuonshow";
-  protected static final String MENU_RIGHTICON = "menurighticon";
+  public static final String MENU_RIGHTICON = "menurighticon";
   public static final String MENU_SELECT_ITEM = "menuselitem";
   public static final String MENU_SELECTION_DOWN = "menuseldown";
   public static final String MENU_SELECTION_UP = "menuselup";
