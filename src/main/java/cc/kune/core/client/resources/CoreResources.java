@@ -30,7 +30,7 @@ public interface CoreResources extends CommonResources {
   }
 
   @Source("accept.png")
-  ImageResource acceptNotUsed();
+  ImageResource acceptNowNotUsed();
 
   @Source("icons/add-participant.png")
   ImageResource addParticipant();
@@ -58,9 +58,6 @@ public interface CoreResources extends CommonResources {
 
   @Source("arrow-right-black.gif")
   ImageResource arrowRightBlack();
-
-  @Source("arrow-right-white.gif")
-  ImageResource arrowRightWhite();
 
   @Source("browser-32.png")
   ImageResource browser32();

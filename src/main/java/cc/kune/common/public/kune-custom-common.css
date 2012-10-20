@@ -144,7 +144,10 @@ button.k-optionsborder img.k-iconlabel-left {
 }
 
 .gwt-MenuBar-vertical .subMenuIcon-selected {
-  background: none repeat scroll 0 0 #808080;
+ background-color: #FFF !important;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .gwt-Button {

@@ -28,7 +28,7 @@ public interface SubMenuResources extends Resources {
   public static final SubMenuResources INSTANCE = GWT.create(SubMenuResources.class);
 
   @Override
-  @Source("arrow-right-white.gif")
+  @Source("arrow-right.png")
   @ImageOptions(flipRtl = true)
   ImageResource menuBarSubMenuIcon();
 }
