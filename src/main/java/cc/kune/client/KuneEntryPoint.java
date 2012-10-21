@@ -24,7 +24,6 @@ import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.wave.client.WebClient.ErrorHandler;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -84,16 +83,13 @@ public class KuneEntryPoint implements EntryPoint {
   public void onModuleLoadCont() {
     DelayedBindRegistry.bind(ginjector);
     ginjector.getSpinerPresenter();
-    ginjector.getGlobalShortcutRegister().enable();
-    AsyncCallbackSimple.init(ginjector.getErrorHandler());
+
     ginjector.getSessionExpirationManager();
     ginjector.getEventLogger();
-    // NotifyUser.init(ginjector.getEventBus(), ginjector.getI18n());
     ginjector.getCorePresenter().get().forceReveal();
     ginjector.getOnAppStartFactory();
     ginjector.getStateManager();
     ginjector.getGwtGuiProvider();
-    ginjector.getSpinerPresenter();
     ginjector.getGroupMembersPresenter();
 
     /* Tools (order in GUI) */
@@ -113,7 +109,10 @@ public class KuneEntryPoint implements EntryPoint {
     ginjector.getGSpaceParts();
     ginjector.getPSpaceParts();
     ginjector.getHSpaceParts();
+
     ginjector.getXmlActionsParser();
     ginjector.getContentViewerSelector().init();
+
+    ginjector.getGlobalShortcutRegister().enable();
   }
 }

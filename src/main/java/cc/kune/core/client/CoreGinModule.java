@@ -69,6 +69,7 @@ import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.client.sitebar.ErrorsDialog;
@@ -215,6 +216,7 @@ public class CoreGinModule extends ExtendedGinModule {
     bind(Session.class).to(SessionDefault.class).in(Singleton.class);
     s(SessionExpirationManager.class);
     s(ErrorHandler.class);
+    requestStaticInjection(AsyncCallbackSimple.class);
     s(StateManagerDefault.class);
     bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
     s(AccessRightsClientManager.class);
