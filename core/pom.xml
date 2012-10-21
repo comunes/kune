@@ -11,9 +11,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <wiab.version>0.3.13</wiab.version>
     <gwt.version>2.1.1</gwt.version>
+    <guice.version>3.0</guice.version>
   </properties>
   <modules>
     <module>kune-cli</module>
+    <module>kune-java-gadget-sample</module>
   </modules>
   <!-- <repositories> -->
   <!-- <repository> -->
