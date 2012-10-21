@@ -17,8 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.msgs.client;
+package cc.kune.core.client.msgs.resources;
 
-public interface CloseCallback {
-  void onClose();
+import cc.kune.common.client.notify.NotifyLevel;
+
+import com.google.gwt.resources.client.ImageResource;
+
+public class UserMessageImagesUtil {
+
+  public static ImageResource getIcon(final NotifyLevel level) {
+
+    switch (level) {
+    case important:
+      return UserMessageImages.INST.important();
+    case info:
+      return UserMessageImages.INST.info();
+    case veryImportant:
+      return UserMessageImages.INST.warning();
+    case error:
+    default:
+      return UserMessageImages.INST.error();
+    }
+  }
+
 }

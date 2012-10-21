@@ -21,11 +21,11 @@ package cc.kune.core.client.notify.msgs;
 
 import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.client.ui.PopupBottomPanel;
+import cc.kune.core.client.msgs.CloseCallback;
+import cc.kune.core.client.msgs.UserMessage;
+import cc.kune.core.client.msgs.UserMessagesPanel;
+import cc.kune.core.client.msgs.UserMessagesPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierView;
-import cc.kune.msgs.client.CloseCallback;
-import cc.kune.msgs.client.UserMessage;
-import cc.kune.msgs.client.UserMessagesPanel;
-import cc.kune.msgs.client.UserMessagesPresenter;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;

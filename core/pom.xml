@@ -16,6 +16,7 @@
   <modules>
     <module>kune-cli</module>
     <module>kune-java-gadget-sample</module>
+    <module>kune-sandbox</module>
   </modules>
   <!-- <repositories> -->
   <!-- <repository> -->

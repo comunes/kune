@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.msgs.client;
+package cc.kune.core.client.msgs;
 
 import cc.kune.common.client.notify.NotifyLevel;
-import cc.kune.msgs.client.UserMessagesPresenter.UserMessagesView;
+import cc.kune.core.client.msgs.UserMessagesPresenter.UserMessagesView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.AttachEvent;

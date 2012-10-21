@@ -17,27 +17,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.msgs.client.resources;
+package cc.kune.core.client.msgs.resources;
 
-import cc.kune.common.client.notify.NotifyLevel;
-
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
-public class UserMessageImagesUtil {
+public interface UserMessageImages extends ClientBundle {
 
-  public static ImageResource getIcon(final NotifyLevel level) {
+  public static final UserMessageImages INST = GWT.create(UserMessageImages.class);
 
-    switch (level) {
-    case important:
-      return UserMessageImages.INST.important();
-    case info:
-      return UserMessageImages.INST.info();
-    case veryImportant:
-      return UserMessageImages.INST.warning();
-    case error:
-    default:
-      return UserMessageImages.INST.error();
-    }
-  }
+  ImageResource error();
 
+  ImageResource info();
+
+  ImageResource warning();
+
+  ImageResource important();
+
+  ImageResource severe();
+
+  ImageResource remove();
+
+  @Source("remove-grey.png")
+  ImageResource removeGrey();
+
+  @Source("remove-over.png")
+  ImageResource removeOver();
 }

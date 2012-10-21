@@ -60,6 +60,8 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.init.AppStarterDefault;
 import cc.kune.core.client.init.PrefetchUtilities;
+import cc.kune.core.client.msgs.UserMessagesPanel;
+import cc.kune.core.client.msgs.UserMessagesPresenter;
 import cc.kune.core.client.notify.confirm.UserConfirmPanel;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
@@ -118,8 +120,6 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
-import cc.kune.msgs.client.UserMessagesPanel;
-import cc.kune.msgs.client.UserMessagesPresenter;
 
 import com.calclab.emite.core.client.services.Services;
 import com.calclab.emite.core.client.services.gwt.GWTServices;

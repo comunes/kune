@@ -17,14 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.msgs.client;
+package cc.kune.core.client.msgs;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import cc.kune.common.client.notify.NotifyLevel;
-import cc.kune.msgs.client.UserMessagesPresenter.UserMessagesView;
+import cc.kune.core.client.msgs.CloseCallback;
+import cc.kune.core.client.msgs.UserMessage;
+import cc.kune.core.client.msgs.UserMessagesPresenter;
+import cc.kune.core.client.msgs.UserMessagesPresenter.UserMessagesView;
 
 public class UserMessagesPresenterTest {
 

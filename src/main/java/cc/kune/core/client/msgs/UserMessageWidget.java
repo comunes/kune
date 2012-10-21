@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.msgs.client;
+package cc.kune.core.client.msgs;
 
 import org.adamtacy.client.ui.effects.events.EffectCompletedEvent;
 import org.adamtacy.client.ui.effects.events.EffectCompletedHandler;
@@ -26,7 +26,7 @@ import org.adamtacy.client.ui.effects.examples.Show;
 
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.msgs.client.resources.UserMessageImagesUtil;
+import cc.kune.core.client.msgs.resources.UserMessageImagesUtil;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

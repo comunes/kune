@@ -26,7 +26,7 @@ import cc.kune.common.client.notify.UserNotifyEvent;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.msgs.client.resources.UserMessageImagesUtil;
+import cc.kune.core.client.msgs.resources.UserMessageImagesUtil;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
