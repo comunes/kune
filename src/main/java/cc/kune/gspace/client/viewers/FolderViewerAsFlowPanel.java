@@ -19,7 +19,6 @@
  */
 package cc.kune.gspace.client.viewers;
 
-import cc.kune.common.client.actions.gxtui.AbstractGxtMenuGui;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
@@ -88,7 +87,6 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
         false, token);
     final MenuDescriptor menu = new MenuDescriptor();
     menu.setStandalone(true);
-    menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
     for (final GuiActionDescrip item : menuitems) {
       item.setParent(menu);
     }

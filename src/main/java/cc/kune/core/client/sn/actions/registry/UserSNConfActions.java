@@ -36,7 +36,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.gspace.client.actions.ActionStyles;
+import cc.kune.gspace.client.actions.SNActionStyles;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
@@ -65,7 +65,7 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
     ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
     String menuText = isNewbie ? i18n.t("Options") : "";
     String menuTooltip = isNewbie ? "" : i18n.t("Options");
-    String menuStyle = isNewbie ? ActionStyles.SN_OPTIONS_STYLES_NEWBIE : ActionStyles.SN_OPTIONS_STYLES;
+    String menuStyle = isNewbie ? SNActionStyles.SN_OPTIONS_STYLES_NEWBIE : SNActionStyles.SN_OPTIONS_STYLES;
     OPTIONS_MENU.withText(menuText).withToolTip(menuTooltip).withIcon(icon).withStyles(menuStyle);
     final MenuRadioItemDescriptor anyoneItem = userBuddiesVisibility.get().withVisibility(
         UserSNetVisibility.anyone);

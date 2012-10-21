@@ -41,11 +41,11 @@ import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.client.ui.IconLabel;
 
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -75,8 +75,9 @@ public class SampleEntryPoint implements EntryPoint {
   @Override
   public void onModuleLoad() {
 
+    // FIXME move this to sandbox!!!
+
     final SampleGinjector ginjector = GWT.create(SampleGinjector.class);
-    ginjector.getGxtGuiProvider();
     ginjector.getGuiProvider();
     final GlobalShortcutRegister shortcutRegister = ginjector.getGlobalShortcutRegister();
 
@@ -155,7 +156,7 @@ public class SampleEntryPoint implements EntryPoint {
         });
     thumb.setTooltip("kkkkkkK");
     thumb.setOnOverLabel(true);
-    final LayoutContainer layout = new LayoutContainer();
+    final AbsolutePanel layout = new AbsolutePanel();
     // final QuickTip quickTip = new QuickTip(layout);
     // quickTip.setInterceptTitles(true);
     layout.add(thumb);

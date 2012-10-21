@@ -23,11 +23,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import cc.kune.common.client.msgs.CloseCallback;
+import cc.kune.common.client.msgs.UserMessage;
+import cc.kune.common.client.msgs.UserMessagesPresenter;
+import cc.kune.common.client.msgs.UserMessagesPresenter.UserMessagesView;
 import cc.kune.common.client.notify.NotifyLevel;
-import cc.kune.core.client.msgs.CloseCallback;
-import cc.kune.core.client.msgs.UserMessage;
-import cc.kune.core.client.msgs.UserMessagesPresenter;
-import cc.kune.core.client.msgs.UserMessagesPresenter.UserMessagesView;
 
 public class UserMessagesPresenterTest {
 

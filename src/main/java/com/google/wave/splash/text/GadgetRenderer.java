@@ -16,17 +16,17 @@
  */
 package com.google.wave.splash.text;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.wave.api.Gadget;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.google.common.collect.ImmutableSet;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.wave.api.Gadget;
 
 
 /**

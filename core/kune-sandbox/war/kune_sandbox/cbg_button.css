@@ -1,0 +1,78 @@
+/* Button Style */
+
+/* specific for Opera */
+.cbg-ButtonContent::selection {
+  background-color:transparent;
+}
+
+.cbg-Button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 70%; /*relative to inherit 16px font-size*/
+}
+
+.cbg-Button .cbg-ButtonOuter {
+  border-color: #bcbcbc;
+}
+
+.cbg-Button .cbg-ButtonInner {
+  background-color: #e2e2e2;
+  border-color: #bcbcbc;
+}
+
+.cbg-Button .cbg-ButtonTop {
+  background-color: #f9f9f9;
+  border-bottom-color: #ededed;
+  border-bottom-width: 0.2em;
+  height: 0.9em;
+}
+
+.cbg-Button .cbg-ButtonContent {
+  color: black;
+  line-height: 1.8em;
+  padding: 0 8px;
+}
+
+.cbg-Button-active .cbg-ButtonInner {
+  background-color: #f9f9f9;
+}
+
+.cbg-Button-active  .cbg-ButtonTop {
+  background-color: #e2e2e2;
+}
+
+.cbg-Button-disabled .cbg-ButtonContent {
+  color: #878787;
+}
+
+.cbg-Button-hover .cbg-ButtonOuter {
+  border-color: #939393;
+}
+
+.cbg-Button-hover .cbg-ButtonInner {
+  border-color: #939393;
+}
+
+.cbg-Button-focus .cbg-ButtonOuter {
+  border-color: #444444;
+}
+
+.cbg-Button-focus .cbg-ButtonInner {
+  border-color: #444444;
+}
+
+/* ButtonBar specific style */
+.cbg-ButtonBar .cbg-BCLeft .cbg-ButtonInner {
+  border-left-color: white;
+}
+
+.cbg-ButtonBar .cbg-Button-hover .cbg-ButtonInner {
+  border-color: #939393;
+}
+
+.cbg-ButtonBar .cbg-Button-focus .cbg-ButtonInner {
+  border-color: #444444;
+}
+
+.cbg-ButtonBar .cbg-BCRight .cbg-ButtonInner {
+  border-right-color: #bcbcbc;
+}

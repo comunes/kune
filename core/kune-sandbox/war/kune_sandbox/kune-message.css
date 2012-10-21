@@ -1,0 +1,42 @@
+.k-msg-panel {
+  background-color: #892c00;
+  border-collapse: separate !important;
+}
+
+.k-msg-panel table {
+}
+
+.k-msg-panel-bottom {
+  margin-bottom: 8px;
+}
+
+.k-msg {
+  border: solid 1px #F2F2F2;
+  background: #fff0e6;
+  color: #280b0b;
+  margin: 8px 8px 0;
+  width: auto;
+}
+
+.k-msg-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.k-msg-close {
+  position: relative;
+  right: -14px;
+  top: 0px;
+}
+
+.k-msg-topsep {
+  border-top: solid 1px wheat;
+}
+
+.k-msg-icon {
+  padding: 10px 10px 5px;
+}
+
+.k-msg-label {
+  font-size: 16px;
+}

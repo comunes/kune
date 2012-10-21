@@ -17,13 +17,6 @@
  */
 package org.waveprotocol.box.server.waveserver;
 
-import cc.kune.core.server.properties.KuneProperties;
-
-import com.google.gxp.org.apache.xerces.impl.dv.util.Base64;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
-import com.google.protobuf.ByteString;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
@@ -34,16 +27,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.waveprotocol.box.server.persistence.AttachmentStore;
-import org.waveprotocol.wave.model.version.HashedVersion;
-import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
-import org.waveprotocol.wave.util.logging.Log;
 import org.waveprotocol.wave.federation.Proto.ProtocolAppliedWaveletDelta;
 import org.waveprotocol.wave.federation.Proto.ProtocolHashedVersion;
 import org.waveprotocol.wave.federation.Proto.ProtocolWaveletDelta;
@@ -52,10 +44,20 @@ import org.waveprotocol.wave.model.id.IdURIEncoderDecoder;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.id.WaveletName;
+import org.waveprotocol.wave.model.version.HashedVersion;
 import org.waveprotocol.wave.model.version.HashedVersionFactory;
 import org.waveprotocol.wave.model.version.HashedVersionFactoryImpl;
+import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.util.escapers.jvm.JavaUrlCodec;
+import org.waveprotocol.wave.util.logging.Log;
+
+import cc.kune.core.server.properties.KuneProperties;
+
+import com.google.gxp.org.apache.xerces.impl.dv.util.Base64;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.google.protobuf.ByteString;
 
 /**
  *

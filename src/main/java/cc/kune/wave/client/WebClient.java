@@ -78,7 +78,6 @@ import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
-import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.viewers.PathToolbarUtils;

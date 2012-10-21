@@ -26,7 +26,6 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 
-
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;

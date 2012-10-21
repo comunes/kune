@@ -19,11 +19,14 @@
  */
 package cc.kune.core.client;
 
-import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.events.EventBusWithLogging;
+import cc.kune.common.client.msgs.UserMessagesPanel;
+import cc.kune.common.client.msgs.UserMessagesPresenter;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.notify.UserNotifierPopup;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
@@ -60,13 +63,8 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.init.AppStarterDefault;
 import cc.kune.core.client.init.PrefetchUtilities;
-import cc.kune.core.client.msgs.UserMessagesPanel;
-import cc.kune.core.client.msgs.UserMessagesPresenter;
 import cc.kune.core.client.notify.confirm.UserConfirmPanel;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
-import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
-import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
-import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -170,8 +168,8 @@ public class CoreGinModule extends ExtendedGinModule {
         CorePresenter.CoreProxy.class);
     bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerPanel.class,
         SpinerPresenter.SpinerProxy.class);
-    bindPresenter(UserNotifierPresenter.class, UserNotifierPresenter.UserNotifierView.class,
-        UserNotifierViewImpl.class, UserNotifierProxy.class);
+    eagle(UserNotifierPopup.class);
+    requestStaticInjection(NotifyUser.class);
     bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
         SpaceSelectorPanel.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
     s(SiteLogo.class);
@@ -208,8 +206,7 @@ public class CoreGinModule extends ExtendedGinModule {
     // UI
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
 
-    // FIXME: revise this!
-    s(GxtGuiProvider.class);
+    // s(GxtGuiProvider.class);
     // s(GwtGuiProvider.class);
 
     bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);

@@ -19,22 +19,37 @@
  */
 package cc.kune.common.client.notify;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class NotifyUser {
+  @Inject
   private static EventBus eventBus;
-  private static I18nTranslationService i18n;
-  private static SimpleResponseCallback onOk;
+
+  private static SimpleResponseCallback onOk = new SimpleResponseCallback() {
+
+    @Override
+    public void onCancel() {
+      // Do nothing
+    }
+
+    @Override
+    public void onSuccess() {
+      // Do nothing
+    }
+  };
 
   public static void askConfirmation(final ImageResource icon, final String title, final String message,
       final SimpleResponseCallback callback) {
-    eventBus.fireEvent(new ConfirmAskEvent(icon, title, message, i18n.t("Yes"), i18n.t("No"), callback));
+    eventBus.fireEvent(new ConfirmAskEvent(icon, title, message, I18n.t("Yes"), I18n.t("No"), callback));
   }
 
   public static void askConfirmation(final String title, final String message,
@@ -61,8 +76,8 @@ public class NotifyUser {
         + (TextUtils.empty(additionalMessage) ? "" : ": " + additionalMessage)));
   }
 
-  public static void error(final String message, final String title, final boolean closeable) {
-    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, title, closeable));
+  public static void error(final String title, final String message, final boolean closeable) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, title, message, closeable));
   }
 
   public static void error(final String title, final String message, final String id,
@@ -95,24 +110,6 @@ public class NotifyUser {
     sendEventImpl(title, message, id, closeable, NotifyLevel.info);
   }
 
-  public static void init(final EventBus eventBus, final I18nTranslationService i18n) {
-    NotifyUser.eventBus = eventBus;
-    NotifyUser.i18n = i18n;
-    onOk = new SimpleResponseCallback() {
-
-      @Override
-      public void onCancel() {
-        // Do nothing
-      }
-
-      @Override
-      public void onSuccess() {
-        // Do nothing
-      }
-    };
-
-  }
-
   public static void logError(final String message) {
     if (eventBus != null) {
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.log, message));
@@ -132,7 +129,7 @@ public class NotifyUser {
 
   public static void showAlertMessage(final String title, final String message,
       final SimpleResponseCallback callback) {
-    eventBus.fireEvent(new ConfirmAskEvent(title, message, i18n.t("Ok"), "", callback));
+    eventBus.fireEvent(new ConfirmAskEvent(title, message, I18n.t("Ok"), "", callback));
   }
 
   public static void showProgress() {
@@ -149,7 +146,7 @@ public class NotifyUser {
   }
 
   public static void showProgressSearching() {
-    eventBus.fireEvent(new ProgressShowEvent(i18n.t("Searching")));
+    eventBus.fireEvent(new ProgressShowEvent(I18n.t("Searching")));
   }
 
   public static void veryImportant(final String message) {

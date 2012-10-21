@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client.sn;
 
-import cc.kune.common.client.actions.gxtui.AbstractGxtMenuGui;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
@@ -150,7 +149,6 @@ public class AbstractSNPanel extends ViewImpl {
         if (menu == null) {
           menu = new MenuDescriptor();
           menu.setStandalone(true);
-          menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
           for (final GuiActionDescrip item : menuitems) {
             item.setParent(menu);
           }

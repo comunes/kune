@@ -20,7 +20,6 @@
 package cc.kune.common.client;
 
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
-import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
@@ -33,8 +32,8 @@ public class SampleGinModule extends AbstractGinModule {
 
   @Override
   protected void configure() {
+    // FIXME move this to sandbox!!!
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
-    bind(GxtGuiProvider.class).in(Singleton.class);
     bind(GwtGuiProvider.class).in(Singleton.class);
     bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
   }

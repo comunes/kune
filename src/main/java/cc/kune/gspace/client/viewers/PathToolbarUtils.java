@@ -33,7 +33,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.gspace.client.actions.ActionStyles;
+import cc.kune.gspace.client.actions.SNActionStyles;
 import cc.kune.gspace.client.actions.GotoTokenAction;
 
 import com.google.gwt.event.shared.EventBus;
@@ -63,7 +63,7 @@ public class PathToolbarUtils {
   }
 
   private ButtonDescriptor createGroupButton(final GroupDTO group, boolean showGroupName, boolean minimal) {
-    final String style = ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " + ActionStyles.BTN_SMALL : "");
+    final String style = ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " + SNActionStyles.BTN_SMALL : "");
     final String tooltip = group.getLongName();
     final GotoTokenAction action = new GotoTokenAction(null,
         showGroupName ? group.getShortName() : null, tooltip, group.getStateToken(), style,

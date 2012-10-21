@@ -21,8 +21,8 @@ package cc.kune.wave.client.kspecific;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;

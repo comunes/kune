@@ -55,8 +55,8 @@ public class KuneEntryPoint implements EntryPoint {
         Log.error("Error in 'onModuleLoad()' method", e);
         ErrorHandler.getStackTraceAsync(e, new Accessor<SafeHtml>() {
           @Override
-          public void use(SafeHtml stack) {
-            String message = stack.asString().replace("<br>", "\n");
+          public void use(final SafeHtml stack) {
+            final String message = stack.asString().replace("<br>", "\n");
             NotifyUser.logError(message);
             NotifyUser.showProgress("Error");
             new Timer() {
@@ -88,12 +88,11 @@ public class KuneEntryPoint implements EntryPoint {
     AsyncCallbackSimple.init(ginjector.getErrorHandler());
     ginjector.getSessionExpirationManager();
     ginjector.getEventLogger();
-    NotifyUser.init(ginjector.getEventBus(), ginjector.getI18n());
+    // NotifyUser.init(ginjector.getEventBus(), ginjector.getI18n());
     ginjector.getCorePresenter().get().forceReveal();
     ginjector.getOnAppStartFactory();
     ginjector.getStateManager();
     ginjector.getGwtGuiProvider();
-    ginjector.getUserNotifierPresenter();
     ginjector.getSpinerPresenter();
     ginjector.getGroupMembersPresenter();
 

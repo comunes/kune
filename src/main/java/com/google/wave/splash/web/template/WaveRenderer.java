@@ -16,14 +16,14 @@
  */
 package com.google.wave.splash.web.template;
 
+import java.util.List;
+
 import com.google.inject.ImplementedBy;
-import com.google.wave.splash.rpc.ClientAction;
 import com.google.wave.api.Blip;
 import com.google.wave.api.Element;
 import com.google.wave.api.ParticipantProfile;
 import com.google.wave.api.Wavelet;
-
-import java.util.List;
+import com.google.wave.splash.rpc.ClientAction;
 
 /**
  * Does the actual conversion of a wavelet/blipdata tree into html. This
