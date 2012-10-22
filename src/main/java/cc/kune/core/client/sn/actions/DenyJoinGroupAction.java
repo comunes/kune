@@ -50,7 +50,7 @@ public class DenyJoinGroupAction extends AbstractExtendedAction {
     this.i18n = i18n;
     this.snServiceProvider = snServiceProvider;
     putValue(NAME, i18n.t("Reject as member"));
-    putValue(Action.SMALL_ICON, res.forbiden());
+    putValue(Action.SMALL_ICON, res.del());
   }
 
   @Override
