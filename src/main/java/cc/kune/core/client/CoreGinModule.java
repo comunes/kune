@@ -19,11 +19,14 @@
  */
 package cc.kune.core.client;
 
-import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.events.EventBusWithLogging;
+import cc.kune.common.client.msgs.UserMessagesPanel;
+import cc.kune.common.client.msgs.UserMessagesPresenter;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.notify.UserNotifierPopup;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
@@ -62,13 +65,11 @@ import cc.kune.core.client.init.AppStarterDefault;
 import cc.kune.core.client.init.PrefetchUtilities;
 import cc.kune.core.client.notify.confirm.UserConfirmPanel;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
-import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
-import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
-import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
 import cc.kune.core.client.sitebar.ErrorsDialog;
@@ -118,8 +119,6 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
-import cc.kune.msgs.client.UserMessagesPanel;
-import cc.kune.msgs.client.UserMessagesPresenter;
 
 import com.calclab.emite.core.client.services.Services;
 import com.calclab.emite.core.client.services.gwt.GWTServices;
@@ -170,8 +169,8 @@ public class CoreGinModule extends ExtendedGinModule {
         CorePresenter.CoreProxy.class);
     bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerPanel.class,
         SpinerPresenter.SpinerProxy.class);
-    bindPresenter(UserNotifierPresenter.class, UserNotifierPresenter.UserNotifierView.class,
-        UserNotifierViewImpl.class, UserNotifierProxy.class);
+    eagle(UserNotifierPopup.class);
+    requestStaticInjection(NotifyUser.class);
     bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
         SpaceSelectorPanel.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
     s(SiteLogo.class);
@@ -208,8 +207,7 @@ public class CoreGinModule extends ExtendedGinModule {
     // UI
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
 
-    // FIXME: revise this!
-    s(GxtGuiProvider.class);
+    // s(GxtGuiProvider.class);
     // s(GwtGuiProvider.class);
 
     bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
@@ -218,6 +216,7 @@ public class CoreGinModule extends ExtendedGinModule {
     bind(Session.class).to(SessionDefault.class).in(Singleton.class);
     s(SessionExpirationManager.class);
     s(ErrorHandler.class);
+    requestStaticInjection(AsyncCallbackSimple.class);
     s(StateManagerDefault.class);
     bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
     s(AccessRightsClientManager.class);

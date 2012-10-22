@@ -74,7 +74,7 @@
     </repository>
     <repository>
       <id>gwt-maven-rewraps</id>
-      <url>http://gwt-maven-rewraps.googlecode.com/hg/</url>
+      <url>http://gwt-maven-rewraps.googlecode.com/git/</url>
     </repository>
     <!-- cc -->
     <repository>
@@ -235,6 +235,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!-- FIXME Try to remove this dependency -->
     <dependency>
       <groupId>org.adamtacy</groupId>
       <artifactId>gwt-fx</artifactId>

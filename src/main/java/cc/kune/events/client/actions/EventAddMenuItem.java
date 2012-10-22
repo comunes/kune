@@ -23,15 +23,15 @@ import java.util.Date;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.ui.dialogs.PromptTopDialog;
-import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
-import cc.kune.common.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;

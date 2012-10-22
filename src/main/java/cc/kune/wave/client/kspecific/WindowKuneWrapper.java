@@ -25,11 +25,11 @@ import org.waveprotocol.wave.client.common.util.WindowPromptCallback;
 import org.waveprotocol.wave.client.common.util.WindowWrapper;
 
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.ui.dialogs.PromptTopDialog;
-import cc.kune.common.client.ui.dialogs.PromptTopDialog.Builder;
-import cc.kune.common.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog.OnEnter;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

@@ -25,7 +25,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.safety.Whitelist;
-import com.google.wave.api.Annotation;
+
 import com.google.common.collect.Maps;
 import com.google.wave.api.Annotations;
 import com.google.wave.api.Line;

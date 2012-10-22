@@ -20,7 +20,6 @@
 package cc.kune.common.client;
 
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
-import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 
@@ -29,11 +28,11 @@ import com.google.gwt.inject.client.Ginjector;
 
 @GinModules(SampleGinModule.class)
 public interface SampleGinjector extends Ginjector {
+  // FIXME move this to sandbox!!!
   GlobalShortcutRegister getGlobalShortcutRegister();
 
   GuiProvider getGuiProvider();
 
   GwtGuiProvider getGwtGuiProvider();
 
-  GxtGuiProvider getGxtGuiProvider();
 }

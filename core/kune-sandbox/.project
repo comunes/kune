@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+  <name>kune-sandbox</name>
+  <comment>Just a GWT EntryPoint to test kune UI widgets. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <projects/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+    <buildCommand>
+      <name>org.eclipse.m2e.core.maven2Builder</name>
+    </buildCommand>
+    <buildCommand>
+      <name>com.google.gdt.eclipse.core.webAppProjectValidator</name>
+    </buildCommand>
+    <buildCommand>
+      <name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+    <nature>org.eclipse.m2e.core.maven2Nature</nature>
+    <nature>com.google.gwt.eclipse.core.gwtNature</nature>
+  </natures>
+</projectDescription>

@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>kune-core</artifactId>
+    <groupId>cc.kune</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <artifactId>kune-java-gadget-sample</artifactId>
+  <name>A gadget sample for kune</name>
+  <description>A java gadget sample for kune to help the creation of kune gadgets</description>
+  <repositories>
+    <repository>
+      <id>cobogw</id>
+      <name>Cobogw repository at googlecode</name>
+      <url>http://cobogw.googlecode.com/svn/maven2</url>
+    </repository>
+    <repository>
+      <id>ext-gxt</id>
+      <name>ext-gxt at jahia</name>
+      <url>http://maven.jahia.org/maven2/</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.9</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>${gwt.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>${guice.version}</version>
+      <classifier>no_aop</classifier>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt.inject</groupId>
+      <artifactId>gin</artifactId>
+      <version>1.5.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.cobogw.gwt.wave-api</groupId>
+      <artifactId>cobogwave-gadget</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.extjs</groupId>
+      <artifactId>gxt</artifactId>
+      <version>2.2.1</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <dependency>
+    <groupId>com.googlecode.gwtquery</groupId>
+    <artifactId>gwtquery</artifactId>
+    <version>1.1.0</version>
+    <!-- If you are using old versions of gwt, uncomment the appropriate
+      line -->
+    <classifier>2.1.0</classifier>
+    <scope>provided</scope>
+  </dependency>
+</project>

@@ -27,7 +27,7 @@ public class AbstractEditorsMenu extends MenuLoggedDescriptor {
 
   public AbstractEditorsMenu(final AccessRightsClientManager rightsManager) {
     super(rightsManager);
-    this.withStyles(ActionStyles.MENU_BTN_STYLE_LEFT);
+    this.withStyles(SNActionStyles.MENU_BTN_STYLE_LEFT);
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override
       public void onAccessRightsChanged(final AccessRightsChangedEvent event) {

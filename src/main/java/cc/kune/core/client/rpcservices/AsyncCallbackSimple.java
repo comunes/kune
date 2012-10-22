@@ -22,18 +22,16 @@ package cc.kune.core.client.rpcservices;
 import cc.kune.core.client.errors.ErrorHandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
 
 public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
 
+  @Inject
   private static ErrorHandler errorHandler;
 
   @Override
   public void onFailure(final Throwable caught) {
     errorHandler.process(caught);
-  }
-
-  public static void init(ErrorHandler kuneErrorHandler) {
-    errorHandler = kuneErrorHandler;
   }
 
 }

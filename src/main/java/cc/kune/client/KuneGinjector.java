@@ -39,7 +39,6 @@ import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
-import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogo;
@@ -161,8 +160,6 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
   TokenMatcher getTokenMatcher();
 
   AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
-
-  AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
 
   WaveParts getWaveParts();
 

@@ -38,9 +38,9 @@ public class ContentViewerOptionsMenu extends MenuDescriptor {
     this.withIcon(res.arrowdownsitebar()).withId(ID);
     if (session.isNewbie()) {
       this.withText(I18n.t("More"));
-      this.withStyles(ActionStyles.MENU_BTN_STYLE_RIGHT);
+      this.withStyles(SNActionStyles.MENU_BTN_STYLE_RIGHT);
     } else {
-      this.withStyles(ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT);
+      this.withStyles(SNActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT);
     }
   }
 

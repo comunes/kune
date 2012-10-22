@@ -4,7 +4,7 @@
   <inherits name='com.google.gwt.user.User'/>
   <!-- Other module inherits -->
   <!-- Specify the app entry point class. -->
-  <!-- <entry-point class='cc.kune.msgs.client.KuneMessagesSampleEntryPoint' 
+  <!-- <entry-point class='cc.kune.msgs.client.KuneMessagesSampleEntryPoint'
     /> -->
   <!-- Specify the paths for translatable code -->
   <source path="shared"
@@ -14,7 +14,6 @@
   <public path="public"/>
   <inherits name='org.cobogw.gwt.user.User'/>
   <inherits name='com.google.gwt.inject.Inject'/>
-  <inherits name="com.extjs.gxt.ui.GXT"/>
   <inherits name='com.google.gwt.query.Query'/>
   <stylesheet src="kune-common.css"/>
 </module>
