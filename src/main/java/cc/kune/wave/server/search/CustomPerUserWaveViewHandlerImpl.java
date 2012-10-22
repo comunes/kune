@@ -101,6 +101,9 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     final String waveId = waveletData.getWaveId().serialise();
     final String waveletId = waveletData.getWaveletId().serialise();
     final String domain = waveletData.getWaveId().getDomain();
+    // waveletData.getCreator()
+    // waveletData.getCreationTime()
+    // waveletData.getDocument(root?)
     try {
       waveEntity = waveEntityManager.find(domain, waveId, waveletId);
     } catch (final javax.persistence.NoResultException e) {
