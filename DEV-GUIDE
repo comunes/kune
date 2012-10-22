@@ -402,8 +402,6 @@ See class WaveClientProvider in Kune (in the short term, we should define this i
 
 ==Kune maven repo==
 
-NOTE: This section (between << >>) is outdated. Kune repository is now in Gitorious: https://gitorious.org/kune
-<<<<
 To upload packages you need to configure in .m2/settings.xml something like:
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -421,7 +419,14 @@ also you have to
 and access via ssh with that key without problems.
 
 We usually upload new packages to this repo via bin/repopubli.sh
->>>>
+
+==Making a Kune release==
+
+* check the current scm configuration with something like: mvn -DstartDate=2012-09-01 -DendDate=2012-09-21 scm:changelog
+* do the las commits, change debian version and scripts grep -r CURRENTVERSION-SNAPSHOT src/ debian/ bin/ and change these files with CURRENTVERSION
+* do a mvn release:prepare
+* if all it's ok: mvn release:perform
+* if things goes wrong mvn release:prepare -Dresume=false or even mvn release:clean
 
 ==Changelog==
 
