@@ -4,7 +4,7 @@
 
 usage() {
     echo "$0 [-j <jar file>] [-k <kune-config>] [-w <wave-config>] [-s <jaas config>] [Debug options] [other options]
-    Example: $0 -j target/kune-0.2.0-SNAPSHOT-jar-with-dependencies.jar -l IGNORE -d -p -u 20000
+    Example: $0 -j target/kune-0.3.0-SNAPSHOT-jar-with-dependencies.jar -l IGNORE -d -p -u 20000
 
 Options:
 -j <jar file> : runs jar file generated via mvn assembly:assembly
