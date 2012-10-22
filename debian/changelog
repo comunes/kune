@@ -1,3 +1,9 @@
+kune (0.3.0+b1) precise; urgency=low
+
+  * Source refactorization and new kune-sandbox module
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 22 Oct 2012 14:18:47 +0200
+
 kune (0.2.0+b34) unstable; urgency=low
 
   * More chrome fixes (continuation of #388)
