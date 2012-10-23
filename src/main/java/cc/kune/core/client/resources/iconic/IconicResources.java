@@ -117,6 +117,9 @@ public interface IconicResources extends ClientBundle {
   @Source("event.png")
   ImageResource eventWhite();
 
+  @Source("facebook.png")
+  ImageResource facebook();
+
   @Source("folder-add.png")
   ImageResource folderAdd();
 
@@ -131,6 +134,9 @@ public interface IconicResources extends ClientBundle {
 
   @Source("home.png")
   ImageResource home();
+
+  @Source("identica.png")
+  ImageResource identica();
 
   @Source("info.png")
   ImageResource info();
@@ -234,17 +240,20 @@ public interface IconicResources extends ClientBundle {
   @Source("tasks.png")
   ImageResource tasksWhite();
 
-  @Source("tools.png")
-  ImageResource toolsWhite();
-
   @Source("tools-g.png")
   ImageResource toolsGrey();
+
+  @Source("tools.png")
+  ImageResource toolsWhite();
 
   @Source("trash-g.png")
   ImageResource trashGrey();
 
   @Source("trash.png")
   ImageResource trashWhite();
+
+  @Source("twitter.png")
+  ImageResource twitter();
 
   @Source("undo.png")
   ImageResource undo();
