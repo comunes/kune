@@ -80,7 +80,7 @@ implements MaxMinWorkspace {
       showMaximized(false);
     }
   }
-  private static final int LIMIT_SMALL_SCREEN = 2000;
+  private static final int LIMIT_SMALL_SCREEN = 900;
 
   public static final String MAX_ICON = "mmwp-max_bt";
 
