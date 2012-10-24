@@ -23,11 +23,11 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 
 public interface SitebarActions {
-
   static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
   static final MenuDescriptor MORE_MENU = new MenuDescriptor();
-
   static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
+
+  public String COMMON_LINK_STYLE = "k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor";
 
   void refreshActions();
 
