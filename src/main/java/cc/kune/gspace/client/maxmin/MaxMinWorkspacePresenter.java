@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
+import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18n;
@@ -32,6 +33,7 @@ import cc.kune.core.client.sitebar.SitebarActions;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -46,10 +48,11 @@ public class MaxMinWorkspacePresenter
 implements MaxMinWorkspace {
 
   public class MaximizeAction extends AbstractExtendedAction {
-    public MaximizeAction(final String name, final ImageResource img) {
+    public MaximizeAction(final String name, final ImageResource img, final String tooltip) {
       super();
       putValue(Action.NAME, name);
       putValue(Action.SMALL_ICON, img);
+      putValue(Action.TOOLTIP, tooltip);
     }
 
     @Override
@@ -65,10 +68,11 @@ implements MaxMinWorkspace {
 
   }
   public class MinimizeAction extends AbstractExtendedAction {
-    public MinimizeAction(final String name, final ImageResource img) {
+    public MinimizeAction(final String name, final ImageResource img, final String tooltip) {
       super();
       putValue(Action.NAME, name);
       putValue(Action.SMALL_ICON, img);
+      putValue(Action.TOOLTIP, tooltip);
     }
 
     @Override
@@ -80,15 +84,23 @@ implements MaxMinWorkspace {
 
   public static final String MIN_ICON = "mmwp-min_bt";
 
+  private static final int LIMIT_SMALL_SCREEN = 900;
+
   private final IconicResources images;
 
-  private MenuItemDescriptor maximizeButton;
+  private MenuItemDescriptor maximizeButtonMenu;
+  
+  private IconLabelDescriptor maximizeButtonBar;
 
   private boolean maximized;
 
-  private MenuItemDescriptor minimizeButton;
+  private MenuItemDescriptor minimizeButtonMenu;
+  
+  private IconLabelDescriptor minimizeButtonBar;
 
   private final GlobalShortcutRegister shortcutReg;
+  
+  private boolean SmallScreen;
 
   @Inject
   public MaxMinWorkspacePresenter(final EventBus eventBus, final MaxMinWorkspaceView view,
@@ -98,26 +110,50 @@ implements MaxMinWorkspace {
     this.shortcutReg = shortcutReg;
     this.images = images;
     maximized = false;
+    
+    checkSmallScreen();
   }
 
   private void createActions() {
     final KeyStroke shortcut = Shortcut.getShortcut(true, true, false, false, Character.valueOf('F'));
 
-    final MaximizeAction maximizeAction = new MaximizeAction(I18n.t("Maximize the workspace"),
-        images.maximize());
-    maximizeAction.setShortcut(shortcut);
-    maximizeButton = new MenuItemDescriptor(SitebarActions.MORE_MENU, maximizeAction);
-    maximizeButton.setPosition(0);
-    maximizeButton.setId(MAX_ICON);
-
-    final MinimizeAction minimizeAction = new MinimizeAction(I18n.t("Minimize the workspace"),
-        images.minimize());
-    minimizeAction.setShortcut(shortcut);
-    minimizeButton = new MenuItemDescriptor(SitebarActions.MORE_MENU, minimizeAction);
-    minimizeButton.setPosition(1);
-    minimizeButton.setVisible(false);
-    minimizeButton.setId(MIN_ICON);
-
+    if (SmallScreen) {
+      // in small screens, add MaxMin button to the sitebar very visible 
+      final MaximizeAction maximizeAction = new MaximizeAction(I18n.t("Maximize"),
+          images.maximize(), I18n.t("Maximize the workspace in Inbox and Group Space"));
+      maximizeAction.setShortcut(shortcut);
+      maximizeButtonBar = new IconLabelDescriptor(maximizeAction);
+      maximizeButtonBar.setId(MAX_ICON);
+      maximizeButtonBar.setParent(SitebarActions.RIGHT_TOOLBAR);
+      maximizeButtonBar.setPosition(0);
+      
+      final MinimizeAction minimizeAction = new MinimizeAction(I18n.t("Minimize"),
+          images.minimize(), I18n.t("Restore the normal workspace size in Inbox and Group Space"));
+      minimizeAction.setShortcut(shortcut);
+      minimizeButtonBar = new IconLabelDescriptor(minimizeAction);
+      minimizeButtonBar.setId(MIN_ICON);
+      minimizeButtonBar.setParent(SitebarActions.RIGHT_TOOLBAR);
+      minimizeButtonBar.setPosition(1);
+      minimizeButtonBar.setVisible(false);
+      
+    } else {
+      // in large screens, add the MaxMin button to the More menu
+      final MaximizeAction maximizeAction = new MaximizeAction(I18n.t("Maximize the workspace"),
+          images.maximize(), I18n.t("Maximize the workspace in Inbox and Group Space"));
+      maximizeAction.setShortcut(shortcut);
+      maximizeButtonMenu = new MenuItemDescriptor(SitebarActions.MORE_MENU, maximizeAction);
+      maximizeButtonMenu.setPosition(0);
+      maximizeButtonMenu.setId(MAX_ICON);
+      
+      final MinimizeAction minimizeAction = new MinimizeAction(I18n.t("Minimize the workspace"),
+          images.minimize(), I18n.t("Restore the normal workspace size in Inbox and Group Space"));
+      minimizeAction.setShortcut(shortcut);
+      minimizeButtonMenu = new MenuItemDescriptor(SitebarActions.MORE_MENU, minimizeAction);
+      minimizeButtonMenu.setPosition(1);
+      minimizeButtonMenu.setVisible(false);
+      minimizeButtonMenu.setId(MIN_ICON);
+    }
+    
     shortcutReg.put(shortcut, new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
@@ -147,9 +183,22 @@ implements MaxMinWorkspace {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /** Checks if the client's screen size is small, that is, its browser height under a fixed threshold
+   * 
+   */
+  private void checkSmallScreen(){
+    SmallScreen = Window.getClientHeight() < LIMIT_SMALL_SCREEN;
+  }
+  
   private void showMaximized(final boolean maximized) {
-    maximizeButton.setVisible(!maximized);
-    minimizeButton.setVisible(maximized);
+    if(SmallScreen){
+      maximizeButtonBar.setVisible(!maximized);
+      minimizeButtonBar.setVisible(maximized);
+    }
+    else{
+      maximizeButtonMenu.setVisible(!maximized);
+      minimizeButtonMenu.setVisible(maximized);
+    }
     this.maximized = maximized;
     getView().setMaximized(maximized);
   }
