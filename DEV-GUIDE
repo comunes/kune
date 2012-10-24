@@ -342,6 +342,8 @@ please use them if you want to contribute.
 
 NOTE: In order to import those XML in your Eclipse, follow (tested in Eclipse 3.5, 3.6, 3.7):  Window | Preferences | Java | Code Style | Formatter & import selecting the formatter XML file. Go to |Clean Up to import the cleanup XML file.
 
+NOTE: In Window | Preferences | Java | Editor | Save Actions, you can set default formatting and cleaning tasks automatically on save. This guarantees your contributions to be always with the appropriate code style.
+
 We will (try) to follow:
 http://code.google.com/webtoolkit/makinggwtbetter.html#codestyle
 
