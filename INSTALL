@@ -247,6 +247,8 @@ Besides, you can build diferent tutorials than the default ones (see src/main/we
 
 NOTE: If you want to INSTALL Kune without the Openfire dependency (which is useful for development or testing), you can skip this part (you should configure kune.openfire.ignore in kune.properties accordingly). In this case, there won't be XMPP server.
 
+NOTE: The Openfire database should have been created, as explained before.
+
 To install openfire in your system, download the appropriate version from: 
 http://www.igniterealtime.org/downloads/index.jsp
 
