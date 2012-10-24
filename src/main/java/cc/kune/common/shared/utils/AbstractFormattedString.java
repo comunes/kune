@@ -17,49 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.mail;
+package cc.kune.common.shared.utils;
 
 import java.util.Arrays;
 
-import com.calclab.emite.core.client.packet.TextUtils;
 import com.google.common.base.Preconditions;
 
 /**
- * The Class FormatedString is used to separate, String templates (usually html)
- * from args (indicated with %s) and also to allow the translation of this
+ * The Class FormattedString is used to separate, String templates (usually
+ * html) from args (indicated with %s) and also to allow the translation of this
  * templates. More info
  * http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html#syntax
  */
-public class FormatedString {
-
-  public static FormatedString build(final boolean shouldBeTranslated, final String template,
-      final Object... args) {
-    return new FormatedString(shouldBeTranslated, template, args);
-  }
-
-  /**
-   * Builds with only a message without args.
-   * 
-   * @param plainMsg
-   *          the plain msg
-   * @return the formated string
-   */
-  public static FormatedString build(final String plainMsg) {
-    return new FormatedString(plainMsg);
-  }
-
-  /**
-   * Builds the.
-   * 
-   * @param template
-   *          the template
-   * @param args
-   *          the args
-   * @return the formated string
-   */
-  public static FormatedString build(final String template, final Object... args) {
-    return new FormatedString(template, args);
-  }
+public abstract class AbstractFormattedString {
 
   /** The args. */
   private final Object[] args;
@@ -80,7 +50,8 @@ public class FormatedString {
    * @param args
    *          the args that will be formatted inside the template (%s, etc)
    */
-  public FormatedString(final boolean shouldBeTranslated, final String template, final Object... args) {
+  public AbstractFormattedString(final boolean shouldBeTranslated, final String template,
+      final Object... args) {
     this.template = template;
     this.shouldBeTranslated = shouldBeTranslated;
     this.args = args;
@@ -92,10 +63,8 @@ public class FormatedString {
    * @param plainMsg
    *          the plain msg
    */
-  public FormatedString(final String plainMsg) {
-    template = plainMsg;
-    args = null;
-    shouldBeTranslated = true;
+  public AbstractFormattedString(final String plainMsg) {
+    this(true, plainMsg);
   }
 
   /**
@@ -106,14 +75,8 @@ public class FormatedString {
    * @param args
    *          the args that will be formatted inside the template (%s, etc)
    */
-  public FormatedString(final String template, final Object... args) {
-    this.template = template;
-    this.args = args;
-    this.shouldBeTranslated = true;
-  }
-
-  public FormatedString copy() {
-    return new FormatedString(shouldBeTranslated, template, args);
+  public AbstractFormattedString(final String template, final Object... args) {
+    this(true, template, args);
   }
 
   @Override
@@ -127,7 +90,7 @@ public class FormatedString {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final FormatedString other = (FormatedString) obj;
+    final AbstractFormattedString other = (AbstractFormattedString) obj;
     if (!Arrays.equals(args, other.args)) {
       return false;
     }
@@ -144,6 +107,12 @@ public class FormatedString {
     return true;
   }
 
+  public abstract String format(final String template, final Object... args);
+
+  public Object[] getArgs() {
+    return args;
+  }
+
   /**
    * Gets the string.
    * 
@@ -151,7 +120,7 @@ public class FormatedString {
    */
   public String getString() {
     Preconditions.checkNotNull(template, "Template of FormatedString cannot be null");
-    return args == null ? template : String.format(template, args);
+    return args == null ? template : format(template, args);
   }
 
   /**

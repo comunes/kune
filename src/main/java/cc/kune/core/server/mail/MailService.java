@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.mail;
 
+import cc.kune.common.shared.utils.AbstractFormattedString;
+
 public interface MailService {
 
   /**
@@ -33,7 +35,7 @@ public interface MailService {
    * @param tos
    *          the recipients
    */
-  void send(FormatedString subject, FormatedString body, boolean isHtml, String... tos);
+  void send(AbstractFormattedString subject, AbstractFormattedString body, boolean isHtml, String... tos);
 
   /**
    * Sends email
@@ -47,7 +49,7 @@ public interface MailService {
    * @param tos
    *          the recipients
    */
-  void send(String from, FormatedString subject, FormatedString body, boolean isHtml, String... tos);
+  void send(String from, AbstractFormattedString subject, AbstractFormattedString body, boolean isHtml, String... tos);
 
   /**
    * Sends html email with default site "from"
@@ -59,7 +61,7 @@ public interface MailService {
    * @param tos
    *          the recipients
    */
-  void sendHtml(FormatedString subject, FormatedString body, String... tos);
+  void sendHtml(AbstractFormattedString subject, AbstractFormattedString body, String... tos);
 
   /**
    * Sends html email
@@ -73,7 +75,7 @@ public interface MailService {
    * @param tos
    *          the recipients
    */
-  void sendHtml(String from, FormatedString subject, FormatedString body, String... tos);
+  void sendHtml(String from, AbstractFormattedString subject, AbstractFormattedString body, String... tos);
 
   /**
    * 
@@ -86,7 +88,7 @@ public interface MailService {
    * @param tos
    *          the recipients
    */
-  void sendPlain(FormatedString subject, FormatedString body, String... tos);
+  void sendPlain(AbstractFormattedString subject, AbstractFormattedString body, String... tos);
 
   /**
    * Sends plain email
@@ -100,6 +102,6 @@ public interface MailService {
    * @param tos
    *          the recipients
    */
-  void sendPlain(String from, FormatedString subject, FormatedString body, String... tos);
+  void sendPlain(String from, AbstractFormattedString subject, AbstractFormattedString body, String... tos);
 
 }

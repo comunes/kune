@@ -61,15 +61,13 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
   }
 
   private final I18nTranslationService i18n;
-  private final StateTokenUtils stateTokenUtils;
 
   @Inject
   public PSpacePresenter(final Session session, final StateManager stateManager,
       final EventBus eventBus, final PSpaceView view, final PSpaceProxy proxy,
-      final I18nTranslationService i18n, final StateTokenUtils stateTokenUtils) {
+      final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
     this.i18n = i18n;
-    this.stateTokenUtils = stateTokenUtils;
     session.onAppStart(true, new AppStartEvent.AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -120,7 +118,7 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
       if (((StateContainerDTO) state).getAccessLists().getViewers().getMode().equals(
           GroupListDTO.EVERYONE)) {
         @SuppressWarnings("unused")
-        final String publicUrl = stateTokenUtils.getPublicUrl(token);
+        final String publicUrl = StateTokenUtils.getPublicSpaceUrl(token);
         // getView().setContentGotoPublicUrl(publicUrl);
         getView().setContentGotoPublicUrl("about:blank");
         if (state instanceof StateContentDTO) {

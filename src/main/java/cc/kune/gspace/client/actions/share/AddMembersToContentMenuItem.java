@@ -17,11 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.actions;
+package cc.kune.gspace.client.actions.share;
 
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
+import cc.kune.gspace.client.actions.AddMembersToContentAction;
 
 public class AddMembersToContentMenuItem extends MenuItemDescriptor {
 

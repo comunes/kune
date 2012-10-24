@@ -17,23 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.actions;
+package cc.kune.gspace.client.actions.share;
 
+import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAGroupCondition;
-import cc.kune.core.shared.dto.SocialNetworkSubGroup;
+import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 
 import com.google.inject.Inject;
 
-public class AddCollabMembersToContentMenuItem extends AddMembersToContentMenuItem {
+/**
+ * The Class ContentViewerOptionsShareSubMenu (not used yet)
+ */
+public class ContentViewerOptionsShareSubMenu extends SubMenuDescriptor {
+
+  public static final String ID = "k-cnt-viewer-share-opt-submenu";
 
   @Inject
-  public AddCollabMembersToContentMenuItem(final I18nTranslationService i18n,
-      final AddMembersToContentAction action, final IsCurrentStateAGroupCondition isAGroupCondition,
-      final ContentViewerShareMenu menu, final IconicResources res) {
-    super(i18n.t("Share with collaborators"), SocialNetworkSubGroup.COLLABS, action, menu, res);
-    add(isAGroupCondition);
+  public ContentViewerOptionsShareSubMenu(final I18nTranslationService i18n, final IconicResources res,
+      final ContentViewerOptionsMenu parent) {
+    super();
+    this.withText(i18n.t("Share")).withIcon(res.add()).withId(ID).withParent(parent, false);
   }
 
 }

@@ -28,9 +28,9 @@ import org.apache.commons.logging.LogFactory;
 
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.server.i18n.I18nTranslationServiceMultiLang;
-import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.mail.MailService;
 import cc.kune.core.server.properties.KuneProperties;
+import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.domain.User;
@@ -80,8 +80,8 @@ public class NotificationSenderDefault implements NotificationSender {
 
   @Override
   public void send(final PendingNotification notification, final EmailNotificationFrequency withFrequency) {
-    final FormatedString subject = notification.getSubject().copy();
-    final FormatedString body = notification.getBody();
+    final FormattedString subject = notification.getSubject().copy();
+    final FormattedString body = notification.getBody();
     final NotificationType notifyType = notification.getNotifyType();
     final boolean forceSend = notification.isForceSend();
     final boolean isHtml = notification.isHtml();
@@ -121,8 +121,9 @@ public class NotificationSenderDefault implements NotificationSender {
             || (user.isEmailVerified() && noOnline(username) && withFrequency == user.getEmailNotifFreq())) {
           // we'll send this notification if is mandatory or this user is not
           // only and has this freq configured
-          mailService.send(subject, FormatedString.build(emailTemplate.replace("%s", body.getString())),
-              isHtml, user.getEmail());
+          mailService.send(subject,
+              FormattedString.build(emailTemplate.replace("%s", body.getString())), isHtml,
+              user.getEmail());
         }
         break;
       case wave:

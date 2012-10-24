@@ -17,24 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.actions;
+package cc.kune.gspace.client.actions.share;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAGroupCondition;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
+import cc.kune.gspace.client.actions.AddMembersToContentAction;
 
 import com.google.inject.Inject;
 
-public class AddAdminMembersToContentMenuItem extends AddMembersToContentMenuItem {
+public class AddAllMembersToContentMenuItem extends AddMembersToContentMenuItem {
 
   @Inject
-  public AddAdminMembersToContentMenuItem(final I18nTranslationService i18n,
-      final AddMembersToContentAction action, final IsCurrentStateAGroupCondition isAGroupCondition,
+  public AddAllMembersToContentMenuItem(final I18nTranslationService i18n,
+      final IsCurrentStateAGroupCondition isAGroupCondition, final AddMembersToContentAction action,
       final ContentViewerShareMenu menu, final IconicResources res) {
-    super(i18n.t("Share with admins"), SocialNetworkSubGroup.ADMINS, action, menu, res);
+    super(i18n.t("Share with all group members"), SocialNetworkSubGroup.ALL_GROUP_MEMBERS, action, menu,
+        res);
     add(isAGroupCondition);
-
   }
 
 }

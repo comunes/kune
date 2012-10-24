@@ -19,8 +19,8 @@
  */
 package cc.kune.core.server.notifier;
 
-import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.utils.AbsoluteFileDownloadUtils;
+import cc.kune.core.server.utils.FormattedString;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -54,10 +54,10 @@ public class NotificationHtmlHelper {
     this.fileDownloadUtils = fileDownloadUtils;
   }
 
-  private FormatedString entityNotification(final String groupName, final boolean hasLogo,
+  private FormattedString entityNotification(final String groupName, final boolean hasLogo,
       final String message, final boolean isPersonal) {
     final String groupUrl = fileDownloadUtils.getUrl(groupName);
-    return FormatedString.build(false, GROUP_TEMPLATE, groupUrl,
+    return FormattedString.build(false, GROUP_TEMPLATE, groupUrl,
         fileDownloadUtils.getLogoAvatarHtml(groupName, hasLogo, isPersonal, 50, 5), groupUrl, groupName,
         message);
   }
@@ -75,7 +75,7 @@ public class NotificationHtmlHelper {
    *          the read more msg
    * @return the html string
    */
-  public FormatedString groupNotification(final String groupName, final boolean hasLogo,
+  public FormattedString groupNotification(final String groupName, final boolean hasLogo,
       final String message) {
     return entityNotification(groupName, hasLogo, message, false);
   }
@@ -93,7 +93,7 @@ public class NotificationHtmlHelper {
    *          the read more msg
    * @return the html string
    */
-  public FormatedString userNotification(final String userName, final boolean hasLogo,
+  public FormattedString userNotification(final String userName, final boolean hasLogo,
       final String message) {
     return entityNotification(userName, hasLogo, message, true);
   }
@@ -108,9 +108,9 @@ public class NotificationHtmlHelper {
    *          the hash
    * @return the formated string
    */
-  public FormatedString userNotification(final String body, final String hash) {
+  public FormattedString userNotification(final String body, final String hash) {
     final String hashUrl = fileDownloadUtils.getUrl(hash);
-    return FormatedString.build(false, body + "<br><a href='%s'>%s</a>",
+    return FormattedString.build(false, body + "<br><a href='%s'>%s</a>",
         fileDownloadUtils.getSiteCommonName(), hashUrl, hashUrl);
   }
 }

@@ -32,6 +32,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cc.kune.common.shared.utils.AbstractFormattedString;
 import cc.kune.core.server.LogThis;
 import cc.kune.core.server.properties.KuneProperties;
 
@@ -57,13 +58,13 @@ public class MailServiceDefault implements MailService {
   }
 
   @Override
-  public void send(final FormatedString subject, final FormatedString body, final boolean isHtml,
+  public void send(final AbstractFormattedString subject, final AbstractFormattedString body, final boolean isHtml,
       final String... tos) {
     send(smtpDefaultFrom, subject, body, isHtml, tos);
   }
 
   @Override
-  public void send(final String from, final FormatedString subject, final FormatedString body,
+  public void send(final String from, final AbstractFormattedString subject, final AbstractFormattedString body,
       final boolean isHtml, final String... tos) {
     if (smtpSkip) {
       return;
@@ -105,23 +106,23 @@ public class MailServiceDefault implements MailService {
   }
 
   @Override
-  public void sendHtml(final FormatedString subject, final FormatedString body, final String... tos) {
+  public void sendHtml(final AbstractFormattedString subject, final AbstractFormattedString body, final String... tos) {
     send(smtpDefaultFrom, subject, body, true, tos);
   }
 
   @Override
-  public void sendHtml(final String from, final FormatedString subject, final FormatedString body,
+  public void sendHtml(final String from, final AbstractFormattedString subject, final AbstractFormattedString body,
       final String... tos) {
     send(from, subject, body, true, tos);
   }
 
   @Override
-  public void sendPlain(final FormatedString subject, final FormatedString body, final String... tos) {
+  public void sendPlain(final AbstractFormattedString subject, final AbstractFormattedString body, final String... tos) {
     send(smtpDefaultFrom, subject, body, false, tos);
   }
 
   @Override
-  public void sendPlain(final String from, final FormatedString subject, final FormatedString body,
+  public void sendPlain(final String from, final AbstractFormattedString subject, final AbstractFormattedString body,
       final String... tos) {
     send(from, subject, body, false, tos);
   }
