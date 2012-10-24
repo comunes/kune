@@ -65,7 +65,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
       final CoreResources coreResources, final Session session) {
     super(newGroupAction);
     this.session = session;
-    withId(NEW_GROUP_BTN_ID).withStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
+    withId(NEW_GROUP_BTN_ID).withStyles(SitebarActions.COMMON_LINK_STYLE);
     withParent(SitebarActions.RIGHT_TOOLBAR);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         SitebarActions.RIGHT_TOOLBAR);

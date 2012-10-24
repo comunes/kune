@@ -26,14 +26,15 @@ import com.google.inject.Inject;
 public class StateTokenUtils {
 
   private static final String SEPARATOR = ".";
-  private final Session session;
 
   @Inject
-  public StateTokenUtils(final Session session) {
-    this.session = session;
+  private static Session session;
+
+  public static String getGroupSpaceUrl(final StateToken token) {
+    return session.getSiteUrl() + "/#" + token.getEncoded();
   }
 
-  public String getPublicUrl(final StateToken token) {
+  public static String getPublicSpaceUrl(final StateToken token) {
     String publicUrl = "";
 
     final String group = token.getGroup();
@@ -57,5 +58,8 @@ public class StateTokenUtils {
     }
 
     return publicUrl;
+  }
+
+  public StateTokenUtils() {
   }
 }

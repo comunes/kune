@@ -44,7 +44,6 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.state.SiteTokens;
-import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.server.notifier.PendingNotification;
 import cc.kune.core.server.notifier.PendingNotificationProvider;
@@ -53,6 +52,7 @@ import cc.kune.core.server.notifier.SimpleDestinationProvider;
 import cc.kune.core.server.notifier.WaveDestinationProvider;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.rack.ContainerListener;
+import cc.kune.core.server.utils.FormattedString;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
 
@@ -96,7 +96,7 @@ public class WaveEmailNotifier implements ContainerListener {
     waveBus.subscribe(new Subscriber() {
 
       private PendingNotification createPendingNotif(final ParticipantId participant,
-          final FormatedString subject, final FormatedString body) {
+          final FormattedString subject, final FormattedString body) {
         final String address = participant.getAddress();
         if (partUtils.isLocal(address)) {
           final String userName = partUtils.getAddressName(address);
@@ -121,20 +121,20 @@ public class WaveEmailNotifier implements ContainerListener {
         return KuneWaveServerUtils.getUrl(WaveRef.of(wavelet.getWaveId(), waveletId));
       }
 
-      private FormatedString newWaveTemplate(final String by, final String url) {
-        return FormatedString.build(
+      private FormattedString newWaveTemplate(final String by, final String url) {
+        return FormattedString.build(
             "Hi there,<br><br>You have a new message by '%s' in your inbox at %s. <a href=\"%s#%s\">Read more</a>.<br>",
             by, siteCommonName, siteUrl, url);
       }
 
-      private FormatedString removeWaveTemplate(final String by, final String title) {
-        return FormatedString.build(
+      private FormattedString removeWaveTemplate(final String by, final String title) {
+        return FormattedString.build(
             "Hi there,<br><br>You have been removed by '%s' from message '%s' at %s. <a href=\"%s#%s\">Read more</a>.<br>",
             by, title, siteCommonName, siteUrl, SiteTokens.WAVE_INBOX);
       }
 
-      private FormatedString updatedWaveTemplate(final String by, final String title, final String url) {
-        return FormatedString.build(
+      private FormattedString updatedWaveTemplate(final String by, final String title, final String url) {
+        return FormattedString.build(
             "Hi there,<br><br>The message '%s' was updated by '%s' in your inbox at %s. <a href=\"%s#%s\">Read more</a>.<br>",
             title, by, siteCommonName, siteUrl, url);
       }
@@ -159,7 +159,7 @@ public class WaveEmailNotifier implements ContainerListener {
                   final ParticipantId by = addParticipantOp.getContext().getCreator();
                   final ParticipantId to = addParticipantOp.getParticipantId();
                   LOG.info(String.format("New wave from '%s' to '%s'", by, to));
-                  return createPendingNotif(to, FormatedString.build("You have a new message"),
+                  return createPendingNotif(to, FormattedString.build("You have a new message"),
                       newWaveTemplate(by.toString(), getUrl(wavelet, waveletId)));
                 }
               });
@@ -173,7 +173,7 @@ public class WaveEmailNotifier implements ContainerListener {
                   final String title = getTitle(wavelet, by);
                   LOG.info(String.format("'%s' removed from wave '%s' to '%s'", by, title, to));
                   return createPendingNotif(to,
-                      FormatedString.build("You have been removed from a message"),
+                      FormattedString.build("You have been removed from a message"),
                       removeWaveTemplate(by.toString(), title));
                 }
               });
@@ -191,7 +191,7 @@ public class WaveEmailNotifier implements ContainerListener {
                     final String url = KuneWaveServerUtils.getUrl(waveref);
                     LOG.info(String.format("'%s' update wave '%s'", by, title));
                     return new PendingNotification(NotificationType.email,
-                        FormatedString.build("You have an update message"), updatedWaveTemplate(
+                        FormattedString.build("You have an update message"), updatedWaveTemplate(
                             by.toString(), title, url), true, false, new WaveDestinationProvider(
                             waveref, by.toString()));
                   }

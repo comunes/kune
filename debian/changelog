@@ -1,6 +1,7 @@
-kune (0.3.0+b1) precise; urgency=low
+kune (0.3.0+b1) unstable; urgency=low
 
   * Source refactorization and new kune-sandbox module
+  * Added share button in social networks (twitter, identica, g+, etc) #391
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 22 Oct 2012 14:18:47 +0200
 

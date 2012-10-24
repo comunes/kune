@@ -30,12 +30,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
-import cc.kune.gspace.client.actions.AddAdminMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.AddAllMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.AddCollabMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
-import cc.kune.gspace.client.actions.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.MoveContentMenuItem;
 import cc.kune.gspace.client.actions.ParticipateInContentBtn;
@@ -47,6 +42,15 @@ import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 import cc.kune.gspace.client.actions.TutorialBtn;
 import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
+import cc.kune.gspace.client.actions.share.AddAdminMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
+import cc.kune.gspace.client.actions.share.AddPublicToContentMenuItem;
+import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -89,7 +93,11 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelListMenuItem> delFolderMenuItem,
       final Provider<DelPostMenuItem> delPostMenuItem,
       final Provider<MoveContentMenuItem> moveContentMenuItem,
-      final Provider<SetAsHomePageMenuItem> setAsHomePage) {
+      final Provider<SetAsHomePageMenuItem> setAsHomePage,
+      final Provider<ShareInTwitterMenuItem> shareInTwitter,
+      final Provider<ShareInGPlusMenuItem> shareInGPlus,
+      final Provider<ShareInIdenticaMenuItem> shareInIdentica,
+      final Provider<ShareInFacebookMenuItem> shareInFacebook) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContainer, containers);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, contents);
@@ -107,11 +115,16 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, all);
+    // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
+    // shareInFacebook, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, subscribersCount, containersNoRoot);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);

@@ -25,6 +25,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.server.properties.KunePropertiesDefault;
+import cc.kune.core.server.utils.FormattedString;
 
 public class MailServiceDefaultTest {
 
@@ -32,20 +33,20 @@ public class MailServiceDefaultTest {
 
   @Test(expected = NullPointerException.class)
   public void basicException() {
-    assertEquals(null, FormatedString.build(null).getString());
+    assertEquals(null, FormattedString.build(null).getString());
   }
 
   @Test(expected = NullPointerException.class)
   public void basicExceptionWithArgs() {
-    assertEquals(null, FormatedString.build(null).getString());
-    assertEquals(null, FormatedString.build(null, "arg").getString());
+    assertEquals(null, FormattedString.build(null).getString());
+    assertEquals(null, FormattedString.build(null, "arg").getString());
   }
 
   @Test
   public void basicFormat() {
-    assertEquals("basic", FormatedString.build("basic").getString());
-    assertEquals("basic arg", FormatedString.build("basic %s", "arg").getString());
-    assertEquals("basic %s", FormatedString.build("basic %s", null).getString());
+    assertEquals("basic", FormattedString.build("basic").getString());
+    assertEquals("basic arg", FormattedString.build("basic %s", "arg").getString());
+    assertEquals("basic %s", FormattedString.build("basic %s", null).getString());
   }
 
   @Before
@@ -55,15 +56,15 @@ public class MailServiceDefaultTest {
 
   @Test
   public void simpleTest() {
-    service.sendPlain(FormatedString.build("Some test subject"), FormatedString.build("Some body"),
+    service.sendPlain(FormattedString.build("Some test subject"), FormattedString.build("Some body"),
         "vjrj@localhost");
   }
 
   @Test
   public void utf8Test() {
-    service.sendPlain(FormatedString.build("áéíóú"), FormatedString.build("Some body áéíóú"),
+    service.sendPlain(FormattedString.build("áéíóú"), FormattedString.build("Some body áéíóú"),
         "vjrj@localhost");
-    service.sendHtml(FormatedString.build("áéíóú"), FormatedString.build("Some body áéíóú"),
+    service.sendHtml(FormattedString.build("áéíóú"), FormattedString.build("Some body áéíóú"),
         "vjrj@localhost");
   }
 }

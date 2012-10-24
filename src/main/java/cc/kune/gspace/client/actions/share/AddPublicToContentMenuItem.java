@@ -17,26 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.actions;
+package cc.kune.gspace.client.actions.share;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
+import cc.kune.gspace.client.actions.AddMembersToContentAction;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
-@Singleton
-public class ContentViewerShareMenu extends MenuLoggedDescriptor {
-
-  private static final String ID = "k-cnt-viewer-share-menu";
+public class AddPublicToContentMenuItem extends AddMembersToContentMenuItem {
 
   @Inject
-  public ContentViewerShareMenu(final IconicResources res, final I18nTranslationService i18n,
-      final AccessRightsClientManager rightsManager) {
-    super(rightsManager);
-    this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
-        res.world()).withStyles(SNActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID);
+  public AddPublicToContentMenuItem(final I18nTranslationService i18n,
+      final AddMembersToContentAction action, final ContentViewerShareMenu menu,
+      final IconicResources res) {
+    super(i18n.t("Allow any person to edit this"), SocialNetworkSubGroup.PUBLIC, action, menu, res);
+    this.withIcon(res.world());
   }
-
 }

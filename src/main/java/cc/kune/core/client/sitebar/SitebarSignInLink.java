@@ -70,7 +70,7 @@ public class SitebarSignInLink extends ButtonDescriptor {
     // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
     setId(SITE_SIGN_IN);
     setVisible(!session.isLogged());
-    setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
+    setStyles(SitebarActions.COMMON_LINK_STYLE);
     setParent(SitebarActions.RIGHT_TOOLBAR);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         SitebarActions.RIGHT_TOOLBAR);

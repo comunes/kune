@@ -26,8 +26,8 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cc.kune.core.server.mail.FormatedString;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
+import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
@@ -48,8 +48,8 @@ public class NotificationService {
     this.helper = helper;
   }
 
-  private FormatedString createPlainSubject(final String subject) {
-    return FormatedString.build(subject);
+  private FormattedString createPlainSubject(final String subject) {
+    return FormattedString.build(subject);
   }
 
   public void notifyGroupAdmins(final Group groupToNotify, final Group groupSender,

@@ -19,7 +19,7 @@
  */
 package cc.kune.core.server.notifier;
 
-import cc.kune.core.server.mail.FormatedString;
+import cc.kune.core.server.utils.FormattedString;
 
 /**
  * The Class PendingNotification is used to store and send notifications (for
@@ -37,7 +37,7 @@ public class PendingNotification {
       false, null);
 
   /** The body. */
-  private final FormatedString body;
+  private final FormattedString body;
 
   /** The dest provider. */
   private final DestinationProvider destProvider;
@@ -52,7 +52,7 @@ public class PendingNotification {
   private final NotificationType notifyType;
 
   /** The subject. */
-  private final FormatedString subject;
+  private final FormattedString subject;
 
   /** The subject prefix [sitename] */
   private final String subjectPrefix;
@@ -73,8 +73,8 @@ public class PendingNotification {
    * @param destProvider
    *          the dest provider
    */
-  public PendingNotification(final NotificationType notifyType, final FormatedString subject,
-      final FormatedString body, final boolean isHtml, final boolean forceSend,
+  public PendingNotification(final NotificationType notifyType, final FormattedString subject,
+      final FormattedString body, final boolean isHtml, final boolean forceSend,
       final DestinationProvider destProvider) {
     this(notifyType, DEFAULT_SUBJECT_PREFIX, subject, body, isHtml, forceSend, destProvider);
   }
@@ -96,7 +96,7 @@ public class PendingNotification {
    *          the dest provider
    */
   public PendingNotification(final NotificationType notifyType, final String subjectPrefix,
-      final FormatedString subject, final FormatedString body, final boolean isHtml,
+      final FormattedString subject, final FormattedString body, final boolean isHtml,
       final boolean forceSend, final DestinationProvider destProvider) {
     this.notifyType = notifyType;
     this.subjectPrefix = subjectPrefix;
@@ -157,7 +157,7 @@ public class PendingNotification {
    * 
    * @return the body
    */
-  public FormatedString getBody() {
+  public FormattedString getBody() {
     return body;
   }
 
@@ -184,7 +184,7 @@ public class PendingNotification {
    * 
    * @return the subject
    */
-  public FormatedString getSubject() {
+  public FormattedString getSubject() {
     return subject;
   }
 

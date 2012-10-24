@@ -132,6 +132,9 @@ public interface IconicResources extends ClientBundle {
   @Source("forbiden.png")
   ImageResource forbiden();
 
+  @Source("g-plus.png")
+  ImageResource googlePlus();
+
   @Source("home.png")
   ImageResource home();
 

@@ -25,14 +25,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import cc.kune.core.server.mail.FormatedString;
+import cc.kune.core.server.utils.FormattedString;
 
 public class PendingNotificationSenderTest extends AbstractPendingNotificationTest {
 
-  private static final FormatedString BODY = FormatedString.build("Some body");
-  private static final FormatedString OTHER_BODY = FormatedString.build("Some other body");
-  private static final FormatedString OTHER_SUBJECT = FormatedString.build("Some other subject");
-  private static final FormatedString SUBJECT = FormatedString.build("Some subject");
+  private static final FormattedString BODY = FormattedString.build("Some body");
+  private static final FormattedString OTHER_BODY = FormattedString.build("Some other body");
+  private static final FormattedString OTHER_SUBJECT = FormattedString.build("Some other subject");
+  private static final FormattedString SUBJECT = FormattedString.build("Some subject");
   private PendingNotificationSender manager;
   private PendingNotificationProvider otherNotif;
   private NotificationSender sender;

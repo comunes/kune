@@ -22,7 +22,7 @@ package cc.kune.core.server.notifier;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import cc.kune.core.server.mail.FormatedString;
+import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.domain.User;
 
@@ -73,8 +73,9 @@ public class PendingNotificationSender {
     // LinkedHashSet<PendingNotificationProvider>());
   }
 
-  public void add(final NotificationType type, final String subjectPrefix, final FormatedString subject,
-      final FormatedString body, final boolean isHtml, final boolean forceSend, final User to) {
+  public void add(final NotificationType type, final String subjectPrefix,
+      final FormattedString subject, final FormattedString body, final boolean isHtml,
+      final boolean forceSend, final User to) {
     add(new PendingNotificationProvider() {
       @Override
       public PendingNotification get() {
