@@ -33,8 +33,8 @@ public class FolderNamesActionUtils {
     builder.regex(TextUtils.UNIX_NAME).regexText(
         I18n.t("The name must contain only lowercase characters, numbers and dashes")).textboxId(id);
     builder.minLength(3).maxLength(15).allowBlank(false).minLengthText(
-        CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS).maxLengthText(
-        CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS);
+        I18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS)).maxLengthText(
+        I18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS));
   }
 
 }
