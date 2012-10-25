@@ -23,9 +23,8 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.actions.FolderNamesActionUtils;
 import cc.kune.core.client.actions.RolAction;
-import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -77,12 +76,7 @@ public class NewRoomBtn extends ButtonDescriptor {
           });
       builder.width("200px").height("50px").firstButtonTitle(i18n.t("Create")).sndButtonTitle(
           i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID);
-      builder.regex(TextUtils.UNIX_NAME).regexText(
-          i18n.t("The name must contain only lowercase characters, numbers and dashes")).textboxId(
-          TEXTBOX_ID);
-      builder.minLength(3).maxLength(15).allowBlank(false).minLengthText(
-          CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS).maxLengthText(
-          CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS);
+      FolderNamesActionUtils.restrictToUnixName(builder, TEXTBOX_ID);
       diag = builder.build();
       diag.showCentered();
       diag.focusOnTextBox();
