@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client.init;
 
+import org.waveprotocol.wave.client.common.util.UserAgent;
+
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
@@ -74,7 +76,8 @@ public class AppStarterDefault implements AppStarter {
     // http://www.useragentstring.com/pages/useragentstring.php
     final String userAgent = Navigator.getUserAgent().toLowerCase();
     Log.info("User agent: " + userAgent);
-    if (userAgent.contains("chrome") || userAgent.contains("gecko")) {
+    if (UserAgent.isFirefox() || UserAgent.isWebkit() || UserAgent.isAndroid() || UserAgent.isChrome()
+        || UserAgent.isSafari() || UserAgent.isMobileWebkit()) {
       navSupport.onSupported();
     } else {
       navSupport.onNotSupported();
