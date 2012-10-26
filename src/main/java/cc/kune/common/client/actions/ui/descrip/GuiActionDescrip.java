@@ -226,7 +226,8 @@ public interface GuiActionDescrip {
    * @param listener
    *          the listener
    */
-  void removePropertyChangeListener(final PropertyChangeListener listener);
+  void removePropertyChangeListener(
+      final PropertyChangeListener listener);
 
   /**
    * Sets the drop target.
@@ -387,7 +388,17 @@ public interface GuiActionDescrip {
    *          without any other check (for instance session status, etc)
    * @return the gui action descrip
    */
-  GuiActionDescrip withParent(GuiActionDescrip parent, boolean addToParent);
+  GuiActionDescrip withParent(GuiActionDescrip parent,
+      boolean addToParent);
+
+  /**
+   * With position.
+   * 
+   * @param position
+   *          the position
+   * @return the gui action descrip
+   */
+  GuiActionDescrip withPosition(int position);
 
   /**
    * With shortcut.
@@ -396,7 +407,8 @@ public interface GuiActionDescrip {
    *          the keystroke
    * @return the gui action descrip
    */
-  GuiActionDescrip withShortcut(KeyStroke keystroke, GlobalShortcutRegister register);
+  GuiActionDescrip withShortcut(KeyStroke keystroke,
+      GlobalShortcutRegister register);
 
   /**
    * With shortcut.
@@ -405,7 +417,8 @@ public interface GuiActionDescrip {
    *          the keys (for instance "Ctrl+A")
    * @return the gui action descrip
    */
-  GuiActionDescrip withShortcut(String keys, GlobalShortcutRegister register);
+  GuiActionDescrip withShortcut(String keys,
+      GlobalShortcutRegister register);
 
   /**
    * With styles.
@@ -433,4 +446,13 @@ public interface GuiActionDescrip {
    * @return the gui action descrip
    */
   GuiActionDescrip withToolTip(String tooltip);
+
+  /**
+   * With visible.
+   * 
+   * @param visible
+   *          the visibility
+   * @return the gui action descrip
+   */
+  GuiActionDescrip withVisible(boolean visible);
 }

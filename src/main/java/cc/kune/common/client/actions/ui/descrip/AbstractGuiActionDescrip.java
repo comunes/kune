@@ -35,7 +35,8 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 /**
  * The Class AbstractUIActionDescriptor.
  */
-public abstract class AbstractGuiActionDescrip extends ChangeableObject implements GuiActionDescrip {
+public abstract class AbstractGuiActionDescrip extends
+    ChangeableObject implements GuiActionDescrip {
 
   /** The action. */
   private AbstractAction action;
@@ -235,7 +236,8 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
    * kune.common.client.actions.ui.descrip.GuiActionDescrip, boolean)
    */
   @Override
-  public void setParent(final GuiActionDescrip parent, final boolean addToParent) {
+  public void setParent(final GuiActionDescrip parent,
+      final boolean addToParent) {
     if (parent != NO_PARENT && addToParent) {
       ((AbstractParentGuiActionDescrip) parent).add(this);
     }
@@ -301,7 +303,8 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   public String toString() {
     final String name = (String) getValue(Action.NAME);
     final String tooltip = (String) getValue(Action.TOOLTIP);
-    return "[GuiActionDescrip: " + getClass().getName() + (name == null ? "" : " " + name)
+    return "[GuiActionDescrip: " + getClass().getName()
+        + (name == null ? "" : " " + name)
         + (tooltip == null ? "" : " " + tooltip) + "]";
   }
 
@@ -336,20 +339,29 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   }
 
   @Override
-  public GuiActionDescrip withParent(final GuiActionDescrip parent, final boolean addToParent) {
+  public GuiActionDescrip withParent(final GuiActionDescrip parent,
+      final boolean addToParent) {
     setParent(parent, addToParent);
     return this;
   }
 
   @Override
-  public GuiActionDescrip withShortcut(final KeyStroke shortcut, final GlobalShortcutRegister register) {
+  public GuiActionDescrip withPosition(final int position) {
+    setPosition(position);
+    return this;
+  }
+
+  @Override
+  public GuiActionDescrip withShortcut(final KeyStroke shortcut,
+      final GlobalShortcutRegister register) {
     putValue(Action.ACCELERATOR_KEY, shortcut);
     register.put(shortcut, action);
     return this;
   }
 
   @Override
-  public GuiActionDescrip withShortcut(final String keys, final GlobalShortcutRegister register) {
+  public GuiActionDescrip withShortcut(final String keys,
+      final GlobalShortcutRegister register) {
     final KeyStroke shortcut = Shortcut.getShortcut(keys);
     putValue(Action.ACCELERATOR_KEY, shortcut);
     register.put(shortcut, action);
@@ -371,6 +383,12 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public GuiActionDescrip withToolTip(final String tooltip) {
     putValue(Action.TOOLTIP, tooltip);
+    return this;
+  }
+
+  @Override
+  public GuiActionDescrip withVisible(final boolean visible) {
+    setVisible(visible);
     return this;
   }
 }
