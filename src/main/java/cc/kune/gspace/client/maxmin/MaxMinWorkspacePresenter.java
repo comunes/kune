@@ -48,8 +48,7 @@ public class MaxMinWorkspacePresenter
 implements MaxMinWorkspace {
 
   public class MaximizeAction extends AbstractExtendedAction {
-    public MaximizeAction(final String name, final ImageResource img,
-        final String tooltip) {
+    public MaximizeAction(final String name, final ImageResource img, final String tooltip) {
       super();
       putValue(Action.NAME, name);
       putValue(Action.SMALL_ICON, img);
@@ -62,16 +61,14 @@ implements MaxMinWorkspace {
     }
   }
   @ProxyCodeSplit
-  public interface MaxMinWorkspaceProxy extends
-      Proxy<MaxMinWorkspacePresenter> {
+  public interface MaxMinWorkspaceProxy extends Proxy<MaxMinWorkspacePresenter> {
   }
 
   public interface MaxMinWorkspaceView extends View, IsMaximizable {
 
   }
   public class MinimizeAction extends AbstractExtendedAction {
-    public MinimizeAction(final String name, final ImageResource img,
-        final String tooltip) {
+    public MinimizeAction(final String name, final ImageResource img, final String tooltip) {
       super();
       putValue(Action.NAME, name);
       putValue(Action.SMALL_ICON, img);
@@ -83,7 +80,7 @@ implements MaxMinWorkspace {
       showMaximized(false);
     }
   }
-  private static final int LIMIT_SMALL_SCREEN = 900;
+  private static final int LIMIT_SMALL_SCREEN = 650;
 
   public static final String MAX_ICON = "mmwp-max_bt";
 
@@ -106,10 +103,8 @@ implements MaxMinWorkspace {
   private boolean SmallScreen;
 
   @Inject
-  public MaxMinWorkspacePresenter(final EventBus eventBus,
-      final MaxMinWorkspaceView view,
-      final MaxMinWorkspaceProxy proxy,
-      final GlobalShortcutRegister shortcutReg,
+  public MaxMinWorkspacePresenter(final EventBus eventBus, final MaxMinWorkspaceView view,
+      final MaxMinWorkspaceProxy proxy, final GlobalShortcutRegister shortcutReg,
       final IconicResources images) {
     super(eventBus, view, proxy);
     this.shortcutReg = shortcutReg;
@@ -129,49 +124,37 @@ implements MaxMinWorkspace {
   }
 
   private void createActions() {
-    final KeyStroke shortcut = Shortcut.getShortcut(true, true,
-        false, false, Character.valueOf('F'));
+    final KeyStroke shortcut = Shortcut.getShortcut(true, true, false, false, Character.valueOf('F'));
 
     if (SmallScreen) {
       // in small screens, add MaxMin button to the sitebar very visible
-      final MaximizeAction maximizeAction = new MaximizeAction(
-          I18n.t("Maximize"), images.maximize(),
+      final MaximizeAction maximizeAction = new MaximizeAction("", images.maximize(),
           I18n.t("Maximize the workspace in Inbox and Group Space"));
       maximizeAction.setShortcut(shortcut);
       maximizeButtonBar = new IconLabelDescriptor(maximizeAction);
-      maximizeButtonBar.withId(MAX_ICON).withParent(
-          SitebarActions.RIGHT_TOOLBAR).withPosition(0).withStyles(
+      maximizeButtonBar.withId(MAX_ICON).withParent(SitebarActions.RIGHT_TOOLBAR).withPosition(0).withStyles(
           SitebarActions.COMMON_LINK_STYLE);
 
-      final MinimizeAction minimizeAction = new MinimizeAction(
-          I18n.t("Minimize"),
-          images.minimize(),
+      final MinimizeAction minimizeAction = new MinimizeAction("", images.minimize(),
           I18n.t("Restore the normal workspace size in Inbox and Group Space"));
       minimizeAction.setShortcut(shortcut);
       minimizeButtonBar = new IconLabelDescriptor(minimizeAction);
-      minimizeButtonBar.withId(MIN_ICON).withParent(
-          SitebarActions.RIGHT_TOOLBAR).withPosition(1).withStyles(
+      minimizeButtonBar.withId(MIN_ICON).withParent(SitebarActions.RIGHT_TOOLBAR).withPosition(1).withStyles(
           SitebarActions.COMMON_LINK_STYLE).withVisible(false);
 
     } else {
       // in large screens, add the MaxMin button to the More menu
-      final MaximizeAction maximizeAction = new MaximizeAction(
-          I18n.t("Maximize the workspace"), images.maximize(),
-          I18n.t("Maximize the workspace in Inbox and Group Space"));
+      final MaximizeAction maximizeAction = new MaximizeAction(I18n.t("Maximize the workspace"),
+          images.maximize(), I18n.t("Maximize the workspace in Inbox and Group Space"));
       maximizeAction.setShortcut(shortcut);
-      maximizeButtonMenu = new MenuItemDescriptor(
-          SitebarActions.MORE_MENU, maximizeAction);
+      maximizeButtonMenu = new MenuItemDescriptor(SitebarActions.MORE_MENU, maximizeAction);
       maximizeButtonMenu.withPosition(0).withId(MAX_ICON);
 
-      final MinimizeAction minimizeAction = new MinimizeAction(
-          I18n.t("Minimize the workspace"),
-          images.minimize(),
-          I18n.t("Restore the normal workspace size in Inbox and Group Space"));
+      final MinimizeAction minimizeAction = new MinimizeAction(I18n.t("Minimize the workspace"),
+          images.minimize(), I18n.t("Restore the normal workspace size in Inbox and Group Space"));
       minimizeAction.setShortcut(shortcut);
-      minimizeButtonMenu = new MenuItemDescriptor(
-          SitebarActions.MORE_MENU, minimizeAction);
-      minimizeButtonMenu.withPosition(1).withId(MIN_ICON).withVisible(
-          false);
+      minimizeButtonMenu = new MenuItemDescriptor(SitebarActions.MORE_MENU, minimizeAction);
+      minimizeButtonMenu.withPosition(1).withId(MIN_ICON).withVisible(false);
     }
 
     shortcutReg.put(shortcut, new AbstractExtendedAction() {
