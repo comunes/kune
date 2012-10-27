@@ -1,6 +1,6 @@
 /*
  *
- * opyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * opyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify

@@ -1,5 +1,5 @@
 /* ActionEvent.java -- an action has been triggered
-   Copyright (C) 1999, 2002, 2005  Free Software Foundation, Inc.
+   Copyright (C) 1999, 2002, 2005, 2012  Free Software Foundation, Inc.
 
 This file is part of GNU Classpath.
 
