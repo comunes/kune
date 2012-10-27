@@ -1,5 +1,5 @@
 /* PropertyChangeEvent.java -- describes a change in a property
-   Copyright (C) 1998, 2000, 2002, 2005  Free Software Foundation, Inc.
+   Copyright (C) 1998, 2000, 2002, 2005, 2012  Free Software Foundation, Inc.
 
 This file is part of GNU Classpath.
 

@@ -1,5 +1,5 @@
 /* PropertyChangeSupport.java -- support to manage property change listeners
-   Copyright (C) 1998, 1999, 2000, 2002, 2005, 2006
+   Copyright (C) 1998, 1999, 2000, 2002, 2005, 2006, 2012
    Free Software Foundation, Inc.
 
 This file is part of GNU Classpath.

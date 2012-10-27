@@ -1,5 +1,5 @@
 /* ActionListener.java -- listens for action events
-   Copyright (C) 1999, 2002 Free Software Foundation, Inc.
+   Copyright (C) 1999, 2002, 2012 Free Software Foundation, Inc.
 
 This file is part of GNU Classpath.
 
