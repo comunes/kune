@@ -10,6 +10,8 @@ kune (0.3.0+b1) unstable; urgency=low
   * Added share button in social networks (twitter, identica, g+, etc) #391
   * CLOSED - task #398: Translator should allow to translate from other non
     English languages
+  * Added share button in social networks (twitter, identica, g+, etc) #391
+  * CLOSED - task 390: Group lists names should me limited
 
   [Samer Hassan Collado]
   * CLOSED - task #342: Maximize/minimize button more visible
