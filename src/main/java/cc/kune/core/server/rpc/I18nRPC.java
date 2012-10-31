@@ -106,11 +106,11 @@ public class I18nRPC implements RPC, I18nService {
   @Authenticated
   @KuneTransactional
   public List<I18nTranslationDTO> getTranslatedLexicon(final String userHash, final String language,
-      final boolean toTranslate) {
+      final String languageFrom, final boolean toTranslate) {
     if (toTranslate) {
-      return i18nTranslationManager.getUntranslatedLexicon(language);
+      return i18nTranslationManager.getUntranslatedLexicon(language, languageFrom);
     } else {
-      return i18nTranslationManager.getTranslatedLexicon(language);
+      return i18nTranslationManager.getTranslatedLexicon(language, languageFrom);
     }
   }
 

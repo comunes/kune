@@ -188,9 +188,10 @@ public class I18nCellList extends Composite {
     rangeLabelPager.setDisplay(cellList);
   }
 
-  public void setLanguage(final I18nLanguageSimpleDTO language, final boolean toTranslate) {
-    data.setLanguage(language, toTranslate);
-    translatorForm.setToLanguage(language);
+  public void setLanguage(final I18nLanguageSimpleDTO fromLanguage,
+      final I18nLanguageSimpleDTO toLanguage, final boolean toTranslate) {
+    data.setLanguage(fromLanguage, toLanguage, toTranslate);
+    translatorForm.setToLanguage(toLanguage);
   }
 
 }

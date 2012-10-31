@@ -51,6 +51,11 @@ public class I18nLanguageManagerDefault extends DefaultManager<I18nLanguage, Lon
   }
 
   @Override
+  public List<I18nLanguage> findByCodes(final List<String> languages) {
+    return finder.findByCodes(languages);
+  }
+
+  @Override
   public List<I18nLanguage> getAll() {
     return finder.getAll();
   }

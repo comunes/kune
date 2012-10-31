@@ -28,7 +28,7 @@ public class LanguageSelectorPanel extends AbstractLanguageSelectorPanel {
 
   @Inject
   public LanguageSelectorPanel(final I18nTranslationService i18n, final Session session) {
-    super(i18n, session, true);
+    super(i18n, session, LanguageSelectorType.ALL);
   }
 
 }

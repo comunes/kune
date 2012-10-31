@@ -45,6 +45,7 @@ public class InitData {
   private List<ExtMediaDescrip> extMediaDescrips;
   private boolean feedbackEnabled;
   private String flvEmbedObject;
+  private List<I18nLanguage> fullTranslatedLanguages;
   private String galleryPermittedExtensions;
   private List<ToolSimple> groupTools;
   private HashMap<String, GSpaceTheme> gSpaceThemes;
@@ -113,6 +114,10 @@ public class InitData {
 
   public String getFlvEmbedObject() {
     return flvEmbedObject;
+  }
+
+  public List<I18nLanguage> getFullTranslatedLanguages() {
+    return fullTranslatedLanguages;
   }
 
   public String getGalleryPermittedExtensions() {
@@ -261,6 +266,10 @@ public class InitData {
 
   public void setFlvEmbedObject(final String flvEmbedObject) {
     this.flvEmbedObject = flvEmbedObject;
+  }
+
+  public void setFullTranslatedLanguages(final List<I18nLanguage> fullTranslatedLanguages) {
+    this.fullTranslatedLanguages = fullTranslatedLanguages;
   }
 
   public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {

@@ -17,18 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.manager;
+package cc.kune.gspace.client.i18n;
 
-import java.util.List;
+import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.state.Session;
 
-import cc.kune.domain.I18nLanguage;
+import com.google.inject.Inject;
 
-public interface I18nLanguageManager extends Manager<I18nLanguage, Long> {
+public class LanguageSelectorOnlyFullTranslatedPanel extends AbstractLanguageSelectorPanel {
 
-  I18nLanguage findByCode(String language);
-
-  List<I18nLanguage> findByCodes(List<String> langs);
-
-  List<I18nLanguage> getAll();
+  @Inject
+  public LanguageSelectorOnlyFullTranslatedPanel(final I18nTranslationService i18n, final Session session) {
+    super(i18n, session, LanguageSelectorType.ONLY_FULL_TRANSLATED);
+  }
 
 }

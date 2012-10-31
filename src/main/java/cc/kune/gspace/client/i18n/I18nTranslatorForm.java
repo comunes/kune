@@ -142,7 +142,7 @@ public class I18nTranslatorForm extends Composite {
       item.setText(translation.getText());
       item.setDirty(true);
       dataProvider.refreshDisplays();
-      saver.save(new I18nTranslationDTO(item.getId(), item.getTrKey(), newTranslation,
+      saver.save(new I18nTranslationDTO(item.getId(), item.getTrKey(), null, newTranslation,
           item.getParentId(), item.getParentTrKey(), item.getNoteForTranslators()));
     }
   }

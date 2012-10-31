@@ -40,13 +40,18 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
   private String parentTrKey;
   private String text;
   private String trKey;
+  /*
+   * trKey from is used when selecting a different language than English from
+   * where we translate
+   */
+  private String trKeyFrom;
 
   public I18nTranslationDTO() {
-    this(null, null, null, null, null, null);
+    this(null, null, null, null, null, null, null);
   }
 
-  public I18nTranslationDTO(final Long id, final String trKey, final String text, final Long parentId,
-      final String parentTrKey, final String noteForTranslators) {
+  public I18nTranslationDTO(final Long id, final String trKey, final String trKeyFrom,
+      final String text, final Long parentId, final String parentTrKey, final String noteForTranslators) {
     this.id = id;
     this.trKey = trKey;
     this.text = text;
@@ -84,6 +89,10 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
     return trKey;
   }
 
+  public String getTrKeyFrom() {
+    return trKeyFrom;
+  }
+
   public boolean isDirty() {
     return dirty;
   }
@@ -114,6 +123,10 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   public void setTrKey(final String trKey) {
     this.trKey = trKey;
+  }
+
+  public void setTrKeyFrom(final String trKeyFrom) {
+    this.trKeyFrom = trKeyFrom;
   }
 
 }

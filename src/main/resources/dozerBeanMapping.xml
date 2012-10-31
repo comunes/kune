@@ -22,6 +22,12 @@
       <a-hint> cc.kune.core.shared.dto.I18nLanguageSimpleDTO </a-hint>
       <b-hint> cc.kune.domain.I18nLanguage </b-hint>
     </field>
+        <field>
+      <a>fullTranslatedLanguages</a>
+      <b>fullTranslatedLanguages</b>
+      <a-hint> cc.kune.core.shared.dto.I18nLanguageSimpleDTO </a-hint>
+      <b-hint> cc.kune.domain.I18nLanguage </b-hint>
+    </field>
     <field>
       <a>countries</a>
       <b>countries</b>

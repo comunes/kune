@@ -17,18 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.manager;
 
-import java.util.List;
+package cc.kune.gspace.client.i18n;
 
-import cc.kune.domain.I18nLanguage;
-
-public interface I18nLanguageManager extends Manager<I18nLanguage, Long> {
-
-  I18nLanguage findByCode(String language);
-
-  List<I18nLanguage> findByCodes(List<String> langs);
-
-  List<I18nLanguage> getAll();
-
+public enum LanguageSelectorType {
+  ALL, ALL_EXCEPT_ENGLISH, ONLY_FULL_TRANSLATED
 }

@@ -19,6 +19,8 @@
  */
 package cc.kune.gspace.client.i18n;
 
+import java.util.List;
+
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleCallback;
@@ -86,10 +88,11 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
   private final Session session;
 
   public AbstractLanguageSelectorPanel(final I18nTranslationService i18n, final Session session,
-      final boolean withEnglish) {
+      final LanguageSelectorType type) {
     super();
     this.i18n = i18n;
     this.session = session;
+
     setBorders(false);
     setFrame(false);
     setHeaderVisible(false);
@@ -97,7 +100,7 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     // setWidth(300);
     setLabelWidth(DefaultForm.DEF_FIELD_LABEL_WITH + 25);
     setPadding(0);
-    createLangCombo(withEnglish);
+    createLangCombo(type);
     super.add(langCombo);
   }
 
@@ -110,14 +113,14 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     });
   }
 
-  private void createLangCombo(final boolean withEnglish) {
+  private void createLangCombo(final LanguageSelectorType type) {
     // Field.setMsgTarget("side");
     // NOTE: The Combo box in modal popups fails!
     langCombo = new ComboBox<LanguageData>();
     langCombo.setName(LANG_FIELD);
     langCombo.setMinChars(1);
     // langCombo.setMode(ComboBox.LOCAL);
-    langCombo.setStore(createStore(withEnglish));
+    langCombo.setStore(createStore(type));
     langCombo.setDisplayField("language");
     langCombo.setTriggerAction(TriggerAction.ALL);
     langCombo.setEmptyText(i18n.t("Enter language"));
@@ -133,13 +136,22 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     langCombo.setAllowBlank(false);
   }
 
-  private ListStore<LanguageData> createStore(final boolean withEnglish) {
+  private ListStore<LanguageData> createStore(final LanguageSelectorType type) {
     final ListStore<LanguageData> list = new ListStore<LanguageData>();
-
-    for (final I18nLanguageSimpleDTO lang : session.getLanguages()) {
-      final boolean isEnglish = lang.getCode().equals("en");
-      if (!isEnglish || (isEnglish && withEnglish)) {
+    final List<I18nLanguageSimpleDTO> langs = type == LanguageSelectorType.ONLY_FULL_TRANSLATED ? session.getFullTranslatedLanguages()
+        : session.getLanguages();
+    for (final I18nLanguageSimpleDTO lang : langs) {
+      switch (type) {
+      case ALL_EXCEPT_ENGLISH:
+      case ONLY_FULL_TRANSLATED:
+        if (!lang.getCode().equals("en")) {
+          list.add(getLangData(lang));
+        }
+        break;
+      case ALL:
+      default:
         list.add(getLangData(lang));
+        break;
       }
     }
     return list;
@@ -150,13 +162,17 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
   }
 
   public I18nLanguageSimpleDTO getLanguage() {
-    final String langCode = langCombo.getValue().getCode();
+    final LanguageData value = langCombo.getValue();
+    if (value == null) {
+      return null;
+    }
+    final String langCode = value.getCode();
     for (final I18nLanguageSimpleDTO lang : session.getLanguages()) {
       if (lang.getCode().equals(langCode)) {
         return lang;
       }
     }
-    throw new UIException("Languege not found");
+    throw new UIException("Language not found");
   }
 
   public String getLanguageCode() {
@@ -187,6 +203,10 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
   }
 
   public void setLanguage(final I18nLanguageSimpleDTO language) {
-    langCombo.setValue(getLangData(language));
+    if (language == null) {
+      langCombo.clear();
+    } else {
+      langCombo.setValue(getLangData(language));
+    }
   }
 }

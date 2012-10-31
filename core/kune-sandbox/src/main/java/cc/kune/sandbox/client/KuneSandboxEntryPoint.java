@@ -143,6 +143,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final PushButtonDescriptor pushBtn = new PushButtonDescriptor(action2);
     pushBtn.setPushed(true);
     pushBtn.withText("Push btn").withStyles("k-button");
+    // FIXME when fix the style set also in I18nTranslatorForm.ui.xml (currently is set to "none")
 
     final ToolbarDescriptor toolbar = new ToolbarDescriptor();
 

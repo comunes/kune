@@ -27,6 +27,10 @@ import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.google.inject.Inject;
 
@@ -36,6 +40,8 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
   private static final String TRANSLATOR_ERROR_ID = "i18n-trans-panel-error";
   private static final String TRANSLATOR_PANEL_ID = "i18n-trans-panel";
   private static final int WIDTH = 570;
+  private final CheckBox checkbox;
+  private final LanguageSelectorOnlyFullTranslatedPanel lanSelectorFullTranslatedPanel;
   private final AbstractLanguageSelectorPanel lanSelectorPanel;
   private final I18nToTranslateGridPanel toTranslateGrid;
   private final I18nTranslatedGridPanel translatedGrid;
@@ -44,6 +50,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
   @Inject
   public I18nTranslatorPanel(final I18nTranslationService i18n, final NotifyLevelImages images,
       final I18nTranslatorTabsCollection transGroup,
+      final LanguageSelectorOnlyFullTranslatedPanel lanSelectorFullTranslatedPanel,
       final LanguageSelectorWithoutEnglishPanel lanSelectorPanel,
       final I18nToTranslateGridPanel toTranslateGrid, final I18nTranslatedGridPanel translatedGrid,
       final I18nTranslateRecomendPanel transRecommend, final IconicResources res) {
@@ -52,22 +59,46 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
         null, null, transGroup, i18n.getDirection());
     setIcon(res.world());
     this.lanSelectorPanel = lanSelectorPanel;
+    this.lanSelectorFullTranslatedPanel = lanSelectorFullTranslatedPanel;
     this.toTranslateGrid = toTranslateGrid;
     this.translatedGrid = translatedGrid;
     this.transRecommend = transRecommend;
     transRecommend.setSize(WIDTH, HEIGHT);
     super.setIconCls("k-options-icon");
     super.setTitle(i18n.t("Help to translate kune"));
-    super.getInnerPanel().insert(lanSelectorPanel, 0);
+
+    checkbox = new CheckBox();
+    checkbox.setBoxLabel(i18n.t("Translate from other non-English language"));
+    checkbox.setValue(false);
+    lanSelectorFullTranslatedPanel.setVisible(false);
+    checkbox.addListener(Events.Change, new Listener<BaseEvent>() {
+      @Override
+      public void handleEvent(final BaseEvent be) {
+        final Boolean value = checkbox.getValue();
+        lanSelectorFullTranslatedPanel.setVisible(value);
+        lanSelectorFullTranslatedPanel.setLanguage(null);
+        refreshLangs(lanSelectorFullTranslatedPanel, lanSelectorPanel);
+      }
+    });
+    super.getInnerPanel().insert(checkbox, 0);
+
+    final SimpleCallback onLangChange = new SimpleCallback() {
+      @Override
+      public void onCallback() {
+        refreshLangs(lanSelectorFullTranslatedPanel, lanSelectorPanel);
+      }
+    };
+
+    super.getInnerPanel().insert(lanSelectorFullTranslatedPanel, 1);
+    lanSelectorFullTranslatedPanel.setLangTitle(i18n.t("from"));
+    lanSelectorFullTranslatedPanel.setLabelAlign(LabelAlign.RIGHT);
+    lanSelectorFullTranslatedPanel.setLangSeparator(":");
+    lanSelectorFullTranslatedPanel.addChangeListener(onLangChange);
+    super.getInnerPanel().insert(lanSelectorPanel, 2);
     lanSelectorPanel.setLangTitle(i18n.t("to"));
     lanSelectorPanel.setLabelAlign(LabelAlign.RIGHT);
     lanSelectorPanel.setLangSeparator(":");
-    lanSelectorPanel.addChangeListener(new SimpleCallback() {
-      @Override
-      public void onCallback() {
-        setLanguage(lanSelectorPanel.getLanguage());
-      }
-    });
+    lanSelectorPanel.addChangeListener(onLangChange);
   }
 
   @Override
@@ -77,11 +108,29 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
     addTab(transRecommend, transRecommend.getTabTitle());
   }
 
+  private void refreshLangs(
+      final LanguageSelectorOnlyFullTranslatedPanel lanSelectorFullTranslatedPanel,
+      final LanguageSelectorWithoutEnglishPanel lanSelectorPanel) {
+    setLanguage(lanSelectorFullTranslatedPanel.getLanguage(), lanSelectorPanel.getLanguage());
+  }
+
   @Override
-  public void setLanguage(final I18nLanguageSimpleDTO language) {
-    lanSelectorPanel.setLanguage(language);
-    toTranslateGrid.setLanguage(language);
-    translatedGrid.setLanguage(language);
+  public void setLanguage(final I18nLanguageSimpleDTO currentLanguage) {
+    setLanguage(null, currentLanguage);
+  }
+
+  public void setLanguage(final I18nLanguageSimpleDTO fromLanguage,
+      final I18nLanguageSimpleDTO toLanguage) {
+    if (checkbox.getValue() && fromLanguage != null) {
+      lanSelectorFullTranslatedPanel.setLanguage(fromLanguage);
+    } else {
+      lanSelectorFullTranslatedPanel.clear();
+    }
+    if (toLanguage != null) {
+      lanSelectorPanel.setLanguage(toLanguage);
+      toTranslateGrid.setLanguage(fromLanguage, toLanguage);
+      translatedGrid.setLanguage(fromLanguage, toLanguage);
+    }
   }
 
   @Override

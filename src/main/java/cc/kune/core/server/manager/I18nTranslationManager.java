@@ -31,17 +31,17 @@ public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
   HashMap<String, String> getLexicon(String language);
 
-  List<I18nTranslationDTO> getTranslatedLexicon(String language);
+  List<I18nTranslationDTO> getTranslatedLexicon(String language, String languageFrom);
 
-  SearchResultDTO<I18nTranslationDTO> getTranslatedLexicon(String language, Integer firstResult,
-      Integer maxResults);
+  SearchResultDTO<I18nTranslationDTO> getTranslatedLexicon(String language, String languageFrom,
+      Integer firstResult, Integer maxResults);
 
   String getTranslation(String language, String text, String noteForTranslators);
 
-  List<I18nTranslationDTO> getUntranslatedLexicon(String language);
+  List<I18nTranslationDTO> getUntranslatedLexicon(String language, String languageFrom);
 
-  SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(String language, Integer firstResult,
-      Integer maxResults);
+  SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(String language, String languageFrom,
+      Integer firstResult, Integer maxResults);
 
   String setTranslation(Long id, String translation) throws DefaultException;
 

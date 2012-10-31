@@ -38,6 +38,7 @@ public class InitDataDTO implements IsSerializable {
   private List<ExtMediaDescripDTO> extMediaDescrips;
   private boolean feedbackEnabled;
   private String flvEmbedObject;
+  private List<I18nLanguageSimpleDTO> fullTranslatedLanguages;
   private String galleryPermittedExtensions;
   private List<ToolSimpleDTO> groupTools;
   private HashMap<String, GSpaceTheme> gSpaceThemes = new HashMap<String, GSpaceTheme>();
@@ -108,6 +109,10 @@ public class InitDataDTO implements IsSerializable {
 
   public String getFlvEmbedObject() {
     return flvEmbedObject;
+  }
+
+  public List<I18nLanguageSimpleDTO> getFullTranslatedLanguages() {
+    return fullTranslatedLanguages;
   }
 
   public String getGalleryPermittedExtensions() {
@@ -257,6 +262,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setFlvEmbedObject(final String flvEmbedObject) {
     this.flvEmbedObject = flvEmbedObject;
+  }
+
+  public void setFullTranslatedLanguages(final List<I18nLanguageSimpleDTO> fullTranslatedLanguages) {
+    this.fullTranslatedLanguages = fullTranslatedLanguages;
   }
 
   public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {

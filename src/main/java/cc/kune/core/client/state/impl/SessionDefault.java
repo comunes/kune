@@ -154,6 +154,11 @@ public class SessionDefault implements Session {
   }
 
   @Override
+  public List<I18nLanguageSimpleDTO> getFullTranslatedLanguages() {
+    return initData.getFullTranslatedLanguages();
+  }
+
+  @Override
   public String getGalleryPermittedExtensions() {
     return initData.getGalleryPermittedExtensions();
   }
@@ -274,6 +279,12 @@ public class SessionDefault implements Session {
   }
 
   @Override
+  public boolean isNewbie() {
+    return currentUserInfo != null ? currentUserInfo.getSignInCount() <= SessionConstants.MIN_SIGN_IN_FOR_NEWBIES
+        : true;
+  }
+
+  @Override
   public boolean isNotLogged() {
     return !isLogged();
   }
@@ -348,6 +359,11 @@ public class SessionDefault implements Session {
   }
 
   @Override
+  public void refreshCurrentUserInfo(final UserInfoDTO currentUserInfo) {
+    this.currentUserInfo = currentUserInfo;
+  }
+
+  @Override
   public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
     this.currentLanguage = currentLanguage;
   }
@@ -388,16 +404,5 @@ public class SessionDefault implements Session {
   @Override
   public boolean userIsJoiningGroups() {
     return currentUserInfo.getGroupsIsAdmin().size() + currentUserInfo.getGroupsIsCollab().size() > 0;
-  }
-
-  @Override
-  public boolean isNewbie() {
-    return currentUserInfo != null ? currentUserInfo.getSignInCount() <= SessionConstants.MIN_SIGN_IN_FOR_NEWBIES
-        : true;
-  }
-
-  @Override
-  public void refreshCurrentUserInfo(UserInfoDTO currentUserInfo) {
-    this.currentUserInfo = currentUserInfo;
   }
 }

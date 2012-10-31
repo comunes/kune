@@ -94,15 +94,26 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   }
 
   @Override
-  public List<I18nTranslationDTO> getTranslatedLexicon(final String languageCode) {
-    return finder.getTranslatedLexicon(getLanguage(languageCode));
+  public List<I18nTranslationDTO> getTranslatedLexicon(final String languageCode,
+      final String languageFrom) {
+    if (languageFrom == null) {
+      return finder.getTranslatedLexicon(getLanguage(languageCode));
+    } else {
+      return finder.getTranslatedLexiconWithFrom(getLanguage(languageCode), getLanguage(languageFrom));
+    }
   }
 
   @Override
   public SearchResultDTO<I18nTranslationDTO> getTranslatedLexicon(final String languageCode,
-      final Integer firstResult, final Integer maxResults) {
+      final String languageCodeFrom, final Integer firstResult, final Integer maxResults) {
     final I18nLanguage language = getLanguage(languageCode);
-    final List<I18nTranslationDTO> list = finder.getTranslatedLexicon(language, firstResult, maxResults);
+    List<I18nTranslationDTO> list;
+    if (languageCodeFrom == null) {
+      list = finder.getTranslatedLexicon(language, firstResult, maxResults);
+    } else {
+      final I18nLanguage languageFrom = getLanguage(languageCodeFrom);
+      list = finder.getTranslatedLexiconWithFrom(language, languageFrom, firstResult, maxResults);
+    }
     return new SearchResultDTO<I18nTranslationDTO>(list.size(), list);
   }
 
@@ -136,16 +147,27 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   }
 
   @Override
-  public List<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode) {
-    return finder.getUntranslatedLexicon(initUnstranlated(languageCode));
+  public List<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode,
+      final String languageFrom) {
+    final I18nLanguage language = initUnstranlated(languageCode);
+    if (languageFrom == null) {
+      return finder.getUntranslatedLexicon(language);
+    } else {
+      return finder.getUntranslatedLexiconWithFrom(language, getLanguage(languageFrom));
+    }
   }
 
   @Override
   public SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode,
-      final Integer firstResult, final Integer maxResults) {
+      final String languageCodeFrom, final Integer firstResult, final Integer maxResults) {
     final I18nLanguage language = initUnstranlated(languageCode);
-    final List<I18nTranslationDTO> list = finder.getUnstranslatedLexicon(language, firstResult,
-        maxResults);
+    List<I18nTranslationDTO> list;
+    if (languageCodeFrom == null) {
+      list = finder.getUnstranslatedLexicon(language, firstResult, maxResults);
+    } else {
+      final I18nLanguage languageFrom = getLanguage(languageCodeFrom);
+      list = finder.getUntranslatedLexiconWithFrom(language, languageFrom, firstResult, maxResults);
+    }
     return new SearchResultDTO<I18nTranslationDTO>(list.size(), list);
   }
 

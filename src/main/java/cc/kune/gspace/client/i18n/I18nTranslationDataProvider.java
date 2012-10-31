@@ -70,22 +70,23 @@ public class I18nTranslationDataProvider {
     avance(-1);
   }
 
-  public void setLanguage(final I18nLanguageSimpleDTO language, final boolean toTranslate) {
+  public void setLanguage(final I18nLanguageSimpleDTO fromLanguage,
+      final I18nLanguageSimpleDTO toLanguage, final boolean toTranslate) {
     NotifyUser.showProgressLoading();
     dataProvider.getList().clear();
     dataProvider.refresh();
-    i18n.getTranslatedLexicon(session.getUserHash(), language.getCode(), toTranslate,
-        new AsyncCallbackSimple<List<I18nTranslationDTO>>() {
-          @Override
-          public void onSuccess(final List<I18nTranslationDTO> result) {
-            dataProvider.setList(result);
-            dataProvider.refresh();
-            if (result.size() > 0) {
-              selectionModel.setSelected(result.get(0), true);
-            }
-            loadCallback.onCallback();
-          }
-        });
+    i18n.getTranslatedLexicon(session.getUserHash(), toLanguage.getCode(), fromLanguage == null ? null
+        : fromLanguage.getCode(), toTranslate, new AsyncCallbackSimple<List<I18nTranslationDTO>>() {
+      @Override
+      public void onSuccess(final List<I18nTranslationDTO> result) {
+        dataProvider.setList(result);
+        dataProvider.refresh();
+        if (result.size() > 0) {
+          selectionModel.setSelected(result.get(0), true);
+        }
+        loadCallback.onCallback();
+      }
+    });
   }
 
   public void setLoadCallback(final SimpleCallback loadCallback) {

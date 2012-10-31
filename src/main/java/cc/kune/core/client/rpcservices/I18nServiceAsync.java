@@ -33,7 +33,7 @@ public interface I18nServiceAsync {
 
   void getLexicon(String language, AsyncCallback<HashMap<String, String>> callback);
 
-  void getTranslatedLexicon(String userHash, String language, boolean toTranslate,
+  void getTranslatedLexicon(String userHash, String language, String languageFrom, boolean toTranslate,
       AsyncCallback<List<I18nTranslationDTO>> callback);
 
   void getTranslation(String userHash, String language, String text, String noteForTranslators,

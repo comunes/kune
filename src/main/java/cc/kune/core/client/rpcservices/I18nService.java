@@ -36,7 +36,7 @@ public interface I18nService extends RemoteService {
 
   HashMap<String, String> getLexicon(String language);
 
-  List<I18nTranslationDTO> getTranslatedLexicon(String userHash, final String language,
+  List<I18nTranslationDTO> getTranslatedLexicon(String userHash, String language, String languageFrom,
       boolean toTranslate);
 
   String getTranslation(String userHash, String language, String text, String noteForTranslators);

@@ -28,7 +28,7 @@ public class LanguageSelectorWithoutEnglishPanel extends AbstractLanguageSelecto
 
   @Inject
   public LanguageSelectorWithoutEnglishPanel(final I18nTranslationService i18n, final Session session) {
-    super(i18n, session, false);
+    super(i18n, session, LanguageSelectorType.ALL_EXCEPT_ENGLISH);
   }
 
 }

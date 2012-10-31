@@ -327,7 +327,7 @@ ul.x-tab-strip-bottom {
 }
 */
 .x-form-empty-field {
-    color: #dadadd;
+    color: gray;
 }
 
 .x-small-editor .x-form-text {

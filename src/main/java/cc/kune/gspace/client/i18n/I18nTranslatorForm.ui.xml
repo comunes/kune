@@ -80,9 +80,9 @@
       <g:Label ui:field="toLanguageTitle" addStyleNames="{style.titles} {style.cell}"/>
       <g:TextArea ui:field='translation' addStyleNames="{style.cell} {style.input}"
         visibleLines="5"/>
-      <g:FlowPanel styleName="k-button"
-        addStyleNames="{style.cell} {style.copyicon} k-button k-btn k-5corners">
-        <g:PushButton ui:field='copyIcon' enabled='true'>
+      <g:FlowPanel
+        addStyleNames="{style.cell} {style.copyicon}">
+        <g:PushButton styleName="none" ui:field='copyIcon' enabled='true'>
           <g:upFace image='{res.undo}'/>
           <g:upHoveringFace/>
           <g:downFace/>

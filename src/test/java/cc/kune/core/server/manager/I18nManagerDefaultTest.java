@@ -62,8 +62,12 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   @Test
   public void getLexiconList() {
-    assertTrue(translationManager.getTranslatedLexicon("en").size() > 0);
-    assertTrue(translationManager.getUntranslatedLexicon("en").size() == 0);
+    assertTrue(translationManager.getTranslatedLexicon("en", null).size() > 0);
+    assertTrue(translationManager.getUntranslatedLexicon("en", null).size() == 0);
+    assertTrue(translationManager.getTranslatedLexicon("es", null).size() > 0);
+    assertTrue(translationManager.getUntranslatedLexicon("es", "af").size() > 0);
+    // assertTrue(translationManager.getTranslatedLexicon("es", "af").size() ==
+    // 0);
   }
 
   @Test
@@ -143,6 +147,8 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     translationManager.persist(new I18nTranslation("Sunday [weekday]", english, "Sunday",
         "note for translators"));
     translationManager.persist(new I18nTranslation("January [month]", english, "January",
+        "note for translators"));
+    translationManager.persist(new I18nTranslation("January [month]", spanish, "Enero",
         "note for translators"));
     translationManager.persist(new I18nTranslation("Sunday [weekday]", afrikaans, "Sondag",
         "note for translators"));

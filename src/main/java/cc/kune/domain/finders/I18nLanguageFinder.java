@@ -32,6 +32,9 @@ public interface I18nLanguageFinder {
   @Finder(query = "FROM I18nLanguage l WHERE code = :language")
   public I18nLanguage findByCode(@Named("language") final String language);
 
+  @Finder(query = "FROM I18nLanguage l WHERE code in (:languages)", returnAs = ArrayList.class)
+  public List<I18nLanguage> findByCodes(@Named("languages") final List<String> languages);
+
   @Finder(query = "FROM I18nLanguage ORDER BY englishName", returnAs = ArrayList.class)
   public List<I18nLanguage> getAll();
 
