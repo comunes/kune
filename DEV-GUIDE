@@ -438,10 +438,10 @@ You should update the Changelog (in "debian/changelog" ) using "dch". You should
 
 NOTE: If you don't have "dch", install it in Debian/Ubuntu/related: 'apt-get install devscripts'
 
-NOTE: To facilitate this task, add in your local .bashrc:
+NOTE: To facilitate this task, add in your local .bashrc (email and full name are samples):
  #dh_make
- DEBEMAIL="vjrj@ourproject.org"
- DEBFULLNAME="Vicente J. Ruiz Jurado"
+ DEBEMAIL="alice@domain.dom"
+ DEBFULLNAME="Alice White"
  export DEBEMAIL DEBFULLNAME
 
 NOTE: When generating a new DEB package => dch -i
