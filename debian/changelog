@@ -1,7 +1,18 @@
+kune (0.3.0+b2) unstable; urgency=low
+
+  * 
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 31 Oct 2012 22:33:56 +0100
+
 kune (0.3.0+b1) unstable; urgency=low
 
   * Source refactorization and new kune-sandbox module
   * Added share button in social networks (twitter, identica, g+, etc) #391
+  * CLOSED - task #398: Translator should allow to translate from other non
+    English languages
+
+  [Samer Hassan Collado]
+  * CLOSED - task #342: Maximize/minimize button more visible
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 22 Oct 2012 14:18:47 +0200
 
