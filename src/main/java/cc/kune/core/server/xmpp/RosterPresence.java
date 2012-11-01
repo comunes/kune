@@ -19,24 +19,38 @@
  */
 package cc.kune.core.server.xmpp;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import com.google.inject.name.Named;
-import com.google.inject.persist.finder.Finder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-public interface OpenfireXmppRosterFinder {
+@Entity
+@Table(name = "ofPresence")
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+public class RosterPresence {
 
-  @Finder(query = "SELECT count(*) FROM RosterItem r")
-  Long count();
+  @Column(name = "offlineDate", columnDefinition = "char")
+  private String offlineDate;
 
-  /**
-   * Gets the.
-   * 
-   * @param shortname
-   *          the shortname of the user but without the @domain
-   * @return the list
-   */
-  @Finder(query = "from RosterItem WHERE username = :username", returnAs = ArrayList.class)
-  List<RosterItem> get(@Named("username") final String shortname);
+  @Id
+  private String username;
+
+  public Long getOfflineDate() {
+    return Long.parseLong(offlineDate.trim());
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setOfflineDate(final Long offlineDate) {
+    this.offlineDate = offlineDate.toString();
+  }
+
+  public void setUsername(final String username) {
+    this.username = username;
+  }
 }

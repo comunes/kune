@@ -19,6 +19,10 @@
  */
 package cc.kune.core.client.sn.actions;
 
+import cc.kune.chat.client.ChatInstances;
+import cc.kune.chat.client.ChatOptions;
+import cc.kune.chat.client.LastConnectedManager;
+import cc.kune.chat.client.actions.StartChatWithMemberAction;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
@@ -32,19 +36,26 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
+import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
+import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.inject.Inject;
 
-public class WriteToBuddyHeaderButton {
+public class BuddyLastConnectedHeaderLabel {
+
+  private final ButtonDescriptor button;
+  private final LastConnectedManager lastConnectedManager;
 
   @Inject
-  public WriteToBuddyHeaderButton(final WriteToAction writeToAction, final EntityHeader entityHeader,
-      final StateManager stateManager, final Session session,
-      final SimpleContactManager simpleContactManager) {
-    final ButtonDescriptor button = new ButtonDescriptor(writeToAction);
-    // button.setVisible(false);
-    button.withText("Write to your buddy");
-    button.setStyles("k-chat-add-as-buddie");
-    writeToAction.addPropertyChangeListener(new PropertyChangeListener() {
+  public BuddyLastConnectedHeaderLabel(final StartChatWithMemberAction chatAction,
+      final EntityHeader entityHeader, final StateManager stateManager, final Session session,
+      final SimpleContactManager simpleContactManager, final LastConnectedManager lastConnectedManager,
+      final ChatInstances chatInstances, final ChatOptions chatOptions) {
+    this.lastConnectedManager = lastConnectedManager;
+    button = new ButtonDescriptor(chatAction);
+    button.setStyles("k-buddy-last-connected");
+    chatAction.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
         if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
@@ -52,7 +63,26 @@ public class WriteToBuddyHeaderButton {
         }
       }
     });
-    writeToAction.setEnabled(false);
+    chatInstances.roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
+      @Override
+      public void onRosterItemChanged(final RosterItemChangedEvent event) {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            final Object target = button.getTarget();
+            if (target instanceof GroupDTO) {
+              final String username = ((GroupDTO) target).getShortName();
+              if (event.getRosterItem().getJID().equals(chatOptions.uriFrom(username))) {
+                // Ok, is this user, we set the last connected info
+                setLabelText(username);
+              }
+            }
+          }
+
+        });
+      }
+    });
+    chatAction.setEnabled(false);
     entityHeader.addAction(button);
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
@@ -65,11 +95,16 @@ public class WriteToBuddyHeaderButton {
         if (imLogged && group.isPersonal() && isBuddie
             && !session.getCurrentUser().getShortName().equals(groupName)) {
           button.setTarget(group);
-          writeToAction.setEnabled(true);
+          setLabelText(groupName);
+          chatAction.setEnabled(true);
         } else {
-          writeToAction.setEnabled(false);
+          chatAction.setEnabled(false);
         }
       }
     });
+  }
+
+  private void setLabelText(final String username) {
+    button.withText(lastConnectedManager.get(username, true));
   }
 }

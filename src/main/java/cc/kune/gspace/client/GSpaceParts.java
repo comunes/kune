@@ -23,6 +23,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
+import cc.kune.core.client.sn.actions.BuddyLastConnectedHeaderLabel;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.core.client.state.HistoryTokenMustBeAuthCallback;
 import cc.kune.core.client.state.Session;
@@ -62,6 +63,7 @@ public class GSpaceParts {
       final Provider<I18nToTranslateGridPanel> toTrans,
       final Provider<I18nTranslatorTabsCollection> gtranslator,
       final Provider<I18nTranslator> translator, final Provider<WriteToBuddyHeaderButton> writeToBuddie,
+      final Provider<BuddyLastConnectedHeaderLabel> lastConnectedBuddie,
       final SiteTokenListeners tokenListener) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
@@ -96,6 +98,7 @@ public class GSpaceParts {
 
         // Others
         writeToBuddie.get();
+        lastConnectedBuddie.get();
       }
     });
     tokenListener.put(SiteTokens.TRANSLATE, new HistoryTokenMustBeAuthCallback("") {

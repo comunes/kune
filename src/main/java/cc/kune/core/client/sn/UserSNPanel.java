@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.sn;
 
+import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
@@ -47,8 +48,9 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   @Inject
   public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
       final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
-      final KuneDragController dragController, final NotImplementedDropManager notDrop) {
-    super(i18n, guiProvider, armor, avatarDecorator, dragController);
+      final KuneDragController dragController, final NotImplementedDropManager notDrop,
+      final LastConnectedManager lastConnectedManager) {
+    super(i18n, guiProvider, armor, avatarDecorator, dragController, lastConnectedManager);
     this.i18n = i18n;
 
     setVisibleImpl(false);
@@ -79,16 +81,16 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
   @Override
   public void addBuddie(final UserSimpleDTO user, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
-    final BasicDragableThumb thumb = createThumb(user.getShortName(), avatarUrl, tooltip, tooltipTitle,
-        menu, user.getStateToken(), dragable);
+    final BasicDragableThumb thumb = createThumb(true, user.getShortName(), user.getShortName(),
+        avatarUrl, tooltip, tooltipTitle, menu, user.getStateToken(), dragable);
     firstCategoryFlow.add((Widget) decorateAvatarWithXmppStatus(user.getShortName(), thumb));
   }
 
   @Override
   public void addParticipation(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
-    sndCategoryFlow.add(createThumb(group.getCompoundName(), avatarUrl, tooltip, tooltipTitle, menu,
-        group.getStateToken(), dragable));
+    sndCategoryFlow.add(createThumb(group.isPersonal(), group.getShortName(), group.getCompoundName(),
+        avatarUrl, tooltip, tooltipTitle, menu, group.getStateToken(), dragable));
   }
 
   @Override

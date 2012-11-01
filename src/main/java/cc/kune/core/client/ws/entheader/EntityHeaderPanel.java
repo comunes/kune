@@ -107,7 +107,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   @Override
   public void setLogoImage(final GroupDTO group, final boolean noCache) {
-    String url = downloadProvider.get().getLogoImageUrl(group.getShortName());
+    final String url = downloadProvider.get().getLogoImageUrl(group.getShortName(), noCache);
     entityTextLogo.setLogoImage(url);
   }
 

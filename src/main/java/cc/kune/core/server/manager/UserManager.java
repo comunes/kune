@@ -28,6 +28,7 @@ import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.server.manager.impl.EmailConfirmationType;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
+import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
@@ -126,6 +127,15 @@ public interface UserManager {
    * @return the user
    */
   User findByShortname(String shortName);
+
+  /**
+   * Gets the buddies presence (mainly the last connected time).
+   * 
+   * @param user
+   *          the user
+   * @return the buddies presence
+   */
+  UserBuddiesPresenceDataDTO getBuddiesPresence(User user);
 
   /**
    * Gets the user buddies.

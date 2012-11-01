@@ -23,6 +23,7 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
@@ -40,6 +41,8 @@ public interface UserServiceAsync {
   void checkUserAndHash(String username, String userHash, AsyncCallback<Void> callback);
 
   void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<Void> asyncCallback);
+
+  void getBuddiesPresence(String userHash, AsyncCallback<UserBuddiesPresenceDataDTO> asyncCallback);
 
   void getUserAvatarBaser64(String userHash, StateToken userToken, AsyncCallback<String> asyncCallback);
 

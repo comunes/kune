@@ -69,10 +69,12 @@ import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.xmpp.RosterItem;
 import cc.kune.core.server.xmpp.XmppManager;
+import cc.kune.core.server.xmpp.XmppRosterPresenceProvider;
 import cc.kune.core.server.xmpp.XmppRosterProvider;
 import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
+import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.domain.Group;
 import cc.kune.domain.I18nCountry;
@@ -107,6 +109,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final CustomUserRegistrationServlet waveUserRegister;
   private final XmppManager xmppManager;
   private final XmppRosterProvider xmppRoster;
+  private final XmppRosterPresenceProvider xmppRosterPresence;
 
   @Inject
   public UserManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -117,7 +120,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils,
       final KuneBasicProperties properties, final GroupManager groupManager,
       final NotificationService notifyService, final XmppRosterProvider xmppRoster,
-      final SocialNetworkCache snCache) {
+      final XmppRosterPresenceProvider xmppRosterPresence, final SocialNetworkCache snCache) {
     super(provider, User.class);
     this.userFinder = finder;
     this.languageManager = languageManager;
@@ -133,6 +136,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.groupManager = groupManager;
     this.notifyService = notifyService;
     this.xmppRoster = xmppRoster;
+    this.xmppRosterPresence = xmppRosterPresence;
     this.snCache = snCache;
   }
 
@@ -339,28 +343,57 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   }
 
   @Override
+  public UserBuddiesPresenceDataDTO getBuddiesPresence(final User user) {
+    final UserBuddiesPresenceDataDTO data = new UserBuddiesPresenceDataDTO();
+    final Collection<RosterItem> roster = xmppRoster.getRoster(user.getShortName());
+    for (final RosterItem entry : roster) {
+      if (entry.getSubStatus() == 3) {
+        // only show buddies with subscription 'both'
+        final String jid = entry.getJid();
+        final int index = jid.indexOf(getDomain());
+        if (index > 0) {
+          // local user
+          try {
+            final String username = jid.substring(0, index);
+            data.put(username, xmppRosterPresence.getLastConnected(username));
+          } catch (final NoResultException e) {
+            // No existent buddie, skip
+          }
+        } else {
+          // ext user
+        }
+      }
+    }
+    return data;
+  }
+
+  private String getDomain() {
+    return "@" + chatProperties.getDomain();
+  }
+
+  @Override
   public UserBuddiesData getUserBuddies(final String shortName) {
     // XEP-133 get roster by admin part is not implemented in openfire
     // also access to the openfire db is not easy with hibernate (the use of
     // two db at the same time). This compromise solution is server
     // independent.
     // In the future cache this.
-    final String domain = "@" + chatProperties.getDomain();
     final UserBuddiesData buddiesData = new UserBuddiesData();
 
     final User user = userFinder.findByShortName(shortName);
-    Collection<RosterItem> roster;
-    roster = xmppRoster.getRoster(user.getShortName());
+
+    final Collection<RosterItem> roster = xmppRoster.getRoster(user.getShortName());
     for (final RosterItem entry : roster) {
       if (entry.getSubStatus() == 3) {
         // only show buddies with subscription 'both'
         final String jid = entry.getJid();
-        final int index = jid.indexOf(domain);
+        final int index = jid.indexOf(getDomain());
         if (index > 0) {
           // local user
           try {
             final String username = jid.substring(0, index);
             final User buddie = userFinder.findByShortName(username);
+            // buddie.setLastLogin(xmppRosterPresence.getLastConnected(username));
             buddiesData.getBuddies().add(buddie);
           } catch (final NoResultException e) {
             // No existent buddie, skip

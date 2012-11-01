@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.sn;
 
+import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
@@ -42,8 +43,9 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
       final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
       final KuneDragController dragController, final AdminsGroupSNDropController adminsDropController,
       final CollabsGroupSNDropController collabsDropController,
-      final AllMembersGroupSNDropController allMembersDropController) {
-    super(i18n, guiProvider, armor, avatarDecorator, dragController);
+      final AllMembersGroupSNDropController allMembersDropController,
+      final LastConnectedManager lastConnectedManager) {
+    super(i18n, guiProvider, armor, avatarDecorator, dragController, lastConnectedManager);
     setVisibleImpl(false);
     mainTitle.setText(i18n.t("Group members"));
     Tooltip.to(mainTitle, i18n.t("Users and groups collaborating in this group"));
@@ -71,26 +73,29 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
   @Override
   public void addAdmin(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
-    final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
-        tooltipTitle, menu, group.getStateToken(), dragable);
-    firstCategoryFlow.add(group.isPersonal() ? (Widget) decorateAvatarWithXmppStatus(
-        group.getShortName(), thumb) : thumb);
+    final boolean isPersonal = group.isPersonal();
+    final BasicDragableThumb thumb = createThumb(isPersonal, group.getShortName(),
+        group.getCompoundName(), avatarUrl, tooltip, tooltipTitle, menu, group.getStateToken(), dragable);
+    firstCategoryFlow.add(isPersonal ? (Widget) decorateAvatarWithXmppStatus(group.getShortName(), thumb)
+        : thumb);
   }
 
   @Override
   public void addCollab(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
-    final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
-        tooltipTitle, menu, group.getStateToken(), dragable);
-    sndCategoryFlow.add(group.isPersonal() ? (Widget) decorateAvatarWithXmppStatus(group.getShortName(),
-        thumb) : thumb);
+    final boolean isPersonal = group.isPersonal();
+    final BasicDragableThumb thumb = createThumb(isPersonal, group.getShortName(),
+        group.getCompoundName(), avatarUrl, tooltip, tooltipTitle, menu, group.getStateToken(), dragable);
+    sndCategoryFlow.add(isPersonal ? (Widget) decorateAvatarWithXmppStatus(group.getShortName(), thumb)
+        : thumb);
   }
 
   @Override
   public void addPending(final GroupDTO group, final String avatarUrl, final String tooltip,
       final String tooltipTitle, final GuiActionDescCollection menu, final boolean dragable) {
-    final BasicDragableThumb thumb = createThumb(group.getCompoundName(), avatarUrl, tooltip,
-        tooltipTitle, menu, group.getStateToken(), dragable);
+    final boolean isPersonal = group.isPersonal();
+    final BasicDragableThumb thumb = createThumb(isPersonal, group.getShortName(),
+        group.getCompoundName(), avatarUrl, tooltip, tooltipTitle, menu, group.getStateToken(), dragable);
     trdCategoryFlow.add(thumb);
   }
 

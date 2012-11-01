@@ -25,6 +25,7 @@ import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.AdminsGroupSNDropController;
 import cc.kune.core.client.sn.AllMembersGroupSNDropController;
 import cc.kune.core.client.sn.CollabsGroupSNDropController;
+import cc.kune.core.client.sn.actions.BuddyLastConnectedHeaderLabel;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.gspace.client.actions.ActionUtils;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
@@ -219,6 +220,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(RenameAction.class);
     s(GiveUsFeedbackBtn.class);
     s(WriteToBuddyHeaderButton.class);
+    s(BuddyLastConnectedHeaderLabel.class);
 
     // LicenseWizard
     bindPresenter(LicenseWizardPresenter.class, LicenseWizardView.class, LicenseWizardPanel.class,

@@ -147,11 +147,3 @@
     -moz-binding: url('/ws/ellipsis.xml#ellipsis');
     width: 100%
 }
-
-button.k-chat-add-as-buddie {
-  margin: 10px !important;
-}
-
-.k-chat-add-as-buddie * {
-  font-size: 13px !important;
-}

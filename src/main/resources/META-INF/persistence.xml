@@ -86,6 +86,7 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <!-- JPA entities must be registered here -->
     <class>cc.kune.core.server.xmpp.RosterItem</class>
+    <class>cc.kune.core.server.xmpp.RosterPresence</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->

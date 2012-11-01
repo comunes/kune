@@ -29,6 +29,7 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
@@ -58,6 +59,8 @@ public interface UserService extends RemoteService {
   void checkUserAndHash(String username, String userHash);
 
   void createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;
+
+  UserBuddiesPresenceDataDTO getBuddiesPresence(String userHash);
 
   String getUserAvatarBaser64(String userHash, StateToken userToken) throws DefaultException;
 

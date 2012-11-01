@@ -27,7 +27,11 @@ import org.hibernate.Session;
 
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.xmpp.OpenfireXmppRosterFinder;
+import cc.kune.core.server.xmpp.OpenfireXmppRosterPresenceFinder;
+import cc.kune.core.server.xmpp.OpenfireXmppRosterPresenceProvider;
 import cc.kune.core.server.xmpp.OpenfireXmppRosterProvider;
+import cc.kune.core.server.xmpp.XmppRosterPresenceProvider;
+import cc.kune.core.server.xmpp.XmppRosterPresenceProviderMock;
 import cc.kune.core.server.xmpp.XmppRosterProvider;
 import cc.kune.core.server.xmpp.XmppRosterProviderMock;
 
@@ -53,6 +57,8 @@ public class DataSourceOpenfirePersistModule extends PrivateModule {
     if (kuneProperties.getBoolean(KuneProperties.SITE_OPENFIRE_IGNORE)) {
       bind(XmppRosterProvider.class).to(XmppRosterProviderMock.class).in(Singleton.class);
       expose(XmppRosterProvider.class);
+      bind(XmppRosterPresenceProvider.class).to(XmppRosterPresenceProviderMock.class).in(Singleton.class);
+      expose(XmppRosterPresenceProvider.class);
     } else {
       final JpaPersistModule jpm = new JpaPersistModule("openfire");
 
@@ -67,11 +73,15 @@ public class DataSourceOpenfirePersistModule extends PrivateModule {
       dbProperties.setProperty("exclude-unlisted-classes", "true");
 
       jpm.properties(dbProperties);
-      install(jpm.addFinder(OpenfireXmppRosterFinder.class));
-      expose(OpenfireXmppRosterFinder.class);
+      jpm.addFinder(OpenfireXmppRosterPresenceFinder.class);
+      jpm.addFinder(OpenfireXmppRosterFinder.class);
+      install(jpm);
 
       bind(XmppRosterProvider.class).to(OpenfireXmppRosterProvider.class).in(Singleton.class);
+      bind(XmppRosterPresenceProvider.class).to(OpenfireXmppRosterPresenceProvider.class).in(
+          Singleton.class);
       expose(XmppRosterProvider.class);
+      expose(XmppRosterPresenceProvider.class);
 
       bind(Session.class).annotatedWith(DataSourceOpenfire.class).toProvider(
           DataSourceOpenfireSessionProvider.class);
@@ -83,6 +93,9 @@ public class DataSourceOpenfirePersistModule extends PrivateModule {
 
       transactionInterceptor = new OpenfireJpaLocalTxnInterceptor();
       requestInjection(transactionInterceptor);
+
+      expose(OpenfireXmppRosterPresenceFinder.class);
+      expose(OpenfireXmppRosterFinder.class);
 
       bind(MY_DATA_SOURCE_TWO_FILTER_KEY).to(CustomPersistFilter.class);
       expose(MY_DATA_SOURCE_TWO_FILTER_KEY);

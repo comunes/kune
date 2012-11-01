@@ -1,5 +1,5 @@
-GCHARSET                                   "UTF-8
-        "; body {
+GCHARSET                                    "UTF-8
+         "; body {
   background-color: transparent;
   color: black;
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
@@ -122,7 +122,7 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
 }
 
 .k-btn-sitebar div {
-    padding: 0px 2px !important;
+  padding: 0px 2px !important;
 }
 
 div div.siteBar table.k-sitebar img.k-iconlabel-left {
@@ -172,7 +172,7 @@ div.gwt-TabLayoutPanelTabInner {
   padding-top: 3px;
 }
 
-div.gwt-TabLayoutPanelTabInner img  {
+div.gwt-TabLayoutPanelTabInner img {
   margin: 0 !important;
 }
 
@@ -620,7 +620,6 @@ div.gwt-TabLayoutPanelTabInner img  {
     white-space: nowrap;
 }
 */
-
 div.DecoratedFileUpload div.wrapper {
   top: 10px !important;
 }
@@ -631,14 +630,11 @@ input.gwt-FileUpload {
 }
 
 /* buttons */
-
 button.k-btn-go-up {
   margin-right: 5px;
 }
 
-
 /* end buttons */
-
 .k-sn-collabslabel {
 
 }
@@ -918,7 +914,7 @@ table.k-folder-viewer {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   kfilter: alpha(opacity =
-                         90);
+                          90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1290,7 +1286,6 @@ div.docEditorContainer div.thread div.time {
 }
 
 /* Unsave status */
-
 .k-unsave-popup {
   color: #4d4d4d;
   background-color: #CCC;
@@ -1304,5 +1299,22 @@ div.docEditorContainer div.thread div.time {
 }
 
 .k-feedback-btn div {
-    margin: 5px;
+  margin: 5px;
+}
+
+button.k-buddy-last-connected {
+  font-style: italic;
+  border: 0px;
+  background: none;
+  font-weight: normal;
+  font-size: 11px;
+  margin: 0px 1px;
+  border: 1px solid transparent;
+}
+
+button.k-chat-add-as-buddie {
+  background: none repeat scroll 0 0 transparent;
+  border: 1px solid transparent;
+  font-weight: normal;
+  margin: 1px;
 }

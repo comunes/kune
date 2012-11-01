@@ -19,24 +19,19 @@
  */
 package cc.kune.core.server.xmpp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
-public interface OpenfireXmppRosterFinder {
-
-  @Finder(query = "SELECT count(*) FROM RosterItem r")
-  Long count();
+public interface OpenfireXmppRosterPresenceFinder {
 
   /**
-   * Gets the.
+   * Gets the last connected time of a username
    * 
-   * @param shortname
+   * @param username
    *          the shortname of the user but without the @domain
    * @return the list
    */
-  @Finder(query = "from RosterItem WHERE username = :username", returnAs = ArrayList.class)
-  List<RosterItem> get(@Named("username") final String shortname);
+  @Finder(query = "from RosterPresence WHERE username = :username")
+  RosterPresence getLastConnected(@Named("username") final String username);
+
 }

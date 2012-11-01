@@ -59,6 +59,7 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
@@ -180,6 +181,13 @@ public class UserRPC implements RPC, UserService {
         userDTO.getTimezone().getId(), wantPersonalHomepage);
   }
 
+  @Authenticated
+  @Override
+  @KuneTransactional
+  public UserBuddiesPresenceDataDTO getBuddiesPresence(final String userHash) {
+    return userManager.getBuddiesPresence(userSessionManager.getUser());
+  };
+
   @Override
   @Authenticated
   @KuneTransactional
@@ -196,7 +204,7 @@ public class UserRPC implements RPC, UserService {
     } else {
       throw new DefaultException("Unexpected programatic exception (user has no logo)");
     }
-  };
+  }
 
   @Override
   @Authenticated(mandatory = true)

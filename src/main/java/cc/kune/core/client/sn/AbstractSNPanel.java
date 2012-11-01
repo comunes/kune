@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.sn;
 
+import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
@@ -28,6 +29,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.ui.BasicDragableThumb;
@@ -81,6 +83,7 @@ public class AbstractSNPanel extends ViewImpl {
   ScrollPanel firstCategoryScroll;
   @UiField
   Label firstDeckLabel;
+  private final LastConnectedManager lastConnectedManager;
   @UiField
   FlowPanel mainPanel;
   @UiField
@@ -111,10 +114,11 @@ public class AbstractSNPanel extends ViewImpl {
 
   public AbstractSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
       final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
-      final KuneDragController dragController) {
+      final KuneDragController dragController, final LastConnectedManager lastConnectedManager) {
     this.armor = armor;
     this.avatarDecoratorProv = avatarDecorator;
     this.dragController = dragController;
+    this.lastConnectedManager = lastConnectedManager;
     widget = uiBinder.createAndBindUi(this);
     actions = new ActionSimplePanel(guiProvider, i18n);
   }
@@ -135,9 +139,9 @@ public class AbstractSNPanel extends ViewImpl {
     return count > 0 ? new StringBuffer("(").append(count).append(")").toString() : "";
   }
 
-  public BasicDragableThumb createThumb(final String text, final String avatarUrl, final String tooltip,
-      final String tooltipTitle, final GuiActionDescCollection menuitems, final StateToken token,
-      final boolean dragable) {
+  public BasicDragableThumb createThumb(final boolean isPersonal, final String shortName,
+      final String text, final String avatarUrl, final String tooltip, final String tooltipTitle,
+      final GuiActionDescCollection menuitems, final StateToken token, final boolean dragable) {
     final BasicDragableThumb thumb = new BasicDragableThumb(avatarUrl, AVATARSIZE, text,
         AVATARLABELMAXSIZE, false, token);
 
@@ -160,7 +164,11 @@ public class AbstractSNPanel extends ViewImpl {
       }
     };
     thumb.addClickHandler(clickHand);
-    thumb.setTooltip(tooltipTitle, tooltip);
+
+    thumb.setTooltip(tooltipTitle,
+        isPersonal ? tooltip
+            + (TextUtils.empty(lastConnectedManager.get(shortName, true)) ? "" : ". "
+                + lastConnectedManager.get(shortName, true)) : tooltip);
     thumb.setLabelVisible(false);
     if (dragable) {
       dragController.makeDraggable(thumb);

@@ -43,6 +43,10 @@ public class SharedFileDownloadUtils {
     }
   }
 
+  public String getCacheSuffix(final boolean noCache) {
+    return noCache ? UrlParam.noCacheStringSuffix() : "";
+  }
+
   public String getGroupLogo(final GroupDTO group) {
     return prefix
         + (group.hasLogo() ? getLogoImageUrl(group.getShortName()) : group.isPersonal() ? "/"
@@ -67,10 +71,6 @@ public class SharedFileDownloadUtils {
             new UrlParam(FileConstants.ONLY_USERS, false)).toString() + getCacheSuffix(noCache);
   }
 
-  public String getCacheSuffix(final boolean noCache) {
-    return noCache ? UrlParam.noCacheStringSuffix() : "";
-  }
-
   public String getPrefix() {
     return prefix;
   }
@@ -80,9 +80,13 @@ public class SharedFileDownloadUtils {
   }
 
   public String getUserAvatar(final String username) {
+    return getUserAvatar(username, false);
+  }
+
+  public String getUserAvatar(final String username, final boolean noCache) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, username),
-            new UrlParam(FileConstants.ONLY_USERS, true)).toString();
+            new UrlParam(FileConstants.ONLY_USERS, true)).toString() + getCacheSuffix(noCache);
   }
 
   public String getUserAvatar(final UserSimpleDTO user) {
