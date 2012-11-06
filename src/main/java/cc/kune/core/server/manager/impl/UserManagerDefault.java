@@ -33,14 +33,17 @@ import javax.persistence.NoResultException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.QueryParser;
+import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.robots.agent.RobotAgentUtil;
+import org.waveprotocol.box.server.util.RegistrationUtil;
 import org.waveprotocol.wave.model.id.InvalidIdException;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
+import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
@@ -82,13 +85,13 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
 import cc.kune.domain.finders.UserFinder;
-import cc.kune.wave.server.CustomUserRegistrationServlet;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
@@ -106,21 +109,22 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final SocialNetworkCache snCache;
   private final UserFinder userFinder;
   private final AccountStore waveAccountStore;
-  private final CustomUserRegistrationServlet waveUserRegister;
   private final XmppManager xmppManager;
   private final XmppRosterProvider xmppRoster;
   private final XmppRosterPresenceProvider xmppRosterPresence;
+  private final String domain;
 
   @Inject
   public UserManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final UserFinder finder, final I18nLanguageManager languageManager,
       final I18nCountryManager countryManager, final XmppManager xmppManager,
       final ChatProperties chatProperties, final I18nTranslationServiceMultiLang i18n,
-      final CustomUserRegistrationServlet waveUserRegister, final AccountStore waveAccountStore,
+      final AccountStore waveAccountStore,
       final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils,
       final KuneBasicProperties properties, final GroupManager groupManager,
       final NotificationService notifyService, final XmppRosterProvider xmppRoster,
-      final XmppRosterPresenceProvider xmppRosterPresence, final SocialNetworkCache snCache) {
+      final XmppRosterPresenceProvider xmppRosterPresence, final SocialNetworkCache snCache,
+      @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain) {
     super(provider, User.class);
     this.userFinder = finder;
     this.languageManager = languageManager;
@@ -128,7 +132,6 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.xmppManager = xmppManager;
     this.chatProperties = chatProperties;
     this.i18n = i18n;
-    this.waveUserRegister = waveUserRegister;
     this.waveAccountStore = waveAccountStore;
     this.kuneWaveManager = kuneWaveManager;
     this.participantUtils = participantUtils;
@@ -138,15 +141,16 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.xmppRoster = xmppRoster;
     this.xmppRosterPresence = xmppRosterPresence;
     this.snCache = snCache;
+    this.domain = domain;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.UserManager#askForEmailConfirmation(cc.kune
    * .domain.User, cc.kune.core.server.manager.impl.EmailConfirmationType)
-   * 
+   *
    * More info: http://en.wikipedia.org/wiki/Self-service_password_reset
    * http://en.wikipedia.org/wiki/Password_notification_e-mail
    * http://stackoverflow
@@ -314,7 +318,22 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   @Override
   public void createWaveAccount(final String shortName, final PasswordDigest passwdDigest) {
-    final String msg = waveUserRegister.tryCreateUser(shortName, passwdDigest);
+    ParticipantId id = null;
+    String msg = null;
+    try {
+      id = RegistrationUtil.checkNewUsername(domain, shortName);
+    } catch (InvalidParticipantAddress exception) {
+      msg = exception.getMessage();
+    }
+
+    if (RegistrationUtil.doesAccountExist(waveAccountStore, id)) {
+      msg = "Account already exists";
+    }
+
+    if (!RegistrationUtil.createAccountIfMissing(waveAccountStore, id, passwdDigest)) {
+      msg = "An unexpected error occured while trying to create the account";
+    }
+
     if (msg != null) {
       throw new UserRegistrationException(msg);
     }

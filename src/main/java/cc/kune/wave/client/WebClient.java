@@ -107,6 +107,8 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import java.util.Set;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -235,13 +237,12 @@ public class WebClient extends Composite implements WaveClientView {
         new WaveCreationEventHandler() {
 
           @Override
-          public void onCreateRequest(WaveCreationEvent event) {
+          public void onCreateRequest(WaveCreationEvent event, Set<ParticipantId> participantSet) {
             LOG.info("WaveCreationEvent received");
             if (channel == null) {
               throw new DefaultException("Spaghetti attack.  Create occured before login");
             }
-
-            openWave(WaveRef.of(idGenerator.newWaveId()), true);
+            openWave(WaveRef.of(idGenerator.newWaveId()), true, participantSet);
           }
         });
 
@@ -356,8 +357,10 @@ public class WebClient extends Composite implements WaveClientView {
    *
    * @param waveRef wave id to open
    * @param isNewWave whether the wave is being created by this client session.
+   * @param participants the participants to add to the newly created wave.
+   *        {@code null} if only the creator should be added
    */
-  private void openWave(WaveRef waveRef, boolean isNewWave) {
+  private void openWave(WaveRef waveRef, boolean isNewWave, Set<ParticipantId> participants) {
     LOG.info("WebClient.openWave()");
 
     WaveClientClearEvent.fire(eventBus);
@@ -370,7 +373,7 @@ public class WebClient extends Composite implements WaveClientView {
     waveHolder.getElement().appendChild(loading);
     Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
     CustomStagesProvider wave = new CustomStagesProvider(
-        holder, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), waveUnsavedIndicator);
+        holder, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, waveUnsavedIndicator);
     this.wave = wave;
     wave.load(new Command() {
       @Override
@@ -479,7 +482,7 @@ public class WebClient extends Composite implements WaveClientView {
         new SearchPresenter.WaveActionHandler() {
           @Override
           public void onCreateWave() {
-            ClientEvents.get().fireEvent(WaveCreationEvent.CREATE_NEW_WAVE);
+            ClientEvents.get().fireEvent(new WaveCreationEvent());
           }
 
           @Override
@@ -527,7 +530,7 @@ public class WebClient extends Composite implements WaveClientView {
     ClientEvents.get().addWaveSelectionEventHandler(new WaveSelectionEventHandler() {
       @Override
       public void onSelection(final WaveRef waveRef) {
-        openWave(waveRef, false);
+        openWave(waveRef, false, null);
       }
     });
   }

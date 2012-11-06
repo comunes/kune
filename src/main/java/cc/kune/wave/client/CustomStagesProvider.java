@@ -1,6 +1,6 @@
 // @formatter:off
 /**
- * Copyright 2010, 2012 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,10 @@
 
 package cc.kune.wave.client;
 
+import java.util.Set;
+
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
+import org.waveprotocol.box.webclient.client.StageTwoProvider;
 import org.waveprotocol.box.webclient.search.WaveContext;
 import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
@@ -91,6 +94,8 @@ public class CustomStagesProvider extends Stages {
   private StageThree three;
   private WaveContext wave;
 
+  private Set<ParticipantId> participants;
+
   private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   /**
@@ -104,11 +109,13 @@ public class CustomStagesProvider extends Stages {
    * @param channel the communication channel.
    * @param isNewWave true if the wave is a new client-created wave
    * @param idGenerator
+   * @param participants the participants to add to the newly created wave. null
+   *                     if only the creator should be added
    */
   public CustomStagesProvider(Element wavePanelElement,
       LogicalPanel rootPanel, FramedPanel waveFrame, WaveRef waveRef, RemoteViewServiceMultiplexer channel,
       IdGenerator idGenerator, ProfileManager profiles, WaveStore store, boolean isNewWave,
-      String localDomain, CustomSavedStateIndicator waveUnsavedIndicator) {
+      String localDomain, Set<ParticipantId> participants, CustomSavedStateIndicator waveUnsavedIndicator) {
     this.wavePanelElement = wavePanelElement;
     this.waveFrame = waveFrame;
     this.rootPanel = rootPanel;
@@ -119,6 +126,7 @@ public class CustomStagesProvider extends Stages {
     this.waveStore = store;
     this.isNewWave = isNewWave;
     this.localDomain = localDomain;
+    this.participants = participants;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
   }
 
@@ -144,8 +152,8 @@ public class CustomStagesProvider extends Stages {
 
   @Override
   protected AsyncHolder<StageTwo> createStageTwoLoader(final StageOne one) {
-    return haltIfClosed(new CustomStageTwoProvider(this.one = one, waveRef, channel, isNewWave,
-      idGenerator, profiles, waveUnsavedIndicator));};
+    return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave,
+      idGenerator, profiles, waveUnsavedIndicator, participants));};
 
   @Override
   protected AsyncHolder<StageThree> createStageThreeLoader(final StageTwo two) {

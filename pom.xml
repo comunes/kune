@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>cc.kune</groupId>
   <artifactId>kune</artifactId>
@@ -22,7 +23,7 @@
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
     <hibernate.version>4.1.2.Final</hibernate.version>
-    <wiab.version>0.3.34</wiab.version>
+    <wiab.version>0.3.36</wiab.version>
     <jetty.version>8.1.4.v20120524</jetty.version>
     <skipTests>true</skipTests>
   </properties>
@@ -556,12 +557,12 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>api</artifactId>
+      <artifactId>wave-api-0.3</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>api-src</artifactId>
+      <artifactId>wave-api-0.3-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -718,6 +719,11 @@
       <artifactId>maven-release-plugin</artifactId>
       <version>2.2.2</version>
       <type>maven-plugin</type>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.htmlunit</groupId>
+      <artifactId>htmlunit</artifactId>
+      <version>2.8</version>
     </dependency>
   </dependencies>
   <distributionManagement>
@@ -1130,15 +1136,15 @@
               <pluginExecutions>
                 <pluginExecution>
                   <pluginExecutionFilter>
-                    <groupId />
-                    <artifactId />
-                    <versionRange />
+                    <groupId/>
+                    <artifactId/>
+                    <versionRange/>
                     <goals>
-                      <goal />
+                      <goal/>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1153,7 +1159,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <execute />
+                    <execute/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1166,7 +1172,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -1346,7 +1352,8 @@
         <configuration>
           <!-- During release:perform, enable the "release" profile -->
           <releaseProfiles>release</releaseProfiles>
-          <goals>assembly:assembly -Dgwt.compiler.skip=false -Dgwt.compiler.force=true -P production</goals>
+          <goals>assembly:assembly -Dgwt.compiler.skip=false
+            -Dgwt.compiler.force=true -P production</goals>
         </configuration>
       </plugin>
     </plugins>

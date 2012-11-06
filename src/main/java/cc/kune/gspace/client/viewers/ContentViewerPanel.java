@@ -241,7 +241,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
         final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
         final CustomStagesProvider wave = new CustomStagesProvider(holder, waveHolder, dummyWaveFrame,
             waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
-            org.waveprotocol.box.webclient.client.Session.get().getDomain(), waveUnsavedIndicator);
+            org.waveprotocol.box.webclient.client.Session.get().getDomain(), null, waveUnsavedIndicator);
         this.wave = wave;
         wave.load(new Command() {
           @Override

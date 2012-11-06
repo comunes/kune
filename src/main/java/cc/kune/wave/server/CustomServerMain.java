@@ -1,7 +1,7 @@
 // @formatter:off
 
 /**
- * Copyright 2009, 2012 Google Inc.
+ * Copyright 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,6 +69,8 @@ import org.waveprotocol.box.server.waveserver.WaveIndexer;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
 import org.waveprotocol.box.server.waveserver.WaveletStateException;
+import org.waveprotocol.box.server.rpc.AttachmentInfoServlet;
+import org.waveprotocol.box.server.rpc.AttachmentServlet;
 import org.waveprotocol.wave.crypto.CertPathStore;
 import org.waveprotocol.wave.federation.FederationSettings;
 import org.waveprotocol.wave.federation.FederationTransport;
@@ -225,6 +227,9 @@ public class CustomServerMain {
   private static void initializeServlets(Injector injector, ServerRpcProvider server) {
     server.addServlet("/gadget/gadgetlist", injector.getInstance(CustomGadgetProviderServlet.class));
     server.addServlet("/attachment/*", injector.getInstance(AttachmentServlet.class));
+    server.addServlet(AttachmentServlet.ATTACHMENT_URL + "/*", injector.getInstance(AttachmentServlet.class));
+    server.addServlet(AttachmentServlet.THUMBNAIL_URL + "/*", injector.getInstance(AttachmentServlet.class));
+    server.addServlet(AttachmentInfoServlet.ATTACHMENTS_INFO_URL, injector.getInstance(AttachmentInfoServlet.class));
 
     server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));
     server.addServlet("/auth/signout", injector.getInstance(SignOutServlet.class));

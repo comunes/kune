@@ -1,6 +1,6 @@
 // @formatter:off
 /**
- * Copyright 2010, 2012 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@
 
 
 package cc.kune.wave.client;
+
+import java.util.Set;
 
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.RemoteWaveViewService;
@@ -62,6 +64,7 @@ public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
    * new protocol.
    */
   private AsyncHolder.Accessor<StageTwo> whenReady;
+  private final Set<ParticipantId> otherParticipants;
 
   /**
    * @param waveId the id of the wave to open, or null to create a new wave
@@ -71,7 +74,7 @@ public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
    */
   public CustomStageTwoProvider(StageOne stageOne, WaveRef waveRef, RemoteViewServiceMultiplexer channel,
       boolean isNewWave, IdGenerator idGenerator, ProfileManager profiles,
-      UnsavedDataListener unsavedDataListener) {
+      UnsavedDataListener unsavedDataListener, Set<ParticipantId> otherParticipants) {
     super(stageOne, unsavedDataListener);
     Preconditions.checkArgument(stageOne != null);
     Preconditions.checkArgument(waveRef != null);
@@ -81,6 +84,7 @@ public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
     this.isNewWave = isNewWave;
     this.idGenerator = idGenerator;
     this.profiles = profiles;
+    this.otherParticipants = otherParticipants;
     Log.info("StageTwo: created");
   }
 
@@ -123,6 +127,9 @@ public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
       Log.info("StageTwo: Is new wave");
       // For a new wave, initial state comes from local initialization.
       getConversations().createRoot().getRootThread().appendBlip();
+
+      // Adding any initial participant to the new wave
+      getConversations().getRoot().addParticipantIds(otherParticipants);
       super.install();
       whenReady.use(CustomStageTwoProvider.this);
     } else {

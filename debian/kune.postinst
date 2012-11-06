@@ -21,6 +21,8 @@ set -e
 
 case "$1" in
     configure)
+        oldver=$2
+
 	# http://people.debian.org/~seanius/policy/dbconfig-common-using.html/ch-develguide.html
 	alias ucf="ucf --debconf-ok"
 	dbc_generate_include=template:/etc/kune/kune.properties
@@ -43,6 +45,25 @@ case "$1" in
 	chmod -R 0755 /var/log/kune/
 	chmod -R 0755 /var/lib/kune/uploads
 	chmod -R 0755 /var/lib/kune/lucene/
+
+	# http://stackoverflow.com/questions/11680448/is-there-a-mechanism-to-upgrade-create-database-on-a-ubuntu-deb-package
+        if dpkg --compare-versions "$oldver" lt 0.3.0+b2; then
+	    # attachment migration based in wave migrate-attachments.xml
+	    ATTACHS=/var/lib/kune/_attachments
+	    ATTACHS_TEMP=/var/lib/kune/_attachments_tmp
+            if [ `ls $ATTACHS/*/* 2>/dev/null | wc -l` -gt 0 ]
+	    then
+                # we have attachments
+		if [ ! -d $ATTACHS_TEMP ]
+		then
+		    mkdir $ATTACHS_TEMP
+		fi
+		mv $ATTACHS/*/*/* $ATTACHS_TEMP/
+		rm -rf $ATTACHS
+		mv $ATTACHS_TEMP $ATTACHS
+	    fi
+        fi
+    ;;
 
     # TODO do the same (remove the user/dirs) in rm.ex
     ;;
