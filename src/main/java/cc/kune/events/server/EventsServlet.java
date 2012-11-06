@@ -105,7 +105,7 @@ public class EventsServlet extends HttpServlet {
         return;
       }
       calendar.getComponents().addAll(events);
-      resp.setContentType("text/calendar");
+      resp.setContentType("text/calendar; charset=UTF-8");
       final OutputStream out = resp.getOutputStream();
       final CalendarOutputter outputter = new CalendarOutputter();
       outputter.output(calendar, out);
