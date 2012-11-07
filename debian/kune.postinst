@@ -63,8 +63,6 @@ case "$1" in
 		mv $ATTACHS_TEMP $ATTACHS
 	    fi
         fi
-    ;;
-
     # TODO do the same (remove the user/dirs) in rm.ex
     ;;
 
