@@ -21,9 +21,10 @@
 package cc.kune.core.shared;
 
 public class CoreConstants {
-  public static final String MOZILLA_FF_LINK = "https://www.mozilla.com/en-US/firefox/fx/";
-  public static final int MAX_SHORT_NAME_SIZE = 30;
+  public static final String ESCAPED_FRAGMENT_PARAMETER = "_escaped_fragment_";
   public static final int MAX_LONG_NAME_SIZE = 60;
+  public static final int MAX_SHORT_NAME_SIZE = 30;
+  public static final String MOZILLA_FF_LINK = "https://www.mozilla.com/en-US/firefox/fx/";
 
   private CoreConstants() {
   }

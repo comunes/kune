@@ -24,6 +24,8 @@ import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.core.shared.CoreConstants;
 import cc.kune.wave.client.WebClient.ErrorHandler;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -69,12 +71,16 @@ public class KuneEntryPoint implements EntryPoint {
         // e.printStackTrace();
       }
     });
-    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-      @Override
-      public void execute() {
-        onModuleLoadCont();
-      }
-    });
+
+    if (WindowUtils.getParameter(CoreConstants.ESCAPED_FRAGMENT_PARAMETER) == null) {
+      // Only if is not a crawler url start kune
+      Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        @Override
+        public void execute() {
+          onModuleLoadCont();
+        }
+      });
+    }
   }
 
   /**
