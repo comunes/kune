@@ -22,8 +22,6 @@ package cc.kune.selenium;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -42,7 +40,8 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
 
 public abstract class PageObject {
-  private static final Log LOG = LogFactory.getLog(PageObject.class.getName());
+  // private static final Log LOG =
+  // LogFactory.getLog(PageObject.class.getName());
   private static final long[] POLL_INTERVALS = { 10, 20, 30, 40, 50, 50, 50, 50, 100 };
 
   @Inject

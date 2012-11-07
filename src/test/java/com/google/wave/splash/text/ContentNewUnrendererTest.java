@@ -21,24 +21,15 @@ package com.google.wave.splash.text;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.waveprotocol.wave.model.document.indexed.IndexedDocument;
-import org.waveprotocol.wave.model.document.operation.DocInitialization;
-import org.waveprotocol.wave.model.document.raw.impl.Element;
-import org.waveprotocol.wave.model.document.raw.impl.Node;
-import org.waveprotocol.wave.model.document.raw.impl.Text;
-import org.waveprotocol.wave.model.id.IdURIEncoderDecoder;
-import org.waveprotocol.wave.model.id.WaveId;
-import org.waveprotocol.wave.model.id.WaveletId;
-import org.waveprotocol.wave.model.version.HashedVersionFactory;
-import org.waveprotocol.wave.model.version.HashedVersionZeroFactoryImpl;
-import org.waveprotocol.wave.model.wave.Blip;
-import org.waveprotocol.wave.model.wave.ParticipantId;
-import org.waveprotocol.wave.util.escapers.jvm.JavaUrlCodec;
 
 public class ContentNewUnrendererTest {
-  private static final IdURIEncoderDecoder CODEC_URI = new IdURIEncoderDecoder(new JavaUrlCodec());
-  private static final ParticipantId CREATOR = ParticipantId.ofUnsafe("someone@example.com");
-  private static final HashedVersionFactory HASH_FACTORY = new HashedVersionZeroFactoryImpl(CODEC_URI);
+  // private static final IdURIEncoderDecoder CODEC_URI = new
+  // IdURIEncoderDecoder(new JavaUrlCodec());
+
+  // private static final ParticipantId CREATOR =
+  // ParticipantId.ofUnsafe("someone@example.com");
+  // private static final HashedVersionFactory HASH_FACTORY = new
+  // HashedVersionZeroFactoryImpl(CODEC_URI);
 
   @Ignore
   @Test
@@ -52,11 +43,12 @@ public class ContentNewUnrendererTest {
     // final CMutableDocument mutable = new
     // ContentDocument(null).createSequencedDocumentWrapper(sequencer);
 
-    final IndexedDocument<Node, Element, Text> result = ContentNewUnrenderer.unrender("<b>Some <em>bold</em></b>");
-    final DocInitialization content = result.asOperation();
-
-    final WaveId waveId;
-    final WaveletId waveletId;
+    // final IndexedDocument<Node, Element, Text> result =
+    // ContentNewUnrenderer.unrender("<b>Some <em>bold</em></b>");
+    // final DocInitialization content = result.asOperation();
+    //
+    // final WaveId waveId;
+    // final WaveletId waveletId;
     // Of just created wave
     // final WaveletName waveletName = WaveletName.of(waveId, waveletId);
 
@@ -72,7 +64,7 @@ public class ContentNewUnrendererTest {
     // Collections.singletonList(CREATOR), content, System.currentTimeMillis(),
     // 0);
 
-    final Blip rootBlipId;
+    // final Blip rootBlipId;
 
     // final OperationRequest operation =
     // operationRequest(OperationType.BLIP_CONTINUE_THREAD, rootBlipId,

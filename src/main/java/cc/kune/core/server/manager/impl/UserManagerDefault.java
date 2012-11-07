@@ -326,11 +326,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       msg = exception.getMessage();
     }
 
-    if (RegistrationUtil.doesAccountExist(waveAccountStore, id)) {
+    if (msg == null && RegistrationUtil.doesAccountExist(waveAccountStore, id)) {
       msg = "Account already exists";
     }
 
-    if (!RegistrationUtil.createAccountIfMissing(waveAccountStore, id, passwdDigest)) {
+    if (msg == null && !RegistrationUtil.createAccountIfMissing(waveAccountStore, id, passwdDigest)) {
       msg = "An unexpected error occured while trying to create the account";
     }
 

@@ -19,8 +19,6 @@
  */
 package cc.kune.core.client.dnd;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
-
 import com.allen_sauer.gwt.dnd.client.DragContext;
 import com.allen_sauer.gwt.dnd.client.VetoDragException;
 import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
@@ -28,11 +26,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class NotAllowedDropController extends SimpleDropController {
 
-  private final I18nTranslationService i18n;
-
-  public NotAllowedDropController(final Widget dropTarget, final I18nTranslationService i18n) {
+  public NotAllowedDropController(final Widget dropTarget) {
     super(dropTarget);
-    this.i18n = i18n;
   }
 
   @Override

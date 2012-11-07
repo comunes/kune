@@ -61,8 +61,10 @@ import com.google.inject.Provider;
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
  * 
  */
-@SuppressWarnings("serial")
+
 public class GroupSNConfActions extends AbstractSNActionsRegistry {
+
+  private static final long serialVersionUID = 1L;
 
   @Inject
   public GroupSNConfActions(final Session session, final StateManager stateManager,

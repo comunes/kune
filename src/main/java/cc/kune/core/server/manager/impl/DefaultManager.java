@@ -40,8 +40,6 @@ import cc.kune.core.server.manager.SearchResult;
 import com.google.inject.Provider;
 
 public abstract class DefaultManager<T, K> {
-  // FIXME: revise this
-  private static final int BATCH_SIZE = 50;
   protected final static Version LUCENE_VERSION = Version.LUCENE_35;
   private final Class<T> entityClass;
   protected final Log log;

@@ -49,11 +49,13 @@ import com.google.inject.Provider;
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
  * 
  */
-@SuppressWarnings("serial")
+
 public class UserSNConfActions extends AbstractSNActionsRegistry {
 
   public static final String ADD_BUDDIE_BTN = "user-sn-add-buddie-btn";
+
   public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
+  private static final long serialVersionUID = 1L;
   public static final SubMenuDescriptor VISIBILITY_SUBMENU = new SubMenuDescriptor();
 
   @Inject
@@ -61,11 +63,12 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
       final I18nTranslationService i18n, final Provider<UserSNVisibilityMenuItem> userBuddiesVisibility,
       final CoreResources res, final IsGroupCondition isGroupCondition,
       final AddNewBuddiesAction addNewBuddiesAction) {
-    boolean isNewbie = session.isNewbie();
-    ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
-    String menuText = isNewbie ? i18n.t("Options") : "";
-    String menuTooltip = isNewbie ? "" : i18n.t("Options");
-    String menuStyle = isNewbie ? SNActionStyles.SN_OPTIONS_STYLES_NEWBIE : SNActionStyles.SN_OPTIONS_STYLES;
+    final boolean isNewbie = session.isNewbie();
+    final ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
+    final String menuText = isNewbie ? i18n.t("Options") : "";
+    final String menuTooltip = isNewbie ? "" : i18n.t("Options");
+    final String menuStyle = isNewbie ? SNActionStyles.SN_OPTIONS_STYLES_NEWBIE
+        : SNActionStyles.SN_OPTIONS_STYLES;
     OPTIONS_MENU.withText(menuText).withToolTip(menuTooltip).withIcon(icon).withStyles(menuStyle);
     final MenuRadioItemDescriptor anyoneItem = userBuddiesVisibility.get().withVisibility(
         UserSNetVisibility.anyone);

@@ -37,12 +37,13 @@ import cc.kune.wave.server.kspecific.KuneAgent;
 import com.google.common.collect.Lists;
 
 public class KuneAgentTest {
-  private static final String MESSAGE = "testing";
-  private static final String NEW_PARTICIPANT = "newparti";
-  private static final String RICHTEXT_MESSAGE = "<b>" + MESSAGE + "</b>";
-  private static final String TEST_GADGET = "http://wave-api.appspot.com/public/gadgets/areyouin/gadget.xml";
-  private static final String TITLE = "title";
-  private static final String TITLENEW = "titleNew";
+  // private static final String MESSAGE = "testing";
+  // private static final String NEW_PARTICIPANT = "newparti";
+  // private static final String RICHTEXT_MESSAGE = "<b>" + MESSAGE + "</b>";
+  // private static final String TEST_GADGET =
+  // "http://wave-api.appspot.com/public/gadgets/areyouin/gadget.xml";
+  // private static final String TITLE = "title";
+  // private static final String TITLENEW = "titleNew";
 
   KuneAgent manager;
 
@@ -64,12 +65,6 @@ public class KuneAgentTest {
     Mockito.when(accountRobotData.getConsumerSecret()).thenReturn("someconsumer");
     // manager = new KuneAgent("example.com", accountStore, tokenGenerator,
     // frontendAddressHolder);
-  }
-
-  private String getSiteAdminShortName() {
-    // TODO Auto-generated method stub
-
-    return "admin@example.com";
   }
 
   @Ignore

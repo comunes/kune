@@ -74,7 +74,7 @@ public class CustomImportServlet extends HttpServlet {
   private static final IdURIEncoderDecoder URI_CODEC = new IdURIEncoderDecoder(new JavaUrlCodec());
   private static final HashedVersionFactory HASH_FACTORY = new HashedVersionFactoryImpl(URI_CODEC);
   private final WaveletProvider waveletProvider;
-  private final AttachmentStore attachmentStore;
+  // private final AttachmentStore attachmentStore;
   private final WaveMap waveMap;
   private KuneProperties kuneProperties;
   private static HashMap<String, String> userMap;
@@ -83,10 +83,10 @@ public class CustomImportServlet extends HttpServlet {
   private CustomImportServlet(WaveletProvider waveletProvider, AttachmentStore attachmentStore,
       WaveMap waveMap) {
     this.waveletProvider = waveletProvider;
-    this.attachmentStore = attachmentStore;
+    // this.attachmentStore = attachmentStore;
     this.waveMap = waveMap;
   }
-  
+
   public void init(KuneProperties kuneProperties ) {
     this.kuneProperties = kuneProperties;
     if (userMap == null) {

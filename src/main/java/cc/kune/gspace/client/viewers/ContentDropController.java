@@ -19,7 +19,6 @@
  */
 package cc.kune.gspace.client.viewers;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.dnd.AbstractDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -41,7 +40,6 @@ import com.google.inject.Singleton;
 public class ContentDropController extends AbstractDropController {
 
   private final ContentServiceAsync contentService;
-  private final I18nTranslationService i18n;
   private final Session session;
 
   /**
@@ -52,11 +50,10 @@ public class ContentDropController extends AbstractDropController {
    */
   @Inject
   public ContentDropController(final KuneDragController dragController,
-      final ContentServiceAsync contentService, final Session session, final I18nTranslationService i18n) {
+      final ContentServiceAsync contentService, final Session session) {
     super(dragController);
     this.contentService = contentService;
     this.session = session;
-    this.i18n = i18n;
     registerType(BasicDragableThumb.class);
   }
 

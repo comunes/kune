@@ -17,7 +17,6 @@
 package com.google.wave.splash.text;
 
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -48,7 +47,8 @@ public class ContentUnrenderer {
     }
   }
 
-  private static final Logger LOG = Logger.getLogger(ContentUnrenderer.class.getName());
+  // private static final Logger LOG =
+  // Logger.getLogger(ContentUnrenderer.class.getName());
 
   /**
    * Helper method to recursively parse a HTML element and construct a wave

@@ -46,7 +46,7 @@ public class MailServiceDefaultTest {
   public void basicFormat() {
     assertEquals("basic", FormattedString.build("basic").getString());
     assertEquals("basic arg", FormattedString.build("basic %s", "arg").getString());
-    assertEquals("basic %s", FormattedString.build("basic %s", null).getString());
+    assertEquals("basic %s", FormattedString.build("basic %s", (Object[]) null).getString());
   }
 
   @Before

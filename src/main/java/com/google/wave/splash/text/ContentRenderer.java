@@ -99,7 +99,7 @@ public class ContentRenderer {
   }
   public static final Log LOG = LogFactory.getLog(ContentRenderer.class);
 
-  private final GadgetRenderer gadgetRenderer;
+  // private final GadgetRenderer gadgetRenderer;
   private boolean identing;
   private boolean inAlign = false;
   private boolean inheader = false;
@@ -107,7 +107,7 @@ public class ContentRenderer {
 
   @Inject
   public ContentRenderer(final GadgetRenderer gadgetRenderer, final WaveRenderer waveRenderer) {
-    this.gadgetRenderer = gadgetRenderer;
+    // this.gadgetRenderer = gadgetRenderer;
     this.waveRenderer = waveRenderer;
   }
 
@@ -156,7 +156,7 @@ public class ContentRenderer {
       final String t = element.getProperty(Line.LINE_TYPE);
       final String i = element.getProperty(Line.INDENT);
       final String a = element.getProperty(Line.ALIGNMENT);
-      final String d = element.getProperty(Line.DIRECTION);
+      // final String d = element.getProperty(Line.DIRECTION);
       // For direction stuff (RTL etc) see DefaultParagraphHtml
       if (inAlign) {
         // Close identations

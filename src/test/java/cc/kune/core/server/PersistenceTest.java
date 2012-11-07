@@ -33,23 +33,13 @@ import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
 public abstract class PersistenceTest {
-  private final String persistenceUnit;
-  private final String propetiesFileName;
   @Inject
   @DataSourceKune
   Provider<EntityManager> provider;
 
   public PersistenceTest() {
-    // test: use memory
-    // test_db: use mysql
-    // Also configurable ein TestHelper
-    this(TestConstants.PERSISTENCE_MYSQL_UNIT, "kune.properties");
   }
 
-  public PersistenceTest(final String persistenceUnit, final String propetiesFileName) {
-    this.persistenceUnit = persistenceUnit;
-    this.propetiesFileName = propetiesFileName;
-  }
 
   public void closeTransaction() {
     getManager().getTransaction().commit();
@@ -80,12 +70,6 @@ public abstract class PersistenceTest {
   @Before
   public void prepare() {
     final Injector injector = IntegrationTestHelper.createInjector();
-    // (new PlatformServerModule(), persistenceUnit,
-    // propetiesFileName);
-    // final PersistService persistence =
-    // injector.getInstance(PersistService.class);
-    // To Debug insert breakpoint here
-    // persistence.start();
     injector.injectMembers(this);
   }
 

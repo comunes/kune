@@ -72,3 +72,4 @@ public class GroupFinderTest extends PersistenceTest {
     assertEquals(SHORT_NAME_A, groupFinder.getAll().get(0).getShortName());
   }
 }
+ 

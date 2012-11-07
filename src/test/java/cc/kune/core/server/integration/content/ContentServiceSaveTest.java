@@ -23,25 +23,23 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import cc.kune.core.server.TestDomainHelper;
 import cc.kune.core.server.integration.IntegrationTestHelper;
-import cc.kune.core.shared.dto.StateContentDTO;
 
 public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
-  private StateContentDTO defaultContent;
+  // private StateContentDTO defaultContent;
 
   @Before
   public void init() throws Exception {
     new IntegrationTestHelper(true, this);
-    defaultContent = getSiteDefaultContent();
+    // defaultContent = getSiteDefaultContent();
     doLogin();
   }
 
   @Ignore
   @Test
   public void testSaveAndRetrieve() throws Exception {
-    final String text = "Some content";
+    // final String text = "Some content";
     // final int version = defaultContent.getVersion();
     // contentService.save(getHash(), defaultContent.getStateToken(), text);
     // final StateContentDTO again = (StateContentDTO)
@@ -58,7 +56,7 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
   @Ignore
   @Test
   public void testSaveAndRetrieveBig() throws Exception {
-    final String text = TestDomainHelper.createBigText();
+    // final String text = TestDomainHelper.createBigText();
     // final int version = defaultContent.getVersion();
     // contentService.save(getHash(), defaultContent.getStateToken(), text);
     // final StateContentDTO again = (StateContentDTO)
