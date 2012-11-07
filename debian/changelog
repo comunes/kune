@@ -2,7 +2,7 @@ kune (0.3.0+b2) unstable; urgency=low
 
   * CLOSED -task #383: Show last connected info about buddies (similar to whatsapp)
   * 397# started
-  * Wave updated (attachments improved, lucene index ttl)
+  * Wave updated (attachments improved)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 31 Oct 2012 22:33:56 +0100
 
