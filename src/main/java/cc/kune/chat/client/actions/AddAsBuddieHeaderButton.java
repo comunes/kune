@@ -25,6 +25,7 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
@@ -129,7 +130,7 @@ public class AddAsBuddieHeaderButton {
       final EntityHeader entityHeader) {
     final ButtonDescriptor button = new ButtonDescriptor(buddieAction);
     button.setVisible(false);
-    button.setStyles("k-chat-add-as-buddie");
+    button.setStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
     buddieAction.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {

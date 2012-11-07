@@ -20,6 +20,7 @@
 package cc.kune.core.client.sn.actions;
 
 import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
@@ -43,7 +44,7 @@ public class WriteToBuddyHeaderButton {
     final ButtonDescriptor button = new ButtonDescriptor(writeToAction);
     // button.setVisible(false);
     button.withText("Write to your buddy");
-    button.setStyles("k-chat-add-as-buddie");
+    button.setStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
     writeToAction.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {

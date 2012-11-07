@@ -1,5 +1,5 @@
-GCHARSET                                    "UTF-8
-         "; body {
+GCHARSET                                     "UTF-8
+          "; body {
   background-color: transparent;
   color: black;
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
@@ -914,7 +914,7 @@ table.k-folder-viewer {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   kfilter: alpha(opacity =
-                          90);
+                           90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1298,10 +1298,6 @@ div.docEditorContainer div.thread div.time {
   font-size: 14px;
 }
 
-.k-feedback-btn div {
-  margin: 5px;
-}
-
 button.k-buddy-last-connected {
   font-style: italic;
   border: 0px;
@@ -1312,9 +1308,24 @@ button.k-buddy-last-connected {
   border: 1px solid transparent;
 }
 
-button.k-chat-add-as-buddie {
+button.k-chat-add-as-buddie,button.k-noborder-btn,button.k-feedback-btn
+  {
   background: none repeat scroll 0 0 transparent;
   border: 1px solid transparent;
   font-weight: normal;
   margin: 1px;
+}
+
+button.k-feedback-btn {
+  border: 1px solid #ACACAC;
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  background: #FFF;
+  -moz-border-radius-bottomleft: 0px;
+  border-bottom-left-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  border-bottom-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
 }

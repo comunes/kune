@@ -22,6 +22,7 @@ package cc.kune.gspace.client.options;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -93,7 +94,7 @@ public class GroupOptionsPresenter extends
     }
     groupPrefsAction.putValue(Action.SMALL_ICON, img.prefGrey());
     prefsItem = new ButtonDescriptor(groupPrefsAction);
-    prefsItem.withStyles("k-ent-header-btn, k-btn-min");
+    prefsItem.withStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
     // k-noborder,
     // k-nobackcolor,
     // k-btn-min");

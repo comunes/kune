@@ -21,6 +21,7 @@ package cc.kune.common.client.actions;
 
 public class ActionStyles {
 
+  public static final String BTN_NO_BACK_NO_BORDER = "k-noborder-btn";
   public static final String BTN_SMALL = "k-btn-min";
   // FIXME add here more styles and use then
   public static final String MENU_BTN_STYLE_LEFT = "gwt-Button k-button, k-btn, k-5corners, k-def-docbtn, k-fl";

@@ -20,6 +20,7 @@
 package cc.kune.chat.client.actions;
 
 import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
@@ -35,7 +36,7 @@ public class OpenGroupPublicChatRoomButton {
     final ButtonDescriptor button = new ButtonDescriptor(openRoomAction);
     openRoomAction.setInviteMembers(false);
     button.setVisible(false);
-    button.setStyles("k-chat-add-as-buddie");
+    button.setStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
     openRoomAction.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
