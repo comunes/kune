@@ -30,6 +30,6 @@ public interface UsersOnline {
    *          of the user
    * @return true if is logged
    */
-  boolean isLogged(String shortname);
+  boolean isOnline(String shortname);
 
 }
