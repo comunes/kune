@@ -20,9 +20,15 @@
 
 package cc.kune.core.server.utils;
 
+import java.util.UnknownFormatConversionException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cc.kune.common.shared.utils.AbstractFormattedString;
 
 public class FormattedString extends AbstractFormattedString {
+  public static final Log LOG = LogFactory.getLog(FormattedString.class);
 
   public static FormattedString build(final boolean shouldBeTranslated, final String template,
       final Object... args) {
@@ -85,7 +91,12 @@ public class FormattedString extends AbstractFormattedString {
 
   @Override
   public String format(final String template, final Object... args) {
-    return String.format(template, args);
+    try {
+      return String.format(template, args);
+    } catch (final UnknownFormatConversionException e) {
+      LOG.error("Formating error, template: " + template + ", args.length: " + args.length);
+      throw e;
+    }
   }
 
 }

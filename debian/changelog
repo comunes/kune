@@ -1,3 +1,9 @@
+kune (0.3.0+b3) unstable; urgency=low
+
+  * CLOSED -task #408: password reset
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 12 Nov 2012 00:21:57 +0100
+
 kune (0.3.0+b2) unstable; urgency=low
 
   * CLOSED -task #383: Show last connected info about buddies (similar to whatsapp)
