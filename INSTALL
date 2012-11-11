@@ -2,6 +2,13 @@
 
 ==Development environment instructions==
 
+===Important warning===
+This document will help you to install Kune, but it is especially aimed for developers. If you just want to deploy Kune in a server for your users to make use of it, we strongly advise you to use the DEB package and install it in a Debian/Ubuntu environment. That would be much easier, faster and hassle-free. In that case, ignore the rest of this document and go to the following links:
+* Steps for an easy installation with a deb package:
+  http://kune.cc/#!kune.docs.6810.898
+* For installation/administration documentation:
+  http://kune.cc/#!kune.docs.6810
+
 ===Prerrequisites===
 
 * Install java-jdk (>=6), maven2, mysql (> 5.0) and eclipse (well, this depends on what IDE do you use for development). In Debian and derivatives (such as Ubuntu):
