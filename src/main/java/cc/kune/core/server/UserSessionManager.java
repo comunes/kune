@@ -19,8 +19,7 @@
  */
 package cc.kune.core.server;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,6 +28,8 @@ import org.eclipse.jetty.server.session.HashSessionManager;
 
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.notifier.UsersOnline;
+import cc.kune.core.server.xmpp.XmppRosterPresenceProvider;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
@@ -41,15 +42,17 @@ public class UserSessionManager implements UsersOnline {
 
   public static final Log LOG = LogFactory.getLog(UserSessionManager.class);
 
-  private final Set<String> logins;
   private final UserManager manager;
+  private final XmppRosterPresenceProvider presenceManager;
   private final Provider<UserSession> userSessionProv;
 
   @Inject
   public UserSessionManager(final UserManager manager, final Provider<UserSession> userSessionProv,
-      final SessionManager jettySessionManager, final UserSessionMonitor userSessionMonitor) {
+      final SessionManager jettySessionManager, final UserSessionMonitor userSessionMonitor,
+      final XmppRosterPresenceProvider presence) {
     this.manager = manager;
     this.userSessionProv = userSessionProv;
+    this.presenceManager = presence;
     final HashSessionManager hSessionManager = (HashSessionManager) jettySessionManager;
     hSessionManager.setMaxInactiveInterval(-1);
     hSessionManager.setSavePeriod(5);
@@ -58,17 +61,6 @@ public class UserSessionManager implements UsersOnline {
     LOG.debug(String.format("User sessions total: %d", hSessionManager.getSessionsTotal()));
     // this prevent saving the session??
     // hSessionManager.setUsingCookies(true);
-    // For now the implementation of this can be very inaccurate (if we
-    // login/logout several times with different clients) and not scalable
-    // (stored in a MAP). Possible fix, to use jabber status
-    // More info:
-    // http://stackoverflow.com/questions/4592961/how-can-i-check-which-all-users-are-logged-into-my-application
-    //
-    // Best way maybe it's accessing openfire db:
-    // http://www.mastertheboss.com/jboss-howto/45-jboss-persistence/110-jboss-persistencexml-multiple-database.html
-
-    // FIXME add sessions from restored ?
-    logins = new HashSet<String>();
   }
 
   public String getHash() {
@@ -79,17 +71,15 @@ public class UserSessionManager implements UsersOnline {
     return manager.find(getUserSession().getUserId());
   }
 
-  private String getUserLoggedShortName() {
-    return getUser().getShortName();
-  }
-
   private UserSession getUserSession() {
     return userSessionProv.get();
   }
 
   @Override
-  public boolean isLogged(final String shortname) {
-    return logins.contains(shortname);
+  public boolean isOnline(final String shortname) {
+    final long diffToLastConnection = (new Date()).getTime()
+        - presenceManager.getLastConnected(shortname);
+    return diffToLastConnection < SessionConstants._AN_HOUR;
   }
 
   public boolean isUserLoggedIn() {
@@ -103,16 +93,10 @@ public class UserSessionManager implements UsersOnline {
   public void login(final Long userId, final String newUserHash) {
     getUserSession().setUserId(userId);
     getUserSession().setHash(newUserHash);
-    updateLoggedUser();
   }
 
   public void logout() {
-    logins.remove(getUserLoggedShortName());
     getUserSession().setUserId(null);
     getUserSession().setHash(null);
-  }
-
-  public void updateLoggedUser() {
-    logins.add(getUserLoggedShortName());
   }
 }

@@ -120,7 +120,7 @@ public abstract class AbstractFormattedString {
    */
   public String getString() {
     Preconditions.checkNotNull(template, "Template of FormatedString cannot be null");
-    return args == null ? template : format(template, args);
+    return args == null || args.length == 0 ? template : format(template, args);
   }
 
   /**

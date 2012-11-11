@@ -73,9 +73,9 @@ public class NotificationSenderDefault implements NotificationSender {
   }
 
   private boolean noOnline(final String username) {
-    final boolean logged = usersOnline.isLogged(username);
-    LOG.debug(String.format("User '%s' is online for notifications? %s", username, logged));
-    return !logged;
+    final boolean isOnline = usersOnline.isOnline(username);
+    LOG.debug(String.format("User '%s' is online for notifications? %s", username, isOnline));
+    return !isOnline;
   }
 
   @Override

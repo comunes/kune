@@ -89,7 +89,9 @@ public abstract class FileGwtUploadAbstractServlet extends UploadAction {
       // Remove files from session because we have a copy of them
       return response;
     } finally {
+      // Without this the session restoration fails
       removeSessionFileItems(request);
+      request.getSession().removeAttribute(ATTR_LAST_FILES);
     }
 
   }
