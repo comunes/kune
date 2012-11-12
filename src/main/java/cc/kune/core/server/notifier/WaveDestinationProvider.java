@@ -23,7 +23,6 @@ import java.util.Collection;
 
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
-import cc.kune.domain.User;
 import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
 
 /**
@@ -35,7 +34,7 @@ public class WaveDestinationProvider implements DestinationProvider {
   private final String author;
 
   /** The list. */
-  private Collection<User> list;
+  private Collection<Addressee> list;
 
   /** The ref. */
   private final WaveRef ref;
@@ -84,7 +83,7 @@ public class WaveDestinationProvider implements DestinationProvider {
    * @see cc.kune.wave.server.kspecific.pendnotif.DestinationProvider#getDest()
    */
   @Override
-  public Collection<User> getDest() {
+  public Collection<Addressee> getDest() {
     if (list == null) {
       list = KuneWaveServerUtils.getLocalParticipants(ref, author);
     }

@@ -33,7 +33,6 @@ import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.shared.dto.EmailNotificationFrequency;
-import cc.kune.domain.User;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.common.base.Preconditions;
@@ -107,7 +106,7 @@ public class NotificationSenderDefault implements NotificationSender {
       // }
     }
 
-    for (final User user : notification.getDestProvider().getDest()) {
+    for (final Addressee user : notification.getDestProvider().getDest()) {
       final String username = user.getShortName();
 
       switch (notifyType) {
@@ -118,12 +117,12 @@ public class NotificationSenderDefault implements NotificationSender {
         break;
       case email:
         if (forceSend
-            || (user.isEmailVerified() && noOnline(username) && withFrequency == user.getEmailNotifFreq())) {
+            || (user.isEmailVerified() && noOnline(username) && withFrequency == user.getFreq())) {
           // we'll send this notification if is mandatory or this user is not
           // only and has this freq configured
           mailService.send(subject,
               FormattedString.build(emailTemplate.replace("%s", body.getString())), isHtml,
-              user.getEmail());
+              user.getAddress());
         }
         break;
       case wave:

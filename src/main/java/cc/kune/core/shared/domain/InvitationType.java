@@ -17,27 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.notifier;
 
-import java.util.Collection;
+package cc.kune.core.shared.domain;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
- * The Interface DestinationProvider is used to provide a way to get a list of
- * Users (for instance to send notifications to them)
+ * The Enum InvitationType describes types of invitations (usually email
+ * invitations)
  */
-public interface DestinationProvider {
+public enum InvitationType implements IsSerializable {
 
-  @Override
-  boolean equals(final Object obj);
+  /** Invitation to a group */
+  TO_GROUP,
 
-  /**
-   * Gets the destination list
-   * 
-   * @return the destination
-   */
-  Collection<Addressee> getDest();
+  /** Invitation to a group list */
+  TO_LISTS,
 
-  @Override
-  int hashCode();
-
+  /** Invitation to this site. */
+  TO_SITE
 }

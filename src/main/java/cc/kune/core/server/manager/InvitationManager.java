@@ -17,20 +17,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.notifier;
 
-import static org.junit.Assert.*;
+package cc.kune.core.server.manager;
 
-import org.junit.Test;
+import cc.kune.core.server.notifier.NotificationType;
+import cc.kune.core.shared.domain.InvitationType;
+import cc.kune.domain.Invitation;
+import cc.kune.domain.User;
 
-public class SimpleDestinationProviderTest extends AbstractPendingNotificationTest {
+public interface InvitationManager extends Manager<Invitation, Long> {
 
-  @Test
-  public void shouldCompareWell() {
-    assertTrue(someUserProvider.equals(someSimilarUserProvider));
-    assertTrue(someUserProvider.equals(someSimilarUserProvider2));
-    assertTrue(someSimilarUserProvider.equals(someSimilarUserProvider2));
-    assertFalse(someUserProvider.equals(diferentProvider));
-  }
+  /**
+   * Invite some emails to the site or a group, or a list.
+   * 
+   * @param from
+   *          the user inviting
+   * @param type
+   *          the type of invitation (to group/list/etc)
+   * @param notifType
+   *          the notif type (email,chat,wave)
+   * @param toToken
+   *          the to token
+   * @param emails
+   *          the list of emails to invite to
+   */
+  void invite(User from, InvitationType type, NotificationType notifType, String toToken,
+      String... emails);
 
 }

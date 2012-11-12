@@ -69,7 +69,8 @@ public class NotificationService {
   public void notifyGroupToUser(final Group group, final User to, final String subject,
       final String message) {
     sender.add(NotificationType.email, group.getShortName(), createPlainSubject(subject),
-        helper.groupNotification(group.getShortName(), group.hasLogo(), message), true, false, to);
+        helper.groupNotification(group.getShortName(), group.hasLogo(), message), true, false,
+        Addressee.build(to));
   }
 
   private void notifyToAll(final Group groupSender, final String subject, final String message,
@@ -77,14 +78,15 @@ public class NotificationService {
     for (final User to : users) {
       sender.add(NotificationType.email, groupSender.getShortName(), createPlainSubject(subject),
           helper.groupNotification(groupSender.getShortName(), groupSender.hasLogo(), message), true,
-          true, to);
+          true, Addressee.build(to));
     }
   }
 
   public void notifyUserToUser(final User from, final User to, final String subject, final String message) {
     sender.add(NotificationType.email, PendingNotification.DEFAULT_SUBJECT_PREFIX,
         createPlainSubject(subject),
-        helper.userNotification(from.getShortName(), from.hasLogo(), message), true, false, to);
+        helper.userNotification(from.getShortName(), from.hasLogo(), message), true, false,
+        Addressee.build(to));
   }
 
   /**
@@ -92,7 +94,7 @@ public class NotificationService {
    * changed by the site name.
    * 
    * @param to
-   *          the User to send the notification
+   *          the Addressee to send the notification
    * @param subject
    *          the subject of the email
    * @param body
@@ -101,7 +103,7 @@ public class NotificationService {
    * @param hash
    *          the hash an additional link that will be added at the end
    */
-  public void sendEmailToWithLink(final User to, final String subject, final String body,
+  public void sendEmailToWithLink(final Addressee to, final String subject, final String body,
       final String hash) {
     sender.add(NotificationType.email, PendingNotification.DEFAULT_SUBJECT_PREFIX,
         createPlainSubject(subject), helper.userNotification(body, hash), true, true, to);

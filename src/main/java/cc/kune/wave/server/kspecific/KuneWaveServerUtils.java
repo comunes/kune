@@ -30,6 +30,7 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.server.notifier.Addressee;
 import cc.kune.domain.Content;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
@@ -47,13 +48,15 @@ public class KuneWaveServerUtils {
   @Inject
   static Provider<KuneWaveService> waveService;
 
-  public static Collection<User> getLocalParticipants(final WaveRef waveref, final String author) {
+  public static Collection<Addressee> getLocalParticipants(final WaveRef waveref, final String author) {
     final Participants participants = waveService.get().getParticipants(waveref, author);
-    final Set<User> list = new HashSet<User>();
+    final Set<Addressee> list = new HashSet<Addressee>();
     for (final String participant : participants) {
       participantUtils.get().isLocal(participant);
       try {
-        list.add(userFinder.get().findByShortName(participantUtils.get().getAddressName(participant)));
+        final User user = userFinder.get().findByShortName(
+            participantUtils.get().getAddressName(participant));
+        list.add(Addressee.build(user));
       } catch (final NoResultException e) {
         // Seems is not a local user
       }

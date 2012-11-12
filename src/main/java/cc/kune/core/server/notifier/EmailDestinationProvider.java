@@ -23,18 +23,22 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class SimpleDestinationProvider implements DestinationProvider {
+import cc.kune.domain.I18nLanguage;
+
+public class EmailDestinationProvider implements DestinationProvider {
   private final List<Addressee> list;
 
   /**
-   * Instantiates a new simple destination provider (used for single
-   * notifications like add/remove participant emails).
+   * Instantiates a new destination provider (used for single notifications like
+   * add/remove participant emails).
    * 
-   * @param addressee
-   *          the addressee
+   * @param email
+   *          the user to send the email or other type of notification
+   * @param lang
+   *          the lang of the user
    */
-  public SimpleDestinationProvider(final Addressee addressee) {
-    list = Arrays.asList(addressee);
+  public EmailDestinationProvider(final String email, final I18nLanguage lang) {
+    list = Arrays.asList(Addressee.build(email, lang));
   }
 
   @Override
@@ -48,7 +52,7 @@ public class SimpleDestinationProvider implements DestinationProvider {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final SimpleDestinationProvider other = (SimpleDestinationProvider) obj;
+    final EmailDestinationProvider other = (EmailDestinationProvider) obj;
     if (list == null) {
       if (other.list != null) {
         return false;

@@ -19,25 +19,18 @@
  */
 package cc.kune.core.server.notifier;
 
-import java.util.Collection;
+import static org.junit.Assert.*;
 
-/**
- * The Interface DestinationProvider is used to provide a way to get a list of
- * Users (for instance to send notifications to them)
- */
-public interface DestinationProvider {
+import org.junit.Test;
 
-  @Override
-  boolean equals(final Object obj);
+public class LocalUserDestinationProviderTest extends AbstractPendingNotificationTest {
 
-  /**
-   * Gets the destination list
-   * 
-   * @return the destination
-   */
-  Collection<Addressee> getDest();
-
-  @Override
-  int hashCode();
+  @Test
+  public void shouldCompareWell() {
+    assertTrue(someUserProvider.equals(someSimilarUserProvider));
+    assertTrue(someUserProvider.equals(someSimilarUserProvider2));
+    assertTrue(someSimilarUserProvider.equals(someSimilarUserProvider2));
+    assertFalse(someUserProvider.equals(diferentProvider));
+  }
 
 }
