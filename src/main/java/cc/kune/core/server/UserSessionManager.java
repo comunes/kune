@@ -21,6 +21,8 @@ package cc.kune.core.server;
 
 import java.util.Date;
 
+import javax.persistence.NoResultException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.SessionManager;
@@ -77,9 +79,13 @@ public class UserSessionManager implements UsersOnline {
 
   @Override
   public boolean isOnline(final String shortname) {
-    final long diffToLastConnection = (new Date()).getTime()
-        - presenceManager.getLastConnected(shortname);
-    return diffToLastConnection < SessionConstants._AN_HOUR;
+    try {
+      final long diffToLastConnection = (new Date()).getTime()
+          - presenceManager.getLastConnected(shortname);
+      return diffToLastConnection < SessionConstants._AN_HOUR;
+    } catch (final NoResultException e) {
+      return false;
+    }
   }
 
   public boolean isUserLoggedIn() {
