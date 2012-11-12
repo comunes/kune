@@ -136,6 +136,7 @@ else
             -Dlog4j.configuration=$LOGJ4_CONFIG \
             -Dkune.server.config=$KUNE_CONFIG \
             -Dwave.server.config=$WAVE_CONFIG \
+            -Djava.awt.headless=true \
             $MS \
 	    $MX \
 	    -jar $JAR >> $LOGFILE 2>> $LOGFILE
@@ -146,6 +147,7 @@ else
 	    -Dlog4j.configuration=$LOGJ4_CONFIG \
 	    -Dkune.server.config=$KUNE_CONFIG \
 	    -Dwave.server.config=$WAVE_CONFIG \
+            -Djava.awt.headless=true \
             $MS \
 	    $MX \
 	    -jar $JAR >> $LOGFILE 2>> $LOGFILE
