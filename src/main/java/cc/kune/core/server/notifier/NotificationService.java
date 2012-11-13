@@ -27,6 +27,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.server.manager.impl.GroupServerUtils;
+import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Group;
@@ -39,17 +40,27 @@ import com.google.inject.Singleton;
 public class NotificationService {
 
   public static final Log LOG = LogFactory.getLog(NotificationService.class);
+  private final KuneBasicProperties basicPropierties;
   private final NotificationHtmlHelper helper;
   private final PendingNotificationSender sender;
 
   @Inject
-  NotificationService(final PendingNotificationSender sender, final NotificationHtmlHelper helper) {
+  NotificationService(final PendingNotificationSender sender, final NotificationHtmlHelper helper,
+      final KuneBasicProperties basicPropierties
+
+  ) {
     this.sender = sender;
     this.helper = helper;
+    this.basicPropierties = basicPropierties;
   }
 
   private FormattedString createPlainSubject(final String subject) {
     return FormattedString.build(subject);
+  }
+
+  private String formatPrefix(final String subjectPrefix) {
+    return subjectPrefix.equals(PendingNotification.SITE_SUBJECT_PREFIX) ? basicPropierties.getSiteCommonName()
+        : subjectPrefix;
   }
 
   public void notifyGroupAdmins(final Group groupToNotify, final Group groupSender,
@@ -90,6 +101,41 @@ public class NotificationService {
   }
 
   /**
+   * Send an email
+   * 
+   * @param to
+   *          the address (destination)
+   * @param subjectPrefix
+   *          the subject prefix for instance [somegroup]
+   * @param subject
+   *          the subject of the email
+   * @param body
+   *          the body of the email
+   */
+  public void sendEmail(final Addressee to, final String subjectPrefix, final FormattedString subject,
+      final FormattedString body) {
+    sender.add(NotificationType.email, formatPrefix(subjectPrefix), subject, body, true, true,
+        new SimpleDestinationProvider(to));
+  }
+
+  /**
+   * Send an email
+   * 
+   * @param dest
+   *          the list of address (destinations)
+   * @param subjectPrefix
+   *          the subject prefix for instance [somegroup]
+   * @param subject
+   *          the subject of the email
+   * @param body
+   *          the body of the email
+   */
+  public void sendEmail(final DestinationProvider dest, final String subjectPrefix,
+      final FormattedString subject, final FormattedString body) {
+    sender.add(NotificationType.email, subjectPrefix, subject, body, true, true, dest);
+  }
+
+  /**
    * Send email to an User with a link. The first an unique %s in body is
    * changed by the site name.
    * 
@@ -106,6 +152,6 @@ public class NotificationService {
   public void sendEmailToWithLink(final Addressee to, final String subject, final String body,
       final String hash) {
     sender.add(NotificationType.email, PendingNotification.DEFAULT_SUBJECT_PREFIX,
-        createPlainSubject(subject), helper.userNotification(body, hash), true, true, to);
+        createPlainSubject(subject), helper.createBodyWithEndLink(body, hash), true, true, to);
   }
 }

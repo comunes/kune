@@ -33,6 +33,7 @@ public final class SiteTokens {
   public final static String GROUP_HOME = "";
   public final static String GROUP_PREFS = "gprefs";
   public final static String HOME = "";
+  public final static String INVITATION = "invitation";
   public final static String NEW_GROUP = "newgroup";
   public final static String PREFS = "prefs";
   public static final String PREVIEW = "preview";

@@ -17,20 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.manager;
+package cc.kune.core.client.rpcservices;
 
-import java.util.List;
+import cc.kune.core.shared.domain.InvitationType;
 
-import cc.kune.domain.I18nLanguage;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-public interface I18nLanguageManager extends Manager<I18nLanguage, Long> {
+@RemoteServiceRelativePath("InvitationService")
+public interface InvitationService extends RemoteService {
 
-  I18nLanguage getDefaultLanguage();
-
-  I18nLanguage findByCode(String language);
-
-  List<I18nLanguage> findByCodes(List<String> langs);
-
-  List<I18nLanguage> getAll();
+  void invite(String userHash, InvitationType type, String token, String[] emails);
 
 }

@@ -28,13 +28,14 @@ import cc.kune.core.server.utils.FormattedString;
 public class PendingNotification {
 
   public static final String DEFAULT_SUBJECT_PREFIX = new String();
-
   /**
    * The Constant NONE is used when for instance, all the destinations are not
    * local, so, we should not notify them by email
    */
   public static final PendingNotification NONE = new PendingNotification(null, null, null, null, false,
       false, null);
+
+  public static final String SITE_SUBJECT_PREFIX = new String();
 
   /** The body. */
   private final FormattedString body;

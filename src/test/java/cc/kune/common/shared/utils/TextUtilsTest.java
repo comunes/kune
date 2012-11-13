@@ -29,6 +29,16 @@ public class TextUtilsTest {
   private static final String DOMAIN_REGEXP = "^http([s]|)://localhost/.*";
 
   @Test
+  public void testRemoveHttp() {
+    assertEquals("localhost", TextUtils.removeHttp("http://localhost/"));
+    assertEquals("localhost", TextUtils.removeHttp("https://localhost/"));
+    assertEquals("localhost", TextUtils.removeHttp("http://localhost"));
+    assertEquals("localhost", TextUtils.removeHttp("https://localhost"));
+    assertEquals("localhost:8080", TextUtils.removeHttp("http://localhost:8080/"));
+    assertEquals("localhost:8080", TextUtils.removeHttp("https://localhost:8080/"));
+  }
+
+  @Test
   public void testUrlDomain() {
     assertTrue("http://localhost/kk".matches(DOMAIN_REGEXP));
     assertTrue("https://localhost/kk".matches(DOMAIN_REGEXP));

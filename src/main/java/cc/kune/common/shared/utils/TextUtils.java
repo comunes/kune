@@ -207,6 +207,10 @@ public class TextUtils {
     return string != null && string.length() > 0;
   }
 
+  public static String removeHttp(final String text) {
+    return removeLastSlash(text.replaceFirst("(http|https):\\/\\/", ""));
+  }
+
   public static String removeLastSlash(final String text) {
     return text.replaceFirst("/$", "");
   }

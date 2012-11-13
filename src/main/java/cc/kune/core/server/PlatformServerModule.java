@@ -26,6 +26,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
+import cc.kune.core.client.rpcservices.InvitationService;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SocialNetService;
 import cc.kune.core.client.rpcservices.UserService;
@@ -99,6 +100,7 @@ import cc.kune.core.server.persist.KunePersistenceService;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.GroupRPC;
 import cc.kune.core.server.rpc.I18nRPC;
+import cc.kune.core.server.rpc.InvitationRPC;
 import cc.kune.core.server.rpc.SiteRPC;
 import cc.kune.core.server.rpc.SocialNetworkRPC;
 import cc.kune.core.server.rpc.StatsRPC;
@@ -158,6 +160,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(I18nService.class).to(I18nRPC.class);
     bind(ListsService.class).to(ListsRPC.class);
     bind(ClientStatsService.class).to(StatsRPC.class);
+    bind(InvitationService.class).to(InvitationRPC.class);
   }
 
   private void bindServices() {

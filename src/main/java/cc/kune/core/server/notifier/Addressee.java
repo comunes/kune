@@ -20,6 +20,9 @@
 
 package cc.kune.core.server.notifier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cc.kune.core.shared.dto.EmailNotificationFrequency;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
@@ -28,6 +31,14 @@ import cc.kune.domain.User;
  * The Class Addressee is used to make a list of notifications addressees.
  */
 public class Addressee {
+
+  public static List<Addressee> build(final I18nLanguage lang, final String... emails) {
+    final ArrayList<Addressee> list = new ArrayList<Addressee>();
+    for (final String email : emails) {
+      list.add(Addressee.build(email, lang));
+    }
+    return list;
+  }
 
   /**
    * Builds and address from a email.

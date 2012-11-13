@@ -19,13 +19,17 @@
  */
 package cc.kune.core.server.notifier;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import cc.kune.domain.I18nLanguage;
 
 public class EmailDestinationProvider implements DestinationProvider {
+  public static EmailDestinationProvider build(final I18nLanguage defaultLanguage,
+      final String... emails) {
+    return new EmailDestinationProvider(defaultLanguage, emails);
+  }
+
   private final List<Addressee> list;
 
   /**
@@ -37,8 +41,8 @@ public class EmailDestinationProvider implements DestinationProvider {
    * @param lang
    *          the lang of the user
    */
-  public EmailDestinationProvider(final String email, final I18nLanguage lang) {
-    list = Arrays.asList(Addressee.build(email, lang));
+  public EmailDestinationProvider(final I18nLanguage lang, final String... emails) {
+    list = Addressee.build(lang, emails);
   }
 
   @Override

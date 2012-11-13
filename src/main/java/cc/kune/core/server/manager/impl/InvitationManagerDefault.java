@@ -28,13 +28,27 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.TokenUtils;
+import cc.kune.core.server.content.ContainerManager;
+import cc.kune.core.server.content.ContentUtils;
+import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.InvitationManager;
+import cc.kune.core.server.notifier.Addressee;
+import cc.kune.core.server.notifier.NotificationHtmlHelper;
 import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.notifier.NotificationType;
+import cc.kune.core.server.notifier.PendingNotification;
 import cc.kune.core.server.persist.DataSourceKune;
+import cc.kune.core.server.properties.KuneBasicProperties;
+import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.shared.domain.InvitationType;
+import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.domain.Group;
+import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.Invitation;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.GroupFinder;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
@@ -46,13 +60,27 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     InvitationManager {
 
   public static final Log LOG = LogFactory.getLog(InvitationManagerDefault.class);
+  private final KuneBasicProperties basicProperties;
+  private final ContainerManager containerManager;
+  private final GroupFinder groupFinder;
+  private final I18nLanguageManager i18nLanguageManager;
+  private final NotificationHtmlHelper notificationHtmlHelper;
   private final NotificationService notifyService;
 
   @Inject
   public InvitationManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
-      final NotificationService notifyService) {
+      final NotificationService notifyService, final I18nLanguageManager i18nLanguageManager,
+      final KuneBasicProperties basicProperties, final NotificationHtmlHelper notificationHtmlHelper,
+      final GroupFinder groupFinder, final ContainerManager containerManager
+
+  ) {
     super(provider, Invitation.class);
     this.notifyService = notifyService;
+    this.i18nLanguageManager = i18nLanguageManager;
+    this.basicProperties = basicProperties;
+    this.notificationHtmlHelper = notificationHtmlHelper;
+    this.groupFinder = groupFinder;
+    this.containerManager = containerManager;
   }
 
   @Override
@@ -60,29 +88,49 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
       final String toToken, final String... emails) {
     Preconditions.checkState(notifType == NotificationType.email,
         "Only email invitations are implemented");
+    final String siteUrl = basicProperties.getSiteUrlWithoutHttp();
+    final String fromName = from.getName();
+    final I18nLanguage defLang = i18nLanguageManager.getDefaultLanguage();
     for (final String email : emails) {
-      final String hash = UUID.randomUUID().toString();
-      final Invitation invitation = new Invitation(from, hash, toToken, notifType, email, type);
+      final String redirect = TokenUtils.addRedirect(SiteTokens.INVITATION, UUID.randomUUID().toString());
+      final String link = notificationHtmlHelper.createLink(redirect);
+      final Invitation invitation = new Invitation(from, UUID.randomUUID().toString(), toToken,
+          notifType, email, type);
       switch (type) {
       case TO_SITE:
-        // notifyService.sendEmailToWithLink(
-        // user,
-        // "Verify password reset",
-        // "You are receiving this email because a request has been made to change the password associated with this email address in %s.<br><br>"
-        // +
-        // "If this was a mistake, just ignore this email and nothing will happen.<br><br>"
-        // +
-        // "If you would like to reset the password for this account simply click on the link below or paste it into the url field on your favorite browser:",
-        // TokenUtils.addRedirect(SiteTokens.RESET_PASSWD, hash));
+        notifyService.sendEmail(Addressee.build(email, defLang),
+            PendingNotification.DEFAULT_SUBJECT_PREFIX,
+            FormattedString.build("%s has invited you to join %s", fromName, siteUrl),
+            FormattedString.build("You have been invited by %s to join %s.<br><br>"
+                + "If you want to accept the invitation, just follow this link:<br>%s<br>"
+                + "in other case, just ignore this email.", fromName, siteUrl, link));
         break;
       case TO_GROUP:
-
+        final Group group = groupFinder.findByShortName(new StateToken(toToken).getGroup());
+        final String longName = group.getLongName();
+        notifyService.sendEmail(Addressee.build(email, defLang),
+            PendingNotification.DEFAULT_SUBJECT_PREFIX,
+            FormattedString.build("%s has invited you to join the group '%s'", fromName, longName),
+            FormattedString.build("You have been invited by %s to join the group '%s' in %s."
+                + "If you want to accept the invitation, just follow this link:<br>%s<br>"
+                + "in other case, just ignore this email.", fromName, longName, siteUrl, link));
         break;
       case TO_LISTS:
+        final StateToken token = new StateToken(toToken);
+        final String groupShortName = groupFinder.findByShortName(token.getGroup()).getShortName();
+        final String listName = containerManager.find(ContentUtils.parseId(token.getFolder())).getName();
+        notifyService.sendEmail(Addressee.build(email, defLang),
+            PendingNotification.DEFAULT_SUBJECT_PREFIX, FormattedString.build(
+                "%s has invited you to join the lists '%s'", fromName, listName), FormattedString.build(
+                "You have been invited by %s to join the list '%s' of group '%s' in %s."
+                    + "If you want to accept the invitation, just follow this link::<br>%s<br>"
+                    + "in other case, just ignore this email.", fromName, listName, groupShortName,
+                siteUrl, link));
         break;
       default:
         throw new NotImplementedException();
       }
+      persist(invitation);
     }
   }
 }

@@ -26,6 +26,7 @@ import javax.persistence.EntityManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.I18nTranslation;
 import cc.kune.domain.finders.I18nLanguageFinder;
 
 import com.google.inject.Inject;
@@ -43,6 +44,11 @@ public class I18nLanguageManagerDefault extends DefaultManager<I18nLanguage, Lon
       final I18nLanguageFinder finder) {
     super(provider, I18nLanguage.class);
     this.finder = finder;
+  }
+
+  @Override
+  public I18nLanguage getDefaultLanguage() {
+    return findByCode(I18nTranslation.DEFAULT_LANG);
   }
 
   @Override

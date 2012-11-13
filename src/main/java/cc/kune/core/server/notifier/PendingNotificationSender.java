@@ -84,6 +84,17 @@ public class PendingNotificationSender {
     });
   }
 
+  public void add(final NotificationType type, final String subjectPrefix,
+      final FormattedString subject, final FormattedString body, final boolean isHtml,
+      final boolean forceSend, final DestinationProvider dest) {
+    add(new PendingNotificationProvider() {
+      @Override
+      public PendingNotification get() {
+        return new PendingNotification(type, subjectPrefix, subject, body, isHtml, forceSend, dest);
+      }
+    });
+  }
+
   /**
    * Adds a pending notification.
    * 
