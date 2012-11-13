@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.rpcservices;
 
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.errors.ErrorHandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -31,6 +32,7 @@ public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
 
   @Override
   public void onFailure(final Throwable caught) {
+    NotifyUser.hideProgress();
     errorHandler.process(caught);
   }
 

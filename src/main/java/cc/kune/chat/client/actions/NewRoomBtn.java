@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.actions.FolderNamesActionUtils;
+import cc.kune.core.client.actions.FieldValidationUtil;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -76,7 +76,7 @@ public class NewRoomBtn extends ButtonDescriptor {
           });
       builder.width("200px").height("50px").firstButtonTitle(i18n.t("Create")).sndButtonTitle(
           i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID);
-      FolderNamesActionUtils.restrictToUnixName(builder, TEXTBOX_ID);
+      FieldValidationUtil.restrictToUnixName(builder, TEXTBOX_ID);
       diag = builder.build();
       diag.showCentered();
       diag.focusOnTextBox();

@@ -30,6 +30,7 @@ public class TextUtils {
 
   // Original regexp from http://www.regular-expressions.info/email.html
   public static final String EMAIL_REGEXP = "[-!#$%&\'*+/=?_`{|}~a-z0-9^]+(\\.[-!#$%&\'*+/=?_`{|}~a-z0-9^]+)*@(localhost|([a-z0-9]([-a-z0-9]*[a-z0-9])?\\.)+[a-z0-9]([-a-z0-9]*[a-z0-9]))?";
+  public static final String EMAIL_REGEXP_LIST = "(" + EMAIL_REGEXP + "|,| )+";
   public static final String IN_DEVELOPMENT = "In development";
 
   public static final String IN_DEVELOPMENT_P = " (in development)";

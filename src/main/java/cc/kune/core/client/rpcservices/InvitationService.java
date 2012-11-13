@@ -20,6 +20,7 @@
 package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.shared.domain.InvitationType;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -27,6 +28,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("InvitationService")
 public interface InvitationService extends RemoteService {
 
-  void invite(String userHash, InvitationType type, String token, String[] emails);
+  void invite(String userHash, InvitationType type, StateToken token, String[] emails);
 
 }

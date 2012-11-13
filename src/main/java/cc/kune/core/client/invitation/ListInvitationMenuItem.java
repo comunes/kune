@@ -18,16 +18,24 @@
  *
  */
 
-package cc.kune.core.client.rpcservices;
+package cc.kune.core.client.invitation;
 
-import cc.kune.core.shared.domain.InvitationType;
-import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-public interface InvitationServiceAsync {
+@Singleton
+public class ListInvitationMenuItem extends MenuItemDescriptor {
 
-  void invite(String userHash, InvitationType type, StateToken token, String[] emails,
-      AsyncCallback<Void> callback);
-
+  @Inject
+  ListInvitationMenuItem(final ListInvitationAction action, final IconicResources icons,
+      final IsLoggedCondition isLogged) {
+    super(action);
+    withText(I18n.t("Invite others to this list via email")).withIcon(icons.listsPostGrey());
+    withAddCondition(isLogged);
+  }
 }

@@ -85,7 +85,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
 
   @Override
   public void invite(final User from, final InvitationType type, final NotificationType notifType,
-      final String toToken, final String... emails) {
+      final StateToken token, final String... emails) {
     Preconditions.checkState(notifType == NotificationType.email,
         "Only email invitations are implemented");
     final String siteUrl = basicProperties.getSiteUrlWithoutHttp();
@@ -94,8 +94,8 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     for (final String email : emails) {
       final String redirect = TokenUtils.addRedirect(SiteTokens.INVITATION, UUID.randomUUID().toString());
       final String link = notificationHtmlHelper.createLink(redirect);
-      final Invitation invitation = new Invitation(from, UUID.randomUUID().toString(), toToken,
-          notifType, email, type);
+      final Invitation invitation = new Invitation(from, UUID.randomUUID().toString(),
+          token.getEncoded(), notifType, email, type);
       switch (type) {
       case TO_SITE:
         notifyService.sendEmail(Addressee.build(email, defLang),
@@ -106,7 +106,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
                 + "in other case, just ignore this email.", fromName, siteUrl, link));
         break;
       case TO_GROUP:
-        final Group group = groupFinder.findByShortName(new StateToken(toToken).getGroup());
+        final Group group = groupFinder.findByShortName(token.getGroup());
         final String longName = group.getLongName();
         notifyService.sendEmail(Addressee.build(email, defLang),
             PendingNotification.DEFAULT_SUBJECT_PREFIX,
@@ -116,7 +116,6 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
                 + "in other case, just ignore this email.", fromName, longName, siteUrl, link));
         break;
       case TO_LISTS:
-        final StateToken token = new StateToken(toToken);
         final String groupShortName = groupFinder.findByShortName(token.getGroup()).getShortName();
         final String listName = containerManager.find(ContentUtils.parseId(token.getFolder())).getName();
         notifyService.sendEmail(Addressee.build(email, defLang),

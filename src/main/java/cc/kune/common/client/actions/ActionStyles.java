@@ -27,4 +27,7 @@ public class ActionStyles {
   public static final String MENU_BTN_STYLE_LEFT = "gwt-Button k-button, k-btn, k-5corners, k-def-docbtn, k-fl";
   public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
   public static final String MENU_BTN_STYLE_RIGHT = "gwt-Button k-button, k-btn, k-5corners, k-def-docbtn, k-fr";
+  public static final String SITEBAR_STYLE = "k-no-backimage, k-btn-sitebar, k-noborder, k-nobackcolor";
+  public static final String SITEBAR_STYLE_FL = SITEBAR_STYLE + ", k-fl";
+
 }

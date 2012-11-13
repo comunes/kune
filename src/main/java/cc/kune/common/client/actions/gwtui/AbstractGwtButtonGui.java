@@ -25,6 +25,7 @@ import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -74,7 +75,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     } else {
       button = new Button();
     }
-    String value = (String) descriptor.getValue(Action.STYLES);
+    final String value = (String) descriptor.getValue(Action.STYLES);
     if (value == null) {
       // Default btn styles
       button.addStyleName("k-button");
@@ -159,6 +160,11 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   public void setText(final String text) {
     iconLabel.setText(text, descriptor.getDirection());
     layout();
+  }
+
+  @Override
+  public void setToolTipText(final String tooltipText) {
+    Tooltip.to(button, tooltipText);
   }
 
   @Override

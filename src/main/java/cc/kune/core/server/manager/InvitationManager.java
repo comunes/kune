@@ -22,6 +22,7 @@ package cc.kune.core.server.manager;
 
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.shared.domain.InvitationType;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Invitation;
 import cc.kune.domain.User;
 
@@ -41,7 +42,7 @@ public interface InvitationManager extends Manager<Invitation, Long> {
    * @param emails
    *          the list of emails to invite to
    */
-  void invite(User from, InvitationType type, NotificationType notifType, String toToken,
+  void invite(User from, InvitationType type, NotificationType notifType, StateToken toToken,
       String... emails);
 
 }

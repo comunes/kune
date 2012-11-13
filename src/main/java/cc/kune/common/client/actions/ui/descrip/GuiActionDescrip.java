@@ -56,7 +56,8 @@ public interface GuiActionDescrip {
   public static final String VISIBLE = "visibleprop";
 
   /**
-   * Adds the.
+   * Adds the condition (checked only when new content/container is evaluated in
+   * a folder list, etc).
    * 
    * @param addCondition
    *          the add condition
@@ -226,8 +227,7 @@ public interface GuiActionDescrip {
    * @param listener
    *          the listener
    */
-  void removePropertyChangeListener(
-      final PropertyChangeListener listener);
+  void removePropertyChangeListener(final PropertyChangeListener listener);
 
   /**
    * Sets the drop target.
@@ -342,6 +342,15 @@ public interface GuiActionDescrip {
   GuiActionDescrip withAction(AbstractAction action);
 
   /**
+   * Adds the condition (checked only when new content/container is evaluated in
+   * a folder list, etc).
+   * 
+   * @param addCondition
+   *          the add condition
+   */
+  void withAddCondition(GuiAddCondition addCondition);
+
+  /**
    * With icon.
    * 
    * @param icon
@@ -388,8 +397,7 @@ public interface GuiActionDescrip {
    *          without any other check (for instance session status, etc)
    * @return the gui action descrip
    */
-  GuiActionDescrip withParent(GuiActionDescrip parent,
-      boolean addToParent);
+  GuiActionDescrip withParent(GuiActionDescrip parent, boolean addToParent);
 
   /**
    * With position.
@@ -407,8 +415,7 @@ public interface GuiActionDescrip {
    *          the keystroke
    * @return the gui action descrip
    */
-  GuiActionDescrip withShortcut(KeyStroke keystroke,
-      GlobalShortcutRegister register);
+  GuiActionDescrip withShortcut(KeyStroke keystroke, GlobalShortcutRegister register);
 
   /**
    * With shortcut.
@@ -417,8 +424,7 @@ public interface GuiActionDescrip {
    *          the keys (for instance "Ctrl+A")
    * @return the gui action descrip
    */
-  GuiActionDescrip withShortcut(String keys,
-      GlobalShortcutRegister register);
+  GuiActionDescrip withShortcut(String keys, GlobalShortcutRegister register);
 
   /**
    * With styles.

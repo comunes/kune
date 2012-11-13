@@ -28,6 +28,7 @@ import cc.kune.chat.client.snd.KuneSoundManager;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.ParentWidget;
@@ -249,7 +250,7 @@ public class ChatClientDefault implements ChatClient {
       chatIcon = new IconLabelDescriptor(action);
       chatIcon.setParent(SitebarActions.LEFT_TOOLBAR);
       chatIcon.setId(CHAT_CLIENT_ICON_ID);
-      chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
+      chatIcon.setStyles(ActionStyles.SITEBAR_STYLE + ", k-chat-icon");
       chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
       chatIcon.putValue(Action.SMALL_ICON, chatResources.chatNoBlink());
       chatIcon.putValue(Action.TOOLTIP, i18n.t("Show/hide the chat window"));

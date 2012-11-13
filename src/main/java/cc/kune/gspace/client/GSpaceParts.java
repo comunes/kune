@@ -22,6 +22,7 @@ package cc.kune.gspace.client;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.invitation.GroupInvitationMenuItem;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.actions.BuddyLastConnectedHeaderLabel;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
@@ -64,7 +65,7 @@ public class GSpaceParts {
       final Provider<I18nTranslatorTabsCollection> gtranslator,
       final Provider<I18nTranslator> translator, final Provider<WriteToBuddyHeaderButton> writeToBuddie,
       final Provider<BuddyLastConnectedHeaderLabel> lastConnectedBuddie,
-      final SiteTokenListeners tokenListener) {
+      final Provider<GroupInvitationMenuItem> groupInvitation, final SiteTokenListeners tokenListener) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -77,6 +78,7 @@ public class GSpaceParts {
         siteSearch.get();
         noHome.get();
         maxMinWorkspace.get();
+        groupInvitation.get();
         // // Add User & Groups Options
         // final GroupOptionsCollection goc = gocProv.get();
         // final UserOptionsCollection uoc = uocProv.get();

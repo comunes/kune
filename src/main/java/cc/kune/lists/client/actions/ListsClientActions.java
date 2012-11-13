@@ -24,6 +24,8 @@ import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.invitation.ListInvitationMenuItem;
+import cc.kune.core.client.invitation.ListInvitationShareMenuItem;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
@@ -59,6 +61,7 @@ import com.google.inject.Provider;
 public class ListsClientActions extends AbstractFoldableToolActions {
 
   final String[] all = { TYPE_ROOT, TYPE_LIST, TYPE_POST };
+  final String[] allExceptRoot = { TYPE_LIST, TYPE_POST };
   final String[] containers = { TYPE_ROOT, TYPE_LIST };
   final String[] containersNoRoot = { TYPE_LIST };
   final String[] contents = { TYPE_POST };
@@ -97,7 +100,9 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInTwitterMenuItem> shareInTwitter,
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
-      final Provider<ShareInFacebookMenuItem> shareInFacebook) {
+      final Provider<ShareInFacebookMenuItem> shareInFacebook,
+      final Provider<ListInvitationShareMenuItem> shareInvitation,
+      final Provider<ListInvitationMenuItem> inviteMenuItem) {
     super(session, stateManager, i18n, registry);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContainer, containers);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, contents);
@@ -120,6 +125,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInvitation, allExceptRoot);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, all);
@@ -132,6 +138,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, inviteMenuItem, allExceptRoot);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delPostMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAllMenuItem, contents);

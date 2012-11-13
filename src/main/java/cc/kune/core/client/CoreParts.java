@@ -29,6 +29,7 @@ import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.init.WebSocketChecker;
+import cc.kune.core.client.invitation.SiteInvitationBtn;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
@@ -75,7 +76,8 @@ public class CoreParts {
       final Provider<PasswordResetPanel> passReset, final Provider<AskForPasswordResetPanel> askForPass,
       final GlobalShortcuts shortcuts, final I18nTranslationService i18n,
       final Provider<TutorialViewer> tutorialViewer, final Provider<WebSocketChecker> websocketChecker,
-      final Provider<EmailNotVerifiedReminder> emailNotVerifiedReminder) {
+      final Provider<EmailNotVerifiedReminder> emailNotVerifiedReminder,
+      final Provider<SiteInvitationBtn> siteInvitation) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -89,6 +91,7 @@ public class CoreParts {
         tutorialViewer.get();
         emailNotVerifiedReminder.get();
         websocketChecker.get();
+        siteInvitation.get();
       }
     });
     tokenListener.put(SiteTokens.SIGN_IN, new HistoryTokenAuthNotNeededCallback() {

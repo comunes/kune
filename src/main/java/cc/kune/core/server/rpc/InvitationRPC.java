@@ -25,6 +25,7 @@ import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.manager.InvitationManager;
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.shared.domain.InvitationType;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
@@ -47,7 +48,7 @@ public class InvitationRPC implements RPC, InvitationService {
 
   @Override
   @Authenticated
-  public void invite(final String userHash, final InvitationType type, final String token,
+  public void invite(final String userHash, final InvitationType type, final StateToken token,
       final String[] emails) {
     invitationManager.invite(getUser(), type, NotificationType.email, token, emails);
   }

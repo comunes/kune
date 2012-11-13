@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.sitebar;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
@@ -75,7 +76,7 @@ public class MyGroupsMenu extends MenuDescriptor {
     setId(MENU_ID);
     setParent(SitebarActions.LEFT_TOOLBAR);
     setPosition(0);
-    setStyles("k-no-backimage, k-btn-sitebar");
+    setStyles(ActionStyles.SITEBAR_STYLE);
     withText(I18n.t("Your groups"));
     withToolTip(I18n.t("See your groups or create a new one"));
     withIcon(res.arrowdownsitebarSmall());
