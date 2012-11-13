@@ -48,8 +48,8 @@ public class Invitation implements HasId {
   @Basic
   private Long date;
   @ManyToOne
-  private User from;
-  @Column(unique = true, nullable = true)
+  private User fromUser;
+  @Column(unique = true, nullable = false)
   private String hash;
   @Id
   @DocumentId
@@ -59,6 +59,7 @@ public class Invitation implements HasId {
   @Enumerated(EnumType.STRING)
   private NotificationType notifType;
 
+  @Column(name = "invitTo")
   private String to;
   @Enumerated(EnumType.STRING)
   private InvitationType type;
@@ -66,7 +67,7 @@ public class Invitation implements HasId {
   public Invitation(final User from, final String hash, final String invitedToToken,
       final NotificationType notifType, final String to, final InvitationType type) {
     this.date = System.currentTimeMillis();
-    this.from = from;
+    this.fromUser = from;
     this.hash = hash;
     this.invitedToToken = invitedToToken;
     this.notifType = notifType;
@@ -79,7 +80,7 @@ public class Invitation implements HasId {
   }
 
   public User getFrom() {
-    return from;
+    return fromUser;
   }
 
   public String getHash() {
@@ -112,7 +113,7 @@ public class Invitation implements HasId {
   }
 
   public void setFrom(final User from) {
-    this.from = from;
+    this.fromUser = from;
   }
 
   public void setHash(final String hash) {

@@ -20,16 +20,19 @@
 package cc.kune.core.client.ui.dialogs;
 
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.i18n.client.HasDirection.Direction;
+import com.google.gwt.user.client.ui.Label;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class PromptTopDialog shows a top dialog with some textfield and two
- * buttons
+ * buttons.
  */
 public class PromptTopDialog extends BasicTopDialog {
 
@@ -40,6 +43,8 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /** The allow blank. */
     private boolean allowBlank = false;
+
+    private String emptyText;
 
     /** The field width. */
     private int fieldWidth;
@@ -59,9 +64,10 @@ public class PromptTopDialog extends BasicTopDialog {
     /** The on enter. */
     private final OnEnter onEnter;
 
+    /** The prompt text. */
+    private String promptText;
     /** The regex. */
     private String regex;
-
     /** The regex text. */
     private String regexText;
 
@@ -76,8 +82,8 @@ public class PromptTopDialog extends BasicTopDialog {
      * 
      * @param dialogId
      *          the dialog id (used for debuggin)
-     * @param promptText
-     *          the prompt text
+     * @param title
+     *          the title
      * @param autohide
      *          the autohide
      * @param modal
@@ -87,11 +93,11 @@ public class PromptTopDialog extends BasicTopDialog {
      * @param onEnter
      *          the on enter
      */
-    public Builder(final String dialogId, final String promptText, final boolean autohide,
+    public Builder(final String dialogId, final String title, final boolean autohide,
         final boolean modal, final Direction direction, final OnEnter onEnter) {
       super(dialogId, autohide, modal, direction);
       this.onEnter = onEnter;
-      super.title(promptText);
+      super.title(title);
       super.tabIndexStart(1);
     }
 
@@ -116,6 +122,18 @@ public class PromptTopDialog extends BasicTopDialog {
     public PromptTopDialog build() {
       final PromptTopDialog dialog = new PromptTopDialog(this);
       return dialog;
+    }
+
+    /**
+     * Empty text showed when the prompt field is empty.
+     * 
+     * @param emptyText
+     *          the empty text
+     * @return the builder
+     */
+    public Builder emptyTextField(final String emptyText) {
+      this.emptyText = emptyText;
+      return this;
     }
 
     /**
@@ -179,6 +197,18 @@ public class PromptTopDialog extends BasicTopDialog {
     }
 
     /**
+     * Prompt text showed just before the text field.
+     * 
+     * @param promptText
+     *          the prompt text
+     * @return the builder
+     */
+    public Builder promptText(final String promptText) {
+      this.promptText = promptText;
+      return this;
+    }
+
+    /**
      * Regex.
      * 
      * @param regex
@@ -226,14 +256,19 @@ public class PromptTopDialog extends BasicTopDialog {
     }
   }
 
+  /**
+   * The Interface OnEnter.
+   */
   public interface OnEnter {
 
     /**
-     * On enter what to do
+     * On enter what to do.
      */
     void onEnter();
   }
 
+  /** The prompt label. */
+  private final Label promptLabel;
   /** The text field of the Prompt. */
   private final TextField<String> textField;
 
@@ -245,6 +280,8 @@ public class PromptTopDialog extends BasicTopDialog {
    */
   protected PromptTopDialog(final Builder builder) {
     super(builder);
+    promptLabel = new Label();
+    promptLabel.addStyleName("kune-Margin-Medium-b");
     textField = new TextField<String>();
     textField.setRegex(builder.regex);
     textField.getMessages().setRegexText(builder.regexText);
@@ -252,6 +289,9 @@ public class PromptTopDialog extends BasicTopDialog {
     textField.getMessages().setMaxLengthText(builder.maxLengthText);
     textField.setTabIndex(1);
     textField.setId(builder.textboxId);
+    if (TextUtils.notEmpty(builder.emptyText)) {
+      textField.setEmptyText(builder.emptyText);
+    }
     if (builder.width != 0) {
       textField.setWidth(builder.width);
     }
@@ -271,6 +311,10 @@ public class PromptTopDialog extends BasicTopDialog {
         }
       }
     });
+    if (TextUtils.notEmpty(builder.promptText)) {
+      promptLabel.setText(builder.promptText);
+    }
+    super.getInnerPanel().add(promptLabel);
     super.getInnerPanel().add(textField);
   }
 
@@ -307,15 +351,29 @@ public class PromptTopDialog extends BasicTopDialog {
   }
 
   /**
+   * Sets the prompt label.
+   * 
+   * @param promptText
+   *          the new prompt label
+   */
+  public void setPromptLabel(final String promptText) {
+    promptLabel.setText(promptText);
+  }
+
+  /**
    * Sets the text field focus.
    * 
-   * @param text
-   *          the new text field value
    */
   public void setTextFieldFocus() {
     textField.focus();
   }
 
+  /**
+   * Sets the text field select on focus.
+   * 
+   * @param selectOnFocus
+   *          the new text field select on focus
+   */
   public void setTextFieldSelectOnFocus(final boolean selectOnFocus) {
     textField.setSelectOnFocus(selectOnFocus);
   }

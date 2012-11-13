@@ -82,19 +82,20 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
     } else {
       token = session.getCurrentStateToken();
     }
-    final Builder builder = new PromptTopDialog.Builder(dialogId, promptText, false, true,
+    final Builder builder = new PromptTopDialog.Builder(dialogId, title, false, true,
         I18n.getDirection(), new OnEnter() {
           @Override
           public void onEnter() {
             doAction(token);
           }
         });
-    builder.width("300px").height("50px").firstButtonTitle(I18n.t("Invite")).sndButtonTitle(
-        I18n.t("Cancel")).firstButtonId(inviteId).sndButtonId(cancelId).width(270).title(title);
+    builder.width("320px").height("80px").firstButtonTitle(I18n.t("Invite")).sndButtonTitle(
+        I18n.t("Cancel")).firstButtonId(inviteId).sndButtonId(cancelId);
+    builder.promptText(promptText).emptyTextField("mary@example.com, john@example.com").fieldWidth(280);
     FieldValidationUtil.restrictToEmailList(builder, textBoxId);
     diag = builder.build();
     diag.showCentered();
-    diag.focusOnTextBox();
+    // diag.focusOnTextBox();
     diag.getSecondBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {

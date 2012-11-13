@@ -37,6 +37,6 @@ public class GroupInvitationMenuItem extends MenuItemDescriptor {
     super(action);
     withText(I18n.t("Invite others to this group via email")).withIcon(icons.listsPostGrey());
     setParent(optionsMenu);
-    setPosition(2);
+    setPosition(0);
   }
 }
