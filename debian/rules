@@ -70,6 +70,7 @@ install/kune::
 	cp $(CURDIR)/src/main/resources/db/update-0020-names-width.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b12
 	cp $(CURDIR)/src/main/resources/db/update-0021-avatarLastModifiedTime-deb.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b23
 	cp $(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b25
+	cp $(CURDIR)/src/main/resources/db/update-0023-inviation.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b4
 
 # FIXME
 #	cp logrotate $(DEST)/etc/logrotate.d/
