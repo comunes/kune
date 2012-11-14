@@ -29,7 +29,13 @@ public class TextUtilsTest {
   private static final String DOMAIN_REGEXP = "^http([s]|)://localhost/.*";
 
   @Test
-  public void testEmails() {
+  public void testEmail() {
+    assertTrue("kk@ex.com".matches(TextUtils.EMAIL_REGEXP));
+    assertTrue("kk@local.net".matches(TextUtils.EMAIL_REGEXP));
+  }
+
+  @Test
+  public void testEmailList() {
     assertTrue("kk@ex.com,kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
     assertTrue("kk@ex.com, kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
     assertTrue("kk@ex.com,,,, kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));

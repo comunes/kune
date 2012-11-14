@@ -91,7 +91,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     final String fromName = from.getName();
     final I18nLanguage defLang = i18nLanguageManager.getDefaultLanguage();
     for (final String email : emails) {
-      Preconditions.checkState(TextUtils.EMAIL_REGEXP.matches(email));
+      Preconditions.checkState(email.matches(TextUtils.EMAIL_REGEXP), "Wrong email: " + email);
       final String redirect = TokenUtils.addRedirect(SiteTokens.INVITATION, UUID.randomUUID().toString());
       final String link = notificationHtmlHelper.createLink(redirect);
       final Invitation invitation = new Invitation(from, UUID.randomUUID().toString(),
@@ -111,7 +111,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
         notifyService.sendEmail(Addressee.build(email, defLang),
             PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX,
             FormattedString.build("%s has invited you to join the group '%s'", fromName, longName),
-            FormattedString.build("You have been invited by %s to join the group '%s' in %s."
+            FormattedString.build("You have been invited by %s to join the group '%s' in %s.<br><br>"
                 + "If you want to accept the invitation, just follow this link:<br>%s<br>"
                 + "in other case, just ignore this email.", fromName, longName, siteUrl, link));
         break;
@@ -120,8 +120,8 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
         final String listName = containerManager.find(ContentUtils.parseId(token.getFolder())).getName();
         notifyService.sendEmail(Addressee.build(email, defLang),
             PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX, FormattedString.build(
-                "%s has invited you to join the lists '%s'", fromName, listName), FormattedString.build(
-                "You have been invited by %s to join the list '%s' of group '%s' in %s."
+                "%s has invited you to join the list '%s'", fromName, listName), FormattedString.build(
+                "You have been invited by %s to join the list '%s' of group '%s' in %s.<br><br>"
                     + "If you want to accept the invitation, just follow this link::<br>%s<br>"
                     + "in other case, just ignore this email.", fromName, listName, groupShortName,
                 siteUrl, link));

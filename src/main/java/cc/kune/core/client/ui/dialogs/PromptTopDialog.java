@@ -25,6 +25,7 @@ import cc.kune.common.shared.utils.TextUtils;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.ui.Label;
@@ -64,10 +65,12 @@ public class PromptTopDialog extends BasicTopDialog {
     /** The on enter. */
     private final OnEnter onEnter;
 
+    private int promptLines = 1;
     /** The prompt text. */
     private String promptText;
     /** The regex. */
     private String regex;
+
     /** The regex text. */
     private String regexText;
 
@@ -197,6 +200,19 @@ public class PromptTopDialog extends BasicTopDialog {
     }
 
     /**
+     * The number of lines that the prompt has. If > 1 will be a textarea, if
+     * not a textfield
+     * 
+     * @param promptLines
+     *          the prompt lines
+     * @return the builder
+     */
+    public Builder promptLines(final int promptLines) {
+      this.promptLines = promptLines;
+      return this;
+    }
+
+    /**
      * Prompt text showed just before the text field.
      * 
      * @param promptText
@@ -269,8 +285,9 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /** The prompt label. */
   private final Label promptLabel;
+
   /** The text field of the Prompt. */
-  private final TextField<String> textField;
+  private TextField<String> textField;
 
   /**
    * Instantiates a new prompt top dialog.
@@ -282,7 +299,12 @@ public class PromptTopDialog extends BasicTopDialog {
     super(builder);
     promptLabel = new Label();
     promptLabel.addStyleName("kune-Margin-Medium-b");
-    textField = new TextField<String>();
+    if (builder.promptLines > 1) {
+      textField = new TextArea();
+      textField.setHeight(20 * builder.promptLines);
+    } else {
+      textField = new TextField<String>();
+    }
     textField.setRegex(builder.regex);
     textField.getMessages().setRegexText(builder.regexText);
     textField.getMessages().setMinLengthText(builder.minLengthText);

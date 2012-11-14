@@ -89,9 +89,10 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
             doAction(token);
           }
         });
-    builder.width("320px").height("80px").firstButtonTitle(I18n.t("Invite")).sndButtonTitle(
+    builder.width("320px").height("120px").firstButtonTitle(I18n.t("Invite")).sndButtonTitle(
         I18n.t("Cancel")).firstButtonId(inviteId).sndButtonId(cancelId);
-    builder.promptText(promptText).emptyTextField("mary@example.com, john@example.com").fieldWidth(280);
+    builder.promptText(promptText).promptLines(3).emptyTextField(
+        "simone@example.com, bertrand@example.com, luther@example.com").fieldWidth(295);
     FieldValidationUtil.restrictToEmailList(builder, textBoxId);
     diag = builder.build();
     diag.showCentered();
