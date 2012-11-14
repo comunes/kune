@@ -27,7 +27,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.server.manager.impl.GroupServerUtils;
-import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Group;
@@ -40,27 +39,17 @@ import com.google.inject.Singleton;
 public class NotificationService {
 
   public static final Log LOG = LogFactory.getLog(NotificationService.class);
-  private final KuneBasicProperties basicPropierties;
   private final NotificationHtmlHelper helper;
   private final PendingNotificationSender sender;
 
   @Inject
-  NotificationService(final PendingNotificationSender sender, final NotificationHtmlHelper helper,
-      final KuneBasicProperties basicPropierties
-
-  ) {
+  NotificationService(final PendingNotificationSender sender, final NotificationHtmlHelper helper) {
     this.sender = sender;
     this.helper = helper;
-    this.basicPropierties = basicPropierties;
   }
 
   private FormattedString createPlainSubject(final String subject) {
     return FormattedString.build(subject);
-  }
-
-  private String formatPrefix(final String subjectPrefix) {
-    return subjectPrefix.equals(PendingNotification.SITE_SUBJECT_PREFIX) ? basicPropierties.getSiteCommonName()
-        : subjectPrefix;
   }
 
   public void notifyGroupAdmins(final Group groupToNotify, final Group groupSender,
@@ -94,7 +83,7 @@ public class NotificationService {
   }
 
   public void notifyUserToUser(final User from, final User to, final String subject, final String message) {
-    sender.add(NotificationType.email, PendingNotification.DEFAULT_SUBJECT_PREFIX,
+    sender.add(NotificationType.email, PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX,
         createPlainSubject(subject),
         helper.userNotification(from.getShortName(), from.hasLogo(), message), true, false,
         Addressee.build(to));
@@ -114,7 +103,7 @@ public class NotificationService {
    */
   public void sendEmail(final Addressee to, final String subjectPrefix, final FormattedString subject,
       final FormattedString body) {
-    sender.add(NotificationType.email, formatPrefix(subjectPrefix), subject, body, true, true,
+    sender.add(NotificationType.email, subjectPrefix, subject, body, true, true,
         new SimpleDestinationProvider(to));
   }
 
@@ -151,7 +140,7 @@ public class NotificationService {
    */
   public void sendEmailToWithLink(final Addressee to, final String subject, final String body,
       final String hash) {
-    sender.add(NotificationType.email, PendingNotification.DEFAULT_SUBJECT_PREFIX,
+    sender.add(NotificationType.email, PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX,
         createPlainSubject(subject), helper.createBodyWithEndLink(body, hash), true, true, to);
   }
 }

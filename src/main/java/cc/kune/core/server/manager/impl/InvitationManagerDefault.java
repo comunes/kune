@@ -28,6 +28,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.server.content.ContainerManager;
@@ -71,9 +72,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
   public InvitationManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final NotificationService notifyService, final I18nLanguageManager i18nLanguageManager,
       final KuneBasicProperties basicProperties, final NotificationHtmlHelper notificationHtmlHelper,
-      final GroupFinder groupFinder, final ContainerManager containerManager
-
-  ) {
+      final GroupFinder groupFinder, final ContainerManager containerManager) {
     super(provider, Invitation.class);
     this.notifyService = notifyService;
     this.i18nLanguageManager = i18nLanguageManager;
@@ -92,6 +91,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     final String fromName = from.getName();
     final I18nLanguage defLang = i18nLanguageManager.getDefaultLanguage();
     for (final String email : emails) {
+      Preconditions.checkState(TextUtils.EMAIL_REGEXP.matches(email));
       final String redirect = TokenUtils.addRedirect(SiteTokens.INVITATION, UUID.randomUUID().toString());
       final String link = notificationHtmlHelper.createLink(redirect);
       final Invitation invitation = new Invitation(from, UUID.randomUUID().toString(),
@@ -99,7 +99,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
       switch (type) {
       case TO_SITE:
         notifyService.sendEmail(Addressee.build(email, defLang),
-            PendingNotification.DEFAULT_SUBJECT_PREFIX,
+            PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX,
             FormattedString.build("%s has invited you to join %s", fromName, siteUrl),
             FormattedString.build("You have been invited by %s to join %s.<br><br>"
                 + "If you want to accept the invitation, just follow this link:<br>%s<br>"
@@ -109,7 +109,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
         final Group group = groupFinder.findByShortName(token.getGroup());
         final String longName = group.getLongName();
         notifyService.sendEmail(Addressee.build(email, defLang),
-            PendingNotification.DEFAULT_SUBJECT_PREFIX,
+            PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX,
             FormattedString.build("%s has invited you to join the group '%s'", fromName, longName),
             FormattedString.build("You have been invited by %s to join the group '%s' in %s."
                 + "If you want to accept the invitation, just follow this link:<br>%s<br>"
@@ -119,7 +119,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
         final String groupShortName = groupFinder.findByShortName(token.getGroup()).getShortName();
         final String listName = containerManager.find(ContentUtils.parseId(token.getFolder())).getName();
         notifyService.sendEmail(Addressee.build(email, defLang),
-            PendingNotification.DEFAULT_SUBJECT_PREFIX, FormattedString.build(
+            PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX, FormattedString.build(
                 "%s has invited you to join the lists '%s'", fromName, listName), FormattedString.build(
                 "You have been invited by %s to join the list '%s' of group '%s' in %s."
                     + "If you want to accept the invitation, just follow this link::<br>%s<br>"

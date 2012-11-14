@@ -27,15 +27,13 @@ import cc.kune.core.server.utils.FormattedString;
  */
 public class PendingNotification {
 
-  public static final String DEFAULT_SUBJECT_PREFIX = new String();
+  public static final String SITE_DEFAULT_SUBJECT_PREFIX = new String();
   /**
    * The Constant NONE is used when for instance, all the destinations are not
    * local, so, we should not notify them by email
    */
   public static final PendingNotification NONE = new PendingNotification(null, null, null, null, false,
       false, null);
-
-  public static final String SITE_SUBJECT_PREFIX = new String();
 
   /** The body. */
   private final FormattedString body;
@@ -77,7 +75,7 @@ public class PendingNotification {
   public PendingNotification(final NotificationType notifyType, final FormattedString subject,
       final FormattedString body, final boolean isHtml, final boolean forceSend,
       final DestinationProvider destProvider) {
-    this(notifyType, DEFAULT_SUBJECT_PREFIX, subject, body, isHtml, forceSend, destProvider);
+    this(notifyType, SITE_DEFAULT_SUBJECT_PREFIX, subject, body, isHtml, forceSend, destProvider);
   }
 
   /**

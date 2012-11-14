@@ -85,7 +85,7 @@ public class NotificationSenderDefault implements NotificationSender {
     final boolean forceSend = notification.isForceSend();
     final boolean isHtml = notification.isHtml();
     final String subjectPrefix = notification.getSubjectPrefix();
-    final String subjectWithoutBra = subjectPrefix.equals(PendingNotification.DEFAULT_SUBJECT_PREFIX) ? siteName
+    final String subjectWithoutBra = subjectPrefix.equals(PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX) ? siteName
         : subjectPrefix;
     subject.setTemplate(addBraquet(subjectWithoutBra) + subject.getTemplate());
     if (subject.shouldBeTranslated()) {
