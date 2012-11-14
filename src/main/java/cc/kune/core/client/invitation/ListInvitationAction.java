@@ -48,7 +48,7 @@ public class ListInvitationAction extends AbstractInvitateAction {
         rightsManager,
         invitationService,
         InvitationType.TO_LISTS,
-        AccessRolDTO.Editor,
+        AccessRolDTO.Administrator,
         true,
         true,
         true,

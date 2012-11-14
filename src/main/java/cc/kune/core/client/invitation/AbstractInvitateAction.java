@@ -116,15 +116,30 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
       NotifyUser.showProgress();
       diag.hide();
 
-      invitationService.get().invite(session.getUserHash(), type, token,
-          toArray(diag.getTextFieldValue()), new AsyncCallbackSimple<Void>() {
-            @Override
-            public void onSuccess(final Void val) {
-              NotifyUser.hideProgress();
+      final AsyncCallbackSimple<Void> callback = new AsyncCallbackSimple<Void>() {
+        @Override
+        public void onSuccess(final Void val) {
+          NotifyUser.hideProgress();
 
-              NotifyUser.info(I18n.t("Invitation sent"));
-            }
-          });
+          NotifyUser.info(I18n.t("Invitation sent"));
+        }
+      };
+      switch (type) {
+      case TO_SITE:
+        invitationService.get().inviteToSite(session.getUserHash(), token,
+            toArray(diag.getTextFieldValue()), callback);
+        break;
+      case TO_GROUP:
+        invitationService.get().inviteToGroup(session.getUserHash(), token,
+            toArray(diag.getTextFieldValue()), callback);
+        break;
+      case TO_LISTS:
+        invitationService.get().inviteToList(session.getUserHash(), token,
+            toArray(diag.getTextFieldValue()), callback);
+        break;
+      default:
+        break;
+      }
 
     }
   }

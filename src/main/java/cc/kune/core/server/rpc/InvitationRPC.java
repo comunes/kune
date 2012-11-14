@@ -21,9 +21,13 @@ package cc.kune.core.server.rpc;
 
 import cc.kune.core.client.rpcservices.InvitationService;
 import cc.kune.core.server.UserSessionManager;
+import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
+import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.InvitationManager;
 import cc.kune.core.server.notifier.NotificationType;
+import cc.kune.core.server.persist.KuneTransactional;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.InvitationType;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.User;
@@ -48,9 +52,25 @@ public class InvitationRPC implements RPC, InvitationService {
 
   @Override
   @Authenticated
-  public void invite(final String userHash, final InvitationType type, final StateToken token,
-      final String[] emails) {
-    invitationManager.invite(getUser(), type, NotificationType.email, token, emails);
+  @KuneTransactional
+  @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+  public void inviteToGroup(final String userHash, final StateToken token, final String[] emails) {
+    invitationManager.invite(getUser(), InvitationType.TO_GROUP, NotificationType.email, token, emails);
+  }
+
+  @Override
+  @Authenticated
+  @KuneTransactional
+  @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+  public void inviteToList(final String userHash, final StateToken token, final String[] emails) {
+    invitationManager.invite(getUser(), InvitationType.TO_LISTS, NotificationType.email, token, emails);
+  }
+
+  @Override
+  @Authenticated
+  @KuneTransactional
+  public void inviteToSite(final String userHash, final StateToken token, final String[] emails) {
+    invitationManager.invite(getUser(), InvitationType.TO_SITE, NotificationType.email, token, emails);
   }
 
 }
