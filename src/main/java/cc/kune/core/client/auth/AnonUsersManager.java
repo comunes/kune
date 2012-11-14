@@ -21,7 +21,6 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.UserNotifyEvent;
-import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
@@ -29,7 +28,6 @@ import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteTokens;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -50,10 +48,6 @@ public class AnonUsersManager {
           if (anonCookie == null) {
             // First access, set cookie to short period (1day), and show message
             cookiesManager.setAnonCookie(false);
-            final String register = TextUtils.generateHtmlLink("#" + SiteTokens.REGISTER,
-                i18n.tWithNT("register", "register, in lowercase"), false);
-            final String signin = TextUtils.generateHtmlLink("#" + SiteTokens.SIGN_IN,
-                i18n.tWithNT("sign in", "register, in lowercase"), false);
             final String siteCommonName = i18n.getSiteCommonName();
             notifyMsg = UserNotifyEvent.fire(
                 eventBus,
@@ -63,7 +57,8 @@ public class AnonUsersManager {
                     "You did not sign-in, so you can just see some public contents in [%s], "
                         + "but not edit or collaborate with others. Please [%s] or [%s] in order to get full access to [%s] tools and contents",
                     "This will be something like 'Please register or sign in in other to get full access to this site tools', but instead of %s some links",
-                    siteCommonName, register, signin, siteCommonName), Boolean.TRUE);
+                    siteCommonName, UserFieldFactory.getRegisterLink(),
+                    UserFieldFactory.getSignInLink(), siteCommonName), Boolean.TRUE);
             notifyMsg.setId(ANON_MESSAGE_CLOSE_ICON);
           } else {
             if (Boolean.valueOf(anonCookie)) {

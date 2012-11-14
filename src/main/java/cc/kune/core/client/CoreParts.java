@@ -20,7 +20,7 @@
 package cc.kune.core.client;
 
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.EmailNotVerifiedReminder;
 import cc.kune.core.client.auth.Register;
@@ -28,7 +28,9 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.groups.newgroup.NewGroup;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.WebSocketChecker;
+import cc.kune.core.client.invitation.ListInvitationConfirmDialog;
 import cc.kune.core.client.invitation.SiteInvitationBtn;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
@@ -74,7 +76,7 @@ public class CoreParts {
       final Provider<VerifyEmailClientManager> verifyManager,
       final Provider<UserOptions> userOptionsDialog, final Provider<GroupOptions> groupOptionsDialog,
       final Provider<PasswordResetPanel> passReset, final Provider<AskForPasswordResetPanel> askForPass,
-      final GlobalShortcuts shortcuts, final I18nTranslationService i18n,
+      final GlobalShortcuts shortcuts, final I18nUITranslationService i18n,
       final Provider<TutorialViewer> tutorialViewer, final Provider<WebSocketChecker> websocketChecker,
       final Provider<EmailNotVerifiedReminder> emailNotVerifiedReminder,
       final Provider<SiteInvitationBtn> siteInvitation) {
@@ -211,6 +213,18 @@ public class CoreParts {
           passReset.get().setPasswordHash(token);
           passReset.get().show();
         }
+      }
+    });
+    tokenListener.put(SiteTokens.INVITATION, new HistoryTokenAuthNotNeededCallback() {
+      @Override
+      public void onHistoryToken(final String token) {
+        if (!session.isLogged()) {
+          final ListInvitationConfirmDialog.Builder builder = new ListInvitationConfirmDialog.Builder(
+              i18n, "fulano", "some list", "some group with long name");
+          final BasicTopDialog dialg = builder.build();
+          dialg.showCentered();
+        }
+
       }
     });
     verifyManager.get();

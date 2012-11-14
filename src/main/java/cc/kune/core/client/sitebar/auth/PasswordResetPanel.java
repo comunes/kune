@@ -63,8 +63,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
   @Inject
   public PasswordResetPanel(final I18nTranslationService i18n, final Session session,
       final MaskWidgetView mask, final NotifyLevelImages images, final EventBus eventbus,
-      final UserFieldFactory userFieldFactory, final Provider<UserServiceAsync> userService,
-      final StateManager stateManager) {
+      final Provider<UserServiceAsync> userService, final StateManager stateManager) {
     super(PASSWD_RESET_DIALOG, mask, i18n, i18n.t("Reset your password"), true, true, true, "",
         i18n.t("Reset your password"), RESET_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
         CANCEL_BUTTON_ID, images, ERRMSG, 1);
@@ -72,9 +71,9 @@ public class PasswordResetPanel extends SignInAbstractPanel {
     final DefaultForm form = new DefaultForm();
     final Label desc = new Label(i18n.t("Enter your new password below."));
     desc.setWidth("310px");
-    newPasswdField = userFieldFactory.createUserPasswd(PASSWD_RESET_ID, i18n.t("New password"));
+    newPasswdField = UserFieldFactory.createUserPasswd(PASSWD_RESET_ID, i18n.t("New password"));
     newPasswdField.setTabIndex(1);
-    confirmPasswdField = userFieldFactory.createUserPasswd(PASSWD_RESET_ID, i18n.t("Confirm"));
+    confirmPasswdField = UserFieldFactory.createUserPasswd(PASSWD_RESET_ID, i18n.t("Confirm"));
     confirmPasswdField.setTabIndex(1);
 
     messageErrorBar = new MessageToolbar(images, errorLabelId);

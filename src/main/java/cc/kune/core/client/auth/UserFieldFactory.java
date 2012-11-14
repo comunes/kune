@@ -19,33 +19,27 @@
  */
 package cc.kune.core.client.auth;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
+import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.CoreConstants;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 public class UserFieldFactory {
 
-  private final I18nTranslationService i18n;
-
-  @Inject
-  public UserFieldFactory(final I18nTranslationService i18n) {
-    this.i18n = i18n;
-  }
-
-  public TextField<String> createUserEmail(final String fieldId) {
+  public static TextField<String> createUserEmail(final String fieldId) {
     // http://www.sencha.com/forum/showthread.php?49702-GXT-Form-Validation
     final TextField<String> emailRegField = new TextField<String>();
-    emailRegField.setFieldLabel(i18n.t("Email"));
+    emailRegField.setFieldLabel(I18n.t("Email"));
     emailRegField.setName(fieldId);
     emailRegField.setRegex(TextUtils.EMAIL_REGEXP);
-    emailRegField.getMessages().setRegexText(i18n.t("This is not a valid email"));
+    emailRegField.getMessages().setRegexText(I18n.t("This is not a valid email"));
     emailRegField.setWidth(DefaultForm.DEF_MEDIUM_FIELD_WIDTH);
     emailRegField.setAllowBlank(false);
     emailRegField.setValidationDelay(1000);
@@ -53,9 +47,9 @@ public class UserFieldFactory {
     return emailRegField;
   }
 
-  public TextField<String> createUserLongName(final String fieldId) {
+  public static TextField<String> createUserLongName(final String fieldId) {
     final TextField<String> longNameRegField = new TextField<String>();
-    longNameRegField.setFieldLabel(i18n.t("Name"));
+    longNameRegField.setFieldLabel(I18n.t("Name"));
     longNameRegField.setName(fieldId);
     longNameRegField.setWidth(DefaultForm.DEF_FIELD_WIDTH);
     longNameRegField.setAllowBlank(false);
@@ -71,7 +65,7 @@ public class UserFieldFactory {
     return longNameRegField;
   }
 
-  public TextField<String> createUserPasswd(final String fieldId, final String fieldText) {
+  public static TextField<String> createUserPasswd(final String fieldId, final String fieldText) {
     final TextField<String> passwdRegField = new TextField<String>();
     passwdRegField.setFieldLabel(fieldText);
     passwdRegField.setName(fieldId);
@@ -79,18 +73,18 @@ public class UserFieldFactory {
     passwdRegField.setAllowBlank(false);
     passwdRegField.setMinLength(6);
     passwdRegField.setMaxLength(40);
-    passwdRegField.getMessages().setMinLengthText(i18n.t(CoreMessages.PASSWD_MUST_BE_BETWEEN_6_AND_40));
-    passwdRegField.getMessages().setMaxLengthText(i18n.t(CoreMessages.PASSWD_MUST_BE_BETWEEN_6_AND_40));
+    passwdRegField.getMessages().setMinLengthText(I18n.t(CoreMessages.PASSWD_MUST_BE_BETWEEN_6_AND_40));
+    passwdRegField.getMessages().setMaxLengthText(I18n.t(CoreMessages.PASSWD_MUST_BE_BETWEEN_6_AND_40));
     passwdRegField.setWidth(DefaultForm.DEF_MEDIUM_FIELD_WIDTH);
     passwdRegField.setValidationDelay(1000);
     passwdRegField.setId(fieldId);
     return passwdRegField;
   }
 
-  public TextField<String> createUserShortName(final String fieldId) {
-    final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_30);
+  public static TextField<String> createUserShortName(final String fieldId) {
+    final String minMaxText = I18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_30);
     final TextField<String> field = new TextField<String>();
-    field.setFieldLabel(i18n.t("Username"));
+    field.setFieldLabel(I18n.t("Username"));
     field.setName(fieldId);
     field.setId(fieldId);
     field.setWidth(DefaultForm.DEF_SMALL_FIELD_WIDTH);
@@ -107,6 +101,20 @@ public class UserFieldFactory {
     field.setValidationDelay(1000);
     field.addStyleName("k-lower");
     return field;
+  }
+
+  public static String getRegisterLink() {
+    return TextUtils.generateHtmlLink("#" + HistoryUtils.PREFIX + SiteTokens.REGISTER,
+        I18n.tWithNT("register", "register, in lowercase"), false);
+  }
+
+  public static String getRegisterLink(final String withText) {
+    return TextUtils.generateHtmlLink("#" + HistoryUtils.PREFIX + SiteTokens.REGISTER, withText, false);
+  }
+
+  public static String getSignInLink() {
+    return TextUtils.generateHtmlLink("#" + HistoryUtils.PREFIX + SiteTokens.SIGN_IN,
+        I18n.tWithNT("sign in", "register, in lowercase"), false);
   }
 
 }

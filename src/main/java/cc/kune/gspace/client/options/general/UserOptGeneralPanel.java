@@ -62,18 +62,17 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   @Inject
   public UserOptGeneralPanel(final I18nUITranslationService i18n, final IconicResources res,
-      final MaskWidget maskWidget, final LanguageSelectorPanel langSelector,
-      final UserFieldFactory userFieldFactory) {
+      final MaskWidget maskWidget, final LanguageSelectorPanel langSelector) {
     super(maskWidget, res.equalizerWhite(), i18n.t("General"), i18n.t("You can change these values:"));
     this.langSelector = langSelector;
-    longName = userFieldFactory.createUserLongName(LONG_NAME_FIELD);
+    longName = UserFieldFactory.createUserLongName(LONG_NAME_FIELD);
     add(longName);
     langSelector.setLangTitle(i18n.t("Your language"));
     langSelector.setLabelAlign(LabelAlign.LEFT);
     langSelector.setLangSeparator(":");
     add(langSelector);
 
-    email = userFieldFactory.createUserEmail(EMAIL_FIELD);
+    email = UserFieldFactory.createUserEmail(EMAIL_FIELD);
     add(email);
 
     emailNotifTypeFieldSet = DefaultFormUtils.createFieldSet(i18n.t("How often do you want to receive email notifications?"));
