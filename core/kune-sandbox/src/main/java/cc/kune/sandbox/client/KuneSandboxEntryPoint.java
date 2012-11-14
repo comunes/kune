@@ -372,8 +372,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     dialog.getFirstBtn().addClickHandler(clickHandler);
     dialog.getSecondBtn().addClickHandler(clickHandler);
     final VerticalPanel sPanel = new VerticalPanel();
-    sPanel.add(new Label("lo que sea"));
-    final Button btn = new Button("lo que sea");
+    sPanel.add(new Label("Someother thing"));
+    final Button btn = new Button("Something");
     btn.setTabIndex(1);
     btn.setFocus(true);
     sPanel.add(btn);

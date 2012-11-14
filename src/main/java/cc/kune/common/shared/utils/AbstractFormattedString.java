@@ -21,8 +21,6 @@ package cc.kune.common.shared.utils;
 
 import java.util.Arrays;
 
-import com.google.common.base.Preconditions;
-
 /**
  * The Class FormattedString is used to separate, String templates (usually
  * html) from args (indicated with %s) and also to allow the translation of this
@@ -119,7 +117,9 @@ public abstract class AbstractFormattedString {
    * @return the string
    */
   public String getString() {
-    Preconditions.checkNotNull(template, "Template of FormatedString cannot be null");
+    if (template == null) {
+      throw new NullPointerException(String.valueOf("Template of FormatedString cannot be null"));
+    }
     return args == null || args.length == 0 ? template : format(template, args);
   }
 
