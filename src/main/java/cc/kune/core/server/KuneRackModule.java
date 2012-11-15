@@ -30,6 +30,7 @@ import cc.kune.chat.server.ChatServerModule;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
+import cc.kune.core.client.rpcservices.InvitationService;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SocialNetService;
 import cc.kune.core.client.rpcservices.UserService;
@@ -159,7 +160,7 @@ public class KuneRackModule implements RackModule {
 
     builder.installGWTServices("^" + suffix + "/", SiteService.class, GroupService.class,
         ContentService.class, UserService.class, SocialNetService.class, I18nService.class,
-        ListsService.class, ClientStatsService.class);
+        ListsService.class, ClientStatsService.class, InvitationService.class);
     builder.installRESTServices("^" + suffix + "/json/", TestJSONService.class, GroupJSONService.class,
         UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
     builder.installServlet("^" + suffix + "/servlets/", FileUploadManager.class,

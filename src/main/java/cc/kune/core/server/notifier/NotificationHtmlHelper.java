@@ -54,6 +54,29 @@ public class NotificationHtmlHelper {
     this.fileDownloadUtils = fileDownloadUtils;
   }
 
+  /**
+   * Format a user notification with an additional link. The first an unique %s
+   * in body is changed by the site name.
+   * 
+   * @param body
+   *          the body
+   * @param hash
+   *          the hash
+   * @return the formated string
+   */
+  @Deprecated
+  public FormattedString createBodyWithEndLink(final String body, final String hash) {
+    final String hashUrl = fileDownloadUtils.getUrl(hash);
+    // FIXME %s aditional in body? dirttyyyyy
+    return FormattedString.build(false, body + "<br><a href='%s'>%s</a>",
+        fileDownloadUtils.getSiteCommonName(), hashUrl, hashUrl);
+  }
+
+  public String createLink(final String hash) {
+    final String hashUrl = fileDownloadUtils.getUrl(hash);
+    return FormattedString.build(false, "<a href='%s'>%s</a>", hashUrl, hashUrl).getString();
+  }
+
   private FormattedString entityNotification(final String groupName, final boolean hasLogo,
       final String message, final boolean isPersonal) {
     final String groupUrl = fileDownloadUtils.getUrl(groupName);
@@ -96,21 +119,5 @@ public class NotificationHtmlHelper {
   public FormattedString userNotification(final String userName, final boolean hasLogo,
       final String message) {
     return entityNotification(userName, hasLogo, message, true);
-  }
-
-  /**
-   * Format a user notification with an additional link. The first an unique %s
-   * in body is changed by the site name.
-   * 
-   * @param body
-   *          the body
-   * @param hash
-   *          the hash
-   * @return the formated string
-   */
-  public FormattedString userNotification(final String body, final String hash) {
-    final String hashUrl = fileDownloadUtils.getUrl(hash);
-    return FormattedString.build(false, body + "<br><a href='%s'>%s</a>",
-        fileDownloadUtils.getSiteCommonName(), hashUrl, hashUrl);
   }
 }

@@ -165,6 +165,7 @@ public class BasicTopDialog extends BasicDialog {
     super.setSecondBtnId(builder.sndButtonId);
     super.setSecondBtnTabIndex(builder.tabIndexStart + 1);
     super.getTitleText().setText(builder.title, builder.direction);
+
     setWidthImpl(builder.width);
     setHeightImpl(builder.height);
     recalculateSize();

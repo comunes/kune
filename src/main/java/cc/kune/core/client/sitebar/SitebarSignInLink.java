@@ -22,6 +22,7 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
@@ -70,7 +71,7 @@ public class SitebarSignInLink extends ButtonDescriptor {
     // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
     setId(SITE_SIGN_IN);
     setVisible(!session.isLogged());
-    setStyles(SitebarActions.COMMON_LINK_STYLE);
+    setStyles(ActionStyles.SITEBAR_STYLE_FL);
     setParent(SitebarActions.RIGHT_TOOLBAR);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         SitebarActions.RIGHT_TOOLBAR);

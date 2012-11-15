@@ -22,7 +22,7 @@
       <a-hint> cc.kune.core.shared.dto.I18nLanguageSimpleDTO </a-hint>
       <b-hint> cc.kune.domain.I18nLanguage </b-hint>
     </field>
-        <field>
+    <field>
       <a>fullTranslatedLanguages</a>
       <b>fullTranslatedLanguages</b>
       <a-hint> cc.kune.core.shared.dto.I18nLanguageSimpleDTO </a-hint>
@@ -48,7 +48,7 @@
       <a>hasLogo</a>
       <b>hasLogo</b>
     </field>
-        <field type="one-way">
+    <field type="one-way">
       <a>hasBackground</a>
       <b>hasBackground</b>
     </field>
@@ -283,6 +283,20 @@
       <b>lastContentsOfMyGroups</b>
       <a-hint> cc.kune.core.shared.dto.ContentSimpleDTO </a-hint>
       <b-hint> cc.kune.domain.Content </b-hint>
+    </field>
+  </mapping>
+  <mapping>
+    <class-a>cc.kune.core.shared.dto.InvitationDTO</class-a>
+    <class-b>cc.kune.domain.Invitation</class-b>
+    <field>
+      <a>fromUser</a>
+      <b>fromUser</b>
+      <a-hint> cc.kune.core.shared.dto.UserSimpleDTO</a-hint>
+      <b-hint> cc.kune.domain.User </b-hint>
+    </field>
+    <field>
+      <a>type</a>
+      <b>type</b>
     </field>
   </mapping>
 </mappings>

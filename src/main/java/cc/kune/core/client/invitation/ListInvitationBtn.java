@@ -18,23 +18,22 @@
  *
  */
 
-package cc.kune.core.client.actions;
+package cc.kune.core.client.invitation;
 
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18n;
-import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.resources.CoreMessages;
-import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
+import cc.kune.core.client.resources.iconic.IconicResources;
 
-public class FolderNamesActionUtils {
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-  public static void restrictToUnixName(final Builder builder, final String id) {
-    // For the future: In Google Groups, the max group shorta name is 63 chars
-    // (with dashes)
-    builder.regex(TextUtils.UNIX_NAME).regexText(
-        I18n.t("The name must contain only lowercase characters, numbers and dashes")).textboxId(id);
-    builder.minLength(3).maxLength(15).allowBlank(false).minLengthText(
-        I18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS)).maxLengthText(
-        I18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15_NO_CHARS));
+@Singleton
+public class ListInvitationBtn extends ButtonDescriptor {
+
+  @Inject
+  ListInvitationBtn(final ListInvitationAction action, final IconicResources icons) {
+    super(action);
+    withText(I18n.t("Invite")).withToolTip(I18n.t("Invite others to this list via email")).withIcon(
+        icons.listsPostGrey());
   }
-
 }

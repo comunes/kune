@@ -27,8 +27,6 @@ public interface SitebarActions {
   static final MenuDescriptor MORE_MENU = new MenuDescriptor();
   static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
 
-  public String COMMON_LINK_STYLE = "k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor";
-
   void refreshActions();
 
 }

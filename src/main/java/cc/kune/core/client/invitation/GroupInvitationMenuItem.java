@@ -17,20 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.notifier;
 
-import static org.junit.Assert.*;
+package cc.kune.core.client.invitation;
 
-import org.junit.Test;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.core.client.sn.actions.GroupSNOptionsMenu;
 
-public class SimpleDestinationProviderTest extends AbstractPendingNotificationTest {
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-  @Test
-  public void shouldCompareWell() {
-    assertTrue(someUserProvider.equals(someSimilarUserProvider));
-    assertTrue(someUserProvider.equals(someSimilarUserProvider2));
-    assertTrue(someSimilarUserProvider.equals(someSimilarUserProvider2));
-    assertFalse(someUserProvider.equals(diferentProvider));
+@Singleton
+public class GroupInvitationMenuItem extends MenuItemDescriptor {
+
+  @Inject
+  GroupInvitationMenuItem(final GroupInvitationAction action, final IconicResources icons,
+      final GroupSNOptionsMenu optionsMenu) {
+    super(action);
+    withText(I18n.t("Invite others to this group via email")).withIcon(icons.listsPostGrey());
+    setParent(optionsMenu);
+    setPosition(0);
   }
-
 }

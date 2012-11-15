@@ -26,6 +26,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
+import cc.kune.core.client.rpcservices.InvitationService;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SocialNetService;
 import cc.kune.core.client.rpcservices.UserService;
@@ -59,6 +60,7 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
+import cc.kune.core.server.manager.InvitationManager;
 import cc.kune.core.server.manager.KuneWaveManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.RateManager;
@@ -78,6 +80,7 @@ import cc.kune.core.server.manager.impl.GroupManagerDefault;
 import cc.kune.core.server.manager.impl.I18nCountryManagerDefault;
 import cc.kune.core.server.manager.impl.I18nLanguageManagerDefault;
 import cc.kune.core.server.manager.impl.I18nTranslationManagerDefault;
+import cc.kune.core.server.manager.impl.InvitationManagerDefault;
 import cc.kune.core.server.manager.impl.KuneWaveManagerDefault;
 import cc.kune.core.server.manager.impl.LicenseManagerDefault;
 import cc.kune.core.server.manager.impl.RateManagerDefault;
@@ -97,6 +100,7 @@ import cc.kune.core.server.persist.KunePersistenceService;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.GroupRPC;
 import cc.kune.core.server.rpc.I18nRPC;
+import cc.kune.core.server.rpc.InvitationRPC;
 import cc.kune.core.server.rpc.SiteRPC;
 import cc.kune.core.server.rpc.SocialNetworkRPC;
 import cc.kune.core.server.rpc.StatsRPC;
@@ -144,6 +148,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
     bind(KuneWaveManager.class).to(KuneWaveManagerDefault.class);
     bind(UserSignInLogManager.class).to(UserSignInLogManagerDefault.class);
+    bind(InvitationManager.class).to(InvitationManagerDefault.class);
   }
 
   private void bindRPC() {
@@ -155,6 +160,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(I18nService.class).to(I18nRPC.class);
     bind(ListsService.class).to(ListsRPC.class);
     bind(ClientStatsService.class).to(StatsRPC.class);
+    bind(InvitationService.class).to(InvitationRPC.class);
   }
 
   private void bindServices() {

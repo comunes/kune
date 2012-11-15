@@ -66,6 +66,7 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.notifier.Addressee;
 import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.properties.ChatProperties;
@@ -99,6 +100,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   public static final Log LOG = LogFactory.getLog(UserManagerDefault.class);
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;
+  private final String domain;
   private final GroupManager groupManager;
   private final I18nTranslationServiceMultiLang i18n;
   private final KuneWaveService kuneWaveManager;
@@ -112,19 +114,17 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
   private final XmppManager xmppManager;
   private final XmppRosterProvider xmppRoster;
   private final XmppRosterPresenceProvider xmppRosterPresence;
-  private final String domain;
 
   @Inject
   public UserManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final UserFinder finder, final I18nLanguageManager languageManager,
       final I18nCountryManager countryManager, final XmppManager xmppManager,
       final ChatProperties chatProperties, final I18nTranslationServiceMultiLang i18n,
-      final AccountStore waveAccountStore,
-      final KuneWaveService kuneWaveManager, final ParticipantUtils participantUtils,
-      final KuneBasicProperties properties, final GroupManager groupManager,
-      final NotificationService notifyService, final XmppRosterProvider xmppRoster,
-      final XmppRosterPresenceProvider xmppRosterPresence, final SocialNetworkCache snCache,
-      @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain) {
+      final AccountStore waveAccountStore, final KuneWaveService kuneWaveManager,
+      final ParticipantUtils participantUtils, final KuneBasicProperties properties,
+      final GroupManager groupManager, final NotificationService notifyService,
+      final XmppRosterProvider xmppRoster, final XmppRosterPresenceProvider xmppRosterPresence,
+      final SocialNetworkCache snCache, @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
     super(provider, User.class);
     this.userFinder = finder;
     this.languageManager = languageManager;
@@ -146,11 +146,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.manager.UserManager#askForEmailConfirmation(cc.kune
    * .domain.User, cc.kune.core.server.manager.impl.EmailConfirmationType)
-   *
+   * 
    * More info: http://en.wikipedia.org/wiki/Self-service_password_reset
    * http://en.wikipedia.org/wiki/Password_notification_e-mail
    * http://stackoverflow
@@ -166,13 +166,13 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
     switch (type) {
     case emailVerification:
-      notifyService.sendEmailToWithLink(user, "Please verify your email",
+      notifyService.sendEmailToWithLink(Addressee.build(user), "Please verify your email",
           "Please click in the following link to verify your email at %s:",
           TokenUtils.addRedirect(SiteTokens.VERIFY_EMAIL, hash));
       break;
     case passwordReset:
       notifyService.sendEmailToWithLink(
-          user,
+          Addressee.build(user),
           "Verify password reset",
           "You are receiving this email because a request has been made to change the password associated with this email address in %s.<br><br>"
               + "If this was a mistake, just ignore this email and nothing will happen.<br><br>"
@@ -322,7 +322,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     String msg = null;
     try {
       id = RegistrationUtil.checkNewUsername(domain, shortName);
-    } catch (InvalidParticipantAddress exception) {
+    } catch (final InvalidParticipantAddress exception) {
       msg = exception.getMessage();
     }
 

@@ -23,20 +23,18 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import cc.kune.domain.User;
-
 public class SimpleDestinationProvider implements DestinationProvider {
-  private final List<User> list;
+  private final List<Addressee> list;
 
   /**
    * Instantiates a new simple destination provider (used for single
    * notifications like add/remove participant emails).
    * 
-   * @param user
-   *          the user to send the email or other type of notification
+   * @param addressee
+   *          the addressee
    */
-  public SimpleDestinationProvider(final User user) {
-    list = Arrays.asList(user);
+  public SimpleDestinationProvider(final Addressee addressee) {
+    list = Arrays.asList(addressee);
   }
 
   @Override
@@ -62,7 +60,7 @@ public class SimpleDestinationProvider implements DestinationProvider {
   }
 
   @Override
-  public Collection<User> getDest() {
+  public Collection<Addressee> getDest() {
     return list;
   }
 

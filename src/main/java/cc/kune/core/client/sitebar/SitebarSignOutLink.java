@@ -22,6 +22,7 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
@@ -126,7 +127,7 @@ public class SitebarSignOutLink extends ButtonDescriptor {
         SitebarActions.RIGHT_TOOLBAR);
     setParent(SitebarActions.RIGHT_TOOLBAR);
     setVisible(session.isLogged());
-    setStyles(SitebarActions.COMMON_LINK_STYLE);
+    setStyles(ActionStyles.SITEBAR_STYLE_FL);
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {

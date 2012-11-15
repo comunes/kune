@@ -48,7 +48,7 @@ import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.server.notifier.PendingNotification;
 import cc.kune.core.server.notifier.PendingNotificationProvider;
 import cc.kune.core.server.notifier.PendingNotificationSender;
-import cc.kune.core.server.notifier.SimpleDestinationProvider;
+import cc.kune.core.server.notifier.LocalUserDestinationProvider;
 import cc.kune.core.server.notifier.WaveDestinationProvider;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.rack.ContainerListener;
@@ -103,7 +103,7 @@ public class WaveEmailNotifier implements ContainerListener {
           try {
             final User user = userFinder.findByShortName(userName);
             return new PendingNotification(NotificationType.email, subject, body, true, false,
-                new SimpleDestinationProvider(user));
+                new LocalUserDestinationProvider(user));
           } catch (final NoResultException e) {
             // Seems is not a local user
           }

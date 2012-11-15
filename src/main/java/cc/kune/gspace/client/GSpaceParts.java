@@ -77,6 +77,7 @@ public class GSpaceParts {
         siteSearch.get();
         noHome.get();
         maxMinWorkspace.get();
+
         // // Add User & Groups Options
         // final GroupOptionsCollection goc = gocProv.get();
         // final UserOptionsCollection uoc = uocProv.get();

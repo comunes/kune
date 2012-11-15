@@ -21,14 +21,13 @@ package cc.kune.core.server.notifier;
 
 import java.util.Collection;
 
-import cc.kune.domain.User;
-
 /**
  * The Interface DestinationProvider is used to provide a way to get a list of
  * Users (for instance to send notifications to them)
  */
 public interface DestinationProvider {
 
+  @Override
   boolean equals(final Object obj);
 
   /**
@@ -36,8 +35,9 @@ public interface DestinationProvider {
    * 
    * @return the destination
    */
-  Collection<User> getDest();
+  Collection<Addressee> getDest();
 
+  @Override
   int hashCode();
 
 }

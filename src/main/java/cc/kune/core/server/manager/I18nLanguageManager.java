@@ -25,6 +25,8 @@ import cc.kune.domain.I18nLanguage;
 
 public interface I18nLanguageManager extends Manager<I18nLanguage, Long> {
 
+  I18nLanguage getDefaultLanguage();
+
   I18nLanguage findByCode(String language);
 
   List<I18nLanguage> findByCodes(List<String> langs);

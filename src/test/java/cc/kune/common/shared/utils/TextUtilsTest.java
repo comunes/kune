@@ -29,6 +29,33 @@ public class TextUtilsTest {
   private static final String DOMAIN_REGEXP = "^http([s]|)://localhost/.*";
 
   @Test
+  public void testEmail() {
+    assertTrue("kk@ex.com".matches(TextUtils.EMAIL_REGEXP));
+    assertTrue("kk@local.net".matches(TextUtils.EMAIL_REGEXP));
+  }
+
+  @Test
+  public void testEmailList() {
+    assertTrue("kk@ex.com,kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    assertTrue("kk@ex.com, kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    assertTrue("kk@ex.com,,,, kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    assertTrue("kk@ex.com,   kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    assertTrue("kk@ex.com,   kk@ex2.com, kk@ex3.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    assertFalse("kk@ex.com   ;kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    assertFalse("kk@ex.com;kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+  }
+
+  @Test
+  public void testRemoveHttp() {
+    assertEquals("localhost", TextUtils.removeHttp("http://localhost/"));
+    assertEquals("localhost", TextUtils.removeHttp("https://localhost/"));
+    assertEquals("localhost", TextUtils.removeHttp("http://localhost"));
+    assertEquals("localhost", TextUtils.removeHttp("https://localhost"));
+    assertEquals("localhost:8080", TextUtils.removeHttp("http://localhost:8080/"));
+    assertEquals("localhost:8080", TextUtils.removeHttp("https://localhost:8080/"));
+  }
+
+  @Test
   public void testUrlDomain() {
     assertTrue("http://localhost/kk".matches(DOMAIN_REGEXP));
     assertTrue("https://localhost/kk".matches(DOMAIN_REGEXP));

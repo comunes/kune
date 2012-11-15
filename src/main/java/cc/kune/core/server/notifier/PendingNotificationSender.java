@@ -24,7 +24,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.shared.dto.EmailNotificationFrequency;
-import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -75,12 +74,23 @@ public class PendingNotificationSender {
 
   public void add(final NotificationType type, final String subjectPrefix,
       final FormattedString subject, final FormattedString body, final boolean isHtml,
-      final boolean forceSend, final User to) {
+      final boolean forceSend, final Addressee to) {
     add(new PendingNotificationProvider() {
       @Override
       public PendingNotification get() {
         return new PendingNotification(type, subjectPrefix, subject, body, isHtml, forceSend,
             new SimpleDestinationProvider(to));
+      }
+    });
+  }
+
+  public void add(final NotificationType type, final String subjectPrefix,
+      final FormattedString subject, final FormattedString body, final boolean isHtml,
+      final boolean forceSend, final DestinationProvider dest) {
+    add(new PendingNotificationProvider() {
+      @Override
+      public PendingNotification get() {
+        return new PendingNotification(type, subjectPrefix, subject, body, isHtml, forceSend, dest);
       }
     });
   }

@@ -24,6 +24,7 @@
     <class>cc.kune.domain.I18nCountry</class>
     <class>cc.kune.domain.I18nLanguage</class>
     <class>cc.kune.domain.I18nTranslation</class>
+    <class>cc.kune.domain.Invitation</class>
     <class>cc.kune.domain.License</class>
     <class>cc.kune.domain.Rate</class>
     <class>cc.kune.domain.Revision</class>
@@ -148,6 +149,7 @@
     <class>cc.kune.domain.I18nCountry</class>
     <class>cc.kune.domain.I18nLanguage</class>
     <class>cc.kune.domain.I18nTranslation</class>
+    <class>cc.kune.domain.Invitation</class>
     <class>cc.kune.domain.License</class>
     <class>cc.kune.domain.Rate</class>
     <class>cc.kune.domain.Revision</class>
@@ -226,6 +228,7 @@
     <class>cc.kune.domain.I18nCountry</class>
     <class>cc.kune.domain.I18nLanguage</class>
     <class>cc.kune.domain.I18nTranslation</class>
+    <class>cc.kune.domain.Invitation</class>
     <class>cc.kune.domain.License</class>
     <class>cc.kune.domain.Rate</class>
     <class>cc.kune.domain.Revision</class>
@@ -297,6 +300,7 @@
     <class>cc.kune.domain.I18nCountry</class>
     <class>cc.kune.domain.I18nLanguage</class>
     <class>cc.kune.domain.I18nTranslation</class>
+    <class>cc.kune.domain.Invitation</class>
     <class>cc.kune.domain.License</class>
     <class>cc.kune.domain.Rate</class>
     <class>cc.kune.domain.Revision</class>

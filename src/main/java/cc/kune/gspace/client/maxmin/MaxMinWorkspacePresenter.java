@@ -22,6 +22,7 @@ package cc.kune.gspace.client.maxmin;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
@@ -133,14 +134,14 @@ implements MaxMinWorkspace {
       maximizeAction.setShortcut(shortcut);
       maximizeButtonBar = new IconLabelDescriptor(maximizeAction);
       maximizeButtonBar.withId(MAX_ICON).withParent(SitebarActions.RIGHT_TOOLBAR).withPosition(0).withStyles(
-          SitebarActions.COMMON_LINK_STYLE);
+          ActionStyles.SITEBAR_STYLE_FL);
 
       final MinimizeAction minimizeAction = new MinimizeAction("", images.minimize(),
           I18n.t("Restore the normal workspace size in Inbox and Group Space"));
       minimizeAction.setShortcut(shortcut);
       minimizeButtonBar = new IconLabelDescriptor(minimizeAction);
       minimizeButtonBar.withId(MIN_ICON).withParent(SitebarActions.RIGHT_TOOLBAR).withPosition(1).withStyles(
-          SitebarActions.COMMON_LINK_STYLE).withVisible(false);
+          ActionStyles.SITEBAR_STYLE_FL).withVisible(false);
 
     } else {
       // in large screens, add the MaxMin button to the More menu

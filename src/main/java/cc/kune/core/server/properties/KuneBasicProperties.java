@@ -19,15 +19,15 @@
  */
 package cc.kune.core.server.properties;
 
+import cc.kune.common.shared.utils.TextUtils;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-/**
- * Sugar
- */
 @Singleton
 public class KuneBasicProperties {
   private final KuneProperties properties;
+  private String siteUrlWithoutHttp;
 
   @Inject
   public KuneBasicProperties(final KuneProperties properties) {
@@ -74,6 +74,13 @@ public class KuneBasicProperties {
 
   public String getSiteUrl() {
     return properties.get(KuneProperties.SITE_URL);
+  }
+
+  public String getSiteUrlWithoutHttp() {
+    if (siteUrlWithoutHttp == null) {
+      siteUrlWithoutHttp = TextUtils.removeHttp(properties.get(KuneProperties.SITE_URL));
+    }
+    return siteUrlWithoutHttp;
   }
 
   public String getWelcomewave() {

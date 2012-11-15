@@ -21,6 +21,7 @@ package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
@@ -65,7 +66,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
       final CoreResources coreResources, final Session session) {
     super(newGroupAction);
     this.session = session;
-    withId(NEW_GROUP_BTN_ID).withStyles(SitebarActions.COMMON_LINK_STYLE);
+    withId(NEW_GROUP_BTN_ID).withStyles(ActionStyles.SITEBAR_STYLE_FL);
     withParent(SitebarActions.RIGHT_TOOLBAR);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         SitebarActions.RIGHT_TOOLBAR);

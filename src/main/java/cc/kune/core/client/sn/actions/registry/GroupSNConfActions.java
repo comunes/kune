@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
+import cc.kune.core.client.invitation.GroupInvitationMenuItem;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.actions.AddEntityToThisGroupAction;
@@ -71,8 +72,9 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final I18nTranslationService i18n, final Provider<MembersVisibilityMenuItem> membersVisibility,
       final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
       final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
-      final WriteToMembers writeToMembers, final WriteToAdmins writeToAdmins,
-      final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction,
+      final GroupInvitationMenuItem groupInvitation, final WriteToMembers writeToMembers,
+      final WriteToAdmins writeToAdmins, final IsGroupCondition isGroupCondition,
+      final UnJoinFromCurrentGroupAction unJoinGroupAction,
       final AddEntityToThisGroupAction addEntityToThisGroupAction, final GroupSNOptionsMenu optionsMenu,
       final GroupSNModerationSubMenu moderationSubMenu, final GroupSNVisibilitySubMenu visibilitySubMenu) {
     final boolean isNewbie = session.isNewbie();
@@ -95,6 +97,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     final MenuRadioItemDescriptor openItem = membersModeration.get().withModeration(AdmissionType.Open);
 
     addImpl(optionsMenu);
+
     // final MenuSeparatorDescriptor sep =
     new MenuSeparatorDescriptor(optionsMenu);
     final GuiActionDescrip memberOptions = new MenuTitleItemDescriptor(i18n.t("Member options")).withParent(optionsMenu);
@@ -121,7 +124,6 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     // addImpl(unJoinBtn); //
     // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
     // addImpl(addMemberBtn);
-
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {

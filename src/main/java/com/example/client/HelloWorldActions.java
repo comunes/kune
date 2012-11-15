@@ -2,6 +2,7 @@ package com.example.client;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
@@ -33,7 +34,7 @@ public class HelloWorldActions {
     final ButtonDescriptor siteBarBtn = new ButtonDescriptor(sharedAction);
     siteBarBtn.withText("HWorld!").withIcon(res.info());
     siteBarBtn.setParent(SitebarActions.LEFT_TOOLBAR);
-
+    siteBarBtn.setStyles(ActionStyles.SITEBAR_STYLE);
     // Other action in the sitebar options menu
 
     // An action in the user options menu

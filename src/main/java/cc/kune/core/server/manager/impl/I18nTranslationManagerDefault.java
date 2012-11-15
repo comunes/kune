@@ -58,7 +58,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
   }
 
   private I18nLanguage defLang() {
-    return languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
+    return languageManager.getDefaultLanguage();
   }
 
   private I18nLanguage getLanguage(final String languageId) {

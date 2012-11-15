@@ -35,8 +35,7 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 /**
  * The Class AbstractUIActionDescriptor.
  */
-public abstract class AbstractGuiActionDescrip extends
-    ChangeableObject implements GuiActionDescrip {
+public abstract class AbstractGuiActionDescrip extends ChangeableObject implements GuiActionDescrip {
 
   /** The action. */
   private AbstractAction action;
@@ -236,8 +235,7 @@ public abstract class AbstractGuiActionDescrip extends
    * kune.common.client.actions.ui.descrip.GuiActionDescrip, boolean)
    */
   @Override
-  public void setParent(final GuiActionDescrip parent,
-      final boolean addToParent) {
+  public void setParent(final GuiActionDescrip parent, final boolean addToParent) {
     if (parent != NO_PARENT && addToParent) {
       ((AbstractParentGuiActionDescrip) parent).add(this);
     }
@@ -303,8 +301,7 @@ public abstract class AbstractGuiActionDescrip extends
   public String toString() {
     final String name = (String) getValue(Action.NAME);
     final String tooltip = (String) getValue(Action.TOOLTIP);
-    return "[GuiActionDescrip: " + getClass().getName()
-        + (name == null ? "" : " " + name)
+    return "[GuiActionDescrip: " + getClass().getName() + (name == null ? "" : " " + name)
         + (tooltip == null ? "" : " " + tooltip) + "]";
   }
 
@@ -312,6 +309,11 @@ public abstract class AbstractGuiActionDescrip extends
   public GuiActionDescrip withAction(final AbstractAction action) {
     setAction(action);
     return this;
+  }
+
+  @Override
+  public void withAddCondition(final GuiAddCondition addCondition) {
+    add(addCondition);
   }
 
   @Override
@@ -339,8 +341,7 @@ public abstract class AbstractGuiActionDescrip extends
   }
 
   @Override
-  public GuiActionDescrip withParent(final GuiActionDescrip parent,
-      final boolean addToParent) {
+  public GuiActionDescrip withParent(final GuiActionDescrip parent, final boolean addToParent) {
     setParent(parent, addToParent);
     return this;
   }
@@ -352,16 +353,14 @@ public abstract class AbstractGuiActionDescrip extends
   }
 
   @Override
-  public GuiActionDescrip withShortcut(final KeyStroke shortcut,
-      final GlobalShortcutRegister register) {
+  public GuiActionDescrip withShortcut(final KeyStroke shortcut, final GlobalShortcutRegister register) {
     putValue(Action.ACCELERATOR_KEY, shortcut);
     register.put(shortcut, action);
     return this;
   }
 
   @Override
-  public GuiActionDescrip withShortcut(final String keys,
-      final GlobalShortcutRegister register) {
+  public GuiActionDescrip withShortcut(final String keys, final GlobalShortcutRegister register) {
     final KeyStroke shortcut = Shortcut.getShortcut(keys);
     putValue(Action.ACCELERATOR_KEY, shortcut);
     register.put(shortcut, action);
