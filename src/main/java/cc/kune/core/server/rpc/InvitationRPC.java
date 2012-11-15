@@ -19,31 +19,69 @@
  */
 package cc.kune.core.server.rpc;
 
+import cc.kune.core.client.errors.IncorrectHashException;
 import cc.kune.core.client.rpcservices.InvitationService;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
+import cc.kune.core.server.content.ContainerManager;
+import cc.kune.core.server.content.ContentUtils;
 import cc.kune.core.server.manager.InvitationManager;
+import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.InvitationType;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.InvitationDTO;
+import cc.kune.domain.Container;
+import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.GroupFinder;
 
 import com.google.inject.Inject;
 
 public class InvitationRPC implements RPC, InvitationService {
 
+  private final ContainerManager containerManager;
+  private final GroupFinder groupFinder;
   private final InvitationManager invitationManager;
+  private final Mapper mapper;
   private final UserSessionManager userSessionManager;
 
   @Inject
   public InvitationRPC(final InvitationManager invitationManager,
-      final UserSessionManager userSessionManager) {
+      final UserSessionManager userSessionManager, final Mapper mapper, final GroupFinder groupFinder,
+      final ContainerManager containerManager) {
+    this.containerManager = containerManager;
     this.invitationManager = invitationManager;
     this.userSessionManager = userSessionManager;
+    this.mapper = mapper;
+    this.groupFinder = groupFinder;
+
+  }
+
+  @Override
+  @KuneTransactional
+  public InvitationDTO getInvitation(final String invitationHash) throws IncorrectHashException {
+    final InvitationDTO map = mapper.map(invitationManager.get(invitationHash), InvitationDTO.class);
+    final StateToken token = new StateToken(map.getInvitedToToken());
+    switch (map.getType()) {
+    case TO_GROUP:
+      final Group group = groupFinder.findByShortName(token.getGroup());
+      map.setName(group.getShortName());
+      map.setDescription(group.getLongName());
+      break;
+    case TO_LISTS:
+      final Group groupOfList = groupFinder.findByShortName(token.getGroup());
+      final Container cnt = containerManager.find(ContentUtils.parseId(token.getFolder()));
+      map.setName(cnt.getName());
+      map.setDescription(groupOfList.getLongName());
+    default:
+      break;
+    }
+    return map;
   }
 
   private User getUser() {
@@ -72,5 +110,4 @@ public class InvitationRPC implements RPC, InvitationService {
   public void inviteToSite(final String userHash, final StateToken token, final String[] emails) {
     invitationManager.invite(getUser(), InvitationType.TO_SITE, NotificationType.email, token, emails);
   }
-
 }

@@ -29,6 +29,15 @@ import cc.kune.domain.User;
 public interface InvitationManager extends Manager<Invitation, Long> {
 
   /**
+   * Gets the invitation via the hash
+   * 
+   * @param invitationHash
+   *          the invitation hash
+   * @return the invitation
+   */
+  Invitation get(String invitationHash);
+
+  /**
    * Invite some emails to the site or a group, or a list.
    * 
    * @param from

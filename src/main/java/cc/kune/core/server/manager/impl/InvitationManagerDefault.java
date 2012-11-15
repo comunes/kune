@@ -23,12 +23,14 @@ package cc.kune.core.server.manager.impl;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.errors.IncorrectHashException;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.server.content.ContainerManager;
@@ -50,6 +52,7 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.Invitation;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.GroupFinder;
+import cc.kune.domain.finders.InvitationFinder;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
@@ -63,6 +66,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
   public static final Log LOG = LogFactory.getLog(InvitationManagerDefault.class);
   private final KuneBasicProperties basicProperties;
   private final ContainerManager containerManager;
+  private final InvitationFinder finder;
   private final GroupFinder groupFinder;
   private final I18nLanguageManager i18nLanguageManager;
   private final NotificationHtmlHelper notificationHtmlHelper;
@@ -70,16 +74,30 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
 
   @Inject
   public InvitationManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
-      final NotificationService notifyService, final I18nLanguageManager i18nLanguageManager,
-      final KuneBasicProperties basicProperties, final NotificationHtmlHelper notificationHtmlHelper,
-      final GroupFinder groupFinder, final ContainerManager containerManager) {
+      final InvitationFinder finder, final NotificationService notifyService,
+      final I18nLanguageManager i18nLanguageManager, final KuneBasicProperties basicProperties,
+      final NotificationHtmlHelper notificationHtmlHelper, final GroupFinder groupFinder,
+      final ContainerManager containerManager) {
     super(provider, Invitation.class);
+    this.finder = finder;
     this.notifyService = notifyService;
     this.i18nLanguageManager = i18nLanguageManager;
     this.basicProperties = basicProperties;
     this.notificationHtmlHelper = notificationHtmlHelper;
     this.groupFinder = groupFinder;
     this.containerManager = containerManager;
+  }
+
+  @Override
+  public Invitation get(final String invitationHash) {
+    try {
+      final Invitation invitation = finder.findByHash(invitationHash);
+      invitation.setUsed(true);
+      persist(invitation);
+      return invitation;
+    } catch (final NoResultException exp) {
+      throw new IncorrectHashException();
+    }
   }
 
   @Override
@@ -92,10 +110,11 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     final I18nLanguage defLang = i18nLanguageManager.getDefaultLanguage();
     for (final String email : emails) {
       Preconditions.checkState(email.matches(TextUtils.EMAIL_REGEXP), "Wrong email: " + email);
-      final String redirect = TokenUtils.addRedirect(SiteTokens.INVITATION, UUID.randomUUID().toString());
+      final String hash = UUID.randomUUID().toString();
+      final String redirect = TokenUtils.addRedirect(SiteTokens.INVITATION, hash);
       final String link = notificationHtmlHelper.createLink(redirect);
-      final Invitation invitation = new Invitation(from, UUID.randomUUID().toString(),
-          token.getEncoded(), notifType, email, type);
+      final Invitation invitation = new Invitation(from, hash, token.getEncoded(), notifType, email,
+          type);
       switch (type) {
       case TO_SITE:
         notifyService.sendEmail(Addressee.build(email, defLang),

@@ -273,6 +273,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   }
 
   @Override
+  public void gotoHomeSpace() {
+    gotoHistoryToken(SiteTokens.HOME);
+  }
+
+  @Override
   public void gotoStateToken(final StateToken newToken) {
     Log.debug("StateManager: history goto-token: " + newToken + ", previous: " + previousGroupToken);
     previousHash = history.getToken();

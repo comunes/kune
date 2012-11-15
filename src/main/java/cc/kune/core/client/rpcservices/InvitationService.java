@@ -19,13 +19,17 @@
  */
 package cc.kune.core.client.rpcservices;
 
+import cc.kune.core.client.errors.IncorrectHashException;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.InvitationDTO;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("InvitationService")
 public interface InvitationService extends RemoteService {
+
+  InvitationDTO getInvitation(String invitationHash) throws IncorrectHashException;
 
   void inviteToGroup(String userHash, StateToken token, String[] emails);
 

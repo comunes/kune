@@ -64,6 +64,14 @@ public class Invitation implements HasId {
   @Enumerated(EnumType.STRING)
   private InvitationType type;
 
+  @Basic
+  @Column(columnDefinition = "BIT", length = 1)
+  private Boolean used;
+
+  public Invitation() {
+    this(null, null, null, null, null, null);
+  }
+
   public Invitation(final User from, final String hash, final String invitedToToken,
       final NotificationType notifType, final String to, final InvitationType type) {
     this.date = System.currentTimeMillis();
@@ -73,6 +81,7 @@ public class Invitation implements HasId {
     this.notifType = notifType;
     this.to = to;
     this.type = type;
+    this.used = false;
   }
 
   public Long getDate() {
@@ -80,6 +89,10 @@ public class Invitation implements HasId {
   }
 
   public User getFrom() {
+    return fromUser;
+  }
+
+  public User getFromUser() {
     return fromUser;
   }
 
@@ -106,6 +119,10 @@ public class Invitation implements HasId {
 
   public InvitationType getType() {
     return type;
+  }
+
+  public Boolean getUsed() {
+    return used;
   }
 
   public void setDate(final Long date) {
@@ -139,6 +156,10 @@ public class Invitation implements HasId {
 
   public void setType(final InvitationType type) {
     this.type = type;
+  }
+
+  public void setUsed(final Boolean used) {
+    this.used = used;
   }
 
 }

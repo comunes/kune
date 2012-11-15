@@ -40,6 +40,7 @@ import cc.kune.domain.finders.GroupFinder;
 import cc.kune.domain.finders.I18nCountryFinder;
 import cc.kune.domain.finders.I18nLanguageFinder;
 import cc.kune.domain.finders.I18nTranslationFinder;
+import cc.kune.domain.finders.InvitationFinder;
 import cc.kune.domain.finders.LicenseFinder;
 import cc.kune.domain.finders.RateFinder;
 import cc.kune.domain.finders.TagFinder;
@@ -158,6 +159,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
     jpm.addFinder(TagUserContentFinder.class);
     jpm.addFinder(UserFinder.class);
     jpm.addFinder(UserSignInLogFinder.class);
+    jpm.addFinder(InvitationFinder.class);
     install(jpm);
 
     bind(Session.class).annotatedWith(DataSourceKune.class).toProvider(
@@ -187,6 +189,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
     expose(TagUserContentFinder.class);
     expose(UserFinder.class);
     expose(UserSignInLogFinder.class);
+    expose(InvitationFinder.class);
     expose(MY_DATA_SOURCE_ONE_FILTER_KEY);
 
     bind(GenericPersistenceInitializer.class).asEagerSingleton();

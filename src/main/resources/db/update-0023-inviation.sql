@@ -10,6 +10,7 @@ CREATE TABLE `invitation` (
   `invitTo` varchar(255) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `fromUser_id` bigint(20) DEFAULT NULL,
+  `used` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `hash` (`hash`),
   KEY `FK473F7799890F3BFB` (`fromUser_id`),

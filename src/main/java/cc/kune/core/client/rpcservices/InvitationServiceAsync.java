@@ -21,10 +21,13 @@
 package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.InvitationDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface InvitationServiceAsync {
+
+  void getInvitation(String invitationHash, AsyncCallback<InvitationDTO> callback);
 
   void inviteToGroup(String userHash, StateToken token, String[] emails, AsyncCallback<Void> callback);
 

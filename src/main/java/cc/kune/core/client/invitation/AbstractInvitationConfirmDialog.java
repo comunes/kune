@@ -35,7 +35,7 @@ public class AbstractInvitationConfirmDialog extends BasicTopDialog {
     private final String message;
 
     public Builder(final String dialogId, final String title, final String message) {
-      super(dialogId, false, true, I18n.getDirection());
+      super(dialogId, false, false, I18n.getDirection());
       super.title(title);
       this.message = message;
       this.sndButtonTitle(I18n.t("Cancel"));

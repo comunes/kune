@@ -62,6 +62,8 @@ public interface StateManager {
 
   void gotoHistoryTokenButRedirectToCurrent(String signin);
 
+  void gotoHomeSpace();
+
   void gotoStateToken(StateToken newToken);
 
   void gotoStateToken(StateToken token, boolean useCache);
