@@ -27,7 +27,7 @@ import java.util.Collection;
  */
 public interface DestinationProvider {
 
-  @Override
+  // This fails with some compilers @Override
   boolean equals(final Object obj);
 
   /**
@@ -37,7 +37,7 @@ public interface DestinationProvider {
    */
   Collection<Addressee> getDest();
 
-  @Override
+  // This fails with some compilers @Override
   int hashCode();
 
 }
