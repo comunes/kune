@@ -1,3 +1,10 @@
+kune (0.3.0+b4) unstable; urgency=low
+
+  * Invitations to site/group/list when no logged (#166, #136, #251 WIP)
+  * Fix with attachments library (fix #410)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 15 Nov 2012 03:04:44 +0100
+
 kune (0.3.0+b3) unstable; urgency=low
 
   * CLOSED -task #408: password reset
