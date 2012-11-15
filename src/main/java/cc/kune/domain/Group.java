@@ -109,9 +109,9 @@ public class Group implements HasId {
   @Field(index = Index.YES, store = Store.NO)
   @Column(unique = true)
   @Length(min = 3, max = CoreConstants.MAX_SHORT_NAME_SIZE, message = "The shortname must be between 3 and 15 characters of length")
-  @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and "
+  @Pattern(regexp = "^[a-z0-9][a-z0-9_-]*$", message = "The name must be between 3 and "
       + CoreConstants.MAX_SHORT_NAME_SIZE
-      + " lowercase characters. It can only contain Western characters, numbers, and dashes")
+      + " lowercase characters. It can only contain Western characters, numbers, dashes (-) or underscores (_)")
   private String shortName;
 
   @OneToOne(cascade = CascadeType.ALL)
