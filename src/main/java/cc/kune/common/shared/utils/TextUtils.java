@@ -34,19 +34,10 @@ public class TextUtils {
 
   public static final String IN_DEVELOPMENT_P = " (in development)";
 
-  /*
-   * Changes in these regular expressions might involve changes in the reg.exp.
-   * of cc.kune.domain/Group.java, where the patterns for inclusion in the DB
-   * are
-   */
   public static final String NUM_REGEXP = "^[0-9]+$";
 
   public static final String SHORTNAME_REGEXP = "^[a-z0-9]+$";
 
-  // Allowance of lowercase/uppercase letter, numbers, dashes(-) and
-  // underscore(_), but beginning only with letter/number (avoiding groups such
-  // as "___"):
-  public static final String SHORTNAME_UPPER_DASH_UNDERSC_REGEXP = "^[a-zA-Z0-9][a-zA-Z0-9_-]*$";
   public static final String SHORTNAME_UPPER_REGEXP = "^[a-zA-Z0-9]+$";
   public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
   // Original regexp from http://snippets.dzone.com/posts/show/452

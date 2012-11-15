@@ -77,7 +77,7 @@ public class GroupFieldFactory {
                                                             * shortName
                                                             */
     field.setAllowBlank(false);
-    field.setRegex(TextUtils.SHORTNAME_UPPER_DASH_UNDERSC_REGEXP);
+    field.setRegex(TextUtils.SHORTNAME_UPPER_REGEXP);
     field.getMessages().setMinLengthText(minMaxText);
     field.getMessages().setMaxLengthText(minMaxText);
     field.getMessages().setRegexText(minMaxText);
