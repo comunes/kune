@@ -20,6 +20,7 @@
 
 package cc.kune.core.client.invitation;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
@@ -41,11 +42,10 @@ public class SiteInvitationBtn extends ButtonDescriptor {
       final I18nUITranslationService i18n, final IconicResources icons) {
     super(action);
     withText(i18n.t("Invite")).withToolTip(
-        i18n.t("Invite others to [%s] via email", i18n.getSiteCommonName())).withParent(
-        SitebarActions.RIGHT_TOOLBAR);
+        i18n.t("Invite others to [%s] via email", i18n.getSiteCommonName())).withStyles(
+        ActionStyles.SITEBAR_STYLE_FL).withParent(SitebarActions.RIGHT_TOOLBAR);
     // .withIcon(icons.listsPostGrey())
     // .withParent(SitebarActions.MORE_MENU);
-    // .withStyles(ActionStyles.SITEBAR_STYLE_FL)
 
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         SitebarActions.RIGHT_TOOLBAR);
