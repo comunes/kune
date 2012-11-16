@@ -22,8 +22,6 @@ package cc.kune.gspace.client.actions;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyLevel;
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -32,13 +30,19 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class GiveUsFeedbackAction extends AbstractExtendedAction {
 
+  public static final String GIVE_US_FEEDBACK_ID = "k-give-feed-diag-id";
+  public static final String GIVE_US_FEEDBACK_SEND_BTN_ID = "k-give-feed-diag-send-btn-id";
   private final Provider<ContentServiceAsync> contentService;
+  private PromptTopDialog diag;
   private final I18nUITranslationService i18n;
   private final Session session;
   private final Provider<SignIn> signIn;
@@ -58,31 +62,41 @@ public class GiveUsFeedbackAction extends AbstractExtendedAction {
   @Override
   public void actionPerformed(final ActionEvent event) {
     if (session.isLogged()) {
-      NotifyUser.askConfirmation(
-          i18n.t("Confirm, please:"),
-          i18n.t(
-              "Do you want to write us with some positive or negative feedback about [%s]? This can help us to improve these services",
-              i18n.getSiteCommonName()), new SimpleResponseCallback() {
+      final String title = i18n.t("Feedback of [%s] about [%s]",
+          session.getCurrentUser().getShortName(), i18n.getSiteCommonName());
+      final PromptTopDialog.Builder builder = new PromptTopDialog.Builder(GIVE_US_FEEDBACK_ID, title,
+          false, true, i18n.getDirection(), new PromptTopDialog.OnEnter() {
             @Override
-            public void onCancel() {
-            }
-
-            @Override
-            public void onSuccess() {
-              contentService.get().sendFeedback(
-                  session.getUserHash(),
-                  i18n.t("Feedback of [%s]", session.getCurrentUser().getShortName()),
-                  i18n.t("Please, edit and write here your feedback about this tool. "
-                      + "We find your comments very useful, especially "
-                      + "if you mention the things you would like to see, "
-                      + "your personal/group needs, etc."), new AsyncCallbackSimple<String>() {
-                    @Override
-                    public void onSuccess(final String url) {
-                      stateManager.gotoHistoryToken(url);
-                    }
-                  });
+            public void onEnter() {
+              // We do nothing to allow multiple lines
             }
           });
+      builder.emptyTextField(i18n.t("Please, edit and write here your feedback about this tool. "
+          + "We find your comments very useful, especially "
+          + "if you mention the things you would like to see, " + "your personal/group needs, etc."));
+      builder.promptWidth(300).promptLines(6).width("320px").height("120px").firstButtonId(
+          GIVE_US_FEEDBACK_SEND_BTN_ID).firstButtonTitle(i18n.t("Send")).sndButtonTitle(i18n.t("Cancel"));
+      diag = builder.build();
+      diag.getFirstBtn().addClickHandler(new ClickHandler() {
+        @Override
+        public void onClick(final ClickEvent event) {
+          diag.hide();
+          contentService.get().sendFeedback(session.getUserHash(), title, diag.getTextFieldValue(),
+              new AsyncCallbackSimple<String>() {
+                @Override
+                public void onSuccess(final String url) {
+                  stateManager.gotoHistoryToken(url);
+                }
+              });
+        }
+      });
+      diag.getSecondBtn().addClickHandler(new ClickHandler() {
+        @Override
+        public void onClick(final ClickEvent event) {
+          diag.hide();
+        }
+      });
+      diag.showCentered();
     } else {
       signIn.get().setErrorMessage(i18n.t("Sign in or create an account to give us feedback"),
           NotifyLevel.info);

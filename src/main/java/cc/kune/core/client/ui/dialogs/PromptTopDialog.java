@@ -48,7 +48,7 @@ public class PromptTopDialog extends BasicTopDialog {
     private String emptyText;
 
     /** The field width. */
-    private int fieldWidth;
+    private int promptWidth;
 
     /** The max length. */
     private int maxLength = 0;
@@ -142,12 +142,12 @@ public class PromptTopDialog extends BasicTopDialog {
     /**
      * Field width.
      * 
-     * @param fieldWidth
+     * @param promptWidth
      *          the field width
      * @return the builder
      */
-    public Builder fieldWidth(final int fieldWidth) {
-      this.fieldWidth = fieldWidth;
+    public Builder promptWidth(final int promptWidth) {
+      this.promptWidth = promptWidth;
       return this;
     }
 
@@ -323,7 +323,7 @@ public class PromptTopDialog extends BasicTopDialog {
     if (builder.maxLength != 0) {
       textField.setMaxLength(builder.maxLength);
     }
-    textField.setWidth(builder.fieldWidth);
+    textField.setWidth(builder.promptWidth);
     textField.setAllowBlank(builder.allowBlank);
     textField.addListener(Events.OnKeyPress, new Listener<FieldEvent>() {
       @Override
