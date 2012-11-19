@@ -70,7 +70,6 @@ import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
 import org.waveprotocol.box.server.waveserver.WaveletStateException;
 import org.waveprotocol.box.server.rpc.AttachmentInfoServlet;
-import org.waveprotocol.box.server.rpc.AttachmentServlet;
 import org.waveprotocol.wave.crypto.CertPathStore;
 import org.waveprotocol.wave.federation.FederationSettings;
 import org.waveprotocol.wave.federation.FederationTransport;
@@ -173,7 +172,7 @@ public class CustomServerMain {
     Injector injector =
         settingsInjector.createChildInjector(new ServerModule(enableFederation, listenerCount,
             waveletLoadCount, deltaPersistCount, storageContinuationCount, lookupCount),
-               new RobotApiModule(), federationModule, persistenceModule, searchModule); 
+               new RobotApiModule(), federationModule, persistenceModule, searchModule);
 
     ServerRpcProvider server = injector.getInstance(ServerRpcProvider.class);
     WaveBus waveBus = injector.getInstance(WaveBus.class);
