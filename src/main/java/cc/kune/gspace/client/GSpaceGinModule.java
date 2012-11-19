@@ -29,12 +29,12 @@ import cc.kune.core.client.sn.actions.BuddyLastConnectedHeaderLabel;
 import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.gspace.client.actions.ActionUtils;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
-import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.share.ContentViewerOptionsShareSubMenu;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceArmorDefault;
+import cc.kune.gspace.client.feedback.FeedbackBottomPanel;
 import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorPanel;
 import cc.kune.gspace.client.i18n.I18nTranslatorPresenter;
@@ -218,7 +218,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(ContentViewerShareMenu.class);
     s(ContentViewerOptionsShareSubMenu.class);
     s(RenameAction.class);
-    s(GiveUsFeedbackBtn.class);
+    s(FeedbackBottomPanel.class);
     s(WriteToBuddyHeaderButton.class);
     s(BuddyLastConnectedHeaderLabel.class);
 

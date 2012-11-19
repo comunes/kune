@@ -1,5 +1,5 @@
-GCHARSET                                     "UTF-8
-          "; body {
+GCHARSET                                       "UTF-8
+            "; body {
   background-color: transparent;
   color: black;
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
@@ -17,7 +17,9 @@ GCHARSET                                     "UTF-8
 body.fontface {
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
     "DejaVu Sans", Tahoma, sans-serif;
-}m
+}
+
+m
 
 div,span {
   outline: 0 none;
@@ -914,7 +916,7 @@ table.k-folder-viewer {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   kfilter: alpha(opacity =
-                           90);
+                             90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1308,24 +1310,27 @@ button.k-buddy-last-connected {
   border: 1px solid transparent;
 }
 
-button.k-chat-add-as-buddie,button.k-noborder-btn,button.k-feedback-btn
-  {
+button.k-chat-add-as-buddie,button.k-noborder-btn {
   background: none repeat scroll 0 0 transparent;
   border: 1px solid transparent;
   font-weight: normal;
   margin: 1px;
 }
 
-button.k-feedback-btn {
+div.k-feedback-btn {
+  font-weight: normal;
+  padding: 3px;
   border: 1px solid #ACACAC;
-  position: absolute;
-  top: 11px;
-  left: 10px;
   background: #FFF;
-  -moz-border-radius-bottomleft: 0px;
-  border-bottom-left-radius: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-  -moz-border-radius-bottomright: 0px;
-  border-bottom-right-radius: 0px;
-  -webkit-border-bottom-right-radius: 0px;
+  -moz-border-radius-topleft: 5px;
+  border-top-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  cursor: pointer;
+}
+
+.k-feedback-btn div img {
+  margin: -1px 2px 0 2px;
 }

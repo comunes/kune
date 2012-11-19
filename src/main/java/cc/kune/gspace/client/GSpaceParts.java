@@ -29,8 +29,8 @@ import cc.kune.core.client.state.HistoryTokenMustBeAuthCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
-import cc.kune.gspace.client.actions.GiveUsFeedbackBtn;
 import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.gspace.client.feedback.FeedbackBottomPanel;
 import cc.kune.gspace.client.i18n.I18nToTranslateGridPanel;
 import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorTabsCollection;
@@ -59,7 +59,8 @@ public class GSpaceParts {
       final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,
       final Provider<UserOptions> uo, final Provider<SitebarSearchPresenter> siteSearch,
       final Provider<SiteOptionsI18nTranslatorAction> transAction,
-      final Provider<MaxMinWorkspace> maxMinWorkspace, final Provider<GiveUsFeedbackBtn> giveUsFeedback,
+      final Provider<MaxMinWorkspace> maxMinWorkspace,
+      final Provider<FeedbackBottomPanel> feedbackPanel,
       final Provider<I18nToTranslateGridPanel> toTrans,
       final Provider<I18nTranslatorTabsCollection> gtranslator,
       final Provider<I18nTranslator> translator, final Provider<WriteToBuddyHeaderButton> writeToBuddie,
@@ -94,7 +95,7 @@ public class GSpaceParts {
 
         // Feedback
         if (event.getInitData().isFeedbackEnabled()) {
-          giveUsFeedback.get();
+          feedbackPanel.get();
         }
 
         // Others

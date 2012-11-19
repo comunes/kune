@@ -1,3 +1,9 @@
+kune (0.3.0+b5) unstable; urgency=low
+
+  * CLOSED -task #422: Feedback funtinality confusing
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 19 Nov 2012 11:13:08 +0100
+
 kune (0.3.0+b4) unstable; urgency=low
 
   * Invitations to site/group/list when no logged (#166, #136, #251 WIP)
