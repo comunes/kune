@@ -19,6 +19,8 @@
  */
 package cc.kune.common.client.ui;
 
+import cc.kune.common.client.tooltip.Tooltip;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -42,16 +44,25 @@ public class DottedTabPanel extends Composite {
     tabPanel.setSize(width, height);
   }
 
-  public void addTab(final IsWidget view) {
-    tabPanel.add(view, new DottedTab());
+  public void addTab(final IsWidget view, final String tooltip) {
+    final DottedTab tab = new DottedTab();
+    Tooltip.to(tab, tooltip);
+    tabPanel.add(view, tab);
+  }
+
+  public void blinkCurrentTab() {
+    final Widget tab = tabPanel.getTabWidget(tabPanel.getSelectedIndex());
+    new BlinkAnimation(tab.getParent(), 350).animate(5);
   }
 
   public int getWidgetIndex(final IsWidget view) {
     return tabPanel.getWidgetIndex(view.asWidget());
   }
 
-  public void insertTab(final IsWidget view, final int beforeIndex) {
-    tabPanel.insert(view.asWidget(), new DottedTab(), beforeIndex);
+  public void insertTab(final IsWidget view, final String tooltip, final int beforeIndex) {
+    final DottedTab tab = new DottedTab();
+    Tooltip.to(tab, tooltip);
+    tabPanel.insert(view.asWidget(), tab, beforeIndex);
   }
 
   public void removeTab(final IsWidget view) {

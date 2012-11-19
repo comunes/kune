@@ -1245,6 +1245,10 @@ div.jGrowl {
   background-color: #dd8a3d;
 }
 
+.k-dotted-tabpanel .gwt-TabLayoutPanelTab-blink {
+  background-color: #C87137 !important;
+}
+
 /* Calendar */
 .gwt-cal-MonthView {
   bottom: 0 !important;

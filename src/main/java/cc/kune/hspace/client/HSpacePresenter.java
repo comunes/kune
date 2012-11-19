@@ -32,6 +32,9 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent.SpaceSelectHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
@@ -57,6 +60,8 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
   }
 
   public interface HSpaceView extends View {
+
+    void blinkCurrentTab();
 
     HasText getGlobalStatsTotalGroupsCount();
 
@@ -150,6 +155,15 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
         }
         getView().setUserGroupsActivityVisible(myGroupsHasActivity);
         getView().setInboxUnreadVisible(logged);
+        getEventBus().addHandler(SpaceSelectEvent.getType(), new SpaceSelectHandler() {
+          @Override
+          public void onSpaceSelect(final SpaceSelectEvent event) {
+            if (event.getSpace().equals(Space.homeSpace)) {
+              getView().blinkCurrentTab();
+            }
+          }
+        });
+        getView().blinkCurrentTab();
       }
     };
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {

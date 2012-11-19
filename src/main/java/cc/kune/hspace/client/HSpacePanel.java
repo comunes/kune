@@ -81,6 +81,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   private final ActionSimplePanel homeToolbar;
   @UiField
   public FlowPanel lastActivityInYourGroup;
+  private final String lastActivityInYourGroupsText;
   @UiField
   public Label lastActivityInYourGroupTitle;
   @UiField
@@ -93,6 +94,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   public Label lastGroupsTitle;
   @UiField
   public FlowPanel lastPublishedContents;
+
   @UiField
   public Label lastPublishedContentsTitle;
 
@@ -102,7 +104,6 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   private final Provider<GroupContentHomeLink> linkProv;
 
   private final DottedTabPanel tabPanel;
-
   @UiField
   public Hyperlink unreadInYourInbox;
   private final Widget widget;
@@ -118,12 +119,15 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     globalStatsTitle.setText(i18n.t("Stats"));
     globalStatsTotalGroupsTitle.setText(i18n.t("Hosted groups:"));
     globalStatsTotalUsersTitle.setText(i18n.t("Registered users:"));
-    lastGroupsTitle.setText(i18n.t("Latest created groups"));
-    lastPublishedContentsTitle.setText(i18n.t("Latest publications"));
-    lastActivityInYourGroupTitle.setText(i18n.t("Latest activity in your groups"));
+    final String lastCreatedGroupsText = i18n.t("Latest created groups");
+    final String lastPublicationsText = i18n.t("Latest publications");
+    lastActivityInYourGroupsText = i18n.t("Latest activity in your groups");
+    lastGroupsTitle.setText(lastCreatedGroupsText);
+    lastPublishedContentsTitle.setText(lastPublicationsText);
+    lastActivityInYourGroupTitle.setText(lastActivityInYourGroupsText);
     tabPanel = new DottedTabPanel("440px", "200px");
-    tabPanel.addTab(lastGroupsPanel);
-    tabPanel.addTab(lastPublishedPanel);
+    tabPanel.addTab(lastGroupsPanel, lastCreatedGroupsText);
+    tabPanel.addTab(lastPublishedPanel, lastPublicationsText);
     globalStats.removeFromParent();
     unreadInYourInbox.setTargetHistoryToken(SiteTokens.WAVE_INBOX);
     globalStatsParent = RootPanel.get(K_HOME_GLOBAL_STATS);
@@ -144,6 +148,11 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   @Override
   public Widget asWidget() {
     return widget;
+  }
+
+  @Override
+  public void blinkCurrentTab() {
+    tabPanel.blinkCurrentTab();
   }
 
   private String format(final Long modifiedOn, final String name) {
@@ -227,7 +236,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   public void setUserGroupsActivityVisible(final boolean visible) {
     final boolean isAttached = tabPanel.getWidgetIndex(lastActivityPanel) != -1;
     if (visible && !isAttached) {
-      tabPanel.insertTab(lastActivityPanel, 0);
+      tabPanel.insertTab(lastActivityPanel, lastActivityInYourGroupsText, 0);
     } else if (!visible && isAttached) {
       tabPanel.removeTab(lastActivityPanel);
     }
