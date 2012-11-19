@@ -81,11 +81,11 @@ implements MaxMinWorkspace {
       showMaximized(false);
     }
   }
-  private static final int LIMIT_SMALL_SCREEN = 650;
-
   public static final String MAX_ICON = "mmwp-max_bt";
 
   public static final String MIN_ICON = "mmwp-min_bt";
+
+  private static final int SMALL_SCREEN_HEIGHT_LIMIT = 550;
 
   private final IconicResources images;
 
@@ -121,7 +121,7 @@ implements MaxMinWorkspace {
    * 
    */
   private void checkSmallScreen() {
-    SmallScreen = Window.getClientHeight() < LIMIT_SMALL_SCREEN;
+    SmallScreen = Window.getClientHeight() < SMALL_SCREEN_HEIGHT_LIMIT;
   }
 
   private void createActions() {
