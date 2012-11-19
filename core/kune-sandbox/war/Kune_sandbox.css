@@ -52,3 +52,20 @@ body.fontface {
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
     "DejaVu Sans", Tahoma, sans-serif;
 }
+
+.k-dottedtab {
+  background-color: #ffccaa !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.k-dottedtab-selected {
+  background-color: #dd8a3d !important;
+}
+
+.k-dottedtab-blink {
+  background-color: highlight !important;
+}

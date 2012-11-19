@@ -25,6 +25,8 @@ import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.common.client.ui.BlinkAnimation;
+import cc.kune.common.client.ui.DottedTab;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.PopupTopPanel;
@@ -108,6 +110,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     absolutePanel.add(thumb, 100, 300);
     absolutePanel.add(view, 200, 300);
+
+    DottedTab tab = new DottedTab();
+    absolutePanel.add(tab, 400, 400);
+
+    new BlinkAnimation(tab,350).animate(5);
 
     RootPanel.get().add(absolutePanel);
   }
@@ -220,7 +227,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     iconLabel.setAction(action1);
 
     ButtonDescriptor button1 = new ButtonDescriptor("button 1", action1);
-    ButtonDescriptor button2 = new ButtonDescriptor("button 2", action2);
+    ButtonDescriptor button2 = new ButtonDescriptor("button 2 but bigger bigger", action2);
     ButtonDescriptor button3 = new ButtonDescriptor(action1);
 
     button1.withIcon(res.info()).withToolTip("Some tooltip");
