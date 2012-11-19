@@ -143,7 +143,6 @@ public class InvitationClientManager {
             }
             break;
           case TO_GROUP:
-
             NotifyUser.askConfirmation(I18n.t("Invitation to join the group '[%s]'", name), I18n.t(
                 "[%s] has invited you to join the group '[%s]'. Do you want to accept the invitation?",
                 whoInvitesName, description), new SimpleResponseCallback() {
@@ -167,7 +166,6 @@ public class InvitationClientManager {
 
             break;
           case TO_LISTS:
-
             NotifyUser.askConfirmation(
                 I18n.t("Invitation to join the list '[%s]'", name),
                 I18n.t(
