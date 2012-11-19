@@ -23,6 +23,8 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.client.events.AccessRightsChangedEvent;
 import cc.kune.core.client.events.AccessRightsChangedEvent.AccessRightsChangedHandler;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -47,6 +49,13 @@ public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
       final boolean authNeed, final boolean visibleForNonMemb, final boolean visibleForMembers) {
     this.stateManager = stateManager;
     this.session = session;
+    session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        refreshStatus(rolRequired, authNeed, session.isLogged(), visibleForMembers, visibleForNonMemb,
+            session.getCurrentState().getGroupRights());
+      }
+    });
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override
       public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
@@ -76,7 +85,5 @@ public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
     // Workaround to force change ...
     putValue(GuiActionDescrip.VISIBLE, !newEnabled);
     putValue(GuiActionDescrip.VISIBLE, newEnabled);
-    // NotifyUser.info("Set '" + getValue(Action.NAME) + "' visible: " +
-    // newVisibility, true);
   }
 }
