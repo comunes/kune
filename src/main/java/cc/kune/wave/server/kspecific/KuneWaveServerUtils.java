@@ -48,8 +48,10 @@ public class KuneWaveServerUtils {
   @Inject
   static Provider<KuneWaveService> waveService;
 
-  public static Collection<Addressee> getLocalParticipants(final WaveRef waveref, final String author) {
+  public static Collection<Addressee> getLocalParticipantsExceptAuthor(final WaveRef waveref,
+      final String author) {
     final Participants participants = waveService.get().getParticipants(waveref, author);
+    participants.remove(author);
     final Set<Addressee> list = new HashSet<Addressee>();
     for (final String participant : participants) {
       participantUtils.get().isLocal(participant);

@@ -85,7 +85,7 @@ public class WaveDestinationProvider implements DestinationProvider {
   @Override
   public Collection<Addressee> getDest() {
     if (list == null) {
-      list = KuneWaveServerUtils.getLocalParticipants(ref, author);
+      list = KuneWaveServerUtils.getLocalParticipantsExceptAuthor(ref, author);
     }
     return list;
   }

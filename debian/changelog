@@ -1,6 +1,7 @@
 kune (0.3.0+b5) unstable; urgency=low
 
-  * CLOSED -task #422: Feedback funtinality confusing
+  * CLOSED -task #422: Feedback funtionality confusing
+  * CLOSED -task #416: Improve email notifications
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 19 Nov 2012 11:13:08 +0100
 
