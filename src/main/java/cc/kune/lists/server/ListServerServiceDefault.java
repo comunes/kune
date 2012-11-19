@@ -60,10 +60,11 @@ public class ListServerServiceDefault implements ListServerService {
   @Override
   public StateContainerDTO createList(final String userHash, final StateToken parentToken,
       final String listName, final String description, final boolean isPublic) {
-    final StateContainerDTO result = contentRPC.addFolder(userHash, parentToken,
+    final StateContainerDTO newList = contentRPC.addFolder(userHash, parentToken,
         composeListName(parentToken, listName), ListsToolConstants.TYPE_LIST);
+    setContainerAcl(newList.getStateToken(), isPublic);
     // Not public list, don't permit subscriptions neither view posts
-    return contentRPC.getState(setContainerAcl(result.getStateToken(), isPublic));
+    return subscribeCurrentUserToList(newList.getStateToken(), true);
   }
 
   private Container getContainer(final StateToken token) {

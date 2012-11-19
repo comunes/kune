@@ -1,5 +1,6 @@
 kune (0.3.0+b5) unstable; urgency=low
 
+  * CLOSED -task #411: List creator should be added to list by default
   * Invitations to site/group/list when logged (close #166, #136, #251)
   * CLOSED -task #422: Feedback funtionality confusing
   * CLOSED -task #416: Improve email notifications
