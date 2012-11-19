@@ -23,6 +23,7 @@ import java.util.List;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import cc.kune.domain.Group;
 import cc.kune.domain.ParticipationData;
@@ -50,6 +51,8 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
   ParticipationData findParticipation(User user, Group group) throws DefaultException;
 
   List<Group> findParticipationAggregated(User userLogged, Group group) throws AccessViolationException;
+
+  SocialNetworkDataDTO generateResponse(User userLogged, Group group);
 
   SocialNetwork get(User userLogged, Group group) throws DefaultException;
 

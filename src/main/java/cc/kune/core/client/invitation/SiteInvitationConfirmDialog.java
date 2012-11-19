@@ -28,14 +28,16 @@ public class SiteInvitationConfirmDialog extends AbstractInvitationConfirmDialog
 
     public static final String DIALOG_ID = "k-site-inv-confirm-diag-id";
 
-    public Builder(final I18nUITranslationService i18n, final String userWhoInvites) {
+    public Builder(final String redirect, final I18nUITranslationService i18n,
+        final String userWhoInvites) {
       super(
           DIALOG_ID,
           i18n.t("Invitation to join this site"),
           i18n.t(
               "[%s] has invited you to join [%s]. Please [%s] to accept the invitation and register in this site, or just [%s] if you already have an account.",
               userWhoInvites, i18n.getSiteCommonName(),
-              UserFieldFactory.getRegisterLink(i18n.t("click here")), UserFieldFactory.getSignInLink()));
+              UserFieldFactory.getRegisterLink(i18n.t("click here"), redirect),
+              UserFieldFactory.getSignInLink(redirect)));
     }
 
   }

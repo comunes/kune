@@ -35,6 +35,7 @@ import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.InvitationType;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.InvitationDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.domain.Container;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
@@ -59,7 +60,26 @@ public class InvitationRPC implements RPC, InvitationService {
     this.userSessionManager = userSessionManager;
     this.mapper = mapper;
     this.groupFinder = groupFinder;
+  }
 
+  @Override
+  public void confirmationInvitationToGroup(final String userHash, final String invitationHash)
+      throws IncorrectHashException {
+    invitationManager.confirmInvitationToGroup(getUser(), invitationHash);
+  }
+
+  @Override
+  @Authenticated
+  @KuneTransactional
+  public void confirmationInvitationToSite(final String userHash, final String invitationHash)
+      throws IncorrectHashException {
+    invitationManager.confirmInvitationToSite(getUser(), invitationHash);
+  }
+
+  @Override
+  public StateContainerDTO confirmInvitationToList(final String userHash, final String invitationHash)
+      throws IncorrectHashException {
+    return invitationManager.confirmInvitationToList(getUser(), invitationHash);
   }
 
   @Override

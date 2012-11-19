@@ -22,12 +22,22 @@ package cc.kune.core.client.rpcservices;
 import cc.kune.core.client.errors.IncorrectHashException;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.InvitationDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("InvitationService")
 public interface InvitationService extends RemoteService {
+
+  void confirmationInvitationToGroup(String userHash, String invitationHash)
+      throws IncorrectHashException;
+
+  void confirmationInvitationToSite(String userHash, String invitationHash)
+      throws IncorrectHashException;
+
+  StateContainerDTO confirmInvitationToList(String userHash, String invitationHash)
+      throws IncorrectHashException;
 
   InvitationDTO getInvitation(String invitationHash) throws IncorrectHashException;
 

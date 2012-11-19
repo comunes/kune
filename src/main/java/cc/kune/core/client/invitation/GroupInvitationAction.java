@@ -48,6 +48,7 @@ public class GroupInvitationAction extends AbstractInvitateAction {
         rightsManager,
         invitationService,
         InvitationType.TO_GROUP,
+        /* InvitationManagerDefault will fail if we change this */
         AccessRolDTO.Administrator,
         true,
         true,

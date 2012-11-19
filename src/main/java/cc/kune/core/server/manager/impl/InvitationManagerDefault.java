@@ -37,6 +37,7 @@ import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentUtils;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.InvitationManager;
+import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.notifier.Addressee;
 import cc.kune.core.server.notifier.NotificationHtmlHelper;
 import cc.kune.core.server.notifier.NotificationService;
@@ -47,12 +48,15 @@ import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.utils.FormattedString;
 import cc.kune.core.shared.domain.InvitationType;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.SocialNetworkDataDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.Invitation;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.GroupFinder;
 import cc.kune.domain.finders.InvitationFinder;
+import cc.kune.lists.server.ListServerService;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
@@ -69,15 +73,18 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
   private final InvitationFinder finder;
   private final GroupFinder groupFinder;
   private final I18nLanguageManager i18nLanguageManager;
+  private final ListServerService listService;
   private final NotificationHtmlHelper notificationHtmlHelper;
   private final NotificationService notifyService;
+  private final SocialNetworkManager snManager;
 
   @Inject
   public InvitationManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final InvitationFinder finder, final NotificationService notifyService,
       final I18nLanguageManager i18nLanguageManager, final KuneBasicProperties basicProperties,
       final NotificationHtmlHelper notificationHtmlHelper, final GroupFinder groupFinder,
-      final ContainerManager containerManager) {
+      final ContainerManager containerManager, final SocialNetworkManager snManager,
+      final ListServerService listService) {
     super(provider, Invitation.class);
     this.finder = finder;
     this.notifyService = notifyService;
@@ -86,6 +93,57 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     this.notificationHtmlHelper = notificationHtmlHelper;
     this.groupFinder = groupFinder;
     this.containerManager = containerManager;
+    this.snManager = snManager;
+    this.listService = listService;
+  }
+
+  @Override
+  public SocialNetworkDataDTO confirmInvitationToGroup(final User user, final String invitationHash) {
+    try {
+      final Invitation invitation = finder.findByHash(invitationHash);
+      invitation.setUsed(true);
+      persist(invitation);
+      final User from = invitation.getFrom();
+      final Group group = groupFinder.findByShortName(invitation.getInvitedToToken().getGroup());
+      snManager.addGroupToCollabs(from, user.getUserGroup(), group);
+      return snManager.generateResponse(user, group);
+    } catch (final NoResultException exp) {
+      throw new IncorrectHashException();
+    }
+
+  }
+
+  @Override
+  public StateContainerDTO confirmInvitationToList(final User user, final String invitationHash) {
+    try {
+      final Invitation invitation = finder.findByHash(invitationHash);
+      invitation.setUsed(true);
+      persist(invitation);
+      return listService.subscribeToListWithoutPermCheck(invitation.getInvitedToToken(),
+          user.getUserGroup());
+    } catch (final NoResultException exp) {
+      throw new IncorrectHashException();
+    }
+  }
+
+  @Override
+  public void confirmInvitationToSite(final User user, final String invitationHash) {
+    try {
+      final Invitation invitation = finder.findByHash(invitationHash);
+      invitation.setUsed(true);
+      persist(invitation);
+      final User from = invitation.getFrom();
+      final String siteUrl = basicProperties.getSiteUrlWithoutHttp();
+      notifyService.sendEmail(
+          Addressee.build(from.getEmail(), i18nLanguageManager.getDefaultLanguage()),
+          PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX, FormattedString.build(
+              "Some people you may know on %s", siteUrl), FormattedString.build(
+              "%s has now an account in %s. You can check his/her profile here:<br>%s<br>",
+              user.getName(), siteUrl, notificationHtmlHelper.createLink(user.getShortName())));
+    } catch (final NoResultException exp) {
+      throw new IncorrectHashException();
+    }
+
   }
 
   @Override

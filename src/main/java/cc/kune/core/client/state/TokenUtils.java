@@ -49,4 +49,5 @@ public class TokenUtils {
   public static String tutorial(final String token) {
     return addRedirect(SiteTokens.TUTORIAL, token);
   }
+
 }

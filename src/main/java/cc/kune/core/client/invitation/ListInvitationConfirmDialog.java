@@ -28,8 +28,8 @@ public class ListInvitationConfirmDialog extends AbstractInvitationConfirmDialog
 
     public static final String DIALOG_ID = "k-list-inv-confirm-diag-id";
 
-    public Builder(final I18nUITranslationService i18n, final String userWhoInvites,
-        final String listShortName, final String groupLongName) {
+    public Builder(final String redirect, final I18nUITranslationService i18n,
+        final String userWhoInvites, final String listShortName, final String groupLongName) {
       super(
           DIALOG_ID,
           i18n.t("Invitation to join the list '[%s]'", listShortName),
@@ -37,7 +37,8 @@ public class ListInvitationConfirmDialog extends AbstractInvitationConfirmDialog
               "[%s] has invited you to join the list '[%s]' of the group '[%s]' in [%s]. "
                   + "Please [%s] to accept the invitation and register in this site, or just [%s] if you already have an account.",
               userWhoInvites, listShortName, groupLongName, i18n.getSiteCommonName(),
-              UserFieldFactory.getRegisterLink(i18n.t("click here")), UserFieldFactory.getSignInLink()));
+              UserFieldFactory.getRegisterLink(i18n.t("click here"), redirect),
+              UserFieldFactory.getSignInLink(redirect)));
     }
   }
 

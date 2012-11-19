@@ -20,17 +20,24 @@
 
 package cc.kune.core.client.invitation;
 
+import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.errors.IncorrectHashException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.InvitationServiceAsync;
+import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.shared.domain.InvitationType;
 import cc.kune.core.shared.dto.InvitationDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.UserSimpleDTO;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -38,15 +45,20 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class InvitationClientManager {
+  private final ChatClient chatEngine;
   private final I18nUITranslationService i18n;
   private final Provider<InvitationServiceAsync> invitationService;
   private final Session session;
+  private final Provider<SocialNetServiceAsync> snService;
   private final StateManager stateManager;
 
   @Inject
   public InvitationClientManager(final Provider<InvitationServiceAsync> invitationService,
+      final ChatClient chatEngine, final Provider<SocialNetServiceAsync> snService,
       final Session session, final I18nUITranslationService i18n, final StateManager stateManager) {
     this.invitationService = invitationService;
+    this.chatEngine = chatEngine;
+    this.snService = snService;
     this.session = session;
     this.i18n = i18n;
     this.stateManager = stateManager;
@@ -66,27 +78,33 @@ public class InvitationClientManager {
 
       @Override
       public void onSuccess(final InvitationDTO invitation) {
+        final String invitationHash = invitation.getHash();
         final String invitationToToken = invitation.getInvitedToToken();
         final String name = invitation.getName();
         final String description = invitation.getDescription();
-        final String whoInvites = invitation.getFromUser().getName();
+        final UserSimpleDTO from = invitation.getFromUser();
+        final String whoInvitesName = from.getName();
+        final String whoInvitesShortName = from.getShortName();
         final InvitationType type = invitation.getType();
 
         if (session.isNotLogged()) {
+          final String redirect = TokenUtils.addRedirect(SiteTokens.INVITATION, invitationHash);
           BasicTopDialog dialog;
           AbstractInvitationConfirmDialog.Builder builder;
           switch (type) {
           case TO_SITE:
             stateManager.gotoHomeSpace();
-            builder = new SiteInvitationConfirmDialog.Builder(i18n, whoInvites);
+            builder = new SiteInvitationConfirmDialog.Builder(redirect, i18n, whoInvitesName);
             break;
           case TO_GROUP:
             stateManager.gotoHistoryToken(invitationToToken);
-            builder = new GroupInvitationConfirmDialog.Builder(i18n, whoInvites, name, description);
+            builder = new GroupInvitationConfirmDialog.Builder(redirect, i18n, whoInvitesName, name,
+                description);
             break;
           case TO_LISTS:
             stateManager.gotoHistoryToken(invitationToToken);
-            builder = new ListInvitationConfirmDialog.Builder(i18n, whoInvites, name, description);
+            builder = new ListInvitationConfirmDialog.Builder(redirect, i18n, whoInvitesName, name,
+                description);
             break;
           default:
             throw new RuntimeException("Unexpected type");
@@ -94,17 +112,86 @@ public class InvitationClientManager {
           dialog = builder.build();
           dialog.showCentered();
         } else {
-          // Logged! TODO
           switch (type) {
           case TO_SITE:
-            // Goto buddie!?
             stateManager.gotoHomeSpace();
+            invitationService.get().confirmationInvitationToSite(session.getUserHash(), invitationHash,
+                new AsyncCallbackSimple<Void>() {
+                  @Override
+                  public void onSuccess(final Void result) {
+                  }
+                });
+            if (!chatEngine.isBuddy(whoInvitesShortName)) {
+              NotifyUser.askConfirmation(I18n.t("Add [%s] as a buddie", whoInvitesShortName), I18n.t(
+                  "'[%s]' invited you to this site. Do you want to add him/her as a buddie?",
+                  whoInvitesName), new SimpleResponseCallback() {
+                @Override
+                public void onCancel() {
+                }
+
+                @Override
+                public void onSuccess() {
+                  chatEngine.addNewBuddy(whoInvitesShortName);
+                  snService.get().addAsBuddie(session.getUserHash(), whoInvitesShortName,
+                      new AsyncCallbackSimple<Void>() {
+                        @Override
+                        public void onSuccess(final Void result) {
+                        }
+                      });
+                }
+              });
+            }
             break;
           case TO_GROUP:
-            stateManager.gotoHistoryToken(invitationToToken);
+
+            NotifyUser.askConfirmation(I18n.t("Invitation to join the group '[%s]'", name), I18n.t(
+                "[%s] has invited you to join the group '[%s]'. Do you want to accept the invitation?",
+                whoInvitesName, description), new SimpleResponseCallback() {
+              @Override
+              public void onCancel() {
+              }
+
+              @Override
+              public void onSuccess() {
+                invitationService.get().confirmationInvitationToGroup(session.getUserHash(),
+                    invitationHash, new AsyncCallbackSimple<Void>() {
+                      @Override
+                      public void onSuccess(final Void result) {
+                        // TODO
+                        stateManager.gotoHistoryToken(invitationToToken);
+                        stateManager.refreshCurrentStateWithoutCache();
+                      }
+                    });
+              }
+            });
+
             break;
           case TO_LISTS:
-            stateManager.gotoHistoryToken(invitationToToken);
+
+            NotifyUser.askConfirmation(
+                I18n.t("Invitation to join the list '[%s]'", name),
+                I18n.t(
+                    "[%s] has invited you to join the list '[%s]' of group '[%s]'.  Do you want to accept the invitation?",
+                    whoInvitesName, name, description), new SimpleResponseCallback() {
+                  @Override
+                  public void onCancel() {
+                  }
+
+                  @Override
+                  public void onSuccess() {
+                    invitationService.get().confirmInvitationToList(session.getUserHash(),
+                        invitationHash, new AsyncCallbackSimple<StateContainerDTO>() {
+                          @Override
+                          public void onSuccess(final StateContainerDTO result) {
+                            stateManager.gotoHistoryToken(invitationToToken);
+                            NotifyUser.info(i18n.t("Subscribed"));
+                            stateManager.setRetrievedState(result);
+                            stateManager.refreshCurrentState();
+                            NotifyUser.hideProgress();
+                          }
+                        });
+                  }
+                });
             break;
           default:
             throw new RuntimeException("Unexpected type");

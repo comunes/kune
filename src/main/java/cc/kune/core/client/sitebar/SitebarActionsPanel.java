@@ -34,14 +34,15 @@ import com.gwtplatform.mvp.client.ViewImpl;
 public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView {
 
   private final Provider<AboutKuneDialog> aboutPanel;
-  private final ErrorsDialog errorPanel;
+  private final Provider<ErrorsDialog> errorPanel;
   private final ActionSimplePanel toolbarLeft;
   private final ActionSimplePanel toolbarRight;
 
   @Inject
   public SitebarActionsPanel(final GSpaceArmor armor, final ActionSimplePanel toolbarRight,
       final ActionSimplePanel toolbarLeft, final I18nTranslationService i18n,
-      final Provider<AboutKuneDialog> aboutPanel, final ErrorsDialog errorPanel, final SiteLogo siteLogo) {
+      final Provider<AboutKuneDialog> aboutPanel, final Provider<ErrorsDialog> errorPanel,
+      final SiteLogo siteLogo) {
     this.toolbarRight = toolbarRight;
     this.toolbarLeft = toolbarLeft;
     this.aboutPanel = aboutPanel;
@@ -77,7 +78,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
 
   @Override
   public void showErrorDialog() {
-    errorPanel.showCentered();
+    errorPanel.get().showCentered();
   }
 
 }

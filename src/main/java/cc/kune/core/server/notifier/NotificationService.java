@@ -82,7 +82,7 @@ public class NotificationService {
     }
   }
 
-  public void notifyUserToUser(final User from, final User to, final String subject, final String message) {
+  public void notifyUserToUserByEmail(final User from, final User to, final String subject, final String message) {
     sender.add(NotificationType.email, PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX,
         createPlainSubject(subject),
         helper.userNotification(from.getShortName(), from.hasLogo(), message), true, false,

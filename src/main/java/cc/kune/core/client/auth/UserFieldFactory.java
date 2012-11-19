@@ -23,6 +23,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.CoreConstants;
@@ -104,17 +105,27 @@ public class UserFieldFactory {
   }
 
   public static String getRegisterLink() {
-    return TextUtils.generateHtmlLink("#" + HistoryUtils.PREFIX + SiteTokens.REGISTER,
-        I18n.tWithNT("register", "register, in lowercase"), false);
+    return getRegisterLink(I18n.tWithNT("register", "register, in lowercase"), null);
   }
 
-  public static String getRegisterLink(final String withText) {
-    return TextUtils.generateHtmlLink("#" + HistoryUtils.PREFIX + SiteTokens.REGISTER, withText, false);
+  public static String getRegisterLink(final String withText, final String redirect) {
+    final String href = "#"
+        + HistoryUtils.PREFIX
+        + (TextUtils.empty(redirect) ? SiteTokens.REGISTER : TokenUtils.addRedirect(SiteTokens.REGISTER,
+            redirect));
+    return TextUtils.generateHtmlLink(href, withText, false);
   }
 
   public static String getSignInLink() {
-    return TextUtils.generateHtmlLink("#" + HistoryUtils.PREFIX + SiteTokens.SIGN_IN,
-        I18n.tWithNT("sign in", "register, in lowercase"), false);
+    return getSignInLink(null);
+  }
+
+  public static String getSignInLink(final String redirect) {
+    final String href = "#"
+        + HistoryUtils.PREFIX
+        + (TextUtils.empty(redirect) ? SiteTokens.SIGN_IN : TokenUtils.addRedirect(SiteTokens.SIGN_IN,
+            redirect));
+    return TextUtils.generateHtmlLink(href, I18n.tWithNT("sign in", "register, in lowercase"), false);
   }
 
 }

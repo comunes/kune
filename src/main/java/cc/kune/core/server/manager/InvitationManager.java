@@ -23,10 +23,44 @@ package cc.kune.core.server.manager;
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.shared.domain.InvitationType;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.SocialNetworkDataDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.domain.Invitation;
 import cc.kune.domain.User;
 
 public interface InvitationManager extends Manager<Invitation, Long> {
+
+  /**
+   * Confirm group invitation.
+   * 
+   * @param user
+   *          the user who received the invitation
+   * @param invitationHash
+   *          the invitation hash
+   * @return the social network data
+   */
+  SocialNetworkDataDTO confirmInvitationToGroup(User user, String invitationHash);
+
+  /**
+   * Confirm list invitation.
+   * 
+   * @param user
+   *          the user who received the invitation
+   * @param invitationHash
+   *          the invitation hash
+   * @return the state container
+   */
+  StateContainerDTO confirmInvitationToList(User user, String invitationHash);
+
+  /**
+   * Confirm site invitation.
+   * 
+   * @param user
+   *          the user who received the invitation
+   * @param invitationHash
+   *          the invitation hash
+   */
+  void confirmInvitationToSite(User user, String invitationHash);
 
   /**
    * Gets the invitation via the hash
@@ -53,5 +87,4 @@ public interface InvitationManager extends Manager<Invitation, Long> {
    */
   void invite(User from, InvitationType type, NotificationType notifType, StateToken toToken,
       String... emails);
-
 }

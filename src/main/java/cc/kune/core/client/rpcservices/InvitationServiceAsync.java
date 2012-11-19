@@ -22,10 +22,18 @@ package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.InvitationDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface InvitationServiceAsync {
+
+  void confirmationInvitationToGroup(String userHash, String invitationHash, AsyncCallback<Void> callback);
+
+  void confirmationInvitationToSite(String userHash, String invitationHash, AsyncCallback<Void> callback);
+
+  void confirmInvitationToList(String userHash, String invitationHash,
+      AsyncCallback<StateContainerDTO> callback);
 
   void getInvitation(String invitationHash, AsyncCallback<InvitationDTO> callback);
 

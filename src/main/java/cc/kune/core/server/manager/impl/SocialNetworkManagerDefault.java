@@ -38,6 +38,7 @@ import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.shared.domain.AdmissionType;
@@ -46,6 +47,7 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.GroupType;
+import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import cc.kune.domain.Group;
 import cc.kune.domain.ParticipationData;
@@ -66,18 +68,21 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
   private final AccessRightsService accessRightsService;
   private final GroupFinder finder;
+  private final Mapper mapper;
   private final NotificationService notifyService;
   private final SocialNetworkCache snCache;
+
   private final UserManager userManager;
 
   @Inject
   public SocialNetworkManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
-      final GroupFinder finder, final AccessRightsService accessRightsService,
+      final GroupFinder finder, final AccessRightsService accessRightsService, final Mapper mapper,
       final UserManager userManager, final SocialNetworkCache snCache,
       final NotificationService notifyService) {
     super(provider, SocialNetwork.class);
     this.finder = finder;
     this.accessRightsService = accessRightsService;
+    this.mapper = mapper;
     this.userManager = userManager;
     this.snCache = snCache;
     this.notifyService = notifyService;
@@ -90,10 +95,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     checkUserLoggedIsAdmin(userLogged, sn);
     final Set<Group> pendingCollabs = sn.getPendingCollaborators().getList();
     if (pendingCollabs.contains(group)) {
-      sn.addCollaborator(group);
-      sn.removePendingCollaborator(group);
-      snCache.expire(group);
-      snCache.expire(inGroup);
+      addGroupToCollabs(userLogged, group, inGroup);
+      notifyService.notifyGroupMembers(group, inGroup, "Accepted as member",
+          "You are now member of this group");
     } else {
       throw new DefaultException("User is not a pending collaborator");
     }
@@ -107,7 +111,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
   @Override
   public void addAsBuddie(final User userLogged, final User toUser) {
-    notifyService.notifyUserToUser(userLogged, toUser, "Added as buddie", "He/she added you as buddie");
+    notifyService.notifyUserToUserByEmail(userLogged, toUser, "Added as buddie",
+        "He/she added you as buddie");
     snCache.expire(userLogged.getUserGroup());
     snCache.expire(toUser.getUserGroup());
   }
@@ -123,6 +128,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (sn.isPendingCollab(group)) {
       sn.removePendingCollaborator(group);
     }
+    notifyService.notifyGroupMembers(group, inGroup, "Added as administrator",
+        "You are now admin of this group");
     snCache.expire(group);
     snCache.expire(inGroup);
   }
@@ -138,6 +145,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     if (sn.isPendingCollab(group)) {
       sn.removePendingCollaborator(group);
     }
+    notifyService.notifyGroupMembers(group, inGroup, "Added as collaborator",
+        "You are now a collaborator of this group");
     snCache.expire(group);
     snCache.expire(inGroup);
   }
@@ -184,6 +193,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     checkUserLoggedIsAdmin(userLogged, sn);
     unJoinGroup(group, inGroup);
+    notifyService.notifyGroupMembers(group, inGroup, "Removed as collaborator",
+        "You have been removed as collaborator of this group");
     snCache.expire(group);
     snCache.expire(inGroup);
   }
@@ -196,6 +207,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     final Set<Group> pendingCollabs = sn.getPendingCollaborators().getList();
     if (pendingCollabs.contains(group)) {
       sn.removePendingCollaborator(group);
+      notifyService.notifyGroupMembers(group, inGroup, "Membership denied",
+          "Your membership to this group has been rejected");
     } else {
       throw new DefaultException("Person/Group is not a pending collaborator");
     }
@@ -229,6 +242,11 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       groups.remove(group);
     }
     return groups;
+  }
+
+  @Override
+  public SocialNetworkDataDTO generateResponse(final User userLogged, final Group group) {
+    return mapper.map(getSocialNetworkData(userLogged, group), SocialNetworkDataDTO.class);
   }
 
   @Override
@@ -338,6 +356,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     checkGroupIsNotAlreadyAMember(userGroup, sn);
     if (isModerated(admissionType)) {
       sn.addPendingCollaborator(userGroup);
+      notifyService.notifyGroupAdmins(userGroup, inGroup, "Pending collaborator",
+          "There is a pending collaborator in this group. Please accept or deny him/her");
+      snCache.expire(userGroup);
       snCache.expire(inGroup);
       return SocialNetworkRequestResult.moderated;
     } else if (isOpen(admissionType)) {
@@ -349,7 +370,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       } else {
         sn.addCollaborator(userGroup);
       }
-      snCache.expire(userLogged.getUserGroup());
+      snCache.expire(userGroup);
       snCache.expire(inGroup);
       return SocialNetworkRequestResult.accepted;
     } else if (isClosed(admissionType)) {
@@ -370,6 +391,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
       }
       sn.removeAdmin(group);
       sn.addCollaborator(group);
+      notifyService.notifyGroupMembers(group, inGroup, "Membership changed",
+          "Your membership to this group has changed. You are now a collaborator of this group");
       snCache.expire(group);
       snCache.expire(inGroup);
     } else {
@@ -383,6 +406,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     final SocialNetwork sn = inGroup.getSocialNetwork();
     checkUserLoggedIsAdmin(userLogged, sn);
     if (sn.isCollab(group)) {
+      notifyService.notifyGroupMembers(group, inGroup, "Membership changed",
+          "Your membership to this group has changed. You are now an administrator of this group");
       snCache.expire(group);
       snCache.expire(inGroup);
       sn.removeCollaborator(group);
@@ -403,7 +428,6 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
   @Override
   public void unJoinGroup(final Group groupToUnJoin, final Group inGroup) throws DefaultException {
     final SocialNetwork sn = inGroup.getSocialNetwork();
-
     if (sn.isAdmin(groupToUnJoin)) {
       if (sn.getAccessLists().getAdmins().getList().size() == 1) {
         if (sn.getAccessLists().getEditors().getList().size() > 0) {
@@ -419,6 +443,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     } else {
       throw new DefaultException("Person/Group is not a collaborator");
     }
+    notifyService.notifyGroupAdmins(groupToUnJoin, inGroup, "A member left this group",
+        "A member has left this group");
     snCache.expire(groupToUnJoin);
     snCache.expire(inGroup);
   }

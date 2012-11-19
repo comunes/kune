@@ -117,6 +117,8 @@ import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.server.xmpp.XmppManagerDefault;
 import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
+import cc.kune.lists.server.ListServerService;
+import cc.kune.lists.server.ListServerServiceDefault;
 import cc.kune.lists.server.rpc.ListsRPC;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 import cc.kune.wave.server.kspecific.KuneWaveServiceDefault;
@@ -175,6 +177,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(KuneWaveService.class).to(KuneWaveServiceDefault.class);
     bind(MailService.class).to(MailServiceDefault.class);
     bind(StatsService.class).to(StatsServiceDefault.class);
+    bind(ListServerService.class).to(ListServerServiceDefault.class);
   }
 
   @Override
