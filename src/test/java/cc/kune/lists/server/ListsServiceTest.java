@@ -117,7 +117,7 @@ public class ListsServiceTest extends IntegrationTest {
   private void subscribeUnsubsSeveral(final StateContainerDTO list) {
     final AccessListsDTO initialAcl = list.getAccessLists();
     assertTrue(initialAcl.getAdmins().includes(userGroup));
-    assertFalse(initialAcl.getEditors().getList().contains(userGroup));
+    assertTrue(initialAcl.getEditors().getList().contains(userGroup));
 
     StateContainerDTO state = listsService.subscribeToList(getHash(), list.getStateToken(), true);
     AccessListsDTO acl = state.getAccessLists();
