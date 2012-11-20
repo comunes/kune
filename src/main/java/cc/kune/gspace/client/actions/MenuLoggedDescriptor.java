@@ -29,7 +29,7 @@ public class MenuLoggedDescriptor extends MenuDescriptor {
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override
       public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
-        MenuLoggedDescriptor.this.setVisible(event.getCurrentRights().isEditable());
+        MenuLoggedDescriptor.this.setVisible(event.getCurrentRights().isVisible());
       }
     });
   }

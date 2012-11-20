@@ -30,6 +30,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateTokenUtils;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.google.gwt.resources.client.ImageResource;
 
@@ -61,7 +62,7 @@ public class AbstractShareInSocialNetMenuItem extends MenuItemDescriptor {
   protected static String getTitle(final Session session) {
     final StateAbstractDTO state = session.getCurrentState();
     final String prefix = session.getCurrentGroupShortName() + ", ";
-    if (state instanceof StateContainerDTO) {
+    if (!(state instanceof StateContentDTO)) {
       return prefix
           + (((StateContainerDTO) state).getContainer().isRoot() ? I18n.t(state.getTitle())
               : state.getTitle());
