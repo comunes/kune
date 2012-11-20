@@ -122,7 +122,8 @@ public class InvitationClientManager {
                   }
                 });
             if (!chatEngine.isBuddy(whoInvitesShortName)) {
-              NotifyUser.askConfirmation(I18n.t("Add [%s] as a buddie", whoInvitesShortName), I18n.t(
+              NotifyUser.askConfirmation(I18n.t("Do you want to add '[%s]' as a buddie?",
+                  whoInvitesShortName), I18n.t(
                   "'[%s]' invited you to this site. Do you want to add him/her as a buddie?",
                   whoInvitesName), new SimpleResponseCallback() {
                 @Override
