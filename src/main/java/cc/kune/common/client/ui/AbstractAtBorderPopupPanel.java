@@ -31,7 +31,7 @@ public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
   protected UIObject showNearObject;
 
   public AbstractAtBorderPopupPanel() {
-    super(false, false);
+    this(false, false);
   }
 
   public AbstractAtBorderPopupPanel(final boolean autohide) {

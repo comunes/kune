@@ -39,7 +39,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -65,7 +64,7 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
     addStyleName("k-popup-bottom-centered");
     // addStyleName("k-top-5corners");
     add(btn);
-    setCenterPositionImpl();
+    showCentered();
     btn.getFocus().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -82,7 +81,7 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
           builder.emptyTextField(i18n.t("Please, edit and write here your feedback about this tool. "
               + "We find your comments very useful, especially "
               + "if you mention the things you would like to see, " + "your personal/group needs, etc."));
-          builder.promptWidth(300).promptLines(6).width("320px").height("120px").firstButtonId(
+          builder.promptWidth(300).promptLines(7).width("320px").height("120px").firstButtonId(
               GIVE_US_FEEDBACK_SEND_BTN_ID).firstButtonTitle(i18n.t("Send")).sndButtonTitle(
               i18n.t("Cancel"));
           diag = builder.build();
@@ -112,10 +111,8 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
           stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN,
               session.getCurrentStateToken().toString()));
         }
-
       }
     });
-
   }
 
   @Override
@@ -123,13 +120,10 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
     setPopupPositionAndShow(new PopupPanel.PositionCallback() {
       @Override
       public void setPosition(final int offsetWidth, final int offsetHeight) {
-        final Widget widget = getWidget();
         final int x = 60;
-        final int y = Window.getClientHeight() - (widget != null ? getWidget().getOffsetHeight() : 0)
-            - 23;
+        final int y = Window.getClientHeight() - offsetHeight + 1;
         FeedbackBottomPanel.this.setPopupPosition(x, y);
       }
     });
   }
-
 }
