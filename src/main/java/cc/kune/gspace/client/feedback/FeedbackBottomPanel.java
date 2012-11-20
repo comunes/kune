@@ -124,9 +124,9 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
       @Override
       public void setPosition(final int offsetWidth, final int offsetHeight) {
         final Widget widget = getWidget();
-        final int x = (Window.getClientWidth() - (widget != null ? getWidget().getOffsetWidth() : 0)) - 140;
+        final int x = 80;
         final int y = Window.getClientHeight() - (widget != null ? getWidget().getOffsetHeight() : 0)
-            - 5;
+            - 23;
         FeedbackBottomPanel.this.setPopupPosition(x, y);
       }
     });

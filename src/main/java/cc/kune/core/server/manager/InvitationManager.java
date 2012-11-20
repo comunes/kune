@@ -63,6 +63,11 @@ public interface InvitationManager extends Manager<Invitation, Long> {
   void confirmInvitationToSite(User user, String invitationHash);
 
   /**
+   * Delete older invitations.
+   */
+  void deleteOlderInvitations();
+
+  /**
    * Gets the invitation via the hash
    * 
    * @param invitationHash

@@ -54,6 +54,7 @@ public class SiteInvitationBtn extends ButtonDescriptor {
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
         final boolean logged = event.isLogged();
         separator.setVisible(logged);
+        SiteInvitationBtn.this.setVisible(logged);
       }
     });
   }

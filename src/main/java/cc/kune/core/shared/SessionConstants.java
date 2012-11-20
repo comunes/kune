@@ -25,13 +25,16 @@ package cc.kune.core.shared;
 public final class SessionConstants {
 
   /** The Constant _AN_HOUR in millisecons */
-  public final static int _AN_HOUR = 1000 * 60 * 60;
+  public final static int _1_HOUR = 1000 * 60 * 60;
 
   /** The Constant _5_HOURS in millisecons */
-  public final static int _5_HOURS = 5 * _AN_HOUR;
+  public final static int _5_HOURS = 5 * _1_HOUR;
 
   /** The Constant A_DAY in millisecons */
-  public final static long A_DAY = _AN_HOUR * 24;
+  public final static long A_DAY = _1_HOUR * 24;
+
+  /** The Constant A_WEEK in millisecons */
+  public final static long A_WEEK = A_DAY * 7;
 
   /** The Constant ANON_SESSION_DURATION. */
   public final static long ANON_SESSION_DURATION = A_DAY;
@@ -39,14 +42,14 @@ public final class SessionConstants {
   /** The Constant ANON_SESSION_DURATION_AFTER_REG. */
   public final static long ANON_SESSION_DURATION_AFTER_REG = A_DAY * 365;
 
+  /** The Constant JSESSIONID. */
+  public static final String JSESSIONID = "JSESSIONID";
+
   /**
    * The Constant MIN_SIGN_IN_FOR_NEWBIES (number of access to kune under that,
    * the user is viewed as a newbie (so, more help is needed)
    */
   public final static long MIN_SIGN_IN_FOR_NEWBIES = 10;
-
-  /** The Constant JSESSIONID. */
-  public static final String JSESSIONID = "JSESSIONID";
   // session duration
   /** The Constant SESSION_DURATION. */
   public final static long SESSION_DURATION = A_DAY * 30; // four weeks login

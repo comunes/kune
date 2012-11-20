@@ -54,7 +54,7 @@ public class EmailNotVerifiedReminder {
         final UserSimpleDTO currentUser = session.getCurrentUser();
         if (!currentUser.isEmailVerified()) {
           final long now = new Date().getTime();
-          if ((currentUser.getCreatedOn() + SessionConstants._AN_HOUR) < now) {
+          if ((currentUser.getCreatedOn() + SessionConstants._1_HOUR) < now) {
             final String link = TextUtils.generateHtmlLink("#" + SiteTokens.PREFS,
                 I18n.t("verify your email"), false);
             NotifyUser.info(I18n.t(

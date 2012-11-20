@@ -1,3 +1,10 @@
+kune (0.3.0+b6) unstable; urgency=low
+
+  * Fix minor issues with feedback and invite btn
+  * Added cron task for old invitation delete
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 20 Nov 2012 03:08:14 +0100
+
 kune (0.3.0+b5) unstable; urgency=low
 
   * CLOSED -task #411: List creator should be added to list by default

@@ -44,8 +44,10 @@ import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.server.notifier.PendingNotification;
 import cc.kune.core.server.persist.DataSourceKune;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.utils.FormattedString;
+import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.domain.InvitationType;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -70,6 +72,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
   public static final Log LOG = LogFactory.getLog(InvitationManagerDefault.class);
   private final KuneBasicProperties basicProperties;
   private final ContainerManager containerManager;
+  private final Provider<EntityManager> em;
   private final InvitationFinder finder;
   private final GroupFinder groupFinder;
   private final I18nLanguageManager i18nLanguageManager;
@@ -86,6 +89,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
       final ContainerManager containerManager, final SocialNetworkManager snManager,
       final ListServerService listService) {
     super(provider, Invitation.class);
+    em = provider;
     this.finder = finder;
     this.notifyService = notifyService;
     this.i18nLanguageManager = i18nLanguageManager;
@@ -144,6 +148,13 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
       throw new IncorrectHashException();
     }
 
+  }
+
+  @Override
+  @KuneTransactional
+  public void deleteOlderInvitations() {
+    final Long aWeekAgo = System.currentTimeMillis() - SessionConstants.A_WEEK;
+    em.get().createQuery("DELETE FROM Invitation i WHERE i.used = true AND i.date <= " + aWeekAgo).executeUpdate();
   }
 
   @Override

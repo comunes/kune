@@ -115,7 +115,7 @@ public class EventAddMenuItem extends MenuItemDescriptor {
         }
         appt.setStart(startDate);
         // http://stackoverflow.com/questions/2527845/how-to-do-calendar-operations-in-java-gwt-how-to-add-days-to-a-dateSessionConstants._AN_HOUR
-        final Date endDate = new Date(startDate.getTime() + SessionConstants._AN_HOUR);
+        final Date endDate = new Date(startDate.getTime() + SessionConstants._1_HOUR);
         appt.setEnd(endDate);
         appt.setTitle(title);
         appt.setStyle(AppointmentStyle.ORANGE);
