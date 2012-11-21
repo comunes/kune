@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -74,6 +74,7 @@ import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPanel;
+import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
