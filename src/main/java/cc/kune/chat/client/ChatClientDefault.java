@@ -59,8 +59,10 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.emite.im.client.roster.SubscriptionManager;
+import com.calclab.emite.im.client.roster.SubscriptionState;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.SubscriptionRequestReceivedEvent;
 import com.calclab.emite.im.client.roster.events.SubscriptionRequestReceivedHandler;
@@ -367,7 +369,8 @@ public class ChatClientDefault implements ChatClient {
   @Override
   public boolean isBuddy(final XmppURI jid) {
     if (roster.isRosterReady()) {
-      if (roster.getItemByJID(jid) != null) {
+      final RosterItem rosterItem = roster.getItemByJID(jid);
+      if (rosterItem != null && rosterItem.getSubscriptionState().equals(SubscriptionState.both)) {
         return true;
       }
     }
