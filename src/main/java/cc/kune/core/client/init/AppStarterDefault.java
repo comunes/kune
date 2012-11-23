@@ -37,8 +37,6 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.CoreConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
@@ -88,16 +86,13 @@ public class AppStarterDefault implements AppStarter {
     siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
       private void continueStart(final InitDataDTO initData) {
         eventBus.fireEvent(new AppStartEvent(initData));
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-          @Override
-          public void execute() {
-            // hideInitialPanels();
-          }
-        });
       }
 
       private void hideInitialPanels() {
-        RootPanel.get("kuneloading").setVisible(false);
+        final RootPanel loadingElement = RootPanel.get("k-home-loading");
+        if (loadingElement != null) {
+          loadingElement.setVisible(false);
+        }
       }
 
       @Override

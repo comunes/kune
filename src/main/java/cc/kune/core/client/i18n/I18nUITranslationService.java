@@ -49,7 +49,9 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class I18nUITranslationService extends I18nTranslationService {
   public interface I18nLanguageChangeNeeded {
     void onChangeNeeded();
@@ -294,6 +296,10 @@ public class I18nUITranslationService extends I18nTranslationService {
     }
     Log.info("Workspace adaptation to language: " + currentLang + " is not in properties");
     return false;
+  }
+
+  public boolean isReady() {
+    return lexicon != null;
   }
 
   @Override

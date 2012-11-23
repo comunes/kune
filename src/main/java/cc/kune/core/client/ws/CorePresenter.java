@@ -20,13 +20,14 @@
 package cc.kune.core.client.ws;
 
 import cc.kune.core.client.i18n.I18nReadyEvent;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
@@ -34,6 +35,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 /**
  * The Class CorePresenter.
  */
+@Singleton
 public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresenter.CoreProxy> {
   @ProxyStandard
   public interface CoreProxy extends Proxy<CorePresenter> {
@@ -41,18 +43,20 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
   public interface CoreView extends View {
   }
 
-  private final AppStarter appStarter;
-
   @Inject
   public CorePresenter(final EventBus eventBus, final CoreView view, final CoreProxy proxy,
-      final AppStarter appStarter) {
+      final AppStarter appStarter, final I18nUITranslationService i18n) {
     super(eventBus, view, proxy);
-    this.appStarter = appStarter;
-  }
+    if (i18n.isReady()) {
+      appStarter.start();
+    }
 
-  @ProxyEvent
-  public void onI18nReady(final I18nReadyEvent event) {
-    appStarter.start();
+    eventBus.addHandler(I18nReadyEvent.getType(), new I18nReadyEvent.I18nReadyHandler() {
+      @Override
+      public void onI18nReady(final I18nReadyEvent event) {
+        appStarter.start();
+      }
+    });
   }
 
   @Override

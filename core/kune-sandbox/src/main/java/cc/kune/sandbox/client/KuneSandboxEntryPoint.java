@@ -28,10 +28,10 @@ import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.common.client.ui.DottedTab;
 import cc.kune.common.client.ui.IconLabel;
-import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.common.client.ui.dialogs.BasicDialog;
 import cc.kune.common.client.ui.dialogs.MessagePanel;
+import cc.kune.common.client.utils.WindowUtils;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -92,6 +92,20 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     testActionToolbar();
 
+    final String defLocale = "en";
+
+    String locale = WindowUtils.getParameter("locale");
+    String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
+
+    for (String id : ids) {
+      RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
+      RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
+      if (someId != null)
+        someId.setVisible(true);
+      else if (defId != null)
+        defId.setVisible(true);
+    }
+
     // testToolpanel();
     // toolSelector.addWidget(new Label("Test"));
 
@@ -114,7 +128,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     DottedTab tab = new DottedTab();
     absolutePanel.add(tab, 400, 400);
 
-    new BlinkAnimation(tab,350).animate(5);
+    new BlinkAnimation(tab, 350).animate(5);
 
     RootPanel.get().add(absolutePanel);
   }
@@ -150,7 +164,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final PushButtonDescriptor pushBtn = new PushButtonDescriptor(action2);
     pushBtn.setPushed(true);
     pushBtn.withText("Push btn").withStyles("k-button");
-    // FIXME when fix the style set also in I18nTranslatorForm.ui.xml (currently is set to "none")
+    // FIXME when fix the style set also in I18nTranslatorForm.ui.xml (currently
+    // is set to "none")
 
     final ToolbarDescriptor toolbar = new ToolbarDescriptor();
 
@@ -335,7 +350,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
         100);
 
-
   }
 
   //
@@ -391,7 +405,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // GWT.create(NotifyLevelImages.class);
     dialog.getBottomPanel().add(new MessagePanel(levelImg, "some message"));
 
-    //final MaskWidget mask = new MaskWidget();
+    // final MaskWidget mask = new MaskWidget();
 
     absolutePanel.add(label, 130, 130);
 

@@ -24,14 +24,19 @@ import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.utils.MetaUtils;
+import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.core.client.state.SiteParameters;
 import cc.kune.wave.client.WebClient.ErrorHandler;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
 /**
@@ -39,6 +44,8 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  */
 public class KuneEntryPoint implements EntryPoint {
 
+  private static final String HOME_IDS_DEF_SUFFIX = "-def";
+  private static final String HOME_IDS_PREFIX = "k-home-";
   public final KuneGinjector ginjector = GWT.create(KuneGinjector.class);
 
   /*
@@ -48,6 +55,7 @@ public class KuneEntryPoint implements EntryPoint {
    */
   @Override
   public void onModuleLoad() {
+    setHomeLocale();
     GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
       @Override
       public void onUncaughtException(final Throwable e) {
@@ -66,53 +74,87 @@ public class KuneEntryPoint implements EntryPoint {
             }.schedule(5000);
           }
         });
-        // e.printStackTrace();
       }
     });
-    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+
+    GWT.runAsync(new RunAsyncCallback() {
       @Override
-      public void execute() {
-        onModuleLoadCont();
+      public void onFailure(final Throwable reason) {
+        GWT.log("Error starting kune");
+      }
+
+      @Override
+      public void onSuccess() {
+        // FIXME: emite is loading (via EmiteBrowserEntryPoint) here! (maybe we
+        // don't need chat)
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            onModuleLoadCont();
+          }
+
+          /**
+           * On module load continue
+           */
+          private void onModuleLoadCont() {
+            DelayedBindRegistry.bind(ginjector);
+            ginjector.getSpinerPresenter();
+
+            ginjector.getSessionExpirationManager();
+            ginjector.getEventLogger();
+            ginjector.getCorePresenter().get().forceReveal();
+            ginjector.getOnAppStartFactory();
+            ginjector.getStateManager();
+            ginjector.getGwtGuiProvider();
+            ginjector.getGroupMembersPresenter();
+
+            /* Tools (order in GUI) */
+            ginjector.getDocsParts();
+            ginjector.getBlogsParts();
+            ginjector.getWikiParts();
+            ginjector.getEventsParts();
+            ginjector.getTasksParts();
+            ginjector.getListsParts();
+            ginjector.getChatParts();
+            ginjector.getBartersParts();
+            ginjector.getTrashParts();
+
+            ginjector.getSiteLogo();
+            ginjector.getChatClient();
+            ginjector.getCoreParts();
+            ginjector.getGSpaceParts();
+            ginjector.getPSpaceParts();
+            ginjector.getHSpaceParts();
+
+            ginjector.getXmlActionsParser();
+            ginjector.getContentViewerSelector().init();
+
+            ginjector.getGlobalShortcutRegister().enable();
+          }
+
+        });
       }
     });
   }
 
   /**
-   * On module load cont.
+   * Home set locale. In ws.html there is some no visible elements with the
+   * different locales and we only show the current locale
    */
-  public void onModuleLoadCont() {
-    DelayedBindRegistry.bind(ginjector);
-    ginjector.getSpinerPresenter();
+  private void setHomeLocale() {
+    final String currentLocale = WindowUtils.getParameter(SiteParameters.LOCALE);
 
-    ginjector.getSessionExpirationManager();
-    ginjector.getEventLogger();
-    ginjector.getCorePresenter().get().forceReveal();
-    ginjector.getOnAppStartFactory();
-    ginjector.getStateManager();
-    ginjector.getGwtGuiProvider();
-    ginjector.getGroupMembersPresenter();
+    final String[] ids = MetaUtils.get("kune.home.ids").split(",[ ]*");
 
-    /* Tools (order in GUI) */
-    ginjector.getDocsParts();
-    ginjector.getBlogsParts();
-    ginjector.getWikiParts();
-    ginjector.getEventsParts();
-    ginjector.getTasksParts();
-    ginjector.getListsParts();
-    ginjector.getChatParts();
-    ginjector.getBartersParts();
-    ginjector.getTrashParts();
-
-    ginjector.getSiteLogo();
-    ginjector.getChatClient();
-    ginjector.getCoreParts();
-    ginjector.getGSpaceParts();
-    ginjector.getPSpaceParts();
-    ginjector.getHSpaceParts();
-
-    ginjector.getXmlActionsParser();
-    ginjector.getContentViewerSelector().init();
-
-    ginjector.getGlobalShortcutRegister().enable();
+    for (final String id : ids) {
+      final RootPanel someElement = RootPanel.get(HOME_IDS_PREFIX + id + "-" + currentLocale);
+      final RootPanel defElement = RootPanel.get(HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX);
+      if (someElement != null) {
+        someElement.setVisible(true);
+      } else if (defElement != null) {
+        defElement.setVisible(true);
+      }
+    }
   }
+
 }

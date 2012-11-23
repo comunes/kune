@@ -20,7 +20,7 @@
   <!-- http://bit.ly/uCiBDm -->
   <extend-property name="locale" values="en,ar,es"/>
   <set-property-fallback name="locale" value="en"/>
-  <set-property name="locale" value="en,ar"/>
+  <set-property name="locale" value="en,ar,es"/>
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave -->

@@ -51,3 +51,7 @@ _sessions
 chromedriver.log
 kune-screencast*
 kune-cc-data
+src/main/webapp/genfilesforspeedtracer/
+src/main/webapp/symbolmanifest.json
+src/main/webapp/symbolsforspeedtracer/
+src/main/webapp/ws/
