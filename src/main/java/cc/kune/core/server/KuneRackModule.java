@@ -49,6 +49,7 @@ import cc.kune.core.server.persist.OpenfireTransactional;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.rack.RackBuilder;
 import cc.kune.core.server.rack.RackModule;
+import cc.kune.core.server.rack.SearchEngineServletFilter;
 import cc.kune.core.server.rack.filters.ForwardFilter;
 import cc.kune.core.server.rack.filters.ListenerFilter;
 import cc.kune.core.server.rack.filters.RedirectFilter;
@@ -150,6 +151,7 @@ public class KuneRackModule implements RackModule {
 
     // builder.at(".*").install(new LogFilter());
     builder.at(".*").install(new GuiceFilter());
+    builder.at(".*").install(new SearchEngineServletFilter());
 
     // NOTE: Commented this while testing Wave
     // builder.at("^/$").install(new RedirectFilter(KUNE_PREFIX + "/"));

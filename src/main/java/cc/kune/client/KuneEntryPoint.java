@@ -27,6 +27,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.state.SiteParameters;
+import cc.kune.core.shared.CoreConstants;
 import cc.kune.wave.client.WebClient.ErrorHandler;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -87,52 +88,55 @@ public class KuneEntryPoint implements EntryPoint {
       public void onSuccess() {
         // FIXME: emite is loading (via EmiteBrowserEntryPoint) here! (maybe we
         // don't need chat)
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-          @Override
-          public void execute() {
-            onModuleLoadCont();
-          }
+        if (WindowUtils.getParameter(CoreConstants.ESCAPED_FRAGMENT_PARAMETER) == null) {
+          Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
 
-          /**
-           * On module load continue
-           */
-          private void onModuleLoadCont() {
-            DelayedBindRegistry.bind(ginjector);
-            ginjector.getSpinerPresenter();
+              onModuleLoadCont();
+            }
 
-            ginjector.getSessionExpirationManager();
-            ginjector.getEventLogger();
-            ginjector.getCorePresenter().get().forceReveal();
-            ginjector.getOnAppStartFactory();
-            ginjector.getStateManager();
-            ginjector.getGwtGuiProvider();
-            ginjector.getGroupMembersPresenter();
+            /**
+             * On module load continue
+             */
+            private void onModuleLoadCont() {
+              DelayedBindRegistry.bind(ginjector);
+              ginjector.getSpinerPresenter();
 
-            /* Tools (order in GUI) */
-            ginjector.getDocsParts();
-            ginjector.getBlogsParts();
-            ginjector.getWikiParts();
-            ginjector.getEventsParts();
-            ginjector.getTasksParts();
-            ginjector.getListsParts();
-            ginjector.getChatParts();
-            ginjector.getBartersParts();
-            ginjector.getTrashParts();
+              ginjector.getSessionExpirationManager();
+              ginjector.getEventLogger();
+              ginjector.getCorePresenter().get().forceReveal();
+              ginjector.getOnAppStartFactory();
+              ginjector.getStateManager();
+              ginjector.getGwtGuiProvider();
+              ginjector.getGroupMembersPresenter();
 
-            ginjector.getSiteLogo();
-            ginjector.getChatClient();
-            ginjector.getCoreParts();
-            ginjector.getGSpaceParts();
-            ginjector.getPSpaceParts();
-            ginjector.getHSpaceParts();
+              /* Tools (order in GUI) */
+              ginjector.getDocsParts();
+              ginjector.getBlogsParts();
+              ginjector.getWikiParts();
+              ginjector.getEventsParts();
+              ginjector.getTasksParts();
+              ginjector.getListsParts();
+              ginjector.getChatParts();
+              ginjector.getBartersParts();
+              ginjector.getTrashParts();
 
-            ginjector.getXmlActionsParser();
-            ginjector.getContentViewerSelector().init();
+              ginjector.getSiteLogo();
+              ginjector.getChatClient();
+              ginjector.getCoreParts();
+              ginjector.getGSpaceParts();
+              ginjector.getPSpaceParts();
+              ginjector.getHSpaceParts();
 
-            ginjector.getGlobalShortcutRegister().enable();
-          }
+              ginjector.getXmlActionsParser();
+              ginjector.getContentViewerSelector().init();
 
-        });
+              ginjector.getGlobalShortcutRegister().enable();
+            }
+
+          });
+        }
       }
     });
   }
