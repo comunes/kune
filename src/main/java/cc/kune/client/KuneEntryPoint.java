@@ -143,15 +143,18 @@ public class KuneEntryPoint implements EntryPoint {
   private void setHomeLocale() {
     final String currentLocale = WindowUtils.getParameter(SiteParameters.LOCALE);
 
-    final String[] ids = MetaUtils.get("kune.home.ids").split(",[ ]*");
+    final String meta = MetaUtils.get("kune.home.ids");
+    if (meta != null) {
+      final String[] ids = meta.split(",[ ]*");
 
-    for (final String id : ids) {
-      final RootPanel someElement = RootPanel.get(HOME_IDS_PREFIX + id + "-" + currentLocale);
-      final RootPanel defElement = RootPanel.get(HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX);
-      if (someElement != null) {
-        someElement.setVisible(true);
-      } else if (defElement != null) {
-        defElement.setVisible(true);
+      for (final String id : ids) {
+        final RootPanel someElement = RootPanel.get(HOME_IDS_PREFIX + id + "-" + currentLocale);
+        final RootPanel defElement = RootPanel.get(HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX);
+        if (someElement != null) {
+          someElement.setVisible(true);
+        } else if (defElement != null) {
+          defElement.setVisible(true);
+        }
       }
     }
   }
