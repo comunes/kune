@@ -27,7 +27,6 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.state.SiteParameters;
-import cc.kune.core.shared.CoreConstants;
 import cc.kune.wave.client.WebClient.ErrorHandler;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -88,7 +87,7 @@ public class KuneEntryPoint implements EntryPoint {
       public void onSuccess() {
         // FIXME: emite is loading (via EmiteBrowserEntryPoint) here! (maybe we
         // don't need chat)
-        if (WindowUtils.getParameter(CoreConstants.ESCAPED_FRAGMENT_PARAMETER) == null) {
+        if (!SiteParameters.isSearchRobot()) {
           Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {

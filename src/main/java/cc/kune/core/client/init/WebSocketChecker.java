@@ -29,6 +29,7 @@ import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.shared.CoreConstants;
 
 import com.google.inject.Inject;
@@ -52,7 +53,7 @@ public class WebSocketChecker {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
-        if (WindowUtils.dontHasWebSocket()) {
+        if (SiteParameters.checkUA() && WindowUtils.dontHasWebSocket()) {
           final String mozLink = TextUtils.generateHtmlLink(CoreConstants.MOZILLA_FF_LINK,
               "Mozilla Firefox");
           NotifyUser.askConfirmation(

@@ -19,14 +19,28 @@
  */
 package cc.kune.core.client.state;
 
+import cc.kune.common.client.utils.WindowUtils;
+
 /**
  * Some common url params like {@link ?locale}
  * 
  */
 public final class SiteParameters {
 
+  /** The Constant ESCAPED_FRAGMENT_PARAMETER is used to make kune searcheable */
+  public static final String ESCAPED_FRAGMENT_PARAMETER = "_escaped_fragment_";
+
   /** The Constant LOCALE force the use of some language. */
   public static final String LOCALE = "locale";
+
+  /** The Constant NO_UA_CHECK, if present, disable the User Agent check */
+  public static final String NO_UA_CHECK = "noua";
+
+  /**
+   * The Constant ONLY_WEBCLIENT indicates if we should only open waves in Wave
+   * webclient (not in the group space). Useful for debugging.
+   */
+  public static final String ONLY_WEBCLIENT = "onlywebclient";
 
   /**
    * The Constant WAVE_AVATARS indicates if we should use avatars in wave panel
@@ -34,11 +48,13 @@ public final class SiteParameters {
    */
   public static final String WAVE_AVATARS_DISABLED = "waveavatarsdisabled";
 
-  /**
-   * The Constant ONLY_WEBCLIENT indicates if we should only open waves in Wave
-   * webclient (not in the group space). Useful for debugging.
-   */
-  public static final String ONLY_WEBCLIENT = "onlywebclient";
+  public static boolean checkUA() {
+    return WindowUtils.getParameter(SiteParameters.NO_UA_CHECK) == null;
+  }
+
+  public static boolean isSearchRobot() {
+    return WindowUtils.getParameter(SiteParameters.ESCAPED_FRAGMENT_PARAMETER) != null;
+  }
 
   public SiteParameters() {
   }

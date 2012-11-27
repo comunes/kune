@@ -34,6 +34,7 @@ import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStopEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.shared.CoreConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
 
@@ -71,14 +72,19 @@ public class AppStarterDefault implements AppStarter {
   }
 
   private void checkNavigatorCompatibility(final NavigatorSupport navSupport) {
-    // http://www.useragentstring.com/pages/useragentstring.php
-    final String userAgent = Navigator.getUserAgent().toLowerCase();
-    Log.info("User agent: " + userAgent);
-    if (UserAgent.isFirefox() || UserAgent.isWebkit() || UserAgent.isAndroid() || UserAgent.isChrome()
-        || UserAgent.isSafari() || UserAgent.isMobileWebkit()) {
+    if (!SiteParameters.checkUA()) {
+      // htmlunit server parsing
       navSupport.onSupported();
     } else {
-      navSupport.onNotSupported();
+      // http://www.useragentstring.com/pages/useragentstring.php
+      final String userAgent = Navigator.getUserAgent().toLowerCase();
+      Log.info("User agent: " + userAgent);
+      if (UserAgent.isFirefox() || UserAgent.isWebkit() || UserAgent.isAndroid() || UserAgent.isChrome()
+          || UserAgent.isSafari() || UserAgent.isMobileWebkit()) {
+        navSupport.onSupported();
+      } else {
+        navSupport.onNotSupported();
+      }
     }
   }
 
