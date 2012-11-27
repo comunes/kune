@@ -368,9 +368,13 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String feedbackOfParam();
 
+  String feedbackOfParamAboutParam();
+
   String finishUsedInButton();
 
   String french();
+
+  String from();
 
   String general();
 
@@ -448,6 +452,16 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String invalidOperation();
 
+  String invitationSent();
+
+  String invite();
+
+  String inviteOthersToParamViaEmail();
+
+  String inviteOthersToThisGroupViaEmail();
+
+  String inviteOthersToThisListViaEmail();
+
   String join();
 
   String joinsIn();
@@ -459,6 +473,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String kuneDevelopmentSite();
 
   String kuneFaq();
+
+  String lastSeenAtParam();
 
   String latestActivityInYourGroups();
 
@@ -495,6 +511,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String markAsNotDone();
 
   String maximizeTheWorkspace();
+
+  String maximizeTheWorkspaceInInboxAndGroupSpace();
 
   String media();
 
@@ -646,6 +664,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String oneRecentConversationUnread();
 
+  String online();
+
   String onlyAdministrators();
 
   String onlyForAuthorizedTranslators();
@@ -720,6 +740,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String pleaseEnterYourEmailAddressYouWillReceiveALinkToCreateANewPasswordViaEmail();
 
+  String pleaseProvideHereACommaSeparatedListOfEmails();
+
   String pleaseSignInAgain();
 
   String pleaseSignInOrRegisterToCreateAGroup();
@@ -788,6 +810,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String resetYourPassword();
 
+  String restoreTheNormalWorkspaceSizeInInboxAndGroupSpace();
+
   String rightNowThePublicWebSpaceOfThisGroupItSUnderConstruction();
 
   String russian();
@@ -834,7 +858,11 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String selectTheLicenseYouPreferUsingForSharingYourGroupContentsWithOtherPeople();
 
+  String send();
+
   String sendedCheckYourEmailForTheVerificationLink();
+
+  String sendInvitationsToOthersViaEmail();
 
   String serverErrorSavingTheTranslation();
 
@@ -847,6 +875,12 @@ public interface KuneConstants extends ConstantsWithLookup {
   String sharedWithGeneralPublicNowAnyoneCanParticipate();
 
   String sharedWithMembers();
+
+  String shareThisInGoogle();
+
+  String shareThisInIdentiCa();
+
+  String shareThisInTwitter();
 
   String shareThisWithGroupMembersEtc();
 
@@ -1074,6 +1108,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String translated();
 
+  String translateFromOtherNonEnglishLanguage();
+
   String translateThis();
 
   String transparentAThemeName();
@@ -1119,6 +1155,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String useTheGnuLicensesRecommendedForFreeSoftwareWorksAndOtherKindOfLicenses();
 
   String verifyYourEmail();
+
+  String viaParamUsedInReferencesSomethingViasomeone();
 
   String visibilityOfYourNetworkChanged();
 
@@ -1185,6 +1223,12 @@ public interface KuneConstants extends ConstantsWithLookup {
   String youCanCollaborativelyEditThisDocumentWithTheMeetingMinutes();
 
   String youCanDropHereContentsToDeleteThen();
+
+  String youCanInviteOthersToJoinThisGroupPleaseProvideHereACommaSeparatedListOfEmailsWhereTheInvitationsWill();
+
+  String youCanInviteOthersToJoinThisListPleaseProvideHereACommaSeparatedListOfEmailsWhereTheInvitationsWillB();
+
+  String youCanInviteOthersToJoinThisSitePleaseProvideHereACommaSeparatedListOfEmailsWhereTheInvitationsWillB();
 
   String youCannotDisableThisToolBecauseItSWhereYourHomePageIsLocatedToDoThatYouHaveToSelectOtherContentAsThe();
 
