@@ -33,13 +33,13 @@ import cc.kune.core.server.persist.KuneTransactional;
 
 import com.google.inject.Inject;
 
-public class CleanInvitationsWeeklyJob implements Job {
+public class CleanInvitationsJob implements Job {
 
-  public static final Log LOG = LogFactory.getLog(CleanInvitationsWeeklyJob.class);
+  public static final Log LOG = LogFactory.getLog(CleanInvitationsJob.class);
   private final InvitationManager invitationManager;
 
   @Inject
-  public CleanInvitationsWeeklyJob(final InvitationManager invitationManager) throws ParseException,
+  public CleanInvitationsJob(final InvitationManager invitationManager) throws ParseException,
       SchedulerException {
     this.invitationManager = invitationManager;
   }
