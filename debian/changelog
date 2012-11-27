@@ -1,3 +1,9 @@
+kune (0.3.0+b7) unstable; urgency=low
+
+  * kune googleable, closes #286 (thanks to Samer)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 27 Nov 2012 15:59:04 +0100
+
 kune (0.3.0+b6) unstable; urgency=low
 
   * Fix minor issues with feedback and invite btn
