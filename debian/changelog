@@ -1,8 +1,10 @@
 kune (0.3.0+b7) unstable; urgency=low
 
-  * kune googleable, closes #286 (thanks to Samer)
+  * kune googleable, closes #286 (thanks to Samer Hassan Collado for the 
+    investigation)
+  * New email template (thanks to Aitor Méndez)
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 27 Nov 2012 15:59:04 +0100
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 27 Nov 2012 18:44:17 +0100
 
 kune (0.3.0+b6) unstable; urgency=low
 
