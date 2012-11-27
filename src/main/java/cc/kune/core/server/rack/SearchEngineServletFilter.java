@@ -56,7 +56,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler, AlertHandler,
     IncorrectnessListener {
 
-  @SuppressWarnings("serial")
   public class QuietCssErrorHandler implements ErrorHandler {
 
     @Override
@@ -107,7 +106,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
             "")
             + "#" + urlWithEscapedFragment;
 
-        LOG.warn("New url with hash: " + newUrl);
+        LOG.info("New url with hash: " + newUrl);
 
         // use the headless browser to obtain an HTML snapshot
         final WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
