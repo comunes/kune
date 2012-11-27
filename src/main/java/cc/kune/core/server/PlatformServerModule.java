@@ -106,6 +106,7 @@ import cc.kune.core.server.rpc.SocialNetworkRPC;
 import cc.kune.core.server.rpc.StatsRPC;
 import cc.kune.core.server.rpc.UserRPC;
 import cc.kune.core.server.scheduler.CronServerTasksManager;
+import cc.kune.core.server.searcheable.SiteMapServlet;
 import cc.kune.core.server.state.StateService;
 import cc.kune.core.server.state.StateServiceDefault;
 import cc.kune.core.server.stats.StatsService;
@@ -202,6 +203,8 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(NotificationSender.class).to(NotificationSenderDefault.class).in(Singleton.class);
     bind(CronServerTasksManager.class).in(Singleton.class);
     bind(XMLActionReader.class).in(Singleton.class);
+    requestStaticInjection(SiteMapServlet.class);
+
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
         outermostCall(new AuthenticatedMethodInterceptor()));
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),

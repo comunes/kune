@@ -33,6 +33,9 @@ import com.google.inject.persist.finder.MaxResults;
 
 public interface GroupFinder {
 
+  @Finder(query = "FROM Group g " + " WHERE (g.groupType != :notgrouptype)" + " ORDER BY createdOn DESC", returnAs = ArrayList.class)
+  public List<Group> getAllExcept(@Named("notgrouptype") final GroupType excludedGroupType);
+
   @Finder(query = "SELECT count(*) FROM Group g")
   public Long count();
 

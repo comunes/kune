@@ -34,6 +34,13 @@ import com.google.inject.persist.finder.FirstResult;
 import com.google.inject.persist.finder.MaxResults;
 
 public interface ContentFinder {
+  @Finder(query = "FROM Content c WHERE " + "((:groupid IN (SELECT ed.id FROM "
+      + "c.container.owner.socialNetwork.accessLists.editors.list AS ed)) OR"
+      + "(:groupid IN (SELECT ad.id FROM "
+      + "c.container.owner.socialNetwork.accessLists.admins.list AS ad)))"
+      + "ORDER BY c.modifiedOn DESC", returnAs = ArrayList.class)
+  public List<Content> allContentsInUserGroup(@Named("groupid") Long groupId);
+
   @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND deletedOn=null ORDER BY lastRevision.title ASC", returnAs = ArrayList.class)
   public List<Content> find2Mime(@Named(GROUP) final String groupShortName,
       @Named(TITLE) final String title, @Named(MIMETYPE) final String mimetype,

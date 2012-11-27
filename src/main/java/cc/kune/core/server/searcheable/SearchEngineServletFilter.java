@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.rack;
+package cc.kune.core.server.searcheable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +52,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * The Class SearchEngineServletFilter. based in
  * https://developers.google.com/webmasters/ajax-crawling/docs/html-snapshot
+ * http
+ * ://coding.smashingmagazine.com/2011/09/27/searchable-dynamic-content-with-
+ * ajax-crawling/
  */
 public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler, AlertHandler,
     IncorrectnessListener {
