@@ -1,3 +1,9 @@
+kune (0.3.0+b8) unstable; urgency=low
+
+  * kune googleable, fixes comment in #286-4
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 28 Nov 2012 23:15:14 +0100
+
 kune (0.3.0+b7) unstable; urgency=low
 
   * kune googleable, closes #286 (thanks to Samer Hassan Collado for the 

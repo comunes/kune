@@ -29,12 +29,10 @@ import cc.kune.domain.Group;
 
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
+import com.google.inject.persist.finder.FirstResult;
 import com.google.inject.persist.finder.MaxResults;
 
 public interface GroupFinder {
-
-  @Finder(query = "FROM Group g " + " WHERE (g.groupType != :notgrouptype)" + " ORDER BY createdOn DESC", returnAs = ArrayList.class)
-  public List<Group> getAllExcept(@Named("notgrouptype") final GroupType excludedGroupType);
 
   @Finder(query = "SELECT count(*) FROM Group g")
   public Long count();
@@ -44,6 +42,9 @@ public interface GroupFinder {
 
   @Finder(query = "SELECT count(*) FROM Group g WHERE g.shortName = :shortName")
   public Long countByShortName(@Named("shortName") final String shortName);
+
+  @Finder(query = "SELECT count(*) FROM Group g WHERE(g.groupType != :notgrouptype)")
+  public Long countExceptType(@Named("notgrouptype") final GroupType excludedGroupType);
 
   @Finder(query = "SELECT count(*) FROM Group g " + " WHERE (g.groupType != :notgrouptype)")
   public Long countGroups(@Named("notgrouptype") final GroupType excludedGroupType);
@@ -75,6 +76,10 @@ public interface GroupFinder {
 
   @Finder(query = "FROM Group g ORDER BY g.shortName ASC", returnAs = ArrayList.class)
   public List<Group> getAll();
+
+  @Finder(query = "FROM Group g WHERE (g.groupType != :notgrouptype)" + " ORDER BY createdOn DESC", returnAs = ArrayList.class)
+  public List<Group> getAllExcept(@MaxResults final int limit, @FirstResult final int init,
+      @Named("notgrouptype") final GroupType excludedGroupType);
 
   @Finder(query = "FROM Group g "
       + " WHERE (g.groupType != :notgrouptype1 AND g.groupType != :notgrouptype2)"

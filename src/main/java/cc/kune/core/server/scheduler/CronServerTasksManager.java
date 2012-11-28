@@ -78,14 +78,15 @@ public class CronServerTasksManager implements ContainerListener {
     LOG.info("Starting cron manager");
     try {
       sched.start();
+      // http://www.ibm.com/developerworks/java/library/j-quartz/#N1010F
       scheduleJob(PendingNotificationImmediateJob.class, "0 */1 * * * ?", "pendinnotifimmediate");
       scheduleJob(PendingNotificationHourlyJob.class, "0 0 * * * ?", "pendingnotifhourly");
       scheduleJob(ClearUpdatedWavesHourlyJob.class, "0 0 * * * ?", "clearupdatedwaveshourly");
-      scheduleJob(PendingNotificationDailyJob.class, "0 5 0 * * ?", "pendingnotifdaily");
-      scheduleJob(EventsCacheClearDailyJob.class, "0 6 0 * * ?", "cleareventscachedaily");
+      scheduleJob(PendingNotificationDailyJob.class, "0 0 0 * * ?", "pendingnotifdaily");
+      scheduleJob(EventsCacheClearDailyJob.class, "0 0 1 * * ?", "cleareventscachedaily");
       scheduleJob(SocialNetworkCacheClearDailyJob.class, "0 6 0 * * ?", "clearcontentcachedaily");
-      scheduleJob(CleanInvitationsJob.class, "0 2 0 * * ?", "clearinvitationsweekly");
-      scheduleJob(GenerateSitemapJob.class, "0 */1 * * * ?", "sitemapdaily");
+      scheduleJob(CleanInvitationsJob.class, "0 0 1 * * ?", "clearinvitationsweekly");
+      scheduleJob(GenerateSitemapJob.class, "0 20 0 * * ?", "sitemapdaily");
     } catch (final SchedulerException e) {
       logError(e);
     } catch (final ParseException e) {

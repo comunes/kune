@@ -61,6 +61,8 @@ public class SiteMapGenerator {
   private static final Double CONTENTS_PRIORITY = 0.8;
 
   private static final Double GROUPS_PRIORITY = 0.9;
+
+  private static final int LIMIT_OF_QUERY = 100;
   public static final Log LOG = LogFactory.getLog(SiteMapGenerator.class);
   private static final double SITE_PRIORITY = 1.0;
   public static final String[] siteUrls = new String[] { SiteTokens.HOME, SiteTokens.GROUP_HOME,
@@ -107,32 +109,39 @@ public class SiteMapGenerator {
       }
 
       // Groups
-      final List<Group> groups = groupFinder.getAllExcept(GroupType.CLOSED);
-      for (final Group group : groups) {
-        final String groupUri = fileDownloadUtils.getUrl(group.getStateToken().toString());
-        final WebSitemapUrl groupUrl = new WebSitemapUrl.Options(groupUri).lastMod(now).priority(
-            GROUPS_PRIORITY).changeFreq(ChangeFreq.DAILY).build();
-        wsg.addUrl(groupUrl);
+      final Long count = groupFinder.countExceptType(GroupType.CLOSED);
+      int i = 0;
+      while (i < count) {
 
-        // Containers
-        for (final Container container : containerFinder.allContainersInUserGroup(group.getId())) {
-          if (container.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
-            final String containerUri = fileDownloadUtils.getUrl(container.getStateToken().toString());
-            final WebSitemapUrl containerUrl = new WebSitemapUrl.Options(containerUri).lastMod(now).priority(
-                CONTENTS_PRIORITY).changeFreq(ChangeFreq.DAILY).build();
-            wsg.addUrl(containerUrl);
-          }
-        }
+        final List<Group> groups = groupFinder.getAllExcept(LIMIT_OF_QUERY, i, GroupType.CLOSED);
+        for (final Group group : groups) {
+          final String groupUri = fileDownloadUtils.getUrl(group.getStateToken().toString());
+          final WebSitemapUrl groupUrl = new WebSitemapUrl.Options(groupUri).lastMod(now).priority(
+              GROUPS_PRIORITY).changeFreq(ChangeFreq.DAILY).build();
+          wsg.addUrl(groupUrl);
 
-        // Contents
-        for (final Content content : contentFinder.allContentsInUserGroup(group.getId())) {
-          if (content.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
-            final String contentUri = fileDownloadUtils.getUrl(content.getStateToken().toString());
-            final WebSitemapUrl contentUrl = new WebSitemapUrl.Options(contentUri).lastMod(
-                new Date(content.getModifiedOn())).priority(CONTENTS_PRIORITY).changeFreq(
-                ChangeFreq.DAILY).build();
-            wsg.addUrl(contentUrl);
+          // Containers
+          for (final Container container : containerFinder.allContainersInUserGroup(group.getId())) {
+            if (container.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
+              final String containerUri = fileDownloadUtils.getUrl(container.getStateToken().toString());
+              final WebSitemapUrl containerUrl = new WebSitemapUrl.Options(containerUri).lastMod(now).priority(
+                  CONTENTS_PRIORITY).changeFreq(ChangeFreq.DAILY).build();
+              wsg.addUrl(containerUrl);
+            }
           }
+
+          // Contents
+          for (final Content content : contentFinder.allContentsInUserGroup(group.getId())) {
+            if (content.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
+              final String contentUri = fileDownloadUtils.getUrl(content.getStateToken().toString());
+              final WebSitemapUrl contentUrl = new WebSitemapUrl.Options(contentUri).lastMod(
+                  new Date(content.getModifiedOn())).priority(CONTENTS_PRIORITY).changeFreq(
+                  ChangeFreq.DAILY).build();
+              wsg.addUrl(contentUrl);
+            }
+          }
+
+          i += LIMIT_OF_QUERY;
         }
       }
 
