@@ -93,6 +93,9 @@ NOTE: This is not needed in development enviroments or when you use a Debian pac
  sudo mkdir -p /var/lib/kune/uploads/
  sudo chown yourUser:yourUser /var/lib/kune/uploads
 
+ sudo mkdir -p /var/lib/kune/sitemap/
+ sudo chown yourUser:yourUser /var/lib/kune/sitemap
+
 You can use other location (see kune.properties).
 
 Configurate hibernate/lucene indexes directories (these are GNU/Linux instructions, Windows developers: look and tune "hibernate.search.default.indexBase" variables in persistence.xml if you want to change indexes destination to other place):

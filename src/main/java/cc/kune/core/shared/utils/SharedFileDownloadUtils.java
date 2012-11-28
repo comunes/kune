@@ -76,7 +76,7 @@ public class SharedFileDownloadUtils {
   }
 
   public String getUrl(final String hash) {
-    return getPrefix() + "#" + HistoryUtils.hashbang(hash);
+    return getPrefix() + "/#" + HistoryUtils.hashbang(hash);
   }
 
   public String getUserAvatar(final String username) {

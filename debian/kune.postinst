@@ -45,6 +45,7 @@ case "$1" in
 	chmod -R 0755 /var/log/kune/
 	chmod -R 0755 /var/lib/kune/uploads
 	chmod -R 0755 /var/lib/kune/lucene/
+	chmod -R 0755 /var/lib/kune/sitemap/
 
 	# http://stackoverflow.com/questions/11680448/is-there-a-mechanism-to-upgrade-create-database-on-a-ubuntu-deb-package
         if dpkg --compare-versions "$oldver" lt 0.3.0+b2; then

@@ -42,6 +42,7 @@ import cc.kune.core.server.notifier.PendingNotificationDailyJob;
 import cc.kune.core.server.notifier.PendingNotificationHourlyJob;
 import cc.kune.core.server.notifier.PendingNotificationImmediateJob;
 import cc.kune.core.server.rack.ContainerListener;
+import cc.kune.core.server.searcheable.GenerateSitemapJob;
 import cc.kune.events.server.utils.EventsCacheClearDailyJob;
 
 import com.google.inject.Inject;
@@ -84,6 +85,7 @@ public class CronServerTasksManager implements ContainerListener {
       scheduleJob(EventsCacheClearDailyJob.class, "0 6 0 * * ?", "cleareventscachedaily");
       scheduleJob(SocialNetworkCacheClearDailyJob.class, "0 6 0 * * ?", "clearcontentcachedaily");
       scheduleJob(CleanInvitationsJob.class, "0 2 0 * * ?", "clearinvitationsweekly");
+      scheduleJob(GenerateSitemapJob.class, "0 */1 * * * ?", "sitemapdaily");
     } catch (final SchedulerException e) {
       logError(e);
     } catch (final ParseException e) {

@@ -139,16 +139,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <servlet-name>Proxy</servlet-name>
     <url-pattern>/http-bind/
     </url-pattern>
+  </servlet-mapping>
   <!-- Kune googleable configuration ========================================================================== -->
-  </servlet-mapping>
-    <servlet>
-    <servlet-name>SiteMap</servlet-name>
-    <servlet-class>cc.kune.core.server.searcheable.SiteMapServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SiteMap</servlet-name>
-    <url-pattern>/sitemap.xml</url-pattern>
-  </servlet-mapping>
   <filter>
     <filter-name>searcheable</filter-name>
     <filter-class>cc.kune.core.server.searcheable.SearchEngineServletFilter</filter-class>

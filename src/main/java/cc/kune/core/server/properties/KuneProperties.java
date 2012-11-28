@@ -78,6 +78,7 @@ public interface KuneProperties {
   String SITE_USER_AVAILABLE_TOOLS = "kune.tools.userSiteAvailableTools";
   String SITE_USER_REGIST_ENABLED_TOOLS = "kune.tools.userRegisEnabledTools";
   String SITE_WAVE_IMPORT_USERNAME_PAIRS = "kune.wave.import.usernamespairs";
+  String SITEMAP_DIR = "kune.sitemap.dir";
   String UI_TRANSLATOR_ENABLED = "kune.ui-translator.enabled";
   String UI_TRANSLATOR_FULL_TRANSLATED_LANGS = "kune.ui-translator.fullTranslatedLanguages";
   String UPLOAD_DELAY_FOR_TEST = "kune.upload.delayfortest";
