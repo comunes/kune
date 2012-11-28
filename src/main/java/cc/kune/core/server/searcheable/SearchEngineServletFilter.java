@@ -135,14 +135,14 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
           final WebRequest webReq = new WebRequest(new URL(newUrl));
           final HtmlPage page = client.getPage(webReq);
 
-          client.waitForBackgroundJavaScriptStartingBefore(30000);
+          client.waitForBackgroundJavaScriptStartingBefore(18000);
 
           // return the snapshot
           response.setCharacterEncoding("UTF-8");
           response.setContentType("text/html; charset=UTF-8");
           client.getAjaxController().processSynchron(page, webReq, false);
 
-          response.getOutputStream().println(page.asXml());
+          response.getOutputStream().write(page.asXml().toString().getBytes());
           client.closeAllWindows();
         } catch (final IOException e) {
           LOG.debug("Error getting page: ", e);
