@@ -27,6 +27,9 @@ public final class SessionConstants {
   /** The Constant _AN_HOUR in millisecons */
   public final static int _1_HOUR = 1000 * 60 * 60;
 
+  /** The Constant _2_HOURS in millisecons */
+  public final static int _2_HOURS = 2 * _1_HOUR;
+
   /** The Constant _5_HOURS in millisecons */
   public final static int _5_HOURS = 5 * _1_HOUR;
 

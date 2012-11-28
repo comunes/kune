@@ -82,7 +82,7 @@ public class UserSessionManager implements UsersOnline {
     try {
       final long diffToLastConnection = (new Date()).getTime()
           - presenceManager.getLastConnected(shortname);
-      return diffToLastConnection < SessionConstants._1_HOUR;
+      return diffToLastConnection < SessionConstants._2_HOURS;
     } catch (final NoResultException e) {
       return false;
     }
