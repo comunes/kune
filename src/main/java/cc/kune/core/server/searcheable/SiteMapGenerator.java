@@ -31,6 +31,7 @@ import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.persistence.file.FileUtils;
 
 import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.utils.AbsoluteFileDownloadUtils;
 import cc.kune.core.shared.domain.GroupListMode;
@@ -94,6 +95,7 @@ public class SiteMapGenerator {
     }
   }
 
+  @KuneTransactional
   public void generate() {
     final Date now = new Date();
 

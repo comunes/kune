@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.google.inject.Singleton;
 
 /**
  * The Class SearchEngineServletFilter. based in
@@ -56,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * ://coding.smashingmagazine.com/2011/09/27/searchable-dynamic-content-with-
  * ajax-crawling/
  */
+@Singleton
 public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler, AlertHandler,
     IncorrectnessListener {
 
@@ -77,6 +79,8 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
 
   public static final Log LOG = LogFactory.getLog(SearchEngineServletFilter.class);
 
+  private WebClient client;
+
   private final Object waitForUnload = new Object();
 
   /*
@@ -87,6 +91,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
    */
   @Override
   public void destroy() {
+    client.closeAllWindows();
   }
 
   @Override
@@ -110,9 +115,6 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
             + "#" + urlWithEscapedFragment;
 
         LOG.info("New url with hash: " + newUrl);
-
-        // use the headless browser to obtain an HTML snapshot
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
 
         try {
           client.setUseInsecureSSL(true);
@@ -143,7 +145,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
           client.getAjaxController().processSynchron(page, webReq, false);
 
           response.getOutputStream().write(page.asXml().toString().getBytes());
-          client.closeAllWindows();
+
         } catch (final IOException e) {
           LOG.debug("Error getting page: ", e);
         }
@@ -175,6 +177,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
 
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
+    client = new WebClient(BrowserVersion.FIREFOX_3_6);
   }
 
   @Override
