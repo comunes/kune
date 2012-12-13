@@ -105,7 +105,7 @@ public class UserFieldFactory {
   }
 
   public static String getRegisterLink() {
-    return getRegisterLink(I18n.tWithNT("register", "register, in lowercase"), null);
+    return getRegisterLink(I18n.t("register"), null);
   }
 
   public static String getRegisterLink(final String withText, final String redirect) {
@@ -125,7 +125,7 @@ public class UserFieldFactory {
         + HistoryUtils.PREFIX
         + (TextUtils.empty(redirect) ? SiteTokens.SIGN_IN : TokenUtils.addRedirect(SiteTokens.SIGN_IN,
             redirect));
-    return TextUtils.generateHtmlLink(href, I18n.tWithNT("sign in", "register, in lowercase"), false);
+    return TextUtils.generateHtmlLink(href, I18n.t("sign in"), false);
   }
 
 }
