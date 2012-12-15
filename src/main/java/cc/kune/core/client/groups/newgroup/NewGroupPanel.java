@@ -185,19 +185,19 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     tag.setId(TAGS_FIELD);
     tag.setWidth(DefaultForm.BIG_FIELD_WIDTH);
     tag.setAllowBlank(false);
-    Tooltip.to(tag, i18n.t("Type some keywords that define your group"));
+    Tooltip.to(tag, i18n.t("Type some comma-separated keywords that define your group"));
     tag.setValidationDelay(1000);
     return tag;
   }
 
   @Override
-  public void focusOnShortName() {
-    shortNameField.focus();
+  public void focusOnLongName() {
+    longNameField.focus();
   }
 
   @Override
-  public void focusOnLongName() {
-    longNameField.focus();
+  public void focusOnShortName() {
+    shortNameField.focus();
   }
 
   @Override
