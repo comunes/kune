@@ -164,6 +164,8 @@ NOTE: Compilation will be mandatory when you aim to build the DEB package. In th
 
 NOTE: If you want to run Server in debug mode, you should run "kune server via mvn with debug.launch" (then you will see the [DEBUG] comments in the Eclipse Console). If you want to run the Client in debug mode, you can run it using the Debug icon, as usual in Java programs.
 
+NOTE: If you have errors or problems during compilation or launching, check out the TROUBLESHOOT file for help. If you are still unable to solve it, contact the Kune developers (http://kune.ourproject.org/contact/ ) and we'll try to help you. 
+
 ==== Optionally ==== 
 
 You can run the server via bin/server.sh (you can also run the server in debug mode, see TROUBLESHOOT or -h for help). This is quite useful to put breakpoints in the server code.
