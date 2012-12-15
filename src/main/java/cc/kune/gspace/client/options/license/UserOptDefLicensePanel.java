@@ -29,6 +29,7 @@ public class UserOptDefLicensePanel extends EntityOptDefLicensePanel implements 
   @Inject
   public UserOptDefLicensePanel(final I18nTranslationService i18n, final IconicResources res) {
     super(i18n, res);
+    getIntro().setText(
+        i18n.t("This is the default license for all the contents of your personal space (although you can choose a different license for specific contents):"));
   }
-
 }

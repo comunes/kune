@@ -41,6 +41,7 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
 
   public static final String TAB_ID = "k-eodlp-lic-id";
   private final Button change;
+  private final Label intro;
   private final Image licenseImage;
   private final IconLabel tabTitle;
 
@@ -48,7 +49,7 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
     tabTitle = TabTitleGenerator.generate(res.copyleftWhite(), i18n.t("License"), MAX_TABTITLE_LENGTH,
         TAB_ID);
     final FlowPanel flow = new FlowPanel();
-    final Label intro = new Label();
+    intro = new Label();
     intro.setWordWrap(true);
     intro.setText(i18n.t("This is the default license for all the contents of this group (although you can choose a different license for specific contents):"));
     intro.addStyleName("kune-Margin-20-tb");
@@ -70,6 +71,10 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
   @Override
   public HasClickHandlers getChange() {
     return change;
+  }
+
+  public Label getIntro() {
+    return intro;
   }
 
   @Override
