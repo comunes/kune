@@ -26,6 +26,8 @@ The gwt compiler is trying to create a sprite sheet, an image with all the icons
 
 Be sure to do mvn compile (that copy them to the target directory)
 
+** Guice-related errors
+See Mysql => Other mysql errors
 ** Mysql
 *** Mysql: Caused by: java.sql.SQLException: Access denied for user 'kune'@'localhost' (using password: YES)
 
@@ -47,12 +49,13 @@ If you get this warning, probably you have connection problems between kune and 
 WARNING: Multiple Servlet injectors detected. This is a warning indicating that you have more than one GuiceFilter running in your web application. If this is deliberate, you may safely ignore this message. If this is NOT deliberate however, your application may not work as expected.
 
 A check list:
-- these files should be the same:
-  diff src/main/resources/kune.properties target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/kune.properties
+- These files should be the same:
+    diff src/main/resources/kune.properties target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/kune.properties
   and:
-  diff src/main/resources/META-INF/persistence.xml target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml
-  if not "mvn compile -Dliquibase.should.run=false"
-also check the persistence unit that you are using and find that name in persistence.xml (we are using development, but can be other). The db user/password configured in kune.properties for that name should be the same to that one you used in the GRANT sentence of mysql database creation.
+    diff src/main/resources/META-INF/persistence.xml target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml
+  otherwise, run
+    "mvn compile -Dliquibase.should.run=false"
+- Also check the persistence unit that you are using and find that name in persistence.xml (we are using development, but can be other). The db user/password configured in kune.properties for that name should be the same to that one you used in the GRANT sentence of mysql database creation.
 
 To debug mysql logs, you can uncomment:
 #general_log_file        = /var/log/mysql/mysql.log
