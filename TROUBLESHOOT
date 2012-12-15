@@ -3,9 +3,9 @@ TROUBLESHOOTING for kune -*- mode: org; -*-
 
 * TROUBLESHOOTING
 
-** Kune server start hangs in "INFO: Starting server"
+** Starting Kune server hangs in "INFO: Starting server"
 
-This happens probably because some directory of 'resource_bases' in wave-server.properties doesn't exist. Please create o configure this variable correctly.
+This probably happens because a directory of 'resource_bases' in wave-server.properties doesn't exist. Please create or configure this variable correctly, or make sure the missing directory exists.
 
 ** Too many files open
 
