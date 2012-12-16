@@ -37,10 +37,33 @@ public class TextUtils {
 
   public static final String NUM_REGEXP = "^[0-9]+$";
 
-  public static final String SHORTNAME_REGEXP = "^[a-z0-9]+$";
+  /**
+   * Contains a list of all the characters that map one to one for UNICODE.
+   */
+  private static final String PLAIN_ASCII = "AaEeIiOoUu" // grave
+      + "AaEeIiOoUuYy" // acute
+      + "AaEeIiOoUuYy" // circumflex
+      + "AaEeIiOoUuYy" // tilde
+      + "AaEeIiOoUuYy" // umlaut
+      + "Aa" // ring
+      + "Cc" // cedilla
+      + "Nn" // n tilde (spanish)
+  ;
 
+  public static final String SHORTNAME_REGEXP = "^[a-z0-9]+$";
   public static final String SHORTNAME_UPPER_REGEXP = "^[a-zA-Z0-9]+$";
+  /**
+   * Actual accented values, corresponds one to one with ASCII
+   */
+  private static final String UNICODE = "\u00C0\u00E0\u00C8\u00E8\u00CC\u00EC\u00D2\u00F2\u00D9\u00F9"
+      + "\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DD\u00FD"
+      + "\u00C2\u00E2\u00CA\u00EA\u00CE\u00EE\u00D4\u00F4\u00DB\u00FB\u0176\u0177"
+      + "\u00C2\u00E2\u00CA\u00EA\u00CE\u00EE\u00D4\u00F4\u00DB\u00FB\u0176\u0177"
+      + "\u00C4\u00E4\u00CB\u00EB\u00CF\u00EF\u00D6\u00F6\u00DC\u00FC\u0178\u00FF" + "\u00C5\u00E5"
+      + "\u00C7\u00E7" + "\u00D1\u00F1";
+
   public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
+
   // Original regexp from http://snippets.dzone.com/posts/show/452
   public static final String URL_REGEXP = "((ftp|http|https|mailto):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?)";
 
@@ -137,6 +160,28 @@ public class TextUtils {
     }
     str = str.toLowerCase();
     return capitalize(str, delimiters);
+  }
+
+  /**
+   * Removes accents from a string and replace it with ASCII equivalent (á => a)
+   * 
+   * @param s
+   *          The string to englishify
+   * @return The string without the accents.
+   */
+  public static String deAccent(final String s) {
+    final StringBuilder b = new StringBuilder();
+    final int n = s.length();
+    for (int i = 0; i < n; i++) {
+      final char c = s.charAt(i);
+      final int pos = UNICODE.indexOf(c);
+      if (pos > -1) {
+        b.append(PLAIN_ASCII.charAt(pos));
+      } else {
+        b.append(c);
+      }
+    }
+    return b.toString();
   }
 
   private static String defaultString(final String str) {

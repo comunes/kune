@@ -21,6 +21,7 @@ package cc.kune.core.client.groups.newgroup;
 
 import cc.kune.common.client.notify.NotifyLevel;
 
+import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -30,15 +31,17 @@ public interface NewGroupView extends View {
 
   void clearData();
 
-  void focusOnShortName();
-
   void focusOnLongName();
+
+  void focusOnShortName();
 
   HasCloseHandlers<PopupPanel> getClose();
 
   HasClickHandlers getFirstBtn();
 
   String getLongName();
+
+  TextField<String> getLongNameField();
 
   String getPublicDesc();
 
@@ -64,9 +67,13 @@ public interface NewGroupView extends View {
 
   void maskProcessing();
 
+  void setLongName(final String longName);
+
   void setLongNameFailed(final String msg);
 
   void setMessage(String message, NotifyLevel level);
+
+  void setShortName(final String shortName);
 
   void setShortNameFailed(final String msg);
 

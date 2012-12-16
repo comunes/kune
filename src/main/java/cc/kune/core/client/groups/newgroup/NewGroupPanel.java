@@ -75,6 +75,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   private TextArea publicDescField;
 
   private TextField<String> shortNameField;
+
   private TextField<String> tag1;
 
   // private TextField<String> tag2;
@@ -216,6 +217,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   }
 
   @Override
+  public TextField<String> getLongNameField() {
+    return longNameField;
+  }
+
+  @Override
   public String getPublicDesc() {
     return publicDescField.getValue();
   }
@@ -280,6 +286,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   }
 
   @Override
+  public void setLongName(final String longName) {
+    longNameField.setValue(longName);
+  }
+
+  @Override
   public void setLongNameFailed(final String msg) {
     longNameField.markInvalid(msg);
   }
@@ -287,6 +298,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   @Override
   public void setMessage(final String message, final NotifyLevel level) {
     messageErrorBar.setErrorMessage(message, level);
+  }
+
+  @Override
+  public void setShortName(final String shortName) {
+    shortNameField.setValue(shortName);
   }
 
   @Override
