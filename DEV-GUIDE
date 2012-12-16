@@ -388,8 +388,8 @@ Any test class can be run independently as a JUnit Test. It is recommended to se
 NOTE: For automatic running of tests online, see the next section on Continuous Integration.
 
 ===Jenkins Continuous Integration Server===
-We use Jenkins as our continuous integration tool. It automatically runs our collection of JUnit tests. The Jenkins instance is located in:
-http://ci.comunes.org
+We use Jenkins as our continuous integration tool. After each commit, it automatically runs the full collection of JUnit tests. The Jenkins instance is located in:
+  http://ci.comunes.org
 
 ==Code samples==
 
