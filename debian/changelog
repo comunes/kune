@@ -1,8 +1,12 @@
 kune (0.3.0+b9) unstalbe; urgency=low
 
+  [ Vicente J. Ruiz Jurado ]
   * Tunning issue #286
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 04 Dec 2012 00:34:56 +0100
+  [ Samer ]
+  * NewGroup: Suggest short name based on long name, #396
+
+ -- Samer <samer@ourproject.org>  Sun, 16 Dec 2012 18:54:41 +0100
 
 kune (0.3.0+b8) unstable; urgency=low
 
