@@ -918,6 +918,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String signOutOfChat();
 
+  String slovenian();
+
   String someFunctionalitiesSuchAsConcurrentEditionWillThenWorkProperlyContinueAnyway();
 
   String sorryThisGadgetHasProblemsWithItsnHeightWeHopeThisWillBeFixedSoonn();
@@ -1069,6 +1071,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String thisNameInAlreadyInUsePleaseTryWithADifferentName();
 
   String thisNameIsAlreadyInUsePleaseTryWithADifferentName();
+
+  String thisNameIsNotPermittedItIsUsedWhenAFileOrAFolderDoesNotHaveAPermittedName();
 
   String thisSite();
 
