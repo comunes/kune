@@ -41,6 +41,7 @@ import cc.kune.core.client.state.SiteParameters;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
@@ -55,7 +56,11 @@ import com.google.inject.Singleton;
  * https://developers.google.com/webmasters/ajax-crawling/docs/html-snapshot
  * http
  * ://coding.smashingmagazine.com/2011/09/27/searchable-dynamic-content-with-
- * ajax-crawling/
+ * ajax-crawling/ and
+ * http://code.google.com/p/google-web-toolkit/source/browse/branches
+ * /crawlability
+ * /samples/showcase/src/com/google/gwt/sample/showcase/server/CrawlServlet
+ * .java?r=6231
  */
 @Singleton
 public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler, AlertHandler,
@@ -79,7 +84,11 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
 
   public static final Log LOG = LogFactory.getLog(SearchEngineServletFilter.class);
 
-  private WebClient client;
+  private static final int TIMEOUT = 20000;
+
+  private Cache cache;
+
+  private FilterConfig filterConfig;
 
   private final Object waitForUnload = new Object();
 
@@ -91,12 +100,16 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
    */
   @Override
   public void destroy() {
-    client.closeAllWindows();
+    this.filterConfig = null;
   }
 
   @Override
   public void doFilter(final ServletRequest request, final ServletResponse response,
       final FilterChain chain) throws IOException {
+    if (filterConfig == null) {
+      return;
+    }
+
     if (request instanceof HttpServletRequest) {
 
       final HttpServletRequest httpReq = (HttpServletRequest) request;
@@ -115,6 +128,8 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
             + "#" + urlWithEscapedFragment;
 
         LOG.info("New url with hash: " + newUrl);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
+        client.setCache(cache);
 
         try {
           client.setUseInsecureSSL(true);
@@ -131,6 +146,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
         client.setOnbeforeunloadHandler(this);
         client.setAlertHandler(this);
         client.setIncorrectnessListener(this);
+        client.setTimeout(TIMEOUT);
 
         client.setAjaxController(new NicelyResynchronizingAjaxController());
         try {
@@ -143,9 +159,8 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
           response.setCharacterEncoding("UTF-8");
           response.setContentType("text/html; charset=UTF-8");
           client.getAjaxController().processSynchron(page, webReq, false);
-
           response.getOutputStream().write(page.asXml().toString().getBytes());
-
+          client.closeAllWindows();
         } catch (final IOException e) {
           LOG.debug("Error getting page: ", e);
         }
@@ -177,7 +192,8 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
 
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
-    client = new WebClient(BrowserVersion.FIREFOX_3_6);
+    this.filterConfig = filterConfig;
+    cache = new Cache();
   }
 
   @Override
