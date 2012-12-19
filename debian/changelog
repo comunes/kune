@@ -1,4 +1,10 @@
-kune (0.3.0+b10) precise; urgency=low
+kune (0.3.0+b11) precise; urgency=low
+
+  * Fix for memory leaks in htmlunit (issue #268)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 19 Dec 2012 02:42:56 +0100
+
+kune (0.3.0+b10) unstable; urgency=low
 
   * More tunning on issue #286
   * Languages updated, added Slovenian (thanks to David Starina)

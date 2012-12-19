@@ -22,6 +22,12 @@ package cc.kune.core.server.searcheable;
 import java.io.IOException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -84,9 +90,13 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
 
   public static final Log LOG = LogFactory.getLog(SearchEngineServletFilter.class);
 
+  private static final int THREADS = 10;
+
   private static final int TIMEOUT = 20000;
 
   private Cache cache;
+
+  private ExecutorService executor;
 
   private FilterConfig filterConfig;
 
@@ -101,6 +111,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
   @Override
   public void destroy() {
     this.filterConfig = null;
+    shutdownAndAwaitTermination(executor);
   }
 
   @Override
@@ -118,51 +129,72 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
       final String queryString = httpReq.getQueryString();
 
       if ((queryString != null) && (queryString.contains(SiteParameters.ESCAPED_FRAGMENT_PARAMETER))) {
-        // rewrite the URL back to the original #! version
-        // remember to unescape any %XX characters
-        final String urlWithEscapedFragment = request.getParameter(SiteParameters.ESCAPED_FRAGMENT_PARAMETER);
+        final Future<String> result = executor.submit(new Callable<String>() {
 
-        final String newUrl = url.append("?").append(queryString).toString().replaceFirst(
-            SiteParameters.ESCAPED_FRAGMENT_PARAMETER, SiteParameters.NO_UA_CHECK).replaceFirst("/ws",
-            "")
-            + "#" + urlWithEscapedFragment;
+          @Override
+          public String call() throws Exception {
+            // rewrite the URL back to the original #! version
+            // remember to unescape any %XX characters
+            final String urlWithEscapedFragment = request.getParameter(SiteParameters.ESCAPED_FRAGMENT_PARAMETER);
+            final String newUrl = url.append("?").append(queryString).toString().replaceFirst(
+                SiteParameters.ESCAPED_FRAGMENT_PARAMETER, SiteParameters.NO_UA_CHECK).replaceFirst(
+                "/ws", "")
+                + "#" + urlWithEscapedFragment;
 
-        LOG.info("New url with hash: " + newUrl);
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
-        client.setCache(cache);
+            LOG.info("New url with hash: " + newUrl);
+            final WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
+            client.setCache(cache);
+            try {
+              client.setUseInsecureSSL(true);
+            } catch (final GeneralSecurityException e) {
+              LOG.error("Servlet exception caught: " + e);
+            }
+            client.setCssErrorHandler(new QuietCssErrorHandler());
+            client.setCssEnabled(true);
+            client.setJavaScriptTimeout(20000);
+            client.setThrowExceptionOnScriptError(true);
+            client.setThrowExceptionOnFailingStatusCode(false);
+            client.setJavaScriptEnabled(true);
+            client.setRedirectEnabled(true);
+            client.setOnbeforeunloadHandler(SearchEngineServletFilter.this);
+            client.setAlertHandler(SearchEngineServletFilter.this);
+            client.setIncorrectnessListener(SearchEngineServletFilter.this);
+            client.setTimeout(TIMEOUT);
 
+            client.setAjaxController(new NicelyResynchronizingAjaxController());
+            try {
+              final WebRequest webReq = new WebRequest(new URL(newUrl));
+              final HtmlPage page = client.getPage(webReq);
+
+              client.waitForBackgroundJavaScriptStartingBefore(18000);
+
+              // return the snapshot
+              response.setCharacterEncoding("UTF-8");
+              response.setContentType("text/html; charset=UTF-8");
+              client.getAjaxController().processSynchron(page, webReq, false);
+              final String pageAsXml = page.asXml().toString();
+              page.cleanUp();
+              page.remove();
+              client.closeAllWindows();
+              return pageAsXml;
+            } catch (final IOException e) {
+              LOG.debug("Error getting page: ", e);
+              throw e;
+            }
+          }
+
+        });
         try {
-          client.setUseInsecureSSL(true);
-        } catch (final GeneralSecurityException e) {
-          LOG.error("Servlet exception caught: " + e);
-        }
-        client.setCssErrorHandler(new QuietCssErrorHandler());
-        client.setCssEnabled(true);
-        client.setJavaScriptTimeout(20000);
-        client.setThrowExceptionOnScriptError(true);
-        client.setThrowExceptionOnFailingStatusCode(false);
-        client.setJavaScriptEnabled(true);
-        client.setRedirectEnabled(true);
-        client.setOnbeforeunloadHandler(this);
-        client.setAlertHandler(this);
-        client.setIncorrectnessListener(this);
-        client.setTimeout(TIMEOUT);
-
-        client.setAjaxController(new NicelyResynchronizingAjaxController());
-        try {
-          final WebRequest webReq = new WebRequest(new URL(newUrl));
-          final HtmlPage page = client.getPage(webReq);
-
-          client.waitForBackgroundJavaScriptStartingBefore(18000);
-
+          final String page = result.get();
           // return the snapshot
           response.setCharacterEncoding("UTF-8");
           response.setContentType("text/html; charset=UTF-8");
-          client.getAjaxController().processSynchron(page, webReq, false);
-          response.getOutputStream().write(page.asXml().toString().getBytes());
-          client.closeAllWindows();
-        } catch (final IOException e) {
-          LOG.debug("Error getting page: ", e);
+          response.getOutputStream().write(page.getBytes());
+        } catch (final InterruptedException e) {
+          LOG.error(e);
+        } catch (final ExecutionException e) {
+          LOG.error(e);
+          e.printStackTrace();
         }
       } else {
         try {
@@ -194,6 +226,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
   public void init(final FilterConfig filterConfig) throws ServletException {
     this.filterConfig = filterConfig;
     cache = new Cache();
+    executor = Executors.newFixedThreadPool(THREADS);
   }
 
   @Override
@@ -205,6 +238,25 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
       return;
     }
     LOG.warn(message);
+  }
+
+  void shutdownAndAwaitTermination(final ExecutorService pool) {
+    pool.shutdown(); // Disable new tasks from being submitted
+    try {
+      // Wait a while for existing tasks to terminate
+      if (!pool.awaitTermination(30, TimeUnit.SECONDS)) {
+        pool.shutdownNow(); // Cancel currently executing tasks
+        // Wait a while for tasks to respond to being cancelled
+        if (!pool.awaitTermination(30, TimeUnit.SECONDS)) {
+          System.err.println("Pool did not terminate");
+        }
+      }
+    } catch (final InterruptedException ie) {
+      // (Re-)Cancel if current thread also interrupted
+      pool.shutdownNow();
+      // Preserve interrupt status
+      Thread.currentThread().interrupt();
+    }
   }
 
 }
