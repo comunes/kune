@@ -164,6 +164,8 @@ NOTE: Compilation will be mandatory when you aim to build the DEB package. In th
 
 NOTE: If you want to run Server in debug mode, you should run "kune server via mvn with debug.launch" (then you will see the [DEBUG] comments in the Eclipse Console). If you want to run the Client in debug mode, you can run it using the Debug icon, as usual in Java programs.
 
+NOTE: If you have errors or problems during compilation or launching, check out the TROUBLESHOOT file for help. If you are still unable to solve it, contact the Kune developers (http://kune.ourproject.org/contact/ ) and we'll try to help you. 
+
 ==== Optionally ==== 
 
 You can run the server via bin/server.sh (you can also run the server in debug mode, see TROUBLESHOOT or -h for help). This is quite useful to put breakpoints in the server code.
@@ -374,6 +376,21 @@ http://www.redmine.org/projects/redmine/wiki/HowTo_Mylyn
 Besides it is recommended to use EGit for Mylyn plugin:
 http://www.javaforge.com/project/EGIT
 
+==Testing==
+
+===JUnit tests===
+We recommend and use JUnit (in combination with Mockito as mocking framework) for testing. Besides, it is recommended to define tests frequently in the Kune code, which is organised as follows:
+- src/main/java: Kune source code
+- src/test/java: Kune JUnit tests source code
+
+Any test class can be run independently as a JUnit Test. It is recommended to set up tests frequently and test them locally before committing the changes. Besides, there is a ".launch" to run all the "kune tests" locally. 
+
+NOTE: For automatic running of tests online, see the next section on Continuous Integration.
+
+===Jenkins Continuous Integration Server===
+We use Jenkins as our continuous integration tool. After each commit, it automatically runs the full collection of JUnit tests. The Jenkins instance is located in:
+  http://ci.comunes.org
+
 ==Code samples==
 
 See HelloWorld*.java classes for a small sample of how to develop and extend the GWT workspace UI.
@@ -432,9 +449,9 @@ We usually upload new packages to this repo via bin/repopubli.sh
 
 ==Changelog==
 
-When doing a GIT commit, you should provide an appropriate description of your changes. 
+When doing a GIT commit, you should always provide an appropriate description of your changes. 
 
-You should update the Changelog (in "debian/changelog" ) using "dch". You should include there all the comments of each commit. This changelog will be included in the DEB package.
+After relevant commits, you should also update the Changelog (in "debian/changelog" ) using "dch". You should include there all the comments of the commit. This changelog will be included in the DEB package.
 
 NOTE: If you don't have "dch", install it in Debian/Ubuntu/related: 'apt-get install devscripts'
 
@@ -511,6 +528,4 @@ It is recommended to be subscribed to both mailing lists and especially to the K
 
 Follow @kuneproject in twitter and identica. 
 
-===Jenkins Continuous Integration Server===
 
-http://ci.comunes.org

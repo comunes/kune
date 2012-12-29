@@ -31,6 +31,7 @@ public class UserOptStylePanel extends EntityOptStylePanel implements UserOptSty
   public UserOptStylePanel(final I18nTranslationService i18n, final IconicResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
     super(i18n, res, styleSelector);
+    this.getWsThemeInfo().setText(i18n.t("Change the theme of your personal space:"));
   }
 
 }

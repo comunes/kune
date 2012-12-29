@@ -58,6 +58,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   private final String noHasBacklabel;
   private final IconLabel tabTitle;
   private final EntityUploaderForm uploader;
+  private final Label wsThemeInfo;
 
   public EntityOptStylePanel(final I18nTranslationService i18n, final IconicResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
@@ -67,7 +68,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     super.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
 
     final FlowPanel flow = new FlowPanel();
-    final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));
+    wsThemeInfo = new Label(i18n.t("Change the group workspace theme:"));
     flow.addStyleName("kune-Margin-20-tb");
     wsThemeInfo.addStyleName("k-fl");
     styleSelector.addStyleName("k-fl");
@@ -155,6 +156,10 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   @Override
   public IsWidget getTabTitle() {
     return tabTitle;
+  }
+
+  public Label getWsThemeInfo() {
+    return wsThemeInfo;
   }
 
   @Override

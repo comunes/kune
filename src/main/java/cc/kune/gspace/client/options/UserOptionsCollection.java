@@ -41,8 +41,8 @@ public class UserOptionsCollection extends ProvidersCollection {
       final Provider<UserOptStyle> ups, final Provider<UserOptDefLicense> udl) {
     add(ug);
     add(up);
-    add(utc);
     add(ul);
+    add(utc);
     add(ups);
     add(udl);
   }

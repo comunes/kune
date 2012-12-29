@@ -35,12 +35,13 @@ public final class SiteParameters {
 
   /** The Constant NO_UA_CHECK, if present, disable the User Agent check */
   public static final String NO_UA_CHECK = "noua";
-
   /**
    * The Constant ONLY_WEBCLIENT indicates if we should only open waves in Wave
    * webclient (not in the group space). Useful for debugging.
    */
   public static final String ONLY_WEBCLIENT = "onlywebclient";
+  /** The Constant UA_CHECK, if present, enable the User Agent check */
+  public static final String UA_CHECK = "ua";
 
   /**
    * The Constant WAVE_AVATARS indicates if we should use avatars in wave panel

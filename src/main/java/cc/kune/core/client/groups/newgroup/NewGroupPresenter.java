@@ -23,6 +23,7 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
@@ -44,6 +45,8 @@ import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -109,6 +112,32 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     });
   }
 
+  /**
+   * Automatically generate a "short name" for a group, after typing the
+   * "long name":
+   */
+  protected String generateShortName() {
+    String autoGenShort = getView().getLongName();
+    // If there is a short-name, no automatic generation (for not stepping on
+    // manually inserted modifications, and doing it just once)
+    // If under 3 chars, incorrect LongName => no automatic generation
+    if (getView().getShortName() == null && autoGenShort != null && autoGenShort.length() > 2) {
+      // to lower-case, transformed accented letters into English characters:
+      autoGenShort = TextUtils.deAccent(autoGenShort.toLowerCase());
+      // remove not alphanumeric characters
+      autoGenShort = autoGenShort.replaceAll("[^a-zA-Z0-9]", "");
+      // guarantee <30 chars:
+      if (autoGenShort.length() > 30) {
+        autoGenShort = autoGenShort.substring(0, 29);
+      }
+      if (!autoGenShort.isEmpty() && autoGenShort.length() > 2) {
+        getView().setShortName(autoGenShort);
+        return autoGenShort;
+      }
+    }
+    return null;
+  }
+
   private GroupType getTypeOfGroup() {
     // Duplicate in GroupOptGeneralPanel
     if (getView().isProject()) {
@@ -138,12 +167,18 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
       }
     });
     getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
-
       @Override
       public void onClose(final CloseEvent<PopupPanel> event) {
         NewGroupPresenter.this.onClose();
       }
     });
+    // When you leave the field "long name", auto-generate the "short name":
+    getView().getLongNameField().addHandler(new BlurHandler() {
+      @Override
+      public void onBlur(final BlurEvent event) {
+        generateShortName();
+      }
+    }, BlurEvent.getType());
   }
 
   public void onCancel() {

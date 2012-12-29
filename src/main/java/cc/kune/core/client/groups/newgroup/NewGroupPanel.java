@@ -75,6 +75,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   private TextArea publicDescField;
 
   private TextField<String> shortNameField;
+
   private TextField<String> tag1;
 
   // private TextField<String> tag2;
@@ -185,19 +186,19 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     tag.setId(TAGS_FIELD);
     tag.setWidth(DefaultForm.BIG_FIELD_WIDTH);
     tag.setAllowBlank(false);
-    Tooltip.to(tag, i18n.t("Type some keywords that define your group"));
+    Tooltip.to(tag, i18n.t("Type some comma-separated keywords that define your group"));
     tag.setValidationDelay(1000);
     return tag;
   }
 
   @Override
-  public void focusOnShortName() {
-    shortNameField.focus();
+  public void focusOnLongName() {
+    longNameField.focus();
   }
 
   @Override
-  public void focusOnLongName() {
-    longNameField.focus();
+  public void focusOnShortName() {
+    shortNameField.focus();
   }
 
   @Override
@@ -213,6 +214,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   @Override
   public String getLongName() {
     return longNameField.getValue();
+  }
+
+  @Override
+  public TextField<String> getLongNameField() {
+    return longNameField;
   }
 
   @Override
@@ -280,6 +286,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   }
 
   @Override
+  public void setLongName(final String longName) {
+    longNameField.setValue(longName);
+  }
+
+  @Override
   public void setLongNameFailed(final String msg) {
     longNameField.markInvalid(msg);
   }
@@ -287,6 +298,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
   @Override
   public void setMessage(final String message, final NotifyLevel level) {
     messageErrorBar.setErrorMessage(message, level);
+  }
+
+  @Override
+  public void setShortName(final String shortName) {
+    shortNameField.setValue(shortName);
   }
 
   @Override
