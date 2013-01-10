@@ -356,7 +356,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     checkGroupIsNotAlreadyAMember(userGroup, sn);
     if (isModerated(admissionType)) {
       sn.addPendingCollaborator(userGroup);
-      notifyService.notifyGroupAdmins(userGroup, inGroup, "Pending collaborator",
+      notifyService.notifyGroupAdmins(inGroup, inGroup, "Pending collaborator",
           "There is a pending collaborator in this group. Please accept or deny him/her");
       snCache.expire(userGroup);
       snCache.expire(inGroup);
