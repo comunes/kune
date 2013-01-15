@@ -300,8 +300,10 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   }
 
   @Override
+  @KuneTransactional
   public SearchResult<Group> search(final String search, final Integer firstResult,
       final Integer maxResults) {
+    // Wilcard is not allowed in the first character of the query
     final String escapedQuery = QueryParser.escape(search) + SearcherConstants.WILDCARD;
     return super.search(new String[] { escapedQuery, escapedQuery, escapedQuery }, new String[] {
         "longName", "shortName", "publicDesc" }, firstResult, maxResults);

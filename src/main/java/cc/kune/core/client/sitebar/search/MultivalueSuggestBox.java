@@ -483,7 +483,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   }
 
   private final I18nUITranslationService i18n;
+  private com.google.gwt.http.client.Request lastQuery;
   private final FormFeedback mfeedback;
+
   private final SuggestBox mfield;
 
   private int mfindExactMatchesFound = 0;
@@ -495,8 +497,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   private int mindexFrom = 0;
 
   private int mindexTo = 0;
-
   private boolean misMultivalued = false;
+
   private final String mrestEndpointUrl;
 
   private final Map<String, String> mvalueMap;
@@ -901,10 +903,14 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     });
 
     try {
-      builder.send();
+      if (lastQuery != null && lastQuery.isPending()) {
+        lastQuery.cancel();
+      }
+      lastQuery = builder.send();
     } catch (final RequestException e) {
       updateFormFeedback(FormFeedback.ERROR, "Error: " + e.getMessage());
     }
+
   }
 
   private void resetPageIndices() {
