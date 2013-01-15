@@ -219,15 +219,21 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
   @Override
   public ParticipationData findParticipation(final User userLogged, final Group group)
       throws AccessViolationException {
+    final SocialNetwork sn = group.getSocialNetwork();
     get(userLogged, group); // check access
     final Long groupId = group.getId();
-    final Set<Group> adminInGroups = finder.findAdminInGroups(groupId);
+    final boolean isMember = sn.isAdmin(userLogged.getUserGroup())
+        || sn.isCollab(userLogged.getUserGroup());
+    final Set<Group> adminInGroups = (isMember ? finder.findAdminInGroups(groupId)
+        : finder.findAdminInGroups(groupId, GroupType.CLOSED));
+
     // Don't show self user group
     if (group.isPersonal()) {
       adminInGroups.remove(group);
     }
     // adminInGroups.remove(userLogged.getUserGroup());
-    final Set<Group> collabInGroups = finder.findCollabInGroups(groupId);
+    final Set<Group> collabInGroups = isMember ? finder.findCollabInGroups(groupId)
+        : finder.findCollabInGroups(groupId, GroupType.CLOSED);
     return new ParticipationData(adminInGroups, collabInGroups);
   }
 

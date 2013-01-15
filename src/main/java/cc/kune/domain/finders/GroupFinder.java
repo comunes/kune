@@ -33,6 +33,8 @@ import com.google.inject.persist.finder.FirstResult;
 import com.google.inject.persist.finder.MaxResults;
 
 public interface GroupFinder {
+  String ADMIN_IN_GROUPS = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid) ";
+  String EDITOR_IN_GROUPS = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid) ";
 
   @Finder(query = "SELECT count(*) FROM Group g")
   public Long count();
@@ -49,9 +51,12 @@ public interface GroupFinder {
   @Finder(query = "SELECT count(*) FROM Group g " + " WHERE (g.groupType != :notgrouptype)")
   public Long countGroups(@Named("notgrouptype") final GroupType excludedGroupType);
 
-  @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id "
-      + "FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid) ORDER BY g.shortName ASC", returnAs = HashSet.class)
+  @Finder(query = ADMIN_IN_GROUPS + "ORDER BY g.shortName ASC", returnAs = HashSet.class)
   public Set<Group> findAdminInGroups(@Named("groupid") final Long groupId);
+
+  @Finder(query = ADMIN_IN_GROUPS + " AND (g.groupType != :notgrouptype)" + " ORDER BY g.shortName ASC", returnAs = HashSet.class)
+  public Set<Group> findAdminInGroups(@Named("groupid") final Long groupId,
+      @Named("notgrouptype") final GroupType excludedGroupType);
 
   @Finder(query = "FROM Group g WHERE g.longName = :longName")
   public Group findByLongName(@Named("longName") final String longName);
@@ -59,9 +64,12 @@ public interface GroupFinder {
   @Finder(query = "FROM Group g WHERE g.shortName = :shortName")
   public Group findByShortName(@Named("shortName") final String shortName);
 
-  @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM "
-      + "g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid) ORDER BY g.shortName ASC", returnAs = HashSet.class)
+  @Finder(query = EDITOR_IN_GROUPS + "ORDER BY g.shortName ASC", returnAs = HashSet.class)
   public Set<Group> findCollabInGroups(@Named("groupid") final Long groupId);
+
+  @Finder(query = EDITOR_IN_GROUPS + " AND (g.groupType != :notgrouptype)" + "ORDER BY g.shortName ASC", returnAs = HashSet.class)
+  public Set<Group> findCollabInGroups(@Named("groupid") final Long groupId,
+      @Named("notgrouptype") final GroupType excludedGroupType);
 
   @Finder(query = "SELECT t.root.toolName FROM ToolConfiguration t "
       + "WHERE t.enabled=true AND t.root.owner.id = :groupid", returnAs = ArrayList.class)
