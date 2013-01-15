@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.dto.GroupType;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 
@@ -68,9 +69,10 @@ public interface ContentFinder {
   public Long findMimeCount(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
       @Named(MIMETYPE) final String mimetype);
 
-  @Finder(query = "FROM Content c WHERE c.status = :status ORDER BY c.modifiedOn DESC", returnAs = ArrayList.class)
+  @Finder(query = "FROM Content c WHERE c.status = :status AND c.container.owner.groupType != :notgrouptype ORDER BY c.modifiedOn DESC ", returnAs = ArrayList.class)
   public List<Content> lastModifiedContents(@MaxResults final int limit,
-      @Named("status") final ContentStatus status);
+      @Named("status") final ContentStatus status,
+      @Named("notgrouptype") final GroupType excludedGroupType);
 
   @Finder(query = "FROM Content c WHERE " + "((:groupid IN (SELECT ed.id FROM "
       + "c.container.owner.socialNetwork.accessLists.editors.list AS ed)) OR"

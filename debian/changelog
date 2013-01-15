@@ -2,8 +2,10 @@ kune (0.3.0+b12) unstable; urgency=low
 
   * Server translations updated
   * Fix for #455
+  * Fix for #401: Home=>Latest publications shouldn't show contents from Closed 
+    groups
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 15 Jan 2013 15:50:16 +0100
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 15 Jan 2013 18:07:18 +0100
 
 kune (0.3.0+b11) unstable; urgency=low
 
