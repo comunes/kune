@@ -1,4 +1,11 @@
-kune (0.3.0+b11) precise; urgency=low
+kune (0.3.0+b12) unstable; urgency=low
+
+  * Server translations updated
+  * Fix for #455
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 15 Jan 2013 15:50:16 +0100
+
+kune (0.3.0+b11) unstable; urgency=low
 
   * Fix for memory leaks in htmlunit (issue #268)
 
