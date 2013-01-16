@@ -22,7 +22,7 @@ package cc.kune.core.server.rest;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.SearchResult;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.rack.filters.rest.REST;
 import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.dto.LinkDTO;
@@ -34,12 +34,12 @@ import com.google.inject.Inject;
 
 public class ContentJSONService {
   private final ContentManager contentManager;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private final ContainerManager containerManager;
 
   @Inject
   public ContentJSONService(final ContentManager contentManager,
-      final ContainerManager containerManager, final Mapper mapper) {
+      final ContainerManager containerManager, final KuneMapper mapper) {
     this.containerManager = containerManager;
     this.contentManager = contentManager;
     this.mapper = mapper;

@@ -78,7 +78,7 @@ public class MapperTest {
   @Inject
   GroupManager groupManager;
   @Inject
-  Mapper mapper;
+  KuneMapper mapper;
 
   private void assertMapping(final GroupListMode mode, final String modeName) {
     final GroupList list = new GroupList();

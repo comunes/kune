@@ -48,7 +48,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.manager.UserSignInLogManager;
 import cc.kune.core.server.manager.impl.EmailConfirmationType;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.ReservedWordsRegistry;
 import cc.kune.core.server.users.UserInfo;
@@ -76,7 +76,7 @@ import com.google.inject.name.Named;
 public class UserRPC implements RPC, UserService {
 
   private final ContentRPC contentRPC;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private final ParticipantUtils partUtils;
   private final ReservedWordsRegistry reserverdWords;
   private final UserFinder userFinder;
@@ -90,7 +90,7 @@ public class UserRPC implements RPC, UserService {
 
   @Inject
   public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
-      final UserInfoService userInfoService, final Mapper mapper,
+      final UserInfoService userInfoService, final KuneMapper mapper,
       final SessionManager waveSessionManager, final WaveClientServlet waveClientServlet,
       final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
       final UserSessionManager userSessionManager, final UserFinder userFinder,

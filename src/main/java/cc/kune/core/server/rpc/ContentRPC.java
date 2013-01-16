@@ -50,7 +50,7 @@ import cc.kune.core.server.content.CreationService;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.KuneWaveManager;
 import cc.kune.core.server.manager.TagUserContentManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.state.StateContainer;
 import cc.kune.core.server.state.StateContent;
@@ -88,7 +88,7 @@ public class ContentRPC implements ContentService, RPC {
   private final CreationService creationService;
   private final FinderService finderService;
   private final GroupManager groupManager;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private final AccessRightsService rightsService;
   private final StateService stateService;
   private final TagUserContentManager tagManager;
@@ -101,7 +101,7 @@ public class ContentRPC implements ContentService, RPC {
       final StateService stateService, final CreationService creationService,
       final GroupManager groupManager, final ContentManager contentManager,
       final ContainerManager containerManager, final TagUserContentManager tagManager,
-      final Mapper mapper, final ChatManager chatManager, final KuneWaveManager waveManager) {
+      final KuneMapper mapper, final ChatManager chatManager, final KuneWaveManager waveManager) {
     this.finderService = finderService;
     this.userSession = userSession;
     this.accessService = accessService;

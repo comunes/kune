@@ -40,7 +40,7 @@ import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.I18nLanguageManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.rpc.SocialNetworkRPC;
 import cc.kune.core.server.users.UserInfo;
@@ -70,7 +70,7 @@ public class UserServiceTest extends IntegrationTest {
   I18nLanguageManager i18nLangManager;
   private I18nLanguageDTO lang;
   @Inject
-  Mapper mapper;
+  KuneMapper mapper;
   @Inject
   KuneBasicProperties properties;
   private I18nLanguageSimpleDTO simpleLang;

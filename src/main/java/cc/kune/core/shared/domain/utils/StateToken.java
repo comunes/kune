@@ -34,8 +34,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * 
  */
 public class StateToken implements IsSerializable {
-  public static final String SEPARATOR = ".";
   private static final String[] EMPTYA = new String[0];
+  public static final String SEPARATOR = ".";
 
   private static String encode(final String group, final String tool, final String folder,
       final String document) {
@@ -55,12 +55,12 @@ public class StateToken implements IsSerializable {
     return encoded;
   }
 
-  private String group;
-  private String tool;
-  private String folder;
   private String document;
-
   private String encoded;
+  private String folder;
+  private String group;
+
+  private String tool;
 
   public StateToken() {
     this(null, null, null, null);
@@ -96,6 +96,14 @@ public class StateToken implements IsSerializable {
     this.folder = null;
     resetEncoded();
     return this;
+  }
+
+  private String conditionalAssign(final int index, final String[] splitted) {
+    if (splitted.length > index) {
+      return splitted[index];
+    } else {
+      return null;
+    }
   }
 
   public StateToken copy() {
@@ -184,10 +192,22 @@ public class StateToken implements IsSerializable {
     return getDocument() != null;
   }
 
-  public StateToken setDocument(final Long document) {
-    this.document = document == null ? null : document.toString();
+  private void parse(final String encoded) {
+    String[] splitted;
+    if (encoded != null && encoded.length() > 0) {
+      splitted = encoded.split("\\.");
+    } else {
+      splitted = EMPTYA;
+    }
+    group = conditionalAssign(0, splitted);
+    tool = conditionalAssign(1, splitted);
+    folder = conditionalAssign(2, splitted);
+    document = conditionalAssign(3, splitted);
     resetEncoded();
-    return this;
+  }
+
+  private void resetEncoded() {
+    encoded = null;
   }
 
   public StateToken setDocument(final String document) {
@@ -196,18 +216,24 @@ public class StateToken implements IsSerializable {
     return this;
   }
 
-  public void setEncoded(final String encoded) {
-    parse(encoded);
-  }
-
-  public StateToken setFolder(final Long folder) {
-    this.folder = folder == null ? null : folder.toString();
+  public StateToken setDocumentL(final Long document) {
+    this.document = document == null ? null : document.toString();
     resetEncoded();
     return this;
   }
 
+  public void setEncoded(final String encoded) {
+    parse(encoded);
+  }
+
   public StateToken setFolder(final String folder) { // NO_UCD
     this.folder = folder;
+    resetEncoded();
+    return this;
+  }
+
+  public StateToken setFolderL(final Long folder) {
+    this.folder = folder == null ? null : folder.toString();
     resetEncoded();
     return this;
   }
@@ -227,31 +253,5 @@ public class StateToken implements IsSerializable {
   @Override
   public String toString() {
     return getEncoded();
-  }
-
-  private String conditionalAssign(final int index, final String[] splitted) {
-    if (splitted.length > index) {
-      return splitted[index];
-    } else {
-      return null;
-    }
-  }
-
-  private void parse(final String encoded) {
-    String[] splitted;
-    if (encoded != null && encoded.length() > 0) {
-      splitted = encoded.split("\\.");
-    } else {
-      splitted = EMPTYA;
-    }
-    group = conditionalAssign(0, splitted);
-    tool = conditionalAssign(1, splitted);
-    folder = conditionalAssign(2, splitted);
-    document = conditionalAssign(3, splitted);
-    resetEncoded();
-  }
-
-  private void resetEncoded() {
-    encoded = null;
   }
 }

@@ -33,7 +33,7 @@ import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.SuperAdmin;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
@@ -47,14 +47,14 @@ import com.google.inject.Provider;
 public class I18nRPC implements RPC, I18nService {
   private final I18nTranslationManager i18nTranslationManager;
   private final I18nLanguageManager languageManager;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private final Provider<HttpServletRequest> requestProvider;
   private final UserSessionManager userSessionManager;
 
   @Inject
   public I18nRPC(final Provider<HttpServletRequest> requestProvider,
       final UserSessionManager userSessionManager, final I18nTranslationManager i18nTranslationManager,
-      final I18nLanguageManager languageManager, final Mapper mapper) {
+      final I18nLanguageManager languageManager, final KuneMapper mapper) {
     this.requestProvider = requestProvider;
     this.userSessionManager = userSessionManager;
     this.i18nTranslationManager = i18nTranslationManager;

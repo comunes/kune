@@ -28,7 +28,7 @@ import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentUtils;
 import cc.kune.core.server.manager.InvitationManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.notifier.NotificationType;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.shared.domain.AccessRol;
@@ -48,12 +48,12 @@ public class InvitationRPC implements RPC, InvitationService {
   private final ContainerManager containerManager;
   private final GroupFinder groupFinder;
   private final InvitationManager invitationManager;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private final UserSessionManager userSessionManager;
 
   @Inject
   public InvitationRPC(final InvitationManager invitationManager,
-      final UserSessionManager userSessionManager, final Mapper mapper, final GroupFinder groupFinder,
+      final UserSessionManager userSessionManager, final KuneMapper mapper, final GroupFinder groupFinder,
       final ContainerManager containerManager) {
     this.containerManager = containerManager;
     this.invitationManager = invitationManager;

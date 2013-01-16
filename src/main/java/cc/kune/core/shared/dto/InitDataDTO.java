@@ -35,7 +35,6 @@ public class InitDataDTO implements IsSerializable {
   private LicenseDTO defaultLicense;
   private String defaultWsTheme;
   private String defTutorialLanguage;
-  private List<ExtMediaDescripDTO> extMediaDescrips;
   private boolean feedbackEnabled;
   private String flvEmbedObject;
   private List<I18nLanguageSimpleDTO> fullTranslatedLanguages;
@@ -101,10 +100,6 @@ public class InitDataDTO implements IsSerializable {
 
   public String getDefTutorialLanguage() {
     return defTutorialLanguage;
-  }
-
-  public List<ExtMediaDescripDTO> getExtMediaDescrips() {
-    return extMediaDescrips;
   }
 
   public String getFlvEmbedObject() {
@@ -250,10 +245,6 @@ public class InitDataDTO implements IsSerializable {
 
   public void setDefTutorialLanguage(final String defTutorialLanguage) {
     this.defTutorialLanguage = defTutorialLanguage;
-  }
-
-  public void setExtMediaDescrips(final List<ExtMediaDescripDTO> extMediaDescrips) {
-    this.extMediaDescrips = extMediaDescrips;
   }
 
   public void setFeedbackEnabled(final boolean feedbackEnabled) {

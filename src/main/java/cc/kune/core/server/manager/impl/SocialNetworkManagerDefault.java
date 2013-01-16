@@ -38,7 +38,7 @@ import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.UserManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.shared.domain.AdmissionType;
@@ -68,7 +68,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
   private final AccessRightsService accessRightsService;
   private final GroupFinder finder;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private final NotificationService notifyService;
   private final SocialNetworkCache snCache;
 
@@ -76,7 +76,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
   @Inject
   public SocialNetworkManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
-      final GroupFinder finder, final AccessRightsService accessRightsService, final Mapper mapper,
+      final GroupFinder finder, final AccessRightsService accessRightsService, final KuneMapper mapper,
       final UserManager userManager, final SocialNetworkCache snCache,
       final NotificationService notifyService) {
     super(provider, SocialNetwork.class);
