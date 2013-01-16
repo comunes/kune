@@ -8,8 +8,10 @@ kune (0.3.0+b12) unstable; urgency=low
   * Fix for #243: Don't show closed groups to others
   * Fix for #456: Development environment depends on java 6. Updated to 7. 
     Dozer updated.
+  * Ask for confirmation when history changes or window closes.
+  * Fix for #211: Loosing editions while switching from group space to user space
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 16 Jan 2013 01:35:27 +0100
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 16 Jan 2013 03:56:23 +0100
 
 kune (0.3.0+b11) unstable; urgency=low
 

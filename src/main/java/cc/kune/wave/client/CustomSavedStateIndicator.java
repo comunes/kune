@@ -22,13 +22,21 @@ import org.waveprotocol.wave.client.scheduler.SchedulerInstance;
 import org.waveprotocol.wave.client.scheduler.TimerService;
 import org.waveprotocol.wave.concurrencycontrol.common.UnsavedDataListener;
 
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.wave.client.kspecific.WaveUnsaveNotificator;
 
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.ClosingEvent;
+import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.inject.Singleton;
 
 @Singleton
-public class CustomSavedStateIndicator implements UnsavedDataListener {
+public class CustomSavedStateIndicator implements UnsavedDataListener, ValueChangeHandler<String> {
 
   private enum SavedState {
     SAVED, UNSAVED;
@@ -59,6 +67,16 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
   public CustomSavedStateIndicator(){
     this.scheduler = SchedulerInstance.getLowPriorityTimer();
     notifier = new WaveUnsaveNotificator();
+    Window.addWindowClosingHandler(new ClosingHandler() {
+      @Override
+      public void onWindowClosing(final ClosingEvent event) {
+        if (currentSavedState != null && currentSavedState.equals(SavedState.UNSAVED)) {
+          event.setMessage(I18n.t("This document is not saved. " +
+              "Are you sure that you want to navigate away from this page?"));
+        }
+        }
+      });
+    History.addValueChangeHandler(this);
   }
 
   private void maybeUpdateDisplay() {
@@ -92,6 +110,16 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     }
   }
 
+  public void onNewHistory(final String nextHistory, final SimpleResponseCallback callback) {
+    if (currentSavedState != null && currentSavedState.equals(SavedState.UNSAVED)) {
+      NotifyUser.askConfirmation(I18n.t("Please confirm"),I18n.t("This document is not saved. " +
+          "Are you sure that you want to navigate away from it?"), callback);
+    }
+    else {
+      callback.onSuccess();
+    }
+  }
+
   @Override
   public void onUpdate(final UnsavedDataInfo unsavedDataInfo) {
     if (unsavedDataInfo.estimateUnacknowledgedSize() != 0) {
@@ -102,6 +130,23 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
       saved();
     }
   }
+
+  @Override
+  public void onValueChange(final ValueChangeEvent<String> event) {
+    final String nextHistory = event.getValue();
+    final SimpleResponseCallback callback = new SimpleResponseCallback() {
+      @Override
+      public void onCancel() {
+        // Do nothing
+      }
+
+      @Override
+      public void onSuccess() {
+        History.newItem(nextHistory);
+      }
+    };
+    onNewHistory(nextHistory, callback);
+    }
 
   public void saved() {
     maybeUpdateDisplay();
