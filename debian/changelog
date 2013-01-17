@@ -1,3 +1,14 @@
+kune (0.3.0+b13) unstable; urgency=low
+
+  * Apache wave code updated
+  * User space: Link popup for humans
+  * User space: Blip link icon improved
+  * User space: Search panel improved: new message icon, shared/inbox button
+  * User space: New participant icons
+  * User space: Fix for #431: Clarify wave buttons in non-edition mode
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 17 Jan 2013 04:04:23 +0100
+
 kune (0.3.0+b12) unstable; urgency=low
 
   * Server translations updated

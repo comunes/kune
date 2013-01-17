@@ -17,8 +17,12 @@
  */
 package cc.kune.wave.client;
 
+import java.util.Set;
+
 import javax.annotation.Nullable;
 
+import org.waveprotocol.box.webclient.client.ClientEvents;
+import org.waveprotocol.box.webclient.client.events.WaveCreationEvent;
 import org.waveprotocol.wave.client.account.Profile;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.EscapeUtils;
@@ -27,12 +31,15 @@ import org.waveprotocol.wave.client.common.util.WindowUtil;
 import org.waveprotocol.wave.client.wavepanel.WavePanel;
 import org.waveprotocol.wave.client.wavepanel.event.EventHandlerRegistry;
 import org.waveprotocol.wave.client.wavepanel.event.WaveClickHandler;
+import org.waveprotocol.wave.client.wavepanel.impl.WavePanelImpl;
+import org.waveprotocol.wave.client.wavepanel.impl.edit.ParticipantSelectorWidget;
 import org.waveprotocol.wave.client.wavepanel.view.ParticipantView;
 import org.waveprotocol.wave.client.wavepanel.view.ParticipantsView;
 import org.waveprotocol.wave.client.wavepanel.view.View.Type;
 import org.waveprotocol.wave.client.wavepanel.view.dom.DomAsViewProvider;
 import org.waveprotocol.wave.client.wavepanel.view.dom.ModelAsViewProvider;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.TypeCodes;
+import org.waveprotocol.wave.client.widget.popup.UniversalPopup;
 import org.waveprotocol.wave.client.widget.profile.ProfilePopupPresenter;
 import org.waveprotocol.wave.client.widget.profile.ProfilePopupView;
 import org.waveprotocol.wave.model.conversation.Conversation;
@@ -43,10 +50,13 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.EventBus;
 
 /**
  * Installs the add/remove participant controls.
@@ -57,27 +67,34 @@ public final class CustomParticipantController {
   private final ModelAsViewProvider models;
   private final ProfileManager profiles;
   private final String localDomain;
+  private UniversalPopup popup = null;
+  private final ParticipantId user;
+  private static EventBus eventBus;
 
   /**
    * @param localDomain nullable. if provided, automatic suffixing will occur.
+   * @param user
    */
   CustomParticipantController(
       DomAsViewProvider views, ModelAsViewProvider models,
       ProfileManager profiles,
-      String localDomain) {
+      String localDomain, ParticipantId user) {
     this.views = views;
     this.models = models;
     this.profiles = profiles;
     this.localDomain = localDomain;
+    this.user = user;
   }
 
   /**
    * Builds and installs the participant control feature.
+   * @param user
    */
   public static void install(WavePanel panel, ModelAsViewProvider models,
-      ProfileManager profiles, String localDomain) {
+      ProfileManager profiles, String localDomain, ParticipantId user, EventBus eventBus) {
+    CustomParticipantController.eventBus = eventBus;
     CustomParticipantController controller = new CustomParticipantController(panel.getViewProvider(),
-        models, profiles, localDomain);
+        models, profiles, localDomain, user);
     controller.install(panel.getHandlers());
   }
 
@@ -89,6 +106,14 @@ public final class CustomParticipantController {
         return true;
       }
     });
+    handlers.registerClickHandler(TypeCodes.kind(Type.NEW_WAVE_WITH_PARTICIPANTS),
+        new WaveClickHandler() {
+          @Override
+          public boolean onClick(ClickEvent event, Element context) {
+            handleNewWaveWithParticipantsButtonClicked(context);
+            return true;
+          }
+        });
     handlers.registerClickHandler(TypeCodes.kind(Type.PARTICIPANT), new WaveClickHandler() {
       @Override
       public boolean onClick(ClickEvent event, Element context) {
@@ -133,6 +158,35 @@ public final class CustomParticipantController {
       participants[i] = ParticipantId.of(address);
     }
     return participants;
+  }
+
+  /**
+   * Creates a new wave with the participants of the current wave. Showing
+   * a popup dialog where the user can chose to deselect users that should not
+   * be participants in the new wave
+   */
+  private void handleNewWaveWithParticipantsButtonClicked(Element context) {
+    ParticipantsView participantsUi = views.fromNewWaveWithParticipantsButton(context);
+    ParticipantSelectorWidget selector = new ParticipantSelectorWidget();
+    popup = null;
+    selector.setListener(new ParticipantSelectorWidget.Listener() {
+      @Override
+      public void onSelect(Set<ParticipantId> participants) {
+        if (popup != null) {
+          popup.hide();
+        }
+        SpaceSelectEvent.fire(eventBus, Space.userSpace);
+        ClientEvents.get().fireEvent(
+            new WaveCreationEvent(participants));
+      }
+
+      @Override
+      public void onCancel() {
+        popup.hide();
+      }
+    });
+    popup = selector.showInPopup(user,
+        models.getParticipants(participantsUi).getParticipantIds(), profiles);
   }
 
   /**
@@ -188,4 +242,5 @@ public final class CustomParticipantController {
     }
     profileUi.show();
   }
+
 }

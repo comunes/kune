@@ -387,7 +387,7 @@ public class WebClient extends Composite implements WaveClientView {
     waveHolder.getElement().appendChild(loading);
     Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
     CustomStagesProvider wave = new CustomStagesProvider(
-        holder, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, waveUnsavedIndicator);
+        holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus);
     this.wave = wave;
     wave.load(new Command() {
       @Override
