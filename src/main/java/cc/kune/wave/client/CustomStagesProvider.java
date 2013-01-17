@@ -79,9 +79,9 @@ public class CustomStagesProvider extends Stages {
     }
   };
 
-  @SuppressWarnings("unused")
   private final Element wavePanelElement;
   private final CustomSavedStateIndicator waveUnsavedIndicator;
+  @SuppressWarnings("unused")
   private final FramedPanel waveFrame;
   private final LogicalPanel rootPanel;
   private final WaveRef waveRef;

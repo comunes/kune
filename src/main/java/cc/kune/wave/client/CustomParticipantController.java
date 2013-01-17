@@ -31,7 +31,6 @@ import org.waveprotocol.wave.client.common.util.WindowUtil;
 import org.waveprotocol.wave.client.wavepanel.WavePanel;
 import org.waveprotocol.wave.client.wavepanel.event.EventHandlerRegistry;
 import org.waveprotocol.wave.client.wavepanel.event.WaveClickHandler;
-import org.waveprotocol.wave.client.wavepanel.impl.WavePanelImpl;
 import org.waveprotocol.wave.client.wavepanel.impl.edit.ParticipantSelectorWidget;
 import org.waveprotocol.wave.client.wavepanel.view.ParticipantView;
 import org.waveprotocol.wave.client.wavepanel.view.ParticipantsView;
