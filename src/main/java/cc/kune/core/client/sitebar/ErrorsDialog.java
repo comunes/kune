@@ -48,34 +48,21 @@ public class ErrorsDialog {
   public static final String ERROR_LOGGER_BUTTON_ID = "kune-error-button-diag";
   public static final String ERROR_LOGGER_ID = "kune-error-diag";
 
-  private final BasicTopDialog dialog;
+  private BasicTopDialog dialog;
   @UiField
   FlowPanel panel;
   @UiField
   ScrollPanel scroll;
+  private final I18nTranslationService i18n;
 
   @Inject
   public ErrorsDialog(final I18nTranslationService i18n, final EventBus eventBus) {
-    dialog = new BasicTopDialog.Builder(ERROR_LOGGER_ID, true, true, i18n.getDirection()).title(
-        i18n.t("Errors info")).autoscroll(true).firstButtonTitle(i18n.t("Ok")).firstButtonId(
-        ERROR_LOGGER_BUTTON_ID).tabIndexStart(1).width("400px").height("400px").build();
-    dialog.getTitleText().setText(i18n.t("Info about errors"), i18n.getDirection());
-    final InlineLabel subTitle = new InlineLabel(
-        i18n.t("Please copy/paste this info to report problems"));
-    dialog.getInnerPanel().add(subTitle);
-    dialog.getInnerPanel().add(BINDER.createAndBindUi(this));
-    scroll.setHeight("350px");
-    // scroll.setAlwaysShowScrollBars(true);
-    dialog.getFirstBtn().addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        dialog.hide();
-      }
-    });
+    this.i18n = i18n;
 
     eventBus.addHandler(UserNotifyEvent.getType(), new UserNotifyEvent.UserNotifyHandler() {
       @Override
       public void onUserNotify(final UserNotifyEvent event) {
+        createDialogLazy();
         final NotifyLevel level = event.getLevel();
         final IconLabel iconMessage = new IconLabel();
         iconMessage.setRightIconResource(UserMessageImagesUtil.getIcon(level));
@@ -88,7 +75,29 @@ public class ErrorsDialog {
     });
   }
 
+  private void createDialogLazy() {
+    if (dialog == null) {
+      dialog = new BasicTopDialog.Builder(ERROR_LOGGER_ID, true, true, i18n.getDirection()).title(
+          i18n.t("Errors info")).autoscroll(true).firstButtonTitle(i18n.t("Ok")).firstButtonId(
+          ERROR_LOGGER_BUTTON_ID).tabIndexStart(1).width("400px").height("400px").build();
+      dialog.getTitleText().setText(i18n.t("Info about errors"), i18n.getDirection());
+      final InlineLabel subTitle = new InlineLabel(
+          i18n.t("Please copy/paste this info to report problems"));
+      dialog.getInnerPanel().add(subTitle);
+      dialog.getInnerPanel().add(BINDER.createAndBindUi(this));
+      scroll.setHeight("350px");
+      // scroll.setAlwaysShowScrollBars(true);
+      dialog.getFirstBtn().addClickHandler(new ClickHandler() {
+        @Override
+        public void onClick(final ClickEvent event) {
+          dialog.hide();
+        }
+      });
+    }
+  }
+
   public void showCentered() {
+    createDialogLazy();
     dialog.showCentered();
   }
 

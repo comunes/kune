@@ -1,8 +1,9 @@
 kune (0.3.0+b14) unstable; urgency=low
 
   * Compilation in mode PRETTY to debug errors
+  * Fix for 480: Error dialog is broken
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 17 Jan 2013 16:31:33 +0100
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 17 Jan 2013 20:52:52 +0100
 
 kune (0.3.0+b13) unstable; urgency=low
 

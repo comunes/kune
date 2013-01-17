@@ -40,6 +40,7 @@ import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
+import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogo;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
@@ -164,5 +165,7 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
   WaveParts getWaveParts();
 
   XMLActionsParser getXmlActionsParser();
+
+  ErrorsDialog getErrorsDialog();
 
 }
