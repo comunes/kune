@@ -113,6 +113,9 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
       NotifyUser.askConfirmation(I18n.t("Please confirm"),I18n.t("This document is not saved. " +
           "Are you sure that you want to navigate away from it?"), callback);
     }
+    else {
+      callback.onSuccess();
+    }
   }
 
   @Override

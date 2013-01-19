@@ -1,3 +1,9 @@
+kune (0.3.0+b15) unstable; urgency=low
+
+  * Inbox issue after +b14 fix (thanks to pablojan)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 19 Jan 2013 19:41:22 +0100
+
 kune (0.3.0+b14) unstable; urgency=low
 
   * Compilation in mode PRETTY to debug errors
