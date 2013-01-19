@@ -2,6 +2,7 @@ kune (0.3.0+b14) unstable; urgency=low
 
   * Compilation in mode PRETTY to debug errors
   * Fix for 480: Error dialog is broken
+  * History loop bug regression caused by fix to #211
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 17 Jan 2013 20:52:52 +0100
 
