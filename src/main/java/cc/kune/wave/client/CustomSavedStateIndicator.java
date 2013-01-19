@@ -27,17 +27,13 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.wave.client.kspecific.WaveUnsaveNotificator;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.inject.Singleton;
 
 @Singleton
-public class CustomSavedStateIndicator implements UnsavedDataListener, ValueChangeHandler<String> {
+public class CustomSavedStateIndicator implements UnsavedDataListener {
 
   private enum SavedState {
     SAVED, UNSAVED;
@@ -77,7 +73,8 @@ public class CustomSavedStateIndicator implements UnsavedDataListener, ValueChan
         }
         }
       });
-    History.addValueChangeHandler(this);
+    // FIXME: http://code.google.com/p/google-web-toolkit/issues/detail?id=5657
+    // When history.newItem can be canceled add a similar code to onWindowClosing
   }
 
   private void maybeUpdateDisplay() {
@@ -128,23 +125,6 @@ public class CustomSavedStateIndicator implements UnsavedDataListener, ValueChan
       saved();
     }
   }
-
-  @Override
-  public void onValueChange(final ValueChangeEvent<String> event) {
-    final String nextHistory = event.getValue();
-    final SimpleResponseCallback callback = new SimpleResponseCallback() {
-      @Override
-      public void onCancel() {
-        // Do nothing
-      }
-
-      @Override
-      public void onSuccess() {
-        History.newItem(nextHistory);
-      }
-    };
-    onNewHistory(nextHistory, callback);
-    }
 
   public void saved() {
     maybeUpdateDisplay();
