@@ -27,6 +27,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.wave.client.kspecific.WaveUnsaveNotificator;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
@@ -114,9 +115,6 @@ public class CustomSavedStateIndicator implements UnsavedDataListener, ValueChan
     if (currentSavedState != null && currentSavedState.equals(SavedState.UNSAVED)) {
       NotifyUser.askConfirmation(I18n.t("Please confirm"),I18n.t("This document is not saved. " +
           "Are you sure that you want to navigate away from it?"), callback);
-    }
-    else {
-      callback.onSuccess();
     }
   }
 
