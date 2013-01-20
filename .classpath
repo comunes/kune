@@ -124,7 +124,7 @@
   <classpathentry kind="var" path="M2_REPO/org/json/json/20080701/json-20080701.jar" sourcepath="M2_REPO/org/json/json/20080701/json-20080701-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/json-lib/json-lib/2.1/json-lib-2.1-jdk15.jar" sourcepath="M2_REPO/net/sf/json-lib/json-lib/2.1/json-lib-2.1-jdk15-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jsoup/jsoup/1.2.2/jsoup-1.2.2.jar" sourcepath="M2_REPO/org/jsoup/jsoup/1.2.2/jsoup-1.2.2-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/sourceforge/findbugs/jsr-305/v0r47/jsr-305-v0r47.jar" sourcepath="M2_REPO/net/sourceforge/findbugs/jsr-305/v0r47/jsr-305-v0r47-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/findbugs/jsr-305/v0r47/jsr-305-v0r47.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/jtidy/jtidy/4aug2000r7-dev/jtidy-4aug2000r7-dev.jar" sourcepath="M2_REPO/jtidy/jtidy/4aug2000r7-dev/jtidy-4aug2000r7-dev-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/jtidy/r8-20060801/jtidy-r8-20060801.jar"/>
@@ -229,7 +229,7 @@
   <classpathentry kind="var" path="M2_REPO/org/apache/solr/solr-solrj/3.5.0/solr-solrj-3.5.0.jar" sourcepath="M2_REPO/org/apache/solr/solr-solrj/3.5.0/solr-solrj-3.5.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/testng/testng/6.2.1/testng-6.2.1.jar" sourcepath="M2_REPO/org/testng/testng/6.2.1/testng-6.2.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/tigase/tigase-xmltools/3.3.5/tigase-xmltools-3.3.5.jar" sourcepath="M2_REPO/tigase/tigase-xmltools/3.3.5/tigase-xmltools-3.3.5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/tigase/tigase-xmltools/3.3.5/tigase-xmltools-3.3.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/util/0.3.38/util-0.3.38.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/util-src/0.3.38/util-src-0.3.38.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/wagon/wagon-file/1.0-beta-2/wagon-file-1.0-beta-2.jar" sourcepath="M2_REPO/org/apache/maven/wagon/wagon-file/1.0-beta-2/wagon-file-1.0-beta-2-sources.jar"/>
