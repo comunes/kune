@@ -56,7 +56,7 @@ public final class SessionConstants {
   // session duration
   /** The Constant SESSION_DURATION. */
   public final static long SESSION_DURATION = A_DAY * 30; // four weeks login
-  // public final static long SESSION_DURATION = 100; // For test
+  // public final static long SESSION_DURATION = 10000; // For test
   /** The Constant USERHASH. */
   public final static String USERHASH = "k007userHash";
 
