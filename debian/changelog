@@ -1,6 +1,7 @@
 kune (0.3.0+b16) unstable; urgency=low
 
   * Fix for #443: Set up a artifactory server (http://archiva.comunes.org)
+  * Fix for #453: Debian package db migration fails. Client gives HTTP ERROR: 503
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 20 Jan 2013 02:22:59 +0100
 
