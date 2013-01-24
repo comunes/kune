@@ -25,7 +25,7 @@ import cc.kune.common.shared.utils.TextUtils;
 
 /**
  * Copied some methods from org.apache.commons.lang.WordUtils
- * 
+ *
  */
 public class I18nUtils {
 
@@ -55,5 +55,9 @@ public class I18nUtils {
     }
 
   }
+
+public static String convertMethodName(String name, String nameTwo) {
+    return convertMethodName(name + " " + nameTwo);
+}
 
 }
