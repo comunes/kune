@@ -12,7 +12,7 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
         <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.core.client.i18n{I18nUtils.java"/>
-        <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.common.client.utils{TextUtils.java"/>
+        <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.common.shared.utils{TextUtils.java"/>
         <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.core.client.i18n{I18nConvertMethodName.java"/>
         <javaElement handleIdentifier="=kune/src\/main\/java&lt;cc.kune.common.client.errors"/>
     </selectedElements>

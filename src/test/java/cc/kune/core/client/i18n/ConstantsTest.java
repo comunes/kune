@@ -38,6 +38,17 @@ public class ConstantsTest {
     assertEquals("Are you Sure?", english.getString(I18nUtils.convertMethodName("Are you Sure?")));
   }
 
+  @Test
+  public void startingWithNumbersShouldAddUnderscore() {
+    assertEquals("_1day", I18nUtils.convertMethodName("1day"));
+  }
+
+
+  @Test
+  public void basicEnglishFoundWithNoteForTranslators() {
+    assertEquals("Next", english.getString(I18nUtils.convertMethodName("Next", "used in button")));
+  }
+
   @Test(expected = MissingResourceException.class)
   public void basicEnglishNotFound() {
     english.getString(I18nUtils.convertMethodName("Other thing"));
