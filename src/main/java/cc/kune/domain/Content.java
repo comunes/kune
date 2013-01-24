@@ -235,7 +235,7 @@ public class Content implements HasStateToken {
   @Override
   @Transient
   public StateToken getStateToken() {
-    return getContainer().getStateToken().copy().setDocument(getId());
+    return getContainer().getStateToken().copy().setDocumentL(getId());
   }
 
   @Transient

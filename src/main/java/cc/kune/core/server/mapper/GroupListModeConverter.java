@@ -22,13 +22,14 @@ package cc.kune.core.server.mapper;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
-import net.sf.dozer.util.mapping.MappingException;
-import net.sf.dozer.util.mapping.converters.CustomConverter;
+import org.dozer.CustomConverter;
+import org.dozer.MappingException;
+
 import cc.kune.core.shared.domain.GroupListMode;
 
 public class GroupListModeConverter implements CustomConverter {
-  private final HashMap<String, GroupListMode> stringToEnum;
   private final HashMap<GroupListMode, String> enumToString;
+  private final HashMap<String, GroupListMode> stringToEnum;
 
   public GroupListModeConverter() {
     this.stringToEnum = new HashMap<String, GroupListMode>();
@@ -38,6 +39,12 @@ public class GroupListModeConverter implements CustomConverter {
     add(GroupListMode.NOBODY);
   }
 
+  private void add(final GroupListMode mode) {
+    enumToString.put(mode, mode.toString());
+    stringToEnum.put(mode.toString(), mode);
+  }
+
+  @Override
   @SuppressWarnings("rawtypes")
   public Object convert(final Object destination, final Object source, final Class destinationClass,
       final Class sourceClass) {
@@ -53,11 +60,6 @@ public class GroupListModeConverter implements CustomConverter {
       throw new MappingException(msg);
     }
 
-  }
-
-  private void add(final GroupListMode mode) {
-    enumToString.put(mode, mode.toString());
-    stringToEnum.put(mode.toString(), mode);
   }
 
 }

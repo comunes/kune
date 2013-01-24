@@ -52,8 +52,10 @@ public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
     session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        refreshStatus(rolRequired, authNeed, session.isLogged(), visibleForMembers, visibleForNonMemb,
-            session.getCurrentState().getGroupRights());
+        if (session.getCurrentState() != null) {
+          refreshStatus(rolRequired, authNeed, session.isLogged(), visibleForMembers, visibleForNonMemb,
+              session.getCurrentState().getGroupRights());
+        }
       }
     });
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {

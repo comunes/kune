@@ -110,6 +110,8 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private final Widget widget;
 
+  private final EventBus eventBus;
+
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
@@ -118,6 +120,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     this.gsArmor = wsArmor;
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
+    this.eventBus = eventBus;
     this.stateManager = stateManager;
     this.dropController = dropController;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
@@ -239,9 +242,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
         // UIObject.setVisible(waveFrame.getElement(), true);
         waveHolder.getElement().appendChild(loading);
         final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-        final CustomStagesProvider wave = new CustomStagesProvider(holder, waveHolder, dummyWaveFrame,
+        final CustomStagesProvider wave = new CustomStagesProvider(holder,  waveUnsavedIndicator, waveHolder, dummyWaveFrame,
             waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
-            org.waveprotocol.box.webclient.client.Session.get().getDomain(), null, waveUnsavedIndicator);
+            org.waveprotocol.box.webclient.client.Session.get().getDomain(), null, eventBus);
         this.wave = wave;
         wave.load(new Command() {
           @Override

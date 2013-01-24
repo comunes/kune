@@ -55,7 +55,7 @@ public class StatsServiceDefault implements StatsService {
     stats.setTotalGroups(groupFinder.countGroups(GroupType.PERSONAL));
     stats.setTotalUsers(userFinder.count());
     stats.setLastPublishedContents(contentFinder.lastModifiedContents(LIMIT,
-        ContentStatus.publishedOnline));
+        ContentStatus.publishedOnline, GroupType.CLOSED));
     if (userGroup != Group.NO_GROUP) {
       stats.setLastContentsOfMyGroups(contentFinder.lastModifiedContentsInUserGroup(LIMIT,
           userGroup.getId()));

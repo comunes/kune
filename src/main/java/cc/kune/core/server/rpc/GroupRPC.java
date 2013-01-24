@@ -29,7 +29,7 @@ import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.ReservedWordsRegistry;
 import cc.kune.core.shared.domain.AccessRol;
@@ -48,13 +48,13 @@ public class GroupRPC implements RPC, GroupService {
   private final ContentManager contentManager;
   private final ContentRPC contentRPC;
   private final GroupManager groupManager;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private final ReservedWordsRegistry reserverdWords;
   private final UserSessionManager userSessionManager;
 
   @Inject
   public GroupRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
-      final ContentManager contentManager, final Mapper mapper,
+      final ContentManager contentManager, final KuneMapper mapper,
       final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC) {
     this.userSessionManager = userSessionManager;
     this.groupManager = groupManager;

@@ -22,9 +22,14 @@ import org.waveprotocol.wave.client.scheduler.SchedulerInstance;
 import org.waveprotocol.wave.client.scheduler.TimerService;
 import org.waveprotocol.wave.concurrencycontrol.common.UnsavedDataListener;
 
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.wave.client.kspecific.WaveUnsaveNotificator;
 
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.ClosingEvent;
+import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.inject.Singleton;
 
 @Singleton
@@ -59,6 +64,17 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
   public CustomSavedStateIndicator(){
     this.scheduler = SchedulerInstance.getLowPriorityTimer();
     notifier = new WaveUnsaveNotificator();
+    Window.addWindowClosingHandler(new ClosingHandler() {
+      @Override
+      public void onWindowClosing(final ClosingEvent event) {
+        if (currentSavedState != null && currentSavedState.equals(SavedState.UNSAVED)) {
+          event.setMessage(I18n.t("This document is not saved. " +
+              "Are you sure that you want to navigate away from this page?"));
+        }
+        }
+      });
+    // FIXME: http://code.google.com/p/google-web-toolkit/issues/detail?id=5657
+    // When history.newItem can be canceled add a similar code to onWindowClosing
   }
 
   private void maybeUpdateDisplay() {
@@ -89,6 +105,16 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
       saved();
     } else {
       unsaved();
+    }
+  }
+
+  public void onNewHistory(final String nextHistory, final SimpleResponseCallback callback) {
+    if (currentSavedState != null && currentSavedState.equals(SavedState.UNSAVED)) {
+      NotifyUser.askConfirmation(I18n.t("Please confirm"),I18n.t("This document is not saved. " +
+          "Are you sure that you want to navigate away from it?"), callback);
+    }
+    else {
+      callback.onSuccess();
     }
   }
 

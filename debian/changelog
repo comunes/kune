@@ -1,4 +1,52 @@
-kune (0.3.0+b11) precise; urgency=low
+kune (0.3.0+b16) unstable; urgency=low
+
+  * Fix for #443: Set up a artifactory server (http://archiva.comunes.org)
+  * Fix for #453: Debian package db migration fails. Client gives HTTP ERROR: 503
+  * Fix for #484: NPE on start webclient
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 21 Jan 2013 18:12:36 +0100
+
+kune (0.3.0+b15) unstable; urgency=low
+
+  * Inbox issue after +b14 fix (thanks to pablojan)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 19 Jan 2013 19:41:22 +0100
+
+kune (0.3.0+b14) unstable; urgency=low
+
+  * Compilation in mode PRETTY to debug errors
+  * Fix for 480: Error dialog is broken
+  * History loop bug regression caused by fix to #211
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 17 Jan 2013 20:52:52 +0100
+
+kune (0.3.0+b13) unstable; urgency=low
+
+  * Apache wave code updated
+  * User space: Link popup for humans
+  * User space: Blip link icon improved
+  * User space: Search panel improved: new message icon, shared/inbox button
+  * User space: New participant icons
+  * User space: Fix for #431: Clarify wave buttons in non-edition mode
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 17 Jan 2013 04:04:23 +0100
+
+kune (0.3.0+b12) unstable; urgency=low
+
+  * Server translations updated
+  * Fix for #455
+  * Fix for #401: Home=>Latest publications shouldn't show contents from Closed 
+    groups
+  * Fix for #479: Cancel previous search request
+  * Fix for #243: Don't show closed groups to others
+  * Fix for #456: Development environment depends on java 6. Updated to 7. 
+    Dozer updated.
+  * Ask for confirmation when history changes or window closes.
+  * Fix for #211: Loosing editions while switching from group space to user space
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 16 Jan 2013 03:56:23 +0100
+
+kune (0.3.0+b11) unstable; urgency=low
 
   * Fix for memory leaks in htmlunit (issue #268)
 

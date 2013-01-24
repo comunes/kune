@@ -50,7 +50,7 @@ public class KuneEntryPoint implements EntryPoint {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
    */
   @Override
@@ -102,6 +102,7 @@ public class KuneEntryPoint implements EntryPoint {
 
             ginjector.getSessionExpirationManager();
             ginjector.getEventLogger();
+            ginjector.getErrorsDialog();
             ginjector.getCorePresenter().get().forceReveal();
             ginjector.getOnAppStartFactory();
             ginjector.getStateManager();

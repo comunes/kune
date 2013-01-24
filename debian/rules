@@ -64,7 +64,15 @@ install/kune::
 #	/usr/share/doc/dbconfig-common/examples/
 # Debuggin: http://people.debian.org/~seanius/policy/dbconfig-common-using.html/ch-develguide.html#s-debugging
 
-	cat $(CURDIR)/src/main/resources/db/kune_initialize.sql $(CURDIR)/src/main/resources/db/init-data-countries.sql $(CURDIR)/src/main/resources/db/init-data-languages.sql $(CURDIR)/src/main/resources/db/update-0020-names-width.sql > $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
+	cat $(CURDIR)/src/main/resources/db/kune_initialize.sql \
+            $(CURDIR)/src/main/resources/db/init-data-countries.sql \
+            $(CURDIR)/src/main/resources/db/init-data-languages.sql \
+            $(CURDIR)/src/main/resources/db/update-0020-names-width.sql \
+	    $(CURDIR)/src/main/resources/db/update-0021-avatarLastModifiedTime-deb.sql \
+	    $(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql \
+	    $(CURDIR)/src/main/resources/db/update-0023-inviation.sql \
+            > $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
+        # Add the upgrades algo in the previous install
 	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5
 	cp $(CURDIR)/src/main/resources/db/init-data-languages.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b6
 	cp $(CURDIR)/src/main/resources/db/update-0020-names-width.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b12

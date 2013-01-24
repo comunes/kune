@@ -24,7 +24,7 @@ import java.util.List;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.shared.dto.SearchResultDTO;
 
-public interface Mapper {
+public interface KuneMapper {
 
   <T> T map(Object source, Class<T> type);
 

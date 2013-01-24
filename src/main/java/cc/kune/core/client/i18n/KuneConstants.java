@@ -146,6 +146,10 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String changeIt();
 
+  String changeTheGroupWorkspaceTheme();
+
+  String changeTheThemeOfYourPersonalSpace();
+
   String changeThisWorkspaceTheme();
 
   String changeToAdministrator();
@@ -964,11 +968,15 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String theMembersOfThisGroupAreNotPublic();
 
+  String theNameMustBeBetween3And15LowercaseCharacters();
+
   String theNameMustBeBetween3And15LowercaseWesternCharactersAndOrNumbers();
 
   String theNameMustBeBetween3And30LowercaseWesternCharactersAndOrNumbers();
 
   String theNameMustContainOnlyCharactersNumbersAndDashes();
+
+  String theNameMustContainOnlyLowercaseCharactersNumbersAndDashes();
 
   String thePasswordMustBeBetween6And40Characters();
 
@@ -1064,6 +1072,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String thisIsTheDefaultLicenseForAllTheContentsOfThisGroupAlthoughYouCanChooseADifferentLicenseForSpecificC();
 
+  String thisIsTheDefaultLicenseForAllTheContentsOfYourPersonalSpaceAlthoughYouCanChooseADifferentLicenseForS();
+
   String thisListIsNowRestrictedToThePublic();
 
   String thisNameAlreadyExistsItIsUsedWhenAFileOrAFolderWithTheSameNameAlreadyExists();
@@ -1119,6 +1129,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String transparentAThemeName();
 
   String trash();
+
+  String typeSomeCommaSeparatedKeywordsThatDefineYourGroup();
 
   String typeSomeKeywordsThatDefineYourGroup();
 
@@ -1247,6 +1259,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String yourBrowserIsCurrentlyUnsupported();
 
   String yourBrowserIsOutdatedWithTheServerSoftwarePleaseReloadThisPage();
+
+  String yourBrowserVersionIsNotProperlySupportedPleaseUseAFreeLibreModernAndUpdatedBrowserLikeTheLastVersion();
 
   String yourEmailIsNotVerifiedParamFunctionalityWillWorkBetterIfYouParam();
 

@@ -21,7 +21,7 @@ package cc.kune.core.server.rest;
 
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.UserManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.rack.filters.rest.REST;
 import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.dto.GroupResultDTO;
@@ -32,10 +32,10 @@ import com.google.inject.Inject;
 
 public class UserJSONService {
   private final UserManager manager;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
 
   @Inject
-  public UserJSONService(final UserManager manager, final Mapper mapper) {
+  public UserJSONService(final UserManager manager, final KuneMapper mapper) {
     this.manager = manager;
     this.mapper = mapper;
   }

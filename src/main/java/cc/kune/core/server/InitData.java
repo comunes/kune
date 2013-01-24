@@ -26,7 +26,6 @@ import cc.kune.core.server.tool.ToolSimple;
 import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
-import cc.kune.domain.ExtMediaDescrip;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.License;
@@ -42,7 +41,6 @@ public class InitData {
   private License defaultLicense;
   private String defaultWsTheme;
   private String defTutorialLanguage;
-  private List<ExtMediaDescrip> extMediaDescrips;
   private boolean feedbackEnabled;
   private String flvEmbedObject;
   private List<I18nLanguage> fullTranslatedLanguages;
@@ -106,10 +104,6 @@ public class InitData {
 
   public String getDefTutorialLanguage() {
     return defTutorialLanguage;
-  }
-
-  public List<ExtMediaDescrip> getExtMediaDescrips() {
-    return extMediaDescrips;
   }
 
   public String getFlvEmbedObject() {
@@ -254,10 +248,6 @@ public class InitData {
 
   public void setDefTutorialLanguage(final String defTutorialLanguage) {
     this.defTutorialLanguage = defTutorialLanguage;
-  }
-
-  public void setExtMediaDescrips(final List<ExtMediaDescrip> extMediaDescrips) {
-    this.extMediaDescrips = extMediaDescrips;
   }
 
   public void setFeedbackEnabled(final boolean feedbackEnabled) {

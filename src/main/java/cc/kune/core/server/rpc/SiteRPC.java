@@ -32,7 +32,7 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.UserManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneProperties;
@@ -55,7 +55,7 @@ public class SiteRPC implements RPC, SiteService {
   private final KuneProperties kuneProperties;
   private final I18nLanguageManager languageManager;
   private final LicenseManager licenseManager;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private ReservedWordsRegistryDTO reservedWords;
   private final ServerToolRegistry serverToolRegistry;
   private HashMap<String, GSpaceTheme> siteThemes;
@@ -64,7 +64,7 @@ public class SiteRPC implements RPC, SiteService {
 
   @Inject
   public SiteRPC(final UserSessionManager userSessionManager, final UserManager userManager,
-      final UserInfoService userInfoService, final LicenseManager licenseManager, final Mapper mapper,
+      final UserInfoService userInfoService, final LicenseManager licenseManager, final KuneMapper mapper,
       final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescManager) {
@@ -153,7 +153,6 @@ public class SiteRPC implements RPC, SiteService {
     data.setMp3EmbedObject(kuneProperties.get(KuneProperties.MP3_EMBEDED_OBJECT));
     data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));
     data.setAviEmbedObject(kuneProperties.get(KuneProperties.AVI_EMBEDED_OBJECT));
-    data.setExtMediaDescrips(extMediaDescManager.getAll());
     data.setFeedbackEnabled(kuneProperties.getBoolean(KuneProperties.FEEDBACK_ENABLED));
     data.setSiteShortName(kuneProperties.get(KuneProperties.SITE_SHORTNAME));
     data.setSiteCommonName(kuneProperties.get(KuneProperties.SITE_COMMON_NAME));

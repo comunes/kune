@@ -38,7 +38,7 @@ import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.UserManager;
-import cc.kune.core.server.mapper.Mapper;
+import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.shared.domain.AdmissionType;
@@ -68,7 +68,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
   private final AccessRightsService accessRightsService;
   private final GroupFinder finder;
-  private final Mapper mapper;
+  private final KuneMapper mapper;
   private final NotificationService notifyService;
   private final SocialNetworkCache snCache;
 
@@ -76,7 +76,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
   @Inject
   public SocialNetworkManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
-      final GroupFinder finder, final AccessRightsService accessRightsService, final Mapper mapper,
+      final GroupFinder finder, final AccessRightsService accessRightsService, final KuneMapper mapper,
       final UserManager userManager, final SocialNetworkCache snCache,
       final NotificationService notifyService) {
     super(provider, SocialNetwork.class);
@@ -219,15 +219,21 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
   @Override
   public ParticipationData findParticipation(final User userLogged, final Group group)
       throws AccessViolationException {
+    final SocialNetwork sn = group.getSocialNetwork();
     get(userLogged, group); // check access
     final Long groupId = group.getId();
-    final Set<Group> adminInGroups = finder.findAdminInGroups(groupId);
+    final boolean isMember = sn.isAdmin(userLogged.getUserGroup())
+        || sn.isCollab(userLogged.getUserGroup());
+    final Set<Group> adminInGroups = (isMember ? finder.findAdminInGroups(groupId)
+        : finder.findAdminInGroups(groupId, GroupType.CLOSED));
+
     // Don't show self user group
     if (group.isPersonal()) {
       adminInGroups.remove(group);
     }
     // adminInGroups.remove(userLogged.getUserGroup());
-    final Set<Group> collabInGroups = finder.findCollabInGroups(groupId);
+    final Set<Group> collabInGroups = isMember ? finder.findCollabInGroups(groupId)
+        : finder.findCollabInGroups(groupId, GroupType.CLOSED);
     return new ParticipationData(adminInGroups, collabInGroups);
   }
 
@@ -356,7 +362,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     checkGroupIsNotAlreadyAMember(userGroup, sn);
     if (isModerated(admissionType)) {
       sn.addPendingCollaborator(userGroup);
-      notifyService.notifyGroupAdmins(userGroup, inGroup, "Pending collaborator",
+      notifyService.notifyGroupAdmins(inGroup, inGroup, "Pending collaborator",
           "There is a pending collaborator in this group. Please accept or deny him/her");
       snCache.expire(userGroup);
       snCache.expire(inGroup);

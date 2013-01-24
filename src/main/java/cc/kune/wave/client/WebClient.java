@@ -69,6 +69,7 @@ import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -352,6 +353,19 @@ public class WebClient extends Composite implements WaveClientView {
     clear();
   }
 
+  private void openWave(final WaveRef waveRef, final boolean isNewWave, final Set<ParticipantId> participants) {
+    waveUnsavedIndicator.onNewHistory(History.getToken(), new SimpleResponseCallback () {
+      @Override
+      public void onSuccess() {
+        openWaveImpl(waveRef, isNewWave, participants);
+      }
+
+      @Override
+      public void onCancel() {
+        // Do nothing
+      }});
+  }
+
   /**
    * Shows a wave in a wave panel.
    *
@@ -360,7 +374,7 @@ public class WebClient extends Composite implements WaveClientView {
    * @param participants the participants to add to the newly created wave.
    *        {@code null} if only the creator should be added
    */
-  private void openWave(WaveRef waveRef, boolean isNewWave, Set<ParticipantId> participants) {
+  private void openWaveImpl(WaveRef waveRef, boolean isNewWave, Set<ParticipantId> participants) {
     LOG.info("WebClient.openWave()");
 
     WaveClientClearEvent.fire(eventBus);
@@ -373,7 +387,7 @@ public class WebClient extends Composite implements WaveClientView {
     waveHolder.getElement().appendChild(loading);
     Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
     CustomStagesProvider wave = new CustomStagesProvider(
-        holder, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, waveUnsavedIndicator);
+        holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus);
     this.wave = wave;
     wave.load(new Command() {
       @Override
