@@ -86,7 +86,6 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
         I18n.getDirection(), new OnEnter() {
           @Override
           public void onEnter() {
-            doAction(token);
           }
         });
     builder.width("320px").height("120px").firstButtonTitle(I18n.t("Invite")).sndButtonTitle(

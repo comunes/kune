@@ -51,6 +51,8 @@ public class TextUtilsTest {
     assertTrue("kk@ex.com,   kk@ex2.com, kk@ex3.com".matches(TextUtils.EMAIL_REGEXP_LIST));
     assertFalse("kk@ex.com   ;kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
     assertFalse("kk@ex.com;kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    // with Carriage Return, etc:
+    assertTrue("kk@ex.com, \t  \n  \f  \r kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
   }
 
   @Test
