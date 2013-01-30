@@ -68,8 +68,9 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
       @Override
       public void onWindowClosing(final ClosingEvent event) {
         if (currentSavedState != null && currentSavedState.equals(SavedState.UNSAVED)) {
-          event.setMessage(I18n.t("This document is not saved. " +
-              "Are you sure that you want to navigate away from this page?"));
+          event.setMessage(I18n.t("WARNING: This document is not saved. " +
+              "Are you sure that you want to navigate away from this page? " + 
+              "We advise you to copy the contents you wrote just in case they get lost."));
         }
         }
       });
