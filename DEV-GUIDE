@@ -1,15 +1,15 @@
 KUNE DEVELOPER'S GUIDE
-(best viewed in emacs with org-mode)
+NOTE: This document is best viewed with GNU Emacs Org-mode (open with Emacs, Alt+X org-mode)
 
 * Summary of development resources
 
-| Code                            | https://gitorious.org/kune |
-| Bugs (send issues here)         | http://redmine.comunes.org |
-| Continuous Integration          | http://ci.comunes.org      |
-| Reviews (send your patchs here) | http://reviews.comunes.org |
-| Maven Repository                | http://archiva.comunes.org |
-| Our lists                       | http://kune.cc/#kune.lists |
-| Our group in kune               | http://kune.cc/#kune       |
+| Code                             | https://gitorious.org/kune |
+| Bugs (send issues here)          | http://redmine.comunes.org |
+| Continuous Integration           | http://ci.comunes.org      |
+| Reviews (send your patches here) | http://reviews.comunes.org |
+| Maven Repository                 | http://archiva.comunes.org |
+| Our lists                        | http://kune.cc/#kune.lists |
+| Our group in kune                | http://kune.cc/#kune       |
 
 * Development Environment
 
