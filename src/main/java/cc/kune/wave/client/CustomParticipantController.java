@@ -32,6 +32,7 @@ import org.waveprotocol.wave.client.wavepanel.WavePanel;
 import org.waveprotocol.wave.client.wavepanel.event.EventHandlerRegistry;
 import org.waveprotocol.wave.client.wavepanel.event.WaveClickHandler;
 import org.waveprotocol.wave.client.wavepanel.impl.edit.ParticipantSelectorWidget;
+import org.waveprotocol.wave.client.wavepanel.impl.edit.i18n.ParticipantMessages;
 import org.waveprotocol.wave.client.wavepanel.view.ParticipantView;
 import org.waveprotocol.wave.client.wavepanel.view.ParticipantsView;
 import org.waveprotocol.wave.client.wavepanel.view.View.Type;
@@ -69,6 +70,7 @@ public final class CustomParticipantController {
   private UniversalPopup popup = null;
   private final ParticipantId user;
   private static EventBus eventBus;
+  private static ParticipantMessages messages;
 
   /**
    * @param localDomain nullable. if provided, automatic suffixing will occur.
@@ -90,7 +92,8 @@ public final class CustomParticipantController {
    * @param user
    */
   public static void install(WavePanel panel, ModelAsViewProvider models,
-      ProfileManager profiles, String localDomain, ParticipantId user, EventBus eventBus) {
+      ProfileManager profiles, String localDomain, ParticipantId user, ParticipantMessages messages, EventBus eventBus) {
+    CustomParticipantController.messages = messages;
     CustomParticipantController.eventBus = eventBus;
     CustomParticipantController controller = new CustomParticipantController(panel.getViewProvider(),
         models, profiles, localDomain, user);
@@ -230,7 +233,7 @@ public final class CustomParticipantController {
     final ProfilePopupView profileView = participantView.showParticipation();
     ProfilePopupPresenter profileUi = ProfilePopupPresenter.create(profile, profileView, profiles);
     if (!participation.first.getParticipantIds().iterator().next().equals(participation.getSecond())) {
-      profileUi.addControl(EscapeUtils.fromSafeConstant("Remove"), new ClickHandler() {
+      profileUi.addControl(EscapeUtils.fromSafeConstant(messages.remove()), new ClickHandler() {
         @Override
         public void onClick(ClickEvent event) {
           participation.first.removeParticipant(participation.second);

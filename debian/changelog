@@ -1,3 +1,14 @@
+kune (0.3.0+b17) unstable; urgency=low
+
+  [ Vicente J. Ruiz Jurado ]
+  * Wave code can now be translated (almost full translated to Spanish)
+
+  [Samer Hassan Collado]
+  * Fix #496: Improve message when edition not saved
+  * Fix #442: invitations allow multilines
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 04 Feb 2013 20:15:19 +0100
+
 kune (0.3.0+b16) unstable; urgency=low
 
   * Fix for #443: Set up a artifactory server (http://archiva.comunes.org)
