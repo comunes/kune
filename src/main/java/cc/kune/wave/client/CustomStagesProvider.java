@@ -42,11 +42,13 @@ import org.waveprotocol.wave.client.wavepanel.impl.edit.Actions;
 import org.waveprotocol.wave.client.wavepanel.impl.edit.EditController;
 import org.waveprotocol.wave.client.wavepanel.impl.edit.EditSession;
 import org.waveprotocol.wave.client.wavepanel.impl.edit.KeepFocusInView;
+import org.waveprotocol.wave.client.wavepanel.impl.edit.i18n.ParticipantMessages;
 import org.waveprotocol.wave.client.wavepanel.impl.focus.FocusBlipSelector;
 import org.waveprotocol.wave.client.wavepanel.impl.focus.FocusFramePresenter;
 import org.waveprotocol.wave.client.wavepanel.impl.focus.ViewTraverser;
 import org.waveprotocol.wave.client.wavepanel.impl.indicator.ReplyIndicatorController;
 import org.waveprotocol.wave.client.wavepanel.impl.menu.MenuController;
+import org.waveprotocol.wave.client.wavepanel.impl.menu.i18n.MenuMessages;
 import org.waveprotocol.wave.client.wavepanel.impl.reader.Reader;
 import org.waveprotocol.wave.client.wavepanel.impl.title.WaveTitleHandler;
 import org.waveprotocol.wave.client.wavepanel.impl.toolbar.ToolbarSwitcher;
@@ -62,6 +64,7 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.log.Log;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.EventBus;
 
@@ -74,33 +77,47 @@ public class CustomStagesProvider extends Stages {
 
   private final static AsyncHolder<Object> HALT = new AsyncHolder<Object>() {
     @Override
-    public void call(Accessor<Object> accessor) {
+    public void call(final Accessor<Object> accessor) {
       // Never ready, so never notify the accessor.
     }
   };
 
-  private final Element wavePanelElement;
-  private final CustomSavedStateIndicator waveUnsavedIndicator;
-  @SuppressWarnings("unused")
-  private final FramedPanel waveFrame;
-  private final LogicalPanel rootPanel;
-  private final WaveRef waveRef;
+  /**
+   * Finds the blip that should receive the focus and selects it.
+   */
+  private static void selectAndFocusOnBlip(final Reader reader, final ModelAsViewProvider views,
+      final ConversationView wave, final FocusFramePresenter focusFrame, final WaveRef waveRef) {
+    final FocusBlipSelector blipSelector =
+        FocusBlipSelector.create(wave, views, reader, new ViewTraverser());
+    final BlipView blipUi = blipSelector.selectBlipByWaveRef(waveRef);
+    // Focus on the selected blip.
+    if (blipUi != null) {
+      focusFrame.focus(blipUi);
+    }
+  }
   private final RemoteViewServiceMultiplexer channel;
+  private boolean closed;
+  private final EventBus eventBus;
   private final IdGenerator idGenerator;
-  private final ProfileManager profiles;
-  private final WaveStore waveStore;
   private final boolean isNewWave;
   private final String localDomain;
-
-  private boolean closed;
   private StageOne one;
-  private StageTwo two;
+  private final Set<ParticipantId> participants;
+  private final ProfileManager profiles;
+  private final LogicalPanel rootPanel;
+
   private StageThree three;
+  private StageTwo two;
   private WaveContext wave;
+  @SuppressWarnings("unused")
+  private final FramedPanel waveFrame;
+  private final Element wavePanelElement;
 
-  private Set<ParticipantId> participants;
+  private final WaveRef waveRef;
 
-  private final EventBus eventBus;
+  private final WaveStore waveStore;
+
+  private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   /**
    * @param wavePanelElement the DOM element to become the wave panel.
@@ -116,10 +133,10 @@ public class CustomStagesProvider extends Stages {
    * @param participants the participants to add to the newly created wave. null
    *                     if only the creator should be added
    */
-  public CustomStagesProvider(Element wavePanelElement, CustomSavedStateIndicator waveUnsavedIndicator,
-      LogicalPanel rootPanel, FramedPanel waveFrame, WaveRef waveRef, RemoteViewServiceMultiplexer channel,
-      IdGenerator idGenerator, ProfileManager profiles, WaveStore store, boolean isNewWave,
-      String localDomain, Set<ParticipantId> participants, EventBus eventBus) {
+  public CustomStagesProvider(final Element wavePanelElement, final CustomSavedStateIndicator waveUnsavedIndicator,
+      final LogicalPanel rootPanel, final FramedPanel waveFrame, final WaveRef waveRef, final RemoteViewServiceMultiplexer channel,
+      final IdGenerator idGenerator, final ProfileManager profiles, final WaveStore store, final boolean isNewWave,
+      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus) {
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.wavePanelElement = wavePanelElement;
     this.waveFrame = waveFrame;
@@ -136,29 +153,18 @@ public class CustomStagesProvider extends Stages {
   }
 
   @Override
-  protected AsyncHolder<StageZero> createStageZeroLoader() {
-    return haltIfClosed(super.createStageZeroLoader());
-  }
-
-  @Override
-  protected AsyncHolder<StageOne> createStageOneLoader(StageZero zero) {
+  protected AsyncHolder<StageOne> createStageOneLoader(final StageZero zero) {
     return haltIfClosed(new StageOne.DefaultProvider(zero) {
-      @Override
-      protected Element createWaveHolder() {
-        return wavePanelElement;
-      }
-
       @Override
       protected LogicalPanel createWaveContainer() {
         return rootPanel;
       }
-    });
-  }
 
-  @Override
-  protected AsyncHolder<StageTwo> createStageTwoLoader(StageOne one) {
-    return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave,
-      idGenerator, profiles, waveUnsavedIndicator, participants));
+      @Override
+      protected Element createWaveHolder() {
+        return wavePanelElement;
+      }
+    });
   }
 
   @Override
@@ -169,7 +175,7 @@ public class CustomStagesProvider extends Stages {
         // Prepend an init wave flow onto the stage continuation.
         super.create(new Accessor<StageThree>() {
           @Override
-          public void use(StageThree x) {
+          public void use(final StageThree x) {
             onStageThreeLoaded(x, whenReady);
           }
         });
@@ -193,39 +199,34 @@ public class CustomStagesProvider extends Stages {
         final ModelAsViewProvider models = stageTwo.getModelAsViewProvider();
         final ProfileManager profiles = stageTwo.getProfileManager();
 
+        final MenuMessages menuMessages = GWT.create(MenuMessages.class);
+        final ParticipantMessages participantMessages = GWT.create(ParticipantMessages.class);
+
         final Actions actions = getEditActions();
         final EditSession edit = getEditSession();
-        MenuController.install(actions, panel);
+        MenuController.install(actions, panel, menuMessages);
         ToolbarSwitcher.install(stageTwo.getStageOne().getWavePanel(), getEditSession(),
             getViewToolbar(), getEditToolbar());
         WaveTitleHandler.install(edit, models);
         ReplyIndicatorController.install(actions, edit, panel);
         EditController.install(focus, actions, panel);
-        CustomParticipantController.install(panel, models, profiles, getLocalDomain(), user, eventBus);
+        CustomParticipantController.install(panel, models, profiles, getLocalDomain(), user,  participantMessages, eventBus);
         KeepFocusInView.install(edit, panel);
         stageTwo.getDiffController().upgrade(edit);
       }
 
     });
+  }
+
+  @Override
+  protected AsyncHolder<StageTwo> createStageTwoLoader(final StageOne one) {
+    return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave,
+      idGenerator, profiles, waveUnsavedIndicator, participants));
   };
 
-  private void onStageThreeLoaded(StageThree x, Accessor<StageThree> whenReady) {
-    Log.info("On stage three loaded");
-    if (closed) {
-      // Stop the loading process.
-      return;
-    }
-    three = x;
-    if (isNewWave) {
-      initNewWave(x);
-    } else {
-      handleExistingWave(x);
-    }
-    wave = new WaveContext(
-        two.getWave(), two.getConversations(), two.getSupplement(), two.getReadMonitor());
-    waveStore.add(wave);
-    install();
-    whenReady.use(x);
+  @Override
+  protected AsyncHolder<StageZero> createStageZeroLoader() {
+    return haltIfClosed(super.createStageZeroLoader());
   }
 
   public void destroy() {
@@ -301,18 +302,23 @@ public class CustomStagesProvider extends Stages {
   }
 
 
-  /**
-   * Finds the blip that should receive the focus and selects it.
-   */
-  private static void selectAndFocusOnBlip(final Reader reader, final ModelAsViewProvider views,
-      final ConversationView wave, final FocusFramePresenter focusFrame, final WaveRef waveRef) {
-    final FocusBlipSelector blipSelector =
-        FocusBlipSelector.create(wave, views, reader, new ViewTraverser());
-    final BlipView blipUi = blipSelector.selectBlipByWaveRef(waveRef);
-    // Focus on the selected blip.
-    if (blipUi != null) {
-      focusFrame.focus(blipUi);
+  private void onStageThreeLoaded(final StageThree x, final Accessor<StageThree> whenReady) {
+    Log.info("On stage three loaded");
+    if (closed) {
+      // Stop the loading process.
+      return;
     }
+    three = x;
+    if (isNewWave) {
+      initNewWave(x);
+    } else {
+      handleExistingWave(x);
+    }
+    wave = new WaveContext(
+        two.getWave(), two.getConversations(), two.getSupplement(), two.getReadMonitor());
+    waveStore.add(wave);
+    install();
+    whenReady.use(x);
   }
 
 }
