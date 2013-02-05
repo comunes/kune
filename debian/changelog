@@ -1,3 +1,10 @@
+kune (0.3.0+b18) unstable; urgency=low
+
+  * Wave unread/read & follow/unfollow blip
+  * Wave avatar in blips with better title
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 05 Feb 2013 16:26:46 +0100
+
 kune (0.3.0+b17) unstable; urgency=low
 
   [ Vicente J. Ruiz Jurado ]
