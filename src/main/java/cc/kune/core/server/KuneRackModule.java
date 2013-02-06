@@ -23,6 +23,10 @@ import static com.google.inject.matcher.Matchers.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.waveprotocol.box.server.authentication.SessionManager;
+import org.waveprotocol.box.server.robots.dataapi.DataApiOAuthServlet;
+import org.waveprotocol.box.server.rpc.AttachmentInfoServlet;
+import org.waveprotocol.box.server.rpc.AttachmentServlet;
 
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.blogs.server.BlogServerModule;
@@ -128,18 +132,32 @@ public class KuneRackModule implements RackModule {
     builder.exclude("/javascripts/.*");
     builder.exclude("/templates/.*");
 
-    /* Wave with context '/' */
+    /*
+     * Wave with context '/'. See {@link CustomServerMain}
+     */
     builder.exclude("/");
+    builder.exclude("/gadget/gadgetlist");
     builder.exclude("/attachment/.*");
-    builder.exclude("/auth/signin");
+    builder.exclude(AttachmentServlet.ATTACHMENT_URL + "/*");
+    builder.exclude(AttachmentServlet.THUMBNAIL_URL + "/*");
+    builder.exclude(AttachmentInfoServlet.ATTACHMENTS_INFO_URL);
+
+    builder.exclude(SessionManager.SIGN_IN_URL);
     builder.exclude("/auth/signout");
     builder.exclude("/auth/register");
+    builder.exclude("/locale/.*");
     builder.exclude("/fetch/.*");
+    builder.exclude("/search/.*");
+    builder.exclude("/notification/.*");
     builder.exclude("/robot/dataapi");
-    builder.exclude("/robot/dataapi/oauth/.*");
+    builder.exclude(DataApiOAuthServlet.DATA_API_OAUTH_PATH + "/.*");
     builder.exclude("/robot/dataapi/rpc");
     builder.exclude("/robot/register/.*");
     builder.exclude("/robot/rpc");
+    builder.exclude("/webclient/remote_logging");
+    builder.exclude("/profile/.*");
+    builder.exclude("/waveref/.*");
+
     builder.exclude("/gadgets");
     builder.exclude("/gadgets/.*");
     builder.exclude("/socket.io/*");

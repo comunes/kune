@@ -1,3 +1,9 @@
+kune (0.3.0+b19) unstable; urgency=low
+
+  * Fix for 505: Attachments have wrong thumbnail
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 06 Feb 2013 18:18:58 +0100
+
 kune (0.3.0+b18) unstable; urgency=low
 
   * Wave unread/read & follow/unfollow blip
