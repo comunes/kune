@@ -224,6 +224,7 @@ public class CustomServerMain {
   }
 
   private static void initializeServlets(Injector injector, ServerRpcProvider server) {
+    // See exclude list in {@link KuneRackModule}
     server.addServlet("/gadget/gadgetlist", injector.getInstance(CustomGadgetProviderServlet.class));
     server.addServlet("/attachment/*", injector.getInstance(AttachmentServlet.class));
     server.addServlet(AttachmentServlet.ATTACHMENT_URL + "/*", injector.getInstance(AttachmentServlet.class));

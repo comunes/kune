@@ -10,6 +10,7 @@
 /var/log/kune
 /var/lib/kune/uploads/
 /var/lib/kune/sitemap/
+/var/lib/kune/thumbnail_patterns
 /var/lib/kune/lucene/kune_prod/indexes/
 /usr/share/dbconfig-common/data/kune/install/
 /usr/share/dbconfig-common/data/kune/upgrade/mysql/

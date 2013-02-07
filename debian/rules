@@ -25,6 +25,7 @@ KUNE := $(DEST)/usr/share/kune
 ETCDIR := $(DEST)/etc/kune
 LOGDIR := $(DEST)/var/log/kune
 VARDIR := $(DEST)/var/lib/kune
+THUMBDIR := $(DEST)/var/lib/kune/thumbnail_patterns
 TARGETJAR := $(TARGET)/kune-$(KUNE_VERSION)-complete.jar
 NO_GWT=true
 
@@ -57,6 +58,7 @@ install/kune::
 	cp $(RESOURCES)/jaas.config $(ETCDIR)
 	cp $(RESOURCES)/log4j.prod.properties $(ETCDIR)/log4j.properties
 	cp $(RESOURCES)/mail-notif-template.html $(ETCDIR)
+	cp $(RESOURCES)/thumbnail_patterns/* $(THUMBDIR)
 
 #	DB configuration, see:
 #	http://people.debian.org/~seanius/policy/examples/dbconfig-common/doc/dbconfig-common-using.html#bootstrap
