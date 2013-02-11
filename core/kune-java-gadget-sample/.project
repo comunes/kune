@@ -8,13 +8,13 @@
       <name>org.eclipse.jdt.core.javabuilder</name>
     </buildCommand>
     <buildCommand>
-      <name>org.eclipse.m2e.core.maven2Builder</name>
-    </buildCommand>
-    <buildCommand>
       <name>com.google.gdt.eclipse.core.webAppProjectValidator</name>
     </buildCommand>
     <buildCommand>
       <name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
+    </buildCommand>
+    <buildCommand>
+      <name>org.eclipse.m2e.core.maven2Builder</name>
     </buildCommand>
   </buildSpec>
   <natures>
