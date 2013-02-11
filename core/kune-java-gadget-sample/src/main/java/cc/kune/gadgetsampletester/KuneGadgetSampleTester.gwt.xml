@@ -6,7 +6,7 @@
   <!-- Other module inherits -->
   <inherits name='com.thezukunft.wave.WaveConnectorMock'/>
 
-  <!-- Specify the app entry point class. -->
+  <!-- Specify the gadget tester entry point class -->
   <entry-point
     class='cc.kune.gadgetsampletester.client.KuneGadgetSampleTesterEntryPoint'/>
 

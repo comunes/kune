@@ -21,15 +21,10 @@
 package cc.kune.gadget.client;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import com.google.inject.Singleton;
-import com.thezukunft.wave.connector.Wave;
-import com.thezukunft.wave.connectormock.WaveMock;
 
 public abstract class AbstractKuneGadgetGinModule extends AbstractGinModule {
 
-  @Override
-  protected void configure() {
-    bind(Wave.class).to(WaveMock.class).in(Singleton.class);
+  public AbstractKuneGadgetGinModule() {
   }
 
 }

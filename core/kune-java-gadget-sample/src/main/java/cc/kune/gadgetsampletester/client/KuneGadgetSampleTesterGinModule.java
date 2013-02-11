@@ -18,13 +18,19 @@
  *
  */
 
-package cc.kune.gadgetsample.client;
+package cc.kune.gadgetsampletester.client;
 
-import cc.kune.gadget.client.KuneGadgetGinInjector;
+import cc.kune.gadget.client.AbstractKuneGadgetGinModule;
 
-import com.google.gwt.inject.client.GinModules;
+import com.google.inject.Singleton;
+import com.thezukunft.wave.connector.Wave;
+import com.thezukunft.wave.connectormock.WaveMock;
 
-@GinModules(KuneGadgetSampleGinModule.class)
-public interface GadgetSampleGinInjector extends KuneGadgetGinInjector {
-  KuneGadgetSampleMainPanel getMainPanel();
+public class KuneGadgetSampleTesterGinModule extends AbstractKuneGadgetGinModule {
+
+
+  @Override
+  protected void configure() {
+    bind(Wave.class).to(WaveMock.class).in(Singleton.class);
+  };
 }

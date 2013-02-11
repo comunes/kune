@@ -38,7 +38,7 @@
     <dependency>
       <groupId>com.google.gwt.google-apis</groupId>
       <artifactId>gwt-gadgets</artifactId>
-      <version>1.2.1-rc1</version>
+      <version>1.0.3</version>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
@@ -67,7 +67,7 @@
     </dependency>
   </dependencies>
   <build>
-    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes
+    <outputDirectory>target/WEB-INF/classes
     </outputDirectory>
   </build>
 </project>

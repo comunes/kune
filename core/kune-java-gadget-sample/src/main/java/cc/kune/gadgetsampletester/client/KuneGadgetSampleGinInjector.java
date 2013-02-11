@@ -18,10 +18,14 @@
  *
  */
 
-package cc.kune.gadgetsample.client;
+package cc.kune.gadgetsampletester.client;
 
-import cc.kune.gadget.client.AbstractKuneGadgetGinModule;
+import cc.kune.gadget.client.KuneGadgetGinInjector;
+import cc.kune.gadgetsample.client.KuneGadgetSampleMainPanel;
 
-public class KuneGadgetSampleGinModule extends AbstractKuneGadgetGinModule {
+import com.google.gwt.inject.client.GinModules;
 
+@GinModules(KuneGadgetSampleTesterGinModule.class)
+public interface KuneGadgetSampleGinInjector extends KuneGadgetGinInjector {
+  KuneGadgetSampleMainPanel getMainPanel();
 }

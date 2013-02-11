@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <inherits name='cc.kune.gadget.KuneGadget'/>
-
-  <!-- Specify the paths for translatable code -->
+  <!-- Specify the paths for transla table code -->
   <source path='client'/>
 
+  <!-- This is the gadget sample ui , doesn't have EntryPoint -->
 </module>

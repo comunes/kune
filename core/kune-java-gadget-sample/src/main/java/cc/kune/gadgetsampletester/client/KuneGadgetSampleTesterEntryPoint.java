@@ -1,6 +1,5 @@
 package cc.kune.gadgetsampletester.client;
 
-import cc.kune.gadgetsample.client.GadgetSampleGinInjector;
 import cc.kune.gadgetsample.client.KuneGadgetSampleMainPanel;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -16,7 +15,7 @@ public class KuneGadgetSampleTesterEntryPoint implements EntryPoint {
 
   @Override
   public void onModuleLoad() {
-    final GadgetSampleGinInjector gin = GWT.create(GadgetSampleGinInjector.class);
+    final KuneGadgetSampleGinInjector gin = GWT.create(KuneGadgetSampleGinInjector.class);
 
     final WaveMock w = (WaveMock) gin.getWave();
 
