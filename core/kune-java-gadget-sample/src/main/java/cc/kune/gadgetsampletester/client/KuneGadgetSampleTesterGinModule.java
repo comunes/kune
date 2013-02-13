@@ -28,9 +28,11 @@ import com.thezukunft.wave.connectormock.WaveMock;
 
 public class KuneGadgetSampleTesterGinModule extends AbstractKuneGadgetGinModule {
 
-
   @Override
   protected void configure() {
+    // As this is just a tester, we use a mock for the wave functionality so,
+    // this can run without the rest of the wave infrastructure. See
+    // KuneGadgetSampleDeployModule to see how this looks like in real use
     bind(Wave.class).to(WaveMock.class).in(Singleton.class);
   };
 }

@@ -34,13 +34,27 @@ import com.thezukunft.wave.connector.StateUpdateEvent;
 import com.thezukunft.wave.connector.StateUpdateEventHandler;
 import com.thezukunft.wave.connector.Wave;
 
+/**
+ * The Class KuneGadgetSampleMainPanel is a simple panel with a button that
+ * update its text when you click in the button
+ */
 public class KuneGadgetSampleMainPanel extends Composite {
 
+  /** The Constant LOCK. */
   private static final String LOCK = "LOCK_KEY";
 
+  /**
+   * Instantiates a new kune gadget sample main panel. We use gin to inject the dependencies.
+   *
+   * @param eventBus
+   *          the event bus
+   * @param wave
+   *          the wave
+   */
   @Inject
   public KuneGadgetSampleMainPanel(final EventBus eventBus, final Wave wave) {
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      // We run this deferred, at the end of the gadget load
       @Override
       public void execute() {
         boolean lockStatus = getLockStatus(wave);
@@ -49,6 +63,7 @@ public class KuneGadgetSampleMainPanel extends Composite {
           @Override
           public void onClick(ClickEvent event) {
             Boolean nextStatus = !getLockStatus(wave);
+            // We update the status of key LOCK to the inverse of the current status
             wave.getState().submitValue(LOCK, nextStatus.toString());
           }
         });
@@ -56,13 +71,21 @@ public class KuneGadgetSampleMainPanel extends Composite {
         eventBus.addHandler(StateUpdateEvent.TYPE, new StateUpdateEventHandler() {
           @Override
           public void onUpdate(final StateUpdateEvent event) {
+            // When the status changes we just update the text of the button
             btn.setText(getBtnText(Boolean.valueOf(event.getState().get(LOCK))));
           }
         });
         eventBus.addHandler(ModeChangeEvent.TYPE, new ModeChangeEventHandler() {
           @Override
           public void onUpdate(final ModeChangeEvent event) {
-            // FIXME
+            // See the modes in http://www.waveprotocol.org/wave-apis/google-wave-gadgets-api/reference
+            // EDIT, VIEW, PLAYBACK, etc
+            if (wave.isPlayback()) {
+              // Do something
+            }
+            else {
+              // Do other thing
+            }
           }
         });
 
@@ -74,7 +97,14 @@ public class KuneGadgetSampleMainPanel extends Composite {
     });
   }
 
+  /**
+   * Calculate the button text.
+   *
+   * @param lockStatus
+   *          the lock status
+   * @return the btn text
+   */
   protected String getBtnText(Boolean lockStatus) {
-    return lockStatus? "Unlock": "Lock";
+    return lockStatus ? "Unlock" : "Lock";
   }
 }

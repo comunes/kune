@@ -17,19 +17,17 @@ public class KuneGadgetSampleTesterEntryPoint implements EntryPoint {
   public void onModuleLoad() {
     final KuneGadgetSampleGinInjector gin = GWT.create(KuneGadgetSampleGinInjector.class);
 
-    final WaveMock w = (WaveMock) gin.getWave();
+    final WaveMock waveMock = (WaveMock) gin.getWave();
 
-    // initializing random participants will currently generate two
-    // fixed ones
-    // TODO
-    w.initRandomParticipants();
+    // We initialize some participants
+    waveMock.initRandomParticipants();
 
-    // we have to create the gadget using gin so it can use injection
+    // We have to create the gadget using gin so it can use injection of its dependencies (evenBus, etc)
+
     final KuneGadgetSampleMainPanel gadget = gin.getMainPanel();
     final KuneGadgetSampleMainPanel gadget2 = gin.getMainPanel();
 
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-
       @Override
       public void execute() {
         RootPanel.get().add(new Label ("Gadget of user 1"));

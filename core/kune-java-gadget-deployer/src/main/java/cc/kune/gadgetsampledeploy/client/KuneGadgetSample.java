@@ -25,8 +25,8 @@ title = "Kune gadget sample", //
 author = "The kune development team", //
 author_link = "http://kune.ourproject.org", //
 height = 640// , //
-// Default width 320
-// Commented only to use 100% width=550 (WAVE-309)//
+// width=550 //
+// Commented only to use 100% width (see WAVE-309)//
 )
 @Gadget.InjectContent(files = { "ModuleContent.txt" })
 public class KuneGadgetSample extends WaveGadget<UserPreferences> implements NeedsWave, EntryPoint,
@@ -77,6 +77,7 @@ public class KuneGadgetSample extends WaveGadget<UserPreferences> implements Nee
       @Override
       public void execute() {
         if (getWave().isInWaveContainer()) {
+          // We only create and initialize the gadget panel when we are running in a the wave container. If not we wait.
           timer = new Timer() {
             @Override
             public void run() {
