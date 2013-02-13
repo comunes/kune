@@ -121,6 +121,8 @@ http://www.gnu.org/licenses/gpl.html
 We use the code of waveconnector-gwt for our wave gadget library so we can 
 test and deploy gadgets easily:
 http://code.google.com/p/waveconnector-gwt/
+Copyright under MIT License 
+http://www.opensource.org/licenses/mit-license.php
 
 kune documentation
 --------------------------------------------------------------------------------

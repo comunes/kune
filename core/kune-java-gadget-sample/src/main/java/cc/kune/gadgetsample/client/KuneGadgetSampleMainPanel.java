@@ -26,6 +26,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.inject.Inject;
 import com.onetwopoll.gwt.framework.EventBus;
 import com.thezukunft.wave.connector.ModeChangeEvent;
@@ -40,11 +42,12 @@ import com.thezukunft.wave.connector.Wave;
  */
 public class KuneGadgetSampleMainPanel extends Composite {
 
-  /** The Constant LOCK. */
+  private static final String AVATAR_SIZE = "50px";
   private static final String LOCK = "LOCK_KEY";
 
   /**
-   * Instantiates a new kune gadget sample main panel. We use gin to inject the dependencies.
+   * Instantiates a new kune gadget sample main panel. We use gin to inject the
+   * dependencies.
    *
    * @param eventBus
    *          the event bus
@@ -57,17 +60,28 @@ public class KuneGadgetSampleMainPanel extends Composite {
       // We run this deferred, at the end of the gadget load
       @Override
       public void execute() {
+
+        final Image avatar = new Image();
+        avatar.setSize(AVATAR_SIZE, AVATAR_SIZE);
+        avatar.setTitle(wave.getViewer().getDisplayName());
+        avatar.setUrl(wave.getViewer().getThumbnailUrl());
+
         boolean lockStatus = getLockStatus(wave);
         final Button btn = new Button(getBtnText(lockStatus));
+
         btn.addClickHandler(new ClickHandler() {
           @Override
           public void onClick(ClickEvent event) {
             Boolean nextStatus = !getLockStatus(wave);
-            // We update the status of key LOCK to the inverse of the current status
+            // We update the status of key LOCK to the inverse of the current
+            // status
             wave.getState().submitValue(LOCK, nextStatus.toString());
           }
         });
-        initWidget(btn);
+        final VerticalPanel vp = new VerticalPanel();
+        vp.add(avatar);
+        vp.add(btn);
+        initWidget(vp);
         eventBus.addHandler(StateUpdateEvent.TYPE, new StateUpdateEventHandler() {
           @Override
           public void onUpdate(final StateUpdateEvent event) {
@@ -78,12 +92,12 @@ public class KuneGadgetSampleMainPanel extends Composite {
         eventBus.addHandler(ModeChangeEvent.TYPE, new ModeChangeEventHandler() {
           @Override
           public void onUpdate(final ModeChangeEvent event) {
-            // See the modes in http://www.waveprotocol.org/wave-apis/google-wave-gadgets-api/reference
+            // See the modes in
+            // http://www.waveprotocol.org/wave-apis/google-wave-gadgets-api/reference
             // EDIT, VIEW, PLAYBACK, etc
             if (wave.isPlayback()) {
               // Do something
-            }
-            else {
+            } else {
               // Do other thing
             }
           }

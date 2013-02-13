@@ -5,4 +5,5 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.thezukunft.wave.WaveConnector" />
 	<source path="connectormock" />
+        <public path="public"/>
 </module>
