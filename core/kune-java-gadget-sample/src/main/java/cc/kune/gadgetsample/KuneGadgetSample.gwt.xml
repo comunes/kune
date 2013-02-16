@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <inherits name='cc.kune.gadget.KuneGadget'/>
-  <inherits name="com.google.gwt.i18n.I18N"/>
 
+  <inherits name="com.google.gwt.i18n.I18N"/>
   <extend-property name="locale" values="es"/>
   <extend-property name="locale" values="en"/>
   <set-property-fallback name="locale" value="en"/>
