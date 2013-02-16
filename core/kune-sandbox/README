@@ -1,0 +1,13 @@
+KUNE SANDBOX README
+NOTE: This document is best viewed with GNU Emacs Org-mode (open with Emacs, Alt+X org-mode)
+
+This is a README file for the Kune developer's sandbox. Please read the Kune DEV-GUIDE for further developer info about Kune.
+
+Kune has a small sandbox where some UI elements can be tested quickly without a server. It's a simple GWT app. For running the Sandbox, you should follow these steps:
+- Import /kune/core/kune-sandbox as a project in Eclipse
+- Project properties => Google => Web Tookit => Enable "Use Google Web Toolkit" with GWT 2.1.1
+- In the java source some errors will appear. Allow automatic fixing from "Fix Project Setup", which will add the project "kune" to the Build Path
+- You should be able to run (without running any server before) src/main/java/cc/kune/sandbox/KuneSandbox.gwt.xml from mouse right click => Run As => Web Application. An URL will be provided, which can be open in a browser (Firefox/Chrome/Chromium) with the GWT plugin.
+- If it doesn't work, you may Run As => Run Configurations => select Kune_sandbox.html => Classpath tab => Click on any User entry => Advanced button => Add Folder => Add, from the project kune, src/main/java, src/main/resources, src/main/webapp => Run
+
+NOTE: you may need to run "mvn eclipse:eclipse" from the kune-sandbox folder.
