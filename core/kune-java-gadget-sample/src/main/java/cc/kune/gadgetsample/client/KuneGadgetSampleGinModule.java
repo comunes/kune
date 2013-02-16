@@ -23,8 +23,6 @@ package cc.kune.gadgetsample.client;
 import cc.kune.gadget.client.AbstractKuneGadgetGinModule;
 
 import com.google.inject.Singleton;
-import com.thezukunft.wave.connector.Wave;
-import com.thezukunft.wave.connectormock.WaveMock;
 
 public class KuneGadgetSampleGinModule extends AbstractKuneGadgetGinModule {
   @Override
