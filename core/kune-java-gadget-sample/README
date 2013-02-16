@@ -1,0 +1,11 @@
+* Kune Gadget sample
+** Introduction
+This is a simple java gadget sample for kune (or wave). Mainly is a panel that updates the state of the gadget and also listen to state changes.
+** Testing
+- First, compile the project from eclipse using the GWT compiler. 
+- Then run target/KuneGadgetSampleTester.html as a Web Application (GWT Dev hosted mode).
+- Open http://127.0.0.1:8888/KuneGadgetSampleTester.html?gwt.codesvr=127.0.0.1:9997 in your browser
+** Deployment
+There is a similar project "kune-java-gadget-deployer" that allow the deploy of this gadget. Basically allow the compilation of the gadget so you can copy/deploy to a webserver.
+** Create your own gadget
+For that just copy this sample project and the deployer project and use them as templates for your gadget. See KuneGadgetSampleMainPanel for the main code of the gadget.

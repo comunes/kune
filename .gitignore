@@ -56,3 +56,6 @@ src/main/webapp/symbolmanifest.json
 src/main/webapp/symbolsforspeedtracer/
 src/main/webapp/ws/
 core/kune-sandbox/war/kune_sandbox
+core/kune-java-gadget-lib/target
+core/kune-sandbox/war/WEB-INF/lib/
+*~

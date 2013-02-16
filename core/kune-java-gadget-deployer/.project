@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-  <name>kune-java-gadget-sample</name>
-  <comment>A java gadget sample for kune to show the creation of kune gadgets. It includes a local gadget tester (without deploy). NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <name>kune-java-gadget-sample-deployer</name>
+  <comment>A java gadget sample deployer for kune to show the creation of kune gadgets. Ready to compile and copy/deploy to a webserver. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

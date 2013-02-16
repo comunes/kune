@@ -7,21 +7,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
-  <artifactId>kune-java-gadget-sample</artifactId>
-  <name>A gadget sample for kune</name>
-  <description>A java gadget sample for kune to show the creation of kune gadgets. It includes a local gadget tester (without deploy)</description>
+  <artifactId>kune-java-gadget-lib</artifactId>
+  <name>A generic gadget lib for kune</name>
+  <description>A java gadget library for kune to help the creation of kune gadgets</description>
   <repositories>
-    <repository>
-      <id>comunes-snapshots</id>
-      <name>Comunes Archiva Snapshot Repository</name>
-      <url>http://archiva.comunes.org/repository/comunes-snapshots/</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
     <repository>
       <id>comunes-internal</id>
       <url>http://archiva.comunes.org/repository/comunes-internal/</url>
@@ -35,11 +24,6 @@
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>cc.kune</groupId>
-      <artifactId>kune-java-gadget-lib</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.10</version>
@@ -50,6 +34,11 @@
       <artifactId>gwt-user</artifactId>
       <version>${gwt.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt.google-apis</groupId>
+      <artifactId>gwt-gadgets</artifactId>
+      <version>1.0.3</version>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
@@ -66,11 +55,26 @@
   <build>
     <outputDirectory>target/WEB-INF/classes
     </outputDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.java</include>
+          <include>**/*.gwt.xml</include>
+          <include>**/*.jpg</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
-  <url>http://kune.ourproject.org</url>
-  <organization>
-    <name>Comunes Collective</name>
-    <url>http://comunes.org</url>
-  </organization>
-  <version>0.0.1</version>
 </project>

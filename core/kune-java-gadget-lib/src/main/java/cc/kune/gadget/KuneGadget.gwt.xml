@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit the core Web Toolkit stuff. -->
+  <inherits name='com.google.gwt.user.User'/>
+
+  <!-- Other module inherits -->
+  <inherits name="com.google.gwt.inject.Inject"/>
+
+  <!-- Specify the paths for translatable code -->
+  <source path='client'/>
+
+  <!-- This is the gadget library, doesn't have EntryPoint -->
+
+</module>

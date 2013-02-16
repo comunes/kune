@@ -1,6 +1,7 @@
 kune (0.3.0+b19) unstable; urgency=low
 
   * Fix for 505: Attachments have wrong thumbnail
+  * Added a java gadget sample (with tester and deployer)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 06 Feb 2013 18:18:58 +0100
 

@@ -1,0 +1,11 @@
+* Kune Gadget sample deployer
+** Introduction
+This is a simple java gadget deployer sample for kune (or wave). Mainly is a gadget that uses the "kune-java-gadget-sample" so can be compiled, deployed to a webserver and used.
+** Testing
+- If you want to test the gadget you have to use the "kune-java-gadget-sample" project instead.
+** Deployment
+- GWT Compile this project
+- Copy the target/kuneGadgetSampleDeploy directory to a web server
+- Add http://example.com/kuneGadgetSampleDeploy/cc.kune.gadgetsampledeploy.client.KuneGadgetSample.gadget.xml as a gadget in a wave.
+** Create your own gadget
+For that just copy this deployer project and the sample project use then as templates for your gadget
