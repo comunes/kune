@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <inherits name='cc.kune.gadget.KuneGadget'/>
-  <!-- Specify the paths for transla table code -->
+  <inherits name="com.google.gwt.i18n.I18N"/>
+
+  <extend-property name="locale" values="es"/>
+  <extend-property name="locale" values="en"/>
+  <set-property-fallback name="locale" value="en"/>
+
   <source path='client'/>
 
   <!-- This is the gadget sample ui , doesn't have EntryPoint -->
