@@ -402,8 +402,9 @@ http://www.youtube.com/user/GoogleDevelopers/search?query=Wave
 
 See class WaveClientProvider in Kune (in the short term, we should define this in a .gwt.xml instead of there, but this is a starting point).
 
-* Sandbox
-
+* UI dev
+When changing the User Interface, you may want quick ways of working with it, without the need to reload every time the whole Kune.
+** Sandbox
 Kune has a small sandbox where some UI elements can be tested quickly without a server. It's a simple GWT app. For running the Sandbox, you should follow these steps:
 - Import /kune/core/kune-sandbox as a project in Eclipse
 - Project properties => Google => Web Tookit => Enable "Use Google Web Toolkit" with GWT 2.1.1
@@ -413,6 +414,10 @@ Kune has a small sandbox where some UI elements can be tested quickly without a 
 
 NOTE: you may need to run "mvn eclipse:eclipse" from the kune-sandbox folder.
 
+** CSS
+If you want to make modifications in the Kune CSS, the following will help:
+- There is a script bin/css-update.sh that should help updating Kune CSS
+- Use the extension CSS Reloader or CSS Refresh (both for Firefox and Chrome/Chromium) for refreshing just the CSS of the page (instead of needing to refresh the whole page). Use the shortcut provided by the extension (F9 or CTRL+ALT+R).
 * Kune maven repo
 
 To upload packages you need to configure in .m2/settings.xml something like:
