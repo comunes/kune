@@ -21,6 +21,7 @@
 package cc.kune.gadgetsampletester.client;
 
 import cc.kune.gadget.client.KuneGadgetGinInjector;
+import cc.kune.gadgetsample.client.KuneGadgetSampleMessages;
 import cc.kune.gadgetsample.client.KuneGadgetSampleMainPanel;
 
 import com.google.gwt.inject.client.GinModules;
@@ -28,4 +29,5 @@ import com.google.gwt.inject.client.GinModules;
 @GinModules(KuneGadgetSampleTesterGinModule.class)
 public interface KuneGadgetSampleGinInjector extends KuneGadgetGinInjector {
   KuneGadgetSampleMainPanel getMainPanel();
+  KuneGadgetSampleMessages getGadgetMessages();
 }

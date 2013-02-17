@@ -1,6 +1,7 @@
 package cc.kune.gadgetsampletester.client;
 
 import cc.kune.gadgetsample.client.KuneGadgetSampleMainPanel;
+import cc.kune.gadgetsample.client.KuneGadgetSampleMessages;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -18,6 +19,7 @@ public class KuneGadgetSampleTesterEntryPoint implements EntryPoint {
     final KuneGadgetSampleGinInjector gin = GWT.create(KuneGadgetSampleGinInjector.class);
 
     final WaveMock waveMock = (WaveMock) gin.getWave();
+    final KuneGadgetSampleMessages messages = gin.getGadgetMessages();
 
     // We initialize some participants
     waveMock.initRandomParticipants();
@@ -30,9 +32,9 @@ public class KuneGadgetSampleTesterEntryPoint implements EntryPoint {
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       @Override
       public void execute() {
-        RootPanel.get().add(new Label ("Gadget of user 1"));
+        RootPanel.get().add(new Label(messages.gadgetOfParticipant("1")));
         RootPanel.get().add(gadget);
-        RootPanel.get().add(new Label ("Gadget of user 2"));
+        RootPanel.get().add(new Label(messages.gadgetOfParticipant("2")));
         RootPanel.get().add(gadget2);
         gin.getEventBus().fireEvent(new ModeChangeEvent(0));
       }

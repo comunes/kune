@@ -28,5 +28,6 @@ public class KuneGadgetSampleGinModule extends AbstractKuneGadgetGinModule {
   @Override
   protected void configure() {
     bind(KuneGadgetSampleMainPanel.class).in(Singleton.class);
+    bind(KuneGadgetSampleMessages.class).in(Singleton.class);
   };
 }
