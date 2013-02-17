@@ -51,65 +51,81 @@ import com.googlecode.gwtrpccommlayer.client.Module;
 
 public class KuneCliMain {
 
-  private static final String SERVICE_PREFFIX = "http://127.0.0.1/ws/";
   public static final Log LOG = LogFactory.getLog(KuneCliMain.class);
-  private static UserServiceAsync userService;
+  private static final String SERVICE_PREFFIX = "http://127.0.0.1/ws/";
   private static SiteServiceAsync siteService;
+  private static UserServiceAsync userService;
 
-  public static void main(String[] args) throws InvalidSyntaxException, ExecutionException,
+  private static void initServices() throws MalformedURLException {
+    // http://code.google.com/p/gwtrpccommlayer/wiki/GettingStarted
+    // http://googlewebtoolkit.blogspot.com.es/2010/07/gwtrpccommlayer-extending-gwt-rpc-to-do.html
+    final Injector injector = Guice.createInjector(new Module());
+
+    final GwtRpcService service = injector.getInstance(GwtRpcService.class);
+
+    // TODO javadoc of this services
+    userService = service.create(new URL(SERVICE_PREFFIX + "UserService"), UserServiceAsync.class);
+    siteService = service.create(new URL(SERVICE_PREFFIX + "SiteService"), SiteServiceAsync.class);
+  }
+
+  public static void main(final String[] args) throws InvalidSyntaxException, ExecutionException,
       MalformedURLException {
 
     initServices();
-    
+
     // TODO: integrate jline or similar
     // http://jline.sourceforge.net/index.html
-    
-    //http://sourceforge.net/projects/javacurses/
-      //http://massapi.com/class/jcurses/widgets/Button.java.html
-    
-    Command showDateCommand = new Command("hello world [<name:string>]",
+
+    // http://sourceforge.net/projects/javacurses/
+    // http://massapi.com/class/jcurses/widgets/Button.java.html
+
+    final Command showDateCommand = new Command("hello world [<name:string>]",
         "Says hello to the world and, maybe, especially to someone.", new ICommandExecutor() {
-          public void execute(ParseResult pr) {
+          @Override
+          public void execute(final ParseResult pr) {
             System.out.print("Hello world!");
-            String p0 = pr.getParameterValue(0).toString();
-            if (p0 == null)
+            final String p0 = pr.getParameterValue(0).toString();
+            if (p0 == null) {
               System.out.println();
-            else
+            } else {
               System.out.println(" And hello especially to " + p0);
+            }
           }
         });
 
-    Command auth = new Command("auth <user:string> <pass:string>", "auth to kune",
+    final Command auth = new Command("auth <user:string> <pass:string>", "auth to kune",
         new ICommandExecutor() {
 
-          public void execute(ParseResult pr) throws ExecutionException {
-            String user = pr.getParameterValue(0).toString();
-            String pass = pr.getParameterValue(1).toString();
+          @Override
+          public void execute(final ParseResult pr) throws ExecutionException {
+            final String user = pr.getParameterValue(0).toString();
+            final String pass = pr.getParameterValue(1).toString();
             userService.login(user, pass, "FIXME", new AsyncCallback<UserInfoDTO>() {
 
               @Override
-              public void onSuccess(UserInfoDTO result) {
+              public void onFailure(final Throwable caught) {
                 // TODO Auto-generated method stub
               }
 
               @Override
-              public void onFailure(Throwable caught) {
+              public void onSuccess(final UserInfoDTO result) {
                 // TODO Auto-generated method stub
               }
             });
           }
         });
 
-    Command init = new Command("siteGetInitData", "gets the initial data", new ICommandExecutor() {
-      public void execute(ParseResult parseResult) throws ExecutionException {
+    final Command init = new Command("siteGetInitData", "gets the initial data", new ICommandExecutor() {
+      @Override
+      public void execute(final ParseResult parseResult) throws ExecutionException {
         siteService.getInitData("", new AsyncCallback<InitDataDTO>() {
           @Override
-          public void onFailure(Throwable caught) {
+          public void onFailure(final Throwable caught) {
             // TODO Auto-generated method stub
           }
 
           @Override
-          public void onSuccess(InitDataDTO result) {
+          public void onSuccess(final InitDataDTO result) {
             // TODO Auto-generated method stub
           }
         });
@@ -117,35 +133,23 @@ public class KuneCliMain {
     });
 
     // Create an empty command set
-    Set<Command> cs = new HashSet<Command>();
+    final Set<Command> cs = new HashSet<Command>();
 
     // Create the interpreter
-    NaturalCLI nc = new NaturalCLI(cs);
+    final NaturalCLI nc = new NaturalCLI(cs);
 
     // Add the commands that can be understood
     cs.add(showDateCommand);
     cs.add(new HelpCommand(cs)); // help
     cs.add(new HTMLHelpCommand(cs)); // htmlhelp
     cs.add(new SleepCommand()); // sleep <seconds:number>
-    
-    // A script can be useful for kune  
+
+    // A script can be useful for kune
     cs.add(new ExecuteFileCommand(nc)); // execute file <filename:string>
 
     cs.add(init);
     cs.add(auth);
     // Execute the command line
     nc.execute(args, 0);
-  }
-
-  private static void initServices() throws MalformedURLException {
-    // http://code.google.com/p/gwtrpccommlayer/wiki/GettingStarted
-    // http://googlewebtoolkit.blogspot.com.es/2010/07/gwtrpccommlayer-extending-gwt-rpc-to-do.html
-    Injector injector = Guice.createInjector(new Module());
-
-    GwtRpcService service = injector.getInstance(GwtRpcService.class);
-
-    // TODO javadoc of this services
-    userService = service.create(new URL(SERVICE_PREFFIX + "UserService"), UserServiceAsync.class);
-    siteService = service.create(new URL(SERVICE_PREFFIX + "SiteService"), SiteServiceAsync.class);
   }
 }
