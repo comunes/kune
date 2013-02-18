@@ -7,7 +7,7 @@
    
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>GadgetSample.html</welcome-file>
+    <welcome-file>KuneGadgetSampleTester.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
