@@ -18,16 +18,16 @@
  *
  */
 
-package cc.kune.gadgetsampletester.client;
+package cc.kune.gadgetsample.client;
 
-import cc.kune.gadget.client.KuneGadgetGinInjector;
-import cc.kune.gadgetsample.client.KuneGadgetSampleMessages;
-import cc.kune.gadgetsample.client.KuneGadgetSampleMainPanel;
+import cc.kune.gadget.client.AbstractKuneGadgetGinModule;
 
-import com.google.gwt.inject.client.GinModules;
+import com.google.inject.Singleton;
 
-@GinModules(KuneGadgetSampleTesterGinModule.class)
-public interface KuneGadgetSampleGinInjector extends KuneGadgetGinInjector {
-  KuneGadgetSampleMainPanel getMainPanel();
-  KuneGadgetSampleMessages getGadgetMessages();
+public class KuneGadgetSampleGinModule extends AbstractKuneGadgetGinModule {
+  @Override
+  protected void configure() {
+    bind(KuneGadgetSampleMainPanel.class).in(Singleton.class);
+    bind(KuneGadgetSampleMessages.class).in(Singleton.class);
+  };
 }

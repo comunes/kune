@@ -20,16 +20,19 @@
 
 package cc.kune.gadgetsampletester.client;
 
-import cc.kune.gadget.client.AbstractKuneGadgetGinModule;
+import cc.kune.gadgetsample.client.KuneGadgetSampleGinModule;
+import cc.kune.gadgetsample.client.KuneGadgetSampleMainPanel;
 
 import com.google.inject.Singleton;
 import com.thezukunft.wave.connector.Wave;
 import com.thezukunft.wave.connectormock.WaveMock;
 
-public class KuneGadgetSampleTesterGinModule extends AbstractKuneGadgetGinModule {
+public class KuneGadgetSampleTesterGinModule extends KuneGadgetSampleGinModule {
 
   @Override
   protected void configure() {
+    // We use two gadgets for testing so is not a Singleton.class
+    bind(KuneGadgetSampleMainPanel.class);
     // As this is just a tester, we use a mock for the wave functionality so,
     // this can run without the rest of the wave infrastructure. See
     // KuneGadgetSampleDeployModule to see how this looks like in real use

@@ -44,6 +44,7 @@ public class KuneGadgetSampleMainPanel extends Composite {
 
   private static final String AVATAR_SIZE = "50px";
   private static final String LOCK = "LOCK_KEY";
+  private final KuneGadgetSampleMessages messages;
 
   /**
    * Instantiates a new kune gadget sample main panel. We use gin to inject the
@@ -55,7 +56,8 @@ public class KuneGadgetSampleMainPanel extends Composite {
    *          the wave
    */
   @Inject
-  public KuneGadgetSampleMainPanel(final EventBus eventBus, final Wave wave) {
+  public KuneGadgetSampleMainPanel(final EventBus eventBus, final Wave wave, KuneGadgetSampleMessages gadgetMessages) {
+    this.messages = gadgetMessages;
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       // We run this deferred, at the end of the gadget load
       @Override
@@ -119,6 +121,6 @@ public class KuneGadgetSampleMainPanel extends Composite {
    * @return the btn text
    */
   protected String getBtnText(Boolean lockStatus) {
-    return lockStatus ? "Unlock" : "Lock";
+    return lockStatus ? messages.unlock() : messages.lock();
   }
 }
