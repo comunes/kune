@@ -24,12 +24,12 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.inject.Inject;
-import com.onetwopoll.gwt.framework.EventBus;
 import com.thezukunft.wave.connector.ModeChangeEvent;
 import com.thezukunft.wave.connector.ModeChangeEventHandler;
 import com.thezukunft.wave.connector.StateUpdateEvent;
@@ -49,14 +49,15 @@ public class KuneGadgetSampleMainPanel extends Composite {
   /**
    * Instantiates a new kune gadget sample main panel. We use gin to inject the
    * dependencies.
-   *
+   * 
    * @param eventBus
    *          the event bus
    * @param wave
    *          the wave
    */
   @Inject
-  public KuneGadgetSampleMainPanel(final EventBus eventBus, final Wave wave, KuneGadgetSampleMessages gadgetMessages) {
+  public KuneGadgetSampleMainPanel(final EventBus eventBus, final Wave wave,
+      final KuneGadgetSampleMessages gadgetMessages) {
     this.messages = gadgetMessages;
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       // We run this deferred, at the end of the gadget load
@@ -68,13 +69,13 @@ public class KuneGadgetSampleMainPanel extends Composite {
         avatar.setTitle(wave.getViewer().getDisplayName());
         avatar.setUrl(wave.getViewer().getThumbnailUrl());
 
-        boolean lockStatus = getLockStatus(wave);
+        final boolean lockStatus = getLockStatus(wave);
         final Button btn = new Button(getBtnText(lockStatus));
 
         btn.addClickHandler(new ClickHandler() {
           @Override
-          public void onClick(ClickEvent event) {
-            Boolean nextStatus = !getLockStatus(wave);
+          public void onClick(final ClickEvent event) {
+            final Boolean nextStatus = !getLockStatus(wave);
             // We update the status of key LOCK to the inverse of the current
             // status
             wave.getState().submitValue(LOCK, nextStatus.toString());
@@ -115,12 +116,12 @@ public class KuneGadgetSampleMainPanel extends Composite {
 
   /**
    * Calculate the button text.
-   *
+   * 
    * @param lockStatus
    *          the lock status
    * @return the btn text
    */
-  protected String getBtnText(Boolean lockStatus) {
+  protected String getBtnText(final Boolean lockStatus) {
     return lockStatus ? messages.unlock() : messages.lock();
   }
 }
