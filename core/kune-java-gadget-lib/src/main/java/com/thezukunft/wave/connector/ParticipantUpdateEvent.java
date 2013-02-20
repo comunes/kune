@@ -1,7 +1,7 @@
 /**
  * Copyright 2010 Jonas Huckestein, jonas.huckestein@me.com, http://thezukunft.com
  * Copyright 2009 Hilbrand Bouwkamp, hs@bouwkamp.com
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -10,7 +10,7 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
  *
@@ -26,17 +26,17 @@
 package com.thezukunft.wave.connector;
 
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
-import com.onetwopoll.gwt.framework.EventBus;
 
 /**
- * Event fired when participants on the wave change. 
+ * Event fired when participants on the wave change.
  */
 public class ParticipantUpdateEvent extends GwtEvent<ParticipantUpdateEventHandler> {
 
-	public static final GwtEvent.Type<ParticipantUpdateEventHandler> TYPE = new GwtEvent.Type<ParticipantUpdateEventHandler>();
+  public static final GwtEvent.Type<ParticipantUpdateEventHandler> TYPE = new GwtEvent.Type<ParticipantUpdateEventHandler>();
 
-	private final Wave wave;
+  private final Wave wave;
 
 
   public static ParticipantUpdateEvent fire(EventBus source, Wave wave) {
