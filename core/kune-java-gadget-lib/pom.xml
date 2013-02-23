@@ -77,4 +77,7 @@
       </resource>
     </resources>
   </build>
+  <issueManagement>
+    <url>http://kune.ourproject.org/issues/</url>
+  </issueManagement>
 </project>

@@ -18,10 +18,14 @@
     <module>kune-java-gadget-sample</module>
     <module>kune-sandbox</module>
   </modules>
-  <!-- <repositories> -->
-  <!-- <repository> -->
-  <!-- <id>kune-maven</id> -->
-  <!-- <url>http://kune.ourproject.org/mavenrepo/</url> -->
-  <!-- </repository> -->
-  <!-- </repositories> -->
+  <distributionManagement>
+    <repository>
+      <id>comunes-internal</id>
+      <url>http://archiva.comunes.org/repository/comunes-internal/</url>
+    </repository>
+    <snapshotRepository>
+      <id>comunes-snapshots</id>
+      <url>http://archiva.comunes.org/repository/comunes-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>

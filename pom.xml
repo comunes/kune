@@ -637,6 +637,10 @@
       <id>comunes-internal</id>
       <url>http://archiva.comunes.org/repository/comunes-internal/</url>
     </repository>
+    <snapshotRepository>
+      <id>comunes-snapshots</id>
+      <url>http://archiva.comunes.org/repository/comunes-snapshots/</url>
+    </snapshotRepository>
   </distributionManagement>
   <issueManagement>
     <system>kune issues list at ourproject.org</system>
