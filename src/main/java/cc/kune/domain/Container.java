@@ -85,9 +85,11 @@ public class Container implements HasId, HasStateToken {
   @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
   private Set<Content> contents;
 
+  @org.hibernate.annotations.Index(name="createdOn")
   @Basic(optional = false)
   private Long createdOn;
 
+  @org.hibernate.annotations.Index(name="deletedOn")
   @Basic(optional = true)
   private Date deletedOn;
 

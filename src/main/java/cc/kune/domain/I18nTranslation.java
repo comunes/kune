@@ -81,9 +81,11 @@ public class I18nTranslation implements HasId {
   @Column(name = "text")
   private String text;
 
+  @org.hibernate.annotations.Index(name="tr_key")
   @Column(name = "tr_key")
   private String trKey;
 
+  @org.hibernate.annotations.Index(name="gtype")
   @Column(name = "gtype")
   private String type;
 

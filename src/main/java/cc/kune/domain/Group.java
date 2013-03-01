@@ -65,6 +65,7 @@ public class Group implements HasId {
   public static final Group NO_GROUP = null;
   // public static final String PROPS_ID = "groupprops";
 
+  @org.hibernate.annotations.Index(name="admissionType")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   AdmissionType admissionType;
@@ -73,6 +74,7 @@ public class Group implements HasId {
 
   private String backgroundMime;
 
+  @org.hibernate.annotations.Index(name="createdOn")
   @Basic(optional = false)
   private final Long createdOn;
 
@@ -82,6 +84,8 @@ public class Group implements HasId {
   @OneToOne
   private License defaultLicense;
 
+
+  @org.hibernate.annotations.Index(name="groupType")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   GroupType groupType;
@@ -102,6 +106,8 @@ public class Group implements HasId {
 
   @Field(index = Index.YES, store = Store.NO)
   @Column(nullable = false, unique = true)
+
+  @org.hibernate.annotations.Index(name="longName")
   @Length(min = 3, max = CoreConstants.MAX_LONG_NAME_SIZE, message = "The longName must be between 3 and "
       + CoreConstants.MAX_LONG_NAME_SIZE + " characters of length")
   private String longName;
@@ -112,6 +118,7 @@ public class Group implements HasId {
   @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and "
       + CoreConstants.MAX_SHORT_NAME_SIZE
       + " lowercase characters. It can only contain Western characters, numbers, and dashes")
+  @org.hibernate.annotations.Index(name="shortName")
   private String shortName;
 
   @OneToOne(cascade = CascadeType.ALL)

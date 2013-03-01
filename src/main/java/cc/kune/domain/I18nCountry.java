@@ -44,6 +44,7 @@ import cc.kune.domain.utils.HasId;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class I18nCountry implements HasId {
 
+  @org.hibernate.annotations.Index(name="code")
   @Column(name = "code", length = 2)
   private String code;
 
@@ -62,6 +63,7 @@ public class I18nCountry implements HasId {
   @Column(name = "decimal_sep", length = 2)
   private String decimalSep;
 
+  @org.hibernate.annotations.Index(name="english_name")
   @Column(name = "english_name")
   private String englishName;
 

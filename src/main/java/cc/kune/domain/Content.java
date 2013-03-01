@@ -89,9 +89,11 @@ public class Content implements HasStateToken {
   @IndexedEmbedded
   private Container container;
 
+  @org.hibernate.annotations.Index(name="createdOn")
   @Basic(optional = false)
   private Long createdOn;
 
+  @org.hibernate.annotations.Index(name="deletedOn")
   @Basic(optional = true)
   private Date deletedOn;
 
@@ -123,12 +125,15 @@ public class Content implements HasStateToken {
   @Embedded
   private BasicMimeType mimeType;
 
+  @org.hibernate.annotations.Index(name="modifiedOn")
   @Basic(optional = true)
   private Long modifiedOn;
 
+  @org.hibernate.annotations.Index(name="publishedOn")
   @Basic(optional = true)
   private Date publishedOn;
 
+  @org.hibernate.annotations.Index(name="status")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private ContentStatus status;
@@ -139,11 +144,11 @@ public class Content implements HasStateToken {
   // @NotNull??
   private String typeId;
 
+  @org.hibernate.annotations.Index(name="version")
   @Version
   private Integer version;
 
-  // TODO add index and also to debian package and liquibase
-  // @Index(name = "waveId")
+  @org.hibernate.annotations.Index(name="waveId")
   private String waveId;
 
   public Content() {
