@@ -1,0 +1,12 @@
+ALTER TABLE groups ADD INDEX (groupType), ADD INDEX (createdOn);
+ALTER TABLE containers ADD INDEX (deletedOn), ADD INDEX (createdOn);
+ALTER TABLE contents ADD INDEX (deletedOn), ADD INDEX (createdOn), ADD INDEX (modifiedOn), ADD INDEX (status), ADD INDEX (waveId), ADD INDEX (publishedOn), ADD INDEX (version);
+ALTER TABLE globalize_countries ADD INDEX (english_name), ADD INDEX (code);
+ALTER TABLE globalize_languages ADD INDEX (english_name), ADD INDEX (code);
+ALTER TABLE globalize_translations ADD INDEX (tr_key), ADD INDEX (gtype);
+ALTER TABLE licenses ADD INDEX (isCC), ADD INDEX (shortName);
+ALTER TABLE revisions ADD INDEX (createdOn), ADD INDEX (version);
+ALTER TABLE tags ADD INDEX (createdOn);
+ALTER TABLE tag_user_content ADD INDEX (createdOn);
+ALTER TABLE kusers ADD INDEX (createdOn);
+ALTER TABLE user_signin_log ADD INDEX (ipAddress), ADD INDEX (signInDate), ADD INDEX (userAgent);

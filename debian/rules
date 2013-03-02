@@ -73,6 +73,7 @@ install/kune::
 	    $(CURDIR)/src/main/resources/db/update-0021-avatarLastModifiedTime-deb.sql \
 	    $(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql \
 	    $(CURDIR)/src/main/resources/db/update-0023-inviation.sql \
+            $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql \
             > $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
         # Add the upgrades algo in the previous install
 	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5
@@ -81,6 +82,7 @@ install/kune::
 	cp $(CURDIR)/src/main/resources/db/update-0021-avatarLastModifiedTime-deb.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b23
 	cp $(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b25
 	cp $(CURDIR)/src/main/resources/db/update-0023-inviation.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b4
+	cp $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b20
 
 # FIXME
 #	cp logrotate $(DEST)/etc/logrotate.d/

@@ -47,6 +47,7 @@ public class TagUserContent implements HasId {
   @ManyToOne(fetch = FetchType.LAZY)
   private Content content;
 
+  @org.hibernate.annotations.Index(name="createdOn")
   @Basic(optional = false)
   private final Long createdOn;
 

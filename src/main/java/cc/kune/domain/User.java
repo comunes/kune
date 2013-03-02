@@ -75,6 +75,7 @@ public class User implements HasId {
   @NotNull
   private I18nCountry country;
 
+  @org.hibernate.annotations.Index(name="createdOn")
   @Basic(optional = false)
   private final Long createdOn;
 

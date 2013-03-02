@@ -63,6 +63,7 @@ public class Revision {
   @JoinColumn
   private Content content;
 
+  @org.hibernate.annotations.Index(name="createdOn")
   @Basic(optional = false)
   private Long createdOn;
 
@@ -80,6 +81,7 @@ public class Revision {
   @Field(index = Index.YES, store = Store.NO)
   String title;
 
+  @org.hibernate.annotations.Index(name="version")
   @Version
   private int version;
 

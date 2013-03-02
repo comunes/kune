@@ -42,6 +42,7 @@ import cc.kune.domain.utils.HasId;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Tag implements HasId {
 
+  @org.hibernate.annotations.Index(name="createdOn")
   @Basic(optional = false)
   private final Long createdOn;
 

@@ -147,15 +147,20 @@ public class UserSignInLog implements HasId {
   private final User user;
 
   /** The ip address of the client. */
+  @org.hibernate.annotations.Index(name="ipAddress")  
   @Column
   private final String ipAddress;
 
   /** The sign in date. */
+
+  @org.hibernate.annotations.Index(name="signInDate")  
   @Basic
   @Column(nullable = false)
   private final Long signInDate;
 
   /** The user agent. */
+
+  @org.hibernate.annotations.Index(name="userAgent")  
   @Field(index = Index.YES)
   @Column
   private final String userAgent;

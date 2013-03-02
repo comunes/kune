@@ -44,6 +44,7 @@ public class License implements HasId {
   @Column(nullable = false)
   private String imageUrl;
 
+  @org.hibernate.annotations.Index(name="isCC")  
   @Basic
   @Column(columnDefinition = "BIT", length = 1)
   private boolean isCC;
@@ -59,8 +60,11 @@ public class License implements HasId {
   @Column(unique = true)
   private String longName;
   private String rdf;
+
+  @org.hibernate.annotations.Index(name="shortName")
   @Column(unique = true)
   private String shortName;
+
   @Column(nullable = false)
   private String url;
 

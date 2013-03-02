@@ -185,8 +185,14 @@
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
   <changeSet id="28" author="vjrj">
-    <comment>User sign in stats</comment>
+    <comment>Add invitations table</comment>
     <sqlFile path="src/main/resources/db/update-0023-inviation.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
+  <changeSet id="29" author="vjrj">
+    <comment>Add some indexes</comment>
+    <sqlFile path="src/main/resources/db/update-0024-add-indexes.sql"
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>

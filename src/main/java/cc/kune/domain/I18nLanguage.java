@@ -49,6 +49,7 @@ import cc.kune.domain.utils.HasId;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class I18nLanguage implements HasId {
 
+  @org.hibernate.annotations.Index(name="code")  
   @Field(index = Index.YES, store = Store.NO)
   @Column(name = "code", unique = true)
   private String code;
@@ -62,6 +63,7 @@ public class I18nLanguage implements HasId {
   @Column(name = "direction")
   private String direction;
 
+  @org.hibernate.annotations.Index(name="english_name")
   @Field(index = Index.YES, store = Store.NO)
   @Column(name = "english_name")
   private String englishName;
