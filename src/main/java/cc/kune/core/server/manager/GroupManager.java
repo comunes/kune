@@ -50,7 +50,7 @@ public interface GroupManager extends Manager<Group, Long> {
    * 
    * @return the int
    */
-  int count();
+  Long count();
 
   Group createGroup(Group group, User user, String publicDescrip) throws GroupShortNameInUseException,
       UserMustBeLoggedException;

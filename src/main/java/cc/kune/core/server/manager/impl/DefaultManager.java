@@ -184,7 +184,8 @@ public abstract class DefaultManager<T, K> {
   }
 
   @SuppressWarnings("unchecked")
-  public int size() {
+  @Deprecated
+  public int sizeDeprecated() {
     final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
     final List<T> entities = fullTextEm.createQuery(
         "SELECT e FROM " + entityClass.getSimpleName() + " AS e").getResultList();

@@ -148,8 +148,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   @Override
   @KuneTransactional
-  public int count() {
-    return super.size();
+  public Long count() {
+    return finder.count();
+    // return super.size();
   }
 
   @Override
