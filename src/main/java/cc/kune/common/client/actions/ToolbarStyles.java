@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.viewers;
+package cc.kune.common.client.actions;
 
 public class ToolbarStyles {
   public static final String CSS_BTN_ALONE = "k-button,  k-button-alone, k-fl";

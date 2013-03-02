@@ -60,7 +60,7 @@ public class KuneGadgetSample extends WaveGadget<UserPreferences> implements Nee
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       @Override
       public void execute() {
-        RootPanel.get().add(mainPanel);
+        dynHeightFeature.getContentDiv().add(mainPanel);
         setHeight(mainPanel);
       }
     });

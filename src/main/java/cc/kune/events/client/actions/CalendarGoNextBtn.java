@@ -19,9 +19,9 @@
  */
 package cc.kune.events.client.actions;
 
+import cc.kune.common.client.actions.ToolbarStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.viewers.ToolbarStyles;
 
 import com.google.inject.Inject;
 

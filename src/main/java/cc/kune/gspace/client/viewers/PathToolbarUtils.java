@@ -19,6 +19,7 @@
  */
 package cc.kune.gspace.client.viewers;
 
+import cc.kune.common.client.actions.ToolbarStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
@@ -33,8 +34,8 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.gspace.client.actions.SNActionStyles;
 import cc.kune.gspace.client.actions.GotoTokenAction;
+import cc.kune.gspace.client.actions.SNActionStyles;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -62,7 +63,8 @@ public class PathToolbarUtils {
     iconsRegistry = capabilitiesRegistry.getIconsRegistry();
   }
 
-  private ButtonDescriptor createGroupButton(final GroupDTO group, boolean showGroupName, boolean minimal) {
+  private ButtonDescriptor createGroupButton(final GroupDTO group, final boolean showGroupName,
+      final boolean minimal) {
     final String style = ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " + SNActionStyles.BTN_SMALL : "");
     final String tooltip = group.getLongName();
     final GotoTokenAction action = new GotoTokenAction(null,
@@ -78,7 +80,12 @@ public class PathToolbarUtils {
   }
 
   public GuiActionDescCollection createPath(final GroupDTO group, final ContainerDTO container,
-      final boolean withDrop, boolean showGroupName, ContainerSimpleDTO extra) {
+      final boolean withDrop, final boolean showGroupName) {
+    return createPath(group, container, withDrop, showGroupName, null);
+  }
+
+  public GuiActionDescCollection createPath(final GroupDTO group, final ContainerDTO container,
+      final boolean withDrop, final boolean showGroupName, final ContainerSimpleDTO extra) {
     final GuiActionDescCollection actions = new GuiActionDescCollection();
     final ContainerSimpleDTO[] path = container.getAbsolutePath();
 
@@ -86,7 +93,7 @@ public class PathToolbarUtils {
     // content/container
     // is used in the Inbox to show the title of the current document
 
-    boolean hasExtra = extra != null;
+    final boolean hasExtra = extra != null;
     final int pathLength = path.length + (hasExtra ? 1 : 0);
 
     if (pathLength > 0) {
@@ -101,7 +108,7 @@ public class PathToolbarUtils {
         final boolean isNotTheLast = i != pathLength - 1;
         final boolean isTheLast = !isNotTheLast;
         final boolean isTheLastAndTheExtra = isTheLast && hasExtra;
-        ContainerSimpleDTO item = isTheLastAndTheExtra ? extra : path[i];
+        final ContainerSimpleDTO item = isTheLastAndTheExtra ? extra : path[i];
         final ButtonDescriptor btn = createPathButton(item, pathLength, i, isTheLastAndTheExtra,
             withDrop, hasExtra);
         if (withDrop) {
@@ -121,13 +128,8 @@ public class PathToolbarUtils {
     return actions;
   }
 
-  public GuiActionDescCollection createPath(final GroupDTO group, final ContainerDTO container,
-      final boolean withDrop, boolean showGroupName) {
-    return createPath(group, container, withDrop, showGroupName, null);
-  }
-
   private ButtonDescriptor createPathButton(final ContainerSimpleDTO container, final int length,
-      final int pos, boolean isTheLastExtra, boolean withDrop, boolean hasExtra) {
+      final int pos, final boolean isTheLastExtra, final boolean withDrop, final boolean hasExtra) {
     // +1 because of the first group button
     final String style = ToolbarStyles.calculateStyle(pos + 1, length + 1);
 
@@ -136,10 +138,10 @@ public class PathToolbarUtils {
     final String title = pos == 0 ? i18n.t(name) : name;
 
     // Normal buttons are smaller
-    int tooltipSize = isTheLastExtra ? 30 : 15;
-    String truncatedName = TextUtils.ellipsis(title, tooltipSize);
+    final int tooltipSize = isTheLastExtra ? 30 : 15;
+    final String truncatedName = TextUtils.ellipsis(title, tooltipSize);
 
-    String tooltip = withDrop ? i18n.t("Click to go here or drop contents here to move them") : "";
+    final String tooltip = withDrop ? i18n.t("Click to go here or drop contents here to move them") : "";
 
     final GotoTokenAction action = new GotoTokenAction(
         iconsRegistry.getContentTypeIcon(container.getTypeId()), truncatedName, tooltip,
