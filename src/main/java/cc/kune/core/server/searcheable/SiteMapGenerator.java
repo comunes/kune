@@ -31,6 +31,7 @@ import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.persistence.file.FileUtils;
 
 import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.server.LogThis;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.utils.AbsoluteFileDownloadUtils;
@@ -57,6 +58,7 @@ import com.redfin.sitemapgenerator.WebSitemapUrl;
  * http://dynamical.biz/blog/seo-technical/sitemap-strategy-large-sites-17.html
  */
 @Singleton
+@LogThis
 public class SiteMapGenerator {
 
   private static final Double CONTENTS_PRIORITY = 0.8;
@@ -95,7 +97,6 @@ public class SiteMapGenerator {
     }
   }
 
-  @KuneTransactional
   public void generate() {
     final Date now = new Date();
 
@@ -115,7 +116,7 @@ public class SiteMapGenerator {
       int i = 0;
       while (i < count) {
 
-        final List<Group> groups = groupFinder.getAllExcept(LIMIT_OF_QUERY, i, GroupType.CLOSED);
+        final List<Group> groups = getGroups(i);
         for (final Group group : groups) {
           final String groupUri = fileDownloadUtils.getUrl(group.getStateToken().toString());
           final WebSitemapUrl groupUrl = new WebSitemapUrl.Options(groupUri).lastMod(now).priority(
@@ -123,7 +124,7 @@ public class SiteMapGenerator {
           wsg.addUrl(groupUrl);
 
           // Containers
-          for (final Container container : containerFinder.allContainersInUserGroup(group.getId())) {
+          for (final Container container : getContainers(group)) {
             if (container.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
               final String containerUri = fileDownloadUtils.getUrl(container.getStateToken().toString());
               final WebSitemapUrl containerUrl = new WebSitemapUrl.Options(containerUri).lastMod(now).priority(
@@ -133,7 +134,7 @@ public class SiteMapGenerator {
           }
 
           // Contents
-          for (final Content content : contentFinder.allContentsInUserGroup(group.getId())) {
+          for (final Content content : getContents(group)) {
             if (content.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
               final String contentUri = fileDownloadUtils.getUrl(content.getStateToken().toString());
               final WebSitemapUrl contentUrl = new WebSitemapUrl.Options(contentUri).lastMod(
@@ -152,5 +153,20 @@ public class SiteMapGenerator {
       LOG.error("Error generating sitemap. Malformed URL.", e);
     }
 
+  }
+
+  @KuneTransactional
+  private List<Container> getContainers(final Group group) {
+    return containerFinder.allContainersInUserGroup(group.getId());
+  }
+
+  @KuneTransactional
+  private List<Content> getContents(final Group group) {
+    return contentFinder.allContentsInUserGroup(group.getId());
+  }
+
+  @KuneTransactional
+  private List<Group> getGroups(final int i) {
+    return groupFinder.getAllExcept(LIMIT_OF_QUERY, i, GroupType.CLOSED);
   }
 }
