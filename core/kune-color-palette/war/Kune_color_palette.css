@@ -1,0 +1,11 @@
+/** Add css rules here for your application. */
+.kune-WebSafePalette {
+  background-color: #FFF;
+  border: 1px solid #AAA;
+  margin: 1px;
+}
+
+.kune-WebSafePalette td {
+  width: 12px;
+  height: 10px;
+}
