@@ -228,8 +228,8 @@ public final class SliderBar extends HTML
 
         this.parent = parent;
 
-        setWidth("40px");
-        setHeight("256px");
+        setWidth("20px");
+        setHeight("128px");
 
         cpImageBundle = (ColorPickerImageResource) GWT.create(ColorPickerImageResource.class);
 
@@ -301,7 +301,7 @@ public final class SliderBar extends HTML
                     int y = DOM.eventGetClientY(event) - getAbsoluteTop() + Window.getScrollTop();
 
                     if (y < 0) y = 0;
-                    if (y > 256) y = 256;
+                    if (y > 128) y = 128;
 
                     DOM.setStyleAttribute(slider.getElement(), "top", y - 4 + "px");
 
@@ -355,31 +355,31 @@ public final class SliderBar extends HTML
             break;
 
             case Hue:
-            	colorA.setResource(cpImageBundle.bar_white());
-            	colorB.setResource(cpImageBundle.bar_white());
-            	colorC.setResource(cpImageBundle.bar_white());
-            	colorD.setResource(cpImageBundle.bar_hue());
+                colorA.setResource(cpImageBundle.bar_white());
+                colorB.setResource(cpImageBundle.bar_white());
+                colorC.setResource(cpImageBundle.bar_white());
+                colorD.setResource(cpImageBundle.bar_hue());
             break;
 
             case Red:
-            	colorA.setResource(cpImageBundle.bar_red_tl());
-            	colorB.setResource(cpImageBundle.bar_red_tr());
-            	colorC.setResource(cpImageBundle.bar_red_br());
-            	colorD.setResource(cpImageBundle.bar_red_bl());
+                colorA.setResource(cpImageBundle.bar_red_tl());
+                colorB.setResource(cpImageBundle.bar_red_tr());
+                colorC.setResource(cpImageBundle.bar_red_br());
+                colorD.setResource(cpImageBundle.bar_red_bl());
             break;
 
             case Green:
-            	colorA.setResource(cpImageBundle.bar_green_tl());
-            	colorB.setResource(cpImageBundle.bar_green_tr());
-            	colorC.setResource(cpImageBundle.bar_green_br());
-            	colorD.setResource(cpImageBundle.bar_green_bl());
+                colorA.setResource(cpImageBundle.bar_green_tl());
+                colorB.setResource(cpImageBundle.bar_green_tr());
+                colorC.setResource(cpImageBundle.bar_green_br());
+                colorD.setResource(cpImageBundle.bar_green_bl());
             break;
 
             case Blue:
-            	colorA.setResource(cpImageBundle.bar_blue_tl());
-            	colorB.setResource(cpImageBundle.bar_blue_tr());
-            	colorC.setResource(cpImageBundle.bar_blue_br());
-            	colorD.setResource(cpImageBundle.bar_blue_bl());
+                colorA.setResource(cpImageBundle.bar_blue_tl());
+                colorB.setResource(cpImageBundle.bar_blue_tr());
+                colorC.setResource(cpImageBundle.bar_blue_br());
+                colorD.setResource(cpImageBundle.bar_blue_bl());
             break;
         }
     }
@@ -454,7 +454,7 @@ public final class SliderBar extends HTML
     public void setSliderPosition(int y)
     {
         if (y < 0) y = 0;
-        if (y > 256) y = 256;
+        if (y > 128) y = 128;
         DOM.setStyleAttribute(slider.getElement(), "top", y - 4 + "px");
     }
 }

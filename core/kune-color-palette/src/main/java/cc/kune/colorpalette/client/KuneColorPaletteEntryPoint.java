@@ -15,12 +15,11 @@ public class KuneColorPaletteEntryPoint implements EntryPoint {
    */
   @Override
   public void onModuleLoad() {
-    ColorWebSafePalettePresenter pres = new ColorWebSafePalettePresenter();
-    ColorWebSafePalettePanel panel = new ColorWebSafePalettePanel(pres);
+//    ColorWebSafePalettePresenter pres = new ColorWebSafePalettePresenter();
+//    ColorWebSafePalettePanel panel = new ColorWebSafePalettePanel(pres);
    // panel.show(0, 0);
 
-   ColorPicker picker = new ColorPicker();
    RootPanel.get().add(new ColorPalettePanel());
-   RootPanel.get().add(picker);
+   RootPanel.get().add(new ColorPicker());
   }
 }

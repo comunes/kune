@@ -221,8 +221,8 @@ public final class SliderMap extends HTML
 
         this.parent = parent;
 
-        setWidth("256px");
-        setHeight("256px");
+        setWidth("128px");
+        setHeight("128px");
 
         cpImageBundle = (ColorPickerImageResource) GWT.create(ColorPickerImageResource.class);
 
@@ -286,9 +286,9 @@ public final class SliderMap extends HTML
                     int y = DOM.eventGetClientY(event) - colorUnderlay.getAbsoluteTop() + 1 + Window.getScrollTop();
 
                     if (x < 0) x = 0;
-                    if (x > 256) x = 256;
+                    if (x > 128) x = 128;
                     if (y < 0) y = 0;
-                    if (y > 256) y = 256;
+                    if (y > 128) y = 128;
 
                     DOM.setStyleAttribute(slider.getElement(), "left", x - 7 + "px");
                     DOM.setStyleAttribute(slider.getElement(), "top", y - 7 + "px");
@@ -329,8 +329,8 @@ public final class SliderMap extends HTML
         switch (mode)
         {
             case Saturation:
-            	colorUnderlay.setResource(cpImageBundle.map_saturation());
-            	colorOverlay.setResource(cpImageBundle.map_saturation_overlay());
+                colorUnderlay.setResource(cpImageBundle.map_saturation());
+                colorOverlay.setResource(cpImageBundle.map_saturation_overlay());
             break;
 
             case Brightness:
@@ -355,7 +355,7 @@ public final class SliderMap extends HTML
             break;
 
             case Blue:
-            	colorOverlay.setResource(cpImageBundle.map_blue_max());
+                colorOverlay.setResource(cpImageBundle.map_blue_max());
                 colorUnderlay.setResource(cpImageBundle.map_blue_min());
             break;
         }
@@ -384,15 +384,15 @@ public final class SliderMap extends HTML
 
     /**
      * Sets the slider's position along the x-axis and y-axis.
-     * @param x position along the x-axis [0-256]
-     * @param y position along the y-axis [0-256]
+     * @param x position along the x-axis [0-128]
+     * @param y position along the y-axis [0-128]
      */
     public void setSliderPosition(int x, int y)
     {
         if (x < 0) x = 0;
         if (y < 0) y = 0;
-        if (x > 256) x = 256;
-        if (y > 256) y = 256;
+        if (x > 128) x = 128;
+        if (y > 128) y = 128;
         DOM.setStyleAttribute(slider.getElement(), "left", x - 7 + "px");
         DOM.setStyleAttribute(slider.getElement(), "top", y - 7 + "px");
     }

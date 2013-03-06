@@ -196,6 +196,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -271,26 +272,30 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         green = 0;
         blue = 0;
 
-        HorizontalPanel panel = new HorizontalPanel();
-        FlexTable table = new FlexTable();
+        VerticalPanel vp = new VerticalPanel();
+        HorizontalPanel hp = new HorizontalPanel();
+        FlexTable hxTable = new FlexTable();
+
+        vp.add(hxTable);
+        vp.add(hp);
 
         // Add the large slider map
         slidermap = new SliderMap(this);
-        panel.add(slidermap);
-        panel.setCellWidth(slidermap, "258px");
-        panel.setCellHeight(slidermap, "258px");
+        hp.add(slidermap);
+        hp.setCellWidth(slidermap, "130px");
+        hp.setCellHeight(slidermap, "130px");
 
         // Add the small slider bar
         sliderbar = new SliderBar(this);
-        panel.add(sliderbar);
-        panel.setCellWidth(sliderbar, "40px");
-        panel.setCellHeight(sliderbar, "258px");
+        hp.add(sliderbar);
+        hp.setCellWidth(sliderbar, "30px");
+        hp.setCellHeight(sliderbar, "130px");
 
         // Define the Flextable's content
         // Color preview at the top
         colorpreview = new HTML("");
-        colorpreview.setWidth("50px");
-        colorpreview.setHeight("50px");
+        colorpreview.setWidth("30px");
+        colorpreview.setHeight("30px");
         DOM.setStyleAttribute(colorpreview.getElement(), "border", "1px solid black");
 
         // Radio buttons
@@ -353,8 +358,8 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         tbHexColor.addChangeHandler(this);
 
         // Put together the FlexTable
-        table.setWidget(0, 0, colorpreview);
-        table.getFlexCellFormatter().setColSpan(0, 0, 3);
+        hxTable.setWidget(0, 0, colorpreview);
+  //      table.getFlexCellFormatter().setColSpan(0, 0, 3);
 //        table.setWidget(1, 0, rbHue);
 //        table.setWidget(1, 1, tbHue);
 //        table.setWidget(1, 2, new HTML("&deg;"));
@@ -370,12 +375,12 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
 //        table.setWidget(5, 1, tbGreen);
 //        table.setWidget(6, 0, rbBlue);
 //        table.setWidget(6, 1, tbBlue);
-        table.setText(7,0, "#:");
-        table.setWidget(7,1, tbHexColor);
-        table.getFlexCellFormatter().setColSpan(7, 1, 2);
+        hxTable.setText(0,1, "# ");
+        hxTable.setWidget(0,2, tbHexColor);
+//        table.getFlexCellFormatter().setColSpan(7, 1, 2);
 
         // Final setup
-        panel.add(table);
+        //panel.add(table);
         rbSaturation.setValue(true);
         setPreview("ff0000");
         DOM.setStyleAttribute(colorpreview.getElement(), "cursor", "default");
@@ -383,7 +388,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         // First event
         onClick(rbSaturation);
 
-        initWidget(panel);
+        initWidget(vp);
     }
 
     /**
@@ -413,7 +418,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
      * Fires whenever the user generates picking events along the color picker bar.
      *
      * Subclasses that override this method must call <tt>super.onBarSelected(y)</tt> to ensure that the Widget recieves its events.
-     * @param y the distance along the y-axis of the user's selection, between 0 and 255, inclusive.
+     * @param y the distance along the y-axis of the user's selection, between 0 and 127, inclusive.
      */
     public void onBarSelected(int y)
     {
@@ -435,17 +440,17 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
                 onChange(tbBrightness);
                 break;
             case SliderMap.Red:
-                red = 255 - y;
+                red = 127 - y;
                 tbRed.setText(Integer.toString(red));
                 onChange(tbRed);
                 break;
             case SliderMap.Green:
-                green = 255 - y;
+                green = 127 - y;
                 tbGreen.setText(Integer.toString(green));
                 onChange(tbGreen);
                 break;
             case SliderMap.Blue:
-                blue = 255 - y;
+                blue = 127 - y;
                 tbBlue.setText(Integer.toString(blue));
                 onChange(tbBlue);
                 break;
@@ -618,9 +623,9 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
             }
             catch (Exception e) {}
 
-            sliderbar.setSliderPosition(256 - (int)((new Integer(hue).floatValue() / 360) * 256));
-            slidermap.setSliderPosition((int)((new Integer(saturation).floatValue() / 100) * 256),
-                                        256 - (int)((new Integer(brightness).floatValue() / 100) * 256));
+            sliderbar.setSliderPosition(128 - (int)((new Integer(hue).floatValue() / 360) * 128));
+            slidermap.setSliderPosition((int)((new Integer(saturation).floatValue() / 100) * 128),
+                                        128 - (int)((new Integer(brightness).floatValue() / 100) * 128));
         }
         else if(sender == rbSaturation)
         {
@@ -643,9 +648,9 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
 
             slidermap.setOverlayOpacity(100 - saturation);
 
-            sliderbar.setSliderPosition(256 - (int)((new Integer(saturation).floatValue() / 100) * 256));
-            slidermap.setSliderPosition((int)((new Integer(hue).floatValue() / 360) * 256),
-                                        256 - (int)((new Integer(brightness).floatValue() / 100) * 256));
+            sliderbar.setSliderPosition(128 - (int)((new Integer(saturation).floatValue() / 100) * 128));
+            slidermap.setSliderPosition((int)((new Integer(hue).floatValue() / 360) * 128),
+                                        128 - (int)((new Integer(brightness).floatValue() / 100) * 128));
         }
         else if(sender == rbBrightness)
         {
@@ -669,9 +674,9 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
 
             slidermap.setOverlayOpacity(brightness);
 
-            sliderbar.setSliderPosition(256 - (int)((new Integer(brightness).floatValue() / 100) * 256));
-            slidermap.setSliderPosition((int)((new Integer(hue).floatValue() / 360) * 256),
-                                        256 - (int)((new Integer(saturation).floatValue() / 100) * 256));
+            sliderbar.setSliderPosition(128 - (int)((new Integer(brightness).floatValue() / 100) * 128));
+            slidermap.setSliderPosition((int)((new Integer(hue).floatValue() / 360) * 128),
+                                        128 - (int)((new Integer(saturation).floatValue() / 100) * 128));
         }
         else if(sender == rbRed)
         {
@@ -683,8 +688,8 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
             }
             slidermap.setOverlayOpacity(percentOf(red, 100));
 
-            sliderbar.setSliderPosition(256 - red);
-            slidermap.setSliderPosition(blue, 256 - green);
+            sliderbar.setSliderPosition(128 - red);
+            slidermap.setSliderPosition(blue, 128 - green);
         }
         else if(sender == rbGreen)
         {
@@ -697,8 +702,8 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
 
             slidermap.setOverlayOpacity(percentOf(green, 100));
 
-            sliderbar.setSliderPosition(256 - green);
-            slidermap.setSliderPosition(blue, 256 - red);
+            sliderbar.setSliderPosition(128 - green);
+            slidermap.setSliderPosition(blue, 128 - red);
         }
         else if(sender == rbBlue)
         {
@@ -711,8 +716,8 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
 
             slidermap.setOverlayOpacity(percentOf(blue, 100));
 
-            sliderbar.setSliderPosition(256 - blue);
-            slidermap.setSliderPosition(red, 256 - green);
+            sliderbar.setSliderPosition(128 - blue);
+            slidermap.setSliderPosition(red, 128 - green);
         }
 
         if (colorMode == SliderMap.Red || colorMode == SliderMap.Green || colorMode == SliderMap.Blue)
@@ -738,10 +743,10 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
                 y = green;
             }
 
-            int horzPer = (int)((new Float(x).floatValue() / 256) * 100);
-            int vertPer = (int)((new Float(y).floatValue() / 256) * 100);
-            int horzPerRev = (int)(((256 - new Float(x).floatValue()) / 256) * 100);
-            int vertPerRev = (int)(((256 - new Float(y).floatValue()) / 256) * 100);
+            int horzPer = (int)((new Float(x).floatValue() / 128) * 100);
+            int vertPer = (int)((new Float(y).floatValue() / 128) * 100);
+            int horzPerRev = (int)(((128 - new Float(x).floatValue()) / 128) * 100);
+            int vertPerRev = (int)(((128 - new Float(y).floatValue()) / 128) * 100);
 
             if (vertPerRev > horzPerRev)
                 sliderbar.setLayerOpacity(horzPerRev, SliderBar.BarD);
@@ -816,8 +821,8 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
      * Fires whenever the user generates picking events on the color picker map.
      *
      * Subclasses that override this method must call <tt>super.onMapSelected(x,y)</tt> to ensure that the Widget recieves its events.
-     * @param x the distance along the x-axis of the user's selection, between 0 and 255, inclusive.
-     * @param y the distance along the y-axis of the user's selection, between 0 and 255, inclusive.
+     * @param x the distance along the x-axis of the user's selection, between 0 and 127, inclusive.
+     * @param y the distance along the y-axis of the user's selection, between 0 and 127, inclusive.
      */
     public void onMapSelected(int x, int y)
     {
@@ -846,21 +851,21 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
                 break;
             case SliderMap.Red:
                 blue = x;
-                green = 256 - y;
+                green = 128 - y;
                 tbBlue.setText(Integer.toString(blue));
                 tbGreen.setText(Integer.toString(green));
                 onChange(tbRed);
                 break;
             case SliderMap.Green:
                 blue = x;
-                red = 256 - y;
+                red = 128 - y;
                 tbBlue.setText(Integer.toString(blue));
                 tbRed.setText(Integer.toString(red));
                 onChange(tbGreen);
                 break;
             case SliderMap.Blue:
                 red = x;
-                green = 256 - y;
+                green = 128 - y;
                 tbRed.setText(Integer.toString(red));
                 tbGreen.setText(Integer.toString(green));
                 onChange(tbBlue);
@@ -871,14 +876,14 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
     /*Helper functions -- for common calculations
      */
     /**
-     * Divides the first value by 256, then multiplies it by the second value.
+     * Divides the first value by 128, then multiplies it by the second value.
      * @param val1 first value.
      * @param val2 second value.
      * @return result.
      */
     private int percentOf(int val1, int val2)
     {
-        return (int)(new Float(val1).floatValue() / 256 * val2);
+        return (int)(new Float(val1).floatValue() / 128 * val2);
     }
 
     /**

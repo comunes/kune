@@ -14,5 +14,5 @@
   <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='net.auroris.ColorPicker.client.ColorPickerSample'/>
+<!--   <entry-point class='net.auroris.ColorPicker.client.ColorPickerSample'/> -->
 </module>
