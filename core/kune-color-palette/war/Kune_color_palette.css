@@ -9,3 +9,21 @@
   width: 12px;
   height: 10px;
 }
+
+tr.k-bottom-10>td {
+  padding-bottom: 6px;
+}
+
+.k-color-push-btn {
+  cursor: hand;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.k-color-push-btn-down-hovering {
+  border: 1px solid red;
+}
+
+.k-color-push-btn-up-hovering {
+  border: 1px solid black;
+}
