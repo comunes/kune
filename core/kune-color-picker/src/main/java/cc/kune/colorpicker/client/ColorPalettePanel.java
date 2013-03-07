@@ -1,4 +1,4 @@
-package cc.kune.colorpalette.client;
+package cc.kune.colorpicker.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

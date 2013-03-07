@@ -1,6 +1,5 @@
-/*
- *
- * Copyright (C) 2007-2013 The kune development team (see CREDITS for details)
+/*******************************************************************************
+ * Copyright (C) 2007, 2013 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,20 +14,12 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-package cc.kune.colorpalette.client;
+ *******************************************************************************/
 
-public interface ColorWebSafePaletteView {
+package cc.kune.colorpicker.client;
 
-  String COLORS[] = { "0", "3", "6", "9", "C", "F" };
+public interface OnColorSelectedListener {
 
-  int COLS = 12;
-
-  int ROWS = 18;
-
-  void hide();
-
-  void show(int left, int top);
+  void onColorChoose(String color);
 
 }

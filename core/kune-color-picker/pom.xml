@@ -7,8 +7,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
-  <artifactId>kune-color-palette</artifactId>
-  <name>kune-color-palette</name>
+  <artifactId>kune-color-picker</artifactId>
+  <name>kune-color-picker</name>
   <description>A color palette/dialog</description>
   <repositories>
     <repository>

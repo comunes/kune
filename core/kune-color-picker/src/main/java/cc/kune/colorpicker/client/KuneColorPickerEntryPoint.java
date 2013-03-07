@@ -1,4 +1,4 @@
-package cc.kune.colorpalette.client;
+package cc.kune.colorpicker.client;
 
 import net.auroris.ColorPicker.client.ColorPicker;
 
@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class KuneColorPaletteEntryPoint implements EntryPoint {
+public class KuneColorPickerEntryPoint implements EntryPoint {
 
   /**
    * This is the entry point method.

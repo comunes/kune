@@ -17,13 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.colorpalette.client;
+package cc.kune.colorpicker.client.old;
 
+public interface ColorWebSafePaletteView {
 
-public interface ColorWebSafePalette {
+  String COLORS[] = { "0", "3", "6", "9", "C", "F" };
+
+  int COLS = 12;
+
+  int ROWS = 18;
 
   void hide();
 
-  void show(int left, int top, OnColorSelectedListener onColorSelected);
+  void show(int left, int top);
 
 }

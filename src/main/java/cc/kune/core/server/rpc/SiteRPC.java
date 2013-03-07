@@ -64,8 +64,8 @@ public class SiteRPC implements RPC, SiteService {
 
   @Inject
   public SiteRPC(final UserSessionManager userSessionManager, final UserManager userManager,
-      final UserInfoService userInfoService, final LicenseManager licenseManager, final KuneMapper mapper,
-      final KuneProperties kuneProperties, final ChatProperties chatProperties,
+      final UserInfoService userInfoService, final LicenseManager licenseManager,
+      final KuneMapper mapper, final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescManager) {
     this.userSessionManager = userSessionManager;

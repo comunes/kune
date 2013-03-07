@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='kune_color_palette'>
+<module rename-to='kune_color_picker'>
   <!-- Inherit the core Web Toolkit stuff. -->
   <inherits name='com.google.gwt.user.User'/>
   <inherits name='net.auroris.ColorPicker.client'/>
@@ -7,7 +7,7 @@
 
   <!-- Specify the app entry point class. -->
 
-  <entry-point class='cc.kune.colorpalette.client.KuneColorPaletteEntryPoint'/>
+  <entry-point class='cc.kune.colorpicker.client.KuneColorPickerEntryPoint'/>
 
   <!-- Specify the paths for translatable code -->
   <source path='client'/>

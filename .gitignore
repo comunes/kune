@@ -60,5 +60,5 @@ core/kune-java-gadget-lib/target
 core/kune-sandbox/war/WEB-INF/lib/
 *~
 .classpath
-core/kune-color-palette/war/WEB-INF/classes/
-core/kune-color-palette/war/kune_color_palette
+core/kune-color-picker/war/WEB-INF/classes/
+core/kune-color-picker/war/kune_color_picker
