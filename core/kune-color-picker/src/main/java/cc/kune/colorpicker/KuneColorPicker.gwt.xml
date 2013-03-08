@@ -13,6 +13,10 @@
   <source path='client'/>
   <public path="public"/>
 
-<!--   <stylesheet src="somefile.css"/> -->
+  <!-- For make CSS obfuscation more pretty -->
+  <set-configuration-property name="CssResource.style"
+    value="pretty"/>
+
+  <!-- <stylesheet src="somefile.css"/> -->
 
 </module>

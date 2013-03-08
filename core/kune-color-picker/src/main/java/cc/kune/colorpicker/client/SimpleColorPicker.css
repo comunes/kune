@@ -1,0 +1,23 @@
+@external .pushbutton, .pushbutton-down-hovering, .pushbutton-up-hovering;
+
+.grid {
+  margin: 10px;
+}
+
+tr.firstRow>td {
+  padding-bottom: 6px;
+}
+
+.pushbutton {
+  cursor: hand;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.pushbutton-down-hovering {
+  border: 1px solid red;
+}
+
+.pushbutton-up-hovering {
+  border: 1px solid black;
+}

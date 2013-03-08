@@ -182,6 +182,8 @@ package net.auroris.ColorPicker.client;
  * DAMAGE.
  */
 
+import cc.kune.colorpicker.client.OnColorSelectedListener;
+
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -235,7 +237,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
     private int colorMode; // Which color picking mode we are in
 
     // Elements
-        private HTML colorpreview;
+    private HTML colorpreview;
     private int green;
     private int hue;
     private RadioButton rbBlue;
@@ -359,22 +361,25 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
 
         // Put together the FlexTable
         hxTable.setWidget(0, 0, colorpreview);
-  //      table.getFlexCellFormatter().setColSpan(0, 0, 3);
-//        table.setWidget(1, 0, rbHue);
-//        table.setWidget(1, 1, tbHue);
-//        table.setWidget(1, 2, new HTML("&deg;"));
-//        table.setWidget(2, 0, rbSaturation);
-//        table.setWidget(2, 1, tbSaturation);
-//        table.setText(2, 2, "%");
-//        table.setWidget(3, 0, rbBrightness);
-//        table.setWidget(3, 1, tbBrightness);
-//        table.setText(3, 2, "%");
-//        table.setWidget(4, 0, rbRed);
-//        table.setWidget(4, 1, tbRed);
-//        table.setWidget(5, 0, rbGreen);
-//        table.setWidget(5, 1, tbGreen);
-//        table.setWidget(6, 0, rbBlue);
-//        table.setWidget(6, 1, tbBlue);
+//        hxTable.getFlexCellFormatter().setColSpan(0, 0, 3);
+
+        // Uncomment this part if we want the rest of textboxes
+//        hxTable.setWidget(1, 0, rbHue);
+//        hxTable.setWidget(1, 1, tbHue);
+//        hxTable.setWidget(1, 2, new HTML("&deg;"));
+//        hxTable.setWidget(2, 0, rbSaturation);
+//        hxTable.setWidget(2, 1, tbSaturation);
+//        hxTable.setText(2, 2, "%");
+//        hxTable.setWidget(3, 0, rbBrightness);
+//        hxTable.setWidget(3, 1, tbBrightness);
+//        hxTable.setText(3, 2, "%");
+//        hxTable.setWidget(4, 0, rbRed);
+//        hxTable.setWidget(4, 1, tbRed);
+//        hxTable.setWidget(5, 0, rbGreen);
+//        hxTable.setWidget(5, 1, tbGreen);
+//        hxTable.setWidget(6, 0, rbBlue);
+//        hxTable.setWidget(6, 1, tbBlue);
+
         hxTable.setText(0,1, "# ");
         hxTable.setWidget(0,2, tbHexColor);
 //        table.getFlexCellFormatter().setColSpan(7, 1, 2);
