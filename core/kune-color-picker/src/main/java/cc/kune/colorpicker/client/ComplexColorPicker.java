@@ -20,17 +20,44 @@ package cc.kune.colorpicker.client;
 
 import net.auroris.ColorPicker.client.ColorPicker;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ComplexColorPicker extends DeckPanel {
 
+  /** Resources used by this widget. */
+  public interface Resources extends ClientBundle {
+    /** CSS */
+    @Source("ComplexColorPicker.css")
+    Style style();
+  }
+
+
+  interface Style extends CssResource {
+
+    String fl();
+
+    String fr();
+
+    String toolbar();
+
+    String customColorPushbutton();
+
+  }
+
+  final static Style style = GWT.<Resources> create(Resources.class).style();
+
   public ComplexColorPicker(final OnColorSelectedListener listener) {
+    style.ensureInjected();
+
     VerticalPanel vp = new VerticalPanel();
     SimpleColorPicker simplePicker = new SimpleColorPicker(listener);
 
@@ -39,10 +66,10 @@ public class ComplexColorPicker extends DeckPanel {
     final ColorPicker auPicker = new ColorPicker();
     Button okBtn = new Button("Ok");
     Button cancelBtn = new Button("Cancel");
-    okBtn.addStyleName("k-fl");
-    okBtn.addStyleName("k-color-toolbar");
-    cancelBtn.addStyleName("k-fr");
-    cancelBtn.addStyleName("k-color-toolbar");
+    okBtn.addStyleName(style.fl());
+    okBtn.addStyleName(style.toolbar());
+    cancelBtn.addStyleName(style.fr());
+    cancelBtn.addStyleName(style.toolbar());
     auPickerPanel.add(auPicker);
     auPickerPanel.add(okBtn);
     auPickerPanel.add(cancelBtn);
@@ -59,8 +86,9 @@ public class ComplexColorPicker extends DeckPanel {
         ComplexColorPicker.this.showWidget(0);
       }
     });
-    Label custom = new Label("Custom...");
-    custom.addStyleName("k-color-toolbar");
+    PushButton custom = new PushButton("Custom...");
+    custom.addStyleName(style.toolbar());
+    custom.setStylePrimaryName(style.customColorPushbutton());
     custom.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {

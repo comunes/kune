@@ -30,6 +30,7 @@ public class SimpleColorPicker extends Composite {
     String firstRow();
 
     String pushbutton();
+
   }
 
   private static final String[] COLORS = new String[] { "rgb(0, 0, 0)", "rgb(67, 67, 67)",
