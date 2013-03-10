@@ -14,3 +14,4 @@ bin/i18n-db2gwt.sh -l pl > KuneConstants_pl.properties
 bin/i18n-db2gwt.sh -l gl > KuneConstants_gl.properties
 bin/i18n-db2gwt.sh -l eu > KuneConstants_eu.properties
 bin/i18n-db2gwt.sh -l sl > KuneConstants_sl.properties
+bin/i18n-db2gwt.sh -l pt-br > KuneConstants_pt-br.properties
