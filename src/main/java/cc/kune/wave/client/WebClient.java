@@ -53,7 +53,6 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.debug.logger.LogLevel;
-import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AurorisColorPicker;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.client.widget.popup.CenterPopupPositioner;
 import org.waveprotocol.wave.client.widget.popup.PopupChrome;
@@ -84,6 +83,7 @@ import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.viewers.PathToolbarUtils;
+import cc.kune.wave.client.kspecific.AurorisColorPicker;
 import cc.kune.wave.client.kspecific.WaveClientClearEvent;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
 import cc.kune.wave.client.kspecific.WaveClientView;
@@ -248,8 +248,8 @@ public class WebClient extends Composite implements WaveClientView {
   private Provider<AurorisColorPicker> colorPicker;
 
   private final ContentServiceAsync contentService;
-  private final EventBus eventBus;
 
+  private final EventBus eventBus;
   private final I18nTranslationService i18n;
 
   private IdGenerator idGenerator;
@@ -296,8 +296,9 @@ public class WebClient extends Composite implements WaveClientView {
 
   private final WaveStore waveStore = new SimpleWaveStore();
 
-
   private final CustomSavedStateIndicator waveUnsavedIndicator;
+
+
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
    */

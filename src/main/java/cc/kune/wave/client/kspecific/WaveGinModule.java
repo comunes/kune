@@ -19,8 +19,6 @@
  */
 package cc.kune.wave.client.kspecific;
 
-import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AurorisColorPicker;
-
 import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.wave.client.KuneWaveProfileManager;
 import cc.kune.wave.client.WebClient;

@@ -52,7 +52,6 @@ import org.waveprotocol.wave.client.wavepanel.impl.menu.i18n.MenuMessages;
 import org.waveprotocol.wave.client.wavepanel.impl.reader.Reader;
 import org.waveprotocol.wave.client.wavepanel.impl.title.WaveTitleHandler;
 import org.waveprotocol.wave.client.wavepanel.impl.toolbar.ToolbarSwitcher;
-import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AurorisColorPicker;
 import org.waveprotocol.wave.client.wavepanel.view.BlipView;
 import org.waveprotocol.wave.client.wavepanel.view.dom.ModelAsViewProvider;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipQueueRenderer;
@@ -64,6 +63,7 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.wave.client.kspecific.AurorisColorPicker;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;

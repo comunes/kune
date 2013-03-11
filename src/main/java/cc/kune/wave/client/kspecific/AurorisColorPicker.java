@@ -1,6 +1,11 @@
-package org.waveprotocol.wave.client.wavepanel.impl.toolbar.color;
+package cc.kune.wave.client.kspecific;
 
 import net.auroris.ColorPicker.client.ColorPicker;
+
+import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AbstractColorPicker;
+import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.ComplexColorPicker;
+
+import cc.kune.common.shared.i18n.I18n;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -51,8 +56,9 @@ public class AurorisColorPicker extends AbstractColorPicker {
       }
     });
 
-    final PushButton custom = new PushButton("Custom...");
-    custom.addStyleName(ComplexColorPicker.style.margins());
+    final PushButton custom = new PushButton(I18n.tWithNT("Custom...",
+        "Used in a button to choose a custom color"));
+    custom.addStyleName(ComplexColorPicker.style.buttonsMargins());
     custom.setStylePrimaryName(ComplexColorPicker.style.customColorPushbutton());
     custom.addClickHandler(new ClickHandler() {
       @Override
