@@ -74,6 +74,7 @@ install/kune::
 	    $(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql \
 	    $(CURDIR)/src/main/resources/db/update-0023-inviation.sql \
             $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql \
+            $(CURDIR)/src/main/resources/db/update-0008-i18n-pt-br.sql \
             > $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
         # Add the upgrades algo in the previous install
 	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5
