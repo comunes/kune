@@ -2,6 +2,8 @@
 <module>
   <inherits name='org.waveprotocol.box.webclient.WebClient' />
   <inherits name="cc.kune.core.KuneCore" />
+  <inherits name='net.auroris.ColorPicker.client'/>
+
   <!-- Stack emulation is too slow to use in production. -->
   <set-property name="compiler.emulatedStack" value="false" />
 

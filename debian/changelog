@@ -1,8 +1,9 @@
 kune (0.3.0+b22) unstable; urgency=low
 
   * Added Brazilian Portuguese
+  * Added color and background color buttons to editor
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 10 Mar 2013 23:55:40 +0100
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 11 Mar 2013 00:34:20 +0100
 
 kune (0.3.0+b21) unstable; urgency=low
 

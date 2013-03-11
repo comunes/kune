@@ -52,6 +52,8 @@ import org.waveprotocol.wave.client.wavepanel.impl.menu.i18n.MenuMessages;
 import org.waveprotocol.wave.client.wavepanel.impl.reader.Reader;
 import org.waveprotocol.wave.client.wavepanel.impl.title.WaveTitleHandler;
 import org.waveprotocol.wave.client.wavepanel.impl.toolbar.ToolbarSwitcher;
+import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AurorisColorPicker;
+import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.ComplexColorPicker;
 import org.waveprotocol.wave.client.wavepanel.view.BlipView;
 import org.waveprotocol.wave.client.wavepanel.view.dom.ModelAsViewProvider;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipQueueRenderer;
@@ -97,6 +99,7 @@ public class CustomStagesProvider extends Stages {
   }
   private final RemoteViewServiceMultiplexer channel;
   private boolean closed;
+  protected AurorisColorPicker colorPicker;
   private final EventBus eventBus;
   private final IdGenerator idGenerator;
   private final boolean isNewWave;
@@ -104,19 +107,19 @@ public class CustomStagesProvider extends Stages {
   private StageOne one;
   private final Set<ParticipantId> participants;
   private final ProfileManager profiles;
-  private final LogicalPanel rootPanel;
 
+  private final LogicalPanel rootPanel;
   private StageThree three;
   private StageTwo two;
   private WaveContext wave;
   @SuppressWarnings("unused")
   private final FramedPanel waveFrame;
+
   private final Element wavePanelElement;
 
   private final WaveRef waveRef;
 
   private final WaveStore waveStore;
-
   private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   /**
@@ -213,8 +216,10 @@ public class CustomStagesProvider extends Stages {
         CustomParticipantController.install(panel, models, profiles, getLocalDomain(), user,  participantMessages, eventBus);
         KeepFocusInView.install(edit, panel);
         stageTwo.getDiffController().upgrade(edit);
+        if (colorPicker == null) {
+          colorPicker = new AurorisColorPicker(ComplexColorPicker.getInstance());
+        }
       }
-
     });
   }
 

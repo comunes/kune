@@ -20,6 +20,7 @@ package cc.kune.wave.client;
 
 
 import java.util.Date;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.waveprotocol.box.webclient.client.ClientEvents;
@@ -108,8 +109,6 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import java.util.Set;
-
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -118,12 +117,110 @@ public class WebClient extends Composite implements WaveClientView {
   interface Binder extends UiBinder<DockLayoutPanel, WebClient> {
   }
 
+  /**
+   * An exception handler that reports exceptions using a <em>shiny banner</em>
+   * (an alert placed on the top of the screen). Once the stack trace is
+   * prepared, it is revealed in the banner via a link.
+   */
+  public static class ErrorHandler implements UncaughtExceptionHandler {
+    public static void getStackTraceAsync(final Throwable t, final Accessor<SafeHtml> whenReady) {
+      // TODO: Request stack-trace de-obfuscation. For now, just use the
+      // javascript stack trace.
+      //
+      // Use minimal services here, in order to avoid the chance that reporting
+      // the error produces more errors. In particular, do not use WIAB's
+      // scheduler to run this command.
+      // Also, this code could potentially be put behind a runAsync boundary, to
+      // save whatever dependencies it uses from the initial download.
+      new Timer() {
+        @Override
+        public void run() {
+          final SafeHtmlBuilder stack = new SafeHtmlBuilder();
+
+          Throwable error = t;
+          while (error != null) {
+            final String token = String.valueOf((new Date()).getTime());
+            stack.appendHtmlConstant("Token:  " + token + "<br> ");
+            stack.appendEscaped(String.valueOf(error.getMessage())).appendHtmlConstant("<br>");
+            for (final StackTraceElement elt : error.getStackTrace()) {
+              stack.appendHtmlConstant("  ")
+                  .appendEscaped(maybe(elt.getClassName(), "??")).appendHtmlConstant(".") //
+                  .appendEscaped(maybe(elt.getMethodName(), "??")).appendHtmlConstant(" (") //
+                  .appendEscaped(maybe(elt.getFileName(), "??")).appendHtmlConstant(":") //
+                  .appendEscaped(maybe(elt.getLineNumber(), "??")).appendHtmlConstant(")") //
+                  .appendHtmlConstant("<br>");
+            }
+            error = error.getCause();
+            if (error != null) {
+              stack.appendHtmlConstant("Caused by: ");
+            }
+          }
+
+          whenReady.use(stack.toSafeHtml());
+        }
+      }.schedule(1);
+    }
+
+    public static void install() {
+    GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
+    }
+
+    private static String maybe(final int value, final String otherwise) {
+      return value != -1 ? String.valueOf(value) : otherwise;
+    }
+
+    private static String maybe(final String value, final String otherwise) {
+      return value != null ? value : otherwise;
+    }
+
+    /**
+     * Indicates whether an error has already been reported (at most one error
+     * is ever reported by this handler).
+     */
+    private boolean hasFired;
+
+    /** Next handler in the handler chain. */
+    private final UncaughtExceptionHandler next;
+
+    private ErrorHandler(final UncaughtExceptionHandler next) {
+      this.next = next;
+    }
+
+    @Override
+    public void onUncaughtException(final Throwable e) {
+      if (!hasFired) {
+        hasFired = true;
+      //  final ErrorIndicatorPresenter error =
+        //    ErrorIndicatorPresenter.create(RootPanel.get("banner"));
+        getStackTraceAsync(e, new Accessor<SafeHtml>() {
+          @Override
+          public void use(final SafeHtml stack) {
+          //  error.addDetail(stack, null);
+            // REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
+            final String message = stack.asString().replace("<br>", "\n");
+            NotifyUser.logError(message);
+            NotifyUser.showProgress("Error");
+            REMOTE_LOG.severe(message);
+            new Timer() {
+              @Override
+              public void run() {
+                NotifyUser.hideProgress();
+              }}.schedule(5000);
+          }
+        });
+      }
+      if (next != null) {
+        next.onUncaughtException(e);
+      }
+    }
+  }
+
   interface Style extends CssResource {
   }
 
   private static final Binder BINDER = GWT.create(Binder.class);
-
   static Log LOG = Log.get(WebClient.class);
+
   // Use of GWT logging is only intended for sending exception reports to the
   // server, nothing else in the client should use java.util.logging.
   // Please also see WebClientDemo.gwt.xml.
@@ -131,17 +228,48 @@ public class WebClient extends Composite implements WaveClientView {
 
   /** Creates a popup that warns about network disconnects. */
   private static UniversalPopup createTurbulencePopup() {
-    PopupChrome chrome = PopupChromeFactory.createPopupChrome();
-    UniversalPopup popup =
+    final PopupChrome chrome = PopupChromeFactory.createPopupChrome();
+    final UniversalPopup popup =
         PopupFactory.createPopup(null, new CenterPopupPositioner(), chrome, true);
     popup.add(new HTML("<div style='color: red; padding: 5px; text-align: center;'>"
         + "<b>A turbulence detected!<br></br>"
         + " Please save your last changes to somewhere and reload the wave.</b></div>"));
     return popup;
   }
+  @UiField
+  SimplePanel bottomBar;
+
+  private final ActionFlowPanel bottomToolbar;
+
+  private RemoteViewServiceMultiplexer channel;
+
+  private final ContentServiceAsync contentService;
+
+  private final EventBus eventBus;
+  private final I18nTranslationService i18n;
+
+  private IdGenerator idGenerator;
+
+  private final InboxCountPresenter inboxCount;
+
+  private final cc.kune.core.client.state.Session kuneSession;
+
+  private final Element loading = new LoadingIndicator().getElement();
+
+  private ParticipantId loggedInUser;
+
+  @UiField
+  DebugMessagePanel logPanel;
+
+  private final PathToolbarUtils pathToolbaUtils;
 
   private final ProfileManager profiles;
-  private final UniversalPopup turbulencePopup = createTurbulencePopup();
+
+  @UiField
+  DockLayoutPanel rightPanel;
+
+  @UiField(provided = true)
+  final SearchPanelWidget searchPanel;
 
   @UiField(provided=true)
   SplitLayoutPanel splitPanel;
@@ -149,65 +277,34 @@ public class WebClient extends Composite implements WaveClientView {
   @UiField
   Style style;
 
+  private final TokenMatcher tokenMatcher;
+
+  private final UniversalPopup turbulencePopup = createTurbulencePopup();
+
+  /** The wave panel, if a wave is open. */
+  private CustomStagesProvider wave;
+
   @UiField
   FramedPanel waveFrame;
 
   //FIXME UiField???
   ImplPanel waveHolder;
-  private final Element loading = new LoadingIndicator().getElement();
-
-  @UiField(provided = true)
-  final SearchPanelWidget searchPanel;
-
-  @UiField
-  DebugMessagePanel logPanel;
-
-  @UiField
-  SimplePanel bottomBar;
-
-  @UiField
-  DockLayoutPanel rightPanel;
-
-  /** The wave panel, if a wave is open. */
-  private CustomStagesProvider wave;
 
   private final WaveStore waveStore = new SimpleWaveStore();
+
+  private final CustomSavedStateIndicator waveUnsavedIndicator;
+
 
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
    */
   private WaveWebSocketClient websocket;
 
-  private ParticipantId loggedInUser;
-
-  private IdGenerator idGenerator;
-
-  private RemoteViewServiceMultiplexer channel;
-
-  private final CustomSavedStateIndicator waveUnsavedIndicator;
-
-  private final EventBus eventBus;
-
-  private final I18nTranslationService i18n;
-
-  private final InboxCountPresenter inboxCount;
-
-  private final TokenMatcher tokenMatcher;
-
-  private final ContentServiceAsync contentService;
-
-  private final cc.kune.core.client.state.Session kuneSession;
-
-  private final PathToolbarUtils pathToolbaUtils;
-
-  private final ActionFlowPanel bottomToolbar;
-
-
   /**
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator, ContentServiceAsync contentService, PathToolbarUtils pathToolbaUtils, ActionFlowPanel bottomToolbar) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final PathToolbarUtils pathToolbaUtils, final ActionFlowPanel bottomToolbar) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
@@ -238,7 +335,7 @@ public class WebClient extends Composite implements WaveClientView {
         new WaveCreationEventHandler() {
 
           @Override
-          public void onCreateRequest(WaveCreationEvent event, Set<ParticipantId> participantSet) {
+          public void onCreateRequest(final WaveCreationEvent event, final Set<ParticipantId> participantSet) {
             LOG.info("WaveCreationEvent received");
             if (channel == null) {
               throw new DefaultException("Spaghetti attack.  Create occured before login");
@@ -282,6 +379,10 @@ public class WebClient extends Composite implements WaveClientView {
   waveFrame.clear();
 }
 
+  private void clearBottomToolbarActions() {
+    bottomToolbar.clear();
+  }
+
   private void createWebSocket() {
     websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl());
     websocket.connect();
@@ -296,7 +397,6 @@ public class WebClient extends Composite implements WaveClientView {
   public Element getLoading() {
     return loading;
   }
-
   @Override
   public ProfileManager getProfiles() {
     return profiles;
@@ -306,6 +406,8 @@ public class WebClient extends Composite implements WaveClientView {
   public void getStackTraceAsync(final Throwable caught, final Accessor<SafeHtml> accessor) {
     ErrorHandler.getStackTraceAsync(caught, accessor);
   }
+
+
   @Override
   public ImplPanel getWaveHolder() {
     return waveHolder;
@@ -316,12 +418,19 @@ public class WebClient extends Composite implements WaveClientView {
     return websocket;
   }
 
-
   /**
    * Returns <code>ws(s)://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
-  private native String getWebSocketBaseUrl() /*-{return ((window.location.protocol == "https:") ? "wss" : "ws") + "://" +  $wnd.__websocket_address + "/";}-*/;
+  private native String getWebSocketBaseUrl() /*-{
+		return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
+				+ $wnd.__websocket_address + "/";
+  }-*/;
+
+  private void hideBottomToolbar() {
+    rightPanel.setWidgetSize(bottomBar, 0);
+    bottomBar.getParent().getElement().getStyle().setBottom(0d, Unit.PX);
+  }
 
   @Override
   public void login() {
@@ -356,13 +465,13 @@ public class WebClient extends Composite implements WaveClientView {
   private void openWave(final WaveRef waveRef, final boolean isNewWave, final Set<ParticipantId> participants) {
     waveUnsavedIndicator.onNewHistory(History.getToken(), new SimpleResponseCallback () {
       @Override
-      public void onSuccess() {
-        openWaveImpl(waveRef, isNewWave, participants);
+      public void onCancel() {
+        // Do nothing
       }
 
       @Override
-      public void onCancel() {
-        // Do nothing
+      public void onSuccess() {
+        openWaveImpl(waveRef, isNewWave, participants);
       }});
   }
 
@@ -374,7 +483,7 @@ public class WebClient extends Composite implements WaveClientView {
    * @param participants the participants to add to the newly created wave.
    *        {@code null} if only the creator should be added
    */
-  private void openWaveImpl(WaveRef waveRef, boolean isNewWave, Set<ParticipantId> participants) {
+  private void openWaveImpl(final WaveRef waveRef, final boolean isNewWave, final Set<ParticipantId> participants) {
     LOG.info("WebClient.openWave()");
 
     WaveClientClearEvent.fire(eventBus);
@@ -385,8 +494,8 @@ public class WebClient extends Composite implements WaveClientView {
     // Release the display:none.
     UIObject.setVisible(waveFrame.getElement(), true);
     waveHolder.getElement().appendChild(loading);
-    Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-    CustomStagesProvider wave = new CustomStagesProvider(
+    final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
+    final CustomStagesProvider wave = new CustomStagesProvider(
         holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus);
     this.wave = wave;
     wave.load(new Command() {
@@ -396,17 +505,17 @@ public class WebClient extends Composite implements WaveClientView {
       }
     });
 
-    String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
+    final String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
 
     setBottomToolbar(waveUri);
 
-    String encodedToken = HistoryUtils.undoHashbang(History.getToken());
+    final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
     // Kune patch
     if (encodedToken != null && !encodedToken.isEmpty() && !tokenMatcher.isInboxToken(encodedToken)) {
       WaveRef fromWaveRef;
       try {
         fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);
-      } catch (InvalidWaveRefException e) {
+      } catch (final InvalidWaveRefException e) {
         LOG.info("History token contains invalid path: " + encodedToken);
         return;
       }
@@ -422,14 +531,14 @@ public class WebClient extends Composite implements WaveClientView {
     History.newItem(tokenFromWaveref, false);
   }
 
-  private void setBottomToolbar(String waveUri) {
+  private void setBottomToolbar(final String waveUri) {
     contentService.getContentByWaveRef(kuneSession.getUserHash(), waveUri, new AsyncCallbackSimple<StateAbstractDTO>() {
       @Override
-      public void onSuccess(StateAbstractDTO result) {
+      public void onSuccess(final StateAbstractDTO result) {
         if (result instanceof StateContentDTO) {
-          StateContentDTO state = (StateContentDTO) result;
-          ContainerSimpleDTO doc = new ContainerSimpleDTO(state.getTitle(), state.getContainer().getStateToken(), state.getStateToken(), state.getTypeId());
-          GuiActionDescCollection actions = pathToolbaUtils.createPath(state.getGroup(), state.getContainer(), false, true, doc);
+          final StateContentDTO state = (StateContentDTO) result;
+          final ContainerSimpleDTO doc = new ContainerSimpleDTO(state.getTitle(), state.getContainer().getStateToken(), state.getStateToken(), state.getTypeId());
+          final GuiActionDescCollection actions = pathToolbaUtils.createPath(state.getGroup(), state.getContainer(), false, true, doc);
           bottomToolbar.addAll(actions);
           rightPanel.setWidgetSize(bottomBar, 26);
           bottomBar.getParent().getElement().getStyle().setBottom(12d, Unit.PX);
@@ -439,15 +548,6 @@ public class WebClient extends Composite implements WaveClientView {
         }
       }
     });
-  }
-
-  private void clearBottomToolbarActions() {
-    bottomToolbar.clear();
-  }
-
-  private void hideBottomToolbar() {
-    rightPanel.setWidgetSize(bottomBar, 0);
-    bottomBar.getParent().getElement().getStyle().setBottom(0d, Unit.PX);
   }
 
   @Override
@@ -535,7 +635,6 @@ public class WebClient extends Composite implements WaveClientView {
     setupWavePanel();
     bottomBar.add(bottomToolbar);
   }
-
   private void setupWavePanel() {
     // Hide the frame until waves start getting opened.
     UIObject.setVisible(waveFrame.getElement(), false);
@@ -548,105 +647,8 @@ public class WebClient extends Composite implements WaveClientView {
       }
     });
   }
+
   private native boolean useSocketIO() /*-{
-    return !window.WebSocket
+		return !window.WebSocket
   }-*/;
-
-  /**
-   * An exception handler that reports exceptions using a <em>shiny banner</em>
-   * (an alert placed on the top of the screen). Once the stack trace is
-   * prepared, it is revealed in the banner via a link.
-   */
-  public static class ErrorHandler implements UncaughtExceptionHandler {
-    /** Next handler in the handler chain. */
-    private final UncaughtExceptionHandler next;
-
-    /**
-     * Indicates whether an error has already been reported (at most one error
-     * is ever reported by this handler).
-     */
-    private boolean hasFired;
-
-    private ErrorHandler(UncaughtExceptionHandler next) {
-      this.next = next;
-    }
-
-    public static void install() {
-    GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
-    }
-
-    @Override
-    public void onUncaughtException(Throwable e) {
-      if (!hasFired) {
-        hasFired = true;
-      //  final ErrorIndicatorPresenter error =
-        //    ErrorIndicatorPresenter.create(RootPanel.get("banner"));
-        getStackTraceAsync(e, new Accessor<SafeHtml>() {
-          @Override
-          public void use(SafeHtml stack) {
-          //  error.addDetail(stack, null);
-            // REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
-            String message = stack.asString().replace("<br>", "\n");
-            NotifyUser.logError(message);
-            NotifyUser.showProgress("Error");
-            REMOTE_LOG.severe(message);
-            new Timer() {
-              @Override
-              public void run() {
-                NotifyUser.hideProgress();
-              }}.schedule(5000);
-          }
-        });
-      }
-      if (next != null) {
-        next.onUncaughtException(e);
-      }
-    }
-
-    public static void getStackTraceAsync(final Throwable t, final Accessor<SafeHtml> whenReady) {
-      // TODO: Request stack-trace de-obfuscation. For now, just use the
-      // javascript stack trace.
-      //
-      // Use minimal services here, in order to avoid the chance that reporting
-      // the error produces more errors. In particular, do not use WIAB's
-      // scheduler to run this command.
-      // Also, this code could potentially be put behind a runAsync boundary, to
-      // save whatever dependencies it uses from the initial download.
-      new Timer() {
-        @Override
-        public void run() {
-          SafeHtmlBuilder stack = new SafeHtmlBuilder();
-
-          Throwable error = t;
-          while (error != null) {
-            String token = String.valueOf((new Date()).getTime());
-            stack.appendHtmlConstant("Token:  " + token + "<br> ");
-            stack.appendEscaped(String.valueOf(error.getMessage())).appendHtmlConstant("<br>");
-            for (StackTraceElement elt : error.getStackTrace()) {
-              stack.appendHtmlConstant("  ")
-                  .appendEscaped(maybe(elt.getClassName(), "??")).appendHtmlConstant(".") //
-                  .appendEscaped(maybe(elt.getMethodName(), "??")).appendHtmlConstant(" (") //
-                  .appendEscaped(maybe(elt.getFileName(), "??")).appendHtmlConstant(":") //
-                  .appendEscaped(maybe(elt.getLineNumber(), "??")).appendHtmlConstant(")") //
-                  .appendHtmlConstant("<br>");
-            }
-            error = error.getCause();
-            if (error != null) {
-              stack.appendHtmlConstant("Caused by: ");
-            }
-          }
-
-          whenReady.use(stack.toSafeHtml());
-        }
-      }.schedule(1);
-    }
-
-    private static String maybe(String value, String otherwise) {
-      return value != null ? value : otherwise;
-    }
-
-    private static String maybe(int value, String otherwise) {
-      return value != -1 ? String.valueOf(value) : otherwise;
-    }
-  }
 }
