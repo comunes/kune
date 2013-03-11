@@ -53,6 +53,7 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.debug.logger.LogLevel;
+import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AurorisColorPicker;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.client.widget.popup.CenterPopupPositioner;
 import org.waveprotocol.wave.client.widget.popup.PopupChrome;
@@ -107,6 +108,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
@@ -243,9 +245,11 @@ public class WebClient extends Composite implements WaveClientView {
 
   private RemoteViewServiceMultiplexer channel;
 
-  private final ContentServiceAsync contentService;
+  private Provider<AurorisColorPicker> colorPicker;
 
+  private final ContentServiceAsync contentService;
   private final EventBus eventBus;
+
   private final I18nTranslationService i18n;
 
   private IdGenerator idGenerator;
@@ -292,9 +296,8 @@ public class WebClient extends Composite implements WaveClientView {
 
   private final WaveStore waveStore = new SimpleWaveStore();
 
+
   private final CustomSavedStateIndicator waveUnsavedIndicator;
-
-
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
    */
@@ -304,7 +307,7 @@ public class WebClient extends Composite implements WaveClientView {
    * This is the entry point method.
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final PathToolbarUtils pathToolbaUtils, final ActionFlowPanel bottomToolbar) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final PathToolbarUtils pathToolbaUtils, final ActionFlowPanel bottomToolbar, final Provider<AurorisColorPicker> colorPicker) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.inboxCount = inboxCount;
@@ -315,6 +318,7 @@ public class WebClient extends Composite implements WaveClientView {
     this.contentService = contentService;
     this.pathToolbaUtils = pathToolbaUtils;
     this.bottomToolbar = bottomToolbar;
+    this.colorPicker = colorPicker;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
     ErrorHandler.install();
     eventBus.addHandler(StackErrorEvent.getType(), new StackErrorEvent.StackErrorHandler() {
@@ -496,7 +500,7 @@ public class WebClient extends Composite implements WaveClientView {
     waveHolder.getElement().appendChild(loading);
     final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
     final CustomStagesProvider wave = new CustomStagesProvider(
-        holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus);
+        holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus, colorPicker);
     this.wave = wave;
     wave.load(new Command() {
       @Override

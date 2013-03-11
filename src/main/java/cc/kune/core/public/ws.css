@@ -1338,3 +1338,26 @@ div.k-feedback-btn {
 .k-feedback-btn div img {
   margin: -1px 2px 0 2px;
 }
+
+/* Color picker colors */
+.pushbutton {
+  margin: 1px;
+}
+
+.customColorPushbutton {
+  margin: 0 5px;
+}
+
+.k-aurorisColorPicker {
+  margin: 10px;
+  border-collapse: separate;
+  border-spacing: 2 !important;
+}
+
+button.k-aurorisColorPicker-btn {
+  margin: 10px 0 5px;
+}
+
+div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
+  margin: 2px;
+}

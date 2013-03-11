@@ -19,6 +19,8 @@
  */
 package cc.kune.wave.client.kspecific;
 
+import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AurorisColorPicker;
+
 import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.wave.client.KuneWaveProfileManager;
 import cc.kune.wave.client.WebClient;
@@ -34,6 +36,7 @@ public class WaveGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
+    s(AurorisColorPicker.class);
     s(WebClientMock.class);
     s(WebClient.class);
     s(WaveClientProvider.class);

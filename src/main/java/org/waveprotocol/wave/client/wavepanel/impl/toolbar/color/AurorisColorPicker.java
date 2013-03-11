@@ -21,19 +21,19 @@ public class AurorisColorPicker extends AbstractColorPicker {
    * @param colorPicker
    *          the color picker
    */
-  public AurorisColorPicker(final ComplexColorPicker colorPicker) {
-    super(colorPicker);
+  public AurorisColorPicker() {
+    super(ComplexColorPicker.getInstance());
 
     final FlowPanel auPickerPanel = new FlowPanel();
     auPickerPanel.setWidth("155px");
-    auPickerPanel.addStyleName(ComplexColorPicker.style.margins());
+    auPickerPanel.addStyleName("k-aurorisColorPicker");
     final ColorPicker auPicker = new ColorPicker();
     final Button okBtn = new Button("Ok");
     final Button cancelBtn = new Button("Cancel");
-    okBtn.addStyleName(ComplexColorPicker.style.fl());
-    okBtn.addStyleName(ComplexColorPicker.style.toolbar());
-    cancelBtn.addStyleName(ComplexColorPicker.style.fr());
-    cancelBtn.addStyleName(ComplexColorPicker.style.toolbar());
+    okBtn.addStyleName("k-fl");
+    okBtn.addStyleName("k-aurorisColorPicker-btn");
+    cancelBtn.addStyleName("k-fr");
+    cancelBtn.addStyleName("k-aurorisColorPicker-btn");
     auPickerPanel.add(auPicker);
     auPickerPanel.add(okBtn);
     auPickerPanel.add(cancelBtn);
@@ -68,7 +68,6 @@ public class AurorisColorPicker extends AbstractColorPicker {
     // opens the panel)
     colorPicker.addToBottom(custom);
     colorPicker.addColorPicker(this);
-
   }
 
 }

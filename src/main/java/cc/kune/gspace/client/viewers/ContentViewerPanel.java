@@ -25,6 +25,7 @@ import org.waveprotocol.box.webclient.client.SimpleWaveStore;
 import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.client.account.ProfileManager;
+import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AurorisColorPicker;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.model.id.IdGenerator;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
@@ -67,6 +68,7 @@ import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
@@ -79,26 +81,30 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
   private RemoteViewServiceMultiplexer channel;
+  private final Provider<AurorisColorPicker> colorPicker;
   private final ContentTitleWidget contentTitle;
   @UiField
   DeckPanel deck;
   private final ContentDropController dropController;
   private FramedPanel dummyWaveFrame;
+  private final EventBus eventBus;
   private final GSpaceArmor gsArmor;
   private IdGenerator idGenerator;
+
   private Element loading;
+
   @UiField
   InlineHTML onlyViewPanel;
 
   private final boolean onlyWebClient;
 
   private ProfileManager profiles;
-
   private final StateManager stateManager;
-
   /** The wave panel, if a wave is open. */
   private CustomStagesProvider wave;
+
   private final WaveClientProvider waveClientProv;
+
   private ImplPanel waveHolder;
 
   @UiField
@@ -110,13 +116,12 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   private final Widget widget;
 
-  private final EventBus eventBus;
-
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
       final EventBus eventBus, final StateManager stateManager,
-      final ContentDropController dropController, final CustomSavedStateIndicator waveUnsavedIndicator) {
+      final ContentDropController dropController, final CustomSavedStateIndicator waveUnsavedIndicator,
+      final Provider<AurorisColorPicker> colorPicker) {
     this.gsArmor = wsArmor;
     this.waveClientProv = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
@@ -124,6 +129,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     this.stateManager = stateManager;
     this.dropController = dropController;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
+    this.colorPicker = colorPicker;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistryLight());
     eventBus.addHandler(WaveClientClearEvent.getType(),
@@ -242,9 +248,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
         // UIObject.setVisible(waveFrame.getElement(), true);
         waveHolder.getElement().appendChild(loading);
         final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-        final CustomStagesProvider wave = new CustomStagesProvider(holder,  waveUnsavedIndicator, waveHolder, dummyWaveFrame,
-            waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
-            org.waveprotocol.box.webclient.client.Session.get().getDomain(), null, eventBus);
+        final CustomStagesProvider wave = new CustomStagesProvider(holder, waveUnsavedIndicator,
+            waveHolder, dummyWaveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
+            org.waveprotocol.box.webclient.client.Session.get().getDomain(), null, eventBus, colorPicker);
         this.wave = wave;
         wave.load(new Command() {
           @Override

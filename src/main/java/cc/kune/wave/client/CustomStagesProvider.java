@@ -53,7 +53,6 @@ import org.waveprotocol.wave.client.wavepanel.impl.reader.Reader;
 import org.waveprotocol.wave.client.wavepanel.impl.title.WaveTitleHandler;
 import org.waveprotocol.wave.client.wavepanel.impl.toolbar.ToolbarSwitcher;
 import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AurorisColorPicker;
-import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.ComplexColorPicker;
 import org.waveprotocol.wave.client.wavepanel.view.BlipView;
 import org.waveprotocol.wave.client.wavepanel.view.dom.ModelAsViewProvider;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipQueueRenderer;
@@ -69,6 +68,7 @@ import cc.kune.common.client.log.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Provider;
 
 /**
  * Stages for loading the undercurrent Wave Panel
@@ -99,7 +99,7 @@ public class CustomStagesProvider extends Stages {
   }
   private final RemoteViewServiceMultiplexer channel;
   private boolean closed;
-  protected AurorisColorPicker colorPicker;
+  private final Provider<AurorisColorPicker> colorPicker;
   private final EventBus eventBus;
   private final IdGenerator idGenerator;
   private final boolean isNewWave;
@@ -139,7 +139,7 @@ public class CustomStagesProvider extends Stages {
   public CustomStagesProvider(final Element wavePanelElement, final CustomSavedStateIndicator waveUnsavedIndicator,
       final LogicalPanel rootPanel, final FramedPanel waveFrame, final WaveRef waveRef, final RemoteViewServiceMultiplexer channel,
       final IdGenerator idGenerator, final ProfileManager profiles, final WaveStore store, final boolean isNewWave,
-      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus) {
+      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus, final Provider<AurorisColorPicker> colorPicker) {
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.wavePanelElement = wavePanelElement;
     this.waveFrame = waveFrame;
@@ -153,6 +153,7 @@ public class CustomStagesProvider extends Stages {
     this.localDomain = localDomain;
     this.participants = participants;
     this.eventBus = eventBus;
+    this.colorPicker = colorPicker;
   }
 
   @Override
@@ -216,9 +217,7 @@ public class CustomStagesProvider extends Stages {
         CustomParticipantController.install(panel, models, profiles, getLocalDomain(), user,  participantMessages, eventBus);
         KeepFocusInView.install(edit, panel);
         stageTwo.getDiffController().upgrade(edit);
-        if (colorPicker == null) {
-          colorPicker = new AurorisColorPicker(ComplexColorPicker.getInstance());
-        }
+        colorPicker.get();
       }
     });
   }
