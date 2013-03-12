@@ -60,6 +60,7 @@ From the Eclipse Marketplace (Help > Eclipse Marketplace (*)) install:
 
 - [ ] Google Plugin for Eclipse https://code.google.com/intl/en/eclipse/docs/getting_started.html (if available, install also the GWT Designer from the Google repository)
 - [ ] EGit plugin (Git for Eclipse)
+- [ ] Eclipse Java EE Developer Tools
 
 (*): If the Marketplace does not appear in that menu, download the plugin "Marketplace Client" from the Install New Software > Your version repository > "General Purpose Tools" > Marketplace Client. Install and restart, and you will see Help > Eclipse Marketplace.
 
@@ -113,7 +114,9 @@ You can change this globally in Eclipse Preferences > General > Workspace.
 NOTE: Please don't send patches in other charsets.
 
 *** Other recommended & suggested plugins for Eclipse
- 
+
+NOTE: When a URL repository is indicated, it should be added to Eclipse > Help > Install new software > Add 
+
 **** From the Eclipse Marketplace:
 - [ ] The FindBugs plugin (looks for bug patterns)
 - [ ] Mylyn (task-focused development)
@@ -121,12 +124,11 @@ NOTE: Please don't send patches in other charsets.
 **** From the Google repository (as you installed the "Google Plugin for Eclipse" before):
 - [ ] The GWT Designer GUI Builder plugin (a great helper to work with GWT UiBinder) 
 
-**** From the repository http://pmd.sourceforge.net/eclipse
+**** From the repository http://pmd.sourceforge.net/eclipse 
 - [ ] The PMD Eclipse plugin (scans the code looking for potential problems). 
 
 **** From the repository http://redmin-mylyncon.sourceforge.net/update-site/N/
 - [ ] Redmine Mylyn Connector (ideal to use in combination with Mylyn and a Redmine like the used by Kune)
-
 
 **** Also maybe some other plugins are interesting such as:
 - [ ] Quick Junit
