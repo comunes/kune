@@ -117,6 +117,17 @@ drwxr-xr-x  2 root root 4096 jul 26 14:15 .
 drwxr-xr-x 13 kune kune 4096 jul 26 14:19 ..
 kunedemo:/usr/share/kune/custom# rm /var/lib/kune/_wave_indexes/write.lock
 
+** Guice error while running server
+When running the server (e.g. "kune server via mvn.launch"), and Guice throws a sequence of exceptions such as:
+
+- FAILED rack: com.google.inject.CreationException: Guice creation errors:
+  1) Error injecting constructor, javax.persistence.PersistenceException: [PersistenceUnit: development] Unable to build EntityManagerFactory
+  
+  Caused by: ...
+  Caused by: ...
+  Caused by: ...
+
+There is a chain of "Caused by" exceptions. Check the last ones of the chain to understand what's going on. For instance, it may give a problem of permissions ("permission denied"), which can be easily fixed correcting the pointed file permissions. Another example is a problem with Hibernate and thus the database, as in: http://www.kune.cc/?locale=en#!kune.lists.1226.8850 (the solution is described there)
 ** JUnit
 
 Running all the Kune test from eclipse I get connection pool exceptions like:
@@ -172,6 +183,36 @@ and
 ** Error: Incorrect string value: '\xEF\xBF\xBD\xEF\xBF\xBD...' for column 'native_name' at row 1
 
 Verify that your system supports UTF8 (in debian systems check /etc/locale.gen and locale-gen)
+
+** Error during build: Validation
+
+While building, problems during validation such as:
+- Errors occurred during the build.
+  Errors running builder 'Faceted Project Validation Builder' on project 'kune'.
+  Could not initialize class org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
+  Errors running builder 'Validation' on project 'kune'.
+  org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
+
+or: 
+- An internal error occurred during: "Validating kune".
+  org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
+
+These can be solved installing "Eclipse Java EE Developer Tools", as mentioned in:
+http://stackoverflow.com/questions/6936309/getting-an-error-message-while-building-phonegapsample-in-blackberry-webworks
+
+** Error during build: Maven
+
+While building, problems related to Maven such as:
+- Errors occurred during the build.
+  Errors running builder 'Maven Project Builder' on project 'kune'.
+  java.lang.NullPointerException
+
+or: 
+- Plugin execution not covered by lifecycle configuration: 
+  org.apache.maven.plugins:maven-resources-plugin:2.4.2:resources (execution: default-resources, phase: process-resources)	pom.xml	/kune	line 773	Maven Project Build Lifecycle Mapping Problem
+
+These can be solved by installing the m2eclipse, as described in:
+http://code.google.com/p/google-web-toolkit/wiki/WorkingWithMaven#Using_Maven_with_Google_Plugin_for_Eclipse
 
 ** Java compile errors: incompatible types 
 Sometimes you get errors like this, trying to compile:
