@@ -62,6 +62,15 @@ To debug mysql logs, you can uncomment:
 #general_log             = 1
 in /etc/mysql/my.cnf
 
+*** Liquibase Migration failed
+After executing
+  bin/liquibase-migrate.sh 
+An error such as this one may appear: 
+  Migration Failed: Error executing SQL ALTER TABLE groups ADD COLUMN logoLastModifiedTime BIGINT NOT NULL DEFAULT 1347400051999
+
+This is due to the auto-generation of columns by the Kune environment. In this specific case, dropping the column would allow the migration to succeed. That is, it can be solved connecting to the kune_dev (or kune_prod) table and executing this SQL sentence:
+  ALTER TABLE groups DROP COLUMN logoLastModifiedTime;
+
 ** If during initialization (first start) you get a 'Account already exists'
 
 If you stopped the first initialization and the server init is half started you will get something like:
