@@ -11,8 +11,25 @@
   <description>Kune command line interface</description>
   <repositories>
     <repository>
-      <id>kune-maven</id>
-      <url>http://kune.ourproject.org/mavenrepo/</url>
+      <id>comunes-snapshots</id>
+      <name>Comunes Archiva Snapshot Repository</name>
+      <url>http://archiva.comunes.org/repository/comunes-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>comunes-internal</id>
+      <url>http://archiva.comunes.org/repository/comunes-internal/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
   </repositories>
   <dependencies>
@@ -30,7 +47,7 @@
     <dependency>
       <groupId>cc.kune</groupId>
       <artifactId>kune-services</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
+      <version>0.3.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
