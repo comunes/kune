@@ -135,6 +135,7 @@ NOTE: When a URL repository is indicated, it should be added to Eclipse > Help >
 - [ ] JUnitHelper
 - [ ] AnyEditTools (to remove tabs and so on)
 - [ ] MercurialEclipse (if you wanna play with the WIAB code)
+- [ ] EGit for Mylyn (connecting EGit and Mylyn)
 
 *** Other Eclipse info
  
@@ -382,7 +383,7 @@ See HelloWorld*.java classes for a small sample of how to develop and extend the
 
 Outdated => Check also kune/HOWTO_ADD_A_NEW_TOOL for instructions of how to add a new tool in Kune.
 
-*** Apache Wave (old Google Wave) 
+** Apache Wave (old Google Wave) 
 
 Wave Client Development Environment Set Up (if you want to work only in the Apache Wave part):
 http://www.waveprotocol.org/code/client-development-environment-set-up
