@@ -140,7 +140,8 @@ http://posidev.com/blog/2009/06/04/set-ulimit-parameters-on-ubuntu/
 ===Install jmagick===
 
 Install jmagick-jni. In debian: 
- apt-get install libjmagick6-jni (version 6.2.6-0) 
+ sudo apt-get install libjmagick6-jni 
+(version 6.2.6-0) 
 Besides, you need either:
  sudo ln -s /usr/lib/jni/libJMagick.so /usr/lib/libJMagick.so
 or:
@@ -208,6 +209,12 @@ bin/server.sh -j kune.jar
 
 For more options:
 bin/server.sh -h 
+
+==JAR package generation==
+
+Execute 
+ mvn package
+to generate the .jar package of the current version of the Kune code. Make sure the database migration ( bin/liquibase-migrate.sh ) ran successfully before packaging (see the TROUBLESHOOT for related problems).
 
 ==Debian package generation==
 
