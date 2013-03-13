@@ -1,3 +1,10 @@
+kune (0.3.0+b23) unstable; urgency=low
+
+  * Added Traditional Chinese translation, thanks to Jeremy Lam.
+  * linked pt-br to pt_BR
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 13 Mar 2013 11:17:18 +0100
+
 kune (0.3.0+b22) unstable; urgency=low
 
   * Added Brazilian Portuguese
