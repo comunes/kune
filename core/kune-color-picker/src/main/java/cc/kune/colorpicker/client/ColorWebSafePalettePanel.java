@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.colorpicker.client.old;
+package cc.kune.colorpicker.client;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;

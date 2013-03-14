@@ -17,9 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.colorpicker.client.old;
+package cc.kune.colorpicker.client;
 
-import cc.kune.colorpicker.client.OnColorSelectedListener;
 
 
 public interface ColorWebSafePalette {
