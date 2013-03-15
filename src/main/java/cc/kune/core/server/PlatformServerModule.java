@@ -41,8 +41,8 @@ import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.AuthenticatedMethodInterceptor;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.auth.AuthorizatedMethodInterceptor;
-import cc.kune.core.server.auth.SuperAdmin;
-import cc.kune.core.server.auth.SuperAdminMethodInterceptor;
+import cc.kune.core.server.auth.MustBeTranslator;
+import cc.kune.core.server.auth.MustBeTranslatorMethodInterceptor;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContainerManagerDefault;
 import cc.kune.core.server.content.ContentManager;
@@ -207,8 +207,8 @@ public class PlatformServerModule extends AbstractExtendedModule {
         outermostCall(new AuthenticatedMethodInterceptor()));
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
         outermostCall(new AuthorizatedMethodInterceptor()));
-    bindInterceptor(Matchers.any(), Matchers.annotatedWith(SuperAdmin.class),
-        outermostCall(new SuperAdminMethodInterceptor()));
+    bindInterceptor(Matchers.any(), Matchers.annotatedWith(MustBeTranslator.class),
+        outermostCall(new MustBeTranslatorMethodInterceptor()));
   }
 
 }

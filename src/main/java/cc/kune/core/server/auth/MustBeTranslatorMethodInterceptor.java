@@ -40,9 +40,9 @@ import cc.kune.domain.finders.GroupFinder;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class SuperAdminMethodInterceptor implements MethodInterceptor {
+public class MustBeTranslatorMethodInterceptor implements MethodInterceptor {
 
-  public static final Log LOG = LogFactory.getLog(SuperAdminMethodInterceptor.class);
+  public static final Log LOG = LogFactory.getLog(MustBeTranslatorMethodInterceptor.class);
 
   @Inject
   Provider<GroupFinder> groupFinder;
@@ -50,7 +50,7 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
   Provider<KuneProperties> kuneProperties;
   @Inject
   Provider<HttpServletRequest> requestProvider;
-  private Group siteGroup;
+  private Group allowedGroup;
   @Inject
   UserSessionManager userSessionManager;
 
@@ -65,14 +65,14 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
     LOG.info("Userhash received: " + userHash);
     LOG.info("--------------------------------------------------------------------------------");
 
-    final SuperAdmin authAnnotation = invocation.getStaticPart().getAnnotation(SuperAdmin.class);
+    final MustBeTranslator authAnnotation = invocation.getStaticPart().getAnnotation(MustBeTranslator.class);
     final AccessRol rol = authAnnotation.rol();
 
-    if (siteGroup == null) {
-      siteGroup = groupFinder.get().findByShortName(
-          kuneProperties.get().get(KuneProperties.DEFAULT_SITE_SHORT_NAME));
+    if (allowedGroup == null) {
+      allowedGroup = groupFinder.get().findByShortName(
+          kuneProperties.get().get(KuneProperties.UI_TRANSLATOR_GROUP));
     }
-    LOG.info(String.format("SuperAuth for group: %s", siteGroup.getShortName()));
+    LOG.info(String.format("Translator group: %s", allowedGroup.getShortName()));
     LOG.info(String.format("Auth rol required: %s", rol.toString()));
 
     if (userHash == null) {
@@ -82,9 +82,9 @@ public class SuperAdminMethodInterceptor implements MethodInterceptor {
       throw new SessionExpiredException();
     } else {
       final User user = userSessionManager.getUser();
-      if (!AccessRightsUtils.correctMember(user, siteGroup, rol)) {
+      if (!AccessRightsUtils.correctMember(user, allowedGroup, rol)) {
         LOG.info(String.format("Don't have rights for do that. User: %s, not %s member of %s",
-            user.getShortName(), rol, siteGroup.getShortName()));
+            user.getShortName(), rol, allowedGroup.getShortName()));
         throw new AccessViolationException();
       }
     }

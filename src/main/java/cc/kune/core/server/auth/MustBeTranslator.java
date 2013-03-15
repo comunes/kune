@@ -25,13 +25,13 @@ import java.lang.annotation.RetentionPolicy;
 import com.google.inject.BindingAnnotation;
 
 /**
- * Use in *RPC methods to check if user is superadmin
- * 
+ * Use in *RPC methods to check if user is a translator of the site
+ *
  * The first param in the method must be the userHash
  */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SuperAdmin {
+public @interface MustBeTranslator {
 
   cc.kune.core.shared.domain.AccessRol rol() default cc.kune.core.shared.domain.AccessRol.Administrator;
 

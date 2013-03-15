@@ -33,30 +33,30 @@ import cc.kune.core.shared.domain.AccessRol;
 
 import com.google.inject.persist.Transactional;
 
-public class SuperAdminMethodInterceptorTest extends IntegrationTest {
+public class MustBeTranslatorMethodInterceptorTest extends IntegrationTest {
 
   private MethodInvocation invocation;
-  private SuperAdmin superAdminAnnotation;
-  private SuperAdminMethodInterceptor superAdminInterceptor;
+  private MustBeTranslator annotation;
+  private MustBeTranslatorMethodInterceptor translatorInterceptor;
 
   @Transactional
   @Before
   public void before() {
-    superAdminInterceptor = new SuperAdminMethodInterceptor();
-    new IntegrationTestHelper(true, this, superAdminInterceptor);
+    translatorInterceptor = new MustBeTranslatorMethodInterceptor();
+    new IntegrationTestHelper(true, this, translatorInterceptor);
     invocation = Mockito.mock(MethodInvocation.class);
     final AccessibleObject accessibleObject = Mockito.mock(AccessibleObject.class);
     Mockito.when(invocation.getMethod()).thenReturn(this.getClass().getMethods()[0]);
     Mockito.when(invocation.getStaticPart()).thenReturn(accessibleObject);
-    superAdminAnnotation = Mockito.mock(SuperAdmin.class);
-    Mockito.when(accessibleObject.getAnnotation(SuperAdmin.class)).thenReturn(superAdminAnnotation);
+    annotation = Mockito.mock(MustBeTranslator.class);
+    Mockito.when(accessibleObject.getAnnotation(MustBeTranslator.class)).thenReturn(annotation);
   }
 
   private void invoke() throws Throwable {
-    Mockito.when(superAdminAnnotation.rol()).thenReturn(AccessRol.Administrator);
+    Mockito.when(annotation.rol()).thenReturn(AccessRol.Administrator);
     final Object[] arguments = { getHash() };
     Mockito.when(invocation.getArguments()).thenReturn(arguments);
-    superAdminInterceptor.invoke(invocation);
+    translatorInterceptor.invoke(invocation);
   }
 
   @Test(expected = AccessViolationException.class)
