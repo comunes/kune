@@ -25,6 +25,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
+import cc.kune.common.shared.utils.I18nBasicUtils;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.I18nService;
@@ -78,19 +79,14 @@ public class I18nRPC implements RPC, I18nService {
         if (browserLang != null) {
           // Not logged, use browser language if possible
           final String country = requestProvider.get().getLocale().getCountry();
-          if (browserLang.equals("pt") && country != null && country.equals("BR")) {
-            // FIXME: the only supported rfc 3066 lang supported
-            initLanguage = "pt-br";
-          } else {
-            initLanguage = browserLang;
-          }
+          initLanguage = browserLang + (country != null? "_" + country : "");
         } else {
           initLanguage = I18nTranslation.DEFAULT_LANG;
         }
       }
     }
     try {
-      lang = languageManager.findByCode(initLanguage);
+      lang = languageManager.findByCode(I18nBasicUtils.javaLocaleNormalize(initLanguage));
     } catch (final NoResultException e) {
       lang = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
     }

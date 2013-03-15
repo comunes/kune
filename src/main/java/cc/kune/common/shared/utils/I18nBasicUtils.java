@@ -1,7 +1,7 @@
-package cc.kune.common.client.utils;
+package cc.kune.common.shared.utils;
 
 /**
- * The Class I18nBasicUtils. Some code from Apache Wave SessionLocale.java.
+ * The Class I18nBasicUtils. Some code from Apache Wave SessionLocale.java. FIXME use SessionLocale in the future
  */
 public class I18nBasicUtils {
     /**
@@ -25,6 +25,27 @@ public class I18nBasicUtils {
             return split[0];
         } else {
             return DEFAULT_LANG;
+        }
+    }
+
+    /**
+     * Java locale normalize (uses _ and uppercase countries).
+     *
+     * @param localeString the locale string
+     * @return the string
+     */
+    public static String javaLocaleNormalize(String localeString) {
+        String[] split = localeString.split("[_-]");
+        String lang;
+        if ((split.length > 0) && split[0].matches(LANG_PATTERN)) {
+            lang = split[0];
+        } else {
+            lang = DEFAULT_LANG;
+        }
+        if (split.length > 1) {
+            return lang + "_" + split[1].toUpperCase();
+        } else {
+            return lang;
         }
     }
 }

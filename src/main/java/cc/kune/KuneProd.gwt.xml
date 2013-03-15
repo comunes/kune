@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Sam: property "set-property-fallback" does not appear in the DTD. Bug GWT: http://ur1.ca/a3ehr -->
-<!-- <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd"> -->
+<!-- Sam: property "set-property-fallback" does not appear in the DTD. Bug
+  GWT: http://ur1.ca/a3ehr -->
+<!-- <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN"
+  "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd"> -->
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.1//EN" "../../gwt-module.dtd">
 <module rename-to="ws">
 
-  <inherits name="cc.kune.Kune"/>
+  <inherits name="cc.kune.Kune" />
 
   <!-- Uncomment if you are enabling server side deobfuscation of StackTraces
     <set-property name="compiler.emulatedStack" value="true" /> <set-configuration-property
@@ -19,20 +21,28 @@
   <!-- I18n ===================================================== -->
   <!-- http://bit.ly/uCiBDm -->
   <!-- More locale name in package com.google.gwt.i18n.client.impl.cldr -->
-  <extend-property name="locale" values="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl,eu,gl,sl,pt_BR,zh_HK,zh_TW"/>
-  <set-property-fallback name="locale" value="en"/>
-  <set-property name="locale" value="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl,eu,gl,sl,pt_BR,zh_HK,zh_TW"/>
+  <!-- "While Java'a Locale class was clearly based on RFC 3066, it uses
+    underscores in place of hyphens when separating language codes...lowercasing
+    the first component (the language code) and upper-casing the second component"
+    http://stackoverflow.com/a/4632988 -->
+  <!-- zh_TW Chinese (Traditional, Taiwan), zh_HK is almost the same -->
+
+  <extend-property name="locale"
+    values="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl,eu,gl,sl,pt_BR,zh_HK,zh_TW" />
+  <set-property-fallback name="locale" value="en" />
+  <set-property name="locale"
+    value="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl,eu,gl,sl,pt_BR,zh_HK,zh_TW" />
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave, because it's really slow. -->
   <!-- <set-property name="loglevel" value="debug" /> -->
-  <set-property name="loglevel" value="none"/>
+  <set-property name="loglevel" value="none" />
 
   <!-- Debugging ================================================ -->
   <!-- for add ensureDebugIds (debugId in UIBinder), remove/comment in production
     see UIObject.ensureDebugId()) -->
   <!-- For now this is useful for create screencasts and selenium tests -->
-  <inherits name="com.google.gwt.user.Debug"/>
+  <inherits name="com.google.gwt.user.Debug" />
 
 </module>
 

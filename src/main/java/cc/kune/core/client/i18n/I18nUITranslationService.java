@@ -290,11 +290,11 @@ public class I18nUITranslationService extends I18nTranslationService {
   private boolean isInConstantProperties(final String currentLang) {
     for (final String lang : LocaleInfo.getAvailableLocaleNames()) {
       if (lang.equals(currentLang)) {
-        Log.info("Workspace adaptation to language: " + currentLang + " is in properties");
+        Log.info("Workspace adaptation to language: " + currentLang + " is in KuneConstants*properties");
         return true;
       }
     }
-    Log.info("Workspace adaptation to language: " + currentLang + " is not in properties");
+    Log.info("Workspace adaptation to language: " + currentLang + " is not in KuneConstants*properties");
     return false;
   }
 
