@@ -40,9 +40,9 @@ import cc.kune.domain.finders.GroupFinder;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MustBeTranslatorMethodInterceptor implements MethodInterceptor {
+public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
 
-  public static final Log LOG = LogFactory.getLog(MustBeTranslatorMethodInterceptor.class);
+  public static final Log LOG = LogFactory.getLog(ShouldBeMemberMethodInterceptor.class);
 
   @Inject
   Provider<GroupFinder> groupFinder;
@@ -65,12 +65,12 @@ public class MustBeTranslatorMethodInterceptor implements MethodInterceptor {
     LOG.info("Userhash received: " + userHash);
     LOG.info("--------------------------------------------------------------------------------");
 
-    final MustBeTranslator authAnnotation = invocation.getStaticPart().getAnnotation(MustBeTranslator.class);
+    final ShouldBeMember authAnnotation = invocation.getStaticPart().getAnnotation(ShouldBeMember.class);
     final AccessRol rol = authAnnotation.rol();
 
     if (allowedGroup == null) {
       allowedGroup = groupFinder.get().findByShortName(
-          kuneProperties.get().get(KuneProperties.UI_TRANSLATOR_GROUP));
+          kuneProperties.get().get(authAnnotation.groupKuneProperty()));
     }
     LOG.info(String.format("Translator group: %s", allowedGroup.getShortName()));
     LOG.info(String.format("Auth rol required: %s", rol.toString()));

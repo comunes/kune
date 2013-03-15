@@ -29,31 +29,33 @@ import org.mockito.Mockito;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
+import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.AccessRol;
 
 import com.google.inject.persist.Transactional;
 
-public class MustBeTranslatorMethodInterceptorTest extends IntegrationTest {
+public class ShouldBeMemberMethodInterceptorTest extends IntegrationTest {
 
   private MethodInvocation invocation;
-  private MustBeTranslator annotation;
-  private MustBeTranslatorMethodInterceptor translatorInterceptor;
+  private ShouldBeMember annotation;
+  private ShouldBeMemberMethodInterceptor translatorInterceptor;
 
   @Transactional
   @Before
   public void before() {
-    translatorInterceptor = new MustBeTranslatorMethodInterceptor();
+    translatorInterceptor = new ShouldBeMemberMethodInterceptor();
     new IntegrationTestHelper(true, this, translatorInterceptor);
     invocation = Mockito.mock(MethodInvocation.class);
     final AccessibleObject accessibleObject = Mockito.mock(AccessibleObject.class);
     Mockito.when(invocation.getMethod()).thenReturn(this.getClass().getMethods()[0]);
     Mockito.when(invocation.getStaticPart()).thenReturn(accessibleObject);
-    annotation = Mockito.mock(MustBeTranslator.class);
-    Mockito.when(accessibleObject.getAnnotation(MustBeTranslator.class)).thenReturn(annotation);
+    annotation = Mockito.mock(ShouldBeMember.class);
+    Mockito.when(accessibleObject.getAnnotation(ShouldBeMember.class)).thenReturn(annotation);
   }
 
   private void invoke() throws Throwable {
-    Mockito.when(annotation.rol()).thenReturn(AccessRol.Administrator);
+      Mockito.when(annotation.rol()).thenReturn(AccessRol.Administrator);
+      Mockito.when(annotation.groupKuneProperty()).thenReturn(KuneProperties.UI_TRANSLATOR_GROUP);
     final Object[] arguments = { getHash() };
     Mockito.when(invocation.getArguments()).thenReturn(arguments);
     translatorInterceptor.invoke(invocation);

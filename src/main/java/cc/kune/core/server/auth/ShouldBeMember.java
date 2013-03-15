@@ -24,15 +24,29 @@ import java.lang.annotation.RetentionPolicy;
 
 import com.google.inject.BindingAnnotation;
 
+// TODO: Auto-generated Javadoc
 /**
  * Use in *RPC methods to check if user is a translator of the site
  *
- * The first param in the method must be the userHash
+ * The first param in the method must be the userHash.
  */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MustBeTranslator {
+public @interface ShouldBeMember {
 
-  cc.kune.core.shared.domain.AccessRol rol() default cc.kune.core.shared.domain.AccessRol.Administrator;
+    /**
+     * Rol required to perform this method.
+     *
+     * @return the cc.kune.core.shared.domain. access rol
+     */
+    cc.kune.core.shared.domain.AccessRol rol() default cc.kune.core.shared.domain.AccessRol.Administrator;
+
+    /**
+     * Group shortname key in kune.properties (so the value of this key, will be
+     * read from kune.properties and we used to search the db for this group)
+     *
+     * @return the groupKuneProperty
+     */
+    String groupKuneProperty();
 
 }
