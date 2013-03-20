@@ -58,13 +58,18 @@ do
   sed "s/^/`echo $i | sed 's/\//\\\\\//g'`|/g" | \
   # Substitute first " = " with delimiter
   sed "0,/RE/s/ = /$DELIMITER/g" ; 
-done | awk -F "|" -v passwd=$PASS -v username=$USERNAME -v db=$DB '{
+done | gawk -F "|" -v passwd=$PASS -v username=$USERNAME -v db=$DB '
+# @include "mysql.awk"
+BEGIN {
+  # mysql_login(username, passwd, 'localhost', db)  
+}
+{ 
   key = $1"|"$2
   connect = "mysql -p"passwd" -u"username" "db" -e "
   select = connect "\"SELECT * FROM globalize_translations g WHERE gtype=\x27"key"\x27\""
-  print select
+  # print select
   # system(select)
-  select
+  select 
   # |& getline result
   while ( ( select | getline result ) > 0 ) {
     print result
