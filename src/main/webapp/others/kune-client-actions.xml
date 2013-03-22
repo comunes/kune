@@ -217,6 +217,17 @@
       <iconCss></iconCss>
     </extension>
 
+    <extension>
+      <name>Taskboardy+</name>
+      <installerUrl>none
+      </installerUrl>
+      <gadgetUrl>http://taskboardy.googlecode.com/svn/trunk/taskboardy2.xml
+      </gadgetUrl>
+      <iconUrl>http://taskboardy.googlecode.com/svn/trunk/screenshot.png
+      </iconUrl>
+      <iconCss></iconCss>
+    </extension>
+
   </waveExtensions>
 
   <!-- Where and how to use the above extensions ================ -->
@@ -838,6 +849,38 @@
       <participants>ask</participants>
     </guiActionDescriptor>
 
+	<guiActionDescriptor>
+      <type>wave-gadget</type>
+      <extensionName>Taskboardy+</extensionName>
+      <name>Taskboardy+</name>
+      <path>New Gadget»Others</path>
+      <description>Gadget that allows to maintain a taskboard with
+		user stories and tasks.
+      </description>
+      <new-content-title>New Taskboard</new-content-title>
+      <new-content-textintro></new-content-textintro>
+      <enabled>true</enabled>
+      <typeIds>
+        <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
+        <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.blog" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.list" destTypeId="lists.post"/>
+                <!-- Add gadget in docs directly: -->
+        <typeId origTypeId="docs.doc" destTypeId="docs.doc"/>
+        <typeId origTypeId="blogs.post" destTypeId="blogs.post"/>
+        <typeId origTypeId="lists.post" destTypeId="lists.post"/>
+        <typeId origTypeId="wiki.wikipage" destTypeId="wiki.wikipage"/>
+        <typeId origTypeId="tasks.task" destTypeId="tasks.task"/>
+      </typeIds>
+      <rol>
+        <!-- Administrator, Editor, Viewer -->
+        <rolRequired>Editor</rolRequired>
+        <authNeed>true</authNeed>
+      </rol>
+      <!-- only for new waves: anyone, onlymembers, onlyadmins, ask (not
+        used yet) -->
+      <participants>ask</participants>
+    </guiActionDescriptor>
 
   </guiActionDescriptors>
 
