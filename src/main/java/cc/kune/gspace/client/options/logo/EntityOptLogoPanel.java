@@ -104,7 +104,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     uploader.setLabelText(i18n.t("Select an image from your computer as the logo for this group. "
         + "For best results use a [%d]x[%d] pixel image. Bigger images will be automatically resized.",
         FileConstants.LOGO_DEF_SIZE, FileConstants.LOGO_DEF_SIZE));
-    TabTitleGenerator.setText(tabTitle, CoreMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE,
+    TabTitleGenerator.setText(tabTitle, i18n.t(CoreMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE),
         MAX_TABTITLE_LENGTH, i18n.getDirection());
   }
 
@@ -113,7 +113,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     uploader.setLabelText(i18n.t("Select an image from your computer as your avatar. "
         + "For best results use a [%d]x[%d] pixel image. Bigger images will be automatically resized.",
         FileConstants.LOGO_DEF_SIZE, FileConstants.LOGO_DEF_SIZE));
-    TabTitleGenerator.setText(tabTitle, CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE,
+    TabTitleGenerator.setText(tabTitle, i18n.t(CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE),
         MAX_TABTITLE_LENGTH, i18n.getDirection());
   }
 
