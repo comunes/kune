@@ -19,16 +19,8 @@
  */
 package cc.kune.core.server.properties;
 
-import java.lang.management.ManagementFactory;
 import java.text.MessageFormat;
 import java.util.List;
-
-import javax.management.InstanceAlreadyExistsException;
-import javax.management.MBeanRegistrationException;
-import javax.management.MBeanServer;
-import javax.management.MalformedObjectNameException;
-import javax.management.NotCompliantMBeanException;
-import javax.management.ObjectName;
 
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -75,11 +67,6 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
   }
 
   @Override
-  public boolean has(final String key) {
-    return config.getString(key) != null;
-  }
-
-  @Override
   public String get(final String key) {
     final String value = config.getString(key);
     checkNull(key, value);
@@ -121,6 +108,16 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     return value;
   }
 
+  @Override
+  public String getProperty(final String key) {
+    return this.get(key, "Value doesn't exist");
+  }
+
+  @Override
+  public boolean has(final String key) {
+    return config.getString(key) != null;
+  }
+
   private void loadConfiguration() {
     try {
       config = new CompositeConfiguration();
@@ -134,73 +131,13 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   @Override
   public void reload() {
-
     /* Don't catch any exception */
-
     this.loadConfiguration();
-
   }
 
   @Override
-  public String getProperty(String key) {
-
-    return this.get(key, "Value doesn't exist");
-
-  }
-
-  @Override
-  public void setProperty(String key, String value) {
-
+  public void setProperty(final String key, final String value) {
     this.config.setProperty(key, value);
-
-  }
-
-  /**
-   * Register this object itself in the JVM MBean Server.
-   */
-  public void registerAsMBean() {
-
-    MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
-    ObjectName mbeanName = null;
-
-    try {
-
-      mbeanName = new ObjectName(KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME);
-
-    } catch (MalformedObjectNameException e) {
-
-      LOG.error("Error creating MBean ObjectName: " + KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME
-          + ", " + e.getMessage());
-
-    } catch (NullPointerException e) {
-
-      LOG.error("Error creating MBean ObjectName: " + KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME
-          + ", " + e.getMessage());
-
-    }
-
-    try {
-
-      mbeanServer.registerMBean(this, mbeanName);
-
-    } catch (InstanceAlreadyExistsException e) {
-
-      LOG.error("Error registering MBean: " + KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME + ", "
-          + e.getMessage());
-
-    } catch (MBeanRegistrationException e) {
-
-      LOG.error("Error registering MBean: " + KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME + ", "
-          + e.getMessage());
-
-    } catch (NotCompliantMBeanException e) {
-
-      LOG.error("Error registering MBean: " + KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME + ", "
-          + e.getMessage());
-
-    }
-
-    LOG.info("Registered as MBean sucessfully");
   }
 
 }

@@ -19,13 +19,23 @@
  */
 package cc.kune.core.server.properties;
 
+import cc.kune.core.server.mbean.MBeanConstants;
+
 /**
  * MBean interface for JMX management of server properties
- *
+ * 
  */
 public interface KunePropertiesDefaultMBean {
 
-  public static final String MBEAN_OBJECT_NAME = "cc.kune.mbeans:type=KuneProperties";
+  public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "KuneProperties";
+
+  /**
+   * Return a property value for the provided key
+   * 
+   * @param key
+   * @return To string value
+   */
+  String getProperty(String key);
 
   /**
    * Reloads configuration object, reading again property files.
@@ -33,16 +43,8 @@ public interface KunePropertiesDefaultMBean {
   void reload();
 
   /**
-   * Return a property value for the provided key
-   *
-   * @param key
-   * @return To string value
-   */
-  String getProperty(String key);
-
-  /**
    * Set a property value for the provided key
-   *
+   * 
    * @param key
    * @param value
    */

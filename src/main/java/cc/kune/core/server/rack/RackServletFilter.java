@@ -38,6 +38,7 @@ import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.waveserver.CustomImportServlet;
 
 import cc.kune.core.server.error.ServerException;
+import cc.kune.core.server.mbean.MBeanRegister;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
@@ -177,6 +178,9 @@ public class RackServletFilter implements Filter {
     LOG.debug("INITIALIZATION DONE!");
     kuneChildInjector.getInstance(CustomImportServlet.class).init(
         kuneChildInjector.getInstance(KuneProperties.class));
+
+    // Register some mbeans objects
+    kuneChildInjector.getInstance(MBeanRegister.class);
 
     // Uncomment to generate the graph
     // graph("docs/wave-guice-graph.dot", injector);
