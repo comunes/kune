@@ -20,6 +20,8 @@ package cc.kune.core.server.mbean;
 
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.properties.KunePropertiesDefaultMBean;
+import cc.kune.core.server.searcheable.SiteMapGenerator;
+import cc.kune.core.server.searcheable.SiteMapGeneratorMBean;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -37,8 +39,14 @@ public class MBeanRegister {
    *          the kune properties
    */
   @Inject
-  public MBeanRegister(final MBeanRegistry registry, final KuneProperties kuneProperties) {
+  public MBeanRegister(final MBeanRegistry registry, final KuneProperties kuneProperties,
+      final SiteMapGenerator siteMapGenerator) {
+    // Since KuneProperties is not created via Guice, we need to do a manual
+    // injection
     registry.registerAsMBean(kuneProperties, KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME);
+    // As SiteMapGenerator is instantiated by cron, we register the mbean here
+    // so it's there since the server start
+    registry.registerAsMBean(siteMapGenerator, SiteMapGeneratorMBean.MBEAN_OBJECT_NAME);
     // other objects (...)
   }
 }

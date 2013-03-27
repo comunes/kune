@@ -59,7 +59,7 @@ import com.redfin.sitemapgenerator.WebSitemapUrl;
  */
 @Singleton
 @LogThis
-public class SiteMapGenerator {
+public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
   private static final Double CONTENTS_PRIORITY = 0.8;
 
@@ -102,6 +102,7 @@ public class SiteMapGenerator {
     return groupFinder.countExceptType(GroupType.CLOSED);
   }
 
+  @Override
   public void generate() {
     LOG.info("Starting to generate sitemap");
     final Date now = new Date();

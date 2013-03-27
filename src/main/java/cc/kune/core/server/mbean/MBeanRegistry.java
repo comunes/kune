@@ -70,6 +70,6 @@ public class MBeanRegistry {
       LOG.error("Error registering MBean: " + objectName + ", " + e.getMessage());
     }
 
-    LOG.info("Registered as MBean sucessfully");
+    LOG.info("Registered " + objectName + " as MBean sucessfully");
   }
 }
