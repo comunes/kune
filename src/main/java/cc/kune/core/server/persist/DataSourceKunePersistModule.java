@@ -220,6 +220,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
     final SystemConfiguration sysConf = new SystemConfiguration();
     kuneConfig = settedProperties != null ? settedProperties : sysConf.getString("kune.server.config");
     kuneProperties = new KunePropertiesDefault(kuneConfig);
+    kuneProperties.registerAsMBean();
     log4Conf = sysConf.getString("log4j.configuration");
   }
 

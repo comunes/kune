@@ -71,6 +71,7 @@ public interface KuneProperties {
   String SITE_OPENFIRE_DB_USER = "kune.openfire.db.user";
   String SITE_OPENFIRE_IGNORE = "kune.openfire.ignore";
   String SITE_SHORTNAME = "kune.default.site.shortName";
+  String SITE_SUPERADMIN_GROUP = "kune.superadmin.group.shortname";
   String SITE_SMTP_DEFAULT_FROM = "kune.site.smtp.defaultfrom";
   String SITE_SMTP_HOST = "kune.site.smtp.host";
   String SITE_SMTP_SKIP = "kune.site.smtp.skip";
@@ -80,6 +81,7 @@ public interface KuneProperties {
   String SITE_WAVE_IMPORT_USERNAME_PAIRS = "kune.wave.import.usernamespairs";
   String SITEMAP_DIR = "kune.sitemap.dir";
   String UI_TRANSLATOR_ENABLED = "kune.ui-translator.enabled";
+  String UI_TRANSLATOR_GROUP = "kune.ui-translator.group.shortname";
   String UI_TRANSLATOR_FULL_TRANSLATED_LANGS = "kune.ui-translator.fullTranslatedLanguages";
   String UPLOAD_DELAY_FOR_TEST = "kune.upload.delayfortest";
   String UPLOAD_GALLERY_PERMITTED_EXTS = "kune.upload.gallerypermittedextensions";

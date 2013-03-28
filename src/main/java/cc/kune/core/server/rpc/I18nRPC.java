@@ -25,16 +25,18 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
+import cc.kune.common.shared.utils.I18nBasicUtils;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.I18nService;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.Authenticated;
-import cc.kune.core.server.auth.SuperAdmin;
+import cc.kune.core.server.auth.ShouldBeMember;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.persist.KuneTransactional;
+import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.I18nTranslationDTO;
@@ -77,19 +79,14 @@ public class I18nRPC implements RPC, I18nService {
         if (browserLang != null) {
           // Not logged, use browser language if possible
           final String country = requestProvider.get().getLocale().getCountry();
-          if (browserLang.equals("pt") && country != null && country.equals("BR")) {
-            // FIXME: the only supported rfc 3066 lang supported
-            initLanguage = "pt-br";
-          } else {
-            initLanguage = browserLang;
-          }
+          initLanguage = browserLang + (country != null? "_" + country : "");
         } else {
           initLanguage = I18nTranslation.DEFAULT_LANG;
         }
       }
     }
     try {
-      lang = languageManager.findByCode(initLanguage);
+      lang = languageManager.findByCode(I18nBasicUtils.javaLocaleNormalize(initLanguage));
     } catch (final NoResultException e) {
       lang = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
     }
@@ -135,7 +132,7 @@ public class I18nRPC implements RPC, I18nService {
   @Override
   @Authenticated
   @KuneTransactional
-  @SuperAdmin(rol = AccessRol.Editor)
+  @ShouldBeMember(groupKuneProperty = KuneProperties.UI_TRANSLATOR_GROUP, rol = AccessRol.Editor)
   public String setTranslation(final String userHash, final Long id, final String translation)
       throws DefaultException {
     return i18nTranslationManager.setTranslation(id, translation);

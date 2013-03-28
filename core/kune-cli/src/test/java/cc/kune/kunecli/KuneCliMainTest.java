@@ -30,13 +30,34 @@ import org.naturalcli.ExecutionException;
 import org.naturalcli.InvalidSyntaxException;
 
 public class KuneCliMainTest {
-  
+
   @Test
-  public void basicHelp() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
-    KuneCliMain cli = new KuneCliMain();
-    String[] args = new String[] {"auth", "admin", "easyeasy"};
-    cli.main(args);
+  public void testBasicAuth() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
+    final KuneCliMain cli = new KuneCliMain();
+    final String[] args = new String[] { "auth", "admin", "easyeasy" };
+    KuneCliMain.main(args);
   }
 
+  @Test
+  public void testBasicHello() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
+    final KuneCliMain cli = new KuneCliMain();
+    final String[] args = new String[] { "hello", "world", "admin" };
+    KuneCliMain.main(args);
+  }
+
+  @Test
+  public void testBasicInit() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
+    final KuneCliMain cli = new KuneCliMain();
+    final String[] args = new String[] { "siteGetInitData" };
+    KuneCliMain.main(args);
+  }
+
+  @Test
+  public void testBasicInitLang() throws InvalidSyntaxException, ExecutionException,
+      MalformedURLException {
+    final KuneCliMain cli = new KuneCliMain();
+    final String[] args = new String[] { "i18nGetInitLang" };
+    KuneCliMain.main(args);
+  }
 
 }

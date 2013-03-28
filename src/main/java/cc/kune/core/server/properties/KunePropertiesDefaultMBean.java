@@ -17,18 +17,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.colorpicker.client.old;
+package cc.kune.core.server.properties;
 
-public interface ColorWebSafePaletteView {
+/**
+ * MBean interface for JMX management of server properties
+ *
+ */
+public interface KunePropertiesDefaultMBean {
 
-  String COLORS[] = { "0", "3", "6", "9", "C", "F" };
+  public static final String MBEAN_OBJECT_NAME = "cc.kune.mbeans:type=KuneProperties";
 
-  int COLS = 12;
+  /**
+   * Reloads configuration object, reading again property files.
+   */
+  void reload();
 
-  int ROWS = 18;
+  /**
+   * Return a property value for the provided key
+   *
+   * @param key
+   * @return To string value
+   */
+  String getProperty(String key);
 
-  void hide();
-
-  void show(int left, int top);
+  /**
+   * Set a property value for the provided key
+   *
+   * @param key
+   * @param value
+   */
+  void setProperty(String key, String value);
 
 }

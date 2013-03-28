@@ -1,0 +1,4 @@
+UPDATE globalize_languages SET code="zh_TW" WHERE code="zh-Hant";
+UPDATE globalize_languages SET code="zh_CN" WHERE code="zh-Hans";
+UPDATE globalize_languages SET code="pt_BR" WHERE code="pt-br";
+INSERT INTO `globalize_languages` VALUES (7598,'zh_HK','','','ltr','Chinese (Hong Kong)','','','',NULL,NULL,'\0','','','','','zh_HK','L');

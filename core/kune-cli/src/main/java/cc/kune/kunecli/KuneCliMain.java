@@ -38,10 +38,11 @@ import org.naturalcli.commands.HTMLHelpCommand;
 import org.naturalcli.commands.HelpCommand;
 import org.naturalcli.commands.SleepCommand;
 
+import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.InitDataDTO;
-import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Guice;
@@ -51,8 +52,9 @@ import com.googlecode.gwtrpccommlayer.client.Module;
 
 public class KuneCliMain {
 
+  private static I18nServiceAsync i18nService;
   public static final Log LOG = LogFactory.getLog(KuneCliMain.class);
-  private static final String SERVICE_PREFFIX = "http://127.0.0.1/ws/";
+  private static final String SERVICE_PREFFIX = "http://127.0.0.1:8888/ws/";
   private static SiteServiceAsync siteService;
   private static UserServiceAsync userService;
 
@@ -66,6 +68,7 @@ public class KuneCliMain {
     // TODO javadoc of this services
     userService = service.create(new URL(SERVICE_PREFFIX + "UserService"), UserServiceAsync.class);
     siteService = service.create(new URL(SERVICE_PREFFIX + "SiteService"), SiteServiceAsync.class);
+    i18nService = service.create(new URL(SERVICE_PREFFIX + "I18nService"), I18nServiceAsync.class);
   }
 
   public static void main(final String[] args) throws InvalidSyntaxException, ExecutionException,
@@ -100,16 +103,20 @@ public class KuneCliMain {
           public void execute(final ParseResult pr) throws ExecutionException {
             final String user = pr.getParameterValue(0).toString();
             final String pass = pr.getParameterValue(1).toString();
-            userService.login(user, pass, "FIXME", new AsyncCallback<UserInfoDTO>() {
+            userService.checkUserAndHash("admin", "easyeasy", new AsyncCallback<Void>() {
+              // userService.login(user, pass, "FIXME", new
+              // AsyncCallback<UserInfoDTO>() {
 
               @Override
               public void onFailure(final Throwable caught) {
-                // TODO Auto-generated method stub
+                System.out.println("Auth Failure: " + caught.getMessage());
               }
 
               @Override
-              public void onSuccess(final UserInfoDTO result) {
+              // public void onSuccess(final UserInfoDTO result) {
+              public void onSuccess(final Void result) {
                 // TODO Auto-generated method stub
+                System.out.println("Auth Success");
               }
             });
           }
@@ -121,16 +128,34 @@ public class KuneCliMain {
         siteService.getInitData("", new AsyncCallback<InitDataDTO>() {
           @Override
           public void onFailure(final Throwable caught) {
-            // TODO Auto-generated method stub
+            System.out.println("Init Failure: " + caught.getMessage());
           }
 
           @Override
           public void onSuccess(final InitDataDTO result) {
-            // TODO Auto-generated method stub
+            System.out.println("Init Success");
           }
         });
       }
     });
+
+    final Command i18nInitLang = new Command("i18nGetInitLang", "gets the initial language",
+        new ICommandExecutor() {
+          @Override
+          public void execute(final ParseResult parseResult) throws ExecutionException {
+            i18nService.getInitialLanguage(null, new AsyncCallback<I18nLanguageDTO>() {
+              @Override
+              public void onFailure(final Throwable caught) {
+                System.out.println("Init Failure: " + caught.getMessage());
+              }
+
+              @Override
+              public void onSuccess(final I18nLanguageDTO result) {
+                System.out.println("Init Success");
+              }
+            });
+          }
+        });
 
     // Create an empty command set
     final Set<Command> cs = new HashSet<Command>();
@@ -149,6 +174,7 @@ public class KuneCliMain {
 
     cs.add(init);
     cs.add(auth);
+    cs.add(i18nInitLang);
     // Execute the command line
     nc.execute(args, 0);
   }
