@@ -1,6 +1,5 @@
-/*
- *
- * Copyright (C) 2007-2013 The kune development team (see CREDITS for details)
+/*******************************************************************************
+ * Copyright (C) 2007, 2013 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,39 +14,20 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-package cc.kune.core.server.properties;
+ *******************************************************************************/
+
+package cc.kune.core.server.searcheable;
 
 import cc.kune.core.server.mbean.MBeanConstants;
 
 /**
- * MBean interface for JMX management of server properties
+ * MBean interface for JMX management of the {@link SitemapGenerator}
  * 
  */
-public interface KunePropertiesDefaultMBean {
+public interface SiteMapGeneratorMBean {
 
-  public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "KuneProperties";
+  public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SiteMapGenerator";
 
-  /**
-   * Return a property value for the provided key
-   * 
-   * @param key
-   * @return To string value
-   */
-  String getProperty(String key);
-
-  /**
-   * Reloads configuration object, reading again property files.
-   */
-  void reload();
-
-  /**
-   * Set a property value for the provided key
-   * 
-   * @param key
-   * @param value
-   */
-  void setProperty(String key, String value);
+  void generate();
 
 }

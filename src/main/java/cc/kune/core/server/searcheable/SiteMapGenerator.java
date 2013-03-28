@@ -53,125 +53,130 @@ import com.redfin.sitemapgenerator.WebSitemapUrl;
 /**
  * The Class SiteMapServlet generate a sitemap.xml for the kune site
  * http://en.wikipedia.org/wiki/Sitemaps
- *
+ * 
  * Inspired in: http://betweengo.com/category/java/servlet/ and for large sites:
  * http://dynamical.biz/blog/seo-technical/sitemap-strategy-large-sites-17.html
  */
 @Singleton
 @LogThis
-public class SiteMapGenerator {
+public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
-    private static final Double CONTENTS_PRIORITY = 0.8;
+  private static final Double CONTENTS_PRIORITY = 0.8;
 
-    private static final Double GROUPS_PRIORITY = 0.9;
+  private static final Double GROUPS_PRIORITY = 0.9;
 
-    private static final int LIMIT_OF_QUERY = 100;
-    public static final Log LOG = LogFactory.getLog(SiteMapGenerator.class);
-    private static final double SITE_PRIORITY = 1.0;
-    public static final String[] siteUrls = new String[] { SiteTokens.HOME, SiteTokens.GROUP_HOME,
-            SiteTokens.ABOUT_KUNE, SiteTokens.ASK_RESET_PASSWD, SiteTokens.NEW_GROUP, SiteTokens.REGISTER,
-            SiteTokens.RESET_PASSWD, SiteTokens.SIGN_IN };
+  private static final int LIMIT_OF_QUERY = 100;
+  public static final Log LOG = LogFactory.getLog(SiteMapGenerator.class);
+  private static final double SITE_PRIORITY = 1.0;
+  public static final String[] siteUrls = new String[] { SiteTokens.HOME, SiteTokens.GROUP_HOME,
+      SiteTokens.ABOUT_KUNE, SiteTokens.ASK_RESET_PASSWD, SiteTokens.NEW_GROUP, SiteTokens.REGISTER,
+      SiteTokens.RESET_PASSWD, SiteTokens.SIGN_IN };
 
-    private final ContainerFinder containerFinder;
-    private final ContentFinder contentFinder;
-    private File dir;
-    private final AbsoluteFileDownloadUtils fileDownloadUtils;
-    private final GroupFinder groupFinder;
+  private final ContainerFinder containerFinder;
+  private final ContentFinder contentFinder;
+  private File dir;
+  private final AbsoluteFileDownloadUtils fileDownloadUtils;
+  private final GroupFinder groupFinder;
 
-    private final String siteUrl;
+  private final String siteUrl;
 
-    @Inject
-    public SiteMapGenerator(final KuneProperties props, final GroupFinder groupFinder,
-            final ContentFinder contentFinder, final ContainerFinder containerFinder,
-            final AbsoluteFileDownloadUtils fileDownloadUtils) {
-        this.groupFinder = groupFinder;
-        this.contentFinder = contentFinder;
-        this.containerFinder = containerFinder;
-        this.fileDownloadUtils = fileDownloadUtils;
-        siteUrl = props.get(KuneProperties.SITE_URL);
-        final String dirName = props.get(KuneProperties.SITEMAP_DIR);
-        try {
-            dir = FileUtils.createDirIfNotExists(dirName, "");
-        } catch (final PersistenceException e) {
-            LOG.error("Error generating sitemap", e);
-        }
+  @Inject
+  public SiteMapGenerator(final KuneProperties props, final GroupFinder groupFinder,
+      final ContentFinder contentFinder, final ContainerFinder containerFinder,
+      final AbsoluteFileDownloadUtils fileDownloadUtils) {
+    this.groupFinder = groupFinder;
+    this.contentFinder = contentFinder;
+    this.containerFinder = containerFinder;
+    this.fileDownloadUtils = fileDownloadUtils;
+    siteUrl = props.get(KuneProperties.SITE_URL);
+    final String dirName = props.get(KuneProperties.SITEMAP_DIR);
+    try {
+      dir = FileUtils.createDirIfNotExists(dirName, "");
+    } catch (final PersistenceException e) {
+      LOG.error("Error generating sitemap", e);
     }
+  }
 
-    public void generate() {
-        final Date now = new Date();
+  @KuneTransactional
+  private Long countNotClosedGroups() {
+    return groupFinder.countExceptType(GroupType.CLOSED);
+  }
 
-        try {
-            final WebSitemapGenerator wsg = new WebSitemapGenerator(siteUrl, dir);
+  @Override
+  public void generate() {
+    LOG.info("Starting to generate sitemap");
+    final Date now = new Date();
 
-            // Site urls hashs (#signin, #register, etc)
-            for (final String siteHash : siteUrls) {
-                final String siteUri = fileDownloadUtils.getUrl(siteHash);
-                final WebSitemapUrl url = new WebSitemapUrl.Options(siteUri).lastMod(now).priority(SITE_PRIORITY).changeFreq(
-                        ChangeFreq.WEEKLY).build();
-                wsg.addUrl(url);
+    try {
+      final WebSitemapGenerator wsg = new WebSitemapGenerator(siteUrl, dir);
+
+      LOG.info("Initialize sitemap");
+      // Site urls hashs (#signin, #register, etc)
+      for (final String siteHash : siteUrls) {
+        final String siteUri = fileDownloadUtils.getUrl(siteHash);
+        final WebSitemapUrl url = new WebSitemapUrl.Options(siteUri).lastMod(now).priority(SITE_PRIORITY).changeFreq(
+            ChangeFreq.WEEKLY).build();
+        wsg.addUrl(url);
+      }
+
+      // Groups
+      LOG.info("Start groups procesing for sitema generation");
+      final Long count = countNotClosedGroups();
+      int i = 0;
+      while (i < count) {
+
+        LOG.info("Procesing groups for site map til: " + i + LIMIT_OF_QUERY);
+        final List<Group> groups = getGroups(i);
+        for (final Group group : groups) {
+          final String groupUri = fileDownloadUtils.getUrl(group.getStateToken().toString());
+          final WebSitemapUrl groupUrl = new WebSitemapUrl.Options(groupUri).lastMod(now).priority(
+              GROUPS_PRIORITY).changeFreq(ChangeFreq.DAILY).build();
+          wsg.addUrl(groupUrl);
+
+          // Containers
+          for (final Container container : getContainers(group)) {
+            if (container.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
+              final String containerUri = fileDownloadUtils.getUrl(container.getStateToken().toString());
+              final WebSitemapUrl containerUrl = new WebSitemapUrl.Options(containerUri).lastMod(now).priority(
+                  CONTENTS_PRIORITY).changeFreq(ChangeFreq.DAILY).build();
+              wsg.addUrl(containerUrl);
             }
+          }
 
-            // Groups
-            final Long count = countNotClosedGroups();
-            int i = 0;
-            while (i < count) {
-
-                final List<Group> groups = getGroups(i);
-                for (final Group group : groups) {
-                    final String groupUri = fileDownloadUtils.getUrl(group.getStateToken().toString());
-                    final WebSitemapUrl groupUrl = new WebSitemapUrl.Options(groupUri).lastMod(now).priority(
-                            GROUPS_PRIORITY).changeFreq(ChangeFreq.DAILY).build();
-                    wsg.addUrl(groupUrl);
-
-                    // Containers
-                    for (final Container container : getContainers(group)) {
-                        if (container.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
-                            final String containerUri = fileDownloadUtils.getUrl(container.getStateToken().toString());
-                            final WebSitemapUrl containerUrl = new WebSitemapUrl.Options(containerUri).lastMod(now).priority(
-                                    CONTENTS_PRIORITY).changeFreq(ChangeFreq.DAILY).build();
-                            wsg.addUrl(containerUrl);
-                        }
-                    }
-
-                    // Contents
-                    for (final Content content : getContents(group)) {
-                        if (content.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
-                            final String contentUri = fileDownloadUtils.getUrl(content.getStateToken().toString());
-                            final WebSitemapUrl contentUrl = new WebSitemapUrl.Options(contentUri).lastMod(
-                                    new Date(content.getModifiedOn())).priority(CONTENTS_PRIORITY).changeFreq(
-                                    ChangeFreq.DAILY).build();
-                            wsg.addUrl(contentUrl);
-                        }
-                    }
-
-                    i += LIMIT_OF_QUERY;
-                }
+          // Contents
+          for (final Content content : getContents(group)) {
+            if (content.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE)) {
+              final String contentUri = fileDownloadUtils.getUrl(content.getStateToken().toString());
+              final WebSitemapUrl contentUrl = new WebSitemapUrl.Options(contentUri).lastMod(
+                  new Date(content.getModifiedOn())).priority(CONTENTS_PRIORITY).changeFreq(
+                  ChangeFreq.DAILY).build();
+              wsg.addUrl(contentUrl);
             }
+          }
 
-            wsg.write();
-        } catch (final MalformedURLException e) {
-            LOG.error("Error generating sitemap. Malformed URL.", e);
+          i += LIMIT_OF_QUERY;
         }
+      }
 
+      wsg.write();
+    } catch (final MalformedURLException e) {
+      LOG.error("Error generating sitemap. Malformed URL.", e);
     }
 
-    @KuneTransactional
-    private Long countNotClosedGroups() {
-        return groupFinder.countExceptType(GroupType.CLOSED);
-    }
+  }
 
-    @KuneTransactional
-    private List<Container> getContainers(final Group group) {
-        return containerFinder.allContainersInUserGroup(group.getId());
-    }
+  @KuneTransactional
+  private List<Container> getContainers(final Group group) {
+    return containerFinder.allContainersInUserGroup(group.getId());
+  }
 
-    @KuneTransactional
-    private List<Content> getContents(final Group group) {
-        return contentFinder.allContentsInUserGroup(group.getId());
-    }
+  @KuneTransactional
+  private List<Content> getContents(final Group group) {
+    return contentFinder.allContentsInUserGroup(group.getId());
+  }
 
-    @KuneTransactional
-    private List<Group> getGroups(final int i) {
-        return groupFinder.getAllExcept(LIMIT_OF_QUERY, i, GroupType.CLOSED);
-    }
+  @KuneTransactional
+  private List<Group> getGroups(final int i) {
+    return groupFinder.getAllExcept(LIMIT_OF_QUERY, i, GroupType.CLOSED);
+  }
 }
