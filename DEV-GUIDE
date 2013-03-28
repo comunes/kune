@@ -68,6 +68,7 @@ From the Eclipse Marketplace (Help > Eclipse Marketplace (*)) install:
  
 Check:
 http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN.txt
+http://code.google.com/p/google-web-toolkit/wiki/WorkingWithMaven#Using_Maven_with_Google_Plugin_for_Eclipse
 
 ** Eclipse configuration
 
