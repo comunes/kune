@@ -1,1 +1,11 @@
+Kune Command Line Interface (CLI)
+(under development)
+
+* Dev CLI
+Import the folder kune/core/kune-cli as an Eclipse project. Run the Kune server and afterwards run the KuneCliMain or its tests KuneCliMainTest
+
+* For running it from terminal, with arguments:
 mvn exec:java -Dexec.args="hello"
+
+* For solving dependency problems in Eclipse
+mcn eclipse:eclipse
