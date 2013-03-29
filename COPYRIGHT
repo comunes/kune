@@ -1,18 +1,22 @@
 LICENSES
 --------------------------------------------------------------------------------
 
-All programs are either under the AGPL, GPL, LGPL, Artistic or BSD licenses, see
+All programs are either under the AGPL, GPL, LGPL, Artistic, Apache 2.0, MIT or BSD licenses. See
 below for details.
 
-On Debian systems, the complete text of these licenses can be found in:
+On Debian systems, the complete text of most of these licenses can be found in:
 
-/usr/share/common-licenses/AGPL
 /usr/share/common-licenses/GPL-3
 /usr/share/common-licenses/Artistic
 /usr/share/common-licenses/BSD
 /usr/share/common-licenses/LGPL
+/usr/share/common-licenses/Apache-2.0
 
-When in doubt, check the individual file, they should all have license
+while the rest in:
+http://spdx.org/licenses/AGPL-3.0
+http://spdx.org/licenses/MIT
+
+When in doubt, check the individual file, as they should all have license
 headings and other identifying marks.
 
 kune software
@@ -39,12 +43,13 @@ See COPYRIGHT-AGPLv3 for a complete text.
 
 other stuff (libraries, etc)
 --------------------------------------------------------------------------------
+#wave protocol / wave in a box#
 
-#wave / wave in a box#
-
-* http://www.waveprotocol.org
-* http://www.apache.org/licenses/LICENSE-2.0
-* http://www.waveprotocol.org/patent-license
+Copyright: the code from Apache Wave / Wave In A Box and the Google Wave Protocol are under the Apache License, version 2.0. The Google Wave Protocol specification is under the following Patent License.
+https://incubator.apache.org/wave/
+http://www.waveprotocol.org
+http://www.apache.org/licenses/LICENSE-2.0
+http://www.waveprotocol.org/patent-license
 
 #emite libray#
 
@@ -109,7 +114,7 @@ Some ideas and embedded video code from
 #some license descriptions#
 
 from Wikipedia (English) http://en.wikipedia.org/
-Copyright under GFDL http://www.gnu.org/copyleft/fdl.html
+Copyright under CC-BY-SA 3.0: http://creativecommons.org/licenses/by-sa/3.0/
 
 #some Action classes#
 
@@ -214,6 +219,6 @@ The Humanity Icon Theme is licensed under the GPL v2.
 Parts of the work are based on the Tango icons, which are released under the
 public domain.
 LibreOffice icons,libreoffice-*.png, are LibreOffice icons and libreoffice-*.svg
-are modified from  LibreOffice icons, which are licenced under CC-by-SA,
+are modified from  LibreOffice icons, which are licenced under CC-BY-SA,
 LGPL 3+, MPL 1.1
 
