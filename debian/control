@@ -14,12 +14,12 @@ Depends: libjmagick6-jni, sun-java6-jre | openjdk-6-jdk, mysql-server (>= 5.1) ,
 Recommends: openfire (>= 3.7.1), mysql-client, postfix | exim4
 Suggests:
 Architecture: all
-Description: Distributed social net of collaborative web tools
- Kune (which means together in esperanto) is a web tool, for creating 
- environments of constant inter-communication, collective intelligence, 
+Description: Distributed social network of collaborative web tools
+ Kune (which means together in esperanto) creates 
+ environments of real-time inter-communication, collective intelligence, 
  knowledge and shared work. It integrates Apache Wave.
  .
- Kune’s main objective is to multiply the capacity and skills of people, 
+ Kune’s main aim is to multiply the capacity and skills of people, 
  communities and organizations, allowing their constant cooperation, regardless
  of physical distance. Therefore, it aims to facilitate virtual meetings, 
  coordinate common agendas, join people with similar interests and develop 
