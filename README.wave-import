@@ -2,7 +2,12 @@
 
 This document was originally written for documenting the export of all the waves from the old Google Wave and import them in Wave In A Box (WIAB), nowadays known as Apache Wave. This may be also valid to export/import waves from an Apache Wave instance to another.
 
-You may need to download the necessary scripts from
+IMPORTANT: Nowadays there is another utility to do this, distributed within Apache Wave, that aims to simplify things:
+https://github.com/apache/wave/blob/trunk/README.export-import
+The current document describes the process without that utility. 
+
+
+In order to run the mentioned .sh scripts, you may need to download the necessary scripts from
 https://github.com/vega113/WaveImport
 
 ** Features:
