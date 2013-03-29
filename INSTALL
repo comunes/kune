@@ -1,17 +1,21 @@
-=INSTALL=
+* INSTALL: Kune Installation Guide
+NOTE: This document is best viewed with GNU Emacs Org-mode (open with Emacs, Alt+X org-mode)
+See the IMPORTANT WARNING below
 
-==Development environment instructions==
+** Development environment instructions
 
-===Important warning===
-This document will help you to install Kune, but it is especially aimed for developers. If you just want to deploy Kune in a server for your users to make use of it, we strongly advise you to use the DEB package and install it in a Debian/Ubuntu environment. That would be much easier, faster and hassle-free. In that case, ignore the rest of this document and go to the following links:
-* Steps for an easy installation with a deb package:
+*** IMPORTANT WARNING
+This document will help you to install Kune, but it is especially aimed for developers. If you just want to deploy Kune in a server for your users to make use of it, we strongly advise you to use the DEB package and install it in a Debian/Ubuntu environment. That would be much easier, faster and hassle-free. In that case, ignore these installation instructions and go to the following links:
+- Steps for an easy installation with a deb package:
   http://kune.cc/#!kune.docs.6810.898
-* For installation/administration documentation:
+- For installation/administration documentation:
   http://kune.cc/#!kune.docs.6810
 
-===Prerrequisites===
+NOTE: This INSTALL document contains more info besides the installation instructions (e.g. package creation, customization, etc) that may be useful even when choosing the DEB package installation.
 
-* Install java-jdk (>=6), maven2, mysql (> 5.0) and eclipse (well, this depends on what IDE do you use for development). In Debian and derivatives (such as Ubuntu):
+*** Prerrequisites
+
+- Install java-jdk (>=6), maven2, mysql (> 5.0) and eclipse (well, this depends on what IDE do you use for development). In Debian and derivatives (such as Ubuntu):
 
 For development environment:
  sudo apt-get install subversion maven2 mercurial openjdk-6-jdk mysql-server libjmagick6-jni
@@ -22,9 +26,9 @@ For production environment:
 NOTE: If you want the Jabber/XMPP chat service in your installation, you will need OpenFire, as described later on.
 NOTE: If you want to send automatic email notifications, you will need to set up a SMTP server, and test it as described later on.
 
-===MYSQL configuration===
+*** MYSQL configuration
 
-====Db creation====
+**** Db creation
 
 For development, make two databases in your mysql:
 
@@ -67,13 +71,13 @@ WARNING: Although using this password ('db4kune') is useful for a quick and dirt
 
 On the other hand, if you want to select the database used (by default "kune_dev") you have to configure it in kune.properties.
 
-===Configure your domain===
+*** Configure your domain
 
 Be sure that the domain you want to use with Kune resolves correctly:
    dig example.org
 For development we recommend to use some local domain like localhost, but better with zone like local.net (add to you /etc/hosts if it's not yet there). If you want to use another different domain from localhost, you have to update src/main/resources/kune.properties and src/main/resources/wave-server* and ws.html
 
-===Source code (if you are installing Kune for development)===
+*** Source code (if you are installing Kune for development)
 
 See the DEVGUIDE for instructions on how to download the Kune code.
 
@@ -83,7 +87,7 @@ Compile with maven:
 
 NOTE: If you change the previous db passwords after this compiling, you have to repeat the "mvn compile" because if not, probably you will use an old kune.properties. See TROUBLESHOOT for more details.
 
-===Configure directories===
+*** Configure directories
 
 NOTE: This is not needed in development enviroments or when you use a Debian package (.deb)
 
@@ -111,33 +115,33 @@ Configurate hibernate/lucene indexes directories (these are GNU/Linux instructio
 
  sudo chown -R yourUser:yourUser /var/lib/kune/
 
-====Aditional info for W$ users====
+**** Aditional info for W$ users
 
 Not verified:  In case you are using Windows as dev platform you just need to create a couple of folders anywhere you like and then specify them in persistence.xml, as follows:
  <property name="hibernate.search.default.indexBase" value="C:\kune\kune-index"/>
 Do the same with every persistence unit defined inside.
 
-===Run Openfire Jabber server===
+*** Run Openfire Jabber server
 
 Install and run a Openfire Jabber server (see Appendix A for proper configuration of Openfire).
 
-===Configure your SMTP server===
+*** Configure your SMTP server
 
 See Appendix C for more info.
 
-===Wave in a Box===
+*** Wave in a Box
 
 If you want to use Kune in production and federate with other Wave capable servers, follow "Federation configuration" from:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/code/installation
 and:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/federation/openfire-installation
 
-===Increase open file limits in system===
+*** Increase open file limits in system
 
 Follow:
 http://posidev.com/blog/2009/06/04/set-ulimit-parameters-on-ubuntu/
 
-===Install jmagick===
+*** Install jmagick
 
 Install jmagick-jni. In debian: 
  sudo apt-get install libjmagick6-jni 
@@ -148,11 +152,11 @@ or:
 	set LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jni 
 in your test and in your webserver.
 
-====Aditional info for W$ users====
+**** Aditional info for W$ users
 
 Not verified: in Windows you need to do something similar (copy the jmagick .dll of the same version in the Windows directory)
 
-===Initialize the kune database===
+*** Initialize the kune database
 
 Choose the one you will use. Run the second line (kune_dev) for development, or the last line (kune_prod) for production:
 
@@ -171,7 +175,7 @@ This last script might be needed to be adapted, as it is prepared for the "kune_
 NOTE: Windows developer users should do this by hand or adapt this (simple) script to Windows or simple:
 mvn compile -Dliquibase.should.run=true (or mvn compile)
 
-===Run the server===
+*** Run the server
 
 Run the server for the first time and initialize the db:
 
@@ -183,7 +187,7 @@ or for production
 
  bin/server.sh -j kune.jar # -h for more options
 
-===Connecting to the server===
+*** Connecting to the server
 
 Open your browser and connect to Kune. 
 
@@ -197,7 +201,7 @@ NOTE: If you configured a different port in wave-server.properties, replace 8888
 NOTE: Kune for development will not work in languages other than English (locale=en). Trying other languages (locale=fr, locale=es, etc) in development mode might result in loops. This is done in purpose for accelerating compilation (without loading dozens of languages).
 NOTE: If you were following the DEV-GUIDE, remember to come back to it in order to finish the steps to develop Kune.
 
-==Production environment instructions==
+** Production environment instructions
 
 With
   mvn assembly:assembly -P production
@@ -210,13 +214,13 @@ bin/server.sh -j kune.jar
 For more options:
 bin/server.sh -h 
 
-==JAR package generation==
+** JAR package generation
 
 Execute 
  mvn package
 to generate the .jar package of the current version of the Kune code. Make sure the database migration ( bin/liquibase-migrate.sh ) ran successfully before packaging (see the TROUBLESHOOT for related problems).
 
-==Debian package generation==
+** Debian package generation
 
 In trunk run:
   mvn assembly:assembly -P production 
@@ -228,14 +232,14 @@ or
   debuild -b
 to sign the resulting package.
 
-==Releasing kune==
+** Releasing kune
 
 mvn release:prepare
 mvn release:perform
 
 More info: http://maven.apache.org/plugins/maven-release-plugin/index.html
 
-===Customization: Adapting Kune to your site===
+*** Customization: Adapting Kune to your site
 
 Copy and adapt to your needs, as much as possible, these files:
 
@@ -260,7 +264,7 @@ NOTE: Remember that if you are running kune using the source code (via mvn) and 
 
 Besides, you can build diferent tutorials than the default ones (see src/main/webapp/tutorials)
 
-==Appendix A: Configuration of Openfire xmpp server==
+** Appendix A: Configuration of Openfire xmpp server
 
 NOTE: If you want to INSTALL Kune without the Openfire dependency (which is useful for development or testing), you can skip this part (you should configure kune.openfire.ignore in kune.properties accordingly). In this case, there won't be XMPP server.
 
@@ -321,7 +325,7 @@ so this will not conflict with kune users management.
 
 NOTE: Remember to click "Save Settings" after each change in Openfire web administration.
 
-===Openfire auth via Kune===
+*** Openfire auth via Kune
 
 Download from http://kune.cc/downloads/openfireauth kune-openfireauth-VERSION.jar and copy to /usr/share/openfire/lib as root. 
 
@@ -363,8 +367,8 @@ jdbcUserProvider.usernameField = shortName
 admin.authorizedJIDs = admin@PUT_HERE_YOUR_DOMAIN
 
 Or, alternatively (if it is easier for you), add these lines to conf/openfire.xml
-* In debian (with a .deb installation) you can edit the configuration in /etc/openfire directory.
-* In Mac: /usr/local/openfire/conf
+- In Debian (with a .deb installation) you can edit the configuration in /etc/openfire directory.
+- In Mac: /usr/local/openfire/conf
 (Again check that the user/passwd of the db is the same one here and in kune.properties, the ones configured before):
 
 <pre>
@@ -416,14 +420,14 @@ after that the previous values will be incorpored to Server > Server Manager > S
 
 After the section 'Run the server for the first time' you'll be able to use the password of the admin user of the kune instalation (specified in kune.properties), or other admin new users you want to register using kune and that were configure in the authorizedUsernames attribute.
 
-===Configure your DNS for your XMPP service correctly===
+*** Configure your DNS for your XMPP service correctly
 
 You have to configure your DNS domain adding SRV records for your XMPP services if you want to use kune in production (this is not necessary for development). This allows your XMPP server to communicate with other similar servers correctly. You should follow:
 http://jabberd.org/1.4/doc/adminguide#dnssrv
 and:
 http://www.google.com/support/a/bin/answer.py?answer=34143
 
-==Appendix B: Apache configuration sample==
+** Appendix B: Apache configuration sample
 
 WARNING: This will not work with current Wave's websocket. Consider using nginx (that has a better support for websockets) instead.
 http://serverfault.com/questions/290121/configuring-apache2-to-proxy-websocket
@@ -462,7 +466,7 @@ a2enmod proxy_http
     </Location>
 </VirtualHost>
 
-==Appendix C: Configure your SMTP mail server==
+** Appendix C: Configure your SMTP mail server
 
 You should configure a SMTP server in order to be used by Kune in production sites. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance, you can test something such as:
 
@@ -474,7 +478,7 @@ http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#JavaMailSend
 For more specific configuration parameters that you might need with your SMTP server, you can check:
 http://javamail.kenai.com/nonav/javadocs/com/sun/mail/smtp/package-summary.html
 
-==Appendix D: Configure remote JMX Support==
+** Appendix D: Configure remote JMX Support
 
 Some management features are exposed as JMX MBeans. In case to need to access them remotely JVM
 must be executed with these options:
