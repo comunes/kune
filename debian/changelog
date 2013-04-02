@@ -1,3 +1,9 @@
+kune (0.3.0+b25) unstable; urgency=low
+
+  * Added MBeans (thanks to Pablojan)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 02 Apr 2013 18:42:53 +0200
+
 kune (0.3.0+b24) unstable; urgency=low
 
   * Several internationalization fixes (locales with Countries names)

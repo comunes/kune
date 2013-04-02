@@ -21,15 +21,63 @@ package cc.kune.core.server.searcheable;
 import cc.kune.core.server.mbean.MBeanConstants;
 
 /**
- * MBean interface for JMX management of the {@link SearchEngineServletFilter}
- *
+ * MBean interface for JMX management of the {@link SearchEngineServletFilter}.
  */
 public interface SearchEngineServletFilterMBean {
 
-  public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SearchEngineServletFilter";
+    /** The Constant MBEAN_OBJECT_NAME. */
+    public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SearchEngineServletFilter";
 
-  void clearCache();
+    /**
+     * Clear the htmlunit cache.
+     */
+    void clearCache();
 
-  void setExecuterSize(int size);
+    /**
+     * Sets the executor thread size.
+     *
+     * @param size
+     *            the new executor thread size
+     */
+    void setExecutorThreadSize(int size);
+
+    /**
+     * Gets the cache size.
+     *
+     * @return the cache size
+     */
+    int getCacheSize();
+
+    /**
+     * Sets the max cache size (maximum number of files in cache).
+     *
+     * @param size
+     *            the new cache size
+     */
+    void setCacheMaxSize(int size);
+
+    /**
+     * Gets the executor thread size.
+     *
+     * @return the executor thread size
+     */
+    int getExecutorThreadSize();
+
+    /**
+     * Inits the web client (useful if htmlunit has some memory leak).
+     */
+    void initWebClient();
+
+    /**
+     * Gets the cache max size.
+     *
+     * @return the cache max size
+     */
+    int getCacheMaxSize();
+
+    /**
+     * Client close all windows (htmlunit).
+     */
+    void closeAllWindows();
 
 }

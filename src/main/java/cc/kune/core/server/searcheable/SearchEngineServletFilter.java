@@ -29,6 +29,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -43,7 +44,6 @@ import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 
 import cc.kune.core.client.state.SiteParameters;
-import cc.kune.core.server.rack.filters.AbstractInjectedFilter;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -69,7 +69,7 @@ import com.google.inject.Singleton;
  * .java?r=6231
  */
 @Singleton
-public class SearchEngineServletFilter extends AbstractInjectedFilter implements OnbeforeunloadHandler, AlertHandler, IncorrectnessListener,
+public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler, AlertHandler, IncorrectnessListener,
         SearchEngineServletFilterMBean {
 
     public class QuietCssErrorHandler implements ErrorHandler {
@@ -88,19 +88,38 @@ public class SearchEngineServletFilter extends AbstractInjectedFilter implements
         }
     }
 
+    private static final int INIT_CACHE_SIZE = 100;
+
     public static final Log LOG = LogFactory.getLog(SearchEngineServletFilter.class);
 
     private static final int THREADS = 2;
 
     private static final int TIMEOUT = 20000;
 
+    public static final String SEARCH_ENGINE_FILTER_ATTRIBUTE = "searchEngineFilterAttribute";
+
     private Cache cache;
+
+    private WebClient client;
 
     private ExecutorService executor;
 
     private FilterConfig filterConfig;
 
     private final Object waitForUnload = new Object();
+
+    private int executorSize;
+
+    @Override
+    public void clearCache() {
+        LOG.info("Clearing cache");
+        cache.clear();
+    }
+
+    @Override
+    public void closeAllWindows() {
+        client.closeAllWindows();
+    }
 
     /*
      * (non-Javadoc)
@@ -142,26 +161,6 @@ public class SearchEngineServletFilter extends AbstractInjectedFilter implements
                                 + "#" + urlWithEscapedFragment;
 
                         LOG.info("New url with hash: " + newUrl);
-                        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
-                        client.setCache(cache);
-                        try {
-                            client.setUseInsecureSSL(true);
-                        } catch (final GeneralSecurityException e) {
-                            LOG.error("Servlet exception caught: " + e);
-                        }
-                        client.setCssErrorHandler(new QuietCssErrorHandler());
-                        client.setCssEnabled(true);
-                        client.setJavaScriptTimeout(20000);
-                        client.setThrowExceptionOnScriptError(true);
-                        client.setThrowExceptionOnFailingStatusCode(false);
-                        client.setJavaScriptEnabled(true);
-                        client.setRedirectEnabled(true);
-                        client.setOnbeforeunloadHandler(SearchEngineServletFilter.this);
-                        client.setAlertHandler(SearchEngineServletFilter.this);
-                        client.setIncorrectnessListener(SearchEngineServletFilter.this);
-                        client.setTimeout(TIMEOUT);
-
-                        client.setAjaxController(new NicelyResynchronizingAjaxController());
                         try {
                             final WebRequest webReq = new WebRequest(new URL(newUrl));
                             final HtmlPage page = client.getPage(webReq);
@@ -211,6 +210,21 @@ public class SearchEngineServletFilter extends AbstractInjectedFilter implements
     }
 
     @Override
+    public int getCacheMaxSize() {
+        return cache.getMaxSize();
+    }
+
+    @Override
+    public int getCacheSize() {
+        return cache.getSize();
+    }
+
+    @Override
+    public int getExecutorThreadSize() {
+        return executorSize;
+    }
+
+    @Override
     public void handleAlert(final Page page, final String message) {
         LOG.error("Alert: " + message);
     }
@@ -227,7 +241,36 @@ public class SearchEngineServletFilter extends AbstractInjectedFilter implements
     public void init(final FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
         cache = new Cache();
+        setCacheMaxSize(INIT_CACHE_SIZE);
+        initWebClient();
         executor = Executors.newFixedThreadPool(THREADS);
+        executorSize = THREADS;
+        // As this object is not created by guice, we cannot use injection, so
+        // we store this object in context and we can retrieve it later
+        filterConfig.getServletContext().setAttribute(SEARCH_ENGINE_FILTER_ATTRIBUTE, this);
+    }
+
+    public void initWebClient() {
+        LOG.info("Initializing web client");
+        client = new WebClient(BrowserVersion.FIREFOX_3_6);
+        client.setCache(cache);
+        try {
+            client.setUseInsecureSSL(true);
+        } catch (final GeneralSecurityException e) {
+            LOG.error("Servlet exception caught: " + e);
+        }
+        client.setCssErrorHandler(new QuietCssErrorHandler());
+        client.setCssEnabled(true);
+        client.setJavaScriptTimeout(20000);
+        client.setThrowExceptionOnScriptError(true);
+        client.setThrowExceptionOnFailingStatusCode(false);
+        client.setJavaScriptEnabled(true);
+        client.setRedirectEnabled(true);
+        client.setOnbeforeunloadHandler(SearchEngineServletFilter.this);
+        client.setAlertHandler(SearchEngineServletFilter.this);
+        client.setIncorrectnessListener(SearchEngineServletFilter.this);
+        client.setTimeout(TIMEOUT);
+        client.setAjaxController(new NicelyResynchronizingAjaxController());
     }
 
     @Override
@@ -239,6 +282,19 @@ public class SearchEngineServletFilter extends AbstractInjectedFilter implements
             return;
         }
         LOG.warn(message);
+    }
+
+    @Override
+    public void setCacheMaxSize(int size) {
+        cache.setMaxSize(size);
+    }
+
+    @Override
+    public void setExecutorThreadSize(int size) {
+        LOG.info("Setting executors size: " + size);
+        shutdownAndAwaitTermination(executor);
+        executor = Executors.newFixedThreadPool(size);
+        executorSize = size;
     }
 
     void shutdownAndAwaitTermination(final ExecutorService pool) {
@@ -258,17 +314,6 @@ public class SearchEngineServletFilter extends AbstractInjectedFilter implements
             // Preserve interrupt status
             Thread.currentThread().interrupt();
         }
-    }
-
-    @Override
-    public void clearCache() {
-        cache.clear();
-    }
-
-    @Override
-    public void setExecuterSize(int size) {
-        shutdownAndAwaitTermination(executor);
-        executor = Executors.newFixedThreadPool(size);
     }
 
 }

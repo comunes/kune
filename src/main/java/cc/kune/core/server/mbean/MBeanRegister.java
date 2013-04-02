@@ -21,6 +21,7 @@ package cc.kune.core.server.mbean;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.properties.KunePropertiesDefaultMBean;
 import cc.kune.core.server.searcheable.SearchEngineServletFilter;
+import cc.kune.core.server.searcheable.SearchEngineServletFilterMBean;
 import cc.kune.core.server.searcheable.SiteMapGenerator;
 import cc.kune.core.server.searcheable.SiteMapGeneratorMBean;
 
@@ -29,6 +30,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class MBeanRegister {
+
 
     /**
      * Register mbeans objects in the {@link MBeanRegistry} for other objects
@@ -50,9 +52,6 @@ public class MBeanRegister {
         // so it's there since the server start
         registry.registerAsMBean(siteMapGenerator, SiteMapGeneratorMBean.MBEAN_OBJECT_NAME);
 
-        // FIXME This is not working, seems that this mbean is not working
-        // because this object is not the real filter (is not initialized, so cache and executors operations gives a NPE).
-        // registry.registerAsMBean(searchEngineServletFilter, SearchEngineServletFilterMBean.MBEAN_OBJECT_NAME);
-        // other objects (...)
+        registry.registerAsMBean(searchEngineServletFilter, SearchEngineServletFilterMBean.MBEAN_OBJECT_NAME);
     }
 }
