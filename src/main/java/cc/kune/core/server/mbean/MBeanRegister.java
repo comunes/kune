@@ -20,6 +20,7 @@ package cc.kune.core.server.mbean;
 
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.properties.KunePropertiesDefaultMBean;
+import cc.kune.core.server.searcheable.SearchEngineServletFilter;
 import cc.kune.core.server.searcheable.SiteMapGenerator;
 import cc.kune.core.server.searcheable.SiteMapGeneratorMBean;
 
@@ -29,24 +30,29 @@ import com.google.inject.Singleton;
 @Singleton
 public class MBeanRegister {
 
-  /**
-   * Register mbeans objects in the {@link MBeanRegistry} for other objects that
-   * cannot inject and use {@link MBeanRegistry.registerAsMBean} directly
-   * 
-   * @param registry
-   *          the registry
-   * @param kuneProperties
-   *          the kune properties
-   */
-  @Inject
-  public MBeanRegister(final MBeanRegistry registry, final KuneProperties kuneProperties,
-      final SiteMapGenerator siteMapGenerator) {
-    // Since KuneProperties is not created via Guice, we need to do a manual
-    // injection
-    registry.registerAsMBean(kuneProperties, KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME);
-    // As SiteMapGenerator is instantiated by cron, we register the mbean here
-    // so it's there since the server start
-    registry.registerAsMBean(siteMapGenerator, SiteMapGeneratorMBean.MBEAN_OBJECT_NAME);
-    // other objects (...)
-  }
+    /**
+     * Register mbeans objects in the {@link MBeanRegistry} for other objects
+     * that cannot inject and use {@link MBeanRegistry.registerAsMBean} directly
+     *
+     * @param registry
+     *            the registry
+     * @param kuneProperties
+     *            the kune properties
+     */
+    @Inject
+    public MBeanRegister(final MBeanRegistry registry, final KuneProperties kuneProperties,
+            final SiteMapGenerator siteMapGenerator, SearchEngineServletFilter searchEngineServletFilter) {
+        // Since KuneProperties is not created via Guice, we need to do a manual
+        // injection
+        registry.registerAsMBean(kuneProperties, KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME);
+        // As SiteMapGenerator is instantiated by cron, we register the mbean
+        // here
+        // so it's there since the server start
+        registry.registerAsMBean(siteMapGenerator, SiteMapGeneratorMBean.MBEAN_OBJECT_NAME);
+
+        // FIXME This is not working, seems that this mbean is not working
+        // because this object is not the real filter (is not initialized, so cache and executors operations gives a NPE).
+        // registry.registerAsMBean(searchEngineServletFilter, SearchEngineServletFilterMBean.MBEAN_OBJECT_NAME);
+        // other objects (...)
+    }
 }

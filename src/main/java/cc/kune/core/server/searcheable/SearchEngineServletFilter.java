@@ -29,7 +29,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -44,6 +43,7 @@ import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 
 import cc.kune.core.client.state.SiteParameters;
+import cc.kune.core.server.rack.filters.AbstractInjectedFilter;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -69,194 +69,206 @@ import com.google.inject.Singleton;
  * .java?r=6231
  */
 @Singleton
-public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler, AlertHandler,
-    IncorrectnessListener {
+public class SearchEngineServletFilter extends AbstractInjectedFilter implements OnbeforeunloadHandler, AlertHandler, IncorrectnessListener,
+        SearchEngineServletFilterMBean {
 
-  public class QuietCssErrorHandler implements ErrorHandler {
+    public class QuietCssErrorHandler implements ErrorHandler {
+
+        @Override
+        public void error(final CSSParseException e) throws CSSException {
+
+        }
+
+        @Override
+        public void fatalError(final CSSParseException e) throws CSSException {
+        }
+
+        @Override
+        public void warning(final CSSParseException e) throws CSSException {
+        }
+    }
+
+    public static final Log LOG = LogFactory.getLog(SearchEngineServletFilter.class);
+
+    private static final int THREADS = 2;
+
+    private static final int TIMEOUT = 20000;
+
+    private Cache cache;
+
+    private ExecutorService executor;
+
+    private FilterConfig filterConfig;
+
+    private final Object waitForUnload = new Object();
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
+     * javax.servlet.ServletResponse, javax.servlet.FilterChain)
+     */
+    @Override
+    public void destroy() {
+        this.filterConfig = null;
+        shutdownAndAwaitTermination(executor);
+    }
 
     @Override
-    public void error(final CSSParseException e) throws CSSException {
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
+            throws IOException {
+        if (filterConfig == null) {
+            return;
+        }
 
-    }
+        if (request instanceof HttpServletRequest) {
 
-    @Override
-    public void fatalError(final CSSParseException e) throws CSSException {
-    }
+            final HttpServletRequest httpReq = (HttpServletRequest) request;
+            final StringBuffer url = httpReq.getRequestURL();
 
-    @Override
-    public void warning(final CSSParseException e) throws CSSException {
-    }
-  }
+            final String queryString = httpReq.getQueryString();
 
-  public static final Log LOG = LogFactory.getLog(SearchEngineServletFilter.class);
+            if ((queryString != null) && (queryString.contains(SiteParameters.ESCAPED_FRAGMENT_PARAMETER))) {
+                final Future<String> result = executor.submit(new Callable<String>() {
 
-  private static final int THREADS = 10;
+                    @Override
+                    public String call() throws Exception {
+                        // rewrite the URL back to the original #! version
+                        // remember to unescape any %XX characters
+                        final String urlWithEscapedFragment = request.getParameter(SiteParameters.ESCAPED_FRAGMENT_PARAMETER);
+                        final String newUrl = url.append("?").append(queryString).toString().replaceFirst(
+                                SiteParameters.ESCAPED_FRAGMENT_PARAMETER, SiteParameters.NO_UA_CHECK).replaceFirst(
+                                "/ws", "")
+                                + "#" + urlWithEscapedFragment;
 
-  private static final int TIMEOUT = 20000;
+                        LOG.info("New url with hash: " + newUrl);
+                        final WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
+                        client.setCache(cache);
+                        try {
+                            client.setUseInsecureSSL(true);
+                        } catch (final GeneralSecurityException e) {
+                            LOG.error("Servlet exception caught: " + e);
+                        }
+                        client.setCssErrorHandler(new QuietCssErrorHandler());
+                        client.setCssEnabled(true);
+                        client.setJavaScriptTimeout(20000);
+                        client.setThrowExceptionOnScriptError(true);
+                        client.setThrowExceptionOnFailingStatusCode(false);
+                        client.setJavaScriptEnabled(true);
+                        client.setRedirectEnabled(true);
+                        client.setOnbeforeunloadHandler(SearchEngineServletFilter.this);
+                        client.setAlertHandler(SearchEngineServletFilter.this);
+                        client.setIncorrectnessListener(SearchEngineServletFilter.this);
+                        client.setTimeout(TIMEOUT);
 
-  private Cache cache;
+                        client.setAjaxController(new NicelyResynchronizingAjaxController());
+                        try {
+                            final WebRequest webReq = new WebRequest(new URL(newUrl));
+                            final HtmlPage page = client.getPage(webReq);
 
-  private ExecutorService executor;
+                            client.waitForBackgroundJavaScriptStartingBefore(18000);
 
-  private FilterConfig filterConfig;
+                            // return the snapshot
+                            response.setCharacterEncoding("UTF-8");
+                            response.setContentType("text/html; charset=UTF-8");
+                            client.getAjaxController().processSynchron(page, webReq, false);
+                            final String pageAsXml = page.asXml().toString();
+                            page.cleanUp();
+                            page.remove();
+                            client.closeAllWindows();
+                            return pageAsXml;
+                        } catch (final IOException e) {
+                            LOG.debug("Error getting page: ", e);
+                            throw e;
+                        }
+                    }
 
-  private final Object waitForUnload = new Object();
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
-   * javax.servlet.ServletResponse, javax.servlet.FilterChain)
-   */
-  @Override
-  public void destroy() {
-    this.filterConfig = null;
-    shutdownAndAwaitTermination(executor);
-  }
-
-  @Override
-  public void doFilter(final ServletRequest request, final ServletResponse response,
-      final FilterChain chain) throws IOException {
-    if (filterConfig == null) {
-      return;
-    }
-
-    if (request instanceof HttpServletRequest) {
-
-      final HttpServletRequest httpReq = (HttpServletRequest) request;
-      final StringBuffer url = httpReq.getRequestURL();
-
-      final String queryString = httpReq.getQueryString();
-
-      if ((queryString != null) && (queryString.contains(SiteParameters.ESCAPED_FRAGMENT_PARAMETER))) {
-        final Future<String> result = executor.submit(new Callable<String>() {
-
-          @Override
-          public String call() throws Exception {
-            // rewrite the URL back to the original #! version
-            // remember to unescape any %XX characters
-            final String urlWithEscapedFragment = request.getParameter(SiteParameters.ESCAPED_FRAGMENT_PARAMETER);
-            final String newUrl = url.append("?").append(queryString).toString().replaceFirst(
-                SiteParameters.ESCAPED_FRAGMENT_PARAMETER, SiteParameters.NO_UA_CHECK).replaceFirst(
-                "/ws", "")
-                + "#" + urlWithEscapedFragment;
-
-            LOG.info("New url with hash: " + newUrl);
-            final WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
-            client.setCache(cache);
-            try {
-              client.setUseInsecureSSL(true);
-            } catch (final GeneralSecurityException e) {
-              LOG.error("Servlet exception caught: " + e);
+                });
+                try {
+                    final String page = result.get();
+                    // return the snapshot
+                    response.setCharacterEncoding("UTF-8");
+                    response.setContentType("text/html; charset=UTF-8");
+                    response.getOutputStream().write(page.getBytes());
+                } catch (final InterruptedException e) {
+                    LOG.error(e);
+                } catch (final ExecutionException e) {
+                    LOG.error(e);
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    // LOG.warn("Url without hash");
+                    // not an _escaped_fragment_ URL, so move up the chain of
+                    // servlet
+                    // (filters)
+                    chain.doFilter(request, response);
+                } catch (final ServletException e) {
+                    LOG.error("Servlet exception caught: " + e);
+                }
             }
-            client.setCssErrorHandler(new QuietCssErrorHandler());
-            client.setCssEnabled(true);
-            client.setJavaScriptTimeout(20000);
-            client.setThrowExceptionOnScriptError(true);
-            client.setThrowExceptionOnFailingStatusCode(false);
-            client.setJavaScriptEnabled(true);
-            client.setRedirectEnabled(true);
-            client.setOnbeforeunloadHandler(SearchEngineServletFilter.this);
-            client.setAlertHandler(SearchEngineServletFilter.this);
-            client.setIncorrectnessListener(SearchEngineServletFilter.this);
-            client.setTimeout(TIMEOUT);
+        }
+    }
 
-            client.setAjaxController(new NicelyResynchronizingAjaxController());
-            try {
-              final WebRequest webReq = new WebRequest(new URL(newUrl));
-              final HtmlPage page = client.getPage(webReq);
+    @Override
+    public void handleAlert(final Page page, final String message) {
+        LOG.error("Alert: " + message);
+    }
 
-              client.waitForBackgroundJavaScriptStartingBefore(18000);
+    @Override
+    public boolean handleEvent(final Page page, final String returnValue) {
+        synchronized (waitForUnload) {
+            waitForUnload.notifyAll();
+        }
+        return true;
+    }
 
-              // return the snapshot
-              response.setCharacterEncoding("UTF-8");
-              response.setContentType("text/html; charset=UTF-8");
-              client.getAjaxController().processSynchron(page, webReq, false);
-              final String pageAsXml = page.asXml().toString();
-              page.cleanUp();
-              page.remove();
-              client.closeAllWindows();
-              return pageAsXml;
-            } catch (final IOException e) {
-              LOG.debug("Error getting page: ", e);
-              throw e;
+    @Override
+    public void init(final FilterConfig filterConfig) throws ServletException {
+        this.filterConfig = filterConfig;
+        cache = new Cache();
+        executor = Executors.newFixedThreadPool(THREADS);
+    }
+
+    @Override
+    public void notify(final String message, final Object origin) {
+        if ("Obsolete content type encountered: 'application/x-javascript'.".equals(message)
+                || "Obsolete content type encountered: 'application/javascript'.".equals(message)
+                || "Obsolete content type encountered: 'text/javascript'.".equals(message)) {
+            // silently eat warning about text/javascript MIME type
+            return;
+        }
+        LOG.warn(message);
+    }
+
+    void shutdownAndAwaitTermination(final ExecutorService pool) {
+        pool.shutdown(); // Disable new tasks from being submitted
+        try {
+            // Wait a while for existing tasks to terminate
+            if (!pool.awaitTermination(30, TimeUnit.SECONDS)) {
+                pool.shutdownNow(); // Cancel currently executing tasks
+                // Wait a while for tasks to respond to being cancelled
+                if (!pool.awaitTermination(30, TimeUnit.SECONDS)) {
+                    System.err.println("Pool did not terminate");
+                }
             }
-          }
-
-        });
-        try {
-          final String page = result.get();
-          // return the snapshot
-          response.setCharacterEncoding("UTF-8");
-          response.setContentType("text/html; charset=UTF-8");
-          response.getOutputStream().write(page.getBytes());
-        } catch (final InterruptedException e) {
-          LOG.error(e);
-        } catch (final ExecutionException e) {
-          LOG.error(e);
-          e.printStackTrace();
+        } catch (final InterruptedException ie) {
+            // (Re-)Cancel if current thread also interrupted
+            pool.shutdownNow();
+            // Preserve interrupt status
+            Thread.currentThread().interrupt();
         }
-      } else {
-        try {
-          // LOG.warn("Url without hash");
-          // not an _escaped_fragment_ URL, so move up the chain of servlet
-          // (filters)
-          chain.doFilter(request, response);
-        } catch (final ServletException e) {
-          LOG.error("Servlet exception caught: " + e);
-        }
-      }
     }
-  }
 
-  @Override
-  public void handleAlert(final Page page, final String message) {
-    LOG.error("Alert: " + message);
-  }
-
-  @Override
-  public boolean handleEvent(final Page page, final String returnValue) {
-    synchronized (waitForUnload) {
-      waitForUnload.notifyAll();
+    @Override
+    public void clearCache() {
+        cache.clear();
     }
-    return true;
-  }
 
-  @Override
-  public void init(final FilterConfig filterConfig) throws ServletException {
-    this.filterConfig = filterConfig;
-    cache = new Cache();
-    executor = Executors.newFixedThreadPool(THREADS);
-  }
-
-  @Override
-  public void notify(final String message, final Object origin) {
-    if ("Obsolete content type encountered: 'application/x-javascript'.".equals(message)
-        || "Obsolete content type encountered: 'application/javascript'.".equals(message)
-        || "Obsolete content type encountered: 'text/javascript'.".equals(message)) {
-      // silently eat warning about text/javascript MIME type
-      return;
+    @Override
+    public void setExecuterSize(int size) {
+        shutdownAndAwaitTermination(executor);
+        executor = Executors.newFixedThreadPool(size);
     }
-    LOG.warn(message);
-  }
-
-  void shutdownAndAwaitTermination(final ExecutorService pool) {
-    pool.shutdown(); // Disable new tasks from being submitted
-    try {
-      // Wait a while for existing tasks to terminate
-      if (!pool.awaitTermination(30, TimeUnit.SECONDS)) {
-        pool.shutdownNow(); // Cancel currently executing tasks
-        // Wait a while for tasks to respond to being cancelled
-        if (!pool.awaitTermination(30, TimeUnit.SECONDS)) {
-          System.err.println("Pool did not terminate");
-        }
-      }
-    } catch (final InterruptedException ie) {
-      // (Re-)Cancel if current thread also interrupted
-      pool.shutdownNow();
-      // Preserve interrupt status
-      Thread.currentThread().interrupt();
-    }
-  }
 
 }
