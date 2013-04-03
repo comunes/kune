@@ -51,39 +51,80 @@ fi
 
 DELIMITER="|"
 
-for i in `find $WAVE_HOME/src -name *Mess*_en.properties | tail -5` ; 
+LIMIT=1
+
+CURRENT_LANG=en
+
+# Removing end slash
+# http://stackoverflow.com/questions/1848415/remove-slash-from-the-end-of-a-variable
+DIR=${WAVE_HOME%/}/src
+
+for i in `find $DIR -name *Mess*_$CURRENT_LANG.properties | tail -$LIMIT`
 do 
+  LANG=`basename $i .properties | cut -d "_" -f 2`
   cat $i | \
-  # Add newline at the end (if I rember)
+  # Add newline at the end (if I remember)
   sed -e '$a\' | \
   # Remove empty lines  
   sed '/^[\b]*$/d' | \
-  # Add file name key to the start (escaping /)
-  sed "s/^/`echo $i | sed 's/\//\\\\\//g'`|/g" | \
+  # Add file name key to the start (escaping /) and removing the last _langcode.properties 
+  sed "s/^/$LANG|`echo $i | sed 's/_..\.properties//g' | sed 's/\//\\\\\//g'`|/g" | \
   # Substitute first " = " with delimiter
-  sed "0,/RE/s/ = /$DELIMITER/g" ; 
+  sed "0,/RE/s/ = /$DELIMITER/g" ;   
 done | awk -F "|" -v passwd=$PASS -v username=$USERNAME -v db=$DB '
 function sql(operation) {
-   while ( ( operation | getline res ) > 0 ) {
-
-   } 
-   # print res
+   cmd = connect "\""operation"\""
+   cmd |& getline res
+   close(cmd)
+   print cmd
    return res
-} 
+}
+
+function getLangCode(lang) {
+  select = "SELECT id FROM globalize_languages g WHERE code=\x27"lang"\x27"
+  # print select
+  return sql(select)
+}
+
+function getKeyInLang(somekey, somelang) {
+  select = "SELECT count(*) FROM globalize_translations g WHERE gtype=\x27"somekey"\x27 AND language_id=\x27"somelang"\x27"
+  return sql(select)
+}
+
 BEGIN {
+  connect = "mysql -B -p"passwd" -u"username" "db" --skip-column-names -e "
+  english=getLangCode("en")
 }
 {
-  key = $1"|"$2
-  connect = "mysql -p"passwd" -u"username" "db" --skip-column-names -e"
-  select = connect "\"SELECT count(*) FROM globalize_translations g WHERE gtype=\x27"key"\x27\""
-  #select 
-  result = sql(select)
+  key = $2"|"$3
+  print "key: "$3
+  if ($1 == "en") {
+    currentLang = english;
+  } else {
+     currentLang = getLangCode($1)
+  }
+  result = getKeyInLang(key, currentLang)
   if (result > 0) {
     print "Already in db"
   } else {
-    print "Dont exists, so insert"
-    insert = connect "\"INSERT INTO globalize_translations VALUES (NULL,\x27\x27,NULL,1,\x27\x27,\x27"$3"\x27,\x27"$3"\x27,\x27"key"\x27,1819)\""
+    # print "Dont exists, so insert"
+    if (currentLang == english) {
+       # just insert
+    } else {
+       parent = getKeyInLang(key, english)
+       # find english parent
+       if (parent > 0) {
+          # parent found, insert with reference
+          # insert = connect "\"INSERT INTO globalize_translations VALUES (NULL,\x27\x27,NULL,1,\x27\x27,\x27"$3"\x27,\x27"$3"\x27,\x27"key"\x27,1819)\""
+       } else {
+          # parent dont exit, ignore by now
+       }
+    }
   }
-  # 1819: English
-}'
+}
+END {
+  # 1819: English 
+  # print english
+}
+'
 
