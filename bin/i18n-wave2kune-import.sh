@@ -57,14 +57,14 @@ CURRENT_LANG=en
 
 # Removing end slash
 # http://stackoverflow.com/questions/1848415/remove-slash-from-the-end-of-a-variable
-DIR=${WAVE_HOME%/}/src
+# DIR=${WAVE_HOME%/}/src
 
 # TODO process first *_en and later the rest of languages, so do here a function
 
-for i in `find $DIR -name *Mess*_$CURRENT_LANG.properties | tail -$LIMIT`
-do 
+for i in `(cd $WAVE_HOME; find src -name *Mess*_$CURRENT_LANG.properties | tail -$LIMIT)`
+do
   LANG=`basename $i .properties | cut -d "_" -f 2`
-  cat $i | \
+  cat $WAVE_HOME$i | \
   # Add newline at the end (if I remember)
   sed -e '$a\' | \
   # Remove empty lines  
@@ -73,4 +73,4 @@ do
   sed "s/^/$LANG|`echo $i | sed 's/_..\.properties//g' | sed 's/\//\\\\\//g'`|/g" | \
   # Substitute first " = " with delimiter
   sed "0,/RE/s/ = /$DELIMITER/g" ;   
-done | awk -F "|" -v passwd=$PASS -v username=$USERNAME -v db=$DB -f i18n-lib.awk -f i18n-wave2kune-import.awk
+done | awk -F "|" -v gtypeprefix="wave" -v passwd=$PASS -v username=$USERNAME -v db=$DB -f i18n-lib.awk -f i18n-wave2kune-import.awk
