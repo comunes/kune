@@ -1,34 +1,37 @@
 #!/usr/bin/gawk
 BEGIN {
-    connect = "mysql -B -p"passwd" -u"username" "db" --skip-column-names -e "
-    english=getLangCode("en")
-    # 1819: English 
-    # print english
 }
-
 {
-    key = $2"|"$3
-    print "key: "$3
+    gtype = $2"ł"$3
+    if (gtypeprefix)
+	gtype = gtypeprefix"ł"gtype
+    trkey = $3
+    text = $4
     if ($1 == "en") {
-	currentLang = english;
+	currentLang = english
     } else {
 	currentLang = getLangCode($1)
     }
-    result = getKeyInLang(key, currentLang)
+    result = getKeyInLang(gtype, currentLang)
     if (result > 0) {
-	print "Already in db"
+	# print "'"trkey "' already in db for lang '" $1 "'"
     } else {
 	# print "Dont exists, so insert"
 	if (currentLang == english) {
-	    # just insert
+	    insertNewItem(text, gtype, currentLang, "NULL")
+	    print "Inserting '" trkey "' in lang '" $1 "'"
+	    # FIXME, parent id = self
+	    id = getKeyInLang(gtype, currentLang)
+	    updateParentId(id);
 	} else {
-	    parent = getKeyInLang(key, english)
-	    # find english parent
+	    # Other langs different than English
+	    parent = getKeyInLang(gtype, english)
+	    # find English parent
 	    if (parent > 0) {
 		# parent found, insert with reference
-		# insert = connect "\"INSERT INTO globalize_translations VALUES (NULL,\x27\x27,NULL,1,\x27\x27,\x27"$3"\x27,\x27"$3"\x27,\x27"key"\x27,1819)\""
+		insertNewItem(text, gtype, currentLang, parent)
 	    } else {
-		# parent dont exit, ignore by now
+		print "'"trkey "' is not added for language English so no processing it for lang '" $1 "'"
 	    }
 	}
     }

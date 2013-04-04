@@ -1,16 +1,19 @@
 #!/bin/bash
 
 usage() {
-    echo "Use: $0 -u kune_db_username -p kune_db_passwd -d kune_db_name -w path-to-wiab-code "
+    echo "Use: $0 -u kune_db_username -p kune_db_passwd -d kune_db_name -w path-to-wiab-code [-e]"
+    echo "-e : only process English"
 }
+
+CURRENT_LANG=*
 
 # This only for development
 USERNAME="kune"
 PASS="db4kune"
 DB="kune_dev"
-WAVE_HOME=/home/vjrj/dev/wave/wiab/wiab-ro/
+WAVE_HOME=/home/vjrj/dev/wave/wiab/wiab-rw/
 
-while getopts “hu:p:d:w:” OPTION
+while getopts “hu:p:d:w:e” OPTION
 do
     case $OPTION in
 	h)
@@ -28,6 +31,9 @@ do
 	    ;;   
         w)
 	    WAVE_HOME=$OPTARG
+	    ;;
+	e)
+	    CURRENT_LANG=en
 	    ;;
 	?)
             usage
@@ -51,20 +57,16 @@ fi
 
 DELIMITER="|"
 
-LIMIT=1
-
-CURRENT_LANG=en
-
 # Removing end slash
 # http://stackoverflow.com/questions/1848415/remove-slash-from-the-end-of-a-variable
-DIR=${WAVE_HOME%/}/src
+# DIR=${WAVE_HOME%/}/src
 
 # TODO process first *_en and later the rest of languages, so do here a function
 
-for i in `find $DIR -name *Mess*_$CURRENT_LANG.properties | tail -$LIMIT`
-do 
+for i in `(cd $WAVE_HOME; find src -name *Mess*_$CURRENT_LANG.properties)`
+do
   LANG=`basename $i .properties | cut -d "_" -f 2`
-  cat $i | \
+  cat $WAVE_HOME$i | \
   # Add newline at the end (if I remember)
   sed -e '$a\' | \
   # Remove empty lines  
@@ -73,4 +75,4 @@ do
   sed "s/^/$LANG|`echo $i | sed 's/_..\.properties//g' | sed 's/\//\\\\\//g'`|/g" | \
   # Substitute first " = " with delimiter
   sed "0,/RE/s/ = /$DELIMITER/g" ;   
-done | awk -F "|" -v passwd=$PASS -v username=$USERNAME -v db=$DB -f i18n-lib.awk -f i18n-wave2kune-import.awk
+done | awk -F "|" -v gtypeprefix="wave" -v passwd=$PASS -v username=$USERNAME -v db=$DB -f i18n-lib.awk -f i18n-wave2kune-import.awk

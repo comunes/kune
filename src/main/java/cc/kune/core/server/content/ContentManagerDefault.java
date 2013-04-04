@@ -24,7 +24,6 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -321,9 +320,15 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     Preconditions.checkState(container.isRoot(), "Trying to purge a non root folder: " + container);
     Preconditions.checkState(container.getTypeId().equals(TrashToolConstants.TYPE_ROOT),
         "Container is not a trash root folder");
-    final Iterator<Content> iterator = container.getContents().iterator();
-    while (iterator.hasNext()) {
-      purgeContent(iterator.next());
+
+    // Issue #256 (ConcurrentModificationException)
+    // http://www.javacodegeeks.com/2011/05/avoid-concurrentmodificationexception.html
+    final Set<Content> contents = container.getContents();
+    final Content[] contentsArray = contents.toArray(new Content[contents.size()]);
+    // Set to null
+    container.setContents(new HashSet<Content>());
+    for (final Content content : contentsArray) {
+      purgeContent(content);
     }
     return container;
   }
