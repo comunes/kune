@@ -1,5 +1,5 @@
 #!/usr/bin/gawk
-function sqlImpl(operation, noact) {
+function sql(operation, noact) {
     cmd = connect "\""operation"\""
     if (noact > 0) 
 	print cmd
@@ -10,19 +10,18 @@ function sqlImpl(operation, noact) {
     return res    
 }
 
-function sql(operation) {
-    return sqlImpl(operation, 0)
-}
-
 function getLangCode(lang) {
-    select = "SELECT id FROM globalize_languages g WHERE code=\x27"lang"\x27"
+    select = "SELECT id FROM globalize_languages g WHERE code='"lang"'"
     return sql(select)
 }
 
 
 function getKeyInLang(somekey, somelang) {
-    select = "SELECT count(*) FROM globalize_translations g WHERE gtype=\x27"somekey"\x27 AND language_id=\x27"somelang"\x27"
-    return sql(select)
+    count = sql("SELECT count(*) FROM globalize_translations g WHERE gtype='"somekey"' AND language_id='"somelang"'")    
+    if (count > 0) 
+    return sql("SELECT id FROM globalize_translations g WHERE gtype='"somekey"' AND language_id='"somelang"'")
+    else
+	return 0
 }
 
 function insertNewItem(text, gtype, lang, parent) {
@@ -30,7 +29,12 @@ function insertNewItem(text, gtype, lang, parent) {
 	"(id, facet, item_id, noteForTranslators, pluralization_index, table_name, " \
 	"text, tr_key, gtype, language_id, parent_id) "			\
 	"VALUES (NULL,'',NULL,'',1,'','"text"','', '"gtype"', "lang", "parent")"
-    sqlImpl(insert);
+    sql(insert);
+}
+
+function updateParentId(id) {
+    update = "UPDATE globalize_translations SET parent_id="id" WHERE id="id
+    sql(update);
 }
 
 BEGIN {

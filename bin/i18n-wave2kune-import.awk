@@ -18,13 +18,12 @@ BEGIN {
     } else {
 	# print "Dont exists, so insert"
 	if (currentLang == english) {
-	    # just 
-	    parent = "NULL";
-	    insertNewItem($3, gtype, currentLang, parent)
+	    insertNewItem($3, gtype, currentLang, NULL)
 	    print "Inserting '" text "' in lang '" $1 "'"
-	    # result = getKeyInLang(gtype, currentLang)
-	    # update
 	    # FIXME, parent id = self
+	    id = getKeyInLang(gtype, currentLang)
+	    updateParentId(id);
+
 	} else {
 	    parent = getKeyInLang(gtype, english)
 	    # find English parent
