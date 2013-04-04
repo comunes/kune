@@ -206,6 +206,7 @@ public class TextUtils {
   public static String escapeHtmlLight(final String source) {
     String result = source;
     if (source != null) {
+      // This replacement sort is important
       result = result.replaceAll("&", "&amp;");
       result = result.replaceAll("\"", "&quot;");
       // text = text.replaceAll("\'", "&#039;");
