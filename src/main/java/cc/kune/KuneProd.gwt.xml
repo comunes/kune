@@ -28,10 +28,10 @@
   <!-- zh_TW Chinese (Traditional, Taiwan), zh_HK is almost the same -->
 
   <extend-property name="locale"
-    values="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl,eu,gl,sl,pt_BR,zh_HK,zh_TW" />
+    values="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl,eu,gl,sl,pt_BR,zh_HK,zh_TW,eo" />
   <set-property-fallback name="locale" value="en" />
   <set-property name="locale"
-    value="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl,eu,gl,sl,pt_BR,zh_HK,zh_TW" />
+    value="en,es,fr,ca,it,de,ru,ar,tr,ro,hu,pl,eu,gl,sl,pt_BR,zh_HK,zh_TW,eo" />
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave, because it's really slow. -->
