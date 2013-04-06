@@ -66,6 +66,7 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.mbean.MBeanRegistry;
 import cc.kune.core.server.notifier.Addressee;
 import cc.kune.core.server.notifier.NotificationService;
 import cc.kune.core.server.persist.DataSourceKune;
@@ -95,7 +96,7 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 @Singleton
-public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
+public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager, UserManagerDefaultMBean {
 
   public static final Log LOG = LogFactory.getLog(UserManagerDefault.class);
   private final ChatProperties chatProperties;
@@ -124,8 +125,9 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final ParticipantUtils participantUtils, final KuneBasicProperties properties,
       final GroupManager groupManager, final NotificationService notifyService,
       final XmppRosterProvider xmppRoster, final XmppRosterPresenceProvider xmppRosterPresence,
-      final SocialNetworkCache snCache, @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
+      final SocialNetworkCache snCache, @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain, MBeanRegistry mBeanRegistry) {
     super(provider, User.class);
+    mBeanRegistry.registerAsMBean(this, UserManagerDefaultMBean.MBEAN_OBJECT_NAME);
     this.userFinder = finder;
     this.languageManager = languageManager;
     this.countryManager = countryManager;
@@ -146,11 +148,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.UserManager#askForEmailConfirmation(cc.kune
    * .domain.User, cc.kune.core.server.manager.impl.EmailConfirmationType)
-   * 
+   *
    * More info: http://en.wikipedia.org/wiki/Self-service_password_reset
    * http://en.wikipedia.org/wiki/Password_notification_e-mail
    * http://stackoverflow
