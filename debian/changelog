@@ -1,7 +1,14 @@
+kune (0.3.0+b26) unstable; urgency=low
+
+  * Added Esperanto partial translation
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 06 Apr 2013 15:43:56 +0200
+
 kune (0.3.0+b25) unstable; urgency=low
 
   * Added MBeans (thanks to Pablojan)
   * Fix for #257 (purge all)
+	* Fix for #534 Add Add mbean to reindex groups/users
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 04 Apr 2013 13:29:36 +0200
 
