@@ -2,7 +2,8 @@ kune (0.3.0+b25) unstable; urgency=low
 
   * Added MBeans (thanks to Pablojan)
   * Fix for #257 (purge all)
-	* Fix for #534 Add Add mbean to reindex groups/users
+  * Fix for #534 Add Add mbean to reindex groups/users
+  * Fix for #535 Add a mbean task to enable/disable sitemap/htmlunit generation
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 04 Apr 2013 13:29:36 +0200
 
