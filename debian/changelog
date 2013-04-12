@@ -1,6 +1,7 @@
 kune (0.3.0+b26) unstable; urgency=low
 
   * Added Esperanto partial translation
+  * Added Portuguese full translation (thanks to http://kune.cc/#mastabloid)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 06 Apr 2013 15:43:56 +0200
 
