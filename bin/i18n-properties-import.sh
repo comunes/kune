@@ -66,7 +66,13 @@ DELIMITER="|"
 # http://stackoverflow.com/questions/1848415/remove-slash-from-the-end-of-a-variable
 # DIR=${EXTERNAL_SRC%/}/src
 
-# TODO process first *_en and later the rest of languages, so do here a function
+if [[ $EXTERNAL_SRC != *src && $EXTERNAL_SRC != *src/ ]]
+then
+  # We are looking for the src directory of the project
+  EXTERNAL_SRC=${EXTERNAL_SRC%/}"/src/"
+  #echo $EXTERNAL_SRC
+fi
+
 BASEDIR=$(dirname $0)
 
 for i in `(cd $EXTERNAL_SRC; find . -name *$SRC_PREFIX*_$CURRENT_LANG.properties)`

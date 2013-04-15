@@ -1,7 +1,13 @@
+kune (0.3.0+b27) unstable; urgency=low
+
+  * Added Portuguese full translation (thanks to http://kune.cc/#mastabloid)
+  * i18n from properties import/export (wip)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 15 Apr 2013 17:15:47 +0200
+
 kune (0.3.0+b26) unstable; urgency=low
 
   * Added Esperanto partial translation
-  * Added Portuguese full translation (thanks to http://kune.cc/#mastabloid)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 06 Apr 2013 15:43:56 +0200
 
