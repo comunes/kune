@@ -22,6 +22,6 @@ do
 # lang|file-used-in-gtype|trkey|text
 
 #done | grep TO_DEBUG_PUT_SOMETHING_AND_REMOVE_-V_AND_PUT_A_FILE_IN_TEE | tee /dev/null \
-#done | grep everything | tee /tmp/debug-i18n.txt \
+#done | grep something | tee /tmp/debug-i18n.txt \
 done \
 | awk -F "|" -v gtypeprefix=$NAMESPACE -v passwd=$PASS -v username=$USERNAME -v db=$DB -f $BASEDIR/i18n-lib.awk -f $BASEDIR/i18n-import.awk
