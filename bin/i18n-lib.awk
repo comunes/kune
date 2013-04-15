@@ -10,8 +10,13 @@ function sql(operation, noact) {
     return res    
 }
 
-function getLangCode(lang) {
+function getLangId(lang) {
     select = "SELECT id FROM globalize_languages g WHERE code='"lang"'"
+    return sql(select)
+}
+
+function getLangCode(langId) {
+    select = "SELECT code FROM globalize_languages g WHERE id="langId
     return sql(select)
 }
 
@@ -72,7 +77,7 @@ function updateParentId(id) {
 
 BEGIN {
     connect = "mysql -B -p"passwd" -u"username" "db" --skip-column-names -e "
-    english=getLangCode("en")
+    english=getLangId("en")
     # 1819: English 
     # print english
 }
