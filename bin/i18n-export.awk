@@ -11,11 +11,11 @@ BEGIN {
     langCode = getLangCode($5)
     propertiesFile = dest""gtype[2]"_"getLangCode($5)".properties"
     if (langCode == "en") {
-	translation = gtype[3]" = "$3"\n"
+	translation = gtype[3]" = "unescape($3)"\n"
 	redirect(translation, propertiesFile)
     } else {
 	if ($2 != "NULL") {
-	    translation = gtype[3]" = "$2"\n"
+	    translation = gtype[3]" = "unescape($2)"\n"
 	    redirect(translation, propertiesFile)
 	}
     }    

@@ -40,9 +40,27 @@ function escape(text) {
 	gsub("\\&", "\\&amp;", text)
 	gsub("\"", "\\&quot;", text)
 	gsub("—", "\\&#8212;", text)
+	gsub("\\\\", "\\\\\\", text)
 	gsub("'", "\\'", text)
 	gsub("<", "\\&lt;", text)
 	gsub(">", "\\&gt;", text);
+    }
+    return text
+}
+
+function unescape(text) {
+    if (text != "NULL") {
+	# Escape quotes etc (from kune TextUtils.java)
+	# This replacement sort is important
+
+
+	gsub("&#8212;", "—", text)
+	gsub("\\\\\\\\", "\\", text)
+	gsub("&quot;", "\"", text)
+	#gsub("\\'", "'", text)
+	gsub("&lt;", "<", text)
+	gsub("&gt;", ">", text);
+	gsub("&amp;", "\\&", text)
     }
     return text
 }
