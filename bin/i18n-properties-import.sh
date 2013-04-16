@@ -11,6 +11,8 @@ do
   sed -e '$a\' | \
   # Remove empty lines  
   sed '/^[\b]*$/d' | \
+  # Remove comments  
+  sed '/^[\b]*#.*$/d' | \
   # Add file name key to the start (escaping /) and removing the last _langcode.properties 
   sed "s/^/$LANG|`echo $i | sed 's/_..\.properties//g' | sed 's/\//\\\\\//g'`|/g" | \
   # Substitute first " = " with delimiter
