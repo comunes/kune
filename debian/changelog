@@ -1,3 +1,9 @@
+kune (0.3.0+b28) unstable; urgency=low
+
+  * Updated all translations
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 18 Apr 2013 12:51:35 +0200
+
 kune (0.3.0+b27) unstable; urgency=low
 
   * Added Portuguese full translation (thanks to http://kune.cc/#mastabloid)

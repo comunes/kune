@@ -128,6 +128,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String blueAThemeName();
 
+  String brazilianPortuguese();
+
   String buddies();
 
   String busy();
@@ -185,6 +187,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String clear();
 
   String clickAltpageupOrAltpagedownToMoveUpDownInTheListWhileTranslatingAndAltVToCopyTheOriginalTextTheTrans();
+
+  String clickHere();
 
   String clickToGoHereOrDropContentsHereToMoveThem();
 
@@ -273,6 +277,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String currentBackgroundImage();
 
   String currentPassword();
+
+  String customUsedInAButtonToChooseACustomColor();
 
   String defaultAThemeName();
 
@@ -457,6 +463,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String invalidOperation();
 
   String invitationSent();
+
+  String invitationToJoinTheGroupParam();
 
   String invite();
 
@@ -718,6 +726,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String paramHadAddedYouAsABuddyDoYouWantToAddHimHerAlso();
 
+  String paramHasInvitedYouToJoinTheGroupParamInParamPleaseParamToAcceptTheInvitationAndRegisterInThisSiteOrJ();
+
   String paramTheDevelopment();
 
   String paramUnderLicenseParam();
@@ -757,6 +767,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String pleaseUseAFreeLibreModernAndUpdatedNavigatorLikeParamInsteadSomeFunctionalityLikeConcurrentEditionWi();
 
   String polish();
+
+  String portuguese();
 
   String post();
 
@@ -952,6 +964,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String tags();
 
+  String taskboardy();
+
   String tasks();
 
   String thanksForJoiningParamNowYouCanActivelyParticipateInParamYouCanAlsoUseYourPersonalSpaceToPublishConte();
@@ -1023,6 +1037,10 @@ public interface KuneConstants extends ConstantsWithLookup {
   String thisBlogHasnTAnyPostCreateOne();
 
   String thisDemoOfKune();
+
+  String thisDocumentIsNotSavedAreYouSureThatYouWantToNavigateAwayFromIt();
+
+  String thisDocumentIsNotSavedAreYouSureThatYouWantToNavigateAwayFromThisPage();
 
   String thisEmailAddressIsBeingUsedByAnotherUserPleaseTryWithAnotherOne();
 
@@ -1120,6 +1138,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String toStartAChatYouNeedToBeOnline();
 
+  String traditionalChinese();
+
   String translated();
 
   String translateFromOtherNonEnglishLanguage();
@@ -1131,8 +1151,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String trash();
 
   String typeSomeCommaSeparatedKeywordsThatDefineYourGroup();
-
-  String typeSomeKeywordsThatDefineYourGroup();
 
   String typeSomethingToSearchForUsersAndGroupsInParam();
 
@@ -1187,6 +1205,10 @@ public interface KuneConstants extends ConstantsWithLookup {
   String voting();
 
   String warning();
+
+  String warningSessionDataNotAvailable();
+
+  String warningThisDocumentIsNotSavedAreYouSureThatYouWantToNavigateAwayFromThisPageWeAdviseYouToCopyTheCont();
 
   String welcome();
 
