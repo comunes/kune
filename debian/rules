@@ -75,6 +75,8 @@ install/kune::
 	    $(CURDIR)/src/main/resources/db/update-0023-inviation.sql \
             $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql \
             $(CURDIR)/src/main/resources/db/update-0008-i18n-pt-br.sql \
+	    $(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt \
+	    $(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql \
             > $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
         # Add the upgrades algo in the previous install
 	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5
@@ -85,6 +87,7 @@ install/kune::
 	cp $(CURDIR)/src/main/resources/db/update-0023-inviation.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b4
 	cp $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b20
 	cp $(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b24
+	cp $(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b27
 
 # FIXME
 #	cp logrotate $(DEST)/etc/logrotate.d/

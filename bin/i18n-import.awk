@@ -13,7 +13,7 @@ BEGIN {
     if (langCode == "en") {
 	currentLang = english
     } else {
-	currentLang = getLangCode(langCode)
+	currentLang = getLangId(langCode)
     }
     result = getKeyInLang(gtype, currentLang)
     if (result > 0) {
