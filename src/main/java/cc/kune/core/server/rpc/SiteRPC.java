@@ -27,12 +27,12 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.server.InitData;
 import cc.kune.core.server.UserSessionManager;
-import cc.kune.core.server.manager.ExtMediaDescripManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.mapper.KuneMapper;
+import cc.kune.core.server.mbean.MBeanRegistry;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.ChatProperties;
 import cc.kune.core.server.properties.KuneProperties;
@@ -47,11 +47,10 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
 
-public class SiteRPC implements RPC, SiteService {
+public class SiteRPC implements RPC, SiteService, SiteRPCMBean {
   private final ChatProperties chatProperties;
   private final I18nCountryManager countryManager;
   private InitData data;
-  private final ExtMediaDescripManager extMediaDescManager;
   private final KuneProperties kuneProperties;
   private final I18nLanguageManager languageManager;
   private final LicenseManager licenseManager;
@@ -59,6 +58,7 @@ public class SiteRPC implements RPC, SiteService {
   private ReservedWordsRegistryDTO reservedWords;
   private final ServerToolRegistry serverToolRegistry;
   private HashMap<String, GSpaceTheme> siteThemes;
+  private boolean storeUntranslatedString;
   private final UserInfoService userInfoService;
   private final UserSessionManager userSessionManager;
 
@@ -67,7 +67,7 @@ public class SiteRPC implements RPC, SiteService {
       final UserInfoService userInfoService, final LicenseManager licenseManager,
       final KuneMapper mapper, final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-      final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescManager) {
+      final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry) {
     this.userSessionManager = userSessionManager;
     this.userInfoService = userInfoService;
     this.licenseManager = licenseManager;
@@ -77,17 +77,10 @@ public class SiteRPC implements RPC, SiteService {
     this.languageManager = languageManager;
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
-    this.extMediaDescManager = extMediaDescManager;
-    // Gives some warning in openjdk
-    // http://stackoverflow.com/questions/5023520/sending-signals-to-a-running-jvm
-    //
-    // sun.misc.Signal.handle(new sun.misc.Signal("HUP"), new SignalHandler() {
-    // @Override
-    // public void handle(final sun.misc.Signal sig) {
-    // loadProperties(kuneProperties);
-    // }
-    // });
     loadProperties(kuneProperties);
+    // By default we don't collect which part of the client is untranslated
+    storeUntranslatedString = false;
+    mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
   }
 
   private String[] getColors(final String key) {
@@ -107,6 +100,7 @@ public class SiteRPC implements RPC, SiteService {
 
     dataMapped.setgSpaceThemes(siteThemes);
     dataMapped.setReservedWords(reservedWords);
+    dataMapped.setStoreUntranslatedStrings(storeUntranslatedString);
     return dataMapped;
   }
 
@@ -116,6 +110,11 @@ public class SiteRPC implements RPC, SiteService {
       map.put(theme, getThemeFromProperties(theme));
     }
     return map;
+  }
+
+  @Override
+  public boolean getStoreUntranslatedString() {
+    return storeUntranslatedString;
   }
 
   private GSpaceTheme getThemeFromProperties(final String themeName) {
@@ -168,6 +167,11 @@ public class SiteRPC implements RPC, SiteService {
     data = loadInitData();
     siteThemes = getSiteThemes(this.kuneProperties.getList(KuneProperties.WS_THEMES));
     reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
+  }
+
+  @Override
+  public void setStoreUntranslatedString(final boolean storeUntranslatedString) {
+    this.storeUntranslatedString = storeUntranslatedString;
   }
 
 }

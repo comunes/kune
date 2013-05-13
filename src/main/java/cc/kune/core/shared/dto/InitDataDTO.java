@@ -56,6 +56,7 @@ public class InitDataDTO implements IsSerializable {
   private String siteLogoUrlOnOver;
   private String siteShortName;
   private String siteUrl;
+  private boolean storeUntranslatedStrings;
   private String[] timezones;
   private boolean translatorEnabled;
   private List<String> tutorialLanguages;
@@ -177,6 +178,10 @@ public class InitDataDTO implements IsSerializable {
 
   public String getSiteUrl() {
     return siteUrl;
+  }
+
+  public boolean getStoreUntranslatedStrings() {
+    return storeUntranslatedStrings;
   }
 
   public String[] getTimezones() {
@@ -329,6 +334,10 @@ public class InitDataDTO implements IsSerializable {
 
   public void setSiteUrl(final String siteUrl) {
     this.siteUrl = siteUrl;
+  }
+
+  public void setStoreUntranslatedStrings(final boolean shouldStoreUntranslatedStrings) {
+    this.storeUntranslatedStrings = shouldStoreUntranslatedStrings;
   }
 
   public void setTimezones(final String[] timezones) {
