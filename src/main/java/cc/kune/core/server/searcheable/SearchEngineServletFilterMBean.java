@@ -20,6 +20,7 @@ package cc.kune.core.server.searcheable;
 
 import cc.kune.core.server.mbean.MBeanConstants;
 
+// TODO: Auto-generated Javadoc
 /**
  * MBean interface for JMX management of the {@link SearchEngineServletFilter}.
  */
@@ -27,6 +28,13 @@ public interface SearchEngineServletFilterMBean {
 
     /** The Constant MBEAN_OBJECT_NAME. */
     public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SearchEngineServletFilter";
+
+    /**
+     * Enable or disable search functionality.
+     *
+     * @param enabled the new enabled
+     */
+    void setEnabled(boolean enabled);
 
     /**
      * Clear the htmlunit cache.
@@ -79,5 +87,12 @@ public interface SearchEngineServletFilterMBean {
      * Client close all windows (htmlunit).
      */
     void closeAllWindows();
+
+    /**
+     * Checks if is enabled.
+     *
+     * @return true, if is enable
+     */
+    boolean isEnabled();
 
 }

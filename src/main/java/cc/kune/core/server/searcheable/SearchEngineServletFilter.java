@@ -36,6 +36,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -92,23 +93,24 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
 
     public static final Log LOG = LogFactory.getLog(SearchEngineServletFilter.class);
 
+    public static final String SEARCH_ENGINE_FILTER_ATTRIBUTE = "searchEngineFilterAttribute";
     private static final int THREADS = 2;
 
     private static final int TIMEOUT = 20000;
-
-    public static final String SEARCH_ENGINE_FILTER_ATTRIBUTE = "searchEngineFilterAttribute";
 
     private Cache cache;
 
     private WebClient client;
 
+    private boolean enabled;
+
     private ExecutorService executor;
+
+    private int executorSize;
 
     private FilterConfig filterConfig;
 
     private final Object waitForUnload = new Object();
-
-    private int executorSize;
 
     @Override
     public void clearCache() {
@@ -123,7 +125,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
      * javax.servlet.ServletResponse, javax.servlet.FilterChain)
      */
@@ -148,6 +150,12 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
             final String queryString = httpReq.getQueryString();
 
             if ((queryString != null) && (queryString.contains(SiteParameters.ESCAPED_FRAGMENT_PARAMETER))) {
+                if (!enabled) {
+                    final HttpServletResponse httpRes = (HttpServletResponse) response;
+                    httpRes.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE,
+                            "Search Engine service disabled temporally");
+                    return;
+                }
                 final Future<String> result = executor.submit(new Callable<String>() {
 
                     @Override
@@ -240,6 +248,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
     @Override
     public void init(final FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
+        enabled = true;
         cache = new Cache();
         setCacheMaxSize(INIT_CACHE_SIZE);
         initWebClient();
@@ -250,6 +259,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
         filterConfig.getServletContext().setAttribute(SEARCH_ENGINE_FILTER_ATTRIBUTE, this);
     }
 
+    @Override
     public void initWebClient() {
         LOG.info("Initializing web client");
         client = new WebClient(BrowserVersion.FIREFOX_3_6);
@@ -274,6 +284,11 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
     }
 
     @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
     public void notify(final String message, final Object origin) {
         if ("Obsolete content type encountered: 'application/x-javascript'.".equals(message)
                 || "Obsolete content type encountered: 'application/javascript'.".equals(message)
@@ -285,12 +300,17 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
     }
 
     @Override
-    public void setCacheMaxSize(int size) {
+    public void setCacheMaxSize(final int size) {
         cache.setMaxSize(size);
     }
 
     @Override
-    public void setExecutorThreadSize(int size) {
+    public void setEnabled(final boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public void setExecutorThreadSize(final int size) {
         LOG.info("Setting executors size: " + size);
         shutdownAndAwaitTermination(executor);
         executor = Executors.newFixedThreadPool(size);

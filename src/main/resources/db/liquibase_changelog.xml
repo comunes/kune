@@ -196,4 +196,16 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+  <changeSet id="30" author="vjrj">
+    <comment>Chinese and other country changes</comment>
+    <sqlFile path="src/main/resources/db/update-0025-i18n-country-codes.txt"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
+  <changeSet id="31" author="vjrj">
+    <comment>Translation limit bigger</comment>
+    <sqlFile path="src/main/resources/db/update-0026-i18n-max-size.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
 </databaseChangeLog>

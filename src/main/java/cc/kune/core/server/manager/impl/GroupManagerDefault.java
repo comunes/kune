@@ -42,6 +42,7 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.manager.file.FileUtils;
+import cc.kune.core.server.mbean.MBeanRegistry;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneBasicProperties;
@@ -71,7 +72,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager {
+public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager, GroupManagerDefaultMBean {
 
   private final FileManager fileManager;
   private final GroupFinder finder;
@@ -91,8 +92,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       final KuneBasicProperties properties, final LicenseManager licenseManager,
       final LicenseFinder licenseFinder, final FileManager fileManager,
       final ServerToolRegistry serverToolRegistry, final Provider<TrashServerTool> trashTool,
-      final I18nTranslationService i18n, final SocialNetworkCache snCache) {
+      final I18nTranslationService i18n, final SocialNetworkCache snCache, MBeanRegistry mBeanRegistry) {
     super(provider, Group.class);
+    mBeanRegistry.registerAsMBean(this, GroupManagerDefaultMBean.MBEAN_OBJECT_NAME);
     this.finder = finder;
     this.userFinder = userFinder;
     this.kuneProperties = kuneProperties;
