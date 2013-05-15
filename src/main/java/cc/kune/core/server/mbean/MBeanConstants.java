@@ -20,9 +20,10 @@ package cc.kune.core.server.mbean;
 
 public class MBeanConstants {
 
-  public static final String PREFIX = "cc.kune.mbeans:type=";
+	public static final String PREFIX = "cc.kune.mbeans:type=";
+	public static final String LOG4J_PREFIX_DEFAULT = "log4j:hiearchy=default";
 
-  private MBeanConstants() {
-  }
+	private MBeanConstants() {
+	}
 
 }
