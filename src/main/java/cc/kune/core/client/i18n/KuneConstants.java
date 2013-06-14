@@ -760,6 +760,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String pleaseEnterYourEmailAddressYouWillReceiveALinkToCreateANewPasswordViaEmail();
 
+  String pleaseProvideADifferentNewPassword();
+
   String pleaseProvideHereACommaSeparatedListOfEmails();
 
   String pleaseSignInAgain();
