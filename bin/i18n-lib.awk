@@ -1,8 +1,10 @@
 #!/usr/bin/gawk
-function sql(operation, noact) {
+function sql(operation) {
     cmd = connect "\""operation"\""
-    if (noact > 0) 
+    if (verbose > 0)  
 	print cmd
+    if (noact > 0) {
+    }
     else {
 	cmd |& getline res
 	close(cmd)
@@ -19,7 +21,6 @@ function getLangCode(langId) {
     select = "SELECT code FROM globalize_languages g WHERE id="langId
     return sql(select)
 }
-
 
 function getKeyInLang(somekey, somelang) {
     count = sql("SELECT count(*) FROM globalize_translations g WHERE gtype='"somekey"' AND language_id='"somelang"'")    
