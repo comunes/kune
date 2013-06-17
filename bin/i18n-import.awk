@@ -16,7 +16,11 @@ BEGIN {
 	currentLang = getLangId(langCode)
     }
     if (verbose > 0)
-	print "Current lang: " currentLang " code:" langCode
+	print "Current lang id: " currentLang " code: " langCode
+    if (currentLang <= 0) {
+	print "Error getting the lang code, so stopping"
+	exit
+    }
     result = getKeyInLang(gtype, currentLang)
     if (result > 0) {
 	if (verbose > 0)
