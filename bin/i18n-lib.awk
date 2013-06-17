@@ -1,5 +1,5 @@
 #!/usr/bin/gawk
-function sql(operation) {
+function sql(operation, noact) {
     cmd = connect "\""operation"\""
     if (verbose > 0)  
 	print cmd
@@ -85,7 +85,7 @@ function insertNewItem(trkey, text, gtype, lang, parent, keyValue, langCode) {
 	"(id, facet, item_id, noteForTranslators, pluralization_index, table_name, " \
 	"text, tr_key, gtype, language_id, parent_id) "			\
 	"VALUES (NULL,'',NULL,'',1,'',"text","trkey", '"gtype"', "lang", "parent")"
-    sql(insert);
+    sql(insert, noact);
     logInsert(keyValue, langCode)
 }
 
