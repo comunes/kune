@@ -914,7 +914,11 @@ table.k-folder-viewer {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   kfilter: alpha(opacity =
+<<<<<<< HEAD
                                  90);
+=======
+                              90);
+>>>>>>> aa52a73... Sharing dialog (wip of #550)
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1377,6 +1381,7 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 }
 
 /* Share dialog */
+
 .k-sharelist-title {
   font-size: 14px;
   font-weight: bold;
