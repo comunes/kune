@@ -1,5 +1,5 @@
-GCHARSET                                       "UTF-8
-            "; body {
+GCHARSET                                        "UTF-8
+             "; body {
   background-color: transparent;
   color: black;
   font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
@@ -916,7 +916,7 @@ table.k-folder-viewer {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   kfilter: alpha(opacity =
-                             90);
+                              90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1358,7 +1358,8 @@ button.k-aurorisColorPicker-btn {
   margin: 10px 0 5px;
 }
 
-div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
+div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
+  {
   margin: 2px;
 }
 
@@ -1375,4 +1376,20 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
 .k-iconfontlabel {
   font-size: 16px;
   font-family: kuneicons;
+}
+
+/* Share dialog */
+
+.k-sharelist-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: brown;
+}
+
+.k-sharelist-scroll {
+  overflow-x: hidden;
+}
+
+.k-shareitem {
+  height: 18px;
 }
