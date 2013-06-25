@@ -25,6 +25,7 @@ import cc.kune.gspace.client.licensewizard.LicenseWizardPresenter;
 import cc.kune.gspace.client.maxmin.MaxMinWorkspacePresenter;
 import cc.kune.gspace.client.options.GroupOptionsPresenter;
 import cc.kune.gspace.client.options.UserOptionsPresenter;
+import cc.kune.gspace.client.share.ShareDialogPresenter;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
@@ -54,6 +55,8 @@ public interface GSpaceGinjector extends Ginjector {
   AsyncProvider<LicenseWizardPresenter> getLicenseWizardPresenter();
 
   AsyncProvider<MaxMinWorkspacePresenter> getMaxMinWorkspacePresenter();
+
+  AsyncProvider<ShareDialogPresenter> getShareDialogPresenter();
 
   AsyncProvider<SitebarSearchPresenter> getSitebarSearchPresenter();
 

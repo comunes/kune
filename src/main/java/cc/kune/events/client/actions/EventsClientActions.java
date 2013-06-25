@@ -47,6 +47,7 @@ import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareSettingsMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -86,6 +87,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<PurgeContainerBtn> purgeFolderBtn, final Provider<ExportCalendarMenuItem> export,
       final Provider<CalendarGoNextBtn> calNextBtn, final CalendarOnOverMenu onOverMenu,
       final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh,
+      final Provider<ShareSettingsMenuItem> shareSettings,
       final Provider<ShareInTwitterMenuItem> shareInTwitter,
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
@@ -111,6 +113,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareSettings, contents);
     // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
     // shareInFacebook, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);

@@ -1,6 +1,5 @@
-/*
- *
- * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
+/*******************************************************************************
+ * Copyright (C) 2007, 2013 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,30 +14,22 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
+ *******************************************************************************/
+
+package cc.kune.gspace.client.share;
+
+import cc.kune.common.shared.i18n.I18n;
+
+/**
+ * The Class ShareToAdminsPanel is a lists of user/groups with admin permissions
  */
-package cc.kune.wave.client.kspecific;
+public class ShareToAdminsPanel extends AbstractShareToListPanel implements ShareToAdminsView {
 
-import cc.kune.wave.client.WebClient;
-
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-
-public class WaveClientProvider implements Provider<WaveClientView> {
-
-  private final Provider<? extends WaveClientView> webClientProv;
-
-  @Inject
-  public WaveClientProvider(final Provider<WebClient> webClient,
-      final Provider<WebClientMock> webClientMock) {
-    // webClientProv = webClient;
-    // If you want not to load the Webclient Mock
-    webClientProv = webClientMock;
-  }
-
-  @Override
-  public WaveClientView get() {
-    return webClientProv.get();
+  /**
+   * Instantiates a new share to admins panel.
+   */
+  ShareToAdminsPanel() {
+    super(I18n.t("who can admin this:"));
   }
 
 }
