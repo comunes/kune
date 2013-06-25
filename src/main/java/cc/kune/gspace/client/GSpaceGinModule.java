@@ -119,6 +119,8 @@ import cc.kune.gspace.client.share.ShareToAdminsPanel;
 import cc.kune.gspace.client.share.ShareToAdminsView;
 import cc.kune.gspace.client.share.ShareToCollabsPanel;
 import cc.kune.gspace.client.share.ShareToCollabsView;
+import cc.kune.gspace.client.share.ShareToOthersPanel;
+import cc.kune.gspace.client.share.ShareToTheNetPanel;
 import cc.kune.gspace.client.share.ShareToViewersPanel;
 import cc.kune.gspace.client.share.ShareToViewersView;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
@@ -256,6 +258,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(ShareToCollabsView.class, ShareToCollabsPanel.class);
     s(ShareToViewersView.class, ShareToViewersPanel.class);
     s(ShareItemFactory.class);
+    s(ShareToTheNetPanel.class);
+    s(ShareToOthersPanel.class);
 
     requestStaticInjection(ShareItemFactory.class);
   }

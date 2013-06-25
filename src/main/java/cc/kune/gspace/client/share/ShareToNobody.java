@@ -33,7 +33,7 @@ public class ShareToNobody extends AbstractShareItem {
   @Inject
   public ShareToNobody(final ActionSimplePanel actionsPanel, final CommonResources res) {
     super(actionsPanel);
-    withIcon(res.worldDeny16());
+    withIcon(res.worldDeny16()).withText(I18n.t("Nobody"));
   }
 
   public void init() {

@@ -55,8 +55,11 @@ public abstract class AbstractShareItem extends Composite {
     flow = new FlowPanel();
     iconLabel = new IconLabel();
     flow.add(iconLabel);
-    flow.add(actionsPanel);
+    flow.add(this.actionsPanel);
     flow.setStyleName("k-shareitem");
+    iconLabel.addStyleName("k-fl");
+    this.actionsPanel.addStyleName("k-fr");
+    this.actionsPanel.addStyleName("k-share-item-actions");
     initWidget(flow);
   }
 

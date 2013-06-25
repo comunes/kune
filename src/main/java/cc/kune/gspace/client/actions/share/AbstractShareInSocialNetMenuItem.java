@@ -20,64 +20,18 @@
 
 package cc.kune.gspace.client.actions.share;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.client.utils.ClientFormattedString;
-import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateTokenUtils;
-import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.google.gwt.resources.client.ImageResource;
 
 public class AbstractShareInSocialNetMenuItem extends MenuItemDescriptor {
 
-  public static class AbstractShareInSocialNetAction extends AbstractExtendedAction {
-
-    private ClientFormattedString url;
-
-    public AbstractShareInSocialNetAction() {
-
-    }
-
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-      KuneWindowUtils.open(url.getString());
-    }
-
-    public void setUrl(final ClientFormattedString url) {
-      this.url = url;
-    }
-
-  }
-
-  protected static String getCurrentUrl(final Session session) {
-    return StateTokenUtils.getGroupSpaceUrl(session.getCurrentState().getStateToken());
-  }
-
-  protected static String getTitle(final Session session) {
-    final StateAbstractDTO state = session.getCurrentState();
-    final String prefix = session.getCurrentGroupShortName() + ", ";
-    if (!(state instanceof StateContentDTO)) {
-      return prefix
-          + (((StateContainerDTO) state).getContainer().isRoot() ? I18n.t(state.getTitle())
-              : state.getTitle());
-    } else {
-      return prefix + session.getCurrentState().getTitle();
-    }
-  }
-
-  protected final Session session;
-
   public AbstractShareInSocialNetMenuItem(final AbstractShareInSocialNetAction action,
       final Session session, final ContentViewerShareMenu menu, final String text,
       final ImageResource icon, final ClientFormattedString url) {
     super(action);
-    this.session = session;
     withText(text).withIcon(icon).withParent(menu, false);
     action.setUrl(url);
     setEnabled(session.getCurrentState().getGroupRights().isVisible());

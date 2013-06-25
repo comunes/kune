@@ -77,7 +77,8 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.create(descriptor);
-    menu = new MenuBar(true, SubMenuResources.INSTANCE);
+    menu = new MenuBar((Boolean) descriptor.getValue(MenuDescriptor.MENU_VERTICAL),
+        SubMenuResources.INSTANCE);
     menu.setAutoOpen(true);
     menu.setFocusOnHoverEnabled(true);
     menu.setAnimationEnabled(true);
