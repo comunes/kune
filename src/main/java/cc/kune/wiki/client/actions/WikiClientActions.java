@@ -49,6 +49,7 @@ import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareSettingsMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -84,6 +85,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<MoveContentMenuItem> moveContentMenuItem, final WikiPageNewMenu wikipageNewMenu,
+      final Provider<ShareSettingsMenuItem> shareSettings,
       final Provider<ShareInTwitterMenuItem> shareInTwitter,
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
@@ -110,6 +112,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareSettings, contents);
     // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
     // shareInFacebook, all);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);

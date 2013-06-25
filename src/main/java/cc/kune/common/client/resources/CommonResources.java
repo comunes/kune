@@ -148,4 +148,7 @@ public interface CommonResources extends ClientBundle {
 
   @Source("icons/world-16.png")
   ImageResource world16();
+
+  @Source("icons/world-deny-16.png")
+  ImageResource worldDeny16();
 }
