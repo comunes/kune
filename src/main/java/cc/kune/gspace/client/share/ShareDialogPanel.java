@@ -40,8 +40,9 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
 
   @Inject
   public ShareDialogPanel(final ShareToAdminsView adminsPanel, final ShareToCollabsView collabsPanel,
-      final ShareToViewersView viewersPanel) {
-    final Builder builder = new BasicTopDialog.Builder(DIALOG_ID, true, false, I18n.getDirection()).autoscroll(
+      final ShareToViewersView viewersPanel, final ShareToTheNetPanel shareToTheNetPanel,
+      final ShareToOthersPanel shareToOthersPanel) {
+    final Builder builder = new BasicTopDialog.Builder(DIALOG_ID, false, false, I18n.getDirection()).autoscroll(
         true).title(I18n.t("Share settings"));
     // builder.icon(icon);
     builder.firstButtonTitle(I18n.t("Close")).firstButtonId(FIRSTBUTTON_ID);
@@ -52,11 +53,12 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
         dialog.hide();
       }
     });
-
     vp = new VerticalPanel();
     vp.add(adminsPanel.getView());
     vp.add(collabsPanel.getView());
     vp.add(viewersPanel.getView());
+    vp.add(shareToTheNetPanel);
+    vp.add(shareToOthersPanel);
     dialog.getInnerPanel().add(vp);
   }
 

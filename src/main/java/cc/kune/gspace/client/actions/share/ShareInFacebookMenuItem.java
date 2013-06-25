@@ -54,10 +54,10 @@ public class ShareInFacebookMenuItem extends AbstractShareInSocialNetMenuItem {
         ClientFormattedString.build(
             false,
             URL_TEMPLATE,
-            URL.encode(getCurrentUrl(session)),
+            URL.encode(ShareInSocialNetUtils.getCurrentUrl(session)),
             URL.encodeQueryString(downUtils.getGroupLogo(session.getCurrentState().getGroup())),
-            URL.encode(getTitle(session)),
+            URL.encode(ShareInSocialNetUtils.getTitle(session)),
             URL.encode(i18n.tWithNT("via [%s]", "used in references 'something via @someone'",
-                i18n.getSiteCommonName())), getCurrentUrl(session)));
+                i18n.getSiteCommonName())), ShareInSocialNetUtils.getCurrentUrl(session)));
   }
 }

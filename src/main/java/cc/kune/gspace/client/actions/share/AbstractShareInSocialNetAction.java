@@ -16,37 +16,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.share;
+package cc.kune.gspace.client.actions.share;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.resources.CommonResources;
-import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.client.ui.KuneWindowUtils;
+import cc.kune.common.client.utils.ClientFormattedString;
 
-import com.google.inject.Inject;
+public class AbstractShareInSocialNetAction extends AbstractExtendedAction {
 
-public class ShareToEveryone extends AbstractShareItem {
+  private ClientFormattedString url;
 
-  @Inject
-  public ShareToEveryone(final ActionSimplePanel actionsPanel, final CommonResources res) {
-    super(actionsPanel);
-    withIcon(res.world16()).withText(I18n.t("Anyone"));
+  public AbstractShareInSocialNetAction() {
+
   }
 
-  public void init() {
-    final ButtonDescriptor descr = new ButtonDescriptor(I18n.t("Don't share"),
-        new AbstractExtendedAction() {
-          @Override
-          public void actionPerformed(final ActionEvent event) {
-            // TODO
-            NotifyUser.info("In development");
-          }
-        });
-    descr.withToolTip(I18n.t("Don't share this with everyone"));
-    super.add(descr);
+  @Override
+  public void actionPerformed(final ActionEvent event) {
+    KuneWindowUtils.open(url.getString());
   }
 
+  public void setUrl(final ClientFormattedString url) {
+    this.url = url;
+  }
 }
