@@ -18,6 +18,7 @@
 
 package cc.kune.gspace.client.share;
 
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
 
 import com.google.gwt.user.client.ui.IsWidget;
@@ -26,6 +27,6 @@ public interface ShareListView {
 
   IsWidget getView();
 
-  void setState(GroupListDTO groupList);
+  void setState(GroupDTO currentGroup, GroupListDTO groupList);
 
 }

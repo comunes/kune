@@ -39,18 +39,19 @@ public class ShareToEntity extends AbstractShareItem {
     this.downloadUtils = downloadUtils;
   }
 
-  public void init(final GroupDTO group) {
+  public void init(final GroupDTO group, final boolean canBeRemoved) {
     withText(group.getLongName());
     withIcon(downloadUtils.getGroupLogo(group));
-    final LabelDescriptor descr = new LabelDescriptor(I18n.t("Remove"));
-    descr.setAction(new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        // TODO
-        NotifyUser.info("In development");
-      }
-    });
-    super.add(descr);
+    if (canBeRemoved) {
+      final LabelDescriptor descr = new LabelDescriptor(I18n.t("Remove"), new AbstractExtendedAction() {
+        @Override
+        public void actionPerformed(final ActionEvent event) {
+          // TODO
+          NotifyUser.info("In development");
+        }
+      });
+      super.add(descr);
+    }
   }
 
 }

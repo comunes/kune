@@ -34,18 +34,14 @@ public class ShareToNobody extends AbstractShareItem {
   public ShareToNobody(final ActionSimplePanel actionsPanel, final CommonResources res) {
     super(actionsPanel);
     withIcon(res.worldDeny16()).withText(I18n.t("Nobody"));
-  }
-
-  public void init() {
-    final LabelDescriptor descr = new LabelDescriptor(I18n.t(I18n.t("Share"),
-        I18n.t("Share with everyone")));
-    descr.setAction(new AbstractExtendedAction() {
+    final LabelDescriptor descr = new LabelDescriptor(I18n.t("Share"), new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
         // TODO
         NotifyUser.info("In development");
       }
     });
+    descr.withToolTip(I18n.t("Share with everyone"));
     super.add(descr);
   }
 

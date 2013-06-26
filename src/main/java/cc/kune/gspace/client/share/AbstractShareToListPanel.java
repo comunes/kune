@@ -36,8 +36,6 @@ public abstract class AbstractShareToListPanel extends Composite implements Shar
 
   private static final String SCROLL_HEIGHT = "50px";
 
-  private static final String SCROLL_WIDTH = "220px";
-
   private final VerticalPanel itemsPanel;
 
   /**
@@ -54,7 +52,6 @@ public abstract class AbstractShareToListPanel extends Composite implements Shar
     final ScrollPanel scroll = new ScrollPanel();
     // scroll.setHeight(SCROLL_HEIGHT);
     DOM.setStyleAttribute(scroll.getElement(), "maxHeight", SCROLL_HEIGHT);
-    scroll.setWidth(SCROLL_WIDTH);
     scroll.setStyleName("k-sharelist-scroll");
     scroll.add(itemsPanel);
     title.setText(titleText);
@@ -69,7 +66,7 @@ public abstract class AbstractShareToListPanel extends Composite implements Shar
   }
 
   @Override
-  public void setState(final GroupListDTO groupList) {
+  public void setState(final GroupDTO currentGroup, final GroupListDTO groupList) {
     itemsPanel.clear();
     if (groupList.getMode().equals(GroupListDTO.NOBODY)) {
       itemsPanel.add(ShareItemFactory.getShareToNobody());
@@ -79,7 +76,7 @@ public abstract class AbstractShareToListPanel extends Composite implements Shar
       } else {
         for (final GroupDTO group : groupList.getList()) {
           final ShareToEntity entity = ShareItemFactory.getEntity();
-          entity.init(group);
+          entity.init(group, !group.equals(currentGroup));
           itemsPanel.add(entity);
         }
       }
