@@ -914,7 +914,7 @@ table.k-folder-viewer {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
   kfilter: alpha(opacity =
-                              90);
+                                 90);
   -moz-opacity: 0.90;
   -khtml-opacity: 0.90;
   opacity: 0.90;
@@ -1377,7 +1377,6 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 }
 
 /* Share dialog */
-
 .k-sharelist-title {
   font-size: 14px;
   font-weight: bold;
@@ -1386,6 +1385,7 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 
 .k-sharelist-scroll {
   overflow-x: hidden;
+  width: 250px;
 }
 
 .k-shareitem {
@@ -1395,18 +1395,41 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 
 div.k-shareitem {
   padding-left: 10px;
+  width: 230px;
 }
 
 div.k-shareitem div.k-iconlabel {
   padding-left: 5px;
+  overflow: hidden;
+  width: 120px;
 }
 
 .k-share-item-actions {
   color: #999999;
- /*  color: #e6e6e6; */
+  /*  color: #e6e6e6; */
+  cursor: pointer;
+  font-size: 11px;
+  width: 60px;
+  float: left;
 }
 
 .k-share-others {
+  margin-top: 5px;
   background-color: #f2f2f2;
   padding: 10px;
+  color: #aa4400;
+}
+
+.k-share-searchbox {
+  float: left;
+}
+
+.k-share-searchbox-text {
+  margin: 1px 6px 0 3px;
+  padding-left: 1px;
+  color: #deaa87;
+  position: relative;
+  z-index: -1px;
+  top: -20px;
+  left: 5px;
 }

@@ -18,6 +18,7 @@
 
 package cc.kune.gspace.client.share;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.shared.i18n.I18n;
@@ -42,6 +43,7 @@ public class ShareToTheNetPanel extends Composite {
     flow.add(label);
 
     final MenuDescriptor menu = new MenuDescriptor(I18n.t("social nets"));
+    menu.withStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
     menu.setVertical(false);
     twitterItem.withParent(menu, false).withText("");
     gPlusItem.withParent(menu, false).withText("");
