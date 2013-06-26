@@ -113,6 +113,16 @@ public class AccessLists {
     this.id = id;
   }
 
+  public void setList(final AccessRol rol, final GroupList list) {
+    if (rol == AccessRol.Administrator) {
+      this.admins = list;
+    } else if (rol == AccessRol.Editor) {
+      this.editors = list;
+    } else {
+      this.viewers = list;
+    }
+  }
+
   @Override
   public String toString() {
     return "AccessList[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";
