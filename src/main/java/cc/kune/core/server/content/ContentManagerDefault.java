@@ -55,12 +55,16 @@ import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.utils.FilenameUtils;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
+import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
+import cc.kune.domain.GroupList;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.Rate;
 import cc.kune.domain.Revision;
@@ -180,6 +184,38 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
     final Content content = finder.getContent(contentId);
     return addParticipants(user, content, members.toArray(new String[members.size()]));
+  }
+
+  public Content allowAnyone(final Content content, final AccessRol rol, final boolean allow) {
+    final AccessLists acl = content.getAccessLists();
+    // Group group = content.getContainer().getOwner();
+    GroupList list;
+    switch (rol) {
+    case Administrator:
+      list = acl.getAdmins();
+      break;
+    case Editor:
+      list = acl.getEditors();
+      break;
+    case Viewer:
+      list = acl.getViewers();
+      break;
+    default:
+      throw new DefaultException("Error setting ACL");
+    }
+    final boolean isEmpty = list.isEmpty();
+    if (allow) {
+      list.setMode(GroupListMode.EVERYONE);
+    } else {
+      if (isEmpty) {
+        list.setMode(GroupListMode.NOBODY);
+      } else {
+        list.setMode(GroupListMode.NORMAL);
+      }
+    }
+    acl.setList(rol, list);
+    save(content);
+    return content;
   }
 
   private void clearEventsCacheIfNecessary(final Container previousParent) {
