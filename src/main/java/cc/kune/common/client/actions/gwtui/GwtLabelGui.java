@@ -19,11 +19,17 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
+import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.shared.res.KuneIcon;
+import cc.kune.common.client.tooltip.Tooltip;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Label;
 
 public class GwtLabelGui extends AbstractGuiItem {
@@ -49,6 +55,16 @@ public class GwtLabelGui extends AbstractGuiItem {
       label.ensureDebugId(id);
     }
     initWidget(label);
+    label.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        final AbstractAction action = descriptor.getAction();
+        if (action != null) {
+          action.actionPerformed(new ActionEvent(label, getTargetObjectOfAction(descriptor),
+              Event.as(event.getNativeEvent())));
+        }
+      }
+    });
     configureItemFromProperties();
     return this;
   }
@@ -77,6 +93,16 @@ public class GwtLabelGui extends AbstractGuiItem {
   @Override
   public void setText(final String text) {
     label.setText(text, descriptor.getDirection());
+  }
+
+  @Override
+  public void setToolTipText(final String tooltipText) {
+    Tooltip.to(label, tooltipText);
+  }
+
+  @Override
+  public void setVisible(final boolean visible) {
+    super.setVisible(visible);
   }
 
   @Override

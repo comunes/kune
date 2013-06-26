@@ -19,20 +19,34 @@
  */
 package cc.kune.common.client.actions.ui.descrip;
 
+import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.BaseAction;
 
 public class LabelDescriptor extends AbstractGuiActionDescrip {
 
   public LabelDescriptor() {
-    super(new BaseAction("", null));
+    this("", "");
   }
 
   public LabelDescriptor(final String text) {
-    super(new BaseAction(text, null));
+    this(text, "");
+  }
+
+  public LabelDescriptor(final String text, final AbstractAction action) {
+    this(text, null, action);
   }
 
   public LabelDescriptor(final String text, final String tooltip) {
     super(new BaseAction(text, tooltip));
+    putValue(Action.NAME, text);
+    putValue(Action.TOOLTIP, tooltip);
+  }
+
+  public LabelDescriptor(final String text, final String tooltip, final AbstractAction action) {
+    super(action);
+    putValue(Action.NAME, text);
+    putValue(Action.TOOLTIP, tooltip);
   }
 
   @Override
