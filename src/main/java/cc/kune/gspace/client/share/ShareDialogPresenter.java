@@ -24,6 +24,7 @@ package cc.kune.gspace.client.share;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.AccessListsDTO;
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.google.gwt.event.shared.EventBus;
@@ -94,9 +95,10 @@ public class ShareDialogPresenter extends
   public void show() {
     final StateContainerDTO cnt = (StateContainerDTO) session.getCurrentState();
     final AccessListsDTO acl = cnt.getAccessLists();
-    adminsView.setState(acl.getAdmins());
-    collabsView.setState(acl.getEditors());
-    viewersView.setState(acl.getViewers());
+    final GroupDTO currentGroup = cnt.getGroup();
+    adminsView.setState(currentGroup, acl.getAdmins());
+    collabsView.setState(currentGroup, acl.getEditors());
+    viewersView.setState(currentGroup, acl.getViewers());
     getView().show();
   }
 }
