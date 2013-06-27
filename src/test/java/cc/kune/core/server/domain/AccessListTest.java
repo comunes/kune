@@ -38,7 +38,7 @@ import cc.kune.domain.GroupList;
  * The Class AccessListTest make the test of {@link AccessListsDTO} table.
  */
 public class AccessListTest {
-  private AccessRightsServiceDefault accessRightsManager;
+  private AccessRightsServiceDefault accessRightsService;
   private AccessLists acl;
   private Group group1;
   private Group group2;
@@ -60,7 +60,7 @@ public class AccessListTest {
     group1 = new Group("one", "group one");
     group2 = new Group("two", "group two");
     group3 = new Group("three", "group three");
-    accessRightsManager = new AccessRightsServiceDefault();
+    accessRightsService = new AccessRightsServiceDefault();
   }
 
   @Test
@@ -147,9 +147,39 @@ public class AccessListTest {
     verify(1, 1, 0);
   }
 
+  @Test
+  public void testSequence() {
+    configure(NORMAL, NORMAL, NOBODY);
+    acl.getAdmins().add(group1);
+    verify(1, 0, 0);
+    verify(group1, true, true, true);
+    verify(group2, false, false, false);
+    verify(group3, false, false, false);
+    acl.getEditors().add(group2);
+    verify(group1, true, true, true);
+    verify(group2, false, true, true);
+    verify(group3, false, false, false);
+    verify(1, 1, 0);
+    configure(NORMAL, NOBODY, NOBODY);
+    verify(group1, true, true, true);
+    verify(group2, false, false, false);
+    verify(group3, false, false, false);
+    verify(1, 1, 0);
+    configure(NORMAL, NORMAL, NOBODY);
+    verify(group1, true, true, true);
+    verify(group2, false, true, true);
+    verify(group3, false, false, false);
+    verify(1, 1, 0);
+    acl.getEditors().remove(group2);
+    verify(group1, true, true, true);
+    verify(group2, false, false, false);
+    verify(group3, false, false, false);
+    verify(1, 0, 0);
+  }
+
   private void verify(final Group group, final boolean administrable, final boolean editable,
       final boolean visible) {
-    final AccessRights rights = accessRightsManager.get(group, acl);
+    final AccessRights rights = accessRightsService.get(group, acl);
     assertEquals(administrable, rights.isAdministrable());
     assertEquals(editable, rights.isEditable());
     assertEquals(visible, rights.isVisible());

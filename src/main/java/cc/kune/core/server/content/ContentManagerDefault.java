@@ -186,33 +186,10 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return addParticipants(user, content, members.toArray(new String[members.size()]));
   }
 
-  public Content allowAnyone(final Content content, final AccessRol rol, final boolean allow) {
+  public Content addToAcl(final Content content, final Group group, final AccessRol rol) {
     final AccessLists acl = content.getAccessLists();
-    // Group group = content.getContainer().getOwner();
-    GroupList list;
-    switch (rol) {
-    case Administrator:
-      list = acl.getAdmins();
-      break;
-    case Editor:
-      list = acl.getEditors();
-      break;
-    case Viewer:
-      list = acl.getViewers();
-      break;
-    default:
-      throw new DefaultException("Error setting ACL");
-    }
-    final boolean isEmpty = list.isEmpty();
-    if (allow) {
-      list.setMode(GroupListMode.EVERYONE);
-    } else {
-      if (isEmpty) {
-        list.setMode(GroupListMode.NOBODY);
-      } else {
-        list.setMode(GroupListMode.NORMAL);
-      }
-    }
+    final GroupList list = getListFromRol(rol, acl);
+    list.add(group);
     acl.setList(rol, list);
     save(content);
     return content;
@@ -312,6 +289,24 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
       LOG.error("Parsing gadget URL: " + urlS, e);
     }
     return gadgetUrl;
+  }
+
+  private GroupList getListFromRol(final AccessRol rol, final AccessLists acl) {
+    GroupList list;
+    switch (rol) {
+    case Administrator:
+      list = acl.getAdmins();
+      break;
+    case Editor:
+      list = acl.getEditors();
+      break;
+    case Viewer:
+      list = acl.getViewers();
+      break;
+    default:
+      throw new DefaultException("Error setting ACL");
+    }
+    return list;
   }
 
   @Override
@@ -433,6 +428,15 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.removeAuthor(author);
   }
 
+  public Content removeFromAcl(final Content content, final Group group, final AccessRol rol) {
+    final AccessLists acl = content.getAccessLists();
+    final GroupList list = getListFromRol(rol, acl);
+    list.remove(group);
+    acl.setList(rol, list);
+    save(content);
+    return content;
+  }
+
   @Override
   public Content renameContent(final User user, final Long contentId, final String newTitle)
       throws DefaultException {
@@ -502,6 +506,19 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     final Long count = contentFinder.find2MimeCount(groupShortName, "%" + search + "%", mimetype,
         mimetype2);
     return new SearchResult<Content>(count.intValue(), list);
+  }
+
+  public Content setAclMode(final Content content, final AccessRol rol, final GroupListMode mode) {
+    final AccessLists acl = content.getAccessLists();
+    // Group group = content.getContainer().getOwner();
+    final GroupList list = getListFromRol(rol, acl);
+    if (AccessRol.Administrator.equals(rol) && !GroupListMode.NORMAL.equals(mode)) {
+      throw new RuntimeException("Cannot set to admins other mode than normal");
+    }
+    list.setMode(mode);
+    acl.setList(rol, list);
+    save(content);
+    return content;
   }
 
   @Override

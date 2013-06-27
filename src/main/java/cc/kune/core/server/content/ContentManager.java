@@ -25,7 +25,9 @@ import java.util.Map;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.Manager;
 import cc.kune.core.server.manager.SearchResult;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Container;
@@ -51,6 +53,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
   boolean addParticipants(User user, Long contentId, Group group, SocialNetworkSubGroup whichOnes);
 
+  Content addToAcl(Content content, Group group, AccessRol rol);
+
   Content copyContent(User user, Container container, Content contentToCopy);
 
   Content createGadget(User user, Container container, String gadgetname, String typeIdChild,
@@ -74,6 +78,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
   void removeAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
+  Content removeFromAcl(Content content, Group group, AccessRol rol);
+
   Content renameContent(User user, Long contentId, String newName) throws DefaultException;
 
   Content save(Content content);
@@ -89,6 +95,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
   SearchResult<?> searchMime(String search, Integer firstResult, Integer maxResults, String group,
       String mimetype, String mimetype2);
+
+  Content setAclMode(Content content, AccessRol rol, GroupListMode mode);
 
   void setGadgetProperties(User user, Content content, String gadgetName, Map<String, String> properties);
 
