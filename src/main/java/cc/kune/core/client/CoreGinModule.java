@@ -133,8 +133,11 @@ import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
 
+import com.calclab.emite.core.client.services.Services;
+import com.calclab.emite.core.client.services.gwt.GWTServices;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
+import com.gwtplatform.mvp.client.DefaultProxyFailureHandler;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -285,6 +288,6 @@ public class CoreGinModule extends ExtendedGinModule {
 
     s(ErrorsDialog.class);
     s(XMLActionsParser.class);
-
+    s(Services.class, GWTServices.class);
   }
 }
