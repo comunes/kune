@@ -68,11 +68,11 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
     intro.addStyleName("kune-Margin-10-b");
 
     final FieldSet commercialfieldSet = new FieldSet();
-    commercialfieldSet.setHeading(i18n.t("Allow any uses of your work, including commercial?"));
+    commercialfieldSet.setHeadingHtml(i18n.t("Allow any uses of your work, including commercial?"));
     commercialfieldSet.setCollapsible(false);
     commercialfieldSet.setAutoHeight(true);
     final FieldSet modificationsfieldSet = new FieldSet();
-    modificationsfieldSet.setHeading(i18n.t("Allow modifications of your work?"));
+    modificationsfieldSet.setHeadingHtml(i18n.t("Allow modifications of your work?"));
     modificationsfieldSet.setCollapsible(false);
     modificationsfieldSet.setAutoHeight(true);
 

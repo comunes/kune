@@ -276,7 +276,7 @@ public class ChatClientDefault implements ChatClient {
   private void createDialogIfNeeded() {
     if (dialog == null) {
       dialog = new Dialog();
-      dialog.setHeading(i18n.t(CHAT_TITLE));
+      dialog.setHeadingText(i18n.t(CHAT_TITLE));
       dialog.setClosable(true);
       dialog.setResizable(true);
       dialog.setButtons("");

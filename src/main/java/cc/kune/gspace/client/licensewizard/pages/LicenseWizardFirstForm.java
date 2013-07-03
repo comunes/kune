@@ -78,7 +78,7 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
     });
 
     final FieldSet infoFS = new FieldSet();
-    infoFS.setHeading("Info");
+    infoFS.setHeadingHtml("Info");
     // infoFS.setFrame(false);
     // infoFS.setIcon("k-info-icon");
     infoFS.setCollapsible(false);

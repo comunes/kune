@@ -54,26 +54,27 @@
   <classpathentry kind="var" path="M2_REPO/net/sf/ezmorph/ezmorph/1.0.3/ezmorph-1.0.3.jar" sourcepath="M2_REPO/net/sf/ezmorph/ezmorph/1.0.3/ezmorph-1.0.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/freemarker/freemarker/2.3.8/freemarker-2.3.8.jar"/>
   <classpathentry kind="var" path="M2_REPO/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210.jar" sourcepath="M2_REPO/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/gwt/inject/gin/2.0.0/gin-2.0.0.jar" sourcepath="M2_REPO/com/google/gwt/inject/gin/2.0.0/gin-2.0.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/gxp/google-gxp/0.2.4-beta/google-gxp-0.2.4-beta.jar" sourcepath="M2_REPO/com/google/gxp/google-gxp/0.2.4-beta/google-gxp-0.2.4-beta-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/groovy/groovy-all/1.7.6/groovy-all-1.7.6.jar" sourcepath="M2_REPO/org/codehaus/groovy/groovy-all/1.7.6/groovy-all-1.7.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/10.0.1/guava-10.0.1.jar" sourcepath="M2_REPO/com/google/guava/guava/10.0.1/guava-10.0.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/guava-gwt/r09/guava-gwt-r09.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/guice/3.0/guice-3.0.jar" sourcepath="M2_REPO/com/google/inject/guice/3.0/guice-3.0-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-assisted-inject/2.0/guice-assisted-inject-2.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-assistedinject/3.0/guice-assistedinject-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-assistedinject/3.0/guice-assistedinject-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-grapher/3.0/guice-grapher-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-grapher/3.0/guice-grapher-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-multibindings/3.0/guice-multibindings-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-multibindings/3.0/guice-multibindings-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-persist/3.0/guice-persist-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-persist/3.0/guice-persist-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-servlet/3.0/guice-servlet-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-servlet/3.0/guice-servlet-3.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/bradrydzewski/gwt-cal/0.9.3-dndCreation/gwt-cal-0.9.3-dndCreation.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/dnd/gwt-dnd/gwt-dnd/3.0.1/gwt-dnd-3.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-dev/2.5.1/gwt-dev-2.5.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-dev/2.5.1/gwt-dev-2.5.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/allen-sauer/gwt/dnd/gwt-dnd/3.2.3/gwt-dnd-3.2.3.jar" sourcepath="M2_REPO/com/allen-sauer/gwt/dnd/gwt-dnd/3.2.3/gwt-dnd-3.2.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/adamtacy/gwt-fx/r464/gwt-fx-r464.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-gin/1.0-r137/gwt-gin-1.0-r137.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/log/gwt-log/gwt-log/3.0.1/gwt-log-3.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/allen-sauer/gwt/log/gwt-log/3.2.1/gwt-log-3.2.1.jar" sourcepath="M2_REPO/com/allen-sauer/gwt/log/gwt-log/3.2.1/gwt-log-3.2.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-servlet/2.5.1/gwt-servlet-2.5.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-servlet/2.5.1/gwt-servlet-2.5.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/2.5.1/gwt-user-2.5.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-user/2.5.1/gwt-user-2.5.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/gwt-util-src/0.3.42/gwt-util-src-0.3.42.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/voices/gwt-voices/gwt-voices/2.0.0/gwt-voices-2.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/allen-sauer/gwt/voices/gwt-voices/3.2.0/gwt-voices-3.2.0.jar" sourcepath="M2_REPO/com/allen-sauer/gwt/voices/gwt-voices/3.2.0/gwt-voices-3.2.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-clients-common/0.5/gwtp-clients-common-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-clients-common/0.5/gwtp-clients-common-0.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-dispatch-client/0.5/gwtp-dispatch-client-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-dispatch-client/0.5/gwtp-dispatch-client-0.5-sources.jar"/>
@@ -85,7 +86,7 @@
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtquery/gwtquery/1.1.0/gwtquery-1.1.0-2.1.0.jar" sourcepath="M2_REPO/com/googlecode/gwtquery/gwtquery/1.1.0/gwtquery-1.1.0-2.1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtrpccommlayer/0.0.1/gwtrpccommlayer-0.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat.jar" sourcepath="M2_REPO/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/extjs/gxt/2.2.1/gxt-2.2.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/extjs/gxt/2.3.0-gwt22/gxt-2.3.0-gwt22.jar" sourcepath="M2_REPO/com/extjs/gxt/2.3.0-gwt22/gxt-2.3.0-gwt22-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.3.168/h2-1.3.168.jar" sourcepath="M2_REPO/com/h2database/h2/1.3.168/h2-1.3.168-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/calclab/hablar/surevine-68/hablar-surevine-68-classes.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/calclab/hablar/surevine-68/hablar-surevine-68-sources.jar"/>
@@ -131,7 +132,7 @@
   <classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/jtidy/jtidy/4aug2000r7-dev/jtidy-4aug2000r7-dev.jar" sourcepath="M2_REPO/jtidy/jtidy/4aug2000r7-dev/jtidy-4aug2000r7-dev-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/jtidy/r8-20060801/jtidy-r8-20060801.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jukito/jukito/1.0/jukito-1.0.jar" sourcepath="M2_REPO/org/jukito/jukito/1.0/jukito-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jukito/jukito/1.2/jukito-1.2.jar" sourcepath="M2_REPO/org/jukito/jukito/1.2/jukito-1.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.10/junit-4.10.jar" sourcepath="M2_REPO/junit/junit/4.10/junit-4.10-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/liquibase/liquibase-core/1.8.1/liquibase-core-1.8.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/liquibase/liquibase-plugin/1.8.1.0/liquibase-plugin-1.8.1.0.jar"/>
@@ -186,7 +187,7 @@
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9.jar" sourcepath="M2_REPO/org/apache/maven/maven-settings/2.0.9/maven-settings-2.0.9-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/media-src/0.3.42/media-src-0.3.42.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/mks/api/mksapi-jar/4.10.9049/mksapi-jar-4.10.9049.jar" sourcepath="M2_REPO/com/mks/api/mksapi-jar/4.10.9049/mksapi-jar-4.10.9049-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.8.5/mockito-core-1.8.5.jar" sourcepath="M2_REPO/org/mockito/mockito-core/1.8.5/mockito-core-1.8.5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.9.5/mockito-core-1.9.5.jar" sourcepath="M2_REPO/org/mockito/mockito-core/1.9.5/mockito-core-1.9.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/model/0.3.42/model-0.3.42.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/model-src/0.3.42/model-src-0.3.42.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mvel/mvel2/2.0.16/mvel2-2.0.16.jar" sourcepath="M2_REPO/org/mvel/mvel2/2.0.16/mvel2-2.0.16-sources.jar"/>
