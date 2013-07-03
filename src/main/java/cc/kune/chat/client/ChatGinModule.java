@@ -39,7 +39,6 @@ import com.calclab.emite.reconnect.client.SessionReconnect;
 import com.calclab.emite.xep.avatar.client.AvatarManager;
 import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.emite.xep.storage.client.PrivateStorageManager;
-import com.google.inject.Singleton;
 
 public class ChatGinModule extends ExtendedGinModule {
   /*
@@ -49,7 +48,6 @@ public class ChatGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
-    s(ChatInstances.class);
     bind(SmallAvatarDecorator.class).to(SmallAvatarDecoratorImpl.class);
     bind(MediumAvatarDecorator.class).to(MediumAvatarDecoratorImpl.class);
     s(ChatClient.class, ChatClientDefault.class);
@@ -62,22 +60,17 @@ public class ChatGinModule extends ExtendedGinModule {
     s(ChatClientActions.class);
 
     // This is needed because of Suco use and to prevent object duplicates
-    bind(XmppSession.class).toProvider(ChatInstances.XmppSessionProvider.class).in(Singleton.class);
-    bind(XmppRoster.class).toProvider(ChatInstances.XmppRosterProvider.class).in(Singleton.class);
-    bind(ChatManager.class).toProvider(ChatInstances.ChatManagerProvider.class).in(Singleton.class);
-    bind(RoomManager.class).toProvider(ChatInstances.RoomManagerProvider.class).in(Singleton.class);
-    bind(SessionReconnect.class).toProvider(ChatInstances.SessionReconnectProvider.class).in(
-        Singleton.class);
-    bind(AvatarManager.class).toProvider(ChatInstances.AvatarManagerProvider.class).in(Singleton.class);
-    bind(PresenceManager.class).toProvider(ChatInstances.PresenceManagerProvider.class).in(
-        Singleton.class);
-    bind(PrivateStorageManager.class).toProvider(ChatInstances.PrivateStorageManagerProvider.class).in(
-        Singleton.class);
-    bind(SubscriptionManager.class).toProvider(ChatInstances.SubscriptionManagerProvider.class).in(
-        Singleton.class);
-    bind(SubscriptionHandler.class).toProvider(ChatInstances.SubscriptionHandlerProvider.class).in(
-        Singleton.class);
-    bind(XmppConnection.class).toProvider(ChatInstances.XmppConnectionProvider.class).in(Singleton.class);
-    bind(SASLManager.class).toProvider(ChatInstances.SASLManagerProvider.class).in(Singleton.class);
+    s(XmppSession.class);
+    s(XmppRoster.class);
+    s(ChatManager.class);
+    s(RoomManager.class);
+    s(SessionReconnect.class);
+    s(AvatarManager.class);
+    s(PresenceManager.class);
+    s(PrivateStorageManager.class);
+    s(SubscriptionManager.class);
+    s(SubscriptionHandler.class);
+    s(XmppConnection.class);
+    s(SASLManager.class);
   }
 }

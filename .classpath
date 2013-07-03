@@ -8,6 +8,7 @@
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar" sourcepath="M2_REPO/javax/transaction/jta/1.1/jta-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/mail/mail/1.4.4/mail-1.4.4.jar" sourcepath="M2_REPO/javax/mail/mail/1.4.4/mail-1.4.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar" sourcepath="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
   <classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/avalon-framework/avalon-framework/4.1.3/avalon-framework-4.1.3.jar"/>
@@ -47,7 +48,8 @@
   <classpathentry kind="var" path="M2_REPO/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-10/doxia-sink-api-1.0-alpha-10.jar" sourcepath="M2_REPO/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-10/doxia-sink-api-1.0-alpha-10-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/dozer/dozer/5.4.0/dozer-5.4.0.jar" sourcepath="M2_REPO/net/sf/dozer/dozer/5.4.0/dozer-5.4.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/ehcache/ehcache-core/2.4.3/ehcache-core-2.4.3.jar" sourcepath="M2_REPO/net/sf/ehcache/ehcache-core/2.4.3/ehcache-core-2.4.3-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/calclab/emite/emite/r1694/emite-r1694.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/calclab/emite/surevine-68/emite-surevine-68-tests.jar" sourcepath="M2_REPO/com/calclab/emite/surevine-68/emite-surevine-68-test-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/calclab/emite/surevine-68/emite-surevine-68.jar" sourcepath="M2_REPO/com/calclab/emite/surevine-68/emite-surevine-68-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/calclab/emite/emite-proxy/0.1/emite-proxy-0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/ezmorph/ezmorph/1.0.3/ezmorph-1.0.3.jar" sourcepath="M2_REPO/net/sf/ezmorph/ezmorph/1.0.3/ezmorph-1.0.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/freemarker/freemarker/2.3.8/freemarker-2.3.8.jar"/>
@@ -68,8 +70,8 @@
   <classpathentry kind="var" path="M2_REPO/org/adamtacy/gwt-fx/r464/gwt-fx-r464.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-gin/1.0-r137/gwt-gin-1.0-r137.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/log/gwt-log/gwt-log/3.0.1/gwt-log-3.0.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-servlet/2.1.1/gwt-servlet-2.1.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-servlet/2.1.1/gwt-servlet-2.1.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/2.1.1/gwt-user-2.1.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-user/2.1.1/gwt-user-2.1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-servlet/2.5.1/gwt-servlet-2.5.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-servlet/2.5.1/gwt-servlet-2.5.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/2.5.1/gwt-user-2.5.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-user/2.5.1/gwt-user-2.5.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/gwt-util-src/0.3.42/gwt-util-src-0.3.42.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/voices/gwt-voices/gwt-voices/2.0.0/gwt-voices-2.0.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5-sources.jar"/>
@@ -85,7 +87,8 @@
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat.jar" sourcepath="M2_REPO/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/extjs/gxt/2.2.1/gxt-2.2.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.3.168/h2-1.3.168.jar" sourcepath="M2_REPO/com/h2database/h2/1.3.168/h2-1.3.168-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/calclab/emite/hablar/r1697/hablar-r1697.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/calclab/hablar/surevine-68/hablar-surevine-68-classes.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/calclab/hablar/surevine-68/hablar-surevine-68-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-c3p0/4.1.2.Final/hibernate-c3p0-4.1.2.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-c3p0/4.1.2.Final/hibernate-c3p0-4.1.2.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.1.Final/hibernate-commons-annotations-4.0.1.Final.jar" sourcepath="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.1.Final/hibernate-commons-annotations-4.0.1.Final-sources.jar"/>
@@ -121,7 +124,7 @@
   <classpathentry kind="var" path="M2_REPO/org/jruby/jruby-complete/1.2.0/jruby-complete-1.2.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jruby/rack/jruby-rack/0.9.4/jruby-rack-0.9.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/jcraft/jsch/0.1.27/jsch-0.1.27.jar" sourcepath="M2_REPO/com/jcraft/jsch/0.1.27/jsch-0.1.27-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/json/json/20080701/json-20080701.jar" sourcepath="M2_REPO/org/json/json/20080701/json-20080701-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/json/json/20090211/json-20090211.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/json-lib/json-lib/2.1/json-lib-2.1-jdk15.jar" sourcepath="M2_REPO/net/sf/json-lib/json-lib/2.1/json-lib-2.1-jdk15-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jsoup/jsoup/1.2.2/jsoup-1.2.2.jar" sourcepath="M2_REPO/org/jsoup/jsoup/1.2.2/jsoup-1.2.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sourceforge/findbugs/jsr-305/v0r47/jsr-305-v0r47.jar"/>
@@ -250,5 +253,4 @@
   <classpathentry kind="var" path="M2_REPO/xpp3/xpp3_min/1.1.3.4.O/xpp3_min-1.1.3.4.O.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/thoughtworks/xstream/xstream/1.2.2/xstream-1.2.2.jar" sourcepath="M2_REPO/com/thoughtworks/xstream/xstream/1.2.2/xstream-1.2.2-sources.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="src" path=".apt_generated" including="**/*.java"/>  <classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 </classpath>

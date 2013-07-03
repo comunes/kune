@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client.sn.actions;
 
-import cc.kune.chat.client.ChatInstances;
 import cc.kune.chat.client.ChatOptions;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.chat.client.actions.StartChatWithMemberAction;
@@ -36,6 +35,7 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.google.gwt.core.client.Scheduler;
@@ -51,7 +51,7 @@ public class BuddyLastConnectedHeaderLabel {
   public BuddyLastConnectedHeaderLabel(final StartChatWithMemberAction chatAction,
       final EntityHeader entityHeader, final StateManager stateManager, final Session session,
       final SimpleContactManager simpleContactManager, final LastConnectedManager lastConnectedManager,
-      final ChatInstances chatInstances, final ChatOptions chatOptions) {
+      final XmppRoster roster, final ChatOptions chatOptions) {
     this.lastConnectedManager = lastConnectedManager;
     button = new ButtonDescriptor(chatAction);
     button.setStyles("k-buddy-last-connected");
@@ -63,7 +63,7 @@ public class BuddyLastConnectedHeaderLabel {
         }
       }
     });
-    chatInstances.roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
+    roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
       @Override
       public void onRosterItemChanged(final RosterItemChangedEvent event) {
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {

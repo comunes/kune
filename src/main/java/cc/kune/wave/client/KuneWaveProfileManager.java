@@ -26,7 +26,6 @@ import org.waveprotocol.wave.client.account.impl.ProfileImpl;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
-import cc.kune.chat.client.ChatInstances;
 import cc.kune.chat.client.ChatOptions;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.log.Log;
@@ -37,6 +36,7 @@ import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChang
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.emite.im.client.roster.events.RosterRetrievedEvent;
@@ -60,11 +60,11 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
 
   @Inject
   public KuneWaveProfileManager(final EventBus eventBus, final ClientFileDownloadUtils downloadUtils,
-      final LastConnectedManager lastConnectedManager, final ChatInstances chatInstances,
+      final LastConnectedManager lastConnectedManager, final XmppRoster roster,
       final ChatOptions chatOptions) {
     this.downloadUtils = downloadUtils;
     this.lastConnectedManager = lastConnectedManager;
-    chatInstances.roster.addRosterRetrievedHandler(new RosterRetrievedHandler() {
+    roster.addRosterRetrievedHandler(new RosterRetrievedHandler() {
       @Override
       public void onRosterRetrieved(final RosterRetrievedEvent event) {
         for (final RosterItem item : event.getRosterItems()) {
@@ -72,7 +72,7 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
         }
       }
     });
-    chatInstances.roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
+    roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
       @Override
       public void onRosterItemChanged(final RosterItemChangedEvent event) {
         refreshRosterItem(event.getRosterItem().getJID(), false);

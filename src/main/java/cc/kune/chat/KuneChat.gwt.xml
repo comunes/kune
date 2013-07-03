@@ -5,10 +5,15 @@
   <inherits name="com.calclab.hablar.Hablar" />
   <inherits name='com.calclab.hablar.console.HablarConsole' />
   <inherits name='com.calclab.hablar.login.HablarLogin' />
-  <inherits name='com.calclab.hablar.icons.def.HablarDefaultIcons' />
-  <inherits name='com.calclab.hablar.icons.ie6gif.HablarIE6GifIcons' />
-  <inherits name='com.calclab.hablar.icons.alt.HablarAltIcons' />
-  <source path="client" />
-  <public path="public" />
-  <source path="shared" />
+
+  <inherits name="com.calclab.emite.xep.avatar.EmiteAvatar"/>
+  <inherits name="com.calclab.emite.reconnect.EmiteReconnect"/>
+<!--   <inherits name='com.calclab.hablar.signals.HablarSignals'/> -->
+
+  <set-configuration-property name="UiBinder.useSafeHtmlTemplates"
+    value="true"/>
+
+  <source path="client"/>
+  <public path="public"/>
+  <source path="shared"/>
 </module>

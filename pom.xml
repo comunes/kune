@@ -14,7 +14,7 @@
   </ciManagement>
   <properties>
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
-    <gwt.version>2.1.1</gwt.version>
+    <gwt.version>2.5.1</gwt.version>
     <!-- <gwtmaven.version>2.2.0</gwtmaven.version> -->
     <gwtmaven.version>2.1.0-1</gwtmaven.version>
     <maven.compiler.source>1.6</maven.compiler.source>
@@ -178,9 +178,9 @@
     </dependency>
     <!-- xmpp -->
     <dependency>
-      <groupId>com.calclab.emite</groupId>
+      <groupId>com.calclab</groupId>
       <artifactId>emite</artifactId>
-      <version>r1694</version>
+      <version>surevine-68</version>
       <!-- Used in server side also <scope>provided</scope> -->
     </dependency>
     <dependency>
@@ -189,9 +189,24 @@
       <version>0.1</version>
     </dependency>
     <dependency>
-      <groupId>com.calclab.emite</groupId>
+      <groupId>com.calclab</groupId>
+      <artifactId>emite</artifactId>
+      <classifier>tests</classifier>
+      <version>surevine-68</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab</groupId>
       <artifactId>hablar</artifactId>
-      <version>r1697</version>
+      <version>surevine-68</version>
+      <classifier>classes</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab</groupId>
+      <artifactId>hablar</artifactId>
+      <version>surevine-68</version>
+      <classifier>sources</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
