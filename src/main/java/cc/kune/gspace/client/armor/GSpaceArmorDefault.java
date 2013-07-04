@@ -76,6 +76,8 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   @UiField
   FlowPanel entityToolsContainer;
   @UiField
+  DockLayoutPanel entityToolsMainPanel;
+  @UiField
   FlowPanel entityToolsNorth;
   @UiField
   FlowPanel entityToolsSouth;
@@ -94,8 +96,6 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   FlowPanel sitebar;
   @UiField
   DockLayoutPanel splitCenter;
-  @UiField
-  DockLayoutPanel entityToolsMainPanel;
   private final ActionFlowPanel subheaderToolbar;
   @UiField
   TabLayoutPanel tabs;
@@ -288,8 +288,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   }
 
   @Override
-  public void setRTL(Direction direction) {
+  public void setRTL(final Direction direction) {
     groupSpace.remove(splitCenter);
+    groupSpace.setWidgetMinSize(entityToolsMainPanel, 25);
     if (direction.equals(Direction.RTL)) {
       groupSpace.addEast(entityToolsMainPanel, TOOLS_WIDTH);
     } else {
@@ -297,8 +298,6 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     }
     // Add to the center
     groupSpace.add(splitCenter);
-
-    groupSpace.setWidgetMinSize(entityToolsMainPanel, 25);
 
     // Fix tools Arrows visibility:
     groupSpace.getWidgetContainerElement(entityToolsMainPanel).getStyle().setOverflow(Overflow.VISIBLE);
