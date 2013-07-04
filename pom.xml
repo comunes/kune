@@ -38,6 +38,17 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>comunes-snapshots</id>
+      <name>Comunes Archiva Snapshot Repository</name>
+      <url>http://archiva.comunes.org/repository/comunes-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
@@ -196,7 +207,7 @@
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>emite</artifactId>
-      <version>surevine-68</version>
+      <version>0.9-SNAPSHOT</version>
       <!-- Used in server side also <scope>provided</scope> -->
     </dependency>
     <dependency>
@@ -208,20 +219,20 @@
       <groupId>com.calclab</groupId>
       <artifactId>emite</artifactId>
       <classifier>tests</classifier>
-      <version>surevine-68</version>
+      <version>0.9-SNAPSHOT</version>
       <!-- <scope>test</scope> -->
     </dependency>
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>hablar</artifactId>
-      <version>surevine-68</version>
+      <version>0.9-SNAPSHOT</version>
       <classifier>classes</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>hablar</artifactId>
-      <version>surevine-68</version>
+      <version>0.9-SNAPSHOT</version>
       <classifier>sources</classifier>
       <scope>provided</scope>
     </dependency>
