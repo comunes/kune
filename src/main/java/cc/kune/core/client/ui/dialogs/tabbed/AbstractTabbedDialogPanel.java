@@ -29,7 +29,6 @@ import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.Abstr
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -40,9 +39,9 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
@@ -64,7 +63,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
   private final ProvidersCollection provCollection;
   private final String sndBtnId;
   private final String sndBtnTitle;
-  private TabLayoutPanel tabPanel;
+  private DecoratedTabPanel tabPanel;
   private String title;
   private int width = NO_SIZE;
 
@@ -147,7 +146,9 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
       dialog.setTitleIcon(icon);
     }
     messageErrorBar = new MessageToolbar(images, errorLabelId);
-    tabPanel = new TabLayoutPanel(25, Unit.PX);
+
+    // http://stackoverflow.com/questions/5170324/tablayoutpanel-dynamic-resizing
+    tabPanel = new DecoratedTabPanel();
     // tabPanel.addStyleName("oc-noselect");
     dialog.getInnerPanel().add(tabPanel);
     tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
