@@ -76,20 +76,22 @@ import cc.kune.wave.client.kspecific.WaveParts;
 import cc.kune.wiki.client.WikiGinModule;
 import cc.kune.wiki.client.WikiGinjector;
 
+import com.calclab.hablar.client.HablarGinjector;
+import com.calclab.hablar.client.HablarModule;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, WaveGinModule.class, PSpaceGinModule.class,
     HSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class,
     ChatGinModule.class, WikiGinModule.class, BartersGinModule.class, EventsGinModule.class,
-    TasksGinModule.class, ListsGinModule.class, TrashGinModule.class })
+    TasksGinModule.class, ListsGinModule.class, TrashGinModule.class, HablarModule.class })
 public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector,
     WikiGinjector, BartersGinjector, EventsGinjector, ChatGinjector, TasksGinjector, ListsGinjector,
-    TrashGinjector {
+    TrashGinjector, HablarGinjector {
 
   /*
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
@@ -107,6 +109,8 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
   AsyncProvider<EntityHeaderPresenter> getEntityHeaderPresenter();
 
   ErrorHandler getErrorHandler();
+
+  ErrorsDialog getErrorsDialog();
 
   EventBus getEventBus();
 
@@ -128,11 +132,13 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
 
   I18nTranslationService getI18n();
 
+  StateManager getKuneStateManager();
+
   AsyncProvider<NewGroupPresenter> getNewGroupPresenter();
 
   OnAppStartFactory getOnAppStartFactory();
 
-  ProxyFailureHandler getProxyFailureHandler();
+  PlaceManager getPlaceManager();
 
   PSpaceParts getPSpaceParts();
 
@@ -154,8 +160,6 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
 
   AsyncProvider<SpinerPresenter> getSpinerPresenter();
 
-  StateManager getStateManager();
-
   AsyncProvider<SubtitlesManager> getSubtitlesPresenter();
 
   TokenMatcher getTokenMatcher();
@@ -165,7 +169,5 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
   WaveParts getWaveParts();
 
   XMLActionsParser getXmlActionsParser();
-
-  ErrorsDialog getErrorsDialog();
 
 }

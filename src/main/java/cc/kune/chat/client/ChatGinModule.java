@@ -27,20 +27,11 @@ import cc.kune.core.client.avatar.MediumAvatarDecorator;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.contacts.SimpleContactManager;
 
-import com.calclab.emite.core.client.conn.XmppConnection;
-import com.calclab.emite.core.client.xmpp.sasl.SASLManager;
-import com.calclab.emite.core.client.xmpp.session.XmppSession;
-import com.calclab.emite.im.client.chat.ChatManager;
-import com.calclab.emite.im.client.presence.PresenceManager;
-import com.calclab.emite.im.client.roster.SubscriptionHandler;
-import com.calclab.emite.im.client.roster.SubscriptionManager;
-import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.reconnect.client.SessionReconnect;
-import com.calclab.emite.xep.avatar.client.AvatarManager;
-import com.calclab.emite.xep.muc.client.RoomManager;
-import com.calclab.emite.xep.storage.client.PrivateStorageManager;
+import com.calclab.hablar.client.HablarGinjector;
 
 public class ChatGinModule extends ExtendedGinModule {
+  private HablarGinjector hablarInjector;
+
   /*
    * (non-Javadoc)
    * 
@@ -58,19 +49,6 @@ public class ChatGinModule extends ExtendedGinModule {
     // bind(OpenGroupPublicChatRoomButton.class);
     s(ChatClientTool.class);
     s(ChatClientActions.class);
-
-    // This is needed because of Suco use and to prevent object duplicates
-    s(XmppSession.class);
-    s(XmppRoster.class);
-    s(ChatManager.class);
-    s(RoomManager.class);
-    s(SessionReconnect.class);
-    s(AvatarManager.class);
-    s(PresenceManager.class);
-    s(PrivateStorageManager.class);
-    s(SubscriptionManager.class);
-    s(SubscriptionHandler.class);
-    s(XmppConnection.class);
-    s(SASLManager.class);
   }
+
 }
