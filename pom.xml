@@ -558,11 +558,6 @@
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
-      <groupId>net.sourceforge.findbugs</groupId>
-      <artifactId>jsr-305</artifactId>
-      <version>v0r47</version>
-    </dependency>
-    <dependency>
       <groupId>com.glines.socketio.java</groupId>
       <artifactId>socketio-gwt</artifactId>
       <version>23-10-2011</version>
