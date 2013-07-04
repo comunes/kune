@@ -209,7 +209,7 @@
       <artifactId>emite</artifactId>
       <classifier>tests</classifier>
       <version>surevine-68</version>
-      <scope>test</scope>
+      <!-- <scope>test</scope> -->
     </dependency>
     <dependency>
       <groupId>com.calclab</groupId>
