@@ -172,6 +172,7 @@ input[disabled] {
 .hablar-AccordionHeaderWidget.notFocused {
   border-top: 1px solid #E9E9E9;
   border-bottom: 1px solid #BBB;
+  background: #F2F2F2;
 }
 
 .hablar-AccordionHeaderWidget.focused {
