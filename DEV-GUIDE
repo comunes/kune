@@ -86,19 +86,19 @@ Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java 
 
 (*) NOTE: We actually use bin/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line. In order to execute the script, run ./bin/mvn-eclipse.sh   from the kune directory.
 
-NOTE: If after bin/mvn-eclipse.sh the Eclipse project does not properly select the GWT SDK (throwing an error in the Build Path, showing an "unknown" SDK, or similar problem) then include and choose manually the GWT SDK 2.1.1. 
+NOTE: If after bin/mvn-eclipse.sh the Eclipse project does not properly select the GWT SDK (throwing an error in the Build Path, showing an "unknown" SDK, or similar problem) then include and choose manually the GWT SDK 2.5.1. 
 
 *** Configure Google GWT Plugin
  
-For now we are using GWT 2.1.1 (it usually will not match with the one from the eclipse GWT plugin) so probably you have to download that version of the SDK from:
+For now we are using GWT 2.5.1 (it usually will not match with the one from the eclipse GWT plugin) so probably you have to download that version of the SDK from:
 http://code.google.com/p/google-web-toolkit/downloads/list
 unzip (to any place you find appropriate), and add that SDK in Eclipse (Windows > Preferences > Google > Web Toolkit > Add). 
 
-WARNING: Do not use any other higher GWT SDK versions (such as 2.4.0) because our code (and dependencies) are not compatible with higher versions and we should do a coordinated migration.
+WARNING: Do not use any other GWT SDK versions because our code (and dependencies) probably are not compatible with different versions and we should do a coordinated migration.
 
 After that, right click Kune project in the "Package Explorer" > Google > WebApplication > WAR directory: set to src/main/webapp (after checking "This project has a WAR directory") and uncheck the "Launch and deploy from this directory".
 
-Also in Kune project properties > Google > Web Toolkit > Check that you are using the 2.1.1 SDK. 
+Also in Kune project properties > Google > Web Toolkit > Check that you are using the 2.5.1 SDK. 
 
 *** Configure the Firefox GWT Plugin
  
@@ -273,7 +273,11 @@ For content indexing, we use Lucene. We usually use [http://www.hibernate.org/hi
 
 *** Emite
  
-[http://emite.google.code emite] is our xmpp extensible library and client. See [http://code.google.com/p/emite/w/list the wiki] for more documentation about emite. It's a module totally independent of Kune, so you can also use emite in your website or project.
+[https://github.com/EmiteGWT emite] is our xmpp extensible library and client. See [http://code.google.com/p/emite/w/list the wiki] for more documentation about emite. It's a module totally independent of Kune, so you can also use emite in your website or project.
+
+We use these forks:
+https://github.com/comunes/emite/
+https://github.com/comunes/hablar/
 
 *** UI Binder
 We use [https://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinder.html UI Binder] for GWT Widgets. Also we use [https://code.google.com/intl/en/webtoolkit/tools/download-gwtdesigner.html GWT Designer Eclipse plugin] for developing these widgets.
@@ -411,7 +415,7 @@ When changing the User Interface, you may want quick ways of working with it, wi
 ** Sandbox
 Kune has a small sandbox where some UI elements can be tested quickly without a server. It's a simple GWT app. For running the Sandbox, you should follow these steps:
 - Import /kune/core/kune-sandbox as a project in Eclipse
-- Project properties => Google => Web Tookit => Enable "Use Google Web Toolkit" with GWT 2.1.1
+- Project properties => Google => Web Tookit => Enable "Use Google Web Toolkit" with GWT 2.5.1
 - In the java source some errors will appear. Allow automatic fixing from "Fix Project Setup", which will add the project "kune" to the Build Path
 - You should be able to run (without running any server before) src/main/java/cc/kune/sandbox/KuneSandbox.gwt.xml from mouse right click => Run As => Web Application. An URL will be provided, which can be open in a browser (Firefox/Chrome/Chromium) with the GWT plugin.
 - If it doesn't work, you may Run As => Run Configurations => select Kune_sandbox.html => Classpath tab => Click on any User entry => Advanced button => Add Folder => Add, from the project kune, src/main/java, src/main/resources, src/main/webapp => Run
