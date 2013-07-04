@@ -1,3 +1,6 @@
+/* From time to time compare with hablar/src/main/webapp/Hablar.css
+*/
+
 /** Colors */
 .hablar-clearBackground {
   background-color: white;
@@ -66,6 +69,11 @@ div.hablar-SearchResultItemWidget:hover {
   background-color: #e9e9e9;
 }
 
+.hablar-SearchResultItemWidget .hablar-avatar {
+  display: block;
+  float: left;
+  margin: -2px 5px 0px 0px;
+}
 .hablar-ChatWidget .actions div.hablar-OccupantsWidget:hover {
   background-color: #BBBBBB;
   color: white;
@@ -417,6 +425,11 @@ body {
 /** CHAT PAGE **/
 .hablar-ChatWidget .actions div {
   float: right;
+  height: 24px;
+}
+
+.hablar-ChatWidget .actions div img {
+  vertical-align: middle;
 }
 
 /** SEARCH PAGE **/
@@ -593,7 +606,8 @@ body {
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   -moz-binding: url('ellipsis.xml#ellipsis');
-  width: 100%
+  width: 100%;
+  /* margin-left: 24px; */
 }
 
 .gwt-TextArea {
@@ -608,4 +622,61 @@ body {
 .hablar-RosterGroupWidget {
   -moz-user-select: none;
   -khtml-user-select: none;
+}
+
+.hablar-avatar {
+  display: inline;
+  vertical-align: middle;
+}
+
+.hablar-avatar-tiny img {
+  /*  -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+  -khtml-border-radius: 1px;
+  border-radius: 1px;
+    -moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    -khtml-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2); */
+  width: 24px;
+  height: 24px;
+  display: block;
+  /* background-color: red; /* TODO: Replace with bg image of silouhette */
+}
+
+.hablar-avatar-medium img {
+    /* -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+    -moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    -khtml-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2); */
+  width: 100px;
+  height: 100px;
+}
+
+.avatarPanel {
+  float: left;
+}
+
+.avatarPanel .hablar-avatar {
+  float: left;
+  margin-right: 1px;
+}
+
+.hablar-ZoomedAvatarPopup .hablar-avatar img {
+  border: 1px solid #999999;
+}
+
+.chatMessage {
+  clear: left;
+}
+
+.chatMessage .hablar-avatar {
+  float: left;
+  margin-right: 5px;
 }

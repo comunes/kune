@@ -143,6 +143,7 @@ public class ChatClientDefault implements ChatClient {
 
   private static final String CHAT_TITLE = "Chat ;)";
   private final ChatClientAction action;
+  private final Provider<KuneChatAvatarConfig> avatarConfig;
   private final Provider<AvatarManager> avatarManager;
   private final Provider<AvatarProviderRegistry> avatarProviderRegistry;
   protected IconLabelDescriptor chatIcon;
@@ -181,7 +182,8 @@ public class ChatClientDefault implements ChatClient {
       final Provider<MUCChatStateManager> mucChatStateManager,
       final Provider<AvatarProviderRegistry> avatarProviderRegistry,
       final Provider<PrivateStorageManager> privateStorageManager,
-      final Provider<SubscriptionHandler> subscriptionHandler) {
+      final Provider<SubscriptionHandler> subscriptionHandler,
+      final Provider<KuneChatAvatarConfig> avatarConfig) {
     this.kuneEventBus = kuneEventBus;
     this.i18n = i18n;
     this.res = res;
@@ -203,6 +205,7 @@ public class ChatClientDefault implements ChatClient {
     this.roomManager = roomManager;
     this.avatarManager = avatarManager;
     this.subscriptionManager = subscriptionManager;
+    this.avatarConfig = avatarConfig;
     action = new ChatClientAction(chatResources);
 
     session.onAppStart(true, new AppStartEvent.AppStartHandler() {
@@ -352,8 +355,6 @@ public class ChatClientDefault implements ChatClient {
   }
 
   private void initEmite() {
-    loadIcons(chatResources);
-
     // Adapted from HablarHtml.java
     BrowserFocusHandler.getInstance();
     final HablarConfig config = HablarConfig.getFromMeta();
@@ -364,8 +365,7 @@ public class ChatClientDefault implements ChatClient {
     config.dockConfig.rosterDock = "left";
     final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
     final Hablar hablar = widget.getHablar();
-    // FIXME
-    // HablarComplete.install(hablar, config);
+    avatarProviderRegistry.get().put("kune-avatars", avatarConfig.get());
 
     new HablarCore(hablar);
     new HablarChat(hablar, config.chatConfig, roster.get(), chatManager.get(), xmppStateManager.get(),
@@ -466,31 +466,6 @@ public class ChatClientDefault implements ChatClient {
           true);
     }
     return room;
-  }
-
-  public void loadIcons(final ChatResources others) {
-    // final AltIconsBundle bundle = GWT.create(AltIconsBundle.class);
-    // Icons.register(Icons.BUDDY_ADD, bundle.buddyAddIcon());
-    // Icons.register(Icons.BUDDY, bundle.buddyIcon());
-    // Icons.register(Icons.BUDDY_DND, others.busy());
-    // Icons.register(Icons.BUDDY_OFF, others.offline());
-    // Icons.register(Icons.BUDDY_ON, others.online());
-    // Icons.register(Icons.BUDDY_WAIT, others.away());
-    // Icons.register(Icons.ADD_CHAT, bundle.chatAddIcon());
-    // Icons.register(Icons.CHAT, others.xa());
-    // Icons.register(Icons.CLIPBOARD, bundle.clipboardIcon());
-    // Icons.register(Icons.CLOSE, bundle.closeIcon());
-    // Icons.register(Icons.CONSOLE, bundle.consoleIcon());
-    // Icons.register(Icons.ADD_GROUP, bundle.groupAddIcon());
-    // Icons.register(Icons.GROUP_CHAT, bundle.groupChatIcon());
-    // Icons.register(Icons.GROUP_CHAT_ADD, bundle.groupChatAddIcon());
-    // Icons.register(Icons.LOADING, bundle.loadingIcon());
-    // Icons.register(Icons.MENU, bundle.menuIcon());
-    // Icons.register(Icons.MISSING_ICON, bundle.missingIcon());
-    // Icons.register(Icons.NOT_CONNECTED, others.offline());
-    // Icons.register(Icons.CONNECTED, others.online());
-    // Icons.register(Icons.ROSTER, bundle.rosterIcon());
-    // Icons.register(Icons.SEARCH, bundle.searchIcon());
   }
 
   @Override
