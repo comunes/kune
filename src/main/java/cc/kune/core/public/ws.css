@@ -1188,7 +1188,7 @@ button.k-drop-allowed-hover,.k-drop-allowed-hover {
   background-color: #F2F2F2;
 }
 
-.k-tabs .gwt-TabLayoutPanelTab, .k-tabs .gwt-DecoratedTabBar {
+.k-tabs .gwt-TabLayoutPanelTab {
   background-color: #d38d5f;
   color: #552200;
   height: 20px !important;
@@ -1198,7 +1198,7 @@ button.k-drop-allowed-hover,.k-drop-allowed-hover {
   font-weight: bold;
 }
 
- .k-tabs .gwt-DecoratedTabBar .gwt-TabBarItem-selected, .k-tabs .gwt-TabLayoutPanelTab-selected {
+.k-tabs .gwt-TabLayoutPanelTab-selected {
   background-color: #552200;
   color: #FFF;
 }
@@ -1207,7 +1207,7 @@ button.k-drop-allowed-hover,.k-drop-allowed-hover {
   padding-bottom: 27px !important;
 }
 
-.k-tabs .gwt-DecoratedTabBar .gwt-TabBarItem, .k-tabs .gwt-TabLayoutPanel,.k-tabs .gwt-TabLayoutPanelTab {
+.k-tabs .gwt-TabLayoutPanel,.k-tabs .gwt-TabLayoutPanelTab {
   -webkit-border-top-right-radius: 5px;
   -moz-border-radius-topright: 5px;
   border-top-right-radius: 5px;
