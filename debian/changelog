@@ -1,3 +1,9 @@
+kune (0.3.0+b29) unstable; urgency=low
+
+  * Update gwt, emite chat, and other libraries
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 08 Jul 2013 11:49:45 +0200
+
 kune (0.3.0+b28) unstable; urgency=low
 
   * Updated all translations
