@@ -81,7 +81,7 @@ function insertNewItem(trkey, text, gtype, lang, parent, keyValue, langCode) {
     trkey = quote(trkey)
     text = quote(text)    
 
-    insert = "INSERT INTO globalize_translations "			\
+    insert = "SET NAMES utf8; INSERT INTO globalize_translations "			\
 	"(id, facet, item_id, noteForTranslators, pluralization_index, table_name, " \
 	"text, tr_key, gtype, language_id, parent_id) "			\
 	"VALUES (NULL,'',NULL,'',1,'',"text","trkey", '"gtype"', "lang", "parent")"
