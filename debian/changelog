@@ -1,8 +1,15 @@
+kune (0.3.0+b29) unstable; urgency=low
+
+  * Update gwt, emite chat, and other libraries
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 08 Jul 2013 11:49:45 +0200
+
 kune (0.3.0+b28) unstable; urgency=low
 
   * Updated all translations
+  * Fix for #547: i18n client untranslated strings configurable
 
- -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 18 Apr 2013 12:51:35 +0200
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 13 May 2013 19:17:39 +0200
 
 kune (0.3.0+b27) unstable; urgency=low
 

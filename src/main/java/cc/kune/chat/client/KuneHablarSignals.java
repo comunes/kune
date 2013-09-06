@@ -71,10 +71,10 @@ public class KuneHablarSignals {
   // FIXME: move to gin
   @SuppressWarnings("deprecation")
   public KuneHablarSignals(final EventBus kuneEventBus, final XmppSession session, final Hablar hablar,
-      final ChatClientAction action, final ChatInstances chatInstances,
+      final ChatClientAction action, final PrivateStorageManager privateStorageManager,
       final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
     final HablarEventBus hablarEventBus = hablar.getEventBus();
-    final PrivateStorageManager storageManager = chatInstances.privateStorageManager;
+    final PrivateStorageManager storageManager = privateStorageManager;
 
     final HasText titleDisplay = new HasText() {
       @Override

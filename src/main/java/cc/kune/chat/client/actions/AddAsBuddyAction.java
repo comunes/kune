@@ -20,7 +20,6 @@
 package cc.kune.chat.client.actions;
 
 import cc.kune.chat.client.ChatClient;
-import cc.kune.chat.client.ChatInstances;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -43,8 +42,8 @@ public class AddAsBuddyAction extends AbstractExtendedAction {
   private final Provider<SocialNetServiceAsync> snService;
 
   @Inject
-  public AddAsBuddyAction(final ChatClient chatEngine, final ChatInstances chatInstances,
-      final StateManager stateManager, final I18nTranslationService i18n, final IconicResources img,
+  public AddAsBuddyAction(final ChatClient chatEngine, final StateManager stateManager,
+      final I18nTranslationService i18n, final IconicResources img,
       final Provider<SocialNetServiceAsync> snService, final Session session) {
     super();
     this.chatEngine = chatEngine;

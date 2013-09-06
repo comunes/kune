@@ -27,21 +27,11 @@ import cc.kune.core.client.avatar.MediumAvatarDecorator;
 import cc.kune.core.client.avatar.SmallAvatarDecorator;
 import cc.kune.core.client.contacts.SimpleContactManager;
 
-import com.calclab.emite.core.client.conn.XmppConnection;
-import com.calclab.emite.core.client.xmpp.sasl.SASLManager;
-import com.calclab.emite.core.client.xmpp.session.XmppSession;
-import com.calclab.emite.im.client.chat.ChatManager;
-import com.calclab.emite.im.client.presence.PresenceManager;
-import com.calclab.emite.im.client.roster.SubscriptionHandler;
-import com.calclab.emite.im.client.roster.SubscriptionManager;
-import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.reconnect.client.SessionReconnect;
-import com.calclab.emite.xep.avatar.client.AvatarManager;
-import com.calclab.emite.xep.muc.client.RoomManager;
-import com.calclab.emite.xep.storage.client.PrivateStorageManager;
-import com.google.inject.Singleton;
+import com.calclab.hablar.client.HablarGinjector;
 
 public class ChatGinModule extends ExtendedGinModule {
+  private HablarGinjector hablarInjector;
+
   /*
    * (non-Javadoc)
    * 
@@ -49,7 +39,6 @@ public class ChatGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
-    s(ChatInstances.class);
     bind(SmallAvatarDecorator.class).to(SmallAvatarDecoratorImpl.class);
     bind(MediumAvatarDecorator.class).to(MediumAvatarDecoratorImpl.class);
     s(ChatClient.class, ChatClientDefault.class);
@@ -60,24 +49,6 @@ public class ChatGinModule extends ExtendedGinModule {
     // bind(OpenGroupPublicChatRoomButton.class);
     s(ChatClientTool.class);
     s(ChatClientActions.class);
-
-    // This is needed because of Suco use and to prevent object duplicates
-    bind(XmppSession.class).toProvider(ChatInstances.XmppSessionProvider.class).in(Singleton.class);
-    bind(XmppRoster.class).toProvider(ChatInstances.XmppRosterProvider.class).in(Singleton.class);
-    bind(ChatManager.class).toProvider(ChatInstances.ChatManagerProvider.class).in(Singleton.class);
-    bind(RoomManager.class).toProvider(ChatInstances.RoomManagerProvider.class).in(Singleton.class);
-    bind(SessionReconnect.class).toProvider(ChatInstances.SessionReconnectProvider.class).in(
-        Singleton.class);
-    bind(AvatarManager.class).toProvider(ChatInstances.AvatarManagerProvider.class).in(Singleton.class);
-    bind(PresenceManager.class).toProvider(ChatInstances.PresenceManagerProvider.class).in(
-        Singleton.class);
-    bind(PrivateStorageManager.class).toProvider(ChatInstances.PrivateStorageManagerProvider.class).in(
-        Singleton.class);
-    bind(SubscriptionManager.class).toProvider(ChatInstances.SubscriptionManagerProvider.class).in(
-        Singleton.class);
-    bind(SubscriptionHandler.class).toProvider(ChatInstances.SubscriptionHandlerProvider.class).in(
-        Singleton.class);
-    bind(XmppConnection.class).toProvider(ChatInstances.XmppConnectionProvider.class).in(Singleton.class);
-    bind(SASLManager.class).toProvider(ChatInstances.SASLManagerProvider.class).in(Singleton.class);
   }
+
 }

@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cc.kune.chat.client.ChatClient;
-import cc.kune.chat.client.ChatInstances;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -54,8 +53,7 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
   @Inject
   public OpenGroupPublicChatRoomAction(final Session session,
       final AccessRightsClientManager accessRightsClientManager, final ChatClient chatClient,
-      final StateManager stateManager, final I18nTranslationService i18n, final ChatResources res,
-      final ChatInstances chatInstances) {
+      final StateManager stateManager, final I18nTranslationService i18n, final ChatResources res) {
     super(stateManager, session, accessRightsClientManager, AccessRolDTO.Editor, true, false, true);
     this.session = session;
     this.chatClient = chatClient;

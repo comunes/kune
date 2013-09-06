@@ -15,11 +15,19 @@ BEGIN {
     } else {
 	currentLang = getLangId(langCode)
     }
+    if (verbose > 0)
+	print "Current lang id: " currentLang " code: " langCode
+    if (currentLang <= 0) {
+	print "Error getting the lang code, so stopping"
+	exit
+    }
     result = getKeyInLang(gtype, currentLang)
     if (result > 0) {
-	# print "'"propKey "' already in db for lang '" langCode "'"
+	if (verbose > 0)
+	    print "'"propKey "' already in db for lang '" langCode "'"
     } else {
-	# print "Don't exists, so insert"
+	if (verbose > 0)
+	    print "'"propKey "' don't exists, so let's try to insert"
 	if (currentLang == english) {
 	    insertNewItem(text, "NULL", gtype, currentLang, "NULL", propKey, langCode)
 	    # FIXME, parent id = self

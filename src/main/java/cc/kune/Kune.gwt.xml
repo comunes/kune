@@ -18,7 +18,6 @@
   <inherits name="cc.kune.trash.KuneTrash" />
   <inherits name="cc.kune.pspace.PSpace" />
   <inherits name="cc.kune.hspace.HSpace" />
-  <inherits name="com.calclab.suco.Suco" />
   <inherits name="org.adamtacy.GWTEffects"></inherits>
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
@@ -35,7 +34,7 @@
   <set-property name="gwt.logging.systemHandler" value="ENABLED" />
   <set-property name="gwt.logging.simpleRemoteHandler"
     value="DISABLED" />
-  
+
   <!-- gwt-platform ============================================= -->
   <inherits name='com.gwtplatform.mvp.Mvp' />
   <define-configuration-property name="gin.ginjector"

@@ -104,6 +104,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String availableForChat();
 
+  String avatar();
+
   String away();
 
   String backgroundChanged();
@@ -466,6 +468,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String invitationToJoinTheGroupParam();
 
+  String invitationToJoinThisSite();
+
   String invite();
 
   String inviteOthersToParamViaEmail();
@@ -726,6 +730,8 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String paramHadAddedYouAsABuddyDoYouWantToAddHimHerAlso();
 
+  String paramHasInvitedYouToJoinParamPleaseParamToAcceptTheInvitationAndRegisterInThisSiteOrJustParamIfYouAl();
+
   String paramHasInvitedYouToJoinTheGroupParamInParamPleaseParamToAcceptTheInvitationAndRegisterInThisSiteOrJ();
 
   String paramTheDevelopment();
@@ -753,6 +759,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String pleaseEditAndWriteHereYourFeedbackAboutThisToolWeFindYourCommentsVeryUsefulEspeciallyIfYouMentionThe();
 
   String pleaseEnterYourEmailAddressYouWillReceiveALinkToCreateANewPasswordViaEmail();
+
+  String pleaseProvideADifferentNewPassword();
 
   String pleaseProvideHereACommaSeparatedListOfEmails();
 

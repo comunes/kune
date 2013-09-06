@@ -22,7 +22,6 @@ package cc.kune.chat.client.actions;
 import java.util.Date;
 
 import cc.kune.chat.client.ChatClient;
-import cc.kune.chat.client.ChatInstances;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
@@ -47,8 +46,8 @@ public class StartAssemblyWithMembersAction extends OpenGroupPublicChatRoomActio
   public StartAssemblyWithMembersAction(final Session session,
       final AccessRightsClientManager accessRightsClientManager, final ChatClient chatClient,
       final StateManager stateManager, final I18nTranslationService i18n, final ChatResources res,
-      final ChatInstances chatInstances, final Provider<ContentServiceAsync> contentService) {
-    super(session, accessRightsClientManager, chatClient, stateManager, i18n, res, chatInstances);
+      final Provider<ContentServiceAsync> contentService) {
+    super(session, accessRightsClientManager, chatClient, stateManager, i18n, res);
     this.contentService = contentService;
   }
 

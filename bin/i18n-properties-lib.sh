@@ -5,14 +5,16 @@ CURRENT_LANG=*
 SRC_PREFIX="Messages"
 
 usage() {
-    echo "Use: $0 -u kune_db_username -p kune_db_passwd -d kune_db_name -w path-to-src-code -n namespace [-e|-l fr]"
+    echo "Use: $0 -u kune_db_username -p kune_db_passwd -d kune_db_name -w path-to-src-code -n namespace [-e|-l fr] [-v]"
     echo "     -e : only process English"
     echo "     -l fr: only process French"
     echo "     -n wave: project short name that we add as a prefix to the ids"
+    echo "     -v : verbose"
+    echo "     -a : no act, dry run"
     echo "Sample: $0 -u kune -p db4kune -d kune_dev -w /home/user/projects/dev/wave/src -n wave"
 }
 
-while getopts “hu:p:d:w:l:m:n:e” OPTION
+while getopts “hu:p:d:w:l:m:n:eva” OPTION
 do
     case $OPTION in
 	h)
@@ -43,6 +45,12 @@ do
 	n)
 	    NAMESPACE=$OPTARG
 	    ;;
+	v)
+	    VERBOSE=1
+	    ;;
+	a)
+	    NOACT=1
+	    ;;
 	?)
             usage
             exit
@@ -70,7 +78,11 @@ DELIMITER="|"
 
 if [[ $EXTERNAL_SRC != *src && $EXTERNAL_SRC != *src/ ]]
 then
-  # We are looking for the src directory of the project
-  EXTERNAL_SRC=${EXTERNAL_SRC%/}"/src/"
-  #echo $EXTERNAL_SRC
+  EXTERNAL_SRC_NEW=${EXTERNAL_SRC%/}"/src/"
+  if [[ -d EXTERNAL_SRC_NEW ]]
+  then
+      EXTERNAL_SRC=${EXTERNAL_SRC%/}"/src/"
+  else
+      echo "Warning: We are usually looking for the src directory of the project"
+  fi
 fi

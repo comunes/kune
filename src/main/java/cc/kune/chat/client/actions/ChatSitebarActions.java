@@ -24,7 +24,6 @@ import org.waveprotocol.box.webclient.client.events.NetworkStatusEvent;
 import org.waveprotocol.box.webclient.client.events.NetworkStatusEventHandler;
 
 import cc.kune.chat.client.ChatClient;
-import cc.kune.chat.client.ChatInstances;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
@@ -126,14 +125,14 @@ public class ChatSitebarActions {
   @Inject
   public ChatSitebarActions(final SessionConstants session, final ChatClient chatClient,
       final SiteUserOptions userOptions, final I18nTranslationService i18n, final ChatResources res,
-      final ChatInstances chatInstances, final EventBus eventBus) {
+      final XmppSession xmppSession, final PresenceManager presenceManager, final EventBus eventBus) {
     this.chatClient = chatClient;
     this.userOptions = userOptions;
     this.i18n = i18n;
     this.res = res;
     this.eventBus = eventBus;
-    xmppSession = chatInstances.xmppSession;
-    presenceManager = chatInstances.presenceManager;
+    this.xmppSession = xmppSession;
+    this.presenceManager = presenceManager;
     createActions();
     createListener();
   }

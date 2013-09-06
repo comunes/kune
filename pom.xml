@@ -14,7 +14,7 @@
   </ciManagement>
   <properties>
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
-    <gwt.version>2.1.1</gwt.version>
+    <gwt.version>2.5.1</gwt.version>
     <!-- <gwtmaven.version>2.2.0</gwtmaven.version> -->
     <gwtmaven.version>2.1.0-1</gwtmaven.version>
     <maven.compiler.source>1.6</maven.compiler.source>
@@ -36,6 +36,17 @@
       </releases>
       <snapshots>
         <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>comunes-snapshots</id>
+      <name>Comunes Archiva Snapshot Repository</name>
+      <url>http://archiva.comunes.org/repository/comunes-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
       </snapshots>
     </repository>
   </repositories>
@@ -70,6 +81,12 @@
       <version>${gwt.version}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>${gwt.version}</version>
+      <!-- <scope>test</scope> -->
+    </dependency>
     <!-- guice -->
     <dependency>
       <groupId>com.google.inject</groupId>
@@ -91,13 +108,18 @@
     </dependency>
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-assistedinject</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-grapher</artifactId>
       <version>3.0</version>
     </dependency>
     <dependency>
       <groupId>com.extjs</groupId>
       <artifactId>gxt</artifactId>
-      <version>2.2.1</version>
+      <version>2.3.0-gwt22</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -109,7 +131,7 @@
     <dependency>
       <groupId>com.gwtplatform</groupId>
       <artifactId>gwtp-all</artifactId>
-      <version>0.5</version>
+      <version>0.6</version>
       <scope>provided</scope>
       <!-- <version>0.6-SNAPSHOT</version> -->
       <exclusions>
@@ -139,6 +161,11 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <dependency>
+      <groupId>com.google.gwt.inject</groupId>
+      <artifactId>gin</artifactId>
+      <version>2.0.0</version>
+    </dependency>
     <!-- FIXME Try to remove this dependency -->
     <dependency>
       <groupId>org.adamtacy</groupId>
@@ -148,21 +175,21 @@
     </dependency>
     <!-- cc -->
     <dependency>
-      <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
+      <groupId>com.allen-sauer.gwt.log</groupId>
       <artifactId>gwt-log</artifactId>
-      <version>3.0.1</version>
+      <version>3.2.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
+      <groupId>com.allen-sauer.gwt.voices</groupId>
       <artifactId>gwt-voices</artifactId>
-      <version>2.0.0</version>
+      <version>3.2.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.allen_sauer.gwt.dnd.gwt-dnd</groupId>
+      <groupId>com.allen-sauer.gwt.dnd</groupId>
       <artifactId>gwt-dnd</artifactId>
-      <version>3.0.1</version>
+      <version>3.2.3</version>
       <scope>provided</scope>
     </dependency>
     <!-- utilities -->
@@ -178,9 +205,9 @@
     </dependency>
     <!-- xmpp -->
     <dependency>
-      <groupId>com.calclab.emite</groupId>
+      <groupId>com.calclab</groupId>
       <artifactId>emite</artifactId>
-      <version>r1694</version>
+      <version>0.9-SNAPSHOT</version>
       <!-- Used in server side also <scope>provided</scope> -->
     </dependency>
     <dependency>
@@ -189,9 +216,24 @@
       <version>0.1</version>
     </dependency>
     <dependency>
-      <groupId>com.calclab.emite</groupId>
+      <groupId>com.calclab</groupId>
+      <artifactId>emite</artifactId>
+      <classifier>tests</classifier>
+      <version>0.9-SNAPSHOT</version>
+      <!-- <scope>test</scope> -->
+    </dependency>
+    <dependency>
+      <groupId>com.calclab</groupId>
       <artifactId>hablar</artifactId>
-      <version>r1697</version>
+      <version>0.9-SNAPSHOT</version>
+      <classifier>classes</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab</groupId>
+      <artifactId>hablar</artifactId>
+      <version>0.9-SNAPSHOT</version>
+      <classifier>sources</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -354,7 +396,7 @@
     <dependency>
       <groupId>org.jukito</groupId>
       <artifactId>jukito</artifactId>
-      <version>1.0</version>
+      <version>1.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -525,11 +567,6 @@
       <groupId>org.waveprotocol</groupId>
       <artifactId>communication-src</artifactId>
       <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>net.sourceforge.findbugs</groupId>
-      <artifactId>jsr-305</artifactId>
-      <version>v0r47</version>
     </dependency>
     <dependency>
       <groupId>com.glines.socketio.java</groupId>

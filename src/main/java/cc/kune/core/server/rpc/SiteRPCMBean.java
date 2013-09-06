@@ -16,14 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.core.server.mbean;
+package cc.kune.core.server.rpc;
 
-public class MBeanConstants {
+import cc.kune.core.server.mbean.MBeanConstants;
 
-	public static final String PREFIX = "cc.kune.mbeans:type=";
-	public static final String LOG4J_PREFIX_DEFAULT = "log4j:hiearchy=default";
+/**
+ * MBean interface for JMX management of the {@link SiteRPC}
+ * 
+ */
+public interface SiteRPCMBean {
 
-	private MBeanConstants() {
-	}
+  public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SiteRPC";
+
+  /**
+   * Gets the store untranslated string.
+   * 
+   * @return the store unstranslated string
+   */
+  boolean getStoreUntranslatedString();
+
+  void setStoreUntranslatedString(boolean storeUntranslatedString);
 
 }

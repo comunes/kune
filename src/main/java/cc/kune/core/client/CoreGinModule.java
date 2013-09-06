@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client;
 
+import cc.kune.client.KunePlaceManager;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusInstance;
@@ -121,21 +122,18 @@ import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 
-import com.calclab.emite.core.client.services.Services;
-import com.calclab.emite.core.client.services.gwt.GWTServices;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.DefaultProxyFailureHandler;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
-import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
 public class CoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -143,9 +141,19 @@ public class CoreGinModule extends ExtendedGinModule {
     bind(EventBus.class).to(EventBusWithLogging.class).in(Singleton.class);
     requestStaticInjection(EventBusInstance.class);
 
+    // gwtplatform
     bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
     bind(RootPresenter.class).asEagerSingleton();
-    bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
+    bind(PlaceManager.class).to(KunePlaceManager.class).in(Singleton.class);
+
+    // FIXME
+    // http://code.google.com/p/gwt-platform/wiki/PortingV1?ts=1305893694&updated=PortingV1#No_more_FailureHandler
+    // No more FailureHandler
+    // The FailureHandler interface and its implementation,
+    // DefaultFailureHandler have both been removed from GWTP. You will have to
+    // remove the binding from your module. If you were using it, handle the new
+    // and more versatile AsyncCallFailEvent instead.
+    // bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
 
     s(I18nUITranslationService.class);
     bind(HasRTL.class).to(I18nUITranslationService.class);
@@ -259,6 +267,6 @@ public class CoreGinModule extends ExtendedGinModule {
 
     s(ErrorsDialog.class);
     s(XMLActionsParser.class);
-    s(Services.class, GWTServices.class);
+
   }
 }

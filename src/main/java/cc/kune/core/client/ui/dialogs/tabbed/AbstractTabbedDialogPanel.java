@@ -29,6 +29,8 @@ import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.Abstr
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Style.Overflow;
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -260,22 +262,25 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     }
   }
 
-  // private void setPosition(final IsWidget widget) {
-  // // DOM.setStyleAttribute(widget.asWidget().getElement(), "position",
-  // // "relative");
-  // //
-  // (widget.asWidget()).getParent().getElement().getStyle().setPosition(Position.RELATIVE);
-  // }
-
+  // Workaround from:
+  // http://stackoverflow.com/questions/5170324/tablayoutpanel-dynamic-resizing
   private void setPositions() {
     for (int i = 0; i < tabPanel.getWidgetCount(); i++) {
-      final Widget widget = tabPanel.getWidget(i);
-      DOM.setStyleAttribute(widget.getElement(), "position", "relative");
+      final Element element = tabPanel.getWidget(i).getElement();
+      element.getStyle().setPosition(Position.RELATIVE);
+      element.getStyle().setOverflow(Overflow.VISIBLE);
 
-      final Element parent = DOM.getParent(widget.getElement());
-      DOM.setStyleAttribute(parent, "overflowX", "visible");
-      DOM.setStyleAttribute(parent, "overflowY", "visible");
-      DOM.setStyleAttribute(parent, "position", "relative");
+      final Element parent = DOM.getParent(element);
+      parent.getStyle().setPosition(Position.RELATIVE);
+      parent.getStyle().setOverflow(Overflow.VISIBLE);
+
+      final Element grand = DOM.getParent(parent);
+      grand.getStyle().setPosition(Position.RELATIVE);
+      grand.getStyle().setOverflow(Overflow.VISIBLE);
+
+      final Element pGrand = DOM.getParent(grand);
+      pGrand.getStyle().setPosition(Position.RELATIVE);
+      pGrand.getStyle().setOverflow(Overflow.VISIBLE);
     }
   }
 

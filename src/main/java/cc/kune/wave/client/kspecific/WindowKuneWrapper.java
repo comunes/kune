@@ -54,7 +54,7 @@ public class WindowKuneWrapper implements WindowWrapper {
    */
   @Override
   public void alert(final String message) {
-    NotifyUser.showAlertMessage(I18n.t("Warning"), I18n.t(message));
+    NotifyUser.showAlertMessage(I18n.t("Warning"), message);
   }
 
   /*
@@ -66,7 +66,7 @@ public class WindowKuneWrapper implements WindowWrapper {
    */
   @Override
   public void confirm(final String msg, final WindowConfirmCallback callback) {
-    NotifyUser.askConfirmation(I18n.t("Confirm"), I18n.t(msg), new SimpleResponseCallback() {
+    NotifyUser.askConfirmation(I18n.t("Confirm"), msg, new SimpleResponseCallback() {
       @Override
       public void onCancel() {
         callback.onCancel();
@@ -102,7 +102,7 @@ public class WindowKuneWrapper implements WindowWrapper {
   public void prompt(final String msg, final String value, final WindowPromptCallback callback) {
     this.callback = callback;
     if (diag == null) {
-      final Builder builder = new PromptTopDialog.Builder(WINDOW_PROMPT_ID, I18n.t(msg), false, true,
+      final Builder builder = new PromptTopDialog.Builder(WINDOW_PROMPT_ID, msg, false, true,
           I18n.getDirection(), new OnEnter() {
             @Override
             public void onEnter() {

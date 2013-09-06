@@ -31,6 +31,7 @@ import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -46,9 +47,9 @@ public class LastConnectedManager {
   private UserBuddiesPresenceDataDTO data;
 
   @Inject
-  public LastConnectedManager(final Session session, final ChatInstances chatInstances,
+  public LastConnectedManager(final Session session, final XmppRoster roster,
       final Provider<UserServiceAsync> userService) {
-    chatInstances.roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
+    roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
       @Override
       public void onRosterItemChanged(final RosterItemChangedEvent event) {
         update(event.getRosterItem().getJID().getShortName(), new Date().getTime());

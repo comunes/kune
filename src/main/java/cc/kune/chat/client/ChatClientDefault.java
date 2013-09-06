@@ -59,7 +59,9 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.SubscriptionHandler;
 import com.calclab.emite.im.client.roster.SubscriptionHandler.Behaviour;
 import com.calclab.emite.im.client.roster.SubscriptionManager;
 import com.calclab.emite.im.client.roster.SubscriptionState;
@@ -67,27 +69,39 @@ import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.SubscriptionRequestReceivedEvent;
 import com.calclab.emite.im.client.roster.events.SubscriptionRequestReceivedHandler;
 import com.calclab.emite.xep.avatar.client.AvatarManager;
+import com.calclab.emite.xep.chatstate.client.StateManager;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.emite.xep.muc.client.subject.RoomSubject;
-import com.calclab.hablar.HablarComplete;
-import com.calclab.hablar.HablarConfig;
-import com.calclab.hablar.console.client.HablarConsole;
+import com.calclab.emite.xep.mucchatstate.client.MUCChatStateManager;
+import com.calclab.emite.xep.mucdisco.client.RoomDiscoveryManager;
+import com.calclab.emite.xep.storage.client.PrivateStorageManager;
+import com.calclab.hablar.chat.client.HablarChat;
+import com.calclab.hablar.client.HablarConfig;
 import com.calclab.hablar.core.client.Hablar;
-import com.calclab.hablar.core.client.ui.icon.Icons;
-import com.calclab.hablar.html.client.HtmlConfig;
-import com.calclab.hablar.icons.alt.client.AltIconsBundle;
-import com.calclab.hablar.login.client.HablarLogin;
-import com.calclab.hablar.login.client.LoginConfig;
+import com.calclab.hablar.core.client.HablarCore;
+import com.calclab.hablar.core.client.browser.BrowserFocusHandler;
+import com.calclab.hablar.dock.client.HablarDock;
+import com.calclab.hablar.editbuddy.client.HablarEditBuddy;
+import com.calclab.hablar.group.client.HablarGroup;
+import com.calclab.hablar.groupchat.client.HablarGroupChat;
+import com.calclab.hablar.icons.client.AvatarProviderRegistry;
+import com.calclab.hablar.openchat.client.HablarOpenChat;
+import com.calclab.hablar.rooms.client.HablarRooms;
+import com.calclab.hablar.roster.client.HablarRoster;
+import com.calclab.hablar.roster.client.page.RosterPage;
+import com.calclab.hablar.signals.client.sound.HablarSoundSignals;
+import com.calclab.hablar.user.client.HablarUser;
+import com.calclab.hablar.usergroups.client.HablarUserGroups;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.Dialog;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class ChatClientDefault implements ChatClient {
 
@@ -128,48 +142,71 @@ public class ChatClientDefault implements ChatClient {
   }
 
   private static final String CHAT_TITLE = "Chat ;)";
-
   private final ChatClientAction action;
-  private final AvatarManager avatarManager;
+  private final Provider<KuneChatAvatarConfig> avatarConfig;
+  private final Provider<AvatarManager> avatarManager;
+  private final Provider<AvatarProviderRegistry> avatarProviderRegistry;
   protected IconLabelDescriptor chatIcon;
-  private final ChatInstances chatInstances;
-  private final ChatManager chatManager;
+  private final Provider<ChatManager> chatManager;
   private final ChatOptions chatOptions;
   private final ChatResources chatResources;
   private Dialog dialog;
   private final ClientFileDownloadUtils downUtils;
   private final I18nTranslationService i18n;
   private final EventBus kuneEventBus;
+  private final Provider<MUCChatStateManager> mucChatStateManager;
+  private final Provider<PresenceManager> presenceManager;
+  private final Provider<PrivateStorageManager> privateStorageManager;
   private final CoreResources res;
-  private final RoomManager roomManager;
-  private final XmppRoster roster;
+  private final Provider<RoomDiscoveryManager> roomDiscoveryManager;
+  private final Provider<RoomManager> roomManager;
+  private final Provider<XmppRoster> roster;
   private final Session session;
   private final GlobalShortcutRegister shorcutRegister;
-  private final SubscriptionManager subscriptionManager;
-
-  private final XmppSession xmppSession;
+  private final Provider<SubscriptionHandler> subscriptionHandler;
+  private final Provider<SubscriptionManager> subscriptionManager;
+  private final Provider<XmppSession> xmppSession;
+  private final Provider<StateManager> xmppStateManager;
 
   @Inject
   public ChatClientDefault(final EventBus kuneEventBus, final I18nTranslationService i18n,
       final SitebarActions siteActions, final Session session, final CoreResources res,
       final ClientFileDownloadUtils downUtils, final GlobalShortcutRegister shorcutRegister,
-      final ChatOptions chatOptions, final ChatResources chatResources, final ChatInstances chatInstances) {
+      final ChatOptions chatOptions, final ChatResources chatResources,
+      final Provider<XmppSession> xmppSession, final Provider<XmppRoster> roster,
+      final Provider<ChatManager> chatManager, final Provider<RoomManager> roomManager,
+      final Provider<AvatarManager> avatarManager,
+      final Provider<SubscriptionManager> subscriptionManager,
+      final Provider<PresenceManager> presenceManager, final Provider<StateManager> xmppStateManager,
+      final Provider<RoomDiscoveryManager> roomDiscoveryManager,
+      final Provider<MUCChatStateManager> mucChatStateManager,
+      final Provider<AvatarProviderRegistry> avatarProviderRegistry,
+      final Provider<PrivateStorageManager> privateStorageManager,
+      final Provider<SubscriptionHandler> subscriptionHandler,
+      final Provider<KuneChatAvatarConfig> avatarConfig) {
     this.kuneEventBus = kuneEventBus;
     this.i18n = i18n;
     this.res = res;
     this.downUtils = downUtils;
-    this.chatInstances = chatInstances;
-    action = new ChatClientAction(chatResources);
+    this.presenceManager = presenceManager;
+    this.xmppStateManager = xmppStateManager;
+    this.roomDiscoveryManager = roomDiscoveryManager;
+    this.mucChatStateManager = mucChatStateManager;
+    this.avatarProviderRegistry = avatarProviderRegistry;
+    this.privateStorageManager = privateStorageManager;
+    this.subscriptionHandler = subscriptionHandler;
     this.session = session;
     this.shorcutRegister = shorcutRegister;
     this.chatOptions = chatOptions;
     this.chatResources = chatResources;
-    this.xmppSession = chatInstances.xmppSession;
-    this.roster = chatInstances.roster;
-    this.chatManager = chatInstances.chatManager;
-    this.roomManager = chatInstances.roomManager;
-    this.avatarManager = chatInstances.avatarManager;
-    this.subscriptionManager = chatInstances.subscriptionManager;
+    this.xmppSession = xmppSession;
+    this.roster = roster;
+    this.chatManager = chatManager;
+    this.roomManager = roomManager;
+    this.avatarManager = avatarManager;
+    this.subscriptionManager = subscriptionManager;
+    this.avatarConfig = avatarConfig;
+    action = new ChatClientAction(chatResources);
 
     session.onAppStart(true, new AppStartEvent.AppStartHandler() {
       @Override
@@ -224,7 +261,7 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public void addNewBuddy(final String shortName) {
-    roster.requestAddItem(uriFrom(shortName), shortName);
+    roster.get().requestAddItem(uriFrom(shortName), shortName);
   }
 
   @Override
@@ -234,7 +271,7 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public void chat(final XmppURI jid) {
-    chatManager.open(jid);
+    chatManager.get().open(jid);
   }
 
   // Put this in Panel object
@@ -266,7 +303,7 @@ public class ChatClientDefault implements ChatClient {
     }
   }
 
-  private void createDialog(final KuneHablarWidget widget, final HtmlConfig htmlConfig) {
+  private void createDialog(final KuneHablarWidget widget, final CustomHtmlConfig htmlConfig) {
     widget.addStyleName("k-chat-panel");
     setSize(widget, htmlConfig);
     dialog.add(widget);
@@ -275,7 +312,7 @@ public class ChatClientDefault implements ChatClient {
   private void createDialogIfNeeded() {
     if (dialog == null) {
       dialog = new Dialog();
-      dialog.setHeading(i18n.t(CHAT_TITLE));
+      dialog.setHeadingText(i18n.t(CHAT_TITLE));
       dialog.setClosable(true);
       dialog.setResizable(true);
       dialog.setButtons("");
@@ -318,47 +355,74 @@ public class ChatClientDefault implements ChatClient {
   }
 
   private void initEmite() {
-    loadIcons(chatResources);
-
+    // Adapted from HablarHtml.java
+    BrowserFocusHandler.getInstance();
     final HablarConfig config = HablarConfig.getFromMeta();
-    final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
+    final CustomHtmlConfig htmlConfig = CustomHtmlConfig.getFromMeta();
+
     config.dockConfig.headerSize = 0;
     config.dockConfig.rosterWidth = 150;
     config.dockConfig.rosterDock = "left";
     final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
     final Hablar hablar = widget.getHablar();
-    HablarComplete.install(hablar, config);
-    new KuneHablarSignals(kuneEventBus, xmppSession, hablar, action, chatInstances, i18n, downUtils);
-    if (htmlConfig.hasLogger) {
-      new HablarConsole(hablar);
-    }
+    avatarProviderRegistry.get().put("kune-avatars", avatarConfig.get());
 
-    if (htmlConfig.hasLogin) {
-      new HablarLogin(hablar, LoginConfig.getFromMeta());
-    }
-    new KuneSoundManager(kuneEventBus, config.soundConfig);
+    new HablarCore(hablar);
+    new HablarChat(hablar, config.chatConfig, roster.get(), chatManager.get(), xmppStateManager.get(),
+        avatarProviderRegistry.get());
+    new HablarRooms(hablar, config.roomsConfig, xmppSession.get(), roster.get(), roomManager.get(),
+        roomDiscoveryManager.get(), mucChatStateManager.get(), avatarProviderRegistry.get());
+    new HablarGroupChat(hablar, config.roomsConfig, xmppSession.get(), roster.get(), chatManager.get(),
+        roomManager.get(), avatarProviderRegistry.get());
+    new HablarDock(hablar, config.dockConfig);
+    new HablarUser(hablar, xmppSession.get(), presenceManager.get(), privateStorageManager.get());
+
+    final HablarRoster hablarRoster = new HablarRoster(hablar, config.rosterConfig, xmppSession.get(),
+        roster.get(), chatManager.get(), subscriptionHandler.get());
+    final RosterPage rosterPage = hablarRoster.getRosterPage();
+
+    new HablarOpenChat(hablar, xmppSession.get(), roster.get(), chatManager.get());
+    new HablarEditBuddy(hablar, roster.get());
+    new HablarUserGroups(rosterPage, hablar, roster.get());
+    new HablarGroup(hablar, xmppSession.get(), roster.get(), avatarProviderRegistry.get());
+    hablarRoster.addLowPriorityActions();
+
+    new KuneHablarSignals(kuneEventBus, xmppSession.get(), hablar, action, privateStorageManager.get(),
+        i18n, downUtils);
+    new HablarSoundSignals(hablar);
+
+    // if (htmlConfig.hasLogger) {
+    // new HablarConsole(hablar, ginjector.getXmppConnection(), session);
+    // }
+    //
+    // if (htmlConfig.hasLogin) {
+    // new HablarLogin(hablar, LoginConfig.getFromMeta(), session);
+    // }
+
+    new KuneSoundManager(kuneEventBus);
     createDialog(widget, htmlConfig);
-    chatInstances.subscriptionHandler.setBehaviour(Behaviour.none);
-    subscriptionManager.addSubscriptionRequestReceivedHandler(new SubscriptionRequestReceivedHandler() {
-      @Override
-      public void onSubscriptionRequestReceived(final SubscriptionRequestReceivedEvent event) {
-        final XmppURI uri = event.getFrom();
-        final String nick = event.getNick();
-        NotifyUser.askConfirmation(res.question32(), i18n.t("Confirm new buddy"), i18n.t(
-            "[%s] had added you as a buddy. Do you want to add him/her also?", uri.getJID().toString()),
-            new SimpleResponseCallback() {
+    subscriptionHandler.get().setBehaviour(Behaviour.none);
+    subscriptionManager.get().addSubscriptionRequestReceivedHandler(
+        new SubscriptionRequestReceivedHandler() {
+          @Override
+          public void onSubscriptionRequestReceived(final SubscriptionRequestReceivedEvent event) {
+            final XmppURI uri = event.getFrom();
+            final String nick = event.getNick();
+            NotifyUser.askConfirmation(res.question32(), i18n.t("Confirm new buddy"), i18n.t(
+                "[%s] had added you as a buddy. Do you want to add him/her also?",
+                uri.getJID().toString()), new SimpleResponseCallback() {
               @Override
               public void onCancel() {
-                subscriptionManager.refuseSubscriptionRequest(uri.getJID());
+                subscriptionManager.get().refuseSubscriptionRequest(uri.getJID());
               }
 
               @Override
               public void onSuccess() {
-                subscriptionManager.approveSubscriptionRequest(uri.getJID(), nick);
+                subscriptionManager.get().approveSubscriptionRequest(uri.getJID(), nick);
               }
             });
-      }
-    });
+          }
+        });
   }
 
   @Override
@@ -368,8 +432,8 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public boolean isBuddy(final XmppURI jid) {
-    if (roster.isRosterReady()) {
-      final RosterItem rosterItem = roster.getItemByJID(jid);
+    if (roster.get().isRosterReady()) {
+      final RosterItem rosterItem = roster.get().getItemByJID(jid);
       if (rosterItem != null && rosterItem.getSubscriptionState().equals(SubscriptionState.both)) {
         return true;
       }
@@ -379,7 +443,7 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public boolean isXmppLoggedIn() {
-    return xmppSession.isReady();
+    return xmppSession.get().isReady();
   }
 
   @Override
@@ -390,10 +454,10 @@ public class ChatClientDefault implements ChatClient {
   @Override
   public Room joinRoom(final String roomName, final String subject, final String userAlias) {
     Room room = null;
-    if (xmppSession.isReady()) {
+    if (xmppSession.get().isReady()) {
       final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
           + chatOptions.username);
-      room = roomManager.open(roomURI, roomManager.getDefaultHistoryOptions());
+      room = roomManager.get().open(roomURI, roomManager.get().getDefaultHistoryOptions());
       if (TextUtils.notEmpty(subject)) {
         RoomSubject.requestSubjectChange(room, subject);
       }
@@ -404,34 +468,9 @@ public class ChatClientDefault implements ChatClient {
     return room;
   }
 
-  public void loadIcons(final ChatResources others) {
-    final AltIconsBundle bundle = GWT.create(AltIconsBundle.class);
-    Icons.register(Icons.BUDDY_ADD, bundle.buddyAddIcon());
-    Icons.register(Icons.BUDDY, bundle.buddyIcon());
-    Icons.register(Icons.BUDDY_DND, others.busy());
-    Icons.register(Icons.BUDDY_OFF, others.offline());
-    Icons.register(Icons.BUDDY_ON, others.online());
-    Icons.register(Icons.BUDDY_WAIT, others.away());
-    Icons.register(Icons.ADD_CHAT, bundle.chatAddIcon());
-    Icons.register(Icons.CHAT, others.xa());
-    Icons.register(Icons.CLIPBOARD, bundle.clipboardIcon());
-    Icons.register(Icons.CLOSE, bundle.closeIcon());
-    Icons.register(Icons.CONSOLE, bundle.consoleIcon());
-    Icons.register(Icons.ADD_GROUP, bundle.groupAddIcon());
-    Icons.register(Icons.GROUP_CHAT, bundle.groupChatIcon());
-    Icons.register(Icons.GROUP_CHAT_ADD, bundle.groupChatAddIcon());
-    Icons.register(Icons.LOADING, bundle.loadingIcon());
-    Icons.register(Icons.MENU, bundle.menuIcon());
-    Icons.register(Icons.MISSING_ICON, bundle.missingIcon());
-    Icons.register(Icons.NOT_CONNECTED, others.offline());
-    Icons.register(Icons.CONNECTED, others.online());
-    Icons.register(Icons.ROSTER, bundle.rosterIcon());
-    Icons.register(Icons.SEARCH, bundle.searchIcon());
-  }
-
   @Override
   public void login(final XmppURI uri, final String passwd) {
-    xmppSession.login(uri, passwd);
+    xmppSession.get().login(uri, passwd);
   }
 
   @Override
@@ -449,7 +488,7 @@ public class ChatClientDefault implements ChatClient {
       dialog.hide();
     }
     if (isXmppLoggedIn()) {
-      xmppSession.logout();
+      xmppSession.get().logout();
     }
   }
 
@@ -460,10 +499,10 @@ public class ChatClientDefault implements ChatClient {
 
   @Override
   public void setAvatar(final String photoBinary) {
-    avatarManager.setVCardAvatar(photoBinary);
+    avatarManager.get().setVCardAvatar(photoBinary);
   }
 
-  private void setSize(final Widget widget, final HtmlConfig htmlConfig) {
+  private void setSize(final Widget widget, final CustomHtmlConfig htmlConfig) {
     if (htmlConfig.width != null) {
       widget.setWidth("98%");
       dialog.setWidth(htmlConfig.width);

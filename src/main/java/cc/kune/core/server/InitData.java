@@ -63,6 +63,7 @@ public class InitData {
   private String siteLogoUrlOnOver;
   private String siteShortName;
   private String siteUrl;
+  private boolean storeUntranslatedStrings;
   private String[] timezones;
   private boolean translatorEnabled;
   private List<String> tutorialLanguages;
@@ -184,6 +185,10 @@ public class InitData {
 
   public String getSiteUrl() {
     return siteUrl;
+  }
+
+  public boolean getStoreUntranslatedStrings() {
+    return storeUntranslatedStrings;
   }
 
   public String[] getTimezones() {
@@ -336,6 +341,10 @@ public class InitData {
 
   public void setSiteUrl(final String siteUrl) {
     this.siteUrl = siteUrl;
+  }
+
+  public void setStoreUntranslatedStrings(final boolean storeUntranslatedStrings) {
+    this.storeUntranslatedStrings = storeUntranslatedStrings;
   }
 
   public void setTimezones(final String[] timezones) {

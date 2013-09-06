@@ -16,14 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.core.server.mbean;
+package cc.kune.chat.client;
 
-public class MBeanConstants {
+import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.core.shared.FileConstants;
 
-	public static final String PREFIX = "cc.kune.mbeans:type=";
-	public static final String LOG4J_PREFIX_DEFAULT = "log4j:hiearchy=default";
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.hablar.icons.client.AvatarConfig;
+import com.google.inject.Inject;
 
-	private MBeanConstants() {
-	}
+public class KuneChatAvatarConfig implements AvatarConfig {
 
+  private final ChatOptions chatOptions;
+  private final ClientFileDownloadUtils downUtils;
+
+  @Inject
+  public KuneChatAvatarConfig(final ChatOptions chatOptions, final ClientFileDownloadUtils downUtils) {
+    this.chatOptions = chatOptions;
+    this.downUtils = downUtils;
+  }
+
+  @Override
+  public String getUrl(final XmppURI uri, final String size) {
+
+    if (chatOptions.domain.equals(uri.getHost())) {
+      return downUtils.getUserAvatar(uri.getShortName());
+    } else {
+      return FileConstants.PERSON_NO_AVATAR_IMAGE;
+    }
+  }
 }

@@ -37,7 +37,7 @@ public class DefaultFormUtils {
 
   public static FieldSet createFieldSet(final String heading, final String width) {
     final FieldSet fieldSet = new FieldSet();
-    fieldSet.setHeading(heading);
+    fieldSet.setHeadingHtml(heading);
     fieldSet.addStyleName("k-form-fieldset");
     fieldSet.setCollapsible(false);
     fieldSet.setWidth(width);

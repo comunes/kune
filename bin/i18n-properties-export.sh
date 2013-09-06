@@ -8,8 +8,8 @@ BASEDIR=$(dirname $0)/
 # so
 # id|text|tr_key|gtype|language_id|parend_id
 
-mysql -B -p$PASS -u$USERNAME $DB --skip-column-names -e "SELECT id,text,tr_key,gtype,language_id,parent_id FROM globalize_translations g where g.gtype like '"$NAMESPACE"ł%'" | sed "s/\t/$DELIMITER/g" \
-| awk -F "|" -v dest=$EXTERNAL_SRC -v gtypeprefix="wave" -v passwd=$PASS -v username=$USERNAME -v db=$DB -f $BASEDIR/i18n-lib.awk -f $BASEDIR/i18n-export.awk
+mysql -B -p$PASS -u$USERNAME $DB --skip-column-names -e "SET character_set_results=utf8; SELECT id,text,tr_key,gtype,language_id,parent_id FROM globalize_translations g where g.gtype like '"$NAMESPACE"ł%'" | sed "s/\t/$DELIMITER/g" \
+| awk -F "|" -v verbose=$VERBOSE -v noact=$NOACT -v dest=$EXTERNAL_SRC -v gtypeprefix="wave" -v passwd=$PASS -v username=$USERNAME -v db=$DB -f $BASEDIR/i18n-lib.awk -f $BASEDIR/i18n-export.awk
 
 #| grep wave | tee /tmp/debug-export-i18n.txt \
 #| grep TO_DEBUG_PUT_SOMETHING_AND_REMOVE_-V_AND_PUT_A_FILE_IN_TEE | tee /dev/null \

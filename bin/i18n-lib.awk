@@ -1,8 +1,10 @@
 #!/usr/bin/gawk
 function sql(operation, noact) {
     cmd = connect "\""operation"\""
-    if (noact > 0) 
+    if (verbose > 0)  
 	print cmd
+    if (noact > 0) {
+    }
     else {
 	cmd |& getline res
 	close(cmd)
@@ -19,7 +21,6 @@ function getLangCode(langId) {
     select = "SELECT code FROM globalize_languages g WHERE id="langId
     return sql(select)
 }
-
 
 function getKeyInLang(somekey, somelang) {
     count = sql("SELECT count(*) FROM globalize_translations g WHERE gtype='"somekey"' AND language_id='"somelang"'")    
@@ -80,11 +81,11 @@ function insertNewItem(trkey, text, gtype, lang, parent, keyValue, langCode) {
     trkey = quote(trkey)
     text = quote(text)    
 
-    insert = "INSERT INTO globalize_translations "			\
+    insert = "SET NAMES utf8; INSERT INTO globalize_translations "			\
 	"(id, facet, item_id, noteForTranslators, pluralization_index, table_name, " \
 	"text, tr_key, gtype, language_id, parent_id) "			\
 	"VALUES (NULL,'',NULL,'',1,'',"text","trkey", '"gtype"', "lang", "parent")"
-    sql(insert);
+    sql(insert, noact);
     logInsert(keyValue, langCode)
 }
 

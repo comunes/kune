@@ -62,3 +62,5 @@ core/kune-sandbox/war/WEB-INF/lib/
 .classpath
 core/kune-color-picker/war/WEB-INF/classes/
 core/kune-color-picker/war/kune_color_picker
+src/main/gwt-unitCache/
+src/main/webapp/WEB-INF/deploy/

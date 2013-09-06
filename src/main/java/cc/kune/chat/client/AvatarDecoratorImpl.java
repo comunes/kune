@@ -62,12 +62,14 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
   private final XmppSession session;
   private final HandlerRegistration sessionStateChangedHandler;
   private XmppURI uri;
-  private final XmppSession xmppSession;
 
-  public AvatarDecoratorImpl(final I18nTranslationService i18n, final ChatInstances chatInstances,
-      final ChatClient chatClient, final ImageResource chatDotBusy, final ImageResource chatDotXA,
-      final ImageResource chatDotAway, final ImageResource chatDotExtendedAway,
-      final ImageResource chatDotAvailable) {
+  public AvatarDecoratorImpl(final I18nTranslationService i18n, final XmppSession session,
+      final PresenceManager presenceManager, final XmppRoster roster, final ChatClient chatClient,
+      final ImageResource chatDotBusy, final ImageResource chatDotXA, final ImageResource chatDotAway,
+      final ImageResource chatDotExtendedAway, final ImageResource chatDotAvailable) {
+    this.session = session;
+    this.presenceManager = presenceManager;
+    this.roster = roster;
     this.chatClient = chatClient;
     this.i18n = i18n;
     this.chatDotBusy = chatDotBusy;
@@ -75,16 +77,12 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
     this.chatDotAway = chatDotAway;
     this.chatDotExtendedAway = chatDotExtendedAway;
     this.chatDotAvailable = chatDotAvailable;
-    session = chatInstances.xmppSession;
     sessionStateChangedHandler = session.addSessionStateChangedHandler(false, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {
         refresh();
       }
     });
-    roster = chatInstances.roster;
-    xmppSession = chatInstances.xmppSession;
-    presenceManager = chatInstances.presenceManager;
     rosterHandler = roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
       @Override
       public void onRosterItemChanged(final RosterItemChangedEvent event) {
@@ -107,7 +105,7 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
   }
 
   protected boolean isMe() {
-    final XmppURI currentUserURI = xmppSession.getCurrentUserURI();
+    final XmppURI currentUserURI = session.getCurrentUserURI();
     return currentUserURI != null && currentUserURI.getJID().equals(uri);
   }
 
@@ -118,7 +116,7 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
         if (uri != null) {
           if (isMe()) {
             final Presence ownPresence = presenceManager.getOwnPresence();
-            setIcon(xmppSession.isReady(), ownPresence.getShow(), ownPresence.getStatus());
+            setIcon(session.isReady(), ownPresence.getShow(), ownPresence.getStatus());
           } else {
             final RosterItem item = roster.getItemByJID(uri.getJID());
             if (session.isReady() && item != null) {

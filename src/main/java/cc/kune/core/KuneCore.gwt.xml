@@ -18,7 +18,6 @@
   <inherits name='com.calclab.emite.core.EmiteCore'/>
   <inherits name="com.extjs.gxt.ui.GXT"/>
   <!-- <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" /> -->
-  <inherits name="com.calclab.suco.Suco"/>
   <inherits name='com.gwtplatform.mvp.Mvp'/>
   <inherits name='com.allen_sauer.gwt.dnd.gwt-dnd'/>
   <!-- Styles =================================================== -->

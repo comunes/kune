@@ -1,6 +1,5 @@
-/*
- *
- * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
+/*******************************************************************************
+ * Copyright (C) 2007, 2013 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,19 +14,24 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-package cc.kune.chat.client;
+ *******************************************************************************/
 
-import com.calclab.emite.core.client.xmpp.session.XmppSession;
-import com.calclab.suco.client.Suco;
-import com.google.inject.Provider;
+package cc.kune.client;
 
-public class XmppSessionProvider implements Provider<XmppSession> {
+import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
+import com.gwtplatform.mvp.client.proxy.TokenFormatter;
+
+public class KunePlaceManager extends PlaceManagerImpl {
+
+  @Inject
+  public KunePlaceManager(final EventBus eventBus, final TokenFormatter tokenFormatter) {
+    super(eventBus, tokenFormatter);
+  }
 
   @Override
-  public XmppSession get() {
-    return Suco.get(XmppSession.class);
+  public void revealDefaultPlace() {
   }
 
 }
