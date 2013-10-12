@@ -1,3 +1,9 @@
+kune (0.3.0+b30) unstable; urgency=low
+
+  * Added kune font-face. Closes #551 (thanks to Aitor and Jorge)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 12 Oct 2013 20:27:44 +0200
+
 kune (0.3.0+b29) unstable; urgency=low
 
   * Update gwt, emite chat, and other libraries

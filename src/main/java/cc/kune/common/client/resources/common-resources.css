@@ -39,3 +39,11 @@
     margin: 2px 0 0 0;
   }
 }
+
+/* kune SVG font */
+@url kuneFontUrl kuneFontResource;
+
+@font-face {
+  font-family: 'kune';
+  src: kuneFontUrl;
+}
