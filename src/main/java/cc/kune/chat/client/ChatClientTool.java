@@ -45,7 +45,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
         i18n.t("chatrooms"),
         i18n.t(
             "A 'room' where you can have a group-chat with many users at once. Rooms can be public or private. Users can be from [%s] or other sites (compatible with Gmail chat)",
-            i18n.getSiteCommonName()), icons.chatsWhite(), AccessRolDTO.Viewer, toolSelector,
+            i18n.getSiteCommonName()), ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector,
         cntCapRegistry, i18n, history);
 
     this.icons = icons;

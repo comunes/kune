@@ -42,7 +42,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
         TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("Lists behave similarly to a mailing list or a forum (but minimizing emails). You can subscribe and discuss about specific topics"),
-        icons.listsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
+        ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
     this.icons = icons;
 
     // registerAclEditableTypes();

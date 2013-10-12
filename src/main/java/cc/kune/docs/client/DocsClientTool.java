@@ -44,7 +44,7 @@ public class DocsClientTool extends FoldableAbstractClientTool {
         TOOL_NAME,
         i18n.t(DocsToolConstants.ROOT_NAME),
         i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs could be static pages in your public web page in case you publish them"),
-        icons.docsRootWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
+        ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
     this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);

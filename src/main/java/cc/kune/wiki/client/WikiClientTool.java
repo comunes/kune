@@ -44,7 +44,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
         i18n.t("wiki"),
         i18n.t(
             "Wiki-pages are Documents that can be edited by any visitor (in [%s]), instead of only by the group. This accelerates updating and construction",
-            i18n.getSiteCommonName()), icons.wikisWhite(), AccessRolDTO.Viewer, toolSelector,
+            i18n.getSiteCommonName()), ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector,
         cntCapRegistry, i18n, history);
     this.icons = icons;
 

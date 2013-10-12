@@ -39,7 +39,7 @@ public class EventsClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
       final HistoryWrapper history) {
     super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
-        icons.eventsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
+        ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
     this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);

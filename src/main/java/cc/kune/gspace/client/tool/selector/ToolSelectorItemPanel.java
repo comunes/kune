@@ -20,13 +20,13 @@
 package cc.kune.gspace.client.tool.selector;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -37,6 +37,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 public class ToolSelectorItemPanel extends Composite implements ToolSelectorItemView {
@@ -53,7 +54,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   @UiField
   FlowPanel flow;
   @UiField
-  Image iconLeft;
+  Label iconLeft;
   @UiField
   Image iconRight;
   @UiField
@@ -62,12 +63,12 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   FocusPanel self;
   private final String shortName;
 
-  public ToolSelectorItemPanel(final String shortName, final ImageResource icon) {
+  public ToolSelectorItemPanel(final String shortName, final KuneIcon icon) {
     this.shortName = shortName;
     initWidget(uiBinder.createAndBindUi(this));
     ensureDebugId(TOOL_ID_PREFIX + shortName);
     setVisibleImpl(false);
-    iconLeft.setResource(icon);
+    iconLeft.setText(icon.getCharacter().toString());
   }
 
   @Override

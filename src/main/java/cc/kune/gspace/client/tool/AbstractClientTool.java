@@ -19,19 +19,18 @@
  */
 package cc.kune.gspace.client.tool;
 
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
 
-import com.google.gwt.resources.client.ImageResource;
-
 public abstract class AbstractClientTool {
 
   public AbstractClientTool(final String shortName, final String longName, final String tooltip,
-      final ImageResource icon, final AccessRolDTO visibleForRol, final ToolSelector toolSelector,
-      HistoryWrapper history) {
+      final KuneIcon icon, final AccessRolDTO visibleForRol, final ToolSelector toolSelector,
+      final HistoryWrapper history) {
     final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName,
         tooltip, visibleForRol, toolSelector, history);
     final ToolSelectorItemPanel panel = new ToolSelectorItemPanel(shortName, icon);

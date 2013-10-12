@@ -43,7 +43,7 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
         TOOL_NAME,
         i18n.t(BlogsToolConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
-        icons.blogsWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
+        ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
     this.icons = icons;
 
     // registerAclEditableTypes();

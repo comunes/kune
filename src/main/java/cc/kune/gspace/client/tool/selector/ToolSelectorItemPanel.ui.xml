@@ -27,6 +27,8 @@
     }
 
     .iconLeft {
+      font-family: kune;
+      color: red; /* FIXME */
     }
 
     .iconRight {
@@ -40,7 +42,7 @@
     type='cc.kune.gspace.client.tool.selector.ToolResources'/>
   <g:FocusPanel ui:field="self" stylePrimaryName="k-tool-item">
     <g:FlowPanel styleName="{style.flow}" ui:field="flow">
-      <g:Image ui:field="iconLeft" styleName="{style.iconLeft}"/>
+      <g:Label ui:field="iconLeft" styleName="{style.iconLeft}"/>
       <g:Image ui:field="iconRight" styleName="{style.iconRight}"/> <!-- resource {res.arrowRightDef}' -->
       <g:InlineLabel ui:field="label" styleName="{style.label}"/>
       <g:HTMLPanel ui:field="arrow"

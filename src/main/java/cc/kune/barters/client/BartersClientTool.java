@@ -43,7 +43,7 @@ public class BartersClientTool extends FoldableAbstractClientTool {
         TOOL_NAME,
         i18n.t("barters"),
         i18n.t("A decentralized way to offer (or ask for) services and goods to your groups or to anyone. Bartering means the exchange of goods by the agreement of two people"),
-        icons.bartersWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
+        ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
     this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);

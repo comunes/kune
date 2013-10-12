@@ -44,7 +44,7 @@ public class TasksClientTool extends FoldableAbstractClientTool {
         TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
-        icons.tasksWhite(), AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
+        ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
     this.icons = icons;
 
     // registerAclEditableTypes();

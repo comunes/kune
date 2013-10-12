@@ -40,7 +40,7 @@ public class TrashClientTool extends FoldableAbstractClientTool {
       final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources res,
       final HistoryWrapper history) {
     super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("You can drop here contents to delete then"),
-        res.trashWhite(), AccessRolDTO.Editor, toolSelector, cntCapRegistry, i18n, history);
+        ICON_TYPE_ROOT, AccessRolDTO.Editor, toolSelector, cntCapRegistry, i18n, history);
     this.res = res;
 
     // registerAclEditableTypes();
