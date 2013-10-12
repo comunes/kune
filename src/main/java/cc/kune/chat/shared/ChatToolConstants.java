@@ -19,10 +19,15 @@
  */
 package cc.kune.chat.shared;
 
+import cc.kune.common.shared.res.KuneIcon;
+
 public final class ChatToolConstants {
 
-  public static final String TOOL_NAME = "chats";
+  public static final KuneIcon ICON_TYPE_CHAT = new KuneIcon('d');
+  public static final KuneIcon ICON_TYPE_ROOM = new KuneIcon('d');
+  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('d');
   public static final String ROOT_NAME = "chats";
+  public static final String TOOL_NAME = "chats";
   public static final String TYPE_CHAT = TOOL_NAME + "." + "chat";
   public static final String TYPE_ROOM = TOOL_NAME + "." + "room";
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";

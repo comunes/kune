@@ -19,10 +19,13 @@
  */
 package cc.kune.trash.shared;
 
+import cc.kune.common.shared.res.KuneIcon;
+
 public final class TrashToolConstants {
 
-  public static final String TOOL_NAME = "trash";
+  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('i');
   public static final String ROOT_NAME = "trash";
+  public static final String TOOL_NAME = "trash";
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
 
   private TrashToolConstants() {

@@ -19,12 +19,15 @@
  */
 package cc.kune.docs.shared;
 
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.shared.ToolConstants;
 
 public final class DocsToolConstants {
-
-  public static final String TOOL_NAME = "docs";
+  public static final KuneIcon ICON_TYPE_DOCUMENT = new KuneIcon('b');
+  public static final KuneIcon ICON_TYPE_FOLDER = new KuneIcon('f');
+  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('b');
   public static final String ROOT_NAME = "documents";
+  public static final String TOOL_NAME = "docs";
   public static final String TYPE_DOCUMENT = TOOL_NAME + "." + "doc";
   public static final String TYPE_FOLDER = TOOL_NAME + "." + "folder";
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";

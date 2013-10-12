@@ -19,12 +19,16 @@
  */
 package cc.kune.wiki.shared;
 
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.shared.ToolConstants;
 
 public final class WikiToolConstants {
 
-  public static final String TOOL_NAME = "wiki";
+  public static final KuneIcon ICON_TYPE_FOLDER = new KuneIcon('n');
+  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('e');
+  public static final KuneIcon ICON_TYPE_WIKIPAGE = new KuneIcon('e');
   public static final String ROOT_NAME = "wiki";
+  public static final String TOOL_NAME = "wiki";
   public static final String TYPE_FOLDER = TOOL_NAME + "." + "folder";
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
   public static final String TYPE_UPLOADEDFILE = TOOL_NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;

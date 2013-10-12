@@ -19,10 +19,15 @@
  */
 package cc.kune.lists.shared;
 
+import cc.kune.common.shared.res.KuneIcon;
+
 public final class ListsToolConstants {
 
-  public static final String TOOL_NAME = "lists";
+  public static final KuneIcon ICON_TYPE_LIST = new KuneIcon('o');
+  public static final KuneIcon ICON_TYPE_POST = new KuneIcon('k');
+  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('o');
   public static final String ROOT_NAME = "lists";
+  public static final String TOOL_NAME = "lists";
   public static final String TYPE_LIST = TOOL_NAME + "." + "list";
   public static final String TYPE_POST = TOOL_NAME + "." + "post";
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";

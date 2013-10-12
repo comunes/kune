@@ -19,12 +19,15 @@
  */
 package cc.kune.blogs.shared;
 
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.shared.ToolConstants;
 
 public final class BlogsToolConstants {
-
-  public static final String TOOL_NAME = "blogs";
+  public static final KuneIcon ICON_TYPE_BLOG = new KuneIcon('q');
+  public static final KuneIcon ICON_TYPE_POST = new KuneIcon('c');
+  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('q');
   public static final String ROOT_NAME = "blogs";
+  public static final String TOOL_NAME = "blogs";
   public static final String TYPE_BLOG = TOOL_NAME + "." + "blog";
   public static final String TYPE_POST = TOOL_NAME + "." + "post";
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";

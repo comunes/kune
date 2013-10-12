@@ -19,10 +19,15 @@
  */
 package cc.kune.tasks.shared;
 
+import cc.kune.common.shared.res.KuneIcon;
+
 public final class TasksToolConstants {
 
-  public static final String TOOL_NAME = "tasks";
+  public static final KuneIcon ICON_TYPE_FOLDER = new KuneIcon('m');
+  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('l');
+  public static final KuneIcon ICON_TYPE_TASK = new KuneIcon('l');
   public static final String ROOT_NAME = "tasks";
+  public static final String TOOL_NAME = "tasks";
   public static final String TYPE_FOLDER = TOOL_NAME + "." + "folder";
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
   public static final String TYPE_TASK = TOOL_NAME + "." + "task";

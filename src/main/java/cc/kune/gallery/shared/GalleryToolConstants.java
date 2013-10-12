@@ -19,11 +19,15 @@
  */
 package cc.kune.gallery.shared;
 
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.shared.ToolConstants;
 
 public final class GalleryToolConstants {
-  public static final String TOOL_NAME = "gallery";
+  public static final KuneIcon ICON_TYPE_ALBUM = new KuneIcon('j');
+  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('j');
+  public static final KuneIcon ICON_TYPE_UPLOADEDFILE = new KuneIcon('j');
   public static final String ROOT_NAME = "gallery";
+  public static final String TOOL_NAME = "gallery";
   public static final String TYPE_ALBUM = TOOL_NAME + "." + "album";
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
   public static final String TYPE_UPLOADEDFILE = TOOL_NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
