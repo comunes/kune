@@ -44,6 +44,6 @@
 @url kuneFontUrl kuneFontResource;
 
 @font-face {
-  font-family: 'kune';
+  font-family: 'kuneicons';
   src: kuneFontUrl;
 }

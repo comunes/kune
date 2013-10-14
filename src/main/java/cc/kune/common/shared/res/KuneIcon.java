@@ -1,7 +1,7 @@
 package cc.kune.common.shared.res;
 
 /**
- * The Class KuneIcon is used with the kune SVG (see the layer names in
+ * The Class KuneIcon is used with a kune SVG font (see the layer names in
  * kune-artwork/iconic/iconsfonts.svg) to show kune icons from the kune icons
  * generated ttf.
  */

@@ -85,6 +85,17 @@
   font-size: 22px;
 }
 
+.k-tool-item-selected div {
+  color: c3;
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.k-tool-item-notselected div {
+  /* icon color of tools not selected */
+  color: c1;
+}
+
 /* Derived from: from http://jonrohan.me/guide/css/creating-triangles-in-css/ */
 .k-tool-item-selected-arrow {
   border-color: transparent transparent transparent bc3;
