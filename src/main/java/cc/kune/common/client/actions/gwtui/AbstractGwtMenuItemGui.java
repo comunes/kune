@@ -37,6 +37,7 @@ import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.res.KuneIcon;
 
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Event;
@@ -106,7 +107,8 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
       item.ensureDebugId(id);
     }
     // initWidget(item);
-    item.setCommand(new Command() {
+    item.setScheduledCommand(new ScheduledCommand() {
+
       @Override
       public void execute() {
         getParentMenu(descriptor).hide();
