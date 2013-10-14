@@ -111,6 +111,7 @@ public class WindowKuneWrapper implements WindowWrapper {
           });
       builder.firstButtonTitle(I18n.t("Ok"));
       builder.sndButtonTitle(I18n.t("Cancel"));
+      builder.width("220px");
       builder.tabIndexStart(1);
       diag = builder.build();
       diag.getFirstBtn().addClickHandler(new ClickHandler() {

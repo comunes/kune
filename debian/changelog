@@ -1,5 +1,7 @@
 kune (0.3.0+b30) unstable; urgency=low
 
+  * Removed some deprecated method in menu items
+  * Fix width issue in wave url prompt
   * Added kune font-face. Closes #551 (thanks to Aitor and Jorge)
   * Use kune icons font instead of main image (png) icons. Closes #553 (thanks to
     Aitor Méndez and Jorge Toledo
