@@ -23,15 +23,15 @@ import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.gwt.user.client.ui.Label;
 
 public class ContentTitleWidget extends Composite {
   public static final String ID = "k-cnt-title-id";
@@ -39,7 +39,7 @@ public class ContentTitleWidget extends Composite {
   private final GSpaceArmor gsArmor;
   private final I18nTranslationService i18n;
   private final IconsRegistry iconRegistry;
-  private final Image titleIcon;
+  private final Label titleIcon;
 
   public ContentTitleWidget(final I18nTranslationService i18n, final GSpaceArmor gsArmor,
       final IconsRegistry iconRegistry) {
@@ -47,7 +47,8 @@ public class ContentTitleWidget extends Composite {
     this.gsArmor = gsArmor;
     this.iconRegistry = iconRegistry;
     final FlowPanel flow = new FlowPanel();
-    titleIcon = new Image();
+    titleIcon = new Label();
+    titleIcon.setStyleName("k-content-title-icon");
     editableTitle = new EditableLabel();
     flow.add(titleIcon);
     flow.add(editableTitle);
@@ -76,11 +77,11 @@ public class ContentTitleWidget extends Composite {
     final ForIsWidget docHeader = gsArmor.getDocHeader();
     UiUtils.clear(docHeader);
 
-    final ImageResource resource = (mime == null ? (ImageResource) iconRegistry.getContentTypeIcon(typeId)
-        : (ImageResource) iconRegistry.getContentTypeIcon(typeId, mime));
+    final KuneIcon resource = (mime == null ? (KuneIcon) iconRegistry.getContentTypeIcon(typeId)
+        : (KuneIcon) iconRegistry.getContentTypeIcon(typeId, mime));
     final boolean hasIcon = resource != null;
     if (hasIcon) {
-      titleIcon.setResource(resource);
+      titleIcon.setText(resource.getCharacter().toString());
     }
     titleIcon.setVisible(hasIcon);
     editableTitle.setText(title);

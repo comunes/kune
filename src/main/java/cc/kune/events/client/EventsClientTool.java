@@ -22,7 +22,6 @@ package cc.kune.events.client;
 import static cc.kune.events.shared.EventsToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -32,15 +31,11 @@ import com.google.inject.Inject;
 
 public class EventsClientTool extends FoldableAbstractClientTool {
 
-  private final IconicResources icons;
-
   @Inject
   public EventsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
-      final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     super(TOOL_NAME, i18n.t(ROOT_NAME), i18n.t("A calendar to schedule activities and events"),
         ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
-    this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_MEETING);
@@ -61,10 +56,8 @@ public class EventsClientTool extends FoldableAbstractClientTool {
   }
 
   private void registerIcons() {
-    registerContentTypeIcon(TYPE_ROOT, icons.eventsGrey());
-    registerContentTypeIcon(TYPE_MEETING, icons.eventGrey());
-    registerContentTypeIconLight(TYPE_ROOT, icons.eventsWhite());
-    registerContentTypeIconLight(TYPE_MEETING, icons.eventWhite());
+    registerContentTypeIcon(TYPE_ROOT, ICON_TYPE_ROOT);
+    registerContentTypeIcon(TYPE_MEETING, ICON_TYPE_MEETING);
     registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any meeting, you can create one"));
     registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t("There isn't any meeting"));
   }

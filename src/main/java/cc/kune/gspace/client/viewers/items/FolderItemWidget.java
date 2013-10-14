@@ -20,6 +20,7 @@
 package cc.kune.gspace.client.viewers.items;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.core.client.GWT;
@@ -31,7 +32,6 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -39,8 +39,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -58,7 +58,7 @@ public class FolderItemWidget extends Composite implements HasText {
   @UiField
   FocusPanel focusPanel;
   @UiField
-  Image icon;
+  Label icon;
   @UiField
   SimplePanel menu;
   @UiField
@@ -68,12 +68,12 @@ public class FolderItemWidget extends Composite implements HasText {
 
   private final StateToken token;
 
-  public FolderItemWidget(final ImageResource iconResource, final String title, final StateToken token,
+  public FolderItemWidget(final KuneIcon icon, final String title, final StateToken token,
       final String id) {
     this.token = token;
     initWidget(uiBinder.createAndBindUi(this));
     this.title.setText(title);
-    icon.setResource(iconResource);
+    this.icon.setText(icon.getCharacter().toString());
     this.ensureDebugId(id);
     menu.ensureDebugId(id + MENU_ID);
   }

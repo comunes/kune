@@ -25,6 +25,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.user.client.ui.MenuItem;
@@ -66,6 +67,12 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
   @Override
   public void setEnabled(final boolean enabled) {
     item.setEnabled(enabled);
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
+    iconLabel.setLeftIconFont(icon);
+    layout();
   }
 
   @Override

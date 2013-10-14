@@ -10,7 +10,7 @@
 }
 
 .k-spaces {
-  
+
 }
 
 .k-group-space {
@@ -21,7 +21,7 @@
 }
 
 .k-space {
-  
+
 }
 
 .floatRight {
@@ -83,7 +83,7 @@
 .docHeader span,.docHeader input {
   font-size: 26px;
   font-weight: bold;
-  margin-left: 15px;
+  margin-left: 3px;
   font: 'UbuntuBold', Arial;
   line-height: 32px;
 }
@@ -129,7 +129,7 @@
 }
 
 .docEditorMargin {
-  
+
 }
 
 .docEditor {
@@ -193,11 +193,11 @@
 }
 
 .entityToolsNorth {
-  
+
 }
 
 .entityToolsNorth span {
-  
+
 }
 
 .entityToolsCenter {

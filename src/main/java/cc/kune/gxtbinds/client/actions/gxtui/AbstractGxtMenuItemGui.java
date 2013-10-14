@@ -32,6 +32,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -124,6 +125,11 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
   @Override
   protected void setEnabled(final boolean enabled) {
     item.setVisible(enabled);
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
+    // TODO Auto-generated method stub
   }
 
   @Override

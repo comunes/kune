@@ -1,6 +1,8 @@
 kune (0.3.0+b30) unstable; urgency=low
 
   * Added kune font-face. Closes #551 (thanks to Aitor and Jorge)
+  * Use kune icons font instead of main image (png) icons. Closes #553 (thanks to
+    Aitor Méndez and Jorge Toledo
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 12 Oct 2013 20:27:44 +0200
 

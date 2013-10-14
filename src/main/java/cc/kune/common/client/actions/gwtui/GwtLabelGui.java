@@ -22,6 +22,7 @@ package cc.kune.common.client.actions.gwtui;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.user.client.ui.Label;
 
@@ -55,6 +56,10 @@ public class GwtLabelGui extends AbstractGuiItem {
   @Override
   public void setEnabled(final boolean enabled) {
     super.setVisible(enabled);
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
   }
 
   @Override

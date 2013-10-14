@@ -167,6 +167,11 @@
   color: c7;
 }
 
+.k-folder-viewer div {
+  /* folder viewer svg/ttf icons */
+  color: c7;
+}
+
 .docFooter {
   background-color: #e3dbdb;
 }

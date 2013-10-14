@@ -22,7 +22,6 @@ package cc.kune.wiki.client;
 import static cc.kune.wiki.shared.WikiToolConstants.*;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -33,12 +32,10 @@ import com.google.inject.Inject;
 public class WikiClientTool extends FoldableAbstractClientTool {
 
   private static final String EMPTY_FOLDER = "This folder is empty, you can create a wikipage or folder here";
-  private final IconicResources icons;
 
   @Inject
   public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
-      final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t("wiki"),
@@ -46,7 +43,6 @@ public class WikiClientTool extends FoldableAbstractClientTool {
             "Wiki-pages are Documents that can be edited by any visitor (in [%s]), instead of only by the group. This accelerates updating and construction",
             i18n.getSiteCommonName()), ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector,
         cntCapRegistry, i18n, history);
-    this.icons = icons;
 
     registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
     registerDragableTypes(TYPE_WIKIPAGE, TYPE_FOLDER, TYPE_UPLOADEDFILE);
@@ -67,13 +63,9 @@ public class WikiClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
-    registerContentTypeIcon(TYPE_ROOT, icons.wikisGrey());
-    registerContentTypeIcon(TYPE_FOLDER, icons.wikisFolderGrey());
-    registerContentTypeIcon(TYPE_WIKIPAGE, icons.wikisGrey());
-    registerContentTypeIconLight(TYPE_ROOT, icons.wikisWhite());
-    registerContentTypeIconLight(TYPE_FOLDER, icons.wikisFolderWhite());
-    registerContentTypeIconLight(TYPE_WIKIPAGE, icons.wikisWhite());
-    registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+    registerContentTypeIcon(TYPE_ROOT, ICON_TYPE_ROOT);
+    registerContentTypeIcon(TYPE_FOLDER, ICON_TYPE_FOLDER);
+    registerContentTypeIcon(TYPE_WIKIPAGE, ICON_TYPE_WIKIPAGE);
     registerEmptyMessages(TYPE_FOLDER, i18n.t(EMPTY_FOLDER));
     registerEmptyMessages(TYPE_ROOT, i18n.t(EMPTY_FOLDER));
     registerEmptyMessagesNotLogged(TYPE_FOLDER, i18n.t("This folder is empty"));

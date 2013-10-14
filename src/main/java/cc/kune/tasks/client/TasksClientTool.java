@@ -22,7 +22,6 @@ package cc.kune.tasks.client;
 import static cc.kune.tasks.shared.TasksToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -34,18 +33,15 @@ import com.google.inject.Inject;
 public class TasksClientTool extends FoldableAbstractClientTool {
 
   private static final String NO_TASK = "There isn't any task";
-  private final IconicResources icons;
 
   @Inject
   public TasksClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
-      final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("A collaborative TO-DO list for the group. Any group-member can participate in any proposed task, add others to a task, comment them, add info, etc"),
         ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
-    this.icons = icons;
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_TASK);
@@ -67,13 +63,11 @@ public class TasksClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
-    registerContentTypeIcon(TYPE_ROOT, icons.tasksGrey());
-    registerContentTypeIcon(TYPE_FOLDER, icons.tasksFolderGrey());
-    registerContentTypeIcon(TYPE_TASK, icons.tasksNew());
-    registerContentTypeIconLight(TYPE_ROOT, icons.tasksWhite());
-    registerContentTypeIconLight(TYPE_FOLDER, icons.tasksFolderWhite());
-    registerContentTypeIconLight(TYPE_TASK, icons.tasksWhite());
-    registerContentTypeIcon(TYPE_TASK, ContentStatus.inTheDustbin, icons.taskDone());
+    registerContentTypeIcon(TYPE_ROOT, ICON_TYPE_TASK);
+    registerContentTypeIcon(TYPE_FOLDER, ICON_TYPE_FOLDER);
+    registerContentTypeIcon(TYPE_TASK, ICON_TYPE_TASK);
+    // FIXME: Do a different icon to completed tasks
+    registerContentTypeIcon(TYPE_TASK, ContentStatus.inTheDustbin, ICON_TYPE_TASK);
     final String noTaskLogged = i18n.t(NO_TASK + ", create one");
     final String noTaskNotLogged = i18n.t(NO_TASK);
     registerEmptyMessages(TYPE_ROOT, noTaskLogged);

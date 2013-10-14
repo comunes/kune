@@ -22,6 +22,7 @@ package cc.kune.common.client.ui;
 import java.util.Iterator;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.core.client.GWT;
@@ -52,6 +53,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   @UiField
   FlowPanel flow;
   @UiField
+  Label iconFontLeft;
+  @UiField
+  Label iconFontRight;
+  @UiField
   Image iconLeft;
   @UiField
   Image iconRight;
@@ -75,6 +80,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     initWidget(uiBinder.createAndBindUi(this));
     setIconClear(iconLeft);
     setIconClear(iconRight);
+    iconFontLeft.setVisible(false);
+    iconFontRight.setVisible(false);
     setIconFloats();
     iconRight.setUrl(GWT.getModuleBaseURL() + "clear.cache.gif");
     label.setText(text);
@@ -109,7 +116,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   }
 
   private String getFloatFromDirection(final Direction direction) {
-    return direction.equals(Direction.LTR) ? "k-fl" : "k-fr";
+    return direction.equals(Direction.LTR) || direction.equals(Direction.DEFAULT) ? "k-fl" : "k-fr";
   }
 
   public HasClickHandlers getFocus() {
@@ -131,6 +138,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     return flow.iterator();
   }
 
+  private Direction opossite(final Direction direction) {
+    return direction.equals(Direction.LTR) || direction.equals(Direction.DEFAULT) ? Direction.RTL
+        : Direction.LTR;
+  }
+
   @Override
   public boolean remove(final Widget w) {
     return flow.remove(w);
@@ -142,11 +154,15 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   private void setIconFloats() {
     // setting floats again, because with setResource we lost them
-    setIconRTL(iconLeft, getTextDirection());
-    setIconRTL(iconRight, getTextDirection());
+    final Direction currentDirection = getTextDirection();
+    setIconRTL(iconLeft, currentDirection);
+    setIconRTL(iconRight, currentDirection);
+    setIconRTL(iconFontLeft, currentDirection);
+    setIconRTL(iconFontRight, currentDirection);
   }
 
   private void setIconRTL(final Widget widget, final Direction direction) {
+    widget.removeStyleName(getFloatFromDirection(opossite(direction)));
     widget.addStyleName(getFloatFromDirection(direction));
   }
 
@@ -163,6 +179,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   public void setLeftIconBackground(final String backgroundColor) {
     DOM.setStyleAttribute(iconLeft.getElement(), "backgroundColor", backgroundColor);
+  }
+
+  public void setLeftIconFont(final KuneIcon icon) {
+    iconFontLeft.setText(icon.getCharacter().toString());
+    iconFontLeft.setVisible(true);
   }
 
   public void setLeftIconResource(final ImageResource res) {
@@ -196,6 +217,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
   public void setRightIconBackground(final String backgroundColor) {
     DOM.setStyleAttribute(iconRight.getElement(), "backgroundColor", backgroundColor);
+  }
+
+  public void setRightIconFont(final KuneIcon icon) {
+    iconFontRight.setText(icon.getCharacter().toString());
+    iconFontRight.setVisible(true);
   }
 
   public void setRightIconResource(final ImageResource res) {

@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -46,6 +47,10 @@ public class GxtMenuSeparatorGui extends AbstractChildGuiItem implements ParentW
 
   @Override
   protected void setEnabled(final boolean enabled) {
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
   }
 
   @Override

@@ -25,6 +25,7 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -72,6 +73,11 @@ public class GwtIconLabelGui extends AbstractGuiItem {
   @Override
   public void setEnabled(final boolean enabled) {
     super.setVisible(enabled);
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
+    iconLabel.setLeftIconFont(icon);
   }
 
   @Override

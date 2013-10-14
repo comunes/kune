@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -107,6 +108,14 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   public void setEnabled(final boolean enabled) {
     if (notStandAlone) {
       button.setVisible(enabled);
+    }
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
+    if (notStandAlone) {
+      iconLabel.setLeftIconFont(icon);
+      layout();
     }
   }
 

@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.widget.menu.HeaderMenuItem;
@@ -63,6 +64,10 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
   @Override
   protected void setEnabled(final boolean enabled) {
     item.setVisible(enabled);
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
   }
 
   @Override

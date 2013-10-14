@@ -26,10 +26,7 @@ import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
-
-import com.google.gwt.resources.client.ImageResource;
 
 public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
@@ -58,23 +55,14 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     contentCapabilitiesRegistry.getComentable().register(typeIds);
   }
 
-  public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType,
-      final String iconUrl) {
-    contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(typeId, mimeType, iconUrl);
+  public void registerContentTypeIcon(final String contentTypeId, final ContentStatus contentStatus,
+      final KuneIcon icon) {
+    contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(contentTypeId, contentStatus,
+        icon);
   }
 
-  public void registerContentTypeIcon(final String typeId, final ContentStatus contentStatus,
-      final ImageResource imageResource) {
-    contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(typeId, contentStatus,
-        imageResource);
-  }
-
-  public void registerContentTypeIcon(final String contentTypeId, final Object icon) {
+  public void registerContentTypeIcon(final String contentTypeId, final KuneIcon icon) {
     contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(contentTypeId, icon);
-  }
-
-  public void registerContentTypeIconLight(final String contentTypeId, final Object icon) {
-    contentCapabilitiesRegistry.getIconsRegistryLight().registerContentTypeIcon(contentTypeId, icon);
   }
 
   protected void registerDragableTypes(final String... typeIds) {
@@ -131,26 +119,6 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
   protected void registerTranslatableTypes(final String... typeIds) {
     contentCapabilitiesRegistry.getTranslatable().register(typeIds);
-  }
-
-  protected void registerUploadTypesAndMimes(final String typeUploadedfile) {
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("image"), "images/nav/picture.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("video"), "images/nav/film.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("audio"), "images/nav/music.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "pdf"),
-        "images/nav/page_pdf.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "zip"),
-        "images/nav/page_zip.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "zip"),
-        "images/nav/page_zip.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("text"), "images/nav/page_text.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "msword"),
-        "images/nav/page_word.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "excel"),
-        "images/nav/page_excel.png");
-    registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "mspowerpoint"),
-        "images/nav/page_pps.png");
-    registerContentTypeIcon(typeUploadedfile, "images/nav/page.png");
   }
 
   protected void registerVersionableTypes(final String... typeIds) {

@@ -22,7 +22,6 @@ package cc.kune.lists.client;
 import static cc.kune.lists.shared.ListsToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -32,18 +31,14 @@ import com.google.inject.Inject;
 
 public class ListsClientTool extends FoldableAbstractClientTool {
 
-  private final IconicResources icons;
-
   @Inject
   public ListsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
-      final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(ROOT_NAME),
         i18n.t("Lists behave similarly to a mailing list or a forum (but minimizing emails). You can subscribe and discuss about specific topics"),
         ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
-    this.icons = icons;
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST);
@@ -65,12 +60,9 @@ public class ListsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_LIST);
-    registerContentTypeIcon(TYPE_ROOT, icons.listsGrey());
-    registerContentTypeIcon(TYPE_LIST, icons.listsGrey());
-    registerContentTypeIcon(TYPE_POST, icons.listsPostGrey());
-    registerContentTypeIconLight(TYPE_ROOT, icons.listsWhite());
-    registerContentTypeIconLight(TYPE_LIST, icons.listsWhite());
-    registerContentTypeIconLight(TYPE_POST, icons.listsPostWhite());
+    registerContentTypeIcon(TYPE_ROOT, ICON_TYPE_ROOT);
+    registerContentTypeIcon(TYPE_LIST, ICON_TYPE_LIST);
+    registerContentTypeIcon(TYPE_POST, ICON_TYPE_POST);
     final String noWave = i18n.t("There is nothing posted yet. Post something");
     final String noList = i18n.t("There isn't any list, you can create one");
     final String noWaveNotLogged = i18n.t("There is nothing posted yet");

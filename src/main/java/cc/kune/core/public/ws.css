@@ -1361,3 +1361,18 @@ button.k-aurorisColorPicker-btn {
 div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
   margin: 2px;
 }
+
+/* font icons */
+
+.k-content-title-icon {
+  font-size: 22px;
+  font-family: kuneicons;
+  color: #FFF;
+  float: left;
+  margin: 5px 0 0 10px;
+}
+
+.k-iconfontlabel {
+  font-size: 16px;
+  font-family: kuneicons;
+}

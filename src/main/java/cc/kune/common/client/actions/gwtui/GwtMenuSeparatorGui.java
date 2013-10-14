@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.user.client.ui.MenuItemSeparator;
 
@@ -45,6 +46,10 @@ public class GwtMenuSeparatorGui extends AbstractGuiItem {
   @Override
   protected void setEnabled(final boolean enabled) {
     separator.setVisible(enabled);
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
   }
 
   @Override

@@ -23,7 +23,6 @@ import static cc.kune.blogs.shared.BlogsToolConstants.*;
 import cc.kune.blogs.shared.BlogsToolConstants;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -33,18 +32,14 @@ import com.google.inject.Inject;
 
 public class BlogsClientTool extends FoldableAbstractClientTool {
 
-  private final IconicResources icons;
-
   @Inject
   public BlogsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
-      final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(BlogsToolConstants.ROOT_NAME),
         i18n.t("Blogs are a chronological list of posts (ordered by date) about a specific topic. Each post can be commented by the visitors"),
         ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
-    this.icons = icons;
 
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
@@ -66,13 +61,9 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_BLOG);
-    registerContentTypeIcon(TYPE_ROOT, icons.blogsGrey());
-    registerContentTypeIcon(TYPE_BLOG, icons.blogsGrey());
-    registerContentTypeIcon(TYPE_POST, icons.blogPostsGrey());
-    registerContentTypeIconLight(TYPE_ROOT, icons.blogsWhite());
-    registerContentTypeIconLight(TYPE_BLOG, icons.blogsWhite());
-    registerContentTypeIconLight(TYPE_POST, icons.blogPostsWhite());
-    registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+    registerContentTypeIcon(TYPE_ROOT, ICON_TYPE_ROOT);
+    registerContentTypeIcon(TYPE_BLOG, ICON_TYPE_BLOG);
+    registerContentTypeIcon(TYPE_POST, ICON_TYPE_POST);
     registerEmptyMessages(TYPE_ROOT, i18n.t("There isn't any blog, you can create one"));
     registerEmptyMessages(TYPE_BLOG, i18n.t("This blog doesn't have any posts, you can create one"));
     registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t("There isn't any blog"));

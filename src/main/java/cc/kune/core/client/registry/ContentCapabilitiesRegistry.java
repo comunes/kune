@@ -35,7 +35,6 @@ public class ContentCapabilitiesRegistry {
   private final EmptyMessagesRegistry emptyMessagesRegistry;
   private final EmptyMessagesRegistry emptyMessagesRegistryNotLogged;
   private final IconsRegistry iconsRegistry;
-  private final IconsRegistry iconsRegistryLight;
   private final LicensableRegistry licensable;
   private final NewMenusForTypeIdsRegistry newMenus;
   private final PublishModerableRegistry publishModerable;
@@ -66,7 +65,6 @@ public class ContentCapabilitiesRegistry {
     this.newMenus = newMenus;
     this.aclEditable = aclEditableRegistry;
     this.iconsRegistry = iconsRegistry.get();
-    this.iconsRegistryLight = iconsRegistry.get();
     this.canBeHomepage = canBeHomepage;
     this.comentable = comentable;
     this.dragable = dragable;
@@ -133,10 +131,6 @@ public class ContentCapabilitiesRegistry {
 
   public IconsRegistry getIconsRegistry() {
     return iconsRegistry;
-  }
-
-  public IconsRegistry getIconsRegistryLight() {
-    return iconsRegistryLight;
   }
 
   public LicensableRegistry getLicensable() {

@@ -22,7 +22,6 @@ package cc.kune.barters.client;
 import static cc.kune.barters.shared.BartersToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
@@ -33,18 +32,15 @@ import com.google.inject.Inject;
 public class BartersClientTool extends FoldableAbstractClientTool {
 
   private static final String THERE_ISN_T_ANY_BARTER = "There isn't any barter. ";
-  private final IconicResources icons;
 
   @Inject
   public BartersClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
-      final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t("barters"),
         i18n.t("A decentralized way to offer (or ask for) services and goods to your groups or to anyone. Bartering means the exchange of goods by the agreement of two people"),
         ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
-    this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_BARTER);
@@ -66,12 +62,9 @@ public class BartersClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
-    registerContentTypeIcon(TYPE_FOLDER, icons.folderGrey());
-    registerContentTypeIcon(TYPE_ROOT, icons.bartersGrey());
-    registerContentTypeIcon(TYPE_BARTER, icons.bartersGrey());
-    registerContentTypeIconLight(TYPE_FOLDER, icons.folderWhite());
-    registerContentTypeIconLight(TYPE_ROOT, icons.bartersWhite());
-    registerContentTypeIconLight(TYPE_BARTER, icons.bartersWhite());
+    registerContentTypeIcon(TYPE_ROOT, ICON_TYPE_ROOT);
+    registerContentTypeIcon(TYPE_FOLDER, ICON_TYPE_FOLDER);
+    registerContentTypeIcon(TYPE_BARTER, ICON_TYPE_BARTER);
     registerEmptyMessages(TYPE_FOLDER,
         i18n.t(THERE_ISN_T_ANY_BARTER + "You can create some of them here"));
     registerEmptyMessages(TYPE_ROOT, i18n.t(THERE_ISN_T_ANY_BARTER));

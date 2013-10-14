@@ -131,7 +131,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.colorPicker = colorPicker;
     widget = uiBinder.createAndBindUi(this);
-    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistryLight());
+    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
     eventBus.addHandler(WaveClientClearEvent.getType(),
         new WaveClientClearEvent.WaveClientClearHandler() {
           @Override

@@ -35,6 +35,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Command;
@@ -176,6 +177,12 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
   protected void setEnabled(final boolean enabled) {
     item.setEnabled(enabled);
     // setVisible(enabled);
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
+    iconLabel.setLeftIconFont(icon);
+    layout();
   }
 
   @Override

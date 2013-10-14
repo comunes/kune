@@ -29,6 +29,7 @@ import cc.kune.common.client.actions.ui.descrip.DropTarget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
 
@@ -147,8 +148,12 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     setEnabled(enabled == null ? true : enabled);
   }
 
+  public abstract void setIcon(final KuneIcon icon);
+
   private void setIcon(final Object icon) {
-    if (icon instanceof ImageResource) {
+    if (icon instanceof KuneIcon) {
+      setIcon((KuneIcon) icon);
+    } else if (icon instanceof ImageResource) {
       setIconResource((ImageResource) icon);
     } else if (icon instanceof Url) {
       setIconUrl(((Url) icon).toString());

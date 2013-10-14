@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.Style.ButtonScale;
@@ -117,6 +118,11 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
     if (button != null) {
       button.setEnabled(enabled);
     }
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
+    // TODO Auto-generated method stub
   }
 
   @Override

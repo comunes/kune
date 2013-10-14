@@ -33,6 +33,8 @@
     <g:FlowPanel styleName="{style.flow}" ui:field="flow">
       <g:Image ui:field="iconLeft" styleName="{style.tcell}" />
       <g:Image ui:field="iconRight" styleName="{style.tcell}" />
+      <g:Label ui:field="iconFontLeft" addStyleNames="{style.tcell} k-iconfontlabel" />
+      <g:Label ui:field="iconFontRight" addStyleNames="{style.tcell} k-iconfontlabel" />
       <g:Label ui:field="label" addStyleNames="{style.label} {style.tcell}" />
     </g:FlowPanel>
   </g:FocusPanel>

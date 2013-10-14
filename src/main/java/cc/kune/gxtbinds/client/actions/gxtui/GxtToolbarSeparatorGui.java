@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
@@ -56,6 +57,10 @@ public class GxtToolbarSeparatorGui extends AbstractChildGuiItem {
   @Override
   protected void setEnabled(final boolean enabled) {
     // do nothing
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
   }
 
   @Override

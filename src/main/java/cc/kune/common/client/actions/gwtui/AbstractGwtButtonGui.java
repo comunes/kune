@@ -27,6 +27,7 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -122,6 +123,11 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     // + " ----------------------------------");
     button.setEnabled(enabled);
     button.getElement().getStyle().setOpacity(enabled ? 1d : 0.6d);
+  }
+
+  @Override
+  public void setIcon(final KuneIcon icon) {
+    iconLabel.setLeftIconFont(icon);
   }
 
   @Override

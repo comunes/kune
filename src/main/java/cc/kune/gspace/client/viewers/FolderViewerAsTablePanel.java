@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.dnd.KuneDragController;
@@ -49,7 +50,6 @@ import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -90,7 +90,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
   public void addItem(final FolderItemDescriptor item, final ClickHandler clickHandler,
       final DoubleClickHandler doubleClickHandler) {
     final int rowCount = flex.getRowCount();
-    final FolderItemWidget itemWidget = new FolderItemWidget((ImageResource) item.getIcon(),
+    final FolderItemWidget itemWidget = new FolderItemWidget((KuneIcon) item.getIcon(),
         TextUtils.ellipsis(item.getText(), 70), item.getStateToken(), ITEM_ID + (flex.getRowCount() + 1));
     final ActionSimplePanel toolbar = new ActionSimplePanel(guiProvider, i18n);
     final long modifiedOn = item.getModififiedOn();

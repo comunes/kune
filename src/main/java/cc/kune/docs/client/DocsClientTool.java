@@ -22,7 +22,6 @@ package cc.kune.docs.client;
 import static cc.kune.docs.shared.DocsToolConstants.*;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.docs.shared.DocsToolConstants;
@@ -34,18 +33,15 @@ import com.google.inject.Inject;
 public class DocsClientTool extends FoldableAbstractClientTool {
 
   private static final String EMPTY_CREATE_SOME = "This folder is empty. You can create a document or folder here.";
-  private final IconicResources icons;
 
   @Inject
   public DocsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
-      final ContentCapabilitiesRegistry cntCapRegistry, final IconicResources icons,
-      final HistoryWrapper history) {
+      final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     super(
         TOOL_NAME,
         i18n.t(DocsToolConstants.ROOT_NAME),
         i18n.t("Here you can create or upload your personal, group or public documents. These documents can be edited and commented collaboratively and simultaneously. These docs could be static pages in your public web page in case you publish them"),
         ICON_TYPE_ROOT, AccessRolDTO.Viewer, toolSelector, cntCapRegistry, i18n, history);
-    this.icons = icons;
 
     // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
     registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -67,13 +63,9 @@ public class DocsClientTool extends FoldableAbstractClientTool {
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);
-    registerContentTypeIcon(TYPE_ROOT, icons.docsRootGrey());
-    registerContentTypeIcon(TYPE_FOLDER, icons.folderGrey());
-    registerContentTypeIcon(TYPE_DOCUMENT, icons.docsGrey());
-    registerContentTypeIconLight(TYPE_ROOT, icons.docsRootWhite());
-    registerContentTypeIconLight(TYPE_FOLDER, icons.folderWhite());
-    registerContentTypeIconLight(TYPE_DOCUMENT, icons.docsWhite());
-    registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
+    registerContentTypeIcon(TYPE_ROOT, ICON_TYPE_ROOT);
+    registerContentTypeIcon(TYPE_FOLDER, ICON_TYPE_FOLDER);
+    registerContentTypeIcon(TYPE_DOCUMENT, ICON_TYPE_DOCUMENT);
     registerEmptyMessagesNotLogged(TYPE_FOLDER, i18n.t(EMPTY));
     registerEmptyMessagesNotLogged(TYPE_ROOT, i18n.t(EMPTY));
     registerEmptyMessages(TYPE_FOLDER, i18n.t(EMPTY_CREATE_SOME));
