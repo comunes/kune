@@ -13,7 +13,7 @@
   <!-- NOTE: this only compiles for chromium/safari ============= -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
   <!-- <set-property name="user.agent" value="gecko1_8" /> -->
-  <set-property name="user.agent" value="gecko1_8"/>
+  <set-property name="user.agent" value="gecko1_8,safari"/>
 
 
   <!-- I18n ===================================================== -->
