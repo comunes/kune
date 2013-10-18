@@ -56,8 +56,8 @@ public class ShareDialogPresenter extends
     void show();
   }
 
-  private final ShareToListView listView;
   private final Session session;
+  private final ShareToListView shareToListView;
   private final ShareToTheNetView shareToNetView;
   private final ShareToOthersView shareToOthersView;
 
@@ -73,11 +73,11 @@ public class ShareDialogPresenter extends
    */
   @Inject
   public ShareDialogPresenter(final EventBus eventBus, final ShareDialogView view,
-      final ShareDialogProxy proxy, final ShareToListView listView,
+      final ShareDialogProxy proxy, final ShareToListView shareToListView,
       final ShareToTheNetView shareToNetView, final ShareToOthersView shareToOthersView,
       final Session session) {
     super(eventBus, view, proxy);
-    this.listView = listView;
+    this.shareToListView = shareToListView;
     this.shareToNetView = shareToNetView;
     this.shareToOthersView = shareToOthersView;
     this.session = session;
@@ -99,7 +99,7 @@ public class ShareDialogPresenter extends
     final StateContainerDTO cnt = (StateContainerDTO) session.getCurrentState();
     final AccessListsDTO acl = cnt.getAccessLists();
     final GroupDTO currentGroup = cnt.getGroup();
-    // adminsView.setState(currentGroup, acl.getAdmins());
+    shareToListView.setState(currentGroup, acl.getAdmins());
     // collabsView.setState(currentGroup, acl.getEditors());
     // viewersView.setState(currentGroup, acl.getViewers());
     shareToNetView.setLinkToShare(StateTokenUtils.getGroupSpaceUrl(session.getCurrentStateToken()));
