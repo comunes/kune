@@ -61,7 +61,9 @@ public class ShareToOthersPanel extends Composite {
     final SuggestBox suggestBox = multivalueSBox.getSuggestBox();
     final TextBoxBase searchTextBox = suggestBox.getTextBox();
 
+    final Label searchIntro = new Label(I18n.t("drag and drop to add people or"));
     final Label searchLabel = new Label(I18n.t("search someone to add"));
+    flow.add(searchIntro);
     flow.add(multivalueSBox);
     flow.add(searchLabel);
     multivalueSBox.addStyleName("k-share-searchbox");

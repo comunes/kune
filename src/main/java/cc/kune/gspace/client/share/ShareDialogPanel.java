@@ -25,6 +25,7 @@ import cc.kune.gspace.client.share.ShareDialogPresenter.ShareDialogView;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -54,11 +55,15 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
       }
     });
     vp = new VerticalPanel();
+    final Label dialogIntro = new Label(
+        I18n.t("Here you can define how others can interact with this document"));
+    dialogIntro.addStyleName("k-dialog-intro");
+    vp.add(dialogIntro);
     vp.add(adminsPanel.getView());
     vp.add(collabsPanel.getView());
     vp.add(viewersPanel.getView());
-    vp.add(shareToTheNetPanel);
     vp.add(shareToOthersPanel);
+    vp.add(shareToTheNetPanel);
     dialog.getInnerPanel().add(vp);
   }
 

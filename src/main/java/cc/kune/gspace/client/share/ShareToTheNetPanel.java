@@ -20,7 +20,8 @@ package cc.kune.gspace.client.share;
 
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
@@ -38,20 +39,26 @@ public class ShareToTheNetPanel extends Composite {
       final ShareInGPlusMenuItem gPlusItem, final ShareInIdenticaMenuItem identicaItem,
       final ActionSimplePanel actionsPanel) {
     final FlowPanel flow = new FlowPanel();
-    final Label label = new Label(I18n.t("or share via:"));
+    final Label label = new Label(I18n.t("share this link via:"));
     label.setStyleName("k-sharelist-title");
     flow.add(label);
 
-    final MenuDescriptor menu = new MenuDescriptor(I18n.t("social nets"));
-    menu.withStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
-    menu.setVertical(false);
-    twitterItem.withParent(menu, false).withText("");
-    gPlusItem.withParent(menu, false).withText("");
-    identicaItem.withParent(menu, false).withText("");
-    actionsPanel.add(menu);
-    actionsPanel.add(twitterItem);
-    actionsPanel.add(gPlusItem);
-    actionsPanel.add(identicaItem);
+    // Clone social net menu items
+    final ButtonDescriptor twitterBtn = new ButtonDescriptor(twitterItem);
+    final ButtonDescriptor gPlusBtn = new ButtonDescriptor(gPlusItem);
+    final ButtonDescriptor identicaBtn = new ButtonDescriptor(identicaItem);
+
+    twitterBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
+        ActionStyles.BTN_NO_BACK_NO_BORDER);
+    gPlusBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
+        ActionStyles.BTN_NO_BACK_NO_BORDER);
+    identicaBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
+        ActionStyles.BTN_NO_BACK_NO_BORDER);
+
+    actionsPanel.add(twitterBtn);
+    actionsPanel.add(gPlusBtn);
+    actionsPanel.add(identicaBtn);
+
     flow.add(actionsPanel);
 
     label.addStyleName("k-fl");
