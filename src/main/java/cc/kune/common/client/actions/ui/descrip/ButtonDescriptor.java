@@ -28,6 +28,10 @@ public class ButtonDescriptor extends AbstractGuiActionDescrip {
     super(action);
   }
 
+  public ButtonDescriptor(final AbstractGuiActionDescrip descr) {
+    super(descr);
+  }
+
   public ButtonDescriptor(final String text, final AbstractAction action) {
     this(action);
     putValue(Action.NAME, text);

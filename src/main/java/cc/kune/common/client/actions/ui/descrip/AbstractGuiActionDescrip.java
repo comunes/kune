@@ -72,9 +72,31 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     addConditions = new ArrayList<GuiAddCondition>();
   }
 
+  /**
+   * Creates a action descriptor from a previous created descriptor cloning its
+   * values
+   * 
+   * @param descr
+   *          the other descriptor
+   */
+  public AbstractGuiActionDescrip(final AbstractGuiActionDescrip descr) {
+    this.action = descr.getAction();
+    putValue(Action.ENABLED, descr.getValue(Action.ENABLED));
+    putValue(VISIBLE, descr.getValue(VISIBLE));
+    position = descr.getPosition();
+    parent = descr.getParent();
+    isRTL = descr.isRTL();
+    location = descr.getLocation();
+    addConditions = descr.getAddConditions();
+    for (final Object keyO : descr.getKeys()) {
+      final String key = (String) keyO;
+      super.putValue(key, descr.getValue(key));
+    }
+  }
+
   @Override
   public void add(final GuiAddCondition addCondition) {
-    addConditions.add(addCondition);
+    getAddConditions().add(addCondition);
   }
 
   @Override
@@ -85,6 +107,10 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public AbstractAction getAction() {
     return action;
+  }
+
+  public List<GuiAddCondition> getAddConditions() {
+    return addConditions;
   }
 
   @Override
@@ -172,7 +198,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public boolean mustBeAdded() {
     final boolean result = true;
-    for (final GuiAddCondition addCondition : addConditions) {
+    for (final GuiAddCondition addCondition : getAddConditions()) {
       if (!addCondition.mustBeAdded(this)) {
         return false;
       }
