@@ -70,9 +70,9 @@ public class ChatClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomArchiveMenuItem,
         containersNoRoot);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, containers);
     // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
     // shareInFacebook, all);
 

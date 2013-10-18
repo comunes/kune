@@ -110,9 +110,9 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, all);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, containers);
+    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, containers);
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareSettings, contents);
     // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
     // shareInFacebook, all);
