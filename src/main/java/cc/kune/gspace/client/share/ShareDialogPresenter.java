@@ -23,6 +23,7 @@ package cc.kune.gspace.client.share;
  */
 
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateTokenUtils;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
@@ -57,6 +58,8 @@ public class ShareDialogPresenter extends
 
   private final ShareToListView listView;
   private final Session session;
+  private final ShareToTheNetView shareToNetView;
+  private final ShareToOthersView shareToOthersView;
 
   /**
    * Instantiates a new share dialog presenter.
@@ -70,9 +73,13 @@ public class ShareDialogPresenter extends
    */
   @Inject
   public ShareDialogPresenter(final EventBus eventBus, final ShareDialogView view,
-      final ShareDialogProxy proxy, final ShareToListView listView, final Session session) {
+      final ShareDialogProxy proxy, final ShareToListView listView,
+      final ShareToTheNetView shareToNetView, final ShareToOthersView shareToOthersView,
+      final Session session) {
     super(eventBus, view, proxy);
     this.listView = listView;
+    this.shareToNetView = shareToNetView;
+    this.shareToOthersView = shareToOthersView;
     this.session = session;
 
   }
@@ -95,6 +102,7 @@ public class ShareDialogPresenter extends
     // adminsView.setState(currentGroup, acl.getAdmins());
     // collabsView.setState(currentGroup, acl.getEditors());
     // viewersView.setState(currentGroup, acl.getViewers());
+    shareToNetView.setLinkToShare(StateTokenUtils.getGroupSpaceUrl(session.getCurrentStateToken()));
     getView().show();
   }
 }

@@ -1362,7 +1362,6 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 }
 
 /* font icons */
-
 .k-content-title-icon {
   font-size: 22px;
   font-family: kuneicons;
@@ -1378,7 +1377,7 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 
 /* Share dialog */
 
-.k-sharelist-title {
+.k-sharelist-title,.k-sharelist-title {
   font-size: 14px;
   font-weight: bold;
   color: brown;
@@ -1399,6 +1398,12 @@ div.k-shareitem {
   padding-left: 10px;
   width: 230px;
 }
+
+.k-sharetonet-introtexts {
+  color: #aa4400;
+  margin: 7px 0 2px 0;
+}
+
 
 div.k-shareitem div.k-iconlabel {
   padding-left: 5px;
@@ -1422,8 +1427,22 @@ div.k-shareitem div.k-iconlabel {
   color: #aa4400;
 }
 
-.k-share-searchbox {
+.k-share-searchbox,.k-sharelink-box {
   float: left;
+}
+
+input.k-sharelink-box {
+    margin-left: 10px;
+}
+
+.k-share-searchbox input, input.k-sharelink-box {
+  border: 1px solid #E4A374;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-top: 5px;
+  color: #999;
+  padding: 3px;
 }
 
 .k-share-searchbox-text {

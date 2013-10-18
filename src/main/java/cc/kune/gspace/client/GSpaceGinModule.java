@@ -118,7 +118,9 @@ import cc.kune.gspace.client.share.ShareItemFactory;
 import cc.kune.gspace.client.share.ShareToListPanel;
 import cc.kune.gspace.client.share.ShareToListView;
 import cc.kune.gspace.client.share.ShareToOthersPanel;
+import cc.kune.gspace.client.share.ShareToOthersView;
 import cc.kune.gspace.client.share.ShareToTheNetPanel;
+import cc.kune.gspace.client.share.ShareToTheNetView;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 import cc.kune.gspace.client.style.GSpaceBackgroundManagerImpl;
 import cc.kune.gspace.client.tags.TagsSummaryPanel;
@@ -251,6 +253,8 @@ public class GSpaceGinModule extends ExtendedGinModule {
         ShareDialogPanel.class, ShareDialogPresenter.ShareDialogProxy.class);
     s(ShareDialog.class, ShareDialogPresenter.class);
     s(ShareToListView.class, ShareToListPanel.class);
+    s(ShareToOthersView.class, ShareToOthersPanel.class);
+    s(ShareToTheNetView.class, ShareToTheNetPanel.class);
     s(ShareItemFactory.class);
     s(ShareToTheNetPanel.class);
     s(ShareToOthersPanel.class);

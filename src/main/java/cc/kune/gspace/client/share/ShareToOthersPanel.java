@@ -39,8 +39,10 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.ValueBoxBase;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-public class ShareToOthersPanel extends Composite {
+@Singleton
+public class ShareToOthersPanel extends Composite implements ShareToOthersView {
 
   public static final String SEARCH_TEXTBOX_ID = "stop-textbox";
 
@@ -59,16 +61,20 @@ public class ShareToOthersPanel extends Composite {
         });
     final SuggestBox suggestBox = multivalueSBox.getSuggestBox();
     final ValueBoxBase<String> searchTextBox = suggestBox.getValueBox();
-
     final Label suggestBoxIntro = new Label(I18n.t("drag and drop to add people or"));
     final Label suggestTextWhenEmpty = new Label(I18n.t("search users or groups to add"));
+
     flow.add(suggestBoxIntro);
     flow.add(multivalueSBox);
     flow.add(suggestTextWhenEmpty);
+
     multivalueSBox.addStyleName("k-share-searchbox");
     suggestTextWhenEmpty.addStyleName("k-share-searchbox-text");
     suggestTextWhenEmpty.addStyleName("k-clean");
+
     initWidget(flow);
+
+    /* Search box settings */
     suggestTextWhenEmpty.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -90,9 +96,12 @@ public class ShareToOthersPanel extends Composite {
         }
       }
     });
+
+    /* Tooltips */
     Tooltip.to(suggestBox, I18n.t("type something to search and add users or groups in this site"));
     Tooltip.to(suggestTextWhenEmpty,
         I18n.t("type something to search and add users or groups in this site"));
     Tooltip.to(suggestBoxIntro, I18n.t("type something to search and add users or groups in this site"));
   }
+
 }
