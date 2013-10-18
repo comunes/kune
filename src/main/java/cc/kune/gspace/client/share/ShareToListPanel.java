@@ -18,6 +18,7 @@
 
 package cc.kune.gspace.client.share;
 
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
 
@@ -29,10 +30,10 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
- * The Class AbstractShareToListPanel is used as a list of users/groups a
- * document is shared to
+ * The Class ShareToListPanel is used as a list of users/groups a document is
+ * shared to
  */
-public abstract class AbstractShareToListPanel extends Composite implements ShareListView {
+public class ShareToListPanel extends Composite implements ShareToListView {
 
   private static final String SCROLL_HEIGHT = "50px";
 
@@ -44,7 +45,7 @@ public abstract class AbstractShareToListPanel extends Composite implements Shar
    * @param titleText
    *          the title text
    */
-  AbstractShareToListPanel(final String titleText) {
+  ShareToListPanel() {
     final Label title = new Label();
     title.setStyleName("k-sharelist-title");
     final VerticalPanel vp = new VerticalPanel();
@@ -54,7 +55,7 @@ public abstract class AbstractShareToListPanel extends Composite implements Shar
     DOM.setStyleAttribute(scroll.getElement(), "maxHeight", SCROLL_HEIGHT);
     scroll.setStyleName("k-sharelist-scroll");
     scroll.add(itemsPanel);
-    title.setText(titleText);
+    title.setText(I18n.t("who can access:"));
     vp.add(title);
     vp.add(scroll);
     initWidget(vp);

@@ -18,6 +18,15 @@
 
 package cc.kune.gspace.client.share;
 
-public interface ShareToCollabsView extends ShareListView {
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.GroupListDTO;
+
+import com.google.gwt.user.client.ui.IsWidget;
+
+public interface ShareToListView {
+
+  IsWidget getView();
+
+  void setState(GroupDTO currentGroup, GroupListDTO groupList);
 
 }

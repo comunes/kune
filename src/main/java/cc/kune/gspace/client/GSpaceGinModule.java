@@ -115,14 +115,10 @@ import cc.kune.gspace.client.share.ShareDialog;
 import cc.kune.gspace.client.share.ShareDialogPanel;
 import cc.kune.gspace.client.share.ShareDialogPresenter;
 import cc.kune.gspace.client.share.ShareItemFactory;
-import cc.kune.gspace.client.share.ShareToAdminsPanel;
-import cc.kune.gspace.client.share.ShareToAdminsView;
-import cc.kune.gspace.client.share.ShareToCollabsPanel;
-import cc.kune.gspace.client.share.ShareToCollabsView;
+import cc.kune.gspace.client.share.ShareToListPanel;
+import cc.kune.gspace.client.share.ShareToListView;
 import cc.kune.gspace.client.share.ShareToOthersPanel;
 import cc.kune.gspace.client.share.ShareToTheNetPanel;
-import cc.kune.gspace.client.share.ShareToViewersPanel;
-import cc.kune.gspace.client.share.ShareToViewersView;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 import cc.kune.gspace.client.style.GSpaceBackgroundManagerImpl;
 import cc.kune.gspace.client.tags.TagsSummaryPanel;
@@ -254,9 +250,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
     bindPresenter(ShareDialogPresenter.class, ShareDialogPresenter.ShareDialogView.class,
         ShareDialogPanel.class, ShareDialogPresenter.ShareDialogProxy.class);
     s(ShareDialog.class, ShareDialogPresenter.class);
-    s(ShareToAdminsView.class, ShareToAdminsPanel.class);
-    s(ShareToCollabsView.class, ShareToCollabsPanel.class);
-    s(ShareToViewersView.class, ShareToViewersPanel.class);
+    s(ShareToListView.class, ShareToListPanel.class);
     s(ShareItemFactory.class);
     s(ShareToTheNetPanel.class);
     s(ShareToOthersPanel.class);

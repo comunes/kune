@@ -55,10 +55,8 @@ public class ShareDialogPresenter extends
     void show();
   }
 
-  private final ShareToAdminsView adminsView;
-  private final ShareToCollabsView collabsView;
+  private final ShareToListView listView;
   private final Session session;
-  private final ShareToViewersView viewersView;
 
   /**
    * Instantiates a new share dialog presenter.
@@ -72,13 +70,11 @@ public class ShareDialogPresenter extends
    */
   @Inject
   public ShareDialogPresenter(final EventBus eventBus, final ShareDialogView view,
-      final ShareDialogProxy proxy, final ShareToAdminsView adminsView,
-      final ShareToCollabsView collabsView, final ShareToViewersView viewersView, final Session session) {
+      final ShareDialogProxy proxy, final ShareToListView listView, final Session session) {
     super(eventBus, view, proxy);
-    this.adminsView = adminsView;
-    this.collabsView = collabsView;
-    this.viewersView = viewersView;
+    this.listView = listView;
     this.session = session;
+
   }
 
   /*
@@ -96,9 +92,9 @@ public class ShareDialogPresenter extends
     final StateContainerDTO cnt = (StateContainerDTO) session.getCurrentState();
     final AccessListsDTO acl = cnt.getAccessLists();
     final GroupDTO currentGroup = cnt.getGroup();
-    adminsView.setState(currentGroup, acl.getAdmins());
-    collabsView.setState(currentGroup, acl.getEditors());
-    viewersView.setState(currentGroup, acl.getViewers());
+    // adminsView.setState(currentGroup, acl.getAdmins());
+    // collabsView.setState(currentGroup, acl.getEditors());
+    // viewersView.setState(currentGroup, acl.getViewers());
     getView().show();
   }
 }

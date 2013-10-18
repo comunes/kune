@@ -1377,10 +1377,12 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 }
 
 /* Share dialog */
+
 .k-sharelist-title {
   font-size: 14px;
   font-weight: bold;
   color: brown;
+  margin-top: 7px;
 }
 
 .k-sharelist-scroll {

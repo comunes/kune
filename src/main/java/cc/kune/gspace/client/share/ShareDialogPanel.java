@@ -40,11 +40,10 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
   private final VerticalPanel vp;
 
   @Inject
-  public ShareDialogPanel(final ShareToAdminsView adminsPanel, final ShareToCollabsView collabsPanel,
-      final ShareToViewersView viewersPanel, final ShareToTheNetPanel shareToTheNetPanel,
+  public ShareDialogPanel(final ShareToListView listView, final ShareToTheNetPanel shareToTheNetPanel,
       final ShareToOthersPanel shareToOthersPanel) {
-    final Builder builder = new BasicTopDialog.Builder(DIALOG_ID, false, false, I18n.getDirection()).autoscroll(
-        true).title(I18n.t("Share settings"));
+    final Builder builder = new BasicTopDialog.Builder(DIALOG_ID, false, true, I18n.getDirection()).autoscroll(
+        true).title(I18n.t("Share settings")).width(280);
     // builder.icon(icon);
     builder.firstButtonTitle(I18n.t("Close")).firstButtonId(FIRSTBUTTON_ID);
     dialog = builder.build();
@@ -59,9 +58,7 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
         I18n.t("Here you can define how others can interact with this document"));
     dialogIntro.addStyleName("k-dialog-intro");
     vp.add(dialogIntro);
-    vp.add(adminsPanel.getView());
-    vp.add(collabsPanel.getView());
-    vp.add(viewersPanel.getView());
+    vp.add(listView.getView());
     vp.add(shareToOthersPanel);
     vp.add(shareToTheNetPanel);
     dialog.getInnerPanel().add(vp);

@@ -26,6 +26,7 @@ import cc.kune.core.client.sitebar.search.MultivalueSuggestBox;
 import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
 import cc.kune.core.client.sitebar.search.SearchBoxFactory;
 
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -36,7 +37,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.TextBoxBase;
+import com.google.gwt.user.client.ui.ValueBoxBase;
 import com.google.inject.Inject;
 
 public class ShareToOthersPanel extends Composite {
@@ -47,8 +48,6 @@ public class ShareToOthersPanel extends Composite {
   public ShareToOthersPanel(final I18nUITranslationService i18n) {
     final FlowPanel flow = new FlowPanel();
     flow.addStyleName("k-share-others");
-    final Label title = new Label(I18n.t("or drag and drop to add people or"));
-    flow.add(title);
 
     final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, false, true,
         SEARCH_TEXTBOX_ID, new OnEntitySelectedInSearch() {
@@ -59,17 +58,18 @@ public class ShareToOthersPanel extends Composite {
           }
         });
     final SuggestBox suggestBox = multivalueSBox.getSuggestBox();
-    final TextBoxBase searchTextBox = suggestBox.getTextBox();
+    final ValueBoxBase<String> searchTextBox = suggestBox.getValueBox();
 
-    final Label searchIntro = new Label(I18n.t("drag and drop to add people or"));
-    final Label searchLabel = new Label(I18n.t("search someone to add"));
-    flow.add(searchIntro);
+    final Label suggestBoxIntro = new Label(I18n.t("drag and drop to add people or"));
+    final Label suggestTextWhenEmpty = new Label(I18n.t("search users or groups to add"));
+    flow.add(suggestBoxIntro);
     flow.add(multivalueSBox);
-    flow.add(searchLabel);
+    flow.add(suggestTextWhenEmpty);
     multivalueSBox.addStyleName("k-share-searchbox");
-    searchLabel.addStyleName("k-share-searchbox-text");
+    suggestTextWhenEmpty.addStyleName("k-share-searchbox-text");
+    suggestTextWhenEmpty.addStyleName("k-clean");
     initWidget(flow);
-    searchLabel.addClickHandler(new ClickHandler() {
+    suggestTextWhenEmpty.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
         suggestBox.setFocus(true);
@@ -78,17 +78,21 @@ public class ShareToOthersPanel extends Composite {
     searchTextBox.addFocusHandler(new FocusHandler() {
       @Override
       public void onFocus(final FocusEvent event) {
-        searchLabel.setVisible(false);
+        // searchLabel.setVisible(false);
+        suggestTextWhenEmpty.getElement().getStyle().setVisibility(Visibility.HIDDEN);
       }
     });
     searchTextBox.addBlurHandler(new BlurHandler() {
       @Override
       public void onBlur(final BlurEvent event) {
         if (searchTextBox.getValue().isEmpty()) {
-          searchLabel.setVisible(true);
+          suggestTextWhenEmpty.getElement().getStyle().setVisibility(Visibility.VISIBLE);
         }
       }
     });
     Tooltip.to(suggestBox, I18n.t("type something to search and add users or groups in this site"));
+    Tooltip.to(suggestTextWhenEmpty,
+        I18n.t("type something to search and add users or groups in this site"));
+    Tooltip.to(suggestBoxIntro, I18n.t("type something to search and add users or groups in this site"));
   }
 }
