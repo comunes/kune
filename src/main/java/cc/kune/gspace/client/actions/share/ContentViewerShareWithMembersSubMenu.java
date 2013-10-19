@@ -22,22 +22,22 @@ package cc.kune.gspace.client.actions.share;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.AccessRightsClientManager;
-import cc.kune.gspace.client.actions.MenuLoggedDescriptor;
 import cc.kune.gspace.client.actions.SNActionStyles;
+import cc.kune.gspace.client.actions.SubMenuLoggedDescriptor;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class ContentViewerShareMenu extends MenuLoggedDescriptor {
+public class ContentViewerShareWithMembersSubMenu extends SubMenuLoggedDescriptor {
 
-  public static final String ID = "k-cnt-viewer-share-menu";
+  public static final String ID = "k-cnt-viewer-share-submenu";
 
   @Inject
-  public ContentViewerShareMenu(final IconicResources res, final I18nTranslationService i18n,
-      final AccessRightsClientManager rightsManager) {
+  public ContentViewerShareWithMembersSubMenu(final IconicResources res,
+      final I18nTranslationService i18n, final AccessRightsClientManager rightsManager) {
     super(rightsManager);
-    this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
+    this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with members, etc")).withIcon(
         res.world()).withStyles(SNActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID);
   }
 
