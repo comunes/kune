@@ -1370,9 +1370,11 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
   color: #FFF;
   float: left;
   margin: 5px 0 0 10px;
+  font-weight: normal;
 }
 
 .k-iconfontlabel {
   font-size: 16px;
   font-family: kuneicons;
+  font-weight: normal;
 }

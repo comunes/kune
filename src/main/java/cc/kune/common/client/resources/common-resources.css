@@ -46,4 +46,5 @@
 @font-face {
   font-family: 'kuneicons';
   src: kuneFontUrl;
+  font-weight: normal;
 }
