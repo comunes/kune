@@ -98,13 +98,12 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook) {
     super(TOOL_NAME, session, registry);
-    add(TOPBAR, all, optionsMenuContent, refresh, newDocIconBtn, shareMenuContent);
+    add(TOPBAR, all, optionsMenuContent, refresh, newDocIconBtn);
     add(TOPBAR, containers, newFolderBtn, foldersNewMenu, newDocMenuItem);
-    add(TOPBAR, contents, docsNewMenu, addAllMenuItem, addAdminMembersMenuItem,
-        addCollabMembersMenuItem, addPublicMenuItem);
+    add(TOPBAR, contents, docsNewMenu);
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, containers, newFolderMenuItem, shareInTwitter, shareInIdentica, shareInGPlus);
-    add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants, shareSettings);
+    add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
@@ -121,6 +120,9 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     newMenusRegistry.register(TYPE_DOCUMENT,
         (MenuDescriptor) docsNewMenu.get().withText(I18n.t("Add Gadget")));
     newMenusRegistry.register(TYPE_UPLOADEDFILE, docsNewMenu.get());
+    add(TOPBAR, all, shareMenuContent);
+    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
+        addPublicMenuItem, shareSettings);
   }
 
   @Override

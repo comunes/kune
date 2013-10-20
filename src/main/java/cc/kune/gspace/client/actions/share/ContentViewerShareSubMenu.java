@@ -29,16 +29,16 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class ContentViewerShareWithMembersSubMenu extends SubMenuLoggedDescriptor {
+public class ContentViewerShareSubMenu extends SubMenuLoggedDescriptor {
 
   public static final String ID = "k-cnt-viewer-share-submenu";
 
   @Inject
-  public ContentViewerShareWithMembersSubMenu(final IconicResources res,
-      final I18nTranslationService i18n, final AccessRightsClientManager rightsManager) {
+  public ContentViewerShareSubMenu(final IconicResources res, final I18nTranslationService i18n,
+      final AccessRightsClientManager rightsManager, final ContentViewerShareMenu menu) {
     super(rightsManager);
-    this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with members, etc")).withIcon(
-        res.world()).withStyles(SNActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID);
+    this.withText(i18n.t("Share with other members")).withIcon(res.world()).withStyles(
+        SNActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID).withParent(menu);
   }
 
 }

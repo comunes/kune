@@ -30,7 +30,7 @@ public class AddPublicToContentMenuItem extends AddMembersToContentMenuItem {
 
   @Inject
   public AddPublicToContentMenuItem(final I18nTranslationService i18n,
-      final AddMembersToContentAction action, final ContentViewerShareMenu menu,
+      final AddMembersToContentAction action, final ContentViewerShareSubMenu menu,
       final IconicResources res) {
     super(i18n.t("Allow any person to edit this"), SocialNetworkSubGroup.PUBLIC, action, menu, res);
     this.withIcon(res.world());

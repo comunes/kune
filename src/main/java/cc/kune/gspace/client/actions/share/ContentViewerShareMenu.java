@@ -38,7 +38,7 @@ public class ContentViewerShareMenu extends MenuLoggedDescriptor {
       final AccessRightsClientManager rightsManager) {
     super(rightsManager);
     this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
-        res.world()).withStyles(SNActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID);
+        res.world()).withStyles(SNActionStyles.MENU_BTN_STYLE_LEFT).withId(ID);
   }
 
 }
