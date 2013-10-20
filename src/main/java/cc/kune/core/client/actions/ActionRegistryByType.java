@@ -58,33 +58,67 @@ public class ActionRegistryByType {
 
   public void addAction(@Nonnull final String tool, final String actionsGroupId,
       final GuiActionDescrip descrip, final String typeId) {
-    addAction(tool, actionsGroupId, new Provider<GuiActionDescrip>() {
+    addActions(tool, actionsGroupId, new String[] { typeId }, new Provider<GuiActionDescrip>() {
       @Override
       public GuiActionDescrip get() {
         return descrip;
       }
-    }, typeId);
+    });
   }
 
   public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final Provider<? extends GuiActionDescrip> action) {
-    addAction(tool, actionsGroupId, action, GENERIC_TYPE_ID);
+    addActions(tool, actionsGroupId, new String[] { GENERIC_TYPE_ID }, action);
   }
 
   public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final @Nonnull Provider<? extends GuiActionDescrip> action, final ContentStatus status,
-      @Nonnull final String... typeIds) {
-    for (final String typeId : typeIds) {
-      addAction(tool, actionsGroupId, action, IdGenerator.generate(typeId, status.toString()));
-    }
+      @Nonnull final String typeId) {
+    addActions(tool, actionsGroupId, new String[] { IdGenerator.generate(typeId, status.toString()) },
+        action);
   }
 
   public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
-      final @Nonnull Provider<? extends GuiActionDescrip> action, @Nonnull final String... typeIds) {
+      final @Nonnull Provider<? extends GuiActionDescrip> action, @Nonnull final String typeId) {
+    final GuiActionDescProviderCollection actionColl = getActions(tool, actionsGroupId, typeId);
+    actionColl.add(action);
+    actions.put(genKey(tool, actionsGroupId, typeId), actionColl);
+  }
+
+  public void addActions(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      final ContentStatus status, @Nonnull final String[] typeIds,
+      final @Nonnull Provider<? extends GuiActionDescrip> action) {
+    addAction(tool, actionsGroupId, action);
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  public void addActions(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      final ContentStatus status, @Nonnull final String[] typeIds,
+      final @Nonnull Provider<? extends GuiActionDescrip>... actions) {
+    for (final Provider action : actions) {
+      for (final String typeId : typeIds) {
+        addActions(tool, actionsGroupId,
+            new String[] { IdGenerator.generate(typeId, status.toString()) }, action);
+      }
+    }
+  }
+
+  public void addActions(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      @Nonnull final String[] typeIds, final @Nonnull Provider<? extends GuiActionDescrip> action) {
     for (final String typeId : typeIds) {
-      final GuiActionDescProviderCollection actionColl = getActions(tool, actionsGroupId, typeId);
-      actionColl.add(action);
-      actions.put(genKey(tool, actionsGroupId, typeId), actionColl);
+      addAction(tool, actionsGroupId, action, typeId);
+    }
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  public void addActions(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      @Nonnull final String[] typeIds, final @Nonnull Provider<? extends GuiActionDescrip>... actionList) {
+    for (final Provider action : actionList) {
+      for (final String typeId : typeIds) {
+        final GuiActionDescProviderCollection actionColl = getActions(tool, actionsGroupId, typeId);
+        actionColl.add(action);
+        actions.put(genKey(tool, actionsGroupId, typeId), actionColl);
+      }
     }
   }
 

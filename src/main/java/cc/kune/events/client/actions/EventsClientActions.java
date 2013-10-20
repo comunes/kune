@@ -20,13 +20,11 @@
 package cc.kune.events.client.actions;
 
 import static cc.kune.events.shared.EventsToolConstants.*;
+import static cc.kune.gspace.client.actions.ActionGroups.*;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
-import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.MoveContentMenuItem;
@@ -59,10 +57,12 @@ public class EventsClientActions extends AbstractFoldableToolActions {
   final String[] containersNoRoot = {};
   final String[] contents = { TYPE_MEETING };
 
+  @SuppressWarnings("unchecked")
   @Inject
-  public EventsClientActions(final I18nUITranslationService i18n, final Session session,
-      final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<NewEventBtn> newEventBtn, final Provider<GoParentFolderBtn> folderGoUp,
+  public EventsClientActions(final Session session,
+
+  final ActionRegistryByType registry, final CoreResources res, final Provider<NewEventBtn> newEventBtn,
+      final Provider<GoParentFolderBtn> folderGoUp,
       final Provider<OpenMeetingMenuItem> openContentMenuItem,
       final Provider<DelMeetingMenuItem> delContentMenuItem,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
@@ -92,60 +92,55 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook) {
-    super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, goToday, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, calPrevBtn, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, cal1DayBtn, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, cal3DaysBtn, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, cal7DaysBtn, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, calMonthBtn, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, calNextBtn, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, export, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareSettings, contents);
-    // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
+    super(TOOL_NAME, session, registry);
+    add(TOPBAR, all, optionsMenuContent);
+    add(TOPBAR, all, refresh);
+    add(TOPBAR, containers, goToday);
+    add(TOPBAR, containers, calPrevBtn);
+    add(TOPBAR, containers, cal1DayBtn);
+    add(TOPBAR, containers, cal3DaysBtn);
+    add(TOPBAR, containers, cal7DaysBtn);
+    add(TOPBAR, containers, calMonthBtn);
+    add(TOPBAR, containers, calNextBtn);
+    add(TOPBAR, contents, participateBtn);
+    add(TOPBAR, all, export);
+    add(BOTTOMBAR, contents, folderGoUp);
+    add(TOPBAR, all, shareMenuContent);
+    add(TOPBAR, contents, addAllMenuItem);
+    add(TOPBAR, contents, addAdminMembersMenuItem);
+    add(TOPBAR, contents, addCollabMembersMenuItem);
+    add(TOPBAR, contents, addPublicMenuItem);
+    add(TOPBAR, containers, shareInTwitter);
+    add(TOPBAR, containers, shareInIdentica);
+    add(TOPBAR, containers, shareInGPlus);
+    add(TOPBAR, contents, shareSettings);
+    // add(TOPBAR,
     // shareInFacebook, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
+    add(TOPBAR, all, tutorialBtn);
+    add(TOPBAR, contents, copyContent);
+    add(TOPBAR, contents, writeToParticipants);
     // On over calendar menu
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, onOverMenu, containers);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeFolderBtn,
-        containersNoRoot);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
-        containersNoRoot);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        containersNoRoot);
+    add(TOPBAR, containers, onOverMenu);
+    add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem);
+    add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
     eventOpenMenuItem.get();
     eventAddMenuItem.get();
     eventRemoveMenuItem.get();
 
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newEventBtn, containers);
+    add(TOPBAR, containers, newEventBtn);
 
     // For now, commented:
-    // actionsRegistry.addAction(NAME, ActionGroups.ITEM_MENU,
+    // add(NAME, ITEM_MENU,
     // openContentMenuItem,
     // contents);
-    // actionsRegistry.addAction(NAME, ActionGroups.ITEM_MENU,
+    // add(NAME, ITEM_MENU,
     // openContentMenuItem,
     // containersNoRoot);
-    // actionsRegistry.addAction(NAME, ActionGroups.ITEM_MENU,
+    // add(NAME, ITEM_MENU,
     // delContentMenuItem,
     // contents);
 

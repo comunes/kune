@@ -19,19 +19,18 @@
  \*/
 package cc.kune.lists.client.actions;
 
+import static cc.kune.gspace.client.actions.ActionGroups.*;
 import static cc.kune.lists.shared.ListsToolConstants.*;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.invitation.ListInvitationMenuItem;
 import cc.kune.core.client.invitation.ListInvitationShareMenuItem;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
-import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.MoveContentMenuItem;
@@ -67,10 +66,11 @@ public class ListsClientActions extends AbstractFoldableToolActions {
   final String[] contents = { TYPE_POST };
   final String[] noRoot = { TYPE_LIST, TYPE_POST };
 
+  @SuppressWarnings("unchecked")
   @Inject
-  public ListsClientActions(final I18nUITranslationService i18n, final Session session,
-      final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewListPostIconMenuItem> newPostItem,
+  public ListsClientActions(final Session session, final ActionRegistryByType registry,
+      final CoreResources res, final Provider<GoParentFolderBtn> folderGoUp,
+      final Provider<NewListPostIconMenuItem> newPostItem,
       final Provider<NewListPostIconBtn> newPostIconBtn,
       final Provider<NewListMenuItem> newListMenuItem, final Provider<NewListBtn> newListBtn,
       final Provider<OpenFolderMenuItem> openContentMenuItem,
@@ -103,65 +103,43 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInFacebookMenuItem> shareInFacebook,
       final Provider<ListInvitationShareMenuItem> shareInvitation,
       final Provider<ListInvitationMenuItem> inviteMenuItem) {
-    super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContainer, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newPostIconBtn, noRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newListBtn, TYPE_ROOT);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, listNewMenu, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, postNewMenu, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, subscribeBtn, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refreshList, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refreshPost, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, listOpenessMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newPostItem, containersNoRoot);
-    // actionsRegistry.addAction(NAME, ActionGroups.TOOLBAR, newListMenuItem,
+    super(TOOL_NAME, session, registry);
+    add(TOPBAR, containers, optionsMenuContainer);
+    add(TOPBAR, contents, optionsMenuContent);
+    add(TOPBAR, noRoot, newPostIconBtn);
+    add(TOPBAR, newListBtn, TYPE_ROOT);
+    add(TOPBAR, containersNoRoot, listNewMenu, subscribeBtn, listOpenessMenuItem, newPostItem);
+    add(TOPBAR, containers, refreshList);
+    add(TOPBAR, contents, postNewMenu, refreshPost);
+    // add(NAME, TOOLBAR, newListMenuItem,
     // TYPE_ROOT);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInvitation, allExceptRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, containers);
-    // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
+    add(BOTTOMBAR, contents, folderGoUp);
+    add(BOTTOMBAR, containers, folderGoUp);
+    add(TOPBAR, all, tutorialBtn, shareMenuContent);
+    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
+        addPublicMenuItem);
+    add(TOPBAR, allExceptRoot, shareInvitation);
+    add(TOPBAR, containers, shareInTwitter, shareInIdentica, shareInGPlus);
+    // add(TOPBAR,
     // shareInFacebook, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, subscribersCount, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, inviteMenuItem, allExceptRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delPostMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAllMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, copyContent, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, writeToParticipants, contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeFolderBtn,
-        containersNoRoot);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
-        containersNoRoot);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        containersNoRoot);
+    add(TOPBAR, contents, participateBtn);
+    add(TOPBAR, containersNoRoot, subscribersCount);
+    add(TOPBAR, contents, copyContent, chatAbout, writeToParticipants);
+    add(ITEM_MENU, contents, openContentMenuItem);
+    add(ITEM_MENU, containersNoRoot, openContentMenuItem, delFolderMenuItem);
+    add(ITEM_MENU, allExceptRoot, inviteMenuItem);
+    add(ITEM_MENU, contents, delPostMenuItem, addAllMenuItem, addAdminMembersMenuItem,
+        addCollabMembersMenuItem, addPublicMenuItem, copyContent, writeToParticipants);
+    add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem);
+    add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
     newMenusRegistry.register(TYPE_LIST, listNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, listNewMenu.get());
     newMenusRegistry.register(TYPE_POST,
-        (MenuDescriptor) postNewMenu.get().withText(i18n.t("Add Gadget")));
+        (MenuDescriptor) postNewMenu.get().withText(I18n.t("Add Gadget")));
   }
 
   @Override

@@ -19,17 +19,16 @@
  \*/
 package cc.kune.wiki.client.actions;
 
+import static cc.kune.gspace.client.actions.ActionGroups.*;
 import static cc.kune.wiki.shared.WikiToolConstants.*;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
-import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.CopyContentMenuItem;
 import cc.kune.gspace.client.actions.MoveContentMenuItem;
@@ -62,11 +61,11 @@ public class WikiClientActions extends AbstractFoldableToolActions {
   final String[] contents = { TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
   final String[] root = { TYPE_ROOT };
 
+  @SuppressWarnings("unchecked")
   @Inject
-  public WikiClientActions(final I18nUITranslationService i18n, final Session session,
-      final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewWikiMenuItem> newWikiMenuItem,
-      final Provider<NewWikiIconBtn> newWikiIconBtn,
+  public WikiClientActions(final Session session, final ActionRegistryByType registry,
+      final CoreResources res, final Provider<GoParentFolderBtn> folderGoUp,
+      final Provider<NewWikiMenuItem> newWikiMenuItem, final Provider<NewWikiIconBtn> newWikiIconBtn,
       final Provider<NewFolderMenuItem> newFolderMenuItem,
       final Provider<OpenWikiMenuItem> openContentMenuItem,
       final Provider<DelWikiMenuItem> delContentMenuItem,
@@ -90,66 +89,61 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook) {
-    super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newWikiIconBtn, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newFolderBtn, containers);
-    // actionsRegistry.addAction(NAME, ActionGroups.TOOLBAR, folderNewMenu,
+    super(TOOL_NAME, session, registry);
+    add(TOPBAR, all, optionsMenuContent);
+    add(TOPBAR, all, refresh);
+    add(TOPBAR, all, newWikiIconBtn);
+    add(TOPBAR, containers, newFolderBtn);
+    // add(NAME, TOOLBAR, folderNewMenu,
     // containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, wikipageNewMenu, contents);
-    // actionsRegistry.addAction(NAME, ActionGroups.TOOLBAR, newWikiMenuItem,
+    add(TOPBAR, contents, wikipageNewMenu);
+    // add(NAME, TOOLBAR, newWikiMenuItem,
     // containers);
-    // actionsRegistry.addAction(NAME, ActionGroups.TOOLBAR, newFolderMenuItem,
+    // add(NAME, TOOLBAR, newFolderMenuItem,
     // containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareSettings, contents);
-    // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
+    add(BOTTOMBAR, contents, folderGoUp);
+    add(BOTTOMBAR, containers, folderGoUp);
+    add(TOPBAR, all, shareMenuContent);
+    add(TOPBAR, all, addAllMenuItem);
+    add(TOPBAR, contents, addAdminMembersMenuItem);
+    add(TOPBAR, contents, addCollabMembersMenuItem);
+    add(TOPBAR, contents, addPublicMenuItem);
+    add(TOPBAR, containers, shareInTwitter);
+    add(TOPBAR, containers, shareInIdentica);
+    add(TOPBAR, containers, shareInGPlus);
+    add(TOPBAR, contents, shareSettings);
+    // add(TOPBAR,
     // shareInFacebook, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delContentMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, setAsHomePage, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAllMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, copyContent, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, writeToParticipants, contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        containersNoRoot);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        containersNoRoot);
+    add(TOPBAR, all, tutorialBtn);
+    add(TOPBAR, contents, participateBtn);
+    add(TOPBAR, contents, chatAbout);
+    add(TOPBAR, contents, copyContent);
+    add(TOPBAR, contents, writeToParticipants);
+    add(ITEM_MENU, contents, openContentMenuItem);
+    add(ITEM_MENU, containersNoRoot, openContentMenuItem);
+    add(ITEM_MENU, contents, moveContentMenuItem);
+    add(ITEM_MENU, containersNoRoot, moveContentMenuItem);
+    add(ITEM_MENU, contents, delContentMenuItem);
+    add(ITEM_MENU, containersNoRoot, delFolderMenuItem);
+    add(ITEM_MENU, contents, setAsHomePage);
+    add(ITEM_MENU, contents, addAllMenuItem);
+    add(ITEM_MENU, contents, addAdminMembersMenuItem);
+    add(ITEM_MENU, contents, addCollabMembersMenuItem);
+    add(ITEM_MENU, contents, addPublicMenuItem);
+    add(ITEM_MENU, contents, copyContent);
+    add(ITEM_MENU, contents, writeToParticipants);
+    add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());
     // newMenusRegistry.register(TYPE_ROOT, folderNewMenu.get());
     newMenusRegistry.register(TYPE_WIKIPAGE,
-        (MenuDescriptor) wikipageNewMenu.get().withText(i18n.t("Add Gadget")));
+        (MenuDescriptor) wikipageNewMenu.get().withText(I18n.t("Add Gadget")));
     newMenusRegistry.register(TYPE_UPLOADEDFILE, wikipageNewMenu.get());
   }
 

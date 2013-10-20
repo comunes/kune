@@ -20,13 +20,13 @@
 package cc.kune.chat.client.actions;
 
 import static cc.kune.chat.shared.ChatToolConstants.*;
+import static cc.kune.gspace.client.actions.ActionGroups.*;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
-import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.TutorialBtn;
@@ -46,6 +46,7 @@ public class ChatClientActions extends AbstractFoldableToolActions {
   final String[] containersNoRoot = { TYPE_ROOM };
   final String[] contents = {};
 
+  @SuppressWarnings("unchecked")
   @Inject
   public ChatClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
@@ -59,21 +60,20 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook) {
-    super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newRoomBtn, TYPE_ROOT);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, openRoomBtn, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomArchiveMenuItem,
-        containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, containers);
-    // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
+    super(TOOL_NAME, session, registry);
+    add(TOPBAR, all, optionsMenuContent);
+    add(TOPBAR, all, refresh);
+    add(TOOL_NAME, TOPBAR, newRoomBtn, TYPE_ROOT);
+    add(BOTTOMBAR, containers, folderGoUp);
+    add(TOPBAR, all, tutorialBtn);
+    add(TOPBAR, containersNoRoot, openRoomBtn);
+    add(ITEM_MENU, containersNoRoot, openRoomMenuItem);
+    add(ITEM_MENU, containersNoRoot, openRoomArchiveMenuItem);
+    add(TOPBAR, all, shareMenuContent);
+    add(TOPBAR, containers, shareInTwitter);
+    add(TOPBAR, containers, shareInIdentica);
+    add(TOPBAR, containers, shareInGPlus);
+    // add(TOPBAR,
     // shareInFacebook, all);
 
   }
