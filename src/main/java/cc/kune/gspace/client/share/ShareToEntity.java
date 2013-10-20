@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -31,12 +32,15 @@ import com.google.inject.Inject;
 
 public class ShareToEntity extends AbstractShareItem {
 
+  private final ContentServiceAsync contentServiceAsync;
   private final ClientFileDownloadUtils downloadUtils;
 
   @Inject
-  public ShareToEntity(final ActionSimplePanel actionsPanel, final ClientFileDownloadUtils downloadUtils) {
+  public ShareToEntity(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync) {
     super(actionsPanel);
     this.downloadUtils = downloadUtils;
+    this.contentServiceAsync = contentServiceAsync;
   }
 
   public void init(final GroupDTO group, final boolean canBeRemoved) {

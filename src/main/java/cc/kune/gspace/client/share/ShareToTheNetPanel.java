@@ -52,7 +52,7 @@ public class ShareToTheNetPanel extends Composite implements ShareToTheNetView {
     final Label linkToShareIntro = new Label(I18n.t("Link to share:"));
     linkToShareIntro.addStyleName("k-sharetonet-introtexts");
     linkToShare = new TextBox();
-
+    linkToShare.setVisibleLength(25);
     linkToShare.setReadOnly(true);
     linkToShare.addStyleName("k-sharelink-box");
 

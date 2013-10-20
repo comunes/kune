@@ -35,7 +35,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class ShareToListPanel extends Composite implements ShareToListView {
 
-  private static final String SCROLL_HEIGHT = "50px";
+  private static final String SCROLL_HEIGHT = "75px";
 
   private final VerticalPanel itemsPanel;
 
@@ -52,6 +52,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
     itemsPanel = new VerticalPanel();
     final ScrollPanel scroll = new ScrollPanel();
     // scroll.setHeight(SCROLL_HEIGHT);
+    scroll.setWidth("280px");
     DOM.setStyleAttribute(scroll.getElement(), "maxHeight", SCROLL_HEIGHT);
     scroll.setStyleName("k-sharelist-scroll");
     scroll.add(itemsPanel);
@@ -69,6 +70,13 @@ public class ShareToListPanel extends Composite implements ShareToListView {
   @Override
   public void setState(final GroupDTO currentGroup, final GroupListDTO groupList) {
     itemsPanel.clear();
+    itemsPanel.add(ShareItemFactory.getShareToNobody());
+    itemsPanel.add(ShareItemFactory.getShareToNobody());
+    itemsPanel.add(ShareItemFactory.getShareToNobody());
+    itemsPanel.add(ShareItemFactory.getShareToEveryone());
+    itemsPanel.add(ShareItemFactory.getShareToEveryone());
+    itemsPanel.add(ShareItemFactory.getShareToEveryone());
+    itemsPanel.add(ShareItemFactory.getShareToEveryone());
     if (groupList.getMode().equals(GroupListDTO.NOBODY)) {
       itemsPanel.add(ShareItemFactory.getShareToNobody());
     } else {
