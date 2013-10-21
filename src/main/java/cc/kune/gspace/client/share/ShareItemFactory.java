@@ -26,31 +26,34 @@ import com.google.inject.Singleton;
 public class ShareItemFactory {
 
   @Inject
+  private static Provider<ShareItemEditableByAnyone> editableByAnyone;
+  @Inject
+  private static Provider<ShareItemNotEditableByOthers> notEditableByOthers;
+  @Inject
   private static Provider<ShareToEntity> shareToEntity;
   @Inject
-  private static Provider<ShareToEveryone> shareToEveryone;
+  private static Provider<ShareItemVisibleByAnyone> visibleByAnyone;
   @Inject
-  private static Provider<ShareToNobody> shareToNone;
-
-  // @Inject
-  // ShareItemFactory(final Provider<ShareToEveryone> shareToEveryone,
-  // final Provider<ShareToNobody> shareToNone, final Provider<ShareToEntity>
-  // shareToEntity) {
-  // this.shareToEveryone = shareToEveryone;
-  // this.shareToNone = shareToNone;
-  // this.shareToEntity = shareToEntity;
-  // }
+  private static Provider<ShareItemNotVisibleByOthers> notVisibleByOthers;
 
   public static ShareToEntity getEntity() {
     return shareToEntity.get();
   }
 
-  public static ShareToEveryone getShareToEveryone() {
-    return shareToEveryone.get();
+  public static ShareItemNotEditableByOthers getShareItemNotEditableByOthers() {
+    return notEditableByOthers.get();
   }
 
-  public static ShareToNobody getShareToNobody() {
-    return shareToNone.get();
+  public static ShareItemEditableByAnyone getShareItemEditableByAnyone() {
+    return editableByAnyone.get();
+  }
+
+  public static ShareItemVisibleByAnyone getShareItemVisibleByAnyone() {
+    return visibleByAnyone.get();
+  }
+
+  public static ShareItemNotVisibleByOthers getShareItemNotVisibleByOthers() {
+    return notVisibleByOthers.get();
   }
 
   public ShareItemFactory() {

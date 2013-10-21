@@ -21,6 +21,9 @@ package cc.kune.gspace.client.share;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.core.shared.dto.GroupDTO;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
@@ -33,6 +36,10 @@ import com.google.gwt.user.client.ui.FlowPanel;
 public abstract class AbstractShareItem extends Composite {
 
   private final ActionSimplePanel actionsPanel;
+
+  protected final ContentServiceAsync contentServiceAsync;
+
+  private final ClientFileDownloadUtils downloadUtils;
 
   /** The flow. */
   private final FlowPanel flow;
@@ -49,9 +56,14 @@ public abstract class AbstractShareItem extends Composite {
    *          the text
    * @param actionsPanel
    *          the actions panel
+   * @param downloadUtils
+   * @param contentServiceAsync
    */
-  public AbstractShareItem(final ActionSimplePanel actionsPanel) {
+  public AbstractShareItem(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync) {
     this.actionsPanel = actionsPanel;
+    this.downloadUtils = downloadUtils;
+    this.contentServiceAsync = contentServiceAsync;
     flow = new FlowPanel();
     iconLabel = new IconLabel();
     flow.add(iconLabel);
@@ -65,6 +77,11 @@ public abstract class AbstractShareItem extends Composite {
 
   public void add(final GuiActionDescrip descr) {
     actionsPanel.add(descr);
+  }
+
+  public void setGroupName(final GroupDTO group) {
+    withText(group.getLongName());
+    withIcon(downloadUtils.getGroupLogo(group));
   }
 
   public AbstractShareItem withIcon(final ImageResource img) {

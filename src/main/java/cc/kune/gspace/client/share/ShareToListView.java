@@ -19,14 +19,31 @@
 package cc.kune.gspace.client.share;
 
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.core.shared.dto.GroupListDTO;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
 public interface ShareToListView {
 
-  IsWidget getView();
+  void addAdmin(GroupDTO admin);
 
-  void setState(GroupDTO currentGroup, GroupListDTO groupList);
+  void addEditableByAnyone();
+
+  void addEditor(GroupDTO editor);
+
+  void addNotEditableByOthers();
+
+  void addNotVisibleByOthers();
+
+  void addOwner(GroupDTO owner);
+
+  void addParticipant(String waveParticipant);
+
+  void addViewer(GroupDTO viewer);
+
+  void addVisibleByAnyone();
+
+  void clear();
+
+  IsWidget getView();
 
 }

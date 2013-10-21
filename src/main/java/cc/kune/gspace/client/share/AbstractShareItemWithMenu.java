@@ -20,36 +20,35 @@ package cc.kune.gspace.client.share;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
-import cc.kune.core.shared.dto.GroupDTO;
 
-import com.google.inject.Inject;
+import com.google.gwt.resources.client.ImageResource;
 
-public class ShareToEntity extends AbstractShareItem {
+public abstract class AbstractShareItemWithMenu extends AbstractShareItem {
 
-  @Inject
-  public ShareToEntity(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync) {
+  public AbstractShareItemWithMenu(final ImageResource icon, final String text, final String menuTitle,
+      final String menuItemText, final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final CommonResources res) {
     super(actionsPanel, downloadUtils, contentServiceAsync);
-  }
-
-  public void init(final GroupDTO group, final boolean canBeRemoved) {
-    setGroupName(group);
-    if (canBeRemoved) {
-      final LabelDescriptor descr = new LabelDescriptor(I18n.t("Remove"), new AbstractExtendedAction() {
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-          // TODO
-          NotifyUser.info("In development");
-        }
-      });
-      super.add(descr);
-    }
+    withText(text).withIcon(icon);
+    final MenuDescriptor menu = new MenuDescriptor(menuTitle);
+    final MenuItemDescriptor menuItem = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        NotifyUser.info("In development");
+      }
+    });
+    menu.withStyles(ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
+    menuItem.withText(menuItemText);
+    super.add(menu);
   }
 
 }

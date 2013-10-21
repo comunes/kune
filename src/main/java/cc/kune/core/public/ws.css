@@ -1410,15 +1410,16 @@ div.k-shareitem {
 div.k-shareitem div.k-iconlabel {
   padding-left: 5px;
   overflow: hidden;
-  width: 120px;
+  width: 100px;
 }
 
 .k-share-item-actions {
   color: #d45500;
   cursor: pointer;
   font-size: 11px;
-  width: 60px;
-  float: left;
+  overflow: hidden;
+  float: right;
+  max-width: 100px;
 }
 
 .k-share-others {

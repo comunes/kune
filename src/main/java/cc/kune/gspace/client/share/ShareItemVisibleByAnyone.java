@@ -18,10 +18,22 @@
 
 package cc.kune.gspace.client.share;
 
-public interface ShareToTheNetView {
+import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.common.client.resources.CommonResources;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 
-  void setLinkToShare(String link);
+import com.google.inject.Inject;
 
-  void setVisible(boolean visible);
+public class ShareItemVisibleByAnyone extends AbstractShareItemWithMenu {
+
+  @Inject
+  public ShareItemVisibleByAnyone(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final CommonResources res) {
+    super(res.world16(), I18n.t("Anyone"), I18n.t("can view"), I18n.t("Don't do this public"),
+        actionsPanel, downloadUtils, contentServiceAsync, res);
+  }
 
 }

@@ -36,6 +36,7 @@ public class StateContent extends StateContainer {
   private boolean isParticipant;
   private BasicMimeType mimeType;
   private Date modifiedOn;
+  private List<String> participants;
   private Date publishedOn;
   private Double rate;
   private Integer rateByUsers;
@@ -77,6 +78,10 @@ public class StateContent extends StateContainer {
 
   public Date getModifiedOn() {
     return modifiedOn;
+  }
+
+  public List<String> getParticipants() {
+    return participants;
   }
 
   public Date getPublishedOn() {
@@ -145,6 +150,10 @@ public class StateContent extends StateContainer {
 
   public void setModifiedOn(final Date modifiedOn) {
     this.modifiedOn = modifiedOn;
+  }
+
+  public void setParticipants(final List<String> participants) {
+    this.participants = participants;
   }
 
   public void setPublishedOn(final Date publishedOn) {

@@ -27,6 +27,7 @@ import cc.kune.core.client.state.StateTokenUtils;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -56,6 +57,7 @@ public class ShareDialogPresenter extends
     void show();
   }
 
+  private final ShareDialogHelper helper;
   private final Session session;
   private final ShareToListView shareToListView;
   private final ShareToTheNetView shareToNetView;
@@ -75,12 +77,13 @@ public class ShareDialogPresenter extends
   public ShareDialogPresenter(final EventBus eventBus, final ShareDialogView view,
       final ShareDialogProxy proxy, final ShareToListView shareToListView,
       final ShareToTheNetView shareToNetView, final ShareToOthersView shareToOthersView,
-      final Session session) {
+      final Session session, final ShareDialogHelper helper) {
     super(eventBus, view, proxy);
     this.shareToListView = shareToListView;
     this.shareToNetView = shareToNetView;
     this.shareToOthersView = shareToOthersView;
     this.session = session;
+    this.helper = helper;
 
   }
 
@@ -99,9 +102,16 @@ public class ShareDialogPresenter extends
     final StateContainerDTO cnt = (StateContainerDTO) session.getCurrentState();
     final AccessListsDTO acl = cnt.getAccessLists();
     final GroupDTO currentGroup = cnt.getGroup();
-    shareToListView.setState(currentGroup, acl.getAdmins());
-    // collabsView.setState(currentGroup, acl.getEditors());
-    // viewersView.setState(currentGroup, acl.getViewers());
+    if (cnt instanceof StateContentDTO) {
+      final StateContentDTO content = (StateContentDTO) cnt;
+      if (content.isWave()) {
+        helper.setState(currentGroup, acl, content.getParticipants());
+      } else {
+        helper.setState(currentGroup, acl);
+      }
+    } else {
+      helper.setState(currentGroup, acl);
+    }
     shareToNetView.setLinkToShare(StateTokenUtils.getGroupSpaceUrl(session.getCurrentStateToken()));
     getView().show();
   }

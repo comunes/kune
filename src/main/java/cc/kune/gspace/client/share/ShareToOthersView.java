@@ -20,4 +20,6 @@ package cc.kune.gspace.client.share;
 
 public interface ShareToOthersView {
 
+  void setVisible(boolean visible);
+
 }

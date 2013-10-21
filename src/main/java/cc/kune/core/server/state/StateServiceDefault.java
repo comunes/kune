@@ -19,6 +19,9 @@
  */
 package cc.kune.core.server.state;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
@@ -42,6 +45,7 @@ import cc.kune.wave.server.kspecific.KuneWaveService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.wave.api.Participants;
 import com.google.wave.api.Wavelet;
 
 @Singleton
@@ -128,6 +132,13 @@ public class StateServiceDefault implements StateService {
         state.setTitle(wavelet.getTitle());
         state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveService.isParticipant(wavelet,
             userLogged.getShortName()) : false);
+        // Wave participant list
+        final Participants waveParticipants = wavelet.getParticipants();
+        final List<String> participantList = new ArrayList<String>();
+        for (final String string : waveParticipants) {
+          participantList.add(string);
+        }
+        state.setParticipants(participantList);
       } catch (final Exception e) {
         LOG.error("Error accessing wave " + waveRef, e);
         String waveUrl = null;

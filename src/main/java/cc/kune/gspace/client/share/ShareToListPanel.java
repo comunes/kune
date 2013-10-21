@@ -20,7 +20,6 @@ package cc.kune.gspace.client.share;
 
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.core.shared.dto.GroupListDTO;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
@@ -45,7 +44,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
    * @param titleText
    *          the title text
    */
-  ShareToListPanel() {
+  public ShareToListPanel() {
     final Label title = new Label();
     title.setStyleName("k-sharelist-title");
     final VerticalPanel vp = new VerticalPanel();
@@ -63,33 +62,58 @@ public class ShareToListPanel extends Composite implements ShareToListView {
   }
 
   @Override
-  public IsWidget getView() {
-    return this;
+  public void addAdmin(final GroupDTO group) {
+    // itemsPanel.add(ShareItemFactory.getAdmin(group));
   }
 
   @Override
-  public void setState(final GroupDTO currentGroup, final GroupListDTO groupList) {
+  public void addEditableByAnyone() {
+    itemsPanel.add(ShareItemFactory.getShareItemEditableByAnyone());
+  }
+
+  @Override
+  public void addEditor(final GroupDTO group) {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void addNotEditableByOthers() {
+    itemsPanel.add(ShareItemFactory.getShareItemNotEditableByOthers());
+  }
+
+  @Override
+  public void addNotVisibleByOthers() {
+    itemsPanel.add(ShareItemFactory.getShareItemNotVisibleByOthers());
+  }
+
+  @Override
+  public void addOwner(final GroupDTO owner) {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void addParticipant(final String waveParticipant) {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void addViewer(final GroupDTO viewer) {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void addVisibleByAnyone() {
+    itemsPanel.add(ShareItemFactory.getShareItemVisibleByAnyone());
+  }
+
+  @Override
+  public void clear() {
     itemsPanel.clear();
-    itemsPanel.add(ShareItemFactory.getShareToNobody());
-    itemsPanel.add(ShareItemFactory.getShareToNobody());
-    itemsPanel.add(ShareItemFactory.getShareToNobody());
-    itemsPanel.add(ShareItemFactory.getShareToEveryone());
-    itemsPanel.add(ShareItemFactory.getShareToEveryone());
-    itemsPanel.add(ShareItemFactory.getShareToEveryone());
-    itemsPanel.add(ShareItemFactory.getShareToEveryone());
-    if (groupList.getMode().equals(GroupListDTO.NOBODY)) {
-      itemsPanel.add(ShareItemFactory.getShareToNobody());
-    } else {
-      if (groupList.getMode().equals(GroupListDTO.EVERYONE)) {
-        itemsPanel.add(ShareItemFactory.getShareToEveryone());
-      } else {
-        for (final GroupDTO group : groupList.getList()) {
-          final ShareToEntity entity = ShareItemFactory.getEntity();
-          entity.init(group, !group.equals(currentGroup));
-          itemsPanel.add(entity);
-        }
-      }
-    }
+  }
+
+  @Override
+  public IsWidget getView() {
+    return this;
   }
 
 }

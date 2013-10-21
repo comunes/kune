@@ -18,31 +18,22 @@
 
 package cc.kune.gspace.client.share;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 import com.google.inject.Inject;
 
-public class ShareToNobody extends AbstractShareItem {
+public class ShareItemEditableByAnyone extends AbstractShareItemWithMenu {
 
   @Inject
-  public ShareToNobody(final ActionSimplePanel actionsPanel, final CommonResources res) {
-    super(actionsPanel);
-    withIcon(res.worldDeny16()).withText(I18n.t("Nobody"));
-    final LabelDescriptor descr = new LabelDescriptor(I18n.t("Share"), new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        // TODO
-        NotifyUser.info("In development");
-      }
-    });
-    descr.withToolTip(I18n.t("Share with everyone"));
-    super.add(descr);
+  public ShareItemEditableByAnyone(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final CommonResources res) {
+    super(res.world16(), I18n.t("Anyone"), I18n.t("can edit"), I18n.t("Don't allow edit by everyone"),
+        actionsPanel, downloadUtils, contentServiceAsync, res);
   }
 
 }

@@ -18,32 +18,22 @@
 
 package cc.kune.gspace.client.share;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 import com.google.inject.Inject;
 
-public class ShareToEveryone extends AbstractShareItem {
+public class ShareItemNotVisibleByOthers extends AbstractShareItemWithMenu {
 
   @Inject
-  public ShareToEveryone(final ActionSimplePanel actionsPanel, final CommonResources res) {
-    super(actionsPanel);
-    withIcon(res.world16()).withText(I18n.t("Anyone"));
-    final LabelDescriptor descr = new LabelDescriptor(I18n.t("Don't share"),
-        new AbstractExtendedAction() {
-          @Override
-          public void actionPerformed(final ActionEvent event) {
-            // TODO
-            NotifyUser.info("In development");
-          }
-        });
-    descr.withToolTip(I18n.t("Don't share this with everyone"));
-    super.add(descr);
+  public ShareItemNotVisibleByOthers(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final CommonResources res) {
+    super(res.worldDeny16(), I18n.t("Nobody"), I18n.t("can't view"), I18n.t("Do this public to anyone"),
+        actionsPanel, downloadUtils, contentServiceAsync, res);
   }
 
 }

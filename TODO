@@ -75,7 +75,7 @@ GRANT SELECT ON kune_dev.* TO kune_stats@'localhost' IDENTIFIED BY 'db4kune';
 AccessList samples (using GroupListMode)
 
 |---------------------------------------------------+--------+---------------+----------+---------|
-| AccessList (A: Admins, E:Editors, V: Viewers      |        | Administrable | Editable | Visible |
+| AccessList (A: Admins, E:Editors, V: Viewers)     |        | Administrable | Editable | Visible |
 |---------------------------------------------------+--------+---------------+----------+---------|
 | (A:EVERYONE, E: EVERYONE, V:EVERYONE)             | Group1 | yes           | yes      | yes     |
 |                                                   | Group2 | yes           | yes      | yes     |
