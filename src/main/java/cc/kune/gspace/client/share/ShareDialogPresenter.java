@@ -84,7 +84,7 @@ public class ShareDialogPresenter extends
     this.shareToOthersView = shareToOthersView;
     this.session = session;
     this.helper = helper;
-
+    this.helper.init(org.waveprotocol.box.webclient.client.Session.get().getDomain());
   }
 
   /*

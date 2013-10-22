@@ -19,22 +19,27 @@
 package cc.kune.gspace.client.share;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.resources.CommonResources;
+import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
 import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.core.shared.dto.GroupDTO;
 
 import com.google.inject.Inject;
 
-public class ShareItemNotVisibleByOthers extends AbstractShareItemEveryoneWithMenu {
+public class ShareItemOfOwner extends AbstractShareItem {
 
   @Inject
-  public ShareItemNotVisibleByOthers(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
-      final CommonResources res, final IconicResources icons) {
-    super(icons.del(), I18n.t("Nobody else"), I18n.t("can't view"), I18n.t("Do this public to anyone"),
-        actionsPanel, downloadUtils, contentServiceAsync, res);
+  public ShareItemOfOwner(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync) {
+    super(actionsPanel, downloadUtils, contentServiceAsync);
+  }
+
+  public AbstractShareItem of(final GroupDTO group) {
+    setGroupName(group);
+    final LabelDescriptor isOwner = new LabelDescriptor(I18n.t("is owner"));
+    super.add(isOwner);
+    return this;
   }
 
 }

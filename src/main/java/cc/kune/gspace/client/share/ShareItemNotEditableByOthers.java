@@ -21,19 +21,20 @@ package cc.kune.gspace.client.share;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 import com.google.inject.Inject;
 
-public class ShareItemNotEditableByOthers extends AbstractShareItemWithMenu {
+public class ShareItemNotEditableByOthers extends AbstractShareItemEveryoneWithMenu {
 
   @Inject
   public ShareItemNotEditableByOthers(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
-      final CommonResources res) {
-    super(res.worldDeny16(), I18n.t("Nobody else"), I18n.t("can't edit"),
-        I18n.t("Allow edit by everyone"), actionsPanel, downloadUtils, contentServiceAsync, res);
+      final CommonResources res, final IconicResources icons) {
+    super(icons.del(), I18n.t("Nobody else"), I18n.t("can't edit"), I18n.t("Allow edit by everyone"),
+        actionsPanel, downloadUtils, contentServiceAsync, res);
   }
 
 }

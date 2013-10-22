@@ -26,7 +26,7 @@ import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 import com.google.inject.Inject;
 
-public class ShareItemEditableByAnyone extends AbstractShareItemWithMenu {
+public class ShareItemEditableByAnyone extends AbstractShareItemEveryoneWithMenu {
 
   @Inject
   public ShareItemEditableByAnyone(final ActionSimplePanel actionsPanel,

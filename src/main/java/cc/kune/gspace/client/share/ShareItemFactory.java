@@ -26,34 +26,52 @@ import com.google.inject.Singleton;
 public class ShareItemFactory {
 
   @Inject
+  private static Provider<ShareItemOfAdmin> admin;
+  @Inject
   private static Provider<ShareItemEditableByAnyone> editableByAnyone;
+  @Inject
+  private static Provider<ShareItemOfEditor> editor;
   @Inject
   private static Provider<ShareItemNotEditableByOthers> notEditableByOthers;
   @Inject
-  private static Provider<ShareToEntity> shareToEntity;
+  private static Provider<ShareItemNotVisibleByOthers> notVisibleByOthers;
+  @Inject
+  private static Provider<ShareItemOfOwner> owner;
+  @Inject
+  private static Provider<ShareItemOfViewer> viewer;
   @Inject
   private static Provider<ShareItemVisibleByAnyone> visibleByAnyone;
-  @Inject
-  private static Provider<ShareItemNotVisibleByOthers> notVisibleByOthers;
 
-  public static ShareToEntity getEntity() {
-    return shareToEntity.get();
+  public static ShareItemOfAdmin getAdmin() {
+    return admin.get();
   }
 
-  public static ShareItemNotEditableByOthers getShareItemNotEditableByOthers() {
-    return notEditableByOthers.get();
+  public static ShareItemOfEditor getEditor() {
+    return editor.get();
+  }
+
+  public static ShareItemOfOwner getOwner() {
+    return owner.get();
   }
 
   public static ShareItemEditableByAnyone getShareItemEditableByAnyone() {
     return editableByAnyone.get();
   }
 
-  public static ShareItemVisibleByAnyone getShareItemVisibleByAnyone() {
-    return visibleByAnyone.get();
+  public static ShareItemNotEditableByOthers getShareItemNotEditableByOthers() {
+    return notEditableByOthers.get();
   }
 
   public static ShareItemNotVisibleByOthers getShareItemNotVisibleByOthers() {
     return notVisibleByOthers.get();
+  }
+
+  public static ShareItemVisibleByAnyone getShareItemVisibleByAnyone() {
+    return visibleByAnyone.get();
+  }
+
+  public static ShareItemOfViewer getViewer() {
+    return viewer.get();
   }
 
   public ShareItemFactory() {

@@ -18,6 +18,7 @@ import com.google.gwt.dev.util.collect.HashSet;
 
 public class ShareDialogHelperTest {
 
+  private static final String EVERYONE_IN_WAVE = "@example.com";
   private static final String SOMEBODY1 = "somebody1@example.com";
   private static final String SOMEBODY2 = "somebody2@example.com";
   private GroupDTO group1;
@@ -80,6 +81,7 @@ public class ShareDialogHelperTest {
     group2 = new GroupDTO("shortname2", "longname 2", GroupType.PROJECT);
     group3 = new GroupDTO("shortname3", "longname 3", GroupType.PROJECT);
     helper = new ShareDialogHelper(shareToList, shareToTheNet, shareToOthers);
+    helper.init(EVERYONE_IN_WAVE);
     shareToListInOrder = Mockito.inOrder(shareToList);
     participants = new ArrayList<String>();
     participants.add(SOMEBODY1);
@@ -175,6 +177,21 @@ public class ShareDialogHelperTest {
   }
 
   @Test
+  public void whenListListNobodyAndEveryoneParticipants() {
+    final AccessListsDTO acl = acl(list(group1), list(group2), NOBODY);
+    participants.add(EVERYONE_IN_WAVE);
+    helper.setState(group1, acl, participants);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(group1);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addEditableByAnyone();
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2);
+    shareToListInOrder.verify(shareToList, Mockito.times(0)).addParticipant(EVERYONE_IN_WAVE);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotVisibleByOthers();
+    Mockito.verify(shareToTheNet, Mockito.times(1)).setVisible(false);
+    Mockito.verify(shareToOthers, Mockito.times(1)).setVisible(true);
+  }
+
+  @Test
   public void whenListListNobodyAndParticipants() {
     final AccessListsDTO acl = acl(list(group1), list(group2), NOBODY);
     helper.setState(group1, acl, participants);
@@ -182,6 +199,7 @@ public class ShareDialogHelperTest {
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addNotEditableByOthers();
+    shareToListInOrder.verify(shareToList, Mockito.times(0)).addEditableByAnyone();
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotVisibleByOthers();
     Mockito.verify(shareToTheNet, Mockito.times(1)).setVisible(false);
     Mockito.verify(shareToOthers, Mockito.times(1)).setVisible(true);

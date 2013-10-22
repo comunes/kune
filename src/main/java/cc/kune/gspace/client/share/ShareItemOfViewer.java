@@ -21,35 +21,51 @@ package cc.kune.gspace.client.share;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 
 import com.google.inject.Inject;
 
-public class ShareToEntity extends AbstractShareItem {
+public class ShareItemOfViewer extends AbstractShareItemWithMenu {
+
+  private final IconicResources res;
 
   @Inject
-  public ShareToEntity(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync) {
-    super(actionsPanel, downloadUtils, contentServiceAsync);
+  public ShareItemOfViewer(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final IconicResources res, final CommonResources commonResources) {
+    super(I18n.tWithNT("can read", "someone can read a doc"), actionsPanel, downloadUtils,
+        contentServiceAsync, commonResources);
+    this.res = res;
   }
 
-  public void init(final GroupDTO group, final boolean canBeRemoved) {
+  public AbstractShareItem of(final GroupDTO group) {
     setGroupName(group);
-    if (canBeRemoved) {
-      final LabelDescriptor descr = new LabelDescriptor(I18n.t("Remove"), new AbstractExtendedAction() {
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-          // TODO
-          NotifyUser.info("In development");
-        }
-      });
-      super.add(descr);
-    }
+    final MenuItemDescriptor toEditor = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        // TODO
+        NotifyUser.info("In development");
+      }
+    });
+    toEditor.withText(I18n.t("Change to editor")).withIcon(res.upArrow());
+    final MenuItemDescriptor remove = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        // TODO
+        NotifyUser.info("In development");
+      }
+    });
+    remove.withText(I18n.t("Remove")).withIcon(res.del());
+    super.add(toEditor);
+    super.add(remove);
+    return this;
   }
 
 }

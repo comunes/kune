@@ -17,6 +17,7 @@ import com.google.inject.Singleton;
 public class ShareDialogHelper {
 
   private static final List<String> NO_MORE_PARTICIPANTS = new ArrayList<String>();
+  private String localDomain;
   private final ShareToListView shareToListView;
   private final ShareToOthersView shareToOthersView;
   private final ShareToTheNetView shareToTheNetView;
@@ -27,7 +28,10 @@ public class ShareDialogHelper {
     this.shareToListView = shareToListView;
     this.shareToTheNetView = shareToTheNetView;
     this.shareToOthersView = shareToOthersView;
+  }
 
+  public void init(final String localDomain) {
+    this.localDomain = localDomain;
   }
 
   public void setState(final GroupDTO currentGroup, final AccessListsDTO acl) {
@@ -53,8 +57,12 @@ public class ShareDialogHelper {
         shareToListView.addOwner(currentGroup);
         adminList.remove(currentGroup);
       }
-      for (final GroupDTO group : adminList) {
-        shareToListView.addAdmin(group);
+      if (adminList.size() == 1) {
+        shareToListView.addOwner(adminList.iterator().next());
+      } else {
+        for (final GroupDTO group : adminList) {
+          shareToListView.addAdmin(group);
+        }
       }
     }
 
@@ -74,8 +82,13 @@ public class ShareDialogHelper {
     }
 
     // Participants
+    if (participants.contains(localDomain)) {
+      shareToListView.addEditableByAnyone();
+    }
     for (final String participant : participants) {
-      shareToListView.addParticipant(participant);
+      if (!localDomain.equals(participant)) {
+        shareToListView.addParticipant(participant);
+      }
     }
 
     // Viewers

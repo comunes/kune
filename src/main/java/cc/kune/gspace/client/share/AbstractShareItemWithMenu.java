@@ -18,38 +18,24 @@
 
 package cc.kune.gspace.client.share;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
-import com.google.gwt.resources.client.ImageResource;
-
 public abstract class AbstractShareItemWithMenu extends AbstractShareItem {
 
-  public AbstractShareItemWithMenu(final ImageResource icon, final String text, final String menuTitle,
-      final String menuItemText, final ActionSimplePanel actionsPanel,
+  protected MenuDescriptor menu;
+
+  public AbstractShareItemWithMenu(final String menuTitle, final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
       final CommonResources res) {
     super(actionsPanel, downloadUtils, contentServiceAsync);
-    withText(text).withIcon(icon);
-    final MenuDescriptor menu = new MenuDescriptor(menuTitle);
-    final MenuItemDescriptor menuItem = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        NotifyUser.info("In development");
-      }
-    });
-
+    menu = new MenuDescriptor(menuTitle);
     menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
         ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
-    menuItem.withText(menuItemText);
     super.add(menu);
   }
 }
