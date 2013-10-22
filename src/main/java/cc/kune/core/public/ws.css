@@ -1377,16 +1377,16 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 
 /* Share dialog */
 
-.k-sharelist-title, .k-sharelist-title {
+.k-sharelist-title {
   font-size: 14px;
   font-weight: bold;
   color: brown;
-  margin-top: 7px;
+  margin: 7px 0px 5px 0px;
 }
 
 .k-sharelist-scroll {
   overflow-x: hidden;
-  width: 250px;
+  width: 290px;
 }
 
 .k-shareitem {
@@ -1397,7 +1397,7 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 
 div.k-shareitem {
   padding-left: 10px;
-  width: 230px;
+  width: 270px;
   color: #999999;
 }
 
@@ -1410,7 +1410,7 @@ div.k-shareitem {
 div.k-shareitem div.k-iconlabel {
   padding-left: 5px;
   overflow: hidden;
-  max-width: 110px;
+  max-width: 180px;
 }
 
 .k-share-item-actions {

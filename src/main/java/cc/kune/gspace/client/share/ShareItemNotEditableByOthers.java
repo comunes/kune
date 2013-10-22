@@ -32,8 +32,8 @@ public class ShareItemNotEditableByOthers extends AbstractShareItemWithMenu {
   public ShareItemNotEditableByOthers(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
       final CommonResources res) {
-    super(res.worldDeny16(), I18n.t("Nobody"), I18n.t("can't edit"), I18n.t("Allow edit by everyone"),
-        actionsPanel, downloadUtils, contentServiceAsync, res);
+    super(res.worldDeny16(), I18n.t("Nobody else"), I18n.t("can't edit"),
+        I18n.t("Allow edit by everyone"), actionsPanel, downloadUtils, contentServiceAsync, res);
   }
 
 }

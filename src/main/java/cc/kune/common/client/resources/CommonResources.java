@@ -36,6 +36,9 @@ public interface CommonResources extends ClientBundle {
   @Source("alert.png")
   ImageResource alert();
 
+  @Source("arrowdownsitebar-small.gif")
+  ImageResource arrowdownsitebarSmall();
+
   @Source("icons/chain-close-black.png")
   ImageResource chainCloseBlack();
 

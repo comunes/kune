@@ -46,9 +46,10 @@ public abstract class AbstractShareItemWithMenu extends AbstractShareItem {
         NotifyUser.info("In development");
       }
     });
-    menu.withStyles(ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
+
+    menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
+        ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
     menuItem.withText(menuItemText);
     super.add(menu);
   }
-
 }

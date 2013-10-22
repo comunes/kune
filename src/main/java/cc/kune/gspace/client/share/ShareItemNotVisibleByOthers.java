@@ -32,8 +32,8 @@ public class ShareItemNotVisibleByOthers extends AbstractShareItemWithMenu {
   public ShareItemNotVisibleByOthers(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
       final CommonResources res) {
-    super(res.worldDeny16(), I18n.t("Nobody"), I18n.t("can't view"), I18n.t("Do this public to anyone"),
-        actionsPanel, downloadUtils, contentServiceAsync, res);
+    super(res.worldDeny16(), I18n.t("Nobody else"), I18n.t("can't view"),
+        I18n.t("Do this public to anyone"), actionsPanel, downloadUtils, contentServiceAsync, res);
   }
 
 }

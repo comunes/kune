@@ -32,8 +32,8 @@ public class ShareItemEditableByAnyone extends AbstractShareItemWithMenu {
   public ShareItemEditableByAnyone(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
       final CommonResources res) {
-    super(res.world16(), I18n.t("Anyone"), I18n.t("can edit"), I18n.t("Don't allow edit by everyone"),
-        actionsPanel, downloadUtils, contentServiceAsync, res);
+    super(res.world16(), I18n.tWithNT("Anyone", "with initial uppercase"), I18n.t("can edit"),
+        I18n.t("Don't allow edit by everyone"), actionsPanel, downloadUtils, contentServiceAsync, res);
   }
 
 }
