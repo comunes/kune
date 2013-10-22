@@ -95,8 +95,8 @@ public class ActionRegistryByType {
   public void addActions(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final ContentStatus status, @Nonnull final String[] typeIds,
       final @Nonnull Provider<? extends GuiActionDescrip>... actions) {
-    for (final Provider action : actions) {
-      for (final String typeId : typeIds) {
+    for (final String typeId : typeIds) {
+      for (final Provider action : actions) {
         addActions(tool, actionsGroupId,
             new String[] { IdGenerator.generate(typeId, status.toString()) }, action);
       }
@@ -113,8 +113,8 @@ public class ActionRegistryByType {
   @SuppressWarnings({ "unchecked", "rawtypes" })
   public void addActions(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       @Nonnull final String[] typeIds, final @Nonnull Provider<? extends GuiActionDescrip>... actionList) {
-    for (final Provider action : actionList) {
-      for (final String typeId : typeIds) {
+    for (final String typeId : typeIds) {
+      for (final Provider action : actionList) {
         final GuiActionDescProviderCollection actionColl = getActions(tool, actionsGroupId, typeId);
         actionColl.add(action);
         actions.put(genKey(tool, actionsGroupId, typeId), actionColl);

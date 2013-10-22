@@ -103,6 +103,10 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, contents, docsNewMenu);
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, containers, newFolderMenuItem);
+    newMenusRegistry.register(TYPE_DOCUMENT,
+        (MenuDescriptor) docsNewMenu.get().withText(I18n.t("Add Gadget")));
+    newMenusRegistry.register(TYPE_UPLOADEDFILE, docsNewMenu.get());
+    add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
         addPublicMenuItem, shareSettings);
     add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
@@ -120,10 +124,6 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
     newMenusRegistry.register(TYPE_FOLDER, foldersNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, foldersNewMenu.get());
-    newMenusRegistry.register(TYPE_DOCUMENT,
-        (MenuDescriptor) docsNewMenu.get().withText(I18n.t("Add Gadget")));
-    newMenusRegistry.register(TYPE_UPLOADEDFILE, docsNewMenu.get());
-    add(TOPBAR, all, shareMenuContent);
   }
 
   @Override
