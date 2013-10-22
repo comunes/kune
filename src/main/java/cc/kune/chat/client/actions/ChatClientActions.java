@@ -61,21 +61,14 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook) {
     super(TOOL_NAME, session, registry);
-    add(TOPBAR, all, optionsMenuContent);
-    add(TOPBAR, all, refresh);
+    add(TOPBAR, all, optionsMenuContent, refresh);
     add(TOOL_NAME, TOPBAR, newRoomBtn, TYPE_ROOT);
     add(BOTTOMBAR, containers, folderGoUp);
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, containersNoRoot, openRoomBtn);
-    add(ITEM_MENU, containersNoRoot, openRoomMenuItem);
-    add(ITEM_MENU, containersNoRoot, openRoomArchiveMenuItem);
+    add(ITEM_MENU, containersNoRoot, openRoomMenuItem, openRoomArchiveMenuItem);
     add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, containers, shareInTwitter);
-    add(TOPBAR, containers, shareInIdentica);
-    add(TOPBAR, containers, shareInGPlus);
-    // add(TOPBAR,
-    // shareInFacebook, all);
-
+    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
   }
 
   @Override

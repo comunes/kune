@@ -52,6 +52,7 @@ import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareSettingsMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -97,6 +98,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<DelPostMenuItem> delPostMenuItem,
       final Provider<MoveContentMenuItem> moveContentMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
+      final Provider<ShareSettingsMenuItem> shareSettings,
       final Provider<ShareInTwitterMenuItem> shareInTwitter,
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
@@ -104,6 +106,8 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<ListInvitationShareMenuItem> shareInvitation,
       final Provider<ListInvitationMenuItem> inviteMenuItem) {
     super(TOOL_NAME, session, registry);
+    // add(NAME, TOOLBAR, newListMenuItem,
+    // TYPE_ROOT);
     add(TOPBAR, containers, optionsMenuContainer);
     add(TOPBAR, contents, optionsMenuContent);
     add(TOPBAR, noRoot, newPostIconBtn);
@@ -111,31 +115,26 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, containersNoRoot, listNewMenu, subscribeBtn, listOpenessMenuItem, newPostItem);
     add(TOPBAR, containers, refreshList);
     add(TOPBAR, contents, postNewMenu, refreshPost);
-    // add(NAME, TOOLBAR, newListMenuItem,
-    // TYPE_ROOT);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
     add(TOPBAR, all, tutorialBtn, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
         addPublicMenuItem);
     add(TOPBAR, allExceptRoot, shareInvitation);
-    add(TOPBAR, containers, shareInTwitter, shareInIdentica, shareInGPlus);
-    // add(TOPBAR,
-    // shareInFacebook, all);
-    add(TOPBAR, contents, participateBtn);
+    add(TOPBAR, containers, shareSettings);
+    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
     add(TOPBAR, containersNoRoot, subscribersCount);
-    add(TOPBAR, contents, copyContent, chatAbout, writeToParticipants);
-    add(ITEM_MENU, contents, openContentMenuItem);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, delFolderMenuItem);
+    add(TOPBAR, contents, participateBtn, copyContent, chatAbout, writeToParticipants);
+    add(ITEM_MENU, contents, openContentMenuItem);
     add(ITEM_MENU, allExceptRoot, inviteMenuItem);
     add(ITEM_MENU, contents, delPostMenuItem, addAllMenuItem, addAdminMembersMenuItem,
         addCollabMembersMenuItem, addPublicMenuItem, copyContent, writeToParticipants);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem,
+        moveContentMenuItem);
     newMenusRegistry.register(TYPE_LIST, listNewMenu.get());
     newMenusRegistry.register(TYPE_ROOT, listNewMenu.get());
     newMenusRegistry.register(TYPE_POST,

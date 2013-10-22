@@ -95,38 +95,26 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     super(TOOL_NAME, session, registry);
     add(TOPBAR, all, optionsMenuContent);
     add(TOPBAR, all, refresh);
-    add(TOPBAR, containers, goToday);
-    add(TOPBAR, containers, calPrevBtn);
-    add(TOPBAR, containers, cal1DayBtn);
-    add(TOPBAR, containers, cal3DaysBtn);
-    add(TOPBAR, containers, cal7DaysBtn);
-    add(TOPBAR, containers, calMonthBtn);
-    add(TOPBAR, containers, calNextBtn);
+    add(TOPBAR, containers, goToday, calPrevBtn, cal1DayBtn, cal3DaysBtn, cal7DaysBtn, calMonthBtn,
+        calNextBtn);
     add(TOPBAR, contents, participateBtn);
     add(TOPBAR, all, export);
     add(BOTTOMBAR, contents, folderGoUp);
     add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, contents, addAllMenuItem);
-    add(TOPBAR, contents, addAdminMembersMenuItem);
-    add(TOPBAR, contents, addCollabMembersMenuItem);
-    add(TOPBAR, contents, addPublicMenuItem);
-    add(TOPBAR, containers, shareInTwitter);
-    add(TOPBAR, containers, shareInIdentica);
-    add(TOPBAR, containers, shareInGPlus);
+    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
+        addPublicMenuItem);
+    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
     add(TOPBAR, contents, shareSettings);
     // add(TOPBAR,
     // shareInFacebook, all);
     add(TOPBAR, all, tutorialBtn);
-    add(TOPBAR, contents, copyContent);
-    add(TOPBAR, contents, writeToParticipants);
+    add(TOPBAR, contents, copyContent, writeToParticipants);
     // On over calendar menu
     add(TOPBAR, containers, onOverMenu);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem, moveContentMenuItem);
     eventOpenMenuItem.get();
     eventAddMenuItem.get();
     eventRemoveMenuItem.get();

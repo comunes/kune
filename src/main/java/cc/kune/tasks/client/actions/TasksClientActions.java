@@ -113,34 +113,19 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
         addPublicMenuItem, shareSettings);
-    add(TOPBAR, containers, shareInTwitter, shareInIdentica, shareInGPlus);
-    // add(TOPBAR,
-    // shareInFacebook, all);
-    add(TOPBAR, contents, participateBtn);
-    add(TOPBAR, contents, chatAbout);
-    add(TOPBAR, contents, copyContent);
-    add(TOPBAR, contents, writeToParticipants);
-    add(ITEM_MENU, contents, openContentMenuItem);
-    add(ITEM_MENU, containersNoRoot, openContentMenuItem);
-    add(ITEM_MENU, contents, moveContentMenuItem);
-    add(ITEM_MENU, containersNoRoot, moveContentMenuItem);
+    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
+    add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
+    add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem);
     add(TOOL_NAME, ITEM_MENU, marksAsDoneMenuItem, ContentStatus.publishedOnline, TYPE_TASK);
     add(TOOL_NAME, ITEM_MENU, marksAsDoneMenuItem, ContentStatus.editingInProgress, TYPE_TASK);
     add(TOOL_NAME, ITEM_MENU, marksAsNotDoneMenuItem, ContentStatus.inTheDustbin, TYPE_TASK);
     add(ITEM_MENU, containersNoRoot, delFolderMenuItem);
-    add(ITEM_MENU, contents, delContentMenuItem);
-    add(ITEM_MENU, contents, addAllMenuItem);
-    add(ITEM_MENU, contents, addAdminMembersMenuItem);
-    add(ITEM_MENU, contents, addCollabMembersMenuItem);
-    add(ITEM_MENU, contents, addPublicMenuItem);
-    add(ITEM_MENU, contents, copyContent);
-    add(ITEM_MENU, contents, writeToParticipants);
+    add(ITEM_MENU, contents, delContentMenuItem, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem, addPublicMenuItem, copyContent, writeToParticipants);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem, moveContentMenuItem);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, taskFolderNewMenu.get());

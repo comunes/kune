@@ -92,22 +92,20 @@ public class BartersClientActions extends AbstractFoldableToolActions {
         addPublicMenuItem);
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, containers, newBartersBtn, newFolderBtn);
-    add(TOPBAR, contents, participateBtn, copyContent, writeToParticipants);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
+    add(TOPBAR, contents, participateBtn, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
         addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem, addPublicMenuItem);
-    add(TOPBAR, containers, shareInTwitter, shareInIdentica, shareInGPlus);
+    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
     add(TOPBAR, contents, shareSettings);
     // actionsRegistry.addAction(TOPBAR,
     // shareInFacebook, all);
     add(ITEM_MENU, contents, copyContent);
     add(ITEM_MENU, contents, writeToParticipants);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem, moveContentMenuItem);
   }
 
   @Override

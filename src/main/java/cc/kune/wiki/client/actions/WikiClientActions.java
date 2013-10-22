@@ -90,54 +90,33 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook) {
     super(TOOL_NAME, session, registry);
-    add(TOPBAR, all, optionsMenuContent);
-    add(TOPBAR, all, refresh);
-    add(TOPBAR, all, newWikiIconBtn);
-    add(TOPBAR, containers, newFolderBtn);
     // add(NAME, TOOLBAR, folderNewMenu,
     // containers);
-    add(TOPBAR, contents, wikipageNewMenu);
     // add(NAME, TOOLBAR, newWikiMenuItem,
     // containers);
     // add(NAME, TOOLBAR, newFolderMenuItem,
     // containers);
+    add(TOPBAR, all, optionsMenuContent, refresh);
+    add(TOPBAR, all, newWikiIconBtn);
+    add(TOPBAR, containers, newFolderBtn);
+    add(TOPBAR, contents, wikipageNewMenu);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, all, addAllMenuItem);
-    add(TOPBAR, contents, addAdminMembersMenuItem);
-    add(TOPBAR, contents, addCollabMembersMenuItem);
-    add(TOPBAR, contents, addPublicMenuItem);
-    add(TOPBAR, containers, shareInTwitter);
-    add(TOPBAR, containers, shareInIdentica);
-    add(TOPBAR, containers, shareInGPlus);
-    add(TOPBAR, contents, shareSettings);
-    // add(TOPBAR,
-    // shareInFacebook, all);
+    add(TOPBAR, contents, addAdminMembersMenuItem, addCollabMembersMenuItem, addPublicMenuItem);
+    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
     add(TOPBAR, all, tutorialBtn);
-    add(TOPBAR, contents, participateBtn);
-    add(TOPBAR, contents, chatAbout);
-    add(TOPBAR, contents, copyContent);
-    add(TOPBAR, contents, writeToParticipants);
-    add(ITEM_MENU, contents, openContentMenuItem);
-    add(ITEM_MENU, containersNoRoot, openContentMenuItem);
-    add(ITEM_MENU, contents, moveContentMenuItem);
-    add(ITEM_MENU, containersNoRoot, moveContentMenuItem);
-    add(ITEM_MENU, contents, delContentMenuItem);
-    add(ITEM_MENU, containersNoRoot, delFolderMenuItem);
-    add(ITEM_MENU, contents, setAsHomePage);
-    add(ITEM_MENU, contents, addAllMenuItem);
-    add(ITEM_MENU, contents, addAdminMembersMenuItem);
-    add(ITEM_MENU, contents, addCollabMembersMenuItem);
-    add(ITEM_MENU, contents, addPublicMenuItem);
-    add(ITEM_MENU, contents, copyContent);
-    add(ITEM_MENU, contents, writeToParticipants);
+    add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
+    add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
+        setAsHomePage, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
+        addPublicMenuItem, copyContent, writeToParticipants);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem,
+        moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem,
+        moveContentMenuItem);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, folderNewMenu.get());
