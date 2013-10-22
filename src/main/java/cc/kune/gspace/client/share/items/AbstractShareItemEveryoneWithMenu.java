@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.share;
+package cc.kune.gspace.client.share.items;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
@@ -24,48 +24,26 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
-import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
-import cc.kune.core.shared.dto.GroupDTO;
 
-import com.google.inject.Inject;
+import com.google.gwt.resources.client.ImageResource;
 
-public class ShareItemOfEditor extends AbstractShareItemWithMenu {
+public abstract class AbstractShareItemEveryoneWithMenu extends AbstractShareItemWithMenu {
 
-  private final IconicResources res;
-
-  @Inject
-  public ShareItemOfEditor(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
-      final IconicResources res, final CommonResources commonResources) {
-    super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils,
-        contentServiceAsync, commonResources);
-    this.res = res;
-  }
-
-  public AbstractShareItem of(final GroupDTO group) {
-    setGroupName(group);
-    final MenuItemDescriptor editorToAdmin = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+  public AbstractShareItemEveryoneWithMenu(final ImageResource itemIcon, final String itemText,
+      final String menuTitle, final ImageResource menuItemIcon, final String menuItemText,
+      final ActionSimplePanel actionsPanel, final ClientFileDownloadUtils downloadUtils,
+      final ContentServiceAsync contentServiceAsync, final CommonResources res) {
+    super(menuTitle, actionsPanel, downloadUtils, contentServiceAsync, res);
+    withText(itemText).withIcon(itemIcon);
+    final MenuItemDescriptor menuItem = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
-        // TODO
         NotifyUser.info("In development");
       }
     });
-    editorToAdmin.withText(I18n.t("Change to administrator")).withIcon(res.upArrow());
-    final MenuItemDescriptor remove = new MenuItemDescriptor(menu, true, new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        // TODO
-        NotifyUser.info("In development");
-      }
-    });
-    remove.withText(I18n.t("Remove")).withIcon(res.del());
-    super.add(editorToAdmin);
-    super.add(remove);
-    return this;
+    menuItem.withText(menuItemText).withIcon(menuItemIcon);
+    add(menuItem);
   }
-
 }

@@ -53,10 +53,11 @@ public class ShareDialogHelper {
     // Admins
     if (admins.getMode().equals(NORMAL)) {
       final Set<GroupDTO> adminList = admins.getList();
-      if (adminList.contains(currentGroup)) {
-        shareToListView.addOwner(currentGroup);
-        adminList.remove(currentGroup);
-      }
+      // FIXME
+      // if (adminList.contains(currentGroup)) {
+      // shareToListView.addOwner(currentGroup);
+      // adminList.remove(currentGroup);
+      // }
       if (adminList.size() == 1) {
         shareToListView.addOwner(adminList.iterator().next());
       } else {

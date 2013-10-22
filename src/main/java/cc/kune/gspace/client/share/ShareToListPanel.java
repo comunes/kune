@@ -20,6 +20,7 @@ package cc.kune.gspace.client.share;
 
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.gspace.client.share.items.ShareItemFactory;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;

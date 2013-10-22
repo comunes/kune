@@ -16,26 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.share;
+package cc.kune.gspace.client.share.items;
 
-import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.resources.CommonResources;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
-public abstract class AbstractShareItemWithMenu extends AbstractShareItem {
+import com.google.inject.Inject;
 
-  protected MenuDescriptor menu;
+public class ShareItemVisibleByAnyone extends AbstractShareItemEveryoneWithMenu {
 
-  public AbstractShareItemWithMenu(final String menuTitle, final ActionSimplePanel actionsPanel,
+  @Inject
+  public ShareItemVisibleByAnyone(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
-      final CommonResources res) {
-    super(actionsPanel, downloadUtils, contentServiceAsync);
-    menu = new MenuDescriptor(menuTitle);
-    menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
-        ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
-    super.add(menu);
+      final CommonResources res, final IconicResources icons) {
+    super(icons.world(), I18n.t("Anyone"), I18n.t("can view"), icons.del(),
+        I18n.t("Don't do this public"), actionsPanel, downloadUtils, contentServiceAsync, res);
   }
+
 }

@@ -16,33 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.share;
+package cc.kune.gspace.client.share.items;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
-import com.google.gwt.resources.client.ImageResource;
+import com.google.inject.Inject;
 
-public abstract class AbstractShareItemEveryoneWithMenu extends AbstractShareItemWithMenu {
+public class ShareItemNotVisibleByOthers extends AbstractShareItemEveryoneWithMenu {
 
-  public AbstractShareItemEveryoneWithMenu(final ImageResource icon, final String text, final String menuTitle,
-      final String menuItemText, final ActionSimplePanel actionsPanel,
+  @Inject
+  public ShareItemNotVisibleByOthers(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
-      final CommonResources res) {
-    super(menuTitle, actionsPanel, downloadUtils, contentServiceAsync, res);
-    withText(text).withIcon(icon);
-    final MenuItemDescriptor menuItem = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        NotifyUser.info("In development");
-      }
-    });
-    menuItem.withText(menuItemText);
+      final CommonResources res, final IconicResources icons) {
+    super(icons.del(), I18n.t("Nobody else"), I18n.t("can't view"), icons.world(),
+        I18n.t("Do this public to anyone"), actionsPanel, downloadUtils, contentServiceAsync, res);
+
   }
+
 }

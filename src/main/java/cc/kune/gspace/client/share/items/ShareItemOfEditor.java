@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.share;
+package cc.kune.gspace.client.share.items;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
@@ -32,30 +32,30 @@ import cc.kune.core.shared.dto.GroupDTO;
 
 import com.google.inject.Inject;
 
-public class ShareItemOfAdmin extends AbstractShareItemWithMenu {
+public class ShareItemOfEditor extends AbstractShareItemWithMenu {
 
   private final IconicResources res;
 
   @Inject
-  public ShareItemOfAdmin(final ActionSimplePanel actionsPanel,
+  public ShareItemOfEditor(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
       final IconicResources res, final CommonResources commonResources) {
-    super(I18n.tWithNT("is admin", "someone is administrator"), actionsPanel, downloadUtils,
+    super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils,
         contentServiceAsync, commonResources);
     this.res = res;
   }
 
   public AbstractShareItem of(final GroupDTO group) {
     setGroupName(group);
-    final MenuItemDescriptor adminToEditor = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+    final MenuItemDescriptor editorToAdmin = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
         // TODO
         NotifyUser.info("In development");
       }
     });
-    adminToEditor.withText(I18n.t("Change to editor")).withIcon(res.downArrow());
-    final MenuItemDescriptor remove = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+    editorToAdmin.withText(I18n.t("Change to administrator")).withIcon(res.upArrow());
+    final MenuItemDescriptor remove = new MenuItemDescriptor(menu, true, new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
         // TODO
@@ -63,7 +63,7 @@ public class ShareItemOfAdmin extends AbstractShareItemWithMenu {
       }
     });
     remove.withText(I18n.t("Remove")).withIcon(res.del());
-    super.add(adminToEditor);
+    super.add(editorToAdmin);
     super.add(remove);
     return this;
   }

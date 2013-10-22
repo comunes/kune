@@ -16,30 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.share;
+package cc.kune.gspace.client.share.items;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
-import cc.kune.core.shared.dto.GroupDTO;
 
 import com.google.inject.Inject;
 
-public class ShareItemOfOwner extends AbstractShareItem {
+public class ShareItemNotEditableByOthers extends AbstractShareItemEveryoneWithMenu {
 
   @Inject
-  public ShareItemOfOwner(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync) {
-    super(actionsPanel, downloadUtils, contentServiceAsync);
-  }
-
-  public AbstractShareItem of(final GroupDTO group) {
-    setGroupName(group);
-    final LabelDescriptor isOwner = new LabelDescriptor(I18n.t("is owner"));
-    super.add(isOwner);
-    return this;
+  public ShareItemNotEditableByOthers(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final CommonResources res, final IconicResources icons) {
+    super(icons.del(), I18n.t("Nobody else"), I18n.t("can't edit"), icons.world(),
+        I18n.t("Allow edit by everyone"), actionsPanel, downloadUtils, contentServiceAsync, res);
   }
 
 }

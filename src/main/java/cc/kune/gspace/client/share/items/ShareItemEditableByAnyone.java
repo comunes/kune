@@ -16,11 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.share;
+package cc.kune.gspace.client.share.items;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
@@ -31,9 +32,20 @@ public class ShareItemEditableByAnyone extends AbstractShareItemEveryoneWithMenu
   @Inject
   public ShareItemEditableByAnyone(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
-      final CommonResources res) {
-    super(res.world16(), I18n.tWithNT("Anyone", "with initial uppercase"), I18n.t("can edit"),
-        I18n.t("Don't allow edit by everyone"), actionsPanel, downloadUtils, contentServiceAsync, res);
+      final CommonResources res, final IconicResources icons) {
+    super(icons.world(), I18n.tWithNT("Anyone", "with initial uppercase"), I18n.t("can edit"),
+        icons.del(), I18n.t("Don't allow edit by everyone"), actionsPanel, downloadUtils,
+        contentServiceAsync, res);
+    // final MenuItemDescriptor notAnyone = new MenuItemDescriptor(menu, new
+    // AbstractExtendedAction() {
+    // @Override
+    // public void actionPerformed(final ActionEvent event) {
+    // // TODO
+    // NotifyUser.info("In development");
+    // }
+    // });
+    // notAnyone.withText(I18n.t("Don't allow edit by anyone")).withIcon(icons.del());
+    // super.add(notAnyone);
   }
 
 }

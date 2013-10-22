@@ -16,25 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.share;
+package cc.kune.gspace.client.share.items;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.resources.CommonResources;
-import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
-import com.google.inject.Inject;
+public abstract class AbstractShareItemWithMenu extends AbstractShareItem {
 
-public class ShareItemNotEditableByOthers extends AbstractShareItemEveryoneWithMenu {
+  protected MenuDescriptor menu;
 
-  @Inject
-  public ShareItemNotEditableByOthers(final ActionSimplePanel actionsPanel,
+  public AbstractShareItemWithMenu(final String menuTitle, final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
-      final CommonResources res, final IconicResources icons) {
-    super(icons.del(), I18n.t("Nobody else"), I18n.t("can't edit"), I18n.t("Allow edit by everyone"),
-        actionsPanel, downloadUtils, contentServiceAsync, res);
+      final CommonResources res) {
+    super(actionsPanel, downloadUtils, contentServiceAsync);
+    menu = new MenuDescriptor(menuTitle);
+    menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
+        ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
+    super.add(menu);
   }
-
 }
