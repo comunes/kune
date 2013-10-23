@@ -81,7 +81,7 @@ public abstract class AbstractShareItem extends Composite {
   }
 
   public void setGroupName(final GroupDTO group) {
-    final boolean isAnUser = group.isNotPersonal();
+    final boolean isAnUser = group.isPersonal();
     withText((isAnUser ? "" : I18n.t("Group") + ": ") + group.getLongName());
     withIcon(downloadUtils.getGroupLogo(group));
   }

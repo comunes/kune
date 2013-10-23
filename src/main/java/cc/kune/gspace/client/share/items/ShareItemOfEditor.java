@@ -29,6 +29,7 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
@@ -40,8 +41,7 @@ public class ShareItemOfEditor extends AbstractShareItemWithMenu {
   public ShareItemOfEditor(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
       final IconicResources res, final CommonResources commonResources) {
-    super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils,
-        contentServiceAsync, commonResources);
+    super("", actionsPanel, downloadUtils, contentServiceAsync, commonResources);
     this.res = res;
   }
 
@@ -65,6 +65,16 @@ public class ShareItemOfEditor extends AbstractShareItemWithMenu {
     remove.withText(I18n.t("Remove")).withIcon(res.del());
     super.add(editorToAdmin);
     super.add(remove);
+    return this;
+  }
+
+  @Override
+  public AbstractShareItem with(final String typeId) {
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      menu.setText(I18n.tWithNT("is member", "someone is member of a list"));
+    } else {
+      menu.setText(I18n.tWithNT("is editor", "someone is editor"));
+    }
     return this;
   }
 

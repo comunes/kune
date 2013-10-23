@@ -73,7 +73,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addEditableByAnyone() {
-    itemsPanel.add(ShareItemFactory.getShareItemEditableByAnyone());
+    itemsPanel.add(ShareItemFactory.getShareItemEditableByAnyone().with(typeId));
   }
 
   @Override
@@ -83,12 +83,12 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addNotEditableByOthers() {
-    itemsPanel.add(ShareItemFactory.getShareItemNotEditableByOthers());
+    itemsPanel.add(ShareItemFactory.getShareItemNotEditableByOthers().with(typeId));
   }
 
   @Override
   public void addNotVisibleByOthers() {
-    itemsPanel.add(ShareItemFactory.getShareItemNotVisibleByOthers());
+    itemsPanel.add(ShareItemFactory.getShareItemNotVisibleByOthers().with(typeId));
   }
 
   @Override
@@ -108,7 +108,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addVisibleByAnyone() {
-    itemsPanel.add(ShareItemFactory.getShareItemVisibleByAnyone());
+    itemsPanel.add(ShareItemFactory.getShareItemVisibleByAnyone().with(typeId));
   }
 
   @Override

@@ -22,7 +22,6 @@ package cc.kune.gspace.client.share;
  * The Class ShareDialogPresenter, allows to set up how a content is shared to others
  */
 
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.Session;
@@ -122,7 +121,6 @@ public class ShareDialogPresenter extends
 
     // Configure behavior if is a doc or a list
     final String typeId = cnt.getTypeId();
-    NotifyUser.info(typeId, false);
     getView().setTypeId(typeId);
     shareToListView.setTypeId(typeId);
 
@@ -131,12 +129,12 @@ public class ShareDialogPresenter extends
     if (cnt instanceof StateContentDTO) {
       final StateContentDTO content = (StateContentDTO) cnt;
       if (content.isWave()) {
-        helper.setState(currentGroup, acl, content.getParticipants());
+        helper.setState(currentGroup, acl, typeId, content.getParticipants());
       } else {
-        helper.setState(currentGroup, acl);
+        helper.setState(currentGroup, acl, typeId);
       }
     } else {
-      helper.setState(currentGroup, acl);
+      helper.setState(currentGroup, acl, typeId);
     }
     shareToNetView.setLinkToShare(StateTokenUtils.getGroupSpaceUrl(session.getCurrentStateToken()));
     getView().show();

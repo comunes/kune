@@ -24,6 +24,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
@@ -34,8 +35,21 @@ public class ShareItemVisibleByAnyone extends AbstractShareItemEveryoneWithMenu 
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
       final CommonResources res, final IconicResources icons) {
     super(icons.world(), I18n.tWithNT("Anyone", "with initial uppercase"), I18n.t("can view"),
-        icons.del(), I18n.t("Don't do this public"), actionsPanel, downloadUtils, contentServiceAsync,
-        res);
+        icons.del(), "", actionsPanel, downloadUtils, contentServiceAsync, res);
+  }
+
+  @Override
+  public AbstractShareItem with(final String typeId) {
+    String menuItemText;
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      menu.withText(I18n.t("can be member"));
+      menuItemText = I18n.t("Make this list not public");
+    } else {
+      menu.withText(I18n.t("can view"));
+      menuItemText = I18n.t("Don't do this public");
+    }
+    menuItem.withText(menuItemText);
+    return this;
   }
 
 }

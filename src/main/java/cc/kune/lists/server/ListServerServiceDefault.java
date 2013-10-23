@@ -144,6 +144,9 @@ public class ListServerServiceDefault implements ListServerService {
     return contentRPC.getState(container);
   }
 
+  /**
+   * This is used by invitations when confirmed
+   */
   @Override
   public StateContainerDTO subscribeToListWithoutPermCheck(final StateToken token, final Group userGroup) {
     final Container container = getContainer(token);

@@ -24,6 +24,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
@@ -38,4 +39,15 @@ public class ShareItemNotVisibleByOthers extends AbstractShareItemEveryoneWithMe
 
   }
 
+  @Override
+  public AbstractShareItem with(final String typeId) {
+    String menuItemText;
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      menuItemText = I18n.t("Make this list public");
+    } else {
+      menuItemText = I18n.t("Do this public to anyone");
+    }
+    menuItem.withText(menuItemText);
+    return this;
+  }
 }

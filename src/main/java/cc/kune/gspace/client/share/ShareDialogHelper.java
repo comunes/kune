@@ -9,6 +9,7 @@ import java.util.Set;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -34,11 +35,11 @@ public class ShareDialogHelper {
     this.localDomain = localDomain;
   }
 
-  public void setState(final GroupDTO currentGroup, final AccessListsDTO acl) {
-    setState(currentGroup, acl, NO_MORE_PARTICIPANTS);
+  public void setState(final GroupDTO currentGroup, final AccessListsDTO acl, final String typeId) {
+    setState(currentGroup, acl, typeId, NO_MORE_PARTICIPANTS);
   }
 
-  public void setState(final GroupDTO currentGroup, final AccessListsDTO acl,
+  public void setState(final GroupDTO currentGroup, final AccessListsDTO acl, final String typeId,
       final List<String> participants) {
     final GroupListDTO admins = acl.getAdmins();
     final GroupListDTO editors = acl.getEditors();
@@ -55,7 +56,9 @@ public class ShareDialogHelper {
     shareToListView.addOwner(currentGroup);
 
     shareToTheNetView.setVisible(viewerMode.equals(EVERYONE));
-    shareToOthersView.setVisible(!editorMode.equals(EVERYONE));
+    final boolean isAList = typeId.equals(ListsToolConstants.TYPE_LIST);
+
+    shareToOthersView.setVisible(!editorMode.equals(EVERYONE) || isAList);
 
     // Admins
     if (adminsMode.equals(NORMAL)) {
@@ -69,7 +72,7 @@ public class ShareDialogHelper {
     // Editors
     final boolean noEditors = editorMode.equals(NOBODY)
         || (editorMode.equals(NORMAL) && editorsList.size() == 0 && participants.size() == 0);
-    if (noEditors) {
+    if (noEditors && !isAList) {
       shareToListView.addNotEditableByOthers();
     } else {
       if (editorMode.equals(NORMAL)) {
@@ -78,7 +81,7 @@ public class ShareDialogHelper {
             shareToListView.addEditor(editor);
           }
         }
-      } else if (editorMode.equals(EVERYONE)) {
+      } else if (editorMode.equals(EVERYONE) && !isAList) {
         shareToListView.addEditableByAnyone();
       }
     }

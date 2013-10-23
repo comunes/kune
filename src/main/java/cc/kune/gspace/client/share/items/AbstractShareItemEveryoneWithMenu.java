@@ -31,19 +31,25 @@ import com.google.gwt.resources.client.ImageResource;
 
 public abstract class AbstractShareItemEveryoneWithMenu extends AbstractShareItemWithMenu {
 
+  protected MenuItemDescriptor menuItem;
+
   public AbstractShareItemEveryoneWithMenu(final ImageResource itemIcon, final String itemText,
       final String menuTitle, final ImageResource menuItemIcon, final String menuItemText,
       final ActionSimplePanel actionsPanel, final ClientFileDownloadUtils downloadUtils,
       final ContentServiceAsync contentServiceAsync, final CommonResources res) {
     super(menuTitle, actionsPanel, downloadUtils, contentServiceAsync, res);
     withText(itemText).withIcon(itemIcon);
-    final MenuItemDescriptor menuItem = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+    menuItem = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
-        NotifyUser.info("In development");
+        doAction();
       }
     });
     menuItem.withText(menuItemText).withIcon(menuItemIcon);
     add(menuItem);
+  }
+
+  private void doAction() {
+    NotifyUser.info("In development");
   }
 }
