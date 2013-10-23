@@ -33,12 +33,8 @@ public class SearchBoxFactory {
   public static MultivalueSuggestBox create(final I18nUITranslationService i18n,
       final boolean searchOnlyUsers, final boolean showNoResult, final String id,
       final OnEntitySelectedInSearch callback) {
-    final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(
-        i18n,
-        showNoResult,
-        searchOnlyUsers ? SearcherConstants.USER_DATA_PROXY_URL : SearcherConstants.GROUP_DATA_PROXY_URL,
-        false, new OnExactMatch() {
-
+    final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(i18n, showNoResult,
+        getSearchUrl(searchOnlyUsers), false, new OnExactMatch() {
           @Override
           public void onExactMatch(final String match) {
             // NotifyUser.info(match);
@@ -72,6 +68,11 @@ public class SearchBoxFactory {
     textBox.setDirection(i18n.isRTL() ? Direction.RTL : Direction.LTR);
     textBox.ensureDebugId(id);
     return multivalueSBox;
+  }
+
+  public static String getSearchUrl(final boolean searchOnlyUsers) {
+    return searchOnlyUsers ? SearcherConstants.USER_DATA_PROXY_URL
+        : SearcherConstants.GROUP_DATA_PROXY_URL;
   }
 
 }

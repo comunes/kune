@@ -123,6 +123,7 @@ public class ShareDialogPresenter extends
     final String typeId = cnt.getTypeId();
     getView().setTypeId(typeId);
     shareToListView.setTypeId(typeId);
+    shareToOthersView.setTypeId(typeId);
 
     final AccessListsDTO acl = cnt.getAccessLists();
     final GroupDTO currentGroup = cnt.getGroup();

@@ -25,6 +25,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.sitebar.search.MultivalueSuggestBox;
 import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
 import cc.kune.core.client.sitebar.search.SearchBoxFactory;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -44,7 +45,9 @@ import com.google.inject.Singleton;
 @Singleton
 public class ShareToOthersPanel extends Composite implements ShareToOthersView {
 
+  private static final String NOT_LIST_TOOLTIP = "type something to search and add people in this site";
   public static final String SEARCH_TEXTBOX_ID = "stop-textbox";
+  private final MultivalueSuggestBox multivalueSBox;
 
   @Inject
   public ShareToOthersPanel(final I18nUITranslationService i18n,
@@ -52,8 +55,8 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
     final FlowPanel flow = new FlowPanel();
     flow.addStyleName("k-share-others");
 
-    final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, false, true,
-        SEARCH_TEXTBOX_ID, new OnEntitySelectedInSearch() {
+    multivalueSBox = SearchBoxFactory.create(i18n, false, true, SEARCH_TEXTBOX_ID,
+        new OnEntitySelectedInSearch() {
           @Override
           public void onSeleted(final String shortName) {
             // TODO
@@ -63,7 +66,7 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
     final SuggestBox suggestBox = multivalueSBox.getSuggestBox();
     final ValueBoxBase<String> searchTextBox = suggestBox.getValueBox();
     final Label suggestBoxIntro = new Label(I18n.t("drag and drop to add people or"));
-    final Label suggestTextWhenEmpty = new Label(I18n.t("search users or groups to add"));
+    final Label suggestTextWhenEmpty = new Label(I18n.t("search to add"));
 
     flow.add(suggestBoxIntro);
     flow.add(multivalueSBox);
@@ -99,13 +102,20 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
     });
 
     // Tooltips
-    Tooltip.to(suggestBox, I18n.t("type something to search and add users or groups in this site"));
-    Tooltip.to(suggestTextWhenEmpty,
-        I18n.t("type something to search and add users or groups in this site"));
-    Tooltip.to(suggestBoxIntro, I18n.t("type something to search and add users or groups in this site"));
+    Tooltip.to(suggestBox, I18n.t(NOT_LIST_TOOLTIP));
+    Tooltip.to(suggestTextWhenEmpty, I18n.t(NOT_LIST_TOOLTIP));
+    Tooltip.to(suggestBoxIntro, I18n.t(NOT_LIST_TOOLTIP));
 
     // D&D
     dropController.init(flow);
   }
 
+  @Override
+  public void setTypeId(final String typeId) {
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      multivalueSBox.setSearchUrl(SearchBoxFactory.getSearchUrl(true));
+    } else {
+      multivalueSBox.setSearchUrl(SearchBoxFactory.getSearchUrl(false));
+    }
+  }
 }

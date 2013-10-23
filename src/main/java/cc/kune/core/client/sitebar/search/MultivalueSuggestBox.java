@@ -499,13 +499,11 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   private int mindexTo = 0;
   private boolean misMultivalued = false;
 
-  private final String mrestEndpointUrl;
+  private String mrestEndpointUrl;
 
   private final Map<String, String> mvalueMap;
 
   private final boolean showNoResult;
-
-  // private final OnExactMatch onExactMatch;
 
   /**
    * Constructor.
@@ -568,6 +566,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     resetPageIndices();
   }
+
+  // private final OnExactMatch onExactMatch;
 
   private void findExactMatch(final String displayValue, final int position) {
     updateFormFeedback(FormFeedback.LOADING, null);
@@ -926,6 +926,10 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   @Override
   public void setFocus(final boolean focused) {
     mfield.setFocus(focused);
+  }
+
+  public void setSearchUrl(final String searchUrl) {
+    mrestEndpointUrl = searchUrl;
   }
 
   @Override
