@@ -74,7 +74,7 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
 
     initWidget(flow);
 
-    /* Search box settings */
+    // Search box settings
     suggestTextWhenEmpty.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -97,7 +97,7 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
       }
     });
 
-    /* Tooltips */
+    // Tooltips
     Tooltip.to(suggestBox, I18n.t("type something to search and add users or groups in this site"));
     Tooltip.to(suggestTextWhenEmpty,
         I18n.t("type something to search and add users or groups in this site"));

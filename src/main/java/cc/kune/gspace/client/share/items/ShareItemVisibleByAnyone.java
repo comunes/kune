@@ -33,8 +33,9 @@ public class ShareItemVisibleByAnyone extends AbstractShareItemEveryoneWithMenu 
   public ShareItemVisibleByAnyone(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
       final CommonResources res, final IconicResources icons) {
-    super(icons.world(), I18n.t("Anyone"), I18n.t("can view"), icons.del(),
-        I18n.t("Don't do this public"), actionsPanel, downloadUtils, contentServiceAsync, res);
+    super(icons.world(), I18n.tWithNT("Anyone", "with initial uppercase"), I18n.t("can view"),
+        icons.del(), I18n.t("Don't do this public"), actionsPanel, downloadUtils, contentServiceAsync,
+        res);
   }
 
 }

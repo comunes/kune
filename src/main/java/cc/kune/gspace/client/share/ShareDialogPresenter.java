@@ -22,7 +22,11 @@ package cc.kune.gspace.client.share;
  * The Class ShareDialogPresenter, allows to set up how a content is shared to others
  */
 
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateTokenUtils;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -54,6 +58,13 @@ public class ShareDialogPresenter extends
    * The Interface ShareDialogView.
    */
   public interface ShareDialogView extends View {
+
+    void hide();
+
+    boolean isVisible();
+
+    void setTypeId(String typeId);
+
     void show();
   }
 
@@ -77,7 +88,7 @@ public class ShareDialogPresenter extends
   public ShareDialogPresenter(final EventBus eventBus, final ShareDialogView view,
       final ShareDialogProxy proxy, final ShareToListView shareToListView,
       final ShareToTheNetView shareToNetView, final ShareToOthersView shareToOthersView,
-      final Session session, final ShareDialogHelper helper) {
+      final Session session, final ShareDialogHelper helper, final StateManager stateManager) {
     super(eventBus, view, proxy);
     this.shareToListView = shareToListView;
     this.shareToNetView = shareToNetView;
@@ -85,6 +96,14 @@ public class ShareDialogPresenter extends
     this.session = session;
     this.helper = helper;
     this.helper.init(org.waveprotocol.box.webclient.client.Session.get().getDomain());
+    stateManager.onStateChanged(false, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        if (getView().isVisible()) {
+          getView().hide();
+        }
+      }
+    });
   }
 
   /*
@@ -100,6 +119,13 @@ public class ShareDialogPresenter extends
   @Override
   public void show() {
     final StateContainerDTO cnt = (StateContainerDTO) session.getCurrentState();
+
+    // Configure behavior if is a doc or a list
+    final String typeId = cnt.getTypeId();
+    NotifyUser.info(typeId, false);
+    getView().setTypeId(typeId);
+    shareToListView.setTypeId(typeId);
+
     final AccessListsDTO acl = cnt.getAccessLists();
     final GroupDTO currentGroup = cnt.getGroup();
     if (cnt instanceof StateContentDTO) {

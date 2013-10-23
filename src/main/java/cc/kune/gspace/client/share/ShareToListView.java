@@ -46,4 +46,6 @@ public interface ShareToListView {
 
   IsWidget getView();
 
+  void setTypeId(String typeId);
+
 }

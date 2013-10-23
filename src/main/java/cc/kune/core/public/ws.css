@@ -1397,7 +1397,7 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 
 div.k-shareitem {
   padding-left: 10px;
-  width: 260px;
+  width: 250px;
   color: #999999;
 }
 
@@ -1424,6 +1424,7 @@ div.k-shareitem div.k-iconlabel {
 
 .k-share-item-noactions {
   color: #999;
+  cursor: default;
 }
 
 .k-share-others {

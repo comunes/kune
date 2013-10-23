@@ -22,6 +22,7 @@ import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.gspace.client.share.ShareDialogPresenter.ShareDialogView;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -37,13 +38,14 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
   public static final String FIRSTBUTTON_ID = "sharedialog-close";
 
   private final BasicTopDialog dialog;
+  private final Label dialogIntro;
   private final VerticalPanel vp;
 
   @Inject
   public ShareDialogPanel(final ShareToListView listView, final ShareToTheNetPanel shareToTheNetPanel,
       final ShareToOthersPanel shareToOthersPanel) {
     final Builder builder = new BasicTopDialog.Builder(DIALOG_ID, false, false, I18n.getDirection()).autoscroll(
-        true).title(I18n.t("Share settings")).width(280);
+        true).width(280);
     // builder.icon(icon);
     builder.firstButtonTitle(I18n.t("Close")).firstButtonId(FIRSTBUTTON_ID);
     dialog = builder.build();
@@ -54,8 +56,7 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
       }
     });
     vp = new VerticalPanel();
-    final Label dialogIntro = new Label(
-        I18n.t("Here you can define how others can interact with this document"));
+    dialogIntro = new Label();
     dialogIntro.addStyleName("k-dialog-intro");
     vp.add(dialogIntro);
     vp.add(listView.getView());
@@ -72,6 +73,31 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
   @Override
   public Widget asWidget() {
     return dialog;
+  }
+
+  @Override
+  public void hide() {
+    dialog.hide();
+  }
+
+  @Override
+  public boolean isVisible() {
+    return dialog.isVisible();
+  }
+
+  @Override
+  public void setTypeId(final String typeId) {
+    String dialogTitle;
+    String dialogIntroText;
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      dialogTitle = I18n.t("List settings");
+      dialogIntroText = I18n.t("Here you can manage the members of this list");
+    } else {
+      dialogTitle = I18n.t("Share settings");
+      dialogIntroText = I18n.t("Here you can define how others can interact with this document");
+    }
+    dialog.setText(dialogTitle, I18n.getDirection());
+    dialogIntro.setText(dialogIntroText);
   }
 
   @Override

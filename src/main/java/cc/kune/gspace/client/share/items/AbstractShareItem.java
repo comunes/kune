@@ -21,6 +21,7 @@ package cc.kune.gspace.client.share.items;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -80,8 +81,13 @@ public abstract class AbstractShareItem extends Composite {
   }
 
   public void setGroupName(final GroupDTO group) {
-    withText(group.getLongName());
+    final boolean isAnUser = group.isNotPersonal();
+    withText((isAnUser ? "" : I18n.t("Group") + ": ") + group.getLongName());
     withIcon(downloadUtils.getGroupLogo(group));
+  }
+
+  public AbstractShareItem with(final String typeId) {
+    return this;
   }
 
   public AbstractShareItem withIcon(final ImageResource img) {
@@ -98,4 +104,5 @@ public abstract class AbstractShareItem extends Composite {
     iconLabel.setText(text);
     return this;
   }
+
 }

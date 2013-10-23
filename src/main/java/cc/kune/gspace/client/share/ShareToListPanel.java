@@ -21,6 +21,7 @@ package cc.kune.gspace.client.share;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.share.items.ShareItemFactory;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
@@ -39,6 +40,10 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   private final VerticalPanel itemsPanel;
 
+  private final Label title;
+
+  private String typeId;
+
   /**
    * Instantiates a new abstract share to list panel.
    * 
@@ -46,7 +51,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
    *          the title text
    */
   public ShareToListPanel() {
-    final Label title = new Label();
+    title = new Label();
     title.setStyleName("k-sharelist-title");
     final VerticalPanel vp = new VerticalPanel();
     itemsPanel = new VerticalPanel();
@@ -56,7 +61,6 @@ public class ShareToListPanel extends Composite implements ShareToListView {
     DOM.setStyleAttribute(scroll.getElement(), "maxHeight", SCROLL_HEIGHT);
     scroll.setStyleName("k-sharelist-scroll");
     scroll.add(itemsPanel);
-    title.setText(I18n.t("who can access:"));
     vp.add(title);
     vp.add(scroll);
     initWidget(vp);
@@ -64,7 +68,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addAdmin(final GroupDTO admin) {
-    itemsPanel.add(ShareItemFactory.getAdmin().of(admin));
+    itemsPanel.add(ShareItemFactory.getAdmin().of(admin).with(typeId));
   }
 
   @Override
@@ -74,7 +78,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addEditor(final GroupDTO group) {
-    itemsPanel.add(ShareItemFactory.getEditor().of(group));
+    itemsPanel.add(ShareItemFactory.getEditor().of(group).with(typeId));
   }
 
   @Override
@@ -89,17 +93,17 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addOwner(final GroupDTO owner) {
-    itemsPanel.add(ShareItemFactory.getOwner().of(owner));
+    itemsPanel.add(ShareItemFactory.getOwner().of(owner).with(typeId));
   }
 
   @Override
   public void addParticipant(final String waveParticipant) {
-    itemsPanel.add(ShareItemFactory.getParticipant().of(waveParticipant));
+    itemsPanel.add(ShareItemFactory.getParticipant().of(waveParticipant).with(typeId));
   }
 
   @Override
   public void addViewer(final GroupDTO viewer) {
-    itemsPanel.add(ShareItemFactory.getViewer().of(viewer));
+    itemsPanel.add(ShareItemFactory.getViewer().of(viewer).with(typeId));
   }
 
   @Override
@@ -115,6 +119,18 @@ public class ShareToListPanel extends Composite implements ShareToListView {
   @Override
   public IsWidget getView() {
     return this;
+  }
+
+  @Override
+  public void setTypeId(final String typeId) {
+    this.typeId = typeId;
+    final String titleText;
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      titleText = I18n.t("members:");
+    } else {
+      titleText = I18n.t("who can access:");
+    }
+    title.setText(titleText);
   }
 
 }
