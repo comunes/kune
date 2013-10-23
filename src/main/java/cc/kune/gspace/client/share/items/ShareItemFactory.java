@@ -38,6 +38,8 @@ public class ShareItemFactory {
   @Inject
   private static Provider<ShareItemOfOwner> owner;
   @Inject
+  private static Provider<ShareItemOfParticipant> participant;
+  @Inject
   private static Provider<ShareItemOfViewer> viewer;
   @Inject
   private static Provider<ShareItemVisibleByAnyone> visibleByAnyone;
@@ -52,6 +54,10 @@ public class ShareItemFactory {
 
   public static ShareItemOfOwner getOwner() {
     return owner.get();
+  }
+
+  public static ShareItemOfParticipant getParticipant() {
+    return participant.get();
   }
 
   public static ShareItemEditableByAnyone getShareItemEditableByAnyone() {

@@ -38,6 +38,7 @@ public class ShareItemOfOwner extends AbstractShareItem {
   public AbstractShareItem of(final GroupDTO group) {
     setGroupName(group);
     final LabelDescriptor isOwner = new LabelDescriptor(I18n.t("is owner"));
+    isOwner.withStyles("k-share-item-noactions");
     super.add(isOwner);
     return this;
   }

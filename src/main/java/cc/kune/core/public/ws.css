@@ -1422,6 +1422,10 @@ div.k-shareitem div.k-iconlabel {
   max-width: 100px;
 }
 
+.k-share-item-noactions {
+  color: #999;
+}
+
 .k-share-others {
   margin-top: 5px;
   background-color: #f2f2f2;
