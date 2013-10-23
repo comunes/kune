@@ -47,7 +47,8 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
   public static final String SEARCH_TEXTBOX_ID = "stop-textbox";
 
   @Inject
-  public ShareToOthersPanel(final I18nUITranslationService i18n) {
+  public ShareToOthersPanel(final I18nUITranslationService i18n,
+      final ShareToOthersDropController dropController) {
     final FlowPanel flow = new FlowPanel();
     flow.addStyleName("k-share-others");
 
@@ -102,6 +103,9 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
     Tooltip.to(suggestTextWhenEmpty,
         I18n.t("type something to search and add users or groups in this site"));
     Tooltip.to(suggestBoxIntro, I18n.t("type something to search and add users or groups in this site"));
+
+    // D&D
+    dropController.init(flow);
   }
 
 }
