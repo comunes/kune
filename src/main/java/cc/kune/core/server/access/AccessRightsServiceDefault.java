@@ -66,8 +66,6 @@ public class AccessRightsServiceDefault implements AccessRightsService {
     boolean isEditable = false;
     boolean isVisible = false;
 
-    // FIXME, future: admin users can admin, edit, view everything
-    // (not now while we are doing tests)
     isVisible = isEditable = isAdministrable = canAccess(userGroup, accessList, AccessRol.Administrator);
     if (!isEditable) {
       isVisible = isEditable = canAccess(userGroup, accessList, AccessRol.Editor);

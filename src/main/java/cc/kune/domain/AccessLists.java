@@ -59,6 +59,14 @@ public class AccessLists {
     this.viewers = new GroupList();
   }
 
+  public AccessLists(final Group group) {
+    // We create a list with that group members as admins and editors and as
+    // viewers, the viewer mode of the group
+    this.admins = new GroupList(group);
+    this.editors = new GroupList(group);
+    this.viewers = group.getAccessLists().getList(AccessRol.Viewer);
+  }
+
   public void addAdmin(final Group group) {
     admins.add(group);
   }

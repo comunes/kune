@@ -85,11 +85,11 @@ public class Container implements HasId, HasStateToken {
   @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
   private Set<Content> contents;
 
-  @org.hibernate.annotations.Index(name="createdOn")
+  @org.hibernate.annotations.Index(name = "createdOn")
   @Basic(optional = false)
   private Long createdOn;
 
-  @org.hibernate.annotations.Index(name="deletedOn")
+  @org.hibernate.annotations.Index(name = "deletedOn")
   @Basic(optional = true)
   private Date deletedOn;
 
@@ -203,7 +203,7 @@ public class Container implements HasId, HasStateToken {
 
   @Transient
   public AccessLists getAccessLists() {
-    return hasAccessList() ? accessLists : isRoot() ? getOwner().getAccessLists()
+    return hasAccessList() ? accessLists : isRoot() ? new AccessLists(getOwner())
         : getParent().getAccessLists();
   }
 

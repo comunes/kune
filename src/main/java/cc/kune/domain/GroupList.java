@@ -67,6 +67,11 @@ public class GroupList {
     this.mode = GroupListMode.NORMAL;
   }
 
+  public GroupList(final Group group) {
+    this();
+    add(group);
+  }
+
   public GroupList(final Set<Group> list) {
     this.list = list;
   }
