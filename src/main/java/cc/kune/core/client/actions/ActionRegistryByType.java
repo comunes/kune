@@ -32,6 +32,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.client.registry.IdGenerator;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.inject.Provider;
 
@@ -184,6 +185,27 @@ public class ActionRegistryByType {
         return false;
       }
     }
+
+    // We check if the rol < higgerRol (this is used to exclude some minor
+    // actions for admins, etc)
+    final AccessRolDTO higherRol = action.getHigherRol();
+    if (higherRol != null) {
+      switch (higherRol) {
+      case Viewer:
+        if (rights.isAdministrable() || rights.isEditable()) {
+          return false;
+        }
+        break;
+      case Editor:
+        if (rights.isAdministrable()) {
+          return false;
+        }
+        break;
+      default:
+        break;
+      }
+    }
+
     switch (action.getRolRequired()) {
     case Administrator:
       return rights.isAdministrable();

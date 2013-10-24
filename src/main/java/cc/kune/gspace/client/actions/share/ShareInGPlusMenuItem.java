@@ -46,5 +46,6 @@ public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
             false,
             URL_TEMPLATE,
             URL.encodeQueryString(StateTokenUtils.getGroupSpaceUrl(session.getCurrentState().getStateToken()))));
+
   }
 }

@@ -18,17 +18,18 @@
 
 package cc.kune.gspace.client.actions.share;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.client.utils.ClientFormattedString;
+import cc.kune.core.client.actions.RolAction;
+import cc.kune.core.shared.dto.AccessRolDTO;
 
-public class AbstractShareInSocialNetAction extends AbstractExtendedAction {
+public class AbstractShareInSocialNetAction extends RolAction {
 
   private ClientFormattedString url;
 
   public AbstractShareInSocialNetAction() {
-
+    super(AccessRolDTO.Viewer, AccessRolDTO.Editor, false);
   }
 
   @Override
