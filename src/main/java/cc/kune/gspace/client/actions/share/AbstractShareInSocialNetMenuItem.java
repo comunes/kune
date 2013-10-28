@@ -34,7 +34,6 @@ public class AbstractShareInSocialNetMenuItem extends MenuItemDescriptor {
     super(action);
     withText(text).withIcon(icon).withParent(menu, false);
     action.setUrl(url);
-    setEnabled(session.getCurrentState().getGroupRights().isVisible());
   }
 
 }

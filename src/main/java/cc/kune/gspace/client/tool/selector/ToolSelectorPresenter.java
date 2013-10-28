@@ -25,7 +25,7 @@ import java.util.List;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.actions.RolComparator;
+import cc.kune.core.client.actions.RolActionHelper;
 import cc.kune.core.client.events.GroupChangedEvent;
 import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.events.StateChangedEvent;
@@ -73,7 +73,7 @@ public class ToolSelectorPresenter extends
           if (enabledTools != null && enabledTools.contains(toolName)) {
             final ToolSelectorItem tool = tools.get(toolName);
             // Set visible only when allowed
-            tool.setVisible(RolComparator.isEnabled(tool.getVisibleForRol(), state.getGroupRights()));
+            tool.setVisible(RolActionHelper.isAuthorized(tool.getVisibleForRol(), state.getGroupRights()));
           } else {
             tools.get(toolName).setVisible(false);
           }

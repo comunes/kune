@@ -32,7 +32,6 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.client.registry.IdGenerator;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.AccessRights;
-import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.inject.Provider;
 
@@ -159,7 +158,9 @@ public class ActionRegistryByType {
       if (action instanceof RolAction) {
         // Log.debug("Must add action?: " + action + ", isLogged: " + isLogged +
         // ", r: " + rights);
-        if (mustAdd((RolAction) action, isLogged, rights)) {
+        final RolAction rolAction = (RolAction) action;
+        if (RolActionHelper.mustAdd(rolAction.getRolRequired(), rolAction.getHigherRol(),
+            rolAction.isAuthNeed(), isLogged, rights)) {
           add(collection, descrip, targetItem);
         }
       } else {
@@ -177,44 +178,6 @@ public class ActionRegistryByType {
     collection.addAll(getCurrentActions(tool, targetItem,
         IdGenerator.generate(typeId, status.toString()), isLogged, rights, actionsGroupId));
     return collection;
-  }
-
-  private boolean mustAdd(final RolAction action, final boolean isLogged, final AccessRights rights) {
-    if (action.isAuthNeed()) {
-      if (!isLogged) {
-        return false;
-      }
-    }
-
-    // We check if the rol < higgerRol (this is used to exclude some minor
-    // actions for admins, etc)
-    final AccessRolDTO higherRol = action.getHigherRol();
-    if (higherRol != null) {
-      switch (higherRol) {
-      case Viewer:
-        if (rights.isAdministrable() || rights.isEditable()) {
-          return false;
-        }
-        break;
-      case Editor:
-        if (rights.isAdministrable()) {
-          return false;
-        }
-        break;
-      default:
-        break;
-      }
-    }
-
-    switch (action.getRolRequired()) {
-    case Administrator:
-      return rights.isAdministrable();
-    case Editor:
-      return rights.isEditable();
-    case Viewer:
-    default:
-      return rights.isVisible();
-    }
   }
 
 }

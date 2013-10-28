@@ -25,6 +25,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateTokenUtils;
+import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.gwt.http.client.URL;
 import com.google.inject.Inject;
@@ -46,6 +47,6 @@ public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
             false,
             URL_TEMPLATE,
             URL.encodeQueryString(StateTokenUtils.getGroupSpaceUrl(session.getCurrentState().getStateToken()))));
-
+    action.setHigherRol(AccessRolDTO.Editor);
   }
 }

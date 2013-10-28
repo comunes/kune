@@ -20,10 +20,10 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
+import cc.kune.core.client.actions.RolActionHelper;
 import cc.kune.core.client.events.AccessRightsChangedEvent;
 import cc.kune.core.client.events.AccessRightsChangedEvent.AccessRightsChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
-import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
 public class SubMenuWithRolRequiredDescriptor extends SubMenuDescriptor {
@@ -32,21 +32,8 @@ public class SubMenuWithRolRequiredDescriptor extends SubMenuDescriptor {
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
       @Override
       public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
-        final AccessRights rights = event.getCurrentRights();
-        boolean visible;
-        switch (rolRequired) {
-        case Administrator:
-          visible = rights.isAdministrable();
-          break;
-        case Editor:
-          visible = rights.isEditable();
-          break;
-        case Viewer:
-        default:
-          visible = rights.isVisible();
-          break;
-        }
-        SubMenuWithRolRequiredDescriptor.this.setVisible(visible);
+        SubMenuWithRolRequiredDescriptor.this.setVisible(RolActionHelper.isAuthorized(rolRequired,
+            event.getCurrentRights()));
       }
     });
   }
