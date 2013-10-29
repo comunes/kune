@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.List;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
@@ -63,6 +64,7 @@ public class SessionDefault implements Session {
   private UserInfoDTO currentUserInfo;
   private final EventBus eventBus;
   private InitDataDTO initData;
+  private Boolean isDev;
   private Object[][] languagesArray;
   private Object[][] timezonesArray;
   private String userHash;
@@ -258,6 +260,15 @@ public class SessionDefault implements Session {
   @Override
   public boolean isCurrentStateAPerson() {
     return currentState == null ? false : currentState.getGroup().isPersonal();
+  }
+
+  @Override
+  public boolean isGuiInDevelopment() {
+    if (isDev == null) {
+      final String isDevParam = WindowUtils.getParameter(SessionConstants.DEVELOPMENT);
+      isDev = isDevParam == null ? false : Boolean.valueOf(isDevParam);
+    }
+    return isDev;
   }
 
   @Override

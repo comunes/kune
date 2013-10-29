@@ -129,6 +129,11 @@ public interface Session {
 
   boolean isCurrentStateAPerson();
 
+  /**
+   * If we have using the development version of the Gui (param ?dev=true)
+   */
+  boolean isGuiInDevelopment();
+
   boolean isInCurrentUserSpace();
 
   boolean isLogged();

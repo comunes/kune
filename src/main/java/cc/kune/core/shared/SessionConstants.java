@@ -23,7 +23,6 @@ package cc.kune.core.shared;
  * The Class SessionConstants.
  */
 public final class SessionConstants {
-
   /** The Constant _AN_HOUR in millisecons */
   public final static int _1_HOUR = 1000 * 60 * 60;
 
@@ -45,6 +44,11 @@ public final class SessionConstants {
   /** The Constant ANON_SESSION_DURATION_AFTER_REG. */
   public final static long ANON_SESSION_DURATION_AFTER_REG = A_DAY * 365;
 
+  /**
+   * Use http://kune.example.com/?dev=true to get some development functionality
+   */
+  public final static String DEVELOPMENT = "dev";
+
   /** The Constant JSESSIONID. */
   public static final String JSESSIONID = "JSESSIONID";
 
@@ -53,10 +57,11 @@ public final class SessionConstants {
    * the user is viewed as a newbie (so, more help is needed)
    */
   public final static long MIN_SIGN_IN_FOR_NEWBIES = 10;
-  // session duration
+
   /** The Constant SESSION_DURATION. */
   public final static long SESSION_DURATION = A_DAY * 30; // four weeks login
   // public final static long SESSION_DURATION = 10000; // For test
+
   /** The Constant USERHASH. */
   public final static String USERHASH = "k007userHash";
 

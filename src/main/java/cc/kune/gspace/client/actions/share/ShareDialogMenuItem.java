@@ -23,14 +23,16 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.shared.dto.AccessRolDTO;
+import cc.kune.gspace.client.actions.IsInDevelopmentCondition;
 import cc.kune.gspace.client.share.ShareDialog;
 
 import com.google.inject.Inject;
 
-public class ShareSettingsMenuItem extends MenuItemDescriptor {
+public class ShareDialogMenuItem extends MenuItemDescriptor {
 
   @Inject
-  public ShareSettingsMenuItem(final ShareDialog shareDialog, final ContentViewerShareMenu menu) {
+  public ShareDialogMenuItem(final ShareDialog shareDialog, final ContentViewerShareMenu menu,
+      final IsInDevelopmentCondition isInDevAddCondition) {
     super(new RolAction(AccessRolDTO.Administrator, true) {
       @Override
       public void actionPerformed(final ActionEvent event) {
@@ -38,6 +40,7 @@ public class ShareSettingsMenuItem extends MenuItemDescriptor {
       }
     });
     withText(I18n.t("More sharing options"));
+    withAddCondition(isInDevAddCondition);
     setParent(menu, false);
   }
 

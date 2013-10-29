@@ -52,7 +52,7 @@ import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
-import cc.kune.gspace.client.actions.share.ShareSettingsMenuItem;
+import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -98,7 +98,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<DelPostMenuItem> delPostMenuItem,
       final Provider<MoveContentMenuItem> moveContentMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
-      final Provider<ShareSettingsMenuItem> shareSettings,
+      final Provider<ShareDialogMenuItem> shareSettings,
       final Provider<ShareInTwitterMenuItem> shareInTwitter,
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
