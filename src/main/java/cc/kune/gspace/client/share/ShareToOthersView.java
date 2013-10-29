@@ -18,7 +18,11 @@
 
 package cc.kune.gspace.client.share;
 
+import cc.kune.gspace.client.share.ShareDialogPresenter.OnAddGroupListener;
+
 public interface ShareToOthersView {
+
+  void onAddGroupListener(OnAddGroupListener addListener);
 
   void setTypeId(String typeId);
 

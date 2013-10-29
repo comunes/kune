@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 import com.google.gwt.resources.client.ImageResource;
@@ -36,8 +36,8 @@ public abstract class AbstractShareItemEveryoneWithMenu extends AbstractShareIte
   public AbstractShareItemEveryoneWithMenu(final ImageResource itemIcon, final String itemText,
       final String menuTitle, final ImageResource menuItemIcon, final String menuItemText,
       final ActionSimplePanel actionsPanel, final ClientFileDownloadUtils downloadUtils,
-      final ContentServiceAsync contentServiceAsync, final CommonResources res) {
-    super(menuTitle, actionsPanel, downloadUtils, contentServiceAsync, res);
+      final ContentServiceHelper contentService, final CommonResources res) {
+    super(menuTitle, actionsPanel, downloadUtils, contentService, res);
     withText(itemText).withIcon(itemIcon);
     menuItem = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override

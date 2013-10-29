@@ -32,7 +32,7 @@ public class ShareDialogHelper {
   }
 
   public void init(final String localDomain) {
-    this.localDomain = localDomain;
+    this.localDomain = "@" + localDomain;
   }
 
   public void setState(final GroupDTO currentGroup, final AccessListsDTO acl, final String typeId) {

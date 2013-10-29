@@ -23,6 +23,7 @@ import cc.kune.common.client.notify.ConfirmAskEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -99,6 +100,21 @@ public class ContentServiceHelper {
           }
         });
     cache.remove(parentToken);
+  }
+
+  public void addParticipant(final StateToken token, final String userName, final SimpleCallback onAdd) {
+    contentService.get().addParticipant(session.getUserHash(), token, userName,
+        new AsyncCallbackSimple<Boolean>() {
+          @Override
+          public void onSuccess(final Boolean result) {
+            if (result) {
+              NotifyUser.info(i18n.t("User '[%s]' added as participant", userName));
+              onAdd.onCallback();
+            } else {
+              NotifyUser.info(i18n.t("This user is already partipanting"));
+            }
+          }
+        });
   }
 
   public void addParticipants(final StateToken token, final SocialNetworkSubGroup subGroup) {

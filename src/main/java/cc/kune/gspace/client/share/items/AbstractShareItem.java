@@ -22,7 +22,7 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -38,7 +38,7 @@ public abstract class AbstractShareItem extends Composite {
 
   private final ActionSimplePanel actionsPanel;
 
-  protected final ContentServiceAsync contentServiceAsync;
+  protected final ContentServiceHelper contentService;
 
   private final ClientFileDownloadUtils downloadUtils;
 
@@ -61,10 +61,10 @@ public abstract class AbstractShareItem extends Composite {
    * @param contentServiceAsync
    */
   public AbstractShareItem(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync) {
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService) {
     this.actionsPanel = actionsPanel;
     this.downloadUtils = downloadUtils;
-    this.contentServiceAsync = contentServiceAsync;
+    this.contentService = contentService;
     flow = new FlowPanel();
     iconLabel = new IconLabel();
     flow.add(iconLabel);

@@ -18,12 +18,11 @@
 
 package cc.kune.gspace.client.share;
 
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.dnd.AbstractDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.ui.BasicDragableThumb;
+import cc.kune.gspace.client.share.ShareDialogPresenter.OnAddGroupListener;
 
 import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
 import com.google.gwt.user.client.ui.Widget;
@@ -32,6 +31,8 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ShareToOthersDropController extends AbstractDropController {
+  private OnAddGroupListener addListener;
+
   @Inject
   public ShareToOthersDropController(final KuneDragController dragController,
       final ContentServiceAsync contentService) {
@@ -39,11 +40,17 @@ public class ShareToOthersDropController extends AbstractDropController {
     registerType(BasicDragableThumb.class);
   }
 
+  public void onAddGroupListener(final OnAddGroupListener addListener) {
+    this.addListener = addListener;
+  }
+
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
     if (widget instanceof BasicDragableThumb) {
       final String shortName = ((BasicDragableThumb) widget).getToken().getGroup();
-      NotifyUser.info("Adding: " + shortName + TextUtils.IN_DEVELOPMENT_P);
+      if (addListener != null) {
+        addListener.onAdd(shortName);
+      }
     }
   }
 

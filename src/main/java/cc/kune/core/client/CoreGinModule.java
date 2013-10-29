@@ -121,6 +121,7 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+import cc.kune.lists.client.rpc.ListsServiceHelper;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
@@ -257,6 +258,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
     s(ContentServiceHelper.class);
     s(SocialNetServiceHelper.class);
+    s(ListsServiceHelper.class);
 
     s(MyGroupsMenu.class);
     s(SiteUserOptionsPresenter.class);

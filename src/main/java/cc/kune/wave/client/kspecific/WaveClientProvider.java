@@ -31,9 +31,9 @@ public class WaveClientProvider implements Provider<WaveClientView> {
   @Inject
   public WaveClientProvider(final Provider<WebClient> webClient,
       final Provider<WebClientMock> webClientMock) {
-    // webClientProv = webClient;
+    webClientProv = webClient;
     // If you want not to load the Webclient Mock
-    webClientProv = webClientMock;
+    // webClientProv = webClientMock;
   }
 
   @Override

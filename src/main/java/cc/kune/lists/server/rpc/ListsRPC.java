@@ -28,6 +28,8 @@ import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.domain.Group;
+import cc.kune.domain.finders.GroupFinder;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.ListServerService;
 
@@ -35,11 +37,13 @@ import com.google.inject.Inject;
 
 public class ListsRPC implements ListsService, RPC {
 
+  private final GroupFinder groupFinder;
   private final ListServerService listService;
 
   @Inject
-  public ListsRPC(final ListServerService listService) {
+  public ListsRPC(final ListServerService listService, final GroupFinder groupFinder) {
     this.listService = listService;
+    this.groupFinder = groupFinder;
   }
 
   @Override
@@ -70,9 +74,21 @@ public class ListsRPC implements ListsService, RPC {
 
   @Override
   @Authenticated
+  @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.container)
+  @KuneTransactional
+  public StateContainerDTO subscribeAnUserToList(final String hash, final StateToken token,
+      final String newSubscriber, final Boolean subscribe) {
+    final Group newSubscriberGroup = groupFinder.findByShortName(newSubscriber);
+    // Without checking perms because {@link AuthorizatedMethodInterceptor} do
+    // this
+    return listService.subscribeToListWithoutPermCheck(token, newSubscriberGroup, subscribe);
+  }
+
+  @Override
+  @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.container)
   @KuneTransactional
-  public StateContainerDTO subscribeToList(final String userHash, final StateToken token,
+  public StateContainerDTO subscribeMyselfToList(final String userHash, final StateToken token,
       final Boolean subscribe) {
     return listService.subscribeCurrentUserToList(token, subscribe);
   }

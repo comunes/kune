@@ -104,11 +104,11 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     return refreshProfile(participantId, true, false);
   }
 
-  private String getUsername(final String address) {
+  public String getUsername(final String address) {
     return address.split("@")[0];
   }
 
-  private boolean isLocal(final String address) {
+  public boolean isLocal(final String address) {
     return Session.get().getDomain() != null && address.contains(Session.get().getDomain());
   }
 

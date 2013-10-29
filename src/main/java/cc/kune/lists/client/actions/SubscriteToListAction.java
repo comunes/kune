@@ -93,7 +93,7 @@ public class SubscriteToListAction extends RolAction {
   private void performAction() {
     NotifyUser.showProgress();
     final boolean subcribe = !isMember();
-    listService.get().subscribeToList(session.getUserHash(), session.getCurrentStateToken(),
+    listService.get().subscribeMyselfToList(session.getUserHash(), session.getCurrentStateToken(),
         Boolean.valueOf(subcribe), new AsyncCallbackSimple<StateContainerDTO>() {
           @Override
           public void onSuccess(final StateContainerDTO result) {

@@ -36,6 +36,6 @@ public interface ListServerService {
 
   StateContainerDTO subscribeCurrentUserToList(final StateToken token, final Boolean subscribe);
 
-  StateContainerDTO subscribeToListWithoutPermCheck(StateToken token, Group userGroup);
+  StateContainerDTO subscribeToListWithoutPermCheck(StateToken token, Group userGroup, Boolean subscribe);
 
 }

@@ -26,7 +26,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -38,14 +38,14 @@ public class ShareItemOfAdmin extends AbstractShareItemWithMenu {
 
   @Inject
   public ShareItemOfAdmin(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
       final IconicResources res, final CommonResources commonResources) {
     super(I18n.tWithNT("is admin", "someone is administrator"), actionsPanel, downloadUtils,
-        contentServiceAsync, commonResources);
+        contentService, commonResources);
     this.res = res;
   }
 
-  public AbstractShareItem of(final GroupDTO group) {
+  public AbstractShareItem of(final GroupDTO group, final String typeId) {
     setGroupName(group);
     final MenuItemDescriptor adminToEditor = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override

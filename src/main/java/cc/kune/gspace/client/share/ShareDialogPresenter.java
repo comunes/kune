@@ -22,8 +22,10 @@ package cc.kune.gspace.client.share;
  * The Class ShareDialogPresenter, allows to set up how a content is shared to others
  */
 
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateTokenUtils;
@@ -31,9 +33,12 @@ import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.lists.client.rpc.ListsServiceHelper;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -47,12 +52,16 @@ public class ShareDialogPresenter extends
     Presenter<ShareDialogPresenter.ShareDialogView, ShareDialogPresenter.ShareDialogProxy> implements
     ShareDialog {
 
+  public interface OnAddGroupListener {
+    void onAdd(String groupName);
+  }
   /**
    * The Interface ShareDialogProxy.
    */
   @ProxyCodeSplit
   public interface ShareDialogProxy extends Proxy<ShareDialogPresenter> {
   }
+
   /**
    * The Interface ShareDialogView.
    */
@@ -65,13 +74,16 @@ public class ShareDialogPresenter extends
     void setTypeId(String typeId);
 
     void show();
+
   }
 
+  private final Provider<ContentServiceHelper> contentService;
   private final ShareDialogHelper helper;
+  private final Provider<ListsServiceHelper> listService;
   private final Session session;
-  private final ShareToListView shareToListView;
-  private final ShareToTheNetView shareToNetView;
-  private final ShareToOthersView shareToOthersView;
+  private final Provider<ShareToListView> shareToListView;
+  private final Provider<ShareToTheNetView> shareToNetView;
+  private final Provider<ShareToOthersView> shareToOthersView;
 
   /**
    * Instantiates a new share dialog presenter.
@@ -85,15 +97,19 @@ public class ShareDialogPresenter extends
    */
   @Inject
   public ShareDialogPresenter(final EventBus eventBus, final ShareDialogView view,
-      final ShareDialogProxy proxy, final ShareToListView shareToListView,
-      final ShareToTheNetView shareToNetView, final ShareToOthersView shareToOthersView,
-      final Session session, final ShareDialogHelper helper, final StateManager stateManager) {
+      final ShareDialogProxy proxy, final Provider<ShareToListView> shareToListView,
+      final Provider<ShareToTheNetView> shareToNetView,
+      final Provider<ShareToOthersView> shareToOthersView, final Session session,
+      final ShareDialogHelper helper, final StateManager stateManager,
+      final Provider<ContentServiceHelper> contentService, final Provider<ListsServiceHelper> listService) {
     super(eventBus, view, proxy);
     this.shareToListView = shareToListView;
     this.shareToNetView = shareToNetView;
     this.shareToOthersView = shareToOthersView;
     this.session = session;
     this.helper = helper;
+    this.contentService = contentService;
+    this.listService = listService;
     this.helper.init(org.waveprotocol.box.webclient.client.Session.get().getDomain());
     stateManager.onStateChanged(false, new StateChangedHandler() {
       @Override
@@ -103,6 +119,36 @@ public class ShareDialogPresenter extends
         }
       }
     });
+  }
+
+  @Override
+  protected void onBind() {
+    super.onBind();
+    final OnAddGroupListener addListener = new OnAddGroupListener() {
+      @Override
+      public void onAdd(final String groupName) {
+        final StateContainerDTO cnt = (StateContainerDTO) session.getCurrentState();
+        final String typeId = cnt.getTypeId();
+        final SimpleCallback onAdd = new SimpleCallback() {
+          @Override
+          public void onCallback() {
+            // FIXME (vjrj) I don't know if this is correct for this
+            shareToListView.get().addParticipant(groupName);
+          }
+        };
+        if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+          listService.get().subscribeAnUserToList(cnt.getStateToken(), groupName, true, onAdd);
+        } else {
+          if (cnt instanceof StateContentDTO) {
+            final StateContentDTO content = (StateContentDTO) cnt;
+            if (content.isWave()) {
+              contentService.get().addParticipant(cnt.getStateToken(), groupName, onAdd);
+            }
+          }
+        }
+      }
+    };
+    shareToOthersView.get().onAddGroupListener(addListener);
   }
 
   /*
@@ -122,8 +168,8 @@ public class ShareDialogPresenter extends
     // Configure behavior if is a doc or a list
     final String typeId = cnt.getTypeId();
     getView().setTypeId(typeId);
-    shareToListView.setTypeId(typeId);
-    shareToOthersView.setTypeId(typeId);
+    shareToListView.get().setTypeId(typeId);
+    shareToOthersView.get().setTypeId(typeId);
 
     final AccessListsDTO acl = cnt.getAccessLists();
     final GroupDTO currentGroup = cnt.getGroup();
@@ -137,7 +183,7 @@ public class ShareDialogPresenter extends
     } else {
       helper.setState(currentGroup, acl, typeId);
     }
-    shareToNetView.setLinkToShare(StateTokenUtils.getGroupSpaceUrl(session.getCurrentStateToken()));
+    shareToNetView.get().setLinkToShare(StateTokenUtils.getGroupSpaceUrl(session.getCurrentStateToken()));
     getView().show();
   }
 }

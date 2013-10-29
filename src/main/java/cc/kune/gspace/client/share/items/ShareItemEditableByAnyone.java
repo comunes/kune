@@ -22,7 +22,7 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 import com.google.inject.Inject;
@@ -31,11 +31,11 @@ public class ShareItemEditableByAnyone extends AbstractShareItemEveryoneWithMenu
 
   @Inject
   public ShareItemEditableByAnyone(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
       final CommonResources res, final IconicResources icons) {
     super(icons.world(), I18n.tWithNT("Anyone", "with initial uppercase"), I18n.t("can edit"),
         icons.del(), I18n.t("Don't allow edit by everyone"), actionsPanel, downloadUtils,
-        contentServiceAsync, res);
+        contentService, res);
     // final MenuItemDescriptor notAnyone = new MenuItemDescriptor(menu, new
     // AbstractExtendedAction() {
     // @Override

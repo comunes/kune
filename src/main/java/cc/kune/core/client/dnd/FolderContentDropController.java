@@ -19,11 +19,8 @@
  */
 package cc.kune.core.client.dnd;
 
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.state.Session;
+import cc.kune.common.shared.utils.SimpleCallback;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.domain.utils.StateToken;
 
@@ -39,18 +36,14 @@ import com.google.inject.Inject;
  */
 public class FolderContentDropController extends AbstractDropController {
 
-  private final ContentServiceAsync contentService;
-  private final I18nTranslationService i18n;
-  private final Session session;
+  private final ContentServiceHelper contentService;
 
   @Inject
   public FolderContentDropController(final KuneDragController dragController,
-      final ContentServiceAsync contentService, final Session session, final I18nTranslationService i18n) {
+      final ContentServiceHelper contentService) {
     super(dragController);
-    this.i18n = i18n;
     registerType(BasicDragableThumb.class);
     this.contentService = contentService;
-    this.session = session;
   }
 
   @Override
@@ -59,17 +52,12 @@ public class FolderContentDropController extends AbstractDropController {
     if (widget instanceof BasicDragableThumb) {
       final BasicDragableThumb thumb = (BasicDragableThumb) widget;
       final String userName = thumb.getToken().getGroup();
-      contentService.addParticipant(session.getUserHash(), (StateToken) getTarget(), userName,
-          new AsyncCallbackSimple<Boolean>() {
-            @Override
-            public void onSuccess(final Boolean result) {
-              if (result) {
-                NotifyUser.info(i18n.t("User '[%s]' added as participant", userName));
-              } else {
-                NotifyUser.info(i18n.t("This user is already partipanting"));
-              }
-            }
-          });
+      contentService.addParticipant((StateToken) getTarget(), userName, new SimpleCallback() {
+        @Override
+        public void onCallback() {
+          // Do nothing
+        }
+      });
     }
   }
 

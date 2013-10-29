@@ -22,7 +22,7 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.lists.shared.ListsToolConstants;
 
@@ -32,10 +32,10 @@ public class ShareItemVisibleByAnyone extends AbstractShareItemEveryoneWithMenu 
 
   @Inject
   public ShareItemVisibleByAnyone(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
       final CommonResources res, final IconicResources icons) {
     super(icons.world(), I18n.tWithNT("Anyone", "with initial uppercase"), I18n.t("can view"),
-        icons.del(), "", actionsPanel, downloadUtils, contentServiceAsync, res);
+        icons.del(), "", actionsPanel, downloadUtils, contentService, res);
   }
 
   @Override

@@ -36,6 +36,9 @@ public interface ListsService extends RemoteService {
 
   StateContainerDTO setPublic(String hash, StateToken token, Boolean isPublic);
 
-  StateContainerDTO subscribeToList(String hash, StateToken token, Boolean subscribe);
+  StateContainerDTO subscribeAnUserToList(String hash, StateToken token, String newSubscriber,
+      Boolean subscribe);
+
+  StateContainerDTO subscribeMyselfToList(String hash, StateToken token, Boolean subscribe);
 
 }

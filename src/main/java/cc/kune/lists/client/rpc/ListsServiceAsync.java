@@ -36,7 +36,10 @@ public interface ListsServiceAsync {
   void setPublic(String hash, StateToken token, Boolean isPublic,
       AsyncCallback<StateContainerDTO> callback);
 
-  void subscribeToList(String hash, StateToken token, Boolean subscribe,
+  void subscribeAnUserToList(String hash, StateToken token, String newSubscriber, Boolean subscribe,
+      AsyncCallback<StateContainerDTO> callback);
+
+  void subscribeMyselfToList(String hash, StateToken token, Boolean subscribe,
       AsyncCallback<StateContainerDTO> callback);
 
 }

@@ -31,7 +31,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.wave.client.KuneWaveProfileManager;
 
@@ -45,23 +45,25 @@ public class ShareItemOfParticipant extends AbstractShareItemWithMenu {
   @Inject
   public ShareItemOfParticipant(final ActionSimplePanel actionsPanel,
       final KuneWaveProfileManager profileManager, final ClientFileDownloadUtils downloadUtils,
-      final ContentServiceAsync contentServiceAsync, final IconicResources res,
+      final ContentServiceHelper contentService, final IconicResources res,
       final CommonResources commonResources) {
-    super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils,
-        contentServiceAsync, commonResources);
+    super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils, contentService,
+        commonResources);
     this.profileManager = profileManager;
     this.res = res;
   }
 
-  public AbstractShareItem of(final String participant) {
+  public AbstractShareItem of(final String participant, final String typeId) {
     try {
       final ProfileImpl profile = profileManager.getProfile(ParticipantId.of(participant));
-      withText(profile.getFirstName());
+      final String address = profile.getAddress();
+      // remove @localhost in the participant is local
+      withText(profileManager.isLocal(address) ? profileManager.getUsername(address) : address);
       withIcon(profile.getImageUrl());
       final MenuItemDescriptor remove = new MenuItemDescriptor(menu, true, new AbstractExtendedAction() {
         @Override
         public void actionPerformed(final ActionEvent event) {
-          // TODO
+
           NotifyUser.info("In development");
         }
       });
@@ -72,5 +74,4 @@ public class ShareItemOfParticipant extends AbstractShareItemWithMenu {
     }
     return this;
   }
-
 }

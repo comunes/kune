@@ -22,7 +22,7 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 import com.google.inject.Inject;
@@ -31,10 +31,10 @@ public class ShareItemNotEditableByOthers extends AbstractShareItemEveryoneWithM
 
   @Inject
   public ShareItemNotEditableByOthers(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
       final CommonResources res, final IconicResources icons) {
     super(icons.del(), I18n.t("Nobody else"), I18n.t("can't edit"), icons.world(),
-        I18n.t("Allow edit by everyone"), actionsPanel, downloadUtils, contentServiceAsync, res);
+        I18n.t("Allow edit by everyone"), actionsPanel, downloadUtils, contentService, res);
   }
 
 }

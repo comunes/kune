@@ -148,11 +148,15 @@ public class ListServerServiceDefault implements ListServerService {
    * This is used by invitations when confirmed
    */
   @Override
-  public StateContainerDTO subscribeToListWithoutPermCheck(final StateToken token, final Group userGroup) {
+  public StateContainerDTO subscribeToListWithoutPermCheck(final StateToken token,
+      final Group userGroup, final Boolean subscribe) {
     final Container container = getContainer(token);
-
     final AccessLists acl = container.getAccessLists();
-    acl.getEditors().add(userGroup);
+    if (subscribe) {
+      acl.getEditors().add(userGroup);
+    } else {
+      acl.getEditors().add(userGroup);
+    }
     contentManager.setAccessList(container, acl);
     return contentRPC.getState(container);
   }

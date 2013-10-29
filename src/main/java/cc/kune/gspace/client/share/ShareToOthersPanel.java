@@ -18,13 +18,13 @@
 
 package cc.kune.gspace.client.share;
 
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.sitebar.search.MultivalueSuggestBox;
 import cc.kune.core.client.sitebar.search.OnEntitySelectedInSearch;
 import cc.kune.core.client.sitebar.search.SearchBoxFactory;
+import cc.kune.gspace.client.share.ShareDialogPresenter.OnAddGroupListener;
 import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.gwt.dom.client.Style.Visibility;
@@ -47,11 +47,14 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
 
   private static final String NOT_LIST_TOOLTIP = "type something to search and add people in this site";
   public static final String SEARCH_TEXTBOX_ID = "stop-textbox";
+  private OnAddGroupListener addListener;
+  private final ShareToOthersDropController dropController;
   private final MultivalueSuggestBox multivalueSBox;
 
   @Inject
   public ShareToOthersPanel(final I18nUITranslationService i18n,
       final ShareToOthersDropController dropController) {
+    this.dropController = dropController;
     final FlowPanel flow = new FlowPanel();
     flow.addStyleName("k-share-others");
 
@@ -59,8 +62,9 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
         new OnEntitySelectedInSearch() {
           @Override
           public void onSeleted(final String shortName) {
-            // TODO
-            NotifyUser.info("Selected: " + shortName);
+            if (addListener != null) {
+              addListener.onAdd(shortName);
+            }
           }
         });
     final SuggestBox suggestBox = multivalueSBox.getSuggestBox();
@@ -111,11 +115,18 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
   }
 
   @Override
+  public void onAddGroupListener(final OnAddGroupListener addListener) {
+    dropController.onAddGroupListener(addListener);
+    this.addListener = addListener;
+  }
+
+  @Override
   public void setTypeId(final String typeId) {
     if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
       multivalueSBox.setSearchUrl(SearchBoxFactory.getSearchUrl(true));
     } else {
-      multivalueSBox.setSearchUrl(SearchBoxFactory.getSearchUrl(false));
+      // By now we only add participants, so only search users
+      multivalueSBox.setSearchUrl(SearchBoxFactory.getSearchUrl(true));
     }
   }
 }

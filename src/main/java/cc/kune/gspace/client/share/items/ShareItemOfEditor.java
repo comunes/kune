@@ -26,7 +26,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.lists.shared.ListsToolConstants;
@@ -39,9 +39,9 @@ public class ShareItemOfEditor extends AbstractShareItemWithMenu {
 
   @Inject
   public ShareItemOfEditor(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceAsync contentServiceAsync,
+      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
       final IconicResources res, final CommonResources commonResources) {
-    super("", actionsPanel, downloadUtils, contentServiceAsync, commonResources);
+    super("", actionsPanel, downloadUtils, contentService, commonResources);
     this.res = res;
   }
 

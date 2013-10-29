@@ -68,7 +68,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addAdmin(final GroupDTO admin) {
-    itemsPanel.add(ShareItemFactory.getAdmin().of(admin).with(typeId));
+    itemsPanel.add(ShareItemFactory.getAdmin().of(admin, typeId));
   }
 
   @Override
@@ -98,7 +98,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addParticipant(final String waveParticipant) {
-    itemsPanel.add(ShareItemFactory.getParticipant().of(waveParticipant).with(typeId));
+    itemsPanel.add(ShareItemFactory.getParticipant().of(waveParticipant, typeId));
   }
 
   @Override

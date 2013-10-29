@@ -19,7 +19,7 @@ import cc.kune.core.shared.dto.GroupType;
 import cc.kune.lists.shared.ListsToolConstants;
 
 public class ShareDialogHelperTest {
-  private static final String EVERYONE_IN_WAVE = "@example.com";
+  private static final String EVERYONE_IN_WAVE = "example.com";
   private static final String SOMEBODY1 = "somebody1@example.com";
   private static final String SOMEBODY2 = "somebody2@example.com";
   private GroupDTO currentGroup;
@@ -188,7 +188,7 @@ public class ShareDialogHelperTest {
   @Test
   public void whenShareDocToListNobodyAndEveryoneParticipants() {
     final AccessListsDTO acl = acl(list(currentGroup, group1), list(group2), NOBODY);
-    participants.add(EVERYONE_IN_WAVE);
+    participants.add("@" + EVERYONE_IN_WAVE);
     helper.setState(currentGroup, acl, TYPE_DOCUMENT, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addAdmin(group1);
