@@ -33,6 +33,7 @@ import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.access.AccessRightsUtils;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.AccessRol;
+import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.GroupFinder;
@@ -50,7 +51,6 @@ public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
   Provider<KuneProperties> kuneProperties;
   @Inject
   Provider<HttpServletRequest> requestProvider;
-  private Group allowedGroup;
   @Inject
   UserSessionManager userSessionManager;
 
@@ -68,11 +68,10 @@ public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
     final ShouldBeMember authAnnotation = invocation.getStaticPart().getAnnotation(ShouldBeMember.class);
     final AccessRol rol = authAnnotation.rol();
 
-    if (allowedGroup == null) {
-      allowedGroup = groupFinder.get().findByShortName(
-          kuneProperties.get().get(authAnnotation.groupKuneProperty()));
-    }
-    LOG.info(String.format("Translator group: %s", allowedGroup.getShortName()));
+    final Group allowedGroup = groupFinder.get().findByShortName(
+        kuneProperties.get().get(authAnnotation.groupKuneProperty()));
+    final AccessLists acl = allowedGroup.getAccessLists();
+    LOG.info(String.format("Translator group: %s, acl %s", allowedGroup.getShortName(), acl));
     LOG.info(String.format("Auth rol required: %s", rol.toString()));
 
     if (userHash == null) {
@@ -83,8 +82,9 @@ public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
     } else {
       final User user = userSessionManager.getUser();
       if (!AccessRightsUtils.correctMember(user, allowedGroup, rol)) {
-        LOG.info(String.format("Don't have rights for do that. User: %s, not %s member of %s",
-            user.getShortName(), rol, allowedGroup.getShortName()));
+        LOG.info(String.format(
+            "Don't have rights for do that. User: %s, not %s member of %s with acl %s",
+            user.getShortName(), rol, allowedGroup.getShortName(), acl));
         throw new AccessViolationException();
       }
     }
