@@ -83,7 +83,6 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
-      final Provider<SetListOpenessMenuItem> listOpenessMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<RefreshContentMenuItem> refreshPost,
@@ -110,7 +109,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, contents, optionsMenuContent);
     add(TOPBAR, noRoot, newPostIconBtn);
     add(TOPBAR, newListBtn, TYPE_ROOT);
-    add(TOPBAR, containersNoRoot, listNewMenu, subscribeBtn, listOpenessMenuItem, newPostItem);
+    add(TOPBAR, containersNoRoot, listNewMenu, subscribeBtn, newPostItem);
     add(TOPBAR, containers, refreshList);
     add(TOPBAR, contents, postNewMenu, refreshPost);
     add(BOTTOMBAR, contents, folderGoUp);
