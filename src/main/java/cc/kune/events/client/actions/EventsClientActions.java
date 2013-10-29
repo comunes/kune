@@ -39,13 +39,12 @@ import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.gspace.client.actions.share.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.share.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
-import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -70,7 +69,6 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
-      final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn,
       final Provider<Calendar1DayViewSelectBtn> cal1DayBtn,
       final Provider<Calendar3DaysViewSelectBtn> cal3DaysBtn,
@@ -101,8 +99,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, all, export);
     add(BOTTOMBAR, contents, folderGoUp);
     add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
-        addPublicMenuItem);
+    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
     add(TOPBAR, contents, shareSettings);
     // add(TOPBAR,
@@ -114,7 +111,8 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem,
+        moveContentMenuItem);
     eventOpenMenuItem.get();
     eventAddMenuItem.get();
     eventRemoveMenuItem.get();

@@ -117,6 +117,10 @@ public class ContentServiceHelper {
         });
   }
 
+  public void addParticipants(final SocialNetworkSubGroup subGroup) {
+    addParticipants(session.getCurrentStateToken(), subGroup);
+  }
+
   public void addParticipants(final StateToken token, final SocialNetworkSubGroup subGroup) {
     contentService.get().addParticipants(session.getUserHash(), token,
         session.getCurrentGroupShortName(), subGroup, new AsyncCallback<Boolean>() {

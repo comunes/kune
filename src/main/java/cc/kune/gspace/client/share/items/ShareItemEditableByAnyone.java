@@ -36,16 +36,11 @@ public class ShareItemEditableByAnyone extends AbstractShareItemEveryoneWithMenu
     super(icons.world(), I18n.tWithNT("Anyone", "with initial uppercase"), I18n.t("can edit"),
         icons.del(), I18n.t("Don't allow edit by everyone"), actionsPanel, downloadUtils,
         contentService, res);
-    // final MenuItemDescriptor notAnyone = new MenuItemDescriptor(menu, new
-    // AbstractExtendedAction() {
-    // @Override
-    // public void actionPerformed(final ActionEvent event) {
-    // // TODO
-    // NotifyUser.info("In development");
-    // }
-    // });
-    // notAnyone.withText(I18n.t("Don't allow edit by anyone")).withIcon(icons.del());
-    // super.add(notAnyone);
+  }
+
+  @Override
+  protected void doAction() {
+    super.doAction();
   }
 
 }

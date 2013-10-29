@@ -24,6 +24,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 
 import com.google.inject.Inject;
 
@@ -34,7 +35,11 @@ public class ShareItemNotEditableByOthers extends AbstractShareItemEveryoneWithM
       final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
       final CommonResources res, final IconicResources icons) {
     super(icons.del(), I18n.t("Nobody else"), I18n.t("can't edit"), icons.world(),
-        I18n.t("Allow edit by everyone"), actionsPanel, downloadUtils, contentService, res);
+        I18n.t("Allow any person to edit this"), actionsPanel, downloadUtils, contentService, res);
   }
 
+  @Override
+  protected void doAction() {
+    contentService.addParticipants(SocialNetworkSubGroup.PUBLIC);
+  }
 }

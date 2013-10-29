@@ -45,13 +45,12 @@ import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.gspace.client.actions.share.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.share.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
-import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -81,7 +80,6 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
-      final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final Provider<PurgeContentMenuItem> purgeMenuItem, final Provider<PurgeContentBtn> purgeBtn,
       final Provider<PurgeContainerMenuItem> purgeFolderMenuItem,
       final Provider<PurgeContainerBtn> purgeFolderBtn, final Provider<ChatAboutContentBtn> chatAbout,
@@ -112,7 +110,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
-        addPublicMenuItem, shareSettings);
+        shareSettings);
     add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
     add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
@@ -121,11 +119,13 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     add(TOOL_NAME, ITEM_MENU, marksAsDoneMenuItem, ContentStatus.editingInProgress, TYPE_TASK);
     add(TOOL_NAME, ITEM_MENU, marksAsNotDoneMenuItem, ContentStatus.inTheDustbin, TYPE_TASK);
     add(ITEM_MENU, containersNoRoot, delFolderMenuItem);
-    add(ITEM_MENU, contents, delContentMenuItem, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem, addPublicMenuItem, copyContent, writeToParticipants);
+    add(ITEM_MENU, contents, delContentMenuItem, addAllMenuItem, addAdminMembersMenuItem,
+        addCollabMembersMenuItem, copyContent, writeToParticipants);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
-    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem,
+        moveContentMenuItem);
     // Currently new menu in folders has no sense (because we have buttons for
     // the same contents)
     // newMenusRegistry.register(TYPE_FOLDER, taskFolderNewMenu.get());

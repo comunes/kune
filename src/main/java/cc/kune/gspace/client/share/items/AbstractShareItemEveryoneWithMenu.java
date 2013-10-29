@@ -49,7 +49,7 @@ public abstract class AbstractShareItemEveryoneWithMenu extends AbstractShareIte
     add(menuItem);
   }
 
-  private void doAction() {
+  protected void doAction() {
     NotifyUser.info("In development");
   }
 }
