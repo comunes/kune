@@ -21,22 +21,43 @@ package cc.kune.gspace.client.share.items;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.lists.client.rpc.ListsServiceHelper;
 import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class ShareItemNotVisibleByOthers extends AbstractShareItemEveryoneWithMenu {
+
+  public static final String TYPE_ID = "type-id";
+  private final Provider<ListsServiceHelper> listsHelper;
 
   @Inject
   public ShareItemNotVisibleByOthers(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
-      final CommonResources res, final IconicResources icons) {
+      final Provider<ListsServiceHelper> listsHelper, final CommonResources res,
+      final IconicResources icons) {
     super(icons.del(), I18n.t("Nobody else"), I18n.t("can't view"), icons.world(),
         I18n.t("Do this public to anyone"), actionsPanel, downloadUtils, contentService, res);
+    this.listsHelper = listsHelper;
 
+  }
+
+  @Override
+  protected void doAction() {
+    final String typeId = (String) menuItem.getValue(TYPE_ID);
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      listsHelper.get().setPublic(true, new SimpleCallback() {
+        @Override
+        public void onCallback() {
+        }
+      });
+    } else {
+    }
   }
 
   @Override
@@ -48,6 +69,7 @@ public class ShareItemNotVisibleByOthers extends AbstractShareItemEveryoneWithMe
       menuItemText = I18n.t("Do this public to anyone");
     }
     menuItem.withText(menuItemText);
+    menuItem.putValue(TYPE_ID, typeId);
     return this;
   }
 }
