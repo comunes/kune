@@ -51,11 +51,7 @@ public class ShareItemNotVisibleByOthers extends AbstractShareItemEveryoneWithMe
   protected void doAction() {
     final String typeId = (String) menuItem.getValue(TYPE_ID);
     if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
-      listsHelper.get().setPublic(true, new SimpleCallback() {
-        @Override
-        public void onCallback() {
-        }
-      });
+      listsHelper.get().setPublic(true, SimpleCallback.DO_NOTHING);
     } else {
     }
   }

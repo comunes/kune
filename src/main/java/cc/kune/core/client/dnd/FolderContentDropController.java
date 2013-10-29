@@ -52,12 +52,7 @@ public class FolderContentDropController extends AbstractDropController {
     if (widget instanceof BasicDragableThumb) {
       final BasicDragableThumb thumb = (BasicDragableThumb) widget;
       final String userName = thumb.getToken().getGroup();
-      contentService.addParticipant((StateToken) getTarget(), userName, new SimpleCallback() {
-        @Override
-        public void onCallback() {
-          // Do nothing
-        }
-      });
+      contentService.addParticipant((StateToken) getTarget(), userName, SimpleCallback.DO_NOTHING);
     }
   }
 
