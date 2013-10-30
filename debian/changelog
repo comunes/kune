@@ -1,5 +1,7 @@
 kune (0.3.0+b30) unstable; urgency=low
 
+  * Added Greek translation thanks to Akis Vassiliadis
+  * Updated translations
   * Removed some deprecated method in menu items
   * Fix width issue in wave url prompt
   * Added kune font-face. Closes #551 (thanks to Aitor and Jorge)
