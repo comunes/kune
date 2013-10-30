@@ -1,8 +1,9 @@
 #!/bin/bash
 
-HOST=kune@kune.beta.iepala.es
+DEST=/usr/share/kune
+HOST=kune@shell.kune.cc
 
-rsync --partial bin/convertI18nMsgToMethods* $HOST:/home/kune/kune-current/bin/
-rsync --partial bin/i18n-* $HOST:/home/kune/kune-current/bin/
-ssh $HOST "cd /home/kune/kune-current/; bin/i18n-all.ssh"
-scp $HOST:/home/kune/kune-current/KuneCon* src/main/java/cc/kune/core/client/i18n/
+rsync --partial bin/convertI18nMsgToMethods* $HOST:$DEST/bin/
+rsync --partial bin/i18n-* $HOST:$DEST/bin/
+ssh $HOST "cd $DEST; bin/i18n-all.sh"
+scp $HOST:$DEST/KuneCon* src/main/java/cc/kune/core/client/i18n/
