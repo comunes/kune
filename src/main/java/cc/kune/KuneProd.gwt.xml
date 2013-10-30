@@ -31,7 +31,7 @@
     values="ar,ca,de,el,en,eo,es,eu,fr,gl,hu,it,pl,pt,pt_BR,ro,ru,sl,tr,zh_HK,zh_TW"/>
   <set-property-fallback name="locale" value="en"/>
   <set-property name="locale"
-    values="ar,ca,de,el,en,eo,es,eu,fr,gl,hu,it,pl,pt,pt_BR,ro,ru,sl,tr,zh_HK,zh_TW"/>
+    value="ar,ca,de,el,en,eo,es,eu,fr,gl,hu,it,pl,pt,pt_BR,ro,ru,sl,tr,zh_HK,zh_TW"/>
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave, because it's really slow. -->
