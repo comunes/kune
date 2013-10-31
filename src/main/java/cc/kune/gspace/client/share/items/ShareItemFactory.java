@@ -24,13 +24,14 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ShareItemFactory {
-
   @Inject
   private static Provider<ShareItemOfAdmin> admin;
   @Inject
   private static Provider<ShareItemEditableByAnyone> editableByAnyone;
   @Inject
   private static Provider<ShareItemOfEditor> editor;
+  @Inject
+  private static Provider<ListPublicShareItemUi> listPublic;
   @Inject
   private static Provider<ShareItemNotEditableByOthers> notEditableByOthers;
   @Inject
@@ -68,11 +69,13 @@ public class ShareItemFactory {
     return notEditableByOthers.get();
   }
 
-  public static ShareItemNotVisibleByOthers getShareItemNotVisibleByOthers() {
+  public static AbstractShareItemUi getShareItemNotVisibleByOthers() {
+    // return listPublic.get().with(false);
     return notVisibleByOthers.get();
   }
 
-  public static ShareItemVisibleByAnyone getShareItemVisibleByAnyone() {
+  public static AbstractShareItemUi getShareItemVisibleByAnyone() {
+    // return listPublic.get().with(true);
     return visibleByAnyone.get();
   }
 

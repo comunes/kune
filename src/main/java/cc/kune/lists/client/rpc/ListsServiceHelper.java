@@ -23,7 +23,6 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
 
@@ -36,14 +35,11 @@ public class ListsServiceHelper {
 
   private final Provider<ListsServiceAsync> listsService;
   private final Session session;
-  private final StateManager stateManager;
 
   @Inject
-  public ListsServiceHelper(final Session session, final Provider<ListsServiceAsync> listsService,
-      final StateManager stateManager) {
+  public ListsServiceHelper(final Session session, final Provider<ListsServiceAsync> listsService) {
     this.session = session;
     this.listsService = listsService;
-    this.stateManager = stateManager;
   }
 
   public void setPublic(final Boolean isPublic, final SimpleCallback onSuccess) {
@@ -54,8 +50,6 @@ public class ListsServiceHelper {
             onSuccess.onCallback();
             NotifyUser.info(isPublic ? I18n.t("This list is now public")
                 : I18n.t("This list is now restricted to the public"));
-            stateManager.setRetrievedState(result);
-            stateManager.refreshCurrentState();
             NotifyUser.hideProgress();
           }
         });

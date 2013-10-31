@@ -18,37 +18,35 @@
 
 package cc.kune.gspace.client.share.items;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
-import com.google.gwt.resources.client.ImageResource;
+public abstract class AbstractShareItemWithMenuUi extends AbstractShareItemUi {
 
-public abstract class AbstractShareItemEveryoneWithMenu extends AbstractShareItemWithMenu {
+  private final MenuDescriptor menu;
 
-  protected MenuItemDescriptor menuItem;
-
-  public AbstractShareItemEveryoneWithMenu(final ImageResource itemIcon, final String itemText,
-      final String menuTitle, final ImageResource menuItemIcon, final String menuItemText,
-      final ActionSimplePanel actionsPanel, final ClientFileDownloadUtils downloadUtils,
-      final CommonResources res) {
-    super(menuTitle, actionsPanel, downloadUtils, res);
-    withText(itemText).withIcon(itemIcon);
-    menuItem = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        doAction();
-      }
-    });
-    menuItem.withText(menuItemText).withIcon(menuItemIcon);
-    add(menuItem);
+  public AbstractShareItemWithMenuUi(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils, final CommonResources res) {
+    super(actionsPanel, downloadUtils);
+    menu = new MenuDescriptor("");
+    menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
+        ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
+    super.add(menu);
   }
 
-  protected void doAction() {
-    NotifyUser.info("In development");
+  public void setValuesViaDescriptor(final ShareItemDescriptor descriptor) {
+    withIcon(descriptor.getItemIcon()).withText(descriptor.getItemText());
+    menu.withText(descriptor.getMenuText());
+    // We remove the previous items
+    menu.clear();
+    for (final MenuItemDescriptor menuItem : descriptor.getMenuItems()) {
+      menuItem.setParent(menu);
+      super.add(menuItem);
+    }
   }
+
 }

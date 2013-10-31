@@ -30,12 +30,15 @@ import com.google.inject.Inject;
 
 public class ShareItemNotEditableByOthers extends AbstractShareItemEveryoneWithMenu {
 
+  private final ContentServiceHelper contentService;
+
   @Inject
   public ShareItemNotEditableByOthers(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
       final CommonResources res, final IconicResources icons) {
     super(icons.del(), I18n.t("Nobody else"), I18n.t("can't edit"), icons.world(),
-        I18n.t("Allow any person to edit this"), actionsPanel, downloadUtils, contentService, res);
+        I18n.t("Allow any person to edit this"), actionsPanel, downloadUtils, res);
+    this.contentService = contentService;
   }
 
   @Override

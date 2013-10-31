@@ -22,17 +22,15 @@ import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.resources.CommonResources;
-import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
-public abstract class AbstractShareItemWithMenu extends AbstractShareItem {
+public abstract class AbstractShareItemWithMenu extends AbstractShareItemUi {
 
   protected MenuDescriptor menu;
 
   public AbstractShareItemWithMenu(final String menuTitle, final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
-      final CommonResources res) {
-    super(actionsPanel, downloadUtils, contentService);
+      final ClientFileDownloadUtils downloadUtils, final CommonResources res) {
+    super(actionsPanel, downloadUtils);
     menu = new MenuDescriptor(menuTitle);
     menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
         ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");

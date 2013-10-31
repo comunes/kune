@@ -22,7 +22,6 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -34,12 +33,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
  * The Class AbstractShareItem is a simple element that represent, for instance,
  * a group/user a content is share to
  */
-public abstract class AbstractShareItem extends Composite {
+public abstract class AbstractShareItemUi extends Composite {
 
   private final ActionSimplePanel actionsPanel;
-
-  protected final ContentServiceHelper contentService;
-
   private final ClientFileDownloadUtils downloadUtils;
 
   /** The flow. */
@@ -60,11 +56,10 @@ public abstract class AbstractShareItem extends Composite {
    * @param downloadUtils
    * @param contentServiceAsync
    */
-  public AbstractShareItem(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService) {
+  public AbstractShareItemUi(final ActionSimplePanel actionsPanel,
+      final ClientFileDownloadUtils downloadUtils) {
     this.actionsPanel = actionsPanel;
     this.downloadUtils = downloadUtils;
-    this.contentService = contentService;
     flow = new FlowPanel();
     iconLabel = new IconLabel();
     flow.add(iconLabel);
@@ -76,8 +71,8 @@ public abstract class AbstractShareItem extends Composite {
     initWidget(flow);
   }
 
-  public void add(final GuiActionDescrip descr) {
-    actionsPanel.add(descr);
+  public void add(final GuiActionDescrip... menuItems) {
+    actionsPanel.add(menuItems);
   }
 
   public void setGroupName(final GroupDTO group) {
@@ -86,21 +81,21 @@ public abstract class AbstractShareItem extends Composite {
     withIcon(downloadUtils.getGroupLogo(group));
   }
 
-  public AbstractShareItem with(final String typeId) {
+  public AbstractShareItemUi with(final String typeId) {
     return this;
   }
 
-  public AbstractShareItem withIcon(final ImageResource img) {
+  public AbstractShareItemUi withIcon(final ImageResource img) {
     iconLabel.setLeftIconResource(img);
     return this;
   }
 
-  public AbstractShareItem withIcon(final String url) {
+  public AbstractShareItemUi withIcon(final String url) {
     iconLabel.setLeftIconUrl(url);
     return this;
   }
 
-  public AbstractShareItem withText(final String text) {
+  public AbstractShareItemUi withText(final String text) {
     iconLabel.setText(text);
     return this;
   }

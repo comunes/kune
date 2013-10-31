@@ -21,21 +21,20 @@ package cc.kune.gspace.client.share.items;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
 import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 
 import com.google.inject.Inject;
 
-public class ShareItemOfOwner extends AbstractShareItem {
+public class ShareItemOfOwner extends AbstractShareItemUi {
 
   @Inject
   public ShareItemOfOwner(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService) {
-    super(actionsPanel, downloadUtils, contentService);
+      final ClientFileDownloadUtils downloadUtils) {
+    super(actionsPanel, downloadUtils);
   }
 
-  public AbstractShareItem of(final GroupDTO group) {
+  public AbstractShareItemUi of(final GroupDTO group) {
     setGroupName(group);
     final LabelDescriptor isOwner = new LabelDescriptor(I18n.t("is owner"));
     isOwner.withStyles("k-share-item-noactions");

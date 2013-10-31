@@ -31,7 +31,6 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.wave.client.KuneWaveProfileManager;
 
@@ -45,15 +44,13 @@ public class ShareItemOfParticipant extends AbstractShareItemWithMenu {
   @Inject
   public ShareItemOfParticipant(final ActionSimplePanel actionsPanel,
       final KuneWaveProfileManager profileManager, final ClientFileDownloadUtils downloadUtils,
-      final ContentServiceHelper contentService, final IconicResources res,
-      final CommonResources commonResources) {
-    super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils, contentService,
-        commonResources);
+      final IconicResources res, final CommonResources commonResources) {
+    super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils, commonResources);
     this.profileManager = profileManager;
     this.res = res;
   }
 
-  public AbstractShareItem of(final String participant, final String typeId) {
+  public AbstractShareItemUi of(final String participant, final String typeId) {
     try {
       final ProfileImpl profile = profileManager.getProfile(ParticipantId.of(participant));
       final String address = profile.getAddress();

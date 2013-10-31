@@ -26,7 +26,6 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.lists.shared.ListsToolConstants;
@@ -39,13 +38,13 @@ public class ShareItemOfEditor extends AbstractShareItemWithMenu {
 
   @Inject
   public ShareItemOfEditor(final ActionSimplePanel actionsPanel,
-      final ClientFileDownloadUtils downloadUtils, final ContentServiceHelper contentService,
-      final IconicResources res, final CommonResources commonResources) {
-    super("", actionsPanel, downloadUtils, contentService, commonResources);
+      final ClientFileDownloadUtils downloadUtils, final IconicResources res,
+      final CommonResources commonResources) {
+    super("", actionsPanel, downloadUtils, commonResources);
     this.res = res;
   }
 
-  public AbstractShareItem of(final GroupDTO group) {
+  public AbstractShareItemUi of(final GroupDTO group) {
     setGroupName(group);
     final MenuItemDescriptor editorToAdmin = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override
@@ -69,7 +68,7 @@ public class ShareItemOfEditor extends AbstractShareItemWithMenu {
   }
 
   @Override
-  public AbstractShareItem with(final String typeId) {
+  public AbstractShareItemUi with(final String typeId) {
     if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
       menu.setText(I18n.tWithNT("is member", "someone is member of a list"));
     } else {
