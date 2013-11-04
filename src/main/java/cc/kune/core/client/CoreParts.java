@@ -19,9 +19,8 @@
  */
 package cc.kune.core.client;
 
-import cc.kune.client.KuneLinkInterceptor;
+import cc.kune.client.LinkInterceptor;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
-import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.EmailNotVerifiedReminder;
 import cc.kune.core.client.auth.Register;
@@ -81,8 +80,7 @@ public class CoreParts {
       final Provider<TutorialViewer> tutorialViewer, final Provider<WebSocketChecker> websocketChecker,
       final Provider<EmailNotVerifiedReminder> emailNotVerifiedReminder,
       final Provider<SiteInvitationBtn> siteInvitation, final InvitationClientManager invitationManager,
-		final Provider<KuneLinkInterceptor> linkInterceptor
-) {
+      final Provider<LinkInterceptor> linkInterceptor) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -97,7 +95,7 @@ public class CoreParts {
         emailNotVerifiedReminder.get();
         websocketChecker.get();
         siteInvitation.get();
-		linkInterceptor.get();
+        linkInterceptor.get();
       }
     });
     tokenListener.put(SiteTokens.SIGN_IN, new HistoryTokenAuthNotNeededCallback() {
