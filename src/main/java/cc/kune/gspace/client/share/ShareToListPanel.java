@@ -73,7 +73,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addEditableByAnyone() {
-    itemsPanel.add(ShareItemFactory.getShareItemEditableByAnyone().with(typeId));
+    itemsPanel.add(ShareItemFactory.getContentEditableByAnyone().with(true));
   }
 
   @Override
@@ -83,12 +83,16 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addNotEditableByOthers() {
-    itemsPanel.add(ShareItemFactory.getShareItemNotEditableByOthers().with(typeId));
+    itemsPanel.add(ShareItemFactory.getContentEditableByAnyone().with(false));
   }
 
   @Override
   public void addNotVisibleByOthers() {
-    itemsPanel.add(ShareItemFactory.getShareItemNotVisibleByOthers().with(typeId));
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      itemsPanel.add(ShareItemFactory.getListPublicByAnyone().with(false));
+    } else {
+      itemsPanel.add(ShareItemFactory.getContentVisibleByAnyone().with(false));
+    }
   }
 
   @Override
@@ -108,7 +112,11 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addVisibleByAnyone() {
-    itemsPanel.add(ShareItemFactory.getShareItemVisibleByAnyone().with(typeId));
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      itemsPanel.add(ShareItemFactory.getListPublicByAnyone().with(true));
+    } else {
+      itemsPanel.add(ShareItemFactory.getContentVisibleByAnyone().with(true));
+    }
   }
 
   @Override

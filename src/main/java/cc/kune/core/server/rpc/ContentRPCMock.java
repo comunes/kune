@@ -113,6 +113,13 @@ public class ContentRPCMock implements ContentService, RPC {
   }
 
   @Override
+  public Boolean delParticipants(final String userHash, final StateToken token, final String groupName,
+      final SocialNetworkSubGroup subGroup) throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
   public StateAbstractDTO getContent(final String userHash, final StateToken token)
       throws DefaultException {
     return contentMock;
@@ -224,6 +231,12 @@ public class ContentRPCMock implements ContentService, RPC {
   @Override
   public TagCloudResult setTags(final String userHash, final StateToken token, final String tags)
       throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public StateContentDTO setVisible(final String userHash, final StateToken token, final boolean visible) {
     // TODO Auto-generated method stub
     return null;
   }

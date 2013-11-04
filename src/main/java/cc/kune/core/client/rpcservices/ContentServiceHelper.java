@@ -30,6 +30,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
 import com.google.gwt.event.shared.EventBus;
@@ -111,17 +112,18 @@ public class ContentServiceHelper {
               NotifyUser.info(i18n.t("User '[%s]' added as participant", userName));
               onAdd.onCallback();
             } else {
-              NotifyUser.info(i18n.t("This user is already partipanting"));
+              NotifyUser.info(i18n.t("This user is already participating"));
             }
           }
         });
   }
 
-  public void addParticipants(final SocialNetworkSubGroup subGroup) {
-    addParticipants(session.getCurrentStateToken(), subGroup);
+  public void addParticipants(final SocialNetworkSubGroup subGroup, final SimpleCallback onSuccess) {
+    addParticipants(session.getCurrentStateToken(), subGroup, onSuccess);
   }
 
-  public void addParticipants(final StateToken token, final SocialNetworkSubGroup subGroup) {
+  public void addParticipants(final StateToken token, final SocialNetworkSubGroup subGroup,
+      final SimpleCallback onSuccess) {
     contentService.get().addParticipants(session.getUserHash(), token,
         session.getCurrentGroupShortName(), subGroup, new AsyncCallback<Boolean>() {
           @Override
@@ -131,6 +133,7 @@ public class ContentServiceHelper {
 
           @Override
           public void onSuccess(final Boolean result) {
+            onSuccess.onCallback();
             NotifyUser.info(result ? subGroup.equals(SocialNetworkSubGroup.PUBLIC) ? i18n.t("Shared with general public. Now anyone can participate")
                 : i18n.t("Shared with members")
                 : i18n.t("All these members are already partipating"));
@@ -145,6 +148,29 @@ public class ContentServiceHelper {
           public void onSuccess() {
             NotifyUser.showProgress();
             contentService.get().delContent(session.getUserHash(), token, defCallback);
+          }
+        });
+  }
+
+  public void delParticipants(final SocialNetworkSubGroup subGroup, final SimpleCallback onSuccess) {
+    delParticipants(session.getCurrentStateToken(), subGroup, onSuccess);
+  }
+
+  public void delParticipants(final StateToken token, final SocialNetworkSubGroup subGroup,
+      final SimpleCallback onSuccess) {
+    contentService.get().delParticipants(session.getUserHash(), token,
+        session.getCurrentGroupShortName(), subGroup, new AsyncCallback<Boolean>() {
+          @Override
+          public void onFailure(final Throwable caught) {
+            NotifyUser.important(i18n.t("Seems that the list of partipants were deleted partially. Please, retry"));
+          }
+
+          @Override
+          public void onSuccess(final Boolean result) {
+            onSuccess.onCallback();
+            NotifyUser.info(result ? subGroup.equals(SocialNetworkSubGroup.PUBLIC) ? i18n.t("Not editable by anyone: Now only editors can participate")
+                : i18n.t("Removed")
+                : i18n.t("All these member are not partipating"));
           }
         });
   }
@@ -167,6 +193,26 @@ public class ContentServiceHelper {
           public void onSuccess() {
             NotifyUser.showProgress();
             contentService.get().purgeContent(session.getUserHash(), token, defCallback);
+          }
+        });
+  }
+
+  public void setEditableByAnyone(final boolean editable, final SimpleCallback onSuccess) {
+    if (editable) {
+      addParticipants(SocialNetworkSubGroup.PUBLIC, onSuccess);
+    } else {
+      delParticipants(SocialNetworkSubGroup.PUBLIC, onSuccess);
+    }
+  }
+
+  public void setVisible(final boolean visible, final SimpleCallback onSuccess) {
+    contentService.get().setVisible(session.getUserHash(), session.getCurrentStateToken(), visible,
+        new AsyncCallbackSimple<StateContentDTO>() {
+          @Override
+          public void onSuccess(final StateContentDTO result) {
+            onSuccess.onCallback();
+            NotifyUser.info(i18n.t(visible ? "Now, this is visible for everyone"
+                : "Now, this is not visible for everyone"));
           }
         });
   }

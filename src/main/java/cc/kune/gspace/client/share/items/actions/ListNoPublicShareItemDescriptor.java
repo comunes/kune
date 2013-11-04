@@ -19,11 +19,11 @@ public class ListNoPublicShareItemDescriptor extends ShareItemDescriptor {
   }
 
   @Singleton
-  public static class MakeListPublicMenuItem extends AbstractToggleMenuItem {
+  public static class MakeListPublicMenuItem extends AbstractToggleShareMenuItem {
     @Inject
     public MakeListPublicMenuItem(final MakeListPublicAction action, final IconicResources icons) {
       super(action);
-      withIcon(icons.world()).withText(I18n.t("Make this list public"));
+      withIcon(icons.world()).withText(I18n.t("Do this public to anyone"));
     }
   }
 

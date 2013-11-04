@@ -176,16 +176,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   @Override
   public boolean addParticipants(final User user, final Long contentId, final Group group,
       final SocialNetworkSubGroup whichOnes) {
-    final Set<String> members = new HashSet<String>();
-    if (whichOnes.equals(SocialNetworkSubGroup.PUBLIC)) {
-      members.add(participantUtils.getPublicParticipantId().toString());
-    } else {
-      GroupServerUtils.getAllUserMembersAsString(members, group, whichOnes);
-    }
-    final Content content = finder.getContent(contentId);
-    return addParticipants(user, content, members.toArray(new String[members.size()]));
+    final Set<String> members = participantsGroupToSet(group, whichOnes);
+    return addParticipants(user, finder.getContent(contentId),
+        members.toArray(new String[members.size()]));
   }
 
+  @Override
   public Content addToAcl(final Content content, final Group group, final AccessRol rol) {
     final AccessLists acl = content.getAccessLists();
     final GroupList list = getListFromRol(rol, acl);
@@ -258,6 +254,22 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         typeIdChild, getGadgetUrl(gadgetname), gadgetProperties);
     tool.onCreateContent(content, container);
     return content;
+  }
+
+  private boolean delParticipants(final User user, final Content content, final String... participants) {
+    if (content.isWave()) {
+      return kuneWaveManager.delParticipants(KuneWaveServerUtils.getWaveRef(content),
+          user.getShortName(), participants);
+    }
+    return false;
+  }
+
+  @Override
+  public boolean delParticipants(final User user, final Long contentId, final Group group,
+      final SocialNetworkSubGroup whichOnes) {
+    final Set<String> members = participantsGroupToSet(group, whichOnes);
+    return delParticipants(user, finder.getContent(contentId),
+        members.toArray(new String[members.size()]));
   }
 
   @Override
@@ -346,6 +358,16 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return persist(content);
   }
 
+  private Set<String> participantsGroupToSet(final Group group, final SocialNetworkSubGroup whichOnes) {
+    final Set<String> members = new HashSet<String>();
+    if (whichOnes.equals(SocialNetworkSubGroup.PUBLIC)) {
+      members.add(participantUtils.getPublicParticipantId().toString());
+    } else {
+      GroupServerUtils.getAllUserMembersAsString(members, group, whichOnes);
+    }
+    return members;
+  }
+
   @Override
   public Container purgeAll(final Container container) {
     Preconditions.checkState(container.isRoot(), "Trying to purge a non root folder: " + container);
@@ -428,6 +450,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.removeAuthor(author);
   }
 
+  @Override
   public Content removeFromAcl(final Content content, final Group group, final AccessRol rol) {
     final AccessLists acl = content.getAccessLists();
     final GroupList list = getListFromRol(rol, acl);
@@ -508,6 +531,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return new SearchResult<Content>(count.intValue(), list);
   }
 
+  @Override
   public Content setAclMode(final Content content, final AccessRol rol, final GroupListMode mode) {
     final AccessLists acl = content.getAccessLists();
     // Group group = content.getContainer().getOwner();
@@ -583,6 +607,16 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
     final Content content = finder.getContent(contentId);
     tagManager.setTags(user, content, tags);
+  }
+
+  @Override
+  public Content setVisible(final Content content, final boolean visible) {
+    final AccessLists acl = content.getAccessLists();
+    final GroupList list = getListFromRol(AccessRol.Viewer, acl);
+    list.setMode(visible ? GroupListMode.EVERYONE : GroupListMode.NORMAL);
+    acl.setList(AccessRol.Viewer, list);
+    save(content);
+    return content;
   }
 
 }

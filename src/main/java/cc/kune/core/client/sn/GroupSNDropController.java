@@ -20,6 +20,7 @@
 package cc.kune.core.client.sn;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.dnd.AbstractDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
@@ -56,7 +57,8 @@ public class GroupSNDropController extends AbstractDropController {
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
     if (widget instanceof FolderItemWidget) {
-      contentService.addParticipants(((FolderItemWidget) widget).getToken(), subGroup);
+      contentService.addParticipants(((FolderItemWidget) widget).getToken(), subGroup,
+          SimpleCallback.DO_NOTHING);
     }
     if (widget instanceof BasicDragableThumb) {
       final String shortName = ((BasicDragableThumb) widget).getToken().getGroup();

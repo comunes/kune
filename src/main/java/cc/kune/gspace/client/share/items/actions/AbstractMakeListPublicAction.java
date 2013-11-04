@@ -5,7 +5,7 @@ import cc.kune.lists.client.rpc.ListsServiceHelper;
 
 import com.google.inject.Provider;
 
-public abstract class AbstractMakeListPublicAction extends AbstractToggleAction {
+public abstract class AbstractMakeListPublicAction extends AbstractToggleShareItemAction {
 
   private final Provider<ListsServiceHelper> helper;
 

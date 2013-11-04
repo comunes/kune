@@ -70,6 +70,9 @@ public interface ContentServiceAsync {
 
   void delContent(String userHash, StateToken token, AsyncCallback<StateContainerDTO> asyncCallback);
 
+  void delParticipants(String userHash, StateToken token, String groupName,
+      SocialNetworkSubGroup subGroup, AsyncCallback<Boolean> callback);
+
   void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
   void getContentByWaveRef(String userHash, String waveRef, AsyncCallback<StateAbstractDTO> callback);
@@ -89,11 +92,11 @@ public interface ContentServiceAsync {
   void removeAuthor(String userHash, StateToken token, String authorShortName,
       AsyncCallback<Void> asyncCallback);
 
-  void renameContainer(String userHash, StateToken token, String newName,
-      AsyncCallback<StateAbstractDTO> asyncCallback);
-
   // void save(String user, StateToken token, String content,
   // AsyncCallback<Void> asyncCallback);
+
+  void renameContainer(String userHash, StateToken token, String newName,
+      AsyncCallback<StateAbstractDTO> asyncCallback);
 
   void renameContent(String userHash, StateToken token, String newName,
       AsyncCallback<StateAbstractDTO> asyncCallback);
@@ -120,6 +123,9 @@ public interface ContentServiceAsync {
 
   void setTags(String userHash, StateToken token, String tags,
       AsyncCallback<TagCloudResult> asyncCallback);
+
+  void setVisible(String userHash, StateToken token, boolean visible,
+      AsyncCallback<StateContentDTO> callback);
 
   void writeTo(String userHash, StateToken token, boolean onlyToAdmins, AsyncCallback<String> callback);
 

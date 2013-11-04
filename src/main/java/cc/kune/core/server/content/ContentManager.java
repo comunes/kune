@@ -60,6 +60,8 @@ public interface ContentManager extends Manager<Content, Long> {
   Content createGadget(User user, Container container, String gadgetname, String typeIdChild,
       String title, String body, Map<String, String> gadgetProperties);
 
+  boolean delParticipants(User user, Long contentId, Group group, SocialNetworkSubGroup whichOnes);
+
   boolean findIfExistsTitle(Container container, String title);
 
   Double getRateAvg(Content content);
@@ -109,5 +111,7 @@ public interface ContentManager extends Manager<Content, Long> {
   Content setStatus(Long contentId, ContentStatus contentStatus);
 
   void setTags(User user, Long contentId, String tags) throws DefaultException;
+
+  Content setVisible(Content content, boolean visible);
 
 }

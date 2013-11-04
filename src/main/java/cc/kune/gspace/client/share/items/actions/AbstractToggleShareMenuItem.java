@@ -6,14 +6,14 @@ import cc.kune.gspace.client.share.items.ShareItemDescriptor;
 
 import com.google.inject.Inject;
 
-public abstract class AbstractToggleMenuItem extends MenuItemDescriptor {
+public abstract class AbstractToggleShareMenuItem extends MenuItemDescriptor {
 
   @Inject
-  public AbstractToggleMenuItem(final AbstractAction action) {
+  public AbstractToggleShareMenuItem(final AbstractAction action) {
     super(action);
   }
 
-  public void setComplementary(final ShareItemDescriptor complementaryItem) {
-    ((AbstractToggleAction) getAction()).init(complementaryItem);
+  public void onPerformNewDescriptor(final ShareItemDescriptor onPerformShareItem) {
+    ((AbstractToggleShareItemAction) getAction()).init(onPerformShareItem);
   }
 }

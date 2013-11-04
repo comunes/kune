@@ -20,7 +20,7 @@ public class ListPublicShareItemDescriptor extends ShareItemDescriptor {
   }
 
   @Singleton
-  public static class MakeListNonPublicMenuItem extends AbstractToggleMenuItem {
+  public static class MakeListNonPublicMenuItem extends AbstractToggleShareMenuItem {
 
     @Inject
     public MakeListNonPublicMenuItem(final MakeListNonPublicAction action, final IconicResources icons) {

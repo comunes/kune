@@ -27,30 +27,38 @@ public class ShareItemFactory {
   @Inject
   private static Provider<ShareItemOfAdmin> admin;
   @Inject
-  private static Provider<ShareItemEditableByAnyone> editableByAnyone;
+  private static Provider<ContentEditableShareItemUi> contentEditable;
+  @Inject
+  private static Provider<ContentVisibleShareItemUi> contentVisible;
   @Inject
   private static Provider<ShareItemOfEditor> editor;
   @Inject
   private static Provider<ListPublicShareItemUi> listPublic;
-  @Inject
-  private static Provider<ShareItemNotEditableByOthers> notEditableByOthers;
-  @Inject
-  private static Provider<ShareItemNotVisibleByOthers> notVisibleByOthers;
   @Inject
   private static Provider<ShareItemOfOwner> owner;
   @Inject
   private static Provider<ShareItemOfParticipant> participant;
   @Inject
   private static Provider<ShareItemOfViewer> viewer;
-  @Inject
-  private static Provider<ShareItemVisibleByAnyone> visibleByAnyone;
 
   public static ShareItemOfAdmin getAdmin() {
     return admin.get();
   }
 
+  public static ContentEditableShareItemUi getContentEditableByAnyone() {
+    return contentEditable.get();
+  }
+
+  public static ContentVisibleShareItemUi getContentVisibleByAnyone() {
+    return contentVisible.get();
+  }
+
   public static ShareItemOfEditor getEditor() {
     return editor.get();
+  }
+
+  public static ListPublicShareItemUi getListPublicByAnyone() {
+    return listPublic.get();
   }
 
   public static ShareItemOfOwner getOwner() {
@@ -59,24 +67,6 @@ public class ShareItemFactory {
 
   public static ShareItemOfParticipant getParticipant() {
     return participant.get();
-  }
-
-  public static ShareItemEditableByAnyone getShareItemEditableByAnyone() {
-    return editableByAnyone.get();
-  }
-
-  public static ShareItemNotEditableByOthers getShareItemNotEditableByOthers() {
-    return notEditableByOthers.get();
-  }
-
-  public static AbstractShareItemUi getShareItemNotVisibleByOthers() {
-    // return listPublic.get().with(false);
-    return notVisibleByOthers.get();
-  }
-
-  public static AbstractShareItemUi getShareItemVisibleByAnyone() {
-    // return listPublic.get().with(true);
-    return visibleByAnyone.get();
   }
 
   public static ShareItemOfViewer getViewer() {

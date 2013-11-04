@@ -5,21 +5,21 @@ import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.gspace.client.share.items.AbstractShareItemWithMenuUi;
 import cc.kune.gspace.client.share.items.ShareItemDescriptor;
 
-public abstract class AbstractToggleAction extends AbstractExtendedAction {
+public abstract class AbstractToggleShareItemAction extends AbstractExtendedAction {
 
-  private ShareItemDescriptor complementaryItem;
+  private ShareItemDescriptor onPerformShareItem;
   protected final SimpleCallback onSuccess;
   protected final boolean value;
 
-  AbstractToggleAction(final boolean value) {
+  AbstractToggleShareItemAction(final boolean value) {
     this.value = value;
     onSuccess = new SimpleCallback() {
       @Override
       public void onCallback() {
         // On action success in server
         final AbstractShareItemWithMenuUi itemUi = getTarget();
-        if (itemUi != null && complementaryItem != null) {
-          itemUi.setValuesViaDescriptor(complementaryItem);
+        if (itemUi != null && onPerformShareItem != null) {
+          itemUi.setValuesViaDescriptor(onPerformShareItem);
         }
       }
     };
@@ -29,8 +29,8 @@ public abstract class AbstractToggleAction extends AbstractExtendedAction {
     return (AbstractShareItemWithMenuUi) getValue(ShareItemDescriptor.ITEM);
   }
 
-  public void init(final ShareItemDescriptor complementaryItem) {
-    this.complementaryItem = complementaryItem;
+  public void init(final ShareItemDescriptor onPerformShareItem) {
+    this.onPerformShareItem = onPerformShareItem;
   }
 
 }

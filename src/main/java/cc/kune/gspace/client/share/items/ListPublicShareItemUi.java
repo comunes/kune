@@ -33,26 +33,28 @@ import com.google.inject.Singleton;
 @Singleton
 public class ListPublicShareItemUi extends AbstractShareItemWithMenuUi {
 
-  private final ShareItemDescriptor isNonPublicDescr;
-  private final ShareItemDescriptor isPublicDescr;
+  private final ShareItemDescriptor listNoPublicDescr;
+  private final ShareItemDescriptor listPublicDescr;
 
   @Inject
   public ListPublicShareItemUi(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final CommonResources res,
       final IconicResources icons, final ListPublicShareItemDescriptor listPublicDescr,
-      final ListNoPublicShareItemDescriptor publicDesc,
-      final MakeListNonPublicMenuItem makeListNotPublic, final MakeListPublicMenuItem makeListPublic) {
+      final ListNoPublicShareItemDescriptor listNoPublicDesc,
+      final MakeListNonPublicMenuItem makeListNotPublicMenuItem,
+      final MakeListPublicMenuItem makeListPublicMenuItem) {
     super(actionsPanel, downloadUtils, res);
-    isPublicDescr = publicDesc;
-    isNonPublicDescr = listPublicDescr;
-    isPublicDescr.setTarget(this);
-    isNonPublicDescr.setTarget(this);
-    makeListPublic.setComplementary(isNonPublicDescr);
-    makeListNotPublic.setComplementary(isPublicDescr);
+    this.listNoPublicDescr = listNoPublicDesc;
+    this.listPublicDescr = listPublicDescr;
+    // When this action is performed we replace this UI item with new values
+    this.listNoPublicDescr.setTarget(this);
+    this.listPublicDescr.setTarget(this);
+    makeListPublicMenuItem.onPerformNewDescriptor(this.listPublicDescr);
+    makeListNotPublicMenuItem.onPerformNewDescriptor(this.listNoPublicDescr);
   }
 
   public AbstractShareItemWithMenuUi with(final boolean isPublic) {
-    setValuesViaDescriptor(isPublic ? isPublicDescr : isNonPublicDescr);
+    setValuesViaDescriptor(isPublic ? listPublicDescr : listNoPublicDescr);
     return this;
   }
 }

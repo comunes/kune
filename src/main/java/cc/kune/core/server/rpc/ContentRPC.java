@@ -279,6 +279,18 @@ public class ContentRPC implements ContentService, RPC {
   }
 
   @Override
+  @Authenticated
+  @Authorizated(accessRolRequired = AccessRol.Administrator, mustCheckMembership = true)
+  @KuneTransactional
+  public Boolean delParticipants(final String userHash, final StateToken token, final String groupName,
+      final SocialNetworkSubGroup subGroup) throws DefaultException {
+    final Long contentId = ContentUtils.parseId(token.getDocument());
+    final Group group = groupManager.findByShortName(groupName);
+    final User user = getCurrentUser();
+    return contentManager.delParticipants(user, contentId, group, subGroup);
+  }
+
+  @Override
   @Authenticated(mandatory = false)
   @KuneTransactional
   public StateAbstractDTO getContent(final String userHash, final StateToken token)
@@ -319,12 +331,12 @@ public class ContentRPC implements ContentService, RPC {
     final User user = getCurrentUser();
     try {
       // FIXME get this from a wave constant
-      String root = "/~/conv+root";
+      final String root = "/~/conv+root";
       final Content content = finderService.getContainerByWaveRef(waveRef.endsWith("/~/conv+root") ? waveRef
           : waveRef + root);
       accessService.accessToContent(content, user, AccessRol.Viewer);
       return mapState(stateService.create(user, content), user);
-    } catch (javax.persistence.NoResultException e) {
+    } catch (final javax.persistence.NoResultException e) {
       return new StateNoContentDTO();
     }
 
@@ -683,6 +695,16 @@ public class ContentRPC implements ContentService, RPC {
     final Group group = groupManager.findByShortName(token.getGroup());
     contentManager.setTags(user, contentId, tags);
     return getSummaryTags(group);
+  }
+
+  @Override
+  @Authenticated
+  @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Administrator, mustCheckMembership = true)
+  @KuneTransactional
+  public StateContentDTO setVisible(final String userHash, final StateToken token, final boolean visible) {
+    final User user = getCurrentUser();
+    final Content content = finderService.getContent(ContentUtils.parseId(token.getDocument()));
+    return mapper.map(contentManager.setVisible(content, visible), StateContentDTO.class);
   }
 
   @Override

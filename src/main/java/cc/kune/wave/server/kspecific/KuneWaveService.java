@@ -70,7 +70,7 @@ public interface KuneWaveService {
   WaveRef createWave(String title, String message, WaveRef waveIdToCopy,
       SimpleArgCallback<WaveRef> onCreate, URL gadgetUrl, ParticipantId... participantsArray);
 
-  void delParticipants(WaveRef waveName, String whoDel, String... participants);
+  boolean delParticipants(WaveRef waveName, String whoDel, String... participants);
 
   Wavelet fetchWave(WaveId waveId, WaveletId waveletId, String author);
 

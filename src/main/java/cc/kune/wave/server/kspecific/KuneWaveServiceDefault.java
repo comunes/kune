@@ -336,8 +336,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   @Override
-  public void delParticipants(final WaveRef waveName, final String whoDel,
+  public boolean delParticipants(final WaveRef waveName, final String whoDel,
       final String... participantsToDel) {
+    boolean removed = false;
     final Wavelet wavelet = fetchWave(waveName, whoDel);
     final Participants currentParticipants = wavelet.getParticipants();
     final Set<String> set = toSet(participantsToDel);
@@ -349,10 +350,12 @@ public class KuneWaveServiceDefault implements KuneWaveService {
       final String partWithDomain = participantUtils.of(participant).toString();
       if (currentParticipants.contains(partWithDomain)) {
         LOG.debug("Removing as participant: " + partWithDomain);
+        removed = true;
         opQueue.removeParticipantFromWavelet(wavelet, partWithDomain);
       }
     }
     doOperations(whoDel, opQueue, "del participant");
+    return removed;
   }
 
   // final SubmitRequestListener listener
