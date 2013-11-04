@@ -20,32 +20,31 @@
 
 package cc.kune.client;
 
+import cc.kune.core.client.state.HistoryWrapper;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class KuneLinkInterceptor implements NativePreviewHandler {
+public class LinkInterceptor implements NativePreviewHandler {
 
-  public KuneLinkInterceptor() {
+  private final HistoryWrapper history;
+
+  @Inject
+  public LinkInterceptor(final HistoryWrapper history) {
+    this.history = history;
     Event.addNativePreviewHandler(this);
   }
 
   private native String getTagName(final Element element) /*-{
                   return element.tagName;
           }-*/;
-
-  boolean isLocal(final String href, final String base) {
-    final String baseHashbang = base + "#!";
-    final String baseHash = base + "#";
-    final boolean startsWithURLandHashbang = href.startsWith(baseHashbang);
-    final boolean startsWithURLandHash = href.startsWith(baseHash);
-    return href.startsWith("#") || startsWithURLandHashbang || startsWithURLandHash;
-  }
 
   @Override
   public void onPreviewNativeEvent(final NativePreviewEvent nativeEventPreview) {
@@ -54,23 +53,20 @@ public class KuneLinkInterceptor implements NativePreviewHandler {
     if (nativeEventPreview.getTypeInt() == Event.ONCLICK) {
       final Element target = DOM.eventGetTarget(event);
       if ("a".equalsIgnoreCase(getTagName(target))) {
-        GWT.log("HREF base: " + base);
         final String href = DOM.getElementAttribute(target, "href");
-        GWT.log("HREF href: " + href);
-        if (isLocal(href, base)) {
-          GWT.log("HREF true");
-          // if (startsWithURLandHashbang) {
-          // History.newItem(href.replace(baseHashbang, ""));
-          // nativeEventPreview.cancel();
-          // }
-          // if (startsWithURLandHash) {
-          // History.newItem(href.replace(baseHash, ""));
-          // nativeEventPreview.cancel();
-          // }
+        if (LinkInterceptorHelper.isLocal(href, base)) {
+          // Is a local link so we try to use the history without load a new
+          // page
+          final String hash = LinkInterceptorHelper.getHash(href);
+          if (hash.equals(href)) {
+            // Is not a different hash, so continue
+          } else {
+            // Is a local link so we use the history
+            history.newItem(hash);
+            nativeEventPreview.cancel();
+          }
         } else {
-          GWT.log("HREF false");
-          // FIXME this should be removed
-          nativeEventPreview.cancel();
+          // External URL so just follow (normally with target="_blank")
         }
       }
     }

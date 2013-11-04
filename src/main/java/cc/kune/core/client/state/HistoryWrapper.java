@@ -35,11 +35,24 @@ import cc.kune.core.shared.domain.utils.StateToken;
 public interface HistoryWrapper {
 
   /**
+   * Check if the current #fragment token has #!hashbang and if not add it.
+   */
+  void checkHashbang();
+
+  /**
    * Gets the current #token fragment of the current browser url.
    * 
    * @return the token
    */
   String getToken();
+
+  /**
+   * Goes to this new #group.tool.id.id token
+   * 
+   * @param historyToken
+   *          the new history token fragment
+   */
+  void newItem(StateToken token);
 
   /**
    * Goes to this new #token fragment in the browser.
