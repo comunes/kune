@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.client;
+package cc.kune.core.client.state;
 
 import static org.junit.Assert.*;
 

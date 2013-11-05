@@ -22,7 +22,6 @@
  */
 package cc.kune.core.client;
 
-import cc.kune.client.LinkInterceptor;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
 import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.EmailNotVerifiedReminder;
@@ -50,6 +49,7 @@ import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.core.client.state.HistoryTokenAuthNotNeededCallback;
 import cc.kune.core.client.state.HistoryTokenMustBeAuthCallback;
+import cc.kune.core.client.state.LinkInterceptor;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
