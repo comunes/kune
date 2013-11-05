@@ -1058,6 +1058,27 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>0.10</version>
+        <configuration>
+          <licenses>
+            <license
+              implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
+              <licenseFamilyCategory>AGPL3</licenseFamilyCategory>
+              <licenseFamilyName>GNU Affero General Public License,
+                Version 3</licenseFamilyName>
+              <notes></notes>
+              <patterns>
+                <pattern>Copyright (C) 2007-2013 Licensed to the
+                  Comunes
+                  Association (CA) under</pattern>
+              </patterns>
+            </license>
+          </licenses>
+        </configuration>
+      </plugin>
     </plugins>
     <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes
     </outputDirectory>

@@ -473,8 +473,12 @@ NOTE: When generating a new DEB package => dch -i
 * License
 
 Attach the following notices to each source of the program at the begining:
-<pre>
-    (c) 2007-2012 The Kune development team (see CREDITS for details)
+<pre>    
+    Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+    one or more contributor license agreements (see COPYRIGHT for details).
+    The CA licenses this file to you under the GNU Affero General Public 
+    License version 3, (the "License"); you may not use this file except in 
+    compliance with the License. This file is part of kune.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -490,29 +494,15 @@ Attach the following notices to each source of the program at the begining:
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 </pre>
 
-In Java, something like this (you can write your name instead of "Kune development team" if you create new files):
+In Java just include the COPYRIGHT-AGPLv3.java header.
 
-<pre>
-/*
- *
- * Copyright (C) 2007-2012 The Kune development team (see CREDITS for details)
- * This file is part of Kune.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-</pre> 
+** Contributor License Agreements
+
+The Comunes Association (CA) desires that all contributors of ideas, code, or documentation to the CA projects complete, sign, and submit (via postal mail or email) an Individual Contributor License Agreement (CLA) (see http://comunes.org/licenses/icla.txt). The purpose of this agreement is to clearly define the terms under which intellectual property has been contributed to the CA and thereby allow us to defend the project should there be a legal dispute regarding the software at some future time. A signed CLA is required to be on file before an individual is given commit rights to an CA project.
+
+For a corporation that has assigned employees to work on an CA project, a Corporate CLA (CCLA) is available (seehttp://comunes.org/licenses/cla-corporate.txt) for contributing intellectual property via the corporation, that may have been assigned as part of an employment agreement. Note that a Corporate CLA does not remove the need for every developer to sign their own CLA as an individual, to cover any of their contributions which are not owned by the corporation signing the CCLA.
+
+CLAs may be submitted by traditional postal mail or by emailing a scan of the signed copy to comunes@ourproject.org. You can also edit the text document, create a detached gpg signature, and send both the document and the detached signature via email.
 
 * Get in touch
 

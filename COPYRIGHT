@@ -24,7 +24,10 @@ kune software
 
 Copyright
 
-(c) 2007-2012 The kune development team (see CREDITS for details)
+(c) 2007-2013 Licensed to the Comunes Association (CA) under one or 
+more contributor license agreements. The CA licenses this software to 
+you under the GNU Affero General Public License version 3, (the "License"); 
+you may not use this software except in compliance with the License.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
@@ -33,13 +36,14 @@ License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 See COPYRIGHT-AGPLv3 for a complete text.
+
 
 other stuff (libraries, etc)
 --------------------------------------------------------------------------------
@@ -138,9 +142,10 @@ kune documentation
 
 Copyright
 
-(c) The kune development team (see CREDITS an individual docs for details)
-This work is licensed under the Creative Commons Attribution-Share Alike 3.0
-License. To view a copy of this license, visit
+(c) 2007-2013 Licensed to the Comunes Association (CA) under one or 
+more contributor license agreements. The CA licenses this documentation to
+you under the Creative Commons Attribution-Share Alike 3.0 License. 
+To view a copy of this license, visit
 http://creativecommons.org/licenses/by-sa/3.0/
 or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San
 Francisco, California, 94105, USA.
