@@ -31,7 +31,10 @@ public class LinkInterceptorHelperTest {
     assertEquals("hash", LinkInterceptorHelper.getHash("http://kune.example.com/?var=true#!hash"));
     assertEquals("hash",
         LinkInterceptorHelper.getHash("http://kune.example.com:8080/?var1=true&var2=false#!hash"));
-
+    assertEquals("hash", LinkInterceptorHelper.getHash("#hash"));
+    assertEquals("hash", LinkInterceptorHelper.getHash("#!hash"));
+    assertEquals("", LinkInterceptorHelper.getHash("#"));
+    assertEquals("", LinkInterceptorHelper.getHash("#!"));
   }
 
   @Test
