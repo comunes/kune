@@ -24,7 +24,6 @@ package cc.kune.core.client.state;
 
 import cc.kune.core.shared.domain.utils.StateToken;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface HistoryWrapper controls the url #hash of the browser.
  * 
