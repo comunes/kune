@@ -67,41 +67,68 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CoreParts.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CoreParts {
 
   /**
    * Instantiates a new core parts.
-   *
-   * @param session the session
-   * @param groupMembersPresenter the group members presenter
-   * @param buddiesAndParticipationPresenter the buddies and participation presenter
-   * @param groupMembersConfActions the group members conf actions
-   * @param userSNConfActions the user sn conf actions
-   * @param anonUsers the anon users
-   * @param userOptions the user options
-   * @param spaceSelector the space selector
-   * @param tokenListener the token listener
-   * @param signIn the sign in
-   * @param register the register
-   * @param aboutKuneDialog the about kune dialog
-   * @param newGroup the new group
-   * @param subProvider the sub provider
-   * @param eventBus the event bus
-   * @param verifyManager the verify manager
-   * @param userOptionsDialog the user options dialog
-   * @param groupOptionsDialog the group options dialog
-   * @param passReset the pass reset
-   * @param askForPass the ask for pass
-   * @param shortcuts the shortcuts
-   * @param i18n the i18n
-   * @param tutorialViewer the tutorial viewer
-   * @param websocketChecker the websocket checker
-   * @param emailNotVerifiedReminder the email not verified reminder
-   * @param siteInvitation the site invitation
-   * @param invitationManager the invitation manager
+   * 
+   * @param session
+   *          the session
+   * @param groupMembersPresenter
+   *          the group members presenter
+   * @param buddiesAndParticipationPresenter
+   *          the buddies and participation presenter
+   * @param groupMembersConfActions
+   *          the group members conf actions
+   * @param userSNConfActions
+   *          the user sn conf actions
+   * @param anonUsers
+   *          the anon users
+   * @param userOptions
+   *          the user options
+   * @param spaceSelector
+   *          the space selector
+   * @param tokenListener
+   *          the token listener
+   * @param signIn
+   *          the sign in
+   * @param register
+   *          the register
+   * @param aboutKuneDialog
+   *          the about kune dialog
+   * @param newGroup
+   *          the new group
+   * @param subProvider
+   *          the sub provider
+   * @param eventBus
+   *          the event bus
+   * @param verifyManager
+   *          the verify manager
+   * @param userOptionsDialog
+   *          the user options dialog
+   * @param groupOptionsDialog
+   *          the group options dialog
+   * @param passReset
+   *          the pass reset
+   * @param askForPass
+   *          the ask for pass
+   * @param shortcuts
+   *          the shortcuts
+   * @param i18n
+   *          the i18n
+   * @param tutorialViewer
+   *          the tutorial viewer
+   * @param websocketChecker
+   *          the websocket checker
+   * @param emailNotVerifiedReminder
+   *          the email not verified reminder
+   * @param siteInvitation
+   *          the site invitation
+   * @param invitationManager
+   *          the invitation manager
    */
   @Inject
   public CoreParts(final Session session, final Provider<GroupSNPresenter> groupMembersPresenter,
