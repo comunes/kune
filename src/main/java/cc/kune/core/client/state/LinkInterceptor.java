@@ -20,8 +20,6 @@
 
 package cc.kune.core.client.state;
 
-import cc.kune.core.client.state.HistoryWrapper;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -41,7 +39,8 @@ public class LinkInterceptor implements NativePreviewHandler {
   @Inject
   public LinkInterceptor(final HistoryWrapper history) {
     this.history = history;
-    Event.addNativePreviewHandler(this);
+    // FIXME: Disabled til ?dev=true param
+    // Event.addNativePreviewHandler(this);
   }
 
   @Override
