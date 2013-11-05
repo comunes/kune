@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client;
 
-import cc.kune.client.LinkInterceptor;
 import cc.kune.client.KunePlaceManager;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
@@ -103,6 +102,7 @@ import cc.kune.core.client.sn.actions.registry.UserSNMenuItemsRegistry;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.HistoryWrapper;
+import cc.kune.core.client.state.LinkInterceptor;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SiteTokenListeners;

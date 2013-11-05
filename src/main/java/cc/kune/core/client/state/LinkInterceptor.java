@@ -18,7 +18,7 @@
  *
  */
 
-package cc.kune.client;
+package cc.kune.core.client.state;
 
 import cc.kune.core.client.state.HistoryWrapper;
 
@@ -34,6 +34,8 @@ import com.google.inject.Singleton;
 @Singleton
 public class LinkInterceptor implements NativePreviewHandler {
 
+  private static final String A = "a";
+  private static final String HREF = "href";
   private final HistoryWrapper history;
 
   @Inject
@@ -42,18 +44,14 @@ public class LinkInterceptor implements NativePreviewHandler {
     Event.addNativePreviewHandler(this);
   }
 
-  private native String getTagName(final Element element) /*-{
-                  return element.tagName;
-          }-*/;
-
   @Override
   public void onPreviewNativeEvent(final NativePreviewEvent nativeEventPreview) {
     final Event event = Event.as(nativeEventPreview.getNativeEvent());
     final String base = GWT.getHostPageBaseURL();
     if (nativeEventPreview.getTypeInt() == Event.ONCLICK) {
       final Element target = DOM.eventGetTarget(event);
-      if ("a".equalsIgnoreCase(getTagName(target))) {
-        final String href = DOM.getElementAttribute(target, "href");
+      if (A.equalsIgnoreCase(target.getTagName())) {
+        final String href = DOM.getElementAttribute(target, HREF);
         if (LinkInterceptorHelper.isLocal(href, base)) {
           // Is a local link so we try to use the history without load a new
           // page
