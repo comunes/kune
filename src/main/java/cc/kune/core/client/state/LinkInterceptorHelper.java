@@ -34,8 +34,8 @@ public class LinkInterceptorHelper {
   public static String getHash(final String href) {
     final int hashPos = href.lastIndexOf("#");
     final int hashbagPos = href.lastIndexOf("#!");
-    final int pos = hashbagPos > 0 ? hashbagPos + 2 : hashPos > 0 ? hashPos + 1 : 0;
-    return (pos > 0) ? href.substring(pos) : href;
+    final int pos = hashbagPos >= 0 ? hashbagPos + 2 : hashPos >= 0 ? hashPos + 1 : 0;
+    return (pos >= 0) ? href.substring(pos) : href;
   }
 
   /**
